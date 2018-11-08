@@ -12,10 +12,10 @@ import { FSAStorefrontModule } from '@fsa/storefront';
     BrowserModule,
     FSAStorefrontModule.withConfig({
       server: {
-        baseUrl: "https://financialservices.dev-ded1-2.yrd.rot.hybris.com:9002"
+        baseUrl: 'https://financialservices.dev-ded1-2.yrd.rot.hybris.com:9002'
       },
       site: {
-        baseSite: "insurance"
+        baseSite: 'insurance'
       }
     })
   ],

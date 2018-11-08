@@ -34,7 +34,7 @@
         "projects/storefrontlib/src/public_api"
       ],
       "@spartacus/styles": [
-        "projects/storefrontstyles/scss/"
+        "@spartacus/styles/scss/"
       ]
     }
   }
