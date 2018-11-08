@@ -1,0 +1,59 @@
+import { TestBed } from '@angular/core/testing';
+import { combineReducers, Store, StoreModule, select } from '@ngrx/store';
+
+import * as fromActions from '../actions';
+import * as fromReducers from '../reducers';
+import * as fromSelectors from '../selectors';
+import * as fromRoot from './../../../routing/store';
+
+const mockUserAddresses = ['address1', 'address2'];
+
+describe('User Addresses Selectors', () => {
+  let store: Store<fromReducers.UserState>;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        StoreModule.forRoot({
+          ...fromRoot.getReducers(),
+          user: combineReducers(fromReducers.getReducers())
+        })
+      ]
+    });
+
+    store = TestBed.get(Store);
+    spyOn(store, 'dispatch').and.callThrough();
+  });
+
+  describe('getAddresses', () => {
+    it('should return a user addresses', () => {
+      let result;
+      store
+        .pipe(select(fromSelectors.getAddresses))
+        .subscribe(value => (result = value));
+
+      expect(result).toEqual([]);
+
+      store.dispatch(
+        new fromActions.LoadUserAddressesSuccess(mockUserAddresses)
+      );
+
+      expect(result).toEqual(mockUserAddresses);
+    });
+  });
+
+  describe('getAddressLoading', () => {
+    it('should return isLoading flag', () => {
+      let result;
+      store
+        .pipe(select(fromSelectors.getAddressesLoading))
+        .subscribe(value => (result = value));
+
+      expect(result).toEqual(false);
+
+      store.dispatch(new fromActions.LoadUserAddresses('userId'));
+
+      expect(result).toEqual(true);
+    });
+  });
+});

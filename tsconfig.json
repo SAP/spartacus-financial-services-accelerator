@@ -1,0 +1,41 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "paths": {
+      "@fsa/storefront": [
+        "projects/fsastorefrontlib/src/public_api"
+      ],
+      "fsastorefrontlib": [
+        "dist/fsastorefrontlib"
+      ],
+      "fsastorefrontlib/*": [
+        "dist/fsastorefrontlib/*"
+      ],//SHOULD BE REMOVED ONCE SPARTACUS CONTENT IS AVAILABLE ON NPM (STOREFRONT, STYLES, MODULE)
+      "@spartacus/core": [
+        "projects/core/public_api"
+      ],
+      "@spartacus/storefront": [
+        "projects/storefrontlib/src/public_api"
+      ],
+      "@spartacus/styles": [
+        "projects/storefrontstyles/scss/"
+      ]
+    }
+  }
+}

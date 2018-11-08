@@ -1,0 +1,13 @@
+@import 'theme';
+@import 'functions';
+@import 'mixins';
+//register page variables
+$y-register-registration-link-text-decoration: underline !important;
+.y-section__login-link {
+  margin-top: $spacer;
+}
+
+.y_section-registration-link {
+  cursor: pointer;
+  text-decoration: $y-register-registration-link-text-decoration;
+}

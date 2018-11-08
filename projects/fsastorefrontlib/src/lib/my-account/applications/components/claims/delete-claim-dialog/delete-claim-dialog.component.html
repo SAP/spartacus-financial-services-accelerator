@@ -1,0 +1,17 @@
+<div class="delete-claim-dialog">
+  <ng-container>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <div>
+      <h3>Delete started claim process?</h3>
+      <p>The following claim process will be deleted.</p>
+    </div>
+    <div class="modal-actions">
+        <div class="row">
+          <button (click)="activeModal.dismiss('Cross click')">Cancel</button>
+          <button (click)="deleteClaim(); activeModal.dismiss('Cross click')">Delete</button>
+        </div>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,46 @@
+<ng-container *ngIf="policies$ | async as policies">
+  <div class="row" *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
+    <div *ngFor="let policy of policies.insurancePolicies" class="col-md-4 cards">
+      <div class="cards__wrapper cards__wrapper--border-primary">
+        <div class="cards__title cards__title--border-primary">
+          <span class="images images__wrapper">
+            <img class="images__size" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0].url" alt="">
+          </span>
+          <h4 class="cards__caption cards__caption--color-primary">
+            {{policy.categoryData.name}}
+          </h4>
+          <div class="cards__info cards__info--color-primary">
+            {{policy.contractNumber}}
+          </div>
+        </div>
+        <div class="cards__details-wrapper">
+          <div class="cards__data">
+            <span class="title">Product</span>
+            <span class="value">{{policy.mainProduct.coverageProduct.name}}</span>
+          </div>
+          <div class="cards__data">
+            <span class="title">{{policy.insuredObjects[0].insuredObjectItems[0].value}}</span>
+            <span class="value">{{policy.insuredObjects[0].insuredObjectItems[1].value}}</span></div>
+          <div class="cards__data">
+            <span class="title">{{policy.policyPremium.formattedValue}} / {{policy.paymentFrequency}}</span>
+            <span class="value ">{{policy.paymentMethod.paymentOption | uppercase}}</span>
+          </div>
+          <div class="cards__data">
+            <span class="title">{{policy.policyStartDate }} - {{policy.policyEndDate}}</span>
+          </div>
+        </div>
+        <div class="cards-button-wrapper cards-button-wrapper--border-primary">
+          <div class="cards__button">
+            <a class="secondary-button secondary-button__default secondary-button__account-policies" href="#">
+              Details</a>
+            <a class="primary-button primary-button__default primary-button__account-policies" href="#">
+              Make a Claim</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
+<ng-template #noPolicies>
+  <h3>{{noPoliciesText}}</h3>
+</ng-template>
