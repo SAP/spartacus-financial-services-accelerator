@@ -1,9 +1,0 @@
-@import '../../mixins';
-
-a {
-  @include var-color('color', 'primary');
-
-  &:hover {
-    @include var-color('color', 'primary');
-  }
-}

@@ -26,7 +26,7 @@
               "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["./projects", "./projects/storefrontstyles/scss"]
+              "includePaths": ["./projects/fsastorefrontstyles/scss", "node_modules/@spartacus/styles/scss"]
             },
             "scripts": []
           },
