@@ -1,0 +1,13 @@
+<div class="enriched-banner">
+    <div class="image-wrapper">
+        <picture [class]="getClass()">
+                        <img [srcset]="getResponsiveSrcset()" sizes="100%" />
+        </picture>
+    </div>
+    <div class="enriched-banner__text">
+        <span class="enriched-banner__title">{{component.headingText}}</span>
+        <span class="enriched-banner__details">
+            <a class="enriched-banner__styled-text" href="">{{component.styledText}}</a>
+        </span>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+.enriched-banner {
+	position: relative;
+	&__text {
+		text-align: center;
+	}
+	&__title {
+		line-height: 1;
+	}
+	&__details {
+		display: block;
+	}
+	.responsive-image {
+		width: 100%;
+		display: block;
+	}
+}
