@@ -3,7 +3,7 @@ import * as fromAction from './../actions';
 export interface ClaimState {
   refresh: boolean;
   loaded: boolean;
-  claims: { [code: string]: any };
+  claims: { [claimNumber: string]: any };
 }
 
 export const initialState: ClaimState = {
@@ -17,27 +17,27 @@ export function reducer(
   action: fromAction.ClaimAction
 ): ClaimState {
   switch (action.type) {
-
     case fromAction.LOAD_CLAIMS_SUCCESS: {
-      const claims = { ...action.payload };
-      let claimEntries = {};
-      if (claims.entries) {
-        claimEntries = claims.entries.reduce(
-          (entryMap: { [code: string]: any }, entry: any) => {
+      const content = { ...action.payload };
+      let claims = {};
+      if (content.claims) {
+        claims = content.claims.reduce(
+          (claimsMap: { [claimNumber: string]: any }, claim: any) => {
             return {
-              ...entryMap,
-              [entry.userId]: state.claims[entry.userId]
-                ? {
-                  ...state.claims[entry.userId],
-                  ...entry
-                }
-                : entry
+              ...claimsMap,
+              [claim.claimNumber] : state.claims[claim.claimNumber]
+              ? {
+                ...state.claims[claim.claimNumber],
+                ...claim
+              }
+              : claim
             };
           },
           {
-            ...claimEntries
+            ...claims
           }
         );
+        delete content['claims'];
       }
       return {
         ...state,
@@ -54,6 +54,7 @@ export function reducer(
       };
     }
 
+    case fromAction.LOAD_CLAIMS:
     case fromAction.DELETE_CLAIM:
       return {
         ...state,
@@ -64,5 +65,6 @@ export function reducer(
   return state;
 }
 
+export const getClaims = (state: ClaimState) => state.claims;
 export const getRefresh = (state: ClaimState) => state.refresh;
 export const getLoaded = (state: ClaimState) => state.loaded;

@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
+import { Claim } from '../..';
 
 export const ANONYMOUS_USERID = 'anonymous';
 
 @Injectable()
 export class ClaimDataService {
   private _userId = ANONYMOUS_USERID;
-  private _claims : any;
+  private _claims: Claim[];
 
   constructor() {}
 
@@ -17,12 +18,11 @@ export class ClaimDataService {
     return this._userId;
   }
 
-  set claims(val) {
+  set claims(val: Claim[]) {
     this._claims = val;
   }
 
-  get claims(): string {
+  get claims(): Claim[] {
     return this._claims;
   }
-
 }

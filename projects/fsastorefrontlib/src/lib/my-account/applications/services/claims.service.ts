@@ -1,27 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
-import { catchError } from 'rxjs/operators';
+import { catchError, filter } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
-//import { ClaimDataService } from './claim-data.service';
-// import { ANONYMOUS_USERID } from '../../../cart/services/cart-data.service';
+import { ClaimDataService, ANONYMOUS_USERID } from './claim-data.service';
+import * as fromSelector from '../store/selectors';
 import { OccConfig } from '@spartacus/core';
+import { AuthService } from '@spartacus/storefront';
 
 const FULL_PARAMS = 'fields=FULL';
 
 @Injectable()
 export class ClaimsService {
+  callback: Function;
 
   constructor(
     protected http: HttpClient,
     protected config: OccConfig,
     private store: Store<fromReducer.ClaimState>,
-    //private claimData: ClaimDataService
+    private claimData: ClaimDataService,
+    protected auth: AuthService
   ) {
-    //this.initClaims();
+    this.initClaims();
   }
 
   protected getClaimsEndpoint(userId: string) {
@@ -37,7 +40,6 @@ export class ClaimsService {
   public getClaims(userId: string): Observable<any> {
     const url = this.getClaimsEndpoint(userId);
     const params = new HttpParams({ fromString: FULL_PARAMS });
-
     return this.http
       .get(url, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
@@ -63,14 +65,34 @@ export class ClaimsService {
     );
   }
 
-  // initClaims() {
-  //   if (this.claimData.userId !== ANONYMOUS_USERID) {
-  //     this.store.dispatch(
-  //       new fromAction.LoadClaims({
-  //         userId: this.claimData.userId,
-  //         claims: this.claimData.claims
-  //       })
-  //     );
-  //   }
-  // }
+  initClaims() {
+    this.store.pipe(select(fromSelector.getActiveClaims)).subscribe(claims => {
+      this.claimData.claims = claims;
+      if (this.callback) {
+        this.callback();
+        this.callback = null;
+      }
+    });
+
+    this.auth.userToken$.subscribe(userData => {
+      this.claimData.userId = userData.userId;
+      if (this.claimData.userId !== ANONYMOUS_USERID) {
+        this.store.dispatch(
+          new fromAction.LoadClaims({
+            userId: this.claimData.userId
+          })
+        );
+      }
+    });
+
+    this.store.pipe(select(fromSelector.getRefresh)).subscribe(refresh => {
+      if (refresh) {
+        this.store.dispatch(
+          new fromAction.LoadClaims({
+            userId: this.claimData.userId
+          })
+        );
+      }
+    });
+  }
 }

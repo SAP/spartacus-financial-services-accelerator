@@ -20,7 +20,6 @@ export class PoliciesService {
   }
 
   public getPolicies(userId: string): Observable<any> {
-    console.log("getPolicies");
     const url = this.getPoliciesEndpoint(userId);
     const params = new HttpParams();
 

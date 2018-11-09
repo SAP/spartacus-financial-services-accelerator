@@ -7,9 +7,12 @@ import { ClaimsComponent } from './components/claims/claims.component';
 import { DeleteClaimDialogComponent } from './components/claims/delete-claim-dialog/delete-claim-dialog.component';
 import { effects } from './store/effects';
 import { EffectsModule } from '@ngrx/effects';
-import { reducerProvider } from './store/reducers';
+import { reducerProvider, reducerToken } from './store/reducers';
 import { ClaimsService } from './services/claims.service';
 import { ClaimDataService } from './services/claim-data.service';
+import { StoreModule } from '@ngrx/store';
+import { metaReducers } from 'projects/storefrontlib/src/lib/checkout/store';
+import { BootstrapModule } from 'projects/storefrontlib/src/lib/bootstrap.module';
 
 @NgModule({
   imports: [
@@ -17,6 +20,8 @@ import { ClaimDataService } from './services/claim-data.service';
     RouterModule,
     FormsModule,
     NgSelectModule,
+    BootstrapModule,
+    StoreModule.forFeature('claim', reducerToken, { metaReducers }),
     EffectsModule.forFeature(effects)
   ],
   declarations: [ClaimsComponent, DeleteClaimDialogComponent],
@@ -24,4 +29,4 @@ import { ClaimDataService } from './services/claim-data.service';
   exports: [ClaimsComponent],
   providers: [reducerProvider, ClaimsService, ClaimDataService]
 })
-export class ClaimsModule { }
+export class ClaimsModule {}

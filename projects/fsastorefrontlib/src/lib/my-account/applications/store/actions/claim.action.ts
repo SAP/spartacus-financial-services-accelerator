@@ -25,7 +25,7 @@ export class DeleteClaimFail implements Action {
 
 export class LoadClaims implements Action {
   readonly type = LOAD_CLAIMS;
-  constructor(public payload: { userId: string, claims: any}) {}
+  constructor(public payload: any) {}
 }
 
 export class LoadClaimsSuccess implements Action {

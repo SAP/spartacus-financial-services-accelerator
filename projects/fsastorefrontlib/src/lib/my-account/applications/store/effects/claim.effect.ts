@@ -7,32 +7,23 @@ import { map, catchError, mergeMap } from 'rxjs/operators';
 import { ClaimsService } from '../../services/claims.service';
 import { ClaimDataService } from '../../services/claim-data.service';
 
-
 @Injectable()
 export class ClaimEffects {
   @Effect()
   loadClaims$: Observable<any> = this.actions$.pipe(
-    ofType(
-      fromActions.LOAD_CLAIMS,
-      '[Site-context] Language Change',
-      '[Site-context] Currency Change'
+    ofType(fromActions.LOAD_CLAIMS),
+    map((action: fromActions.LoadClaims) =>
+      action.payload
     ),
-    map((action: any) => action.payload),
     mergeMap(payload => {
-      if (payload === undefined || payload.userId === undefined) {
-        payload = {
-          userId: this.claimData.userId
-        };
-      }
-
-      return this.claimsService.getClaims(payload.userId)
-        .pipe(
-          map(() => {
-            return new fromActions.LoadClaimsSuccess(payload.userId);
+      return this.claimsService.getClaims(payload.userId).pipe(
+        map((claims: any) => {
+          return new fromActions.LoadClaimsSuccess(claims);
           }),
           catchError(error => of(new fromActions.LoadClaimsFail(error)))
         );
-    })
+      }
+    )
   );
 
   @Effect()
@@ -40,16 +31,18 @@ export class ClaimEffects {
     ofType(fromActions.DELETE_CLAIM),
     map((action: fromActions.DeleteClaim) => action.payload),
     mergeMap(payload =>
-      this.claimsService
-        .deleteClaim(payload.userId, payload.claimId)
-        .pipe(
-          map(() => {
-            return new fromActions.DeleteClaimSuccess();
-          }),
-          catchError(error => of(new fromActions.DeleteClaimFail(error)))
-        )
+      this.claimsService.deleteClaim(payload.userId, payload.claimId).pipe(
+        map(() => {
+          return new fromActions.DeleteClaimSuccess();
+        }),
+        catchError(error => of(new fromActions.DeleteClaimFail(error)))
+      )
     )
   );
 
-  constructor(private actions$: Actions, private claimsService: ClaimsService, private claimData: ClaimDataService) {}
+  constructor(
+    private actions$: Actions,
+    private claimsService: ClaimsService,
+    private claimData: ClaimDataService
+  ) {}
 }
