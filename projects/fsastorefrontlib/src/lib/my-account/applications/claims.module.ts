@@ -13,6 +13,7 @@ import { ClaimDataService } from './services/claim-data.service';
 import { StoreModule } from '@ngrx/store';
 import { metaReducers } from 'projects/storefrontlib/src/lib/checkout/store';
 import { BootstrapModule } from 'projects/storefrontlib/src/lib/bootstrap.module';
+import { OccClaimService } from '../../occ/claim/claim.service';
 
 @NgModule({
   imports: [
@@ -27,6 +28,6 @@ import { BootstrapModule } from 'projects/storefrontlib/src/lib/bootstrap.module
   declarations: [ClaimsComponent, DeleteClaimDialogComponent],
   entryComponents: [DeleteClaimDialogComponent],
   exports: [ClaimsComponent],
-  providers: [reducerProvider, ClaimsService, ClaimDataService]
+  providers: [reducerProvider, ClaimsService, ClaimDataService, OccClaimService]
 })
 export class ClaimsModule {}

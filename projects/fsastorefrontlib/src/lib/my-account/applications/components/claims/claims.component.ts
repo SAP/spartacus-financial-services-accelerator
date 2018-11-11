@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { DeleteClaimDialogComponent } from './delete-claim-dialog/delete-claim-dialog.component';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import * as fromClaimStore from '../../store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { OccConfig } from '@spartacus/core';
 
 export interface Claim {
   claimNumber?: any;
@@ -13,37 +14,34 @@ export interface Claim {
 @Component({
   selector: 'fsa-claims',
   templateUrl: './claims.component.html',
-  styleUrls: ['./claims.component.scss']
+  styleUrls: ['./claims.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class ClaimsComponent implements OnInit {
-  @Input()
-  claims: Claim[] = [];
-
-  @Input()
-  claim: Claim;
-
-  @Input()
-  claimIsLoading = false;
 
   modalInstance;
   form: FormGroup = this.fb.group({});
   subscription: Subscription;
   userId: string;
 
+
   constructor(
     private modalService: NgbModal,
     protected fb: FormBuilder,
-    protected store: Store<fromClaimStore.ClaimState>
+    protected store: Store<fromClaimStore.ClaimState>,
+    private config: OccConfig,
+  
   ) {}
 
-  claims$: Observable<any>;
-  claimsLoaded$: Observable<any>;
+  claims$; 
+  claimsLoaded$; 
 
   noClaimsText = 'You have no Claims!';
 
   ngOnInit() {
-     this.claims$ = this.store.pipe(select(fromClaimStore.getActiveClaims));
-     this.claimsLoaded$ = this.store.pipe(select(fromClaimStore.getLoaded));
+    this.claims$ = this.store.pipe(select(fromClaimStore.getActiveClaims));
+    this.claimsLoaded$ = this.store.pipe(select(fromClaimStore.getLoaded));
   }
 
   deleteClaim(claim: Claim) {
@@ -56,5 +54,9 @@ export class ClaimsComponent implements OnInit {
       size: 'lg'
     }).componentInstance;
     this.modalInstance.claim$ = claim;
+  }
+
+  public getBaseUrl() {
+    return this.config.server.baseUrl || '';
   }
 }

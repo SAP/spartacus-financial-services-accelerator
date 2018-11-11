@@ -4,7 +4,7 @@ import * as fromActions from './../actions';
 import { Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap } from 'rxjs/operators';
-import { ClaimsService } from '../../services/claims.service';
+import { OccClaimService} from './../../../../occ/claim/claim.service'
 import { ClaimDataService } from '../../services/claim-data.service';
 
 @Injectable()
@@ -12,16 +12,23 @@ export class ClaimEffects {
   @Effect()
   loadClaims$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.LOAD_CLAIMS),
-    map((action: fromActions.LoadClaims) =>
-      action.payload
-    ),
+    map((action: fromActions.LoadClaims) => action.payload),
     mergeMap(payload => {
-      return this.claimsService.getClaims(payload.userId).pipe(
-        map((claims: any) => {
-          return new fromActions.LoadClaimsSuccess(claims);
-          }),
-          catchError(error => of(new fromActions.LoadClaimsFail(error)))
-        );
+        if(payload === undefined || payload.userId === undefined)
+        {
+          payload = 
+          {
+             userId: this.claimData.userId,
+             //claims: this.claimData.claims 
+          }
+        }
+        return this.claimsService.getClaims(payload.userId)
+          .pipe(
+            map((claims: any) => {
+              return new fromActions.LoadClaimsSuccess(claims);
+            }),
+            catchError(error => of(new fromActions.LoadClaimsFail(error)))
+          );
       }
     )
   );
@@ -42,7 +49,7 @@ export class ClaimEffects {
 
   constructor(
     private actions$: Actions,
-    private claimsService: ClaimsService,
+    private claimsService: OccClaimService,
     private claimData: ClaimDataService
   ) {}
 }

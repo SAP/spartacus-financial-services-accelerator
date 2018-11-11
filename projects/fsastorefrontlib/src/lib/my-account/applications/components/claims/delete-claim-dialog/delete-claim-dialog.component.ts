@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClaimsService } from '../../../services/claims.service';
-import { tap } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Claim } from '../claims.component';
 import { Subscription } from 'rxjs';
@@ -49,7 +48,7 @@ export class DeleteClaimDialogComponent implements OnInit {
   }
 
   deleteClaim() {
-    this.service.removeClaim(this.user_id, this.claimNumber);
+    this.service.removeClaim(this.user_id, this.claim$.claimNumber);
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

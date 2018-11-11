@@ -18,27 +18,7 @@ export function reducer(
 ): ClaimState {
   switch (action.type) {
     case fromAction.LOAD_CLAIMS_SUCCESS: {
-      const content = { ...action.payload };
-      let claims = {};
-      if (content.claims) {
-        claims = content.claims.reduce(
-          (claimsMap: { [claimNumber: string]: any }, claim: any) => {
-            return {
-              ...claimsMap,
-              [claim.claimNumber] : state.claims[claim.claimNumber]
-              ? {
-                ...state.claims[claim.claimNumber],
-                ...claim
-              }
-              : claim
-            };
-          },
-          {
-            ...claims
-          }
-        );
-        delete content['claims'];
-      }
+      const claims = { ...action.payload };
       return {
         ...state,
         claims,
