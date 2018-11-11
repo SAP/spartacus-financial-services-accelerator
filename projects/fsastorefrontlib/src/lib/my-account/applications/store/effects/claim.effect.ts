@@ -19,10 +19,10 @@ export class ClaimEffects {
           payload = 
           {
              userId: this.claimData.userId,
-             //claims: this.claimData.claims 
+             claims: this.claimData.claims 
           }
         }
-        return this.claimsService.getClaims(payload.userId)
+        return this.claimService.getClaims(payload.userId)
           .pipe(
             map((claims: any) => {
               return new fromActions.LoadClaimsSuccess(claims);
@@ -38,7 +38,7 @@ export class ClaimEffects {
     ofType(fromActions.DELETE_CLAIM),
     map((action: fromActions.DeleteClaim) => action.payload),
     mergeMap(payload =>
-      this.claimsService.deleteClaim(payload.userId, payload.claimId).pipe(
+      this.claimService.deleteClaim(payload.userId, payload.claimId).pipe(
         map(() => {
           return new fromActions.DeleteClaimSuccess();
         }),
@@ -49,7 +49,7 @@ export class ClaimEffects {
 
   constructor(
     private actions$: Actions,
-    private claimsService: OccClaimService,
+    private claimService: OccClaimService,
     private claimData: ClaimDataService
   ) {}
 }

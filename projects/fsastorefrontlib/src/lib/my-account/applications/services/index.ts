@@ -1,7 +1,7 @@
-import { ClaimsService } from './claims.service';
+import { ClaimService } from './claim.service';
 import { ClaimDataService } from './claim-data.service';
 
-export const services: any[] = [ClaimsService, ClaimDataService];
+export const services: any[] = [ClaimService, ClaimDataService];
 
-export * from './claims.service';
+export * from './claim.service';
 //export * from './claims-data.service';

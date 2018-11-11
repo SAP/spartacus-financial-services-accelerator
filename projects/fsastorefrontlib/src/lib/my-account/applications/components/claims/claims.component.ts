@@ -25,7 +25,6 @@ export class ClaimsComponent implements OnInit {
   subscription: Subscription;
   userId: string;
 
-
   constructor(
     private modalService: NgbModal,
     protected fb: FormBuilder,
@@ -44,16 +43,16 @@ export class ClaimsComponent implements OnInit {
     this.claimsLoaded$ = this.store.pipe(select(fromClaimStore.getLoaded));
   }
 
-  deleteClaim(claim: Claim) {
-    this.openModal(claim);
+  deleteClaim(claimNumber: string) {
+    this.openModal(claimNumber);
   }
 
-  private openModal(claim: Claim) {
+  private openModal(claimNumber: string) {
     this.modalInstance = this.modalService.open(DeleteClaimDialogComponent, {
       centered: true,
       size: 'lg'
     }).componentInstance;
-    this.modalInstance.claim$ = claim;
+    this.modalInstance.claimNumber = claimNumber;
   }
 
   public getBaseUrl() {

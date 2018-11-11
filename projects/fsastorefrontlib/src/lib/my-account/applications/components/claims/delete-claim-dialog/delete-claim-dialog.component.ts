@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ClaimsService } from '../../../services/claims.service';
+import { ClaimService } from '../../../services/claim.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Claim } from '../claims.component';
 import { Subscription } from 'rxjs';
@@ -12,19 +12,19 @@ import { AuthService } from '@spartacus/storefront';
   styleUrls: ['./delete-claim-dialog.component.scss']
 })
 export class DeleteClaimDialogComponent implements OnInit {
-  private user_id: string;
-  private claimNumber: string;
-  claim$: Claim;
+
   form: FormGroup = this.fb.group({});
   private subscription: Subscription;
 
-
   constructor(
     public activeModal: NgbActiveModal,
-    private service: ClaimsService,
+    private service: ClaimService,
     protected fb: FormBuilder,
     protected auth: AuthService
   ) {}
+
+  private user_id: string;
+  private claimNumber: string;
 
   ngOnInit() {
     this.subscription = this.auth.userToken$.subscribe(userData => {
@@ -33,22 +33,22 @@ export class DeleteClaimDialogComponent implements OnInit {
       }
     });
 
-    if (!this.form.controls[this.claim$.claimNumber]) {
+    if (!this.form.controls[this.claimNumber]) {
       this.form.setControl(
-        this.claim$.claimNumber,
-        this.createClaimFormGroup(this.claim$)
+        this.claimNumber,
+        this.createClaimFormGroup(this.claimNumber)
       );
     }
   }
 
-  private createClaimFormGroup(claim) {
+  private createClaimFormGroup(claimNumber) {
     return this.fb.group({
-      claimNumber: claim.claimNumber
+      claimNumber: claimNumber
     });
   }
 
   deleteClaim() {
-    this.service.removeClaim(this.user_id, this.claim$.claimNumber);
+    this.service.removeClaim(this.user_id, this.claimNumber);
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

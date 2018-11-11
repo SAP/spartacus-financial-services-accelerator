@@ -34,7 +34,6 @@ export function reducer(
       };
     }
 
-    case fromAction.LOAD_CLAIMS:
     case fromAction.DELETE_CLAIM:
       return {
         ...state,

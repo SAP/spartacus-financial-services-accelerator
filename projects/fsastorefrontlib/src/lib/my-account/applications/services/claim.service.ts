@@ -8,7 +8,8 @@ import { AuthService } from '@spartacus/storefront';
 
 
 @Injectable()
-export class ClaimsService {
+export class ClaimService {
+  
   callback: Function;
 
   constructor(
@@ -19,19 +20,10 @@ export class ClaimsService {
     this.initClaims();
   }
 
-  removeClaim(userId: string, claimId: string) {
-    this.store.dispatch(
-      new fromAction.DeleteClaim({
-        userId: userId,
-        claimId: claimId
-      })
-    );
-  }
-
   initClaims() {
     this.store.pipe(select(fromSelector.getActiveClaims)).subscribe(claims => {
       if(claims)
-      this.claimData.claims = claims;
+        this.claimData.claims = claims;
       if (this.callback) {
         this.callback();
         this.callback = null;
@@ -41,16 +33,10 @@ export class ClaimsService {
     this.auth.userToken$.subscribe(userData => {
       if (this.claimData.userId !== userData.userId) {
         this.claimData.userId = userData.userId;
-        this.store.dispatch(
-          new fromAction.LoadClaims({
-            userId: this.claimData.userId,
-          })
-        );
       }
     });
 
     this.store.pipe(select(fromSelector.getRefresh)).subscribe(refresh => {
-      console.log('refresh');
       if (refresh) {
         this.store.dispatch(
           new fromAction.LoadClaims({
@@ -68,4 +54,13 @@ export class ClaimsService {
         })
       );
     }
+
+  removeClaim(userId: string, claimId: string) {
+    this.store.dispatch(
+      new fromAction.DeleteClaim({
+         userId: userId,
+         claimId: claimId
+      })
+    );
+  }
 }

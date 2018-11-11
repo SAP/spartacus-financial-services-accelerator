@@ -8,7 +8,7 @@ import { DeleteClaimDialogComponent } from './components/claims/delete-claim-dia
 import { effects } from './store/effects';
 import { EffectsModule } from '@ngrx/effects';
 import { reducerProvider, reducerToken } from './store/reducers';
-import { ClaimsService } from './services/claims.service';
+import { ClaimService } from './services/claim.service';
 import { ClaimDataService } from './services/claim-data.service';
 import { StoreModule } from '@ngrx/store';
 import { metaReducers } from 'projects/storefrontlib/src/lib/checkout/store';
@@ -28,6 +28,6 @@ import { OccClaimService } from '../../occ/claim/claim.service';
   declarations: [ClaimsComponent, DeleteClaimDialogComponent],
   entryComponents: [DeleteClaimDialogComponent],
   exports: [ClaimsComponent],
-  providers: [reducerProvider, ClaimsService, ClaimDataService, OccClaimService]
+  providers: [reducerProvider, ClaimService, ClaimDataService, OccClaimService]
 })
 export class ClaimsModule {}
