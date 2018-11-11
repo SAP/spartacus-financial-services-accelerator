@@ -24,7 +24,6 @@ protected getClaimsEndpoint(userId: string) {
       }
   
   public getClaims(userId: string): Observable<any> {
-    console.log("getClaimsOCC");
     const url = this.getClaimsEndpoint(userId);
     const params = new HttpParams({ fromString: FULL_PARAMS });
     return this.http
