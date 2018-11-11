@@ -3,7 +3,7 @@ import * as fromAction from './../actions';
 export interface ClaimState {
   refresh: boolean;
   loaded: boolean;
-  claims: { [claimNumber: string]: any };
+  claims: {};
 }
 
 export const initialState: ClaimState = {
