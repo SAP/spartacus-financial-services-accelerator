@@ -14,13 +14,11 @@ export class ClaimEffects {
     ofType(fromActions.LOAD_CLAIMS),
     map((action: fromActions.LoadClaims) => action.payload),
     mergeMap(payload => {
-        if(payload === undefined || payload.userId === undefined)
-        {
-          payload = 
-          {
+        if (payload === undefined || payload.userId === undefined) {
+          payload = {
              userId: this.claimData.userId,
-             claims: this.claimData.claims 
-          }
+             claims: this.claimData.claims
+          };
         }
         return this.claimService.getClaims(payload.userId)
           .pipe(
@@ -29,8 +27,7 @@ export class ClaimEffects {
             }),
             catchError(error => of(new fromActions.LoadClaimsFail(error)))
           );
-      }
-    )
+      })
   );
 
   @Effect()

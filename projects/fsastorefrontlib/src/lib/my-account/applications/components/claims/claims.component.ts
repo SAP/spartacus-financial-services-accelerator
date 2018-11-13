@@ -1,8 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Subscription } from 'rxjs';
 import { DeleteClaimDialogComponent } from './delete-claim-dialog/delete-claim-dialog.component';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import * as fromClaimStore from '../../store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OccConfig } from '@spartacus/core';
@@ -19,23 +18,17 @@ export interface Claim {
 })
 
 export class ClaimsComponent implements OnInit {
-
-  modalInstance;
-  form: FormGroup = this.fb.group({});
-  subscription: Subscription;
-  userId: string;
-
   constructor(
     private modalService: NgbModal,
     protected fb: FormBuilder,
     protected store: Store<fromClaimStore.ClaimState>,
     private config: OccConfig,
-  
   ) {}
 
-  claims$; 
-  claimsLoaded$; 
+  claims$;
+  claimsLoaded$;
 
+  modalInstance;
   noClaimsText = 'You have no Claims!';
 
   ngOnInit() {

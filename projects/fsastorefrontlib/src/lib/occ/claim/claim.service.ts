@@ -10,8 +10,10 @@ const FULL_PARAMS = 'fields=FULL';
 
 @Injectable()
 export class OccClaimService {
-      
-constructor(protected http: HttpClient, protected config: OccConfig) {}
+constructor(
+  protected http: HttpClient,
+  protected config: OccConfig
+  ) {}
 
 protected getClaimsEndpoint(userId: string) {
     const claimsEndpoint = '/users/' + userId + '/claims';
@@ -20,9 +22,9 @@ protected getClaimsEndpoint(userId: string) {
         this.config.server.occPrefix +
         this.config.site.baseSite +
            claimsEndpoint
-        );
-      }
-  
+    );
+}
+
   public getClaims(userId: string): Observable<any> {
     const url = this.getClaimsEndpoint(userId);
     const params = new HttpParams({ fromString: FULL_PARAMS });
@@ -41,8 +43,6 @@ protected getClaimsEndpoint(userId: string) {
       .delete(url, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
-
-
 }
 
 

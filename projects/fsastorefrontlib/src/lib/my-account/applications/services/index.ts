@@ -4,4 +4,4 @@ import { ClaimDataService } from './claim-data.service';
 export const services: any[] = [ClaimService, ClaimDataService];
 
 export * from './claim.service';
-//export * from './claims-data.service';
+export * from './claim-data.service';

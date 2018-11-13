@@ -9,9 +9,6 @@ import { AuthService } from '@spartacus/storefront';
 
 @Injectable()
 export class ClaimService {
-  
-  callback: Function;
-
   constructor(
     private store: Store<fromReducer.ClaimState>,
     private claimData: ClaimDataService,
@@ -20,10 +17,13 @@ export class ClaimService {
     this.initClaims();
   }
 
+  callback: Function;
+
   initClaims() {
     this.store.pipe(select(fromSelector.getActiveClaims)).subscribe(claims => {
-      if(claims)
+      if (claims) {
         this.claimData.claims = claims;
+      }
       if (this.callback) {
         this.callback();
         this.callback = null;

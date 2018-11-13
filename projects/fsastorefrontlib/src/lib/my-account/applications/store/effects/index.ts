@@ -1,4 +1,4 @@
-import {ClaimEffects} from "./claim.effect";
+import {ClaimEffects} from './claim.effect';
 
 export const effects: any[] = [ClaimEffects];
 
