@@ -1,44 +1,33 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { QuotesService } from '../../services/quotes.service';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import * as fromQuoteStore from '../../store';
+import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
-import { AuthService } from '@spartacus/storefront';
 
-// NOTE: this a work in progress component. The code here is not ready for production.
+export interface Quote {
+  quoteId?: any;
+}
 
 @Component({
   selector: 'fsa-quotes',
   templateUrl: './quotes.component.html',
-  styleUrls: ['./quotes.component.scss']
+  styleUrls: ['./quotes.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class QuotesComponent implements OnInit, OnDestroy {
-  private subscription: Subscription;
+export class QuotesComponent implements OnInit {
 
   constructor(
-    private service: QuotesService,
-    private config: OccConfig,
-    private auth: AuthService
+    private store: Store<fromQuoteStore.QuoteState>,
+    private config: OccConfig
   ) {}
 
-  quotes$: Observable<any>;
+  quotes$;
+  quotesLoaded$;
+
   noQuotesText = 'You have no Quotes!';
 
-  private user_id: string;
-
   ngOnInit() {
-    this.subscription = this.auth.userToken$.subscribe(userData => {
-      if (userData && userData.userId) {
-        this.user_id = userData.userId;
-      }
-    });
-
-    this.quotes$ = this.service.getQuotes(this.user_id);
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.quotes$ = this.store.pipe(select(fromQuoteStore.getActiveQuotes));
+    this.quotesLoaded$ = this.store.pipe(select(fromQuoteStore.getQuoteLoaded));
   }
 
   public getBaseUrl() {

@@ -6,21 +6,24 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 import { OccConfig } from '@spartacus/core';
 
 @Injectable()
-export class PoliciesService {
-  constructor(protected http: HttpClient, protected config: OccConfig) { }
+export class OccQuoteService {
+  constructor(
+    protected http: HttpClient,
+    protected config: OccConfig
+  ) {}
 
-  protected getPoliciesEndpoint(userId: string) {
-    const policiesEndpoint = '/users/' + userId + '/policies';
+  protected getQuotesEndpoint(userId: string) {
+    const quotesEndpoint = '/users/' + userId + '/insurance-quotes';
     return (
       (this.config.server.baseUrl || '') +
       this.config.server.occPrefix +
       this.config.site.baseSite +
-      policiesEndpoint
+      quotesEndpoint
     );
   }
 
-  public getPolicies(userId: string): Observable<any> {
-    const url = this.getPoliciesEndpoint(userId);
+  public getQuotes(userId: string): Observable<any> {
+    const url = this.getQuotesEndpoint(userId);
     const params = new HttpParams();
 
     return this.http

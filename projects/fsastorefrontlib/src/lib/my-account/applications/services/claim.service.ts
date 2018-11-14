@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
-import { ClaimDataService, ANONYMOUS_USERID } from './claim-data.service';
+import { ClaimDataService } from './claim-data.service';
 import * as fromSelector from '../store/selectors';
 import { AuthService } from '@spartacus/storefront';
 
@@ -36,7 +36,7 @@ export class ClaimService {
       }
     });
 
-    this.store.pipe(select(fromSelector.getRefresh)).subscribe(refresh => {
+    this.store.pipe(select(fromSelector.getClaimRefresh)).subscribe(refresh => {
       if (refresh) {
         this.store.dispatch(
           new fromAction.LoadClaims({

@@ -7,7 +7,7 @@ import { ClaimsComponent } from './components/claims/claims.component';
 import { DeleteClaimDialogComponent } from './components/claims/delete-claim-dialog/delete-claim-dialog.component';
 import { effects } from './store/effects';
 import { EffectsModule } from '@ngrx/effects';
-import { reducerProvider, reducerToken } from './store/reducers';
+import { claimReducerProvider, claimReducerToken } from './store/reducers';
 import { ClaimService } from './services/claim.service';
 import { ClaimDataService } from './services/claim-data.service';
 import { StoreModule } from '@ngrx/store';
@@ -22,12 +22,12 @@ import { OccClaimService } from '../../occ/claim/claim.service';
     FormsModule,
     NgSelectModule,
     BootstrapModule,
-    StoreModule.forFeature('claim', reducerToken, { metaReducers }),
+    StoreModule.forFeature('claim', claimReducerToken, { metaReducers }),
     EffectsModule.forFeature(effects)
   ],
   declarations: [ClaimsComponent, DeleteClaimDialogComponent],
   entryComponents: [DeleteClaimDialogComponent],
   exports: [ClaimsComponent],
-  providers: [reducerProvider, ClaimService, ClaimDataService, OccClaimService]
+  providers: [claimReducerProvider, ClaimService, ClaimDataService, OccClaimService]
 })
 export class ClaimsModule {}

@@ -16,12 +16,12 @@ export const getActiveClaims: MemoizedSelector<any, any> = createSelector(
   fromClaim.getClaims
 );
 
-export const getRefresh: MemoizedSelector<any, boolean> = createSelector(
+export const getClaimRefresh: MemoizedSelector<any, boolean> = createSelector(
   getActiveClaimState,
   fromClaim.getRefresh
 );
 
-export const getLoaded: MemoizedSelector<any, boolean> = createSelector(
+export const getClaimLoaded: MemoizedSelector<any, boolean> = createSelector(
   getActiveClaimState,
   fromClaim.getLoaded
 );
@@ -31,7 +31,7 @@ export const getClaimsMap: MemoizedSelector<any, any> = createSelector(
   fromClaim.getClaims
 );
 
-export const getEntrySelectorFactory = (
+export const getClaimEntrySelectorFactory = (
   claimId
 ): MemoizedSelector<any, any> => {
   return createSelector(getClaimsMap, claims => {

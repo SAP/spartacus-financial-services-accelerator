@@ -1,9 +1,9 @@
 import * as fromAction from './../actions';
 
 export interface ClaimState {
+  claims: {};
   refresh: boolean;
   loaded: boolean;
-  claims: {};
 }
 
 export const initialState: ClaimState = {
