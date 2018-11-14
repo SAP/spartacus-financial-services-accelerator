@@ -6,9 +6,7 @@ import * as fromClaimStore from '../../store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OccConfig } from '@spartacus/core';
 
-export interface Claim {
-  claimNumber?: any;
-}
+
 
 @Component({
   selector: 'fsa-claims',

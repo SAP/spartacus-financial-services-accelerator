@@ -3,9 +3,7 @@ import * as fromPolicyStore from '../../store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
 
-export interface Policy {
-  policyId?: any;
-}
+
 
 @Component({
   selector: 'fsa-policies',

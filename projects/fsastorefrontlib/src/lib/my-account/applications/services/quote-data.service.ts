@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { ANONYMOUS_USERID } from './claim-data.service';
-import { Quote } from '../components/quotes/quotes.component';
+import { Quote } from '../store/reducers/quote.reducer';
 
 
 @Injectable()
 export class QuoteDataService {
-  private _userId = ANONYMOUS_USERID;
+  private _userId = 'anonymous';
   private _quotes: Quote[];
 
   constructor() {}

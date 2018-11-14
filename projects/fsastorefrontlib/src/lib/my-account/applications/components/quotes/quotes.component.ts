@@ -3,9 +3,6 @@ import * as fromQuoteStore from '../../store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
 
-export interface Quote {
-  quoteId?: any;
-}
 
 @Component({
   selector: 'fsa-quotes',

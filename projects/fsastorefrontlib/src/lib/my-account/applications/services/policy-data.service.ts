@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Policy } from '../..';
-import { ANONYMOUS_USERID } from './claim-data.service';
+import { Policy } from '../store/reducers/policy.reducer';
 
 @Injectable()
 export class PolicyDataService {
-  private _userId = ANONYMOUS_USERID;
+  private _userId = 'anonymous';
   private _policies: Policy[];
 
   constructor() {}

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Claim } from '../..';
+import { Claim } from '../store/reducers/claim.reducer';
 
-export const ANONYMOUS_USERID = 'anonymous';
 
 @Injectable()
 export class ClaimDataService {
-  private _userId = ANONYMOUS_USERID;
+  private _userId = 'anonymous';
   private _claims: Claim[];
 
   constructor() {}

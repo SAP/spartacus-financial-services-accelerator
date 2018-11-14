@@ -1,5 +1,9 @@
 import * as fromAction from './../actions';
 
+export interface Claim {
+  claimNumber?: string;
+}
+
 export interface ClaimState {
   claims: {};
   refresh: boolean;

@@ -1,5 +1,9 @@
 import * as fromAction from './../actions';
 
+export interface Policy {
+  policyId?: string;
+}
+
 export interface PolicyState {
   policies: {};
   refresh: boolean;

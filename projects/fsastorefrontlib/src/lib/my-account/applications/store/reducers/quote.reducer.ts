@@ -1,5 +1,9 @@
 import * as fromAction from '../actions';
 
+export interface Quote {
+  quoteId?: string;
+}
+
 export interface QuoteState {
   quotes: {};
   refresh: boolean;
