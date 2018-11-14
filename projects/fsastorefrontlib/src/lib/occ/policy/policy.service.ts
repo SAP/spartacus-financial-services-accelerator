@@ -7,7 +7,10 @@ import { OccConfig } from '@spartacus/core';
 
 @Injectable()
 export class OccPolicyService {
-  constructor(protected http: HttpClient, protected config: OccConfig) { }
+  constructor(
+    protected http: HttpClient,
+    protected config: OccConfig
+    ) {}
 
   protected getPoliciesEndpoint(userId: string) {
     const policiesEndpoint = '/users/' + userId + '/policies';

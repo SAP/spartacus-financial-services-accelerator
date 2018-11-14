@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Policy } from '../..';
 import { ANONYMOUS_USERID } from './claim-data.service';
+import { Quote } from '../components/quotes/quotes.component';
 
 
 @Injectable()
 export class QuoteDataService {
   private _userId = ANONYMOUS_USERID;
-  private _quotes: Policy[];
+  private _quotes: Quote[];
 
   constructor() {}
 
@@ -18,11 +18,11 @@ export class QuoteDataService {
     return this._userId;
   }
 
-  set quotes(val: Policy[]) {
+  set quotes(val: Quote[]) {
     this._quotes = val;
   }
 
-  get quotes(): Policy[] {
+  get quotes(): Quote[] {
     return this._quotes;
   }
 }
