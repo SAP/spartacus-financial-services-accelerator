@@ -1,6 +1,6 @@
 <ng-container *ngIf="(claims$ | async) as claims">
   <div class="row" *ngIf="claims?.claims?.length > 0; else: noClaims">
-    <div *ngFor="let claim of claims.claims" class="col-md-4 cards">
+    <div *ngFor="let claim of claims.claims" class="col-xs-12 col-sm-6 col-md-4 cards">
       <div class="cards__wrapper cards__wrapper--border-primary">
         <div
           *ngIf="claim.claimStatus == 'OPEN' || claim.claimStatus == 'REJECTED'"
@@ -19,7 +19,7 @@
               <ng-template #noIncidentType>
                 <!--
                   If there is no incident type, no image will be displayed
-                -->
+                --><img _ngcontent-c14="" class="images__size" src="assets/images/teest.jpg" alt="">
               </ng-template>
               <div
                 *ngIf="claim.incidentType != undefined; else: noIncidentType"

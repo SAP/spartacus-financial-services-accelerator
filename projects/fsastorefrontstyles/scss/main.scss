@@ -44,6 +44,11 @@ $screen-xxs: 380px;
 
 $border-grey: 1px solid $color-grey;
 //Mixin for linear gradient background
+
+//CSS Reset
+button:focus {
+  outline: none;
+}
 @mixin linear-gradient-background(
   $startColor,
   $endColor,
@@ -233,6 +238,8 @@ $border-grey: 1px solid $color-grey;
 .primary-button,
 .secondary-button,
 .inverted {
+  cursor: pointer;
+  margin-bottom: 10px;
   &__default {
     @include transition;
     width: 100%;

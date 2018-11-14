@@ -1,24 +1,19 @@
-<div class="delete-claim-dialog">
-  <ng-container>
-    <button
-      type="button"
-      class="close"
-      aria-label="Close"
-      (click)="activeModal.dismiss('Cross click')"
-    >
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <div>
-      <h3>Delete started claim process?</h3>
-      <p>The following claim process will be deleted.</p>
-    </div>
+<div id="cboxLoadedContent">
+  <div class="popup-content-wrapper">
+    <button type="button" class="close"(click)="activeModal.dismiss('Cross click')"></button>
+    <h3>Delete started claim process</h3>
+    <p>The following claim process will be deleted</p>
     <div class="modal-actions">
-      <div class="row">
-        <button (click)="activeModal.dismiss('Cross click')">Cancel</button>
-        <button (click)="deleteClaim(); activeModal.dismiss('Cross click')">
-          Delete
-        </button>
-      </div>
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-sm-pull-6">
+              <!-- <button class="closeColorBox secondary-button secondary-button__default secondary-button__popup">Cancel</button> -->
+              <button class="primary-button primary-button__default" (click)="activeModal.dismiss('Cross click')" >Cancel</button>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-sm-push-6">
+              <!-- <button type="submit" class="primary-button primary-button__default primary-button__popup">Delete</button> -->
+              <button class="secondary-button secondary-button__default" (click)="deleteClaim(); activeModal.dismiss('Cross click')">Delete</button>
+          </div>
+        </div>
     </div>
-  </ng-container>
+  </div>
 </div>
