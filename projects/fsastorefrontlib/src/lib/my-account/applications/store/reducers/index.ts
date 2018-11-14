@@ -1,22 +1,24 @@
-import {InjectionToken, Provider} from '@angular/core';
-import {ActionReducerMap, createFeatureSelector, MemoizedSelector} from '@ngrx/store';
+import { InjectionToken, Provider } from '@angular/core';
+import {
+  ActionReducerMap,
+  createFeatureSelector,
+  MemoizedSelector
+} from '@ngrx/store';
 import * as fromClaim from './claim.reducer';
 
 export interface ClaimState {
   active: fromClaim.ClaimState;
-  loaded: fromClaim.ClaimState;
 }
 
 export function getReducers(): ActionReducerMap<ClaimState> {
   return {
-    active: fromClaim.reducer,
-    loaded: fromClaim.reducer
+    active: fromClaim.reducer
   };
 }
 
 export const reducerToken: InjectionToken<
   ActionReducerMap<ClaimState>
-  > = new InjectionToken<ActionReducerMap<ClaimState>>('ClaimReducers');
+> = new InjectionToken<ActionReducerMap<ClaimState>>('ClaimReducers');
 
 export const reducerProvider: Provider = {
   provide: reducerToken,
@@ -26,5 +28,4 @@ export const reducerProvider: Provider = {
 export const getClaimState: MemoizedSelector<
   any,
   ClaimState
-  > = createFeatureSelector<ClaimState>('claim');
-
+> = createFeatureSelector<ClaimState>('claim');
