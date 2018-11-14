@@ -6,7 +6,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { QuotesComponent } from './components/quotes/quotes.component';
 import { quoteReducerProvider, quoteReducerToken } from './store/reducers';
 import { StoreModule } from '@ngrx/store';
-import { metaReducers } from 'projects/storefrontlib/src/lib/checkout/store';
 import { EffectsModule } from '@ngrx/effects';
 import { effects } from './store/effects';
 import { QuoteService } from './services/quote.service';
@@ -19,7 +18,7 @@ import { OccQuoteService } from '../../occ/quote/quote.service';
     RouterModule,
     FormsModule,
     NgSelectModule,
-    StoreModule.forFeature('quote', quoteReducerToken, { metaReducers }),
+    StoreModule.forFeature('quote', quoteReducerToken),
     EffectsModule.forFeature(effects)
   ],
   declarations: [QuotesComponent],

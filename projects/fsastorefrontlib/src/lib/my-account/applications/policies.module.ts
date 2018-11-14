@@ -6,7 +6,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { PoliciesComponent } from './components/policies/policies.component';
 import { policyReducerProvider, policyReducerToken } from './store/reducers';
 import { StoreModule } from '@ngrx/store';
-import { metaReducers } from 'projects/storefrontlib/src/lib/checkout/store';
 import { EffectsModule } from '@ngrx/effects';
 import { effects } from './store/effects';
 import { PolicyService } from './services/policy.service';
@@ -19,7 +18,7 @@ import { OccPolicyService } from '../../occ/policy/policy.service';
     RouterModule,
     FormsModule,
     NgSelectModule,
-    StoreModule.forFeature('policy', policyReducerToken, { metaReducers }),
+    StoreModule.forFeature('policy', policyReducerToken),
     EffectsModule.forFeature(effects)
   ],
   declarations: [PoliciesComponent],

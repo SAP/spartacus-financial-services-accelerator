@@ -11,7 +11,6 @@ import { claimReducerProvider, claimReducerToken } from './store/reducers';
 import { ClaimService } from './services/claim.service';
 import { ClaimDataService } from './services/claim-data.service';
 import { StoreModule } from '@ngrx/store';
-import { metaReducers } from 'projects/storefrontlib/src/lib/checkout/store';
 import { BootstrapModule } from 'projects/storefrontlib/src/lib/bootstrap.module';
 import { OccClaimService } from '../../occ/claim/claim.service';
 
@@ -22,7 +21,7 @@ import { OccClaimService } from '../../occ/claim/claim.service';
     FormsModule,
     NgSelectModule,
     BootstrapModule,
-    StoreModule.forFeature('claim', claimReducerToken, { metaReducers }),
+    StoreModule.forFeature('claim', claimReducerToken),
     EffectsModule.forFeature(effects)
   ],
   declarations: [ClaimsComponent, DeleteClaimDialogComponent],

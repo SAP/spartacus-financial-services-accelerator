@@ -4,8 +4,8 @@ import * as fromActions from './../actions';
 import { Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap } from 'rxjs/operators';
-import { OccPolicyService } from 'projects/fsastorefrontlib/src/lib/occ/policy/policy.service';
 import { PolicyDataService } from '../../services/policy-data.service';
+import { OccPolicyService } from '../../../../occ/policy/policy.service';
 
 @Injectable()
 export class PolicyEffects {
