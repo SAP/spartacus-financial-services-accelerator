@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { FSAStorefrontModule } from '@fsa/storefront';
+import { FsaFooterNavigationModule } from 'projects/fsastorefrontlib/src/lib/footer-navigation/fsa-footer-navigation.module';
 
 @NgModule({
   declarations: [
@@ -10,6 +11,7 @@ import { FSAStorefrontModule } from '@fsa/storefront';
   ],
   imports: [
     BrowserModule,
+    FsaFooterNavigationModule,
     FSAStorefrontModule.withConfig({
       server: {
         baseUrl: 'https://financialservices.dev-ded1-2.yrd.rot.hybris.com:9002'
