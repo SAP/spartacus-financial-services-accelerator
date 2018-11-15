@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PolicyService } from '../../../my-account/applications/services/policy.service';
 
 @Component({
   selector: 'fsa-policies-page-layout',
@@ -6,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./policies-page-layout.component.scss']
 })
 export class PoliciesPageLayoutComponent implements OnInit {
-  constructor() {}
+  constructor(
+    protected policyService: PolicyService
+  ) {}
 
   policies = 'Policies';
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.policyService.loadPolicies();
+  }
 }

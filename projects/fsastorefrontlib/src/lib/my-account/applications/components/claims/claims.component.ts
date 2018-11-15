@@ -6,9 +6,7 @@ import * as fromClaimStore from '../../store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OccConfig } from '@spartacus/core';
 
-export interface Claim {
-  claimNumber?: any;
-}
+
 
 @Component({
   selector: 'fsa-claims',
@@ -22,7 +20,7 @@ export class ClaimsComponent implements OnInit {
     private modalService: NgbModal,
     protected fb: FormBuilder,
     protected store: Store<fromClaimStore.ClaimState>,
-    private config: OccConfig,
+    private config: OccConfig
   ) {}
 
   claims$;
@@ -33,7 +31,7 @@ export class ClaimsComponent implements OnInit {
 
   ngOnInit() {
     this.claims$ = this.store.pipe(select(fromClaimStore.getActiveClaims));
-    this.claimsLoaded$ = this.store.pipe(select(fromClaimStore.getLoaded));
+    this.claimsLoaded$ = this.store.pipe(select(fromClaimStore.getClaimLoaded));
   }
 
   deleteClaim(claimNumber: string) {
