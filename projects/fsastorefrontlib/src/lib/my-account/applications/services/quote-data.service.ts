@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Claim } from '../store/reducers/claim.reducer';
+import { Quote } from '../store/reducers/quote.reducer';
 
 
 @Injectable()
-export class ClaimDataService {
+export class QuoteDataService {
   private _userId = 'anonymous';
-  private _claims: Claim[];
+  private _quotes: Quote[];
 
   constructor() {}
 
@@ -17,11 +17,11 @@ export class ClaimDataService {
     return this._userId;
   }
 
-  set claims(val: Claim[]) {
-    this._claims = val;
+  set quotes(val: Quote[]) {
+    this._quotes = val;
   }
 
-  get claims(): Claim[] {
-    return this._claims;
+  get quotes(): Quote[] {
+    return this._quotes;
   }
 }

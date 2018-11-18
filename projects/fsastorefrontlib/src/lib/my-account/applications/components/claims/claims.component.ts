@@ -1,64 +1,41 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { ClaimsService } from '../../services/claims.service';
-import { OccConfig } from '@spartacus/core';
-import { AuthService } from '@spartacus/storefront';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Store, select } from '@ngrx/store';
 import { DeleteClaimDialogComponent } from './delete-claim-dialog/delete-claim-dialog.component';
+import { FormBuilder } from '@angular/forms';
+import * as fromClaimStore from '../../store';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { OccConfig } from '@spartacus/core';
+
+
 
 @Component({
   selector: 'fsa-claims',
   templateUrl: './claims.component.html',
-  styleUrls: ['./claims.component.scss']
+  styleUrls: ['./claims.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClaimsComponent implements OnInit, OnDestroy {
 
-  private subscription: Subscription;
+export class ClaimsComponent implements OnInit {
+  constructor(
+    private modalService: NgbModal,
+    protected fb: FormBuilder,
+    protected store: Store<fromClaimStore.ClaimState>,
+    private config: OccConfig
+  ) {}
+
+  claims$;
+  claimsLoaded$;
 
   modalInstance;
-  form: FormGroup = this.fb.group({});
-
-  constructor(
-    private service: ClaimsService,
-    private config: OccConfig,
-    private auth: AuthService,
-    private modalService: NgbModal,
-    protected fb: FormBuilder
-
-  ) { }
-
-  claims$: Observable<any>;
-  claim$: Observable<any>;
-
-  private user_id: string;
-
   noClaimsText = 'You have no Claims!';
 
   ngOnInit() {
-    this.subscription = this.auth.userToken$.subscribe(userData => {
-      if (userData && userData.userId) {
-        this.user_id = userData.userId;
-      }
-    });
-
-    this.claims$ = this.service.getClaims(this.user_id);
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
-
-  public getBaseUrl() {
-    return this.config.server.baseUrl || '';
+    this.claims$ = this.store.pipe(select(fromClaimStore.getActiveClaims));
+    this.claimsLoaded$ = this.store.pipe(select(fromClaimStore.getClaimLoaded));
   }
 
   deleteClaim(claimNumber: string) {
-    console.log(claimNumber);
     this.openModal(claimNumber);
-    delete this.form.controls[claimNumber];
   }
 
   private openModal(claimNumber: string) {
@@ -66,7 +43,10 @@ export class ClaimsComponent implements OnInit, OnDestroy {
       centered: true,
       size: 'lg'
     }).componentInstance;
-    this.modalInstance.entry$ = this.claim$;
     this.modalInstance.claimNumber = claimNumber;
+  }
+
+  public getBaseUrl() {
+    return this.config.server.baseUrl || '';
   }
 }

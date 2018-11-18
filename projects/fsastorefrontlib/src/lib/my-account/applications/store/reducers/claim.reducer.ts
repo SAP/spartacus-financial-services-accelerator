@@ -1,9 +1,13 @@
 import * as fromAction from './../actions';
 
+export interface Claim {
+  claimNumber?: string;
+}
+
 export interface ClaimState {
+  claims: {};
   refresh: boolean;
   loaded: boolean;
-  claims: { [code: string]: any };
 }
 
 export const initialState: ClaimState = {
@@ -17,28 +21,8 @@ export function reducer(
   action: fromAction.ClaimAction
 ): ClaimState {
   switch (action.type) {
-
     case fromAction.LOAD_CLAIMS_SUCCESS: {
       const claims = { ...action.payload };
-      let claimEntries = {};
-      if (claims.entries) {
-        claimEntries = claims.entries.reduce(
-          (entryMap: { [code: string]: any }, entry: any) => {
-            return {
-              ...entryMap,
-              [entry.userId]: state.claims[entry.userId]
-                ? {
-                  ...state.claims[entry.userId],
-                  ...entry
-                }
-                : entry
-            };
-          },
-          {
-            ...claimEntries
-          }
-        );
-      }
       return {
         ...state,
         claims,
@@ -64,5 +48,6 @@ export function reducer(
   return state;
 }
 
+export const getClaims = (state: ClaimState) => state.claims;
 export const getRefresh = (state: ClaimState) => state.refresh;
 export const getLoaded = (state: ClaimState) => state.loaded;

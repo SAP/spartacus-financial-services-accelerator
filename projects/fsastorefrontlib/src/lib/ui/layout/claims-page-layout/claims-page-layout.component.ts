@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import * as fromClaimStore from '../../../my-account/applications/store';
+import { Store } from '@ngrx/store';
+import { ClaimService } from '../../../my-account/applications/services/claim.service';
+
 
 @Component({
   selector: 'fsa-claims-page-layout',
@@ -6,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./claims-page-layout.component.scss']
 })
 export class ClaimsPageLayoutComponent implements OnInit {
-  constructor() {}
+
+  constructor(
+    protected store: Store<fromClaimStore.ClaimState>,
+    protected claimService: ClaimService
+  ) {}
 
   claims = 'Claims';
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.claimService.loadClaims();
+  }
 }

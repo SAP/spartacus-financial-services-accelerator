@@ -6,8 +6,11 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 import { OccConfig } from '@spartacus/core';
 
 @Injectable()
-export class QuotesService {
-  constructor(protected http: HttpClient, protected config: OccConfig) { }
+export class OccQuoteService {
+  constructor(
+    protected http: HttpClient,
+    protected config: OccConfig
+  ) {}
 
   protected getQuotesEndpoint(userId: string) {
     const quotesEndpoint = '/users/' + userId + '/insurance-quotes';
