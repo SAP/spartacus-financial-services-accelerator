@@ -16,11 +16,6 @@
         <div class="cards__title cards__title--border-primary">
           <span class="images images__wrapper">
             <span class="images images__wrapper images__wrapper--size">
-              <ng-template #noIncidentType>
-                <!--
-                  If there is no incident type, N/A image will be displayed
-                --><img class="images__size" [src]="getlink()" alt="">
-              </ng-template>
                 <img *ngIf="claim.incidentType != undefined; else: noIncidentType"
                   class="images__size"
                   [src]="getBaseUrl() + claim.incidentType?.icon.url"
@@ -85,4 +80,7 @@
 </ng-template>
 <ng-template #na>
   {{ notAvailable }}
+</ng-template>
+<ng-template #noIncidentType>
+  <img class="images__size" [src]="getlink()" alt="">
 </ng-template>
