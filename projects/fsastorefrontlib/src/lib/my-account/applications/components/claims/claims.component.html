@@ -1,6 +1,6 @@
 <ng-container *ngIf="(claims$ | async) as claims">
   <div class="row" *ngIf="claims?.claims?.length > 0; else: noClaims">
-    <div *ngFor="let claim of claims.claims" class="col-xs-12 col-sm-6 col-lg-4 cards">
+    <div *ngFor="let claim of claims.claims" class="col-xs-12 col-sm-6 col-md-4 cards">
       <div class="cards__wrapper cards__wrapper--border-primary">
         <div
           *ngIf="claim.claimStatus == 'OPEN' || claim.claimStatus == 'REJECTED'"
@@ -18,25 +18,20 @@
             <span class="images images__wrapper images__wrapper--size">
               <ng-template #noIncidentType>
                 <!--
-                  If there is no incident type, no image will be displayed
-                --><img _ngcontent-c14="" class="images__size" [src]="getlink()" alt="">
+                  If there is no incident type, N/A image will be displayed
+                --><img class="images__size" [src]="getlink()" alt="">
               </ng-template>
-              <div
-                *ngIf="claim.incidentType != undefined; else: noIncidentType"
-              >
-                <img
+                <img *ngIf="claim.incidentType != undefined; else: noIncidentType"
                   class="images__size"
                   [src]="getBaseUrl() + claim.incidentType?.icon.url"
                   alt="{{claim.incidentType?.icon.alt}}"
                 />
-              </div>
             </span>
           </span>
-          <h3 *ngIf="claim.incidentType?.incidentName" class="cards__caption cards__caption--color-primary">
-            {{ claim.incidentType?.incidentName }}
-          </h3>
-          <h3 *ngIf="!claim.incidentType?.incidentName" class="cards__caption cards__caption--color-primary">
-            {{ notAvailable }}
+          <h3 class="cards__caption cards__caption--color-primary">
+            <span *ngIf="claim.incidentType != undefined; else: na">
+              {{ claim.incidentType?.incidentName }}
+            </span>
           </h3>
           <h4 class="cards__caption cards__caption--color-primary">
             {{ claim.claimNumber }}
@@ -51,8 +46,7 @@
           </div>
           <div class="cards__data">
             <span class="title">Date of Loss</span>
-            <span *ngIf="claim.dateOfLoss" class="value">{{ claim.dateOfLoss }}</span>
-            <span *ngIf="!claim.dateOfLoss" class="value">{{ notAvailable }}</span>
+            <span class="value" *ngIf="claim.dateOfLoss != undefined; else: na">{{ claim.dateOfLoss }}</span>
           </div>
           <div class="cards__data">
             <span class="title">Status</span>
@@ -88,4 +82,7 @@
 </ng-container>
 <ng-template #noClaims>
   <h3>{{ noClaimsText }}</h3>
+</ng-template>
+<ng-template #na>
+  {{ notAvailable }}
 </ng-template>
