@@ -5,7 +5,7 @@ import * as fromClaimStore from '../../store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OccConfig } from '@spartacus/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { naIconImgSrc } from '../../../../assets/info-icon';
+import { naIconImgSrc } from '../../../../assets/na-icon';
 
 
 
@@ -41,7 +41,7 @@ export class ClaimsComponent implements OnInit {
     this.openModal(claimNumber);
   }
 
-  getlink() {
+  getNaImagelink() {
     return this.domSanitizer.bypassSecurityTrustUrl(naIconImgSrc);
   }
 
