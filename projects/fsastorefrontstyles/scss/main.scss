@@ -194,6 +194,7 @@ button:focus {
 }
 .account-cards-actions {
   position: absolute;
+  cursor: pointer;
   top: 14px;
   right: 14px;
   .action-links {
@@ -244,6 +245,7 @@ button:focus {
 .secondary-button,
 .inverted {
   cursor: pointer;
+  -webkit-appearance: none;
   margin-bottom: 10px;
   &__default {
     @include transition;
@@ -267,6 +269,9 @@ button:focus {
     padding: 14px;
     margin: 6px 0;
     white-space: nowrap;
+  }
+  &:hover {
+    text-decoration: none;
   }
 }
 .primary-button {

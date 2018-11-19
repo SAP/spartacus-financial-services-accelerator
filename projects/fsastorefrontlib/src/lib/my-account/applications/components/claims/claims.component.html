@@ -19,7 +19,7 @@
               <ng-template #noIncidentType>
                 <!--
                   If there is no incident type, no image will be displayed
-                --><img _ngcontent-c14="" class="images__size" src="assets/images/teest.jpg" alt="">
+                --><img _ngcontent-c14="" class="images__size" [src]="getlink()" alt="">
               </ng-template>
               <div
                 *ngIf="claim.incidentType != undefined; else: noIncidentType"
@@ -32,8 +32,11 @@
               </div>
             </span>
           </span>
-          <h3 class="cards__caption cards__caption--color-primary">
+          <h3 *ngIf="claim.incidentType?.incidentName" class="cards__caption cards__caption--color-primary">
             {{ claim.incidentType?.incidentName }}
+          </h3>
+          <h3 *ngIf="!claim.incidentType?.incidentName" class="cards__caption cards__caption--color-primary">
+            {{ notAvailable }}
           </h3>
           <h4 class="cards__caption cards__caption--color-primary">
             {{ claim.claimNumber }}
@@ -48,7 +51,8 @@
           </div>
           <div class="cards__data">
             <span class="title">Date of Loss</span>
-            <span class="value">{{ claim.dateOfLoss }}</span>
+            <span *ngIf="claim.dateOfLoss" class="value">{{ claim.dateOfLoss }}</span>
+            <span *ngIf="!claim.dateOfLoss" class="value">{{ notAvailable }}</span>
           </div>
           <div class="cards__data">
             <span class="title">Status</span>
