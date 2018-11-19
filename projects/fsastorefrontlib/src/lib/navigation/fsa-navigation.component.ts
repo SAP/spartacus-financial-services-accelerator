@@ -16,7 +16,7 @@ export class FsaNavigationComponent extends NavigationComponent {
     constructor(
         protected cmsService: CmsService,
         protected cd: ChangeDetectorRef,
-        private fsaNavigationService: FsaNavigationService,
+        protected fsaNavigationService: FsaNavigationService,
         protected store: Store<fromStore.CmsState>
     ) {
         super(cmsService, cd, fsaNavigationService, store);

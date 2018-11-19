@@ -14,7 +14,7 @@ import { FsaFooterNavigationModule } from 'projects/fsastorefrontlib/src/lib/foo
     FsaFooterNavigationModule,
     FSAStorefrontModule.withConfig({
       server: {
-        baseUrl: 'https://financialservices.dev-ded1-2.yrd.rot.hybris.com:9002'
+        baseUrl: 'https://financialservices.local:9002'
       },
       site: {
         baseSite: 'insurance'
