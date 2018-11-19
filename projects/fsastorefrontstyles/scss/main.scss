@@ -49,6 +49,11 @@ $border-grey: 1px solid $color-grey;
 button:focus {
   outline: none;
 }
+.center1400 {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
 @mixin linear-gradient-background(
   $startColor,
   $endColor,

@@ -1,6 +1,6 @@
 <ng-container *ngIf="(claims$ | async) as claims">
   <div class="row" *ngIf="claims?.claims?.length > 0; else: noClaims">
-    <div *ngFor="let claim of claims.claims" class="col-xs-12 col-sm-6 col-md-4 cards">
+    <div *ngFor="let claim of claims.claims" class="col-xs-12 col-sm-6 col-lg-4 cards">
       <div class="cards__wrapper cards__wrapper--border-primary">
         <div
           *ngIf="claim.claimStatus == 'OPEN' || claim.claimStatus == 'REJECTED'"
@@ -70,11 +70,11 @@
             "
             class="cards__button"
           >
-            <a href="#" type="submit" class="btn btn-primary">Resume</a>
+            <a href="#" type="submit" class="secondary-button secondary-button__default secondary-button__account-policies">Resume</a>
           </div>
           <ng-template #details>
             <div class="cards__button">
-              <a href="#" type="submit" class="btn btn-secondary">Details</a>
+              <a href="#" type="submit" class="secondary-button secondary-button__default secondary-button__account-policies">Details</a>
             </div>
           </ng-template>
         </div>
