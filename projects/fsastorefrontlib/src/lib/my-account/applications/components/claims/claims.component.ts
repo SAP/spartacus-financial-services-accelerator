@@ -7,9 +7,7 @@ import { OccConfig } from '@spartacus/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { naIconImgSrc } from '../../../../assets/info-icon';
 
-export interface Claim {
-  claimNumber?: any;
-}
+
 
 @Component({
   selector: 'fsa-claims',
@@ -36,7 +34,7 @@ export class ClaimsComponent implements OnInit {
 
   ngOnInit() {
     this.claims$ = this.store.pipe(select(fromClaimStore.getActiveClaims));
-    this.claimsLoaded$ = this.store.pipe(select(fromClaimStore.getLoaded));
+    this.claimsLoaded$ = this.store.pipe(select(fromClaimStore.getClaimLoaded));
   }
 
   deleteClaim(claimNumber: string) {

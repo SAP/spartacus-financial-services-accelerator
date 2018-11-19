@@ -12,9 +12,6 @@ import { AuthService } from '@spartacus/storefront';
 })
 export class DeleteClaimDialogComponent implements OnInit {
 
-  form: FormGroup = this.fb.group({});
-  private subscription: Subscription;
-
   constructor(
     public activeModal: NgbActiveModal,
     private service: ClaimService,
@@ -22,6 +19,8 @@ export class DeleteClaimDialogComponent implements OnInit {
     protected auth: AuthService
   ) {}
 
+  form: FormGroup = this.fb.group({});
+  private subscription: Subscription;
   private user_id: string;
   private claimNumber: string;
 
