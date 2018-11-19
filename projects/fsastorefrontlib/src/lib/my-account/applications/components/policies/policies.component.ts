@@ -3,15 +3,16 @@ import * as fromPolicyStore from '../../store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
 
-
-
 @Component({
   selector: 'fsa-policies',
   templateUrl: './policies.component.html',
   styleUrls: ['./policies.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class PoliciesComponent implements OnInit {
+
+  title = 'test';
 
   constructor(
     private store: Store<fromPolicyStore.PolicyState>,
