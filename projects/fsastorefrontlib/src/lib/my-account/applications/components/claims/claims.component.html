@@ -19,7 +19,7 @@
               <ng-template #noIncidentType>
                 <!--
                   If there is no incident type, no image will be displayed
-                --><img _ngcontent-c14="" class="images__size" src="assets/images/teest.jpg" alt="">
+                --><img _ngcontent-c14="" class="images__size" [src]="getlink()" alt="">
               </ng-template>
               <div
                 *ngIf="claim.incidentType != undefined; else: noIncidentType"
