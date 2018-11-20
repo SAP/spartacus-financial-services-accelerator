@@ -1,9 +1,8 @@
-import { Component, ChangeDetectionStrategy, Injectable, Input, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import * as fromPolicyStore from '../../../my-account/applications/store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
-import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'fsa-view-policies',
@@ -14,26 +13,17 @@ import { Subscription } from 'rxjs';
 })
 export class CMSViewPoliciesComponent implements OnInit{
 
-    //component$;
-    //title = 'Tour of Heroes';
+    component$;
 
     constructor(
         protected componentData: CmsComponentData,
         private store: Store<fromPolicyStore.PolicyState>,
         private config: OccConfig,
         private changeDetectorRef: ChangeDetectorRef
-      ) {
-        //   this.subscription = this.componentData.data$.subscribe(
-        //       data => {
-        //           this.component$ = data;
-        //           console.log(data);
-        //       }
-        //   )
-      }
+      ) { }
          
-    //   policies$;
-    //   policiesLoaded$;
-    //   private subscription: Subscription;
+      policies$;
+      policiesLoaded$;
     
     public noPoliciesText = 'You have no Policies!';
 
@@ -43,20 +33,13 @@ export class CMSViewPoliciesComponent implements OnInit{
         this.changeDetectorRef.detectChanges();
     }
     
-    // fetchPolicies() {
-    //     this.policies$ = this.store.pipe(select(fromPolicyStore.getActivePolicies));
-    //     this.policiesLoaded$ = this.store.pipe(select(fromPolicyStore.getPolicyLoaded));
-    // }
+    fetchPolicies() {
+        this.policies$ = this.store.pipe(select(fromPolicyStore.getActivePolicies));
+        this.policiesLoaded$ = this.store.pipe(select(fromPolicyStore.getPolicyLoaded));
+    }
 
-    // ngOnDestroy() {
-    //     if (this.subscription) {
-    //         this.subscription.unsubscribe();
-    //       }      
-    //     }
-
-
-    // public getBaseUrl() {
-    //     return this.config.server.baseUrl || '';
-    // }
+    public getBaseUrl() {
+        return this.config.server.baseUrl || '';
+    }
 
 }
