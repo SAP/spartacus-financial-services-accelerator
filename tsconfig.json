@@ -32,9 +32,6 @@
       ],
       "@spartacus/storefront": [
         "projects/storefrontlib/src/public_api"
-      ],
-      "@spartacus/styles": [
-        "projects/storefrontstyles/scss/"
       ]
     }
   }

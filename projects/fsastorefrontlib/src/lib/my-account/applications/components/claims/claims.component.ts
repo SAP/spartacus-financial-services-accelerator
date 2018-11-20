@@ -1,10 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { DeleteClaimDialogComponent } from './delete-claim-dialog/delete-claim-dialog.component';
-import { FormBuilder } from '@angular/forms';
 import * as fromClaimStore from '../../store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OccConfig } from '@spartacus/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { naIconImgSrc } from '../../../../assets/na-icon';
 
 
 
@@ -18,16 +19,18 @@ import { OccConfig } from '@spartacus/core';
 export class ClaimsComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
-    protected fb: FormBuilder,
     protected store: Store<fromClaimStore.ClaimState>,
-    private config: OccConfig
+    private config: OccConfig,
+    private domSanitizer: DomSanitizer
   ) {}
 
+  naIconImgSrc = naIconImgSrc;
   claims$;
   claimsLoaded$;
 
   modalInstance;
   noClaimsText = 'You have no Claims!';
+  notAvailable = 'N/A';
 
   ngOnInit() {
     this.claims$ = this.store.pipe(select(fromClaimStore.getActiveClaims));
@@ -36,6 +39,10 @@ export class ClaimsComponent implements OnInit {
 
   deleteClaim(claimNumber: string) {
     this.openModal(claimNumber);
+  }
+
+  getNaImagelink() {
+    return this.domSanitizer.bypassSecurityTrustUrl(naIconImgSrc);
   }
 
   private openModal(claimNumber: string) {
