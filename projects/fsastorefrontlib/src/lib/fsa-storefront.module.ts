@@ -14,7 +14,7 @@ import { FsaHeaderModule } from './ui/layout/fsa-header/fsa-header.module';
     StorefrontModule,
     ConfigModule.forRoot()
   ],
-  exports: [StorefrontModule, MyAccountModule, FsaHeaderModule],
+  exports: [StorefrontModule, FsaHeaderModule],
   declarations: []
 })
 export class FSAStorefrontModule {
