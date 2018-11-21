@@ -1,21 +1,32 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { ConfigModule, provideConfig } from '@spartacus/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
+import { ConfigModule, provideConfig } from '@spartacus/core';
+import {
+  StorefrontModuleConfig,
+  StorefrontModule,
+  GlobalMessageModule
+} from '@spartacus/storefront';
+
+import { FsaStorefrontComponent } from './fsa-storefront.component';
+import { FsaHeaderModule} from './ui/layout/fsa-header/fsa-header.module'
 import { MyAccountModule } from './my-account/index';
-import { StorefrontModuleConfig, StorefrontModule } from '@spartacus/storefront';
 import { UiModule } from './ui/index';
-import { FsaHeaderModule } from './ui/layout/fsa-header/fsa-header.module';
 
 @NgModule({
   imports: [
+    CommonModule,
+    RouterModule,
+    GlobalMessageModule,
     UiModule,
     FsaHeaderModule,
     MyAccountModule,
     StorefrontModule,
     ConfigModule.forRoot()
   ],
-  exports: [StorefrontModule, FsaHeaderModule],
-  declarations: []
+  declarations: [FsaStorefrontComponent],
+  exports: [StorefrontModule, FsaStorefrontComponent]
 })
 export class FSAStorefrontModule {
   static withConfig(config?: StorefrontModuleConfig): ModuleWithProviders {
