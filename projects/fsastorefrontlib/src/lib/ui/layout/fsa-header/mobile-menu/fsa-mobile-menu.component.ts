@@ -4,11 +4,11 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'y-mobile-menu',
-  templateUrl: './mobile-menu.component.html',
-  styleUrls: ['./mobile-menu.component.scss']
+  selector: 'fsa-mobile-menu',
+  templateUrl: './fsa-mobile-menu.component.html',
+  styleUrls: ['./fsa-mobile-menu.component.scss']
 })
-export class MobileMenuComponent implements OnDestroy {
+export class FsaMobileMenuComponent implements OnDestroy {
   private subscription: Subscription;
   showMenu = false;
 

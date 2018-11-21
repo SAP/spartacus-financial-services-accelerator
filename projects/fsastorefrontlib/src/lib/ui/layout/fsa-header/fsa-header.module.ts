@@ -1,10 +1,14 @@
-import { RouterModule } from '@angular/router';
-import { CmsModule } from '@spartacus/storefront';
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+
+import { CmsModule } from '@spartacus/storefront';
 import { SiteContextModule } from '@spartacus/storefront';
-import { FsaHeaderComponent } from './fsa-header.component';
 import { LoginModule } from '@spartacus/storefront';
+
+import { FsaHeaderComponent } from './fsa-header.component';
+import { FsaMobileMenuComponent } from './mobile-menu/fsa-mobile-menu.component';
+
 
 @NgModule({
   imports: [
@@ -15,10 +19,10 @@ import { LoginModule } from '@spartacus/storefront';
     RouterModule
   ],
   declarations: [
-    FsaHeaderComponent
+    FsaHeaderComponent, FsaMobileMenuComponent
   ],
   exports: [
-    FsaHeaderComponent
+    FsaHeaderComponent, FsaMobileMenuComponent
   ]
 })
 export class FsaHeaderModule {}

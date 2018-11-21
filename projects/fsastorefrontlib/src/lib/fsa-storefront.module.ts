@@ -10,7 +10,7 @@ import {
 } from '@spartacus/storefront';
 
 import { FsaStorefrontComponent } from './fsa-storefront.component';
-import { FsaHeaderModule} from './ui/layout/fsa-header/fsa-header.module'
+import { FsaHeaderModule} from './ui/layout/fsa-header/fsa-header.module';
 import { MyAccountModule } from './my-account/index';
 import { UiModule } from './ui/index';
 
