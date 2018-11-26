@@ -1,5 +1,5 @@
 <nav class="y-footer-navigation">
-  <div class="container">
+  <div class="center1400">
     <div class="row">
       <div class="col-xs-12 col-sm-4 col-md-3" *ngFor="let child of node.children">
         <div class="y-footer-navigation__container">
@@ -14,7 +14,10 @@
       </div>
     </div>
   </div>
+  <div class="y-footer-navigation__notice">
+    <div class="center1400">
+      {{component?.notice}}
+    </div>
+  </div>
 </nav>
-<div class="y-footer-navigation__notice">
-  {{component?.notice}}
-</div>
+

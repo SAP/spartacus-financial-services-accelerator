@@ -1,0 +1,40 @@
+@import '../mixins.scss';
+@import '../variables.scss';
+
+.y-footer-navigation {
+    @include radial-gradient-background($color-link-hover,$color-button-secondary-hover,$color-dark-blue);
+    margin-top: 80px;
+    padding-top: 40px;
+    &__title {
+        color: $color-white;
+        font-size: 15px;
+        font-weight: 600;
+        padding-bottom: 20px;
+        text-transform: uppercase;
+    }
+    &__list {
+        padding-left: 0;
+    }
+    &__item {
+        margin-top: 10px;
+    }
+    &__link {
+        color: $color-white;
+        font-size: 12px;
+        font-weight: normal;
+        border-bottom: 1px solid transparent;
+        &:hover {
+            text-decoration: none;
+            border-bottom: 1px solid $color-white;
+            padding-bottom: 3px;
+            color: $color-white;
+        }
+    }
+    &__notice {
+        border-top: 1px solid $color-white;
+        margin-top: 20px;
+        color: $color-white;
+        font-size: 12px;
+        padding: 25px 0;
+    }
+}

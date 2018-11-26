@@ -1,0 +1,61 @@
+@import '../variables.scss';
+.main-title {
+	&__headline-border {
+		margin: 35px auto 35px;
+		border-top: 3px solid $color-mild-grey;
+		text-align: center;
+	}
+	&__quote-heading {
+		width: 300px;
+		background-color: $color-white;
+		display: inline-block;
+		position: relative;
+		top: -20px;
+		margin-top: 0;
+		margin-bottom: 0;
+		font-size: 30px;
+		@media (max-width: $screen-xs-max) {
+			width: 230px;
+			font-size: 30px;
+		}
+	}
+}
+.find-agent {
+    &__main-page {
+		margin-bottom: 60px;
+        overflow: hidden;
+		padding: 0 10px;
+        @media (max-width: $screen-lg) {
+            padding: 0 30px;
+        }
+		@media (max-width: $screen-sm-max) {
+			padding: 0px 10px 30px 10px;
+		}
+    }
+    &__homepage {
+        font-size: 30px;
+        font-weight: lighter;
+        text-align: center;
+        background-color: $color-light-grey;
+        padding: 20px 0;
+    }
+    &__link {
+        color: $color-blue;
+    }
+    @media (max-width: $screen-sm-max) {
+        font-size: 20px;
+    }
+}
+// To change class when solution for paragraph components is found
+.make-claim {
+    text-align: center;
+    text-transform: none;
+    padding: 40px 0;
+    line-height: 0;
+    font-size: 22px;
+    font-weight: 100;
+    background-color:$color-blue;
+    & a {
+        color: $color-white;
+    }
+}
