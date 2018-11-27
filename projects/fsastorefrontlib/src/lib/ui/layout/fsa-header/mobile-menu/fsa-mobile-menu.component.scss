@@ -1,6 +1,7 @@
 @import 'theme';
 @import 'functions';
 @import 'mixins';
+@import 'main';
 
 //https://github.com/jonsuh/hamburgers
 $hamburger-types: (squeeze);
@@ -26,10 +27,18 @@ $y-mobile-menu-transition: left 0.2s ease-in !default;
 $y-mobile-menu-z-index: 100 !default;
 $y-mobile-menu-width: 100% !default;
 $y-mobile-menu-position-left-hidden: -1000vh !default;
-
+// #y-mobile-menu {
+  
+//   .hamburger-inner {
+//     background-color: $color-dark-blue;
+//     &:before, &:after {
+//       background-color: $color-dark-blue; 
+//     }
+//   }
+// }
 .y-mobile-menu {
   position: $y-mobile-menu-position;
-  @include var-color('background-color', $y-mobile-menu-background-color);
+  background-color: $color-white;
   @include var-color('color', $y-mobile-menu-color);
   display: flex;
   flex-flow: column;
@@ -72,10 +81,7 @@ $y-mobile-menu-position-left-hidden: -1000vh !default;
     @include media-breakpoint-down(md) {
       position: $y-mobile-menu-position;
       left: $y-mobile-menu-position-left;
-      @include var-color(
-        'background-color',
-        $y-mobile-menu-md-content-background-color
-      );
+      background-color: $color-white;
       transition: $y-mobile-menu-transition;
       z-index: $y-mobile-menu-z-index;
       width: $y-mobile-menu-width;

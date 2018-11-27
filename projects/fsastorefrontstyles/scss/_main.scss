@@ -317,14 +317,6 @@ button:focus {
     padding: 0;
     margin: 1rem 0;
   }
-  #y-mobile-menu {
-    .hamburger-inner {
-      background-color: $color-dark-blue;
-      &:before, &:after {
-        background-color: $color-dark-blue; 
-      }
-    }
-  }
   .y-search-box .y-search-box__input {
     border: 1px solid $color-dark-blue;
   }
