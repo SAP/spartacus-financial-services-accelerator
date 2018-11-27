@@ -297,3 +297,35 @@ button:focus {
 /* ************************************************************* */
 /* ************************ Buttons end ************************ */
 /* ************************************************************* */
+
+
+// HEADER OVERRIDES
+.y-header {
+  color: $color-dark-grey;
+  text-transform: uppercase;
+  a, y-navigation .y-navigation__link, span.y-navigation__link {
+    color: $color-dark-grey;
+    text-transform: uppercase;
+  }
+  y-navigation {
+    padding: 15px 30px;
+  }
+  nav .y-navigation__list {
+    justify-content: flex-start;
+    border-top: 1px solid $color-mild-grey;
+    border-bottom: 1px solid $color-mild-grey;
+    padding: 0;
+    margin: 1rem 0;
+  }
+  #y-mobile-menu {
+    .hamburger-inner {
+      background-color: $color-dark-blue;
+      &:before, &:after {
+        background-color: $color-dark-blue; 
+      }
+    }
+  }
+  .y-search-box .y-search-box__input {
+    border: 1px solid $color-dark-blue;
+  }
+}

@@ -4,12 +4,9 @@
 @import 'main';
 
 
-
-
 // //header color variables
-$y-header-background-color: 'light' !default;
-$y-header-color: 'info' !default;
-// $y-header-separator-color: 'info' !default;
+// $y-header-background-color: 'red' !default;
+// $y-header-color: 'info' !default;
 
 //header variables
 $y-header-skipper-position: absolute !default;
@@ -27,8 +24,8 @@ $y-header-trbl-padding-mobile: 0.5rem 0 0 0 !default;
 
 :host {
   @include reset;
-  @include var-color('background-color', $y-header-background-color);
-  @include var-color('color', $y-header-color);
+  // @include var-color('background-color', $y-header-background-color);
+  // @include var-color('color', $y-header-color);
 }
 
 .y-header {
@@ -39,7 +36,7 @@ $y-header-trbl-padding-mobile: 0.5rem 0 0 0 !default;
   overflow: visible;
   @include media-breakpoint-up(lg) {
     position: static;
-    @include make-container-max-widths;
+    // @include make-container-max-widths;
   }
   @include media-breakpoint-down(md) {
     height: $y-header-height-tablet;
@@ -61,11 +58,6 @@ $y-header-trbl-padding-mobile: 0.5rem 0 0 0 !default;
       --width: 75%;
     }
   }
-  // a.nav-link {
-  //   color: $color-dark-grey;
-  // }
-  --y-primary: #666666;
-  --y-inverse: #666666;
 }
 /**
   Introduce the beauty of CSS vars here.
