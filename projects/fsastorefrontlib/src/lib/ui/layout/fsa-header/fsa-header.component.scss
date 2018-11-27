@@ -1,11 +1,15 @@
 @import 'theme';
 @import 'functions';
 @import 'mixins';
+@import 'main';
 
-//header color variables
-$y-header-background-color: 'dark' !default;
-$y-header-color: 'inverse' !default;
-$y-header-separator-color: 'secondary' !default;
+
+
+
+// //header color variables
+$y-header-background-color: 'light' !default;
+$y-header-color: 'info' !default;
+// $y-header-separator-color: 'info' !default;
 
 //header variables
 $y-header-skipper-position: absolute !default;
@@ -29,24 +33,13 @@ $y-header-trbl-padding-mobile: 0.5rem 0 0 0 !default;
 
 .y-header {
   position: relative;
+  background-color: $color-white;
   margin: $y-header-trbl-margin;
   max-height: $y-header-bar-height;
   overflow: visible;
-
   @include media-breakpoint-up(lg) {
     position: static;
     @include make-container-max-widths;
-
-    &:before {
-      content: '';
-      position: $y-header-separator-position;
-      border-bottom-style: solid;
-      border-bottom-width: $y-header-separator-border-width;
-      @include var-color('border-bottom-color', $y-header-separator-color);
-      width: $y-header-separator-width;
-      left: $y-header-separator-position-left;
-      top: $y-header-separator-position-top;
-    }
   }
   @include media-breakpoint-down(md) {
     height: $y-header-height-tablet;
@@ -58,21 +51,22 @@ $y-header-trbl-padding-mobile: 0.5rem 0 0 0 !default;
   }
 
   &__logo {
-    --width: 100px;
+    --width: 100%;
     //keeping logo width simple for now
 
     @include media-breakpoint-down(md) {
       --margin: 0 0 0 5rem;
     }
-    // @include media-breakpoint-down(md) {
-    //   --width: 35%;
-    // }
-    // @include media-breakpoint-down(xs) {
-    //   --width: 25%;
-    // }
+    @include media-breakpoint-down(md) {
+      --width: 75%;
+    }
   }
+  // a.nav-link {
+  //   color: $color-dark-grey;
+  // }
+  --y-primary: #666666;
+  --y-inverse: #666666;
 }
-
 /**
   Introduce the beauty of CSS vars here.
   The container specifies highly generic CSS vars.
