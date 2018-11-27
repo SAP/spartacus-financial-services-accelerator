@@ -1,5 +1,5 @@
+@import '../theme/variables.scss';
 @import '../mixins.scss';
-@import '../variables.scss';
 
 .y-footer-navigation {
     @include radial-gradient-background($color-link-hover,$color-button-secondary-hover,$color-dark-blue);

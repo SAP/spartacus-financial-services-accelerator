@@ -1,10 +1,11 @@
 //Bootsrap modules (these are things we are NOT changing at all)
 @import '~bootstrap/scss/bootstrap';
 
+@import './theme';
+@import './functions.scss';
+
 @import 'main';
 @import 'popup';
-@import 'fonts';
-@import 'variables';
 @import './blocks/titles.scss';
 @import './blocks/footer.scss';
 

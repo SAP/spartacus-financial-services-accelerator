@@ -1,15 +1,7 @@
-@import './variables.scss';
+@import './theme/variables';
 @import './mixins.scss';
-@import url('//fonts.googleapis.com/css?family=Open+Sans:400,600,700');
 
-body {
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
-  font-size: 14px;
-  line-height: 1.42857143;
-}
-h1, h2, h3, h4, h5, h6 {
-  color: $color-dark-grey;
-}
+//CSS Reset
 ul, li {
   list-style: none;
 }
@@ -17,20 +9,16 @@ a {
   text-decoration: none;
   @include transition;
 }
+
 .mb10 {
  margin-bottom: 10px;
 }
 .mb20 {
   margin-bottom: 20px;
 }
-$border-grey: 1px solid $color-grey;
-//Layout 
-y-paragraph,y-dynamic-slot {
-  display: block;
-  overflow: hidden;
-}
 
-//CSS Reset
+
+$border-grey: 1px solid $color-grey;
 button:focus {
   outline: none;
 }
@@ -172,33 +160,33 @@ button:focus {
   transition: all 300ms ease;
 }
 @mixin primary-btn-color {
-  background-color: $color-button-primary !important;
-  border-color: $color-button-primary !important;
-  color: $color-white !important;
+  background-color: $color-blue;
+  border-color: $color-blue;
+  color: $color-white;
   &:hover,
   &:active,
   &:focus {
-    background-color: $color-button-primary-hover !important;
-    border-color: $color-button-primary-hover !important;
-    color: $color-white !important;
+    background-color: $color-link-hover;
+    border-color: $color-link-hover;
+    color: $color-white;
   }
 }
 @mixin secondary-btn-color {
-  background-color: $color-button-secondary !important;
-  border-color: $color-button-secondary !important;
-  color: $color-white !important;
+  background-color: $color-dark-blue;
+  border-color: $color-dark-blue;
+  color: $color-white;
   &:hover,
   &:active,
   &:focus {
-    background-color: $color-button-secondary-hover !important;
-    border-color: $color-button-secondary-hover !important;
-    color: $color-white !important;
+    background-color: $color-button-secondary-hover;
+    border-color: $color-button-secondary-hover;
+    color: $color-white;
   }
 }
 @mixin secondary-btn-color-inverted {
-  background-color: $color-white !important;
-  border-color: $color-white !important;
-  color: $color-dark-blue !important;
+  background-color: $color-white;
+  border-color: $color-white;
+  color: $color-dark-blue;
   &:hover,
   &:active,
   &:focus {
