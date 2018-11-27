@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CmsPageGuards } from '@spartacus/storefront';
 import { AuthGuard } from '@spartacus/storefront';
-import { ClaimsPageComponent } from './claims-page.component';
-import { ClaimsPageLayoutModule } from '../../layout/claims-page-layout/claims-page-layout.module';
+import { ClaimsPageComponent } from "./claims-page.component";
+import { ClaimsPageLayoutModule } from "../../layout/claims-page-layout/claims-page-layout.module";
 
 const routes: Routes = [
   {
