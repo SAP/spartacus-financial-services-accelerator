@@ -1,0 +1,77 @@
+@import '../main';
+
+@mixin radial-gradient-background (
+    $startColor, 
+    $middleColor, 
+    $endColor
+    ) {
+    background: radial-gradient(ellipse at center, $startColor 30%, $middleColor 80%, $endColor 120%);
+    background: -ms-radial-gradient(ellipse at center, $startColor 30%, $middleColor 80%, $endColor 120%);
+    background: -moz-radial-gradient(ellipse at center, $startColor 30%, $middleColor 80%, $endColor 120%);
+    background: -o-radial-gradient(ellipse at center, $startColor 30%, $middleColor 80%, $endColor 120%);
+    background: -webkit-radial-gradient(ellipse at center, $startColor 30%, $middleColor 80%, $endColor 120%);
+}
+
+@mixin linear-gradient-background(
+  $startColor,
+  $endColor,
+  $firstStop,
+  $secondStop
+) {
+  background: -webkit-linear-gradient(
+    left,
+    $startColor $firstStop,
+    $endColor $secondStop
+  );
+  background: -o-linear-gradient(
+    left,
+    $startColor $firstStop,
+    $endColor $secondStop
+  );
+  background: linear-gradient(
+    to right,
+    $startColor $firstStop,
+    $endColor $secondStop
+  );
+}
+
+footer.y-footer {
+    @include radial-gradient-background($color-link-hover,$color-button-secondary-hover,$color-dark-blue);
+    margin-top: 80px;
+    padding-top: 40px;
+    .y-footer-navigation {
+        &__title {
+            color: $color-white;
+            font-size: 15px;
+            font-weight: 600;
+            padding-bottom: 20px;
+            text-transform: uppercase;
+        }
+        &__list {
+            padding-left: 0;
+        }
+        &__item {
+            margin-top: 10px;
+        }
+        &__link {
+            color: $color-white;
+            font-size: 12px;
+            font-weight: normal;
+            border-bottom: 1px solid transparent;
+            &:hover {
+                text-decoration: none;
+                border-bottom: 1px solid $color-white;
+                padding-bottom: 3px;
+                color: $color-white;
+            }
+        }
+        &__notice {
+            background-color: transparent;
+            border-top: 1px solid $color-white;
+            margin-top: 20px;
+            color: $color-white;
+            font-size: 12px;
+            padding: 25px 0;
+        }
+    }
+}
