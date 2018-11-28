@@ -27,15 +27,7 @@ $y-mobile-menu-transition: left 0.2s ease-in !default;
 $y-mobile-menu-z-index: 100 !default;
 $y-mobile-menu-width: 100% !default;
 $y-mobile-menu-position-left-hidden: -1000vh !default;
-// #y-mobile-menu {
-  
-//   .hamburger-inner {
-//     background-color: $color-dark-blue;
-//     &:before, &:after {
-//       background-color: $color-dark-blue; 
-//     }
-//   }
-// }
+
 .y-mobile-menu {
   position: $y-mobile-menu-position;
   background-color: $color-white;
@@ -43,7 +35,12 @@ $y-mobile-menu-position-left-hidden: -1000vh !default;
   display: flex;
   flex-flow: column;
   z-index: 100;
-
+  .hamburger-inner {
+    background-color: $color-dark-blue;
+    &:before, &:after {
+      background-color: $color-dark-blue; 
+    }
+  }
   &__components {
     display: flex;
     flex-direction: column;
