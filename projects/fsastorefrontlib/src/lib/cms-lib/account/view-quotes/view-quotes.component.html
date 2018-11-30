@@ -1,1 +1,36 @@
-2 {{test}}
+<!-- <div *ngIf="component$ && | async as component">
+        {{component.numberOfPoliciesToDisplay}}
+</div> -->
+<ng-container *ngIf="quotes$ | async as quotes">
+        <div class="review__wrapper">
+            <div class="review__quote">
+                <div class="my-quotes">
+                    <h2 class="my-quotes__title">View Quotes</h2>
+                        <ul>
+                            <div class="row">
+                                    <div *ngFor="let quote of quotes.insuranceQuotes">
+                                            <li class="my-quotes__my-quote">
+                                                    <div class="my-quotes__data-container">
+                                                            <span class="images images__wrapper">
+                                                                    <img class="images__size" [src]="getBaseUrl()+quote.defaultCategory.image.url" alt="">
+                                                                  </span>
+                                                            <div class="my-quotes__name-number">
+                                                                <span class="my-quotes__name">{{quote.planName}}</span>
+                                                                <span class="my-quotes__number">{{quote.quoteId}}</span>
+                                                            </div>
+                                                                <span class="my-quotes__add-infos">{{quote.formattedExpiryDate}}</span>
+                                                        </div>
+                                            </li>
+                                    </div>
+                            </div>
+                        </ul>
+                 </div>
+            </div>
+        </div>
+    </ng-container>
+      <ng-template #noPolicies>
+        <h3>{{noQuotesText}}</h3>
+      </ng-template>
+    
+    
+    

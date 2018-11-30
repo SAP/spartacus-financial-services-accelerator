@@ -17,11 +17,15 @@ import { FSAStorefrontModule } from '@fsa/storefront';
       site: {
         baseSite: 'insurance'
       },
+      authentication: {
+        client_id: 'financial_customer',
+        client_secret: 'secret'
+      },
       cmsComponentMapping: {
         EnrichedResponsiveBannerComponent: 'fsa-enriched-responsive-banner',
         CMSViewPoliciesComponent: 'fsa-view-policies',
         CMSViewQuotesComponent: 'fsa-view-quotes'
-      }
+      },
     })
   ],
   providers: [],
