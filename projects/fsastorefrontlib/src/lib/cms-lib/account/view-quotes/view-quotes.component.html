@@ -1,14 +1,12 @@
-<!-- <div *ngIf="component$ && | async as component">
-        {{component.numberOfPoliciesToDisplay}}
-</div> -->
-<ng-container *ngIf="quotes$ | async as quotes">
-        <div class="review__wrapper">
+
+<ng-container *ngIf="component$ | async as component">
+        <div *ngIf="quotes$ | async as quotes"  class="review__wrapper">
             <div class="review__quote">
                 <div class="my-quotes">
                     <h2 class="my-quotes__title">View Quotes</h2>
                         <ul>
                             <div class="row">
-                                    <div *ngFor="let quote of quotes.insuranceQuotes">
+                                    <div *ngFor="let quote of quotes.insuranceQuotes  | slice: 0:component.numberOfQuotesToDisplay">
                                             <li class="my-quotes__my-quote">
                                                     <div class="my-quotes__data-container">
                                                             <span class="images images__wrapper">
@@ -27,10 +25,10 @@
                  </div>
             </div>
         </div>
-    </ng-container>
-      <ng-template #noPolicies>
-        <h3>{{noQuotesText}}</h3>
-      </ng-template>
+</ng-container>
+<ng-template #noPolicies>
+    <h3>{{noQuotesText}}</h3>
+</ng-template>
     
     
     
