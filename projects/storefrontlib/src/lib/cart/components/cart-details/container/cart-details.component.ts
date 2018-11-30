@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-import * as fromCartStore from '../../../store';
+
+import { CartService } from '../../../facade/cart.service';
 
 @Component({
-  selector: 'y-cart-details',
+  selector: 'cx-cart-details',
   templateUrl: './cart-details.component.html',
   styleUrls: ['./cart-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -13,12 +13,12 @@ export class CartDetailsComponent implements OnInit {
   entries$;
   cartLoaded$;
 
-  constructor(protected store: Store<fromCartStore.CartState>) {}
+  constructor(protected cartService: CartService) {}
 
   ngOnInit() {
-    this.cart$ = this.store.pipe(select(fromCartStore.getActiveCart));
-    this.entries$ = this.store.pipe(select(fromCartStore.getEntries));
-    this.cartLoaded$ = this.store.pipe(select(fromCartStore.getLoaded));
+    this.cart$ = this.cartService.activeCart$;
+    this.entries$ = this.cartService.entries$;
+    this.cartLoaded$ = this.cartService.loaded$;
   }
 
   getAllPromotionsForCart(cart) {

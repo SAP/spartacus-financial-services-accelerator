@@ -5,12 +5,15 @@ import {
   ViewChild,
   ViewEncapsulation
 } from '@angular/core';
+
+import { ProductService } from '@spartacus/core';
+
 import { Observable } from 'rxjs';
-import { ProductService } from '../../../services/product.service';
+
 import { ProductDetailOutlets } from '../../../product-outlets.model';
 
 @Component({
-  selector: 'y-product-details',
+  selector: 'cx-product-details',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],
   encapsulation: ViewEncapsulation.None
@@ -24,7 +27,6 @@ export class ProductDetailsComponent implements OnChanges {
   @Input()
   productCode: string;
   product$: Observable<any>;
-  itemCount = 1;
 
   get outlets() {
     return ProductDetailsComponent.outlets;

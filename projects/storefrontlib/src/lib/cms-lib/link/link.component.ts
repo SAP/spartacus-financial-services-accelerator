@@ -1,10 +1,12 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { AbstractCmsComponent } from '../../cms/components/abstract-cms-component';
+import { CmsComponentData } from '../../cms/components/cms-component-data';
 
 @Component({
-  selector: 'y-link',
+  selector: 'cx-link',
   templateUrl: './link.component.html',
   styleUrls: ['./link.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LinkComponent extends AbstractCmsComponent {}
+export class LinkComponent {
+  constructor(public component: CmsComponentData) {}
+}

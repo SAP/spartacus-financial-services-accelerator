@@ -1,17 +1,16 @@
 import { TestBed } from '@angular/core/testing';
-import { combineReducers, Store, StoreModule, select } from '@ngrx/store';
+import { Store, StoreModule, select } from '@ngrx/store';
 
 import * as fromActions from '../actions';
 import * as fromReducers from '../reducers';
 import * as fromSelectors from '../selectors';
-import * as fromRoot from './../../../routing/store';
+import { User } from '@spartacus/core';
 
-const mockUserDetails: any = {
+const mockUserDetails: User = {
   displayUid: 'Display Uid',
   firstName: 'First',
   lastName: 'Last',
   name: 'First Last',
-  type: 'Mock Type',
   uid: 'UID'
 };
 
@@ -21,10 +20,8 @@ describe('User Details Selectors', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        StoreModule.forRoot({
-          ...fromRoot.getReducers(),
-          user: combineReducers(fromReducers.getReducers())
-        })
+        StoreModule.forRoot({}),
+        StoreModule.forFeature('user', fromReducers.getReducers())
       ]
     });
 

@@ -1,10 +1,10 @@
 import { TestBed } from '@angular/core/testing';
-import { combineReducers, Store, StoreModule, select } from '@ngrx/store';
+import { Store, StoreModule, select } from '@ngrx/store';
 
 import * as fromActions from '../actions';
 import * as fromReducers from '../reducers';
 import * as fromSelectors from '../selectors';
-import * as fromRoot from './../../../routing/store';
+import { Country } from '@spartacus/core';
 
 describe('Delivery Countries Selectors', () => {
   let store: Store<fromReducers.UserState>;
@@ -12,10 +12,8 @@ describe('Delivery Countries Selectors', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        StoreModule.forRoot({
-          ...fromRoot.getReducers(),
-          user: combineReducers(fromReducers.getReducers())
-        })
+        StoreModule.forRoot({}),
+        StoreModule.forFeature('user', fromReducers.getReducers())
       ]
     });
 
@@ -25,7 +23,7 @@ describe('Delivery Countries Selectors', () => {
 
   describe('getAllDeliveryCountries', () => {
     it('should return all delivery countries', () => {
-      const mockCountries = [
+      const mockCountries: Country[] = [
         {
           isocode: 'AL',
           name: 'Albania'
@@ -54,7 +52,7 @@ describe('Delivery Countries Selectors', () => {
   describe('countrySelectorFactory', () => {
     it('should return title', () => {
       const isocode = 'AL';
-      const mockCountries = [
+      const mockCountries: Country[] = [
         {
           isocode: 'AL',
           name: 'Albania'

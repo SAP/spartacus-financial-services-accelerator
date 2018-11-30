@@ -1,59 +1,62 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { StoreModule, combineReducers } from '@ngrx/store';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FooterNavigationComponent } from './footer-navigation.component';
-import * as fromRoot from '../../routing/store';
-import * as fromCmsReducer from '../../cms/store/reducers';
-import { CmsModuleConfig } from '../../cms/cms-module-config';
-import { NavigationModule } from '../navigation/navigation.module';
-import { DebugElement } from '@angular/core';
+import { DebugElement, Component, Input } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-const UseCmsModuleConfig: CmsModuleConfig = {
-  cmsComponentMapping: {
-    FooterNavigationComponent: 'FooterNavigationComponent'
-  }
-};
+import { NavigationService } from '../navigation/navigation.service';
+import { CmsService } from '../../cms/facade/cms.service';
+import { NavigationComponent } from '..';
+import { FooterNavigationComponent } from './footer-navigation.component';
 
-const mockLinks = [
-  {
-    title: 'Test child 1',
-    url: '/test1',
-    target: true
-  },
-  {
-    title: 'Test child 2',
-    url: '/',
-    target: false
-  }
-];
-
+@Component({
+  selector: 'cx-navigation-ui',
+  template: ''
+})
+class MockNavigationUIComponent {
+  @Input()
+  dropdownMode = 'list';
+  @Input()
+  node;
+}
 describe('FooterNavigationComponent', () => {
-  let footerNavigationComponent: FooterNavigationComponent;
+  let component: FooterNavigationComponent;
   let fixture: ComponentFixture<FooterNavigationComponent>;
   let footer: DebugElement;
   let column: DebugElement;
 
+  const mockLinks = [
+    {
+      title: 'Test child 1',
+      url: '/test1',
+      target: true
+    },
+    {
+      title: 'Test child 2',
+      url: '/',
+      target: false
+    }
+  ];
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        StoreModule.forRoot({
-          ...fromRoot.getReducers(),
-          cms: combineReducers(fromCmsReducer.getReducers())
-        }),
-        RouterTestingModule,
-        NavigationModule
+      imports: [RouterTestingModule],
+      declarations: [
+        FooterNavigationComponent,
+        NavigationComponent,
+        MockNavigationUIComponent
       ],
-      declarations: [FooterNavigationComponent],
-      providers: [{ provide: CmsModuleConfig, useValue: UseCmsModuleConfig }]
+      providers: [
+        NavigationService,
+        { provide: CmsService, useValue: {} },
+        { provide: NavigationService, useValue: {} }
+      ]
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FooterNavigationComponent);
-    footerNavigationComponent = fixture.componentInstance;
-
-    footerNavigationComponent.node = {
+    component = fixture.componentInstance;
+    component.node = {
       children: [
         {
           title: 'Test 1',
@@ -67,18 +70,18 @@ describe('FooterNavigationComponent', () => {
   });
 
   it('should create FooterNavigationComponent in CmsLib', () => {
-    expect(footerNavigationComponent).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   describe('UI tests', () => {
     beforeAll(() => {
       footer = fixture.debugElement;
-      column = footer.query(By.css('.y-footer-navigation__container'));
+      column = footer.query(By.css('.cx-footer-navigation__container'));
     });
 
     it('should display the column title', () => {
       const titleElement: HTMLElement = column.query(
-        By.css('.y-footer-navigation__title')
+        By.css('.cx-footer-navigation__title')
       ).nativeElement;
 
       expect(titleElement.textContent).toEqual('Test 1');
@@ -86,7 +89,7 @@ describe('FooterNavigationComponent', () => {
 
     it('should display the correct number of links', () => {
       const list: HTMLElement = column.query(
-        By.css('.y-footer-navigation__list')
+        By.css('.cx-footer-navigation__list')
       ).nativeElement;
 
       expect(list.childElementCount).toBe(2);
@@ -94,7 +97,7 @@ describe('FooterNavigationComponent', () => {
 
     it('should display link title with correct url', () => {
       const link: HTMLElement = column.query(
-        By.css('.y-footer-navigation__link')
+        By.css('.cx-footer-navigation__link')
       ).nativeElement;
 
       expect(link.textContent).toEqual(mockLinks[0].title);
@@ -103,10 +106,10 @@ describe('FooterNavigationComponent', () => {
 
     it('should have the correct target', () => {
       const link1: HTMLElement = column.queryAll(
-        By.css('.y-footer-navigation__link')
+        By.css('.cx-footer-navigation__link')
       )[0].nativeElement;
       const link2: HTMLElement = column.queryAll(
-        By.css('.y-footer-navigation__link')
+        By.css('.cx-footer-navigation__link')
       )[1].nativeElement;
 
       expect(link1.getAttribute('target')).toEqual('blank');

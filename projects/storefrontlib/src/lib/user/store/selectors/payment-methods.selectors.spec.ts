@@ -1,12 +1,14 @@
 import { TestBed } from '@angular/core/testing';
-import { combineReducers, Store, StoreModule, select } from '@ngrx/store';
+import { Store, StoreModule, select } from '@ngrx/store';
 
 import * as fromActions from '../actions';
 import * as fromReducers from '../reducers';
 import * as fromSelectors from '../selectors';
-import * as fromRoot from './../../../routing/store';
+import { PaymentDetailsList } from '@spartacus/core';
 
-const mockUserPaymentMethods = ['payment1', 'payment2'];
+const mockUserPaymentMethods: PaymentDetailsList = {
+  payments: [{ id: 'payment1' }, { id: 'payment2' }]
+};
 
 describe('User Payment Methods Selectors', () => {
   let store: Store<fromReducers.UserState>;
@@ -14,10 +16,8 @@ describe('User Payment Methods Selectors', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        StoreModule.forRoot({
-          ...fromRoot.getReducers(),
-          user: combineReducers(fromReducers.getReducers())
-        })
+        StoreModule.forRoot({}),
+        StoreModule.forFeature('user', fromReducers.getReducers())
       ]
     });
 
@@ -35,10 +35,12 @@ describe('User Payment Methods Selectors', () => {
       expect(result).toEqual([]);
 
       store.dispatch(
-        new fromActions.LoadUserPaymentMethodsSuccess(mockUserPaymentMethods)
+        new fromActions.LoadUserPaymentMethodsSuccess(
+          mockUserPaymentMethods.payments
+        )
       );
 
-      expect(result).toEqual(mockUserPaymentMethods);
+      expect(result).toEqual(mockUserPaymentMethods.payments);
     });
   });
 

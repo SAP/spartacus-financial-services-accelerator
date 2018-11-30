@@ -1,10 +1,11 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+
+import { CartService } from '../../../facade/cart.service';
 import { Item } from '../../cart-shared/cart-item/cart-item.component';
-import { CartService } from '../../../services/cart.service';
 
 @Component({
-  selector: 'y-cart-item-list',
+  selector: 'cx-cart-item-list',
   templateUrl: './cart-item-list.component.html',
   styleUrls: ['./cart-item-list.component.scss'],
   encapsulation: ViewEncapsulation.None

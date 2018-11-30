@@ -1,14 +1,15 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { combineReducers, StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 
 import { StoreFinderGridComponent } from './store-finder-grid.component';
-import { StoreFinderListItemComponent } from '../store-finder-list/store-finder-list-item/store-finder-list-item.component';
+// tslint:disable-next-line:max-line-length
+import { StoreFinderListItemComponent } from '../store-finder-list-item/store-finder-list-item.component';
 import { StoreFinderService } from '../../services/store-finder.service';
+import { SpinnerModule } from '../../../ui/components/spinner/spinner.module';
 
 import * as fromReducers from '../../store';
-import * as fromRoot from '../../../routing/store';
 
 const countryIsoCode = 'CA';
 const regionIsoCode = 'CA-QC';
@@ -60,18 +61,15 @@ describe('StoreFinderGridComponent', () => {
     createComponent();
 
     expect(component).toBeTruthy();
-    expect(storeFinderService.viewAllStoresForRegion).toHaveBeenCalledWith(
-      countryIsoCode,
-      regionIsoCode
-    );
   });
 
-  it('should route when viewStore is called', () => {
+  it('should route when viewStore is called with region', () => {
     mockActivatedRoute.snapshot.params = {
       country: countryIsoCode,
       region: regionIsoCode
     };
     configureTestBed();
+    spyOn(storeFinderService, 'viewAllStoresForRegion');
     createComponent();
 
     component.viewStore(location);
@@ -84,16 +82,37 @@ describe('StoreFinderGridComponent', () => {
       regionIsoCode,
       location.name
     ]);
+    expect(storeFinderService.viewAllStoresForRegion).toHaveBeenCalledWith(
+      countryIsoCode,
+      regionIsoCode
+    );
+  });
+
+  it('should route when viewStore is called without region', () => {
+    mockActivatedRoute.snapshot.params = {
+      country: countryIsoCode
+    };
+    configureTestBed();
+    spyOn(storeFinderService, 'viewAllStoresForCountry');
+    createComponent();
+
+    component.viewStore(location);
+
+    expect(mockRouter.navigate).toHaveBeenCalledWith([
+      'store-finder',
+      'country',
+      countryIsoCode,
+      location.name
+    ]);
   });
 
   function configureTestBed(): void {
     const bed = TestBed.configureTestingModule({
       imports: [
-        StoreModule.forRoot({
-          ...fromRoot.getReducers(),
-          stores: combineReducers(fromReducers.reducers)
-        }),
-        RouterTestingModule
+        StoreModule.forRoot({}),
+        StoreModule.forFeature('stores', fromReducers.reducers),
+        RouterTestingModule,
+        SpinnerModule
       ],
       declarations: [StoreFinderGridComponent, StoreFinderListItemComponent],
       providers: [
