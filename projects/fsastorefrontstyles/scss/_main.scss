@@ -44,6 +44,19 @@ $screen-xxs: 380px;
 
 $border-grey: 1px solid $color-grey;
 //Mixin for linear gradient background
+
+//CSS Reset
+button:focus {
+  outline: none;
+}
+.center1400 {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+a {
+  @include transition();
+}
 @mixin linear-gradient-background(
   $startColor,
   $endColor,
@@ -81,6 +94,7 @@ $border-grey: 1px solid $color-grey;
   padding: 6px;
 }
 .cards {
+  color: $color-dark-grey;
   &__wrapper {
     border: $border-grey;
     border-radius: 15px 15px 0 0;
@@ -184,6 +198,7 @@ $border-grey: 1px solid $color-grey;
 }
 .account-cards-actions {
   position: absolute;
+  cursor: pointer;
   top: 14px;
   right: 14px;
   .action-links {
@@ -233,6 +248,9 @@ $border-grey: 1px solid $color-grey;
 .primary-button,
 .secondary-button,
 .inverted {
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-bottom: 10px;
   &__default {
     @include transition;
     width: 100%;
@@ -255,6 +273,9 @@ $border-grey: 1px solid $color-grey;
     padding: 14px;
     margin: 6px 0;
     white-space: nowrap;
+  }
+  &:hover {
+    text-decoration: none;
   }
 }
 .primary-button {

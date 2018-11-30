@@ -1,0 +1,101 @@
+@font-face {
+    font-family: 'font-FSA';
+    src:  url('assets/fonts/font-FSA.eot?esj2np');
+    src:  url('assets/fonts/font-FSA.eot?esj2np#iefix') format('embedded-opentype'),
+      url('assets/fonts/font-FSA.ttf?esj2np') format('truetype'),
+      url('assets/fonts/font-FSA.woff?esj2np') format('woff'),
+      url('assets/fonts/font-FSA.svg?esj2np#font-FSA') format('svg');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  .FSA-icon {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'font-FSA', sans-serif !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .icon-FSA-heart {
+      &:before {
+          content: "\e900";
+      }
+  }
+  .icon-FSA-agent {
+      &:before {
+          content: "\e901";
+      }
+  }
+  .icon-FSA-lock {
+      &:before {
+            content: "\e902";
+      }
+  }
+  .icon-FSA-auto {
+      &:before {
+            content: "\e903";
+      }
+  }
+  .icon-FSA-event {
+      &:before {
+            content: "\e904";
+      }
+  }
+  .icon-FSA-house {
+      &:before {
+            content: "\e905";
+      }
+  }
+  .icon-FSA-key {
+      &:before {
+            content: "\e906";
+      }
+  }
+  .icon-FSA-plane {
+      &:before {
+            content: "\e907";
+      }
+  }
+  .icon-FSA-google-plus {
+      &:before {
+            content: "\e909";
+      }
+  }
+  .icon-FSA-facebook {
+      &:before {
+            content: "\e908";
+      }
+  }
+  .icon-FSA-twitter {
+      &:before {
+            content: "\e90c";
+      }
+  }
+  .icon-FSA-youtube {
+      &:before {
+            content: "\e90d";
+      }
+  }
+  .icon-FSA-linkedin {
+      &:before {
+            content: "\e90a";
+      }
+  }
+  .icon-FSA-newsfeed{
+      &:before {
+        content: "\e90b";
+      }	
+  }
+  .icon-fsa-envelope-open{
+      &:before {
+        content: "\e90e";
+      }	
+  }
