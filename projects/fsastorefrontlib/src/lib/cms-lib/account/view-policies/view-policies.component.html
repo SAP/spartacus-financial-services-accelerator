@@ -1,35 +1,55 @@
 <ng-container *ngIf="component$ | async as component">
-<div *ngIf="policies$ | async as policies">
-    <div class="review__wrapper">
-        <div class="review__policies">
-            <div class="my-policies">
-                <h2 class="my-policies__title">View Policies</h2>
+<div *ngIf="!anonymous$; else noPolicies">
+    <div *ngIf="policies$ | async as policies">
+        <div class="review__wrapper">
+            <div class="review__policies" *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
+                <div class="my-policies">
+                    <h2 class="my-policies__title">View Policies</h2>
                     <ul>
-                        <div class="row">
-                                <div *ngFor="let policy of policies.insurancePolicies  | slice: 0:component.numberOfPoliciesToDisplay">
-                                        <li class="my-policies__my-policy">
-                                                <div class="my-policies__data-container">
-                                                        <span class="images images__wrapper">
-                                                                <img class="images__size" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0].url" alt="">
-                                                              </span>
-                                                        <div class="my-policies__name-number">
-                                                            <span class="my-policies__name">{{policy.categoryData.name}}</span>
-                                                            <span class="my-policies__number">{{policy.contractNumber}}</span>
-                                                        </div>
-                                                            <span class="my-policies__add-infos">{{policy.policyEndDate}}</span>
-                                                    </div>
-                                        </li>
-                                </div>
-                        </div>
+                        <ng-container *ngTemplateOutlet="policiesList; context:{policies: policies, max: (viewAll$ ? policies?.insurancePolicies?.length : component.numberOfPoliciesToDisplay)}"></ng-container>
                     </ul>
-             </div>
+                    <div *ngIf="!viewAll$">
+                        <button class="secondary-button secondary-button__default secondary-button__home" (click)="showAll();">
+                            View All Policies
+                        </button>
+                    </div>
+                    <div *ngIf="viewAll$">
+                        <button class="secondary-button secondary-button__default secondary-button__home" (click)="showLess();">
+                            View Less Policies
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 </ng-container>
 
+
+<ng-template #policiesList let-policies="policies" let-max="max">
+        <div class="row">
+            <div *ngFor="let policy of policies.insurancePolicies | slice: 0:max">
+                    <li class="my-policies__my-policy">
+                            <div class="my-policies__data-container">
+                                <span class="images images__wrapper">
+                                        <img class="images__size" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0].url" alt="">
+                                    </span>
+                                <div class="my-policies__name-number">
+                                    <span class="my-policies__name">{{policy.categoryData.name}}</span>
+                                    <span class="my-policies__number">{{policy.contractNumber}}</span>
+                                </div>
+                                    <span class="my-policies__add-infos">{{policy.policyEndDate}}</span>
+                            </div>
+                        </li>
+            </div>
+        </div>
+</ng-template>
+
 <ng-template #noPolicies>
-   <h3>{{noPoliciesText}}</h3>
+    <div class="none-policies">
+        <h2 class="none-policies__title">View Policies</h2>
+        <p class="none-policies__content">- You need to finish your quote to get a Policy</p>
+    </div>
 </ng-template>
 
 

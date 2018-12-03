@@ -4,6 +4,8 @@ import * as fromQuoteStore from '../../../my-account/applications/store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
 import { QuoteService } from '../../../my-account/applications/services/quote.service';
+import { AuthService } from '@spartacus/storefront';
+
 
 @Component({
     selector: 'fsa-view-quotes',
@@ -17,6 +19,7 @@ export class CMSViewQuotesComponent implements OnInit {
 
     constructor(
         protected componentData: CmsComponentData,
+        protected authService: AuthService,
         private store: Store<fromQuoteStore.QuoteState>,
         private config: OccConfig,
         private quoteService: QuoteService
@@ -24,18 +27,37 @@ export class CMSViewQuotesComponent implements OnInit {
          
     quotes$;
     quotesLoaded$;
-    
-    public noQuotesText = 'You have no Quotes!';
+    anonymous$;
 
-    ngOnInit() {
+    viewAll$ = false;
     
-        this.quoteService.loadQuotes();
-        this.quotes$ = this.store.pipe(select(fromQuoteStore.getActiveQuotes));
-        this.quotesLoaded$ = this.store.pipe(select(fromQuoteStore.getQuoteLoaded));
+    ngOnInit() {
+        this.authService.userToken$.subscribe(token=> 
+        {
+            if (token.userId !== undefined){
+                this.quoteService.loadQuotes();
+                this.quotes$ = this.store.pipe(select(fromQuoteStore.getActiveQuotes));
+                this.quotesLoaded$ = this.store.pipe(select(fromQuoteStore.getQuoteLoaded));
+            }
+            else
+            {
+                this.anonymous$ = true;
+            }
+        });
         this.component$ = this.componentData.data$;
       }
     
     public getBaseUrl() {
         return this.config.server.baseUrl || '';
+    }
+
+    public showAll()
+    {
+        this.viewAll$ = true;
+    }
+
+    public showLess()
+    {
+        this.viewAll$ = false;
     }
 }

@@ -1,34 +1,50 @@
-
 <ng-container *ngIf="component$ | async as component">
+    <div *ngIf="!anonymous$; else noQuotes">
         <div *ngIf="quotes$ | async as quotes"  class="review__wrapper">
-            <div class="review__quote">
+            <div class="review__quote" *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes">
                 <div class="my-quotes">
                     <h2 class="my-quotes__title">View Quotes</h2>
                         <ul>
-                            <div class="row">
-                                    <div *ngFor="let quote of quotes.insuranceQuotes  | slice: 0:component.numberOfQuotesToDisplay">
-                                            <li class="my-quotes__my-quote">
-                                                    <div class="my-quotes__data-container">
-                                                            <span class="images images__wrapper">
-                                                                    <img class="images__size" [src]="getBaseUrl()+quote.defaultCategory.image.url" alt="">
-                                                                  </span>
-                                                            <div class="my-quotes__name-number">
-                                                                <span class="my-quotes__name">{{quote.planName}}</span>
-                                                                <span class="my-quotes__number">{{quote.quoteId}}</span>
-                                                            </div>
-                                                                <span class="my-quotes__add-infos">{{quote.formattedExpiryDate}}</span>
-                                                        </div>
-                                            </li>
-                                    </div>
-                            </div>
+                            <ng-container *ngTemplateOutlet="quotesList; context:{quotes: quotes, max: (viewAll$ ? quotes?.insuranceQuotes?.length : component.numberOfQuotesToDisplay)}"></ng-container>
                         </ul>
+                        <div *ngIf="!viewAll$">
+                             <button class="primary-button primary-button__default primary-button__home" (click)="showAll();">
+                                View All Quotes
+                            </button>
+                        </div>
+                        <div *ngIf="viewAll$">
+                               <button class="primary-button primary-button__default primary-button__home" (click)="showLess();">
+                                 View Less Quotes
+                               </button>
+                        </div>
                  </div>
             </div>
         </div>
+    </div>
 </ng-container>
-<ng-template #noPolicies>
-    <h3>{{noQuotesText}}</h3>
+
+<ng-template #quotesList let-quotes="quotes" let-max="max">
+        <div class="row">
+            <div *ngFor="let quote of quotes.insuranceQuotes | slice: 0:max">
+                <li class="my-quotes__my-quote">
+                    <div class="my-quotes__data-container">
+                        <span class="images images__wrapper">
+                                <img class="images__size" [src]="getBaseUrl()+quote.defaultCategory.image.url" alt="">
+                                </span>
+                        <div class="my-quotes__name-number">
+                            <span class="my-quotes__name">{{quote.planName}}</span>
+                            <span class="my-quotes__number">{{quote.quoteId}}</span>
+                        </div>
+                        <span class="my-quotes__add-infos">{{quote.formattedExpiryDate}}</span>
+                    </div>
+                </li>
+            </div>
+        </div>
 </ng-template>
-    
-    
-    
+
+<ng-template #noQuotes>
+        <div class="none-quote">
+            <h2 class="none-quote__title">View Quotes</h2>
+            <p class="none-quote__content">- Get a Quote by selecting an insurance type above</p>
+        </div>
+</ng-template>

@@ -4,6 +4,7 @@ import * as fromPolicyStore from '../../../my-account/applications/store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
 import { PolicyService } from '../../../my-account/applications/services/policy.service';
+import {AuthService} from '@spartacus/storefront'
 
 @Component({
     selector: 'fsa-view-policies',
@@ -20,24 +21,46 @@ export class CMSViewPoliciesComponent implements OnInit{
         protected componentData: CmsComponentData,
         private store: Store<fromPolicyStore.PolicyState>,
         private config: OccConfig,
-        private policyService: PolicyService
+        private policyService: PolicyService,
+        protected authService: AuthService
     ) { }
          
       policies$;
       policiesLoaded$;
+      anonymous$ = false;
+      viewAll$ = false;
     
     public noPoliciesText = 'You have no Policies!';
 
     ngOnInit() {
-    
-        this.policyService.loadPolicies();
-        this.policies$ = this.store.pipe(select(fromPolicyStore.getActivePolicies));
-        this.policiesLoaded$ = this.store.pipe(select(fromPolicyStore.getPolicyLoaded));
+        this.authService.userToken$.subscribe(token=> 
+        {
+            if (token.userId !== undefined){
+                this.policyService.loadPolicies();
+                this.policies$ = this.store.pipe(select(fromPolicyStore.getActivePolicies));
+                this.policiesLoaded$ = this.store.pipe(select(fromPolicyStore.getPolicyLoaded));
+            }
+            else
+            {
+                this.anonymous$ = true;
+            }
+        }
+        );
         this.component$ = this.componentData.data$;
-      }
-    
+    }
+        
     public getBaseUrl() {
         return this.config.server.baseUrl || '';
+    }
+
+    public showAll()
+    {
+        this.viewAll$ = true;
+    }
+
+    public showLess()
+    {
+        this.viewAll$ = false;
     }
 
 }
