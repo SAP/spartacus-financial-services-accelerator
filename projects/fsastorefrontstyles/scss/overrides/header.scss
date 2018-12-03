@@ -1,1 +1,72 @@
 @import '../main';
+
+y-header {
+    --y-primary: #666666;
+    --y-inverse: #263950;
+    --y-dark: #ffffff;
+    .y-header {
+        text-transform: uppercase;
+        &::before {
+            display: none;
+        }
+        a, y-navigation .y-navigation__link, span.y-navigation__link {
+            color: $color-dark-grey;
+            text-transform: uppercase;
+        }
+        y-category-navigation y-navigation {
+            padding: 15px 30px;
+            position: relative;
+            @include media-breakpoint-up(lg) {
+                &:before {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    background-color: $color-link-hover;
+                    width: 0;
+                    height: 5px;
+                    @include transition;
+                }
+                &:hover {
+                    color: $color-link-hover;
+                    &:before {
+                        width: 100%;
+                        @include transition;
+                    }
+                }
+            }
+        }
+        nav .y-navigation__list {
+            justify-content: flex-start;
+            border-top: 1px solid $color-mild-grey;
+            border-bottom: 1px solid $color-mild-grey;
+            padding: 0;
+            margin: 1rem 0;
+        }
+        &__logo[position] {
+            --width: 100%;    
+            @include media-breakpoint-down(md) {
+              --margin: 0 0 0 5rem;
+            }
+            @include media-breakpoint-down(md) {
+              --width: 75%;
+            }
+        }
+        #y-mobile-menu {
+        .hamburger-inner {
+            background-color: $color-dark-blue;
+            &:before, &:after {
+            background-color: $color-dark-blue; 
+            }
+        }
+        }
+        .y-search-box {
+            .y-search-box__group {
+                background-color: $color-white;
+            }
+            .y-search-box__input {
+                border: 1px solid $color-dark-blue;
+            }
+        }
+    }
+}
