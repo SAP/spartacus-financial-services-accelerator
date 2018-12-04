@@ -3,3 +3,8 @@
 @import 'scss/fonts';
 @import 'scss/overrides';
 
+:root {
+    @each $color, $value in $fsa-colors {
+      --y-#{$color}: #{$value};
+    }
+}
