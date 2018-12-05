@@ -39,6 +39,35 @@ $color-banking-dark-blue: #00a1e4;
 $color-banking-darker-blue: #0071bd;
 $color-banking-darkest-blue: #00528a;
 
+// $primary: #fe5757 !default;
+// $secondary: #747881 !default;
+// $success: #5dac06 !default;
+// $danger: #db0002 !default;
+// $warning: #ffc107 !default;
+// $info: #17a2b8 !default;
+// $light: #d3d6db !default;
+// $dark: #212738 !default;
+// $background: #f4f4f4 !default;
+// $inverse: #ffffff !default;
+// $text: #212738 !default;
+// $transparent: transparent !default;
+
+$fsa-colors: (
+  'primary': $color-blue,
+  'secondary': $color-dark-blue,
+  // 'success': $success,
+  // 'danger': $danger,
+  // 'warning': $warning,
+  // 'info': $info,
+  // 'light': $light,
+  // 'dark': $dark,
+  // 'background': $background,
+  // 'inverse': $inverse,
+  // 'text': $text,
+  // 'transparent': $transparent
+);
+
+
 $screen-sm-mid: 768px;
 $screen-xxs: 380px;
 
