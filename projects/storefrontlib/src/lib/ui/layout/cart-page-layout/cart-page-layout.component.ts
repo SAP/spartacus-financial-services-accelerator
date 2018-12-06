@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { CartService } from '../../../cart/services/cart.service';
 
 @Component({
-  selector: 'y-cart-page-layout',
+  selector: 'cx-cart-page-layout',
   templateUrl: './cart-page-layout.component.html',
   styleUrls: ['./cart-page-layout.component.scss']
 })
@@ -18,7 +18,13 @@ export class CartPageLayoutComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.cartService.loadCartDetails();
+    this.store
+      .pipe(select(fromCartStore.getCartMergeComplete))
+      .subscribe(isCartMergeComplete => {
+        if (isCartMergeComplete) {
+          this.cartService.loadCartDetails();
+        }
+      });
     this.cart$ = this.store.pipe(select(fromCartStore.getActiveCart));
   }
 }

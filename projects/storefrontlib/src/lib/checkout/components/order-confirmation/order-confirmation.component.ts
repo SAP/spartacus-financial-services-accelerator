@@ -4,27 +4,28 @@ import {
   OnInit,
   OnDestroy
 } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import { CheckoutService } from '../../services/checkout.service';
+import { CheckoutService } from '../../facade/checkout.service';
 import { Card } from '../../../ui/components/card/card.component';
 
 @Component({
-  selector: 'y-order-confirmation',
+  selector: 'cx-order-confirmation',
   templateUrl: './order-confirmation.component.html',
   styleUrls: ['./order-confirmation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OrderConfirmationComponent implements OnInit, OnDestroy {
-  order: any;
+  order$: Observable<any>;
 
   constructor(protected checkoutService: CheckoutService) {}
 
   ngOnInit() {
-    this.order = this.checkoutService.orderDetails;
+    this.order$ = this.checkoutService.orderDetails$;
   }
 
   ngOnDestroy() {
-    this.checkoutService.orderDetails = undefined;
+    this.checkoutService.clearCheckoutData();
   }
 
   getAddressCardContent(deliveryAddress: any): Card {

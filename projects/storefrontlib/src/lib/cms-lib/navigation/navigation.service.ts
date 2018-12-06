@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 
 @Injectable()
 export class NavigationService {
-  constructor(private store: Store<fromStore.CmsState>) { }
+  constructor(private store: Store<fromStore.CmsState>) {}
 
   /**
    * Get all navigation entry items' type and id. Dispatch action to load all these items
@@ -13,7 +13,7 @@ export class NavigationService {
    * @param itemsList
    */
   public getNavigationEntryItems(nodeData: any, root: boolean, itemsList = []) {
-    if (nodeData.children && nodeData.children.length > 0) {
+    if (nodeData.children) {
       this.processChildren(nodeData, itemsList);
     } else if (nodeData.entries && nodeData.entries.length > 0) {
       nodeData.entries.forEach(entry => {
@@ -52,7 +52,7 @@ export class NavigationService {
     node['title'] = nodeData.title;
     node['url'] = '';
 
-    if (nodeData.children && nodeData.children.length > 0) {
+    if (nodeData.children) {
       const children = this.createChildren(nodeData, items);
       node['children'] = children;
     } else if (nodeData.entries && nodeData.entries.length > 0) {

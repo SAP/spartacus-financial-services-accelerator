@@ -1,31 +1,35 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Input } from '@angular/core';
-import { OrderConfirmationComponent } from './order-confirmation.component';
 import { By } from '@angular/platform-browser';
-import { CheckoutService } from '../../services';
-import { CartService } from '../../../cart/services';
+import { of } from 'rxjs';
+import createSpy = jasmine.createSpy;
 
-@Component({ selector: 'y-order-summary', template: '' })
+import { CheckoutService } from '../../facade';
+import { OrderConfirmationComponent } from './order-confirmation.component';
+
+@Component({ selector: 'cx-order-summary', template: '' })
 class MockOrderSummaryComponent {
   @Input()
   cart: any;
 }
-@Component({ selector: 'y-cart-item-list', template: '' })
+@Component({ selector: 'cx-cart-item-list', template: '' })
 class MockReviewSubmitComponent {
   @Input()
   items: any;
   @Input()
   isReadOnly: any;
 }
-@Component({ selector: 'y-card', template: '' })
+@Component({ selector: 'cx-card', template: '' })
 class MockCartComponent {
   @Input()
   content: any;
 }
 
-class CheckoutServiceMock {
-  entries;
-  orderDetails = {
+@Component({ selector: 'cx-add-to-home-screen-banner', template: '' })
+class MockAddtoHomeScreenBannerComponent {}
+
+const mockCheckoutService = {
+  orderDetails$: of({
     code: 'test-code-412',
     deliveryAddress: {
       country: {}
@@ -36,8 +40,9 @@ class CheckoutServiceMock {
         country: {}
       }
     }
-  };
-}
+  }),
+  clearCheckoutData: createSpy()
+};
 
 describe('OrderConfirmationComponent', () => {
   let component: OrderConfirmationComponent;
@@ -49,12 +54,10 @@ describe('OrderConfirmationComponent', () => {
         OrderConfirmationComponent,
         MockReviewSubmitComponent,
         MockCartComponent,
-        MockOrderSummaryComponent
+        MockOrderSummaryComponent,
+        MockAddtoHomeScreenBannerComponent
       ],
-      providers: [
-        { provide: CheckoutService, useClass: CheckoutServiceMock },
-        { provide: CartService, useValue: {} }
-      ]
+      providers: [{ provide: CheckoutService, useValue: mockCheckoutService }]
     }).compileComponents();
   }));
 
@@ -71,7 +74,7 @@ describe('OrderConfirmationComponent', () => {
   it('should create', () => {
     component.ngOnInit();
     fixture.detectChanges();
-    const titleText = fixture.debugElement.query(By.css('.y-page__title'))
+    const titleText = fixture.debugElement.query(By.css('.cx-page__title'))
       .nativeElement.textContent;
 
     expect(titleText).toContain('test-code-412');
