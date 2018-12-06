@@ -9,4 +9,4 @@ import { EnrichedResponsiveBannerComponent } from './enriched-responsive-banner.
   exports: [ EnrichedResponsiveBannerComponent],
   entryComponents: [ EnrichedResponsiveBannerComponent]
 })
-export class BannerModule { }
+export class FsaBannerModule { }
