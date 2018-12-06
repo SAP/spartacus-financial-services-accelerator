@@ -35,11 +35,11 @@
   );
 }
 
-footer.y-footer {
+footer.cx-footer {
     @include radial-gradient-background($color-link-hover,$color-button-secondary-hover,$color-dark-blue);
     margin-top: 80px;
     padding-top: 40px;
-    .y-footer-navigation {
+    .cx-footer-navigation {
         &__title {
             color: $color-white;
             font-size: 15px;

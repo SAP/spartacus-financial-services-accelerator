@@ -1,11 +1,11 @@
 @import '../main';
 
-y-header {
-    --y-primary: #666666;
-    --y-inverse: #263950;
-    // --y-dark: #ffffff;
+cx-header {
+    --cx-primary: #666666;
+    --cx-inverse: #263950;
+    // --cx-dark: #ffffff;
     // $fsa-header-background-color: 'primary' !default;
-    .y-header {
+    .cx-header {
         // @include var-color (
         //     'background-color',
         //     $fsa-header-background-color
@@ -17,7 +17,7 @@ y-header {
         &::before {
             display: none;
         }
-        a, .nav-link, span.y-navigation__link, .y-login-status__greet {
+        a, .nav-link, span.cx-navigation__link, .cx-login-status__greet {
             @include media-breakpoint-down(lg) {
                 &:hover, &:focus, &:active, &:after {
                     color: $color-white;
@@ -33,7 +33,7 @@ y-header {
             font-size: 14px;
             color: $color-white;
         }
-        y-category-navigation y-navigation {
+        cx-category-navigation cx-navigation {
             position: relative;
             padding: 0;
             @include media-breakpoint-up(lg) {
@@ -57,7 +57,7 @@ y-header {
                 }
             }
         }
-        nav .y-navigation__list {
+        nav .cx-navigation__list {
             &.nav {
                 padding: 0;
                 .nav-item {
@@ -88,32 +88,32 @@ y-header {
                 max-width: 250px;
             }
         }
-        y-dynamic-slot[position="StoreFinder"] {
+        cx-dynamic-slot[position="StoreFinder"] {
             display: none;
         }
-        y-login {
-            .y-login-status__greet {
+        cx-login {
+            .cx-login-status__greet {
                 font-weight: bold;
             }
-            y-link {
+            cx-link {
                 margin-left: 1.5rem
             }
             @include media-breakpoint-up(lg) {
-                .y-login-status__greet {
+                .cx-login-status__greet {
                     color: $color-dark-blue;
                 }
                 margin-right: 30px; 
                 & > * {
                     display: inline-block;
                 }
-                y-link {
+                cx-link {
                     order: 2;
                 }
-                .y-login-status__dropdown {
+                .cx-login-status__dropdown {
                     display: flex;
                     align-items: center;
                 }
-                .y-navigation__child-item {
+                .cx-navigation__child-item {
                     a {
                         color: $color-dark-grey;
                     }
@@ -126,10 +126,10 @@ y-header {
                 }
             }
         }
-        #y-mobile-menu {
+        #cx-mobile-menu {
             margin-top: 15px;
             color: $color-white;
-            .y-mobile-menu__components{
+            .cx-mobile-menu__components{
                 background-color: $color-dark-blue;
                 color: $color-white;
             }
@@ -139,7 +139,7 @@ y-header {
                 background-color: $color-dark-blue; 
                 }
             }
-            .y-language-selector, .y-currency-selector {
+            .cx-language-selector, .cx-currency-selector {
                 i {
                     border-color: $color-white;
                 }
@@ -149,11 +149,11 @@ y-header {
                 }
             }
         }
-        .y-search-box {
-            .y-search-box__group {
+        .cx-search-box {
+            .cx-search-box__group {
                 background-color: $color-white;
             }
-            .y-search-box__input {
+            .cx-search-box__input {
                 border: 1px solid $color-dark-blue;
                 @include media-breakpoint-down(md) {
                     color: $color-white;
