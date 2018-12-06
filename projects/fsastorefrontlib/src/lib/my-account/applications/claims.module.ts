@@ -11,7 +11,6 @@ import { claimReducerProvider, claimReducerToken } from './store/reducers';
 import { ClaimService } from './services/claim.service';
 import { ClaimDataService } from './services/claim-data.service';
 import { StoreModule } from '@ngrx/store';
-import { BootstrapModule } from 'projects/storefrontlib/src/lib/bootstrap.module';
 import { OccClaimService } from '../../occ/claim/claim.service';
 
 @NgModule({
@@ -20,7 +19,6 @@ import { OccClaimService } from '../../occ/claim/claim.service';
     RouterModule,
     FormsModule,
     NgSelectModule,
-    BootstrapModule,
     StoreModule.forFeature('claim', claimReducerToken),
     EffectsModule.forFeature(effects)
   ],
