@@ -1,0 +1,62 @@
+$color-dark-blue: #263950;
+$color-light-grey: #f5f5f5;
+$color-white: #ffffff;
+
+$color-table-heading: $color-dark-blue;
+$color-quotes-bckg: $color-light-grey;
+
+
+$screen-sm-mid: 768px;
+$screen-xxs: 380px;
+
+li
+{
+    list-style: none
+}
+
+.my-quotes {
+    &__title {
+        line-height: 1.458em;
+        margin: 20px auto;
+        text-align: center;
+    }
+    &__table-head {
+        background-color: $color-table-heading;
+        font-size: 14px;
+        font-weight: bold;
+        line-height: 17px;
+        padding: 12px 0 12px 20px;
+    }
+    &__my-quote, &__my-policy {
+        background-color: $color-quotes-bckg;
+        margin-bottom: 10px;
+        position: relative;
+    }
+    &__data-container {
+        padding: 20px;
+        &:hover {
+            color:$color-white;
+            .expired {
+                color: $color-white;
+            }
+        }
+    }
+    &__name-number {
+        font-size: 18px;
+        display: inline-block;
+        padding: 10px 20px;
+        vertical-align: middle;
+        width: 70%;
+    }
+    &__name {
+        display: block;
+        margin-bottom: 5px;
+    }
+    &__number {
+        display: block;
+    }
+    &__add-infos {
+        text-align: right;
+        display: block;
+    }
+}
