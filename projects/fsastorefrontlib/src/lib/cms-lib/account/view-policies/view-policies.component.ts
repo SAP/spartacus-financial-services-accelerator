@@ -33,7 +33,7 @@ export class CMSViewPoliciesComponent implements OnInit{
     textLessPolicies$ = 'Show less policies'
     policyButtonText;
 
-    showAll$ = false;
+    allPoliciesDisplayed$ = false;
 
     ngOnInit() {
         this.authService.userToken$.subscribe(token=> 
@@ -59,7 +59,7 @@ export class CMSViewPoliciesComponent implements OnInit{
 
     public showAllPolicies(showAll)
     {
-        this.showAll$ = showAll
+        this.allPoliciesDisplayed$ = showAll
         if(showAll)
         {
             this.policyButtonText = this.textLessPolicies$;

@@ -32,7 +32,7 @@ export class CMSViewQuotesComponent implements OnInit {
     textLessQuotes$ = 'Show less quotes'
     quoteButtonText;
 
-    showAll$ = false;
+    allQuotesDisplayed$ = false;
     
     ngOnInit() {
         this.authService.userToken$.subscribe(token=> 
@@ -57,7 +57,7 @@ export class CMSViewQuotesComponent implements OnInit {
 
     public showAllQuotes(showAll)
     {
-        this.showAll$ = showAll
+        this.allQuotesDisplayed$ = showAll
         if(showAll)
         {
             this.quoteButtonText = this.textLessQuotes$;

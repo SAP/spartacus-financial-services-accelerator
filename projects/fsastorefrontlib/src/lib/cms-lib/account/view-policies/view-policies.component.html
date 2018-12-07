@@ -6,10 +6,10 @@
                 <div class="my-policies">
                     <h2 class="my-policies__title">View Policies</h2>
                     <ul>
-                        <ng-container *ngTemplateOutlet="policiesList; context:{policies: policies, max: (showAll$ ? policies?.insurancePolicies?.length : component.numberOfPoliciesToDisplay)}"></ng-container>
+                        <ng-container *ngTemplateOutlet="policiesList; context:{policies: policies, max: (allPoliciesDisplayed$ ? policies?.insurancePolicies?.length : component.numberOfPoliciesToDisplay)}"></ng-container>
                     </ul>
                     <div *ngIf = "policies?.insurancePolicies?.length > component.numberOfPoliciesToDisplay">
-                        <ng-container *ngTemplateOutlet="showAllPoliciesButton context: {showAll: (showAll$ ? false : true)}"></ng-container>
+                        <ng-container *ngTemplateOutlet="showAllPoliciesButton context: {showAll: (allPoliciesDisplayed$ ? false : true)}"></ng-container>
                     </div>  
                 </div>
             </div>

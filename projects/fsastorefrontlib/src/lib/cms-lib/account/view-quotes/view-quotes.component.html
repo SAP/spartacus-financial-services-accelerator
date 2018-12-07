@@ -5,10 +5,10 @@
                 <div class="my-quotes">
                     <h2 class="my-quotes__title">Retrieve Quotes</h2>
                         <ul>
-                            <ng-container *ngTemplateOutlet="quoteList; context:{quotes: quotes, max: (showAll$ ? quotes?.insuranceQuotes?.length : component.numberOfQuotesToDisplay)}"></ng-container>
+                            <ng-container *ngTemplateOutlet="quoteList; context:{quotes: quotes, max: (allQuotesDisplayed$ ? quotes?.insuranceQuotes?.length : component.numberOfQuotesToDisplay)}"></ng-container>
                         </ul>
                          <div *ngIf = "quotes?.insuranceQuotes?.length > component.numberOfQuotesToDisplay">
-                              <ng-container *ngTemplateOutlet="showAllQuotesButton context: {showAll: (showAll$ ? false : true)}"></ng-container>
+                              <ng-container *ngTemplateOutlet="showAllQuotesButton context: {showAll: (allQuotesDisplayed$ ? false : true)}"></ng-container>
                          </div>   
                  </div>
             </div>
