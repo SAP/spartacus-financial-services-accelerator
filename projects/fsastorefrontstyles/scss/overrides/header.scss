@@ -71,7 +71,7 @@ y-header {
                 justify-content: flex-start;
                 border-top: 1px solid $color-mild-grey;
                 border-bottom: 1px solid $color-mild-grey;
-                margin: 1rem 0;
+                margin: 1rem 0 0;
             }
         }
         &__logo[position="SiteLogo"] {
@@ -128,8 +128,10 @@ y-header {
             }
         }
         #y-mobile-menu {
-            margin-top: 15px;
             color: $color-white;
+            @include media-breakpoint-down(md) {
+                margin-top: 15px;
+            }
             .y-mobile-menu__components{
                 background-color: $color-dark-blue;
                 color: $color-white;
