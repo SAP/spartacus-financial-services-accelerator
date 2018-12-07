@@ -28,7 +28,9 @@
                             <span class="my-quotes__name">{{quote.planName}}</span>
                             <span class="my-quotes__number">{{quote.quoteId}}</span>
                         </div>
-                        <span class="my-quotes__add-infos">{{quote.formattedExpiryDate}}</span>
+                        <span class="my-quotes__add-infos">
+                                {{quote.quoteWorkflowStatus.code}}
+                        </span>
                     </div>
                 </li>
             </div>
