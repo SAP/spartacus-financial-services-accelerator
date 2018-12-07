@@ -25,12 +25,15 @@ export class CMSViewPoliciesComponent implements OnInit{
         protected authService: AuthService
     ) { }
          
-      policies$;
-      policiesLoaded$;
-      anonymous$ = false;
-      viewAll$ = false;
-    
-    public noPoliciesText = 'You have no Policies!';
+    policies$;
+    policiesLoaded$;
+    anonymous$ = false;
+
+    textAllPolicies$ = 'Show all policies'
+    textLessPolicies$ = 'Show less policies'
+    policyButtonText;
+
+    showAll$ = false;
 
     ngOnInit() {
         this.authService.userToken$.subscribe(token=> 
@@ -47,20 +50,23 @@ export class CMSViewPoliciesComponent implements OnInit{
         }
         );
         this.component$ = this.componentData.data$;
+        this.policyButtonText = this.textAllPolicies$;
     }
         
     public getBaseUrl() {
         return this.config.server.baseUrl || '';
     }
 
-    public showAll()
+    public showAllPolicies(showAll)
     {
-        this.viewAll$ = true;
+        this.showAll$ = showAll
+        if(showAll)
+        {
+            this.policyButtonText = this.textLessPolicies$;
+        }
+        else
+        {
+            this.policyButtonText = this.textAllPolicies$;
+        }
     }
-
-    public showLess()
-    {
-        this.viewAll$ = false;
-    }
-
 }

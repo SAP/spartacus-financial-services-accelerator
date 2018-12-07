@@ -15,8 +15,6 @@ import { AuthService } from '@spartacus/storefront';
 })
 export class CMSViewQuotesComponent implements OnInit {
 
-    component$;
-
     constructor(
         protected componentData: CmsComponentData,
         protected authService: AuthService,
@@ -25,14 +23,16 @@ export class CMSViewQuotesComponent implements OnInit {
         private quoteService: QuoteService
     ) { }
          
+    component$;
     quotes$;
     quotesLoaded$;
     anonymous$;
 
-    showAllQuotes$ = 'Show all quotes'
-    showLessQuotes$ = 'Show less quotes'
+    textAllQuotes$ = 'Show all quotes'
+    textLessQuotes$ = 'Show less quotes'
+    quoteButtonText;
 
-    viewAll$ = false;
+    showAll$ = false;
     
     ngOnInit() {
         this.authService.userToken$.subscribe(token=> 
@@ -48,19 +48,23 @@ export class CMSViewQuotesComponent implements OnInit {
             }
         });
         this.component$ = this.componentData.data$;
+        this.quoteButtonText = this.textAllQuotes$
       }
     
     public getBaseUrl() {
         return this.config.server.baseUrl || '';
     }
 
-    public showAll()
+    public showAllQuotes(showAll)
     {
-        this.viewAll$ = true;
-    }
-
-    public showLess()
-    {
-        this.viewAll$ = false;
+        this.showAll$ = showAll
+        if(showAll)
+        {
+            this.quoteButtonText = this.textLessQuotes$;
+        }
+        else
+        {
+            this.quoteButtonText = this.textAllQuotes$;
+        }
     }
 }

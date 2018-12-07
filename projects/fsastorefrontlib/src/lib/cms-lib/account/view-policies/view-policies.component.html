@@ -6,18 +6,11 @@
                 <div class="my-policies">
                     <h2 class="my-policies__title">View Policies</h2>
                     <ul>
-                        <ng-container *ngTemplateOutlet="policiesList; context:{policies: policies, max: (viewAll$ ? policies?.insurancePolicies?.length : component.numberOfPoliciesToDisplay)}"></ng-container>
+                        <ng-container *ngTemplateOutlet="policiesList; context:{policies: policies, max: (showAll$ ? policies?.insurancePolicies?.length : component.numberOfPoliciesToDisplay)}"></ng-container>
                     </ul>
-                    <div *ngIf="!viewAll$ && policies?.insurancePolicies?.length > component.numberOfPoliciesToDisplay">
-                        <button class="secondary-button secondary-button__default secondary-button__home" (click)="showAll();">
-                            View All Policies
-                        </button>
-                    </div>
-                    <div *ngIf="viewAll$ && policies?.insurancePolicies?.length > component.numberOfPoliciesToDisplay">
-                            <button class="secondary-button secondary-button__default secondary-button__home" (click)="showLess();">
-                            View Less Policies
-                        </button>
-                    </div>
+                    <div *ngIf = "policies?.insurancePolicies?.length > component.numberOfPoliciesToDisplay">
+                        <ng-container *ngTemplateOutlet="showAllPoliciesButton context: {showAll: (showAll$ ? false : true)}"></ng-container>
+                    </div>  
                 </div>
             </div>
         </div>
@@ -42,6 +35,12 @@
                         </li>
             </div>
         </div>
+</ng-template>
+
+<ng-template #showAllPoliciesButton let-showAll="showAll">
+        <button class="secondary-button secondary-button__default secondary-button__home" (click)="showAllPolicies(showAll);">
+                {{policyButtonText}}
+            </button>
 </ng-template>
 
 <ng-template #noPolicies>

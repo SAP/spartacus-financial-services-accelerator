@@ -5,18 +5,11 @@
                 <div class="my-quotes">
                     <h2 class="my-quotes__title">Retrieve Quotes</h2>
                         <ul>
-                            <ng-container *ngTemplateOutlet="quoteList; context:{quotes: quotes, max: (viewAll$ ? quotes?.insuranceQuotes?.length : component.numberOfQuotesToDisplay)}"></ng-container>
+                            <ng-container *ngTemplateOutlet="quoteList; context:{quotes: quotes, max: (showAll$ ? quotes?.insuranceQuotes?.length : component.numberOfQuotesToDisplay)}"></ng-container>
                         </ul>
-                        <div *ngIf="!viewAll$ && quotes?.insuranceQuotes?.length > component.numberOfQuotesToDisplay">
-                             <button class="primary-button primary-button__default primary-button__home" (click)="showAll();">
-                                View All Quotes
-                            </button>
-                        </div>
-                        <div *ngIf="viewAll$ && quotes?.insuranceQuotes?.length > component.numberOfQuotesToDisplay">
-                               <button class="primary-button primary-button__default primary-button__home" (click)="showLess();">
-                                 View Less Quotes
-                               </button>
-                        </div>
+                         <div *ngIf = "quotes?.insuranceQuotes?.length > component.numberOfQuotesToDisplay">
+                              <ng-container *ngTemplateOutlet="showAllQuotesButton context: {showAll: (showAll$ ? false : true)}"></ng-container>
+                         </div>   
                  </div>
             </div>
         </div>
@@ -40,6 +33,12 @@
                 </li>
             </div>
         </div>
+</ng-template>
+
+<ng-template #showAllQuotesButton let-showAll="showAll">
+        <button class="primary-button primary-button__default primary-button__home" (click)="showAllQuotes(showAll);">
+                {{quoteButtonText}}
+            </button>
 </ng-template>
 
 <ng-template #noQuotes>
