@@ -1,4 +1,5 @@
-@import '../main';
+@import '../mixins-fsa';
+@import '../variables-fsa';
 
 @mixin radial-gradient-background (
     $startColor, 

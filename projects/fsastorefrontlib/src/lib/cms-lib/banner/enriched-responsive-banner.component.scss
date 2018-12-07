@@ -1,12 +1,27 @@
-.link {
-  flex: 1 1 0%;
-  box-sizing: border-box;
-  picture {
-    &.responsive-banner {
-      img {
-        width: 100%;
-        display: block;
-      }
-    }
+@import './mixins-fsa';
+@import './variables-fsa';
+
+.enriched-banner {
+  position: relative;
+  .responsive-image {
+    width: 100%;
+    display: block;
+  }
+  &__text {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 40%;
+    transform: translate(-60%,-50%);
+    -webkit-transform: translate(-60%,-50%);
+  }
+  &__title {
+    font-size: 44px;
+    line-height: 1;
+    // color: @color-dark-blue;
+  }
+  &__details {
+    display: block;
+    margin-top: 40px;
   }
 }
