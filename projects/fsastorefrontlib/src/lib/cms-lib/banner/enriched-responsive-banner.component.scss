@@ -1,5 +1,5 @@
-@import './mixins-fsa';
-@import './variables-fsa';
+@import 'mixins-fsa';
+@import 'variables-fsa';
 
 .enriched-banner {
   position: relative;
@@ -18,7 +18,6 @@
   &__title {
     font-size: 44px;
     line-height: 1;
-    // color: @color-dark-blue;
   }
   &__details {
     display: block;
