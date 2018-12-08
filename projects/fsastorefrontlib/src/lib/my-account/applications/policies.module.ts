@@ -4,7 +4,8 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PoliciesComponent } from './components/policies/policies.component';
-import { policyReducerProvider, policyReducerToken } from './store/reducers';
+import { PolicyDetailsComponent } from './components/policy-details/policy-details.component';
+import { policyReducerProvider, policyReducerToken, policyDetailsReducerProvider, policyDetailsReducerToken } from './store/reducers';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { effects } from './store/effects';
@@ -19,10 +20,11 @@ import { OccPolicyService } from '../../occ/policy/policy.service';
     FormsModule,
     NgSelectModule,
     StoreModule.forFeature('policy', policyReducerToken),
+    StoreModule.forFeature('policydetails', policyDetailsReducerToken),
     EffectsModule.forFeature(effects)
   ],
-  declarations: [PoliciesComponent],
-  exports: [PoliciesComponent],
-  providers: [policyReducerProvider, PolicyService, PolicyDataService, OccPolicyService]
+  declarations: [PoliciesComponent,PolicyDetailsComponent],
+  exports: [PoliciesComponent, PolicyDetailsComponent],
+  providers: [policyReducerProvider, policyDetailsReducerProvider, PolicyService, PolicyDataService, OccPolicyService]
 })
 export class PoliciesModule { }

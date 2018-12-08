@@ -1,0 +1,42 @@
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { PolicyService } from '../../../applications/services/policy.service';
+import {RoutingService } from '@spartacus/core';
+import { map } from 'rxjs/operators';
+import { Subscription, combineLatest } from 'rxjs';
+
+
+@Component({
+  selector: 'fsa-policy-details',
+  templateUrl: './policy-details.component.html',
+  styleUrls: ['./policy-details.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+export class PolicyDetailsComponent implements OnInit {
+
+  constructor(
+    private routingService: RoutingService,
+    private policyService: PolicyService
+  ) {}
+
+  policy$;
+  subscription: Subscription;
+
+  ngOnInit(): void {
+    const policyId$ = this.routingService.routerState$.pipe(
+      map(routingData => routingData.state.params.policyId)
+    ); 
+    
+    const contractId$ = this.routingService.routerState$.pipe(
+      map(routingData => routingData.state.params.contractId)
+    ); 
+
+    this.subscription = combineLatest(policyId$, contractId$).subscribe(
+      ([policyId, contractId]) => {
+        if (policyId && contractId) {
+          this.policyService.loadPolicyDetails(policyId, contractId);
+        }
+      }
+    );
+    this.policy$ = this.policyService.policyDetails$;
+  }
+}

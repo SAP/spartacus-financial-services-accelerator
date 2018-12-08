@@ -5,6 +5,8 @@ import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
 import { AuthService } from '@spartacus/storefront';
 import { PolicyDataService } from './policy-data.service';
+import * as fromStore from '../store';
+import { Observable } from 'rxjs';
 
 
 @Injectable()
@@ -14,12 +16,16 @@ export class PolicyService {
     private policyData: PolicyDataService,
     protected auth: AuthService
   ) {
-    this.initQuotes();
+    this.initPolicies();
   }
 
   callback: Function;
 
-  initQuotes() {
+  readonly policyDetails$: Observable<any> = this.store.pipe(
+    select(fromStore.getPolicyDetails)
+  );
+
+  initPolicies() {
     this.store.pipe(select(fromSelector.getActivePolicies)).subscribe(policies => {
       if (policies) {
         this.policyData.policies = policies;
@@ -47,11 +53,22 @@ export class PolicyService {
     });
   }
 
-loadPolicies() {
-      this.store.dispatch(
-        new fromAction.LoadPolicies({
-          userId: this.policyData.userId,
-        })
-      );
-    }
+  loadPolicies() {
+        this.store.dispatch(
+          new fromAction.LoadPolicies({
+            userId: this.policyData.userId,
+          })
+        );
+  }
+    
+  loadPolicyDetails(policyId,contractId)
+  {
+    this.store.dispatch(
+      new fromAction.LoadPolicyDetails({
+        userId: this.policyData.userId,
+        policyId: policyId,
+        contractId: contractId
+      })
+    )
+  }
 }

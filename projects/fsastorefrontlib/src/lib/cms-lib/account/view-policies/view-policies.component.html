@@ -21,6 +21,7 @@
 <ng-template #policiesList let-policies="policies" let-max="max">
         <div class="row">
             <div *ngFor="let policy of policies.insurancePolicies | slice: 0:max">
+                    <a routerLink="/my-account/my-policies/{{policy.policyNumber}}/{{policy.contractNumber}}" routerLinkActive="active">
                     <li class="my-policies__my-policy">
                             <div class="my-policies__data-container">
                                 <span class="images images__wrapper">
@@ -32,7 +33,8 @@
                                 </div>
                                     <span class="my-policies__add-infos">{{policy.policyEndDate}}</span>
                             </div>
-                        </li>
+                    </li>
+                </a>
             </div>
         </div>
 </ng-template>

@@ -7,6 +7,8 @@ import {
 import * as fromQuote from './quote.reducer';
 import * as fromPolicy from './policy.reducer';
 import * as fromClaim from './claim.reducer';
+import * as fromPolicyDetails from './policy-details.reducer';
+
 
 export interface QuoteState {
   active: fromQuote.QuoteState;
@@ -18,6 +20,10 @@ export interface PolicyState {
 
 export interface ClaimState {
   active: fromClaim.ClaimState;
+}
+
+export interface PolicyDetailsState {
+  policy: fromPolicyDetails.PolicyDetailsState;
 }
 
 export function getQuoteReducers(): ActionReducerMap<QuoteState> {
@@ -38,6 +44,12 @@ export function getClaimReducers(): ActionReducerMap<ClaimState> {
   };
 }
 
+export function getPolicyDetailsReducers(): ActionReducerMap<PolicyDetailsState> {
+  return {
+    policy: fromPolicyDetails.reducer
+  };
+}
+
 export const quoteReducerToken: InjectionToken<
   ActionReducerMap<QuoteState>
 > = new InjectionToken<ActionReducerMap<QuoteState>>('QuoteReducers');
@@ -49,6 +61,11 @@ export const policyReducerToken: InjectionToken<
 export const claimReducerToken: InjectionToken<
   ActionReducerMap<ClaimState>
 > = new InjectionToken<ActionReducerMap<ClaimState>>('ClaimReducers');
+
+export const policyDetailsReducerToken: InjectionToken<
+  ActionReducerMap<ClaimState>
+> = new InjectionToken<ActionReducerMap<PolicyDetailsState>>('PolicyDetailsReducers');
+
 
 export const quoteReducerProvider: Provider = {
   provide: quoteReducerToken,
@@ -65,6 +82,11 @@ export const claimReducerProvider: Provider = {
   useFactory: getClaimReducers
 };
 
+export const policyDetailsReducerProvider: Provider = {
+  provide: policyDetailsReducerToken,
+  useFactory: getPolicyDetailsReducers
+};
+
 export const getQuoteState: MemoizedSelector<
   any,
   QuoteState
@@ -79,3 +101,8 @@ export const getClaimState: MemoizedSelector<
   any,
   ClaimState
 > = createFeatureSelector<ClaimState>('claim');
+
+export const getPolicyDetailsState: MemoizedSelector<
+  any,
+  PolicyDetailsState
+> = createFeatureSelector<PolicyDetailsState>('policydetails');
