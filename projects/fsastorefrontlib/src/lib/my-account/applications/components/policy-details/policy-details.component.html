@@ -1,3 +1,296 @@
 <ng-container *ngIf="policy$ | async as policy">
-    {{policy | json}}
+    <h2 class="policy-spec account-section-content__headline"></h2>
+            <span *ngIf="policy.mainProduct && policy.mainProduct.coverageProduct" class="images images__wrapper">
+                    <img class="images__size" [src]="getBaseUrl()+ policy.mainProduct.coverageProduct.images[0].url" alt="">
+             </span>
+             <span *ngIf="policy.categoryData" class="account-section-content__headline--title">
+                        {{policy.categoryData.name}} Policy <br>
+                        {{policy.mainProduct.coverageProduct.name}}
+             </span>
+             <span class="account-section-content__headline--number">
+                    {{policy.policyNumber}}
+            </span>
+            <a class="account-section-content__headline--back" 
+            routerLink="/my-account/my-policies/" routerLinkActive="active">Back</a>
+
+            <div class="accordion">
+                <div class="accordion-item accordion-item--margin-t-30 clearfix">
+                    <div class="accordion-item__wrapper">
+                        <h2 class="accordion-item__heading accordion-item__heading--gradient js-toggle active">
+                                <span class="accordion-item__open"></span>
+                                Policy Summary
+                        </h2>
+                        <div class="accordion-item__body opened">
+                            <ul class="accordion-item__list accordion-item__list--enhanced">
+                                <li class="accordion-item__list-item ">
+                                    <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                                        ContractId
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark">
+                                        {{policy.contractNumber}}
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6"></div>
+                                </li>
+                                <li class="accordion-item__list-item ">
+                                    <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                                        Product
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark" *ngIf="policy.mainProduct && policy.mainProduct.coverageProduct">
+                                            {{policy.mainProduct.coverageProduct.name}}
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6"></div>
+                                </li>
+                            <!-- <li class="accordion-item__list-item">
+                                    <c:choose>
+                                        <c:when test="${policy.mainProduct.investmentInfo.size() gt 0}">
+                                            <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                                                <spring:theme code="policy.payment.contribution"/>
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                                                <spring:theme code="policy.payment.premium"/>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    <div class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark">
+                                        <c:if test="${not empty policy.recurringPrice}">
+                                            <format:price priceData="${policy.recurringPrice}"/>
+                                        </c:if>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-6"></div>
+                                </li> -->
+                                <li class="accordion-item__list-item  ">
+                                        <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                                            Payment frequency </div>
+                                        <div class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark">
+                                                {{policy.paymentFrequency}}
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6"></div>
+                                </li>   
+                                <li class="accordion-item__list-item ">
+                                        <div class="col-xs-6 col-sm-3 accordion-item__title bold">Payment method</div>
+                                        <div class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark" *ngIf="policy.paymentMethod">
+                                                {{policy.paymentMethod.paymentOption}}
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6"></div>
+                                </li>
+                                <li class="accordion-item__list-item ">
+                                        <div class="col-xs-6 col-sm-3 accordion-item__title bold">Duration</div>
+                                        <div class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark">
+                                            <span class="accordion-item__date">
+                                                {{policy.policyStartDate}} - {{policy.policyEndDate}}
+                                            </span>
+                                        </div>
+                                        <div class="col-xs-12 col-sm-6 "></div>
+                                </li>
+                            </ul>     
+                        </div>
+                    </div>
+            </div>
+            <div class="accordion-item accordion-item--margin-t-30 clearfix">
+                <div class="accordion-item__wrapper">
+                    <h2 class="accordion-item__heading accordion-item__heading--gradient js-toggle">
+                        <span class="accordion-item__open"></span>
+                        Insured Object
+                    </h2>
+                    <div  class="col-md-4 cards" *ngIf="policy.insuredObjects">
+                        <ul *ngFor="let insuredObjectItem of policy.insuredObjects[0].insuredObjectItems" class="accordion-item__list accordion-item__list--enhanced">
+                            <li class="accordion-item__list-item ">
+                                <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                                        {{insuredObjectItem.label}}
+                                </div>
+                                <div class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark">
+                                        {{insuredObjectItem.value}}
+                                </div>
+                                <div class="col-xs-12 col-sm-6"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item accordion-item--margin-t-30 clearfix">
+                <div class="accordion-item__wrapper">
+                    <h2 class="accordion-item__heading accordion-item__heading--gradient js-toggle">
+                        <span class="accordion-item__open"></span>
+                        What's included
+                    </h2>
+                    <div class="accordion-item__body" *ngIf="policy.mainProduct && policy.mainProduct.benefits">
+                        <ul *ngFor="let benefit of policy.mainProduct.benefits" class="accordion-item__list accordion-item__list--enhanced">
+                            <li class="accordion-item__list-item ">
+                                <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                                    {{benefit.name}}
+                                </div>
+                                <div class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark">
+                                    {{benefit.coverageValue}}
+                                </div>
+                                <div class="col-xs-12 col-sm-6"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item accordion-item--margin-t-30 clearfix">
+                <div class="accordion-item__wrapper">
+                    <h2 class="accordion-item__heading accordion-item__heading--gradient js-toggle">
+                        <span class="accordion-item__open"></span>
+                        Optional Extras
+                    </h2>
+                    <div class="accordion-item__body">
+                        <ul *ngFor="let optionalCoverage of policy.optionalProducts" class="accordion-item__list accordion-item__list--enhanced">
+                            <li class="accordion-item__list-item">
+                                <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                                        {{optionalCoverage.coverageProduct.name}}
+                                </div>
+                                <div *ngIf="optionalCoverage.coverageIsIncluded" class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark">
+                                    Included
+                                </div>
+                                <div *ngIf="!optionalCoverage.coverageIsIncluded" class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark">
+                                    Excluded
+                                </div>
+                                <div class="col-xs-12 col-sm-6"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="policy.mainProduct && policy.mainProduct.investmentInfo" class="accordion-item accordion-item--margin-t-30 clearfix">
+                <div class="accordion-item__wrapper">
+                    <h2 class="accordion-item__heading accordion-item__heading--gradient js-toggle">
+                        <span class="accordion-item__open"></span>
+                        Investment Details
+                    </h2>
+                    <div class="accordion-item__body">
+                        <ul *ngFor="let investmentInfoItem of policy.mainProduct.investmentInfo" class="accordion-item__list accordion-item__list--enhanced">
+                            <li class="accordion-item__list-item">
+                                <div>
+                                    <div *ngIf="investmentInfoItem.investmentType" class="col-xs-6 col-sm-3 accordion-item__title bold">
+                                            {{investmentInfoItem.investmentType.fundName}}
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark">
+                                            {{investmentInfoItem.distributionPercentage}} %
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="accordion-item__list-item">
+                                <div>
+                                    <div class="col-xs-6 col-sm-3 accordion-item__title bold">        
+                                        ISIN                                                        
+                                    </div>
+                                    <div *ngIf="investmentInfoItem.investmentType" class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark">
+                                            {{investmentInfoItem.investmentType.isin}}
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="accordion-item__list-item">
+                                <div>
+                                    <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                                        5 Year Performance
+                                    </div>
+                                    <div *ngIf="investmentInfoItem.investmentType" class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark">
+                                            {{investmentInfoItem.investmentType.fiveYearPerformance}}
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="accordion-item__list-item">
+                                <div>
+                                    <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                                            Risk & Returning Rating
+                                    </div>
+                                    <div class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark">
+                                            {{investmentInfoItem.investmentType.riskReturningRating}}
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item accordion-item--margin-t-30 clearfix">
+                <div class="accordion-item__wrapper">
+                    <h2 class="accordion-item__heading accordion-item__heading--gradient  js-toggle">
+                        <span class="accordion-item__open"></span>
+                        What Does It Cost Me?
+                    </h2>
+                    <div class="accordion-item__body">
+                        <ul class="accordion-item__list accordion-item__list--enhanced">
+                            <li class="accordion-item__list-item">
+                                Premium
+                                <div class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark">
+                                        {{policy.recurringPrice}}
+                                </div>
+                                <div class="col-xs-12 col-sm-6 "></div>
+                            </li>
+                            <li class="accordion-item__list-item ">
+                                <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                                    Payment frequency
+                                </div>
+                                <div class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark">
+                                        {{policy.paymentFrequency}}
+                                </div>
+                                <div class="col-xs-12 col-sm-6 "></div>
+                            </li>
+                            <li class="accordion-item__list-item">
+                                <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                                    Payment method
+                                </div>
+                                <div class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark" *ngIf="policy.paymentOption">
+                                    {{policy.paymentMethod.paymentOption}}
+                                </div>
+                                <div class="col-xs-12 col-sm-6"></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item accordion-item--margin-t-30 clearfix">
+                <div class="accordion-item__wrapper">
+                    <h2 class="accordion-item__heading accordion-item__heading--gradient  js-toggle">
+                        <span class="accordion-item__open"></span>
+                        Documents
+                    </h2>
+                    <div class="accordion-item__body">
+                        <ul class="accordion-item__list accordion-item__list--enhanced">
+                            <li class="accordion-item__list-item">
+                                <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                                    Policy
+                                </div>
+                                <div class="col-xs-6 col-sm-3 accordion-item__value notice notice--dark">
+                                        {{policy.policyStartDate}} - {{policy.policyEndDate}}
+                                </div>
+                                <div class="col-xs-12 col-sm-6 accordion-item__download">
+                                    Download PDF Link
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="policy.commissionContract && policy.commissionContract.agent | async as agent" class="accordion-item accordion-item--margin-t-30 clearfix">
+                <div class="accordion-item__wrapper">
+                    <h2 class="accordion-item__heading accordion-item__heading--gradient  js-toggle">
+                        <span class="accordion-item__open"></span>
+                        My Agent
+                    </h2>
+                    <div class="accordion-item__body">
+                        <div class="agent-info agent-info__wrapper col-xs-10 col-sm-4 col-md-3">
+                            <div class="agent-info__image">
+                                <img class="agent-info__image--color-border" src="{{agent.thumbnail.url}}"/>
+                            </div>
+                            <div class="agent-info__description">
+                                <ul class="agent-info__details">
+                                    <li class="agent-info__name">{{agent.firstName}} - {{agent.lastName}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 </ng-container>

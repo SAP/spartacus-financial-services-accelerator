@@ -3,6 +3,7 @@ import { PolicyService } from '../../../applications/services/policy.service';
 import {RoutingService } from '@spartacus/core';
 import { map } from 'rxjs/operators';
 import { Subscription, combineLatest } from 'rxjs';
+import { OccConfig } from '@spartacus/core';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class PolicyDetailsComponent implements OnInit {
 
   constructor(
     private routingService: RoutingService,
-    private policyService: PolicyService
+    private policyService: PolicyService,
+    private config: OccConfig
   ) {}
 
   policy$;
@@ -38,5 +40,9 @@ export class PolicyDetailsComponent implements OnInit {
       }
     );
     this.policy$ = this.policyService.policyDetails$;
+  }
+
+  public getBaseUrl() {
+    return this.config.server.baseUrl || '';
   }
 }
