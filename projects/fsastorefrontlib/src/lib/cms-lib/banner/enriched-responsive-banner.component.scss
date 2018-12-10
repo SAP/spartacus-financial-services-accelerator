@@ -1,8 +1,6 @@
 @import 'mixins-fsa';
 @import 'variables-fsa';
 
-@import 'theme';
-
 .enriched-banner {
   position: relative;
   .responsive-image {
@@ -10,21 +8,32 @@
     display: block;
   }
   &__text {
+    padding: 2vw;
+    background-color: rgba(255, 255, 255, 0.7);
     position: absolute;
-    text-align: center;
+    text-align: left;
+    max-width: 410px;
     top: 50%;
-    left: 40%;
-    transform: translate(-60%,-50%);
-    -webkit-transform: translate(-60%,-50%);
-  }
-  &__title {
-    font-size: 44px;
+    left: 30%;
+    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%,-50%);
     @include media-breakpoint-down(md) {
       font-size: 4vw;
     }
   }
+  &__title {
+    font-size: 30px;
+    line-height: 1;
+    color: $color-dark-blue;
+    font-weight: 600;
+  }
   &__details {
     display: block;
-    margin-top: 40px;
+    margin-top: 1vw;
+    pointer-events: none;
+    font-size: 20px;
+    a {
+      color: $color-button-secondary-hover;
+    }
   }
 }

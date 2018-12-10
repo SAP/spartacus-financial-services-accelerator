@@ -1,0 +1,11 @@
+@import '../mixins-fsa';
+@import '../variables-fsa';
+
+y-home-page{
+    .y-container{
+        @include make-container-max-widths();
+     }
+}
+// y-dynamic-slot[ng-reflect-position="Section1"] .homepage-banner{
+//     width: 50%;
+// }
