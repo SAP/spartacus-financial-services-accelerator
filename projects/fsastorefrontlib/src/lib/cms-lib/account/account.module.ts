@@ -13,8 +13,8 @@ import { PolicyDataService } from '../../my-account/applications/services/policy
 import { OccPolicyService } from '../../occ/policy/policy.service';
 
 @NgModule({
-  imports:[
-    CommonModule, 
+  imports: [
+    CommonModule,
     RouterModule,
     StoreModule.forFeature('policy', policyReducerToken),
     EffectsModule.forFeature(effects)

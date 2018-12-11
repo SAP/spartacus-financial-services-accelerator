@@ -1,17 +1,17 @@
 @import '../mixins-fsa';
 @import '../variables-fsa';
 
-y-home-page {
+cx-home-page {
   //OVERRIDING SPARTACUS RULES
-  .y-container {
+  .cx-container {
     //seting our own max widths
     @include make-container-max-widths();
 
-    .y-landing-page-layout__container {
+    .cx-landing-page-layout__container {
       flex-direction: column;
     }
     //Service links specific styling - Overriding our own enriched banner :-(
-    y-dynamic-slot[ng-reflect-position="Section2A"] {
+    cx-dynamic-slot[ng-reflect-position="Section2A"] {
       @include width1400();
       margin-bottom: 60px;
       flex-direction: row;
@@ -54,7 +54,7 @@ y-home-page {
 }
 
 //Homepage banner specific styling
-y-dynamic-slot[ng-reflect-position="Section1"] fsa-enriched-responsive-banner {
+cx-dynamic-slot[ng-reflect-position="Section1"] fsa-enriched-responsive-banner {
   .enriched-banner {
     position: relative;
     .responsive-image {
@@ -100,7 +100,7 @@ y-dynamic-slot[ng-reflect-position="Section1"] fsa-enriched-responsive-banner {
 }
 
 //Get a quote section & Make a claim paragraph
-y-dynamic-slot[ng-reflect-position="Section1"] y-paragraph, y-dynamic-slot[ng-reflect-position="Section3"] {
+cx-dynamic-slot[ng-reflect-position="Section1"] cx-paragraph, cx-dynamic-slot[ng-reflect-position="Section3"] {
   @include width1400();
   display: block;
   margin-top: 100px;
@@ -129,9 +129,9 @@ y-dynamic-slot[ng-reflect-position="Section1"] y-paragraph, y-dynamic-slot[ng-re
   }
 }
 //Find an agent paragraph
-y-dynamic-slot[ng-reflect-position="Section2B"] {
+cx-dynamic-slot[ng-reflect-position="Section2B"] {
   @include width1400();
-  y-paragraph {
+  cx-paragraph {
     color: $color-dark-grey;
     width: 100%;
     padding: 0 15px;
@@ -153,7 +153,7 @@ y-dynamic-slot[ng-reflect-position="Section2B"] {
   }
 }
 //Make a claim section
-y-dynamic-slot[ng-reflect-position="Section3"] .make-claim {
+cx-dynamic-slot[ng-reflect-position="Section3"] .make-claim {
   margin: 50px auto;
   background-color: $color-blue;
   text-align: center;
