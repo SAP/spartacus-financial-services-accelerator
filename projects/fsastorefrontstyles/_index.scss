@@ -9,6 +9,6 @@
 
 :root {
     @each $color, $value in $fsa-colors {
-      --cx-#{$color}: #{$value};
+      --y-#{$color}: #{$value};
     }
 }

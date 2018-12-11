@@ -2,8 +2,8 @@
 @import '../variables-fsa';
 
 cx-header {
-    --cx-primary: $color-dark-grey;
-    --cx-inverse: $color-dark-blue;
+    --y-primary: $color-dark-grey;
+    --y-inverse: $color-dark-blue;
     .cx-header {
         background-color: $color-white;
         color: $color-dark-grey;
@@ -28,7 +28,7 @@ cx-header {
             font-size: 14px;
             color: $color-white;
         }
-        cx-categorcx-navigation cx-navigation {
+        cx-category-navigation cx-navigation {
             position: relative;
             padding: 0;
             @include media-breakpoint-up(lg) {
