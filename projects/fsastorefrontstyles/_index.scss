@@ -1,5 +1,9 @@
-@import 'scss/main';
-@import 'scss/popup';
+//Spartacus styling
+@import '~@spartacus/styles/index';
+
+@import 'scss/mixins-fsa';
+@import 'scss/variables-fsa';
+@import 'scss/theme/index';
 @import 'scss/fonts';
 @import 'scss/overrides';
 
