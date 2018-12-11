@@ -10,15 +10,13 @@ y-home-page {
     .y-landing-page-layout__container {
       flex-direction: column;
     }
-
-    //Service links specific styling
+    //Service links specific styling - Overriding our own enriched banner :-(
     y-dynamic-slot[ng-reflect-position="Section2A"] {
+      @include width1400();
+      margin-bottom: 60px;
       flex-direction: row;
       justify-content: center;
       flex-wrap: wrap;
-      max-width: 1400px;
-      width: 100%;
-      margin: 0 auto;
       fsa-enriched-responsive-banner {
         width: 25%;
         text-align: center;
@@ -36,6 +34,9 @@ y-home-page {
             font-size: 16px;
             text-transform: uppercase;
             border-bottom: 1px solid $color-link-hover;
+          }
+          &__text {
+            @include transition();
             &:hover {
               transform: scale(1.1);
             }
@@ -98,16 +99,14 @@ y-dynamic-slot[ng-reflect-position="Section1"] fsa-enriched-responsive-banner {
   }
 }
 
-//Get a quote section
-y-dynamic-slot[ng-reflect-position="Section1"] y-paragraph {
+//Get a quote section & Make a claim paragraph
+y-dynamic-slot[ng-reflect-position="Section1"] y-paragraph, y-dynamic-slot[ng-reflect-position="Section3"] {
   display: block;
   margin-top: 100px;
   padding: 0 15px;
   .main-title {
     &__headline-border {
-      max-width: 1400px;
-      width: 100%;
-      margin: 35px auto 35px;
+      @include width1400();
       border-top: 3px solid $color-mild-grey;
       text-align: center;
     }
@@ -126,6 +125,30 @@ y-dynamic-slot[ng-reflect-position="Section1"] y-paragraph {
         width: 230px;
         font-size: 30px;
       }
+    }
+  }
+}
+//Find an agent paragraph
+y-dynamic-slot[ng-reflect-position="Section2B"] {
+  @include width1400();
+  y-paragraph {
+    color: $color-dark-grey;
+    width: 100%;
+    padding: 0 15px;
+  }
+  .find-agent {
+    &__homepage {
+      font-size: 30px;
+      text-align: center;
+      background-color: $color-light-grey;
+      padding: 20px 15px;
+      @include media-breakpoint-down(md) {
+        font-size: 20px;
+      }
+    }
+    &__link {
+        color: $color-blue;
+        text-decoration: none;
     }
   }
 }
