@@ -22,48 +22,37 @@ export class CMSViewQuotesComponent implements OnInit {
         private config: OccConfig,
         private quoteService: QuoteService
     ) { }
-         
+
     component$;
     quotes$;
     quotesLoaded$;
     anonymous$;
-
-    textAllQuotes$ = 'Show all quotes'
-    textLessQuotes$ = 'Show less quotes'
+    textAllQuotes$ = 'Show all quotes';
+    textLessQuotes$ = 'Show less quotes';
     quoteButtonText;
-
     allQuotesDisplayed$ = false;
-    
     ngOnInit() {
-        this.authService.userToken$.subscribe(token=> 
-        {
-            if (token.userId !== undefined){
+        this.authService.userToken$.subscribe(token => {
+            if (token.userId !== undefined) {
                 this.quoteService.loadQuotes();
                 this.quotes$ = this.store.pipe(select(fromQuoteStore.getActiveQuotes));
                 this.quotesLoaded$ = this.store.pipe(select(fromQuoteStore.getQuoteLoaded));
-            }
-            else
-            {
+            } else {
                 this.anonymous$ = true;
             }
         });
         this.component$ = this.componentData.data$;
-        this.quoteButtonText = this.textAllQuotes$
+        this.quoteButtonText = this.textAllQuotes$;
       }
-    
     public getBaseUrl() {
         return this.config.server.baseUrl || '';
     }
 
-    public showAllQuotes(showAll)
-    {
-        this.allQuotesDisplayed$ = showAll
-        if(showAll)
-        {
+    public showAllQuotes(showAll) {
+        this.allQuotesDisplayed$ = showAll;
+        if ( showAll ) {
             this.quoteButtonText = this.textLessQuotes$;
-        }
-        else
-        {
+        } else {
             this.quoteButtonText = this.textAllQuotes$;
         }
     }

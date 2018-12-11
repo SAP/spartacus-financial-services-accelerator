@@ -1,0 +1,195 @@
+@import './main.scss';
+
+.accordion {
+    margin-top: 30px;
+    font-weight: normal;
+    text-transform: none;
+    &__form-button {
+      margin: 40px auto 20px;
+      @media(max-width: $screen-xs-max) {
+        margin-top: 0;
+        &--bottom {
+          margin-bottom: 0;
+        }
+      }
+    }
+    &-item {
+      border-bottom: $border-grey;
+      margin-top: 40px;
+      &__wrapper {
+        border: $border-grey;
+        border-bottom: none;
+        padding: 0;
+        position: relative;
+      }
+      &--margin-t-30 {
+        margin-top: 30px;
+      }
+      &__image {
+        background-size: 100%;
+        display: inline-block;
+        height: 96px;
+        width: 96px;
+        &--policy {
+          //background-image: url(../../../addons/financialacceleratorstorefront/responsive/theme-alpha/images/96_96px_policy.svg);
+        }
+        &--terms {
+          //background-image: url(../../../addons/financialacceleratorstorefront/responsive/theme-alpha/images/96_96px_terms_conditions.svg);
+        }
+      }
+      &__value {
+        @media(max-width: $screen-xs-max) {
+          text-align: right;
+        }
+      }
+      &__download {
+        text-align: right;
+        @media(max-width: $screen-xs-max) {
+          margin-top: 20px;
+          text-align: center;
+        }
+      }
+      &__heading {
+        font-size: 17px;
+        font-weight: 500;
+        height: 55px;
+        line-height: 55px;
+        background: $color-light-grey;
+        cursor: pointer;
+        margin: 0;
+        padding: 0 60px;
+        @include ellipsis;
+        &--gradient {
+            @include linear-gradient-background(
+            $color-blue,
+            $color-banking-darkest-blue,
+            50%,
+            100%
+          );
+          color: $color-white;
+          font-size: 20px;
+        }
+        &:hover {
+          background-color: $color-blue;
+          color: $color-white;
+          .review-accordion-item__open:before {
+            color: $color-white;
+          }
+        }
+        &:before {
+          font-family: "Glyphicons Halflings", sans-serif;
+          font-size: 16px;
+          position: relative;
+          left: -40px;
+        }
+        &.active {
+          background-color: $color-blue;
+          color: $color-white;
+          .accordion-item__open:before {
+            transform: rotateZ(180deg);
+          }
+        }
+      }
+      &--valid {
+        //@include glyphicon-ok;
+      }
+      &--invalid {
+        //@include glyphicon-remove;
+      }
+      &__open {
+        cursor: pointer;
+        display: block;
+        padding: 0 20px;
+        top: 0;
+        right: 0;
+        left: auto;
+        position: absolute;
+        width: 70px;
+        height: 55px;
+        line-height: 55px;
+        text-align: center;
+        opacity: 1;
+       // @include glyphicon-menu-down;
+        &:before {
+            //@include glyphicon;
+            // @include transition;
+            float: right;
+            font-size: 20px;
+            line-height: 55px;
+        }
+      }
+      &__body {
+        padding: 30px 46px 20px;
+        background: $color-white;
+        overflow: hidden;
+        display: none;
+        &.opened {
+          display: block;
+        }
+        @media(max-width: $screen-xs-max) {
+          padding: 25px 0 20px;
+        }
+      }
+      &__list {
+        margin-bottom: 25px;
+        float: left;
+        list-style-type: none;
+        width: 100%;
+        &--style-type {
+          padding-left: 24px;
+          .accordion-item__list-item {
+            padding-left: 10px;
+            list-style-type: circle;
+          }
+        }
+        &--enhanced {
+          .accordion-item__list-item {
+            border-bottom: 1px solid $color-grey;
+            padding: 14px 0;
+          }
+        }
+        @media(max-width: $screen-xs-max) {
+          margin-bottom: 40px;
+        }
+      }
+      &__list-item {
+        float: left;
+        width: 100%;
+        padding-left: 20px;
+        padding-right: 10px;
+        &--title {
+          font-weight: bold;
+          margin-bottom: 10px;
+        }
+        &.margin-b-20:last-child {
+          margin-bottom: 0;
+        }
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+      &__date {
+        @media(max-width: $screen-sm) {
+          width: 100%;
+          display: block;
+        }
+      }
+      &__list-title {
+        margin-top: 0;
+        margin-bottom: 20px;
+        padding-left: 24px;
+      }
+      &__button {
+        @media(max-width: $screen-xs-max) {
+          margin-bottom: 20px;
+        }
+      }
+      &__text {
+        padding-left: 24px;
+      }
+      &__docs-flow {
+        pointer-events: none;
+        cursor: pointer;
+      }
+    }
+  }
