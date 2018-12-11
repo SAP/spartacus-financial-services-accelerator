@@ -1,5 +1,21 @@
+//Overriding Sparatcus uses for max-width y-container element, since we don't control the classes in HTML
+//Needs to be set before import statement
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+$container-max-widths: (
+  sm: 940px,
+  md: 1024px,
+  lg: 1200px,
+  xl: 9999px
+);
+
 @import 'theme';
-//this import provides default bootstrap mixins and variables
+//this import provides default  Spartacus theme and bootstrap mixins and variables
 
 $color-white: #ffffff;
 $color-black: #000000;
@@ -72,27 +88,5 @@ $fsa-colors: (
   // 'transparent': $transparent
 );
 
-//Overriding Sparatcus uses for max-width y-container element, since we don't control the classes in HTML
-$grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px
-);
-$container-max-widths: (
-  sm: 940px,
-  md: 1024px,
-  lg: 1200px,
-  xl: 9999px
-);
-
-@mixin make-container-max-widths($max-widths: $container-max-widths, $breakpoints: $grid-breakpoints) {
-  @each $breakpoint, $container-max-width in $max-widths {
-    @include media-breakpoint-up($breakpoint, $breakpoints) {
-      max-width: $container-max-width;
-    }
-  }
-}
 
 

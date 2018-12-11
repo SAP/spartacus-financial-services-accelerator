@@ -2,38 +2,7 @@
 @import 'variables-fsa';
 
 .enriched-banner {
-  position: relative;
-  .responsive-image {
-    width: 100%;
-    display: block;
-  }
-  &__text {
-    padding: 2vw;
-    background-color: rgba(255, 255, 255, 0.7);
-    position: absolute;
-    text-align: left;
-    max-width: 410px;
-    top: 50%;
-    left: 30%;
-    transform: translate(-50%,-50%);
-    -webkit-transform: translate(-50%,-50%);
-    @include media-breakpoint-down(md) {
-      font-size: 4vw;
+    &__styled-text {
+        text-decoration: none;
     }
-  }
-  &__title {
-    font-size: 30px;
-    line-height: 1;
-    color: $color-dark-blue;
-    font-weight: 600;
-  }
-  &__details {
-    display: block;
-    margin-top: 1vw;
-    pointer-events: none;
-    font-size: 20px;
-    a {
-      color: $color-button-secondary-hover;
-    }
-  }
 }

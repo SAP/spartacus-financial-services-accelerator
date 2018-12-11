@@ -1,11 +1,131 @@
-@import '../mixins-fsa';
-@import '../variables-fsa';
+@import "../mixins-fsa";
+@import "../variables-fsa";
 
-y-home-page{
-    .y-container{
-        @include make-container-max-widths();
-     }
+y-home-page {
+  //OVERRIDING SPARTACUS RULES
+  .y-container {
+    //seting our own max widths
+    @include make-container-max-widths();
+
+    .y-landing-page-layout__container {
+      flex-direction: column;
+    }
+
+    //Service links specific styling
+    y-dynamic-slot[ng-reflect-position="Section2A"] {
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      fsa-enriched-responsive-banner {
+        width: 25%;
+        text-align: center;
+        margin-bottom: 30px;
+        @include media-breakpoint-down(sm) {
+          width: 33.33%;
+        }
+        @include media-breakpoint-down(xs) {
+          width: 50%;
+        }
+        .enriched-banner {
+          &__styled-text {
+            color: $color-link-hover;
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: uppercase;
+            border-bottom: 1px solid $color-link-hover;
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+          .image-wrapper {
+            .responsive-image {
+              max-width: 150px;
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
 }
-// y-dynamic-slot[ng-reflect-position="Section1"] .homepage-banner{
-//     width: 50%;
-// }
+
+//Homepage banner specific styling
+y-dynamic-slot[ng-reflect-position="Section1"] fsa-enriched-responsive-banner {
+  .enriched-banner {
+    position: relative;
+    .responsive-image {
+      width: 100%;
+      display: block;
+    }
+    &__text {
+      padding: 2vw;
+      background-color: rgba(255, 255, 255, 0.7);
+      position: absolute;
+      text-align: left;
+      max-width: 410px;
+      top: 50%;
+      left: 30%;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+      @include media-breakpoint-down(sm) {
+        left: 40%;
+      }
+    }
+    &__title {
+      font-size: 30px;
+      line-height: 1;
+      color: $color-dark-blue;
+      font-weight: 600;
+      @include media-breakpoint-down(md) {
+        font-size: 4vw;
+      }
+    }
+    &__details {
+      display: block;
+      margin-top: 1vw;
+      pointer-events: none;
+      font-size: 20px;
+      @include media-breakpoint-down(sm) {
+        font-size: 3.5vw;
+      }
+      a {
+        color: $color-button-secondary-hover;
+      }
+    }
+  }
+}
+
+//Get a quote section
+y-dynamic-slot[ng-reflect-position="Section1"] y-paragraph {
+  display: block;
+  margin-top: 100px;
+  padding: 0 15px;
+  .main-title {
+    &__headline-border {
+      max-width: 1400px;
+      width: 100%;
+      margin: 35px auto 35px;
+      border-top: 3px solid $color-mild-grey;
+      text-align: center;
+    }
+    &__quote-heading {
+      color: $color-dark-grey;
+      background-color: $color-white;
+      display: inline-block;
+      position: relative;
+      width: 300px;
+      top: -20px;
+      margin-top: 0;
+      margin-bottom: 0;
+      font-size: 30px;
+      font-weight: 500;
+      @include media-breakpoint-down(md) {
+        width: 230px;
+        font-size: 30px;
+      }
+    }
+  }
+}
