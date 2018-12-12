@@ -21,14 +21,14 @@
         <li class="my-quotes__my-quote">
             <div class="my-quotes__data-container">
                 <span class="images images__wrapper">
-                        <img class="images__size" [src]="getBaseUrl()+quote.defaultCategory.image.url" alt="">
+                        <img class="images__size" [src]="getBaseUrl()+quote.defaultCategory?.image.url" alt="">
                         </span>
                 <div class="my-quotes__name-number">
                     <span class="my-quotes__name">{{quote.planName}}</span>
                     <span class="my-quotes__number">{{quote.quoteId}}</span>
                 </div>
                 <span class="my-quotes__add-infos">
-                        {{quote.quoteWorkflowStatus.code}}
+                        {{quote.quoteWorkflowStatus?.code}}
                 </span>
             </div>
         </li>

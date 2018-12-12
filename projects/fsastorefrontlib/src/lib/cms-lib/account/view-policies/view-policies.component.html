@@ -26,7 +26,7 @@
                     <img class="images__size" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0].url" alt="">
                 </span>
             <div class="my-policies__name-number">
-                <span class="my-policies__name">{{policy.categoryData.name}}</span>
+                <span class="my-policies__name">{{policy.categoryData?.name}}</span>
                 <span class="my-policies__number">{{policy.contractNumber}}</span>
             </div>
                 <span class="my-policies__add-infos">{{policy.policyEndDate}}</span>
