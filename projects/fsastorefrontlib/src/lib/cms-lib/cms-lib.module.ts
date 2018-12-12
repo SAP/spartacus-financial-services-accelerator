@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { AccountModule } from './account/account.module';
-import { FsaBannerModule } from './banner/fsa-banner.module';
+import { BannerModule } from './banner/banner.module';
 
 
 @NgModule({
   imports: [
     AccountModule,
-    FsaBannerModule
+    BannerModule
   ],
   exports: [
     AccountModule,
-    FsaBannerModule
+    BannerModule
   ]
 })
 export class CmsLibModule {}
