@@ -105,6 +105,9 @@ cx-dynamic-slot[ng-reflect-position="Section1"] cx-paragraph, cx-dynamic-slot[ng
   display: block;
   margin-top: 100px;
   padding: 0 15px;
+  @include media-breakpoint-down(xs) {
+    margin-top: 60px;
+  }
   .main-title {
     &__headline-border {
       border-top: 3px solid $color-mild-grey;
@@ -135,6 +138,7 @@ cx-dynamic-slot[ng-reflect-position="Section2B"] {
     color: $color-dark-grey;
     width: 100%;
     padding: 0 15px;
+    margin-bottom: 60px;
   }
   .find-agent {
     &__homepage {
@@ -156,8 +160,21 @@ cx-dynamic-slot[ng-reflect-position="Section2B"] {
 cx-dynamic-slot[ng-reflect-position="Section2C"] {
   @include width1400();
   display: flex;
+  @include media-breakpoint-down(xs) {
+    flex-direction: column;
+  }
   fsa-view-quotes, fsa-view-policies {
-    width: 50%;
+    flex: 1;
+    margin: 0 15px;
+    button {
+      height: auto;
+      padding: 33px 0;
+    }
+  }
+  fsa-view-quotes {
+    @include media-breakpoint-down(xs) {
+      margin-bottom: 20px;
+    }
   }
 }
 //Make a claim section
