@@ -1,0 +1,172 @@
+@import '../mixins-fsa';
+@import '../variables-fsa';
+
+y-home-page {
+  //OVERRIDING SPARTACUS RULES
+  .y-container {
+    //seting our own max widths
+    @include make-container-max-widths();
+
+    .y-landing-page-layout__container {
+      flex-direction: column;
+    }
+    //Service links specific styling - Overriding our own enriched banner :-(
+    y-dynamic-slot[ng-reflect-position="Section2A"] {
+      @include width1400();
+      margin-bottom: 60px;
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+      fsa-enriched-responsive-banner {
+        width: 25%;
+        text-align: center;
+        margin-bottom: 30px;
+        @include media-breakpoint-down(sm) {
+          width: 33.33%;
+        }
+        @include media-breakpoint-down(xs) {
+          width: 50%;
+        }
+        .enriched-banner {
+          &__styled-text {
+            color: $color-link-hover;
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: uppercase;
+            border-bottom: 1px solid $color-link-hover;
+          }
+          &__text {
+            @include transition();
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+          .image-wrapper {
+            .responsive-image {
+              max-width: 150px;
+              width: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+//Homepage banner specific styling
+y-dynamic-slot[ng-reflect-position="Section1"] fsa-enriched-responsive-banner {
+  .enriched-banner {
+    position: relative;
+    .responsive-image {
+      width: 100%;
+      display: block;
+    }
+    &__text {
+      padding: 2vw;
+      background-color: rgba(255, 255, 255, 0.7);
+      position: absolute;
+      text-align: left;
+      max-width: 410px;
+      top: 50%;
+      left: 30%;
+      transform: translate(-50%, -50%);
+      -webkit-transform: translate(-50%, -50%);
+      @include media-breakpoint-down(sm) {
+        left: 40%;
+      }
+    }
+    &__title {
+      font-size: 30px;
+      line-height: 1;
+      color: $color-dark-blue;
+      font-weight: 600;
+      @include media-breakpoint-down(md) {
+        font-size: 4vw;
+      }
+    }
+    &__details {
+      display: block;
+      margin-top: 1vw;
+      pointer-events: none;
+      font-size: 20px;
+      @include media-breakpoint-down(sm) {
+        font-size: 3.5vw;
+      }
+      a {
+        color: $color-button-secondary-hover;
+      }
+    }
+  }
+}
+
+//Get a quote section & Make a claim paragraph
+y-dynamic-slot[ng-reflect-position="Section1"] y-paragraph, y-dynamic-slot[ng-reflect-position="Section3"] {
+  @include width1400();
+  display: block;
+  margin-top: 100px;
+  padding: 0 15px;
+  .main-title {
+    &__headline-border {
+      border-top: 3px solid $color-mild-grey;
+      text-align: center;
+    }
+    &__quote-heading {
+      color: $color-dark-grey;
+      background-color: $color-white;
+      display: inline-block;
+      position: relative;
+      width: 300px;
+      top: -20px;
+      margin-top: 0;
+      margin-bottom: 0;
+      font-size: 30px;
+      font-weight: 500;
+      @include media-breakpoint-down(md) {
+        width: 230px;
+        font-size: 30px;
+      }
+    }
+  }
+}
+//Find an agent paragraph
+y-dynamic-slot[ng-reflect-position="Section2B"] {
+  @include width1400();
+  y-paragraph {
+    color: $color-dark-grey;
+    width: 100%;
+    padding: 0 15px;
+  }
+  .find-agent {
+    &__homepage {
+      font-size: 30px;
+      text-align: center;
+      background-color: $color-light-grey;
+      padding: 20px 15px;
+      @include media-breakpoint-down(md) {
+        font-size: 20px;
+      }
+    }
+    &__link {
+        color: $color-blue;
+        text-decoration: none;
+    }
+  }
+}
+//Make a claim section
+y-dynamic-slot[ng-reflect-position="Section3"] .make-claim {
+  margin: 50px auto;
+  background-color: $color-blue;
+  text-align: center;
+  a {
+    display: block;
+    padding: 20px 10px;
+    font-size: 22px;
+    color: $color-white;
+    text-decoration: none;
+  }
+  @include media-breakpoint-down(sm) {
+    .hidden-xs {
+      display: none;
+    }
+  }
+}

@@ -4,15 +4,21 @@ import { ConfigModule, provideConfig } from '@spartacus/core';
 import { MyAccountModule } from './my-account/index';
 import { StorefrontModuleConfig, StorefrontModule } from '@spartacus/storefront';
 import { UiModule } from './ui/index';
+import { FsaBannerModule } from './cms-lib/banner/fsa-banner.module';
 
 @NgModule({
   imports: [
     UiModule,
     MyAccountModule,
+    FsaBannerModule,
     StorefrontModule,
     ConfigModule.forRoot()
   ],
-  exports: [StorefrontModule, MyAccountModule],
+  exports: [
+    StorefrontModule,
+    MyAccountModule,
+    FsaBannerModule
+  ],
   declarations: []
 })
 export class FSAStorefrontModule {

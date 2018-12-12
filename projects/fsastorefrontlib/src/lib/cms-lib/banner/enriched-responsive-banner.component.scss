@@ -1,0 +1,8 @@
+@import 'mixins-fsa';
+@import 'variables-fsa';
+
+.enriched-banner {
+    &__styled-text {
+        text-decoration: none;
+    }
+}

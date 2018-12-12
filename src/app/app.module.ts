@@ -16,6 +16,9 @@ import { FSAStorefrontModule } from '@fsa/storefront';
       },
       site: {
         baseSite: 'insurance'
+      },
+      cmsComponentMapping: {
+        EnrichedResponsiveBannerComponent: 'fsa-enriched-responsive-banner'
       }
     })
   ],
