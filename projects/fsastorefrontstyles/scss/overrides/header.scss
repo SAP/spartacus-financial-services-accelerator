@@ -2,8 +2,8 @@
 @import '../variables-fsa';
 
 cx-header {
-    --y-primary: $color-dark-grey;
-    --y-inverse: $color-dark-blue;
+    --y-primary: #666666;
+    --y-inverse: #263950;
     .cx-header {
         background-color: $color-white;
         color: $color-dark-grey;

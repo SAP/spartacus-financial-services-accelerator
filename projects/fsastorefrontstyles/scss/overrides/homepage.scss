@@ -152,6 +152,14 @@ cx-dynamic-slot[ng-reflect-position="Section2B"] {
     }
   }
 }
+//Quotes & Policies review
+cx-dynamic-slot[ng-reflect-position="Section2C"] {
+  @include width1400();
+  display: flex;
+  fsa-view-quotes, fsa-view-policies {
+    width: 50%;
+  }
+}
 //Make a claim section
 cx-dynamic-slot[ng-reflect-position="Section3"] .make-claim {
   margin: 50px auto;
