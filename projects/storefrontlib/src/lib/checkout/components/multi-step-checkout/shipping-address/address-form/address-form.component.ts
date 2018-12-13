@@ -7,22 +7,19 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
-import { tap, filter } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
-import * as fromCheckoutStore from '../../../../store';
-import * as fromRouting from '../../../../../routing/store';
-import * as fromUser from '../../../../../user/store';
-import * as fromGlobalMessage from '../../../../../global-message/store';
-import { CheckoutService } from '../../../../services/checkout.service';
+import { UserService } from '../../../../../user/facade/user.service';
+import { CheckoutService } from '../../../../facade/checkout.service';
+import { GlobalMessageService } from '../../../../../global-message/facade/global-message.service';
 import { GlobalMessageType } from '.././../../../../global-message/models/message.model';
 
 import { SuggestedAddressDialogComponent } from './suggested-addresses-dialog/suggested-addresses-dialog.component';
 import { NgbModalRef, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'y-address-form',
+  selector: 'cx-address-form',
   templateUrl: './address-form.component.html',
   styleUrls: ['./address-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -59,47 +56,42 @@ export class AddressFormComponent implements OnInit, OnDestroy {
   });
 
   constructor(
-    protected store: Store<fromRouting.State>,
     private fb: FormBuilder,
     protected checkoutService: CheckoutService,
+    protected userService: UserService,
+    protected globalMessageService: GlobalMessageService,
     private modalService: NgbModal
   ) {}
 
   ngOnInit() {
     // Fetching countries
-    this.countries$ = this.store.pipe(
-      select(fromUser.getAllDeliveryCountries),
+    this.countries$ = this.userService.allDeliveryCountries$.pipe(
       tap(countries => {
-        // If the store is empty fetch countries. This is also used when changing language.
         if (Object.keys(countries).length === 0) {
-          this.store.dispatch(new fromUser.LoadDeliveryCountries());
+          this.userService.loadDeliveryCountries();
         }
       })
     );
 
     // Fetching titles
-    this.titles$ = this.store.pipe(
-      select(fromUser.getAllTitles),
+    this.titles$ = this.userService.titles$.pipe(
       tap(titles => {
-        // If the store is empty fetch titles. This is also used when changing language.
         if (Object.keys(titles).length === 0) {
-          this.store.dispatch(new fromUser.LoadTitles());
+          this.userService.loadTitles();
         }
       })
     );
 
     // Fetching regions
-    this.regions$ = this.store.pipe(
-      select(fromUser.getAllRegions),
+    this.regions$ = this.userService.allRegions$.pipe(
       tap(regions => {
         const regionControl = this.address.get('region.isocode');
 
-        // If the store is empty fetch regions. This is also used when changing language.
         if (Object.keys(regions).length === 0) {
           regionControl.disable();
           const countryIsoCode = this.address.get('country.isocode').value;
           if (countryIsoCode) {
-            this.store.dispatch(new fromUser.LoadRegions(countryIsoCode));
+            this.userService.loadRegions(countryIsoCode);
           }
         } else {
           regionControl.enable();
@@ -108,32 +100,23 @@ export class AddressFormComponent implements OnInit, OnDestroy {
     );
 
     // verify the new added address
-    this.addressVerifySub = this.store
-      .pipe(
-        select(fromCheckoutStore.getAddressVerificationResults),
-        filter(results => Object.keys(results).length !== 0)
-      )
-      .subscribe((results: any) => {
+    this.addressVerifySub = this.checkoutService.addressVerificationResults$.subscribe(
+      (results: any) => {
         if (results === 'FAIL') {
-          this.store.dispatch(
-            new fromCheckoutStore.ClearAddressVerificationResults()
-          );
+          this.checkoutService.clearAddressVerificationResults();
         } else if (results.decision === 'ACCEPT') {
           this.addAddress.emit(this.address.value);
         } else if (results.decision === 'REJECT') {
-          this.store.dispatch(
-            new fromGlobalMessage.AddMessage({
-              type: GlobalMessageType.MSG_TYPE_ERROR,
-              text: 'Invalid Address'
-            })
-          );
-          this.store.dispatch(
-            new fromCheckoutStore.ClearAddressVerificationResults()
-          );
+          this.globalMessageService.add({
+            type: GlobalMessageType.MSG_TYPE_ERROR,
+            text: 'Invalid Address'
+          });
+          this.checkoutService.clearAddressVerificationResults();
         } else if (results.decision === 'REVIEW') {
           this.openSuggestedAddress(results);
         }
-      });
+      }
+    );
   }
 
   titleSelected(title) {
@@ -144,7 +127,7 @@ export class AddressFormComponent implements OnInit, OnDestroy {
     this.address['controls'].country['controls'].isocode.setValue(
       country.isocode
     );
-    this.store.dispatch(new fromUser.LoadRegions(country.isocode));
+    this.userService.loadRegions(country.isocode);
   }
 
   regionSelected(region) {
@@ -174,30 +157,39 @@ export class AddressFormComponent implements OnInit, OnDestroy {
       this.suggestedAddressModalRef.componentInstance.enteredAddress = this.address.value;
       this.suggestedAddressModalRef.componentInstance.suggestedAddresses =
         results.suggestedAddresses;
-      this.suggestedAddressModalRef.result.then(address => {
-        this.store.dispatch(
-          new fromCheckoutStore.ClearAddressVerificationResults()
-        );
-        if (address) {
-          address = Object.assign(
+      this.suggestedAddressModalRef.result
+        .then(address => {
+          this.checkoutService.clearAddressVerificationResults();
+          if (address) {
+            address = Object.assign(
+              {
+                titleCode: this.address.value.titleCode,
+                phone: this.address.value.phone,
+                selected: true
+              },
+              address
+            );
+            this.addAddress.emit(address);
+          }
+          this.suggestedAddressModalRef = null;
+        })
+        .catch(() => {
+          // this  callback is called when modal is closed with Esc key or clicking backdrop
+          this.checkoutService.clearAddressVerificationResults();
+          const address = Object.assign(
             {
-              titleCode: this.address.value.titleCode,
-              phone: this.address.value.phone,
               selected: true
             },
-            address
+            this.address.value
           );
           this.addAddress.emit(address);
-        }
-        this.suggestedAddressModalRef = null;
-      });
+          this.suggestedAddressModalRef = null;
+        });
     }
   }
 
   ngOnDestroy() {
-    this.store.dispatch(
-      new fromCheckoutStore.ClearAddressVerificationResults()
-    );
+    this.checkoutService.clearAddressVerificationResults();
 
     if (this.addressVerifySub) {
       this.addressVerifySub.unsubscribe();

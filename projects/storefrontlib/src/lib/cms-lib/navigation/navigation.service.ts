@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 
 @Injectable()
 export class NavigationService {
-  constructor(private store: Store<fromStore.CmsState>) { }
+  constructor(private store: Store<fromStore.CmsState>) {}
 
   /**
    * Get all navigation entry items' type and id. Dispatch action to load all these items

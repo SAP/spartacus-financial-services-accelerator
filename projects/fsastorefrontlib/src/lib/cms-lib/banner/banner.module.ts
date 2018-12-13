@@ -5,8 +5,8 @@ import { EnrichedResponsiveBannerComponent } from './enriched-responsive-banner.
 
 @NgModule({
   imports: [CommonModule, RouterModule],
-  declarations: [ EnrichedResponsiveBannerComponent],
-  exports: [ EnrichedResponsiveBannerComponent],
-  entryComponents: [ EnrichedResponsiveBannerComponent]
+  declarations: [EnrichedResponsiveBannerComponent],
+  exports: [EnrichedResponsiveBannerComponent],
+  entryComponents: [EnrichedResponsiveBannerComponent]
 })
-export class FsaBannerModule { }
+export class BannerModule { }
