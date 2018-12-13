@@ -4,11 +4,13 @@ import { CommonModule } from '@angular/common';
 import { QuotesPageModule } from './quotes-page/quotes-page.module';
 import { PoliciesPageModule } from './policies-page/policies-page.module';
 import { ClaimsPageModule } from './claims-page/claims-page.module';
+import { InsuranceCategoryPageModule } from './insurance-category-page/insurance-category-page.module';
 
 const pageModules = [
     QuotesPageModule,
     PoliciesPageModule,
-    ClaimsPageModule
+    ClaimsPageModule,
+    InsuranceCategoryPageModule
 ];
 
 @NgModule({
