@@ -4,7 +4,7 @@ import { PanelComponent } from '../panel/panel.component';
 @Component({
   selector: 'fsa-accordion',
   templateUrl: './accordion.component.html',
-  styleUrls: ['./accordion.component.css']
+  styleUrls: ['./accordion.component.scss']
 })
 export class AccordionComponent  implements AfterContentInit {
   @ContentChildren(PanelComponent) panels: QueryList<PanelComponent>;
