@@ -7,6 +7,10 @@ import { FSCategoryPageLayoutModule } from '../../layout/FS-category-page-layout
 
 const routes: Routes = [
   {
+    path: 'Banking-Products/:categoryTitle/c/:categoryCode',
+    redirectTo: '/category/:categoryCode/:categoryTitle'
+  },
+  {
     path: 'category/:categoryCode/:title',
     canActivate: [CmsPageGuards],
     component: FSCategoryPageComponent
