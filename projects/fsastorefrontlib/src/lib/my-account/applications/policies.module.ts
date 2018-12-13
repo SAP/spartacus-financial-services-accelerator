@@ -12,6 +12,8 @@ import { effects } from './store/effects';
 import { PolicyService } from './services/policy.service';
 import { PolicyDataService } from './services/policy-data.service';
 import { OccPolicyService } from '../../occ/policy/policy.service';
+import { AccordionModule } from '../../../lib/accordion.module';
+
 
 @NgModule({
   imports: [
@@ -19,11 +21,12 @@ import { OccPolicyService } from '../../occ/policy/policy.service';
     RouterModule,
     FormsModule,
     NgSelectModule,
+    AccordionModule,
     StoreModule.forFeature('policy', policyReducerToken),
     StoreModule.forFeature('policydetails', policyDetailsReducerToken),
     EffectsModule.forFeature(effects)
   ],
-  declarations: [PoliciesComponent,PolicyDetailsComponent],
+  declarations: [PoliciesComponent, PolicyDetailsComponent],
   exports: [PoliciesComponent, PolicyDetailsComponent],
   providers: [policyReducerProvider, policyDetailsReducerProvider, PolicyService, PolicyDataService, OccPolicyService]
 })

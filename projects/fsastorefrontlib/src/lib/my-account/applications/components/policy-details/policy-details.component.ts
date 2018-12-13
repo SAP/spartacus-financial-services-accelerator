@@ -26,12 +26,10 @@ export class PolicyDetailsComponent implements OnInit {
   ngOnInit(): void {
     const policyId$ = this.routingService.routerState$.pipe(
       map(routingData => routingData.state.params.policyId)
-    ); 
-    
+    );
     const contractId$ = this.routingService.routerState$.pipe(
       map(routingData => routingData.state.params.contractId)
-    ); 
-
+    );
     this.subscription = combineLatest(policyId$, contractId$).subscribe(
       ([policyId, contractId]) => {
         if (policyId && contractId) {

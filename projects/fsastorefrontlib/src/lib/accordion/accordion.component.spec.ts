@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FsastorefrontlibComponent } from './fsastorefrontlib.component';
+import { AccordionComponent } from './accordion.component';
 
-describe('FsastorefrontlibComponent', () => {
-  let component: FsastorefrontlibComponent;
-  let fixture: ComponentFixture<FsastorefrontlibComponent>;
+describe('AccordionComponent', () => {
+  let component: AccordionComponent;
+  let fixture: ComponentFixture<AccordionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FsastorefrontlibComponent ]
+      declarations: [ AccordionComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FsastorefrontlibComponent);
+    fixture = TestBed.createComponent(AccordionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

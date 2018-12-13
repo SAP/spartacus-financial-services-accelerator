@@ -1,0 +1,8 @@
+<div class="panel panel-info">
+    <h2 class="accordion--heading" (click)="toggle.emit()">
+      {{title}}
+    </h2>
+  <div class="panel-body" [class.active]="opened">
+    <ng-content></ng-content>
+  </div>
+<div>

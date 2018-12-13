@@ -2,6 +2,7 @@
 @import 'scss/popup';
 @import 'scss/fonts';
 @import 'scss/overrides';
+@import 'scss/accordions';
 
 :root {
     @each $color, $value in $fsa-colors {
