@@ -25,6 +25,8 @@ import { FSAStorefrontModule } from '@fsa/storefront';
       },
       cmsComponents: {
         EnrichedResponsiveBannerComponent: { selector: 'fsa-enriched-responsive-banner' },
+        CMSViewPoliciesComponent: { selector: 'fsa-view-policies' },
+        CMSViewQuotesComponent: { selector: 'fsa-view-quotes' },
       }
     })
   ],

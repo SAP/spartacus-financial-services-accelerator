@@ -9,11 +9,11 @@
             </span>
           </span>
           <h3 class="cards__caption cards__caption--color-secondary">
-            {{quote.defaultCategory.name}}</h3>
+            {{quote.defaultCategory?.name}}</h3>
         </div>
         <div class="cards__details-wrapper">
           <div class="cards__data">
-            <span class="title">Auto Insurance Monthly</span>
+            <span class="title">{{quote.quotePlan}}</span>
             <span class="value">{{quote.quoteId}}</span>
           </div>
           <div class="cards__data">
@@ -21,7 +21,7 @@
             <span class="value">{{quote.quoteStatus}}</span></div>
           <div class="cards__data">
             <span class="title">Expiry Date</span>
-            <span class="value ">{{quote.quoteWorkflowStatus.code}}</span>
+            <span class="value ">{{quote.quoteWorkflowStatus?.code}}</span>
           </div>
           <div class="cards__data">
             <span class="title">Price</span>
