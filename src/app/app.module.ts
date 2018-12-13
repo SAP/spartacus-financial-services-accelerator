@@ -12,7 +12,7 @@ import { FSAStorefrontModule } from '@fsa/storefront';
     BrowserModule,
     FSAStorefrontModule.withConfig({
       server: {
-        baseUrl: 'https://financialservices.dev-ded1-2.yrd.rot.hybris.com:9002'
+        baseUrl: 'https://financialservices.local:9002'
       },
       site: {
         baseSite: 'insurance'
@@ -23,9 +23,9 @@ import { FSAStorefrontModule } from '@fsa/storefront';
       },
       cmsComponentMapping: {
         CMSViewPoliciesComponent: 'fsa-view-policies',
-        CMSViewQuotesComponent: 'fsa-view-quotes'
-      },
-
+        CMSViewQuotesComponent: 'fsa-view-quotes',
+        EnrichedResponsiveBannerComponent: 'fsa-enriched-responsive-banner'
+      }
     })
   ],
   providers: [],

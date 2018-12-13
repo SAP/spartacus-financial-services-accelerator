@@ -1,0 +1,66 @@
+@mixin width1400 {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+@mixin transition {
+  transition: all 300ms ease;
+}
+@mixin primary-btn-color {
+  background-color: $color-button-primary !important;
+  border-color: $color-button-primary !important;
+  color: $color-white !important;
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $color-button-primary-hover !important;
+    border-color: $color-button-primary-hover !important;
+    color: $color-white !important;
+  }
+}
+@mixin secondary-btn-color {
+  background-color: $color-button-secondary !important;
+  border-color: $color-button-secondary !important;
+  color: $color-white !important;
+  &:hover,
+  &:active,
+  &:focus {
+    background-color: $color-button-secondary-hover !important;
+    border-color: $color-button-secondary-hover !important;
+    color: $color-white !important;
+  }
+}
+@mixin secondary-btn-color-inverted {
+  background-color: $color-white !important;
+  border-color: $color-white !important;
+  color: $color-dark-blue !important;
+  &:hover,
+  &:active,
+  &:focus {
+    opacity: 0.9;
+  }
+}
+
+@mixin linear-gradient-background(
+  $startColor,
+  $endColor,
+  $firstStop,
+  $secondStop
+) {
+  background: -webkit-linear-gradient(
+    left,
+    $startColor $firstStop,
+    $endColor $secondStop
+  );
+  background: -o-linear-gradient(
+    left,
+    $startColor $firstStop,
+    $endColor $secondStop
+  );
+  background: linear-gradient(
+    to right,
+    $startColor $firstStop,
+    $endColor $secondStop
+  );
+}

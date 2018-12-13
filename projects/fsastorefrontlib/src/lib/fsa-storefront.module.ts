@@ -6,7 +6,6 @@ import { StorefrontModuleConfig, StorefrontModule } from '@spartacus/storefront'
 import { UiModule } from './ui/index';
 import { CmsLibModule } from './cms-lib/cms-lib.module';
 
-
 @NgModule({
   imports: [
     UiModule,
@@ -15,7 +14,11 @@ import { CmsLibModule } from './cms-lib/cms-lib.module';
     StorefrontModule,
     ConfigModule.forRoot()
   ],
-  exports: [StorefrontModule, MyAccountModule],
+  exports: [
+    StorefrontModule,
+    MyAccountModule,
+    CmsLibModule
+  ],
   declarations: []
 })
 export class FSAStorefrontModule {

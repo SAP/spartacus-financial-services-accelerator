@@ -4,7 +4,7 @@ import * as fromPolicyStore from '../../../my-account/applications/store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
 import { PolicyService } from '../../../my-account/applications/services/policy.service';
-import {AuthService} from '@spartacus/storefront'
+import {AuthService} from '@spartacus/storefront';
 
 @Component({
     selector: 'fsa-view-policies',
@@ -13,9 +13,7 @@ import {AuthService} from '@spartacus/storefront'
     changeDetection: ChangeDetectionStrategy.OnPush
 
 })
-export class CMSViewPoliciesComponent implements OnInit{
-
-    component$;
+export class CMSViewPoliciesComponent implements OnInit {
 
     constructor(
         protected componentData: CmsComponentData,
@@ -24,27 +22,25 @@ export class CMSViewPoliciesComponent implements OnInit{
         private policyService: PolicyService,
         protected authService: AuthService
     ) { }
-         
+
+    component$;
     policies$;
     policiesLoaded$;
     anonymous$ = false;
 
-    textAllPolicies$ = 'Show all policies'
-    textLessPolicies$ = 'Show less policies'
+    textAllPolicies$ = 'Show all policies';
+    textLessPolicies$ = 'Show less policies';
     policyButtonText;
 
     allPoliciesDisplayed$ = false;
 
     ngOnInit() {
-        this.authService.userToken$.subscribe(token=> 
-        {
-            if (token.userId !== undefined){
+        this.authService.userToken$.subscribe(token => {
+            if (token.userId !== undefined) {
                 this.policyService.loadPolicies();
                 this.policies$ = this.store.pipe(select(fromPolicyStore.getActivePolicies));
                 this.policiesLoaded$ = this.store.pipe(select(fromPolicyStore.getPolicyLoaded));
-            }
-            else
-            {
+            } else {
                 this.anonymous$ = true;
             }
         }
@@ -52,20 +48,15 @@ export class CMSViewPoliciesComponent implements OnInit{
         this.component$ = this.componentData.data$;
         this.policyButtonText = this.textAllPolicies$;
     }
-        
     public getBaseUrl() {
         return this.config.server.baseUrl || '';
     }
 
-    public showAllPolicies(showAll)
-    {
-        this.allPoliciesDisplayed$ = showAll
-        if(showAll)
-        {
+    public showAllPolicies(showAll) {
+        this.allPoliciesDisplayed$ = showAll;
+        if (showAll) {
             this.policyButtonText = this.textLessPolicies$;
-        }
-        else
-        {
+        } else {
             this.policyButtonText = this.textAllPolicies$;
         }
     }

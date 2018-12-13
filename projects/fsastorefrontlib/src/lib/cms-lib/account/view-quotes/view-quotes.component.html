@@ -17,24 +17,22 @@
 </ng-container>
 
 <ng-template #quoteList let-quotes="quotes" let-max="max">
-        <div class="row">
-            <div *ngFor="let quote of quotes.insuranceQuotes | slice: 0:max">
-                <li class="my-quotes__my-quote">
-                    <div class="my-quotes__data-container">
-                        <span class="images images__wrapper">
-                                <img class="images__size" [src]="getBaseUrl()+quote.defaultCategory.image.url" alt="">
-                                </span>
-                        <div class="my-quotes__name-number">
-                            <span class="my-quotes__name">{{quote.planName}}</span>
-                            <span class="my-quotes__number">{{quote.quoteId}}</span>
-                        </div>
-                        <span class="my-quotes__add-infos">
-                                {{quote.quoteWorkflowStatus.code}}
+    <div *ngFor="let quote of quotes.insuranceQuotes | slice: 0:max">
+        <li class="my-quotes__my-quote">
+            <div class="my-quotes__data-container">
+                <span class="images images__wrapper">
+                        <img class="images__size" [src]="getBaseUrl()+quote.defaultCategory?.image.url" alt="">
                         </span>
-                    </div>
-                </li>
+                <div class="my-quotes__name-number">
+                    <span class="my-quotes__name">{{quote.planName}}</span>
+                    <span class="my-quotes__number">{{quote.quoteId}}</span>
+                </div>
+                <span class="my-quotes__add-infos">
+                        {{quote.quoteWorkflowStatus?.code}}
+                </span>
             </div>
-        </div>
+        </li>
+    </div>
 </ng-template>
 
 <ng-template #showAllQuotesButton let-showAll="showAll">

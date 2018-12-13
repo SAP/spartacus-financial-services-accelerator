@@ -7,8 +7,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { effects } from '../../my-account/applications/store';
 
 @NgModule({
-  imports:[
-    CommonModule, 
+  imports: [
+    CommonModule,
     RouterModule,
     EffectsModule.forFeature(effects)
   ],

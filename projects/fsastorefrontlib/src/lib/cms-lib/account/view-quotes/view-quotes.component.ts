@@ -50,7 +50,7 @@ export class CMSViewQuotesComponent implements OnInit {
 
     public showAllQuotes(showAll) {
         this.allQuotesDisplayed$ = showAll;
-        if ( showAll ) {
+        if (showAll) {
             this.quoteButtonText = this.textLessQuotes$;
         } else {
             this.quoteButtonText = this.textAllQuotes$;

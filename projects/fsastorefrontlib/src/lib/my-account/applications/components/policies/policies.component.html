@@ -7,7 +7,7 @@
             <img class="images__size" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0].url" alt="">
           </span>
           <h4 class="cards__caption cards__caption--color-primary">
-            {{policy.categoryData.name}}
+            {{policy.categoryData?.name}}
           </h4>
           <div class="cards__info cards__info--color-primary">
             {{policy.contractNumber}}
@@ -16,14 +16,14 @@
         <div class="cards__details-wrapper">
           <div class="cards__data">
             <span class="title">Product</span>
-            <span class="value">{{policy.mainProduct.coverageProduct.name}}</span>
+            <span class="value">{{policy.mainProduct?.coverageProduct?.name}}</span>
           </div>
           <div class="cards__data">
-            <span class="title">{{policy.insuredObjects[0].insuredObjectItems[0].value}}</span>
-            <span class="value">{{policy.insuredObjects[0].insuredObjectItems[1].value}}</span></div>
+            <span class="title">{{policy.insuredObjects[0]?.insuredObjectItems[0]?.value}}</span>
+            <span class="value">{{policy.insuredObjects[0]?.insuredObjectItems[1]?.value}}</span></div>
           <div class="cards__data">
-            <span class="title">{{policy.policyPremium.formattedValue}} / {{policy.paymentFrequency}}</span>
-            <span class="value ">{{policy.paymentMethod.paymentOption | uppercase}}</span>
+            <span class="title">{{policy.policyPremium?.formattedValue}} / {{policy.paymentFrequency}}</span>
+            <span class="value ">{{policy.paymentMethod?.paymentOption | uppercase}}</span>
           </div>
           <div class="cards__data">
             <span class="title">{{policy.policyStartDate }} - {{policy.policyEndDate}}</span>

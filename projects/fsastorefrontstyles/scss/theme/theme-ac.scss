@@ -77,6 +77,8 @@ $screen-xxs: 380px;
 
 $border-grey: 1px solid $color-grey;
 //Mixin for linear gradient background
+@import '../mixins-fsa';
+@import '../variables-fsa';
 
 //CSS Reset
 button:focus {
@@ -101,28 +103,7 @@ button:focus {
 a {
   @include transition();
 }
-@mixin linear-gradient-background(
-  $startColor,
-  $endColor,
-  $firstStop,
-  $secondStop
-) {
-  background: -webkit-linear-gradient(
-    left,
-    $startColor $firstStop,
-    $endColor $secondStop
-  );
-  background: -o-linear-gradient(
-    left,
-    $startColor $firstStop,
-    $endColor $secondStop
-  );
-  background: linear-gradient(
-    to right,
-    $startColor $firstStop,
-    $endColor $secondStop
-  );
-}
+
 .images__size {
   width: 100%;
   height: 100%;
@@ -259,41 +240,6 @@ a {
 /* *********************************************************** */
 /* ************************ Buttons ************************* */
 /* ********************************************************* */
-
-@mixin primary-btn-color {
-  background-color: $color-button-primary !important;
-  border-color: $color-button-primary !important;
-  color: $color-white !important;
-  &:hover,
-  &:active,
-  &:focus {
-    background-color: $color-button-primary-hover !important;
-    border-color: $color-button-primary-hover !important;
-    color: $color-white !important;
-  }
-}
-@mixin secondary-btn-color {
-  background-color: $color-button-secondary !important;
-  border-color: $color-button-secondary !important;
-  color: $color-white !important;
-  &:hover,
-  &:active,
-  &:focus {
-    background-color: $color-button-secondary-hover !important;
-    border-color: $color-button-secondary-hover !important;
-    color: $color-white !important;
-  }
-}
-@mixin secondary-btn-color-inverted {
-  background-color: $color-white !important;
-  border-color: $color-white !important;
-  color: $color-dark-blue !important;
-  &:hover,
-  &:active,
-  &:focus {
-    opacity: 0.9;
-  }
-}
 .primary-button,
 .secondary-button,
 .inverted {
