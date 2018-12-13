@@ -8,5 +8,4 @@ import { CategoryPageComponent } from '@spartacus/storefront';
   styleUrls: ['./fs-category-page.component.scss']
 })
 export class FSCategoryPageComponent extends CategoryPageComponent {
-  
 }
