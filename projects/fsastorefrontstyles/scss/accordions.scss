@@ -1,32 +1,23 @@
 .accordion {
-    margin-top: 30px;
-    font-weight: normal;
-    text-transform: none;
     &--heading {
-        margin-bottom: 0;
+        color: $color-white;
         font-size: 20px;
         font-weight: 500;
         line-height: 55px;
+        margin-bottom: 0;
         height: 55px;
         cursor: pointer;
         padding: 0 60px;
         @include ellipsis;
         @include linear-gradient-background( $color-blue, $color-banking-darkest-blue, 50%, 100% );
-        color: $color-white;
     }
     &-item {
         margin-top: 40px;
         border: $border-grey;
-        padding: 0;
-        position: relative;
-    }
-    &--list-wrapper {
-        padding: 30px 46px 20px;
     }
     &--list-item {
         border-bottom: 1px solid $color-grey;
         padding: 14px 0; 
-        overflow: hidden;
         &:last-child {
             border-bottom: none;
         }
@@ -36,12 +27,13 @@
           text-align: right;
         }
     }
-    .panel-body {
-        transition: all 0.5s ease-out;
+    &-item--wrapper {
+        transition: opacity 0.5s ease-out;
         opacity: 0; 
         height: 0;
         overflow: hidden;
         &.active {
+            padding: 30px 46px 20px;
             opacity: 1;
             height: auto;
         }

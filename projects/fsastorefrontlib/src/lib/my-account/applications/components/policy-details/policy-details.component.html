@@ -17,148 +17,136 @@
         <fsa-accordion class="accordion">
             <div class="accordion-item">
                 <fsa-panel [opened]="true" [title]="'Policy Summary'">
-                    <div class="accordion-item__body">
-                        <ul class="accordion--list-wrapper container-fluid">
-                            <li class="accordion--list-item row">
-                                <div class="col-6 col-sm-3 bold">
-                                    ContractId
-                                </div>
-                                <div class="col-6 col-sm-3 value notice notice--dark">
-                                    {{policy.contractNumber}}
-                                </div>
-                            </li>
-                            <li class="accordion--list-item row">
-                                <div class="col-6 col-sm-3 bold">
-                                    Product
-                                </div>
-                                <div class="col-6 col-sm-3 value notice notice--dark">
-                                    {{policy.mainProduct?.coverageProduct?.name}}
-                                </div>
-                            </li>
-                            <li class="accordion--list-item row">
-                                <div class="col-6 col-sm-3 bold">
-                                    Payment frequency </div>
-                                <div class="col-6 col-sm-3 value notice notice--dark">
-                                    {{policy.paymentFrequency}}
-                                </div>
-                            </li>   
-                            <li class="accordion--list-item row">
-                                <div class="col-6 col-sm-3 bold">Payment method</div>
-                                <div class="col-6 col-sm-3 value notice notice--dark">
-                                    {{policy.paymentMethod?.paymentOption}}
-                                </div>
-                            </li>
-                            <li class="accordion--list-item row">
-                                <div class="col-6 col-sm-3 bold">Duration</div>
-                                <div class="col-6 col-sm-3 value notice notice--dark">
-                                     {{policy.policyStartDate}} - {{policy.policyEndDate}}
-                                </div>
-                            </li>
-                        </ul>     
-                    </div>
+                    <ul class="accordion--list container-fluid">
+                        <li class="accordion--list-item row">
+                            <div class="col-6 col-sm-3 bold">
+                                ContractId
+                            </div>
+                            <div class="col-6 col-sm-3 value notice notice--dark">
+                                {{policy.contractNumber}}
+                            </div>
+                        </li>
+                        <li class="accordion--list-item row">
+                            <div class="col-6 col-sm-3 bold">
+                                Product
+                            </div>
+                            <div class="col-6 col-sm-3 value notice notice--dark">
+                                {{policy.mainProduct?.coverageProduct?.name}}
+                            </div>
+                        </li>
+                        <li class="accordion--list-item row">
+                            <div class="col-6 col-sm-3 bold">
+                                Payment frequency </div>
+                            <div class="col-6 col-sm-3 value notice notice--dark">
+                                {{policy.paymentFrequency}}
+                            </div>
+                        </li>   
+                        <li class="accordion--list-item row">
+                            <div class="col-6 col-sm-3 bold">Payment method</div>
+                            <div class="col-6 col-sm-3 value notice notice--dark">
+                                {{policy.paymentMethod?.paymentOption}}
+                            </div>
+                        </li>
+                        <li class="accordion--list-item row">
+                            <div class="col-6 col-sm-3 bold">Duration</div>
+                            <div class="col-6 col-sm-3 value notice notice--dark">
+                                    {{policy.policyStartDate}} - {{policy.policyEndDate}}
+                            </div>
+                        </li>
+                    </ul>     
                 </fsa-panel>
             </div>
             <div class="accordion-item">
                 <fsa-panel [title]="'Who or What Is Insured'">
-                    <div  class="accordion-item__body" *ngIf="policy.insuredObjects">
-                        <ul class="accordion--list-wrapper container-fluid">
-                            <li *ngFor="let insuredObjectItem of policy.insuredObjects[0].insuredObjectItems" class="accordion--list-item row">
-                                <div class="col-6 col-sm-3 bold">
-                                        {{insuredObjectItem.label}}
-                                </div>
-                                <div class="col-6 col-sm-3 value notice notice--dark">
-                                        {{insuredObjectItem.value}}
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <ul class="accordion--list container-fluid" *ngIf="policy.insuredObjects">
+                        <li *ngFor="let insuredObjectItem of policy.insuredObjects[0].insuredObjectItems" class="accordion--list-item row">
+                            <div class="col-6 col-sm-3 bold">
+                                    {{insuredObjectItem.label}}
+                            </div>
+                            <div class="col-6 col-sm-3 value notice notice--dark">
+                                    {{insuredObjectItem.value}}
+                            </div>
+                        </li>
+                    </ul>
                 </fsa-panel>
             </div>
             <div class="accordion-item">
                 <fsa-panel [title]="'Whats included'">
-                    <div class="accordion-item__body" *ngIf="policy.mainProduct && policy.mainProduct.benefits">
-                        <ul class="accordion--list-wrapper container-fluid">
-                            <li *ngFor="let benefit of policy.mainProduct.benefits" class="accordion--list-item row">
-                                <div class="col-6 col-sm-3 bold">
-                                    {{benefit.name}}
-                                </div>
-                                <div class="col-6 col-sm-3 value notice notice--dark">
-                                    {{benefit.coverageValue}}
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <ul class="accordion--list container-fluid" *ngIf="policy.mainProduct && policy.mainProduct.benefits">
+                        <li *ngFor="let benefit of policy.mainProduct.benefits" class="accordion--list-item row">
+                            <div class="col-6 col-sm-3 bold">
+                                {{benefit.name}}
+                            </div>
+                            <div class="col-6 col-sm-3 value notice notice--dark">
+                                {{benefit.coverageValue}}
+                            </div>
+                        </li>
+                    </ul>
                 </fsa-panel>
             </div>
             <div class="accordion-item">
                 <fsa-panel [title]="'Optional Extras'">
-                    <div class="accordion-item__body">
-                        <ul class="accordion--list-wrapper container-fluid">
-                            <li *ngFor="let optionalCoverage of policy.optionalProducts" class="accordion--list-item row">
-                                <div class="col-6 col-sm-3 accordion-item__title bold">
-                                        {{optionalCoverage.coverageProduct.name}}
-                                </div>
-                                <div *ngIf="optionalCoverage.coverageIsIncluded" class="col-6 col-sm-3 notice notice--dark">
-                                    Included
-                                </div>
-                                <div *ngIf="!optionalCoverage.coverageIsIncluded" class="col-6 col-sm-3 value notice notice--dark">
-                                    Excluded
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <ul class="accordion--list container-fluid">
+                        <li *ngFor="let optionalCoverage of policy.optionalProducts" class="accordion--list-item row">
+                            <div class="col-6 col-sm-3 accordion-item__title bold">
+                                    {{optionalCoverage.coverageProduct.name}}
+                            </div>
+                            <div *ngIf="optionalCoverage.coverageIsIncluded" class="col-6 col-sm-3 notice notice--dark">
+                                Included
+                            </div>
+                            <div *ngIf="!optionalCoverage.coverageIsIncluded" class="col-6 col-sm-3 value notice notice--dark">
+                                Excluded
+                            </div>
+                        </li>
+                    </ul>
                 </fsa-panel>
             </div>
             <div class="accordion-item">
                 <fsa-panel [title]="'What Does It Cost Me?'">
-                    <div class="accordion-item__body">
-                        <ul class="accordion--list-wrapper container-fluid">
-                            <li class="accordion--list-item row">
-                                <div class="col-6 col-sm-3 bold">
-                                    Premium
-                                </div>
-                                <div class="col-xs-12 col-sm-6 value notice notice--dark"> 
-                                    {{policy.policyPremium?.formattedValue}}
-                                </div>
-                            </li>
-                            <li class="accordion--list-item row">
-                                <div class="col-6 col-sm-3 bold">
-                                    Payment frequency
-                                </div>
-                                <div class="col-6 col-sm-3 value notice notice--dark">
-                                        {{policy.paymentFrequency}}
-                                </div>
-                                <div class="col-xs-12 col-sm-6 "></div>
-                            </li>
-                            <li class="accordion--list-item row">
-                                <div class="col-6 col-sm-3 bold">
-                                    Payment method
-                                </div>
-                                <div class="col-6 col-sm-3 value notice notice--dark">
-                                    {{policy.paymentMethod?.paymentOption}}
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+                    <ul class="accordion--list container-fluid">
+                        <li class="accordion--list-item row">
+                            <div class="col-6 col-sm-3 bold">
+                                Premium
+                            </div>
+                            <div class="col-xs-12 col-sm-6 value notice notice--dark"> 
+                                {{policy.policyPremium?.formattedValue}}
+                            </div>
+                        </li>
+                        <li class="accordion--list-item row">
+                            <div class="col-6 col-sm-3 bold">
+                                Payment frequency
+                            </div>
+                            <div class="col-6 col-sm-3 value notice notice--dark">
+                                    {{policy.paymentFrequency}}
+                            </div>
+                            <div class="col-xs-12 col-sm-6 "></div>
+                        </li>
+                        <li class="accordion--list-item row">
+                            <div class="col-6 col-sm-3 bold">
+                                Payment method
+                            </div>
+                            <div class="col-6 col-sm-3 value notice notice--dark">
+                                {{policy.paymentMethod?.paymentOption}}
+                            </div>
+                        </li>
+                    </ul>
                 </fsa-panel>
             </div>
             <div class="accordion-item">
                 <fsa-panel [title]="'Documents'">
-                    <div class="accordion-item__body">
-                        <ul class="accordion--list-wrapper container-fluid">
-                            <li class="accordion-item__list-item row">
-                                <div class="col-6 col-sm-3 bold">
-                                    Policy
-                                </div>
-                                <div class="col-6 col-sm-3 value notice notice--dark">
-                                        {{policy.policyStartDate}} - {{policy.policyEndDate}}
-                                </div>
-                                <div class="col-xs-12 col-sm-6 download">
-                                    Download PDF Link
-                                </div>
-                            </li>
-                        </ul>
-                    </div>    
+                    <ul class="accordion--list container-fluid">
+                        <li class="accordion-item__list-item row">
+                            <div class="col-6 col-sm-3 bold">
+                                Policy
+                            </div>
+                            <div class="col-6 col-sm-3 value notice notice--dark">
+                                    {{policy.policyStartDate}} - {{policy.policyEndDate}}
+                            </div>
+                            <div class="col-xs-12 col-sm-6 download">
+                                Download PDF Link
+                            </div>
+                        </li>
+                    </ul>   
                 </fsa-panel>
             </div>
             <!-- <div *ngIf="policy.commissionContract && policy.commissionContract.agent | async as agent" class="accordion-item">
