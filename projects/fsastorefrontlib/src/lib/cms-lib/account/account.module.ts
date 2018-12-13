@@ -14,6 +14,6 @@ import { effects } from '../../my-account/applications/store';
   ],
   declarations: [ CMSViewPoliciesComponent, CMSViewQuotesComponent],
   exports: [ CMSViewPoliciesComponent, CMSViewQuotesComponent],
-  entryComponents: [ CMSViewPoliciesComponent, CMSViewQuotesComponent],
+  entryComponents: [ CMSViewPoliciesComponent, CMSViewQuotesComponent]
 })
 export class AccountModule { }
