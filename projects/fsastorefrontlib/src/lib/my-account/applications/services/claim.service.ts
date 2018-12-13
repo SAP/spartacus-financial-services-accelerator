@@ -4,7 +4,7 @@ import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import { ClaimDataService } from './claim-data.service';
 import * as fromSelector from '../store/selectors';
-import { AuthService } from '@spartacus/storefront';
+import { AuthService } from '@spartacus/core';
 
 
 @Injectable()
@@ -30,7 +30,7 @@ export class ClaimService {
       }
     });
 
-    this.auth.userToken$.subscribe(userData => {
+    this.auth.getUserToken().subscribe(userData => {
       if (this.claimData.userId !== userData.userId) {
         this.claimData.userId = userData.userId;
       }

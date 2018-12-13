@@ -3,7 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClaimService } from '../../../services/claim.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { AuthService } from '@spartacus/storefront';
+import { AuthService } from '@spartacus/core';
 
 @Component({
   selector: 'fsa-deleted-claim-dialog',
@@ -25,7 +25,7 @@ export class DeleteClaimDialogComponent implements OnInit {
   private claimNumber: string;
 
   ngOnInit() {
-    this.subscription = this.auth.userToken$.subscribe(userData => {
+    this.subscription = this.auth.getUserToken().subscribe(userData => {
       if (userData && userData.userId) {
         this.user_id = userData.userId;
       }

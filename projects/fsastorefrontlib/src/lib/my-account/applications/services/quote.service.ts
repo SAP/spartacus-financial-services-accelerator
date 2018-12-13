@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
-import { AuthService } from '@spartacus/storefront';
+import { AuthService } from '@spartacus/core';
 import { QuoteDataService } from './quote-data.service';
 
 
@@ -30,7 +30,7 @@ export class QuoteService {
       }
     });
 
-    this.auth.userToken$.subscribe(userData => {
+    this.auth.getUserToken().subscribe(userData => {
       if (this.quoteData.userId !== userData.userId) {
         this.quoteData.userId = userData.userId;
       }

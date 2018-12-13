@@ -16,9 +16,15 @@ import { FSAStorefrontModule } from '@fsa/storefront';
       },
       site: {
         baseSite: 'insurance'
+      }
+    }),
+      FSAStorefrontModule.withCmsConfig({
+      authentication: {
+        client_id: 'financial_customer',
+        client_secret: 'secret'
       },
-      cmsComponentMapping: {
-        EnrichedResponsiveBannerComponent: 'fsa-enriched-responsive-banner'
+      cmsComponents: {
+        EnrichedResponsiveBannerComponent: { selector: 'fsa-enriched-responsive-banner' },
       }
     })
   ],
