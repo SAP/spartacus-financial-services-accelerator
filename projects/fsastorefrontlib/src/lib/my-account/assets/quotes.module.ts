@@ -3,11 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { QuotesComponent } from './components/quotes/quotes.component';
-import { quoteReducerProvider, quoteReducerToken } from './store/reducers';
-import { StoreModule } from '@ngrx/store';
-import { EffectsModule } from '@ngrx/effects';
-import { effects } from './store/effects';
+import { QuotesComponent } from '../assets/components/quotes/quotes.component';
 import { QuoteService } from './services/quote.service';
 import { QuoteDataService } from './services/quote-data.service';
 import { OccQuoteService } from '../../occ/quote/quote.service';
@@ -17,13 +13,11 @@ import { OccQuoteService } from '../../occ/quote/quote.service';
     CommonModule,
     RouterModule,
     FormsModule,
-    NgSelectModule,
-    StoreModule.forFeature('quote', quoteReducerToken),
-    EffectsModule.forFeature(effects)
+    NgSelectModule
   ],
   declarations: [QuotesComponent],
   exports: [QuotesComponent],
-  providers: [quoteReducerProvider, QuoteService, QuoteDataService, OccQuoteService ]
+  providers: [QuoteService, QuoteDataService, OccQuoteService ]
 
 })
 export class QuotesModule { }

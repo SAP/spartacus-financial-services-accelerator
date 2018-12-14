@@ -4,13 +4,9 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ClaimsComponent } from './components/claims/claims.component';
-import { DeleteClaimDialogComponent } from './components/claims/delete-claim-dialog/delete-claim-dialog.component';
-import { effects } from './store/effects';
-import { EffectsModule } from '@ngrx/effects';
-import { claimReducerProvider, claimReducerToken } from './store/reducers';
+import { DeleteClaimDialogComponent } from '../assets/components/claims/delete-claim-dialog/delete-claim-dialog.component';
 import { ClaimService } from './services/claim.service';
 import { ClaimDataService } from './services/claim-data.service';
-import { StoreModule } from '@ngrx/store';
 import { BootstrapModule } from 'projects/storefrontlib/src/lib/bootstrap.module';
 import { OccClaimService } from '../../occ/claim/claim.service';
 
@@ -20,13 +16,11 @@ import { OccClaimService } from '../../occ/claim/claim.service';
     RouterModule,
     FormsModule,
     NgSelectModule,
-    BootstrapModule,
-    StoreModule.forFeature('claim', claimReducerToken),
-    EffectsModule.forFeature(effects)
+    BootstrapModule
   ],
   declarations: [ClaimsComponent, DeleteClaimDialogComponent],
   entryComponents: [DeleteClaimDialogComponent],
   exports: [ClaimsComponent],
-  providers: [claimReducerProvider, ClaimService, ClaimDataService, OccClaimService]
+  providers: [ClaimService, ClaimDataService, OccClaimService]
 })
 export class ClaimsModule {}

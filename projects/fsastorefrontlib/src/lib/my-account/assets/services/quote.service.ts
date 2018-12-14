@@ -10,7 +10,7 @@ import { QuoteDataService } from './quote-data.service';
 @Injectable()
 export class QuoteService {
   constructor(
-    private store: Store<fromReducer.QuoteState>,
+    private store: Store<fromReducer.UserState>,
     private quoteData: QuoteDataService,
     protected auth: AuthService
   ) {
@@ -20,7 +20,7 @@ export class QuoteService {
   callback: Function;
 
   initQuotes() {
-    this.store.pipe(select(fromSelector.getActiveQuotes)).subscribe(quotes => {
+    this.store.pipe(select(fromSelector.getQuotes)).subscribe(quotes => {
       if (quotes) {
         this.quoteData.quotes = quotes;
       }

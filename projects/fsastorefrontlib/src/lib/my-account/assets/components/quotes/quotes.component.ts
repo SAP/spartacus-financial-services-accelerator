@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import * as fromQuoteStore from '../../store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { OccConfig } from '@spartacus/core';
 export class QuotesComponent implements OnInit {
 
   constructor(
-    private store: Store<fromQuoteStore.QuoteState>,
+    private store: Store<fromQuoteStore.UserState>,
     private config: OccConfig
   ) {}
 
@@ -23,8 +24,8 @@ export class QuotesComponent implements OnInit {
   noQuotesText = 'You have no Quotes!';
 
   ngOnInit() {
-    this.quotes$ = this.store.pipe(select(fromQuoteStore.getActiveQuotes));
-    this.quotesLoaded$ = this.store.pipe(select(fromQuoteStore.getQuoteLoaded));
+    this.quotes$ = this.store.pipe(select(fromQuoteStore.getQuotes));
+    this.quotesLoaded$ = this.store.pipe(select(fromQuoteStore.getQuotesLoaded));
   }
 
   public getBaseUrl() {

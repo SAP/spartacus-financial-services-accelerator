@@ -19,7 +19,7 @@ import { naIconImgSrc } from '../../../../assets/na-icon';
 export class ClaimsComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
-    protected store: Store<fromClaimStore.ClaimState>,
+    protected store: Store<fromClaimStore.UserState>,
     private config: OccConfig,
     private domSanitizer: DomSanitizer
   ) {}
@@ -33,8 +33,8 @@ export class ClaimsComponent implements OnInit {
   notAvailable = 'N/A';
 
   ngOnInit() {
-    this.claims$ = this.store.pipe(select(fromClaimStore.getActiveClaims));
-    this.claimsLoaded$ = this.store.pipe(select(fromClaimStore.getClaimLoaded));
+    this.claims$ = this.store.pipe(select(fromClaimStore.getClaims));
+    this.claimsLoaded$ = this.store.pipe(select(fromClaimStore.getClaimsLoaded));
   }
 
   deleteClaim(claimNumber: string) {

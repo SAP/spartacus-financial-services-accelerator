@@ -8,8 +8,8 @@ export const getActivePolicyDetailsState: MemoizedSelector<
   any,
   PolicyDetailsState
 > = createSelector(
-  fromFeature.getPolicyDetailsState,
-  (state: fromFeature.PolicyDetailsState) => state.policy
+  fromFeature.getUserState,
+  (state: fromFeature.UserState) => state.policyDetails
 );
 
 export const getPolicyDetails: MemoizedSelector<any, any> = createSelector(

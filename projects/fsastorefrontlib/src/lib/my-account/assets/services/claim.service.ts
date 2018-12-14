@@ -10,7 +10,7 @@ import { AuthService } from '@spartacus/storefront';
 @Injectable()
 export class ClaimService {
   constructor(
-    private store: Store<fromReducer.ClaimState>,
+    private store: Store<fromReducer.UserState>,
     private claimData: ClaimDataService,
     protected auth: AuthService
   ) {
@@ -20,7 +20,7 @@ export class ClaimService {
   callback: Function;
 
   initClaims() {
-    this.store.pipe(select(fromSelector.getActiveClaims)).subscribe(claims => {
+    this.store.pipe(select(fromSelector.getClaims)).subscribe(claims => {
       if (claims) {
         this.claimData.claims = claims;
       }
@@ -36,7 +36,7 @@ export class ClaimService {
       }
     });
 
-    this.store.pipe(select(fromSelector.getClaimRefresh)).subscribe(refresh => {
+    this.store.pipe(select(fromSelector.getClaimsRefresh)).subscribe(refresh => {
       if (refresh) {
         this.store.dispatch(
           new fromAction.LoadClaims({

@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { PolicyService } from '../../../applications/services/policy.service';
+import { PolicyService } from '../../../assets/services/policy.service';
 import {RoutingService } from '@spartacus/core';
 import { map } from 'rxjs/operators';
 import { Subscription, combineLatest } from 'rxjs';

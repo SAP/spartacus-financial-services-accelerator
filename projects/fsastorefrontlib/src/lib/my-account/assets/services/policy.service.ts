@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class PolicyService {
   constructor(
-    private store: Store<fromReducer.PolicyState>,
+    private store: Store<fromReducer.UserState>,
     private policyData: PolicyDataService,
     protected auth: AuthService
   ) {
@@ -26,7 +26,7 @@ export class PolicyService {
   );
 
   initPolicies() {
-    this.store.pipe(select(fromSelector.getActivePolicies)).subscribe(policies => {
+    this.store.pipe(select(fromSelector.getPolicies)).subscribe(policies => {
       if (policies) {
         this.policyData.policies = policies;
       }
@@ -42,7 +42,7 @@ export class PolicyService {
       }
     });
 
-    this.store.pipe(select(fromSelector.getPolicyRefresh)).subscribe(refresh => {
+    this.store.pipe(select(fromSelector.getPoliciesRefresh)).subscribe(refresh => {
       if (refresh) {
         this.store.dispatch(
           new fromAction.LoadPolicies({

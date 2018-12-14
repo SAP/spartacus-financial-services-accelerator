@@ -5,7 +5,7 @@ export interface Quote {
 }
 
 export interface QuoteState {
-  quotes: {};
+  quotes: any;
   refresh: boolean;
   loaded: boolean;
 }
