@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CmsPageGuards } from '@spartacus/storefront';
 import { FSCategoryPageComponent } from './fs-category-page.component';
-import { FSCategoryPageLayoutModule } from '../../layout/FS-category-page-layout/fs-category-page-layout.module';
+import { FSCategoryPageLayoutModule } from '../../layout/fs-category-page-layout/fs-category-page-layout.module';
 
 const routes: Routes = [
   {
