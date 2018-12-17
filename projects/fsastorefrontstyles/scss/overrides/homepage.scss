@@ -11,9 +11,8 @@ cx-home-page {
       flex-direction: column;
     }
     //Service links specific styling - Overriding our own enriched banner :-(
-    cx-dynamic-slot[ng-reflect-position="Section2A"] {
+    .cx-landing-page-layout__slot-2 {
       @include width1400();
-      margin-bottom: 60px;
       flex-direction: row;
       justify-content: center;
       flex-wrap: wrap;
@@ -54,7 +53,7 @@ cx-home-page {
 }
 
 //Homepage banner specific styling
-cx-dynamic-slot[ng-reflect-position="Section1"] fsa-enriched-responsive-banner {
+cx-dynamic-slot:first-of-type:not(.cx-landing-page-layout__slot-2) fsa-enriched-responsive-banner {
   .enriched-banner {
     position: relative;
     .responsive-image {
@@ -100,7 +99,7 @@ cx-dynamic-slot[ng-reflect-position="Section1"] fsa-enriched-responsive-banner {
 }
 
 //Get a quote section & Make a claim paragraph
-cx-dynamic-slot[ng-reflect-position="Section1"] cx-paragraph, cx-dynamic-slot[ng-reflect-position="Section3"] {
+cx-dynamic-slot:first-of-type cx-paragraph, cx-dynamic-slot:nth-of-type(3) cx-paragraph {
   @include width1400();
   display: block;
   margin-top: 100px;
@@ -132,13 +131,15 @@ cx-dynamic-slot[ng-reflect-position="Section1"] cx-paragraph, cx-dynamic-slot[ng
   }
 }
 //Find an agent paragraph
-cx-dynamic-slot[ng-reflect-position="Section2B"] {
-  @include width1400();
+.cx-landing-page-layout__slot-2:nth-of-type(2) {
   cx-paragraph {
     color: $color-dark-grey;
     width: 100%;
     padding: 0 15px;
-    margin-bottom: 60px;
+    margin: 60px 0;
+    p {
+      margin: 0;
+    }
   }
   .find-agent {
     &__homepage {
@@ -157,7 +158,7 @@ cx-dynamic-slot[ng-reflect-position="Section2B"] {
   }
 }
 //Quotes & Policies review
-cx-dynamic-slot[ng-reflect-position="Section2C"] {
+.cx-landing-page-layout__container + cx-dynamic-slot {
   @include width1400();
   display: flex;
   @include media-breakpoint-down(xs) {
@@ -178,7 +179,7 @@ cx-dynamic-slot[ng-reflect-position="Section2C"] {
   }
 }
 //Make a claim section
-cx-dynamic-slot[ng-reflect-position="Section3"] .make-claim {
+cx-dynamic-slot:nth-of-type(3) cx-paragraph .make-claim {
   margin: 50px auto;
   background-color: $color-blue;
   text-align: center;
