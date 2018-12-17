@@ -1,5 +1,5 @@
 import { Component, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
-import { PanelComponent } from '../panel/panel.component';
+import { PanelComponent } from './panel.component';
 
 @Component({
   selector: 'fsa-accordion',

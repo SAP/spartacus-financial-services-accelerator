@@ -8,7 +8,7 @@ import { PolicyDetailsComponent } from '../assets/components/policy-details/poli
 import { PolicyService } from './services/policy.service';
 import { PolicyDataService } from './services/policy-data.service';
 import { OccPolicyService } from '../../occ/policy/policy.service';
-import { AccordionModule } from '../../accordion.module';
+import { AccordionModule } from './../../accordion/accordion.module';
 
 
 @NgModule({
