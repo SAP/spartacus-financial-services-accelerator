@@ -85,7 +85,7 @@
                         <div class="col-6 col-sm-3 accordion-item__title bold">
                                 {{optionalCoverage.coverageProduct.name}}
                         </div>
-                        <div *ngIf="optionalCoverage.coverageIsIncluded" class="col-6 col-sm-3 notice notice--dark">
+                        <div *ngIf="optionalCoverage.coverageIsIncluded" class="col-6 col-sm-3 value notice notice--dark">
                             Included
                         </div>
                         <div *ngIf="!optionalCoverage.coverageIsIncluded" class="col-6 col-sm-3 value notice notice--dark">
@@ -139,9 +139,13 @@
                 </ul>   
             </accordion-item>
             <accordion-item *ngIf="policy.responsibleAgent" [title]="'My Agent'">
-                <div class="contact-box col-6 col-sm-3">
-                    <img class="circle-image" [src]="getBaseUrl()+ policy.responsibleAgent?.thumbnail?.url"/>
-                    <p class="contact-info">{{policy.responsibleAgent?.firstName}} - {{policy.responsibleAgent?.lastName}}</p>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="contact-box col-xs-10 col-sm-4 col-md-3">
+                            <img class="circle-image" [src]="getBaseUrl()+ policy.responsibleAgent?.thumbnail?.url"/>
+                            <p class="contact-info">{{policy.responsibleAgent?.firstName}} - {{policy.responsibleAgent?.lastName}}</p>
+                        </div>
+                    </div>
                 </div>
             </accordion-item>
         </div>

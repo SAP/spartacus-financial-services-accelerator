@@ -36,6 +36,9 @@
             padding: 30px 46px 20px;
             opacity: 1;
             height: auto;
+            @media (max-width: $screen-xs-max) {
+                padding: 25px 0 20px;
+            }
         }
     }
     .contact-box {
@@ -46,7 +49,7 @@
 		padding: 20px 0;
 		margin: 0 4% 70px;
 		@media (max-width: $screen-sm) {
-			margin: 0 8% 70px;
+			padding: 25px 0 20px;
         }
         .contact-info {
             margin: 20px 0 10px; 
