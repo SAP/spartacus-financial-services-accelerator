@@ -7,6 +7,11 @@
 @mixin transition {
   transition: all 300ms ease;
 }
+@mixin box-shadow($x, $y, $a, $b, $color, $opacity) {
+  box-shadow: $x $y $a $b rgba($color, $opacity);
+  // -moz-box-shadow: $x $y $a $b fade($color, $opacity);
+  // -webkit-box-shadow: $x $y $a $b fade($color, $opacity);
+}
 @mixin primary-btn-color {
   background-color: $color-button-primary !important;
   border-color: $color-button-primary !important;
