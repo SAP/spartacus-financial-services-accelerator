@@ -6,7 +6,7 @@ import { ProductModule } from '../../../product/product.module';
 import { ProductDetailsPageLayoutComponent } from './product-details-page-layout.component';
 
 @NgModule({
-  imports: [CommonModule, CmsModule, ProductModule],
+  imports: [CmsModule, ProductModule],
   declarations: [ProductDetailsPageLayoutComponent],
   exports: [ProductDetailsPageLayoutComponent]
 })

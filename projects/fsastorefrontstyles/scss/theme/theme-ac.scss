@@ -1,71 +1,6 @@
-$color-white: #ffffff;
-$color-black: #000000;
-$color-dark-grey: #666666;
-$color-body: $color-dark-grey;
-$color-semi-dark-grey: #999999;
-$color-grey: #cccccc;
-$color-light-grey: #f5f5f5;
-$color-mild-grey: #e9e9e9;
-$color-blue: #0078c0;
-$color-dark-blue: #263950;
-$color-red: #ff0000;
-$color-dark-red: #c90400;
-$color-green: #3ab85d;
-$color-yellow: #ffd200;
-$color-orange: #f0ab00;
-$color-heading: $color-dark-grey;
-$color-heading-infos: $color-blue;
-$color-link: $color-dark-grey;
-$color-link-hover: #3498db;
-$color-button-primary: $color-blue;
-$color-button-primary-hover: $color-link-hover;
-$color-button-secondary: $color-dark-blue;
-$color-button-secondary-hover: #385980;
-$color-mobile-menu-bckg: #2b3e51;
-$color-mobile-menu-opaque: $color-button-secondary-hover;
-$color-footer-links: $color-grey;
-$color-footer-bckg: $color-dark-grey;
-$color-footer-copyright-bckg: #555555;
-$color-quotes-bckg: $color-light-grey;
-$color-account-section-bckg: #154259;
-$color-table-heading: $color-dark-blue;
-$color-table-link: $color-blue;
-$color-table-link-hover: $color-link-hover;
-$color-colorbox-border: rgba(255, 255, 255, 0.3);
-$color-cart-border: #e1e1e1;
-$color-cart-top-border: #1b75ad;
-$color-banking-blue: #48c8ff;
-$color-banking-dark-blue: #00a1e4;
-$color-banking-darker-blue: #0071bd;
-$color-banking-darkest-blue: #00528a;
-
-// $primary: #fe5757 !default;
-// $secondary: #747881 !default;
-// $success: #5dac06 !default;
-// $danger: #db0002 !default;
-// $warning: #ffc107 !default;
-// $info: #17a2b8 !default;
-// $light: #d3d6db !default;
-// $dark: #212738 !default;
-// $background: #f4f4f4 !default;
-// $inverse: #ffffff !default;
-// $text: #212738 !default;
-// $transparent: transparent !default;
-
-$fsa-colors: (
-  'primary': $color-blue,
-  'secondary': $color-dark-blue,
-  // 'success': $success,
-  // 'danger': $danger,
-  // 'warning': $warning,
-  // 'info': $info,
-  // 'light': $light,
-  // 'dark': $dark,
-  // 'background': $background,
-  // 'inverse': $inverse,
-  // 'text': $text,
-  // 'transparent': $transparent
-);
+//Mixin for linear gradient background
+@import '../mixins-fsa';
+@import '../variables-fsa';
 
 body {
   font-size: 14px;
@@ -74,16 +9,6 @@ $screen-sm: 768px;
 $screen-xs-max: 639px;
 $screen-sm-mid: 768px;
 $screen-xxs: 380px;
-
-$border-grey: 1px solid $color-grey;
-//Mixin for linear gradient background
-@import '../mixins-fsa';
-@import '../variables-fsa';
-
-//CSS Reset
-button:focus {
-  outline: none;
-}
 .center1400 {
   max-width: 1400px;
   width: 100%;
@@ -92,6 +17,11 @@ button:focus {
 .contentPadding {
   padding: 20px 10px 0 10px;
 }
+//CSS Reset
+button:focus {
+  outline: none;
+}
+$border-grey: 1px solid $color-grey;
 @mixin transition {
   transition: all 300ms ease;
 }
