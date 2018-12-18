@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PolicyService } from '../../../my-account/applications/services/policy.service';
+import { PolicyService } from '../../../my-account/assets/services/policy.service';
 
 @Component({
   selector: 'fsa-policies-page-layout',

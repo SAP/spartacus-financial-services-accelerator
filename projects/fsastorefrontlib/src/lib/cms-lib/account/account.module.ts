@@ -4,8 +4,7 @@ import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { effects } from '../../my-account/applications/store';
-
+import { effects } from '../../my-account/assets/store';
 
 @NgModule({
   imports: [
