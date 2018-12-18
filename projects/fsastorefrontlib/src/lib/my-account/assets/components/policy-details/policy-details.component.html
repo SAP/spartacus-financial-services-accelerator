@@ -15,7 +15,7 @@
             routerLink="/my-account/my-policies/" routerLinkActive="active">Back</a>
         </h2>
         <div class="accordion">
-            <accordion-item [opened]="true" [title]="'Policy Summary'">
+            <fsa-accordion-item [opened]="true" [title]="'Policy Summary'">
                 <ul class="accordion--list container-fluid">
                     <li class="accordion--list-item row">
                         <div class="col-6 col-sm-3 bold">
@@ -54,8 +54,8 @@
                         </div>
                     </li>
                 </ul>     
-            </accordion-item>
-            <accordion-item [title]="'Who or What Is Insured'">
+            </fsa-accordion-item>
+            <fsa-accordion-item [title]="'Who or What Is Insured'">
                 <ul class="accordion--list container-fluid" *ngIf="policy.insuredObjects">
                     <li *ngFor="let insuredObjectItem of policy.insuredObjects[0].insuredObjectItems" class="accordion--list-item row">
                         <div class="col-6 col-sm-3 bold">
@@ -66,8 +66,8 @@
                         </div>
                     </li>
                 </ul>
-            </accordion-item>
-            <accordion-item [title]="'Whats included'">
+            </fsa-accordion-item>
+            <fsa-accordion-item [title]="'Whats included'">
                 <ul class="accordion--list container-fluid" *ngIf="policy.mainProduct && policy.mainProduct.benefits">
                     <li *ngFor="let benefit of policy.mainProduct.benefits" class="accordion--list-item row">
                         <div class="col-6 col-sm-3 bold">
@@ -78,8 +78,8 @@
                         </div>
                     </li>
                 </ul>
-            </accordion-item>
-            <accordion-item [title]="'Optional Extras'">
+            </fsa-accordion-item>
+            <fsa-accordion-item [title]="'Optional Extras'">
                 <ul class="accordion--list container-fluid">
                     <li *ngFor="let optionalCoverage of policy.optionalProducts" class="accordion--list-item row">
                         <div class="col-6 col-sm-3 accordion-item__title bold">
@@ -93,8 +93,8 @@
                         </div>
                     </li>
                 </ul>
-            </accordion-item>
-            <accordion-item [title]="'What Does It Cost Me?'">
+            </fsa-accordion-item>
+            <fsa-accordion-item [title]="'What Does It Cost Me?'">
                 <ul class="accordion--list container-fluid">
                     <li class="accordion--list-item row">
                         <div class="col-6 col-sm-3 bold">
@@ -122,8 +122,8 @@
                         </div>
                     </li>
                 </ul>
-            </accordion-item>
-            <accordion-item [title]="'Documents'">
+            </fsa-accordion-item>
+            <fsa-accordion-item [title]="'Documents'">
                 <ul class="accordion--list container-fluid">
                     <li class="accordion-item__list-item row">
                         <div class="col-6 col-sm-3 bold">
@@ -137,8 +137,8 @@
                         </div>
                     </li>
                 </ul>   
-            </accordion-item>
-            <accordion-item *ngIf="policy.responsibleAgent" [title]="'My Agent'">
+            </fsa-accordion-item>
+            <fsa-accordion-item *ngIf="policy.responsibleAgent" [title]="'My Agent'">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="contact-box col-xs-10 col-sm-4 col-md-3">
@@ -147,7 +147,7 @@
                         </div>
                     </div>
                 </div>
-            </accordion-item>
+            </fsa-accordion-item>
         </div>
     </ng-container>
 </div>

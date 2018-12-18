@@ -22,7 +22,7 @@
         }
     }
     .value {
-        @media(max-width: $screen-xs-max) {
+        @include media-breakpoint-down(xs) {
           text-align: right;
         }
     }
@@ -35,7 +35,7 @@
             padding: 30px 46px 20px;
             opacity: 1;
             height: auto;
-            @media (max-width: $screen-xs-max) {
+            @include media-breakpoint-down(xs) {
                 padding: 25px 0 20px;
             }
         }
@@ -47,7 +47,7 @@
 		@include box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 0.3);
 		padding: 20px 0;
 		margin: 0 4% 70px;
-		@media (max-width: $screen-sm) {
+		@include media-breakpoint-down(sm) {
 			padding: 25px 0 20px;
         }
         .contact-info {

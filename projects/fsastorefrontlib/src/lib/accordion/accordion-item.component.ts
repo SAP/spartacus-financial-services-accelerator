@@ -1,7 +1,7 @@
 import { Component, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'accordion-item',
+  selector: 'fsa-accordion-item',
   templateUrl: './accordion-item.component.html',
   styleUrls: ['./accordion-item.component.scss']
 })
