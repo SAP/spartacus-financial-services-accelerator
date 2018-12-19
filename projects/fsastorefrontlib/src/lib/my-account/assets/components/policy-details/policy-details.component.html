@@ -73,8 +73,11 @@
                         <div class="col-6 col-sm-3 bold">
                             {{benefit.name}}
                         </div>
-                        <div class="col-6 col-sm-3 value notice notice--dark">
+                        <div *ngIf="benefit.coverageValue" class="col-6 col-sm-3 value notice notice--dark">
                             {{benefit.coverageValue}}
+                        </div>
+                        <div *ngIf="!benefit.coverageValue && benefit.coverageInformation" class="col-6 col-sm-3 value notice notice--dark">
+                            {{benefit.coverageInformation}}
                         </div>
                     </li>
                 </ul>
@@ -95,13 +98,14 @@
                 </ul>
             </fsa-accordion-item>
             <fsa-accordion-item *ngIf="policy.mainProduct?.investmentInfo" [title]="'Investment Details'">
-                <ul *ngFor="let investmentInfoItem of policy.mainProduct?.investmentInfo" class="accordion--list container-fluid">
+                <ul class="accordion--list container-fluid">
+                    <ng-container *ngFor="let investmentInfoItem of policy.mainProduct?.investmentInfo">
                         <li  class="accordion--list-item row">
                             <div class="col-6 col-sm-3 accordion-item__title bold">
-                                    {{investmentInfoItem.investmentType?.fundName}}
+                                {{investmentInfoItem.investmentType?.fundName}}
                             </div>
                             <div class="col-6 col-sm-3 notice notice--dark">
-                                    {{investmentInfoItem.distributionPercentage}}&#37;
+                                {{investmentInfoItem.distributionPercentage}}&#37;
                             </div>
                         </li>
                         <li class="accordion--list-item row">
@@ -128,7 +132,8 @@
                                 {{investmentInfoItem.investmentType?.riskReturningRating}}
                             </div>
                         </li>
-                    </ul>
+                    </ng-container> 
+                </ul>
             </fsa-accordion-item>
             <fsa-accordion-item [title]="'What Does It Cost Me?'">
                 <ul class="accordion--list container-fluid">
