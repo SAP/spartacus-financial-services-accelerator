@@ -94,6 +94,42 @@
                     </li>
                 </ul>
             </fsa-accordion-item>
+            <fsa-accordion-item *ngIf="policy.mainProduct?.investmentInfo" [title]="'Investment Details'">
+                <ul *ngFor="let investmentInfoItem of policy.mainProduct?.investmentInfo" class="accordion--list container-fluid">
+                        <li  class="accordion--list-item row">
+                            <div class="col-6 col-sm-3 accordion-item__title bold">
+                                    {{investmentInfoItem.investmentType?.fundName}}
+                            </div>
+                            <div class="col-6 col-sm-3 notice notice--dark">
+                                    {{investmentInfoItem.distributionPercentage}}&#37;
+                            </div>
+                        </li>
+                        <li class="accordion--list-item row">
+                            <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                                ISIN
+                            </div>
+                            <div class="col-xs-6 col-sm-3 notice notice--dark">
+                                {{investmentInfoItem.investmentType?.isin}}
+                            </div>
+                        </li>
+                        <li class="accordion--list-item row">
+                            <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                                5 Year Performance
+                            </div>
+                            <div class="col-xs-6 col-sm-3 notice notice--dark">
+                                {{investmentInfoItem.investmentType?.fiveYearPerformance}}&#37;
+                            </div>
+                        </li>
+                            <li class="accordion--list-item row">
+                            <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                                Risk & Returning Rating
+                            </div>
+                            <div class="col-xs-6 col-sm-3 notice notice--dark">
+                                {{investmentInfoItem.investmentType?.riskReturningRating}}
+                            </div>
+                        </li>
+                    </ul>
+            </fsa-accordion-item>
             <fsa-accordion-item [title]="'What Does It Cost Me?'">
                 <ul class="accordion--list container-fluid">
                     <li class="accordion--list-item row">
@@ -111,7 +147,6 @@
                         <div class="col-6 col-sm-3 value notice notice--dark">
                                 {{policy.paymentFrequency}}
                         </div>
-                        <div class="col-xs-12 col-sm-6 "></div>
                     </li>
                     <li class="accordion--list-item row">
                         <div class="col-6 col-sm-3 bold">
@@ -147,7 +182,7 @@
                         </div>
                     </div>
                 </div>
-            </fsa-accordion-item>
+            </fsa-accordion-item> 
         </div>
     </ng-container>
 </div>
