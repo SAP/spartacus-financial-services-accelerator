@@ -9,8 +9,8 @@ import { reducerProvider, reducerToken } from './assets/store/reducers';
 
 @NgModule({
   imports: [
-    QuotesModule, 
-    PoliciesModule, 
+    QuotesModule,
+    PoliciesModule,
     ClaimsModule,
     StoreModule.forFeature('assets', reducerToken),
     EffectsModule.forFeature(effects)

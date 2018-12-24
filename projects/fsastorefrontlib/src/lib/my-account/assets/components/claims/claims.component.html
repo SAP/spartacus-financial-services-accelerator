@@ -1,63 +1,65 @@
 <ng-container *ngIf="(claims$ | async) as claims">
-  <div class="row" *ngIf="claims?.claims?.length > 0; else: noClaims">
-    <div *ngFor="let claim of claims.claims" class="col-xs-12 col-sm-6 col-md-4 cards">
-      <div class="cards__wrapper cards__wrapper--border-primary">
-        <div class="account-cards-actions" *ngIf="claim.claimStatus == 'OPEN' || claim.claimStatus == 'REJECTED'">
-          <a class="action-links action-links-secondary-button" (click)="deleteClaim(claim.claimNumber)">x</a>
-        </div>
-        <div class="cards__title cards__title--border-primary">
-          <span class="images images__wrapper">
-            <span class="images images__wrapper images__wrapper--size">
-                <img *ngIf="claim.incidentType != undefined; else: noIncidentType"
-                  class="images__size"
-                  [src]="getBaseUrl() + claim.incidentType?.icon.url"
-                  alt="{{claim.incidentType?.icon.alt}}"
-                />
+  <ng-container *ngIf="claimsLoaded$ | async; else loading">
+    <div class="row" *ngIf="claims?.claims?.length > 0; else: noClaims">
+      <div *ngFor="let claim of claims.claims" class="col-xs-12 col-sm-6 col-md-4 cards">
+        <div class="cards__wrapper cards__wrapper--border-primary">
+          <div class="account-cards-actions" *ngIf="claim.claimStatus == 'OPEN' || claim.claimStatus == 'REJECTED'">
+            <a class="action-links action-links-secondary-button" (click)="deleteClaim(claim.claimNumber)">x</a>
+          </div>
+          <div class="cards__title cards__title--border-primary">
+            <span class="images images__wrapper">
+              <span class="images images__wrapper images__wrapper--size">
+                  <img *ngIf="claim.incidentType != undefined; else: noIncidentType"
+                    class="images__size"
+                    [src]="getBaseUrl() + claim.incidentType?.icon.url"
+                    alt="{{claim.incidentType?.icon.alt}}"
+                  />
+              </span>
             </span>
-          </span>
-          <h3 class="cards__caption cards__caption--color-primary">
-            <span *ngIf="claim.incidentType != undefined; else: na">
-              {{ claim.incidentType?.incidentName }}
-            </span>
-          </h3>
-          <h4 class="cards__caption cards__caption--color-primary">
-            {{ claim.claimNumber }}
-          </h4>
-        </div>
-        <div class="cards__details-wrapper">
-          <div class="cards__data">
-            <span class="title">{{ claim.insurancePolicy?.categoryData?.name }}</span>
-            <span class="value">{{ claim.insurancePolicy?.policyNumber }}</span>
+            <h3 class="cards__caption cards__caption--color-primary">
+              <span *ngIf="claim.incidentType != undefined; else: na">
+                {{ claim.incidentType?.incidentName }}
+              </span>
+            </h3>
+            <h4 class="cards__caption cards__caption--color-primary">
+              {{ claim.claimNumber }}
+            </h4>
           </div>
-          <div class="cards__data">
-            <span class="title">Date of Loss</span>
-            <span class="value" *ngIf="claim.dateOfLoss != undefined; else: na">{{ claim.dateOfLoss }}</span>
-          </div>
-          <div class="cards__data">
-            <span class="title">Status</span>
-            <span class="value ">{{ claim.claimStatus }}</span>
-          </div>
-          <div class="cards__data">
-            <span class="title">Claim Handler</span>
-            <span class="value">
-              <span class="value" *ngIf="claim.claimHandler?.displayName != undefined; else: na">{{ claim.claimHandler.displayName }}</span> <br />
-              <span class="value" *ngIf="claim.claimHandler?.email != undefined; else: na">{{ claim.claimHandler.email }}</span>
-            </span>
-          </div>
-        </div>
-        <div class="cards-button-wrapper cards-button-wrapper--border-primary">
-          <div class="cards__button" *ngIf="claim.claimStatus == 'OPEN' || claim.claimStatus == 'REJECTED'; else: details">
-            <a href="#" type="submit" class="secondary-button secondary-button__default secondary-button__account-policies">Resume</a>
-          </div>
-          <ng-template #details>
-            <div class="cards__button">
-              <a href="#" type="submit" class="secondary-button secondary-button__default secondary-button__account-policies">Details</a>
+          <div class="cards__details-wrapper">
+            <div class="cards__data">
+              <span class="title">{{ claim.insurancePolicy?.categoryData?.name }}</span>
+              <span class="value">{{ claim.insurancePolicy?.policyNumber }}</span>
             </div>
-          </ng-template>
+            <div class="cards__data">
+              <span class="title">Date of Loss</span>
+              <span class="value" *ngIf="claim.dateOfLoss != undefined; else: na">{{ claim.dateOfLoss }}</span>
+            </div>
+            <div class="cards__data">
+              <span class="title">Status</span>
+              <span class="value ">{{ claim.claimStatus }}</span>
+            </div>
+            <div class="cards__data">
+              <span class="title">Claim Handler</span>
+              <span class="value">
+                <span class="value" *ngIf="claim.claimHandler?.displayName != undefined; else: na">{{ claim.claimHandler.displayName }}</span> <br />
+                <span class="value" *ngIf="claim.claimHandler?.email != undefined; else: na">{{ claim.claimHandler.email }}</span>
+              </span>
+            </div>
+          </div>
+          <div class="cards-button-wrapper cards-button-wrapper--border-primary">
+            <div class="cards__button" *ngIf="claim.claimStatus == 'OPEN' || claim.claimStatus == 'REJECTED'; else: details">
+              <a href="#" type="submit" class="secondary-button secondary-button__default secondary-button__account-policies">Resume</a>
+            </div>
+            <ng-template #details>
+              <div class="cards__button">
+                <a href="#" type="submit" class="secondary-button secondary-button__default secondary-button__account-policies">Details</a>
+              </div>
+            </ng-template>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 </ng-container>
 <ng-template #noClaims>
   <h3>{{ noClaimsText }}</h3>
@@ -67,4 +69,7 @@
 </ng-template>
 <ng-template #noIncidentType>
   <img class="images__size" [src]="getNaImagelink()" alt="">
+</ng-template>
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
 </ng-template>
