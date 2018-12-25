@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CmsModule } from '../../../cms/cms.module';
-import { ProductModule } from '../../../product/product.module';
+import { CmsModule } from '@spartacus/core';
+import { ProductModule } from '@spartacus/core';
+import { ProductDetailsPageLayoutComponent } from '@spartacus/storefront';
 
-import { ProductDetailsPageLayoutComponent } from './product-details-page-layout.component';
 
 @NgModule({
   imports: [CmsModule, ProductModule],

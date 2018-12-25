@@ -4,7 +4,9 @@ import * as fromUserStore from '../../../my-account/assets/store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
 import { PolicyService } from '../../../my-account/assets/services/policy.service';
-import { AuthService } from '@spartacus/storefront';
+import {AuthService} from '@spartacus/core';
+import {CmsViewPoliciesComponent} from './../../../occ-models/cms-component.models'
+
 
 @Component({
     selector: 'fsa-view-policies',
@@ -16,7 +18,7 @@ import { AuthService } from '@spartacus/storefront';
 export class CMSViewPoliciesComponent implements OnInit {
 
     constructor(
-        protected componentData: CmsComponentData,
+        protected componentData: CmsComponentData<CmsViewPoliciesComponent>,
         private store: Store<fromUserStore.UserState>,
         private config: OccConfig,
         private policyService: PolicyService,
@@ -35,7 +37,7 @@ export class CMSViewPoliciesComponent implements OnInit {
     allPoliciesDisplayed$ = false;
 
     ngOnInit() {
-        this.authService.userToken$.subscribe(token => {
+        this.authService.getUserToken().subscribe(token => {
             if (token.userId !== undefined) {
                 this.policyService.loadPolicies();
                 this.policies$ = this.store.pipe(select(fromUserStore.getPolicies));

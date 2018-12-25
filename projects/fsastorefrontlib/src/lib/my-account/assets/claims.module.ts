@@ -8,7 +8,6 @@ import { ClaimsComponent } from './components/claims/claims.component';
 import { DeleteClaimDialogComponent } from '../assets/components/claims/delete-claim-dialog/delete-claim-dialog.component';
 import { ClaimService } from './services/claim.service';
 import { ClaimDataService } from './services/claim-data.service';
-import { BootstrapModule } from 'projects/storefrontlib/src/lib/bootstrap.module';
 import { OccClaimService } from '../../occ/claim/claim.service';
 
 import { ComponentsModule } from '@spartacus/storefront';
@@ -19,7 +18,6 @@ import { ComponentsModule } from '@spartacus/storefront';
     RouterModule,
     FormsModule,
     NgSelectModule,
-    BootstrapModule,
     ComponentsModule
   ],
   declarations: [ClaimsComponent, DeleteClaimDialogComponent],
