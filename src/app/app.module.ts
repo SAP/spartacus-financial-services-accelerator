@@ -16,9 +16,7 @@ import { FSAStorefrontModule } from '@fsa/storefront';
       },
       site: {
         baseSite: 'insurance'
-      }
-    }),
-      FSAStorefrontModule.withCmsConfig({
+      },
       authentication: {
         client_id: 'financial_customer',
         client_secret: 'secret'
