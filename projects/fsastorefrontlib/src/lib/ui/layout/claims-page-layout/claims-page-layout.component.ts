@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as fromClaimStore from '../../../my-account/applications/store';
+import * as fromClaimStore from '../../../my-account/assets/store';
 import { Store } from '@ngrx/store';
-import { ClaimService } from '../../../my-account/applications/services/claim.service';
+import { ClaimService } from '../../../my-account/assets/services/claim.service';
 
 
 @Component({
@@ -12,7 +12,7 @@ import { ClaimService } from '../../../my-account/applications/services/claim.se
 export class ClaimsPageLayoutComponent implements OnInit {
 
   constructor(
-    protected store: Store<fromClaimStore.ClaimState>,
+    protected store: Store<fromClaimStore.UserState>,
     protected claimService: ClaimService
   ) {}
 

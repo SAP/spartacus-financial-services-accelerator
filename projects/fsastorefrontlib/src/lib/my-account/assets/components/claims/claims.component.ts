@@ -1,0 +1,59 @@
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { DeleteClaimDialogComponent } from './delete-claim-dialog/delete-claim-dialog.component';
+import * as fromClaimStore from '../../store';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { OccConfig } from '@spartacus/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { naIconImgSrc } from '../../../../assets/na-icon';
+
+
+
+@Component({
+  selector: 'fsa-claims',
+  templateUrl: './claims.component.html',
+  styleUrls: ['./claims.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+
+export class ClaimsComponent implements OnInit {
+  constructor(
+    private modalService: NgbModal,
+    protected store: Store<fromClaimStore.UserState>,
+    private config: OccConfig,
+    private domSanitizer: DomSanitizer
+  ) {}
+
+  naIconImgSrc = naIconImgSrc;
+  claims$;
+  claimsLoaded$;
+
+  modalInstance;
+  noClaimsText = 'You have no Claims!';
+  notAvailable = 'N/A';
+
+  ngOnInit() {
+    this.claims$ = this.store.pipe(select(fromClaimStore.getClaims));
+    this.claimsLoaded$ = this.store.pipe(select(fromClaimStore.getClaimsLoaded));
+  }
+
+  deleteClaim(claimNumber: string) {
+    this.openModal(claimNumber);
+  }
+
+  getNaImagelink() {
+    return this.domSanitizer.bypassSecurityTrustUrl(naIconImgSrc);
+  }
+
+  private openModal(claimNumber: string) {
+    this.modalInstance = this.modalService.open(DeleteClaimDialogComponent, {
+      centered: true,
+      size: 'lg'
+    }).componentInstance;
+    this.modalInstance.claimNumber = claimNumber;
+  }
+
+  public getBaseUrl() {
+    return this.config.server.baseUrl || '';
+  }
+}

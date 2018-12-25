@@ -1,14 +1,34 @@
+//Mixin for linear gradient background
 @import '../mixins-fsa';
 @import '../variables-fsa';
 
-//CSS Reset
-button:focus {
-  outline: none;
+body {
+  font-size: 14px;
 }
+$screen-sm: 768px;
+$screen-xs-max: 639px;
+$screen-sm-mid: 768px;
+$screen-xxs: 380px;
 .center1400 {
   max-width: 1400px;
   width: 100%;
   margin: 0 auto;
+}
+.contentPadding {
+  padding: 20px 10px 0 10px;
+}
+//CSS Reset
+button:focus {
+  outline: none;
+}
+$border-grey: 1px solid $color-grey;
+@mixin transition {
+  transition: all 300ms ease;
+}
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 a {
   @include transition();
@@ -28,6 +48,22 @@ a {
   text-align: center;
   padding: 6px;
 }
+.notice {
+  color: $color-blue;
+  font-weight: bold;
+  &--dark {
+    color: $color-button-secondary-hover;
+  }
+}
+.circle-image {
+  background-color: $color-banking-dark-blue;
+  border-radius: 50%;
+  @include box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 70%);
+  margin: 0 25px;
+}
+/* *********************************************************** */
+/* ************************ Cards ************************* */
+/* ********************************************************* */
 .cards {
   color: $color-dark-grey;
   &__wrapper {
@@ -198,3 +234,70 @@ a {
 /* ************************************************************* */
 /* ************************ Buttons end ************************ */
 /* ************************************************************* */
+/*******MY ACCOUNT - POLICIES DETAILS START********/
+.policy-spec {
+  &.account-section-content__headline {
+    padding-bottom: 10px;
+    text-align: center;
+    overflow: hidden;
+    text-transform: capitalize;
+    font-size: 36px;
+    color: $color-dark-blue;
+    position: relative;
+    @media (max-width: $screen-xs-max) {
+        margin-top:0px;
+    }
+    .images__wrapper {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      left:0;
+      background-color: transparent;
+    }
+  }
+  .account-section-content__headline {
+    &--title {
+      display: block;
+      color: $color-dark-grey;
+      font-size: 22px;
+      font-weight: 600;
+      @media (max-width: $screen-xs-max) {
+        font-size:22px;
+        line-height:30px;
+        width: 70%;
+          margin: 0 auto;
+      }
+    }
+    &--number {
+      display: block;
+      font-size: 22px;
+      border-bottom: $border-grey;
+        color: $color-dark-grey;
+        padding-bottom: 10px;
+        font-weight: 600;
+      @media (max-width: $screen-xs-max) {
+        font-size: 20px;
+      }
+    }
+    &--back {
+      // .glyphicon-chevron-left;
+      top: 50%;
+      right: 48px;
+      position: absolute;
+      transform: translateY(-50%);
+      background: transparent;
+      color: $color-dark-blue;
+      &:before {
+        //@include glyphicon;
+        @include transition;
+        float: right;
+        font-size: 20px;
+      }
+      @media (max-width: $screen-xs-max) {
+        right: 11px;
+      }
+    }
+  }
+}
+	
+/*********MY ACCOUNT - POLICIES DETAILS END********/

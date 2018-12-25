@@ -22,10 +22,29 @@ export class OccPolicyService {
     );
   }
 
+  protected getPolicyEndpoint(userId: string, policyId: string, contractId: string) {
+    const policyEndpoint = '/users/' + userId + '/policies/' + policyId + '/contracts/' + contractId;
+    return (
+      (this.config.server.baseUrl || '') +
+      this.config.server.occPrefix +
+      this.config.site.baseSite +
+      policyEndpoint
+    );
+  }
+
   public getPolicies(userId: string): Observable<any> {
     const url = this.getPoliciesEndpoint(userId);
     const params = new HttpParams();
 
+    return this.http
+      .get(url, { params: params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  public getPolicy(userId: string, policyId: string, contractId: string): Observable<any> {
+    const url = this.getPolicyEndpoint(userId, policyId, contractId);
+    const params = new HttpParams();
+    
     return this.http
       .get(url, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
