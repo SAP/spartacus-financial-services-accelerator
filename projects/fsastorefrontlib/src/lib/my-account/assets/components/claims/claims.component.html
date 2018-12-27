@@ -3,7 +3,7 @@
     <div class="row" *ngIf="claims?.claims?.length > 0; else: noClaims">
       <div *ngFor="let claim of claims.claims" class="col-xs-12 col-sm-6 col-md-4 cards">
         <div class="cards__wrapper cards__wrapper--border-primary">
-          <div class="account-cards-actions" *ngIf="claim.claimStatus == 'OPEN' || claim.claimStatus == 'REJECTED'">
+          <div class="account-cards-actions" *ngIf="claim.claimStatus === 'OPEN' || claim.claimStatus === 'ERROR'">
             <a class="action-links action-links-secondary-button" (click)="deleteClaim(claim.claimNumber)">x</a>
           </div>
           <div class="cards__title cards__title--border-primary">
