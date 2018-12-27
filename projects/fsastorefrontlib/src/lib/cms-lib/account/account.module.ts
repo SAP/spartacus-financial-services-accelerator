@@ -5,11 +5,14 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { effects } from '../../my-account/assets/store';
+import {LogoutModule} from "./logout/logout.module";
+
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
+    LogoutModule,
     EffectsModule.forFeature(effects)
   ],
   declarations: [ CMSViewPoliciesComponent, CMSViewQuotesComponent],
