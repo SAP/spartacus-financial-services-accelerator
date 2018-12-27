@@ -6,6 +6,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { CMSViewPoliciesComponent } from './view-policies/view-policies.component';
 import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
 import { effects } from '../../my-account/assets/store';
+import {LogoutModule} from './logout/logout.module';
+
 
 import { ComponentsModule } from '@spartacus/storefront';
 
@@ -13,6 +15,7 @@ import { ComponentsModule } from '@spartacus/storefront';
   imports: [
     CommonModule,
     RouterModule,
+    LogoutModule,
     EffectsModule.forFeature(effects),
     ComponentsModule
   ],
