@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { LoginComponent } from '@spartacus/storefront';
 
 @Component({
-  templateUrl: './logout.component.html',
+  template: '',
 })
 export class LogoutComponent extends LoginComponent{
 
