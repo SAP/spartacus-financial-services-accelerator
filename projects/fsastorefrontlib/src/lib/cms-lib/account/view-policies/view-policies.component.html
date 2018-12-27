@@ -1,21 +1,23 @@
 <ng-container *ngIf="component$ | async as component">
-<div *ngIf="!anonymous$; else anonymousLogin">
-    <div *ngIf="policies$ | async as policies">
-        <div class="review__wrapper">
-            <div class="review__policies" *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
-                <div class="my-policies">
-                    <h2 class="my-policies__title">View Policies</h2>
-                    <ul>
-                        <ng-container *ngTemplateOutlet="policiesList; context:{policies: policies, max: (allPoliciesDisplayed$ ? policies?.insurancePolicies?.length : component.numberOfPoliciesToDisplay)}"></ng-container>
-                    </ul>
-                    <div *ngIf = "policies?.insurancePolicies?.length > component.numberOfPoliciesToDisplay">
-                        <ng-container *ngTemplateOutlet="showAllPoliciesButton context: {showAll: (allPoliciesDisplayed$ ? false : true)}"></ng-container>
-                    </div>  
+    <div *ngIf="!anonymous$; else anonymousLogin">
+        <ng-container *ngIf="policiesLoaded$ | async; else loading">
+            <div *ngIf="policies$ | async as policies">
+                <div class="review__wrapper">
+                    <div class="review__policies" *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
+                        <div class="my-policies">
+                            <h2 class="my-policies__title">View Policies</h2>
+                            <ul>
+                                <ng-container *ngTemplateOutlet="policiesList; context:{policies: policies, max: (allPoliciesDisplayed$ ? policies?.insurancePolicies?.length : component.numberOfPoliciesToDisplay)}"></ng-container>
+                            </ul>
+                            <div *ngIf = "policies?.insurancePolicies?.length > component.numberOfPoliciesToDisplay">
+                                <ng-container *ngTemplateOutlet="showAllPoliciesButton context: {showAll: (allPoliciesDisplayed$ ? false : true)}"></ng-container>
+                            </div>  
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
+        </ng-container>
     </div>
-</div>
 </ng-container>
 
 <ng-template #policiesList let-policies="policies" let-max="max">
@@ -56,3 +58,6 @@
     </a>
 </ng-template>
 
+<ng-template #loading>
+    <cx-spinner></cx-spinner>
+</ng-template>

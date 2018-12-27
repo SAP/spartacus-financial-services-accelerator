@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { LogoutComponent } from './logout.component';
-import { RouterModule, Routes } from "@angular/router";
-import { AuthGuard, CmsPageGuards } from "@spartacus/storefront";
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard, CmsPageGuards } from '@spartacus/storefront';
 
 const routes: Routes = [
   {

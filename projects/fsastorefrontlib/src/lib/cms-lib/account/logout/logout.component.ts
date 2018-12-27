@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LoginComponent } from "@spartacus/storefront";
+import { LoginComponent } from '@spartacus/storefront';
 
 @Component({
   templateUrl: './logout.component.html',

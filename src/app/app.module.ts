@@ -21,10 +21,10 @@ import { FSAStorefrontModule } from '@fsa/storefront';
         client_id: 'financial_customer',
         client_secret: 'secret'
       },
-      cmsComponentMapping: {
-        CMSViewPoliciesComponent: 'fsa-view-policies',
-        CMSViewQuotesComponent: 'fsa-view-quotes',
-        EnrichedResponsiveBannerComponent: 'fsa-enriched-responsive-banner'
+      cmsComponents: {
+        EnrichedResponsiveBannerComponent: { selector: 'fsa-enriched-responsive-banner' },
+        CMSViewPoliciesComponent: { selector: 'fsa-view-policies' },
+        CMSViewQuotesComponent: { selector: 'fsa-view-quotes' },
       }
     })
   ],

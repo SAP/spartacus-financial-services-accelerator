@@ -26,12 +26,6 @@
       ],
       "fsastorefrontlib/*": [
         "dist/fsastorefrontlib/*"
-      ],//SHOULD BE REMOVED ONCE SPARTACUS CONTENT IS AVAILABLE ON NPM (STOREFRONT, STYLES, MODULE)
-      "@spartacus/core": [
-        "projects/core/public_api"
-      ],
-      "@spartacus/storefront": [
-        "projects/storefrontlib/src/public_api"
       ]
     }
   }

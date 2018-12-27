@@ -1,18 +1,20 @@
 <ng-container *ngIf="component$ | async as component">
     <div *ngIf="!anonymous$; else anonymousLogin">
-        <div *ngIf="quotes$ | async as quotes"  class="review__wrapper">
-            <div class="review__quote" *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes">
-                <div class="my-quotes">
-                    <h2 class="my-quotes__title">Retrieve Quotes</h2>
-                        <ul>
-                            <ng-container *ngTemplateOutlet="quoteList; context:{quotes: quotes, max: (allQuotesDisplayed$ ? quotes?.insuranceQuotes?.length : component.numberOfQuotesToDisplay)}"></ng-container>
-                        </ul>
-                         <div *ngIf = "quotes?.insuranceQuotes?.length > component.numberOfQuotesToDisplay">
-                              <ng-container *ngTemplateOutlet="showAllQuotesButton context: {showAll: (allQuotesDisplayed$ ? false : true)}"></ng-container>
-                         </div>   
-                 </div>
+        <ng-container *ngIf="quotesLoaded$ | async; else loading">
+            <div *ngIf="quotes$ | async as quotes"  class="review__wrapper">
+                <div class="review__quote" *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes">
+                    <div class="my-quotes">
+                        <h2 class="my-quotes__title">Retrieve Quotes</h2>
+                            <ul>
+                                <ng-container *ngTemplateOutlet="quoteList; context:{quotes: quotes, max: (allQuotesDisplayed$ ? quotes?.insuranceQuotes?.length : component.numberOfQuotesToDisplay)}"></ng-container>
+                            </ul>
+                            <div *ngIf = "quotes?.insuranceQuotes?.length > component.numberOfQuotesToDisplay">
+                                <ng-container *ngTemplateOutlet="showAllQuotesButton context: {showAll: (allQuotesDisplayed$ ? false : true)}"></ng-container>
+                            </div>   
+                    </div>
+                </div>
             </div>
-        </div>
+        </ng-container>
     </div>
 </ng-container>
 
@@ -52,4 +54,8 @@
     <a routerLink="/login">
         <button class="primary-button primary-button__default primary-button__home">View your quotes</button>
     </a>
+</ng-template>
+
+<ng-template #loading>
+    <cx-spinner></cx-spinner>
 </ng-template>

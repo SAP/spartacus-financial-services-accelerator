@@ -3,8 +3,9 @@ import { CmsComponentData } from '@spartacus/storefront';
 import * as fromQuoteStore from '../../../my-account/assets/store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
+import { AuthService } from '@spartacus/core';
+import {CmsViewQuotesComponent} from './../../../occ-models/cms-component.models'
 import { QuoteService } from '../../../my-account/assets/services/quote.service';
-import { AuthService } from '@spartacus/storefront';
 
 
 @Component({
@@ -16,7 +17,7 @@ import { AuthService } from '@spartacus/storefront';
 export class CMSViewQuotesComponent implements OnInit {
 
     constructor(
-        protected componentData: CmsComponentData,
+        protected componentData: CmsComponentData<CmsViewQuotesComponent>,
         protected authService: AuthService,
         private store: Store<fromQuoteStore.UserState>,
         private config: OccConfig,
@@ -32,7 +33,7 @@ export class CMSViewQuotesComponent implements OnInit {
     quoteButtonText;
     allQuotesDisplayed$ = false;
     ngOnInit() {
-        this.authService.userToken$.subscribe(token => {
+        this.authService.getUserToken().subscribe(token => {
             if (token.userId !== undefined) {
                 this.quoteService.loadQuotes();
                 this.quotes$ = this.store.pipe(select(fromQuoteStore.getQuotes));
