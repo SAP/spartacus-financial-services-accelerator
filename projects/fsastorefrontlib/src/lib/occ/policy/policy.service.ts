@@ -41,10 +41,19 @@ export class OccPolicyService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
+  public getPremiumCalendar(userId: string): Observable<any> {
+    const url = this.getPoliciesEndpoint(userId) + '/premium-calendar';
+    const params = new HttpParams();
+
+    return this.http
+      .get(url, { params: params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
   public getPolicy(userId: string, policyId: string, contractId: string): Observable<any> {
     const url = this.getPolicyEndpoint(userId, policyId, contractId);
     const params = new HttpParams();
-    
+
     return this.http
       .get(url, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));

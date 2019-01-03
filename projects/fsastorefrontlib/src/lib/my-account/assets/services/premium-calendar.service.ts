@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 
 
 @Injectable()
-export class PolicyService {
+export class PremiumCalendarService {
   constructor(
     private store: Store<fromReducer.UserState>,
     private policyData: PolicyDataService,
@@ -21,12 +21,12 @@ export class PolicyService {
 
   callback: Function;
 
-  readonly policyDetails$: Observable<any> = this.store.pipe(
-    select(fromStore.getPolicyDetails)
+  readonly premiumCalendarData$: Observable<any> = this.store.pipe(
+    select(fromStore.getPremiumCalendar)
   );
 
   initPolicies() {
-    this.store.pipe(select(fromSelector.getPolicies)).subscribe(policies => {
+    this.store.pipe(select(fromSelector.getPremiumCalendar)).subscribe(policies => {
       if (policies) {
         this.policyData.policies = policies;
       }
@@ -42,10 +42,10 @@ export class PolicyService {
       }
     });
 
-    this.store.pipe(select(fromSelector.getPoliciesRefresh)).subscribe(refresh => {
+    this.store.pipe(select(fromSelector.getPremiumCalendarRefresh)).subscribe(refresh => {
       if (refresh) {
         this.store.dispatch(
-          new fromAction.LoadPolicies({
+          new fromAction.LoadPremiumCalendar({
             userId: this.policyData.userId
           })
         );
@@ -53,21 +53,11 @@ export class PolicyService {
     });
   }
 
-  loadPolicies() {
+  loadPremiumCalendar() {
         this.store.dispatch(
-          new fromAction.LoadPolicies({
-            userId: this.policyData.userId,
+          new fromAction.LoadPremiumCalendar({
+            userId: this.policyData.userId
           })
         );
-  }
-
-  loadPolicyDetails(policyId, contractId) {
-    this.store.dispatch(
-      new fromAction.LoadPolicyDetails({
-        userId: this.policyData.userId,
-        policyId: policyId,
-        contractId: contractId
-      })
-    );
   }
 }
