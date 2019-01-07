@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import * as fromPolicyStore from '../../store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
@@ -10,7 +10,6 @@ import { OccConfig } from '@spartacus/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PremiumCalendarComponent implements OnInit {
-
   constructor(
     private store: Store<fromPolicyStore.UserState>,
     private config: OccConfig

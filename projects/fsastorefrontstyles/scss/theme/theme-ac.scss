@@ -17,23 +17,34 @@ $screen-xxs: 380px;
 .contentPadding {
   padding: 20px 10px 0 10px;
 }
+.heading-headline {
+  line-height: 35px;
+    padding: 20px 0;
+    text-align: left;
+    margin-bottom: 30px;
+    color: $color-dark-blue;
+    font-size: 24px;
+    font-weight: 700;
+    border-bottom: 1px solid $color-grey;
+}
+.gradient-heading {
+  color: $color-white;
+  font-size: 20px;
+  line-height: 55px;
+  @include ellipsis;
+  @include linear-gradient-background( $color-blue, $color-banking-darkest-blue, 50%, 100% );
+}
+.clickable {
+  cursor: pointer;
+}
 //CSS Reset
 button:focus {
   outline: none;
 }
 $border-grey: 1px solid $color-grey;
-@mixin transition {
-  transition: all 300ms ease;
-}
-@mixin ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 a {
   @include transition();
 }
-
 .images__size {
   width: 100%;
   height: 100%;
