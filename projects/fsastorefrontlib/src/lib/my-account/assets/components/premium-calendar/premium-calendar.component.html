@@ -30,7 +30,7 @@
                 {{policy.paymentFrequency}}
               </div>
               <div class="col" [ngClass]="(policy.billingData[0].paymentStatus == 'Overdue')?'warn':'notice'">
-                {{policy.billingData[0].billingDate | date}}
+                {{policy.billingData[0].billingDate}}
                 <div class="warn" *ngIf="policy.billingData[0].paymentStatus == 'Overdue'">
                   Overdue
                 </div>
@@ -42,19 +42,23 @@
                 {{policy.paymentMethod.paymentOption}}
               </div>
             </div>
-            <ng-container *ngFor="let dueDate of policy.billingData | slice:1">
-              <div class="premium-accordion row" *ngIf="policy.billingData.length > 1;" [ngClass]="policy.opened ? 'opened' : ''">
-                <div class="col"></div>
-                <div class="col"></div>
-                <div class="col color-dot">
-                  {{dueDate.billingDate | date}}
-                </div>
-                <div class="col color-dot">
-                  {{dueDate.paymentAmount}}
-                </div>
-                <div class="col"></div>
+            <div class="accordion row" *ngIf="policy.billingData.length > 1;"[ngClass]="policy.opened ? 'opened' : ''" >
+              <div class="container-fluid">
+                <ng-container *ngFor="let dueDate of policy.billingData | slice:1">
+                  <div class="premium-accordion row">
+                    <div class="col"></div>
+                    <div class="col"></div>
+                    <div class="col color-dot">
+                      {{dueDate.billingDate}}
+                    </div>
+                    <div class="col color-dot">
+                      {{dueDate.paymentAmount}}
+                    </div>
+                    <div class="col"></div>
+                  </div>
+                </ng-container>
               </div>
-            </ng-container>
+            </div>
           </div>
         </ng-container>
       </div><!-- End of Desktop Layout-->
@@ -81,7 +85,7 @@
                         Payment Frequency
                       </span>
                       <span class="value">
-                        {{policy.mainProduct?.coverageProduct?.name}}
+                        {{policy.paymentFrequency}}
                       </span>
                     </div>
                     <div class="container cards__data border-bottom-grey" (click)="policy.opened=!policy.opened" [ngClass]="{'clickable': policy.billingData.length > 1}">
@@ -108,20 +112,20 @@
                       </div>
                     </div>
                     <ng-container *ngIf="policy.billingData.length > 1;">
-                        <ul class="list-data premium-accordion" [ngClass]="policy.opened ? 'opened' : ''">
-                            <ng-container *ngFor="let dueDate of policy.billingData | slice:1">
-                                <li class=" list-data__list-item border-bottom-grey">
-                                    <div class="row">
-                                        <div class="col-6 text-left pl-5">
-                                            {{dueDate.billingDate | date}}
-                                        </div>
-                                        <div class="col-6 text-left pl-5">
-                                            {{dueDate.paymentAmount}}
-                                        </div>
-                                    </div>
-                                </li>
-                            </ng-container>
+                      <div class="accordion container" [ngClass]="policy.opened ? 'opened' : ''">
+                        <ul class="list-data premium-accordion">
+                          <ng-container *ngFor="let dueDate of policy.billingData | slice:1">
+                              <li class="row list-data__list-item border-bottom-grey">
+                                <div class="col-6 text-left pl-5">
+                                    {{dueDate.billingDate}}
+                                </div>
+                                <div class="col-6 text-left pl-5">
+                                    {{dueDate.paymentAmount}}
+                                </div>
+                              </li>
+                          </ng-container>
                         </ul>
+                      </div>
                     </ng-container>
                     <div class="cards__data">
                       <span class="title">
