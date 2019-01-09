@@ -5,6 +5,8 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { OccConfig } from '@spartacus/core';
 
+const FULL_PARAMS = 'fields=FULL';
+
 @Injectable()
 export class OccPolicyService {
   constructor(
@@ -43,7 +45,7 @@ export class OccPolicyService {
 
   public getPremiumCalendar(userId: string): Observable<any> {
     const url = this.getPoliciesEndpoint(userId) + '/premium-calendar';
-    const params = new HttpParams();
+    const params = new HttpParams({ fromString: FULL_PARAMS });
 
     return this.http
       .get(url, { params: params })
