@@ -22,7 +22,7 @@ export class PoliciesComponent implements OnInit {
   noPoliciesText = 'You have no Policies!';
 
   ngOnInit() {
-    this.policies$ = this.store.pipe(select(fromPolicyStore.getPolicies));
+    this.policies$ = this.store.pipe(select(fromPolicyStore.getPolicyData));
     this.policiesLoaded$ = this.store.pipe(select(fromPolicyStore.getPoliciesLoaded));
   }
 

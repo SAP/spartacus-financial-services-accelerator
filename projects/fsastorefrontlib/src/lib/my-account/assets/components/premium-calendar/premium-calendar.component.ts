@@ -21,8 +21,8 @@ export class PremiumCalendarComponent implements OnInit {
   noPoliciesText = 'You have no Policies!';
 
   ngOnInit() {
-    this.policies$ = this.store.pipe(select(fromPolicyStore.getPremiumCalendar));
-    this.policiesLoaded$ = this.store.pipe(select(fromPolicyStore.getPremiumCalendarLoaded));
+    this.policies$ = this.store.pipe(select(fromPolicyStore.getPolicyData));
+    this.policiesLoaded$ = this.store.pipe(select(fromPolicyStore.getPoliciesLoaded));
   }
 
   public getBaseUrl() {

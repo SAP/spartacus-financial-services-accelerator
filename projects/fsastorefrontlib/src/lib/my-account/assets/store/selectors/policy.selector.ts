@@ -11,9 +11,9 @@ export const getPoliciesState: MemoizedSelector<
   (policyState: fromFeature.UserState) => policyState.policies
 );
 
-export const getPolicies: MemoizedSelector<any, any> = createSelector(
+export const getPolicyData: MemoizedSelector<any, any> = createSelector(
   getPoliciesState,
-  fromPolicy.getPolicies
+  fromPolicy.getPolicyData
 );
 
 export const getPoliciesRefresh: MemoizedSelector<any, boolean> = createSelector(

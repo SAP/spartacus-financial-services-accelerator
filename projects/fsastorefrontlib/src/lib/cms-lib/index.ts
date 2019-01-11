@@ -1,1 +1,1 @@
-export * from './cms-lib.module'
+export * from './cms-lib.module';

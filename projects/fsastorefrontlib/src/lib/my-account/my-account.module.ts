@@ -6,19 +6,17 @@ import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { effects } from './assets/store/effects';
 import { reducerProvider, reducerToken } from './assets/store/reducers';
-import { PremiumCalendarModule } from './assets/premium-calendar.module';
 
 @NgModule({
   imports: [
     QuotesModule,
     PoliciesModule,
     ClaimsModule,
-    PremiumCalendarModule,
     StoreModule.forFeature('assets', reducerToken),
     EffectsModule.forFeature(effects)
   ],
   declarations: [],
-  exports: [QuotesModule, PoliciesModule, ClaimsModule, PremiumCalendarModule],
+  exports: [QuotesModule, PoliciesModule, ClaimsModule],
   providers: [reducerProvider]
 })
 export class MyAccountModule {

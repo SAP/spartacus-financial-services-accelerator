@@ -2,8 +2,7 @@ import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'fsa-accordion-item',
-  templateUrl: './accordion-item.component.html',
-  styleUrls: ['./accordion-item.component.scss']
+  templateUrl: './accordion-item.component.html'
 })
 export class AccordionItemComponent {
   @Input() opened = false;

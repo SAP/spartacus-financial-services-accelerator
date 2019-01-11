@@ -6,6 +6,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
 import { PoliciesComponent } from '../assets/components/policies/policies.component';
 import { PolicyDetailsComponent } from '../assets/components/policy-details/policy-details.component';
+import { PremiumCalendarComponent } from '../assets/components/premium-calendar/premium-calendar.component';
 import { PolicyService } from './services/policy.service';
 import { PolicyDataService } from './services/policy-data.service';
 import { OccPolicyService } from '../../occ/policy/policy.service';
@@ -22,8 +23,8 @@ import { ComponentsModule } from '@spartacus/storefront';
     AccordionModule,
     ComponentsModule
   ],
-  declarations: [PoliciesComponent, PolicyDetailsComponent],
-  exports: [PoliciesComponent, PolicyDetailsComponent],
+  declarations: [PoliciesComponent, PolicyDetailsComponent, PremiumCalendarComponent],
+  exports: [PoliciesComponent, PolicyDetailsComponent, PremiumCalendarComponent],
   providers: [PolicyService, PolicyDataService, OccPolicyService]
 })
 export class PoliciesModule { }

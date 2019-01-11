@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { PremiumCalendarService } from '../../../my-account/assets/services/premium-calendar.service';
+import { PolicyService } from '../../../my-account/assets/services/policy.service';
 
 @Component({
   selector: 'fsa-premium-calendar-page-layout',
-  templateUrl: './premium-calendar-page-layout.component.html',
-  styleUrls: ['./premium-calendar-page-layout.component.scss']
+  templateUrl: './premium-calendar-page-layout.component.html'
 })
 export class PremiumCalendarPageLayoutComponent implements OnInit {
   constructor(
-    protected premiumCalendarService: PremiumCalendarService
+    protected premiumCalendarService: PolicyService
   ) {}
 
   policies = 'Policies';
