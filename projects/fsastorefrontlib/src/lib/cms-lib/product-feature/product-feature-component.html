@@ -2,7 +2,8 @@
     <div class="product product-feature__wrapper product-feature__pro_property_homeowners_monthly">
         <h3 class="product-feature__title section-header__heading">{{component.title}}</h3>
         <div class="product-feature__image"></div>
-        <ul class="product-feature__details">
+        <ul class="product-feature__details" *ngIf="product$ | async as product">
+            {{product | json}}
             <li><p>Excess Waiver up to 500$</p></li>
             <li><p>Home Emergency Cover up to 5.000$</p></li>
             <li><p>Legal Expenses up to 50.000$</p></li>

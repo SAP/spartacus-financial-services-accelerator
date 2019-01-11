@@ -1,0 +1,26 @@
+@import 'mixins-fsa';
+@import 'variables-fsa';
+
+.cx-category-page-layout {
+    .category-promotion {
+        border: 1px solid $color-grey;
+        background-color: $color-light-grey;
+        overflow: hidden;
+        display: block;
+        margin: 40px 0;
+        padding: 0;
+        height: 100%;
+        cx-generic-link {
+            display: inline-block;
+            vertical-align: top;
+            width: 50%;
+            cursor: pointer;
+        }
+        cx-paragraph {
+            display: inline-block;
+            width: 50%;
+            vertical-align: top;
+            padding: 20px;
+        }
+    }
+}

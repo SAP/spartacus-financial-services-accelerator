@@ -1,5 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
+import { ProductService } from '@spartacus/core';
 import { CmsProductFeature } from './../../occ-models/cms-component.models';
 
 @Component({
@@ -12,10 +13,16 @@ export class ProductFeatureComponent implements OnInit {
     CmsComponent = Component;
     constructor(
         protected componentData: CmsComponentData<CmsProductFeature>,
+        protected productService: ProductService,
     ) { }
     component$;
+    product$;
+    productCode;
     ngOnInit() {
         this.component$ = this.componentData.data$;
-        console.log(this.component$);
+        this.component$.subscribe(data => {
+            this.productCode = data.product;
+        });
+        this.product$ = this.productService.get(this.productCode);
     }
 }
