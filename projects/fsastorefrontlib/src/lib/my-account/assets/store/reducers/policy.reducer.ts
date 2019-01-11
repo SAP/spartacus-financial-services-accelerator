@@ -1,17 +1,17 @@
 import * as fromAction from './../actions';
 
 export interface Policy {
-  policyId?: string;
+  policy: any;
 }
 
 export interface PolicyState {
-  policies: {};
+  data: {};
   refresh: boolean;
   loaded: boolean;
 }
 
 export const initialState: PolicyState = {
-  policies: {},
+  data: {},
   refresh: false,
   loaded: false
 };
@@ -21,20 +21,25 @@ export function reducer(
   action: fromAction.PolicyAction
 ): PolicyState {
   switch (action.type) {
-    case fromAction.LOAD_POLICIES_SUCCESS: {
-      const policies = { ...action.payload };
+    case fromAction.LOAD_POLICIES_SUCCESS:
+    case fromAction.LOAD_POLICY_DETAILS_SUCCESS:
+    case fromAction.LOAD_PREMIUM_CALENDAR_SUCCESS: {
+      const data = { ...action.payload };
       return {
         ...state,
-        policies,
+        data,
         refresh: false,
         loaded: true
       };
+    }
+    case fromAction.CLEAR_POLICY_DETAILS: {
+      return initialState;
     }
   }
 
   return state;
 }
 
-export const getPolicies = (state: PolicyState) => state.policies;
+export const getPolicyData = (state: PolicyState) => state.data;
 export const getRefresh = (state: PolicyState) => state.refresh;
 export const getLoaded = (state: PolicyState) => state.loaded;

@@ -21,12 +21,12 @@ export class PolicyService {
 
   callback: Function;
 
-  readonly policyDetails$: Observable<any> = this.store.pipe(
-    select(fromStore.getPolicyDetails)
+  readonly policyData$: Observable<any> = this.store.pipe(
+    select(fromStore.getPolicyData)
   );
 
   initPolicies() {
-    this.store.pipe(select(fromSelector.getPolicies)).subscribe(policies => {
+    this.store.pipe(select(fromSelector.getPolicyData)).subscribe(policies => {
       if (policies) {
         this.policyData.policies = policies;
       }
@@ -54,21 +54,26 @@ export class PolicyService {
   }
 
   loadPolicies() {
-        this.store.dispatch(
-          new fromAction.LoadPolicies({
-            userId: this.policyData.userId,
-          })
-        );
+    this.store.dispatch(
+      new fromAction.LoadPolicies({
+        userId: this.policyData.userId,
+      })
+    );
   }
-    
-  loadPolicyDetails(policyId,contractId)
-  {
+  loadPremiumCalendar() {
+    this.store.dispatch(
+      new fromAction.LoadPremiumCalendar({
+        userId: this.policyData.userId
+      })
+    );
+  }
+  loadPolicyDetails(policyId, contractId) {
     this.store.dispatch(
       new fromAction.LoadPolicyDetails({
         userId: this.policyData.userId,
         policyId: policyId,
         contractId: contractId
       })
-    )
+    );
   }
 }

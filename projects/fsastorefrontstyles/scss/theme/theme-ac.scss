@@ -1,14 +1,10 @@
-//Mixin for linear gradient background
 @import '../mixins-fsa';
 @import '../variables-fsa';
 
 body {
   font-size: 14px;
+  color: $color-dark-grey;
 }
-$screen-sm: 768px;
-$screen-xs-max: 639px;
-$screen-sm-mid: 768px;
-$screen-xxs: 380px;
 .center1400 {
   max-width: 1400px;
   width: 100%;
@@ -17,23 +13,17 @@ $screen-xxs: 380px;
 .contentPadding {
   padding: 20px 10px 0 10px;
 }
-//CSS Reset
-button:focus {
-  outline: none;
+// Stand-alone building blocks
+.heading-headline {
+  line-height: 35px;
+  padding: 20px 0;
+  text-align: left;
+  margin-bottom: 30px;
+  color: $color-dark-blue;
+  font-size: 24px;
+  font-weight: 700;
+  border-bottom: 1px solid $color-grey;
 }
-$border-grey: 1px solid $color-grey;
-@mixin transition {
-  transition: all 300ms ease;
-}
-@mixin ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-a {
-  @include transition();
-}
-
 .images__size {
   width: 100%;
   height: 100%;
@@ -55,12 +45,72 @@ a {
     color: $color-button-secondary-hover;
   }
 }
+.warn {
+  color: $color-orange;
+  font-weight: bold;
+}
+.border-bottom-grey {
+  border-bottom: 1px solid $color-grey;
+}
 .circle-image {
   background-color: $color-banking-dark-blue;
   border-radius: 50%;
   @include box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 70%);
   margin: 0 25px;
 }
+.gradient-heading {
+  color: $color-white;
+  font-size: 20px;
+  line-height: 55px;
+  @include ellipsis;
+  @include linear-gradient-background( $color-blue, $color-banking-darkest-blue, 50%, 100% );
+}
+.list-data {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: $color-white;
+  &--closed {
+    display: none;
+  }
+  &__list-item {
+    padding: 12px;
+    list-style: none;
+    background-color: $color-white;
+  }
+  &__info {
+    position: relative;
+    display: inline-block;
+    padding-left: 20px;
+  }
+}
+.color-dot {
+  position: relative;
+  &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: $color-blue;
+  }
+}
+.clickable {
+  cursor: pointer;
+}
+//CSS Reset
+button:focus {
+  outline: none;
+}
+$border-grey: 1px solid $color-grey;
+a {
+  @include transition();
+}
+
 /* *********************************************************** */
 /* ************************ Cards ************************* */
 /* ********************************************************* */
