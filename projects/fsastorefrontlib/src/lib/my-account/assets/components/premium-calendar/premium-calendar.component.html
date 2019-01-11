@@ -39,7 +39,9 @@
                 {{policy.policyPremium.formattedValue}}
               </div>
               <div class="col">
-                {{policy.paymentMethod.paymentOption}}
+                <ng-container *ngIf="policy.paymentMethod; else NA">
+                  {{policy.paymentMethod.cardType.code| uppercase }} {{policy.paymentMethod.cardNumber }}
+                </ng-container>
               </div>
             </div>
             <div class="accordion row" *ngIf="policy.billingData.length > 1;"[ngClass]="policy.opened ? 'opened' : ''" >
@@ -132,16 +134,7 @@
                         Payment Method
                       </span>
                       <ng-container *ngIf="policy.paymentMethod; else NA">
-                        <ng-container *ngIf="true">
-                          <span class="value">
-                            VISA**********11111
-                          </span>
-                        </ng-container>
-                        <ng-container *ngIf="policy.paymentMethod.bank && policy.paymentMethod.paymentOption">
-                          <span class="value">
-                              {{policy.paymentMethod.bank}}<span>&#47;</span>
-                          </span>
-                        </ng-container>
+                        {{policy.paymentMethod.cardType.code| uppercase }} {{policy.paymentMethod.cardNumber }}
                       </ng-container>
                     </div>
                   </div>
