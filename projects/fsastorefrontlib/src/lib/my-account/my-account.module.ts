@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { QuotesModule } from './assets/quotes.module';
 import { PoliciesModule } from './assets/policies.module';
 import { ClaimsModule } from './assets/claims.module';
-
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { effects } from './assets/store/effects';
