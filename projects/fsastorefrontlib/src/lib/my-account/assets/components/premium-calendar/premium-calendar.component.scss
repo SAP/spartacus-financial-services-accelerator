@@ -21,19 +21,13 @@
         max-height: 600px;
         transition: ease-in-out 600ms max-height;
     }
-}
-.premium-accordion {
-    padding: 20px;
-    border: $border-grey;
-    border-top:none;
-    &--heading {
-        padding: 20px;
-        & h3 {
-            font-weight: 100;
-        }
+    .container-fluid {
+        border: 1px solid $color-grey;
+        border-top: none;
+        border-bottom: none;
     }
-    &.list-data {
-        padding: 0;
-        border: none;
+    .row {
+        border-bottom: 1px solid $color-grey;
+        padding: 20px 0;
     }
 }
