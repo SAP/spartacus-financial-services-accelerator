@@ -2,25 +2,111 @@
 @import 'variables-fsa';
 
 .cx-category-page-layout {
-    .category-promotion {
-        border: 1px solid $color-grey;
-        background-color: $color-light-grey;
-        overflow: hidden;
-        display: block;
+    .Section2B, .Section3 {
         margin: 40px 0;
-        padding: 0;
-        height: 100%;
-        cx-generic-link {
+        cx-dynamic-slot {
+            border: 1px solid $color-grey;
+            background-color: $color-light-grey;
+            overflow: hidden;
+            display: block;
+            height: 100%;
+        }
+        cx-generic-link, cx-paragraph {
             display: inline-block;
             vertical-align: top;
             width: 50%;
+            @include media-breakpoint-down(sm) {
+                width: 100%;
+            }
+        }
+        cx-generic-link {
             cursor: pointer;
         }
         cx-paragraph {
-            display: inline-block;
-            width: 50%;
-            vertical-align: top;
             padding: 20px;
+        }
+        .enriched-banner {
+            padding: 6%;
+            &__title {
+                font-size: 24px;
+            }
+        }
+        @include media-breakpoint-down(md) { 
+            margin: 20px 0 0 0;
+        }
+    }
+    cx-dynamic-slot[ng-reflect-position="Section1"] {
+        .enriched-banner {
+            position: relative;
+            &__title {
+                display: block;
+                font-size: 44px;
+                color: $color-dark-blue;
+                @include media-breakpoint-down(md) { 
+                    color: $color-body;
+                    font-size: 4vw;
+                }
+                @include media-breakpoint-down(xs) {
+                    font-size: 5vw;
+                }
+            }
+            &__text {
+                position: absolute;
+                text-align: center;
+                left: 0;
+                bottom: 0;
+                background: rgba(255, 255, 255, 0.7);
+                padding: 35px;
+                width: 100%;
+                @include media-breakpoint-down(md) {
+                    padding: 20px 35px;
+                }
+                @include media-breakpoint-down(xs) {
+                    padding: 10px 35px;
+                }
+            }
+            .image-wrapper {
+                .responsive-image {
+                    width: 100%;
+                }
+            }
+            &__details {
+                display: block;
+                @include width1400;
+                margin: 30px auto 0;
+                @include media-breakpoint-down(xs) {
+                    margin-top: 10px;
+                }
+            }
+            &__styled-text {
+                @include secondary-btn-color;
+                @include transition;
+                text-transform: uppercase;
+                font-size: 18px;
+                line-height: 0;
+                display: inline-block;
+                padding: 25px 0;
+                width: 25%;
+                @include media-breakpoint-down(md) {
+                    width: 60%;
+                    line-height: 30px;
+                    @include ellipsis;
+                    padding: 6px 10px;
+                }
+                @include media-breakpoint-down(xs) {
+                    font-size: 13px;
+                    width: 70%;
+                }
+            }
+        }
+    }
+    cx-dynamic-slot[ng-reflect-position="Section4"] {
+        width: 100%;
+        display: flex;
+        justify-content: flex-start;
+        fsa-product-feature {
+            width: 32%;
+            padding: 0 10px;
         }
     }
 }

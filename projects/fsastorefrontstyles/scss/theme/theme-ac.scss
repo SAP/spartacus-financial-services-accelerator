@@ -18,14 +18,6 @@ button:focus {
   outline: none;
 }
 $border-grey: 1px solid $color-grey;
-@mixin transition {
-  transition: all 300ms ease;
-}
-@mixin ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 a {
   @include transition();
 }
