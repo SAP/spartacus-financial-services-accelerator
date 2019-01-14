@@ -101,12 +101,28 @@
         }
     }
     cx-dynamic-slot[ng-reflect-position="Section4"] {
-        width: 100%;
         display: flex;
         justify-content: flex-start;
-        fsa-product-feature {
-            width: 32%;
-            padding: 0 10px;
+        margin: 0 -15px;
+        @include media-breakpoint-down(md) {
+            display: block;
         }
+        fsa-product-feature {
+            width: 33%;
+            margin: 0 15px;
+            @include media-breakpoint-down(md) {
+                width: inherit;
+                margin: 20px 15px;
+                display: block;
+            }
+        }
+        .product-feature {
+            &__buttons a {
+                margin: 0 auto;
+            }
+        }
+    }
+    fsa-category-page-layout[ng-reflect-category-code="insurance_main_auto"] {
+        display: none;
     }
 }
