@@ -1,14 +1,10 @@
 .accordion {
     &--heading {
         color: $color-white;
-        font-size: 20px;
         font-weight: 500;
-        line-height: 55px;
         margin-bottom: 0;
         cursor: pointer;
         padding: 0 60px;
-        @include ellipsis;
-        @include linear-gradient-background( $color-blue, $color-banking-darkest-blue, 50%, 100% );
     }
     &-item {
         margin-top: 40px;

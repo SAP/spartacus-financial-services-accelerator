@@ -50,7 +50,14 @@
     opacity: 0.9;
   }
 }
-
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@mixin transition {
+  transition: all 300ms ease;
+}
 @mixin linear-gradient-background(
   $startColor,
   $endColor,

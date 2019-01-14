@@ -2,28 +2,25 @@ import { InjectionToken, Provider } from '@angular/core';
 import {
   ActionReducerMap,
   createFeatureSelector,
-  MemoizedSelector  
+  MemoizedSelector
 } from '@ngrx/store';
 
 import * as fromQuoteReducer from './quote.reducer';
 import * as fromPolicyReducer from './policy.reducer';
 import * as fromClaimReducer from './claim.reducer';
-import * as fromPolicyDetails from './policy-details.reducer';
 
 
 export interface UserState {
   quotes: fromQuoteReducer.QuoteState;
   policies: fromPolicyReducer.PolicyState;
   claims: fromClaimReducer.ClaimState;
-  policyDetails: fromPolicyDetails.PolicyDetailsState;
 }
 
 export function getReducers(): ActionReducerMap<UserState> {
   return {
     quotes: fromQuoteReducer.reducer,
     policies: fromPolicyReducer.reducer,
-    claims: fromClaimReducer.reducer,
-    policyDetails: fromPolicyDetails.reducer
+    claims: fromClaimReducer.reducer
   };
 }
 

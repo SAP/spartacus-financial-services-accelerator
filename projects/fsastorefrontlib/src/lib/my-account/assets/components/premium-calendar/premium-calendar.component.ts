@@ -4,13 +4,12 @@ import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
 
 @Component({
-  selector: 'fsa-policies',
-  templateUrl: './policies.component.html',
-  styleUrls: ['./policies.component.scss'],
+  selector: 'fsa-premium-calendar',
+  templateUrl: './premium-calendar.component.html',
+  styleUrls: ['./premium-calendar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PoliciesComponent implements OnInit {
-
+export class PremiumCalendarComponent implements OnInit {
   constructor(
     private store: Store<fromPolicyStore.UserState>,
     private config: OccConfig

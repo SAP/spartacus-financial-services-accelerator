@@ -5,6 +5,7 @@ import { QuotesPageModule } from './quotes-page/quotes-page.module';
 import { PoliciesPageModule } from './policies-page/policies-page.module';
 import { ClaimsPageModule } from './claims-page/claims-page.module';
 import { PolicyDetailsPageModule } from './policy-details-page/policy-details-page.module';
+import { PremiumCalendarPageModule } from './premium-calendar-page/premium-calendar-page.module';
 import { FSCategoryPageModule } from './fs-category-page/fs-category-page.module';
 
 const pageModules = [
@@ -12,6 +13,7 @@ const pageModules = [
     PoliciesPageModule,
     ClaimsPageModule,
     PolicyDetailsPageModule,
+    PremiumCalendarPageModule,
     FSCategoryPageModule
 ];
 

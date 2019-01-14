@@ -6,8 +6,8 @@
 @import 'scss/theme/index';
 @import 'scss/fonts';
 @import 'scss/overrides';
-@import 'scss/fsa-base/popup.scss';
-@import 'scss/fsa-base/accordions.scss';
+@import 'scss/fsa-base';
+
 
 :root {
     @each $color, $value in $fsa-colors {

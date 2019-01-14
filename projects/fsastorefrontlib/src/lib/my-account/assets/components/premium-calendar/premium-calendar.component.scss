@@ -1,0 +1,33 @@
+@import 'mixins-fsa';
+@import 'variables-fsa';
+
+.gradient-heading {
+    padding: 20px;
+    & h3 {
+        font-weight: normal;
+    }
+}
+.premium-data-row {
+    background-color: $color-light-grey;
+    border: $border-grey;
+    border-top:none;
+    padding: 26px 0;
+}
+.accordion {
+    max-height: 0px;
+    overflow-y: hidden;
+    transition: ease-in-out 400ms max-height;
+    &.opened {
+        max-height: 600px;
+        transition: ease-in-out 600ms max-height;
+    }
+    .container-fluid {
+        border: 1px solid $color-grey;
+        border-top: none;
+        border-bottom: none;
+    }
+    .row {
+        border-bottom: 1px solid $color-grey;
+        padding: 12px 0;
+    }
+}

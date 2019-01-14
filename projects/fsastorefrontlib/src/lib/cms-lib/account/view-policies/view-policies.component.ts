@@ -40,7 +40,7 @@ export class CMSViewPoliciesComponent implements OnInit {
         this.authService.getUserToken().subscribe(token => {
             if (token.userId !== undefined) {
                 this.policyService.loadPolicies();
-                this.policies$ = this.store.pipe(select(fromUserStore.getPolicies));
+                this.policies$ = this.store.pipe(select(fromUserStore.getPolicyData));
                 this.policiesLoaded$ = this.store.pipe(select(fromUserStore.getPoliciesLoaded));
             } else {
                 this.anonymous$ = true;
