@@ -2,15 +2,15 @@
   <h2 class="heading-headline">Premium Calendar</h2>
   <ng-container *ngIf="policies$ | async as policies; else noPolicies">
     <ng-container *ngIf="policiesLoaded$ | async; else loading">
-      <div class="container-fluid d-none d-lg-block"> <!-- Desktop Layout-->
-        <div class="gradient-heading row">
-          <h3 class="col"> Policy </h3>
-          <h3 class="col"> Payment Frequency </h3>
-          <h3 class="col"> Due Date </h3>
-          <h3 class="col"> Premium </h3>
-          <h3 class="col"> Payment Method </h3>
-        </div>
-        <ng-container *ngIf="policies?.insurancePolicies?.length > 0">
+      <ng-container *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
+        <div class="container-fluid d-none d-lg-block"> <!-- Desktop Layout-->
+          <div class="gradient-heading row">
+            <h3 class="col"> Policy </h3>
+            <h3 class="col"> Payment Frequency </h3>
+            <h3 class="col"> Due Date </h3>
+            <h3 class="col"> Premium </h3>
+            <h3 class="col"> Payment Method </h3>
+          </div>
           <div *ngFor="let policy of policies.insurancePolicies">
             <div class="premium-data-row row" (click)="policy.opened=!policy.opened" [ngClass]="{'clickable': policy.billingData?.length > 1}">
               <div class="col">
@@ -62,88 +62,88 @@
               </div>
             </div>
           </div>
-        </ng-container>
-      </div><!-- End of Desktop Layout-->
-      <div class="container-fluid"><!-- Mobile layout-->
-        <div class="row">
-          <ng-container *ngFor="let policy of policies.insurancePolicies">
-            <div class="col-12 col-sm-6 d-block d-lg-none">
-              <div class="cards__wrapper">
-                <div class="cards__title cards__title--gradient-background">
-                  <span class="images images__wrapper images__wrapper--white-bck">
-                    <img class="images__size" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0]?.url" alt="">
-                  </span>
-                  <h4 class="cards__caption cards__caption--color-white">
-                    {{policy.categoryData?.name}}
-                  </h4>
-                  <div class="cards__info cards__info--color-white">
-                    {{policy.policyNumber}}
-                  </div>
-                </div>
-                <div class="cards__details-wrapper cards__details-wrapper--grey">
-                  <div class="cards__data border-bottom-grey">
-                    <span class="title">
-                      Payment Frequency
+        </div><!-- End of Desktop Layout-->
+        <div class="container-fluid"><!-- Mobile layout-->
+          <div class="row">
+            <ng-container *ngFor="let policy of policies.insurancePolicies">
+              <div class="col-12 col-sm-6 d-block d-lg-none">
+                <div class="cards__wrapper">
+                  <div class="cards__title cards__title--gradient-background">
+                    <span class="images images__wrapper images__wrapper--white-bck">
+                      <img class="images__size" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0]?.url" alt="">
                     </span>
-                    <span class="value">
-                      {{policy.paymentFrequency}}
-                    </span>
+                    <h4 class="cards__caption cards__caption--color-white">
+                      {{policy.categoryData?.name}}
+                    </h4>
+                    <div class="cards__info cards__info--color-white">
+                      {{policy.policyNumber}}
+                    </div>
                   </div>
-                  <div class="container cards__data border-bottom-grey" (click)="policy.opened=!policy.opened" [ngClass]="{'clickable': policy.billingData.length > 1}">
-                    <div class="row">
-                      <div class="col-6">
-                        <div class="title">
-                            <div class="cell-text text-left d-flex justify-content-around">Due Date</div>
-                        </div>
-                        <div class="title text-left d-flex justify-content-around" [ngClass]="(policy.billingData[0]?.paymentStatus == 'Overdue')?'warn':'notice'">
-                          {{policy.billingData[0]?.billingDate}}
-                          <div class="warn" *ngIf="policy.billingData[0]?.paymentStatus == 'Overdue'">Overdue</div>
-                        </div>
-                      </div>
-                      <div class="col-6">
-                        <div class="title text-left d-flex justify-content-around">
-                          <div class="cell-text">
-                            Premium
+                  <div class="cards__details-wrapper cards__details-wrapper--grey">
+                    <div class="cards__data border-bottom-grey">
+                      <span class="title">
+                        Payment Frequency
+                      </span>
+                      <span class="value">
+                        {{policy.paymentFrequency}}
+                      </span>
+                    </div>
+                    <div class="container cards__data border-bottom-grey" (click)="policy.opened=!policy.opened" [ngClass]="{'clickable': policy.billingData.length > 1}">
+                      <div class="row">
+                        <div class="col-6">
+                          <div class="title">
+                              <div class="cell-text text-left d-flex justify-content-around">Due Date</div>
+                          </div>
+                          <div class="title text-left d-flex justify-content-around" [ngClass]="(policy.billingData[0]?.paymentStatus == 'Overdue')?'warn':'notice'">
+                            {{policy.billingData[0]?.billingDate}}
+                            <div class="warn" *ngIf="policy.billingData[0]?.paymentStatus == 'Overdue'">Overdue</div>
                           </div>
                         </div>
-                        <div class="title text-left d-flex justify-content-around" [ngClass]="(policy.billingData[0]?.paymentStatus == 'Overdue')?'warn':'notice'">
-                          {{policy.billingData[0]?.paymentAmount}}                                   
+                        <div class="col-6">
+                          <div class="title text-left d-flex justify-content-around">
+                            <div class="cell-text">
+                              Premium
+                            </div>
+                          </div>
+                          <div class="title text-left d-flex justify-content-around" [ngClass]="(policy.billingData[0]?.paymentStatus == 'Overdue')?'warn':'notice'">
+                            {{policy.billingData[0]?.paymentAmount}}                                   
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                  <ng-container *ngIf="policy.billingData.length > 1;">
-                    <div class="accordion container" [ngClass]="policy.opened ? 'opened' : ''">
-                      <ul class="list-data">
-                        <ng-container *ngFor="let dueDate of policy.billingData | slice:1">
-                            <li class="row list-data__list-item border-bottom-grey">
-                              <div class="col-6 text-left d-flex justify-content-around">
-                                  {{dueDate.billingDate}}
-                              </div>
-                              <div class="col-6 text-left d-flex justify-content-around">
-                                  {{dueDate.paymentAmount}}
-                              </div>
-                            </li>
-                        </ng-container>
-                      </ul>
-                    </div>
-                  </ng-container>
-                  <div class="cards__data">
-                    <span class="title">
-                      Payment Method
-                    </span>
-                    <ng-container *ngIf="policy.paymentMethod; else NA">
-                      {{policy.paymentMethod.cardType?.code| uppercase }} {{policy.paymentMethod?.cardNumber }}
+                    <ng-container *ngIf="policy.billingData.length > 1;">
+                      <div class="accordion container" [ngClass]="policy.opened ? 'opened' : ''">
+                        <ul class="list-data">
+                          <ng-container *ngFor="let dueDate of policy.billingData | slice:1">
+                              <li class="row list-data__list-item border-bottom-grey">
+                                <div class="col-6 text-left d-flex justify-content-around">
+                                    {{dueDate.billingDate}}
+                                </div>
+                                <div class="col-6 text-left d-flex justify-content-around">
+                                    {{dueDate.paymentAmount}}
+                                </div>
+                              </li>
+                          </ng-container>
+                        </ul>
+                      </div>
                     </ng-container>
+                    <div class="cards__data">
+                      <span class="title">
+                        Payment Method
+                      </span>
+                      <ng-container *ngIf="policy.paymentMethod; else NA">
+                        {{policy.paymentMethod.cardType?.code| uppercase }} {{policy.paymentMethod?.cardNumber }}
+                      </ng-container>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </ng-container>
-        </div>  
-      </div>
-    </ng-container><!-- If policies loaded else #loading-->
-  </ng-container><!-- If has policies-->
+            </ng-container>
+          </div>  
+        </div>
+      </ng-container>
+    </ng-container><!-- If has policies-->
+  </ng-container><!-- If policies loaded else #loading-->
   <ng-template #NA>
       N/A
   </ng-template>
