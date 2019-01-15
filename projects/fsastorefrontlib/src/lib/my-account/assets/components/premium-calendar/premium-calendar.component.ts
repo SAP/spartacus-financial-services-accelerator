@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import * as fromPolicyStore from '../../store';
+import * as fromStore from '../../store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
 
@@ -11,7 +11,7 @@ import { OccConfig } from '@spartacus/core';
 })
 export class PremiumCalendarComponent implements OnInit {
   constructor(
-    private store: Store<fromPolicyStore.UserState>,
+    private store: Store<fromStore.UserState>,
     private config: OccConfig
   ) {}
 
@@ -21,8 +21,8 @@ export class PremiumCalendarComponent implements OnInit {
   noPoliciesText = 'You have no Policies!';
 
   ngOnInit() {
-    this.policies$ = this.store.pipe(select(fromPolicyStore.getPolicyData));
-    this.policiesLoaded$ = this.store.pipe(select(fromPolicyStore.getPoliciesLoaded));
+    this.policies$ = this.store.pipe(select(fromStore.getPremiumCalendarData));
+    this.policiesLoaded$ = this.store.pipe(select(fromStore.getPremiumCalendarLoaded));
   }
 
   public getBaseUrl() {

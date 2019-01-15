@@ -7,12 +7,14 @@ import {
 
 import * as fromQuoteReducer from './quote.reducer';
 import * as fromPolicyReducer from './policy.reducer';
+import * as fromPremiumCalendarReducer from './premium-calendar.reducer';
 import * as fromClaimReducer from './claim.reducer';
 
 
 export interface UserState {
   quotes: fromQuoteReducer.QuoteState;
   policies: fromPolicyReducer.PolicyState;
+  premiumCalendar: fromPremiumCalendarReducer.PremiumCalendarState;
   claims: fromClaimReducer.ClaimState;
 }
 
@@ -20,6 +22,7 @@ export function getReducers(): ActionReducerMap<UserState> {
   return {
     quotes: fromQuoteReducer.reducer,
     policies: fromPolicyReducer.reducer,
+    premiumCalendar: fromPremiumCalendarReducer.reducer,
     claims: fromClaimReducer.reducer
   };
 }
