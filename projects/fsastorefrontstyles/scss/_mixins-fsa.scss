@@ -3,9 +3,10 @@
   width: 100%;
   margin: 0 auto;
 }
-
-@mixin transition {
-  transition: all 300ms ease;
+@mixin ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 @mixin box-shadow($x, $y, $a, $b, $color, $opacity) {
   box-shadow: $x $y $a $b rgba($color, $opacity);

@@ -1,18 +1,18 @@
-
-<div class="cx-category-page-layout container">
-
-    <div class="cx-category-page-layout__facet-navigation hidden-sm hidden-xs">
-        <cx-dynamic-slot position="Section4"></cx-dynamic-slot>
-    </div>
-
-    <div class="cx-category-page-layout__simple-image row">
+<div class="cx-category-page-layout container-fluid">
+    <div class="row Section1">
         <cx-dynamic-slot position="Section1"></cx-dynamic-slot>
     </div>
-
-    <div class="row">
-        <cx-dynamic-slot class="cx-category-page-layout__bottom-products" position="Section2"></cx-dynamic-slot>
+    <div class="center1400">
+        <div class="row align-items-stretch">
+            <div class="col-md-8 col-sm-12 Section2B">
+                <cx-dynamic-slot position="Section2B"></cx-dynamic-slot>
+            </div>
+            <div class="col-md-4 col-sm-12 Section3 text-center">
+                <cx-dynamic-slot position="Section3"></cx-dynamic-slot>
+            </div>
+        </div>
+        <div class="Section4">
+            <cx-dynamic-slot position="Section4"></cx-dynamic-slot>
+        </div>
     </div>
-
-    <cx-dynamic-slot position="Section3"></cx-dynamic-slot>
-
 </div>

@@ -8,7 +8,6 @@
 @import 'scss/overrides';
 @import 'scss/fsa-base';
 
-
 :root {
     @each $color, $value in $fsa-colors {
       --cx-#{$color}: #{$value};

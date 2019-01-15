@@ -13,6 +13,14 @@ body {
 .contentPadding {
   padding: 20px 10px 0 10px;
 }
+//CSS Reset
+button:focus {
+  outline: none;
+}
+$border-grey: 1px solid $color-grey;
+a {
+  @include transition();
+}
 // Stand-alone building blocks
 .heading-headline {
   line-height: 35px;
@@ -23,6 +31,15 @@ body {
   font-size: 24px;
   font-weight: 700;
   border-bottom: 1px solid $color-grey;
+}
+.section-header__heading {
+  @include linear-gradient-background ($color-blue, $color-banking-darkest-blue, 50%, 100%);
+  border: none;
+  color: $color-white;
+  font-size: 22px;
+  font-weight: 400;
+  padding: 20px; 
+  text-align: center;
 }
 .images__size {
   width: 100%;
@@ -261,6 +278,19 @@ a {
   &:hover {
     text-decoration: none;
   }
+  &__infos, &__contact-agent, &__continue-shopping {
+    padding: 11px;
+    font-size: 18px;
+    display: block;
+    max-width: 260px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    @include media-breakpoint-down(xs) {
+        max-width: 100%;
+      }
+    }
 }
 .primary-button {
   &__default {
