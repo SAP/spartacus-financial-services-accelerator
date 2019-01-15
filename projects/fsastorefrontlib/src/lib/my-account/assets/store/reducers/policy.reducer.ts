@@ -22,8 +22,7 @@ export function reducer(
 ): PolicyState {
   switch (action.type) {
     case fromAction.LOAD_POLICIES_SUCCESS:
-    case fromAction.LOAD_POLICY_DETAILS_SUCCESS:
-    case fromAction.LOAD_PREMIUM_CALENDAR_SUCCESS: {
+    case fromAction.LOAD_POLICY_DETAILS_SUCCESS: {
       const data = { ...action.payload };
       return {
         ...state,
