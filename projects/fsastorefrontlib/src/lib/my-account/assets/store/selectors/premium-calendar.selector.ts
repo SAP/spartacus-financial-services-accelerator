@@ -13,7 +13,7 @@ export const getPremiumCalendarState: MemoizedSelector<
 
 export const getPremiumCalendarData: MemoizedSelector<any, any> = createSelector(
   getPremiumCalendarState,
-  fromPremiumCalendar.getPolicyData
+  fromPremiumCalendar.getPremiumCalendarData
 );
 
 export const getPremiumCalendarRefresh: MemoizedSelector<any, boolean> = createSelector(

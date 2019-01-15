@@ -31,6 +31,6 @@ export function reducer(
   return state;
 }
 
-export const getPolicyData = (state: PremiumCalendarState) => state.data;
+export const getPremiumCalendarData = (state: PremiumCalendarState) => state.data;
 export const getRefresh = (state: PremiumCalendarState) => state.refresh;
 export const getLoaded = (state: PremiumCalendarState) => state.loaded;
