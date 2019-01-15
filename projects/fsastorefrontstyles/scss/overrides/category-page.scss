@@ -19,9 +19,6 @@
                 width: 100%;
             }
         }
-        cx-generic-link {
-            cursor: pointer;
-        }
         cx-paragraph {
             padding: 20px;
         }
@@ -71,8 +68,8 @@
                 }
             }
             &__details {
-                display: block;
                 @include width1400;
+                display: block;
                 margin: 30px auto 0;
                 @include media-breakpoint-down(xs) {
                     margin-top: 10px;
@@ -116,13 +113,5 @@
                 display: block;
             }
         }
-        .product-feature {
-            &__buttons a {
-                margin: 0 auto;
-            }
-        }
-    }
-    fsa-category-page-layout[ng-reflect-category-code="insurance_main_auto"] {
-        display: none;
     }
 }

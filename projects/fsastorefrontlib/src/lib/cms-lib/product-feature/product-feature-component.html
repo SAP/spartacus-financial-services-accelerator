@@ -3,7 +3,7 @@
         <h3 class="product-feature__title section-header__heading">{{component.title}}</h3>
         <div class="product-feature__image"></div>
         <div *ngIf="product$ | async as product">
-            <ul class="product-feature__details" [innerHTML]="product.summary" [ngStyle]="myStyles">
+            <ul class="product-feature__details" [innerHTML]="product.summary">
             </ul>
         </div>
         <div class="product-feature__buttons">
