@@ -9,4 +9,4 @@ import { ProductFeatureComponent } from './product-feature-component';
   exports: [ProductFeatureComponent],
   entryComponents: [ProductFeatureComponent]
 })
-export class ProductFeature { }
+export class ProductFeatureModule { }

@@ -9,7 +9,7 @@ export interface CmsViewPoliciesComponent extends CmsComponent {
 export interface CmsViewQuotesComponent extends CmsComponent {
   numberOfQuotesToDisplay?: string;
 }
-export interface CmsProductFeature extends CmsComponent {
+export interface CmsProductFeatureComponent extends CmsComponent {
   title?: string;
   description?: string;
   media?: string;

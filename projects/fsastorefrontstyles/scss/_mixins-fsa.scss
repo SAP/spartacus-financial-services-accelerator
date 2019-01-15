@@ -3,9 +3,6 @@
   width: 100%;
   margin: 0 auto;
 }
-@mixin transition {
-  transition: all 300ms ease;
-}
 @mixin ellipsis {
   white-space: nowrap;
   overflow: hidden;

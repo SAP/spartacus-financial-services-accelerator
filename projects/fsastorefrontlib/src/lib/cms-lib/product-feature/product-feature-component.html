@@ -1,5 +1,5 @@
 <ng-container *ngIf="component$ | async as component">
-    <div class="product product-feature__wrapper product-feature__pro_property_homeowners_monthly">
+    <div class="product product-feature__wrapper">
         <h3 class="product-feature__title section-header__heading">{{component.title}}</h3>
         <div class="product-feature__image"></div>
         <div *ngIf="product$ | async as product">
@@ -7,7 +7,7 @@
             </ul>
         </div>
         <div class="product-feature__buttons">
-            <a href="/yacceleratorstorefront/insurance/en/c/insurances_property_homeowners" class="secondary-button secondary-button__default secondary-button__continue-shopping">Get a Quote</a>
+            <a href="#" class="secondary-button secondary-button__default secondary-button__continue-shopping">Get a Quote</a>
         </div>
     </div>
 </ng-container>

@@ -32,7 +32,7 @@
             margin: 20px 0 0 0;
         }
     }
-    cx-dynamic-slot[ng-reflect-position="Section1"] {
+    .Section1 {
         .enriched-banner {
             position: relative;
             &__title {
@@ -97,7 +97,7 @@
             }
         }
     }
-    cx-dynamic-slot[ng-reflect-position="Section4"] {
+    .Section4 cx-dynamic-slot {
         display: flex;
         justify-content: flex-start;
         margin: 0 -15px;
