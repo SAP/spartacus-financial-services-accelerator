@@ -249,9 +249,14 @@ a {
 .primary-button,
 .secondary-button,
 .inverted {
-  cursor: pointer;
+  display: inline-block;
+  font-size: 12px;
+  padding: 14px;
+  margin: 6px 0;
+  white-space: nowrap;
   -webkit-appearance: none;
   margin-bottom: 10px;
+  cursor: pointer;
   &__default {
     @include transition;
     width: 100%;
@@ -267,13 +272,6 @@ a {
     &--opacity-disabled {
       opacity: 0.2;
     }
-  }
-  &__account-policies {
-    display: inline-block;
-    font-size: 12px;
-    padding: 14px;
-    margin: 6px 0;
-    white-space: nowrap;
   }
   &:hover {
     text-decoration: none;
