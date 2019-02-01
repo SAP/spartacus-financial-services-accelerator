@@ -134,7 +134,6 @@
                       <ng-container *ngIf="policy.paymentMethod; else NA">
                         {{policy.paymentMethod.cardType?.code| uppercase }} {{policy.paymentMethod?.cardNumber }}
                       </ng-container>
-                      <div [ngClass]="{'arrow': policy.billingData?.length > 1}"></div>
                     </div>
                   </div>
                 </div>
