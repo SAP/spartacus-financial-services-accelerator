@@ -12,7 +12,7 @@
             <h3 class="col"> Payment Method </h3>
           </div>
           <div *ngFor="let policy of policies.insurancePolicies">
-            <div class="premium-data-row row" (click)="policy.opened=!policy.opened" [ngClass]="{'clickable': policy.billingData?.length > 1}">
+            <div class="premium-data-row row" (click)="policy.opened=!policy.opened" [ngClass]="{'clickable': policy.billingData?.length > 1, 'opened':policy.opened}">
               <div class="col">
                 <div class=row>
                   <div class="col-4">
@@ -88,7 +88,7 @@
                         {{policy.paymentFrequency}}
                       </span>
                     </div>
-                    <div class="container cards__data border-bottom-grey" (click)="policy.opened=!policy.opened" [ngClass]="{'clickable': policy.billingData.length > 1}">
+                    <div class="container cards__data border-bottom-grey" (click)="policy.opened=!policy.opened" [ngClass]="{'clickable': policy.billingData.length > 1, 'opened':policy.opened}">
                       <div class="row">
                         <div class="col-6">
                           <div class="title">
@@ -134,6 +134,7 @@
                       <ng-container *ngIf="policy.paymentMethod; else NA">
                         {{policy.paymentMethod.cardType?.code| uppercase }} {{policy.paymentMethod?.cardNumber }}
                       </ng-container>
+                      <div [ngClass]="{'arrow': policy.billingData?.length > 1}"></div>
                     </div>
                   </div>
                 </div>

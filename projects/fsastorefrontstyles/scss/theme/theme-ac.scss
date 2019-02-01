@@ -118,6 +118,25 @@ a {
 }
 .clickable {
   cursor: pointer;
+  position: relative;
+    &:before {
+        display: block;
+        content: '';
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%) rotateZ(45deg);
+        width: 13px;
+        height: 13px;
+        border-bottom: 3px solid $color-dark-grey;
+        border-right: 3px solid $color-dark-grey;
+        @include transition();
+    }
+    &.opened {
+        &:before {
+            transform: translateY(-50%) rotateZ(-135deg);
+        }
+    }
 }
 //CSS Reset
 button:focus {
