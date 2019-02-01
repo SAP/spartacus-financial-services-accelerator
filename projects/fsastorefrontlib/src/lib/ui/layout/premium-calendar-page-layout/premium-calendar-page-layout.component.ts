@@ -6,7 +6,7 @@ import { PolicyService } from '../../../my-account/assets/services';
   templateUrl: './premium-calendar-page-layout.component.html'
 })
 export class PremiumCalendarPageLayoutComponent implements OnInit {
-  
+
   constructor(
     protected policyService: PolicyService
   ) {}
