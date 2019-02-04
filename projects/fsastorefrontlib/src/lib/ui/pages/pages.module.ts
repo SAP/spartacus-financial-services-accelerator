@@ -14,7 +14,7 @@ const pageModules = [
     ClaimsPageModule,
     PolicyDetailsPageModule,
     PremiumCalendarPageModule,
-    FSCategoryPageModule
+    // FSCategoryPageModule
 ];
 
 @NgModule({
