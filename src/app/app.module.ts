@@ -39,6 +39,15 @@ import { FSAStorefrontModule } from '@fsa/storefront';
             'Section4',
             'Section5'
           ]
+        },
+        FSCategoryPageTemplate: {
+          slots: [
+            'Section1',
+            'Section2A',
+            'Section2B',
+            'Section3',
+            'Section4'
+          ]
         }
 
       }
