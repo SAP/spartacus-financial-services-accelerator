@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { FSAStorefrontModule } from '@fsa/storefront';
@@ -22,6 +22,7 @@ import { FSAStorefrontModule } from '@fsa/storefront';
         client_secret: 'secret'
       },
       cmsComponents: {
+        InboxComponent: { selector: 'fsa-inbox' },
         EnrichedResponsiveBannerComponent: { selector: 'fsa-enriched-responsive-banner' },
         CMSViewPoliciesComponent: { selector: 'fsa-view-policies' },
         CMSViewQuotesComponent: { selector: 'fsa-view-quotes' },
