@@ -1,58 +1,50 @@
 @import '../mixins-fsa';
 @import '../variables-fsa';
 
-cx-home-page {
-  //OVERRIDING SPARTACUS RULES
-  .cx-container {
-    //seting our own max widths
-    @include make-container-max-widths();
-
-    .cx-landing-page-layout__container {
-      flex-direction: column;
-    }
-    //Service links specific styling - Overriding our own enriched banner :-(
-    cx-dynamic-slot[ng-reflect-position="Section2A"] {
-      @include width1400();
-      margin-bottom: 60px;
-      flex-direction: row;
-      justify-content: center;
-      flex-wrap: wrap;
-      fsa-enriched-responsive-banner {
-        width: 25%;
-        text-align: center;
-        margin-bottom: 30px;
-        @include media-breakpoint-down(sm) {
-          width: 33.33%;
+.InsuranceLandingPageTemplate {
+  //Service links specific styling - Overriding our own enriched banner :-(
+  .Section2A {
+    @include width1400();
+    margin-bottom: 60px;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    fsa-enriched-responsive-banner {
+      width: 25%;
+      text-align: center;
+      margin-bottom: 30px;
+      flex: 0 1 auto;
+      @include media-breakpoint-down(sm) {
+        width: 33.33%;
+      }
+      @include media-breakpoint-down(xs) {
+        width: 50%;
+      }
+      .enriched-banner {
+        &__styled-text {
+          color: $color-link-hover;
+          font-weight: 600;
+          font-size: 16px;
+          text-transform: uppercase;
+          border-bottom: 1px solid $color-link-hover;
         }
-        @include media-breakpoint-down(xs) {
-          width: 50%;
+        &__text {
+          @include transition();
+          &:hover {
+            transform: scale(1.1);
+          }
         }
-        .enriched-banner {
-          &__styled-text {
-            color: $color-link-hover;
-            font-weight: 600;
-            font-size: 16px;
-            text-transform: uppercase;
-            border-bottom: 1px solid $color-link-hover;
-          }
-          &__text {
-            @include transition();
-            &:hover {
-              transform: scale(1.1);
-            }
-          }
-          .image-wrapper {
-            .responsive-image {
-              max-width: 150px;
-              width: 100%;
-            }
+        .image-wrapper {
+          .responsive-image {
+            max-width: 150px;
+            width: 100%;
           }
         }
       }
     }
   }
   //Homepage banner specific styling
-  cx-dynamic-slot[ng-reflect-position="Section1"] fsa-enriched-responsive-banner {
+  .Section1 fsa-enriched-responsive-banner {
     .enriched-banner {
       position: relative;
       .responsive-image {
@@ -98,7 +90,7 @@ cx-home-page {
   }
 
   //Get a quote section & Make a claim paragraph
-  cx-dynamic-slot[ng-reflect-position="Section1"] cx-paragraph, cx-dynamic-slot[ng-reflect-position="Section3"] {
+  .Section1 cx-paragraph, .Section3 {
     @include width1400();
     display: block;
     margin-top: 100px;
@@ -130,7 +122,7 @@ cx-home-page {
     }
   }
   //Find an agent paragraph
-  cx-dynamic-slot[ng-reflect-position="Section2B"] {
+  .Section2B {
     @include width1400();
     cx-paragraph {
       color: $color-dark-grey;
@@ -155,7 +147,7 @@ cx-home-page {
     }
   }
   //Quotes & Policies review
-  cx-dynamic-slot[ng-reflect-position="Section2C"] {
+  .Section2C {
     @include width1400();
     display: flex;
     @include media-breakpoint-down(xs) {
@@ -176,16 +168,17 @@ cx-home-page {
     }
   }
   //Make a claim section
-  cx-dynamic-slot[ng-reflect-position="Section3"] .make-claim {
+  .Section3 .make-claim {
     margin: 50px auto;
     background-color: $color-blue;
     text-align: center;
-    a {
-      display: block;
-      padding: 20px 10px;
-      font-size: 22px;
-      color: $color-white;
-      text-decoration: none;
+    .primary-button {
+        text-transform: none;
+        padding: 40px 0;
+        line-height: 0;
+        font-size: 22px;
+        display: block;
+        text-align: center;
     }
     @include media-breakpoint-down(sm) {
       .hidden-xs {

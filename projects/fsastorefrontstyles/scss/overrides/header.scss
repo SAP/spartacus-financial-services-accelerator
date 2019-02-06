@@ -1,17 +1,18 @@
 @import '../mixins-fsa';
 @import '../variables-fsa';
 
+// 
 cx-header {
-    --cx-primary: #666666;
-    --cx-inverse: #263950;
+    --cx-g-color-primary: #{$color-dark-grey};
+    --cx-g-color-inverse: #{$color-dark-blue};
+    --cx-background-color: #{$color-white};
+    --cx-max-width: 100%;
+    &::before {
+        display: none;
+    }
     .cx-header {
-        background-color: $color-white;
         color: $color-dark-grey;
-        max-width: 100% !important;
         text-transform: uppercase;
-        &::before {
-            display: none;
-        }
         a, .nav-link, span.cx-navigation__link, .cx-login-status__greet {
             @include media-breakpoint-down(md) {
                 &:hover, &:focus, &:active, &:after {
@@ -68,8 +69,8 @@ cx-header {
                 margin: 1rem 0 0;
             }
         }
-        &__logo[position="SiteLogo"] {
-            --width: 100%;
+        .SiteLogo {
+            --cx-width: 100%;
             flex: 2;
             margin-left: 15px;
             @include media-breakpoint-down(md) {
@@ -154,6 +155,7 @@ cx-header {
                 border: 1px solid $color-dark-blue;
                 @include media-breakpoint-down(xs) {
                     color: $color-white;
+                    top: 50px; 
                 }
             }
         }
