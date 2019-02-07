@@ -3,7 +3,7 @@ import { CmsConfig } from '@spartacus/core';
 import { CmsComponentData, ResponsiveBannerComponent } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CmsEnrichedResponsiveBannerComponent } from './../../';
+import { CmsEnrichedResponsiveBannerComponent } from './../../occ-models';
 
 
 @Component({
