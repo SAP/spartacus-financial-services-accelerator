@@ -3,14 +3,14 @@ import { CmsConfig } from '@spartacus/core';
 import { CmsComponentData, ResponsiveBannerComponent } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CmsEnrichedResponsiveBannerComponent } from './../../occ-models'
+import { CmsEnrichedResponsiveBannerComponent } from './../../';
 
 
 @Component({
-  selector: 'fsa-enriched-responsive-banner',
-  templateUrl: './enriched-responsive-banner.component.html',
-  styleUrls: ['./enriched-responsive-banner.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+   selector: 'fsa-enriched-responsive-banner',
+   templateUrl: './enriched-responsive-banner.component.html',
+   styleUrls: ['./enriched-responsive-banner.component.scss'],
+   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EnrichedResponsiveBannerComponent extends ResponsiveBannerComponent {
   constructor(
