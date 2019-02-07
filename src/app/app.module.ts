@@ -25,7 +25,6 @@ import { FSAStorefrontModule } from '@fsa/storefront';
         EnrichedResponsiveBannerComponent: { selector: 'fsa-enriched-responsive-banner' },
         CMSViewPoliciesComponent: { selector: 'fsa-view-policies' },
         CMSViewQuotesComponent: { selector: 'fsa-view-quotes' },
-        JspIncludeComponent: { selector: 'fsa-insurance-jsp-include' },
         FinancialServicesProductFeatureComponent: { selector: 'fsa-product-feature' }
       },
       layoutSlots: {
@@ -49,7 +48,6 @@ import { FSAStorefrontModule } from '@fsa/storefront';
             'Section4'
           ]
         }
-
       }
     })
   ],
