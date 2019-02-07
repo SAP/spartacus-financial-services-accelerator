@@ -22,7 +22,7 @@ import { FSAStorefrontModule } from '@fsa/storefront';
         client_secret: 'secret'
       },
       cmsComponents: {
-        InboxComponent: { selector: 'fsa-inbox' },
+        CMSInboxComponent: { selector: 'fsa-inbox' },
         EnrichedResponsiveBannerComponent: { selector: 'fsa-enriched-responsive-banner' },
         CMSViewPoliciesComponent: { selector: 'fsa-view-policies' },
         CMSViewQuotesComponent: { selector: 'fsa-view-quotes' },

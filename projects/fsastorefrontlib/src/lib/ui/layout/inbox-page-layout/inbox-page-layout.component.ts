@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { PolicyService } from '../../../my-account/assets/services';
+
 
 @Component({
   selector: 'fsa-inbox-page-layout',
@@ -7,11 +7,8 @@ import { PolicyService } from '../../../my-account/assets/services';
 })
 export class InboxPageLayoutComponent implements OnInit {
 
-  constructor(
-    protected policyService: PolicyService
-  ) {}
+  constructor() {}
 
   ngOnInit() {
-    this.policyService.loadPremiumCalendar();
   }
 }

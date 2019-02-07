@@ -14,3 +14,6 @@ export interface CmsProductFeatureComponent extends CmsComponent {
   description?: string;
   media?: string;
  }
+ export interface CmsInboxComponent extends CmsComponent {
+   tabComponents?: string;
+ }

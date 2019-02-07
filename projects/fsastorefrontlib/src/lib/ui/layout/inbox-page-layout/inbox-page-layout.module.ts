@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MyAccountModule } from '../../../my-account/my-account.module';
+import { CmsModule } from '@spartacus/storefront';
 import { InboxPageLayoutComponent } from './inbox-page-layout.component';
 
 @NgModule({
-  imports: [CommonModule, MyAccountModule],
+  imports: [CommonModule, CmsModule],
   declarations: [InboxPageLayoutComponent],
   exports: [InboxPageLayoutComponent]
 })
