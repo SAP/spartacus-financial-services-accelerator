@@ -1,34 +1,33 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CmsPageGuards } from '@spartacus/storefront';
-import { FSCategoryPageComponent } from './fs-category-page.component';
-import { FSCategoryPageLayoutModule } from '../../layout/fs-category-page-layout/fs-category-page-layout.module';
+import { CategoryPageComponent, CmsPageGuards, PageLayoutModule } from '@spartacus/storefront';
 
 const routes: Routes = [
   {
+    path: null,
+    canActivate: [CmsPageGuards],
+    component: CategoryPageComponent,
+    data: { cxPath: 'category' }
+  },
+  {
     path: 'Insurance-Products/:categoryTitle/c/:categoryCode',
-    redirectTo: '/category/:categoryCode/:categoryTitle'
+    redirectTo: null,
+    data: { cxRedirectTo: 'category' }
   },
   {
     path: 'Banking-Products/:categoryTitle/c/:categoryCode',
-    redirectTo: '/category/:categoryCode/:categoryTitle'
-  },
-  {
-    path: 'category/:categoryCode/:title',
-    canActivate: [CmsPageGuards],
-    component: FSCategoryPageComponent
+    redirectTo: null,
+    data: { cxRedirectTo: 'category' }
   }
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    FSCategoryPageLayoutModule,
-    RouterModule.forChild(routes)
-  ],
-  declarations: [FSCategoryPageComponent],
-  exports: [FSCategoryPageComponent]
+    RouterModule.forChild(routes),
+    PageLayoutModule
+  ]
 })
 export class FSCategoryPageModule {
 }

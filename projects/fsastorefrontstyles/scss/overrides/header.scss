@@ -1,34 +1,33 @@
 @import '../mixins-fsa';
 @import '../variables-fsa';
 
+// 
 cx-header {
-    --cx-primary: #666666;
-    --cx-inverse: #263950;
+    --cx-g-color-primary: #{$color-dark-grey};
+    --cx-g-color-inverse: #{$color-dark-blue};
+    --cx-background-color: #{$color-white};
+    --cx-max-width: 100%;
+    &::before {
+        display: none;
+    }
     .cx-header {
-        background-color: $color-white;
         color: $color-dark-grey;
-        max-width: 100% !important;
         text-transform: uppercase;
-        &::before {
-            display: none;
-        }
-        a, .nav-link, span.cx-navigation__link, .cx-login-status__greet {
+        padding: 0 !important; //needed to override Spartacus default padding :-(
+        .nav-link, .cx-navigation__link, .cx-login-status__greet {
+            text-transform: uppercase;
+            font-size: 14px;
+            color: $color-white;
             @include media-breakpoint-down(md) {
                 &:hover, &:focus, &:active, &:after {
                     color: $color-white;
-                }
-                &:after {
-                    border-color: $color-white;
                 }
             }
             @include media-breakpoint-up(lg) {
                 color: $color-dark-grey;
             }
-            text-transform: uppercase;
-            font-size: 14px;
-            color: $color-white;
         }
-        cx-category-navigation cx-navigation {
+        .NavigationBar cx-navigation-ui {
             position: relative;
             padding: 0;
             @include media-breakpoint-up(lg) {
@@ -52,13 +51,14 @@ cx-header {
                 }
             }
         }
-        nav .cx-navigation__list {
-            &.nav {
-                padding: 0;
-                .nav-item {
-                    @include media-breakpoint-down(md) {
-                        padding: 15px 0;
-                      }
+        nav {
+            padding: 0;
+            @include media-breakpoint-down(md) {
+                background-color: $color-dark-blue;
+            }
+            .nav-item {
+                @include media-breakpoint-down(md) {
+                    padding: 15px 0;
                 }
             }
             @include media-breakpoint-up(lg) {
@@ -68,8 +68,8 @@ cx-header {
                 margin: 1rem 0 0;
             }
         }
-        &__logo[position="SiteLogo"] {
-            --width: 100%;
+        .SiteLogo {
+            --cx-width: 100%;
             flex: 2;
             margin-left: 15px;
             @include media-breakpoint-down(md) {
@@ -83,15 +83,13 @@ cx-header {
                 max-width: 250px;
             }
         }
-        cx-dynamic-slot[position="StoreFinder"] {
-            display: none;
-        }
-        cx-login {
+        .SiteLogin {
             .cx-login-status__greet {
                 font-weight: bold;
             }
             cx-link {
-                margin-left: 1.5rem
+                margin-left: 1rem;
+                order: 2;
             }
             @include media-breakpoint-up(lg) {
                 .cx-login-status__greet {
@@ -100,9 +98,6 @@ cx-header {
                 margin-right: 30px; 
                 & > * {
                     display: inline-block;
-                }
-                cx-link {
-                    order: 2;
                 }
                 .cx-login-status__dropdown {
                     display: flex;
@@ -120,30 +115,20 @@ cx-header {
                     }
                 }
             }
-        }
-        #cx-mobile-menu {
-            color: $color-white;
             @include media-breakpoint-down(md) {
-                margin-top: 15px;
-            }
-            .cx-mobile-menu__components{
-                background-color: $color-dark-blue;
-                color: $color-white;
-            }
-            .hamburger-inner {
-                background-color: $color-dark-blue;
-                &:before, &:after {
-                background-color: $color-dark-blue; 
+                cx-link {
+                    color: $color-white;
+                }
+                background: $color-dark-blue;
+                .HeaderLinks {
+                    flex-direction: column;
                 }
             }
-            .cx-language-selector, .cx-currency-selector {
-                i {
-                    border-color: $color-white;
-                }
-                color: $color-white;
-                &:hover, &:focus, &:active {
-                    background-color: $color-dark-blue;
-                }
+        }
+        .hamburger-inner, .is-active .hamburger-inner {
+            background-color: $color-dark-blue;
+            &:before, &:after {
+            background-color: $color-dark-blue; 
             }
         }
         .cx-search-box {
@@ -154,6 +139,8 @@ cx-header {
                 border: 1px solid $color-dark-blue;
                 @include media-breakpoint-down(xs) {
                     color: $color-white;
+                    top: 50px; 
+                    border-bottom: 1px solid $color-white;
                 }
             }
         }
