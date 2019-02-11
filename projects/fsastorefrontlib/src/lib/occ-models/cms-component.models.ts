@@ -15,10 +15,12 @@ export interface CmsProductFeatureComponent extends CmsComponent {
   description?: string;
   media?: string;
  }
-
  export interface CmsEnrichedResponsiveBannerComponent extends CmsBannerComponent {
   headingText?: string;
   styledText?: string;
   url?: string;
 }
+ export interface CmsInboxComponent extends CmsComponent {
+   tabComponents?: string;
+ }
 
