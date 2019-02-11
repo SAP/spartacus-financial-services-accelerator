@@ -1,37 +1,8 @@
 @import 'mixins-fsa';
 @import 'variables-fsa';
 
-.cx-category-page-layout {
-    .Section2B, .Section3 {
-        margin: 40px 0;
-        cx-dynamic-slot {
-            border: 1px solid $color-grey;
-            background-color: $color-light-grey;
-            overflow: hidden;
-            display: block;
-            height: 100%;
-        }
-        cx-generic-link, cx-paragraph {
-            display: inline-block;
-            vertical-align: top;
-            width: 50%;
-            @include media-breakpoint-down(sm) {
-                width: 100%;
-            }
-        }
-        cx-paragraph {
-            padding: 20px;
-        }
-        .enriched-banner {
-            padding: 6%;
-            &__title {
-                font-size: 24px;
-            }
-        }
-        @include media-breakpoint-down(md) { 
-            margin: 20px 0 0 0;
-        }
-    }
+.FSCategoryPageTemplate {
+    text-align: center;
     .Section1 {
         .enriched-banner {
             position: relative;
@@ -97,20 +68,102 @@
             }
         }
     }
-    .Section4 cx-dynamic-slot {
+    .Section2A {
+        @include media-breakpoint-down(lg) {
+            padding: 0 10px;
+        }
+        .enriched-banner {
+            @include width1400;
+            background-color: $color-light-grey;
+            border: $border-grey;
+            margin: 30px auto 0;
+            padding: 20px;
+            text-align: center;
+            .image-wrapper {
+                display: none;
+            }
+            &__details {
+                display: block;
+                margin: 30px auto 0;
+            }
+            &__title {
+                margin: 0 auto;
+                font-size: 28px;
+                @include media-breakpoint-down(md) { 
+                    font-size: 20px;
+                }
+            }
+            &__styled-text {
+                @include primary-btn-color;
+                display: inline-block;
+                font-size: 18px;
+                line-height: 0;
+                padding: 25px 0;
+                text-transform: uppercase;
+                width: 25%;
+                @include media-breakpoint-down(md) { 
+                    width: 70%;
+                    font-size: 13px;
+                }
+            }
+        }
+    }
+    .Section2B {
+        @include width1400;
+        margin: 30px auto;
+        align-items: center;
+        border: 1px solid $color-grey;
+        background-color: $color-light-grey;
+        cx-responsive-banner, cx-paragraph {
+            flex: 0 1 auto;
+            width: 50%;
+            @include media-breakpoint-down(sm) {
+                width: 100%;
+            }
+        }
+        cx-paragraph {
+            padding: 20px;
+            @include media-breakpoint-down(sm) {
+                border: 1px solid $color-grey;
+                background-color: $color-light-grey;
+            }
+        }
+        @include media-breakpoint-down(sm) {
+            border: none;
+            background-color: transparent;
+            margin: 20px 0;
+            padding: 0 10px
+        }
+    }
+
+    .Section3 {
+        display: none;
+    }
+    .Section4 {
+        @include width1400;
         display: flex;
-        justify-content: flex-start;
-        margin: 0 -15px;
+        text-align: left;
         @include media-breakpoint-down(md) {
-            display: block;
+            flex-direction: column;
+            padding: 0 10px;
         }
         fsa-product-feature {
-            width: 33%;
-            margin: 0 15px;
+            display: block;
+            flex: 0 1 33.3333%;
+            &:first-of-type {
+                padding: 0 15px 0 0;
+            }
+            &:last-of-type {
+                padding: 0 0 0 15px;
+            }
             @include media-breakpoint-down(md) {
-                width: inherit;
-                margin: 20px 15px;
-                display: block;
+                margin: 20px 0;
+                &:first-of-type {
+                    padding: 0;
+                }
+                &:last-of-type {
+                    padding: 0;
+                }
             }
         }
     }

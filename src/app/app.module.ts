@@ -25,11 +25,33 @@ import { FSAStorefrontModule } from '@fsa/storefront';
         EnrichedResponsiveBannerComponent: { selector: 'fsa-enriched-responsive-banner' },
         CMSViewPoliciesComponent: { selector: 'fsa-view-policies' },
         CMSViewQuotesComponent: { selector: 'fsa-view-quotes' },
-        FinancialServicesProductFeatureComponent : { selector: 'fsa-product-feature' },
+        FinancialServicesProductFeatureComponent: { selector: 'fsa-product-feature' }
+      },
+      layoutSlots: {
+        InsuranceLandingPageTemplate: {
+          slots: [
+            'Section1',
+            'Section2A',
+            'Section2B',
+            'Section2C',
+            'Section3',
+            'Section4',
+            'Section5'
+          ]
+        },
+        FSCategoryPageTemplate: {
+          slots: [
+            'Section1',
+            'Section2A',
+            'Section2B',
+            'Section3',
+            'Section4'
+          ]
+        }
       }
     })
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import * as fromStore from '../../store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
+import * as fromStore from '../../store';
 
 @Component({
   selector: 'fsa-premium-calendar',
