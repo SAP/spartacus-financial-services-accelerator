@@ -1,0 +1,39 @@
+<ng-container *ngIf="entries$ | async as entries">
+  <ng-container *ngFor='let orderEntryData of entries | slice:1'>
+    <div class="col-md-12 cart-items-list__item">
+      <div class="row" *ngIf="orderEntryData.product.description != undefined">
+        <div class="holder-add-options holder__wrapper">
+          <div class="holder__tooltip js-tooltip">i</div>
+          <span class="holder__tip js-tip">
+            <span class="holder__close-tip js-close-tip">&#215;</span>
+            <span class="holder__content-tip">
+              {{orderEntryData.product.description}}
+            </span>
+          </span>
+        </div>
+        <div class="col-xs-12 col-sm-2 cart-items-list__thumb">
+          <cx-picture class="cx-product-image-container" [imageContainer]="orderEntryData.product.images?.PRIMARY" imageFormat="96Wx96H"></cx-picture>
+        </div>
+        <div class="col-xs-12 col-sm-7">
+          <h3 class="cart-items-list__product-name">{{orderEntryData.product.name}}</h3>
+        </div>
+        <div *ngIf="!orderEntryData.removeable && !orderEntryData.addable" class="col-xs-12 col-sm-3 cart-items-list__button">
+          <ng-container *ngTemplateOutlet="mandatoryNotAvailableButton; context:{title: ( orderEntryData.product.bundleTemplates?.length ==3 ? 'Mandatory' : 'Not avaliable')}"></ng-container>
+        </div>
+        <div *ngIf="!orderEntryData.removeable && orderEntryData.addable">
+          <button (click)="addProductToCart(orderEntryData.product?.code)" class="secondary-button secondary-button__default secondary-button__add-remove secondary-button__default--opacity">Add</button>
+        </div>
+        <div *ngIf="orderEntryData.removeable">
+            <button (click)="removeProductFromCart(orderEntryData.product)" class="secondary-button secondary-button__default secondary-button__add-remove secondary-button__default--opacity">Remove</button>
+          </div>
+      </div>
+    </div>
+  </ng-container>
+  <div *ngIf="entries != undefined" class="col-xs-12 col-sm-3 cart-items-list__button-row">
+    <button id="checkoutButtonBottom" class="primary-button primary-button__default primary-button__single-checkout js-continue-checkout-button"
+      type="button" data-checkout-url="">Next</button>
+  </div>
+</ng-container>
+<ng-template #mandatoryNotAvailableButton let-title="title">
+  <button type="button" class="secondary-button secondary-button__default secondary-button__add-remove secondary-button__default--opacity-disabled">{{title}}</button>
+</ng-template>
