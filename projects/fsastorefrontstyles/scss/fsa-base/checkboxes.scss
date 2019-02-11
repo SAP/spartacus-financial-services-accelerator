@@ -1,0 +1,50 @@
+@import '../mixins-fsa';
+@import '../variables-fsa';
+
+.checkbox-label {
+	padding-left: 30px;
+	margin-bottom: 30px;
+	input {
+		&:checked ~ .checkbox-text {
+			color: $color-dark-grey;
+		}
+	}
+	& ~ .primary-button__checkout[disabled] {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+}
+.checkbox-label {
+	display: block;
+	position: relative;
+	input {
+		display: none;
+		&:checked ~ .checkbox-text:before {
+			color: $color-blue;
+			border-color: $color-blue;
+		}
+	}
+}
+.checkbox-text {
+	line-height: 1;
+	color: $color-grey;
+	cursor: pointer;
+	text-transform: none;
+	font-size: 15px;
+	// .glyphicon-ok;
+	&:before {
+		@include transition;
+		font-size: 11px;
+		position: absolute;
+		padding: 0 0 1px 1px;
+		top: 0;
+		left: 0;
+		height: 18px;
+		width: 18px;
+		line-height: 1.2;
+		border: 2px solid $color-grey;
+		border-radius: 3px;
+		font-family: 'Glyphicons Halflings', sans-serif;
+		color: transparent;
+	}
+}

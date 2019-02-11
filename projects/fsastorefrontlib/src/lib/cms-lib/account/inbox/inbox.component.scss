@@ -2,205 +2,43 @@
 @import 'variables-fsa';
 @import '~bootstrap/scss/mixins/breakpoints';
 
-.inbox {
-	.checkbox-label {
-		display: block;
-		position: relative;
-		input {
-			display: none;
-			&:checked ~ .checkbox-text:before {
-				color: $color-blue;
-				border-color: $color-blue;
-			}
-		}
-	}
-	.checkbox-text {
-		line-height: 1;
-		color: $color-grey;
-		cursor: pointer;
-		text-transform: none;
-		font-size: 15px;
-		// glyphicon-ok;
-		&:before {
-			@include transition;
-			font-size: 11px;
-			position: absolute;
-			padding: 0 0 1px 1px;
-			top: 0;
-			left: 0;
-			height: 18px;
-			width: 18px;
-			line-height: 1.2;
-			border: 2px solid $color-grey;
-			border-radius: 3px;
-			font-family: 'Glyphicons Halflings', sans-serif;
-			color: transparent;
-		}
-	}
-	.checkbox-text {
-		&:before {
-			background-color: $color-white;
-		}
-	}
-	.messages-state {
-		color: $color-blue;
-		padding: 6px 20px;
-		font-size: 20px;
-		cursor: pointer;
-		// @include glyphicon-envelope;
-		&:before {
-			// @include glyphicon;
-		}
-		&.opened {
-			// @include icon-fsa-envelope-open;
-			&:before {
-				// @include FSA-icon;
-			}
-		  }
-	}
-	.dropdown {
-		.section-header__heading {
-			font-size: 16px;
-			font-weight: 600;
-			cursor: pointer;
-		}
-		.checkbox-label {
-			position: absolute;
-			left: 20px;
-			top: 50%;
-			transform: translateY(-50%);
-		}
-		.checkbox-text {
-			display: block;
-			width: 18px;
-			height: 18px;
-		}
-		.glyphicon-triangle-bottom, .glyphicon-triangle-top  {
-			position: absolute;
-			right: 5vw;
-			top: 50%;
-			transform: translateY(-50%);
-		}
-		.dropdown-menu {
-			padding: 0;
-		}
-	}
-	.dropdown-menu {
-		margin: 0;
-		width: 100%;
-		& a {
-			padding: 10px 20px;
-			color: $color-dark-grey;
-		}
-		&> .active > a {
-			background-color: $color-white;
-			color: $color-dark-grey;
-		}
-		&>li>a:hover {
-            background-color: $color-grey;
-		}
-	}
-	.section-header__heading--small-title {
-		position: relative;
-		font-size: 16px;
-		.sort {
-			cursor: pointer;
-			//@include glyphicon-triangle-bottom;
-			&:before {
-				//@include glyphicon;
-				font-size: 15px;
-				position: absolute;
-				top: 3px;
-				right: 2vw;
-				@include transition;
-			}
-			&.top {
-				&:before {
-					transform: rotateX(180deg);
-					@include transition;
-				}
-			}
-		}
-	}
-	.tr {
-		padding: 0 20px;
-		& > * {
-			padding-top: 20px;
-			padding-bottom: 20px;
-		}
-	}
-	.td1, .td4 {
-		padding-right: 0;
-	}
-	.td2, .td4 {
-		flex-grow: 2;
-	}
-	.td4 {
-		@include media-breakpoint-down(sm) {
-			flex-grow: 1;
-			padding-right: 5%;
-		}
-	}
-	.td3 {
-		cursor: pointer;
-		flex-grow: 5;
-		&.msg-preview {
-			&:hover, &.active {
-				@include transition;
-				color: $color-blue;
-			}
-		}
-		.cell-text {
-			padding-right: 2vw;
-		}
-	}
-	.td1.section-header__heading--small-title, .dropdown {
-		.checkbox-label {
-			input {
-				&:checked ~ .checkbox-text:before {
-					color: $color-black;
-					border-color: $color-grey;
-				}
-			}
-		}
-		.checkbox-text {
-			color: $color-grey;
-			&:before {
-				border-color: $color-grey;
-				background-color: $color-white;
-			}
-		}
-	}
-	.pagination {
-		width: auto;
-		float: right;
-		& > li > a, & > li > span {
-			width: 30px;
-		}
-	}
-}
-.messages {
-	border: $border-grey;
-	.message {
-		display: none;
-		padding: 40px 20px;
-		div {
-			max-width: 1100px;
-			width: 100%;
-			margin: 0 auto;
-			padding: 20px;
-			border: $border-grey;
-            @include box-shadow(0, 3px, 10px, 0, $color-dark-grey, 25%);
-		}
+.tabs-header {
+	border-bottom: 1px solid #cccccc;
+	& ul {
+		display: flex;
+	} 
+	& ul li {
+		list-style: none;
+		flex-grow: 1;
+    background-color: $color-light-grey;
+    margin-right: 5px;
+    border: 1px solid $color-grey;
+    border-bottom: none;
+    text-align: center;
+		max-width: 15%;
 		a {
-			font-weight: bold;
-			color: $color-blue;
+			@include transition;
+			border-top: 4px solid transparent;
+			background-color: $color-semi-dark-grey;
+			color: $color-white;
+			padding: 10px;
+			font-weight: 600;
+			display: block;
+			&:hover {
+				background-color: $color-white;
+				color: $color-semi-dark-grey;
+			}
 		}
-	}
+		&.active {
+			a {
+				border-top: 4px solid $color-cart-top-border;
+				background-color: transparent;
+				color: $color-dark-grey;
+			}
+		}
+	} 
 }
-.unread {
-	font-weight: 600;
-}
-.msg-selected {
-	background-color: $color-mild-grey;
+.section-header__heading {
+	text-align: left;
+	font-size: 16px;
 }

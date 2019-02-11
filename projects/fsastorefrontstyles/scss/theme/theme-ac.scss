@@ -20,6 +20,14 @@ button:focus {
 $border-grey: 1px solid $color-grey;
 a {
   @include transition();
+  &:hover {
+    text-decoration: none;
+  }
+}
+ul, li {
+  list-style:none;
+  margin: 0;
+  padding: 0;
 }
 // Stand-alone building blocks
 .heading-headline {
