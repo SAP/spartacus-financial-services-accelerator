@@ -38,8 +38,7 @@ export class FSCartService extends CartService {
         this.fsStore.dispatch(
           new LoadCart({
             userId: this.fsCartData.userId,
-            cartId: this.fsCartData.cartId,
-            details: true
+            cartId: this.fsCartData.cartId
           })
         );
       }

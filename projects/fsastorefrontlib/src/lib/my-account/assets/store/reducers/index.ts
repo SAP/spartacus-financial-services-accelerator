@@ -26,21 +26,6 @@ export function getReducers(): ActionReducerMap<UserState> {
   };
 }
 
-// export function getFSCartReducers(): ActionReducerMap<CartsState> {
-//   return {
-//     active: loaderReducer<CartState>(CART_DATA, fromFSCartReducer.reducer)
-//   };
-// }
-
-// export const reducerFSCartToken: InjectionToken<
-//   ActionReducerMap<CartsState>
-// > = new InjectionToken<ActionReducerMap<CartsState>>('FSCartReducers');
-
-// export const reducerFSCartProvider: Provider = {
-//   provide: reducerFSCartToken,
-//   useFactory: getFSCartReducers
-// };
-
 export const reducerToken: InjectionToken<
   ActionReducerMap<UserState>
   > = new InjectionToken<ActionReducerMap<UserState>>('UserReducers');
