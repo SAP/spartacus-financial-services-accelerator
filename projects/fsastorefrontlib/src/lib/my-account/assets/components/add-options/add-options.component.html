@@ -27,7 +27,7 @@
                   <button (click)="addProductToCart(orderEntryData.product?.code)" class="secondary-button secondary-button__default">Add</button>
                 </div>
                 <div *ngIf="orderEntryData.removeable">
-                    <button (click)="removeProductFromCart(orderEntryData.product)" class="secondary-button secondary-button__default secondary-button__default--opacity">Remove</button>
+                  <button (click)="removeProductFromCart(orderEntryData)" class="secondary-button secondary-button__default secondary-button__default--opacity">Remove</button>
                 </div>
               </div>
             </div>
