@@ -13,7 +13,7 @@ export class AddOptionalProduct extends LoaderLoadAction implements Action {
 
 export class AddOptionalProductSuccess extends LoaderSuccessAction implements Action {
   readonly type = ADD_OPTIONAL_PRODUCT_SUCCESS;
-  constructor() {
+  constructor(public payload: any) {
     super(CART_DATA);
   }
 }
@@ -24,7 +24,7 @@ export class AddOptionalProductFail extends LoaderFailAction {
     super(CART_DATA, payload);
   }}
 
-export type FSCartAction =
+export type CartAction =
   | AddOptionalProduct
   | AddOptionalProductSuccess
   | AddOptionalProductFail

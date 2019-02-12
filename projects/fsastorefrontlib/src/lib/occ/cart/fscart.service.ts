@@ -16,7 +16,6 @@ export class OccFSCartService {
 
     public addToCart(userId: string, cartId: string, productCode: string, quantity: number): Observable<any> {
         const url = this.getAddOptionalProductToCartEndpoint(userId, cartId);
-        console.log(url);
         const params = new HttpParams({
             fromString: 'productCode=' + productCode + '&quantity=' + quantity + FULL_PARAMS
         });

@@ -1,27 +1,19 @@
 import { InjectionToken, Provider } from '@angular/core';
-import {
-  ActionReducerMap,
-  createFeatureSelector,
-  MemoizedSelector
-} from '@ngrx/store';
-
-import * as fromQuoteReducer from './quote.reducer';
+import { ActionReducerMap, createFeatureSelector, MemoizedSelector } from '@ngrx/store';
+import { CartsState, CartState, CART_DATA, loaderReducer } from '@spartacus/core';
+import * as fromClaimReducer from './claim.reducer';
 import * as fromPolicyReducer from './policy.reducer';
 import * as fromPremiumCalendarReducer from './premium-calendar.reducer';
-import * as fromClaimReducer from './claim.reducer';
+import * as fromQuoteReducer from './quote.reducer';
 import * as fromFSCartReducer from './fscart.reducer';
-import { ActionReducer } from '@ngrx/store/src/models';
-import { FSCartAction } from 'projects/fsastorefrontlib/src/lib/my-account/assets/store';
+
 
 export interface UserState {
   quotes: fromQuoteReducer.QuoteState;
   policies: fromPolicyReducer.PolicyState;
   premiumCalendar: fromPremiumCalendarReducer.PremiumCalendarState;
   claims: fromClaimReducer.ClaimState;
-}
-
-export interface CartState {
-  carts: fromFSCartReducer.CartState
+  cart: CartState
 }
 
 export function getReducers(): ActionReducerMap<UserState> {
@@ -30,18 +22,24 @@ export function getReducers(): ActionReducerMap<UserState> {
     policies: fromPolicyReducer.reducer,
     premiumCalendar: fromPremiumCalendarReducer.reducer,
     claims: fromClaimReducer.reducer,
+    cart: fromFSCartReducer.reducer
   };
 }
 
-export function getCartReducer(): ActionReducerMap<CartState> {
-  return {
-    carts: fromFSCartReducer.reducer
-  }
-}
+// export function getFSCartReducers(): ActionReducerMap<CartsState> {
+//   return {
+//     active: loaderReducer<CartState>(CART_DATA, fromFSCartReducer.reducer)
+//   };
+// }
 
-export const reducerCartToken: InjectionToken<
-  ActionReducerMap<CartState>
-  > = new InjectionToken<ActionReducerMap<CartState>>('CartReducers');
+// export const reducerFSCartToken: InjectionToken<
+//   ActionReducerMap<CartsState>
+// > = new InjectionToken<ActionReducerMap<CartsState>>('FSCartReducers');
+
+// export const reducerFSCartProvider: Provider = {
+//   provide: reducerFSCartToken,
+//   useFactory: getFSCartReducers
+// };
 
 export const reducerToken: InjectionToken<
   ActionReducerMap<UserState>
@@ -57,12 +55,4 @@ export const getUserState: MemoizedSelector<
   UserState
   > = createFeatureSelector<UserState>('assets');
 
-  export const reducerCartProvider: Provider = {
-    provide: reducerCartToken,
-    useFactory: getCartReducer
-  };
-
-  export const getCartState: MemoizedSelector<
-  any,
-  CartState
-  > = createFeatureSelector<CartState>('carts');
+ 

@@ -2,16 +2,22 @@ import { MemoizedSelector, createSelector } from '@ngrx/store';
 
 import * as fromFeature from './../reducers';
 import * as fromCart from './../reducers/fscart.reducer';
+import { CartState } from '@spartacus/core';
 
 export const getCartState: MemoizedSelector<
   any,
-  fromCart.CartState
+  CartState
 > = createSelector(
-  fromFeature.getCartState,
-  (cartState: fromFeature.CartState) => cartState.carts
+  fromFeature.getUserState,
+  (cartState: fromFeature.UserState) => cartState.cart
 );
 
-export const getRefresh: MemoizedSelector<any, boolean> = createSelector(
+export const getCart: MemoizedSelector<any, any> = createSelector(
+  getCartState,
+  fromCart.getEntries
+);
+
+export const getCartRefresh: MemoizedSelector<any, boolean> = createSelector(
   getCartState,
   fromCart.getRefresh
 );

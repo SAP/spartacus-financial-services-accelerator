@@ -9,7 +9,6 @@ import { AddOptionsComponent } from './assets/components/add-options/add-options
 import { ComponentsModule } from '@spartacus/storefront';
 import { FSCartService } from 'projects/fsastorefrontlib/src/lib/my-account/assets/services';
 import { StoreModule } from '@ngrx/store';
-import { reducerCartProvider, reducerCartToken } from './assets/store/reducers';
 @NgModule({
   imports: [
     NgbTooltipModule,
@@ -17,11 +16,10 @@ import { reducerCartProvider, reducerCartToken } from './assets/store/reducers';
     RouterModule,
     FormsModule,
     NgSelectModule,
-    ComponentsModule,
-    StoreModule.forFeature('carts', reducerCartToken),
+    ComponentsModule
   ],
   declarations: [AddOptionsComponent],
   exports: [AddOptionsComponent],
-  providers: [FSCartService,reducerCartProvider]
+  providers: [FSCartService]
 })
 export class AddOptionsModule { }
