@@ -4,16 +4,16 @@ export const ADD_OPTIONAL_PRODUCT = '[Cart] Add Optional Product';
 export const ADD_OPTIONAL_PRODUCT_SUCCESS = '[Cart] Add Optional Product Success';
 export const ADD_OPTIONAL_PRODUCT_FAIL = '[Cart] Add Optional Product Fail';
 
-export class AddOptionalProduct extends LoaderLoadAction {
+export class AddOptionalProduct extends LoaderLoadAction implements Action {
   readonly type = ADD_OPTIONAL_PRODUCT;
   constructor(public payload: any) {
     super(CART_DATA);
   }
 }
 
-export class AddOptionalProductSuccess extends LoaderSuccessAction {
+export class AddOptionalProductSuccess extends LoaderSuccessAction implements Action {
   readonly type = ADD_OPTIONAL_PRODUCT_SUCCESS;
-  constructor(public payload: any) {
+  constructor() {
     super(CART_DATA);
   }
 }

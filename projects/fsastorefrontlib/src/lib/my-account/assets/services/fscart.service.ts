@@ -10,7 +10,7 @@ import { AuthService, UserToken } from '@spartacus/core';
 import * as fromAction from '../store/actions';
 import * as fromSelector from '../store/selectors';
 import { ANONYMOUS_USERID, CartDataService } from '@spartacus/core';
-import { StateWithCart } from '@spartacus/core';
+import { StateWithCart } from 'C:/spartacus/cloud-commerce-spartacus-storefront/projects/core/src/cart/store/cart-state';
 import { CartService } from '@spartacus/core';
 
 @Injectable()
@@ -22,6 +22,7 @@ export class FSCartService extends CartService {
         private fsAuthService: AuthService
     ) {
         super(fsStore, fsCartData, fsAuthService);
+        this.refresh();
     }
 
     addOptionalProduct(productCode: string, quantity: number): void {

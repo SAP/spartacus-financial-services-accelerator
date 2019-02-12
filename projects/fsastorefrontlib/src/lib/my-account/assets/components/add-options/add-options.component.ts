@@ -1,6 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy,Input } from '@angular/core';
-import * as fromStore from '../../store';
-import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
 import { CartService, Cart, OrderEntry } from '@spartacus/core';
 import { filter } from 'rxjs/operators';
@@ -17,7 +15,6 @@ export class AddOptionsComponent implements OnInit {
 
   constructor(
     protected cartService: FSCartService,
-    private store: Store<fromStore.UserState>,
     private config: OccConfig
   ) {  }
 
@@ -37,9 +34,16 @@ export class AddOptionsComponent implements OnInit {
     if (!orderEntryCode) {
       return;
     }
-    this.cartService.addOptionalProduct (orderEntryCode, 1);
+    this.cartService.addOptionalProduct(orderEntryCode, 1);
   }
 
+  removeProductFromCart(item): void {
+    if (!item) {
+      return;
+    }
+    this.cartService.removeEntry(item);
+  }
+  
   public getBaseUrl() {
     return this.config.server.baseUrl || '';
   }

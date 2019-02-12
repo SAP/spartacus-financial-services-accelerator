@@ -7,17 +7,19 @@ import { CartService } from '@spartacus/core';
 import { AddOptionsComponent } from './assets/components/add-options/add-options.component';
 import { ComponentsModule } from '@spartacus/storefront';
 import { FSCartService } from 'projects/fsastorefrontlib/src/lib/my-account/assets/services';
-
+import { StoreModule } from '@ngrx/store';
+import { reducerCartProvider, reducerCartToken } from './assets/store/reducers';
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     FormsModule,
     NgSelectModule,
-    ComponentsModule
+    ComponentsModule,
+    StoreModule.forFeature('carts', reducerCartToken),
   ],
   declarations: [AddOptionsComponent],
   exports: [AddOptionsComponent],
-  providers: [FSCartService]
+  providers: [FSCartService,reducerCartProvider]
 })
 export class AddOptionsModule { }

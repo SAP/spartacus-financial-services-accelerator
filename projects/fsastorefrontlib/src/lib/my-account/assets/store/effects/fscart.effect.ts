@@ -22,7 +22,7 @@ export class FSCartEffects {
         .addToCart(payload.userId, payload.cartId, payload.productCode, payload.quantity)
         .pipe(
             map((cart: any) => {
-              return new fromActions.AddOptionalProductSuccess(cart);
+              return new fromActions.AddOptionalProductSuccess();
             }),
             catchError(error => of(new fromActions.AddOptionalProductFail(error)))
           );
