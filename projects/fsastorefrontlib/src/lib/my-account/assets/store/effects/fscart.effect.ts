@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { CartDataService, ProductImageConverterService } from '@spartacus/core';
-import { OccFSCartService } from 'projects/fsastorefrontlib/src/lib/occ/cart/fscart.service';
+import { OccFSCartService } from './../../../../occ/cart/fscart.service';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import * as fromActions from './../actions';
+import * as fromCartActions from '@spartacus/core';
 
 @Injectable()
 export class FSCartEffects {
@@ -17,9 +18,9 @@ export class FSCartEffects {
         .addToCart(payload.userId, payload.cartId, payload.productCode, payload.quantity)
         .pipe(
           map((entry: any) => {
-            return new fromActions.AddOptionalProductSuccess(entry);
+            return new fromCartActions.AddEntrySuccess(entry);
           }),
-          catchError(error => of(new fromActions.AddOptionalProductFail(error)))
+          catchError(error => of(new fromCartActions.AddEntryFail(error)))
         );
     })
   );

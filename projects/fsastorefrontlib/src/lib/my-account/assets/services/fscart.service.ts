@@ -29,19 +29,5 @@ export class FSCartService extends CartService {
         quantity: quantity
       })
     );
-    this.refreshCart();
-  }
-
-  refreshCart(): void {
-    this.fsStore.pipe(select(fromSelector.getCartRefresh)).subscribe(refresh => {
-      if (refresh) {
-        this.fsStore.dispatch(
-          new LoadCart({
-            userId: this.fsCartData.userId,
-            cartId: this.fsCartData.cartId
-          })
-        );
-      }
-    });
   }
 }

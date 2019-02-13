@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
-import { catchError } from 'rxjs/operators';
+import { OccConfig, CartModification } from '@spartacus/core';
+import { catchError } from 'rxjs/internal/operators/catchError';
 import { throwError } from 'rxjs/internal/observable/throwError';
-import { OccConfig } from '@spartacus/core';
 
 const FULL_PARAMS = '&fields=FULL';
 
@@ -14,12 +14,18 @@ export class OccFSCartService {
         protected config: OccConfig
     ) { }
 
-    public addToCart(userId: string, cartId: string, productCode: string, quantity: number): Observable<any> {
+    public addToCart(userId: string, cartId: string, productCode: string, quantity: number): Observable<CartModification> {
+        const toAdd = JSON.stringify({});
         const url = this.getAddOptionalProductToCartEndpoint(userId, cartId);
         const params = new HttpParams({
             fromString: 'productCode=' + productCode + '&quantity=' + quantity + FULL_PARAMS
         });
-        return this.http.post(url, params);
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/x-www-form-urlencoded'
+        });
+        return this.http
+            .post<any>(url, toAdd, { headers, params })
+            .pipe(catchError((error: any) => throwError(error.json())));
     }
 
     protected getAddOptionalProductToCartEndpoint(userId: string, cartId: string) {

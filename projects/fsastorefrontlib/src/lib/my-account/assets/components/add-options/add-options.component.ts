@@ -1,10 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy,Input } from '@angular/core';
 import { OccConfig } from '@spartacus/core';
-import { CartService, Cart, OrderEntry } from '@spartacus/core';
+import { Cart, OrderEntry } from '@spartacus/core';
 import { filter } from 'rxjs/operators';
-
 import { Observable } from 'rxjs';
-import { FSCartService } from 'projects/fsastorefrontlib/src/lib/my-account/assets/services/fscart.service';
+import { FSCartService } from '../../../assets/services/fscart.service';
+
 @Component({
   selector: 'fsa-add-options',
   templateUrl: './add-options.component.html',
@@ -43,7 +43,7 @@ export class AddOptionsComponent implements OnInit {
     }
     this.cartService.removeEntry(item);
   }
-  
+
   public getBaseUrl() {
     return this.config.server.baseUrl || '';
   }
