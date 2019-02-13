@@ -1,3 +1,66 @@
-<p>
-  quotes-review-page works!
-</p>
+<div class="center1400">
+  <div class="col-md-8">
+    <div class="accordion">
+      <!-- <c:url value="${nextStepUrl}" var="nextStep"/>
+      <c:url value="/checkout/multi/quote/back" var="backStep"/> -->
+      <div class="accordion-header section-header__heading">
+        <!-- <quote:quoteHeader insuranceQuoteReviews="${insuranceQuoteReviews}"/> -->
+      </div>
+      <div class="accordion-item">
+        <ng-container *ngIf="(cart$ | async) as cart">
+          <div>
+            {{  cart | json}}
+           
+          </div>
+        </ng-container>
+        <!-- <c:set var="openWhatsIncludedSection" value="true"/>
+        <c:choose>
+          <c:when test="${fn:toLowerCase(fn:escapeXml(cmsSite.channel)) eq 'insurance'}"> <c:set var="personalDetailsStepOrder" value="3"/></c:when>
+          <c:otherwise><c:set var="personalDetailsStepOrder" value="2"/></c:otherwise>
+        </c:choose>
+        <c:if test="${cartData.insuranceQuote.quoteType ne 'EVENT'}">
+          <c:set var="openWhatsIncludedSection" value="false"/>-->
+          <div class="accordion-item__wrapper">
+            <!--<quote:quotePlanInfoSection insuranceQuoteReviews="${insuranceQuoteReviews}" isValidStep="${insuranceQuoteReviews[0].validation['0']}"/> -->
+          </div>
+        <!-- </c:if>
+        <c:if test="${not empty insuranceQuoteReviews and fn:length(insuranceQuoteReviews[0].mainProduct.benefits) > 0}">-->
+          <div class="accordion-item__wrapper">
+            <!-- <quote:quoteIncluded insuranceQuoteReviews="${insuranceQuoteReviews}" isValidStep="${insuranceQuoteReviews[0].validation['0']}" openSection="${openWhatsIncludedSection}"/>  -->
+          </div>
+        <!-- </c:if> -->
+        <div class="accordion-item__wrapper">
+          <!-- <quote:quoteExtras insuranceQuoteReviews="${insuranceQuoteReviews}" isValidStep="${insuranceQuoteReviews[0].validation['1']}"/> -->
+        </div>
+
+        <!-- <c:if test="${not empty insuranceQuoteReviews and fn:length(insuranceQuoteReviews[0].mainProduct.coverageProduct.investments) > 0}"> -->
+          <div class="accordion-item__wrapper">
+            <!-- <quote:quoteInvestments insuranceQuoteReviews="${insuranceQuoteReviews}" isValidStep="${insuranceQuoteReviews[0].validation['0']}" /> -->
+          </div>
+        <!-- </c:if> -->
+
+        <div class="accordion-item__wrapper">
+          <!-- <quote:quoteReviewDetails insuranceQuoteReviews="${insuranceQuoteReviews}" isValidStep="${insuranceQuoteReviews[0].validation[personalDetailsStepOrder]}"/> -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <!-- <form:form method="post" commandName="quoteReviewForm" class="accordion__form-button accordion__form-button--bottom">
+            <ycommerce:testId code="multicheckout_back_button"> -->
+              <a class="secondary-button secondary-button__default secondary-button__checkout js-checkQuoteStatus" href="">
+                <!-- <spring:theme code="checkout.multi.quoteReview.back" text="Back"/> -->
+              </a>
+            <!-- </ycommerce:testId>
+          </form:form> -->
+        </div>
+        <!-- <quote:quoteCertifySection checkoutUrl="${nextStep}" cartData="${cartData}"/> -->
+      </div>
+    </div>
+  </div>
+  <!-- <multi-checkout:checkoutOrderDetails cartData="${cartData}" showShipDeliveryEntries="true" showPickupDeliveryEntries="true" showTax="true"/>
+  <insuranceCheckout:confirmQuoteUnbindActionPopup/>
+  <insuranceCheckout:confirmQuoteBindActionPopup/> -->
+</div>
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
+</ng-template>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Cart, CartService, OrderEntry } from '@spartacus/core';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'fsa-quotes-review-page',
@@ -7,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class QuotesReviewPageComponent implements OnInit {
 
-  constructor() { }
+  entries$: Observable<OrderEntry[]>;
+  cart$: Observable<Cart>;
+
+  constructor(
+    protected cartService: CartService
+  ) { }
 
   ngOnInit() {
+    this.cart$ = this.cartService.getActive();
+    this.entries$ = this.cartService.getEntries();
   }
 
 }
