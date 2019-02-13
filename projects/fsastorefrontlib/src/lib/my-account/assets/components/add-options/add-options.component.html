@@ -1,0 +1,48 @@
+<div class="center1400 contentPadding">
+  <h2 class="centered-heading">Your Event Insurance</h2>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="cart-items-list col-lg-8">
+        <div class="row">
+          <h2 class="gradient-heading text-center col">Add Options</h2>
+        </div>
+        <ng-container *ngIf="entries$ | async as entries">
+          <ng-container *ngFor='let orderEntryData of entries | slice:1'>
+            <div class="row position-relative py-3" *ngIf="orderEntryData.product.description != undefined">
+              <div *ngIf="!orderEntryData.removeable && !orderEntryData.addable" class="disabled-option"></div> 
+              <div class="tooltip-wrapper">
+                <div class="fs-tooltip" ngbTooltip="{{orderEntryData.product.description}}" triggers="click:blur" placement="left">i</div>
+              </div>
+              <div class="col-12 col-md-2 align-self-center">
+                <cx-picture class="cx-product-image-container" [imageContainer]="orderEntryData.product.images?.PRIMARY" imageFormat="96Wx96H"></cx-picture>
+              </div>
+              <div class="col-12 col-md-7 align-self-center">
+                <h3>{{orderEntryData.product.name}}</h3>
+              </div>
+              <div *ngIf="!orderEntryData.removeable && !orderEntryData.addable" class="col-12 col-md-3 align-self-center">
+                <ng-container *ngTemplateOutlet="mandatoryNotAvailableButton; context:{title: ( orderEntryData.product.bundleTemplates?.length ==3 ? 'Mandatory' : 'Not avaliable')}"></ng-container>
+              </div>
+              <div class="col-12 col-md-3 align-self-center">
+                <div *ngIf="!orderEntryData.removeable && orderEntryData.addable">
+                  <button (click)="addProductToCart(orderEntryData.product?.code)" class="secondary-button secondary-button__default">Add</button>
+                </div>
+                <div *ngIf="orderEntryData.removeable">
+                  <button (click)="removeProductFromCart(orderEntryData)" class="secondary-button secondary-button__default secondary-button__default--opacity">Remove</button>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>  
+    </div><!-- End of .row -->
+    <div class="row">
+      <div class="col-lg-8" *ngIf="entries$ != undefined">
+        <button id="checkoutButtonBottom" class="primary-button primary-button__default primary-button__single-checkout col-md-3 col mt-4 float-right"
+          type="button" data-checkout-url="">Next</button>
+      </div>
+    </div>
+  </div><!-- End of .container-fluid -->
+</div><!-- End of .center1400 -->
+<ng-template #mandatoryNotAvailableButton let-title="title">
+  <button disabled type="button" class="secondary-button secondary-button__default secondary-button__default--opacity-disabled">{{title}}</button>
+</ng-template>

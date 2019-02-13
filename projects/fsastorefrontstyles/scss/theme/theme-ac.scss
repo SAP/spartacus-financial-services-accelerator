@@ -14,6 +14,9 @@ body {
   padding: 20px 10px 0 10px;
 }
 //CSS Reset
+button[disabled], html input[disabled] {
+  cursor: default;
+}
 button:focus {
   outline: none;
 }
@@ -398,3 +401,91 @@ a {
 }
 	
 /*********MY ACCOUNT - POLICIES DETAILS END********/
+/********* CHECKOUT ********/
+.centered-heading {
+  padding: 40px 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 30px;
+  font-weight: 500;
+  border-bottom: 1px solid $color-grey;
+}
+.cart-items-list {
+  border: 1px solid $color-grey;
+  background-color: $color-light-grey;
+  margin-top: 30px;
+  & h2 {
+    margin: 0;
+  }
+  & h3 {
+    font-weight: 500;
+    margin: 0;
+    padding: 2px 0;
+    max-width: 285px;
+    width: 100%;
+    @include ellipsis;
+    @media (max-width: $screen-sm-mid) {
+      margin: 12px 0;
+      max-width: inherit;
+    }
+  }
+  & > .row {
+    @media (max-width: $screen-sm-mid) {
+      border-top: 1px solid $color-grey;
+    }
+  }
+  .disabled-option {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-bottom: 2px solid $color-mild-grey;
+    border-top: 2px solid $color-mild-grey;
+    box-shadow: 0 0 0 2px white inset;
+  }
+  .tooltip-wrapper {
+    padding-top: 39px;
+    padding-left: 40px;
+    z-index: 2000;
+    position: absolute;
+    right: 32%;
+    @media (max-width: $screen-sm-mid) {
+      right: 30px;
+      top: 0;
+    }
+  }
+  @media (max-width: $screen-sm-mid) {
+    text-align: center;
+  }
+}
+
+/********* CHECKOUT - END ********/
+/********* TOOLTIP ********/
+
+.fs-tooltip {
+  width: 20px;
+  height: 20px;
+  font-weight: 600;
+  background-color: #263950;
+  cursor: pointer;
+  color: $color-white;
+  font-style: italic;
+  text-align: center;
+  border-radius: 50%;
+}
+.tooltip {
+  .arrow:before {
+    width: 200px;
+    border-left-color: $color-button-secondary-hover;
+  }
+  .tooltip-inner {
+    width: 200px;
+    background-color: $color-button-secondary-hover;
+    opacity: 0.95;
+    border-radius: 6px;
+  }
+}
+/********* TOOLTIP - END ********/
