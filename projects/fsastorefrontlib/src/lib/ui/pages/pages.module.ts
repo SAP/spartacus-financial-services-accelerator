@@ -15,7 +15,6 @@ const pageModules = [
     ClaimsPageModule,
     PolicyDetailsPageModule,
     PremiumCalendarPageModule,
-    //FSCategoryPageModule,
     AddOptionsPageModule,
 ];
 

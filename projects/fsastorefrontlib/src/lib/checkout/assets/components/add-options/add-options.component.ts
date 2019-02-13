@@ -1,9 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy,Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { OccConfig } from '@spartacus/core';
 import { Cart, OrderEntry } from '@spartacus/core';
 import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { FSCartService } from '../../../assets/services/fscart.service';
+import {FSCartService} from '../../services';
 
 @Component({
   selector: 'fsa-add-options',
@@ -16,7 +16,7 @@ export class AddOptionsComponent implements OnInit {
   constructor(
     protected cartService: FSCartService,
     private config: OccConfig
-  ) {  }
+  ) { }
 
   cart$: Observable<Cart>;
   entries$: Observable<OrderEntry[]>;
@@ -30,7 +30,7 @@ export class AddOptionsComponent implements OnInit {
     this.cartLoaded$ = this.cartService.getLoaded();
   }
 
-  addProductToCart(orderEntryCode:string) {
+  addProductToCart(orderEntryCode: string) {
     if (!orderEntryCode) {
       return;
     }
