@@ -29,12 +29,12 @@ export class OccFSCartService {
     }
 
     protected getAddOptionalProductToCartEndpoint(userId: string, cartId: string) {
-        const adddOptionalProductToCartEndpoint = '/users/' + userId + '/carts/' + cartId + '/fs-add-to-cart';
+        const addOptionalProductToCartEndpoint = '/users/' + userId + '/carts/' + cartId + '/fs-add-to-cart';
         return (
             (this.config.server.baseUrl || '') +
             this.config.server.occPrefix +
             this.config.site.baseSite +
-            adddOptionalProductToCartEndpoint
+            addOptionalProductToCartEndpoint
         );
     }
 

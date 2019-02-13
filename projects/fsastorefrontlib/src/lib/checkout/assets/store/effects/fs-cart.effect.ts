@@ -4,7 +4,7 @@ import {Observable, of} from 'rxjs';
 import {catchError, map, switchMap} from 'rxjs/operators';
 import * as fromCartActions from '@spartacus/core';
 import { CartDataService } from '@spartacus/core';
-import {OccFSCartService} from '../../../../occ/cart/fscart.service';
+import {OccFSCartService} from '../../../../occ/cart/fs-cart.service';
 import * as fromActions from '../../../../checkout/assets/store/actions/index';
 
 @Injectable()

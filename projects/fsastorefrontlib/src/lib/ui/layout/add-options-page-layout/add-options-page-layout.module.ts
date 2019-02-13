@@ -1,14 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AddOptionsPageLayoutComponent } from './add-options-page-layout.component';
-import { AddOptionsModule } from 'projects/fsastorefrontlib/src/lib/my-account';
-import { CmsLibModule } from '@spartacus/storefront';
-import { MiniCartModule } from '@spartacus/storefront';
-import { CmsComponentData } from '@spartacus/storefront';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AddOptionsPageLayoutComponent} from './add-options-page-layout.component';
+import {CheckoutModule} from '../../../checkout';
 
 
 @NgModule({
-  imports: [CommonModule, AddOptionsModule],
+  imports: [CommonModule, CheckoutModule],
   declarations: [AddOptionsPageLayoutComponent],
   exports: [AddOptionsPageLayoutComponent],
   providers: [

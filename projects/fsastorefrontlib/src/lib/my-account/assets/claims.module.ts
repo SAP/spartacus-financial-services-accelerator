@@ -11,7 +11,6 @@ import { ClaimDataService } from './services/claim-data.service';
 import { OccClaimService } from '../../occ/claim/claim.service';
 
 import { ComponentsModule } from '@spartacus/storefront';
-import { OccFSCartService } from 'projects/fsastorefrontlib/src/lib/occ/cart/fscart.service';
 
 @NgModule({
   imports: [
@@ -24,6 +23,6 @@ import { OccFSCartService } from 'projects/fsastorefrontlib/src/lib/occ/cart/fsc
   declarations: [ClaimsComponent, DeleteClaimDialogComponent],
   entryComponents: [DeleteClaimDialogComponent],
   exports: [ClaimsComponent],
-  providers: [ClaimService, ClaimDataService, OccClaimService,OccFSCartService]
+  providers: [ClaimService, ClaimDataService, OccClaimService]
 })
 export class ClaimsModule {}

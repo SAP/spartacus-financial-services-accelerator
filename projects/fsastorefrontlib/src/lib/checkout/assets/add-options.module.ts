@@ -1,14 +1,14 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {RouterModule} from '@angular/router';
-import {FormsModule} from '@angular/forms';
-import {NgSelectModule} from '@ng-select/ng-select';
-import {NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
-import {ComponentsModule} from '@spartacus/storefront';
-import {OccFSCartService} from '../../occ/cart/fscart.service';
-import {AddOptionsComponent} from './components/add-options/add-options.component';
-import {FSCartService} from './services';
+import { ComponentsModule } from '@spartacus/storefront';
+import { AddOptionsComponent } from './components/add-options/add-options.component';
+import { FSCartService } from './services';
+import { OccFSCartService } from 'projects/fsastorefrontlib/src/lib/occ/cart/fs-cart.service';
 
 @NgModule({
   imports: [
