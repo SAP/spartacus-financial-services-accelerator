@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Cart, CartService, OrderEntry } from '@spartacus/core';
+import { Cart, CartService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 
 
@@ -10,7 +10,6 @@ import { Observable } from 'rxjs';
 })
 export class QuotesReviewPageComponent implements OnInit {
 
-  entries$: Observable<OrderEntry[]>;
   cart$: Observable<Cart>;
 
   constructor(
@@ -19,7 +18,6 @@ export class QuotesReviewPageComponent implements OnInit {
 
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
-    this.entries$ = this.cartService.getEntries();
   }
 
 }

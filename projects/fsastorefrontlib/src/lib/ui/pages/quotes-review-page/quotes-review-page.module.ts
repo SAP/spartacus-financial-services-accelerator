@@ -3,8 +3,9 @@ import { CommonModule } from '@angular/common';
 import { QuotesReviewPageComponent } from './quotes-review-page.component';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from '@spartacus/core';
-import { CmsPageGuards } from '@spartacus/storefront';
 import { ComponentsModule } from '@spartacus/storefront';
+import { AccordionModule } from '../../../accordion/accordion.module';
+import { CmsPageGuards } from '@spartacus/storefront';
 
 const routes: Routes = [
   {
@@ -18,8 +19,9 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    ComponentsModule,
+    AccordionModule,
     RouterModule.forChild(routes),
-    ComponentsModule
   ],
   declarations: [QuotesReviewPageComponent],
   exports: [QuotesReviewPageComponent]
