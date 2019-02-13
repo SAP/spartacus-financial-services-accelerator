@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Cart, CartService } from '@spartacus/core';
+import { Cart, CartService, OrderEntry } from '@spartacus/core';
 import { Observable } from 'rxjs';
 
 

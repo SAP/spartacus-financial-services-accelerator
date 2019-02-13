@@ -17,6 +17,7 @@
             <div class="accordion-header__expiry-date">Expiry Date:</div>
           </div>
         </div>
+        {{ cart | json }}
         <fsa-accordion-item [opened]="true" [title]="'Policy Summary'">
             <ul class="accordion--list container-fluid">
                 <li class="accordion--list-item row">
@@ -59,16 +60,10 @@
         </fsa-accordion-item>
         <div class="row">
           <div class="col-md-6 col-sm-6 col-xs-12">
-            <!-- <form:form method="post" commandName="quoteReviewForm" class="accordion__form-button accordion__form-button--bottom">
-            <ycommerce:testId code="multicheckout_back_button"> -->
-            <a
-              class="secondary-button secondary-button__default secondary-button__checkout js-checkQuoteStatus"
-              href=""
-            >
-              <!-- <spring:theme code="checkout.multi.quoteReview.back" text="Back"/> -->
-            </a>
-            <!-- </ycommerce:testId>
-          </form:form> -->
+            <a class="secondary-button secondary-button__default secondary-button__checkout js-checkQuoteStatus" href="">Back</a>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+              <a class="primary-button primary-button__default primary-button__checkout js-checkoutBtn ">Continue</a>
           </div>
         </div>
       </div>
