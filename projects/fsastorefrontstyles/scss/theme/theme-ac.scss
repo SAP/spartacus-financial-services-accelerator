@@ -20,7 +20,7 @@ button[disabled], html input[disabled] {
 button:focus {
   outline: none;
 }
-$border-grey: 1px solid $color-grey;
+$border-grey: $border-grey;
 a {
   @include transition();
 }
@@ -33,7 +33,7 @@ a {
   color: $color-dark-blue;
   font-size: 24px;
   font-weight: 700;
-  border-bottom: 1px solid $color-grey;
+  border-bottom: $border-grey;
 }
 .section-header__heading {
   @include linear-gradient-background ($color-blue, $color-banking-darkest-blue, 50%, 100%);
@@ -70,7 +70,7 @@ a {
   font-weight: bold;
 }
 .border-bottom-grey {
-  border-bottom: 1px solid $color-grey;
+  border-bottom: $border-grey;
 }
 .circle-image {
   background-color: $color-banking-dark-blue;
@@ -145,7 +145,7 @@ a {
 button:focus {
   outline: none;
 }
-$border-grey: 1px solid $color-grey;
+$border-grey: $border-grey;
 a {
   @include transition();
 }
@@ -407,31 +407,30 @@ a {
   text-align: center;
   text-transform: uppercase;
   font-size: 30px;
-  font-weight: 500;
-  border-bottom: 1px solid $color-grey;
+  border-bottom: $border-grey;
 }
 .cart-items-list {
-  border: 1px solid $color-grey;
+  border: $border-grey;
   background-color: $color-light-grey;
   margin-top: 30px;
   & h2 {
     margin: 0;
   }
   & h3 {
-    font-weight: 500;
+    font-weight: normal;
     margin: 0;
     padding: 2px 0;
     max-width: 285px;
     width: 100%;
     @include ellipsis;
-    @media (max-width: $screen-sm-mid) {
+    @include media-breakpoint-down(md) {
       margin: 12px 0;
       max-width: inherit;
     }
   }
   & > .row {
-    @media (max-width: $screen-sm-mid) {
-      border-top: 1px solid $color-grey;
+    @include media-breakpoint-down(sm) {
+      border-top: $border-grey;
     }
   }
   .disabled-option {
@@ -447,17 +446,16 @@ a {
     box-shadow: 0 0 0 2px white inset;
   }
   .tooltip-wrapper {
-    padding-top: 39px;
-    padding-left: 40px;
+    top: 40%;
+    right: 30%;
     z-index: 2000;
     position: absolute;
-    right: 32%;
-    @media (max-width: $screen-sm-mid) {
+    @include media-breakpoint-down(sm) {
+      top: 15%;
       right: 30px;
-      top: 0;
     }
   }
-  @media (max-width: $screen-sm-mid) {
+  @include media-breakpoint-down(sm) {
     text-align: center;
   }
 }
@@ -466,19 +464,18 @@ a {
 /********* TOOLTIP ********/
 
 .fs-tooltip {
+  background-color: $color-dark-blue;
+  color: $color-white;
+  cursor: pointer;
+  font-style: italic;
+  text-align: center;
   width: 20px;
   height: 20px;
   font-weight: 600;
-  background-color: #263950;
-  cursor: pointer;
-  color: $color-white;
-  font-style: italic;
-  text-align: center;
   border-radius: 50%;
 }
 .tooltip {
   .arrow:before {
-    width: 200px;
     border-left-color: $color-button-secondary-hover;
   }
   .tooltip-inner {

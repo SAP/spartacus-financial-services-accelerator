@@ -18,6 +18,7 @@ const pageModules = [
     PremiumCalendarPageModule,
     FSCategoryPageModule,
     AddOptionsPageModule,
+    QuotesReviewPageModule
 ];
 
 @NgModule({
