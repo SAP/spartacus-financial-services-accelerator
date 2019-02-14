@@ -7,7 +7,7 @@
         </div>
         <ng-container *ngIf="entries$ | async as entries">
           <ng-container *ngFor='let orderEntryData of entries | slice:1'>
-            <div class="row position-relative py-3" *ngIf="orderEntryData.product.description != undefined">
+            <div class="row position-relative py-3" *ngIf="orderEntryData.product">
               <div *ngIf="!orderEntryData.removeable && !orderEntryData.addable" class="disabled-option"></div>
               <div class="tooltip-wrapper">
                 <div class="fs-tooltip" ngbTooltip="{{orderEntryData.product.description}}" triggers="click:blur" placement="left">i</div>

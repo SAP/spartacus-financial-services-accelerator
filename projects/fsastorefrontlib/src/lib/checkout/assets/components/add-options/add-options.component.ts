@@ -1,5 +1,4 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { OccConfig } from '@spartacus/core';
 import { Cart, OrderEntry } from '@spartacus/core';
 import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -8,14 +7,12 @@ import {FSCartService} from '../../services';
 @Component({
   selector: 'fsa-add-options',
   templateUrl: './add-options.component.html',
-  styleUrls: ['./add-options.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddOptionsComponent implements OnInit {
 
   constructor(
-    protected cartService: FSCartService,
-    private config: OccConfig
+    protected cartService: FSCartService
   ) { }
 
   cart$: Observable<Cart>;
@@ -44,7 +41,4 @@ export class AddOptionsComponent implements OnInit {
     this.cartService.removeEntry(item);
   }
 
-  public getBaseUrl() {
-    return this.config.server.baseUrl || '';
-  }
 }
