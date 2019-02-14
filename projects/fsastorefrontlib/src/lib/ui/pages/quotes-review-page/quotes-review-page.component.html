@@ -1,6 +1,6 @@
 <div class="center1400 contentPadding">
   <ng-container *ngIf="(cart$ | async) as cart">
-    <h2 class="centered-heading">Your {{ cart.name }}</h2>
+    <h2 class="centered-heading">Your Insurance</h2><!-- Need to have dynamic heading value -->
     <div class="col-md-8">
       <div class="accordion">
         <div class="section-header__heading">
@@ -11,53 +11,37 @@
           </div>
           <div class="col-md-7 col-sm-7 col-xs-12 accordion-header__text">
             Auto Insurance Quote
-          </div>
+          </div><!-- Need to have dynamic heading value -->
           <div class="col-md-4 col-sm-4 col-xs-12 accordion-header__details">
             <div class="accordion-header__id">ID:</div>
             <div class="accordion-header__expiry-date">Expiry Date:</div>
           </div>
         </div>
         {{ cart | json }}
-        <fsa-accordion-item [opened]="true" [title]="'Policy Summary'">
+        <fsa-accordion-item [opened]="true" [title]="'Auto Information'"><!-- Need to have dynamic heading value -->
             <ul class="accordion--list container-fluid">
-                <li class="accordion--list-item row">
+                <li *ngFor="let quote of cart.insuranceQuote.productDetails.entry" class="accordion--list-item row">
                     <div class="col-6 col-sm-3 bold">
-                        ContractId
+                      {{ quote.key }}
                     </div>
                     <div class="col-6 col-sm-3 value notice notice--dark">
-                        policy contractNumber
-                    </div>
-                </li>
-                <li class="accordion--list-item row">
-                    <div class="col-6 col-sm-3 bold">
-                        Product
-                    </div>
-                    <div class="col-6 col-sm-3 value notice notice--dark">
-                        coverageProduct name
-                    </div>
-                </li>
-                <li class="accordion--list-item row">
-                    <div class="col-6 col-sm-3 bold">
-                        Payment frequency 
-                    </div>
-                    <div class="col-6 col-sm-3 value notice notice--dark">
-                        policy payment Frequency
-                    </div>
-                </li>   
-                <li class="accordion--list-item row">
-                    <div class="col-6 col-sm-3 bold">Payment method</div>
-                    <div class="col-6 col-sm-3 value notice notice--dark">
-                        policy mpaymentMethod paymentOption
-                    </div>
-                </li>
-                <li class="accordion--list-item row">
-                    <div class="col-6 col-sm-3 bold">Duration</div>
-                    <div class="col-6 col-sm-3 value notice notice--dark">
-                        some date
+                      {{ quote.value }}
                     </div>
                 </li>
             </ul>     
         </fsa-accordion-item>
+        <fsa-accordion-item [opened]="true" [title]="'What\'s Included'"><!-- Need to have dynamic heading value -->
+          <ul class="accordion--list container-fluid">
+              <li class="accordion--list-item row">
+                  <div class="col-6 col-sm-3 bold">
+                    {{ cart?.productDiscounts.formattedValue }}
+                  </div>
+                  <div class="col-6 col-sm-3 value notice notice--dark">
+                    {{ cart?.productDiscounts?.formattedValue }}
+                  </div>
+              </li>
+          </ul>     
+      </fsa-accordion-item>
         <div class="row">
           <div class="col-md-6 col-sm-6 col-xs-12">
             <a class="secondary-button secondary-button__default secondary-button__checkout js-checkQuoteStatus" href="">Back</a>
