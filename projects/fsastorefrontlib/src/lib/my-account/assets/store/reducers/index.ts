@@ -1,11 +1,14 @@
 import { InjectionToken, Provider } from '@angular/core';
-import { ActionReducerMap, createFeatureSelector, MemoizedSelector } from '@ngrx/store';
-import { CartsState, CartState, CART_DATA, loaderReducer } from '@spartacus/core';
-import * as fromClaimReducer from './claim.reducer';
+import {
+  ActionReducerMap,
+  createFeatureSelector,
+  MemoizedSelector
+} from '@ngrx/store';
+
+import * as fromQuoteReducer from './quote.reducer';
 import * as fromPolicyReducer from './policy.reducer';
 import * as fromPremiumCalendarReducer from './premium-calendar.reducer';
-import * as fromQuoteReducer from './quote.reducer';
-import * as fromFSCartReducer from './fscart.reducer';
+import * as fromClaimReducer from './claim.reducer';
 
 
 export interface UserState {
@@ -13,7 +16,6 @@ export interface UserState {
   policies: fromPolicyReducer.PolicyState;
   premiumCalendar: fromPremiumCalendarReducer.PremiumCalendarState;
   claims: fromClaimReducer.ClaimState;
-  cart: CartState
 }
 
 export function getReducers(): ActionReducerMap<UserState> {
@@ -21,14 +23,13 @@ export function getReducers(): ActionReducerMap<UserState> {
     quotes: fromQuoteReducer.reducer,
     policies: fromPolicyReducer.reducer,
     premiumCalendar: fromPremiumCalendarReducer.reducer,
-    claims: fromClaimReducer.reducer,
-    cart: fromFSCartReducer.reducer
+    claims: fromClaimReducer.reducer
   };
 }
 
 export const reducerToken: InjectionToken<
   ActionReducerMap<UserState>
-  > = new InjectionToken<ActionReducerMap<UserState>>('UserReducers');
+> = new InjectionToken<ActionReducerMap<UserState>>('UserReducers');
 
 export const reducerProvider: Provider = {
   provide: reducerToken,
@@ -38,6 +39,4 @@ export const reducerProvider: Provider = {
 export const getUserState: MemoizedSelector<
   any,
   UserState
-  > = createFeatureSelector<UserState>('assets');
-
- 
+> = createFeatureSelector<UserState>('assets');

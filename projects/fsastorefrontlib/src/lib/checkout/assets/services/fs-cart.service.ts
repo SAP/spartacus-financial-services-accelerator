@@ -1,14 +1,7 @@
 import { Injectable } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import {
-  AuthService,
-  CartDataService,
-  CartService,
-  LoadCart,
-  StateWithCart
-} from '@spartacus/core';
-import * as fromAction from '../store/actions';
-import * as fromSelector from '../store/selectors';
+import { Store } from '@ngrx/store';
+import { AuthService, CartDataService, CartService, StateWithCart } from '@spartacus/core';
+import * as fromAction from '../../../checkout/assets/store/actions/index';
 
 @Injectable()
 export class FSCartService extends CartService {
@@ -29,19 +22,5 @@ export class FSCartService extends CartService {
         quantity: quantity
       })
     );
-    this.refreshCart();
-  }
-
-  refreshCart(): void {
-    this.fsStore.pipe(select(fromSelector.getCartRefresh)).subscribe(refresh => {
-      if (refresh) {
-        this.fsStore.dispatch(
-          new LoadCart({
-            userId: this.fsCartData.userId,
-            cartId: this.fsCartData.cartId
-          })
-        );
-      }
-    });
   }
 }
