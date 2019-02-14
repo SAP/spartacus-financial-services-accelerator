@@ -17,14 +17,12 @@ export class AddOptionsComponent implements OnInit {
 
   cart$: Observable<Cart>;
   entries$: Observable<OrderEntry[]>;
-  cartLoaded$: Observable<boolean>;
 
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
     this.entries$ = this.cartService
       .getEntries()
       .pipe(filter(entries => entries.length > 0));
-    this.cartLoaded$ = this.cartService.getLoaded();
   }
 
   addProductToCart(orderEntryCode: string) {
