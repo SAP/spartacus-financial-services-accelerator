@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 export class QuotesReviewPageComponent implements OnInit {
 
   cart$: Observable<Cart>;
+  entries$: Observable<OrderEntry[]>;
 
   constructor(
     protected cartService: CartService
@@ -18,6 +19,6 @@ export class QuotesReviewPageComponent implements OnInit {
 
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
+    this.entries$ = this.cartService.getEntries();
   }
-
 }

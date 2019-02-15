@@ -27,6 +27,7 @@
         opacity: 0; 
         height: 0;
         overflow: hidden;
+        display: flex;
         &.active {
             padding: 30px 46px 20px;
             opacity: 1;
