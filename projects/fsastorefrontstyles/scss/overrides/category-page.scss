@@ -11,7 +11,7 @@
                 font-size: 44px;
                 color: $color-dark-blue;
                 @include media-breakpoint-down(md) { 
-                    color: $color-body;
+                    color: $color-dark-grey;
                     font-size: 4vw;
                 }
                 @include media-breakpoint-down(xs) {

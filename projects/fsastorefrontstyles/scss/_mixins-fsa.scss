@@ -14,20 +14,20 @@
   -webkit-box-shadow: $x $y $a $b rgba($color, $opacity);
 }
 @mixin primary-btn-color {
-  background-color: $color-button-primary !important;
-  border-color: $color-button-primary !important;
+  background-color: $color-blue !important;
+  border-color: $color-blue !important;
   color: $color-white !important;
   &:hover,
   &:active,
   &:focus {
-    background-color: $color-button-primary-hover !important;
-    border-color: $color-button-primary-hover !important;
+    background-color: $color-link-hover !important;
+    border-color: $color-link-hover !important;
     color: $color-white !important;
   }
 }
 @mixin secondary-btn-color {
-  background-color: $color-button-secondary !important;
-  border-color: $color-button-secondary !important;
+  background-color: $color-dark-blue !important;
+  border-color: $color-dark-blue !important;
   color: $color-white !important;
   &:hover,
   &:active,
@@ -77,16 +77,37 @@
     $endColor $secondStop
   );
 }
-@mixin radial-gradient-background (
-    $startColor, 
-    $middleColor, 
-    $endColor
-    ) {
-    background: radial-gradient(ellipse at center, $startColor 30%, $middleColor 80%, $endColor 120%);
-    background: -ms-radial-gradient(ellipse at center, $startColor 30%, $middleColor 80%, $endColor 120%);
-    background: -moz-radial-gradient(ellipse at center, $startColor 30%, $middleColor 80%, $endColor 120%);
-    background: -o-radial-gradient(ellipse at center, $startColor 30%, $middleColor 80%, $endColor 120%);
-    background: -webkit-radial-gradient(ellipse at center, $startColor 30%, $middleColor 80%, $endColor 120%);
+@mixin radial-gradient-background($startColor, $middleColor, $endColor) {
+  background: radial-gradient(
+    ellipse at center,
+    $startColor 30%,
+    $middleColor 80%,
+    $endColor 120%
+  );
+  background: -ms-radial-gradient(
+    ellipse at center,
+    $startColor 30%,
+    $middleColor 80%,
+    $endColor 120%
+  );
+  background: -moz-radial-gradient(
+    ellipse at center,
+    $startColor 30%,
+    $middleColor 80%,
+    $endColor 120%
+  );
+  background: -o-radial-gradient(
+    ellipse at center,
+    $startColor 30%,
+    $middleColor 80%,
+    $endColor 120%
+  );
+  background: -webkit-radial-gradient(
+    ellipse at center,
+    $startColor 30%,
+    $middleColor 80%,
+    $endColor 120%
+  );
 }
 
 @mixin linear-gradient-background(
@@ -110,4 +131,27 @@
     $startColor $firstStop,
     $endColor $secondStop
   );
+}
+
+@mixin accordion-arrow {
+  cursor: pointer;
+  position: relative;
+  &:before {
+    display: block;
+    content: '';
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%) rotateZ(45deg);
+    width: 13px;
+    height: 13px;
+    border-bottom: 3px solid;
+    border-right: 3px solid;
+    @include transition();
+  }
+  &.active {
+    &:before {
+      transform: translateY(-50%) rotateZ(-135deg);
+    }
+  }
 }

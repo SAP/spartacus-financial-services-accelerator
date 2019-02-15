@@ -1,5 +1,5 @@
 <div class="accordion-item">
-  <h2 class="accordion--heading gradient-heading" (click)="onItemClick()">
+  <h2 class="accordion--heading gradient-heading" (click)="onItemClick()" [class.active]="opened">
     {{title}}
   </h2>
   <div class="accordion-item--wrapper" [class.active]="opened">

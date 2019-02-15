@@ -3,12 +3,18 @@
         color: $color-white;
         font-weight: 500;
         margin-bottom: 0;
-        cursor: pointer;
         padding: 0 60px;
+        @include accordion-arrow();
     }
     &-item {
         margin-top: 40px;
         border: $border-grey;
+    }
+    &--list {
+        margin: 30px 46px 20px;
+        @include media-breakpoint-down(xs) {
+            margin: 25px 0 20px;
+        }
     }
     &--list-item {
         border-bottom: 1px solid $color-grey;
@@ -23,18 +29,12 @@
         }
     }
     &-item--wrapper {
-        transition: opacity 0.5s ease-out;
-        opacity: 0; 
-        height: 0;
-        overflow: hidden;
         display: flex;
+        transition: all 0.5s ease-in-out;
+        max-height: 0;
+        overflow: hidden;
         &.active {
-            padding: 30px 46px 20px;
-            opacity: 1;
-            height: auto;
-            @include media-breakpoint-down(xs) {
-                padding: 25px 0 20px;
-            }
+            max-height: 1200px;
         }
     }
     .contact-box {
