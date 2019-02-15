@@ -326,7 +326,7 @@ a {
     font-size: 36px;
     color: $color-dark-blue;
     position: relative;
-    @media (max-width: $screen-xs-max) {
+    @include media-breakpoint-down(md) {
         margin-top:0px;
     }
     .images__wrapper {
@@ -343,7 +343,7 @@ a {
       color: $color-dark-grey;
       font-size: 22px;
       font-weight: 600;
-      @media (max-width: $screen-xs-max) {
+      @include media-breakpoint-down(md) {
         font-size:22px;
         line-height:30px;
         width: 70%;
@@ -357,7 +357,7 @@ a {
         color: $color-dark-grey;
         padding-bottom: 10px;
         font-weight: 600;
-      @media (max-width: $screen-xs-max) {
+      @include media-breakpoint-down(md) {
         font-size: 20px;
       }
     }
@@ -375,7 +375,7 @@ a {
         float: right;
         font-size: 20px;
       }
-      @media (max-width: $screen-xs-max) {
+      @include media-breakpoint-down(md) {
         right: 11px;
       }
     }
