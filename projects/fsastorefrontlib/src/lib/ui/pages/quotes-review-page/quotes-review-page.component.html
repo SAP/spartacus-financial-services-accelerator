@@ -1,32 +1,32 @@
 <div class="center1400 contentPadding">
-  <ng-container *ngIf="(entries$ | async) as entries">
-    <ng-container *ngIf="(cart$ | async) as cart">
-    <h2 class="centered-heading">Your {{ entries[0]?.product?.categories[0]?.name }}</h2>
+  <ng-container *ngIf="(cart$ | async) as cart">
+    <ng-container *ngIf="cart.deliveryOrderGroups">
+    <h2 class="centered-heading">Your {{ cart.deliveryOrderGroups[0].entries[0]?.product?.categories[0]?.name }}</h2>
     <div class="col-md-8">
       <div class="accordion">
         <div class="section-header__heading">
-          <div class="col-md-1 col-sm-1 col-xs-12 accordion-header__icon">
+          <div class="col-xs-12 col-md-2 accordion-header__icon">
             <span class="images images__wrapper images__wrapper--size"
-              ><img class="images__size" src="{{ entries[0]?.product?.images?.PRIMARY['40Wx40H_quote_responsive']?.url }}"
+              ><img class="images__size" [src]="getBaseUrl() + cart.deliveryOrderGroups[0]?.entries[0]?.product?.images[3]?.url"
             /></span>
           </div>
-          <div class="col-md-7 col-sm-7 col-xs-12 accordion-header__text">
-              {{ entries[0]?.product?.categories[0]?.name }} Quote
+          <div class="col-xs-12 col-sm-7 col-md-7 accordion-header__text">
+              {{ cart.deliveryOrderGroups[0].entries[0]?.product?.categories[0]?.name }} Quote
           </div>
-          <div class="col-md-4 col-sm-4 col-xs-12 accordion-header__details">
+          <div class="col-xs-12 col-sm-3 col-md-3 accordion-header__details">
             <div class="accordion-header__id"></div>
             <div class="accordion-header__expiry-date"></div>
           </div>
         </div>
-        <fsa-accordion-item [opened]="true" [title]="'Auto Information'"><!-- Need to have dynamic heading value -->
+        <fsa-accordion-item [opened]="true" [title]="'Auto Information'"><!-- Needs to have dynamic heading value -->
             <ul class="col-xs-12  col-sm-9 accordion--list container-fluid">
-                <ng-container *ngFor="let quote of cart?.insuranceQuote?.quoteDetails?.entry">
-                  <li class="col-10 accordion--list-item row">
+                <ng-container *ngFor="let item of cart?.insuranceQuote?.quoteDetails?.entry">
+                  <li class="accordion--list-item row">
                     <div class="col-6">
-                      {{ quote.key }}
+                      {{ item.key }}
                     </div>
                     <div class="col-6 value notice notice--dark">
-                      {{ quote.value }}
+                      {{ item.value }}
                     </div>
                   </li>
                 </ng-container>
@@ -35,10 +35,10 @@
             	<a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
             </div>
         </fsa-accordion-item>
-        <fsa-accordion-item [title]="'What\'s Included'"><!-- Need to have dynamic heading value -->
+        <fsa-accordion-item [title]="'What\'s Included'"><!-- Needs to have dynamic heading value -->
           <ul class="col-xs-12  col-sm-9 accordion--list container-fluid">
-            <ng-container *ngFor="let item of entries[0]?.product?.price?.oneTimeChargeEntries">
-              <li class="col-10 accordion--list-item row">
+            <ng-container *ngFor="let item of cart.deliveryOrderGroups[0]?.entries[0]?.product?.price?.oneTimeChargeEntries">
+              <li class="accordion--list-item row">
                 <div class="col-6">
                   {{ item.billingTime.name }}
                 </div>
@@ -52,29 +52,36 @@
             <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
           </div>
       </fsa-accordion-item>
-      <fsa-accordion-item [title]="'Added by you'"><!-- Need to have dynamic heading value -->
+      <fsa-accordion-item [title]="'Added by you'"><!-- Needs to have dynamic heading value -->
         <ul class="col-xs-12  col-sm-9 accordion--list container-fluid">
-            <li class="col-10 accordion--list-item row">
+          <ng-container *ngFor="let item of cart.deliveryOrderGroups[0]?.entries">
+            <li class="accordion--list-item row">
               <div class="col-6">
-                <!-- {{ item.billingTime.name }} -->
-              </div>
-              <div class="col-6 value notice notice--dark">
-                  <!-- {{ item.price.formattedValue }} -->
+                {{ item.product?.name }}
               </div>
             </li>
+          </ng-container>
         </ul>
         <div class="col-xs-12 col-sm-3">
           <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
         </div>
     </fsa-accordion-item>
-    <fsa-accordion-item [title]="'Personal Details'"><!-- Need to have dynamic heading value -->
+    <fsa-accordion-item [title]="'Personal Details'"><!-- Needs to have dynamic heading value -->
       <ul class="col-xs-12  col-sm-9 accordion--list container-fluid">
-          <li class="col-10 accordion--list-item row">
+          <li class="accordion--list-item row">
             <div class="col-6">
-              <!-- {{ item.billingTime.name }} -->
-            </div>
-            <div class="col-6 value notice notice--dark">
-                <!-- {{ item.price.formattedValue }} -->
+              <!-- Needs to have dynamic heading value -->
+                <h3 class="accordion-item__list-title">Policy Holder</h3>
+                <ul class="accordion-item__list">
+                  <li class="accordion-item__list-item">Mrs. Test Tester
+                  </li>
+                  <li class="accordion-item__list-item">Phone Number: 323535</li>
+                  <li class="accordion-item__list-item">Email Address: donna@moore.com</li>
+                  <li class="accordion-item__list-item">Address Line 1: sfsdfsdf</li>
+                  <li class="accordion-item__list-item">City: sffsd</li>
+                  <li class="accordion-item__list-item">Postcode: 3423423</li>
+                  <li class="accordion-item__list-item">Country: France</li>
+                </ul>
             </div>
           </li>
       </ul>
@@ -92,7 +99,7 @@
         </div>
       </div>
     </div>
-  </ng-container>
+    </ng-container>
   </ng-container>
 </div>
 <ng-template #loading>

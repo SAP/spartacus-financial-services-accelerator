@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Cart, CartService, OrderEntry } from '@spartacus/core';
+import { Cart, CartService, OccConfig } from '@spartacus/core';
 import { Observable } from 'rxjs';
 
 
@@ -11,14 +11,16 @@ import { Observable } from 'rxjs';
 export class QuotesReviewPageComponent implements OnInit {
 
   cart$: Observable<Cart>;
-  entries$: Observable<OrderEntry[]>;
 
   constructor(
-    protected cartService: CartService
+    protected cartService: CartService,
+    private config: OccConfig
   ) { }
 
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
-    this.entries$ = this.cartService.getEntries();
+  }
+  public getBaseUrl() {
+    return this.config.server.baseUrl || '';
   }
 }
