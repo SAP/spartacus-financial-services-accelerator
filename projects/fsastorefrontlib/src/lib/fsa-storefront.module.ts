@@ -12,7 +12,37 @@ import { CmsLibModule } from './cms-lib/cms-lib.module';
     CmsLibModule,
     MyAccountModule,
     StorefrontModule,
-    ConfigModule.forRoot()
+    ConfigModule.withConfig({
+      cmsComponents: {
+        EnrichedResponsiveBannerComponent: { selector: 'fsa-enriched-responsive-banner' },
+        CMSViewPoliciesComponent: { selector: 'fsa-view-policies' },
+        CMSViewQuotesComponent: { selector: 'fsa-view-quotes' },
+        FinancialServicesProductFeatureComponent: { selector: 'fsa-product-feature' }
+      },
+      layoutSlots: {
+        InsuranceLandingPageTemplate: {
+          slots: [
+            'Section1',
+            'Section2A',
+            'Section2B',
+            'Section2C',
+            'Section3',
+            'Section4',
+            'Section5'
+          ]
+        },
+        FSCategoryPageTemplate: {
+          slots: [
+            'Section1',
+            'Section2A',
+            'Section2B',
+            'Section3',
+            'Section4'
+          ]
+        }
+      }
+      }
+    )
   ],
   exports: [
     StorefrontModule,
