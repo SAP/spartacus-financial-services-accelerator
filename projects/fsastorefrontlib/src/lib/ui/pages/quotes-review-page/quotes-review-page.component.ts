@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Cart, CartService, OccConfig } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import { Cart, CartService, OccConfig } from '@spartacus/core';
 
 
 @Component({
@@ -14,8 +14,8 @@ export class QuotesReviewPageComponent implements OnInit {
 
   constructor(
     protected cartService: CartService,
-    private config: OccConfig
-  ) { }
+    private config: OccConfig,
+    ) { }
 
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
