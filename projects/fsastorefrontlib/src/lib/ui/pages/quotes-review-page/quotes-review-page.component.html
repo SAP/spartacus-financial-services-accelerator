@@ -23,8 +23,8 @@
             </div>
             <fsa-accordion-item [opened]="true" [title]="'Auto Information'"><!-- Needs to have dynamic heading value -->
               <div class="container">
-                <div class="row">
-                  <ul class="col-12 col-md-9 accordion--list">
+                <div class="row justify-content-center">
+                  <ul class="col-12 accordion--list">
                     <ng-container *ngFor="let item of cart?.insuranceQuote?.quoteDetails?.entry">
                       <li class="accordion--list-item row">
                         <div class="col-6">
@@ -36,7 +36,7 @@
                       </li>
                     </ng-container>
                   </ul>
-                  <div class="col-12 col-md-3">
+                  <div class="col-12 col-md-6">
                     <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
                   </div>
                 </div>
@@ -44,8 +44,8 @@
             </fsa-accordion-item>
             <fsa-accordion-item [title]="'What\'s Included'"><!-- Needs to have dynamic heading value -->
               <div class="container">
-                <div class="row">
-                  <ul class="col-12  col-md-9 accordion--list">
+                <div class="row justify-content-center">
+                  <ul class="col-12 accordion--list">
                     <ng-container *ngFor="let item of (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.price?.oneTimeChargeEntries">
                       <li class="accordion--list-item row">
                         <div class="col-6">
@@ -57,7 +57,7 @@
                       </li>
                     </ng-container>
                   </ul>
-                  <div class="col-12 col-md-3">
+                  <div class="col-12 col-md-6">
                     <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
                   </div>
                 </div>
@@ -65,15 +65,15 @@
             </fsa-accordion-item>
             <fsa-accordion-item [title]="'Added by you'"><!-- Needs to have dynamic heading value -->
               <div class="container">
-                <div class="row">
-                  <ul class="col-12  col-md-9 accordion--list">
+                <div class="row justify-content-center">
+                  <ul class="col-12 accordion--list">
                     <ng-container *ngFor="let item of cart.deliveryOrderGroups[0]?.entries">
                       <li class="accordion--list-item row">
                         <div class="col-12"> {{ item.product?.name }} </div>
                       </li>
                     </ng-container>
                   </ul>
-                  <div class="col-12 col-md-3">
+                  <div class="col-12 col-md-6">
                     <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
                   </div>
                 </div>
@@ -81,8 +81,8 @@
             </fsa-accordion-item>
             <fsa-accordion-item [title]="'Personal Details'"><!-- Needs to have dynamic heading value -->
               <div class="container">
-                <div class="row">
-                  <ul class="col-12  col-md-9 accordion--list">
+                <div class="row justify-content-center">
+                  <ul class="col-12 accordion--list">
                     <li class="accordion--list-item row">
                       <div class="col-12">
                         <!-- Needs to have dynamic heading value -->
@@ -111,7 +111,7 @@
                       </div>
                     </li>
                   </ul>
-                  <div class="col-12 col-md-3">
+                  <div class="col-12 col-md-6">
                     <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
                   </div>
                 </div>
