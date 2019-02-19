@@ -7,8 +7,9 @@ import { ClaimsPageModule } from './claims-page/claims-page.module';
 import { PolicyDetailsPageModule } from './policy-details-page/policy-details-page.module';
 import { PremiumCalendarPageModule } from './premium-calendar-page/premium-calendar-page.module';
 import { FSCategoryPageModule } from './fs-category-page/fs-category-page.module';
-import { QuotesReviewPageModule } from './quotes-review-page/quotes-review-page.module';
 import { AddOptionsPageModule } from './add-options-page/add-options-page.module';
+import { InboxPageModule } from './inbox-page/inbox-page.module';
+import {ComparisonTablePageModule} from './comparison-table-page/comparison-table-page.module';
 
 const pageModules = [
     QuotesPageModule,
@@ -18,7 +19,8 @@ const pageModules = [
     PremiumCalendarPageModule,
     FSCategoryPageModule,
     AddOptionsPageModule,
-    QuotesReviewPageModule
+    InboxPageModule,
+    ComparisonTablePageModule
 ];
 
 @NgModule({
