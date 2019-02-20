@@ -1,6 +1,5 @@
 @import '../mixins-fsa';
 @import '../variables-fsa';
-@import '../fonts';
 
 .checkbox-label {
 	padding-left: 30px;
@@ -32,8 +31,8 @@
 	cursor: pointer;
 	text-transform: none;
 	font-size: 15px;
+	// .glyphicon-ok;
 	&:before {
-		@include FSA-icon;
 		@include transition;
 		font-size: 11px;
 		position: absolute;
