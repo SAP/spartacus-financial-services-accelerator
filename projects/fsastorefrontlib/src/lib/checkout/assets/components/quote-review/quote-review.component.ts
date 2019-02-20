@@ -11,6 +11,7 @@ import { Cart, CartService, OccConfig } from '@spartacus/core';
 export class QuoteReviewComponent implements OnInit {
 
   cart$: Observable<Cart>;
+  cartLoaded$: Observable<boolean>;
 
   constructor(
     protected cartService: CartService,
@@ -19,6 +20,7 @@ export class QuoteReviewComponent implements OnInit {
 
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
+    this.cartLoaded$ = this.cartService.getLoaded();
   }
   public getBaseUrl() {
     return this.config.server.baseUrl || '';

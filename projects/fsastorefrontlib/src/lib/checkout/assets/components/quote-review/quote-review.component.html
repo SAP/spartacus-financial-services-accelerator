@@ -1,7 +1,7 @@
 <div class="center1400 contentPadding">
   <ng-container *ngIf="cart$ | async as cart">
-    <ng-container *ngIf="cart.deliveryOrderGroups && cart.deliveryOrderGroups.length > 0; else noQuotes">
-      <!-- <ng-container *ngIf="cart.deliveryOrderGroups.length > 0; else loading"> -->
+    <ng-container *ngIf="cartLoaded$ | async; else loading">
+      <ng-container *ngIf="cart.deliveryOrderGroups; else noQuotes">
         <h2 class="centered-heading">
           Your {{ (cart.deliveryOrderGroups[0].entries[0]?.product?.categories)[0]?.name }}
         </h2>
@@ -127,7 +127,7 @@
             </div>
           </div>
         </div>
-      <!-- </ng-container> -->
+      </ng-container>
     </ng-container>
   </ng-container>
 </div>
