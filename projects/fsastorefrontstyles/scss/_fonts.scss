@@ -1,0 +1,206 @@
+
+  @mixin FSA-icon {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'font-FSA', sans-serif !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+  
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  @mixin icon-FSA-heart {
+      &:before {
+          content: "\e900";
+      }
+  }
+  @mixin icon-FSA-agent {
+      &:before {
+          content: "\e901";
+      }
+  }
+  @mixin icon-FSA-lock {
+      &:before {
+            content: "\e902";
+      }
+  }
+  @mixin icon-FSA-auto {
+      &:before {
+            content: "\e903";
+      }
+  }
+  @mixin icon-FSA-event {
+      &:before {
+            content: "\e904";
+      }
+  }
+  @mixin icon-FSA-house {
+      &:before {
+            content: "\e905";
+      }
+  }
+  @mixin icon-FSA-key {
+      &:before {
+            content: "\e906";
+      }
+  }
+  @mixin icon-FSA-plane {
+      &:before {
+            content: "\e907";
+      }
+  }
+  @mixin icon-FSA-google-plus {
+      &:before {
+            content: "\e909";
+      }
+  }
+  @mixin icon-FSA-facebook {
+      &:before {
+            content: "\e908";
+      }
+  }
+  @mixin icon-FSA-twitter {
+      &:before {
+            content: "\e90c";
+      }
+  }
+  @mixin icon-FSA-youtube {
+      &:before {
+            content: "\e90d";
+      }
+  }
+  @mixin icon-FSA-linkedin {
+      &:before {
+            content: "\e90a";
+      }
+  }
+  @mixin icon-FSA-newsfeed{
+      &:before {
+        content: "\e90b";
+      }	
+  }
+  @mixin icon-fsa-envelope-open{
+      &:before {
+        content: "\e90e";
+      }	
+  }
+  @mixin icon-icon-FSA-arrow-left {
+    &:before {
+      content: "\e90f";
+    }
+  }
+  @mixin icon-icon-FSA-arrow-up {
+    &:before {
+      content: "\e910";
+    }
+  }
+  @mixin icon-icon-FSA-briefcase {
+    &:before {
+      content: "\e911";
+    }
+  }
+  @mixin icon-icon-FSA-credit-card {
+    &:before {
+      content: "\e913";
+    }
+  }
+  @mixin icon-icon-FSA-edit {
+    &:before {
+      content: "\e914";
+    }
+  }
+  @mixin icon-icon-FSA-envelope {
+    &:before {
+      content: "\e915";
+    }
+  }
+  @mixin icon-icon-FSA-exclamation-sign {
+    &:before {
+      content: "\e916";
+    }
+  }
+  @mixin icon-icon-FSA-file {
+    &:before {
+      content: "\e917";
+    }
+  }
+  @mixin icon-icon-FSA-user {
+    &:before {
+      content: "\e918";
+    }
+  }
+  @mixin icon-icon-FSA-folder-close {
+    &:before {
+      content: "\e919";
+    }
+  }
+  @mixin icon-icon-FSA-list {
+    &:before {
+      content: "\e91b";
+    }
+  }
+  @mixin icon-icon-FSA-list-alt {
+    &:before {
+      content: "\e91c";
+    }
+  }
+  @mixin icon-icon-FSA-map-marker {
+    &:before {
+      content: "\e91e";
+    }
+  }
+  @mixin icon-icon-FSA-menu-hamburger {
+    &:before {
+      content: "\e920";
+    }
+  }
+  @mixin icon-icon-FSA-ok {
+    &:before {
+      content: "\e922";
+    }
+  }
+  @mixin icon-icon-FSA-paperclip {
+    &:before {
+      content: "\e923";
+    }
+  }
+  @mixin icon-icon-FSA-play {
+    &:before {
+      content: "\e924";
+    }
+  }
+  @mixin icon-icon-FSA-remove {
+    &:before {
+      content: "\e925";
+    }
+  }
+  @mixin icon-icon-FSA-search {
+    &:before {
+      content: "\e926";
+    }
+  }
+  @mixin icon-icon-FSA-trash {
+    &:before {
+      content: "\e927";
+    }
+  }
+  @mixin icon-icon-FSA-triangle-bottom {
+    &:before {
+      content: "\e928";
+    }
+  }
+  @mixin icon-icon-FSA-unchecked {
+    &:before {
+      content: "\e929";
+    }
+  }
+  @mixin icon-icon-FSA-log-out {
+    &:before {
+      content: "\e91d";
+    }
+  }
