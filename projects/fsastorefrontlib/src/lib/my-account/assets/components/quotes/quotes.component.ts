@@ -2,7 +2,6 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import * as fromQuoteStore from '../../store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
-import { Observable } from 'rxjs';
 
 
 @Component({

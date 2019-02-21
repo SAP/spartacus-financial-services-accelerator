@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Cart, OrderEntry } from '@spartacus/core';
 import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';

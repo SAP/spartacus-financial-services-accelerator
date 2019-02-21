@@ -3,8 +3,8 @@
         color: $color-white;
         font-weight: 500;
         margin-bottom: 0;
-        cursor: pointer;
         padding: 0 60px;
+        @include accordion-arrow();
     }
     &-item {
         margin-top: 40px;
@@ -12,7 +12,8 @@
     }
     &--list-item {
         border-bottom: 1px solid $color-grey;
-        padding: 14px 0; 
+        padding: 14px 0;
+        margin: 0;
         &:last-child {
             border-bottom: none;
         }
@@ -23,17 +24,13 @@
         }
     }
     &-item--wrapper {
-        transition: opacity 0.5s ease-out;
-        opacity: 0; 
-        height: 0;
+        display: flex;
+        transition: all 0.5s ease-in-out;
+        max-height: 0;
         overflow: hidden;
         &.active {
-            padding: 30px 46px 20px;
-            opacity: 1;
-            height: auto;
-            @include media-breakpoint-down(xs) {
-                padding: 25px 0 20px;
-            }
+            padding: 40px 0;
+            max-height: 1200px;
         }
     }
     .contact-box {

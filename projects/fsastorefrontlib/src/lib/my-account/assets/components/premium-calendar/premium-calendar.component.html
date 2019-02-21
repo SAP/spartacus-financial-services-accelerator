@@ -12,7 +12,7 @@
             <h3 class="col"> Payment Method </h3>
           </div>
           <div *ngFor="let policy of policies.insurancePolicies">
-            <div class="premium-data-row row" (click)="policy.opened=!policy.opened" [ngClass]="{'clickable': policy.billingData?.length > 1, 'opened':policy.opened}">
+            <div class="premium-data-row row" (click)="policy.opened=!policy.opened" [ngClass]="{'clickable': policy.billingData?.length > 1, 'active':policy.opened}">
               <div class="col">
                 <div class=row>
                   <div class="col-4">
@@ -88,7 +88,7 @@
                         {{policy.paymentFrequency}}
                       </span>
                     </div>
-                    <div class="container cards__data border-bottom-grey" (click)="policy.opened=!policy.opened" [ngClass]="{'clickable': policy.billingData.length > 1, 'opened':policy.opened}">
+                    <div class="container cards__data border-bottom-grey" (click)="policy.opened=!policy.opened" [ngClass]="{'clickable': policy.billingData.length > 1, 'active':policy.opened}">
                       <div class="row">
                         <div class="col-6">
                           <div class="title">
