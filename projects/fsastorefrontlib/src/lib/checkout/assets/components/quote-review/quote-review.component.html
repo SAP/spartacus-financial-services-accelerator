@@ -21,7 +21,6 @@
                 <div class="accordion-header__expiry-date"></div>
               </div>
             </div>
-            {{cart |json}}
             <ng-container *ngIf="(cart?.insuranceQuote?.quoteDetails | json) !== '{}'">
               <fsa-accordion-item [opened]="true" [title]="(cart.deliveryOrderGroups[0].entries[0]?.product?.categories[0])?.name + ' Information'">
                 <div class="container">
