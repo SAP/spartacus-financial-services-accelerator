@@ -23,6 +23,11 @@ export interface CmsProductFeatureComponent extends CmsComponent {
 }
 
  export interface CmsInboxComponent extends CmsComponent {
+   uid?: string;
    tabComponents?: string;
  }
+
+ export interface CmsInboxTabComponent {
+  title?: string;
+}
 
