@@ -1,5 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { provideConfig } from '@spartacus/core';
+import { provideConfig, ConfigModule } from '@spartacus/core';
 
 import { MyAccountModule } from './my-account/index';
 import { StorefrontModuleConfig, StorefrontModule } from '@spartacus/storefront';
@@ -11,7 +11,8 @@ import { CmsLibModule } from './cms-lib/cms-lib.module';
     UiModule,
     CmsLibModule,
     MyAccountModule,
-    StorefrontModule
+    StorefrontModule,
+    ConfigModule.forRoot()
   ],
   exports: [
     StorefrontModule,
