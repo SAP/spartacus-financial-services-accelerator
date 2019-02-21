@@ -11,8 +11,8 @@
                 <li><a href="#">Claims</a></li>
             </ul>
         </div>
-        <div class="section-header__heading mt-5 p-4">
-            <div class="row">
+        <div class="section-header__heading mt-5 p-4 position-relative">
+            <div class="row d-none d-md-flex">
                 <div class="col-1">
                     <label class="checkbox-label">
                         <input type="checkbox" value="true">
@@ -32,23 +32,47 @@
                     <span class="filter pt-1 pr-1 float-right FSA-icon icon-icon-FSA-triangle-bottom"></span>
                 </div>
             </div>
+            <div class="mobile-heading row d-md-none">
+                <div class="col-1">
+                    <label class="checkbox-label">
+                        <input type="checkbox" value="true">
+                        <span class="checkbox-text FSA-icon icon-icon-FSA-ok"></span>
+                    </label>
+                </div>
+                <div class="col-10 text-center" (click)="shouldShow = !shouldShow">
+                    Auto
+                </div>
+                <div class="col-1">
+                    <span class="filter pt-1 pr-1 float-right FSA-icon icon-icon-FSA-triangle-bottom"></span>
+                </div>
+            </div>
+            <div class="select" [ngClass]="{opened: shouldShow, '': !shouldShow}">
+                <ul>
+                    <li class="active"><a href="#">Auto</a></li>
+                    <li><a href="#">Travel</a></li>
+                    <li><a href="#">Homeowners</a></li>
+                    <li><a href="#">Savings</a></li>
+                    <li><a href="#">Policies</a></li>
+                    <li><a href="#">Claims</a></li>
+                </ul>
+            </div>
         </div>
         <div class="messages">
             <div class="message read border-bottom-grey"><!-- To be in a repeater -->
                 <div class="inbox-header row no-gutters">
-                    <div class="col-1 p-4">
+                    <div class="col-sm-1 col-1 p-4">
                         <label class="checkbox-label">
                             <input type="checkbox" value="true">
                             <span class="checkbox-text FSA-icon icon-icon-FSA-ok"></span>
                         </label>
                     </div>
-                    <div class="col-3 p-4">
+                    <div class="col-sm-7 col-md-3 p-4 ellipsis">
                         00000001 / Auto Insurance Policy
                     </div>
-                    <div class="col-5 p-4 ellipsis">
+                    <div class="col-md-5 p-4 d-none d-md-block ellipsis">
                         Dear Donna Moore, Thank you for purchasing your insurance from the Financial Services Accelerator. We would like to provide you with an update on your Policy Purc
                     </div>
-                    <div class="col-3 p-4">
+                    <div class="col-sm-4 col-md-3 p-4">
                         11 Feb 2019
                     </div>
                 </div>

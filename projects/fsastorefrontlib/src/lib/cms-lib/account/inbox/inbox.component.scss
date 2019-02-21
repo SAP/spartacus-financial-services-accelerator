@@ -19,8 +19,7 @@
 			&:hover {
 				color: $color-blue;
 			}
-		}
-			
+		}	
 	}
 	.message-content {
 		// display: none;
@@ -94,6 +93,32 @@
 	font-size: 16px;
 	.filter {
 		cursor: pointer;
+	}
+	.mobile-heading {
+		cursor: pointer;
+	}
+	.select {
+		display: none;
+		position: absolute;
+		top: 72px;
+		left: 0;
+		width: 100%;
+		z-index: 99;
+		background: $color-white;
+		font-size: 14px;
+		border: 1px solid rgba(0, 0, 0, 0.15);
+		@include box-shadow(0px, 6px, 12px, 0px, $color-dark-grey, 0.3);
+		&.opened {
+			display: block;
+		}
+		a {
+			padding: 10px 20px;
+			color: $color-dark-grey;
+			display: block;
+			&:hover {
+				background: $color-grey;
+			}
+		}
 	}
 }
 .ellipsis {
