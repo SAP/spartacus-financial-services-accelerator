@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductFeatureComponent } from './product-feature-component';
-import { ConfigModule, CmsConfig } from '@spartacus/core'
+import { ConfigModule, CmsConfig } from '@spartacus/core';
 
 @NgModule({
   imports: [
@@ -10,7 +10,8 @@ import { ConfigModule, CmsConfig } from '@spartacus/core'
       cmsComponents: {
         FinancialServicesProductFeatureComponent: { selector: 'fsa-product-feature' }
       }
-    }),],
+    }),
+  ],
   declarations: [ProductFeatureComponent],
   exports: [ProductFeatureComponent],
   entryComponents: [ProductFeatureComponent]

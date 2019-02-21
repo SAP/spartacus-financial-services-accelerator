@@ -9,7 +9,7 @@ import { effects } from '../../my-account/assets/store';
 import {LogoutModule} from './logout/logout.module';
 
 import { ComponentsModule } from '@spartacus/storefront';
-import { ConfigModule, CmsConfig } from '@spartacus/core'
+import { ConfigModule, CmsConfig } from '@spartacus/core';
 
 @NgModule({
   imports: [
@@ -23,7 +23,8 @@ import { ConfigModule, CmsConfig } from '@spartacus/core'
         CMSViewPoliciesComponent: { selector: 'fsa-view-policies' },
         CMSViewQuotesComponent: { selector: 'fsa-view-quotes' }
        }
-    }),],
+    }),
+  ],
   declarations: [ CMSViewPoliciesComponent, CMSViewQuotesComponent],
   exports: [ CMSViewPoliciesComponent, CMSViewQuotesComponent],
   entryComponents: [ CMSViewPoliciesComponent, CMSViewQuotesComponent]

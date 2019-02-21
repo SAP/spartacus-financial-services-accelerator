@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PagesModule } from './pages/pages.module';
-import { ConfigModule } from '@spartacus/core'
+import { ConfigModule } from '@spartacus/core';
 
 
 @NgModule({
