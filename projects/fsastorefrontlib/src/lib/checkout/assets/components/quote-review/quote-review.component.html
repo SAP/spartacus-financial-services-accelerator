@@ -3,25 +3,25 @@
     <ng-container *ngIf="cartLoaded$ | async; else loading">
       <ng-container *ngIf="cart.deliveryOrderGroups; else noQuotes">
         <h2 class="centered-heading">
-          Your {{ (cart.deliveryOrderGroups[0].entries[0]?.product?.categories)[0]?.name }}
+          Your {{ (cart.deliveryOrderGroups[0].entries[0]?.product?.categories[0])?.name }}
         </h2>
         <div class="col-md-8">
           <div class="accordion">
             <div class="row no-gutters section-header__heading">
               <div class="col-12 col-md-2 accordion-header__icon">
                 <span class="images images__wrapper images__wrapper--size"
-                  ><img class="images__size" [src]="getBaseUrl() + ((cart.deliveryOrderGroups[0]?.entries)[0]?.product?.images)[3]?.url"/>
+                  ><img class="images__size" [src]="getBaseUrl() + cart.deliveryOrderGroups[0]?.entries[0]?.product?.images[3]?.url"/>
                 </span>
               </div>
               <div class="col-12 col-md-8 accordion-header__text">
-                {{ (cart.deliveryOrderGroups[0].entries[0]?.product?.categories)[0]?.name }} Quote
+                {{ (cart.deliveryOrderGroups[0].entries[0]?.product?.categories[0])?.name }} Quote
               </div>
               <div class="col-12 col-md-3 col-md-2 accordion-header__details">
                 <div class="accordion-header__id"></div>
                 <div class="accordion-header__expiry-date"></div>
               </div>
             </div>
-            <fsa-accordion-item [opened]="true" [title]="'Auto Information'"><!-- Needs to have dynamic heading value -->
+            <fsa-accordion-item [opened]="true" [title]="(cart.deliveryOrderGroups[0].entries[0]?.product?.categories[0])?.name + ' Information'">
               <div class="container">
                 <div class="row justify-content-center">
                   <ul class="col-12 accordion--list">
@@ -42,7 +42,7 @@
                 </div>
               </div>
             </fsa-accordion-item>
-            <fsa-accordion-item [title]="'What\'s Included'"><!-- Needs to have dynamic heading value -->
+            <fsa-accordion-item [title]="'What\'s Included'">
               <div class="container">
                 <div class="row justify-content-center">
                   <ul class="col-12 accordion--list">
@@ -63,7 +63,7 @@
                 </div>
               </div>
             </fsa-accordion-item>
-            <fsa-accordion-item [title]="'Added by you'"><!-- Needs to have dynamic heading value -->
+            <fsa-accordion-item [title]="'Added by you'">
               <div class="container">
                 <div class="row justify-content-center">
                   <ul class="col-12 accordion--list">
@@ -79,7 +79,7 @@
                 </div>
               </div>
             </fsa-accordion-item>
-            <fsa-accordion-item [title]="'Personal Details'"><!-- Needs to have dynamic heading value -->
+            <fsa-accordion-item [title]="'Personal Details'">
               <div class="container">
                 <div class="row justify-content-center">
                   <ul class="col-12 accordion--list">
