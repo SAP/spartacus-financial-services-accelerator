@@ -1,5 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { ConfigModule, provideConfig } from '@spartacus/core';
+import { provideConfig } from '@spartacus/core';
 
 import { MyAccountModule } from './my-account/index';
 import { StorefrontModuleConfig, StorefrontModule } from '@spartacus/storefront';
@@ -11,38 +11,7 @@ import { CmsLibModule } from './cms-lib/cms-lib.module';
     UiModule,
     CmsLibModule,
     MyAccountModule,
-    StorefrontModule,
-    ConfigModule.withConfig({
-      cmsComponents: {
-        EnrichedResponsiveBannerComponent: { selector: 'fsa-enriched-responsive-banner' },
-        CMSViewPoliciesComponent: { selector: 'fsa-view-policies' },
-        CMSViewQuotesComponent: { selector: 'fsa-view-quotes' },
-        FinancialServicesProductFeatureComponent: { selector: 'fsa-product-feature' }
-      },
-      layoutSlots: {
-        InsuranceLandingPageTemplate: {
-          slots: [
-            'Section1',
-            'Section2A',
-            'Section2B',
-            'Section2C',
-            'Section3',
-            'Section4',
-            'Section5'
-          ]
-        },
-        FSCategoryPageTemplate: {
-          slots: [
-            'Section1',
-            'Section2A',
-            'Section2B',
-            'Section3',
-            'Section4'
-          ]
-        }
-      }
-      }
-    )
+    StorefrontModule
   ],
   exports: [
     StorefrontModule,
