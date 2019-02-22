@@ -44,7 +44,7 @@
                 </ng-container>
               </div>
             </div>
-            <div class="accordion row" *ngIf="policy.billingData?.length > 1;"[ngClass]="policy.opened ? 'opened' : ''" >
+            <div class="simple-accordion row" *ngIf="policy.billingData?.length > 1;"[ngClass]="policy.opened ? 'opened' : ''" >
               <div class="container-fluid">
                 <ng-container *ngFor="let dueDate of policy.billingData | slice:1">
                   <div class="row">
@@ -112,7 +112,7 @@
                       </div>
                     </div>
                     <ng-container *ngIf="policy.billingData.length > 1;">
-                      <div class="accordion container" [ngClass]="policy.opened ? 'opened' : ''">
+                      <div class="simple-accordion container" [ngClass]="policy.opened ? 'opened' : ''">
                         <ul class="list-data">
                           <ng-container *ngFor="let dueDate of policy.billingData | slice:1">
                               <li class="row list-data__list-item border-bottom-grey">

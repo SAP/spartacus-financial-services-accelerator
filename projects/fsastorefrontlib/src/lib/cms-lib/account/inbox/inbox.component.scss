@@ -31,7 +31,7 @@
 			width: 100%;
 			margin: 0 auto;
 			padding: 20px;
-			border: 1px solid #cccccc;
+			border: 1px solid $color-grey;
 			@include box-shadow(0px, 3px, 10px, 1px, $color-dark-grey, 0.3);
 		}
 	}
@@ -41,30 +41,19 @@
 		
 	}
 }
-
-.accordion {
-	width: 100%;
-    max-height: 0px;
-    overflow-y: hidden;
-    transition: ease-in-out 400ms max-height;
-    &.opened {
-        max-height: 600px;
-        transition: ease-in-out 600ms max-height;
-    }
-}
 .tabs-header {
-	border-bottom: 1px solid #cccccc;
+	border-bottom: 1px solid $color-grey;
 	& ul {
 		display: flex;
 	} 
 	& ul li {
 		list-style: none;
 		flex-grow: 1;
-    background-color: $color-light-grey;
-    margin-right: 5px;
-    border: 1px solid $color-grey;
-    border-bottom: none;
-    text-align: center;
+		background-color: $color-light-grey;
+		margin-right: 5px;
+		border: 1px solid $color-grey;
+		border-bottom: none;
+		text-align: center;
 		max-width: 15%;
 		a {
 			@include transition;
@@ -120,6 +109,9 @@
 			}
 		}
 	}
+}
+.simple-accordion {
+	width: 100%;
 }
 .ellipsis {
 	@include ellipsis;
