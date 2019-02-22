@@ -27,7 +27,7 @@ export interface CmsProductFeatureComponent extends CmsComponent {
    tabComponents?: string;
  }
 
- export interface CmsInboxTabComponent {
+ export interface CmsInboxTabComponent extends CmsComponent {
   title?: string;
 }
 
