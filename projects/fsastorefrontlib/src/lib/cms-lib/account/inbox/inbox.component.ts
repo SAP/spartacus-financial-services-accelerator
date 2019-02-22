@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { CmsService, StandardCmsComponentConfig, CmsComponentMapping } from '@spartacus/core';
+import { select, Store } from '@ngrx/store';
+import { CmsComponentMapping, CmsService, StandardCmsComponentConfig } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
+import { InboxService } from '../../../my-account/assets/services/inbox.service';
+import * as fromStore from '../../../my-account/assets/store';
 import { CmsInboxComponent } from './../../../occ-models/cms-component.models';
 
 export interface Mapping extends StandardCmsComponentConfig {
@@ -17,12 +20,15 @@ export interface Mapping extends StandardCmsComponentConfig {
 export class InboxComponent implements OnInit {
   constructor(
     protected componentData: CmsComponentData<CmsInboxComponent>,
-    protected cmsService: CmsService
+    protected cmsService: CmsService,
+    protected inboxService: InboxService,
+    protected store: Store<fromStore.UserState>
   ) {}
 
   component$: Observable<CmsInboxComponent>;
   inboxTabs$: Observable<any>;
   tabs;
+  messages$;
 
   ngOnInit() {
     this.component$ = this.componentData.data$;
@@ -34,5 +40,10 @@ export class InboxComponent implements OnInit {
     this.component$.subscribe(data => {
       this.tabs = data.tabComponents.split(' ');
     });
+  }
+
+  loadGroup(group: string) {
+    this.inboxService.loadMessagesByMessageGroup(group);
+    this.messages$ = this.store.pipe(select(fromStore.getMessages));
   }
 }

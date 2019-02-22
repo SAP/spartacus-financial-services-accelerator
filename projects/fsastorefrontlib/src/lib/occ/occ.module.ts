@@ -6,6 +6,7 @@ import { Config, OccConfig } from '@spartacus/core';
 import { OccClaimService } from './claim/claim.service';
 import { OccQuoteService } from './quote/quote.service';
 import { OccPolicyService } from './policy/policy.service';
+import { OccInboxService } from './inbox/inbox.service';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { OccPolicyService } from './policy/policy.service';
     OccQuoteService,
     OccPolicyService,
     OccClaimService,
+    OccInboxService,
     { provide: OccConfig, useExisting: Config }
   ]
 })
