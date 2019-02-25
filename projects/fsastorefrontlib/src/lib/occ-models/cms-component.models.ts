@@ -22,3 +22,21 @@ export interface CmsProductFeatureComponent extends CmsComponent {
   url?: string;
 }
 
+ export interface CmsInboxComponent extends CmsComponent {
+   tabComponents?: string;
+ }
+
+export interface CmsMultiComparisonTabContainer extends CmsComponent  {
+  simpleCMSComponents?: string;
+}
+
+export interface CMSComparisonTabComponent extends CmsComponent {
+  title?: string;
+  comparisonPanel?: string;
+  modifiedTime?: string;
+}
+
+export interface ComparisonPanelCMSComponent extends CmsComponent {
+  uid?: string;
+  products?: string;
+}

@@ -1,20 +1,25 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from '@angular/router';
-import {CmsPageGuards} from '@spartacus/storefront';
+import {CmsPageGuards, CategoryPageComponent} from '@spartacus/storefront';
 import {AuthGuard} from '@spartacus/core';
 import {ComparisonTablePageComponent} from './comparison-table-page.component';
 import {ComparisonTablePageLayoutModule} from '../../layout/comparison-table-page-layout/comparison-table-page-layout.module';
 
 const routes: Routes = [
   {
-    path: 'comparison-table',
-    canActivate: [AuthGuard, CmsPageGuards],
+    path: null,
+    canActivate: [CmsPageGuards],
     component: ComparisonTablePageComponent,
-    data: { pageLabel: 'account' }
+    data: { pageLabel: 'account', cxPath: 'comparisonTable' }
+  },
+  {
+    path: 'Insurance-Products/:categoryTitle/:categoryType/c/:categoryCode',
+    canActivate: [CmsPageGuards],
+    redirectTo: null,
+    data: { cxRedirectTo: 'comparisonTable' }
   }
 ];
-
 @NgModule({
   imports: [
     CommonModule,

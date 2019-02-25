@@ -14,6 +14,13 @@ import { FSAStorefrontModule } from '@fsa/storefront';
       server: {
         baseUrl: 'https://financialservices.local:9002'
       },
+      routesConfig: {
+        translations: {
+          default: {
+            'comparisonTable': { paths: ['comparisonTable/:categoryCode'] }
+          }
+        }
+      },
       site: {
         baseSite: 'insurance'
       },
@@ -26,7 +33,10 @@ import { FSAStorefrontModule } from '@fsa/storefront';
         EnrichedResponsiveBannerComponent: { selector: 'fsa-enriched-responsive-banner' },
         CMSViewPoliciesComponent: { selector: 'fsa-view-policies' },
         CMSViewQuotesComponent: { selector: 'fsa-view-quotes' },
-        FinancialServicesProductFeatureComponent: { selector: 'fsa-product-feature' }
+        FinancialServicesProductFeatureComponent: { selector: 'fsa-product-feature' },
+        CMSMultiComparisonTabContainer: { selector: 'fsa-comparison-table-container' },
+        CMSComparisonTabComponent: { selector: 'fsa-comparison-table-tab' },
+        ComparisonPanelCMSComponent: { selector: 'fsa-comparison-panel' }
       },
       layoutSlots: {
         InsuranceLandingPageTemplate: {
@@ -49,8 +59,8 @@ import { FSAStorefrontModule } from '@fsa/storefront';
             'Section4'
           ]
         },
-        MultiTabsCategoryPageTemplate:{
-          slots:[
+        MultiTabsCategoryPageTemplate: {
+          slots: [
             'Section1',
             'Section2',
           ]
