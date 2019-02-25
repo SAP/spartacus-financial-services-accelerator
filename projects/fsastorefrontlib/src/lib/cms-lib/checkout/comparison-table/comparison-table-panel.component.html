@@ -1,0 +1,5 @@
+<ng-container *ngIf="comparisonPanel | async as panel">
+        <ng-container *ngFor="let productId of getProductList()">
+                <fsa-comparison-table-product-item [productCode]="productId"></fsa-comparison-table-product-item>
+        </ng-container>
+</ng-container>

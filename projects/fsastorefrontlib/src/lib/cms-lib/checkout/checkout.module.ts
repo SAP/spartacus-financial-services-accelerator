@@ -6,7 +6,7 @@ import { ComponentsModule, OutletModule } from '@spartacus/storefront';
 import { ComparisonTableContainerComponent } from './comparison-table/comparison-table-container.component';
 import { ComparisonTableTabComponent } from 'projects/fsastorefrontlib/src/lib/cms-lib/checkout/comparison-table/comparison-table-tab.component';
 import { CmsModule } from '@spartacus/storefront';
-import { ComparisonPanelComponent } from 'projects/fsastorefrontlib/src/lib/cms-lib/checkout/comparison-table/comparison-panel.component';
+import { ComparisonTablePanelComponent } from 'projects/fsastorefrontlib/src/lib/cms-lib/checkout/comparison-table/comparison-table-panel.component';
 import { ComparisonTableItemComponent } from './comparison-table/comparison-table-product-item.component';
 
 @NgModule({
@@ -17,9 +17,9 @@ import { ComparisonTableItemComponent } from './comparison-table/comparison-tabl
     OutletModule,
     CmsModule
   ],
-  declarations: [ComparisonTableContainerComponent, ComparisonTableTabComponent, ComparisonPanelComponent, ComparisonTableItemComponent],
-  exports: [ComparisonTableContainerComponent, ComparisonTableTabComponent, ComparisonPanelComponent,ComparisonTableItemComponent],
-  entryComponents: [ComparisonTableContainerComponent, ComparisonTableTabComponent, ComparisonPanelComponent,ComparisonTableItemComponent]
+  declarations: [ComparisonTableContainerComponent, ComparisonTableTabComponent, ComparisonTablePanelComponent, ComparisonTableItemComponent],
+  exports: [ComparisonTableContainerComponent, ComparisonTableTabComponent, ComparisonTablePanelComponent,ComparisonTableItemComponent],
+  entryComponents: [ComparisonTableContainerComponent, ComparisonTableTabComponent, ComparisonTablePanelComponent,ComparisonTableItemComponent]
 })
 export class CheckoutModule {
 }

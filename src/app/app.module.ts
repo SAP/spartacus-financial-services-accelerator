@@ -36,7 +36,7 @@ import { FSAStorefrontModule } from '@fsa/storefront';
         FinancialServicesProductFeatureComponent: { selector: 'fsa-product-feature' },
         CMSMultiComparisonTabContainer: { selector: 'fsa-comparison-table-container' },
         CMSComparisonTabComponent: { selector: 'fsa-comparison-table-tab' },
-        ComparisonPanelCMSComponent: { selector: 'fsa-comparison-panel' }
+        ComparisonPanelCMSComponent: { selector: 'fsa-comparison-table-panel' }
       },
       layoutSlots: {
         InsuranceLandingPageTemplate: {

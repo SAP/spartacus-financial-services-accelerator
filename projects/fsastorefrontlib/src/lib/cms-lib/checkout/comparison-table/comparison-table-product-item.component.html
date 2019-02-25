@@ -1,3 +1,4 @@
 <ng-container *ngIf="product$ | async as product">
-    {{product}}
+    <h3 class="products-details__name js-product-name">{{product.name}}</h3>
+    <button class="primary-button primary-button__default primary-button__event col-md-3 col mt-4" type="submit">Select</button>
 </ng-container>

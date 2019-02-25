@@ -1,9 +1,6 @@
 <ng-container *ngIf="component$ | async as component">
-        <ng-container *ngIf="component.simpleCMSComponents as list">
-                <b>{{list}}</b>
-                <ng-container *ngFor="let comparisonTabId of getComparisonTabList(list)">
-                        <!-- <ng-container cxComponentWrapper componentType="CMSComparisonTabComponent"
-                                componentUid="{{comparisonTabId}}"></ng-container> -->
+                <ng-container *ngFor="let comparisonTabId of getComparisonTabList()">
+                                <ng-container cxComponentWrapper componentType="CMSComparisonTabComponent"
+                                        componentUid="{{comparisonTabId}}"></ng-container>
                 </ng-container>
-        </ng-container>
 </ng-container>
