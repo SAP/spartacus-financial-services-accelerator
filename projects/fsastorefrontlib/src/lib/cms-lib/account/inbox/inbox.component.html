@@ -3,6 +3,9 @@
         <h2 class="heading-headline"> Inbox</h2>
         <div class="tabs-header d-none d-md-block">
             <ul>
+                <ng-container *ngFor="let tab of tabs">
+                    <ng-container cxComponentWrapper componentType="CMSInboxTabComponent" componentUid="{{tab}}"></ng-container>
+                </ng-container>
                 <li class="active"><a href="#">Auto</a></li>
                 <li><a href="#">Travel</a></li>
                 <li><a href="#">Homeowners</a></li>

@@ -26,6 +26,7 @@ import { FSAStorefrontModule } from '@fsa/storefront';
         EnrichedResponsiveBannerComponent: { selector: 'fsa-enriched-responsive-banner' },
         CMSViewPoliciesComponent: { selector: 'fsa-view-policies' },
         CMSViewQuotesComponent: { selector: 'fsa-view-quotes' },
+        CMSInboxTabComponent: { selector: 'fsa-inbox-tab' },
         FinancialServicesProductFeatureComponent: { selector: 'fsa-product-feature' }
       },
       layoutSlots: {

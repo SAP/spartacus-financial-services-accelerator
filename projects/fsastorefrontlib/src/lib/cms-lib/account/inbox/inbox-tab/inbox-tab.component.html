@@ -1,3 +1,4 @@
-<p *ngIf="inboxTab">
-  {{inboxTab | json}}
-</p>
+
+<ng-container *ngIf="component$ | async as tab">
+  <li class="active"><a href="#">{{ tab.title }}</a></li>
+</ng-container>
