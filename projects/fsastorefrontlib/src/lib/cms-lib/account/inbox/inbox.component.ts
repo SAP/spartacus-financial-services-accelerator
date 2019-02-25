@@ -5,7 +5,7 @@ import { CmsComponentData } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
 import { InboxService } from '../../../my-account/assets/services/inbox.service';
 import * as fromStore from '../../../my-account/assets/store';
-import { CmsInboxComponent } from './../../../occ-models/cms-component.models';
+import { CmsInboxComponent, CmsInboxTabComponent } from './../../../occ-models/cms-component.models';
 
 export interface Mapping extends StandardCmsComponentConfig {
   CMSInboxTabComponent?: CmsComponentMapping;
@@ -26,20 +26,18 @@ export class InboxComponent implements OnInit {
   ) {}
 
   component$: Observable<CmsInboxComponent>;
-  inboxTabs$: Observable<any>;
-  tabs;
   messages$;
 
   ngOnInit() {
     this.component$ = this.componentData.data$;
-
-    this.loadInboxTabs();
   }
 
-  loadInboxTabs() {
-    this.component$.subscribe(data => {
-      this.tabs = data.tabComponents.split(' ');
-    });
+  splitArray(arrayToSplit: string): string[] {
+    return arrayToSplit.split(' ');
+  }
+
+  loadTab(tabId): Observable<CmsInboxTabComponent> {
+    return this.cmsService.getComponentData(tabId);
   }
 
   loadGroup(group: string) {
