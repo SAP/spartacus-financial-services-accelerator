@@ -27,17 +27,15 @@ export class InboxComponent implements OnInit {
 
   component$: Observable<CmsInboxComponent>;
   messages$;
+  tabs;
 
   ngOnInit() {
     this.component$ = this.componentData.data$;
+    this.component$.subscribe( data => this.tabs = this.splitArray(data.tabComponents));
   }
 
   splitArray(arrayToSplit: string): string[] {
     return arrayToSplit.split(' ');
-  }
-
-  loadTab(tabId): Observable<CmsInboxTabComponent> {
-    return this.cmsService.getComponentData(tabId);
   }
 
   loadGroup(group: string) {

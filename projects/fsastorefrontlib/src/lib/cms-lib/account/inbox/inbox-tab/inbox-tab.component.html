@@ -1,2 +1,5 @@
-<li class="test active sdfsdfsdfds"><a href="#">{{ component.title }}</a></li>
+<ng-container *ngIf="component$ | async as component">
+  <li class="test active sdfsdfsdfds"><a href="#">{{ component.title }}</a></li>
+</ng-container>
+
 

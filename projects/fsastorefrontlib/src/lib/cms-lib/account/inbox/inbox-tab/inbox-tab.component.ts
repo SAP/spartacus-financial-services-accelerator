@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { CmsComponentData } from '@spartacus/storefront';
+import { InboxService } from 'projects/fsastorefrontlib/src/lib/my-account/assets/services/inbox.service';
 import { CmsInboxTabComponent } from 'projects/fsastorefrontlib/src/lib/occ-models/cms-component.models';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import * as fromStore from '../../../../my-account/assets/store';
+
+
 
 @Component({
   selector: 'fsa-inbox-tab',
@@ -11,17 +14,16 @@ import { map } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InboxTabComponent implements OnInit {
-  inboxTab: Observable<CmsInboxTabComponent>;
 
-  constructor(public component: CmsComponentData<CmsInboxTabComponent>) {}
+  component$;
+  messages$;
 
-  ngOnInit() {}
+  constructor(public component: CmsComponentData<CmsInboxTabComponent>,
+    public inboxService: InboxService,
+    protected store: Store<fromStore.UserState>
+    ) {}
 
-  getData(): Observable<CmsInboxTabComponent> {
-    return this.component.data$.pipe(
-      map(data => {
-        return data;
-      })
-    );
-  }
+    ngOnInit() {
+      this.component$ = this.component.data$;
+    }
 }

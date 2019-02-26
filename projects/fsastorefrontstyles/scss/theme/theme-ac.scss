@@ -1,6 +1,8 @@
 @import '../mixins-fsa';
 @import '../variables-fsa';
-
+fsa-inbox-tab {
+	flex-grow: 1;
+}
 body {
   font-size: 14px;
   color: $color-dark-grey;
