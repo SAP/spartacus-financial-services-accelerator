@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {CmsComponentData} from '@spartacus/storefront';
-import {Observable} from 'rxjs/internal/Observable';
-import {CmsMultiComparisonTabContainer} from '../../../occ-models';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { CmsComponentData } from '@spartacus/storefront';
+import { Observable } from 'rxjs/internal/Observable';
+import { CmsMultiComparisonTabContainer } from '../../../occ-models';
 
 @Component({
   selector: 'fsa-comparison-table-container',
@@ -21,9 +21,9 @@ export class ComparisonTableContainerComponent implements OnInit {
     this.component$ = this.componentData.data$;
   }
   getComparisonTabList(): string[] {
-      this.component$.subscribe(data => {
-        this.comparisonTabList = data.simpleCMSComponents.split(' ');
-      })
+    this.component$.subscribe(data => {
+      this.comparisonTabList = data.simpleCMSComponents.split(' ');
+    })
     return this.comparisonTabList;
   }
 }

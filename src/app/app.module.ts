@@ -1,8 +1,8 @@
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { LOCALE_ID, NgModule } from '@angular/core';
-
-import { AppComponent } from './app.component';
 import { FSAStorefrontModule } from '@fsa/storefront';
+import { AppComponent } from './app.component';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +17,8 @@ import { FSAStorefrontModule } from '@fsa/storefront';
       routesConfig: {
         translations: {
           default: {
-            'comparisonTable': { paths: ['comparisonTable/:categoryCode'] }
+            'comparisonTable': { paths: ['comparisonTable/:categoryCode'] },
+            'add-options': { paths: ['add-options'] }
           }
         }
       },

@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {CmsComponentData} from '@spartacus/storefront';
-import {CMSComparisonTabComponent} from '../../../occ-models';
-import {Observable} from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { CmsComponentData } from '@spartacus/storefront';
+import { Observable } from 'rxjs';
+import { CMSComparisonTabComponent } from '../../../occ-models';
 
 @Component({
   selector: 'fsa-comparison-table-tab',
@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComparisonTableTabComponent implements OnInit {
-  comparisonTab:Observable<CMSComparisonTabComponent>;
+  comparisonTab: Observable<CMSComparisonTabComponent>;
 
   constructor(
     protected componentData: CmsComponentData<CMSComparisonTabComponent>,
