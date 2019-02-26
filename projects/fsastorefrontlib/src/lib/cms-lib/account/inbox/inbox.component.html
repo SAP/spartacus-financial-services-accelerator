@@ -1,17 +1,12 @@
 <ng-container *ngIf="component$ | async as component">
+    {{ component | json }}
     <div class="center1400 contentPadding">
         <h2 class="heading-headline"> Inbox</h2>
         <div class="tabs-header d-none d-md-block">
             <ul>
-                <ng-container *ngFor="let tab of tabs">
+                <!-- <ng-container *ngFor="splitArray() as tab">
                     <ng-container cxComponentWrapper componentType="CMSInboxTabComponent" componentUid="{{tab}}"></ng-container>
-                </ng-container>
-                <li class="active"><a href="#">Auto</a></li>
-                <li><a href="#">Travel</a></li>
-                <li><a href="#">Homeowners</a></li>
-                <li><a href="#">Savings</a></li>
-                <li><a href="#">Policies</a></li>
-                <li><a href="#">Claims</a></li>
+                </ng-container> -->
             </ul>
         </div>
         <div class="section-header__heading mt-5 p-4 position-relative">

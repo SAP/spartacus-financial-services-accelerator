@@ -74,6 +74,12 @@
 		}
 	}
 }
+.tabs-header {
+	border-bottom: 1px solid $color-grey;
+	& ul {
+		display: flex;
+	} 
+}
 .simple-accordion {
 	width: 100%;
 }
