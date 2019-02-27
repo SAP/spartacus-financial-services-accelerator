@@ -22,10 +22,6 @@ export interface CmsProductFeatureComponent extends CmsComponent {
   url?: string;
 }
 
- export interface CmsInboxComponent extends CmsComponent {
-   tabComponents?: string;
- }
-
 export interface CmsMultiComparisonTabContainer extends CmsComponent  {
   simpleCMSComponents?: string;
 }
