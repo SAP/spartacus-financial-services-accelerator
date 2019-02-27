@@ -10,6 +10,14 @@ import { ConfigModule } from '@spartacus/core';
         CommonModule,
         PagesModule,
         ConfigModule.withConfig({
+            routesConfig: {
+              translations: {
+                default: {
+                  'comparisonTable': { paths: ['comparisonTable/:categoryCode'] },
+                  'add-options': { paths: ['add-options'] }
+                }
+              }
+            },
             layoutSlots: {
               InsuranceLandingPageTemplate: {
                 slots: [
@@ -29,6 +37,12 @@ import { ConfigModule } from '@spartacus/core';
                   'Section2B',
                   'Section3',
                   'Section4'
+                ]
+              },
+              MultiTabsCategoryPageTemplate: {
+                slots: [
+                  'Section1',
+                  'Section2',
                 ]
               }
             }

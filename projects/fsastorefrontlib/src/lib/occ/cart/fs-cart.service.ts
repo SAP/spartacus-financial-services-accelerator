@@ -29,7 +29,8 @@ export class OccFSCartService {
             .pipe(catchError((error: any) => throwError(error.json())));
     }
 
-    public startBundle(userId: string, cartId: string, productCode: string, bundleTemplateId: string, quantity: number): Observable<CartModification> {
+    public startBundle(userId: string, cartId: string, productCode: string
+            , bundleTemplateId: string, quantity: number): Observable<CartModification> {
         const toAdd = JSON.stringify({});
         const url = this.getStartBundleForProductOfSpecifiedCart(userId, cartId);
         console.log(url);

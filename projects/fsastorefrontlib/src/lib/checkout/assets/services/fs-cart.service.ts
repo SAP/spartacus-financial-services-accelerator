@@ -54,6 +54,6 @@ export class FSCartService extends CartService {
           quantity: quantity
         })
       );
-    }
+    };
   }
 }

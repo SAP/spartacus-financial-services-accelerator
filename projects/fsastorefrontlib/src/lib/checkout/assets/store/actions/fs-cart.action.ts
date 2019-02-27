@@ -19,4 +19,4 @@ export class StartBundle extends LoaderLoadAction {
 
 export type FSCartAction =
   | AddOptionalProduct
-  | StartBundle
+  | StartBundle;

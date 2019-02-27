@@ -6,6 +6,7 @@ import { ComparisonTableContainerComponent } from './comparison-table-container.
 import { ComparisonTablePanelComponent } from './comparison-table-panel.component';
 import { ComparisonTableItemComponent } from './comparison-table-product-item.component';
 import { ComparisonTableTabComponent } from './comparison-table-tab.component';
+import { ConfigModule, CmsConfig } from '@spartacus/core';
 
 
 @NgModule({
@@ -14,11 +15,21 @@ import { ComparisonTableTabComponent } from './comparison-table-tab.component';
         RouterModule,
         ComponentsModule,
         OutletModule,
-        CmsModule
+        CmsModule,
+        ConfigModule.withConfig(<CmsConfig>{
+            cmsComponents: {
+                CMSMultiComparisonTabContainer: { selector: 'fsa-comparison-table-container' },
+                CMSComparisonTabComponent: { selector: 'fsa-comparison-table-tab' },
+                ComparisonPanelCMSComponent: { selector: 'fsa-comparison-table-panel' }
+            }
+        }),
     ],
-    declarations: [ComparisonTableContainerComponent, ComparisonTableTabComponent, ComparisonTablePanelComponent, ComparisonTableItemComponent],
-    exports: [ComparisonTableContainerComponent, ComparisonTableTabComponent, ComparisonTablePanelComponent, ComparisonTableItemComponent],
-    entryComponents: [ComparisonTableContainerComponent, ComparisonTableTabComponent, ComparisonTablePanelComponent, ComparisonTableItemComponent]
+    declarations: [ComparisonTableContainerComponent, ComparisonTableTabComponent, ComparisonTablePanelComponent
+        , ComparisonTableItemComponent],
+    exports: [ComparisonTableContainerComponent, ComparisonTableTabComponent, ComparisonTablePanelComponent
+        , ComparisonTableItemComponent],
+    entryComponents: [ComparisonTableContainerComponent, ComparisonTableTabComponent, ComparisonTablePanelComponent
+        , ComparisonTableItemComponent]
 })
 export class ComparisonTableModule {
 }

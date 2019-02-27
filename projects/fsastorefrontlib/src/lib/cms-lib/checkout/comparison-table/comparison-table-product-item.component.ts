@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Cart, Product, ProductService, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import { Cart, Product, ProductService } from '@spartacus/core';
 import { FSCartService } from '../../../checkout/assets/services';
-import { Router } from '@angular/router';
 
 @Component({
     selector: 'fsa-comparison-table-product-item',
@@ -20,8 +19,7 @@ export class ComparisonTableItemComponent implements OnInit {
 
     constructor(
         protected productService: ProductService,
-        protected cartService: FSCartService,
-        protected router: Router
+        protected cartService: FSCartService
     ) {
     }
 
@@ -32,6 +30,5 @@ export class ComparisonTableItemComponent implements OnInit {
 
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {
         this.cartService.createCartAndStartBundle(productCode, bundleTemplateId, 1);
-        this.router.navigate(['/add-options']);
     }
 }

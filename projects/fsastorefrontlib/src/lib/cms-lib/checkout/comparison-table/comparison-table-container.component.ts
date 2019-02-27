@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { CmsComponentData } from '@spartacus/storefront';
 import { Observable } from 'rxjs/internal/Observable';
+import { CmsComponentData } from '@spartacus/storefront';
 import { CmsMultiComparisonTabContainer } from '../../../occ-models';
 
 @Component({
@@ -23,7 +23,7 @@ export class ComparisonTableContainerComponent implements OnInit {
   getComparisonTabList(): string[] {
     this.component$.subscribe(data => {
       this.comparisonTabList = data.simpleCMSComponents.split(' ');
-    })
+    });
     return this.comparisonTabList;
   }
 }

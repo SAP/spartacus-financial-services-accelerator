@@ -1,7 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {CmsComponentData} from '@spartacus/storefront';
-import {ComparisonPanelCMSComponent} from '../../../occ-models';
 import {Observable} from 'rxjs';
+import {ComparisonPanelCMSComponent} from '../../../occ-models';
 
 @Component({
   selector: 'fsa-comparison-table-panel',
@@ -25,7 +25,7 @@ export class ComparisonTablePanelComponent implements OnInit {
   getProductList(): string[] {
     this.componentData.data$.subscribe(data => {
       this.productList = data.products.split(' ');
-    })
+    });
     return this.productList;
   }
 }
