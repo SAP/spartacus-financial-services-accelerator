@@ -4,7 +4,8 @@
         <div class="tabs-header d-none d-md-block">
             <ul>
                 <ng-container *ngFor="let tab of tabs">
-                    <ng-container cxComponentWrapper componentType="CMSInboxTabComponent" componentUid="{{tab}}"></ng-container>
+                    <!-- <ng-container  cxComponentWrapper contextParameters="test" componentType="CMSInboxTabComponent" componentUid="{{tab}}"></ng-container> -->
+                    <fsa-inbox-tab (tabsSelected)="onTabSelected($event)"></fsa-inbox-tab>
                 </ng-container>
             </ul>
         </div>

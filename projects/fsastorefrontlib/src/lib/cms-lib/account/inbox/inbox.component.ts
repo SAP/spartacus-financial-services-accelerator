@@ -28,9 +28,15 @@ export class InboxComponent implements OnInit {
   component$: Observable<CmsInboxComponent>;
   messages$;
   tabs;
+  baba;
 
+  onTabSelected(event) {
+    // console.log('sda');
+    // console.log(event);
+  }
   ngOnInit() {
     this.component$ = this.componentData.data$;
+    this.component$.subscribe( data => this.baba = data);
     this.component$.subscribe( data => this.tabs = this.splitArray(data.tabComponents));
   }
 
