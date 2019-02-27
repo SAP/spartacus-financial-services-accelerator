@@ -1,13 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit, Output } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { CmsComponentData } from '@spartacus/storefront';
-import { InboxService } from 'projects/fsastorefrontlib/src/lib/my-account/assets/services/inbox.service';
-import { CmsInboxTabComponent } from 'projects/fsastorefrontlib/src/lib/occ-models/cms-component.models';
-import * as fromStore from '../../../../my-account/assets/store';
+import { ChangeDetectionStrategy, Component, OnInit, Output, Input } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 import { CmsService } from '@spartacus/core';
-
-
 
 @Component({
   selector: 'fsa-inbox-tab',
@@ -15,25 +8,17 @@ import { CmsService } from '@spartacus/core';
   styleUrls: ['./inbox-tab.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class InboxTabComponent implements OnInit {
   @Output() tabsSelected = new EventEmitter();
+  @Input() tab: string;
   component$;
-  messages$;
-  deda;
-  componentUid;
 
-  constructor(
-    public componentData: CmsComponentData<CmsInboxTabComponent>,
-    public inboxService: InboxService,
-    protected store: Store<fromStore.UserState>,
-    private cmsService: CmsService,
-    ) {}
-
+  constructor ( private cmsService: CmsService ) {}
     ngOnInit() {
-      this.component$ = this.cmsService.getComponentData('AutoInboxTabComponent');
-      console.log(this.component$);
+      this.component$ = this.cmsService.getComponentData(this.tab);
     }
-    onTabClicked() {
-      this.deda = this.componentData.contextParameters;
+    onTabClicked(messageGroup) {
+      this.tabsSelected.emit(messageGroup);
     }
 }

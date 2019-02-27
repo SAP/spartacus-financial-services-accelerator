@@ -1,6 +1,7 @@
 <ng-container *ngIf="component$ | async as component">
-  {{ component | json}}
-  <li class="test "><a (click)="onTabClicked();">{{ component.title }}</a></li>
+  <li class="tab">
+    <a (click)="onTabClicked(component.messageGroup);">{{ component.title }}</a>
+  </li>
 </ng-container>
 
 

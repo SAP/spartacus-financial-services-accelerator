@@ -13,7 +13,10 @@ export class OccInboxService {
     ) {}
 
   protected getSiteMessagesEndpoint(userId: string, messageGroup: string) {
-    const siteMessagesEndpoint = '/users/' + userId + '/notifications/sitemessages?messagegroup=' + messageGroup;
+    let siteMessagesEndpoint = '/users/' + userId + '/notifications/sitemessages';
+    if (  messageGroup !== '') {
+      siteMessagesEndpoint += '?messagegroup=' + messageGroup;
+    }
     return (
       (this.config.server.baseUrl || '') +
       this.config.server.occPrefix +
