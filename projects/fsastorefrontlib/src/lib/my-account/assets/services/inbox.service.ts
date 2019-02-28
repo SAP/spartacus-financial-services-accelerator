@@ -20,7 +20,7 @@ export class InboxService {
   callback: Function;
 
   initMessages() {
-    this.store.pipe(select(fromSelector.getQuotes)).subscribe(messages => {
+    this.store.pipe(select(fromSelector.getMessages)).subscribe(messages => {
       if (messages) {
         this.inboxData.messages = messages;
       }

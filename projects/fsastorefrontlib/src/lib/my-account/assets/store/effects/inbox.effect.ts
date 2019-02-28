@@ -12,7 +12,7 @@ export class InboxEffects {
   @Effect()
   loadMessagesByCode$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.LOAD_MESSAGES),
-    map((action: fromActions.LoadQuotes) => action.payload),
+    map((action: fromActions.LoadMessages) => action.payload),
     mergeMap(payload => {
         if (payload === undefined || payload.userId === undefined) {
           payload = {
