@@ -10,7 +10,7 @@ const routes: Routes = [
     path: null,
     canActivate: [CmsPageGuards],
     component: ComparisonTablePageComponent,
-    data: { pageLabel: 'account', cxPath: 'comparisonTable' }
+    data: { cxPath: 'comparisonTable' }
   },
   {
     path: 'Insurance-Products/:categoryTitle/:categoryType/c/:categoryCode',

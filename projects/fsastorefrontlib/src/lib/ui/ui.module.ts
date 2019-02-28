@@ -37,12 +37,6 @@ import { ConfigModule } from '@spartacus/core';
                   'Section3',
                   'Section4'
                 ]
-              },
-              MultiTabsCategoryPageTemplate: {
-                slots: [
-                  'Section1',
-                  'Section2',
-                ]
               }
             }
             }
