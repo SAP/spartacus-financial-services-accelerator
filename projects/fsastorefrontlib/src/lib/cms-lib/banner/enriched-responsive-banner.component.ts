@@ -21,10 +21,19 @@ export class EnrichedResponsiveBannerComponent implements OnInit {
 
   component$;
 
-  ngOnInit()
-  {
+  private convertToAbsoluteUrl = map(url => this.getBaseUrl() + url);
+
+  static hasMedia(data): boolean {
+    return !!data.media;
+  }
+
+  ngOnInit() {
     this.component$ = this.component.data$;
     this.component$.subscribe(comp => console.log(comp));
+  }
+
+  getBaseUrl(): string {
+    return this.config.server.baseUrl || '';
   }
 
   getComponentData(): Observable<CmsEnrichedResponsiveBannerComponent> {
@@ -43,16 +52,6 @@ export class EnrichedResponsiveBannerComponent implements OnInit {
 
   getResponsiveImageAbsoluteUrl(): Observable<string> {
     return this.getResponsiveImageUrl().pipe(this.convertToAbsoluteUrl);
-  }
-
-  private convertToAbsoluteUrl = map(url => this.getBaseUrl() + url);
-
-  getBaseUrl(): string {
-    return this.config.server.baseUrl || '';
-  }
-
-  static hasMedia(data): boolean {
-    return !!data.media;
   }
 
   getHeadingText(): Observable<string> {
