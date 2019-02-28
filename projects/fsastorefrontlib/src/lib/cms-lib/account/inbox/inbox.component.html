@@ -1,0 +1,97 @@
+<ng-container *ngIf="component$ | async as component">
+    <div class="center1400 contentPadding">
+        <h2 class="heading-headline"> Inbox</h2>
+        <div class="tabs-header d-none d-md-block">
+            <ul>
+                <ng-container *ngFor="let tab of tabs; let i=index;">
+                    <fsa-inbox-tab (tabsSelected)="onTabSelected($event)" [tabId]="tab" [ngClass]=" i===1 ? 'active' : ''"></fsa-inbox-tab>
+                </ng-container>
+            </ul>
+        </div>
+        <div class="section-header__heading mt-5 p-4 position-relative">
+            <div class="row d-none d-md-flex">
+                <div class="col-1">
+                    <label class="checkbox-label">
+                        <input type="checkbox" value="true">
+                        <span class="checkbox-text FSA-icon icon-icon-FSA-ok"></span>
+                    </label>
+                </div>
+                <div class="col-3">
+                    Subject
+                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"></span>
+                </div>
+                <div class="col-6">
+                    Preview
+                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"></span>
+                </div>
+                <div class="col-2">
+                    Date
+                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"></span>
+                </div>
+            </div>
+            <div class="mobile-heading row d-md-none">
+                <div class="col-1">
+                    <label class="checkbox-label">
+                        <input type="checkbox" value="true">
+                        <span class="checkbox-text FSA-icon icon-icon-FSA-ok"></span>
+                    </label>
+                </div>
+                <div class="col-10 text-center" (click)="shouldShow = !shouldShow">
+                    Auto
+                </div>
+                <div class="col-1">
+                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"></span>
+                </div>
+            </div>
+            <div class="select d-md-none" [ngClass]="{opened: shouldShow, '': !shouldShow}">
+                <ul>
+                    <li class="active"><a href="#">Auto</a></li>
+                    <li><a href="#">Travel</a></li>
+                    <li><a href="#">Homeowners</a></li>
+                    <li><a href="#">Savings</a></li>
+                    <li><a href="#">Policies</a></li>
+                    <li><a href="#">Claims</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="messages">
+            <ng-container *ngIf="messages$ | async as messages">
+                <ng-container *ngIf="messages.messages?.length !== 0; else noMessages">
+                    <div class="message read border-bottom-grey" *ngFor="let message of messages.messages">
+                        <div class="inbox-header p-4">
+                            <div class="row">
+                                <div class="col-1">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" value="true">
+                                        <span class="checkbox-text FSA-icon icon-icon-FSA-ok"></span>
+                                    </label>
+                                </div>
+                                <div class="col-6 col-md-3 ellipsis">
+                                    {{ message.title }}
+                                </div>
+                                <div class="col-md-6 d-none d-md-block ellipsis">
+                                    {{ message.content }}
+                                </div>
+                                <div class="col-4 col-md-2 ellipsis">
+                                    {{ message.sentDate }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion active">
+                            <div class="message-content py-5 px-3">
+                                <div class="box-shadow">
+                                    {{ message.content }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </div><!-- End of .messages-->
+        <ng-template #noMessages>
+            <h4 class="p-4 border-bottom-grey">
+                You have no messages for chosen group!
+            </h4>
+        </ng-template>
+    </div> <!-- End of .center1400-->
+</ng-container>

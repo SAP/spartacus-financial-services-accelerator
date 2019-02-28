@@ -7,6 +7,8 @@ import { OccClaimService } from './claim/claim.service';
 
 import { OccQuoteService } from './quote/quote.service';
 import { OccPolicyService } from './policy/policy.service';
+import { OccInboxService } from './inbox/inbox.service';
+
 import {OccFSCartService} from './cart/fs-cart.service';
 
 @NgModule({
@@ -15,6 +17,7 @@ import {OccFSCartService} from './cart/fs-cart.service';
     OccQuoteService,
     OccPolicyService,
     OccClaimService,
+    OccInboxService,
     OccFSCartService,
     { provide: OccConfig, useExisting: Config }
   ]
