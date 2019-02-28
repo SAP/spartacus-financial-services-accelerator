@@ -35,7 +35,7 @@ export class InboxComponent implements OnInit {
   ngOnInit() {
     this.component$ = this.componentData.data$;
     this.component$.subscribe( data => this.tabs = this.splitArray(data.tabComponents));
-    this.loadGroup('');
+    this.loadGroup(''); // Temporary solution for loading default message group
   }
   splitArray(arrayToSplit: string): string[] {
     return arrayToSplit.split(' ');

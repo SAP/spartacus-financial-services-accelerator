@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { ComponentsModule, CmsModule } from '@spartacus/storefront';
 import { InboxTabComponent } from '../../cms-lib/account/inbox/inbox-tab/inbox-tab.component';
 import { InboxComponent } from '../../cms-lib/account/inbox/inbox.component';
@@ -11,7 +9,7 @@ import { InboxDataService } from './services/inbox-data.service';
 import { InboxService } from './services/inbox.service';
 
 @NgModule({
-  imports: [CommonModule, RouterModule, FormsModule, NgSelectModule, ComponentsModule, CmsModule],
+  imports: [CommonModule, RouterModule, ComponentsModule, CmsModule],
   declarations: [InboxComponent, InboxTabComponent],
   exports: [InboxComponent, InboxTabComponent],
   entryComponents: [InboxComponent, InboxTabComponent],

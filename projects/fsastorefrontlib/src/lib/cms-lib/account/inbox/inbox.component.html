@@ -4,7 +4,7 @@
         <div class="tabs-header d-none d-md-block">
             <ul>
                 <ng-container *ngFor="let tab of tabs; let i=index;">
-                    <fsa-inbox-tab (tabsSelected)="onTabSelected($event)" [tab]="tab" [ngClass]=" i===1 ? 'active' : ''"></fsa-inbox-tab>
+                    <fsa-inbox-tab (tabsSelected)="onTabSelected($event)" [tabId]="tab" [ngClass]=" i===1 ? 'active' : ''"></fsa-inbox-tab>
                 </ng-container>
             </ul>
         </div>
@@ -18,15 +18,15 @@
                 </div>
                 <div class="col-3">
                     Subject
-                    <span class="filter pt-1 pr-1 float-right FSA-icon icon-icon-FSA-triangle-bottom"></span>
+                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"></span>
                 </div>
                 <div class="col-6">
                     Preview
-                    <span class="filter pt-1 pr-1 float-right FSA-icon icon-icon-FSA-triangle-bottom"></span>
+                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"></span>
                 </div>
                 <div class="col-2">
                     Date
-                    <span class="filter pt-1 pr-1 float-right FSA-icon icon-icon-FSA-triangle-bottom"></span>
+                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"></span>
                 </div>
             </div>
             <div class="mobile-heading row d-md-none">
@@ -40,7 +40,7 @@
                     Auto
                 </div>
                 <div class="col-1">
-                    <span class="filter pt-1 pr-1 float-right FSA-icon icon-icon-FSA-triangle-bottom"></span>
+                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"></span>
                 </div>
             </div>
             <div class="select d-md-none" [ngClass]="{opened: shouldShow, '': !shouldShow}">
@@ -77,7 +77,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="simple-accordion opened">
+                        <div class="accordion active">
                             <div class="message-content py-5 px-3">
                                 <div class="box-shadow">
                                     {{ message.content }}
