@@ -11,9 +11,9 @@ export class FSCartService extends CartService {
   protected callbackFunction: Function;
 
   constructor(
-    private fsStore: Store<StateWithCart>,
-    private fsCartData: CartDataService,
-    private fsAuthService: AuthService
+    protected fsStore: Store<StateWithCart>,
+    protected fsCartData: CartDataService,
+    protected fsAuthService: AuthService
   ) {
     super(fsStore, fsCartData, fsAuthService);
     this.initCart();
