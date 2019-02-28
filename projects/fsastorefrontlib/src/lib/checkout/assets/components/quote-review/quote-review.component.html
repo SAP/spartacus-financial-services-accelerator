@@ -21,30 +21,32 @@
                 <div class="accordion-header__expiry-date"></div>
               </div>
             </div>
-            <ng-container *ngIf="(cart?.insuranceQuote?.quoteDetails | json) !== '{}'">
-              <fsa-accordion-item [opened]="true" [title]="(cart.deliveryOrderGroups[0].entries[0]?.product?.categories[0])?.name + ' Information'">
-                <div class="container">
-                  <div class="row justify-content-center">
-                    <ul class="col-12 accordion--list">
-                      <ng-container *ngFor="let item of cart?.insuranceQuote?.quoteDetails?.entry">
-                        <li class="accordion--list-item row">
-                          <div class="col-6">
-                            {{ item.key }}
-                          </div>
-                          <div class="col-6 value notice notice--dark">
-                            {{ item.value }}
-                          </div>
-                        </li>
-                      </ng-container>
-                    </ul>
-                    <div class="col-12 col-md-6">
-                      <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
+            <div #ref>
+              <ng-container *ngIf="(cart?.insuranceQuote?.quoteDetails | json) !== '{}'">
+                <fsa-accordion-item [opened]="true" [title]="(cart.deliveryOrderGroups[0].entries[0]?.product?.categories[0])?.name + ' Information'">
+                  <div class="container">
+                    <div class="row justify-content-center">
+                      <ul class="col-12 accordion--list">
+                        <ng-container *ngFor="let item of cart?.insuranceQuote?.quoteDetails?.entry">
+                          <li class="accordion--list-item row">
+                            <div class="col-6">
+                              {{ item.key }}
+                            </div>
+                            <div class="col-6 value notice notice--dark">
+                              {{ item.value }}
+                            </div>
+                          </li>
+                        </ng-container>
+                      </ul>
+                      <div class="col-12 col-md-6">
+                        <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </fsa-accordion-item>
-            </ng-container>
-            <fsa-accordion-item [title]="'What\'s Included'">
+                </fsa-accordion-item>
+              </ng-container>
+            </div>
+            <fsa-accordion-item [opened]="ref.children.length > 0 ? false : true" [title]="'What\'s Included'">
               <div class="container">
                 <div class="row justify-content-center">
                   <ul class="col-12 accordion--list">

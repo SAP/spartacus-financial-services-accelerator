@@ -1,6 +1,5 @@
 @import '../mixins-fsa';
 @import '../variables-fsa';
-
 body {
   font-size: 14px;
   color: $color-dark-grey;
@@ -23,6 +22,9 @@ button:focus {
 $border-grey: $border-grey;
 a {
   @include transition();
+  &:hover {
+    text-decoration: none;
+  }
 }
 // Stand-alone building blocks
 .heading-headline {
@@ -71,6 +73,9 @@ a {
 }
 .border-bottom-grey {
   border-bottom: $border-grey;
+}
+.border-top-grey {
+  border-top: 1px solid $color-grey;
 }
 .circle-image {
   background-color: $color-banking-dark-blue;

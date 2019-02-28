@@ -22,3 +22,12 @@ export interface CmsProductFeatureComponent extends CmsComponent {
   url?: string;
 }
 
+ export interface CmsInboxComponent extends CmsComponent {
+   uid?: string;
+   tabComponents?: string;
+ }
+
+ export interface CmsInboxTabComponent extends CmsComponent {
+  title?: string;
+}
+

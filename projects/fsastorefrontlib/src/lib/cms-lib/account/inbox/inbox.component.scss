@@ -1,0 +1,88 @@
+@import 'mixins-fsa';
+@import 'variables-fsa';
+@import '~bootstrap/scss/mixins/breakpoints';
+
+
+.messages {
+	border-left: 1px solid $color-grey;
+	border-right: 1px solid $color-grey;
+	.message {
+		&.read .inbox-header{ 
+			background: $color-light-grey;
+		}
+		&.unread .inbox-header {
+			background: $color-mild-grey;
+			font-weight: 600;
+		}
+		.inbox-header {
+			cursor: pointer;
+			&:hover {
+				color: $color-blue;
+			}
+		}	
+	}
+	.message-content {
+		.box-shadow {
+			max-width: 1100px;
+			width: 100%;
+			margin: 0 auto;
+			padding: 20px;
+			border: 1px solid $color-grey;
+			@include box-shadow(0px, 3px, 10px, 1px, $color-dark-grey, 0.3);
+		}
+	}
+	input:checked ~ .checkbox-text:before {
+		color: $color-blue;
+		border: 2px solid $color-blue;
+		
+	}
+}
+.section-header__heading {
+	text-align: left;
+	font-size: 16px;
+	.filter {
+		cursor: pointer;
+		right: 10px;
+		top: 4px;
+	}
+	.mobile-heading {
+		cursor: pointer;
+	}
+	.select {
+		display: none;
+		position: absolute;
+		top: 72px;
+		left: 0;
+		width: 100%;
+		z-index: 99;
+		background: $color-white;
+		font-size: 14px;
+		border: 1px solid rgba(0, 0, 0, 0.15);
+		@include box-shadow(0px, 6px, 12px, 0px, $color-dark-grey, 0.3);
+		&.opened {
+			display: block;
+		}
+		a {
+			padding: 10px 20px;
+			color: $color-dark-grey;
+			display: block;
+			&:hover {
+				background: $color-grey;
+			}
+		}
+	}
+}
+.tabs-header {
+	border-bottom: 1px solid $color-grey;
+	& ul {
+		display: flex;
+	} 
+}
+.ellipsis {
+	@include ellipsis;
+}
+ul, li {
+	list-style:none;
+	margin: 0;
+	padding: 0;
+}
