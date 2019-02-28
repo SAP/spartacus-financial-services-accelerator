@@ -1,8 +1,5 @@
 @import '../mixins-fsa';
 @import '../variables-fsa';
-fsa-inbox-tab {
-	flex-grow: 1;
-}
 body {
   font-size: 14px;
   color: $color-dark-grey;
@@ -28,11 +25,6 @@ a {
   &:hover {
     text-decoration: none;
   }
-}
-ul, li {
-  list-style:none;
-  margin: 0;
-  padding: 0;
 }
 // Stand-alone building blocks
 .heading-headline {

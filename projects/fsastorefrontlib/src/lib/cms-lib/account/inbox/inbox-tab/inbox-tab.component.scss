@@ -2,8 +2,8 @@
 @import 'variables-fsa';
 @import '~bootstrap/scss/mixins/breakpoints';
 
-fsa-inbox-tab {
-	// flex-grow: 1; <!-- Un-coment this when restrictions work
+:host {
+	flex-grow: 1;
 }
 .tab {
 	list-style: none;
