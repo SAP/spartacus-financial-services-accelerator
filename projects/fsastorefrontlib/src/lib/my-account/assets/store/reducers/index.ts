@@ -17,7 +17,7 @@ export interface UserState {
   policies: fromPolicyReducer.PolicyState;
   premiumCalendar: fromPremiumCalendarReducer.PremiumCalendarState;
   claims: fromClaimReducer.ClaimState;
-  messages: fromInboxReducer.InboxState
+  messages: fromInboxReducer.InboxState;
 }
 
 export function getReducers(): ActionReducerMap<UserState> {

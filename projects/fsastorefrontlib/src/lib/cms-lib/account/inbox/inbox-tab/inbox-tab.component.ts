@@ -11,14 +11,15 @@ import { CmsService } from '@spartacus/core';
 
 export class InboxTabComponent implements OnInit {
   @Output() tabsSelected = new EventEmitter();
-  @Input() tab: string;
+  @Input() tabId: string;
   component$;
 
-  constructor ( private cmsService: CmsService ) {}
-    ngOnInit() {
-      this.component$ = this.cmsService.getComponentData(this.tab);
-    }
-    onTabClicked(messageGroup) {
-      this.tabsSelected.emit(messageGroup);
-    }
+  constructor ( protected cmsService: CmsService ) {}
+
+  ngOnInit() {
+    this.component$ = this.cmsService.getComponentData(this.tabId);
+  }
+  onTabClicked(messageGroup) {
+    this.tabsSelected.emit(messageGroup);
+  }
 }

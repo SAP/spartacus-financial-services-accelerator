@@ -22,10 +22,6 @@
 		}	
 	}
 	.message-content {
-		// display: none;
-		background: $color-white;
-		width: 100%;
-		font-weight: normal;
 		.box-shadow {
 			max-width: 1100px;
 			width: 100%;
@@ -46,6 +42,8 @@
 	font-size: 16px;
 	.filter {
 		cursor: pointer;
+		right: 10px;
+		top: 4px;
 	}
 	.mobile-heading {
 		cursor: pointer;
@@ -79,9 +77,6 @@
 	& ul {
 		display: flex;
 	} 
-}
-.simple-accordion {
-	width: 100%;
 }
 .ellipsis {
 	@include ellipsis;
