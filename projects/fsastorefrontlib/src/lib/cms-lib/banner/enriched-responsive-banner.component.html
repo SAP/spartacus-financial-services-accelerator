@@ -1,6 +1,6 @@
 <div class="enriched-banner">
     <div class="image-wrapper">
-        <img class="responsive-image" [srcset]="getResponsiveSrcSet() | async" sizes="100%" />
+        <img class="responsive-image" [srcset]="getResponsiveImageAbsoluteUrl() | async" sizes="100%" />
     </div>
     <div class="enriched-banner__text">
         <span class="enriched-banner__title">{{getHeadingText() | async}}</span>
