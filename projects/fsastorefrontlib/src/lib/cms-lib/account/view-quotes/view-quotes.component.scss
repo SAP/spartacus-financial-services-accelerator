@@ -14,14 +14,14 @@ ul {
     text-align: center;
   }
   &__table-head {
-    background-color: $color-table-heading;
+    background-color: $color-dark-blue;
     font-size: 14px;
     font-weight: bold;
     line-height: 17px;
     padding: 12px 0 12px 20px;
   }
   &__my-quote {
-    background-color: $color-quotes-bckg;
+    background-color: $color-light-grey;
     margin-bottom: 10px;
     position: relative;
   }

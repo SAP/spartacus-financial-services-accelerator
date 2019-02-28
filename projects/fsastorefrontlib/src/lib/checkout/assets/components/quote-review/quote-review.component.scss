@@ -1,0 +1,8 @@
+@import 'mixins-fsa';
+@import 'variables-fsa';
+@import '~bootstrap/scss/mixins/breakpoints';
+
+.section-header__heading {
+    display: flex;
+    align-items: center;
+}

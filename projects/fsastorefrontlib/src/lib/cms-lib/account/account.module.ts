@@ -7,7 +7,7 @@ import { effects } from '../../my-account/assets/store';
 import { LogoutModule } from './logout/logout.module';
 import { CMSViewPoliciesComponent } from './view-policies/view-policies.component';
 import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
-
+import { ConfigModule, CmsConfig } from '@spartacus/core';
 
 @NgModule({
   imports: [
@@ -16,7 +16,15 @@ import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
     RouterModule,
     LogoutModule,
     EffectsModule.forFeature(effects),
-    ComponentsModule
+    ComponentsModule,
+    ConfigModule.withConfig(<CmsConfig>{
+      cmsComponents: {
+        CMSViewPoliciesComponent: { selector: 'fsa-view-policies' },
+        CMSViewQuotesComponent: { selector: 'fsa-view-quotes' },
+        CMSInboxComponent: { selector: 'fsa-inbox' },
+        CMSInboxTabComponent: { selector: 'fsa-inbox-tab' }
+       }
+    }),
   ],
   declarations: [ CMSViewPoliciesComponent, CMSViewQuotesComponent ],
   exports: [ CMSViewPoliciesComponent, CMSViewQuotesComponent ],

@@ -16,10 +16,13 @@ body {
   padding: 20px 10px 0 10px;
 }
 //CSS Reset
+button[disabled], html input[disabled] {
+  cursor: default;
+}
 button:focus {
   outline: none;
 }
-$border-grey: 1px solid $color-grey;
+$border-grey: $border-grey;
 a {
   @include transition();
   &:hover {
@@ -40,7 +43,7 @@ ul, li {
   color: $color-dark-blue;
   font-size: 24px;
   font-weight: 700;
-  border-bottom: 1px solid $color-grey;
+  border-bottom: $border-grey;
 }
 .section-header__heading {
   @include linear-gradient-background ($color-blue, $color-banking-darkest-blue, 50%, 100%);
@@ -77,7 +80,7 @@ ul, li {
   font-weight: bold;
 }
 .border-bottom-grey {
-  border-bottom: 1px solid $color-grey;
+  border-bottom: $border-grey;
 }
 .border-top-grey {
   border-top: 1px solid $color-grey;
@@ -130,32 +133,14 @@ ul, li {
   }
 }
 .clickable {
-  cursor: pointer;
-  position: relative;
-    &:before {
-        display: block;
-        content: '';
-        position: absolute;
-        right: 15px;
-        top: 50%;
-        transform: translateY(-50%) rotateZ(45deg);
-        width: 13px;
-        height: 13px;
-        border-bottom: 3px solid $color-dark-grey;
-        border-right: 3px solid $color-dark-grey;
-        @include transition();
-    }
-    &.opened {
-        &:before {
-            transform: translateY(-50%) rotateZ(-135deg);
-        }
-    }
+  @include accordion-arrow();
 }
+
 //CSS Reset
 button:focus {
   outline: none;
 }
-$border-grey: 1px solid $color-grey;
+$border-grey: $border-grey;
 a {
   @include transition();
 }
@@ -323,6 +308,7 @@ a {
     }
 }
 .primary-button {
+  text-align: center;
   &__default {
     @include primary-btn-color();
   }
@@ -334,6 +320,7 @@ a {
   @include secondary-btn-color;
 }
 .secondary-button {
+  text-align: center;
   &__default {
     @include secondary-btn-color;
   }
@@ -354,7 +341,7 @@ a {
     font-size: 36px;
     color: $color-dark-blue;
     position: relative;
-    @media (max-width: $screen-xs-max) {
+    @include media-breakpoint-down(md) {
         margin-top:0px;
     }
     .images__wrapper {
@@ -371,7 +358,7 @@ a {
       color: $color-dark-grey;
       font-size: 22px;
       font-weight: 600;
-      @media (max-width: $screen-xs-max) {
+      @include media-breakpoint-down(md) {
         font-size:22px;
         line-height:30px;
         width: 70%;
@@ -385,7 +372,7 @@ a {
         color: $color-dark-grey;
         padding-bottom: 10px;
         font-weight: 600;
-      @media (max-width: $screen-xs-max) {
+      @include media-breakpoint-down(md) {
         font-size: 20px;
       }
     }
@@ -403,7 +390,7 @@ a {
         float: right;
         font-size: 20px;
       }
-      @media (max-width: $screen-xs-max) {
+      @include media-breakpoint-down(md) {
         right: 11px;
       }
     }
@@ -411,3 +398,88 @@ a {
 }
 	
 /*********MY ACCOUNT - POLICIES DETAILS END********/
+/********* CHECKOUT ********/
+.centered-heading {
+  padding: 40px 0;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 30px;
+  border-bottom: $border-grey;
+}
+.cart-items-list {
+  border: $border-grey;
+  background-color: $color-light-grey;
+  margin-top: 30px;
+  & h2 {
+    margin: 0;
+  }
+  & h3 {
+    font-weight: normal;
+    margin: 0;
+    padding: 2px 0;
+    max-width: 285px;
+    width: 100%;
+    @include ellipsis;
+    @include media-breakpoint-down(md) {
+      margin: 12px 0;
+      max-width: inherit;
+    }
+  }
+  & > .row {
+    @include media-breakpoint-down(sm) {
+      border-top: $border-grey;
+    }
+  }
+  .disabled-option {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-bottom: 2px solid $color-mild-grey;
+    border-top: 2px solid $color-mild-grey;
+    box-shadow: 0 0 0 2px white inset;
+  }
+  .tooltip-wrapper {
+    top: 40%;
+    right: 30%;
+    z-index: 2000;
+    position: absolute;
+    @include media-breakpoint-down(sm) {
+      top: 15%;
+      right: 30px;
+    }
+  }
+  @include media-breakpoint-down(sm) {
+    text-align: center;
+  }
+}
+
+/********* CHECKOUT - END ********/
+/********* TOOLTIP ********/
+
+.fs-tooltip {
+  background-color: $color-dark-blue;
+  color: $color-white;
+  cursor: pointer;
+  font-style: italic;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  font-weight: 600;
+  border-radius: 50%;
+}
+.tooltip {
+  .arrow:before {
+    border-left-color: $color-button-secondary-hover;
+  }
+  .tooltip-inner {
+    width: 200px;
+    background-color: $color-button-secondary-hover;
+    opacity: 0.95;
+    border-radius: 6px;
+  }
+}
+/********* TOOLTIP - END ********/

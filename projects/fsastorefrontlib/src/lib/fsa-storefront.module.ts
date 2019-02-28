@@ -1,5 +1,5 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
-import { ConfigModule, provideConfig } from '@spartacus/core';
+import { provideConfig, ConfigModule } from '@spartacus/core';
 
 import { MyAccountModule } from './my-account/index';
 import { StorefrontModuleConfig, StorefrontModule } from '@spartacus/storefront';
