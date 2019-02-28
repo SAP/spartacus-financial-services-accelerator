@@ -7,10 +7,10 @@ import { AddOptionsPageComponent } from './add-options-page.component';
 
 const routes: Routes = [
   {
-    path: null,
+    path: 'add-options',
     canActivate: [CmsPageGuards],
     component: AddOptionsPageComponent,
-    data: { pageLabel: 'cartPage', cxPath: 'add-options' },
+    data: { pageLabel: 'cartPage' },
   }
 ];
 

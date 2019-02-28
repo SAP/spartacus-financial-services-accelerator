@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { CmsModule, ComponentsModule, OutletModule } from '@spartacus/storefront';
+import { CmsConfig, ConfigModule } from '@spartacus/core';
+import { CmsModule, ComponentsModule } from '@spartacus/storefront';
 import { ComparisonTableContainerComponent } from './comparison-table-container.component';
 import { ComparisonTablePanelComponent } from './comparison-table-panel.component';
 import { ComparisonTableItemComponent } from './comparison-table-product-item.component';
 import { ComparisonTableTabComponent } from './comparison-table-tab.component';
-import { ConfigModule, CmsConfig } from '@spartacus/core';
 
 
 @NgModule({
@@ -14,7 +14,6 @@ import { ConfigModule, CmsConfig } from '@spartacus/core';
         CommonModule,
         RouterModule,
         ComponentsModule,
-        OutletModule,
         CmsModule,
         ConfigModule.withConfig(<CmsConfig>{
             cmsComponents: {

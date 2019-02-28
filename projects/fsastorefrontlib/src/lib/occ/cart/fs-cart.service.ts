@@ -30,10 +30,8 @@ export class OccFSCartService {
     }
 
     public startBundle(userId: string, cartId: string, productCode: string
-            , bundleTemplateId: string, quantity: number): Observable<CartModification> {
-        const toAdd = JSON.stringify({});
+        , bundleTemplateId: string, quantity: number): Observable<CartModification> {
         const url = this.getStartBundleForProductOfSpecifiedCart(userId, cartId);
-        console.log(url);
         const params = new HttpParams({
             fromString: 'bundleTemplateId=' + bundleTemplateId + '&productCode=' + productCode + '&quantity=' + quantity + FULL_PARAMS
         });
@@ -41,7 +39,7 @@ export class OccFSCartService {
             'Content-Type': 'application/x-www-form-urlencoded'
         });
         return this.http
-            .post<any>(url, toAdd, { headers, params })
+            .post<any>(url, params, { headers })
             .pipe(catchError((error: any) => throwError(error.json())));
     }
 

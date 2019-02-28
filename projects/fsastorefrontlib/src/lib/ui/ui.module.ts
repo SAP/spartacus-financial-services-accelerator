@@ -13,8 +13,7 @@ import { ConfigModule } from '@spartacus/core';
             routesConfig: {
               translations: {
                 default: {
-                  'comparisonTable': { paths: ['comparisonTable/:categoryCode'] },
-                  'add-options': { paths: ['add-options'] }
+                  'comparisonTable': { paths: ['comparisonTable/:categoryCode'] }
                 }
               }
             },

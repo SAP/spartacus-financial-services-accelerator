@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CmsModule } from '@spartacus/storefront';
-import {ComparisonTablePageLayoutComponent} from './comparison-table-page-layout.component';
-import {CheckoutModule} from '../../../cms-lib/checkout/checkout.module';
+import { ComparisonTablePageLayoutComponent } from './comparison-table-page-layout.component';
+import { ComparisonTableModule } from '../../../cms-lib/comparison-table/comparison-table.module';
 
 @NgModule({
-  imports: [CommonModule, CmsModule, CheckoutModule],
+  imports: [CommonModule, CmsModule, ComparisonTableModule],
   declarations: [ComparisonTablePageLayoutComponent],
   exports: [ComparisonTablePageLayoutComponent]
 })
-export class ComparisonTablePageLayoutModule {}
+export class ComparisonTablePageLayoutModule { }

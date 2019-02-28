@@ -1,10 +1,9 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {RouterModule, Routes} from '@angular/router';
-import {CmsPageGuards, CategoryPageComponent} from '@spartacus/storefront';
-import {AuthGuard} from '@spartacus/core';
-import {ComparisonTablePageComponent} from './comparison-table-page.component';
-import {ComparisonTablePageLayoutModule} from '../../layout/comparison-table-page-layout/comparison-table-page-layout.module';
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { CmsPageGuards } from '@spartacus/storefront';
+import { ComparisonTablePageLayoutModule } from '../../layout/comparison-table-page-layout/comparison-table-page-layout.module';
+import { ComparisonTablePageComponent } from './comparison-table-page.component';
 
 const routes: Routes = [
   {

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Product, ProductService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { Cart, Product, ProductService } from '@spartacus/core';
-import { FSCartService } from '../../../checkout/assets/services';
+import { FSCartService } from '../../checkout/assets/services';
 
 @Component({
     selector: 'fsa-comparison-table-product-item',
@@ -14,8 +14,6 @@ export class ComparisonTableItemComponent implements OnInit {
     productCode: string;
 
     product$: Observable<Product>;
-    cart$: Observable<Cart>;
-    bundleTemplateId: Observable<string>;
 
     constructor(
         protected productService: ProductService,
@@ -24,7 +22,6 @@ export class ComparisonTableItemComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.cart$ = this.cartService.getActive();
         this.product$ = this.productService.get(this.productCode);
     }
 
