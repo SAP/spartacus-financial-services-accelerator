@@ -5,7 +5,7 @@
         class="primary-button primary-button__default primary-button__event col-md-3 col mt-4"
         type="button">Select
     </button>
-    <ul class="pricing">
-        <li *ngFor="let price of product?.price?.oneTimeChargeEntries">{{price?.price?.formattedValue}}</li>
-    </ul>
+    <div class="products-prices__price-wrapper">
+        <div class="products-prices__label-name-link" *ngFor="let price of product?.price?.oneTimeChargeEntries">{{price?.price?.formattedValue}}</div>
+    </div>
 </ng-container>
