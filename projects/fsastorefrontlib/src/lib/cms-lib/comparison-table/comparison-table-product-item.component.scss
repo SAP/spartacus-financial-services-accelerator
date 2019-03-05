@@ -1,0 +1,132 @@
+@import 'mixins-fsa';
+@import 'variables-fsa';
+@import '~bootstrap/scss/mixins/breakpoints';
+
+.products-details {
+    &__name {
+        font-size: 20px;
+        // @media (max-width: @screen-xs) {
+        //     font-size: 18px;
+        // }
+    }
+    &__main-price {
+        margin: 20px 0;
+        font-size: 40px;
+        // color: $color-button-secondary;
+		.banking & {
+			// color: $color-banking-darker-blue;
+			font-size: 30px;
+			// @media (max-width: @screen-sm-max) {
+			// 	font-size: 28px;
+			// 	font-weight:bold;
+			// }
+			// @media (max-width: @screen-xs) {
+			// 	font-size: 22px;
+			// }
+		}
+        // @media (max-width: @screen-sm-max) {
+        //     font-size: 28px;
+        //     font-weight:bold;
+        // }
+        // @media (max-width: @screen-xs) {
+        //     font-size: 22px;
+        // }
+    }
+    &__optional-products {
+        font-size: 24px;
+        text-align: left;
+        margin-bottom: 10px;
+        padding: 0 10px;
+        overflow: hidden;
+        &--margin {
+            margin: 10px 0 0;
+        }
+        &--checkbox-margin {
+            margin-bottom: 0 !important;
+            margin-top: 0;
+        }
+        // @media (max-width: @screen-sm-max) {
+        //     font-size: 16px;
+        //     font-weight: bold;
+        // }
+    }
+    &__optional-products-name {
+        font-size: 14px;
+        line-height: 18px;
+        display: block;
+        font-weight: normal;
+        padding: 0 0 0 25px;
+        // @media (max-width: @screen-xs) {
+        //     padding: 0;
+        // }
+    }
+    &__pay-on-checkout {
+        font-size: 14px;
+        line-height: 18px;
+        display: block;
+        font-weight: normal;
+        padding: 10px 5px;
+        margin: 10px 0;
+        // @media (max-width: @screen-sm) {
+        //     padding: 5px;
+        // }
+    }
+    &__pay-on-checkout-monthly {
+        background-color: $color-yellow;
+        color: $color-dark-grey;
+    }
+    &__mandatory-products {
+        margin: 10px 0;
+        &--checkbox-margin {
+            margin-top: 0;
+            margin-bottom: 0 !important;
+            vertical-align: top;
+        }
+    }
+}
+.products-prices {
+    &__price-wrapper {
+        padding: 15px;
+        // background-color: $color-quotes-bckg;
+        &:nth-child(even) {
+            background-color: transparent;
+        }
+        &:nth-child(odd) {
+            background-color: $color-mild-grey;
+			.banking & {
+				background-color: $color-light-grey;
+			}
+        }
+		.banking & {
+			color: $color-semi-dark-grey;
+		}
+		.glyphicon {
+			font-size: 18px;
+			top: 50%;
+			transform: translateY(-50%);
+			color: $color-dark-blue;
+			.banking & {
+				color: $color-banking-blue;
+			}
+		}
+    }
+    &__price-line {
+        vertical-align:middle;
+        margin: 0;
+		text-transform: capitalize;
+    }
+    &__label-name, &__label-name-link {
+        display: inline-block;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		vertical-align: top;
+		width: 80%;
+		// @media (max-width: @screen-md) {
+		// 	width: 77%;
+		// }
+		.banking & {
+			font-weight: 600;
+			color: $color-dark-grey;
+		}
+    }
+}

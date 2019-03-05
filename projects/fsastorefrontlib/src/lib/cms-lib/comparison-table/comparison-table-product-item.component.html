@@ -1,6 +1,11 @@
 <ng-container *ngIf="product$ | async as product">
     <h3 class="products-details__name">{{product.name}}</h3>
+    <h4 class="products-details__main-price">$97.00</h4>
     <button (click)="createCartAndStartBundleForProduct(product.code, product.bundleTemplates[0]?.id)"
         class="primary-button primary-button__default primary-button__event col-md-3 col mt-4"
-        type="button">Select</button>
+        type="button">Select
+    </button>
+    <ul class="pricing">
+        <li *ngFor="let price of product?.price?.oneTimeChargeEntries">{{price?.price?.formattedValue}}</li>
+    </ul>
 </ng-container>
