@@ -15,7 +15,7 @@ export class QuoteReviewComponent implements OnInit {
 
   constructor(
     protected cartService: CartService,
-    private config: OccConfig,
+    private config: OccConfig
     ) { }
 
   ngOnInit() {

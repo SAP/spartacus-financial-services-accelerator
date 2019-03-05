@@ -6,6 +6,7 @@ import {ComparisonPanelCMSComponent} from '../../occ-models';
 @Component({
   selector: 'fsa-comparison-table-panel',
   templateUrl: './comparison-table-panel.component.html',
+  styleUrls: ['./comparison-table-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComparisonTablePanelComponent implements OnInit {
