@@ -3,21 +3,21 @@ import { select, Store } from '@ngrx/store';
 import { CmsComponentMapping, CmsService, StandardCmsComponentConfig } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
-import { InboxService } from '../../../my-account/assets/services/inbox.service';
-import * as fromStore from '../../../my-account/assets/store';
-import { CmsInboxComponent } from './../../../occ-models/cms-component.models';
+import { InboxService } from '../../../../my-account/assets/services/inbox.service';
+import * as fromStore from '../../../../my-account/assets/store';
+import { CmsInboxComponent } from './../../../../occ-models/cms-component.models';
 
 export interface Mapping extends StandardCmsComponentConfig {
   CMSInboxTabComponent?: CmsComponentMapping;
 }
 
 @Component({
-  selector: 'fsa-inbox',
-  templateUrl: './inbox.component.html',
-  styleUrls: ['./inbox.component.scss'],
+  selector: 'fsa-message-inbox',
+  templateUrl: './inbox-message.component.html',
+  styleUrls: ['./inbox-message.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InboxComponent implements OnInit {
+export class InboxMessageComponent implements OnInit {
   constructor(
     protected componentData: CmsComponentData<CmsInboxComponent>,
     protected cmsService: CmsService,
@@ -27,19 +27,13 @@ export class InboxComponent implements OnInit {
 
   component$: Observable<CmsInboxComponent>;
   messages$;
-  tabs;
-  activeTabIndex = 0;
+  opened = false;
 
   onTabSelected(messageGroup) {
     this.loadGroup(messageGroup);
   }
   ngOnInit() {
-    this.component$ = this.componentData.data$;
-    this.component$.subscribe( data => this.tabs = this.splitArray(data.tabComponents));
-    this.loadGroup(''); // Temporary solution for loading default message group
-  }
-  splitArray(arrayToSplit: string): string[] {
-    return arrayToSplit.split(' ');
+    this.loadGroup('');
   }
   loadGroup(group: string) {
     this.inboxService.loadMessagesByMessageGroup(group);

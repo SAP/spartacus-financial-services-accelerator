@@ -8,6 +8,7 @@
 .tab {
 	list-style: none;
 	flex-grow: 1;
+	cursor: pointer;
 	background-color: $color-light-grey;
 	margin-right: 5px;
 	border: 1px solid $color-grey;
@@ -25,9 +26,7 @@
 			background-color: $color-white;
 			color: $color-semi-dark-grey;
 		}
-	}
-	&.active {
-		a {
+		&.active {
 			border-top: 4px solid $color-cart-top-border;
 			background-color: transparent;
 			color: $color-dark-grey;

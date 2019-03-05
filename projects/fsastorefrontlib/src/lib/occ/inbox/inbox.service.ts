@@ -13,9 +13,9 @@ export class OccInboxService {
     ) {}
 
   protected getSiteMessagesEndpoint(userId: string, messageGroup: string) {
-    let siteMessagesEndpoint = '/users/' + userId + '/notifications/sitemessages';
+    let siteMessagesEndpoint = '/users/' + userId + '/notifications/sitemessages?fields=FULL';
     if (  messageGroup !== '') {
-      siteMessagesEndpoint += '?messagegroup=' + messageGroup;
+      siteMessagesEndpoint += '&messagegroup=' + messageGroup;
     }
     return (
       (this.config.server.baseUrl || '') +

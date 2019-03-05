@@ -1,0 +1,37 @@
+<div class="messages">
+    <ng-container *ngIf="messages$ | async as messages">
+        <ng-container *ngIf="messages.messages?.length !== 0; else noMessages">
+            <div class="message read border-bottom-grey" *ngFor="let message of messages.messages">
+                <div class="inbox-header p-4 clickable" (click)="message.opened=!message.opened" [ngClass]="{'active':message.opened}">
+                    <div class="row" >
+                        <div class="col-1">
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="true">
+                                <span class="checkbox-text FSA-icon icon-icon-FSA-ok"></span>
+                            </label>
+                        </div>
+                        <div class="col-6 col-md-3 ellipsis">
+                            {{ message.title }}
+                        </div>
+                        <div class="col-md-6 d-none d-md-block ellipsis">
+                            {{ message.content }}
+                        </div>
+                        <div class="col-4 col-md-2 ellipsis">
+                            {{ message.sentDate }}
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion accordion-item--wrapper" [ngClass]="message.opened ? 'active' : ''" >
+                    
+                    <div class="box-shadow" [innerHtml]="message.richContent">
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+</div><!-- End of .messages-->
+<ng-template #noMessages>
+    <h4 class="p-4 border-bottom-grey">
+        You have no messages for chosen group!
+    </h4>
+</ng-template>

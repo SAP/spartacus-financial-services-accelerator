@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { CmsModule, ComponentsModule } from '@spartacus/storefront';
+import { InboxMessageComponent } from '../../cms-lib/account/inbox/inbox-message/inbox-message.component';
 import { InboxTabComponent } from '../../cms-lib/account/inbox/inbox-tab/inbox-tab.component';
 import { InboxComponent } from '../../cms-lib/account/inbox/inbox.component';
 import { OccInboxService } from '../../occ/inbox/inbox.service';
@@ -17,9 +18,9 @@ import { InboxService } from './services/inbox.service';
     ComponentsModule,
     CmsModule
   ],
-  declarations: [InboxComponent, InboxTabComponent],
-  exports: [InboxComponent, InboxTabComponent],
-  entryComponents: [InboxComponent, InboxTabComponent],
+  declarations: [InboxComponent, InboxTabComponent, InboxMessageComponent],
+  exports: [InboxComponent, InboxTabComponent, InboxMessageComponent],
+  entryComponents: [InboxComponent, InboxTabComponent, InboxMessageComponent],
   providers: [InboxService, InboxDataService, OccInboxService]
 })
 export class InboxModule {}

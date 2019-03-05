@@ -13,6 +13,7 @@ export class InboxTabComponent implements OnInit {
   @Output() tabsSelected = new EventEmitter();
   @Input() tabId: string;
   component$;
+  active ;
 
   constructor ( protected cmsService: CmsService ) {}
 
@@ -21,5 +22,9 @@ export class InboxTabComponent implements OnInit {
   }
   onTabClicked(messageGroup) {
     this.tabsSelected.emit(messageGroup);
+  }
+  @Input()
+  set chosen(chosen: boolean) {
+    this.active = chosen ? true : false;
   }
 }
