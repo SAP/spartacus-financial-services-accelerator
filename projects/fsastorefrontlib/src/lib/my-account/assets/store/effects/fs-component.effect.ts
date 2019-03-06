@@ -29,7 +29,7 @@ export class FSComponentEffects {
           this.occCmsService.loadComponent(uid, pageContext).pipe(
             map(data => new componentActions.LoadComponentSuccess(data)),
             catchError(error =>
-              of(new componentActions.LoadComponentFail(uid, error))
+              of(new componentActions.LoadComponentFail(uid))
             )
           )
         )

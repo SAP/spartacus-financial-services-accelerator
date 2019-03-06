@@ -5,7 +5,7 @@
             <ul>
                 <fsa-inbox-tab 
                     *ngFor="let tab of tabs; let i=index;" 
-                    (tabsSelected)="message.onTabSelected($event)" 
+                    (tabsSelected)="message.onTabSelected($event, tabTitle)" 
                     (click)="activeTabIndex=i" 
                     [chosen]="i == activeTabIndex"
                     [tabId]="tab">
@@ -33,6 +33,7 @@
                     <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"></span>
                 </div>
             </div>
+            <div class="sdsadsa"></div>
             <div class="mobile-heading row d-md-none">
                 <div class="col-1">
                     <label class="checkbox-label">
@@ -41,7 +42,7 @@
                     </label>
                 </div>
                 <div class="col-10 text-center" (click)="shouldShow = !shouldShow">
-                    Auto
+                    {{ activeTabTitle }}
                 </div>
                 <div class="col-1">
                     <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"></span>
@@ -49,12 +50,14 @@
             </div>
             <div class="select d-md-none" [ngClass]="{opened: shouldShow, '': !shouldShow}">
                 <ul>
-                    <li class="active"><a href="#">Auto</a></li>
-                    <li><a href="#">Travel</a></li>
-                    <li><a href="#">Homeowners</a></li>
-                    <li><a href="#">Savings</a></li>
-                    <li><a href="#">Policies</a></li>
-                    <li><a href="#">Claims</a></li>
+                    <fsa-inbox-tab 
+                        *ngFor="let tab of tabs; let i=index;" 
+                        (tabsSelected)="message.onTabSelected($event)"
+                        (activeTabTitle)="setActiveTitle($event)" 
+                        (click)="activeTabIndex=i" 
+                        [chosen]="i == activeTabIndex"
+                        [tabId]="tab">
+                    </fsa-inbox-tab>
                 </ul>
             </div>
         </div>

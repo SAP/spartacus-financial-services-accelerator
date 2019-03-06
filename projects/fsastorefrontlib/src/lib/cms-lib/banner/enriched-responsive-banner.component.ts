@@ -29,7 +29,6 @@ export class EnrichedResponsiveBannerComponent implements OnInit {
 
   ngOnInit() {
     this.component$ = this.component.data$;
-    this.component$.subscribe(comp => console.log(comp));
   }
 
   getBaseUrl(): string {

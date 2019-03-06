@@ -14,6 +14,10 @@
 	border: 1px solid $color-grey;
 	border-bottom: none;
 	text-align: center;
+	@include media-breakpoint-down(sm) {
+		border-top: none;
+		margin-right: 0;
+	}
 	a {
 		@include transition;
 		border-top: 4px solid transparent;
@@ -31,5 +35,23 @@
 			background-color: transparent;
 			color: $color-dark-grey;
 		}
+		@include media-breakpoint-down(sm) {
+			background: $color-white;
+			padding: 10px 20px;
+			color: $color-dark-grey;
+			display: block;
+			&:hover {
+				background: $color-grey;
+				color: $color-dark-grey;
+			}
+			&.active {
+				border-top: none;
+			}
+		}
 	}
+}
+ul, li {
+	list-style:none;
+	margin: 0;
+	padding: 0;
 }

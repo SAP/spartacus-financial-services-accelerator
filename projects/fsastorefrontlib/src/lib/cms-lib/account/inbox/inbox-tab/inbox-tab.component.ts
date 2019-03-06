@@ -11,6 +11,7 @@ import { CmsService } from '@spartacus/core';
 
 export class InboxTabComponent implements OnInit {
   @Output() tabsSelected = new EventEmitter();
+  @Output() activeTabTitle = new EventEmitter();
   @Input() tabId: string;
   component$;
   active ;
@@ -22,6 +23,9 @@ export class InboxTabComponent implements OnInit {
   }
   onTabClicked(messageGroup) {
     this.tabsSelected.emit(messageGroup);
+  }
+  sendActiveTitle(title) {
+    this.activeTabTitle.emit(title);
   }
   @Input()
   set chosen(chosen: boolean) {
