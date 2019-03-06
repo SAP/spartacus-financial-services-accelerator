@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, ElementRef, AfterViewInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ElementRef } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { CmsComponentMapping, CmsService, StandardCmsComponentConfig } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
@@ -17,7 +17,7 @@ export interface Mapping extends StandardCmsComponentConfig {
   styleUrls: ['./inbox.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InboxComponent implements OnInit, AfterViewInit {
+export class InboxComponent implements OnInit {
   constructor(
     protected componentData: CmsComponentData<CmsInboxComponent>,
     protected cmsService: CmsService,
@@ -31,17 +31,17 @@ export class InboxComponent implements OnInit, AfterViewInit {
   tabs;
   activeTabIndex = 0;
   activeTabTitle: string;
+  activeGroupTitle: string;
 
   ngOnInit() {
     this.component$ = this.componentData.data$;
     this.component$.subscribe( data => this.tabs = this.splitArray(data.tabComponents));
     this.loadGroup(''); // Temporary solution for loading default message group
+    this.inboxService.activeGroupTitle.subscribe( title => this.activeGroupTitle = title);
   }
-  ngAfterViewInit() {
-    this.activeTabTitle = this.elRef.nativeElement.querySelector('.tabActive');
-    console.log(this.activeTabTitle);
+  setActiveGroupTitle(title) {
+    this.inboxService.setActiveGroupTitle(title);
   }
-
   setActiveTitle(title: string) {
     this.activeTabTitle = title;
   }

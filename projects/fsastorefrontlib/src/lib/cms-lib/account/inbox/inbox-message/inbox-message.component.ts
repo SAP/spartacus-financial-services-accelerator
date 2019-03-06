@@ -28,12 +28,14 @@ export class InboxMessageComponent implements OnInit {
   component$: Observable<CmsInboxComponent>;
   messages$;
   opened = false;
+  activeMessageGroup;
 
-  onTabSelected(messageGroup) {
-    this.loadGroup(messageGroup);
-  }
   ngOnInit() {
     this.loadGroup('');
+    this.inboxService.activeMessageGroup.subscribe(
+      messageGroup => { this.activeMessageGroup = messageGroup;
+      this.loadGroup(this.activeMessageGroup);
+      });
   }
   loadGroup(group: string) {
     this.inboxService.loadMessagesByMessageGroup(group);

@@ -5,6 +5,7 @@ import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
 import { InboxDataService } from './inbox-data.service';
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable()
@@ -16,9 +17,20 @@ export class InboxService {
   ) {
     this.initMessages();
   }
+  activeGroupTitleSource = new BehaviorSubject<string>('General');
+  activeMessageGroupSource = new BehaviorSubject<string>('');
+  activeGroupTitle = this.activeGroupTitleSource.asObservable();
+  activeMessageGroup = this.activeMessageGroupSource.asObservable();
 
   callback: Function;
 
+  setActiveGroupTitle( title: string ) {
+    this.activeGroupTitleSource.next(title);
+  }
+  setActiveMessageGroup( messageGroup: string ) {
+    console.log(messageGroup);
+    this.activeMessageGroupSource.next(messageGroup);
+  }
   initMessages() {
     this.store.pipe(select(fromSelector.getMessages)).subscribe(messages => {
       if (messages) {
