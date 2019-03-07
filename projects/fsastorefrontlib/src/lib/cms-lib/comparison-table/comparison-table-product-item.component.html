@@ -1,4 +1,4 @@
-<ng-container *ngIf="product$ | async as product">
+<ng-container *ngIf="product$ | async as product; else loading">
     <h3 class="products-details__name">{{product.name}}</h3>
     <h4 class="products-details__main-price">$97.00</h4>
     <button (click)="createCartAndStartBundleForProduct(product.code, product.bundleTemplates[0]?.id)"
@@ -9,3 +9,7 @@
         <div class="products-prices__label-name-link" *ngFor="let price of product?.price?.oneTimeChargeEntries">{{price?.price?.formattedValue}}</div>
     </div>
 </ng-container>
+<ng-template #loading>
+    <cx-spinner></cx-spinner>
+</ng-template>
+

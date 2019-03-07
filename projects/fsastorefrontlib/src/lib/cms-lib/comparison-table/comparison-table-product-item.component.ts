@@ -13,7 +13,6 @@ export class ComparisonTableItemComponent implements OnInit {
 
     @Input()
     productCode: string;
-
     product$: Observable<Product>;
 
     constructor(
@@ -24,7 +23,7 @@ export class ComparisonTableItemComponent implements OnInit {
 
     ngOnInit() {
         this.product$ = this.productService.get(this.productCode);
-        this.product$.subscribe(data => console.log(data));
+        // this.product$.subscribe(data => console.log(data));
     }
 
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {
