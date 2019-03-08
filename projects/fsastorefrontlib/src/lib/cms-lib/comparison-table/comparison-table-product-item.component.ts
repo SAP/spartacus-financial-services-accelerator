@@ -27,7 +27,7 @@ export class ComparisonTableItemComponent implements OnInit {
         this.product$ = this.productService.get(this.productCode);
         this.product$.subscribe(data => {
             if (data) {
-                this.entries = (data.price.oneTimeChargeEntries).map(childData => childData.price);
+                this.entries = (data.price.oneTimeChargeEntries);
                 console.log(data);
             }
             return this.entries;
