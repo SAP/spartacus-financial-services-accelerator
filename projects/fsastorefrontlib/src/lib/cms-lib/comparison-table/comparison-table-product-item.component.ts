@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Product, ProductService } from '@spartacus/core';
+import { ProductService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCartService } from '../../checkout/assets/services';
+import { FSProduct } from '../../occ-models';
 
 @Component({
     selector: 'fsa-comparison-table-product-item',
@@ -13,7 +14,8 @@ export class ComparisonTableItemComponent implements OnInit {
 
     @Input()
     productCode: string;
-    product$: Observable<Product>;
+    product$: Observable<FSProduct>;
+    entries: any;
 
     constructor(
         protected productService: ProductService,
@@ -23,9 +25,14 @@ export class ComparisonTableItemComponent implements OnInit {
 
     ngOnInit() {
         this.product$ = this.productService.get(this.productCode);
-        // this.product$.subscribe(data => console.log(data));
+        this.product$.subscribe(data => {
+            if (data) {
+                this.entries = (data.price.oneTimeChargeEntries).map(childData => childData.price);
+                console.log(data);
+            }
+            return this.entries;
+        });
     }
-
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {
         this.cartService.createCartAndStartBundle(productCode, bundleTemplateId, 1);
     }

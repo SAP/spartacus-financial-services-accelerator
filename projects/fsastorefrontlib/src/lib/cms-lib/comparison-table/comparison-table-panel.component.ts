@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit, Output} from '@angular/core';
 import {CmsComponentData} from '@spartacus/storefront';
 import {Observable} from 'rxjs';
 import {ComparisonPanelCMSComponent} from '../../occ-models';
@@ -11,6 +11,45 @@ import {ComparisonPanelCMSComponent} from '../../occ-models';
 })
 export class ComparisonTablePanelComponent implements OnInit {
 
+  @Output()
+  billingEvents = [
+    {
+      code: 'paynow',
+      name: 'Pay On Checkout'
+    },
+    {
+      code: 'personalaccident',
+      name: 'Personal Accident'
+    },
+    {
+      code: 'curtailment',
+      name: 'Curtailment'
+    },
+    {
+      code: 'hospitalbenefit',
+      name: 'Hospital Benefit'
+    },
+    {
+      code: 'repatriation',
+      name: 'Repatriation'
+    },
+    {
+      code: 'medicalexpenses',
+      name: 'Medical Expenses'
+    },
+    {
+      code: 'excesswaivercoverage',
+      name: 'Excess Waiver'
+    },
+    {
+      code: 'personalliabilitycoverage',
+      name: 'Personal Liability'
+    },
+    {
+      code: 'legalexpenses',
+      name: 'Legal Expenses'
+    }
+  ];
   comparisonPanel: Observable<ComparisonPanelCMSComponent>;
   productList: string[];
 
