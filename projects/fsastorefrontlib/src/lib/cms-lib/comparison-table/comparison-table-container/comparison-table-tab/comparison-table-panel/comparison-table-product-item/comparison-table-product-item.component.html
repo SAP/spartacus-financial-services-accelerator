@@ -6,10 +6,19 @@
         type="button">Select
     </button>
     <div class="products-prices__price-wrapper">
-        <div class="products-prices__label-name-link" *ngFor="let entry of entries">{{entry?.billingTime?.description}}: {{entry?.price?.formattedValue}}</div>
+        <ng-container *ngFor="let item of billingCode">
+            <div class="products-prices__label-name-link" *ngFor="let entry of entries">
+                <ng-container *ngIf="item.code === entry?.billingTime?.code; else nada">
+                    {{entry?.price?.formattedValue}}
+                </ng-container>
+            </div>
+        </ng-container>
     </div>
 </ng-container>
 <ng-template #loading>
     <cx-spinner></cx-spinner>
+</ng-template>
+<ng-template #nada>
+    X
 </ng-template>
 

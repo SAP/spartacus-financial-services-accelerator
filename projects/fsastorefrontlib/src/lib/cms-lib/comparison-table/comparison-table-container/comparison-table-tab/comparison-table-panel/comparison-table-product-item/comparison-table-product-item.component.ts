@@ -14,6 +14,9 @@ export class ComparisonTableItemComponent implements OnInit {
 
     @Input()
     productCode: string;
+    @Input()
+    billingCode: string;
+
     product$: Observable<FSProduct>;
     entries: any;
 
