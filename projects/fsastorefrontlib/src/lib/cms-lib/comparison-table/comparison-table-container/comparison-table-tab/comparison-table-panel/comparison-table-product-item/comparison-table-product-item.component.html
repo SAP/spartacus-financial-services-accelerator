@@ -6,7 +6,7 @@
         type="button">Select
     </button>
     <div class="products-prices__price-wrapper">
-        <div class="products-prices__label-name-link" *ngFor="let entry of entries">{{entry?.billingTime?.code}}: {{entry?.price?.formattedValue}}</div>
+        <div class="products-prices__label-name-link" *ngFor="let entry of entries">{{entry?.billingTime?.description}}: {{entry?.price?.formattedValue}}</div>
     </div>
 </ng-container>
 <ng-template #loading>

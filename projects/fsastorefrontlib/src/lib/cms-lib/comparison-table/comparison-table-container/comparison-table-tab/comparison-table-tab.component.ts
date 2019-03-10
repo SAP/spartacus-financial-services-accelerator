@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
-import { CMSComparisonTabComponent } from '../../occ-models';
+import { CMSComparisonTabComponent } from '../../../../occ-models';
 
 @Component({
   selector: 'fsa-comparison-table-tab',

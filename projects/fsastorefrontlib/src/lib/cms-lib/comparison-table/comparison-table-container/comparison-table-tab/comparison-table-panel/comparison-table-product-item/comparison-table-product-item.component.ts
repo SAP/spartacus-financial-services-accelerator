@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ProductService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { FSCartService } from '../../checkout/assets/services';
-import { FSProduct } from '../../occ-models';
+import { FSCartService } from '../../../../../../checkout/assets/services';
+import { FSProduct } from '../../../../../../occ-models';
 
 @Component({
     selector: 'fsa-comparison-table-product-item',

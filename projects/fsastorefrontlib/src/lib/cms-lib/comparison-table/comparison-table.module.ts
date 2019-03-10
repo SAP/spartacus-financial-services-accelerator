@@ -4,10 +4,12 @@ import { RouterModule } from '@angular/router';
 import { NgbTabsetModule} from '@ng-bootstrap/ng-bootstrap';
 import { CmsConfig, ConfigModule } from '@spartacus/core';
 import { CmsModule, ComponentsModule } from '@spartacus/storefront';
-import { ComparisonTableContainerComponent } from './comparison-table-container.component';
-import { ComparisonTablePanelComponent } from './comparison-table-panel.component';
-import { ComparisonTableItemComponent } from './comparison-table-product-item.component';
-import { ComparisonTableTabComponent } from './comparison-table-tab.component';
+import { ComparisonTableContainerComponent } from './comparison-table-container/comparison-table-container.component';
+// tslint:disable-next-line:max-line-length
+import { ComparisonTablePanelComponent } from './comparison-table-container/comparison-table-tab/comparison-table-panel/comparison-table-panel.component';
+// tslint:disable-next-line:max-line-length
+import { ComparisonTableItemComponent } from './comparison-table-container/comparison-table-tab/comparison-table-panel/comparison-table-product-item/comparison-table-product-item.component';
+import { ComparisonTableTabComponent } from './comparison-table-container/comparison-table-tab/comparison-table-tab.component';
 
 @NgModule({
   imports: [
