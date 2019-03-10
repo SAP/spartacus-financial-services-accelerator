@@ -1,24 +1,29 @@
-<ng-container *ngIf="product$ | async as product; else loading">
-    <h3 class="products-details__name">{{product.name}}</h3>
-    <h4 class="products-details__main-price">$97.00</h4>
-    <button (click)="createCartAndStartBundleForProduct(product.code, product.bundleTemplates[0]?.id)"
-        class="primary-button primary-button__default primary-button__event col-md-3 col mt-4"
-        type="button">Select
-    </button>
-    <div class="products-prices__price-wrapper">
-        <ng-container *ngFor="let item of billingCode">
-            <div class="products-prices__label-name-link" *ngFor="let entry of entries">
-                <ng-container *ngIf="item.code === entry?.billingTime?.code; else nada">
-                    {{entry?.price?.formattedValue}}
-                </ng-container>
-            </div>
+<ng-container *ngIf="(product$ | async) as product; else loading">
+  <h3 class="products-details__name">{{ product.name }}</h3>
+  <h4 class="products-details__main-price">$97.00</h4>
+  <button (click)="createCartAndStartBundleForProduct(product.code,product.bundleTemplates[0]?.id)"
+    class="primary-button primary-button__default primary-button__event col-md-3 col mt-4"
+    type="button"
+  >
+    Select
+  </button>
+  <div class="products-prices__price-wrapper">
+    <ng-container *ngFor="let item of billingCode">
+      <ng-container *ngFor="let entry of entries">
+        <ng-container *ngIf="item.code === entry?.billingTime?.code;else nada">
+          <div class="products-prices__label-name-link">
+            {{ entry?.billingTime?.code }}: {{ entry?.billingTime?.name }}
+          </div>
         </ng-container>
-    </div>
+      </ng-container>
+    </ng-container>
+  </div>
 </ng-container>
 <ng-template #loading>
-    <cx-spinner></cx-spinner>
+  <cx-spinner></cx-spinner>
 </ng-template>
 <ng-template #nada>
-    X
+    <div class="products-prices__label-name-link">
+        X
+    </div>
 </ng-template>
-

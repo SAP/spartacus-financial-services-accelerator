@@ -19,6 +19,7 @@ export class ComparisonTableItemComponent implements OnInit {
 
     product$: Observable<FSProduct>;
     entries: any;
+    info: any;
 
     constructor(
         protected productService: ProductService,
@@ -30,10 +31,11 @@ export class ComparisonTableItemComponent implements OnInit {
         this.product$ = this.productService.get(this.productCode);
         this.product$.subscribe(data => {
             if (data) {
-                this.entries = (data.price.oneTimeChargeEntries);
-                console.log(data);
+                this.entries = data.price.oneTimeChargeEntries;
+                this.info = data;
+                console.log(this.info);
             }
-            return this.entries;
+            return [this.entries, this.info];
         });
     }
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {

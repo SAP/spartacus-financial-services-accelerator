@@ -33,6 +33,10 @@ export class ComparisonTablePanelComponent implements OnInit {
       name: 'Repatriation'
     },
     {
+      code: 'baggage',
+      name: 'Baggage'
+    },
+    {
       code: 'medicalexpenses',
       name: 'Medical Expenses'
     },
@@ -47,6 +51,46 @@ export class ComparisonTablePanelComponent implements OnInit {
     {
       code: 'legalexpenses',
       name: 'Legal Expenses'
+    },
+    {
+      code: 'supplierinsolvency',
+      name: 'Supplier Insolvency'
+    },
+    {
+      code: 'misseddeparture',
+      name: 'Missed Departure'
+    },
+    {
+      code: 'accommodationcover',
+      name: 'Accommodation'
+    },
+    {
+      code: 'cancellation ',
+      name: 'Cancellation '
+    },
+    {
+      code: 'delayeddeparture',
+      name: 'Delayed Departure'
+    },
+    {
+      code: 'safi',
+      name: 'Safi'
+    },
+    {
+      code: 'abandonmentcover',
+      name: 'Abandonment'
+    },
+    {
+      code: 'hijack',
+      name: 'Hijack'
+    },
+    {
+      code: 'personalmoney',
+      name: 'Personal Money'
+    },
+    {
+      code: 'petcare',
+      name: 'Pet Care'
     }
   ];
   comparisonPanel: Observable<ComparisonPanelCMSComponent>;
