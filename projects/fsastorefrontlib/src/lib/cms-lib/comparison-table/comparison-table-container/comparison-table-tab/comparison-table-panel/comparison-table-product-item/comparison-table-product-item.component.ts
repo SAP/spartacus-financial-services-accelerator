@@ -15,11 +15,16 @@ export class ComparisonTableItemComponent implements OnInit {
     @Input()
     productCode: string;
     @Input()
-    billingCode: string;
+    billingCode: any[] = [];
 
     product$: Observable<FSProduct>;
     entries: any;
     info: any;
+    infoEnt: any;
+    entriesArray: any[] = [];
+    billingArray: any[] = [];
+    filterArray: any;
+
 
     constructor(
         protected productService: ProductService,
@@ -29,13 +34,23 @@ export class ComparisonTableItemComponent implements OnInit {
 
     ngOnInit() {
         this.product$ = this.productService.get(this.productCode);
+        this.billingArray = this.billingCode.map(stuff => {
+            this.info = stuff.code;
+            return this.info;
+        });
+        console.log('billingArray', this.billingArray);
         this.product$.subscribe(data => {
             if (data) {
                 this.entries = data.price.oneTimeChargeEntries;
-                this.info = data;
-                console.log(this.info);
+                this.entriesArray = this.entries.map(ent => {
+                    this.infoEnt = ent.billingTime.code;
+                    return this.infoEnt;
+                });
+                console.log('entriesArray', this.entriesArray);
+                this.filterArray = this.entriesArray.filter(element => this.billingArray.indexOf(element) > -1);
+                console.log('Filtered Array ', this.filterArray);
             }
-            return [this.entries, this.info];
+            return [this.entries, this.filterArray, this.infoEnt];
         });
     }
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {

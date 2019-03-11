@@ -10,14 +10,17 @@
   <div class="products-prices__price-wrapper">
     <ng-container *ngFor="let item of billingCode">
       <ng-container *ngFor="let entry of entries">
-        <ng-container *ngIf="item.code === entry?.billingTime?.code;else nada">
+        <ng-container *ngIf="item.code.indexOf(entry?.billingTime?.code) > -1 ;else nada">
           <div class="products-prices__label-name-link">
             {{ entry?.billingTime?.code }}: {{ entry?.billingTime?.name }}
           </div>
+          </ng-container>
         </ng-container>
-      </ng-container>
-    </ng-container>
-  </div>
+        </ng-container>
+      </div>
+  <!-- <div class="nesto" *ngFor="let item of filterData">
+    {{item}}
+  </div> -->
 </ng-container>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
