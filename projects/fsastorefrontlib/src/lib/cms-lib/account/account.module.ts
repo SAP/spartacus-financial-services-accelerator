@@ -3,11 +3,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { CmsConfig, ConfigModule } from '@spartacus/core';
-import { CmsModule, ComponentsModule } from '@spartacus/storefront';
+import { CmsModule, ComponentsModule, PaginationAndSortingModule } from '@spartacus/storefront';
 import { effects } from '../../my-account/assets/store';
 import { LogoutModule } from './logout/logout.module';
 import { CMSViewPoliciesComponent } from './view-policies/view-policies.component';
 import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
+
+
 
 @NgModule({
   imports: [
@@ -15,6 +17,7 @@ import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
     CmsModule,
     RouterModule,
     LogoutModule,
+    PaginationAndSortingModule,
     EffectsModule.forFeature(effects),
     ComponentsModule,
     ConfigModule.withConfig(<CmsConfig>{

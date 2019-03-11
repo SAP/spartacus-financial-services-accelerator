@@ -6,6 +6,7 @@ import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
 import { InboxDataService } from './inbox-data.service';
 import { BehaviorSubject } from 'rxjs';
+import { SearchConfig } from '../services/inbox-data.service';
 
 
 @Injectable()
@@ -19,8 +20,11 @@ export class InboxService {
   }
   activeGroupTitleSource = new BehaviorSubject<string>('General');
   activeMessageGroupSource = new BehaviorSubject<string>('');
+  activeSortingFilterSource = new BehaviorSubject<string>('');
   activeGroupTitle = this.activeGroupTitleSource.asObservable();
   activeMessageGroup = this.activeMessageGroupSource.asObservable();
+  activeSortingFilter = this.activeSortingFilterSource.asObservable();
+
 
   callback: Function;
 
@@ -28,7 +32,6 @@ export class InboxService {
     this.activeGroupTitleSource.next(title);
   }
   setActiveMessageGroup( messageGroup: string ) {
-    console.log(messageGroup);
     this.activeMessageGroupSource.next(messageGroup);
   }
   initMessages() {
@@ -49,11 +52,12 @@ export class InboxService {
     });
   }
 
-  loadMessagesByMessageGroup(messageGroup: string) {
+  loadMessagesByMessageGroup(messageGroup: string, searchConfig: SearchConfig) {
       this.store.dispatch(
         new fromAction.LoadMessages({
           userId: this.inboxData.userId,
-          messageGroup: messageGroup
+          messageGroup: messageGroup,
+          searchConfig: searchConfig
         })
       );
     }

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { OccConfig } from '@spartacus/core';
+import { SearchConfig } from '../../my-account/assets/services/inbox-data.service';
 
 @Injectable()
 export class OccInboxService {
@@ -12,8 +13,12 @@ export class OccInboxService {
     protected config: OccConfig
     ) {}
 
-  protected getSiteMessagesEndpoint(userId: string, messageGroup: string) {
+  protected getSiteMessagesEndpoint(userId: string, messageGroup: string, searchConfig: SearchConfig) {
     let siteMessagesEndpoint = '/users/' + userId + '/notifications/sitemessages?fields=FULL';
+  
+    if (searchConfig.sortCode && searchConfig.sortOrder) {
+      siteMessagesEndpoint += '&page=0&sortCode=' + searchConfig.sortCode + '&sortOrder=' + searchConfig.sortOrder;
+    }
     if (  messageGroup !== '') {
       siteMessagesEndpoint += '&messagegroup=' + messageGroup;
     }
@@ -25,8 +30,8 @@ export class OccInboxService {
     );
   }
 
-  public getSiteMessagesForUserAndGroup(userId: string, messageGroup: string): Observable<any> {
-    const url = this.getSiteMessagesEndpoint(userId, messageGroup);
+  public getSiteMessagesForUserAndGroup(userId: string, messageGroup: string, searchConfig: SearchConfig): Observable<any> {
+    const url = this.getSiteMessagesEndpoint(userId, messageGroup, searchConfig);
     const params = new HttpParams();
 
     return this.http

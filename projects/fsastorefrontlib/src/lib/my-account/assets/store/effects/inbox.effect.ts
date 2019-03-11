@@ -14,14 +14,16 @@ export class InboxEffects {
     ofType(fromActions.LOAD_MESSAGES),
     map((action: fromActions.LoadMessages) => action.payload),
     mergeMap(payload => {
-        if (payload === undefined || payload.userId === undefined) {
+        if (payload === undefined || payload.userId === undefined || payload.messageGroup === undefined) {
           payload = {
              userId: this.inboxData.userId,
              messageGroup: this.inboxData.messageGroup,
-             messages: this.inboxData.messages
+             messages: this.inboxData.messages,
+             searchConfig : this.inboxData.searchConfig
           };
         }
-        return this.inboxService.getSiteMessagesForUserAndGroup(payload.userId, payload.messageGroup)
+        console.log(this.inboxData);
+        return this.inboxService.getSiteMessagesForUserAndGroup(payload.userId, payload.messageGroup, payload.searchConfig )
           .pipe(
             map((messages: any) => {
               return new fromActions.LoadMessagesSuccess(messages);

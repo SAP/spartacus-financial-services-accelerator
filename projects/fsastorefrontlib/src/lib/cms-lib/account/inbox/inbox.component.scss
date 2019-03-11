@@ -9,6 +9,11 @@
 		cursor: pointer;
 		right: 10px;
 		top: 4px;
+		@include transition;
+		&.rotate {
+			transform: rotate(180deg);
+			-webkit-transform: rotateZ(180deg);
+		}
 	}
 	.mobile-heading {
 		cursor: pointer;

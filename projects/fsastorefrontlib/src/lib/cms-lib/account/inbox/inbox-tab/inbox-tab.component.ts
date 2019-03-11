@@ -13,7 +13,6 @@ export class InboxTabComponent implements OnInit {
   @Input() tabId: string;
   component$;
   active;
-  activeTabTitle: string;
   activeGroupTitle: string;
 
   constructor (
@@ -25,7 +24,6 @@ export class InboxTabComponent implements OnInit {
     this.component$ = this.cmsService.getComponentData(this.tabId);
   }
   onTabClicked(messageGroup, title) {
-    console.log(title);
     this.inboxService.setActiveGroupTitle(title);
     this.inboxService.setActiveMessageGroup(messageGroup);
   }

@@ -3,12 +3,17 @@ import { Injectable } from '@angular/core';
 export interface Message {
   messageCode: string;
 }
-
+export interface SearchConfig {
+  page?: number;
+  sortCode?: string;
+  sortOrder?: string;
+}
 @Injectable()
 export class InboxDataService {
   private _userId = 'anonymous';
   private _messageGroup: string;
   private _messages: Message[];
+  private _searchConfig?: SearchConfig;
 
   constructor() {}
 
@@ -18,6 +23,14 @@ export class InboxDataService {
 
   get userId(): string {
     return this._userId;
+  }
+
+  set searchConfig(val) {
+    this._searchConfig = val;
+  }
+
+  get searchConfig(): SearchConfig {
+    return this._searchConfig;
   }
 
   set messageGroup(val) {

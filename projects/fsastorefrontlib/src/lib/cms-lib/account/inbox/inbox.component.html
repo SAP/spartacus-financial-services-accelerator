@@ -11,6 +11,14 @@
                 </fsa-inbox-tab>
             </ul>
         </div>
+       <ng-container *ngIf="messages$ | async as messages">
+           <!-- {{pagination | json}}
+            <cx-pagination
+            [pagination]="pagination"
+            (viewPageEvent)="pageChange($event)"
+            
+          ></cx-pagination> -->
+       </ng-container>
         <div class="section-header__heading mt-5 p-4 position-relative">
             <div class="row d-none d-md-flex">
                 <div class="col-1">
@@ -21,15 +29,24 @@
                 </div>
                 <div class="col-3">
                     Subject
-                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"></span>
+                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"
+                        (click)="subjectSortOrder = (subjectSortOrder == 'desc' ? 'asc' : 'desc'); sort('subject', subjectSortOrder);"
+                        [ngClass]="subjectSortOrder == 'asc' ? 'rotate' : '' "
+                    > </span>
                 </div>
                 <div class="col-6">
                     Preview
-                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"></span>
+                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"
+                        (click)="contentSortOrder = (contentSortOrder == 'desc' ? 'asc' : 'desc'); sort('title', contentSortOrder);"
+                        [ngClass]="contentSortOrder == 'asc' ? 'rotate' : '' "
+                    ></span>
                 </div>
                 <div class="col-2">
                     Date
-                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"></span>
+                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"
+                        (click)="sentSortOrder = (sentSortOrder == 'desc' ? 'asc' : 'desc'); sort('sentdate', sentSortOrder);"
+                        [ngClass]="sentSortOrder == 'asc' ? 'rotate' : '' "
+                    ></span>
                 </div>
             </div>
             <div class="mobile-heading row d-md-none">
