@@ -1,12 +1,12 @@
-import { PolicyDetailsComponent } from "./policy-details.component";
-import { ComponentFixture, async, TestBed } from "@angular/core/testing";
-import { RoutingService, OccConfig } from "@spartacus/core";
-import { DebugElement } from "@angular/core";
-import { of } from "rxjs";
-import { AccordionModule } from "./../../../../accordion/accordion.module";
-import { PolicyService } from "../../services";
+import { PolicyDetailsComponent } from './policy-details.component';
+import { ComponentFixture, async, TestBed } from '@angular/core/testing';
+import { RoutingService, OccConfig } from '@spartacus/core';
+import { DebugElement } from '@angular/core';
+import { of } from 'rxjs';
+import { AccordionModule } from './../../../../accordion/accordion.module';
+import { PolicyService } from '../../services';
 
-  
+
 class MockPolicyService {
     loadPolicyDetails(policyId: string, contractId: string): void {}
 }
@@ -26,9 +26,8 @@ describe('PolicyDetailsComponent', () => {
     let fixture: ComponentFixture<PolicyDetailsComponent>;
     let mockRoutingService: RoutingService;
     let el: DebugElement;
-    let policyService: PolicyService
-    let occConfig: OccConfig
-  
+    let policyService: PolicyService;
+
     beforeEach(async(() => {
       mockRoutingService = <RoutingService>{
         getRouterState() {
@@ -42,7 +41,7 @@ describe('PolicyDetailsComponent', () => {
           });
         }
       };
-  
+
       TestBed.configureTestingModule({
         imports: [
             AccordionModule
@@ -57,16 +56,16 @@ describe('PolicyDetailsComponent', () => {
         ]
       }).compileComponents();
     }));
-  
+
     beforeEach(() => {
       fixture = TestBed.createComponent(PolicyDetailsComponent);
       el = fixture.debugElement;
       policyService = TestBed.get(PolicyService);
-  
+
       component = fixture.componentInstance;
       component.ngOnInit();
     });
-  
+
     it('should create', () => {
       expect(component).toBeTruthy();
     });

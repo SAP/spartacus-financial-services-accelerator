@@ -9,8 +9,8 @@ import { OccConfig } from '@spartacus/core';
 
 const userId = '123';
 
-const policyId = '00000023'
-const contractId = '00000023'
+const policyId = '00000023';
+const contractId = '00000023';
 
 const usersEndpoint = '/users';
 const policiesEndpoint = '/policies';

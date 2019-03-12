@@ -8,11 +8,11 @@ import { OccInboxService } from './inbox.service';
 import { OccConfig } from '@spartacus/core';
 
 const userId = '123';
-const messageGroup = 'autoGroup'
+const messageGroup = 'autoGroup';
 
 
 const usersEndpoint = '/users';
-const messagesEndPoint = '/notifications/sitemessages'
+const messagesEndPoint = '/notifications/sitemessages';
 
 
 const MockOccModuleConfig: OccConfig = {
