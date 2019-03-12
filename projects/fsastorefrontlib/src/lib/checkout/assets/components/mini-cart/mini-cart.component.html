@@ -1,0 +1,17 @@
+<ng-container *ngIf="cart$ | async as cart">
+    <ng-container *ngIf="cart.deliveryOrderGroups">
+        <ng-container *ngFor="let item of cart.deliveryOrderGroups[0].entries">
+            <li class="accordion--list-item row">
+                <div class="col-6">
+                    {{item.product.name}}
+                </div>
+                <div class="col-6 value notice notice--dark">
+                    {{item.totalPrice.formattedValue}}
+                </div>
+            </li>
+        </ng-container>
+        <li class="accordion-item__list-item">
+            <b>Total price: {{cart.totalPrice?.formattedValue}}</b>
+        </li>
+    </ng-container>
+</ng-container>
