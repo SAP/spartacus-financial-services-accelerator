@@ -4,14 +4,16 @@ import {
   HttpTestingController
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OccClaimService } from './claim.service';
+import { OccInboxService } from './inbox.service';
 import { OccConfig } from '@spartacus/core';
 
 const userId = '123';
-const claimNumber = 'CL0000012';
+const messageGroup = 'autoGroup'
+
 
 const usersEndpoint = '/users';
-const claimsEndpoint = '/claims';
+const messagesEndPoint = '/notifications/sitemessages'
+
 
 const MockOccModuleConfig: OccConfig = {
   server: {
@@ -24,20 +26,20 @@ const MockOccModuleConfig: OccConfig = {
   }
 };
 
-describe('OccClaimsService', () => {
-  let service: OccClaimService;
+describe('OccInboxService', () => {
+  let service: OccInboxService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
-        OccClaimService,
+        OccInboxService,
         { provide: OccConfig, useValue: MockOccModuleConfig }
       ]
     });
 
-    service = TestBed.get(OccClaimService);
+    service = TestBed.get(OccInboxService);
     httpMock = TestBed.get(HttpTestingController);
   });
 
@@ -45,27 +47,15 @@ describe('OccClaimsService', () => {
     httpMock.verify();
   });
 
-  describe('getClaims', () => {
-    it('should fetch user Claims', async(() => {
-      service.getClaims(userId).subscribe();
+  describe('getMessagesForMessageGroup', () => {
+    it('should fetch user messages for specified group', async(() => {
+      service.getSiteMessagesForUserAndGroup(userId, messageGroup).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
-          req.url === usersEndpoint + `/${userId}` + claimsEndpoint &&
+          req.url === usersEndpoint + `/${userId}` + messagesEndPoint + `?messagegroup=${messageGroup}` &&
           req.method === 'GET'
         );
       }, `GET method and url`);
-    }));
-  });
-
-  describe('deleteClaim', () => {
-    it('delete specified claim by id', async(() => {
-      service.deleteClaim(userId, claimNumber).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url === usersEndpoint + `/${userId}` + claimsEndpoint + `/${claimNumber}` &&
-          req.method === 'DELETE'
-        );
-      }, `DELETE method and url`);
     }));
   });
 });
