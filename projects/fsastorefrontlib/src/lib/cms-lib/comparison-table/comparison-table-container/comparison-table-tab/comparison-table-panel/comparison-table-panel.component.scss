@@ -2,10 +2,9 @@
     display: flex;
     flex: 0 1 100%;
 }
-fsa-comparison-table-product-item {
-    flex: 0 1 100%;
+.product-grid-item {
+    flex: 0 1 50%;
 }
 .products-details {
     min-height: 200px;
-    width: 200px;
 }

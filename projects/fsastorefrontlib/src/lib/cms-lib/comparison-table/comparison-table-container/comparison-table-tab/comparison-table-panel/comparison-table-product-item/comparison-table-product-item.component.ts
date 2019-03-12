@@ -45,7 +45,7 @@ export class ComparisonTableItemComponent implements OnInit {
                 });
                 this.filterArray = this.billingArray.map(element => {
                     // checking whether billingCode matches element from billingArray
-                   const billingCodeArr = this.entriesArray.map(el => {
+                    const billingCodeArr = this.entriesArray.map(el => {
                         return el.billingCode;
                     }).indexOf(element);
                     // if billingCode matches return its' pair formattedPrice

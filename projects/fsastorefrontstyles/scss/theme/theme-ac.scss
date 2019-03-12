@@ -19,7 +19,6 @@ button[disabled], html input[disabled] {
 button:focus {
   outline: none;
 }
-$border-grey: $border-grey;
 a {
   @include transition();
   &:hover {
