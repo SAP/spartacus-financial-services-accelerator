@@ -83,7 +83,7 @@
                 </div>
               </div>
             </fsa-accordion-item>
-            <ng-container *ngIf="cart.deliveryOrderGroups[0]?.entries[0]?.product?.investments != undefined">
+            <ng-container *ngIf="cart.deliveryOrderGroups[0]?.entries[0]?.product?.investments">
               <fsa-accordion-item [title]="'Investments Details'">
                 <div class="container">
                   <div class="row justify-content-center">
@@ -92,10 +92,10 @@
                         <ng-container *ngFor="let investmentDetail of item.product?.investments">
                           <li class="accordion--list-item row">
                             <div class="col-12">
-                              {{investmentDetail.investmentType.fundName}}: {{investmentDetail.distributionPercentage}}% </div>
-                            <div class="col-12">ISIN: {{investmentDetail.investmentType.isin}} </div>
-                            <div class="col-12">5 Year Perfomance: {{investmentDetail.investmentType.fiveYearPerformance}} </div>
-                            <div class="col-12">Risk & Returning Rating: {{investmentDetail.investmentType.riskReturningRating}}</div>
+                              {{investmentDetail.investmentType?.fundName}}: {{investmentDetail.distributionPercentage}}% </div>
+                            <div class="col-12">ISIN: {{investmentDetail.investmentType?.isin}} </div>
+                            <div class="col-12">5 Year Perfomance: {{investmentDetail.investmentType?.fiveYearPerformance}} </div>
+                            <div class="col-12">Risk & Returning Rating: {{investmentDetail.investmentType?.riskReturningRating}}</div>
                           </li>
                         </ng-container>
                       </ng-container>
