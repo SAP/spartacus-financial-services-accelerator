@@ -43,4 +43,11 @@ export class InboxMessageComponent implements OnInit {
     this.inboxService.loadMessagesByMessageGroup(group, this.searchConfig);
     this.messages$ = this.store.pipe(select(fromStore.getMessages));
   }
+  sendMessageState(readDate, messageUid) {
+    const messageObj = {
+      readDate: readDate,
+      messageUid: messageUid
+    };
+    this.inboxService.selectedMessages(messageObj);
+  }
 }

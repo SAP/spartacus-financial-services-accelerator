@@ -9,13 +9,12 @@
 	.message {
 		&.read .inbox-header{ 
 			background: $color-light-grey;
-		}
-		&.unread .inbox-header {
-			background: $color-mild-grey;
-			font-weight: 600;
+			font-weight: normal;
 		}
 		.inbox-header {
 			cursor: pointer;
+			background: $color-mild-grey;
+			font-weight: 600;
 			&:hover {
 				color: $color-blue;
 			}
@@ -36,6 +35,9 @@
 		color: $color-blue;
 		border: 2px solid $color-blue;
 	}
+}
+.cursor-default {
+	cursor: default;
 }
 .ellipsis {
 	@include ellipsis;

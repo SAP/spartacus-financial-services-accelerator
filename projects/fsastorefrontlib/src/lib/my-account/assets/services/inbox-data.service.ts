@@ -8,12 +8,19 @@ export interface SearchConfig {
   sortCode?: string;
   sortOrder?: string;
 }
+export interface MessageToSend {
+  readDate?: string;
+  messageUid?: string;
+  messagesUid?: Array<string>;
+  read?: boolean;
+}
 @Injectable()
 export class InboxDataService {
   private _userId = 'anonymous';
   private _messageGroup: string;
   private _messages: Message[];
   private _searchConfig?: SearchConfig;
+  private _messageToSend?: MessageToSend;
 
   constructor() {}
 
@@ -31,6 +38,14 @@ export class InboxDataService {
 
   get searchConfig(): SearchConfig {
     return this._searchConfig;
+  }
+
+  set messageToSend(val) {
+    this._messageToSend = val;
+  }
+
+  get messageToSend(): MessageToSend {
+    return this._messageToSend;
   }
 
   set messageGroup(val) {

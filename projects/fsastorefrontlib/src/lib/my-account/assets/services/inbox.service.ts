@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Optional } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
 import * as fromAction from '../store/actions';
@@ -7,6 +7,7 @@ import * as fromSelector from '../store/selectors';
 import { InboxDataService } from './inbox-data.service';
 import { BehaviorSubject } from 'rxjs';
 import { SearchConfig } from '../services/inbox-data.service';
+import { MessageToSend } from '../services/inbox-data.service';
 
 
 @Injectable()
@@ -24,8 +25,8 @@ export class InboxService {
   activeGroupTitle = this.activeGroupTitleSource.asObservable();
   activeMessageGroup = this.activeMessageGroupSource.asObservable();
   activeSortingFilter = this.activeSortingFilterSource.asObservable();
-
-
+  messagesCollection: MessageToSend[] = [];
+  read: true;
   callback: Function;
 
   setActiveGroupTitle( title: string ) {
@@ -33,6 +34,22 @@ export class InboxService {
   }
   setActiveMessageGroup( messageGroup: string ) {
     this.activeMessageGroupSource.next(messageGroup);
+  }
+  selectedMessages(messageObject: MessageToSend) {
+    const index = this.messagesCollection.map(function(e) { return e.messageUid; }).indexOf(messageObject.messageUid);
+    if ( index === -1) {
+      this.messagesCollection.push(messageObject);
+    } else {
+      this.messagesCollection.splice(index, 1);
+    }
+    this.setMessagesAction();
+  }
+  setMessagesAction() {
+    this.messagesCollection.map(function(message) {
+      if (message.messageUid === 'undefined') {
+        this.read = false;
+      }
+    });
   }
   initMessages() {
     this.store.pipe(select(fromSelector.getMessages)).subscribe(messages => {
@@ -61,4 +78,13 @@ export class InboxService {
         })
       );
     }
+  changeMessagesState( messagesUidList: [], read: boolean) {
+    this.store.dispatch(
+      new fromAction.SetMessagesState({
+        userId: this.inboxData.userId,
+        messagesUidList: this.inboxData.messageToSend.messagesUid,
+        read: this.read
+      })
+    );
+  }
 }

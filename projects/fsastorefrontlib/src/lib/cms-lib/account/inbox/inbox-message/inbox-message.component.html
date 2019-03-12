@@ -1,22 +1,24 @@
 <div class="messages">
     <ng-container *ngIf="messages$ | async as messages">
         <ng-container *ngIf="messages.messages?.length !== 0; else noMessages">
-            <div class="message read border-bottom-grey" *ngFor="let message of messages.messages">
-                <div class="inbox-header p-4 clickable" (click)="message.opened=!message.opened" [ngClass]="{'active':message.opened}">
-                    <div class="row" >
+            <div class="message border-bottom-grey" 
+                *ngFor="let message of messages.messages"
+                [ngClass]="{read: message.readDate}">
+                <div class="inbox-header clickable p-4" [ngClass]="{'active':message.opened}">
+                    <div class="row"  >
                         <div class="col-1">
                             <label class="checkbox-label">
-                                <input type="checkbox" value="true">
+                                <input type="checkbox" value="true" (change)="sendMessageState(message.readDate, message.uid);">
                                 <span class="checkbox-text FSA-icon icon-icon-FSA-ok"></span>
                             </label>
                         </div>
-                        <div class="col-6 col-md-3 ellipsis">
+                        <div class="col-6 col-md-3 ellipsis" (click)="message.opened=!message.opened">
                             {{ message.title }}
                         </div>
-                        <div class="col-md-6 d-none d-md-block ellipsis">
+                        <div class="col-md-6 d-none d-md-block ellipsis" (click)="message.opened=!message.opened">
                             {{ message.content }}
                         </div>
-                        <div class="col-4 col-md-2 ellipsis">
+                        <div class="col-4 col-md-2 ellipsis cursor-default">
                             {{ message.sentDate }}
                         </div>
                     </div>

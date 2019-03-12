@@ -15,7 +15,7 @@ export class OccInboxService {
 
   protected getSiteMessagesEndpoint(userId: string, messageGroup: string, searchConfig: SearchConfig) {
     let siteMessagesEndpoint = '/users/' + userId + '/notifications/sitemessages?fields=FULL';
-  
+
     if (searchConfig.sortCode && searchConfig.sortOrder) {
       siteMessagesEndpoint += '&page=0&sortCode=' + searchConfig.sortCode + '&sortOrder=' + searchConfig.sortOrder;
     }
@@ -37,5 +37,9 @@ export class OccInboxService {
     return this.http
       .get(url, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
+  }
+  public setMessagesState(userId: string, messageGroup: string, searchConfig: SearchConfig): Observable<any> {
+    return;
+
   }
 }

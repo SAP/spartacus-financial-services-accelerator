@@ -22,7 +22,6 @@ export class InboxEffects {
              searchConfig : this.inboxData.searchConfig
           };
         }
-        console.log(this.inboxData);
         return this.inboxService.getSiteMessagesForUserAndGroup(payload.userId, payload.messageGroup, payload.searchConfig )
           .pipe(
             map((messages: any) => {
@@ -32,7 +31,27 @@ export class InboxEffects {
           );
       })
   );
-
+  @Effect()
+  changeMessagesState$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.SET_MESSAGES_STATE),
+    map((action: fromActions.SetMessagesState) => action.payload),
+    mergeMap(payload => {
+        if (payload === undefined || payload.userId === undefined) {
+          payload = {
+             userId: this.inboxData.userId,
+             messagesUidList: this.inboxData.messageToSend.messagesUid,
+             read: this.inboxData.messageToSend.read
+          };
+        }
+        return this.inboxService.setMessagesState(payload.userId, payload.messageGroup, payload.searchConfig )
+          .pipe(
+            map((messages: any) => {
+              return new fromActions.LoadMessagesSuccess(messages);
+            }),
+            catchError(error => of(new fromActions.LoadMessagesFail(error)))
+          );
+      })
+  );
   constructor(
     private actions$: Actions,
     private inboxService: OccInboxService,
