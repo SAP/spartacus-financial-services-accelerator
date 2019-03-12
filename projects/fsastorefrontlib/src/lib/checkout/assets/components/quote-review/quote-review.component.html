@@ -83,7 +83,7 @@
                 </div>
               </div>
             </fsa-accordion-item>
-            <ng-container *ngIf="cart.deliveryOrderGroups[0]?.entries[0]?.product?.investments">
+            <ng-container *ngIf="cart.deliveryOrderGroups.length > 0 && cart.deliveryOrderGroups[0]?.entries.length > 0 && cart.deliveryOrderGroups[0]?.entries[0]?.product?.investments">
               <fsa-accordion-item [title]="'Investments Details'">
                 <div class="container">
                   <div class="row justify-content-center">
