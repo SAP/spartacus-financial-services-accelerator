@@ -72,7 +72,7 @@ describe('OccPolicyService', () => {
               `/${userId}` +
               policiesEndpoint +
               `/${policyId}` +
-              'dummy' +
+              contractsEndpoint +
               `/${contractId}`
                && req.method === 'GET'
         );
