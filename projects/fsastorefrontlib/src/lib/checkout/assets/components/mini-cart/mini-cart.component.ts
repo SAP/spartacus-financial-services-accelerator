@@ -3,7 +3,7 @@ import { Cart, CartService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'fs-mini-cart',
+  selector: 'fsa-mini-cart',
   templateUrl: './mini-cart.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })

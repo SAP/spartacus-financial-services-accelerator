@@ -14,7 +14,7 @@ import { FSMiniCartComponent } from './mini-cart.component';
     CmsModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
-        MiniCartComponent: { selector: 'fs-mini-cart' }
+        MiniCartComponent: { selector: 'fsa-mini-cart' }
       }
     }),
   ],
