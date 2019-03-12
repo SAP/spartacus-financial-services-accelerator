@@ -3,24 +3,18 @@
   <h4 class="products-details__main-price">$97.00</h4>
   <button (click)="createCartAndStartBundleForProduct(product.code,product.bundleTemplates[0]?.id)"
     class="primary-button primary-button__default primary-button__event col-md-3 col mt-4"
-    type="button"
-  >
+    type="button">
     Select
   </button>
   <div class="products-prices__price-wrapper">
-    <ng-container *ngFor="let item of billingCode">
-      <ng-container *ngFor="let entry of entries">
-        <ng-container *ngIf="item.code.indexOf(entry?.billingTime?.code) > -1 ;else nada">
-          <div class="products-prices__label-name-link">
-            {{ entry?.billingTime?.code }}: {{ entry?.billingTime?.name }}
-          </div>
-          </ng-container>
-        </ng-container>
-        </ng-container>
-      </div>
-  <!-- <div class="nesto" *ngFor="let item of filterData">
-    {{item}}
-  </div> -->
+    <ng-container *ngFor="let item of filterArray">
+      <ng-container *ngIf="item !== undefined; else nada">
+        <div class="products-prices__label-name-link">
+            {{ item }}
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
 </ng-container>
 <ng-template #loading>
   <cx-spinner></cx-spinner>

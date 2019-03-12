@@ -15,16 +15,13 @@ export class ComparisonTableItemComponent implements OnInit {
     @Input()
     productCode: string;
     @Input()
-    billingCode: any[] = [];
+    billingCode: any;
 
     product$: Observable<FSProduct>;
-    entries: any;
-    info: any;
-    infoEnt: any;
+
     entriesArray: any[] = [];
     billingArray: any[] = [];
-    filterArray: any;
-
+    filterArray: any[] = [];
 
     constructor(
         protected productService: ProductService,
@@ -34,23 +31,32 @@ export class ComparisonTableItemComponent implements OnInit {
 
     ngOnInit() {
         this.product$ = this.productService.get(this.productCode);
-        this.billingArray = this.billingCode.map(stuff => {
-            this.info = stuff.code;
-            return this.info;
+        this.billingArray = this.billingCode.map(el => {
+            return el.code;
         });
-        console.log('billingArray', this.billingArray);
         this.product$.subscribe(data => {
             if (data) {
-                this.entries = data.price.oneTimeChargeEntries;
-                this.entriesArray = this.entries.map(ent => {
-                    this.infoEnt = ent.billingTime.code;
-                    return this.infoEnt;
+                this.entriesArray = data.price.oneTimeChargeEntries.map(elem => {
+                    // creating object with only product code and price
+                    return {
+                        billingCode: elem.billingTime.code,
+                        formattedPrice: elem.price.formattedValue
+                    };
                 });
-                console.log('entriesArray', this.entriesArray);
-                this.filterArray = this.entriesArray.filter(element => this.billingArray.indexOf(element) > -1);
-                console.log('Filtered Array ', this.filterArray);
+                this.filterArray = this.billingArray.map(element => {
+                    // checking whether billingCode matches element from billingArray
+                   const billingCodeArr = this.entriesArray.map(el => {
+                        return el.billingCode;
+                    }).indexOf(element);
+                    // if billingCode matches return its' pair formattedPrice
+                    if (billingCodeArr > -1) {
+                        return this.entriesArray[billingCodeArr].formattedPrice;
+                    } else {
+                        return undefined;
+                    }
+                });
             }
-            return [this.entries, this.filterArray, this.infoEnt];
+            return this.filterArray;
         });
     }
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {
