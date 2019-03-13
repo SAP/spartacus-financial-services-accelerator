@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NgbTabsetModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { CmsConfig, ConfigModule } from '@spartacus/core';
 import { CmsModule, ComponentsModule } from '@spartacus/storefront';
 import { ComparisonTableContainerComponent } from './comparison-table-container/comparison-table-container.component';
@@ -10,6 +10,7 @@ import { ComparisonTablePanelComponent } from './comparison-table-container/comp
 // tslint:disable-next-line:max-line-length
 import { ComparisonTableItemComponent } from './comparison-table-container/comparison-table-tab/comparison-table-panel/comparison-table-product-item/comparison-table-product-item.component';
 import { ComparisonTableTabComponent } from './comparison-table-container/comparison-table-tab/comparison-table-tab.component';
+import { OccBillingTimeService } from '../../occ/billing-time/billing-time.service';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { ComparisonTableTabComponent } from './comparison-table-container/compar
     ComparisonTableTabComponent,
     ComparisonTablePanelComponent,
     ComparisonTableItemComponent
-  ]
+  ],
+  providers: [OccBillingTimeService]
 })
-export class ComparisonTableModule {}
+export class ComparisonTableModule { }
