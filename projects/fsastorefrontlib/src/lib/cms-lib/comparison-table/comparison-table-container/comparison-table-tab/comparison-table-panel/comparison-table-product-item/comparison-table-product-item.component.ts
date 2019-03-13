@@ -49,7 +49,7 @@ export class ComparisonTableItemComponent implements OnInit {
                     const billingCodeArr = this.entriesArray.map(el => {
                         return el.billingCode;
                     }).indexOf(element);
-                    // if billingCode matches return its' pair chargeValue
+                    // if billingCode matches return its' pair chargeValue (either price or chargeInformation)
                     if (billingCodeArr > -1) {
                         return this.entriesArray[billingCodeArr].chargeValue;
                     } else {

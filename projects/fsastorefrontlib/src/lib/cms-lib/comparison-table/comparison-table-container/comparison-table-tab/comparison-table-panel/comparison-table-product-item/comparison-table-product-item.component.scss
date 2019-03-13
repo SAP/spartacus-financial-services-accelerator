@@ -13,10 +13,12 @@
     min-height: 200px;
     &__name {
         font-size: 20px;
+        font-weight: 500;
     }
     &__main-price {
         margin: 20px 0;
         font-size: 40px;
+        font-weight: 500;
     }
 }
 .products-prices {

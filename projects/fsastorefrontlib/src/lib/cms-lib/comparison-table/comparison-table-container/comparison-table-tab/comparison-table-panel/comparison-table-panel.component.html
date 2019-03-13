@@ -1,19 +1,20 @@
-<ng-container *ngIf="comparisonPanel | async as panel">
-  <ng-container *ngIf="billingData | async as billingData">
+<ng-container *ngIf="(comparisonPanel | async) as panel">
+  <ng-container *ngIf="(billingData | async) as billingInfo">
     <div class="product-grid-item">
       <div class="products-details"></div>
       <div class="products-prices">
-        <div class="products-prices__price-wrapper">
-          <div *ngFor="let item of billingData.billingTimes" class="products-prices__label-name-link">{{item.name}}
-          </div>
+        <div *ngFor="let item of billingInfo.billingTimes" class="products-prices__price-wrapper">
+          {{ item.name }}
         </div>
       </div>
     </div>
-    <ng-container *ngFor="let productCode of getProductList()">
-      <ng-container *ngIf="productCode">
-        <fsa-comparison-table-product-item [productCode]="productCode" [billingCode]="billingData.billingTimes">
-        </fsa-comparison-table-product-item>
+    <ng-container *ngIf="(comparisonPanel | async) as panel">
+      <ng-container *ngFor="let productCode of getProductList()">
+        <ng-container *ngIf="productCode">
+          <fsa-comparison-table-product-item [productCode]="productCode" [billingCode]="billingInfo.billingTimes"></fsa-comparison-table-product-item>
+        </ng-container>
       </ng-container>
     </ng-container>
   </ng-container>
 </ng-container>
+  

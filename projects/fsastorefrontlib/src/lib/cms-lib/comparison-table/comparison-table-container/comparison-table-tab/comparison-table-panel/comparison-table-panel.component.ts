@@ -27,7 +27,7 @@ export class ComparisonTablePanelComponent implements OnInit {
   ngOnInit() {
     this.comparisonPanel = this.componentData.data$;
     this.componentData.data$.pipe(take(1)).subscribe(data => {
-      let productCodes = data.products.split(' ');
+      const productCodes = data.products.split(' ');
       this.billingData = this.billingTimeService.getBillingTimes(productCodes);
     });
   }

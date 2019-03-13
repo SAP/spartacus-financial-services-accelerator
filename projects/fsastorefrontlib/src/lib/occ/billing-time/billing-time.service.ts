@@ -18,8 +18,6 @@ export class OccBillingTimeService {
         const params = new HttpParams({
             fromString: 'productCodes=' + productCodes + FULL_PARAMS
         });
-        console.log(url);
-        console.log(params)
         return this.http
             .get(url, { params: params })
             .pipe(catchError((error: any) => throwError(error.json())));
