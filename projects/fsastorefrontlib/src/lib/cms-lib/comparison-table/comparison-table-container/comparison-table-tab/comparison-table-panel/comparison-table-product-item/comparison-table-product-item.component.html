@@ -1,15 +1,17 @@
 <ng-container *ngIf="(product$ | async) as product; else loading">
-  <h3 class="products-details__name">{{ product.name }}</h3>
-  <h4 class="products-details__main-price">$97.00</h4>
-  <button (click)="createCartAndStartBundleForProduct(product.code,product.bundleTemplates[0]?.id)"
-    class="primary-button primary-button__default"
-    type="button">
-    Select
-  </button>
-  <div class="products-prices__price-wrapper">
+  <div class="products-details">
+    <h3 class="products-details__name">{{ product.name }}</h3>
+    <h4 class="products-details__main-price">$97.00</h4>
+    <button (click)="createCartAndStartBundleForProduct(product.code,product.bundleTemplates[0]?.id)"
+      class="primary-button primary-button__default"
+      type="button">
+      Select
+    </button>
+  </div>
+  <div class="products-prices">
     <ng-container *ngFor="let item of filterArray">
       <ng-container *ngIf="item !== undefined; else nada">
-        <div class="products-prices__label-name-link">
+        <div class="products-prices__price-wrapper">
             {{ item }}
         </div>
       </ng-container>
@@ -20,7 +22,7 @@
   <cx-spinner></cx-spinner>
 </ng-template>
 <ng-template #nada>
-    <div class="products-prices__label-name-link">
-        X
+    <div class="products-prices__price-wrapper">
+        <span class="FSA-icon icon-icon-FSA-remove"></span>
     </div>
 </ng-template>
