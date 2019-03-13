@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit, Output} from '@angular/core';
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {CmsComponentData} from '@spartacus/storefront';
 import {Observable} from 'rxjs';
 import {ComparisonPanelCMSComponent} from '../../../../../occ-models';

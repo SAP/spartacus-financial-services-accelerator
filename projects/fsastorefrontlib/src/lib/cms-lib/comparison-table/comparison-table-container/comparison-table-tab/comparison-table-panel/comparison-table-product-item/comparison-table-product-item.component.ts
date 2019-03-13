@@ -37,12 +37,11 @@ export class ComparisonTableItemComponent implements OnInit {
         this.product$.subscribe(data => {
             if (data) {
                 this.entriesArray = data.price.oneTimeChargeEntries.map(elem => {
-                    console.log(data.price.oneTimeChargeEntries);
                     // creating object with only product code and price/chargeInformation
-                    const value = elem.price.formattedValue ? elem.price.formattedValue : elem.chargeInformation;
+                    const value = elem.price.value !== 0 ? elem.price.formattedValue : elem.chargeInformation;
                     return {
                         billingCode: elem.billingTime.code,
-                        formattedPrice: value
+                        chargeValue: value
                     };
                 });
                 this.filterArray = this.billingArray.map(element => {
@@ -50,9 +49,9 @@ export class ComparisonTableItemComponent implements OnInit {
                     const billingCodeArr = this.entriesArray.map(el => {
                         return el.billingCode;
                     }).indexOf(element);
-                    // if billingCode matches return its' pair formattedPrice
+                    // if billingCode matches return its' pair chargeValue
                     if (billingCodeArr > -1) {
-                        return this.entriesArray[billingCodeArr].formattedPrice;
+                        return this.entriesArray[billingCodeArr].chargeValue;
                     } else {
                         return undefined;
                     }

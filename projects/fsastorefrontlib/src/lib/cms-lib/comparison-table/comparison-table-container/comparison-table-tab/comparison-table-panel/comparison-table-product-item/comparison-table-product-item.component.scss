@@ -5,9 +5,12 @@
 :host {
     flex: 0 1 100%;
     padding: 0 5px;
+    border-left: 1px dashed $color-grey;
+    text-align: center;
 }
 
 .products-details {
+    min-height: 200px;
     &__name {
         font-size: 20px;
 
@@ -15,48 +18,6 @@
     &__main-price {
         margin: 20px 0;
         font-size: 40px;
-    }
-    &__optional-products {
-        font-size: 24px;
-        text-align: left;
-        margin-bottom: 10px;
-        padding: 0 10px;
-        overflow: hidden;
-        &--margin {
-            margin: 10px 0 0;
-        }
-        &--checkbox-margin {
-            margin-bottom: 0 !important;
-            margin-top: 0;
-        }
-    }
-    &__optional-products-name {
-        font-size: 14px;
-        line-height: 18px;
-        display: block;
-        font-weight: normal;
-        padding: 0 0 0 25px;
-
-    }
-    &__pay-on-checkout {
-        font-size: 14px;
-        line-height: 18px;
-        display: block;
-        font-weight: normal;
-        padding: 10px 5px;
-        margin: 10px 0;
-    }
-    &__pay-on-checkout-monthly {
-        background-color: $color-yellow;
-        color: $color-dark-grey;
-    }
-    &__mandatory-products {
-        margin: 10px 0;
-        &--checkbox-margin {
-            margin-top: 0;
-            margin-bottom: 0 !important;
-            vertical-align: top;
-        }
     }
 }
 .products-prices {
@@ -67,22 +28,7 @@
         }
         &:nth-child(odd) {
             background-color: $color-mild-grey;
-			.banking & {
-				background-color: $color-light-grey;
-			}
         }
-		.banking & {
-			color: $color-semi-dark-grey;
-		}
-		.glyphicon {
-			font-size: 18px;
-			top: 50%;
-			transform: translateY(-50%);
-			color: $color-dark-blue;
-			.banking & {
-				color: $color-banking-blue;
-			}
-		}
     }
     &__price-line {
         vertical-align:middle;

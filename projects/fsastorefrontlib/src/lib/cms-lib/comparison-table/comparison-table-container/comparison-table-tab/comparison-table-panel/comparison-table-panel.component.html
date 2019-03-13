@@ -1,15 +1,15 @@
 <div class="product-grid-item">
   <div class="products-details"></div>
   <div class="products-prices">
-    <div class="products-prices__price-wrapper">
-      <div *ngFor="let item of billingEvents" class="products-prices__label-name-link">{{item.name}}</div>
+    <div class="products-prices__price-wrapper" *ngFor="let item of billingEvents">
+      {{ item.name }}
     </div>
   </div>
 </div>
-<ng-container *ngIf="comparisonPanel | async as panel">
-    <ng-container *ngFor="let productCode of getProductList()">
-      <ng-container *ngIf="productCode">
-        <fsa-comparison-table-product-item [productCode]="productCode" [billingCode]="billingEvents"></fsa-comparison-table-product-item>
+<ng-container *ngIf="(comparisonPanel | async) as panel">
+  <ng-container *ngFor="let productCode of getProductList()">
+    <ng-container *ngIf="productCode">
+      <fsa-comparison-table-product-item [productCode]="productCode" [billingCode]="billingEvents"></fsa-comparison-table-product-item>
     </ng-container>
   </ng-container>
 </ng-container>

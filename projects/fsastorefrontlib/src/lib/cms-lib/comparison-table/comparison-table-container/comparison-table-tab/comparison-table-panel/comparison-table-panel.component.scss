@@ -1,10 +1,27 @@
+@import 'mixins-fsa';
+@import 'variables-fsa';
+
 :host {
     display: flex;
     flex: 0 1 100%;
+    justify-items: stretch;
 }
 .product-grid-item {
     flex: 0 1 50%;
 }
 .products-details {
     min-height: 200px;
+    padding-right: 5px;
+}
+.products-prices {
+    padding-right: 5px;
+    &__price-wrapper {
+        padding: 15px;
+        &:nth-child(even) {
+            background-color: transparent;
+        }
+        &:nth-child(odd) {
+            background-color: $color-mild-grey;
+        }
+    }
 }
