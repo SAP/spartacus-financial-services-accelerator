@@ -13,7 +13,6 @@
     min-height: 200px;
     &__name {
         font-size: 20px;
-
     }
     &__main-price {
         margin: 20px 0;
@@ -29,21 +28,5 @@
         &:nth-child(odd) {
             background-color: $color-mild-grey;
         }
-    }
-    &__price-line {
-        vertical-align:middle;
-        margin: 0;
-		text-transform: capitalize;
-    }
-    &__label-name, &__label-name-link {
-        display: inline-block;
-		overflow: hidden;
-		text-overflow: ellipsis;
-		vertical-align: top;
-		width: 80%;
-		.banking & {
-			font-weight: 600;
-			color: $color-dark-grey;
-		}
     }
 }
