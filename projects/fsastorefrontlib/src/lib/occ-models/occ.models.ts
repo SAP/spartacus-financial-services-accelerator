@@ -12,10 +12,11 @@ export interface OneTimeChargeEntry {
   name?: string;
   price?: Price;
   billingTime?: BillingTime;
+  chargeInformation?: string;
 }
 
 export interface BillingTime {
   code?: string;
-  name?: Price;
-  description?: BillingTime;
+  name?: string;
+  description?: string;
 }
