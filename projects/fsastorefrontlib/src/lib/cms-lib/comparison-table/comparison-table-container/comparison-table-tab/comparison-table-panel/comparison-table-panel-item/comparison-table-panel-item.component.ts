@@ -18,7 +18,7 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     billingTimes: any;
 
     product$: Observable<FSProduct>;
-    filterArray: OneTimeChargeEntry[] = [];
+    panelItemEntries: OneTimeChargeEntry[] = [];
 
     constructor(
         protected productService: ProductService,
@@ -30,7 +30,7 @@ export class ComparisonTablePanelItemComponent implements OnInit {
         this.product$ = this.productService.get(this.productCode);
         this.product$.subscribe(data => {
             if (data) {
-                this.filterArray = this.billingTimes.map(billingTime => {
+                this.panelItemEntries = this.billingTimes.map(billingTime => {
                     return data.price.oneTimeChargeEntries.find(entry => entry.billingTime.code === billingTime.code);
                 });
             }

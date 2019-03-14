@@ -9,7 +9,7 @@
     </button>
   </div>
   <div class="products-prices">
-    <ng-container *ngFor="let item of filterArray">
+    <ng-container *ngFor="let item of panelItemEntries">
       <div class="products-prices__price-wrapper">
       <ng-container *ngIf="item !== undefined; else itemNotIncluded">
         <div *ngIf="item.price?.value > 0 || item.chargeInformation; else itemIncluded" >
