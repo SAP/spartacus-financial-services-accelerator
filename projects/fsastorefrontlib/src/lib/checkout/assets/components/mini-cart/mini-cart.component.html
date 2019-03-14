@@ -1,0 +1,36 @@
+<ng-container *ngIf="(cart$ | async) as cart">
+  <ng-container *ngIf="cart.deliveryOrderGroups">
+    <div class="short-overview short-overview--right">
+      <div class="short-overview__heading gradient-heading">
+          {{ cart.deliveryOrderGroups[0]?.entries[0]?.product?.categories[0]?.name }}
+      </div>
+      <div class="short-overview__content">
+          <ng-container *ngFor="let item of cart.deliveryOrderGroups[0].entries">
+            <div class="short-overview__items">
+              <div class="short-overview__item row">
+                <div class="short-overview__item-name col-7">
+                    {{ item.product.name }}:
+                </div>
+                <div class="short-overview__item-price col-5">
+                  {{ item.totalPrice.formattedValue }}
+                </div>
+              </div>
+            </div>
+        </ng-container>
+          <div class="short-overview__item short-overview__item--highlighted row">
+            <div class="short-overview__item-name col-6">
+                Total price:
+            </div>
+            <div class="short-overview__item-price col-6">{{ cart.totalPrice?.formattedValue }}</div>
+          </div>
+        </div>
+        <div class="short-overview__link-wrapper">
+          <a
+            class="mean-link mean-link--bold"
+            href="#"
+            >Modify Plan</a
+          >
+        </div>
+      </div>
+  </ng-container>
+</ng-container>
