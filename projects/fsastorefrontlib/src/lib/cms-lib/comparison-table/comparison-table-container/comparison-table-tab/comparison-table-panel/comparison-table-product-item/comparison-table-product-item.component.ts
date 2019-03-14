@@ -38,7 +38,6 @@ export class ComparisonTableItemComponent implements OnInit {
             if (data) {
                 this.entriesArray = data.price.oneTimeChargeEntries.map(elem => {
                     // creating object with only product code and price/chargeInformation
-                    console.log(elem);
                     const value = elem.price.value !== 0 ? elem.price.formattedValue : elem.chargeInformation;
                     return {
                         billingCode: elem.billingTime.code,
