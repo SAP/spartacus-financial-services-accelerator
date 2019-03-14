@@ -1,9 +1,9 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {CmsComponentData} from '@spartacus/storefront';
-import {Observable} from 'rxjs';
-import {take} from 'rxjs/operators';
-import {ComparisonPanelCMSComponent} from '../../../../../occ-models';
-import {OccBillingTimeService} from '../../../../../occ/billing-time/billing-time.service';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { CmsComponentData } from '@spartacus/storefront';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { ComparisonPanelCMSComponent } from '../../../../../occ-models';
+import { OccBillingTimeService } from '../../../../../occ/billing-time/billing-time.service';
 
 @Component({
   selector: 'fsa-comparison-table-panel',
@@ -12,8 +12,6 @@ import {OccBillingTimeService} from '../../../../../occ/billing-time/billing-tim
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComparisonTablePanelComponent implements OnInit {
-
-
   comparisonPanel: Observable<ComparisonPanelCMSComponent>;
   productList: string[];
   billingData: Observable<any>;
@@ -21,8 +19,7 @@ export class ComparisonTablePanelComponent implements OnInit {
   constructor(
     protected componentData: CmsComponentData<ComparisonPanelCMSComponent>,
     protected billingTimeService: OccBillingTimeService
-  ) {
-  }
+  ) {}
 
   ngOnInit() {
     this.comparisonPanel = this.componentData.data$;

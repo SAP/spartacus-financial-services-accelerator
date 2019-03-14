@@ -1,8 +1,9 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OccConfig } from '@spartacus/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
+import { OccConfig } from '@spartacus/core';
+
 const FULL_PARAMS = '&fields=FULL';
 
 @Injectable()
