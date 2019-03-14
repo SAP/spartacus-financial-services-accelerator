@@ -401,8 +401,8 @@ a {
 .cart-items-list {
   border: $border-grey;
   background-color: $color-light-grey;
-  margin-top: 30px;
-  & h2 {
+  padding: 0 15px;
+   h2 {
     margin: 0;
   }
   & h3 {

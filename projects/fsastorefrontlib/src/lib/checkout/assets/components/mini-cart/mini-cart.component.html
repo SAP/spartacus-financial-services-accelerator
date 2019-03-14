@@ -1,17 +1,36 @@
-<ng-container *ngIf="cart$ | async as cart">
-    <ng-container *ngIf="cart.deliveryOrderGroups">
-        <ng-container *ngFor="let item of cart.deliveryOrderGroups[0].entries">
-            <li class="accordion--list-item row">
-                <div class="col-6">
-                    {{item.product.name}}
+<ng-container *ngIf="(cart$ | async) as cart">
+  <ng-container *ngIf="cart.deliveryOrderGroups">
+    <div class="short-overview short-overview--right">
+      <div class="short-overview__heading gradient-heading">
+          {{ cart.deliveryOrderGroups[0]?.entries[0]?.product?.categories[0]?.name }}
+      </div>
+      <div class="short-overview__content">
+          <ng-container *ngFor="let item of cart.deliveryOrderGroups[0].entries">
+            <div class="short-overview__items">
+              <div class="short-overview__item row">
+                <div class="short-overview__item-name col-7">
+                    {{ item.product.name }}:
                 </div>
-                <div class="col-6 value notice notice--dark">
-                    {{item.totalPrice.formattedValue}}
+                <div class="short-overview__item-price col-5">
+                  {{ item.totalPrice.formattedValue }}
                 </div>
-            </li>
+              </div>
+            </div>
         </ng-container>
-        <li class="accordion-item__list-item">
-            <b>Total price: {{cart.totalPrice?.formattedValue}}</b>
-        </li>
-    </ng-container>
+          <div class="short-overview__item short-overview__item--highlighted row">
+            <div class="short-overview__item-name col-6">
+                Total price:
+            </div>
+            <div class="short-overview__item-price col-6">{{ cart.totalPrice?.formattedValue }}</div>
+          </div>
+        </div>
+        <div class="short-overview__link-wrapper">
+          <a
+            class="mean-link mean-link--bold"
+            href="#"
+            >Modify Plan</a
+          >
+        </div>
+      </div>
+  </ng-container>
 </ng-container>

@@ -1,140 +1,134 @@
-<div class="center1400 contentPadding">
-  <ng-container *ngIf="cart$ | async as cart">
-    <ng-container *ngIf="cartLoaded$ | async; else loading">
-      <ng-container *ngIf="cart.deliveryOrderGroups; else noQuotes">
-        <h2 class="centered-heading">
-          Your {{ (cart.deliveryOrderGroups[0].entries[0]?.product?.categories[0])?.name }}
-        </h2>
-        <div class="col-md-8">
-          <div class="accordion">
-            <div class="row no-gutters section-header__heading">
-              <div class="col-12 col-md-2 accordion-header__icon">
-                <span class="images images__wrapper images__wrapper--size"
-                  ><img class="images__size" [src]="getBaseUrl() + cart.deliveryOrderGroups[0]?.entries[0]?.product?.images[3]?.url"/>
-                </span>
-              </div>
-              <div class="col-12 col-md-8 accordion-header__text">
-                {{ (cart.deliveryOrderGroups[0].entries[0]?.product?.categories[0])?.name }} Quote
-              </div>
-              <div class="col-12 col-md-3 col-md-2 accordion-header__details">
-                <div class="accordion-header__id"></div>
-                <div class="accordion-header__expiry-date"></div>
-              </div>
+
+<ng-container *ngIf="cart$ | async as cart">
+  <ng-container *ngIf="cartLoaded$ | async; else loading">
+    <ng-container *ngIf="cart.deliveryOrderGroups; else noQuotes">
+        <div class="accordion">
+          <div class="row no-gutters section-header__heading">
+            <div class="col-12 col-md-2 accordion-header__icon">
+              <span class="images images__wrapper images__wrapper--size"
+                ><img class="images__size" [src]="getBaseUrl() + cart.deliveryOrderGroups[0]?.entries[0]?.product?.images[3]?.url"/>
+              </span>
             </div>
-            <div #ref>
-              <ng-container *ngIf="(cart?.insuranceQuote?.quoteDetails | json) !== '{}'">
-                <fsa-accordion-item [opened]="true" [title]="(cart.deliveryOrderGroups[0].entries[0]?.product?.categories[0])?.name + ' Information'">
-                  <div class="container">
-                    <div class="row justify-content-center">
-                      <ul class="col-12 accordion--list">
-                        <ng-container *ngFor="let item of cart?.insuranceQuote?.quoteDetails?.entry">
-                          <li class="accordion--list-item row">
-                            <div class="col-6">
-                              {{ item.key }}
-                            </div>
-                            <div class="col-6 value notice notice--dark">
-                              {{ item.value }}
-                            </div>
-                          </li>
-                        </ng-container>
-                      </ul>
-                      <div class="col-12 col-md-6">
-                        <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
-                      </div>
+            <div class="col-12 col-md-8 accordion-header__text">
+              {{ (cart.deliveryOrderGroups[0].entries[0]?.product?.categories[0])?.name }} Quote
+            </div>
+            <div class="col-12 col-md-3 col-md-2 accordion-header__details">
+              <div class="accordion-header__id"></div>
+              <div class="accordion-header__expiry-date"></div>
+            </div>
+          </div>
+          <div #ref>
+            <ng-container *ngIf="(cart?.insuranceQuote?.quoteDetails | json) !== '{}'">
+              <fsa-accordion-item [opened]="true" [title]="(cart.deliveryOrderGroups[0].entries[0]?.product?.categories[0])?.name + ' Information'">
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <ul class="col-12 accordion--list">
+                      <ng-container *ngFor="let item of cart?.insuranceQuote?.quoteDetails?.entry">
+                        <li class="accordion--list-item row">
+                          <div class="col-6">
+                            {{ item.key }}
+                          </div>
+                          <div class="col-6 value notice notice--dark">
+                            {{ item.value }}
+                          </div>
+                        </li>
+                      </ng-container>
+                    </ul>
+                    <div class="col-12 col-md-6">
+                      <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
                     </div>
                   </div>
-                </fsa-accordion-item>
-              </ng-container>
-            </div>
-            <fsa-accordion-item [opened]="ref.children.length > 0 ? false : true" [title]="'What\'s Included'">
-              <div class="container">
-                <div class="row justify-content-center">
-                  <ul class="col-12 accordion--list">
-                    <ng-container *ngFor="let item of (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.price?.oneTimeChargeEntries">
-                      <li class="accordion--list-item row">
-                        <div class="col-6">
-                          {{ item.billingTime.name }}
-                        </div>
-                        <div class="col-6 value notice notice--dark">
-                          {{ item.price.formattedValue }}
-                        </div>
-                      </li>
-                    </ng-container>
-                  </ul>
-                  <div class="col-12 col-md-6">
-                    <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
-                  </div>
                 </div>
-              </div>
-            </fsa-accordion-item>
-            <fsa-accordion-item [title]="'Added by you'">
-              <div class="container">
-                <div class="row justify-content-center">
-                  <ul class="col-12 accordion--list">
-                    <ng-container *ngFor="let item of cart.deliveryOrderGroups[0]?.entries">
-                      <li class="accordion--list-item row">
-                        <div class="col-12"> {{ item.product?.name }} </div>
-                      </li>
-                    </ng-container>
-                  </ul>
-                  <div class="col-12 col-md-6">
-                    <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
-                  </div>
-                </div>
-              </div>
-            </fsa-accordion-item>
-            <fsa-accordion-item [title]="'Personal Details'">
-              <div class="container">
-                <div class="row justify-content-center">
-                  <ul class="col-12 accordion--list">
+              </fsa-accordion-item>
+            </ng-container>
+          </div>
+          <fsa-accordion-item [opened]="ref.children.length > 0 ? false : true" [title]="'What\'s Included'">
+            <div class="container">
+              <div class="row justify-content-center">
+                <ul class="col-12 accordion--list">
+                  <ng-container *ngFor="let item of (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.price?.oneTimeChargeEntries">
                     <li class="accordion--list-item row">
-                      <div class="col-12">
-                        <!-- Needs to have dynamic heading value -->
-                        <h3 class="accordion-item__list-title">Policy Holder</h3>
-                        <ul class="accordion-item__list">
-                          <li class="accordion-item__list-item">
-                            Mrs. Test Tester
-                          </li>
-                          <li class="accordion-item__list-item">
-                            Phone Number: 323535
-                          </li>
-                          <li class="accordion-item__list-item">
-                            Email Address: donna@moore.com
-                          </li>
-                          <li class="accordion-item__list-item">
-                            Address Line 1: sfsdfsdf
-                          </li>
-                          <li class="accordion-item__list-item">City: sffsd</li>
-                          <li class="accordion-item__list-item">
-                            Postcode: 3423423
-                          </li>
-                          <li class="accordion-item__list-item">
-                            Country: France
-                          </li>
-                        </ul>
+                      <div class="col-6">
+                        {{ item.billingTime.name }}
+                      </div>
+                      <div class="col-6 value notice notice--dark">
+                        {{ item.price.formattedValue }}
                       </div>
                     </li>
-                  </ul>
-                  <div class="col-12 col-md-6">
-                    <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
-                  </div>
+                  </ng-container>
+                </ul>
+                <div class="col-12 col-md-6">
+                  <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
                 </div>
               </div>
-            </fsa-accordion-item>
-            <div class="row mt-5">
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <a class="secondary-button secondary-button__default secondary-button__checkout js-checkQuoteStatus" href="">Back</a>
+            </div>
+          </fsa-accordion-item>
+          <fsa-accordion-item [title]="'Added by you'">
+            <div class="container">
+              <div class="row justify-content-center">
+                <ul class="col-12 accordion--list">
+                  <ng-container *ngFor="let item of cart.deliveryOrderGroups[0]?.entries">
+                    <li class="accordion--list-item row">
+                      <div class="col-12"> {{ item.product?.name }} </div>
+                    </li>
+                  </ng-container>
+                </ul>
+                <div class="col-12 col-md-6">
+                  <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
+                </div>
               </div>
-              <div class="col-md-6 col-sm-6 col-xs-12">
-                <a class="primary-button primary-button__default primary-button__checkout js-checkoutBtn">Continue</a>
+            </div>
+          </fsa-accordion-item>
+          <fsa-accordion-item [title]="'Personal Details'">
+            <div class="container">
+              <div class="row justify-content-center">
+                <ul class="col-12 accordion--list">
+                  <li class="accordion--list-item row">
+                    <div class="col-12">
+                      <!-- Needs to have dynamic heading value -->
+                      <h3 class="accordion-item__list-title">Policy Holder</h3>
+                      <ul class="accordion-item__list">
+                        <li class="accordion-item__list-item">
+                          Mrs. Test Tester
+                        </li>
+                        <li class="accordion-item__list-item">
+                          Phone Number: 323535
+                        </li>
+                        <li class="accordion-item__list-item">
+                          Email Address: donna@moore.com
+                        </li>
+                        <li class="accordion-item__list-item">
+                          Address Line 1: sfsdfsdf
+                        </li>
+                        <li class="accordion-item__list-item">City: sffsd</li>
+                        <li class="accordion-item__list-item">
+                          Postcode: 3423423
+                        </li>
+                        <li class="accordion-item__list-item">
+                          Country: France
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+                <div class="col-12 col-md-6">
+                  <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
+                </div>
               </div>
+            </div>
+          </fsa-accordion-item>
+          <div class="row mt-5">
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <a class="secondary-button secondary-button__default secondary-button__checkout js-checkQuoteStatus" href="">Back</a>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <a class="primary-button primary-button__default primary-button__checkout js-checkoutBtn">Continue</a>
             </div>
           </div>
         </div>
-      </ng-container>
     </ng-container>
   </ng-container>
-</div>
+</ng-container>
 <ng-template #noQuotes>
     <h3>You have no active quotes!</h3>
 </ng-template>
