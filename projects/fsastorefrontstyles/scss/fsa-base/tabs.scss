@@ -1,0 +1,17 @@
+@import '../mixins-fsa';
+@import '../variables-fsa';
+
+ul[role='tablist'].nav-tabs {
+    border-bottom: $border-grey;
+    .nav-item .nav-link {
+        background-color: $color-dark-grey;
+        color: $color-white;
+        margin-right: 3px;
+        &.active {
+            background-color: $color-light-grey;
+            color: $color-dark-grey;
+            border: $border-grey;
+            border-bottom: none;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+<div class="products-wrapper d-flex justify-content-around mt-5 mb-2">
+  <ng-container *ngIf="(component$ | async) as component">
+    <ngb-tabset>
+      <ngb-tab *ngFor="let comparisonTabId of getComparisonTabList()" title="{{ comparisonTabId }}">
+        <ng-template ngbTabContent>
+          <ng-container
+            cxComponentWrapper
+            componentType="CMSComparisonTabComponent"
+            componentUid="{{ comparisonTabId }}"
+          >
+          </ng-container>
+        </ng-template>
+      </ngb-tab>
+    </ngb-tabset>
+  </ng-container>
+</div>

@@ -1,0 +1,34 @@
+<ng-container *ngIf="(product$ | async) as product; else loading">
+  <div class="products-details">
+    <h3 class="products-details__name">{{ product.name }}</h3>
+    <h4 class="products-details__main-price">$97.00</h4>
+    <button (click)="createCartAndStartBundleForProduct(product.code,product.bundleTemplates[0]?.id)"
+      class="primary-button primary-button__default"
+      type="button">
+      Select
+    </button>
+  </div>
+  <div class="products-prices">
+    <ng-container *ngFor="let item of panelItemEntries">
+      <div class="products-prices__price-wrapper">
+      <ng-container *ngIf="item !== undefined; else itemNotIncluded">
+        <div *ngIf="item.price?.value > 0 || item.chargeInformation; else itemIncluded" >
+            <ng-container *ngTemplateOutlet="itemValue context: {value: (item.price.value > 0 ? item.price.formattedValue : item.chargeInformation)}"></ng-container>
+        </div>
+      </ng-container>
+    </div>
+    </ng-container>
+  </div>
+</ng-container>
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
+</ng-template>
+<ng-template #itemNotIncluded>
+        <span class="FSA-icon icon-icon-FSA-remove"></span>
+</ng-template>
+<ng-template #itemIncluded>
+        <span class="FSA-icon icon-icon-FSA-ok"></span>
+</ng-template>
+<ng-template #itemValue let-value="value">
+      {{value}}
+</ng-template>

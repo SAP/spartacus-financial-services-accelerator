@@ -1,6 +1,0 @@
-<ng-container *ngIf="product$ | async as product">
-    <h3 class="products-details__name js-product-name">{{product.name}}</h3>
-    <button (click)="createCartAndStartBundleForProduct(product.code, product.bundleTemplates[0]?.id)"
-        class="primary-button primary-button__default primary-button__event col-md-3 col mt-4"
-        type="button">Select</button>
-</ng-container>

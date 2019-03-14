@@ -10,6 +10,7 @@ import { OccPolicyService } from './policy/policy.service';
 import { OccInboxService } from './inbox/inbox.service';
 
 import {OccFSCartService} from './cart/fs-cart.service';
+import { OccBillingTimeService } from './billing-time/billing-time.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
@@ -19,6 +20,7 @@ import {OccFSCartService} from './cart/fs-cart.service';
     OccClaimService,
     OccInboxService,
     OccFSCartService,
+    OccBillingTimeService,
     { provide: OccConfig, useExisting: Config }
   ]
 })
