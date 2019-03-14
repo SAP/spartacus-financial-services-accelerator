@@ -35,8 +35,8 @@ export class ComparisonTableItemComponent implements OnInit {
                 });
             }
         });
-
     }
+
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {
         this.cartService.createCartAndStartBundle(productCode, bundleTemplateId, 1);
     }
