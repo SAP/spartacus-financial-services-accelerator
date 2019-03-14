@@ -2,17 +2,17 @@
   <ng-container *ngIf="cart.deliveryOrderGroups">
     <div class="short-overview short-overview--right">
       <div class="short-overview__heading gradient-heading">
-          {{ cart.deliveryOrderGroups[0]?.entries[0]?.product?.categories[0]?.name }}
+          {{ cart.deliveryOrderGroups[0]?.entries[0]?.product?.categories[0]?.name }} Quote
       </div>
       <div class="short-overview__content">
-          <ng-container *ngFor="let item of cart.deliveryOrderGroups[0].entries">
+          <ng-container *ngFor="let entry of cart.deliveryOrderGroups[0].entries">
             <div class="short-overview__items">
               <div class="short-overview__item row">
                 <div class="short-overview__item-name col-7">
-                    {{ item.product.name }}:
+                    {{ entry.product.name }}:
                 </div>
                 <div class="short-overview__item-price col-5">
-                  {{ item.totalPrice.formattedValue }}
+                  {{ entry.totalPrice.formattedValue }}
                 </div>
               </div>
             </div>
