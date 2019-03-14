@@ -38,22 +38,22 @@ export class ComparisonTableItemComponent implements OnInit {
             if (data) {
                 this.entriesArray = data.price.oneTimeChargeEntries.map(elem => {
                     // creating object with only product code and price/chargeInformation
+                    console.log(elem);
                     const value = elem.price.value !== 0 ? elem.price.formattedValue : elem.chargeInformation;
                     return {
                         billingCode: elem.billingTime.code,
                         chargeValue: value
                     };
                 });
+                // this.filterArray = this.entriesArray.filter(o1 => this.billingArray.some(o2 => o1.chargeValue === o2.billingCode));
                 this.filterArray = this.billingArray.map(element => {
                     // checking whether billingCode matches element from billingArray
                     const billingCodeArr = this.entriesArray.map(el => {
                         return el.billingCode;
                     }).indexOf(element);
-                    // if billingCode matches return its' pair chargeValue (either price or chargeInformation)
+                    // if billingCode matches return its' pair chargeValue
                     if (billingCodeArr > -1) {
                         return this.entriesArray[billingCodeArr].chargeValue;
-                    } else {
-                        return undefined;
                     }
                 });
             }

@@ -15,7 +15,9 @@
 }
 .products-prices {
     padding-right: 5px;
+    max-width: 200px;
     &__price-wrapper {
+        @include ellipsis;
         padding: 15px;
         &:nth-child(even) {
             background-color: transparent;

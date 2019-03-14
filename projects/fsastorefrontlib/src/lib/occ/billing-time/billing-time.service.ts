@@ -14,7 +14,7 @@ export class OccBillingTimeService {
     ) { }
 
     public getBillingTimes(productCodes: string[]): any {
-        const url = this.getBillingTimesEndPoint(productCodes);
+        const url = this.getBillingTimesEndPoint();
         const params = new HttpParams({
             fromString: 'productCodes=' + productCodes + FULL_PARAMS
         });
@@ -23,7 +23,7 @@ export class OccBillingTimeService {
             .pipe(catchError((error: any) => throwError(error.json())));
     }
 
-    protected getBillingTimesEndPoint(productCodes: string[]) {
+    protected getBillingTimesEndPoint() {
         const billingTimeEndpoint = '/billing-events';
         return (
             (this.config.server.baseUrl || '') +

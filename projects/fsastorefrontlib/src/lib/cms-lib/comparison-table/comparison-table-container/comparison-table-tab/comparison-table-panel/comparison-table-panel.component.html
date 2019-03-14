@@ -3,7 +3,7 @@
     <div class="product-grid-item">
       <div class="products-details"></div>
       <div class="products-prices">
-        <div *ngFor="let item of billingInfo.billingTimes" class="products-prices__price-wrapper">
+        <div *ngFor="let item of billingInfo.billingTimes" class="products-prices__price-wrapper" title="{{ item.name }}">
           {{ item.name }}
         </div>
       </div>
