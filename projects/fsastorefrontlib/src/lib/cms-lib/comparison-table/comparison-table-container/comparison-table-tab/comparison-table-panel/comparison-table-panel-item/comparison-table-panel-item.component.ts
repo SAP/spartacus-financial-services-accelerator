@@ -2,15 +2,15 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { ProductService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCartService } from '../../../../../../checkout/assets/services';
-import { FSProduct, OneTimeChargeEntry } from './../../../../../../occ-models';
+import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
 
 @Component({
-    selector: 'fsa-comparison-table-product-item',
-    templateUrl: './comparison-table-product-item.component.html',
-    styleUrls: ['./comparison-table-product-item.component.scss'],
+    selector: 'fsa-comparison-table-panel-item',
+    templateUrl: './comparison-table-panel-item.component.html',
+    styleUrls: ['./comparison-table-panel-item.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ComparisonTableItemComponent implements OnInit {
+export class ComparisonTablePanelItemComponent implements OnInit {
 
     @Input()
     productCode: string;

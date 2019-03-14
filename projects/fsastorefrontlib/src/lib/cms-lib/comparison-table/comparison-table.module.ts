@@ -8,7 +8,7 @@ import { ComparisonTableContainerComponent } from './comparison-table-container/
 // tslint:disable-next-line:max-line-length
 import { ComparisonTablePanelComponent } from './comparison-table-container/comparison-table-tab/comparison-table-panel/comparison-table-panel.component';
 // tslint:disable-next-line:max-line-length
-import { ComparisonTableItemComponent } from './comparison-table-container/comparison-table-tab/comparison-table-panel/comparison-table-product-item/comparison-table-product-item.component';
+import { ComparisonTablePanelItemComponent } from './comparison-table-container/comparison-table-tab/comparison-table-panel/comparison-table-panel-item/comparison-table-panel-item.component';
 import { ComparisonTableTabComponent } from './comparison-table-container/comparison-table-tab/comparison-table-tab.component';
 import { OccBillingTimeService } from '../../occ/billing-time/billing-time.service';
 
@@ -33,19 +33,19 @@ import { OccBillingTimeService } from '../../occ/billing-time/billing-time.servi
     ComparisonTableContainerComponent,
     ComparisonTableTabComponent,
     ComparisonTablePanelComponent,
-    ComparisonTableItemComponent
+    ComparisonTablePanelItemComponent
   ],
   exports: [
     ComparisonTableContainerComponent,
     ComparisonTableTabComponent,
     ComparisonTablePanelComponent,
-    ComparisonTableItemComponent
+    ComparisonTablePanelItemComponent
   ],
   entryComponents: [
     ComparisonTableContainerComponent,
     ComparisonTableTabComponent,
     ComparisonTablePanelComponent,
-    ComparisonTableItemComponent
+    ComparisonTablePanelItemComponent
   ],
   providers: [OccBillingTimeService]
 })
