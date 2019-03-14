@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { ProductService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCartService } from '../../../../../../checkout/assets/services';
-import { FSProduct } from '../../../../../../occ-models';
+import { FSProduct, OneTimeChargeEntry } from './../../../../../../occ-models';
 
 @Component({
     selector: 'fsa-comparison-table-product-item',
@@ -15,13 +15,10 @@ export class ComparisonTableItemComponent implements OnInit {
     @Input()
     productCode: string;
     @Input()
-    billingCode: any;
+    billingTimes: any;
 
     product$: Observable<FSProduct>;
-
-    entriesArray: any[] = [];
-    billingArray: any[] = [];
-    filterArray: any[] = [];
+    filterArray: OneTimeChargeEntry[] = [];
 
     constructor(
         protected productService: ProductService,
@@ -31,32 +28,14 @@ export class ComparisonTableItemComponent implements OnInit {
 
     ngOnInit() {
         this.product$ = this.productService.get(this.productCode);
-        this.billingArray = this.billingCode.map(el => {
-            return el.code;
-        });
         this.product$.subscribe(data => {
             if (data) {
-                this.entriesArray = data.price.oneTimeChargeEntries.map(elem => {
-                    // creating object with only product code and price/chargeInformation
-                    const value = elem.price.value !== 0 ? elem.price.formattedValue : elem.chargeInformation;
-                    return {
-                        billingCode: elem.billingTime.code,
-                        chargeValue: value
-                    };
-                });
-                this.filterArray = this.billingArray.map(element => {
-                    // checking whether billingCode matches element from billingArray
-                    const billingCodeArr = this.entriesArray.map(el => {
-                        return el.billingCode;
-                    }).indexOf(element);
-                    // if billingCode matches return its' pair chargeValue
-                    if (billingCodeArr > -1) {
-                        return this.entriesArray[billingCodeArr].chargeValue;
-                    }
+                this.filterArray = this.billingTimes.map(billingTime => {
+                    return data.price.oneTimeChargeEntries.find(entry => entry.billingTime.code === billingTime.code);
                 });
             }
-            return this.filterArray;
         });
+
     }
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {
         this.cartService.createCartAndStartBundle(productCode, bundleTemplateId, 1);

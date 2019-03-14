@@ -10,19 +10,25 @@
   </div>
   <div class="products-prices">
     <ng-container *ngFor="let item of filterArray">
-      <ng-container *ngIf="item !== undefined; else nada">
-        <div class="products-prices__price-wrapper">
-            {{ item }}
+      <div class="products-prices__price-wrapper">
+      <ng-container *ngIf="item !== undefined; else itemNotIncluded">
+        <div *ngIf="item.price?.value > 0 || item.chargeInformation; else itemIncluded" >
+            <ng-container *ngTemplateOutlet="itemValue context: {value: (item.price.value > 0 ? item.price.formattedValue : item.chargeInformation)}"></ng-container>
         </div>
       </ng-container>
+    </div>
     </ng-container>
   </div>
 </ng-container>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
 </ng-template>
-<ng-template #nada>
-    <div class="products-prices__price-wrapper">
+<ng-template #itemNotIncluded>
         <span class="FSA-icon icon-icon-FSA-remove"></span>
-    </div>
+</ng-template>
+<ng-template #itemIncluded>
+        <span class="FSA-icon icon-icon-FSA-ok"></span>
+</ng-template>
+<ng-template #itemValue let-value="value">
+      {{value}}
 </ng-template>
