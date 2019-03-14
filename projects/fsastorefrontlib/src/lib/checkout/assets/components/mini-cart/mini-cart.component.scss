@@ -9,6 +9,9 @@
     @include media-breakpoint-down(md) { 
         width: 100%;
     }
+    @include media-breakpoint-down(sm) { 
+        margin-top: 30px;
+    }
   }
   &__content {
     border: $border-grey;
