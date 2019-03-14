@@ -44,7 +44,6 @@ export class ComparisonTableItemComponent implements OnInit {
                         chargeValue: value
                     };
                 });
-                // this.filterArray = this.entriesArray.filter(o1 => this.billingArray.some(o2 => o1.chargeValue === o2.billingCode));
                 this.filterArray = this.billingArray.map(element => {
                     // checking whether billingCode matches element from billingArray
                     const billingCodeArr = this.entriesArray.map(el => {
