@@ -9,8 +9,6 @@ import { LogoutModule } from './logout/logout.module';
 import { CMSViewPoliciesComponent } from './view-policies/view-policies.component';
 import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
 
-
-
 @NgModule({
   imports: [
     CommonModule,
