@@ -13,12 +13,12 @@ export interface Mapping extends StandardCmsComponentConfig {
 }
 
 @Component({
-  selector: 'fsa-message-inbox',
-  templateUrl: './inbox-message.component.html',
-  styleUrls: ['./inbox-message.component.scss'],
+  selector: 'fsa-messages-inbox',
+  templateUrl: './inbox-messages.component.html',
+  styleUrls: ['./inbox-messages.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InboxMessageComponent implements OnInit {
+export class InboxMessagesComponent implements OnInit {
   constructor(
     protected componentData: CmsComponentData<CmsInboxComponent>,
     protected cmsService: CmsService,
