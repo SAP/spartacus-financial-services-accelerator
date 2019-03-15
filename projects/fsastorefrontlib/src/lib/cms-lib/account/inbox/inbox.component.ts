@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, ElementRef, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { CmsComponentMapping, CmsService, StandardCmsComponentConfig } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
@@ -23,29 +23,28 @@ export class InboxComponent implements OnInit {
     protected componentData: CmsComponentData<CmsInboxComponent>,
     protected cmsService: CmsService,
     protected inboxService: InboxService,
-    protected store: Store<fromStore.UserState>,
-    private elRef: ElementRef
+    protected store: Store<fromStore.UserState>
   ) {}
 
-  mainCheckboxChecked: Boolean = false;
+  @Output() changeCheckboxes = new EventEmitter();
   component$: Observable<CmsInboxComponent>;
+  messages$;
+  tabs;
   searchConfig: SearchConfig = {};
+  mainCheckboxChecked: Boolean = false;
   subjectSortOrder: string;
   contentSortOrder: string;
   sentSortOrder: string;
-  messages$;
-  tabs;
-  activeTabIndex = 0;
   activeGroupTitle: string;
   activeMessageGroup: string;
-  @Output() changeCheckboxes = new EventEmitter();
+  activeTabIndex = 0;
 
   ngOnInit() {
     this.subjectSortOrder = 'desc';
     this.contentSortOrder = 'desc';
     this.sentSortOrder = 'desc';
     this.component$ = this.componentData.data$;
-    this.component$.subscribe( data => this.tabs = this.splitArray(data.tabComponents));
+    this.component$.subscribe( data => this.tabs = data.tabComponents.split(' '));
     this.loadGroup('', this.searchConfig); // Temporary solution for loading default message group
     this.inboxService.activeGroupTitle.subscribe( title => this.activeGroupTitle = title);
     this.inboxService.activeMessageGroup.subscribe( messageGroup => this.activeMessageGroup = messageGroup);
@@ -53,12 +52,6 @@ export class InboxComponent implements OnInit {
   checkAllCheckboxes() {
     this.mainCheckboxChecked = !this.mainCheckboxChecked;
     this.changeCheckboxes.emit(this.mainCheckboxChecked);
-  }
-  setActiveGroupTitle(title) {
-    this.inboxService.setActiveGroupTitle(title);
-  }
-  setActiveTitle(title: string) {
-    this.activeGroupTitle = title;
   }
   sort(sortCode, sortOrder) {
     this.searchConfig.sortCode = sortCode;
@@ -70,9 +63,6 @@ export class InboxComponent implements OnInit {
   }
   onTabSelected(messageGroup) {
     this.loadGroup(messageGroup, this.searchConfig);
-  }
-  splitArray(arrayToSplit: string): string[] {
-    return arrayToSplit.split(' ');
   }
   loadGroup(group: string, searchConfig: SearchConfig) {
     this.inboxService.loadMessagesByMessageGroup(group, searchConfig);

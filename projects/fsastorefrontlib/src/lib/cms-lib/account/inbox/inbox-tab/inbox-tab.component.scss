@@ -6,7 +6,6 @@
 	flex-grow: 1;
 }
 .tab {
-	list-style: none;
 	flex-grow: 1;
 	cursor: pointer;
 	background-color: $color-light-grey;
@@ -39,7 +38,6 @@
 			background: $color-white;
 			padding: 10px 20px;
 			color: $color-dark-grey;
-			display: block;
 			&:hover {
 				background: $color-grey;
 				color: $color-dark-grey;

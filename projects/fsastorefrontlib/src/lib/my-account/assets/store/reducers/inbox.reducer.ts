@@ -8,7 +8,6 @@ export interface InboxState {
   message: any;
   read: boolean;
 }
-
 export const initialState: InboxState = {
   messages: {},
   refresh: false,
@@ -17,7 +16,6 @@ export const initialState: InboxState = {
   message: {},
   read: true
 };
-
 export function reducer(state = initialState, action: fromAction.MessageAction): InboxState {
   switch (action.type) {
     case fromAction.LOAD_MESSAGES_SUCCESS: {

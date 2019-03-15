@@ -42,7 +42,6 @@ export class LoadSingleMessageFail implements Action {
   constructor(public payload: any) {}
 }
 
-
 export class SetMessagesState implements Action {
   readonly type = SET_MESSAGES_STATE;
   constructor(public payload: any) {}

@@ -1,4 +1,4 @@
-import { Injectable, Optional } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
 import * as fromAction from '../store/actions';
@@ -37,19 +37,12 @@ export class InboxService {
   }
   selectedMessages(messageObject: MessageToSend) {
     const index = this.messagesCollection.map(function(e) { return e.messageUid; }).indexOf(messageObject.messageUid);
-    if ( index === -1) {
-      this.messagesCollection.push(messageObject);
-    } else {
-      this.messagesCollection.splice(index, 1);
-    }
-    console.log(this.messagesCollection);
+    index === -1 ? this.messagesCollection.push(messageObject) : this.messagesCollection.splice(index, 1);
   }
   getUidsFromMessagesCollection( meesagesCollecton) {
     const uids = [];
     meesagesCollecton.map(
-      function(messageObj) {
-        uids.push(messageObj.messageUid);
-      }
+      function(messageObj) {  uids.push(messageObj.messageUid); }
     );
     return uids;
   }
@@ -63,7 +56,7 @@ export class InboxService {
     return readStatus;
   }
   initMessages() {
-    this.store.pipe(select(fromSelector.getMessages)).subscribe(messages => {
+    this.store.pipe(select(fromSelector.getMessages)).subscribe( messages => {
       if (messages) {
         this.inboxData.messages = messages;
       }
@@ -72,43 +65,37 @@ export class InboxService {
         this.callback = null;
       }
     });
-
     this.auth.getUserToken().subscribe(userData => {
       if (this.inboxData.userId !== userData.userId) {
         this.inboxData.userId = userData.userId;
       }
     });
   }
-
   loadMessagesByMessageGroup(messageGroup: string, searchConfig: SearchConfig) {
-      this.store.dispatch(
-        new fromAction.LoadMessages({
-          userId: this.inboxData.userId,
-          messageGroup: messageGroup,
-          searchConfig: searchConfig
-        })
-      );
-    }
-
-    changeMessageListState() {
-      this.changeMessagesState(this.getUidsFromMessagesCollection(this.messagesCollection));
-    }
-
-    readMessage(messageId: string) {
-      this.changeSingleMessagesState(messageId);
-    }
-
-    changeSingleMessagesState(messsageGroupIds: string) {
-      this.store.dispatch(
-        new fromAction.LoadSingleMessage({
-          userId: this.inboxData.userId,
-          messagesUidList: messsageGroupIds,
-          read: this.getMessagesAction()
-        })
-      );
-    }
-  
-   changeMessagesState(messsageGroupIds: string[]) {
+    this.store.dispatch(
+      new fromAction.LoadMessages({
+        userId: this.inboxData.userId,
+        messageGroup: messageGroup,
+        searchConfig: searchConfig
+      })
+    );
+  }
+  changeMessageListState() {
+    this.changeMessagesState(this.getUidsFromMessagesCollection(this.messagesCollection));
+  }
+  readSingleMessage(messageId: string) {
+    this.changeSingleMessagesState(messageId);
+  }
+  changeSingleMessagesState(messsageGroupIds: string) {
+    this.store.dispatch(
+      new fromAction.LoadSingleMessage({
+        userId: this.inboxData.userId,
+        messagesUidList: messsageGroupIds,
+        read: this.getMessagesAction()
+      })
+    );
+  }
+  changeMessagesState(messsageGroupIds: string[]) {
     this.store.dispatch(
       new fromAction.SetMessagesState({
         userId: this.inboxData.userId,
@@ -123,5 +110,4 @@ export class InboxService {
     };
     this.messagesCollection = [];
   }
-
 }

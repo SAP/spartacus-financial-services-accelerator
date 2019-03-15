@@ -25,29 +25,29 @@ export class InboxMessageComponent implements OnInit {
     protected inboxService: InboxService,
     protected store: Store<fromStore.UserState>
   ) {}
-  checkAll: Boolean = false;
+
+  @Input() changeCheckboxes: Observable<boolean>;
   component$: Observable<CmsInboxComponent>;
   searchConfig: SearchConfig = {};
   messages$;
-  opened = false;
   activeMessageGroup;
-  @Input() changeCheckboxes: Observable<boolean>;
-
   messagesAction$;
+  checkAll: Boolean = false;
+  opened: Boolean = false;
 
   ngOnInit() {
     this.loadGroup('', this.searchConfig);
     this.messagesAction$ = this.changeCheckboxes;
-    this.inboxService.activeMessageGroup.subscribe(
-      messageGroup => { this.activeMessageGroup = messageGroup;
+    this.inboxService.activeMessageGroup.subscribe( messageGroup => {
+      this.activeMessageGroup = messageGroup;
       this.loadGroup(this.activeMessageGroup, this.searchConfig);
-      });
+    });
   }
-  readMessage(messageUid) {
-    this.inboxService.readMessage(messageUid);
+  readSingleMessage(messageUid) {
+    this.inboxService.readSingleMessage(messageUid);
   }
   loadGroup(group: string, searchConfig) {
-    this.inboxService.loadMessagesByMessageGroup(group, this.searchConfig);
+    this.inboxService.loadMessagesByMessageGroup(group, searchConfig);
     this.messages$ = this.store.pipe(select(fromStore.getMessages));
   }
   sendMessageState(readDate, messageUid) {

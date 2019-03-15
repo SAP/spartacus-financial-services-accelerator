@@ -13,15 +13,14 @@ export class OccInboxService {
   constructor(
     protected http: HttpClient,
     protected config: OccConfig
-    ) {}
+  ) {}
 
   protected getSiteMessagesEndpoint(userId: string, messageGroup: string, searchConfig?: SearchConfig) {
     let siteMessagesEndpoint = '/users/' + userId + '/notifications/sitemessages?fields=FULL';
-
-    if (searchConfig.sortCode && searchConfig.sortOrder) {
+    if ( searchConfig.sortCode && searchConfig.sortOrder ) {
       siteMessagesEndpoint += '&page=0&sortCode=' + searchConfig.sortCode + '&sortOrder=' + searchConfig.sortOrder;
     }
-    if (  messageGroup !== '') {
+    if ( messageGroup !== '' ) {
       siteMessagesEndpoint += '&messagegroup=' + messageGroup;
     }
     return (
@@ -44,7 +43,6 @@ export class OccInboxService {
   public getSiteMessagesForUserAndGroup(userId: string, messageGroup: string, searchConfig: SearchConfig): Observable<any> {
     const url = this.getSiteMessagesEndpoint(userId, messageGroup, searchConfig);
     const params = new HttpParams();
-
     return this.http
       .get(url, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
