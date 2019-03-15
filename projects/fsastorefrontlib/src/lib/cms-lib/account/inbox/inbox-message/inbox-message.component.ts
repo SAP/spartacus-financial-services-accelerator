@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { CmsComponentMapping, CmsService, StandardCmsComponentConfig } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
@@ -25,19 +25,26 @@ export class InboxMessageComponent implements OnInit {
     protected inboxService: InboxService,
     protected store: Store<fromStore.UserState>
   ) {}
-
+  checkAll: Boolean = false;
   component$: Observable<CmsInboxComponent>;
   searchConfig: SearchConfig = {};
   messages$;
   opened = false;
   activeMessageGroup;
+  @Input() changeCheckboxes: Observable<boolean>;
+
+  messagesAction$;
 
   ngOnInit() {
     this.loadGroup('', this.searchConfig);
+    this.messagesAction$ = this.changeCheckboxes;
     this.inboxService.activeMessageGroup.subscribe(
       messageGroup => { this.activeMessageGroup = messageGroup;
       this.loadGroup(this.activeMessageGroup, this.searchConfig);
       });
+  }
+  readMessage(messageUid) {
+    this.inboxService.readMessage(messageUid);
   }
   loadGroup(group: string, searchConfig) {
     this.inboxService.loadMessagesByMessageGroup(group, this.searchConfig);

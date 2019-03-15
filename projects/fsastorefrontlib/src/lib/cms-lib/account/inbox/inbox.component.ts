@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ElementRef, Output, EventEmitter } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { CmsComponentMapping, CmsService, StandardCmsComponentConfig, PaginationModel } from '@spartacus/core';
+import { CmsComponentMapping, CmsService, StandardCmsComponentConfig } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
 import { InboxService } from '../../../my-account/assets/services/inbox.service';
@@ -27,7 +27,7 @@ export class InboxComponent implements OnInit {
     private elRef: ElementRef
   ) {}
 
-  pagination: PaginationModel;
+  mainCheckboxChecked: Boolean = false;
   component$: Observable<CmsInboxComponent>;
   searchConfig: SearchConfig = {};
   subjectSortOrder: string;
@@ -38,6 +38,7 @@ export class InboxComponent implements OnInit {
   activeTabIndex = 0;
   activeGroupTitle: string;
   activeMessageGroup: string;
+  @Output() changeCheckboxes = new EventEmitter();
 
   ngOnInit() {
     this.subjectSortOrder = 'desc';
@@ -49,6 +50,10 @@ export class InboxComponent implements OnInit {
     this.inboxService.activeGroupTitle.subscribe( title => this.activeGroupTitle = title);
     this.inboxService.activeMessageGroup.subscribe( messageGroup => this.activeMessageGroup = messageGroup);
   }
+  checkAllCheckboxes() {
+    this.mainCheckboxChecked = !this.mainCheckboxChecked;
+    this.changeCheckboxes.emit(this.mainCheckboxChecked);
+  }
   setActiveGroupTitle(title) {
     this.inboxService.setActiveGroupTitle(title);
   }
@@ -59,6 +64,9 @@ export class InboxComponent implements OnInit {
     this.searchConfig.sortCode = sortCode;
     this.searchConfig.sortOrder = sortOrder;
     this.loadGroup(this.activeMessageGroup, this.searchConfig);
+  }
+  setMessagesState() {
+    this.inboxService.changeMessageListState();
   }
   onTabSelected(messageGroup) {
     this.loadGroup(messageGroup, this.searchConfig);

@@ -43,15 +43,38 @@ export class InboxEffects {
              read: this.inboxData.messageToSend.read
           };
         }
-        return this.inboxService.setMessagesState(payload.userId, payload.messageGroup, payload.searchConfig )
+        return this.inboxService.setMessagesState(payload.userId, payload.messagesUidList, payload.read )
           .pipe(
-            map((messages: any) => {
-              return new fromActions.LoadMessagesSuccess(messages);
+            map((response: any) => {
+              return new fromActions.SetMessagesStateSuccess(response);
             }),
-            catchError(error => of(new fromActions.LoadMessagesFail(error)))
+            catchError(error => of(new fromActions.SetMessagesStateError(error)))
           );
       })
   );
+
+  @Effect()
+  changeMessageState$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.LOAD_MESSAGE),
+    map((action: fromActions.LoadSingleMessage) => action.payload),
+    mergeMap(payload => {
+        if (payload === undefined || payload.userId === undefined) {
+          payload = {
+             userId: this.inboxData.userId,
+             message: this.inboxData.messages,
+             read: true
+          };
+        }
+        return this.inboxService.setMessagesState(payload.userId, payload.messagesUidList, payload.read )
+          .pipe(
+            map((response: any) => {
+              return new fromActions.LoadSingleMessageSuccess(response);
+            }),
+            catchError(error => of(new fromActions.LoadSingleMessageFail(error)))
+          );
+      })
+  );
+
   constructor(
     private actions$: Actions,
     private inboxService: OccInboxService,

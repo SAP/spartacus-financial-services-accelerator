@@ -11,10 +11,10 @@ export const getInboxState: MemoizedSelector<
   (inboxState: fromFeature.UserState) => inboxState.messages
 );
 
- export const getMessages: MemoizedSelector<any, any> = createSelector(
-   getInboxState,
-   fromInbox.getMessages
- );
+export const getMessages: MemoizedSelector<any, any> = createSelector(
+  getInboxState,
+  fromInbox.getMessages
+);
 
 export const  getInboxRefresh: MemoizedSelector<any, boolean> = createSelector(
   getInboxState,
@@ -25,4 +25,12 @@ export const getInboxsLoaded: MemoizedSelector<any, boolean> = createSelector(
   getInboxState,
   fromInbox.getLoaded
 );
+
+export const getSelectedMessages: MemoizedSelector<any, boolean> = createSelector(
+  getInboxState,
+  fromInbox.getMessagesUids,
+  fromInbox.getMessagesAction
+);
+
+
 

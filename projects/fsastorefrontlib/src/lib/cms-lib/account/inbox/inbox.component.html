@@ -11,12 +11,12 @@
                 </fsa-inbox-tab>
             </ul>
         </div>
-       <div class="FSA-icon icon-icon-FSA-envelope m-4"></div>
+       <div class="FSA-icon icon-icon-FSA-envelope m-4" (click)="setMessagesState()"></div>
         <div class="section-header__heading p-4 position-relative">
             <div class="row d-none d-md-flex">
                 <div class="col-1">
                     <label class="checkbox-label">
-                        <input type="checkbox" value="true">
+                        <input type="checkbox" value="true" (click)="checkAllCheckboxes()">
                         <span class="checkbox-text FSA-icon icon-icon-FSA-ok"></span>
                     </label>
                 </div>
@@ -67,6 +67,6 @@
                 </ul>
             </div>
         </div>
-        <fsa-message-inbox #message></fsa-message-inbox>
+        <fsa-message-inbox [changeCheckboxes]="changeCheckboxes"></fsa-message-inbox>
     </div> <!-- End of .center1400-->
 </ng-container>

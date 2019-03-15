@@ -4,11 +4,11 @@
             <div class="message border-bottom-grey" 
                 *ngFor="let message of messages.messages"
                 [ngClass]="{read: message.readDate}">
-                <div class="inbox-header clickable p-4" [ngClass]="{'active':message.opened}">
+                <div class="inbox-header clickable p-4" [ngClass]="{'active':message.opened}" (click)="!message.readDate ? readMessage(message.uid) : '' ">
                     <div class="row"  >
                         <div class="col-1">
                             <label class="checkbox-label">
-                                <input type="checkbox" value="true" (change)="sendMessageState(message.readDate, message.uid);">
+                                <input type="checkbox" [checked]="messagesAction$ | async" (change)="sendMessageState(message.readDate, message.uid);">
                                 <span class="checkbox-text FSA-icon icon-icon-FSA-ok"></span>
                             </label>
                         </div>
