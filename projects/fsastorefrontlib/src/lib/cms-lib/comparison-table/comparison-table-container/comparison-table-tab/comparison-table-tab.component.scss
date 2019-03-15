@@ -1,0 +1,14 @@
+@import 'mixins-fsa';
+@import 'variables-fsa';
+
+:host {
+    background-color: $color-light-grey;
+    display: flex;
+    flex: 0 1 100%;
+    border: $border-grey;
+    border-top: none;
+    padding: 0 10px;
+}
+.table-tab {
+    flex: 0 1 100%;
+}
