@@ -1,6 +1,6 @@
 <div class="products-wrapper d-flex justify-content-around mt-5 mb-2">
   <ng-container *ngIf="(component$ | async) as component">
-    <ngb-tabset>
+    <ngb-tabset [ngClass]="{'hide-tab-heading': getComparisonTabList().length === 1}">
       <ngb-tab *ngFor="let comparisonTabId of getComparisonTabList()" title="{{ comparisonTabId }}">
         <ng-template ngbTabContent>
           <ng-container
