@@ -1,6 +1,5 @@
 @import 'mixins-fsa';
 @import 'variables-fsa';
-@import '~bootstrap/scss/mixins/breakpoints';
 
 .section-header__heading {
 	text-align: left;
@@ -11,7 +10,7 @@
 		top: 4px;
 		@include transition;
 		&.rotate {
-			transform: rotate(180deg);
+			transform: rotateZ(180deg);
 			-webkit-transform: rotateZ(180deg);
 		}
 	}
@@ -48,15 +47,12 @@
 		display: flex;
 	} 
 }
-.ellipsis {
-	@include ellipsis;
-}
 ul, li {
 	list-style:none;
 	margin: 0;
 	padding: 0;
 }
-.icon-icon-FSA-envelope {
+.icon-FSA-envelope {
 	color: $color-blue;
 	font-size: 20px;
 	cursor: pointer;

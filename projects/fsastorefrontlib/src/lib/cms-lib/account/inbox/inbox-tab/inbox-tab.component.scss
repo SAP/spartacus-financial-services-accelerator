@@ -3,7 +3,7 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 
 :host {
-	flex-grow: 1;
+	flex: 0 1 100%;
 }
 .tab {
 	flex-grow: 1;

@@ -28,7 +28,7 @@ export class InboxService {
   activeSortingFilter = this.activeSortingFilterSource.asObservable();
   messagesCollection: MessageToSend[] = [];
   protected callback: Function;
-
+  niz: any[] = [];
   setActiveGroupTitle( title: string ) {
     this.activeGroupTitleSource.next(title);
   }
@@ -41,8 +41,8 @@ export class InboxService {
   }
   getUidsFromMessagesCollection( meesagesCollecton) {
     const uids = [];
-    meesagesCollecton.map(
-      function(messageObj) {  uids.push(messageObj.messageUid); }
+    meesagesCollecton.map( messageObj =>
+      uids.push(messageObj.messageUid)
     );
     return uids;
   }

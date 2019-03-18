@@ -31,18 +31,15 @@ export class InboxComponent implements OnInit {
   messages$;
   tabs;
   searchConfig: SearchConfig = {};
-  mainCheckboxChecked: Boolean = false;
-  subjectSortOrder: string;
-  contentSortOrder: string;
-  sentSortOrder: string;
+  mainCheckboxChecked = false;
   activeGroupTitle: string;
   activeMessageGroup: string;
   activeTabIndex = 0;
+  subjectSortOrder = 'desc';
+  contentSortOrder = 'desc';
+  sentSortOrder = 'desc';
 
   ngOnInit() {
-    this.subjectSortOrder = 'desc';
-    this.contentSortOrder = 'desc';
-    this.sentSortOrder = 'desc';
     this.component$ = this.componentData.data$;
     this.component$.subscribe( data => this.tabs = data.tabComponents.split(' '));
     this.loadGroup('', this.searchConfig); // Temporary solution for loading default message group
@@ -53,12 +50,12 @@ export class InboxComponent implements OnInit {
     this.mainCheckboxChecked = !this.mainCheckboxChecked;
     this.changeCheckboxes.emit(this.mainCheckboxChecked);
   }
-  sort(sortCode, sortOrder) {
+  sortMessages(sortCode, sortOrder) {
     this.searchConfig.sortCode = sortCode;
     this.searchConfig.sortOrder = sortOrder;
     this.loadGroup(this.activeMessageGroup, this.searchConfig);
   }
-  setMessagesState() {
+  changeMessagesReadState() {
     this.inboxService.changeMessageListState();
   }
   onTabSelected(messageGroup) {

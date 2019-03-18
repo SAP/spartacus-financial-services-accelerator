@@ -3,10 +3,10 @@ import { select, Store } from '@ngrx/store';
 import { CmsComponentMapping, CmsService, StandardCmsComponentConfig } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
-import { InboxService } from '../../../../my-account/assets/services/inbox.service';
-import * as fromStore from '../../../../my-account/assets/store';
-import { CmsInboxComponent } from './../../../../occ-models/cms-component.models';
-import { SearchConfig } from '../../../../my-account/assets/services/inbox-data.service';
+import { InboxService } from '../../../../../my-account/assets/services/inbox.service';
+import * as fromStore from '../../../../../my-account/assets/store';
+import { CmsInboxComponent } from './../../../../../occ-models/cms-component.models';
+import { SearchConfig } from '../../../../../my-account/assets/services/inbox-data.service';
 
 export interface Mapping extends StandardCmsComponentConfig {
   CMSInboxTabComponent?: CmsComponentMapping;
@@ -29,11 +29,10 @@ export class InboxMessagesComponent implements OnInit {
   @Input() changeCheckboxes: Observable<boolean>;
   component$: Observable<CmsInboxComponent>;
   searchConfig: SearchConfig = {};
-  messages$;
+  messagesObject$;
   activeMessageGroup;
   messagesAction$;
-  checkAll: Boolean = false;
-  opened: Boolean = false;
+  opened = false;
 
   ngOnInit() {
     this.loadGroup('', this.searchConfig);
@@ -48,7 +47,7 @@ export class InboxMessagesComponent implements OnInit {
   }
   loadGroup(group: string, searchConfig) {
     this.inboxService.loadMessagesByMessageGroup(group, searchConfig);
-    this.messages$ = this.store.pipe(select(fromStore.getMessages));
+    this.messagesObject$ = this.store.pipe(select(fromStore.getMessages));
   }
   sendMessageState(readDate, messageUid) {
     const messageObj = {

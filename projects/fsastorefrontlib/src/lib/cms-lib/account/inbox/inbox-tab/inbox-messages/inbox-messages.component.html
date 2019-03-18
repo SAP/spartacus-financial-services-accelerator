@@ -1,24 +1,24 @@
 <div class="messages">
-    <ng-container *ngIf="messages$ | async as messages">
-        <ng-container *ngIf="messages.messages?.length !== 0; else noMessages">
+    <ng-container *ngIf="messagesObject$ | async as messagesObj">
+        <ng-container *ngIf="messagesObj.messages?.length !== 0; else noMessages">
             <div class="message border-bottom-grey" 
-                *ngFor="let message of messages.messages"
+                *ngFor="let message of messagesObj.messages"
                 [ngClass]="{read: message.readDate}">
                 <div class="inbox-header clickable p-4" [ngClass]="{'active':message.opened}" (click)="!message.readDate ? readSingleMessage(message.uid) : '' ">
                     <div class="row"  >
                         <div class="col-1">
                             <label class="checkbox-label">
                                 <input type="checkbox" [checked]="messagesAction$ | async" (change)="sendMessageState(message.readDate, message.uid);">
-                                <span class="checkbox-text FSA-icon icon-icon-FSA-ok"></span>
+                                <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
                             </label>
                         </div>
-                        <div class="col-6 col-md-3 ellipsis" (click)="message.opened=!message.opened">
+                        <div class="col-6 col-md-3 text-truncate" (click)="message.opened=!message.opened">
                             {{ message.title }}
                         </div>
-                        <div class="col-md-6 d-none d-md-block ellipsis" (click)="message.opened=!message.opened">
+                        <div class="col-md-6 d-none d-md-block text-truncate" (click)="message.opened=!message.opened">
                             {{ message.content }}
                         </div>
-                        <div class="col-4 col-md-2 ellipsis cursor-default">
+                        <div class="col-4 col-md-2 text-truncate cursor-default">
                             {{ message.sentDate }}
                         </div>
                     </div>

@@ -6,39 +6,39 @@
                 <fsa-inbox-tab 
                     *ngFor="let tab of tabs; let i=index;"
                     (click)="activeTabIndex=i" 
-                    [chosen]="i == activeTabIndex"
+                    [currentTab]="i === activeTabIndex"
                     [tabId]="tab">
                 </fsa-inbox-tab>
             </ul>
         </div>
-       <div class="FSA-icon icon-icon-FSA-envelope m-4" (click)="setMessagesState()"></div>
+       <div class="FSA-icon icon-FSA-envelope m-4" (click)="changeMessagesReadState()"></div>
         <div class="section-header__heading p-4 position-relative">
             <div class="row d-none d-md-flex">
                 <div class="col-1">
                     <label class="checkbox-label">
                         <input type="checkbox" value="true" (click)="checkAllCheckboxes()">
-                        <span class="checkbox-text FSA-icon icon-icon-FSA-ok"></span>
+                        <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
                     </label>
                 </div>
                 <div class="col-3">
                     Subject
-                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"
-                        (click)="subjectSortOrder = (subjectSortOrder == 'desc' ? 'asc' : 'desc'); sort('subject', subjectSortOrder);"
-                        [ngClass]="subjectSortOrder == 'asc' ? 'rotate' : '' "
+                    <span class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
+                        (click)="subjectSortOrder = (subjectSortOrder === 'desc' ? 'asc' : 'desc'); sortMessages('subject', subjectSortOrder);"
+                        [ngClass]="subjectSortOrder === 'asc' ? 'rotate' : '' "
                     > </span>
                 </div>
                 <div class="col-6">
                     Preview
-                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"
-                        (click)="contentSortOrder = (contentSortOrder == 'desc' ? 'asc' : 'desc'); sort('title', contentSortOrder);"
-                        [ngClass]="contentSortOrder == 'asc' ? 'rotate' : '' "
+                    <span class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
+                        (click)="contentSortOrder = (contentSortOrder === 'desc' ? 'asc' : 'desc'); sortMessages('title', contentSortOrder);"
+                        [ngClass]="contentSortOrder === 'asc' ? 'rotate' : '' "
                     ></span>
                 </div>
                 <div class="col-2">
                     Date
-                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"
-                        (click)="sentSortOrder = (sentSortOrder == 'desc' ? 'asc' : 'desc'); sort('sentdate', sentSortOrder);"
-                        [ngClass]="sentSortOrder == 'asc' ? 'rotate' : '' "
+                    <span class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
+                        (click)="sentSortOrder = (sentSortOrder === 'desc' ? 'asc' : 'desc'); sortMessages('sentdate', sentSortOrder);"
+                        [ngClass]="sentSortOrder === 'asc' ? 'rotate' : '' "
                     ></span>
                 </div>
             </div>
@@ -46,14 +46,14 @@
                 <div class="col-1">
                     <label class="checkbox-label">
                         <input type="checkbox" value="true">
-                        <span class="checkbox-text FSA-icon icon-icon-FSA-ok"></span>
+                        <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
                     </label>
                 </div>
                 <div class="col-10 text-center" (click)="shouldShow = !shouldShow">
                     {{ activeGroupTitle }}
                 </div>
                 <div class="col-1">
-                    <span class="filter position-absolute FSA-icon icon-icon-FSA-triangle-bottom"></span>
+                    <span class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"></span>
                 </div>
             </div>
             <div class="select d-md-none" [ngClass]="{opened: shouldShow, '': !shouldShow}">
@@ -61,7 +61,7 @@
                     <fsa-inbox-tab 
                         *ngFor="let tab of tabs; let i=index;"  
                         (click)="activeTabIndex=i; shouldShow=false" 
-                        [chosen]="i == activeTabIndex"
+                        [currentTab]="i === activeTabIndex"
                         [tabId]="tab">
                     </fsa-inbox-tab>
                 </ul>

@@ -54,7 +54,7 @@ export class InboxEffects {
   );
 
   @Effect()
-  changeMessageState$: Observable<any> = this.actions$.pipe(
+  changeMessagesReadState$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.LOAD_MESSAGE),
     map((action: fromActions.LoadSingleMessage) => action.payload),
     mergeMap(payload => {

@@ -11,6 +11,9 @@ import { InboxService } from '../../../../my-account/assets/services/inbox.servi
 
 export class InboxTabComponent implements OnInit {
   @Input() tabId: string;
+  @Input() set currentTab(currentTab: boolean) {
+    this.active = currentTab ? true : false;
+  }
   component$;
   active;
   activeGroupTitle: string;
@@ -26,9 +29,5 @@ export class InboxTabComponent implements OnInit {
   onTabClicked(messageGroup, title) {
     this.inboxService.setActiveGroupTitle(title);
     this.inboxService.setActiveMessageGroup(messageGroup);
-  }
-  @Input()
-  set chosen(chosen: boolean) {
-    this.active = chosen ? true : false;
   }
 }

@@ -5,7 +5,6 @@ export interface InboxState {
   refresh: boolean;
   loaded: boolean;
   messageUids: Array<string>;
-  message: any;
   read: boolean;
 }
 export const initialState: InboxState = {
@@ -13,7 +12,6 @@ export const initialState: InboxState = {
   refresh: false,
   loaded: false,
   messageUids: [],
-  message: {},
   read: true
 };
 export function reducer(state = initialState, action: fromAction.MessageAction): InboxState {
@@ -39,14 +37,12 @@ export function reducer(state = initialState, action: fromAction.MessageAction):
       const message = { ...action.payload };
       return {
         ...state,
-        message,
         refresh: true,
         loaded: true
       };
   }
   }
   return state;
-
 }
 
 export const getMessages = (state: InboxState) => state.messages;
