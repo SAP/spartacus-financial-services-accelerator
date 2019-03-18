@@ -39,8 +39,8 @@ export class InboxEffects {
         if (payload === undefined || payload.userId === undefined) {
           payload = {
              userId: this.inboxData.userId,
-             messagesUidList: this.inboxData.messageToSend.messagesUid,
-             read: this.inboxData.messageToSend.read
+             messagesUidList: this.inboxData.MessagesCollection.messagesUid,
+             read: this.inboxData.MessagesCollection.read
           };
         }
         return this.inboxService.setMessagesState(payload.userId, payload.messagesUidList, payload.read )

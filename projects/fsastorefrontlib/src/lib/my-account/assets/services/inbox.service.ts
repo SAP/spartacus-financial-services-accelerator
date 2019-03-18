@@ -6,8 +6,8 @@ import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
 import { InboxDataService } from './inbox-data.service';
 import { BehaviorSubject } from 'rxjs';
-import { SearchConfig } from '../services/inbox-data.service';
-import { MessageToSend } from '../services/inbox-data.service';
+import { FSSearchConfig } from '../services/inbox-data.service';
+import { Message } from '../services/inbox-data.service';
 
 
 @Injectable()
@@ -26,7 +26,7 @@ export class InboxService {
   activeGroupTitle = this.activeGroupTitleSource.asObservable();
   activeMessageGroup = this.activeMessageGroupSource.asObservable();
   activeSortingFilter = this.activeSortingFilterSource.asObservable();
-  messagesCollection: MessageToSend[] = [];
+  messagesCollection: Message[] = [];
   protected callback: Function;
   niz: any[] = [];
   setActiveGroupTitle( title: string ) {
@@ -35,7 +35,7 @@ export class InboxService {
   setActiveMessageGroup( messageGroup: string ) {
     this.activeMessageGroupSource.next(messageGroup);
   }
-  selectedMessages(messageObject: MessageToSend) {
+  selectedMessages(messageObject: Message ) {
     const index = this.messagesCollection.map(function(e) { return e.messageUid; }).indexOf(messageObject.messageUid);
     index === -1 ? this.messagesCollection.push(messageObject) : this.messagesCollection.splice(index, 1);
   }
@@ -71,7 +71,7 @@ export class InboxService {
       }
     });
   }
-  loadMessagesByMessageGroup(messageGroup: string, searchConfig: SearchConfig) {
+  loadMessagesByMessageGroup(messageGroup: string, searchConfig: FSSearchConfig) {
     this.store.dispatch(
       new fromAction.LoadMessages({
         userId: this.inboxData.userId,

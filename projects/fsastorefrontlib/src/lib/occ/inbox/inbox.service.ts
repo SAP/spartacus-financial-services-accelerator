@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { OccConfig } from '@spartacus/core';
-import { SearchConfig } from '../../my-account/assets/services/inbox-data.service';
+import { FSSearchConfig } from '../../my-account/assets/services/inbox-data.service';
 
 const FULL_PARAMS = '&fields=FULL';
 
@@ -15,7 +15,7 @@ export class OccInboxService {
     protected config: OccConfig
   ) {}
 
-  protected getSiteMessagesEndpoint(userId: string, messageGroup: string, searchConfig?: SearchConfig) {
+  protected getSiteMessagesEndpoint(userId: string, messageGroup: string, searchConfig?: FSSearchConfig) {
     let siteMessagesEndpoint = '/users/' + userId + '/notifications/sitemessages?fields=FULL';
     if ( searchConfig.sortCode && searchConfig.sortOrder ) {
       siteMessagesEndpoint += '&page=0&sortCode=' + searchConfig.sortCode + '&sortOrder=' + searchConfig.sortOrder;
@@ -40,7 +40,7 @@ export class OccInboxService {
     );
   }
 
-  public getSiteMessagesForUserAndGroup(userId: string, messageGroup: string, searchConfig: SearchConfig): Observable<any> {
+  public getSiteMessagesForUserAndGroup(userId: string, messageGroup: string, searchConfig: FSSearchConfig): Observable<any> {
     const url = this.getSiteMessagesEndpoint(userId, messageGroup, searchConfig);
     const params = new HttpParams();
     return this.http

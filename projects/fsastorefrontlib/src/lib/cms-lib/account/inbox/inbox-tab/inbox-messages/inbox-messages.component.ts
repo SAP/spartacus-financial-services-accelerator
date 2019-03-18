@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { InboxService } from '../../../../../my-account/assets/services/inbox.service';
 import * as fromStore from '../../../../../my-account/assets/store';
 import { CmsInboxComponent } from './../../../../../occ-models/cms-component.models';
-import { SearchConfig } from '../../../../../my-account/assets/services/inbox-data.service';
+import { FSSearchConfig } from '../../../../../my-account/assets/services/inbox-data.service';
 
 export interface Mapping extends StandardCmsComponentConfig {
   CMSInboxTabComponent?: CmsComponentMapping;
@@ -28,7 +28,7 @@ export class InboxMessagesComponent implements OnInit {
 
   @Input() changeCheckboxes: Observable<boolean>;
   component$: Observable<CmsInboxComponent>;
-  searchConfig: SearchConfig = {};
+  searchConfig: FSSearchConfig = {};
   messagesObject$;
   activeMessageGroup;
   messagesAction$;

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { InboxService } from '../../../my-account/assets/services/inbox.service';
 import * as fromStore from '../../../my-account/assets/store';
 import { CmsInboxComponent } from './../../../occ-models/cms-component.models';
-import { SearchConfig } from '../../../my-account/assets/services/inbox-data.service';
+import { FSSearchConfig } from '../../../my-account/assets/services/inbox-data.service';
 
 export interface Mapping extends StandardCmsComponentConfig {
   CMSInboxTabComponent?: CmsComponentMapping;
@@ -30,7 +30,7 @@ export class InboxComponent implements OnInit {
   component$: Observable<CmsInboxComponent>;
   messages$;
   tabs;
-  searchConfig: SearchConfig = {};
+  searchConfig: FSSearchConfig = {};
   mainCheckboxChecked = false;
   activeGroupTitle: string;
   activeMessageGroup: string;
@@ -61,7 +61,7 @@ export class InboxComponent implements OnInit {
   onTabSelected(messageGroup) {
     this.loadGroup(messageGroup, this.searchConfig);
   }
-  loadGroup(group: string, searchConfig: SearchConfig) {
+  loadGroup(group: string, searchConfig: FSSearchConfig) {
     this.inboxService.loadMessagesByMessageGroup(group, searchConfig);
     this.messages$ = this.store.pipe(select(fromStore.getMessages));
   }
