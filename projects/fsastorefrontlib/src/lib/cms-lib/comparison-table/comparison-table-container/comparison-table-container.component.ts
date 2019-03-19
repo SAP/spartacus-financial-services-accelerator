@@ -1,30 +1,34 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { CmsComponentData } from '@spartacus/storefront';
-import { CmsMultiComparisonTabContainer } from '../../../occ-models';
+import { ComparisonTableService } from '../comparison-table.service';
+import { CmsService } from '@spartacus/core';
+import { Observable } from 'rxjs';
+import { CMSComparisonTabComponent } from '../../../occ-models';
 
 @Component({
   selector: 'fsa-comparison-table-container',
   templateUrl: './comparison-table-container.component.html',
   styleUrls: ['./comparison-table-container.component.scss'],
+  providers: [ComparisonTableService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
+
 export class ComparisonTableContainerComponent implements OnInit {
   constructor(
-    protected componentData: CmsComponentData<CmsMultiComparisonTabContainer>
-  ) {
-  }
+    protected comparisonTableService: ComparisonTableService,
+    protected cmsService: CmsService
+  ) {}
 
-  component$: Observable<CmsMultiComparisonTabContainer>;
-  comparisonTabList: string[];
+  component$;
 
   ngOnInit() {
-    this.component$ = this.componentData.data$;
+    this.component$ = this.comparisonTableService.getComponentData().data$;
   }
-  getComparisonTabList(): string[] {
-    this.component$.subscribe(data => {
-      this.comparisonTabList = data.simpleCMSComponents.split(' ');
-    });
-    return this.comparisonTabList;
+
+  getTabList(): string[] {
+    return this.comparisonTableService.getComparisonTabList(this.component$);
+  }
+
+  getTabTitles(): string[] {
+    return this.comparisonTableService.getTabNames(this.component$);
   }
 }
