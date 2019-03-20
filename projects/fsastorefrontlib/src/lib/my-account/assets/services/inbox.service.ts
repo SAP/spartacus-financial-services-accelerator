@@ -46,7 +46,7 @@ export class InboxService {
     );
     return uids;
   }
-  getMessagesAction(): Boolean {
+  getMessagesAction(): boolean {
     let readStatus = true;
     this.messagesCollection.map(function(message) {
       if (message.readDate) {

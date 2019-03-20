@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { CmsComponentMapping, CmsService, StandardCmsComponentConfig } from '@spartacus/core';
+import { CmsComponentMapping, StandardCmsComponentConfig } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
 import { InboxService } from '../../../../../my-account/assets/services/inbox.service';
@@ -21,7 +21,6 @@ export interface Mapping extends StandardCmsComponentConfig {
 export class InboxMessagesComponent implements OnInit {
   constructor(
     protected componentData: CmsComponentData<CmsInboxComponent>,
-    protected cmsService: CmsService,
     protected inboxService: InboxService,
     protected store: Store<fromStore.UserState>
   ) {}
