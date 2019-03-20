@@ -3,16 +3,20 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 
 :host {
-	flex-grow: 1;
+	flex: 0 1 100%;
 }
 .tab {
-	list-style: none;
 	flex-grow: 1;
+	cursor: pointer;
 	background-color: $color-light-grey;
 	margin-right: 5px;
 	border: 1px solid $color-grey;
 	border-bottom: none;
 	text-align: center;
+	@include media-breakpoint-down(sm) {
+		border-top: none;
+		margin-right: 0;
+	}
 	a {
 		@include transition;
 		border-top: 4px solid transparent;
@@ -25,12 +29,27 @@
 			background-color: $color-white;
 			color: $color-semi-dark-grey;
 		}
-	}
-	&.active {
-		a {
+		&.active {
 			border-top: 4px solid $color-cart-top-border;
 			background-color: transparent;
 			color: $color-dark-grey;
 		}
+		@include media-breakpoint-down(sm) {
+			background: $color-white;
+			padding: 10px 20px;
+			color: $color-dark-grey;
+			&:hover {
+				background: $color-grey;
+				color: $color-dark-grey;
+			}
+			&.active {
+				border-top: none;
+			}
+		}
 	}
+}
+ul, li {
+	list-style:none;
+	margin: 0;
+	padding: 0;
 }

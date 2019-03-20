@@ -5,13 +5,11 @@ export interface InboxState {
   refresh: boolean;
   loaded: boolean;
 }
-
 export const initialState: InboxState = {
   messages: {},
   refresh: false,
   loaded: false
 };
-
 export function reducer(state = initialState, action: fromAction.MessageAction): InboxState {
   switch (action.type) {
     case fromAction.LOAD_MESSAGES_SUCCESS: {
@@ -23,8 +21,15 @@ export function reducer(state = initialState, action: fromAction.MessageAction):
         loaded: true
       };
     }
+    case fromAction.SET_MESSAGES_STATE_SUCCESS: {
+      const messages = { ...action.payload };
+      return {
+        ...state,
+        messages,
+        refresh: true
+      };
+    }
   }
-
   return state;
 }
 
