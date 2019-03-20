@@ -34,7 +34,6 @@ export class InboxMessagesComponent implements OnInit {
   opened = false;
 
   ngOnInit() {
-    this.loadGroup('', this.searchConfig);
     this.messagesAction$ = this.changeCheckboxes;
     this.inboxService.activeMessageGroup.subscribe( messageGroup => {
       this.activeMessageGroup = messageGroup;
