@@ -11,7 +11,7 @@ export interface FSSearchConfig extends SearchConfig {
   sortOrder?: string;
 }
 export interface MessagesCollection {
-  messagesUid?: Message[];
+  messages?: Message[];
   read?: boolean;
 }
 @Injectable()
@@ -40,11 +40,11 @@ export class InboxDataService {
     return this._searchConfig;
   }
 
-  set MessagesCollection(val) {
+  set messagesCollection(val) {
     this._messagesCollection = val;
   }
 
-  get MessagesCollection(): MessagesCollection {
+  get messagesCollection(): MessagesCollection {
     return this._messagesCollection;
   }
 
