@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CategoryPageComponent, CmsPageGuards, PageLayoutModule } from '@spartacus/storefront';
+import {  CmsPageGuard, PageLayoutModule, PageLayoutComponent } from '@spartacus/storefront';
 
 const routes: Routes = [
   {
     path: null,
-    canActivate: [CmsPageGuards],
-    component: CategoryPageComponent,
+    canActivate: [CmsPageGuard],
+    component: PageLayoutComponent,
     data: { cxPath: 'category' }
   },
   {
