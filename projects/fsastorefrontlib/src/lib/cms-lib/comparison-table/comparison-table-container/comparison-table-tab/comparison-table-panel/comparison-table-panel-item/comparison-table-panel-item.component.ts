@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ComparisonTableService } from '../../../../comparison-table.service';
 
 @Component({
@@ -20,8 +20,8 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     ) {
     }
 
-    product$ = this.comparisonTableService.productFS;
-    panelItemEntries = this.comparisonTableService.panelItemEntries;
+    product$ = this.comparisonTableService.getProductFS();
+    panelItemEntries = this.comparisonTableService.getPanelItemEntries();
 
     ngOnInit() {
         this.product$ = this.comparisonTableService.getProductData(this.productCode);
@@ -35,30 +35,6 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     }
 
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {
-        this.comparisonTableService.cartService.createCartAndStartBundle(productCode, bundleTemplateId, 1);
+        this.comparisonTableService.getCartServiceFS().createCartAndStartBundle(productCode, bundleTemplateId, 1);
     }
-
-    // product$: Observable<FSProduct>;
-    // panelItemEntries: OneTimeChargeEntry[] = [];
-
-    // constructor(
-    //     protected productService: ProductService,
-    //     protected cartService: FSCartService
-    // ) {
-    // }
-
-    // ngOnInit() {
-    //     this.product$ = this.productService.get(this.productCode);
-    //     this.product$.subscribe(data => {
-    //         if (data) {
-    //             this.panelItemEntries = this.billingTimes.map(billingTime => {
-    //                 return data.price.oneTimeChargeEntries.find(entry => entry.billingTime.code === billingTime.code);
-    //             });
-    //         }
-    //     });
-    // }
-
-    // createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {
-    //     this.cartService.createCartAndStartBundle(productCode, bundleTemplateId, 1);
-    // }
 }

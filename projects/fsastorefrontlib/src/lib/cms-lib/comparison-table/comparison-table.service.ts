@@ -11,19 +11,30 @@ export class ComparisonTableService {
 
   constructor(
     private componentData: CmsComponentData<CmsMultiComparisonTabContainer>,
-    public productService: ProductService,
-    public cartService: FSCartService,
-    protected cmsService: CmsService
+    private productService: ProductService,
+    private cartServiceFS: FSCartService,
+    private cmsService: CmsService
   ) {}
 
   private comparisonTabList: string[];
-  public productFS: Observable<FSProduct>;
-  public panelItemEntries: OneTimeChargeEntry[] = [];
-  protected components: Array<Observable<CMSComparisonTabComponent>> = [];
-  protected cmsComponentTab: Observable<CMSComparisonTabComponent>;
+  private productFS: Observable<FSProduct>;
+  private panelItemEntries: OneTimeChargeEntry[] = [];
+  private cmsComponentTab: Observable<CMSComparisonTabComponent>;
 
   getComponentData() {
     return this.componentData;
+  }
+
+  getCartServiceFS() {
+    return this.cartServiceFS;
+  }
+
+  getProductFS() {
+    return this.productFS;
+  }
+
+  getPanelItemEntries() {
+    return this.panelItemEntries;
   }
 
   getComparisonTabList(component: Observable<CmsMultiComparisonTabContainer>): string[] {
