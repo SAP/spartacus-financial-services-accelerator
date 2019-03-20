@@ -52,28 +52,6 @@ export class InboxEffects {
           );
       })
   );
-
-  @Effect()
-  changeMessagesReadState$: Observable<any> = this.actions$.pipe(
-    ofType(fromActions.LOAD_MESSAGE),
-    map((action: fromActions.LoadSingleMessage) => action.payload),
-    mergeMap(payload => {
-        if (payload === undefined || payload.userId === undefined) {
-          payload = {
-             userId: this.inboxData.userId,
-             read: true
-          };
-        }
-        return this.inboxService.setMessagesState(payload.userId, payload.messagesUidList, payload.read )
-          .pipe(
-            map((response: any) => {
-              return new fromActions.LoadSingleMessageSuccess(response);
-            }),
-            catchError(error => of(new fromActions.LoadSingleMessageFail(error)))
-          );
-      })
-  );
-
   constructor(
     private actions$: Actions,
     private inboxService: OccInboxService,

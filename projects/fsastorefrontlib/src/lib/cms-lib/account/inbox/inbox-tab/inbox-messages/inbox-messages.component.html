@@ -4,7 +4,7 @@
             <div class="message border-bottom-grey" 
                 *ngFor="let message of messagesObj.messages"
                 [ngClass]="{read: message.readDate}">
-                <div class="inbox-header clickable p-4" [ngClass]="{'active':message.opened}" (click)="!message.readDate ? readSingleMessage(message.uid) : '' ">
+                <div class="inbox-header clickable p-4" [ngClass]="{'active':message.opened}">
                     <div class="row"  >
                         <div class="col-1">
                             <label class="checkbox-label">

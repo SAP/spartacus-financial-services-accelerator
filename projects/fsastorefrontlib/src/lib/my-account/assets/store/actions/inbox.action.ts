@@ -27,21 +27,6 @@ export class LoadMessagesFail implements Action {
   constructor(public payload: any) {}
 }
 
-export class LoadSingleMessage implements Action {
-  readonly type = LOAD_MESSAGE;
-  constructor(public payload: any) {}
-}
-
-export class LoadSingleMessageSuccess implements Action {
-  readonly type = LOAD_MESSAGE_SUCCESS;
-  constructor(public payload: any) {}
-}
-
-export class LoadSingleMessageFail implements Action {
-  readonly type = LOAD_MESSAGE_FAIL;
-  constructor(public payload: any) {}
-}
-
 export class SetMessagesState implements Action {
   readonly type = SET_MESSAGES_STATE;
   constructor(public payload: any) {}
@@ -61,9 +46,6 @@ export type MessageAction =
   | LoadMessages
   | LoadMessagesSuccess
   | LoadMessagesFail
-  | LoadSingleMessage
-  | LoadSingleMessageSuccess
-  | LoadSingleMessageFail
   | SetMessagesState
   | SetMessagesStateSuccess
   | SetMessagesStateError;

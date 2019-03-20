@@ -28,7 +28,7 @@ export class InboxService {
   activeSortingFilter = this.activeSortingFilterSource.asObservable();
   messagesCollection: Message[] = [];
   protected callback: Function;
-  niz: any[] = [];
+
   setActiveGroupTitle( title: string ) {
     this.activeGroupTitleSource.next(title);
   }
@@ -82,18 +82,6 @@ export class InboxService {
   }
   changeMessageListState() {
     this.changeMessagesState(this.getUidsFromMessagesCollection(this.messagesCollection));
-  }
-  readSingleMessage(messageId: string) {
-    this.changeSingleMessagesState(messageId);
-  }
-  changeSingleMessagesState(messsageGroupIds: string) {
-    this.store.dispatch(
-      new fromAction.LoadSingleMessage({
-        userId: this.inboxData.userId,
-        messagesUidList: messsageGroupIds,
-        read: this.getMessagesAction()
-      })
-    );
   }
   changeMessagesState(messsageGroupIds: string[]) {
     this.store.dispatch(
