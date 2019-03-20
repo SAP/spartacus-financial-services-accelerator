@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ComparisonTableService } from '../comparison-table.service';
 import { CmsService } from '@spartacus/core';
+import { CmsComponentData } from '@spartacus/storefront';
+import { CmsMultiComparisonTabContainer } from '../../../occ-models';
 
 @Component({
   selector: 'fsa-comparison-table-container',
@@ -9,9 +11,9 @@ import { CmsService } from '@spartacus/core';
   providers: [ComparisonTableService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-
 export class ComparisonTableContainerComponent implements OnInit {
   constructor(
+    protected componentData: CmsComponentData<CmsMultiComparisonTabContainer>,
     protected comparisonTableService: ComparisonTableService,
     protected cmsService: CmsService
   ) {}
@@ -19,14 +21,13 @@ export class ComparisonTableContainerComponent implements OnInit {
   component$;
 
   ngOnInit() {
-    this.component$ = this.comparisonTableService.getComponentData().data$;
+    this.component$ = this.componentData.data$;
   }
 
-  getTabList(): string[] {
-    return this.comparisonTableService.getComparisonTabList(this.component$);
-  }
-
-  getTabTitles(): string[] {
-    return this.comparisonTableService.getTabNames(this.component$);
+  getTabs() {
+    return {
+      tab: this.comparisonTableService.getComparisonTabList(this.component$),
+      tabTitle: this.comparisonTableService.getTabNames(this.component$)
+    };
   }
 }

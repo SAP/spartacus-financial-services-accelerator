@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ComparisonTableService } from '../../../../comparison-table.service';
+import { FSCartService } from 'projects/fsastorefrontlib/src/lib/checkout/assets/services';
 
 @Component({
     selector: 'fsa-comparison-table-panel-item',
@@ -16,11 +17,12 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     billingTimes: any;
 
     constructor(
-        protected comparisonTableService: ComparisonTableService
+        protected comparisonTableService: ComparisonTableService,
+        protected cartService: FSCartService
     ) {
     }
 
-    product$ = this.comparisonTableService.getProductFS();
+    product$;
     panelItemEntries = this.comparisonTableService.getPanelItemEntries();
 
     ngOnInit() {
@@ -35,6 +37,6 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     }
 
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {
-        this.comparisonTableService.getCartServiceFS().createCartAndStartBundle(productCode, bundleTemplateId, 1);
+        this.cartService.createCartAndStartBundle(productCode, bundleTemplateId, 1);
     }
 }

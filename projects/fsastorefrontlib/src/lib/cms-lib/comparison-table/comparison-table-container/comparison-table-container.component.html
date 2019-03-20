@@ -1,9 +1,9 @@
 <div class="products-wrapper d-flex justify-content-around mt-5 mb-2">
   <ng-container *ngIf="(component$ | async) as component">
-    <ng-container *ngIf="getTabList()">
-      <ngb-tabset [ngClass]="{'hide-tab-heading': getTabList().length === 1}">
-        <ngb-tab *ngFor="let comparisonTabId of getTabList(); let i = index">
-          <ng-template ngbTabTitle>{{ getTabTitles()[i] }}</ng-template>
+    <ng-container *ngIf="getTabs()">
+      <ngb-tabset [ngClass]="{'hide-tab-heading': getTabs().tab.length === 1}">
+        <ngb-tab *ngFor="let comparisonTabId of getTabs().tab; let i = index">
+          <ng-template ngbTabTitle>{{ getTabs().tabTitle[i] }}</ng-template>
           <ng-template ngbTabContent>
             <ng-container
               cxComponentWrapper
