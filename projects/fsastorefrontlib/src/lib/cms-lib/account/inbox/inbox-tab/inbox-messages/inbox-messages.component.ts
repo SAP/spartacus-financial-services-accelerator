@@ -20,13 +20,11 @@ export interface Mapping extends StandardCmsComponentConfig {
 })
 export class InboxMessagesComponent implements OnInit {
   constructor(
-    protected componentData: CmsComponentData<CmsInboxComponent>,
     protected inboxService: InboxService,
     protected store: Store<fromStore.UserState>
   ) {}
 
   @Input() changeCheckboxes: Observable<boolean>;
-  component$: Observable<CmsInboxComponent>;
   searchConfig: FSSearchConfig = {};
   messagesObject$;
   activeMessageGroup;
