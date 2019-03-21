@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { CmsPageGuards } from '@spartacus/storefront';
+import { CmsPageGuard } from '@spartacus/storefront';
 import { AuthGuard } from '@spartacus/core';
 import { InboxPageComponent } from './inbox-page.component';
 import { InboxPageLayoutModule } from '../../layout/inbox-page-layout/inbox-page-layout.module';
@@ -9,7 +9,7 @@ import { InboxPageLayoutModule } from '../../layout/inbox-page-layout/inbox-page
 const routes: Routes = [
   {
     path: 'my-account/inbox',
-    canActivate: [AuthGuard, CmsPageGuards],
+    canActivate: [AuthGuard, CmsPageGuard],
     component: InboxPageComponent,
     data: { pageLabel: 'inbox' }
   }

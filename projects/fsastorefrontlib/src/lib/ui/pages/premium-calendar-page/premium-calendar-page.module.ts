@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { CmsPageGuards } from '@spartacus/storefront';
+import { CmsPageGuard } from '@spartacus/storefront';
 import { AuthGuard } from '@spartacus/core';
 import { PremiumCalendarPageComponent } from './premium-calendar-page.component';
 import { PremiumCalendarPageLayoutModule } from '../../layout/premium-calendar-page-layout/premium-calendar-page-layout.module';
@@ -9,7 +9,7 @@ import { PremiumCalendarPageLayoutModule } from '../../layout/premium-calendar-p
 const routes: Routes = [
   {
     path: 'my-account/premium-calendar',
-    canActivate: [AuthGuard, CmsPageGuards],
+    canActivate: [AuthGuard, CmsPageGuard],
     component: PremiumCalendarPageComponent,
     data: { pageLabel: 'premium-calendar' }
   }
