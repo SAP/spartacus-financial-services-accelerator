@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { ProductService } from '@spartacus/core';
+import { ProductService, CmsConfig } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCartService } from '../../../../../../checkout/assets/services';
 import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
@@ -22,7 +22,8 @@ export class ComparisonTablePanelItemComponent implements OnInit {
 
     constructor(
         protected productService: ProductService,
-        protected cartService: FSCartService
+        protected cartService: FSCartService,
+        protected config: CmsConfig
     ) {
     }
 
@@ -40,4 +41,10 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {
         this.cartService.createCartAndStartBundle(productCode, bundleTemplateId, 1);
     }
+
+    getBaseUrl(url: string): string {
+        return this.config.server.baseUrl + url;
+      }
+    
+
 }

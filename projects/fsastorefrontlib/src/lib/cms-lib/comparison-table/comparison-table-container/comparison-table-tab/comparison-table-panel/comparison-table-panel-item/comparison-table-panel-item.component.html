@@ -18,6 +18,15 @@
       </ng-container>
     </div>
     </ng-container>
+    <ng-container *ngFor="let investment of product.investments">
+      <div class="products-prices__price-wrapper">
+        <p>{{investment.distributionPercentage}} % </p>
+        <a [href]="getBaseUrl(investment.investmentType?.factSheetDocument?.downloadUrl)">{{investment.investmentType?.fundName}}</a>
+        <p>ISIN: {{investment.investmentType?.isin}}</p>
+        <p>5 Years Performance: {{investment.investmentType?.fiveYearPerformance}} %</p>
+        <p>Risk & Returning Rating: {{investment.investmentType?.riskReturningRating}}</p>
+      </div>
+    </ng-container>
   </div>
 </ng-container>
 <ng-template #loading>
