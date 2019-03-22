@@ -45,6 +45,4 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     getBaseUrl(url: string): string {
         return this.config.server.baseUrl + url;
       }
-    
-
 }
