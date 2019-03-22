@@ -21,7 +21,7 @@
     <ng-container *ngFor="let investment of product.investments">
       <div class="products-prices__price-wrapper">
         <p class="mb-2"><strong>{{investment.distributionPercentage}} % </strong></p>
-        <a [href]="getBaseUrl(investment.investmentType?.factSheetDocument?.downloadUrl)"><strong>{{investment.investmentType?.fundName}}</strong></a>
+        <a [href]="getBaseUrl() + investment.investmentType?.factSheetDocument?.downloadUrl"><strong>{{investment.investmentType?.fundName}}</strong></a>
         <p class="mb-0">ISIN: {{investment.investmentType?.isin}}</p>
         <p class="mb-0">5 Years Performance: {{investment.investmentType?.fiveYearPerformance}} %</p>
         <p class="mb-0">Risk & Returning Rating: {{investment.investmentType?.riskReturningRating}}</p>

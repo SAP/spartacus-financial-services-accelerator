@@ -42,7 +42,7 @@ export class ComparisonTablePanelItemComponent implements OnInit {
         this.cartService.createCartAndStartBundle(productCode, bundleTemplateId, 1);
     }
 
-    getBaseUrl(url: string): string {
-        return this.config.server.baseUrl + url;
-      }
+    public getBaseUrl() {
+        return this.config.server.baseUrl || '';
+    }
 }
