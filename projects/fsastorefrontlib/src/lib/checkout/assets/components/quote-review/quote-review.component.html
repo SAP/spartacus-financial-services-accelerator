@@ -4,12 +4,15 @@
         <div class="accordion">
           <div class="row no-gutters section-header__heading">
             <div class="col-12 col-md-2 accordion-header__icon">
-              <span class="images images__wrapper images__wrapper--size"
-                ><img class="images__size" [src]="getBaseUrl() + cart.deliveryOrderGroups[0]?.entries[0]?.product?.images[3]?.url"/>
+              <span *ngIf="cart.deliveryOrderGroups[0]?.entries[0]?.product?.images?.length > 0"
+                    class="images images__wrapper images__wrapper--size"
+              >
+                <img class="images__size"
+                     [src]="getBaseUrl() + cart.deliveryOrderGroups[0]?.entries[0]?.product?.images[3]?.url"/>
               </span>
             </div>
             <div class="col-12 col-md-8 accordion-header__text">
-              {{ (cart.deliveryOrderGroups[0].entries[0]?.product?.categories[0])?.name }} Quote
+              {{ cart.deliveryOrderGroups[0].entries[0]?.product?.defaultCategory?.name }} Quote
             </div>
             <div class="col-12 col-md-3 col-md-2 accordion-header__details">
               <div class="accordion-header__id"></div>

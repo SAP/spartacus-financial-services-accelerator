@@ -10,7 +10,6 @@ import { OccConfig } from '@spartacus/core';
 const userId = '123';
 const messageGroup = 'autoGroup';
 
-
 const usersEndpoint = '/users';
 const messagesEndPoint = '/notifications/sitemessages';
 
@@ -49,10 +48,10 @@ describe('OccInboxService', () => {
 
   describe('getMessagesForMessageGroup', () => {
     it('should fetch user messages for specified group', async(() => {
-      service.getSiteMessagesForUserAndGroup(userId, messageGroup).subscribe();
+      service.getSiteMessagesForUserAndGroup(userId, messageGroup, {}).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
-          req.url === usersEndpoint + `/${userId}` + messagesEndPoint + `?messagegroup=${messageGroup}` &&
+          req.url === usersEndpoint + `/${userId}` + messagesEndPoint + `?fields=FULL&messagegroup=${messageGroup}` &&
           req.method === 'GET'
         );
       }, `GET method and url`);

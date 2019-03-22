@@ -2,8 +2,8 @@
   <ng-container *ngIf="cart.deliveryOrderGroups">
     <div class="short-overview short-overview--right">
       <div class="short-overview__heading gradient-heading">
-          {{ cart.deliveryOrderGroups[0]?.entries[0]?.product?.categories[0]?.name }} Quote
-      </div>
+          {{ cart.deliveryOrderGroups[0].entries[0]?.product?.defaultCategory?.name }} Quote
+        </div>
       <div class="short-overview__content">
           <ng-container *ngFor="let entry of cart.deliveryOrderGroups[0].entries">
             <div class="short-overview__items">

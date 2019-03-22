@@ -1,14 +1,26 @@
 import { Injectable } from '@angular/core';
+import { SearchConfig } from '@spartacus/core';
 
 export interface Message {
-  messageCode: string;
+  messageCode?: string;
+  readDate?: string;
+  messageUid?: string;
 }
-
+export interface FSSearchConfig extends SearchConfig {
+  sortCode?: string;
+  sortOrder?: string;
+}
+export interface MessagesCollection {
+  messages?: Message[];
+  read?: boolean;
+}
 @Injectable()
 export class InboxDataService {
   private _userId = 'anonymous';
   private _messageGroup: string;
   private _messages: Message[];
+  private _searchConfig?: SearchConfig;
+  private _messagesCollection?: MessagesCollection;
 
   constructor() {}
 
@@ -18,6 +30,22 @@ export class InboxDataService {
 
   get userId(): string {
     return this._userId;
+  }
+
+  set searchConfig(val) {
+    this._searchConfig = val;
+  }
+
+  get searchConfig(): SearchConfig {
+    return this._searchConfig;
+  }
+
+  set messagesCollection(val) {
+    this._messagesCollection = val;
+  }
+
+  get messagesCollection(): MessagesCollection {
+    return this._messagesCollection;
   }
 
   set messageGroup(val) {

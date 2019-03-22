@@ -2,9 +2,11 @@
 @import '../variables-fsa';
 
 footer {
-    @include radial-gradient-background($color-link-hover,$color-button-secondary-hover,$color-dark-blue);
-    margin-top: 80px;
-    padding-top: 40px;
+    .footer {
+        @include radial-gradient-background($color-link-hover,$color-button-secondary-hover,$color-dark-blue);
+        margin-top: 80px;
+        padding-top: 40px;
+    }
     .Footer {
         .container {
             max-width: 1400px;

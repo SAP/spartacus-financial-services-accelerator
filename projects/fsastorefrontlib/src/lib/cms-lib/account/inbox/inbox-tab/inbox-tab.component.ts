@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit, Output, Input } from '@angular/core';
-import { EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
 import { CmsService } from '@spartacus/core';
+import { InboxService } from '../../../../my-account/assets/services/inbox.service';
 
 @Component({
   selector: 'fsa-inbox-tab',
@@ -10,16 +10,24 @@ import { CmsService } from '@spartacus/core';
 })
 
 export class InboxTabComponent implements OnInit {
-  @Output() tabsSelected = new EventEmitter();
   @Input() tabId: string;
+  @Input() set currentTab(currentTab: boolean) {
+    this.active = currentTab ? true : false;
+  }
   component$;
+  active;
+  activeGroupTitle: string;
 
-  constructor ( protected cmsService: CmsService ) {}
+  constructor (
+    protected cmsService: CmsService,
+    protected inboxService: InboxService
+  ) {}
 
   ngOnInit() {
     this.component$ = this.cmsService.getComponentData(this.tabId);
   }
-  onTabClicked(messageGroup) {
-    this.tabsSelected.emit(messageGroup);
+  onTabClicked(messageGroup, title) {
+    this.inboxService.setActiveGroupTitle(title);
+    this.inboxService.setActiveMessageGroup(messageGroup);
   }
 }

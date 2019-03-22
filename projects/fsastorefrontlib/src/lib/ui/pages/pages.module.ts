@@ -10,26 +10,24 @@ import { FSCategoryPageModule } from './fs-category-page/fs-category-page.module
 import { InboxPageModule } from './inbox-page/inbox-page.module';
 import { QuotesReviewPageModule } from './quotes-review-page/quotes-review-page.module';
 import { AddOptionsPageModule } from './add-options-page/add-options-page.module';
-import {ComparisonTablePageModule} from './comparison-table-page/comparison-table-page.module';
+import { ComparisonTablePageModule } from './comparison-table-page/comparison-table-page.module';
 
 const pageModules = [
-    QuotesPageModule,
-    PoliciesPageModule,
-    ClaimsPageModule,
-    PolicyDetailsPageModule,
-    PremiumCalendarPageModule,
-    FSCategoryPageModule,
-    InboxPageModule,
-    AddOptionsPageModule,
-    QuotesReviewPageModule,
-    ComparisonTablePageModule
+  QuotesPageModule,
+  PoliciesPageModule,
+  ClaimsPageModule,
+  PolicyDetailsPageModule,
+  PremiumCalendarPageModule,
+  FSCategoryPageModule,
+  InboxPageModule,
+  AddOptionsPageModule,
+  QuotesReviewPageModule,
+  ComparisonTablePageModule
 ];
 
 @NgModule({
-    imports: [CommonModule, ...pageModules],
-    declarations: [],
-    exports: [...pageModules]
+  imports: [CommonModule, ...pageModules],
+  declarations: [],
+  exports: [...pageModules]
 })
-
-export class PagesModule {
-}
+export class PagesModule {}
