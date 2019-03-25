@@ -21,7 +21,7 @@
           </div>
           <div #ref>
             <ng-container *ngIf="(cart?.insuranceQuote?.quoteDetails | json) !== '{}'">
-              <fsa-accordion-item [opened]="true" [title]="(cart.deliveryOrderGroups[0].entries[0]?.product?.categories[0])?.name + ' Information'">
+              <fsa-accordion-item [opened]="true" [title]="'General Details'">
                 <div class="container">
                   <div class="row justify-content-center">
                     <ul class="col-12 accordion--list">
