@@ -434,8 +434,7 @@ a {
     box-shadow: 0 0 0 2px white inset;
   }
   .tooltip-wrapper {
-    top: 50%;
-    transform: translateY(-50%);
+    @include absolute-center;
     right: 30%;
     z-index: 2000;
     position: absolute;

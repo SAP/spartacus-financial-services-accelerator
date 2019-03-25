@@ -1,5 +1,6 @@
 @import 'mixins-fsa';
 @import 'variables-fsa';
+@import '~bootstrap/scss/mixins/breakpoints';
 
 :host {
     display: flex;
@@ -22,7 +23,7 @@
 }
 .price-name {
     line-height: 1.2;
-    max-width: 10.5vw;
+    max-width: calc(100% - 6vw);
     @include ellipsis;
 }
 .fs-tooltip {
