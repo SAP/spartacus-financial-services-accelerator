@@ -3,6 +3,7 @@ import { AccountModule } from './account/account.module';
 import { BannerModule } from './banner/banner.module';
 import { ProductFeatureModule } from './product-feature/product-feature.module';
 import { ComparisonTableModule } from './comparison-table/comparison-table.module';
+import { CheckoutModule } from '../checkout/checkout.module';
 
 
 @NgModule({
@@ -10,13 +11,15 @@ import { ComparisonTableModule } from './comparison-table/comparison-table.modul
     AccountModule,
     BannerModule,
     ProductFeatureModule,
-    ComparisonTableModule
+    ComparisonTableModule,
+    CheckoutModule
   ],
   exports: [
     AccountModule,
     BannerModule,
     ProductFeatureModule,
-    ComparisonTableModule
+    ComparisonTableModule,
+    CheckoutModule
   ]
 })
 export class CmsLibModule {}

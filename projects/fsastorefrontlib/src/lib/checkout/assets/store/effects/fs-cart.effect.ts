@@ -34,7 +34,7 @@ export class FSCartEffects {
         .startBundle(payload.userId, payload.cartId, payload.productCode, payload.bundleTemplateId, payload.quantity)
         .pipe(
           map((cart: any) => {
-            return new fromCartActions.MergeCartSuccess();
+            return new fromCartActions.AddEntrySuccess(cart.entry);
           }),
 
         );

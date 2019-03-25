@@ -30,7 +30,7 @@
 </div>
 <ng-container *ngIf="entries$ != undefined">
   <button class="primary-button primary-button__default primary-button__single-checkout col-md-3 col mt-4 float-right"
-    type="button" data-checkout-url="">Next</button>
+    type="button" data-checkout-url="" (click)="next()">Next</button>
 </ng-container>
 <ng-template #mandatoryNotAvailableButton let-title="title">
   <button disabled type="button" class="secondary-button secondary-button__default secondary-button__default--opacity-disabled">{{title}}</button>
