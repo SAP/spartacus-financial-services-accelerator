@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { AuthService, CartDataService, CartService, StateWithCart, CartState } from '@spartacus/core';
+import { AuthService, CartDataService, CartService, StateWithCart } from '@spartacus/core';
 import * as fromAction from '@spartacus/core';
 import * as fromSelector from '@spartacus/core';
 import * as fromFSAction from '../../../checkout/assets/store/actions/index';
