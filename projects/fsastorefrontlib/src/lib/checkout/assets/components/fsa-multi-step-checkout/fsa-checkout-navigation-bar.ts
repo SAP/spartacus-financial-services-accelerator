@@ -1,14 +1,3 @@
-export class ProgressStatus {
-    disabled: boolean;
-    completed: boolean;
-    active: boolean;
-  }
-  export class ProgressItem {
-    id: string;
-    label: number;
-    status: ProgressStatus;
-    progressBar: boolean;
-  }
   export const checkoutNavBar = [
     {
       id: 1,

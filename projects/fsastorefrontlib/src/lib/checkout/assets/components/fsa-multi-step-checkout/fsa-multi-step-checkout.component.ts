@@ -11,7 +11,7 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./fsa-multi-step-checkout.component.scss']
 
 })
-export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent implements OnInit {
+export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
   step = 2;
   navs = checkoutNavBar;
 
