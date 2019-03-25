@@ -7,23 +7,25 @@
     justify-items: stretch;
 }
 .product-grid-item {
-    flex: 0 1 50%;
+    flex: 0 1 25%;
 }
-.products-details {
-    min-height: 200px;
+.product-grid-items {
+    display: flex;
+    flex: 0 1 100%;
+}
+.products-details, .products-prices {
     padding-right: 5px;
 }
-.products-prices {
-    padding-right: 5px;
-    max-width: 200px;
-    &__price-wrapper {
-        @include ellipsis;
-        padding: 15px;
-        &:nth-child(even) {
-            background-color: transparent;
-        }
-        &:nth-child(odd) {
-            background-color: $color-mild-grey;
-        }
-    }
+.price-name, .price-tooltip {
+    display: inline-block;
+    vertical-align: middle;
+}
+.price-name {
+    line-height: 1.2;
+    max-width: 10.5vw;
+    @include ellipsis;
+}
+.fs-tooltip {
+    @include absolute-center;
+    right: 2%;
 }

@@ -8,6 +8,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+@mixin absolute-center {
+  top: 50%;
+  transform: translateY(-50%);
+}
 @mixin box-shadow($x, $y, $a, $b, $color, $opacity) {
   box-shadow: $x $y $a $b rgba($color, $opacity);
   -moz-box-shadow: $x $y $a $b rgba($color, $opacity);
@@ -91,5 +95,4 @@
   &.active:before {
     transform: translateY(-50%) rotateZ(-135deg);
   }
-
 }

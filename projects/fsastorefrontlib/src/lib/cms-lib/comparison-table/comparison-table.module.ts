@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { CmsConfig, ConfigModule } from '@spartacus/core';
 import { CmsModule, ComponentsModule } from '@spartacus/storefront';
 import { ComparisonTableContainerComponent } from './comparison-table-container/comparison-table-container.component';
@@ -19,6 +20,7 @@ import { OccBillingTimeService } from '../../occ/billing-time/billing-time.servi
     ComponentsModule,
     CmsModule,
     NgbTabsetModule,
+    NgbTooltipModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         CMSMultiComparisonTabContainer: {

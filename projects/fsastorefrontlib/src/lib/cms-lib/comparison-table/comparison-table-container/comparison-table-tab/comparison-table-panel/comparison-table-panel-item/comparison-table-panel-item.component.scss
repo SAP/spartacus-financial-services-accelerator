@@ -1,34 +1,10 @@
 @import 'mixins-fsa';
 @import 'variables-fsa';
-@import '~bootstrap/scss/mixins/breakpoints';
+// @import '~bootstrap/scss/mixins/breakpoints';
 
 :host {
     flex: 0 1 100%;
     padding: 0 5px;
     border-left: 1px dashed $color-grey;
     text-align: center;
-}
-
-.products-details {
-    min-height: 200px;
-    &__name {
-        font-size: 20px;
-        font-weight: 500;
-    }
-    &__main-price {
-        margin: 20px 0;
-        font-size: 40px;
-        font-weight: 500;
-    }
-}
-.products-prices {
-    &__price-wrapper {
-        padding: 15px;
-        &:nth-child(even) {
-            background-color: transparent;
-        }
-        &:nth-child(odd) {
-            background-color: $color-mild-grey;
-        }
-    }
 }
