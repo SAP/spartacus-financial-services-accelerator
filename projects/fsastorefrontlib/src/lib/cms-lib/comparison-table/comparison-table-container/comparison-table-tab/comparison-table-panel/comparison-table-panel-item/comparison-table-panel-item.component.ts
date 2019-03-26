@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ComparisonTableService } from '../../../../comparison-table.service';
 import { FSCartService } from 'projects/fsastorefrontlib/src/lib/checkout/assets/services';
+import {  CmsConfig } from '@spartacus/core';
 
 @Component({
     selector: 'fsa-comparison-table-panel-item',
@@ -18,7 +19,8 @@ export class ComparisonTablePanelItemComponent implements OnInit {
 
     constructor(
         protected comparisonTableService: ComparisonTableService,
-        protected cartService: FSCartService
+        protected cartService: FSCartService,
+        protected config: CmsConfig
     ) {
     }
 
@@ -38,5 +40,9 @@ export class ComparisonTablePanelItemComponent implements OnInit {
 
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {
         this.cartService.createCartAndStartBundle(productCode, bundleTemplateId, 1);
+    }
+
+    public getBaseUrl() {
+        return this.config.server.baseUrl || '';
     }
 }
