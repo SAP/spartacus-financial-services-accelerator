@@ -1,8 +1,12 @@
 @import '../mixins-fsa';
 @import '../variables-fsa';
+@import '~bootstrap/scss/mixins/breakpoints';
 
 ul[role='tablist'].nav-tabs {
     border-bottom: $border-grey;
+    @include media-breakpoint-down(sm) {
+        display: block;
+    }
     .nav-item .nav-link {
         background-color: $color-dark-grey;
         color: $color-white;
@@ -12,6 +16,10 @@ ul[role='tablist'].nav-tabs {
             color: $color-dark-grey;
             border: $border-grey;
             border-bottom: none;
+        }
+        @include media-breakpoint-down(sm) {
+            border-radius: 0;
+            margin-right: 0;
         }
     }
 }
