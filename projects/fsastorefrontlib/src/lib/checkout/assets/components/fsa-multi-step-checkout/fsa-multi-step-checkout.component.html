@@ -1,23 +1,26 @@
 <div class="cx-page">
   <ng-container *ngIf="(cart$ | async) as cart">
-    <div class="cx-multi-step-checkout container">
+    <div class="cx-multi-step-checkout center1400 contentPadding">
       <div class="row">
+        <div class="col-12">
+          <!-- Navigation -->
+          <div class="cx-multi-step-checkout__nav d-none d-lg-block d-xl-block my-5">
+              <ul class="cx-multi-step-checkout__nav-list">
+                <li *ngFor="let nav of navs" class="cx-multi-step-checkout__nav-item" [ngClass]="{
+                                ' is-disabled': nav.status.disabled,
+                                ' progressbar': nav.progressBar}">
+                  <a class=" cx-multi-step-checkout__nav-link " [ngClass]="{
+                                  ' is-disabled': nav.status.disabled,
+                                  ' is-active': nav.status.active}" 
+                                  (click)="nav.status.disabled === false ? setStep(nav.id) : false">
+                                  {{ nav.label }}</a>
+                </li>
+              </ul>
+            </div>
+        </div>
         <div class="col-12 col-md-8">
           <!-- VISIBLE ONLY ON LG AND XL SCREENS -->
-          <!-- Navigation -->
-          <div class="cx-multi-step-checkout__nav d-none d-lg-block d-xl-block">
-            <ul class="cx-multi-step-checkout__nav-list">
-              <li *ngFor="let nav of navs" class="cx-multi-step-checkout__nav-item" [ngClass]="{
-                              ' is-disabled': nav.status.disabled,
-                              ' progressbar': nav.progressBar}">
-                <a class=" cx-multi-step-checkout__nav-link " [ngClass]="{
-                                ' is-disabled': nav.status.disabled,
-                                ' is-active': nav.status.active}" 
-                                (click)="nav.status.disabled === false ? setStep(nav.id) : false">
-                                {{ nav.label }}</a>
-              </li>
-            </ul>
-          </div>
+          
           <div class="cx-multi-step-checkout__nav--media">
             <div *ngFor="let nav of navs">
               <!-- Navigation -->
@@ -49,10 +52,10 @@
           </div>
         </div>
         <div class="col-12 col-md-4 ">
-          <br /><br /><br />
           <fsa-mini-cart></fsa-mini-cart>
         </div>
       </div>
     </div>
   </ng-container>
 </div>
+

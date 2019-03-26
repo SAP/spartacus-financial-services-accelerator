@@ -4,9 +4,6 @@ import { Component, OnInit } from '@angular/core';
   selector: 'fsa-checkout-page',
   templateUrl: './checkout-page.component.html'
 })
-export class CheckoutPageComponent implements OnInit {
+export class CheckoutPageComponent {
   constructor() { }
-
-  ngOnInit() {
-  }
 }

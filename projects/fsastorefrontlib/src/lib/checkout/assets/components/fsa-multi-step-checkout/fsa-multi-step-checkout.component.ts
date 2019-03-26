@@ -33,7 +33,7 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
   processSteps() {
     this.subscriptions.push(
       this.cartService.mainProductAdded
-      .pipe(filter(object => Object.keys(object).length !== 0 && this.step === 2))
+      .pipe(filter(poductCode => Object.keys(poductCode).length !== 0 && this.step === 2))
       .subscribe(state => {
         this.nextStep(3);
       }));
