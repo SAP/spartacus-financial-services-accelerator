@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { CmsService, ProductService } from '@spartacus/core';
-import { CMSComparisonTabComponent, FSProduct } from '../../occ-models';
+import { CmsService } from '@spartacus/core';
+import { CMSComparisonTabComponent } from '../../occ-models';
 
 @Injectable()
 
