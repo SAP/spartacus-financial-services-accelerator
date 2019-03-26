@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { Cart, OrderEntry } from '@spartacus/core';
 import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -17,6 +17,9 @@ export class AddOptionsComponent implements OnInit {
 
   cart$: Observable<Cart>;
   entries$: Observable<OrderEntry[]>;
+
+  @Output()
+  addOptions = new EventEmitter<any>();
 
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
@@ -39,4 +42,7 @@ export class AddOptionsComponent implements OnInit {
     this.cartService.removeEntry(item);
   }
 
+  next() {
+    this.addOptions.emit();
+  }
 }

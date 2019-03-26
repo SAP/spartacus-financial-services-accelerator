@@ -11,6 +11,7 @@ import { InboxPageModule } from './inbox-page/inbox-page.module';
 import { QuotesReviewPageModule } from './quotes-review-page/quotes-review-page.module';
 import { AddOptionsPageModule } from './add-options-page/add-options-page.module';
 import { ComparisonTablePageModule } from './comparison-table-page/comparison-table-page.module';
+import { CheckoutPageModule } from './checkout-page/checkout-page.module';
 
 const pageModules = [
   QuotesPageModule,
@@ -22,7 +23,8 @@ const pageModules = [
   InboxPageModule,
   AddOptionsPageModule,
   QuotesReviewPageModule,
-  ComparisonTablePageModule
+  ComparisonTablePageModule,
+  CheckoutPageModule
 ];
 
 @NgModule({

@@ -11,12 +11,6 @@ const routes: Routes = [
     canActivate: [CmsPageGuard],
     component: ComparisonTablePageComponent,
     data: { cxPath: 'comparisonTable' }
-  },
-  {
-    path: 'Insurance-Products/:categoryTitle/:categoryType/c/:categoryCode',
-    canActivate: [CmsPageGuard],
-    redirectTo: null,
-    data: { cxRedirectTo: 'comparisonTable' }
   }
 ];
 @NgModule({

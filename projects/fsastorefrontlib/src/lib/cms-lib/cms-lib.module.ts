@@ -4,7 +4,6 @@ import { BannerModule } from './banner/banner.module';
 import { ProductFeatureModule } from './product-feature/product-feature.module';
 import { ComparisonTableModule } from './comparison-table/comparison-table.module';
 
-
 @NgModule({
   imports: [
     AccountModule,
