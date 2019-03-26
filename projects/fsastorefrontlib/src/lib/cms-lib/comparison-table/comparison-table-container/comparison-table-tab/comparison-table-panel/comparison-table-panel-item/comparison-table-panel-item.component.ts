@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ComparisonTableService } from '../../../../comparison-table.service';
 import { FSCartService } from 'projects/fsastorefrontlib/src/lib/checkout/assets/services';
-import {  CmsConfig } from '@spartacus/core';
+import {  CmsConfig, ProductService } from '@spartacus/core';
 
 @Component({
     selector: 'fsa-comparison-table-panel-item',
@@ -20,15 +20,16 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     constructor(
         protected comparisonTableService: ComparisonTableService,
         protected cartService: FSCartService,
+        protected productService: ProductService,
         protected config: CmsConfig
     ) {
     }
 
     product$;
-    panelItemEntries = this.comparisonTableService.getPanelItemEntries();
+    panelItemEntries = []
 
     ngOnInit() {
-        this.product$ = this.comparisonTableService.getProductData(this.productCode);
+        this.product$ = this.productService.get(this.productCode);
         this.product$.subscribe(data => {
             if (data) {
                 this.panelItemEntries = this.billingTimes.map(billingTime => {

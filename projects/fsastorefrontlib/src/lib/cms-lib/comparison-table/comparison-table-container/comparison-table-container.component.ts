@@ -19,15 +19,14 @@ export class ComparisonTableContainerComponent implements OnInit {
   ) {}
 
   component$;
+  tabs$;
 
   ngOnInit() {
     this.component$ = this.componentData.data$;
-  }
-
-  getTabs() {
-    return {
-      tab: this.comparisonTableService.getComparisonTabList(this.component$),
-      tabTitle: this.comparisonTableService.getTabNames(this.component$)
-    };
+    this.component$.subscribe(data => {
+    if(data.simpleCMSComponents){
+        this.tabs$ = this.comparisonTableService.getComparisonTabs(data.simpleCMSComponents.split(' '));
+      }
+    })
   }
 }
