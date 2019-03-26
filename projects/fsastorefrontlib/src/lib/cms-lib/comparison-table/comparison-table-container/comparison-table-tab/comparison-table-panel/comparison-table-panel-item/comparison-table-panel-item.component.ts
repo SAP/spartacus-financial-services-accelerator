@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { FSCartService } from 'projects/fsastorefrontlib/src/lib/checkout/assets/services';
+import { FSCartService } from './../../../../../../checkout/assets/services';
 import {  CmsConfig, ProductService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';

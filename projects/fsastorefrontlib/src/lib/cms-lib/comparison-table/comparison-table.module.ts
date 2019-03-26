@@ -13,7 +13,6 @@ import { ComparisonTableTabComponent } from './comparison-table-container/compar
 import { OccBillingTimeService } from '../../occ/billing-time/billing-time.service';
 import { ComparisonTableService } from './comparison-table.service';
 
-
 @NgModule({
   imports: [
     CommonModule,

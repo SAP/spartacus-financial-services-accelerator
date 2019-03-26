@@ -21,9 +21,9 @@ export class ComparisonTableContainerComponent implements OnInit {
   ngOnInit() {
     this.component$ = this.componentData.data$;
     this.component$.subscribe(data => {
-    if(data.simpleCMSComponents){
+    if (data.simpleCMSComponents) {
         this.tabs$ = this.comparisonTableService.getComparisonTabs(data.simpleCMSComponents.split(' '));
       }
-    })
+    });
   }
 }
