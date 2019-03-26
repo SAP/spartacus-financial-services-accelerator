@@ -9,9 +9,11 @@
 .product-grid-item {
     float: left;
     width: 25%;
+    position: relative;
+    z-index: 2;
     @include media-breakpoint-down(sm) {
         width: 44%;
-        border-right: $border-grey;
+        @include box-shadow(5px, 0px, 3px, -4px, $color-semi-dark-grey, 0.8);
     }
 }
 .product-grid-items {

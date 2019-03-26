@@ -481,6 +481,11 @@ a {
       }
   }
 }
+.price-value {
+  @include media-breakpoint-down(sm) {
+    max-width: 100px;
+  }
+}
 .ct-tooltip .arrow:before {
   border-top-color: $color-button-secondary-hover;
 }

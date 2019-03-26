@@ -12,7 +12,7 @@
     <ng-container *ngFor="let item of panelItemEntries">
       <div class="products-prices__price-wrapper">
         <ng-container *ngIf="item !== undefined; else itemNotIncluded">
-          <div class="price-value" *ngIf="item.price?.value > 0 || item.chargeInformation; else itemIncluded" >
+          <div class="price-value text-truncate" *ngIf="item.price?.value > 0 || item.chargeInformation; else itemIncluded" title="{{item.chargeInformation}}">
               <ng-container *ngTemplateOutlet="itemValue context: {value: (item.price.value > 0 ? item.price.formattedValue : item.chargeInformation)}"></ng-container>
           </div>
         </ng-container>
