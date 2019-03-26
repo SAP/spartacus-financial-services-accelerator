@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class FSCartService extends CartService {
 
   protected callbackFunction: Function;
-  private productAddedSource = new BehaviorSubject<string>('');
+  protected productAddedSource = new BehaviorSubject<string>('');
   public mainProductAdded = this.productAddedSource.asObservable();
 
   constructor(
