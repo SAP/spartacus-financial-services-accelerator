@@ -24,6 +24,3 @@ export const getInboxsLoaded: MemoizedSelector<any, boolean> = createSelector(
   fromInbox.getLoaded
 );
 
-
-
-

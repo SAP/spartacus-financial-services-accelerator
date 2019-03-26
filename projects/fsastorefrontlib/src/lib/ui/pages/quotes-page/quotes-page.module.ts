@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { CmsPageGuards } from '@spartacus/storefront';
+import { CmsPageGuard } from '@spartacus/storefront';
 import { AuthGuard } from '@spartacus/core';
 import { QuotesPageLayoutModule } from '../../layout/quotes-page-layout/quotes-page-layout.module';
 import { QuotesPageComponent } from './quotes-page.component';
@@ -9,7 +9,7 @@ import { QuotesPageComponent } from './quotes-page.component';
 const routes: Routes = [
   {
     path: 'my-account/my-financial-applications',
-    canActivate: [AuthGuard, CmsPageGuards],
+    canActivate: [AuthGuard, CmsPageGuard],
     component: QuotesPageComponent,
     data: { pageLabel: 'my-quotes' }
   }

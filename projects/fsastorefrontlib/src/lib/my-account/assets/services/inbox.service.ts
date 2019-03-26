@@ -30,6 +30,7 @@ export class InboxService {
   readStatus = this.readStatusSource.asObservable();
   messagesCollection: Message[] = [];
   protected callback: Function;
+
   setActiveGroupTitle( title: string ) {
     this.activeGroupTitleSource.next(title);
   }

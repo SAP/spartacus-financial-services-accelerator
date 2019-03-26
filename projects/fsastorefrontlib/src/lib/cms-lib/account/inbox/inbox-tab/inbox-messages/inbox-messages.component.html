@@ -8,12 +8,12 @@
                     <div class="row"  >
                         <div class="col-1 p-4">
                             <label class="checkbox-label">
-                                <input type="checkbox" [checked]="messagesAction$ | async" (change)="sendMessageState(message.readDate, message.uid);">
+                                <input type="checkbox" [checked]="messagesAction$ | async" (change)="changeMessageState(message.readDate, message.uid);">
                                 <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
                             </label>
                         </div>
                         <div class="col-6 col-md-3 text-truncate p-4" (click)="message.opened=!message.opened; readSingleMessage(message.uid)">
-                            {{ message.uid }}
+                            {{ message.title }}
                         </div>
                         <div class="col-md-6 d-none d-md-block text-truncate p-4" (click)="message.opened=!message.opened; readSingleMessage(message.uid, message.readDate )">
                             {{ message.content }}
@@ -29,7 +29,7 @@
             </div>
         </ng-container>
     </ng-container>
-</div><!-- End of .messages-->
+</div>
 <ng-template #noMessages>
     <h4 class="p-4 border-bottom-grey">
         You have no messages for chosen group!

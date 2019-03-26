@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { CmsComponentMapping, CmsService, StandardCmsComponentConfig } from '@spartacus/core';
+import { CmsComponentMapping, StandardCmsComponentConfig } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
 import { InboxService } from '../../../../../my-account/assets/services/inbox.service';
@@ -20,14 +20,11 @@ export interface Mapping extends StandardCmsComponentConfig {
 })
 export class InboxMessagesComponent implements OnInit {
   constructor(
-    protected componentData: CmsComponentData<CmsInboxComponent>,
-    protected cmsService: CmsService,
     protected inboxService: InboxService,
     protected store: Store<fromStore.UserState>
   ) {}
 
   @Input() changeCheckboxes: Observable<boolean>;
-  component$: Observable<CmsInboxComponent>;
   searchConfig: FSSearchConfig = {};
   messagesObject$;
   activeMessageGroup;
@@ -35,7 +32,6 @@ export class InboxMessagesComponent implements OnInit {
   opened = false;
 
   ngOnInit() {
-    this.loadGroup('', this.searchConfig);
     this.messagesAction$ = this.changeCheckboxes;
     this.inboxService.activeMessageGroup.subscribe( messageGroup => {
       this.activeMessageGroup = messageGroup;
@@ -51,7 +47,7 @@ export class InboxMessagesComponent implements OnInit {
     this.inboxService.loadMessagesByMessageGroup(group, searchConfig);
     this.messagesObject$ = this.store.pipe(select(fromStore.getMessages));
   }
-  sendMessageState(readDate, messageUid) {
+  changeMessageState(readDate, messageUid) {
     const messageObj = {
       readDate: readDate,
       messageUid: messageUid

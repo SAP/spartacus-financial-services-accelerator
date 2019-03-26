@@ -8,13 +8,11 @@ export interface InboxState {
   messages: any;
   refresh: boolean;
   loaded: boolean;
-  read: boolean;
 }
 export const initialState: InboxState = {
   messages: {},
   refresh: false,
-  loaded: false,
-  read: true
+  loaded: false
 };
 export function reducer(state = initialState, action: fromAction.MessageAction): InboxState {
   switch (action.type) {
@@ -54,4 +52,3 @@ export function reducer(state = initialState, action: fromAction.MessageAction):
 export const getMessages = (state: InboxState) => state.messages;
 export const getRefresh = (state: InboxState) => state.refresh;
 export const getLoaded = (state: InboxState) => state.loaded;
-export const getMessagesAction = (state: InboxState) => state.read;

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { CmsComponentMapping, CmsService, StandardCmsComponentConfig } from '@spartacus/core';
+import { CmsComponentMapping, StandardCmsComponentConfig } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
 import { InboxService } from '../../../my-account/assets/services/inbox.service';
@@ -21,7 +21,6 @@ export interface Mapping extends StandardCmsComponentConfig {
 export class InboxComponent implements OnInit {
   constructor(
     protected componentData: CmsComponentData<CmsInboxComponent>,
-    protected cmsService: CmsService,
     protected inboxService: InboxService,
     protected store: Store<fromStore.UserState>
   ) {}
@@ -44,7 +43,6 @@ export class InboxComponent implements OnInit {
   ngOnInit() {
     this.component$ = this.componentData.data$;
     this.component$.subscribe( data => this.tabs = data.tabComponents.split(' '));
-    this.loadGroup('', this.searchConfig); // Temporary solution for loading default message group
     this.inboxService.activeGroupTitle.subscribe( title => this.activeGroupTitle = title);
     this.inboxService.activeMessageGroup.subscribe( messageGroup => this.activeMessageGroup = messageGroup);
     this.inboxService.readStatus.subscribe( state => this.readState = state);
@@ -61,9 +59,6 @@ export class InboxComponent implements OnInit {
   }
   changeMessagesReadState() {
     this.inboxService.changeMessageListState();
-  }
-  onTabSelected(messageGroup) {
-    this.loadGroup(messageGroup, this.searchConfig);
   }
   loadGroup(group: string, searchConfig: FSSearchConfig) {
     this.inboxService.loadMessagesByMessageGroup(group, searchConfig);

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { CmsPageGuards } from '@spartacus/storefront';
+import { CmsPageGuard } from '@spartacus/storefront';
 import { AuthGuard } from '@spartacus/core';
 import { ClaimsPageComponent } from './claims-page.component';
 import { ClaimsPageLayoutModule } from '../../layout/claims-page-layout/claims-page-layout.module';
@@ -9,7 +9,7 @@ import { ClaimsPageLayoutModule } from '../../layout/claims-page-layout/claims-p
 const routes: Routes = [
   {
     path: 'my-account/my-insurance-claims',
-    canActivate: [AuthGuard, CmsPageGuards],
+    canActivate: [AuthGuard, CmsPageGuard],
     component: ClaimsPageComponent,
     data: { pageLabel: 'my-claims' }
   }

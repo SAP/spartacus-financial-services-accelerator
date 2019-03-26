@@ -3,15 +3,15 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AuthGuard } from '@spartacus/core';
-import { CmsPageGuards } from '@spartacus/storefront';
 
 import { QuotesReviewPageComponent } from './quotes-review-page.component';
 import { CheckoutModule } from '../../../checkout';
+import { CmsPageGuard } from '@spartacus/storefront';
 
 const routes: Routes = [
   {
     path: 'quote-review',
-    canActivate: [AuthGuard, CmsPageGuards],
+    canActivate: [AuthGuard, CmsPageGuard],
     component: QuotesReviewPageComponent,
     data: { pageLabel: 'multiStepCheckoutSummaryPage' }
   }
