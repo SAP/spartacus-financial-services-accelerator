@@ -3,16 +3,27 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 
 :host {
-    display: flex;
-    flex: 0 1 100%;
-    justify-items: stretch;
+    display: block;
+    width: 100%;
 }
 .product-grid-item {
-    flex: 0 1 25%;
+    float: left;
+    width: 25%;
+    @include media-breakpoint-down(sm) {
+        width: 44%;
+        border-right: $border-grey;
+    }
 }
 .product-grid-items {
+    float: left; 
     display: flex;
-    flex: 0 1 100%;
+    width: 75%;
+    overflow-y: hidden;
+    overflow-x: auto;
+    @include media-breakpoint-down(sm) {
+        width: 56%;
+        margin-right: -65px;
+    }
 }
 .products-details, .products-prices {
     padding-right: 5px;
@@ -29,4 +40,15 @@
 .fs-tooltip {
     @include absolute-center;
     right: 2%;
+}
+fsa-comparison-table-panel-item {
+    flex: 0 1 100%;
+    padding: 0 5px;
+    border-left: 1px dashed $color-grey;
+    text-align: center;
+    @include media-breakpoint-down(sm) {
+        &:first-of-type {
+            border-left: none;
+        }
+    }
 }
