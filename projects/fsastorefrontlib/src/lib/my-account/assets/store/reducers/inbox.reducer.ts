@@ -4,7 +4,6 @@ export interface MessageState {
   content: any;
   refresh: boolean;
 }
-
 export interface InboxState {
   messages: any;
   refresh: boolean;
@@ -48,13 +47,6 @@ export function reducer(state = initialState, action: fromAction.MessageAction):
         refresh: false
       };
     }
-    case fromAction.LOAD_MESSAGE_SUCCESS: {
-      return {
-        ...state,
-        refresh: true,
-        loaded: true
-      };
-  }
   }
   return state;
 }

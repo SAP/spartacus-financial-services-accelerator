@@ -47,7 +47,6 @@ export class InboxComponent implements OnInit {
     this.loadGroup('', this.searchConfig); // Temporary solution for loading default message group
     this.inboxService.activeGroupTitle.subscribe( title => this.activeGroupTitle = title);
     this.inboxService.activeMessageGroup.subscribe( messageGroup => this.activeMessageGroup = messageGroup);
-    this.inboxService.readStatus.subscribe( state => console.log(state));
     this.inboxService.readStatus.subscribe( state => this.readState = state);
   }
   checkAllCheckboxes() {

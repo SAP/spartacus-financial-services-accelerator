@@ -36,6 +36,7 @@ export class InboxService {
   resetMessagesToSend() {
     this.messagesCollection = [];
     this.readStatusSource.next(false);
+    console.log('resetovano');
   }
   setActiveMessageGroup( messageGroup: string ) {
     this.activeMessageGroupSource.next(messageGroup);
@@ -52,7 +53,6 @@ export class InboxService {
     return uids;
   }
   getMessagesAction() {
-    console.log(this.messagesCollection);
     let state = true;
     this.messagesCollection.map(function(message) {
       if ( message.readDate ) {
@@ -86,13 +86,10 @@ export class InboxService {
     this.changeMessagesState(this.getUidsFromMessagesCollection(this.messagesCollection));
   }
   readSingleMessage(messageId: string) {
-    this.changeSingleMessagesState(messageId);
-  }
-  changeSingleMessagesState(messsageGroupIds: string) {
     this.store.dispatch(
-      new fromAction.LoadSingleMessage({
+      new fromAction.SetMessagesState({
         userId: this.inboxData.userId,
-        messagesUidList: messsageGroupIds,
+        messagesUidList: messageId,
         read: true
       })
     );
@@ -101,6 +98,7 @@ export class InboxService {
     if ( messsageGroupIds.length === 0 ) {
       return;
     }
+    console.log(this.messagesCollection);
     this.store.dispatch(
       new fromAction.SetMessagesState({
         userId: this.inboxData.userId,
