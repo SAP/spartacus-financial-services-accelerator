@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ComparisonTableService } from '../comparison-table.service';
-import { CmsService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { CmsMultiComparisonTabContainer } from '../../../occ-models';
 
@@ -8,7 +7,6 @@ import { CmsMultiComparisonTabContainer } from '../../../occ-models';
   selector: 'fsa-comparison-table-container',
   templateUrl: './comparison-table-container.component.html',
   styleUrls: ['./comparison-table-container.component.scss'],
-  providers: [ComparisonTableService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComparisonTableContainerComponent implements OnInit {
