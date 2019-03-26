@@ -4,7 +4,7 @@
 
 ul[role='tablist'].nav-tabs {
     border-bottom: $border-grey;
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(xs) {
         display: block;
     }
     .nav-item .nav-link {
@@ -17,7 +17,7 @@ ul[role='tablist'].nav-tabs {
             border: $border-grey;
             border-bottom: none;
         }
-        @include media-breakpoint-down(sm) {
+        @include media-breakpoint-down(xs) {
             border-radius: 0;
             margin-right: 0;
         }
