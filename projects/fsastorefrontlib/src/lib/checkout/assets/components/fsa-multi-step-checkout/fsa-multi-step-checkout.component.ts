@@ -7,9 +7,7 @@ import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-multi-step-checkout',
-  templateUrl: './fsa-multi-step-checkout.component.html',
-  styleUrls: ['./fsa-multi-step-checkout.component.scss']
-
+  templateUrl: './fsa-multi-step-checkout.component.html'
 })
 export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
   step = 2;
