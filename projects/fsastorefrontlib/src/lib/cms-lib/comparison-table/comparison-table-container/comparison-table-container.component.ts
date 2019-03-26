@@ -14,8 +14,7 @@ import { CmsMultiComparisonTabContainer } from '../../../occ-models';
 export class ComparisonTableContainerComponent implements OnInit {
   constructor(
     protected componentData: CmsComponentData<CmsMultiComparisonTabContainer>,
-    protected comparisonTableService: ComparisonTableService,
-    protected cmsService: CmsService
+    protected comparisonTableService: ComparisonTableService
   ) {}
 
   component$;
