@@ -29,5 +29,6 @@ export class InboxTabComponent implements OnInit {
   onTabClicked(messageGroup, title) {
     this.inboxService.setActiveGroupTitle(title);
     this.inboxService.setActiveMessageGroup(messageGroup);
+    this.inboxService.resetMessagesToSend();
   }
 }

@@ -23,14 +23,19 @@ export class InboxService {
   activeGroupTitleSource = new BehaviorSubject<string>('General');
   activeMessageGroupSource = new BehaviorSubject<string>('');
   activeSortingFilterSource = new BehaviorSubject<string>('');
+  readStatusSource = new BehaviorSubject<boolean>(false);
   activeGroupTitle = this.activeGroupTitleSource.asObservable();
   activeMessageGroup = this.activeMessageGroupSource.asObservable();
   activeSortingFilter = this.activeSortingFilterSource.asObservable();
+  readStatus = this.readStatusSource.asObservable();
   messagesCollection: Message[] = [];
   protected callback: Function;
-  niz: any[] = [];
   setActiveGroupTitle( title: string ) {
     this.activeGroupTitleSource.next(title);
+  }
+  resetMessagesToSend() {
+    this.messagesCollection = [];
+    this.readStatusSource.next(false);
   }
   setActiveMessageGroup( messageGroup: string ) {
     this.activeMessageGroupSource.next(messageGroup);
@@ -46,23 +51,20 @@ export class InboxService {
     );
     return uids;
   }
-  getMessagesAction(): Boolean {
-    let readStatus = true;
+  getMessagesAction() {
+    console.log(this.messagesCollection);
+    let state = true;
     this.messagesCollection.map(function(message) {
-      if (message.readDate) {
-        readStatus = false;
+      if ( message.readDate ) {
+        state = false;
       }
     });
-    return readStatus;
+    this.readStatusSource.next(state);
   }
   initMessages() {
     this.store.pipe(select(fromSelector.getMessages)).subscribe( messages => {
       if (messages) {
         this.inboxData.messages = messages;
-      }
-      if (this.callback) {
-        this.callback();
-        this.callback = null;
       }
     });
     this.auth.getUserToken().subscribe(userData => {
@@ -91,23 +93,29 @@ export class InboxService {
       new fromAction.LoadSingleMessage({
         userId: this.inboxData.userId,
         messagesUidList: messsageGroupIds,
-        read: this.getMessagesAction()
+        read: true
       })
     );
   }
   changeMessagesState(messsageGroupIds: string[]) {
+    if ( messsageGroupIds.length === 0 ) {
+      return;
+    }
     this.store.dispatch(
       new fromAction.SetMessagesState({
         userId: this.inboxData.userId,
         messagesUidList: messsageGroupIds,
-        read: this.getMessagesAction()
+        read: this.readStatusSource.getValue()
       })
     );
-    this.callback = function() {
-      let messageGroup;
-      this.activeMessageGroup.subscribe( data => { messageGroup = data; });
-      this.loadMessagesByMessageGroup(messageGroup, {});
-    };
-    this.messagesCollection = [];
+    let readDate;
+    this.readStatusSource.getValue() ? readDate = 'date' : readDate = undefined;
+    this.messagesCollection.map( message => {
+      message.readDate = readDate;
+      return this.messagesCollection;
+    }, this);
+    let nextAction;
+    this.readStatusSource.getValue() ? nextAction = false : nextAction = true;
+    this.readStatusSource.next(nextAction);
   }
 }

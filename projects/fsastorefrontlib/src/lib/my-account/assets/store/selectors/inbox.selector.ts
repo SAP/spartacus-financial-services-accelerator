@@ -24,11 +24,6 @@ export const getInboxsLoaded: MemoizedSelector<any, boolean> = createSelector(
   fromInbox.getLoaded
 );
 
-export const getSelectedMessages: MemoizedSelector<any, boolean> = createSelector(
-  getInboxState,
-  fromInbox.getMessagesUids,
-  fromInbox.getMessagesAction
-);
 
 
 

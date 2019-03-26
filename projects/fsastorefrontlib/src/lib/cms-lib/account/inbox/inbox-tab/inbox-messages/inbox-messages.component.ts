@@ -42,8 +42,10 @@ export class InboxMessagesComponent implements OnInit {
       this.loadGroup(this.activeMessageGroup, this.searchConfig);
     });
   }
-  readSingleMessage(messageUid) {
-    this.inboxService.readSingleMessage(messageUid);
+  readSingleMessage(messageUid, messageReadDate) {
+    if ( !messageReadDate ) {
+      this.inboxService.readSingleMessage(messageUid);
+    }
   }
   loadGroup(group: string, searchConfig) {
     this.inboxService.loadMessagesByMessageGroup(group, searchConfig);
@@ -55,5 +57,6 @@ export class InboxMessagesComponent implements OnInit {
       messageUid: messageUid
     };
     this.inboxService.selectedMessages(messageObj);
+    this.inboxService.getMessagesAction();
   }
 }

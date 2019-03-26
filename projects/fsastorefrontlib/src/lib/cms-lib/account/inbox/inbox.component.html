@@ -11,7 +11,7 @@
                 </fsa-inbox-tab>
             </ul>
         </div>
-       <div class="FSA-icon icon-FSA-envelope m-4" (click)="changeMessagesReadState()"></div>
+       <div class="FSA-icon m-4" (click)="changeMessagesReadState()" [ngClass]="{ 'icon-FSA-envelope-open' : readState, 'icon-FSA-envelope' : !readState }" ></div>
         <div class="section-header__heading p-4 position-relative">
             <div class="row d-none d-md-flex">
                 <div class="col-1">
