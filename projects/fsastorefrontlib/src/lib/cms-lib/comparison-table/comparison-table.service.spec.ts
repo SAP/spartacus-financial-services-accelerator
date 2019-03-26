@@ -13,7 +13,7 @@ describe('ComparisonTableService', () => {
 
   it('should be created', () => {
     let service: ComparisonTableService;
-    
+
     TestBed.configureTestingModule({
       providers: [
         ComparisonTableService,
