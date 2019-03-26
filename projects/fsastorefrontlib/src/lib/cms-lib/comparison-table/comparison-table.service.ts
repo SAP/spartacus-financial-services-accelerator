@@ -4,7 +4,6 @@ import { CmsService } from '@spartacus/core';
 import { CMSComparisonTabComponent } from '../../occ-models';
 
 @Injectable()
-
 export class ComparisonTableService {
 
   constructor(
