@@ -14,7 +14,7 @@ import { ConfigModule } from '@spartacus/core';
               translations: {
                 default: {
                   'comparisonTable': { paths: ['comparisonTable/:categoryCode'] },
-                  'fsa-checkout': { paths: ['fsa-checkout/:categoryCode'] }
+                  'checkout/': { paths: ['checkout/:categoryCode'] }
                 }
               }
             },

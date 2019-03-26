@@ -3,23 +3,19 @@ import { AccountModule } from './account/account.module';
 import { BannerModule } from './banner/banner.module';
 import { ProductFeatureModule } from './product-feature/product-feature.module';
 import { ComparisonTableModule } from './comparison-table/comparison-table.module';
-import { CheckoutModule } from '../checkout/checkout.module';
-
 
 @NgModule({
   imports: [
     AccountModule,
     BannerModule,
     ProductFeatureModule,
-    ComparisonTableModule,
-    CheckoutModule
+    ComparisonTableModule
   ],
   exports: [
     AccountModule,
     BannerModule,
     ProductFeatureModule,
-    ComparisonTableModule,
-    CheckoutModule
+    ComparisonTableModule
   ]
 })
 export class CmsLibModule {}

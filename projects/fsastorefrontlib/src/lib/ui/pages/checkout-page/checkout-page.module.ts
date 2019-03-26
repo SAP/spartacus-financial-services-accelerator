@@ -10,13 +10,13 @@ const routes: Routes = [
     path: null,
     canActivate: [CmsPageGuard],
     component: CheckoutPageComponent,
-    data: { cxPath: 'fsa-checkout' }
+    data: { cxPath: 'checkout/' }
   },
   {
     path: 'Insurance-Products/:categoryTitle/:categoryType/c/:categoryCode',
     canActivate: [CmsPageGuard],
     redirectTo: null,
-    data: { cxRedirectTo: 'fsa-checkout' }
+    data: { cxRedirectTo: 'checkout/' }
   }
 ];
 
