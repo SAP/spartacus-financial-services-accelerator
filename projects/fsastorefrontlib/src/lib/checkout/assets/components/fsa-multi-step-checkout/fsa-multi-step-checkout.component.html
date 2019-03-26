@@ -52,7 +52,9 @@
           </div>
         </div>
         <div class="col-12 col-md-4 ">
-          <fsa-mini-cart></fsa-mini-cart>
+          <div *ngIf="step !== 2">
+            <fsa-mini-cart></fsa-mini-cart>
+          </div>
         </div>
       </div>
     </div>
