@@ -37,7 +37,7 @@
     max-width: calc(100% - 6vw);
     @include ellipsis;
 }
-.fs-tooltip {
+.fsa-tooltip {
     @include absolute-center;
     right: 5%;
 }
