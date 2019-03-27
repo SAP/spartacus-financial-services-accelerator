@@ -11,8 +11,6 @@ export class ComparisonTableService {
   ) {}
 
   getComparisonTabs(tabIds: string[]): Observable<CMSComparisonTabComponent>[] {
-    return tabIds.map(tabId => {
-      return this.cmsService.getComponentData(tabId);
-    });
+    return tabIds.map(tabId => this.cmsService.getComponentData(tabId));
   }
 }

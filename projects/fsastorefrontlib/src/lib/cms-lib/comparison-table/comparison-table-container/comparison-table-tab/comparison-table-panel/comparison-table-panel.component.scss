@@ -9,11 +9,8 @@
 .product-grid-item {
     float: left;
     width: 25%;
-    position: relative;
-    z-index: 2;
     @include media-breakpoint-down(sm) {
         width: 44%;
-        @include box-shadow(5px, 0px, 3px, -4px, $color-semi-dark-grey, 0.8);
     }
 }
 .product-grid-items {
@@ -25,6 +22,7 @@
     @include media-breakpoint-down(sm) {
         width: 56%;
         margin-right: -65px;
+        border-left: $border-grey;
     }
 }
 .products-details, .products-prices {
@@ -44,6 +42,8 @@
     right: 5%;
 }
 fsa-comparison-table-panel-item {
+    position: relative;
+    z-index: 1;
     flex: 0 1 100%;
     padding: 0 5px;
     border-left: 1px dashed $color-grey;
