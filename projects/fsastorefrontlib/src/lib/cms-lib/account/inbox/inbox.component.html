@@ -23,14 +23,14 @@
                 <div class="col-3">
                     Subject
                     <span class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
-                        (click)="subjectSortOrder = (subjectSortOrder === 'desc' ? 'asc' : 'desc'); sortMessages('subject', subjectSortOrder);"
+                        (click)="subjectSortOrder = (subjectSortOrder === 'desc' ? 'asc' : 'desc'); sortMessages('title', subjectSortOrder);"
                         [ngClass]="subjectSortOrder === 'asc' ? 'rotate' : '' "
                     > </span>
                 </div>
                 <div class="col-6">
                     Preview
                     <span class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
-                        (click)="contentSortOrder = (contentSortOrder === 'desc' ? 'asc' : 'desc'); sortMessages('title', contentSortOrder);"
+                        (click)="contentSortOrder = (contentSortOrder === 'desc' ? 'asc' : 'desc'); sortMessages('content', contentSortOrder);"
                         [ngClass]="contentSortOrder === 'asc' ? 'rotate' : '' "
                     ></span>
                 </div>
