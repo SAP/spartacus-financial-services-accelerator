@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cart, CartService, OccConfig } from '@spartacus/core';
 
@@ -13,6 +13,9 @@ export class QuoteReviewComponent implements OnInit {
   cart$: Observable<Cart>;
   cartLoaded$: Observable<boolean>;
 
+  @Output()
+  backStep = new EventEmitter<any>();
+
   constructor(
     protected cartService: CartService,
     private config: OccConfig
@@ -24,5 +27,9 @@ export class QuoteReviewComponent implements OnInit {
   }
   public getBaseUrl() {
     return this.config.server.baseUrl || '';
+  }
+
+  back() {
+    this.backStep.emit();
   }
 }
