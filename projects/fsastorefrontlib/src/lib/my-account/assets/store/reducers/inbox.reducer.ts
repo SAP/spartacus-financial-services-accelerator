@@ -17,16 +17,24 @@ export function reducer(state = initialState, action: fromAction.MessageAction):
       return {
         ...state,
         messages,
-        refresh: false,
+        refresh: true,
         loaded: true
       };
     }
     case fromAction.SET_MESSAGES_STATE_SUCCESS: {
-      const messages = { ...action.payload };
+      const payloadObj = { ...action.payload };
+      payloadObj.messages.map( message => {
+        state.messages.messages.find( obj => {
+          if (obj.uid === message.uid) {
+            obj.readDate = message.readDate;
+          }
+        });
+      });
+      const messages = { messages: state.messages.messages };
       return {
         ...state,
         messages,
-        refresh: true
+        refresh: false
       };
     }
   }
