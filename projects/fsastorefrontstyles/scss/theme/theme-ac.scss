@@ -434,7 +434,7 @@ a {
     box-shadow: 0 0 0 2px white inset;
   }
   .tooltip-wrapper {
-    top: 40%;
+    @include absolute-center;
     right: 30%;
     z-index: 2000;
     position: absolute;
@@ -442,35 +442,51 @@ a {
       top: 15%;
       right: 30px;
     }
+    .tooltip .arrow:before {
+      border-left-color: $color-button-secondary-hover;
+    }
   }
   @include media-breakpoint-down(sm) {
     text-align: center;
   }
 }
-
 /********* CHECKOUT - END ********/
-/********* TOOLTIP ********/
 
-.fs-tooltip {
-  background-color: $color-dark-blue;
-  color: $color-white;
-  cursor: pointer;
-  font-style: italic;
-  text-align: center;
-  width: 20px;
-  height: 20px;
-  font-weight: 600;
-  border-radius: 50%;
-}
-.tooltip {
-  .arrow:before {
-    border-left-color: $color-button-secondary-hover;
+/*********Comparison Table*******/
+.products-details {
+  min-height: 200px;
+  &__name {
+      font-size: 20px;
+      @include media-breakpoint-down(sm) {
+        font-size: 18px;
+      }
   }
-  .tooltip-inner {
-    width: 200px;
-    background-color: $color-button-secondary-hover;
-    opacity: 0.95;
-    border-radius: 6px;
+  &__main-price {
+      margin: 20px 0;
+      font-size: 40px;
+      @include media-breakpoint-down(sm) {
+        font-size: 24px;
+      }
   }
 }
-/********* TOOLTIP - END ********/
+.products-prices {
+  &__price-wrapper {
+      position: relative;
+      padding: 15px;
+      &:nth-child(even) {
+          background-color: transparent;
+      }
+      &:nth-child(odd) {
+          background-color: $color-mild-grey;
+      }
+  }
+}
+.price-value {
+  @include media-breakpoint-down(sm) {
+    max-width: 100px;
+  }
+}
+.ct-tooltip .arrow:before {
+  border-top-color: $color-button-secondary-hover;
+}
+/******Comparison Table - END***/

@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
-import { CmsConfig, ConfigModule } from '@spartacus/core';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { CmsConfig, ConfigModule, UrlTranslationModule } from '@spartacus/core';
 import { CmsModule, ComponentsModule } from '@spartacus/storefront';
 import { ComparisonTableContainerComponent } from './comparison-table-container/comparison-table-container.component';
 // tslint:disable-next-line:max-line-length
@@ -20,6 +21,8 @@ import { ComparisonTableService } from './comparison-table.service';
     ComponentsModule,
     CmsModule,
     NgbTabsetModule,
+    NgbTooltipModule,
+    UrlTranslationModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         CMSMultiComparisonTabContainer: {
@@ -27,16 +30,17 @@ import { ComparisonTableService } from './comparison-table.service';
         },
         CMSComparisonTabComponent: { selector: 'fsa-comparison-table-tab' },
         ComparisonPanelCMSComponent: { selector: 'fsa-comparison-table-panel' }
+      },
+      routesConfig: {
+        translations: {
+          default: {
+            'category/': { paths: ['category/:categoryCode'] }
+          }
+        }
       }
     })
   ],
   declarations: [
-    ComparisonTableContainerComponent,
-    ComparisonTableTabComponent,
-    ComparisonTablePanelComponent,
-    ComparisonTablePanelItemComponent
-  ],
-  exports: [
     ComparisonTableContainerComponent,
     ComparisonTableTabComponent,
     ComparisonTablePanelComponent,

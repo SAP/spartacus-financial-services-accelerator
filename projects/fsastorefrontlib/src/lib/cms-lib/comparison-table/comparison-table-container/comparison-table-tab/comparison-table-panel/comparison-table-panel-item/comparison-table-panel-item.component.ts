@@ -7,7 +7,6 @@ import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
 @Component({
     selector: 'fsa-comparison-table-panel-item',
     templateUrl: './comparison-table-panel-item.component.html',
-    styleUrls: ['./comparison-table-panel-item.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComparisonTablePanelItemComponent implements OnInit {
