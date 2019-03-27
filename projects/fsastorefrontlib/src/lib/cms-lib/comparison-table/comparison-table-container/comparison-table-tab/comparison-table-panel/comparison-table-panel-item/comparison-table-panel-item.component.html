@@ -28,7 +28,7 @@
       </div>
     </ng-container>
   </div>
-  <a class="secondary-button__default secondary-button mt-5" href="category/{{product.defaultCategory.parentCategory.code}}">More Info</a>
+  <a class="secondary-button__default secondary-button mt-5" [routerLink]=" { route: [{ name: 'category/', params: { categoryCode: product.defaultCategory?.parentCategory?.code } }] }| cxTranslateUrl">More Info</a>
 </ng-container>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
