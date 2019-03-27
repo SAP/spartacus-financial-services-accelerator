@@ -4,11 +4,14 @@ import { AuthService, CartDataService, CartService, StateWithCart } from '@spart
 import * as fromAction from '@spartacus/core';
 import * as fromSelector from '@spartacus/core';
 import * as fromFSAction from '../../../checkout/assets/store/actions/index';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class FSCartService extends CartService {
 
   protected callbackFunction: Function;
+  protected productAddedSource = new BehaviorSubject<string>('');
+  public mainProductAdded = this.productAddedSource.asObservable();
 
   constructor(
     protected fsStore: Store<StateWithCart>,
@@ -54,6 +57,7 @@ export class FSCartService extends CartService {
           quantity: quantity
         })
       );
+    this.productAddedSource.next(productCode);
     };
   }
 }
