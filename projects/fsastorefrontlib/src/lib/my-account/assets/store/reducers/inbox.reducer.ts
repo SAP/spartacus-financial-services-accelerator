@@ -26,11 +26,7 @@ export function reducer(state = initialState, action: fromAction.MessageAction):
       payloadObj.messages.map( message => {
         state.messages.messages.find( obj => {
           if (obj.uid === message.uid) {
-            if (message.readDate !== 'undefined') {
-              obj.readDate = message.readDate;
-            } else {
-              obj.readDate = 'undefined';
-            }
+            obj.readDate = message.readDate;
           }
         });
       });
