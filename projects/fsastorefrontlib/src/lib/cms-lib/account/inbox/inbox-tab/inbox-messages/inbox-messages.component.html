@@ -12,10 +12,10 @@
                                 <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
                             </label>
                         </div>
-                        <div class="col-6 col-md-3 text-truncate p-4" (click)="message.opened=!message.opened; readSingleMessage(message.uid)">
+                        <div class="col-6 col-md-3 text-truncate p-4" (click)="message.opened=!message.opened; readSingleMessage(message.uid, message.readDate)">
                             {{ message.title }}
                         </div>
-                        <div class="col-md-6 d-none d-md-block text-truncate p-4" (click)="message.opened=!message.opened; readSingleMessage(message.uid, message.readDate )">
+                        <div class="col-md-6 d-none d-md-block text-truncate p-4" (click)="message.opened=!message.opened; readSingleMessage(message.uid, message.readDate)">
                             {{ message.content }}
                         </div>
                         <div class="col-4 col-md-2 text-truncate cursor-default p-4">
