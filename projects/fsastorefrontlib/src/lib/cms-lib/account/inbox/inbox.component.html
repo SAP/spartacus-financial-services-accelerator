@@ -1,6 +1,6 @@
 <ng-container *ngIf="component$ | async as component">
     <div class="center1400 contentPadding">
-        <h2 class="heading-headline"> Inbox</h2>
+        <h2 class="heading-headline">Inbox</h2>
         <div class="tabs-header d-none d-md-block">
             <ul>
                 <fsa-inbox-tab 
@@ -11,8 +11,8 @@
                 </fsa-inbox-tab>
             </ul>
         </div>
-       <div class="FSA-icon m-4" (click)="changeMessagesReadState()" [ngClass]="{ 'icon-FSA-envelope-open' : readState, 'icon-FSA-envelope' : !readState }" ></div>
-        <div class="section-header__heading p-4 position-relative">
+       <div class="FSA-icon m-4" (click)="changeMessagesReadState()" [ngClass]="readState ? 'icon-FSA-envelope-open' : 'icon-FSA-envelope'" ></div>
+        <div class="section-header__heading p-4 position-relative container-fluid">
             <div class="row d-none d-md-flex">
                 <div class="col-1">
                     <label class="checkbox-label">
@@ -43,16 +43,16 @@
                 </div>
             </div>
             <div class="mobile-heading row d-md-none">
-                <div class="col-1">
+                <div class="col-2">
                     <label class="checkbox-label">
                         <input type="checkbox" value="true">
                         <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
                     </label>
                 </div>
-                <div class="col-10 text-center" (click)="shouldShow = !shouldShow">
+                <div class="col-8 text-center" (click)="shouldShow = !shouldShow">
                     {{ activeGroupTitle }}
                 </div>
-                <div class="col-1">
+                <div class="col-2">
                     <span class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"></span>
                 </div>
             </div>

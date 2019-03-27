@@ -39,7 +39,6 @@ export class InboxComponent implements OnInit {
   sentSortOrder = 'desc';
   readState;
 
-
   ngOnInit() {
     this.component$ = this.componentData.data$;
     this.component$.subscribe( data => this.tabs = data.tabComponents.split(' '));

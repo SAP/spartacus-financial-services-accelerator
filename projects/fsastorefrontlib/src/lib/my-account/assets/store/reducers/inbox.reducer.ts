@@ -1,9 +1,5 @@
 import * as fromAction from '../actions';
 
-export interface MessageState {
-  content: any;
-  refresh: boolean;
-}
 export interface InboxState {
   messages: any;
   refresh: boolean;

@@ -37,7 +37,6 @@ export class InboxService {
   resetMessagesToSend() {
     this.messagesCollection = [];
     this.readStatusSource.next(false);
-    console.log('resetovano');
   }
   setActiveMessageGroup( messageGroup: string ) {
     this.activeMessageGroupSource.next(messageGroup);
@@ -99,7 +98,6 @@ export class InboxService {
     if ( messsageGroupIds.length === 0 ) {
       return;
     }
-    console.log(this.messagesCollection);
     this.store.dispatch(
       new fromAction.SetMessagesState({
         userId: this.inboxData.userId,
