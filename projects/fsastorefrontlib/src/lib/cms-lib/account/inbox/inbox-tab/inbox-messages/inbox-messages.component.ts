@@ -38,9 +38,9 @@ export class InboxMessagesComponent implements OnInit {
       this.loadGroup(this.activeMessageGroup, this.searchConfig);
     });
   }
-  readSingleMessage(messageUid, messageReadDate) {
-    if ( !messageReadDate ) {
-      this.inboxService.readSingleMessage(messageUid);
+  readSingleMessage(message) {
+    if ( !message.ReadDate ) {
+      this.inboxService.readSingleMessage(message.uid);
     }
   }
   loadGroup(group: string, searchConfig) {

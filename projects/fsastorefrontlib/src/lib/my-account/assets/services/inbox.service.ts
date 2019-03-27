@@ -53,13 +53,13 @@ export class InboxService {
     return uids;
   }
   getMessagesAction() {
-    let state = true;
+    let readState = true;
     this.messagesCollection.map(function(message) {
       if ( message.readDate ) {
-        state = false;
+        readState = false;
       }
     });
-    this.readStatusSource.next(state);
+    this.readStatusSource.next(readState);
   }
   initMessages() {
     this.store.pipe(select(fromSelector.getMessages)).subscribe( messages => {
@@ -94,25 +94,23 @@ export class InboxService {
       })
     );
   }
-  changeMessagesState(messsageGroupIds: string[]) {
-    if ( messsageGroupIds.length === 0 ) {
+  changeMessagesState(messsageIds: string[]) {
+    if ( messsageIds.length === 0 ) {
       return;
     }
     this.store.dispatch(
       new fromAction.SetMessagesState({
         userId: this.inboxData.userId,
-        messagesUidList: messsageGroupIds,
+        messagesUidList: messsageIds,
         read: this.readStatusSource.getValue()
       })
     );
-    let readDate;
-    this.readStatusSource.getValue() ? readDate = 'date' : readDate = undefined;
+    const readDate = this.readStatusSource.getValue() ?  'date' :  undefined;
     this.messagesCollection.map( message => {
       message.readDate = readDate;
       return this.messagesCollection;
     }, this);
-    let nextAction;
-    this.readStatusSource.getValue() ? nextAction = false : nextAction = true;
+    const nextAction = this.readStatusSource.getValue() ? false :  true;
     this.readStatusSource.next(nextAction);
   }
 }
