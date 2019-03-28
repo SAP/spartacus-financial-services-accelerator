@@ -67,7 +67,7 @@ a {
   }
 }
 .warn {
-  color: $color-orange;
+  color: var(--cx-g-color-warning);
   font-weight: bold;
 }
 .border-bottom-grey {
@@ -77,7 +77,7 @@ a {
   border-top: 1px solid $color-grey;
 }
 .circle-image {
-  background-color: $color-banking-dark-blue;
+  background-color: $color-link-hover;
   border-radius: 50%;
   @include box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 70%);
   margin: 0 25px;
