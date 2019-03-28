@@ -20,7 +20,7 @@ export class InboxService {
     this.initMessages();
   }
 
-  activeGroupTitleSource = new BehaviorSubject<string>('General');
+  activeGroupTitleSource = new BehaviorSubject<string>('');
   activeMessageGroupSource = new BehaviorSubject<string>('');
   activeSortingFilterSource = new BehaviorSubject<string>('');
   readStatusSource = new BehaviorSubject<boolean>(false);

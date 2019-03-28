@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
 import { CmsService } from '@spartacus/core';
 import { InboxService } from '../../../../my-account/assets/services/inbox.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-inbox-tab',
@@ -25,6 +26,11 @@ export class InboxTabComponent implements OnInit {
 
   ngOnInit() {
     this.component$ = this.cmsService.getComponentData(this.tabId);
+    this.component$
+      .pipe(filter(data => data !== undefined && this.active))
+      .subscribe(data =>
+        this.inboxService.activeMessageGroupSource.next(data.messageGroup)
+      );
   }
   onTabClicked(messageGroup, title) {
     this.inboxService.setActiveGroupTitle(title);
