@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { CmsComponentMapping, StandardCmsComponentConfig } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
@@ -18,7 +18,7 @@ export interface Mapping extends StandardCmsComponentConfig {
   styleUrls: ['./inbox-messages.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InboxMessagesComponent implements OnInit {
+export class InboxMessagesComponent implements OnInit, OnDestroy {
   constructor(
     protected inboxService: InboxService,
     protected store: Store<fromStore.UserState>
@@ -54,5 +54,8 @@ export class InboxMessagesComponent implements OnInit {
     };
     this.inboxService.selectedMessages(messageObj);
     this.inboxService.getMessagesAction();
+  }
+  ngOnDestroy(): void {
+    this.messagesObject$.unsubscribe();
   }
 }
