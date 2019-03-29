@@ -19,7 +19,7 @@ export class AddOptionsComponent implements OnInit {
   entries$: Observable<OrderEntry[]>;
 
   @Output()
-  addOptions = new EventEmitter<any>();
+  nextStep = new EventEmitter<any>();
 
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
@@ -43,6 +43,6 @@ export class AddOptionsComponent implements OnInit {
   }
 
   next() {
-    this.addOptions.emit();
+    this.nextStep.emit();
   }
 }

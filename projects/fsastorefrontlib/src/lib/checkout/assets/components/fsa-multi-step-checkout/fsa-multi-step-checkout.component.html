@@ -42,11 +42,18 @@
                 </div>
               </div>
               <div *ngIf="nav.status.active && step === 3">
-                <fsa-add-options (addOptions)="addOptions()">
+                <fsa-add-options (nextStep)="setStep(5)">
                 </fsa-add-options>
               </div>
               <div *ngIf="nav.status.active && step === 5">
-                <fsa-quote-review (backStep)="setStep(3)"> </fsa-quote-review>
+                <fsa-quote-review (nextStep)="setStep(6)" (backStep)="setStep(3)"> </fsa-quote-review>
+              </div>
+              <div *ngIf="nav.status.active && step === 6">
+                <fsa-payment-details
+                  [selectedPayment]="paymentDetails"
+                  (addPaymentInfo)="addPaymentInfo($event)"
+                  (backStep)="setStep(5)"
+                ></fsa-payment-details>
               </div>
             </div>
           </div>

@@ -16,6 +16,9 @@ export class QuoteReviewComponent implements OnInit {
   @Output()
   backStep = new EventEmitter<any>();
 
+  @Output()
+  nextStep = new EventEmitter<any>();
+
   constructor(
     protected cartService: CartService,
     private config: OccConfig
@@ -32,4 +35,9 @@ export class QuoteReviewComponent implements OnInit {
   back() {
     this.backStep.emit();
   }
+
+  next() {
+    this.nextStep.emit();
+  }
+
 }
