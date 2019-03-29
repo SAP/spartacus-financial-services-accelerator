@@ -46,9 +46,7 @@ export class InboxService {
     index === -1 ? this.messagesCollection.push(messageObject) : this.messagesCollection.splice(index, 1);
   }
   getUidsFromMessagesCollection(meesagesCollecton) {
-    return meesagesCollecton.map(messageObj => {
-      return messageObj.messageUid;
-    });
+    return meesagesCollecton.map(messageObj => messageObj.messageUid);
   }
   getMessagesAction() {
     let readState = true;
