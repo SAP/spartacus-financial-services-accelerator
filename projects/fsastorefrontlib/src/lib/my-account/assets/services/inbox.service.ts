@@ -45,12 +45,10 @@ export class InboxService {
     const index = this.messagesCollection.map(function(e) { return e.messageUid; }).indexOf(messageObject.messageUid);
     index === -1 ? this.messagesCollection.push(messageObject) : this.messagesCollection.splice(index, 1);
   }
-  getUidsFromMessagesCollection( meesagesCollecton) {
-    const uids = [];
-    meesagesCollecton.map( messageObj =>
-      uids.push(messageObj.messageUid)
-    );
-    return uids;
+  getUidsFromMessagesCollection(meesagesCollecton) {
+    return meesagesCollecton.map(messageObj => {
+      return messageObj.messageUid;
+    });
   }
   getMessagesAction() {
     let readState = true;

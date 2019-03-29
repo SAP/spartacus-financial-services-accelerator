@@ -1,11 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { CmsComponentMapping, StandardCmsComponentConfig } from '@spartacus/core';
-import { CmsComponentData } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
 import { InboxService } from '../../../../../my-account/assets/services/inbox.service';
 import * as fromStore from '../../../../../my-account/assets/store';
-import { CmsInboxComponent } from './../../../../../occ-models/cms-component.models';
 import { FSSearchConfig } from '../../../../../my-account/assets/services/inbox-data.service';
 
 export interface Mapping extends StandardCmsComponentConfig {
@@ -18,7 +16,7 @@ export interface Mapping extends StandardCmsComponentConfig {
   styleUrls: ['./inbox-messages.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class InboxMessagesComponent implements OnInit, OnDestroy {
+export class InboxMessagesComponent implements OnInit {
   constructor(
     protected inboxService: InboxService,
     protected store: Store<fromStore.UserState>
@@ -27,15 +25,13 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   @Input() changeCheckboxes: Observable<boolean>;
   searchConfig: FSSearchConfig = {};
   messagesObject$;
-  activeMessageGroup;
   messagesAction$;
   opened = false;
 
   ngOnInit() {
     this.messagesAction$ = this.changeCheckboxes;
     this.inboxService.activeMessageGroup.subscribe( messageGroup => {
-      this.activeMessageGroup = messageGroup;
-      this.loadGroup(this.activeMessageGroup, this.searchConfig);
+      this.loadGroup(messageGroup, this.searchConfig);
     });
   }
   readSingleMessage(message) {
@@ -54,8 +50,5 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     };
     this.inboxService.selectedMessages(messageObj);
     this.inboxService.getMessagesAction();
-  }
-  ngOnDestroy(): void {
-    this.messagesObject$.unsubscribe();
   }
 }
