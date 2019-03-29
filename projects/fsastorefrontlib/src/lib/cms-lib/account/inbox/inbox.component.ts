@@ -7,6 +7,7 @@ import { InboxService } from '../../../my-account/assets/services/inbox.service'
 import * as fromStore from '../../../my-account/assets/store';
 import { CmsInboxComponent } from './../../../occ-models/cms-component.models';
 import { FSSearchConfig } from '../../../my-account/assets/services/inbox-data.service';
+import { filter } from 'rxjs/operators';
 
 export interface Mapping extends StandardCmsComponentConfig {
   CMSInboxTabComponent?: CmsComponentMapping;
@@ -41,7 +42,7 @@ export class InboxComponent implements OnInit {
 
   ngOnInit() {
     this.component$ = this.componentData.data$;
-    this.component$.subscribe( data => this.tabs = data.tabComponents.split(' '));
+    this.component$.pipe(filter(data => data.tabComponents !== undefined)).subscribe( data => this.tabs = data.tabComponents.split(' '));
     this.inboxService.activeGroupTitle.subscribe( title => this.activeGroupTitle = title);
     this.inboxService.activeMessageGroup.subscribe( messageGroup => this.activeMessageGroup = messageGroup);
     this.inboxService.readStatus.subscribe( state => this.readState = state);

@@ -19,7 +19,7 @@
                             {{ message.content }}
                         </div>
                         <div class="col-4 col-md-2 text-truncate cursor-default p-4">
-                            {{ message.sentDate }}
+                            {{ message.sentDate | date:'mediumDate' }}
                         </div>
                     </div>
                 </div>
