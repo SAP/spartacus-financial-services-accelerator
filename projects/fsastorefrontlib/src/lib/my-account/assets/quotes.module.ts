@@ -1,15 +1,26 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { CmsPageGuard } from '@spartacus/storefront';
+import { ComponentsModule } from '@spartacus/storefront';
+import { CmsConfig, ConfigModule, AuthGuard } from '@spartacus/core';
 
 import { QuotesComponent } from '../assets/components/quotes/quotes.component';
 import { QuoteService } from './services/quote.service';
 import { QuoteDataService } from './services/quote-data.service';
 import { OccQuoteService } from '../../occ/quote/quote.service';
 
-import { ComponentsModule } from '@spartacus/storefront';
+
+const routes: Routes = [
+  {
+    path: 'my-account/my-financial-applications',
+    canActivate: [AuthGuard, CmsPageGuard],
+    component: QuotesComponent,
+    data: { pageLabel: 'my-quotes' }
+  }
+];
 
 @NgModule({
   imports: [
@@ -17,7 +28,13 @@ import { ComponentsModule } from '@spartacus/storefront';
     RouterModule,
     FormsModule,
     NgSelectModule,
-    ComponentsModule
+    ComponentsModule,
+    RouterModule.forChild(routes),
+    ConfigModule.withConfig(<CmsConfig>{
+      cmsComponents: {
+        QuotesComponent: { selector: 'fsa-quotes' },
+      },
+    }),
   ],
   declarations: [QuotesComponent],
   exports: [QuotesComponent],
