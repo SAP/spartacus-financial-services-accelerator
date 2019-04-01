@@ -1,0 +1,8 @@
+<div class="center1400 contentPadding">
+    <div class="gradient-heading text-center">
+        Final Review
+    </div>
+    <div *ngIf="cart$ | async as cart">
+        {{ cart | json }}
+    </div>
+</div>
