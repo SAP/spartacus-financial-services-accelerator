@@ -25,9 +25,6 @@ export class FinalReviewComponent implements OnInit {
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
     this.cartLoaded$ = this.cartService.getLoaded();
-    this.checkoutService.getPaymentDetails().subscribe(paymentInfo => {
-      console.log(paymentInfo);
-     });
   }
   public getBaseUrl() {
     return this.config.server.baseUrl || '';

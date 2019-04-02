@@ -6,14 +6,14 @@ import { RouterModule } from '@angular/router';
 import { ɵr  as PaymentMethodModule } from '@spartacus/storefront';
 import { ɵh  as SpinnerModule } from '@spartacus/storefront';
 import { ɵd  as CardModule } from '@spartacus/storefront';
-import { FSPaymentFormModule } from './fs-payment-form/fs-payment-form.module';
+import { ɵs  as PaymentFormModule } from '@spartacus/storefront';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
     PaymentMethodModule,
-    FSPaymentFormModule,
+    PaymentFormModule,
     UrlTranslationModule,
     CardModule,
     SpinnerModule,

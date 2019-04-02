@@ -3,7 +3,26 @@
         Final Review
     </div>
     <div *ngIf="cart$ | async as cart">
-        {{ cart | json }}
+        <div class="info-container row p-4">
+            <div class="col-6 col-md-4">
+                <p class="notice notice--dark m-b-4">Payment Details</p>     
+                <ul>
+                    <li>{{ paymentDetails.accountHolderName }}</li>
+                    <li>{{ paymentDetails.cardNumber }}</li>
+                    <li>{{ paymentDetails.cardType.name }}</li>
+                    <li>Expires: {{ paymentDetails.expiryMonth }} / {{ paymentDetails.expiryYear }}</li>
+                    {{ paymentDetails | json }}
+                </ul>
+            </div>
+            <div class="col-6 col-md-5">
+                <p class="notice notice--dark m-b-4">Billing Address</p>
+                <ul>
+                    <li></li>
+                </ul>
+            </div>
+            <div class="col-12 col-md-3">
+                <a class="secondary-button__default secondary-button mt-5" href="#">EDIT</a>
+            </div>
+        </div>
     </div>
-    {{ paymentDetails }}
 </div>

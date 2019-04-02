@@ -1,5 +1,8 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { CartDataService, CheckoutService, GlobalMessageService, GlobalMessageType, RoutingService } from '@spartacus/core';
+import {
+  CartDataService, CheckoutService, GlobalMessageService,
+  GlobalMessageType, RoutingService, Address, PaymentDetails
+} from '@spartacus/core';
 import { MultiStepCheckoutComponent } from '@spartacus/storefront';
 import { filter } from 'rxjs/operators';
 import { FSCartService } from '../../services/fs-cart.service';
@@ -25,7 +28,6 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
   }
 
   processSteps() {
-
     // step2: add main product
     this.subscriptions.push(
       this.cartService.mainProductAdded
@@ -47,7 +49,8 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
         .subscribe(paymentInfo => {
           if (!paymentInfo['hasError']) {
             this.paymentDetails = paymentInfo;
-            this.done = true;
+            console.log(paymentInfo);
+            this.nextStep(7);
           } else {
             Object.keys(paymentInfo).forEach(key => {
               if (key.startsWith('InvalidField')) {
@@ -62,4 +65,30 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
         })
     );
   }
+
+  addPaymentInfo({
+    newPayment,
+    payment,
+    billingAddress
+  }: {
+    newPayment: boolean;
+    payment: PaymentDetails;
+    billingAddress: Address;
+  }): void {
+    payment.billingAddress = billingAddress
+      ? billingAddress
+      : this.deliveryAddress;
+
+    if (newPayment) {
+      if (!billingAddress) {
+        this.checkoutService.getDeliveryAddress().subscribe(data => {
+          payment.billingAddress = data;
+        });
+      }
+      this.checkoutService.createPaymentDetails(payment);
+      return;
+    }
+    this.checkoutService.setPaymentDetails(payment);
+  }
+
 }

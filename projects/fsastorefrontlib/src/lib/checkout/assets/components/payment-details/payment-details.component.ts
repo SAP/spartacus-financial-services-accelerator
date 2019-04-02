@@ -1,6 +1,9 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { UserService, CartDataService } from '@spartacus/core';
-import { ɵv  as PaymentMethodComponent } from '@spartacus/storefront';
+import { UserService, CartDataService, Address, CheckoutService } from '@spartacus/core';
+import { ɵv as PaymentMethodComponent } from '@spartacus/storefront';
+import * as fromCheckout from '@spartacus/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'fsa-payment-details',
@@ -9,16 +12,28 @@ import { ɵv  as PaymentMethodComponent } from '@spartacus/storefront';
 })
 export class PaymentDetailsComponent extends PaymentMethodComponent {
 
-  @Output()
-  nextStep = new EventEmitter<any>();
-
-constructor(
+  deliveryAddress: Address = {
+    country: { 'isocode': 'AT' },
+    firstName: 'John',
+    lastName: 'Doe',
+    defaultAddress: true,
+    titleCode: 'mr',
+    line1: 'Toyosaki 2',
+    town: 'Wien',
+    postalCode: '213A',
+  };
+  constructor(
+    protected checkoutService: CheckoutService,
+    protected store: Store<fromCheckout.CheckoutState>,
     protected cartData: CartDataService,
     protected userService: UserService
   ) {
     super(cartData, userService);
+    this.mockDeliveryAddress();
   }
-  next() {
-    this.nextStep.emit();
+
+  mockDeliveryAddress(): void {
+    this.store.dispatch(
+      new fromCheckout.SetDeliveryAddressSuccess(this.deliveryAddress));
   }
 }
