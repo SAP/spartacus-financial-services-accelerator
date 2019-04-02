@@ -1,13 +1,14 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { ComponentsModule } from '@spartacus/storefront';
-import { effects } from './assets/store/effects';
-import { AddOptionsModule } from './assets/add-options.module';
-import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
 import { AccordionModule } from '../accordion/accordion.module';
+import { AddOptionsModule } from './assets/add-options.module';
 import { MiniCartModule } from './assets/components/mini-cart/mini-cart.module';
+import { PaymentDetailsModule } from './assets/components/payment-details/payment-details.module';
+import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
 import { FinalReviewComponent } from './assets/components/final-review/final-review.component';
+import { effects } from './assets/store/effects';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import { FinalReviewComponent } from './assets/components/final-review/final-rev
     EffectsModule.forFeature(effects)
   ],
   declarations: [QuoteReviewComponent, FinalReviewComponent],
-  exports: [AddOptionsModule, QuoteReviewComponent, MiniCartModule, FinalReviewComponent],
+  exports: [AddOptionsModule, QuoteReviewComponent, MiniCartModule, FinalReviewComponent, PaymentDetailsModule],
   providers: []
 })
 export class CheckoutModule {

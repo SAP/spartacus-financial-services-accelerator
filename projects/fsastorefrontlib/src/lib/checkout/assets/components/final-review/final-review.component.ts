@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cart, CartService, OccConfig, PaymentDetails, CheckoutService } from '@spartacus/core';
 
@@ -11,7 +11,8 @@ export class FinalReviewComponent implements OnInit {
 
   cart$: Observable<Cart>;
   cartLoaded$: Observable<boolean>;
-
+  @Input()
+  paymentDetails: PaymentDetails;
   @Output()
   backStep = new EventEmitter<any>();
 
