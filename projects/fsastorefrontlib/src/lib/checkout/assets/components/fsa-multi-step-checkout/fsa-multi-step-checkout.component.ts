@@ -1,12 +1,12 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { CartDataService, CheckoutService, GlobalMessageService,
-  GlobalMessageType, RoutingService, Address, PaymentDetails } from '@spartacus/core';
+import {
+  CartDataService, CheckoutService, GlobalMessageService,
+  GlobalMessageType, RoutingService, Address, PaymentDetails
+} from '@spartacus/core';
 import { MultiStepCheckoutComponent } from '@spartacus/storefront';
 import { filter } from 'rxjs/operators';
 import { FSCartService } from '../../services/fs-cart.service';
 import { checkoutNavBar } from './fsa-checkout-navigation-bar';
-import * as fromCheckout from '@spartacus/core';
-import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'fsa-multi-step-checkout',
@@ -19,7 +19,6 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
   navs = checkoutNavBar;
 
   constructor(
-    protected store: Store<fromCheckout.CheckoutState>,
     protected checkoutService: CheckoutService,
     protected cartService: FSCartService,
     protected cartDataService: CartDataService,
@@ -31,7 +30,6 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
   }
 
   processSteps() {
-
     // step2: add main product
     this.subscriptions.push(
       this.cartService.mainProductAdded
@@ -39,6 +37,7 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
         .subscribe(state => {
           this.nextStep(3);
         }));
+
     // step6: set payment information
     this.subscriptions.push(
       this.checkoutService
@@ -68,6 +67,7 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
         })
     );
   }
+
   addPaymentInfo({
     newPayment,
     payment,
@@ -92,4 +92,5 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
     }
     this.checkoutService.setPaymentDetails(payment);
   }
+
 }
