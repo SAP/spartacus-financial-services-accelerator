@@ -18,7 +18,7 @@
               </ul>
             </div>
         </div>
-        <div class="col-12 col-md-8">
+        <div [ngClass]="step !== 2 ? 'col-12 col-md-8' : 'col-12'">
           <!-- VISIBLE ONLY ON LG AND XL SCREENS -->
           
           <div class="cx-multi-step-checkout__nav--media">
@@ -59,7 +59,9 @@
           </div>
         </div>
         <div class="col-12 col-md-4 ">
-          <fsa-mini-cart></fsa-mini-cart>
+          <div *ngIf="step !== 2">
+            <fsa-mini-cart></fsa-mini-cart>
+          </div>
         </div>
       </div>
     </div>

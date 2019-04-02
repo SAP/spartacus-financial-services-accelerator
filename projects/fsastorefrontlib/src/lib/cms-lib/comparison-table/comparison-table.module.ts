@@ -2,7 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
-import { CmsConfig, ConfigModule } from '@spartacus/core';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { CmsConfig, ConfigModule, UrlTranslationModule } from '@spartacus/core';
 import { CmsModule, ComponentsModule } from '@spartacus/storefront';
 import { ComparisonTableContainerComponent } from './comparison-table-container/comparison-table-container.component';
 // tslint:disable-next-line:max-line-length
@@ -11,6 +12,7 @@ import { ComparisonTablePanelComponent } from './comparison-table-container/comp
 import { ComparisonTablePanelItemComponent } from './comparison-table-container/comparison-table-tab/comparison-table-panel/comparison-table-panel-item/comparison-table-panel-item.component';
 import { ComparisonTableTabComponent } from './comparison-table-container/comparison-table-tab/comparison-table-tab.component';
 import { OccBillingTimeService } from '../../occ/billing-time/billing-time.service';
+import { ComparisonTableService } from './comparison-table.service';
 
 @NgModule({
   imports: [
@@ -19,6 +21,8 @@ import { OccBillingTimeService } from '../../occ/billing-time/billing-time.servi
     ComponentsModule,
     CmsModule,
     NgbTabsetModule,
+    NgbTooltipModule,
+    UrlTranslationModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         CMSMultiComparisonTabContainer: {
@@ -26,16 +30,17 @@ import { OccBillingTimeService } from '../../occ/billing-time/billing-time.servi
         },
         CMSComparisonTabComponent: { selector: 'fsa-comparison-table-tab' },
         ComparisonPanelCMSComponent: { selector: 'fsa-comparison-table-panel' }
+      },
+      routesConfig: {
+        translations: {
+          default: {
+            'category/': { paths: ['category/:categoryCode'] }
+          }
+        }
       }
     })
   ],
   declarations: [
-    ComparisonTableContainerComponent,
-    ComparisonTableTabComponent,
-    ComparisonTablePanelComponent,
-    ComparisonTablePanelItemComponent
-  ],
-  exports: [
     ComparisonTableContainerComponent,
     ComparisonTableTabComponent,
     ComparisonTablePanelComponent,
@@ -47,6 +52,6 @@ import { OccBillingTimeService } from '../../occ/billing-time/billing-time.servi
     ComparisonTablePanelComponent,
     ComparisonTablePanelItemComponent
   ],
-  providers: [OccBillingTimeService]
+  providers: [OccBillingTimeService, ComparisonTableService]
 })
 export class ComparisonTableModule { }

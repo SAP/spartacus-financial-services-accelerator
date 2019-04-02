@@ -1,29 +1,56 @@
 @import 'mixins-fsa';
 @import 'variables-fsa';
+@import '~bootstrap/scss/mixins/breakpoints';
 
 :host {
-    display: flex;
-    flex: 0 1 100%;
-    justify-items: stretch;
+    display: block;
+    width: 100%;
 }
 .product-grid-item {
-    flex: 0 1 50%;
+    float: left;
+    width: 25%;
+    @include media-breakpoint-down(sm) {
+        width: 44%;
+    }
 }
-.products-details {
-    min-height: 200px;
+.product-grid-items {
+    float: left; 
+    display: flex;
+    width: 75%;
+    overflow-y: hidden;
+    overflow-x: auto;
+    @include media-breakpoint-down(sm) {
+        width: 56%;
+        margin-right: -65px;
+        border-left: $border-grey;
+    }
+}
+.products-details, .products-prices {
     padding-right: 5px;
 }
-.products-prices {
-    padding-right: 5px;
-    max-width: 200px;
-    &__price-wrapper {
-        @include ellipsis;
-        padding: 15px;
-        &:nth-child(even) {
-            background-color: transparent;
-        }
-        &:nth-child(odd) {
-            background-color: $color-mild-grey;
+.price-name, .price-tooltip {
+    display: inline-block;
+    vertical-align: middle;
+}
+.price-name {
+    line-height: 1.2;
+    max-width: calc(100% - 6vw);
+    @include ellipsis;
+}
+.fsa-tooltip {
+    @include absolute-center;
+    right: 5%;
+}
+fsa-comparison-table-panel-item {
+    position: relative;
+    z-index: 1;
+    flex: 0 1 100%;
+    padding: 0 5px;
+    border-left: 1px dashed $color-grey;
+    text-align: center;
+    @include media-breakpoint-down(sm) {
+        &:first-of-type {
+            border-left: none;
         }
     }
 }

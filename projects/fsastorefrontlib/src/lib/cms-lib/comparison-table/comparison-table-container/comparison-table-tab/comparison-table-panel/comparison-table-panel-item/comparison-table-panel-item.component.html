@@ -11,12 +11,12 @@
   <div class="products-prices">
     <ng-container *ngFor="let item of panelItemEntries">
       <div class="products-prices__price-wrapper">
-      <ng-container *ngIf="item !== undefined; else itemNotIncluded">
-        <div *ngIf="item.price?.value > 0 || item.chargeInformation; else itemIncluded" >
-            <ng-container *ngTemplateOutlet="itemValue context: {value: (item.price.value > 0 ? item.price.formattedValue : item.chargeInformation)}"></ng-container>
-        </div>
-      </ng-container>
-    </div>
+        <ng-container *ngIf="item !== undefined; else itemNotIncluded">
+          <div class="price-value text-truncate" *ngIf="item.price?.value > 0 || item.chargeInformation; else itemIncluded" title="{{item.chargeInformation}}">
+              <ng-container *ngTemplateOutlet="itemValue context: {value: (item.price.value > 0 ? item.price.formattedValue : item.chargeInformation)}"></ng-container>
+          </div>
+        </ng-container>
+      </div>
     </ng-container>
     <ng-container *ngFor="let investment of product.investments">
       <div class="products-prices__price-wrapper">
@@ -28,6 +28,7 @@
       </div>
     </ng-container>
   </div>
+  <a class="secondary-button__default secondary-button mt-5" [routerLink]=" { route: [{ name: 'category/', params: { categoryCode: product.defaultCategory?.parentCategory?.code } }] }| cxTranslateUrl">More Info</a>
 </ng-container>
 <ng-template #loading>
   <cx-spinner></cx-spinner>

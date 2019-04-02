@@ -5,7 +5,7 @@
       <div class="row no-gutters position-relative py-3" *ngIf="orderEntryData.product">
         <div *ngIf="!orderEntryData.removeable && !orderEntryData.addable" class="disabled-option"></div>
         <div class="tooltip-wrapper">
-          <div class="fs-tooltip" ngbTooltip="{{orderEntryData.product.description}}" triggers="click:blur" placement="left">i</div>
+          <div class="fsa-tooltip" ngbTooltip="{{orderEntryData.product.description}}" triggers="click:blur" placement="left">i</div>
         </div>
         <div class="col-12 col-md-2 align-self-center">
           <cx-picture class="cx-product-image-container" [imageContainer]="orderEntryData.product.images?.PRIMARY" imageFormat="96Wx96H"></cx-picture>
