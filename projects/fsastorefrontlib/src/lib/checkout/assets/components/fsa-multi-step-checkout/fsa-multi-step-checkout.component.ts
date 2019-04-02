@@ -77,8 +77,7 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
   }): void {
     payment.billingAddress = billingAddress
       ? billingAddress
-      : this.deliveryAddress;
-
+      : payment.billingAddress;
     if (newPayment) {
       if (!billingAddress) {
         this.checkoutService.getDeliveryAddress().subscribe(data => {
