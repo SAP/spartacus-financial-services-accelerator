@@ -2,8 +2,12 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import * as fromQuoteStore from '../../store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
+import { CmsComponentMapping, StandardCmsComponentConfig } from '@spartacus/core';
 import { QuoteService } from '../../services/quote.service';
 
+export interface Mapping extends StandardCmsComponentConfig {
+  AccountMyQuotesComponent?: CmsComponentMapping;
+}
 
 @Component({
   selector: 'fsa-quotes',
@@ -16,7 +20,7 @@ export class QuotesComponent implements OnInit {
   constructor(
     private store: Store<fromQuoteStore.UserState>,
     private config: OccConfig,
-    protected quoteService: QuoteService
+    protected quoteService: QuoteService,
   ) {}
 
   quotes$;
