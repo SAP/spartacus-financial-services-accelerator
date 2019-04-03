@@ -49,7 +49,6 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
         .subscribe(paymentInfo => {
           if (!paymentInfo['hasError']) {
             this.paymentDetails = paymentInfo;
-            console.log(paymentInfo);
             this.nextStep(7);
           } else {
             Object.keys(paymentInfo).forEach(key => {
@@ -75,10 +74,11 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
     payment: PaymentDetails;
     billingAddress: Address;
   }): void {
+    console.log(payment);
+    console.log(billingAddress);
     payment.billingAddress = billingAddress
       ? billingAddress
       : this.deliveryAddress;
-
     if (newPayment) {
       if (!billingAddress) {
         this.checkoutService.getDeliveryAddress().subscribe(data => {
@@ -88,6 +88,7 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
       this.checkoutService.createPaymentDetails(payment);
       return;
     }
+    console.log('nisam usao');
     this.checkoutService.setPaymentDetails(payment);
   }
 

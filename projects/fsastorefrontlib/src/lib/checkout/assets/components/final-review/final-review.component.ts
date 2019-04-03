@@ -15,7 +15,7 @@ export class FinalReviewComponent implements OnInit {
   paymentDetails: PaymentDetails;
   @Output()
   backStep = new EventEmitter<any>();
-
+  tAndCToggler = false;
   constructor(
     protected cartService: CartService,
     private config: OccConfig,
@@ -26,11 +26,16 @@ export class FinalReviewComponent implements OnInit {
     this.cart$ = this.cartService.getActive();
     this.cartLoaded$ = this.cartService.getLoaded();
   }
+  toggleTAndC(): void {
+    this.tAndCToggler = !this.tAndCToggler;
+  }
   public getBaseUrl() {
     return this.config.server.baseUrl || '';
   }
-
   back() {
     this.backStep.emit();
+  }
+  placeOrder(): void {
+    this.checkoutService.placeOrder();
   }
 }

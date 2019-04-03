@@ -1,28 +1,51 @@
-<div class="center1400 contentPadding">
-    <div class="gradient-heading text-center">
-        Final Review
-    </div>
-    <div *ngIf="cart$ | async as cart">
+<div class="gradient-heading text-center">
+    Final Review
+</div>
+<div *ngIf="cart$ | async as cart">
+    <div class="container-fluid">
         <div class="info-container row p-4">
             <div class="col-6 col-md-4">
-                <p class="notice notice--dark m-b-4">Payment Details</p>     
                 <ul>
+                    <li class="mb-3"><strong>Payment Details</strong></li>
                     <li>{{ paymentDetails.accountHolderName }}</li>
                     <li>{{ paymentDetails.cardNumber }}</li>
                     <li>{{ paymentDetails.cardType.name }}</li>
                     <li>Expires: {{ paymentDetails.expiryMonth }} / {{ paymentDetails.expiryYear }}</li>
-                    {{ paymentDetails | json }}
                 </ul>
             </div>
             <div class="col-6 col-md-5">
-                <p class="notice notice--dark m-b-4">Billing Address</p>
                 <ul>
-                    <li></li>
+                    <li class="mb-3"><strong>Billing Address</strong></li>
+                    <li>Mrs. Donna Moore</li>
+                    <li>Holborn tower</li>
+                    <li>137 High Holborn</li>
+                    <li>London</li>
+                    <li>United Kingdom</li>
                 </ul>
             </div>
             <div class="col-12 col-md-3">
-                <a class="secondary-button__default secondary-button mt-5" href="#">EDIT</a>
+                <button [disabled]="!tAndCToggler" class="secondary-button__default secondary-button" href="#">EDIT</button>
             </div>
         </div>
     </div>
+    <div class="cx-place-order-form form-check">
+        <label for="termsCheck">
+            <input
+            name="termsCheck"
+            class="form-check-input"
+            type="checkbox"
+            (change)="toggleTAndC()" />
+            <span class="form-check-label">
+                I confirm that I have read and agree with the
+                <a  href="#" class="cx-tc-link"> Terms & Conditions </a>
+            </span>
+        </label>
+    </div>
+    <button
+        [disabled]="!tAndCToggler"
+        (click)="placeOrder()"
+        class="primary-button primary-button__default"
+    >
+        Apply
+    </button>
 </div>
