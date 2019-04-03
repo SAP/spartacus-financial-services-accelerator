@@ -11,10 +11,6 @@ export interface CmsViewQuotesComponent extends CmsComponent {
   numberOfQuotesToDisplay?: string;
 }
 
-export interface AccountMyQuotesSPAComponent extends CmsComponent {
-  title?: string;
-}
-
 export interface CmsProductFeatureComponent extends CmsComponent {
   title?: string;
   description?: string;
