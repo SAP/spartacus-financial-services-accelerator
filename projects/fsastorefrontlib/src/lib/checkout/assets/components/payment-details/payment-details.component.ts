@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService, CartDataService, Address, CheckoutService } from '@spartacus/core';
 import { ɵv as PaymentMethodComponent } from '@spartacus/storefront';
 import * as fromCheckout from '@spartacus/core';
