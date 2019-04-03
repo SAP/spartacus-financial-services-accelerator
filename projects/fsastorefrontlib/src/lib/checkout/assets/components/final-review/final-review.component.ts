@@ -14,7 +14,7 @@ export class FinalReviewComponent implements OnInit {
   @Input()
   paymentDetails: PaymentDetails;
   @Output()
-  backStep = new EventEmitter<any>();
+  goToQuoteReview = new EventEmitter<any>();
   tAndCToggler = false;
   constructor(
     protected cartService: CartService,
@@ -29,13 +29,7 @@ export class FinalReviewComponent implements OnInit {
   toggleTAndC(): void {
     this.tAndCToggler = !this.tAndCToggler;
   }
-  public getBaseUrl() {
-    return this.config.server.baseUrl || '';
-  }
-  back() {
-    this.backStep.emit();
-  }
-  placeOrder(): void {
-    this.checkoutService.placeOrder();
+  edit() {
+    this.goToQuoteReview.emit();
   }
 }

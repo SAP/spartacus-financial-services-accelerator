@@ -78,7 +78,7 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
     console.log(billingAddress);
     payment.billingAddress = billingAddress
       ? billingAddress
-      : this.deliveryAddress;
+      : payment.billingAddress;
     if (newPayment) {
       if (!billingAddress) {
         this.checkoutService.getDeliveryAddress().subscribe(data => {
@@ -91,5 +91,4 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
     console.log('nisam usao');
     this.checkoutService.setPaymentDetails(payment);
   }
-
 }

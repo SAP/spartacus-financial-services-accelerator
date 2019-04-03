@@ -58,6 +58,7 @@
               </div>
               <div *ngIf="nav.status.active && step === 7">
                 <fsa-final-review
+                  (goToQuoteReview)="setStep(5)"
                   [paymentDetails]="paymentDetails"
                 ></fsa-final-review>
               </div>

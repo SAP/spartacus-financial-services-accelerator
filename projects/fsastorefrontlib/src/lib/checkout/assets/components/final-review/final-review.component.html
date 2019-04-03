@@ -6,7 +6,7 @@
         <div class="info-container row p-4">
             <div class="col-6 col-md-4">
                 <ul>
-                    <li class="mb-3"><strong>Payment Details</strong></li>
+                    <li class="mb-2"><strong>Payment Details</strong></li>
                     <li>{{ paymentDetails.accountHolderName }}</li>
                     <li>{{ paymentDetails.cardNumber }}</li>
                     <li>{{ paymentDetails.cardType.name }}</li>
@@ -15,37 +15,36 @@
             </div>
             <div class="col-6 col-md-5">
                 <ul>
-                    <li class="mb-3"><strong>Billing Address</strong></li>
-                    <li>Mrs. Donna Moore</li>
-                    <li>Holborn tower</li>
-                    <li>137 High Holborn</li>
-                    <li>London</li>
-                    <li>United Kingdom</li>
+                    <li class="mb-2"><strong>Billing Address</strong></li>
+                    <li>{{ paymentDetails.billingAddress.firstName }} {{ paymentDetails.billingAddress.lastName }}</li>
+                    <li>{{ paymentDetails.billingAddress.line1 }}</li>
+                    <li>{{ paymentDetails.billingAddress.town }}</li>
+                    <li>{{ paymentDetails.billingAddress.postalCode }}</li>
+                    <li>{{ paymentDetails.billingAddress.country.isocode }}</li>
                 </ul>
             </div>
             <div class="col-12 col-md-3">
-                <button [disabled]="!tAndCToggler" class="secondary-button__default secondary-button" href="#">EDIT</button>
+                <button class="secondary-button__default secondary-button" href="#" (click)="edit()">EDIT</button>
             </div>
         </div>
+        <div class="row my-5">
+                <div class="col-12 col-md-8 cx-place-order-form form-check">
+                    <label for="termsCheck">
+                        <input
+                        name="termsCheck"
+                        type="checkbox"
+                        (change)="toggleTAndC()" />
+                        <span class="form-check-label">
+                            I confirm that I have read and agree with the
+                            <a  href="#" class="cx-tc-link"> Terms & Conditions </a>
+                        </span>
+                    </label>
+                </div>
+                <button
+                    [disabled]="!tAndCToggler"
+                    class="col-12 col-md-4 primary-button primary-button__default" >
+                    Apply
+                </button>
+            </div>
     </div>
-    <div class="cx-place-order-form form-check">
-        <label for="termsCheck">
-            <input
-            name="termsCheck"
-            class="form-check-input"
-            type="checkbox"
-            (change)="toggleTAndC()" />
-            <span class="form-check-label">
-                I confirm that I have read and agree with the
-                <a  href="#" class="cx-tc-link"> Terms & Conditions </a>
-            </span>
-        </label>
-    </div>
-    <button
-        [disabled]="!tAndCToggler"
-        (click)="placeOrder()"
-        class="primary-button primary-button__default"
-    >
-        Apply
-    </button>
 </div>

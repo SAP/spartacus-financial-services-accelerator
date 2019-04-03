@@ -3,12 +3,10 @@ import { UserService, CartDataService, Address, CheckoutService } from '@spartac
 import { ɵv as PaymentMethodComponent } from '@spartacus/storefront';
 import * as fromCheckout from '@spartacus/core';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'fsa-payment-details',
-  templateUrl: './payment-details.component.html',
-  styleUrls: ['./payment-details.component.css']
+  templateUrl: './payment-details.component.html'
 })
 export class PaymentDetailsComponent extends PaymentMethodComponent {
 
