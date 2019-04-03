@@ -1,9 +1,12 @@
-import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
-import { checkoutNavBar } from './fsa-checkout-navigation-bar';
+import { ChangeDetectorRef, Component } from '@angular/core';
+import {
+  CartDataService, CheckoutService, GlobalMessageService,
+  GlobalMessageType, RoutingService, Address, PaymentDetails
+} from '@spartacus/core';
 import { MultiStepCheckoutComponent } from '@spartacus/storefront';
-import { CheckoutService, CartDataService, RoutingService, GlobalMessageService } from '@spartacus/core';
-import { FSCartService } from '../../services/fs-cart.service';
 import { filter } from 'rxjs/operators';
+import { FSCartService } from '../../services/fs-cart.service';
+import { checkoutNavBar } from './fsa-checkout-navigation-bar';
 
 @Component({
   selector: 'fsa-multi-step-checkout',
@@ -24,16 +27,67 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
     super(checkoutService, cartService, cartDataService, routingService, globalMessageService, cd);
   }
 
-  addOptions() {
-    this.nextStep(5);
-  }
-
   processSteps() {
+    // step2: add main product
     this.subscriptions.push(
       this.cartService.mainProductAdded
-      .pipe(filter(poductCode => Object.keys(poductCode).length !== 0 && this.step === 2))
-      .subscribe(state => {
-        this.nextStep(3);
-      }));
+        .pipe(filter(poductCode => Object.keys(poductCode).length !== 0 && this.step === 2))
+        .subscribe(state => {
+          this.nextStep(3);
+        }));
+
+    // step6: set payment information
+    this.subscriptions.push(
+      this.checkoutService
+        .getPaymentDetails()
+        .pipe(
+          filter(
+            paymentInfo =>
+              Object.keys(paymentInfo).length !== 0 && this.step === 6
+          )
+        )
+        .subscribe(paymentInfo => {
+          if (!paymentInfo['hasError']) {
+            this.paymentDetails = paymentInfo;
+            // next step - final review step
+            this.routingService.go({ route: ['orderConfirmation'] });
+          } else {
+            Object.keys(paymentInfo).forEach(key => {
+              if (key.startsWith('InvalidField')) {
+                this.globalMessageService.add({
+                  type: GlobalMessageType.MSG_TYPE_ERROR,
+                  text: 'InvalidField: ' + paymentInfo[key]
+                });
+              }
+            });
+            this.checkoutService.clearCheckoutStep(6);
+          }
+        })
+    );
   }
+
+  addPaymentInfo({
+    newPayment,
+    payment,
+    billingAddress
+  }: {
+    newPayment: boolean;
+    payment: PaymentDetails;
+    billingAddress: Address;
+  }): void {
+    payment.billingAddress = billingAddress
+      ? billingAddress
+      : payment.billingAddress;
+    if (newPayment) {
+      if (!billingAddress) {
+        this.checkoutService.getDeliveryAddress().subscribe(data => {
+          payment.billingAddress = data;
+        });
+      }
+      this.checkoutService.createPaymentDetails(payment);
+      return;
+    }
+    this.checkoutService.setPaymentDetails(payment);
+  }
+
 }
