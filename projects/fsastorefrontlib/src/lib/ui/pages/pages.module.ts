@@ -12,7 +12,6 @@ import { QuotesReviewPageModule } from './quotes-review-page/quotes-review-page.
 import { AddOptionsPageModule } from './add-options-page/add-options-page.module';
 import { ComparisonTablePageModule } from './comparison-table-page/comparison-table-page.module';
 import { CheckoutPageModule } from './checkout-page/checkout-page.module';
-import { FinalReviewPageModule } from './final-review-page/final-review-page.module';
 
 const pageModules = [
   QuotesPageModule,
@@ -25,8 +24,7 @@ const pageModules = [
   AddOptionsPageModule,
   QuotesReviewPageModule,
   ComparisonTablePageModule,
-  CheckoutPageModule,
-  FinalReviewPageModule
+  CheckoutPageModule
 ];
 
 @NgModule({

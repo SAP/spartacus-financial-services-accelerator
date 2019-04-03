@@ -74,8 +74,6 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
     payment: PaymentDetails;
     billingAddress: Address;
   }): void {
-    console.log(payment);
-    console.log(billingAddress);
     payment.billingAddress = billingAddress
       ? billingAddress
       : payment.billingAddress;
@@ -88,7 +86,6 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
       this.checkoutService.createPaymentDetails(payment);
       return;
     }
-    console.log('nisam usao');
     this.checkoutService.setPaymentDetails(payment);
   }
 }
