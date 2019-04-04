@@ -104,7 +104,10 @@ cx-header {
                     align-items: center;
                 }
                 .cx-navigation__child-item {
+                    padding: 0;
                     a {
+                        display: block;
+                        padding: 12px 18px;
                         color: $color-dark-grey;
                     }
                     &:hover {
