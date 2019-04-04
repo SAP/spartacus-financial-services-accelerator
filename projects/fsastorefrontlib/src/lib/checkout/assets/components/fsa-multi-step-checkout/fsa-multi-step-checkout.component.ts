@@ -86,7 +86,7 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
       this.checkoutService.createPaymentDetails(payment);
       return;
     }
-    this.checkoutService.setDeliveryMode("financial-default");
+    this.checkoutService.setDeliveryMode('financial-default');
     this.checkoutService.setPaymentDetails(payment);
   }
 }
