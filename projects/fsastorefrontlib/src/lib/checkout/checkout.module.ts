@@ -20,7 +20,6 @@ import { effects } from './assets/store/effects';
   ],
   declarations: [QuoteReviewComponent, FinalReviewComponent],
   exports: [AddOptionsModule, QuoteReviewComponent, MiniCartModule, FinalReviewComponent, PaymentDetailsModule],
-  providers: []
 })
 export class CheckoutModule {
 }

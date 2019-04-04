@@ -1,30 +1,22 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Cart, CartService, PaymentDetails, CheckoutService } from '@spartacus/core';
+import { PaymentDetails, CheckoutService } from '@spartacus/core';
 
 @Component({
   selector: 'fsa-final-review',
   templateUrl: './final-review.component.html',
   styleUrls: ['./final-review.component.scss']
 })
-export class FinalReviewComponent implements OnInit {
+export class FinalReviewComponent {
 
-  cart$: Observable<Cart>;
-  cartLoaded$: Observable<boolean>;
   @Input()
   paymentDetails: PaymentDetails;
   @Output()
   goToQuoteReview = new EventEmitter<any>();
   tAndCToggler = false;
   constructor(
-    protected cartService: CartService,
     private checkoutService: CheckoutService
     ) { }
 
-  ngOnInit() {
-    this.cart$ = this.cartService.getActive();
-    this.cartLoaded$ = this.cartService.getLoaded();
-  }
   toggleTAndC(): void {
     this.tAndCToggler = !this.tAndCToggler;
   }

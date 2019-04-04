@@ -1,11 +1,11 @@
 <div class="gradient-heading text-center">
     Final Review
 </div>
-<div *ngIf="cart$ | async as cart">
+<div *ngIf="paymentDetails">
     <div class="container-fluid">
         <div class="info-container row p-4">
             <div class="col-6 col-md-4">
-                <ul>
+                <ul class="list-unstyled">
                     <li class="mb-2"><strong>Payment Details</strong></li>
                     <li>{{ paymentDetails.accountHolderName }}</li>
                     <li>{{ paymentDetails.cardNumber }}</li>
@@ -14,13 +14,13 @@
                 </ul>
             </div>
             <div class="col-6 col-md-5">
-                <ul>
+                <ul class="list-unstyled">
                     <li class="mb-2"><strong>Billing Address</strong></li>
-                    <li>{{ paymentDetails.billingAddress.firstName }} {{ paymentDetails.billingAddress.lastName }}</li>
+                    <li>{{ paymentDetails.billingAddress?.firstName }} {{ paymentDetails.billingAddress?.lastName }}</li>
                     <li>{{ paymentDetails.billingAddress.line1 }}</li>
                     <li>{{ paymentDetails.billingAddress.town }}</li>
                     <li>{{ paymentDetails.billingAddress.postalCode }}</li>
-                    <li>{{ paymentDetails.billingAddress.country.isocode }}</li>
+                    <li>{{ paymentDetails.billingAddress?.country?.isocode }}</li>
                 </ul>
             </div>
             <div class="col-12 col-md-3">
@@ -28,24 +28,24 @@
             </div>
         </div>
         <div class="row my-5">
-                <div class="col-12 col-md-8 cx-place-order-form form-check">
-                    <label for="termsCheck">
-                        <input
-                        name="termsCheck"
-                        type="checkbox"
-                        (change)="toggleTAndC()" />
-                        <span class="form-check-label">
-                            I confirm that I have read and agree with the
-                            <a  href="#" class="cx-tc-link"> Terms & Conditions </a>
-                        </span>
-                    </label>
-                </div>
-                <button
-                    [disabled]="!tAndCToggler" 
-                    (click)=placeOrder()
-                    class="col-12 col-md-4 primary-button primary-button__default" >
-                    Apply
-                </button>
+            <div class="col-12 col-md-8 cx-place-order-form form-check">
+                <label for="termsCheck">
+                    <input
+                    name="termsCheck"
+                    type="checkbox"
+                    (change)="toggleTAndC()" />
+                    <span class="form-check-label">
+                        I confirm that I have read and agree with the
+                        <a  href="#" class="cx-tc-link"> Terms & Conditions </a>
+                    </span>
+                </label>
             </div>
+            <button
+                [disabled]="!tAndCToggler" 
+                (click)=placeOrder()
+                class="col-12 col-md-4 primary-button primary-button__default" >
+                Apply
+            </button>
+        </div>
     </div>
 </div>
