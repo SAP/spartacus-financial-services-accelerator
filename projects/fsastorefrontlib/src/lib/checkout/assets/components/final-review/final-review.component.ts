@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cart, CartService, OccConfig, PaymentDetails, CheckoutService } from '@spartacus/core';
+import { Cart, CartService, PaymentDetails } from '@spartacus/core';
 
 @Component({
   selector: 'fsa-final-review',
@@ -17,9 +17,7 @@ export class FinalReviewComponent implements OnInit {
   goToQuoteReview = new EventEmitter<any>();
   tAndCToggler = false;
   constructor(
-    protected cartService: CartService,
-    private config: OccConfig,
-    private checkoutService: CheckoutService
+    protected cartService: CartService
     ) { }
 
   ngOnInit() {
