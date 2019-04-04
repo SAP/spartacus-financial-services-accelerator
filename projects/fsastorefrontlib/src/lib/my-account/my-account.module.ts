@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+
 import { ClaimsModule } from './assets/claims.module';
+import { InboxModule } from './assets/inbox.module';
 import { QuotesModule } from './assets/quotes.module';
 import { PoliciesModule } from './assets/policies.module';
+import { PolicyDetailsModule } from './assets/policy-details.module';
 import { PremiumCalendarModule } from './assets/premium-calendar.module';
-import { InboxModule } from './assets/inbox.module';
 import { effects } from './assets/store/effects';
 import { reducerProvider, reducerToken } from './assets/store/reducers';
 
@@ -14,12 +16,13 @@ import { reducerProvider, reducerToken } from './assets/store/reducers';
     ClaimsModule,
     QuotesModule,
     PoliciesModule,
+    PolicyDetailsModule,
     PremiumCalendarModule,
     InboxModule,
     StoreModule.forFeature('assets', reducerToken),
     EffectsModule.forFeature(effects)
   ],
-  exports: [QuotesModule, PoliciesModule, ClaimsModule, InboxModule],
+  exports: [ ClaimsModule, InboxModule, QuotesModule, PoliciesModule, PolicyDetailsModule, PremiumCalendarModule],
   providers: [reducerProvider]
 })
 export class MyAccountModule {}

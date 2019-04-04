@@ -3,17 +3,16 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
+
+import { ComponentsModule } from '@spartacus/storefront';
 import { CmsConfig, ConfigModule, AuthGuard } from '@spartacus/core';
 import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 
 import { PoliciesComponent } from '../assets/components/policies/policies.component';
-import { PolicyDetailsComponent } from '../assets/components/policy-details/policy-details.component';
 import { PolicyService } from './services/policy.service';
 import { PolicyDataService } from './services/policy-data.service';
 import { OccPolicyService } from '../../occ/policy/policy.service';
-import { AccordionModule } from './../../accordion/accordion.module';
 
-import { ComponentsModule } from '@spartacus/storefront';
 
 const routes: Routes = [
   {
@@ -30,7 +29,6 @@ const routes: Routes = [
     RouterModule,
     FormsModule,
     NgSelectModule,
-    AccordionModule,
     ComponentsModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig>{
@@ -39,8 +37,8 @@ const routes: Routes = [
       }
     })
   ],
-  declarations: [PoliciesComponent, PolicyDetailsComponent],
-  exports: [PoliciesComponent, PolicyDetailsComponent],
+  declarations: [PoliciesComponent],
+  exports: [PoliciesComponent],
   providers: [PolicyService, PolicyDataService, OccPolicyService],
   entryComponents: [PoliciesComponent]
 })
