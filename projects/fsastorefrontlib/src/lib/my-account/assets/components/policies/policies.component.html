@@ -1,3 +1,4 @@
+<h2 class="heading-headline">Policies</h2>
 <ng-container *ngIf="policies$ | async as policies">
   <ng-container *ngIf="policiesLoaded$ | async; else loading">
     <div class="row" *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
@@ -46,7 +47,7 @@
   </ng-container>
 </ng-container>
 <ng-template #noPolicies>
-  <h3>{{noPoliciesText}}</h3>
+  <h3>You have no Policies!</h3>
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>

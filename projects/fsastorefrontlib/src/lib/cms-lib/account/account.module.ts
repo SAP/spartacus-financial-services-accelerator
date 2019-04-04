@@ -24,8 +24,8 @@ import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
       }
     })
   ],
-  declarations: [CMSViewPoliciesComponent, CMSViewQuotesComponent],
-  exports: [CMSViewPoliciesComponent, CMSViewQuotesComponent],
-  entryComponents: [CMSViewPoliciesComponent, CMSViewQuotesComponent]
+  declarations: [ CMSViewPoliciesComponent, CMSViewQuotesComponent ],
+  exports: [ CMSViewPoliciesComponent, CMSViewQuotesComponent ],
+  entryComponents: [ CMSViewPoliciesComponent, CMSViewQuotesComponent ]
 })
 export class AccountModule {}
