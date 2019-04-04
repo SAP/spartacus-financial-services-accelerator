@@ -8,7 +8,6 @@ import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 
 import { PoliciesComponent } from '../assets/components/policies/policies.component';
 import { PolicyDetailsComponent } from '../assets/components/policy-details/policy-details.component';
-import { PremiumCalendarComponent } from '../assets/components/premium-calendar/premium-calendar.component';
 import { PolicyService } from './services/policy.service';
 import { PolicyDataService } from './services/policy-data.service';
 import { OccPolicyService } from '../../occ/policy/policy.service';
@@ -25,7 +24,6 @@ const routes: Routes = [
   }
 ];
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -41,8 +39,8 @@ const routes: Routes = [
       }
     })
   ],
-  declarations: [PoliciesComponent, PolicyDetailsComponent, PremiumCalendarComponent],
-  exports: [PoliciesComponent, PolicyDetailsComponent, PremiumCalendarComponent],
+  declarations: [PoliciesComponent, PolicyDetailsComponent],
+  exports: [PoliciesComponent, PolicyDetailsComponent],
   providers: [PolicyService, PolicyDataService, OccPolicyService],
   entryComponents: [PoliciesComponent]
 })

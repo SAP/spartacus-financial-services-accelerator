@@ -35,9 +35,9 @@ const routes: Routes = [
       }
     })
   ],
-  declarations: [QuotesComponent],
-  exports: [QuotesComponent],
-  providers: [QuoteService, QuoteDataService, OccQuoteService ],
-  entryComponents: [QuotesComponent]
+  declarations: [ QuotesComponent ],
+  exports: [ QuotesComponent ],
+  providers: [ QuoteService, QuoteDataService, OccQuoteService ],
+  entryComponents: [ QuotesComponent ]
 })
 export class QuotesModule { }

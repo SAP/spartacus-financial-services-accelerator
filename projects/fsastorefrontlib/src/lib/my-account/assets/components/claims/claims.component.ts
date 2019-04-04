@@ -6,6 +6,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OccConfig } from '@spartacus/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { naIconImgSrc } from '../../../../assets/na-icon';
+import { ClaimService } from '../../services';
 
 
 
@@ -21,7 +22,8 @@ export class ClaimsComponent implements OnInit {
     private modalService: NgbModal,
     protected store: Store<fromClaimStore.UserState>,
     private config: OccConfig,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    protected claimService: ClaimService
   ) {}
 
   naIconImgSrc = naIconImgSrc;
@@ -29,10 +31,9 @@ export class ClaimsComponent implements OnInit {
   claimsLoaded$;
 
   modalInstance;
-  noClaimsText = 'You have no Claims!';
-  notAvailable = 'N/A';
 
   ngOnInit() {
+    this.claimService.loadClaims();
     this.claims$ = this.store.pipe(select(fromClaimStore.getClaims));
     this.claimsLoaded$ = this.store.pipe(select(fromClaimStore.getClaimsLoaded));
   }
