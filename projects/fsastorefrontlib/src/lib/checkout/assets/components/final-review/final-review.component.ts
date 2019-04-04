@@ -32,4 +32,7 @@ export class FinalReviewComponent implements OnInit {
   edit() {
     this.goToQuoteReview.emit();
   }
+  placeOrder(): void {
+    this.checkoutService.placeOrder();
+  }
 }
