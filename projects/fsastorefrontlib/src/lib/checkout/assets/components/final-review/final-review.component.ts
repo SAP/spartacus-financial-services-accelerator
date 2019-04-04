@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cart, CartService, OccConfig, PaymentDetails, CheckoutService } from '@spartacus/core';
+import { Cart, CartService, PaymentDetails, CheckoutService } from '@spartacus/core';
 
 @Component({
   selector: 'fsa-final-review',
@@ -18,7 +18,6 @@ export class FinalReviewComponent implements OnInit {
   tAndCToggler = false;
   constructor(
     protected cartService: CartService,
-    private config: OccConfig,
     private checkoutService: CheckoutService
     ) { }
 
