@@ -22,7 +22,7 @@ import { reducerProvider, reducerToken } from './assets/store/reducers';
     StoreModule.forFeature('assets', reducerToken),
     EffectsModule.forFeature(effects)
   ],
-  exports: [ ClaimsModule, InboxModule, QuotesModule, PoliciesModule, PolicyDetailsModule, PremiumCalendarModule],
-  providers: [reducerProvider]
+  exports: [ ClaimsModule, InboxModule, QuotesModule, PoliciesModule, PolicyDetailsModule, PremiumCalendarModule ],
+  providers: [ reducerProvider ]
 })
 export class MyAccountModule {}
