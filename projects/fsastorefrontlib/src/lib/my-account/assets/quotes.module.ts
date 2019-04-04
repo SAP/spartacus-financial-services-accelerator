@@ -31,7 +31,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
-        AccountMyQuotesSPAComponent: { selector: 'fsa-quotes' },
+        AccountMyQuotesSPAComponent: { selector: 'fsa-quotes' }
       }
     })
   ],
