@@ -35,7 +35,6 @@ export class QuoteReviewComponent implements OnInit {
   back() {
     this.backStep.emit();
   }
-
   next() {
     this.nextStep.emit();
   }
