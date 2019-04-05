@@ -1,0 +1,6 @@
+@import '../mixins-fsa';
+@import '../variables-fsa';
+
+.AccountPageTemplate cx-dynamic-slot {
+    max-width: 1400px;
+}

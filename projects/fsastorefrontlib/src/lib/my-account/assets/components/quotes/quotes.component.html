@@ -1,3 +1,5 @@
+
+<h2 class="heading-headline">Quotes</h2>
 <ng-container *ngIf="quotes$ | async as quotes">
   <ng-container *ngIf="quotesLoaded$ | async; else loading">
     <div class="row" *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes">
@@ -40,7 +42,7 @@
   </ng-container>
 </ng-container>
 <ng-template #noQuotes>
-  <h3>{{noQuotesText}}</h3>
+  <h3>You have no Quotes!</h3>
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
