@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CmsPageGuard } from '@spartacus/storefront';
 import { CheckoutPageComponent } from './checkout-page.component';
 import { CheckoutPageLayoutModule } from '../../layout/checkout-page-layout/checkout-page-layout.module';
+import { ConfigModule } from '@spartacus/core';
 
 const routes: Routes = [
   {
@@ -20,11 +21,22 @@ const routes: Routes = [
   }
 ];
 
+
 @NgModule({
   imports: [
     CommonModule,
     CheckoutPageLayoutModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ConfigModule.withConfig({
+      layoutSlots: {
+        MultiTabsCategoryPageTemplate: {
+          slots: [
+            'Section1',
+            'Section2'
+          ]
+        }
+      }
+      })
   ],
   declarations: [CheckoutPageComponent],
   exports: [CheckoutPageComponent]
