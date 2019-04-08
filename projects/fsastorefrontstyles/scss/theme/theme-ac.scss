@@ -27,6 +27,10 @@ a {
   }
 }
 // Stand-alone building blocks
+.info-container {
+  background-color: $color-light-grey;
+  border: $border-grey;
+}
 .heading-headline {
   line-height: 35px;
   padding: 20px 0;

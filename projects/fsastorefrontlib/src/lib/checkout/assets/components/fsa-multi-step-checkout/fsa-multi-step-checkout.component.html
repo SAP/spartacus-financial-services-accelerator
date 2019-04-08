@@ -52,8 +52,15 @@
                 <fsa-payment-details
                   [selectedPayment]="paymentDetails"
                   (addPaymentInfo)="addPaymentInfo($event)"
-                  (backStep)="setStep(5)"
+                  (nextStep)="setStep(7)"
+                  (backStep)="setStep(5) "
                 ></fsa-payment-details>
+              </div>
+              <div *ngIf="nav.status.active && step === 7">
+                <fsa-final-review
+                  (goToQuoteReview)="setStep(5)"
+                  [paymentDetails]="paymentDetails"
+                ></fsa-final-review>
               </div>
             </div>
           </div>
