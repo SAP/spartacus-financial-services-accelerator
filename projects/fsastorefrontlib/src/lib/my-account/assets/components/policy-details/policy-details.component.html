@@ -1,193 +1,191 @@
-<div class="center1400 contentPadding">
-    <ng-container *ngIf="policy$ | async as policy">
-        <h2 class="policy-spec account-section-content__headline mt-5">
-            <span *ngIf="policy.mainProduct && policy.mainProduct.coverageProduct" class="images images__wrapper">
-                <img class="images__size" [src]="getBaseUrl()+ policy.mainProduct.coverageProduct.images[0].url" alt="">
-            </span>
-            <span *ngIf="policy.categoryData" class="account-section-content__headline--title">
-                        {{policy.categoryData.name}} Policy <br>
-                        {{policy.mainProduct.coverageProduct.name}}
-            </span>
-            <span class="account-section-content__headline--number">
-                    {{policy.policyNumber}}
-            </span>
-            <a class="account-section-content__headline--back" 
-            routerLink="/my-account/my-policies/" routerLinkActive="active">Back</a>
-        </h2>
-        <div class="accordion">
-            <fsa-accordion-item [opened]="true" [title]="'Policy Summary'">
-                <ul class="accordion--list container-fluid">
-                    <li class="accordion--list-item row">
-                        <div class="col-6 col-sm-3 bold">
-                            ContractId
-                        </div>
-                        <div class="col-6 col-sm-3 value notice notice--dark">
-                            {{policy.contractNumber}}
-                        </div>
-                    </li>
-                    <li class="accordion--list-item row">
-                        <div class="col-6 col-sm-3 bold">
-                            Product
-                        </div>
-                        <div class="col-6 col-sm-3 value notice notice--dark">
-                            {{policy.mainProduct?.coverageProduct?.name}}
-                        </div>
-                    </li>
-                    <li class="accordion--list-item row">
-                        <div class="col-6 col-sm-3 bold">
-                            Payment frequency 
-                        </div>
-                        <div class="col-6 col-sm-3 value notice notice--dark">
-                            {{policy.paymentFrequency}}
-                        </div>
-                    </li>   
-                    <li class="accordion--list-item row">
-                        <div class="col-6 col-sm-3 bold">Payment method</div>
-                        <div class="col-6 col-sm-3 value notice notice--dark">
-                            {{policy.paymentMethod?.paymentOption}}
-                        </div>
-                    </li>
-                    <li class="accordion--list-item row">
-                        <div class="col-6 col-sm-3 bold">Duration</div>
-                        <div class="col-6 col-sm-3 value notice notice--dark">
-                            {{policy.policyStartDate}} - {{policy.policyEndDate}}
-                        </div>
-                    </li>
-                </ul>     
-            </fsa-accordion-item>
-            <fsa-accordion-item [title]="'Who or What Is Insured'">
-                <ul class="accordion--list container-fluid" *ngIf="policy.insuredObjects">
-                    <li *ngFor="let insuredObjectItem of policy.insuredObjects[0].insuredObjectItems" class="accordion--list-item row">
-                        <div class="col-6 col-sm-3 bold">
-                                {{insuredObjectItem.label}}
-                        </div>
-                        <div class="col-6 col-sm-3 value notice notice--dark">
-                                {{insuredObjectItem.value}}
-                        </div>
-                    </li>
-                </ul>
-            </fsa-accordion-item>
-            <fsa-accordion-item [title]="'Whats included'">
-                <ul class="accordion--list container-fluid" *ngIf="policy.mainProduct && policy.mainProduct.benefits">
-                    <li *ngFor="let benefit of policy.mainProduct.benefits" class="accordion--list-item row">
-                        <div class="col-6 col-sm-3 bold">
-                            {{benefit.name}}
-                        </div>
-                        <div *ngIf="benefit.coverageValue" class="col-6 col-sm-3 value notice notice--dark">
-                            {{benefit.coverageValue}}
-                        </div>
-                        <div *ngIf="!benefit.coverageValue && benefit.coverageInformation" class="col-6 col-sm-3 value notice notice--dark">
-                            {{benefit.coverageInformation}}
-                        </div>
-                    </li>
-                </ul>
-            </fsa-accordion-item>
-            <fsa-accordion-item [title]="'Optional Extras'">
-                <ul class="accordion--list container-fluid">
-                    <li *ngFor="let optionalCoverage of policy.optionalProducts" class="accordion--list-item row">
+<ng-container *ngIf="policy$ | async as policy">
+    <h2 class="policy-spec account-section-content__headline mt-5">
+        <span *ngIf="policy.mainProduct && policy.mainProduct.coverageProduct" class="images images__wrapper">
+            <img class="images__size" [src]="getBaseUrl()+ policy.mainProduct.coverageProduct.images[0].url" alt="">
+        </span>
+        <span *ngIf="policy.categoryData" class="account-section-content__headline--title">
+                    {{policy.categoryData.name}} Policy <br>
+                    {{policy.mainProduct.coverageProduct.name}}
+        </span>
+        <span class="account-section-content__headline--number">
+                {{policy.policyNumber}}
+        </span>
+        <a class="account-section-content__headline--back" 
+        routerLink="/my-account/my-policies/" routerLinkActive="active">Back</a>
+    </h2>
+    <div class="accordion">
+        <fsa-accordion-item [opened]="true" [title]="'Policy Summary'">
+            <ul class="accordion--list container-fluid">
+                <li class="accordion--list-item row">
+                    <div class="col-6 col-sm-3 bold">
+                        ContractId
+                    </div>
+                    <div class="col-6 col-sm-3 value notice notice--dark">
+                        {{policy.contractNumber}}
+                    </div>
+                </li>
+                <li class="accordion--list-item row">
+                    <div class="col-6 col-sm-3 bold">
+                        Product
+                    </div>
+                    <div class="col-6 col-sm-3 value notice notice--dark">
+                        {{policy.mainProduct?.coverageProduct?.name}}
+                    </div>
+                </li>
+                <li class="accordion--list-item row">
+                    <div class="col-6 col-sm-3 bold">
+                        Payment frequency 
+                    </div>
+                    <div class="col-6 col-sm-3 value notice notice--dark">
+                        {{policy.paymentFrequency}}
+                    </div>
+                </li>   
+                <li class="accordion--list-item row">
+                    <div class="col-6 col-sm-3 bold">Payment method</div>
+                    <div class="col-6 col-sm-3 value notice notice--dark">
+                        {{policy.paymentMethod?.paymentOption}}
+                    </div>
+                </li>
+                <li class="accordion--list-item row">
+                    <div class="col-6 col-sm-3 bold">Duration</div>
+                    <div class="col-6 col-sm-3 value notice notice--dark">
+                        {{policy.policyStartDate}} - {{policy.policyEndDate}}
+                    </div>
+                </li>
+            </ul>     
+        </fsa-accordion-item>
+        <fsa-accordion-item [title]="'Who or What Is Insured'">
+            <ul class="accordion--list container-fluid" *ngIf="policy.insuredObjects">
+                <li *ngFor="let insuredObjectItem of policy.insuredObjects[0].insuredObjectItems" class="accordion--list-item row">
+                    <div class="col-6 col-sm-3 bold">
+                            {{insuredObjectItem.label}}
+                    </div>
+                    <div class="col-6 col-sm-3 value notice notice--dark">
+                            {{insuredObjectItem.value}}
+                    </div>
+                </li>
+            </ul>
+        </fsa-accordion-item>
+        <fsa-accordion-item [title]="'Whats included'">
+            <ul class="accordion--list container-fluid" *ngIf="policy.mainProduct && policy.mainProduct.benefits">
+                <li *ngFor="let benefit of policy.mainProduct.benefits" class="accordion--list-item row">
+                    <div class="col-6 col-sm-3 bold">
+                        {{benefit.name}}
+                    </div>
+                    <div *ngIf="benefit.coverageValue" class="col-6 col-sm-3 value notice notice--dark">
+                        {{benefit.coverageValue}}
+                    </div>
+                    <div *ngIf="!benefit.coverageValue && benefit.coverageInformation" class="col-6 col-sm-3 value notice notice--dark">
+                        {{benefit.coverageInformation}}
+                    </div>
+                </li>
+            </ul>
+        </fsa-accordion-item>
+        <fsa-accordion-item [title]="'Optional Extras'">
+            <ul class="accordion--list container-fluid">
+                <li *ngFor="let optionalCoverage of policy.optionalProducts" class="accordion--list-item row">
+                    <div class="col-6 col-sm-3 accordion-item__title bold">
+                            {{optionalCoverage.coverageProduct.name}}
+                    </div>
+                    <div *ngIf="optionalCoverage.coverageIsIncluded" class="col-6 col-sm-3 value notice notice--dark">
+                        Included
+                    </div>
+                    <div *ngIf="!optionalCoverage.coverageIsIncluded" class="col-6 col-sm-3 value notice notice--dark">
+                        Excluded
+                    </div>
+                </li>
+            </ul>
+        </fsa-accordion-item>
+        <fsa-accordion-item *ngIf="policy.mainProduct?.investmentInfo" [title]="'Investment Details'">
+            <ul class="accordion--list container-fluid">
+                <ng-container *ngFor="let investmentInfoItem of policy.mainProduct?.investmentInfo">
+                    <li  class="accordion--list-item row">
                         <div class="col-6 col-sm-3 accordion-item__title bold">
-                                {{optionalCoverage.coverageProduct.name}}
+                            {{investmentInfoItem.investmentType?.fundName}}
                         </div>
-                        <div *ngIf="optionalCoverage.coverageIsIncluded" class="col-6 col-sm-3 value notice notice--dark">
-                            Included
-                        </div>
-                        <div *ngIf="!optionalCoverage.coverageIsIncluded" class="col-6 col-sm-3 value notice notice--dark">
-                            Excluded
+                        <div class="col-6 col-sm-3 notice notice--dark">
+                            {{investmentInfoItem.distributionPercentage}}&#37;
                         </div>
                     </li>
-                </ul>
-            </fsa-accordion-item>
-            <fsa-accordion-item *ngIf="policy.mainProduct?.investmentInfo" [title]="'Investment Details'">
-                <ul class="accordion--list container-fluid">
-                    <ng-container *ngFor="let investmentInfoItem of policy.mainProduct?.investmentInfo">
-                        <li  class="accordion--list-item row">
-                            <div class="col-6 col-sm-3 accordion-item__title bold">
-                                {{investmentInfoItem.investmentType?.fundName}}
-                            </div>
-                            <div class="col-6 col-sm-3 notice notice--dark">
-                                {{investmentInfoItem.distributionPercentage}}&#37;
-                            </div>
-                        </li>
+                    <li class="accordion--list-item row">
+                        <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                            ISIN
+                        </div>
+                        <div class="col-xs-6 col-sm-3 notice notice--dark">
+                            {{investmentInfoItem.investmentType?.isin}}
+                        </div>
+                    </li>
+                    <li class="accordion--list-item row">
+                        <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                            5 Year Performance
+                        </div>
+                        <div class="col-xs-6 col-sm-3 notice notice--dark">
+                            {{investmentInfoItem.investmentType?.fiveYearPerformance}}&#37;
+                        </div>
+                    </li>
                         <li class="accordion--list-item row">
-                            <div class="col-xs-6 col-sm-3 accordion-item__title bold">
-                                ISIN
-                            </div>
-                            <div class="col-xs-6 col-sm-3 notice notice--dark">
-                                {{investmentInfoItem.investmentType?.isin}}
-                            </div>
-                        </li>
-                        <li class="accordion--list-item row">
-                            <div class="col-xs-6 col-sm-3 accordion-item__title bold">
-                                5 Year Performance
-                            </div>
-                            <div class="col-xs-6 col-sm-3 notice notice--dark">
-                                {{investmentInfoItem.investmentType?.fiveYearPerformance}}&#37;
-                            </div>
-                        </li>
-                            <li class="accordion--list-item row">
-                            <div class="col-xs-6 col-sm-3 accordion-item__title bold">
-                                Risk & Returning Rating
-                            </div>
-                            <div class="col-xs-6 col-sm-3 notice notice--dark">
-                                {{investmentInfoItem.investmentType?.riskReturningRating}}
-                            </div>
-                        </li>
-                    </ng-container> 
-                </ul>
-            </fsa-accordion-item>
-            <fsa-accordion-item [title]="'What Does It Cost Me?'">
-                <ul class="accordion--list container-fluid">
-                    <li class="accordion--list-item row">
-                        <div class="col-6 col-sm-3 bold">
-                            Premium
+                        <div class="col-xs-6 col-sm-3 accordion-item__title bold">
+                            Risk & Returning Rating
                         </div>
-                        <div class="col-xs-12 col-sm-6 value notice notice--dark"> 
-                            {{policy.policyPremium?.formattedValue}}
+                        <div class="col-xs-6 col-sm-3 notice notice--dark">
+                            {{investmentInfoItem.investmentType?.riskReturningRating}}
                         </div>
                     </li>
-                    <li class="accordion--list-item row">
-                        <div class="col-6 col-sm-3 bold">
-                            Payment frequency
-                        </div>
-                        <div class="col-6 col-sm-3 value notice notice--dark">
-                                {{policy.paymentFrequency}}
-                        </div>
-                    </li>
-                    <li class="accordion--list-item row">
-                        <div class="col-6 col-sm-3 bold">
-                            Payment method
-                        </div>
-                        <div class="col-6 col-sm-3 value notice notice--dark">
-                            {{policy.paymentMethod?.paymentOption}}
-                        </div>
-                    </li>
-                </ul>
-            </fsa-accordion-item>
-            <fsa-accordion-item [title]="'Documents'">
-                <ul class="accordion--list container-fluid">
-                    <li class="accordion-item__list-item row">
-                        <div class="col-6 col-sm-3 bold">
-                            Policy
-                        </div>
-                        <div class="col-6 col-sm-3 value notice notice--dark">
-                                {{policy.policyStartDate}} - {{policy.policyEndDate}}
-                        </div>
-                        <div class="col-xs-12 col-sm-6 download">
-                            Download PDF Link
-                        </div>
-                    </li>
-                </ul>   
-            </fsa-accordion-item>
-            <fsa-accordion-item *ngIf="policy.responsibleAgent" [title]="'My Agent'">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class="contact-box col-xs-10 col-sm-4 col-md-3">
-                            <img class="circle-image" [src]="getBaseUrl()+ policy.responsibleAgent?.thumbnail?.url"/>
-                            <p class="contact-info">{{policy.responsibleAgent?.firstName}} - {{policy.responsibleAgent?.lastName}}</p>
-                        </div>
+                </ng-container> 
+            </ul>
+        </fsa-accordion-item>
+        <fsa-accordion-item [title]="'What Does It Cost Me?'">
+            <ul class="accordion--list container-fluid">
+                <li class="accordion--list-item row">
+                    <div class="col-6 col-sm-3 bold">
+                        Premium
+                    </div>
+                    <div class="col-xs-12 col-sm-6 value notice notice--dark"> 
+                        {{policy.policyPremium?.formattedValue}}
+                    </div>
+                </li>
+                <li class="accordion--list-item row">
+                    <div class="col-6 col-sm-3 bold">
+                        Payment frequency
+                    </div>
+                    <div class="col-6 col-sm-3 value notice notice--dark">
+                            {{policy.paymentFrequency}}
+                    </div>
+                </li>
+                <li class="accordion--list-item row">
+                    <div class="col-6 col-sm-3 bold">
+                        Payment method
+                    </div>
+                    <div class="col-6 col-sm-3 value notice notice--dark">
+                        {{policy.paymentMethod?.paymentOption}}
+                    </div>
+                </li>
+            </ul>
+        </fsa-accordion-item>
+        <fsa-accordion-item [title]="'Documents'">
+            <ul class="accordion--list container-fluid">
+                <li class="accordion-item__list-item row">
+                    <div class="col-6 col-sm-3 bold">
+                        Policy
+                    </div>
+                    <div class="col-6 col-sm-3 value notice notice--dark">
+                            {{policy.policyStartDate}} - {{policy.policyEndDate}}
+                    </div>
+                    <div class="col-xs-12 col-sm-6 download">
+                        Download PDF Link
+                    </div>
+                </li>
+            </ul>   
+        </fsa-accordion-item>
+        <fsa-accordion-item *ngIf="policy.responsibleAgent" [title]="'My Agent'">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="contact-box col-xs-10 col-sm-4 col-md-3">
+                        <img class="circle-image" [src]="getBaseUrl()+ policy.responsibleAgent?.thumbnail?.url"/>
+                        <p class="contact-info">{{policy.responsibleAgent?.firstName}} - {{policy.responsibleAgent?.lastName}}</p>
                     </div>
                 </div>
-            </fsa-accordion-item> 
-        </div>
-    </ng-container>
-</div>
+            </div>
+        </fsa-accordion-item> 
+    </div>
+</ng-container>
