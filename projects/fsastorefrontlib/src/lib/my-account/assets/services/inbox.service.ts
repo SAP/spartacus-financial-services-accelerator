@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
+import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { FSSearchConfig, Message } from '../services/inbox-data.service';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
 import { InboxDataService } from './inbox-data.service';
-import { BehaviorSubject } from 'rxjs';
-import { FSSearchConfig } from '../services/inbox-data.service';
-import { Message } from '../services/inbox-data.service';
 
 
 @Injectable()

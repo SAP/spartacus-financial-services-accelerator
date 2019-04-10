@@ -1,18 +1,11 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import {
-  CmsComponentMapping,
-  StandardCmsComponentConfig
-} from '@spartacus/core';
-import { Observable } from 'rxjs';
+import { CmsComponentMapping, StandardCmsComponentConfig } from '@spartacus/core';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { FSSearchConfig } from '../../../../../my-account/assets/services/inbox-data.service';
 import { InboxService } from '../../../../../my-account/assets/services/inbox.service';
 import * as fromStore from '../../../../../my-account/assets/store';
+import { take } from 'rxjs/operators';
 
 export interface Mapping extends StandardCmsComponentConfig {
   CMSInboxTabComponent?: CmsComponentMapping;
@@ -40,10 +33,9 @@ export class InboxMessagesComponent implements OnInit {
       this.loadGroup(messageGroup, this.searchConfig);
     });
     this.changeCheckboxes = this.inboxService.checkAllMessages;
-
-    this.inboxService.checkAllMessages.subscribe(allChecked => {
+    this.changeCheckboxes.subscribe(allChecked => {
       this.inboxService.resetMessagesToSend();
-      this.messagesObject$.subscribe(data => {
+      this.messagesObject$.pipe(take(1)).subscribe(data => {
         if (allChecked) {
           data.messages.forEach(message => {
             this.changeMessageState(message.readDate, message.uid);
