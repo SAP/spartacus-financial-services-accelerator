@@ -20,7 +20,8 @@ import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
         CMSViewPoliciesComponent: { selector: 'fsa-view-policies' },
         CMSViewQuotesComponent: { selector: 'fsa-view-quotes' },
         CMSInboxComponent: { selector: 'fsa-inbox' },
-        CMSInboxTabComponent: { selector: 'fsa-inbox-tab' }
+        CMSInboxTabComponent: { selector: 'fsa-inbox-tab' },
+        AccountPaymentDetailsSPAComponent: {selector : 'cx-payment-methods'}
       }
     })
   ],
