@@ -26,7 +26,6 @@ export class InboxComponent implements OnInit {
     protected store: Store<fromStore.UserState>
   ) {}
 
-  @Output() changeCheckboxes = new EventEmitter();
   component$: Observable<CmsInboxComponent>;
   messages$;
   tabs;
@@ -46,10 +45,10 @@ export class InboxComponent implements OnInit {
     this.inboxService.activeGroupTitle.subscribe( title => this.activeGroupTitle = title);
     this.inboxService.activeMessageGroup.subscribe( messageGroup => this.activeMessageGroup = messageGroup);
     this.inboxService.readStatus.subscribe( state => this.readState = state);
+    this.inboxService.checkAllMessages.subscribe(check => this.mainCheckboxChecked = check);
   }
   checkAllCheckboxes() {
-    this.mainCheckboxChecked = !this.mainCheckboxChecked;
-    this.changeCheckboxes.emit(this.mainCheckboxChecked);
+    this.inboxService.checkAllMessagesSource.next(!this.mainCheckboxChecked);
   }
   sortMessages(sortCode, sortOrder) {
     this.inboxService.resetMessagesToSend();

@@ -24,10 +24,12 @@ export class InboxService {
   activeMessageGroupSource = new BehaviorSubject<string>('');
   activeSortingFilterSource = new BehaviorSubject<string>('');
   readStatusSource = new BehaviorSubject<boolean>(false);
+  checkAllMessagesSource = new BehaviorSubject<boolean>(false);
   activeGroupTitle = this.activeGroupTitleSource.asObservable();
   activeMessageGroup = this.activeMessageGroupSource.asObservable();
   activeSortingFilter = this.activeSortingFilterSource.asObservable();
   readStatus = this.readStatusSource.asObservable();
+  checkAllMessages = this.checkAllMessagesSource.asObservable();
   messagesCollection: Message[] = [];
   protected callback: Function;
 

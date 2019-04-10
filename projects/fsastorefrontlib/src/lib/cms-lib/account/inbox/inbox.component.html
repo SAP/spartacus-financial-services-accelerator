@@ -18,7 +18,7 @@
             <div class="row d-none d-md-flex">
                 <div class="col-1">
                     <label class="checkbox-label">
-                        <input type="checkbox" value="true" (click)="checkAllCheckboxes()">
+                        <input type="checkbox" [checked]="mainCheckboxChecked" (click)="checkAllCheckboxes()">
                         <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
                     </label>
                 </div>
@@ -47,7 +47,7 @@
             <div class="mobile-heading row d-md-none">
                 <div class="col-2">
                     <label class="checkbox-label">
-                        <input type="checkbox" value="true">
+                        <input type="checkbox" [checked]="mainCheckboxChecked">
                         <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
                     </label>
                 </div>
@@ -69,6 +69,6 @@
                 </ul>
             </div>
         </div>
-        <fsa-messages-inbox [changeCheckboxes]="changeCheckboxes"></fsa-messages-inbox>
+        <fsa-messages-inbox></fsa-messages-inbox>
     </div>
 </ng-container>

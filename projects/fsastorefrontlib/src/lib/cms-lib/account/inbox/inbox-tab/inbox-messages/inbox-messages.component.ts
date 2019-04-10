@@ -30,8 +30,8 @@ export class InboxMessagesComponent implements OnInit {
     protected store: Store<fromStore.UserState>
   ) {}
 
-  @Input() changeCheckboxes: Observable<boolean>;
   searchConfig: FSSearchConfig = {};
+  changeCheckboxes: Observable<boolean>;
   messagesObject$;
   opened = false;
 
@@ -39,16 +39,17 @@ export class InboxMessagesComponent implements OnInit {
     this.inboxService.activeMessageGroup.subscribe(messageGroup => {
       this.loadGroup(messageGroup, this.searchConfig);
     });
-    
-    this.changeCheckboxes.subscribe(allChecked => {
+    this.changeCheckboxes = this.inboxService.checkAllMessages;
+
+    this.inboxService.checkAllMessages.subscribe(allChecked => {
       this.inboxService.resetMessagesToSend();
-      if (allChecked) {
-        this.messagesObject$.subscribe(data => {
+      this.messagesObject$.subscribe(data => {
+        if (allChecked) {
           data.messages.forEach(message => {
             this.changeMessageState(message.readDate, message.uid);
           });
-        });
-      }
+        }
+      });
     });
   }
   readSingleMessage(message) {
