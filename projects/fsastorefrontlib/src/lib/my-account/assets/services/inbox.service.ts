@@ -43,7 +43,7 @@ export class InboxService {
     this.activeMessageGroupSource.next(messageGroup);
   }
   selectedMessages(messageObject: Message) {
-    const index = this.messagesCollection.map(e => { return e.messageUid; }).indexOf(messageObject.messageUid);
+    const index = this.messagesCollection.map(e =>  e.messageUid).indexOf(messageObject.messageUid);
     index === -1 ? this.messagesCollection.push(messageObject) : this.messagesCollection.splice(index, 1);
   }
   getUidsFromMessagesCollection(meesagesCollecton) {
