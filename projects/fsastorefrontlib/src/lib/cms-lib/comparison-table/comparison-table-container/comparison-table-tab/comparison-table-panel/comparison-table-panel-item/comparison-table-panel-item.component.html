@@ -19,7 +19,7 @@
       </div>
     </ng-container>
     <ng-container *ngFor="let investment of product.investments">
-      <div class="products-prices__price-wrapper">
+      <div class="products-prices__price-wrapper investments">
         <p class="mb-2"><strong>{{investment.distributionPercentage}} % </strong></p>
         <a [href]="getBaseUrl() + investment.investmentType?.factSheetDocument?.downloadUrl"><strong>{{investment.investmentType?.fundName}}</strong></a>
         <p class="mb-0">ISIN: {{investment.investmentType?.isin}}</p>
