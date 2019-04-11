@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
+import { BehaviorSubject } from 'rxjs';
+import { FSSearchConfig, Message } from '../services/inbox-data.service';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
 import { InboxDataService } from './inbox-data.service';
-import { BehaviorSubject } from 'rxjs';
-import { FSSearchConfig } from '../services/inbox-data.service';
-import { Message } from '../services/inbox-data.service';
 
 
 @Injectable()
@@ -24,10 +23,12 @@ export class InboxService {
   activeMessageGroupSource = new BehaviorSubject<string>('');
   activeSortingFilterSource = new BehaviorSubject<string>('');
   readStatusSource = new BehaviorSubject<boolean>(false);
+  checkAllMessagesSource = new BehaviorSubject<boolean>(false);
   activeGroupTitle = this.activeGroupTitleSource.asObservable();
   activeMessageGroup = this.activeMessageGroupSource.asObservable();
   activeSortingFilter = this.activeSortingFilterSource.asObservable();
   readStatus = this.readStatusSource.asObservable();
+  checkAllMessages = this.checkAllMessagesSource.asObservable();
   messagesCollection: Message[] = [];
   protected callback: Function;
 
@@ -41,8 +42,8 @@ export class InboxService {
   setActiveMessageGroup( messageGroup: string ) {
     this.activeMessageGroupSource.next(messageGroup);
   }
-  selectedMessages(messageObject: Message ) {
-    const index = this.messagesCollection.map(function(e) { return e.messageUid; }).indexOf(messageObject.messageUid);
+  selectedMessages(messageObject: Message) {
+    const index = this.messagesCollection.map(e =>  e.messageUid).indexOf(messageObject.messageUid);
     index === -1 ? this.messagesCollection.push(messageObject) : this.messagesCollection.splice(index, 1);
   }
   getUidsFromMessagesCollection(meesagesCollecton) {
@@ -50,7 +51,7 @@ export class InboxService {
   }
   getMessagesAction() {
     let readState = true;
-    this.messagesCollection.map(function(message) {
+    this.messagesCollection.forEach(function(message) {
       if ( message.readDate ) {
         readState = false;
       }

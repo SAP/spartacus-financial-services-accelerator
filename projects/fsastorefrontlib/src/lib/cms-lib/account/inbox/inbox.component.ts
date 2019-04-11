@@ -1,13 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { CmsComponentMapping, StandardCmsComponentConfig } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { FSSearchConfig } from '../../../my-account/assets/services/inbox-data.service';
 import { InboxService } from '../../../my-account/assets/services/inbox.service';
 import * as fromStore from '../../../my-account/assets/store';
 import { CmsInboxComponent } from './../../../occ-models/cms-component.models';
-import { FSSearchConfig } from '../../../my-account/assets/services/inbox-data.service';
-import { filter } from 'rxjs/operators';
 
 export interface Mapping extends StandardCmsComponentConfig {
   CMSInboxTabComponent?: CmsComponentMapping;
@@ -26,7 +26,6 @@ export class InboxComponent implements OnInit {
     protected store: Store<fromStore.UserState>
   ) {}
 
-  @Output() changeCheckboxes = new EventEmitter();
   component$: Observable<CmsInboxComponent>;
   messages$;
   tabs;
@@ -46,10 +45,10 @@ export class InboxComponent implements OnInit {
     this.inboxService.activeGroupTitle.subscribe( title => this.activeGroupTitle = title);
     this.inboxService.activeMessageGroup.subscribe( messageGroup => this.activeMessageGroup = messageGroup);
     this.inboxService.readStatus.subscribe( state => this.readState = state);
+    this.inboxService.checkAllMessages.subscribe(check => this.mainCheckboxChecked = check);
   }
   checkAllCheckboxes() {
-    this.mainCheckboxChecked = !this.mainCheckboxChecked;
-    this.changeCheckboxes.emit(this.mainCheckboxChecked);
+    this.inboxService.checkAllMessagesSource.next(!this.mainCheckboxChecked);
   }
   sortMessages(sortCode, sortOrder) {
     this.inboxService.resetMessagesToSend();
