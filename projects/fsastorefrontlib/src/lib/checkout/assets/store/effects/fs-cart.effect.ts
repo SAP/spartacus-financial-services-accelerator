@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import * as fromCartActions from '@spartacus/core';
-import { CartDataService } from '@spartacus/core';
+import { CartDataService, ProductImageConverterService } from '@spartacus/core';
 import { OccFSCartService } from '../../../../occ/cart/fs-cart.service';
 import * as fromActions from '../../../../checkout/assets/store/actions/index';
 
@@ -33,10 +33,18 @@ export class FSCartEffects {
       return this.occCartService
         .startBundle(payload.userId, payload.cartId, payload.productCode, payload.bundleTemplateId, payload.quantity)
         .pipe(
-          map((cart: any) => {
-            return new fromCartActions.AddEntrySuccess(cart.entry);
+          switchMap((cart: any) => {
+            if (cart.entries) {
+              for (const entry of cart.entries) {
+                this.productImageConverter.convertProduct(entry.product);
+              }
+            }
+            return [
+              new fromCartActions.MergeCartSuccess(),
+              new fromCartActions.AddEntrySuccess(cart.entry)
+            ];
           }),
-
+          catchError(error => of(new fromCartActions.AddEntryFail(error)))
         );
     })
   );
@@ -44,7 +52,8 @@ export class FSCartEffects {
   constructor(
     private actions$: Actions,
     private occCartService: OccFSCartService,
-    private cartData: CartDataService
+    private cartData: CartDataService,
+    private productImageConverter: ProductImageConverterService,
   ) { }
 }
 
