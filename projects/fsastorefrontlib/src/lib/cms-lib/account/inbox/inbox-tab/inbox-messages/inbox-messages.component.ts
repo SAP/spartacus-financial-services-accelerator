@@ -1,11 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { CmsComponentMapping, StandardCmsComponentConfig } from '@spartacus/core';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { FSSearchConfig } from '../../../../../my-account/assets/services/inbox-data.service';
 import { InboxService } from '../../../../../my-account/assets/services/inbox.service';
 import * as fromStore from '../../../../../my-account/assets/store';
-import { take } from 'rxjs/operators';
 
 export interface Mapping extends StandardCmsComponentConfig {
   CMSInboxTabComponent?: CmsComponentMapping;

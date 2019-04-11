@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
-import { BehaviorSubject, ReplaySubject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { FSSearchConfig, Message } from '../services/inbox-data.service';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
@@ -51,7 +51,7 @@ export class InboxService {
   }
   getMessagesAction() {
     let readState = true;
-    this.messagesCollection.map(function(message) {
+    this.messagesCollection.forEach(function(message) {
       if ( message.readDate ) {
         readState = false;
       }
