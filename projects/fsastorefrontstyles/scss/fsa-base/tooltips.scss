@@ -14,7 +14,8 @@
   }
   .tooltip {
     .tooltip-inner {
-      width: 200px;
+      max-width: 250px;
+      width: 250px;
       background-color: $color-button-secondary-hover;
       opacity: 0.95;
       border-radius: 6px;
