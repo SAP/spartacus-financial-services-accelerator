@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import {
   CartDataService, CheckoutService, GlobalMessageService,
-  GlobalMessageType, RoutingService, Address, PaymentDetails
+  GlobalMessageType, RoutingService, Address, PaymentDetails, UserService
 } from '@spartacus/core';
 import { MultiStepCheckoutComponent } from '@spartacus/storefront';
 import { filter } from 'rxjs/operators';
@@ -15,6 +15,7 @@ import { checkoutNavBar } from './fsa-checkout-navigation-bar';
 export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
   step = 2;
   navs = checkoutNavBar;
+  anonymous = true;
 
   constructor(
     protected checkoutService: CheckoutService,
@@ -23,6 +24,7 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
     protected routingService: RoutingService,
     protected globalMessageService: GlobalMessageService,
     protected cd: ChangeDetectorRef,
+    protected userService: UserService
   ) {
     super(checkoutService, cartService, cartDataService, routingService, globalMessageService, cd);
   }
@@ -63,6 +65,15 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
           }
         })
     );
+
+    // authentication
+    this.subscriptions.push(this.userService.get().subscribe(user => {
+      if (user.uid !== undefined) {
+        this.anonymous = false;
+      } else {
+        this.anonymous = true;
+      }
+    }));
   }
 
   addPaymentInfo({
@@ -88,5 +99,13 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
     }
     this.checkoutService.setDeliveryMode('financial-default');
     this.checkoutService.setPaymentDetails(payment);
+  }
+
+  nextStep(step: number) {
+    if (step >= 4 && this.anonymous) {
+      this.routingService.goByUrl('login');
+    } else {
+      super.nextStep(step);
+    }
   }
 }

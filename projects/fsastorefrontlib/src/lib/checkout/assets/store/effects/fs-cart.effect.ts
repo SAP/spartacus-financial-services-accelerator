@@ -36,7 +36,6 @@ export class FSCartEffects {
           map((cart: any) => {
             return new fromCartActions.AddEntrySuccess(cart.entry);
           }),
-
         );
     })
   );
