@@ -11,13 +11,12 @@ import { PaymentDetailsModule } from './assets/components/payment-details/paymen
 import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
 import { FinalReviewComponent } from './assets/components/final-review/final-review.component';
 import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
-import { OrderConfirmationPageGuard } from './assets/guards/order-confirmation-page.guard';
 import { effects } from './assets/store/effects';
 
 const routes: Routes = [
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard, OrderConfirmationPageGuard],
+    canActivate: [AuthGuard, CmsPageGuard],
     component: PageLayoutComponent,
     data: { pageLabel: 'orderConfirmationPage', cxPath: 'orderConfirmation' },
   },
@@ -33,7 +32,7 @@ const routes: Routes = [
     EffectsModule.forFeature(effects),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
-        AccountMyClaimsSPAComponent: { selector: 'fsa-order-confirmation' },
+        orderConfirmationSPAComponent: { selector: 'fsa-order-confirmation' },
       }
     })
   ],

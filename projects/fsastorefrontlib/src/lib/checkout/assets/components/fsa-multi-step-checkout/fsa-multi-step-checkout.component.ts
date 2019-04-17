@@ -51,7 +51,9 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
         .subscribe(paymentInfo => {
           if (!paymentInfo['hasError']) {
             this.paymentDetails = paymentInfo;
-            this.nextStep(7);
+            // this.nextStep(7);
+            this.done = true;
+            this.routingService.go({ route: ['orderConfirmation'] });
           } else {
             Object.keys(paymentInfo).forEach(key => {
               if (key.startsWith('InvalidField')) {
