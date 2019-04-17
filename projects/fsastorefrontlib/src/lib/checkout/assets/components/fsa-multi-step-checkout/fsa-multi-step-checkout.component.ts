@@ -51,9 +51,7 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
         .subscribe(paymentInfo => {
           if (!paymentInfo['hasError']) {
             this.paymentDetails = paymentInfo;
-            // this.nextStep(7);
-            this.done = true;
-            this.routingService.go({ route: ['orderConfirmation'] });
+            this.nextStep(7);
           } else {
             Object.keys(paymentInfo).forEach(key => {
               if (key.startsWith('InvalidField')) {
@@ -67,7 +65,19 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
           }
         })
     );
-
+    // step7: place order
+    this.subscriptions.push(
+      this.checkoutService
+        .getOrderDetails()
+        .pipe(
+          filter(order => Object.keys(order).length !== 0 && this.step === 7)
+        )
+        .subscribe(() => {
+          // checkout steps are done
+          this.done = true;
+          this.routingService.go({ route: ['orderConfirmation'] });
+        })
+    );
     // authentication
     this.subscriptions.push(this.userService.get().subscribe(user => {
       if (user.uid !== undefined) {
