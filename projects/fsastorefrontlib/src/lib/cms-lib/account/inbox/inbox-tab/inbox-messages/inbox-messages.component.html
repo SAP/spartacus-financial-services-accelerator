@@ -5,7 +5,7 @@
                 *ngFor="let message of messagesObj.messages"
                 [ngClass]="{read: message.readDate}">
                 <div class="inbox-header container-fluid" [ngClass]="{'active':message.opened}" >
-                    <div class="row"  >
+                    <div class="row">
                         <div class="col-1 p-4">
                             <label class="checkbox-label">
                                 <input type="checkbox" [checked]="changeCheckboxes | async" (change)="changeMessageState(message.readDate, message.uid);">
@@ -19,7 +19,7 @@
                             {{ message.content }}
                         </div>
                         <div class="col-4 col-md-2 text-truncate cursor-default p-4">
-                            {{ message.sentDate | date:'mediumDate' }}
+                            {{ message.sentDate | date:'MMM d, yyyy h:m aaa'}}
                         </div>
                     </div>
                 </div>
