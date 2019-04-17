@@ -65,7 +65,7 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
           }
         })
     );
-    // step7: place order
+    // step7: Place an order / Order Confirmation
     this.subscriptions.push(
       this.checkoutService
         .getOrderDetails()

@@ -7,7 +7,8 @@ import {
 
 import {
   Order,
-  CheckoutService
+  CheckoutService,
+  OccConfig
 } from '@spartacus/core';
 
 import { Observable } from 'rxjs';
@@ -21,12 +22,17 @@ import { Observable } from 'rxjs';
 export class FsaOrderConfirmationComponent implements OnInit, OnDestroy {
   order$: Observable<Order>;
 
-  constructor(protected checkoutService: CheckoutService) { }
+  constructor(
+    protected checkoutService: CheckoutService,
+    private config: OccConfig
+    ) { }
 
   ngOnInit() {
     this.order$ = this.checkoutService.getOrderDetails();
   }
-
+  public getBaseUrl() {
+    return this.config.server.baseUrl || '';
+  }
   ngOnDestroy() {
     this.checkoutService.clearCheckoutData();
   }
