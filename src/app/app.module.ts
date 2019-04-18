@@ -12,7 +12,8 @@ import { AppComponent } from './app.component';
         baseUrl: 'https://financialservices.local:9002'
       },
       site: {
-        baseSite: 'insurance'
+        baseSite: 'insurance',
+        currency: 'EUR'
       },
       authentication: {
         client_id: 'financial_customer',
