@@ -65,7 +65,19 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
           }
         })
     );
-
+    // step7: Place an order / Order Confirmation
+    this.subscriptions.push(
+      this.checkoutService
+        .getOrderDetails()
+        .pipe(
+          filter(order => Object.keys(order).length !== 0 && this.step === 7)
+        )
+        .subscribe(() => {
+          // checkout steps are done
+          this.done = true;
+          this.routingService.go({ route: ['orderConfirmation'] });
+        })
+    );
     // authentication
     this.subscriptions.push(this.userService.get().subscribe(user => {
       if (user.uid !== undefined) {
