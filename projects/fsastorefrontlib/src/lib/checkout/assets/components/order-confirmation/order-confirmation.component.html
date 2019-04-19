@@ -61,7 +61,7 @@
                                                     <ng-container
                                                         *ngFor="let item of (order.deliveryOrderGroups[0]?.entries)[0]?.product?.price?.oneTimeChargeEntries">
                                                         <li class="accordion-item__list-item">
-                                                            {{ item.billingTime.name }}
+                                                            {{ item.billingTime?.name }}
                                                         </li>
                                                     </ng-container>
     

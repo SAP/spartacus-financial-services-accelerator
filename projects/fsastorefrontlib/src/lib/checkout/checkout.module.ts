@@ -32,7 +32,7 @@ const routes: Routes = [
     EffectsModule.forFeature(effects),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
-        orderConfirmationSPAComponent: { selector: 'fsa-order-confirmation' },
+        OrderConfirmationSPAComponent: { selector: 'fsa-order-confirmation' },
       }
     })
   ],
