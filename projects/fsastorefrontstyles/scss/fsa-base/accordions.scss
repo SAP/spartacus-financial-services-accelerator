@@ -1,9 +1,15 @@
 .accordion {
+    &-header__summary-line-text {
+        @include media-breakpoint-up(md) {
+            text-align: left;
+          }
+    }
     &--heading {
         color: $color-white;
         font-weight: 500;
         margin-bottom: 0;
-        padding: 0 60px;
+        padding-left: 60px;
+        padding-right: 60px;
         @include accordion-arrow();
     }
     &-item {
