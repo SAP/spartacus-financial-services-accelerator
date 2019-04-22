@@ -51,10 +51,10 @@
                   <ng-container *ngFor="let item of (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.price?.oneTimeChargeEntries">
                     <li class="accordion--list-item row">
                       <div class="col-6">
-                        {{ item.billingTime.name }}
+                        {{ item.billingTime?.name }}
                       </div>
                       <div class="col-6 value notice notice--dark">
-                        {{ item.price.formattedValue }}
+                          <ng-container *ngTemplateOutlet="itemValue context: {value: (item.price.value > 0 ? item.price.formattedValue : item.chargeInformation)}"></ng-container>
                       </div>
                     </li>
                   </ng-container>
@@ -160,4 +160,7 @@
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
+</ng-template>
+<ng-template #itemValue let-value="value">
+  {{value}}
 </ng-template>
