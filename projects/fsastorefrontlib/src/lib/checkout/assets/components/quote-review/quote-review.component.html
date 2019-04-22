@@ -54,10 +54,10 @@
                         {{ item.billingTime?.name }}
                       </div>
                       <div class="col-6 value notice notice--dark">
-                        <ng-container *ngIf="item.price.value > 0; then currency; else (item.chargeInformation ? info : icon)"></ng-container>
-                        <ng-template #currency>{{ item.price.formattedValue }}</ng-template>
-                        <ng-template #info>{{ item.chargeInformation }}</ng-template>
-                        <ng-template #icon><span class="FSA-icon icon-FSA-ok"></span></ng-template>
+                        <ng-container *ngIf="item.price.value > 0; then formattedPrice; else (item.chargeInformation ? chargeInfo : iconOk)"></ng-container>
+                        <ng-template #formattedPrice>{{ item.price.formattedValue }}</ng-template>
+                        <ng-template #chargeInfo>{{ item.chargeInformation }}</ng-template>
+                        <ng-template #iconOk><span class="FSA-icon icon-FSA-ok"></span></ng-template>
                       </div>
                     </li>
                   </ng-container>
