@@ -54,7 +54,10 @@
                         {{ item.billingTime?.name }}
                       </div>
                       <div class="col-6 value notice notice--dark">
-                          <ng-container *ngTemplateOutlet="itemValue context: {value: (item.price.value > 0 ? item.price.formattedValue : item.chargeInformation)}"></ng-container>
+                        <ng-container *ngIf="item.price.value > 0; then currency; else (item.chargeInformation ? info : icon)"></ng-container>
+                        <ng-template #currency>{{ item.price.formattedValue }}</ng-template>
+                        <ng-template #info>{{ item.chargeInformation }}</ng-template>
+                        <ng-template #icon><span class="FSA-icon icon-FSA-ok"></span></ng-template>
                       </div>
                     </li>
                   </ng-container>
@@ -160,7 +163,4 @@
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
-</ng-template>
-<ng-template #itemValue let-value="value">
-  {{value}}
 </ng-template>
