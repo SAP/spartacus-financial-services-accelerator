@@ -51,10 +51,13 @@
                   <ng-container *ngFor="let item of (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.price?.oneTimeChargeEntries">
                     <li class="accordion--list-item row">
                       <div class="col-6">
-                        {{ item.billingTime.name }}
+                        {{ item.billingTime?.name }}
                       </div>
                       <div class="col-6 value notice notice--dark">
-                        {{ item.price.formattedValue }}
+                        <ng-container *ngIf="item.price.value > 0; then formattedPrice; else (item.chargeInformation ? chargeInfo : iconOk)"></ng-container>
+                        <ng-template #formattedPrice>{{ item.price.formattedValue }}</ng-template>
+                        <ng-template #chargeInfo>{{ item.chargeInformation }}</ng-template>
+                        <ng-template #iconOk><span class="FSA-icon icon-FSA-ok"></span></ng-template>
                       </div>
                     </li>
                   </ng-container>
