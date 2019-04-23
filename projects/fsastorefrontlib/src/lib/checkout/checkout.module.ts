@@ -1,14 +1,26 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { ComponentsModule } from '@spartacus/storefront';
+import { ComponentsModule, CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
+import { AuthGuard, CmsConfig, ConfigModule } from '@spartacus/core';
 import { AccordionModule } from '../accordion/accordion.module';
 import { AddOptionsModule } from './assets/add-options.module';
 import { MiniCartModule } from './assets/components/mini-cart/mini-cart.module';
 import { PaymentDetailsModule } from './assets/components/payment-details/payment-details.module';
 import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
 import { FinalReviewComponent } from './assets/components/final-review/final-review.component';
+import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
 import { effects } from './assets/store/effects';
+
+const routes: Routes = [
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    component: PageLayoutComponent,
+    data: { pageLabel: 'orderConfirmationPage', cxPath: 'orderConfirmation' },
+  },
+];
 
 @NgModule({
   imports: [
@@ -16,10 +28,24 @@ import { effects } from './assets/store/effects';
     AddOptionsModule,
     ComponentsModule,
     AccordionModule,
-    EffectsModule.forFeature(effects)
+    RouterModule.forChild(routes),
+    EffectsModule.forFeature(effects),
+    ConfigModule.withConfig(<CmsConfig>{
+      cmsComponents: {
+        OrderConfirmationSPAComponent: { selector: 'fsa-order-confirmation' },
+      }
+    })
   ],
-  declarations: [QuoteReviewComponent, FinalReviewComponent],
-  exports: [AddOptionsModule, QuoteReviewComponent, MiniCartModule, FinalReviewComponent, PaymentDetailsModule],
+  declarations: [QuoteReviewComponent, FinalReviewComponent, FsaOrderConfirmationComponent],
+  exports: [
+    AddOptionsModule,
+    QuoteReviewComponent,
+    MiniCartModule,
+    PaymentDetailsModule,
+    FinalReviewComponent,
+    FsaOrderConfirmationComponent
+  ],
+  entryComponents: [FsaOrderConfirmationComponent]
 })
 export class CheckoutModule {
 }

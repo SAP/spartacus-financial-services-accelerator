@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CmsPageGuard } from '@spartacus/storefront';
+import { ConfigModule } from '@spartacus/core';
 import { CheckoutPageComponent } from './checkout-page.component';
 import { CheckoutPageLayoutModule } from '../../layout/checkout-page-layout/checkout-page-layout.module';
-import { ConfigModule } from '@spartacus/core';
 
 const routes: Routes = [
   {

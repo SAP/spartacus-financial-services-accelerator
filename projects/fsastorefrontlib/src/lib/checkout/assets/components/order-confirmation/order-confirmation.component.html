@@ -1,0 +1,212 @@
+<ng-container *ngIf="order$ | async as order; else loading">
+    <div class="container-fluid center1400">
+        <ng-container *ngIf="order.deliveryOrderGroups?.length > 0; else orderComplete">
+            <h2 class="mt-5 mb-5">Thank you! Your policy request has been submitted</h2>
+            <div class="row">
+                <div class="col-12 col-md-8">
+                    <div class="accordion">
+                        <div class="row no-gutters section-header__heading">
+                            <div class="col-12 col-md-2 accordion-header__icon">
+                                <span *ngIf="order.deliveryOrderGroups[0]?.entries[0]?.product?.images?.length > 0"
+                                    class="images images__wrapper images__wrapper--size">
+                                    <img class="images__size"
+                                        [src]="getBaseUrl() + order.deliveryOrderGroups[0]?.entries[0]?.product?.images[3]?.url" />
+                                </span>
+                            </div>
+                            <div class="col-12 col-md-10 accordion-header__summary-line-text">
+                                Your {{ order.entries[0]?.product?.defaultCategory?.name }}<br>
+                                Quote number is: {{ order.code }}
+                            </div>
+                        </div>
+                        <div #ref>
+                            <ng-container *ngIf="(order?.insuranceQuote?.quoteDetails | json) !== '{}'">
+                                <fsa-accordion-item [opened]="true"
+                                    [title]="order.entries[0]?.product?.defaultCategory?.name + ' Information'">
+                                    <div class="container">
+                                        <div class="row justify-content-center">
+                                            <ul class="col-12 accordion--list">
+                                                <!-- To be uncommented once we have data from yForms -->
+                                                <!-- <ng-container *ngFor="let item of order?.insuranceQuote?.quoteDetails?.entry">
+                                                    <li class="accordion--list-item row">
+                                                        <div class="col-6">
+                                                            {{ item.key }}
+                                                        </div>
+                                                        <div class="col-6 value notice notice--dark">
+                                                            {{ item.value }}
+                                                        </div>
+                                                    </li>
+                                                </ng-container> -->
+                                                <li class="accordion--list-item row">
+                                                    Quote status: {{order.insuranceQuote?.quoteWorkflowStatus?.code}}
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </fsa-accordion-item>
+                            </ng-container>
+                        </div>
+                        <fsa-accordion-item [opened]="ref.children.length > 0 ? false : true" [title]="'What\'s Included'">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <ul class="col-12 accordion--list">
+                                        <li class="accordion--list-item row">
+                                            <div class="col-12">
+                                                <h3 class="accordion-item__list-title">
+                                                    {{ order.deliveryOrderGroups[0]?.entries[0]?.product?.name }}</h3>
+                                                <ul class="accordion-item__list">
+                                                    <ng-container
+                                                        *ngFor="let item of (order.deliveryOrderGroups[0]?.entries)[0]?.product?.price?.oneTimeChargeEntries">
+                                                        <li class="accordion-item__list-item">
+                                                            {{ item.billingTime?.name }}
+                                                        </li>
+                                                    </ng-container>
+    
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </fsa-accordion-item>
+                        <fsa-accordion-item [title]="'Added by you'">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <ul class="col-12 accordion--list">
+                                        <li class="accordion--list-item row">
+                                            <div class="col-12">
+                                                <ul class="accordion-item__list">
+                                                    <ng-container
+                                                        *ngFor="let item of order.deliveryOrderGroups[0]?.entries">
+                                                        <li class="accordion-item__list-item">
+                                                            {{ item.product?.name }}
+                                                        </li>
+                                                    </ng-container>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </fsa-accordion-item>
+                        <ng-container
+                            *ngIf="order.deliveryOrderGroups[0]?.entries.length > 0 && order.deliveryOrderGroups[0]?.entries[0]?.product?.investments">
+                            <fsa-accordion-item [title]="'Investments Details'">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <ul class="col-12 accordion--list">
+                                            <ng-container *ngFor="let item of order.deliveryOrderGroups[0]?.entries">
+                                                <ng-container *ngFor="let investmentDetail of item.product?.investments">
+                                                    <li class="accordion--list-item row">
+                                                        <div class="col-12">
+                                                            {{investmentDetail.investmentType?.fundName}}:
+                                                            {{investmentDetail.distributionPercentage}}% </div>
+                                                        <div class="col-12">ISIN: {{investmentDetail.investmentType?.isin}}
+                                                        </div>
+                                                        <div class="col-12">5 Year Perfomance:
+                                                            {{investmentDetail.investmentType?.fiveYearPerformance}} </div>
+                                                        <div class="col-12">Risk & Returning Rating:
+                                                            {{investmentDetail.investmentType?.riskReturningRating}}</div>
+                                                    </li>
+                                                </ng-container>
+                                            </ng-container>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </fsa-accordion-item>
+                        </ng-container>
+                        <fsa-accordion-item [title]="'Personal Details'">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <ul class="col-12 accordion--list">
+                                        <li class="accordion--list-item row">
+                                            <div class="col-12">
+                                                <!-- Needs to have dynamic heading value -->
+                                                <h3 class="accordion-item__list-title">Policy Holder</h3>
+                                                <ul class="accordion-item__list">
+                                                    <li class="accordion-item__list-item">
+                                                        Mrs. Test Tester
+                                                    </li>
+                                                    <li class="accordion-item__list-item">
+                                                        Phone Number: 323535
+                                                    </li>
+                                                    <li class="accordion-item__list-item">
+                                                        Email Address: donna@moore.com
+                                                    </li>
+                                                    <li class="accordion-item__list-item">
+                                                        Address Line 1: sfsdfsdf
+                                                    </li>
+                                                    <li class="accordion-item__list-item">City: sffsd</li>
+                                                    <li class="accordion-item__list-item">
+                                                        Postcode: 3423423
+                                                    </li>
+                                                    <li class="accordion-item__list-item">
+                                                        Country: France
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </fsa-accordion-item>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="short-overview short-overview--right">
+                        <div class="short-overview__heading gradient-heading">
+                            My Quote
+                        </div>
+                        <div class="short-overview__content">
+                            <div class="short-overview__items">
+                                <div class="short-overview__item row">
+                                    <div class="short-overview__item-name col-7">
+                                        Quote ID:
+                                    </div>
+                                    <div class="short-overview__item-price col-5">
+                                        {{ order.code }}
+                                    </div>
+                                </div>
+                                <div class="short-overview__item row">
+                                    <div class="short-overview__item-name col-7">
+                                        Payment Frequency:
+                                    </div>
+                                    <div class="short-overview__item-price col-5">
+                                        {{ order.insuranceQuote?.paymentFrequency }}
+                                    </div>
+                                </div>
+                                <div class="short-overview__item row">
+                                    <div class="short-overview__item-name col-7">
+                                        Start Date:
+                                    </div>
+                                    <div class="short-overview__item-price col-5">
+                                        {{ order.insuranceQuote?.startDate }}
+                                    </div>
+                                </div>
+                                <div class="short-overview__item row">
+                                    <div class="short-overview__item-name col-7">
+                                        {{ order.deliveryOrderGroups[0]?.entries[0]?.product?.name }}
+                                    </div>
+                                    <div class="short-overview__item-price col-5">
+                                        {{ order.totalPrice?.formattedValue }}
+                                    </div>
+                                </div>
+                        </div>
+                            <div class="short-overview__item short-overview__item--highlighted row">
+                                <div class="short-overview__item-name col-6">
+                                    Order total:
+                                </div>
+                                <div class="short-overview__item-price col-6">{{ order.totalPrice?.formattedValue }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</ng-container>
+<ng-template #orderComplete>
+    <h1 class="mt-5 mb-3 text-center">Your policy has already been submited</h1>
+</ng-template>
+<ng-template #loading>
+    <cx-spinner></cx-spinner>
+</ng-template>

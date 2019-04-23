@@ -90,8 +90,8 @@ a {
 .gradient-heading {
   color: $color-white;
   font-size: 20px;
-  line-height: 55px;
-  @include ellipsis;
+  padding-top: 15px;
+  padding-bottom: 15px;
   @include linear-gradient-background( $color-blue, $color-banking-darkest-blue, 50%, 100% );
 }
 .list-data {
