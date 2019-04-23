@@ -1,10 +1,10 @@
 @font-face {
     font-family: 'font-FSA';
-    src:  url('assets/fonts/font-FSA.eot?tw91cn');
-    src:  url('assets/fonts/font-FSA.eot?tw91cn#iefix') format('embedded-opentype'),
-      url('assets/fonts/font-FSA.ttf?tw91cn') format('truetype'),
-      url('assets/fonts/font-FSA.woff?tw91cn') format('woff'),
-      url('assets/fonts/font-FSA.svg?tw91cn#font-FSA') format('svg');
+    src:  url('assets/fonts/font-FSA.eot?lh24ap');
+    src:  url('assets/fonts/font-FSA.eot?lh24ap#iefix') format('embedded-opentype'),
+      url('assets/fonts/font-FSA.ttf?lh24ap') format('truetype'),
+      url('assets/fonts/font-FSA.woff?lh24ap') format('woff'),
+      url('assets/fonts/font-FSA.svg?lh24ap#font-FSA') format('svg');
     font-weight: normal;
     font-style: normal;
   }
@@ -141,3 +141,25 @@
 .icon-FSA-log-out:before {
   content: "\e91d";
 }
+.icon-FSA-list:before {
+  content: "\e912";
+}
+.icon-FSA-person:before {
+  content: "\e91f";
+}
+.icon-FSA-selected-item:before {
+  content: "\e921";
+}
+.icon-FSA-card-verify:before {
+  content: "\e92a";
+}
+.icon-FSA-payment-cards:before {
+  content: "\e92b";
+}
+.icon-FSA-review:before {
+  content: "\e92c";
+}
+.icon-FSA-shield:before {
+  content: "\e92d";
+}
+
