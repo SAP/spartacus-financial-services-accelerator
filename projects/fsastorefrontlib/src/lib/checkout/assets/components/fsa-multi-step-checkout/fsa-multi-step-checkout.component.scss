@@ -1,0 +1,65 @@
+@import 'mixins-fsa';
+@import 'variables-fsa';
+@import '~bootstrap/scss/mixins/breakpoints'; // TO CHECK ALL IMPORTS
+
+.progress-wrapper {
+    border-top: 2px solid $color-grey;
+    .progress-inner-wrapper {
+        flex-basis: 0;
+    }
+}
+.progress-node {
+    position: relative;
+    margin-bottom: 14px;
+    cursor: pointer;
+    .FSA-icon {
+        display: inline-block;
+        padding: 16px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        background: $color-mild-grey;
+        border: $border-grey;
+        font-size: 20px;
+        @include box-shadow(0px, 5px, 10px, 3px, $color-dark-grey, 0.2);
+        @include media-breakpoint-down(md) {
+            padding: 12px;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+    }
+    .icon-FSA-ok {
+        color: $color-blue;
+    }
+    .label {
+        font-size: 14px;
+        font-weight: 600;
+        @include media-breakpoint-down(md) {
+            font-size: 12px;
+        }
+    }
+    &.is-active {
+        .FSA-icon {
+            color: $color-blue;
+            background: $color-white;
+        }
+        .label {
+            color: $color-blue;
+        }
+        &:before {
+            width: 100%;
+            background-color: $color-link-hover;
+        }
+    }
+    &.is-disabled {
+        cursor: default;
+        .FSA-icon { 
+            background: $color-white;
+        }
+        .label {
+            font-weight: 400;
+        }
+        &:before {
+            background-color:transparent;
+        }
+    }
+}

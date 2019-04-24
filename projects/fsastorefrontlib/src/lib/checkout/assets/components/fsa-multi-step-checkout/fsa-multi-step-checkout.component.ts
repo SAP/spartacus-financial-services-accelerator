@@ -10,6 +10,7 @@ import { checkoutNavBar } from './fsa-checkout-navigation-bar';
 
 @Component({
   selector: 'fsa-multi-step-checkout',
+  styleUrls: ['./fsa-multi-step-checkout.component.scss'],
   templateUrl: './fsa-multi-step-checkout.component.html'
 })
 export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {

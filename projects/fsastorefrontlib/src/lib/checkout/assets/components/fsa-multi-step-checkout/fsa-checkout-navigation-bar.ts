@@ -7,7 +7,8 @@
         completed: false,
         active: false
       },
-      progressBar: true
+      progressBar: true,
+      icon: 'icon-FSA-selected-item'
     },
     {
       id: 2,
@@ -17,7 +18,8 @@
         completed: false,
         active: true
       },
-      progressBar: false
+      progressBar: false,
+      icon: 'icon-FSA-list'
     },
     {
       id: 3,
@@ -27,7 +29,8 @@
         completed: false,
         active: false
       },
-      progressBar: false
+      progressBar: false,
+      icon: 'icon-FSA-shield'
     },
     {
       id: 4,
@@ -37,7 +40,8 @@
         completed: false,
         active: false
       },
-      progressBar: false
+      progressBar: false,
+      icon: 'icon-FSA-person'
     },
     {
         id: 5,
@@ -47,7 +51,8 @@
           completed: false,
           active: false
         },
-        progressBar: false
+        progressBar: false,
+        icon: 'icon-FSA-card-verify'
       },
       {
         id: 6,
@@ -57,7 +62,8 @@
           completed: false,
           active: false
         },
-        progressBar: false
+        progressBar: false,
+        icon: 'icon-FSA-payment-cards'
       },
       {
         id: 7,
@@ -67,7 +73,8 @@
           completed: false,
           active: false
         },
-        progressBar: false
+        progressBar: false,
+        icon: 'icon-FSA-review'
       }
   ];
 
