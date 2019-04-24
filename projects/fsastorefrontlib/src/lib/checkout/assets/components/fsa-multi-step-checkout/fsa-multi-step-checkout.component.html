@@ -4,18 +4,18 @@
       <div class="row">
         <div class="col-12">
           <!-- Navigation -->
-          <div class="progress-wrapper my-5">
-              <div class="d-flex align-content-around flex-wrap my-4">
-                <div class="flex-fill text-center" 
+          <div class="progress-wrapper my-2">
+              <div class="d-flex flex-wrap my-4">
+                <div class="progress-inner-wrapper flex-grow-1 flex-shrink-1 text-center" 
                   *ngFor="let nav of navs">
                   <div class="d-inline-block underline-effect progress-node mx-2" 
                         (click)="nav.status.disabled === false ? setStep(nav.id) : false"
                         [ngClass]="{
                           ' is-disabled': nav.status.disabled,
                           ' is-active': nav.status.active}" > 
-                    <div class="FSA-icon mb-3" [ngClass]="
+                    <div class="FSA-icon" [ngClass]="
                       nav.status.completed ? 'icon-FSA-ok' : nav.icon"></div>
-                    <p class="label  position-relative">{{ nav.label }}</p>
+                    <p class="label  position-relative mb-2">{{ nav.label }}</p>
                   </div>
                 </div>
               </div>  
