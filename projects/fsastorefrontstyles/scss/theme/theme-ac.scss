@@ -151,11 +151,9 @@ a {
     height: 5px;
     transition: all 300ms ease;
   }
-  &:hover {
-    &:before {
+  &:hover:before {
       width: 100%;
     }
-  }
 }
 
 /* *********************************************************** */
