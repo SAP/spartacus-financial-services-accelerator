@@ -10,7 +10,7 @@
     cursor: pointer;
     .FSA-icon {
         display: inline-block;
-        padding: 20px;
+        padding: 16px;
         border-radius: 50%;
         background: $color-mild-grey;
         border: 1px solid $color-grey;
@@ -38,14 +38,21 @@
         .label {
             color: $color-blue;
         }
+        &:before {
+            width: 100%;
+            background-color: $color-link-hover;
+        }
     }
     &.is-disabled {
         cursor: default;
-        &:before {
-            background-color:transparent;
-        }
         .FSA-icon { 
             background: $color-white;
+        }
+        .label {
+            font-weight: 400;
+        }
+        &:before {
+            background-color:transparent;
         }
     }
 }
