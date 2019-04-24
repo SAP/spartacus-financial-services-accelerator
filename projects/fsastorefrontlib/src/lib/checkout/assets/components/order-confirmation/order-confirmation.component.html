@@ -49,21 +49,19 @@
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <ul class="col-12 accordion--list">
-                                        <li class="accordion--list-item row">
-                                            <div class="col-12">
-                                                <h3 class="accordion-item__list-title">
-                                                    {{ order.deliveryOrderGroups[0]?.entries[0]?.product?.name }}</h3>
-                                                <ul class="accordion-item__list">
-                                                    <ng-container
-                                                        *ngFor="let item of (order.deliveryOrderGroups[0]?.entries)[0]?.product?.price?.oneTimeChargeEntries">
-                                                        <li class="accordion-item__list-item">
-                                                            {{ item.billingTime?.name }}
-                                                        </li>
-                                                    </ng-container>
-    
-                                                </ul>
-                                            </div>
-                                        </li>
+                                        <ng-container *ngFor="let item of (order.deliveryOrderGroups[0]?.entries)[0]?.product?.price?.oneTimeChargeEntries">
+                                            <li class="accordion--list-item row">
+                                              <div class="col-6">
+                                                {{ item.billingTime?.name }}
+                                              </div>
+                                              <div class="col-6 value notice notice--dark">
+                                                <ng-container *ngIf="item.price.value > 0; then formattedPrice; else (item.chargeInformation ? chargeInfo : iconOk)"></ng-container>
+                                                <ng-template #formattedPrice>{{ item.price.formattedValue }}</ng-template>
+                                                <ng-template #chargeInfo>{{ item.chargeInformation }}</ng-template>
+                                                <ng-template #iconOk><span class="FSA-icon icon-FSA-ok"></span></ng-template>
+                                              </div>
+                                            </li>
+                                        </ng-container>
                                     </ul>
                                 </div>
                             </div>
