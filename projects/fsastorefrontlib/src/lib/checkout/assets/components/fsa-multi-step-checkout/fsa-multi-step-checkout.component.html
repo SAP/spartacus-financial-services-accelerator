@@ -29,7 +29,6 @@
               <div
                 class="cx-multi-step-checkout__nav-list--media"
                 [ngClass]="{ ' is-active': nav.status.active }">
-                <div>{{ nav.label }}</div>
                 <button
                   *ngIf="nav.status.completed && !nav.status.active"
                   class="btn btn-link"
