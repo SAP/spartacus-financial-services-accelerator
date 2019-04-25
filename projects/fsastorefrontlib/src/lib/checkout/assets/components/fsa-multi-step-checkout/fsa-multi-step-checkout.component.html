@@ -25,16 +25,6 @@
           <!-- VISIBLE ONLY ON LG AND XL SCREENS -->
           <div class="cx-multi-step-checkout__nav--media">
             <div *ngFor="let nav of navs">
-              <!-- Navigation -->
-              <div
-                class="cx-multi-step-checkout__nav-list--media"
-                [ngClass]="{ ' is-active': nav.status.active }">
-                <button
-                  *ngIf="nav.status.completed && !nav.status.active"
-                  class="btn btn-link"
-                  (click)="setStep(nav.id)">
-                </button>
-              </div>
               <!--  CONTENT -->
               <div *ngIf="nav.status.active && step === 2">
                 <div class="center1400 pr-2 pl-2">
