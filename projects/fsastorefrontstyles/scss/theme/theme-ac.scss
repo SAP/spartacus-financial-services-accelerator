@@ -477,6 +477,7 @@ a {
   min-height: 200px;
   &__name {
       font-size: 20px;
+      min-height: 50px;
       @include media-breakpoint-down(sm) {
         min-height: 60px;
         font-size: 18px;
