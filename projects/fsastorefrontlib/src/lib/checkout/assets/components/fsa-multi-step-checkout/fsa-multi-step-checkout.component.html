@@ -40,9 +40,6 @@
                 <fsa-quote-review (nextStep)="setStep(6)" (backStep)="setStep(3)"> </fsa-quote-review>
               </div>
               <div *ngIf="nav.status.active && step === 6">
-                <!-- <cx-payment-method (goToStep)="nextStep($event)">
-
-                </cx-payment-method> -->
                 <cx-payment-method
                   (goToStep)="nextStep($event)"
                 ></cx-payment-method>
