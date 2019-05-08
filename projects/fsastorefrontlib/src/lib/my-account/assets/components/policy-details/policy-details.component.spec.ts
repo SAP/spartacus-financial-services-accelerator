@@ -12,13 +12,15 @@ class MockPolicyService {
 }
 
 const MockOccModuleConfig: OccConfig = {
-    server: {
-        baseUrl: '',
-        occPrefix: ''
-    },
-    site: {
-        baseSite: ''
+  site: {
+    baseSite: ''
+  },
+  backend: {
+    occ: {
+      baseUrl: '',
+      prefix: ''
     }
+  }
 };
 
 describe('PolicyDetailsComponent', () => {
