@@ -27,8 +27,8 @@ export class OccBillingTimeService {
     protected getBillingTimesEndPoint() {
         const billingTimeEndpoint = '/billing-times';
         return (
-            (this.config.server.baseUrl || '') +
-            this.config.server.occPrefix +
+            (this.config.backend.occ.baseUrl || '') +
+            this.config.backend.occ.prefix +
             this.config.site.baseSite +
             billingTimeEndpoint
         );

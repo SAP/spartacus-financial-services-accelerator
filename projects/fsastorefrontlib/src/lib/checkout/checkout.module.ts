@@ -2,16 +2,16 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { ComponentsModule, CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
+import { ComponentsModule, CmsPageGuard, PageLayoutComponent, PageComponentModule, MultiStepCheckoutModule } from '@spartacus/storefront';
 import { AuthGuard, CmsConfig, ConfigModule } from '@spartacus/core';
 import { AccordionModule } from '../accordion/accordion.module';
 import { AddOptionsModule } from './assets/add-options.module';
 import { MiniCartModule } from './assets/components/mini-cart/mini-cart.module';
-import { PaymentDetailsModule } from './assets/components/payment-details/payment-details.module';
 import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
 import { FinalReviewComponent } from './assets/components/final-review/final-review.component';
 import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
 import { effects } from './assets/store/effects';
+import { ɵu as PaymentMethodModule  } from '@spartacus/storefront';
 
 const routes: Routes = [
   {
@@ -24,7 +24,10 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    PaymentMethodModule,
     CommonModule,
+    PageComponentModule,
+    MultiStepCheckoutModule,
     AddOptionsModule,
     ComponentsModule,
     AccordionModule,
@@ -38,10 +41,11 @@ const routes: Routes = [
   ],
   declarations: [QuoteReviewComponent, FinalReviewComponent, FsaOrderConfirmationComponent],
   exports: [
+    PaymentMethodModule,
     AddOptionsModule,
     QuoteReviewComponent,
     MiniCartModule,
-    PaymentDetailsModule,
+    MultiStepCheckoutModule,
     FinalReviewComponent,
     FsaOrderConfirmationComponent
   ],

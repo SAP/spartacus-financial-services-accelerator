@@ -15,8 +15,8 @@ export class OccQuoteService {
   protected getQuotesEndpoint(userId: string) {
     const quotesEndpoint = '/users/' + userId + '/insurance-quotes';
     return (
-      (this.config.server.baseUrl || '') +
-      this.config.server.occPrefix +
+      (this.config.backend.occ.baseUrl || '') +
+      this.config.backend.occ.prefix +
       this.config.site.baseSite +
       quotesEndpoint
     );

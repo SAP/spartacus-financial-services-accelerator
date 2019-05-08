@@ -26,7 +26,7 @@ export class PaymentDetailsComponent extends PaymentMethodComponent {
     protected cartData: CartDataService,
     protected userService: UserService
   ) {
-    super(cartData, userService);
+    super();
     this.mockDeliveryAddress();
   }
 

@@ -32,7 +32,7 @@ export class EnrichedResponsiveBannerComponent implements OnInit {
   }
 
   getBaseUrl(): string {
-    return this.config.server.baseUrl || '';
+    return this.config.backend.occ.baseUrl || '';
   }
 
   getComponentData(): Observable<CmsEnrichedResponsiveBannerComponent> {

@@ -13,13 +13,14 @@ const usersEndpoint = '/users';
 const quotesEndpoint = '/insurance-quotes';
 
 const MockOccModuleConfig: OccConfig = {
-  server: {
-    baseUrl: '',
-    occPrefix: ''
-  },
-
   site: {
     baseSite: ''
+  },
+  backend: {
+    occ: {
+      baseUrl: '',
+      prefix: ''
+    }
   }
 };
 

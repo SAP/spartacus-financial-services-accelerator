@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-
 import { ComponentsModule } from '@spartacus/storefront';
 import { AddOptionsComponent } from './components/add-options/add-options.component';
 import { FSCartService } from './services';

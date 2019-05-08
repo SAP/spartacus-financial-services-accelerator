@@ -8,9 +8,11 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FSAStorefrontModule.withConfig({
-      server: {
-        baseUrl: 'https://financialservices.local:9002'
-      },
+      backend: {
+        occ: {
+           baseUrl: 'https://financialservices.local:9002'
+       }
+     },
       site: {
         baseSite: 'insurance',
         currency: 'EUR'
