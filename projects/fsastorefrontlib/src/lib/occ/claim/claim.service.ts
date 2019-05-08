@@ -18,8 +18,8 @@ constructor(
 protected getClaimsEndpoint(userId: string) {
     const claimsEndpoint = '/users/' + userId + '/claims';
     return (
-      (this.config.server.baseUrl || '') +
-        this.config.server.occPrefix +
+      (this.config.backend.occ.baseUrl || '') +
+            this.config.backend.occ.prefix +
         this.config.site.baseSite +
            claimsEndpoint
     );

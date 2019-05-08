@@ -29,7 +29,7 @@ export class QuoteReviewComponent implements OnInit {
     this.cartLoaded$ = this.cartService.getLoaded();
   }
   public getBaseUrl() {
-    return this.config.server.baseUrl || '';
+    return this.config.backend.occ.baseUrl || '';
   }
 
   back() {

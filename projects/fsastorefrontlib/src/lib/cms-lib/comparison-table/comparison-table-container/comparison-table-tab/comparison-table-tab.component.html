@@ -2,9 +2,10 @@
     <div class="table-tab d-flex justify-content-around mt-5 mb-5">
         <ng-container
             *ngIf="tab.comparisonPanel"
-            cxComponentWrapper
-            componentMappedType="ComparisonPanelCMSComponent"
-            componentUid="{{ tab.comparisonPanel.uid }}"
+            [cxComponentWrapper]="{
+                flexType: 'ComparisonPanelCMSComponent',
+                uid: tab.comparisonPanel.uid
+              }"
         ></ng-container>
     </div>
 </ng-container>

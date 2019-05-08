@@ -46,8 +46,8 @@ export class OccFSCartService {
     protected getAddOptionalProductToCartEndpoint(userId: string, cartId: string) {
         const addOptionalProductToCartEndpoint = '/users/' + userId + '/carts/' + cartId + '/fs-add-to-cart';
         return (
-            (this.config.server.baseUrl || '') +
-            this.config.server.occPrefix +
+            (this.config.backend.occ.baseUrl || '') +
+            this.config.backend.occ.prefix +
             this.config.site.baseSite +
             addOptionalProductToCartEndpoint
         );
@@ -56,8 +56,8 @@ export class OccFSCartService {
     protected getStartBundleForProductOfSpecifiedCart(userId: string, cartId: string) {
         const startBundleForProductOfCartEndpoint = '/users/' + userId + '/carts/' + cartId + '/fs-start-bundle';
         return (
-            (this.config.server.baseUrl || '') +
-            this.config.server.occPrefix +
+            (this.config.backend.occ.baseUrl || '') +
+            this.config.backend.occ.prefix +
             this.config.site.baseSite +
             startBundleForProductOfCartEndpoint
         );

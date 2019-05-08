@@ -28,8 +28,8 @@
               <!--  CONTENT -->
               <div *ngIf="nav.status.active && step === 2">
                 <div class="center1400 pr-2 pl-2">
-                  <cx-dynamic-slot position="Section1"></cx-dynamic-slot>
-                  <cx-dynamic-slot position="Section2"></cx-dynamic-slot>
+                  <cx-page-slot position="Section1"></cx-page-slot>
+                  <cx-page-slot position="Section2"></cx-page-slot>
                 </div>
               </div>
               <div *ngIf="nav.status.active && step === 3">
@@ -40,12 +40,12 @@
                 <fsa-quote-review (nextStep)="setStep(6)" (backStep)="setStep(3)"> </fsa-quote-review>
               </div>
               <div *ngIf="nav.status.active && step === 6">
-                <fsa-payment-details
-                  [selectedPayment]="paymentDetails"
-                  (addPaymentInfo)="addPaymentInfo($event)"
-                  (nextStep)="setStep(7)"
-                  (backStep)="setStep(5) "
-                ></fsa-payment-details>
+                <!-- <cx-payment-method (goToStep)="nextStep($event)">
+
+                </cx-payment-method> -->
+                <cx-payment-method
+                  (goToStep)="nextStep($event)"
+                ></cx-payment-method>
               </div>
               <div *ngIf="nav.status.active && step === 7">
                 <fsa-final-review

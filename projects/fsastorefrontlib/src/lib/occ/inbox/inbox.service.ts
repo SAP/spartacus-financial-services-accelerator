@@ -24,8 +24,8 @@ export class OccInboxService {
       siteMessagesEndpoint += '&messagegroup=' + messageGroup;
     }
     return (
-      (this.config.server.baseUrl || '') +
-      this.config.server.occPrefix +
+      (this.config.backend.occ.baseUrl || '') +
+      this.config.backend.occ.prefix +
       this.config.site.baseSite +
       siteMessagesEndpoint
     );
@@ -33,8 +33,8 @@ export class OccInboxService {
   protected getReadUnreadEndpoint(userId: string) {
     const readUnreadEndpoint = '/users/' + userId + '/notifications/sitemessages/read-unread';
     return (
-      (this.config.server.baseUrl || '') +
-      this.config.server.occPrefix +
+      (this.config.backend.occ.baseUrl || '') +
+      this.config.backend.occ.prefix +
       this.config.site.baseSite +
       readUnreadEndpoint
     );

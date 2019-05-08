@@ -28,6 +28,6 @@ export class PoliciesComponent implements OnInit {
   }
 
   public getBaseUrl() {
-    return this.config.server.baseUrl || '';
+    return this.config.backend.occ.baseUrl || '';
   }
 }

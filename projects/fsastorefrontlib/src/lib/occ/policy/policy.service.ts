@@ -17,8 +17,8 @@ export class OccPolicyService {
   protected getPoliciesEndpoint(userId: string) {
     const policiesEndpoint = '/users/' + userId + '/policies';
     return (
-      (this.config.server.baseUrl || '') +
-      this.config.server.occPrefix +
+      (this.config.backend.occ.baseUrl || '') +
+      this.config.backend.occ.prefix +
       this.config.site.baseSite +
       policiesEndpoint
     );
@@ -27,8 +27,8 @@ export class OccPolicyService {
   protected getPolicyEndpoint(userId: string, policyId: string, contractId: string) {
     const policyEndpoint = '/users/' + userId + '/policies/' + policyId + '/contracts/' + contractId;
     return (
-      (this.config.server.baseUrl || '') +
-      this.config.server.occPrefix +
+      (this.config.backend.occ.baseUrl || '') +
+      this.config.backend.occ.prefix +
       this.config.site.baseSite +
       policyEndpoint
     );

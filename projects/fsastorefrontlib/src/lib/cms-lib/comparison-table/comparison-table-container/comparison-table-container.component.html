@@ -8,9 +8,10 @@
               </ng-template>
               <ng-template ngbTabContent>
                 <ng-container
-                  cxComponentWrapper
-                  componentMappedType="CMSComparisonTabComponent"
-                  componentUid="{{ tab.uid }}"
+                  [cxComponentWrapper]="{
+                    flexType: 'CMSComparisonTabComponent',
+                    uid: tab.uid
+                  }"
                 >
               </ng-container>
             </ng-template>

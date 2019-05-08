@@ -1,6 +1,6 @@
-import { Product, Price} from '@spartacus/core';
+import { UIProduct, Price} from '@spartacus/core';
 
-export interface FSProduct extends Product {
+export interface FSProduct extends UIProduct {
   price?: FSPrice;
 }
 

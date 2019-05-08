@@ -46,7 +46,7 @@ export class CMSViewQuotesComponent implements OnInit {
         this.quoteButtonText = this.textAllQuotes$;
       }
     public getBaseUrl() {
-        return this.config.server.baseUrl || '';
+        return this.config.backend.occ.baseUrl || '';
     }
 
     public showAllQuotes(showAll) {

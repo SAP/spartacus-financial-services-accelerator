@@ -31,7 +31,7 @@ export class FsaOrderConfirmationComponent implements OnInit, OnDestroy {
     this.order$ = this.checkoutService.getOrderDetails();
   }
   public getBaseUrl() {
-    return this.config.server.baseUrl || '';
+    return this.config.backend.occ.baseUrl || '';
   }
   ngOnDestroy() {
     this.checkoutService.clearCheckoutData();
