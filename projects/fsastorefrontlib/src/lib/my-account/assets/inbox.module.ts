@@ -13,6 +13,7 @@ import { InboxComponent } from '../../cms-lib/account/inbox/inbox.component';
 import { OccInboxService } from '../../occ/inbox/inbox.service';
 import { InboxDataService } from './services/inbox-data.service';
 import { InboxService } from './services/inbox.service';
+import { I18nModule } from '@spartacus/core';
 
 const routes: Routes = [
   {
@@ -26,6 +27,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    I18nModule.forRoot(),
     RouterModule,
     NgSelectModule,
     ComponentsModule,

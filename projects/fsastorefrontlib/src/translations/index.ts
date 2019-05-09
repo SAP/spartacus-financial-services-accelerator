@@ -1,8 +1,10 @@
 import { TranslationResources } from '@spartacus/core';
-import { common } from './en/common.en';
+import { deda } from './en/baba.en';
+import { translations} from '@spartacus/storefront';
 
-export const translations: TranslationResources = {
+export const translations1: TranslationResources = {
+  translations,
   en: {
-    common
-  },
+    deda,
+  }
 };

@@ -10,10 +10,14 @@ import { PolicyDetailsModule } from './assets/policy-details.module';
 import { PremiumCalendarModule } from './assets/premium-calendar.module';
 import { effects } from './assets/store/effects';
 import { reducerProvider, reducerToken } from './assets/store/reducers';
+import {
+  I18nModule
+} from '@spartacus/core';
 
 @NgModule({
   imports: [
     ClaimsModule,
+    I18nModule,
     QuotesModule,
     PoliciesModule,
     PolicyDetailsModule,
