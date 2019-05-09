@@ -15,13 +15,14 @@ const messagesEndPoint = '/notifications/sitemessages';
 
 
 const MockOccModuleConfig: OccConfig = {
-  server: {
-    baseUrl: '',
-    occPrefix: ''
-  },
-
   site: {
     baseSite: ''
+  },
+  backend: {
+    occ: {
+      baseUrl: '',
+      prefix: ''
+    }
   }
 };
 

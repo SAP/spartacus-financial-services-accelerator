@@ -14,13 +14,14 @@ const usersEndpoint = '/users';
 const claimsEndpoint = '/claims';
 
 const MockOccModuleConfig: OccConfig = {
-  server: {
-    baseUrl: '',
-    occPrefix: ''
-  },
-
   site: {
     baseSite: ''
+  },
+  backend: {
+    occ: {
+      baseUrl: '',
+      prefix: ''
+    }
   }
 };
 
