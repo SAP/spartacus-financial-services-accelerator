@@ -1,14 +1,14 @@
-<h2 class="heading-headline">Premium Calendar</h2>
+<h2 class="heading-headline">{{ 'fscommon.premiumCalnedar' | cxTranslate }}</h2>
 <ng-container *ngIf="policies$ | async as policies; else noPolicies">
   <ng-container *ngIf="policiesLoaded$ | async; else loading">
     <ng-container *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
       <div class="container-fluid d-none d-lg-block"> <!-- Desktop Layout-->
         <div class="gradient-heading row">
-          <h3 class="col"> Policy </h3>
-          <h3 class="col"> Payment Frequency </h3>
-          <h3 class="col"> Due Date </h3>
-          <h3 class="col"> Premium </h3>
-          <h3 class="col"> Payment Method </h3>
+          <h3 class="col"> {{ 'fscommon.policy.policy' | cxTranslate }} </h3>
+          <h3 class="col"> {{ 'fscommon.paymentFrequency' | cxTranslate }} </h3>
+          <h3 class="col"> {{ 'fscommon.dueDate' | cxTranslate }} </h3>
+          <h3 class="col"> {{ 'fscommon.premium' | cxTranslate }} </h3>
+          <h3 class="col"> {{ 'fscommon.paymentMethod' | cxTranslate }} </h3>
         </div>
         <div *ngFor="let policy of policies.insurancePolicies">
           <div class="premium-data-row row" (click)="policy.opened=!policy.opened" [ngClass]="{'clickable': policy.billingData?.length > 1, 'active':policy.opened}">
@@ -31,7 +31,7 @@
             <div class="col" [ngClass]="(policy.billingData[0]?.paymentStatus == 'Overdue')?'warn':'notice'">
               {{policy.billingData[0]?.billingDate}}
               <div class="warn" *ngIf="policy.billingData[0]?.paymentStatus == 'Overdue'">
-                Overdue
+                  {{ 'fscommon.overdue' | cxTranslate }}
               </div>
             </div>
             <div class="col" [ngClass]="(policy.billingData[0]?.paymentStatus == 'Overdue')?'warn':'notice'">
@@ -81,7 +81,7 @@
                 <div class="cards__details-wrapper cards__details-wrapper--grey">
                   <div class="cards__data border-bottom-grey">
                     <span class="title">
-                      Payment Frequency
+                        {{ 'fscommon.paymentFrequency' | cxTranslate }}
                     </span>
                     <span class="value">
                       {{policy.paymentFrequency}}
@@ -91,17 +91,17 @@
                     <div class="row">
                       <div class="col-6">
                         <div class="title">
-                            <div class="cell-text text-left d-flex justify-content-around">Due Date</div>
+                            <div class="cell-text text-left d-flex justify-content-around">{{ 'fscommon.dueDate' | cxTranslate }}</div>
                         </div>
                         <div class="title text-left d-flex justify-content-around" [ngClass]="(policy.billingData[0]?.paymentStatus == 'Overdue')?'warn':'notice'">
                           {{policy.billingData[0]?.billingDate}}
-                          <div class="warn" *ngIf="policy.billingData[0]?.paymentStatus == 'Overdue'">Overdue</div>
+                          <div class="warn" *ngIf="policy.billingData[0]?.paymentStatus == 'Overdue'">{{ 'fscommon.overdue' | cxTranslate }}</div>
                         </div>
                       </div>
                       <div class="col-6">
                         <div class="title text-left d-flex justify-content-around">
                           <div class="cell-text">
-                            Premium
+                              {{ 'fscommon.premium' | cxTranslate }}
                           </div>
                         </div>
                         <div class="title text-left d-flex justify-content-around" [ngClass]="(policy.billingData[0]?.paymentStatus == 'Overdue')?'warn':'notice'">
@@ -128,7 +128,7 @@
                   </ng-container>
                   <div class="cards__data">
                     <span class="title">
-                      Payment Method
+                        {{ 'fscommon.paymentMethod' | cxTranslate }}
                     </span>
                     <ng-container *ngIf="policy.paymentMethod; else NA">
                       {{policy.paymentMethod.cardType?.code| uppercase }} {{policy.paymentMethod?.cardNumber }}
@@ -144,13 +144,13 @@
   </ng-container>
 </ng-container>
 <ng-template #NA>
-    N/A
+    {{ 'fscommon.notAvailable' | cxTranslate }}
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
 </ng-template>
 <ng-template #noPolicies>
   <p>
-    You have no premiums awaiting payment
+    {{ 'fscommon.noPremiumsAwaitingPayment' | cxTranslate }}
   </p>
 </ng-template>

@@ -12,7 +12,7 @@
               </span>
             </div>
             <div class="col-12 col-md-8 accordion-header__text">
-              {{ cart.deliveryOrderGroups[0].entries[0]?.product?.defaultCategory?.name }} Quote
+              {{ cart.deliveryOrderGroups[0].entries[0]?.product?.defaultCategory?.name }} {{ 'fscommon.quote' | cxTranslate }}
             </div>
             <div class="col-12 col-md-3 col-md-2 accordion-header__details">
               <div class="accordion-header__id"></div>
@@ -37,7 +37,7 @@
                       </ng-container>
                     </ul>
                     <div class="col-12 col-md-6">
-                      <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
+                      <a href="#" type="submit" class="secondary-button secondary-button__default">{{ 'fscommon.edit' | cxTranslate }}</a>
                     </div>
                   </div>
                 </div>
@@ -63,7 +63,7 @@
                   </ng-container>
                 </ul>
                 <div class="col-12 col-md-6">
-                  <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
+                  <a href="#" type="submit" class="secondary-button secondary-button__default">{{ 'fscommon.edit' | cxTranslate }}</a>
                 </div>
               </div>
             </div>
@@ -79,7 +79,7 @@
                   </ng-container>
                 </ul>
                 <div class="col-12 col-md-6">
-                  <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
+                  <a href="#" type="submit" class="secondary-button secondary-button__default">{{ 'fscommon.edit' | cxTranslate }}</a>
                 </div>
               </div>
             </div>
@@ -95,14 +95,14 @@
                           <div class="col-12">
                             {{investmentDetail.investmentType?.fundName}}: {{investmentDetail.distributionPercentage}}% </div>
                           <div class="col-12">ISIN: {{investmentDetail.investmentType?.isin}} </div>
-                          <div class="col-12">5 Year Perfomance: {{investmentDetail.investmentType?.fiveYearPerformance}} </div>
-                          <div class="col-12">Risk & Returning Rating: {{investmentDetail.investmentType?.riskReturningRating}}</div>
+                          <div class="col-12">5 {{ 'fscommon.yearPerformanse' | cxTranslate }}: {{investmentDetail.investmentType?.fiveYearPerformance}} </div>
+                          <div class="col-12">{{ 'fscommon.riskAndReturningRate' | cxTranslate }}: {{investmentDetail.investmentType?.riskReturningRating}}</div>
                         </li>
                       </ng-container>
                     </ng-container>
                   </ul>
                   <div class="col-12 col-md-6">
-                    <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
+                    <a href="#" type="submit" class="secondary-button secondary-button__default">{{ 'fscommon.edit' | cxTranslate }}</a>
                   </div>
                 </div>
               </div>
@@ -115,7 +115,7 @@
                   <li class="accordion--list-item row">
                     <div class="col-12">
                       <!-- Needs to have dynamic heading value -->
-                      <h3 class="accordion-item__list-title">Policy Holder</h3>
+                      <h3 class="accordion-item__list-title">{{ 'fscommon.policy.policyHolder' | cxTranslate }}</h3>
                       <ul class="accordion-item__list">
                         <li class="accordion-item__list-item">
                           Mrs. Test Tester
@@ -141,17 +141,17 @@
                   </li>
                 </ul>
                 <div class="col-12 col-md-6">
-                  <a href="#" type="submit" class="secondary-button secondary-button__default">Edit</a>
+                  <a href="#" type="submit" class="secondary-button secondary-button__default">{{ 'fscommon.edit' | cxTranslate }}</a>
                 </div>
               </div>
             </div>
           </fsa-accordion-item>
           <div class="row mt-5">
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <a class="secondary-button secondary-button__default secondary-button__checkout js-checkQuoteStatus" (click)="back()">Back</a>
+              <a class="secondary-button secondary-button__default secondary-button__checkout js-checkQuoteStatus" (click)="back()">{{ 'fscommon.back' | cxTranslate }}</a>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <a class="primary-button primary-button__default" (click)="next()">Continue</a>
+              <a class="primary-button primary-button__default" (click)="next()">{{ 'common.continue' | cxTranslate }}</a>
             </div>
           </div>
         </div>
@@ -159,7 +159,7 @@
   </ng-container>
 </ng-container>
 <ng-template #noQuotes>
-    <h3>You have no active quotes!</h3>
+    <h3>{{ 'fscommon.noActiveQuotes' | cxTranslate }}!</h3>
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>

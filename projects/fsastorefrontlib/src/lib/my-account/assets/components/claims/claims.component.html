@@ -1,4 +1,4 @@
-<h2 class="heading-headline">Claims</h2>
+<h2 class="heading-headline">{{ 'fscommon.claims' | cxTranslate }}</h2>
 <ng-container *ngIf="(claims$ | async) as claims">
   <ng-container *ngIf="claimsLoaded$ | async; else loading">
     <div class="row" *ngIf="claims?.claims?.length > 0; else: noClaims">
@@ -32,15 +32,15 @@
               <span class="value">{{ claim.insurancePolicy?.policyNumber }}</span>
             </div>
             <div class="cards__data">
-              <span class="title">Date of Loss</span>
+              <span class="title">{{ 'fscommon.dateOfLoss' | cxTranslate }}</span>
               <span class="value" *ngIf="claim.dateOfLoss != undefined; else: na">{{ claim.dateOfLoss }}</span>
             </div>
             <div class="cards__data">
-              <span class="title">Status</span>
+              <span class="title">{{ 'fscommon.status' | cxTranslate }}</span>
               <span class="value ">{{ claim.claimStatus }}</span>
             </div>
             <div class="cards__data">
-              <span class="title">Claim Handler</span>
+              <span class="title">{{ 'fscommon.claimHandler' | cxTranslate }}</span>
               <span class="value">
                 <span class="value" *ngIf="claim.claimHandler?.displayName != undefined; else: na">{{ claim.claimHandler.displayName }}</span> <br />
                 <span class="value" *ngIf="claim.claimHandler?.email != undefined; else: na">{{ claim.claimHandler.email }}</span>
@@ -49,11 +49,11 @@
           </div>
           <div class="cards-button-wrapper cards-button-wrapper--border-primary">
             <div class="cards__button" *ngIf="claim.claimStatus == 'OPEN' || claim.claimStatus == 'REJECTED'; else: details">
-              <a href="#" type="submit" class="secondary-button secondary-button__default secondary-button__account-policies">Resume</a>
+              <a href="#" type="submit" class="secondary-button secondary-button__default secondary-button__account-policies">{{ 'fscommon.resume' | cxTranslate }}</a>
             </div>
             <ng-template #details>
               <div class="cards__button">
-                <a href="#" type="submit" class="secondary-button secondary-button__default secondary-button__account-policies">Details</a>
+                <a href="#" type="submit" class="secondary-button secondary-button__default secondary-button__account-policies">{{ 'fscommon.details' | cxTranslate }}</a>
               </div>
             </ng-template>
           </div>
@@ -63,10 +63,10 @@
   </ng-container>
 </ng-container>
 <ng-template #noClaims>
-  <h3>You have no Claims!</h3>
+  <h3>{{ 'fscommon.youHaveNoClaims' | cxTranslate }}!</h3>
 </ng-template>
 <ng-template #na>
-  N/A
+    {{ 'fscommon.notAvailable' | cxTranslate }}
 </ng-template>
 <ng-template #noIncidentType>
   <img class="images__size" [src]="getNaImagelink()" alt="">

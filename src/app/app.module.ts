@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FSAStorefrontModule, translations1 } from '@fsa/storefront';
+import { FSAStorefrontModule, fstranslations } from '@fsa/storefront';
 import { AppComponent } from './app.component';
 import { translations } from '@spartacus/storefront';
-// import { translations1 } from '../../projects/fsastorefrontlib/src/translations/index';
-
 
 @NgModule({
   declarations: [AppComponent],
@@ -12,7 +10,12 @@ import { translations } from '@spartacus/storefront';
     BrowserModule,
     FSAStorefrontModule.withConfig({
       i18n: {
-        resources: translations1
+        resources: {
+          en: {
+            ...translations.en,
+            ...fstranslations.en
+          }
+        },
       },
       backend: {
         occ: {

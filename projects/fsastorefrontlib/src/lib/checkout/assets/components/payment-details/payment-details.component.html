@@ -2,7 +2,7 @@
   *ngIf="(existingPaymentMethods$ | async) as existingPaymentMethods"
 >
   <div class="cx-payment container">
-    <h3 class="cx-payment-title d-none d-lg-block d-xl-block">Payment</h3>
+    <h3 class="cx-payment-title d-none d-lg-block d-xl-block">{{ 'payment.paymentForm.payment' | cxTranslate }}</h3>
     <ng-container *ngIf="!(isLoading$ | async); else loading">
       <ng-container
         *ngIf="
@@ -10,14 +10,14 @@
           else newPaymentForm
         "
       >
-        <p class="cx-payment-text">Choose a payment method</p>
+        <p class="cx-payment-text">{{ 'payment.paymentForm.choosePaymentMethod' | cxTranslate }}</p>
         <div class="cx-payment-btn row justify-content-end">
           <div class="col-sm-12 col-md-6">
             <button
               class="btn btn-block btn-action"
               (click)="showNewPaymentForm()"
             >
-              Add New Payment
+              {{ 'payment.paymentForm.addNewPayment' | cxTranslate }}
             </button>
           </div>
         </div>
@@ -40,7 +40,7 @@
         <div class="row">
           <div class="col-md-12 col-lg-6">
             <button class="btn btn-block btn-action" (click)="back()">
-              Back
+              {{ 'common.back' | cxTranslate }}
             </button>
           </div>
           <div class="col-md-12 col-lg-6">
@@ -49,7 +49,7 @@
               [disabled]="!selectedPayment"
               (click)="next()"
             >
-              Continue
+            {{ 'common.continue' | cxTranslate }}
             </button>
           </div>
         </div>

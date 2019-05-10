@@ -8,10 +8,12 @@ import { ComponentsModule } from '@spartacus/storefront';
 import { AddOptionsComponent } from './components/add-options/add-options.component';
 import { FSCartService } from './services';
 import { OccFSCartService } from 'projects/fsastorefrontlib/src/lib/occ/cart/fs-cart.service';
+import { I18nModule } from '@spartacus/core';
 
 @NgModule({
   imports: [
     CommonModule,
+    I18nModule,
     RouterModule,
     FormsModule,
     NgSelectModule,

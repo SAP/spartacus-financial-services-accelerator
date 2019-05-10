@@ -11,14 +11,14 @@
                 {{policy.policyNumber}}
         </span>
         <a class="account-section-content__headline--back" 
-        routerLink="/my-account/my-policies/" routerLinkActive="active">Back</a>
+        routerLink="/my-account/my-policies/" routerLinkActive="active">{{ 'common.back' | cxTranslate }}</a>
     </h2>
     <div class="accordion">
         <fsa-accordion-item [opened]="true" [title]="'Policy Summary'">
             <ul class="accordion--list container-fluid">
                 <li class="accordion--list-item row">
                     <div class="col-6 col-sm-3 bold">
-                        ContractId
+                        {{ 'fscommon.contractId' | cxTranslate }}
                     </div>
                     <div class="col-6 col-sm-3 value notice notice--dark">
                         {{policy.contractNumber}}
@@ -26,7 +26,7 @@
                 </li>
                 <li class="accordion--list-item row">
                     <div class="col-6 col-sm-3 bold">
-                        Product
+                        {{ 'fscommon.product' | cxTranslate }}
                     </div>
                     <div class="col-6 col-sm-3 value notice notice--dark">
                         {{policy.mainProduct?.coverageProduct?.name}}
@@ -34,20 +34,20 @@
                 </li>
                 <li class="accordion--list-item row">
                     <div class="col-6 col-sm-3 bold">
-                        Payment frequency 
+                        {{ 'fscommon.paymentFrequency' | cxTranslate }}
                     </div>
                     <div class="col-6 col-sm-3 value notice notice--dark">
                         {{policy.paymentFrequency}}
                     </div>
                 </li>   
                 <li class="accordion--list-item row">
-                    <div class="col-6 col-sm-3 bold">Payment method</div>
+                    <div class="col-6 col-sm-3 bold">{{ 'fscommon.paymentMethod' | cxTranslate }}</div>
                     <div class="col-6 col-sm-3 value notice notice--dark">
                         {{policy.paymentMethod?.paymentOption}}
                     </div>
                 </li>
                 <li class="accordion--list-item row">
-                    <div class="col-6 col-sm-3 bold">Duration</div>
+                    <div class="col-6 col-sm-3 bold">{{ 'fscommon.duration' | cxTranslate }}</div>
                     <div class="col-6 col-sm-3 value notice notice--dark">
                         {{policy.policyStartDate}} - {{policy.policyEndDate}}
                     </div>
@@ -85,13 +85,13 @@
             <ul class="accordion--list container-fluid">
                 <li *ngFor="let optionalCoverage of policy.optionalProducts" class="accordion--list-item row">
                     <div class="col-6 col-sm-3 accordion-item__title bold">
-                            {{optionalCoverage.coverageProduct.name}}
+                        {{optionalCoverage.coverageProduct.name}}
                     </div>
                     <div *ngIf="optionalCoverage.coverageIsIncluded" class="col-6 col-sm-3 value notice notice--dark">
-                        Included
+                        {{ 'fscommon.included' | cxTranslate }}
                     </div>
                     <div *ngIf="!optionalCoverage.coverageIsIncluded" class="col-6 col-sm-3 value notice notice--dark">
-                        Excluded
+                        {{ 'fscommon.excluded' | cxTranslate }}
                     </div>
                 </li>
             </ul>
@@ -117,7 +117,7 @@
                     </li>
                     <li class="accordion--list-item row">
                         <div class="col-xs-6 col-sm-3 accordion-item__title bold">
-                            5 Year Performance
+                            5 {{ 'fscommon.yearPerformanse' | cxTranslate }}
                         </div>
                         <div class="col-xs-6 col-sm-3 notice notice--dark">
                             {{investmentInfoItem.investmentType?.fiveYearPerformance}}&#37;
@@ -125,7 +125,7 @@
                     </li>
                         <li class="accordion--list-item row">
                         <div class="col-xs-6 col-sm-3 accordion-item__title bold">
-                            Risk & Returning Rating
+                            {{ 'fscommon.riskAndReturningRate' | cxTranslate }}
                         </div>
                         <div class="col-xs-6 col-sm-3 notice notice--dark">
                             {{investmentInfoItem.investmentType?.riskReturningRating}}
@@ -138,7 +138,7 @@
             <ul class="accordion--list container-fluid">
                 <li class="accordion--list-item row">
                     <div class="col-6 col-sm-3 bold">
-                        Premium
+                        {{ 'fscommon.premium' | cxTranslate }}
                     </div>
                     <div class="col-xs-12 col-sm-6 value notice notice--dark"> 
                         {{policy.policyPremium?.formattedValue}}
@@ -146,15 +146,15 @@
                 </li>
                 <li class="accordion--list-item row">
                     <div class="col-6 col-sm-3 bold">
-                        Payment frequency
+                        {{ 'fscommon.paymentFrequency' | cxTranslate }}
                     </div>
                     <div class="col-6 col-sm-3 value notice notice--dark">
-                            {{policy.paymentFrequency}}
+                        {{policy.paymentFrequency}}
                     </div>
                 </li>
                 <li class="accordion--list-item row">
                     <div class="col-6 col-sm-3 bold">
-                        Payment method
+                        {{ 'fscommon.paymentMethod' | cxTranslate }}
                     </div>
                     <div class="col-6 col-sm-3 value notice notice--dark">
                         {{policy.paymentMethod?.paymentOption}}
@@ -166,13 +166,13 @@
             <ul class="accordion--list container-fluid">
                 <li class="accordion-item__list-item row">
                     <div class="col-6 col-sm-3 bold">
-                        Policy
+                        {{ 'fscommon.policy.policy' | cxTranslate }}
                     </div>
                     <div class="col-6 col-sm-3 value notice notice--dark">
-                            {{policy.policyStartDate}} - {{policy.policyEndDate}}
+                        {{policy.policyStartDate}} - {{policy.policyEndDate}}
                     </div>
                     <div class="col-xs-12 col-sm-6 download">
-                        Download PDF Link
+                        {{ 'fscommon.donwloadPDFLink' | cxTranslate }}
                     </div>
                 </li>
             </ul>   

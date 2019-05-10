@@ -12,6 +12,7 @@ import { FinalReviewComponent } from './assets/components/final-review/final-rev
 import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
 import { effects } from './assets/store/effects';
 import { ɵu as PaymentMethodModule  } from '@spartacus/storefront';
+import { I18nModule } from '@spartacus/core';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     PaymentMethodModule,
+    I18nModule,
     CommonModule,
     PageComponentModule,
     MultiStepCheckoutModule,

@@ -27,7 +27,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    I18nModule.forRoot(),
+    I18nModule,
     RouterModule,
     NgSelectModule,
     ComponentsModule,

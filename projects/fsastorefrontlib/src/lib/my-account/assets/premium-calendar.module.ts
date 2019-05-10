@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CmsPageGuard, PageLayoutComponent, ComponentsModule } from '@spartacus/storefront';
-import { CmsConfig, ConfigModule, AuthGuard } from '@spartacus/core';
+import { CmsConfig, ConfigModule, AuthGuard, I18nModule } from '@spartacus/core';
 import { PremiumCalendarComponent } from './components/premium-calendar/premium-calendar.component';
 
 const routes: Routes = [
@@ -17,6 +17,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    I18nModule,
     ComponentsModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig>{
