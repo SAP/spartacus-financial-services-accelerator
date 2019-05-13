@@ -14,7 +14,7 @@
           <h3>{{orderEntryData.product.name}}</h3>
         </div>
         <div *ngIf="!orderEntryData.removeable && !orderEntryData.addable" class="col-12 col-md-3 align-self-center">
-          <ng-container *ngTemplateOutlet="mandatoryNotAvailableButton; context:{title: ( orderEntryData.product.bundleTemplates?.length ==3 ? 'Mandatory' : 'Not available')}"></ng-container>
+          <ng-container *ngTemplateOutlet="mandatoryNotAvailableButton; context:{title: ( orderEntryData.product.bundleTemplates?.length ==3 ? ('fscommon.mandatory' | cxTranslate) : ( 'fscommon.notAvailableFull' | cxTranslate ))}"></ng-container>
         </div>
         <div class="col-12 col-md-3 align-self-center">
           <div *ngIf="!orderEntryData.removeable && orderEntryData.addable">

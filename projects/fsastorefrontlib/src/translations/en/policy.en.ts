@@ -6,6 +6,7 @@ export const policy = {
       viewPolicies: 'View Policies',
       viewYourPolicies: 'View your policies',
       youHaveNoPolicies: 'You have no Policies!',
+      policySummary: 'Policy Summary',
       policyRequestSubmitted: 'Your policy request has been submitted',
       yourPolicyHasBeenSubmited: 'Your policy has already been submited',
       finishQuoteToGetPolicy: 'You need to finish your quote to get aCancel Policy'

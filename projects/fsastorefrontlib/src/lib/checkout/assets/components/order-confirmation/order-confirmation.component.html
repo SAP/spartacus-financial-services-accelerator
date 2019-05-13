@@ -21,7 +21,7 @@
                         <div #ref>
                             <ng-container *ngIf="(order?.insuranceQuote?.quoteDetails | json) !== '{}'">
                                 <fsa-accordion-item [opened]="true"
-                                    [title]="order.entries[0]?.product?.defaultCategory?.name + ' Information'">
+                                    [title]="order.entries[0]?.product?.defaultCategory?.name + ('fscommon.information' | cxTranslate)">
                                     <div class="container">
                                         <div class="row justify-content-center">
                                             <ul class="col-12 accordion--list">
@@ -45,7 +45,7 @@
                                 </fsa-accordion-item>
                             </ng-container>
                         </div>
-                        <fsa-accordion-item [opened]="ref.children.length > 0 ? false : true" [title]="'What\'s Included'">
+                        <fsa-accordion-item [opened]="ref.children.length > 0 ? false : true" [title]="'fscommon.whatsIncluded' | cxTranslate">
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <ul class="col-12 accordion--list">
@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                         </fsa-accordion-item>
-                        <fsa-accordion-item [title]="'Added by you'">
+                        <fsa-accordion-item [title]="'fscommon.addedByYou' | cxTranslate">
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <ul class="col-12 accordion--list">
@@ -88,7 +88,7 @@
                         </fsa-accordion-item>
                         <ng-container
                             *ngIf="order.deliveryOrderGroups[0]?.entries.length > 0 && order.deliveryOrderGroups[0]?.entries[0]?.product?.investments">
-                            <fsa-accordion-item [title]="'Investments Details'">
+                            <fsa-accordion-item [title]="'fscommon.investementDetails' | cxTranslate">
                                 <div class="container">
                                     <div class="row justify-content-center">
                                         <ul class="col-12 accordion--list">
@@ -112,7 +112,7 @@
                                 </div>
                             </fsa-accordion-item>
                         </ng-container>
-                        <fsa-accordion-item [title]="'Personal Details'">
+                        <fsa-accordion-item [title]="'fscommon.personalDetails' | cxTranslate">
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <ul class="col-12 accordion--list">
@@ -122,23 +122,25 @@
                                                 <h3 class="accordion-item__list-title">{{ 'policy.policyHolder' | cxTranslate }}</h3>
                                                 <ul class="accordion-item__list">
                                                     <li class="accordion-item__list-item">
-                                                        {{ 'fscommon.mrs' | cxTranslate }} Test Tester
+                                                        Mrs. Test Tester
                                                     </li>
                                                     <li class="accordion-item__list-item">
-                                                        {{ 'fscommon.phoneNumber' | cxTranslate }}: 323535
+                                                        Phone Number: 323535
                                                     </li>
                                                     <li class="accordion-item__list-item">
-                                                        {{ 'fscommon.emailAddress' | cxTranslate }}: donna@moore.com
+                                                        Email Address: donna@moore.com
                                                     </li>
                                                     <li class="accordion-item__list-item">
-                                                        {{ 'fscommon.adressLine' | cxTranslate }} 1: sfsdfsdf
-                                                    </li>
-                                                    <li class="accordion-item__list-item">City: sffsd</li>
-                                                    <li class="accordion-item__list-item">
-                                                        {{ 'fscommon.postCode' | cxTranslate }}: 3423423
+                                                        Address Line 1: Mocked Adress Line
                                                     </li>
                                                     <li class="accordion-item__list-item">
-                                                        {{ 'fscommon.country' | cxTranslate }}: France
+                                                        City: Belgrade
+                                                    </li>
+                                                    <li class="accordion-item__list-item">
+                                                        Postcode: 11090
+                                                    </li>
+                                                    <li class="accordion-item__list-item">
+                                                        Country: Serbia
                                                     </li>
                                                 </ul>
                                             </div>

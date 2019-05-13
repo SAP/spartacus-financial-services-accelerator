@@ -4,7 +4,7 @@
             <img class="images__size" [src]="getBaseUrl()+ policy.mainProduct.coverageProduct.images[0].url" alt="">
         </span>
         <span *ngIf="policy.categoryData" class="account-section-content__headline--title">
-            {{policy.categoryData.name}} Policy <br>
+        {{policy.categoryData.name}} {{ 'policy.policy' | cxTranslate }} <br>
             {{policy.mainProduct.coverageProduct.name}}
         </span>
         <span class="account-section-content__headline--number">
@@ -14,7 +14,7 @@
         routerLink="/my-account/my-policies/" routerLinkActive="active">{{ 'common.back' | cxTranslate }}</a>
     </h2>
     <div class="accordion">
-        <fsa-accordion-item [opened]="true" [title]="'Policy Summary'">
+        <fsa-accordion-item [opened]="true" [title]="'policy.policySummary' | cxTranslate">
             <ul class="accordion--list container-fluid">
                 <li class="accordion--list-item row">
                     <div class="col-6 col-sm-3 bold">
@@ -54,7 +54,7 @@
                 </li>
             </ul>     
         </fsa-accordion-item>
-        <fsa-accordion-item [title]="'Who or What Is Insured'">
+        <fsa-accordion-item [title]="'fscommon.whoOrWhatIsInsured' | cxTranslate">
             <ul class="accordion--list container-fluid" *ngIf="policy.insuredObjects">
                 <li *ngFor="let insuredObjectItem of policy.insuredObjects[0].insuredObjectItems" class="accordion--list-item row">
                     <div class="col-6 col-sm-3 bold">
@@ -66,7 +66,7 @@
                 </li>
             </ul>
         </fsa-accordion-item>
-        <fsa-accordion-item [title]="'Whats included'">
+        <fsa-accordion-item [title]="'fscommon.whatsIncluded' | cxTranslate">
             <ul class="accordion--list container-fluid" *ngIf="policy.mainProduct && policy.mainProduct.benefits">
                 <li *ngFor="let benefit of policy.mainProduct.benefits" class="accordion--list-item row">
                     <div class="col-6 col-sm-3 bold">
@@ -81,7 +81,7 @@
                 </li>
             </ul>
         </fsa-accordion-item>
-        <fsa-accordion-item [title]="'Optional Extras'">
+        <fsa-accordion-item [title]="'fscommon.optionalExtras' | cxTranslate">
             <ul class="accordion--list container-fluid">
                 <li *ngFor="let optionalCoverage of policy.optionalProducts" class="accordion--list-item row">
                     <div class="col-6 col-sm-3 accordion-item__title bold">
@@ -96,7 +96,7 @@
                 </li>
             </ul>
         </fsa-accordion-item>
-        <fsa-accordion-item *ngIf="policy.mainProduct?.investmentInfo" [title]="'Investment Details'">
+        <fsa-accordion-item *ngIf="policy.mainProduct?.investmentInfo" [title]="'fscommon.investmentDetails' | cxTranslate">
             <ul class="accordion--list container-fluid">
                 <ng-container *ngFor="let investmentInfoItem of policy.mainProduct?.investmentInfo">
                     <li  class="accordion--list-item row">
@@ -134,7 +134,7 @@
                 </ng-container> 
             </ul>
         </fsa-accordion-item>
-        <fsa-accordion-item [title]="'What Does It Cost Me?'">
+        <fsa-accordion-item [title]="'fscommon.whatDoesItCostMe' | cxTranslate">
             <ul class="accordion--list container-fluid">
                 <li class="accordion--list-item row">
                     <div class="col-6 col-sm-3 bold">
@@ -162,7 +162,7 @@
                 </li>
             </ul>
         </fsa-accordion-item>
-        <fsa-accordion-item [title]="'Documents'">
+        <fsa-accordion-item [title]="'fscommon.documents' | cxTranslate">
             <ul class="accordion--list container-fluid">
                 <li class="accordion-item__list-item row">
                     <div class="col-6 col-sm-3 bold">
@@ -177,7 +177,7 @@
                 </li>
             </ul>   
         </fsa-accordion-item>
-        <fsa-accordion-item *ngIf="policy.responsibleAgent" [title]="'My Agent'">
+        <fsa-accordion-item *ngIf="policy.responsibleAgent" [title]="'fscommon.myAgent' | cxTranslate">
             <div class="container-fluid">
                 <div class="row">
                     <div class="contact-box col-xs-10 col-sm-4 col-md-3">
