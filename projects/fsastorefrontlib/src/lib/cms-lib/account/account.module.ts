@@ -2,12 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { CmsConfig, ConfigModule } from '@spartacus/core';
+import { CmsConfig, ConfigModule, I18nModule } from '@spartacus/core';
 import { CmsModule, ComponentsModule } from '@spartacus/storefront';
 import { effects } from '../../my-account/assets/store';
 import { CMSViewPoliciesComponent } from './view-policies/view-policies.component';
 import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
-import { I18nModule } from '@spartacus/core';
 
 @NgModule({
   imports: [

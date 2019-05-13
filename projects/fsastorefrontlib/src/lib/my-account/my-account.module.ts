@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { I18nModule } from '@spartacus/core';
 
 import { ClaimsModule } from './assets/claims.module';
 import { InboxModule } from './assets/inbox.module';
@@ -10,9 +11,6 @@ import { PolicyDetailsModule } from './assets/policy-details.module';
 import { PremiumCalendarModule } from './assets/premium-calendar.module';
 import { effects } from './assets/store/effects';
 import { reducerProvider, reducerToken } from './assets/store/reducers';
-import {
-  I18nModule
-} from '@spartacus/core';
 
 @NgModule({
   imports: [

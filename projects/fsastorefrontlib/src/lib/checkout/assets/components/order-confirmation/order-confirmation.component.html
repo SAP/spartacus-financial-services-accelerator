@@ -15,7 +15,7 @@
                             </div>
                             <div class="col-12 col-md-10 accordion-header__summary-line-text">
                                 {{ 'fscommon.your' | cxTranslate }} {{ order.entries[0]?.product?.defaultCategory?.name }}<br>
-                                {{ 'fscommon.quoteNumberIs' | cxTranslate }} : {{ order.code }}
+                                {{ 'quote.quoteNumberIs' | cxTranslate }} : {{ order.code }}
                             </div>
                         </div>
                         <div #ref>
@@ -37,7 +37,7 @@
                                                     </li>
                                                 </ng-container> -->
                                                 <li class="accordion--list-item row">
-                                                    {{ 'fscommon.quoteStatus' | cxTranslate }} : {{order.insuranceQuote?.quoteWorkflowStatus?.code}}
+                                                    {{ 'quote.quoteStatus' | cxTranslate }} : {{order.insuranceQuote?.quoteWorkflowStatus?.code}}
                                                 </li>
                                             </ul>
                                         </div>
@@ -122,23 +122,23 @@
                                                 <h3 class="accordion-item__list-title">{{ 'policy.policyHolder' | cxTranslate }}</h3>
                                                 <ul class="accordion-item__list">
                                                     <li class="accordion-item__list-item">
-                                                        Mrs. Test Tester
+                                                        {{ 'fscommon.mrs' | cxTranslate }} Test Tester
                                                     </li>
                                                     <li class="accordion-item__list-item">
-                                                        Phone Number: 323535
+                                                        {{ 'fscommon.phoneNumber' | cxTranslate }}: 323535
                                                     </li>
                                                     <li class="accordion-item__list-item">
-                                                        Email Address: donna@moore.com
+                                                        {{ 'fscommon.emailAddress' | cxTranslate }}: donna@moore.com
                                                     </li>
                                                     <li class="accordion-item__list-item">
-                                                        Address Line 1: sfsdfsdf
+                                                        {{ 'fscommon.adressLine' | cxTranslate }} 1: sfsdfsdf
                                                     </li>
                                                     <li class="accordion-item__list-item">City: sffsd</li>
                                                     <li class="accordion-item__list-item">
-                                                        Postcode: 3423423
+                                                        {{ 'fscommon.postCode' | cxTranslate }}: 3423423
                                                     </li>
                                                     <li class="accordion-item__list-item">
-                                                        Country: France
+                                                        {{ 'fscommon.country' | cxTranslate }}: France
                                                     </li>
                                                 </ul>
                                             </div>
@@ -152,13 +152,13 @@
                 <div class="col-12 col-md-4">
                     <div class="short-overview short-overview--right">
                         <div class="short-overview__heading gradient-heading">
-                            My Quote
+                            {{ 'quote.myQuote' | cxTranslate }}
                         </div>
                         <div class="short-overview__content">
                             <div class="short-overview__items">
                                 <div class="short-overview__item row">
                                     <div class="short-overview__item-name col-7">
-                                        Quote ID:
+                                        {{ 'quote.quoteId' | cxTranslate }}:
                                     </div>
                                     <div class="short-overview__item-price col-5">
                                         {{ order.code }}
@@ -166,7 +166,7 @@
                                 </div>
                                 <div class="short-overview__item row">
                                     <div class="short-overview__item-name col-7">
-                                        Payment Frequency:
+                                        {{ 'fscommon.paymentFrequency' | cxTranslate }}:
                                     </div>
                                     <div class="short-overview__item-price col-5">
                                         {{ order.insuranceQuote?.paymentFrequency }}
@@ -174,7 +174,7 @@
                                 </div>
                                 <div class="short-overview__item row">
                                     <div class="short-overview__item-name col-7">
-                                        Start Date:
+                                        {{ 'fscommon.startDate' | cxTranslate }}:
                                     </div>
                                     <div class="short-overview__item-price col-5">
                                         {{ order.insuranceQuote?.startDate }}
@@ -191,7 +191,7 @@
                         </div>
                             <div class="short-overview__item short-overview__item--highlighted row">
                                 <div class="short-overview__item-name col-6">
-                                    Order total:
+                                    {{ 'fscommon.orderTotal' | cxTranslate }}:
                                 </div>
                                 <div class="short-overview__item-price col-6">{{ order.totalPrice?.formattedValue }}</div>
                             </div>
@@ -203,7 +203,7 @@
     </div>
 </ng-container>
 <ng-template #orderComplete>
-    <h1 class="mt-5 mb-3 text-center">Your policy has already been submited</h1>
+    <h1 class="mt-5 mb-3 text-center">{{ 'policy.yourPolicyHasBeenSubmited' | cxTranslate }}</h1>
 </ng-template>
 <ng-template #loading>
     <cx-spinner></cx-spinner>
