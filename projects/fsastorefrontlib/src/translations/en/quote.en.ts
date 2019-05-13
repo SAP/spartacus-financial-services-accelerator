@@ -14,4 +14,4 @@ export const quote = {
       noActiveQuotes: 'You have no active quotes',
       getQuoteBySelecting: 'Get a Quote by selecting an insurance type above'
     }
-}
+};

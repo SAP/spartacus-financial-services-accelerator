@@ -50,4 +50,4 @@ export const fscommon = {
     yearsPerformanse: 'Years Performance',
     riskAndReturningRate: 'Risk & Returning Rating'
   }
-}
+};

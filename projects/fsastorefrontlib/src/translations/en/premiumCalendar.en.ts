@@ -5,4 +5,4 @@ export const premiumCalendar = {
         premiumCalendar: 'Premium Calendar',
         noPremiumsAwaitingPayment: 'You have no premiums awaiting payment'
     },
-}
+};

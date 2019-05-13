@@ -7,5 +7,5 @@ export const claim = {
         youHaveNoClaims: 'You have no Claims',
         deleteStartedClaimProcess: 'Delete started claim process',
         followingClaimProcessWillBeDeleted: 'The following claim process will be deleted'
-    },
-}
+    }
+};
