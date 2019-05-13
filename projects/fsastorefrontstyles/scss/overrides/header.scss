@@ -2,15 +2,15 @@
 @import '../variables-fsa';
 
 // 
-cx-header {
+header {
     --cx-g-color-primary: #{$color-dark-grey};
     --cx-g-color-inverse: #{$color-dark-blue};
     --cx-background-color: #{$color-white};
     --cx-max-width: 100%;
-    &::before {
+    .SiteContext::after {
         display: none;
     }
-    .cx-header {
+    .header {
         color: $color-dark-grey;
         text-transform: uppercase;
         padding: 0 !important; //needed to override Spartacus default padding :-(
