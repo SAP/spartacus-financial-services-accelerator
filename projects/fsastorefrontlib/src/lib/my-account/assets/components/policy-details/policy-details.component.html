@@ -4,11 +4,11 @@
             <img class="images__size" [src]="getBaseUrl()+ policy.mainProduct.coverageProduct.images[0].url" alt="">
         </span>
         <span *ngIf="policy.categoryData" class="account-section-content__headline--title">
-                    {{policy.categoryData.name}} Policy <br>
-                    {{policy.mainProduct.coverageProduct.name}}
+            {{policy.categoryData.name}} Policy <br>
+            {{policy.mainProduct.coverageProduct.name}}
         </span>
         <span class="account-section-content__headline--number">
-                {{policy.policyNumber}}
+            {{policy.policyNumber}}
         </span>
         <a class="account-section-content__headline--back" 
         routerLink="/my-account/my-policies/" routerLinkActive="active">{{ 'common.back' | cxTranslate }}</a>

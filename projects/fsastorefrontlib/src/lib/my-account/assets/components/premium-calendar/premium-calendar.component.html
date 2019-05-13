@@ -20,8 +20,8 @@
                   </div>
                 </div>
                 <div class="col-8">
-                    {{policy.categoryData?.name}} <br>
-                    {{policy.contractNumber}}
+                  {{policy.categoryData?.name}} <br>
+                  {{policy.contractNumber}}
                 </div>
               </div>
             </div>
@@ -31,7 +31,7 @@
             <div class="col" [ngClass]="(policy.billingData[0]?.paymentStatus == 'Overdue')?'warn':'notice'">
               {{policy.billingData[0]?.billingDate}}
               <div class="warn" *ngIf="policy.billingData[0]?.paymentStatus == 'Overdue'">
-                  {{ 'premiumCalendar.overdue' | cxTranslate }}
+                {{ 'premiumCalendar.overdue' | cxTranslate }}
               </div>
             </div>
             <div class="col" [ngClass]="(policy.billingData[0]?.paymentStatus == 'Overdue')?'warn':'notice'">
@@ -81,7 +81,7 @@
                 <div class="cards__details-wrapper cards__details-wrapper--grey">
                   <div class="cards__data border-bottom-grey">
                     <span class="title">
-                        {{ 'fscommon.paymentFrequency' | cxTranslate }}
+                      {{ 'fscommon.paymentFrequency' | cxTranslate }}
                     </span>
                     <span class="value">
                       {{policy.paymentFrequency}}
@@ -101,7 +101,7 @@
                       <div class="col-6">
                         <div class="title text-left d-flex justify-content-around">
                           <div class="cell-text">
-                              {{ 'fscommon.premium' | cxTranslate }}
+                            {{ 'fscommon.premium' | cxTranslate }}
                           </div>
                         </div>
                         <div class="title text-left d-flex justify-content-around" [ngClass]="(policy.billingData[0]?.paymentStatus == 'Overdue')?'warn':'notice'">
@@ -116,10 +116,10 @@
                         <ng-container *ngFor="let dueDate of policy.billingData | slice:1">
                             <li class="row list-data__list-item border-bottom-grey">
                               <div class="col-6 text-left d-flex justify-content-around">
-                                  {{dueDate.billingDate}}
+                                {{dueDate.billingDate}}
                               </div>
                               <div class="col-6 text-left d-flex justify-content-around">
-                                  {{dueDate.paymentAmount}}
+                                {{dueDate.paymentAmount}}
                               </div>
                             </li>
                         </ng-container>
@@ -128,7 +128,7 @@
                   </ng-container>
                   <div class="cards__data">
                     <span class="title">
-                        {{ 'fscommon.paymentMethod' | cxTranslate }}
+                      {{ 'fscommon.paymentMethod' | cxTranslate }}
                     </span>
                     <ng-container *ngIf="policy.paymentMethod; else NA">
                       {{policy.paymentMethod.cardType?.code| uppercase }} {{policy.paymentMethod?.cardNumber }}
@@ -144,7 +144,7 @@
   </ng-container>
 </ng-container>
 <ng-template #NA>
-    {{ 'fscommon.notAvailable' | cxTranslate }}
+  {{ 'fscommon.notAvailable' | cxTranslate }}
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>

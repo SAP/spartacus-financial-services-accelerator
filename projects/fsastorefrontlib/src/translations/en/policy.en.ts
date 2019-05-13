@@ -1,12 +1,13 @@
 export const policy = {
     policy: {
-        policyRequestSubmitted: 'Your policy request has been submitted',
         policies: 'Policies',
         policy: 'Policy',
+        policyHolder: 'Policy Holder',
         viewPolicies: 'View Policies',
         viewYourPolicies: 'View your policies',
-        finishQuoteToGetPolicy: 'You need to finish your quote to get aCancel Policy',
         youHaveNoPolicies: 'You have no Policies!',
-        policyHolder: 'Policy Holder'
+        policyRequestSubmitted: 'Your policy request has been submitted',
+        yourPolicyHasBeenSubmited: 'Your policy has already been submited',
+        finishQuoteToGetPolicy: 'You need to finish your quote to get aCancel Policy'
       }
 }

@@ -1,7 +1,7 @@
 <ng-container *ngIf="order$ | async as order; else loading">
     <div class="container-fluid center1400">
         <ng-container *ngIf="order.deliveryOrderGroups?.length > 0; else orderComplete">
-            <h2 class="mt-5 mb-5">{{ 'fscommon.thankYou' | cxTranslate }} {{ 'fscommon.addOptions' | cxTranslate }} </h2>
+            <h2 class="mt-5 mb-5">{{ 'fscommon.thankYou' | cxTranslate }} {{ 'policy.yourPolicyHasBeenSubmited' | cxTranslate }} </h2>
             <div class="row">
                 <div class="col-12 col-md-8">
                     <div class="accordion">
