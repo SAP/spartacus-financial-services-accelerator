@@ -4,7 +4,7 @@
             <div *ngIf="quotes$ | async as quotes"  class="review__wrapper">
                 <div class="review__quote" *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes">
                     <div class="my-quotes">
-                        <h2 class="my-quotes__title">{{ 'fscommon.retrieveQuotes' | cxTranslate }}</h2>
+                        <h2 class="my-quotes__title">{{ 'quote.retrieveQuotes' | cxTranslate }}</h2>
                             <ul>
                                 <ng-container *ngTemplateOutlet="quoteList; context:{quotes: quotes, max: (allQuotesDisplayed$ ? quotes?.insuranceQuotes?.length : component.numberOfQuotesToDisplay)}"></ng-container>
                             </ul>

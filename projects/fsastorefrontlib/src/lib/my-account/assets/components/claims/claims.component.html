@@ -1,4 +1,4 @@
-<h2 class="heading-headline">{{ 'fscommon.claims' | cxTranslate }}</h2>
+<h2 class="heading-headline">{{ 'claim.claims' | cxTranslate }}</h2>
 <ng-container *ngIf="(claims$ | async) as claims">
   <ng-container *ngIf="claimsLoaded$ | async; else loading">
     <div class="row" *ngIf="claims?.claims?.length > 0; else: noClaims">
@@ -32,7 +32,7 @@
               <span class="value">{{ claim.insurancePolicy?.policyNumber }}</span>
             </div>
             <div class="cards__data">
-              <span class="title">{{ 'fscommon.dateOfLoss' | cxTranslate }}</span>
+              <span class="title">{{ 'claim.dateOfLoss' | cxTranslate }}</span>
               <span class="value" *ngIf="claim.dateOfLoss != undefined; else: na">{{ claim.dateOfLoss }}</span>
             </div>
             <div class="cards__data">
@@ -40,7 +40,7 @@
               <span class="value ">{{ claim.claimStatus }}</span>
             </div>
             <div class="cards__data">
-              <span class="title">{{ 'fscommon.claimHandler' | cxTranslate }}</span>
+              <span class="title">{{ 'claim.claimHandler' | cxTranslate }}</span>
               <span class="value">
                 <span class="value" *ngIf="claim.claimHandler?.displayName != undefined; else: na">{{ claim.claimHandler.displayName }}</span> <br />
                 <span class="value" *ngIf="claim.claimHandler?.email != undefined; else: na">{{ claim.claimHandler.email }}</span>
@@ -63,7 +63,7 @@
   </ng-container>
 </ng-container>
 <ng-template #noClaims>
-  <h3>{{ 'fscommon.youHaveNoClaims' | cxTranslate }}!</h3>
+  <h3>{{ 'claim.youHaveNoClaims' | cxTranslate }}!</h3>
 </ng-template>
 <ng-template #na>
     {{ 'fscommon.notAvailable' | cxTranslate }}

@@ -12,10 +12,10 @@ import { translations } from '@spartacus/storefront';
       i18n: {
         resources: {
           en: {
-            ...translations.en,
-            ...fstranslations.en
+            ...fstranslations.en,
+            ...translations.en
           }
-        },
+        }
       },
       backend: {
         occ: {

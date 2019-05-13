@@ -1,4 +1,4 @@
-<h2 class="heading-headline">{{ 'fscommon.premiumCalnedar' | cxTranslate }}</h2>
+<h2 class="heading-headline">{{ 'premiumCalendar.premiumCalendar' | cxTranslate }}</h2>
 <ng-container *ngIf="policies$ | async as policies; else noPolicies">
   <ng-container *ngIf="policiesLoaded$ | async; else loading">
     <ng-container *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
@@ -6,7 +6,7 @@
         <div class="gradient-heading row">
           <h3 class="col"> {{ 'fscommon.policy.policy' | cxTranslate }} </h3>
           <h3 class="col"> {{ 'fscommon.paymentFrequency' | cxTranslate }} </h3>
-          <h3 class="col"> {{ 'fscommon.dueDate' | cxTranslate }} </h3>
+          <h3 class="col"> {{ 'premiumCalendar.dueDate' | cxTranslate }} </h3>
           <h3 class="col"> {{ 'fscommon.premium' | cxTranslate }} </h3>
           <h3 class="col"> {{ 'fscommon.paymentMethod' | cxTranslate }} </h3>
         </div>
@@ -31,7 +31,7 @@
             <div class="col" [ngClass]="(policy.billingData[0]?.paymentStatus == 'Overdue')?'warn':'notice'">
               {{policy.billingData[0]?.billingDate}}
               <div class="warn" *ngIf="policy.billingData[0]?.paymentStatus == 'Overdue'">
-                  {{ 'fscommon.overdue' | cxTranslate }}
+                  {{ 'premiumCalendar.overdue' | cxTranslate }}
               </div>
             </div>
             <div class="col" [ngClass]="(policy.billingData[0]?.paymentStatus == 'Overdue')?'warn':'notice'">
@@ -91,11 +91,11 @@
                     <div class="row">
                       <div class="col-6">
                         <div class="title">
-                            <div class="cell-text text-left d-flex justify-content-around">{{ 'fscommon.dueDate' | cxTranslate }}</div>
+                            <div class="cell-text text-left d-flex justify-content-around">{{ 'premiumCalendar.dueDate' | cxTranslate }}</div>
                         </div>
                         <div class="title text-left d-flex justify-content-around" [ngClass]="(policy.billingData[0]?.paymentStatus == 'Overdue')?'warn':'notice'">
                           {{policy.billingData[0]?.billingDate}}
-                          <div class="warn" *ngIf="policy.billingData[0]?.paymentStatus == 'Overdue'">{{ 'fscommon.overdue' | cxTranslate }}</div>
+                          <div class="warn" *ngIf="policy.billingData[0]?.paymentStatus == 'Overdue'">{{ 'premiumCalendar.overdue' | cxTranslate }}</div>
                         </div>
                       </div>
                       <div class="col-6">
@@ -151,6 +151,6 @@
 </ng-template>
 <ng-template #noPolicies>
   <p>
-    {{ 'fscommon.noPremiumsAwaitingPayment' | cxTranslate }}
+    {{ 'premiumCalendar.noPremiumsAwaitingPayment' | cxTranslate }}
   </p>
 </ng-template>
