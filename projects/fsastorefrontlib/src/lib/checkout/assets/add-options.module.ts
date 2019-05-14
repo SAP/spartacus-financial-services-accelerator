@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ComponentsModule } from '@spartacus/storefront';
+import { I18nModule } from '@spartacus/core';
 import { AddOptionsComponent } from './components/add-options/add-options.component';
 import { FSCartService } from './services';
 import { OccFSCartService } from 'projects/fsastorefrontlib/src/lib/occ/cart/fs-cart.service';
@@ -12,6 +13,7 @@ import { OccFSCartService } from 'projects/fsastorefrontlib/src/lib/occ/cart/fs-
 @NgModule({
   imports: [
     CommonModule,
+    I18nModule,
     RouterModule,
     FormsModule,
     NgSelectModule,

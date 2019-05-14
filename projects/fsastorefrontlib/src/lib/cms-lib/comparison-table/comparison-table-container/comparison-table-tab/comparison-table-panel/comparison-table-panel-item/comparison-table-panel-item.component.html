@@ -5,7 +5,7 @@
     <button (click)="createCartAndStartBundleForProduct(product.code,product.bundleTemplates[0]?.id)"
       class="primary-button primary-button__default"
       type="button">
-      Select
+      {{ 'fscommon.select' | cxTranslate }}
     </button>
   </div>
   <div class="products-prices">
@@ -23,12 +23,12 @@
         <p class="mb-2"><strong>{{investment.distributionPercentage}} % </strong></p>
         <a [href]="getBaseUrl() + investment.investmentType?.factSheetDocument?.downloadUrl"><strong>{{investment.investmentType?.fundName}}</strong></a>
         <p class="mb-0">ISIN: {{investment.investmentType?.isin}}</p>
-        <p class="mb-0">5 Years Performance: {{investment.investmentType?.fiveYearPerformance}} %</p>
-        <p class="mb-0">Risk & Returning Rating: {{investment.investmentType?.riskReturningRating}}</p>
+        <p class="mb-0">5 {{ 'fscommon.yearsPerformanse' | cxTranslate }}: {{investment.investmentType?.fiveYearPerformance}} %</p>
+        <p class="mb-0">{{ 'fscommon.riskAndReturningRate' | cxTranslate }}: {{investment.investmentType?.riskReturningRating}}</p>
       </div>
     </ng-container>
   </div>
-  <a class="secondary-button__default secondary-button mt-5" [routerLink]=" { route: [{ name: 'category/', params: { categoryCode: product.defaultCategory?.parentCategory?.code } }] }| cxTranslateUrl">More Info</a>
+  <a class="secondary-button__default secondary-button mt-5" [routerLink]=" { route: [{ name: 'category/', params: { categoryCode: product.defaultCategory?.parentCategory?.code } }] }| cxTranslateUrl">{{ 'fscommon.moreInfo' | cxTranslate }}</a>
 </ng-container>
 <ng-template #loading>
   <cx-spinner></cx-spinner>

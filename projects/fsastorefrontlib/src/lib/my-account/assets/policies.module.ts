@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { ComponentsModule } from '@spartacus/storefront';
-import { CmsConfig, ConfigModule, AuthGuard } from '@spartacus/core';
+import { CmsConfig, ConfigModule, AuthGuard, I18nModule } from '@spartacus/core';
 import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 
 import { PoliciesComponent } from '../assets/components/policies/policies.component';
@@ -27,6 +27,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     RouterModule,
+    I18nModule,
     FormsModule,
     NgSelectModule,
     ComponentsModule,

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { CmsConfig, ConfigModule, UrlTranslationModule } from '@spartacus/core';
+import { CmsConfig, ConfigModule, UrlTranslationModule, I18nModule } from '@spartacus/core';
 import { CmsModule, ComponentsModule, PageComponentModule } from '@spartacus/storefront';
 import { ComparisonTableContainerComponent } from './comparison-table-container/comparison-table-container.component';
 // tslint:disable-next-line:max-line-length
@@ -19,6 +19,7 @@ import { ComparisonTableService } from './comparison-table.service';
     CommonModule,
     PageComponentModule,
     RouterModule,
+    I18nModule,
     ComponentsModule,
     CmsModule,
     NgbTabsetModule,

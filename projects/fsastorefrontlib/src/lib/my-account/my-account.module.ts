@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { I18nModule } from '@spartacus/core';
 
 import { ClaimsModule } from './assets/claims.module';
 import { InboxModule } from './assets/inbox.module';
@@ -14,6 +15,7 @@ import { reducerProvider, reducerToken } from './assets/store/reducers';
 @NgModule({
   imports: [
     ClaimsModule,
+    I18nModule,
     QuotesModule,
     PoliciesModule,
     PolicyDetailsModule,
