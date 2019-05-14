@@ -4,7 +4,7 @@
             <div *ngIf="quotes$ | async as quotes"  class="review__wrapper">
                 <div class="review__quote" *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes">
                     <div class="my-quotes">
-                        <h2 class="my-quotes__title">Retrieve Quotes</h2>
+                        <h2 class="my-quotes__title">{{ 'quote.retrieveQuotes' | cxTranslate }}</h2>
                             <ul>
                                 <ng-container *ngTemplateOutlet="quoteList; context:{quotes: quotes, max: (allQuotesDisplayed$ ? quotes?.insuranceQuotes?.length : component.numberOfQuotesToDisplay)}"></ng-container>
                             </ul>
@@ -45,14 +45,14 @@
 
 <ng-template #noQuotes>
         <div class="none-quote">
-            <h2 class="none-quote__title">View Quotes</h2>
-            <p class="none-quote__content">- Get a Quote by selecting an insurance type above</p>
+            <h2 class="none-quote__title">{{ 'quote.viewQuotes' | cxTranslate }}</h2>
+            <p class="none-quote__content">- {{ 'quote.getQuoteBySelecting' | cxTranslate }}</p>
         </div>
 </ng-template>
 
 <ng-template #anonymousLogin>
     <a routerLink="/login">
-        <button class="primary-button primary-button__default primary-button__home">View your quotes</button>
+        <button class="primary-button primary-button__default primary-button__home">{{ 'quote.viewYourQuotes' | cxTranslate }}</button>
     </a>
 </ng-template>
 

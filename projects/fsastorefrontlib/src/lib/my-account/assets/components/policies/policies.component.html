@@ -1,4 +1,4 @@
-<h2 class="heading-headline">Policies</h2>
+<h2 class="heading-headline">{{ 'policy.policies' | cxTranslate }}</h2>
 <ng-container *ngIf="policies$ | async as policies">
   <ng-container *ngIf="policiesLoaded$ | async; else loading">
     <div class="row" *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
@@ -17,7 +17,7 @@
           </div>
           <div class="cards__details-wrapper">
             <div class="cards__data">
-              <span class="title">Product</span>
+              <span class="title">{{ 'fscommon.product' | cxTranslate }}</span>
               <span class="value">{{policy.mainProduct?.coverageProduct?.name}}</span>
             </div>
             <div class="cards__data">
@@ -36,9 +36,9 @@
             <div class="cards__button">
                 <a class="secondary-button secondary-button__default secondary-button__account-policies" 
                 routerLink="/my-account/my-policies/{{policy.policyNumber}}/{{policy.contractNumber}}" routerLinkActive="active">
-                Details</a>
+                {{ 'fscommon.details' | cxTranslate }}</a>
               <a class="primary-button primary-button__default primary-button__account-policies" href="#">
-                Make a Claim</a>
+                  {{ 'claim.makeClaim' | cxTranslate }}</a>
             </div>
           </div>
         </div>
@@ -47,7 +47,7 @@
   </ng-container>
 </ng-container>
 <ng-template #noPolicies>
-  <h3>You have no Policies!</h3>
+  <h3>{{ 'policy.youHaveNoPolicies' | cxTranslate }}</h3>
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>

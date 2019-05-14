@@ -1,15 +1,15 @@
 
 <div class="popup-content-wrapper">
   <button type="button" class="close"(click)="activeModal.dismiss('Cross click')"></button>
-  <h3>Delete started claim process</h3>
-  <p>The following claim process will be deleted</p>
+  <h3>{{ 'claim.deleteStartedClaimProcess' | cxTranslate }}</h3>
+  <p>{{ 'claim.followingClaimProcessWillBeDeleted' | cxTranslate }}</p>
   <div class="modal-actions">
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-sm-pull-6">
-            <button class="primary-button primary-button__default" (click)="activeModal.dismiss('Cross click')" >Cancel</button>
+            <button class="primary-button primary-button__default" (click)="activeModal.dismiss('Cross click')" >{{ 'common.cancel' | cxTranslate }}</button>
         </div>
         <div class="col-xs-12 col-sm-6 col-sm-push-6">
-            <button class="secondary-button secondary-button__default" (click)="deleteClaim(); activeModal.dismiss('Cross click')">Delete</button>
+            <button class="secondary-button secondary-button__default" (click)="deleteClaim(); activeModal.dismiss('Cross click')">{{ 'common.delete' | cxTranslate }}</button>
         </div>
       </div>
   </div>

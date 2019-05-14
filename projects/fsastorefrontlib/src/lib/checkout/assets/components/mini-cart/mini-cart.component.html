@@ -2,7 +2,7 @@
   <ng-container *ngIf="cart.deliveryOrderGroups">
     <div class="short-overview short-overview--right">
       <div class="short-overview__heading gradient-heading">
-          {{ cart.deliveryOrderGroups[0]?.entries[0]?.product?.defaultCategory?.name }} Quote
+          {{ cart.deliveryOrderGroups[0]?.entries[0]?.product?.defaultCategory?.name }} {{ 'quote.quote' | cxTranslate }}
         </div>
       <div class="short-overview__content">
           <ng-container *ngFor="let entry of cart.deliveryOrderGroups[0]?.entries">
@@ -19,7 +19,7 @@
         </ng-container>
           <div class="short-overview__item short-overview__item--highlighted row">
             <div class="short-overview__item-name col-6">
-                Total price:
+              {{ 'fscommon.totalPrice' | cxTranslate }}:
             </div>
             <div class="short-overview__item-price col-6">{{ cart.totalPrice?.formattedValue }}</div>
           </div>
@@ -28,7 +28,7 @@
           <a
             class="mean-link mean-link--bold"
             href="#"
-            >Modify Plan</a
+            >{{ 'fscommon.modifyPlan' | cxTranslate }}</a
           >
         </div>
       </div>

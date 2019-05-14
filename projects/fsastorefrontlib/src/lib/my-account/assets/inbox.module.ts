@@ -5,7 +5,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
 import { CmsModule, ComponentsModule } from '@spartacus/storefront';
 import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
-import { AuthGuard } from '@spartacus/core';
+import { AuthGuard, I18nModule } from '@spartacus/core';
 
 import { InboxMessagesComponent } from '../../cms-lib/account/inbox/inbox-tab/inbox-messages/inbox-messages.component';
 import { InboxTabComponent } from '../../cms-lib/account/inbox/inbox-tab/inbox-tab.component';
@@ -26,6 +26,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    I18nModule,
     RouterModule,
     NgSelectModule,
     ComponentsModule,

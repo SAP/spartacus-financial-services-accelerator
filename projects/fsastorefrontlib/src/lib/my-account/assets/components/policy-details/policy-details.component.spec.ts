@@ -1,6 +1,6 @@
 import { PolicyDetailsComponent } from './policy-details.component';
 import { ComponentFixture, async, TestBed } from '@angular/core/testing';
-import { RoutingService, OccConfig } from '@spartacus/core';
+import { RoutingService, OccConfig, I18nTestingModule } from '@spartacus/core';
 import { DebugElement } from '@angular/core';
 import { of } from 'rxjs';
 import { AccordionModule } from './../../../../accordion/accordion.module';
@@ -46,7 +46,8 @@ describe('PolicyDetailsComponent', () => {
 
       TestBed.configureTestingModule({
         imports: [
-            AccordionModule
+            AccordionModule,
+            I18nTestingModule
         ],
         providers: [
           { provide: RoutingService, useValue: mockRoutingService },

@@ -1,7 +1,7 @@
 <ng-container *ngIf="order$ | async as order; else loading">
     <div class="container-fluid center1400">
         <ng-container *ngIf="order.deliveryOrderGroups?.length > 0; else orderComplete">
-            <h2 class="mt-5 mb-5">Thank you! Your policy request has been submitted</h2>
+            <h2 class="mt-5 mb-5">{{ 'fscommon.thankYou' | cxTranslate }} {{ 'policy.yourPolicyHasBeenSubmited' | cxTranslate }} </h2>
             <div class="row">
                 <div class="col-12 col-md-8">
                     <div class="accordion">
@@ -14,14 +14,14 @@
                                 </span>
                             </div>
                             <div class="col-12 col-md-10 accordion-header__summary-line-text">
-                                Your {{ order.entries[0]?.product?.defaultCategory?.name }}<br>
-                                Quote number is: {{ order.code }}
+                                {{ 'fscommon.your' | cxTranslate }} {{ order.entries[0]?.product?.defaultCategory?.name }}<br>
+                                {{ 'quote.quoteNumberIs' | cxTranslate }} : {{ order.code }}
                             </div>
                         </div>
                         <div #ref>
                             <ng-container *ngIf="(order?.insuranceQuote?.quoteDetails | json) !== '{}'">
                                 <fsa-accordion-item [opened]="true"
-                                    [title]="order.entries[0]?.product?.defaultCategory?.name + ' Information'">
+                                    [title]="order.entries[0]?.product?.defaultCategory?.name + ('fscommon.information' | cxTranslate)">
                                     <div class="container">
                                         <div class="row justify-content-center">
                                             <ul class="col-12 accordion--list">
@@ -37,7 +37,7 @@
                                                     </li>
                                                 </ng-container> -->
                                                 <li class="accordion--list-item row">
-                                                    Quote status: {{order.insuranceQuote?.quoteWorkflowStatus?.code}}
+                                                    {{ 'quote.quoteStatus' | cxTranslate }} : {{order.insuranceQuote?.quoteWorkflowStatus?.code}}
                                                 </li>
                                             </ul>
                                         </div>
@@ -45,7 +45,7 @@
                                 </fsa-accordion-item>
                             </ng-container>
                         </div>
-                        <fsa-accordion-item [opened]="ref.children.length > 0 ? false : true" [title]="'What\'s Included'">
+                        <fsa-accordion-item [opened]="ref.children.length > 0 ? false : true" [title]="'fscommon.whatsIncluded' | cxTranslate">
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <ul class="col-12 accordion--list">
@@ -66,7 +66,7 @@
                                 </div>
                             </div>
                         </fsa-accordion-item>
-                        <fsa-accordion-item [title]="'Added by you'">
+                        <fsa-accordion-item [title]="'fscommon.addedByYou' | cxTranslate">
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <ul class="col-12 accordion--list">
@@ -88,7 +88,7 @@
                         </fsa-accordion-item>
                         <ng-container
                             *ngIf="order.deliveryOrderGroups[0]?.entries.length > 0 && order.deliveryOrderGroups[0]?.entries[0]?.product?.investments">
-                            <fsa-accordion-item [title]="'Investments Details'">
+                            <fsa-accordion-item [title]="'fscommon.investementDetails' | cxTranslate">
                                 <div class="container">
                                     <div class="row justify-content-center">
                                         <ul class="col-12 accordion--list">
@@ -100,9 +100,9 @@
                                                             {{investmentDetail.distributionPercentage}}% </div>
                                                         <div class="col-12">ISIN: {{investmentDetail.investmentType?.isin}}
                                                         </div>
-                                                        <div class="col-12">5 Year Perfomance:
+                                                        <div class="col-12">5 {{ 'fscommon.yearPerformanse' | cxTranslate }} :
                                                             {{investmentDetail.investmentType?.fiveYearPerformance}} </div>
-                                                        <div class="col-12">Risk & Returning Rating:
+                                                        <div class="col-12">{{ 'fscommon.riskAndReturningRate' | cxTranslate }}:
                                                             {{investmentDetail.investmentType?.riskReturningRating}}</div>
                                                     </li>
                                                 </ng-container>
@@ -112,14 +112,14 @@
                                 </div>
                             </fsa-accordion-item>
                         </ng-container>
-                        <fsa-accordion-item [title]="'Personal Details'">
+                        <fsa-accordion-item [title]="'fscommon.personalDetails' | cxTranslate">
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <ul class="col-12 accordion--list">
                                         <li class="accordion--list-item row">
                                             <div class="col-12">
                                                 <!-- Needs to have dynamic heading value -->
-                                                <h3 class="accordion-item__list-title">Policy Holder</h3>
+                                                <h3 class="accordion-item__list-title">{{ 'policy.policyHolder' | cxTranslate }}</h3>
                                                 <ul class="accordion-item__list">
                                                     <li class="accordion-item__list-item">
                                                         Mrs. Test Tester
@@ -131,14 +131,16 @@
                                                         Email Address: donna@moore.com
                                                     </li>
                                                     <li class="accordion-item__list-item">
-                                                        Address Line 1: sfsdfsdf
-                                                    </li>
-                                                    <li class="accordion-item__list-item">City: sffsd</li>
-                                                    <li class="accordion-item__list-item">
-                                                        Postcode: 3423423
+                                                        Address Line 1: Mocked Adress Line
                                                     </li>
                                                     <li class="accordion-item__list-item">
-                                                        Country: France
+                                                        City: Belgrade
+                                                    </li>
+                                                    <li class="accordion-item__list-item">
+                                                        Postcode: 11090
+                                                    </li>
+                                                    <li class="accordion-item__list-item">
+                                                        Country: Serbia
                                                     </li>
                                                 </ul>
                                             </div>
@@ -152,13 +154,13 @@
                 <div class="col-12 col-md-4">
                     <div class="short-overview short-overview--right">
                         <div class="short-overview__heading gradient-heading">
-                            My Quote
+                            {{ 'quote.myQuote' | cxTranslate }}
                         </div>
                         <div class="short-overview__content">
                             <div class="short-overview__items">
                                 <div class="short-overview__item row">
                                     <div class="short-overview__item-name col-7">
-                                        Quote ID:
+                                        {{ 'quote.quoteId' | cxTranslate }}:
                                     </div>
                                     <div class="short-overview__item-price col-5">
                                         {{ order.code }}
@@ -166,7 +168,7 @@
                                 </div>
                                 <div class="short-overview__item row">
                                     <div class="short-overview__item-name col-7">
-                                        Payment Frequency:
+                                        {{ 'fscommon.paymentFrequency' | cxTranslate }}:
                                     </div>
                                     <div class="short-overview__item-price col-5">
                                         {{ order.insuranceQuote?.paymentFrequency }}
@@ -174,7 +176,7 @@
                                 </div>
                                 <div class="short-overview__item row">
                                     <div class="short-overview__item-name col-7">
-                                        Start Date:
+                                        {{ 'fscommon.startDate' | cxTranslate }}:
                                     </div>
                                     <div class="short-overview__item-price col-5">
                                         {{ order.insuranceQuote?.startDate }}
@@ -191,7 +193,7 @@
                         </div>
                             <div class="short-overview__item short-overview__item--highlighted row">
                                 <div class="short-overview__item-name col-6">
-                                    Order total:
+                                    {{ 'fscommon.orderTotal' | cxTranslate }}:
                                 </div>
                                 <div class="short-overview__item-price col-6">{{ order.totalPrice?.formattedValue }}</div>
                             </div>
@@ -203,7 +205,7 @@
     </div>
 </ng-container>
 <ng-template #orderComplete>
-    <h1 class="mt-5 mb-3 text-center">Your policy has already been submited</h1>
+    <h1 class="mt-5 mb-3 text-center">{{ 'policy.yourPolicyHasBeenSubmited' | cxTranslate }}</h1>
 </ng-template>
 <ng-template #loading>
     <cx-spinner></cx-spinner>

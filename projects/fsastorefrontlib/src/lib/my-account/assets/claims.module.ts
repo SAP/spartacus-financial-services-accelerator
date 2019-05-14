@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { CmsConfig, ConfigModule, AuthGuard } from '@spartacus/core';
+import { CmsConfig, ConfigModule, AuthGuard, I18nModule } from '@spartacus/core';
 import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 
 import { ClaimsComponent } from './components/claims/claims.component';
@@ -26,6 +26,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    I18nModule,
     RouterModule,
     FormsModule,
     NgSelectModule,

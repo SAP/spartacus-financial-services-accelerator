@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { ComponentsModule, CmsPageGuard, PageLayoutComponent, PageComponentModule, MultiStepCheckoutModule } from '@spartacus/storefront';
-import { AuthGuard, CmsConfig, ConfigModule } from '@spartacus/core';
+import { AuthGuard, CmsConfig, ConfigModule, I18nModule } from '@spartacus/core';
 import { AccordionModule } from '../accordion/accordion.module';
 import { AddOptionsModule } from './assets/add-options.module';
 import { MiniCartModule } from './assets/components/mini-cart/mini-cart.module';
@@ -25,6 +25,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     PaymentMethodModule,
+    I18nModule,
     CommonModule,
     PageComponentModule,
     MultiStepCheckoutModule,

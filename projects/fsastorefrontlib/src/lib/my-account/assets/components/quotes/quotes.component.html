@@ -1,5 +1,5 @@
 
-<h2 class="heading-headline">Quotes</h2>
+<h2 class="heading-headline">{{ 'quote.quotes' | cxTranslate }}</h2>
 <ng-container *ngIf="quotes$ | async as quotes">
   <ng-container *ngIf="quotesLoaded$ | async; else loading">
     <div class="row" *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes">
@@ -20,20 +20,20 @@
               <span class="value">{{quote.quoteId}}</span>
             </div>
             <div class="cards__data">
-              <span class="title">Status</span>
+              <span class="title">{{ 'quote.quoteStatus' | cxTranslate }}</span>
               <span class="value">{{quote.quoteStatus}}</span></div>
             <div class="cards__data">
-              <span class="title">Expiry Date</span>
+              <span class="title">{{ 'fscommon.expiryDate' | cxTranslate }}</span>
               <span class="value">{{quote.quoteWorkflowStatus?.code}}</span>
             </div>
             <div class="cards__data">
-              <span class="title">Price</span>
+              <span class="title">{{ 'fscommon.price' | cxTranslate }}</span>
               <span class="value">{{quote.quotePrice}}</span>
             </div>
           </div>
           <div class="cards-button-wrapper cards-button-wrapper--border-secondary">
             <div class="cards__button">
-              <a href="#" type="submit" class="primary-button primary-button__default">Retrieve</a>
+              <a href="#" type="submit" class="primary-button primary-button__default">{{ 'fscommon.retrieve' | cxTranslate }}</a>
             </div>
           </div>
         </div>
@@ -42,7 +42,7 @@
   </ng-container>
 </ng-container>
 <ng-template #noQuotes>
-  <h3>You have no Quotes!</h3>
+  <h3>{{ 'fscommon.youHaveNoQuotes' | cxTranslate }}!</h3>
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
