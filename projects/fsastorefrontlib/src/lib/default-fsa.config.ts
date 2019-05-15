@@ -2,6 +2,9 @@ import { LayoutConfig } from '@spartacus/storefront';
 import { CmsStructureConfig } from '@spartacus/core';
 
 export const fsaLayoutConfig: LayoutConfig = {
+  breakpoints: {
+    lg: 1400
+  },
   layoutSlots: {
     header: {
       md: {

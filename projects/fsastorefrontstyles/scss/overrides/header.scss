@@ -13,7 +13,6 @@ header {
     .header {
         color: $color-dark-grey;
         text-transform: uppercase;
-        padding: 0 !important; //needed to override Spartacus default padding :-(
         .nav-link, .cx-navigation__link, .cx-login-status__greet {
             text-transform: uppercase;
             font-size: 14px;

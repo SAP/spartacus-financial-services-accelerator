@@ -1,6 +1,8 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { provideConfig, ConfigModule } from '@spartacus/core';
 import { StorefrontModuleConfig, StorefrontModule, PageComponentModule } from '@spartacus/storefront';
+import { fstranslations } from '../translations';
+import { translations } from '@spartacus/storefront';
 
 import { MyAccountModule } from './my-account/index';
 import { UiModule } from './ui/index';
@@ -16,6 +18,14 @@ import { fsaLayoutConfig, fsaCmsStructure } from './default-fsa.config';
     StorefrontModule,
     ConfigModule.forRoot(),
     ConfigModule.withConfig({
+      i18n: {
+        resources: {
+          en: {
+            ...translations.en,
+            ...fstranslations.en,
+          }
+        }
+      },
       ...fsaLayoutConfig,
       ...fsaCmsStructure
     })
