@@ -12,7 +12,6 @@ export const fsaLayoutConfig: LayoutConfig = {
           'SiteLogo',
           'SearchBox',
           'HeaderLinksSlot',
-          'MiniCart',
           'NavigationBar'
         ],
       },

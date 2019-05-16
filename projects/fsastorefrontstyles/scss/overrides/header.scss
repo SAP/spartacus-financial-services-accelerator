@@ -7,16 +7,30 @@ header {
     --cx-g-color-inverse: #{$color-dark-blue};
     --cx-background-color: #{$color-white};
     --cx-max-width: 100%;
-    .SiteContext::after {
+    .SiteContext::after, &.is-expanded:after {
         display: none;
+    }
+    .navigation {
+        background-color: $color-white;
+    }
+    .SiteLogo {
+        --cx-width: 100%;
+        flex: 2;
+        margin: 20px 0 20px 15px;
+        @include media-breakpoint-down(md) {
+            --width: 75%;
+            margin: 0;
+        }
+        img {
+            max-width: 250px;
+        }
     }
     .header {
         color: $color-dark-grey;
         text-transform: uppercase;
-        .nav-link, .cx-navigation__link, .cx-login-status__greet {
+        .nav-link, .cx-login-greet {
             text-transform: uppercase;
             font-size: 14px;
-            color: $color-white;
             @include media-breakpoint-down(md) {
                 &:hover, &:focus, &:active, &:after {
                     color: $color-white;
@@ -25,6 +39,10 @@ header {
             @include media-breakpoint-up(lg) {
                 color: $color-dark-grey;
             }
+        }
+        .cx-login-greet {
+            color: $color-dark-blue;
+            font-weight: bold;
         }
         .NavigationBar cx-navigation-ui {
             position: relative;
@@ -64,45 +82,29 @@ header {
                 justify-content: flex-start;
                 border-top: 1px solid $color-mild-grey;
                 border-bottom: 1px solid $color-mild-grey;
-                margin: 1rem 0 0;
             }
         }
-        .SiteLogo {
-            --cx-width: 100%;
-            flex: 2;
-            margin-left: 15px;
-            @include media-breakpoint-down(md) {
-              --margin: 0 0 0 4rem;
-            }
-            @include media-breakpoint-down(md) {
-              --width: 75%;
-              --margin: 0 0 0 3rem;
-            }
-            img {
-                max-width: 250px;
+        .HeaderLinksSlot {
+            max-width: 360px;
+            width: 100%;
+            .HeaderLinks {
+                padding-top: 10px;
+                cx-link {
+                    order: 2;
+                }
+                cx-link, cx-navigation {
+                    flex: 1;
+                }
+                .cx-nav-link {
+                    padding: 0;
+                }
             }
         }
-        .SiteLogin {
-            .cx-login-status__greet {
-                font-weight: bold;
-            }
-            cx-link {
-                margin-left: 1rem;
-                order: 2;
-            }
+        cx-login {
+            display: flex;
+            flex-direction: column;
             @include media-breakpoint-up(lg) {
-                .cx-login-status__greet {
-                    color: $color-dark-blue;
-                }
-                margin-right: 30px; 
-                & > * {
-                    display: inline-block;
-                }
-                .cx-login-status__dropdown {
-                    display: flex;
-                    align-items: center;
-                }
-                .cx-navigation__child-item {
+                .cx-nav-child-item {
                     padding: 0;
                     a {
                         display: block;
@@ -117,15 +119,6 @@ header {
                     }
                 }
             }
-            @include media-breakpoint-down(md) {
-                cx-link {
-                    color: $color-white;
-                }
-                background: $color-dark-blue;
-                .HeaderLinks {
-                    flex-direction: column;
-                }
-            }
         }
         .hamburger-inner, .is-active .hamburger-inner {
             background-color: $color-dark-blue;
@@ -133,15 +126,21 @@ header {
             background-color: $color-dark-blue; 
             }
         }
-        .cx-search-box {
-            .cx-search-box__group {
-                background-color: $color-white;
+        .SearchBox {
+            margin-right: 15px;
+            .dropdown-menu.show {
+                border: 1px solid $color-dark-blue;
+                border-radius: 0;
             }
-            .cx-search-box__input {
+            .dropdown-item {
+                &.active {
+                    color: $color-dark-blue;
+                }
+            }
+            .cx-form-group input {
                 border: 1px solid $color-dark-blue;
                 @include media-breakpoint-down(xs) {
-                    color: $color-white;
-                    top: 50px; 
+                    top: 64px; 
                     border-bottom: 1px solid $color-white;
                 }
             }
