@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FSAStorefrontModule, fstranslations } from '@fsa/storefront';
 import { AppComponent } from './app.component';
 import { translations } from '@spartacus/storefront';
+import { ConfigModule } from '@spartacus/core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -11,10 +12,7 @@ import { translations } from '@spartacus/storefront';
     FSAStorefrontModule.withConfig({
       i18n: {
         resources: {
-          en: {
-            ...fstranslations.en,
-            ...translations.en
-          }
+          en: translations.en
         }
       },
       backend: {
@@ -30,6 +28,13 @@ import { translations } from '@spartacus/storefront';
       authentication: {
         client_id: 'financial_customer',
         client_secret: 'secret'
+      }
+    }),
+    ConfigModule.withConfig({
+      i18n: {
+        resources: {
+          en: fstranslations.en
+         }
       }
     })
   ],
