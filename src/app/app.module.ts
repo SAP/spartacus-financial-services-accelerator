@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FSAStorefrontModule } from '@fsa/storefront';
+import { translations } from '@spartacus/storefront';
+
+import { FSAStorefrontModule, fstranslations, fsaLayoutConfig, fsaCmsStructure } from '@fsa/storefront';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -8,6 +10,16 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FSAStorefrontModule.withConfig({
+      i18n: {
+        resources: {
+          en: {
+            ...translations.en,
+            ...fstranslations.en
+          }
+        }
+      },
+      ...fsaLayoutConfig,
+      ...fsaCmsStructure,
       backend: {
         occ: {
            baseUrl: 'https://financialservices.local:9002'
