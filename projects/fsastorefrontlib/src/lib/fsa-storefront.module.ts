@@ -1,10 +1,12 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { provideConfig, ConfigModule } from '@spartacus/core';
+import { StorefrontModuleConfig, StorefrontModule, PageComponentModule } from '@spartacus/storefront';
+import { translations } from '@spartacus/storefront';
 
 import { MyAccountModule } from './my-account/index';
-import { StorefrontModuleConfig, StorefrontModule, PageComponentModule } from '@spartacus/storefront';
 import { UiModule } from './ui/index';
 import { CmsLibModule } from './cms-lib/cms-lib.module';
+import { fstranslations } from '../translations';
 
 @NgModule({
   imports: [
@@ -13,7 +15,21 @@ import { CmsLibModule } from './cms-lib/cms-lib.module';
     CmsLibModule,
     MyAccountModule,
     StorefrontModule,
-    ConfigModule.forRoot()
+    ConfigModule.forRoot(),
+    ConfigModule.withConfig({
+       i18n: {
+        resources: {
+          en: translations.en
+        }
+      }
+    }),
+    ConfigModule.withConfig({
+      i18n: {
+        resources: {
+          en: fstranslations.en
+         }
+      }
+    }),
   ],
   exports: [
     StorefrontModule,
