@@ -15,10 +15,6 @@ import { fsaLayoutConfig, fsaCmsStructure } from './default-fsa.config';
     MyAccountModule,
     StorefrontModule,
     ConfigModule.forRoot()
-    // ConfigModule.withConfig({
-    //   ...fsaLayoutConfig,
-    //   ...fsaCmsStructure
-    // })
   ],
   exports: [
     StorefrontModule,
