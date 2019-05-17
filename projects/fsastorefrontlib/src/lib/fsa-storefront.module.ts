@@ -7,6 +7,7 @@ import { MyAccountModule } from './my-account/index';
 import { UiModule } from './ui/index';
 import { CmsLibModule } from './cms-lib/cms-lib.module';
 import { fstranslations } from '../translations';
+import { fsaLayoutConfig, fsaCmsStructure } from './default-fsa.config';
 
 @NgModule({
   imports: [
@@ -21,7 +22,9 @@ import { fstranslations } from '../translations';
         resources: {
           en: translations.en
         }
-      }
+      },
+      ...fsaLayoutConfig,
+      ...fsaCmsStructure
     }),
     ConfigModule.withConfig({
       i18n: {
@@ -29,7 +32,7 @@ import { fstranslations } from '../translations';
           en: fstranslations.en
          }
       }
-    }),
+    })
   ],
   exports: [
     StorefrontModule,

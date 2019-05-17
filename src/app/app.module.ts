@@ -22,7 +22,7 @@ import { AppComponent } from './app.component';
         client_id: 'financial_customer',
         client_secret: 'secret'
       }
-    }),
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]
