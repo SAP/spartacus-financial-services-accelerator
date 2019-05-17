@@ -5,7 +5,6 @@ import { StorefrontModuleConfig, StorefrontModule, PageComponentModule } from '@
 import { MyAccountModule } from './my-account/index';
 import { UiModule } from './ui/index';
 import { CmsLibModule } from './cms-lib/cms-lib.module';
-import { fsaLayoutConfig, fsaCmsStructure } from './default-fsa.config';
 
 @NgModule({
   imports: [
