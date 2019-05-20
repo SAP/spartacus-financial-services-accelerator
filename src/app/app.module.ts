@@ -12,7 +12,7 @@ import { AppComponent } from './app.component';
         occ: {
            baseUrl: 'https://financialservices.local:9002'
        }
-     },
+      },
       site: {
         baseSite: 'insurance',
         currency: 'EUR',

@@ -18,16 +18,20 @@ import { fsaLayoutConfig, fsaCmsStructure } from './default-fsa.config';
     StorefrontModule,
     ConfigModule.forRoot(),
     ConfigModule.withConfig({
-      i18n: {
+       i18n: {
         resources: {
-          en: {
-            ...translations.en,
-            ...fstranslations.en
-          }
+          en: translations.en
         }
       },
       ...fsaLayoutConfig,
       ...fsaCmsStructure
+    }),
+    ConfigModule.withConfig({
+      i18n: {
+        resources: {
+          en: fstranslations.en
+         }
+      }
     })
   ],
   exports: [
