@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService, CartDataService, Address, CheckoutService } from '@spartacus/core';
-import { ɵv as PaymentMethodComponent } from '@spartacus/storefront';
+import { ɵy as PaymentMethodComponent } from '@spartacus/storefront';
 import * as fromCheckout from '@spartacus/core';
 import { Store } from '@ngrx/store';
 
@@ -26,7 +26,7 @@ export class PaymentDetailsComponent extends PaymentMethodComponent {
     protected cartData: CartDataService,
     protected userService: UserService
   ) {
-    super();
+    super(cartData, userService);
     this.mockDeliveryAddress();
   }
 

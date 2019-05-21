@@ -38,6 +38,7 @@ export const fscommon = {
     postCode: 'Postcode',
     country: 'Country',
     expiryDate: 'Expiry Date',
+    expires: 'Expires',
     myAgent: 'My Agent',
     billingAddress: 'Billing Address',
     addOptions: 'Add Options',
