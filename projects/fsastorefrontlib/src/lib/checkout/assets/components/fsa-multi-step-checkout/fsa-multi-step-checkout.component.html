@@ -40,9 +40,11 @@
                 <fsa-quote-review (nextStep)="setStep(6)" (backStep)="setStep(3)"> </fsa-quote-review>
               </div>
               <div *ngIf="nav.status.active && step === 6">
-                <cx-payment-method
-                  (goToStep)="nextStep($event)"
-                ></cx-payment-method>
+                <fsa-payment-details
+                  [selectedPayment]="paymentDetails"
+                  (addPaymentInfo)="addPaymentInfo($event)"
+                  (backStep)="setStep(5)"
+                ></fsa-payment-details>
               </div>
               <div *ngIf="nav.status.active && step === 7">
                 <fsa-final-review
