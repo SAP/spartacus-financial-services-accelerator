@@ -46,7 +46,7 @@ fsa-comparison-table-panel-item {
     z-index: 1;
     flex: 0 1 100%;
     padding: 0 5px;
-    border-left: 1px dashed $color-grey;
+    border-left: 1px dashed var(--cx-g-color-3);
     text-align: center;
     @include media-breakpoint-down(sm) {
         &:first-of-type {

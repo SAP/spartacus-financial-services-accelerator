@@ -3,7 +3,7 @@
 
 body {
   font-size: 14px;
-  color: $color-dark-grey;
+  color: var(--cx-g-color-text);
 }
 .center1400 {
   max-width: 1400px;
@@ -26,9 +26,12 @@ a {
     text-decoration: none;
   }
 }
+.loader {
+  overflow: hidden;
+}
 // Stand-alone building blocks
 .info-container {
-  background-color: $color-light-grey;
+  background-color: var(--cx-g-color-4);
   border: $border-grey;
 }
 .heading-headline {
@@ -36,15 +39,15 @@ a {
   padding: 20px 0;
   text-align: left;
   margin-bottom: 30px;
-  color: $color-dark-blue;
+  color: var(--cx-g-color-secondary);
   font-size: 24px;
   font-weight: 700;
   border-bottom: $border-grey;
 }
 .section-header__heading {
-  @include linear-gradient-background ($color-blue, $color-banking-darkest-blue, 50%, 100%);
+  @include linear-gradient-background (var(--cx-g-color-primary), var(--cx-g-color-9), 50%, 100%);
   border: none;
-  color: $color-white;
+  color: var(--cx-g-color-1);
   font-size: 22px;
   font-weight: 400;
   padding: 20px; 
@@ -65,10 +68,10 @@ a {
   padding: 6px;
 }
 .notice {
-  color: $color-blue;
+  color: var(--cx-g-color-primary);
   font-weight: bold;
   &--dark {
-    color: $color-button-secondary-hover;
+    color: var(--cx-g-color-8);
   }
 }
 .warn {
@@ -79,33 +82,33 @@ a {
   border-bottom: $border-grey;
 }
 .border-top-grey {
-  border-top: 1px solid $color-grey;
+  border-top: 1px solid var(--cx-g-color-3);
 }
 .circle-image {
-  background-color: $color-link-hover;
+  background-color: var(--cx-g-color-7);
   border-radius: 50%;
-  @include box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 70%);
+  @include box-shadow(0px, 0px, 9px, 1px, var(--cx-g-color-text), 70%);
   margin: 0 25px;
 }
 .gradient-heading {
-  color: $color-white;
+  color: var(--cx-g-color-1);
   font-size: 20px;
   padding-top: 15px;
   padding-bottom: 15px;
-  @include linear-gradient-background( $color-blue, $color-banking-darkest-blue, 50%, 100% );
+  @include linear-gradient-background( var(--cx-g-color-primary), var(--cx-g-color-9), 50%, 100% );
 }
 .list-data {
   margin: 0;
   padding: 0;
   list-style: none;
-  background-color: $color-white;
+  background-color: var(--cx-g-color-1);
   &--closed {
     display: none;
   }
   &__list-item {
     padding: 12px;
     list-style: none;
-    background-color: $color-white;
+    background-color: var(--cx-g-color-1);
   }
   &__info {
     position: relative;
@@ -125,7 +128,7 @@ a {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background-color: $color-blue;
+      background-color: var(--cx-g-color-primary);
   }
 }
 .clickable {
@@ -146,7 +149,7 @@ a {
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: $color-link-hover;
+    background-color: var(--cx-g-color-7);
     width: 0;
     height: 5px;
     transition: all 300ms ease;
@@ -160,7 +163,7 @@ a {
 /* ************************ Cards ************************* */
 /* ********************************************************* */
 .cards {
-  color: $color-dark-grey;
+  color: var(--cx-g-color-text);
   &__wrapper {
     border: $border-grey;
     border-radius: 15px 15px 0 0;
@@ -169,14 +172,14 @@ a {
     position: relative;
     display: block;
     &--border-primary {
-      border-bottom: 1px solid $color-dark-blue;
+      border-bottom: 1px solid var(--cx-g-color-secondary);
     }
     &--border-secondary {
-      border-bottom: 1px solid $color-blue;
+      border-bottom: 1px solid var(--cx-g-color-primary);
     }
   }
   &__title {
-    background-color: $color-mild-grey;
+    background-color: var(--cx-g-color-5);
     border-radius: 15px 15px 0 0;
     padding: 20px 0;
     & > * {
@@ -184,17 +187,17 @@ a {
     }
     &--gradient-background {
       @include linear-gradient-background(
-        $color-blue,
-        $color-banking-darkest-blue,
+        var(--cx-g-color-primary),
+        var(--cx-g-color-9),
         50%,
         100%
       );
     }
     &--border-primary {
-      border-bottom: 4px solid $color-dark-blue;
+      border-bottom: 4px solid var(--cx-g-color-secondary);
     }
     &--border-secondary {
-      border-bottom: 4px solid $color-blue;
+      border-bottom: 4px solid var(--cx-g-color-primary);
     }
     .images__wrapper {
       background-color: transparent;
@@ -202,7 +205,7 @@ a {
       height: auto;
       padding: 0;
       &--white-bck {
-        background-color: $color-white;
+        background-color: var(--cx-g-color-1);
         border-radius: 50%;
         padding: 10px;
       }
@@ -212,20 +215,20 @@ a {
   &__info {
     font-weight: bold;
     &--color-primary {
-      color: $color-dark-blue;
+      color: var(--cx-g-color-secondary);
     }
     &--color-secondary {
-      color: $color-blue;
+      color: var(--cx-g-color-primary);
     }
     &--color-white {
-      color: $color-white;
+      color: var(--cx-g-color-1);
     }
   }
   &__details-wrapper {
     .cards__data {
       padding: 20px 0;
       &:nth-of-type(even) {
-        background-color: $color-mild-grey;
+        background-color: var(--cx-g-color-5);
       }
       .title {
         display: block;
@@ -233,20 +236,20 @@ a {
       }
     }
     &--grey {
-      background-color: $color-light-grey;
+      background-color: var(--cx-g-color-4);
       .cards__data {
         &:nth-of-type(even) {
-          background-color: $color-light-grey;
+          background-color: var(--cx-g-color-4);
         }
       }
     }
   }
   &-button-wrapper {
     &--border-primary {
-      border-top: 1px solid $color-dark-blue;
+      border-top: 1px solid var(--cx-g-color-secondary);
     }
     &--border-secondary {
-      border-top: 1px solid $color-blue;
+      border-top: 1px solid var(--cx-g-color-primary);
     }
   }
   &__button {
@@ -268,7 +271,7 @@ a {
   top: 14px;
   right: 14px;
   .action-links {
-      color: $color-blue;
+      color: var(--cx-g-color-primary);
   }
 }
 /* *********************************************************** */
@@ -350,7 +353,7 @@ a {
     overflow: hidden;
     text-transform: capitalize;
     font-size: 36px;
-    color: $color-dark-blue;
+    color: var(--cx-g-color-secondary);
     position: relative;
     @include media-breakpoint-down(md) {
         margin-top:0px;
@@ -366,7 +369,7 @@ a {
   .account-section-content__headline {
     &--title {
       display: block;
-      color: $color-dark-grey;
+      color: var(--cx-g-color-text);
       font-size: 22px;
       font-weight: 600;
       @include media-breakpoint-down(md) {
@@ -380,7 +383,7 @@ a {
       display: block;
       font-size: 22px;
       border-bottom: $border-grey;
-        color: $color-dark-grey;
+        color: var(--cx-g-color-text);
         padding-bottom: 10px;
         font-weight: 600;
       @include media-breakpoint-down(md) {
@@ -394,7 +397,7 @@ a {
       position: absolute;
       transform: translateY(-50%);
       background: transparent;
-      color: $color-dark-blue;
+      color: var(--cx-g-color-secondary);
       &:before {
         //@include glyphicon;
         @include transition;
@@ -419,7 +422,7 @@ a {
 }
 .cart-items-list {
   border: $border-grey;
-  background-color: $color-light-grey;
+  background-color: var(--cx-g-color-4);
   padding: 0 15px;
    h2 {
     margin: 0;
@@ -449,8 +452,8 @@ a {
     width: 100%;
     z-index: 99;
     background-color: rgba(255, 255, 255, 0.5);
-    border-bottom: 2px solid $color-mild-grey;
-    border-top: 2px solid $color-mild-grey;
+    border-bottom: 2px solid var(--cx-g-color-5);
+    border-top: 2px solid var(--cx-g-color-5);
     box-shadow: 0 0 0 2px white inset;
   }
   .tooltip-wrapper {
@@ -463,7 +466,7 @@ a {
       right: 30px;
     }
     .tooltip .arrow:before {
-      border-left-color: $color-button-secondary-hover;
+      border-left-color: var(--cx-g-color-8);
     }
   }
   @include media-breakpoint-down(sm) {
@@ -499,7 +502,7 @@ a {
           background-color: transparent;
       }
       &:nth-child(odd) {
-          background-color: $color-mild-grey;
+          background-color: var(--cx-g-color-5);
       }
   }
 }
@@ -517,6 +520,6 @@ a {
   }
 }
 .ct-tooltip .arrow:before {
-  border-top-color: $color-button-secondary-hover;
+  border-top-color: var(--cx-g-color-8);
 }
 /******Comparison Table - END***/
