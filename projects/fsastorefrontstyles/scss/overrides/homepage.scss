@@ -22,11 +22,11 @@
       }
       .enriched-banner {
         &__styled-text {
-          color: var(--cx-g-color-7);
+          color: $color-link-hover;
           font-weight: 600;
           font-size: 16px;
           text-transform: uppercase;
-          border-bottom: 1px solid var(--cx-g-color-7);
+          border-bottom: 1px solid $color-link-hover;
         }
         &__text {
           @include transition();
@@ -68,7 +68,7 @@
       &__title {
         font-size: 30px;
         line-height: 1;
-        color: var(--cx-g-color-secondary);
+        color: $color-dark-blue;
         font-weight: 600;
         @include media-breakpoint-down(md) {
           font-size: 4vw;
@@ -83,7 +83,7 @@
           font-size: 3.5vw;
         }
         a {
-          color: var(--cx-g-color-8);
+          color: $color-button-secondary-hover;
         }
       }
     }
@@ -112,11 +112,9 @@
         top: -20px;
         margin-top: 0;
         margin-bottom: 0;
-        font-size: 30px;
         font-weight: 500;
         @include media-breakpoint-down(md) {
           width: 230px;
-          font-size: 30px;
         }
       }
     }

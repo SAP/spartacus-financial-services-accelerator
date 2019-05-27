@@ -2,8 +2,18 @@
 @import '../variables-fsa';
 
 body {
-  font-size: 14px;
+  font-size: 1rem;
   color: var(--cx-g-color-text);
+}
+
+h1, .h1 { font-size: var(--cx-g-h1-font-size) }
+h2, .h2, .test { font-size: var(--cx-g-h2-font-size) }
+h3, .h3 { font-size: var(--cx-g-h3-font-size) }
+h4, .h4 { font-size: var(--cx-g-h4-font-size) }
+h5, .h5 { font-size: var(--cx-g-h5-font-size) }
+h6, .h6 { font-size: var(--cx-g-h6-font-size) }
+p {
+  font-size: var(--cx-g-text-font-size);
 }
 .center1400 {
   max-width: 1400px;
@@ -277,69 +287,57 @@ a {
 /* *********************************************************** */
 /* ************************ Buttons ************************* */
 /* ********************************************************* */
-.primary-button,
-.secondary-button,
-.inverted {
+button, .primary-button, .secondary-button, .action-button {
   display: inline-block;
-  font-size: 12px;
-  padding: 14px;
+  width: 100%;
+  padding: 8px;
   margin: 6px 0;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: var(--cx-g-font-weight-normal);
   white-space: nowrap;
   -webkit-appearance: none;
-  margin-bottom: 10px;
+  text-transform: uppercase;
   cursor: pointer;
-  &__default {
-    @include transition;
-    width: 100%;
-    height: 40px;
-    line-height: 1;
-    border: none;
-    font-size: 16px;
-    font-weight: 400;
-    text-transform: uppercase;
-    &--opacity {
-      opacity: 0.7;
-    }
-    &--opacity-disabled {
-      opacity: 0.2;
-    }
+  @include transition;
+  &:disabled {
+    cursor: no-drop;;
   }
-  &:hover {
-    text-decoration: none;
-  }
-  &__infos, &__contact-agent, &__continue-shopping {
-    padding: 11px;
-    font-size: 18px;
-    display: block;
-    max-width: 260px;
-    text-align: center;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    @include media-breakpoint-down(xs) {
-        max-width: 100%;
-      }
-    }
 }
 .primary-button {
-  text-align: center;
-  &__default {
-    @include primary-btn-color();
+  color: var(--cx-g-color-1);
+  background-color: var(--cx-g-color-primary);
+  &:hover{
+    color: var(--cx-g-color-1);
+    background-color: var(--cx-g-color-7);
   }
-}
-.btn-primary {
-  @include primary-btn-color;
-}
-.btn-default {
-  @include secondary-btn-color;
+  &:disabled {
+    opacity: 0.6;
+  }
 }
 .secondary-button {
-  text-align: center;
-  &__default {
-    @include secondary-btn-color;
+  color: var(--cx-g-color-1);
+  background-color: var(--cx-g-color-secondary);
+  &:hover{
+    color: var(--cx-g-color-1);
+    background-color: var(--cx-g-color-8);
   }
-  &--inverted {
-    @include secondary-btn-color-inverted;
+  &:disabled {
+    opacity: 0.6;
+  }
+}
+.action-button {
+  color: var(--cx-g-color-secondary);
+  background-color: var(--cx-g-color-transparent);
+  border: 3px solid var(--cx-g-color-secondary);
+  &:hover{
+    color: var(--cx-g-color-primary);
+    background-color: var(--cx-g-color-transparent);
+    border: 3px solid var(--cx-g-color-primary);
+  }
+  &:disabled {
+    opacity: 0.6;
   }
 }
 /* ************************************************************* */

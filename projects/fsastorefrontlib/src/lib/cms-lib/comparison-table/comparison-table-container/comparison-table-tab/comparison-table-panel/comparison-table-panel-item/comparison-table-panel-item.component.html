@@ -3,7 +3,7 @@
     <h3 class="products-details__name">{{ product.name }}</h3>
     <h4 class="products-details__main-price">€97.00</h4>
     <button (click)="createCartAndStartBundleForProduct(product.code,product.bundleTemplates[0]?.id)"
-      class="primary-button primary-button__default"
+      class="primary-button"
       type="button">
       {{ 'fscommon.select' | cxTranslate }}
     </button>
@@ -28,7 +28,7 @@
       </div>
     </ng-container>
   </div>
-  <a class="secondary-button__default secondary-button mt-5" [routerLink]=" { route: [{ name: 'category/', params: { categoryCode: product.defaultCategory?.parentCategory?.code } }] }| cxTranslateUrl">{{ 'fscommon.moreInfo' | cxTranslate }}</a>
+  <a class="secondary-button mt-5" [routerLink]=" { route: [{ name: 'category/', params: { categoryCode: product.defaultCategory?.parentCategory?.code } }] }| cxTranslateUrl">{{ 'fscommon.moreInfo' | cxTranslate }}</a>
 </ng-container>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
