@@ -37,9 +37,7 @@
             </div>
             <div class="cards__data">
               <span class="title">{{ 'fscommon.status' | cxTranslate }}</span>
-              <ng-container *ngIf="claim.claimStatus != undefined; else: na">
-                <span class="value ">{{ claim.claimStatus }}</span>
-              </ng-container>
+              <span class="value" *ngIf="claim.claimStatus != undefined; else: na">{{ claim.claimStatus }}</span>
             </div>
             <div class="cards__data">
               <span class="title">{{ 'claim.claimHandler' | cxTranslate }}</span>
