@@ -2,10 +2,9 @@
 @import '../variables-fsa';
 
 body {
-  font-size: 1rem;
+  font-size: $font-size-base;
   color: var(--cx-g-color-text);
 }
-
 h1, .h1 { font-size: var(--cx-g-h1-font-size) }
 h2, .h2, .test { font-size: var(--cx-g-h2-font-size) }
 h3, .h3 { font-size: var(--cx-g-h3-font-size) }
@@ -14,6 +13,18 @@ h5, .h5 { font-size: var(--cx-g-h5-font-size) }
 h6, .h6 { font-size: var(--cx-g-h6-font-size) }
 p {
   font-size: var(--cx-g-text-font-size);
+}
+a {
+  @include transition();
+  &:hover {
+    text-decoration: none;
+  }
+}
+.link {
+  color: var(--cx-g-color-primary);
+  &:hover {
+    border-bottom: 1px solid var(--cx-g-color-primary);
+  }
 }
 .center1400 {
   max-width: 1400px;
@@ -30,15 +41,6 @@ button[disabled], html input[disabled] {
 button:focus {
   outline: none;
 }
-a {
-  @include transition();
-  &:hover {
-    text-decoration: none;
-  }
-}
-.loader {
-  overflow: hidden;
-}
 // Stand-alone building blocks
 .info-container {
   background-color: var(--cx-g-color-4);
@@ -50,7 +52,6 @@ a {
   text-align: left;
   margin-bottom: 30px;
   color: var(--cx-g-color-secondary);
-  font-size: 24px;
   font-weight: 700;
   border-bottom: $border-grey;
 }
@@ -291,9 +292,9 @@ a {
 button, .primary-button, .secondary-button, .action-button {
   display: inline-block;
   width: 100%;
-  padding: 8px;
+  padding: 5px;
   margin: 6px 0;
-  border: none;
+  border: 3px solid var(--cx-g-color-transparent);
   border-radius: 4px;
   font-size: 1rem;
   font-weight: var(--cx-g-font-weight-normal);
