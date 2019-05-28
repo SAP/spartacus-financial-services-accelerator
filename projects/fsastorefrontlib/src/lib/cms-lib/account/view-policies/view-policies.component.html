@@ -40,7 +40,7 @@
 </ng-template>
 
 <ng-template #showAllPoliciesButton let-showAll="showAll">
-    <button class="secondary-button " (click)="showAllPolicies(showAll);">
+    <button class="secondary-button" (click)="showAllPolicies(showAll);">
         {{policyButtonText}}
     </button>
 </ng-template>
@@ -53,9 +53,7 @@
 </ng-template>
 
 <ng-template #anonymousLogin>
-    <a routerLink="/login">
-        <button class="secondary-button ">{{ 'policy.viewYourPolicies' | cxTranslate }}</button>
-    </a>
+    <button routerLink="/login" class="secondary-button">{{ 'policy.viewYourPolicies' | cxTranslate }}</button>
 </ng-template>
 
 <ng-template #loading>
