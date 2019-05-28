@@ -71,28 +71,30 @@
   background: -o-linear-gradient(left, $startColor $firstStop, $endColor $secondStop);
   background: linear-gradient(to right, $startColor $firstStop, $endColor $secondStop);
 }
-@mixin arrow {
-  &:before {
+@mixin status {
+  &::before, &::after {
     display: block;
     content: '';
     position: absolute;
     right: 15px;
     top: 50%;
-    width: 13px;
-    height: 13px;
-    border-bottom: 3px solid;
-    border-right: 3px solid;
+    width: 16px;
+    height: 16px;
     @include transition();
   }
 }
-@mixin accordion-arrow {
+@mixin accordion-status {
   cursor: pointer;
   position: relative;
-  @include arrow();
-  &:before {
-    transform: translateY(-50%) rotateZ(45deg);
+  @include status();
+  &::before, &::after {
+    height: 2px;
+    width: 16px;
+  }
+  &::before {
+    transform: translateY(-50%) rotateZ(90deg);
   }
   &.active:before {
-    transform: translateY(-50%) rotateZ(-135deg);
+    transform: translateY(-50%) rotateZ(0deg);
   }
 }

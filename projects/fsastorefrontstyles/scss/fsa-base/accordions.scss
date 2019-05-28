@@ -5,16 +5,22 @@
           }
     }
     &--heading {
-        color: var(--cx-g-color-1);
-        font-weight: 500;
+        color: var(--cx-g-color-text);
+        background: var(--cx-g-color-4);
+        border-top: 5px solid var(--cx-g-color-primary);
+        font-size: 20px;
+        line-height: 1.6;
         margin-bottom: 0;
-        padding-left: 60px;
-        padding-right: 60px;
-        @include accordion-arrow();
+        padding: 9px 60px 14px;
+        @include accordion-status();
+        &:before, &:after {
+            background-color: var(--cx-g-color-primary);
+        }
     }
     &-item {
         margin-top: 40px;
         border: $border-grey;
+        border-top: none;
     }
     &--list-item {
         border-bottom: 1px solid var(--cx-g-color-3);

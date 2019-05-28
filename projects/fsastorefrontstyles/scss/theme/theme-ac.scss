@@ -145,7 +145,7 @@ a {
   }
 }
 .clickable {
-  @include accordion-arrow();
+  @include accordion-status();
 }
 
 //CSS Reset
