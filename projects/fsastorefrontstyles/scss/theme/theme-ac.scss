@@ -41,10 +41,6 @@ button[disabled], html input[disabled] {
 button:focus {
   outline: none;
 }
-
-.loader {
-  overflow: hidden;
-}
 // Stand-alone building blocks
 .info-container {
   background-color: var(--cx-g-color-4);
@@ -56,7 +52,6 @@ button:focus {
   text-align: left;
   margin-bottom: 30px;
   color: var(--cx-g-color-secondary);
-  font-size: 24px;
   font-weight: 700;
   border-bottom: $border-grey;
 }

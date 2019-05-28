@@ -1,5 +1,5 @@
 
-<h2 class="heading-headline">{{ 'quote.quotes' | cxTranslate }}</h2>
+<h3 class="heading-headline">{{ 'quote.quotes' | cxTranslate }}</h3>
 <ng-container *ngIf="quotes$ | async as quotes">
   <ng-container *ngIf="quotesLoaded$ | async; else loading">
     <div class="row" *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes">
