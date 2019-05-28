@@ -1,4 +1,4 @@
-<h3 class="heading-headline">{{ 'policy.policies' | cxTranslate }}</h3>
+<h2 class="heading-headline">{{ 'policy.policies' | cxTranslate }}</h2>
 <ng-container *ngIf="policies$ | async as policies">
   <ng-container *ngIf="policiesLoaded$ | async; else loading">
     <div class="row" *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
@@ -34,7 +34,7 @@
           </div>
           <div class="cards-button-wrapper cards-button-wrapper--border-primary">
             <div class="cards__button">
-                <button class="secondary-button" routerLink="/my-account/my-policies/{{policy.policyNumber}}/{{policy.contractNumber}}" routerLinkActive="active">{{ 'quote.getQuote' | cxTranslate }}>
+                <button class="secondary-button" routerLink="/my-account/my-policies/{{policy.policyNumber}}/{{policy.contractNumber}}" routerLinkActive="active">
                   {{ 'fscommon.details' | cxTranslate }}
                 </button>
                 <button class="primary-button">{{ 'claim.makeClaim' | cxTranslate }}</button>
