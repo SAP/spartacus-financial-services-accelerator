@@ -291,9 +291,9 @@ a {
 button, .primary-button, .secondary-button, .action-button {
   display: inline-block;
   width: 100%;
-  padding: 8px;
+  padding: 5px;
   margin: 6px 0;
-  border: none;
+  border: 3px solid var(--cx-g-color-transparent);
   border-radius: 4px;
   font-size: 1rem;
   font-weight: var(--cx-g-font-weight-normal);
