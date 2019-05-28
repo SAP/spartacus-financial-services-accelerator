@@ -3,6 +3,7 @@
 
 footer {
     .footer {
+        // radial gradient has problem with CSS Custom Properties and scss
         @include radial-gradient-background($color-link-hover,$color-button-secondary-hover,$color-dark-blue);
         margin-top: 80px;
         padding-top: 40px;
@@ -12,9 +13,9 @@ footer {
             max-width: 1400px;
         }
         .notice {
-            color: $color-white;
+            color: var(--cx-g-color-1);
             background-color: transparent;
-            border-top: 1px solid $color-white;
+            border-top: 1px solid var(--cx-g-color-1);
             margin-top: 20px;
             font-size: 12px;
             padding: 25px 0;
@@ -30,15 +31,15 @@ footer {
             margin-top: 10px;
         }
         cx-generic-link a {
-            color: $color-white;
+            color: var(--cx-g-color-1);
             font-size: 12px;
             font-weight: normal;
             border-bottom: 1px solid transparent;
             &:hover {
                 text-decoration: none;
-                border-bottom: 1px solid $color-white;
+                border-bottom: 1px solid var(--cx-g-color-1);
                 padding-bottom: 3px;
-                color: $color-white;
+                color: var(--cx-g-color-1);
             }
         }
     }

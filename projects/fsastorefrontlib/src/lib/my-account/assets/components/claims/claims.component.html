@@ -49,11 +49,11 @@
           </div>
           <div class="cards-button-wrapper cards-button-wrapper--border-primary">
             <div class="cards__button" *ngIf="claim.claimStatus == 'OPEN' || claim.claimStatus == 'REJECTED'; else: details">
-              <a href="#" type="submit" class="secondary-button secondary-button__default secondary-button__account-policies">{{ 'fscommon.resume' | cxTranslate }}</a>
+              <button class="secondary-button">{{ 'fscommon.resume' | cxTranslate }}</button>
             </div>
             <ng-template #details>
               <div class="cards__button">
-                <a href="#" type="submit" class="secondary-button secondary-button__default secondary-button__account-policies">{{ 'fscommon.details' | cxTranslate }}</a>
+                <button class="secondary-button">{{ 'fscommon.details' | cxTranslate }}</button>
               </div>
             </ng-template>
           </div>

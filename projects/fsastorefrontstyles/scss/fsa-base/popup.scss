@@ -11,7 +11,7 @@
         width: 28px;
         height: 28px;
         position: relative;
-        border: 3px solid $color-dark-grey;
+        border: 3px solid var(--cx-g-color-text);
         border-radius: 50%;
         &:before {
             content: '+';
@@ -20,15 +20,15 @@
             top: -4px;
             left: 4px;
             font-size: 28px;
-            color: $color-dark-grey;
+            color: var(--cx-g-color-text);
             overflow: hidden;
             line-height: 1;
             font-weight: 700;
         } 
         &:hover{
-            border-color: $color-blue; 
+            border-color: var(--cx-g-color-primary); 
             &:before {
-                color: $color-blue;
+                color: var(--cx-g-color-primary);
             }
         }
     }

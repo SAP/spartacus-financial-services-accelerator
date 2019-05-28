@@ -3,7 +3,7 @@
 @import '~bootstrap/scss/mixins/breakpoints'; // TO CHECK ALL IMPORTS
 
 .progress-wrapper {
-    border-top: 2px solid $color-grey;
+    border-top: 2px solid var(--cx-g-color-3);
     .progress-inner-wrapper {
         flex-basis: 0;
     }
@@ -17,10 +17,10 @@
         padding: 16px;
         border-radius: 50%;
         margin-bottom: 20px;
-        background: $color-mild-grey;
+        background: var(--cx-g-color-5);
         border: $border-grey;
         font-size: 20px;
-        @include box-shadow(0px, 5px, 10px, 3px, $color-dark-grey, 0.2);
+        @include box-shadow(0px, 5px, 10px, 3px, var(--cx-g-color-text), 0.2);
         @include media-breakpoint-down(md) {
             padding: 12px;
             font-size: 16px;
@@ -28,7 +28,7 @@
         }
     }
     .icon-FSA-ok {
-        color: $color-blue;
+        color: var(--cx-g-color-primary);
     }
     .label {
         font-size: 14px;
@@ -39,21 +39,21 @@
     }
     &.is-active {
         .FSA-icon {
-            color: $color-blue;
-            background: $color-white;
+            color: var(--cx-g-color-primary);
+            background: var(--cx-g-color-1);
         }
         .label {
-            color: $color-blue;
+            color: var(--cx-g-color-primary);
         }
         &:before {
             width: 100%;
-            background-color: $color-link-hover;
+            background-color: var(--cx-g-color-7);
         }
     }
     &.is-disabled {
         cursor: default;
         .FSA-icon { 
-            background: $color-white;
+            background: var(--cx-g-color-1);
         }
         .label {
             font-weight: 400;

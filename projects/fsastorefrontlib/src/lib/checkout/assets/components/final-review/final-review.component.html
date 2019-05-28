@@ -24,7 +24,7 @@
                 </ul>
             </div>
             <div class="col-12 col-md-3">
-                <button class="secondary-button__default secondary-button" href="#" (click)="edit()">{{ 'fscommon.edit' | cxTranslate }}</button>
+                <button class="secondary-button" (click)="edit()">{{ 'fscommon.edit' | cxTranslate }}</button>
             </div>
         </div>
         <div class="row my-5">
@@ -37,7 +37,7 @@
                     </span>
                 </label>
             </div>
-            <button [disabled]="!tAndCToggler" (click)=placeOrder() class="col-12 col-md-4 primary-button primary-button__default">
+            <button [disabled]="!tAndCToggler" (click)=placeOrder() class="col-12 col-md-4 primary-button">
                 {{ 'fscommon.apply' | cxTranslate }}
             </button>
         </div>

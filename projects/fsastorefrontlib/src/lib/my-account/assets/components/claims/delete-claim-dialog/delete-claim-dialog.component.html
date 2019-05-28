@@ -6,10 +6,10 @@
   <div class="modal-actions">
       <div class="row">
         <div class="col-xs-12 col-sm-6 col-sm-pull-6">
-            <button class="primary-button primary-button__default" (click)="activeModal.dismiss('Cross click')" >{{ 'common.cancel' | cxTranslate }}</button>
+            <button class="primary-button" (click)="activeModal.dismiss('Cross click')" >{{ 'common.cancel' | cxTranslate }}</button>
         </div>
         <div class="col-xs-12 col-sm-6 col-sm-push-6">
-            <button class="secondary-button secondary-button__default" (click)="deleteClaim(); activeModal.dismiss('Cross click')">{{ 'common.delete' | cxTranslate }}</button>
+            <button class="secondary-button" (click)="deleteClaim(); activeModal.dismiss('Cross click')">{{ 'common.delete' | cxTranslate }}</button>
         </div>
       </div>
   </div>

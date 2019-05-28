@@ -5,8 +5,7 @@
           <div class="row no-gutters section-header__heading">
             <div class="col-12 col-md-2 accordion-header__icon">
               <span *ngIf="cart.deliveryOrderGroups[0]?.entries[0]?.product?.images?.length > 0"
-                    class="images images__wrapper images__wrapper--size"
-              >
+                    class="images images__wrapper images__wrapper--size">
                 <img class="images__size"
                      [src]="getBaseUrl() + cart.deliveryOrderGroups[0]?.entries[0]?.product?.images[3]?.url"/>
               </span>
@@ -37,7 +36,7 @@
                       </ng-container>
                     </ul>
                     <div class="col-12 col-md-6">
-                      <a href="#" type="submit" class="secondary-button secondary-button__default">{{ 'fscommon.edit' | cxTranslate }}</a>
+                      <button class="secondary-button">{{ 'fscommon.edit' | cxTranslate }}</button>
                     </div>
                   </div>
                 </div>
@@ -63,7 +62,7 @@
                   </ng-container>
                 </ul>
                 <div class="col-12 col-md-6">
-                  <a href="#" type="submit" class="secondary-button secondary-button__default">{{ 'fscommon.edit' | cxTranslate }}</a>
+                  <button class="secondary-button">{{ 'fscommon.edit' | cxTranslate }}</button>
                 </div>
               </div>
             </div>
@@ -79,7 +78,7 @@
                   </ng-container>
                 </ul>
                 <div class="col-12 col-md-6">
-                  <a href="#" type="submit" class="secondary-button secondary-button__default">{{ 'fscommon.edit' | cxTranslate }}</a>
+                  <button class="secondary-button">{{ 'fscommon.edit' | cxTranslate }}</button>
                 </div>
               </div>
             </div>
@@ -102,7 +101,7 @@
                     </ng-container>
                   </ul>
                   <div class="col-12 col-md-6">
-                    <a href="#" type="submit" class="secondary-button secondary-button__default">{{ 'fscommon.edit' | cxTranslate }}</a>
+                    <button class="secondary-button">{{ 'fscommon.edit' | cxTranslate }}</button>
                   </div>
                 </div>
               </div>
@@ -143,17 +142,17 @@
                   </li>
                 </ul>
                 <div class="col-12 col-md-6">
-                  <a href="#" type="submit" class="secondary-button secondary-button__default">{{ 'fscommon.edit' | cxTranslate }}</a>
+                  <button class="secondary-button">{{ 'fscommon.edit' | cxTranslate }}</button>
                 </div>
               </div>
             </div>
           </fsa-accordion-item>
           <div class="row mt-5">
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <a class="secondary-button secondary-button__default secondary-button__checkout js-checkQuoteStatus" (click)="back()">{{ 'common.back' | cxTranslate }}</a>
+              <button class="secondary-button " (click)="back()">{{ 'common.back' | cxTranslate }}</button>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
-              <a class="primary-button primary-button__default" (click)="next()">{{ 'common.continue' | cxTranslate }}</a>
+              <button class="primary-button " (click)="next()">{{ 'common.continue' | cxTranslate }}</button>
             </div>
           </div>
         </div>

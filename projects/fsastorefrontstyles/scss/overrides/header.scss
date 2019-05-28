@@ -3,15 +3,15 @@
 
 // 
 header {
-    --cx-g-color-primary: #{$color-dark-grey};
-    --cx-g-color-inverse: #{$color-dark-blue};
-    --cx-background-color: #{$color-white};
+    --cx-g-color-primary: #{var(--cx-g-color-text)};
+    --cx-g-color-inverse: #{var(--cx-g-color-secondary)};
+    --cx-background-color: #{var(--cx-g-color-1)};
     --cx-max-width: 100%;
     .SiteContext::after, &.is-expanded:after {
         display: none;
     }
     .navigation {
-        background-color: $color-white;
+        background-color: var(--cx-g-color-1);
     }
     .SiteLogo {
         --cx-width: 100%;
@@ -26,22 +26,22 @@ header {
         }
     }
     .header {
-        color: $color-dark-grey;
+        color: var(--cx-g-color-text);
         text-transform: uppercase;
         .nav-link, .cx-login-greet {
             text-transform: uppercase;
             font-size: 14px;
             @include media-breakpoint-down(md) {
                 &:hover, &:focus, &:active, &:after {
-                    color: $color-white;
+                    color: var(--cx-g-color-1);
                 }
             }
             @include media-breakpoint-up(lg) {
-                color: $color-dark-grey;
+                color: var(--cx-g-color-text);
             }
         }
         .cx-login-greet {
-            color: $color-dark-blue;
+            color: var(--cx-g-color-secondary);
             font-weight: bold;
         }
         .NavigationBar cx-navigation-ui {
@@ -54,13 +54,13 @@ header {
                     position: absolute;
                     bottom: 0;
                     left: 0;
-                    background-color: $color-link-hover;
+                    background-color: var(--cx-g-color-7);
                     width: 0;
                     height: 5px;
                     @include transition;
                 }
                 &:hover {
-                    color: $color-link-hover;
+                    color: var(--cx-g-color-7);
                     &:before {
                         width: 100%;
                         @include transition;
@@ -71,7 +71,7 @@ header {
         nav {
             padding: 0;
             @include media-breakpoint-down(md) {
-                background-color: $color-dark-blue;
+                background-color: var(--cx-g-color-secondary);
             }
             .nav-item {
                 @include media-breakpoint-down(md) {
@@ -80,8 +80,8 @@ header {
             }
             @include media-breakpoint-up(lg) {
                 justify-content: flex-start;
-                border-top: 1px solid $color-mild-grey;
-                border-bottom: 1px solid $color-mild-grey;
+                border-top: 1px solid var(--cx-g-color-5);
+                border-bottom: 1px solid var(--cx-g-color-5);
             }
         }
         .HeaderLinksSlot {
@@ -109,39 +109,39 @@ header {
                     a {
                         display: block;
                         padding: 12px 18px;
-                        color: $color-dark-grey;
+                        color: var(--cx-g-color-text);
                     }
                     &:hover {
-                        background-color: $color-blue;
+                        background-color: var(--cx-g-color-primary);
                         a {
-                            color: $color-white;
+                            color: var(--cx-g-color-1);
                         }
                     }
                 }
             }
         }
         .hamburger-inner, .is-active .hamburger-inner {
-            background-color: $color-dark-blue;
+            background-color: var(--cx-g-color-secondary);
             &:before, &:after {
-            background-color: $color-dark-blue; 
+            background-color: var(--cx-g-color-secondary); 
             }
         }
         .SearchBox {
             margin-right: 15px;
             .dropdown-menu.show {
-                border: 1px solid $color-dark-blue;
+                border: 1px solid var(--cx-g-color-secondary);
                 border-radius: 0;
             }
             .dropdown-item {
                 &.active {
-                    color: $color-dark-blue;
+                    color: var(--cx-g-color-secondary);
                 }
             }
             .cx-form-group input {
-                border: 1px solid $color-dark-blue;
+                border: 1px solid var(--cx-g-color-secondary);
                 @include media-breakpoint-down(xs) {
                     top: 64px; 
-                    border-bottom: 1px solid $color-white;
+                    border-bottom: 1px solid var(--cx-g-color-1);
                 }
             }
         }
