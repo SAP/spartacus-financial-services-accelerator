@@ -5,12 +5,12 @@
                 <div class="review__quote" *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes">
                     <div class="my-quotes">
                         <h2 class="my-quotes__title">{{ 'quote.retrieveQuotes' | cxTranslate }}</h2>
-                            <ul>
-                                <ng-container *ngTemplateOutlet="quoteList; context:{quotes: quotes, max: (allQuotesDisplayed$ ? quotes?.insuranceQuotes?.length : component.numberOfQuotesToDisplay)}"></ng-container>
-                            </ul>
-                            <div *ngIf = "quotes?.insuranceQuotes?.length > component.numberOfQuotesToDisplay">
-                                <ng-container *ngTemplateOutlet="showAllQuotesButton context: {showAll: (allQuotesDisplayed$ ? false : true)}"></ng-container>
-                            </div>   
+                        <ul>
+                            <ng-container *ngTemplateOutlet="quoteList; context:{quotes: quotes, max: (allQuotesDisplayed$ ? quotes?.insuranceQuotes?.length : component.numberOfQuotesToDisplay)}"></ng-container>
+                        </ul>
+                        <div *ngIf = "quotes?.insuranceQuotes?.length > 2">
+                            <ng-container *ngTemplateOutlet="showAllQuotesButton context: {showAll: (allQuotesDisplayed$ ? false : true)}"></ng-container>
+                        </div>   
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
 </ng-template>
 
 <ng-template #showAllQuotesButton let-showAll="showAll">
-    <button class="primary-button " (click)="showAllQuotes(showAll);">
+    <button class="primary-button" (click)="showAllQuotes(showAll);">
         {{quoteButtonText}}
     </button>
 </ng-template>
