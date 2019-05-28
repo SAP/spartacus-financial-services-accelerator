@@ -45,12 +45,14 @@ a {
   @include linear-gradient-background ($color-blue, $color-banking-darkest-blue, 50%, 100%);
   border: none;
   color: $color-white;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 400;
-  padding: 20px; 
+  line-height: 1.6;
+  padding: 15px; 
   text-align: center;
 }
 .images__size {
+  display: block;
   width: 100%;
   height: 100%;
 }
@@ -59,10 +61,10 @@ a {
   background-color: #ffffff;
   display: inline-block;
   vertical-align: middle;
-  width: 62px;
-  height: 62px;
+  width: 30px;
+  height: 30px;
   text-align: center;
-  padding: 6px;
+  padding: 2px;
 }
 .notice {
   color: $color-blue;
@@ -92,6 +94,7 @@ a {
   font-size: 20px;
   padding-top: 15px;
   padding-bottom: 15px;
+  line-height: 1.6;
   @include linear-gradient-background( $color-blue, $color-banking-darkest-blue, 50%, 100% );
 }
 .list-data {
