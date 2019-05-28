@@ -26,10 +26,10 @@
                     <ul class="col-12 accordion--list">
                       <ng-container *ngFor="let item of cart?.insuranceQuote?.quoteDetails?.entry">
                         <li class="accordion--list-item row">
-                          <div class="col-6">
+                          <div class="col-6 item-label">
                             {{ item.key }}
                           </div>
-                          <div class="col-6 value notice notice--dark">
+                          <div class="col-6 value notice">
                             {{ item.value }}
                           </div>
                         </li>
@@ -49,10 +49,10 @@
                 <ul class="col-12 accordion--list">
                   <ng-container *ngFor="let item of (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.price?.oneTimeChargeEntries">
                     <li class="accordion--list-item row">
-                      <div class="col-6">
+                      <div class="col-6 item-label">
                         {{ item.billingTime?.name }}
                       </div>
-                      <div class="col-6 value notice notice--dark">
+                      <div class="col-6 value notice">
                         <ng-container *ngIf="item.price.value > 0; then formattedPrice; else (item.chargeInformation ? chargeInfo : iconOk)"></ng-container>
                         <ng-template #formattedPrice>{{ item.price.formattedValue }}</ng-template>
                         <ng-template #chargeInfo>{{ item.chargeInformation }}</ng-template>
@@ -73,7 +73,9 @@
                 <ul class="col-12 accordion--list">
                   <ng-container *ngFor="let item of cart.deliveryOrderGroups[0]?.entries">
                     <li class="accordion--list-item row">
-                      <div class="col-12"> {{ item.product?.name }} </div>
+                      <div class="col-12 item-label">
+                        {{ item.product?.name }}
+                      </div>
                     </li>
                   </ng-container>
                 </ul>
