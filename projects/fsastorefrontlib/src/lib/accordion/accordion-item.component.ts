@@ -5,10 +5,11 @@ import { Component, Input } from '@angular/core';
   templateUrl: './accordion-item.component.html'
 })
 export class AccordionItemComponent {
+  @Input() icon: boolean;
   @Input() opened = false;
   @Input() title: string;
 
   onItemClick() {
-    this.opened === true ? this.opened = false : this.opened = true;
+    this.opened = this.opened === true ? false : true;
   }
 }
