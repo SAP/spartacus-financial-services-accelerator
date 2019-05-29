@@ -35,6 +35,11 @@ ul {
         color: var(--cx-g-color-1);
       }
     }
+    .images__wrapper {
+      width: 60px;
+      height: 60px;
+      padding: 4px;
+    }
   }
   &__name-number {
     font-size: 18px;
