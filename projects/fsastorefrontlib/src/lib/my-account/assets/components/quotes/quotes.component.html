@@ -32,9 +32,7 @@
             </div>
           </div>
           <div class="cards-button-wrapper cards-button-wrapper--border-secondary">
-            <div class="cards__button">
-              <a href="#" type="submit" class="primary-button primary-button__default">{{ 'fscommon.retrieve' | cxTranslate }}</a>
-            </div>
+            <button class="primary-button col-6 my-5">{{ 'fscommon.retrieve' | cxTranslate }}</button>
           </div>
         </div>
       </div>
@@ -42,7 +40,7 @@
   </ng-container>
 </ng-container>
 <ng-template #noQuotes>
-  <h3>{{ 'fscommon.youHaveNoQuotes' | cxTranslate }}!</h3>
+  <h3>{{ 'quote.youHaveNoQuotes' | cxTranslate }}!</h3>
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>

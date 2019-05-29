@@ -7,21 +7,21 @@ ul {
 }
 .my-policies {
   &__title {
-    color: $color-dark-grey;
+    color: var(--cx-g-color-text);
     font-weight: 500;
     line-height: 1.458em;
     margin: 20px auto;
     text-align: center;
   }
   &__table-head {
-    background-color: $color-dark-blue;
+    background-color: var(--cx-g-color-secondary);
     font-size: 14px;
     font-weight: bold;
     line-height: 17px;
     padding: 12px 0 12px 20px;
   }
   &__my-policy {
-    background-color: $color-light-grey;
+    background-color: var(--cx-g-color-4);
     margin-bottom: 10px;
     position: relative;
   }
@@ -29,10 +29,10 @@ ul {
     padding: 20px;
     &:hover {
       @include transition();
-      color: $color-white;
-      background-color: $color-dark-blue;
+      color: var(--cx-g-color-1);
+      background-color: var(--cx-g-color-secondary);
       .expired {
-        color: $color-white;
+        color: var(--cx-g-color-1);
       }
     }
   }
