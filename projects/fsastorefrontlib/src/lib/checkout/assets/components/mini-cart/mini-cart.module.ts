@@ -9,7 +9,7 @@ import { FSMiniCartComponent } from './mini-cart.component';
     CommonModule,
     I18nModule,
     RouterModule,
-    UrlTranslationModule,
+    UrlTranslationModule
   ],
   declarations: [FSMiniCartComponent],
   entryComponents: [FSMiniCartComponent],

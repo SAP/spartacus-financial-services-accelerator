@@ -47,6 +47,7 @@ const routes: Routes = [
   ],
   declarations: [QuoteReviewComponent, FinalReviewComponent, FsaOrderConfirmationComponent, PaymentDetailsComponent],
   exports: [
+    I18nModule,
     PaymentMethodModule,
     PaymentFormModule,
     AddOptionsModule,

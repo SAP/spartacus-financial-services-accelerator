@@ -1,7 +1,7 @@
 <ng-container *ngIf="(cart$ | async) as cart">
   <ng-container *ngIf="cart.deliveryOrderGroups">
     <div class="short-overview short-overview--right">
-      <div class="short-overview__heading gradient-heading">
+      <div class="short-overview__heading gradient-heading px-2">
           {{ cart.deliveryOrderGroups[0]?.entries[0]?.product?.defaultCategory?.name }} {{ 'quote.quote' | cxTranslate }}
         </div>
       <div class="short-overview__content">
@@ -23,13 +23,6 @@
             </div>
             <div class="short-overview__item-price col-6">{{ cart.totalPrice?.formattedValue }}</div>
           </div>
-        </div>
-        <div class="short-overview__link-wrapper">
-          <a
-            class="mean-link mean-link--bold"
-            href="#"
-            >{{ 'fscommon.modifyPlan' | cxTranslate }}</a
-          >
         </div>
       </div>
   </ng-container>

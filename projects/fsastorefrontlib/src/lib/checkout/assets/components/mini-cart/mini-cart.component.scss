@@ -2,6 +2,10 @@
 @import 'variables-fsa';
 @import '~bootstrap/scss/mixins/breakpoints';
 
+:host {
+  display: block;
+  overflow: hidden;
+}
 .short-overview {
   &--right {
     width: 90%;
@@ -33,10 +37,5 @@
       padding: 15px 0;
       margin: 0;
     }
-  }
-  &__link-wrapper {
-    font-weight: 700;
-    text-align: right;
-    margin: 15px 10px 0 0 ;
   }
 }
