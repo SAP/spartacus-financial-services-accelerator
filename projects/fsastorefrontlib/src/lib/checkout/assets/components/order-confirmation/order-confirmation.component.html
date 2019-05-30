@@ -1,27 +1,31 @@
 <ng-container *ngIf="order$ | async as order; else loading">
     <div class="container-fluid center1400">
         <ng-container *ngIf="order.deliveryOrderGroups?.length > 0; else orderComplete">
-            <h2 class="mt-5 mb-5">{{ 'fscommon.thankYou' | cxTranslate }} {{ 'policy.yourPolicyHasBeenSubmited' | cxTranslate }} </h2>
+            <h2 class="mt-5 mb-5">{{ 'fscommon.thankYou' | cxTranslate }} {{ 'policy.policyRequestSubmitted' | cxTranslate }} </h2>
             <div class="row">
                 <div class="col-12 col-md-8">
                     <div class="accordion">
                         <div class="row no-gutters section-header__heading">
                             <div class="col-12 col-md-2 accordion-header__icon">
-                                <span *ngIf="order.deliveryOrderGroups[0]?.entries[0]?.product?.images?.length > 0"
-                                    class="images images__wrapper images__wrapper--size">
-                                    <img class="images__size"
-                                        [src]="getBaseUrl() + order.deliveryOrderGroups[0]?.entries[0]?.product?.images[3]?.url" />
+                                <span *ngIf="order.deliveryOrderGroups[0]?.entries[0]?.product?.images?.length > 0" class="images images__wrapper images__wrapper--size">
+                                    <img class="images__size" [src]="getBaseUrl() + order.deliveryOrderGroups[0]?.entries[0]?.product?.images[3]?.url" />
                                 </span>
                             </div>
                             <div class="col-12 col-md-10 accordion-header__summary-line-text">
-                                {{ 'fscommon.your' | cxTranslate }} {{ order.entries[0]?.product?.defaultCategory?.name }}<br>
-                                {{ 'quote.quoteNumberIs' | cxTranslate }} : {{ order.code }}
+                                <div class="row no-gutters">
+                                    <div class="col-xs-12 col-6">
+                                        {{ order.entries[0]?.product?.defaultCategory?.name }}
+                                    </div>
+                                    <div class="col-xs-12 col-6">
+                                        {{ 'quote.quoteNumberIs' | cxTranslate }} : {{ order.code }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div #ref>
                             <ng-container *ngIf="(order?.insuranceQuote?.quoteDetails | json) !== '{}'">
                                 <fsa-accordion-item [opened]="true"
-                                    [title]="order.entries[0]?.product?.defaultCategory?.name + ('fscommon.information' | cxTranslate)">
+                                    [title]="order.entries[0]?.product?.defaultCategory?.name + ' ' + ('fscommon.information' | cxTranslate)">
                                     <div class="container">
                                         <div class="row justify-content-center">
                                             <ul class="col-12 accordion--list">
@@ -31,13 +35,18 @@
                                                         <div class="col-6">
                                                             {{ item.key }}
                                                         </div>
-                                                        <div class="col-6 value notice notice--dark">
+                                                        <div class="col-6 value notice">
                                                             {{ item.value }}
                                                         </div>
                                                     </li>
                                                 </ng-container> -->
                                                 <li class="accordion--list-item row">
-                                                    {{ 'quote.quoteStatus' | cxTranslate }} : {{order.insuranceQuote?.quoteWorkflowStatus?.code}}
+                                                    <div class="col-6 item-label">
+                                                        {{ 'quote.quoteStatus' | cxTranslate }}
+                                                    </div>
+                                                    <div class="col-6 value notice">
+                                                        {{order.insuranceQuote?.quoteWorkflowStatus?.code}}
+                                                    </div>
                                                 </li>
                                             </ul>
                                         </div>
@@ -51,10 +60,10 @@
                                     <ul class="col-12 accordion--list">
                                         <ng-container *ngFor="let item of (order.deliveryOrderGroups[0]?.entries)[0]?.product?.price?.oneTimeChargeEntries">
                                             <li class="accordion--list-item row">
-                                              <div class="col-6">
+                                              <div class="col-6 item-label">
                                                 {{ item.billingTime?.name }}
                                               </div>
-                                              <div class="col-6 value notice notice--dark">
+                                              <div class="col-6 value notice">
                                                 <ng-container *ngIf="item.price.value > 0; then formattedPrice; else (item.chargeInformation ? chargeInfo : iconOk)"></ng-container>
                                                 <ng-template #formattedPrice>{{ item.price.formattedValue }}</ng-template>
                                                 <ng-template #chargeInfo>{{ item.chargeInformation }}</ng-template>
@@ -70,18 +79,13 @@
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <ul class="col-12 accordion--list">
-                                        <li class="accordion--list-item row">
-                                            <div class="col-12">
-                                                <ul class="accordion-item__list">
-                                                    <ng-container
-                                                        *ngFor="let item of order.deliveryOrderGroups[0]?.entries">
-                                                        <li class="accordion-item__list-item">
-                                                            {{ item.product?.name }}
-                                                        </li>
-                                                    </ng-container>
-                                                </ul>
-                                            </div>
-                                        </li>
+                                        <ng-container *ngFor="let item of order.deliveryOrderGroups[0]?.entries">
+                                            <li class="accordion--list-item row">
+                                                <div class="col-12 item-label">
+                                                    {{ item.product?.name }}
+                                                </div>
+                                            </li>
+                                        </ng-container>
                                     </ul>
                                 </div>
                             </div>
@@ -117,35 +121,62 @@
                                 <div class="row justify-content-center">
                                     <ul class="col-12 accordion--list">
                                         <li class="accordion--list-item row">
-                                            <div class="col-12">
-                                                <!-- Needs to have dynamic heading value -->
-                                                <h3 class="accordion-item__list-title">{{ 'policy.policyHolder' | cxTranslate }}</h3>
-                                                <ul class="accordion-item__list">
-                                                    <li class="accordion-item__list-item">
-                                                        Mrs. Test Tester
-                                                    </li>
-                                                    <li class="accordion-item__list-item">
-                                                        Phone Number: 323535
-                                                    </li>
-                                                    <li class="accordion-item__list-item">
-                                                        Email Address: donna@moore.com
-                                                    </li>
-                                                    <li class="accordion-item__list-item">
-                                                        Address Line 1: Mocked Adress Line
-                                                    </li>
-                                                    <li class="accordion-item__list-item">
-                                                        City: Belgrade
-                                                    </li>
-                                                    <li class="accordion-item__list-item">
-                                                        Postcode: 11090
-                                                    </li>
-                                                    <li class="accordion-item__list-item">
-                                                        Country: Serbia
-                                                    </li>
-                                                </ul>
-                                            </div>
+                                          <div class="col-6 item-label">
+                                            {{ 'policy.policyHolder' | cxTranslate }}
+                                          </div>
+                                          <div class="col-6 value notice">
+                                            Mrs. Test Tester
+                                          </div>
                                         </li>
-                                    </ul>
+                                        <li class="accordion--list-item row">
+                                          <div class="col-6 item-label">
+                                            Phone Number
+                                          </div>
+                                          <div class="col-6 value notice">
+                                            323535
+                                          </div>
+                                        </li>
+                                        <li class="accordion--list-item row">
+                                          <div class="col-6 item-label">
+                                            Email Address
+                                          </div>
+                                          <div class="col-6 value notice">
+                                            donna@moore.com
+                                          </div>
+                                        </li>
+                                        <li class="accordion--list-item row">
+                                          <div class="col-6 item-label">
+                                            Address Line 1
+                                          </div>
+                                          <div class="col-6 value notice">
+                                            Mocked Address
+                                          </div>
+                                        </li>
+                                        <li class="accordion--list-item row">
+                                          <div class="col-6 item-label">
+                                            City
+                                          </div>
+                                          <div class="col-6 value notice">
+                                            Belgrade
+                                          </div>
+                                        </li>
+                                        <li class="accordion--list-item row">
+                                          <div class="col-6 item-label">
+                                            Postcode
+                                          </div>
+                                          <div class="col-6 value notice">
+                                            11090
+                                          </div>
+                                        </li>
+                                        <li class="accordion--list-item row">
+                                          <div class="col-6 item-label">
+                                            Country
+                                          </div>
+                                          <div class="col-6 value notice">
+                                            Serbia
+                                          </div>
+                                        </li>
+                                      </ul>
                                 </div>
                             </div>
                         </fsa-accordion-item>

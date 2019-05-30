@@ -1,166 +1,204 @@
 <ng-container *ngIf="cart$ | async as cart">
   <ng-container *ngIf="cartLoaded$ | async; else loading">
     <ng-container *ngIf="cart.deliveryOrderGroups?.length > 0; else noQuotes">
-        <div class="accordion">
-          <div class="row no-gutters section-header__heading">
-            <div class="col-12 col-md-2 accordion-header__icon">
-              <span *ngIf="cart.deliveryOrderGroups[0]?.entries[0]?.product?.images?.length > 0"
-                    class="images images__wrapper images__wrapper--size">
-                <img class="images__size"
-                     [src]="getBaseUrl() + cart.deliveryOrderGroups[0]?.entries[0]?.product?.images[3]?.url"/>
-              </span>
-            </div>
-            <div class="col-12 col-md-8 accordion-header__text">
-              {{ cart.deliveryOrderGroups[0].entries[0]?.product?.defaultCategory?.name }} {{ 'quote.quote' | cxTranslate }}
-            </div>
-            <div class="col-12 col-md-3 col-md-2 accordion-header__details">
-              <div class="accordion-header__id"></div>
-              <div class="accordion-header__expiry-date"></div>
-            </div>
+      <div class="accordion">
+        <div class="row no-gutters section-header__heading">
+          <div class="col-12 col-md-2 accordion-header__icon">
+            <span *ngIf="cart.deliveryOrderGroups[0]?.entries[0]?.product?.images?.length > 0"
+              class="images images__wrapper images__wrapper--size">
+              <img class="images__size"
+                [src]="getBaseUrl() + cart.deliveryOrderGroups[0]?.entries[0]?.product?.images[3]?.url" />
+            </span>
           </div>
-          <div #ref>
-            <ng-container *ngIf="(cart?.insuranceQuote?.quoteDetails | json) !== '{}'">
-              <fsa-accordion-item [opened]="true" [title]="'fscommon.generalDetails' | cxTranslate">
-                <div class="container">
-                  <div class="row justify-content-center">
-                    <ul class="col-12 accordion--list">
-                      <ng-container *ngFor="let item of cart?.insuranceQuote?.quoteDetails?.entry">
-                        <li class="accordion--list-item row">
-                          <div class="col-6">
-                            {{ item.key }}
-                          </div>
-                          <div class="col-6 value notice notice--dark">
-                            {{ item.value }}
-                          </div>
-                        </li>
-                      </ng-container>
-                    </ul>
-                    <div class="col-12 col-md-6">
-                      <button class="secondary-button">{{ 'fscommon.edit' | cxTranslate }}</button>
-                    </div>
-                  </div>
-                </div>
-              </fsa-accordion-item>
-            </ng-container>
+          <div class="col-12 col-md-8 accordion-header__text">
+            {{ cart.deliveryOrderGroups[0].entries[0]?.product?.defaultCategory?.name }}
+            {{ 'quote.quote' | cxTranslate }}
           </div>
-          <fsa-accordion-item [opened]="ref.children.length > 0 ? false : true" [title]="'fscommon.whatsIncluded' | cxTranslate">
-            <div class="container">
-              <div class="row justify-content-center">
-                <ul class="col-12 accordion--list">
-                  <ng-container *ngFor="let item of (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.price?.oneTimeChargeEntries">
-                    <li class="accordion--list-item row">
-                      <div class="col-6">
-                        {{ item.billingTime?.name }}
-                      </div>
-                      <div class="col-6 value notice notice--dark">
-                        <ng-container *ngIf="item.price.value > 0; then formattedPrice; else (item.chargeInformation ? chargeInfo : iconOk)"></ng-container>
-                        <ng-template #formattedPrice>{{ item.price.formattedValue }}</ng-template>
-                        <ng-template #chargeInfo>{{ item.chargeInformation }}</ng-template>
-                        <ng-template #iconOk><span class="FSA-icon icon-FSA-ok"></span></ng-template>
-                      </div>
-                    </li>
-                  </ng-container>
-                </ul>
-                <div class="col-12 col-md-6">
-                  <button class="secondary-button">{{ 'fscommon.edit' | cxTranslate }}</button>
-                </div>
-              </div>
-            </div>
-          </fsa-accordion-item>
-          <fsa-accordion-item [title]="'fscommon.addedByYou' | cxTranslate">
-            <div class="container">
-              <div class="row justify-content-center">
-                <ul class="col-12 accordion--list">
-                  <ng-container *ngFor="let item of cart.deliveryOrderGroups[0]?.entries">
-                    <li class="accordion--list-item row">
-                      <div class="col-12"> {{ item.product?.name }} </div>
-                    </li>
-                  </ng-container>
-                </ul>
-                <div class="col-12 col-md-6">
-                  <button class="secondary-button">{{ 'fscommon.edit' | cxTranslate }}</button>
-                </div>
-              </div>
-            </div>
-          </fsa-accordion-item>
-          <ng-container *ngIf="cart.deliveryOrderGroups[0]?.entries.length > 0 && cart.deliveryOrderGroups[0]?.entries[0]?.product?.investments">
-            <fsa-accordion-item [title]="'fscommon.investementDetails' | cxTranslate">
+          <div class="col-12 col-md-3 col-md-2 accordion-header__details">
+            <div class="accordion-header__id"></div>
+            <div class="accordion-header__expiry-date"></div>
+          </div>
+        </div>
+        <div #ref>
+          <ng-container *ngIf="(cart?.insuranceQuote?.quoteDetails | json) !== '{}'">
+            <fsa-accordion-item [opened]="true" [title]="'fscommon.generalDetails' | cxTranslate">
               <div class="container">
                 <div class="row justify-content-center">
                   <ul class="col-12 accordion--list">
-                    <ng-container *ngFor="let item of cart.deliveryOrderGroups[0]?.entries">
-                      <ng-container *ngFor="let investmentDetail of item.product?.investments">
-                        <li class="accordion--list-item row">
-                          <div class="col-12">
-                            {{investmentDetail.investmentType?.fundName}}: {{investmentDetail.distributionPercentage}}% </div>
-                          <div class="col-12">ISIN: {{investmentDetail.investmentType?.isin}} </div>
-                          <div class="col-12">5 {{ 'fscommon.yearPerformanse' | cxTranslate }}: {{investmentDetail.investmentType?.fiveYearPerformance}} </div>
-                          <div class="col-12">{{ 'fscommon.riskAndReturningRate' | cxTranslate }}: {{investmentDetail.investmentType?.riskReturningRating}}</div>
-                        </li>
-                      </ng-container>
+                    <ng-container *ngFor="let item of cart?.insuranceQuote?.quoteDetails?.entry">
+                      <li class="accordion--list-item row">
+                        <div class="col-6 item-label">
+                          {{ item.key }}
+                        </div>
+                        <div class="col-6 value notice">
+                          {{ item.value }}
+                        </div>
+                      </li>
                     </ng-container>
                   </ul>
                   <div class="col-12 col-md-6">
-                    <button class="secondary-button">{{ 'fscommon.edit' | cxTranslate }}</button>
+                    <button class="action-button">{{ 'fscommon.edit' | cxTranslate }}</button>
                   </div>
                 </div>
               </div>
             </fsa-accordion-item>
           </ng-container>
-          <fsa-accordion-item [title]="'fscommon.personalDetails' | cxTranslate">
+        </div>
+        <fsa-accordion-item [opened]="ref.children.length > 0 ? false : true"
+          [title]="'fscommon.whatsIncluded' | cxTranslate">
+          <div class="container">
+            <div class="row justify-content-center">
+              <ul class="col-12 accordion--list">
+                <ng-container
+                  *ngFor="let item of (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.price?.oneTimeChargeEntries">
+                  <li class="accordion--list-item row">
+                    <div class="col-6 item-label">
+                      {{ item.billingTime?.name }}
+                    </div>
+                    <div class="col-6 value notice">
+                      <ng-container
+                        *ngIf="item.price.value > 0; then formattedPrice; else (item.chargeInformation ? chargeInfo : iconOk)">
+                      </ng-container>
+                      <ng-template #formattedPrice>{{ item.price.formattedValue }}</ng-template>
+                      <ng-template #chargeInfo>{{ item.chargeInformation }}</ng-template>
+                      <ng-template #iconOk><span class="FSA-icon icon-FSA-ok"></span></ng-template>
+                    </div>
+                  </li>
+                </ng-container>
+              </ul>
+              <div class="col-12 col-md-6">
+                <button class="action-button">{{ 'fscommon.edit' | cxTranslate }}</button>
+              </div>
+            </div>
+          </div>
+        </fsa-accordion-item>
+        <fsa-accordion-item [title]="'fscommon.addedByYou' | cxTranslate">
+          <div class="container">
+            <div class="row justify-content-center">
+              <ul class="col-12 accordion--list">
+                <ng-container *ngFor="let item of cart.deliveryOrderGroups[0]?.entries">
+                  <li class="accordion--list-item row">
+                    <div class="col-12 item-label">
+                      {{ item.product?.name }}
+                    </div>
+                  </li>
+                </ng-container>
+              </ul>
+              <div class="col-12 col-md-6">
+                <button class="action-button">{{ 'fscommon.edit' | cxTranslate }}</button>
+              </div>
+            </div>
+          </div>
+        </fsa-accordion-item>
+        <ng-container
+          *ngIf="cart.deliveryOrderGroups[0]?.entries.length > 0 && cart.deliveryOrderGroups[0]?.entries[0]?.product?.investments">
+          <fsa-accordion-item [title]="'fscommon.investementDetails' | cxTranslate">
             <div class="container">
               <div class="row justify-content-center">
                 <ul class="col-12 accordion--list">
-                  <li class="accordion--list-item row">
-                    <div class="col-12">
-                      <!-- Needs to have dynamic heading value -->
-                      <h3 class="accordion-item__list-title">{{ 'policy.policyHolder' | cxTranslate }}</h3>
-                      <ul class="accordion-item__list">
-                        <li class="accordion-item__list-item">
-                          Mrs. Test Tester
-                        </li>
-                        <li class="accordion-item__list-item">
-                          Phone Number: 323535
-                        </li>
-                        <li class="accordion-item__list-item">
-                          Email Address: donna@moore.com
-                        </li>
-                        <li class="accordion-item__list-item">
-                          Address Line 1: Mocked Address
-                        </li>
-                        <li class="accordion-item__list-item">
-                          City: Belgrade
-                        </li>
-                        <li class="accordion-item__list-item">
-                          Postcode: 11090
-                        </li>
-                        <li class="accordion-item__list-item">
-                          Country: Serbia
-                        </li>
-                      </ul>
-                    </div>
-                  </li>
+                  <ng-container *ngFor="let item of cart.deliveryOrderGroups[0]?.entries">
+                    <ng-container *ngFor="let investmentDetail of item.product?.investments">
+                      <li class="accordion--list-item row">
+                        <div class="col-12">
+                          {{investmentDetail.investmentType?.fundName}}: {{investmentDetail.distributionPercentage}}&#37;
+                        </div>
+                        <div class="col-12">ISIN: {{investmentDetail.investmentType?.isin}} </div>
+                        <div class="col-12">5 {{ 'fscommon.yearPerformanse' | cxTranslate }}:
+                          {{investmentDetail.investmentType?.fiveYearPerformance}} </div>
+                        <div class="col-12">{{ 'fscommon.riskAndReturningRate' | cxTranslate }}:
+                          {{investmentDetail.investmentType?.riskReturningRating}}</div>
+                      </li>
+                    </ng-container>
+                  </ng-container>
                 </ul>
                 <div class="col-12 col-md-6">
-                  <button class="secondary-button">{{ 'fscommon.edit' | cxTranslate }}</button>
+                  <button class="action-button">{{ 'fscommon.edit' | cxTranslate }}</button>
                 </div>
               </div>
             </div>
           </fsa-accordion-item>
-          <div class="row mt-5">
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <button class="secondary-button " (click)="back()">{{ 'common.back' | cxTranslate }}</button>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-              <button class="primary-button " (click)="next()">{{ 'common.continue' | cxTranslate }}</button>
+        </ng-container>
+        <fsa-accordion-item [title]="'fscommon.personalDetails' | cxTranslate">
+          <div class="container">
+            <div class="row justify-content-center">
+              <ul class="col-12 accordion--list">
+                <li class="accordion--list-item row">
+                  <div class="col-6 item-label">
+                    {{ 'policy.policyHolder' | cxTranslate }}
+                  </div>
+                  <div class="col-6 value notice">
+                    Mrs. Test Tester
+                  </div>
+                </li>
+                <li class="accordion--list-item row">
+                  <div class="col-6 item-label">
+                    Phone Number
+                  </div>
+                  <div class="col-6 value notice">
+                    323535
+                  </div>
+                </li>
+                <li class="accordion--list-item row">
+                  <div class="col-6 item-label">
+                    Email Address
+                  </div>
+                  <div class="col-6 value notice">
+                    donna@moore.com
+                  </div>
+                </li>
+                <li class="accordion--list-item row">
+                  <div class="col-6 item-label">
+                    Address Line 1
+                  </div>
+                  <div class="col-6 value notice">
+                    Mocked Address
+                  </div>
+                </li>
+                <li class="accordion--list-item row">
+                  <div class="col-6 item-label">
+                    City
+                  </div>
+                  <div class="col-6 value notice">
+                    Belgrade
+                  </div>
+                </li>
+                <li class="accordion--list-item row">
+                  <div class="col-6 item-label">
+                    Postcode
+                  </div>
+                  <div class="col-6 value notice">
+                    11090
+                  </div>
+                </li>
+                <li class="accordion--list-item row">
+                  <div class="col-6 item-label">
+                    Country
+                  </div>
+                  <div class="col-6 value notice">
+                    Serbia
+                  </div>
+                </li>
+              </ul>
+              <div class="col-12 col-md-6">
+                <button class="action-button">{{ 'fscommon.edit' | cxTranslate }}</button>
+              </div>
             </div>
           </div>
+        </fsa-accordion-item>
+        <div class="row mt-5">
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <button class="secondary-button " (click)="back()">{{ 'common.back' | cxTranslate }}</button>
+          </div>
+          <div class="col-md-6 col-sm-6 col-xs-12">
+            <button class="primary-button " (click)="next()">{{ 'common.continue' | cxTranslate }}</button>
+          </div>
         </div>
+      </div>
     </ng-container>
   </ng-container>
 </ng-container>
 <ng-template #noQuotes>
-    <h3>{{ 'quote.noActiveQuotes' | cxTranslate }}!</h3>
+  <h3>{{ 'quote.noActiveQuotes' | cxTranslate }}!</h3>
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
