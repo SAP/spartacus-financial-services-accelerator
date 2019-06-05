@@ -11,7 +11,7 @@ const userId = '123';
 const messageGroup = 'autoGroup';
 
 const usersEndpoint = '/users';
-const messagesEndPoint = '/notifications/sitemessages';
+const messagesEndPoint = '/notifications/fssitemessages';
 
 
 const MockOccModuleConfig: OccConfig = {
