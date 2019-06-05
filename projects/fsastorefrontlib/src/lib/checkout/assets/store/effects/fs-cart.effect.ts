@@ -15,7 +15,7 @@ export class FSCartEffects {
     map((action: fromActions.AddOptionalProduct) => action.payload),
     switchMap(payload => {
       return this.occCartService
-        .addToCart(payload.userId, payload.cartId, payload.productCode, payload.quantity)
+        .addToCart(payload.userId, payload.cartId, payload.productCode, payload.quantity , payload.entryNumber)
         .pipe(
           map((entry: any) => {
             return new fromCartActions.AddEntrySuccess(entry);

@@ -28,11 +28,11 @@ export class AddOptionsComponent implements OnInit {
       .pipe(filter(entries => entries.length > 0));
   }
 
-  addProductToCart(orderEntryCode: string) {
+  addProductToCart(orderEntryCode: string, entryNumber: string) {
     if (!orderEntryCode) {
       return;
     }
-    this.cartService.addOptionalProduct(orderEntryCode, 1);
+    this.cartService.addOptionalProduct(orderEntryCode, 1, entryNumber);
   }
 
   removeProductFromCart(item): void {
