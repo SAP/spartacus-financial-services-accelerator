@@ -16,7 +16,7 @@ export class OccInboxService {
   ) {}
 
   protected getSiteMessagesEndpoint(userId: string, messageGroup: string, searchConfig?: FSSearchConfig) {
-    let siteMessagesEndpoint = '/users/' + userId + '/notifications/sitemessages?fields=FULL';
+    let siteMessagesEndpoint = '/users/' + userId + '/notifications/fssitemessages?fields=FULL';
     if ( searchConfig.sortCode && searchConfig.sortOrder ) {
       siteMessagesEndpoint += '&page=0&sortCode=' + searchConfig.sortCode + '&sortOrder=' + searchConfig.sortOrder;
     }
@@ -31,7 +31,7 @@ export class OccInboxService {
     );
   }
   protected getReadUnreadEndpoint(userId: string) {
-    const readUnreadEndpoint = '/users/' + userId + '/notifications/sitemessages/read-unread';
+    const readUnreadEndpoint = '/users/' + userId + '/notifications/fssitemessages/read-unread';
     return (
       (this.config.backend.occ.baseUrl || '') +
       this.config.backend.occ.prefix +

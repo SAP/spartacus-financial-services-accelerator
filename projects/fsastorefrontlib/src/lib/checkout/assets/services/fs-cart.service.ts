@@ -32,13 +32,14 @@ export class FSCartService extends CartService {
     });
   }
 
-  addOptionalProduct(productCode: string, quantity: number): void {
+  addOptionalProduct(productCode: string, quantity: number, entryNumber: string): void {
     this.fsStore.dispatch(
       new fromFSAction.AddOptionalProduct({
         userId: this.fsCartData.userId,
         cartId: this.fsCartData.cartId,
         productCode: productCode,
-        quantity: quantity
+        quantity: quantity,
+        entryNumber: entryNumber
       })
     );
   }
