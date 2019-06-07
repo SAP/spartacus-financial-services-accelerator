@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { PolicyService } from '../../../assets/services/policy.service';
 import {RoutingService } from '@spartacus/core';
 import { map } from 'rxjs/operators';
-import { Subscription, combineLatest } from 'rxjs';
+import { Subscription, combineLatest, Observable } from 'rxjs';
 import { OccConfig } from '@spartacus/core';
 
 
@@ -24,13 +24,13 @@ export class PolicyDetailsComponent implements OnInit {
   subscription: Subscription;
 
   ngOnInit(): void {
-    const policyId$ = this.routingService.getRouterState().pipe(
-      map(routingData => routingData.state.params.policyId)
-    );
-    const contractId$ = this.routingService.getRouterState().pipe(
-      map(routingData => routingData.state.params.contractId)
-    );
-    this.subscription = combineLatest(policyId$, contractId$).subscribe(
+    const params: Observable<any>[] = [
+      this.routingService.getRouterState().pipe(
+        map(routingData => routingData.state.params.policyId)
+      ), this.routingService.getRouterState().pipe(
+        map(routingData => routingData.state.params.contractId)
+      )];
+    this.subscription = combineLatest(params).subscribe(
       ([policyId, contractId]) => {
         if (policyId && contractId) {
           this.policyService.loadPolicyDetails(policyId, contractId);
