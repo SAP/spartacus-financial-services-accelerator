@@ -15,11 +15,11 @@ export class OccFSCartService {
         protected config: OccConfig
     ) { }
 
-    public addToCart(userId: string, cartId: string, productCode: string, quantity: number): Observable<CartModification> {
+    public addToCart(userId: string, cartId: string, productCode: string, quantity: number, entryNumber: string): Observable<CartModification> {
         const toAdd = JSON.stringify({});
         const url = this.getAddOptionalProductToCartEndpoint(userId, cartId);
         const params = new HttpParams({
-            fromString: 'productCode=' + productCode + '&quantity=' + quantity + FULL_PARAMS
+            fromString: 'productCode=' + productCode + '&quantity=' + quantity + FULL_PARAMS + '&entryNumber=' + entryNumber
         });
         const headers = new HttpHeaders({
             'Content-Type': 'application/x-www-form-urlencoded'

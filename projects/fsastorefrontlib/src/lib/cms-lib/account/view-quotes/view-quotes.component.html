@@ -5,12 +5,12 @@
                 <div class="review__quote" *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes">
                     <div class="my-quotes">
                         <h2 class="my-quotes__title">{{ 'quote.retrieveQuotes' | cxTranslate }}</h2>
-                            <ul>
-                                <ng-container *ngTemplateOutlet="quoteList; context:{quotes: quotes, max: (allQuotesDisplayed$ ? quotes?.insuranceQuotes?.length : component.numberOfQuotesToDisplay)}"></ng-container>
-                            </ul>
-                            <div *ngIf = "quotes?.insuranceQuotes?.length > component.numberOfQuotesToDisplay">
-                                <ng-container *ngTemplateOutlet="showAllQuotesButton context: {showAll: (allQuotesDisplayed$ ? false : true)}"></ng-container>
-                            </div>   
+                        <ul>
+                            <ng-container *ngTemplateOutlet="quoteList; context:{quotes: quotes, max: (allQuotesDisplayed$ ? quotes?.insuranceQuotes?.length : component.numberOfQuotesToDisplay)}"></ng-container>
+                        </ul>
+                        <div *ngIf = "quotes?.insuranceQuotes?.length > component.numberOfQuotesToDisplay">
+                            <ng-container *ngTemplateOutlet="showAllQuotesButton context: {showAll: (allQuotesDisplayed$ ? false : true)}"></ng-container>
+                        </div>   
                     </div>
                 </div>
             </div>
@@ -38,22 +38,20 @@
 </ng-template>
 
 <ng-template #showAllQuotesButton let-showAll="showAll">
-        <button class="primary-button primary-button__default primary-button__home" (click)="showAllQuotes(showAll);">
-                {{quoteButtonText}}
-            </button>
+    <button class="primary-button" (click)="showAllQuotes(showAll);">
+        {{quoteButtonText}}
+    </button>
 </ng-template>
 
 <ng-template #noQuotes>
-        <div class="none-quote">
-            <h2 class="none-quote__title">{{ 'quote.viewQuotes' | cxTranslate }}</h2>
-            <p class="none-quote__content">- {{ 'quote.getQuoteBySelecting' | cxTranslate }}</p>
-        </div>
+    <div class="none-quote">
+        <h2 class="none-quote__title">{{ 'quote.viewQuotes' | cxTranslate }}</h2>
+        <p class="none-quote__content">- {{ 'quote.getQuoteBySelecting' | cxTranslate }}</p>
+    </div>
 </ng-template>
 
 <ng-template #anonymousLogin>
-    <a routerLink="/login">
-        <button class="primary-button primary-button__default primary-button__home">{{ 'quote.viewYourQuotes' | cxTranslate }}</button>
-    </a>
+    <button routerLink="/login" class="primary-button">{{ 'quote.viewYourQuotes' | cxTranslate }}</button>
 </ng-template>
 
 <ng-template #loading>

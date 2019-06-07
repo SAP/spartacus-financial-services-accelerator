@@ -19,6 +19,12 @@ const routes: Routes = [
     path: 'Banking-Products/:categoryTitle/c/:categoryCode',
     redirectTo: null,
     data: { cxRedirectTo: 'category' }
+  },
+  {
+    path: 'c/:categoryCode',
+    canActivate: [CmsPageGuard],
+    redirectTo: null,
+    data: { cxRedirectTo: 'checkout/' }
   }
 ];
 

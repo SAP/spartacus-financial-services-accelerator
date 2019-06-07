@@ -18,33 +18,33 @@
   -webkit-box-shadow: $x $y $a $b rgba($color, $opacity);
 }
 @mixin primary-btn-color {
-  background-color: $color-blue !important;
-  border-color: $color-blue !important;
-  color: $color-white !important;
+  background-color: var(--cx-g-color-primary) !important;
+  border-color: var(--cx-g-color-primary) !important;
+  color: var(--cx-g-color-1) !important;
   &:hover,
   &:active,
   &:focus {
-    background-color: $color-link-hover !important;
-    border-color: $color-link-hover !important;
-    color: $color-white !important;
+    background-color: var(--cx-g-color-7) !important;
+    border-color: var(--cx-g-color-7) !important;
+    color: var(--cx-g-color-1) !important;
   }
 }
 @mixin secondary-btn-color {
-  background-color: $color-dark-blue !important;
-  border-color: $color-dark-blue !important;
-  color: $color-white !important;
+  background-color: var(--cx-g-color-secondary) !important;
+  border-color: var(--cx-g-color-secondary) !important;
+  color: var(--cx-g-color-1) !important;
   &:hover,
   &:active,
   &:focus {
-    background-color: $color-button-secondary-hover !important;
-    border-color: $color-button-secondary-hover !important;
-    color: $color-white !important;
+    background-color: var(--cx-g-color-8) !important;
+    border-color: var(--cx-g-color-8) !important;
+    color: var(--cx-g-color-1) !important;
   }
 }
 @mixin secondary-btn-color-inverted {
-  background-color: $color-white !important;
-  border-color: $color-white !important;
-  color: $color-dark-blue !important;
+  background-color: var(--cx-g-color-1) !important;
+  border-color: var(--cx-g-color-1) !important;
+  color: var(--cx-g-color-secondary) !important;
   &:hover,
   &:active,
   &:focus {
@@ -71,28 +71,30 @@
   background: -o-linear-gradient(left, $startColor $firstStop, $endColor $secondStop);
   background: linear-gradient(to right, $startColor $firstStop, $endColor $secondStop);
 }
-@mixin arrow {
-  &:before {
+@mixin status {
+  &::before, &::after {
     display: block;
     content: '';
     position: absolute;
     right: 15px;
     top: 50%;
-    width: 13px;
-    height: 13px;
-    border-bottom: 3px solid;
-    border-right: 3px solid;
+    width: 16px;
+    height: 16px;
     @include transition();
   }
 }
-@mixin accordion-arrow {
+@mixin accordion-status {
   cursor: pointer;
   position: relative;
-  @include arrow();
-  &:before {
-    transform: translateY(-50%) rotateZ(45deg);
+  @include status();
+  &::before, &::after {
+    height: 2px;
+    width: 16px;
+  }
+  &::before {
+    transform: translateY(-50%) rotateZ(90deg);
   }
   &.active:before {
-    transform: translateY(-50%) rotateZ(-135deg);
+    transform: translateY(-50%) rotateZ(0deg);
   }
 }

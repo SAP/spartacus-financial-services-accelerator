@@ -8,12 +8,12 @@ ul[role='tablist'].nav-tabs {
         display: block;
     }
     .nav-item .nav-link {
-        background-color: $color-dark-grey;
-        color: $color-white;
+        background-color: var(--cx-g-color-text);
+        color: var(--cx-g-color-1);
         margin-right: 3px;
         &.active {
-            background-color: $color-light-grey;
-            color: $color-dark-grey;
+            background-color: var(--cx-g-color-4);
+            color: var(--cx-g-color-text);
             border: $border-grey;
             border-bottom: none;
         }

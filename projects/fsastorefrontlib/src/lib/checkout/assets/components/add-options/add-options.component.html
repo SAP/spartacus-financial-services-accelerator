@@ -18,10 +18,10 @@
         </div>
         <div class="col-12 col-md-3 align-self-center">
           <div *ngIf="!orderEntryData.removeable && orderEntryData.addable">
-            <button (click)="addProductToCart(orderEntryData.product?.code)" class="secondary-button secondary-button__default">{{ 'fscommon.add' | cxTranslate }}</button>
+            <button (click)="addProductToCart(orderEntryData.product?.code, orderEntryData.entryNumber)" class="secondary-button">{{ 'fscommon.add' | cxTranslate }}</button>
           </div>
           <div *ngIf="orderEntryData.removeable">
-            <button (click)="removeProductFromCart(orderEntryData)" class="secondary-button secondary-button__default secondary-button__default--opacity">{{ 'common.remove' | cxTranslate }}</button>
+            <button (click)="removeProductFromCart(orderEntryData)" class="secondary-button ">{{ 'common.remove' | cxTranslate }}</button>
           </div>
         </div>
       </div>
@@ -29,9 +29,9 @@
   </ng-container>
 </div>
 <ng-container *ngIf="entries$ != undefined">
-  <button class="primary-button primary-button__default primary-button__single-checkout col-md-3 col mt-4 float-right"
+  <button class="primary-button col-md-3 col mt-4 float-right"
     type="button" data-checkout-url="" (click)="next()">{{ 'fscommon.next' | cxTranslate }}</button>
 </ng-container>
 <ng-template #mandatoryNotAvailableButton let-title="title">
-  <button disabled type="button" class="secondary-button secondary-button__default secondary-button__default--opacity-disabled">{{title}}</button>
+  <button disabled type="button" class="secondary-button">{{title}}</button>
 </ng-template>

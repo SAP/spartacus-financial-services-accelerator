@@ -4,7 +4,7 @@
 
 .product-feature {
 	&__wrapper {
-		background-color: $color-light-grey;
+		background-color: var(--cx-g-color-4);
 	}
 	&__title {
 		text-transform: uppercase;
@@ -21,7 +21,7 @@
 		}
 	}
 	&__details {
-		color: $color-dark-grey;
+		color: var(--cx-g-color-text);
 		padding: 0 50px 0 70px;
 		font-size: 15px;
 		list-style-type: circle;

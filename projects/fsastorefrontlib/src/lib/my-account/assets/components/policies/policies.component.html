@@ -34,11 +34,10 @@
           </div>
           <div class="cards-button-wrapper cards-button-wrapper--border-primary">
             <div class="cards__button">
-                <a class="secondary-button secondary-button__default secondary-button__account-policies" 
-                routerLink="/my-account/my-policies/{{policy.policyNumber}}/{{policy.contractNumber}}" routerLinkActive="active">
-                {{ 'fscommon.details' | cxTranslate }}</a>
-              <a class="primary-button primary-button__default primary-button__account-policies" href="#">
-                  {{ 'claim.makeClaim' | cxTranslate }}</a>
+                <button class="secondary-button" routerLink="/my-account/my-policies/{{policy.policyNumber}}/{{policy.contractNumber}}" routerLinkActive="active">
+                  {{ 'fscommon.details' | cxTranslate }}
+                </button>
+                <button class="primary-button">{{ 'claim.makeClaim' | cxTranslate }}</button>
             </div>
           </div>
         </div>

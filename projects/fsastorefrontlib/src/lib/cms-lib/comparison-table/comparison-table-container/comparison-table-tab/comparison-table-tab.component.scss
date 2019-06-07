@@ -2,7 +2,7 @@
 @import 'variables-fsa';
 
 :host {
-    background-color: $color-light-grey;
+    background-color: var(--cx-g-color-4);
     display: flex;
     flex: 0 1 100%;
     border: $border-grey;
