@@ -1,0 +1,110 @@
+@import "../mixins-fsa";
+@import "../theme";
+
+.cards {
+	color: var(--cx-g-color-text);
+	&__wrapper {
+		border: $border-grey;
+		border-radius: 15px 15px 0 0;
+        text-align: center;
+		margin: 20px auto 20px;
+		position: relative;
+		display: block;
+		&--border-primary {
+			border-bottom: 1px solid var(--cx-g-color-secondary);
+		}
+		&--border-secondary {
+			border-bottom: 1px solid var(--cx-g-color-primary);
+		}
+	}
+	&__title {
+		background-color: var(--cx-g-color-5);
+		border-radius: 15px 15px 0 0;
+		padding: 20px 0;
+		& > * {
+			margin-top: 15px;
+		}
+		&--gradient-background {
+			@include linear-gradient-background(var(--cx-g-color-primary), var(--cx-g-color-9), 50%, 100%);
+		}
+		&--border-primary {
+			border-bottom: 4px solid var(--cx-g-color-secondary);
+		}
+		&--border-secondary {
+			border-bottom: 4px solid var(--cx-g-color-primary);
+		}
+		.images__wrapper {
+			background-color: transparent;
+			width: 70px;
+			height: auto;
+			padding: 0;
+			&--white-bck {
+				background-color: var(--cx-g-color-1);
+				border-radius: 50%;
+				padding: 10px;
+			}
+		}
+	}
+	&__caption,
+	&__info {
+		font-weight: bold;
+		&--color-primary {
+			color: var(--cx-g-color-secondary);
+		}
+		&--color-secondary {
+			color: var(--cx-g-color-primary);
+		}
+		&--color-white {
+			color: var(--cx-g-color-1);
+		}
+	}
+	&__details-wrapper {
+		.cards__data {
+			padding: 20px 0;
+			&:nth-of-type(even) {
+				background-color: var(--cx-g-color-5);
+			}
+			.title {
+				display: block;
+				font-weight: 600;
+			}
+		}
+		&--grey {
+			background-color: var(--cx-g-color-4);
+			.cards__data {
+				&:nth-of-type(even) {
+					background-color: var(--cx-g-color-4);
+				}
+			}
+		}
+	}
+	&-button-wrapper {
+		&--border-primary {
+			border-top: 1px solid var(--cx-g-color-secondary);
+		}
+		&--border-secondary {
+			border-top: 1px solid var(--cx-g-color-primary);
+		}
+	}
+	&__button {
+		margin: 0 auto;
+		padding: 40px;
+		max-width: 260px;
+		[disabled] {
+			opacity: 0.7;
+			cursor: not-allowed;
+		}
+		&--spacing-mid {
+			padding: 20px 40px;
+		}
+	}
+}
+.account-cards-actions {
+	position: absolute;
+	cursor: pointer;
+	top: 14px;
+	right: 14px;
+	.action-links {
+		color: var(--cx-g-color-primary);
+	}
+}

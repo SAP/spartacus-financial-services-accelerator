@@ -1,0 +1,49 @@
+@import '../mixins-fsa';
+@import '../theme';
+
+.products-details {
+    min-height: 200px;
+    &__name {
+        font-size: 20px;
+        min-height: 50px;
+        @include media-breakpoint-down(sm) {
+          min-height: 60px;
+          font-size: 18px;
+        }
+    }
+    &__main-price {
+        margin: 20px 0;
+        font-size: 40px;
+        @include media-breakpoint-down(sm) {
+          font-size: 24px;
+        }
+    }
+  }
+  .products-prices {
+    &__price-wrapper {
+        position: relative;
+        padding: 15px;
+        &:nth-child(even) {
+            background-color: transparent;
+        }
+        &:nth-child(odd) {
+            background-color: var(--cx-g-color-5);
+        }
+    }
+  }
+  .price-value {
+    @include media-breakpoint-down(sm) {
+      max-width: 100px;
+    }
+  }
+  .investments {
+    @include media-breakpoint-down(lg) {
+      min-height: 220px;
+    }
+    @include media-breakpoint-down(sm) {
+      min-height: 330px;
+    }
+  }
+  .ct-tooltip .arrow:before {
+    border-top-color: var(--cx-g-color-8);
+  }
