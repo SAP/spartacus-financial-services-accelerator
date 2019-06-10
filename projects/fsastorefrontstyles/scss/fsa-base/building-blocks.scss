@@ -1,55 +1,28 @@
 @import '../mixins-fsa';
 
-body {
-  font-size: $font-size-base;
-  color: var(--cx-g-color-text);
-}
-
-h1, .h1 { font-size: var(--cx-g-h1-font-size) }
-h2, .h2, .test { font-size: var(--cx-g-h2-font-size) }
-h3, .h3 { font-size: var(--cx-g-h3-font-size) }
-h4, .h4 { font-size: var(--cx-g-h4-font-size) }
-h5, .h5 { font-size: var(--cx-g-h5-font-size) }
-h6, .h6 { font-size: var(--cx-g-h6-font-size) }
-p {
-  font-size: var(--cx-g-text-font-size);
-}
-a {
-  @include transition();
-  &:hover {
-    text-decoration: none;
-  }
-}
-.link {
-  color: var(--cx-g-color-primary);
-  &:hover {
-    border-bottom: 1px solid var(--cx-g-color-primary);
-  }
-}
-.center1400 {
-  max-width: 1400px;
-  width: 100%;
-  margin: 0 auto;
-}
-.contentPadding {
-  padding: 20px 10px 0 10px;
-}
-//CSS Reset
-a {
-  @include transition();
-}
-button[disabled], html input[disabled] {
-  cursor: default;
-}
-button:focus {
-  outline: none;
-}
-$border-grey: $border-grey;
-
-// Stand-alone building blocks
 .info-container {
   background-color: var(--cx-g-color-4);
   border: $border-grey;
+}
+.clickable {
+  @include accordion-status();
+}
+.border-bottom-grey {
+  border-bottom: $border-grey;
+}
+.border-top-grey {
+  border-top: 1px solid var(--cx-g-color-3);
+}
+.warn {
+  color: var(--cx-g-color-warning);
+  font-weight: bold;
+}
+.notice {
+  color: var(--cx-g-color-primary);
+  font-weight: bold;
+  &--dark {
+    color: var(--cx-g-color-8);
+  }
 }
 .heading-headline {
   line-height: 35px;
@@ -83,23 +56,7 @@ $border-grey: $border-grey;
   text-align: center;
   padding: 2px;
 }
-.notice {
-  color: var(--cx-g-color-primary);
-  font-weight: bold;
-  &--dark {
-    color: var(--cx-g-color-8);
-  }
-}
-.warn {
-  color: var(--cx-g-color-warning);
-  font-weight: bold;
-}
-.border-bottom-grey {
-  border-bottom: $border-grey;
-}
-.border-top-grey {
-  border-top: 1px solid var(--cx-g-color-3);
-}
+
 .circle-image {
   background-color: var(--cx-g-color-7);
   border-radius: 50%;
@@ -147,9 +104,6 @@ $border-grey: $border-grey;
       border-radius: 50%;
       background-color: var(--cx-g-color-primary);
   }
-}
-.clickable {
-  @include accordion-status();
 }
 .underline-effect {
   &:before {

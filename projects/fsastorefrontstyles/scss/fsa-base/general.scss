@@ -1,0 +1,42 @@
+@import '../mixins-fsa';
+
+body {
+  font-size: $font-size-base;
+  color: var(--cx-g-color-text);
+}
+
+h1, .h1 { font-size: var(--cx-g-h1-font-size)}
+h2, .h2, .test { font-size: var(--cx-g-h2-font-size)}
+h3, .h3 { font-size: var(--cx-g-h3-font-size)}
+h4, .h4 { font-size: var(--cx-g-h4-font-size)}
+h5, .h5 { font-size: var(--cx-g-h5-font-size)}
+h6, .h6 { font-size: var(--cx-g-h6-font-size)}
+p {
+  font-size: var(--cx-g-text-font-size);
+}
+a {
+  @include transition();
+  &:hover {
+    text-decoration: none;
+  }
+}
+button[disabled], html input[disabled] {
+  cursor: default;
+}
+button:focus {
+  outline: none;
+}
+.link {
+  color: var(--cx-g-color-primary);
+  &:hover {
+    border-bottom: 1px solid var(--cx-g-color-primary);
+  }
+}
+.center1400 {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+.contentPadding {
+  padding: 20px 10px 0 10px;
+}
