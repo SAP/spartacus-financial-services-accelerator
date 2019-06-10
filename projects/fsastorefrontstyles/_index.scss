@@ -1,10 +1,10 @@
 //Spartacus styling
 @import '~@spartacus/styles/index';
+//FSA styling
 @import 'scss/root.scss';
 @import 'scss/mixins-fsa';
-
-@import 'scss/theme/index';
-@import 'scss/fonts';
 @import 'scss/overrides';
 @import 'scss/fsa-base';
- 
+
+@import 'scss/theme';
+@import 'scss/fonts';

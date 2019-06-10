@@ -1,0 +1,59 @@
+@import "../mixins-fsa";
+@import "../theme";
+
+button,
+.primary-button,
+.secondary-button,
+.action-button {
+	display: inline-block;
+	width: 100%;
+	padding: 5px;
+	margin: 6px 0;
+	border: 3px solid var(--cx-g-color-transparent);
+	border-radius: 4px;
+	font-size: 1rem;
+	font-weight: var(--cx-g-font-weight-normal);
+	white-space: nowrap;
+	-webkit-appearance: none;
+	text-transform: uppercase;
+	cursor: pointer;
+	@include transition;
+	&:disabled {
+		cursor: no-drop;
+	}
+}
+.primary-button {
+	color: var(--cx-g-color-1);
+	background-color: var(--cx-g-color-primary);
+	&:hover {
+		color: var(--cx-g-color-1);
+		background-color: var(--cx-g-color-7);
+	}
+	&:disabled {
+		opacity: 0.6;
+	}
+}
+.secondary-button {
+	color: var(--cx-g-color-1);
+	background-color: var(--cx-g-color-secondary);
+	&:hover {
+		color: var(--cx-g-color-1);
+		background-color: var(--cx-g-color-8);
+	}
+	&:disabled {
+		opacity: 0.6;
+	}
+}
+.action-button {
+	color: var(--cx-g-color-secondary);
+	background-color: var(--cx-g-color-transparent);
+	border: 3px solid var(--cx-g-color-secondary);
+	&:hover {
+		color: var(--cx-g-color-primary);
+		background-color: var(--cx-g-color-transparent);
+		border: 3px solid var(--cx-g-color-primary);
+	}
+	&:disabled {
+		opacity: 0.6;
+	}
+}
