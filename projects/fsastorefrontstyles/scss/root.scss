@@ -1,4 +1,4 @@
-@import 'variables-fsa';
+@import 'theme';
 
 :root {
     @each $color, $value in $fsa-colors {

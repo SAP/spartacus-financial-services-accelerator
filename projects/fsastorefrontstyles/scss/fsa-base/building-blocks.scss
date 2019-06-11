@@ -1,0 +1,121 @@
+@import '../mixins-fsa';
+
+.info-container {
+  background-color: var(--cx-g-color-4);
+  border: $border-grey;
+}
+.clickable {
+  @include accordion-status();
+}
+.border-bottom-grey {
+  border-bottom: $border-grey;
+}
+.border-top-grey {
+  border-top: 1px solid var(--cx-g-color-3);
+}
+.warn {
+  color: var(--cx-g-color-warning);
+  font-weight: bold;
+}
+.notice {
+  color: var(--cx-g-color-primary);
+  font-weight: bold;
+  &--dark {
+    color: var(--cx-g-color-8);
+  }
+}
+.heading-headline {
+  line-height: 35px;
+  padding: 20px 0;
+  text-align: left;
+  margin-bottom: 30px;
+  color: var(--cx-g-color-secondary);
+  font-weight: 700;
+  border-bottom: $border-grey;
+}
+.section-header__heading {
+  @include linear-gradient-background (var(--cx-g-color-primary), var(--cx-g-color-9), 50%, 100%);
+  border: none;
+  color: var(--cx-g-color-1);
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.6;
+  padding: 15px; 
+  text-align: center;
+}
+.images__size {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.images__wrapper {
+  border-radius: 50%;
+  background-color: #ffffff;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  padding: 2px;
+}
+.circle-image {
+  background-color: var(--cx-g-color-7);
+  border-radius: 50%;
+  @include box-shadow(0px, 0px, 9px, 1px, var(--cx-g-color-text), 70%);
+  margin: 0 25px;
+}
+.gradient-heading {
+  color: var(--cx-g-color-1);
+  font-size: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  line-height: 1.6;
+  @include linear-gradient-background( var(--cx-g-color-primary), var(--cx-g-color-9), 50%, 100% );
+}
+.list-data {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: var(--cx-g-color-1);
+  &--closed {
+    display: none;
+  }
+  &__list-item {
+    padding: 12px;
+    list-style: none;
+    background-color: var(--cx-g-color-1);
+  }
+  &__info {
+    position: relative;
+    display: inline-block;
+    padding-left: 20px;
+  }
+}
+.color-dot {
+  position: relative;
+  &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background-color: var(--cx-g-color-primary);
+  }
+}
+.underline-effect {
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: var(--cx-g-color-7);
+    width: 0;
+    height: 5px;
+    transition: all 300ms ease;
+  }
+  &:hover:before {
+      width: 100%;
+    }
+}
