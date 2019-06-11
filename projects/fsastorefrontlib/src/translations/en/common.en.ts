@@ -21,6 +21,7 @@ export const fscommon = {
     status: 'Status',
     moreInfo: 'More Info',
     product: 'Product',
+    insurance: 'Insurance',
     information: 'Information',
     duration: 'Duration',
     included: 'Included',

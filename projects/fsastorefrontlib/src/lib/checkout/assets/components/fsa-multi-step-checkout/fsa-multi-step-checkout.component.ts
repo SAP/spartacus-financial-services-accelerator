@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   CartDataService, CheckoutService, GlobalMessageService,
   GlobalMessageType, RoutingService, Address, PaymentDetails, UserService
@@ -17,6 +18,8 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
   step = 2;
   navs = checkoutNavBar;
   anonymous = true;
+  currentUrl : string;
+  currentCategory : string;
 
   constructor(
     protected checkoutService: CheckoutService,
@@ -25,12 +28,15 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
     protected routingService: RoutingService,
     protected globalMessageService: GlobalMessageService,
     protected cd: ChangeDetectorRef,
-    protected userService: UserService
+    protected userService: UserService,
+    private router : Router
   ) {
     super(checkoutService, cartService, cartDataService, routingService, globalMessageService, cd);
   }
 
   processSteps() {
+    this.currentUrl = this.router.url;
+    this.currentCategory = this.currentUrl.split('_')[1];
     // step2: add main product
     this.subscriptions.push(
       this.cartService.mainProductAdded
