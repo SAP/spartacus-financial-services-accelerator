@@ -6,10 +6,8 @@
       <div *ngFor="let quote of quotes.insuranceQuotes" class="col-md-4 cards">
         <div class="cards__wrapper cards__wrapper--border-secondary">
           <div class="cards__title cards__title--border-secondary">
-            <span class="images images__wrapper">
-              <span class="images images__wrapper images__wrapper--size">
-                <img class="images__size" [src]="getBaseUrl()+quote.defaultCategory.image.url" alt="">
-              </span>
+            <span class="image-wrapper">
+              <img class="image-item" [src]="getBaseUrl()+quote.defaultCategory.image.url" alt="">
             </span>
             <h3 class="cards__caption cards__caption--color-secondary">
               {{quote.defaultCategory?.name}}</h3>

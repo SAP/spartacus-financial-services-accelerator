@@ -1,7 +1,7 @@
 <ng-container *ngIf="policy$ | async as policy">
     <h2 class="policy-spec account-section-content__headline mt-5">
-        <span *ngIf="policy.mainProduct && policy.mainProduct.coverageProduct" class="images images__wrapper">
-            <img class="images__size" [src]="getBaseUrl()+ policy.mainProduct.coverageProduct.images[0].url" alt="">
+        <span *ngIf="policy.mainProduct && policy.mainProduct.coverageProduct" class="image-wrapper">
+            <img class="image-item" [src]="getBaseUrl()+ policy.mainProduct.coverageProduct.images[0].url" alt="">
         </span>
         <span *ngIf="policy.categoryData" class="account-section-content__headline--title">
         {{policy.categoryData.name}} {{ 'policy.policy' | cxTranslate }} <br>

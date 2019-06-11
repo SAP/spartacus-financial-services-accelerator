@@ -15,8 +15,8 @@
             <div class="col">
               <div class=row>
                 <div class="col-4">
-                  <div class="images__wrapper">
-                    <img class="images__size" [src]="getBaseUrl()+ policy.mainProduct.coverageProduct.images[0]?.url" alt="">
+                  <div class="image-wrapper">
+                    <img class="image-item" [src]="getBaseUrl()+ policy.mainProduct.coverageProduct.images[0]?.url" alt="">
                   </div>
                 </div>
                 <div class="col-8">
@@ -69,7 +69,7 @@
               <div class="cards__wrapper">
                 <div class="cards__title cards__title--gradient-background">
                   <span class="images images__wrapper images__wrapper--white-bck">
-                    <img class="images__size" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0]?.url" alt="">
+                    <img class="image-item" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0]?.url" alt="">
                   </span>
                   <h4 class="cards__caption cards__caption--color-white">
                     {{policy.categoryData?.name}}

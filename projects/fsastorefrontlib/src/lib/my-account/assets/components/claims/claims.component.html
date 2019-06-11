@@ -8,14 +8,12 @@
             <a class="action-links action-links-secondary-button" (click)="deleteClaim(claim.claimNumber)">x</a>
           </div>
           <div class="cards__title cards__title--border-primary">
-            <span class="images images__wrapper">
-              <span class="images images__wrapper images__wrapper--size">
-                  <img *ngIf="claim.incidentType != undefined; else: noIncidentType"
-                    class="images__size"
-                    [src]="getBaseUrl() + claim.incidentType?.icon.url"
-                    alt="{{claim.incidentType?.icon.alt}}"
-                  />
-              </span>
+            <span class="image-wrapper">
+              <img *ngIf="claim.incidentType != undefined; else: noIncidentType"
+                class="image-item"
+                [src]="getBaseUrl() + claim.incidentType?.icon.url"
+                alt="{{claim.incidentType?.icon.alt}}"
+              />
             </span>
             <h3 class="cards__caption cards__caption--color-primary">
               <span *ngIf="claim.incidentType != undefined; else: na">
@@ -69,7 +67,7 @@
     {{ 'fscommon.notAvailable' | cxTranslate }}
 </ng-template>
 <ng-template #noIncidentType>
-  <img class="images__size" [src]="getNaImagelink()" alt="">
+  <img class="image-item" [src]="getNaImagelink()" alt="">
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>

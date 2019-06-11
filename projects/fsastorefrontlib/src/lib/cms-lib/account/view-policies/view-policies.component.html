@@ -25,8 +25,8 @@
     <li class="my-policies__my-policy">
         <a routerLink="/my-account/my-policies/{{policy.policyNumber}}/{{policy.contractNumber}}" routerLinkActive="active">
             <div class="my-policies__data-container">
-                <span class="images images__wrapper">
-                        <img class="images__size" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0].url" alt="">
+                <span class="image-wrapper">
+                        <img class="image-item" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0].url" alt="">
                     </span>
                 <div class="my-policies__name-number">
                     <span class="my-policies__name">{{policy.categoryData?.name}}</span>

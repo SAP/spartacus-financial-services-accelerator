@@ -7,8 +7,8 @@
                     <div class="accordion">
                         <div class="row no-gutters section-header__heading">
                             <div class="col-12 col-md-2 accordion-header__icon">
-                                <span *ngIf="order.deliveryOrderGroups[0]?.entries[0]?.product?.images?.length > 0" class="images images__wrapper images__wrapper--size">
-                                    <img class="images__size" [src]="getBaseUrl() + order.deliveryOrderGroups[0]?.entries[0]?.product?.images[3]?.url" />
+                                <span *ngIf="order.deliveryOrderGroups[0]?.entries[0]?.product?.images?.length > 0" class="image-wrapper">
+                                    <img class="image-item" [src]="getBaseUrl() + order.deliveryOrderGroups[0]?.entries[0]?.product?.images[3]?.url" />
                                 </span>
                             </div>
                             <div class="col-12 col-md-10 accordion-header__summary-line-text">

@@ -22,8 +22,8 @@
     <div *ngFor="let quote of quotes.insuranceQuotes | slice: 0:max">
         <li class="my-quotes__my-quote">
             <div class="my-quotes__data-container">
-                <span class="images images__wrapper">
-                        <img class="images__size" [src]="getBaseUrl()+quote.defaultCategory?.image.url" alt="">
+                <span class="image-wrapper">
+                        <img class="image-item" [src]="getBaseUrl()+quote.defaultCategory?.image.url" alt="">
                         </span>
                 <div class="my-quotes__name-number">
                     <span class="my-quotes__name">{{quote.planName}}</span>
