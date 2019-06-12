@@ -7,7 +7,6 @@ import { QuoteService } from '../../services/quote.service';
 @Component({
   selector: 'fsa-quotes',
   templateUrl: './quotes.component.html',
-  styleUrls: ['./quotes.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class QuotesComponent implements OnInit {

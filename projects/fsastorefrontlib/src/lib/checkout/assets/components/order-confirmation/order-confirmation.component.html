@@ -6,12 +6,12 @@
                 <div class="col-12 col-md-8">
                     <div class="accordion">
                         <div class="row no-gutters section-header__heading">
-                            <div class="col-12 col-md-2 accordion-header__icon">
+                            <div class="col-12 col-md-2">
                                 <span *ngIf="order.deliveryOrderGroups[0]?.entries[0]?.product?.images?.length > 0" class="image-wrapper">
                                     <img class="image-item" [src]="getBaseUrl() + order.deliveryOrderGroups[0]?.entries[0]?.product?.images[3]?.url" />
                                 </span>
                             </div>
-                            <div class="col-12 col-md-10 accordion-header__summary-line-text">
+                            <div class="col-12 col-md-10 accordion-header-summary-caption">
                                 <div class="row no-gutters">
                                     <div class="col-xs-12 col-6">
                                         {{ order.entries[0]?.product?.defaultCategory?.name }}
@@ -28,10 +28,10 @@
                                     [title]="order.entries[0]?.product?.defaultCategory?.name + ' ' + ('fscommon.information' | cxTranslate)">
                                     <div class="container">
                                         <div class="row justify-content-center">
-                                            <ul class="col-12 accordion--list">
+                                            <ul class="col-12 accordion-list">
                                                 <!-- To be uncommented once we have data from yForms -->
                                                 <!-- <ng-container *ngFor="let item of order?.insuranceQuote?.quoteDetails?.entry">
-                                                    <li class="accordion--list-item row">
+                                                    <li class="accordion-list-item row">
                                                         <div class="col-6">
                                                             {{ item.key }}
                                                         </div>
@@ -40,7 +40,7 @@
                                                         </div>
                                                     </li>
                                                 </ng-container> -->
-                                                <li class="accordion--list-item row">
+                                                <li class="accordion-list-item row">
                                                     <div class="col-6 item-label">
                                                         {{ 'quote.quoteStatus' | cxTranslate }}
                                                     </div>
@@ -57,9 +57,9 @@
                         <fsa-accordion-item [opened]="ref.children.length > 0 ? false : true" [title]="'fscommon.whatsIncluded' | cxTranslate">
                             <div class="container">
                                 <div class="row justify-content-center">
-                                    <ul class="col-12 accordion--list">
+                                    <ul class="col-12 accordion-list">
                                         <ng-container *ngFor="let item of (order.deliveryOrderGroups[0]?.entries)[0]?.product?.price?.oneTimeChargeEntries">
-                                            <li class="accordion--list-item row">
+                                            <li class="accordion-list-item row">
                                               <div class="col-6 item-label">
                                                 {{ item.billingTime?.name }}
                                               </div>
@@ -78,9 +78,9 @@
                         <fsa-accordion-item [title]="'fscommon.addedByYou' | cxTranslate">
                             <div class="container">
                                 <div class="row justify-content-center">
-                                    <ul class="col-12 accordion--list">
+                                    <ul class="col-12 accordion-list">
                                         <ng-container *ngFor="let item of order.deliveryOrderGroups[0]?.entries">
-                                            <li class="accordion--list-item row">
+                                            <li class="accordion-list-item row">
                                                 <div class="col-12 item-label">
                                                     {{ item.product?.name }}
                                                 </div>
@@ -95,10 +95,10 @@
                             <fsa-accordion-item [title]="'fscommon.investementDetails' | cxTranslate">
                                 <div class="container">
                                     <div class="row justify-content-center">
-                                        <ul class="col-12 accordion--list">
+                                        <ul class="col-12 accordion-list">
                                             <ng-container *ngFor="let item of order.deliveryOrderGroups[0]?.entries">
                                                 <ng-container *ngFor="let investmentDetail of item.product?.investments">
-                                                    <li class="accordion--list-item row">
+                                                    <li class="accordion-list-item row">
                                                         <div class="col-12">
                                                             {{investmentDetail.investmentType?.fundName}}:
                                                             {{investmentDetail.distributionPercentage}}% </div>
@@ -119,8 +119,8 @@
                         <fsa-accordion-item [title]="'fscommon.personalDetails' | cxTranslate">
                             <div class="container">
                                 <div class="row justify-content-center">
-                                    <ul class="col-12 accordion--list">
-                                        <li class="accordion--list-item row">
+                                    <ul class="col-12 accordion-list">
+                                        <li class="accordion-list-item row">
                                           <div class="col-6 item-label">
                                             {{ 'policy.policyHolder' | cxTranslate }}
                                           </div>
@@ -128,7 +128,7 @@
                                             Mrs. Test Tester
                                           </div>
                                         </li>
-                                        <li class="accordion--list-item row">
+                                        <li class="accordion-list-item row">
                                           <div class="col-6 item-label">
                                             Phone Number
                                           </div>
@@ -136,7 +136,7 @@
                                             323535
                                           </div>
                                         </li>
-                                        <li class="accordion--list-item row">
+                                        <li class="accordion-list-item row">
                                           <div class="col-6 item-label">
                                             Email Address
                                           </div>
@@ -144,7 +144,7 @@
                                             donna@moore.com
                                           </div>
                                         </li>
-                                        <li class="accordion--list-item row">
+                                        <li class="accordion-list-item row">
                                           <div class="col-6 item-label">
                                             Address Line 1
                                           </div>
@@ -152,7 +152,7 @@
                                             Mocked Address
                                           </div>
                                         </li>
-                                        <li class="accordion--list-item row">
+                                        <li class="accordion-list-item row">
                                           <div class="col-6 item-label">
                                             City
                                           </div>
@@ -160,7 +160,7 @@
                                             Belgrade
                                           </div>
                                         </li>
-                                        <li class="accordion--list-item row">
+                                        <li class="accordion-list-item row">
                                           <div class="col-6 item-label">
                                             Postcode
                                           </div>
@@ -168,7 +168,7 @@
                                             11090
                                           </div>
                                         </li>
-                                        <li class="accordion--list-item row">
+                                        <li class="accordion-list-item row">
                                           <div class="col-6 item-label">
                                             Country
                                           </div>

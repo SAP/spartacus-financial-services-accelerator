@@ -7,7 +7,6 @@ import { PolicyService } from '../../services';
 @Component({
   selector: 'fsa-policies',
   templateUrl: './policies.component.html',
-  styleUrls: ['./policies.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PoliciesComponent implements OnInit {

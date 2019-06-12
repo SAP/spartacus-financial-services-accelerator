@@ -1,5 +1,5 @@
 .accordion {
-    &-header__summary-line-text {
+    .accordion-header-summary-caption {
         @include media-breakpoint-up(md) {
             text-align: left;
           }
@@ -9,7 +9,7 @@
         height: 30px;
         padding: 2px;
     }
-    &--heading {
+    .accordion-heading {
         color: var(--cx-g-color-text);
         background: var(--cx-g-color-4);
         border-top: 5px solid var(--cx-g-color-primary);
@@ -27,7 +27,17 @@
             }
         }
     }
-    &-item {
+    .accordion-item-wrapper {
+        display: flex;
+        transition: all 0.5s ease-in-out;
+        max-height: 0;
+        overflow: hidden;
+        &.active {
+            padding: 40px 0;
+            max-height: 1200px;
+        }
+    }
+    .accordion-item {
         margin-top: 20px;
         border: $border-grey;
         border-top: none;
@@ -40,28 +50,28 @@
             z-index: 2;
         }
     }
-    &--list{
+    .accordion-list{
         padding: 0 8%;
-        &-item  {
-            border-bottom: 1px solid var(--cx-g-color-3);
-            padding: 14px 0;
-            margin: 0;
-            &:last-child {
-                border-bottom: none;
-            }
-            .item-label {
-                padding-left: 30px;
-                &::before {
-                    display: block;
-                    content: '';
-                    width: 6px;
-                    height: 6px;
-                    position: absolute;
-                    background-color: var(--cx-g-color-primary);
-                    border-radius: 50%;
-                    left: 10px;
-                    top: 8px;
-                }
+    }
+    .accordion-list-item  {
+        border-bottom: 1px solid var(--cx-g-color-3);
+        padding: 14px 0;
+        margin: 0;
+        &:last-child {
+            border-bottom: none;
+        }
+        .item-label {
+            padding-left: 30px;
+            &::before {
+                display: block;
+                content: '';
+                width: 6px;
+                height: 6px;
+                position: absolute;
+                background-color: var(--cx-g-color-primary);
+                border-radius: 50%;
+                left: 10px;
+                top: 8px;
             }
         }
     }
@@ -69,31 +79,5 @@
         @include media-breakpoint-down(xs) {
           text-align: right;
         }
-    }
-    &-item--wrapper {
-        display: flex;
-        transition: all 0.5s ease-in-out;
-        max-height: 0;
-        overflow: hidden;
-        &.active {
-            padding: 40px 0;
-            max-height: 1200px;
-        }
-    }
-    .contact-box {
-        text-align: center;
-		background-color: var(--cx-g-color-1);
-		border-radius: 5px;
-		@include box-shadow(0px, 0px, 9px, 1px, var(--cx-g-color-text), 0.3);
-		padding: 20px 0;
-		margin: 0 4% 70px;
-		@include media-breakpoint-down(sm) {
-			padding: 25px 0 20px;
-        }
-        .contact-info {
-            margin: 20px 0 10px; 
-            font-weight: var(--cx-g-font-weight-semi);
-            font-size: 16px;
-        }
-    }   
+    }  
 }

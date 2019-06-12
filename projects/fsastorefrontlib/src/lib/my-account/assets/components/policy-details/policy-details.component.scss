@@ -1,0 +1,20 @@
+@import 'mixins-fsa';
+@import 'theme';
+@import '~bootstrap/scss/mixins/breakpoints';
+
+.content-box {
+    text-align: center;
+    background-color: var(--cx-g-color-1);
+    border-radius: 5px;
+    @include box-shadow(0px, 0px, 9px, 1px, var(--cx-g-color-text), 0.3);
+    padding: 20px 0;
+    margin: 0 4% 70px;
+    @include media-breakpoint-down(sm) {
+        padding: 25px 0 20px;
+    }
+    .content-box-info {
+        margin: 20px 0 10px; 
+        font-weight: var(--cx-g-font-weight-semi);
+        font-size: 16px;
+    }
+} 

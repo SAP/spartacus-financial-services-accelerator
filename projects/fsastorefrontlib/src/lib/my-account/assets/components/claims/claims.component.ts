@@ -13,7 +13,6 @@ import { ClaimService } from '../../services';
 @Component({
   selector: 'fsa-claims',
   templateUrl: './claims.component.html',
-  styleUrls: ['./claims.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
