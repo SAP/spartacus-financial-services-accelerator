@@ -13,7 +13,7 @@
         color: var(--cx-g-color-text);
         background: var(--cx-g-color-4);
         border-top: 5px solid var(--cx-g-color-primary);
-        font-weight: 600;
+        font-weight: var(--cx-g-font-weight-bold);
         line-height: 1.6;
         margin-bottom: 0;
         padding: 8px 60px 12px;
@@ -92,7 +92,7 @@
         }
         .contact-info {
             margin: 20px 0 10px; 
-            font-weight: 600;
+            font-weight: var(--cx-g-font-weight-semi);
             font-size: 16px;
         }
     }   

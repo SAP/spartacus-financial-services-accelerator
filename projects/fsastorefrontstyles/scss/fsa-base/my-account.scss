@@ -28,7 +28,7 @@
       display: block;
       color: var(--cx-g-color-text);
       font-size: 22px;
-      font-weight: 600;
+      font-weight: var(--cx-g-font-weight-semi);
       @include media-breakpoint-down(md) {
         font-size:22px;
         line-height:30px;
@@ -42,7 +42,7 @@
       border-bottom: $border-grey;
         color: var(--cx-g-color-text);
         padding-bottom: 10px;
-        font-weight: 600;
+        font-weight: var(--cx-g-font-weight-semi);
       @include media-breakpoint-down(md) {
         font-size: 20px;
       }

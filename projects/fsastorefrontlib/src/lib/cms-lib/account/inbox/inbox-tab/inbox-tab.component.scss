@@ -24,7 +24,7 @@
 		background-color: var(--cx-g-color-6);
 		color: var(--cx-g-color-1);
 		padding: 10px;
-		font-weight: 600;
+		font-weight: var(--cx-g-font-weight-semi);
 		display: block;
 		&:hover {
 			background-color: var(--cx-g-color-1);
