@@ -5,7 +5,6 @@ import { Component, Input } from '@angular/core';
   templateUrl: './accordion-item.component.html'
 })
 export class AccordionItemComponent {
-  @Input() withIcon: boolean;
   @Input() icon: string;
   @Input() opened = false;
   @Input() title: string;
