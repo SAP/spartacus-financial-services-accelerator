@@ -13,6 +13,18 @@
 .border-top-grey {
   border-top: 1px solid var(--cx-g-color-3);
 }
+.border-bottom-primary {
+  border-bottom-color: var(--cx-g-color-primary);
+}
+.border-bottom-secondary {
+  border-bottom-color: var(--cx-g-color-secondary);
+}
+.border-top-primary {
+  border-top-color: var(--cx-g-color-primary);
+}
+.border-top-secondary {
+  border-top-color: var(--cx-g-color-secondary);
+}
 .warn {
   color: var(--cx-g-color-warning);
   font-weight: bold;
@@ -33,7 +45,7 @@
   font-weight: 700;
   border-bottom: $border-grey;
 }
-.section-header__heading {
+.section-header-heading {
   @include linear-gradient-background (var(--cx-g-color-primary), var(--cx-g-color-9), 50%, 100%);
   border: none;
   color: var(--cx-g-color-1);

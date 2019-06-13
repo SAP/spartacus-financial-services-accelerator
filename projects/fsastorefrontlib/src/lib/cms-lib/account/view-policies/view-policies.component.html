@@ -1,42 +1,40 @@
 <ng-container *ngIf="component$ | async as component">
-    <div *ngIf="!anonymous$; else anonymousLogin">
+    <ng-container *ngIf="!anonymous$; else anonymousLogin">
         <ng-container *ngIf="policiesLoaded$ | async; else loading">
-            <div *ngIf="policies$ | async as policies">
+            <ng-container *ngIf="policies$ | async as policies">
                 <div class="review__wrapper">
-                    <div class="review__policies" *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
+                    <ng-container *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
                         <div class="my-policies">
-                            <h2 class="my-policies__title">{{ 'policy.viewPolicies' | cxTranslate }}</h2>
+                            <h2 class="fs-items-title">{{ 'policy.viewPolicies' | cxTranslate }}</h2>
                             <ul>
                                 <ng-container *ngTemplateOutlet="policiesList; context:{policies: policies, max: (allPoliciesDisplayed$ ? policies?.insurancePolicies?.length : component.numberOfPoliciesToDisplay)}"></ng-container>
                             </ul>
-                            <div *ngIf = "policies?.insurancePolicies?.length > component.numberOfPoliciesToDisplay">
+                            <ng-container *ngIf = "policies?.insurancePolicies?.length > component.numberOfPoliciesToDisplay">
                                 <ng-container *ngTemplateOutlet="showAllPoliciesButton context: {showAll: (allPoliciesDisplayed$ ? false : true)}"></ng-container>
-                            </div>  
+                            </ng-container>  
                         </div>
-                    </div>
+                    </ng-container>
                 </div>
-            </div>
+            </ng-container>
         </ng-container>
-    </div>
+    </ng-container>
 </ng-container>
 
 <ng-template #policiesList let-policies="policies" let-max="max">
-<div *ngFor="let policy of policies.insurancePolicies | slice: 0:max">
-    <li class="my-policies__my-policy">
+    <li *ngFor="let policy of policies.insurancePolicies | slice: 0:max" class="fs-items-item">
         <a routerLink="/my-account/my-policies/{{policy.policyNumber}}/{{policy.contractNumber}}" routerLinkActive="active">
-            <div class="my-policies__data-container">
+            <div class="fs-items-data-container background-hover-secondary">
                 <span class="image-wrapper">
                         <img class="image-item" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0].url" alt="">
                     </span>
-                <div class="my-policies__name-number">
-                    <span class="my-policies__name">{{policy.categoryData?.name}}</span>
-                    <span class="my-policies__number">{{policy.contractNumber}}</span>
+                <div class="fs-items-name-number">
+                    <span class="fs-items-name">{{policy.categoryData?.name}}</span>
+                    <span class="fs-items-number">{{policy.contractNumber}}</span>
                 </div>
-                    <span class="my-policies__add-infos">{{policy.policyEndDate}}</span>
+                    <span class="fs-items-add-infos">{{policy.policyEndDate}}</span>
             </div>
         </a>
     </li>
-</div>
 </ng-template>
 
 <ng-template #showAllPoliciesButton let-showAll="showAll">
@@ -46,9 +44,9 @@
 </ng-template>
 
 <ng-template #noPolicies>
-    <div class="none-policies">
-        <h2 class="none-policies__title">{{ 'policy.viewPolicies' | cxTranslate }}</h2>
-        <p class="none-policies__content">- {{ 'policy.finishQuoteToGetPolicy' | cxTranslate }}</p>
+    <div class="empty-block">
+        <h2 class="title">{{ 'policy.viewPolicies' | cxTranslate }}</h2>
+        <p class="content">- {{ 'policy.finishQuoteToGetPolicy' | cxTranslate }}</p>
     </div>
 </ng-template>
 

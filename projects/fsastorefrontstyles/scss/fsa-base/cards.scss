@@ -11,18 +11,6 @@
   .color-secondary, &.color-secondary {
     color: var(--cx-g-color-secondary);
   }
-  .border-bottom-primary, &.border-bottom-primary {
-    border-bottom-color: var(--cx-g-color-primary);
-  }
-  .border-bottom-secondary, &.border-bottom-secondary {
-    border-bottom-color: var(--cx-g-color-secondary);
-  }
-  .border-top-primary, &.border-top-primary {
-    border-top-color: var(--cx-g-color-primary);
-  }
-  .border-top-secondary, &.border-top-secondary {
-    border-top-color: var(--cx-g-color-secondary);
-  }
 }
 .info-card-title {
   background-color: var(--cx-g-color-5);
