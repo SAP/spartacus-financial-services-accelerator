@@ -8,7 +8,6 @@ import { OccBillingTimeService } from '../../../../../occ/billing-time/billing-t
 @Component({
   selector: 'fsa-comparison-table-panel',
   templateUrl: './comparison-table-panel.component.html',
-  styleUrls: ['./comparison-table-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ComparisonTablePanelComponent implements OnInit {

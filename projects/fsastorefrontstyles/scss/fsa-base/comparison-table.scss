@@ -1,49 +1,120 @@
 @import '../mixins-fsa';
 @import '../theme';
 
+.products-wrapper {
+  ngb-tabset {
+    flex: 0 1 100%;
+  }
+  fsa-comparison-table-tab {
+    background-color: var(--cx-g-color-4);
+    display: flex;
+    flex: 0 1 100%;
+    border: $border-grey;
+    border-top: none;
+    padding: 0 10px;
+    overflow: hidden;
+    .table-tab {
+      flex: 0 1 100%;
+    }
+  }
+  fsa-comparison-table-panel {
+    display: block;
+    width: 100%;
+    .product-grid-item {
+      float: left;
+      width: 25%;
+      @include media-breakpoint-down(sm) {
+        width: 44%;
+      }
+    }
+    .product-grid-items {
+      float: left;
+      display: flex;
+      width: 75%;
+      overflow-y: hidden;
+      overflow-x: auto;
+      @include media-breakpoint-down(sm) {
+        width: 56%;
+        margin-right: -65px;
+        border-left: $border-grey;
+      }
+    }
+    .products-details,
+    .products-prices {
+      padding-right: 5px;
+    }
+    .price-name,
+    .price-tooltip {
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .price-name {
+      line-height: 1.2;
+      max-width: calc(100% - 6vw);
+      @include ellipsis;
+    }
+    .fsa-tooltip {
+      @include absolute-center;
+      right: 5%;
+    }
+  }
+  fsa-comparison-table-panel-item {
+    position: relative;
+    z-index: 1;
+    flex: 0 1 100%;
+    padding: 0 5px;
+    border-left: 1px dashed var(--cx-g-color-3);
+    text-align: center;
+    @include media-breakpoint-down(sm) {
+      &:first-of-type {
+        border-left: none;
+      }
+    }
+  }
+}
 .products-details {
-    min-height: 200px;
-    &__name {
-        font-size: 20px;
-        min-height: 50px;
-        @include media-breakpoint-down(sm) {
-          min-height: 60px;
-          font-size: 18px;
-        }
-    }
-    &__main-price {
-        margin: 20px 0;
-        font-size: 40px;
-        @include media-breakpoint-down(sm) {
-          font-size: 24px;
-        }
-    }
-  }
-  .products-prices {
-    &__price-wrapper {
-        position: relative;
-        padding: 15px;
-        &:nth-child(even) {
-            background-color: transparent;
-        }
-        &:nth-child(odd) {
-            background-color: var(--cx-g-color-5);
-        }
-    }
-  }
-  .price-value {
+  min-height: 200px;
+  &__name {
+    font-size: 20px;
+    min-height: 50px;
     @include media-breakpoint-down(sm) {
-      max-width: 100px;
+      min-height: 60px;
+      font-size: 18px;
     }
   }
-  .investments {
-    @include media-breakpoint-down(lg) {
-      min-height: 220px;
-    }
+  &__main-price {
+    margin: 20px 0;
+    font-size: 40px;
     @include media-breakpoint-down(sm) {
-      min-height: 330px;
+      font-size: 24px;
     }
   }
-  .ct-tooltip .arrow:before {
-    border-top-color: var(--cx-g-color-8);
+}
+.products-prices {
+  &__price-wrapper {
+    position: relative;
+    padding: 15px;
+    &:nth-child(even) {
+      background-color: transparent;
+    }
+    &:nth-child(odd) {
+      background-color: var(--cx-g-color-5);
+    }
   }
+}
+.price-value {
+  @include media-breakpoint-down(sm) {
+    max-width: 100px;
+  }
+}
+.investments {
+  @include media-breakpoint-down(lg) {
+    min-height: 220px;
+  }
+  @include media-breakpoint-down(sm) {
+    min-height: 330px;
+  }
+}
+.ct-tooltip .arrow:before {
+  border-top-color: var(--cx-g-color-8);
+}
