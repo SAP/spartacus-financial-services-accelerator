@@ -183,50 +183,48 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-4">
-                    <div class="short-overview short-overview--right">
-                        <div class="short-overview__heading gradient-heading">
+                    <div class="short-overview">
+                        <div class="gradient-heading text-center">
                             {{ 'quote.myQuote' | cxTranslate }}
                         </div>
-                        <div class="short-overview__content">
-                            <div class="short-overview__items">
-                                <div class="short-overview__item row">
-                                    <div class="short-overview__item-name col-7">
-                                        {{ 'quote.quoteId' | cxTranslate }}:
-                                    </div>
-                                    <div class="short-overview__item-price col-5">
-                                        {{ order.code }}
-                                    </div>
+                        <div class="short-overview-content">
+                            <div class="short-overview-item row">
+                                <div class="short-overview-title col-7">
+                                    {{ 'quote.quoteId' | cxTranslate }}:
                                 </div>
-                                <div class="short-overview__item row">
-                                    <div class="short-overview__item-name col-7">
-                                        {{ 'fscommon.paymentFrequency' | cxTranslate }}:
-                                    </div>
-                                    <div class="short-overview__item-price col-5">
-                                        {{ order.insuranceQuote?.paymentFrequency }}
-                                    </div>
+                                <div class="short-overview-value col-5">
+                                    {{ order.code }}
                                 </div>
-                                <div class="short-overview__item row">
-                                    <div class="short-overview__item-name col-7">
-                                        {{ 'fscommon.startDate' | cxTranslate }}:
-                                    </div>
-                                    <div class="short-overview__item-price col-5">
-                                        {{ order.insuranceQuote?.startDate }}
-                                    </div>
+                            </div>
+                            <div class="short-overview-item row">
+                                <div class="short-overview-title col-7">
+                                    {{ 'fscommon.paymentFrequency' | cxTranslate }}:
                                 </div>
-                                <div class="short-overview__item row">
-                                    <div class="short-overview__item-name col-7">
-                                        {{ order.deliveryOrderGroups[0]?.entries[0]?.product?.name }}
-                                    </div>
-                                    <div class="short-overview__item-price col-5">
-                                        {{ order.totalPrice?.formattedValue }}
-                                    </div>
+                                <div class="short-overview-value col-5">
+                                    {{ order.insuranceQuote?.paymentFrequency }}
                                 </div>
-                        </div>
-                            <div class="short-overview__item short-overview__item--highlighted row">
-                                <div class="short-overview__item-name col-6">
+                            </div>
+                            <div class="short-overview-item row">
+                                <div class="short-overview-title col-7">
+                                    {{ 'fscommon.startDate' | cxTranslate }}:
+                                </div>
+                                <div class="short-overview-value col-5">
+                                    {{ order.insuranceQuote?.startDate }}
+                                </div>
+                            </div>
+                            <div class="short-overview-item row">
+                                <div class="short-overview-title col-7">
+                                    {{ order.deliveryOrderGroups[0]?.entries[0]?.product?.name }}
+                                </div>
+                                <div class="short-overview-value col-5">
+                                    {{ order.totalPrice?.formattedValue }}
+                                </div>
+                            </div>
+                            <div class="highlighted row">
+                                <div class="short-overview-title col-6">
                                     {{ 'fscommon.orderTotal' | cxTranslate }}:
                                 </div>
-                                <div class="short-overview__item-price col-6">{{ order.totalPrice?.formattedValue }}</div>
+                                <div class="short-overview-value col-6">{{ order.totalPrice?.formattedValue }}</div>
                             </div>
                         </div>
                     </div>
