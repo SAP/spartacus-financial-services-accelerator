@@ -3,7 +3,7 @@
         <span *ngIf="policy.mainProduct && policy.mainProduct.coverageProduct" class="image-wrapper">
             <img class="image-item" [src]="getBaseUrl()+ policy.mainProduct.coverageProduct.images[0].url" alt="">
         </span>
-        <h2>
+        <h4>
             <span *ngIf="policy.categoryData" class="overview-section-title">
             {{policy.categoryData.name}} {{ 'policy.policy' | cxTranslate }} <br>
                 {{policy.mainProduct.coverageProduct.name}}
@@ -11,7 +11,7 @@
             <span class="overview-section-value">
                 {{policy.policyNumber}}
             </span>
-        </h2>
+        </h4>
         <a class="overview-section-link" 
         routerLink="/my-account/my-policies/" routerLinkActive="active">{{ 'common.back' | cxTranslate }}</a>
     </div>
