@@ -1,18 +1,20 @@
 <ng-container *ngIf="policy$ | async as policy">
-    <h2 class="policy-spec account-section-content__headline mt-5">
+    <div class="overview-section mb-5">
         <span *ngIf="policy.mainProduct && policy.mainProduct.coverageProduct" class="image-wrapper">
             <img class="image-item" [src]="getBaseUrl()+ policy.mainProduct.coverageProduct.images[0].url" alt="">
         </span>
-        <span *ngIf="policy.categoryData" class="account-section-content__headline--title">
-        {{policy.categoryData.name}} {{ 'policy.policy' | cxTranslate }} <br>
-            {{policy.mainProduct.coverageProduct.name}}
-        </span>
-        <span class="account-section-content__headline--number">
-            {{policy.policyNumber}}
-        </span>
-        <a class="account-section-content__headline--back" 
+        <h2>
+            <span *ngIf="policy.categoryData" class="overview-section-title">
+            {{policy.categoryData.name}} {{ 'policy.policy' | cxTranslate }} <br>
+                {{policy.mainProduct.coverageProduct.name}}
+            </span>
+            <span class="overview-section-value">
+                {{policy.policyNumber}}
+            </span>
+        </h2>
+        <a class="overview-section-link" 
         routerLink="/my-account/my-policies/" routerLinkActive="active">{{ 'common.back' | cxTranslate }}</a>
-    </h2>
+    </div>
     <div class="accordion">
         <fsa-accordion-item [opened]="true" [title]="'policy.policySummary' | cxTranslate">
             <ul class="accordion-list container-fluid">

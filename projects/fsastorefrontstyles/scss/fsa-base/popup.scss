@@ -19,11 +19,11 @@
             transform: rotate(45deg);
             top: -4px;
             left: 4px;
-            font-size: 28px;
+            font-size: $h1-font-size;
+            font-weight: $font-weight-bold;
             color: var(--cx-g-color-text);
-            overflow: hidden;
             line-height: 1;
-            font-weight: 700;
+            overflow: hidden;
         } 
         &:hover{
             border-color: var(--cx-g-color-primary); 

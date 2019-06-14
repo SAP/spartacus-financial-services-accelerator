@@ -2,19 +2,72 @@
 @import 'theme';
 @import '~bootstrap/scss/mixins/breakpoints';
 
+.overview-section {
+  color: var(--cx-g-color-secondary);
+  font-size: $h4-font-size;
+  text-align: center;
+  position: relative;
+  .image-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    background-color: transparent;
+    width: 46px;
+    height: 46px;
+    transform: translateY(-50%);
+  }
+  &-title {
+    display: block;
+    color: var(--cx-g-color-text);
+    font-size: 22px;
+    font-weight: var(--cx-g-font-weight-semi);
+    @include media-breakpoint-down(md) {
+      font-size: 22px;
+      line-height: 30px;
+      width: 70%;
+      margin: 0 auto;
+    }
+  }
+  &-value {
+    display: block;
+    font-size: 22px;
+    border-bottom: $border-grey;
+    color: var(--cx-g-color-text);
+    padding-bottom: 10px;
+    font-weight: var(--cx-g-font-weight-semi);
+    @include media-breakpoint-down(md) {
+      font-size: 20px;
+    }
+  }
+  &-link {
+    @include absolute-center;
+    right: 48px;
+    background: transparent;
+    color: var(--cx-g-color-secondary);
+    &:before {
+      @include transition;
+      float: right;
+      font-size: 20px;
+    }
+    @include media-breakpoint-down(md) {
+      right: 11px;
+    }
+  }
+}
+
 .content-box {
-    text-align: center;
-    background-color: var(--cx-g-color-1);
-    border-radius: 5px;
-    @include box-shadow(0px, 0px, 9px, 1px, var(--cx-g-color-text), 0.3);
-    padding: 20px 0;
-    margin: 0 4% 70px;
-    @include media-breakpoint-down(sm) {
-        padding: 25px 0 20px;
-    }
-    .content-box-info {
-        margin: 20px 0 10px; 
-        font-weight: var(--cx-g-font-weight-semi);
-        font-size: 16px;
-    }
-} 
+  text-align: center;
+  background-color: var(--cx-g-color-1);
+  border-radius: 5px;
+  @include box-shadow(0px, 0px, 9px, 1px, var(--cx-g-color-text), 0.3);
+  padding: 20px 0;
+  margin: 0 4% 70px;
+  @include media-breakpoint-down(sm) {
+    padding: 25px 0 20px;
+  }
+  .content-box-info {
+    margin: 20px 0 10px;
+    font-weight: var(--cx-g-font-weight-semi);
+    font-size: 16px;
+  }
+}

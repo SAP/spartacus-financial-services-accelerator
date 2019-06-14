@@ -93,6 +93,7 @@
       display: inline-block;
       line-height: 1.2;
       max-width: calc(100% - 6vw);
+      vertical-align: middle;
     }
     &-value {
       @include media-breakpoint-down(sm) {
