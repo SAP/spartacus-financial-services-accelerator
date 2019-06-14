@@ -1,25 +1,25 @@
 <ng-container *ngIf="(product$ | async) as product; else loading">
-  <div class="products-details">
-    <h3 class="products-details__name">{{ product.name }}</h3>
-    <h4 class="products-details__main-price">€97.00</h4>
+  <div class="table-header">
+    <h3 class="table-header-title">{{ product.name }}</h3>
+    <h4 class="table-header-value">€97.00</h4>
     <button (click)="createCartAndStartBundleForProduct(product.code,product.bundleTemplates[0]?.id)"
       class="primary-button"
       type="button">
       {{ 'fscommon.select' | cxTranslate }}
     </button>
   </div>
-  <div class="products-prices">
+  <div class="table-cell-wrapper">
     <ng-container *ngFor="let item of panelItemEntries">
-      <div class="products-prices__price-wrapper">
+      <div class="table-cell">
         <ng-container *ngIf="item !== undefined; else itemNotIncluded">
-          <div class="price-value text-truncate" *ngIf="item.price?.value > 0 || item.chargeInformation; else itemIncluded" title="{{item.chargeInformation}}">
+          <div class="table-cell-value text-truncate" *ngIf="item.price?.value > 0 || item.chargeInformation; else itemIncluded" title="{{item.chargeInformation}}">
               <ng-container *ngTemplateOutlet="itemValue context: {value: (item.price.value > 0 ? item.price.formattedValue : item.chargeInformation)}"></ng-container>
           </div>
         </ng-container>
       </div>
     </ng-container>
     <ng-container *ngFor="let investment of product.investments">
-      <div class="products-prices__price-wrapper investments">
+      <div class="table-cell special">
         <p class="mb-2"><strong>{{investment.distributionPercentage}} % </strong></p>
         <a class="link" [href]="getBaseUrl() + investment.investmentType?.factSheetDocument?.downloadUrl"><strong>{{investment.investmentType?.fundName}}</strong></a>
         <p class="mb-0">ISIN: {{investment.investmentType?.isin}}</p>

@@ -28,7 +28,7 @@
       width: 25%;
       padding-right: 5px;
       @include media-breakpoint-down(sm) {
-        width: 44%;
+        width: 46%;
       }
     }
     .slide-column-wrapper {
@@ -37,27 +37,13 @@
       overflow-y: hidden;
       overflow-x: auto; 
       @include media-breakpoint-down(sm) {
-        width: 56%;
+        width: 54%;
         border-left: $border-grey;
       }
       .slide-column {
         display: flex;
         width: 100%;
       }
-    }
-    .price-name,
-    .price-tooltip {
-      display: inline-block;
-      vertical-align: middle;
-    }
-    .price-name {
-      line-height: 1.2;
-      max-width: calc(100% - 6vw);
-      @include ellipsis;
-    }
-    .fsa-tooltip {
-      @include absolute-center;
-      right: 5%;
     }
   }
   fsa-comparison-table-panel-item {
@@ -76,27 +62,25 @@
       }
     }
   }
-}
-.products-details {
-  min-height: 200px;
-  &__name {
-    font-size: 20px;
-    min-height: 50px;
-    @include media-breakpoint-down(sm) {
-      min-height: 60px;
-      font-size: 18px;
+  .table-header {
+    min-height: 200px;
+    &-title {
+      font-size: $h5-font-size;
+      min-height: 50px;
+      @include media-breakpoint-down(sm) {
+        min-height: 60px;
+        font-size: 18px;
+      }
+    }
+    &-value {
+      margin: 20px 0;
+      font-size: $h1-font-size;
+      @include media-breakpoint-down(sm) {
+        font-size: $h3-font-size;
+      }
     }
   }
-  &__main-price {
-    margin: 20px 0;
-    font-size: 40px;
-    @include media-breakpoint-down(sm) {
-      font-size: 24px;
-    }
-  }
-}
-.products-prices {
-  &__price-wrapper {
+  .table-cell {
     position: relative;
     padding: 15px;
     &:nth-child(even) {
@@ -105,21 +89,30 @@
     &:nth-child(odd) {
       background-color: var(--cx-g-color-5);
     }
+    &-title {
+      display: inline-block;
+      line-height: 1.2;
+      max-width: calc(100% - 6vw);
+    }
+    &-value {
+      @include media-breakpoint-down(sm) {
+        max-width: 100px;
+      }
+    }
   }
-}
-.price-value {
-  @include media-breakpoint-down(sm) {
-    max-width: 100px;
+  .special {
+    @include media-breakpoint-down(lg) {
+      min-height: 220px;
+    }
+    @include media-breakpoint-down(sm) {
+      min-height: 330px;
+    }
   }
-}
-.investments {
-  @include media-breakpoint-down(lg) {
-    min-height: 220px;
+  .fsa-tooltip {
+    @include absolute-center;
+    right: 5%;
   }
-  @include media-breakpoint-down(sm) {
-    min-height: 330px;
+  .ct-tooltip .arrow:before {
+    border-top-color: var(--cx-g-color-8);
   }
-}
-.ct-tooltip .arrow:before {
-  border-top-color: var(--cx-g-color-8);
 }
