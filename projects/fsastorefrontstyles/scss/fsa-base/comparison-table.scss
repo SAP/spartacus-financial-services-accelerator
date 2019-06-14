@@ -11,37 +11,39 @@
     flex: 0 1 100%;
     border: $border-grey;
     border-top: none;
-    padding: 0 10px;
-    overflow: hidden;
     .table-tab {
       flex: 0 1 100%;
+      @include media-breakpoint-down(sm) {
+        overflow: hidden;
+      }
     }
   }
   fsa-comparison-table-panel {
     display: block;
     width: 100%;
-    .product-grid-item {
+    padding: 0 10px;
+    margin: 3.1rem auto;
+    .fixed-column {
       float: left;
       width: 25%;
+      padding-right: 5px;
       @include media-breakpoint-down(sm) {
         width: 44%;
       }
     }
-    .product-grid-items {
+    .slide-column-wrapper {
       float: left;
-      display: flex;
       width: 75%;
       overflow-y: hidden;
-      overflow-x: auto;
+      overflow-x: auto; 
       @include media-breakpoint-down(sm) {
         width: 56%;
-        margin-right: -65px;
         border-left: $border-grey;
       }
-    }
-    .products-details,
-    .products-prices {
-      padding-right: 5px;
+      .slide-column {
+        display: flex;
+        width: 100%;
+      }
     }
     .price-name,
     .price-tooltip {
@@ -65,6 +67,9 @@
     padding: 0 5px;
     border-left: 1px dashed var(--cx-g-color-3);
     text-align: center;
+    &:last-of-type {
+      padding-right: 0;
+    }
     @include media-breakpoint-down(sm) {
       &:first-of-type {
         border-left: none;
