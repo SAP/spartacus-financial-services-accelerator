@@ -1,7 +1,6 @@
-import { Component } from '@spartacus/core';
-import { CmsBannerComponent } from '@spartacus/core';
+import { CmsComponent, CmsBannerComponent } from '@spartacus/core';
 
-export type CmsComponent = Component;
+export type CmsComponent = CmsComponent;
 
 export interface CmsViewPoliciesComponent extends CmsComponent {
   numberOfPoliciesToDisplay?: string;

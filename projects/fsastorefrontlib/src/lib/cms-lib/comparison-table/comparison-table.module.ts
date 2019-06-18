@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { CmsConfig, ConfigModule, UrlTranslationModule, I18nModule } from '@spartacus/core';
-import { CmsModule, ComponentsModule, PageComponentModule } from '@spartacus/storefront';
+import { CmsModule, CmsConfig, ConfigModule, UrlModule, I18nModule } from '@spartacus/core';
+import { SpinnerModule, PageComponentModule } from '@spartacus/storefront';
 import { ComparisonTableContainerComponent } from './comparison-table-container/comparison-table-container.component';
 // tslint:disable-next-line:max-line-length
 import { ComparisonTablePanelComponent } from './comparison-table-container/comparison-table-tab/comparison-table-panel/comparison-table-panel.component';
@@ -20,11 +20,11 @@ import { ComparisonTableService } from './comparison-table.service';
     PageComponentModule,
     RouterModule,
     I18nModule,
-    ComponentsModule,
+    SpinnerModule,
     CmsModule,
     NgbTabsetModule,
     NgbTooltipModule,
-    UrlTranslationModule,
+    UrlModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         CMSMultiComparisonTabContainer: {

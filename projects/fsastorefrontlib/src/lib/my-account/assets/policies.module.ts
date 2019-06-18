@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { ComponentsModule } from '@spartacus/storefront';
+import { SpinnerModule } from '@spartacus/storefront';
 import { CmsConfig, ConfigModule, AuthGuard, I18nModule } from '@spartacus/core';
 import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 
@@ -30,7 +30,7 @@ const routes: Routes = [
     I18nModule,
     FormsModule,
     NgSelectModule,
-    ComponentsModule,
+    SpinnerModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {

@@ -18,8 +18,8 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
   step = 2;
   navs = checkoutNavBar;
   anonymous = true;
-  currentUrl : string;
-  currentCategory : string;
+  currentUrl: string;
+  currentCategory: string;
 
   constructor(
     protected checkoutService: CheckoutService,
@@ -29,7 +29,7 @@ export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
     protected globalMessageService: GlobalMessageService,
     protected cd: ChangeDetectorRef,
     protected userService: UserService,
-    private router : Router
+    private router: Router
   ) {
     super(checkoutService, cartService, cartDataService, routingService, globalMessageService, cd);
   }

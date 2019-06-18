@@ -18,7 +18,7 @@ export class FSCartService extends CartService {
     protected fsCartData: CartDataService,
     protected fsAuthService: AuthService
   ) {
-    super(fsStore, fsCartData, fsAuthService);
+    super(fsStore, fsCartData, fsAuthService, null);
     this.initCart();
   }
 

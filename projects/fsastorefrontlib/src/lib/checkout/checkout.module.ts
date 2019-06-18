@@ -2,11 +2,10 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { ComponentsModule, CmsPageGuard, PageLayoutComponent, PageComponentModule, MultiStepCheckoutModule } from '@spartacus/storefront';
+import { SpinnerModule, CmsPageGuard, PageLayoutComponent, PageComponentModule, MultiStepCheckoutModule } from '@spartacus/storefront';
 import { AuthGuard, CmsConfig, ConfigModule, I18nModule } from '@spartacus/core';
 
-import { ɵu as PaymentMethodModule  } from '@spartacus/storefront';
-import { ɵv as PaymentFormModule  } from '@spartacus/storefront';
+import { PaymentMethodModule, PaymentFormModule  } from '@spartacus/storefront';
 
 import { AccordionModule } from '../accordion/accordion.module';
 import { AddOptionsModule } from './assets/add-options.module';
@@ -35,7 +34,7 @@ const routes: Routes = [
     PageComponentModule,
     MultiStepCheckoutModule,
     AddOptionsModule,
-    ComponentsModule,
+    SpinnerModule,
     AccordionModule,
     RouterModule.forChild(routes),
     EffectsModule.forFeature(effects),

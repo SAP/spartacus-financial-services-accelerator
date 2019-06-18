@@ -6,7 +6,8 @@ import {
   FsaMultiStepCheckoutComponent
 } from '../../../checkout/assets/components/fsa-multi-step-checkout/fsa-multi-step-checkout.component';
 
-import { CmsModule, PageSlotModule } from '@spartacus/storefront';
+import { PageSlotModule } from '@spartacus/storefront';
+import { CmsModule } from '@spartacus/core';
 
 @NgModule({
   imports: [CommonModule, CheckoutModule, CmsModule, PageSlotModule],

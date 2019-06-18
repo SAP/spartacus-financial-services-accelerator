@@ -12,7 +12,7 @@ import { ClaimService } from './services/claim.service';
 import { ClaimDataService } from './services/claim-data.service';
 import { OccClaimService } from '../../occ/claim/claim.service';
 
-import { ComponentsModule } from '@spartacus/storefront';
+import { SpinnerModule } from '@spartacus/storefront';
 
 const routes: Routes = [
   {
@@ -30,7 +30,7 @@ const routes: Routes = [
     RouterModule,
     FormsModule,
     NgSelectModule,
-    ComponentsModule,
+    SpinnerModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {

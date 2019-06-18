@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService, CartDataService, Address, CheckoutService } from '@spartacus/core';
-import { ɵy as PaymentMethodComponent } from '@spartacus/storefront';
+import { PaymentMethodComponent } from '@spartacus/storefront';
 import * as fromCheckout from '@spartacus/core';
 import { Store } from '@ngrx/store';
 
@@ -10,7 +10,7 @@ import { Store } from '@ngrx/store';
 })
 export class PaymentDetailsComponent extends PaymentMethodComponent {
 
-  deliveryAddress: Address = {
+  private FSDeliveryAddress: Address = {
     country: { 'isocode': 'AT' },
     firstName: 'John',
     lastName: 'Doe',
@@ -26,12 +26,12 @@ export class PaymentDetailsComponent extends PaymentMethodComponent {
     protected cartData: CartDataService,
     protected userService: UserService
   ) {
-    super(cartData, userService);
+    super(null, null, null, null, null, null, null, null, null);
     this.mockDeliveryAddress();
   }
 
   mockDeliveryAddress(): void {
     this.store.dispatch(
-      new fromCheckout.SetDeliveryAddressSuccess(this.deliveryAddress));
+      new fromCheckout.SetDeliveryAddressSuccess(this.FSDeliveryAddress));
   }
 }

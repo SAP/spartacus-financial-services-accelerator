@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { provideConfig, ConfigModule } from '@spartacus/core';
-import { StorefrontModuleConfig, StorefrontModule, PageComponentModule } from '@spartacus/storefront';
-import { translations } from '@spartacus/storefront';
+import { StorefrontConfig, B2cStorefrontModule, PageComponentModule } from '@spartacus/storefront';
+import { translations } from '@spartacus/assets';
 
 import { MyAccountModule } from './my-account/index';
 import { UiModule } from './ui/index';
@@ -15,7 +15,7 @@ import { fsaLayoutConfig, fsaCmsStructure } from './default-fsa.config';
     PageComponentModule,
     CmsLibModule,
     MyAccountModule,
-    StorefrontModule,
+    B2cStorefrontModule,
     ConfigModule.forRoot(),
     ConfigModule.withConfig({
       i18n: {
@@ -35,14 +35,14 @@ import { fsaLayoutConfig, fsaCmsStructure } from './default-fsa.config';
     ConfigModule.withConfig(fsaLayoutConfig)
   ],
   exports: [
-    StorefrontModule,
+    B2cStorefrontModule,
     MyAccountModule,
     CmsLibModule
   ],
   declarations: []
 })
 export class FSAStorefrontModule {
-  static withConfig(config?: StorefrontModuleConfig): ModuleWithProviders {
+  static withConfig(config?: StorefrontConfig): ModuleWithProviders {
     return {
       ngModule: FSAStorefrontModule,
       providers: [provideConfig(config)]
