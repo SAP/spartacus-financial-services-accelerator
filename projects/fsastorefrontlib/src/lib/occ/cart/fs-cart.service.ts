@@ -15,6 +15,7 @@ export class OccFSCartService {
         protected config: OccConfig
     ) { }
 
+    // tslint:disable-next-line:max-line-length
     public addToCart(userId: string, cartId: string, productCode: string, quantity: number, entryNumber: string): Observable<CartModification> {
         const toAdd = JSON.stringify({});
         const url = this.getAddOptionalProductToCartEndpoint(userId, cartId);

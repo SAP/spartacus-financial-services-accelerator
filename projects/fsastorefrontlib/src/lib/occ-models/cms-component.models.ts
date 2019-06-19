@@ -38,7 +38,6 @@ export interface CmsMultiComparisonTabContainer extends CmsComponent  {
 export interface CMSComparisonTabComponent extends CmsComponent {
   title?: string;
   comparisonPanel?: string;
-  modifiedTime?: string;
 }
 
 export interface ComparisonPanelCMSComponent extends CmsComponent {

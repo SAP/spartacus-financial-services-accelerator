@@ -2,13 +2,19 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { SpinnerModule, CmsPageGuard, PageLayoutComponent, PageComponentModule, MultiStepCheckoutModule } from '@spartacus/storefront';
+import {
+  SpinnerModule,
+  CmsPageGuard,
+  PageLayoutComponent,
+  PageComponentModule,
+  // MultiStepCheckoutModule
+} from '@spartacus/storefront';
 import { AuthGuard, CmsConfig, ConfigModule, I18nModule } from '@spartacus/core';
 
 import { PaymentMethodModule, PaymentFormModule  } from '@spartacus/storefront';
 
 import { AccordionModule } from '../accordion/accordion.module';
-import { AddOptionsModule } from './assets/add-options.module';
+// import { AddOptionsModule } from './assets/add-options.module';
 import { MiniCartModule } from './assets/components/mini-cart/mini-cart.module';
 import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
 import { FinalReviewComponent } from './assets/components/final-review/final-review.component';
@@ -32,8 +38,8 @@ const routes: Routes = [
     I18nModule,
     CommonModule,
     PageComponentModule,
-    MultiStepCheckoutModule,
-    AddOptionsModule,
+    // MultiStepCheckoutModule,
+    // AddOptionsModule,
     SpinnerModule,
     AccordionModule,
     RouterModule.forChild(routes),
@@ -49,10 +55,10 @@ const routes: Routes = [
     I18nModule,
     PaymentMethodModule,
     PaymentFormModule,
-    AddOptionsModule,
+    // AddOptionsModule,
     QuoteReviewComponent,
     MiniCartModule,
-    MultiStepCheckoutModule,
+    // MultiStepCheckoutModule,
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
     PaymentDetailsComponent

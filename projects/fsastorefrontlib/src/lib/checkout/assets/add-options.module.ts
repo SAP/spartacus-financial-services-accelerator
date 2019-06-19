@@ -8,7 +8,7 @@ import { SpinnerModule } from '@spartacus/storefront';
 import { I18nModule } from '@spartacus/core';
 import { AddOptionsComponent } from './components/add-options/add-options.component';
 import { FSCartService } from './services';
-import { OccFSCartService } from 'projects/fsastorefrontlib/src/lib/occ/cart/fs-cart.service';
+import { OccFSCartService } from '../../occ/cart/fs-cart.service';
 
 @NgModule({
   imports: [

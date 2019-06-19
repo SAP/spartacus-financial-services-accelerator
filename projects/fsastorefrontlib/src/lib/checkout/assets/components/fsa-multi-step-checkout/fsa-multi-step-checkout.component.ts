@@ -1,10 +1,16 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {
-  CartDataService, CheckoutService, GlobalMessageService,
-  GlobalMessageType, RoutingService, Address, PaymentDetails, UserService
+  CartDataService,
+  CheckoutService,
+  GlobalMessageService,
+  GlobalMessageType,
+  RoutingService,
+  Address,
+  PaymentDetails,
+  UserService
 } from '@spartacus/core';
-import { MultiStepCheckoutComponent } from '@spartacus/storefront';
+import { PaymentMethodComponent } from '@spartacus/storefront';
 import { filter } from 'rxjs/operators';
 import { FSCartService } from '../../services/fs-cart.service';
 import { checkoutNavBar } from './fsa-checkout-navigation-bar';
@@ -14,7 +20,7 @@ import { checkoutNavBar } from './fsa-checkout-navigation-bar';
   styleUrls: ['./fsa-multi-step-checkout.component.scss'],
   templateUrl: './fsa-multi-step-checkout.component.html'
 })
-export class FsaMultiStepCheckoutComponent extends MultiStepCheckoutComponent {
+export class FsaMultiStepCheckoutComponent extends PaymentMethodComponent {
   step = 2;
   navs = checkoutNavBar;
   anonymous = true;
