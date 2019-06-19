@@ -11,7 +11,7 @@
           <cx-picture class="cx-product-image-container" [imageContainer]="orderEntryData.product.images?.PRIMARY" imageFormat="96Wx96H"></cx-picture>
         </div>
         <div class="col-12 col-md-7 align-self-center">
-          <h3>{{orderEntryData.product.name}}</h3>
+          <h3 class="text-truncate">{{orderEntryData.product.name}}</h3>
         </div>
         <div *ngIf="!orderEntryData.removeable && !orderEntryData.addable" class="col-12 col-md-3 align-self-center">
           <ng-container *ngTemplateOutlet="mandatoryNotAvailableButton; context:{title: ( orderEntryData.product.bundleTemplates?.length ==3 ? ('fscommon.mandatory' | cxTranslate) : ( 'fscommon.notAvailableFull' | cxTranslate ))}"></ng-container>

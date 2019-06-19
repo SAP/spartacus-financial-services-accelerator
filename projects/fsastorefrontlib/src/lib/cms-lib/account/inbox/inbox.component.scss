@@ -1,10 +1,10 @@
 @import 'mixins-fsa';
 @import 'theme';
 
-.section-header__heading {
+.section-header-heading {
 	text-align: left;
 	font-size: 16px;
-	font-weight: 600;
+	font-weight: var(--cx-g-font-weight-semi);
 	.filter {
 		cursor: pointer;
 		right: 10px;

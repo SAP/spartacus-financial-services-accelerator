@@ -7,8 +7,7 @@ import { AuthService } from '@spartacus/core';
 
 @Component({
   selector: 'fsa-deleted-claim-dialog',
-  templateUrl: './delete-claim-dialog.component.html',
-  styleUrls: ['./delete-claim-dialog.component.scss']
+  templateUrl: './delete-claim-dialog.component.html'
 })
 export class DeleteClaimDialogComponent implements OnInit {
 

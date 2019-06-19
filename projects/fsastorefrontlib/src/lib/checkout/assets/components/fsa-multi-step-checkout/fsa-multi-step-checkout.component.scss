@@ -32,7 +32,7 @@
     }
     .label {
         font-size: 14px;
-        font-weight: 600;
+        font-weight: var(--cx-g-font-weight-semi);
         @include media-breakpoint-down(md) {
             font-size: 12px;
         }

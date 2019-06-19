@@ -12,7 +12,7 @@
 		.inbox-header {
 			cursor: pointer;
 			background: var(--cx-g-color-4);
-			font-weight: 600;
+			font-weight: var(--cx-g-font-weight-semi);
 			&:hover {
 				color: var(--cx-g-color-primary);
 			}

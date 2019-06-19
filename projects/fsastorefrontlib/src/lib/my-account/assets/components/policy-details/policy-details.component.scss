@@ -1,0 +1,68 @@
+@import 'mixins-fsa';
+@import 'theme';
+@import '~bootstrap/scss/mixins/breakpoints';
+
+.overview-section {
+  color: var(--cx-g-color-secondary);
+  font-size: $h4-font-size;
+  text-align: center;
+  position: relative;
+  .image-wrapper {
+    @include absolute-center;
+    left: 0;
+    background-color: transparent;
+    width: 46px;
+    height: 46px;
+  }
+  &-title {
+    display: block;
+    color: var(--cx-g-color-text);
+    font-weight: var(--cx-g-font-weight-semi);
+    @include media-breakpoint-down(md) {
+      line-height: 30px;
+      width: 70%;
+      margin: 0 auto;
+    }
+  }
+  &-value {
+    display: block;
+    border-bottom: $border-grey;
+    color: var(--cx-g-color-text);
+    padding-bottom: 10px;
+    font-weight: var(--cx-g-font-weight-semi);
+    @include media-breakpoint-down(md) {
+      font-size: $h5-font-size;
+    }
+  }
+  &-link {
+    @include absolute-center;
+    right: 48px;
+    background: transparent;
+    color: var(--cx-g-color-secondary);
+    &:before {
+      @include transition;
+      float: right;
+      font-size: 20px;
+    }
+    @include media-breakpoint-down(md) {
+      right: 11px;
+    }
+  }
+}
+
+.content-box {
+  text-align: center;
+  background-color: var(--cx-g-color-1);
+  border-radius: 5px;
+  padding: 20px 0;
+  margin: 0 4% 70px;
+  @include box-shadow(0px, 0px, 9px, 1px, var(--cx-g-color-text), 0.3);
+  @include media-breakpoint-down(sm) {
+    padding: 25px 0 20px;
+  }
+  .content-box-info {
+    margin: 20px 0 10px;
+    font-weight: var(--cx-g-font-weight-semi);
+    font-size: $h6-font-size;
+  }
+}
