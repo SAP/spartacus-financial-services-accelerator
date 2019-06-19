@@ -4,7 +4,7 @@
     <ng-container *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
       <div class="container-fluid d-none d-lg-block"> <!-- Desktop Layout-->
         <div class="gradient-heading row">
-          <h3 class="col"> {{ 'fscommon.policy.policy' | cxTranslate }} </h3>
+          <h3 class="col"> {{ 'policy.policy' | cxTranslate }} </h3>
           <h3 class="col"> {{ 'fscommon.paymentFrequency' | cxTranslate }} </h3>
           <h3 class="col"> {{ 'premiumCalendar.dueDate' | cxTranslate }} </h3>
           <h3 class="col"> {{ 'fscommon.premium' | cxTranslate }} </h3>
@@ -114,7 +114,7 @@
                     <div class="accordion container" [ngClass]="policy.opened ? 'opened' : ''">
                       <ul class="list-data">
                         <ng-container *ngFor="let dueDate of policy.billingData | slice:1">
-                            <li class="row list-data__list-item border-bottom-grey">
+                            <li class="row list-item border-bottom-grey">
                               <div class="col-6 text-left d-flex justify-content-around">
                                 {{dueDate.billingDate}}
                               </div>

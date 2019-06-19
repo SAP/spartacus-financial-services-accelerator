@@ -86,15 +86,15 @@
   padding: 0;
   list-style: none;
   background-color: var(--cx-g-color-1);
-  &--closed {
+  .closed {
     display: none;
   }
-  &__list-item {
+  .list-item {
     padding: 12px;
     list-style: none;
     background-color: var(--cx-g-color-1);
   }
-  &__info {
+  .info {
     position: relative;
     display: inline-block;
     padding-left: 20px;

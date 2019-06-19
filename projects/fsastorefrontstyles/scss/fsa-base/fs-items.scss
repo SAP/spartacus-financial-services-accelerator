@@ -4,17 +4,10 @@ ul {
   list-style: none;
   padding: 0;
 }
-.fs-items {
-  &-title {
-    color: var(--cx-g-color-text);
-    font-weight: 500;
-    line-height: 1.458em;
-  }
-  &-item {
-    background-color: var(--cx-g-color-4);
-    margin-bottom: 10px;
-    position: relative;
-  }
+.fs-item {
+  background-color: var(--cx-g-color-4);
+  margin-bottom: 10px;
+  position: relative;
   &-data-container {
     display: flex;
     padding: 20px;
@@ -39,7 +32,7 @@ ul {
       padding: 4px;
     }
   }
-  &-name-number {
+  &-wrapper {
     font-size: $h6-font-size;
     display: flex;
     flex: 0 1 60%;
