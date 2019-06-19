@@ -9,8 +9,6 @@ ul {
     color: var(--cx-g-color-text);
     font-weight: 500;
     line-height: 1.458em;
-    margin: 20px auto;
-    text-align: center;
   }
   &-item {
     background-color: var(--cx-g-color-4);
@@ -35,10 +33,10 @@ ul {
         }
     }
     .image-wrapper {
-        flex: 0 0 auto;
-        width: 60px;
-        height: 60px;
-        padding: 4px;
+      flex: 0 0 auto;
+      width: 60px;
+      height: 60px;
+      padding: 4px;
     }
   }
   &-name-number {
