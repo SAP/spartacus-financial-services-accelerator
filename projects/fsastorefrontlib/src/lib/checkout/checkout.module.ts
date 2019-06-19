@@ -42,7 +42,7 @@ const routes: Routes = [
     // AddOptionsModule,
     SpinnerModule,
     AccordionModule,
-    RouterModule.forChild(routes),
+    // RouterModule.forChild(routes),
     EffectsModule.forFeature(effects),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {

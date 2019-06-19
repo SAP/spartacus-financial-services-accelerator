@@ -26,7 +26,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     CheckoutPageLayoutModule,
-    RouterModule.forChild(routes),
+    // RouterModule.forChild(routes),
     ConfigModule.withConfig({
       layoutSlots: {
         MultiTabsCategoryPageTemplate: {
