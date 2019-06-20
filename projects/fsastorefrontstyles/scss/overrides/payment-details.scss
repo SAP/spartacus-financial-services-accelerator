@@ -5,13 +5,11 @@
   margin-bottom: 30px;
 }
 .cx-header h3 {
-  line-height: 35px;
   padding: 20px 0;
-  text-align: left;
   margin-bottom: 20px;
   color: var(--cx-g-color-secondary);
-  font-weight: 700;
-  border-bottom: 1px solid var(--cx-g-color-3);
+  font-weight: var(--cx-g-font-weight-bold);
+  border-bottom: $border-grey;
 }
 .cx-payment-card {
   margin-bottom: 20px;
