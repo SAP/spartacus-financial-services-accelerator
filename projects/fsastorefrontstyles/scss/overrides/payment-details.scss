@@ -1,0 +1,39 @@
+@import '../mixins-fsa';
+@import '../theme';
+
+.cx-msg {
+  margin-bottom: 30px;
+}
+.cx-payment-card {
+  margin-bottom: 20px;
+  .cx-payment-inner {
+    height: 100%;
+  }
+  .cx-header h3 {
+    line-height: 35px;
+    padding: 20px 0;
+    text-align: left;
+    margin-bottom: 20px;
+    color: var(--cx-g-color-secondary);
+    font-weight: 700;
+    border-bottom: 1px solid var(--cx-g-color-3);
+  }
+  .card-header {
+    @include linear-gradient-background( var(--cx-g-color-primary), var(--cx-g-color-9), 50%, 100% );
+  }
+  .cx-card-body {
+    background: var(--cx-g-color-4);
+  }
+  .cx-card-delete-msg, .cx-card-label-bold {
+    font-weight: var(--cx-g-font-weight-semi);
+  }
+  .card-link.btn-link {
+    text-transform: uppercase;
+    &.cx-card-link {
+      color: var(--cx-g-color-7);
+      text-decoration: underline;
+      margin-right: 10px;
+    }
+  }
+}
+
