@@ -1,13 +1,10 @@
 <ng-container *ngIf="component$ | async as component">
-    <div class="product product-feature__wrapper">
-        <h3 class="product-feature__title section-header__heading">{{component.title}}</h3>
-        <div class="product-feature__image"></div>
+    <div class="product-feature-wrapper">
+        <h3 class="section-header-heading">{{component.title}}</h3>
+        <div class="product-feature-image"></div>
         <div *ngIf="product$ | async as product">
-            <ul class="product-feature__details" [innerHTML]="product.summary">
+            <ul class="product-feature-details" [innerHTML]="product.summary">
             </ul>
-        </div>
-        <div class="product-feature__buttons">
-            <button class="secondary-button">{{ 'quote.getQuote' | cxTranslate }}</button>
         </div>
     </div>
 </ng-container>

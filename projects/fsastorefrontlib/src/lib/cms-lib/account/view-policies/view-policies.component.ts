@@ -12,7 +12,6 @@ import {CmsViewPoliciesComponent} from './../../../occ-models/cms-component.mode
 @Component({
     selector: 'fsa-view-policies',
     templateUrl: './view-policies.component.html',
-    styleUrls: ['./view-policies.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 
 })

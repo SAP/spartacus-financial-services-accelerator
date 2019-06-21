@@ -21,7 +21,6 @@
     padding: 2px 0;
     max-width: 285px;
     width: 100%;
-    @include ellipsis;
     @include media-breakpoint-down(md) {
       margin: 12px 0;
       max-width: inherit;
@@ -48,7 +47,6 @@
     @include absolute-center;
     right: 30%;
     z-index: 2000;
-    position: absolute;
     @include media-breakpoint-down(sm) {
       top: 15%;
       right: 30px;

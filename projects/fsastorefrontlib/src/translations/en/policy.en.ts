@@ -9,6 +9,6 @@ export const policy = {
       policySummary: 'Policy Summary',
       policyRequestSubmitted: 'Your policy request has been submitted',
       yourPolicyHasBeenSubmited: 'Your policy has already been submited',
-      finishQuoteToGetPolicy: 'You need to finish your quote to get aCancel Policy'
+      finishQuoteToGetPolicy: 'You need to finish your quote to get a Policy'
     }
 };

@@ -42,12 +42,12 @@ export class FsaMultiStepCheckoutComponent extends PaymentMethodComponent {
 
   processSteps() {
     this.currentUrl = this.router.url;
-    this.currentCategory = this.currentUrl.split('_')[1];
+    this.currentCategory = this.currentUrl.split('_').pop();
     // step2: add main product
     this.subscriptions.push(
       this.cartService.mainProductAdded
         .pipe(filter(poductCode => Object.keys(poductCode).length !== 0 && this.step === 2))
-        .subscribe(state => {
+        .subscribe(() => {
           this.nextStep(3);
         }));
 

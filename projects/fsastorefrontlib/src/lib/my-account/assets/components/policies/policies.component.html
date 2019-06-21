@@ -2,38 +2,38 @@
 <ng-container *ngIf="policies$ | async as policies">
   <ng-container *ngIf="policiesLoaded$ | async; else loading">
     <div class="row" *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
-      <div *ngFor="let policy of policies.insurancePolicies" class="col-md-4 cards">
-        <div class="cards__wrapper cards__wrapper--border-primary">
-          <div class="cards__title cards__title--border-primary">
-            <span class="images images__wrapper">
-              <img class="images__size" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0].url" alt="">
+      <div *ngFor="let policy of policies.insurancePolicies" class="col-md-4">
+        <div class="info-card border-bottom-secondary">
+          <div class="info-card-title border-bottom-secondary">
+            <span class="image-wrapper">
+              <img class="image-item" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0].url" alt="">
             </span>
-            <h4 class="cards__caption cards__caption--color-primary">
+            <h4 class="info-card-caption color-secondary">
               {{policy.categoryData?.name}}
             </h4>
-            <div class="cards__info cards__info--color-primary">
+            <div class="info-card-caption color-secondary">
               {{policy.contractNumber}}
             </div>
           </div>
-          <div class="cards__details-wrapper">
-            <div class="cards__data">
+          <div class="info-card-details-wrapper">
+            <div class="info-card-data">
               <span class="title">{{ 'fscommon.product' | cxTranslate }}</span>
               <span class="value">{{policy.mainProduct?.coverageProduct?.name}}</span>
             </div>
-            <div class="cards__data">
+            <div class="info-card-data">
               <span class="title">{{policy.insuredObjects[0]?.insuredObjectItems[0]?.value}}</span>
               <span class="value">{{policy.insuredObjects[0]?.insuredObjectItems[1]?.value}}</span></div>
-            <div class="cards__data">
+            <div class="info-card-data">
               <span class="title">{{policy.policyPremium?.formattedValue}} / {{policy.paymentFrequency}}</span>
               <span class="value ">{{policy.paymentMethod?.paymentOption | uppercase}}</span>
             </div>
-            <div class="cards__data">
+            <div class="info-card-data">
               <span class="title">{{policy.policyStartDate }} - {{policy.policyEndDate}}</span>
               {{policy.policyStartDate | date}}
             </div>
           </div>
-          <div class="cards-button-wrapper cards-button-wrapper--border-primary">
-            <div class="cards__button">
+          <div class="info-card-button-wrapper border-top-secondary">
+            <div class="info-card-button">
                 <button class="secondary-button" routerLink="/my-account/my-policies/{{policy.policyNumber}}/{{policy.contractNumber}}" routerLinkActive="active">
                   {{ 'fscommon.details' | cxTranslate }}
                 </button>

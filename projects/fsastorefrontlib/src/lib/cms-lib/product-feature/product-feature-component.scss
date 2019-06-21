@@ -3,13 +3,13 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 
 .product-feature {
-	&__wrapper {
+	&-wrapper {
 		background-color: var(--cx-g-color-4);
+		.section-header-heading {
+			text-transform: uppercase;
+		}
 	}
-	&__title {
-		text-transform: uppercase;
-	}
-	&__image {
+	&-image {
 		margin: 30px 0 0;
 		padding: 0 50px;
 		text-align: center;
@@ -20,26 +20,14 @@
 			}
 		}
 	}
-	&__details {
+	&-details {
 		color: var(--cx-g-color-text);
 		padding: 0 50px 0 70px;
-		font-size: 15px;
+		font-size: $font-size-base;
 		list-style-type: circle;
 		min-height: 120px;
 		p {
 			margin: 0 0 10px;
-		}
-	}
-	&__buttons {
-		padding: 0 50px 30px;
-		margin-top: 28px;
-		& a {
-			margin: 0 auto;
-		}
-	}
-	.secondary-button__continue-shopping {
-		@include media-breakpoint-down(sm) {
-			font-size: 16px;
 		}
 	}
 }

@@ -1,27 +1,25 @@
 <ng-container *ngIf="(cart$ | async) as cart">
   <ng-container *ngIf="cart.deliveryOrderGroups">
-    <div class="short-overview short-overview--right">
-      <div class="short-overview__heading gradient-heading px-2">
+    <div class="short-overview">
+      <div class="gradient-heading text-center px-2">
           {{ cart.deliveryOrderGroups[0]?.entries[0]?.product?.defaultCategory?.name }} {{ 'quote.quote' | cxTranslate }}
         </div>
-      <div class="short-overview__content">
+      <div class="short-overview-content">
           <ng-container *ngFor="let entry of cart.deliveryOrderGroups[0]?.entries">
-            <div class="short-overview__items">
-              <div class="short-overview__item row">
-                <div class="short-overview__item-name col-7">
-                    {{ entry.product.name }}:
-                </div>
-                <div class="short-overview__item-price col-5">
-                  {{ entry.totalPrice.formattedValue }}
-                </div>
+            <div class="short-overview-item row">
+              <div class="short-overview-title col-7">
+                  {{ entry.product.name }}:
+              </div>
+              <div class="short-overview-value col-5">
+                {{ entry.totalPrice.formattedValue }}
               </div>
             </div>
         </ng-container>
-          <div class="short-overview__item short-overview__item--highlighted row">
-            <div class="short-overview__item-name col-6">
+          <div class="highlighted row">
+            <div class="short-overview-title col-6">
               {{ 'fscommon.totalPrice' | cxTranslate }}:
             </div>
-            <div class="short-overview__item-price col-6">{{ cart.totalPrice?.formattedValue }}</div>
+            <div class="short-overview-value col-6">{{ cart.totalPrice?.formattedValue }}</div>
           </div>
         </div>
       </div>

@@ -1,42 +1,107 @@
 @import '../mixins-fsa';
 @import '../theme';
 
-.products-details {
-    min-height: 200px;
-    &__name {
-        font-size: 20px;
-        min-height: 50px;
-        @include media-breakpoint-down(sm) {
-          min-height: 60px;
-          font-size: 18px;
-        }
-    }
-    &__main-price {
-        margin: 20px 0;
-        font-size: 40px;
-        @include media-breakpoint-down(sm) {
-          font-size: 24px;
-        }
+.products-wrapper {
+  ngb-tabset {
+    flex: 0 1 100%;
+  }
+  fsa-comparison-table-tab {
+    background-color: var(--cx-g-color-4);
+    display: flex;
+    flex: 0 1 100%;
+    border: $border-grey;
+    border-top: none;
+    .table-tab {
+      flex: 0 1 100%;
+      @include media-breakpoint-down(sm) {
+        overflow: hidden;
+      }
     }
   }
-  .products-prices {
-    &__price-wrapper {
-        position: relative;
-        padding: 15px;
-        &:nth-child(even) {
-            background-color: transparent;
-        }
-        &:nth-child(odd) {
-            background-color: var(--cx-g-color-5);
-        }
+  fsa-comparison-table-panel {
+    display: block;
+    width: 100%;
+    padding: 0 10px;
+    margin: 3.1rem auto;
+    .fixed-column {
+      float: left;
+      width: 25%;
+      padding-right: 5px;
+      @include media-breakpoint-down(sm) {
+        width: 46%;
+      }
+    }
+    .slide-column-wrapper {
+      float: left;
+      width: 75%;
+      overflow-y: hidden;
+      overflow-x: auto; 
+      @include media-breakpoint-down(sm) {
+        width: 54%;
+        border-left: $border-grey;
+      }
+      .slide-column {
+        display: flex;
+        width: 100%;
+      }
     }
   }
-  .price-value {
+  fsa-comparison-table-panel-item {
+    position: relative;
+    z-index: 1;
+    flex: 0 1 100%;
+    padding: 0 5px;
+    border-left: 1px dashed var(--cx-g-color-3);
+    text-align: center;
+    &:last-of-type {
+      padding-right: 0;
+    }
     @include media-breakpoint-down(sm) {
-      max-width: 100px;
+      &:first-of-type {
+        border-left: none;
+      }
     }
   }
-  .investments {
+  .table-header {
+    min-height: 200px;
+    &-title {
+      font-size: $h5-font-size;
+      min-height: 50px;
+      @include media-breakpoint-down(sm) {
+        min-height: 60px;
+        font-size: 18px;
+      }
+    }
+    &-value {
+      margin: 20px 0;
+      font-size: $h1-font-size;
+      @include media-breakpoint-down(sm) {
+        font-size: $h3-font-size;
+      }
+    }
+  }
+  .table-cell {
+    position: relative;
+    padding: 15px;
+    &:nth-child(even) {
+      background-color: transparent;
+    }
+    &:nth-child(odd) {
+      background-color: var(--cx-g-color-5);
+    }
+    &-title {
+      display: inline-block;
+      line-height: 1.2;
+      max-width: calc(100% - 6vw);
+      vertical-align: middle;
+    }
+    &-value {
+      @include media-breakpoint-down(sm) {
+        max-width: 100px;
+      }
+    }
+  }
+  .special {
     @include media-breakpoint-down(lg) {
       min-height: 220px;
     }
@@ -44,6 +109,11 @@
       min-height: 330px;
     }
   }
+  .fsa-tooltip {
+    @include absolute-center;
+    right: 5%;
+  }
   .ct-tooltip .arrow:before {
     border-top-color: var(--cx-g-color-8);
   }
+}
