@@ -34,11 +34,11 @@ export const fsaCmsStructure: CmsStructureConfig = {
         typeCode: 'HamburgerMenuComponent',
         flexType: 'HamburgerMenuComponent',
       },
-      LoginComponent: {
-        typeCode: 'LoginComponent',
-        flexType: 'LoginComponent',
-        uid: 'LoginComponent'
-      }
+      // LoginComponent: {
+      //   typeCode: 'LoginComponent',
+      //   flexType: 'LoginComponent',
+      //   uid: 'LoginComponent'
+      // }
     },
     slots: {
       PreHeader: {

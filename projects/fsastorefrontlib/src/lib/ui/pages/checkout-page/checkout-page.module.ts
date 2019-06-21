@@ -6,21 +6,20 @@ import { ConfigModule } from '@spartacus/core';
 import { CheckoutPageComponent } from './checkout-page.component';
 import { CheckoutPageLayoutModule } from '../../layout/checkout-page-layout/checkout-page-layout.module';
 
-const routes: Routes = [
-  {
-    path: null,
-    canActivate: [CmsPageGuard],
-    component: CheckoutPageComponent,
-    data: { cxPath: 'checkout/' }
-  },
-  {
-    path: 'Insurance-Products/:categoryTitle/:categoryType/c/:categoryCode',
-    canActivate: [CmsPageGuard],
-    redirectTo: null,
-    data: { cxRedirectTo: 'checkout/' }
-  }
-];
-
+// const routes: Routes = [
+//   {
+//     path: null,
+//     canActivate: [CmsPageGuard],
+//     component: CheckoutPageComponent,
+//     data: { cxRoute: 'checkout' }
+//   },
+//   {
+//     path: 'Insurance-Products/:categoryTitle/:categoryType/c/:categoryCode',
+//     canActivate: [CmsPageGuard],
+//     redirectTo: null,
+//     data: { cxRedirectTo: 'checkout/' }
+//   }
+// ];
 
 @NgModule({
   imports: [
