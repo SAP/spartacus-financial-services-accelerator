@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { SpinnerModule } from '@spartacus/storefront';
-import { CmsConfig, ConfigModule, AuthGuard, I18nModule } from '@spartacus/core';
-import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
+import { AuthGuard, I18nModule } from '@spartacus/core';
+import { CmsPageGuard } from '@spartacus/storefront';
 
 import { PoliciesComponent } from '../assets/components/policies/policies.component';
 import { PolicyService } from './services/policy.service';
@@ -19,7 +19,7 @@ const routes: Routes = [
     path: 'my-account/my-policies',
     canActivate: [AuthGuard, CmsPageGuard],
     data: { pageLabel: 'my-policies' },
-    component: PageLayoutComponent
+    component: PoliciesComponent
   }
 ];
 
@@ -32,11 +32,6 @@ const routes: Routes = [
     NgSelectModule,
     SpinnerModule,
     RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig>{
-      cmsComponents: {
-        AccountMyPoliciesSPAComponent: { selector: 'fsa-policies' },
-      }
-    })
   ],
   declarations: [PoliciesComponent],
   exports: [PoliciesComponent],

@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { CmsConfig, ConfigModule, AuthGuard, I18nModule } from '@spartacus/core';
-import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
+import { AuthGuard, I18nModule } from '@spartacus/core';
+import { CmsPageGuard } from '@spartacus/storefront';
 
 import { ClaimsComponent } from './components/claims/claims.component';
 import { DeleteClaimDialogComponent } from '../assets/components/claims/delete-claim-dialog/delete-claim-dialog.component';
@@ -18,7 +18,7 @@ const routes: Routes = [
   {
     path: 'my-account/my-insurance-claims',
     canActivate: [AuthGuard, CmsPageGuard],
-    component: PageLayoutComponent,
+    component: ClaimsComponent,
     data: { pageLabel: 'my-claims' }
   }
 ];
@@ -32,11 +32,6 @@ const routes: Routes = [
     NgSelectModule,
     SpinnerModule,
     RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig>{
-      cmsComponents: {
-        AccountMyClaimsSPAComponent: { selector: 'fsa-claims' },
-      }
-    })
   ],
   declarations: [ClaimsComponent, DeleteClaimDialogComponent],
   exports: [ClaimsComponent],

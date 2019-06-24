@@ -4,9 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
+import { CmsPageGuard } from '@spartacus/storefront';
 import { SpinnerModule } from '@spartacus/storefront';
-import { CmsConfig, ConfigModule, AuthGuard, I18nModule } from '@spartacus/core';
+import { AuthGuard, I18nModule } from '@spartacus/core';
 
 import { QuotesComponent } from '../assets/components/quotes/quotes.component';
 import { QuoteService } from './services/quote.service';
@@ -18,7 +18,7 @@ const routes: Routes = [
     path: 'my-account/my-financial-applications',
     canActivate: [AuthGuard, CmsPageGuard],
     data: { pageLabel: 'my-quotes' },
-    component: PageLayoutComponent
+    component: QuotesComponent
   }
 ];
 
@@ -31,11 +31,6 @@ const routes: Routes = [
     NgSelectModule,
     SpinnerModule,
     RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig>{
-      cmsComponents: {
-        AccountMyQuotesSPAComponent: { selector: 'fsa-quotes' }
-      }
-    })
   ],
   declarations: [ QuotesComponent ],
   exports: [ QuotesComponent ],

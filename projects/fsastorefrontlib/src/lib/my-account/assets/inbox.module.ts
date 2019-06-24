@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { SpinnerModule } from '@spartacus/storefront';
-import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
+import { CmsPageGuard } from '@spartacus/storefront';
 import { CmsModule, AuthGuard, I18nModule } from '@spartacus/core';
 
 import { InboxMessagesComponent } from '../../cms-lib/account/inbox/inbox-tab/inbox-messages/inbox-messages.component';
@@ -19,7 +19,7 @@ const routes: Routes = [
     path: 'my-account/inbox',
     canActivate: [AuthGuard, CmsPageGuard],
     data: { pageLabel: 'inbox' },
-    component: PageLayoutComponent
+    component: InboxComponent
   }
 ];
 

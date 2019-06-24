@@ -16,15 +16,15 @@ import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
     RouterModule,
     EffectsModule.forFeature(effects),
     SpinnerModule,
-    ConfigModule.withConfig(<CmsConfig>{
-      cmsComponents: {
-        CMSViewPoliciesComponent: { selector: 'fsa-view-policies' },
-        CMSViewQuotesComponent: { selector: 'fsa-view-quotes' },
-        CMSInboxComponent: { selector: 'fsa-inbox' },
-        CMSInboxTabComponent: { selector: 'fsa-inbox-tab' },
-        AccountPaymentDetailsSPAComponent: {selector : 'cx-payment-methods'}
-      }
-    })
+    // ConfigModule.withConfig(<CmsConfig>{
+    //   cmsComponents: {
+    //     CMSViewPoliciesComponent: { selector: 'fsa-view-policies' },
+    //     CMSViewQuotesComponent: { selector: 'fsa-view-quotes' },
+    //     CMSInboxComponent: { selector: 'fsa-inbox' },
+    //     CMSInboxTabComponent: { selector: 'fsa-inbox-tab' },
+    //     AccountPaymentDetailsSPAComponent: {selector : 'cx-payment-methods'}
+    //   }
+    // })
   ],
   declarations: [ CMSViewPoliciesComponent, CMSViewQuotesComponent ],
   exports: [ CMSViewPoliciesComponent, CMSViewQuotesComponent ],
