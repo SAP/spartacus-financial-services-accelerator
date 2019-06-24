@@ -10,9 +10,11 @@ import { ConfigModule, CmsConfig } from '@spartacus/core';
     RouterModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
-        EnrichedResponsiveBannerComponent: { selector: 'fsa-enriched-responsive-banner' }
+        EnrichedResponsiveBannerComponent: {
+          component: EnrichedResponsiveBannerComponent
+        }
       }
-    }),
+    })
   ],
   declarations: [EnrichedResponsiveBannerComponent],
   exports: [EnrichedResponsiveBannerComponent],

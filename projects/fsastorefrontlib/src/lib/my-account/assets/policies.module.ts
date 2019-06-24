@@ -31,7 +31,7 @@ const routes: Routes = [
     FormsModule,
     NgSelectModule,
     SpinnerModule,
-    RouterModule.forChild(routes),
+    RouterModule.forChild(routes)
   ],
   declarations: [PoliciesComponent],
   exports: [PoliciesComponent],
