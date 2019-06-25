@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { AuthGuard, I18nModule } from '@spartacus/core';
-import { CmsPageGuard } from '@spartacus/storefront';
+import { AuthGuard, I18nModule, ConfigModule, CmsConfig, RoutesConfig, RoutingConfig } from '@spartacus/core';
+import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 
 import { ClaimsComponent } from './components/claims/claims.component';
 import { DeleteClaimDialogComponent } from '../assets/components/claims/delete-claim-dialog/delete-claim-dialog.component';
@@ -16,10 +16,13 @@ import { SpinnerModule } from '@spartacus/storefront';
 
 const routes: Routes = [
   {
-    path: 'my-account/my-insurance-claims',
+    path: null,
     canActivate: [AuthGuard, CmsPageGuard],
-    component: ClaimsComponent,
-    data: { pageLabel: 'my-claims' }
+    data: {
+      cxRoute: 'claimsComponent',
+      pageLabel: 'my-claims'
+    },
+    component: PageLayoutComponent
   }
 ];
 
@@ -32,6 +35,22 @@ const routes: Routes = [
     NgSelectModule,
     SpinnerModule,
     RouterModule.forChild(routes),
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig> {
+      cmsComponents: {
+        AccountMyClaimsSPAComponent: {
+          component: ClaimsComponent
+        }
+      },
+      routing: {
+        routes: {
+          claimsComponent: {
+            paths: [
+              'my-account/my-insurance-claims'
+            ]
+          }
+        }
+      }
+    })
   ],
   declarations: [ClaimsComponent, DeleteClaimDialogComponent],
   exports: [ClaimsComponent],

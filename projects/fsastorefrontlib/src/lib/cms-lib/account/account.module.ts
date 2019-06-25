@@ -22,10 +22,10 @@ import { PaymentDetailsComponent } from '../../checkout/assets/components/paymen
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         CMSViewPoliciesComponent: {
-          component: CMSViewPoliciesComponent,
+          component: CMSViewPoliciesComponent
         },
         CMSViewQuotesComponent: {
-          component: CMSViewQuotesComponent,
+          component: CMSViewQuotesComponent
         },
         CMSInboxComponent: {
           component: InboxComponent,
