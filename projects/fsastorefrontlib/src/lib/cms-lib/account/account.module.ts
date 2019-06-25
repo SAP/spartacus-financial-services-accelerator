@@ -23,11 +23,9 @@ import { PaymentDetailsComponent } from '../../checkout/assets/components/paymen
       cmsComponents: {
         CMSViewPoliciesComponent: {
           component: CMSViewPoliciesComponent,
-          guards: [AuthGuard]
         },
         CMSViewQuotesComponent: {
           component: CMSViewQuotesComponent,
-          guards: [AuthGuard]
         },
         CMSInboxComponent: {
           component: InboxComponent,
