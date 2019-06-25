@@ -1,15 +1,26 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { CmsConfig, ConfigModule, I18nModule, CmsModule, AuthGuard } from '@spartacus/core';
-import { SpinnerModule } from '@spartacus/storefront';
+import { CmsConfig, ConfigModule, I18nModule, CmsModule, AuthGuard, RoutingConfig, RoutesConfig } from '@spartacus/core';
+import { SpinnerModule, PaymentMethodsComponent, PageLayoutComponent, CmsPageGuard } from '@spartacus/storefront';
 import { effects } from '../../my-account/assets/store';
 import { CMSViewPoliciesComponent } from './view-policies/view-policies.component';
 import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
 import { InboxComponent } from './inbox/inbox.component';
 import { InboxTabComponent } from './inbox/inbox-tab/inbox-tab.component';
-import { PaymentDetailsComponent } from '../../checkout/assets/components/payment-details/payment-details.component';
+
+const routes: Routes = [
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'paymentDetails',
+      pageLabel: 'payment-details'
+    },
+    component: PageLayoutComponent
+  }
+];
 
 @NgModule({
   imports: [
@@ -17,9 +28,10 @@ import { PaymentDetailsComponent } from '../../checkout/assets/components/paymen
     CmsModule,
     I18nModule,
     RouterModule,
-    EffectsModule.forFeature(effects),
     SpinnerModule,
-    ConfigModule.withConfig(<CmsConfig>{
+    EffectsModule.forFeature(effects),
+    RouterModule.forChild(routes),
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
         CMSViewPoliciesComponent: {
           component: CMSViewPoliciesComponent
@@ -36,8 +48,17 @@ import { PaymentDetailsComponent } from '../../checkout/assets/components/paymen
           guards: [AuthGuard]
         },
         AccountPaymentDetailsSPAComponent: {
-          component: PaymentDetailsComponent,
+          component: PaymentMethodsComponent,
           guards: [AuthGuard]
+        }
+      },
+      routing: {
+        routes: {
+          paymentDetails: {
+            paths: [
+              'my-account/payment-details'
+            ]
+          }
         }
       }
     })
