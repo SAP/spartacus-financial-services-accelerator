@@ -7,8 +7,6 @@ import { SpinnerModule, PaymentMethodsComponent, PageLayoutComponent, CmsPageGua
 import { effects } from '../../my-account/assets/store';
 import { CMSViewPoliciesComponent } from './view-policies/view-policies.component';
 import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
-import { InboxComponent } from './inbox/inbox.component';
-import { InboxTabComponent } from './inbox/inbox-tab/inbox-tab.component';
 
 const routes: Routes = [
   {
@@ -38,14 +36,6 @@ const routes: Routes = [
         },
         CMSViewQuotesComponent: {
           component: CMSViewQuotesComponent
-        },
-        CMSInboxComponent: {
-          component: InboxComponent,
-          guards: [AuthGuard]
-        },
-        CMSInboxTabComponent: {
-          component: InboxTabComponent,
-          guards: [AuthGuard]
         },
         AccountPaymentDetailsSPAComponent: {
           component: PaymentMethodsComponent,
