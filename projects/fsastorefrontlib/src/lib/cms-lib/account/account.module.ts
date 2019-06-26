@@ -3,7 +3,17 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { CmsConfig, ConfigModule, I18nModule, CmsModule, AuthGuard, RoutingConfig, RoutesConfig } from '@spartacus/core';
-import { SpinnerModule, PaymentMethodsComponent, PageLayoutComponent, CmsPageGuard } from '@spartacus/storefront';
+import {
+  SpinnerModule,
+  PageLayoutComponent,
+  CmsPageGuard,
+  PaymentMethodsComponent,
+  UpdateProfileComponent,
+  ConsentManagementComponent,
+  UpdatePasswordComponent,
+  UpdateEmailComponent,
+  CloseAccountComponent
+} from '@spartacus/storefront';
 import { effects } from '../../my-account/assets/store';
 import { CMSViewPoliciesComponent } from './view-policies/view-policies.component';
 import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
@@ -15,6 +25,51 @@ const routes: Routes = [
     data: {
       cxRoute: 'paymentDetails',
       pageLabel: 'payment-details'
+    },
+    component: PageLayoutComponent
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'consentManagment',
+      pageLabel: 'consents'
+    },
+    component: PageLayoutComponent
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'personalDetails',
+      pageLabel: 'fs-update-profile'
+    },
+    component: PageLayoutComponent
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'updateEmail',
+      pageLabel: 'update-email'
+    },
+    component: PageLayoutComponent
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'updatePasswordComp',
+      pageLabel: 'updatePassword'
+    },
+    component: PageLayoutComponent
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'closeAccount',
+      pageLabel: 'close-account'
     },
     component: PageLayoutComponent
   }
@@ -38,16 +93,43 @@ const routes: Routes = [
           component: CMSViewQuotesComponent
         },
         AccountPaymentDetailsSPAComponent: {
-          component: PaymentMethodsComponent,
-          guards: [AuthGuard]
+          component: PaymentMethodsComponent
+        },
+        ConsentManagementComponent: {
+          component: ConsentManagementComponent
+        },
+        UpdateProfileSPAComponent: {
+          component: UpdateProfileComponent
+        },
+        UpdateEmailComponent: {
+          component: UpdateEmailComponent
+        },
+        UpdatePasswordComponent: {
+          component: UpdatePasswordComponent
+        },
+        AccountCloseAccountSPAComponent: {
+          component: CloseAccountComponent
         }
       },
       routing: {
         routes: {
           paymentDetails: {
-            paths: [
-              'my-account/payment-details'
-            ]
+            paths: ['my-account/payment-details']
+          },
+          consentManagment: {
+            paths: ['my-account/consents']
+          },
+          personalDetails: {
+            paths: ['my-account/fs-update-profile']
+          },
+          updateEmail: {
+            paths: ['my-account/update-email']
+          },
+          updatePasswordComp: {
+            paths: ['my-account/update-password']
+          },
+          closeAccount: {
+            paths: ['my-account/close-account']
           }
         }
       }
