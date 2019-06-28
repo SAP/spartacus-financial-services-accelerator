@@ -41,7 +41,7 @@ export const fscommon = {
     expiryDate: 'Expiry Date',
     expires: 'Expires',
     myAgent: 'My Agent',
-    travel:'Travel',
+    travel: 'Travel',
     savings: 'Savings',
     life: 'Life',
     auto: 'Auto',
