@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import {  CmsPageGuard, PageLayoutModule, PageLayoutComponent, BannerComponent } from '@spartacus/storefront';
 import { RoutesConfig, RoutingConfig, ConfigModule, CmsConfig } from '@spartacus/core';
 
-const routes: Routes = [
+// const routes: Routes = [
 //   {
 //     path: null,
 //     canActivate: [CmsPageGuard],
@@ -27,7 +27,7 @@ const routes: Routes = [
 //     redirectTo: null,
 //     data: { cxRedirectTo: 'checkout/' }
 //   }
-];
+// ];
 
 @NgModule({
   imports: [
