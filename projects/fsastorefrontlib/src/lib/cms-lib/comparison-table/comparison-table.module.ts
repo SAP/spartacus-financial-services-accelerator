@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { CmsModule, CmsConfig, ConfigModule, UrlModule, I18nModule } from '@spartacus/core';
-import { SpinnerModule, PageComponentModule } from '@spartacus/storefront';
+import { CmsModule, CmsConfig, ConfigModule, UrlModule, I18nModule, RoutesConfig, RoutingConfig } from '@spartacus/core';
+import { SpinnerModule, PageComponentModule, CmsPageGuard } from '@spartacus/storefront';
 import { ComparisonTableContainerComponent } from './comparison-table-container/comparison-table-container.component';
 // tslint:disable-next-line:max-line-length
 import { ComparisonTablePanelComponent } from './comparison-table-container/comparison-table-tab/comparison-table-panel/comparison-table-panel.component';
@@ -13,6 +13,19 @@ import { ComparisonTablePanelItemComponent } from './comparison-table-container/
 import { ComparisonTableTabComponent } from './comparison-table-container/comparison-table-tab/comparison-table-tab.component';
 import { OccBillingTimeService } from '../../occ/billing-time/billing-time.service';
 import { ComparisonTableService } from './comparison-table.service';
+import { FSCartService } from '../../checkout/assets/services';
+
+// const routes: Routes = [
+//   {
+//     path: null,
+//     canActivate: [ CmsPageGuard ],
+//     data: {
+//       cxRoute: 'comparisonTable',
+//       pageLabel: 'payment-details'
+//     },
+//     component: PageLayoutComponent
+//   }
+// ];
 
 @NgModule({
   imports: [
@@ -25,20 +38,37 @@ import { ComparisonTableService } from './comparison-table.service';
     NgbTabsetModule,
     NgbTooltipModule,
     UrlModule,
-    ConfigModule.withConfig(<CmsConfig>{
+    // RouterModule.forChild(routes),
+    // ConfigModule.withConfig(<CmsConfig>{
+      // cmsComponents: {
+      //   CMSMultiComparisonTabContainer: {
+      //     selector: 'fsa-comparison-table-container'
+      //   },
+      //   CMSComparisonTabComponent: { selector: 'fsa-comparison-table-tab' },
+      //   ComparisonPanelCMSComponent: { selector: 'fsa-comparison-table-panel' }
+      // },
+      // routesConfig: {
+      //   translations: {
+      //     default: {
+      //       'category/': { paths: ['category/:categoryCode'] }
+      //     }
+      //   }
+      // }
+    // })
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig> {
       cmsComponents: {
         CMSMultiComparisonTabContainer: {
-          selector: 'fsa-comparison-table-container'
+          component: ComparisonTableContainerComponent
         },
-        CMSComparisonTabComponent: { selector: 'fsa-comparison-table-tab' },
-        ComparisonPanelCMSComponent: { selector: 'fsa-comparison-table-panel' }
-      },
-      routesConfig: {
-        translations: {
-          default: {
-            'category/': { paths: ['category/:categoryCode'] }
-          }
-        }
+        CMSComparisonTabComponent: {
+          component: ComparisonTableTabComponent
+        },
+        ComparisonPanelCMSComponent: {
+          component: ComparisonTablePanelComponent
+        },
+        // simpleCMSComponents: {
+        //   component: ComparisonTablePanelItemComponent
+        // }
       }
     })
   ],
@@ -54,6 +84,6 @@ import { ComparisonTableService } from './comparison-table.service';
     ComparisonTablePanelComponent,
     ComparisonTablePanelItemComponent
   ],
-  providers: [OccBillingTimeService, ComparisonTableService]
+  providers: [OccBillingTimeService, ComparisonTableService, FSCartService]
 })
 export class ComparisonTableModule { }
