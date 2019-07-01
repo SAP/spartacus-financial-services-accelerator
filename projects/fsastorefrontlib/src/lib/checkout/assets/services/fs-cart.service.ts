@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { AuthService, CartDataService, CartService, StateWithCart } from '@spartacus/core';
+import { AuthService, CartDataService, CartService, StateWithCart, BaseSiteService } from '@spartacus/core';
 import * as fromAction from '@spartacus/core';
 import * as fromSelector from '@spartacus/core';
 import * as fromFSAction from '../../../checkout/assets/store/actions/index';
@@ -16,9 +16,10 @@ export class FSCartService extends CartService {
   constructor(
     protected fsStore: Store<StateWithCart>,
     protected fsCartData: CartDataService,
-    protected fsAuthService: AuthService
+    protected fsAuthService: AuthService,
+    protected fsBaseSiteService: BaseSiteService
   ) {
-    super(fsStore, fsCartData, fsAuthService, null);
+    super(fsStore, fsCartData, fsAuthService, fsBaseSiteService);
     this.initCart();
   }
 
