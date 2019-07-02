@@ -1,4 +1,4 @@
-import { LayoutConfig, b2cLayoutConfig } from '@spartacus/storefront';
+import { LayoutConfig } from '@spartacus/storefront';
 import { CmsStructureConfig, CmsPageSlotsConfig, ContentSlotComponentData } from '@spartacus/core';
 
 export const fsaLayoutConfig: LayoutConfig = {
