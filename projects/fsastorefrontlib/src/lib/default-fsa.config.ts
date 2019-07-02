@@ -1,9 +1,12 @@
-import { LayoutConfig } from '@spartacus/storefront';
-import { CmsStructureConfig } from '@spartacus/core';
+import { LayoutConfig, b2cLayoutConfig } from '@spartacus/storefront';
+import { CmsStructureConfig, CmsPageSlotsConfig, ContentSlotComponentData } from '@spartacus/core';
 
 export const fsaLayoutConfig: LayoutConfig = {
   breakpoints: {
-    lg: 1400
+    xs: 576,
+    sm: 768,
+    md: 992,
+    lg: 1400,
   },
   layoutSlots: {
     header: {
@@ -27,26 +30,37 @@ export const fsaLayoutConfig: LayoutConfig = {
   },
 };
 
-export const fsaCmsStructure: CmsStructureConfig = {
-  cmsStructure: {
-    components: {
-      HamburgerMenuComponent: {
-        typeCode: 'HamburgerMenuComponent',
-        flexType: 'HamburgerMenuComponent',
-      },
-      // LoginComponent: {
-      //   typeCode: 'LoginComponent',
-      //   flexType: 'LoginComponent',
-      //   uid: 'LoginComponent'
-      // }
-    },
-    slots: {
-      PreHeader: {
-        componentIds: ['HamburgerMenuComponent']
-      },
-      HeaderLinksSlot: {
-        componentIds: ['LoginComponent']
-      }
-    }
+export const fsaCmsStructure:  {
+  [key: string]: ContentSlotComponentData | any;
+} = {
+  HamburgerMenuComponent: {
+    typeCode: 'HamburgerMenuComponent',
+    flexType: 'HamburgerMenuComponent'
+  },
+  LoginComponent: {
+    typeCode: 'LoginComponent',
+    flexType: 'LoginComponent',
+    uid: 'LoginComponent'
   }
 };
+export const fsaPageHeaderConfig: CmsPageSlotsConfig = {
+  PreHeader: {
+    componentIds: ['HamburgerMenuComponent']
+  },
+  HeaderLinksSlot: {
+    componentIds: ['LoginComponent']
+  }
+};
+export function fsaCmsContentConfig(): CmsStructureConfig {
+  return {
+    cmsStructure: {
+      components: {
+        ...fsaCmsStructure,
+      },
+      slots: {
+        ...fsaPageHeaderConfig,
+      },
+      pages: [],
+    },
+  };
+}
