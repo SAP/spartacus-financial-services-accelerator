@@ -6,7 +6,7 @@ export const fsaLayoutConfig: LayoutConfig = {
     xs: 576,
     sm: 768,
     md: 992,
-    lg: 1400,
+    lg: 1400
   },
   layoutSlots: {
     header: {
@@ -25,9 +25,9 @@ export const fsaLayoutConfig: LayoutConfig = {
     navigation: {
       xs: {
         slots: ['HeaderLinksSlot', 'NavigationBar'],
-      },
-    },
-  },
+      }
+    }
+  }
 };
 
 export const fsaCmsStructure:  {
@@ -60,7 +60,7 @@ export function fsaCmsContentConfig(): CmsStructureConfig {
       slots: {
         ...fsaPageHeaderConfig,
       },
-      pages: [],
+      pages: []
     },
   };
 }
