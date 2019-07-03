@@ -1,30 +1,30 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {  CmsPageGuard, PageLayoutModule, PageLayoutComponent } from '@spartacus/storefront';
-import { RoutesConfig, RoutingConfig, ConfigModule } from '@spartacus/core';
+import {  CmsPageGuard, PageLayoutModule, PageLayoutComponent, BannerComponent } from '@spartacus/storefront';
+import { RoutesConfig, RoutingConfig, ConfigModule, CmsConfig } from '@spartacus/core';
 
 // const routes: Routes = [
 //   {
 //     path: null,
 //     canActivate: [CmsPageGuard],
 //     component: PageLayoutComponent,
-//     data: { cxRoute: 'category' }
+//     data: { cxPath: 'category' }
 //   },
 //   {
 //     path: 'Insurance-Products/:categoryTitle/c/:categoryCode',
-//     redirectTo: 'category',
+//     redirectTo: null,
 //     data: { cxRedirectTo: 'category' }
 //   },
 //   {
 //     path: 'Banking-Products/:categoryTitle/c/:categoryCode',
-//     redirectTo: 'category',
+//     redirectTo: null,
 //     data: { cxRedirectTo: 'category' }
 //   },
 //   {
 //     path: 'c/:categoryCode',
 //     canActivate: [CmsPageGuard],
-//     redirectTo: 'category',
+//     redirectTo: null,
 //     data: { cxRedirectTo: 'checkout/' }
 //   }
 // ];
@@ -33,16 +33,6 @@ import { RoutesConfig, RoutingConfig, ConfigModule } from '@spartacus/core';
   imports: [
     CommonModule,
     // RouterModule.forChild(routes),
-    // ConfigModule.withConfig({
-    //   routing: {
-    //     routes: {
-    //       category: {
-    //         paths: [null],
-    //         paramsMapping: { categoryCode: 'code' },
-    //       }
-    //     }
-    //   }
-    // }),
     PageLayoutModule
   ]
 })

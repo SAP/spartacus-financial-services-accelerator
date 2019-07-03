@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { SpinnerModule } from '@spartacus/storefront';
-import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
-import { CmsModule, AuthGuard, I18nModule } from '@spartacus/core';
+import { SpinnerModule, PageLayoutComponent } from '@spartacus/storefront';
+import { CmsPageGuard } from '@spartacus/storefront';
+import { CmsModule, AuthGuard, I18nModule, ConfigModule, CmsConfig, RoutesConfig, RoutingConfig } from '@spartacus/core';
 
 import { InboxMessagesComponent } from '../../cms-lib/account/inbox/inbox-tab/inbox-messages/inbox-messages.component';
 import { InboxTabComponent } from '../../cms-lib/account/inbox/inbox-tab/inbox-tab.component';
@@ -16,9 +16,12 @@ import { InboxService } from './services/inbox.service';
 
 const routes: Routes = [
   {
-    path: 'my-account/inbox',
+    path: null,
     canActivate: [AuthGuard, CmsPageGuard],
-    data: { pageLabel: 'inbox' },
+    data: {
+      cxRoute: 'Inbox',
+      pageLabel: 'inbox'
+    },
     component: PageLayoutComponent
   }
 ];
@@ -31,7 +34,23 @@ const routes: Routes = [
     NgSelectModule,
     SpinnerModule,
     CmsModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
+      cmsComponents: {
+        CMSInboxComponent: {
+          component: InboxComponent
+        }
+      },
+      routing: {
+        routes: {
+          Inbox: {
+            paths: [
+              'my-account/inbox'
+            ]
+          }
+        }
+      }
+    })
   ],
   declarations: [ InboxComponent, InboxTabComponent, InboxMessagesComponent ],
   exports: [ InboxComponent, InboxTabComponent, InboxMessagesComponent ],

@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { SpinnerModule } from '@spartacus/storefront';
+import { SpinnerModule, MediaModule } from '@spartacus/storefront';
 import { I18nModule } from '@spartacus/core';
 import { AddOptionsComponent } from './components/add-options/add-options.component';
 import { FSCartService } from './services';
@@ -18,6 +18,7 @@ import { OccFSCartService } from '../../occ/cart/fs-cart.service';
     FormsModule,
     NgSelectModule,
     SpinnerModule,
+    MediaModule,
     NgbTooltipModule
   ],
   declarations: [AddOptionsComponent],
