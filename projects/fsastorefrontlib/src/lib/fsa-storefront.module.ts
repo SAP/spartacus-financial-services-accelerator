@@ -7,7 +7,7 @@ import { MyAccountModule } from './my-account/index';
 import { UiModule } from './ui/index';
 import { CmsLibModule } from './cms-lib/cms-lib.module';
 import { fstranslations } from '../translations';
-import { fsaLayoutConfig, fsaCmsStructure } from './default-fsa.config';
+import { fsaLayoutConfig, fsaCmsContentConfig } from './default-fsa.config';
 
 @NgModule({
   imports: [
@@ -31,8 +31,8 @@ import { fsaLayoutConfig, fsaCmsStructure } from './default-fsa.config';
         }
       }
     }),
-    ConfigModule.withConfig(fsaCmsStructure),
-    ConfigModule.withConfig(fsaLayoutConfig)
+    ConfigModule.withConfig(fsaLayoutConfig),
+    ConfigModule.withConfigFactory(fsaCmsContentConfig)
   ],
   exports: [
     B2cStorefrontModule,
