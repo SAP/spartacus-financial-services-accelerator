@@ -11,9 +11,9 @@ const routes: Routes = [
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'premiumCalendar', // custom name for your route to be used in ConfigModule configuration
-      pageLabel: 'premium-calendar'
+      pageLabel: 'premium-calendar'// ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
     },
-    component: PageLayoutComponent // SPA Component you're targeting
+    component: PageLayoutComponent // SPA LAYOUT Component you're targeting
   }
 ];
 
@@ -25,14 +25,14 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig> {
       cmsComponents: {
-        AccountPremiumCalendarSPAComponent: {
-          component: PremiumCalendarComponent
+        AccountPremiumCalendarSPAComponent: { // mapping hybris component (defined in impex)
+          component: PremiumCalendarComponent // to SPA component
         }
       },
       routing: {
         routes: {
           premiumCalendar: { // name from cxRoute property above
-            paths: [
+            paths: [ // replaces the null property from Routes object
               'my-account/premium-calendar'
             ]
           }

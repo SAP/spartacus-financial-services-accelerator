@@ -20,7 +20,7 @@ import { checkoutNavBar } from './fsa-checkout-navigation-bar';
   styleUrls: ['./fsa-multi-step-checkout.component.scss'],
   templateUrl: './fsa-multi-step-checkout.component.html'
 })
-export class FsaMultiStepCheckoutComponent extends PaymentMethodComponent {
+export class FsaMultiStepCheckoutComponent {
   step = 2;
   navs = checkoutNavBar;
   anonymous = true;

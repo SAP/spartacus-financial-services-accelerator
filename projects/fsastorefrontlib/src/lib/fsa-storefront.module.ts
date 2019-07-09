@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { provideConfig, ConfigModule } from '@spartacus/core';
-import { StorefrontConfig, B2cStorefrontModule, PageComponentModule } from '@spartacus/storefront';
+import { StorefrontConfig, B2cStorefrontModule, PageComponentModule, CheckoutComponentModule } from '@spartacus/storefront';
 import { translations } from '@spartacus/assets';
 
 import { MyAccountModule } from './my-account/index';
@@ -16,6 +16,7 @@ import { fsaLayoutConfig, fsaCmsContentConfig } from './default-fsa.config';
     CmsLibModule,
     MyAccountModule,
     B2cStorefrontModule,
+    CheckoutComponentModule,
     ConfigModule.forRoot(),
     ConfigModule.withConfig({
       i18n: {
@@ -32,7 +33,32 @@ import { fsaLayoutConfig, fsaCmsContentConfig } from './default-fsa.config';
       }
     }),
     ConfigModule.withConfig(fsaLayoutConfig),
-    ConfigModule.withConfigFactory(fsaCmsContentConfig)
+    ConfigModule.withConfigFactory(fsaCmsContentConfig),
+    ConfigModule.withConfig({
+      checkout: {
+        steps: [
+          {
+            id: 'testCheckout',
+            name: 'checkoutProgress.testCheckout',
+            routeName: 'category',
+            type: [],
+          },
+          {
+            id: 'testCheckout1',
+            name: 'checkoutProgress.testCheckout1',
+            routeName: 'premiumCalendar',
+            type: [],
+          }
+        ],
+      },
+      routing: {
+        routes: {
+          premiumCalendar: {
+            paths: ['checkout/premium-calendar'],
+          }
+        }
+      }
+    }),
   ],
   exports: [
     B2cStorefrontModule,
