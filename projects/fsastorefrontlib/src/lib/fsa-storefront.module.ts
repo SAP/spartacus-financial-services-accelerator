@@ -40,25 +40,24 @@ import { CheckoutModule } from './checkout';
         steps: [
           {
             id: 'comparisonCheckoutStep',
-            name: 'checkoutProgress.comparisonCheckoutStep',
+            name: 'fscommon.whatsIncluded',
             routeName: 'category',
             type: [],
           },
           {
             id: 'addOptionsStep',
-            name: 'checkoutProgress.addOptionsStep',
+            name: 'fscommon.addOptions',
             routeName: 'addOptions',
             type: [],
+          },
+          {
+            id: 'quoteReviewStep',
+            name: 'quote.quoteReview',
+            routeName: 'quoteReview',
+            type: [],
           }
-        ],
-      },
-      // routing: {
-      //   routes: {
-      //     addOptions: {
-      //       paths: ['checkout/add-options'],
-      //     }
-      //   }
-      // }
+        ]
+      }
     }),
   ],
   exports: [

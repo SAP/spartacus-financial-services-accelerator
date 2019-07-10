@@ -4,6 +4,7 @@ export const quote = {
       quotes: 'Quotes',
       myQuote: 'My Quote',
       quoteId: 'Quote ID',
+      quoteReview: 'Quote Review',
       quoteNumberIs: 'Quote number is',
       quoteStatus: 'Quote status',
       viewQuotes: 'View Quotes',

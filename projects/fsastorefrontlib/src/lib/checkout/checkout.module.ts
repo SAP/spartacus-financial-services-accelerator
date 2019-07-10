@@ -2,26 +2,36 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+
 import {
   SpinnerModule,
   CmsPageGuard,
   PageLayoutComponent,
   PageComponentModule,
-  // MultiStepCheckoutModule
+  PaymentMethodModule,
+  PaymentFormModule,
+  MediaModule
 } from '@spartacus/storefront';
-import { AuthGuard, CmsConfig, ConfigModule, I18nModule } from '@spartacus/core';
-
-import { PaymentMethodModule, PaymentFormModule  } from '@spartacus/storefront';
+import {
+  AuthGuard,
+  CmsConfig,
+  ConfigModule,
+  I18nModule,
+  RoutingConfig,
+  RoutesConfig
+} from '@spartacus/core';
 
 import { AccordionModule } from '../accordion/accordion.module';
-import { AddOptionsModule } from './assets/add-options.module';
-import { MiniCartModule } from './assets/components/mini-cart/mini-cart.module';
 import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
 import { FinalReviewComponent } from './assets/components/final-review/final-review.component';
 import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
 import { PaymentDetailsComponent } from './assets/components/payment-details/payment-details.component';
-import { effects } from './assets/store/effects';
 import { AddOptionsComponent } from './assets/components/add-options/add-options.component';
+import { FSMiniCartComponent } from './assets/components/mini-cart/mini-cart.component';
+import { effects } from './assets/store/effects';
+import { FSCartService } from './assets/services';
+import { OccFSCartService } from '../occ/cart/fs-cart.service';
 
 const routes: Routes = [
   {
@@ -32,6 +42,15 @@ const routes: Routes = [
       pageLabel: 'add-options'// ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
     },
     component: PageLayoutComponent // SPA LAYOUT Component you're targeting
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'quoteReview',
+      pageLabel: 'quote-review'
+    },
+    component: PageLayoutComponent
   }
 ];
 
@@ -40,46 +59,63 @@ const routes: Routes = [
     PaymentMethodModule,
     PaymentFormModule,
     I18nModule,
+    NgbTooltipModule,
     CommonModule,
     PageComponentModule,
-    // MultiStepCheckoutModule,
-    AddOptionsModule,
+    MediaModule,
     SpinnerModule,
     AccordionModule,
     RouterModule.forChild(routes),
     EffectsModule.forFeature(effects),
-    ConfigModule.withConfig(<CmsConfig>{
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
-        AddOptionsFlexComponent: { // mapping hybris component (defined in impex)
+        AddOptionsFlex: { // mapping hybris component (defined in impex) - This is acctualy flexType defined in impex for that component
           component: AddOptionsComponent // to SPA component
+        },
+        MiniCartFlex: {
+          component: FSMiniCartComponent
+        },
+        QuoteReviewFlex: {
+          component: QuoteReviewComponent
         }
       },
       routing: {
         routes: {
           addOptions: {
-            paths: ['checkout/add-options'],
+            paths: ['checkout/add-options']
+          },
+          quoteReview: {
+            paths: ['checkout/quote-review']
           }
         }
       }
-      // cmsComponents: {
-      //   OrderConfirmationSPAComponent: { selector: 'fsa-order-confirmation' },
-      // }
     })
   ],
-  declarations: [QuoteReviewComponent, FinalReviewComponent, FsaOrderConfirmationComponent, PaymentDetailsComponent],
+  declarations: [
+    QuoteReviewComponent,
+    FinalReviewComponent,
+    FsaOrderConfirmationComponent,
+    PaymentDetailsComponent,
+    AddOptionsComponent,
+    FSMiniCartComponent
+  ],
   exports: [
     I18nModule,
     PaymentMethodModule,
     PaymentFormModule,
-    AddOptionsModule,
     QuoteReviewComponent,
-    MiniCartModule,
-    // MultiStepCheckoutModule,
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
-    PaymentDetailsComponent
+    PaymentDetailsComponent,
+    FSMiniCartComponent
   ],
-  entryComponents: [FsaOrderConfirmationComponent]
+  entryComponents: [
+    FsaOrderConfirmationComponent,
+    AddOptionsComponent,
+    QuoteReviewComponent,
+    FSMiniCartComponent
+  ],
+  providers: [ FSCartService, OccFSCartService ]
 })
 export class CheckoutModule {
 }
