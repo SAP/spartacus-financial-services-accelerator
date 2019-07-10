@@ -21,14 +21,18 @@ import { FinalReviewComponent } from './assets/components/final-review/final-rev
 import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
 import { PaymentDetailsComponent } from './assets/components/payment-details/payment-details.component';
 import { effects } from './assets/store/effects';
+import { AddOptionsComponent } from './assets/components/add-options/add-options.component';
 
 const routes: Routes = [
   {
-    path: null,
+    path: null, // can be null only if pathS property is defined in ConfigModule
     canActivate: [AuthGuard, CmsPageGuard],
-    component: PageLayoutComponent,
-    data: { pageLabel: 'orderConfirmationPage', cxPath: 'orderConfirmation' },
-  },
+    data: {
+      cxRoute: 'addOptions', // custom name for your route to be used in ConfigModule configuration
+      pageLabel: 'add-options'// ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
+    },
+    component: PageLayoutComponent // SPA LAYOUT Component you're targeting
+  }
 ];
 
 @NgModule({
@@ -42,12 +46,24 @@ const routes: Routes = [
     AddOptionsModule,
     SpinnerModule,
     AccordionModule,
-    // RouterModule.forChild(routes),
+    RouterModule.forChild(routes),
     EffectsModule.forFeature(effects),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
-        OrderConfirmationSPAComponent: { selector: 'fsa-order-confirmation' },
+        AddOptionsFlexComponent: { // mapping hybris component (defined in impex)
+          component: AddOptionsComponent // to SPA component
+        }
+      },
+      routing: {
+        routes: {
+          addOptions: {
+            paths: ['checkout/add-options'],
+          }
+        }
       }
+      // cmsComponents: {
+      //   OrderConfirmationSPAComponent: { selector: 'fsa-order-confirmation' },
+      // }
     })
   ],
   declarations: [QuoteReviewComponent, FinalReviewComponent, FsaOrderConfirmationComponent, PaymentDetailsComponent],

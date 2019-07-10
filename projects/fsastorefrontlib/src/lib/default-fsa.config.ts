@@ -26,7 +26,13 @@ export const fsaLayoutConfig: LayoutConfig = {
       xs: {
         slots: ['HeaderLinksSlot', 'NavigationBar'],
       }
-    }
+    },
+    MultiTabsCategoryPageTemplate: {
+      slots: ['Section1', 'Section2'],
+    },
+    MultiStepCheckoutSummaryPageTemplate: {
+      slots: ['TopContent',  'SideContent', 'BottomContent'],
+    },
   }
 };
 

@@ -1,6 +1,6 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { provideConfig, ConfigModule } from '@spartacus/core';
-import { StorefrontConfig, B2cStorefrontModule, PageComponentModule, CheckoutComponentModule } from '@spartacus/storefront';
+import { StorefrontConfig, B2cStorefrontModule, PageComponentModule } from '@spartacus/storefront';
 import { translations } from '@spartacus/assets';
 
 import { MyAccountModule } from './my-account/index';
@@ -8,6 +8,7 @@ import { UiModule } from './ui/index';
 import { CmsLibModule } from './cms-lib/cms-lib.module';
 import { fstranslations } from '../translations';
 import { fsaLayoutConfig, fsaCmsContentConfig } from './default-fsa.config';
+import { CheckoutModule } from './checkout';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { fsaLayoutConfig, fsaCmsContentConfig } from './default-fsa.config';
     CmsLibModule,
     MyAccountModule,
     B2cStorefrontModule,
-    CheckoutComponentModule,
+    CheckoutModule,
     ConfigModule.forRoot(),
     ConfigModule.withConfig({
       i18n: {
@@ -38,26 +39,26 @@ import { fsaLayoutConfig, fsaCmsContentConfig } from './default-fsa.config';
       checkout: {
         steps: [
           {
-            id: 'testCheckout',
-            name: 'checkoutProgress.testCheckout',
+            id: 'comparisonCheckoutStep',
+            name: 'checkoutProgress.comparisonCheckoutStep',
             routeName: 'category',
             type: [],
           },
           {
-            id: 'testCheckout1',
-            name: 'checkoutProgress.testCheckout1',
-            routeName: 'premiumCalendar',
+            id: 'addOptionsStep',
+            name: 'checkoutProgress.addOptionsStep',
+            routeName: 'addOptions',
             type: [],
           }
         ],
       },
-      routing: {
-        routes: {
-          premiumCalendar: {
-            paths: ['checkout/premium-calendar'],
-          }
-        }
-      }
+      // routing: {
+      //   routes: {
+      //     addOptions: {
+      //       paths: ['checkout/add-options'],
+      //     }
+      //   }
+      // }
     }),
   ],
   exports: [
