@@ -51,6 +51,24 @@ const routes: Routes = [
       pageLabel: 'quote-review'
     },
     component: PageLayoutComponent
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'checkoutPaymentDetails',
+      pageLabel: 'checkout-payment-details'
+    },
+    component: PageLayoutComponent
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'finalReview',
+      pageLabel: 'final-review'
+    },
+    component: PageLayoutComponent
   }
 ];
 
@@ -77,7 +95,13 @@ const routes: Routes = [
         },
         QuoteReviewFlex: {
           component: QuoteReviewComponent
-        }
+        },
+        PaymentDetailsFlex: {
+          component: PaymentDetailsComponent
+        },
+        FinalReviewFlex: {
+          component: FinalReviewComponent
+        },
       },
       routing: {
         routes: {
@@ -86,7 +110,13 @@ const routes: Routes = [
           },
           quoteReview: {
             paths: ['checkout/quote-review']
-          }
+          },
+          checkoutPaymentDetails: {
+            paths: ['checkout/payment-details']
+          },
+          finalReview: {
+            paths: ['checkout/final-review']
+          },
         }
       }
     })
@@ -113,6 +143,8 @@ const routes: Routes = [
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
     QuoteReviewComponent,
+    PaymentDetailsComponent,
+    FinalReviewComponent,
     FSMiniCartComponent
   ],
   providers: [ FSCartService, OccFSCartService ]

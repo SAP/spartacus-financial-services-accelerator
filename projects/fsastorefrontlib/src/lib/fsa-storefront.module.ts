@@ -55,7 +55,19 @@ import { CheckoutModule } from './checkout';
             name: 'quote.quoteReview',
             routeName: 'quoteReview',
             type: [],
-          }
+          },
+          {
+            id: 'checkoutPaymentDetailsStep',
+            name: 'fscommon.paymentDetails',
+            routeName: 'checkoutPaymentDetails',
+            type: [],
+          },
+          {
+            id: 'finalReviewStep',
+            name: 'fscommon.finalReview',
+            routeName: 'finalReview',
+            type: [],
+          },
         ]
       }
     }),
