@@ -1,11 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
-import { Cart, OrderEntry, RoutingService } from '@spartacus/core';
+import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import {FSCartService} from '../../services';
+import { Cart, OrderEntry, RoutingService } from '@spartacus/core';
 import { ɵc as CheckoutConfigService } from '@spartacus/storefront';
-import { ActivatedRoute } from '@angular/router';
 import { CheckoutStepType } from '@spartacus/storefront';
+import {FSCartService} from '../../services';
 
 @Component({
   selector: 'fsa-add-options',

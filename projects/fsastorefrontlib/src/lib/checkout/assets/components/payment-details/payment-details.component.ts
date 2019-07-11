@@ -1,8 +1,19 @@
 import { Component } from '@angular/core';
-import { UserService, CartDataService, Address, CheckoutService } from '@spartacus/core';
-import { PaymentMethodComponent } from '@spartacus/storefront';
+import {
+  UserService,
+  CartDataService,
+  Address,
+  CheckoutService,
+  UserPaymentService,
+  CheckoutDeliveryService,
+  CheckoutPaymentService,
+  GlobalMessageService,
+  RoutingService,
+  TranslationService} from '@spartacus/core';
+import { ɵc as CheckoutConfigService, PaymentMethodComponent } from '@spartacus/storefront';
 import * as fromCheckout from '@spartacus/core';
 import { Store } from '@ngrx/store';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'fsa-payment-details',
@@ -24,9 +35,27 @@ export class PaymentDetailsComponent extends PaymentMethodComponent {
     protected checkoutService: CheckoutService,
     protected store: Store<fromCheckout.CheckoutState>,
     protected cartData: CartDataService,
-    protected userService: UserService
+    protected userService: UserService,
+    protected userPaymentService: UserPaymentService,
+    protected checkoutDeliveryService: CheckoutDeliveryService,
+    protected checkoutPaymentService: CheckoutPaymentService,
+    protected globalMessageService: GlobalMessageService,
+    protected routingService: RoutingService,
+    protected checkoutConfigService: CheckoutConfigService,
+    protected activatedRoute: ActivatedRoute,
+    protected translation: TranslationService
   ) {
-    super(null, null, null, null, null, null, null, null, null);
+    super(
+      userPaymentService,
+      checkoutService,
+      checkoutDeliveryService,
+      checkoutPaymentService,
+      globalMessageService,
+      routingService,
+      checkoutConfigService,
+      activatedRoute,
+      translation
+      );
     this.mockDeliveryAddress();
   }
 
