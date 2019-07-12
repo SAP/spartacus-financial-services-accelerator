@@ -34,6 +34,7 @@ import { FSMiniCartComponent } from './assets/components/mini-cart/mini-cart.com
 import { effects } from './assets/store/effects';
 import { FSCartService } from './assets/services';
 import { OccFSCartService } from '../occ/cart/fs-cart.service';
+import { OccFSProductService } from '../occ/product/fs-product-service';
 
 const routes: Routes = [
   {
@@ -156,7 +157,7 @@ const routes: Routes = [
     FSMiniCartComponent,
     FormsComponent
   ],
-  providers: [ FSCartService, OccFSCartService ]
+  providers: [ FSCartService, OccFSCartService, OccFSProductService ]
 })
 export class CheckoutModule {
 }

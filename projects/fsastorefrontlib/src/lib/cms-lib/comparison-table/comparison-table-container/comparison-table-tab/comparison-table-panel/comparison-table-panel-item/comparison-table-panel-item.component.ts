@@ -6,7 +6,7 @@ import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
 import { ɵc as CheckoutConfigService } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
 import { CheckoutStepType } from '@spartacus/storefront';
-import  {OccFSProductService} from './../../../../../../occ/product/fs-product-service'
+import { OccFSProductService } from './../../../../../../occ/product/fs-product-service'
 
 @Component({
     selector: 'fsa-comparison-table-panel-item',
@@ -34,7 +34,7 @@ export class ComparisonTablePanelItemComponent implements OnInit {
 
     product$: Observable<FSProduct>;
     panelItemEntries: OneTimeChargeEntry[] = [];
-
+    formObj: any = {};
     ngOnInit() {
         this.goTo = null;
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
@@ -48,6 +48,7 @@ export class ComparisonTablePanelItemComponent implements OnInit {
                 });
             }
         });
+        this.productService.formObj.subscribe( obj => console.log(obj));
     }
 
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {

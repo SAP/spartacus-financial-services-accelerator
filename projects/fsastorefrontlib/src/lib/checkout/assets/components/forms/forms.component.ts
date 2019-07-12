@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OccFSProductService } from 'projects/fsastorefrontlib/src/lib/occ/product/fs-product-service';
 export interface ObjectLiteral {
   [key: string]: any;
 }
@@ -9,12 +10,13 @@ export interface ObjectLiteral {
 })
 export class FormsComponent {
   
-  constructor() { }
+  constructor(
+    protected productService: OccFSProductService,
+  ) { }
   formDataArray: any = [];
   test = {
     "productPriceDescriptors": this.formDataArray
    };
-   
    onClickSubmit(formData) {
     Object.entries(formData).forEach(entry => {
       let key = entry[0];
@@ -25,6 +27,6 @@ export class FormsComponent {
       }
       this.formDataArray.push(obj);
     });
-    console.log(this.test);
+    this.productService.setformObj(this.test);
    }
 }

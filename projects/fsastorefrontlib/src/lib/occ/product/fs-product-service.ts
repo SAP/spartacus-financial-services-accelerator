@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OccConfig } from '@spartacus/core';
+import { BehaviorSubject } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
@@ -14,6 +15,12 @@ export class OccFSProductService {
         protected http: HttpClient,
         protected config: OccConfig
     ) { }
+    formObjSource = new BehaviorSubject<any>('');
+    formObj = this.formObjSource.asObservable();
+
+    setformObj( obj: any ) {
+        this.formObjSource.next(obj);
+    }
 
     public getProductWithPricing(productCode: string, pricingAttributes: any): Observable<any> {
         const url = this.getProductPricing(productCode);
@@ -39,7 +46,5 @@ export class OccFSProductService {
             productPricingService
         );
     }
-
-   
 
 }
