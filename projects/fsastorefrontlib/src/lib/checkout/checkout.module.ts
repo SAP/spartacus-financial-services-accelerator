@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 import {
   SpinnerModule,
@@ -25,6 +26,7 @@ import {
 import { AccordionModule } from '../accordion/accordion.module';
 import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
 import { FinalReviewComponent } from './assets/components/final-review/final-review.component';
+import { FormsComponent } from './assets/components/forms/forms.component';
 import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
 import { PaymentDetailsComponent } from './assets/components/payment-details/payment-details.component';
 import { AddOptionsComponent } from './assets/components/add-options/add-options.component';
@@ -74,6 +76,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    FormsModule,
     PaymentMethodModule,
     PaymentFormModule,
     I18nModule,
@@ -102,6 +105,9 @@ const routes: Routes = [
         FinalReviewFlex: {
           component: FinalReviewComponent
         },
+        CMSTripDetailsSubmitComponent: {
+          component: FormsComponent
+        },
       },
       routing: {
         routes: {
@@ -127,7 +133,8 @@ const routes: Routes = [
     FsaOrderConfirmationComponent,
     PaymentDetailsComponent,
     AddOptionsComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
+    FormsComponent
   ],
   exports: [
     I18nModule,
@@ -137,7 +144,8 @@ const routes: Routes = [
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
     PaymentDetailsComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
+    FormsComponent
   ],
   entryComponents: [
     FsaOrderConfirmationComponent,
@@ -145,7 +153,8 @@ const routes: Routes = [
     QuoteReviewComponent,
     PaymentDetailsComponent,
     FinalReviewComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
+    FormsComponent
   ],
   providers: [ FSCartService, OccFSCartService ]
 })

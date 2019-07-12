@@ -21,7 +21,7 @@ import { checkoutNavBar } from './fsa-checkout-navigation-bar';
   templateUrl: './fsa-multi-step-checkout.component.html'
 })
 export class FsaMultiStepCheckoutComponent {
-  step = 2;
+  step = 1;
   navs = checkoutNavBar;
   anonymous = true;
   currentUrl: string;
