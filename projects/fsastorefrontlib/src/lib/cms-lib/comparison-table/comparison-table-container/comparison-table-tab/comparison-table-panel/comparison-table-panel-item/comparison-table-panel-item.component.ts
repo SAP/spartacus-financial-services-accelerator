@@ -6,6 +6,7 @@ import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
 import { ɵc as CheckoutConfigService } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
 import { CheckoutStepType } from '@spartacus/storefront';
+import  {OccFSProductService} from './../../../../../../occ/product/fs-product-service'
 
 @Component({
     selector: 'fsa-comparison-table-panel-item',
@@ -23,7 +24,7 @@ export class ComparisonTablePanelItemComponent implements OnInit {
 
     constructor(
         protected cartService: FSCartService,
-        protected productService: ProductService,
+        protected productService: OccFSProductService,
         protected config: CmsConfig,
         protected routingService: RoutingService,
         private checkoutConfigService: CheckoutConfigService,
@@ -39,7 +40,7 @@ export class ComparisonTablePanelItemComponent implements OnInit {
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
           this.activatedRoute
         );
-        this.product$ = this.productService.get(this.productCode);
+        this.product$ = this.productService.getProductWithPricing(this.productCode, "");
         this.product$.subscribe(data => {
             if (data) {
                 this.panelItemEntries = this.billingTimes.map(billingTime => {
