@@ -24,7 +24,7 @@ export class OccFSProductService {
 
     public getProductWithPricing(productCode: string, pricingAttributes: any): Observable<any> {
         const url = this.getProductPricing(productCode);
-        const toAdd = pricingAttributes;
+        const productPriceDescriptorList = pricingAttributes;
 
         const params = new HttpParams({
             fromString: FULL_PARAMS
@@ -33,12 +33,12 @@ export class OccFSProductService {
             'Content-Type': 'application/x-www-form-urlencoded'
         });
         return this.http
-            .post<any>(url,toAdd,{ headers,params })
+            .post<any>(url,productPriceDescriptorList,{ headers,params })
             .pipe(catchError((error: any) => throwError(error.json())));
     }
 
     protected getProductPricing(productCode: string) {
-        const productPricingService = '/products-pricing/' + productCode;
+        const productPricingService = '/product-pricing/' + productCode;
         return (
             (this.config.backend.occ.baseUrl || '') +
             this.config.backend.occ.prefix +
