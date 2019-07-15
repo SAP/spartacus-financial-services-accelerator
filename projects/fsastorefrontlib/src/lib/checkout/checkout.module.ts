@@ -26,7 +26,7 @@ import {
 import { AccordionModule } from '../accordion/accordion.module';
 import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
 import { FinalReviewComponent } from './assets/components/final-review/final-review.component';
-import { FormsComponent } from './assets/components/forms/forms.component';
+import { TravelFormComponent } from './assets/components/forms/travel/travel-form.component';
 import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
 import { PaymentDetailsComponent } from './assets/components/payment-details/payment-details.component';
 import { AddOptionsComponent } from './assets/components/add-options/add-options.component';
@@ -107,7 +107,7 @@ const routes: Routes = [
           component: FinalReviewComponent
         },
         CMSTripDetailsSubmitComponent: {
-          component: FormsComponent
+          component: TravelFormComponent
         },
       },
       routing: {
@@ -135,7 +135,7 @@ const routes: Routes = [
     PaymentDetailsComponent,
     AddOptionsComponent,
     FSMiniCartComponent,
-    FormsComponent
+    TravelFormComponent
   ],
   exports: [
     I18nModule,
@@ -146,7 +146,7 @@ const routes: Routes = [
     FsaOrderConfirmationComponent,
     PaymentDetailsComponent,
     FSMiniCartComponent,
-    FormsComponent
+    TravelFormComponent
   ],
   entryComponents: [
     FsaOrderConfirmationComponent,
@@ -155,7 +155,7 @@ const routes: Routes = [
     PaymentDetailsComponent,
     FinalReviewComponent,
     FSMiniCartComponent,
-    FormsComponent
+    TravelFormComponent
   ],
   providers: [ FSCartService, OccFSCartService, OccFSProductService ]
 })

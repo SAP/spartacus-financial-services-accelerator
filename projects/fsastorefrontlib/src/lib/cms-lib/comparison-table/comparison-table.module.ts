@@ -13,6 +13,7 @@ import { ComparisonTableTabComponent } from './comparison-table-container/compar
 import { OccBillingTimeService } from '../../occ/billing-time/billing-time.service';
 import { ComparisonTableService } from './comparison-table.service';
 import { FSCartService } from '../../checkout/assets/services';
+import { PricingService } from '../../occ/pricing/pricing.service';
 
 
 // const routes: Routes = [
@@ -64,6 +65,6 @@ import { FSCartService } from '../../checkout/assets/services';
     ComparisonTablePanelComponent,
     ComparisonTablePanelItemComponent
   ],
-  providers: [OccBillingTimeService, ComparisonTableService, FSCartService]
+  providers: [OccBillingTimeService, ComparisonTableService, FSCartService, PricingService]
 })
 export class ComparisonTableModule { }

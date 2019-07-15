@@ -3,10 +3,10 @@ import { FSCartService } from './../../../../../../checkout/assets/services';
 import {  CmsConfig, ProductService, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
-import { ɵc as CheckoutConfigService } from '@spartacus/storefront';
+import { ɵd as CheckoutConfigService } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
-import { CheckoutStepType } from '@spartacus/storefront';
 import { OccFSProductService } from './../../../../../../occ/product/fs-product-service'
+import { PricingService } from 'projects/fsastorefrontlib/src/lib/occ/pricing/pricing.service';
 
 @Component({
     selector: 'fsa-comparison-table-panel-item',
@@ -20,27 +20,30 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     @Input()
     billingTimes: any;
     checkoutStepUrlNext: string;
-    goTo: CheckoutStepType;
 
     constructor(
         protected cartService: FSCartService,
         protected productService: OccFSProductService,
+        protected coreProductService: ProductService,
         protected config: CmsConfig,
         protected routingService: RoutingService,
         private checkoutConfigService: CheckoutConfigService,
         private activatedRoute: ActivatedRoute,
+        private pricingService: PricingService
     ) {
     }
 
     product$: Observable<FSProduct>;
     panelItemEntries: OneTimeChargeEntry[] = [];
-    formObj: any = {};
+    priceAttributtes = {};
+
     ngOnInit() {
-        this.goTo = null;
+
+        this.priceAttributtes = this.pricingService.getPricingAttributes();
+        this.product$ = this.productService.getProductWithPricing(this.productCode, this.priceAttributtes);
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
           this.activatedRoute
         );
-        this.product$ = this.productService.getProductWithPricing(this.productCode, "");
         this.product$.subscribe(data => {
             if (data) {
                 this.panelItemEntries = this.billingTimes.map(billingTime => {
@@ -48,7 +51,6 @@ export class ComparisonTablePanelItemComponent implements OnInit {
                 });
             }
         });
-        this.productService.formObj.subscribe( obj => console.log(obj));
     }
 
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {

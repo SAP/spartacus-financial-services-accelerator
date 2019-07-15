@@ -20,7 +20,7 @@ protected getClaimsEndpoint(userId: string) {
     return (
       (this.config.backend.occ.baseUrl || '') +
             this.config.backend.occ.prefix +
-        this.config.site.baseSite +
+        'insurance' +
            claimsEndpoint
     );
 }

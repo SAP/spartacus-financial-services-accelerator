@@ -2,8 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from
 import { Cart, OrderEntry, RoutingService } from '@spartacus/core';
 import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import {FSCartService} from '../../services';
-import { ɵc as CheckoutConfigService } from '@spartacus/storefront';
+import { FSCartService } from '../../services';
+//import { ɵc as CheckoutConfigService } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
 import { CheckoutStepType } from '@spartacus/storefront';
 
@@ -17,7 +17,7 @@ export class AddOptionsComponent implements OnInit {
   constructor(
     protected cartService: FSCartService,
     protected routingService: RoutingService,
-    private checkoutConfigService: CheckoutConfigService,
+    //private checkoutCnfigService: CheckoutConfigService,
     private activatedRoute: ActivatedRoute,
   ) { }
 
@@ -31,9 +31,9 @@ export class AddOptionsComponent implements OnInit {
 
   ngOnInit() {
     this.goTo = null;
-    this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-      this.activatedRoute
-    );
+    // this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
+    //   this.activatedRoute
+    // );
     this.cart$ = this.cartService.getActive();
     this.entries$ = this.cartService
       .getEntries()

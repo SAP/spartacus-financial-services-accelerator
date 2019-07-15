@@ -8,15 +8,18 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FSAStorefrontModule.withConfig({
-      backend: {
+      backend: { 
         occ: {
            baseUrl: 'https://financialservices.local:9002'
        }
       },
-      site: {
-        baseSite: 'insurance',
-        currency: 'EUR',
-        language: 'en'
+      context: {
+        baseSite: [
+          'insurance',
+        ],
+        language:['en'],
+        currency:['EUR'],
+        urlParameters: ['baseSite', 'language', 'currency'],
       },
       authentication: {
         client_id: 'financial_customer',

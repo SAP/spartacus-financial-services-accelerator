@@ -49,7 +49,7 @@ export class OccFSCartService {
         return (
             (this.config.backend.occ.baseUrl || '') +
             this.config.backend.occ.prefix +
-            this.config.site.baseSite +
+            'insurance' +
             addOptionalProductToCartEndpoint
         );
     }
@@ -59,7 +59,7 @@ export class OccFSCartService {
         return (
             (this.config.backend.occ.baseUrl || '') +
             this.config.backend.occ.prefix +
-            this.config.site.baseSite +
+            'insurance' +
             startBundleForProductOfCartEndpoint
         );
     }

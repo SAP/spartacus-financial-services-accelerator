@@ -19,7 +19,7 @@ export class OccPolicyService {
     return (
       (this.config.backend.occ.baseUrl || '') +
       this.config.backend.occ.prefix +
-      this.config.site.baseSite +
+      'insurance' +
       policiesEndpoint
     );
   }
@@ -29,7 +29,7 @@ export class OccPolicyService {
     return (
       (this.config.backend.occ.baseUrl || '') +
       this.config.backend.occ.prefix +
-      this.config.site.baseSite +
+      'insurance' +
       policyEndpoint
     );
   }

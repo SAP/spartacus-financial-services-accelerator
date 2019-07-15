@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserService, CartDataService, Address, CheckoutService } from '@spartacus/core';
+import { UserService, CartDataService, Address, CheckoutService, CheckoutActions } from '@spartacus/core';
 import { PaymentMethodComponent } from '@spartacus/storefront';
 import * as fromCheckout from '@spartacus/core';
 import { Store } from '@ngrx/store';
@@ -32,6 +32,6 @@ export class PaymentDetailsComponent extends PaymentMethodComponent {
 
   mockDeliveryAddress(): void {
     this.store.dispatch(
-      new fromCheckout.SetDeliveryAddressSuccess(this.FSDeliveryAddress));
+      new   CheckoutActions.SetDeliveryAddressSuccess(this.FSDeliveryAddress));
   }
 }

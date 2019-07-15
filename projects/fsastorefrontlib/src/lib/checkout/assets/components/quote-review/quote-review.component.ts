@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cart, CartService, OccConfig, RoutingService } from '@spartacus/core';
 import { CheckoutStepType } from '@spartacus/storefront';
-import { ɵc as CheckoutConfigService } from '@spartacus/storefront';
+import { ɵd as CheckoutConfigService } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
 
 

@@ -26,7 +26,7 @@ export class OccInboxService {
     return (
       (this.config.backend.occ.baseUrl || '') +
       this.config.backend.occ.prefix +
-      this.config.site.baseSite +
+      'insurance' +
       siteMessagesEndpoint
     );
   }
@@ -35,7 +35,7 @@ export class OccInboxService {
     return (
       (this.config.backend.occ.baseUrl || '') +
       this.config.backend.occ.prefix +
-      this.config.site.baseSite +
+      'insurance' +
       readUnreadEndpoint
     );
   }

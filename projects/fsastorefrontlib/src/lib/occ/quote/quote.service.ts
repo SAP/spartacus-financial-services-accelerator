@@ -17,7 +17,7 @@ export class OccQuoteService {
     return (
       (this.config.backend.occ.baseUrl || '') +
       this.config.backend.occ.prefix +
-      this.config.site.baseSite +
+      'insurance' +
       quotesEndpoint
     );
   }
