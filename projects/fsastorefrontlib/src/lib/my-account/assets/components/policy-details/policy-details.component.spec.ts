@@ -1,8 +1,7 @@
 import { PolicyDetailsComponent } from './policy-details.component';
-import { ComponentFixture, async, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { RoutingService, OccConfig, I18nTestingModule } from '@spartacus/core';
-import { DebugElement } from '@angular/core';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { AccordionModule } from './../../../../accordion/accordion.module';
 import { PolicyService } from '../../services';
 
@@ -12,7 +11,7 @@ class MockPolicyService {
 }
 
 class MockRoutingService {
-  getRouterState() {
+  getRouterState(): Observable<any> {
     return of({
       state: {
         params: {
@@ -42,7 +41,7 @@ describe('PolicyDetailsComponent', () => {
     let component: PolicyDetailsComponent;
     let fixture: ComponentFixture<PolicyDetailsComponent>;
 
-    beforeEach(() => {
+    beforeEach(async(() => {
 
       TestBed.configureTestingModule({
         imports: [
@@ -50,7 +49,7 @@ describe('PolicyDetailsComponent', () => {
             I18nTestingModule
         ],
         providers: [
-          { provide: RoutingService, useValue: MockRoutingService },
+          { provide: RoutingService, useClass: MockRoutingService },
           { provide: PolicyService, useClass: MockPolicyService },
           { provide: OccConfig, useValue: MockOccModuleConfig },
 
@@ -58,11 +57,13 @@ describe('PolicyDetailsComponent', () => {
         declarations: [
           PolicyDetailsComponent
         ]
-      }).compileComponents();
+      }).compileComponents();  
+    }));
 
+    beforeEach(() => {
       fixture = TestBed.createComponent(PolicyDetailsComponent);
-
       component = fixture.componentInstance;
+      fixture.detectChanges();
       component.ngOnInit();
     });
 
