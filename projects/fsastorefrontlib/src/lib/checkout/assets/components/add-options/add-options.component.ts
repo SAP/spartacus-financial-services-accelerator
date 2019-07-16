@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Cart, OrderEntry, RoutingService } from '@spartacus/core';
-import { ɵc as CheckoutConfigService } from '@spartacus/storefront';
+import { ɵd as CheckoutConfigService } from '@spartacus/storefront';
 import { CheckoutStepType } from '@spartacus/storefront';
 import {FSCartService} from '../../services';
 

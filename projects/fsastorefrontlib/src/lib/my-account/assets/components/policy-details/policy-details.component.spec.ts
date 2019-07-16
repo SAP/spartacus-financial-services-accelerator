@@ -11,9 +11,24 @@ class MockPolicyService {
     loadPolicyDetails(policyId: string, contractId: string): void {}
 }
 
+class MockRoutingService {
+  getRouterState() {
+    return of({
+      state: {
+        params: {
+          policyId: '0000002',
+          contractId: '0000002'
+        },
+      },
+    });
+  }
+}
+
 const MockOccModuleConfig: OccConfig = {
-  site: {
-    baseSite: ''
+  context: {
+    baseSite: [
+      ''
+    ]
   },
   backend: {
     occ: {
@@ -26,23 +41,8 @@ const MockOccModuleConfig: OccConfig = {
 describe('PolicyDetailsComponent', () => {
     let component: PolicyDetailsComponent;
     let fixture: ComponentFixture<PolicyDetailsComponent>;
-    let mockRoutingService: RoutingService;
-    let el: DebugElement;
-    let policyService: PolicyService;
 
-    beforeEach(async(() => {
-      mockRoutingService = <RoutingService>{
-        getRouterState() {
-          return of({
-            state: {
-              params: {
-                policyId: '0000002',
-                contractId: '0000002'
-              }
-            }
-          });
-        }
-      };
+    beforeEach(() => {
 
       TestBed.configureTestingModule({
         imports: [
@@ -50,20 +50,17 @@ describe('PolicyDetailsComponent', () => {
             I18nTestingModule
         ],
         providers: [
-          { provide: RoutingService, useValue: mockRoutingService },
+          { provide: RoutingService, useValue: MockRoutingService },
           { provide: PolicyService, useClass: MockPolicyService },
-          { provide: OccConfig, useValue: MockOccModuleConfig }
+          { provide: OccConfig, useValue: MockOccModuleConfig },
+
         ],
         declarations: [
           PolicyDetailsComponent
         ]
       }).compileComponents();
-    }));
 
-    beforeEach(() => {
       fixture = TestBed.createComponent(PolicyDetailsComponent);
-      el = fixture.debugElement;
-      policyService = TestBed.get(PolicyService);
 
       component = fixture.componentInstance;
       component.ngOnInit();

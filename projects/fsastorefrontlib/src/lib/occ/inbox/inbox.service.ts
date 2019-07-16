@@ -3,7 +3,7 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
-import { OccConfig } from '@spartacus/core';
+import { OccEndpointsService } from '@spartacus/core';
 import { FSSearchConfig } from '../../my-account/assets/services/inbox-data.service';
 
 const FULL_PARAMS = '&fields=FULL';
@@ -12,7 +12,7 @@ const FULL_PARAMS = '&fields=FULL';
 export class OccInboxService {
   constructor(
     protected http: HttpClient,
-    protected config: OccConfig
+    protected occEndpointService: OccEndpointsService,
   ) {}
 
   protected getSiteMessagesEndpoint(userId: string, messageGroup: string, searchConfig?: FSSearchConfig) {
@@ -24,20 +24,16 @@ export class OccInboxService {
       siteMessagesEndpoint += '&messagegroup=' + messageGroup;
     }
     return (
-      (this.config.backend.occ.baseUrl || '') +
-      this.config.backend.occ.prefix +
-      this.config.site.baseSite +
+      (this.occEndpointService.getBaseEndpoint() +
       siteMessagesEndpoint
-    );
+    ));
   }
   protected getReadUnreadEndpoint(userId: string) {
     const readUnreadEndpoint = '/users/' + userId + '/notifications/fssitemessages/read-unread';
     return (
-      (this.config.backend.occ.baseUrl || '') +
-      this.config.backend.occ.prefix +
-      this.config.site.baseSite +
+      (this.occEndpointService.getBaseEndpoint +
       readUnreadEndpoint
-    );
+    ));
   }
 
   public getSiteMessagesForUserAndGroup(userId: string, messageGroup: string, searchConfig: FSSearchConfig): Observable<any> {

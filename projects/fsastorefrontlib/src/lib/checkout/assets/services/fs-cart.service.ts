@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { AuthService, CartDataService, CartService, StateWithCart, BaseSiteService } from '@spartacus/core';
-import * as fromAction from '@spartacus/core';
-import * as fromSelector from '@spartacus/core';
+import { AuthService, CartDataService, CartService, StateWithCart, CartActions } from '@spartacus/core';
 import * as fromFSAction from '../../../checkout/assets/store/actions/index';
 import { BehaviorSubject } from 'rxjs';
 
@@ -17,20 +15,19 @@ export class FSCartService extends CartService {
     protected fsStore: Store<StateWithCart>,
     protected fsCartData: CartDataService,
     protected fsAuthService: AuthService,
-    protected fsBaseSiteService: BaseSiteService
   ) {
-    super(fsStore, fsCartData, fsAuthService, fsBaseSiteService);
+    super(fsStore, fsCartData, fsAuthService);
     this.initCart();
   }
 
   protected initCart(): void {
-    this.fsStore.pipe(select(fromSelector.getCartContent)).subscribe(cart => {
-      this.fsCartData.cart = cart;
-      if (this.callbackFunction) {
-        this.callbackFunction();
-        this.callbackFunction = null;
-      }
-    });
+    // this.fsStore.pipe(select(CartSelectors.getCartContent)).subscribe(cart => {
+    //   this.fsCartData.cart = cart;
+    //   if (this.callbackFunction) {
+    //     this.callbackFunction();
+    //     this.callbackFunction = null;
+    //   }
+    // });
   }
 
   addOptionalProduct(productCode: string, quantity: number, entryNumber: string): void {
@@ -47,7 +44,7 @@ export class FSCartService extends CartService {
 
   createCartAndStartBundle(productCode: string, bundleTemplateId: string, quantity: number): void {
     this.fsStore.dispatch(
-      new fromAction.CreateCart({ userId: this.fsCartData.userId })
+      new CartActions.CreateCart({ userId: this.fsCartData.userId })
     );
     this.callbackFunction = function () {
       this.fsStore.dispatch(

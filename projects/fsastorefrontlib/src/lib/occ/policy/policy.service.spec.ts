@@ -19,8 +19,10 @@ const premiumCalendarEndpoint = '/premium-calendar';
 
 
 const MockOccModuleConfig: OccConfig = {
-  site: {
-    baseSite: ''
+  context: {
+    baseSite: [
+      ''
+    ]
   },
   backend: {
     occ: {

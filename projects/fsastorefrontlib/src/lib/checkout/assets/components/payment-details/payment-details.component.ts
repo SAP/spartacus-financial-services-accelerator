@@ -9,9 +9,10 @@ import {
   CheckoutPaymentService,
   GlobalMessageService,
   RoutingService,
-  TranslationService} from '@spartacus/core';
-import { ɵc as CheckoutConfigService, PaymentMethodComponent } from '@spartacus/storefront';
-import * as fromCheckout from '@spartacus/core';
+  TranslationService,
+  CheckoutActions,
+  CheckoutState} from '@spartacus/core';
+import { ɵd as CheckoutConfigService, PaymentMethodComponent } from '@spartacus/storefront';
 import { Store } from '@ngrx/store';
 import { ActivatedRoute } from '@angular/router';
 
@@ -33,7 +34,7 @@ export class PaymentDetailsComponent extends PaymentMethodComponent {
   };
   constructor(
     protected checkoutService: CheckoutService,
-    protected store: Store<fromCheckout.CheckoutState>,
+    protected store: Store<CheckoutState>,
     protected cartData: CartDataService,
     protected userService: UserService,
     protected userPaymentService: UserPaymentService,
@@ -61,6 +62,6 @@ export class PaymentDetailsComponent extends PaymentMethodComponent {
 
   mockDeliveryAddress(): void {
     this.store.dispatch(
-      new fromCheckout.SetDeliveryAddressSuccess(this.FSDeliveryAddress));
+      new CheckoutActions.SetDeliveryAddressSuccess(this.FSDeliveryAddress));
   }
 }

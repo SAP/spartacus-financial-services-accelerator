@@ -3,7 +3,7 @@ import { FSCartService } from './../../../../../../checkout/assets/services';
 import {  CmsConfig, ProductService, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
-import { ɵc as CheckoutConfigService } from '@spartacus/storefront';
+import { ɵd as CheckoutConfigService } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
 import { CheckoutStepType } from '@spartacus/storefront';
 
