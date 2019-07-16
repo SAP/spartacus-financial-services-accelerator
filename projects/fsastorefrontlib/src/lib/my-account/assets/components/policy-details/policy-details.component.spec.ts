@@ -57,7 +57,7 @@ describe('PolicyDetailsComponent', () => {
         declarations: [
           PolicyDetailsComponent
         ]
-      }).compileComponents();  
+      }).compileComponents();
     }));
 
     beforeEach(() => {
