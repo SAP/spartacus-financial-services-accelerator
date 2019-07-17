@@ -23,7 +23,6 @@ export class FinalReviewComponent implements OnInit {
     private routingService: RoutingService,
     private checkoutConfigService: CheckoutConfigService,
     private activatedRoute: ActivatedRoute
-
     ) { }
 
   checkoutStepUrlNext: string;
