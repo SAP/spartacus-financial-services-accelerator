@@ -14,7 +14,8 @@ import {
   MediaModule,
   CartNotEmptyGuard,
   PaymentDetailsSetGuard,
-  OrderConfirmationGuard
+  OrderConfirmationGuard,
+  CardModule
 } from '@spartacus/storefront';
 import {
   AuthGuard,
@@ -104,6 +105,7 @@ const routes: Routes = [
     MediaModule,
     SpinnerModule,
     AccordionModule,
+    CardModule,
     RouterModule.forChild(routes),
     EffectsModule.forFeature(effects),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
