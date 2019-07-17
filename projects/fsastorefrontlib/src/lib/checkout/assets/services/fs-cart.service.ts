@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { AuthService, CartDataService, CartService, StateWithCart, CartActions } from '@spartacus/core';
+import { AuthService, CartDataService, CartService, StateWithCart, CartActions, CartSelectors, Cart } from '@spartacus/core';
 import * as fromFSAction from '../../../checkout/assets/store/actions/index';
 import { BehaviorSubject } from 'rxjs';
+import { tap, filter, take } from 'rxjs/operators';
 
 @Injectable()
 export class FSCartService extends CartService {
@@ -17,17 +18,6 @@ export class FSCartService extends CartService {
     protected fsAuthService: AuthService,
   ) {
     super(fsStore, fsCartData, fsAuthService);
-    this.initCart();
-  }
-
-  protected initCart(): void {
-    // this.fsStore.pipe(select(CartSelectors.getCartContent)).subscribe(cart => {
-    //   this.fsCartData.cart = cart;
-    //   if (this.callbackFunction) {
-    //     this.callbackFunction();
-    //     this.callbackFunction = null;
-    //   }
-    // });
   }
 
   addOptionalProduct(productCode: string, quantity: number, entryNumber: string): void {
@@ -43,20 +33,37 @@ export class FSCartService extends CartService {
   }
 
   createCartAndStartBundle(productCode: string, bundleTemplateId: string, quantity: number): void {
-    this.fsStore.dispatch(
-      new CartActions.CreateCart({ userId: this.fsCartData.userId })
-    );
-    this.callbackFunction = function () {
-      this.fsStore.dispatch(
-        new fromFSAction.StartBundle({
-          userId: this.fsCartData.userId,
-          cartId: this.fsCartData.cartId,
-          productCode: productCode,
-          bundleTemplateId: bundleTemplateId,
-          quantity: quantity
-        })
-      );
-    this.productAddedSource.next(productCode);
-    };
+    this.fsStore
+      .pipe(
+        select(CartSelectors.getActiveCartState),
+        tap(cartState => {
+          if (!this.isCartCreated(cartState.value.content) && !cartState.loading) {
+            this.fsStore.dispatch(
+              new CartActions.CreateCart({ userId: this.cartData.userId })
+            );
+          }
+        }),
+        filter(cartState => this.isCartCreated(cartState.value.content)),
+        take(1)
+      )
+      .subscribe(_ => {
+        this.fsStore.dispatch(
+          new fromFSAction.StartBundle({
+            userId: this.fsCartData.userId,
+            cartId: this.fsCartData.cartId,
+            productCode: productCode,
+            bundleTemplateId: bundleTemplateId,
+            quantity: quantity
+          })
+        );
+      });
+  }
+
+  private isCartCreated(cart: Cart): boolean {
+    return cart && typeof cart.guid !== 'undefined';
   }
 }
+
+
+
+
