@@ -68,6 +68,12 @@ import { CheckoutModule } from './checkout';
             routeName: 'finalReview',
             type: [],
           },
+          {
+            id: 'orderConfirmationStep',
+            name: 'fscommon.orderConfirmation',
+            routeName: 'orderConfirmation',
+            type: [],
+          }
         ]
       }
     }),
