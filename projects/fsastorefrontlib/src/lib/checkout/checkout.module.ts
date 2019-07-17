@@ -14,7 +14,8 @@ import {
   MediaModule,
   CartNotEmptyGuard,
   PaymentDetailsSetGuard,
-  CardModule
+  CardModule,
+  PaymentMethodComponent
 } from '@spartacus/storefront';
 import {
   AuthGuard,
@@ -29,7 +30,6 @@ import { AccordionModule } from '../accordion/accordion.module';
 import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
 import { FinalReviewComponent } from './assets/components/final-review/final-review.component';
 import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
-import { PaymentDetailsComponent } from './assets/components/payment-details/payment-details.component';
 import { AddOptionsComponent } from './assets/components/add-options/add-options.component';
 import { FSMiniCartComponent } from './assets/components/mini-cart/mini-cart.component';
 import { effects } from './assets/store/effects';
@@ -119,7 +119,7 @@ const routes: Routes = [
           component: QuoteReviewComponent
         },
         PaymentDetailsFlex: {
-          component: PaymentDetailsComponent
+          component: PaymentMethodComponent
         },
         FinalReviewFlex: {
           component: FinalReviewComponent
@@ -153,7 +153,6 @@ const routes: Routes = [
     QuoteReviewComponent,
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
-    PaymentDetailsComponent,
     AddOptionsComponent,
     FSMiniCartComponent
   ],
@@ -164,14 +163,12 @@ const routes: Routes = [
     QuoteReviewComponent,
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
-    PaymentDetailsComponent,
     FSMiniCartComponent
   ],
   entryComponents: [
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
     QuoteReviewComponent,
-    PaymentDetailsComponent,
     FinalReviewComponent,
     FSMiniCartComponent
   ],

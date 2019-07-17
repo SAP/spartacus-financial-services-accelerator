@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cart, CartService, OccConfig, RoutingService } from '@spartacus/core';
+import { Cart, CartService, OccConfig, RoutingService, CheckoutDeliveryService } from '@spartacus/core';
 import { CheckoutStepType } from '@spartacus/storefront';
 import { ɵd as CheckoutConfigService } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
@@ -30,6 +30,7 @@ export class QuoteReviewComponent implements OnInit {
     protected routingService: RoutingService,
     private checkoutConfigService: CheckoutConfigService,
     private activatedRoute: ActivatedRoute,
+    protected checkoutDeliveryService: CheckoutDeliveryService
     ) { }
 
   ngOnInit() {
@@ -48,6 +49,7 @@ export class QuoteReviewComponent implements OnInit {
     this.backStep.emit();
   }
   next() {
+    this.checkoutDeliveryService.setDeliveryMode('financial-default');
     this.routingService.go(this.checkoutStepUrlNext);
   }
 
