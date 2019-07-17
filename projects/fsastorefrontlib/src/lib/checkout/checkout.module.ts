@@ -11,7 +11,10 @@ import {
   PageComponentModule,
   PaymentMethodModule,
   PaymentFormModule,
-  MediaModule
+  MediaModule,
+  CartNotEmptyGuard,
+  PaymentDetailsSetGuard,
+  OrderConfirmationGuard
 } from '@spartacus/storefront';
 import {
   AuthGuard,
@@ -63,10 +66,28 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard],
+    canActivate: [
+      AuthGuard,
+      CmsPageGuard,
+      CartNotEmptyGuard,
+      PaymentDetailsSetGuard
+    ],
     data: {
       cxRoute: 'finalReview',
       pageLabel: 'final-review'
+    },
+    component: PageLayoutComponent
+  },
+  {
+    path: null,
+    canActivate: [
+      AuthGuard,
+      CmsPageGuard,
+      // OrderConfirmationGuard
+    ],
+    data: {
+      cxRoute: 'orderConfirm',
+      pageLabel: 'orderConfirmationPage'
     },
     component: PageLayoutComponent
   }
@@ -101,7 +122,11 @@ const routes: Routes = [
         },
         FinalReviewFlex: {
           component: FinalReviewComponent
+          // component: ReviewSubmitComponent
         },
+        OrderConfirmationFlex: {
+          component: FsaOrderConfirmationComponent
+        }
       },
       routing: {
         routes: {
@@ -117,6 +142,9 @@ const routes: Routes = [
           finalReview: {
             paths: ['checkout/final-review']
           },
+          orderConfirm: {
+            paths: ['checkout/order-confirmation']
+          }
         }
       }
     })
