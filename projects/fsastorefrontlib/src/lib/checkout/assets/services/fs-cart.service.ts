@@ -63,7 +63,3 @@ export class FSCartService extends CartService {
     return cart && typeof cart.guid !== 'undefined';
   }
 }
-
-
-
-

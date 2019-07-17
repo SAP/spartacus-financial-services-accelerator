@@ -24,13 +24,11 @@ export class AddOptionsComponent implements OnInit {
   cart$: Observable<Cart>;
   entries$: Observable<OrderEntry[]>;
   checkoutStepUrlNext: string;
-  goTo: CheckoutStepType;
 
   @Output()
   nextStep = new EventEmitter<any>();
 
   ngOnInit() {
-    this.goTo = null;
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
       this.activatedRoute
     );

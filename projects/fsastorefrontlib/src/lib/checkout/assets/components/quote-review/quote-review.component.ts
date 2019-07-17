@@ -16,7 +16,7 @@ export class QuoteReviewComponent implements OnInit {
   cart$: Observable<Cart>;
   cartLoaded$: Observable<boolean>;
   checkoutStepUrlNext: string;
-  goTo: CheckoutStepType;
+  checkoutStepUrlBack: string;
 
   @Output()
   backStep = new EventEmitter<any>();
@@ -34,8 +34,10 @@ export class QuoteReviewComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.goTo = null;
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
+      this.activatedRoute
+    );
+    this.checkoutStepUrlBack = this.checkoutConfigService.getPreviousCheckoutStepUrl(
       this.activatedRoute
     );
     this.cart$ = this.cartService.getActive();
@@ -46,7 +48,7 @@ export class QuoteReviewComponent implements OnInit {
   }
 
   back() {
-    this.backStep.emit();
+    this.routingService.go(this.checkoutStepUrlBack);
   }
   next() {
     this.checkoutDeliveryService.setDeliveryMode('financial-default');
