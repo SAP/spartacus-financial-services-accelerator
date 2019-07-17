@@ -15,7 +15,8 @@ import {
   CartNotEmptyGuard,
   PaymentDetailsSetGuard,
   OrderConfirmationGuard,
-  CardModule
+  CardModule,
+  PaymentMethodComponent
 } from '@spartacus/storefront';
 import {
   AuthGuard,
@@ -121,10 +122,10 @@ const routes: Routes = [
         },
         PaymentDetailsFlex: {
           component: PaymentDetailsComponent
+          // component: PaymentMethodComponent
         },
         FinalReviewFlex: {
           component: FinalReviewComponent
-          // component: ReviewSubmitComponent
         },
         OrderConfirmationFlex: {
           component: FsaOrderConfirmationComponent
