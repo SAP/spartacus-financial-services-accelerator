@@ -9,6 +9,8 @@ import { CmsLibModule } from './cms-lib/cms-lib.module';
 import { fstranslations } from '../translations';
 import { fsaLayoutConfig, fsaCmsContentConfig } from './default-fsa.config';
 import { CheckoutModule } from './checkout';
+import { FSRegisterComponent } from './cms-lib/user/register/fs-register.component';
+
 
 @NgModule({
   imports: [
@@ -25,7 +27,12 @@ import { CheckoutModule } from './checkout';
           en: translations.en
         },
         chunks: translationChunksConfig
-      }
+      },
+      cmsComponents: {
+        RegisterCustomerComponent: {
+          component: FSRegisterComponent
+        }
+      },
     }),
     ConfigModule.withConfig({
       i18n: {
