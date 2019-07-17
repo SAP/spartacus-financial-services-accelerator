@@ -122,7 +122,6 @@ const routes: Routes = [
         },
         PaymentDetailsFlex: {
           component: PaymentDetailsComponent
-          // component: PaymentMethodComponent
         },
         FinalReviewFlex: {
           component: FinalReviewComponent
