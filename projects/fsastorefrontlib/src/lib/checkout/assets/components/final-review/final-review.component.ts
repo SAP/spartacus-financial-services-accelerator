@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './final-review.component.html',
   styleUrls: ['./final-review.component.scss']
 })
-export class FinalReviewComponent implements OnInit{
+export class FinalReviewComponent implements OnInit {
 
   @Input()
   paymentDetails$: Observable<PaymentDetails>;
@@ -18,7 +18,6 @@ export class FinalReviewComponent implements OnInit{
   goToQuoteReview = new EventEmitter<any>();
   tAndCToggler = false;
   constructor(
-    
     private checkoutService: CheckoutService,
     private checkoutPaymentService: CheckoutPaymentService,
     private routingService: RoutingService,
