@@ -32,7 +32,7 @@ export class FSCartService extends CartService {
     );
   }
 
-  createCartAndStartBundle(productCode: string,bundleTemplateId: string, quantity: number): void {
+  createCartAndStartBundle(productCode: string, bundleTemplateId: string, quantity: number): void {
     this.fsStore
       .pipe(
         select(CartSelectors.getActiveCartState),
