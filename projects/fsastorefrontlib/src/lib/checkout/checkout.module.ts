@@ -14,9 +14,7 @@ import {
   MediaModule,
   CartNotEmptyGuard,
   PaymentDetailsSetGuard,
-  OrderConfirmationGuard,
-  CardModule,
-  PaymentMethodComponent
+  CardModule
 } from '@spartacus/storefront';
 import {
   AuthGuard,

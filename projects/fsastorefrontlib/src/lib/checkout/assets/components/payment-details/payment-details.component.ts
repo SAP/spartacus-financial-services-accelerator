@@ -22,7 +22,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PaymentDetailsComponent extends PaymentMethodComponent {
 
-  private FSDeliveryAddress: Address = {
+  private mockedDeliveryAddress: Address = {
     country: { 'isocode': 'AT' },
     firstName: 'John',
     lastName: 'Doe',
@@ -61,7 +61,7 @@ export class PaymentDetailsComponent extends PaymentMethodComponent {
   }
 
   mockDeliveryAddress(): void {
-    this.store.dispatch(
-      new CheckoutActions.SetDeliveryAddressSuccess(this.FSDeliveryAddress));
+    this.checkoutDeliveryService.createAndSetAddress(this.mockedDeliveryAddress);
+    this.checkoutDeliveryService.setDeliveryMode('financial-default');
   }
 }
