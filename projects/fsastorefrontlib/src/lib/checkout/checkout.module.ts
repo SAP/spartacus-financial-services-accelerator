@@ -86,7 +86,7 @@ const routes: Routes = [
       // OrderConfirmationGuard
     ],
     data: {
-      cxRoute: 'orderConfirm',
+      cxRoute: 'orderConfirmation',
       pageLabel: 'orderConfirmationPage'
     },
     component: PageLayoutComponent
@@ -142,7 +142,7 @@ const routes: Routes = [
           finalReview: {
             paths: ['checkout/final-review']
           },
-          orderConfirm: {
+          orderConfirmation: {
             paths: ['checkout/order-confirmation']
           }
         }
