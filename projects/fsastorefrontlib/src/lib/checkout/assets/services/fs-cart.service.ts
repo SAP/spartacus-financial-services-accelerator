@@ -15,7 +15,7 @@ export class FSCartService extends CartService {
   constructor(
     protected fsStore: Store<StateWithCart>,
     protected fsCartData: CartDataService,
-    protected fsAuthService: AuthService,
+    protected fsAuthService: AuthService
   ) {
     super(fsStore, fsCartData, fsAuthService);
   }

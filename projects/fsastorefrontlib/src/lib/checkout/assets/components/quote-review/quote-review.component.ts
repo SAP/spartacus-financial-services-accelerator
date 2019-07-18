@@ -1,7 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cart, CartService, OccConfig, RoutingService, CheckoutDeliveryService } from '@spartacus/core';
-import { CheckoutStepType } from '@spartacus/storefront';
 import { ɵd as CheckoutConfigService } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
 
@@ -17,12 +16,6 @@ export class QuoteReviewComponent implements OnInit {
   cartLoaded$: Observable<boolean>;
   checkoutStepUrlNext: string;
   checkoutStepUrlBack: string;
-
-  @Output()
-  backStep = new EventEmitter<any>();
-
-  @Output()
-  nextStep = new EventEmitter<any>();
 
   constructor(
     protected cartService: CartService,

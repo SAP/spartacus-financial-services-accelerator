@@ -15,17 +15,6 @@ import { ComparisonTableService } from './comparison-table.service';
 import { FSCartService } from '../../checkout/assets/services';
 
 
-// const routes: Routes = [
-//   {
-//     path: 'category/:categoryCode',
-//     canActivate: [ CmsPageGuard ],
-//     data: {
-//       cxRoute: 'comparisonTable'
-//     },
-//     component: PageLayoutComponent
-//   }
-// ];
-
 @NgModule({
   imports: [
     CommonModule,
@@ -37,7 +26,6 @@ import { FSCartService } from '../../checkout/assets/services';
     NgbTabsetModule,
     NgbTooltipModule,
     UrlModule,
-    // RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig> {
       cmsComponents: {
         CMSMultiComparisonTabContainer: {

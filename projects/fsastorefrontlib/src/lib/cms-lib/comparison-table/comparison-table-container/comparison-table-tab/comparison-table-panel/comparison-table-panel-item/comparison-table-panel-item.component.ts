@@ -27,7 +27,7 @@ export class ComparisonTablePanelItemComponent implements OnInit {
         protected config: CmsConfig,
         protected routingService: RoutingService,
         private checkoutConfigService: CheckoutConfigService,
-        private activatedRoute: ActivatedRoute,
+        private activatedRoute: ActivatedRoute
     ) {
     }
 
