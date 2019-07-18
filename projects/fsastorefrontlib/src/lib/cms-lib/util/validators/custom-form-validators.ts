@@ -3,8 +3,10 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 export class CustomFormValidators {
     static passwordValidator(control: AbstractControl): ValidationErrors | null {
         const password = control.value as string;
-        return password.match(/^.{6,}$/) ? null : { InvalidPassword: true };
-    }
+        return password.match( /^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^*()_\-+{};:.,]).{6,}$/)
+          ? null
+          : { InvalidPassword: true };
+      }
 
     static emailValidator(control: AbstractControl): ValidationErrors | null {
         const email = control.value as string;
