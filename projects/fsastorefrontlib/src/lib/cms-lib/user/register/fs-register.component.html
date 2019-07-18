@@ -35,7 +35,7 @@
               <input class="form-control" 
               [class.is-invalid]="fsUserRegistrationForm.get('dateOfBirth').invalid &&
                                   fsUserRegistrationForm.get('dateOfBirth').dirty"
-                                  type="date" name="dateOfBirth" formControlName="dateOfBirth">
+                                  type="date" name="dateOfBirth" formControlName="dateOfBirth"/>
               <div class="invalid-feedback" *ngIf=" fsUserRegistrationForm.get('dateOfBirth').invalid &&
                                       fsUserRegistrationForm.get('dateOfBirth').dirty ">
                 <span>{{ 'fscommon.register.dateOfBirthMinimumAge' | cxTranslate }}</span>

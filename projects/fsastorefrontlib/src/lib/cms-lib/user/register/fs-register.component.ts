@@ -23,7 +23,7 @@ export class FSRegisterComponent extends RegisterComponent {
   }
   fsUserRegistrationForm: FormGroup = this.formBuilder.group(
     {
-      titleCode: [''],
+      titleCode: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       dateOfBirth: ['', [Validators.required, CustomFormValidators.dateOfBirthValidator]],
