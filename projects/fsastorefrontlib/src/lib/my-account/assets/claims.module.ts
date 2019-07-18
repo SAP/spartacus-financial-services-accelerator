@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { CmsConfig, ConfigModule, AuthGuard, I18nModule } from '@spartacus/core';
+import { AuthGuard, I18nModule, ConfigModule, CmsConfig, RoutesConfig, RoutingConfig } from '@spartacus/core';
 import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 
 import { ClaimsComponent } from './components/claims/claims.component';
@@ -12,14 +12,17 @@ import { ClaimService } from './services/claim.service';
 import { ClaimDataService } from './services/claim-data.service';
 import { OccClaimService } from '../../occ/claim/claim.service';
 
-import { ComponentsModule } from '@spartacus/storefront';
+import { SpinnerModule } from '@spartacus/storefront';
 
 const routes: Routes = [
   {
-    path: 'my-account/my-insurance-claims',
+    path: null,
     canActivate: [AuthGuard, CmsPageGuard],
-    component: PageLayoutComponent,
-    data: { pageLabel: 'my-claims' }
+    data: {
+      cxRoute: 'claimsComponent',
+      pageLabel: 'my-claims'
+    },
+    component: PageLayoutComponent
   }
 ];
 
@@ -30,11 +33,22 @@ const routes: Routes = [
     RouterModule,
     FormsModule,
     NgSelectModule,
-    ComponentsModule,
+    SpinnerModule,
     RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig>{
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig> {
       cmsComponents: {
-        AccountMyClaimsSPAComponent: { selector: 'fsa-claims' },
+        AccountMyClaimsSPAComponent: {
+          component: ClaimsComponent
+        }
+      },
+      routing: {
+        routes: {
+          claimsComponent: {
+            paths: [
+              'my-account/my-insurance-claims'
+            ]
+          }
+        }
       }
     })
   ],

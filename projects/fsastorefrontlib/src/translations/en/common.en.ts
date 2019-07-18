@@ -31,6 +31,7 @@ export const fscommon = {
     notAvailable: 'N/A',
     contractId: 'ContractId',
     orderTotal: 'Order total',
+    orderConfirmation: 'Order confirmation',
     startDate: 'Start Date',
     phoneNumber: 'Phone Number',
     emailAddress: 'Email Address',

@@ -15,8 +15,10 @@ const messagesEndPoint = '/notifications/fssitemessages';
 
 
 const MockOccModuleConfig: OccConfig = {
-  site: {
-    baseSite: ''
+  context: {
+    baseSite: [
+      ''
+    ]
   },
   backend: {
     occ: {

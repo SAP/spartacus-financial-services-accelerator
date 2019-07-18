@@ -14,8 +14,10 @@ const usersEndpoint = '/users';
 const claimsEndpoint = '/claims';
 
 const MockOccModuleConfig: OccConfig = {
-  site: {
-    baseSite: ''
+  context: {
+    baseSite: [
+      ''
+    ]
   },
   backend: {
     occ: {

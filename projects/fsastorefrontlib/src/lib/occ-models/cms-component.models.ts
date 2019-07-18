@@ -1,7 +1,6 @@
-import { Component } from '@spartacus/core';
-import { CmsBannerComponent } from '@spartacus/core';
+import { CmsComponent, CmsBannerComponent } from '@spartacus/core';
 
-export type CmsComponent = Component;
+export type CmsComponent = CmsComponent;
 
 export interface CmsViewPoliciesComponent extends CmsComponent {
   numberOfPoliciesToDisplay?: string;
@@ -39,7 +38,6 @@ export interface CmsMultiComparisonTabContainer extends CmsComponent  {
 export interface CMSComparisonTabComponent extends CmsComponent {
   title?: string;
   comparisonPanel?: string;
-  modifiedTime?: string;
 }
 
 export interface ComparisonPanelCMSComponent extends CmsComponent {

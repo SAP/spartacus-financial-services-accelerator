@@ -9,7 +9,9 @@ import { ConfigModule, CmsConfig, I18nModule } from '@spartacus/core';
     I18nModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
-        FinancialServicesProductFeatureComponent: { selector: 'fsa-product-feature' }
+        FinancialServicesProductFeatureComponent: {
+          component: ProductFeatureComponent
+        }
       }
     }),
   ],

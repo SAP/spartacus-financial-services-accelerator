@@ -1,7 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
-import { Cart, OrderEntry } from '@spartacus/core';
+import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Cart, OrderEntry, RoutingService } from '@spartacus/core';
+import { ɵd as CheckoutConfigService } from '@spartacus/storefront';
+import { CheckoutStepType } from '@spartacus/storefront';
 import {FSCartService} from '../../services';
 
 @Component({
@@ -12,16 +15,23 @@ import {FSCartService} from '../../services';
 export class AddOptionsComponent implements OnInit {
 
   constructor(
-    protected cartService: FSCartService
+    protected cartService: FSCartService,
+    protected routingService: RoutingService,
+    private checkoutConfigService: CheckoutConfigService,
+    private activatedRoute: ActivatedRoute,
   ) { }
 
   cart$: Observable<Cart>;
   entries$: Observable<OrderEntry[]>;
+  checkoutStepUrlNext: string;
 
   @Output()
   nextStep = new EventEmitter<any>();
 
   ngOnInit() {
+    this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
+      this.activatedRoute
+    );
     this.cart$ = this.cartService.getActive();
     this.entries$ = this.cartService
       .getEntries()
@@ -43,6 +53,6 @@ export class AddOptionsComponent implements OnInit {
   }
 
   next() {
-    this.nextStep.emit();
+    this.routingService.go(this.checkoutStepUrlNext);
   }
 }

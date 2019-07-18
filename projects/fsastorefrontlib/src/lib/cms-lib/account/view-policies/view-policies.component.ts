@@ -1,10 +1,11 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { CmsComponentData } from '@spartacus/storefront';
-import * as fromUserStore from '../../../my-account/assets/store';
 import { Store, select } from '@ngrx/store';
-import { OccConfig } from '@spartacus/core';
+
+import { CmsComponentData } from '@spartacus/storefront';
+import { OccConfig, AuthService} from '@spartacus/core';
+
 import { PolicyService } from '../../../my-account/assets/services/policy.service';
-import {AuthService} from '@spartacus/core';
+import * as fromUserStore from '../../../my-account/assets/store';
 import {CmsViewPoliciesComponent} from './../../../occ-models/cms-component.models';
 
 

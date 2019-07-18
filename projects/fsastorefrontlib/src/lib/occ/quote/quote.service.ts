@@ -3,23 +3,21 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
-import { OccConfig } from '@spartacus/core';
+import { OccEndpointsService } from '@spartacus/core';
 
 @Injectable()
 export class OccQuoteService {
   constructor(
     protected http: HttpClient,
-    protected config: OccConfig
+    protected occEndpointService: OccEndpointsService
   ) {}
 
   protected getQuotesEndpoint(userId: string) {
     const quotesEndpoint = '/users/' + userId + '/insurance-quotes';
     return (
-      (this.config.backend.occ.baseUrl || '') +
-      this.config.backend.occ.prefix +
-      this.config.site.baseSite +
+      (this.occEndpointService.getBaseEndpoint() +
       quotesEndpoint
-    );
+    ));
   }
 
   public getQuotes(userId: string): Observable<any> {

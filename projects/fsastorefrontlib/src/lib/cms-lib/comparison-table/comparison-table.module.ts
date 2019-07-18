@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { CmsConfig, ConfigModule, UrlTranslationModule, I18nModule } from '@spartacus/core';
-import { CmsModule, ComponentsModule, PageComponentModule } from '@spartacus/storefront';
+import { RouterModule, Routes } from '@angular/router';
+import { NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { CmsModule, CmsConfig, ConfigModule, UrlModule, I18nModule, RoutesConfig, RoutingConfig } from '@spartacus/core';
+import { SpinnerModule, PageComponentModule, CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 import { ComparisonTableContainerComponent } from './comparison-table-container/comparison-table-container.component';
 // tslint:disable-next-line:max-line-length
 import { ComparisonTablePanelComponent } from './comparison-table-container/comparison-table-tab/comparison-table-panel/comparison-table-panel.component';
@@ -13,6 +12,8 @@ import { ComparisonTablePanelItemComponent } from './comparison-table-container/
 import { ComparisonTableTabComponent } from './comparison-table-container/comparison-table-tab/comparison-table-tab.component';
 import { OccBillingTimeService } from '../../occ/billing-time/billing-time.service';
 import { ComparisonTableService } from './comparison-table.service';
+import { FSCartService } from '../../checkout/assets/services';
+
 
 @NgModule({
   imports: [
@@ -20,24 +21,21 @@ import { ComparisonTableService } from './comparison-table.service';
     PageComponentModule,
     RouterModule,
     I18nModule,
-    ComponentsModule,
+    SpinnerModule,
     CmsModule,
     NgbTabsetModule,
     NgbTooltipModule,
-    UrlTranslationModule,
-    ConfigModule.withConfig(<CmsConfig>{
+    UrlModule,
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig> {
       cmsComponents: {
         CMSMultiComparisonTabContainer: {
-          selector: 'fsa-comparison-table-container'
+          component: ComparisonTableContainerComponent
         },
-        CMSComparisonTabComponent: { selector: 'fsa-comparison-table-tab' },
-        ComparisonPanelCMSComponent: { selector: 'fsa-comparison-table-panel' }
-      },
-      routesConfig: {
-        translations: {
-          default: {
-            'category/': { paths: ['category/:categoryCode'] }
-          }
+        CMSComparisonTabComponent: {
+          component: ComparisonTableTabComponent
+        },
+        ComparisonPanelCMSComponent: {
+          component: ComparisonTablePanelComponent
         }
       }
     })
@@ -54,6 +52,6 @@ import { ComparisonTableService } from './comparison-table.service';
     ComparisonTablePanelComponent,
     ComparisonTablePanelItemComponent
   ],
-  providers: [OccBillingTimeService, ComparisonTableService]
+  providers: [OccBillingTimeService, ComparisonTableService, FSCartService]
 })
 export class ComparisonTableModule { }

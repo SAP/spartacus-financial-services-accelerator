@@ -1,8 +1,10 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FSCartService } from './../../../../../../checkout/assets/services';
-import {  CmsConfig, ProductService } from '@spartacus/core';
+import {  CmsConfig, ProductService, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
+import { ɵd as CheckoutConfigService } from '@spartacus/storefront';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'fsa-comparison-table-panel-item',
@@ -15,11 +17,15 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     productCode: string;
     @Input()
     billingTimes: any;
+    checkoutStepUrlNext: string;
 
     constructor(
         protected cartService: FSCartService,
         protected productService: ProductService,
-        protected config: CmsConfig
+        protected config: CmsConfig,
+        protected routingService: RoutingService,
+        private checkoutConfigService: CheckoutConfigService,
+        private activatedRoute: ActivatedRoute
     ) {
     }
 
@@ -27,6 +33,9 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     panelItemEntries: OneTimeChargeEntry[] = [];
 
     ngOnInit() {
+        this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
+          this.activatedRoute
+        );
         this.product$ = this.productService.get(this.productCode);
         this.product$.subscribe(data => {
             if (data) {
@@ -39,6 +48,7 @@ export class ComparisonTablePanelItemComponent implements OnInit {
 
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {
         this.cartService.createCartAndStartBundle(productCode, bundleTemplateId, 1);
+        this.routingService.go(this.checkoutStepUrlNext);
     }
 
     public getBaseUrl() {

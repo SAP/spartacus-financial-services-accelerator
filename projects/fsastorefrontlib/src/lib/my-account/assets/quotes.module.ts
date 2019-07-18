@@ -5,8 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
-import { ComponentsModule } from '@spartacus/storefront';
-import { CmsConfig, ConfigModule, AuthGuard, I18nModule } from '@spartacus/core';
+import { SpinnerModule } from '@spartacus/storefront';
+import { AuthGuard, I18nModule, ConfigModule, CmsConfig, RoutesConfig, RoutingConfig } from '@spartacus/core';
 
 import { QuotesComponent } from '../assets/components/quotes/quotes.component';
 import { QuoteService } from './services/quote.service';
@@ -15,9 +15,12 @@ import { OccQuoteService } from '../../occ/quote/quote.service';
 
 const routes: Routes = [
   {
-    path: 'my-account/my-financial-applications',
+    path: null,
     canActivate: [AuthGuard, CmsPageGuard],
-    data: { pageLabel: 'my-quotes' },
+    data: {
+      cxRoute: 'myQuotesComponent',
+      pageLabel: 'my-quotes'
+    },
     component: PageLayoutComponent
   }
 ];
@@ -29,11 +32,22 @@ const routes: Routes = [
     I18nModule,
     FormsModule,
     NgSelectModule,
-    ComponentsModule,
+    SpinnerModule,
     RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig>{
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig> {
       cmsComponents: {
-        AccountMyQuotesSPAComponent: { selector: 'fsa-quotes' }
+        AccountMyQuotesSPAComponent: {
+          component: QuotesComponent
+        }
+      },
+      routing: {
+        routes: {
+          myQuotesComponent: {
+            paths: [
+              'my-account/my-financial-applications'
+            ]
+          }
+        }
       }
     })
   ],
