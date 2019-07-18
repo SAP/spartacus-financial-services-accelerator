@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
 import { ɵd as CheckoutConfigService } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
-import { CheckoutStepType } from '@spartacus/storefront';
 
 @Component({
     selector: 'fsa-comparison-table-panel-item',
@@ -19,7 +18,6 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     @Input()
     billingTimes: any;
     checkoutStepUrlNext: string;
-    goTo: CheckoutStepType;
 
     constructor(
         protected cartService: FSCartService,
@@ -35,7 +33,6 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     panelItemEntries: OneTimeChargeEntry[] = [];
 
     ngOnInit() {
-        this.goTo = null;
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
           this.activatedRoute
         );

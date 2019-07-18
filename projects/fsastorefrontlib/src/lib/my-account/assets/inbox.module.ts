@@ -19,7 +19,7 @@ const routes: Routes = [
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
-      cxRoute: 'Inbox',
+      cxRoute: 'inbox',
       pageLabel: 'inbox'
     },
     component: PageLayoutComponent
@@ -43,7 +43,7 @@ const routes: Routes = [
       },
       routing: {
         routes: {
-          Inbox: {
+          inbox: {
             paths: [
               'my-account/inbox'
             ]
