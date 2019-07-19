@@ -4,7 +4,6 @@ import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Cart, OrderEntry, RoutingService } from '@spartacus/core';
 import { ɵd as CheckoutConfigService } from '@spartacus/storefront';
-import { CheckoutStepType } from '@spartacus/storefront';
 import {FSCartService} from '../../services';
 
 @Component({
