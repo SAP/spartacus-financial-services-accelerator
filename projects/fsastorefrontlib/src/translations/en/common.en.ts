@@ -72,6 +72,13 @@ export const fscommon = {
     optionalExtras: 'Optional Extras',
     whoOrWhatIsInsured: 'Who or What Is Insured',
     investmentDetails: 'Investment Details',
-    whatDoesItCostMe: 'What Does It Cost Me?'
+    whatDoesItCostMe: 'What Does It Cost Me?',
+    register: {
+      dateOfBirthMinimumAge: 'Must be over 18 years old',
+      enterValidEmail: 'Please enter a valid email',
+      dateOfBirth: {
+        label: 'Date of Birth'
+      }
+    }
   }
 };
