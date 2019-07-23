@@ -2,6 +2,7 @@ import { Product, Price, UserSignUp} from '@spartacus/core';
 
 export interface FSProduct extends Product {
   price?: FSPrice;
+  cartDispalyName?: string;
 }
 
 export interface FSPrice extends Price {

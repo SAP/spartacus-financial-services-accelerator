@@ -38,10 +38,10 @@
     "rxjs": "^6.4.0",
     "ts-loader": "^5.3.2",
     "zone.js": "^0.9.1",
-    "@spartacus/assets": "1.0.0",
-    "@spartacus/core": "1.0.0",
-    "@spartacus/storefront": "1.0.0",
-    "@spartacus/styles": "1.0.0"
+    "@spartacus/assets": "1.0.1",
+    "@spartacus/core": "1.0.1",
+    "@spartacus/storefront": "1.0.1",
+    "@spartacus/styles": "1.0.1"
 
   },
   "devDependencies": {
