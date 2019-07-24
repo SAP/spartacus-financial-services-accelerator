@@ -5,10 +5,10 @@ export class CustomFormValidators {
     // tslint:disable-next-line:max-line-length
     static emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    static regexValidator(formattRegex) {
+    static regexValidator(regex) {
         return (control: AbstractControl): ValidationErrors | null => {
-            const date = control.value as string;
-            return date.match(formattRegex) ? null : { InvalidFormat: true };
+            const field = control.value as string;
+            return field.match(regex) ? null : { InvalidFormat: true };
         };
     }
 
@@ -22,8 +22,7 @@ export class CustomFormValidators {
 
     static dateOfBirthValidator(minAge: number) {
         return (control: AbstractControl): ValidationErrors | null => {
-            const dateString = control.value as string;
-            const userAge = new Date(dateString);
+            const userAge = new Date(control.value as string);
             const today = new Date();
             const age = new Date(today.getFullYear() - minAge, today.getMonth(), today.getDate());
             return userAge < age ? null : { InvalidDate: true };
