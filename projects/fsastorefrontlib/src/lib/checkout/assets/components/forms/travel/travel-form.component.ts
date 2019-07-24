@@ -12,18 +12,19 @@ import { PricingService } from 'projects/fsastorefrontlib/src/lib/occ/pricing/pr
   styleUrls: ['./travel-form.component.scss']
 })
 export class TravelFormComponent {
-  
+
   constructor(
     protected productService: OccFSProductService,
     protected routingService: RoutingService,
     private  activatedRoute: ActivatedRoute,
     private  checkoutConfigService: CheckoutConfigService,
-    private  pricingService: PricingService 
+    private  pricingService: PricingService
 
   ) { }
   formDataArray: any = [];
   pricingAttributes = {};
   checkoutStepUrlNext: string;
+  destinations = [ 'Europe', 'Asia'];
 
   ngOnInit()
   {

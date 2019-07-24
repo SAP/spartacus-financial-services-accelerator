@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   SpinnerModule,
@@ -35,6 +35,8 @@ import { effects } from './assets/store/effects';
 import { FSCartService } from './assets/services';
 import { OccFSCartService } from '../occ/cart/fs-cart.service';
 import { OccFSProductService } from '../occ/product/fs-product-service';
+import { FormsComponent } from './assets/components/forms/forms.component';
+import { DynamicFormModule } from './assets/components/forms/dynamic-form/dynamic-form.module';
 
 const routes: Routes = [
   {
@@ -78,9 +80,11 @@ const routes: Routes = [
 @NgModule({
   imports: [
     FormsModule,
+    DynamicFormModule,
     PaymentMethodModule,
     PaymentFormModule,
     I18nModule,
+    ReactiveFormsModule,
     NgbTooltipModule,
     CommonModule,
     PageComponentModule,
@@ -107,7 +111,7 @@ const routes: Routes = [
           component: FinalReviewComponent
         },
         CMSTripDetailsSubmitComponent: {
-          component: TravelFormComponent
+          component: FormsComponent
         },
       },
       routing: {
@@ -135,7 +139,8 @@ const routes: Routes = [
     PaymentDetailsComponent,
     AddOptionsComponent,
     FSMiniCartComponent,
-    TravelFormComponent
+    TravelFormComponent,
+    FormsComponent
   ],
   exports: [
     I18nModule,
@@ -146,7 +151,8 @@ const routes: Routes = [
     FsaOrderConfirmationComponent,
     PaymentDetailsComponent,
     FSMiniCartComponent,
-    TravelFormComponent
+    TravelFormComponent,
+    FormsComponent
   ],
   entryComponents: [
     FsaOrderConfirmationComponent,
@@ -155,7 +161,8 @@ const routes: Routes = [
     PaymentDetailsComponent,
     FinalReviewComponent,
     FSMiniCartComponent,
-    TravelFormComponent
+    TravelFormComponent,
+    FormsComponent
   ],
   providers: [ FSCartService, OccFSCartService, OccFSProductService ]
 })
