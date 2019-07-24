@@ -31,6 +31,7 @@ export const fscommon = {
     notAvailable: 'N/A',
     contractId: 'ContractId',
     orderTotal: 'Order total',
+    orderConfirmation: 'Order confirmation',
     startDate: 'Start Date',
     phoneNumber: 'Phone Number',
     emailAddress: 'Email Address',
@@ -41,7 +42,7 @@ export const fscommon = {
     expiryDate: 'Expiry Date',
     expires: 'Expires',
     myAgent: 'My Agent',
-    travel:'Travel',
+    travel: 'Travel',
     savings: 'Savings',
     life: 'Life',
     auto: 'Auto',
@@ -71,6 +72,13 @@ export const fscommon = {
     optionalExtras: 'Optional Extras',
     whoOrWhatIsInsured: 'Who or What Is Insured',
     investmentDetails: 'Investment Details',
-    whatDoesItCostMe: 'What Does It Cost Me?'
+    whatDoesItCostMe: 'What Does It Cost Me?',
+    register: {
+      dateOfBirthMinimumAge: 'Must be over 18 years old',
+      enterValidEmail: 'Please enter a valid email',
+      dateOfBirth: {
+        label: 'Date of Birth'
+      }
+    }
   }
 };

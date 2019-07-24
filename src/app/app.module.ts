@@ -17,8 +17,8 @@ import { AppComponent } from './app.component';
         baseSite: [
           'insurance',
         ],
-        language:['en'],
-        currency:['EUR'],
+        language: ['en'],
+        currency: ['EUR'],
         urlParameters: ['baseSite', 'language', 'currency'],
       },
       authentication: {

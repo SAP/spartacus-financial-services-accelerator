@@ -8,7 +8,7 @@
           <ng-container *ngFor="let entry of cart.deliveryOrderGroups[0]?.entries">
             <div class="short-overview-item row">
               <div class="short-overview-title col-7">
-                  {{ entry.product.name }}:
+                  {{ entry.product.cartDisplayName }}:
               </div>
               <div class="short-overview-value col-5">
                 {{ entry.totalPrice.formattedValue }}

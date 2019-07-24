@@ -34,14 +34,14 @@ export class FormsComponent implements AfterViewInit {
       name: 'numberOfTravelers',
       options: ['1', '2', '3'],
       placeholder: 'Select an option',
-      validation: [Validators.required]
+      validation: [Validators.required, this.customValidator('numberOfTravelers', 1)]
     },
     {
       type: 'input',
       label: 'Traveler 1 Age',
       name: 'traveler1',
       placeholder: 'Enter age of traveler 1',
-      validation: [Validators.required, this.customValidator('numberOfTravelers', 1)],
+      validation: [Validators.required],
       disabled: true,
       hidden: true
     },
@@ -50,7 +50,7 @@ export class FormsComponent implements AfterViewInit {
       label: 'Traveler 2 Age',
       name: 'traveler2',
       placeholder: 'Enter age of traveler 2',
-      validation: [Validators.required, this.customValidator('numberOfTravelers', 2)],
+      validation: [Validators.required],
       disabled: true,
       hidden: true
     },

@@ -28,7 +28,10 @@
       </div>
     </ng-container>
   </div>
-  <button class="secondary-button mt-5" [routerLink]=" { route: [{ name: 'category/', params: { categoryCode: product.defaultCategory?.parentCategory?.code } }] }| cxUrl">{{ 'fscommon.moreInfo' | cxTranslate }}</button>
+  <button class="secondary-button mt-5" 
+  [routerLink]=" { cxRoute: 'category', 
+                  params: { code: product.defaultCategory?.parentCategory?.code }
+                 } | cxUrl">{{ 'fscommon.moreInfo' | cxTranslate }}</button>
 </ng-container>
 <ng-template #loading>
   <cx-spinner></cx-spinner>

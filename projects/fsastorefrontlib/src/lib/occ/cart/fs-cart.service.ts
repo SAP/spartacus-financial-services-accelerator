@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CartModification, OccConfig } from '@spartacus/core';
+import { CartModification, OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
@@ -12,7 +12,7 @@ export class OccFSCartService {
 
     constructor(
         protected http: HttpClient,
-        protected config: OccConfig
+        protected occEndpointService: OccEndpointsService
     ) { }
 
     public addToCart(userId: string, cartId: string, productCode: string,
@@ -47,21 +47,17 @@ export class OccFSCartService {
     protected getAddOptionalProductToCartEndpoint(userId: string, cartId: string) {
         const addOptionalProductToCartEndpoint = '/users/' + userId + '/carts/' + cartId + '/fs-add-to-cart';
         return (
-            (this.config.backend.occ.baseUrl || '') +
-            this.config.backend.occ.prefix +
-            'insurance' +
+            (this.occEndpointService.getBaseEndpoint() +
             addOptionalProductToCartEndpoint
-        );
+        ));
     }
 
     protected getStartBundleForProductOfSpecifiedCart(userId: string, cartId: string) {
         const startBundleForProductOfCartEndpoint = '/users/' + userId + '/carts/' + cartId + '/fs-start-bundle';
         return (
-            (this.config.backend.occ.baseUrl || '') +
-            this.config.backend.occ.prefix +
-            'insurance' +
+            (this.occEndpointService.getBaseEndpoint() +
             startBundleForProductOfCartEndpoint
-        );
+        ));
     }
 
 }

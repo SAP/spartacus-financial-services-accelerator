@@ -12,7 +12,11 @@ import {
   PageComponentModule,
   PaymentMethodModule,
   PaymentFormModule,
-  MediaModule
+  MediaModule,
+  CartNotEmptyGuard,
+  PaymentDetailsSetGuard,
+  CardModule,
+  PaymentMethodComponent
 } from '@spartacus/storefront';
 import {
   AuthGuard,
@@ -26,16 +30,13 @@ import {
 import { AccordionModule } from '../accordion/accordion.module';
 import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
 import { FinalReviewComponent } from './assets/components/final-review/final-review.component';
-import { TravelFormComponent } from './assets/components/forms/travel/travel-form.component';
 import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
-import { PaymentDetailsComponent } from './assets/components/payment-details/payment-details.component';
 import { AddOptionsComponent } from './assets/components/add-options/add-options.component';
 import { FSMiniCartComponent } from './assets/components/mini-cart/mini-cart.component';
+import { FormsComponent } from './assets/components/forms/forms.component';
 import { effects } from './assets/store/effects';
 import { FSCartService } from './assets/services';
 import { OccFSCartService } from '../occ/cart/fs-cart.service';
-import { OccFSProductService } from '../occ/product/fs-product-service';
-import { FormsComponent } from './assets/components/forms/forms.component';
 import { DynamicFormModule } from './assets/components/forms/dynamic-form/dynamic-form.module';
 
 const routes: Routes = [
@@ -68,10 +69,28 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard],
+    canActivate: [
+      AuthGuard,
+      CmsPageGuard,
+      CartNotEmptyGuard,
+      PaymentDetailsSetGuard
+    ],
     data: {
       cxRoute: 'finalReview',
       pageLabel: 'final-review'
+    },
+    component: PageLayoutComponent
+  },
+  {
+    path: null,
+    canActivate: [
+      AuthGuard,
+      CmsPageGuard,
+      // OrderConfirmationGuard
+    ],
+    data: {
+      cxRoute: 'orderConfirmation',
+      pageLabel: 'orderConfirmationPage'
     },
     component: PageLayoutComponent
   }
@@ -79,18 +98,19 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    FormsModule,
     DynamicFormModule,
+    FormsModule,
+    ReactiveFormsModule,
     PaymentMethodModule,
     PaymentFormModule,
     I18nModule,
-    ReactiveFormsModule,
     NgbTooltipModule,
     CommonModule,
     PageComponentModule,
     MediaModule,
     SpinnerModule,
     AccordionModule,
+    CardModule,
     RouterModule.forChild(routes),
     EffectsModule.forFeature(effects),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
@@ -105,14 +125,17 @@ const routes: Routes = [
           component: QuoteReviewComponent
         },
         PaymentDetailsFlex: {
-          component: PaymentDetailsComponent
+          component: PaymentMethodComponent
         },
         FinalReviewFlex: {
           component: FinalReviewComponent
         },
+        OrderConfirmationFlex: {
+          component: FsaOrderConfirmationComponent
+        },
         CMSTripDetailsSubmitComponent: {
           component: FormsComponent
-        },
+        }
       },
       routing: {
         routes: {
@@ -128,6 +151,9 @@ const routes: Routes = [
           finalReview: {
             paths: ['checkout/final-review']
           },
+          orderConfirmation: {
+            paths: ['checkout/order-confirmation']
+          }
         }
       }
     })
@@ -136,10 +162,8 @@ const routes: Routes = [
     QuoteReviewComponent,
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
-    PaymentDetailsComponent,
     AddOptionsComponent,
     FSMiniCartComponent,
-    TravelFormComponent,
     FormsComponent
   ],
   exports: [
@@ -149,22 +173,18 @@ const routes: Routes = [
     QuoteReviewComponent,
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
-    PaymentDetailsComponent,
     FSMiniCartComponent,
-    TravelFormComponent,
     FormsComponent
   ],
   entryComponents: [
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
     QuoteReviewComponent,
-    PaymentDetailsComponent,
     FinalReviewComponent,
     FSMiniCartComponent,
-    TravelFormComponent,
     FormsComponent
   ],
-  providers: [ FSCartService, OccFSCartService, OccFSProductService ]
+  providers: [ FSCartService, OccFSCartService ]
 })
 export class CheckoutModule {
 }

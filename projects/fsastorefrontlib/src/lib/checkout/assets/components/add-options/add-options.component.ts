@@ -1,11 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
-import { Cart, OrderEntry, RoutingService } from '@spartacus/core';
+import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { FSCartService } from '../../services';
-//import { ɵc as CheckoutConfigService } from '@spartacus/storefront';
-import { ActivatedRoute } from '@angular/router';
-import { CheckoutStepType } from '@spartacus/storefront';
+import { Cart, OrderEntry, RoutingService } from '@spartacus/core';
+import { ɵd as CheckoutConfigService } from '@spartacus/storefront';
+import {FSCartService} from '../../services';
 
 @Component({
   selector: 'fsa-add-options',
@@ -17,23 +16,21 @@ export class AddOptionsComponent implements OnInit {
   constructor(
     protected cartService: FSCartService,
     protected routingService: RoutingService,
-    //private checkoutCnfigService: CheckoutConfigService,
+    private checkoutConfigService: CheckoutConfigService,
     private activatedRoute: ActivatedRoute,
   ) { }
 
   cart$: Observable<Cart>;
   entries$: Observable<OrderEntry[]>;
   checkoutStepUrlNext: string;
-  goTo: CheckoutStepType;
 
   @Output()
   nextStep = new EventEmitter<any>();
 
   ngOnInit() {
-    this.goTo = null;
-    // this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-    //   this.activatedRoute
-    // );
+    this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
+      this.activatedRoute
+    );
     this.cart$ = this.cartService.getActive();
     this.entries$ = this.cartService
       .getEntries()

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
-import { OccConfig } from '@spartacus/core';
+import { OccEndpointsService } from '@spartacus/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 const FULL_PARAMS = 'fields=FULL';
@@ -12,17 +12,15 @@ const FULL_PARAMS = 'fields=FULL';
 export class OccClaimService {
 constructor(
   protected http: HttpClient,
-  protected config: OccConfig
+  protected occEndpointService: OccEndpointsService
   ) {}
 
 protected getClaimsEndpoint(userId: string) {
     const claimsEndpoint = '/users/' + userId + '/claims';
     return (
-      (this.config.backend.occ.baseUrl || '') +
-            this.config.backend.occ.prefix +
-        'insurance' +
+      (this.occEndpointService.getBaseEndpoint() +
            claimsEndpoint
-    );
+    ));
 }
 
   public getClaims(userId: string): Observable<any> {

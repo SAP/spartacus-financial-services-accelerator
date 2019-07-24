@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
-import { OccConfig } from '@spartacus/core';
+import { OccEndpointsService } from '@spartacus/core';
 
 const FULL_PARAMS = '&fields=FULL';
 
@@ -11,7 +11,7 @@ export class OccBillingTimeService {
 
     constructor(
         protected http: HttpClient,
-        protected config: OccConfig
+        protected occEndpointService: OccEndpointsService
     ) { }
 
     public getBillingTimes(productCodes: string[]): any {
@@ -27,11 +27,9 @@ export class OccBillingTimeService {
     protected getBillingTimesEndPoint() {
         const billingTimeEndpoint = '/billing-times';
         return (
-            (this.config.backend.occ.baseUrl || '') +
-            this.config.backend.occ.prefix +
-            'insurance' +
+            (this.occEndpointService.getBaseEndpoint() +
             billingTimeEndpoint
-        );
+        ));
     }
 
 }

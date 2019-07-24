@@ -5,8 +5,6 @@ import { Observable } from 'rxjs';
 import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
 import { ɵd as CheckoutConfigService } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
-import { OccFSProductService } from './../../../../../../occ/product/fs-product-service'
-import { PricingService } from 'projects/fsastorefrontlib/src/lib/occ/pricing/pricing.service';
 
 @Component({
     selector: 'fsa-comparison-table-panel-item',
@@ -23,27 +21,22 @@ export class ComparisonTablePanelItemComponent implements OnInit {
 
     constructor(
         protected cartService: FSCartService,
-        protected productService: OccFSProductService,
-        protected coreProductService: ProductService,
+        protected productService: ProductService,
         protected config: CmsConfig,
         protected routingService: RoutingService,
         private checkoutConfigService: CheckoutConfigService,
-        private activatedRoute: ActivatedRoute,
-        private pricingService: PricingService
+        private activatedRoute: ActivatedRoute
     ) {
     }
 
     product$: Observable<FSProduct>;
     panelItemEntries: OneTimeChargeEntry[] = [];
-    priceAttributtes = {};
 
     ngOnInit() {
-
-        this.priceAttributtes = this.pricingService.getPricingAttributes();
-        this.product$ = this.productService.getProductWithPricing(this.productCode, this.priceAttributtes);
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
           this.activatedRoute
         );
+        this.product$ = this.productService.get(this.productCode);
         this.product$.subscribe(data => {
             if (data) {
                 this.panelItemEntries = this.billingTimes.map(billingTime => {
