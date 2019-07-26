@@ -61,7 +61,6 @@ export class FormsComponent implements AfterViewInit {
     }
   ];
 customValidator(controllName: string, limit: number): ValidatorFn {
-  console.log(controllName);
   return (control: AbstractControl): { [key: string]: boolean } | null => {
     const parent = control.parent;
     if (parent) {
@@ -70,8 +69,6 @@ customValidator(controllName: string, limit: number): ValidatorFn {
         if (type.value === limit ) {
             console.log('radiii');
         }
-        console.log(type.value);
-        console.log(limit);
     }
     return null;
     }

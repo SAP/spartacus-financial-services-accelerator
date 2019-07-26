@@ -39,6 +39,9 @@ export class DynamicFormComponent implements OnChanges, OnInit {
 
   ngOnInit() {
     this.form = this.createGroup();
+    this.form.valueChanges.subscribe(changes => {
+    console.log(this.config);
+  });
   }
 
   ngOnChanges() {
@@ -55,6 +58,7 @@ export class DynamicFormComponent implements OnChanges, OnInit {
         .forEach((name) => {
           const config = this.config.find((control) => control.name === name);
           this.form.addControl(name, this.createControl(config));
+          console.log(config);
         });
 
     }

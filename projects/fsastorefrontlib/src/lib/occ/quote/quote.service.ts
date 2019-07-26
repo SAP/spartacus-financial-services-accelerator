@@ -13,7 +13,6 @@ export class OccQuoteService {
   ) {}
 
   protected getQuotesEndpoint(userId: string) {
-    console.log(userId);
     const quotesEndpoint = '/users/' + userId + '/insurance-quotes';
     return (
       (this.occEndpointService.getBaseEndpoint() +
