@@ -26,24 +26,15 @@ export class FSRegisterComponent extends RegisterComponent {
       titleCode: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      dateOfBirth: ['', [Validators.required, CustomFormValidators.dateOfBirthValidator]],
-      email: ['', [Validators.required, CustomFormValidators.emailValidator]],
-      password: [
-        '',
-        [Validators.required, CustomFormValidators.passwordValidator],
-      ],
+      dateOfBirth: ['', [Validators.required, CustomFormValidators.dateOfBirthValidator(18)]],
+      email: ['', [Validators.required, CustomFormValidators.regexValidator(CustomFormValidators.emailRegex)]],
+      password: ['', [Validators.required, CustomFormValidators.regexValidator(CustomFormValidators.passwordRegex)]],
       passwordconf: ['', Validators.required],
       newsletter: [false],
       termsandconditions: [false, Validators.requiredTrue],
     },
-    { validator: this.matchPasswords }
+    { validator: CustomFormValidators.matchFields('password', 'passwordconf') }
   );
-
-  protected matchPasswords(ac: AbstractControl): { NotEqual: boolean } {
-    if (ac.get('password').value !== ac.get('passwordconf').value) {
-      return { NotEqual: true };
-    }
-  }
 
   submit(): void {
     this.emailToLowerCase();
