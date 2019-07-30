@@ -31,7 +31,7 @@ export class OccInboxService {
   protected getReadUnreadEndpoint(userId: string) {
     const readUnreadEndpoint = '/users/' + userId + '/notifications/fssitemessages/read-unread';
     return (
-      (this.occEndpointService.getBaseEndpoint +
+      (this.occEndpointService.getBaseEndpoint() +
       readUnreadEndpoint
     ));
   }
@@ -46,6 +46,7 @@ export class OccInboxService {
 
   public setMessagesState(userId: string, messagesUidList: Array<string>, read: boolean): Observable<any> {
     const url = this.getReadUnreadEndpoint(userId);
+    console.log(url);
     const params = new HttpParams({
         fromString: 'messageCodes=' + messagesUidList + '&readStatus=' + read + FULL_PARAMS
     });

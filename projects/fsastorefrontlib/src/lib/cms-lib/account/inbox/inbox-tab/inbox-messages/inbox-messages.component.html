@@ -2,9 +2,10 @@
     <ng-container *ngIf="messagesObject$ | async as messagesObj">
         <ng-container *ngIf="messagesObj.messages?.length !== 0; else noMessages">
             <div class="message border-bottom-grey" 
-                *ngFor="let message of messagesObj.messages"
+                *ngFor="let message of messagesObj.messages;" 
                 [ngClass]="{read: message.readDate}">
-                <div class="inbox-header container-fluid" [ngClass]="{'active':message.opened}" >
+                {{message | json}}
+                <div class="inbox-header container-fluid"  ng-init="let opened = false" [ngClass]="{'active':opened}" >
                     <div class="row">
                         <div class="col-1 p-4">
                             <label class="checkbox-label">
@@ -12,10 +13,10 @@
                                 <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
                             </label>
                         </div>
-                        <div class="col-6 col-md-3 text-truncate p-4" (click)="message.opened=!message.opened; readSingleMessage(message)">
+                        <div class="col-6 col-md-3 text-truncate p-4" (click)="opened=!opened; readSingleMessage(message)">
                             {{ message.title }}
                         </div>
-                        <div class="col-md-6 d-none d-md-block text-truncate p-4" (click)="message.opened=!message.opened; readSingleMessage(message)">
+                        <div class="col-md-6 d-none d-md-block text-truncate p-4" (click)="opened=!opened; readSingleMessage(message)">
                             {{ message.content }}
                         </div>
                         <div class="col-4 col-md-2 text-truncate cursor-default p-4">
@@ -23,7 +24,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="accordion accordion-item-wrapper" [ngClass]="message.opened ? 'active' : ''" >
+                <div class="accordion accordion-item-wrapper" [ngClass]="opened ? 'active' : ''" >
                     <div class="box-shadow" [innerHtml]="message.richContent"></div> 
                 </div>
             </div>

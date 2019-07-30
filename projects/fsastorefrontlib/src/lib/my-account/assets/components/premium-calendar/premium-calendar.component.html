@@ -10,8 +10,8 @@
           <h3 class="col"> {{ 'fscommon.premium' | cxTranslate }} </h3>
           <h3 class="col"> {{ 'fscommon.paymentMethod' | cxTranslate }} </h3>
         </div>
-        <div *ngFor="let policy of policies.insurancePolicies">
-          <div class="premium-data-row row" (click)="policy.opened=!policy.opened" [ngClass]="{'clickable': policy.billingData?.length > 1, 'active':policy.opened}">
+        <div *ngFor="let policy of policies.insurancePolicies" ng-init="let opened = false">
+          <div class="premium-data-row row" (click)="opened=!opened" [ngClass]="{'clickable': policy.billingData?.length > 1, 'active':opened}">
             <div class="col">
               <div class=row>
                 <div class="col-4">
@@ -43,7 +43,7 @@
               </ng-container>
             </div>
           </div>
-          <div class="accordion row" *ngIf="policy.billingData?.length > 1;"[ngClass]="policy.opened ? 'opened' : ''" >
+          <div class="accordion row" *ngIf="policy.billingData?.length > 1;"[ngClass]="opened ? 'opened' : ''" >
             <div class="container-fluid">
               <ng-container *ngFor="let dueDate of policy.billingData | slice:1">
                 <div class="row">
@@ -87,7 +87,7 @@
                       {{policy.paymentFrequency}}
                     </span>
                   </div>
-                  <div class="container cards__data border-bottom-grey" (click)="policy.opened=!policy.opened" [ngClass]="{'clickable': policy.billingData.length > 1, 'active':policy.opened}">
+                  <div class="container cards__data border-bottom-grey" (click)="opened=!opened" [ngClass]="{'clickable': policy.billingData.length > 1, 'active':opened}">
                     <div class="row">
                       <div class="col-6">
                         <div class="title">
@@ -111,7 +111,7 @@
                     </div>
                   </div>
                   <ng-container *ngIf="policy.billingData.length > 1;">
-                    <div class="accordion container" [ngClass]="policy.opened ? 'opened' : ''">
+                    <div class="accordion container" [ngClass]="opened ? 'opened' : ''">
                       <ul class="list-data">
                         <ng-container *ngFor="let dueDate of policy.billingData | slice:1">
                             <li class="row list-item border-bottom-grey">

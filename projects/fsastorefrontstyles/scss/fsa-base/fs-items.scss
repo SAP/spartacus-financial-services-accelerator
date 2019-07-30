@@ -9,6 +9,9 @@ ul {
     background-color: var(--cx-g-color-4);
     margin-bottom: 10px;
     position: relative;
+    a {
+      color: var(--cx-g-color-text);
+    }
     &-data-container {
       display: flex;
       padding: 20px;

@@ -5,7 +5,7 @@ export interface InboxState {
   refresh: boolean;
   loaded: boolean;
 }
-export const initialState: InboxState = {
+export let initialState: InboxState = {
   messages: {},
   refresh: false,
   loaded: false
