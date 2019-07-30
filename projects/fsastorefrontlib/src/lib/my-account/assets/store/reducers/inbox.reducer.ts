@@ -23,14 +23,15 @@ export function reducer(state = initialState, action: fromAction.MessageAction):
     }
     case fromAction.SET_MESSAGES_STATE_SUCCESS: {
       const payloadObj = { ...action.payload };
+      const stateMessages = state.messages.messages.map(message=>({...message}))
       payloadObj.messages.map( message => {
-        state.messages.messages.find( obj => {
+        stateMessages.find(obj => {
           if (obj.uid === message.uid) {
             obj.readDate = message.readDate;
           }
         });
       });
-      const messages = { messages: state.messages.messages };
+      const messages = { messages: stateMessages };
       return {
         ...state,
         messages,
@@ -39,7 +40,12 @@ export function reducer(state = initialState, action: fromAction.MessageAction):
     }
   }
   return state;
+
+
 }
+
+
+
 
 export const getMessages = (state: InboxState) => state.messages;
 export const getRefresh = (state: InboxState) => state.refresh;
