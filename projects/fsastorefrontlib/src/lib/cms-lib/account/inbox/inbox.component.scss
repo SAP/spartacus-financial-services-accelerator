@@ -28,7 +28,7 @@
 		background: var(--cx-g-color-1);
 		font-size: 14px;
 		border: 1px solid rgba(0, 0, 0, 0.15);
-		@include box-shadow(0px, 6px, 12px, 0px, var(--cx-g-color-text), 0.3);
+		@include box-shadow(0px, 6px, 12px, 0px, 204, 204, 204, 1);
 		&.opened {
 			display: block;
 		}

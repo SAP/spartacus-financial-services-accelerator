@@ -10,8 +10,10 @@
           <h3 class="col"> {{ 'fscommon.premium' | cxTranslate }} </h3>
           <h3 class="col"> {{ 'fscommon.paymentMethod' | cxTranslate }} </h3>
         </div>
-        <div *ngFor="let policy of policies.insurancePolicies" ng-init="let opened = false">
-          <div class="premium-data-row row" (click)="opened=!opened" [ngClass]="{'clickable': policy.billingData?.length > 1, 'active':opened}">
+        <div *ngFor="let policy of policies.insurancePolicies; let i = index">
+          {{ i}}
+          <div class="premium-data-row row" ng-init="var opened + i = false" (click)="opened=!opened" [ngClass]="{'clickable': policy.billingData?.length > 1, 'active':opened}">
+            {{ i0 }}
             <div class="col">
               <div class=row>
                 <div class="col-4">

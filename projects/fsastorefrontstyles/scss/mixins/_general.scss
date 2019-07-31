@@ -13,10 +13,10 @@
     top: 50%;
     transform: translateY(-50%);
   }
-  @mixin box-shadow($x, $y, $a, $b, $color, $opacity) {
-    box-shadow: $x $y $a $b rgba($color, $opacity);
-    -moz-box-shadow: $x $y $a $b rgba($color, $opacity);
-    -webkit-box-shadow: $x $y $a $b rgba($color, $opacity);
+  @mixin box-shadow($x, $y, $a, $b, $cr, $cg, $cb, $opacity) {
+    box-shadow: $x $y $a $b rgba($cr, $cg, $cb, $opacity);
+    -moz-box-shadow: $x $y $a $b rgba($cr, $cg, $cb, $opacity);
+    -webkit-box-shadow: $x $y $a $b rgba($cr, $cg, $cb, $opacity);
   }
   @mixin primary-btn-color {
     background-color: var(--cx-g-color-primary) !important;

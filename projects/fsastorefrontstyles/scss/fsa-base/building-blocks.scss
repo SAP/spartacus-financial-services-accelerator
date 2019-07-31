@@ -70,7 +70,7 @@
 .circle-image {
   background-color: var(--cx-g-color-7);
   border-radius: 50%;
-  @include box-shadow(0px, 0px, 9px, 1px, var(--cx-g-color-text), 70%);
+  @include box-shadow(0px, 0px, 9px, 1px, 204, 204, 204, 0.7);
   margin: 0 25px;
 }
 .gradient-heading {
