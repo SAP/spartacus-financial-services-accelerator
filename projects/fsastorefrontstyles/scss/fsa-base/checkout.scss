@@ -11,7 +11,6 @@
 .cart-items-list {
   border: $border-grey;
   background-color: var(--cx-g-color-4);
-  padding: 0 15px;
    h2 {
     margin: 0;
   }
@@ -28,7 +27,7 @@
   }
   & > .row {
     @include media-breakpoint-down(sm) {
-      border-top: $border-grey;
+       border-top: $border-grey;
     }
   }
   .disabled-option {
