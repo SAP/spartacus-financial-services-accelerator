@@ -1,23 +1,23 @@
 <ng-container *ngIf="(product$ | async) as product; else loading">
-  <div class="table-header">
+    <div class="table-header">
     <h3 class="table-header-title">{{ product.name }}</h3>
-    <h4 class="table-header-value">€97.00</h4>
-    <button (click)="createCartAndStartBundleForProduct(product.code,product.bundleTemplates[0]?.id)"
+    <h4 class="table-header-value">{{ product.price?.oneTimeChargeEntries[0]?.price?.formattedValue}}</h4>
+    <button (click)="createCartAndStartBundleForProduct(product?.code,product?.bundleTemplates[0]?.id)"
       class="primary-button"
       type="button">
       {{ 'fscommon.select' | cxTranslate }}
     </button>
   </div>
   <div class="table-cell-wrapper">
-    <ng-container *ngFor="let item of panelItemEntries">
-      <div class="table-cell">
-        <ng-container *ngIf="item !== undefined; else itemNotIncluded">
-          <div class="table-cell-value text-truncate" *ngIf="item.price?.value > 0 || item.chargeInformation; else itemIncluded" title="{{item.chargeInformation}}">
-              <ng-container *ngTemplateOutlet="itemValue context: {value: (item.price.value > 0 ? item.price.formattedValue : item.chargeInformation)}"></ng-container>
-          </div>
-        </ng-container>
-      </div>
-    </ng-container>
+      <ng-container *ngFor="let item of panelItemEntries">
+        <div class="table-cell">
+          <ng-container *ngIf="item !== undefined; else itemNotIncluded">
+            <div class="table-cell-value text-truncate" *ngIf="item.price?.value > 0 || item.chargeInformation; else itemIncluded" title="{{item.chargeInformation}}">
+                <ng-container *ngTemplateOutlet="itemValue context: {value: (item.price.value > 0 ? item.price.formattedValue : item.chargeInformation)}"></ng-container>
+            </div>
+          </ng-container>
+        </div>
+  </ng-container>
     <ng-container *ngFor="let investment of product.investments">
       <div class="table-cell special">
         <p class="mb-2"><strong>{{investment.distributionPercentage}} % </strong></p>

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
   SpinnerModule,
@@ -32,9 +33,11 @@ import { FinalReviewComponent } from './assets/components/final-review/final-rev
 import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
 import { AddOptionsComponent } from './assets/components/add-options/add-options.component';
 import { FSMiniCartComponent } from './assets/components/mini-cart/mini-cart.component';
+import { FormsComponent } from './assets/components/forms/forms.component';
 import { effects } from './assets/store/effects';
 import { FSCartService } from './assets/services';
 import { OccFSCartService } from '../occ/cart/fs-cart.service';
+import { DynamicFormModule } from './assets/components/forms/dynamic-form/dynamic-form.module';
 
 const routes: Routes = [
   {
@@ -95,6 +98,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    DynamicFormModule,
+    FormsModule,
+    ReactiveFormsModule,
     PaymentMethodModule,
     PaymentFormModule,
     I18nModule,
@@ -126,6 +132,9 @@ const routes: Routes = [
         },
         OrderConfirmationFlex: {
           component: FsaOrderConfirmationComponent
+        },
+        CMSTripDetailsSubmitComponent: {
+          component: FormsComponent
         }
       },
       routing: {
@@ -154,7 +163,8 @@ const routes: Routes = [
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
+    FormsComponent
   ],
   exports: [
     I18nModule,
@@ -163,14 +173,16 @@ const routes: Routes = [
     QuoteReviewComponent,
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
+    FormsComponent
   ],
   entryComponents: [
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
     QuoteReviewComponent,
     FinalReviewComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
+    FormsComponent
   ],
   providers: [ FSCartService, OccFSCartService ]
 })

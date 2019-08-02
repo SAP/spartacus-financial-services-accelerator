@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FSAStorefrontModule.withConfig({
-      backend: {
+      backend: { 
         occ: {
            baseUrl: 'https://financialservices.local:9002'
        }

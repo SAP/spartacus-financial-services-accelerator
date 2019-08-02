@@ -43,6 +43,12 @@ import { FSRegisterModule } from './cms-lib/user/register/fs-register.module';
       checkout: {
         steps: [
           {
+            id: 'firstFormStep',
+            name: 'fscommon.firstForm',
+            routeName: 'category',
+            type: [],
+          },
+          {
             id: 'comparisonCheckoutStep',
             name: 'fscommon.whatsIncluded',
             routeName: 'category',

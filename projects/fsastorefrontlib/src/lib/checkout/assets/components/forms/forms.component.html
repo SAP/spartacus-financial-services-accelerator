@@ -1,0 +1,13 @@
+<div class="center1400 mt-5">
+  <div class="row">
+    <div class="col-6">
+      <dynamic-form
+        [config]="config"
+        #form="dynamicForm"
+        (submit)="submit($event)">
+      </dynamic-form>
+      {{ form.valid }}
+      {{ form.value | json }}
+    </div>
+  </div>
+</div>
