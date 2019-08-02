@@ -1,12 +1,13 @@
 @import "../mixins-fsa";
 @import "../theme";
 
-button,
-.primary-button,
-.secondary-button,
-.action-button {
+button, .btn,
+.primary-button, .btn-primary,
+.secondary-button, .btn-secondary,
+.action-button, .btn-action {
 	display: inline-block;
 	width: 100%;
+	height: 40px;
 	padding: 5px;
 	margin: 6px 0;
 	border: 3px solid var(--cx-g-color-transparent);
@@ -20,40 +21,58 @@ button,
 	@include transition;
 	&:disabled {
 		cursor: no-drop;
+		opacity: 0.6;
+	}
+	&:focus {
+		box-shadow: none;
 	}
 }
-.primary-button {
+.primary-button, .btn-primary {
 	color: var(--cx-g-color-1);
 	background-color: var(--cx-g-color-primary);
-	&:hover {
+	&:hover, &:active, 
+	&:not(:disabled):not(.disabled):active,
+	&:not(:disabled):not(.disabled).active {
 		color: var(--cx-g-color-1);
 		background-color: var(--cx-g-color-7);
 	}
 	&:disabled {
-		opacity: 0.6;
+		color: var(--cx-g-color-1);
+		background-color: var(--cx-g-color-primary);
 	}
 }
-.secondary-button {
+.secondary-button, .btn-secondary {
 	color: var(--cx-g-color-1);
 	background-color: var(--cx-g-color-secondary);
-	&:hover {
+	&:hover, &:active, 
+	&:not(:disabled):not(.disabled):active,
+	&:not(:disabled):not(.disabled).active {
 		color: var(--cx-g-color-1);
 		background-color: var(--cx-g-color-8);
 	}
 	&:disabled {
-		opacity: 0.6;
+		color: var(--cx-g-color-1);
+		background-color: var(--cx-g-color-secondary);
 	}
 }
-.action-button {
+.action-button, .btn-action {
 	color: var(--cx-g-color-secondary);
 	background-color: var(--cx-g-color-transparent);
 	border: 3px solid var(--cx-g-color-secondary);
-	&:hover {
+	&:hover, &:active, 
+	&:not(:disabled):not(.disabled):active,
+	&:not(:disabled):not(.disabled).active {
 		color: var(--cx-g-color-primary);
 		background-color: var(--cx-g-color-transparent);
 		border: 3px solid var(--cx-g-color-primary);
 	}
 	&:disabled {
-		opacity: 0.6;
+		color: var(--cx-g-color-secondary);
+		background-color: var(--cx-g-color-transparent);
+		border: 3px solid var(--cx-g-color-secondary);
 	}
+}
+.btn-outline-text:not(:disabled):not(.disabled):active:focus, 
+.btn-action:not(:disabled):not(.disabled):active:focus {
+  box-shadow: none;
 }
