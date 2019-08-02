@@ -2,13 +2,13 @@
 <div class="cart-items-list">
   <ng-container *ngIf="entries$ | async as entries">
     <ng-container *ngFor='let orderEntryData of entries | slice:1'>
-      <div class="row no-gutters position-relative py-3" *ngIf="orderEntryData.product">
+      <div class="row px-3 no-gutters position-relative py-3" *ngIf="orderEntryData.product">
         <div *ngIf="!orderEntryData.removeable && !orderEntryData.addable" class="disabled-option"></div>
         <div class="tooltip-wrapper">
           <div class="fsa-tooltip" ngbTooltip="{{orderEntryData.product.description}}" triggers="click:blur" placement="left">i</div>
         </div>
         <div class="col-12 col-md-2 align-self-center">
-          <cx-media class="cx-product-image-container" [container]="orderEntryData.product.images?.PRIMARY" imageFormat="96Wx96H"></cx-media>
+          <cx-media class="cx-product-image-container" [container]="orderEntryData.product.images?.PRIMARY" format="96Wx96H"></cx-media>
         </div>
         <div class="col-12 col-md-7 align-self-center">
           <h3 class="text-truncate">{{orderEntryData.product.name}}</h3>
