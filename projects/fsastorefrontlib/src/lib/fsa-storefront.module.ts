@@ -1,13 +1,13 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { provideConfig, ConfigModule } from '@spartacus/core';
-import { StorefrontConfig, B2cStorefrontModule, PageComponentModule } from '@spartacus/storefront';
+import { StorefrontConfig, B2cStorefrontModule, PageComponentModule, defaultCmsContentConfig } from '@spartacus/storefront';
 import { translations, translationChunksConfig  } from '@spartacus/assets';
 
 import { MyAccountModule } from './my-account/index';
 import { UiModule } from './ui/index';
 import { CmsLibModule } from './cms-lib/cms-lib.module';
 import { fstranslations } from '../translations';
-import { fsaLayoutConfig, fsaCmsContentConfig } from './default-fsa.config';
+import { fsaLayoutConfig } from './../recipes/config/default-fsa-layout-config';
 import { fsaRoutingConfig } from './../cms-structure/routing/default-fsa-routing-config';
 import { CheckoutModule } from './checkout';
 import { FSRegisterModule } from './cms-lib/user/register/fs-register.module';
@@ -40,7 +40,7 @@ import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa
       }
     }),
     ConfigModule.withConfig(fsaLayoutConfig),
-    ConfigModule.withConfigFactory(fsaCmsContentConfig),
+    ConfigModule.withConfigFactory(defaultCmsContentConfig),
     ConfigModule.withConfig(fsaRoutingConfig),
     ConfigModule.withConfig(fsaCheckoutConfig),
   ],
