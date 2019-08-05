@@ -8,6 +8,7 @@ import { UiModule } from './ui/index';
 import { CmsLibModule } from './cms-lib/cms-lib.module';
 import { fstranslations } from '../translations';
 import { fsaLayoutConfig, fsaCmsContentConfig } from './default-fsa.config';
+import { fsaRoutingConfig } from './../cms-structure/routing/default-fsa-routing-config';
 import { CheckoutModule } from './checkout';
 import { FSRegisterModule } from './cms-lib/user/register/fs-register.module';
 
@@ -28,7 +29,7 @@ import { FSRegisterModule } from './cms-lib/user/register/fs-register.module';
           en: translations.en
         },
         chunks: translationChunksConfig
-      }
+      },
     }),
     ConfigModule.withConfig({
       i18n: {
@@ -39,6 +40,7 @@ import { FSRegisterModule } from './cms-lib/user/register/fs-register.module';
     }),
     ConfigModule.withConfig(fsaLayoutConfig),
     ConfigModule.withConfigFactory(fsaCmsContentConfig),
+    ConfigModule.withConfig(fsaRoutingConfig),
     ConfigModule.withConfig({
       checkout: {
         steps: [

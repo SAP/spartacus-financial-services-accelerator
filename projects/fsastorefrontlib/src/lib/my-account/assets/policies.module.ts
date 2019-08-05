@@ -19,7 +19,7 @@ const routes: Routes = [
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
-      cxRoute: 'myPoliciesComponent',
+      cxRoute: 'policies',
       pageLabel: 'my-policies' },
     component: PageLayoutComponent
   }
@@ -38,15 +38,6 @@ const routes: Routes = [
       cmsComponents: {
         AccountMyPoliciesSPAComponent: {
           component: PoliciesComponent
-        }
-      },
-      routing: {
-        routes: {
-          myPoliciesComponent: {
-            paths: [
-              'my-account/my-policies'
-            ]
-          }
         }
       }
     })

@@ -19,7 +19,7 @@ const routes: Routes = [
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
-      cxRoute: 'claimsComponent',
+      cxRoute: 'claims',
       pageLabel: 'my-claims'
     },
     component: PageLayoutComponent
@@ -39,15 +39,6 @@ const routes: Routes = [
       cmsComponents: {
         AccountMyClaimsSPAComponent: {
           component: ClaimsComponent
-        }
-      },
-      routing: {
-        routes: {
-          claimsComponent: {
-            paths: [
-              'my-account/my-insurance-claims'
-            ]
-          }
         }
       }
     })

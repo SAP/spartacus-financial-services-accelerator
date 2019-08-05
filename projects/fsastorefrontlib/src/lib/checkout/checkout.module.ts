@@ -127,25 +127,6 @@ const routes: Routes = [
         OrderConfirmationFlex: {
           component: FsaOrderConfirmationComponent
         }
-      },
-      routing: {
-        routes: {
-          addOptions: {
-            paths: ['checkout/add-options']
-          },
-          quoteReview: {
-            paths: ['checkout/quote-review']
-          },
-          checkoutPaymentDetails: {
-            paths: ['checkout/payment-details']
-          },
-          finalReview: {
-            paths: ['checkout/final-review']
-          },
-          orderConfirmation: {
-            paths: ['checkout/order-confirmation']
-          }
-        }
       }
     })
   ],
