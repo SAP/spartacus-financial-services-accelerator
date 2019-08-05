@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { provideConfig, ConfigModule } from '@spartacus/core';
 import { StorefrontConfig, B2cStorefrontModule, PageComponentModule } from '@spartacus/storefront';
-import { translations, translationChunksConfig  } from '@spartacus/assets';
+import { translations, translationChunksConfig } from '@spartacus/assets';
 
 import { MyAccountModule } from './my-account/index';
 import { UiModule } from './ui/index';
@@ -46,36 +46,65 @@ import { FSRegisterModule } from './cms-lib/user/register/fs-register.module';
             id: 'comparisonCheckoutStep',
             name: 'fscommon.whatsIncluded',
             routeName: 'category',
+            status: {
+              disabled: true,
+              completed: false,
+              active: false
+            },
+            progressBar: false,
+            icon: 'icon-FSA-selected-item',
             type: [],
           },
           {
             id: 'addOptionsStep',
             name: 'fscommon.addOptions',
             routeName: 'addOptions',
+            status: {
+              disabled: false,
+              completed: false,
+              active: true
+            },
+            progressBar: false,
+            icon: 'icon-FSA-list',
             type: [],
           },
           {
             id: 'quoteReviewStep',
             name: 'quote.quoteReview',
             routeName: 'quoteReview',
+            status: {
+              disabled: true,
+              completed: false,
+              active: false
+            },
+            progressBar: false,
+            icon: 'icon-FSA-shield',
             type: [],
           },
           {
             id: 'checkoutPaymentDetailsStep',
             name: 'fscommon.paymentDetails',
             routeName: 'checkoutPaymentDetails',
+            status: {
+              disabled: true,
+              completed: false,
+              active: false
+            },
+            progressBar: false,
+            icon: 'icon-FSA-payment-cards',
             type: [],
           },
           {
             id: 'finalReviewStep',
             name: 'fscommon.finalReview',
             routeName: 'finalReview',
-            type: [],
-          },
-          {
-            id: 'orderConfirmationStep',
-            name: 'fscommon.orderConfirmation',
-            routeName: 'orderConfirmation',
+            status: {
+              disabled: true,
+              completed: false,
+              active: false
+            },
+            progressBar: false,
+            icon: 'icon-FSA-review',
             type: [],
           }
         ]
