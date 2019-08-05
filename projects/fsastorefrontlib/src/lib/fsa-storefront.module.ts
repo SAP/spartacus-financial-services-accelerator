@@ -11,6 +11,7 @@ import { fsaLayoutConfig, fsaCmsContentConfig } from './default-fsa.config';
 import { fsaRoutingConfig } from './../cms-structure/routing/default-fsa-routing-config';
 import { CheckoutModule } from './checkout';
 import { FSRegisterModule } from './cms-lib/user/register/fs-register.module';
+import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa-checkout-config';
 
 
 @NgModule({
@@ -41,48 +42,7 @@ import { FSRegisterModule } from './cms-lib/user/register/fs-register.module';
     ConfigModule.withConfig(fsaLayoutConfig),
     ConfigModule.withConfigFactory(fsaCmsContentConfig),
     ConfigModule.withConfig(fsaRoutingConfig),
-    ConfigModule.withConfig({
-      checkout: {
-        steps: [
-          {
-            id: 'comparisonCheckoutStep',
-            name: 'fscommon.whatsIncluded',
-            routeName: 'category',
-            type: [],
-          },
-          {
-            id: 'addOptionsStep',
-            name: 'fscommon.addOptions',
-            routeName: 'addOptions',
-            type: [],
-          },
-          {
-            id: 'quoteReviewStep',
-            name: 'quote.quoteReview',
-            routeName: 'quoteReview',
-            type: [],
-          },
-          {
-            id: 'checkoutPaymentDetailsStep',
-            name: 'fscommon.paymentDetails',
-            routeName: 'checkoutPaymentDetails',
-            type: [],
-          },
-          {
-            id: 'finalReviewStep',
-            name: 'fscommon.finalReview',
-            routeName: 'finalReview',
-            type: [],
-          },
-          {
-            id: 'orderConfirmationStep',
-            name: 'fscommon.orderConfirmation',
-            routeName: 'orderConfirmation',
-            type: [],
-          }
-        ]
-      }
-    }),
+    ConfigModule.withConfig(fsaCheckoutConfig),
   ],
   exports: [
     B2cStorefrontModule,
