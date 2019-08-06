@@ -1,6 +1,7 @@
 import { RoutesConfig, RoutingConfig } from '@spartacus/core';
 
 export const fsaStorefrontRoutesConfig: RoutesConfig = {
+    generalInformationForm: { paths: ['checkout/generalInformationForm/:formCode'] },
     addOptions: { paths: ['checkout/add-options'] },
     quoteReview: { paths: ['checkout/quote-review'] },
     checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
