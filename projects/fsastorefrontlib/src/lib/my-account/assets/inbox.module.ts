@@ -40,15 +40,6 @@ const routes: Routes = [
         CMSInboxComponent: {
           component: InboxComponent
         }
-      },
-      routing: {
-        routes: {
-          inbox: {
-            paths: [
-              'my-account/inbox'
-            ]
-          }
-        }
       }
     })
   ],

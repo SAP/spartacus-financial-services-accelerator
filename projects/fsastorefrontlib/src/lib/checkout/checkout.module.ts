@@ -16,23 +16,21 @@ import { FsaOrderConfirmationComponent } from './assets/components/order-confirm
 import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
 import { FSCartService } from './assets/services';
 import { effects } from './assets/store/effects';
-import { ComparisonTableComponent } from './assets/components/comparison-table/comparison-table.component';
-
 
 
 const routes: Routes = [
   {
-    path: null, 
+    path: null,
     canActivate: [CmsPageGuard],
     data: {
-      cxRoute: 'category', 
+      cxRoute: 'category',
       pageLabel: 'comparison-table'
     },
     component: PageLayoutComponent // SPA LAYOUT Component you're targeting
   },
   {
     path: null, // can be null only if pathS property is defined in ConfigModule
-    canActivate: [ CmsPageGuard],
+    canActivate: [CmsPageGuard],
     data: {
       cxRoute: 'addOptions', // custom name for your route to be used in ConfigModule configuration
       pageLabel: 'add-options'// ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
@@ -103,9 +101,6 @@ const routes: Routes = [
     EffectsModule.forFeature(effects),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
-        ComparisonTableFlex: {
-          component: ComparisonTableComponent
-        },
         AddOptionsFlex: { // mapping hybris component (defined in impex) - This is acctualy flexType defined in impex for that component
           component: AddOptionsComponent // to SPA component
         },
@@ -125,33 +120,7 @@ const routes: Routes = [
           component: FsaOrderConfirmationComponent
         },
         CheckoutProgress: {
-            component: FSCheckoutProgressComponent
-        },
-      },
-      routing: {
-        routes: {
-          // category: {
-          //     paths: [ 'c/:categoryCode' ],
-          //     paramsMapping:  { categoryCode: 'entries[0].product.categories[0].code' }
-          // },
-          category: {
-            paths: ['comparison-table']
-          },
-          addOptions: {
-            paths: ['checkout/add-options']
-          },
-          quoteReview: {
-            paths: ['checkout/quote-review']
-          },
-          checkoutPaymentDetails: {
-            paths: ['checkout/payment-details']
-          },
-          finalReview: {
-            paths: ['checkout/final-review']
-          },
-          orderConfirmation: {
-            paths: ['checkout/order-confirmation']
-          }
+          component: FSCheckoutProgressComponent
         }
       }
     })
@@ -161,7 +130,6 @@ const routes: Routes = [
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
-    ComparisonTableComponent,
     FSMiniCartComponent
   ],
   exports: [
@@ -176,12 +144,11 @@ const routes: Routes = [
   entryComponents: [
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
-    ComparisonTableComponent,
     QuoteReviewComponent,
     FinalReviewComponent,
     FSMiniCartComponent
   ],
-  providers: [ FSCartService, OccFSCartService ]
+  providers: [FSCartService, OccFSCartService]
 })
 export class CheckoutModule {
 }

@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Cart, OrderEntry, RoutingService } from '@spartacus/core';
-import { ɵd as CheckoutConfigService } from '@spartacus/storefront';
 import {FSCartService} from '../../services';
+import { CheckoutConfigService } from '@spartacus/storefront';
 
 @Component({
   selector: 'fsa-add-options',

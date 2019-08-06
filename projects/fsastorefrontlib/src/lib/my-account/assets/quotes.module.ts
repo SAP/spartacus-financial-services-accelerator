@@ -18,7 +18,7 @@ const routes: Routes = [
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
-      cxRoute: 'myQuotesComponent',
+      cxRoute: 'quotes',
       pageLabel: 'my-quotes'
     },
     component: PageLayoutComponent
@@ -38,15 +38,6 @@ const routes: Routes = [
       cmsComponents: {
         AccountMyQuotesSPAComponent: {
           component: QuotesComponent
-        }
-      },
-      routing: {
-        routes: {
-          myQuotesComponent: {
-            paths: [
-              'my-account/my-financial-applications'
-            ]
-          }
         }
       }
     })
