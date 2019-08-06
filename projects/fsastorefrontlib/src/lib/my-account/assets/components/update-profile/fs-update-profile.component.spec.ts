@@ -37,7 +37,7 @@ class MockUpdateProfileFormComponent {
   submited = new EventEmitter<{ uid: string; userUpdates: FSUser }>();
 }
 @Component({
-  selector: 'cx-spinner',
+  selector: 'fsa-spinner',
   template: `
     <div>spinner</div>
   `,
