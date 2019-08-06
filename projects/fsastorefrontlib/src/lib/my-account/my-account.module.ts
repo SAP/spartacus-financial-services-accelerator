@@ -11,6 +11,8 @@ import { PolicyDetailsModule } from './assets/policy-details.module';
 import { PremiumCalendarModule } from './assets/premium-calendar.module';
 import { effects } from './assets/store/effects';
 import { reducerProvider, reducerToken } from './assets/store/reducers';
+import { FSUpdateProfileModule } from './assets/components/update-profile/fs-update-profile.module';
+
 
 @NgModule({
   imports: [
@@ -21,6 +23,7 @@ import { reducerProvider, reducerToken } from './assets/store/reducers';
     PolicyDetailsModule,
     PremiumCalendarModule,
     InboxModule,
+    FSUpdateProfileModule,
     StoreModule.forFeature('assets', reducerToken),
     EffectsModule.forFeature(effects)
   ],

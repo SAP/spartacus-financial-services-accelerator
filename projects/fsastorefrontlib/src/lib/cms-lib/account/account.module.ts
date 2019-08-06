@@ -8,7 +8,6 @@ import {
   PageLayoutComponent,
   CmsPageGuard,
   PaymentMethodsComponent,
-  UpdateProfileComponent,
   ConsentManagementComponent,
   UpdatePasswordComponent,
   UpdateEmailComponent,
@@ -17,6 +16,8 @@ import {
 import { effects } from '../../my-account/assets/store';
 import { CMSViewPoliciesComponent } from './view-policies/view-policies.component';
 import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
+import { FSUpdateProfileComponent } from '../../my-account/assets/components/update-profile/fs-update-profile.component';
+
 
 const routes: Routes = [
   {
@@ -99,7 +100,7 @@ const routes: Routes = [
           component: ConsentManagementComponent
         },
         UpdateProfileSPAComponent: {
-          component: UpdateProfileComponent
+          component: FSUpdateProfileComponent
         },
         UpdateEmailComponent: {
           component: UpdateEmailComponent
