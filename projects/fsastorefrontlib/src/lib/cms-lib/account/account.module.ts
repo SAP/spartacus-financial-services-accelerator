@@ -110,28 +110,6 @@ const routes: Routes = [
         AccountCloseAccountSPAComponent: {
           component: CloseAccountComponent
         }
-      },
-      routing: {
-        routes: {
-          paymentDetails: {
-            paths: ['my-account/payment-details']
-          },
-          consentManagment: {
-            paths: ['my-account/consents']
-          },
-          personalDetails: {
-            paths: ['my-account/fs-update-profile']
-          },
-          updateEmail: {
-            paths: ['my-account/update-email']
-          },
-          updatePasswordComp: {
-            paths: ['my-account/update-password']
-          },
-          closeAccount: {
-            paths: ['my-account/close-account']
-          }
-        }
       }
     })
   ],

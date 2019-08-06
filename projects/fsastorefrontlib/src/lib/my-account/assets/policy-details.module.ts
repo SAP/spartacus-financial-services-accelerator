@@ -29,15 +29,6 @@ const routes: Routes = [
         AccountPolicyDetailsSPAComponent: {
           component: PolicyDetailsComponent
         }
-      },
-      routing: {
-        routes: {
-          policyDetails: {
-            paths: [
-              'my-account/my-policies/:policyId/:contractId'
-            ]
-          }
-        }
       }
     })
   ],
