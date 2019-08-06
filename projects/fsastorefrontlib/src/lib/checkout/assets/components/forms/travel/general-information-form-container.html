@@ -1,0 +1,9 @@
+    <ng-container *ngIf="(component$ | async) as component">
+        {{component | json}}
+    <ng-container *ngFor="let formComponent of formComponents$">
+            <ng-container *ngIf="formComponent | async as component">
+                component is loaded
+            {{formComponent.uid | json}}
+            </ng-container>
+     </ng-container>
+    </ng-container>
