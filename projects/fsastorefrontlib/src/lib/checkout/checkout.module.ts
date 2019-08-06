@@ -35,6 +35,7 @@ import { FSMiniCartComponent } from './assets/components/mini-cart/mini-cart.com
 import { effects } from './assets/store/effects';
 import { FSCartService } from './assets/services';
 import { OccFSCartService } from '../occ/cart/fs-cart.service';
+import { GeneralInformationPageContainer } from './assets/components/forms/travel/general-information-form-container';
 
 const routes: Routes = [
   {
@@ -135,6 +136,9 @@ const routes: Routes = [
         },
         OrderConfirmationFlex: {
           component: FsaOrderConfirmationComponent
+        },
+        CMSCustomDefineStyleCMSComponentsContainer: {
+          component: GeneralInformationPageContainer
         }
       }
     })
@@ -144,7 +148,8 @@ const routes: Routes = [
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
+    GeneralInformationPageContainer
   ],
   exports: [
     I18nModule,
@@ -153,14 +158,16 @@ const routes: Routes = [
     QuoteReviewComponent,
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
+    GeneralInformationPageContainer
   ],
   entryComponents: [
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
     QuoteReviewComponent,
     FinalReviewComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
+    GeneralInformationPageContainer
   ],
   providers: [ FSCartService, OccFSCartService ]
 })
