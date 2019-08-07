@@ -4,14 +4,19 @@ import { FormGroup } from '@angular/forms';
 import { FormButtonComponent } from '../form-button/form-button.component';
 import { FormInputComponent } from '../form-input/form-input.component';
 import { FormSelectComponent } from '../form-select/form-select.component';
+import { FormTitleComponent } from '../form-title/form-title.component';
+import { FormDatepickerComponent } from '../form-datepicker/form-datepicker.component';
 
 import { Field } from '../../models/field.interface';
 import { FieldConfig } from '../../models/field-config.interface';
 
+
 const components: {[type: string]: Type<Field>} = {
   button: FormButtonComponent,
   input: FormInputComponent,
-  select: FormSelectComponent
+  select: FormSelectComponent,
+  title: FormTitleComponent,
+  datepicker: FormDatepickerComponent
 };
 
 @Directive({

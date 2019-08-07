@@ -1,0 +1,46 @@
+fsa-forms {
+  background-color: var(--cx-g-color-4);
+  border: 1px solid var(--cx-g-color-3);
+  .form {
+    max-width: 940px;
+    margin: 2rem auto;
+  }
+  .dynamic-field {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 20px 0;
+    label {
+      flex-basis: 100%;
+      flex: 1;
+      margin-right: 2rem;
+      text-align: right;
+    }
+    input, select {
+      width: 50%;
+      border: 1px solid var(--cx-g-color-3);
+      border-radius: 4px;
+      background-color: var(--cx-g-color-1);
+      padding: 10px;
+    }
+    &.form-title  {
+      border-top: 1px solid var(--cx-g-color-3);
+      margin-top: 2rem;
+      width: 100%;
+      h4 {
+        padding-top: 2rem;
+        padding-left: 2rem;
+        font-size: 18px;
+      }
+    }
+  }
+  .form-button {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 40px;
+    button {
+      max-width: 50%;
+    }
+  }
+}

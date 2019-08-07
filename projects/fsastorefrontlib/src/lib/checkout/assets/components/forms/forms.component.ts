@@ -3,10 +3,10 @@ import { Validators, AbstractControl, ValidatorFn, FormGroup, FormControl } from
 
 import { FormDefinition } from './dynamic-form/models/field-config.interface';
 import { DynamicFormComponent } from './dynamic-form/containers/dynamic-form/dynamic-form.component';
+import { CustomFormValidators } from 'projects/fsastorefrontlib/src/lib/cms-lib/util/validators/custom-form-validators';
 
 @Component({
   selector: 'fsa-forms',
-  styleUrls: ['forms.component.scss'],
   templateUrl: './forms.component.html'
 })
 export class FormsComponent implements AfterViewInit {
@@ -18,14 +18,14 @@ export class FormsComponent implements AfterViewInit {
         groupName: 'General',
         priceAttributes: [
           {
-            type: 'input',
-            label: 'Payent Frequency',
-            name: 'paymentFrequency',
+            type: 'title',
+            label: 'General'
           },
           {
-            type: 'input',
+            type: 'datepicker',
             label: 'Coverage Start Date',
             name: 'coverageStartDate',
+            validation: [Validators.required, CustomFormValidators.dateBiggerThanCurrentDate()],
           }
         ]
       },
@@ -33,10 +33,8 @@ export class FormsComponent implements AfterViewInit {
       groupName: 'Vehicle',
         priceAttributes: [
           {
-            type: 'select',
-            options: ['BMW'],
-            label: 'Vehicle Make',
-            name: 'vehicleMake'
+            type: 'title',
+            label: 'Vehicle'
           },
           {
             type: 'select',
@@ -51,20 +49,13 @@ export class FormsComponent implements AfterViewInit {
         groupName: 'Main Driver',
         priceAttributes: [
           {
-            type: 'input',
+            type: 'title',
+            label: 'Main Driver'
+          },
+          {
+            type: 'datepicker',
             label: 'Driver Date of Birth',
             name: 'driverDob',
-          },
-          {
-            type: 'select',
-            label: 'Driver Gender',
-            name: 'driverGender',
-            options: ['Male', 'Female', 'wtf']
-          },
-          {
-            label: 'Submit',
-            name: 'submit',
-            type: 'button'
           }
         ]
       },
