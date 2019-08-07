@@ -13,8 +13,4 @@ import { FieldConfig } from '../../models/field-config.interface';
 export class FormInputComponent implements Field {
   @Input() config: FieldConfig;
   @Input() group: FormGroup;
-  test(){
-    console.log(this.group);
-  }
-
 }

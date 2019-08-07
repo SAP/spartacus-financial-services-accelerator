@@ -7,9 +7,8 @@
     type="text"
     [attr.placeholder]="config.placeholder"
     [formControlName]="config.name"
-    (change)="this.test()">
+    >
 
     <div class="error" *ngIf="this.group.controls[config.name].errors && this.group.controls.name.dirty">
-      <span>test jebagja</span>
     </div>
 </div>
