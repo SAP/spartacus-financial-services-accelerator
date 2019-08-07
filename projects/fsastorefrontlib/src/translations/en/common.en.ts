@@ -79,6 +79,7 @@ export const fscommon = {
       dateOfBirth: {
         label: 'Date of Birth'
       }
-    }
+    },
+    pleaseSelect: 'Please select:'
   }
 };
