@@ -99,9 +99,6 @@ const routes: Routes = [
         ConsentManagementComponent: {
           component: ConsentManagementComponent
         },
-        UpdateProfileSPAComponent: {
-          component: FSUpdateProfileComponent
-        },
         UpdateEmailComponent: {
           component: UpdateEmailComponent
         },

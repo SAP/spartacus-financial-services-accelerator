@@ -16,7 +16,7 @@ import { FSUpdateProfileComponent } from './fs-update-profile.component';
     CommonModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
-        UpdateProfileComponent: {
+        UpdateProfileSPAComponent: {
           component: FSUpdateProfileComponent,
           guards: [AuthGuard],
         },
