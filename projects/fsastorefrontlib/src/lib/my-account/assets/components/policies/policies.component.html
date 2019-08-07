@@ -20,9 +20,9 @@
               <span class="title">{{ 'fscommon.product' | cxTranslate }}</span>
               <span class="value">{{policy.mainProduct?.coverageProduct?.name}}</span>
             </div>
-            <div class="info-card-data">
-              <span class="title">{{policy.insuredObjects[0]?.insuredObjectItems[0]?.value}}</span>
-              <span class="value">{{policy.insuredObjects[0]?.insuredObjectItems[1]?.value}}</span></div>
+            <div *ngIf="policy.insuredObjects[0]?.insuredObjectItems" class="info-card-data">
+              <span *ngIf="policy.insuredObjects[0]?.insuredObjectItems.length > 0" class="title">{{policy.insuredObjects[0]?.insuredObjectItems[0]?.value}}</span>
+              <span *ngIf="policy.insuredObjects[0]?.insuredObjectItems.length > 1" class="value">{{policy.insuredObjects[0]?.insuredObjectItems[1]?.value}}</span></div>
             <div class="info-card-data">
               <span class="title">{{policy.policyPremium?.formattedValue}} / {{policy.paymentFrequency}}</span>
               <span class="value ">{{policy.paymentMethod?.paymentOption | uppercase}}</span>

@@ -1,8 +1,8 @@
 <div class="cx-multi-step-checkout center1400 contentPadding">
   <div class="row">
-    <div class="col-12">
+    <div *ngIf="currentCategory | async as category" class="col-12">
       <h2 class="py-4 text-center text-uppercase">
-        {{ 'fscommon.your' | cxTranslate }} {{ 'fscommon.' + currentCategory | cxTranslate}}
+        {{ 'fscommon.your' | cxTranslate }} {{ 'fscommon.' + category | cxTranslate}}
         {{'fscommon.insurance'| cxTranslate }}
       </h2>
 
@@ -11,12 +11,21 @@
           <div class="d-flex flex-wrap my-4">
             <div class="progress-inner-wrapper flex-grow-1 flex-shrink-1 text-center"
               *ngFor="let step of steps; let i = index">
-              <div class="d-inline-block underline-effect progress-node mx-2"
-                [routerLink]="{ cxRoute: step.routeName } | cxUrl" [ngClass]="{
-          ' is-disabled': step.status?.disabled,
-          ' is-active': step.status?.active }">
-                <div class="FSA-icon" [ngClass]="
-          step.status?.completed ? 'icon-FSA-ok' : step.icon"></div>
+              <div *ngIf="i==0" class="d-inline-block underline-effect progress-node mx-2"
+                [routerLink]="step.categoryUrl + category" 
+                [ngClass]="{
+                      ' is-disabled': step.status?.disabled,
+                      ' is-active': step.status?.active }">
+                <div class="FSA-icon" [ngClass]="step.status?.completed ? 'icon-FSA-ok' : step.icon"></div>
+                <p class="label  position-relative mb-2">{{ step.name | cxTranslate }}</p>
+              </div>
+
+              <div *ngIf="i > 0" class="d-inline-block underline-effect progress-node mx-2"
+                [routerLink]="{ cxRoute: step.routeName } | cxUrl" 
+                [ngClass]="{
+                      ' is-disabled': step.status?.disabled,
+                      ' is-active': step.status?.active }">
+                <div class="FSA-icon" [ngClass]="step.status?.completed ? 'icon-FSA-ok' : step.icon"></div>
                 <p class="label  position-relative mb-2">{{ step.name | cxTranslate }}</p>
               </div>
             </div>

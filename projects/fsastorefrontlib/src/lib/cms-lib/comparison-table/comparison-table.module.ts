@@ -13,6 +13,7 @@ import { ComparisonTableTabComponent } from './comparison-table-container/compar
 import { OccBillingTimeService } from '../../occ/billing-time/billing-time.service';
 import { ComparisonTableService } from './comparison-table.service';
 import { FSCartService } from '../../checkout/assets/services';
+import { FSCheckoutProgressComponent } from '../../checkout/assets/components/checkout-progress/fs-checkout-progress.component';
 
 
 @NgModule({
@@ -36,6 +37,9 @@ import { FSCartService } from '../../checkout/assets/services';
         },
         ComparisonPanelCMSComponent: {
           component: ComparisonTablePanelComponent
+        },
+        DynamicProgressBarStepsComponent: {
+          component: FSCheckoutProgressComponent
         }
       }
     })

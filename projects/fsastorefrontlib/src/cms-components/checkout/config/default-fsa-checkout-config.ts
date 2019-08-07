@@ -1,44 +1,80 @@
 import { CheckoutConfig } from '@spartacus/storefront';
+import { FSCheckoutStep } from 'projects/fsastorefrontlib/src/lib/checkout/assets/components/checkout-progress/fs-checkout-step.component';
 
-export const fsaCheckoutConfig: CheckoutConfig = {
+export declare abstract class FSCheckoutConfig extends CheckoutConfig {
+  checkout?: {
+      steps: Array<FSCheckoutStep>;
+  };
+}
+
+export const fsaCheckoutConfig: FSCheckoutConfig = {
   checkout: {
     steps: [
-        {
-          id: 'comparisonCheckoutStep',
-          name: 'fscommon.whatsIncluded',
-          routeName: 'category',
-          type: [],
+      {
+        id: 'comparisonCheckoutStep',
+        name: 'fscommon.whatsIncluded',
+        routeName: 'category',
+        status: {
+          disabled: true,
+          completed: false,
+          active: false
         },
-        {
-          id: 'addOptionsStep',
-          name: 'fscommon.addOptions',
-          routeName: 'addOptions',
-          type: [],
+        progressBar: false,
+        icon: 'icon-FSA-selected-item',
+        type: [],
+      },
+      {
+        id: 'addOptionsStep',
+        name: 'fscommon.addOptions',
+        routeName: 'addOptions',
+        status: {
+          disabled: false,
+          completed: false,
+          active: true
         },
-        {
-          id: 'quoteReviewStep',
-          name: 'quote.quoteReview',
-          routeName: 'quoteReview',
-          type: [],
+        progressBar: false,
+        icon: 'icon-FSA-list',
+        type: [],
+      },
+      {
+        id: 'quoteReviewStep',
+        name: 'quote.quoteReview',
+        routeName: 'quoteReview',
+        status: {
+          disabled: true,
+          completed: false,
+          active: false
         },
-        {
-          id: 'checkoutPaymentDetailsStep',
-          name: 'fscommon.paymentDetails',
-          routeName: 'checkoutPaymentDetails',
-          type: [],
+        progressBar: false,
+        icon: 'icon-FSA-shield',
+        type: [],
+      },
+      {
+        id: 'checkoutPaymentDetailsStep',
+        name: 'fscommon.paymentDetails',
+        routeName: 'checkoutPaymentDetails',
+        status: {
+          disabled: true,
+          completed: false,
+          active: false
         },
-        {
-          id: 'finalReviewStep',
-          name: 'fscommon.finalReview',
-          routeName: 'finalReview',
-          type: [],
+        progressBar: false,
+        icon: 'icon-FSA-payment-cards',
+        type: [],
+      },
+      {
+        id: 'finalReviewStep',
+        name: 'fscommon.finalReview',
+        routeName: 'finalReview',
+        status: {
+          disabled: true,
+          completed: false,
+          active: false
         },
-        {
-          id: 'orderConfirmationStep',
-          name: 'fscommon.orderConfirmation',
-          routeName: 'orderConfirmation',
-          type: [],
-        }
+        progressBar: false,
+        icon: 'icon-FSA-review',
+        type: [],
+      }
       ]
   },
 };

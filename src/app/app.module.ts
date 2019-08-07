@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
     FSAStorefrontModule.withConfig({
       backend: {
         occ: {
-           baseUrl: 'https://financialservices.local:9002'
+           baseUrl: 'https://financialservices.dev-ded1-2.yrd.rot.hybris.com:9002'
        }
       },
       context: {

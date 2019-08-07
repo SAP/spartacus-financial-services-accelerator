@@ -1,7 +1,14 @@
-import { CheckoutStep } from "@spartacus/storefront";
+import { CheckoutStep, CheckoutStepType } from "@spartacus/storefront";
+
+export interface FSCheckoutStepStatus {
+    disabled;
+    completed;
+    active;
+}
 
 export interface FSCheckoutStep extends CheckoutStep {
-    status: string;
+    status: FSCheckoutStepStatus;
     icon: string;
-    progressBar: string;
+    progressBar: boolean;
+    categoryUrl?: string;
 }

@@ -1,8 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import {  CmsPageGuard, PageLayoutModule, PageLayoutComponent, BannerComponent } from '@spartacus/storefront';
-import { RoutesConfig, RoutingConfig, ConfigModule, CmsConfig } from '@spartacus/core';
+import { PageLayoutModule } from '@spartacus/storefront';
 
 // const routes: Routes = [
 //   {
@@ -32,7 +30,7 @@ import { RoutesConfig, RoutingConfig, ConfigModule, CmsConfig } from '@spartacus
 @NgModule({
   imports: [
     CommonModule,
-    // RouterModule.forChild(routes),
+    //RouterModule.forChild(routes),
     PageLayoutModule
   ]
 })
