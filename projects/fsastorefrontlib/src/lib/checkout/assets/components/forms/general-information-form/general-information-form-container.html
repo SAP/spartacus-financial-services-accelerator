@@ -1,0 +1,8 @@
+<ng-container *ngIf="(generalInformationPageContainerComponent$ | async) as generalInformationPageContainerComponent">
+    {{generalInformationPageContainerComponent | json}}
+    <ng-container *ngIf="(components$ | async) as components">
+        <hr>
+        {{components | json}}
+            <ng-template [cxComponentWrapper]="components[0]"> </ng-template>
+    </ng-container>
+</ng-container>

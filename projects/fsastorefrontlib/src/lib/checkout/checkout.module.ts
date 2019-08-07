@@ -15,7 +15,8 @@ import {
   CartNotEmptyGuard,
   PaymentDetailsSetGuard,
   CardModule,
-  PaymentMethodComponent
+  PaymentMethodComponent,
+  OutletModule
 } from '@spartacus/storefront';
 import {
   AuthGuard,
@@ -23,7 +24,8 @@ import {
   ConfigModule,
   I18nModule,
   RoutingConfig,
-  RoutesConfig
+  RoutesConfig,
+  CmsModule
 } from '@spartacus/core';
 
 import { AccordionModule } from '../accordion/accordion.module';
@@ -35,7 +37,8 @@ import { FSMiniCartComponent } from './assets/components/mini-cart/mini-cart.com
 import { effects } from './assets/store/effects';
 import { FSCartService } from './assets/services';
 import { OccFSCartService } from '../occ/cart/fs-cart.service';
-import { GeneralInformationPageContainer } from './assets/components/forms/travel/general-information-form-container';
+import { GeneralInformationPageContainer } from './assets/components/forms/general-information-form/general-information-form-container';
+import { CmsFormSubmitComponent } from './assets/components/forms/general-information-form/cms-form-submit-component/cms-form-submit-component';
 
 const routes: Routes = [
   {
@@ -105,6 +108,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    CmsModule,
     PaymentMethodModule,
     PaymentFormModule,
     I18nModule,
@@ -114,6 +118,7 @@ const routes: Routes = [
     MediaModule,
     SpinnerModule,
     AccordionModule,
+    OutletModule,
     CardModule,
     RouterModule.forChild(routes),
     EffectsModule.forFeature(effects),
@@ -139,6 +144,9 @@ const routes: Routes = [
         },
         CMSCustomDefineStyleCMSComponentsContainer: {
           component: GeneralInformationPageContainer
+        },
+        CMSFormSubmitComponent: {
+          component: CmsFormSubmitComponent
         }
       }
     })
@@ -149,7 +157,8 @@ const routes: Routes = [
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
     FSMiniCartComponent,
-    GeneralInformationPageContainer
+    GeneralInformationPageContainer,
+    CmsFormSubmitComponent
   ],
   exports: [
     I18nModule,
@@ -159,7 +168,8 @@ const routes: Routes = [
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
     FSMiniCartComponent,
-    GeneralInformationPageContainer
+    GeneralInformationPageContainer,
+    CmsFormSubmitComponent
   ],
   entryComponents: [
     FsaOrderConfirmationComponent,
@@ -167,7 +177,8 @@ const routes: Routes = [
     QuoteReviewComponent,
     FinalReviewComponent,
     FSMiniCartComponent,
-    GeneralInformationPageContainer
+    GeneralInformationPageContainer,
+    CmsFormSubmitComponent
   ],
   providers: [ FSCartService, OccFSCartService ]
 })
