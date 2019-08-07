@@ -6,20 +6,8 @@ import { FieldConfig } from '../../models/field-config.interface';
 
 @Component({
   selector: 'form-select',
-  styleUrls: ['form-select.component.scss'],
-  template: `
-    <div
-      class="dynamic-field form-select"
-      [formGroup]="group">
-      <label>{{ config.label }}</label>
-      <select [formControlName]="config.name">
-        <option value="">{{ config.placeholder }}</option>
-        <option *ngFor="let option of config.options">
-          {{ option }}
-        </option>
-      </select>
-    </div>
-  `
+  templateUrl: './form-select.component.html'
+
 })
 export class FormSelectComponent implements Field {
   config: FieldConfig;

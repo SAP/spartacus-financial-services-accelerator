@@ -28,4 +28,12 @@ export class CustomFormValidators {
             return userAge < age ? null : { InvalidDate: true };
         };
     }
+
+    static dateBiggerThanCurrentDate() {
+        return (control: AbstractControl): ValidationErrors | null => {
+            const inputVal = new Date(control.value as string);
+            const today = new Date();
+            return inputVal.getTime() > today.getTime() ? null : { InvalidDate: true };
+        };
+    }
 }
