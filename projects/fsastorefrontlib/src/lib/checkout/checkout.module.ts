@@ -15,8 +15,7 @@ import {
   CartNotEmptyGuard,
   PaymentDetailsSetGuard,
   CardModule,
-  PaymentMethodComponent,
-  OutletModule
+  PaymentMethodComponent
 } from '@spartacus/storefront';
 import {
   AuthGuard,
@@ -41,9 +40,9 @@ import { OccFSCartService } from '../occ/cart/fs-cart.service';
 const routes: Routes = [
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard],
+    canActivate: [CmsPageGuard],
     data: {
-      cxRoute: 'generalInformationForm',
+      cxRoute: 'generalInformation',
       pageLabel: 'generalInformationForm'
     },
     component: PageLayoutComponent
@@ -116,7 +115,6 @@ const routes: Routes = [
     MediaModule,
     SpinnerModule,
     AccordionModule,
-    OutletModule,
     CardModule,
     RouterModule.forChild(routes),
     EffectsModule.forFeature(effects),
