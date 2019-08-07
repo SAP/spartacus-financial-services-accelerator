@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfigModule, CmsConfig, I18nModule, CmsModule } from '@spartacus/core';
-import { CmsCustomDefinedContainerComponent } from './cms-custom-defined-container';
+import { CmsCustomContainerComponent } from './cms-custom-container';
 import { PageComponentModule } from '@spartacus/storefront';
 
 @NgModule({
@@ -13,13 +13,13 @@ import { PageComponentModule } from '@spartacus/storefront';
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         CMSCustomDefineStyleCMSComponentsContainer: {
-            component: CmsCustomDefinedContainerComponent
+            component: CmsCustomContainerComponent
           }
       }
     }),
   ],
-  declarations: [CmsCustomDefinedContainerComponent],
-  exports: [CmsCustomDefinedContainerComponent],
-  entryComponents: [CmsCustomDefinedContainerComponent]
+  declarations: [CmsCustomContainerComponent],
+  exports: [CmsCustomContainerComponent],
+  entryComponents: [CmsCustomContainerComponent]
 })
-export class CustomDefinedContainerModule { }
+export class CustomContainerModule { }

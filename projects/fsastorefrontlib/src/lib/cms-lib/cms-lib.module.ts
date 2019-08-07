@@ -4,7 +4,7 @@ import { BannerModule } from './banner/banner.module';
 import { ProductFeatureModule } from './product-feature/product-feature.module';
 import { ComparisonTableModule } from './comparison-table/comparison-table.module';
 import { CategoryFormsModule } from './forms/cms-category-form-component/cms-category-forms.module';
-import { CustomDefinedContainerModule } from './container/cms-custom-defined-container.module';
+import { CustomContainerModule } from './container/cms-custom-container.module';
 
 @NgModule({
   imports: [
@@ -13,7 +13,7 @@ import { CustomDefinedContainerModule } from './container/cms-custom-defined-con
     ProductFeatureModule,
     ComparisonTableModule,
     CategoryFormsModule,
-    CustomDefinedContainerModule
+    CustomContainerModule
   ],
   exports: [
     AccountModule,
@@ -21,7 +21,7 @@ import { CustomDefinedContainerModule } from './container/cms-custom-defined-con
     ProductFeatureModule,
     ComparisonTableModule,
     CategoryFormsModule,
-    CustomDefinedContainerModule
+    CustomContainerModule
   ]
 })
 export class CmsLibModule {}

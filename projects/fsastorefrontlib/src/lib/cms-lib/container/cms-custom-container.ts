@@ -6,10 +6,10 @@ import { CMSCustomDefineStyleCMSComponentsContainer, CmsComponent } from 'projec
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'fsa-cms-custom-defined-container',
-  templateUrl: './cms-custom-defined-container.html'
+  selector: 'fsa-cms-custom-container',
+  templateUrl: './cms-custom-container.html'
 })
-export class CmsCustomDefinedContainerComponent {
+export class CmsCustomContainerComponent {
 
   routeParamId = 'formCode';
   pageContext: PageContext;
