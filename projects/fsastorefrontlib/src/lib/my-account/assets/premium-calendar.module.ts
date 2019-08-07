@@ -28,15 +28,6 @@ const routes: Routes = [
         AccountPremiumCalendarSPAComponent: { // mapping hybris component (defined in impex)
           component: PremiumCalendarComponent // to SPA component
         }
-      },
-      routing: {
-        routes: {
-          premiumCalendar: { // name from cxRoute property above
-            paths: [ // replaces the null property from Routes object
-              'my-account/premium-calendar'
-            ]
-          }
-        }
       }
     })
   ],

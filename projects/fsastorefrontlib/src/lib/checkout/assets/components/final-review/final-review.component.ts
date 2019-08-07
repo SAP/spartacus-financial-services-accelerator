@@ -1,8 +1,8 @@
 import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
 import { PaymentDetails, CheckoutService, CheckoutPaymentService, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { ɵd as CheckoutConfigService } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
+import { CheckoutConfigService } from '@spartacus/storefront';
 
 
 @Component({

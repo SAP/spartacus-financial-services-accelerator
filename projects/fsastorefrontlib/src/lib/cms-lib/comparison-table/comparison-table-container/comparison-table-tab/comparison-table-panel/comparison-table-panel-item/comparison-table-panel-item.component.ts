@@ -3,8 +3,8 @@ import { FSCartService } from './../../../../../../checkout/assets/services';
 import {  CmsConfig, ProductService, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
-import { ɵd as CheckoutConfigService } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
+import { CheckoutConfigService } from '@spartacus/storefront';
 
 @Component({
     selector: 'fsa-comparison-table-panel-item',

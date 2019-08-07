@@ -92,7 +92,7 @@ header {
                 justify-content: flex-start;
             }
         }
-        .HeaderLinksSlot {
+        .SiteLogin {
             max-width: 360px;
             width: 100%;
             .HeaderLinks {
@@ -186,5 +186,10 @@ header {
     }
     cx-page-layout cx-page-slot {
         align-items: center;
+    }
+    cx-navigation-ui {
+        &.flyout h5:hover {
+            color: var(--cx-g-color-primary);
+        }
     }
 }

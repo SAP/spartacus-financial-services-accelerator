@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DynamicFormModule } from './assets/components/forms/dynamic-form/dynamic-form.module';
 
 import {
   SpinnerModule,
@@ -37,7 +38,6 @@ import { FormsComponent } from './assets/components/forms/forms.component';
 import { effects } from './assets/store/effects';
 import { FSCartService } from './assets/services';
 import { OccFSCartService } from '../occ/cart/fs-cart.service';
-import { DynamicFormModule } from './assets/components/forms/dynamic-form/dynamic-form.module';
 
 const routes: Routes = [
   {
@@ -136,25 +136,7 @@ const routes: Routes = [
         CMSTripDetailsSubmitComponent: {
           component: FormsComponent
         }
-      },
-      routing: {
-        routes: {
-          addOptions: {
-            paths: ['checkout/add-options']
-          },
-          quoteReview: {
-            paths: ['checkout/quote-review']
-          },
-          checkoutPaymentDetails: {
-            paths: ['checkout/payment-details']
-          },
-          finalReview: {
-            paths: ['checkout/final-review']
-          },
-          orderConfirmation: {
-            paths: ['checkout/order-confirmation']
-          }
-        }
+
       }
     })
   ],

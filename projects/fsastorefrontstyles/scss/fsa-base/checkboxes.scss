@@ -34,3 +34,7 @@
 		}
 	}
 }
+.form-check input[type=checkbox]:checked {
+	border-color: var(--cx-g-color-primary);
+	background-color: var(--cx-g-color-primary);
+}
