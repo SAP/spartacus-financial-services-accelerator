@@ -23,8 +23,7 @@ import {
   ConfigModule,
   I18nModule,
   RoutingConfig,
-  RoutesConfig,
-  CmsModule
+  RoutesConfig
 } from '@spartacus/core';
 
 import { AccordionModule } from '../accordion/accordion.module';
@@ -105,7 +104,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    CmsModule,
     PaymentMethodModule,
     PaymentFormModule,
     I18nModule,

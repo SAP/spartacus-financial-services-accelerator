@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import { CMSCustomDefineStyleCMSComponentsContainer, CmsComponent } from 'projects/fsastorefrontlib/src/lib/occ-models';
 import { Observable } from 'rxjs';
+import { CmsComponent, CMSCustomCMSComponentsContainer } from '../../occ-models';
 
 @Component({
   selector: 'fsa-cms-custom-container',
@@ -17,7 +17,7 @@ export class CmsCustomContainerComponent {
   components$: Observable<CmsComponent[]>;
 
   constructor(
-    protected componentData: CmsComponentData<CMSCustomDefineStyleCMSComponentsContainer>,
+    protected componentData: CmsComponentData<CMSCustomCMSComponentsContainer>,
     protected activatedRoute: ActivatedRoute,
     protected cmsComponentConnector: CmsComponentConnector,
   ) {

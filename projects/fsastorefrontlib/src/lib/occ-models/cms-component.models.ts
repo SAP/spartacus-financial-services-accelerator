@@ -45,7 +45,7 @@ export interface ComparisonPanelCMSComponent extends CmsComponent {
   products?: string;
 }
 
-export interface CMSCustomDefineStyleCMSComponentsContainer extends CmsComponent {
+export interface CMSCustomCMSComponentsContainer extends CmsComponent {
   uid?: string;
   simpleCMSComponents?: string;
 }
