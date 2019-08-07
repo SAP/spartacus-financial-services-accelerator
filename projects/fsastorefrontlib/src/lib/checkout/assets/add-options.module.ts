@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { SpinnerModule, MediaModule } from '@spartacus/storefront';
@@ -15,7 +14,6 @@ import { OccFSCartService } from '../../occ/cart/fs-cart.service';
     CommonModule,
     I18nModule,
     RouterModule,
-    FormsModule,
     NgSelectModule,
     SpinnerModule,
     MediaModule,

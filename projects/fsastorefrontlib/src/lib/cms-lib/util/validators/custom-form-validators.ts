@@ -29,11 +29,16 @@ export class CustomFormValidators {
         };
     }
 
-    static dateBiggerThanCurrentDate() {
+    static comapreToCurrentDate(operator) {
         return (control: AbstractControl): ValidationErrors | null => {
             const inputVal = new Date(control.value as string);
             const today = new Date();
-            return inputVal.getTime() > today.getTime() ? null : { InvalidDate: true };
+            switch(operator) {
+                case 'shouldBeGrater':
+                    return inputVal.getTime() > today.getTime() ? null : { InvalidDate: true };
+                case 'shouldBeLess':
+                    return inputVal.getTime() < today.getTime() ? null : { InvalidDate: true };
+              }
         };
     }
 }

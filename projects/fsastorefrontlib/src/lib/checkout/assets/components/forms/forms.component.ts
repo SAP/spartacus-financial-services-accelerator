@@ -25,7 +25,13 @@ export class FormsComponent implements AfterViewInit {
             type: 'datepicker',
             label: 'Coverage Start Date',
             name: 'coverageStartDate',
-            validation: [Validators.required, CustomFormValidators.dateBiggerThanCurrentDate()],
+            validation: [Validators.required, CustomFormValidators.comapreToCurrentDate('shouldBeGrater')],
+          },
+          {
+            type: 'select',
+            options: ['Monthly', 'Annually'],
+            label: 'Payent Frequency',
+            name: 'paymentFrequency',
           }
         ]
       },
@@ -38,11 +44,62 @@ export class FormsComponent implements AfterViewInit {
           },
           {
             type: 'select',
+            options: ['BMW'],
+            label: 'Vehicle Make',
+            name: 'vehicleMake'
+          },
+          {
+            type: 'select',
             options: ['328'],
             label: 'Vehicle Model',
             name: 'vehicleModel',
             validation: [Validators.required],
-          }
+          },
+          {
+            type: 'select',
+            options: ['BMW3.2SUPER'],
+            label: 'Vehicle Type',
+            name: 'vehicleType',
+            validation: [Validators.required],
+          },
+          {
+            type: 'select',
+            options: ['2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012', '2011', '2010'],
+            label: 'Vehicle Year',
+            name: 'vehicleYear',
+            validation: [Validators.required],
+          },
+          {
+            type: 'input',
+            label: 'Annual Mileage',
+            name: 'vehicleAnnualMileage',
+            validation: [Validators.required],
+          },
+          {
+            type: 'input',
+            label: 'Vehicle Value',
+            name: 'vehicleValue',
+            validation: [Validators.required],
+          },
+          {
+            type: 'select',
+            options: ['Personal', 'Business'],
+            label: 'Vehicle Usage',
+            name: 'vehicleUsage',
+            validation: [Validators.required],
+          },
+          {
+            type: 'datepicker',
+            label: 'Vehicle Purchase Date',
+            name: 'vehiclePurchaseDate',
+            validation: [Validators.required],
+          },
+          {
+            type: 'input',
+            label: 'Vehicle Owner Postal Code',
+            name: 'vehicleOwnerPostalCode',
+            validation: [Validators.required],
+          },
         ]
       },
       {
@@ -56,6 +113,37 @@ export class FormsComponent implements AfterViewInit {
             type: 'datepicker',
             label: 'Driver Date of Birth',
             name: 'driverDob',
+            validation: [ CustomFormValidators.dateOfBirthValidator(18)]
+          },
+          {
+            type: 'select',
+            label: 'Driver Gender',
+            name: 'driverGender',
+            options: ['Male', 'Female', 'wtf']
+          },
+          {
+            type: 'select',
+            label: 'Driver Marital Status',
+            name: 'driverMaritalStatus',
+            options: ['Single', 'Married', 'Widowed']
+          },
+          {
+            type: 'select',
+            label: 'Driver`s Category',
+            name: 'driverCategory',
+            options: ['Main'],
+            disabled: true,
+            placeholder: 'Main'
+          },
+          {
+            type: 'datepicker',
+            label: 'Driver Licence Date',
+            name: 'driverLicenceDate',
+          },
+          {
+            label: 'Submit',
+            name: 'submit',
+            type: 'button'
           }
         ]
       },
