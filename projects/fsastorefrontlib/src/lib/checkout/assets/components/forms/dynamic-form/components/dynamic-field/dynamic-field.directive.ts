@@ -5,7 +5,7 @@ import { FormButtonComponent } from '../form-button/form-button.component';
 import { FormInputComponent } from '../form-input/form-input.component';
 import { FormSelectComponent } from '../form-select/form-select.component';
 import { FormTitleComponent } from '../form-title/form-title.component';
-import { FormDatepickerComponent } from '../form-datepicker/form-datepicker.component';
+import { FormDatePickerComponent } from '../form-datepicker/form-datepicker.component';
 
 import { Field } from '../../models/field.interface';
 import { FieldConfig } from '../../models/field-config.interface';
@@ -15,7 +15,7 @@ const components: {[type: string]: Type<Field>} = {
   input: FormInputComponent,
   select: FormSelectComponent,
   title: FormTitleComponent,
-  datepicker: FormDatepickerComponent
+  datepicker: FormDatePickerComponent
 };
 
 @Directive({

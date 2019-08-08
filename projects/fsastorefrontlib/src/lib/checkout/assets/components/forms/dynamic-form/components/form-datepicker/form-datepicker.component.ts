@@ -1,15 +1,15 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Field } from '../../models/field.interface';
 import { FieldConfig } from '../../models/field-config.interface';
 
 @Component({
-  selector: 'form-datepicker',
+  selector: 'fsa-form-datepicker',
   templateUrl: './form-datepicker.component.html'
 })
 
-export class FormDatepickerComponent implements Field {
+export class FormDatePickerComponent implements Field {
   @Input() config: FieldConfig;
   @Input() group: FormGroup;
 }

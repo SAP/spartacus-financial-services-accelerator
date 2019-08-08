@@ -9,7 +9,7 @@ import { FormButtonComponent } from './components/form-button/form-button.compon
 import { FormInputComponent } from './components/form-input/form-input.component';
 import { FormSelectComponent } from './components/form-select/form-select.component';
 import { FormTitleComponent } from './components/form-title/form-title.component';
-import { FormDatepickerComponent } from './components/form-datepicker/form-datepicker.component';
+import { FormDatePickerComponent } from './components/form-datepicker/form-datepicker.component';
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { FormDatepickerComponent } from './components/form-datepicker/form-datep
     FormInputComponent,
     FormSelectComponent,
     FormTitleComponent,
-    FormDatepickerComponent
+    FormDatePickerComponent
   ],
   exports: [
     DynamicFormComponent
@@ -35,7 +35,7 @@ import { FormDatepickerComponent } from './components/form-datepicker/form-datep
     FormInputComponent,
     FormSelectComponent,
     FormTitleComponent,
-    FormDatepickerComponent
+    FormDatePickerComponent
   ]
 })
 export class DynamicFormModule {}

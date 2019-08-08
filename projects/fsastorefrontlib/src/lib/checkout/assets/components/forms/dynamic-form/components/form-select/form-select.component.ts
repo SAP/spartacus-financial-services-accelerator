@@ -5,7 +5,7 @@ import { Field } from '../../models/field.interface';
 import { FieldConfig } from '../../models/field-config.interface';
 
 @Component({
-  selector: 'form-select',
+  selector: 'fsa-form-select',
   templateUrl: './form-select.component.html'
 
 })
