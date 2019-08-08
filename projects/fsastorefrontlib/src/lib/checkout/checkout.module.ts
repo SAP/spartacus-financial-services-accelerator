@@ -38,6 +38,15 @@ import { effects } from './assets/store/effects';
 
 const routes: Routes = [
   {
+    path: null,
+    canActivate: [CmsPageGuard],
+    data: {
+      cxRoute: 'generalInformation',
+      pageLabel: 'generalInformationForm'
+    },
+    component: PageLayoutComponent
+  },
+  {
     path: null, // can be null only if pathS property is defined in ConfigModule
     canActivate: [CmsPageGuard],
     data: {
