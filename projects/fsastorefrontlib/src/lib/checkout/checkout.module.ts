@@ -38,6 +38,15 @@ import { OccFSCartService } from '../occ/cart/fs-cart.service';
 
 const routes: Routes = [
   {
+    path: null,
+    canActivate: [CmsPageGuard],
+    data: {
+      cxRoute: 'generalInformation',
+      pageLabel: 'generalInformationForm'
+    },
+    component: PageLayoutComponent
+  },
+  {
     path: null, // can be null only if pathS property is defined in ConfigModule
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
