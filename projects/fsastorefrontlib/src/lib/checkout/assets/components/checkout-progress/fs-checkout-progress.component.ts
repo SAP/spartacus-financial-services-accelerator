@@ -32,8 +32,14 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent {
         this.currentCategorySource.next(params[categoryCode]);
       } else {
         this.cartService.getActive().subscribe(cart => {
-          let fsProduct: FSProduct = cart.deliveryOrderGroups[0].entries[0].product;
-          this.currentCategorySource.next(fsProduct.defaultCategory.code);
+          if (cart.deliveryOrderGroups && cart.deliveryOrderGroups.length > 0
+            && cart.deliveryOrderGroups[0].entries
+            && cart.deliveryOrderGroups[0].entries.length > 0) {
+            let fsProduct: FSProduct = cart.deliveryOrderGroups[0].entries[0].product;
+            if (fsProduct && fsProduct.defaultCategory) {
+              this.currentCategorySource.next(fsProduct.defaultCategory.code);
+            }
+          }
         });
       }
     })

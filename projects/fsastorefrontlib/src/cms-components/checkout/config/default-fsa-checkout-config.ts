@@ -14,11 +14,6 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         id: 'comparisonCheckoutStep',
         name: 'fscommon.whatsIncluded',
         routeName: 'category',
-        status: {
-          disabled: false,
-          completed: false,
-          active: false
-        },
         icon: 'icon-FSA-selected-item',
         type: [],
       },
@@ -26,11 +21,6 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         id: 'addOptionsStep',
         name: 'fscommon.addOptions',
         routeName: 'addOptions',
-        status: {
-          disabled: true,
-          completed: false,
-          active: false
-        },
         icon: 'icon-FSA-list',
         type: [],
       },
@@ -38,11 +28,6 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         id: 'quoteReviewStep',
         name: 'quote.quoteReview',
         routeName: 'quoteReview',
-        status: {
-          disabled: true,
-          completed: false,
-          active: false
-        },
         icon: 'icon-FSA-shield',
         type: [],
       },
@@ -50,11 +35,6 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         id: 'checkoutPaymentDetailsStep',
         name: 'fscommon.paymentDetails',
         routeName: 'checkoutPaymentDetails',
-        status: {
-          disabled: true,
-          completed: false,
-          active: false
-        },
         icon: 'icon-FSA-payment-cards',
         type: [],
       },
@@ -62,11 +42,6 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         id: 'finalReviewStep',
         name: 'fscommon.finalReview',
         routeName: 'finalReview',
-        status: {
-          disabled: true,
-          completed: false,
-          active: false
-        },
         icon: 'icon-FSA-review',
         type: [],
       }

@@ -12,10 +12,8 @@
             <div class="progress-inner-wrapper flex-grow-1 flex-shrink-1 text-center"
               *ngFor="let step of steps; let i = index">
               <div class="d-inline-block underline-effect progress-node mx-2"
-                [routerLink]="{ cxRoute: step.routeName, params: {code: category} } | cxUrl" [ngClass]="{
-                      ' is-disabled': step.status?.disabled,
-                      ' is-active': step.status?.active }">
-                <div class="FSA-icon" [ngClass]="step.status?.completed ? 'icon-FSA-ok' : step.icon"></div>
+                [routerLink]="{ cxRoute: step.routeName, params: {code: category} } | cxUrl">
+                <div class="FSA-icon" [ngClass]="step.icon"></div>
                 <p class="label  position-relative mb-2">{{ step.name | cxTranslate }}</p>
               </div>
             </div>
