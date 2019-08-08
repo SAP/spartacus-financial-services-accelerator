@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DynamicFormModule } from './assets/components/forms/dynamic-form/dynamic-form.module';
+import { FSFormsModule } from './assets/components/forms/forms.module';
 
 import {
   AuthGuard,
@@ -115,7 +115,7 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     CardModule,
-    DynamicFormModule,
+    FSFormsModule,
     FSCheckoutProgressModule,
     RouterModule.forChild(routes),
     EffectsModule.forFeature(effects),
@@ -157,6 +157,7 @@ const routes: Routes = [
     I18nModule,
     PaymentMethodModule,
     PaymentFormModule,
+    FSFormsModule,
     QuoteReviewComponent,
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
@@ -172,4 +173,3 @@ const routes: Routes = [
   providers: [FSCartService, OccFSCartService]
 })
 export class CheckoutModule {}
->>>>>>> develop
