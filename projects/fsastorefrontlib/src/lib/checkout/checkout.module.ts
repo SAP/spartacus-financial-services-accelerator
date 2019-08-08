@@ -6,9 +6,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { AuthGuard, CmsConfig, ConfigModule, I18nModule, RoutesConfig, RoutingConfig } from '@spartacus/core';
 import { CardModule, CartNotEmptyGuard, CmsPageGuard, MediaModule, PageComponentModule, PageLayoutComponent, PaymentDetailsSetGuard, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, SpinnerModule } from '@spartacus/storefront';
 import { AccordionModule } from '../accordion/accordion.module';
-import { ComparisonTableContainerComponent } from '../cms-lib/comparison-table/comparison-table-container/comparison-table-container.component';
 import { OccFSCartService } from '../occ/cart/fs-cart.service';
 import { AddOptionsComponent } from './assets/components/add-options/add-options.component';
+import { FSCheckoutProgressComponent } from './assets/components/checkout-progress/fs-checkout-progress.component';
 import { FSCheckoutProgressModule } from './assets/components/checkout-progress/fs-checkout-progress.module';
 import { FinalReviewComponent } from './assets/components/final-review/final-review.component';
 import { FSMiniCartComponent } from './assets/components/mini-cart/mini-cart.component';
@@ -91,9 +91,6 @@ const routes: Routes = [
     EffectsModule.forFeature(effects),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
-        ComparisonTableFlex: {
-          component: ComparisonTableContainerComponent
-        },
         AddOptionsFlex: { // mapping hybris component (defined in impex) - This is acctualy flexType defined in impex for that component
           component: AddOptionsComponent // to SPA component
         },
@@ -111,6 +108,9 @@ const routes: Routes = [
         },
         OrderConfirmationFlex: {
           component: FsaOrderConfirmationComponent
+        },
+        DynamicProgressBarStepsComponent: {
+          component: FSCheckoutProgressComponent
         }
       }
     })
