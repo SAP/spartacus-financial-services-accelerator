@@ -1,5 +1,5 @@
 import { Component, ViewChild, AfterViewInit, OnInit, Input } from '@angular/core';
-import { Validators } from '@angular/forms';
+import { Validators, FormGroup } from '@angular/forms';
 
 import { FormDefinition } from './dynamic-form/models/field-config.interface';
 import { DynamicFormComponent } from './dynamic-form/containers/dynamic-form/dynamic-form.component';
@@ -14,12 +14,16 @@ export class FormsComponent implements AfterViewInit, OnInit {
   @Input()
   formCategoryCode: string;
   categoryConfig: FormDefinition;
+  formData = {
+    'priceAttributeList': [
+    ],
+  };
 
   config: FormDefinition[] = [{
     categoryCode: "insurances_auto",
     formGroups: [
       {
-        groupName: 'General',
+        groupName: 'general',
         priceAttributes: [
           {
             type: 'title',
@@ -40,63 +44,11 @@ export class FormsComponent implements AfterViewInit, OnInit {
         ]
       },
     {
-      groupName: 'Vehicle',
+      groupName: 'vehicle',
         priceAttributes: [
           {
             type: 'title',
             label: 'Vehicle'
-          },
-          {
-            type: 'select',
-            options: ['BMW'],
-            label: 'Vehicle Make',
-            name: 'vehicleMake'
-          },
-          {
-            type: 'select',
-            options: ['328'],
-            label: 'Vehicle Model',
-            name: 'vehicleModel',
-            validation: [Validators.required],
-          },
-          {
-            type: 'select',
-            options: ['BMW3.2SUPER'],
-            label: 'Vehicle Type',
-            name: 'vehicleType',
-            validation: [Validators.required],
-          },
-          {
-            type: 'select',
-            options: ['2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012', '2011', '2010'],
-            label: 'Vehicle Year',
-            name: 'vehicleYear',
-            validation: [Validators.required],
-          },
-          {
-            type: 'input',
-            label: 'Annual Mileage',
-            name: 'vehicleAnnualMileage',
-            validation: [Validators.required],
-          },
-          {
-            type: 'input',
-            label: 'Vehicle Value',
-            name: 'vehicleValue',
-            validation: [Validators.required],
-          },
-          {
-            type: 'select',
-            options: ['Personal', 'Business'],
-            label: 'Vehicle Usage',
-            name: 'vehicleUsage',
-            validation: [Validators.required],
-          },
-          {
-            type: 'datepicker',
-            label: 'Vehicle Purchase Date',
-            name: 'vehiclePurchaseDate',
-            validation: [Validators.required],
           },
           {
             type: 'input',
@@ -107,42 +59,17 @@ export class FormsComponent implements AfterViewInit, OnInit {
         ]
       },
       {
-        groupName: 'Main Driver',
+        groupName: 'main-driver',
         priceAttributes: [
           {
             type: 'title',
             label: 'Main Driver'
           },
           {
-            type: 'datepicker',
-            label: 'Driver Date of Birth',
-            name: 'driverDob',
-            validation: [ CustomFormValidators.dateOfBirthValidator(18)]
-          },
-          {
             type: 'select',
             label: 'Driver Gender',
             name: 'driverGender',
             options: ['Male', 'Female', 'wtf']
-          },
-          {
-            type: 'select',
-            label: 'Driver Marital Status',
-            name: 'driverMaritalStatus',
-            options: ['Single', 'Married', 'Widowed']
-          },
-          {
-            type: 'select',
-            label: 'Driver`s Category',
-            name: 'driverCategory',
-            options: ['Main'],
-            disabled: true,
-            placeholder: 'Main'
-          },
-          {
-            type: 'datepicker',
-            label: 'Driver Licence Date',
-            name: 'driverLicenceDate',
           },
           {
             label: 'Submit',
@@ -204,7 +131,22 @@ export class FormsComponent implements AfterViewInit, OnInit {
     });
   }
 
-  submit(value: {[name: string]: any}) {
-    console.log(value);
-  }
+  submit(formData: {[name: string]: any}) {
+    Object.entries(formData).forEach(
+      ([groupName, inputsObj]) => {
+        const inputs = [];
+        const groupObj = {
+          'priceAttributesGroup': groupName,
+          'priceAttributes': inputs
+        };
+        Object.entries(inputsObj).forEach( ([inputName, inputValue]) => {
+          inputs.push({
+            'key' : inputName,
+            'value': inputValue
+          });
+        });
+        this.formData.priceAttributeList.push(groupObj);
+      });
+      console.log(this.formData);
+    }
 }
