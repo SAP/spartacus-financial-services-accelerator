@@ -1,8 +1,8 @@
 <div *ngIf="categoryConfig" class="form">
-  <dynamic-form
+  <fsa-dynamic-form
     [config]="categoryConfig"
-    #form="dynamicForm"
+    #form="fsa-dynamicForm"
     (submit)="submit($event)">
-  </dynamic-form>
+  </fsa-dynamic-form>
   {{ form.valid }}
 </div>

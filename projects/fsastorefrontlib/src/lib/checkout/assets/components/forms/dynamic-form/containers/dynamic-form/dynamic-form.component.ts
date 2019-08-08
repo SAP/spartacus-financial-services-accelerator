@@ -4,8 +4,8 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { FieldConfig, FormDefinition } from '../../models/field-config.interface';
 
 @Component({
-  exportAs: 'dynamicForm',
-  selector: 'dynamic-form',
+  exportAs: 'fsa-dynamicForm',
+  selector: 'fsa-dynamic-form',
   templateUrl: '/dynamic-form.component.html'
 })
 export class DynamicFormComponent implements OnInit {
@@ -40,7 +40,9 @@ export class DynamicFormComponent implements OnInit {
       const newGroup = this.fb.group({});
       formGroup.priceAttributes.forEach(input => {
         input.group = newGroup;
-        newGroup.addControl(input.name, this.createControl(input));
+        if (input.type !== 'button' && input.type !== 'title') {
+          newGroup.addControl(input.name, this.createControl(input));
+        }
       });
       form.addControl(groupName, newGroup );
     });
