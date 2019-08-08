@@ -1,6 +1,5 @@
 import { Component, ViewChild, AfterViewInit, OnInit, Input } from '@angular/core';
-import { Validators, FormGroup } from '@angular/forms';
-
+import { Validators } from '@angular/forms';
 import { FormDefinition } from './dynamic-form/models/field-config.interface';
 import { DynamicFormComponent } from './dynamic-form/containers/dynamic-form/dynamic-form.component';
 import { CustomFormValidators } from 'projects/fsastorefrontlib/src/lib/cms-lib/util/validators/custom-form-validators';
@@ -79,8 +78,9 @@ export class FormsComponent implements AfterViewInit, OnInit {
         ]
       },
     ]
-  },{
-  categoryCode: "insurances_travel",
+  },
+  {
+  categoryCode: 'insurances_travel',
   formGroups: [
     {
       groupName: 'trip',
@@ -119,7 +119,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
 ];
 
   ngOnInit() {
-    this.categoryConfig = this.config.filter(item=> item.categoryCode == this.formCategoryCode)[0];
+    this.categoryConfig = this.config.filter( item => item.categoryCode === this.formCategoryCode)[0];
   }
 
   ngAfterViewInit() {

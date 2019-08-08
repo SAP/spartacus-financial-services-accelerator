@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
@@ -9,7 +9,7 @@ import { CmsComponent, CMSCustomComponentsContainer } from '../../occ-models';
   selector: 'fsa-cms-custom-container',
   templateUrl: './cms-custom-container.html'
 })
-export class CmsCustomContainerComponent {
+export class CmsCustomContainerComponent implements OnInit {
 
   routeParamId = 'formCode';
   pageContext: PageContext;
