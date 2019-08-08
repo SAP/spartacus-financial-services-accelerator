@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-
 import { FieldConfig, FormDefinition } from '../../models/field-config.interface';
 
 @Component({
@@ -11,10 +10,8 @@ import { FieldConfig, FormDefinition } from '../../models/field-config.interface
 export class DynamicFormComponent implements OnInit {
   @Input()
   config: FormDefinition;
-
   @Output()
   submit: EventEmitter<any> = new EventEmitter<any>();
-
   form: FormGroup;
 
   allInputs: Array<FieldConfig> = [];

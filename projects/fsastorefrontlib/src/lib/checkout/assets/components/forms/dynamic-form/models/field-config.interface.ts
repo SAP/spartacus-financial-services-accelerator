@@ -4,7 +4,6 @@ export interface FormDefinition {
   formGroups: FromGroup[];
   categoryCode: string;
 }
-
 export interface FromGroup {
   groupName: String;
   priceAttributes: FieldConfig[];
