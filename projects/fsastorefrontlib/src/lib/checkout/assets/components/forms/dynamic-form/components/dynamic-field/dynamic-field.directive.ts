@@ -20,7 +20,7 @@ const components: {[type: string]: Type<Field>} = {
 };
 
 @Directive({
-  selector: '[dynamicField]'
+  selector: '[fsaDynamicField]'
 })
 export class DynamicFieldDirective implements OnChanges, OnInit {
   @Input()
