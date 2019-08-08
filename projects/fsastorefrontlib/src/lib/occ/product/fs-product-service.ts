@@ -14,7 +14,7 @@ export class OccFSProductService {
         protected http: HttpClient,
         protected config: OccConfig
     ) { }
- 
+
     public getProductWithPricing(productCode: string, productPriceDescriptorList: any): Observable<any> {
         const url = this.getProductPricing(productCode);
         const params = new HttpParams({
@@ -24,7 +24,7 @@ export class OccFSProductService {
             'Content-Type': 'application/json'
         });
         return this.http
-            .post<any>(url,productPriceDescriptorList,{ headers,params })
+            .post<any>( url, productPriceDescriptorList, { headers, params })
             .pipe(catchError((error: any) => throwError(error.json())));
     }
 

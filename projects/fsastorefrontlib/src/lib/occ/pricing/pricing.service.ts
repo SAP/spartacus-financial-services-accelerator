@@ -12,15 +12,13 @@ export class PricingService {
     pricingAttributesList = {};
 
     public getPricingAttributes(): any {
-        this.pricingObject.subscribe(obj => 
-        {
+        this.pricingObject.subscribe( obj => {
             this.pricingAttributesList = obj;
-        })
+        });
         return this.pricingAttributesList;
     }
 
-    public setPricingAttributes(pricingObj: any)
-    {
+    public setPricingAttributes(pricingObj: any) {
         this.pricingSource.next(pricingObj);
     }
 }
