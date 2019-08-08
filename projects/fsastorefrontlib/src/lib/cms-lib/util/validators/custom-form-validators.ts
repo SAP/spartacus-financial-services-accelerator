@@ -29,12 +29,12 @@ export class CustomFormValidators {
         };
     }
 
-    static comapreToCurrentDate(operator) {
+    static compareToCurrentDate(operator) {
         return (control: AbstractControl): ValidationErrors | null => {
             const inputVal = new Date(control.value as string);
             const today = new Date();
             switch(operator) {
-                case 'shouldBeGrater':
+                case 'shouldBeGreater':
                     return inputVal.getTime() > today.getTime() ? null : { InvalidDate: true };
                 case 'shouldBeLess':
                     return inputVal.getTime() < today.getTime() ? null : { InvalidDate: true };

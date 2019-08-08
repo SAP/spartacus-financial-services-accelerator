@@ -33,7 +33,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
             type: 'datepicker',
             label: 'Coverage Start Date',
             name: 'coverageStartDate',
-            validation: [Validators.required, CustomFormValidators.comapreToCurrentDate('shouldBeGrater')],
+            validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeGreater')],
           },
           {
             type: 'select',
@@ -69,7 +69,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
             type: 'select',
             label: 'Driver Gender',
             name: 'driverGender',
-            options: ['Male', 'Female', 'wtf']
+            options: ['Male', 'Female']
           },
           {
             label: 'Submit',
@@ -95,13 +95,13 @@ export class FormsComponent implements AfterViewInit, OnInit {
           type: 'datepicker',
           label: 'Start Date',
           name: 'tripStartDate',
-          validation: [Validators.required, CustomFormValidators.comapreToCurrentDate('shouldBeGrater')],
+          validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeGreater')],
         },
         {
           type: 'datepicker',
           label: 'End Date',
           name: 'tripEndDate',
-          validation: [Validators.required, CustomFormValidators.comapreToCurrentDate('shouldBeGrater')],
+          validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeGreater')],
         },
         {
           type: 'input',

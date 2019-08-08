@@ -1,11 +1,11 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Field } from '../../models/field.interface';
 import { FieldConfig } from '../../models/field-config.interface';
 
 @Component({
-  selector: 'form-input',
+  selector: 'fsa-form-input',
   templateUrl: './form-input.component.html'
 })
 
