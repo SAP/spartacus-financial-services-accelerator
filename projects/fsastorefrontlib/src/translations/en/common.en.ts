@@ -42,13 +42,6 @@ export const fscommon = {
     expiryDate: 'Expiry Date',
     expires: 'Expires',
     myAgent: 'My Agent',
-    travel: 'Travel',
-    savings: 'Savings',
-    life: 'Life',
-    auto: 'Auto',
-    homeowners: 'Homeowners',
-    renters: 'Renters',
-    event: 'Event',
     billingAddress: 'Billing Address',
     addOptions: 'Add Options',
     finalReview: 'Final Review',
@@ -79,6 +72,15 @@ export const fscommon = {
       dateOfBirth: {
         label: 'Date of Birth'
       }
+    },
+    category: {
+      insurances_property_homeowners: 'Homeowners',
+      insurances_property_renters: 'Renters',
+      insurances_auto: 'Auto',
+      insurances_travel: 'Travel',
+      insurances_life: 'Life',
+      insurances_event: 'Event',
+      insurances_savings: 'Savings'
     }
   }
 };

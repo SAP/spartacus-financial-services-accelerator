@@ -1,0 +1,70 @@
+@import 'mixins-fsa';
+@import 'theme';
+@import '~bootstrap/scss/mixins/breakpoints'; // TO CHECK ALL IMPORTS
+
+.progress-wrapper {
+    border-top: 2px solid var(--cx-g-color-3);
+    .progress-inner-wrapper {
+        flex-basis: 0;
+    }
+}
+.progress-node {
+    position: relative;
+    margin-bottom: 14px;
+    cursor: pointer;
+    .FSA-icon {
+        display: inline-block;
+        padding: 16px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        background: var(--cx-g-color-5);
+        border: $border-grey;
+        font-size: 20px;
+        @include box-shadow(0px, 5px, 10px, 3px, var(--cx-g-color-text), 0.2);
+        @include media-breakpoint-down(md) {
+            padding: 12px;
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+    }
+    .icon-FSA-ok {
+        color: var(--cx-g-color-primary);
+    }
+    .label {
+        font-size: 14px;
+        font-weight: var(--cx-g-font-weight-semi);
+        @include media-breakpoint-down(md) {
+            font-size: 12px;
+        }
+    }
+    &.is-active {
+        .FSA-icon {
+            color: var(--cx-g-color-primary);
+            background: var(--cx-g-color-1);
+        }
+        .label {
+            color: var(--cx-g-color-primary);
+        }
+        &:before {
+            width: 100%;
+            background-color: var(--cx-g-color-7);
+        }
+    }
+    &.is-disabled {
+        cursor: default;
+        .FSA-icon { 
+            background: var(--cx-g-color-1);
+        }
+        .label {
+            font-weight: 400;
+        }
+        &:before {
+            background-color:transparent;
+        }
+    }
+}
+.link-wrapper {
+    font-weight: 700;
+    text-align: right;
+    margin: 15px 10px 0 0;
+}

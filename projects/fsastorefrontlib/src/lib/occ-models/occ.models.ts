@@ -1,8 +1,9 @@
-import { Product, Price, UserSignUp, User} from '@spartacus/core';
+import { Product, Price, UserSignUp, Category, User} from '@spartacus/core';
 
 export interface FSProduct extends Product {
   price?: FSPrice;
   cartDispalyName?: string;
+  defaultCategory?: Category;
 }
 
 export interface FSPrice extends Price {
