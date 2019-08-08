@@ -8,7 +8,5 @@
     [attr.placeholder]="config.placeholder"
     [formControlName]="config.name"
     >
-
-    <div class="error" *ngIf="this.group.controls[config.name].errors">
-    </div>
+    <div class="error" *ngIf="this.group.controls[config.name].errors"></div>
 </div>

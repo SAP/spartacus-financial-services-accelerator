@@ -11,10 +11,8 @@ import { CustomFormValidators } from 'projects/fsastorefrontlib/src/lib/cms-lib/
 })
 export class FormsComponent implements AfterViewInit, OnInit {
   @ViewChild(DynamicFormComponent, {static: false}) form: DynamicFormComponent;
-
   @Input()
   formCategoryCode: string;
-
   categoryConfig: FormDefinition;
 
   config: FormDefinition[] = [{
@@ -193,11 +191,9 @@ export class FormsComponent implements AfterViewInit, OnInit {
   ]}
 ];
 
-  ngOnInit()
-  {
+  ngOnInit() {
     this.categoryConfig = this.config.filter(item=> item.categoryCode == this.formCategoryCode)[0];
   }
-
 
   ngAfterViewInit() {
     let previousValid = this.form.valid;
