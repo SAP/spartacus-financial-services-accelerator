@@ -158,27 +158,35 @@ export class FormsComponent implements AfterViewInit, OnInit {
   categoryCode: "insurances_travel",
   formGroups: [
     {
-      groupName: 'General',
+      groupName: 'trip',
       priceAttributes: [
         {
-          type: 'title',
-          label: 'General'
+          type: 'select',
+          label: 'Destination',
+          name: 'tripDestination',
+          options: ['Europe', 'Uk']
         },
         {
           type: 'datepicker',
-          label: 'Trip Date',
-          name: 'coverageStartDate',
+          label: 'Start Date',
+          name: 'tripStartDate',
           validation: [Validators.required, CustomFormValidators.comapreToCurrentDate('shouldBeGrater')],
         },
         {
           type: 'datepicker',
-          label: 'Trip End Date',
-          name: 'coverageStartDate',
+          label: 'End Date',
+          name: 'tripEndDate',
           validation: [Validators.required, CustomFormValidators.comapreToCurrentDate('shouldBeGrater')],
         },
         {
           type: 'input',
-          label: 'Number of travelers'
+          label: 'Trip Cost',
+          name: 'costOfTrip'
+        },
+        {
+          type: 'input',
+          label: 'Age of Traveller',
+          name: 'tripDetailsTravellerAges'
         }
       ]
     }
