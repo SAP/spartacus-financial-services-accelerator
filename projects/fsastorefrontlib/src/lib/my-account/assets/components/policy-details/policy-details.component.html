@@ -57,7 +57,7 @@
             </ul>     
         </fsa-accordion-item>
         <fsa-accordion-item [title]="'fscommon.whoOrWhatIsInsured' | cxTranslate">
-            <ul class="accordion-list container-fluid" *ngIf="policy.insuredObjects">
+            <ul class="accordion-list container-fluid" *ngIf="policy.insuredObjects && policy.insuredObjects.length > 0">
                 <li *ngFor="let insuredObjectItem of policy.insuredObjects[0].insuredObjectItems" class="accordion-list-item row">
                     <div class="col-6 item-label">
                         {{insuredObjectItem.label}}
