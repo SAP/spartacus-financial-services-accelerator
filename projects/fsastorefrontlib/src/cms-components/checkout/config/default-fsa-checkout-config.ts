@@ -3,7 +3,7 @@ import { FSCheckoutStep } from 'projects/fsastorefrontlib/src/lib/checkout/asset
 
 export declare abstract class FSCheckoutConfig extends CheckoutConfig {
   checkout?: {
-      steps: Array<FSCheckoutStep>;
+    steps: Array<FSCheckoutStep>;
   };
 }
 
@@ -15,11 +15,10 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         name: 'fscommon.whatsIncluded',
         routeName: 'category',
         status: {
-          disabled: true,
+          disabled: false,
           completed: false,
           active: false
         },
-        progressBar: false,
         icon: 'icon-FSA-selected-item',
         type: [],
       },
@@ -28,11 +27,10 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         name: 'fscommon.addOptions',
         routeName: 'addOptions',
         status: {
-          disabled: false,
+          disabled: true,
           completed: false,
-          active: true
+          active: false
         },
-        progressBar: false,
         icon: 'icon-FSA-list',
         type: [],
       },
@@ -45,7 +43,6 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
           completed: false,
           active: false
         },
-        progressBar: false,
         icon: 'icon-FSA-shield',
         type: [],
       },
@@ -58,7 +55,6 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
           completed: false,
           active: false
         },
-        progressBar: false,
         icon: 'icon-FSA-payment-cards',
         type: [],
       },
@@ -71,10 +67,9 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
           completed: false,
           active: false
         },
-        progressBar: false,
         icon: 'icon-FSA-review',
         type: [],
       }
-      ]
+    ]
   },
 };

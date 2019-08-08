@@ -4,7 +4,6 @@ import { CartService, RoutingConfigService, RoutingService } from "@spartacus/co
 import { CheckoutConfig, CheckoutProgressComponent } from "@spartacus/storefront";
 import { FSProduct } from "projects/fsastorefrontlib/src/lib/occ-models";
 import { BehaviorSubject } from 'rxjs';
-import { FSCheckoutStep } from "./fs-checkout-step.component";
 
 @Component({
   selector: 'fs-checkout-progress',
@@ -12,10 +11,8 @@ import { FSCheckoutStep } from "./fs-checkout-step.component";
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FSCheckoutProgressComponent extends CheckoutProgressComponent {
-  steps: Array<FSCheckoutStep>;
-  currentUrl: string;
-  currentCategorySource = new BehaviorSubject<string>('');
 
+  currentCategorySource = new BehaviorSubject<string>('');
   currentCategory = this.currentCategorySource.asObservable();
 
   constructor(
@@ -43,11 +40,6 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent {
 
     super.ngOnInit();
 
-    this.steps.forEach(step => {
-      if (step.routeName.includes('category')) {
-        step.categoryUrl = '/checkout/c/';
-      }
-    })
   }
 
 }
