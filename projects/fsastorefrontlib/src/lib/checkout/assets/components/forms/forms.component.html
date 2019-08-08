@@ -1,6 +1,6 @@
-<div class="form">
+<div *ngIf="categoryConfig" class="form">
   <dynamic-form
-    [config]="config"
+    [config]="categoryConfig"
     #form="dynamicForm"
     (submit)="submit($event)">
   </dynamic-form>

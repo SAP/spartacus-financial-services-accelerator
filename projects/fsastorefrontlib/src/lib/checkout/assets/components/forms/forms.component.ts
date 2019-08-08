@@ -1,5 +1,5 @@
-import { Component, ViewChild, AfterViewInit } from '@angular/core';
-import { Validators, AbstractControl, ValidatorFn, FormGroup, FormControl } from '@angular/forms';
+import { Component, ViewChild, AfterViewInit, OnInit, Input } from '@angular/core';
+import { Validators } from '@angular/forms';
 
 import { FormDefinition } from './dynamic-form/models/field-config.interface';
 import { DynamicFormComponent } from './dynamic-form/containers/dynamic-form/dynamic-form.component';
@@ -9,10 +9,16 @@ import { CustomFormValidators } from 'projects/fsastorefrontlib/src/lib/cms-lib/
   selector: 'fsa-forms',
   templateUrl: './forms.component.html'
 })
-export class FormsComponent implements AfterViewInit {
+export class FormsComponent implements AfterViewInit, OnInit {
   @ViewChild(DynamicFormComponent, {static: false}) form: DynamicFormComponent;
 
-  config: FormDefinition = {
+  @Input()
+  formCategoryCode: string;
+
+  categoryConfig: FormDefinition;
+
+  config: FormDefinition[] = [{
+    categoryCode: "insurances_auto",
     formGroups: [
       {
         groupName: 'General',
@@ -148,7 +154,43 @@ export class FormsComponent implements AfterViewInit {
         ]
       },
     ]
-  };
+  },{
+  categoryCode: "insurances_travel",
+  formGroups: [
+    {
+      groupName: 'General',
+      priceAttributes: [
+        {
+          type: 'title',
+          label: 'General'
+        },
+        {
+          type: 'datepicker',
+          label: 'Trip Date',
+          name: 'coverageStartDate',
+          validation: [Validators.required, CustomFormValidators.comapreToCurrentDate('shouldBeGrater')],
+        },
+        {
+          type: 'datepicker',
+          label: 'Trip End Date',
+          name: 'coverageStartDate',
+          validation: [Validators.required, CustomFormValidators.comapreToCurrentDate('shouldBeGrater')],
+        },
+        {
+          type: 'input',
+          label: 'Number of travelers'
+        }
+      ]
+    }
+  ]}
+];
+
+  ngOnInit()
+  {
+    this.categoryConfig = this.config.filter(item=> item.categoryCode == this.formCategoryCode)[0];
+  }
+
+
   ngAfterViewInit() {
     let previousValid = this.form.valid;
     this.form.changes.subscribe(() => {
