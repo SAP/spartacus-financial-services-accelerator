@@ -1,4 +1,4 @@
-import { CmsComponent, CmsBannerComponent } from '@spartacus/core';
+import { CmsComponent, CmsBannerComponent, Category } from '@spartacus/core';
 
 export type CmsComponent = CmsComponent;
 
@@ -43,4 +43,14 @@ export interface CMSComparisonTabComponent extends CmsComponent {
 export interface ComparisonPanelCMSComponent extends CmsComponent {
   uid?: string;
   products?: string;
+}
+
+export interface CMSCustomComponentsContainer extends CmsComponent {
+  uid?: string;
+  simpleCMSComponents?: string;
+}
+
+export interface CMSFormSubmitComponent extends CmsComponent {
+  uid?: string;
+  category: Category;
 }

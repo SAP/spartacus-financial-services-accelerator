@@ -7,45 +7,54 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DynamicFormModule } from './assets/components/forms/dynamic-form/dynamic-form.module';
 
 import {
-  SpinnerModule,
-  CmsPageGuard,
-  PageLayoutComponent,
-  PageComponentModule,
-  PaymentMethodModule,
-  PaymentFormModule,
-  MediaModule,
-  CartNotEmptyGuard,
-  PaymentDetailsSetGuard,
-  CardModule,
-  PaymentMethodComponent
-} from '@spartacus/storefront';
-import {
   AuthGuard,
   CmsConfig,
   ConfigModule,
   I18nModule,
-  RoutingConfig,
-  RoutesConfig
+  RoutesConfig,
+  RoutingConfig
 } from '@spartacus/core';
-
+import {
+  CardModule,
+  CartNotEmptyGuard,
+  CmsPageGuard,
+  MediaModule,
+  PageComponentModule,
+  PageLayoutComponent,
+  PaymentDetailsSetGuard,
+  PaymentFormModule,
+  PaymentMethodComponent,
+  PaymentMethodModule,
+  SpinnerModule
+} from '@spartacus/storefront';
 import { AccordionModule } from '../accordion/accordion.module';
-import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
-import { FinalReviewComponent } from './assets/components/final-review/final-review.component';
-import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
-import { AddOptionsComponent } from './assets/components/add-options/add-options.component';
-import { FSMiniCartComponent } from './assets/components/mini-cart/mini-cart.component';
-import { FormsComponent } from './assets/components/forms/forms.component';
-import { effects } from './assets/store/effects';
-import { FSCartService } from './assets/services';
 import { OccFSCartService } from '../occ/cart/fs-cart.service';
+import { AddOptionsComponent } from './assets/components/add-options/add-options.component';
+import { FSCheckoutProgressComponent } from './assets/components/checkout-progress/fs-checkout-progress.component';
+import { FSCheckoutProgressModule } from './assets/components/checkout-progress/fs-checkout-progress.module';
+import { FinalReviewComponent } from './assets/components/final-review/final-review.component';
+import { FSMiniCartComponent } from './assets/components/mini-cart/mini-cart.component';
+import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
+import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
+import { FSCartService } from './assets/services';
+import { effects } from './assets/store/effects';
 
 const routes: Routes = [
   {
+    path: null,
+    canActivate: [CmsPageGuard],
+    data: {
+      cxRoute: 'generalInformation',
+      pageLabel: 'generalInformationForm'
+    },
+    component: PageLayoutComponent
+  },
+  {
     path: null, // can be null only if pathS property is defined in ConfigModule
-    canActivate: [AuthGuard, CmsPageGuard],
+    canActivate: [CmsPageGuard],
     data: {
       cxRoute: 'addOptions', // custom name for your route to be used in ConfigModule configuration
-      pageLabel: 'add-options'// ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
+      pageLabel: 'add-options' // ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
     },
     component: PageLayoutComponent // SPA LAYOUT Component you're targeting
   },
@@ -83,11 +92,7 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [
-      AuthGuard,
-      CmsPageGuard,
-      // OrderConfirmationGuard
-    ],
+    canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'orderConfirmation',
       pageLabel: 'orderConfirmationPage'
@@ -98,9 +103,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    DynamicFormModule,
-    FormsModule,
-    ReactiveFormsModule,
     PaymentMethodModule,
     PaymentFormModule,
     I18nModule,
@@ -110,12 +112,17 @@ const routes: Routes = [
     MediaModule,
     SpinnerModule,
     AccordionModule,
+    FormsModule,
+    ReactiveFormsModule,
     CardModule,
+    DynamicFormModule,
+    FSCheckoutProgressModule,
     RouterModule.forChild(routes),
     EffectsModule.forFeature(effects),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
-        AddOptionsFlex: { // mapping hybris component (defined in impex) - This is acctualy flexType defined in impex for that component
+        AddOptionsFlex: {
+          // mapping hybris component (defined in impex) - This is acctualy flexType defined in impex for that component
           component: AddOptionsComponent // to SPA component
         },
         MiniCartFlex: {
@@ -133,10 +140,9 @@ const routes: Routes = [
         OrderConfirmationFlex: {
           component: FsaOrderConfirmationComponent
         },
-        CMSTripDetailsSubmitComponent: {
-          component: FormsComponent
+        DynamicProgressBarStepsComponent: {
+          component: FSCheckoutProgressComponent
         }
-
       }
     })
   ],
@@ -145,8 +151,7 @@ const routes: Routes = [
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
-    FSMiniCartComponent,
-    FormsComponent
+    FSMiniCartComponent
   ],
   exports: [
     I18nModule,
@@ -155,18 +160,16 @@ const routes: Routes = [
     QuoteReviewComponent,
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
-    FSMiniCartComponent,
-    FormsComponent
+    FSMiniCartComponent
   ],
   entryComponents: [
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
     QuoteReviewComponent,
     FinalReviewComponent,
-    FSMiniCartComponent,
-    FormsComponent
+    FSMiniCartComponent
   ],
-  providers: [ FSCartService, OccFSCartService ]
+  providers: [FSCartService, OccFSCartService]
 })
-export class CheckoutModule {
-}
+export class CheckoutModule {}
+>>>>>>> develop

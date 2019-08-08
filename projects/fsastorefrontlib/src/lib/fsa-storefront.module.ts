@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { provideConfig, ConfigModule } from '@spartacus/core';
 import { StorefrontConfig, B2cStorefrontModule, PageComponentModule, defaultCmsContentConfig } from '@spartacus/storefront';
-import { translations, translationChunksConfig  } from '@spartacus/assets';
+import { translations, translationChunksConfig } from '@spartacus/assets';
 
 import { MyAccountModule } from './my-account/index';
 import { UiModule } from './ui/index';
