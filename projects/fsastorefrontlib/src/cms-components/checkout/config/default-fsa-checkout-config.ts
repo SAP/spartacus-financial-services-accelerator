@@ -1,5 +1,5 @@
 import { CheckoutConfig } from '@spartacus/storefront';
-import { FSCheckoutStep } from 'projects/fsastorefrontlib/src/lib/checkout/assets/components/checkout-progress/fs-checkout-step.component';
+import { FSCheckoutStep } from './../../../lib/checkout/assets/components/checkout-progress/fs-checkout-step.component';
 
 export declare abstract class FSCheckoutConfig extends CheckoutConfig {
   checkout?: {

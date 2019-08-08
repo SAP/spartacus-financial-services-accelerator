@@ -3,8 +3,27 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { EffectsModule } from '@ngrx/effects';
-import { AuthGuard, CmsConfig, ConfigModule, I18nModule, RoutesConfig, RoutingConfig } from '@spartacus/core';
-import { CardModule, CartNotEmptyGuard, CmsPageGuard, MediaModule, PageComponentModule, PageLayoutComponent, PaymentDetailsSetGuard, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, SpinnerModule } from '@spartacus/storefront';
+import {
+  AuthGuard,
+  CmsConfig,
+  ConfigModule,
+  I18nModule,
+  RoutesConfig,
+  RoutingConfig
+} from '@spartacus/core';
+import {
+  CardModule,
+  CartNotEmptyGuard,
+  CmsPageGuard,
+  MediaModule,
+  PageComponentModule,
+  PageLayoutComponent,
+  PaymentDetailsSetGuard,
+  PaymentFormModule,
+  PaymentMethodComponent,
+  PaymentMethodModule,
+  SpinnerModule
+} from '@spartacus/storefront';
 import { AccordionModule } from '../accordion/accordion.module';
 import { OccFSCartService } from '../occ/cart/fs-cart.service';
 import { AddOptionsComponent } from './assets/components/add-options/add-options.component';
@@ -17,14 +36,13 @@ import { QuoteReviewComponent } from './assets/components/quote-review/quote-rev
 import { FSCartService } from './assets/services';
 import { effects } from './assets/store/effects';
 
-
 const routes: Routes = [
   {
     path: null, // can be null only if pathS property is defined in ConfigModule
     canActivate: [CmsPageGuard],
     data: {
       cxRoute: 'addOptions', // custom name for your route to be used in ConfigModule configuration
-      pageLabel: 'add-options'// ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
+      pageLabel: 'add-options' // ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
     },
     component: PageLayoutComponent // SPA LAYOUT Component you're targeting
   },
@@ -62,10 +80,7 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [
-      AuthGuard,
-      CmsPageGuard,
-    ],
+    canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'orderConfirmation',
       pageLabel: 'orderConfirmationPage'
@@ -91,7 +106,8 @@ const routes: Routes = [
     EffectsModule.forFeature(effects),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
-        AddOptionsFlex: { // mapping hybris component (defined in impex) - This is acctualy flexType defined in impex for that component
+        AddOptionsFlex: {
+          // mapping hybris component (defined in impex) - This is acctualy flexType defined in impex for that component
           component: AddOptionsComponent // to SPA component
         },
         MiniCartFlex: {
@@ -140,5 +156,4 @@ const routes: Routes = [
   ],
   providers: [FSCartService, OccFSCartService]
 })
-export class CheckoutModule {
-}
+export class CheckoutModule {}
