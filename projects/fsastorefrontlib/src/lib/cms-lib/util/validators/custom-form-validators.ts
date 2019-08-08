@@ -33,7 +33,7 @@ export class CustomFormValidators {
         return (control: AbstractControl): ValidationErrors | null => {
             const inputVal = new Date(control.value as string);
             const today = new Date();
-            switch(operator) {
+            switch (operator) {
                 case 'shouldBeGreater':
                     return inputVal.getTime() > today.getTime() ? null : { InvalidDate: true };
                 case 'shouldBeLess':

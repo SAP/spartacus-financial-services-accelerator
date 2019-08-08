@@ -172,4 +172,4 @@ const routes: Routes = [
   ],
   providers: [FSCartService, OccFSCartService]
 })
-export class CheckoutModule {}
+export class CheckoutModule { }

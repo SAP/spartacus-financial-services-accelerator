@@ -20,7 +20,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
   };
 
   config: FormDefinition[] = [{
-    categoryCode: "insurances_auto",
+    categoryCode: 'insurances_auto',
     formGroups: [
       {
         groupName: 'general',
