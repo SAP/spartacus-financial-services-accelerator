@@ -9,6 +9,7 @@ import { FormDatePickerComponent } from '../form-datepicker/form-datepicker.comp
 
 import { Field } from '../../models/field.interface';
 import { FieldConfig } from '../../models/field-config.interface';
+import { FormGenericComponent } from '../form-generic.component';
 
 const components: {[type: string]: Type<Field>} = {
   button: FormButtonComponent,
@@ -26,7 +27,7 @@ export class DynamicFieldDirective implements OnChanges, OnInit {
   config: FieldConfig;
   @Input()
   group: FormGroup;
-  component: ComponentRef<Field>;
+  component: ComponentRef<FormGenericComponent>;
 
   constructor(
     private resolver: ComponentFactoryResolver,

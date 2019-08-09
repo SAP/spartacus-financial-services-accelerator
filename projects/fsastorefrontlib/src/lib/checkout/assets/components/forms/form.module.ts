@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { I18nModule } from '@spartacus/core';
-import { FormsComponent } from './forms.component';
+import { FormComponent } from './form.component';
 import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
 
 
@@ -17,8 +17,8 @@ import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
     DynamicFormModule,
     NgbTooltipModule
   ],
-  declarations: [FormsComponent],
-  exports: [FormsComponent],
+  declarations: [FormComponent],
+  exports: [FormComponent],
   providers: []
 
 })

@@ -2,21 +2,17 @@ import { Component, ViewChild, AfterViewInit, OnInit, Input } from '@angular/cor
 import { Validators } from '@angular/forms';
 import { FormDefinition } from './dynamic-form/models/field-config.interface';
 import { DynamicFormComponent } from './dynamic-form/containers/dynamic-form/dynamic-form.component';
-import { CustomFormValidators } from 'projects/fsastorefrontlib/src/lib/cms-lib/util/validators/custom-form-validators';
+import { CustomFormValidators } from './../../../../cms-lib/util/validators/custom-form-validators';
 
 @Component({
-  selector: 'fsa-forms',
-  templateUrl: './forms.component.html'
+  selector: 'fsa-form-component',
+  templateUrl: './form.component.html'
 })
-export class FormsComponent implements AfterViewInit, OnInit {
+export class FormComponent implements AfterViewInit, OnInit {
   @ViewChild(DynamicFormComponent, {static: false}) form: DynamicFormComponent;
   @Input()
   formCategoryCode: string;
   categoryConfig: FormDefinition;
-  formData = {
-    'priceAttributeList': [
-    ],
-  };
 
   config: FormDefinition[] = [{
     categoryCode: 'insurances_auto',
@@ -208,7 +204,12 @@ export class FormsComponent implements AfterViewInit, OnInit {
     });
   }
 
-  submit(formData: {[name: string]: any}) {
+  // should be moved to pricing service, with FSA-4210
+  createPricingData(formData: {[name: string]: any}) {
+    const pricingData = {
+      'priceAttributeList': [
+      ],
+    };
     Object.entries(formData).forEach(
       ([groupName, inputsObj]) => {
         const inputs = [];
@@ -222,8 +223,12 @@ export class FormsComponent implements AfterViewInit, OnInit {
             'value': inputValue
           });
         });
-        this.formData.priceAttributeList.push(groupObj);
-      });
-      console.log(this.formData);
-    }
+        pricingData.priceAttributeList.push(groupObj);
+    });
+    console.log(pricingData);
+  }
+
+  submit(formData: {[name: string]: any}) {
+    this.createPricingData(formData);
+  }
 }

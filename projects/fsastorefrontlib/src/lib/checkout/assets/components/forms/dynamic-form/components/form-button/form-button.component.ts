@@ -1,15 +1,9 @@
 import { Component } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-
-import { Field } from '../../models/field.interface';
-import { FieldConfig } from '../../models/field-config.interface';
+import { FormGenericComponent } from '../form-generic.component';
 
 @Component({
   selector: 'fsa-form-button',
   templateUrl: './form-button.component.html'
 })
 
-export class FormButtonComponent implements Field {
-  config: FieldConfig;
-  group: FormGroup;
-}
+export class FormButtonComponent extends FormGenericComponent {}
