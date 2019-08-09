@@ -7,11 +7,10 @@ import { FormSelectComponent } from '../form-select/form-select.component';
 import { FormTitleComponent } from '../form-title/form-title.component';
 import { FormDatePickerComponent } from '../form-datepicker/form-datepicker.component';
 
-import { Field } from '../../models/field.interface';
 import { FieldConfig } from '../../models/field-config.interface';
 import { FormGenericComponent } from '../form-generic.component';
 
-const components: {[type: string]: Type<Field>} = {
+const components: {[type: string]: Type<FormGenericComponent>} = {
   button: FormButtonComponent,
   input: FormInputComponent,
   select: FormSelectComponent,
@@ -49,7 +48,7 @@ export class DynamicFieldDirective implements OnChanges, OnInit {
         Supported types: ${supportedTypes}`
       );
     }
-    const component = this.resolver.resolveComponentFactory<Field>(components[this.config.type]);
+    const component = this.resolver.resolveComponentFactory<FormGenericComponent>(components[this.config.type]);
     this.component = this.container.createComponent(component);
     this.component.instance.config = this.config;
     this.component.instance.group = this.group;
