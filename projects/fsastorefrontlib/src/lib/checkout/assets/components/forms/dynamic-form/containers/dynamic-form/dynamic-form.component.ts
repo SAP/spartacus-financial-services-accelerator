@@ -35,7 +35,7 @@ export class DynamicFormComponent implements OnInit {
     config.formGroups.forEach(formGroup => {
       const groupName = formGroup.groupName;
       const newGroup = this.fb.group({});
-      formGroup.priceAttributes.forEach(input => {
+      formGroup.fieldConfigs.forEach(input => {
         input.group = newGroup;
         if (input.type !== 'button' && input.type !== 'title') {
           newGroup.addControl(input.name, this.createControl(input));
