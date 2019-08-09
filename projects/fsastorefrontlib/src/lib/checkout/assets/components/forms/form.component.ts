@@ -19,7 +19,7 @@ export class FormComponent implements AfterViewInit, OnInit {
     formGroups: [
       {
         groupName: 'general',
-        priceAttributes: [
+        fieldConfigs: [
           {
             type: 'title',
             label: 'General'
@@ -33,14 +33,14 @@ export class FormComponent implements AfterViewInit, OnInit {
           {
             type: 'select',
             options: ['Monthly', 'Annually'],
-            label: 'Payent Frequency',
+            label: 'Payment Frequency',
             name: 'paymentFrequency',
           }
         ]
       },
     {
       groupName: 'vehicle',
-        priceAttributes: [
+      fieldConfigs: [
           {
             type: 'title',
             label: 'Vehicle'
@@ -107,7 +107,7 @@ export class FormComponent implements AfterViewInit, OnInit {
       },
       {
         groupName: 'mainDriver',
-        priceAttributes: [
+        fieldConfigs: [
           {
             type: 'title',
             label: 'Main Driver'
@@ -157,7 +157,7 @@ export class FormComponent implements AfterViewInit, OnInit {
   formGroups: [
     {
       groupName: 'trip',
-      priceAttributes: [
+      fieldConfigs: [
         {
           type: 'select',
           label: 'Destination',

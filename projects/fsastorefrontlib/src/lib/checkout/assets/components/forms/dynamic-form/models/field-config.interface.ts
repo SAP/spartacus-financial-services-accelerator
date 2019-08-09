@@ -6,7 +6,7 @@ export interface FormDefinition {
 }
 export interface FromGroup {
   groupName: String;
-  priceAttributes: FieldConfig[];
+  fieldConfigs: FieldConfig[];
 }
 export interface FieldConfig {
   disabled?: boolean;
