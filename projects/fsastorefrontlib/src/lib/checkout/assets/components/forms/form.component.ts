@@ -28,7 +28,7 @@ export class FormComponent implements AfterViewInit, OnInit {
             type: 'datepicker',
             label: 'Coverage Start Date',
             name: 'coverageStartDate',
-            validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeGrater')],
+            validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeGreater')],
           },
           {
             type: 'select',
