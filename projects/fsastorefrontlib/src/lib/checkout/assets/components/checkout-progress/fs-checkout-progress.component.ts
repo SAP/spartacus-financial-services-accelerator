@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartService, RoutingConfigService, RoutingService } from '@spartacus/core';
 import { CheckoutConfig, CheckoutProgressComponent } from '@spartacus/storefront';
@@ -10,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './fs-checkout-progress.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FSCheckoutProgressComponent extends CheckoutProgressComponent {
+export class FSCheckoutProgressComponent extends CheckoutProgressComponent implements OnInit {
 
   currentCategorySource = new BehaviorSubject<string>('');
   currentCategory = this.currentCategorySource.asObservable();
