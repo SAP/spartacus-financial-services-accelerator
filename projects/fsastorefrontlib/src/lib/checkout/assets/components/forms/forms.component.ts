@@ -164,7 +164,7 @@ export class FormsComponent implements AfterViewInit, OnInit {
           type: 'select',
           label: 'Destination',
           name: 'tripDestination',
-          options: ['Europe', 'Uk']
+          options: ['Europe', 'UK']
         },
         {
           type: 'datepicker',
