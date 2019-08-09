@@ -5,7 +5,7 @@ import { FieldConfig, FormDefinition } from '../../models/field-config.interface
 @Component({
   exportAs: 'fsa-dynamicForm',
   selector: 'fsa-dynamic-form',
-  templateUrl: '/dynamic-form.component.html'
+  templateUrl: './dynamic-form.component.html'
 })
 export class DynamicFormComponent implements OnInit {
   @Input()
