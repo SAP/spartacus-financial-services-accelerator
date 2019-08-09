@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { CMSFormSubmitComponent, CmsComponent } from 'projects/fsastorefrontlib/src/lib/occ-models';
 import { ActivatedRoute } from '@angular/router';
@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   selector: 'fsa-cms-category-form-submit-component',
   templateUrl: './cms-category-form-submit-component.html'
 })
-export class CmsCategoryFormSubmitComponent implements OnInit {
+export class CmsCategoryFormSubmitComponent {
 
   constructor(
     protected componentData: CmsComponentData<CMSFormSubmitComponent>,

@@ -28,17 +28,4 @@ export class CustomFormValidators {
             return userAge < age ? null : { InvalidDate: true };
         };
     }
-
-    static compareToCurrentDate(operator) {
-        return (control: AbstractControl): ValidationErrors | null => {
-            const inputVal = new Date(control.value as string);
-            const today = new Date();
-            switch (operator) {
-                case 'shouldBeGreater':
-                    return inputVal.getTime() > today.getTime() ? null : { InvalidDate: true };
-                case 'shouldBeLess':
-                    return inputVal.getTime() < today.getTime() ? null : { InvalidDate: true };
-              }
-        };
-    }
 }

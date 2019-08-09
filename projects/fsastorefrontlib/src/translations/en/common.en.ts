@@ -81,7 +81,6 @@ export const fscommon = {
       insurances_life: 'Life',
       insurances_event: 'Event',
       insurances_savings: 'Savings'
-    },
-    pleaseSelect: 'Please select:'
+    }
   }
 };
