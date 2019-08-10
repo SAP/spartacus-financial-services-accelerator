@@ -13,7 +13,7 @@ import {
   UpdateEmailComponent,
   CloseAccountComponent
 } from '@spartacus/storefront';
-import { effects } from '../../my-account/assets/store';
+import { effects } from '../../my-account/assets/store/effects/index';
 import { CMSViewPoliciesComponent } from './view-policies/view-policies.component';
 import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
 import { FSUpdateProfileComponent } from '../../my-account/assets/components/update-profile/fs-update-profile.component';

@@ -9,8 +9,8 @@ import { QuotesModule } from './assets/quotes.module';
 import { PoliciesModule } from './assets/policies.module';
 import { PolicyDetailsModule } from './assets/policy-details.module';
 import { PremiumCalendarModule } from './assets/premium-calendar.module';
-import { effects } from './assets/store/effects';
-import { reducerProvider, reducerToken } from './assets/store/reducers';
+import { effects } from './assets/store/effects/index';
+import { reducerProvider, reducerToken } from './assets/store/reducers/index';
 import { FSUpdateProfileModule } from './assets/components/update-profile/fs-update-profile.module';
 
 
