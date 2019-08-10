@@ -1,7 +1,3 @@
-@import 'mixins-fsa';
-@import 'theme';
-@import '~bootstrap/scss/mixins/breakpoints'; // TO CHECK ALL IMPORTS
-
 .progress-wrapper {
     border-top: 2px solid var(--cx-g-color-3);
     .progress-inner-wrapper {

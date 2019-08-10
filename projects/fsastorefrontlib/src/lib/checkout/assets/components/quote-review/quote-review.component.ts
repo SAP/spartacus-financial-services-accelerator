@@ -7,8 +7,7 @@ import { CheckoutConfigService } from '@spartacus/storefront';
 
 @Component({
   selector: 'fsa-quote-review',
-  templateUrl: './quote-review.component.html',
-  styleUrls: ['./quote-review.component.scss']
+  templateUrl: './quote-review.component.html'
 })
 export class QuoteReviewComponent implements OnInit {
 

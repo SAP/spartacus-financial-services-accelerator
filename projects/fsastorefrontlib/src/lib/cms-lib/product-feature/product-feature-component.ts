@@ -6,7 +6,6 @@ import { CmsProductFeatureComponent } from './../../occ-models/cms-component.mod
 @Component({
     selector: 'fsa-product-feature',
     templateUrl: './product-feature-component.html',
-    styleUrls: ['./product-feature-component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class ProductFeatureComponent implements OnInit {

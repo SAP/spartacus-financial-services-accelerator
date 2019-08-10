@@ -7,14 +7,13 @@ import { PolicyService } from '../../services';
 @Component({
   selector: 'fsa-premium-calendar',
   templateUrl: './premium-calendar.component.html',
-  styleUrls: ['./premium-calendar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PremiumCalendarComponent implements OnInit {
   constructor(
     private store: Store<fromStore.UserState>,
     private config: OccConfig,
-    protected policyService: PolicyService
+  protected policyService: PolicyService
   ) {}
 
   policies$;

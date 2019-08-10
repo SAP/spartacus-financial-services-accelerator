@@ -9,7 +9,6 @@ import { OccConfig } from '@spartacus/core';
 @Component({
   selector: 'fsa-policy-details',
   templateUrl: './policy-details.component.html',
-  styleUrls: ['./policy-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PolicyDetailsComponent implements OnInit {

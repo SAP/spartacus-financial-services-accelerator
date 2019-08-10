@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { FSSearchConfig } from '../../../my-account/assets/services/inbox-data.service';
 import { InboxService } from '../../../my-account/assets/services/inbox.service';
-import * as fromStore from '../../../my-account/assets/store';
+import * as fromStore from '../../../my-account/assets/store/index';
 import { CmsInboxComponent } from './../../../occ-models/cms-component.models';
 
 export interface Mapping extends StandardCmsComponentConfig {
@@ -16,7 +16,6 @@ export interface Mapping extends StandardCmsComponentConfig {
 @Component({
   selector: 'fsa-inbox',
   templateUrl: './inbox.component.html',
-  styleUrls: ['./inbox.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InboxComponent implements OnInit {
@@ -38,6 +37,7 @@ export class InboxComponent implements OnInit {
   contentSortOrder = 'desc';
   sentSortOrder = 'desc';
   readState;
+  shouldShow = false;
 
   ngOnInit() {
     this.component$ = this.componentData.data$;
