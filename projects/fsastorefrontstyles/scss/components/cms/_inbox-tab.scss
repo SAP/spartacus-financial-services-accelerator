@@ -1,52 +1,52 @@
-:host {
+fsa-inbox-tab {
 	flex: 0 1 100%;
 	max-width: 15%;
-}
-.tab {
-	flex-grow: 1;
-	cursor: pointer;
-	background-color: var(--cx-color-4);
-	margin-right: 5px;
-	border: 1px solid var(--cx-color-3);
-	border-bottom: none;
-	text-align: center;
-	@include media-breakpoint-down(sm) {
-		border-top: none;
-		margin-right: 0;
-	}
-	a {
-		@include transition;
-		border-top: 4px solid transparent;
-		background-color: var(--cx-color-6);
-		color: var(--cx-color-1);
-		padding: 10px;
-		font-weight: var(--cx-font-weight-semi);
-		display: block;
-		&:hover {
-			background-color: var(--cx-color-1);
-			color: var(--cx-color-6);
-		}
-		&.active {
-			border-top: 4px solid var(--cx-color-primary);
-			background-color: transparent;
-			color: var(--cx-color-text);
-		}
+	.tab {
+		flex-grow: 1;
+		cursor: pointer;
+		background-color: var(--cx-color-4);
+		margin-right: 5px;
+		border: 1px solid var(--cx-color-3);
+		border-bottom: none;
+		text-align: center;
 		@include media-breakpoint-down(sm) {
-			background: var(--cx-color-1);
-			padding: 10px 20px;
-			color: var(--cx-color-text);
+			border-top: none;
+			margin-right: 0;
+		}
+		a:not([href]) { // needed this kind of selector to overide the bootstrap one
+			@include transition;
+			border-top: 4px solid transparent;
+			background-color: var(--cx-color-6);
+			color: var(--cx-color-1);
+			padding: 10px;
+			font-weight: var(--cx-font-weight-semi);
+			display: block;
 			&:hover {
-				background: var(--cx-color-3);
-				color: var(--cx-color-text);
+				background-color: var(--cx-color-1);
+				color: var(--cx-color-6);
 			}
 			&.active {
-				border-top: none;
+				border-top: 4px solid var(--cx-color-primary);
+				background-color: transparent;
+				color: var(--cx-color-text);
+			}
+			@include media-breakpoint-down(sm) {
+				background: var(--cx-color-1);
+				padding: 10px 20px;
+				color: var(--cx-color-text);
+				&:hover {
+					background: var(--cx-color-3);
+					color: var(--cx-color-text);
+				}
+				&.active {
+					border-top: none;
+				}
 			}
 		}
 	}
-}
-ul, li {
-	list-style:none;
-	margin: 0;
-	padding: 0;
+	ul, li {
+		list-style:none;
+		margin: 0;
+		padding: 0;
+	}
 }

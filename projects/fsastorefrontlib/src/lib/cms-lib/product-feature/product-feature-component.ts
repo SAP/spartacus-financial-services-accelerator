@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { ProductService } from '@spartacus/core';
 import { CmsProductFeatureComponent } from './../../occ-models/cms-component.models';
