@@ -13,6 +13,7 @@ import { ClaimDataService } from './services/claim-data.service';
 import { OccClaimService } from '../../occ/claim/claim.service';
 
 import { SpinnerModule } from '@spartacus/storefront';
+import { ClaimActivePoliciesComponent } from './components/claims/claim-policies/claim-active-policies.component';
 
 const routes: Routes = [
   {
@@ -39,13 +40,16 @@ const routes: Routes = [
       cmsComponents: {
         AccountMyClaimsSPAComponent: {
           component: ClaimsComponent
+        },
+        ClaimActivePoliciesFlex: {
+          component: ClaimActivePoliciesComponent
         }
       }
     })
   ],
-  declarations: [ClaimsComponent, DeleteClaimDialogComponent],
-  exports: [ClaimsComponent],
-  providers: [ClaimService, ClaimDataService, OccClaimService],
-  entryComponents: [ClaimsComponent, DeleteClaimDialogComponent]
+  declarations: [ClaimsComponent, DeleteClaimDialogComponent, ClaimActivePoliciesComponent],
+  exports: [ClaimsComponent, ClaimActivePoliciesComponent],
+  providers: [ClaimService, ClaimDataService, ClaimActivePoliciesComponent, OccClaimService],
+  entryComponents: [ClaimsComponent, DeleteClaimDialogComponent, ClaimActivePoliciesComponent]
 })
 export class ClaimsModule {}
