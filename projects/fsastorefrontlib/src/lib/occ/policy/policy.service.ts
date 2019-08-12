@@ -39,6 +39,16 @@ export class OccPolicyService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
+  public getPoliciesByCategory(userId: string, categoCode: string): Observable<any> {
+    const url = this.getPoliciesEndpoint(userId);
+    const category = 'category=' + categoCode + '&fields=BASIC';
+    const params = new HttpParams({fromString: category});
+
+    return this.http
+      .get(url, { params: params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
   public getPremiumCalendar(userId: string): Observable<any> {
     const url = this.getPoliciesEndpoint(userId) + '/premium-calendar';
     const params = new HttpParams({ fromString: FULL_PARAMS });
