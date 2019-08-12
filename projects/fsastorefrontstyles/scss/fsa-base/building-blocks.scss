@@ -1,7 +1,7 @@
 @import '../mixins-fsa';
 
 .info-container {
-  background-color: var(--cx-g-color-4);
+  background-color: var(--cx-color-4);
   border: $border-grey;
 }
 .clickable {
@@ -11,29 +11,29 @@
   border-bottom: $border-grey;
 }
 .border-top-grey {
-  border-top: 1px solid var(--cx-g-color-3);
+  border-top: 1px solid var(--cx-color-3);
 }
 .border-bottom-primary {
-  border-bottom-color: var(--cx-g-color-primary);
+  border-bottom-color: var(--cx-color-primary);
 }
 .border-bottom-secondary {
-  border-bottom-color: var(--cx-g-color-secondary);
+  border-bottom-color: var(--cx-color-secondary);
 }
 .border-top-primary {
-  border-top-color: var(--cx-g-color-primary);
+  border-top-color: var(--cx-color-primary);
 }
 .border-top-secondary {
-  border-top-color: var(--cx-g-color-secondary);
+  border-top-color: var(--cx-color-secondary);
 }
 .warn {
-  color: var(--cx-g-color-warning);
+  color: var(--cx-color-warning);
   font-weight: bold;
 }
 .notice {
-  color: var(--cx-g-color-primary);
+  color: var(--cx-color-primary);
   font-weight: bold;
   &--dark {
-    color: var(--cx-g-color-8);
+    color: var(--cx-color-8);
   }
 }
 .heading-headline {
@@ -41,14 +41,14 @@
   padding: 20px 0;
   text-align: left;
   margin-bottom: 30px;
-  color: var(--cx-g-color-secondary);
+  color: var(--cx-color-secondary);
   font-weight: 700;
   border-bottom: $border-grey;
 }
 .section-header-heading {
-  @include linear-gradient-background (var(--cx-g-color-primary), var(--cx-g-color-9), 50%, 100%);
+  @include linear-gradient-background (var(--cx-color-primary), var(--cx-color-9), 50%, 100%);
   border: none;
-  color: var(--cx-g-color-1);
+  color: var(--cx-color-1);
   font-size: 20px;
   font-weight: 400;
   line-height: 1.6;
@@ -68,31 +68,31 @@
   text-align: center;
 }
 .circle-image {
-  background-color: var(--cx-g-color-7);
+  background-color: var(--cx-color-7);
   border-radius: 50%;
-  @include box-shadow(0px, 0px, 9px, 1px, var(--cx-g-color-text), 70%);
+  @include box-shadow(0px, 0px, 9px, 1px, var(--cx-color-text), 70%);
   margin: 0 25px;
 }
 .gradient-heading {
-  color: var(--cx-g-color-1);
+  color: var(--cx-color-1);
   font-size: 20px;
   padding-top: 15px;
   padding-bottom: 15px;
   line-height: 1.6;
-  @include linear-gradient-background( var(--cx-g-color-primary), var(--cx-g-color-9), 50%, 100% );
+  @include linear-gradient-background( var(--cx-color-primary), var(--cx-color-9), 50%, 100% );
 }
 .list-data {
   margin: 0;
   padding: 0;
   list-style: none;
-  background-color: var(--cx-g-color-1);
+  background-color: var(--cx-color-1);
   .closed {
     display: none;
   }
   .list-item {
     padding: 12px;
     list-style: none;
-    background-color: var(--cx-g-color-1);
+    background-color: var(--cx-color-1);
   }
   .info {
     position: relative;
@@ -112,7 +112,7 @@
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background-color: var(--cx-g-color-primary);
+      background-color: var(--cx-color-primary);
   }
 }
 .underline-effect {
@@ -121,7 +121,7 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    background-color: var(--cx-g-color-7);
+    background-color: var(--cx-color-7);
     width: 0;
     height: 5px;
     transition: all 300ms ease;

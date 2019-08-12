@@ -5,7 +5,7 @@
     }
 }
 .premium-data-row {
-    background-color: var(--cx-g-color-4);
+    background-color: var(--cx-color-4);
     border: $border-grey;
     border-top:none;
     padding: 26px 0;
@@ -19,12 +19,12 @@
         transition: ease-in-out 600ms max-height;
     }
     .container-fluid {
-        border: 1px solid var(--cx-g-color-3);
+        border: 1px solid var(--cx-color-3);
         border-top: none;
         border-bottom: none;
     }
     .row {
-        border-bottom: 1px solid var(--cx-g-color-3);
+        border-bottom: 1px solid var(--cx-color-3);
         padding: 12px 0;
     }
 }

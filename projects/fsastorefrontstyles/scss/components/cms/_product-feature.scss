@@ -1,6 +1,6 @@
 .product-feature {
 	&-wrapper {
-		background-color: var(--cx-g-color-4);
+		background-color: var(--cx-color-4);
 		.section-header-heading {
 			text-transform: uppercase;
 		}
@@ -17,7 +17,7 @@
 		}
 	}
 	&-details {
-		color: var(--cx-g-color-text);
+		color: var(--cx-color-text);
 		padding: 0 50px 0 70px;
 		font-size: $font-size-base;
 		list-style-type: circle;

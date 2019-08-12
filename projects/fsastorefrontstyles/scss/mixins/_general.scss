@@ -19,33 +19,33 @@
     -webkit-box-shadow: $x $y $a $b rgba($color, $opacity);
   }
   @mixin primary-btn-color {
-    background-color: var(--cx-g-color-primary) !important;
-    border-color: var(--cx-g-color-primary) !important;
-    color: var(--cx-g-color-1) !important;
+    background-color: var(--cx-color-primary) !important;
+    border-color: var(--cx-color-primary) !important;
+    color: var(--cx-color-1) !important;
     &:hover,
     &:active,
     &:focus {
-      background-color: var(--cx-g-color-7) !important;
-      border-color: var(--cx-g-color-7) !important;
-      color: var(--cx-g-color-1) !important;
+      background-color: var(--cx-color-7) !important;
+      border-color: var(--cx-color-7) !important;
+      color: var(--cx-color-1) !important;
     }
   }
   @mixin secondary-btn-color {
-    background-color: var(--cx-g-color-secondary) !important;
-    border-color: var(--cx-g-color-secondary) !important;
-    color: var(--cx-g-color-1) !important;
+    background-color: var(--cx-color-secondary) !important;
+    border-color: var(--cx-color-secondary) !important;
+    color: var(--cx-color-1) !important;
     &:hover,
     &:active,
     &:focus {
-      background-color: var(--cx-g-color-8) !important;
-      border-color: var(--cx-g-color-8) !important;
-      color: var(--cx-g-color-1) !important;
+      background-color: var(--cx-color-8) !important;
+      border-color: var(--cx-color-8) !important;
+      color: var(--cx-color-1) !important;
     }
   }
   @mixin secondary-btn-color-inverted {
-    background-color: var(--cx-g-color-1) !important;
-    border-color: var(--cx-g-color-1) !important;
-    color: var(--cx-g-color-secondary) !important;
+    background-color: var(--cx-color-1) !important;
+    border-color: var(--cx-color-1) !important;
+    color: var(--cx-color-secondary) !important;
     &:hover,
     &:active,
     &:focus {

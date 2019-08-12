@@ -1,7 +1,7 @@
 .section-header-heading {
 	text-align: left;
 	font-size: 16px;
-	font-weight: var(--cx-g-font-weight-semi);
+	font-weight: var(--cx-font-weight-semi);
 	.filter {
 		cursor: pointer;
 		right: 10px;
@@ -22,25 +22,25 @@
 		left: 0;
 		width: 100%;
 		z-index: 99;
-		background: var(--cx-g-color-1);
+		background: var(--cx-color-1);
 		font-size: 14px;
 		border: 1px solid rgba(0, 0, 0, 0.15);
-		@include box-shadow(0px, 6px, 12px, 0px, var(--cx-g-color-text), 0.3);
+		@include box-shadow(0px, 6px, 12px, 0px, var(--cx-color-text), 0.3);
 		&.opened {
 			display: block;
 		}
 		a {
 			padding: 10px 20px;
-			color: var(--cx-g-color-text);
+			color: var(--cx-color-text);
 			display: block;
 			&:hover {
-				background: var(--cx-g-color-3);
+				background: var(--cx-color-3);
 			}
 		}
 	}
 }
 .tabs-header {
-	border-bottom: 1px solid var(--cx-g-color-3);
+	border-bottom: 1px solid var(--cx-color-3);
 	& ul {
 		display: flex;
 	} 
@@ -51,7 +51,7 @@ ul, li {
 	padding: 0;
 }
 .icon-FSA-envelope, .icon-FSA-envelope-open {
-	color: var(--cx-g-color-primary);
+	color: var(--cx-color-primary);
 	font-size: 20px;
 	cursor: pointer;
 }

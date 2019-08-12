@@ -1,16 +1,16 @@
 .messages {
-	border-left: 1px solid var(--cx-g-color-3);
-	border-right: 1px solid var(--cx-g-color-3);
+	border-left: 1px solid var(--cx-color-3);
+	border-right: 1px solid var(--cx-color-3);
 	.message {
 		&.read .inbox-header{ 
 			font-weight: normal;
 		}
 		.inbox-header {
 			cursor: pointer;
-			background: var(--cx-g-color-4);
-			font-weight: var(--cx-g-font-weight-semi);
+			background: var(--cx-color-4);
+			font-weight: var(--cx-font-weight-semi);
 			&:hover {
-				color: var(--cx-g-color-primary);
+				color: var(--cx-color-primary);
 			}
 		}	
 	}
@@ -20,14 +20,14 @@
 		margin: 0 auto;
 		padding: 20px;
 		border: $border-grey;
-		@include box-shadow(0px, 3px, 10px, 1px, var(--cx-g-color-text), 0.3);
+		@include box-shadow(0px, 3px, 10px, 1px, var(--cx-color-text), 0.3);
 		@include media-breakpoint-down(lg) { 
 			margin: 0 20px;
 		}
 	}
 	input:checked ~ .checkbox-text:before {
-		color: var(--cx-g-color-primary);
-		border: 2px solid var(--cx-g-color-primary);
+		color: var(--cx-color-primary);
+		border: 2px solid var(--cx-color-primary);
 	}
 }
 .cursor-default {
