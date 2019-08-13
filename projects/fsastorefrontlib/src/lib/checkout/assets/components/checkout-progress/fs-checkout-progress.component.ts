@@ -28,9 +28,15 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent imple
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       const categoryCode = 'categoryCode';
+      const formCode = 'formCode';
+
       if (params[categoryCode]) {
         this.currentCategorySource.next(params[categoryCode]);
-      } else {
+      }
+      if (params[formCode]) {
+        this.currentCategorySource.next(params[formCode]);
+      } 
+      else {
         this.cartService.getActive().subscribe(cart => {
           if (cart.deliveryOrderGroups && cart.deliveryOrderGroups.length > 0
             && cart.deliveryOrderGroups[0].entries
