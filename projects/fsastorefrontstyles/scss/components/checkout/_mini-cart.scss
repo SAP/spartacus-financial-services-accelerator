@@ -1,32 +1,30 @@
-:host {
-  display: block;
-  overflow: hidden;
-}
-.short-overview {
+fsa-mini-cart {
+  align-self: flex-end;
   width: 90%;
-  float: right;
   @include media-breakpoint-down(md) {
     width: 100%;
   }
-  @include media-breakpoint-down(sm) { 
-    margin-top: 30px;
-  }
-  &-content {
-    border: $border-grey;
-    background-color: var(--cx-color-4);
-    padding: 10px;
-  }
-  &-item {
-    margin: 10px 0;
-  }
-  &-value {
-    text-align: right;
-  }
-  .highlighted {
-    border-top: $border-grey;
-    font-size: $h6-font-size;
-    font-weight: 700;
-    padding: 15px 0;
-    margin: 0;
+  .short-overview {
+    @include media-breakpoint-down(sm) { 
+      margin-top: 30px;
+    }
+    &-content {
+      border: $border-grey;
+      background-color: var(--cx-color-4);
+      padding: 10px;
+    }
+    &-item {
+      margin: 10px 0;
+    }
+    &-value {
+      text-align: right;
+    }
+    .highlighted {
+      border-top: $border-grey;
+      font-size: $h6-font-size;
+      font-weight: 700;
+      padding: 15px 0;
+      margin: 0;
+    }
   }
 }
