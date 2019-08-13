@@ -4,7 +4,6 @@ import { StorefrontConfig, B2cStorefrontModule, PageComponentModule, defaultCmsC
 import { translations, translationChunksConfig } from '@spartacus/assets';
 
 import { MyAccountModule } from './my-account/my-account.module';
-import { UiModule } from './ui/ui.module';
 import { CmsLibModule } from './cms-lib/cms-lib.module';
 import { fstranslations } from '../translations/index';
 import { fsaLayoutConfig } from './../recipes/config/default-fsa-layout-config';
@@ -16,7 +15,6 @@ import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa
 
 @NgModule({
   imports: [
-    UiModule,
     PageComponentModule,
     CmsLibModule,
     MyAccountModule,
