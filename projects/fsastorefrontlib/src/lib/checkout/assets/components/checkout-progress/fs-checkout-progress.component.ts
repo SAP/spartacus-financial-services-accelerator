@@ -35,8 +35,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent imple
       }
       if (params[formCode]) {
         this.currentCategorySource.next(params[formCode]);
-      } 
-      else {
+      } else {
         this.cartService.getActive().subscribe(cart => {
           if (cart.deliveryOrderGroups && cart.deliveryOrderGroups.length > 0
             && cart.deliveryOrderGroups[0].entries

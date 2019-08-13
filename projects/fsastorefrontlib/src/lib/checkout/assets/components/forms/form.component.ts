@@ -1,20 +1,30 @@
 import { Component, ViewChild, AfterViewInit, OnInit, Input } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { FormDefinition } from './dynamic-form/models/field-config.interface';
+import { FormDefinition, FormSubmitType } from './dynamic-form/models/field-config.interface';
 import { DynamicFormComponent } from './dynamic-form/containers/dynamic-form/dynamic-form.component';
 import { CustomFormValidators } from './../../../../cms-lib/util/validators/custom-form-validators';
+import { RoutingService } from '@spartacus/core';
+import { PricingService } from '../../services/pricing/pricing.service';
+
 
 @Component({
   selector: 'fsa-form-component',
   templateUrl: './form.component.html'
 })
 export class FormComponent implements AfterViewInit, OnInit {
+
+  constructor(
+    protected routingService: RoutingService,
+    private pricingService: PricingService
+  ) { }
+
   @ViewChild(DynamicFormComponent, {static: false}) form: DynamicFormComponent;
   @Input()
   formCategoryCode: string;
   categoryConfig: FormDefinition;
 
   config: FormDefinition[] = [{
+    submitType: FormSubmitType.PRICING,
     categoryCode: 'insurances_auto',
     formGroups: [
       {
@@ -144,7 +154,7 @@ export class FormComponent implements AfterViewInit, OnInit {
             name: 'driverLicenceDate',
           },
           {
-            label: 'Submit',
+            label: 'Find Prices',
             name: 'submit',
             type: 'button'
           }
@@ -153,6 +163,7 @@ export class FormComponent implements AfterViewInit, OnInit {
     ]
   },
   {
+  submitType: FormSubmitType.PRICING,
   categoryCode: 'insurances_travel',
   formGroups: [
     {
@@ -185,6 +196,11 @@ export class FormComponent implements AfterViewInit, OnInit {
           type: 'input',
           label: 'Age of Traveller',
           name: 'tripDetailsTravellerAges'
+        },
+        {
+          label: 'Find Prices',
+          name: 'submit1',
+          type: 'button'
         }
       ]
     }
@@ -204,31 +220,22 @@ export class FormComponent implements AfterViewInit, OnInit {
     });
   }
 
-  // should be moved to pricing service, with FSA-4210
-  createPricingData(formData: {[name: string]: any}) {
-    const pricingData = {
-      'priceAttributeList': [
-      ],
-    };
-    Object.entries(formData).forEach(
-      ([groupName, inputsObj]) => {
-        const inputs = [];
-        const groupObj = {
-          'priceAttributesGroup': groupName,
-          'fieldConfigs': inputs
-        };
-        Object.entries(inputsObj).forEach( ([inputName, inputValue]) => {
-          inputs.push({
-            'key' : inputName,
-            'value': inputValue
-          });
-        });
-        pricingData.priceAttributeList.push(groupObj);
-    });
-    console.log(pricingData);
+  submit(formData: {[name: string]: any}) {
+    if (this.form.valid) {
+      switch (this.form.config.submitType) {
+        case FormSubmitType.PRICING: {
+          this.pricingService.buildPricingData(formData);
+        }
+      }
+    }
+    this.navigateNext();
   }
 
-  submit(formData: {[name: string]: any}) {
-    this.createPricingData(formData);
+  // Should be more configurable to support other routes/pages
+  navigateNext() {
+    this.routingService.go({
+      cxRoute: 'category',
+      params: { code: this.form.config.categoryCode },
+    });
   }
 }

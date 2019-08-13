@@ -3,6 +3,7 @@ import { ValidatorFn } from '@angular/forms';
 export interface FormDefinition {
   formGroups: FromGroup[];
   categoryCode: string;
+  submitType: FormSubmitType;
 }
 export interface FromGroup {
   groupName: String;
@@ -18,4 +19,8 @@ export interface FieldConfig {
   validation?: ValidatorFn[];
   value?: any;
   hidden?: boolean;
+}
+
+export enum FormSubmitType {
+  PRICING
 }
