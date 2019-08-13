@@ -1,0 +1,10 @@
+<h3>My own custom heading here!</h3>
+<formio-grid
+  [formio]="service.formio"
+  [gridType]="'form'"
+  [query]="{ type: 'form'}"
+  (rowAction)="onAction($event)"
+  (rowSelect)="onSelect($event)"
+  [createText]="'Create Form'"
+  (createItem)="onCreateItem()"
+></formio-grid>

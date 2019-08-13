@@ -2,6 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { provideConfig, ConfigModule } from '@spartacus/core';
 import { StorefrontConfig, B2cStorefrontModule, PageComponentModule, defaultCmsContentConfig } from '@spartacus/storefront';
 import { translations, translationChunksConfig } from '@spartacus/assets';
+import { FormioModule } from 'angular-formio';
 
 import { MyAccountModule } from './my-account/index';
 import { UiModule } from './ui/index';
@@ -16,6 +17,7 @@ import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa
 
 @NgModule({
   imports: [
+    FormioModule,
     UiModule,
     PageComponentModule,
     CmsLibModule,

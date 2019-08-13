@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { ConfigModule, CmsConfig, I18nModule } from '@spartacus/core';
 import { CmsCategoryFormSubmitComponent } from './cms-category-form-submit-component';
 import { FSFormsModule } from '../../../checkout/assets/components/forms/form.module';
+import { FSFormsioModule } from '../../../checkout/assets/components/formio/formio.module';
+import { FormioManagerModule } from '../../../checkout/assets/components/formio/manager/formioManager.module';
+
 
 
 @NgModule({
@@ -10,6 +13,8 @@ import { FSFormsModule } from '../../../checkout/assets/components/forms/form.mo
     CommonModule,
     I18nModule,
     FSFormsModule,
+    FSFormsioModule,
+    FormioManagerModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         CMSFormSubmitComponent: {

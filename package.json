@@ -41,8 +41,9 @@
     "@spartacus/assets": "1.0.3",
     "@spartacus/core": "1.0.3",
     "@spartacus/storefront": "1.0.3",
-    "@spartacus/styles": "1.0.2"
-
+    "@spartacus/styles": "1.0.2",
+    "formio": "1.49.0",
+    "angular-formio": "4.0.0-beta.9"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.800.2",
