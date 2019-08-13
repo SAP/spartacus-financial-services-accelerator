@@ -11,10 +11,6 @@ export class PricingService  {
         groups: []
     };
 
-    protected getPricesForData(formData: {[name: string]: any}) {
-        this.buildPricingData(formData);
-    }
-
     buildPricingData(formData: {[name: string]: any}) {
         Object.entries(formData).forEach(
             ([groupName, inputsObj]) => {
