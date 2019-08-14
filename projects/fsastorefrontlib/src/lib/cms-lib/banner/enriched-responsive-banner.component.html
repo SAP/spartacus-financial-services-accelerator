@@ -5,7 +5,9 @@
     <div class="enriched-banner__text">
         <span class="enriched-banner__title">{{getHeadingText() | async}}</span>
         <span class="enriched-banner__details">
-            <a class="enriched-banner__styled-text" [href]="getUrl() | async">{{getStyledText() | async}}</a>
+            <a class="enriched-banner__styled-text"
+            [routerLink]="getUrl() | async">
+             {{getStyledText() | async}}</a>
         </span>
     </div>
 </div>
