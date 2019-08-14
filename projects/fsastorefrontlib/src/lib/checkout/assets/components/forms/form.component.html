@@ -1,3 +1,7 @@
+
+<h3 class="my-0 section-header-heading">
+   {{ 'fscommon.category.' + formCategoryCode | cxTranslate}} {{'fscommon.information'| cxTranslate }}
+</h3>
 <div *ngIf="categoryConfig" class="form">
   <fsa-dynamic-form
     [config]="categoryConfig"

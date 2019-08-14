@@ -2,8 +2,7 @@ import { FormDefinition, FormSubmitType } from '../dynamic-form/models/field-con
 import { CustomFormValidators } from 'projects/fsastorefrontlib/src/lib/cms-lib/util/validators/custom-form-validators';
 import { Validators } from '@angular/forms';
 
-export class FormSampleConfigurations
-{
+export class FormSampleConfigurations {
     static sampleConfigurations: FormDefinition[] = [{
         submitType: FormSubmitType.PRICING,
         categoryCode: 'insurances_auto',

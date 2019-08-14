@@ -12,7 +12,7 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
     steps: [
       {
         id: 'chooseCoverStep',
-        name: 'fscommon.generalInformation',
+        name: 'fscommon.chooseCover',
         routeName: 'generalInformation',
         icon: 'icon-FSA-lock',
         type: [],

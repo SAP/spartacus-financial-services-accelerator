@@ -57,7 +57,7 @@ export const fscommon = {
     yearPerformanse: 'Year Performance',
     yearsPerformanse: 'Years Performance',
     riskAndReturningRate: 'Risk & Returning Rating',
-    generalInformation: 'Choose cover',
+    chooseCover: 'Choose a Cover',
     whatsIncluded: 'What\'s Included',
     addedByYou: 'Added by you',
     investementDetails: 'Investments Details',
