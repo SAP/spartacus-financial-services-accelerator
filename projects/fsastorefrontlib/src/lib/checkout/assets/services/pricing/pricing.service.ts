@@ -12,17 +12,15 @@ export class PricingService  {
     };
 
     buildPricingData(formData: {[name: string]: any}) {
-        Object.entries(formData).forEach(
-            ([groupName, inputsObj]) => {
+        Object.keys(formData).forEach( groupName => {
             const priceAttributeGroup: PricingAttributeGroup = {
                 attrributes: [],
             };
             priceAttributeGroup.groupName = groupName;
-            Object.entries(inputsObj).forEach( ([inputName, inputValue]) => {
-                priceAttributeGroup.attrributes.push({'key': inputName, 'value': inputValue});
+            Object.keys(formData[groupName]).forEach( inputName => {
+                priceAttributeGroup.attrributes.push({'key': inputName, 'value': formData[groupName][inputName]});
             });
             this.pricingData.groups.push(priceAttributeGroup);
         });
-        console.log(this.pricingData);
     }
 }
