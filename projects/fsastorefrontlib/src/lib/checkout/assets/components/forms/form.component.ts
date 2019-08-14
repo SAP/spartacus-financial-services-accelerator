@@ -1,9 +1,10 @@
-import { Component, ViewChild, AfterViewInit, OnInit, Input } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormDefinition, FormSubmitType } from './dynamic-form/models/field-config.interface';
 import { DynamicFormComponent } from './dynamic-form/containers/dynamic-form/dynamic-form.component';
 import { RoutingService } from '@spartacus/core';
 import { PricingService } from '../../services/pricing/pricing.service';
 import { FormSampleConfigurations } from './configurations/form-sample-configurations';
+import { PricingData } from '../../models/pricing.interface';
 
 
 @Component({
@@ -11,6 +12,10 @@ import { FormSampleConfigurations } from './configurations/form-sample-configura
   templateUrl: './form.component.html'
 })
 export class FormComponent implements AfterViewInit, OnInit {
+
+  pricingData: PricingData
+  @Output()
+  submitOutput: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(
     protected routingService: RoutingService,
@@ -39,7 +44,8 @@ export class FormComponent implements AfterViewInit, OnInit {
     if (this.form.valid) {
       switch (this.form.config.submitType) {
         case FormSubmitType.PRICING: {
-          this.pricingService.buildPricingData(formData);
+          this.pricingData = this.pricingService.buildPricingData(formData);
+          this.pricingService.setPricingAttributes(this.pricingData);
         }
       }
       this.navigateNext();

@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { PricingData, PricingAttributeGroup } from '../../models/pricing.interface';
+import { Subject } from 'rxjs';
 
 @Injectable()
 export class PricingService  {
 
-    constructor(
-    ) { }
+    constructor( ) { }
 
-    pricingData: PricingData = {
+    pricingAttributesData: PricingData = {
         groups: []
     };
-
-    buildPricingData(formData: {[name: string]: any}) {
+    _pricingSource = new Subject<PricingData>();
+    
+    buildPricingData(formData: {[name: string]: Object}): PricingData {
         Object.entries(formData).forEach(
             ([groupName, inputsObj]) => {
             const priceAttributeGroup: PricingAttributeGroup = {
@@ -21,8 +22,13 @@ export class PricingService  {
             Object.entries(inputsObj).forEach( ([inputName, inputValue]) => {
                 priceAttributeGroup.attrributes.push({'key': inputName, 'value': inputValue});
             });
-            this.pricingData.groups.push(priceAttributeGroup);
+            this.pricingAttributesData.groups.push(priceAttributeGroup);
         });
-        console.log(this.pricingData);
+        return this.pricingAttributesData;
+    }
+
+    setPricingAttributes(priceData: PricingData)
+    {
+        this._pricingSource.next(priceData);
     }
 }
