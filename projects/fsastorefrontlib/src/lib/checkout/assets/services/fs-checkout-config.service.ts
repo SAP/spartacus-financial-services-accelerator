@@ -12,7 +12,7 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
     private fsCheckoutConfig: CheckoutConfig,
     private fsRoutingConfigService: RoutingConfigService
   ) {
-      super(fsCheckoutConfig,fsRoutingConfigService)
+      super(fsCheckoutConfig, fsRoutingConfigService);
   }
 
   getCurrentStepIndex(activatedRoute: ActivatedRoute) {

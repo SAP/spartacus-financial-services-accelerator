@@ -4,7 +4,7 @@ import {  CmsConfig, ProductService, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
 import { ActivatedRoute } from '@angular/router';
-import { FSCheckoutConfigService } from '../../../../../../checkout/assets/services/fs-checkout-config.service'
+import { FSCheckoutConfigService } from '../../../../../../checkout/assets/services/fs-checkout-config.service';
 
 @Component({
     selector: 'fsa-comparison-table-panel-item',
