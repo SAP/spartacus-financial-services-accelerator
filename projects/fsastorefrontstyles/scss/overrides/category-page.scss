@@ -9,9 +9,9 @@
             &__title {
                 display: block;
                 font-size: 44px;
-                color: var(--cx-g-color-secondary);
+                color: var(--cx-color-secondary);
                 @include media-breakpoint-down(md) { 
-                    color: var(--cx-g-color-text);
+                    color: var(--cx-color-text);
                     font-size: 4vw;
                 }
                 @include media-breakpoint-down(xs) {
@@ -74,7 +74,7 @@
         }
         .enriched-banner {
             @include width1400;
-            background-color: var(--cx-g-color-4);
+            background-color: var(--cx-color-4);
             border: $border-grey;
             margin: 30px auto 0;
             padding: 20px;
@@ -112,8 +112,8 @@
         @include width1400;
         margin: 30px auto;
         align-items: center;
-        border: 1px solid var(--cx-g-color-3);
-        background-color: var(--cx-g-color-4);
+        border: 1px solid var(--cx-color-3);
+        background-color: var(--cx-color-4);
         cx-responsive-banner, cx-paragraph {
             flex: 0 1 auto;
             width: 50%;
@@ -124,8 +124,8 @@
         cx-paragraph {
             padding: 20px;
             @include media-breakpoint-down(sm) {
-                border: 1px solid var(--cx-g-color-3);
-                background-color: var(--cx-g-color-4);
+                border: 1px solid var(--cx-color-3);
+                background-color: var(--cx-color-4);
             }
         }
         @include media-breakpoint-down(sm) {

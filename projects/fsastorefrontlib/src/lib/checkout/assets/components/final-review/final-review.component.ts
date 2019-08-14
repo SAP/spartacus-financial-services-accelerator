@@ -8,7 +8,6 @@ import { CheckoutConfigService } from '@spartacus/storefront';
 @Component({
   selector: 'fsa-final-review',
   templateUrl: './final-review.component.html',
-  styleUrls: ['./final-review.component.scss']
 })
 export class FinalReviewComponent implements OnInit {
 

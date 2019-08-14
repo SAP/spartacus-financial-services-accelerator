@@ -23,7 +23,7 @@
       .enriched-banner {
         &__styled-text {
           color: $color-link-hover;
-          font-weight: var(--cx-g-font-weight-semi);
+          font-weight: var(--cx-font-weight-semi);
           font-size: 16px;
           text-transform: uppercase;
           border-bottom: 1px solid $color-link-hover;
@@ -69,7 +69,7 @@
         font-size: 30px;
         line-height: 1;
         color: $color-dark-blue;
-        font-weight: var(--cx-g-font-weight-semi);
+        font-weight: var(--cx-font-weight-semi);
         @include media-breakpoint-down(md) {
           font-size: 4vw;
         }
@@ -100,12 +100,12 @@
     }
     .main-title {
       &__headline-border {
-        border-top: 3px solid var(--cx-g-color-5);
+        border-top: 3px solid var(--cx-color-5);
         text-align: center;
       }
       &__quote-heading {
-        color: var(--cx-g-color-text);
-        background-color: var(--cx-g-color-1);
+        color: var(--cx-color-text);
+        background-color: var(--cx-color-1);
         display: inline-block;
         position: relative;
         width: 300px;
@@ -123,7 +123,7 @@
   .Section2B {
     @include width1400();
     cx-paragraph {
-      color: var(--cx-g-color-text);
+      color: var(--cx-color-text);
       width: 100%;
       padding: 0 15px;
       margin-bottom: 60px;
@@ -132,14 +132,14 @@
       &__homepage {
         font-size: 30px;
         text-align: center;
-        background-color: var(--cx-g-color-4);
+        background-color: var(--cx-color-4);
         padding: 20px 15px;
         @include media-breakpoint-down(md) {
           font-size: 20px;
         }
       }
       &__link {
-          color: var(--cx-g-color-primary);
+          color: var(--cx-color-primary);
           text-decoration: none;
       }
     }
@@ -168,7 +168,7 @@
   //Make a claim section
   .Section3 .make-claim {
     margin: 50px auto;
-    background-color: var(--cx-g-color-primary);
+    background-color: var(--cx-color-primary);
     text-align: center;
     .primary-button {
         text-transform: none;

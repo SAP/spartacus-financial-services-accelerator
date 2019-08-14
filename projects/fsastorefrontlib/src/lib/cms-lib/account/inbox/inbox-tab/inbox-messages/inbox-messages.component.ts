@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { FSSearchConfig } from '../../../../../my-account/assets/services/inbox-data.service';
 import { InboxService } from '../../../../../my-account/assets/services/inbox.service';
-import * as fromStore from '../../../../../my-account/assets/store';
+import * as fromStore from '../../../../../my-account/assets/store/index';
 
 export interface Mapping extends StandardCmsComponentConfig {
   CMSInboxTabComponent?: CmsComponentMapping;
@@ -14,7 +14,6 @@ export interface Mapping extends StandardCmsComponentConfig {
 @Component({
   selector: 'fsa-messages-inbox',
   templateUrl: './inbox-messages.component.html',
-  styleUrls: ['./inbox-messages.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InboxMessagesComponent implements OnInit {
