@@ -32,9 +32,9 @@ footer {
             }
         }
         .notice {
-            color: var(--cx-g-color-1);
+            color: var(--cx-color-1);
             background-color: transparent;
-            border-top: 1px solid var(--cx-g-color-1);
+            border-top: 1px solid var(--cx-color-1);
             margin-top: 20px;
             font-size: 12px;
             padding: 25px 0;
@@ -45,14 +45,14 @@ footer {
         }
         cx-generic-link a {
             display: inline-block;
-            color: var(--cx-g-color-1);
+            color: var(--cx-color-1);
             font-size: 12px;
             font-weight: normal;
             border-bottom: 1px solid transparent;
             &:hover {
                 text-decoration: none;
-                border-bottom: 1px solid var(--cx-g-color-1);
-                color: var(--cx-g-color-1);
+                border-bottom: 1px solid var(--cx-color-1);
+                color: var(--cx-color-1);
             }
         }
     }

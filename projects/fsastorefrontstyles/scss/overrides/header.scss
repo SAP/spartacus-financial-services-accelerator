@@ -3,15 +3,15 @@
 
 // 
 header {
-    --cx-g-color-inverse: #{var(--cx-g-color-secondary)};
-    --cx-background-color: #{var(--cx-g-color-1)};
+    --cx-color-inverse: #{var(--cx-color-secondary)};
+    --cx-background-color: #{var(--cx-color-1)};
     --cx-max-width: 100%;
-    background-color: var(--cx-g-color-1);
+    background-color: var(--cx-color-1);
     .SiteContext::after, &.is-expanded:after {
         display: none;
     }
     .navigation {
-        background-color: var(--cx-g-color-1);
+        background-color: var(--cx-color-1);
     }
     .SiteLogo {
         --cx-width: 100%;
@@ -26,7 +26,7 @@ header {
         }
     }
     .header {
-        color: var(--cx-g-color-text);
+        color: var(--cx-color-text);
         text-transform: uppercase;
         max-width: var(--cx-max-width);
         nav h5, .cx-login-greet {
@@ -36,21 +36,21 @@ header {
             height: inherit;
             @include media-breakpoint-down(md) {
                 &:hover, &:focus, &:active, &:after {
-                    color: var(--cx-g-color-1);
+                    color: var(--cx-color-1);
                 }
             }
             @include media-breakpoint-up(lg) {
-                color: var(--cx-g-color-text);
+                color: var(--cx-color-text);
             }
         }
         .cx-login-greet {
-            color: var(--cx-g-color-secondary);
+            color: var(--cx-color-secondary);
             font-weight: bold;
         }
         .NavigationBar cx-navigation-ui {
             padding: 0;
-            border-top: 1px solid var(--cx-g-color-5);
-            border-bottom: 1px solid var(--cx-g-color-5);
+            border-top: 1px solid var(--cx-color-5);
+            border-bottom: 1px solid var(--cx-color-5);
             cx-generic-link {
                 position: relative;
                 @include media-breakpoint-up(lg) {
@@ -60,13 +60,13 @@ header {
                         position: absolute;
                         bottom: 0;
                         left: 0;
-                        background-color: var(--cx-g-color-7);
+                        background-color: var(--cx-color-7);
                         width: 0;
                         height: 5px;
                         @include transition;
                     }
                     &:hover {
-                        color: var(--cx-g-color-7);
+                        color: var(--cx-color-7);
                         &:before {
                             width: 100%;
                             @include transition;
@@ -74,14 +74,14 @@ header {
                     }
                 }
                 a {
-                    font-weight: var(--cx-g-font-weight-normal);
+                    font-weight: var(--cx-font-weight-normal);
                 }
             }
         }
         nav {
             padding: 0;
             @include media-breakpoint-down(md) {
-                background-color: var(--cx-g-color-secondary);
+                background-color: var(--cx-color-secondary);
             }
             .nav-item {
                 @include media-breakpoint-down(md) {
@@ -124,12 +124,12 @@ header {
                         display: block;
                         width: var(--cx-max-width);
                         padding: 12px 18px;
-                        color: var(--cx-g-color-text);
+                        color: var(--cx-color-text);
                         text-transform: none;
-                        border-bottom: 1px solid var(--cx-g-color-background);
+                        border-bottom: 1px solid var(--cx-color-background);
                         &:hover {
-                            background-color: var(--cx-g-color-primary);
-                            color: var(--cx-g-color-1);
+                            background-color: var(--cx-color-primary);
+                            color: var(--cx-color-1);
                         }
                     }
                     
@@ -137,9 +137,9 @@ header {
             }
         }
         .hamburger-inner, .is-active .hamburger-inner {
-            background-color: var(--cx-g-color-secondary);
+            background-color: var(--cx-color-secondary);
             &:before, &:after {
-            background-color: var(--cx-g-color-secondary); 
+            background-color: var(--cx-color-secondary); 
             }
         }
         .SearchBox {
@@ -151,35 +151,35 @@ header {
                     line-height: 1.5;
                     padding-left: 20px;
                     font-family: 'font-FSA' !important;
-                    font-weight: var(--cx-g-font-weight-light);
+                    font-weight: var(--cx-font-weight-light);
                 }
             }
             .searchbox {
-                background-color: var(--cx-g-color-1);
+                background-color: var(--cx-color-1);
             }
             .cx-icon:before {
                 font-size: 22px;   
             }
             input {
-                border: 1px solid var(--cx-g-color-secondary);
+                border: 1px solid var(--cx-color-secondary);
                 padding: 0 20px;
                 height: 48px;
                 font-size: 1rem;
                 font-weight: 400;
                 flex-basis: inherit;
-                background-color: var(--cx-g-color-1);
+                background-color: var(--cx-color-1);
                 z-index: 1;
                 @include media-breakpoint-down(sm) {
                     border: none;
                 }
             }
             .dropdown-menu.show {
-                border: 1px solid var(--cx-g-color-secondary);
+                border: 1px solid var(--cx-color-secondary);
                 border-radius: 0;
             }
             .dropdown-item {
                 &.active {
-                    color: var(--cx-g-color-secondary);
+                    color: var(--cx-color-secondary);
                 }
             }
         }
@@ -189,7 +189,7 @@ header {
     }
     cx-navigation-ui {
         &.flyout h5:hover {
-            color: var(--cx-g-color-primary);
+            color: var(--cx-color-primary);
         }
     }
 }

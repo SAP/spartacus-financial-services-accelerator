@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'fsa-mini-cart',
   templateUrl: './mini-cart.component.html',
-  styleUrls: ['./mini-cart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FSMiniCartComponent {
