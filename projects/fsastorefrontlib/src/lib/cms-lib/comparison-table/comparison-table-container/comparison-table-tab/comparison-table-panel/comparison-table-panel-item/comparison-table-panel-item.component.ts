@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core
 import { ActivatedRoute } from '@angular/router';
 import { CmsConfig, RoutingService } from '@spartacus/core';
 import { CheckoutConfigService } from '@spartacus/storefront';
+import { FSCheckoutConfigService } from '../../../../../../checkout/assets/services/fs-checkout-config.service';
 
 import { FSCartService } from './../../../../../../checkout/assets/services';
 import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
@@ -28,7 +29,7 @@ export class ComparisonTablePanelItemComponent implements OnInit {
         protected cartService: FSCartService,
         protected config: CmsConfig,
         protected routingService: RoutingService,
-        private checkoutConfigService: CheckoutConfigService,
+        private checkoutConfigService: FSCheckoutConfigService,
         private activatedRoute: ActivatedRoute,
         private pricingService: PricingService,
         private productService: FSProductService,
@@ -54,9 +55,6 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     }
 
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {
-        console.log(this.productCode);
-        console.log(this.pricingData);
-
         this.cartService.createCartAndStartBundle(productCode, bundleTemplateId, 1, this.pricingData);
         this.routingService.go(this.checkoutStepUrlNext);
     }

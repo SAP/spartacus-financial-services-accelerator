@@ -8,17 +8,17 @@
 		display: none;
 	}
 	input:checked ~ .checkbox-text:before {
-		color: var(--cx-g-color-2);
+		color: var(--cx-color-2);
 	}
 	.checkbox-text {
 		line-height: 1;
-		color: var(--cx-g-color-3);
+		color: var(--cx-color-3);
 		cursor: pointer;
 		text-transform: none;
 		font-size: 15px;
 		&:before {
 			@include transition;
-			background: var(--cx-g-color-1);
+			background: var(--cx-color-1);
 			font-size: 11px;
 			font-weight: bold;
 			position: absolute;
@@ -28,13 +28,13 @@
 			height: 18px;
 			width: 18px;
 			line-height: 1.2;
-			border: 2px solid var(--cx-g-color-3);
+			border: 2px solid var(--cx-color-3);
 			border-radius: 3px;
 			color: transparent;
 		}
 	}
 }
 .form-check input[type=checkbox]:checked {
-	border-color: var(--cx-g-color-primary);
-	background-color: var(--cx-g-color-primary);
+	border-color: var(--cx-color-primary);
+	background-color: var(--cx-color-primary);
 }

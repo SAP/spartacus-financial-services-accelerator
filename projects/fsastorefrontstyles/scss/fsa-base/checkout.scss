@@ -10,7 +10,7 @@
 }
 .cart-items-list {
   border: $border-grey;
-  background-color: var(--cx-g-color-4);
+  background-color: var(--cx-color-4);
    h2 {
     margin: 0;
   }
@@ -38,8 +38,8 @@
     width: 100%;
     z-index: 99;
     background-color: rgba(255, 255, 255, 0.5);
-    border-bottom: 2px solid var(--cx-g-color-5);
-    border-top: 2px solid var(--cx-g-color-5);
+    border-bottom: 2px solid var(--cx-color-5);
+    border-top: 2px solid var(--cx-color-5);
     box-shadow: 0 0 0 2px white inset;
   }
   .tooltip-wrapper {
@@ -51,7 +51,7 @@
       right: 30px;
     }
     .tooltip .arrow:before {
-      border-left-color: var(--cx-g-color-8);
+      border-left-color: var(--cx-color-8);
     }
   }
   @include media-breakpoint-down(sm) {

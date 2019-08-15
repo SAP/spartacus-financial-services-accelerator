@@ -2,17 +2,17 @@
 
 body {
   font-size: $font-size-base;
-  color: var(--cx-g-color-text);
+  color: var(--cx-color-text);
 }
 
-h1, .h1 { font-size: var(--cx-g-h1-font-size)}
-h2, .h2, .test { font-size: var(--cx-g-h2-font-size)}
-h3, .h3 { font-size: var(--cx-g-h3-font-size)}
-h4, .h4 { font-size: var(--cx-g-h4-font-size)}
-h5, .h5 { font-size: var(--cx-g-h5-font-size)}
-h6, .h6 { font-size: var(--cx-g-h6-font-size)}
+h1, .h1 { font-size: var(--cx-h1-font-size)}
+h2, .h2, .test { font-size: var(--cx-h2-font-size)}
+h3, .h3 { font-size: var(--cx-h3-font-size)}
+h4, .h4 { font-size: var(--cx-h4-font-size)}
+h5, .h5 { font-size: var(--cx-h5-font-size)}
+h6, .h6 { font-size: var(--cx-h6-font-size)}
 p {
-  font-size: var(--cx-g-text-font-size);
+  font-size: var(--cx-text-font-size);
 }
 a {
   @include transition();
@@ -27,9 +27,9 @@ button:focus {
   outline: none;
 }
 .link {
-  color: var(--cx-g-color-primary);
+  color: var(--cx-color-primary);
   &:hover {
-    border-bottom: 1px solid var(--cx-g-color-primary);
+    border-bottom: 1px solid var(--cx-color-primary);
   }
 }
 .center1400 {

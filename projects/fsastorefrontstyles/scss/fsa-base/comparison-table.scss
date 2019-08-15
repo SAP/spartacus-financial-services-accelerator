@@ -6,7 +6,7 @@
     flex: 0 1 100%;
   }
   fsa-comparison-table-tab {
-    background-color: var(--cx-g-color-4);
+    background-color: var(--cx-color-4);
     display: flex;
     flex: 0 1 100%;
     border: $border-grey;
@@ -51,7 +51,7 @@
     z-index: 1;
     flex: 0 1 100%;
     padding: 0 5px;
-    border-left: 1px dashed var(--cx-g-color-3);
+    border-left: 1px dashed var(--cx-color-3);
     text-align: center;
     &:last-of-type {
       padding-right: 0;
@@ -87,7 +87,7 @@
       background-color: transparent;
     }
     &:nth-child(odd) {
-      background-color: var(--cx-g-color-5);
+      background-color: var(--cx-color-5);
     }
     &-title {
       display: inline-block;
@@ -114,6 +114,6 @@
     right: 5%;
   }
   .ct-tooltip .arrow:before {
-    border-top-color: var(--cx-g-color-8);
+    border-top-color: var(--cx-color-8);
   }
 }

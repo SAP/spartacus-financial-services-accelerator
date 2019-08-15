@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { I18nTestingModule } from '@spartacus/core';
 import { FSUpdateProfileFormComponent } from './fs-update-profile-form.component';
-import { FSUser } from 'projects/fsastorefrontlib/src/lib/occ-models';
+import { FSUser } from '../../../../../occ-models';
 
 const mockUser: FSUser = {
   titleCode: 'dr',

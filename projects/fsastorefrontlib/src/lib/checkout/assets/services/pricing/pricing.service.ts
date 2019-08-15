@@ -19,14 +19,13 @@ export class PricingService {
     };
 
     buildPricingData(formData: { [name: string]: Object }): PricingData {
-        Object.entries(formData).forEach(
-            ([priceAttributesGroup, inputsObj]) => {
+        Object.keys(formData).forEach(groupName => {
                 const priceAttributeGroup: PricingAttributeGroup = {
                     priceAttributes: [],
                 };
-                priceAttributeGroup.priceAttributesGroup = priceAttributesGroup;
-                Object.entries(inputsObj).forEach(([inputName, inputValue]) => {
-                    priceAttributeGroup.priceAttributes.push({ 'key': inputName, 'value': inputValue });
+                priceAttributeGroup.priceAttributesGroup = groupName;
+                Object.keys(formData[groupName]).forEach(inputName => {
+                    priceAttributeGroup.priceAttributes.push({ 'key': inputName, 'value':  formData[groupName][inputName] });
                 });
                 this.pricingAttributesData.priceAttributeList.push(priceAttributeGroup);
             });

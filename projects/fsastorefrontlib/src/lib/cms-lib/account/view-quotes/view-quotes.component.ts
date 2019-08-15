@@ -1,6 +1,6 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import * as fromQuoteStore from '../../../my-account/assets/store';
+import * as fromQuoteStore from '../../../my-account/assets/store/index';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
 import { AuthService } from '@spartacus/core';

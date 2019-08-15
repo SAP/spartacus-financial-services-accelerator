@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { CartDataService, CartActions } from '@spartacus/core';
 import { OccFSCartService } from '../../../../occ/cart/fs-cart.service';
-import * as fromActions from '../../../../checkout/assets/store/actions/index';
+import * as fromActions from './../actions/fs-cart.action';
 
 @Injectable()
 export class FSCartEffects {
@@ -42,7 +42,6 @@ export class FSCartEffects {
   constructor(
     private actions$: Actions,
     private occCartService: OccFSCartService,
-    private cartData: CartDataService
   ) { }
 }
 
