@@ -26,6 +26,23 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent imple
   }
 
   ngOnInit() {
+    super.ngOnInit();
+    this.setActiveStepIndex();
+    this.setActiveCategory();
+  }
+
+  setActiveStepIndex() {
+    this.steps = this.config.checkout.steps;
+    this.activeStepUrl = this.activatedRoute.routeConfig.path;
+    this.steps.forEach((step, index) => {
+      const routeUrl = this.routingConfigService.getRouteConfig(step.routeName).paths[0];
+      if (routeUrl === this.activeStepUrl) {
+        this.activeStepIndex = index;
+      }
+    });
+  }
+
+  setActiveCategory() {
     this.activatedRoute.params.subscribe(params => {
       const categoryCode = 'categoryCode';
       if (params[categoryCode]) {
@@ -43,6 +60,5 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent imple
         });
       }
     });
-    super.ngOnInit();
   }
 }
