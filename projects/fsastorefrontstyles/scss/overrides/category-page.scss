@@ -68,12 +68,12 @@
             }
         }
     }
+    .Section2A, .Section4 {
+        @include width1400;
+        padding: 0 10px;
+    }
     .Section2A {
-        @include media-breakpoint-down(lg) {
-            padding: 0 10px;
-        }
         .enriched-banner {
-            @include width1400;
             background-color: var(--cx-color-4);
             border: $border-grey;
             margin: 30px auto 0;
@@ -109,7 +109,8 @@
         }
     }
     .Section2B {
-        @include width1400;
+        max-width: 1380px;
+        width: calc(100% - 20px);
         margin: 30px auto;
         align-items: center;
         border: 1px solid var(--cx-color-3);
@@ -123,24 +124,28 @@
         }
         cx-paragraph {
             padding: 20px;
+            text-align: left;
             @include media-breakpoint-down(sm) {
+                text-align: center;
                 border: 1px solid var(--cx-color-3);
                 background-color: var(--cx-color-4);
+            }
+        }
+        cx-media {
+            padding-right: calc(100% - 460px);
+            @include media-breakpoint-down(sm) {
+                padding-right: 0;
             }
         }
         @include media-breakpoint-down(sm) {
             border: none;
             background-color: transparent;
             margin: 20px 0;
-            padding: 0 10px
+            padding: 0 10px;
+            width: 100%;
         }
     }
-
-    .Section3 {
-        display: none;
-    }
     .Section4 {
-        @include width1400;
         display: flex;
         text-align: left;
         @include media-breakpoint-down(md) {
