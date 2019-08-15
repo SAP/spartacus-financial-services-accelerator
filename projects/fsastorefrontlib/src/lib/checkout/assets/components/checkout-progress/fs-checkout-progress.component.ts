@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartService, RoutingConfigService, RoutingService } from '@spartacus/core';
 import { CheckoutConfig, CheckoutProgressComponent } from '@spartacus/storefront';
-import { FSProduct } from 'projects/fsastorefrontlib/src/lib/occ-models';
+import { FSProduct } from '../../../../occ-models/occ.models';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -45,8 +45,13 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent imple
   setActiveCategory() {
     this.activatedRoute.params.subscribe(params => {
       const categoryCode = 'categoryCode';
+      const formCode = 'formCode';
+
       if (params[categoryCode]) {
         this.currentCategorySource.next(params[categoryCode]);
+      }
+      if (params[formCode]) {
+        this.currentCategorySource.next(params[formCode]);
       } else {
         this.cartService.getActive().subscribe(cart => {
           if (cart.deliveryOrderGroups && cart.deliveryOrderGroups.length > 0

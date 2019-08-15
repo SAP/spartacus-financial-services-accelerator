@@ -6,6 +6,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { I18nModule } from '@spartacus/core';
 import { FormComponent } from './form.component';
 import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
+import { PricingService } from '../../services/pricing/pricing.service';
 
 
 @NgModule({
@@ -19,7 +20,7 @@ import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
   ],
   declarations: [FormComponent],
   exports: [FormComponent],
-  providers: []
+  providers: [PricingService]
 
 })
 export class FSFormsModule {

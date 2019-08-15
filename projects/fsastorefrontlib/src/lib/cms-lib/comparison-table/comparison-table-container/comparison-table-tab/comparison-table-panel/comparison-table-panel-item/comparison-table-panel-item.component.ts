@@ -4,7 +4,7 @@ import {  CmsConfig, ProductService, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
 import { ActivatedRoute } from '@angular/router';
-import { CheckoutConfigService } from '@spartacus/storefront';
+import { FSCheckoutConfigService } from '../../../../../../checkout/assets/services/fs-checkout-config.service';
 
 @Component({
     selector: 'fsa-comparison-table-panel-item',
@@ -24,7 +24,7 @@ export class ComparisonTablePanelItemComponent implements OnInit {
         protected productService: ProductService,
         protected config: CmsConfig,
         protected routingService: RoutingService,
-        private checkoutConfigService: CheckoutConfigService,
+        private checkoutConfigService: FSCheckoutConfigService,
         private activatedRoute: ActivatedRoute
     ) {
     }
@@ -33,9 +33,8 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     panelItemEntries: OneTimeChargeEntry[] = [];
 
     ngOnInit() {
-        this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-          this.activatedRoute
-        );
+        this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
+        console.log(this.activatedRoute.routeConfig.path);
         this.product$ = this.productService.get(this.productCode);
         this.product$.subscribe(data => {
             if (data) {
