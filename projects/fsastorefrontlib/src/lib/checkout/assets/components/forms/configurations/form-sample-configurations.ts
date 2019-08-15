@@ -23,7 +23,7 @@ export class FormSampleConfigurations
               },
               {
                 type: 'select',
-                options: ['Monthly', 'Annually'],
+                options: ['MONTHLY', 'YEARLY'],
                 label: 'Payment Frequency',
                 name: 'paymentFrequency',
               }
@@ -58,7 +58,7 @@ export class FormSampleConfigurations
               },
               {
                 type: 'select',
-                options: ['2019', '2018', '2017', '2016', '2015', '2014', '2013', '2012', '2011', '2010'],
+                options: ['1940', '1939', '1938', '1937', '1936'],
                 label: 'Vehicle Year',
                 name: 'vehicleYear',
                 validation: [Validators.required],
@@ -97,7 +97,7 @@ export class FormSampleConfigurations
             ]
           },
           {
-            groupName: 'mainDriver',
+            groupName: 'main-driver',
             fieldConfigs: [
               {
                 type: 'title',

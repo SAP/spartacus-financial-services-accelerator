@@ -1,10 +1,10 @@
 export interface PricingData {
-    groups?: PricingAttributeGroup[];
+    priceAttributeList?: PricingAttributeGroup[];
 }
 
 export interface PricingAttributeGroup {
-    groupName?: string;
-    attrributes?: PricingAttribute [];
+    priceAttributesGroup?: string;
+    priceAttributes?: PricingAttribute [];
 }
 
 export interface PricingAttribute {

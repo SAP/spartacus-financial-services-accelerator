@@ -1,7 +1,9 @@
 <ng-container *ngIf="(product$ | async) as product; else loading">
   <div class="table-header">
     <h3 class="table-header-title">{{ product.name }}</h3>
-    <h4 class="table-header-value">€97.00</h4>
+    <ng-container *ngIf=" product.price.oneTimeChargeEntries[0].price.value !== 0; else loading ">
+      <h4 class="table-header-value">{{ product.price.oneTimeChargeEntries[0].price.formattedValue }}</h4>
+    </ng-container>
     <button (click)="createCartAndStartBundleForProduct(product.code,product.bundleTemplates[0]?.id)"
       class="primary-button"
       type="button">

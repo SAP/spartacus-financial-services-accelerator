@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { FSCartService } from './../../../../../../checkout/assets/services';
-import {  CmsConfig, ProductService, RoutingService } from '@spartacus/core';
+import {  CmsConfig, ProductService, RoutingService, Product } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
 import { ActivatedRoute } from '@angular/router';
@@ -21,8 +21,8 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     @Input()
     billingTimes: any;
     checkoutStepUrlNext: string;
-
-    priceData : PricingData;
+    priceData: PricingData;
+    productPrice: string;
 
     constructor(
         protected cartService: FSCartService,
@@ -40,17 +40,12 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     panelItemEntries: OneTimeChargeEntry[] = [];
 
     ngOnInit() {
-       this.pricingService._pricingSource.subscribe(pricingAttribues => {
-           this.priceData = pricingAttribues;
-           console.log(this.priceData);
-           console.log( this.occPricingService);
-            this.occPricingService.getProductPrices(this.productCode, this.priceData);
-        });
-       
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
           this.activatedRoute
         );
-        this.product$ = this.productService.get(this.productCode);
+        this.priceData = this.pricingService.getPricingAttributes();
+        this.product$ = this.pricingService.getExtendedProductData(this.productCode, this.priceData);
+        console.log(this.product$);
         this.product$.subscribe(data => {
             if (data) {
                 this.panelItemEntries = this.billingTimes.map(billingTime => {
@@ -68,4 +63,5 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     public getBaseUrl() {
         return this.config.backend.occ.baseUrl || '';
     }
+
 }
