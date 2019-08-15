@@ -48,6 +48,7 @@
     }
     &.is-disabled {
         cursor: default;
+        pointer-events: none;
         .FSA-icon { 
             background: var(--cx-color-1);
         }
