@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
+import { AuthService } from '@spartacus/core';
+import { Observable } from 'rxjs';
+
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
-import { AuthService } from '@spartacus/core';
 import { PolicyDataService } from './policy-data.service';
 import * as fromStore from '../store';
-import { Observable } from 'rxjs';
 
 
 @Injectable()
@@ -60,6 +61,16 @@ export class PolicyService {
       })
     );
   }
+
+  loadClaimPolicies(claimsCategoryCode: string) {
+    this.store.dispatch(
+      new fromAction.LoadClaimPolicies({
+        userId: this.policyData.userId,
+        claimsCategoryCode: claimsCategoryCode
+      })
+    );
+  }
+
   loadPremiumCalendar() {
     this.store.dispatch(
       new fromAction.LoadPremiumCalendar({
@@ -67,6 +78,7 @@ export class PolicyService {
       })
     );
   }
+
   loadPolicyDetails(policyId, contractId) {
     this.store.dispatch(
       new fromAction.LoadPolicyDetails({

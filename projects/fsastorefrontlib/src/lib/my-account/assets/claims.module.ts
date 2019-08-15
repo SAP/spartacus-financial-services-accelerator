@@ -5,15 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AuthGuard, I18nModule, ConfigModule, CmsConfig, RoutesConfig, RoutingConfig } from '@spartacus/core';
 import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
+import { SpinnerModule } from '@spartacus/storefront';
 
 import { ClaimsComponent } from './components/claims/claims.component';
 import { DeleteClaimDialogComponent } from '../assets/components/claims/delete-claim-dialog/delete-claim-dialog.component';
 import { ClaimService } from './services/claim.service';
 import { ClaimDataService } from './services/claim-data.service';
 import { OccClaimService } from '../../occ/claim/claim.service';
+import { ClaimPoliciesComponent } from './components/claims/claim-policies/claim-policies.component';
 
-import { SpinnerModule } from '@spartacus/storefront';
-import { ClaimActivePoliciesComponent } from './components/claims/claim-policies/claim-active-policies.component';
 
 const routes: Routes = [
   {
@@ -42,14 +42,14 @@ const routes: Routes = [
           component: ClaimsComponent
         },
         ClaimActivePoliciesFlex: {
-          component: ClaimActivePoliciesComponent
+          component: ClaimPoliciesComponent
         }
       }
     })
   ],
-  declarations: [ClaimsComponent, DeleteClaimDialogComponent, ClaimActivePoliciesComponent],
-  exports: [ClaimsComponent, ClaimActivePoliciesComponent],
-  providers: [ClaimService, ClaimDataService, ClaimActivePoliciesComponent, OccClaimService],
-  entryComponents: [ClaimsComponent, DeleteClaimDialogComponent, ClaimActivePoliciesComponent]
+  declarations: [ClaimsComponent, DeleteClaimDialogComponent, ClaimPoliciesComponent],
+  exports: [ClaimsComponent, ClaimPoliciesComponent],
+  providers: [ClaimService, ClaimDataService, ClaimPoliciesComponent, OccClaimService],
+  entryComponents: [ClaimsComponent, DeleteClaimDialogComponent, ClaimPoliciesComponent]
 })
 export class ClaimsModule {}

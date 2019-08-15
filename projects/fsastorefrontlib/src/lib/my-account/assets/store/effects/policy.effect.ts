@@ -30,8 +30,7 @@ export class PolicyEffects {
       })
   );
   @Effect()
-  loadPolicyDetails$: Observable<any> =
-  this.actions$.pipe(
+  loadPolicyDetails$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.LOAD_POLICY_DETAILS),
     map((action: fromActions.LoadPolicyDetails) => action.payload),
     switchMap(payload => {
@@ -65,9 +64,10 @@ export class PolicyEffects {
           );
       })
   );
+
   constructor(
     private actions$: Actions,
-    private policyService: OccPolicyService,
-    private policyData: PolicyDataService
+    private policyData: PolicyDataService,
+    private policyService: OccPolicyService
   ) {}
 }

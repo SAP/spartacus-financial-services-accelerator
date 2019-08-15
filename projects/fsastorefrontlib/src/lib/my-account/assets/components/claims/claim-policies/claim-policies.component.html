@@ -1,0 +1,5 @@
+<h2>List of active policies: </h2>
+
+<ng-container *ngIf="(claimPolicies$ | async) as policies">
+    {{policies | json}}
+</ng-container>

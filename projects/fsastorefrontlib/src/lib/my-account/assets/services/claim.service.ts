@@ -48,12 +48,12 @@ export class ClaimService {
   }
 
   loadClaims() {
-      this.store.dispatch(
-        new fromAction.LoadClaims({
-          userId: this.claimData.userId,
-        })
-      );
-    }
+    this.store.dispatch(
+      new fromAction.LoadClaims({
+        userId: this.claimData.userId,
+      })
+    );
+  }
 
   removeClaim(userId: string, claimId: string) {
     this.store.dispatch(

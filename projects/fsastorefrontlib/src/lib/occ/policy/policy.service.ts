@@ -39,9 +39,9 @@ export class OccPolicyService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public getPoliciesByCategory(userId: string, categoCode: string): Observable<any> {
+  public getPoliciesByCategory(userId: string, claimsCategoryCode: string): Observable<any> {
     const url = this.getPoliciesEndpoint(userId);
-    const category = 'category=' + categoCode + '&fields=BASIC';
+    const category = 'category=' + claimsCategoryCode + '&fields=BASIC';
     const params = new HttpParams({fromString: category});
 
     return this.http

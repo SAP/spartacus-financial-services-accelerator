@@ -15,13 +15,13 @@ constructor(
   protected occEndpointService: OccEndpointsService
   ) {}
 
-protected getClaimsEndpoint(userId: string) {
+  protected getClaimsEndpoint(userId: string) {
     const claimsEndpoint = '/users/' + userId + '/claims';
     return (
       (this.occEndpointService.getBaseEndpoint() +
-           claimsEndpoint
+          claimsEndpoint
     ));
-}
+  }
 
   public getClaims(userId: string): Observable<any> {
     const url = this.getClaimsEndpoint(userId);

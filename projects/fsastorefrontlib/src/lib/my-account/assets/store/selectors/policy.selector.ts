@@ -1,7 +1,7 @@
 import { MemoizedSelector, createSelector } from '@ngrx/store';
 
-import * as fromFeature from './../reducers';
-import * as fromPolicy from './../reducers/policy.reducer';
+import * as fromFeature from '../reducers';
+import * as fromPolicy from '../reducers/policy.reducer';
 
 export const getPoliciesState: MemoizedSelector<
   any,
