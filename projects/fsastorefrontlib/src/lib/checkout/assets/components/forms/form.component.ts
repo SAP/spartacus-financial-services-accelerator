@@ -13,7 +13,7 @@ import { PricingData } from '../../models/pricing.interface';
 })
 export class FormComponent implements AfterViewInit, OnInit {
 
-  pricingData: PricingData
+  pricingData: PricingData;
   @Output()
   submitOutput: EventEmitter<any> = new EventEmitter<any>();
 

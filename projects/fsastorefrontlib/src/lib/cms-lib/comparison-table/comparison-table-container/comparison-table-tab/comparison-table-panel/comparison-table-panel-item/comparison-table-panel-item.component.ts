@@ -1,13 +1,14 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { FSCartService } from './../../../../../../checkout/assets/services';
-import {  CmsConfig, ProductService, RoutingService, Product } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CmsConfig, RoutingService } from '@spartacus/core';
 import { CheckoutConfigService } from '@spartacus/storefront';
+
+import { FSCartService } from './../../../../../../checkout/assets/services';
+import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
 import { PricingData } from 'projects/fsastorefrontlib/src/lib/checkout/assets/models/pricing.interface';
 import { PricingService } from 'projects/fsastorefrontlib/src/lib/checkout/assets/services/pricing/pricing.service';
-import { OccPricingService } from 'projects/fsastorefrontlib/src/lib/occ/pricing/occ-pricing.service';
+import { FSProductService } from 'projects/fsastorefrontlib/src/lib/checkout/assets/services/product/fs-product.service';
 
 @Component({
     selector: 'fsa-comparison-table-panel-item',
@@ -21,18 +22,16 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     @Input()
     billingTimes: any;
     checkoutStepUrlNext: string;
-    priceData: PricingData;
-    productPrice: string;
+    pricingData: PricingData;
 
     constructor(
         protected cartService: FSCartService,
-        protected productService: ProductService,
         protected config: CmsConfig,
         protected routingService: RoutingService,
         private checkoutConfigService: CheckoutConfigService,
         private activatedRoute: ActivatedRoute,
         private pricingService: PricingService,
-        private occPricingService: OccPricingService
+        private productService: FSProductService,
     ) {
     }
 
@@ -41,11 +40,10 @@ export class ComparisonTablePanelItemComponent implements OnInit {
 
     ngOnInit() {
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-          this.activatedRoute
+            this.activatedRoute
         );
-        this.priceData = this.pricingService.getPricingAttributes();
-        this.product$ = this.pricingService.getExtendedProductData(this.productCode, this.priceData);
-        console.log(this.product$);
+        this.pricingData = this.pricingService.getPricingAttributes();
+        this.product$ = this.productService.getExtendedProductData(this.productCode, this.pricingData);
         this.product$.subscribe(data => {
             if (data) {
                 this.panelItemEntries = this.billingTimes.map(billingTime => {

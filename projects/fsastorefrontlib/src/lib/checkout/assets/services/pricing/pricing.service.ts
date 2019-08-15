@@ -1,22 +1,18 @@
+import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
+
 import { PricingData, PricingAttributeGroup } from '../../models/pricing.interface';
-import { Subject, BehaviorSubject, Observable } from 'rxjs';
-import { Product, StateWithProduct, ProductSelectors, ProductActions } from '@spartacus/core';
-import { select, Store } from '@ngrx/store';
-import { tap, map, shareReplay } from 'rxjs/operators';
-import * as fromActions from '../../../../checkout/assets/store/actions/index';
 
 @Injectable()
 export class PricingService {
 
-    constructor(protected store: Store<StateWithProduct>) {}
-    private products: { [code: string]: Observable<Product> } = {};
+    constructor() { }
 
-    _pricingSource = new BehaviorSubject<PricingData>({
+    pricingSource$ = new BehaviorSubject<PricingData>({
         priceAttributeList: []
     });
 
-    pricingAttributesObservable = this._pricingSource.asObservable();
+    pricingAttributesObservable = this.pricingSource$.asObservable();
 
     pricingAttributesData: PricingData = {
         priceAttributeList: []
@@ -37,36 +33,14 @@ export class PricingService {
         return this.pricingAttributesData;
     }
 
-    setPricingAttributes(priceData: PricingData) {
-        this._pricingSource.next(priceData);
+    setPricingAttributes(pricingData: PricingData) {
+        this.pricingSource$.next(pricingData);
     }
 
     getPricingAttributes(): PricingData {
         this.pricingAttributesObservable.subscribe(pricingAttributes => {
             this.pricingAttributesData = pricingAttributes;
-        })
+        });
         return this.pricingAttributesData;
     }
-
-    getExtendedProductData(productCode: string, priceData: PricingData): Observable<Product> {
-        if (!this.products[productCode]) {
-          this.products[productCode] = this.store.pipe(
-            select(ProductSelectors.getSelectedProductStateFactory(productCode)),
-            tap(productState => {
-              const attemptedLoad =
-                productState.loading || productState.success || productState.error;
-    
-              if (!attemptedLoad) {
-                this.store.dispatch(new fromActions.LoadExtendedProduct({
-                    productCode: productCode,
-                    priceData: priceData,
-                  }));
-              }
-            }),
-            map(productState => productState.value),
-            shareReplay({ bufferSize: 1, refCount: true })
-          );
-        }
-        return this.products[productCode];
-      }
 }

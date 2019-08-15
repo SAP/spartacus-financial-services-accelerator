@@ -8,23 +8,23 @@ import { PricingData } from '../../checkout/assets/models/pricing.interface';
 const FULL_PARAMS = 'fields=FULL';
 
 @Injectable()
-export class OccPricingService {
+export class OccProductService {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService
   ) { }
 
-  public getExtendedProductData(productCode: string, priceData: PricingData): any {
+  public getExtendedProductData(productCode: string, pricingData: PricingData): any {
     const url = this.getCalculateProductPriceEndpoint(productCode);
     const params = new HttpParams({ fromString: FULL_PARAMS });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json'
     });
-    const pricingAttributesBody = JSON.stringify(priceData);
+    const pricingAttributesBody = JSON.stringify(pricingData);
 
     return this.http
       .post<any>(url, pricingAttributesBody, { headers, params })
-      .pipe(catchError((error: any) => throwError(error.json())));;
+      .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   protected getCalculateProductPriceEndpoint(productCode: string) {

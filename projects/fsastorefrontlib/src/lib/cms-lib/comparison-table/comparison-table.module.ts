@@ -14,7 +14,8 @@ import { ComparisonTablePanelComponent } from './comparison-table-container/comp
 import { ComparisonTableTabComponent } from './comparison-table-container/comparison-table-tab/comparison-table-tab.component';
 import { ComparisonTableService } from './comparison-table.service';
 import { PricingService } from '../../checkout/assets/services/pricing/pricing.service';
-import { OccPricingService } from '../../occ/pricing/occ-pricing.service';
+import { FSProductService } from '../../checkout/assets/services/product/fs-product.service';
+import { OccProductService } from '../../occ/pricing/occ-product.service';
 
 
 @NgModule({
@@ -54,6 +55,6 @@ import { OccPricingService } from '../../occ/pricing/occ-pricing.service';
     ComparisonTablePanelComponent,
     ComparisonTablePanelItemComponent
   ],
-  providers: [OccBillingTimeService, ComparisonTableService, FSCartService, PricingService, OccPricingService]
+  providers: [OccBillingTimeService, OccProductService, ComparisonTableService, FSCartService, PricingService, FSProductService]
 })
 export class ComparisonTableModule { }

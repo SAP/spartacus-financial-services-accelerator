@@ -2,19 +2,19 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { CartDataService, ProductActions } from '@spartacus/core';
+import { ProductActions } from '@spartacus/core';
 import * as fromActions from '../../../../checkout/assets/store/actions/index';
-import { OccPricingService } from 'projects/fsastorefrontlib/src/lib/occ/pricing/occ-pricing.service';
+import { OccProductService } from 'projects/fsastorefrontlib/src/lib/occ/pricing/occ-product.service';
 
 @Injectable()
 export class FSProductEffect {
     @Effect()
     getExtendedProductData$: Observable<any> = this.actions$.pipe(
-        ofType(fromActions.LOAD_EXTENDED_PRODUCT),
-        map((action: fromActions.LoadExtendedProduct) => action.payload),
+        ofType(fromActions.LOAD_EXTENDED_PRODUCT_DATA),
+        map((action: fromActions.LoadExtendedProductData) => action.payload),
         mergeMap(payload => {
-            return this.occPricingService
-                .getExtendedProductData(payload.productCode, payload.priceData)
+            return this.occProductService
+                .getExtendedProductData(payload.productCode, payload.pricingData)
                 .pipe(
                     map((product: any) => {
                         return new ProductActions.LoadProductSuccess(product);
@@ -33,8 +33,7 @@ export class FSProductEffect {
 
     constructor(
         private actions$: Actions,
-        private occPricingService: OccPricingService,
-        private cartData: CartDataService
+        private occProductService: OccProductService,
     ) { }
 }
 
