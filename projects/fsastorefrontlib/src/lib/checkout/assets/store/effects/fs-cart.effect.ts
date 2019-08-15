@@ -14,7 +14,7 @@ export class FSCartEffects {
     map((action: fromActions.AddOptionalProduct) => action.payload),
     switchMap(payload => {
       return this.occCartService
-        .addToCart(payload.userId, payload.cartId, payload.productCode, payload.quantity , payload.entryNumber)
+        .addToCart(payload.userId, payload.cartId, payload.productCode, payload.quantity, payload.entryNumber)
         .pipe(
           map((entry: any) => {
             return new CartActions.CartAddEntrySuccess(entry);
@@ -30,7 +30,7 @@ export class FSCartEffects {
     map((action: fromActions.StartBundle) => action.payload),
     switchMap(payload => {
       return this.occCartService
-        .startBundle(payload.userId, payload.cartId, payload.productCode, payload.bundleTemplateId, payload.quantity)
+        .startBundle(payload.userId, payload.cartId, payload.productCode, payload.bundleTemplateId, payload.quantity, payload.pricingData)
         .pipe(
           map((cart: any) => {
             return new CartActions.CartAddEntrySuccess(cart.entry);

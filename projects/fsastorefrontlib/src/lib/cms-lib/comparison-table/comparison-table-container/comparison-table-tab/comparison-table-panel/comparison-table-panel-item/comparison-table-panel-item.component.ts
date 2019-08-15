@@ -54,7 +54,10 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     }
 
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {
-        this.cartService.createCartAndStartBundle(productCode, bundleTemplateId, 1);
+        console.log(this.productCode);
+        console.log(this.pricingData);
+
+        this.cartService.createCartAndStartBundle(productCode, bundleTemplateId, 1, this.pricingData);
         this.routingService.go(this.checkoutStepUrlNext);
     }
 
