@@ -114,7 +114,7 @@
         align-items: center;
         border: 1px solid var(--cx-color-3);
         background-color: var(--cx-color-4);
-        cx-responsive-banner, cx-paragraph {
+        cx-banner, cx-paragraph {
             flex: 0 1 auto;
             width: 50%;
             @include media-breakpoint-down(sm) {
