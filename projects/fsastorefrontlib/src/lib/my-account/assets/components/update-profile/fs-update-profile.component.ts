@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UpdateProfileComponent } from '@spartacus/storefront';
-import { FSUser } from 'projects/fsastorefrontlib/src/lib/occ-models';
+import { FSUser } from '../../../../occ-models/occ.models';
 import { Observable } from 'rxjs';
 
 @Component({

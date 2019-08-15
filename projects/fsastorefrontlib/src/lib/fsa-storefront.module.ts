@@ -4,13 +4,12 @@ import { StorefrontConfig, B2cStorefrontModule, PageComponentModule, defaultCmsC
 import { translations, translationChunksConfig } from '@spartacus/assets';
 import { FormioModule } from 'angular-formio';
 
-import { MyAccountModule } from './my-account/index';
-import { UiModule } from './ui/index';
+import { MyAccountModule } from './my-account/my-account.module';
 import { CmsLibModule } from './cms-lib/cms-lib.module';
-import { fstranslations } from '../translations';
+import { fstranslations } from '../translations/index';
 import { fsaLayoutConfig } from './../recipes/config/default-fsa-layout-config';
 import { fsaRoutingConfig } from './../cms-structure/routing/default-fsa-routing-config';
-import { CheckoutModule } from './checkout';
+import { CheckoutModule } from './checkout/checkout.module';
 import { FSRegisterModule } from './cms-lib/user/register/fs-register.module';
 import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa-checkout-config';
 
@@ -18,7 +17,6 @@ import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa
 @NgModule({
   imports: [
     FormioModule,
-    UiModule,
     PageComponentModule,
     CmsLibModule,
     MyAccountModule,

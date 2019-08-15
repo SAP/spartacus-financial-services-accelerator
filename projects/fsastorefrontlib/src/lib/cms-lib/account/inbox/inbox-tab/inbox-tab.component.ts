@@ -6,7 +6,6 @@ import { filter } from 'rxjs/operators';
 @Component({
   selector: 'fsa-inbox-tab',
   templateUrl: './inbox-tab.component.html',
-  styleUrls: ['./inbox-tab.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 

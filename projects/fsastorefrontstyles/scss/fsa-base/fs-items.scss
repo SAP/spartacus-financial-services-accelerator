@@ -6,11 +6,11 @@ ul {
 }
 .fs-items {
   .fs-item {
-    background-color: var(--cx-g-color-4);
+    background-color: var(--cx-color-4);
     margin-bottom: 10px;
     position: relative;
     a {
-      color: var(--cx-g-color-text);
+      color: var(--cx-color-text);
     }
     &-data-container {
       display: flex;
@@ -18,15 +18,15 @@ ul {
       align-items: center;
       &:hover {
         @include transition();
-        color: var(--cx-g-color-1);
-        background-color: var(--cx-g-color-primary);
+        color: var(--cx-color-1);
+        background-color: var(--cx-color-primary);
         .expired {
-          color: var(--cx-g-color-1);
+          color: var(--cx-color-1);
         }
       }
       &.background-hover-secondary {
           &:hover {
-              background-color: var(--cx-g-color-secondary);
+              background-color: var(--cx-color-secondary);
           }
       }
       .image-wrapper {
@@ -54,8 +54,8 @@ ul {
       margin-bottom: 1rem;
     }
     .content {
-      color: var(--cx-g-color-text);
-      background-color: var(--cx-g-color-4);
+      color: var(--cx-color-text);
+      background-color: var(--cx-color-4);
       font-size: $h6-font-size;
       text-align: center;
       padding: 20px;

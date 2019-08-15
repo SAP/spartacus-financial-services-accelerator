@@ -16,7 +16,6 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'fsa-order-confirmation',
   templateUrl: './order-confirmation.component.html',
-  styleUrls: ['./order-confirmation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FsaOrderConfirmationComponent implements OnInit, OnDestroy {

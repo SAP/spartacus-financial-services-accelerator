@@ -6,14 +6,14 @@
   position: relative;
   display: block;
   .color-primary, &.color-primary {
-    color: var(--cx-g-color-primary);
+    color: var(--cx-color-primary);
   }
   .color-secondary, &.color-secondary {
-    color: var(--cx-g-color-secondary);
+    color: var(--cx-color-secondary);
   }
 }
 .info-card-title {
-  background-color: var(--cx-g-color-5);
+  background-color: var(--cx-color-5);
   border-radius: 15px 15px 0 0;
   border-bottom: 4px solid;
   padding: 20px 0;
@@ -22,8 +22,8 @@
   }
   .gradient-background {
     @include linear-gradient-background(
-      var(--cx-g-color-primary),
-      var(--cx-g-color-9), 50%, 100%);
+      var(--cx-color-primary),
+      var(--cx-color-9), 50%, 100%);
   }
   .image-wrapper {
     background-color: transparent;
@@ -39,18 +39,18 @@
   .info-card-data {
     padding: 20px 0;
     &:nth-of-type(even) {
-      background-color: var(--cx-g-color-5);
+      background-color: var(--cx-color-5);
     }
     .title {
       display: block;
-      font-weight: var(--cx-g-font-weight-semi);
+      font-weight: var(--cx-font-weight-semi);
     }
   }
   &--grey {
-    background-color: var(--cx-g-color-4);
+    background-color: var(--cx-color-4);
     .info-card-data {
       &:nth-of-type(even) {
-        background-color: var(--cx-g-color-4);
+        background-color: var(--cx-color-4);
       }
     }
   }
@@ -73,6 +73,6 @@
   top: 14px;
   right: 14px;
   .action-links {
-      color: var(--cx-g-color-primary);
+      color: var(--cx-color-primary);
   }
 }

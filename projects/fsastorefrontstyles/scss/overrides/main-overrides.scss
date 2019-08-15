@@ -9,15 +9,5 @@
     margin: inherit; 
 }
 cx-spinner .loader {
-    border-left-color: var(--cx-g-color-primary); 
-}
-
-cx-page-slot {
-    &.TopContent {
-      flex: 0 100%;
-    }
-
-    &.BodyContent {
-      flex: 0 100%!important;
-    }
+    border-left-color: var(--cx-color-primary); 
 }

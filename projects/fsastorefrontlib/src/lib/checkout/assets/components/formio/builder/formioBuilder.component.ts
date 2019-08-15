@@ -9,7 +9,6 @@ export class FormioBuilderComponent implements OnInit {
   @ViewChild('json', {'static': false}) jsonElement?: ElementRef;
   public form = formDefinition;
   onChange(event) {
-    console.log(event);
     this.jsonElement.nativeElement.innerHTML = '';
     this.jsonElement.nativeElement.appendChild(document.createTextNode(JSON.stringify(event.form, null, 2)));
   }

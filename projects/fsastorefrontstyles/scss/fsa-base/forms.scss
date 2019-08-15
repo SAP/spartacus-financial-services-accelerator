@@ -1,8 +1,7 @@
 fsa-form-component {
   display: block;
-  padding: 0 2rem;
-  background-color: var(--cx-g-color-4);
-  border: 1px solid var(--cx-g-color-3);
+  background-color: var(--cx-color-4);
+  border: 1px solid var(--cx-color-3);
   .form {
     max-width: 940px;
     margin: 2rem auto;
@@ -21,17 +20,17 @@ fsa-form-component {
     }
     input, select {
       width: 50%;
-      border: 1px solid var(--cx-g-color-3);
+      border: 1px solid var(--cx-color-3);
       border-radius: 4px;
-      background-color: var(--cx-g-color-1);
+      background-color: var(--cx-color-1);
       padding: 10px;
       &:disabled {
         cursor: not-allowed;
-        background-color: var(--cx-g-color-5);
+        background-color: var(--cx-color-5);
       }
     }
     &.form-title  {
-      border-top: 1px solid var(--cx-g-color-3);
+      border-top: 1px solid var(--cx-color-3);
       margin-top: 2rem;
       width: 100%;
       h4 {

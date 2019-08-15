@@ -1,9 +1,5 @@
-@import 'mixins-fsa';
-@import 'theme';
-@import '~bootstrap/scss/mixins/breakpoints'; // TO CHECK ALL IMPORTS
-
 .progress-wrapper {
-    border-top: 2px solid var(--cx-g-color-3);
+    border-top: 2px solid var(--cx-color-3);
     .progress-inner-wrapper {
         flex-basis: 0;
     }
@@ -17,10 +13,10 @@
         padding: 16px;
         border-radius: 50%;
         margin-bottom: 20px;
-        background: var(--cx-g-color-5);
+        background: var(--cx-color-5);
         border: $border-grey;
         font-size: 20px;
-        @include box-shadow(0px, 5px, 10px, 3px, var(--cx-g-color-text), 0.2);
+        @include box-shadow(0px, 5px, 10px, 3px, var(--cx-color-text), 0.2);
         @include media-breakpoint-down(md) {
             padding: 12px;
             font-size: 16px;
@@ -28,32 +24,33 @@
         }
     }
     .icon-FSA-ok {
-        color: var(--cx-g-color-primary);
+        color: var(--cx-color-primary);
     }
     .label {
         font-size: 14px;
-        font-weight: var(--cx-g-font-weight-semi);
+        font-weight: var(--cx-font-weight-semi);
         @include media-breakpoint-down(md) {
             font-size: 12px;
         }
     }
     &.is-active {
         .FSA-icon {
-            color: var(--cx-g-color-primary);
-            background: var(--cx-g-color-1);
+            color: var(--cx-color-primary);
+            background: var(--cx-color-1);
         }
         .label {
-            color: var(--cx-g-color-primary);
+            color: var(--cx-color-primary);
         }
         &:before {
             width: 100%;
-            background-color: var(--cx-g-color-7);
+            background-color: var(--cx-color-7);
         }
     }
     &.is-disabled {
         cursor: default;
+        pointer-events: none;
         .FSA-icon { 
-            background: var(--cx-g-color-1);
+            background: var(--cx-color-1);
         }
         .label {
             font-weight: 400;
