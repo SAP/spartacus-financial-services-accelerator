@@ -34,7 +34,7 @@ import { FSMiniCartComponent } from './assets/components/mini-cart/mini-cart.com
 import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
 import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
 import { FSCartService } from './assets/services';
-import { effects } from './assets/store/effects';
+import { effects } from './assets/store/effects/index';
 
 const routes: Routes = [
   {

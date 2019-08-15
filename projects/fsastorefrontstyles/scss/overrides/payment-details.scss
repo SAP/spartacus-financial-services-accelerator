@@ -7,8 +7,8 @@
 .cx-header h3 {
   padding: 20px 0;
   margin-bottom: 20px;
-  color: var(--cx-g-color-secondary);
-  font-weight: var(--cx-g-font-weight-bold);
+  color: var(--cx-color-secondary);
+  font-weight: var(--cx-font-weight-bold);
   border-bottom: $border-grey;
 }
 .cx-payment-card {
@@ -17,19 +17,19 @@
     height: 100%;
   }
   .card-header {
-    @include linear-gradient-background( var(--cx-g-color-primary), var(--cx-g-color-9), 50%, 100% );
+    @include linear-gradient-background( var(--cx-color-primary), var(--cx-color-9), 50%, 100% );
   }
   .cx-card-body {
-    background: var(--cx-g-color-4);
+    background: var(--cx-color-4);
   }
   .cx-card-delete-msg, .cx-card-label-bold {
-    font-weight: var(--cx-g-font-weight-semi);
+    font-weight: var(--cx-font-weight-semi);
   }
   .card-link.btn-link {
     text-transform: uppercase;
     margin-left: 10px;
     &:hover, &:active {
-      color: var(--cx-g-color-7);
+      color: var(--cx-color-7);
       text-decoration: underline;
     }
   }

@@ -210,21 +210,21 @@ export class FormComponent implements AfterViewInit, OnInit {
       'priceAttributeList': [
       ],
     };
-    Object.entries(formData).forEach(
-      ([groupName, inputsObj]) => {
-        const inputs = [];
-        const groupObj = {
-          'priceAttributesGroup': groupName,
-          'fieldConfigs': inputs
-        };
-        Object.entries(inputsObj).forEach( ([inputName, inputValue]) => {
-          inputs.push({
-            'key' : inputName,
-            'value': inputValue
-          });
-        });
-        pricingData.priceAttributeList.push(groupObj);
+   Object.keys(formData).forEach(groupName => {
+    const inputs = [];
+    const groupObj = {
+      'priceAttributesGroup': groupName,
+      'fieldConfigs': inputs
+    };
+    Object.keys(formData[groupName]).forEach(inputName => {
+      console.log(formData[groupName].inputName);
+      inputs.push({
+        'key': inputName,
+        'value': formData[groupName][inputName]
+      });
     });
+    pricingData.priceAttributeList.push(groupObj);
+  });
     console.log(pricingData);
   }
 

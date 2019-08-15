@@ -9,7 +9,6 @@ import { map } from 'rxjs/operators';
 @Component({
    selector: 'fsa-enriched-responsive-banner',
    templateUrl: './enriched-responsive-banner.component.html',
-   styleUrls: ['./enriched-responsive-banner.component.scss'],
    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EnrichedResponsiveBannerComponent implements OnInit {
