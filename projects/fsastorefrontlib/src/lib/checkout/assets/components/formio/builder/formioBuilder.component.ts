@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import formDefinition from '../forms.json';
 
 @Component({
   selector: 'fsa-formiobuilder-component',
@@ -6,16 +7,15 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 })
 export class FormioBuilderComponent implements OnInit {
   @ViewChild('json', {'static': false}) jsonElement?: ElementRef;
-  public form: Object = {
-    components: []
-  };
+  public form = formDefinition;
   onChange(event) {
     console.log(event);
     this.jsonElement.nativeElement.innerHTML = '';
-    this.jsonElement.nativeElement.appendChild(document.createTextNode(JSON.stringify(event.form, null, 4)));
+    this.jsonElement.nativeElement.appendChild(document.createTextNode(JSON.stringify(event.form, null, 2)));
   }
-
+  saveForm(form) {
+  }
   ngOnInit() {
-
+    console.log(this.form);
   }
 }

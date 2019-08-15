@@ -1,0 +1,443 @@
+ {
+  "components": [
+    {
+      "legend": "general",
+      "tableView": false,
+      "key": "fieldSet",
+      "attributes": {},
+      "type": "fieldset",
+      "input": false,
+      "label": "Field Set",
+      "components": [
+        {
+          "label": "Start Date",
+          "hideInputLabels": false,
+          "inputsLabelPosition": "top",
+          "useLocaleSettings": false,
+          "tableView": false,
+          "fields": {
+            "day": {
+              "type": "number",
+              "hide": false,
+              "required": true
+            },
+            "month": {
+              "type": "select",
+              "hide": false,
+              "required": true
+            },
+            "year": {
+              "type": "number",
+              "hide": false,
+              "required": true
+            }
+          },
+          "dayFirst": true,
+          "key": "startDate",
+          "attributes": {},
+          "type": "day",
+          "input": true
+        },
+        {
+          "label": "Payment Frequency",
+          "widget": "choicesjs",
+          "placeholder": "Please Select:",
+          "tableView": true,
+          "indexeddb": {},
+          "data": {
+            "values": [
+              {
+                "label": "Annually",
+                "value": "annually"
+              },
+              {
+                "label": "Monthly",
+                "value": "monthly"
+              }
+            ]
+          },
+          "selectThreshold": 0.3,
+          "customOptions": "{'Anually', 'Monthly}",
+          "persistent": "client-only",
+          "validate": {
+            "required": true
+          },
+          "key": "paymentFrequenc",
+          "attributes": {},
+          "type": "select",
+          "input": true,
+          "value": "paymentFrequency"
+        }
+      ],
+      "path": "fieldSet"
+    },
+    {
+      "legend": "Vehicle",
+      "tableView": false,
+      "key": "fieldSet1",
+      "attributes": {},
+      "type": "fieldset",
+      "input": false,
+      "label": "Field Set",
+      "components": [
+        {
+          "label": "Vehicle Make:",
+          "widget": "choicesjs",
+          "tableView": true,
+          "indexeddb": {},
+          "data": {
+            "values": [
+              {
+                "label": "Audi",
+                "value": "audi"
+              }
+            ]
+          },
+          "selectThreshold": 0.3,
+          "key": "vehicleMake",
+          "attributes": {},
+          "type": "select",
+          "input": true
+        },
+        {
+          "label": "Vehicle Model:",
+          "widget": "choicesjs",
+          "tableView": true,
+          "indexeddb": {},
+          "data": {
+            "values": [
+              {
+                "label": "A5",
+                "value": "a5"
+              }
+            ]
+          },
+          "selectThreshold": 0.3,
+          "key": "vehicleModel",
+          "attributes": {},
+          "type": "select",
+          "input": true
+        },
+        {
+          "label": "Vehicle Type:",
+          "widget": "choicesjs",
+          "tableView": true,
+          "indexeddb": {},
+          "data": {
+            "values": [
+              {
+                "label": "A5 Quattro",
+                "value": "a5Quattro"
+              }
+            ]
+          },
+          "selectThreshold": 0.3,
+          "validate": {
+            "required": true
+          },
+          "key": "vehicleType",
+          "attributes": {},
+          "type": "select",
+          "input": true
+        },
+        {
+          "label": "Vehicle Year:",
+          "widget": "choicesjs",
+          "tableView": true,
+          "indexeddb": {},
+          "data": {
+            "values": [
+              {
+                "label": "2019",
+                "value": "2019"
+              },
+              {
+                "label": "2018",
+                "value": "2018"
+              },
+              {
+                "label": "2017",
+                "value": "2017"
+              },
+              {
+                "label": "2016",
+                "value": "2016"
+              },
+              {
+                "label": "2015",
+                "value": "2015"
+              },
+              {
+                "label": "2014",
+                "value": "2014"
+              },
+              {
+                "label": "2013",
+                "value": "2013"
+              },
+              {
+                "label": "2012",
+                "value": "2012"
+              }
+            ]
+          },
+          "selectThreshold": 0.3,
+          "validate": {
+            "required": true
+          },
+          "key": "vehicleYear",
+          "attributes": {},
+          "type": "select",
+          "input": true
+        },
+        {
+          "label": "Annual Mileage:",
+          "mask": false,
+          "tableView": false,
+          "delimiter": false,
+          "requireDecimal": false,
+          "inputFormat": "plain",
+          "validate": {
+            "customMessage": "Custom error message",
+            "min": 0,
+            "max": 10000
+          },
+          "key": "annualMileage",
+          "attributes": {},
+          "type": "number",
+          "input": true
+        },
+        {
+          "label": "Vehicle Value",
+          "mask": false,
+          "tableView": false,
+          "delimiter": false,
+          "requireDecimal": false,
+          "inputFormat": "plain",
+          "validate": {
+            "min": 2000,
+            "max": 250000
+          },
+          "key": "vehicleValue",
+          "attributes": {},
+          "type": "number",
+          "input": true
+        },
+        {
+          "label": "Vehicle Usage:",
+          "widget": "choicesjs",
+          "tableView": true,
+          "indexeddb": {},
+          "data": {
+            "values": [
+              {
+                "label": "Business",
+                "value": "business"
+              },
+              {
+                "label": "Personal",
+                "value": "personal"
+              }
+            ]
+          },
+          "selectThreshold": 0.3,
+          "validate": {
+            "required": true
+          },
+          "key": "vehicleUsage",
+          "attributes": {},
+          "type": "select",
+          "input": true
+        },
+        {
+          "label": "Purchase Date:",
+          "hideInputLabels": false,
+          "inputsLabelPosition": "top",
+          "useLocaleSettings": false,
+          "tableView": false,
+          "fields": {
+            "day": {
+              "type": "number",
+              "hide": false
+            },
+            "month": {
+              "type": "select",
+              "hide": false
+            },
+            "year": {
+              "type": "number",
+              "hide": false
+            }
+          },
+          "dayFirst": true,
+          "key": "purchaseDate",
+          "attributes": {},
+          "type": "day",
+          "input": true
+        },
+        {
+          "label": "Postal Code of the Vehicle Owner:",
+          "widget": {
+            "type": "input"
+          },
+          "tableView": true,
+          "inputFormat": "plain",
+          "validate": {
+            "required": true
+          },
+          "key": "postalCodeOfTheVehicleOwner",
+          "attributes": {},
+          "type": "textfield",
+          "input": true
+        }
+      ],
+      "path": "fieldSet1"
+    },
+    {
+      "label": "Main Driver:",
+      "tableView": false,
+      "key": "mainDriver",
+      "attributes": {},
+      "type": "container",
+      "input": true,
+      "components": [
+        {
+          "label": "Date of Birth:",
+          "hideInputLabels": false,
+          "inputsLabelPosition": "top",
+          "useLocaleSettings": false,
+          "tableView": false,
+          "fields": {
+            "day": {
+              "type": "number",
+              "hide": false,
+              "required": true
+            },
+            "month": {
+              "type": "select",
+              "hide": false,
+              "required": true
+            },
+            "year": {
+              "type": "number",
+              "hide": false,
+              "required": true
+            }
+          },
+          "dayFirst": true,
+          "key": "dateOfBirth",
+          "attributes": {},
+          "type": "day",
+          "input": true
+        },
+        {
+          "label": "Gender:",
+          "widget": "choicesjs",
+          "tableView": true,
+          "indexeddb": {},
+          "data": {
+            "values": [
+              {
+                "label": "Male",
+                "value": "male"
+              },
+              {
+                "label": "Female",
+                "value": "female"
+              }
+            ]
+          },
+          "selectThreshold": 0.3,
+          "validate": {
+            "required": true
+          },
+          "key": "gender",
+          "attributes": {},
+          "type": "select",
+          "input": true
+        },
+        {
+          "label": "Marital Status:",
+          "widget": "choicesjs",
+          "tableView": true,
+          "indexeddb": {},
+          "data": {
+            "values": [
+              {
+                "label": "Single",
+                "value": "single"
+              },
+              {
+                "label": "Marrried",
+                "value": "marrried"
+              },
+              {
+                "label": "Widowed",
+                "value": "widowed"
+              }
+            ]
+          },
+          "selectThreshold": 0.3,
+          "validate": {
+            "required": true
+          },
+          "key": "maritalStatus",
+          "attributes": {},
+          "type": "select",
+          "input": true
+        },
+        {
+          "label": "Driver\"s Category:",
+          "widget": "choicesjs",
+          "placeholder": "Main",
+          "disabled": true,
+          "tableView": true,
+          "indexeddb": {},
+          "selectThreshold": 0.3,
+          "key": "driversCategory",
+          "attributes": {},
+          "type": "select",
+          "input": true
+        }
+      ],
+      "path": "mainDriver"
+    },
+    {
+      "label": "Licence Issuing Date:",
+      "hideInputLabels": false,
+      "inputsLabelPosition": "top",
+      "useLocaleSettings": false,
+      "tableView": false,
+      "fields": {
+        "day": {
+          "type": "number",
+          "hide": false,
+          "required": true
+        },
+        "month": {
+          "type": "select",
+          "hide": false,
+          "required": true
+        },
+        "year": {
+          "type": "number",
+          "hide": false,
+          "required": true
+        }
+      },
+      "dayFirst": true,
+      "key": "licenceIssuingDate",
+      "attributes": {},
+      "type": "day",
+      "input": true
+    },
+    {
+      "type": "button",
+      "label": "Submit",
+      "key": "submit",
+      "disableOnInvalid": true,
+      "input": true,
+      "tableView": false
+    }
+  ]
+}

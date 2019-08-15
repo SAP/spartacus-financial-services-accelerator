@@ -225,7 +225,6 @@ export class FormComponent implements AfterViewInit, OnInit {
         });
         pricingData.priceAttributeList.push(groupObj);
     });
-    console.log(pricingData);
   }
 
   submit(formData: {[name: string]: any}) {

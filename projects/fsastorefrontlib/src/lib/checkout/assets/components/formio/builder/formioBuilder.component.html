@@ -1,4 +1,5 @@
 <form-builder [form]="form" (change)="onChange($event)"></form-builder>
+<button class="btn btn-primary btn-md" (click)="saveForm(form);">Save</button>
 <div class="well jsonviewer">
   <pre id="json"><code class="language-json" #json></code></pre>
 </div>
