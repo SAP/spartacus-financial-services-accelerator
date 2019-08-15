@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartService, RoutingConfigService, RoutingService } from '@spartacus/core';
 import { CheckoutConfig, CheckoutProgressComponent } from '@spartacus/storefront';
-import { FSProduct } from 'projects/fsastorefrontlib/src/lib/occ-models';
+import { FSProduct } from '../../../../occ-models/occ.models';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({

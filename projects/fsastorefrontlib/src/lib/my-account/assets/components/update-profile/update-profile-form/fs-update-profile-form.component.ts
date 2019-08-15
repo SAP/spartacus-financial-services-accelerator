@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UpdateProfileFormComponent } from '@spartacus/storefront';
-import { CustomFormValidators } from 'projects/fsastorefrontlib/src/lib/cms-lib/util/validators/custom-form-validators';
-import { FSUser } from 'projects/fsastorefrontlib/src/lib/occ-models';
+import { CustomFormValidators } from '../../../../../cms-lib/util/validators/custom-form-validators';
+import { FSUser } from '../../../../../occ-models';
 
 
 @Component({
