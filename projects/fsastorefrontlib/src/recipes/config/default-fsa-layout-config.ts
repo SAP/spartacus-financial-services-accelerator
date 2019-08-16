@@ -45,7 +45,6 @@ export const fsaLayoutConfig: LayoutConfig = {
         'Section1',
         'Section2A',
         'Section2B',
-        'Section3',
         'Section4'
       ]
     },

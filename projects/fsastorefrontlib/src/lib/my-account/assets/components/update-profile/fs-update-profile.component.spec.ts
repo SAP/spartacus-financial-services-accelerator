@@ -18,7 +18,7 @@ import {
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSUpdateProfileComponent } from './fs-update-profile.component';
-import { FSUser } from 'projects/fsastorefrontlib/src/lib/occ-models';
+import { FSUser } from '../../../../occ-models';
 
 @Component({
   selector: 'fsa-update-profile-form',

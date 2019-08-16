@@ -11,6 +11,13 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
   checkout: {
     steps: [
       {
+        id: 'chooseCoverStep',
+        name: 'fscommon.chooseCover',
+        routeName: 'generalInformation',
+        icon: 'icon-FSA-lock',
+        type: [],
+      },
+      {
         id: 'comparisonCheckoutStep',
         name: 'fscommon.whatsIncluded',
         routeName: 'category',
