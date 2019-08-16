@@ -1,5 +1,31 @@
-<h2>List of active policies: </h2>
-
-<ng-container *ngIf="(claimPolicies$ | async) as policies">
-    {{policies | json}}
+<ng-container *ngIf="claimPolicies$ | async as policies">
+    <ng-container *ngFor="let claimPolicy of policies.insurancePolicies">
+        <div class="claim-wrapper">
+            <div class="row">
+                <div class="claims col-sm-6 col-md-4">
+                    <div class="claims-feature__wrapper">
+                        <h3 class="item-headline item-headline--type-uppercase-chubby">
+                            <h2>{{claimPolicy.categoryData?.name}} {{ 'policy.policy' | cxTranslate }}</h2>
+                        </h3>
+                        <div class="claims-feature__image">
+                            <span class="images images__wrapper">
+                                <img class="image-item"
+                                    [src]="getBaseUrl() + claimPolicy.mainProduct?.coverageProduct?.images[1]?.url" />
+                            </span>
+                        </div>
+                        <ul class="claims-feature__details">
+                            <li>
+                                <label class="item-label">{{ 'claim.vehicleMake' | cxTranslate }}</label> :
+                                <span class="item-data--blue">{{claimPolicy.insuredObjects[0]?.insuredObjectItems[0]?.value}}</span>
+                            </li>
+                            <li>
+                                <label class="item-label">{{ 'claim.vehicleModel' | cxTranslate }}</label> :
+                                <span class="item-data--blue">{{claimPolicy.insuredObjects[0]?.insuredObjectItems[1]?.value}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
 </ng-container>

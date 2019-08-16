@@ -3,6 +3,7 @@ import { Store, select } from '@ngrx/store';
 
 import * as fromPolicyStore from '../../../store';
 import { PolicyService } from '../../../services';
+import { OccConfig } from '@spartacus/core';
 
 
 @Component({
@@ -13,7 +14,8 @@ import { PolicyService } from '../../../services';
 export class ClaimPoliciesComponent implements OnInit {
   constructor(
     private store: Store<fromPolicyStore.UserState>,
-    protected policyService: PolicyService
+    protected policyService: PolicyService,
+    private config: OccConfig
   ) {}
 
   claimPolicies$;
@@ -24,6 +26,8 @@ export class ClaimPoliciesComponent implements OnInit {
     // we create dynamic content for FNOL page
     this.policyService.loadClaimPolicies('insurances_auto');
     this.claimPolicies$ = this.store.pipe(select(fromPolicyStore.getClaimPolicies));
-
+  }
+  public getBaseUrl() {
+    return this.config.backend.occ.baseUrl || '';
   }
 }

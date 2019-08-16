@@ -41,7 +41,7 @@ export class OccPolicyService {
 
   public getPoliciesByCategory(userId: string, claimsCategoryCode: string): Observable<any> {
     const url = this.getPoliciesEndpoint(userId);
-    const category = 'category=' + claimsCategoryCode + '&fields=BASIC';
+    const category = 'category=' + claimsCategoryCode + '&fields=DEFAULT';
     const params = new HttpParams({fromString: category});
 
     return this.http
