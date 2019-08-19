@@ -112,7 +112,7 @@ export class FormSampleConfigurations {
                 type: 'select',
                 label: 'Driver Gender',
                 name: 'driverGender',
-                options: ['Male', 'Female', 'wtf']
+                options: ['Male', 'Female']
               },
               {
                 type: 'select',
