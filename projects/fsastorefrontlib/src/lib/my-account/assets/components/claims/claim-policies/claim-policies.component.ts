@@ -1,9 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Store, select } from '@ngrx/store';
-
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { AuthService, OccConfig, RoutingService } from '@spartacus/core';
+import { ClaimService, PolicyService } from '../../../services';
 import * as fromPolicyStore from '../../../store';
-import { PolicyService, ClaimService } from '../../../services';
-import { OccConfig, AuthService, RoutingService } from '@spartacus/core';
+
 
 
 @Component({
@@ -20,10 +20,9 @@ export class ClaimPoliciesComponent implements OnInit {
     private config: OccConfig,
     private authService: AuthService,
     private routingService: RoutingService
-  ) {}
+  ) { }
 
   claimPolicies$;
-  isSelected = false;
 
   ngOnInit() {
     // Fixing insurances_auto until:
@@ -38,14 +37,10 @@ export class ClaimPoliciesComponent implements OnInit {
 
   createClaim(policyId, contractId) {
     this.authService.getUserToken().subscribe(token => {
-      this.claimService.createClaim(token.userId , policyId, contractId);
+      this.claimService.createClaim(token.userId, policyId, contractId);
       this.routingService.go({
-          cxRoute: 'claims'
+        cxRoute: 'claims'
       });
     });
   }
-  selectClaim() {
-    this.isSelected = !this.isSelected;
-  }
-
 }
