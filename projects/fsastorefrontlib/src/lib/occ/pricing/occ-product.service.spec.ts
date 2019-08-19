@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccConfig } from '@spartacus/core';
-import { PricingAttribute, PricingAttributeGroup, PricingData } from '../../checkout/assets/models/pricing.interface';
+import { PricingAttribute, PricingData, PriceGroup } from '../../checkout/assets/models/pricing.interface';
 import { OccProductService } from './occ-product.service';
 
 const productCode = 'testCode';
@@ -19,7 +19,7 @@ const tripDestination: PricingAttribute = {
    key: 'tripDestination',
    value: 'Europe'
 };
-const priceGroup: PricingAttributeGroup = {
+const priceGroup: PriceGroup = {
    priceAttributesGroup: 'testGroupCode',
    priceAttributes: [costOfTrip, tripDestination]
 };

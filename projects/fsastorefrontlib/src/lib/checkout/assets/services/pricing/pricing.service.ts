@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
 
-import { PricingData, PricingAttributeGroup } from '../../models/pricing.interface';
+import { PricingData, PriceGroup } from '../../models/pricing.interface';
 
 @Injectable()
 export class PricingService {
@@ -20,7 +20,7 @@ export class PricingService {
 
     buildPricingData(formData: { [name: string]: Object }): PricingData {
         Object.keys(formData).forEach(groupName => {
-                const priceAttributeGroup: PricingAttributeGroup = {
+                const priceAttributeGroup: PriceGroup = {
                     priceAttributes: [],
                 };
                 priceAttributeGroup.priceAttributesGroup = groupName;

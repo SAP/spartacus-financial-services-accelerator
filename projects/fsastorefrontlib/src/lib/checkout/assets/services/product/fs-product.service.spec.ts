@@ -6,7 +6,7 @@ import { StateWithProduct, Product, PRODUCT_FEATURE } from '@spartacus/core';
 import * as fromStoreReducers from '@spartacus/core';
 
 import { FSProductService } from './fs-product.service';
-import { PricingData, PricingAttributeGroup, PricingAttribute } from '../../models/pricing.interface';
+import { PricingData, PricingAttribute, PriceGroup } from '../../models/pricing.interface';
 
 
 describe('FSProductService', () => {
@@ -22,7 +22,7 @@ describe('FSProductService', () => {
         key: 'tripDestination',
         value: 'Europe'
     };
-    const priceGroup: PricingAttributeGroup = {
+    const priceGroup: PriceGroup = {
         priceAttributesGroup: 'testGroupCode',
         priceAttributes: [costOfTrip, tripDestination]
     };

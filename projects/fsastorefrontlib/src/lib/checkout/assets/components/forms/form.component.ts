@@ -1,4 +1,4 @@
-import { Component, ViewChild, AfterViewInit, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, AfterViewInit, OnInit, Input } from '@angular/core';
 import { FormDefinition, FormSubmitType } from './dynamic-form/models/field-config.interface';
 import { DynamicFormComponent } from './dynamic-form/containers/dynamic-form/dynamic-form.component';
 import { RoutingService } from '@spartacus/core';
