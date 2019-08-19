@@ -63,4 +63,14 @@ export class ClaimService {
       })
     );
   }
+
+  createClaim(userId: string, policyId: string, contractId: string) {
+    this.store.dispatch(
+      new fromAction.CreateClaim({
+         userId: userId,
+         policyId: policyId,
+         contractId: contractId
+      })
+    );
+  }
 }
