@@ -23,6 +23,7 @@ export class ClaimPoliciesComponent implements OnInit {
   ) {}
 
   claimPolicies$;
+  isSelected = false;
 
   ngOnInit() {
     // Fixing insurances_auto until:
@@ -40,8 +41,11 @@ export class ClaimPoliciesComponent implements OnInit {
       this.claimService.createClaim(token.userId , policyId, contractId);
       this.routingService.go({
           cxRoute: 'claims'
-        });
       });
+    });
+  }
+  selectClaim() {
+    this.isSelected = !this.isSelected;
   }
 
 }

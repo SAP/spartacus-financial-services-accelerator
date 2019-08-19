@@ -38,11 +38,6 @@ fsa-claim-policies {
       margin-bottom: 30px;
 		padding: 0 20px;
       cursor: pointer;
-      &.selected {
-			.claims-feature__wrapper {
-            @include hover-select();
-			}
-		}
       &-feature__wrapper {
 			overflow: hidden;
          @include box-shadow(0, 0, 6px, 2px, var(--cx-color-5), 100%);
@@ -53,7 +48,10 @@ fsa-claim-policies {
 			@include transition();
 			&:hover {
             @include hover-select();
-			}
+         }
+         &.selected {
+            @include hover-select();
+         }
       }
       &-feature__image {
 			padding: 20px 0;
