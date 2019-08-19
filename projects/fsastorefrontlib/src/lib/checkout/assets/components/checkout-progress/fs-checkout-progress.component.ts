@@ -26,9 +26,9 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent imple
   }
 
   ngOnInit() {
+    super.ngOnInit();
     this.setActiveStepIndex();
     this.setActiveCategory();
-    super.ngOnInit();
   }
 
   setActiveStepIndex() {
@@ -49,8 +49,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent imple
 
       if (params[categoryCode]) {
         this.currentCategorySource.next(params[categoryCode]);
-      }
-      else if (params[formCode]) {
+      } else if (params[formCode]) {
         this.currentCategorySource.next(params[formCode]);
       } else {
         this.cartService.getActive().subscribe(cart => {
