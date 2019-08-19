@@ -2,14 +2,13 @@ import { Observable } from 'rxjs';
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CmsConfig, RoutingService } from '@spartacus/core';
-import { CheckoutConfigService } from '@spartacus/storefront';
-import { FSCheckoutConfigService } from '../../../../../../checkout/assets/services/fs-checkout-config.service';
 
+import { FSCheckoutConfigService } from '../../../../../../checkout/assets/services/fs-checkout-config.service';
 import { FSCartService } from './../../../../../../checkout/assets/services';
 import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
-import { PricingData } from 'projects/fsastorefrontlib/src/lib/checkout/assets/models/pricing.interface';
-import { PricingService } from 'projects/fsastorefrontlib/src/lib/checkout/assets/services/pricing/pricing.service';
-import { FSProductService } from 'projects/fsastorefrontlib/src/lib/checkout/assets/services/product/fs-product.service';
+import { PricingService } from '../../../../../../checkout/assets/services/pricing/pricing.service';
+import { FSProductService } from '../../../../../../checkout/assets/services/product/fs-product.service';
+import { PricingData } from '../../../../../../checkout/assets/models/pricing.interface';
 
 @Component({
     selector: 'fsa-comparison-table-panel-item',

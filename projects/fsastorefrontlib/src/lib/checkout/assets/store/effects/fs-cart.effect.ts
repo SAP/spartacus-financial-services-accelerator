@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { CartDataService, CartActions } from '@spartacus/core';
+import { CartActions } from '@spartacus/core';
 import { OccFSCartService } from '../../../../occ/cart/fs-cart.service';
 import * as fromActions from './../actions/fs-cart.action';
 

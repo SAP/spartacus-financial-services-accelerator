@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ProductActions } from '@spartacus/core';
 import * as fromActions from '../../../../checkout/assets/store/actions/index';
-import { OccProductService } from 'projects/fsastorefrontlib/src/lib/occ/pricing/occ-product.service';
+import { OccProductService } from '../../../../occ/pricing/occ-product.service';
 
 @Injectable()
 export class FSProductEffect {

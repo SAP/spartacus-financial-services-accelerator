@@ -9,5 +9,4 @@ export class LoadExtendedProductData extends StateEntityLoaderActions.EntityLoad
   }
 }
 
-// action types
 export type ProductAction = LoadExtendedProductData;

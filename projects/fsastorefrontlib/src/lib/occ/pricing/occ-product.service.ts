@@ -5,7 +5,7 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 import { OccEndpointsService } from '@spartacus/core';
 import { PricingData } from '../../checkout/assets/models/pricing.interface';
 
-const FULL_PARAMS = 'fields=FULL';
+const FULL_PARAMS = 'fields=DEFAULT';
 
 @Injectable()
 export class OccProductService {

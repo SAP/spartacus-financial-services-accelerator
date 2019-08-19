@@ -1,4 +1,4 @@
-import { CheckoutConfig, CheckoutStepType } from '@spartacus/storefront';
+import { CheckoutConfig } from '@spartacus/storefront';
 import { FSCheckoutStep } from './../../../lib/checkout/assets/components/checkout-progress/fs-checkout-step.component';
 
 export declare abstract class FSCheckoutConfig extends CheckoutConfig {
@@ -43,7 +43,7 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         name: 'fscommon.paymentDetails',
         routeName: 'checkoutPaymentDetails',
         icon: 'icon-FSA-payment-cards',
-        type: [CheckoutStepType.PAYMENT_DETAILS],
+        type: [],
       },
       {
         id: 'finalReviewStep',
