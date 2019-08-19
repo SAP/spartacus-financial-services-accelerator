@@ -1,14 +1,14 @@
-import { Observable } from 'rxjs';
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CmsConfig, RoutingService } from '@spartacus/core';
-
+import { Observable } from 'rxjs';
+import { PricingData } from '../../../../../../checkout/assets/models/pricing.interface';
 import { FSCheckoutConfigService } from '../../../../../../checkout/assets/services/fs-checkout-config.service';
-import { FSCartService } from './../../../../../../checkout/assets/services';
-import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
 import { PricingService } from '../../../../../../checkout/assets/services/pricing/pricing.service';
 import { FSProductService } from '../../../../../../checkout/assets/services/product/fs-product.service';
-import { PricingData } from '../../../../../../checkout/assets/models/pricing.interface';
+import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
+import { FSCartService } from './../../../../../../checkout/assets/services';
+
 
 @Component({
     selector: 'fsa-comparison-table-panel-item',
@@ -28,10 +28,10 @@ export class ComparisonTablePanelItemComponent implements OnInit {
         protected cartService: FSCartService,
         protected config: CmsConfig,
         protected routingService: RoutingService,
-        private checkoutConfigService: FSCheckoutConfigService,
-        private activatedRoute: ActivatedRoute,
-        private pricingService: PricingService,
-        private productService: FSProductService,
+        protected checkoutConfigService: FSCheckoutConfigService,
+        protected activatedRoute: ActivatedRoute,
+        protected pricingService: PricingService,
+        protected productService: FSProductService,
     ) {
     }
 
@@ -43,7 +43,7 @@ export class ComparisonTablePanelItemComponent implements OnInit {
             this.activatedRoute
         );
         this.pricingData = this.pricingService.getPricingAttributes();
-        this.product$ = this.productService.getExtendedProductData(this.productCode, this.pricingData);
+        this.product$ = this.productService.getCalculatedProductData(this.productCode, this.pricingData);
         this.product$.subscribe(data => {
             if (data) {
                 this.panelItemEntries = this.billingTimes.map(billingTime => {

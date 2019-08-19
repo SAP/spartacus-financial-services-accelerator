@@ -1,6 +1,6 @@
-import { FormDefinition, FormSubmitType } from '../dynamic-form/models/field-config.interface';
-import { CustomFormValidators } from '../../../../../cms-lib/util/validators/custom-form-validators';
 import { Validators } from '@angular/forms';
+import { CustomFormValidators } from '../../../../../cms-lib/util/validators/custom-form-validators';
+import { FormDefinition, FormSubmitType } from '../dynamic-form/models/field-config.interface';
 
 export class FormSampleConfigurations {
   static sampleConfigurations: FormDefinition[] = [{

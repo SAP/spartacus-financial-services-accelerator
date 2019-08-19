@@ -1,8 +1,8 @@
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs/internal/observable/throwError';
 import { OccEndpointsService } from '@spartacus/core';
+import { throwError } from 'rxjs/internal/observable/throwError';
+import { catchError } from 'rxjs/operators';
 import { PricingData } from '../../checkout/assets/models/pricing.interface';
 
 const FULL_PARAMS = 'fields=DEFAULT';
@@ -14,7 +14,7 @@ export class OccProductService {
     protected occEndpointService: OccEndpointsService
   ) { }
 
-  public getExtendedProductData(productCode: string, pricingData: PricingData): any {
+  public getCalculatedProductData(productCode: string, pricingData: PricingData): any {
     const url = this.getCalculateProductPriceEndpoint(productCode);
     const params = new HttpParams({ fromString: FULL_PARAMS });
     const headers = new HttpHeaders({

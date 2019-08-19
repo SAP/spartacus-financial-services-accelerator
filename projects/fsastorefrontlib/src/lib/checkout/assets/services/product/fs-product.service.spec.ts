@@ -1,12 +1,11 @@
+import { inject, TestBed } from '@angular/core/testing';
 import * as ngrxStore from '@ngrx/store';
 import { Store, StoreModule } from '@ngrx/store';
-import { of } from 'rxjs';
-import { inject, TestBed } from '@angular/core/testing';
-import { StateWithProduct, Product, PRODUCT_FEATURE } from '@spartacus/core';
 import * as fromStoreReducers from '@spartacus/core';
-
+import { Product, PRODUCT_FEATURE, StateWithProduct } from '@spartacus/core';
+import { of } from 'rxjs';
+import { PriceAttributeGroup, PricingAttribute, PricingData } from '../../models/pricing.interface';
 import { FSProductService } from './fs-product.service';
-import { PricingData, PricingAttribute, PriceGroup } from '../../models/pricing.interface';
 
 
 describe('FSProductService', () => {
@@ -22,12 +21,12 @@ describe('FSProductService', () => {
         key: 'tripDestination',
         value: 'Europe'
     };
-    const priceGroup: PriceGroup = {
-        priceAttributesGroup: 'testGroupCode',
+    const priceGroup: PriceAttributeGroup = {
+        name: 'testGroup',
         priceAttributes: [costOfTrip, tripDestination]
     };
     const pricingData: PricingData = {
-        priceAttributeList: [priceGroup]
+        priceAttributeGroups: [priceGroup]
     };
 
     beforeEach(() => {
@@ -53,7 +52,7 @@ describe('FSProductService', () => {
         }
     ));
 
-    describe('getExtendedProductData(productCode, pricingData)', () => {
+    describe('getCalculatedProductData(productCode, pricingData)', () => {
         it('should be able to get product by code and price data', () => {
             spyOnProperty(ngrxStore, 'select').and.returnValue(() => () =>
                 of({
@@ -62,7 +61,7 @@ describe('FSProductService', () => {
             );
             let result: Product;
             service
-                .getExtendedProductData('testId', pricingData)
+                .getCalculatedProductData('testId', pricingData)
                 .subscribe(product => {
                     result = product;
                 })

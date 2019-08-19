@@ -1,7 +1,7 @@
-import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { PriceAttributeGroup, PricingData } from '../../models/pricing.interface';
 
-import { PricingData, PriceGroup } from '../../models/pricing.interface';
 
 @Injectable()
 export class PricingService {
@@ -9,31 +9,27 @@ export class PricingService {
     constructor() { }
 
     pricingSource$ = new BehaviorSubject<PricingData>({
-        priceAttributeList: []
+        priceAttributeGroups: []
     });
 
     pricingAttributesObservable = this.pricingSource$.asObservable();
 
     pricingAttributesData: PricingData = {
-        priceAttributeList: []
+        priceAttributeGroups: []
     };
 
-    buildPricingData(formData: { [name: string]: Object }): PricingData {
+    buildPricingData(formData: { [name: string]: Object }) {
         Object.keys(formData).forEach(groupName => {
-                const priceAttributeGroup: PriceGroup = {
-                    priceAttributes: [],
-                };
-                priceAttributeGroup.priceAttributesGroup = groupName;
-                Object.keys(formData[groupName]).forEach(inputName => {
-                    priceAttributeGroup.priceAttributes.push({ 'key': inputName, 'value':  formData[groupName][inputName] });
-                });
-                this.pricingAttributesData.priceAttributeList.push(priceAttributeGroup);
+            const priceAttributeGroup: PriceAttributeGroup = {
+                priceAttributes: [],
+            };
+            priceAttributeGroup.name = groupName;
+            Object.keys(formData[groupName]).forEach(inputName => {
+                priceAttributeGroup.priceAttributes.push({ 'key': inputName, 'value': formData[groupName][inputName] });
             });
-        return this.pricingAttributesData;
-    }
-
-    setPricingAttributes(pricingData: PricingData) {
-        this.pricingSource$.next(pricingData);
+            this.pricingAttributesData.priceAttributeGroups.push(priceAttributeGroup);
+        });
+        this.pricingSource$.next(this.pricingAttributesData);
     }
 
     getPricingAttributes(): PricingData {

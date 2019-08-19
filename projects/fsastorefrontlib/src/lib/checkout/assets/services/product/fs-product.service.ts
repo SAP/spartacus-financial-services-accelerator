@@ -1,11 +1,11 @@
-import { select, Store } from '@ngrx/store';
-import { tap, map, shareReplay } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Product, StateWithProduct, ProductSelectors } from '@spartacus/core';
-
-import { PricingData } from '../../models/pricing.interface';
+import { select, Store } from '@ngrx/store';
+import { Product, ProductSelectors, StateWithProduct } from '@spartacus/core';
+import { Observable } from 'rxjs';
+import { map, shareReplay, tap } from 'rxjs/operators';
 import * as fromActions from '../../../../checkout/assets/store/actions/index';
+import { PricingData } from '../../models/pricing.interface';
+
 
 @Injectable()
 export class FSProductService {
@@ -14,7 +14,7 @@ export class FSProductService {
 
     protected products: { [code: string]: Observable<Product> } = {};
 
-    getExtendedProductData(productCode: string, pricingData: PricingData): Observable<Product> {
+    getCalculatedProductData(productCode: string, pricingData: PricingData): Observable<Product> {
         if (!this.products[productCode]) {
             this.products[productCode] = this.store.pipe(
                 select(ProductSelectors.getSelectedProductStateFactory(productCode)),
@@ -23,7 +23,7 @@ export class FSProductService {
                         productState.loading || productState.success || productState.error;
 
                     if (!attemptedLoad) {
-                        this.store.dispatch(new fromActions.LoadExtendedProductData({
+                        this.store.dispatch(new fromActions.LoadCalculatedProductData({
                             productCode: productCode,
                             pricingData: pricingData,
                         }));
