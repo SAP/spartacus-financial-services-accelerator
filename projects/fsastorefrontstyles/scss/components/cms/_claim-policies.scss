@@ -1,4 +1,11 @@
+@mixin hover-select {
+   border: 1px solid $color-link-hover;
+   @include box-shadow(0, 0, 10px, 1px, $color-link-hover, 100%);
+   @include transition();	
+}
+
 .GeneralLayoutPageTemplate {
+   padding: 3rem 1.5rem 0 1.5rem;
    .Section2A.has-components {
       p {
          margin-bottom: 0;
@@ -6,7 +13,7 @@
             max-width: 100%;
          }
          .checkout-progress__heading {
-            margin: 4rem auto 2.5rem;
+            margin: 2.5rem auto;
             text-transform: uppercase;
          }
          .section-header__heading {
@@ -17,14 +24,78 @@
    }
 }
 
+fsa-claim-policies, fsa-claim-policies + fsa-cms-custom-container {
+   background-color: var(--cx-color-4);
+   border: $border-grey;
+}
 fsa-claim-policies {
-
+   border-bottom: none;
+   padding: 60px 60px 30px;
+   @include media-breakpoint-down(lg) {
+      padding: 60px 20px 25px;
+   }
+   .claims {
+      margin-bottom: 30px;
+		padding: 0 20px;
+      cursor: pointer;
+      &.selected {
+			.claims-feature__wrapper {
+            @include hover-select();
+			}
+		}
+      &-feature__wrapper {
+			overflow: hidden;
+         @include box-shadow(0, 0, 6px, 2px, var(--cx-color-5), 100%);
+			border-radius: 5px;
+			background-color: $color-white;
+			border: $border-grey;
+			text-align: center;
+			@include transition();
+			&:hover {
+            @include hover-select();
+			}
+      }
+      &-feature__image {
+			padding: 20px 0;
+			margin-bottom: 30px;
+			border-bottom: 5px solid $color-link-hover;
+      }
+      &-feature__details {
+			display: inline-block;
+			text-align: left;
+			margin-bottom: 30px;
+			.item-label {
+				color: var(--cx-color-text);
+				font-weight: $font-weight-semi;
+				font-size: 14px;
+				display: inline-block;
+			}
+			.item-data--blue {
+				color: var(--cx-color-primary);
+				font-weight: $font-weight-semi;
+			}
+		}
+   }
    &+ fsa-cms-custom-container {
-      background-color: $color-light-grey;
-      border: $border-grey;
+      padding-bottom: 65px;
       border-top: none;
       .claim-content {
-
+         padding: 0 60px;
+         @include media-breakpoint-down(lg) {
+            padding: 0 20px;
+         }
+         .primary-button__default {
+            white-space: normal;
+            text-transform: none;
+            padding: 10px;
+            font-size: $h5-font-size;
+            font-weight: $font-weight-light;
+            text-align: center;
+            height: auto;
+         }
+      }
+      .content--blue {
+         color: var(--cx-color-primary);
       }
    }
 }
