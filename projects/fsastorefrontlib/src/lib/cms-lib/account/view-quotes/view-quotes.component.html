@@ -21,7 +21,7 @@
 <ng-template #quoteList let-quotes="quotes" let-max="max">
     <li *ngFor="let quote of quotes.insuranceQuotes | slice: 0:max" class="fs-item">
         <div class="fs-item-data-container">
-            <span class="image-wrapper">
+            <span class="image-wrapper small p-1">
                     <img class="image-item" [src]="getBaseUrl()+quote.defaultCategory?.image.url" alt="">
                     </span>
             <div class="fs-item-wrapper">

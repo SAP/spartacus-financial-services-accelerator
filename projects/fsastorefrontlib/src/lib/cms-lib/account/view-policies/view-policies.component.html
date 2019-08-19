@@ -24,7 +24,7 @@
     <li *ngFor="let policy of policies.insurancePolicies | slice: 0:max" class="fs-item">
         <a routerLink="/my-account/my-policies/{{policy.policyNumber}}/{{policy.contractNumber}}" routerLinkActive="active">
             <div class="fs-item-data-container background-hover-secondary">
-                <span class="image-wrapper">
+                <span class="image-wrapper small p-1">
                         <img class="image-item" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0].url" alt="">
                     </span>
                 <div class="fs-item-wrapper">

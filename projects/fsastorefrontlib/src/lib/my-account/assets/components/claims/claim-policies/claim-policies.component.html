@@ -4,11 +4,11 @@
             <div class="row">
                 <div class="claims col-sm-6 col-md-4">
                     <div class="claims-feature__wrapper">
-                        <h3 class="item-headline item-headline--type-uppercase-chubby">
-                            <h2>{{claimPolicy.categoryData?.name}} {{ 'policy.policy' | cxTranslate }}</h2>
+                        <h3 class="section-header-heading text-uppercase">
+                            {{claimPolicy.categoryData?.name}} {{ 'policy.policy' | cxTranslate }}
                         </h3>
                         <div class="claims-feature__image">
-                            <span class="images images__wrapper">
+                            <span class="image-wrapper small">
                                 <img class="image-item"
                                     [src]="getBaseUrl() + claimPolicy.mainProduct?.coverageProduct?.images[1]?.url" />
                             </span>

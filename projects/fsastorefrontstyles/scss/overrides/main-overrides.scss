@@ -1,9 +1,11 @@
 @import '../mixins-fsa';
 @import '../theme';
 
-.AccountPageTemplate cx-page-slot {
-    max-width: 1400px;
-}
+.AccountPageTemplate, .GeneralLayoutPageTemplate {
+    cx-page-slot {
+        @include width1400;
+    }  
+} 
 .close {
     width: inherit;
     margin: inherit; 

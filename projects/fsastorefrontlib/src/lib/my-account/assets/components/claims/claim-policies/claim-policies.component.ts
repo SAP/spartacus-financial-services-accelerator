@@ -9,6 +9,7 @@ import { OccConfig } from '@spartacus/core';
 @Component({
   selector: 'fsa-claim-policies',
   templateUrl: './claim-policies.component.html',
+  styleUrls: ['./claim-policies.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ClaimPoliciesComponent implements OnInit {
