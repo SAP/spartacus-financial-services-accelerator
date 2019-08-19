@@ -2,8 +2,8 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import * as fromPolicyStore from '../../../store';
-import { PolicyService } from '../../../services';
-import { OccConfig } from '@spartacus/core';
+import { PolicyService, ClaimService } from '../../../services';
+import { OccConfig, AuthService, RoutingService } from '@spartacus/core';
 
 
 @Component({
@@ -15,7 +15,10 @@ export class ClaimPoliciesComponent implements OnInit {
   constructor(
     private store: Store<fromPolicyStore.UserState>,
     protected policyService: PolicyService,
-    private config: OccConfig
+    protected claimService: ClaimService,
+    private config: OccConfig,
+    private authService: AuthService,
+    private routingService: RoutingService
   ) {}
 
   claimPolicies$;
@@ -30,4 +33,14 @@ export class ClaimPoliciesComponent implements OnInit {
   public getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
+
+  createClaim(policyId, contractId) {
+    this.authService.getUserToken().subscribe(token => {
+      this.claimService.createClaim(token.userId , policyId, contractId);
+      this.routingService.go({
+          cxRoute: 'claims'
+        });
+      });
+  }
+
 }

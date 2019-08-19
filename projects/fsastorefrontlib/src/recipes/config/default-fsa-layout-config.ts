@@ -48,8 +48,7 @@ export const fsaLayoutConfig: LayoutConfig = {
         'Section4'
       ]
     },
-    GeneralLayoutPageTemplate: 
-    {
+    GeneralLayoutPageTemplate: {
       slots: [
         'Section1',
         'Section2A',
@@ -58,7 +57,7 @@ export const fsaLayoutConfig: LayoutConfig = {
         'Section3',
         'Section4',
         'Section5'
-      ] 
+      ]
     }
   }
 };

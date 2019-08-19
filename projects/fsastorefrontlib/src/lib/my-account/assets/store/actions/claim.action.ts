@@ -8,6 +8,10 @@ export const LOAD_CLAIMS = '[Claim] Load Claims';
 export const LOAD_CLAIMS_SUCCESS = '[Claim] Load Claims Success';
 export const LOAD_CLAIMS_FAIL = '[Claim] Load Claims Fail';
 
+export const CREATE_CLAIM = '[Claim] Create Claim';
+export const CREATE_CLAIM_FAIL = '[Claim] Create Claim Fail';
+export const CREATE_CLAIM_SUCCESS = '[Claim] Create Claim Success';
+
 export class DeleteClaim implements Action {
   readonly type = DELETE_CLAIM;
   constructor(public payload: any) {}
@@ -38,10 +42,28 @@ export class LoadClaimsFail implements Action {
   constructor(public payload: any) {}
 }
 
+export class CreateClaim implements Action {
+  readonly type = CREATE_CLAIM;
+  constructor(public payload: any) { }
+}
+
+export class CreateClaimFail implements Action {
+  readonly type = CREATE_CLAIM_FAIL;
+  constructor(public payload: any) { }
+}
+
+export class CreateClaimSuccess implements Action {
+  readonly type = CREATE_CLAIM_SUCCESS;
+  constructor(public payload: any) { }
+}
+
 export type ClaimAction =
   | DeleteClaim
   | DeleteClaimSuccess
   | DeleteClaimFail
   | LoadClaims
   | LoadClaimsSuccess
-  | LoadClaimsFail;
+  | LoadClaimsFail
+  | CreateClaim
+  | CreateClaimSuccess
+  | CreateClaimFail;

@@ -10,6 +10,9 @@ import { OccConfig } from '@spartacus/core';
 const userId = '123';
 const claimNumber = 'CL0000012';
 
+const policyNumber = 'PL0000012';
+const contractNumber = 'CO0000012';
+
 const usersEndpoint = '/users';
 const claimsEndpoint = '/claims';
 
@@ -71,4 +74,18 @@ describe('OccClaimsService', () => {
       }, `DELETE method and url`);
     }));
   });
+
+  describe('createClaim', () => {
+    it('create claim for specified policyId and contractId', async(() => {
+      service.createClaim(userId, policyNumber, contractNumber).subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url === usersEndpoint + `/${userId}` + claimsEndpoint + `/create?contractId=` +
+          `${contractNumber}&policyId=` + `${policyNumber}` &&
+          req.method === 'POST'
+        );
+      }, `POST method and url`);
+    }));
+  });
+
 });
