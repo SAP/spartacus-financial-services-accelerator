@@ -5,8 +5,8 @@
 .claim-wrapper {
 	background-color: $color-light-grey;
 	border: $border-grey;
+	border-bottom: none;
 	padding: 60px 70px;
-	margin-bottom: 40px;
 	// @media (max-width: @screen-md-max) {
 	// 	padding: 60px 20px 40px;
 	// }

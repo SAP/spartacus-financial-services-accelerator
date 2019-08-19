@@ -1,7 +1,7 @@
 <ng-container *ngIf="claimPolicies$ | async as policies">
-    <ng-container *ngFor="let claimPolicy of policies.insurancePolicies">
-        <div class="claim-wrapper">
-            <div class="row">
+    <div class="claim-wrapper">
+        <div class="row">
+            <ng-container *ngFor="let claimPolicy of policies.insurancePolicies">
                 <div class="claims col-sm-6 col-md-4">
                     <div class="claims-feature__wrapper">
                         <h3 class="section-header-heading text-uppercase">
@@ -24,9 +24,9 @@
                             </li>
                         </ul>
                     </div>
-                    <button class="primary-button" (click)="createClaim(claimPolicy.policyNumber, claimPolicy.contractNumber)">Create Claim</button>
+                    <!-- <button class="primary-button" (click)="createClaim(claimPolicy.policyNumber, claimPolicy.contractNumber)">Create Claim</button> -->
                 </div>
-            </div>
+            </ng-container>
         </div>
-    </ng-container>
+    </div>
 </ng-container>

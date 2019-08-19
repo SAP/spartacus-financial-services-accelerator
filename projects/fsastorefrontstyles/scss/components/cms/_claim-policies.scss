@@ -1,0 +1,30 @@
+.GeneralLayoutPageTemplate {
+   .Section2A.has-components {
+      p {
+         margin-bottom: 0;
+         .container {
+            max-width: 100%;
+         }
+         .checkout-progress__heading {
+            margin: 4rem auto 2.5rem;
+            text-transform: uppercase;
+         }
+         .section-header__heading {
+            margin-bottom: 0;
+            flex: 1 1 100%;
+         }
+      }
+   }
+}
+
+fsa-claim-policies {
+
+   &+ fsa-cms-custom-container {
+      background-color: $color-light-grey;
+      border: $border-grey;
+      border-top: none;
+      .claim-content {
+
+      }
+   }
+}
