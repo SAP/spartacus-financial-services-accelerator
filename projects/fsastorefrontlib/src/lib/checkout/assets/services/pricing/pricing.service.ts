@@ -6,11 +6,7 @@ import { PriceAttributeGroup, PricingData } from '../../models/pricing.interface
 @Injectable()
 export class PricingService {
 
-    pricingSource$ = new BehaviorSubject<PricingData>({
-        priceAttributeGroups: []
-    });
-
-    pricingAttributesObservable = this.pricingSource$.asObservable();
+    pricingSource$ = new BehaviorSubject<PricingData>({});
 
     buildPricingData(formData: { [name: string]: Object }) {
         const pricingAttributesData: PricingData = {
@@ -30,7 +26,7 @@ export class PricingService {
     }
 
     getPricingAttributes(): Observable<PricingData> {
-        return this.pricingAttributesObservable;
+        return this.pricingSource$.asObservable();
     }
 
 }
