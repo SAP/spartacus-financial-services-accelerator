@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { AuthService, OccConfig, RoutingService } from '@spartacus/core';
+import { OccConfig } from '@spartacus/core';
 import { ClaimService, PolicyService } from '../../../services';
 import * as fromPolicyStore from '../../../store';
 
@@ -9,7 +9,6 @@ import * as fromPolicyStore from '../../../store';
 @Component({
   selector: 'fsa-claim-policies',
   templateUrl: './claim-policies.component.html',
-  styleUrls: ['./claim-policies.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ClaimPoliciesComponent implements OnInit {
@@ -18,8 +17,6 @@ export class ClaimPoliciesComponent implements OnInit {
     protected policyService: PolicyService,
     protected claimService: ClaimService,
     private config: OccConfig,
-    private authService: AuthService,
-    private routingService: RoutingService
   ) { }
 
   claimPolicies$;
@@ -33,14 +30,5 @@ export class ClaimPoliciesComponent implements OnInit {
   }
   public getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
-  }
-
-  createClaim(policyId, contractId) {
-    this.authService.getUserToken().subscribe(token => {
-      this.claimService.createClaim(token.userId, policyId, contractId);
-      this.routingService.go({
-        cxRoute: 'claims'
-      });
-    });
   }
 }

@@ -1,33 +1,29 @@
 <ng-container *ngIf="claimPolicies$ | async as policies">
     <div class="row">
-        <ng-container *ngFor="let claimPolicy of policies.insurancePolicies">
-            <div class="claims col-sm-6 col-md-4">
-                <div class="claims-feature__wrapper" (click)="isSelected=!isSelected"
-                    [ngClass]="{selected: isSelected}">
-                    <h3 class="section-header-heading text-uppercase">
-                        {{claimPolicy.categoryData?.name}} {{ 'policy.policy' | cxTranslate }}
-                    </h3>
-                    <div class="claims-feature__image">
-                        <span class="image-wrapper small">
-                            <img class="image-item"
-                                [src]="getBaseUrl() + claimPolicy.mainProduct?.coverageProduct?.images[1]?.url" />
-                        </span>
-                    </div>
-                    <ul class="claims-feature__details">
-                        <li>
-                            <label class="item-label">{{ 'claim.vehicleMake' | cxTranslate }}</label> :
-                            <span
-                                class="item-data--blue">{{claimPolicy.insuredObjects[0]?.insuredObjectItems[0]?.value}}</span>
-                        </li>
-                        <li>
-                            <label class="item-label">{{ 'claim.vehicleModel' | cxTranslate }}</label> :
-                            <span
-                                class="item-data--blue">{{claimPolicy.insuredObjects[0]?.insuredObjectItems[1]?.value}}</span>
-                        </li>
-                    </ul>
+        <div *ngFor="let claimPolicy of policies.insurancePolicies; let i = index" class="claims col-sm-6 col-md-4">
+            <div class="claims-feature__wrapper" (click)="isSelected = i" [ngClass]="{selected: isSelected === i}">
+                <h3 class="section-header-heading text-uppercase">
+                    {{claimPolicy.categoryData?.name}} {{ 'policy.policy' | cxTranslate }}
+                </h3>
+                <div class="claims-feature__image">
+                    <span class="image-wrapper small">
+                        <img class="image-item"
+                            [src]="getBaseUrl() + claimPolicy.mainProduct?.coverageProduct?.images[1]?.url" />
+                    </span>
                 </div>
-                <!-- <button class="primary-button" (click)="createClaim(claimPolicy.policyNumber, claimPolicy.contractNumber)">Create Claim</button> -->
+                <ul *ngIf="claimPolicy.insuredObjects[0]?.insuredObjectItems" class="claims-feature__details">
+                    <li>
+                        <label class="item-label">{{ 'claim.vehicleMake' | cxTranslate }}</label> :
+                        <span *ngIf="claimPolicy.insuredObjects[0]?.insuredObjectItems.length > 0"
+                            class="item-data--blue">{{claimPolicy.insuredObjects[0]?.insuredObjectItems[0]?.value}}</span>
+                    </li>
+                    <li>
+                        <label class="item-label">{{ 'claim.vehicleModel' | cxTranslate }}</label> :
+                        <span *ngIf="claimPolicy.insuredObjects[0]?.insuredObjectItems.length > 1"
+                            class="item-data--blue">{{claimPolicy.insuredObjects[0]?.insuredObjectItems[1]?.value}}</span>
+                    </li>
+                </ul>
             </div>
-        </ng-container>
+        </div>
     </div>
 </ng-container>
