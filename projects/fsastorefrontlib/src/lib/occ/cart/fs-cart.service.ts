@@ -4,6 +4,7 @@ import { CartModification, OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
+import { PricingData } from '../../checkout/assets/models/pricing.interface';
 
 const FULL_PARAMS = '&fields=FULL';
 
@@ -16,7 +17,7 @@ export class OccFSCartService {
     ) { }
 
     public addToCart(userId: string, cartId: string, productCode: string,
-            quantity: number, entryNumber: string): Observable<CartModification> {
+        quantity: number, entryNumber: string): Observable<CartModification> {
         const toAdd = JSON.stringify({});
         const url = this.getAddOptionalProductToCartEndpoint(userId, cartId);
         const params = new HttpParams({
@@ -31,33 +32,36 @@ export class OccFSCartService {
     }
 
     public startBundle(userId: string, cartId: string, productCode: string
-        , bundleTemplateId: string, quantity: number): Observable<CartModification> {
+        , bundleTemplateId: string, quantity: number, pricingData: PricingData): Observable<CartModification> {
         const url = this.getStartBundleForProductOfSpecifiedCart(userId, cartId);
         const params = new HttpParams({
             fromString: 'bundleTemplateId=' + bundleTemplateId + '&productCode=' + productCode + '&quantity=' + quantity + FULL_PARAMS
         });
         const headers = new HttpHeaders({
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json'
         });
+
+        const pricingAttributesBody = JSON.stringify(pricingData);
+
         return this.http
-            .post<any>(url, params, { headers })
-            .pipe(catchError((error: any) => throwError(error.json())));
+          .post<any>(url, pricingAttributesBody, { headers, params })
+          .pipe(catchError((error: any) => throwError(error.json())));
     }
 
     protected getAddOptionalProductToCartEndpoint(userId: string, cartId: string) {
         const addOptionalProductToCartEndpoint = '/users/' + userId + '/carts/' + cartId + '/fs-add-to-cart';
         return (
             (this.occEndpointService.getBaseEndpoint() +
-            addOptionalProductToCartEndpoint
-        ));
+                addOptionalProductToCartEndpoint
+            ));
     }
 
     protected getStartBundleForProductOfSpecifiedCart(userId: string, cartId: string) {
         const startBundleForProductOfCartEndpoint = '/users/' + userId + '/carts/' + cartId + '/fs-start-bundle';
         return (
             (this.occEndpointService.getBaseEndpoint() +
-            startBundleForProductOfCartEndpoint
-        ));
+                startBundleForProductOfCartEndpoint
+            ));
     }
 
 }
