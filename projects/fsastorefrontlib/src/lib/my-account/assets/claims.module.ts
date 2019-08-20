@@ -8,8 +8,8 @@ import { CmsPageGuard, PageLayoutComponent, SpinnerModule } from '@spartacus/sto
 import { OccClaimService } from '../../occ/claim/claim.service';
 import { DeleteClaimDialogComponent } from '../assets/components/claims/delete-claim-dialog/delete-claim-dialog.component';
 import { ClaimPoliciesComponent } from './components/claims/claim-policies/claim-policies.component';
-import { CreateClaimComponent } from './components/claims/claim-submit/create-claim.component';
 import { ClaimsComponent } from './components/claims/claims.component';
+import { CreateClaimComponent } from './components/claims/create-claim/create-claim.component';
 import { ClaimDataService } from './services/claim-data.service';
 import { ClaimService } from './services/claim.service';
 

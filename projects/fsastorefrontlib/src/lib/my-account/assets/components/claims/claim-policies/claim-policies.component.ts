@@ -4,8 +4,6 @@ import { OccConfig } from '@spartacus/core';
 import { ClaimService, PolicyService } from '../../../services';
 import * as fromPolicyStore from '../../../store';
 
-
-
 @Component({
   selector: 'fsa-claim-policies',
   templateUrl: './claim-policies.component.html',
