@@ -42,15 +42,18 @@ export class ComparisonTablePanelItemComponent implements OnInit {
         this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
             this.activatedRoute
         );
-        this.pricingData = this.pricingService.getPricingAttributes();
-        this.product$ = this.productService.getCalculatedProductData(this.productCode, this.pricingData);
-        this.product$.subscribe(data => {
-            if (data) {
-                this.panelItemEntries = this.billingTimes.map(billingTime => {
-                    return data.price.oneTimeChargeEntries.find(entry => entry.billingTime.code === billingTime.code);
-                });
-            }
+        this.pricingService.getPricingAttributes().subscribe(priceAttributes => {
+            this.pricingData = priceAttributes;
+            this.product$ = this.productService.getCalculatedProductData(this.productCode, this.pricingData);
+            this.product$.subscribe(data => {
+                if (data) {
+                    this.panelItemEntries = this.billingTimes.map(billingTime => {
+                        return data.price.oneTimeChargeEntries.find(entry => entry.billingTime.code === billingTime.code);
+                    });
+                }
+            });
         });
+
     }
 
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {

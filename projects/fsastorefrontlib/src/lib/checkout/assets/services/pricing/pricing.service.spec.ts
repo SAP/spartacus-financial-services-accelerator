@@ -22,8 +22,10 @@ describe('PricingService', () => {
     describe('buildPricingData', () => {
         it('should build price data based on form values', async(() => {
             service.buildPricingData(formData);
-            expect(service.pricingAttributesData.priceAttributeGroups.length).toEqual(1);
-            expect(service.pricingAttributesData.priceAttributeGroups[0].priceAttributes.length).toEqual(3);
+            service.pricingSource$.subscribe(priceData => {
+                expect(priceData.priceAttributeGroups.length).toEqual(1);
+                expect(priceData.priceAttributeGroups[0].priceAttributes.length).toEqual(3);
+            });
         }));
     });
 });

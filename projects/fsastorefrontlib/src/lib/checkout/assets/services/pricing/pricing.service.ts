@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { PriceAttributeGroup, PricingData } from '../../models/pricing.interface';
 
 
 @Injectable()
 export class PricingService {
-
-    constructor() { }
 
     pricingSource$ = new BehaviorSubject<PricingData>({
         priceAttributeGroups: []
@@ -14,11 +12,10 @@ export class PricingService {
 
     pricingAttributesObservable = this.pricingSource$.asObservable();
 
-    pricingAttributesData: PricingData = {
-        priceAttributeGroups: []
-    };
-
     buildPricingData(formData: { [name: string]: Object }) {
+        const pricingAttributesData: PricingData = {
+            priceAttributeGroups: []
+        };
         Object.keys(formData).forEach(groupName => {
             const priceAttributeGroup: PriceAttributeGroup = {
                 priceAttributes: [],
@@ -27,15 +24,13 @@ export class PricingService {
             Object.keys(formData[groupName]).forEach(inputName => {
                 priceAttributeGroup.priceAttributes.push({ 'key': inputName, 'value': formData[groupName][inputName] });
             });
-            this.pricingAttributesData.priceAttributeGroups.push(priceAttributeGroup);
+            pricingAttributesData.priceAttributeGroups.push(priceAttributeGroup);
         });
-        this.pricingSource$.next(this.pricingAttributesData);
+        this.pricingSource$.next(pricingAttributesData);
     }
 
-    getPricingAttributes(): PricingData {
-        this.pricingAttributesObservable.subscribe(pricingAttributes => {
-            this.pricingAttributesData = pricingAttributes;
-        });
-        return this.pricingAttributesData;
+    getPricingAttributes(): Observable<PricingData> {
+        return this.pricingAttributesObservable;
     }
+
 }

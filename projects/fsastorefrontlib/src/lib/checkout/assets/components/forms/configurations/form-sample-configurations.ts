@@ -112,7 +112,7 @@ export class FormSampleConfigurations {
             type: 'select',
             label: 'Driver Gender',
             name: 'driverGender',
-            options: ['Male', 'Female', 'wtf']
+            options: ['Male', 'Female']
           },
           {
             type: 'select',
@@ -166,6 +166,11 @@ export class FormSampleConfigurations {
             label: 'End Date',
             name: 'tripEndDate',
             validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeGreater')],
+          },
+          {
+            type: 'input',
+            label: 'Duration in Days',
+            name: 'NoOfDays'
           },
           {
             type: 'input',

@@ -5,7 +5,10 @@ import { NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { CmsConfig, CmsModule, ConfigModule, I18nModule, RoutesConfig, RoutingConfig, UrlModule } from '@spartacus/core';
 import { PageComponentModule, SpinnerModule } from '@spartacus/storefront';
 import { FSCartService } from '../../checkout/assets/services';
+import { PricingService } from '../../checkout/assets/services/pricing/pricing.service';
+import { FSProductService } from '../../checkout/assets/services/product/fs-product.service';
 import { OccBillingTimeService } from '../../occ/billing-time/billing-time.service';
+import { OccProductService } from '../../occ/pricing/occ-product.service';
 import { ComparisonTableContainerComponent } from './comparison-table-container/comparison-table-container.component';
 // tslint:disable-next-line:max-line-length
 import { ComparisonTablePanelItemComponent } from './comparison-table-container/comparison-table-tab/comparison-table-panel/comparison-table-panel-item/comparison-table-panel-item.component';
@@ -13,9 +16,6 @@ import { ComparisonTablePanelItemComponent } from './comparison-table-container/
 import { ComparisonTablePanelComponent } from './comparison-table-container/comparison-table-tab/comparison-table-panel/comparison-table-panel.component';
 import { ComparisonTableTabComponent } from './comparison-table-container/comparison-table-tab/comparison-table-tab.component';
 import { ComparisonTableService } from './comparison-table.service';
-import { PricingService } from '../../checkout/assets/services/pricing/pricing.service';
-import { FSProductService } from '../../checkout/assets/services/product/fs-product.service';
-import { OccProductService } from '../../occ/pricing/occ-product.service';
 
 
 @NgModule({
