@@ -1,2 +1,14 @@
-<button class="primary-button" (click)="createClaim(claimPolicy.policyNumber, claimPolicy.contractNumber)">Create
-    Claim</button>
+<div class="container">
+    <div class="row">
+        <div class="col-12 form-check">
+            <label>
+                <input class="form-check-input" type="checkbox" [(ngModel)]="comfirm" />
+                <span class="form-check-label">
+                    {{ 'claim.truthConfirmation' | cxTranslate }}
+                </span>
+            </label>
+        </div>
+        <button class="primary-button" [disabled]="!comfirm"
+            (click)="startClaim()">{{ 'claim.createClaim' | cxTranslate }}</button>
+    </div>
+</div>

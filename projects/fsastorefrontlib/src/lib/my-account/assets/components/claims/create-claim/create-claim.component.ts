@@ -1,8 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { AuthService, RoutingService } from '@spartacus/core';
+import { RoutingService } from '@spartacus/core';
 import { ClaimService, PolicyService } from '../../../services';
-
-
 
 @Component({
   selector: 'fsa-create-claim',
@@ -13,7 +11,6 @@ export class CreateClaimComponent implements OnInit {
   constructor(
     protected policyService: PolicyService,
     protected claimService: ClaimService,
-    private authService: AuthService,
     private routingService: RoutingService
   ) { }
 
@@ -21,12 +18,12 @@ export class CreateClaimComponent implements OnInit {
 
   }
 
-  createClaim(policyId, contractId) {
-    this.authService.getUserToken().subscribe(token => {
-      this.claimService.createClaim(token.userId, policyId, contractId);
-      this.routingService.go({
-        cxRoute: 'claims'
-      });
+  startClaim() {
+    this.claimService.claimInfo.subscribe(data => {
+      this.claimService.createClaim(data.userId, data.policyId, data.contractId);
+    });
+    this.routingService.go({
+      cxRoute: 'claims'
     });
   }
 }

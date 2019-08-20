@@ -1,15 +1,20 @@
 @import '../mixins-fsa';
 @import '../theme';
 
-.AccountPageTemplate, .GeneralLayoutPageTemplate {
-    cx-page-slot {
-        @include width1400;
-    }  
-} 
+.AccountPageTemplate,
+.GeneralLayoutPageTemplate {
+  cx-page-slot {
+    @include width1400;
+  }
+}
 .close {
-    width: inherit;
-    margin: inherit; 
+  width: inherit;
+  margin: inherit;
+}
+.container {
+  // quick fix, this must be handeled differently
+  max-width: 1400px;
 }
 cx-spinner .loader {
-    border-left-color: var(--cx-color-primary); 
+  border-left-color: var(--cx-color-primary);
 }

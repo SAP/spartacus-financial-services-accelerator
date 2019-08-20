@@ -44,6 +44,10 @@ const routes: Routes = [
         ClaimActivePoliciesFlex: {
           component: ClaimPoliciesComponent,
           guards: [AuthGuard]
+        },
+        StartClaimComponentFlex: {
+          component: CreateClaimComponent,
+          guards: [AuthGuard]
         }
       }
     })
