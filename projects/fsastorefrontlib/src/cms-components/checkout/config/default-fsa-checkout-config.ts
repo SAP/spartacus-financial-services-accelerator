@@ -1,11 +1,4 @@
-import { CheckoutConfig } from '@spartacus/storefront';
-import { FSCheckoutStep } from './../../../lib/checkout/assets/components/checkout-progress/fs-checkout-step.component';
-
-export declare abstract class FSCheckoutConfig extends CheckoutConfig {
-  checkout?: {
-    steps: Array<FSCheckoutStep>;
-  };
-}
+import { FSCheckoutConfig } from './fs-checkout-config';
 
 export const fsaCheckoutConfig: FSCheckoutConfig = {
   checkout: {
@@ -16,6 +9,7 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         routeName: 'generalInformation',
         icon: 'icon-FSA-lock',
         type: [],
+        hideStepCategoriesRegex: ['insurances_event']
       },
       {
         id: 'comparisonCheckoutStep',

@@ -1,16 +1,19 @@
-import { Component, Output, EventEmitter, Input, OnInit } from '@angular/core';
-import { PaymentDetails, CheckoutService, CheckoutPaymentService, RoutingService } from '@spartacus/core';
-import { Observable } from 'rxjs';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CheckoutConfigService } from '@spartacus/storefront';
-
+import {
+  CheckoutPaymentService,
+  CheckoutService,
+  PaymentDetails,
+  RoutingService
+} from '@spartacus/core';
+import { Observable } from 'rxjs';
+import { FSCheckoutConfigService } from '../../services/fs-checkout-config.service';
 
 @Component({
   selector: 'fsa-final-review',
-  templateUrl: './final-review.component.html',
+  templateUrl: './final-review.component.html'
 })
 export class FinalReviewComponent implements OnInit {
-
   @Input()
   paymentDetails$: Observable<PaymentDetails>;
   @Output()
@@ -20,9 +23,9 @@ export class FinalReviewComponent implements OnInit {
     private checkoutService: CheckoutService,
     private checkoutPaymentService: CheckoutPaymentService,
     private routingService: RoutingService,
-    private checkoutConfigService: CheckoutConfigService,
+    private checkoutConfigService: FSCheckoutConfigService,
     private activatedRoute: ActivatedRoute
-    ) { }
+  ) {}
 
   checkoutStepUrlNext: string;
 

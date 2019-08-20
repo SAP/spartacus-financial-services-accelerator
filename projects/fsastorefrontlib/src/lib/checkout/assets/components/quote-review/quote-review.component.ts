@@ -2,15 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cart, CartService, OccConfig, RoutingService, CheckoutDeliveryService } from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
-import { CheckoutConfigService } from '@spartacus/storefront';
-
+import { FSCheckoutConfigService } from '../../services';
 
 @Component({
   selector: 'fsa-quote-review',
   templateUrl: './quote-review.component.html'
 })
 export class QuoteReviewComponent implements OnInit {
-
   cart$: Observable<Cart>;
   cartLoaded$: Observable<boolean>;
   checkoutStepUrlNext: string;
@@ -20,7 +18,7 @@ export class QuoteReviewComponent implements OnInit {
     protected cartService: CartService,
     private config: OccConfig,
     protected routingService: RoutingService,
-    private checkoutConfigService: CheckoutConfigService,
+    private checkoutConfigService: FSCheckoutConfigService,
     private activatedRoute: ActivatedRoute,
     protected checkoutDeliveryService: CheckoutDeliveryService
     ) { }
@@ -46,5 +44,4 @@ export class QuoteReviewComponent implements OnInit {
     this.checkoutDeliveryService.setDeliveryMode('financial-default');
     this.routingService.go(this.checkoutStepUrlNext);
   }
-
 }
