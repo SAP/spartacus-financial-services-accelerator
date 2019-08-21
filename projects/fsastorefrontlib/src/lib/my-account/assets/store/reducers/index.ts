@@ -1,16 +1,12 @@
 import { InjectionToken, Provider } from '@angular/core';
-import {
-  ActionReducerMap,
-  createFeatureSelector,
-  MemoizedSelector
-} from '@ngrx/store';
-
-import * as fromQuoteReducer from './quote.reducer';
+import { ActionReducerMap, createFeatureSelector, MemoizedSelector } from '@ngrx/store';
+import * as fromClaimPolicies from './claim-policies.reducer';
+import * as fromClaimReducer from './claim.reducer';
+import * as fromInboxReducer from './inbox.reducer';
 import * as fromPolicyReducer from './policy.reducer';
 import * as fromPremiumCalendarReducer from './premium-calendar.reducer';
-import * as fromClaimReducer from './claim.reducer';
-import * as fromClaimPolicies from './claim-policies.reducer';
-import * as fromInboxReducer from './inbox.reducer';
+import * as fromQuoteReducer from './quote.reducer';
+
 
 
 export interface UserState {

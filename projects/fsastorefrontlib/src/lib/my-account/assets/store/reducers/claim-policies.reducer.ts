@@ -1,9 +1,5 @@
 import * as fromAction from '../actions';
 
-export interface ClaimPolicies {
-  ClaimPolicy?: any;
-}
-
 export interface ClaimPoliciesState {
   claimPoliciesData: {};
   refresh: boolean;

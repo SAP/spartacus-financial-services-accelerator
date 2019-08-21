@@ -7,11 +7,16 @@
                         <div class="fs-items">
                             <h2 class="my-2 text-center">{{ 'policy.viewPolicies' | cxTranslate }}</h2>
                             <ul>
-                                <ng-container *ngTemplateOutlet="policiesList; context:{policies: policies, max: (allPoliciesDisplayed$ ? policies?.insurancePolicies?.length : component.numberOfPoliciesToDisplay)}"></ng-container>
+                                <ng-container
+                                    *ngTemplateOutlet="policiesList; context:{policies: policies, max: (allPoliciesDisplayed$ ? policies?.insurancePolicies?.length : component.numberOfPoliciesToDisplay)}">
+                                </ng-container>
                             </ul>
-                            <ng-container *ngIf = "policies?.insurancePolicies?.length > component.numberOfPoliciesToDisplay">
-                                <ng-container *ngTemplateOutlet="showAllPoliciesButton context: {showAll: (allPoliciesDisplayed$ ? false : true)}"></ng-container>
-                            </ng-container>  
+                            <ng-container
+                                *ngIf="policies?.insurancePolicies?.length > component.numberOfPoliciesToDisplay">
+                                <ng-container
+                                    *ngTemplateOutlet="showAllPoliciesButton context: {showAll: (allPoliciesDisplayed$ ? false : true)}">
+                                </ng-container>
+                            </ng-container>
                         </div>
                     </ng-container>
                 </div>
@@ -22,16 +27,18 @@
 
 <ng-template #policiesList let-policies="policies" let-max="max">
     <li *ngFor="let policy of policies.insurancePolicies | slice: 0:max" class="fs-item">
-        <a routerLink="/my-account/my-policies/{{policy.policyNumber}}/{{policy.contractNumber}}" routerLinkActive="active">
+        <a routerLink="/my-account/my-policies/{{policy.policyNumber}}/{{policy.contractNumber}}"
+            routerLinkActive="active">
             <div class="fs-item-data-container background-hover-secondary">
                 <span class="image-wrapper small p-1">
-                        <img class="image-item" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0].url" alt="">
-                    </span>
+                    <img class="image-item" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0].url"
+                        alt="">
+                </span>
                 <div class="fs-item-wrapper">
                     <span class="fs-item-title">{{policy.categoryData?.name}}</span>
                     <span class="fs-item-value">{{policy.contractNumber}}</span>
                 </div>
-                    <span class="fs-item-add-infos">{{policy.policyEndDate}}</span>
+                <span class="fs-item-add-infos">{{policy.policyEndDate}}</span>
             </div>
         </a>
     </li>

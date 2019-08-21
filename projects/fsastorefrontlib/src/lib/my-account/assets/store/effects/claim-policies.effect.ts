@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { map, catchError, mergeMap } from 'rxjs/operators';
-
-import * as fromActions from '../actions';
-import { PolicyDataService } from '../../services/policy-data.service';
+import { catchError, map, mergeMap } from 'rxjs/operators';
 import { OccPolicyService } from '../../../../occ/policy/policy.service';
+import { PolicyDataService } from '../../services/policy-data.service';
+import * as fromActions from '../actions';
+
 
 @Injectable()
 export class ClaimPoliciesEffects {
@@ -16,8 +16,8 @@ export class ClaimPoliciesEffects {
     mergeMap(payload => {
       if (payload === undefined || payload.userId === undefined) {
         payload = {
-            userId: this.claimPoliciesData.userId,
-            claimsCategoryCode: this.claimPoliciesData.claimsCategoryCode
+          userId: this.claimPoliciesData.userId,
+          claimsCategoryCode: this.claimPoliciesData.claimsCategoryCode
         };
       }
       return this.claimPoliciesService.getPoliciesByCategory(payload.userId, payload.claimsCategoryCode)
@@ -34,5 +34,5 @@ export class ClaimPoliciesEffects {
     private actions$: Actions,
     private claimPoliciesData: PolicyDataService,
     private claimPoliciesService: OccPolicyService
-  ) {}
+  ) { }
 }

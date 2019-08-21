@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-
+import * as fromStore from '../store';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
 import { PolicyDataService } from './policy-data.service';
-import * as fromStore from '../store';
+
 
 
 @Injectable()

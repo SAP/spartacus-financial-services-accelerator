@@ -9,17 +9,17 @@ export class LoadClaimPolicies implements Action {
   constructor(public payload: {
     userId: string;
     claimsCategoryCode: string;
-  }) {}
+  }) { }
 }
 
 export class LoadClaimPoliciesSuccess implements Action {
   readonly type = LOAD_CLAIM_POLICIES_SUCCESS;
-  constructor(public payload: any) {}
+  constructor(public payload: any) { }
 }
 
 export class LoadClaimPoliciesFail implements Action {
   readonly type = LOAD_CLAIM_POLICIES_FAIL;
-  constructor(public payload: any) {}
+  constructor(public payload: any) { }
 }
 
 export type ClaimPoliciesAction =
