@@ -2,8 +2,9 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartService, RoutingConfigService, RoutingService } from '@spartacus/core';
 import { CheckoutConfig, CheckoutProgressComponent } from '@spartacus/storefront';
-import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { FSProduct } from '../../../../occ-models/occ.models';
+import { FSCategoryService } from '../../services/fs-category.service';
 import { FSCheckoutStep } from './fs-checkout-step.component';
 
 @Component({
@@ -13,18 +14,19 @@ import { FSCheckoutStep } from './fs-checkout-step.component';
 })
 export class FSCheckoutProgressComponent extends CheckoutProgressComponent
   implements OnInit {
-  currentCategorySource = new BehaviorSubject<string>('');
-  currentCategory = this.currentCategorySource.asObservable();
 
   constructor(
     protected config: CheckoutConfig,
     protected routingService: RoutingService,
     protected routingConfigService: RoutingConfigService,
     protected activatedRoute: ActivatedRoute,
-    protected cartService: CartService
+    protected cartService: CartService,
+    protected categoryService: FSCategoryService
   ) {
     super(config, routingService, routingConfigService);
   }
+
+  activeCategory$: Observable<string>;
 
   ngOnInit() {
     super.ngOnInit();
@@ -45,14 +47,16 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
   }
 
   setActiveCategory() {
+    this.activeCategory$ = this.categoryService.getActiveCategory();
+
     this.activatedRoute.params.subscribe(params => {
       const categoryCode = 'categoryCode';
       const formCode = 'formCode';
 
       if (params[categoryCode]) {
-        this.currentCategorySource.next(params[categoryCode]);
+        this.categoryService.setActiveCategory(params[categoryCode]);
       } else if (params[formCode]) {
-        this.currentCategorySource.next(params[formCode]);
+        this.categoryService.setActiveCategory(params[formCode]);
       } else {
         this.cartService.getActive().subscribe(cart => {
           if (
@@ -63,8 +67,9 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
           ) {
             const fsProduct: FSProduct =
               cart.deliveryOrderGroups[0].entries[0].product;
+
             if (fsProduct && fsProduct.defaultCategory) {
-              this.currentCategorySource.next(fsProduct.defaultCategory.code);
+              this.categoryService.setActiveCategory(fsProduct.defaultCategory.code);
             }
           }
         });
@@ -73,12 +78,11 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
   }
 
   filterSteps() {
-    this.currentCategory.subscribe(category => {
-
+    this.activeCategory$.subscribe(activeCategory => {
       this.steps = this.steps.filter(
         step =>
           !(<FSCheckoutStep>step).restrictedCategories ||
-          (<FSCheckoutStep>step).restrictedCategories.indexOf(category)
+          !(<FSCheckoutStep>step).restrictedCategories.includes(activeCategory)
       );
     });
   }
