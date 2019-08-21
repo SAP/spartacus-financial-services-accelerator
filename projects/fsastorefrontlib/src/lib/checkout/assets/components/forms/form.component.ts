@@ -1,9 +1,9 @@
-import { Component, ViewChild, AfterViewInit, OnInit, Input } from '@angular/core';
-import { FormDefinition, FormSubmitType } from './dynamic-form/models/field-config.interface';
-import { DynamicFormComponent } from './dynamic-form/containers/dynamic-form/dynamic-form.component';
+import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 import { PricingService } from '../../services/pricing/pricing.service';
 import { FormSampleConfigurations } from './configurations/form-sample-configurations';
+import { DynamicFormComponent } from './dynamic-form/containers/dynamic-form/dynamic-form.component';
+import { FormDefinition, FormSubmitType } from './dynamic-form/models/field-config.interface';
 
 
 @Component({
@@ -14,16 +14,16 @@ export class FormComponent implements AfterViewInit, OnInit {
 
   constructor(
     protected routingService: RoutingService,
-    private pricingService: PricingService
+    protected pricingService: PricingService
   ) { }
 
-  @ViewChild(DynamicFormComponent, {static: false}) form: DynamicFormComponent;
+  @ViewChild(DynamicFormComponent, { static: false }) form: DynamicFormComponent;
   @Input()
   formCategoryCode: string;
   categoryConfig: FormDefinition;
 
   ngOnInit() {
-    this.categoryConfig = FormSampleConfigurations.sampleConfigurations.filter( item => item.categoryCode === this.formCategoryCode)[0];
+    this.categoryConfig = FormSampleConfigurations.sampleConfigurations.filter(item => item.categoryCode === this.formCategoryCode)[0];
   }
 
   ngAfterViewInit() {
@@ -35,7 +35,7 @@ export class FormComponent implements AfterViewInit, OnInit {
     });
   }
 
-  submit(formData: {[name: string]: any}) {
+  submit(formData: { [name: string]: any }) {
     if (this.form.valid) {
       switch (this.form.config.submitType) {
         case FormSubmitType.PRICING: {

@@ -4,6 +4,7 @@ import { AuthService, CartDataService, CartService, StateWithCart, CartActions, 
 import * as fromFSAction from '../../../checkout/assets/store/actions/index';
 import { BehaviorSubject } from 'rxjs';
 import { tap, filter, take } from 'rxjs/operators';
+import { PricingData } from '../models/pricing.interface';
 
 @Injectable()
 export class FSCartService extends CartService {
@@ -32,7 +33,7 @@ export class FSCartService extends CartService {
     );
   }
 
-  createCartAndStartBundle(productCode: string, bundleTemplateId: string, quantity: number): void {
+  createCartAndStartBundle(productCode: string, bundleTemplateId: string, quantity: number, pricingData: PricingData): void {
     this.fsStore
       .pipe(
         select(CartSelectors.getActiveCartState),
@@ -53,7 +54,8 @@ export class FSCartService extends CartService {
             cartId: this.fsCartData.cartId,
             productCode: productCode,
             bundleTemplateId: bundleTemplateId,
-            quantity: quantity
+            quantity: quantity,
+            pricingData: pricingData
           })
         );
       });

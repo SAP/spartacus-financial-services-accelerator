@@ -1,10 +1,14 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { FSCartService } from './../../../../../../checkout/assets/services';
-import {  CmsConfig, ProductService, RoutingService } from '@spartacus/core';
-import { Observable } from 'rxjs';
-import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
 import { ActivatedRoute } from '@angular/router';
+import { CmsConfig, RoutingService } from '@spartacus/core';
+import { Observable } from 'rxjs';
+import { PricingData } from '../../../../../../checkout/assets/models/pricing.interface';
 import { FSCheckoutConfigService } from '../../../../../../checkout/assets/services/fs-checkout-config.service';
+import { PricingService } from '../../../../../../checkout/assets/services/pricing/pricing.service';
+import { FSProductService } from '../../../../../../checkout/assets/services/product/fs-product.service';
+import { FSProduct, OneTimeChargeEntry } from '../../../../../../occ-models';
+import { FSCartService } from './../../../../../../checkout/assets/services';
+
 
 @Component({
     selector: 'fsa-comparison-table-panel-item',
@@ -18,14 +22,16 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     @Input()
     billingTimes: any;
     checkoutStepUrlNext: string;
+    pricingData: PricingData;
 
     constructor(
         protected cartService: FSCartService,
-        protected productService: ProductService,
         protected config: CmsConfig,
         protected routingService: RoutingService,
-        private checkoutConfigService: FSCheckoutConfigService,
-        private activatedRoute: ActivatedRoute
+        protected checkoutConfigService: FSCheckoutConfigService,
+        protected activatedRoute: ActivatedRoute,
+        protected pricingService: PricingService,
+        protected productService: FSProductService,
     ) {
     }
 
@@ -33,24 +39,30 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     panelItemEntries: OneTimeChargeEntry[] = [];
 
     ngOnInit() {
-        this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(this.activatedRoute);
-        console.log(this.activatedRoute.routeConfig.path);
-        this.product$ = this.productService.get(this.productCode);
-        this.product$.subscribe(data => {
-            if (data) {
-                this.panelItemEntries = this.billingTimes.map(billingTime => {
-                    return data.price.oneTimeChargeEntries.find(entry => entry.billingTime.code === billingTime.code);
-                });
-            }
+        this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
+            this.activatedRoute
+        );
+        this.pricingService.getPricingAttributes().subscribe(priceAttributes => {
+            this.pricingData = priceAttributes;
+            this.product$ = this.productService.getCalculatedProductData(this.productCode, this.pricingData);
+            this.product$.subscribe(data => {
+                if (data) {
+                    this.panelItemEntries = this.billingTimes.map(billingTime => {
+                        return data.price.oneTimeChargeEntries.find(entry => entry.billingTime.code === billingTime.code);
+                    });
+                }
+            });
         });
+
     }
 
     createCartAndStartBundleForProduct(productCode: string, bundleTemplateId: string) {
-        this.cartService.createCartAndStartBundle(productCode, bundleTemplateId, 1);
+        this.cartService.createCartAndStartBundle(productCode, bundleTemplateId, 1, this.pricingData);
         this.routingService.go(this.checkoutStepUrlNext);
     }
 
     public getBaseUrl() {
         return this.config.backend.occ.baseUrl || '';
     }
+
 }

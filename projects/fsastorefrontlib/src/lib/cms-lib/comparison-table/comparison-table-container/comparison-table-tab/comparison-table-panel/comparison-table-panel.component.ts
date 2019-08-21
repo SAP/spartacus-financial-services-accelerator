@@ -18,7 +18,7 @@ export class ComparisonTablePanelComponent implements OnInit {
   constructor(
     protected componentData: CmsComponentData<ComparisonPanelCMSComponent>,
     protected billingTimeService: OccBillingTimeService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.comparisonPanel = this.componentData.data$;
