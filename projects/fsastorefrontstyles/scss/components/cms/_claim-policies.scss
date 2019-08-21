@@ -44,11 +44,11 @@ fsa-claim-policies {
     padding: 25px 20px 20px;
     margin: 20px 0;
   }
-  .claims {
+  .fs-items {
     margin-bottom: 30px;
     padding: 0 20px;
     cursor: pointer;
-    &-feature__wrapper {
+    &-feature-wrapper {
       overflow: hidden;
       @include box-shadow(0, 0, 6px, 2px, var(--cx-color-5), 100%);
       border-radius: 5px;
@@ -63,12 +63,12 @@ fsa-claim-policies {
         @include hover-select();
       }
     }
-    &-feature__image {
+    &-feature-image {
       padding: 20px 0;
       margin-bottom: 30px;
       border-bottom: 5px solid $color-link-hover;
     }
-    &-feature__details {
+    &-feature-details {
       display: inline-block;
       text-align: left;
       margin-bottom: 30px;
@@ -85,7 +85,9 @@ fsa-claim-policies {
     }
   }
   & + fsa-cms-custom-container {
+    // classes and markup for this come from impexes, no way to change them to have pairity
     padding-bottom: 65px;
+    margin-bottom: 40px;
     border-top: none;
     .claim-content {
       padding: 0 60px;

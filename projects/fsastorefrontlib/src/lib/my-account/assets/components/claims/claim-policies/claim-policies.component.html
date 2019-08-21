@@ -1,20 +1,21 @@
 <ng-container *ngIf="claimPolicies$ | async as policies">
     <ng-container *ngIf="policies?.insurancePolicies; else noClaims">
         <div class="row">
-            <div *ngFor="let claimPolicy of policies.insurancePolicies; let i = index" class="claims col-sm-6 col-md-4">
-                <div class="claims-feature__wrapper"
+            <div *ngFor="let claimPolicy of policies.insurancePolicies; let i = index"
+                class="fs-items col-sm-6 col-md-4">
+                <div class="fs-items-feature-wrapper"
                     (click)="isSelected = i; selectClaim(claimPolicy.policyNumber, claimPolicy.contractNumber);"
                     [ngClass]="{selected: isSelected === i}">
                     <h3 class="section-header-heading text-uppercase">
                         {{claimPolicy.categoryData?.name}} {{ 'policy.policy' | cxTranslate }}
                     </h3>
-                    <div class="claims-feature__image">
+                    <div class="fs-items-feature-image">
                         <span class="image-wrapper small">
                             <img class="image-item"
                                 [src]="getBaseUrl() + claimPolicy.mainProduct?.coverageProduct?.images[1]?.url" />
                         </span>
                     </div>
-                    <ul *ngIf="claimPolicy.insuredObjects[0]?.insuredObjectItems" class="claims-feature__details">
+                    <ul *ngIf="claimPolicy.insuredObjects[0]?.insuredObjectItems" class="fs-items-feature-details">
                         <li>
                             <label class="item-label">{{ 'claim.vehicleMake' | cxTranslate }}</label> :
                             <span *ngIf="claimPolicy.insuredObjects[0]?.insuredObjectItems.length > 0"

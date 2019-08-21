@@ -1,14 +1,14 @@
-<div class="container">
-    <div class="row">
-        <div class="col-12 form-check">
+<div class="row justify-content-end">
+    <div class="col-xs-12 col-md-4">
+        <div class="form-check">
             <label>
-                <input class="form-check-input" type="checkbox" [(ngModel)]="comfirm" />
+                <input class="form-check-input" type="checkbox" name="confirm" [(ngModel)]="confirm" />
                 <span class="form-check-label">
                     {{ 'claim.truthConfirmation' | cxTranslate }}
                 </span>
             </label>
         </div>
-        <button class="primary-button" [disabled]="!comfirm"
+        <button class="primary-button" [disabled]="!confirm || !(claimCheck | async)"
             (click)="startClaim()">{{ 'claim.createClaim' | cxTranslate }}</button>
     </div>
 </div>
