@@ -1,26 +1,25 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router, UrlTree } from '@angular/router';
-import {
-  CmsActivatedRouteSnapshot,
-  RoutingConfigService
-} from '@spartacus/core';
+import { ActivatedRoute, CanActivate, Router, UrlTree } from '@angular/router';
+import { CmsActivatedRouteSnapshot, RoutingConfigService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { FSCheckoutStep } from './../../../lib/checkout/assets/components/checkout-progress/fs-checkout-step.component';
-import { FSCheckoutConfigService } from './../../../lib/checkout/assets/services';
+import { FSCheckoutStep } from '../../../lib/checkout/assets/components/checkout-progress/fs-checkout-step.component';
+import { FSCheckoutConfigService } from '../../../lib/checkout/assets/services';
 
 @Injectable({
   providedIn: 'root'
 })
-export class GeneralInformationGuard implements CanActivate {
+export class CatagoryStepGuard implements CanActivate {
   constructor(
     protected routingConfigService: RoutingConfigService,
     protected router: Router,
-    protected fsCheckoutConfigService: FSCheckoutConfigService
-  ) {}
+    protected fsCheckoutConfigService: FSCheckoutConfigService,
+    protected activatedRoute: ActivatedRoute
+  ) { }
 
   category;
 
   canActivate(route: CmsActivatedRouteSnapshot): Observable<boolean | UrlTree> {
+
     const currentStepIndex = this.fsCheckoutConfigService.getCurrentStepIndex(
       route
     );
@@ -37,21 +36,21 @@ export class GeneralInformationGuard implements CanActivate {
       nextStep.routeName
     ).paths[0];
 
-    if (currentStep.hideStepCategoriesRegex) {
-      currentStep.hideStepCategoriesRegex.forEach(
-        regex =>
+    if (currentStep.restrictedCategories) {
+      currentStep.restrictedCategories.forEach(
+        restrictedCategory => {
           this.category = route.url.find(url =>
-            new RegExp(regex).test(url.path)
-          )
+            url.path === restrictedCategory);
+        }
       );
-   }
+    }
 
     return this.category && this.category.path
       ? of(
-          this.router.parseUrl(
-            nextStepUrl.replace(':categoryCode', this.category.path)
-          )
+        this.router.parseUrl(
+          nextStepUrl.replace(':categoryCode', this.category.path)
         )
+      )
       : of(true);
   }
 }

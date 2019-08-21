@@ -16,7 +16,6 @@ import {
 import { effects } from '../../my-account/assets/store/effects/index';
 import { CMSViewPoliciesComponent } from './view-policies/view-policies.component';
 import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
-import { FSUpdateProfileComponent } from '../../my-account/assets/components/update-profile/fs-update-profile.component';
 
 
 const routes: Routes = [
@@ -111,8 +110,8 @@ const routes: Routes = [
       }
     })
   ],
-  declarations: [ CMSViewPoliciesComponent, CMSViewQuotesComponent ],
-  exports: [ CMSViewPoliciesComponent, CMSViewQuotesComponent ],
-  entryComponents: [ CMSViewPoliciesComponent, CMSViewQuotesComponent ]
+  declarations: [CMSViewPoliciesComponent, CMSViewQuotesComponent],
+  exports: [CMSViewPoliciesComponent, CMSViewQuotesComponent],
+  entryComponents: [CMSViewPoliciesComponent, CMSViewQuotesComponent]
 })
-export class AccountModule {}
+export class AccountModule { }

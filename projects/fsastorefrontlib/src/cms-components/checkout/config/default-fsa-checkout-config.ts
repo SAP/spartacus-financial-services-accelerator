@@ -9,42 +9,42 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         routeName: 'generalInformation',
         icon: 'icon-FSA-lock',
         type: [],
-        hideStepCategoriesRegex: ['insurances_event']
+        restrictedCategories: ['insurances_event']
       },
       {
         id: 'comparisonCheckoutStep',
         name: 'fscommon.whatsIncluded',
         routeName: 'category',
         icon: 'icon-FSA-selected-item',
-        type: [],
+        type: []
       },
       {
         id: 'addOptionsStep',
         name: 'fscommon.addOptions',
         routeName: 'addOptions',
         icon: 'icon-FSA-list',
-        type: [],
+        type: []
       },
       {
         id: 'quoteReviewStep',
         name: 'quote.quoteReview',
         routeName: 'quoteReview',
         icon: 'icon-FSA-shield',
-        type: [],
+        type: []
       },
       {
         id: 'checkoutPaymentDetailsStep',
         name: 'fscommon.paymentDetails',
         routeName: 'checkoutPaymentDetails',
         icon: 'icon-FSA-payment-cards',
-        type: [],
+        type: []
       },
       {
         id: 'finalReviewStep',
         name: 'fscommon.finalReview',
         routeName: 'finalReview',
         icon: 'icon-FSA-review',
-        type: [],
+        type: []
       }
     ]
   },
