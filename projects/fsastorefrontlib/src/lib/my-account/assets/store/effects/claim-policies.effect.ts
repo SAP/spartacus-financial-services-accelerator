@@ -16,11 +16,11 @@ export class ClaimPoliciesEffects {
     mergeMap(payload => {
       if (payload === undefined || payload.userId === undefined) {
         payload = {
-          userId: this.claimPoliciesData.userId,
-          policyCategoryCode: this.claimPoliciesData.policyCategoryCode
+          userId: this.policyData.userId,
+          policyCategoryCode: this.policyData.policyCategoryCode
         };
       }
-      return this.claimPoliciesService.getPoliciesByCategory(payload.userId, payload.policyCategoryCode)
+      return this.policyService.getPoliciesByCategory(payload.userId, payload.policyCategoryCode)
         .pipe(
           map((claimPolicies: any) => {
             return new fromActions.LoadClaimPoliciesSuccess(claimPolicies);
@@ -32,7 +32,7 @@ export class ClaimPoliciesEffects {
 
   constructor(
     private actions$: Actions,
-    private claimPoliciesData: PolicyDataService,
-    private claimPoliciesService: OccPolicyService
+    private policyData: PolicyDataService,
+    private policyService: OccPolicyService
   ) { }
 }
