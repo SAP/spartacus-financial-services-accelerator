@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, CanActivate, Router, UrlTree } from '@angular/router';
+import { CanActivate, Router, UrlTree } from '@angular/router';
 import { CmsActivatedRouteSnapshot, RoutingConfigService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCheckoutStep } from '../../../lib/checkout/assets/components/checkout-progress/fs-checkout-step.component';
@@ -12,8 +12,7 @@ export class CatagoryStepGuard implements CanActivate {
   constructor(
     protected routingConfigService: RoutingConfigService,
     protected router: Router,
-    protected fsCheckoutConfigService: FSCheckoutConfigService,
-    protected activatedRoute: ActivatedRoute
+    protected fsCheckoutConfigService: FSCheckoutConfigService
   ) { }
 
   category;
