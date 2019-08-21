@@ -15,6 +15,7 @@ export class CreateClaimComponent implements OnInit {
   ) { }
 
   isPolicySelected$;
+  confirm;
 
   ngOnInit() {
     // needed to check when a claim is selected and pass that info to template
