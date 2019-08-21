@@ -11,11 +11,11 @@ import * as fromPolicyStore from '../../../store';
 })
 export class ClaimPoliciesComponent implements OnInit {
   constructor(
-    private store: Store<fromPolicyStore.UserState>,
+    protected store: Store<fromPolicyStore.UserState>,
     protected policyService: PolicyService,
     protected claimService: ClaimService,
-    private config: OccConfig,
-    private authService: AuthService,
+    protected config: OccConfig,
+    protected authService: AuthService,
   ) { }
 
   claimPolicies$;
