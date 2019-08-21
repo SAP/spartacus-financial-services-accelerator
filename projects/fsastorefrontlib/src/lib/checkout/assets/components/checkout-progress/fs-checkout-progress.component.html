@@ -1,8 +1,8 @@
 <div class="cx-multi-step-checkout center1400 contentPadding">
   <div class="row">
-    <div *ngIf="currentCategory | async as category" class="col-12">
+    <div *ngIf="activeCategory$ | async as activeCategory" class="col-12">
       <h2 class="py-4 text-center text-uppercase">
-        {{ 'fscommon.your' | cxTranslate }} {{ 'fscommon.category.' + category | cxTranslate}}
+        {{ 'fscommon.your' | cxTranslate }} {{ 'fscommon.category.' + activeCategory | cxTranslate}}
         {{'fscommon.insurance'| cxTranslate }}
       </h2>
 
@@ -14,8 +14,7 @@
               <div class="d-inline-block underline-effect progress-node mx-2" [ngClass]="{
                   ' is-active': i === activeStepIndex,
                   ' is-disabled': i > activeStepIndex
-                }"
-                [routerLink]="{ cxRoute: step.routeName, params: {code: category} } | cxUrl">
+                }" [routerLink]="{ cxRoute: step.routeName, params: {code: activeCategory} } | cxUrl">
                 <div class="FSA-icon" [ngClass]="step.icon"></div>
                 <p class="label  position-relative mb-2">{{ step.name | cxTranslate }}</p>
               </div>

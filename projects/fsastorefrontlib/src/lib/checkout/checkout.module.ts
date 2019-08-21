@@ -35,6 +35,7 @@ import { FSMiniCartComponent } from './assets/components/mini-cart/mini-cart.com
 import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
 import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
 import { FSCartService } from './assets/services';
+import { FSCategoryService } from './assets/services/fs-category.service';
 import { effects } from './assets/store/effects/index';
 
 const routes: Routes = [
@@ -164,6 +165,6 @@ const routes: Routes = [
     FinalReviewComponent,
     FSMiniCartComponent
   ],
-  providers: [FSCartService, OccFSCartService]
+  providers: [FSCartService, OccFSCartService, FSCategoryService]
 })
 export class CheckoutModule { }
