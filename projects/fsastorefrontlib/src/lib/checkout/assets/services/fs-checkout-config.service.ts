@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RoutingConfigService } from '@spartacus/core';
+import { RoutingConfigService, CmsActivatedRouteSnapshot } from '@spartacus/core';
 import { CheckoutConfigService, CheckoutConfig } from '@spartacus/storefront';
 
 @Injectable({
@@ -15,7 +15,7 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
       super(fsCheckoutConfig, fsRoutingConfigService);
   }
 
-  getCurrentStepIndex(activatedRoute: ActivatedRoute) {
+  getCurrentStepIndex(activatedRoute: ActivatedRoute | CmsActivatedRouteSnapshot) {
     const currentStepUrl: string = this.getUrlFromActivatedRoute(
       activatedRoute
     );
@@ -36,7 +36,7 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   }
 
   // Class is implemented in order to fix this behavior from spartacus. Once real fix is implemented class can be removed.
-  private getUrlFromActivatedRoute(activatedRoute: ActivatedRoute) {
+  private getUrlFromActivatedRoute(activatedRoute: ActivatedRoute | CmsActivatedRouteSnapshot) {
     return activatedRoute &&
       activatedRoute.routeConfig &&
       activatedRoute.routeConfig.path

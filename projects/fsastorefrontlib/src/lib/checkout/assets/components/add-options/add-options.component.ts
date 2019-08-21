@@ -1,10 +1,16 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  OnInit,
+  Output
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { filter } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 import { Cart, OrderEntry, RoutingService } from '@spartacus/core';
-import {FSCartService} from '../../services';
-import { CheckoutConfigService } from '@spartacus/storefront';
+import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { FSCartService } from '../../services';
+import { FSCheckoutConfigService } from '../../services/fs-checkout-config.service';
 
 @Component({
   selector: 'fsa-add-options',
@@ -12,11 +18,10 @@ import { CheckoutConfigService } from '@spartacus/storefront';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddOptionsComponent implements OnInit {
-
   constructor(
     protected cartService: FSCartService,
     protected routingService: RoutingService,
-    private checkoutConfigService: CheckoutConfigService,
+    private checkoutConfigService: FSCheckoutConfigService,
     private activatedRoute: ActivatedRoute,
   ) { }
 

@@ -2,16 +2,17 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CartService, RoutingConfigService, RoutingService } from '@spartacus/core';
 import { CheckoutConfig, CheckoutProgressComponent } from '@spartacus/storefront';
-import { FSProduct } from '../../../../occ-models/occ.models';
 import { BehaviorSubject } from 'rxjs';
+import { FSProduct } from '../../../../occ-models/occ.models';
+import { FSCheckoutStep } from './fs-checkout-step.component';
 
 @Component({
   selector: 'fsa-checkout-progress',
   templateUrl: './fs-checkout-progress.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FSCheckoutProgressComponent extends CheckoutProgressComponent implements OnInit {
-
+export class FSCheckoutProgressComponent extends CheckoutProgressComponent
+  implements OnInit {
   currentCategorySource = new BehaviorSubject<string>('');
   currentCategory = this.currentCategorySource.asObservable();
 
@@ -27,15 +28,16 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent imple
 
   ngOnInit() {
     super.ngOnInit();
-    this.setActiveStepIndex();
     this.setActiveCategory();
+    this.filterSteps();
+    this.setActiveStepIndex();
   }
 
   setActiveStepIndex() {
-    this.steps = this.config.checkout.steps;
     this.activeStepUrl = this.activatedRoute.routeConfig.path;
     this.steps.forEach((step, index) => {
-      const routeUrl = this.routingConfigService.getRouteConfig(step.routeName).paths[0];
+      const routeUrl = this.routingConfigService.getRouteConfig(step.routeName)
+        .paths[0];
       if (routeUrl === this.activeStepUrl) {
         this.activeStepIndex = index;
       }
@@ -53,16 +55,31 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent imple
         this.currentCategorySource.next(params[formCode]);
       } else {
         this.cartService.getActive().subscribe(cart => {
-          if (cart.deliveryOrderGroups && cart.deliveryOrderGroups.length > 0
-            && cart.deliveryOrderGroups[0].entries
-            && cart.deliveryOrderGroups[0].entries.length > 0) {
-            const fsProduct: FSProduct = cart.deliveryOrderGroups[0].entries[0].product;
+          if (
+            cart.deliveryOrderGroups &&
+            cart.deliveryOrderGroups.length > 0 &&
+            cart.deliveryOrderGroups[0].entries &&
+            cart.deliveryOrderGroups[0].entries.length > 0
+          ) {
+            const fsProduct: FSProduct =
+              cart.deliveryOrderGroups[0].entries[0].product;
             if (fsProduct && fsProduct.defaultCategory) {
               this.currentCategorySource.next(fsProduct.defaultCategory.code);
             }
           }
         });
       }
+    });
+  }
+
+  filterSteps() {
+    this.currentCategory.subscribe(category => {
+
+      this.steps = this.steps.filter(
+        step =>
+          !(<FSCheckoutStep>step).restrictedCategories ||
+          (<FSCheckoutStep>step).restrictedCategories.indexOf(category)
+      );
     });
   }
 }
