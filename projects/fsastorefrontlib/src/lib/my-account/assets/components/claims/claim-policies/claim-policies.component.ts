@@ -30,9 +30,9 @@ export class ClaimPoliciesComponent implements OnInit {
   public getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
-  selectClaim(policyId, contractId) {
+  selectPolicy(policyId, contractId) {
     this.authService.getUserToken().subscribe(token => {
-      this.claimService.setClaimData(token.userId, policyId, contractId);
+      this.claimService.setSelectedPolicy(token.userId, policyId, contractId);
     });
   }
 }

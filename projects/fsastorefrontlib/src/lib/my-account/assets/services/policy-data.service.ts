@@ -4,7 +4,7 @@ import { Policy } from '../store/reducers/policy.reducer';
 @Injectable()
 export class PolicyDataService {
   private _userId = 'anonymous';
-  private _claimsCategoryCode: string;
+  private _policyCategoryCode: string;
   private _policies: Policy[];
 
   constructor() { }
@@ -16,11 +16,11 @@ export class PolicyDataService {
     return this._userId;
   }
 
-  set claimsCategoryCode(val) {
-    this._claimsCategoryCode = val;
+  set policyCategoryCode(val) {
+    this._policyCategoryCode = val;
   }
-  get claimsCategoryCode(): string {
-    return this._claimsCategoryCode;
+  get policyCategoryCode(): string {
+    return this._policyCategoryCode;
   }
 
   set policies(val: Policy[]) {

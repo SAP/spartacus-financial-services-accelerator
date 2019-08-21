@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
-import { ClaimDataService, ClaimInfo } from './claim-data.service';
+import { ClaimDataService, SelectedPolicy } from './claim-data.service';
 
 
 @Injectable()
@@ -18,8 +18,8 @@ export class ClaimService {
     this.initClaims();
   }
 
-  private startClaimData = new BehaviorSubject<ClaimInfo>(null);
-  claimInfo = this.startClaimData.asObservable();
+  private selectedPolicySource = new BehaviorSubject<SelectedPolicy>(null);
+  private selectedPolicy = this.selectedPolicySource.asObservable();
 
   callback: Function;
 
@@ -67,9 +67,11 @@ export class ClaimService {
       })
     );
   }
-
-  setClaimData(userId: string, policyId: string, contractId: string) {
-    this.startClaimData.next({ userId, policyId, contractId });
+  getSelectedPolicy() {
+    return this.selectedPolicy;
+  }
+  setSelectedPolicy(userId: string, policyId: string, contractId: string) {
+    this.selectedPolicySource.next({ userId, policyId, contractId });
   }
 
   createClaim(userId: string, policyId: string, contractId: string) {

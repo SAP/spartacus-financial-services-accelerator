@@ -17,10 +17,10 @@ export class ClaimPoliciesEffects {
       if (payload === undefined || payload.userId === undefined) {
         payload = {
           userId: this.claimPoliciesData.userId,
-          claimsCategoryCode: this.claimPoliciesData.claimsCategoryCode
+          policyCategoryCode: this.claimPoliciesData.policyCategoryCode
         };
       }
-      return this.claimPoliciesService.getPoliciesByCategory(payload.userId, payload.claimsCategoryCode)
+      return this.claimPoliciesService.getPoliciesByCategory(payload.userId, payload.policyCategoryCode)
         .pipe(
           map((claimPolicies: any) => {
             return new fromActions.LoadClaimPoliciesSuccess(claimPolicies);

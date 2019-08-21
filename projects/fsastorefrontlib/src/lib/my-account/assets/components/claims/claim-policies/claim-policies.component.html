@@ -4,7 +4,7 @@
             <div *ngFor="let claimPolicy of policies.insurancePolicies; let i = index"
                 class="fs-items col-sm-6 col-md-4">
                 <div class="fs-items-feature-wrapper"
-                    (click)="isSelected = i; selectClaim(claimPolicy.policyNumber, claimPolicy.contractNumber);"
+                    (click)="isSelected = i; selectPolicy(claimPolicy.policyNumber, claimPolicy.contractNumber);"
                     [ngClass]="{selected: isSelected === i}">
                     <h3 class="section-header-heading text-uppercase">
                         {{claimPolicy.categoryData?.name}} {{ 'policy.policy' | cxTranslate }}

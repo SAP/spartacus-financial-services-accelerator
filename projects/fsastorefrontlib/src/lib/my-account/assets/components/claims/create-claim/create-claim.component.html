@@ -8,7 +8,7 @@
                 </span>
             </label>
         </div>
-        <button class="primary-button" [disabled]="!confirm || !(claimCheck | async)"
+        <button class="primary-button" [disabled]="!confirm || !(isPolicySelected$ | async)"
             (click)="startClaim()">{{ 'claim.createClaim' | cxTranslate }}</button>
     </div>
 </div>

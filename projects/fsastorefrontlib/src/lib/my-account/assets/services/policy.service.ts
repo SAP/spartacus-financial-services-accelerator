@@ -62,11 +62,11 @@ export class PolicyService {
     );
   }
 
-  loadClaimPolicies(claimsCategoryCode: string) {
+  loadClaimPolicies(policyCategoryCode: string) {
     this.store.dispatch(
       new fromAction.LoadClaimPolicies({
         userId: this.policyData.userId,
-        claimsCategoryCode: claimsCategoryCode
+        policyCategoryCode: policyCategoryCode
       })
     );
   }

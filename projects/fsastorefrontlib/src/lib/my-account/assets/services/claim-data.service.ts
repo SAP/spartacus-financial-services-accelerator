@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Claim } from '../store/reducers/claim.reducer';
 
-export interface ClaimInfo {
+export interface SelectedPolicy {
   userId: string;
   policyId: string;
   contractId: string;

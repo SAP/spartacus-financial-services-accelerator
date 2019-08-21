@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs/internal/observable/throwError';
+import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { throwError } from 'rxjs/internal/observable/throwError';
+import { catchError } from 'rxjs/operators';
 
 const FULL_PARAMS = 'fields=FULL';
 
@@ -12,22 +12,22 @@ export class OccPolicyService {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService
-    ) {}
+  ) { }
 
   protected getPoliciesEndpoint(userId: string) {
     const policiesEndpoint = '/users/' + userId + '/policies';
     return (
       (this.occEndpointService.getBaseEndpoint() +
-      policiesEndpoint
-    ));
+        policiesEndpoint
+      ));
   }
 
   protected getPolicyEndpoint(userId: string, policyId: string, contractId: string) {
     const policyEndpoint = '/users/' + userId + '/policies/' + policyId + '/contracts/' + contractId;
     return (
       (this.occEndpointService.getBaseEndpoint() +
-      policyEndpoint
-    ));
+        policyEndpoint
+      ));
   }
 
   public getPolicies(userId: string): Observable<any> {
@@ -39,10 +39,10 @@ export class OccPolicyService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public getPoliciesByCategory(userId: string, claimsCategoryCode: string): Observable<any> {
+  public getPoliciesByCategory(userId: string, policyCategoryCode: string): Observable<any> {
     const url = this.getPoliciesEndpoint(userId);
-    const category = 'category=' + claimsCategoryCode + '&fields=DEFAULT';
-    const params = new HttpParams({fromString: category});
+    const category = 'category=' + policyCategoryCode + '&fields=DEFAULT';
+    const params = new HttpParams({ fromString: category });
 
     return this.http
       .get(url, { params: params })

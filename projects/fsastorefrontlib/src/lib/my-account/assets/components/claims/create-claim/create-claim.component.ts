@@ -14,20 +14,21 @@ export class CreateClaimComponent implements OnInit {
     private routingService: RoutingService
   ) { }
 
-  claimCheck;
+  isPolicySelected$;
 
   ngOnInit() {
-    this.claimCheck = this.claimService.claimInfo; // needed to check when a claim is selected and pass that info to template
+    // needed to check when a claim is selected and pass that info to template
+    this.isPolicySelected$ = this.claimService.getSelectedPolicy();
   }
 
   startClaim() {
-    this.claimService.claimInfo.subscribe(data => {
+    this.claimService.getSelectedPolicy().subscribe(data => {
       if (data) {
         this.claimService.createClaim(data.userId, data.policyId, data.contractId);
         this.routingService.go({
           cxRoute: 'claims'
         });
       }
-    });
+    }).unsubscribe();
   }
 }

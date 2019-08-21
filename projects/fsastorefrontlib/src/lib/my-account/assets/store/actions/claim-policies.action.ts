@@ -8,7 +8,7 @@ export class LoadClaimPolicies implements Action {
   readonly type = LOAD_CLAIM_POLICIES;
   constructor(public payload: {
     userId: string;
-    claimsCategoryCode: string;
+    policyCategoryCode: string;
   }) { }
 }
 
