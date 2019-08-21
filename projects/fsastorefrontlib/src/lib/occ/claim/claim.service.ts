@@ -15,13 +15,13 @@ constructor(
   protected occEndpointService: OccEndpointsService
   ) {}
 
-protected getClaimsEndpoint(userId: string) {
+  protected getClaimsEndpoint(userId: string) {
     const claimsEndpoint = '/users/' + userId + '/claims';
     return (
       (this.occEndpointService.getBaseEndpoint() +
-           claimsEndpoint
+          claimsEndpoint
     ));
-}
+  }
 
   public getClaims(userId: string): Observable<any> {
     const url = this.getClaimsEndpoint(userId);
@@ -39,6 +39,18 @@ protected getClaimsEndpoint(userId: string) {
 
     return this.http
       .delete(url, { headers })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  public createClaim(userId: string, policyId: string, contractId: string) {
+    const url = this.getClaimsEndpoint(userId) + '/create?contractId=' + contractId + '&policyId=' + policyId;
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+
+    return this.http
+      .post(url, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 }

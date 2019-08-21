@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Claim } from '../store/reducers/claim.reducer';
 
+export interface SelectedPolicy {
+  userId: string;
+  policyId: string;
+  contractId: string;
+}
 
 @Injectable()
 export class ClaimDataService {
   private _userId = 'anonymous';
   private _claims: Claim[];
 
-  constructor() {}
+  constructor() { }
 
   set userId(val) {
     this._userId = val;

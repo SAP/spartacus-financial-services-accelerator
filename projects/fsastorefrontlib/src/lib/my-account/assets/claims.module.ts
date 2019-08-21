@@ -1,18 +1,19 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { AuthGuard, I18nModule, ConfigModule, CmsConfig, RoutesConfig, RoutingConfig } from '@spartacus/core';
-import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
-
-import { ClaimsComponent } from './components/claims/claims.component';
-import { DeleteClaimDialogComponent } from '../assets/components/claims/delete-claim-dialog/delete-claim-dialog.component';
-import { ClaimService } from './services/claim.service';
-import { ClaimDataService } from './services/claim-data.service';
+import { AuthGuard, CmsConfig, ConfigModule, I18nModule, RoutesConfig, RoutingConfig } from '@spartacus/core';
+import { CmsPageGuard, PageLayoutComponent, SpinnerModule } from '@spartacus/storefront';
 import { OccClaimService } from '../../occ/claim/claim.service';
+import { DeleteClaimDialogComponent } from '../assets/components/claims/delete-claim-dialog/delete-claim-dialog.component';
+import { ClaimPoliciesComponent } from './components/claims/claim-policies/claim-policies.component';
+import { ClaimsComponent } from './components/claims/claims.component';
+import { CreateClaimComponent } from './components/claims/create-claim/create-claim.component';
+import { ClaimDataService } from './services/claim-data.service';
+import { ClaimService } from './services/claim.service';
 
-import { SpinnerModule } from '@spartacus/storefront';
+
 
 const routes: Routes = [
   {
@@ -35,17 +36,25 @@ const routes: Routes = [
     NgSelectModule,
     SpinnerModule,
     RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig> {
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
         AccountMyClaimsSPAComponent: {
           component: ClaimsComponent
+        },
+        ClaimActivePoliciesFlex: {
+          component: ClaimPoliciesComponent,
+          guards: [AuthGuard]
+        },
+        StartClaimComponentFlex: {
+          component: CreateClaimComponent,
+          guards: [AuthGuard]
         }
       }
     })
   ],
-  declarations: [ClaimsComponent, DeleteClaimDialogComponent],
-  exports: [ClaimsComponent],
-  providers: [ClaimService, ClaimDataService, OccClaimService],
-  entryComponents: [ClaimsComponent, DeleteClaimDialogComponent]
+  declarations: [ClaimsComponent, DeleteClaimDialogComponent, ClaimPoliciesComponent, CreateClaimComponent],
+  exports: [ClaimsComponent, ClaimPoliciesComponent],
+  providers: [ClaimService, ClaimDataService, ClaimPoliciesComponent, OccClaimService],
+  entryComponents: [ClaimsComponent, DeleteClaimDialogComponent, ClaimPoliciesComponent, CreateClaimComponent]
 })
-export class ClaimsModule {}
+export class ClaimsModule { }

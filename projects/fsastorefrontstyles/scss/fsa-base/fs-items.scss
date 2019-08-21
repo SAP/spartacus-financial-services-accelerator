@@ -25,15 +25,9 @@ ul {
         }
       }
       &.background-hover-secondary {
-          &:hover {
-              background-color: var(--cx-color-secondary);
-          }
-      }
-      .image-wrapper {
-        flex: 0 0 auto;
-        width: 60px;
-        height: 60px;
-        padding: 4px;
+        &:hover {
+          background-color: var(--cx-color-secondary);
+        }
       }
     }
     &-wrapper {

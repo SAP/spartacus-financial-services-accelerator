@@ -6,6 +6,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap } from 'rxjs/operators';
 import { OccClaimService} from './../../../../occ/claim/claim.service';
 import { ClaimDataService } from '../../services/claim-data.service';
+import { Claim } from './../reducers/claim.reducer';
 
 @Injectable()
 export class ClaimEffects {
@@ -42,6 +43,25 @@ export class ClaimEffects {
         catchError(error => of(new fromActions.DeleteClaimFail(error)))
       )
     )
+  );
+
+
+  @Effect()
+  createClaim$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.CREATE_CLAIM),
+    map((action: fromActions.CreateClaim) => action.payload),
+    mergeMap(payload => {
+      return this.claimService
+        .createClaim(payload.userId, payload.policyId, payload.contractId)
+        .pipe(
+          map((claim: Claim) => {
+            return new fromActions.CreateClaimSuccess(claim);
+          }),
+          catchError(error =>
+            of(new fromActions.CreateClaimFail(error))
+          )
+        );
+    })
   );
 
   constructor(

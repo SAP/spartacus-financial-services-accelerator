@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { AuthService } from '@spartacus/core';
+import { BehaviorSubject } from 'rxjs';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
-import { ClaimDataService } from './claim-data.service';
 import * as fromSelector from '../store/selectors';
-import { AuthService } from '@spartacus/core';
+import { ClaimDataService, SelectedPolicy } from './claim-data.service';
 
 
 @Injectable()
@@ -16,6 +17,9 @@ export class ClaimService {
   ) {
     this.initClaims();
   }
+
+  private selectedPolicySource = new BehaviorSubject<SelectedPolicy>(null);
+  private selectedPolicy = this.selectedPolicySource.asObservable();
 
   callback: Function;
 
@@ -48,18 +52,34 @@ export class ClaimService {
   }
 
   loadClaims() {
-      this.store.dispatch(
-        new fromAction.LoadClaims({
-          userId: this.claimData.userId,
-        })
-      );
-    }
+    this.store.dispatch(
+      new fromAction.LoadClaims({
+        userId: this.claimData.userId,
+      })
+    );
+  }
 
   removeClaim(userId: string, claimId: string) {
     this.store.dispatch(
       new fromAction.DeleteClaim({
-         userId: userId,
-         claimId: claimId
+        userId: userId,
+        claimId: claimId
+      })
+    );
+  }
+  getSelectedPolicy() {
+    return this.selectedPolicy;
+  }
+  setSelectedPolicy(userId: string, policyId: string, contractId: string) {
+    this.selectedPolicySource.next({ userId, policyId, contractId });
+  }
+
+  createClaim(userId: string, policyId: string, contractId: string) {
+    this.store.dispatch(
+      new fromAction.CreateClaim({
+        userId: userId,
+        policyId: policyId,
+        contractId: contractId
       })
     );
   }

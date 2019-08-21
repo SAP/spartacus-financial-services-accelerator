@@ -43,6 +43,13 @@ export function reducer(
         ...state,
         loaded: false
       };
+
+      case fromAction.CREATE_CLAIM_SUCCESS: {
+        return {
+          ...state,
+          refresh: false,
+        };
+      }
   }
 
   return state;
