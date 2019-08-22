@@ -15,7 +15,7 @@
                   ' is-active': i === activeStepIndex,
                   ' is-disabled': i > activeStepIndex
                 }" [routerLink]="{ cxRoute: step.routeName, params: {code: activeCategory} } | cxUrl">
-                <div class="FSA-icon" [ngClass]="step.icon"></div>
+                <div class="FSA-icon" [ngClass]="[activeStepIndex > i ? 'icon-FSA-ok' : step.icon]"></div>
                 <p class="label  position-relative mb-2">{{ step.name | cxTranslate }}</p>
               </div>
             </div>
