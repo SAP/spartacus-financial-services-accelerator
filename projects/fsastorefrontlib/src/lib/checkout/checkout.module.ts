@@ -15,11 +15,14 @@ import {
   CardModule,
   CartNotEmptyGuard,
   CmsPageGuard,
+  DeliveryModeSetGuard,
   MediaModule,
   PageComponentModule,
   PageLayoutComponent,
   PaymentDetailsSetGuard,
   PaymentFormModule,
+  PaymentMethodModule,
+  ShippingAddressSetGuard,
   SpinnerModule
 } from '@spartacus/storefront';
 import { CatagoryStepGuard } from '../../cms-components/checkout/guards/category-step-guard';
@@ -35,8 +38,8 @@ import { QuoteReviewComponent } from './assets/components/quote-review/quote-rev
 import { FSCartService } from './assets/services';
 import { FSCategoryService } from './assets/services/fs-category.service';
 import { effects } from './assets/store/effects/index';
-import { FsPaymentMethodModule } from './assets/components/payment-method/fs-payment-method.module';
 import { FsPaymentMethodComponent } from './assets/components/payment-method/fs-payment-method.component';
+import { FsPaymentFormModule } from './assets/components/payment-method/payment-form/fs-payment-form.module';
 
 const routes: Routes = [
   {
@@ -102,8 +105,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    FsPaymentMethodModule,
-    PaymentFormModule,
+    FsPaymentFormModule,
+    PaymentMethodModule,
     I18nModule,
     NgbTooltipModule,
     CommonModule,
@@ -117,6 +120,15 @@ const routes: Routes = [
     EffectsModule.forFeature(effects),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
+        CheckoutPaymentDetails: {
+          component: FsPaymentMethodComponent,
+          guards: [
+            AuthGuard,
+            CartNotEmptyGuard,
+            ShippingAddressSetGuard,
+            DeliveryModeSetGuard,
+          ],
+        },
         AddOptionsFlex: {
           // mapping hybris component (defined in impex) - This is acctualy flexType defined in impex for that component
           component: AddOptionsComponent // to SPA component
@@ -147,23 +159,26 @@ const routes: Routes = [
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
+    FsPaymentMethodComponent
   ],
   exports: [
     I18nModule,
-    FsPaymentMethodModule,
     PaymentFormModule,
+    PaymentMethodModule,
     QuoteReviewComponent,
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
+    FsPaymentMethodComponent
   ],
   entryComponents: [
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
     QuoteReviewComponent,
     FinalReviewComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
+    FsPaymentMethodComponent
   ],
   providers: [FSCartService, OccFSCartService, FSCategoryService]
 })
