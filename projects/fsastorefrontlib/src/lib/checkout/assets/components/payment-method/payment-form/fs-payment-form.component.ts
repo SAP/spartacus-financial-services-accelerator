@@ -11,17 +11,6 @@ import { Country } from '@spartacus/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FsPaymentFormComponent extends PaymentFormComponent {
-  @Input()
-  paymentMethodsCount: number;
-
-  @Output()
-  goBack = new EventEmitter<any>();
-
-  @Output()
-  closeForm = new EventEmitter<any>();
-
-  @Output()
-  setPaymentDetails = new EventEmitter<any>();
   showSameAsShippingAddressCheckbox(): Observable<boolean> {
     return combineLatest([this.countries$, this.shippingAddress$]).pipe(
       map(([countries, address]) => {
