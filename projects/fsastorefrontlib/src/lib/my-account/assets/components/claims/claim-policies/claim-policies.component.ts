@@ -19,6 +19,8 @@ export class ClaimPoliciesComponent implements OnInit {
   ) { }
 
   claimPolicies$;
+  claimPoliciesLoaded$;
+  isSelected: number;
 
   ngOnInit() {
     // Fixing insurances_auto until:
@@ -26,6 +28,7 @@ export class ClaimPoliciesComponent implements OnInit {
     // we create dynamic content for FNOL page
     this.policyService.loadClaimPolicies('insurances_auto');
     this.claimPolicies$ = this.store.pipe(select(fromPolicyStore.getClaimPolicies));
+    this.claimPoliciesLoaded$ = this.store.pipe(select(fromPolicyStore.getClaimPoliciesLoaded));
   }
   public getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
