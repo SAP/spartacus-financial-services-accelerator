@@ -20,8 +20,6 @@ import {
   PageLayoutComponent,
   PaymentDetailsSetGuard,
   PaymentFormModule,
-  PaymentMethodComponent,
-  PaymentMethodModule,
   SpinnerModule
 } from '@spartacus/storefront';
 import { CatagoryStepGuard } from '../../cms-components/checkout/guards/category-step-guard';
@@ -37,6 +35,8 @@ import { QuoteReviewComponent } from './assets/components/quote-review/quote-rev
 import { FSCartService } from './assets/services';
 import { FSCategoryService } from './assets/services/fs-category.service';
 import { effects } from './assets/store/effects/index';
+import { FsPaymentMethodModule } from './assets/components/payment-method/fs-payment-method.module';
+import { FsPaymentMethodComponent } from './assets/components/payment-method/fs-payment-method.component';
 
 const routes: Routes = [
   {
@@ -102,7 +102,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    PaymentMethodModule,
+    FsPaymentMethodModule,
     PaymentFormModule,
     I18nModule,
     NgbTooltipModule,
@@ -128,7 +128,7 @@ const routes: Routes = [
           component: QuoteReviewComponent
         },
         PaymentDetailsFlex: {
-          component: PaymentMethodComponent
+          component: FsPaymentMethodComponent
         },
         FinalReviewFlex: {
           component: FinalReviewComponent
@@ -151,7 +151,7 @@ const routes: Routes = [
   ],
   exports: [
     I18nModule,
-    PaymentMethodModule,
+    FsPaymentMethodModule,
     PaymentFormModule,
     QuoteReviewComponent,
     FinalReviewComponent,
