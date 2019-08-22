@@ -1,43 +1,83 @@
 <h2 class="heading-headline">{{ 'policy.policies' | cxTranslate }}</h2>
-<ng-container *ngIf="policies$ | async as policies">
-  <ng-container *ngIf="policiesLoaded$ | async; else loading">
-    <div class="row" *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
+<ng-container *ngIf="(policies$ | async) as policies">
+  <ng-container *ngIf="(policiesLoaded$ | async); else loading">
+    <div class="row" *ngIf="(policies | json) != '{}'; else noPolicies">
       <div *ngFor="let policy of policies.insurancePolicies" class="col-md-4">
         <div class="info-card border-bottom-secondary">
           <div class="info-card-title border-bottom-secondary">
             <span class="image-wrapper">
-              <img class="image-item" [src]="getBaseUrl()+policy.mainProduct.coverageProduct.images[0].url" alt="">
+              <img
+                class="image-item"
+                [src]="
+                  getBaseUrl() +
+                  policy.mainProduct.coverageProduct.images[0].url
+                "
+                alt=""
+              />
             </span>
             <h4 class="info-card-caption color-secondary">
-              {{policy.categoryData?.name}}
+              {{ policy.categoryData?.name }}
             </h4>
             <div class="info-card-caption color-secondary">
-              {{policy.contractNumber}}
+              {{ policy.contractNumber }}
             </div>
           </div>
           <div class="info-card-details-wrapper">
             <div class="info-card-data">
               <span class="title">{{ 'fscommon.product' | cxTranslate }}</span>
-              <span class="value">{{policy.mainProduct?.coverageProduct?.name}}</span>
+              <span class="value">{{
+                policy.mainProduct?.coverageProduct?.name
+              }}</span>
             </div>
-            <div *ngIf="policy.insuredObjects[0]?.insuredObjectItems" class="info-card-data">
-              <span *ngIf="policy.insuredObjects[0]?.insuredObjectItems.length > 0" class="title">{{policy.insuredObjects[0]?.insuredObjectItems[0]?.value}}</span>
-              <span *ngIf="policy.insuredObjects[0]?.insuredObjectItems.length > 1" class="value">{{policy.insuredObjects[0]?.insuredObjectItems[1]?.value}}</span></div>
-            <div class="info-card-data">
-              <span class="title">{{policy.policyPremium?.formattedValue}} / {{policy.paymentFrequency}}</span>
-              <span class="value ">{{policy.paymentMethod?.paymentOption | uppercase}}</span>
+            <div
+              *ngIf="policy.insuredObjects[0]?.insuredObjectItems"
+              class="info-card-data"
+            >
+              <span
+                *ngIf="policy.insuredObjects[0]?.insuredObjectItems.length > 0"
+                class="title"
+                >{{
+                  (policy.insuredObjects[0]?.insuredObjectItems)[0]?.value
+                }}</span
+              >
+              <span
+                *ngIf="policy.insuredObjects[0]?.insuredObjectItems.length > 1"
+                class="value"
+                >{{
+                  (policy.insuredObjects[0]?.insuredObjectItems)[1]?.value
+                }}</span
+              >
             </div>
             <div class="info-card-data">
-              <span class="title">{{policy.policyStartDate }} - {{policy.policyEndDate}}</span>
-              {{policy.policyStartDate}}
+              <span class="title"
+                >{{ policy.policyPremium?.formattedValue }} /
+                {{ policy.paymentFrequency }}</span
+              >
+              <span class="value ">{{
+                policy.paymentMethod?.paymentOption | uppercase
+              }}</span>
+            </div>
+            <div class="info-card-data">
+              <span class="title"
+                >{{ policy.policyStartDate }} - {{ policy.policyEndDate }}</span
+              >
+              {{ policy.policyStartDate }}
             </div>
           </div>
           <div class="info-card-button-wrapper border-top-secondary">
             <div class="info-card-button">
-                <button class="secondary-button" routerLink="/my-account/my-policies/{{policy.policyNumber}}/{{policy.contractNumber}}" routerLinkActive="active">
-                  {{ 'fscommon.details' | cxTranslate }}
-                </button>
-                <button class="primary-button">{{ 'claim.makeClaim' | cxTranslate }}</button>
+              <button
+                class="secondary-button"
+                routerLink="/my-account/my-policies/{{ policy.policyNumber }}/{{
+                  policy.contractNumber
+                }}"
+                routerLinkActive="active"
+              >
+                {{ 'fscommon.details' | cxTranslate }}
+              </button>
+              <button class="primary-button">
+                {{ 'claim.makeClaim' | cxTranslate }}
+              </button>
             </div>
           </div>
         </div>
