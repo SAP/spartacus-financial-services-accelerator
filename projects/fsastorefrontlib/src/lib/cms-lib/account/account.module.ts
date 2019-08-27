@@ -42,7 +42,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'accountOverview',
-      pageLabel: 'bank-account-overview'
+      pageLabel: 'account-overview'
     },
     component: PageLayoutComponent
   },
