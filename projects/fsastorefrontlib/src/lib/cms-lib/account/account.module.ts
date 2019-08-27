@@ -32,6 +32,24 @@ const routes: Routes = [
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
+      cxRoute: 'orderHistory',
+      pageLabel: 'orders'
+    },
+    component: PageLayoutComponent
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'accountOverview',
+      pageLabel: 'bank-account-overview'
+    },
+    component: PageLayoutComponent
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
       cxRoute: 'consentManagment',
       pageLabel: 'consents'
     },
