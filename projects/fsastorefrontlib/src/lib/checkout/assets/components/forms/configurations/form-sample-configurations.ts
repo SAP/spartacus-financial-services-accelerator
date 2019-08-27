@@ -67,6 +67,7 @@ export class FormSampleConfigurations {
             label: 'Annual Mileage',
             name: 'vehicleAnnualMileage',
             validation: [Validators.required],
+            placeholder: true
           },
           {
             type: 'input',
@@ -125,8 +126,7 @@ export class FormSampleConfigurations {
             label: 'Driver`s Category',
             name: 'driverCategory',
             options: ['Main'],
-            disabled: true,
-            placeholder: 'Main'
+            disabled: true
           },
           {
             type: 'datepicker',

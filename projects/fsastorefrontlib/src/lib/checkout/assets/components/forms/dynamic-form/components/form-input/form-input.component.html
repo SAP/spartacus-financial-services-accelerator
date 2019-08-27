@@ -1,12 +1,19 @@
 <div
   [hidden]="config.hidden"
   class="dynamic-field form-input"
-  [formGroup]="group">
+  [formGroup]="group"
+>
   <label>{{ config.label }}</label>
   <input
     type="text"
-    [attr.placeholder]="config.placeholder"
+    required
+    [placeholder]="
+      config.placeholder === true &&
+      this.group.controls[config.name].errors &&
+      this.group.controls[config.name].touched
+        ? ('fscommon.fieldRequired' | cxTranslate)
+        : ''
+    "
     [formControlName]="config.name"
-    >
-    <div class="error" *ngIf="this.group.controls[config.name].errors"></div>
+  />
 </div>

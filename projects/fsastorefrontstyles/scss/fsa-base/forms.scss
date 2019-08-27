@@ -17,8 +17,18 @@ fsa-form-component {
       flex: 1;
       margin-right: 2rem;
       text-align: right;
+      // if we decide on asterisk on required fields
+      // position: relative;
+      // &:after {
+      //   content: '*';
+      //   display: block;
+      //   position: absolute;
+      //   right: -10px;
+      //   top: 0px;
+      // }
     }
-    input, select {
+    input,
+    select {
       width: 50%;
       border: 1px solid var(--cx-color-3);
       border-radius: 4px;
@@ -28,8 +38,11 @@ fsa-form-component {
         cursor: not-allowed;
         background-color: var(--cx-color-5);
       }
+      &[required]::placeholder {
+        color: var(--cx-color-danger);
+      }
     }
-    &.form-title  {
+    &.form-title {
       border-top: 1px solid var(--cx-color-3);
       margin-top: 2rem;
       width: 100%;
@@ -40,6 +53,11 @@ fsa-form-component {
       }
     }
   }
+  fsa-form-title:first-of-type {
+    .form-title {
+      border-top: none;
+    }
+  }
   .form-button {
     display: flex;
     justify-content: flex-end;
@@ -47,5 +65,12 @@ fsa-form-component {
     button {
       max-width: 50%;
     }
+  }
+}
+// Global form errors and warnings
+.ng-invalid.ng-touched {
+  border-color: var(--cx-color-danger);
+  &:focus {
+    outline-color: var(--cx-color-danger);
   }
 }

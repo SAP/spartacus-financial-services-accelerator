@@ -13,8 +13,9 @@ export interface FieldConfig {
   disabled?: boolean;
   label?: string;
   name?: string;
+  group?: string;
   options?: string[];
-  placeholder?: string;
+  placeholder?: boolean;
   type: string;
   validation?: ValidatorFn[];
   value?: any;

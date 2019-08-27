@@ -6,4 +6,4 @@ import { FormGenericComponent } from '../form-generic.component';
   templateUrl: './form-input.component.html'
 })
 
-export class FormInputComponent extends FormGenericComponent {}
+export class FormInputComponent extends FormGenericComponent { }

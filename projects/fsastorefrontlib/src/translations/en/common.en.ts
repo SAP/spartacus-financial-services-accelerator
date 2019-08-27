@@ -67,6 +67,7 @@ export const fscommon = {
     whoOrWhatIsInsured: 'Who or What Is Insured',
     investmentDetails: 'Investment Details',
     whatDoesItCostMe: 'What Does It Cost Me?',
+    fieldRequired: 'This field is required!',
     register: {
       dateOfBirthMinimumAge: 'Must be over 18 years old',
       enterValidEmail: 'Please enter a valid email',
