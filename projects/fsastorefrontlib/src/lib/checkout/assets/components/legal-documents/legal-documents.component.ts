@@ -11,8 +11,7 @@ export class FsaLegalDocumentsComponent implements OnInit {
 
   constructor(
     protected cartService: CartService,
-    protected config: CmsConfig,
-    protected occEndPointService: OccEndpointsService
+    protected config: CmsConfig
   ) { }
 
   ngOnInit() {
