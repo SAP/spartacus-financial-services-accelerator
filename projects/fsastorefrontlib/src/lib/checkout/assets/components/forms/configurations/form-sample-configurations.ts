@@ -68,7 +68,7 @@ export class FormSampleConfigurations {
             label: 'Annual Mileage',
             name: 'vehicleAnnualMileage',
             validation: [Validators.required, Validators.maxLength(5)],
-            error: 'fscommon.fieldRequired'
+            error: 'fscommon.lessThan100K'
           },
           {
             type: 'input',

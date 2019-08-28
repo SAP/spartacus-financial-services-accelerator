@@ -1,10 +1,19 @@
 <div class="row justify-content-end">
   <div class="col-xs-12 col-md-6">
-    <div
-      class="error"
-      *ngIf="warn?.errors && warn?.touched && parentConfig?.error"
+    <ng-container
+      *ngIf="warn?.invalid && warn?.touched && warn?.errors?.required"
     >
-      {{ parentConfig?.error | cxTranslate }}
-    </div>
+      <div class="form-text">
+        Please enter a valid value
+      </div>
+    </ng-container>
+    <ng-container
+      *ngIf="warn?.invalid && warn?.touched && !warn?.errors?.required"
+    >
+      <div class="form-text">
+        {{ parentConfig?.error | cxTranslate }}
+      </div>
+    </ng-container>
+    {{ !warn?.errors?.required | json }}
   </div>
 </div>
