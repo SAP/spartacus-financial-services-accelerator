@@ -6,7 +6,10 @@ import {
   Output
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Cart, OrderEntry, RoutingService } from '@spartacus/core';
+import {
+  OrderEntry,
+  RoutingService
+} from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { FSCartService } from '../../services';
@@ -25,7 +28,6 @@ export class AddOptionsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
   ) { }
 
-  cart$: Observable<Cart>;
   entries$: Observable<OrderEntry[]>;
   checkoutStepUrlNext: string;
 
@@ -36,7 +38,6 @@ export class AddOptionsComponent implements OnInit {
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
       this.activatedRoute
     );
-    this.cart$ = this.cartService.getActive();
     this.entries$ = this.cartService
       .getEntries()
       .pipe(filter(entries => entries.length > 0));

@@ -1,0 +1,15 @@
+<div class="border-color-7 py-3 px-2">
+  <ng-container *ngIf="cart$ | async as cart">
+    <ng-container *ngFor="let entry of cart.deliveryOrderGroups[0]?.entries;">
+      <ng-container *ngIf="entry.product?.documents.length > 0">
+        <ul class="bulleted-list pl-5 pt-3 mb-0">
+          <ng-container *ngFor="let document of entry.product?.documents">
+            <li class="pb-3 pl-2">
+              <a [href]="getBaseUrl() + document.downloadUrl" target="_blank">{{ document.altText}}</a>
+            </li>
+          </ng-container>
+        </ul>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+</div>

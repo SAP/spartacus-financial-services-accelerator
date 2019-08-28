@@ -1,0 +1,30 @@
+<form name="form" #form="ngForm">
+  <label class="checkbox-label">
+    <input type="checkbox" name="readAndAgree" ngModel required>
+    {{'fscommon.legal.readAndAgree'| cxTranslate }}
+    <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
+  </label>
+  <label class="checkbox-label">
+    <input type="checkbox" name="actOnMyBehalf" ngModel required>
+    {{'fscommon.legal.actOnOwnBehalf'| cxTranslate }}
+    <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
+  </label>
+  <label class="checkbox-label">
+    <input type="checkbox" name="usePersonalData" ngModel required>
+    {{'fscommon.legal.usePersonalData'| cxTranslate }}
+    <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
+  </label>
+  <label class="checkbox-label">
+    <input type="checkbox" name="authorizedToAccept" ngModel required>
+    {{'fscommon.legal.iAmAuthorized'| cxTranslate }}
+    <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
+  </label>
+  <div class="row mt-5">
+    <div class="col-6">
+      <button class="secondary-button">{{'common.back'| cxTranslate }}</button>
+    </div>
+    <div class="col-6">
+      <button class="primary-button" [disabled]="!form.valid || !form.dirty">{{'fscommon.next'| cxTranslate }}</button>
+    </div>
+  </div>
+</form>

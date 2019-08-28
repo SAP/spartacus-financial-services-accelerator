@@ -1,18 +1,19 @@
-@import '../mixins-fsa';
-@import '../theme';
+@import "../mixins-fsa";
+@import "../theme";
 
 .checkbox-label {
-	display: block;
+	padding-left: 28px;
 	position: relative;
+	cursor: pointer;
 	input {
 		display: none;
 	}
 	input:checked ~ .checkbox-text:before {
-		color: var(--cx-color-2);
+		color: var(--cx-color-primary);
+		border: 2px solid var(--cx-color-primary);
 	}
 	.checkbox-text {
 		line-height: 1;
-		color: var(--cx-color-3);
 		cursor: pointer;
 		text-transform: none;
 		font-size: 15px;
@@ -22,7 +23,7 @@
 			font-size: 11px;
 			font-weight: bold;
 			position: absolute;
-			padding: 0 0 1px 1px;
+			padding: 1px 0 0 2px;
 			top: 0;
 			left: 0;
 			height: 18px;
@@ -34,7 +35,7 @@
 		}
 	}
 }
-.form-check input[type=checkbox]:checked {
+.form-check input[type="checkbox"]:checked {
 	border-color: var(--cx-color-primary);
 	background-color: var(--cx-color-primary);
 }

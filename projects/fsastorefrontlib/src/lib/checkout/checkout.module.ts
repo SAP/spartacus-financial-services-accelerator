@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { EffectsModule } from '@ngrx/effects';
@@ -31,6 +32,8 @@ import { AddOptionsComponent } from './assets/components/add-options/add-options
 import { FSCheckoutProgressComponent } from './assets/components/checkout-progress/fs-checkout-progress.component';
 import { FSCheckoutProgressModule } from './assets/components/checkout-progress/fs-checkout-progress.module';
 import { FinalReviewComponent } from './assets/components/final-review/final-review.component';
+import { FsaLegalCheckboxesComponent } from './assets/components/legal-checkboxes/legal-checkboxes.component';
+import { FsaLegalDocumentsComponent } from './assets/components/legal-documents/legal-documents.component';
 import { FSMiniCartComponent } from './assets/components/mini-cart/mini-cart.component';
 import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
 import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
@@ -112,6 +115,7 @@ const routes: Routes = [
     SpinnerModule,
     AccordionModule,
     CardModule,
+    FormsModule,
     FSCheckoutProgressModule,
     RouterModule.forChild(routes),
     EffectsModule.forFeature(effects),
@@ -138,6 +142,12 @@ const routes: Routes = [
         },
         DynamicProgressBarStepsComponent: {
           component: FSCheckoutProgressComponent
+        },
+        LegalDocumentsFlex: {
+          component: FsaLegalDocumentsComponent
+        },
+        LegalChecksFlex: {
+          component: FsaLegalCheckboxesComponent
         }
       }
     })
@@ -147,7 +157,9 @@ const routes: Routes = [
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
+    FsaLegalDocumentsComponent,
+    FsaLegalCheckboxesComponent
   ],
   exports: [
     I18nModule,
@@ -156,14 +168,18 @@ const routes: Routes = [
     QuoteReviewComponent,
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
+    FsaLegalDocumentsComponent,
+    FsaLegalCheckboxesComponent
   ],
   entryComponents: [
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
     QuoteReviewComponent,
     FinalReviewComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
+    FsaLegalDocumentsComponent,
+    FsaLegalCheckboxesComponent
   ],
   providers: [FSCartService, OccFSCartService, FSCategoryService]
 })
