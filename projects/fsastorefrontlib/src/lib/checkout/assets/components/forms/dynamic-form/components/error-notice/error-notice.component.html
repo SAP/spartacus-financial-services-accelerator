@@ -4,7 +4,7 @@
       *ngIf="warn?.invalid && warn?.touched && warn?.errors?.required"
     >
       <div class="form-text">
-        Please enter a valid value
+        {{ 'fscommon.enterValidValue' | cxTranslate }}
       </div>
     </ng-container>
     <ng-container
@@ -14,6 +14,5 @@
         {{ parentConfig?.error | cxTranslate }}
       </div>
     </ng-container>
-    {{ !warn?.errors?.required | json }}
   </div>
 </div>
