@@ -1,15 +1,16 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { I18nModule } from '@spartacus/core';
-
 import { DynamicFieldDirective } from './components/dynamic-field/dynamic-field.directive';
-import { DynamicFormComponent } from './containers/dynamic-form/dynamic-form.component';
+import { ErrorNoticeComponent } from './components/error-notice/error-notice.component';
 import { FormButtonComponent } from './components/form-button/form-button.component';
+import { FormDatePickerComponent } from './components/form-datepicker/form-datepicker.component';
 import { FormInputComponent } from './components/form-input/form-input.component';
 import { FormSelectComponent } from './components/form-select/form-select.component';
 import { FormTitleComponent } from './components/form-title/form-title.component';
-import { FormDatePickerComponent } from './components/form-datepicker/form-datepicker.component';
+import { DynamicFormComponent } from './containers/dynamic-form/dynamic-form.component';
+
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { FormDatePickerComponent } from './components/form-datepicker/form-datep
     FormInputComponent,
     FormSelectComponent,
     FormTitleComponent,
-    FormDatePickerComponent
+    FormDatePickerComponent,
+    ErrorNoticeComponent
   ],
   exports: [
     DynamicFormComponent
@@ -38,4 +40,4 @@ import { FormDatePickerComponent } from './components/form-datepicker/form-datep
     FormDatePickerComponent
   ]
 })
-export class DynamicFormModule {}
+export class DynamicFormModule { }

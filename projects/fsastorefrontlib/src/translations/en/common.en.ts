@@ -68,6 +68,8 @@ export const fscommon = {
     investmentDetails: 'Investment Details',
     whatDoesItCostMe: 'What Does It Cost Me?',
     fieldRequired: 'This field is required!',
+    dateInPast: 'Date must be in the past!',
+    dateInFuture: 'Date must be in the future!',
     register: {
       dateOfBirthMinimumAge: 'Must be over 18 years old',
       enterValidEmail: 'Please enter a valid email',

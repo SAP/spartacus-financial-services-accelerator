@@ -6,4 +6,4 @@ import { FormGenericComponent } from '../form-generic.component';
   templateUrl: './form-datepicker.component.html'
 })
 
-export class FormDatePickerComponent extends FormGenericComponent {}
+export class FormDatePickerComponent extends FormGenericComponent { }

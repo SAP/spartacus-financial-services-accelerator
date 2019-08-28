@@ -15,11 +15,12 @@ export interface FieldConfig {
   name?: string;
   group?: string;
   options?: string[];
-  placeholder?: boolean;
+  placeholder?: string;
   type: string;
   validation?: ValidatorFn[];
   value?: any;
   hidden?: boolean;
+  error?: string;
 }
 
 export enum FormSubmitType {

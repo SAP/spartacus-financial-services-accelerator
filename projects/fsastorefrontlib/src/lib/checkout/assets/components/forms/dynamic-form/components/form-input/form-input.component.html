@@ -1,19 +1,20 @@
 <div
   [hidden]="config.hidden"
-  class="dynamic-field form-input"
+  class="dynamic-field form-input d-flex"
   [formGroup]="group"
 >
-  <label>{{ config.label }}</label>
-  <input
-    type="text"
-    required
-    [placeholder]="
-      config.placeholder === true &&
-      this.group.controls[config.name].errors &&
-      this.group.controls[config.name].touched
-        ? ('fscommon.fieldRequired' | cxTranslate)
-        : ''
-    "
-    [formControlName]="config.name"
-  />
+  <div class="row align-items-center">
+    <label class="col-xs-12 col-md-6">{{ config.label }}</label>
+    <input
+      class="col-xs-12 col-md-6"
+      type="text"
+      required
+      [attr.placeholder]="config.placeholder"
+      [formControlName]="config.name"
+    />
+  </div>
+  <fsa-error-notice
+    [warn]="this.group.controls[config.name]"
+    [parentConfig]="config"
+  ></fsa-error-notice>
 </div>

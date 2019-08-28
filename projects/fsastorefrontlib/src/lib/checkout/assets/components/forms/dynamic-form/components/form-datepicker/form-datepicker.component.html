@@ -1,12 +1,18 @@
 <div
   [hidden]="config.hidden"
-  class="dynamic-field form-input"
-  [formGroup]="group">
-  <label>{{ config.label }}</label>
-  <input
-    type="date"
-    [attr.placeholder]="config.placeholder"
-    [formControlName]="config.name"
-    >
-    <div class="error" *ngIf="this.group.controls[config.name].errors"></div>
+  class="dynamic-field form-input d-flex"
+  [formGroup]="group"
+>
+  <div class="row align-items-center">
+    <label class="col-xs-12 col-md-6">{{ config.label }}</label>
+    <input
+      class="col-xs-12 col-md-6"
+      type="date"
+      [formControlName]="config.name"
+    />
+  </div>
+  <fsa-error-notice
+    [warn]="this.group.controls[config.name]"
+    [parentConfig]="config"
+  ></fsa-error-notice>
 </div>

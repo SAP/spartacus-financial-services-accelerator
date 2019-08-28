@@ -1,20 +1,5 @@
 @import '../../mixins-fsa';
 
-//Overriding Sparatcus uses for max-width y-container element, since we don't control the classes in HTML
-$grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px
-);
-$container-max-widths: (
-  sm: 940px,
-  md: 1024px,
-  lg: 1200px,
-  xl: 9999px
-);
-
 //FSA variables
 $color-dark-grey: #666666;
 $color-blue: #0078c0;
@@ -44,10 +29,10 @@ $fsa-colors: (
   '9': $color-darkest-blue
 );
 
-$font-weight-light: 300;   
-$font-weight-normal: 400; 
-$font-weight-semi: 600; 
-$font-weight-bold: 700; 
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-semi: 600;
+$font-weight-bold: 700;
 
 $font-size-base: 0.875rem; //14px
 

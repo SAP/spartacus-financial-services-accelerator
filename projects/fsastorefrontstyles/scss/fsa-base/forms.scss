@@ -7,29 +7,17 @@ fsa-form-component {
     margin: 2rem auto;
   }
   .dynamic-field {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
+    flex-direction: column;
     margin: 20px 0;
     label {
-      flex-basis: 100%;
-      flex: 1;
-      margin-right: 2rem;
-      text-align: right;
-      // if we decide on asterisk on required fields
-      // position: relative;
-      // &:after {
-      //   content: '*';
-      //   display: block;
-      //   position: absolute;
-      //   right: -10px;
-      //   top: 0px;
-      // }
+      padding-right: 2rem;
+      margin-bottom: 0;
+      @include media-breakpoint-up(md) {
+        text-align: right;
+      }
     }
     input,
     select {
-      width: 50%;
       border: 1px solid var(--cx-color-3);
       border-radius: 4px;
       background-color: var(--cx-color-1);
@@ -37,9 +25,6 @@ fsa-form-component {
       &:disabled {
         cursor: not-allowed;
         background-color: var(--cx-color-5);
-      }
-      &[required]::placeholder {
-        color: var(--cx-color-danger);
       }
     }
     &.form-title {
@@ -73,4 +58,8 @@ fsa-form-component {
   &:focus {
     outline-color: var(--cx-color-danger);
   }
+}
+.error {
+  color: var(--cx-color-danger);
+  margin-top: 0.5rem;
 }
