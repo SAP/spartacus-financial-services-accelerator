@@ -1,13 +1,14 @@
 fsa-form-component {
   display: block;
-  background-color: var(--cx-color-4);
-  border: 1px solid var(--cx-color-3);
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 0.5rem;
   .form {
-    max-width: 940px;
-    margin: 2rem auto;
+    background-color: var(--cx-color-4);
+    border: 1px solid var(--cx-color-3);
+    padding: 0 2vw;
   }
   .dynamic-field {
-    flex-direction: column;
     margin: 20px 0;
     label {
       padding-right: 2rem;
@@ -33,8 +34,7 @@ fsa-form-component {
       width: 100%;
       h4 {
         padding-top: 2rem;
-        padding-left: 2rem;
-        font-size: 18px;
+        font-size: var(--cx-h6-font-size);
       }
     }
   }
