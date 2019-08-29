@@ -43,13 +43,8 @@ fsa-form-component {
       border-top: none;
     }
   }
-  .form-button {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 40px;
-    button {
-      max-width: 50%;
-    }
+  .primary-button {
+    margin-top: 3rem;
   }
 }
 // Global form errors and warnings
