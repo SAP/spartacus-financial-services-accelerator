@@ -1,8 +1,10 @@
-@import '../mixins-fsa';
-@import '../theme';
+@import "../mixins-fsa";
+@import "../theme";
 
 .AccountPageTemplate,
-.GeneralLayoutPageTemplate {
+.GeneralLayoutPageTemplate,
+.MultiStepCheckoutSummaryPageTemplate,
+.MultiTabsCategoryPageTemplate {
   cx-page-slot {
     @include width1400;
   }

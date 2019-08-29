@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Cart, CartService, CmsConfig, OccEndpointsService } from '@spartacus/core';
+import { Cart, CartService, CmsConfig } from '@spartacus/core';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'fsa-legal-documents',
   templateUrl: './legal-documents.component.html'
 })
-export class FsaLegalDocumentsComponent implements OnInit {
+export class LegalDocumentsComponent implements OnInit {
   cart$: Observable<Cart>;
 
   constructor(

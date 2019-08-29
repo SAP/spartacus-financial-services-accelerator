@@ -4,4 +4,4 @@ import { Component } from '@angular/core';
   selector: 'fsa-legal-checkboxes',
   templateUrl: './legal-checkboxes.component.html'
 })
-export class FsaLegalCheckboxesComponent { }
+export class LegalCheckboxesComponent { }
