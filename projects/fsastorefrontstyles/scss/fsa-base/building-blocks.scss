@@ -1,4 +1,4 @@
-@import "../mixins-fsa";
+@import '../mixins-fsa';
 
 .info-container {
   background-color: var(--cx-color-4);
@@ -123,7 +123,7 @@
 .color-dot {
   position: relative;
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     left: 0;
     top: 50%;
@@ -137,7 +137,7 @@
 }
 .underline-effect {
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
