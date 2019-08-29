@@ -19,7 +19,7 @@ export class FormSampleConfigurations {
             label: 'Coverage Start Date',
             name: 'coverageStartDate',
             validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeGreater')],
-            error: 'fscommon.dateInFuture'
+            error: 'forms.dateInFuture'
           },
           {
             type: 'select',
@@ -68,7 +68,7 @@ export class FormSampleConfigurations {
             label: 'Annual Mileage',
             name: 'vehicleAnnualMileage',
             validation: [Validators.required, Validators.maxLength(5)],
-            error: 'fscommon.lessThan100K'
+            error: 'forms.lessThan100K'
           },
           {
             type: 'input',

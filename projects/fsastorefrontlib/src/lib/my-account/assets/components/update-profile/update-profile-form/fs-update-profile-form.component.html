@@ -52,7 +52,8 @@
             'updateProfileForm.lastName.placeholder' | cxTranslate
           }}"
           formControlName="lastName"
-          [class.is-invalid]="isNotValid('lastName')"/>
+          [class.is-invalid]="isNotValid('lastName')"
+        />
         <div class="invalid-feedback" *ngIf="isNotValid('lastName')">
           <span>{{
             'updateProfileForm.lastNameIsRequired' | cxTranslate
@@ -60,40 +61,46 @@
         </div>
       </label>
     </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-md-12">
+      <label>
+        <span class="label-content">{{
+          'forms.register.dateOfBirth.label' | cxTranslate
+        }}</span>
+        <input
+          type="date"
+          class="form-control"
+          name="dateOfBirth"
+          formControlName="dateOfBirth"
+          [class.is-invalid]="isNotValid('dateOfBirth')"
+        />
+        <div class="invalid-feedback" *ngIf="isNotValid('dateOfBirth')">
+          <span>{{
+            'forms.register.dateOfBirthMinimumAge' | cxTranslate
+          }}</span>
+        </div>
+      </label>
     </div>
-    
-    <div class="form-group row">
-        <div class="col-md-12">
-          <label>
-            <span class="label-content">{{
-              'fscommon.register.dateOfBirth.label' | cxTranslate
-            }}</span>
-            <input
-              type="date"
-              class="form-control"
-              name="dateOfBirth"
-              formControlName="dateOfBirth"
-              [class.is-invalid]="isNotValid('dateOfBirth')"/>
-            <div class="invalid-feedback" *ngIf="isNotValid('dateOfBirth')">
-              <span>{{
-                'fscommon.register.dateOfBirthMinimumAge' | cxTranslate
-              }}</span>
-            </div>
-          </label>
-        </div>
-        </div>
-    
-    <div class="form-group row">
-      <div class="col-lg-6 col-md-12">
+  </div>
+
+  <div class="form-group row">
+    <div class="col-lg-6 col-md-12">
       <button
         class="btn btn-block btn-secondary"
         type="button"
-        (click)="onCancel()">
+        (click)="onCancel()"
+      >
         {{ 'common.cancel' | cxTranslate }}
       </button>
     </div>
     <div class="col-lg-6 col-md-12">
-      <button class="btn btn-block btn-primary" type="submit" [disabled]="form.invalid">
+      <button
+        class="btn btn-block btn-primary"
+        type="submit"
+        [disabled]="form.invalid"
+      >
         {{ 'common.save' | cxTranslate }}
       </button>
     </div>
