@@ -67,18 +67,6 @@ export const fscommon = {
     whoOrWhatIsInsured: 'Who or What Is Insured',
     investmentDetails: 'Investment Details',
     whatDoesItCostMe: 'What Does It Cost Me?',
-    enterValidValue: 'Please enter valid value!',
-    dateInPast: 'Date must be in the past!',
-    dateInFuture: 'Date must be in the future!',
-    lessThan100K: 'Value must be less than 100.000',
-
-    register: {
-      dateOfBirthMinimumAge: 'Must be over 18 years old',
-      enterValidEmail: 'Please enter a valid email',
-      dateOfBirth: {
-        label: 'Date of Birth'
-      }
-    },
     category: {
       insurances_property_homeowners: 'Homeowners',
       insurances_property_renters: 'Renters',
@@ -88,6 +76,14 @@ export const fscommon = {
       insurances_event: 'Event',
       insurances_savings: 'Savings'
     },
-    pleaseSelect: 'Please select:'
+    pleaseSelect: 'Please select:',
+    legal: {
+      readAndAgree: 'I acknowledge that I have read and agree with all the terms and conditions stated above.',
+      actOnOwnBehalf: 'I act on my own behalf.',
+      usePersonalData: 'I agree to let the bank use my personal data in order to confirm my identity.',
+      iAmAuthorized:
+        'I am authorized to accept' +
+        'terms and conditions on behalf of a second account owner and agree to all the above terms on his behalf as well.'
+    }
   }
 };

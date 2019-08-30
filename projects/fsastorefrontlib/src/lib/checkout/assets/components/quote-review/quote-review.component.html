@@ -4,8 +4,7 @@
       <div class="accordion">
         <div class="row no-gutters section-header-heading">
           <div class="col-12 col-md-2">
-            <span *ngIf="cart.deliveryOrderGroups[0]?.entries[0]?.product?.images?.length > 0"
-              class="image-wrapper">
+            <span *ngIf="cart.deliveryOrderGroups[0]?.entries[0]?.product?.images?.length > 0" class="image-wrapper">
               <img class="image-item"
                 [src]="getBaseUrl() + cart.deliveryOrderGroups[0]?.entries[0]?.product?.images[3]?.url" />
             </span>
@@ -100,7 +99,8 @@
                     <ng-container *ngFor="let investmentDetail of item.product?.investments">
                       <li class="accordion-list-item row">
                         <div class="col-12">
-                          {{investmentDetail.investmentType?.fundName}}: {{investmentDetail.distributionPercentage}}&#37;
+                          {{investmentDetail.investmentType?.fundName}}:
+                          {{investmentDetail.distributionPercentage}}&#37;
                         </div>
                         <div class="col-12">ISIN: {{investmentDetail.investmentType?.isin}} </div>
                         <div class="col-12">5 {{ 'fscommon.yearPerformanse' | cxTranslate }}:

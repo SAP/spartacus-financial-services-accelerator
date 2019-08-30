@@ -22,6 +22,9 @@
 .border-top-primary {
   border-top-color: var(--cx-color-primary);
 }
+.border-color-7 {
+  border: 1px solid var(--cx-color-5);
+}
 .border-top-secondary {
   border-top-color: var(--cx-color-secondary);
 }
@@ -113,6 +116,18 @@
     position: relative;
     display: inline-block;
     padding-left: 20px;
+  }
+}
+.bulleted-list {
+  li {
+    color: var(--cx-color-primary);
+    font-size: var(--cx-h5-font-size);
+    list-style-type: disc;
+    a {
+      color: var(--cx-color-text);
+      font-size: var(--cx-title-font-size);
+      font-weight: var(--cx-font-weight-semi);
+    }
   }
 }
 .color-dot {
