@@ -88,6 +88,14 @@ export const fscommon = {
       insurances_event: 'Event',
       insurances_savings: 'Savings'
     },
-    pleaseSelect: 'Please select:'
+    pleaseSelect: 'Please select:',
+    legal: {
+      readAndAgree: 'I acknowledge that I have read and agree with all the terms and conditions stated above.',
+      actOnOwnBehalf: 'I act on my own behalf.',
+      usePersonalData: 'I agree to let the bank use my personal data in order to confirm my identity.',
+      iAmAuthorized:
+        'I am authorized to accept' +
+        'terms and conditions on behalf of a second account owner and agree to all the above terms on his behalf as well.'
+    }
   }
 };
