@@ -14,13 +14,14 @@ export interface FieldConfig {
   label?: string;
   name?: string;
   group?: string;
-  options?: string[];
+  options?: any[];
   placeholder?: string;
   type: string;
   validation?: ValidatorFn[];
   value?: any;
   hidden?: boolean;
   error?: string;
+  parent?: boolean;
 }
 
 export enum FormSubmitType {

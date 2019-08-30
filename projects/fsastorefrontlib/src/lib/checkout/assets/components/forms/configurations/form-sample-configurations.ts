@@ -78,7 +78,7 @@ export class FormSampleConfigurations {
             label: 'Vehicle Value',
             name: 'vehicleValue',
             validation: [Validators.required, Validators.min(3000), Validators.max(1000000), Validators.pattern('^[0-9]*$')],
-            error: 'forms.vahicleValue'
+            error: 'forms.vehicleValue'
           },
           {
             type: 'select',
@@ -158,6 +158,7 @@ export class FormSampleConfigurations {
             options: ['1', '2', '3', '4'],
             label: 'Number of Drivers',
             name: 'numberOfDrivers',
+            parent: true,
             validation: [Validators.required]
           },
           {
