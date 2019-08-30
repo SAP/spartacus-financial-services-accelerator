@@ -6,7 +6,7 @@ fsa-form-component {
   .form {
     background-color: var(--cx-color-4);
     border: 1px solid var(--cx-color-3);
-    padding: 0 2vw;
+    padding: 2rem 2vw;
   }
   .dynamic-field {
     margin: 20px 0;
@@ -31,7 +31,6 @@ fsa-form-component {
     &.form-title {
       border-top: 1px solid var(--cx-color-3);
       margin-top: 2rem;
-      width: 100%;
       h4 {
         padding-top: 2rem;
         font-size: var(--cx-h6-font-size);
@@ -40,11 +39,12 @@ fsa-form-component {
   }
   fsa-form-title:first-of-type {
     .form-title {
+      margin-top: 0;
       border-top: none;
     }
   }
   .primary-button {
-    margin-top: 3rem;
+    margin-top: 2rem;
   }
 }
 // Global form errors and warnings

@@ -1,6 +1,8 @@
 <div class="row justify-content-end">
   <div class="col-xs-12 col-md-6">
-    <ng-container *ngIf="warn?.touched && warn?.errors?.required">
+    <ng-container
+      *ngIf="(warn?.touched && warn?.errors?.required) || warn?.errors?.pattern"
+    >
       <div class="form-text">
         {{ 'fscommon.enterValidValue' | cxTranslate }}
       </div>

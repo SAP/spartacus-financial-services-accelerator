@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormGenericComponent } from '../form-generic.component';
 
 @Component({
@@ -6,7 +6,11 @@ import { FormGenericComponent } from '../form-generic.component';
     templateUrl: './error-notice.component.html'
 })
 
-export class ErrorNoticeComponent extends FormGenericComponent {
+export class ErrorNoticeComponent extends FormGenericComponent implements OnInit {
     @Input() warn: any;
     @Input() parentConfig: any;
+
+    ngOnInit() {
+        // console.log(this.warn);
+    }
 }

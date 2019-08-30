@@ -26,6 +26,7 @@ export class FormSampleConfigurations {
             options: ['MONTHLY', 'YEARLY'],
             label: 'Payment Frequency',
             name: 'paymentFrequency',
+            validation: [Validators.required]
           }
         ]
       },
@@ -34,66 +35,70 @@ export class FormSampleConfigurations {
         fieldConfigs: [
           {
             type: 'title',
-            label: 'Vehicle'
+            label: 'Vehicle',
+            validation: [Validators.required]
           },
           {
             type: 'select',
             options: ['BMW'],
             label: 'Vehicle Make',
-            name: 'vehicleMake'
+            name: 'vehicleMake',
+            validation: [Validators.required]
           },
           {
             type: 'select',
             options: ['328'],
             label: 'Vehicle Model',
             name: 'vehicleModel',
-            validation: [Validators.required],
+            validation: [Validators.required]
           },
           {
             type: 'select',
             options: ['BMW3.2SUPER'],
             label: 'Vehicle Type',
             name: 'vehicleType',
-            validation: [Validators.required],
+            validation: [Validators.required]
           },
           {
             type: 'select',
             options: ['1940', '1939', '1938', '1937', '1936'],
             label: 'Vehicle Year',
             name: 'vehicleYear',
-            validation: [Validators.required],
+            validation: [Validators.required]
           },
           {
             type: 'input',
             label: 'Annual Mileage',
             name: 'vehicleAnnualMileage',
-            validation: [Validators.required, Validators.maxLength(5)],
+            validation: [Validators.required, Validators.max(100000), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan100K'
           },
           {
             type: 'input',
             label: 'Vehicle Value',
             name: 'vehicleValue',
-            validation: [Validators.required],
+            validation: [Validators.required, Validators.min(3000), Validators.max(1000000), Validators.pattern('^[0-9]*$')],
+            error: 'forms.vahicleValue'
           },
           {
             type: 'select',
             options: ['Personal', 'Business'],
             label: 'Vehicle Usage',
             name: 'vehicleUsage',
-            validation: [Validators.required],
+            validation: [Validators.required]
           },
           {
             type: 'datepicker',
             label: 'Vehicle Purchase Date',
             name: 'vehiclePurchaseDate',
-            validation: [Validators.required],
+            validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeLess')],
+            error: 'forms.dateInPast'
           },
           {
             type: 'input',
             label: 'Vehicle Owner Postal Code',
             name: 'vehicleOwnerPostalCode',
-            validation: [Validators.required],
+            validation: [Validators.required]
           },
         ]
       },
@@ -108,19 +113,22 @@ export class FormSampleConfigurations {
             type: 'datepicker',
             label: 'Driver Date of Birth',
             name: 'driverDob',
-            validation: [CustomFormValidators.dateOfBirthValidator(18)]
+            validation: [Validators.required, CustomFormValidators.dateOfBirthValidator(18)],
+            error: 'forms.dateOfBirthMinimumAge'
           },
           {
             type: 'select',
             label: 'Driver Gender',
             name: 'driverGender',
-            options: ['Male', 'Female']
+            options: ['Male', 'Female'],
+            validation: [Validators.required]
           },
           {
             type: 'select',
             label: 'Driver Marital Status',
             name: 'driverMaritalStatus',
-            options: ['Single', 'Married', 'Widowed']
+            options: ['Single', 'Married', 'Widowed'],
+            validation: [Validators.required]
           },
           {
             type: 'select',
@@ -133,6 +141,24 @@ export class FormSampleConfigurations {
             type: 'datepicker',
             label: 'Driver Licence Date',
             name: 'driverLicenceDate',
+            validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeLess')],
+            error: 'forms.dateInPast'
+          }
+        ]
+      },
+      {
+        groupName: 'additional-drivers',
+        fieldConfigs: [
+          {
+            type: 'title',
+            label: 'Additional Driver(s)'
+          },
+          {
+            type: 'select',
+            options: ['1', '2', '3', '4'],
+            label: 'Number of Drivers',
+            name: 'numberOfDrivers',
+            validation: [Validators.required]
           },
           {
             label: 'Find Prices',
@@ -140,7 +166,7 @@ export class FormSampleConfigurations {
             type: 'button'
           }
         ]
-      },
+      }
     ]
   },
   {
