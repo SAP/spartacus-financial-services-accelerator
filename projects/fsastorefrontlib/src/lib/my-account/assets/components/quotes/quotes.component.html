@@ -1,36 +1,45 @@
-
 <h2 class="heading-headline">{{ 'quote.quotes' | cxTranslate }}</h2>
-<ng-container *ngIf="quotes$ | async as quotes">
-  <ng-container *ngIf="quotesLoaded$ | async; else loading">
+<ng-container *ngIf="(quotes$ | async) as quotes">
+  <ng-container *ngIf="(quotesLoaded$ | async); else loading">
     <div class="row" *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes">
       <div *ngFor="let quote of quotes.insuranceQuotes" class="col-md-4">
         <div class="info-card border-bottom-primary">
           <div class="info-card-title border-bottom-primary">
             <span class="image-wrapper">
-              <img class="image-item" [src]="getBaseUrl()+quote.defaultCategory.image.url" alt="">
+              <img
+                class="image-item"
+                [src]="getBaseUrl() + quote.defaultCategory.image.url"
+                alt=""
+              />
             </span>
             <h3 class="info-card-caption color-primary">
-              {{quote.defaultCategory?.name}}</h3>
+              {{ quote.defaultCategory?.name }}
+            </h3>
           </div>
           <div class="info-card-details-wrapper">
             <div class="info-card-data">
-              <span class="title">{{quote.quotePlan}}</span>
-              <span class="value">{{quote.quoteId}}</span>
+              <span class="title">{{ quote.planName }}</span>
+              <span class="value">{{ quote.quoteId }}</span>
             </div>
             <div class="info-card-data">
               <span class="title">{{ 'quote.quoteStatus' | cxTranslate }}</span>
-              <span class="value">{{quote.quoteStatus}}</span></div>
+              <span class="value">{{ quote.quoteStatus }}</span>
+            </div>
             <div class="info-card-data">
-              <span class="title">{{ 'fscommon.expiryDate' | cxTranslate }}</span>
-              <span class="value">{{quote.quoteWorkflowStatus?.code}}</span>
+              <span class="title">{{
+                'fscommon.expiryDate' | cxTranslate
+              }}</span>
+              <span class="value">{{ quote.quoteWorkflowStatus?.code }}</span>
             </div>
             <div class="info-card-data">
               <span class="title">{{ 'fscommon.price' | cxTranslate }}</span>
-              <span class="value">{{quote.quotePrice}}</span>
+              <span class="value">{{ quote.quotePrice }}</span>
             </div>
           </div>
           <div class="info-card-button-wrapper border-top-primary">
-            <button class="primary-button col-6 my-5">{{ 'fscommon.retrieve' | cxTranslate }}</button>
+            <button class="primary-button col-6 my-5">
+              {{ 'fscommon.retrieve' | cxTranslate }}
+            </button>
           </div>
         </div>
       </div>

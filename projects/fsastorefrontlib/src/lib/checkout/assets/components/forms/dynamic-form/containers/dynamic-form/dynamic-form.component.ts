@@ -19,14 +19,14 @@ export class DynamicFormComponent implements OnInit {
   get valid() { return this.form.valid; }
   get value() { return this.form.value; }
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
     this.form = this.createForm(this.config);
-    this.config.formGroups.map( formGroup => {
-       formGroup.fieldConfigs.map((inputField) =>  {
+    this.config.formGroups.map(formGroup => {
+      formGroup.fieldConfigs.map((inputField) => {
         this.allInputs.push(inputField);
-        });
+      });
     });
   }
 
@@ -41,7 +41,7 @@ export class DynamicFormComponent implements OnInit {
           newGroup.addControl(input.name, this.createControl(input));
         }
       });
-      form.addControl(groupName, newGroup );
+      form.addControl(groupName, newGroup);
     });
     return form;
   }

@@ -160,7 +160,12 @@ export class FormSampleConfigurations {
             name: 'numberOfDrivers',
             parent: true,
             validation: [Validators.required]
-          },
+          }
+        ]
+      },
+      {
+        groupName: 'button',
+        fieldConfigs: [
           {
             label: 'Find Prices',
             name: 'submit',

@@ -8,6 +8,7 @@ export interface FormDefinition {
 export interface FromGroup {
   groupName: String;
   fieldConfigs: FieldConfig[];
+  hidden?: boolean;
 }
 export interface FieldConfig {
   disabled?: boolean;
@@ -22,6 +23,7 @@ export interface FieldConfig {
   hidden?: boolean;
   error?: string;
   parent?: boolean;
+  refGroup?: string;
 }
 
 export enum FormSubmitType {

@@ -15,7 +15,7 @@ export class QuotesComponent implements OnInit {
     private store: Store<fromQuoteStore.UserState>,
     private config: OccConfig,
     protected quoteService: QuoteService,
-  ) {}
+  ) { }
 
   quotes$;
   quotesLoaded$;

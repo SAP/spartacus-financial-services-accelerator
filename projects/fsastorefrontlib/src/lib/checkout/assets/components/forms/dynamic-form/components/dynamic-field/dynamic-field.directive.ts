@@ -10,7 +10,7 @@ import { FormDatePickerComponent } from '../form-datepicker/form-datepicker.comp
 import { FieldConfig } from '../../models/field-config.interface';
 import { FormGenericComponent } from '../form-generic.component';
 
-const components: {[type: string]: Type<FormGenericComponent>} = {
+const components: { [type: string]: Type<FormGenericComponent> } = {
   button: FormButtonComponent,
   input: FormInputComponent,
   select: FormSelectComponent,
@@ -31,7 +31,7 @@ export class DynamicFieldDirective implements OnChanges, OnInit {
   constructor(
     private resolver: ComponentFactoryResolver,
     private container: ViewContainerRef
-  ) {}
+  ) { }
 
   ngOnChanges() {
     if (this.component) {
