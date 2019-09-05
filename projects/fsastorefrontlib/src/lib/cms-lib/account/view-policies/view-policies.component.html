@@ -2,9 +2,9 @@
     <ng-container *ngIf="!anonymous$; else anonymousLogin">
         <ng-container *ngIf="policiesLoaded$ | async; else loading">
             <ng-container *ngIf="policies$ | async as policies">
-                <div class="review__wrapper">
-                    <ng-container *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
-                        <div class="fs-items">
+                <div class="review-wrapper">
+                    <div class="fs-items">
+                        <ng-container *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
                             <h2 class="my-2 text-center">{{ 'policy.viewPolicies' | cxTranslate }}</h2>
                             <ul>
                                 <ng-container
@@ -17,8 +17,8 @@
                                     *ngTemplateOutlet="showAllPoliciesButton context: {showAll: (allPoliciesDisplayed$ ? false : true)}">
                                 </ng-container>
                             </ng-container>
-                        </div>
-                    </ng-container>
+                        </ng-container>
+                    </div>
                 </div>
             </ng-container>
         </ng-container>
