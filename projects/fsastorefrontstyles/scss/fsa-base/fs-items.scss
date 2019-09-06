@@ -42,18 +42,4 @@ ul {
       text-align: right;
     }
   }
-  .empty-block {
-    .title {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .content {
-      color: var(--cx-color-text);
-      background-color: var(--cx-color-4);
-      font-size: $h6-font-size;
-      text-align: center;
-      padding: 20px;
-      margin: 0 auto;
-    }
-  }
 }
