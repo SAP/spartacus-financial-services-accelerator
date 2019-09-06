@@ -150,3 +150,10 @@
     width: 100%;
   }
 }
+.empty-block {
+  .content {
+    color: var(--cx-color-text);
+    background-color: var(--cx-color-4);
+    font-size: $h6-font-size;
+  }
+}

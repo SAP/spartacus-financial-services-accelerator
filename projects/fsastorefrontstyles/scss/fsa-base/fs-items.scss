@@ -38,22 +38,8 @@ ul {
       padding: 0px 20px;
     }
     &-add-infos {
-        flex: 0 1 40%;
-        text-align: right;
-    }
-  }
-  .empty-block {
-    .title {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .content {
-      color: var(--cx-color-text);
-      background-color: var(--cx-color-4);
-      font-size: $h6-font-size;
-      text-align: center;
-      padding: 20px;
-      margin: 0 auto;
+      flex: 0 1 40%;
+      text-align: right;
     }
   }
 }

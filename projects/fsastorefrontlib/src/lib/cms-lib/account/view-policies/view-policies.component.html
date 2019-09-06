@@ -2,7 +2,7 @@
     <ng-container *ngIf="!anonymous$; else anonymousLogin">
         <ng-container *ngIf="policiesLoaded$ | async; else loading">
             <ng-container *ngIf="policies$ | async as policies">
-                <div class="review__wrapper">
+                <div class="review-wrapper">
                     <ng-container *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies">
                         <div class="fs-items">
                             <h2 class="my-2 text-center">{{ 'policy.viewPolicies' | cxTranslate }}</h2>
@@ -51,9 +51,9 @@
 </ng-template>
 
 <ng-template #noPolicies>
-    <div class="empty-block">
-        <h2 class="title">{{ 'policy.viewPolicies' | cxTranslate }}</h2>
-        <p class="content">- {{ 'policy.finishQuoteToGetPolicy' | cxTranslate }}</p>
+    <div class="empty-block text-center">
+        <h2 class="mb-3">{{ 'policy.viewPolicies' | cxTranslate }}</h2>
+        <p class="content p-3 mx-auto">- {{ 'policy.finishQuoteToGetPolicy' | cxTranslate }}</p>
     </div>
 </ng-template>
 
