@@ -147,23 +147,6 @@ export class FormSampleConfigurations {
         ]
       },
       {
-        groupName: 'additional-drivers',
-        fieldConfigs: [
-          {
-            type: 'title',
-            label: 'Additional Driver(s)'
-          },
-          {
-            type: 'select',
-            options: ['1', '2', '3', '4'],
-            label: 'Number of Drivers',
-            name: 'numberOfDrivers',
-            parent: true,
-            validation: [Validators.required]
-          }
-        ]
-      },
-      {
         groupName: 'button',
         fieldConfigs: [
           {
@@ -186,19 +169,28 @@ export class FormSampleConfigurations {
             type: 'select',
             label: 'Destination',
             name: 'tripDestination',
-            options: ['Europe', 'UK']
+            options: [
+              'Europe', 'Australia and New Zealand',
+              'Worldwide(excluding USA, Canada and the Caribbean)',
+              'Worldwide(including USA, Canada and the Caribbean)',
+              'UK'
+            ],
+            validation: [Validators.required],
+            error: 'forms.enterValidValue'
           },
           {
             type: 'datepicker',
             label: 'Start Date',
             name: 'tripStartDate',
             validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeGreater')],
+            error: 'forms.dateInFuture'
           },
           {
             type: 'datepicker',
             label: 'End Date',
             name: 'tripEndDate',
             validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeGreater')],
+            error: 'forms.dateInPast'
           },
           {
             type: 'input',
@@ -208,18 +200,29 @@ export class FormSampleConfigurations {
           {
             type: 'input',
             label: 'Trip Cost',
-            name: 'costOfTrip'
+            name: 'costOfTrip',
+            validation: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern('^[0-9]*$')],
+            error: 'forms.lessThan100K'
           },
           {
-            type: 'input',
+            type: 'select',
+            options: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
             label: 'Number of Traveller',
-            name: 'Travellers'
+            name: 'Travellers',
+            validation: [Validators.required]
           },
           {
             type: 'input',
             label: 'Age of Traveller',
-            name: 'tripDetailsTravellerAges'
-          },
+            name: 'tripDetailsTravellerAges',
+            validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
+            error: 'forms.lessThan150'
+          }
+        ]
+      },
+      {
+        groupName: 'button',
+        fieldConfigs: [
           {
             label: 'Find Prices',
             name: 'submit',
