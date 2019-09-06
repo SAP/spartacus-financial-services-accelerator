@@ -11,7 +11,7 @@
 .cart-items-list {
   border: $border-grey;
   background-color: var(--cx-color-4);
-   h2 {
+  h2 {
     margin: 0;
   }
   & h3 {
@@ -27,7 +27,7 @@
   }
   & > .row {
     @include media-breakpoint-down(sm) {
-       border-top: $border-grey;
+      border-top: $border-grey;
     }
   }
   .disabled-option {
@@ -58,7 +58,8 @@
     text-align: center;
   }
 }
-.MultiStepCheckoutSummaryPageTemplate, .MultiTabsCategoryPageTemplate {
-  max-width: 1400px;
-  margin: auto;
+.overflow-box {
+  height: 220px;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }

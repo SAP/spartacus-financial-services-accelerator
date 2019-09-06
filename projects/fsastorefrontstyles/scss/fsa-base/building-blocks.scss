@@ -22,6 +22,9 @@
 .border-top-primary {
   border-top-color: var(--cx-color-primary);
 }
+.border-color-7 {
+  border: 1px solid var(--cx-color-5);
+}
 .border-top-secondary {
   border-top-color: var(--cx-color-secondary);
 }
@@ -46,13 +49,13 @@
   border-bottom: $border-grey;
 }
 .section-header-heading {
-  @include linear-gradient-background (var(--cx-color-primary), var(--cx-color-9), 50%, 100%);
+  @include linear-gradient-background(var(--cx-color-primary), var(--cx-color-9), 50%, 100%);
   border: none;
   color: var(--cx-color-1);
   font-size: 20px;
   font-weight: 400;
   line-height: 1.6;
-  padding: 15px; 
+  padding: 15px;
   text-align: center;
 }
 .image-item {
@@ -84,7 +87,7 @@
   padding-top: 15px;
   padding-bottom: 15px;
   line-height: 1.6;
-  @include linear-gradient-background( var(--cx-color-primary), var(--cx-color-9), 50%, 100% );
+  @include linear-gradient-background(var(--cx-color-primary), var(--cx-color-9), 50%, 100%);
 }
 .list-data {
   margin: 0;
@@ -105,19 +108,31 @@
     padding-left: 20px;
   }
 }
+.bulleted-list {
+  li {
+    color: var(--cx-color-primary);
+    font-size: var(--cx-h5-font-size);
+    list-style-type: disc;
+    a {
+      color: var(--cx-color-text);
+      font-size: var(--cx-title-font-size);
+      font-weight: var(--cx-font-weight-semi);
+    }
+  }
+}
 .color-dot {
   position: relative;
   &:before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background-color: var(--cx-color-primary);
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--cx-color-primary);
   }
 }
 .underline-effect {
@@ -132,6 +147,13 @@
     transition: all 300ms ease;
   }
   &:hover:before {
-      width: 100%;
-    }
+    width: 100%;
+  }
+}
+.empty-block {
+  .content {
+    color: var(--cx-color-text);
+    background-color: var(--cx-color-4);
+    font-size: $h6-font-size;
+  }
 }

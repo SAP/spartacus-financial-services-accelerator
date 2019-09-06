@@ -37,6 +37,7 @@ import { QuoteReviewComponent } from './assets/components/quote-review/quote-rev
 import { FSCartService } from './assets/services';
 import { FSCategoryService } from './assets/services/fs-category.service';
 import { effects } from './assets/store/effects/index';
+import { LegalModule } from './assets/components/legal/legal.module';
 
 const routes: Routes = [
   {
@@ -102,6 +103,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    LegalModule,
     PaymentMethodModule,
     PaymentFormModule,
     I18nModule,
@@ -151,6 +153,7 @@ const routes: Routes = [
   ],
   exports: [
     I18nModule,
+    LegalModule,
     PaymentMethodModule,
     PaymentFormModule,
     QuoteReviewComponent,

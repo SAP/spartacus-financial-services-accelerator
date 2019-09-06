@@ -2,9 +2,14 @@
 @import '../theme';
 
 .AccountPageTemplate,
-.GeneralLayoutPageTemplate {
+.GeneralLayoutPageTemplate,
+.MultiStepCheckoutSummaryPageTemplate,
+.MultiTabsCategoryPageTemplate {
   cx-page-slot {
     @include width1400;
+    &.SideContent {
+      justify-content: flex-end;
+    }
   }
 }
 .close {

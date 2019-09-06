@@ -1,195 +1,193 @@
 @import '../mixins-fsa';
 @import '../theme';
 
-// 
+//
 header {
-    --cx-color-inverse: #{var(--cx-color-secondary)};
-    --cx-background-color: #{var(--cx-color-1)};
-    --cx-max-width: 100%;
+  --cx-color-inverse: #{var(--cx-color-secondary)};
+  --cx-background-color: #{var(--cx-color-1)};
+  --cx-max-width: 100%;
+  background-color: var(--cx-color-1);
+  .SiteContext::after,
+  &.is-expanded:after {
+    display: none;
+  }
+  .navigation {
     background-color: var(--cx-color-1);
-    .SiteContext::after, &.is-expanded:after {
-        display: none;
+  }
+  .SiteLogo {
+    --cx-width: 100%;
+    flex: 2;
+    margin: 20px 0 20px 15px;
+    @include media-breakpoint-down(md) {
+      --width: 75%;
+      margin: 0;
     }
-    .navigation {
-        background-color: var(--cx-color-1);
+    img {
+      max-width: 250px;
     }
-    .SiteLogo {
-        --cx-width: 100%;
-        flex: 2;
-        margin: 20px 0 20px 15px;
-        @include media-breakpoint-down(md) {
-            --width: 75%;
-            margin: 0;
+  }
+  .header {
+    color: var(--cx-color-text);
+    text-transform: uppercase;
+    max-width: var(--cx-max-width);
+    nav h5,
+    .cx-login-greet {
+      text-transform: uppercase;
+      font-size: 14px;
+      padding: 0;
+      height: inherit;
+      @include media-breakpoint-down(md) {
+        &:hover,
+        &:focus,
+        &:active,
+        &:after {
+          color: var(--cx-color-1);
         }
-        img {
-            max-width: 250px;
-        }
-    }
-    .header {
+      }
+      @include media-breakpoint-up(lg) {
         color: var(--cx-color-text);
-        text-transform: uppercase;
-        max-width: var(--cx-max-width);
-        nav h5, .cx-login-greet {
-            text-transform: uppercase;
-            font-size: 14px;
-            padding: 0;
-            height: inherit;
-            @include media-breakpoint-down(md) {
-                &:hover, &:focus, &:active, &:after {
-                    color: var(--cx-color-1);
-                }
-            }
-            @include media-breakpoint-up(lg) {
-                color: var(--cx-color-text);
-            }
-        }
-        .cx-login-greet {
-            color: var(--cx-color-secondary);
-            font-weight: bold;
-        }
-        .NavigationBar cx-navigation-ui {
-            padding: 0;
-            border-top: 1px solid var(--cx-color-5);
-            border-bottom: 1px solid var(--cx-color-5);
-            cx-generic-link {
-                position: relative;
-                @include media-breakpoint-up(lg) {
-                    padding: 15px 30px;
-                    &:before {
-                        content: '';
-                        position: absolute;
-                        bottom: 0;
-                        left: 0;
-                        background-color: var(--cx-color-7);
-                        width: 0;
-                        height: 5px;
-                        @include transition;
-                    }
-                    &:hover {
-                        color: var(--cx-color-7);
-                        &:before {
-                            width: 100%;
-                            @include transition;
-                        }
-                    }
-                }
-                a {
-                    font-weight: var(--cx-font-weight-normal);
-                }
-            }
-        }
+      }
+    }
+    .cx-login-greet {
+      color: var(--cx-color-secondary);
+      font-weight: bold;
+    }
+    .NavigationBar {
+      min-height: inherit;
+      overflow: inherit;
+      & cx-navigation-ui {
+        padding: 0;
+        border-top: 1px solid var(--cx-color-5);
+        border-bottom: 1px solid var(--cx-color-5);
         nav {
-            padding: 0;
-            @include media-breakpoint-down(md) {
-                background-color: var(--cx-color-secondary);
-            }
-            .nav-item {
-                @include media-breakpoint-down(md) {
-                    padding: 15px 0;
-                }
-            }
-            @include media-breakpoint-up(lg) {
-                justify-content: flex-start;
-            }
+          padding: 20px;
+          position: relative;
+          .wrapper {
+            top: 60px;
+            left: 0;
+            padding: 15px;
+          }
         }
-        .SiteLogin {
-            max-width: 360px;
-            width: 100%;
-            .HeaderLinks {
-                padding-top: 10px;
-                cx-link {
-                    order: 2;
-                }
-                cx-link, cx-navigation {
-                    flex: 1;
-                }
-                .cx-nav-link {
-                    padding: 0;
-                }
-            }
+        &.flyout > nav {
+          &:last-child {
+            overflow: inherit;
+          }
+          & > .wrapper nav {
+            padding: 2px;
+          }
         }
-        cx-login cx-navigation {
-            display: flex;
-            flex-direction: column;
-            @include media-breakpoint-up(lg) {
-                .wrapper {
-                    padding: 0;
-                    .childs nav {
-                        padding-right: 0;
-                        cx-generic-link {
-                            padding: 0;
-                        }
-                    }
-                    a {
-                        display: block;
-                        width: var(--cx-max-width);
-                        padding: 12px 18px;
-                        color: var(--cx-color-text);
-                        text-transform: none;
-                        border-bottom: 1px solid var(--cx-color-background);
-                        &:hover {
-                            background-color: var(--cx-color-primary);
-                            color: var(--cx-color-1);
-                        }
-                    }
-                    
-                }
-            }
-        }
-        .hamburger-inner, .is-active .hamburger-inner {
-            background-color: var(--cx-color-secondary);
-            &:before, &:after {
-            background-color: var(--cx-color-secondary); 
-            }
-        }
-        .SearchBox {
-            margin-right: 15px;
-            .fa-search {
-                &:before {
-                    content: "\e926";
-                    font-size: 26px;
-                    line-height: 1.5;
-                    padding-left: 20px;
-                    font-family: 'font-FSA' !important;
-                    font-weight: var(--cx-font-weight-light);
-                }
-            }
-            .searchbox {
-                background-color: var(--cx-color-1);
-            }
-            .cx-icon:before {
-                font-size: 22px;   
-            }
-            input {
-                border: 1px solid var(--cx-color-secondary);
-                padding: 0 20px;
-                height: 48px;
-                font-size: 1rem;
-                font-weight: 400;
-                flex-basis: inherit;
-                background-color: var(--cx-color-1);
-                z-index: 1;
-                @include media-breakpoint-down(sm) {
-                    border: none;
-                }
-            }
-            .dropdown-menu.show {
-                border: 1px solid var(--cx-color-secondary);
-                border-radius: 0;
-            }
-            .dropdown-item {
-                &.active {
-                    color: var(--cx-color-secondary);
-                }
-            }
-        }
+      }
     }
-    cx-page-layout cx-page-slot {
-        align-items: center;
-    }
-    cx-navigation-ui {
-        &.flyout h5:hover {
-            color: var(--cx-color-primary);
+    nav {
+      @include media-breakpoint-down(md) {
+        background-color: var(--cx-color-secondary);
+      }
+      .nav-item {
+        @include media-breakpoint-down(md) {
+          padding: 15px 0;
         }
+      }
+      @include media-breakpoint-up(lg) {
+        justify-content: flex-start;
+      }
     }
+    .SiteLogin {
+      max-width: 310px;
+      width: 100%;
+      .HeaderLinks {
+        padding-top: 10px;
+        cx-link {
+          order: 2;
+        }
+        cx-link,
+        cx-navigation {
+          flex: 1;
+        }
+        .cx-nav-link {
+          padding: 0;
+        }
+      }
+    }
+    cx-login cx-navigation {
+      display: flex;
+      flex-direction: column;
+      @include media-breakpoint-up(lg) {
+        .wrapper {
+          padding: 0;
+          .childs nav {
+            padding-right: 0;
+            cx-generic-link {
+              padding: 0;
+            }
+          }
+          a {
+            display: block;
+            width: var(--cx-max-width);
+            padding: 12px 18px;
+            color: var(--cx-color-text);
+            text-transform: none;
+            border-bottom: 1px solid var(--cx-color-background);
+            &:hover {
+              background-color: var(--cx-color-primary);
+              color: var(--cx-color-1);
+            }
+          }
+        }
+      }
+    }
+    .hamburger-inner,
+    .is-active .hamburger-inner {
+      background-color: var(--cx-color-secondary);
+      &:before,
+      &:after {
+        background-color: var(--cx-color-secondary);
+      }
+    }
+    .SearchBox {
+      margin-right: 15px;
+      .fa-search {
+        &:before {
+          content: '\e926';
+          font-size: 26px;
+          line-height: 1.5;
+          padding-left: 20px;
+          font-family: 'font-FSA' !important;
+          font-weight: var(--cx-font-weight-light);
+        }
+      }
+      .searchbox {
+        background-color: var(--cx-color-1);
+      }
+      .cx-icon:before {
+        font-size: 22px;
+      }
+      input {
+        border: 1px solid var(--cx-color-secondary);
+        padding: 0 20px;
+        height: 48px;
+        font-size: 1rem;
+        font-weight: 400;
+        flex-basis: inherit;
+        background-color: var(--cx-color-1);
+        z-index: 1;
+        @include media-breakpoint-down(sm) {
+          border: none;
+        }
+      }
+      .dropdown-menu.show {
+        border: 1px solid var(--cx-color-secondary);
+        border-radius: 0;
+      }
+      .dropdown-item {
+        &.active {
+          color: var(--cx-color-secondary);
+        }
+      }
+    }
+  }
+  cx-navigation-ui {
+    &.flyout h5:hover {
+      color: var(--cx-color-primary);
+    }
+  }
 }

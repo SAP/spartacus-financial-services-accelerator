@@ -1,37 +1,33 @@
 fsa-messages-inbox {
-	.messages {
-		border-left: 1px solid var(--cx-color-3);
-		border-right: 1px solid var(--cx-color-3);
-		.message {
-			&.read .inbox-header{ 
-				font-weight: normal;
-			}
-			.inbox-header {
-				cursor: pointer;
-				background: var(--cx-color-4);
-				font-weight: var(--cx-font-weight-semi);
-				&:hover {
-					color: var(--cx-color-primary);
-				}
-			}	
-		}
-		.box-shadow {
-			max-width: 1100px;
-			width: 100%;
-			margin: 0 auto;
-			padding: 20px;
-			border: $border-grey;
-			@include box-shadow(0px, 3px, 10px, 1px, var(--cx-color-text), 0.3);
-			@include media-breakpoint-down(lg) { 
-				margin: 0 20px;
-			}
-		}
-		input:checked ~ .checkbox-text:before {
-			color: var(--cx-color-primary);
-			border: 2px solid var(--cx-color-primary);
-		}
-	}
-	.cursor-default {
-		cursor: default;
-	}
+  .messages {
+    border-left: 1px solid var(--cx-color-3);
+    border-right: 1px solid var(--cx-color-3);
+    .message {
+      &.read .inbox-header {
+        font-weight: normal;
+      }
+      .inbox-header {
+        cursor: pointer;
+        background: var(--cx-color-4);
+        font-weight: var(--cx-font-weight-semi);
+        &:hover {
+          color: var(--cx-color-primary);
+        }
+      }
+    }
+    .box-shadow {
+      max-width: 1100px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 20px;
+      border: $border-grey;
+      @include box-shadow(0px, 3px, 10px, 1px, var(--cx-color-text), 0.3);
+      @include media-breakpoint-down(lg) {
+        margin: 0 20px;
+      }
+    }
+  }
+  .cursor-default {
+    cursor: default;
+  }
 }
