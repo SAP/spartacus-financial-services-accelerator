@@ -14,7 +14,6 @@ export interface FieldConfig {
   disabled?: boolean;
   label?: string;
   name?: string;
-  group?: string;
   options?: any[];
   placeholder?: string;
   type: string;
@@ -23,7 +22,6 @@ export interface FieldConfig {
   hidden?: boolean;
   error?: string;
   parent?: boolean;
-  refGroup?: string;
 }
 
 export enum FormSubmitType {
