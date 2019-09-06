@@ -1,11 +1,12 @@
-fsa-mini-cart {
+fsa-mini-cart,
+.short-overview-wrapper {
   align-self: flex-end;
   width: 90%;
   @include media-breakpoint-down(md) {
     width: 100%;
   }
   .short-overview {
-    @include media-breakpoint-down(sm) { 
+    @include media-breakpoint-down(sm) {
       margin-top: 30px;
     }
     &-content {
