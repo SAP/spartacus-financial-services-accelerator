@@ -7,12 +7,13 @@
     "cy:run": "cypress run --spec cypress/integration/smoke/**/*",
     "cy:cli": "cypress run",
     "cy:run:mobile": "cypress run --config numTestsKeptInMemory=1 --spec cypress/integration/mobile/**/*",
-    "cy:run:regression": "find cypress/integration/regression -type f -name '*.ts' | tr '\n' ',' | xargs yarn run cypress run --config numTestsKeptInMemory=0 --spec"
+    "cy:run:regression": "find cypress/integration/regression -type f -name '*.ts' | tr '\n' ',' | xargs yarn run cypress run --config numTestsKeptInMemory=0 --spec",
+    "e2e": "start-server-and-test start:ci http-get://localhost:4200 cy:run"
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^4.0.3",
     "cypress": "^3.1.5",
     "cypress-testing-library": "^2.3.5",
-    "wait-on": "3.3.0"
+    "start-server-and-test": "1.10.0"
   }
 }
