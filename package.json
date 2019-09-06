@@ -12,6 +12,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "e2e:cy:open": "yarn --cwd ./projects/storefrfsastorefrontontapp-e2e-cypress run cy:open",
     "e2e:cy:run": "yarn --cwd ./projects/fsastorefront-e2e-cypress run cy:run",
     "e2e:cy:start-open": "start-server-and-test start:ci http-get://localhost:4200 e2e:cy:open",
     "e2e:cy:start-run": "start-server-and-test start:ci http-get://localhost:4200 e2e:cy:run"
