@@ -13,7 +13,15 @@ export const initialState: InboxState = {
 export function reducer(state = initialState, action: fromAction.MessageAction): InboxState {
   switch (action.type) {
     case fromAction.LOAD_MESSAGES_SUCCESS: {
-      const messages = { ...action.payload };
+      const payloadObj = { ...action.payload };
+
+      let messagesCopy = JSON.parse(JSON.stringify(payloadObj.messages));
+
+      messagesCopy.forEach(element => {
+        element.opened = false;
+      });
+
+      const messages = { messages: messagesCopy };
       return {
         ...state,
         messages,
@@ -22,15 +30,21 @@ export function reducer(state = initialState, action: fromAction.MessageAction):
       };
     }
     case fromAction.SET_MESSAGES_STATE_SUCCESS: {
+      let messagesCopy = JSON.parse(JSON.stringify(state.messages.messages));
       const payloadObj = { ...action.payload };
+
       payloadObj.messages.map( message => {
-        state.messages.messages.find( obj => {
+        messagesCopy.find( obj => {
           if (obj.uid === message.uid) {
             obj.readDate = message.readDate;
+            if(payloadObj.toggleOpen != undefined) {
+              obj.opened = !obj.opened;
+            }
           }
         });
       });
-      const messages = { messages: state.messages.messages };
+
+      const messages = { messages: messagesCopy};
       return {
         ...state,
         messages,

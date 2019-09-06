@@ -87,7 +87,8 @@ export class InboxService {
       new fromAction.SetMessagesState({
         userId: this.inboxData.userId,
         messagesUidList: messageId,
-        read: true
+        read: true,
+        toggleOpen: true
       })
     );
   }

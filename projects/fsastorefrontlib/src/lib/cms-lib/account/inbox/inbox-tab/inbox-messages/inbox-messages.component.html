@@ -20,17 +20,13 @@
             </div>
             <div
               class="col-6 col-md-3 text-truncate p-4"
-              (click)="
-                message.opened = !message.opened; readSingleMessage(message)
-              "
+              (click)="readSingleMessage(message)"
             >
               {{ message.title }}
             </div>
             <div
               class="col-md-6 d-none d-md-block text-truncate p-4"
-              (click)="
-                message.opened = !message.opened; readSingleMessage(message)
-              "
+              (click)="readSingleMessage(message)"
             >
               {{ message.content }}
             </div>
