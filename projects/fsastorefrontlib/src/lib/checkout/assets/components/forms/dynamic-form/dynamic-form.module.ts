@@ -7,10 +7,10 @@ import { ErrorNoticeComponent } from './components/error-notice/error-notice.com
 import { FormButtonComponent } from './components/form-button/form-button.component';
 import { FormDatePickerComponent } from './components/form-datepicker/form-datepicker.component';
 import { FormInputComponent } from './components/form-input/form-input.component';
-import { FormSelectOptionalComponent } from './components/form-select-optional/form-select-optional.component';
 import { FormSelectComponent } from './components/form-select/form-select.component';
 import { FormTitleComponent } from './components/form-title/form-title.component';
 import { DynamicFormComponent } from './containers/dynamic-form/dynamic-form.component';
+import { FSFormService } from './form.service';
 
 
 
@@ -26,7 +26,6 @@ import { DynamicFormComponent } from './containers/dynamic-form/dynamic-form.com
     FormButtonComponent,
     FormInputComponent,
     FormSelectComponent,
-    FormSelectOptionalComponent,
     FormTitleComponent,
     FormDatePickerComponent,
     ErrorNoticeComponent
@@ -40,6 +39,7 @@ import { DynamicFormComponent } from './containers/dynamic-form/dynamic-form.com
     FormSelectComponent,
     FormTitleComponent,
     FormDatePickerComponent
-  ]
+  ],
+  providers: [FSFormService]
 })
 export class DynamicFormModule { }
