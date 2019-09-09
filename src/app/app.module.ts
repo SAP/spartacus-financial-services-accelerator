@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FSAStorefrontModule } from '@fsa/storefront';
 import { AppComponent } from './app.component';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -10,8 +11,8 @@ import { AppComponent } from './app.component';
     FSAStorefrontModule.withConfig({
       backend: {
         occ: {
-           baseUrl: 'https://financialservices.local:9002'
-       }
+          baseUrl: environment.occBaseUrl
+        }
       },
       context: {
         baseSite: [
@@ -30,4 +31,4 @@ import { AppComponent } from './app.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

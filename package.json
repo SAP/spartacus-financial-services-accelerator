@@ -5,9 +5,17 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "cp -r ./projects/fsastorefrontstyles/fonts ./src/assets && ng build",
+    "build:qa": "cp -r ./projects/fsastorefrontstyles/fonts ./src/assets && ng build -c=qa",
+    "build:ci": "cp -r ./projects/fsastorefrontstyles/fonts ./src/assets && ng build -c=ci",
+    "start:qa": "ng serve -c=qa",
+    "start:ci": "ng serve -c=ci",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "e2e:cy:open": "yarn --cwd ./projects/fsastorefront-e2e-cypress run cy:open",
+    "e2e:cy:run": "yarn --cwd ./projects/fsastorefront-e2e-cypress run cy:run",
+    "e2e:cy:start-open": "start-server-and-test start:ci http-get://localhost:4200 e2e:cy:open",
+    "e2e:cy:start-run": "start-server-and-test start:ci http-get://localhost:4200 e2e:cy:run"
   },
   "private": true,
   "dependencies": {
@@ -42,7 +50,6 @@
     "@spartacus/core": "1.0.4",
     "@spartacus/storefront": "1.0.4",
     "@spartacus/styles": "1.0.2"
-
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.800.2",

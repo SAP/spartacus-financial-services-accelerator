@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-      "fsastorefrontapp": {
+    "fsastorefrontapp": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -27,7 +27,10 @@
               "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["./projects/fsastorefrontstyles/scss", "node_modules/@spartacus/styles/scss"]
+              "includePaths": [
+                "./projects/fsastorefrontstyles/scss",
+                "node_modules/@spartacus/styles/scss"
+              ]
             },
             "scripts": []
           },
@@ -55,6 +58,40 @@
                   "maximumError": "5mb"
                 }
               ]
+            },
+            "ci": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.ci.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
+            },
+            "qa": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.qa.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true
             }
           }
         },
@@ -66,6 +103,15 @@
           "configurations": {
             "production": {
               "browserTarget": "fsastorefrontapp:build:production"
+            },
+            "development": {
+              "browserTarget": "fsastorefrontapp:build:development"
+            },
+            "ci": {
+              "browserTarget": "fsastorefrontapp:build:ci"
+            },
+            "qa": {
+              "browserTarget": "fsastorefrontapp:build:qa"
             }
           }
         },
@@ -112,7 +158,10 @@
               "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
-              "includePaths": ["./projects/fsastorefrontstyles/scss", "node_modules/@spartacus/styles/scss"]
+              "includePaths": [
+                "./projects/fsastorefrontstyles/scss",
+                "node_modules/@spartacus/styles/scss"
+              ]
             }
           }
         },
