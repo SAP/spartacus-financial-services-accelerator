@@ -4,6 +4,7 @@ import { OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
+import { formatDate } from '@angular/common';
 
 const FULL_PARAMS = 'fields=FULL';
 
@@ -41,8 +42,9 @@ export class OccPolicyService {
 
   public getPoliciesByCategory(userId: string, policyCategoryCode: string): Observable<any> {
     const url = this.getPoliciesEndpoint(userId);
-    const category = 'category=' + policyCategoryCode + '&fields=DEFAULT';
-    const params = new HttpParams({ fromString: category });
+    const date = formatDate(new Date(), 'yyyy-MM-dd', 'en');
+    const categoryAndCurrentDate = 'category=' + policyCategoryCode + '&date=' + date + '&fields=DEFAULT';
+    const params = new HttpParams({ fromString: categoryAndCurrentDate });
 
     return this.http
       .get(url, { params: params })
