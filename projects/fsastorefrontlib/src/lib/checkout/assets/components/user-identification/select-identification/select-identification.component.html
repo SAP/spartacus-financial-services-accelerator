@@ -4,8 +4,8 @@
       <div class="center-icon-wrapper position-absolute">
         <div class="center-icon FSA-icon {{ this.choice.icon}} image-wrapper p-3"></div>
       </div>
-      <div #{{choice.name}} class="p-5 mx-2 border-color-3 box-shadow" [attr.data-identification-name]="choice.name"
-        (click)="setSelected(choice);" [ngClass]="{ 'selected fs-border-primary': choice.name === this.selected}">
+      <div class="p-5 mx-2 border-color-3 box-shadow" (click)="setSelected(choice);"
+        [ngClass]="{ 'selected fs-border-primary': choice.name === this.selected}">
         <p class="py-2 mb-">{{ 'fscommon.userIdentification.' + this.choice.name  | cxTranslate }}</p>
       </div>
     </div>
