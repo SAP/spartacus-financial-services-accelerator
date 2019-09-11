@@ -48,18 +48,15 @@ export class OccFSCartService {
             .pipe(catchError((error: any) => throwError(error.json())));
     }
 
-    public setIdentificationType(identificationTYpe: string, cartId: string, userId: string) {
+    public setIdentificationType(identificationType: string, cartId: string, userId: string) {
         const url = this.getUserIdentificationEndpoint(userId, cartId);
-        const params = new HttpParams({
-            fromString: 'identificationType=' + identificationTYpe
-        });
+        const params: HttpParams = new HttpParams().set('identificationType', identificationType);
         const headers = new HttpHeaders({
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/x-www-form-urlencoded'
         });
         return this.http
-            .post<any>(url, { headers, params })
+            .put<any>(url, null, { headers, params })
             .pipe(catchError((error: any) => throwError(error.json())));
-
     }
 
     protected getAddOptionalProductToCartEndpoint(userId: string, cartId: string) {

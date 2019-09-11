@@ -12,7 +12,7 @@ export class SelectIdentificationComponent {
     protected fsCartData: CartDataService,
   ) { }
 
-  selected = '';
+  selected: string;
   choices: Array<any> = [
     {
       name: 'nearest_branch',
@@ -28,10 +28,11 @@ export class SelectIdentificationComponent {
     }
   ];
   setSelected(choise) {
-    this.selected = choise;
+    this.selected = choise.name;
   }
-
   setIdentificationType() {
-    this.occCartService.setIdentificationType(this.selected, this.fsCartData.cartId, this.fsCartData.userId);
+    this.occCartService.setIdentificationType(this.selected, this.fsCartData.cartId, this.fsCartData.userId).subscribe(
+      // ROUTING SHOULD BE DEFINED HERE
+    );
   }
 }
