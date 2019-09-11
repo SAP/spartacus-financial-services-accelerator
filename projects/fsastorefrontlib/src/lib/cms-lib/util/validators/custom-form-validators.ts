@@ -30,18 +30,18 @@ export class CustomFormValidators {
             return userAge < age ? null : { InvalidDate: true };
         };
     }
-    static test(controlName: string) {
+
+    static shouldEnableDependentField(controlName: string, numberToCompare: number) {
         return (control: AbstractControl): ValidationErrors | null => {
             if (control.parent) {
                 const targetControl = control.parent.controls[controlName];
-                if (control.value > 1) {
-                    targetControl.setValue('SRDJAN');
-                } else {
+                if (control.value > numberToCompare) {
                     targetControl.enable();
+                } else {
+                    targetControl.disable();
                 }
-                console.log(control.parent);
             }
-            return { test: true };
+            return null;
         };
     }
 

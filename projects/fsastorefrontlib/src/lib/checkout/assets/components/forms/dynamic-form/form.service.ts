@@ -22,7 +22,6 @@ export class FSFormService {
       });
       this.form.addControl(groupName, newGroup);
     });
-    console.log(this.form);
     return this.form;
   }
 
