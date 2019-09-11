@@ -163,93 +163,103 @@ export class FormSampleConfigurations {
           }
         ]
       },
-      // {
-      //   groupName: 'additional-driver-1',
-      //   hidden: true,
-      //   fieldConfigs: [
-      //     {
-      //       type: 'title',
-      //       label: 'Additional Driver 1'
-      //     },
-      //     {
-      //       type: 'datepicker',
-      //       label: 'Driver Date of Birth',
-      //       name: 'driverDob',
-      //       validation: [Validators.required, CustomFormValidators.dateOfBirthValidator(18)],
-      //       error: 'forms.dateOfBirthMinimumAge'
-      //     },
-      //     {
-      //       type: 'select',
-      //       label: 'Driver Gender',
-      //       name: 'driverGender',
-      //       options: ['Male', 'Female'],
-      //       validation: [Validators.required]
-      //     },
-      //     {
-      //       type: 'select',
-      //       label: 'Driver Marital Status',
-      //       name: 'driverMaritalStatus',
-      //       options: ['Single', 'Married', 'Widowed'],
-      //       validation: [Validators.required]
-      //     },
-      //     {
-      //       type: 'select',
-      //       label: 'Driver`s Category',
-      //       name: 'driverCategory',
-      //       options: ['Main'],
-      //       disabled: true
-      //     },
-      //     {
-      //       type: 'datepicker',
-      //       label: 'Driver Licence Date',
-      //       name: 'driverLicenceDate',
-      //       validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeLess')],
-      //       error: 'forms.dateInPast'
-      //     }
-      //   ]
-      // },
+      {
+        groupName: 'additional-driver-1',
+        fieldConfigs: [
+          {
+            type: 'title',
+            label: 'Additional Driver 1',
+            hidden: true,
+          },
+          {
+            type: 'datepicker',
+            label: 'Driver Date of Birth',
+            name: 'driverDob',
+            validation: [Validators.required, CustomFormValidators.dateOfBirthValidator(18)],
+            error: 'forms.dateOfBirthMinimumAge',
+            hidden: true,
+          },
+          {
+            type: 'select',
+            label: 'Driver Gender',
+            name: 'driverGender',
+            options: ['Male', 'Female'],
+            validation: [Validators.required],
+            hidden: true,
+          },
+          {
+            type: 'select',
+            label: 'Driver Marital Status',
+            name: 'driverMaritalStatus',
+            options: ['Single', 'Married', 'Widowed'],
+            validation: [Validators.required],
+            hidden: true,
+          },
+          {
+            type: 'select',
+            label: 'Driver`s Category',
+            name: 'driverCategory',
+            options: ['Main'],
+            disabled: true,
+            hidden: true,
+          },
+          {
+            type: 'datepicker',
+            label: 'Driver Licence Date',
+            name: 'driverLicenceDate',
+            validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeLess')],
+            error: 'forms.dateInPast',
+            hidden: true,
+          }
+        ]
+      },
       // {
       //   groupName: 'additional-driver-2',
-      //   hidden: true,
       //   fieldConfigs: [
       //     {
       //       type: 'title',
-      //       label: 'Additional Driver 2'
+      //       label: 'Additional Driver 2',
+      //       hidden: true,
       //     },
       //     {
       //       type: 'datepicker',
       //       label: 'Driver Date of Birth',
       //       name: 'driverDob',
       //       validation: [Validators.required, CustomFormValidators.dateOfBirthValidator(18)],
-      //       error: 'forms.dateOfBirthMinimumAge'
+      //       error: 'forms.dateOfBirthMinimumAge',
+      //       hidden: true,
       //     },
       //     {
       //       type: 'select',
       //       label: 'Driver Gender',
       //       name: 'driverGender',
       //       options: ['Male', 'Female'],
-      //       validation: [Validators.required]
+      //       validation: [Validators.required],
+      //       hidden: true,
       //     },
       //     {
       //       type: 'select',
       //       label: 'Driver Marital Status',
       //       name: 'driverMaritalStatus',
       //       options: ['Single', 'Married', 'Widowed'],
-      //       validation: [Validators.required]
+      //       validation: [Validators.required],
+      //       hidden: true,
       //     },
       //     {
       //       type: 'select',
       //       label: 'Driver`s Category',
       //       name: 'driverCategory',
       //       options: ['Main'],
-      //       disabled: true
+      //       disabled: true,
+      //       hidden: true,
       //     },
       //     {
       //       type: 'datepicker',
       //       label: 'Driver Licence Date',
       //       name: 'driverLicenceDate',
       //       validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeLess')],
-      //       error: 'forms.dateInPast'
+      //       error: 'forms.dateInPast',
+      //       hidden: true,
       //     }
       //   ]
       // },
@@ -406,7 +416,15 @@ export class FormSampleConfigurations {
             options: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
             label: 'Number of Traveller',
             name: 'Travellers',
-            validation: [Validators.required]
+            validation: [Validators.required, CustomFormValidators.test('tripDetailsTravellerAges-1')]
+          },
+          {
+            type: 'input',
+            label: 'Age of Traveller',
+            name: 'tripDetailsTravellerAges-1',
+            validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
+            error: 'forms.lessThan150',
+            // hidden: true
           },
           {
             type: 'input',

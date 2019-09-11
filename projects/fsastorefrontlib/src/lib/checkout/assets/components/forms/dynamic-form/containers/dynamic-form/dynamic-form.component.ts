@@ -28,7 +28,6 @@ export class DynamicFormComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formService.createForm(this.config);
-    // console.log(this.config.formGroups);
     this.config.formGroups.map(formGroup => {
       formGroup.fieldConfigs.map((inputField) => {
         this.allInputs.push(inputField);

@@ -1,4 +1,5 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { FieldConfig } from '../../../checkout/assets/components/forms/dynamic-form/models/field-config.interface';
 
 // @dynamic
 export class CustomFormValidators {
@@ -29,6 +30,19 @@ export class CustomFormValidators {
             return userAge < age ? null : { InvalidDate: true };
         };
     }
+    static test(controlName: string) {
+        return (control: AbstractControl): ValidationErrors | null => {
+            if (control.parent) {
+                const targetControl = control.parent.controls[controlName];
+                if (control.value > 1) {
+                    targetControl.setValue('SRDJAN');
+                } else {
+                    targetControl.enable();
+                }
+            }
+            return { test: true };
+        };
+    }
 
     static compareToCurrentDate(operator) {
         return (control: AbstractControl): ValidationErrors | null => {
@@ -39,7 +53,7 @@ export class CustomFormValidators {
                     return inputVal.getTime() > today.getTime() ? null : { InvalidDate: true };
                 case 'shouldBeLess':
                     return inputVal.getTime() < today.getTime() ? null : { InvalidDate: true };
-              }
+            }
         };
     }
 }

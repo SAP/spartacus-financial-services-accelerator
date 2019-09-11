@@ -8,7 +8,6 @@ export interface FormDefinition {
 export interface FromGroup {
   groupName: String;
   fieldConfigs: FieldConfig[];
-  hidden?: boolean;
 }
 export interface FieldConfig {
   disabled?: boolean;
