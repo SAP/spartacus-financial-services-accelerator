@@ -38,6 +38,7 @@ import { FSCartService } from './assets/services';
 import { FSCategoryService } from './assets/services/fs-category.service';
 import { effects } from './assets/store/effects/index';
 import { LegalModule } from './assets/components/legal/legal.module';
+import { FSCheckoutStepGuard } from '../../cms-components/checkout/guards/fscheckout-step-guard';
 
 const routes: Routes = [
   {
@@ -69,7 +70,7 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard],
+    canActivate: [AuthGuard, CmsPageGuard, FSCheckoutStepGuard],
     data: {
       cxRoute: 'checkoutPaymentDetails',
       pageLabel: 'checkout-payment-details'
@@ -96,6 +97,15 @@ const routes: Routes = [
     data: {
       cxRoute: 'orderConfirmation',
       pageLabel: 'orderConfirmationPage'
+    },
+    component: PageLayoutComponent
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard, FSCheckoutStepGuard],
+    data: {
+      cxRoute: 'legalInformation',
+      pageLabel: 'legalInformationPage'
     },
     component: PageLayoutComponent
   }
