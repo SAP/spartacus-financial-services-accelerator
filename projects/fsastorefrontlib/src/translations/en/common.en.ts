@@ -84,6 +84,11 @@ export const fscommon = {
       insurances_savings: 'Savings'
     },
     pleaseSelect: 'Please select:',
+    userIdentification: {
+      nearest_branch: 'At the Nearest Branch',
+      legal_identification: 'Legal Identification',
+      video_identification: 'Video Identification'
+    },
     legal: {
       readAndAgree: 'I acknowledge that I have read and agree with all the terms and conditions stated above.',
       actOnOwnBehalf: 'I act on my own behalf.',
