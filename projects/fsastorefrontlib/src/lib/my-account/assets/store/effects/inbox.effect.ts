@@ -40,12 +40,16 @@ export class InboxEffects {
           payload = {
              userId: this.inboxData.userId,
              messagesUidList: this.inboxData.messagesCollection.messages,
-             read: this.inboxData.messagesCollection.read
+             read: this.inboxData.messagesCollection.read,
+             toggleOpen: this.inboxData.toggleOpen
           };
         }
         return this.inboxService.setMessagesState(payload.userId, payload.messagesUidList, payload.read )
           .pipe(
             map((response: any) => {
+              if(payload.toggleOpen != undefined) {
+                response.toggleOpen = payload.toggleOpen;
+              }
               return new fromActions.SetMessagesStateSuccess(response);
             }),
             catchError(error => of(new fromActions.SetMessagesStateError(error)))

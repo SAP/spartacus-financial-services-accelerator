@@ -31,7 +31,7 @@ export class OccInboxService {
   protected getReadUnreadEndpoint(userId: string) {
     const readUnreadEndpoint = '/users/' + userId + '/notifications/fssitemessages/read-unread';
     return (
-      (this.occEndpointService.getBaseEndpoint +
+      (this.occEndpointService.getBaseEndpoint() +
       readUnreadEndpoint
     ));
   }

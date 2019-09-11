@@ -21,6 +21,7 @@ export class InboxDataService {
   private _messages: Message[];
   private _searchConfig?: SearchConfig;
   private _messagesCollection?: MessagesCollection;
+  private _toggleOpen?: boolean;
 
   constructor() {}
 
@@ -63,4 +64,12 @@ export class InboxDataService {
   get messages(): Message[] {
     return this._messages;
   }
+
+  set toggleOpen(val: boolean) {
+    this._toggleOpen = val;
+  }
+
+  get toggleOpen(): boolean {
+    return this._toggleOpen;
+  } 
 }

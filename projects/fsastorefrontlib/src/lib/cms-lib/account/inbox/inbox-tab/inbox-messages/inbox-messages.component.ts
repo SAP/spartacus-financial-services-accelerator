@@ -1,8 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { CmsComponentMapping, StandardCmsComponentConfig } from '@spartacus/core';
+import {
+  CmsComponentMapping,
+  StandardCmsComponentConfig
+} from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { take, map } from 'rxjs/operators';
 import { FSSearchConfig } from '../../../../../my-account/assets/services/inbox-data.service';
 import { InboxService } from '../../../../../my-account/assets/services/inbox.service';
 import * as fromStore from '../../../../../my-account/assets/store/index';
