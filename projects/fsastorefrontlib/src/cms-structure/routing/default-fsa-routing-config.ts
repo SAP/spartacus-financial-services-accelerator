@@ -10,6 +10,7 @@ export const fsaStorefrontRoutesConfig: RoutesConfig = {
   quoteReview: { paths: ['checkout/quote-review'] },
   checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
   finalReview: { paths: ['checkout/final-review'] },
+  legalInformation: { paths: ['checkout/legal-information'] },
   orderConfirmation: { paths: ['checkout/order-confirmation'] },
   paymentDetails: { paths: ['my-account/payment-details'] },
   consentManagment: { paths: ['my-account/consents'] },

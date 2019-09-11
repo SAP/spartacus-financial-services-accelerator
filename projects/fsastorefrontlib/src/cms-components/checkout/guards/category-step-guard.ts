@@ -15,10 +15,8 @@ export class CatagoryStepGuard implements CanActivate {
     protected fsCheckoutConfigService: FSCheckoutConfigService
   ) { }
 
-  category;
-
   canActivate(route: CmsActivatedRouteSnapshot): Observable<boolean | UrlTree> {
-
+    let currentCategory;
     const currentStepIndex = this.fsCheckoutConfigService.getCurrentStepIndex(
       route
     );
@@ -34,20 +32,18 @@ export class CatagoryStepGuard implements CanActivate {
     const nextStepUrl = this.routingConfigService.getRouteConfig(
       nextStep.routeName
     ).paths[0];
-
     if (currentStep.restrictedCategories) {
-      currentStep.restrictedCategories.forEach(
-        restrictedCategory => {
-          this.category = route.url.find(url =>
-            url.path === restrictedCategory);
+      currentStep.restrictedCategories.map(restrictedCategory => {
+        if (route.url.find(urlParam => urlParam.path === restrictedCategory)) {
+          currentCategory = restrictedCategory;
         }
-      );
+      });
     }
 
-    return this.category && this.category.path
+    return currentCategory && currentCategory
       ? of(
         this.router.parseUrl(
-          nextStepUrl.replace(':categoryCode', this.category.path)
+          nextStepUrl.replace(':categoryCode', currentCategory)
         )
       )
       : of(true);

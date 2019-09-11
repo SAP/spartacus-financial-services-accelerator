@@ -79,10 +79,10 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
 
   filterSteps() {
     this.activeCategory$.subscribe(activeCategory => {
-      this.steps = this.steps.filter(
+        this.steps = this.steps.filter(
         step => {
           return !(<FSCheckoutStep>step).restrictedCategories ||
-            (<FSCheckoutStep>step).restrictedCategories.indexOf(activeCategory);
+            (<FSCheckoutStep>step).restrictedCategories.indexOf(activeCategory) === -1;
         }
       );
     });
