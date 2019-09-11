@@ -11,10 +11,9 @@ export class FSFormService {
   form = this.fb.group({});
 
   createForm(config) {
-    const newGroup = this.fb.group({});
-    let groupName;
     config.formGroups.forEach(formGroup => {
-      groupName = formGroup.groupName;
+      const newGroup = this.fb.group({});
+      const groupName = formGroup.groupName;
       formGroup.fieldConfigs.forEach(input => {
         input.group = newGroup;
         if (input.type !== 'button' && input.type !== 'title') {
@@ -23,6 +22,7 @@ export class FSFormService {
       });
       this.form.addControl(groupName, newGroup);
     });
+    console.log(this.form);
     return this.form;
   }
 

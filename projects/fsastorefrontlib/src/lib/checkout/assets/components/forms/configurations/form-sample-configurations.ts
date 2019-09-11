@@ -158,7 +158,6 @@ export class FormSampleConfigurations {
             options: ['1', '2', '3', '4'],
             label: 'Number of Drivers',
             name: 'numberOfDrivers',
-            parent: true,
             validation: [Validators.required]
           }
         ]
@@ -416,7 +415,7 @@ export class FormSampleConfigurations {
             options: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
             label: 'Number of Traveller',
             name: 'Travellers',
-            validation: [Validators.required, CustomFormValidators.test('tripDetailsTravellerAges-1')]
+            validation: [Validators.required, CustomFormValidators.test('tripDetailsTravellerAges')]
           },
           {
             type: 'input',
@@ -424,7 +423,7 @@ export class FormSampleConfigurations {
             name: 'tripDetailsTravellerAges-1',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
-            // hidden: true
+            hidden: true
           },
           {
             type: 'input',

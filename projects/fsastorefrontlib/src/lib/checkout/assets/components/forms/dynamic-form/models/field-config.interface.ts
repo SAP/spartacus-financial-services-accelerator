@@ -21,7 +21,6 @@ export interface FieldConfig {
   value?: any;
   hidden?: boolean;
   error?: string;
-  parent?: boolean;
 }
 
 export enum FormSubmitType {
