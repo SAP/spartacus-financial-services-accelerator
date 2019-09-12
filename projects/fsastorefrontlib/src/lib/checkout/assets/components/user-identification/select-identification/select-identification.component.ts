@@ -15,8 +15,8 @@ export class SelectIdentificationTypeComponent  implements OnInit {
 
   constructor(
     protected routingService: RoutingService,
-    private activatedRoute: ActivatedRoute,
-    private checkoutConfigService: FSCheckoutConfigService,
+    protected activatedRoute: ActivatedRoute,
+    protected checkoutConfigService: FSCheckoutConfigService,
     protected occCartService: OccFSCartService,
     protected fsCartData: CartDataService,
   ) { }

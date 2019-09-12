@@ -14,8 +14,8 @@ export class LegalCheckboxesComponent implements OnInit {
 
   constructor(
     protected routingService: RoutingService,
-    private activatedRoute: ActivatedRoute,
-    private checkoutConfigService: FSCheckoutConfigService,
+    protected activatedRoute: ActivatedRoute,
+    protected checkoutConfigService: FSCheckoutConfigService,
   ) { }
 
   ngOnInit() {
@@ -37,5 +37,3 @@ export class LegalCheckboxesComponent implements OnInit {
   }
 
 }
-
-

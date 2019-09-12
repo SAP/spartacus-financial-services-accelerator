@@ -11,7 +11,7 @@ export interface FSPrice extends Price {
 }
 
 export interface OneTimeChargeEntry {
-  code: string;
+  code?: string;
   name?: string;
   price?: Price;
   billingTime?: BillingTime;
