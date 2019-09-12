@@ -15,11 +15,11 @@
     margin-bottom: 20px;
     background: var(--cx-color-5);
     border: $border-grey;
-    font-size: 20px;
+    font-size: var(--cx-h5-font-size);
     @include box-shadow(0px, 5px, 10px, 3px, $color-dark-grey, 0.2);
     @include media-breakpoint-down(md) {
       padding: 12px;
-      font-size: 16px;
+      font-size: var(--cx-h6-font-size);
       margin-bottom: 12px;
     }
   }
@@ -29,9 +29,6 @@
   .label {
     font-size: 14px;
     font-weight: var(--cx-font-weight-semi);
-    @include media-breakpoint-down(md) {
-      font-size: 12px;
-    }
   }
   &.is-active {
     .FSA-icon {
@@ -61,7 +58,7 @@
   }
 }
 .link-wrapper {
-  font-weight: 700;
+  font-weight: var(--cx-font-weight-bold);
   text-align: right;
   margin: 15px 10px 0 0;
 }

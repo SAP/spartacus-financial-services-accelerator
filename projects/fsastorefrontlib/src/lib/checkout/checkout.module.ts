@@ -3,8 +3,27 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { EffectsModule } from '@ngrx/effects';
-import { AuthGuard, CmsConfig, ConfigModule, I18nModule, RoutesConfig, RoutingConfig } from '@spartacus/core';
-import { CardModule, CartNotEmptyGuard, CmsPageGuard, MediaModule, PageComponentModule, PageLayoutComponent, PaymentDetailsSetGuard, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, SpinnerModule } from '@spartacus/storefront';
+import {
+  AuthGuard,
+  CmsConfig,
+  ConfigModule,
+  I18nModule,
+  RoutesConfig,
+  RoutingConfig
+} from '@spartacus/core';
+import {
+  CardModule,
+  CartNotEmptyGuard,
+  CmsPageGuard,
+  MediaModule,
+  PageComponentModule,
+  PageLayoutComponent,
+  PaymentDetailsSetGuard,
+  PaymentFormModule,
+  PaymentMethodComponent,
+  PaymentMethodModule,
+  SpinnerModule
+} from '@spartacus/storefront';
 import { CatagoryStepGuard } from '../../cms-components/checkout/guards/category-step-guard';
 import { AccordionModule } from '../accordion/accordion.module';
 import { OccFSCartService } from '../occ/cart/fs-cart.service';

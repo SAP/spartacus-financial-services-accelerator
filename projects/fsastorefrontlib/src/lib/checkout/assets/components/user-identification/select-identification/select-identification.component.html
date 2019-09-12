@@ -1,22 +1,42 @@
 <div class="d-flex p-5">
-  <ng-container *ngFor="let choice of choices">
+  <ng-container *ngFor="let identificationType of identificationTypes">
     <div class="position-relative flex-grow-1 text-center pointer">
       <div class="center-icon-wrapper position-absolute">
-        <div class="center-icon FSA-icon {{ this.choice.icon}} image-wrapper p-3"></div>
+        <div
+          class="center-icon FSA-icon {{
+            this.identificationType.icon
+          }} image-wrapper p-3"
+        ></div>
       </div>
-      <div class="p-5 mx-2 border-color-3 box-shadow" (click)="setSelected(choice);"
-        [ngClass]="{ 'selected fs-border-primary': choice.name === this.selected}">
-        <p class="py-2 mb-">{{ 'fscommon.userIdentification.' + this.choice.name  | cxTranslate }}</p>
+      <div
+        class="p-5 mx-2 border-color-3 box-shadow"
+        (click)="setSelectedType(identificationType)"
+        [ngClass]="{
+          'selected fs-border-primary':
+            identificationType.name === this.selected
+        }"
+      >
+        <p class="py-2 mb-">
+          {{
+            'fscommon.userIdentification.' + this.identificationType.name
+              | cxTranslate
+          }}
+        </p>
       </div>
     </div>
   </ng-container>
 </div>
 <div class="row mt-5">
   <div class="col-6">
-    <button class="secondary-button">{{'common.back'| cxTranslate }}</button>
+    <button class="secondary-button">{{ 'common.back' | cxTranslate }}</button>
   </div>
   <div class="col-6">
-    <button class="primary-button" (click)="setIdentificationType()"
-      [disabled]="!selected">{{'fscommon.next'| cxTranslate }}</button>
+    <button
+      class="primary-button"
+      (click)="setIdentificationType()"
+      [disabled]="!selected"
+    >
+      {{ 'fscommon.next' | cxTranslate }}
+    </button>
   </div>
 </div>
