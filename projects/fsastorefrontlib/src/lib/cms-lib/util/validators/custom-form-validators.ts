@@ -1,5 +1,4 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
-import { FieldConfig } from '../../../checkout/assets/components/forms/dynamic-form/models/field-config.interface';
 
 // @dynamic
 export class CustomFormValidators {
@@ -33,14 +32,14 @@ export class CustomFormValidators {
 
     static shouldEnableDependentField(controlName: string, numberToCompare: number) {
         return (control: AbstractControl): ValidationErrors | null => {
-            if (control.parent) {
-                const targetControl = control.parent.controls[controlName];
-                if (control.value > numberToCompare) {
-                    targetControl.enable();
-                } else {
-                    targetControl.disable();
+            const namesArray = Array(numberToCompare + 1);
+            const newControlName = namesArray.fill(null).map((k, idx) => controlName + '-' + (idx + 1));
+            newControlName.forEach((item, index) => {
+                if (control.parent) {
+                    const targetControl = control.parent.controls[item];
+                    control.value > index ? targetControl.enable() : targetControl.disable();
                 }
-            }
+            });
             return null;
         };
     }
