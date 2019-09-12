@@ -39,7 +39,7 @@ fsa-claim-policies {
     text-align: center;
     background-color: var(--cx-color-1);
     border: $border-grey;
-    @include box-shadow(0, 0, 6px, 2px, var(--cx-color-5), 100%);
+    @include box-shadow(0, 0, 6px, 2px, $color-mild-grey, 100%);
     border-radius: 5px;
     padding: 25px 20px 20px;
     margin: 20px 0;
@@ -50,7 +50,7 @@ fsa-claim-policies {
     cursor: pointer;
     &-feature-wrapper {
       overflow: hidden;
-      @include box-shadow(0, 0, 6px, 2px, var(--cx-color-5), 100%);
+      @include box-shadow(0, 0, 6px, 2px, $color-mild-grey, 100%);
       border-radius: 5px;
       background-color: $color-white;
       border: $border-grey;

@@ -1,7 +1,7 @@
 import { HttpClientModule, HttpRequest } from '@angular/common/http';
 import {
-    HttpClientTestingModule,
-    HttpTestingController
+  HttpClientTestingModule,
+  HttpTestingController
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccFSCartService } from './fs-cart.service';
@@ -13,6 +13,7 @@ const cartId = 'cartId';
 const productCode = 'product123';
 const quantity = 1;
 const entryNumber = '1';
+const identificationType = 'video_identification';
 
 const usersEndpoint = '/users';
 const cartsEndpoint = '/carts';
@@ -23,67 +24,79 @@ const pricingData: PricingData = {};
 
 
 const MockOccModuleConfig: OccConfig = {
-    context: {
-        baseSite: [
-            ''
-        ]
-    },
-    backend: {
-        occ: {
-            baseUrl: '',
-            prefix: ''
-        }
+  context: {
+    baseSite: [
+      ''
+    ]
+  },
+  backend: {
+    occ: {
+      baseUrl: '',
+      prefix: ''
     }
+  }
 };
 
 describe('OccFSCartService', () => {
-    let service: OccFSCartService;
-    let httpMock: HttpTestingController;
+  let service: OccFSCartService;
+  let httpMock: HttpTestingController;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            imports: [HttpClientModule, HttpClientTestingModule],
-            providers: [
-                OccFSCartService,
-                { provide: OccConfig, useValue: MockOccModuleConfig }
-            ]
-        });
-
-        service = TestBed.get(OccFSCartService);
-        httpMock = TestBed.get(HttpTestingController);
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientModule, HttpClientTestingModule],
+      providers: [
+        OccFSCartService,
+        { provide: OccConfig, useValue: MockOccModuleConfig }
+      ]
     });
 
-    afterEach(() => {
-        httpMock.verify();
-    });
+    service = TestBed.get(OccFSCartService);
+    httpMock = TestBed.get(HttpTestingController);
+  });
 
-    describe('addToCart', () => {
-        it('should add product to cart', async(() => {
-            service.addToCart(userId, cartId, productCode, quantity, entryNumber).subscribe();
-            httpMock.expectOne((req: HttpRequest<any>) => {
-                return (
-                    req.url === usersEndpoint + `/${userId}` + cartsEndpoint + `/${cartId}` + '/fs-add-to-cart' &&
-                    req.params.append('productCode', productCode) &&
-                    req.params.append('quantity', quantity.toString()) &&
-                    req.params.append('entryNumber', entryNumber) &&
-                    req.method === 'POST'
-                );
-            }, `POST method and url`);
-        }));
-    });
+  afterEach(() => {
+    httpMock.verify();
+  });
 
-    describe('startBundle', () => {
-        it('start bundle', async(() => {
-            service.startBundle(userId, cartId, productCode, bundleTemplateId, quantity, pricingData).subscribe();
-            httpMock.expectOne((req: HttpRequest<any>) => {
-                return (
-                    req.url === usersEndpoint + `/${userId}` + cartsEndpoint + `/${cartId}` + '/fs-start-bundle' &&
-                    req.params.append('bundleTemplateId', bundleTemplateId) &&
-                    req.params.append('productCode', productCode) &&
-                    req.params.append('quantity', quantity.toString()) &&
-                    req.method === 'POST'
-                );
-            }, `POST method and url`);
-        }));
-    });
+  describe('addToCart', () => {
+    it('should add product to cart', async(() => {
+      service.addToCart(userId, cartId, productCode, quantity, entryNumber).subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url === usersEndpoint + `/${userId}` + cartsEndpoint + `/${cartId}` + '/fs-add-to-cart' &&
+          req.params.append('productCode', productCode) &&
+          req.params.append('quantity', quantity.toString()) &&
+          req.params.append('entryNumber', entryNumber) &&
+          req.method === 'POST'
+        );
+      }, `POST method and url`);
+    }));
+  });
+
+  describe('startBundle', () => {
+    it('start bundle', async(() => {
+      service.startBundle(userId, cartId, productCode, bundleTemplateId, quantity, pricingData).subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url === usersEndpoint + `/${userId}` + cartsEndpoint + `/${cartId}` + '/fs-start-bundle' &&
+          req.params.append('bundleTemplateId', bundleTemplateId) &&
+          req.params.append('productCode', productCode) &&
+          req.params.append('quantity', quantity.toString()) &&
+          req.method === 'POST'
+        );
+      }, `POST method and url`);
+    }));
+  });
+  describe('setIdentificationType', () => {
+    it('should set user identification type', async(() => {
+      service.setIdentificationType(identificationType, cartId, userId).subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url === usersEndpoint + `/${userId}` + cartsEndpoint + `/${cartId}` + '/user-identification' &&
+          req.params.append('identificationType', identificationType) &&
+          req.method === 'PUT'
+        );
+      }, `PUT method and url`);
+    }));
+  });
 });
