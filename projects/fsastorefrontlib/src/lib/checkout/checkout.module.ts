@@ -31,13 +31,14 @@ import { AddOptionsComponent } from './assets/components/add-options/add-options
 import { FSCheckoutProgressComponent } from './assets/components/checkout-progress/fs-checkout-progress.component';
 import { FSCheckoutProgressModule } from './assets/components/checkout-progress/fs-checkout-progress.module';
 import { FinalReviewComponent } from './assets/components/final-review/final-review.component';
+import { LegalModule } from './assets/components/legal/legal.module';
 import { FSMiniCartComponent } from './assets/components/mini-cart/mini-cart.component';
 import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
 import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
+import { UserIdentificationModule } from './assets/components/user-identification/user-identification.module';
 import { FSCartService } from './assets/services';
 import { FSCategoryService } from './assets/services/fs-category.service';
 import { effects } from './assets/store/effects/index';
-import { LegalModule } from './assets/components/legal/legal.module';
 
 const routes: Routes = [
   {
@@ -103,6 +104,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    UserIdentificationModule,
     LegalModule,
     PaymentMethodModule,
     PaymentFormModule,
@@ -154,6 +156,7 @@ const routes: Routes = [
   exports: [
     I18nModule,
     LegalModule,
+    UserIdentificationModule,
     PaymentMethodModule,
     PaymentFormModule,
     QuoteReviewComponent,

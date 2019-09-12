@@ -15,7 +15,7 @@ context('Homepage', () => {
         cy.get('cx-page-slot.Section1 fsa-enriched-responsive-banner');
     });
 
-    it('should have quotes component', () => {
+    it('should have policies component', () => {
         cy.get('cx-page-slot.Section2C fsa-view-policies');
     });
 
