@@ -15,7 +15,7 @@ export function reducer(state = initialState, action: fromAction.MessageAction):
     case fromAction.LOAD_MESSAGES_SUCCESS: {
       const payloadObj = { ...action.payload };
 
-      let messagesCopy = JSON.parse(JSON.stringify(payloadObj.messages));
+      const messagesCopy = JSON.parse(JSON.stringify(payloadObj.messages));
 
       messagesCopy.forEach(element => {
         element.opened = false;
@@ -30,14 +30,14 @@ export function reducer(state = initialState, action: fromAction.MessageAction):
       };
     }
     case fromAction.SET_MESSAGES_STATE_SUCCESS: {
-      let messagesCopy = JSON.parse(JSON.stringify(state.messages.messages));
+      const messagesCopy = JSON.parse(JSON.stringify(state.messages.messages));
       const payloadObj = { ...action.payload };
 
       payloadObj.messages.map( message => {
         messagesCopy.find( obj => {
           if (obj.uid === message.uid) {
             obj.readDate = message.readDate;
-            if(payloadObj.toggleOpen != undefined) {
+            if (payloadObj.toggleOpen !== undefined) {
               obj.opened = !obj.opened;
             }
           }

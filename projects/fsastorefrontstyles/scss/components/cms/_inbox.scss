@@ -1,59 +1,61 @@
 fsa-inbox {
-	.section-header-heading {
-		text-align: left;
-		font-size: 16px;
-		font-weight: var(--cx-font-weight-semi);
-		.filter {
-			cursor: pointer;
-			right: 10px;
-			top: 4px;
-			@include transition;
-			&.rotate {
-				transform: rotateZ(180deg);
-				-webkit-transform: rotateZ(180deg);
-			}
-		}
-		.mobile-heading {
-			cursor: pointer;
-		}
-		.select {
-			display: none;
-			position: absolute;
-			top: 72px;
-			left: 0;
-			width: 100%;
-			z-index: 99;
-			background: var(--cx-color-1);
-			font-size: 14px;
-			border: 1px solid rgba(0, 0, 0, 0.15);
-			@include box-shadow(0px, 6px, 12px, 0px, var(--cx-color-text), 0.3);
-			&.opened {
-				display: block;
-			}
-			a {
-				padding: 10px 20px;
-				color: var(--cx-color-text);
-				display: block;
-				&:hover {
-					background: var(--cx-color-3);
-				}
-			}
-		}
-	}
-	.tabs-header {
-		border-bottom: 1px solid var(--cx-color-3);
-		& ul {
-			display: flex;
-		} 
-	}
-	ul, li {
-		list-style:none;
-		margin: 0;
-		padding: 0;
-	}
-	.icon-FSA-envelope, .icon-FSA-envelope-open {
-		color: var(--cx-color-primary);
-		font-size: 20px;
-		cursor: pointer;
-	}
-}	
+  .section-header-heading {
+    text-align: left;
+    font-size: 16px;
+    font-weight: var(--cx-font-weight-semi);
+    .filter {
+      cursor: pointer;
+      right: 10px;
+      top: 4px;
+      @include transition;
+      &.rotate {
+        transform: rotateZ(180deg);
+        -webkit-transform: rotateZ(180deg);
+      }
+    }
+    .mobile-heading {
+      cursor: pointer;
+    }
+    .select {
+      display: none;
+      position: absolute;
+      top: 72px;
+      left: 0;
+      width: 100%;
+      z-index: 99;
+      background: var(--cx-color-1);
+      font-size: 14px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      @include box-shadow(0px, 6px, 12px, 0px, $color-dark-grey, 0.3);
+      &.opened {
+        display: block;
+      }
+      a {
+        padding: 10px 20px;
+        color: var(--cx-color-text);
+        display: block;
+        &:hover {
+          background: var(--cx-color-3);
+        }
+      }
+    }
+  }
+  .tabs-header {
+    border-bottom: 1px solid var(--cx-color-3);
+    & ul {
+      display: flex;
+    }
+  }
+  ul,
+  li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .icon-FSA-envelope,
+  .icon-FSA-envelope-open {
+    color: var(--cx-color-primary);
+    font-size: 20px;
+    cursor: pointer;
+  }
+}

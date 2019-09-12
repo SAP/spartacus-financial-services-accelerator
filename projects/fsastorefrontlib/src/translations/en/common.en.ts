@@ -87,6 +87,12 @@ export const fscommon = {
       banking_current_account: 'Current Account'
     },
     pleaseSelect: 'Please select:',
+    userIdentification: {
+      title: 'User Identification',
+      nearest_branch: 'At the Nearest Branch',
+      legal_identification: 'Legal Identification',
+      video_identification: 'Video Identification'
+    },
     legal: {
       readAndAgree: 'I acknowledge that I have read and agree with all the terms and conditions stated above.',
       actOnOwnBehalf: 'I act on my own behalf.',

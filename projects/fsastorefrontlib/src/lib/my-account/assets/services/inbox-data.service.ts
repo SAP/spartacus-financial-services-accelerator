@@ -23,7 +23,7 @@ export class InboxDataService {
   private _messagesCollection?: MessagesCollection;
   private _toggleOpen?: boolean;
 
-  constructor() {}
+  constructor() { }
 
   set userId(val) {
     this._userId = val;
@@ -71,5 +71,5 @@ export class InboxDataService {
 
   get toggleOpen(): boolean {
     return this._toggleOpen;
-  } 
+  }
 }

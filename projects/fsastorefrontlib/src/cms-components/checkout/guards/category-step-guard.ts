@@ -32,6 +32,7 @@ export class CatagoryStepGuard implements CanActivate {
     const nextStepUrl = this.routingConfigService.getRouteConfig(
       nextStep.routeName
     ).paths[0];
+
     if (currentStep.restrictedCategories) {
       currentStep.restrictedCategories.map(restrictedCategory => {
         if (route.url.find(urlParam => urlParam.path === restrictedCategory)) {

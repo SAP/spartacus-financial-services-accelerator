@@ -45,6 +45,15 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
           'insurances_savings', 'insurances_life', 'insurances_property_homeowners', 'insurances_property_renters']
       },
       {
+        id: 'userIdentificationStep',
+        name: 'fscommon.userIdentification.title',
+        routeName: 'userIdentification',
+        icon: 'icon-FSA-person',
+        type: [],
+        restrictedCategories: ['insurances_travel', 'insurances_auto', 'insurances_event',
+          'insurances_savings', 'insurances_life', 'insurances_property_homeowners', 'insurances_property_renters']
+      },
+      {
         id: 'checkoutPaymentDetailsStep',
         name: 'fscommon.paymentDetails',
         routeName: 'checkoutPaymentDetails',
@@ -58,7 +67,7 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         routeName: 'finalReview',
         icon: 'icon-FSA-review',
         type: [],
-        restrictedCategories: []
+        restrictedCategories: ['banking_credit_card', 'banking_current_account']
       }
     ]
   },

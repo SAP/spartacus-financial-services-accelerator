@@ -34,6 +34,7 @@ import { FinalReviewComponent } from './assets/components/final-review/final-rev
 import { FSMiniCartComponent } from './assets/components/mini-cart/mini-cart.component';
 import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
 import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
+import { UserIdentificationModule } from './assets/components/user-identification/user-identification.module';
 import { FSCartService } from './assets/services';
 import { FSCategoryService } from './assets/services/fs-category.service';
 import { effects } from './assets/store/effects/index';
@@ -93,10 +94,10 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard],
+    canActivate: [AuthGuard, CmsPageGuard, FSCheckoutStepGuard],
     data: {
-      cxRoute: 'orderConfirmation',
-      pageLabel: 'orderConfirmationPage'
+      cxRoute: 'legalInformation',
+      pageLabel: 'legalInformationPage'
     },
     component: PageLayoutComponent
   },
@@ -104,8 +105,17 @@ const routes: Routes = [
     path: null,
     canActivate: [AuthGuard, CmsPageGuard, FSCheckoutStepGuard],
     data: {
-      cxRoute: 'legalInformation',
-      pageLabel: 'legalInformationPage'
+      cxRoute: 'userIdentification',
+      pageLabel: 'userIdentificationPage'
+    },
+    component: PageLayoutComponent
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'orderConfirmation',
+      pageLabel: 'orderConfirmationPage'
     },
     component: PageLayoutComponent
   }
@@ -113,9 +123,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    LegalModule,
-    PaymentMethodModule,
-    PaymentFormModule,
     I18nModule,
     NgbTooltipModule,
     CommonModule,
@@ -125,6 +132,10 @@ const routes: Routes = [
     AccordionModule,
     CardModule,
     FSCheckoutProgressModule,
+    UserIdentificationModule,
+    LegalModule,
+    PaymentMethodModule,
+    PaymentFormModule,
     RouterModule.forChild(routes),
     EffectsModule.forFeature(effects),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
@@ -164,6 +175,7 @@ const routes: Routes = [
   exports: [
     I18nModule,
     LegalModule,
+    UserIdentificationModule,
     PaymentMethodModule,
     PaymentFormModule,
     QuoteReviewComponent,

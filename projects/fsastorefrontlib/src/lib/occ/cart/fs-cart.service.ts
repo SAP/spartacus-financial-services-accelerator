@@ -44,8 +44,19 @@ export class OccFSCartService {
         const pricingAttributesBody = JSON.stringify(pricingData);
 
         return this.http
-          .post<any>(url, pricingAttributesBody, { headers, params })
-          .pipe(catchError((error: any) => throwError(error.json())));
+            .post<any>(url, pricingAttributesBody, { headers, params })
+            .pipe(catchError((error: any) => throwError(error.json())));
+    }
+
+    public setIdentificationType(identificationType: string, cartId: string, userId: string) {
+        const url = this.getUserIdentificationEndpoint(userId, cartId);
+        const params: HttpParams = new HttpParams().set('identificationType', identificationType);
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/x-www-form-urlencoded'
+        });
+        return this.http
+            .put<any>(url, null, { headers, params })
+            .pipe(catchError((error: any) => throwError(error.json())));
     }
 
     protected getAddOptionalProductToCartEndpoint(userId: string, cartId: string) {
@@ -61,6 +72,14 @@ export class OccFSCartService {
         return (
             (this.occEndpointService.getBaseEndpoint() +
                 startBundleForProductOfCartEndpoint
+            ));
+    }
+
+    protected getUserIdentificationEndpoint(userId: string, cartId: string) {
+        const userIdentificationEndpoint = '/users/' + userId + '/carts/' + cartId + '/user-identification';
+        return (
+            (this.occEndpointService.getBaseEndpoint() +
+                userIdentificationEndpoint
             ));
     }
 
