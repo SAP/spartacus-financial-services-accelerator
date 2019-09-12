@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { FSFormService } from '../../form.service';
 import { FieldConfig, FormDefinition } from '../../models/field-config.interface';
 
@@ -16,7 +16,6 @@ export class DynamicFormComponent implements OnInit {
   form: FormGroup;
 
   allInputs: Array<FieldConfig> = [];
-  newItems: FormArray;
 
   get changes() { return this.form.valueChanges; }
   get valid() { return this.form.valid; }
