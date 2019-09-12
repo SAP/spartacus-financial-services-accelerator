@@ -39,7 +39,6 @@ import { UserIdentificationModule } from './assets/components/user-identificatio
 import { FSCartService } from './assets/services';
 import { FSCategoryService } from './assets/services/fs-category.service';
 import { effects } from './assets/store/effects/index';
-import { LegalModule } from './assets/components/legal/legal.module';
 import { FSCheckoutStepGuard } from '../../cms-components/checkout/guards/fscheckout-step-guard';
 
 const routes: Routes = [
@@ -110,15 +109,20 @@ const routes: Routes = [
       pageLabel: 'legalInformationPage'
     },
     component: PageLayoutComponent
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard, FSCheckoutStepGuard],
+    data: {
+      cxRoute: 'userIdentification',
+      pageLabel: 'userIdentificationPage'
+    },
+    component: PageLayoutComponent
   }
 ];
 
 @NgModule({
   imports: [
-    UserIdentificationModule,
-    LegalModule,
-    PaymentMethodModule,
-    PaymentFormModule,
     I18nModule,
     NgbTooltipModule,
     CommonModule,
@@ -126,6 +130,10 @@ const routes: Routes = [
     MediaModule,
     SpinnerModule,
     AccordionModule,
+    UserIdentificationModule,
+    LegalModule,
+    PaymentMethodModule,
+    PaymentFormModule,
     CardModule,
     FSCheckoutProgressModule,
     RouterModule.forChild(routes),

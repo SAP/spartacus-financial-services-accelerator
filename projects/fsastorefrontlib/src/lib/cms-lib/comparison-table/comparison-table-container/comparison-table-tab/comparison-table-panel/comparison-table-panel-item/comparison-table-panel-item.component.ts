@@ -51,7 +51,6 @@ export class ComparisonTablePanelItemComponent implements OnInit {
                     data.price.oneTimeChargeEntries.forEach(oneTimeChargeEntry => {
                         if (oneTimeChargeEntry.billingTime.code === 'paynow') {
                             this.productPrice = oneTimeChargeEntry.price.formattedValue;
-                            return;
                         }
                     });
                     this.panelItemEntries = this.billingTimes.map(billingTime => {

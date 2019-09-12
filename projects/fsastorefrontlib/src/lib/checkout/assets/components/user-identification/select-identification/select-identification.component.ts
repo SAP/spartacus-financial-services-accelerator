@@ -1,13 +1,22 @@
-import { Component } from '@angular/core';
-import { CartDataService } from '@spartacus/core';
+import { Component, OnInit } from '@angular/core';
+import { CartDataService, RoutingService } from '@spartacus/core';
 import { OccFSCartService } from 'projects/fsastorefrontlib/src/lib/occ/cart/fs-cart.service';
+import { ActivatedRoute } from '@angular/router';
+import { FSCheckoutConfigService } from '../../../services';
 
 @Component({
   selector: 'fsa-select-identification',
   templateUrl: './select-identification.component.html'
 })
-export class SelectIdentificationTypeComponent {
+export class SelectIdentificationTypeComponent  implements OnInit {
+
+  checkoutStepUrlNext: string;
+  checkoutStepUrlBack: string;
+
   constructor(
+    protected routingService: RoutingService,
+    private activatedRoute: ActivatedRoute,
+    private checkoutConfigService: FSCheckoutConfigService,
     protected occCartService: OccFSCartService,
     protected fsCartData: CartDataService,
   ) { }
@@ -27,12 +36,26 @@ export class SelectIdentificationTypeComponent {
       icon: 'icon-FSA-shield'
     }
   ];
+
+  ngOnInit() {
+    this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
+      this.activatedRoute
+    );
+
+    this.checkoutStepUrlBack = this.checkoutConfigService.getPreviousCheckoutStepUrl(
+      this.activatedRoute
+    );
+  }
+
   setSelectedType(identificationType) {
     this.selected = identificationType.name;
   }
   setIdentificationType() {
-    this.occCartService.setIdentificationType(this.selected, this.fsCartData.cartId, this.fsCartData.userId).subscribe(
-      // ROUTING SHOULD BE DEFINED HERE
-    );
+    this.occCartService.setIdentificationType(this.selected, this.fsCartData.cartId, this.fsCartData.userId).subscribe();
+    this.routingService.go({ cxRoute: 'orderConfirmation' });
+  }
+
+  back() {
+    this.routingService.go(this.checkoutStepUrlBack);
   }
 }

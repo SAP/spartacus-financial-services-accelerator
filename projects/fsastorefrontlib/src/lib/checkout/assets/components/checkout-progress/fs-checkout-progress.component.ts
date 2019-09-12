@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { CartService, RoutingConfigService, RoutingService } from '@spartacus/core';
 import { CheckoutConfig, CheckoutProgressComponent } from '@spartacus/storefront';
-import { Observable } from 'rxjs';
 import { FSProduct } from '../../../../occ-models/occ.models';
 import { FSCategoryService } from '../../services/fs-category.service';
 import { FSCheckoutStep } from './fs-checkout-step.component';
@@ -79,7 +79,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
 
   filterSteps() {
     this.activeCategory$.subscribe(activeCategory => {
-        this.steps = this.steps.filter(
+      this.steps = this.steps.filter(
         step => {
           return !(<FSCheckoutStep>step).restrictedCategories ||
             (<FSCheckoutStep>step).restrictedCategories.indexOf(activeCategory) === -1;

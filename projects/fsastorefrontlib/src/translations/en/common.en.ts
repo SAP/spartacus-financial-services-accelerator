@@ -88,6 +88,7 @@ export const fscommon = {
     },
     pleaseSelect: 'Please select:',
     userIdentification: {
+      title: 'User Identification',
       nearest_branch: 'At the Nearest Branch',
       legal_identification: 'Legal Identification',
       video_identification: 'Video Identification'
