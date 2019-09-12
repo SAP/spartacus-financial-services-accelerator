@@ -434,33 +434,33 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             options: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
-            label: 'Number of Traveller',
+            label: 'Number of Travelers',
             name: 'Travellers',
             validation: [Validators.required,
             FormHelpers.shouldEnableDependentField([
-              'tripDetailsTravellerAges1',
-              'tripDetailsTravellerAges2',
-              'tripDetailsTravellerAges3',
-              'tripDetailsTravellerAges4',
-              'tripDetailsTravellerAges5',
-              'tripDetailsTravellerAges6',
-              'tripDetailsTravellerAges7',
-              'tripDetailsTravellerAges8',
-              'tripDetailsTravellerAges9',
-              'tripDetailsTravellerAges10'
+              'tripDetailsTravelerAges1',
+              'tripDetailsTravelerAges2',
+              'tripDetailsTravelerAges3',
+              'tripDetailsTravelerAges4',
+              'tripDetailsTravelerAges5',
+              'tripDetailsTravelerAges6',
+              'tripDetailsTravelerAges7',
+              'tripDetailsTravelerAges8',
+              'tripDetailsTravelerAges9',
+              'tripDetailsTravelerAges10'
             ])]
           },
           {
             type: 'input',
             label: 'Age of Traveller',
-            name: 'tripDetailsTravellerAges1',
+            name: 'tripDetailsTravelerAges1',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
           },
           {
             type: 'input',
             label: 'Age of Traveller 2',
-            name: 'tripDetailsTravellerAges2',
+            name: 'tripDetailsTravelerAges2',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true
@@ -468,7 +468,7 @@ export class FormSampleConfigurations {
           {
             type: 'input',
             label: 'Age of Traveller 3',
-            name: 'tripDetailsTravellerAges3',
+            name: 'tripDetailsTravelerAges3',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true
@@ -476,7 +476,7 @@ export class FormSampleConfigurations {
           {
             type: 'input',
             label: 'Age of Traveller 4',
-            name: 'tripDetailsTravellerAges4',
+            name: 'tripDetailsTravelerAges4',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true
@@ -484,7 +484,7 @@ export class FormSampleConfigurations {
           {
             type: 'input',
             label: 'Age of Traveller 5',
-            name: 'tripDetailsTravellerAges5',
+            name: 'tripDetailsTravelerAges5',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true
@@ -492,7 +492,7 @@ export class FormSampleConfigurations {
           {
             type: 'input',
             label: 'Age of Traveller 6',
-            name: 'tripDetailsTravellerAges6',
+            name: 'tripDetailsTravelerAges6',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true
@@ -500,7 +500,7 @@ export class FormSampleConfigurations {
           {
             type: 'input',
             label: 'Age of Traveller 7',
-            name: 'tripDetailsTravellerAges7',
+            name: 'tripDetailsTravelerAges7',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true
@@ -508,7 +508,7 @@ export class FormSampleConfigurations {
           {
             type: 'input',
             label: 'Age of Traveller 8',
-            name: 'tripDetailsTravellerAges8',
+            name: 'tripDetailsTravelerAges8',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true
@@ -516,7 +516,7 @@ export class FormSampleConfigurations {
           {
             type: 'input',
             label: 'Age of Traveller 9',
-            name: 'tripDetailsTravellerAges9',
+            name: 'tripDetailsTravelerAges9',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true
@@ -524,7 +524,7 @@ export class FormSampleConfigurations {
           {
             type: 'input',
             label: 'Age of Traveller 10',
-            name: 'tripDetailsTravellerAges10',
+            name: 'tripDetailsTravelerAges10',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true

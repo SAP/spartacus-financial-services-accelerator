@@ -1,7 +1,7 @@
 <div
   class="dynamic-field form-select container"
   [formGroup]="group"
-  [hidden]="this.group.controls[config.name].disabled"
+  [hidden]="group.controls[config.name].disabled"
 >
   <div class="row align-items-center">
     <label class="col-xs-12 col-md-6">{{ config.label }}</label>
@@ -13,7 +13,7 @@
     </select>
   </div>
   <fsa-error-notice
-    [warn]="this.group.controls[config.name]"
+    [warn]="group.controls[config.name]"
     [parentConfig]="config"
   ></fsa-error-notice>
 </div>

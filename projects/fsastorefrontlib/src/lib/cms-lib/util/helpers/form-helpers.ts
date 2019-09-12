@@ -14,6 +14,7 @@ export class FormHelpers {
       return null;
     };
   }
+
   static shouldEnableDependentGroup(groupName: Array<string>) {
     return (control: AbstractControl): ValidationErrors | null => {
       let targetGroup;

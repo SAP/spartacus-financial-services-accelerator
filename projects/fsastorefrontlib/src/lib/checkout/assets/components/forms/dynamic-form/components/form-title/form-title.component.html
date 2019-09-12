@@ -1,7 +1,7 @@
 <div
   class="dynamic-field form-title"
   [formGroup]="group"
-  [hidden]="this.group.controls[config.name].disabled"
+  [hidden]="group.controls[config.name].disabled"
 >
   <h4>{{ config.label }}</h4>
 </div>

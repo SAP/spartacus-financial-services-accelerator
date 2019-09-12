@@ -13,7 +13,6 @@ export interface FieldConfig {
   disabled?: boolean;
   label?: string;
   name?: string;
-  group?: string;
   options?: string[];
   placeholder?: string;
   type: string;
