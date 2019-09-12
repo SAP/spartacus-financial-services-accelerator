@@ -1,5 +1,6 @@
 import { Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../../../cms-lib/util/validators/custom-form-validators';
+import { FormHelpers } from '../../../../../cms-lib/util/helpers/form-helpers';
 import { FormDefinition, FormSubmitType } from '../dynamic-form/models/field-config.interface';
 
 export class FormSampleConfigurations {
@@ -35,8 +36,7 @@ export class FormSampleConfigurations {
         fieldConfigs: [
           {
             type: 'title',
-            label: 'Vehicle',
-            validation: [Validators.required]
+            label: 'Vehicle'
           },
           {
             type: 'select',
@@ -158,7 +158,7 @@ export class FormSampleConfigurations {
             options: ['1', '2', '3', '4'],
             label: 'Number of Drivers',
             name: 'numberOfDrivers',
-            validation: [Validators.required]
+            validation: [FormHelpers.shouldEnableDependentGroup('additional-driver', 9)]
           }
         ]
       },
@@ -168,12 +168,13 @@ export class FormSampleConfigurations {
           {
             type: 'title',
             label: 'Additional Driver 1',
-            hidden: true,
+            name: 'driverName-1',
+            hidden: true
           },
           {
             type: 'datepicker',
             label: 'Driver Date of Birth',
-            name: 'driverDob',
+            name: 'driverDob-1',
             validation: [Validators.required, CustomFormValidators.dateOfBirthValidator(18)],
             error: 'forms.dateOfBirthMinimumAge',
             hidden: true,
@@ -181,7 +182,7 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver Gender',
-            name: 'driverGender',
+            name: 'driverGender-1',
             options: ['Male', 'Female'],
             validation: [Validators.required],
             hidden: true,
@@ -189,7 +190,7 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver Marital Status',
-            name: 'driverMaritalStatus',
+            name: 'driverMaritalStatus-1',
             options: ['Single', 'Married', 'Widowed'],
             validation: [Validators.required],
             hidden: true,
@@ -197,15 +198,15 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver`s Category',
-            name: 'driverCategory',
-            options: ['Main'],
+            name: 'driverCategory-1',
+            options: ['Occasional'],
             disabled: true,
             hidden: true,
           },
           {
             type: 'datepicker',
             label: 'Driver Licence Date',
-            name: 'driverLicenceDate',
+            name: 'driverLicenceDate-1',
             validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeLess')],
             error: 'forms.dateInPast',
             hidden: true,
@@ -218,12 +219,13 @@ export class FormSampleConfigurations {
           {
             type: 'title',
             label: 'Additional Driver 2',
+            name: 'driverName-2',
             hidden: true
           },
           {
             type: 'datepicker',
             label: 'Driver Date of Birth',
-            name: 'driverDob',
+            name: 'driverDob-2',
             validation: [Validators.required, CustomFormValidators.dateOfBirthValidator(18)],
             error: 'forms.dateOfBirthMinimumAge',
             hidden: true
@@ -231,7 +233,7 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver Gender',
-            name: 'driverGender',
+            name: 'driverGender-2',
             options: ['Male', 'Female'],
             validation: [Validators.required],
             hidden: true,
@@ -239,7 +241,7 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver Marital Status',
-            name: 'driverMaritalStatus',
+            name: 'driverMaritalStatus-2',
             options: ['Single', 'Married', 'Widowed'],
             validation: [Validators.required],
             hidden: true
@@ -247,15 +249,14 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver`s Category',
-            name: 'driverCategory',
-            options: ['Main'],
-            disabled: true,
+            name: 'driverCategory-2',
+            options: ['Occasional'],
             hidden: true
           },
           {
             type: 'datepicker',
             label: 'Driver Licence Date',
-            name: 'driverLicenceDate',
+            name: 'driverLicenceDate-2',
             validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeLess')],
             error: 'forms.dateInPast',
             hidden: true
@@ -268,46 +269,47 @@ export class FormSampleConfigurations {
           {
             type: 'title',
             label: 'Additional Driver 3',
-            hidden: true,
+            name: 'driverName-3',
+            hidden: true
           },
           {
             type: 'datepicker',
             label: 'Driver Date of Birth',
-            name: 'driverDob',
+            name: 'driverDob-3',
             validation: [Validators.required, CustomFormValidators.dateOfBirthValidator(18)],
             error: 'forms.dateOfBirthMinimumAge',
-            hidden: true,
+            hidden: true
           },
           {
             type: 'select',
             label: 'Driver Gender',
-            name: 'driverGender',
+            name: 'driverGender-3',
             options: ['Male', 'Female'],
             validation: [Validators.required],
-            hidden: true,
+            hidden: true
           },
           {
             type: 'select',
             label: 'Driver Marital Status',
-            name: 'driverMaritalStatus',
+            name: 'driverMaritalStatus-3',
             options: ['Single', 'Married', 'Widowed'],
             validation: [Validators.required],
-            hidden: true,
+            hidden: true
           },
           {
             type: 'select',
             label: 'Driver`s Category',
-            name: 'driverCategory',
-            options: ['Main'],
-            hidden: true,
+            name: 'driverCategory-3',
+            options: ['Occasional'],
+            hidden: true
           },
           {
             type: 'datepicker',
             label: 'Driver Licence Date',
-            name: 'driverLicenceDate',
+            name: 'driverLicenceDate-3',
             validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeLess')],
             error: 'forms.dateInPast',
-            hidden: true,
+            hidden: true
           }
         ]
       },
@@ -316,42 +318,49 @@ export class FormSampleConfigurations {
         fieldConfigs: [
           {
             type: 'title',
-            label: 'Additional Driver 4'
+            label: 'Additional Driver 4',
+            name: 'driverName-4',
+            hidden: true
           },
           {
             type: 'datepicker',
             label: 'Driver Date of Birth',
-            name: 'driverDob',
+            name: 'driverDob-4',
             validation: [Validators.required, CustomFormValidators.dateOfBirthValidator(18)],
-            error: 'forms.dateOfBirthMinimumAge'
+            error: 'forms.dateOfBirthMinimumAge',
+            hidden: true
           },
           {
             type: 'select',
             label: 'Driver Gender',
-            name: 'driverGender',
+            name: 'driverGender-4',
             options: ['Male', 'Female'],
-            validation: [Validators.required]
+            validation: [Validators.required],
+            hidden: true
           },
           {
             type: 'select',
             label: 'Driver Marital Status',
-            name: 'driverMaritalStatus',
+            name: 'driverMaritalStatus-4',
             options: ['Single', 'Married', 'Widowed'],
-            validation: [Validators.required]
+            validation: [Validators.required],
+            hidden: true
           },
           {
             type: 'select',
             label: 'Driver`s Category',
-            name: 'driverCategory',
-            options: ['Main'],
-            disabled: true
+            name: 'driverCategory-4',
+            options: ['Occasional'],
+            disabled: true,
+            hidden: true
           },
           {
             type: 'datepicker',
             label: 'Driver Licence Date',
-            name: 'driverLicenceDate',
+            name: 'driverLicenceDate-4',
             validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeLess')],
-            error: 'forms.dateInPast'
+            error: 'forms.dateInPast',
+            hidden: true
           }
         ]
       },
@@ -419,7 +428,7 @@ export class FormSampleConfigurations {
             label: 'Number of Traveller',
             name: 'Travellers',
             validation: [Validators.required,
-            CustomFormValidators.shouldEnableDependentField('tripDetailsTravellerAges', 9)]
+            FormHelpers.shouldEnableDependentField('tripDetailsTravellerAges', 9)]
           },
           {
             type: 'input',

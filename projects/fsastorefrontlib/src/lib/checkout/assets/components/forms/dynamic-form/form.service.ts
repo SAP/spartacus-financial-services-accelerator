@@ -18,13 +18,10 @@ export class FSFormService {
       this.groupName = formGroup.groupName;
       formGroup.fieldConfigs.forEach(input => {
         input.group = this.newGroup;
-        if (input.type !== 'button' && input.type !== 'title') {
-          this.newGroup.addControl(input.name, this.createControl(input));
-        }
+        this.newGroup.addControl(input.name, this.createControl(input));
       });
       this.form.addControl(this.groupName, this.newGroup);
     });
-    console.log(this.form);
     return this.form;
   }
 
