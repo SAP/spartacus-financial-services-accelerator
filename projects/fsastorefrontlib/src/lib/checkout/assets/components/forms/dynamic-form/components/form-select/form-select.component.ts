@@ -6,9 +6,4 @@ import { FormGenericComponent } from '../form-generic.component';
   templateUrl: './form-select.component.html'
 
 })
-export class FormSelectComponent extends FormGenericComponent {
-
-  SelectToNumber(selectVal) {
-    return new Array(Number(selectVal));
-  }
-}
+export class FormSelectComponent extends FormGenericComponent { }

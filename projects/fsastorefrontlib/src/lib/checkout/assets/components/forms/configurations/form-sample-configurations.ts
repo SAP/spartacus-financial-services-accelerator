@@ -105,12 +105,12 @@ export class FormSampleConfigurations {
         ]
       },
       {
-        groupName: 'main-driver',
+        groupName: 'mainDriver',
         fieldConfigs: [
           {
             type: 'title',
             label: 'Main Driver',
-            name: 'main-driver'
+            name: 'mainDriver'
           },
           {
             type: 'datepicker',
@@ -150,29 +150,34 @@ export class FormSampleConfigurations {
         ]
       },
       {
-        groupName: 'additional-drivers',
+        groupName: 'additionalDrivers',
         fieldConfigs: [
           {
             type: 'title',
             label: 'Additional Driver(s)',
-            name: 'additional-drivers'
+            name: 'additionalDrivers'
           },
           {
             type: 'select',
             options: ['1', '2', '3', '4'],
             label: 'Number of Drivers',
             name: 'numberOfDrivers',
-            validation: [FormHelpers.shouldEnableDependentGroup('additional-driver', 9)]
+            validation: [FormHelpers.shouldEnableDependentGroup([
+              'additionalDriver1',
+              'additionalDriver2',
+              'additionalDriver3',
+              'additionalDriver4'
+            ])]
           }
         ]
       },
       {
-        groupName: 'additional-driver-1',
+        groupName: 'additionalDriver1',
         fieldConfigs: [
           {
             type: 'title',
             label: 'Additional Driver 1',
-            name: 'driverName-1',
+            name: 'additionalDriver1',
             hidden: true
           },
           {
@@ -186,7 +191,7 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver Gender',
-            name: 'driverGender-1',
+            name: 'driverGender1',
             options: ['Male', 'Female'],
             validation: [Validators.required],
             hidden: true,
@@ -194,7 +199,7 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver Marital Status',
-            name: 'driverMaritalStatus-1',
+            name: 'driverMaritalStatus1',
             options: ['Single', 'Married', 'Widowed'],
             validation: [Validators.required],
             hidden: true,
@@ -202,7 +207,7 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver`s Category',
-            name: 'driverCategory-1',
+            name: 'driverCategory1',
             options: ['Occasional'],
             disabled: true,
             hidden: true,
@@ -210,7 +215,7 @@ export class FormSampleConfigurations {
           {
             type: 'datepicker',
             label: 'Driver Licence Date',
-            name: 'driverLicenceDate-1',
+            name: 'driverLicenceDate1',
             validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeLess')],
             error: 'forms.dateInPast',
             hidden: true,
@@ -218,18 +223,18 @@ export class FormSampleConfigurations {
         ]
       },
       {
-        groupName: 'additional-driver-2',
+        groupName: 'additionalDriver2',
         fieldConfigs: [
           {
             type: 'title',
             label: 'Additional Driver 2',
-            name: 'driverName-2',
+            name: 'additionalDriver2',
             hidden: true
           },
           {
             type: 'datepicker',
             label: 'Driver Date of Birth',
-            name: 'driverDob-2',
+            name: 'driverDob2',
             validation: [Validators.required, CustomFormValidators.dateOfBirthValidator(18)],
             error: 'forms.dateOfBirthMinimumAge',
             hidden: true
@@ -237,7 +242,7 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver Gender',
-            name: 'driverGender-2',
+            name: 'driverGender2',
             options: ['Male', 'Female'],
             validation: [Validators.required],
             hidden: true,
@@ -245,7 +250,7 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver Marital Status',
-            name: 'driverMaritalStatus-2',
+            name: 'driverMaritalStatus2',
             options: ['Single', 'Married', 'Widowed'],
             validation: [Validators.required],
             hidden: true
@@ -253,14 +258,14 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver`s Category',
-            name: 'driverCategory-2',
+            name: 'driverCategory2',
             options: ['Occasional'],
             hidden: true
           },
           {
             type: 'datepicker',
             label: 'Driver Licence Date',
-            name: 'driverLicenceDate-2',
+            name: 'driverLicenceDate2',
             validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeLess')],
             error: 'forms.dateInPast',
             hidden: true
@@ -268,18 +273,18 @@ export class FormSampleConfigurations {
         ]
       },
       {
-        groupName: 'additional-driver-3',
+        groupName: 'additionalDriver3',
         fieldConfigs: [
           {
             type: 'title',
             label: 'Additional Driver 3',
-            name: 'driverName-3',
+            name: 'additionalDriver3',
             hidden: true
           },
           {
             type: 'datepicker',
             label: 'Driver Date of Birth',
-            name: 'driverDob-3',
+            name: 'driverDob3',
             validation: [Validators.required, CustomFormValidators.dateOfBirthValidator(18)],
             error: 'forms.dateOfBirthMinimumAge',
             hidden: true
@@ -287,7 +292,7 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver Gender',
-            name: 'driverGender-3',
+            name: 'driverGender3',
             options: ['Male', 'Female'],
             validation: [Validators.required],
             hidden: true
@@ -295,7 +300,7 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver Marital Status',
-            name: 'driverMaritalStatus-3',
+            name: 'driverMaritalStatus3',
             options: ['Single', 'Married', 'Widowed'],
             validation: [Validators.required],
             hidden: true
@@ -303,14 +308,14 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver`s Category',
-            name: 'driverCategory-3',
+            name: 'driverCategory3',
             options: ['Occasional'],
             hidden: true
           },
           {
             type: 'datepicker',
             label: 'Driver Licence Date',
-            name: 'driverLicenceDate-3',
+            name: 'driverLicenceDate3',
             validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeLess')],
             error: 'forms.dateInPast',
             hidden: true
@@ -318,18 +323,18 @@ export class FormSampleConfigurations {
         ]
       },
       {
-        groupName: 'additional-driver-4',
+        groupName: 'additionalDriver4',
         fieldConfigs: [
           {
             type: 'title',
             label: 'Additional Driver 4',
-            name: 'driverName-4',
+            name: 'additionalDriver4',
             hidden: true
           },
           {
             type: 'datepicker',
             label: 'Driver Date of Birth',
-            name: 'driverDob-4',
+            name: 'driverDob4',
             validation: [Validators.required, CustomFormValidators.dateOfBirthValidator(18)],
             error: 'forms.dateOfBirthMinimumAge',
             hidden: true
@@ -337,7 +342,7 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver Gender',
-            name: 'driverGender-4',
+            name: 'driverGender4',
             options: ['Male', 'Female'],
             validation: [Validators.required],
             hidden: true
@@ -345,7 +350,7 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver Marital Status',
-            name: 'driverMaritalStatus-4',
+            name: 'driverMaritalStatus4',
             options: ['Single', 'Married', 'Widowed'],
             validation: [Validators.required],
             hidden: true
@@ -353,7 +358,7 @@ export class FormSampleConfigurations {
           {
             type: 'select',
             label: 'Driver`s Category',
-            name: 'driverCategory-4',
+            name: 'driverCategory4',
             options: ['Occasional'],
             disabled: true,
             hidden: true
@@ -361,7 +366,7 @@ export class FormSampleConfigurations {
           {
             type: 'datepicker',
             label: 'Driver Licence Date',
-            name: 'driverLicenceDate-4',
+            name: 'driverLicenceDate4',
             validation: [Validators.required, CustomFormValidators.compareToCurrentDate('shouldBeLess')],
             error: 'forms.dateInPast',
             hidden: true
@@ -432,19 +437,30 @@ export class FormSampleConfigurations {
             label: 'Number of Traveller',
             name: 'Travellers',
             validation: [Validators.required,
-            FormHelpers.shouldEnableDependentField('tripDetailsTravellerAges', 9)]
+            FormHelpers.shouldEnableDependentField([
+              'tripDetailsTravellerAges1',
+              'tripDetailsTravellerAges2',
+              'tripDetailsTravellerAges3',
+              'tripDetailsTravellerAges4',
+              'tripDetailsTravellerAges5',
+              'tripDetailsTravellerAges6',
+              'tripDetailsTravellerAges7',
+              'tripDetailsTravellerAges8',
+              'tripDetailsTravellerAges9',
+              'tripDetailsTravellerAges10'
+            ])]
           },
           {
             type: 'input',
             label: 'Age of Traveller',
-            name: 'tripDetailsTravellerAges-1',
+            name: 'tripDetailsTravellerAges1',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
           },
           {
             type: 'input',
             label: 'Age of Traveller 2',
-            name: 'tripDetailsTravellerAges-2',
+            name: 'tripDetailsTravellerAges2',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true
@@ -452,7 +468,7 @@ export class FormSampleConfigurations {
           {
             type: 'input',
             label: 'Age of Traveller 3',
-            name: 'tripDetailsTravellerAges-3',
+            name: 'tripDetailsTravellerAges3',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true
@@ -460,7 +476,7 @@ export class FormSampleConfigurations {
           {
             type: 'input',
             label: 'Age of Traveller 4',
-            name: 'tripDetailsTravellerAges-4',
+            name: 'tripDetailsTravellerAges4',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true
@@ -468,7 +484,7 @@ export class FormSampleConfigurations {
           {
             type: 'input',
             label: 'Age of Traveller 5',
-            name: 'tripDetailsTravellerAges-5',
+            name: 'tripDetailsTravellerAges5',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true
@@ -476,7 +492,7 @@ export class FormSampleConfigurations {
           {
             type: 'input',
             label: 'Age of Traveller 6',
-            name: 'tripDetailsTravellerAges-6',
+            name: 'tripDetailsTravellerAges6',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true
@@ -484,7 +500,7 @@ export class FormSampleConfigurations {
           {
             type: 'input',
             label: 'Age of Traveller 7',
-            name: 'tripDetailsTravellerAges-7',
+            name: 'tripDetailsTravellerAges7',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true
@@ -492,7 +508,7 @@ export class FormSampleConfigurations {
           {
             type: 'input',
             label: 'Age of Traveller 8',
-            name: 'tripDetailsTravellerAges-8',
+            name: 'tripDetailsTravellerAges8',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true
@@ -500,7 +516,7 @@ export class FormSampleConfigurations {
           {
             type: 'input',
             label: 'Age of Traveller 9',
-            name: 'tripDetailsTravellerAges-9',
+            name: 'tripDetailsTravellerAges9',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true
@@ -508,7 +524,7 @@ export class FormSampleConfigurations {
           {
             type: 'input',
             label: 'Age of Traveller 10',
-            name: 'tripDetailsTravellerAges-10',
+            name: 'tripDetailsTravellerAges10',
             validation: [Validators.required, Validators.max(150), Validators.pattern('^[0-9]*$')],
             error: 'forms.lessThan150',
             hidden: true

@@ -9,18 +9,18 @@ export class FSFormService {
   constructor(private fb: FormBuilder) { }
 
   form = this.fb.group({});
-  newGroup;
-  groupName;
 
   createForm(config) {
+    let newGroup;
+    let groupName;
     config.formGroups.forEach(formGroup => {
-      this.newGroup = this.fb.group({});
-      this.groupName = formGroup.groupName;
+      newGroup = this.fb.group({});
+      groupName = formGroup.groupName;
       formGroup.fieldConfigs.forEach(input => {
-        input.group = this.newGroup;
-        this.newGroup.addControl(input.name, this.createControl(input));
+        input.group = newGroup;
+        newGroup.addControl(input.name, this.createControl(input));
       });
-      this.form.addControl(this.groupName, this.newGroup);
+      this.form.addControl(groupName, newGroup);
     });
     return this.form;
   }
