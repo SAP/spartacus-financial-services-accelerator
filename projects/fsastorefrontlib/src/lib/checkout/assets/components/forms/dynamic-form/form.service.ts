@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormArray } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { FieldConfig } from './models/field-config.interface';
 
 @Injectable()
