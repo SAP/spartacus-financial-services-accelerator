@@ -1,7 +1,7 @@
 fsa-inbox {
   .section-header-heading {
     text-align: left;
-    font-size: 16px;
+    font-size: var(--cx-h6-font-size);
     font-weight: var(--cx-font-weight-semi);
     .filter {
       cursor: pointer;
@@ -55,7 +55,7 @@ fsa-inbox {
   .icon-FSA-envelope,
   .icon-FSA-envelope-open {
     color: var(--cx-color-primary);
-    font-size: 20px;
+    font-size: var(--cx-h5-font-size);
     cursor: pointer;
   }
 }

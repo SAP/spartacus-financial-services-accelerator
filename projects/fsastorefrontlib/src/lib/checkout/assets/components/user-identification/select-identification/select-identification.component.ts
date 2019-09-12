@@ -8,7 +8,7 @@ import { FSCheckoutConfigService } from '../../../services';
   selector: 'fsa-select-identification',
   templateUrl: './select-identification.component.html'
 })
-export class SelectIdentificationComponent implements OnInit {
+export class SelectIdentificationTypeComponent  implements OnInit {
 
   checkoutStepUrlNext: string;
   checkoutStepUrlBack: string;
@@ -22,7 +22,7 @@ export class SelectIdentificationComponent implements OnInit {
   ) { }
 
   selected: string;
-  choices: Array<any> = [
+  identificationTypes: Array<any> = [
     {
       name: 'nearest_branch',
       icon: 'icon-FSA-person'
@@ -47,10 +47,9 @@ export class SelectIdentificationComponent implements OnInit {
     );
   }
 
-  setSelected(choise) {
-    this.selected = choise.name;
+  setSelectedType(identificationType) {
+    this.selected = identificationType.name;
   }
-
   setIdentificationType() {
     this.occCartService.setIdentificationType(this.selected, this.fsCartData.cartId, this.fsCartData.userId).subscribe();
     this.routingService.go({ cxRoute: 'orderConfirmation' });

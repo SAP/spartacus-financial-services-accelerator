@@ -15,11 +15,11 @@
     margin-bottom: 20px;
     background: var(--cx-color-5);
     border: $border-grey;
-    font-size: 20px;
+    font-size: var(--cx-h5-font-size);
     @include box-shadow(0px, 5px, 10px, 3px, $color-dark-grey, 0.2);
     @include media-breakpoint-down(md) {
       padding: 12px;
-      font-size: 16px;
+      font-size: var(--cx-h6-font-size);
       margin-bottom: 12px;
     }
   }
@@ -27,11 +27,8 @@
     color: var(--cx-color-primary);
   }
   .label {
-    font-size: 14px;
+    font-size: var(--cx-title-font-size);
     font-weight: var(--cx-font-weight-semi);
-    @include media-breakpoint-down(md) {
-      font-size: 12px;
-    }
   }
   &.is-active {
     .FSA-icon {
@@ -53,7 +50,7 @@
       background: var(--cx-color-1);
     }
     .label {
-      font-weight: 400;
+      font-weight: var(--cx-font-weight-normal);
     }
     &:before {
       background-color: transparent;
@@ -61,7 +58,7 @@
   }
 }
 .link-wrapper {
-  font-weight: 700;
+  font-weight: var(--cx-font-weight-bold);
   text-align: right;
   margin: 15px 10px 0 0;
 }

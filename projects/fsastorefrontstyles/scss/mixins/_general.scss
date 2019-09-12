@@ -67,16 +67,11 @@
   background: -o-radial-gradient(ellipse at center, $startColor 30%, $middleColor 80%, $endColor 120%);
   background: -webkit-radial-gradient(ellipse at center, $startColor 30%, $middleColor 80%, $endColor 120%);
 }
-@mixin linear-gradient-background($startColor, $endColor, $firstStop, $secondStop) {
-  background: -webkit-linear-gradient(left, $startColor $firstStop, $endColor $secondStop);
-  background: -o-linear-gradient(left, $startColor $firstStop, $endColor $secondStop);
-  background: linear-gradient(to right, $startColor $firstStop, $endColor $secondStop);
-}
 @mixin status {
   &::before,
   &::after {
     display: block;
-    content: '';
+    content: "";
     position: absolute;
     right: 15px;
     top: 50%;
