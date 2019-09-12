@@ -13,7 +13,8 @@ export class FormSampleConfigurations {
         fieldConfigs: [
           {
             type: 'title',
-            label: 'General'
+            label: 'General',
+            name: 'general'
           },
           {
             type: 'datepicker',
@@ -36,7 +37,8 @@ export class FormSampleConfigurations {
         fieldConfigs: [
           {
             type: 'title',
-            label: 'Vehicle'
+            label: 'Vehicle',
+            name: 'vehicle'
           },
           {
             type: 'select',
@@ -107,7 +109,8 @@ export class FormSampleConfigurations {
         fieldConfigs: [
           {
             type: 'title',
-            label: 'Main Driver'
+            label: 'Main Driver',
+            name: 'main-driver'
           },
           {
             type: 'datepicker',
@@ -151,7 +154,8 @@ export class FormSampleConfigurations {
         fieldConfigs: [
           {
             type: 'title',
-            label: 'Additional Driver(s)'
+            label: 'Additional Driver(s)',
+            name: 'additional-drivers'
           },
           {
             type: 'select',
