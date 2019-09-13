@@ -23,13 +23,18 @@
             </div>
             <div class="info-card-data">
               <span class="title">{{ 'quote.quoteStatus' | cxTranslate }}</span>
-              <span class="value">{{ quote.quoteStatus }}</span>
+              <span class="value">{{ quote.quoteStatus | titlecase }}</span>
             </div>
             <div class="info-card-data">
               <span class="title">{{
                 'fscommon.expiryDate' | cxTranslate
               }}</span>
-              <span class="value">{{ quote.quoteWorkflowStatus?.code }}</span>
+              <span *ngIf="quote.expiryDate" class="value">{{
+                quote.expiryDate
+              }}</span>
+              <span *ngIf="!quote.expiryDate" class="value">{{
+                'fscommon.expiryNotConfirmed' | cxTranslate
+              }}</span>
             </div>
             <div class="info-card-data">
               <span class="title">{{ 'fscommon.price' | cxTranslate }}</span>

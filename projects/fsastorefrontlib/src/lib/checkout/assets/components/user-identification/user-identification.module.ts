@@ -11,7 +11,7 @@ import { SelectIdentificationTypeComponent } from './select-identification/selec
     RouterModule,
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
-        UserIdentificationFlex: {
+        SelectIdentificationTypeFlex: {
           component: SelectIdentificationTypeComponent
         }
       }
