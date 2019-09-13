@@ -10,6 +10,7 @@ import { FormInputComponent } from './components/form-input/form-input.component
 import { FormSelectComponent } from './components/form-select/form-select.component';
 import { FormTitleComponent } from './components/form-title/form-title.component';
 import { FormDatePickerComponent } from './components/form-datepicker/form-datepicker.component';
+import { MockFormService } from '../../../../../occ/form/mock-form.service';
 
 
 @NgModule({
@@ -36,6 +37,7 @@ import { FormDatePickerComponent } from './components/form-datepicker/form-datep
     FormSelectComponent,
     FormTitleComponent,
     FormDatePickerComponent
-  ]
+  ],
+  providers: [MockFormService]
 })
 export class DynamicFormModule {}

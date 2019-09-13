@@ -4,7 +4,7 @@
   <label>{{ config.label }}</label>
   <select [formControlName]="config.name">
     <option value="">{{ 'fscommon.pleaseSelect' | cxTranslate }}</option>
-    <option *ngFor="let option of config.options">
+    <option *ngFor="let option of options">
       {{ option }}
     </option>
   </select>
