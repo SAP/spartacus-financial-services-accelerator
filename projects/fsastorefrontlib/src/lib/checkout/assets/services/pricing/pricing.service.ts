@@ -6,27 +6,31 @@ import { PriceAttributeGroup, PricingData } from '../../models/pricing.interface
 @Injectable()
 export class PricingService {
 
-    pricingSource$ = new BehaviorSubject<PricingData>({});
+  pricingSource$ = new BehaviorSubject<PricingData>({});
 
-    buildPricingData(formData: { [name: string]: Object }) {
-        const pricingAttributesData: PricingData = {
-            priceAttributeGroups: []
+  buildPricingData(formData: { [name: string]: Object }) {
+    const pricingAttributesData: PricingData = {
+      priceAttributeGroups: []
+    };
+    Object.keys(formData).forEach(groupName => {
+      if (groupName !== 'button') {
+        const priceAttributeGroup: PriceAttributeGroup = {
+          priceAttributes: [],
         };
-        Object.keys(formData).forEach(groupName => {
-            const priceAttributeGroup: PriceAttributeGroup = {
-                priceAttributes: [],
-            };
-            priceAttributeGroup.name = groupName;
-            Object.keys(formData[groupName]).forEach(inputName => {
-                priceAttributeGroup.priceAttributes.push({ 'key': inputName, 'value': formData[groupName][inputName] });
-            });
-            pricingAttributesData.priceAttributeGroups.push(priceAttributeGroup);
+        priceAttributeGroup.name = groupName;
+        Object.keys(formData[groupName]).forEach(inputName => {
+          if (groupName !== inputName) {
+            priceAttributeGroup.priceAttributes.push({ 'key': inputName, 'value': formData[groupName][inputName] });
+          }
         });
-        this.pricingSource$.next(pricingAttributesData);
-    }
+        pricingAttributesData.priceAttributeGroups.push(priceAttributeGroup);
+      }
+    });
+    this.pricingSource$.next(pricingAttributesData);
+  }
 
-    getPricingAttributes(): Observable<PricingData> {
-        return this.pricingSource$.asObservable();
-    }
+  getPricingAttributes(): Observable<PricingData> {
+    return this.pricingSource$.asObservable();
+  }
 
 }

@@ -1,8 +1,7 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms';
 
+// @dynamic
 export class FormHelpers {
-  // tslint:disable-next-line:max-line-length
-
   static shouldEnableDependentField(controlNameArray: Array<string>) {
     return (control: AbstractControl): ValidationErrors | null => {
       if (control.parent) {
