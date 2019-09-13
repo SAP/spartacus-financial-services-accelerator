@@ -421,11 +421,6 @@ export class FormSampleConfigurations {
           },
           {
             type: 'input',
-            label: 'Duration in Days',
-            name: 'NoOfDays'
-          },
-          {
-            type: 'input',
             label: 'Trip Cost',
             name: 'costOfTrip',
             validation: [Validators.required, Validators.min(0), Validators.max(1000000), Validators.pattern('^[0-9]*$')],
