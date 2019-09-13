@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGenericComponent } from '../form-generic.component';
-import { MockFormService } from '../../../../../../../occ/form/mock-form.service';
+import { OccMockFormService } from '../../../../../../../occ/form/occ-mock-form.service';
 
 @Component({
   selector: 'fsa-form-select',
@@ -11,7 +11,7 @@ export class FormSelectComponent extends FormGenericComponent  implements OnInit
   options: any [];
 
   constructor(
-    protected formService: MockFormService
+    protected formService: OccMockFormService
   ) {
     super();
   }
@@ -28,14 +28,12 @@ export class FormSelectComponent extends FormGenericComponent  implements OnInit
 
   setFormControlValues(val: string) {
     if (this.config.jsonField) {
-      const array = [];
       const nodes = this.config.jsonField.split('.');
       if (val !== null) {
-        this.formService.getDropdownValues(array, nodes, val);
+        this.options = this.formService.getDropdownValues( nodes, val);
       } else {
-        this.formService.setInitialFormControlValues(array, nodes);
+        this.options = this.formService.setInitialFormControlValues(nodes);
       }
-      this.options = array;
     }
   }
 }

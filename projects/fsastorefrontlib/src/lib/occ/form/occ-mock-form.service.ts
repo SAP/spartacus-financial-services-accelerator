@@ -4,27 +4,30 @@ import autoOptions from '../../checkout/assets/components/forms/configurations/a
 
 
 @Injectable()
-export class MockFormService {
-  setInitialFormControlValues(array: any, nodes: any) {
+export class OccMockFormService {
+  setInitialFormControlValues( nodes: any): any {
     let result = null;
+    const optionsArray = [];
     if (nodes.length === 1) {
       result = autoOptions[nodes[0]];
     }
     if (result) {
       result.forEach((node) => {
-        array.push(node.code);
+        optionsArray.push(node.code);
       });
     }
+    return optionsArray;
   }
-  getDropdownValues(array: any, nodesForParsing: any, val: string) {
+  getDropdownValues(nodesForParsing: any, val: string): any {
     let result = autoOptions;
+    const optionsArray = [];
     if (nodesForParsing.length > 1) {
         for (let i = 0; i < nodesForParsing.length; i += 1) {
           if (result.length) {
             const extractedResults = this.getNodes(result, i, val, nodesForParsing);
             if (nodesForParsing.length - 1 === i) {
               extractedResults.forEach((resultElement) => {
-                array.push(resultElement.code ? resultElement.code : resultElement);
+                optionsArray.push(resultElement.code ? resultElement.code : resultElement);
               });
             } else {
               result = extractedResults;
@@ -34,6 +37,7 @@ export class MockFormService {
           }
         }
     }
+    return optionsArray;
   }
 
   private getNodes(result: any, i: number, value: string, nodesForParsing: any): any {
