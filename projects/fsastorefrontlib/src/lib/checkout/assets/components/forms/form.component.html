@@ -4,8 +4,8 @@
 </h3>
 <div *ngIf="categoryConfig" class="form">
   <fsa-dynamic-form
-    [config]="categoryConfig"
     #form="fsa-dynamicForm"
+    [config]="categoryConfig"
     (submit)="submit($event)"
   >
   </fsa-dynamic-form>

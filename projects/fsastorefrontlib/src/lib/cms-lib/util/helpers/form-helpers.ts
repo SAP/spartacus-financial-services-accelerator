@@ -19,11 +19,13 @@ export class FormHelpers {
       let targetGroup;
       groupName.forEach((name, index) => {
         if (control.parent) {
-          targetGroup = control.parent.parent.controls[name];
-          if (targetGroup) {
-            for (const key in targetGroup.controls) {
-              if (targetGroup.controls.hasOwnProperty(key)) {
-                control.value > index ? targetGroup.controls[key].enable() : targetGroup.controls[key].disable();
+          if (control.parent.parent) {
+            targetGroup = control.parent.parent.controls[name];
+            if (targetGroup) {
+              for (const key in targetGroup.controls) {
+                if (targetGroup.controls.hasOwnProperty(key)) {
+                  control.value > index ? targetGroup.controls[key].enable() : targetGroup.controls[key].disable();
+                }
               }
             }
           }
