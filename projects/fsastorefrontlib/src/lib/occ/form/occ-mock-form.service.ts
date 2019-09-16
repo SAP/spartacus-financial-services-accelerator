@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-// @ts-ignore
-import autoOptions from '../../checkout/assets/components/forms/configurations/auto-options.json';
+import { default as autoOptions } from './auto-options';
 
 
 @Injectable()
 export class OccMockFormService {
-  setInitialFormControlValues( nodes: any): any {
+  setInitialFormControlValues(nodes: any): any {
     let result = null;
     const optionsArray = [];
     if (nodes.length === 1) {
@@ -19,25 +18,21 @@ export class OccMockFormService {
     return optionsArray;
   }
   getDropdownValues(nodesForParsing: any, val: string): any {
-    let result = autoOptions;
+    let result = new Array(autoOptions);
     const optionsArray = [];
     if (nodesForParsing.length > 1) {
-        for (let i = 0; i < nodesForParsing.length; i += 1) {
-          if (result.length) {
-            const extractedResults = this.getNodes(result, i, val, nodesForParsing);
-            if (nodesForParsing.length - 1 === i) {
-              extractedResults.forEach((resultElement) => {
-                optionsArray.push(resultElement.code ? resultElement.code : resultElement);
-              });
-            } else {
-              result = extractedResults;
-            }
-          } else {
-            result = result[nodesForParsing[i]];
-          }
+      for (let i = 0; i < nodesForParsing.length; i += 1) {
+        const extractedResults = this.getNodes(result, i, val, nodesForParsing);
+        if (nodesForParsing.length - 1 === i) {
+          extractedResults.forEach((resultElement) => {
+            optionsArray.push(resultElement.code ? resultElement.code : resultElement);
+          });
+        } else {
+          result = extractedResults;
         }
+      }
+      return optionsArray;
     }
-    return optionsArray;
   }
 
   private getNodes(result: any, i: number, value: string, nodesForParsing: any): any {
