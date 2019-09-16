@@ -12,6 +12,8 @@ import { ClaimsComponent } from './components/claims/claims.component';
 import { CreateClaimComponent } from './components/claims/create-claim/create-claim.component';
 import { ClaimDataService } from './services/claim-data.service';
 import { ClaimService } from './services/claim.service';
+import { OccUserRequestService } from '../../occ/user-request/user-request.service';
+import { UserRequestDataService } from './services';
 
 
 
@@ -54,7 +56,7 @@ const routes: Routes = [
   ],
   declarations: [ClaimsComponent, DeleteClaimDialogComponent, ClaimPoliciesComponent, CreateClaimComponent],
   exports: [ClaimsComponent, ClaimPoliciesComponent],
-  providers: [ClaimService, ClaimDataService, ClaimPoliciesComponent, OccClaimService],
+  providers: [ClaimService, ClaimDataService, ClaimPoliciesComponent, OccClaimService, UserRequestDataService, OccUserRequestService],
   entryComponents: [ClaimsComponent, DeleteClaimDialogComponent, ClaimPoliciesComponent, CreateClaimComponent]
 })
 export class ClaimsModule { }
