@@ -18,15 +18,11 @@ export class FormHelpers {
     return (control: AbstractControl): ValidationErrors | null => {
       let targetGroup;
       groupName.forEach((name, index) => {
-        if (control.parent) {
-          if (control.parent.parent) {
-            targetGroup = control.parent.parent.controls[name];
-            if (targetGroup) {
-              for (const key in targetGroup.controls) {
-                if (targetGroup.controls.hasOwnProperty(key)) {
-                  control.value > index ? targetGroup.controls[key].enable() : targetGroup.controls[key].disable();
-                }
-              }
+        if (control.parent && control.parent.parent && control.parent.parent.controls[name]) {
+          targetGroup = control.parent.parent.controls[name];
+          for (const key in targetGroup.controls) {
+            if (targetGroup.controls.hasOwnProperty(key)) {
+              control.value > index ? targetGroup.controls[key].enable() : targetGroup.controls[key].disable();
             }
           }
         }
