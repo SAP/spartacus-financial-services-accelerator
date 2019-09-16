@@ -59,6 +59,15 @@ export class ClaimService {
     );
   }
 
+  loadRequest(requestId: string) {
+    this.store.dispatch(
+      new fromAction.LoadUserRequest({
+        userId: this.claimData.userId,
+        requestId: requestId
+      })
+    );
+  }
+
   removeClaim(userId: string, claimId: string) {
     this.store.dispatch(
       new fromAction.DeleteClaim({

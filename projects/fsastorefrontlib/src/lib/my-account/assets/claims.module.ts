@@ -5,15 +5,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AuthGuard, CmsConfig, ConfigModule, I18nModule, RoutesConfig, RoutingConfig } from '@spartacus/core';
 import { CmsPageGuard, PageLayoutComponent, SpinnerModule } from '@spartacus/storefront';
+import { FSStepGroupProgressModule } from '../../checkout/assets/components/user-request/fs-step-group-progress.module';
 import { OccClaimService } from '../../occ/claim/claim.service';
+import { OccUserRequestService } from '../../occ/user-request/user-request.service';
 import { DeleteClaimDialogComponent } from '../assets/components/claims/delete-claim-dialog/delete-claim-dialog.component';
 import { ClaimPoliciesComponent } from './components/claims/claim-policies/claim-policies.component';
 import { ClaimsComponent } from './components/claims/claims.component';
 import { CreateClaimComponent } from './components/claims/create-claim/create-claim.component';
+import { UserRequestDataService } from './services';
 import { ClaimDataService } from './services/claim-data.service';
 import { ClaimService } from './services/claim.service';
-import { OccUserRequestService } from '../../occ/user-request/user-request.service';
-import { UserRequestDataService } from './services';
 
 
 
@@ -37,6 +38,7 @@ const routes: Routes = [
     FormsModule,
     NgSelectModule,
     SpinnerModule,
+    FSStepGroupProgressModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {

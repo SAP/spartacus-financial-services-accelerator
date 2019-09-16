@@ -6,7 +6,7 @@ import * as fromInboxReducer from './inbox.reducer';
 import * as fromPolicyReducer from './policy.reducer';
 import * as fromPremiumCalendarReducer from './premium-calendar.reducer';
 import * as fromQuoteReducer from './quote.reducer';
-
+import * as fromUserRequestReducer from './user-request.reducer';
 
 
 export interface UserState {
@@ -16,6 +16,7 @@ export interface UserState {
   claims: fromClaimReducer.ClaimState;
   claimPolicies: fromClaimPolicies.ClaimPoliciesState;
   messages: fromInboxReducer.InboxState;
+  userRequest: fromUserRequestReducer.UserRequestState;
 }
 
 export function getReducers(): ActionReducerMap<UserState> {
@@ -25,7 +26,8 @@ export function getReducers(): ActionReducerMap<UserState> {
     premiumCalendar: fromPremiumCalendarReducer.reducer,
     claims: fromClaimReducer.reducer,
     claimPolicies: fromClaimPolicies.reducer,
-    messages: fromInboxReducer.reducer
+    messages: fromInboxReducer.reducer,
+    userRequest: fromUserRequestReducer.reducer
   };
 }
 

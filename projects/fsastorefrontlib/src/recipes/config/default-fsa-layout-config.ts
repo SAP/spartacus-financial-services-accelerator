@@ -58,6 +58,13 @@ export const fsaLayoutConfig: LayoutConfig = {
         'Section4',
         'Section5'
       ]
+    },
+    FSRequestPageTemplate: {
+        slots: [
+          'TopContent',
+          'BottomContent',
+          'Section1'
+        ]
     }
   }
 };
