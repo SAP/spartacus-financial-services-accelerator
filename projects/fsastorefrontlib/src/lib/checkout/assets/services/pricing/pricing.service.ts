@@ -19,7 +19,7 @@ export class PricingService {
         };
         priceAttributeGroup.name = groupName;
         Object.keys(formData[groupName]).forEach(inputName => {
-          if (groupName !== inputName) {
+          if (groupName !== inputName && inputName !== 'submit') {
             priceAttributeGroup.priceAttributes.push({ 'key': inputName, 'value': formData[groupName][inputName] });
           }
         });
