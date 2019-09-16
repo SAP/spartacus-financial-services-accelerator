@@ -73,10 +73,3 @@
 <ng-template #loading>
   <cx-spinner></cx-spinner>
 </ng-template>
-<ng-container *ngIf="request$ | async as request">
-  <div>
-    <ul *ngIf="request.configurationSteps as steps">
-      <li *ngFor="let step of steps">{{step.name}}</li>
-    </ul>
-  </div>
-</ng-container>
