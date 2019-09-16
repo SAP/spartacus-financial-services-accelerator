@@ -1,6 +1,6 @@
 import { Validators } from '@angular/forms';
-import { CustomFormValidators } from '../../../../../cms-lib/util/validators/custom-form-validators';
 import { FormHelpers } from '../../../../../cms-lib/util/helpers/form-helpers';
+import { CustomFormValidators } from '../../../../../cms-lib/util/validators/custom-form-validators';
 import { FormDefinition, FormSubmitType } from '../dynamic-form/models/field-config.interface';
 
 export class FormSampleConfigurations {
@@ -229,7 +229,7 @@ export class FormSampleConfigurations {
           {
             type: 'title',
             label: 'Additional Driver 2',
-            name: 'additional-driver',
+            name: 'additional-driver-2',
             hidden: true
           },
           {
@@ -279,7 +279,7 @@ export class FormSampleConfigurations {
           {
             type: 'title',
             label: 'Additional Driver 3',
-            name: 'additional-driver',
+            name: 'additional-driver-3',
             hidden: true
           },
           {
@@ -329,7 +329,7 @@ export class FormSampleConfigurations {
           {
             type: 'title',
             label: 'Additional Driver 4',
-            name: 'additional-driver',
+            name: 'additional-driver-4',
             hidden: true
           },
           {
