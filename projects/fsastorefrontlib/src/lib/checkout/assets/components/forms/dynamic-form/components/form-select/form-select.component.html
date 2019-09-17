@@ -1,11 +1,19 @@
 <div
-  class="dynamic-field form-select"
-  [formGroup]="group">
-  <label>{{ config.label }}</label>
-  <select [formControlName]="config.name">
-    <option value="">{{ 'fscommon.pleaseSelect' | cxTranslate }}</option>
-    <option *ngFor="let option of config.options">
-      {{ option }}
-    </option>
-  </select>
+  class="dynamic-field form-select container"
+  [formGroup]="group"
+  [hidden]="group.controls[config.name].disabled"
+>
+  <div class="row align-items-center">
+    <label class="col-xs-12 col-md-6">{{ config.label }}</label>
+    <select class="col-xs-12 col-md-6" [formControlName]="config.name">
+      <option value="">{{ 'fscommon.pleaseSelect' | cxTranslate }}</option>
+      <option *ngFor="let option of config.options">
+        {{ option }}
+      </option>
+    </select>
+  </div>
+  <fsa-error-notice
+    [warn]="group.controls[config.name]"
+    [parentConfig]="config"
+  ></fsa-error-notice>
 </div>

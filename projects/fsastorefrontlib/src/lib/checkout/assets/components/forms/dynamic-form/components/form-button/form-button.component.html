@@ -1,10 +1,15 @@
 <div
-  class="dynamic-field form-button"
-  [formGroup]="group">
-  <button
-    class="primary-button"
-    [disabled]="config.disabled"
-    type="submit">
-    {{ config.label }}
-  </button>
+  class="dynamic-field form-button container"
+  [formGroup]="group"
+  [hidden]="group.controls[config.name].disabled"
+>
+  <div class="row justify-content-end">
+    <button
+      class="primary-button col-xs-12 col-md-6"
+      [disabled]="config.disabled"
+      type="submit"
+    >
+      {{ config.label }}
+    </button>
+  </div>
 </div>

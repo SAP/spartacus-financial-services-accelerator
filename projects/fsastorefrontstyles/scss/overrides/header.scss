@@ -30,6 +30,7 @@ header {
     color: var(--cx-color-text);
     text-transform: uppercase;
     max-width: var(--cx-max-width);
+    padding: 0;
     nav h5,
     .cx-login-greet {
       text-transform: uppercase;
@@ -66,6 +67,7 @@ header {
             top: 60px;
             left: 0;
             padding: 15px;
+            margin-left: 0;
           }
         }
         &.flyout > nav {

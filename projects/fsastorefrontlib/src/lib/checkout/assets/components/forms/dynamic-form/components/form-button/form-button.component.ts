@@ -6,4 +6,4 @@ import { FormGenericComponent } from '../form-generic.component';
   templateUrl: './form-button.component.html'
 })
 
-export class FormButtonComponent extends FormGenericComponent {}
+export class FormButtonComponent extends FormGenericComponent { }
