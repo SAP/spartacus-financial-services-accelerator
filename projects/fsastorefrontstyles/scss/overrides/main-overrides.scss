@@ -5,6 +5,7 @@
 .GeneralLayoutPageTemplate,
 .MultiStepCheckoutSummaryPageTemplate,
 .MultiTabsCategoryPageTemplate {
+  @include width1400;
   cx-page-slot {
     @include width1400;
     &.SideContent {
