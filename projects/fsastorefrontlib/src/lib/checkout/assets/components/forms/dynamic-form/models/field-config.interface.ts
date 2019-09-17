@@ -23,6 +23,7 @@ export interface FieldConfig {
   value?: any;
   hidden?: boolean;
   error?: string;
+  apiProvider?: string;
 }
 
 export enum FormSubmitType {

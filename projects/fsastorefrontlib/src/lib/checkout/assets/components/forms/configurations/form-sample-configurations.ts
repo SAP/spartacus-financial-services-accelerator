@@ -45,7 +45,9 @@ export class FormSampleConfigurations {
             jsonField: 'make',
             label: 'Vehicle Make',
             name: 'vehicleMake',
-            validation: [Validators.required]
+            options: ['Audi', 'BMW'],
+            validation: [Validators.required],
+            apiProvider: 'examplewebservices/auto/makes'
           },
           {
             type: 'select',
@@ -53,7 +55,8 @@ export class FormSampleConfigurations {
             depends: ['vehicleMake'],
             label: 'Vehicle Model',
             name: 'vehicleModel',
-            validation: [Validators.required]
+            validation: [Validators.required],
+            apiProvider: 'examplewebservices/auto/models?make=[vehicleMake]'
           },
           {
             type: 'select',
@@ -61,7 +64,8 @@ export class FormSampleConfigurations {
             jsonField: 'make.model.type',
             label: 'Vehicle Type',
             name: 'vehicleType',
-            validation: [Validators.required]
+            validation: [Validators.required],
+            apiProvider: 'examplewebservices/auto/type?make=[vehicleMake]&model=[vehicleModel]'
           },
           {
             type: 'select',
