@@ -37,27 +37,31 @@ export class FormSampleConfigurations {
           },
           {
             type: 'select',
-            options: ['BMW'],
+            jsonField: 'make',
             label: 'Vehicle Make',
-            name: 'vehicleMake'
+            name: 'vehicleMake',
+            validation: [Validators.required]
           },
           {
             type: 'select',
-            options: ['328'],
+            jsonField: 'make.model',
+            depends: ['vehicleMake'],
             label: 'Vehicle Model',
             name: 'vehicleModel',
             validation: [Validators.required],
           },
           {
             type: 'select',
-            options: ['BMW3.2SUPER'],
+            depends: ['vehicleMake', 'vehicleModel'],
+            jsonField: 'make.model.type',
             label: 'Vehicle Type',
             name: 'vehicleType',
             validation: [Validators.required],
           },
           {
             type: 'select',
-            options: ['1940', '1939', '1938', '1937', '1936'],
+            depends: ['vehicleMake', 'vehicleModel', 'vehicleType'],
+            jsonField: 'make.model.type.year',
             label: 'Vehicle Year',
             name: 'vehicleYear',
             validation: [Validators.required],
