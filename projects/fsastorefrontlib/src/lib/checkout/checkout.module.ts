@@ -39,7 +39,7 @@ import { UserIdentificationModule } from './assets/components/user-identificatio
 import { FSCartService } from './assets/services';
 import { FSCategoryService } from './assets/services/fs-category.service';
 import { effects } from './assets/store/effects/index';
-import { FSCheckoutStepGuard } from '../../cms-components/checkout/guards/fscheckout-step-guard';
+import { FSCheckoutStepGuard } from '../../cms-components/checkout/guards/fs-checkout-step-guard';
 import { reducerToken, reducerProvider } from '../../../src/lib/checkout/assets/store/reducers';
 import { StoreModule } from '@ngrx/store';
 import { CHECKOUT_FEATURE } from './assets/store';

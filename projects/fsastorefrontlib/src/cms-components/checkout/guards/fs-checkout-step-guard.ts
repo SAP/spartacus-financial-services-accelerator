@@ -4,7 +4,7 @@ import { CmsActivatedRouteSnapshot, RoutingConfigService, CartService } from '@s
 import { Observable, of } from 'rxjs';
 import { FSCheckoutStep } from '../../../lib/checkout/assets/components/checkout-progress/fs-checkout-step.component';
 import { FSCheckoutConfigService } from '../../../lib/checkout/assets/services';
-import { FSProduct } from './../../../../src/lib/occ-models';
+import { FSProduct } from '../../../lib/occ-models';
 
 @Injectable({
     providedIn: 'root'
