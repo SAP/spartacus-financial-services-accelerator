@@ -4,6 +4,7 @@ export const forms = {
     dateInPast: 'Date must be in the past',
     dateInFuture: 'Date must be in the future',
     lessThan100K: 'Value must be less than 100.000',
+    lessThan1M: 'Value must be less than 1.000.000',
     dateOfBirthMinimumAge: 'Must be over 18 years old',
     lessThan150: 'Value must be less than 150',
     enterValidEmail: 'Please enter a valid email',
