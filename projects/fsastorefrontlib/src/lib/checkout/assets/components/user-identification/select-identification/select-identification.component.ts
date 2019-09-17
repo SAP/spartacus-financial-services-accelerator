@@ -47,7 +47,7 @@ export class SelectIdentificationTypeComponent implements OnInit {
     this.selected = identificationType.name;
   }
   setIdentificationType() {
-    this.checkoutService.setIdentificationType('aaa');
+    this.checkoutService.setIdentificationType(this.selected);
     this.checkoutService.getIdentificationType().subscribe(identificationType => {
       if (identificationType) {
         this.routingService.go({ cxRoute: 'orderConfirmation' });
