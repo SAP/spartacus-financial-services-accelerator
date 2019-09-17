@@ -1,6 +1,7 @@
 <div
-  [hidden]="config.hidden"
   class="dynamic-field form-title"
-  [formGroup]="group">
+  [formGroup]="group"
+  [hidden]="group.controls[config.name].disabled"
+>
   <h4>{{ config.label }}</h4>
 </div>

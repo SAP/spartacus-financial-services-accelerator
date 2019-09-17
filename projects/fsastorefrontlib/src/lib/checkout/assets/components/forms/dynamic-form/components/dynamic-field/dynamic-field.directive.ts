@@ -1,16 +1,14 @@
 import { ComponentFactoryResolver, ComponentRef, Directive, Input, OnChanges, OnInit, Type, ViewContainerRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-
+import { FieldConfig } from '../../models/field-config.interface';
 import { FormButtonComponent } from '../form-button/form-button.component';
+import { FormDatePickerComponent } from '../form-datepicker/form-datepicker.component';
+import { FormGenericComponent } from '../form-generic.component';
 import { FormInputComponent } from '../form-input/form-input.component';
 import { FormSelectComponent } from '../form-select/form-select.component';
 import { FormTitleComponent } from '../form-title/form-title.component';
-import { FormDatePickerComponent } from '../form-datepicker/form-datepicker.component';
 
-import { FieldConfig } from '../../models/field-config.interface';
-import { FormGenericComponent } from '../form-generic.component';
-
-const components: {[type: string]: Type<FormGenericComponent>} = {
+const components: { [type: string]: Type<FormGenericComponent> } = {
   button: FormButtonComponent,
   input: FormInputComponent,
   select: FormSelectComponent,
@@ -31,7 +29,7 @@ export class DynamicFieldDirective implements OnChanges, OnInit {
   constructor(
     private resolver: ComponentFactoryResolver,
     private container: ViewContainerRef
-  ) {}
+  ) { }
 
   ngOnChanges() {
     if (this.component) {

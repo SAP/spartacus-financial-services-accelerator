@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 import { PricingService } from '../../services/pricing/pricing.service';
 import { FormSampleConfigurations } from './configurations/form-sample-configurations';
@@ -10,7 +10,7 @@ import { FormDefinition, FormSubmitType } from './dynamic-form/models/field-conf
   selector: 'fsa-form-component',
   templateUrl: './form.component.html'
 })
-export class FormComponent implements AfterViewInit, OnInit {
+export class FormComponent implements OnInit {
 
   constructor(
     protected routingService: RoutingService,
@@ -24,15 +24,6 @@ export class FormComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.categoryConfig = FormSampleConfigurations.sampleConfigurations.filter(item => item.categoryCode === this.formCategoryCode)[0];
-  }
-
-  ngAfterViewInit() {
-    let previousValid = this.form.valid;
-    this.form.changes.subscribe(() => {
-      if (this.form.valid !== previousValid) {
-        previousValid = this.form.valid;
-      }
-    });
   }
 
   submit(formData: { [name: string]: any }) {

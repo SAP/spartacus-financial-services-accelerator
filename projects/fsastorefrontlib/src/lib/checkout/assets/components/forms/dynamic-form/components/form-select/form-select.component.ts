@@ -7,7 +7,7 @@ import { OccMockFormService } from '../../../../../../../occ/form/occ-mock-form.
   templateUrl: './form-select.component.html'
 
 })
-export class FormSelectComponent extends FormGenericComponent  implements OnInit {
+export class FormSelectComponent extends FormGenericComponent implements OnInit {
 
   constructor(
     protected formService: OccMockFormService
@@ -29,7 +29,7 @@ export class FormSelectComponent extends FormGenericComponent  implements OnInit
     if (this.config.jsonField) {
       const nodes = this.config.jsonField.split('.');
       if (val !== null) {
-        this.config.options = this.formService.getDropdownValues( nodes, val);
+        this.config.options = this.formService.getDropdownValues(nodes, val);
       } else {
         this.config.options = this.formService.setInitialFormControlValues(nodes);
       }

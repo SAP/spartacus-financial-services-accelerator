@@ -12,6 +12,7 @@ export interface FromGroup {
 export interface FieldConfig {
   disabled?: boolean;
   label?: string;
+  group?: string;
   name?: string;
   options?: string[];
   depends?: string[];
@@ -21,6 +22,7 @@ export interface FieldConfig {
   validation?: ValidatorFn[];
   value?: any;
   hidden?: boolean;
+  error?: string;
 }
 
 export enum FormSubmitType {

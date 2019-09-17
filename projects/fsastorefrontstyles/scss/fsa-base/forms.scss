@@ -1,25 +1,24 @@
 fsa-form-component {
   display: block;
-  background-color: var(--cx-color-4);
-  border: 1px solid var(--cx-color-3);
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 0.5rem;
   .form {
-    max-width: 940px;
-    margin: 2rem auto;
+    background-color: var(--cx-color-4);
+    border: 1px solid var(--cx-color-3);
+    padding: 2rem 2vw;
   }
   .dynamic-field {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
     margin: 20px 0;
     label {
-      flex-basis: 100%;
-      flex: 1;
-      margin-right: 2rem;
-      text-align: right;
+      padding-right: 2rem;
+      margin-bottom: 0;
+      @include media-breakpoint-up(md) {
+        text-align: right;
+      }
     }
-    input, select {
-      width: 50%;
+    input,
+    select {
       border: 1px solid var(--cx-color-3);
       border-radius: 4px;
       background-color: var(--cx-color-1);
@@ -29,23 +28,32 @@ fsa-form-component {
         background-color: var(--cx-color-5);
       }
     }
-    &.form-title  {
+    &.form-title {
       border-top: 1px solid var(--cx-color-3);
       margin-top: 2rem;
-      width: 100%;
       h4 {
         padding-top: 2rem;
-        padding-left: 2rem;
-        font-size: 18px;
+        font-size: var(--cx-h6-font-size);
       }
     }
   }
-  .form-button {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 40px;
-    button {
-      max-width: 50%;
+  fsa-form-title:first-of-type {
+    .form-title {
+      margin-top: 0;
+      border-top: none;
     }
   }
+  .primary-button {
+    margin-top: 2rem;
+  }
+}
+// Global form errors and warnings
+.ng-invalid.ng-touched {
+  border-color: var(--cx-color-danger);
+  &:focus {
+    outline-color: var(--cx-color-danger);
+  }
+}
+.form-text {
+  color: var(--cx-color-danger);
 }
