@@ -22,12 +22,8 @@ export class FSCheckoutService {
                 userId: this.cartData.userId
             })
         );
-    }
-
-    getIdentificationType(): Observable<boolean> {
         return this.store.pipe(
             select(FSCheckoutSelectors.getIdentificationType)
         );
     }
-
 }
