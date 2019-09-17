@@ -40,6 +40,10 @@ import { FSCartService } from './assets/services';
 import { FSCategoryService } from './assets/services/fs-category.service';
 import { effects } from './assets/store/effects/index';
 import { FSCheckoutStepGuard } from '../../cms-components/checkout/guards/fscheckout-step-guard';
+import { reducerToken, reducerProvider } from '../../../src/lib/checkout/assets/store/reducers';
+import { StoreModule } from '@ngrx/store';
+import { CHECKOUT_FEATURE } from './assets/store';
+import { OccFSCheckoutService } from '../occ/checkout/fs-checkout.service';
 
 const routes: Routes = [
   {
@@ -137,6 +141,7 @@ const routes: Routes = [
     CardModule,
     FSCheckoutProgressModule,
     RouterModule.forChild(routes),
+    StoreModule.forFeature(CHECKOUT_FEATURE, reducerToken),
     EffectsModule.forFeature(effects),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
@@ -190,6 +195,6 @@ const routes: Routes = [
     FinalReviewComponent,
     FSMiniCartComponent
   ],
-  providers: [FSCartService, OccFSCartService, FSCategoryService]
+  providers: [FSCartService, OccFSCheckoutService, OccFSCartService, FSCategoryService, reducerProvider]
 })
 export class CheckoutModule { }

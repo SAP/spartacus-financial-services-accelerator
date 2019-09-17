@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CartDataService, RoutingService } from '@spartacus/core';
-import { OccFSCartService } from 'projects/fsastorefrontlib/src/lib/occ/cart/fs-cart.service';
 import { ActivatedRoute } from '@angular/router';
 import { FSCheckoutConfigService } from '../../../services';
+import { FSCheckoutService } from '../../../services/fs-checkout.service';
 
 @Component({
   selector: 'fsa-select-identification',
   templateUrl: './select-identification.component.html'
 })
-export class SelectIdentificationTypeComponent  implements OnInit {
+export class SelectIdentificationTypeComponent implements OnInit {
 
   checkoutStepUrlNext: string;
   checkoutStepUrlBack: string;
@@ -17,8 +17,8 @@ export class SelectIdentificationTypeComponent  implements OnInit {
     protected routingService: RoutingService,
     protected activatedRoute: ActivatedRoute,
     protected checkoutConfigService: FSCheckoutConfigService,
-    protected occCartService: OccFSCartService,
-    protected fsCartData: CartDataService,
+    protected checkoutService: FSCheckoutService,
+    protected fsCartData: CartDataService
   ) { }
 
   selected: string;
@@ -38,10 +38,6 @@ export class SelectIdentificationTypeComponent  implements OnInit {
   ];
 
   ngOnInit() {
-    this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-      this.activatedRoute
-    );
-
     this.checkoutStepUrlBack = this.checkoutConfigService.getPreviousCheckoutStepUrl(
       this.activatedRoute
     );
@@ -51,8 +47,12 @@ export class SelectIdentificationTypeComponent  implements OnInit {
     this.selected = identificationType.name;
   }
   setIdentificationType() {
-    this.occCartService.setIdentificationType(this.selected, this.fsCartData.cartId, this.fsCartData.userId).subscribe();
-    this.routingService.go({ cxRoute: 'orderConfirmation' });
+    this.checkoutService.setIdentificationType(this.selected);
+    this.checkoutService.getIdentificationType().subscribe(identificationType => {
+      if (identificationType) {
+        this.routingService.go({ cxRoute: 'orderConfirmation' });
+      }
+    });
   }
 
   back() {
