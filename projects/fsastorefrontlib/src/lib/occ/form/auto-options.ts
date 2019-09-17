@@ -4,7 +4,7 @@ export default {
       code: 'Audi',
       model: [
         {
-          code: 'a5',
+          code: 'A5',
           type: {
             code: 'A5 Quattro',
             year: [
@@ -25,7 +25,7 @@ export default {
           }
         },
         {
-          code: 'a6',
+          code: 'A6',
           type: {
             code: 'A6 Quattro',
             year: [
@@ -59,7 +59,7 @@ export default {
           }
         },
         {
-          code: 'a8',
+          code: 'A8',
           type: {
             code: 'A8 Quattro',
             year: [
