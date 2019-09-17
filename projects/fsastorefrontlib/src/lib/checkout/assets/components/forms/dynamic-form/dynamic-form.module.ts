@@ -11,7 +11,7 @@ import { FormSelectComponent } from './components/form-select/form-select.compon
 import { FormTitleComponent } from './components/form-title/form-title.component';
 import { DynamicFormComponent } from './containers/dynamic-form/dynamic-form.component';
 import { FSFormService } from './form.service';
-
+import { OccMockFormService } from '../../../../../occ/form/occ-mock-form.service';
 
 
 @NgModule({
@@ -40,6 +40,6 @@ import { FSFormService } from './form.service';
     FormTitleComponent,
     FormDatePickerComponent
   ],
-  providers: [FSFormService]
+  providers: [FSFormService, OccMockFormService]
 })
 export class DynamicFormModule { }
