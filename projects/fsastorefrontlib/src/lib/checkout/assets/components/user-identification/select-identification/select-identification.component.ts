@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CartDataService, RoutingService } from '@spartacus/core';
+import { RoutingService } from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
 import { FSCheckoutConfigService } from '../../../services';
 import { FSCheckoutService } from '../../../services/fs-checkout.service';
@@ -10,15 +10,13 @@ import { FSCheckoutService } from '../../../services/fs-checkout.service';
 })
 export class SelectIdentificationTypeComponent implements OnInit {
 
-  checkoutStepUrlNext: string;
   checkoutStepUrlBack: string;
 
   constructor(
     protected routingService: RoutingService,
     protected activatedRoute: ActivatedRoute,
     protected checkoutConfigService: FSCheckoutConfigService,
-    protected checkoutService: FSCheckoutService,
-    protected fsCartData: CartDataService
+    protected checkoutService: FSCheckoutService
   ) { }
 
   selected: string;
