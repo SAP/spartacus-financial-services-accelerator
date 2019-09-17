@@ -8,9 +8,8 @@ export class FSFormService {
 
   constructor(private fb: FormBuilder) { }
 
-  form = this.fb.group({});
-
   createForm(config) {
+    const form = this.fb.group({});
     let newGroup;
     let groupName;
     config.formGroups.forEach(formGroup => {
@@ -20,9 +19,9 @@ export class FSFormService {
         input.group = newGroup;
         newGroup.addControl(input.name, this.createControl(input));
       });
-      this.form.addControl(groupName, newGroup);
+      form.addControl(groupName, newGroup);
     });
-    return this.form;
+    return form;
   }
 
   createControl(config: FieldConfig) {

@@ -26,15 +26,6 @@ export class FormComponent implements AfterViewInit, OnInit {
     this.categoryConfig = FormSampleConfigurations.sampleConfigurations.filter(item => item.categoryCode === this.formCategoryCode)[0];
   }
 
-  ngAfterViewInit() {
-    let previousValid = this.form.valid;
-    this.form.changes.subscribe(() => {
-      if (this.form.valid !== previousValid) {
-        previousValid = this.form.valid;
-      }
-    });
-  }
-
   submit(formData: { [name: string]: any }) {
     if (this.form.valid) {
       switch (this.form.config.submitType) {
