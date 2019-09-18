@@ -25,7 +25,7 @@ export class FormSampleConfigurations {
           },
           {
             type: 'select',
-            options: ['MONTHLY', 'ANNUALLY'],
+            options: ['MONTHLY', 'YEARLY'],
             label: 'Payment Frequency',
             name: 'paymentFrequency',
             validation: [Validators.required]
