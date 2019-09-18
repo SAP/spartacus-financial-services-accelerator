@@ -23,6 +23,7 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     billingTimes: any;
     checkoutStepUrlNext: string;
     pricingData: PricingData;
+    productPrice: string;
 
     constructor(
         protected cartService: FSCartService,
@@ -45,10 +46,15 @@ export class ComparisonTablePanelItemComponent implements OnInit {
         this.pricingService.getPricingAttributes().subscribe(priceAttributes => {
             this.pricingData = priceAttributes;
             this.product$ = this.productService.getCalculatedProductData(this.productCode, this.pricingData);
-            this.product$.subscribe(data => {
-                if (data) {
+            this.product$.subscribe(productData => {
+                if (productData) {
+                    productData.price.oneTimeChargeEntries.forEach(oneTimeChargeEntry => {
+                        if (oneTimeChargeEntry.billingTime.code === 'paynow') {
+                            this.productPrice = oneTimeChargeEntry.price.formattedValue;
+                        }
+                    });
                     this.panelItemEntries = this.billingTimes.map(billingTime => {
-                        return data.price.oneTimeChargeEntries.find(entry => entry.billingTime.code === billingTime.code);
+                        return productData.price.oneTimeChargeEntries.find(entry => entry.billingTime.code === billingTime.code);
                     });
                 }
             });

@@ -68,6 +68,14 @@ export const fscommon = {
     whoOrWhatIsInsured: 'Who or What Is Insured',
     investmentDetails: 'Investment Details',
     whatDoesItCostMe: 'What Does It Cost Me?',
+    legalInformation: 'Legal Information',
+    register: {
+      dateOfBirthMinimumAge: 'Must be over 18 years old',
+      enterValidEmail: 'Please enter a valid email',
+      dateOfBirth: {
+        label: 'Date of Birth'
+      }
+    },
     category: {
       insurances_property_homeowners: 'Homeowners',
       insurances_property_renters: 'Renters',
@@ -75,10 +83,13 @@ export const fscommon = {
       insurances_travel: 'Travel',
       insurances_life: 'Life',
       insurances_event: 'Event',
-      insurances_savings: 'Savings'
+      insurances_savings: 'Savings',
+      banking_credit_card: 'Credit Card',
+      banking_current_account: 'Current Account'
     },
     pleaseSelect: 'Please select:',
     userIdentification: {
+      title: 'User Identification',
       nearest_branch: 'At the Nearest Branch',
       legal_identification: 'Legal Identification',
       video_identification: 'Video Identification'

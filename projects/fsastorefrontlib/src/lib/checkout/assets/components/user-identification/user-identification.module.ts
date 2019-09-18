@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CmsConfig, ConfigModule, I18nModule, RoutesConfig, RoutingConfig } from '@spartacus/core';
 import { SelectIdentificationTypeComponent } from './select-identification/select-identification.component';
+import { FSCheckoutService } from '../../services';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { SelectIdentificationTypeComponent } from './select-identification/selec
   ],
   declarations: [SelectIdentificationTypeComponent],
   exports: [SelectIdentificationTypeComponent],
-  entryComponents: [SelectIdentificationTypeComponent]
+  entryComponents: [SelectIdentificationTypeComponent],
+  providers: [FSCheckoutService]
 })
 export class UserIdentificationModule {
 }

@@ -21,10 +21,11 @@
   </label>
   <div class="row mt-5">
     <div class="col-6">
-      <button class="secondary-button">{{'common.back'| cxTranslate }}</button>
+      <button class="secondary-button" type="button" (click)="back()">{{'common.back'| cxTranslate }}</button>
     </div>
     <div class="col-6">
-      <button class="primary-button" [disabled]="!form.valid || !form.dirty">{{'fscommon.next'| cxTranslate }}</button>
+      <button class="primary-button" type="button" [disabled]="!form.valid || !form.dirty"
+        (click)="next()">{{'fscommon.next'| cxTranslate }}</button>
     </div>
   </div>
 </form>

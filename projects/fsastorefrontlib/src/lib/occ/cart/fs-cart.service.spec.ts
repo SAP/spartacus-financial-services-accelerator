@@ -87,16 +87,4 @@ describe('OccFSCartService', () => {
       }, `POST method and url`);
     }));
   });
-  describe('setIdentificationType', () => {
-    it('should set user identification type', async(() => {
-      service.setIdentificationType(identificationType, cartId, userId).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url === usersEndpoint + `/${userId}` + cartsEndpoint + `/${cartId}` + '/user-identification' &&
-          req.params.append('identificationType', identificationType) &&
-          req.method === 'PUT'
-        );
-      }, `PUT method and url`);
-    }));
-  });
 });
