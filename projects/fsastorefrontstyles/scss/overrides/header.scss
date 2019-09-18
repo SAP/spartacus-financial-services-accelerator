@@ -2,20 +2,20 @@
 @import '../theme';
 
 header {
-  background-color: var(--cx-color-1);
   color: var(--cx-color-11);
+  background-color: var(--cx-color-1);
   position: relative;
   @include media-breakpoint-down(md) {
     background-color: var(--cx-color-11);
   }
   &:before {
     content: '';
-    background: var(--cx-color-11);
     position: absolute;
-    width: 100%;
-    height: 50px;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 50px;
+    background: var(--cx-color-11);
     @include media-breakpoint-down(md) {
       display: none;
     }
@@ -100,7 +100,7 @@ header {
       color: var(--cx-color-6);
     }
     cx-icon {
-      font-size: 22px;
+      font-size: var(--cx-h4-font-size);
     }
     @include media-breakpoint-down(sm) {
       label {
