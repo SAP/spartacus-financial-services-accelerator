@@ -61,11 +61,16 @@
   border-bottom: $border-grey;
 }
 .section-header-heading {
-  @include linear-gradient-background(var(--cx-color-primary), var(--cx-color-9), 50%, 100%);
+  @include linear-gradient-background(
+    var(--cx-color-primary),
+    var(--cx-color-9),
+    50%,
+    100%
+  );
   border: none;
   color: var(--cx-color-1);
-  font-size: 20px;
-  font-weight: 400;
+  font-size: var(--cx-h5-font-size);
+  font-weight: var(--cx-font-weight-normal);
   line-height: 1.6;
   padding: 15px;
   text-align: center;
@@ -118,7 +123,12 @@
   padding-top: 15px;
   padding-bottom: 15px;
   line-height: 1.6;
-  @include linear-gradient-background(var(--cx-color-primary), var(--cx-color-9), 50%, 100%);
+  @include linear-gradient-background(
+    var(--cx-color-primary),
+    var(--cx-color-9),
+    50%,
+    100%
+  );
 }
 .list-data {
   margin: 0;

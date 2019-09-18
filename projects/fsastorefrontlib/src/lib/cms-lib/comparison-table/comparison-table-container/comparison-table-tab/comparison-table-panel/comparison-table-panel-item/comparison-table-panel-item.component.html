@@ -1,12 +1,19 @@
 <ng-container *ngIf="(product$ | async) as product; else loading">
   <div class="table-header">
     <h3 class="table-header-title">{{ product.name }}</h3>
-    <ng-container *ngIf=" product.price?.oneTimeChargeEntries[0]?.price?.value !== 0; else na ">
-      <h4 class="table-header-value">{{ product.price.oneTimeChargeEntries[0].price.formattedValue }}</h4>
+    <ng-container *ngIf="productPrice !== 0; else na">
+      <h4 class="table-header-value">{{ productPrice }}</h4>
     </ng-container>
-    <button (click)="createCartAndStartBundleForProduct(product.code,product.bundleTemplates[0]?.id)"
+    <button
+      (click)="
+        createCartAndStartBundleForProduct(
+          product.code,
+          product.bundleTemplates[0]?.id
+        )
+      "
       class="primary-button"
-      type="button">
+      type="button"
+    >
       {{ 'fscommon.select' | cxTranslate }}
     </button>
   </div>
@@ -14,41 +21,81 @@
     <ng-container *ngFor="let item of panelItemEntries">
       <div class="table-cell">
         <ng-container *ngIf="item !== undefined; else itemNotIncluded">
-          <div class="table-cell-value text-truncate" *ngIf="item.price?.value > 0 || item.chargeInformation; else itemIncluded" title="{{item.chargeInformation}}">
-              <ng-container *ngTemplateOutlet="itemValue context: {value: (item.price.value > 0 ? item.price.formattedValue : item.chargeInformation)}"></ng-container>
+          <div
+            class="table-cell-value text-truncate"
+            *ngIf="
+              item.price?.value > 0 || item.chargeInformation;
+              else itemIncluded
+            "
+            title="{{ item.chargeInformation }}"
+          >
+            <ng-container
+              *ngTemplateOutlet="
+                itemValue;
+                context: {
+                  value:
+                    item.price.value > 0
+                      ? item.price.formattedValue
+                      : item.chargeInformation
+                }
+              "
+            ></ng-container>
           </div>
         </ng-container>
       </div>
     </ng-container>
     <ng-container *ngFor="let investment of product.investments">
       <div class="table-cell special">
-        <p class="mb-2"><strong>{{investment.distributionPercentage}} % </strong></p>
-        <a class="link" [href]="getBaseUrl() + investment.investmentType?.factSheetDocument?.downloadUrl"><strong>{{investment.investmentType?.fundName}}</strong></a>
-        <p class="mb-0">ISIN: {{investment.investmentType?.isin}}</p>
-        <p class="mb-0">5 {{ 'fscommon.yearsPerformanse' | cxTranslate }}: {{investment.investmentType?.fiveYearPerformance}} %</p>
-        <p class="mb-0">{{ 'fscommon.riskAndReturningRate' | cxTranslate }}: {{investment.investmentType?.riskReturningRating}}</p>
+        <p class="mb-2">
+          <strong>{{ investment.distributionPercentage }} % </strong>
+        </p>
+        <a
+          class="link"
+          [href]="
+            getBaseUrl() +
+            investment.investmentType?.factSheetDocument?.downloadUrl
+          "
+          ><strong>{{ investment.investmentType?.fundName }}</strong></a
+        >
+        <p class="mb-0">ISIN: {{ investment.investmentType?.isin }}</p>
+        <p class="mb-0">
+          5 {{ 'fscommon.yearsPerformanse' | cxTranslate }}:
+          {{ investment.investmentType?.fiveYearPerformance }} %
+        </p>
+        <p class="mb-0">
+          {{ 'fscommon.riskAndReturningRate' | cxTranslate }}:
+          {{ investment.investmentType?.riskReturningRating }}
+        </p>
       </div>
     </ng-container>
   </div>
-  <button class="secondary-button mt-5" 
-  [routerLink]=" { cxRoute: 'category', 
-                  params: { code: product.defaultCategory?.parentCategory?.code }
-                 } | cxUrl">{{ 'fscommon.moreInfo' | cxTranslate }}</button>
+  <button
+    class="secondary-button mt-5"
+    [routerLink]="
+      {
+        cxRoute: 'category',
+        params: { code: product.defaultCategory?.parentCategory?.code }
+      } | cxUrl
+    "
+  >
+    {{ 'fscommon.moreInfo' | cxTranslate }}
+  </button>
 </ng-container>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
 </ng-template>
 <ng-template #itemNotIncluded>
-        <span class="FSA-icon icon-FSA-remove"></span>
+  <span class="FSA-icon icon-FSA-remove"></span>
 </ng-template>
 <ng-template #itemIncluded>
-        <span class="FSA-icon icon-FSA-ok"></span>
+  <span class="FSA-icon icon-FSA-ok"></span>
 </ng-template>
 <ng-template #itemValue let-value="value">
-      {{value}}
+  {{ value }}
 </ng-template>
 <ng-template #na>
-  <h2>
+  <h4 class="table-header-value">
     {{ 'fscommon.notAvailable' | cxTranslate }}
-  </h2>
+  </h4>
 </ng-template>
+

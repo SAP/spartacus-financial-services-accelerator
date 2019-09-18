@@ -40,6 +40,7 @@ export const fscommon = {
     postCode: 'Postcode',
     country: 'Country',
     expiryDate: 'Expiry Date',
+    expiryNotConfirmed: 'Not Confirmed',
     expires: 'Expires',
     myAgent: 'My Agent',
     billingAddress: 'Billing Address',
@@ -67,6 +68,7 @@ export const fscommon = {
     whoOrWhatIsInsured: 'Who or What Is Insured',
     investmentDetails: 'Investment Details',
     whatDoesItCostMe: 'What Does It Cost Me?',
+    legalInformation: 'Legal Information',
     register: {
       dateOfBirthMinimumAge: 'Must be over 18 years old',
       enterValidEmail: 'Please enter a valid email',
@@ -81,10 +83,13 @@ export const fscommon = {
       insurances_travel: 'Travel',
       insurances_life: 'Life',
       insurances_event: 'Event',
-      insurances_savings: 'Savings'
+      insurances_savings: 'Savings',
+      banking_credit_card: 'Credit Card',
+      banking_current_account: 'Current Account'
     },
     pleaseSelect: 'Please select:',
     userIdentification: {
+      title: 'User Identification',
       nearest_branch: 'At the Nearest Branch',
       legal_identification: 'Legal Identification',
       video_identification: 'Video Identification'
