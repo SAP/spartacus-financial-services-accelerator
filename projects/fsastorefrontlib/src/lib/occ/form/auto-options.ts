@@ -361,9 +361,9 @@ export default {
       code: 'Tesla',
       model: [
         {
-          code: 'S',
+          code: 'Tesla S',
           type: {
-            code: 'P100D',
+            code: 'S',
             year: [
               '2012',
               '2013',
