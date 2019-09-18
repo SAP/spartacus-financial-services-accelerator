@@ -26,7 +26,6 @@ export const getCheckoutSteps: MemoizedSelector<
     state => StateLoaderSelectors.loaderValueSelector(state)
 );
 
-
 export const getIdentificationType: MemoizedSelector<
     FSStateWithCheckout,
     boolean

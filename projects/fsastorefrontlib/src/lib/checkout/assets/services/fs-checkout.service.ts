@@ -11,8 +11,7 @@ export class FSCheckoutService {
     constructor(
         protected store: Store<FSStateWithCheckout>,
         protected cartData: CartDataService,
-    ) {
-    }
+    ) { }
 
     setIdentificationType(identificationType: string) {
         this.store.dispatch(
