@@ -11,6 +11,7 @@ export const fsaLayoutConfig: LayoutConfig = {
     header: {
       md: {
         slots: [
+          'TopHeaderSlot',
           'SiteLogo',
           'SearchBox',
           'SiteLogin',
@@ -23,7 +24,7 @@ export const fsaLayoutConfig: LayoutConfig = {
     },
     navigation: {
       xs: {
-        slots: ['SiteLogin', 'NavigationBar'],
+        slots: ['SiteLogin', 'NavigationBar', 'TopHeaderSlot'],
       }
     },
     MultiTabsCategoryPageTemplate: {

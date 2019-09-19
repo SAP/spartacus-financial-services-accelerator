@@ -12,6 +12,11 @@ $color-link-hover: #3498db;
 $color-button-secondary-hover: #385980;
 $color-darkest-blue: #00528a;
 
+//new colors, when new style guide is done, old colors removed, rename new colors!!
+$new-color-light-grey: #eeeeee;
+$new-color-dark-blue: #000033;
+$new-color-blue: #0066cc;
+
 $fsa-colors: (
   'primary': $color-blue,
   'secondary': $color-dark-blue,
@@ -24,7 +29,10 @@ $fsa-colors: (
   '6': $color-semi-dark-grey,
   '7': $color-link-hover,
   '8': $color-button-secondary-hover,
-  '9': $color-darkest-blue
+  '9': $color-darkest-blue,
+  '10': $new-color-light-grey,
+  '11': $new-color-dark-blue,
+  '12': $new-color-blue
 );
 
 $font-weight-light: 300;
@@ -40,6 +48,6 @@ $h3-font-size: $font-size-base * 1.714; //24px
 $h4-font-size: $font-size-base * 1.571; //22px
 $h5-font-size: $font-size-base * 1.428; //20px
 $h6-font-size: $font-size-base * 1.285; //18px
-$title-font-size: $font-size-base; //14px
+$title-font-size: $font-size-base * 1.142; //16px
 
 $border-grey: 1px solid var(--cx-color-3);

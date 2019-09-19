@@ -1,7 +1,7 @@
 <ng-container *ngIf="(product$ | async) as product; else loading">
   <div class="table-header">
     <h3 class="table-header-title">{{ product.name }}</h3>
-    <ng-container *ngIf="productPrice !== 0; else na">
+    <ng-container *ngIf="productPrice !== '0'; else na">
       <h4 class="table-header-value">{{ productPrice }}</h4>
     </ng-container>
     <button
@@ -98,4 +98,3 @@
     {{ 'fscommon.notAvailable' | cxTranslate }}
   </h4>
 </ng-template>
-
