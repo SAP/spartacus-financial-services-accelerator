@@ -22,25 +22,19 @@ export class FormSelectComponent extends FormGenericComponent implements OnInit 
         });
       });
     }
-    //this.getValuesFromAPI();
+    this.setFormControlValues();
   }
 
   setFormControlValues() {
-    // if (this.config.jsonField) {
-    //   const nodes = this.config.jsonField.split('.');
-    //   if (val !== null) {
-    //     this.config.options = this.formService.getDropdownValues(nodes, val);
-    //   } else {
-    //     this.config.options = this.formService.setInitialFormControlValues(nodes);
-    //   }
-    // }
     if (this.config.apiProvider) {
-      this.config.options = this.getValuesFromAPI();
-
+      const api = this.getAPI();
+      this.formService.getValues(api).subscribe(obj => {
+        this.config.options = obj;
+      });
     }
   }
 
-  getValuesFromAPI(): string[] {
+  getAPI(): string {
     if (this.config.apiProvider) {
       let apiConfigUrl = this.config.apiProvider;
       const dynamicParams = apiConfigUrl.match(/\[.*?\]/g);
@@ -53,7 +47,7 @@ export class FormSelectComponent extends FormGenericComponent implements OnInit 
           }
         });
       }
-      return ['123', '456'];
+      return apiConfigUrl;
     }
   }
 }

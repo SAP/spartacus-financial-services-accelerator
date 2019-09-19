@@ -11,6 +11,7 @@ import { fsaRoutingConfig } from './../cms-structure/routing/default-fsa-routing
 import { CheckoutModule } from './checkout/checkout.module';
 import { FSRegisterModule } from './cms-lib/user/register/fs-register.module';
 import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa-checkout-config';
+import { interceptors } from './occ/form/index';
 
 
 @NgModule({
@@ -53,7 +54,7 @@ export class FSAStorefrontModule {
   static withConfig(config?: StorefrontConfig): ModuleWithProviders {
     return {
       ngModule: FSAStorefrontModule,
-      providers: [provideConfig(config)]
+      providers: [provideConfig(config), interceptors]
     };
   }
 }

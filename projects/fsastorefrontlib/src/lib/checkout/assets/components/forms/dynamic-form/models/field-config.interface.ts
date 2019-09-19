@@ -16,7 +16,6 @@ export interface FieldConfig {
   name?: string;
   options?: string[];
   depends?: string[];
-  jsonField?: string;
   placeholder?: string;
   type: string;
   validation?: ValidatorFn[];
