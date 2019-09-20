@@ -2,58 +2,55 @@
 @import '../theme';
 
 footer {
-    .footer {
-        // radial gradient has problem with CSS Custom Properties and scss
-        @include radial-gradient-background($color-link-hover,$color-button-secondary-hover,$color-dark-blue);
-        margin-top: 80px;
-        padding-top: 40px;
+  .footer {
+    background-color: var(--cx-color-11);
+    margin-top: 80px;
+    padding-top: 40px;
+  }
+  .Footer {
+    @include media-breakpoint-down(sm) {
+      cx-navigation-ui {
+        justify-content: space-around;
+        flex-wrap: wrap;
+        flex-direction: row;
+        & > nav {
+          text-align: center;
+          flex-basis: 50%;
+          padding: 2vw;
+          margin: 0;
+        }
+        .wrapper {
+          text-align: center;
+        }
+      }
     }
-    .Footer {
-        @include media-breakpoint-down(sm) {
-            cx-navigation-ui {
-                justify-content: space-around;
-                flex-wrap: wrap; 
-                flex-direction: row;
-                & > nav {
-                    text-align: center; 
-                    flex-basis: 50%;
-                    padding: 2vw; 
-                    margin: 0;
-                }
-                .wrapper {
-                    text-align: center;
-                }
-            }
-        }
-        @include media-breakpoint-down(xs) {
-            cx-navigation-ui > nav {
-                flex-basis: 100%;
-                padding: 4vw; 
-            }
-        }
-        .notice {
-            color: var(--cx-color-1);
-            background-color: transparent;
-            border-top: 1px solid var(--cx-color-1);
-            margin-top: 20px;
-            font-size: 12px;
-            padding: 25px 0;
-            margin-bottom: 0;
-        }
-        li {
-            margin-top: 10px;
-        }
-        cx-generic-link a {
-            display: inline-block;
-            color: var(--cx-color-1);
-            font-size: 12px;
-            font-weight: normal;
-            border-bottom: 1px solid transparent;
-            &:hover {
-                text-decoration: none;
-                border-bottom: 1px solid var(--cx-color-1);
-                color: var(--cx-color-1);
-            }
-        }
+    @include media-breakpoint-down(xs) {
+      cx-navigation-ui > nav {
+        flex-basis: 100%;
+        padding: 4vw;
+      }
     }
+    .notice {
+      color: var(--cx-color-2);
+      background-color: var(--cx-color-1);
+      margin-top: 20px;
+      padding: 25px 0;
+      margin-bottom: 0;
+    }
+    li {
+      margin-top: 10px;
+    }
+    div.childs > nav > cx-generic-link a {
+      display: inline-block;
+      color: var(--cx-color-1);
+      font-weight: normal;
+      border-bottom: 1px solid transparent;
+      padding: 3px 0;
+      &:hover {
+        text-decoration: none;
+        border-bottom: 1px solid var(--cx-color-1);
+        color: var(--cx-color-1);
+      }
+    }
+  }
 }
