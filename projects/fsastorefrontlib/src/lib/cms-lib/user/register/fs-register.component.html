@@ -85,6 +85,33 @@
           <div class="form-group">
             <label>
               <span class="label-content">{{
+                  'forms.phoneNumber.label' | cxTranslate
+                }}</span>
+              <input
+                class="form-control"
+                [class.is-invalid]="
+                  fsUserRegistrationForm.get('phoneNumber').invalid &&
+                  fsUserRegistrationForm.get('phoneNumber').dirty
+                "
+                type="text"
+                name="phoneNumber"
+                formControlName="phoneNumber"
+              />
+              <div
+                class="invalid-feedback"
+                *ngIf="
+                  fsUserRegistrationForm.get('phoneNumber').invalid &&
+                  fsUserRegistrationForm.get('phoneNumber').dirty
+                "
+              >
+                <span>{{ 'forms.minimumPhoneNumber' | cxTranslate }}</span>
+              </div>
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label>
+              <span class="label-content">{{
                 'register.emailAddress.label' | cxTranslate
               }}</span>
               <input

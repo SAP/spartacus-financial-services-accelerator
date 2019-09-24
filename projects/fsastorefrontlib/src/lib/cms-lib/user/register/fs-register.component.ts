@@ -27,6 +27,7 @@ export class FSRegisterComponent extends RegisterComponent {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       dateOfBirth: ['', [Validators.required, CustomFormValidators.dateOfBirthValidator(18)]],
+      phoneNumber: ['', CustomFormValidators.regexValidator(CustomFormValidators.phoneNumberRegex)],
       email: ['', [Validators.required, CustomFormValidators.regexValidator(CustomFormValidators.emailRegex)]],
       password: ['', [Validators.required, CustomFormValidators.regexValidator(CustomFormValidators.passwordRegex)]],
       passwordconf: ['', Validators.required],
@@ -45,6 +46,7 @@ export class FSRegisterComponent extends RegisterComponent {
       email,
       password,
       titleCode,
+      phoneNumber
     } = this.fsUserRegistrationForm.value;
     const userRegisterFormData: FSUserSignUp = {
       firstName,
@@ -53,6 +55,7 @@ export class FSRegisterComponent extends RegisterComponent {
       uid: email,
       password,
       titleCode,
+      phoneNumber
     };
 
     this.fsUserService.register(userRegisterFormData);

@@ -11,7 +11,10 @@ export const forms = {
     vehicleValue: 'Vehicle value must be a number between 3.000 and 1.000.000',
     dateOfBirth: {
       label: 'Date of Birth'
-    }
-
+    },
+    phoneNumber: {
+      label: 'Phone number'
+    },
+    minimumPhoneNumber: 'Phone number should be between minimum 6 characters and maximum 20'
   }
 };
