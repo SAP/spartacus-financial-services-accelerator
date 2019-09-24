@@ -22,8 +22,15 @@
               <span class="value">{{ quote.quoteId }}</span>
             </div>
             <div class="info-card-data">
-              <span class="title">{{ 'quote.quoteStatus' | cxTranslate }}</span>
-              <span class="value">{{ quote.quoteStatus | titlecase }}</span>
+              <span class="title">{{
+                'quote.quoteStatus.title' | cxTranslate
+              }}</span>
+              <span *ngIf="quote.state.code === 'BIND'" class="value">
+                {{ 'quote.quoteStatus.ready' | cxTranslate }}
+              </span>
+              <span *ngIf="quote.state.code === 'UNBIND'" class="value">
+                {{ 'quote.quoteStatus.unfinished' | cxTranslate }}
+              </span>
             </div>
             <div class="info-card-data">
               <span class="title">{{
