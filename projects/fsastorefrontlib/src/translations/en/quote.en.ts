@@ -16,7 +16,8 @@ export const quote = {
     quoteStatus: {
       title: 'Quote status',
       ready: 'Ready for Purchase',
-      unfinished: 'Unfinished'
+      unfinished: 'Unfinished',
+      expired: 'Expired'
     }
   }
 };
