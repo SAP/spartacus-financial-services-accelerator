@@ -48,7 +48,6 @@ import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa
     CmsLibModule
   ],
   declarations: []
-
 })
 export class FSAStorefrontModule {
   static withConfig(config?: StorefrontConfig): ModuleWithProviders {
