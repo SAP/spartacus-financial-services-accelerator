@@ -28,4 +28,4 @@ import { OccAgentService } from './agent/agent.service';
     { provide: OccConfig, useExisting: Config },
   ],
 })
-export class OccModule { }
+export class OccModule {}

@@ -8,9 +8,8 @@ describe('FindAgentNavigationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FindAgentNavigationComponent ]
-    })
-    .compileComponents();
+      declarations: [FindAgentNavigationComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

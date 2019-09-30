@@ -8,9 +8,8 @@ describe('AgentRootComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AgentRootComponent ]
-    })
-    .compileComponents();
+      declarations: [AgentRootComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

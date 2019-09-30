@@ -6,11 +6,10 @@ import { throwError, Observable } from 'rxjs';
 
 @Injectable()
 export class OccAgentService {
-
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService
-  ) { }
+  ) {}
 
   public getAgentsByCategory(category: string): Observable<any> {
     const url = this.getAgentsEndpoint();
@@ -23,7 +22,6 @@ export class OccAgentService {
   }
   protected getAgentsEndpoint() {
     const agentsEndpoint = '/agents/';
-    return (
-      (this.occEndpointService.getBaseEndpoint() + agentsEndpoint));
+    return this.occEndpointService.getBaseEndpoint() + agentsEndpoint;
   }
 }

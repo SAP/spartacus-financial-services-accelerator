@@ -27,4 +27,4 @@ import { AgentModule } from './agent/agent.module';
     CustomContainerModule,
   ],
 })
-export class CmsLibModule { }
+export class CmsLibModule {}

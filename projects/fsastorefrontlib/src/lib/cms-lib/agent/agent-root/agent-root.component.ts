@@ -5,14 +5,13 @@ import { OccAgentService } from '../../../occ/agent/agent.service';
 
 @Component({
   selector: 'fsa-agent-root',
-  templateUrl: './agent-root.component.html'
+  templateUrl: './agent-root.component.html',
 })
 export class AgentRootComponent implements OnInit {
-
   constructor(
     protected componentData: CmsComponentData<CmsAgentRootComponent>,
     protected agentService: OccAgentService
-  ) { }
+  ) {}
 
   agentList$;
   agentRootCategory;
@@ -20,8 +19,9 @@ export class AgentRootComponent implements OnInit {
   ngOnInit() {
     this.componentData.data$.subscribe(data => {
       this.agentRootCategory = data.agentRootCategory;
-      this.agentList$ = this.agentService.getAgentsByCategory(data.agentRootCategory);
+      this.agentList$ = this.agentService.getAgentsByCategory(
+        data.agentRootCategory
+      );
     });
   }
-
 }

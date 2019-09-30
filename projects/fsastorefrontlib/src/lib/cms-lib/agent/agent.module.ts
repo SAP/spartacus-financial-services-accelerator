@@ -18,17 +18,17 @@ import { RouterModule } from '@angular/router';
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         CMSAgentRootComponent: {
-          component: AgentRootComponent
+          component: AgentRootComponent,
         },
         FindAgentNavigationTypeFlex: {
-          component: FindAgentNavigationComponent
-        }
-      }
-    })
+          component: FindAgentNavigationComponent,
+        },
+      },
+    }),
   ],
   declarations: [AgentRootComponent, FindAgentNavigationComponent],
   exports: [AgentRootComponent, FindAgentNavigationComponent],
   entryComponents: [AgentRootComponent, FindAgentNavigationComponent],
-  providers: [OccAgentService]
+  providers: [OccAgentService],
 })
-export class AgentModule { }
+export class AgentModule {}
