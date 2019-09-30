@@ -18,11 +18,9 @@ import { FSProductService } from '../../checkout/assets/services/product/fs-prod
 import { OccBillingTimeService } from '../../occ/billing-time/billing-time.service';
 import { OccProductService } from '../../occ/pricing/occ-product.service';
 import { ComparisonTableContainerComponent } from './comparison-table-container/comparison-table-container.component';
-// tslint:disable-next-line:max-line-length
-import { ComparisonTablePanelItemComponent } from './comparison-table-container/comparison-table-tab/comparison-table-panel/comparison-table-panel-item/comparison-table-panel-item.component';
-// tslint:disable-next-line:max-line-length
-import { ComparisonTablePanelComponent } from './comparison-table-container/comparison-table-tab/comparison-table-panel/comparison-table-panel.component';
-import { ComparisonTableTabComponent } from './comparison-table-container/comparison-table-tab/comparison-table-tab.component';
+import { ComparisonTablePanelItemComponent } from './comaprison-table-panel-item/comparison-table-panel-item.component';
+import { ComparisonTablePanelComponent } from './comparison-table-panel/comparison-table-panel.component';
+import { ComparisonTableTabComponent } from './comparison-table-tab/comparison-table-tab.component';
 import { ComparisonTableService } from './comparison-table.service';
 
 @NgModule({
