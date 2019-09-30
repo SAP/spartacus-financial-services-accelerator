@@ -28,7 +28,7 @@
             </div>
             <div class="info-card-data">
               <span class="title">{{ 'claim.dateOfLoss' | cxTranslate }}</span>
-              <span class="value" *ngIf="claim.dateOfLoss != undefined; else: na">{{ claim.dateOfLoss | cxDate: "dd-MM-yyyy" }}</span>
+              <span class="value" *ngIf="claim.dateOfLoss != undefined; else: na">{{ claim.dateOfLoss | cxDate: 'dd MMM yyyy' }}</span>
             </div>
             <div class="info-card-data">
               <span class="title">{{ 'fscommon.status' | cxTranslate }}</span>

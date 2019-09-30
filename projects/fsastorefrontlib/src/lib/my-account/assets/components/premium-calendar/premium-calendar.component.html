@@ -11,7 +11,7 @@
           <h3 class="col"> {{ 'fscommon.paymentMethod' | cxTranslate }} </h3>
         </div>
         <div *ngFor="let policy of policies.insurancePolicies">
-          <div class="premium-data-row row" (click)="policy.opened=!policy.opened" [ngClass]="{'clickable': policy.billingData?.length > 1, 'active':policy.opened}">
+          <div class="premium-data-row row" (click)="opened=!opened" [ngClass]="{'clickable': policy.billingData?.length > 1, 'active':opened}">
             <div class="col">
               <div class=row>
                 <div class="col-4">
@@ -29,7 +29,7 @@
               {{policy.paymentFrequency}}
             </div>
             <div class="col" [ngClass]="(policy.billingData[0]?.paymentStatus == 'Overdue')?'warn':'notice'">
-              {{policy.billingData[0]?.billingDate | cxDate: "dd-MM-yyyy"}}
+              {{policy.billingData[0]?.billingDate | cxDate: 'dd MMM yyyy'}}
               <div class="warn" *ngIf="policy.billingData[0]?.paymentStatus == 'Overdue'">
                 {{ 'premiumCalendar.overdue' | cxTranslate }}
               </div>
@@ -43,14 +43,14 @@
               </ng-container>
             </div>
           </div>
-          <div class="accordion row" *ngIf="policy.billingData?.length > 1;"[ngClass]="policy.opened ? 'opened' : ''" >
+          <div class="accordion row" *ngIf="policy.billingData?.length > 1;"[ngClass]="opened ? 'opened' : ''" >
             <div class="container-fluid">
               <ng-container *ngFor="let dueDate of policy.billingData | slice:1">
                 <div class="row">
                   <div class="col"></div>
                   <div class="col"></div>
                   <div class="col color-dot">
-                    {{dueDate.billingDate | cxDate: "dd-MM-yyyy"}}
+                    {{dueDate.billingDate | cxDate: 'dd MMM yyyy'}}
                   </div>
                   <div class="col color-dot">
                     {{dueDate.paymentAmount}}
@@ -87,14 +87,14 @@
                       {{policy.paymentFrequency}}
                     </span>
                   </div>
-                  <div class="container cards__data border-bottom-grey" (click)="policy.opened=!policy.opened" [ngClass]="{'clickable': policy.billingData.length > 1, 'active':policy.opened}">
+                  <div class="container cards__data border-bottom-grey" (click)="opened=!opened" [ngClass]="{'clickable': policy.billingData.length > 1, 'active':opened}">
                     <div class="row">
                       <div class="col-6">
                         <div class="title">
                             <div class="cell-text text-left d-flex justify-content-around">{{ 'premiumCalendar.dueDate' | cxTranslate }}</div>
                         </div>
                         <div class="title text-left d-flex justify-content-around" [ngClass]="(policy.billingData[0]?.paymentStatus == 'Overdue')?'warn':'notice'">
-                          {{policy.billingData[0]?.billingDate | cxDate: "dd-MM-yyyy"}}
+                          {{policy.billingData[0]?.billingDate | cxDate: 'dd MMM yyyy'}}
                           <div class="warn" *ngIf="policy.billingData[0]?.paymentStatus == 'Overdue'">{{ 'premiumCalendar.overdue' | cxTranslate }}</div>
                         </div>
                       </div>
@@ -111,12 +111,12 @@
                     </div>
                   </div>
                   <ng-container *ngIf="policy.billingData.length > 1;">
-                    <div class="accordion container" [ngClass]="policy.opened ? 'opened' : ''">
+                    <div class="accordion container" [ngClass]="opened ? 'opened' : ''">
                       <ul class="list-data">
                         <ng-container *ngFor="let dueDate of policy.billingData | slice:1">
                             <li class="row list-item border-bottom-grey">
                               <div class="col-6 text-left d-flex justify-content-around">
-                                {{dueDate.billingDate | cxDate: "dd-MM-yyyy"}}
+                                {{dueDate.billingDate | cxDate: 'dd MMM yyyy'}}
                               </div>
                               <div class="col-6 text-left d-flex justify-content-around">
                                 {{dueDate.paymentAmount}}

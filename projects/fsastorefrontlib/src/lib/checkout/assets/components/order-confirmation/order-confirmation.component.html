@@ -225,7 +225,7 @@
                                         {{ 'fscommon.startDate' | cxTranslate }}:
                                     </div>
                                     <div class="short-overview-value col-5">
-                                        {{ order.insuranceQuote?.startDate }}
+                                        {{ order.insuranceQuote?.startDate | cxDate: 'dd MM yyyy' }}
                                     </div>
                                 </div>
                                 <div class="short-overview-item row">

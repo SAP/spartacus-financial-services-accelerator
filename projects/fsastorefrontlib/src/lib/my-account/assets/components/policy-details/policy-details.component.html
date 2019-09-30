@@ -51,7 +51,7 @@
                 <li class="accordion-list-item row">
                     <div class="col-6 item-label">{{ 'fscommon.duration' | cxTranslate }}</div>
                     <div class="col-6 value notice">
-                        {{policy.policyStartDate | cxDate: "dd-MM-yyyy"}} - {{policy.policyEndDate | cxDate: "dd-MM-yyyy"}}
+                        {{policy.policyStartDate | cxDate: 'dd MMM yyyy'}} - {{policy.policyEndDate | cxDate: 'dd MMM yyyy'}}
                     </div>
                 </li>
             </ul>     
@@ -151,7 +151,7 @@
                         {{ 'policy.policy' | cxTranslate }}
                     </div>
                     <div class="col-6 col-sm-3 value notice">
-                        {{policy.policyStartDate | cxDate: "dd-MM-yyyy"}} - {{policy.policyEndDate | cxDate: "dd-MM-yyyy"}}
+                        {{policy.policyStartDate | cxDate: 'dd MMM yyyy'}} - {{policy.policyEndDate | cxDate: 'dd MMM yyyy'}}
                     </div>
                     <div class="col-xs-12 col-sm-6 download">
                         {{ 'fscommon.donwloadPDFLink' | cxTranslate }}
