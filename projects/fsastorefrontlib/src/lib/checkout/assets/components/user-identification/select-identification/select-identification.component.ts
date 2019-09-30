@@ -6,10 +6,9 @@ import { FSCheckoutService } from '../../../services/fs-checkout.service';
 
 @Component({
   selector: 'fsa-select-identification',
-  templateUrl: './select-identification.component.html'
+  templateUrl: './select-identification.component.html',
 })
 export class SelectIdentificationTypeComponent implements OnInit {
-
   checkoutStepUrlBack: string;
 
   constructor(
@@ -17,22 +16,22 @@ export class SelectIdentificationTypeComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     protected checkoutConfigService: FSCheckoutConfigService,
     protected checkoutService: FSCheckoutService
-  ) { }
+  ) {}
 
   selected: string;
   identificationTypes: Array<any> = [
     {
       name: 'nearest_branch',
-      icon: 'icon-FSA-person'
+      icon: 'icon-FSA-person',
     },
     {
       name: 'legal_identification',
-      icon: 'icon-FSA-payment-cards'
+      icon: 'icon-FSA-payment-cards',
     },
     {
       name: 'video_identification',
-      icon: 'icon-FSA-shield'
-    }
+      icon: 'icon-FSA-shield',
+    },
   ];
 
   ngOnInit() {
@@ -45,11 +44,13 @@ export class SelectIdentificationTypeComponent implements OnInit {
     this.selected = identificationType.name;
   }
   setIdentificationType() {
-    this.checkoutService.setIdentificationType(this.selected).subscribe(identificationType => {
-      if (identificationType) {
-        this.routingService.go({ cxRoute: 'orderConfirmation' });
-      }
-    });
+    this.checkoutService
+      .setIdentificationType(this.selected)
+      .subscribe(identificationType => {
+        if (identificationType) {
+          this.routingService.go({ cxRoute: 'orderConfirmation' });
+        }
+      });
   }
 
   back() {

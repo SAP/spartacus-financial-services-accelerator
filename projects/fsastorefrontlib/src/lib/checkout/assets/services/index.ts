@@ -5,7 +5,7 @@ import { FSCheckoutService } from './fs-checkout.service';
 export const services: any[] = [
   FSCartService,
   FSCheckoutConfigService,
-  FSCheckoutService
+  FSCheckoutService,
 ];
 
 export * from '../../../checkout/assets/services/fs-cart.service';

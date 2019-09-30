@@ -6,22 +6,26 @@ import { map } from 'rxjs/operators';
 import * as fromActions from '../../../../checkout/assets/store/actions/index';
 import { PricingData } from '../../models/pricing.interface';
 
-
 @Injectable()
 export class FSProductService {
+  constructor(protected store: Store<StateWithProduct>) {}
 
-    constructor(protected store: Store<StateWithProduct>) { }
+  protected products: { [code: string]: Observable<Product> } = {};
 
-    protected products: { [code: string]: Observable<Product> } = {};
+  getCalculatedProductData(
+    productCode: string,
+    pricingData: PricingData
+  ): Observable<Product> {
+    this.store.dispatch(
+      new fromActions.LoadCalculatedProductData({
+        productCode: productCode,
+        pricingData: pricingData,
+      })
+    );
 
-    getCalculatedProductData(productCode: string, pricingData: PricingData): Observable<Product> {
-        this.store.dispatch(new fromActions.LoadCalculatedProductData({
-            productCode: productCode,
-            pricingData: pricingData,
-        }));
-
-        return this.store.pipe(
-            select(ProductSelectors.getSelectedProductStateFactory(productCode)),
-            map(productState => productState.value));
-    }
+    return this.store.pipe(
+      select(ProductSelectors.getSelectedProductStateFactory(productCode)),
+      map(productState => productState.value)
+    );
+  }
 }

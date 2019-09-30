@@ -7,10 +7,9 @@ import { AuthService } from '@spartacus/core';
 
 @Component({
   selector: 'fsa-deleted-claim-dialog',
-  templateUrl: './delete-claim-dialog.component.html'
+  templateUrl: './delete-claim-dialog.component.html',
 })
 export class DeleteClaimDialogComponent implements OnInit {
-
   constructor(
     public activeModal: NgbActiveModal,
     private service: ClaimService,
@@ -40,7 +39,7 @@ export class DeleteClaimDialogComponent implements OnInit {
 
   private createClaimFormGroup(claimNumber) {
     return this.fb.group({
-      claimNumber: claimNumber
+      claimNumber: claimNumber,
     });
   }
 

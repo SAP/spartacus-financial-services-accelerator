@@ -4,7 +4,6 @@ import { ConfigModule, CmsConfig, I18nModule } from '@spartacus/core';
 import { CmsCategoryFormSubmitComponent } from './cms-category-form-submit-component';
 import { FSFormsModule } from '../../../checkout/assets/components/forms/form.module';
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -13,13 +12,13 @@ import { FSFormsModule } from '../../../checkout/assets/components/forms/form.mo
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         CMSFormSubmitComponent: {
-            component: CmsCategoryFormSubmitComponent
-          }
-      }
+          component: CmsCategoryFormSubmitComponent,
+        },
+      },
     }),
   ],
   declarations: [CmsCategoryFormSubmitComponent],
   exports: [CmsCategoryFormSubmitComponent],
-  entryComponents: [CmsCategoryFormSubmitComponent]
+  entryComponents: [CmsCategoryFormSubmitComponent],
 })
-export class CategoryFormsModule { }
+export class CategoryFormsModule {}

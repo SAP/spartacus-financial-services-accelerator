@@ -2,7 +2,15 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { CmsConfig, CmsModule, ConfigModule, I18nModule, RoutesConfig, RoutingConfig, UrlModule } from '@spartacus/core';
+import {
+  CmsConfig,
+  CmsModule,
+  ConfigModule,
+  I18nModule,
+  RoutesConfig,
+  RoutingConfig,
+  UrlModule,
+} from '@spartacus/core';
 import { PageComponentModule, SpinnerModule } from '@spartacus/storefront';
 import { FSCartService } from '../../checkout/assets/services';
 import { PricingService } from '../../checkout/assets/services/pricing/pricing.service';
@@ -16,7 +24,6 @@ import { ComparisonTablePanelItemComponent } from './comparison-table-container/
 import { ComparisonTablePanelComponent } from './comparison-table-container/comparison-table-tab/comparison-table-panel/comparison-table-panel.component';
 import { ComparisonTableTabComponent } from './comparison-table-container/comparison-table-tab/comparison-table-tab.component';
 import { ComparisonTableService } from './comparison-table.service';
-
 
 @NgModule({
   imports: [
@@ -32,29 +39,36 @@ import { ComparisonTableService } from './comparison-table.service';
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
         CMSMultiComparisonTabContainer: {
-          component: ComparisonTableContainerComponent
+          component: ComparisonTableContainerComponent,
         },
         CMSComparisonTabComponent: {
-          component: ComparisonTableTabComponent
+          component: ComparisonTableTabComponent,
         },
         ComparisonPanelCMSComponent: {
-          component: ComparisonTablePanelComponent
-        }
-      }
-    })
+          component: ComparisonTablePanelComponent,
+        },
+      },
+    }),
   ],
   declarations: [
     ComparisonTableContainerComponent,
     ComparisonTableTabComponent,
     ComparisonTablePanelComponent,
-    ComparisonTablePanelItemComponent
+    ComparisonTablePanelItemComponent,
   ],
   entryComponents: [
     ComparisonTableContainerComponent,
     ComparisonTableTabComponent,
     ComparisonTablePanelComponent,
-    ComparisonTablePanelItemComponent
+    ComparisonTablePanelItemComponent,
   ],
-  providers: [OccBillingTimeService, OccProductService, ComparisonTableService, FSCartService, PricingService, FSProductService]
+  providers: [
+    OccBillingTimeService,
+    OccProductService,
+    ComparisonTableService,
+    FSCartService,
+    PricingService,
+    FSProductService,
+  ],
 })
-export class ComparisonTableModule { }
+export class ComparisonTableModule {}

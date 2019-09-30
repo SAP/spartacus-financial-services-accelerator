@@ -10,8 +10,7 @@ export const forms = {
     enterValidEmail: 'Please enter a valid email',
     vehicleValue: 'Vehicle value must be a number between 3.000 and 1.000.000',
     dateOfBirth: {
-      label: 'Date of Birth'
-    }
-
-  }
+      label: 'Date of Birth',
+    },
+  },
 };

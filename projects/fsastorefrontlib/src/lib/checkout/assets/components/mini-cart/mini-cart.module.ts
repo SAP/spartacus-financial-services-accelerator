@@ -5,14 +5,10 @@ import { I18nModule } from '@spartacus/core';
 import { FSMiniCartComponent } from './mini-cart.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    I18nModule,
-    RouterModule
-  ],
+  imports: [CommonModule, I18nModule, RouterModule],
   declarations: [FSMiniCartComponent],
   entryComponents: [FSMiniCartComponent],
   exports: [FSMiniCartComponent],
-  providers: []
+  providers: [],
 })
 export class MiniCartModule {}

@@ -6,7 +6,7 @@ import { CmsMultiComparisonTabContainer } from '../../../occ-models';
 @Component({
   selector: 'fsa-comparison-table-container',
   templateUrl: './comparison-table-container.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComparisonTableContainerComponent implements OnInit {
   constructor(
@@ -20,8 +20,10 @@ export class ComparisonTableContainerComponent implements OnInit {
   ngOnInit() {
     this.component$ = this.componentData.data$;
     this.component$.subscribe(data => {
-    if (data.simpleCMSComponents) {
-        this.tabs$ = this.comparisonTableService.getComparisonTabs(data.simpleCMSComponents.split(' '));
+      if (data.simpleCMSComponents) {
+        this.tabs$ = this.comparisonTableService.getComparisonTabs(
+          data.simpleCMSComponents.split(' ')
+        );
       }
     });
   }

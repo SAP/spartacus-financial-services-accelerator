@@ -1,5 +1,5 @@
-<ng-container *ngIf="(comparisonPanel | async) as panel">
-  <ng-container *ngIf="(billingData | async) as billingInfo">
+<ng-container *ngIf="comparisonPanel | async as panel">
+  <ng-container *ngIf="billingData | async as billingInfo">
     <div class="fixed-column">
       <div class="table-header"></div>
       <div class="table-cell-wrapper">
@@ -7,16 +7,27 @@
           <span class="table-cell-title text-truncate" title="{{ item.name }}">
             {{ item.name }}
           </span>
-          <div class="fsa-tooltip" tooltipClass="ct-tooltip" ngbTooltip="{{ item.helpContent }}" triggers="click:blur" placement="top">i</div>
+          <div
+            class="fsa-tooltip"
+            tooltipClass="ct-tooltip"
+            ngbTooltip="{{ item.helpContent }}"
+            triggers="click:blur"
+            placement="top"
+          >
+            i
+          </div>
         </div>
       </div>
     </div>
     <div class="slide-column-wrapper">
       <div class="slide-column">
-        <ng-container *ngIf="(comparisonPanel | async) as panel">
+        <ng-container *ngIf="comparisonPanel | async as panel">
           <ng-container *ngFor="let productCode of getProductList()">
             <ng-container *ngIf="productCode">
-              <fsa-comparison-table-panel-item [productCode]="productCode" [billingTimes]="billingInfo.billingTimes"></fsa-comparison-table-panel-item>
+              <fsa-comparison-table-panel-item
+                [productCode]="productCode"
+                [billingTimes]="billingInfo.billingTimes"
+              ></fsa-comparison-table-panel-item>
             </ng-container>
           </ng-container>
         </ng-container>
@@ -24,4 +35,3 @@
     </div>
   </ng-container>
 </ng-container>
-  

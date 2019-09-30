@@ -13,7 +13,7 @@ export interface PolicyState {
 export const initialState: PolicyState = {
   data: {},
   refresh: false,
-  loaded: false
+  loaded: false,
 };
 
 export function reducer(
@@ -28,7 +28,7 @@ export function reducer(
         ...state,
         data,
         refresh: false,
-        loaded: true
+        loaded: true,
       };
     }
     case fromAction.CLEAR_POLICY_DETAILS: {

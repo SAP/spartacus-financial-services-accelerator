@@ -13,7 +13,6 @@ import { effects } from './assets/store/effects/index';
 import { reducerProvider, reducerToken } from './assets/store/reducers/index';
 import { FSUpdateProfileModule } from './assets/components/update-profile/fs-update-profile.module';
 
-
 @NgModule({
   imports: [
     ClaimsModule,
@@ -25,9 +24,16 @@ import { FSUpdateProfileModule } from './assets/components/update-profile/fs-upd
     InboxModule,
     FSUpdateProfileModule,
     StoreModule.forFeature('assets', reducerToken),
-    EffectsModule.forFeature(effects)
+    EffectsModule.forFeature(effects),
   ],
-  exports: [ ClaimsModule, InboxModule, QuotesModule, PoliciesModule, PolicyDetailsModule, PremiumCalendarModule ],
-  providers: [ reducerProvider ]
+  exports: [
+    ClaimsModule,
+    InboxModule,
+    QuotesModule,
+    PoliciesModule,
+    PolicyDetailsModule,
+    PremiumCalendarModule,
+  ],
+  providers: [reducerProvider],
 })
 export class MyAccountModule {}

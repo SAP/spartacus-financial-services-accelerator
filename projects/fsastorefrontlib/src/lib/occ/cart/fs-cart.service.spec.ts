@@ -1,7 +1,7 @@
 import { HttpClientModule, HttpRequest } from '@angular/common/http';
 import {
   HttpClientTestingModule,
-  HttpTestingController
+  HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccFSCartService } from './fs-cart.service';
@@ -22,19 +22,16 @@ const bundleTemplateId = 'bundleTemplate';
 
 const pricingData: PricingData = {};
 
-
 const MockOccModuleConfig: OccConfig = {
   context: {
-    baseSite: [
-      ''
-    ]
+    baseSite: [''],
   },
   backend: {
     occ: {
       baseUrl: '',
-      prefix: ''
-    }
-  }
+      prefix: '',
+    },
+  },
 };
 
 describe('OccFSCartService', () => {
@@ -46,8 +43,8 @@ describe('OccFSCartService', () => {
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
         OccFSCartService,
-        { provide: OccConfig, useValue: MockOccModuleConfig }
-      ]
+        { provide: OccConfig, useValue: MockOccModuleConfig },
+      ],
     });
 
     service = TestBed.get(OccFSCartService);
@@ -60,10 +57,17 @@ describe('OccFSCartService', () => {
 
   describe('addToCart', () => {
     it('should add product to cart', async(() => {
-      service.addToCart(userId, cartId, productCode, quantity, entryNumber).subscribe();
+      service
+        .addToCart(userId, cartId, productCode, quantity, entryNumber)
+        .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
-          req.url === usersEndpoint + `/${userId}` + cartsEndpoint + `/${cartId}` + '/fs-add-to-cart' &&
+          req.url ===
+            usersEndpoint +
+              `/${userId}` +
+              cartsEndpoint +
+              `/${cartId}` +
+              '/fs-add-to-cart' &&
           req.params.append('productCode', productCode) &&
           req.params.append('quantity', quantity.toString()) &&
           req.params.append('entryNumber', entryNumber) &&
@@ -75,10 +79,24 @@ describe('OccFSCartService', () => {
 
   describe('startBundle', () => {
     it('start bundle', async(() => {
-      service.startBundle(userId, cartId, productCode, bundleTemplateId, quantity, pricingData).subscribe();
+      service
+        .startBundle(
+          userId,
+          cartId,
+          productCode,
+          bundleTemplateId,
+          quantity,
+          pricingData
+        )
+        .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
-          req.url === usersEndpoint + `/${userId}` + cartsEndpoint + `/${cartId}` + '/fs-start-bundle' &&
+          req.url ===
+            usersEndpoint +
+              `/${userId}` +
+              cartsEndpoint +
+              `/${cartId}` +
+              '/fs-start-bundle' &&
           req.params.append('bundleTemplateId', bundleTemplateId) &&
           req.params.append('productCode', productCode) &&
           req.params.append('quantity', quantity.toString()) &&

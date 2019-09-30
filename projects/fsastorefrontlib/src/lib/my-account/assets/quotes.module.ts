@@ -6,7 +6,14 @@ import { NgSelectModule } from '@ng-select/ng-select';
 
 import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 import { SpinnerModule } from '@spartacus/storefront';
-import { AuthGuard, I18nModule, ConfigModule, CmsConfig, RoutesConfig, RoutingConfig } from '@spartacus/core';
+import {
+  AuthGuard,
+  I18nModule,
+  ConfigModule,
+  CmsConfig,
+  RoutesConfig,
+  RoutingConfig,
+} from '@spartacus/core';
 
 import { QuotesComponent } from '../assets/components/quotes/quotes.component';
 import { QuoteService } from './services/quote.service';
@@ -19,10 +26,10 @@ const routes: Routes = [
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'quotes',
-      pageLabel: 'my-quotes'
+      pageLabel: 'my-quotes',
     },
-    component: PageLayoutComponent
-  }
+    component: PageLayoutComponent,
+  },
 ];
 
 @NgModule({
@@ -34,17 +41,17 @@ const routes: Routes = [
     NgSelectModule,
     SpinnerModule,
     RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig> {
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
         AccountMyQuotesSPAComponent: {
-          component: QuotesComponent
-        }
-      }
-    })
+          component: QuotesComponent,
+        },
+      },
+    }),
   ],
-  declarations: [ QuotesComponent ],
-  exports: [ QuotesComponent ],
-  providers: [ QuoteService, QuoteDataService, OccQuoteService ],
-  entryComponents: [ QuotesComponent ]
+  declarations: [QuotesComponent],
+  exports: [QuotesComponent],
+  providers: [QuoteService, QuoteDataService, OccQuoteService],
+  entryComponents: [QuotesComponent],
 })
-export class QuotesModule { }
+export class QuotesModule {}

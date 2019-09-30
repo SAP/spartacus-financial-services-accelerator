@@ -8,7 +8,7 @@ import { OccBillingTimeService } from '../../../../../occ/billing-time/billing-t
 @Component({
   selector: 'fsa-comparison-table-panel',
   templateUrl: './comparison-table-panel.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComparisonTablePanelComponent implements OnInit {
   comparisonPanel: Observable<ComparisonPanelCMSComponent>;
@@ -18,7 +18,7 @@ export class ComparisonTablePanelComponent implements OnInit {
   constructor(
     protected componentData: CmsComponentData<ComparisonPanelCMSComponent>,
     protected billingTimeService: OccBillingTimeService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.comparisonPanel = this.componentData.data$;

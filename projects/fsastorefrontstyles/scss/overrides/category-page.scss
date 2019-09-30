@@ -2,174 +2,176 @@
 @import '../theme';
 
 .FSCategoryPageTemplate {
-    text-align: center;
-    .Section1 {
-        .enriched-banner {
-            position: relative;
-            &__title {
-                display: block;
-                font-size: 44px;
-                color: var(--cx-color-secondary);
-                @include media-breakpoint-down(md) { 
-                    color: var(--cx-color-text);
-                    font-size: 4vw;
-                }
-                @include media-breakpoint-down(xs) {
-                    font-size: 5vw;
-                }
-            }
-            &__text {
-                position: absolute;
-                text-align: center;
-                left: 0;
-                bottom: 0;
-                background: rgba(255, 255, 255, 0.7);
-                padding: 35px;
-                width: 100%;
-                @include media-breakpoint-down(md) {
-                    padding: 20px 35px;
-                }
-                @include media-breakpoint-down(xs) {
-                    padding: 10px 35px;
-                }
-            }
-            .image-wrapper {
-                .responsive-image {
-                    width: 100%;
-                }
-            }
-            &__details {
-                @include width1400;
-                display: block;
-                margin: 30px auto 0;
-                @include media-breakpoint-down(xs) {
-                    margin-top: 10px;
-                }
-            }
-            &__styled-text {
-                @include secondary-btn-color;
-                @include transition;
-                text-transform: uppercase;
-                font-size: 18px;
-                line-height: 0;
-                display: inline-block;
-                padding: 25px 0;
-                width: 25%;
-                @include media-breakpoint-down(md) {
-                    width: 60%;
-                    line-height: 30px;
-                    @include ellipsis;
-                    padding: 6px 10px;
-                }
-                @include media-breakpoint-down(xs) {
-                    font-size: 13px;
-                    width: 70%;
-                }
-            }
+  text-align: center;
+  .Section1 {
+    .enriched-banner {
+      position: relative;
+      &__title {
+        display: block;
+        font-size: 44px;
+        color: var(--cx-color-secondary);
+        @include media-breakpoint-down(md) {
+          color: var(--cx-color-text);
+          font-size: 4vw;
         }
-    }
-    .Section2A, .Section4 {
+        @include media-breakpoint-down(xs) {
+          font-size: 5vw;
+        }
+      }
+      &__text {
+        position: absolute;
+        text-align: center;
+        left: 0;
+        bottom: 0;
+        background: rgba(255, 255, 255, 0.7);
+        padding: 35px;
+        width: 100%;
+        @include media-breakpoint-down(md) {
+          padding: 20px 35px;
+        }
+        @include media-breakpoint-down(xs) {
+          padding: 10px 35px;
+        }
+      }
+      .image-wrapper {
+        .responsive-image {
+          width: 100%;
+        }
+      }
+      &__details {
         @include width1400;
-        padding: 0 10px;
-    }
-    .Section2A {
-        .enriched-banner {
-            background-color: var(--cx-color-4);
-            border: $border-grey;
-            margin: 30px auto 0;
-            padding: 20px;
-            text-align: center;
-            .image-wrapper {
-                display: none;
-            }
-            &__details {
-                display: block;
-                margin: 30px auto 0;
-            }
-            &__title {
-                margin: 0 auto;
-                font-size: 28px;
-                @include media-breakpoint-down(md) { 
-                    font-size: 20px;
-                }
-            }
-            &__styled-text {
-                @include primary-btn-color;
-                display: inline-block;
-                font-size: 18px;
-                line-height: 0;
-                padding: 25px 0;
-                text-transform: uppercase;
-                width: 25%;
-                @include media-breakpoint-down(md) { 
-                    width: 70%;
-                    font-size: 13px;
-                }
-            }
+        display: block;
+        margin: 30px auto 0;
+        @include media-breakpoint-down(xs) {
+          margin-top: 10px;
         }
+      }
+      &__styled-text {
+        @include secondary-btn-color;
+        @include transition;
+        text-transform: uppercase;
+        font-size: 18px;
+        line-height: 0;
+        display: inline-block;
+        padding: 25px 0;
+        width: 25%;
+        @include media-breakpoint-down(md) {
+          width: 60%;
+          line-height: 30px;
+          @include ellipsis;
+          padding: 6px 10px;
+        }
+        @include media-breakpoint-down(xs) {
+          font-size: 13px;
+          width: 70%;
+        }
+      }
     }
-    .Section2B {
-        max-width: 1380px; // quick fix until we agree on the elements and their look on this page
-        width: calc(100% - 20px);
-        margin: 30px auto;
-        align-items: center;
+  }
+  .Section2A,
+  .Section4 {
+    @include width1400;
+    padding: 0 10px;
+  }
+  .Section2A {
+    .enriched-banner {
+      background-color: var(--cx-color-4);
+      border: $border-grey;
+      margin: 30px auto 0;
+      padding: 20px;
+      text-align: center;
+      .image-wrapper {
+        display: none;
+      }
+      &__details {
+        display: block;
+        margin: 30px auto 0;
+      }
+      &__title {
+        margin: 0 auto;
+        font-size: 28px;
+        @include media-breakpoint-down(md) {
+          font-size: 20px;
+        }
+      }
+      &__styled-text {
+        @include primary-btn-color;
+        display: inline-block;
+        font-size: 18px;
+        line-height: 0;
+        padding: 25px 0;
+        text-transform: uppercase;
+        width: 25%;
+        @include media-breakpoint-down(md) {
+          width: 70%;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+  .Section2B {
+    max-width: 1380px; // quick fix until we agree on the elements and their look on this page
+    width: calc(100% - 20px);
+    margin: 30px auto;
+    align-items: center;
+    border: 1px solid var(--cx-color-3);
+    background-color: var(--cx-color-4);
+    cx-banner,
+    cx-paragraph {
+      flex: 0 1 auto;
+      width: 50%;
+      @include media-breakpoint-down(sm) {
+        width: 100%;
+      }
+    }
+    cx-paragraph {
+      padding: 20px;
+      text-align: left;
+      @include media-breakpoint-down(sm) {
+        text-align: center;
         border: 1px solid var(--cx-color-3);
         background-color: var(--cx-color-4);
-        cx-banner, cx-paragraph {
-            flex: 0 1 auto;
-            width: 50%;
-            @include media-breakpoint-down(sm) {
-                width: 100%;
-            }
-        }
-        cx-paragraph {
-            padding: 20px;
-            text-align: left;
-            @include media-breakpoint-down(sm) {
-                text-align: center;
-                border: 1px solid var(--cx-color-3);
-                background-color: var(--cx-color-4);
-            }
-        }
-        cx-media {
-            padding-right: calc(100% - 460px);
-            @include media-breakpoint-down(sm) {
-                padding-right: 0;
-            }
-        }
-        @include media-breakpoint-down(sm) {
-            border: none;
-            background-color: transparent;
-            margin: 20px 0;
-            padding: 0 10px;
-            width: 100%;
-        }
+      }
     }
-    .Section4 {
-        display: flex;
-        text-align: left;
-        @include media-breakpoint-down(md) {
-            flex-direction: column;
-            padding: 0 10px;
-        }
-        fsa-product-feature {
-            display: block;
-            flex: 0 1 33.3333%;
-            &:first-of-type {
-                padding: 0 15px 0 0;
-            }
-            &:last-of-type {
-                padding: 0 0 0 15px;
-            }
-            @include media-breakpoint-down(md) {
-                margin: 20px 0;
-                &:first-of-type {
-                    padding: 0;
-                }
-                &:last-of-type {
-                    padding: 0;
-                }
-            }
-        }
+    cx-media {
+      padding-right: calc(100% - 460px);
+      @include media-breakpoint-down(sm) {
+        padding-right: 0;
+      }
     }
+    @include media-breakpoint-down(sm) {
+      border: none;
+      background-color: transparent;
+      margin: 20px 0;
+      padding: 0 10px;
+      width: 100%;
+    }
+  }
+  .Section4 {
+    display: flex;
+    text-align: left;
+    @include media-breakpoint-down(md) {
+      flex-direction: column;
+      padding: 0 10px;
+    }
+    fsa-product-feature {
+      display: block;
+      flex: 0 1 33.3333%;
+      &:first-of-type {
+        padding: 0 15px 0 0;
+      }
+      &:last-of-type {
+        padding: 0 0 0 15px;
+      }
+      @include media-breakpoint-down(md) {
+        margin: 20px 0;
+        &:first-of-type {
+          padding: 0;
+        }
+        &:last-of-type {
+          padding: 0;
+        }
+      }
+    }
+  }
 }

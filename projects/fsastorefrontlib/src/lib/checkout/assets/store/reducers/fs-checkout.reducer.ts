@@ -3,29 +3,29 @@ import { FSCheckoutAction } from '../actions/fs-checkout.action';
 import * as fromAction from '../actions';
 
 export const initialState: FSCheckoutStepsState = {
-    legalInformation: false,
-    identificationType: false
+  legalInformation: false,
+  identificationType: false,
 };
 
 export function reducer(
-    state = initialState,
-    action: FSCheckoutAction
+  state = initialState,
+  action: FSCheckoutAction
 ): FSCheckoutStepsState {
-    switch (action.type) {
-        case fromAction.SET_IDENTIFICATION_TYPE_SUCCESS: {
-            const identificationType = true;
-            return {
-                ...state,
-                identificationType
-            };
-        }
-        case fromAction.SET_IDENTIFICATION_TYPE_FAIL: {
-            const identificationType = false;
-            return {
-                ...state,
-                identificationType
-            };
-        }
+  switch (action.type) {
+    case fromAction.SET_IDENTIFICATION_TYPE_SUCCESS: {
+      const identificationType = true;
+      return {
+        ...state,
+        identificationType,
+      };
     }
-    return state;
+    case fromAction.SET_IDENTIFICATION_TYPE_FAIL: {
+      const identificationType = false;
+      return {
+        ...state,
+        identificationType,
+      };
+    }
+  }
+  return state;
 }

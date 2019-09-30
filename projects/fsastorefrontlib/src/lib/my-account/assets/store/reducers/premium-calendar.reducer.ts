@@ -9,7 +9,7 @@ export interface PremiumCalendarState {
 export const initialState: PremiumCalendarState = {
   data: {},
   refresh: false,
-  loaded: false
+  loaded: false,
 };
 
 export function reducer(
@@ -23,7 +23,7 @@ export function reducer(
         ...state,
         data,
         refresh: false,
-        loaded: true
+        loaded: true,
       };
     }
   }
@@ -31,6 +31,7 @@ export function reducer(
   return state;
 }
 
-export const getPremiumCalendarData = (state: PremiumCalendarState) => state.data;
+export const getPremiumCalendarData = (state: PremiumCalendarState) =>
+  state.data;
 export const getRefresh = (state: PremiumCalendarState) => state.refresh;
 export const getLoaded = (state: PremiumCalendarState) => state.loaded;

@@ -19,7 +19,4 @@ export class LoadQuotesFail implements Action {
   constructor(public payload: any) {}
 }
 
-export type QuoteAction =
-  | LoadQuotes
-  | LoadQuotesSuccess
-  | LoadQuotesFail;
+export type QuoteAction = LoadQuotes | LoadQuotesSuccess | LoadQuotesFail;

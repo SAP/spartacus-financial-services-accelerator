@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { CmsComponentMapping, StandardCmsComponentConfig } from '@spartacus/core';
+import {
+  CmsComponentMapping,
+  StandardCmsComponentConfig,
+} from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { FSSearchConfig } from '../../../../../my-account/assets/services/inbox-data.service';
@@ -14,7 +17,7 @@ export interface Mapping extends StandardCmsComponentConfig {
 @Component({
   selector: 'fsa-messages-inbox',
   templateUrl: './inbox-messages.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InboxMessagesComponent implements OnInit {
   constructor(
@@ -55,7 +58,7 @@ export class InboxMessagesComponent implements OnInit {
   changeMessageState(readDate, messageUid) {
     const messageObj = {
       readDate: readDate,
-      messageUid: messageUid
+      messageUid: messageUid,
     };
     this.inboxService.selectedMessages(messageObj);
     this.inboxService.getMessagesAction();

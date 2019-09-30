@@ -3,11 +3,9 @@ import { CommonModule } from '@angular/common';
 import { AccordionItemComponent } from './accordion-item.component';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   declarations: [AccordionItemComponent],
   exports: [AccordionItemComponent],
   entryComponents: [AccordionItemComponent],
 })
-export class AccordionModule { }
+export class AccordionModule {}

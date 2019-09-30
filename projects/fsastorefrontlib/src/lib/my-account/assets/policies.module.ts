@@ -5,7 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { SpinnerModule, PageLayoutComponent } from '@spartacus/storefront';
-import { AuthGuard, I18nModule, ConfigModule, CmsConfig, RoutesConfig, RoutingConfig } from '@spartacus/core';
+import {
+  AuthGuard,
+  I18nModule,
+  ConfigModule,
+  CmsConfig,
+  RoutesConfig,
+  RoutingConfig,
+} from '@spartacus/core';
 import { CmsPageGuard } from '@spartacus/storefront';
 
 import { PoliciesComponent } from '../assets/components/policies/policies.component';
@@ -13,16 +20,16 @@ import { PolicyService } from './services/policy.service';
 import { PolicyDataService } from './services/policy-data.service';
 import { OccPolicyService } from '../../occ/policy/policy.service';
 
-
 const routes: Routes = [
   {
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'policies',
-      pageLabel: 'my-policies' },
-    component: PageLayoutComponent
-  }
+      pageLabel: 'my-policies',
+    },
+    component: PageLayoutComponent,
+  },
 ];
 
 @NgModule({
@@ -34,17 +41,17 @@ const routes: Routes = [
     NgSelectModule,
     SpinnerModule,
     RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig> {
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
         AccountMyPoliciesSPAComponent: {
-          component: PoliciesComponent
-        }
-      }
-    })
+          component: PoliciesComponent,
+        },
+      },
+    }),
   ],
   declarations: [PoliciesComponent],
   exports: [PoliciesComponent],
   providers: [PolicyService, PolicyDataService, OccPolicyService],
-  entryComponents: [PoliciesComponent]
+  entryComponents: [PoliciesComponent],
 })
-export class PoliciesModule { }
+export class PoliciesModule {}

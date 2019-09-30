@@ -2,7 +2,15 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EffectsModule } from '@ngrx/effects';
-import { CmsConfig, ConfigModule, I18nModule, CmsModule, AuthGuard, RoutingConfig, RoutesConfig } from '@spartacus/core';
+import {
+  CmsConfig,
+  ConfigModule,
+  I18nModule,
+  CmsModule,
+  AuthGuard,
+  RoutingConfig,
+  RoutesConfig,
+} from '@spartacus/core';
 import {
   SpinnerModule,
   PageLayoutComponent,
@@ -11,12 +19,11 @@ import {
   ConsentManagementComponent,
   UpdatePasswordComponent,
   UpdateEmailComponent,
-  CloseAccountComponent
+  CloseAccountComponent,
 } from '@spartacus/storefront';
 import { effects } from '../../my-account/assets/store/effects/index';
 import { CMSViewPoliciesComponent } from './view-policies/view-policies.component';
 import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
-
 
 const routes: Routes = [
   {
@@ -24,73 +31,73 @@ const routes: Routes = [
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'paymentDetails',
-      pageLabel: 'payment-details'
+      pageLabel: 'payment-details',
     },
-    component: PageLayoutComponent
+    component: PageLayoutComponent,
   },
   {
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'orderHistory',
-      pageLabel: 'orders'
+      pageLabel: 'orders',
     },
-    component: PageLayoutComponent
+    component: PageLayoutComponent,
   },
   {
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'accountOverview',
-      pageLabel: 'account-overview'
+      pageLabel: 'account-overview',
     },
-    component: PageLayoutComponent
+    component: PageLayoutComponent,
   },
   {
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'consentManagment',
-      pageLabel: 'consents'
+      pageLabel: 'consents',
     },
-    component: PageLayoutComponent
+    component: PageLayoutComponent,
   },
   {
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'personalDetails',
-      pageLabel: 'fs-update-profile'
+      pageLabel: 'fs-update-profile',
     },
-    component: PageLayoutComponent
+    component: PageLayoutComponent,
   },
   {
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'updateEmail',
-      pageLabel: 'update-email'
+      pageLabel: 'update-email',
     },
-    component: PageLayoutComponent
+    component: PageLayoutComponent,
   },
   {
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'updatePasswordComp',
-      pageLabel: 'updatePassword'
+      pageLabel: 'updatePassword',
     },
-    component: PageLayoutComponent
+    component: PageLayoutComponent,
   },
   {
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'closeAccount',
-      pageLabel: 'close-account'
+      pageLabel: 'close-account',
     },
-    component: PageLayoutComponent
-  }
+    component: PageLayoutComponent,
+  },
 ];
 
 @NgModule({
@@ -105,31 +112,31 @@ const routes: Routes = [
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
         CMSViewPoliciesComponent: {
-          component: CMSViewPoliciesComponent
+          component: CMSViewPoliciesComponent,
         },
         CMSViewQuotesComponent: {
-          component: CMSViewQuotesComponent
+          component: CMSViewQuotesComponent,
         },
         AccountPaymentDetailsSPAComponent: {
-          component: PaymentMethodsComponent
+          component: PaymentMethodsComponent,
         },
         ConsentManagementComponent: {
-          component: ConsentManagementComponent
+          component: ConsentManagementComponent,
         },
         UpdateEmailComponent: {
-          component: UpdateEmailComponent
+          component: UpdateEmailComponent,
         },
         UpdatePasswordComponent: {
-          component: UpdatePasswordComponent
+          component: UpdatePasswordComponent,
         },
         AccountCloseAccountSPAComponent: {
-          component: CloseAccountComponent
-        }
-      }
-    })
+          component: CloseAccountComponent,
+        },
+      },
+    }),
   ],
   declarations: [CMSViewPoliciesComponent, CMSViewQuotesComponent],
   exports: [CMSViewPoliciesComponent, CMSViewQuotesComponent],
-  entryComponents: [CMSViewPoliciesComponent, CMSViewQuotesComponent]
+  entryComponents: [CMSViewPoliciesComponent, CMSViewQuotesComponent],
 })
-export class AccountModule { }
+export class AccountModule {}

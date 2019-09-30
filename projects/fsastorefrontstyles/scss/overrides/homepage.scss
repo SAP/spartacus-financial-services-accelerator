@@ -88,7 +88,8 @@
   }
 
   //Get a quote section & Make a claim paragraph
-  .Section1 cx-paragraph, .Section3 {
+  .Section1 cx-paragraph,
+  .Section3 {
     @include width1400();
     display: block;
     margin-top: 100px;
@@ -137,8 +138,8 @@
         }
       }
       &__link {
-          color: var(--cx-color-primary);
-          text-decoration: none;
+        color: var(--cx-color-primary);
+        text-decoration: none;
       }
     }
   }
@@ -149,7 +150,8 @@
     @include media-breakpoint-down(xs) {
       flex-direction: column;
     }
-    fsa-view-quotes, fsa-view-policies {
+    fsa-view-quotes,
+    fsa-view-policies {
       flex: 1;
       margin: 0 15px;
       button {
@@ -169,12 +171,12 @@
     background-color: var(--cx-color-primary);
     text-align: center;
     .primary-button {
-        text-transform: none;
-        padding: 40px 0;
-        line-height: 0;
-        font-size: 22px;
-        display: block;
-        text-align: center;
+      text-transform: none;
+      padding: 40px 0;
+      line-height: 0;
+      font-size: 22px;
+      display: block;
+      text-align: center;
     }
     @include media-breakpoint-down(sm) {
       .hidden-xs {

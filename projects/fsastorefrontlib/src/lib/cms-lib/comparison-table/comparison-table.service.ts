@@ -5,10 +5,7 @@ import { CMSComparisonTabComponent } from '../../occ-models';
 
 @Injectable()
 export class ComparisonTableService {
-
-  constructor(
-    private cmsService: CmsService
-  ) {}
+  constructor(private cmsService: CmsService) {}
 
   getComparisonTabs(tabIds: string[]): Observable<CMSComparisonTabComponent>[] {
     return tabIds.map(tabId => this.cmsService.getComponentData(tabId));

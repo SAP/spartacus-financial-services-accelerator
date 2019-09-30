@@ -6,7 +6,6 @@ import * as fromSelector from '../store/selectors';
 import { AuthService } from '@spartacus/core';
 import { QuoteDataService } from './quote-data.service';
 
-
 @Injectable()
 export class QuoteService {
   constructor(
@@ -40,7 +39,7 @@ export class QuoteService {
       if (refresh) {
         this.store.dispatch(
           new fromAction.LoadQuotes({
-            userId: this.quoteData.userId
+            userId: this.quoteData.userId,
           })
         );
       }
@@ -48,10 +47,10 @@ export class QuoteService {
   }
 
   loadQuotes() {
-      this.store.dispatch(
-        new fromAction.LoadQuotes({
-          userId: this.quoteData.userId,
-        })
-      );
-    }
+    this.store.dispatch(
+      new fromAction.LoadQuotes({
+        userId: this.quoteData.userId,
+      })
+    );
+  }
 }

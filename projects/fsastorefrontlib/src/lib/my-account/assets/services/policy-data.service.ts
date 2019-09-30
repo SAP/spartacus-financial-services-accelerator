@@ -7,7 +7,7 @@ export class PolicyDataService {
   private _policyCategoryCode: string;
   private _policies: Policy[];
 
-  constructor() { }
+  constructor() {}
 
   set userId(val) {
     this._userId = val;

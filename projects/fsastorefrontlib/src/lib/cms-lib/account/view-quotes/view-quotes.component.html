@@ -1,61 +1,94 @@
 <ng-container *ngIf="component$ | async as component">
-    <ng-container *ngIf="!anonymous$; else anonymousLogin">
-        <ng-container *ngIf="quotesLoaded$ | async; else loading">
-            <div *ngIf="quotes$ | async as quotes" class="review-wrapper">
-                <ng-container *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes">
-                    <div class="fs-items">
-                        <h2 class="my-2 text-center">{{ 'quote.retrieveQuotes' | cxTranslate }}</h2>
-                        <ul>
-                            <ng-container
-                                *ngTemplateOutlet="quoteList; context:{quotes: quotes, max: (allQuotesDisplayed$ ? quotes?.insuranceQuotes?.length : component.numberOfQuotesToDisplay)}">
-                            </ng-container>
-                        </ul>
-                        <ng-container *ngIf="quotes?.insuranceQuotes?.length > component.numberOfQuotesToDisplay">
-                            <ng-container
-                                *ngTemplateOutlet="showAllQuotesButton context: {showAll: (allQuotesDisplayed$ ? false : true)}">
-                            </ng-container>
-                        </ng-container>
-                    </div>
-                </ng-container>
-            </div>
+  <ng-container *ngIf="!anonymous$; else anonymousLogin">
+    <ng-container *ngIf="quotesLoaded$ | async; else loading">
+      <div *ngIf="quotes$ | async as quotes" class="review-wrapper">
+        <ng-container
+          *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes"
+        >
+          <div class="fs-items">
+            <h2 class="my-2 text-center">
+              {{ 'quote.retrieveQuotes' | cxTranslate }}
+            </h2>
+            <ul>
+              <ng-container
+                *ngTemplateOutlet="
+                  quoteList;
+                  context: {
+                    quotes: quotes,
+                    max: allQuotesDisplayed$
+                      ? quotes?.insuranceQuotes?.length
+                      : component.numberOfQuotesToDisplay
+                  }
+                "
+              >
+              </ng-container>
+            </ul>
+            <ng-container
+              *ngIf="
+                quotes?.insuranceQuotes?.length >
+                component.numberOfQuotesToDisplay
+              "
+            >
+              <ng-container
+                *ngTemplateOutlet="
+                  showAllQuotesButton;
+                  context: { showAll: allQuotesDisplayed$ ? false : true }
+                "
+              >
+              </ng-container>
+            </ng-container>
+          </div>
         </ng-container>
+      </div>
     </ng-container>
+  </ng-container>
 </ng-container>
 
 <ng-template #quoteList let-quotes="quotes" let-max="max">
-    <li *ngFor="let quote of quotes.insuranceQuotes | slice: 0:max" class="fs-item">
-        <div class="fs-item-data-container">
-            <span class="image-wrapper small p-1">
-                <img class="image-item" [src]="getBaseUrl()+quote.defaultCategory?.image.url" alt="">
-            </span>
-            <div class="fs-item-wrapper">
-                <span class="fs-item-title">{{quote.planName}}</span>
-                <span class="fs-item-value">{{quote.quoteId}}</span>
-            </div>
-            <span class="fs-item-add-infos">
-                {{quote.quoteWorkflowStatus?.code}}
-            </span>
-        </div>
-    </li>
+  <li
+    *ngFor="let quote of quotes.insuranceQuotes | slice: 0:max"
+    class="fs-item"
+  >
+    <div class="fs-item-data-container">
+      <span class="image-wrapper small p-1">
+        <img
+          class="image-item"
+          [src]="getBaseUrl() + quote.defaultCategory?.image.url"
+          alt=""
+        />
+      </span>
+      <div class="fs-item-wrapper">
+        <span class="fs-item-title">{{ quote.planName }}</span>
+        <span class="fs-item-value">{{ quote.quoteId }}</span>
+      </div>
+      <span class="fs-item-add-infos">
+        {{ quote.quoteWorkflowStatus?.code }}
+      </span>
+    </div>
+  </li>
 </ng-template>
 
 <ng-template #showAllQuotesButton let-showAll="showAll">
-    <button class="primary-button" (click)="showAllQuotes(showAll);">
-        {{quoteButtonText}}
-    </button>
+  <button class="primary-button" (click)="showAllQuotes(showAll)">
+    {{ quoteButtonText }}
+  </button>
 </ng-template>
 
 <ng-template #noQuotes>
-    <div class="empty-block text-center">
-        <h2 class="mb-3">{{ 'quote.viewQuotes' | cxTranslate }}</h2>
-        <p class="content p-3 mx-auto">- {{ 'quote.getQuoteBySelecting' | cxTranslate }}</p>
-    </div>
+  <div class="empty-block text-center">
+    <h2 class="mb-3">{{ 'quote.viewQuotes' | cxTranslate }}</h2>
+    <p class="content p-3 mx-auto">
+      - {{ 'quote.getQuoteBySelecting' | cxTranslate }}
+    </p>
+  </div>
 </ng-template>
 
 <ng-template #anonymousLogin>
-    <button routerLink="/login" class="primary-button">{{ 'quote.viewYourQuotes' | cxTranslate }}</button>
+  <button routerLink="/login" class="primary-button">
+    {{ 'quote.viewYourQuotes' | cxTranslate }}
+  </button>
 </ng-template>
 
 <ng-template #loading>
-    <cx-spinner></cx-spinner>
+  <cx-spinner></cx-spinner>
 </ng-template>
