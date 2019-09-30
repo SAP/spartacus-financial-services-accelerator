@@ -2,7 +2,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FSRegisterComponent } from './fs-register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 // tslint:disable-next-line:max-line-length
-import { RoutingConfig, UserService, GlobalMessageService, Title, UserToken, AuthService, I18nTestingModule, RoutesConfig, AuthRedirectService } from '@spartacus/core';
+import {
+  RoutingConfig,
+  UserService,
+  GlobalMessageService,
+  Title,
+  UserToken,
+  AuthService,
+  I18nTestingModule,
+  RoutesConfig,
+  AuthRedirectService,
+} from '@spartacus/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, of } from 'rxjs';
 import { PipeTransform, Pipe } from '@angular/core';
@@ -14,8 +24,7 @@ describe('FSRegisterComponent', () => {
   let component: FSRegisterComponent;
   let fixture: ComponentFixture<FSRegisterComponent>;
 
-  class MockStore {
-  }
+  class MockStore {}
   class MockRoutingConfig {
     routing: { routes: RoutesConfig } = {
       routes: {
@@ -24,13 +33,13 @@ describe('FSRegisterComponent', () => {
     };
   }
   class MockUserService {
-    loadTitles(): void { }
+    loadTitles(): void {}
     getTitles(): Observable<Title[]> {
       return of([]);
     }
   }
   class MockGlobalMessageService {
-    remove() { }
+    remove() {}
     get() {
       return of();
     }
@@ -44,18 +53,14 @@ describe('FSRegisterComponent', () => {
     name: 'cxUrl',
   })
   class MockUrlPipe implements PipeTransform {
-    transform() { }
+    transform() {}
   }
   class MockRedirectAfterAuthService {
     redirect = createSpy('AuthRedirectService.redirect');
   }
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [
-        ReactiveFormsModule,
-        RouterTestingModule,
-        I18nTestingModule
-      ],
+      imports: [ReactiveFormsModule, RouterTestingModule, I18nTestingModule],
       declarations: [FSRegisterComponent, MockUrlPipe],
       providers: [
         { provide: Store, useClass: MockStore },
@@ -63,8 +68,11 @@ describe('FSRegisterComponent', () => {
         { provide: UserService, useClass: MockUserService },
         { provide: GlobalMessageService, useClass: MockGlobalMessageService },
         { provide: AuthService, useClass: MockAuthService },
-        { provide: AuthRedirectService, useClass: MockRedirectAfterAuthService },
-      ]
+        {
+          provide: AuthRedirectService,
+          useClass: MockRedirectAfterAuthService,
+        },
+      ],
     }).compileComponents();
   }));
 

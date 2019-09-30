@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, UrlTree } from '@angular/router';
-import { CmsActivatedRouteSnapshot, RoutingConfigService } from '@spartacus/core';
+import {
+  CmsActivatedRouteSnapshot,
+  RoutingConfigService,
+} from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCheckoutStep } from '../../../lib/checkout/assets/components/checkout-progress/fs-checkout-step.component';
 import { FSCheckoutConfigService } from '../../../lib/checkout/assets/services';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CatagoryStepGuard implements CanActivate {
   constructor(
     protected routingConfigService: RoutingConfigService,
     protected router: Router,
     protected fsCheckoutConfigService: FSCheckoutConfigService
-  ) { }
+  ) {}
 
   canActivate(route: CmsActivatedRouteSnapshot): Observable<boolean | UrlTree> {
     let currentCategory;
@@ -43,10 +46,10 @@ export class CatagoryStepGuard implements CanActivate {
 
     return currentCategory
       ? of(
-        this.router.parseUrl(
-          nextStepUrl.replace(':categoryCode', currentCategory)
+          this.router.parseUrl(
+            nextStepUrl.replace(':categoryCode', currentCategory)
+          )
         )
-      )
       : of(true);
   }
 }

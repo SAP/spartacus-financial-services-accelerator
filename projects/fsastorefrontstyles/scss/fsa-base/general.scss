@@ -5,12 +5,31 @@ body {
   color: var(--cx-color-text);
 }
 
-h1, .h1 { font-size: var(--cx-h1-font-size)}
-h2, .h2, .test { font-size: var(--cx-h2-font-size)}
-h3, .h3 { font-size: var(--cx-h3-font-size)}
-h4, .h4 { font-size: var(--cx-h4-font-size)}
-h5, .h5 { font-size: var(--cx-h5-font-size)}
-h6, .h6 { font-size: var(--cx-h6-font-size)}
+h1,
+.h1 {
+  font-size: var(--cx-h1-font-size);
+}
+h2,
+.h2,
+.test {
+  font-size: var(--cx-h2-font-size);
+}
+h3,
+.h3 {
+  font-size: var(--cx-h3-font-size);
+}
+h4,
+.h4 {
+  font-size: var(--cx-h4-font-size);
+}
+h5,
+.h5 {
+  font-size: var(--cx-h5-font-size);
+}
+h6,
+.h6 {
+  font-size: var(--cx-h6-font-size);
+}
 p {
   font-size: var(--cx-text-font-size);
 }
@@ -20,7 +39,8 @@ a {
     text-decoration: none;
   }
 }
-button[disabled], html input[disabled] {
+button[disabled],
+html input[disabled] {
   cursor: default;
 }
 button:focus {

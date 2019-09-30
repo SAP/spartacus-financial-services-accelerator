@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegisterComponentModule, PageLayoutComponent } from '@spartacus/storefront';
+import {
+  RegisterComponentModule,
+  PageLayoutComponent,
+} from '@spartacus/storefront';
 import { I18nModule, UrlModule, ConfigModule } from '@spartacus/core';
 import { FSRegisterComponent } from './fs-register.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -9,17 +12,17 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: 'login/register',
-      redirectTo: 'register'
+    redirectTo: 'register',
   },
   {
-    path: 'register' ,
+    path: 'register',
     data: {
       cxRoute: 'register',
-      pageLabel: 'register'
+      pageLabel: 'register',
     },
-    component: PageLayoutComponent
-  }
- ];
+    component: PageLayoutComponent,
+  },
+];
 
 @NgModule({
   imports: [
@@ -31,15 +34,15 @@ const routes: Routes = [
     ConfigModule.withConfig({
       cmsComponents: {
         RegisterCustomerComponent: {
-          component: FSRegisterComponent
-        }
+          component: FSRegisterComponent,
+        },
       },
     }),
     RouterModule,
-    UrlModule
+    UrlModule,
   ],
   declarations: [FSRegisterComponent],
   exports: [FSRegisterComponent],
-  entryComponents: [FSRegisterComponent]
+  entryComponents: [FSRegisterComponent],
 })
-export class FSRegisterModule { }
+export class FSRegisterModule {}

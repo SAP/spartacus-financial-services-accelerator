@@ -10,13 +10,13 @@ import { ConfigModule, CmsConfig, I18nModule } from '@spartacus/core';
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         FinancialServicesProductFeatureComponent: {
-          component: ProductFeatureComponent
-        }
-      }
+          component: ProductFeatureComponent,
+        },
+      },
     }),
   ],
   declarations: [ProductFeatureComponent],
   exports: [ProductFeatureComponent],
-  entryComponents: [ProductFeatureComponent]
+  entryComponents: [ProductFeatureComponent],
 })
-export class ProductFeatureModule { }
+export class ProductFeatureModule {}

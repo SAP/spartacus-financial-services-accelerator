@@ -13,13 +13,13 @@ import { MediaModule } from '@spartacus/storefront';
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         EnrichedResponsiveBannerComponent: {
-          component: EnrichedResponsiveBannerComponent
-        }
-      }
-    })
+          component: EnrichedResponsiveBannerComponent,
+        },
+      },
+    }),
   ],
   declarations: [EnrichedResponsiveBannerComponent],
   exports: [EnrichedResponsiveBannerComponent],
-  entryComponents: [EnrichedResponsiveBannerComponent]
+  entryComponents: [EnrichedResponsiveBannerComponent],
 })
-export class BannerModule { }
+export class BannerModule {}

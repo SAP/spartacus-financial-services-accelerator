@@ -8,14 +8,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { naIconImgSrc } from '../../../../assets/na-icon';
 import { ClaimService } from '../../services';
 
-
-
 @Component({
   selector: 'fsa-claims',
   templateUrl: './claims.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class ClaimsComponent implements OnInit {
   constructor(
     private modalService: NgbModal,
@@ -34,7 +31,9 @@ export class ClaimsComponent implements OnInit {
   ngOnInit() {
     this.claimService.loadClaims();
     this.claims$ = this.store.pipe(select(fromClaimStore.getClaims));
-    this.claimsLoaded$ = this.store.pipe(select(fromClaimStore.getClaimsLoaded));
+    this.claimsLoaded$ = this.store.pipe(
+      select(fromClaimStore.getClaimsLoaded)
+    );
   }
 
   deleteClaim(claimNumber: string) {
@@ -48,7 +47,7 @@ export class ClaimsComponent implements OnInit {
   private openModal(claimNumber: string) {
     this.modalInstance = this.modalService.open(DeleteClaimDialogComponent, {
       centered: true,
-      size: 'lg'
+      size: 'lg',
     }).componentInstance;
     this.modalInstance.claimNumber = claimNumber;
   }

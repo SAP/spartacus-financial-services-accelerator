@@ -1,12 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Cart, CartService, OccConfig, RoutingService, CheckoutDeliveryService } from '@spartacus/core';
+import {
+  Cart,
+  CartService,
+  OccConfig,
+  RoutingService,
+  CheckoutDeliveryService,
+} from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
 import { FSCheckoutConfigService } from '../../services';
 
 @Component({
   selector: 'fsa-quote-review',
-  templateUrl: './quote-review.component.html'
+  templateUrl: './quote-review.component.html',
 })
 export class QuoteReviewComponent implements OnInit {
   cart$: Observable<Cart>;
@@ -21,7 +27,7 @@ export class QuoteReviewComponent implements OnInit {
     private checkoutConfigService: FSCheckoutConfigService,
     private activatedRoute: ActivatedRoute,
     protected checkoutDeliveryService: CheckoutDeliveryService
-    ) { }
+  ) {}
 
   ngOnInit() {
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(

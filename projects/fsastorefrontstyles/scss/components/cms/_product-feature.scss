@@ -1,33 +1,33 @@
 fsa-product-feature {
-	.product-feature {
-		&-wrapper {
-			background-color: var(--cx-color-4);
-			.section-header-heading {
-				text-transform: uppercase;
-			}
-		}
-		&-image {
-			margin: 30px 0 0;
-			padding: 0 50px;
-			text-align: center;
-			width: 100%;
-			img {
-				@include media-breakpoint-down(xs) {
-					width: 100%;
-				}
-			}
-		}
-		&-details {
-			color: var(--cx-color-text);
-			padding: 0 50px 0 70px;
-			font-size: $font-size-base;
-			min-height: 120px;
-			li {
-				list-style-type: circle;
-			}
-			p {
-				margin: 0 0 10px;
-			}
-		}
-	}
+  .product-feature {
+    &-wrapper {
+      background-color: var(--cx-color-4);
+      .section-header-heading {
+        text-transform: uppercase;
+      }
+    }
+    &-image {
+      margin: 30px 0 0;
+      padding: 0 50px;
+      text-align: center;
+      width: 100%;
+      img {
+        @include media-breakpoint-down(xs) {
+          width: 100%;
+        }
+      }
+    }
+    &-details {
+      color: var(--cx-color-text);
+      padding: 0 50px 0 70px;
+      font-size: $font-size-base;
+      min-height: 120px;
+      li {
+        list-style-type: circle;
+      }
+      p {
+        margin: 0 0 10px;
+      }
+    }
+  }
 }

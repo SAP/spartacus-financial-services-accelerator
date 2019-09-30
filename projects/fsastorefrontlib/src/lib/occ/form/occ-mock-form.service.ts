@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { default as autoOptions } from './auto-options';
 
-
 @Injectable()
 export class OccMockFormService {
   setInitialFormControlValues(nodes: any): any {
@@ -11,7 +10,7 @@ export class OccMockFormService {
       result = autoOptions[nodes[0]];
     }
     if (result) {
-      result.forEach((node) => {
+      result.forEach(node => {
         optionsArray.push(node.code);
       });
     }
@@ -24,8 +23,10 @@ export class OccMockFormService {
       for (let i = 0; i < nodesForParsing.length; i += 1) {
         const extractedResults = this.getNodes(result, i, val, nodesForParsing);
         if (nodesForParsing.length - 1 === i) {
-          extractedResults.forEach((resultElement) => {
-            optionsArray.push(resultElement.code ? resultElement.code : resultElement);
+          extractedResults.forEach(resultElement => {
+            optionsArray.push(
+              resultElement.code ? resultElement.code : resultElement
+            );
           });
         } else {
           result = extractedResults;
@@ -35,11 +36,16 @@ export class OccMockFormService {
     }
   }
 
-  private getNodes(result: any, i: number, value: string, nodesForParsing: any): any {
+  private getNodes(
+    result: any,
+    i: number,
+    value: string,
+    nodesForParsing: any
+  ): any {
     const values = [];
     function pushElements(obj) {
       if (obj.length) {
-        obj.forEach((el) => {
+        obj.forEach(el => {
           values.push(el);
         });
       } else {
@@ -47,7 +53,7 @@ export class OccMockFormService {
       }
     }
     for (let j = 0; j < result.length; j += 1) {
-      const obj = (result[j])[nodesForParsing[i]];
+      const obj = result[j][nodesForParsing[i]];
       if (obj && result[j].code === value) {
         pushElements(obj);
         break;

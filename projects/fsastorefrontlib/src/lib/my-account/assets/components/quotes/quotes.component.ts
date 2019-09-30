@@ -7,15 +7,14 @@ import { QuoteService } from '../../services/quote.service';
 @Component({
   selector: 'fsa-quotes',
   templateUrl: './quotes.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class QuotesComponent implements OnInit {
-
   constructor(
     private store: Store<fromQuoteStore.UserState>,
     private config: OccConfig,
     protected quoteService: QuoteService
-  ) { }
+  ) {}
 
   quotes$;
   quotesLoaded$;
@@ -23,7 +22,9 @@ export class QuotesComponent implements OnInit {
   ngOnInit() {
     this.quoteService.loadQuotes();
     this.quotes$ = this.store.pipe(select(fromQuoteStore.getQuotes));
-    this.quotesLoaded$ = this.store.pipe(select(fromQuoteStore.getQuotesLoaded));
+    this.quotesLoaded$ = this.store.pipe(
+      select(fromQuoteStore.getQuotesLoaded)
+    );
   }
 
   public getBaseUrl() {

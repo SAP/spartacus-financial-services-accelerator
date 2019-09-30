@@ -26,5 +26,5 @@ export interface FieldConfig {
 }
 
 export enum FormSubmitType {
-  PRICING
+  PRICING,
 }

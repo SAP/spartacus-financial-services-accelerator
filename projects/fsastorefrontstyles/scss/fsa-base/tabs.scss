@@ -3,28 +3,28 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 
 ul[role='tablist'].nav-tabs {
-    border-bottom: $border-grey;
+  border-bottom: $border-grey;
+  @include media-breakpoint-down(xs) {
+    display: block;
+  }
+  .nav-item .nav-link {
+    background-color: var(--cx-color-text);
+    color: var(--cx-color-1);
+    margin-right: 3px;
+    &.active {
+      background-color: var(--cx-color-4);
+      color: var(--cx-color-text);
+      border: $border-grey;
+      border-bottom: none;
+    }
     @include media-breakpoint-down(xs) {
-        display: block;
+      border-radius: 0;
+      margin-right: 0;
     }
-    .nav-item .nav-link {
-        background-color: var(--cx-color-text);
-        color: var(--cx-color-1);
-        margin-right: 3px;
-        &.active {
-            background-color: var(--cx-color-4);
-            color: var(--cx-color-text);
-            border: $border-grey;
-            border-bottom: none;
-        }
-        @include media-breakpoint-down(xs) {
-            border-radius: 0;
-            margin-right: 0;
-        }
-    }
+  }
 }
 .hide-tab-heading {
-    .nav-item {
-        display: none;
-    }
+  .nav-item {
+    display: none;
+  }
 }

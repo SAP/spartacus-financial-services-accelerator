@@ -3,7 +3,7 @@ import { RoutesConfig, RoutingConfig } from '@spartacus/core';
 export const fsaStorefrontRoutesConfig: RoutesConfig = {
   generalInformation: {
     paths: ['checkout/generalInformation/:formCode'],
-    paramsMapping: { formCode: 'code' }
+    paramsMapping: { formCode: 'code' },
   },
   category: { paths: ['checkout/c/:categoryCode'] },
   addOptions: { paths: ['checkout/add-options'] },
@@ -11,7 +11,7 @@ export const fsaStorefrontRoutesConfig: RoutesConfig = {
   checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
   finalReview: { paths: ['checkout/final-review'] },
   legalInformation: { paths: ['checkout/legal-information'] },
-  userIdentification: {paths: ['checkout/user-identification']},
+  userIdentification: { paths: ['checkout/user-identification'] },
   orderConfirmation: { paths: ['checkout/order-confirmation'] },
   paymentDetails: { paths: ['my-account/payment-details'] },
   consentManagment: { paths: ['my-account/consents'] },

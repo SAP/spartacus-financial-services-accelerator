@@ -13,22 +13,21 @@ export class OccPolicyService {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService
-  ) { }
+  ) {}
 
   protected getPoliciesEndpoint(userId: string) {
     const policiesEndpoint = '/users/' + userId + '/policies';
-    return (
-      (this.occEndpointService.getBaseEndpoint() +
-        policiesEndpoint
-      ));
+    return this.occEndpointService.getBaseEndpoint() + policiesEndpoint;
   }
 
-  protected getPolicyEndpoint(userId: string, policyId: string, contractId: string) {
-    const policyEndpoint = '/users/' + userId + '/policies/' + policyId + '/contracts/' + contractId;
-    return (
-      (this.occEndpointService.getBaseEndpoint() +
-        policyEndpoint
-      ));
+  protected getPolicyEndpoint(
+    userId: string,
+    policyId: string,
+    contractId: string
+  ) {
+    const policyEndpoint =
+      '/users/' + userId + '/policies/' + policyId + '/contracts/' + contractId;
+    return this.occEndpointService.getBaseEndpoint() + policyEndpoint;
   }
 
   public getPolicies(userId: string): Observable<any> {
@@ -40,10 +39,14 @@ export class OccPolicyService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public getPoliciesByCategory(userId: string, policyCategoryCode: string): Observable<any> {
+  public getPoliciesByCategory(
+    userId: string,
+    policyCategoryCode: string
+  ): Observable<any> {
     const url = this.getPoliciesEndpoint(userId);
     const date = formatDate(new Date(), 'yyyy-MM-dd', 'en');
-    const categoryAndCurrentDate = 'category=' + policyCategoryCode + '&date=' + date + '&fields=DEFAULT';
+    const categoryAndCurrentDate =
+      'category=' + policyCategoryCode + '&date=' + date + '&fields=DEFAULT';
     const params = new HttpParams({ fromString: categoryAndCurrentDate });
 
     return this.http
@@ -60,7 +63,11 @@ export class OccPolicyService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public getPolicy(userId: string, policyId: string, contractId: string): Observable<any> {
+  public getPolicy(
+    userId: string,
+    policyId: string,
+    contractId: string
+  ): Observable<any> {
     const url = this.getPolicyEndpoint(userId, policyId, contractId);
     const params = new HttpParams();
 

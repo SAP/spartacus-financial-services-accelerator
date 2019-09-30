@@ -8,9 +8,12 @@ export interface InboxState {
 export const initialState: InboxState = {
   messages: {},
   refresh: false,
-  loaded: false
+  loaded: false,
 };
-export function reducer(state = initialState, action: fromAction.MessageAction): InboxState {
+export function reducer(
+  state = initialState,
+  action: fromAction.MessageAction
+): InboxState {
   switch (action.type) {
     case fromAction.LOAD_MESSAGES_SUCCESS: {
       const messages = { ...action.payload };
@@ -18,13 +21,13 @@ export function reducer(state = initialState, action: fromAction.MessageAction):
         ...state,
         messages,
         refresh: true,
-        loaded: true
+        loaded: true,
       };
     }
     case fromAction.SET_MESSAGES_STATE_SUCCESS: {
       const payloadObj = { ...action.payload };
-      payloadObj.messages.map( message => {
-        state.messages.messages.find( obj => {
+      payloadObj.messages.map(message => {
+        state.messages.messages.find(obj => {
           if (obj.uid === message.uid) {
             obj.readDate = message.readDate;
           }
@@ -34,7 +37,7 @@ export function reducer(state = initialState, action: fromAction.MessageAction):
       return {
         ...state,
         messages,
-        refresh: false
+        refresh: false,
       };
     }
   }

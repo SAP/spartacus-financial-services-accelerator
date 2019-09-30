@@ -5,13 +5,13 @@ import { ClaimService } from '../../../services';
 @Component({
   selector: 'fsa-create-claim',
   templateUrl: './create-claim.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateClaimComponent implements OnInit {
   constructor(
     protected claimService: ClaimService,
     private routingService: RoutingService
-  ) { }
+  ) {}
 
   isPolicySelected$;
   confirm;
@@ -22,13 +22,20 @@ export class CreateClaimComponent implements OnInit {
   }
 
   startClaim() {
-    this.claimService.getSelectedPolicy().subscribe(policy => {
-      if (policy) {
-        this.claimService.createClaim(policy.userId, policy.policyId, policy.contractId);
-        this.routingService.go({
-          cxRoute: 'claims'
-        });
-      }
-    }).unsubscribe();
+    this.claimService
+      .getSelectedPolicy()
+      .subscribe(policy => {
+        if (policy) {
+          this.claimService.createClaim(
+            policy.userId,
+            policy.policyId,
+            policy.contractId
+          );
+          this.routingService.go({
+            cxRoute: 'claims',
+          });
+        }
+      })
+      .unsubscribe();
   }
 }

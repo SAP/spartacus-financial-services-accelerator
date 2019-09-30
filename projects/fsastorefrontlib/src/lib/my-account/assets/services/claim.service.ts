@@ -7,7 +7,6 @@ import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
 import { ClaimDataService, SelectedPolicy } from './claim-data.service';
 
-
 @Injectable()
 export class ClaimService {
   constructor(
@@ -40,15 +39,17 @@ export class ClaimService {
       }
     });
 
-    this.store.pipe(select(fromSelector.getClaimsRefresh)).subscribe(refresh => {
-      if (refresh) {
-        this.store.dispatch(
-          new fromAction.LoadClaims({
-            userId: this.claimData.userId
-          })
-        );
-      }
-    });
+    this.store
+      .pipe(select(fromSelector.getClaimsRefresh))
+      .subscribe(refresh => {
+        if (refresh) {
+          this.store.dispatch(
+            new fromAction.LoadClaims({
+              userId: this.claimData.userId,
+            })
+          );
+        }
+      });
   }
 
   loadClaims() {
@@ -63,7 +64,7 @@ export class ClaimService {
     this.store.dispatch(
       new fromAction.DeleteClaim({
         userId: userId,
-        claimId: claimId
+        claimId: claimId,
       })
     );
   }
@@ -79,7 +80,7 @@ export class ClaimService {
       new fromAction.CreateClaim({
         userId: userId,
         policyId: policyId,
-        contractId: contractId
+        contractId: contractId,
       })
     );
   }

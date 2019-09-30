@@ -1,34 +1,67 @@
 import { Component } from '@angular/core';
 import { RegisterComponent } from '@spartacus/storefront';
-import {UserService, AuthService, AuthRedirectService, GlobalMessageService } from '@spartacus/core';
-import { Validators, FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
+import {
+  UserService,
+  AuthService,
+  AuthRedirectService,
+  GlobalMessageService,
+} from '@spartacus/core';
+import {
+  Validators,
+  FormGroup,
+  FormBuilder,
+  AbstractControl,
+} from '@angular/forms';
 import { FSUserSignUp } from '../../../occ-models';
 import { CustomFormValidators } from '../../util/validators/custom-form-validators';
 
-
 @Component({
   selector: 'fsa-register',
-  templateUrl: './fs-register.component.html'
+  templateUrl: './fs-register.component.html',
 })
 export class FSRegisterComponent extends RegisterComponent {
-  private fsFormBuilder: FormBuilder = new FormBuilder;
+  private fsFormBuilder: FormBuilder = new FormBuilder();
 
   constructor(
     private authService: AuthService,
     private authRedService: AuthRedirectService,
     private fsUserService: UserService,
     private globalMsgService: GlobalMessageService,
-    private formBuilder: FormBuilder) {
-    super(authService, authRedService, fsUserService, globalMsgService, formBuilder);
+    private formBuilder: FormBuilder
+  ) {
+    super(
+      authService,
+      authRedService,
+      fsUserService,
+      globalMsgService,
+      formBuilder
+    );
   }
   fsUserRegistrationForm: FormGroup = this.formBuilder.group(
     {
       titleCode: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      dateOfBirth: ['', [Validators.required, CustomFormValidators.dateOfBirthValidator(18)]],
-      email: ['', [Validators.required, CustomFormValidators.regexValidator(CustomFormValidators.emailRegex)]],
-      password: ['', [Validators.required, CustomFormValidators.regexValidator(CustomFormValidators.passwordRegex)]],
+      dateOfBirth: [
+        '',
+        [Validators.required, CustomFormValidators.dateOfBirthValidator(18)],
+      ],
+      email: [
+        '',
+        [
+          Validators.required,
+          CustomFormValidators.regexValidator(CustomFormValidators.emailRegex),
+        ],
+      ],
+      password: [
+        '',
+        [
+          Validators.required,
+          CustomFormValidators.regexValidator(
+            CustomFormValidators.passwordRegex
+          ),
+        ],
+      ],
       passwordconf: ['', Validators.required],
       newsletter: [false],
       termsandconditions: [false, Validators.requiredTrue],

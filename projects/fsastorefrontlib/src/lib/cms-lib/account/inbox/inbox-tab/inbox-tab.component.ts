@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit, Input } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  Input,
+} from '@angular/core';
 import { CmsService } from '@spartacus/core';
 import { InboxService } from '../../../../my-account/assets/services/inbox.service';
 import { filter } from 'rxjs/operators';
@@ -6,9 +11,8 @@ import { filter } from 'rxjs/operators';
 @Component({
   selector: 'fsa-inbox-tab',
   templateUrl: './inbox-tab.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-
 export class InboxTabComponent implements OnInit {
   @Input() tabId: string;
   @Input() set currentTab(currentTab: boolean) {
@@ -18,7 +22,7 @@ export class InboxTabComponent implements OnInit {
   active;
   activeGroupTitle: string;
 
-  constructor (
+  constructor(
     protected cmsService: CmsService,
     protected inboxService: InboxService
   ) {}
