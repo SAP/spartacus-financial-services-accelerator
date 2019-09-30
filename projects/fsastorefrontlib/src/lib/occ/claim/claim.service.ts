@@ -7,20 +7,16 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 const FULL_PARAMS = 'fields=FULL';
 
-
 @Injectable()
 export class OccClaimService {
-constructor(
-  protected http: HttpClient,
-  protected occEndpointService: OccEndpointsService
+  constructor(
+    protected http: HttpClient,
+    protected occEndpointService: OccEndpointsService
   ) {}
 
   protected getClaimsEndpoint(userId: string) {
     const claimsEndpoint = '/users/' + userId + '/claims';
-    return (
-      (this.occEndpointService.getBaseEndpoint() +
-          claimsEndpoint
-    ));
+    return this.occEndpointService.getBaseEndpoint() + claimsEndpoint;
   }
 
   public getClaims(userId: string): Observable<any> {
@@ -34,7 +30,7 @@ constructor(
   public deleteClaim(userId: string, claimId: string) {
     const url = this.getClaimsEndpoint(userId) + '/' + claimId;
     const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/x-www-form-urlencoded',
     });
 
     return this.http
@@ -43,10 +39,15 @@ constructor(
   }
 
   public createClaim(userId: string, policyId: string, contractId: string) {
-    const url = this.getClaimsEndpoint(userId) + '/create?contractId=' + contractId + '&policyId=' + policyId;
+    const url =
+      this.getClaimsEndpoint(userId) +
+      '/create?contractId=' +
+      contractId +
+      '&policyId=' +
+      policyId;
 
     const headers = new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/x-www-form-urlencoded',
     });
 
     return this.http
@@ -54,5 +55,3 @@ constructor(
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 }
-
-

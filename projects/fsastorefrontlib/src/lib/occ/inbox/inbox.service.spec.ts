@@ -1,7 +1,7 @@
 import { HttpClientModule, HttpRequest } from '@angular/common/http';
 import {
   HttpClientTestingModule,
-  HttpTestingController
+  HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccInboxService } from './inbox.service';
@@ -13,19 +13,16 @@ const messageGroup = 'autoGroup';
 const usersEndpoint = '/users';
 const messagesEndPoint = '/notifications/fssitemessages';
 
-
 const MockOccModuleConfig: OccConfig = {
   context: {
-    baseSite: [
-      ''
-    ]
+    baseSite: [''],
   },
   backend: {
     occ: {
       baseUrl: '',
-      prefix: ''
-    }
-  }
+      prefix: '',
+    },
+  },
 };
 
 describe('OccInboxService', () => {
@@ -37,8 +34,8 @@ describe('OccInboxService', () => {
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
         OccInboxService,
-        { provide: OccConfig, useValue: MockOccModuleConfig }
-      ]
+        { provide: OccConfig, useValue: MockOccModuleConfig },
+      ],
     });
 
     service = TestBed.get(OccInboxService);
@@ -51,10 +48,16 @@ describe('OccInboxService', () => {
 
   describe('getMessagesForMessageGroup', () => {
     it('should fetch user messages for specified group', async(() => {
-      service.getSiteMessagesForUserAndGroup(userId, messageGroup, {}).subscribe();
+      service
+        .getSiteMessagesForUserAndGroup(userId, messageGroup, {})
+        .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
-          req.url === usersEndpoint + `/${userId}` + messagesEndPoint + `?fields=FULL&messagegroup=${messageGroup}` &&
+          req.url ===
+            usersEndpoint +
+              `/${userId}` +
+              messagesEndPoint +
+              `?fields=FULL&messagegroup=${messageGroup}` &&
           req.method === 'GET'
         );
       }, `GET method and url`);

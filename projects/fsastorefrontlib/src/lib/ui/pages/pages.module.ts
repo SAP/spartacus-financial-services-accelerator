@@ -12,6 +12,6 @@ const pageModules = [
 @NgModule({
   imports: [CommonModule, ...pageModules],
   declarations: [],
-  exports: [...pageModules]
+  exports: [...pageModules],
 })
 export class PagesModule {}

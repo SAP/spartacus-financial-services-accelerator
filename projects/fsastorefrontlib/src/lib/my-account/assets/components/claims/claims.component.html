@@ -1,19 +1,35 @@
 <h2 class="heading-headline">{{ 'claim.claims' | cxTranslate }}</h2>
-<ng-container *ngIf="(claims$ | async) as claims">
+<ng-container *ngIf="claims$ | async as claims">
   <ng-container *ngIf="claimsLoaded$ | async; else loading">
-    <div class="row" *ngIf="claims?.claims?.length > 0; else: noClaims">
-      <div *ngFor="let claim of claims.claims" class="col-xs-12 col-sm-6 col-md-4">
+    <div class="row" *ngIf="claims?.claims?.length > 0; else noClaims">
+      <div
+        *ngFor="let claim of claims.claims"
+        class="col-xs-12 col-sm-6 col-md-4"
+      >
         <div class="info-card border-bottom-secondary">
-          <div class="account-cards-actions" *ngIf="claim.claimStatus === 'OPEN' || claim.claimStatus === 'ERROR'">
-            <a class="action-links action-links-secondary-button" (click)="deleteClaim(claim.claimNumber)">x</a>
+          <div
+            class="account-cards-actions"
+            *ngIf="
+              claim.claimStatus === 'OPEN' || claim.claimStatus === 'ERROR'
+            "
+          >
+            <a
+              class="action-links action-links-secondary-button"
+              (click)="deleteClaim(claim.claimNumber)"
+              >x</a
+            >
           </div>
           <div class="info-card-title border-bottom-secondary">
             <span class="image-wrapper">
-              <img *ngIf="claim.incidentType != undefined; else: noIncidentType" class="image-item"
-                [src]="getBaseUrl() + claim.incidentType?.icon.url" alt="{{claim.incidentType?.icon.alt}}" />
+              <img
+                *ngIf="claim.incidentType != undefined; else noIncidentType"
+                class="image-item"
+                [src]="getBaseUrl() + claim.incidentType?.icon.url"
+                alt="{{ claim.incidentType?.icon.alt }}"
+              />
             </span>
             <h3 class="info-card-caption color-secondary">
-              <span *ngIf="claim.incidentType != undefined; else: na">
+              <span *ngIf="claim.incidentType != undefined; else na">
                 {{ claim.incidentType?.incidentName }}
               </span>
             </h3>
@@ -23,36 +39,65 @@
           </div>
           <div class="info-card-details-wrapper">
             <div class="info-card-data">
-              <span class="title">{{ claim.insurancePolicy?.categoryData?.name }}</span>
-              <span class="value">{{ claim.insurancePolicy?.policyNumber }}</span>
+              <span class="title">{{
+                claim.insurancePolicy?.categoryData?.name
+              }}</span>
+              <span class="value">{{
+                claim.insurancePolicy?.policyNumber
+              }}</span>
             </div>
             <div class="info-card-data">
               <span class="title">{{ 'claim.dateOfLoss' | cxTranslate }}</span>
-              <span class="value" *ngIf="claim.dateOfLoss != undefined; else: na">{{ claim.dateOfLoss | cxDate: "dd-MM-yyyy" }}</span>
+              <span
+                class="value"
+                *ngIf="claim.dateOfLoss != undefined; else na"
+                >{{ claim.dateOfLoss | cxDate: 'dd-MM-yyyy' }}</span
+              >
             </div>
             <div class="info-card-data">
               <span class="title">{{ 'fscommon.status' | cxTranslate }}</span>
-              <span class="value" *ngIf="claim.claimStatus != undefined; else: na">{{ claim.claimStatus }}</span>
+              <span
+                class="value"
+                *ngIf="claim.claimStatus != undefined; else na"
+                >{{ claim.claimStatus }}</span
+              >
             </div>
             <div class="info-card-data">
-              <span class="title">{{ 'claim.claimHandler' | cxTranslate }}</span>
+              <span class="title">{{
+                'claim.claimHandler' | cxTranslate
+              }}</span>
               <span class="value">
-                <span class="value"
-                  *ngIf="claim.claimHandler?.displayName != undefined; else: na">{{ claim.claimHandler.displayName }}</span>
+                <span
+                  class="value"
+                  *ngIf="claim.claimHandler?.displayName != undefined; else na"
+                  >{{ claim.claimHandler.displayName }}</span
+                >
                 <br />
-                <span class="value"
-                  *ngIf="claim.claimHandler?.email != undefined; else: na">{{ claim.claimHandler.email }}</span>
+                <span
+                  class="value"
+                  *ngIf="claim.claimHandler?.email != undefined; else na"
+                  >{{ claim.claimHandler.email }}</span
+                >
               </span>
             </div>
           </div>
           <div class="info-card-button-wrapper border-top-secondary">
-            <div class="info-card-button"
-              *ngIf="claim.claimStatus == 'OPEN' || claim.claimStatus == 'REJECTED'; else: details">
-              <button class="secondary-button">{{ 'fscommon.resume' | cxTranslate }}</button>
+            <div
+              class="info-card-button"
+              *ngIf="
+                claim.claimStatus == 'OPEN' || claim.claimStatus == 'REJECTED';
+                else details
+              "
+            >
+              <button class="secondary-button">
+                {{ 'fscommon.resume' | cxTranslate }}
+              </button>
             </div>
             <ng-template #details>
               <div class="info-card-button">
-                <button class="secondary-button">{{ 'fscommon.details' | cxTranslate }}</button>
+                <button class="secondary-button">
+                  {{ 'fscommon.details' | cxTranslate }}
+                </button>
               </div>
             </ng-template>
           </div>
@@ -68,7 +113,7 @@
   {{ 'fscommon.notAvailable' | cxTranslate }}
 </ng-template>
 <ng-template #noIncidentType>
-  <img class="image-item" [src]="getNaImagelink()" alt="">
+  <img class="image-item" [src]="getNaImagelink()" alt="" />
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>

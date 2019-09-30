@@ -35,7 +35,7 @@
       float: left;
       width: 75%;
       overflow-y: hidden;
-      overflow-x: auto; 
+      overflow-x: auto;
       @include media-breakpoint-down(sm) {
         width: 54%;
         border-left: $border-grey;

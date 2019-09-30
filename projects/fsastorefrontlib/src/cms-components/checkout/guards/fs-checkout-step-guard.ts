@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, UrlTree } from '@angular/router';
-import { CmsActivatedRouteSnapshot, RoutingConfigService, CartService } from '@spartacus/core';
+import {
+  CmsActivatedRouteSnapshot,
+  RoutingConfigService,
+  CartService,
+} from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCheckoutStep } from '../../../lib/checkout/assets/components/checkout-progress/fs-checkout-step.component';
 import { FSCheckoutConfigService } from '../../../lib/checkout/assets/services';
 import { FSProduct } from '../../../lib/occ-models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FSCheckoutStepGuard implements CanActivate {
   constructor(
@@ -15,12 +19,14 @@ export class FSCheckoutStepGuard implements CanActivate {
     protected router: Router,
     protected fsCheckoutConfigService: FSCheckoutConfigService,
     protected cartService: CartService
-  ) { }
+  ) {}
 
   currentCategory: string;
 
   canActivate(route: CmsActivatedRouteSnapshot): Observable<boolean | UrlTree> {
-    const currentStepIndex = this.fsCheckoutConfigService.getCurrentStepIndex(route);
+    const currentStepIndex = this.fsCheckoutConfigService.getCurrentStepIndex(
+      route
+    );
     const currentStep = <FSCheckoutStep>(
       this.fsCheckoutConfigService.steps[currentStepIndex]
     );
@@ -41,9 +47,11 @@ export class FSCheckoutStepGuard implements CanActivate {
     });
     return currentStep.restrictedCategories.indexOf(this.currentCategory) !== -1
       ? of(
-        this.router.parseUrl(this.routingConfigService
-          .getRouteConfig(nextStep.routeName)
-          .paths[0])
-      ) : of(true);
+          this.router.parseUrl(
+            this.routingConfigService.getRouteConfig(nextStep.routeName)
+              .paths[0]
+          )
+        )
+      : of(true);
   }
 }

@@ -16,7 +16,8 @@ export interface CmsProductFeatureComponent extends CmsComponent {
   media?: string;
 }
 
-export interface CmsEnrichedResponsiveBannerComponent extends CmsBannerComponent {
+export interface CmsEnrichedResponsiveBannerComponent
+  extends CmsBannerComponent {
   headingText?: string;
   styledText?: string;
   url?: string;

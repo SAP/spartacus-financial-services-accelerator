@@ -4,18 +4,16 @@ import { UpdateProfileFormComponent } from '@spartacus/storefront';
 import { CustomFormValidators } from '../../../../../cms-lib/util/validators/custom-form-validators';
 import { FSUser } from '../../../../../occ-models';
 
-
 @Component({
   selector: 'fsa-update-profile-form',
   templateUrl: './fs-update-profile-form.component.html',
 })
 export class FSUpdateProfileFormComponent extends UpdateProfileFormComponent {
-
   form = this.formBuilder.group({
     titleCode: ['', Validators.required],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
-    dateOfBirth: ['', CustomFormValidators.dateOfBirthValidator(18)]
+    dateOfBirth: ['', CustomFormValidators.dateOfBirthValidator(18)],
   });
 
   constructor(private formBuilder: FormBuilder) {
@@ -27,5 +25,4 @@ export class FSUpdateProfileFormComponent extends UpdateProfileFormComponent {
 
   @Output()
   submited = new EventEmitter<{ userUpdates: FSUser }>();
-
 }

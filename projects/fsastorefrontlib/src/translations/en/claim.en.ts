@@ -10,6 +10,6 @@ export const claim = {
     followingClaimProcessWillBeDeleted:
       'The following claim process will be deleted',
     vehicleMake: 'Vehicle Make',
-    vehicleModel: 'Vehicle Model'
-  }
+    vehicleModel: 'Vehicle Model',
+  },
 };

@@ -1,7 +1,7 @@
 import { HttpClientModule, HttpRequest } from '@angular/common/http';
 import {
-    HttpClientTestingModule,
-    HttpTestingController
+  HttpClientTestingModule,
+  HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccConfig } from '@spartacus/core';
@@ -15,50 +15,55 @@ const usersEndpoint = '/users';
 const cartsEndpoint = '/carts';
 
 const MockOccModuleConfig: OccConfig = {
-    context: {
-        baseSite: [
-            ''
-        ]
+  context: {
+    baseSite: [''],
+  },
+  backend: {
+    occ: {
+      baseUrl: '',
+      prefix: '',
     },
-    backend: {
-        occ: {
-            baseUrl: '',
-            prefix: ''
-        }
-    }
+  },
 };
 
 describe('OccFSCheckoutService', () => {
-    let service: OccFSCheckoutService;
-    let httpMock: HttpTestingController;
+  let service: OccFSCheckoutService;
+  let httpMock: HttpTestingController;
 
-    beforeEach(() => {
-        TestBed.configureTestingModule({
-            imports: [HttpClientModule, HttpClientTestingModule],
-            providers: [
-                OccFSCheckoutService,
-                { provide: OccConfig, useValue: MockOccModuleConfig }
-            ]
-        });
-
-        service = TestBed.get(OccFSCheckoutService);
-        httpMock = TestBed.get(HttpTestingController);
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientModule, HttpClientTestingModule],
+      providers: [
+        OccFSCheckoutService,
+        { provide: OccConfig, useValue: MockOccModuleConfig },
+      ],
     });
 
-    afterEach(() => {
-        httpMock.verify();
-    });
+    service = TestBed.get(OccFSCheckoutService);
+    httpMock = TestBed.get(HttpTestingController);
+  });
 
-    describe('setIdentificationType', () => {
-        it('should set user identification type', async(() => {
-            service.setIdentificationType(identificationType, cartId, userId).subscribe();
-            httpMock.expectOne((req: HttpRequest<any>) => {
-                return (
-                    req.url === usersEndpoint + `/${userId}` + cartsEndpoint + `/${cartId}` + '/user-identification' &&
-                    req.params.append('identificationType', identificationType) &&
-                    req.method === 'PUT'
-                );
-            }, `PUT method and url`);
-        }));
-    });
+  afterEach(() => {
+    httpMock.verify();
+  });
+
+  describe('setIdentificationType', () => {
+    it('should set user identification type', async(() => {
+      service
+        .setIdentificationType(identificationType, cartId, userId)
+        .subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url ===
+            usersEndpoint +
+              `/${userId}` +
+              cartsEndpoint +
+              `/${cartId}` +
+              '/user-identification' &&
+          req.params.append('identificationType', identificationType) &&
+          req.method === 'PUT'
+        );
+      }, `PUT method and url`);
+    }));
+  });
 });

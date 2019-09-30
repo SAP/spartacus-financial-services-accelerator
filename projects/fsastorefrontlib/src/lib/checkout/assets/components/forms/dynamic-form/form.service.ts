@@ -3,10 +3,8 @@ import { FormBuilder } from '@angular/forms';
 import { FieldConfig } from './models/field-config.interface';
 
 @Injectable()
-
 export class FSFormService {
-
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   createForm(config) {
     const form = this.fb.group({});

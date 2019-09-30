@@ -14,10 +14,7 @@ export class OccQuoteService {
 
   protected getQuotesEndpoint(userId: string) {
     const quotesEndpoint = '/users/' + userId + '/insurance-quotes';
-    return (
-      (this.occEndpointService.getBaseEndpoint() +
-      quotesEndpoint
-    ));
+    return this.occEndpointService.getBaseEndpoint() + quotesEndpoint;
   }
 
   public getQuotes(userId: string): Observable<any> {

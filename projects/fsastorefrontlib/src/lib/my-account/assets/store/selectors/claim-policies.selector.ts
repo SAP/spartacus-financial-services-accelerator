@@ -8,7 +8,8 @@ export const getClaimPoliciesState: MemoizedSelector<
   fromClaimPolicies.ClaimPoliciesState
 > = createSelector(
   fromFeature.getUserState,
-  (claimPoliciesState: fromFeature.UserState) => claimPoliciesState.claimPolicies
+  (claimPoliciesState: fromFeature.UserState) =>
+    claimPoliciesState.claimPolicies
 );
 
 export const getClaimPolicies: MemoizedSelector<any, any> = createSelector(
@@ -16,13 +17,18 @@ export const getClaimPolicies: MemoizedSelector<any, any> = createSelector(
   fromClaimPolicies.getClaimPoliciesData
 );
 
-export const getClaimPoliciesRefresh: MemoizedSelector<any, boolean> = createSelector(
+export const getClaimPoliciesRefresh: MemoizedSelector<
+  any,
+  boolean
+> = createSelector(
   getClaimPoliciesState,
   fromClaimPolicies.getRefreshClaimPolicies
 );
 
-export const getClaimPoliciesLoaded: MemoizedSelector<any, boolean> = createSelector(
+export const getClaimPoliciesLoaded: MemoizedSelector<
+  any,
+  boolean
+> = createSelector(
   getClaimPoliciesState,
   fromClaimPolicies.getLoadedClaimPolicies
 );
-

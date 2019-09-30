@@ -17,21 +17,27 @@
     height: 100%;
   }
   .card-header {
-    @include linear-gradient-background( var(--cx-color-primary), var(--cx-color-9), 50%, 100% );
+    @include linear-gradient-background(
+      var(--cx-color-primary),
+      var(--cx-color-9),
+      50%,
+      100%
+    );
   }
   .cx-card-body {
     background: var(--cx-color-4);
   }
-  .cx-card-delete-msg, .cx-card-label-bold {
+  .cx-card-delete-msg,
+  .cx-card-label-bold {
     font-weight: var(--cx-font-weight-semi);
   }
   .card-link.btn-link {
     text-transform: uppercase;
     margin-left: 10px;
-    &:hover, &:active {
+    &:hover,
+    &:active {
       color: var(--cx-color-7);
       text-decoration: underline;
     }
   }
 }
-

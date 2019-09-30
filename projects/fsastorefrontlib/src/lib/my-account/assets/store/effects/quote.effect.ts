@@ -14,20 +14,19 @@ export class QuoteEffects {
     ofType(fromActions.LOAD_QUOTES),
     map((action: fromActions.LoadQuotes) => action.payload),
     mergeMap(payload => {
-        if (payload === undefined || payload.userId === undefined) {
-          payload = {
-             userId: this.quoteData.userId,
-             quotes: this.quoteData.quotes
-          };
-        }
-        return this.quoteService.getQuotes(payload.userId)
-          .pipe(
-            map((quotes: any) => {
-              return new fromActions.LoadQuotesSuccess(quotes);
-            }),
-            catchError(error => of(new fromActions.LoadQuotesFail(error)))
-          );
-      })
+      if (payload === undefined || payload.userId === undefined) {
+        payload = {
+          userId: this.quoteData.userId,
+          quotes: this.quoteData.quotes,
+        };
+      }
+      return this.quoteService.getQuotes(payload.userId).pipe(
+        map((quotes: any) => {
+          return new fromActions.LoadQuotesSuccess(quotes);
+        }),
+        catchError(error => of(new fromActions.LoadQuotesFail(error)))
+      );
+    })
   );
 
   constructor(

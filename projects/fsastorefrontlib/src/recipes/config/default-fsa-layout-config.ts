@@ -5,7 +5,7 @@ export const fsaLayoutConfig: LayoutConfig = {
     xs: 576,
     sm: 768,
     md: 992,
-    lg: 1400
+    lg: 1400,
   },
   layoutSlots: {
     header: {
@@ -15,7 +15,7 @@ export const fsaLayoutConfig: LayoutConfig = {
           'SiteLogo',
           'SearchBox',
           'SiteLogin',
-          'NavigationBar'
+          'NavigationBar',
         ],
       },
       xs: {
@@ -25,7 +25,7 @@ export const fsaLayoutConfig: LayoutConfig = {
     navigation: {
       xs: {
         slots: ['SiteLogin', 'NavigationBar', 'TopHeaderSlot'],
-      }
+      },
     },
     MultiTabsCategoryPageTemplate: {
       slots: ['Section1', 'Section2'],
@@ -38,16 +38,11 @@ export const fsaLayoutConfig: LayoutConfig = {
         'Section2C',
         'Section3',
         'Section4',
-        'Section5'
-      ]
+        'Section5',
+      ],
     },
     FSCategoryPageTemplate: {
-      slots: [
-        'Section1',
-        'Section2A',
-        'Section2B',
-        'Section4'
-      ]
+      slots: ['Section1', 'Section2A', 'Section2B', 'Section4'],
     },
     GeneralLayoutPageTemplate: {
       slots: [
@@ -57,8 +52,8 @@ export const fsaLayoutConfig: LayoutConfig = {
         'Section2C',
         'Section3',
         'Section4',
-        'Section5'
-      ]
+        'Section5',
+      ],
     },
     FindAgentListTemplate: {
       slots: [
@@ -68,14 +63,11 @@ export const fsaLayoutConfig: LayoutConfig = {
         'Section2C',
         'Section3',
         'Section4',
-        'Section5'
-      ]
+        'Section5',
+      ],
     },
     StoreFinderPageTemplate: {
-      slots: [
-        'SideContent',
-        'MiddleContent'
-      ]
-    }
-  }
+      slots: ['SideContent', 'MiddleContent'],
+    },
+  },
 };

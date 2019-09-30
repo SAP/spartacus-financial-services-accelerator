@@ -1,7 +1,7 @@
 import { HttpClientModule, HttpRequest } from '@angular/common/http';
 import {
   HttpClientTestingModule,
-  HttpTestingController
+  HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccQuoteService } from './quote.service';
@@ -14,16 +14,14 @@ const quotesEndpoint = '/insurance-quotes';
 
 const MockOccModuleConfig: OccConfig = {
   context: {
-    baseSite: [
-      ''
-    ]
+    baseSite: [''],
   },
   backend: {
     occ: {
       baseUrl: '',
-      prefix: ''
-    }
-  }
+      prefix: '',
+    },
+  },
 };
 
 describe('OccQuoteService', () => {
@@ -35,8 +33,8 @@ describe('OccQuoteService', () => {
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
         OccQuoteService,
-        { provide: OccConfig, useValue: MockOccModuleConfig }
-      ]
+        { provide: OccConfig, useValue: MockOccModuleConfig },
+      ],
     });
 
     service = TestBed.get(OccQuoteService);

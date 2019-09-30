@@ -55,23 +55,65 @@
 @mixin transition {
   transition: all 300ms ease;
 }
-@mixin linear-gradient-background($startColor, $endColor, $firstStop, $secondStop) {
-  background: -webkit-linear-gradient(left, $startColor $firstStop, $endColor $secondStop);
-  background: -o-linear-gradient(left, $startColor $firstStop, $endColor $secondStop);
-  background: linear-gradient(to right, $startColor $firstStop, $endColor $secondStop);
+@mixin linear-gradient-background(
+  $startColor,
+  $endColor,
+  $firstStop,
+  $secondStop
+) {
+  background: -webkit-linear-gradient(
+    left,
+    $startColor $firstStop,
+    $endColor $secondStop
+  );
+  background: -o-linear-gradient(
+    left,
+    $startColor $firstStop,
+    $endColor $secondStop
+  );
+  background: linear-gradient(
+    to right,
+    $startColor $firstStop,
+    $endColor $secondStop
+  );
 }
 @mixin radial-gradient-background($startColor, $middleColor, $endColor) {
-  background: radial-gradient(ellipse at center, $startColor 30%, $middleColor 80%, $endColor 120%);
-  background: -ms-radial-gradient(ellipse at center, $startColor 30%, $middleColor 80%, $endColor 120%);
-  background: -moz-radial-gradient(ellipse at center, $startColor 30%, $middleColor 80%, $endColor 120%);
-  background: -o-radial-gradient(ellipse at center, $startColor 30%, $middleColor 80%, $endColor 120%);
-  background: -webkit-radial-gradient(ellipse at center, $startColor 30%, $middleColor 80%, $endColor 120%);
+  background: radial-gradient(
+    ellipse at center,
+    $startColor 30%,
+    $middleColor 80%,
+    $endColor 120%
+  );
+  background: -ms-radial-gradient(
+    ellipse at center,
+    $startColor 30%,
+    $middleColor 80%,
+    $endColor 120%
+  );
+  background: -moz-radial-gradient(
+    ellipse at center,
+    $startColor 30%,
+    $middleColor 80%,
+    $endColor 120%
+  );
+  background: -o-radial-gradient(
+    ellipse at center,
+    $startColor 30%,
+    $middleColor 80%,
+    $endColor 120%
+  );
+  background: -webkit-radial-gradient(
+    ellipse at center,
+    $startColor 30%,
+    $middleColor 80%,
+    $endColor 120%
+  );
 }
 @mixin status {
   &::before,
   &::after {
     display: block;
-    content: "";
+    content: '';
     position: absolute;
     right: 15px;
     top: 50%;

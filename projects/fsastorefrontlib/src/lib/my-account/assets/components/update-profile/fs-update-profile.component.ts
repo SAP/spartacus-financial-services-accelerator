@@ -4,7 +4,7 @@ import { FSUser } from '../../../../occ-models/occ.models';
 import { Observable } from 'rxjs';
 
 @Component({
-  templateUrl: './fs-update-profile.component.html'
+  templateUrl: './fs-update-profile.component.html',
 })
 export class FSUpdateProfileComponent extends UpdateProfileComponent {
   user$: Observable<FSUser>;

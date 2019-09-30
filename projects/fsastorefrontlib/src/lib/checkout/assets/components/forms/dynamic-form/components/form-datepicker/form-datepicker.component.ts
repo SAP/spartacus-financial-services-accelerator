@@ -3,7 +3,6 @@ import { FormGenericComponent } from '../form-generic.component';
 
 @Component({
   selector: 'fsa-form-datepicker',
-  templateUrl: './form-datepicker.component.html'
+  templateUrl: './form-datepicker.component.html',
 })
-
-export class FormDatePickerComponent extends FormGenericComponent { }
+export class FormDatePickerComponent extends FormGenericComponent {}

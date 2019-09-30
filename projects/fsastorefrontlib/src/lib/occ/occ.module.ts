@@ -25,7 +25,7 @@ import { OccAgentService } from './agent/agent.service';
     OccFSCartService,
     OccBillingTimeService,
     OccFSCheckoutService,
-    { provide: OccConfig, useExisting: Config }
-  ]
+    { provide: OccConfig, useExisting: Config },
+  ],
 })
 export class OccModule { }

@@ -15,7 +15,7 @@ import { AgentModule } from './agent/agent.module';
     ProductFeatureModule,
     ComparisonTableModule,
     CategoryFormsModule,
-    CustomContainerModule
+    CustomContainerModule,
   ],
   exports: [
     AgentModule,
@@ -24,7 +24,7 @@ import { AgentModule } from './agent/agent.module';
     ProductFeatureModule,
     ComparisonTableModule,
     CategoryFormsModule,
-    CustomContainerModule
-  ]
+    CustomContainerModule,
+  ],
 })
 export class CmsLibModule { }

@@ -1,8 +1,15 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { CartService, RoutingConfigService, RoutingService } from '@spartacus/core';
-import { CheckoutConfig, CheckoutProgressComponent } from '@spartacus/storefront';
+import {
+  CartService,
+  RoutingConfigService,
+  RoutingService,
+} from '@spartacus/core';
+import {
+  CheckoutConfig,
+  CheckoutProgressComponent,
+} from '@spartacus/storefront';
 import { FSProduct } from '../../../../occ-models/occ.models';
 import { FSCategoryService } from '../../services/fs-category.service';
 import { FSCheckoutStep } from './fs-checkout-step.component';
@@ -10,11 +17,10 @@ import { FSCheckoutStep } from './fs-checkout-step.component';
 @Component({
   selector: 'fsa-checkout-progress',
   templateUrl: './fs-checkout-progress.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FSCheckoutProgressComponent extends CheckoutProgressComponent
   implements OnInit {
-
   constructor(
     protected config: CheckoutConfig,
     protected routingService: RoutingService,
@@ -69,7 +75,9 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
               cart.deliveryOrderGroups[0].entries[0].product;
 
             if (fsProduct && fsProduct.defaultCategory) {
-              this.categoryService.setActiveCategory(fsProduct.defaultCategory.code);
+              this.categoryService.setActiveCategory(
+                fsProduct.defaultCategory.code
+              );
             }
           }
         });
@@ -79,12 +87,14 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
 
   filterSteps() {
     this.activeCategory$.subscribe(activeCategory => {
-      this.steps = this.steps.filter(
-        step => {
-          return !(<FSCheckoutStep>step).restrictedCategories ||
-            (<FSCheckoutStep>step).restrictedCategories.indexOf(activeCategory) === -1;
-        }
-      );
+      this.steps = this.steps.filter(step => {
+        return (
+          !(<FSCheckoutStep>step).restrictedCategories ||
+          (<FSCheckoutStep>step).restrictedCategories.indexOf(
+            activeCategory
+          ) === -1
+        );
+      });
     });
   }
 }

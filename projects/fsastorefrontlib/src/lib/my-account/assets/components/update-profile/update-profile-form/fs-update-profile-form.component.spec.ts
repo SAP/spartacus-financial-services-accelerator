@@ -11,7 +11,7 @@ const mockUser: FSUser = {
   firstName: 'Donna',
   lastName: 'Moore',
   uid: 'donna@moore.com',
-  dateOfBirth: '08/12/1990'
+  dateOfBirth: '08/12/1990',
 };
 
 describe('FSUpdateProfileFormComponent', () => {
@@ -40,7 +40,6 @@ describe('FSUpdateProfileFormComponent', () => {
   });
 
   describe('onSubmit', () => {
-
     it('should NOT emit submited event if the form is not valid', () => {
       spyOn(component.submited, 'emit').and.stub();
 

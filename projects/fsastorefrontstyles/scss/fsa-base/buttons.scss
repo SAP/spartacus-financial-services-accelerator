@@ -1,78 +1,88 @@
-@import "../mixins-fsa";
-@import "../theme";
+@import '../mixins-fsa';
+@import '../theme';
 
-button, .btn,
-.primary-button, .btn-primary,
-.secondary-button, .btn-secondary,
-.action-button, .btn-action {
-	display: inline-block;
-	width: 100%;
-	height: 40px;
-	padding: 5px;
-	margin: 6px 0;
-	border: 3px solid var(--cx-color-transparent);
-	border-radius: 4px;
-	font-size: 1rem;
-	font-weight: var(--cx-font-weight-normal);
-	white-space: nowrap;
-	-webkit-appearance: none;
-	text-transform: uppercase;
-	cursor: pointer;
-	@include transition;
-	&:disabled {
-		cursor: no-drop;
-		opacity: 0.6;
-	}
-	&:focus {
-		box-shadow: none;
-	}
+button,
+.btn,
+.primary-button,
+.btn-primary,
+.secondary-button,
+.btn-secondary,
+.action-button,
+.btn-action {
+  display: inline-block;
+  width: 100%;
+  height: 40px;
+  padding: 5px;
+  margin: 6px 0;
+  border: 3px solid var(--cx-color-transparent);
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: var(--cx-font-weight-normal);
+  white-space: nowrap;
+  -webkit-appearance: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  @include transition;
+  &:disabled {
+    cursor: no-drop;
+    opacity: 0.6;
+  }
+  &:focus {
+    box-shadow: none;
+  }
 }
-.primary-button, .btn-primary {
-	color: var(--cx-color-1);
-	background-color: var(--cx-color-primary);
-	&:hover, &:active, 
-	&:not(:disabled):not(.disabled):active,
-	&:not(:disabled):not(.disabled).active {
-		color: var(--cx-color-1);
-		background-color: var(--cx-color-7);
-	}
-	&:disabled {
-		color: var(--cx-color-1);
-		background-color: var(--cx-color-primary);
-	}
+.primary-button,
+.btn-primary {
+  color: var(--cx-color-1);
+  background-color: var(--cx-color-primary);
+  &:hover,
+  &:active,
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active {
+    color: var(--cx-color-1);
+    background-color: var(--cx-color-7);
+  }
+  &:disabled {
+    color: var(--cx-color-1);
+    background-color: var(--cx-color-primary);
+  }
 }
-.secondary-button, .btn-secondary {
-	color: var(--cx-color-1);
-	background-color: var(--cx-color-secondary);
-	&:hover, &:active, 
-	&:not(:disabled):not(.disabled):active,
-	&:not(:disabled):not(.disabled).active {
-		color: var(--cx-color-1);
-		background-color: var(--cx-color-8);
-	}
-	&:disabled {
-		color: var(--cx-color-1);
-		background-color: var(--cx-color-secondary);
-	}
+.secondary-button,
+.btn-secondary {
+  color: var(--cx-color-1);
+  background-color: var(--cx-color-secondary);
+  &:hover,
+  &:active,
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active {
+    color: var(--cx-color-1);
+    background-color: var(--cx-color-8);
+  }
+  &:disabled {
+    color: var(--cx-color-1);
+    background-color: var(--cx-color-secondary);
+  }
 }
-.action-button, .btn-action {
-	color: var(--cx-color-secondary);
-	background-color: var(--cx-color-transparent);
-	border: 3px solid var(--cx-color-secondary);
-	&:hover, &:active, 
-	&:not(:disabled):not(.disabled):active,
-	&:not(:disabled):not(.disabled).active {
-		color: var(--cx-color-primary);
-		background-color: var(--cx-color-transparent);
-		border: 3px solid var(--cx-color-primary);
-	}
-	&:disabled {
-		color: var(--cx-color-secondary);
-		background-color: var(--cx-color-transparent);
-		border: 3px solid var(--cx-color-secondary);
-	}
+.action-button,
+.btn-action {
+  color: var(--cx-color-secondary);
+  background-color: var(--cx-color-transparent);
+  border: 3px solid var(--cx-color-secondary);
+  &:hover,
+  &:active,
+  &:not(:disabled):not(.disabled):active,
+  &:not(:disabled):not(.disabled).active {
+    color: var(--cx-color-primary);
+    background-color: var(--cx-color-transparent);
+    border: 3px solid var(--cx-color-primary);
+  }
+  &:disabled {
+    color: var(--cx-color-secondary);
+    background-color: var(--cx-color-transparent);
+    border: 3px solid var(--cx-color-secondary);
+  }
 }
-.btn-outline-text:not(:disabled):not(.disabled):active:focus, 
+.btn-outline-text:not(:disabled):not(.disabled):active:focus,
 .btn-action:not(:disabled):not(.disabled):active:focus {
   box-shadow: none;
 }

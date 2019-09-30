@@ -2,7 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
-import { AuthGuard, I18nModule, ConfigModule, CmsConfig, RoutesConfig, RoutingConfig } from '@spartacus/core';
+import {
+  AuthGuard,
+  I18nModule,
+  ConfigModule,
+  CmsConfig,
+  RoutesConfig,
+  RoutingConfig,
+} from '@spartacus/core';
 import { PolicyDetailsComponent } from './components/policy-details/policy-details.component';
 import { AccordionModule } from './../../accordion/accordion.module';
 
@@ -12,10 +19,10 @@ const routes: Routes = [
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'policyDetails',
-      pageLabel: 'policy-details'
+      pageLabel: 'policy-details',
     },
-    component: PageLayoutComponent
-  }
+    component: PageLayoutComponent,
+  },
 ];
 
 @NgModule({
@@ -24,16 +31,16 @@ const routes: Routes = [
     AccordionModule,
     I18nModule,
     RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig> {
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
         AccountPolicyDetailsSPAComponent: {
-          component: PolicyDetailsComponent
-        }
-      }
-    })
+          component: PolicyDetailsComponent,
+        },
+      },
+    }),
   ],
-  declarations: [ PolicyDetailsComponent ],
-  exports: [ PolicyDetailsComponent ],
-  entryComponents: [ PolicyDetailsComponent ]
+  declarations: [PolicyDetailsComponent],
+  exports: [PolicyDetailsComponent],
+  entryComponents: [PolicyDetailsComponent],
 })
-export class PolicyDetailsModule { }
+export class PolicyDetailsModule {}

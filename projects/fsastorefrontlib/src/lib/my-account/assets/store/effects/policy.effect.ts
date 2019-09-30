@@ -6,7 +6,6 @@ import { OccPolicyService } from '../../../../occ/policy/policy.service';
 import { PolicyDataService } from '../../services/policy-data.service';
 import * as fromActions from './../actions';
 
-
 @Injectable()
 export class PolicyEffects {
   @Effect()
@@ -17,16 +16,15 @@ export class PolicyEffects {
       if (payload === undefined || payload.userId === undefined) {
         payload = {
           userId: this.policyData.userId,
-          policies: this.policyData.policies
+          policies: this.policyData.policies,
         };
       }
-      return this.policyService.getPolicies(payload.userId)
-        .pipe(
-          map((policies: any) => {
-            return new fromActions.LoadPoliciesSuccess(policies);
-          }),
-          catchError(error => of(new fromActions.LoadPoliciesFail(error)))
-        );
+      return this.policyService.getPolicies(payload.userId).pipe(
+        map((policies: any) => {
+          return new fromActions.LoadPoliciesSuccess(policies);
+        }),
+        catchError(error => of(new fromActions.LoadPoliciesFail(error)))
+      );
     })
   );
   @Effect()
@@ -52,16 +50,15 @@ export class PolicyEffects {
       if (payload === undefined || payload.userId === undefined) {
         payload = {
           userId: this.policyData.userId,
-          policies: this.policyData.policies
+          policies: this.policyData.policies,
         };
       }
-      return this.policyService.getPremiumCalendar(payload.userId)
-        .pipe(
-          map((premiumCalendar: any) => {
-            return new fromActions.LoadPremiumCalendarSuccess(premiumCalendar);
-          }),
-          catchError(error => of(new fromActions.LoadPremiumCalendarFail(error)))
-        );
+      return this.policyService.getPremiumCalendar(payload.userId).pipe(
+        map((premiumCalendar: any) => {
+          return new fromActions.LoadPremiumCalendarSuccess(premiumCalendar);
+        }),
+        catchError(error => of(new fromActions.LoadPremiumCalendarFail(error)))
+      );
     })
   );
 
@@ -69,5 +66,5 @@ export class PolicyEffects {
     private actions$: Actions,
     private policyData: PolicyDataService,
     private policyService: OccPolicyService
-  ) { }
+  ) {}
 }

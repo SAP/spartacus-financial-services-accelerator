@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { AuthService, CartDataService, CartService, StateWithCart, CartActions, CartSelectors, Cart } from '@spartacus/core';
+import {
+  AuthService,
+  CartDataService,
+  CartService,
+  StateWithCart,
+  CartActions,
+  CartSelectors,
+  Cart,
+} from '@spartacus/core';
 import * as fromFSAction from '../../../checkout/assets/store/actions/index';
 import { BehaviorSubject } from 'rxjs';
 import { tap, filter, take } from 'rxjs/operators';
@@ -8,7 +16,6 @@ import { PricingData } from '../models/pricing.interface';
 
 @Injectable()
 export class FSCartService extends CartService {
-
   protected callbackFunction: Function;
   protected productAddedSource = new BehaviorSubject<string>('');
   public mainProductAdded = this.productAddedSource.asObservable();
@@ -21,24 +28,36 @@ export class FSCartService extends CartService {
     super(fsStore, fsCartData, fsAuthService);
   }
 
-  addOptionalProduct(productCode: string, quantity: number, entryNumber: string): void {
+  addOptionalProduct(
+    productCode: string,
+    quantity: number,
+    entryNumber: string
+  ): void {
     this.fsStore.dispatch(
       new fromFSAction.AddOptionalProduct({
         userId: this.fsCartData.userId,
         cartId: this.fsCartData.cartId,
         productCode: productCode,
         quantity: quantity,
-        entryNumber: entryNumber
+        entryNumber: entryNumber,
       })
     );
   }
 
-  createCartAndStartBundle(productCode: string, bundleTemplateId: string, quantity: number, pricingData: PricingData): void {
+  createCartAndStartBundle(
+    productCode: string,
+    bundleTemplateId: string,
+    quantity: number,
+    pricingData: PricingData
+  ): void {
     this.fsStore
       .pipe(
         select(CartSelectors.getActiveCartState),
         tap(cartState => {
-          if (!this.isCartCreated(cartState.value.content) && !cartState.loading) {
+          if (
+            !this.isCartCreated(cartState.value.content) &&
+            !cartState.loading
+          ) {
             this.fsStore.dispatch(
               new CartActions.CreateCart({ userId: this.cartData.userId })
             );
@@ -55,7 +74,7 @@ export class FSCartService extends CartService {
             productCode: productCode,
             bundleTemplateId: bundleTemplateId,
             quantity: quantity,
-            pricingData: pricingData
+            pricingData: pricingData,
           })
         );
       });

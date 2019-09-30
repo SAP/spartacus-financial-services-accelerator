@@ -12,48 +12,65 @@ const FULL_PARAMS = '&fields=FULL';
 export class OccInboxService {
   constructor(
     protected http: HttpClient,
-    protected occEndpointService: OccEndpointsService,
+    protected occEndpointService: OccEndpointsService
   ) {}
 
-  protected getSiteMessagesEndpoint(userId: string, messageGroup: string, searchConfig?: FSSearchConfig) {
-    let siteMessagesEndpoint = '/users/' + userId + '/notifications/fssitemessages?fields=FULL';
-    if ( searchConfig.sortCode && searchConfig.sortOrder ) {
-      siteMessagesEndpoint += '&page=0&sortCode=' + searchConfig.sortCode + '&sortOrder=' + searchConfig.sortOrder;
+  protected getSiteMessagesEndpoint(
+    userId: string,
+    messageGroup: string,
+    searchConfig?: FSSearchConfig
+  ) {
+    let siteMessagesEndpoint =
+      '/users/' + userId + '/notifications/fssitemessages?fields=FULL';
+    if (searchConfig.sortCode && searchConfig.sortOrder) {
+      siteMessagesEndpoint +=
+        '&page=0&sortCode=' +
+        searchConfig.sortCode +
+        '&sortOrder=' +
+        searchConfig.sortOrder;
     }
-    if ( messageGroup !== '' ) {
+    if (messageGroup !== '') {
       siteMessagesEndpoint += '&messagegroup=' + messageGroup;
     }
-    return (
-      (this.occEndpointService.getBaseEndpoint() +
-      siteMessagesEndpoint
-    ));
+    return this.occEndpointService.getBaseEndpoint() + siteMessagesEndpoint;
   }
   protected getReadUnreadEndpoint(userId: string) {
-    const readUnreadEndpoint = '/users/' + userId + '/notifications/fssitemessages/read-unread';
-    return (
-      (this.occEndpointService.getBaseEndpoint +
-      readUnreadEndpoint
-    ));
+    const readUnreadEndpoint =
+      '/users/' + userId + '/notifications/fssitemessages/read-unread';
+    return this.occEndpointService.getBaseEndpoint + readUnreadEndpoint;
   }
 
-  public getSiteMessagesForUserAndGroup(userId: string, messageGroup: string, searchConfig: FSSearchConfig): Observable<any> {
-    const url = this.getSiteMessagesEndpoint(userId, messageGroup, searchConfig);
+  public getSiteMessagesForUserAndGroup(
+    userId: string,
+    messageGroup: string,
+    searchConfig: FSSearchConfig
+  ): Observable<any> {
+    const url = this.getSiteMessagesEndpoint(
+      userId,
+      messageGroup,
+      searchConfig
+    );
     const params = new HttpParams();
     return this.http
       .get(url, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public setMessagesState(userId: string, messagesUidList: Array<string>, read: boolean): Observable<any> {
+  public setMessagesState(
+    userId: string,
+    messagesUidList: Array<string>,
+    read: boolean
+  ): Observable<any> {
     const url = this.getReadUnreadEndpoint(userId);
     const params = new HttpParams({
-        fromString: 'messageCodes=' + messagesUidList + '&readStatus=' + read + FULL_PARAMS
+      fromString:
+        'messageCodes=' + messagesUidList + '&readStatus=' + read + FULL_PARAMS,
     });
     const headers = new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded'
+      'Content-Type': 'application/x-www-form-urlencoded',
     });
     return this.http
-        .put<any>(url, params, { headers })
-        .pipe(catchError((error: any) => throwError(error.json())));
+      .put<any>(url, params, { headers })
+      .pipe(catchError((error: any) => throwError(error.json())));
   }
 }

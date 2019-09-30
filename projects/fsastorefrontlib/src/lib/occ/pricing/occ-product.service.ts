@@ -12,13 +12,16 @@ export class OccProductService {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService
-  ) { }
+  ) {}
 
-  public getCalculatedProductData(productCode: string, pricingData: PricingData): any {
+  public getCalculatedProductData(
+    productCode: string,
+    pricingData: PricingData
+  ): any {
     const url = this.getCalculateProductPriceEndpoint(productCode);
     const params = new HttpParams({ fromString: FULL_PARAMS });
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     });
     const pricingAttributesBody = JSON.stringify(pricingData);
 
@@ -30,8 +33,7 @@ export class OccProductService {
   protected getCalculateProductPriceEndpoint(productCode: string) {
     const calculateProductPriceEndpoint = '/product-pricing/' + productCode;
     return (
-      (this.occEndpointService.getBaseEndpoint() +
-        calculateProductPriceEndpoint
-      ));
+      this.occEndpointService.getBaseEndpoint() + calculateProductPriceEndpoint
+    );
   }
 }
