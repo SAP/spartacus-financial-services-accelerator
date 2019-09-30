@@ -22,15 +22,24 @@
               <span class="value">{{ quote.quoteId }}</span>
             </div>
             <div class="info-card-data">
-              <span class="title">{{ 'quote.quoteStatus' | cxTranslate }}</span>
-              <span class="value">{{ quote.quoteStatus | titlecase }}</span>
+              <span class="title">{{
+                'quote.quoteStatus.title' | cxTranslate
+              }}</span>
+              <ng-container *ngIf="!quote.isExpired; else expired">
+                <span *ngIf="quote.state.code === 'BIND'" class="value">
+                  {{ 'quote.quoteStatus.ready' | cxTranslate }}
+                </span>
+                <span *ngIf="quote.state.code === 'UNBIND'" class="value">
+                  {{ 'quote.quoteStatus.unfinished' | cxTranslate }}
+                </span>
+              </ng-container>
             </div>
             <div class="info-card-data">
               <span class="title">{{
                 'fscommon.expiryDate' | cxTranslate
               }}</span>
               <span *ngIf="quote.expiryDate" class="value">{{
-                quote.expiryDate
+                quote.expiryDate | cxDate: "dd-MM-yyyy"
               }}</span>
               <span *ngIf="!quote.expiryDate" class="value">{{
                 'fscommon.expiryNotConfirmed' | cxTranslate
@@ -42,7 +51,10 @@
             </div>
           </div>
           <div class="info-card-button-wrapper border-top-primary">
-            <button class="primary-button col-6 my-5">
+            <button
+              class="primary-button col-6 my-5"
+              [disabled]="quote.isExpired"
+            >
               {{ 'fscommon.retrieve' | cxTranslate }}
             </button>
           </div>
@@ -53,6 +65,11 @@
 </ng-container>
 <ng-template #noQuotes>
   <h3>{{ 'quote.youHaveNoQuotes' | cxTranslate }}!</h3>
+</ng-template>
+<ng-template #expired>
+  <span class="value">
+    {{ 'quote.quoteStatus.expired' | cxTranslate }}
+  </span>
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
