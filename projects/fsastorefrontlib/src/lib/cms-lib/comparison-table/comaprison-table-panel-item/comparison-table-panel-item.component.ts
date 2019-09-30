@@ -36,7 +36,7 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     protected pricingService: PricingService,
     protected productService: FSProductService
-  ) { }
+  ) {}
 
   product$: Observable<FSProduct>;
   panelItemEntries: OneTimeChargeEntry[] = [];
