@@ -4,7 +4,9 @@
 .AccountPageTemplate,
 .GeneralLayoutPageTemplate,
 .MultiStepCheckoutSummaryPageTemplate,
-.MultiTabsCategoryPageTemplate {
+.MultiTabsCategoryPageTemplate,
+.FindAgentListTemplate,
+.StoreFinderPageTemplate {
   @include width1400;
   cx-page-slot {
     @include width1400;
@@ -12,6 +14,9 @@
       justify-content: flex-end;
     }
   }
+}
+.FindAgentListTemplate {
+  padding: 3rem 1.5rem 0 1.5rem;
 }
 .close {
   width: inherit;

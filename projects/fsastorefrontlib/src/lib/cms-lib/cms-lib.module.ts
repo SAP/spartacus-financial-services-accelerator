@@ -5,9 +5,11 @@ import { ProductFeatureModule } from './product-feature/product-feature.module';
 import { ComparisonTableModule } from './comparison-table/comparison-table.module';
 import { CategoryFormsModule } from './forms/cms-category-form-component/cms-category-forms.module';
 import { CustomContainerModule } from './container/cms-custom-container.module';
+import { AgentModule } from './agent/agent.module';
 
 @NgModule({
   imports: [
+    AgentModule,
     AccountModule,
     BannerModule,
     ProductFeatureModule,
@@ -16,6 +18,7 @@ import { CustomContainerModule } from './container/cms-custom-container.module';
     CustomContainerModule
   ],
   exports: [
+    AgentModule,
     AccountModule,
     BannerModule,
     ProductFeatureModule,
@@ -24,4 +27,4 @@ import { CustomContainerModule } from './container/cms-custom-container.module';
     CustomContainerModule
   ]
 })
-export class CmsLibModule {}
+export class CmsLibModule { }

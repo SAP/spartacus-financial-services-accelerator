@@ -1,0 +1,37 @@
+fsa-agent-root {
+  cx-media img {
+    background: var(--cx-color-7);
+    border-radius: 50%;
+    @include box-shadow(0px, 3px, 10px, 1px, $color-dark-grey, 0.3);
+  }
+  .accordion-item-wrapper {
+    background: var(--cx-color-4);
+  }
+  .agent-container {
+    background: var(--cx-color-1);
+    @include box-shadow(0px, 3px, 10px, 1px, $color-dark-grey, 0.3);
+    p {
+      font-weight: var(--cx-font-weight-semi);
+    }
+    .FSA-icon:before {
+      padding: 8px;
+      border: 1px solid var(--cx-color-3);
+      border-radius: 50%;
+      font-size: var(--cx-h3-font-size);
+      @include transition;
+    }
+    .icon-FSA-envelope {
+      color: var(--cx-color-11);
+      &:hover:before {
+        color: var(--cx-color-1);
+        background: var(--cx-color-11);
+        border: 1px solid var(--cx-color-11);
+      }
+    }
+    .icon-FSA-map-marker:hover:before {
+      color: var(--cx-color-1);
+      background: var(--cx-color-primary);
+      border: 1px solid var(--cx-color-primary);
+    }
+  }
+}

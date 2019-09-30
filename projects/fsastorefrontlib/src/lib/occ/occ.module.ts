@@ -9,13 +9,15 @@ import { OccQuoteService } from './quote/quote.service';
 import { OccPolicyService } from './policy/policy.service';
 import { OccInboxService } from './inbox/inbox.service';
 
-import {OccFSCartService} from './cart/fs-cart.service';
+import { OccFSCartService } from './cart/fs-cart.service';
 import { OccBillingTimeService } from './billing-time/billing-time.service';
 import { OccFSCheckoutService } from './checkout/fs-checkout.service';
+import { OccAgentService } from './agent/agent.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
   providers: [
+    OccAgentService,
     OccQuoteService,
     OccPolicyService,
     OccClaimService,
@@ -26,4 +28,4 @@ import { OccFSCheckoutService } from './checkout/fs-checkout.service';
     { provide: OccConfig, useExisting: Config }
   ]
 })
-export class OccModule {}
+export class OccModule { }
