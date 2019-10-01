@@ -7,9 +7,9 @@
 .MultiTabsCategoryPageTemplate,
 .FindAgentListTemplate,
 .StoreFinderPageTemplate {
-  @include width1400;
+  @include contentWidth;
   cx-page-slot {
-    @include width1400;
+    @include contentWidth;
     &.SideContent {
       justify-content: flex-end;
     }
