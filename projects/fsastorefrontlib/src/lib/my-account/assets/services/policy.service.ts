@@ -8,8 +8,6 @@ import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
 import { PolicyDataService } from './policy-data.service';
 
-
-
 @Injectable()
 export class PolicyService {
   constructor(
@@ -43,15 +41,17 @@ export class PolicyService {
       }
     });
 
-    this.store.pipe(select(fromSelector.getPoliciesRefresh)).subscribe(refresh => {
-      if (refresh) {
-        this.store.dispatch(
-          new fromAction.LoadPolicies({
-            userId: this.policyData.userId
-          })
-        );
-      }
-    });
+    this.store
+      .pipe(select(fromSelector.getPoliciesRefresh))
+      .subscribe(refresh => {
+        if (refresh) {
+          this.store.dispatch(
+            new fromAction.LoadPolicies({
+              userId: this.policyData.userId,
+            })
+          );
+        }
+      });
   }
 
   loadPolicies() {
@@ -66,7 +66,7 @@ export class PolicyService {
     this.store.dispatch(
       new fromAction.LoadClaimPolicies({
         userId: this.policyData.userId,
-        policyCategoryCode: policyCategoryCode
+        policyCategoryCode: policyCategoryCode,
       })
     );
   }
@@ -74,7 +74,7 @@ export class PolicyService {
   loadPremiumCalendar() {
     this.store.dispatch(
       new fromAction.LoadPremiumCalendar({
-        userId: this.policyData.userId
+        userId: this.policyData.userId,
       })
     );
   }
@@ -84,7 +84,7 @@ export class PolicyService {
       new fromAction.LoadPolicyDetails({
         userId: this.policyData.userId,
         policyId: policyId,
-        contractId: contractId
+        contractId: contractId,
       })
     );
   }

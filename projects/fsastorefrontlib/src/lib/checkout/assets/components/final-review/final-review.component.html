@@ -1,45 +1,67 @@
 <div class="gradient-heading text-center">
-    {{ 'fscommon.finalReview' | cxTranslate }}
+  {{ 'fscommon.finalReview' | cxTranslate }}
 </div>
 <ng-container *ngIf="(paymentDetails$ | async) as paymentDetails">
-    <div class="container-fluid">
-        <div class="info-container row p-4">
-            <div class="col-6 col-md-4">
-                <ul class="list-unstyled">
-                    <li class="mb-2"><strong> {{ 'fscommon.paymentDetails' | cxTranslate }}</strong></li>
-                    <li>{{ paymentDetails.accountHolderName }}</li>
-                    <li>{{ paymentDetails.cardNumber }}</li>
-                    <li>{{ paymentDetails.cardType?.name }}</li>
-                    <li>{{ 'fscommon.expires' | cxTranslate }}: {{ paymentDetails.expiryMonth }} / {{ paymentDetails.expiryYear }}</li>
-                </ul>
-            </div>
-            <div class="col-6 col-md-5">
-                <ul class="list-unstyled">
-                    <li class="mb-2"><strong>{{ 'fscommon.billingAddress' | cxTranslate }}</strong></li>
-                    <li>{{ paymentDetails.billingAddress?.firstName }} {{ paymentDetails.billingAddress?.lastName }}</li>
-                    <li>{{ paymentDetails.billingAddress?.line1 }}</li>
-                    <li>{{ paymentDetails.billingAddress?.town }}</li>
-                    <li>{{ paymentDetails.billingAddress?.postalCode }}</li>
-                    <li>{{ paymentDetails.billingAddress?.country?.isocode }}</li>
-                </ul>
-            </div>
-            <div class="col-12 col-md-3">
-                <button class="secondary-button" (click)="edit()">{{ 'fscommon.edit' | cxTranslate }}</button>
-            </div>
-        </div>
-        <div class="row my-5">
-            <div class="col-12 col-md-8 cx-place-order-form form-check">
-                <label>
-                    <input class="form-check-input" type="checkbox" (change)="toggleTAndC()" />
-                    <span class="form-check-label">
-                        {{ 'fscommon.confirmAndAgree' | cxTranslate }}
-                        <a href="#" class="link"> {{ 'fscommon.termsConditions' | cxTranslate }} </a>
-                    </span>
-                </label>
-            </div>
-            <button [disabled]="!tAndCToggler" (click)=placeOrder() class="col-12 col-md-4 primary-button">
-                {{ 'fscommon.apply' | cxTranslate }}
-            </button>
-        </div>
+  <div class="container-fluid">
+    <div class="info-container row p-4">
+      <div class="col-6 col-md-4">
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <strong> {{ 'fscommon.paymentDetails' | cxTranslate }}</strong>
+          </li>
+          <li>{{ paymentDetails.accountHolderName }}</li>
+          <li>{{ paymentDetails.cardNumber }}</li>
+          <li>{{ paymentDetails.cardType?.name }}</li>
+          <li>
+            {{ 'fscommon.expires' | cxTranslate }}:
+            {{ paymentDetails.expiryMonth }} / {{ paymentDetails.expiryYear }}
+          </li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-5">
+        <ul class="list-unstyled">
+          <li class="mb-2">
+            <strong>{{ 'fscommon.billingAddress' | cxTranslate }}</strong>
+          </li>
+          <li>
+            {{ paymentDetails.billingAddress?.firstName }}
+            {{ paymentDetails.billingAddress?.lastName }}
+          </li>
+          <li>{{ paymentDetails.billingAddress?.line1 }}</li>
+          <li>{{ paymentDetails.billingAddress?.town }}</li>
+          <li>{{ paymentDetails.billingAddress?.postalCode }}</li>
+          <li>{{ paymentDetails.billingAddress?.country?.isocode }}</li>
+        </ul>
+      </div>
+      <div class="col-12 col-md-3">
+        <button class="secondary-button" (click)="edit()">
+          {{ 'fscommon.edit' | cxTranslate }}
+        </button>
+      </div>
     </div>
+    <div class="row my-5">
+      <div class="col-12 col-md-8 cx-place-order-form form-check">
+        <label>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            (change)="toggleTAndC()"
+          />
+          <span class="form-check-label">
+            {{ 'fscommon.confirmAndAgree' | cxTranslate }}
+            <a href="#" class="link">
+              {{ 'fscommon.termsConditions' | cxTranslate }}
+            </a>
+          </span>
+        </label>
+      </div>
+      <button
+        [disabled]="!tAndCToggler"
+        (click)="placeOrder()"
+        class="col-12 col-md-4 primary-button"
+      >
+        {{ 'fscommon.apply' | cxTranslate }}
+      </button>
+    </div>
+  </div>
 </ng-container>

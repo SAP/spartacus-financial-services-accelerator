@@ -1,11 +1,11 @@
 {
-    "defaultCommandTimeout": 10000,
-    "baseUrl": "http://localhost:4200",
-    "requestTimeout": 10000,
-    "modifyObstructiveCode": false,
-    "env": {
-        "CLIENT_ID": "financial_trusted",
-        "CLIENT_SECRET": "secret",
-        "API_URL": "https://10.27.241.116:9012"
-    }
+  "defaultCommandTimeout": 10000,
+  "baseUrl": "http://localhost:4200",
+  "requestTimeout": 10000,
+  "modifyObstructiveCode": false,
+  "env": {
+    "CLIENT_ID": "financial_trusted",
+    "CLIENT_SECRET": "secret",
+    "API_URL": "https://10.27.241.116:9012"
+  }
 }

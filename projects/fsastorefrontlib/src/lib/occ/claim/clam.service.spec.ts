@@ -1,7 +1,7 @@
 import { HttpClientModule, HttpRequest } from '@angular/common/http';
 import {
   HttpClientTestingModule,
-  HttpTestingController
+  HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccClaimService } from './claim.service';
@@ -18,16 +18,14 @@ const claimsEndpoint = '/claims';
 
 const MockOccModuleConfig: OccConfig = {
   context: {
-    baseSite: [
-      ''
-    ]
+    baseSite: [''],
   },
   backend: {
     occ: {
       baseUrl: '',
-      prefix: ''
-    }
-  }
+      prefix: '',
+    },
+  },
 };
 
 describe('OccClaimsService', () => {
@@ -39,8 +37,8 @@ describe('OccClaimsService', () => {
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
         OccClaimService,
-        { provide: OccConfig, useValue: MockOccModuleConfig }
-      ]
+        { provide: OccConfig, useValue: MockOccModuleConfig },
+      ],
     });
 
     service = TestBed.get(OccClaimService);
@@ -68,7 +66,8 @@ describe('OccClaimsService', () => {
       service.deleteClaim(userId, claimNumber).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
-          req.url === usersEndpoint + `/${userId}` + claimsEndpoint + `/${claimNumber}` &&
+          req.url ===
+            usersEndpoint + `/${userId}` + claimsEndpoint + `/${claimNumber}` &&
           req.method === 'DELETE'
         );
       }, `DELETE method and url`);
@@ -80,12 +79,15 @@ describe('OccClaimsService', () => {
       service.createClaim(userId, policyNumber, contractNumber).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
-          req.url === usersEndpoint + `/${userId}` + claimsEndpoint + `/create?contractId=` +
-          `${contractNumber}&policyId=` + `${policyNumber}` &&
-          req.method === 'POST'
+          req.url ===
+            usersEndpoint +
+              `/${userId}` +
+              claimsEndpoint +
+              `/create?contractId=` +
+              `${contractNumber}&policyId=` +
+              `${policyNumber}` && req.method === 'POST'
         );
       }, `POST method and url`);
     }));
   });
-
 });

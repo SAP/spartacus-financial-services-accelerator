@@ -14,47 +14,47 @@ export const CREATE_CLAIM_SUCCESS = '[Claim] Create Claim Success';
 
 export class DeleteClaim implements Action {
   readonly type = DELETE_CLAIM;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class DeleteClaimSuccess implements Action {
   readonly type = DELETE_CLAIM_SUCCESS;
-  constructor() { }
+  constructor() {}
 }
 
 export class DeleteClaimFail implements Action {
   readonly type = DELETE_CLAIM_FAIL;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class LoadClaims implements Action {
   readonly type = LOAD_CLAIMS;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class LoadClaimsSuccess implements Action {
   readonly type = LOAD_CLAIMS_SUCCESS;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class LoadClaimsFail implements Action {
   readonly type = LOAD_CLAIMS_FAIL;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class CreateClaim implements Action {
   readonly type = CREATE_CLAIM;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class CreateClaimFail implements Action {
   readonly type = CREATE_CLAIM_FAIL;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class CreateClaimSuccess implements Action {
   readonly type = CREATE_CLAIM_SUCCESS;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export type ClaimAction =

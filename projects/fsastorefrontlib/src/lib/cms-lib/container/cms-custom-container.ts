@@ -7,10 +7,9 @@ import { CmsComponent, CMSCustomComponentsContainer } from '../../occ-models';
 
 @Component({
   selector: 'fsa-cms-custom-container',
-  templateUrl: './cms-custom-container.html'
+  templateUrl: './cms-custom-container.html',
 })
 export class CmsCustomContainerComponent implements OnInit {
-
   routeParamId = 'formCode';
   pageContext: PageContext;
 
@@ -19,17 +18,22 @@ export class CmsCustomContainerComponent implements OnInit {
   constructor(
     protected componentData: CmsComponentData<CMSCustomComponentsContainer>,
     protected activatedRoute: ActivatedRoute,
-    protected cmsComponentConnector: CmsComponentConnector,
+    protected cmsComponentConnector: CmsComponentConnector
   ) {
     activatedRoute.params.subscribe(params => {
-      this.pageContext = new PageContext(params[this.routeParamId], PageType.CATEGORY_PAGE);
+      this.pageContext = new PageContext(
+        params[this.routeParamId],
+        PageType.CATEGORY_PAGE
+      );
     });
   }
 
   ngOnInit() {
     this.componentData.data$.subscribe(data => {
-      this.components$ = this.cmsComponentConnector.getList(data.simpleCMSComponents.split(' '), this.pageContext);
+      this.components$ = this.cmsComponentConnector.getList(
+        data.simpleCMSComponents.split(' '),
+        this.pageContext
+      );
     });
   }
-
 }

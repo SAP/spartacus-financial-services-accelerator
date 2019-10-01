@@ -4,7 +4,7 @@ import * as fromActions from './../actions';
 import { Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap } from 'rxjs/operators';
-import { OccClaimService} from './../../../../occ/claim/claim.service';
+import { OccClaimService } from './../../../../occ/claim/claim.service';
 import { ClaimDataService } from '../../services/claim-data.service';
 import { Claim } from './../reducers/claim.reducer';
 
@@ -15,20 +15,19 @@ export class ClaimEffects {
     ofType(fromActions.LOAD_CLAIMS),
     map((action: fromActions.LoadClaims) => action.payload),
     mergeMap(payload => {
-        if (payload === undefined || payload.userId === undefined) {
-          payload = {
-             userId: this.claimData.userId,
-             claims: this.claimData.claims
-          };
-        }
-        return this.claimService.getClaims(payload.userId)
-          .pipe(
-            map((claims: any) => {
-              return new fromActions.LoadClaimsSuccess(claims);
-            }),
-            catchError(error => of(new fromActions.LoadClaimsFail(error)))
-          );
-      })
+      if (payload === undefined || payload.userId === undefined) {
+        payload = {
+          userId: this.claimData.userId,
+          claims: this.claimData.claims,
+        };
+      }
+      return this.claimService.getClaims(payload.userId).pipe(
+        map((claims: any) => {
+          return new fromActions.LoadClaimsSuccess(claims);
+        }),
+        catchError(error => of(new fromActions.LoadClaimsFail(error)))
+      );
+    })
   );
 
   @Effect()
@@ -45,7 +44,6 @@ export class ClaimEffects {
     )
   );
 
-
   @Effect()
   createClaim$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.CREATE_CLAIM),
@@ -57,9 +55,7 @@ export class ClaimEffects {
           map((claim: Claim) => {
             return new fromActions.CreateClaimSuccess(claim);
           }),
-          catchError(error =>
-            of(new fromActions.CreateClaimFail(error))
-          )
+          catchError(error => of(new fromActions.CreateClaimFail(error)))
         );
     })
   );

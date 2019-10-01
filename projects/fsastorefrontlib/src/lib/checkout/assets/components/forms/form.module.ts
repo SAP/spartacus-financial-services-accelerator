@@ -8,7 +8,6 @@ import { PricingService } from '../../services/pricing/pricing.service';
 import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
 import { FormComponent } from './form.component';
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -16,12 +15,10 @@ import { FormComponent } from './form.component';
     RouterModule,
     NgSelectModule,
     DynamicFormModule,
-    NgbTooltipModule
+    NgbTooltipModule,
   ],
   declarations: [FormComponent],
   exports: [FormComponent],
-  providers: [PricingService]
-
+  providers: [PricingService],
 })
-export class FSFormsModule {
-}
+export class FSFormsModule {}

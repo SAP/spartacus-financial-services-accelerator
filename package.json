@@ -15,7 +15,9 @@
     "e2e:cy:open": "yarn --cwd ./projects/fsastorefront-e2e-cypress run cy:open",
     "e2e:cy:run": "yarn --cwd ./projects/fsastorefront-e2e-cypress run cy:run",
     "e2e:cy:start-open": "start-server-and-test start:ci http-get://localhost:4200 e2e:cy:open",
-    "e2e:cy:start-run": "start-server-and-test start:ci http-get://localhost:4200 e2e:cy:run"
+    "e2e:cy:start-run": "start-server-and-test start:ci http-get://localhost:4200 e2e:cy:run",
+    "prettier": "prettier --config ./.prettierrc --list-different \"projects/**/*{.ts,.js,.json,.scss,.html}\"",
+    "prettier-fix": "prettier --config ./.prettierrc --list-different \"projects/**/*{.ts,.js,.json,.scss,.html}\" --write"
   },
   "private": true,
   "dependencies": {
@@ -86,7 +88,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "karma-junit-reporter": "^1.2.0",
     "ng-packagr": "^5.2.0",
-    "prettier": "1.16.4",
+    "prettier": "1.18.2",
     "release-it": "^10.4.0",
     "sass": "^1.20.1",
     "semver": "^6.0.0",

@@ -8,7 +8,6 @@ import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
 import { InboxDataService } from './inbox-data.service';
 
-
 @Injectable()
 export class InboxService {
   constructor(
@@ -32,19 +31,23 @@ export class InboxService {
   messagesCollection: Message[] = [];
   protected callback: Function;
 
-  setActiveGroupTitle( title: string ) {
+  setActiveGroupTitle(title: string) {
     this.activeGroupTitleSource.next(title);
   }
   resetMessagesToSend() {
     this.messagesCollection = [];
     this.readStatusSource.next(false);
   }
-  setActiveMessageGroup( messageGroup: string ) {
+  setActiveMessageGroup(messageGroup: string) {
     this.activeMessageGroupSource.next(messageGroup);
   }
   selectedMessages(messageObject: Message) {
-    const index = this.messagesCollection.map(e =>  e.messageUid).indexOf(messageObject.messageUid);
-    index === -1 ? this.messagesCollection.push(messageObject) : this.messagesCollection.splice(index, 1);
+    const index = this.messagesCollection
+      .map(e => e.messageUid)
+      .indexOf(messageObject.messageUid);
+    index === -1
+      ? this.messagesCollection.push(messageObject)
+      : this.messagesCollection.splice(index, 1);
   }
   getUidsFromMessagesCollection(meesagesCollecton) {
     return meesagesCollecton.map(messageObj => messageObj.messageUid);
@@ -52,14 +55,14 @@ export class InboxService {
   getMessagesAction() {
     let readState = true;
     this.messagesCollection.forEach(function(message) {
-      if ( message.readDate ) {
+      if (message.readDate) {
         readState = false;
       }
     });
     this.readStatusSource.next(readState);
   }
   initMessages() {
-    this.store.pipe(select(fromSelector.getMessages)).subscribe( messages => {
+    this.store.pipe(select(fromSelector.getMessages)).subscribe(messages => {
       if (messages) {
         this.inboxData.messages = messages;
       }
@@ -70,44 +73,49 @@ export class InboxService {
       }
     });
   }
-  loadMessagesByMessageGroup(messageGroup: string, searchConfig: FSSearchConfig) {
+  loadMessagesByMessageGroup(
+    messageGroup: string,
+    searchConfig: FSSearchConfig
+  ) {
     this.store.dispatch(
       new fromAction.LoadMessages({
         userId: this.inboxData.userId,
         messageGroup: messageGroup,
-        searchConfig: searchConfig
+        searchConfig: searchConfig,
       })
     );
   }
   changeMessageListState() {
-    this.changeMessagesState(this.getUidsFromMessagesCollection(this.messagesCollection));
+    this.changeMessagesState(
+      this.getUidsFromMessagesCollection(this.messagesCollection)
+    );
   }
   readSingleMessage(messageId: string) {
     this.store.dispatch(
       new fromAction.SetMessagesState({
         userId: this.inboxData.userId,
         messagesUidList: messageId,
-        read: true
+        read: true,
       })
     );
   }
   changeMessagesState(messsageIds: string[]) {
-    if ( messsageIds.length === 0 ) {
+    if (messsageIds.length === 0) {
       return;
     }
     this.store.dispatch(
       new fromAction.SetMessagesState({
         userId: this.inboxData.userId,
         messagesUidList: messsageIds,
-        read: this.readStatusSource.getValue()
+        read: this.readStatusSource.getValue(),
       })
     );
-    const readDate = this.readStatusSource.getValue() ?  'date' :  undefined;
-    this.messagesCollection.map( message => {
+    const readDate = this.readStatusSource.getValue() ? 'date' : undefined;
+    this.messagesCollection.map(message => {
       message.readDate = readDate;
       return this.messagesCollection;
     }, this);
-    const nextAction = this.readStatusSource.getValue() ? false :  true;
+    const nextAction = this.readStatusSource.getValue() ? false : true;
     this.readStatusSource.next(nextAction);
   }
 }

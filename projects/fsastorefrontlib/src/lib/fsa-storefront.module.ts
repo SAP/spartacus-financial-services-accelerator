@@ -1,6 +1,11 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { provideConfig, ConfigModule } from '@spartacus/core';
-import { StorefrontConfig, B2cStorefrontModule, PageComponentModule, defaultCmsContentConfig } from '@spartacus/storefront';
+import {
+  StorefrontConfig,
+  B2cStorefrontModule,
+  PageComponentModule,
+  defaultCmsContentConfig,
+} from '@spartacus/storefront';
 import { translations, translationChunksConfig } from '@spartacus/assets';
 
 import { MyAccountModule } from './my-account/my-account.module';
@@ -11,7 +16,6 @@ import { fsaRoutingConfig } from './../cms-structure/routing/default-fsa-routing
 import { CheckoutModule } from './checkout/checkout.module';
 import { FSRegisterModule } from './cms-lib/user/register/fs-register.module';
 import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa-checkout-config';
-
 
 @NgModule({
   imports: [
@@ -25,35 +29,31 @@ import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa
     ConfigModule.withConfig({
       i18n: {
         resources: {
-          en: translations.en
+          en: translations.en,
         },
-        chunks: translationChunksConfig
+        chunks: translationChunksConfig,
       },
     }),
     ConfigModule.withConfig({
       i18n: {
         resources: {
-          en: fstranslations.en
-        }
-      }
+          en: fstranslations.en,
+        },
+      },
     }),
     ConfigModule.withConfig(fsaLayoutConfig),
     ConfigModule.withConfigFactory(defaultCmsContentConfig),
     ConfigModule.withConfig(fsaRoutingConfig),
     ConfigModule.withConfig(fsaCheckoutConfig),
   ],
-  exports: [
-    B2cStorefrontModule,
-    MyAccountModule,
-    CmsLibModule
-  ],
-  declarations: []
+  exports: [B2cStorefrontModule, MyAccountModule, CmsLibModule],
+  declarations: [],
 })
 export class FSAStorefrontModule {
   static withConfig(config?: StorefrontConfig): ModuleWithProviders {
     return {
       ngModule: FSAStorefrontModule,
-      providers: [provideConfig(config)]
+      providers: [provideConfig(config)],
     };
   }
 }

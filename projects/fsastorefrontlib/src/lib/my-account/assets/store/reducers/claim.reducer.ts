@@ -13,7 +13,7 @@ export interface ClaimState {
 export const initialState: ClaimState = {
   claims: {},
   refresh: false,
-  loaded: false
+  loaded: false,
 };
 
 export function reducer(
@@ -27,29 +27,29 @@ export function reducer(
         ...state,
         claims,
         refresh: false,
-        loaded: true
+        loaded: true,
       };
     }
 
     case fromAction.DELETE_CLAIM_SUCCESS: {
       return {
         ...state,
-        refresh: true
+        refresh: true,
       };
     }
 
     case fromAction.DELETE_CLAIM:
       return {
         ...state,
-        loaded: false
+        loaded: false,
       };
 
-      case fromAction.CREATE_CLAIM_SUCCESS: {
-        return {
-          ...state,
-          refresh: false,
-        };
-      }
+    case fromAction.CREATE_CLAIM_SUCCESS: {
+      return {
+        ...state,
+        refresh: false,
+      };
+    }
   }
 
   return state;

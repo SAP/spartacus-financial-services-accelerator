@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { CmsComponentMapping, StandardCmsComponentConfig } from '@spartacus/core';
+import {
+  CmsComponentMapping,
+  StandardCmsComponentConfig,
+} from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
@@ -16,7 +19,7 @@ export interface Mapping extends StandardCmsComponentConfig {
 @Component({
   selector: 'fsa-inbox',
   templateUrl: './inbox.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InboxComponent implements OnInit {
   constructor(
@@ -41,11 +44,19 @@ export class InboxComponent implements OnInit {
 
   ngOnInit() {
     this.component$ = this.componentData.data$;
-    this.component$.pipe(filter(data => data.tabComponents !== undefined)).subscribe( data => this.tabs = data.tabComponents.split(' '));
-    this.inboxService.activeGroupTitle.subscribe( title => this.activeGroupTitle = title);
-    this.inboxService.activeMessageGroup.subscribe( messageGroup => this.activeMessageGroup = messageGroup);
-    this.inboxService.readStatus.subscribe( state => this.readState = state);
-    this.inboxService.checkAllMessages.subscribe(check => this.mainCheckboxChecked = check);
+    this.component$
+      .pipe(filter(data => data.tabComponents !== undefined))
+      .subscribe(data => (this.tabs = data.tabComponents.split(' ')));
+    this.inboxService.activeGroupTitle.subscribe(
+      title => (this.activeGroupTitle = title)
+    );
+    this.inboxService.activeMessageGroup.subscribe(
+      messageGroup => (this.activeMessageGroup = messageGroup)
+    );
+    this.inboxService.readStatus.subscribe(state => (this.readState = state));
+    this.inboxService.checkAllMessages.subscribe(
+      check => (this.mainCheckboxChecked = check)
+    );
   }
   checkAllCheckboxes() {
     this.inboxService.checkAllMessagesSource.next(!this.mainCheckboxChecked);

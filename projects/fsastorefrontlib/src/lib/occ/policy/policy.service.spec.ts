@@ -1,7 +1,7 @@
 import { HttpClientModule, HttpRequest } from '@angular/common/http';
 import {
   HttpClientTestingModule,
-  HttpTestingController
+  HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccPolicyService } from './policy.service';
@@ -17,19 +17,16 @@ const policiesEndpoint = '/policies';
 const contractsEndpoint = '/contracts';
 const premiumCalendarEndpoint = '/premium-calendar';
 
-
 const MockOccModuleConfig: OccConfig = {
   context: {
-    baseSite: [
-      ''
-    ]
+    baseSite: [''],
   },
   backend: {
     occ: {
       baseUrl: '',
-      prefix: ''
-    }
-  }
+      prefix: '',
+    },
+  },
 };
 
 describe('OccPolicyService', () => {
@@ -41,8 +38,8 @@ describe('OccPolicyService', () => {
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
         OccPolicyService,
-        { provide: OccConfig, useValue: MockOccModuleConfig }
-      ]
+        { provide: OccConfig, useValue: MockOccModuleConfig },
+      ],
     });
 
     service = TestBed.get(OccPolicyService);
@@ -76,8 +73,7 @@ describe('OccPolicyService', () => {
               policiesEndpoint +
               `/${policyId}` +
               contractsEndpoint +
-              `/${contractId}`
-               && req.method === 'GET'
+              `/${contractId}` && req.method === 'GET'
         );
       }, `GET a single policy`);
     }));
@@ -88,8 +84,11 @@ describe('OccPolicyService', () => {
       service.getPremiumCalendar(userId).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
-          req.url === usersEndpoint + `/${userId}` + policiesEndpoint + premiumCalendarEndpoint &&
-          req.method === 'GET'
+          req.url ===
+            usersEndpoint +
+              `/${userId}` +
+              policiesEndpoint +
+              premiumCalendarEndpoint && req.method === 'GET'
         );
       }, `GET method and url`);
     }));

@@ -17,7 +17,7 @@ export const quote = {
       title: 'Quote status',
       ready: 'Ready for Purchase',
       unfinished: 'Unfinished',
-      expired: 'Expired'
-    }
-  }
+      expired: 'Expired',
+    },
+  },
 };

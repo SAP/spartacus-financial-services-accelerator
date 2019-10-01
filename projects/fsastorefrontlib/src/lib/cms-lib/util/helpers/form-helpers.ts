@@ -7,7 +7,9 @@ export class FormHelpers {
       if (control.parent) {
         controlNameArray.forEach((name, index) => {
           const targetControl = control.parent.controls[name];
-          control.value > index ? targetControl.enable() : targetControl.disable();
+          control.value > index
+            ? targetControl.enable()
+            : targetControl.disable();
         });
       }
       return null;
@@ -18,11 +20,17 @@ export class FormHelpers {
     return (control: AbstractControl): ValidationErrors | null => {
       let targetGroup;
       groupName.forEach((name, index) => {
-        if (control.parent && control.parent.parent && control.parent.parent.controls[name]) {
+        if (
+          control.parent &&
+          control.parent.parent &&
+          control.parent.parent.controls[name]
+        ) {
           targetGroup = control.parent.parent.controls[name];
           for (const key in targetGroup.controls) {
             if (targetGroup.controls.hasOwnProperty(key)) {
-              control.value > index ? targetGroup.controls[key].enable() : targetGroup.controls[key].disable();
+              control.value > index
+                ? targetGroup.controls[key].enable()
+                : targetGroup.controls[key].disable();
             }
           }
         }

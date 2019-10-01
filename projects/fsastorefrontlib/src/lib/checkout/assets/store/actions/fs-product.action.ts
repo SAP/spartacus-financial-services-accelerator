@@ -1,6 +1,10 @@
-import { PRODUCT_DETAIL_ENTITY, StateEntityLoaderActions } from '@spartacus/core';
+import {
+  PRODUCT_DETAIL_ENTITY,
+  StateEntityLoaderActions,
+} from '@spartacus/core';
 
-export const LOAD_CALCULATED_PRODUCT_DATA = '[Product] Load Calculated Product Data';
+export const LOAD_CALCULATED_PRODUCT_DATA =
+  '[Product] Load Calculated Product Data';
 
 export class LoadCalculatedProductData extends StateEntityLoaderActions.EntityLoadAction {
   readonly type = LOAD_CALCULATED_PRODUCT_DATA;

@@ -3,13 +3,10 @@ import {
   Component,
   EventEmitter,
   OnInit,
-  Output
+  Output,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  OrderEntry,
-  RoutingService
-} from '@spartacus/core';
+import { OrderEntry, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { FSCartService } from '../../services';
@@ -18,15 +15,15 @@ import { FSCheckoutConfigService } from '../../services/fs-checkout-config.servi
 @Component({
   selector: 'fsa-add-options',
   templateUrl: './add-options.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddOptionsComponent implements OnInit {
   constructor(
     protected cartService: FSCartService,
     protected routingService: RoutingService,
     private checkoutConfigService: FSCheckoutConfigService,
-    private activatedRoute: ActivatedRoute,
-  ) { }
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   entries$: Observable<OrderEntry[]>;
   checkoutStepUrlNext: string;

@@ -1,48 +1,93 @@
-<ng-container *ngIf="claimPolicies$ | async as claimPolicies">
-    <ng-container *ngIf="claimPoliciesLoaded$ | async; else loading">
-        <ng-container *ngIf="claimPolicies?.insurancePolicies?.length > 0; else noClaims">
-            <div class="row">
-                <div *ngFor="let claimPolicy of claimPolicies.insurancePolicies; let i = index"
-                    class="fs-items col-sm-6 col-md-4">
-                    <div class="fs-items-feature-wrapper"
-                        (click)="isSelected = i; selectPolicy(claimPolicy.policyNumber, claimPolicy.contractNumber);"
-                        [ngClass]="{selected: isSelected === i}">
-                        <h3 class="section-header-heading text-uppercase">
-                            {{claimPolicy.categoryData?.name}} {{ 'policy.policy' | cxTranslate }}
-                        </h3>
-                        <div class="fs-items-feature-image">
-                            <span class="image-wrapper small">
-                                <img class="image-item"
-                                    [src]="getBaseUrl() + claimPolicy.mainProduct?.coverageProduct?.images[1]?.url" />
-                            </span>
-                        </div>
-                        <ul *ngIf="claimPolicy.insuredObjects[0]?.insuredObjectItems" class="fs-items-feature-details">
-                            <li>
-                                <label
-                                    class="item-label">{{ 'claim.' + claimPolicy.insuredObjects[0]?.insuredObjectItems[0]?.label | cxTranslate }}</label>
-                                :
-                                <span *ngIf="claimPolicy.insuredObjects[0]?.insuredObjectItems.length > 0"
-                                    class="item-data--blue">{{claimPolicy.insuredObjects[0]?.insuredObjectItems[0]?.value}}</span>
-                            </li>
-                            <li>
-                                <label
-                                    class="item-label">{{ 'claim.' + claimPolicy.insuredObjects[0]?.insuredObjectItems[1]?.label | cxTranslate }}</label>
-                                :
-                                <span *ngIf="claimPolicy.insuredObjects[0]?.insuredObjectItems.length > 1"
-                                    class="item-data--blue">{{claimPolicy.insuredObjects[0]?.insuredObjectItems[1]?.value}}</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+<ng-container *ngIf="(claimPolicies$ | async) as claimPolicies">
+  <ng-container *ngIf="(claimPoliciesLoaded$ | async); else loading">
+    <ng-container
+      *ngIf="claimPolicies?.insurancePolicies?.length > 0; else noClaims"
+    >
+      <div class="row">
+        <div
+          *ngFor="
+            let claimPolicy of claimPolicies.insurancePolicies;
+            let i = index
+          "
+          class="fs-items col-sm-6 col-md-4"
+        >
+          <div
+            class="fs-items-feature-wrapper"
+            (click)="
+              isSelected = i;
+              selectPolicy(claimPolicy.policyNumber, claimPolicy.contractNumber)
+            "
+            [ngClass]="{ selected: isSelected === i }"
+          >
+            <h3 class="section-header-heading text-uppercase">
+              {{ claimPolicy.categoryData?.name }}
+              {{ 'policy.policy' | cxTranslate }}
+            </h3>
+            <div class="fs-items-feature-image">
+              <span class="image-wrapper small">
+                <img
+                  class="image-item"
+                  [src]="
+                    getBaseUrl() +
+                    (claimPolicy.mainProduct?.coverageProduct?.images)[1]?.url
+                  "
+                />
+              </span>
             </div>
-        </ng-container>
+            <ul
+              *ngIf="claimPolicy.insuredObjects[0]?.insuredObjectItems"
+              class="fs-items-feature-details"
+            >
+              <li>
+                <label class="item-label">{{
+                  'claim.' +
+                    (claimPolicy.insuredObjects[0]?.insuredObjectItems)[0]
+                      ?.label | cxTranslate
+                }}</label>
+                :
+                <span
+                  *ngIf="
+                    claimPolicy.insuredObjects[0]?.insuredObjectItems.length > 0
+                  "
+                  class="item-data--blue"
+                  >{{
+                    (claimPolicy.insuredObjects[0]?.insuredObjectItems)[0]
+                      ?.value
+                  }}</span
+                >
+              </li>
+              <li>
+                <label class="item-label">{{
+                  'claim.' +
+                    (claimPolicy.insuredObjects[0]?.insuredObjectItems)[1]
+                      ?.label | cxTranslate
+                }}</label>
+                :
+                <span
+                  *ngIf="
+                    claimPolicy.insuredObjects[0]?.insuredObjectItems.length > 1
+                  "
+                  class="item-data--blue"
+                  >{{
+                    (claimPolicy.insuredObjects[0]?.insuredObjectItems)[1]
+                      ?.value
+                  }}</span
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </ng-container>
+  </ng-container>
 </ng-container>
 <ng-template #noClaims>
-    <div class="notice-text">
-        <h3 class="notice-text__heading">{{ 'policy.noValidPolicies' | cxTranslate }}</h3>
-    </div>
+  <div class="notice-text">
+    <h3 class="notice-text__heading">
+      {{ 'policy.noValidPolicies' | cxTranslate }}
+    </h3>
+  </div>
 </ng-template>
 <ng-template #loading>
-    <cx-spinner></cx-spinner>
+  <cx-spinner></cx-spinner>
 </ng-template>

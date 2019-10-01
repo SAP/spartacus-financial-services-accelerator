@@ -17,12 +17,10 @@ import { OccFSCartService } from '../../occ/cart/fs-cart.service';
     NgSelectModule,
     SpinnerModule,
     MediaModule,
-    NgbTooltipModule
+    NgbTooltipModule,
   ],
   declarations: [AddOptionsComponent],
   exports: [AddOptionsComponent],
-  providers: [FSCartService, OccFSCartService]
-
+  providers: [FSCartService, OccFSCartService],
 })
-export class AddOptionsModule {
-}
+export class AddOptionsModule {}

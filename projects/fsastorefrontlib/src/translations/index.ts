@@ -13,6 +13,6 @@ export const fstranslations: TranslationResources = {
     fscommon,
     quote,
     policy,
-    premiumCalendar
-  }
+    premiumCalendar,
+  },
 };

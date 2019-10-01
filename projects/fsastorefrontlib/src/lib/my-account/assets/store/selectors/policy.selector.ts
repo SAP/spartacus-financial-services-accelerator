@@ -2,7 +2,6 @@ import { createSelector, MemoizedSelector } from '@ngrx/store';
 import * as fromFeature from '../reducers';
 import * as fromPolicy from '../reducers/policy.reducer';
 
-
 export const getPoliciesState: MemoizedSelector<
   any,
   fromPolicy.PolicyState
@@ -16,7 +15,10 @@ export const getPolicyData: MemoizedSelector<any, any> = createSelector(
   fromPolicy.getPolicyData
 );
 
-export const getPoliciesRefresh: MemoizedSelector<any, boolean> = createSelector(
+export const getPoliciesRefresh: MemoizedSelector<
+  any,
+  boolean
+> = createSelector(
   getPoliciesState,
   fromPolicy.getRefresh
 );

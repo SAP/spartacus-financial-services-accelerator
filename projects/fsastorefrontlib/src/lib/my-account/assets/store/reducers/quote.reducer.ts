@@ -13,7 +13,7 @@ export interface QuoteState {
 export const initialState: QuoteState = {
   quotes: {},
   refresh: false,
-  loaded: false
+  loaded: false,
 };
 
 export function reducer(
@@ -27,7 +27,7 @@ export function reducer(
         ...state,
         quotes,
         refresh: false,
-        loaded: true
+        loaded: true,
       };
     }
   }

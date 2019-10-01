@@ -5,11 +5,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 
-import {
-  Order,
-  CheckoutService,
-  OccConfig
-} from '@spartacus/core';
+import { Order, CheckoutService, OccConfig } from '@spartacus/core';
 
 import { Observable } from 'rxjs';
 
@@ -24,7 +20,7 @@ export class FsaOrderConfirmationComponent implements OnInit, OnDestroy {
   constructor(
     protected checkoutService: CheckoutService,
     private config: OccConfig
-    ) { }
+  ) {}
 
   ngOnInit() {
     this.order$ = this.checkoutService.getOrderDetails();

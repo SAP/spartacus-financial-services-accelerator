@@ -1,15 +1,15 @@
 <ng-container *ngIf="(component.data$ | async) as data">
-    <div class="enriched-banner">
-        <div class="image-wrapper">
-            <cx-media [container]="data.media"></cx-media>
-        </div>
-        <div class="enriched-banner__text">
-            <span class="enriched-banner__title">{{data.headingText}}</span>
-            <span class="enriched-banner__details">
-                <a class="enriched-banner__styled-text"
-                [routerLink]="data.urlLink">
-                {{data.styledText}}</a>
-            </span>
-        </div>
+  <div class="enriched-banner">
+    <div class="image-wrapper">
+      <cx-media [container]="data.media"></cx-media>
     </div>
+    <div class="enriched-banner__text">
+      <span class="enriched-banner__title">{{ data.headingText }}</span>
+      <span class="enriched-banner__details">
+        <a class="enriched-banner__styled-text" [routerLink]="data.urlLink">
+          {{ data.styledText }}</a
+        >
+      </span>
+    </div>
+  </div>
 </ng-container>

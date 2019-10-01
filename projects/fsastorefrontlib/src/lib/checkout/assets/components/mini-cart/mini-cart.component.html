@@ -2,26 +2,34 @@
   <ng-container *ngIf="cart.deliveryOrderGroups">
     <div class="short-overview">
       <div class="gradient-heading text-center px-2">
-          {{ cart.deliveryOrderGroups[0]?.entries[0]?.product?.defaultCategory?.name }} {{ 'quote.quote' | cxTranslate }}
-        </div>
+        {{
+          (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.defaultCategory
+            ?.name
+        }}
+        {{ 'quote.quote' | cxTranslate }}
+      </div>
       <div class="short-overview-content">
-          <ng-container *ngFor="let entry of cart.deliveryOrderGroups[0]?.entries">
-            <div class="short-overview-item row">
-              <div class="short-overview-title col-7">
-                  {{ entry.product.cartDisplayName }}:
-              </div>
-              <div class="short-overview-value col-5">
-                {{ entry.totalPrice.formattedValue }}
-              </div>
+        <ng-container
+          *ngFor="let entry of cart.deliveryOrderGroups[0]?.entries"
+        >
+          <div class="short-overview-item row">
+            <div class="short-overview-title col-7">
+              {{ entry.product.cartDisplayName }}:
             </div>
+            <div class="short-overview-value col-5">
+              {{ entry.totalPrice.formattedValue }}
+            </div>
+          </div>
         </ng-container>
-          <div class="highlighted row">
-            <div class="short-overview-title col-6">
-              {{ 'fscommon.totalPrice' | cxTranslate }}:
-            </div>
-            <div class="short-overview-value col-6">{{ cart.totalPrice?.formattedValue }}</div>
+        <div class="highlighted row">
+          <div class="short-overview-title col-6">
+            {{ 'fscommon.totalPrice' | cxTranslate }}:
+          </div>
+          <div class="short-overview-value col-6">
+            {{ cart.totalPrice?.formattedValue }}
           </div>
         </div>
       </div>
+    </div>
   </ng-container>
 </ng-container>

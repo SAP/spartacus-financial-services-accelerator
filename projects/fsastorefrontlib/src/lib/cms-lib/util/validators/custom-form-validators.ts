@@ -25,7 +25,11 @@ export class CustomFormValidators {
     return (control: AbstractControl): ValidationErrors | null => {
       const userAge = new Date(control.value as string);
       const today = new Date();
-      const age = new Date(today.getFullYear() - minAge, today.getMonth(), today.getDate());
+      const age = new Date(
+        today.getFullYear() - minAge,
+        today.getMonth(),
+        today.getDate()
+      );
       return userAge < age ? null : { InvalidDate: true };
     };
   }
@@ -36,9 +40,13 @@ export class CustomFormValidators {
       const today = new Date();
       switch (operator) {
         case 'shouldBeGreater':
-          return inputVal.getTime() > today.getTime() ? null : { InvalidDate: true };
+          return inputVal.getTime() > today.getTime()
+            ? null
+            : { InvalidDate: true };
         case 'shouldBeLess':
-          return inputVal.getTime() < today.getTime() ? null : { InvalidDate: true };
+          return inputVal.getTime() < today.getTime()
+            ? null
+            : { InvalidDate: true };
       }
     };
   }

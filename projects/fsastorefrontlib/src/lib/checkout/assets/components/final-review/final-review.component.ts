@@ -4,14 +4,14 @@ import {
   CheckoutPaymentService,
   CheckoutService,
   PaymentDetails,
-  RoutingService
+  RoutingService,
 } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCheckoutConfigService } from '../../services/fs-checkout-config.service';
 
 @Component({
   selector: 'fsa-final-review',
-  templateUrl: './final-review.component.html'
+  templateUrl: './final-review.component.html',
 })
 export class FinalReviewComponent implements OnInit {
   @Input()
