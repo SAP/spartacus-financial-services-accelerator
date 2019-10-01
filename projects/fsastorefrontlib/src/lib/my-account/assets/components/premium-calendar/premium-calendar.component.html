@@ -55,7 +55,7 @@
                   : 'notice'
               "
             >
-              {{ policy.billingData[0]?.date | cxDate: 'dd MMM yyyy' }}
+              {{ policy.billingData[0]?.dueDate | cxDate: 'dd MMM yyyy' }}
               <div
                 class="warn"
                 *ngIf="policy.billingData[0]?.paymentStatus == 'Overdue'"
@@ -93,7 +93,7 @@
                   <div class="col"></div>
                   <div class="col"></div>
                   <div class="col color-dot">
-                    {{ dueDate.date | cxDate: 'dd MMM yyyy' }}
+                    {{ dueDate.dueDate | cxDate: 'dd MMM yyyy' }}
                   </div>
                   <div class="col color-dot">
                     {{ dueDate.paymentAmount }}
@@ -169,7 +169,8 @@
                           "
                         >
                           {{
-                            policy.billingData[0]?.date | cxDate: 'dd MMM yyyy'
+                            policy.billingData[0]?.dueDate
+                              | cxDate: 'dd MMM yyyy'
                           }}
                           <div
                             class="warn"
@@ -215,7 +216,7 @@
                             <div
                               class="col-6 text-left d-flex justify-content-around"
                             >
-                              {{ dueDate.date | cxDate: 'dd MMM yyyy' }}
+                              {{ dueDate.dueDate | cxDate: 'dd MMM yyyy' }}
                             </div>
                             <div
                               class="col-6 text-left d-flex justify-content-around"

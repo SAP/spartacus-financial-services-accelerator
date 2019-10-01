@@ -53,8 +53,10 @@
                 >{{ policy.policyPremium?.formattedValue }} /
                 {{ policy.paymentFrequency }}</span
               >
-              <span class="value ">{{
-                policy.paymentMethod?.paymentOption | uppercase
+              <span class="value">{{
+                (policy.paymentMethod !== undefined
+                  ? policy.paymentMethod?.paymentOption
+                  : 'n/a') | uppercase
               }}</span>
             </div>
             <div class="info-card-data">
