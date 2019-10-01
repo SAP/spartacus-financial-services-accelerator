@@ -1,5 +1,5 @@
 <div class="border-color-7 py-3 px-2">
-  <ng-container *ngIf="(cart$ | async) as cart">
+  <ng-container *ngIf="cart$ | async as cart">
     <ng-container *ngFor="let entry of cart.deliveryOrderGroups[0]?.entries">
       <ng-container *ngIf="entry.product?.documents.length > 0">
         <ul class="bulleted-list pl-5 pt-1 mb-0">

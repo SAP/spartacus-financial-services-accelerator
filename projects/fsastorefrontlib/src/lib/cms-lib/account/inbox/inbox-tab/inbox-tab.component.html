@@ -1,4 +1,4 @@
-<ng-container *ngIf="(component$ | async) as component">
+<ng-container *ngIf="component$ | async as component">
   <li class="tab">
     <a
       (click)="onTabClicked(component.messageGroup, component.title)"

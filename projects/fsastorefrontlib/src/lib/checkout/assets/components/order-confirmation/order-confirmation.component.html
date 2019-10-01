@@ -1,4 +1,4 @@
-<ng-container *ngIf="(order$ | async) as order; else loading">
+<ng-container *ngIf="order$ | async as order; else loading">
   <div class="container-fluid center1400">
     <ng-container
       *ngIf="order.deliveryOrderGroups?.length > 0; else orderComplete"

@@ -1,5 +1,5 @@
-<ng-container *ngIf="(cart$ | async) as cart">
-  <ng-container *ngIf="(cartLoaded$ | async); else loading">
+<ng-container *ngIf="cart$ | async as cart">
+  <ng-container *ngIf="cartLoaded$ | async; else loading">
     <ng-container *ngIf="cart.deliveryOrderGroups?.length > 0; else noQuotes">
       <div class="accordion">
         <div class="row no-gutters section-header-heading">
