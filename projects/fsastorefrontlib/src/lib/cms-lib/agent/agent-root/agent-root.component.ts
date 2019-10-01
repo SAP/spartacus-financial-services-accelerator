@@ -22,6 +22,6 @@ export class AgentRootComponent implements OnInit {
       this.agentList$ = this.agentService.getAgentsByCategory(
         data.agentRootCategory
       );
-    });
+    }).unsubscribe();
   }
 }

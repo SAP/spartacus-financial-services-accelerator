@@ -1,22 +1,27 @@
-<div class="my-4">
-  <div class="row d-flex justify-content-end">
-    <div class="col-4 d-flex">
-      <button
-        class="primary-button mx-1"
-        routerLink="/find-agent"
-        routerLinkActive="active"
-        [disabled]="disableByMatchingUrl('find-agent')"
-      >
-        {{ 'fscommon.listView' | cxTranslate }}
-      </button>
-      <button
-        class="secondary-button mx-1"
-        routerLink="/agent-locator"
-        routerLinkActive="active"
-        [disabled]="disableByMatchingUrl('agent-locator')"
-      >
-        {{ 'fscommon.mapView' | cxTranslate }}
-      </button>
+
+  <div class="container">
+    <div class="row d-flex justify-content-end">
+      <div class="col-6 col-md-3">
+        <button
+          class="primary-button"
+          routerLink="/find-agent"
+          routerLinkActive="active"
+          [disabled]="disableByMatchingUrl('find-agent')"
+        >
+          {{ 'fscommon.listView' | cxTranslate }} 
+        </button>
+      </div>
+      <div class="col-6 col-md-3">
+        <button
+          class="secondary-button"
+          routerLink="/agent-locator"
+          routerLinkActive="active"
+          [disabled]="disableByMatchingUrl('agent-locator')"
+        >
+          {{ 'fscommon.mapView' | cxTranslate }}
+          
+        </button>
+      </div>
     </div>
-  </div>
-</div>
+  </div> 
+

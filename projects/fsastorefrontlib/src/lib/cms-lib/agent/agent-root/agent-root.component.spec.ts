@@ -1,10 +1,9 @@
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { I18nTestingModule } from '@spartacus/core';
+import { I18nTestingModule, CmsComponent } from '@spartacus/core';
 import { MediaModule, CmsComponentData } from '@spartacus/storefront';
 import { of, Observable, BehaviorSubject } from 'rxjs';
 
-import { CmsComponent } from 'fsastorefrontlib/lib/occ-models';
 import { AgentRootComponent } from './agent-root.component';
 import { AccordionModule } from '../../../accordion/accordion.module';
 import { CmsAgentRootComponent } from '../../../occ-models';
