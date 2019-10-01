@@ -94,7 +94,7 @@ describe('UpdateProfileComponent', () => {
       declarations: [
         FSUpdateProfileComponent,
         MockUpdateProfileFormComponent,
-        MockCxSpinnerComponent
+        MockCxSpinnerComponent,
       ],
       providers: [
         {
@@ -141,7 +141,7 @@ describe('UpdateProfileComponent', () => {
 
     const userUpdates: FSUser = {
       firstName: 'Donna',
-      dateOfBirth: '12/12/1980'
+      dateOfBirth: '12/12/1980',
     };
 
     component.onSubmit({ userUpdates });

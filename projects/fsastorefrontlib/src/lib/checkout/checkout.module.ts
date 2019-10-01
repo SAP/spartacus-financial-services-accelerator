@@ -9,7 +9,7 @@ import {
   ConfigModule,
   I18nModule,
   RoutesConfig,
-  RoutingConfig
+  RoutingConfig,
 } from '@spartacus/core';
 import {
   CardModule,
@@ -22,7 +22,7 @@ import {
   PaymentFormModule,
   PaymentMethodComponent,
   PaymentMethodModule,
-  SpinnerModule
+  SpinnerModule,
 } from '@spartacus/storefront';
 import { CatagoryStepGuard } from '../../cms-components/checkout/guards/category-step-guard';
 import { AccordionModule } from '../accordion/accordion.module';
@@ -40,7 +40,7 @@ import { FSCartService } from './assets/services';
 import { FSCategoryService } from './assets/services/fs-category.service';
 import { effects } from './assets/store/effects/index';
 import { FSCheckoutStepGuard } from '../../cms-components/checkout/guards/fs-checkout-step-guard';
-import { reducerToken, reducerProvider } from '../../../src/lib/checkout/assets/store/reducers';
+import { reducerToken, reducerProvider } from './assets/store/reducers/index';
 import { StoreModule } from '@ngrx/store';
 import { CHECKOUT_FEATURE } from './assets/store';
 import { OccFSCheckoutService } from '../occ/checkout/fs-checkout.service';
@@ -51,36 +51,36 @@ const routes: Routes = [
     canActivate: [CmsPageGuard, CatagoryStepGuard],
     data: {
       cxRoute: 'generalInformation',
-      pageLabel: 'generalInformationForm'
+      pageLabel: 'generalInformationForm',
     },
-    component: PageLayoutComponent
+    component: PageLayoutComponent,
   },
   {
     path: null, // can be null only if pathS property is defined in ConfigModule
     canActivate: [CmsPageGuard],
     data: {
       cxRoute: 'addOptions', // custom name for your route to be used in ConfigModule configuration
-      pageLabel: 'add-options' // ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
+      pageLabel: 'add-options', // ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
     },
-    component: PageLayoutComponent // SPA LAYOUT Component you're targeting
+    component: PageLayoutComponent, // SPA LAYOUT Component you're targeting
   },
   {
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'quoteReview',
-      pageLabel: 'quote-review'
+      pageLabel: 'quote-review',
     },
-    component: PageLayoutComponent
+    component: PageLayoutComponent,
   },
   {
     path: null,
     canActivate: [AuthGuard, CmsPageGuard, FSCheckoutStepGuard],
     data: {
       cxRoute: 'checkoutPaymentDetails',
-      pageLabel: 'checkout-payment-details'
+      pageLabel: 'checkout-payment-details',
     },
-    component: PageLayoutComponent
+    component: PageLayoutComponent,
   },
   {
     path: null,
@@ -88,41 +88,41 @@ const routes: Routes = [
       AuthGuard,
       CmsPageGuard,
       CartNotEmptyGuard,
-      PaymentDetailsSetGuard
+      PaymentDetailsSetGuard,
     ],
     data: {
       cxRoute: 'finalReview',
-      pageLabel: 'final-review'
+      pageLabel: 'final-review',
     },
-    component: PageLayoutComponent
+    component: PageLayoutComponent,
   },
   {
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'orderConfirmation',
-      pageLabel: 'orderConfirmationPage'
+      pageLabel: 'orderConfirmationPage',
     },
-    component: PageLayoutComponent
+    component: PageLayoutComponent,
   },
   {
     path: null,
     canActivate: [AuthGuard, CmsPageGuard, FSCheckoutStepGuard],
     data: {
       cxRoute: 'legalInformation',
-      pageLabel: 'legalInformationPage'
+      pageLabel: 'legalInformationPage',
     },
-    component: PageLayoutComponent
+    component: PageLayoutComponent,
   },
   {
     path: null,
     canActivate: [AuthGuard, CmsPageGuard, FSCheckoutStepGuard],
     data: {
       cxRoute: 'userIdentification',
-      pageLabel: 'userIdentificationPage'
+      pageLabel: 'userIdentificationPage',
     },
-    component: PageLayoutComponent
-  }
+    component: PageLayoutComponent,
+  },
 ];
 
 @NgModule({
@@ -147,35 +147,35 @@ const routes: Routes = [
       cmsComponents: {
         AddOptionsFlex: {
           // mapping hybris component (defined in impex) - This is acctualy flexType defined in impex for that component
-          component: AddOptionsComponent // to SPA component
+          component: AddOptionsComponent, // to SPA component
         },
         MiniCartFlex: {
-          component: FSMiniCartComponent
+          component: FSMiniCartComponent,
         },
         QuoteReviewFlex: {
-          component: QuoteReviewComponent
+          component: QuoteReviewComponent,
         },
         PaymentDetailsFlex: {
-          component: PaymentMethodComponent
+          component: PaymentMethodComponent,
         },
         FinalReviewFlex: {
-          component: FinalReviewComponent
+          component: FinalReviewComponent,
         },
         OrderConfirmationFlex: {
-          component: FsaOrderConfirmationComponent
+          component: FsaOrderConfirmationComponent,
         },
         DynamicProgressBarStepsComponent: {
-          component: FSCheckoutProgressComponent
-        }
-      }
-    })
+          component: FSCheckoutProgressComponent,
+        },
+      },
+    }),
   ],
   declarations: [
     QuoteReviewComponent,
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
   ],
   exports: [
     I18nModule,
@@ -186,15 +186,21 @@ const routes: Routes = [
     QuoteReviewComponent,
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
   ],
   entryComponents: [
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
     QuoteReviewComponent,
     FinalReviewComponent,
-    FSMiniCartComponent
+    FSMiniCartComponent,
   ],
-  providers: [FSCartService, OccFSCheckoutService, OccFSCartService, FSCategoryService, reducerProvider]
+  providers: [
+    FSCartService,
+    OccFSCheckoutService,
+    OccFSCartService,
+    FSCategoryService,
+    reducerProvider,
+  ],
 })
-export class CheckoutModule { }
+export class CheckoutModule {}

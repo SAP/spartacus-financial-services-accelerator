@@ -9,7 +9,7 @@ export interface ClaimPoliciesState {
 export const initialState: ClaimPoliciesState = {
   claimPoliciesData: {},
   refresh: false,
-  loaded: false
+  loaded: false,
 };
 
 export function reducer(
@@ -23,13 +23,16 @@ export function reducer(
         ...state,
         claimPoliciesData,
         refresh: false,
-        loaded: true
+        loaded: true,
       };
     }
   }
   return state;
 }
 
-export const getClaimPoliciesData = (state: ClaimPoliciesState) => state.claimPoliciesData;
-export const getRefreshClaimPolicies = (state: ClaimPoliciesState) => state.refresh;
-export const getLoadedClaimPolicies = (state: ClaimPoliciesState) => state.loaded;
+export const getClaimPoliciesData = (state: ClaimPoliciesState) =>
+  state.claimPoliciesData;
+export const getRefreshClaimPolicies = (state: ClaimPoliciesState) =>
+  state.refresh;
+export const getLoadedClaimPolicies = (state: ClaimPoliciesState) =>
+  state.loaded;

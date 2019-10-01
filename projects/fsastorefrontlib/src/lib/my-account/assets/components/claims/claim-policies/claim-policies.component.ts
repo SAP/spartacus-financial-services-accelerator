@@ -7,7 +7,7 @@ import * as fromPolicyStore from '../../../store';
 @Component({
   selector: 'fsa-claim-policies',
   templateUrl: './claim-policies.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClaimPoliciesComponent implements OnInit {
   constructor(
@@ -15,8 +15,8 @@ export class ClaimPoliciesComponent implements OnInit {
     protected policyService: PolicyService,
     protected claimService: ClaimService,
     protected config: OccConfig,
-    protected authService: AuthService,
-  ) { }
+    protected authService: AuthService
+  ) {}
 
   claimPolicies$;
   claimPoliciesLoaded$;
@@ -27,8 +27,12 @@ export class ClaimPoliciesComponent implements OnInit {
     // we get the BE part returning real categoryCode
     // we create dynamic content for FNOL page
     this.policyService.loadClaimPolicies('insurances_auto');
-    this.claimPolicies$ = this.store.pipe(select(fromPolicyStore.getClaimPolicies));
-    this.claimPoliciesLoaded$ = this.store.pipe(select(fromPolicyStore.getClaimPoliciesLoaded));
+    this.claimPolicies$ = this.store.pipe(
+      select(fromPolicyStore.getClaimPolicies)
+    );
+    this.claimPoliciesLoaded$ = this.store.pipe(
+      select(fromPolicyStore.getClaimPoliciesLoaded)
+    );
   }
   public getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';

@@ -7,13 +7,13 @@ import { PolicyService } from '../../services';
 @Component({
   selector: 'fsa-premium-calendar',
   templateUrl: './premium-calendar.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PremiumCalendarComponent implements OnInit {
   constructor(
     private store: Store<fromStore.UserState>,
     private config: OccConfig,
-  protected policyService: PolicyService
+    protected policyService: PolicyService
   ) {}
 
   policies$;
@@ -22,7 +22,9 @@ export class PremiumCalendarComponent implements OnInit {
   ngOnInit() {
     this.policyService.loadPremiumCalendar();
     this.policies$ = this.store.pipe(select(fromStore.getPremiumCalendarData));
-    this.policiesLoaded$ = this.store.pipe(select(fromStore.getPremiumCalendarLoaded));
+    this.policiesLoaded$ = this.store.pipe(
+      select(fromStore.getPremiumCalendarLoaded)
+    );
   }
 
   public getBaseUrl() {

@@ -1,8 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { CmsPageGuard, SpinnerModule, PageLayoutComponent } from '@spartacus/storefront';
-import { AuthGuard, I18nModule, ConfigModule, CmsConfig, RoutesConfig, RoutingConfig } from '@spartacus/core';
+import {
+  CmsPageGuard,
+  SpinnerModule,
+  PageLayoutComponent,
+} from '@spartacus/storefront';
+import {
+  AuthGuard,
+  I18nModule,
+  ConfigModule,
+  CmsConfig,
+  RoutesConfig,
+  RoutingConfig,
+} from '@spartacus/core';
 import { PremiumCalendarComponent } from './components/premium-calendar/premium-calendar.component';
 
 const routes: Routes = [
@@ -11,10 +22,10 @@ const routes: Routes = [
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'premiumCalendar', // custom name for your route to be used in ConfigModule configuration
-      pageLabel: 'premium-calendar'// ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
+      pageLabel: 'premium-calendar', // ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
     },
-    component: PageLayoutComponent // SPA LAYOUT Component you're targeting
-  }
+    component: PageLayoutComponent, // SPA LAYOUT Component you're targeting
+  },
 ];
 
 @NgModule({
@@ -23,16 +34,17 @@ const routes: Routes = [
     I18nModule,
     SpinnerModule,
     RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig> {
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
-        AccountPremiumCalendarSPAComponent: { // mapping hybris component (defined in impex)
-          component: PremiumCalendarComponent // to SPA component
-        }
-      }
-    })
+        AccountPremiumCalendarSPAComponent: {
+          // mapping hybris component (defined in impex)
+          component: PremiumCalendarComponent, // to SPA component
+        },
+      },
+    }),
   ],
-  declarations: [ PremiumCalendarComponent ],
-  exports: [ PremiumCalendarComponent ],
-  entryComponents: [ PremiumCalendarComponent ]
+  declarations: [PremiumCalendarComponent],
+  exports: [PremiumCalendarComponent],
+  entryComponents: [PremiumCalendarComponent],
 })
-export class PremiumCalendarModule { }
+export class PremiumCalendarModule {}

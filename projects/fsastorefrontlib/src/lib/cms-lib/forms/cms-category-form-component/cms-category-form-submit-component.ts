@@ -7,17 +7,19 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'fsa-cms-category-form-submit-component',
-  templateUrl: './cms-category-form-submit-component.html'
+  templateUrl: './cms-category-form-submit-component.html',
 })
 export class CmsCategoryFormSubmitComponent implements OnInit {
-
   constructor(
     protected componentData: CmsComponentData<CMSFormSubmitComponent>,
     protected activatedRoute: ActivatedRoute,
     protected cmsComponentConnector: CmsComponentConnector
   ) {
     activatedRoute.params.subscribe(params => {
-      this.pageContext = new PageContext(params[this.routeParamId], PageType.CATEGORY_PAGE);
+      this.pageContext = new PageContext(
+        params[this.routeParamId],
+        PageType.CATEGORY_PAGE
+      );
     });
   }
 
@@ -27,7 +29,9 @@ export class CmsCategoryFormSubmitComponent implements OnInit {
   component$: Observable<CmsComponent>;
 
   ngOnInit() {
-    this.component$ = this.cmsComponentConnector.get(this.componentData.uid, this.pageContext);
+    this.component$ = this.cmsComponentConnector.get(
+      this.componentData.uid,
+      this.pageContext
+    );
   }
-
 }

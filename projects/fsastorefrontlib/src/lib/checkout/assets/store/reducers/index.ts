@@ -10,7 +10,7 @@ export function getReducers(): ActionReducerMap<FSCheckoutState> {
     steps: loaderReducer<FSCheckoutStepsState>(
       CHECKOUT_DETAILS,
       fromCheckout.reducer
-    )
+    ),
   };
 }
 

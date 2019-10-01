@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-
 @Injectable()
 export class FSCategoryService {
+  currentCategorySource = new BehaviorSubject<string>('');
 
-    currentCategorySource = new BehaviorSubject<string>('');
+  getActiveCategory(): Observable<string> {
+    return this.currentCategorySource.asObservable();
+  }
 
-    getActiveCategory(): Observable<string> {
-        return this.currentCategorySource.asObservable();
-    }
-
-    setActiveCategory(categoryCode: string) {
-        this.currentCategorySource.next(categoryCode);
-    }
+  setActiveCategory(categoryCode: string) {
+    this.currentCategorySource.next(categoryCode);
+  }
 }

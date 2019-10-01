@@ -12,7 +12,7 @@ export class ClaimDataService {
   private _userId = 'anonymous';
   private _claims: Claim[];
 
-  constructor() { }
+  constructor() {}
 
   set userId(val) {
     this._userId = val;

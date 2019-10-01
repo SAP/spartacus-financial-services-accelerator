@@ -7,10 +7,9 @@ import { PolicyService } from '../../services';
 @Component({
   selector: 'fsa-policies',
   templateUrl: './policies.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PoliciesComponent implements OnInit {
-
   constructor(
     private store: Store<fromPolicyStore.UserState>,
     private config: OccConfig,
@@ -23,7 +22,9 @@ export class PoliciesComponent implements OnInit {
   ngOnInit() {
     this.policyService.loadPolicies();
     this.policies$ = this.store.pipe(select(fromPolicyStore.getPolicyData));
-    this.policiesLoaded$ = this.store.pipe(select(fromPolicyStore.getPoliciesLoaded));
+    this.policiesLoaded$ = this.store.pipe(
+      select(fromPolicyStore.getPoliciesLoaded)
+    );
   }
 
   public getBaseUrl() {

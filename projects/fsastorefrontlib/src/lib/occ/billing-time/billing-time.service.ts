@@ -8,28 +8,23 @@ const FULL_PARAMS = '&fields=FULL';
 
 @Injectable()
 export class OccBillingTimeService {
+  constructor(
+    protected http: HttpClient,
+    protected occEndpointService: OccEndpointsService
+  ) {}
 
-    constructor(
-        protected http: HttpClient,
-        protected occEndpointService: OccEndpointsService
-    ) { }
+  public getBillingTimes(productCodes: string[]): any {
+    const url = this.getBillingTimesEndPoint();
+    const params = new HttpParams({
+      fromString: 'productCodes=' + productCodes + FULL_PARAMS,
+    });
+    return this.http
+      .get(url, { params: params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
 
-    public getBillingTimes(productCodes: string[]): any {
-        const url = this.getBillingTimesEndPoint();
-        const params = new HttpParams({
-            fromString: 'productCodes=' + productCodes + FULL_PARAMS
-        });
-        return this.http
-            .get(url, { params: params })
-            .pipe(catchError((error: any) => throwError(error.json())));
-    }
-
-    protected getBillingTimesEndPoint() {
-        const billingTimeEndpoint = '/billing-times';
-        return (
-            (this.occEndpointService.getBaseEndpoint() +
-            billingTimeEndpoint
-        ));
-    }
-
+  protected getBillingTimesEndPoint() {
+    const billingTimeEndpoint = '/billing-times';
+    return this.occEndpointService.getBaseEndpoint() + billingTimeEndpoint;
+  }
 }

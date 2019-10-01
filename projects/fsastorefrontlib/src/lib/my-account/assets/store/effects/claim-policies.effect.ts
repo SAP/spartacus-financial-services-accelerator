@@ -6,7 +6,6 @@ import { OccPolicyService } from '../../../../occ/policy/policy.service';
 import { PolicyDataService } from '../../services/policy-data.service';
 import * as fromActions from '../actions';
 
-
 @Injectable()
 export class ClaimPoliciesEffects {
   @Effect()
@@ -17,10 +16,11 @@ export class ClaimPoliciesEffects {
       if (payload === undefined || payload.userId === undefined) {
         payload = {
           userId: this.policyData.userId,
-          policyCategoryCode: this.policyData.policyCategoryCode
+          policyCategoryCode: this.policyData.policyCategoryCode,
         };
       }
-      return this.policyService.getPoliciesByCategory(payload.userId, payload.policyCategoryCode)
+      return this.policyService
+        .getPoliciesByCategory(payload.userId, payload.policyCategoryCode)
         .pipe(
           map((claimPolicies: any) => {
             return new fromActions.LoadClaimPoliciesSuccess(claimPolicies);
@@ -34,5 +34,5 @@ export class ClaimPoliciesEffects {
     private actions$: Actions,
     private policyData: PolicyDataService,
     private policyService: OccPolicyService
-  ) { }
+  ) {}
 }

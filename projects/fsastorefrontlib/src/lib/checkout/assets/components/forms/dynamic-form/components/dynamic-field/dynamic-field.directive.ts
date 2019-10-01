@@ -1,4 +1,13 @@
-import { ComponentFactoryResolver, ComponentRef, Directive, Input, OnChanges, OnInit, Type, ViewContainerRef } from '@angular/core';
+import {
+  ComponentFactoryResolver,
+  ComponentRef,
+  Directive,
+  Input,
+  OnChanges,
+  OnInit,
+  Type,
+  ViewContainerRef,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from '../../models/field-config.interface';
 import { FormButtonComponent } from '../form-button/form-button.component';
@@ -13,11 +22,11 @@ const components: { [type: string]: Type<FormGenericComponent> } = {
   input: FormInputComponent,
   select: FormSelectComponent,
   title: FormTitleComponent,
-  datepicker: FormDatePickerComponent
+  datepicker: FormDatePickerComponent,
 };
 
 @Directive({
-  selector: '[fsaDynamicField]'
+  selector: '[fsaDynamicField]',
 })
 export class DynamicFieldDirective implements OnChanges, OnInit {
   @Input()
@@ -29,7 +38,7 @@ export class DynamicFieldDirective implements OnChanges, OnInit {
   constructor(
     private resolver: ComponentFactoryResolver,
     private container: ViewContainerRef
-  ) { }
+  ) {}
 
   ngOnChanges() {
     if (this.component) {
@@ -46,7 +55,9 @@ export class DynamicFieldDirective implements OnChanges, OnInit {
         Supported types: ${supportedTypes}`
       );
     }
-    const component = this.resolver.resolveComponentFactory<FormGenericComponent>(components[this.config.type]);
+    const component = this.resolver.resolveComponentFactory<
+      FormGenericComponent
+    >(components[this.config.type]);
     this.component = this.container.createComponent(component);
     this.component.instance.config = this.config;
     this.component.instance.group = this.group;

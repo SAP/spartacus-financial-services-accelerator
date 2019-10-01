@@ -4,19 +4,16 @@ import { OccMockFormService } from '../../../../../../../occ/form/occ-mock-form.
 
 @Component({
   selector: 'fsa-form-select',
-  templateUrl: './form-select.component.html'
-
+  templateUrl: './form-select.component.html',
 })
-export class FormSelectComponent extends FormGenericComponent implements OnInit {
-
-  constructor(
-    protected formService: OccMockFormService
-  ) {
+export class FormSelectComponent extends FormGenericComponent
+  implements OnInit {
+  constructor(protected formService: OccMockFormService) {
     super();
   }
   ngOnInit() {
     if (this.config.depends) {
-      this.config.depends.forEach((dependField) => {
+      this.config.depends.forEach(dependField => {
         this.group.get(dependField).valueChanges.subscribe(val => {
           this.setFormControlValues(val);
         });
@@ -31,9 +28,10 @@ export class FormSelectComponent extends FormGenericComponent implements OnInit 
       if (val !== null) {
         this.config.options = this.formService.getDropdownValues(nodes, val);
       } else {
-        this.config.options = this.formService.setInitialFormControlValues(nodes);
+        this.config.options = this.formService.setInitialFormControlValues(
+          nodes
+        );
       }
     }
   }
 }
-

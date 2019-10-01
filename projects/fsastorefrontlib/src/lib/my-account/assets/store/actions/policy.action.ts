@@ -5,7 +5,8 @@ export const LOAD_POLICIES_SUCCESS = '[Policy] Load Policies Success';
 export const LOAD_POLICIES_FAIL = '[Policy] Load Policies Fail';
 
 export const LOAD_PREMIUM_CALENDAR = '[Policy] Load PremiumCalendar';
-export const LOAD_PREMIUM_CALENDAR_SUCCESS = '[Policy] Load PremiumCalendar Success';
+export const LOAD_PREMIUM_CALENDAR_SUCCESS =
+  '[Policy] Load PremiumCalendar Success';
 export const LOAD_PREMIUM_CALENDAR_FAIL = '[Policy] Load PremiumCalendar Fail';
 
 export const LOAD_POLICY_DETAILS = '[Policy] Load Policy Details';

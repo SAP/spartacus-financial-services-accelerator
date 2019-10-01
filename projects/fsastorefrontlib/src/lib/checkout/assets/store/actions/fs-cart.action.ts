@@ -17,6 +17,4 @@ export class StartBundle extends StateLoaderActions.LoaderLoadAction {
   }
 }
 
-export type FSCartAction =
-  | AddOptionalProduct
-  | StartBundle;
+export type FSCartAction = AddOptionalProduct | StartBundle;

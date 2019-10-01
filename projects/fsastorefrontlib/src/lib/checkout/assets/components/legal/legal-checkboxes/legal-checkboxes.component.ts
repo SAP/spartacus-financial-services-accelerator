@@ -5,18 +5,17 @@ import { FSCheckoutConfigService } from '../../../services';
 
 @Component({
   selector: 'fsa-legal-checkboxes',
-  templateUrl: './legal-checkboxes.component.html'
+  templateUrl: './legal-checkboxes.component.html',
 })
 export class LegalCheckboxesComponent implements OnInit {
-
   checkoutStepUrlNext: string;
   checkoutStepUrlBack: string;
 
   constructor(
     protected routingService: RoutingService,
     protected activatedRoute: ActivatedRoute,
-    protected checkoutConfigService: FSCheckoutConfigService,
-  ) { }
+    protected checkoutConfigService: FSCheckoutConfigService
+  ) {}
 
   ngOnInit() {
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
@@ -35,5 +34,4 @@ export class LegalCheckboxesComponent implements OnInit {
   back() {
     this.routingService.go(this.checkoutStepUrlBack);
   }
-
 }

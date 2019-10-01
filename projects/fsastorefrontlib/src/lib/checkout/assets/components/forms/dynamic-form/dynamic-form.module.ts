@@ -13,13 +13,8 @@ import { DynamicFormComponent } from './containers/dynamic-form/dynamic-form.com
 import { FSFormService } from './form.service';
 import { OccMockFormService } from '../../../../../occ/form/occ-mock-form.service';
 
-
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    I18nModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule, I18nModule],
   declarations: [
     DynamicFieldDirective,
     DynamicFormComponent,
@@ -28,18 +23,16 @@ import { OccMockFormService } from '../../../../../occ/form/occ-mock-form.servic
     FormSelectComponent,
     FormTitleComponent,
     FormDatePickerComponent,
-    ErrorNoticeComponent
+    ErrorNoticeComponent,
   ],
-  exports: [
-    DynamicFormComponent
-  ],
+  exports: [DynamicFormComponent],
   entryComponents: [
     FormButtonComponent,
     FormInputComponent,
     FormSelectComponent,
     FormTitleComponent,
-    FormDatePickerComponent
+    FormDatePickerComponent,
   ],
-  providers: [FSFormService, OccMockFormService]
+  providers: [FSFormService, OccMockFormService],
 })
-export class DynamicFormModule { }
+export class DynamicFormModule {}

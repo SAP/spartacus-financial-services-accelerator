@@ -11,17 +11,26 @@ export const getPremiumCalendarState: MemoizedSelector<
   (userState: fromFeature.UserState) => userState.premiumCalendar
 );
 
-export const getPremiumCalendarData: MemoizedSelector<any, any> = createSelector(
+export const getPremiumCalendarData: MemoizedSelector<
+  any,
+  any
+> = createSelector(
   getPremiumCalendarState,
   fromPremiumCalendar.getPremiumCalendarData
 );
 
-export const getPremiumCalendarRefresh: MemoizedSelector<any, boolean> = createSelector(
+export const getPremiumCalendarRefresh: MemoizedSelector<
+  any,
+  boolean
+> = createSelector(
   getPremiumCalendarState,
   fromPremiumCalendar.getRefresh
 );
 
-export const getPremiumCalendarLoaded: MemoizedSelector<any, boolean> = createSelector(
+export const getPremiumCalendarLoaded: MemoizedSelector<
+  any,
+  boolean
+> = createSelector(
   getPremiumCalendarState,
   fromPremiumCalendar.getLoaded
 );

@@ -5,9 +5,8 @@ import { of, Observable } from 'rxjs';
 import { AccordionModule } from './../../../../accordion/accordion.module';
 import { PolicyService } from '../../services';
 
-
 class MockPolicyService {
-    loadPolicyDetails(policyId: string, contractId: string): void {}
+  loadPolicyDetails(policyId: string, contractId: string): void {}
 }
 
 class MockRoutingService {
@@ -16,7 +15,7 @@ class MockRoutingService {
       state: {
         params: {
           policyId: '0000002',
-          contractId: '0000002'
+          contractId: '0000002',
         },
       },
     });
@@ -25,49 +24,40 @@ class MockRoutingService {
 
 const MockOccModuleConfig: OccConfig = {
   context: {
-    baseSite: [
-      ''
-    ]
+    baseSite: [''],
   },
   backend: {
     occ: {
       baseUrl: '',
-      prefix: ''
-    }
-  }
+      prefix: '',
+    },
+  },
 };
 
 describe('PolicyDetailsComponent', () => {
-    let component: PolicyDetailsComponent;
-    let fixture: ComponentFixture<PolicyDetailsComponent>;
+  let component: PolicyDetailsComponent;
+  let fixture: ComponentFixture<PolicyDetailsComponent>;
 
-    beforeEach(async(() => {
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [AccordionModule, I18nTestingModule],
+      providers: [
+        { provide: RoutingService, useClass: MockRoutingService },
+        { provide: PolicyService, useClass: MockPolicyService },
+        { provide: OccConfig, useValue: MockOccModuleConfig },
+      ],
+      declarations: [PolicyDetailsComponent],
+    }).compileComponents();
+  }));
 
-      TestBed.configureTestingModule({
-        imports: [
-            AccordionModule,
-            I18nTestingModule
-        ],
-        providers: [
-          { provide: RoutingService, useClass: MockRoutingService },
-          { provide: PolicyService, useClass: MockPolicyService },
-          { provide: OccConfig, useValue: MockOccModuleConfig },
-
-        ],
-        declarations: [
-          PolicyDetailsComponent
-        ]
-      }).compileComponents();
-    }));
-
-    beforeEach(() => {
-      fixture = TestBed.createComponent(PolicyDetailsComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-      component.ngOnInit();
-    });
-
-    it('should create', () => {
-      expect(component).toBeTruthy();
-    });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(PolicyDetailsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    component.ngOnInit();
   });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

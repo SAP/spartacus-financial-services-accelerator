@@ -5,10 +5,12 @@
   margin: 20px auto 20px;
   position: relative;
   display: block;
-  .color-primary, &.color-primary {
+  .color-primary,
+  &.color-primary {
     color: var(--cx-color-primary);
   }
-  .color-secondary, &.color-secondary {
+  .color-secondary,
+  &.color-secondary {
     color: var(--cx-color-secondary);
   }
 }
@@ -23,7 +25,10 @@
   .gradient-background {
     @include linear-gradient-background(
       var(--cx-color-primary),
-      var(--cx-color-9), 50%, 100%);
+      var(--cx-color-9),
+      50%,
+      100%
+    );
   }
   .image-wrapper {
     background-color: transparent;
@@ -73,6 +78,6 @@
   top: 14px;
   right: 14px;
   .action-links {
-      color: var(--cx-color-primary);
+    color: var(--cx-color-primary);
   }
 }

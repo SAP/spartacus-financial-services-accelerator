@@ -13,7 +13,7 @@ import { CustomContainerModule } from './container/cms-custom-container.module';
     ProductFeatureModule,
     ComparisonTableModule,
     CategoryFormsModule,
-    CustomContainerModule
+    CustomContainerModule,
   ],
   exports: [
     AccountModule,
@@ -21,7 +21,7 @@ import { CustomContainerModule } from './container/cms-custom-container.module';
     ProductFeatureModule,
     ComparisonTableModule,
     CategoryFormsModule,
-    CustomContainerModule
-  ]
+    CustomContainerModule,
+  ],
 })
 export class CmsLibModule {}

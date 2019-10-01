@@ -13,7 +13,7 @@
                   'register.selectTitle' | cxTranslate
                 }}</option>
                 <option
-                  *ngFor="let title of (titles$ | async)"
+                  *ngFor="let title of titles$ | async"
                   [value]="title.code"
                   >{{ title.name }}</option
                 >
@@ -85,8 +85,8 @@
           <div class="form-group">
             <label>
               <span class="label-content">{{
-                  'forms.phoneNumber.label' | cxTranslate
-                }}</span>
+                'forms.phoneNumber.label' | cxTranslate
+              }}</span>
               <input
                 class="form-control"
                 [class.is-invalid]="

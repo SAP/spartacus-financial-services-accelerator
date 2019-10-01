@@ -1,9 +1,9 @@
 <div class="accordion-item">
   <ng-container *ngIf="icon !== undefined">
-      <span class="{{icon}}"></span>
+    <span class="{{ icon }}"></span>
   </ng-container>
   <h4 class="accordion-heading" (click)="onItemClick()" [class.active]="opened">
-    {{title}}
+    {{ title }}
   </h4>
   <div class="accordion-item-wrapper" [class.active]="opened">
     <ng-content></ng-content>

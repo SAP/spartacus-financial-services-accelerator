@@ -11,12 +11,12 @@ export const getQuotesState: MemoizedSelector<
   (quoteState: fromFeature.UserState) => quoteState.quotes
 );
 
- export const getQuotes: MemoizedSelector<any, any> = createSelector(
-   getQuotesState,
-   fromQuote.getQuotes
- );
+export const getQuotes: MemoizedSelector<any, any> = createSelector(
+  getQuotesState,
+  fromQuote.getQuotes
+);
 
-export const  getQuoteRefresh: MemoizedSelector<any, boolean> = createSelector(
+export const getQuoteRefresh: MemoizedSelector<any, boolean> = createSelector(
   getQuotesState,
   fromQuote.getRefresh
 );
@@ -25,4 +25,3 @@ export const getQuotesLoaded: MemoizedSelector<any, boolean> = createSelector(
   getQuotesState,
   fromQuote.getLoaded
 );
-

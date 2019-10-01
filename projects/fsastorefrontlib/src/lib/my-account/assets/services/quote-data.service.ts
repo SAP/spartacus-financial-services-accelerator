@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Quote } from '../store/reducers/quote.reducer';
 
-
 @Injectable()
 export class QuoteDataService {
   private _userId = 'anonymous';

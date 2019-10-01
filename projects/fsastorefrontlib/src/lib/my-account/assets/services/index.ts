@@ -11,7 +11,7 @@ export const services: any[] = [
   PolicyService,
   PolicyDataService,
   ClaimService,
-  ClaimDataService
+  ClaimDataService,
 ];
 
 export * from './quote.service';
