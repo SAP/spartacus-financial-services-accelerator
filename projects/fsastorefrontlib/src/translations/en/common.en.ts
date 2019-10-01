@@ -69,6 +69,8 @@ export const fscommon = {
     investmentDetails: 'Investment Details',
     whatDoesItCostMe: 'What Does It Cost Me?',
     legalInformation: 'Legal Information',
+    listView: 'List View',
+    mapView: 'Map View',
     register: {
       dateOfBirthMinimumAge: 'Must be over 18 years old',
       enterValidEmail: 'Please enter a valid email',

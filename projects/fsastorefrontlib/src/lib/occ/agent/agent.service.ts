@@ -21,7 +21,7 @@ export class OccAgentService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
   protected getAgentsEndpoint() {
-    const agentsEndpoint = '/agents/';
+    const agentsEndpoint = '/agents';
     return this.occEndpointService.getBaseEndpoint() + agentsEndpoint;
   }
 }

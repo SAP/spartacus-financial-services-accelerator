@@ -7,7 +7,7 @@
         routerLinkActive="active"
         [disabled]="disableByMatchingUrl('find-agent')"
       >
-        List View
+        {{ 'fscommon.listView' | cxTranslate }}
       </button>
       <button
         class="secondary-button mx-1"
@@ -15,7 +15,7 @@
         routerLinkActive="active"
         [disabled]="disableByMatchingUrl('agent-locator')"
       >
-        Map View
+        {{ 'fscommon.mapView' | cxTranslate }}
       </button>
     </div>
   </div>
