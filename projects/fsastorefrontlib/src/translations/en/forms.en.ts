@@ -14,7 +14,8 @@ export const forms = {
     },
     phoneNumber: {
       label: 'Phone number',
-      lengthValidation: 'Phone number should be between minimum 6 characters and maximum 20'
-    }
+      lengthValidation:
+        'Phone number should be between minimum 6 characters and maximum 20',
+    },
   },
 };
