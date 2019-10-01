@@ -17,11 +17,13 @@ export class AgentRootComponent implements OnInit {
   agentRootCategory;
 
   ngOnInit() {
-    this.componentData.data$.subscribe(data => {
-      this.agentRootCategory = data.agentRootCategory;
-      this.agentList$ = this.agentService.getAgentsByCategory(
-        data.agentRootCategory
-      );
-    }).unsubscribe();
+    this.componentData.data$
+      .subscribe(data => {
+        this.agentRootCategory = data.agentRootCategory;
+        this.agentList$ = this.agentService.getAgentsByCategory(
+          data.agentRootCategory
+        );
+      })
+      .unsubscribe();
   }
 }
