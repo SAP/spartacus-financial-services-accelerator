@@ -38,6 +38,8 @@ export class FSUpdateProfileFormComponent extends UpdateProfileFormComponent
 
   ngOnInit() {
     super.ngOnInit();
-    this.form.controls.contactInfos.setValue(this.user.contactInfos[0]);
+    if (this.user) {
+      this.form.controls.contactInfos.setValue(this.user.contactInfos[0]);
+    }
   }
 }
