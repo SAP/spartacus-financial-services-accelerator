@@ -1,4 +1,4 @@
-import {Component, Input, Output, EventEmitter, OnInit} from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UpdateProfileFormComponent } from '@spartacus/storefront';
 import { CustomFormValidators } from '../../../../../cms-lib/util/validators/custom-form-validators';
@@ -8,25 +8,22 @@ import { FSUser } from '../../../../../occ-models';
   selector: 'fsa-update-profile-form',
   templateUrl: './fs-update-profile-form.component.html',
 })
-<<<<<<< HEAD
-export class FSUpdateProfileFormComponent extends UpdateProfileFormComponent implements OnInit {
-
-=======
-export class FSUpdateProfileFormComponent extends UpdateProfileFormComponent {
->>>>>>> b87ddddb735de61ffa300231b26d202950bea90c
+export class FSUpdateProfileFormComponent extends UpdateProfileFormComponent
+  implements OnInit {
   form = this.formBuilder.group({
     titleCode: ['', Validators.required],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     dateOfBirth: ['', CustomFormValidators.dateOfBirthValidator(18)],
-<<<<<<< HEAD
     contactInfos: this.formBuilder.group({
-        code: [''],
-        phoneNumber: ['', CustomFormValidators.regexValidator(CustomFormValidators.phoneNumberRegex)]
-      }
-    )
-=======
->>>>>>> b87ddddb735de61ffa300231b26d202950bea90c
+      code: [''],
+      phoneNumber: [
+        '',
+        CustomFormValidators.regexValidator(
+          CustomFormValidators.phoneNumberRegex
+        ),
+      ],
+    }),
   });
 
   constructor(private formBuilder: FormBuilder) {
@@ -38,12 +35,9 @@ export class FSUpdateProfileFormComponent extends UpdateProfileFormComponent {
 
   @Output()
   submited = new EventEmitter<{ userUpdates: FSUser }>();
-<<<<<<< HEAD
 
   ngOnInit() {
     super.ngOnInit();
     this.form.controls.contactInfos.setValue(this.user.contactInfos[0]);
   }
-=======
->>>>>>> b87ddddb735de61ffa300231b26d202950bea90c
 }
