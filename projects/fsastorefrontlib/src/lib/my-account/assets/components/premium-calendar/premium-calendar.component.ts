@@ -18,6 +18,7 @@ export class PremiumCalendarComponent implements OnInit {
 
   policies$;
   policiesLoaded$;
+  opened = false;
 
   ngOnInit() {
     this.policyService.loadPremiumCalendar();
