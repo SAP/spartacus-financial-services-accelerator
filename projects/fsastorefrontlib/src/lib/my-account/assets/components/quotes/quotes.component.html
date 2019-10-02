@@ -39,7 +39,7 @@
                 'fscommon.expiryDate' | cxTranslate
               }}</span>
               <span *ngIf="quote.expiryDate" class="value">{{
-                quote.expiryDate | cxDate: 'dd-MM-yyyy'
+                quote.expiryDate | cxDate: 'dd MMM yyyy'
               }}</span>
               <span *ngIf="!quote.expiryDate" class="value">{{
                 'fscommon.expiryNotConfirmed' | cxTranslate
