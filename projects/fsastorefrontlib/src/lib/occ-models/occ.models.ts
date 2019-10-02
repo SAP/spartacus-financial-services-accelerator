@@ -26,8 +26,15 @@ export interface BillingTime {
 
 export interface FSUserSignUp extends UserSignUp {
   dateOfBirth?: string;
+  phoneNumber?: string;
+}
+
+export interface FSContactInfo {
+  code?: string;
+  phoneNumber?: string;
 }
 
 export interface FSUser extends User {
   dateOfBirth?: string;
+  contactInfos?: FSContactInfo[];
 }

@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FSRegisterComponent } from './fs-register.component';
 import { ReactiveFormsModule } from '@angular/forms';
-// tslint:disable-next-line:max-line-length
 import {
   RoutingConfig,
   UserService,

@@ -83,6 +83,29 @@
     </div>
   </div>
 
+  <div class="form-group row" formGroupName="contactInfos">
+    <div class="col-md-12">
+      <label>
+        <span class="label-content">{{
+          'forms.phoneNumber.label' | cxTranslate
+        }}</span>
+        <input
+          type="text"
+          class="form-control"
+          name="contactInfos"
+          formControlName="phoneNumber"
+          [class.is-invalid]="isNotValid('contactInfos.phoneNumber')"
+        />
+        <div
+          class="invalid-feedback"
+          *ngIf="isNotValid('contactInfos.phoneNumber')"
+        >
+          <span>{{ 'forms.phoneNumber.lengthValidation' | cxTranslate }}</span>
+        </div>
+      </label>
+    </div>
+  </div>
+
   <div class="form-group row">
     <div class="col-lg-6 col-md-12">
       <button

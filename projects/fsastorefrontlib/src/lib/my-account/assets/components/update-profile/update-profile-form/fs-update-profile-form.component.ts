@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UpdateProfileFormComponent } from '@spartacus/storefront';
 import { CustomFormValidators } from '../../../../../cms-lib/util/validators/custom-form-validators';
@@ -8,12 +8,22 @@ import { FSUser } from '../../../../../occ-models';
   selector: 'fsa-update-profile-form',
   templateUrl: './fs-update-profile-form.component.html',
 })
-export class FSUpdateProfileFormComponent extends UpdateProfileFormComponent {
+export class FSUpdateProfileFormComponent extends UpdateProfileFormComponent
+  implements OnInit {
   form = this.formBuilder.group({
     titleCode: ['', Validators.required],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
     dateOfBirth: ['', CustomFormValidators.dateOfBirthValidator(18)],
+    contactInfos: this.formBuilder.group({
+      code: [''],
+      phoneNumber: [
+        '',
+        CustomFormValidators.regexValidator(
+          CustomFormValidators.phoneNumberRegex
+        ),
+      ],
+    }),
   });
 
   constructor(private formBuilder: FormBuilder) {
@@ -25,4 +35,11 @@ export class FSUpdateProfileFormComponent extends UpdateProfileFormComponent {
 
   @Output()
   submited = new EventEmitter<{ userUpdates: FSUser }>();
+
+  ngOnInit() {
+    super.ngOnInit();
+    if (this.user) {
+      this.form.controls.contactInfos.setValue(this.user.contactInfos[0]);
+    }
+  }
 }

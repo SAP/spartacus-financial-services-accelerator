@@ -12,6 +12,7 @@ const mockUser: FSUser = {
   lastName: 'Moore',
   uid: 'donna@moore.com',
   dateOfBirth: '08/12/1990',
+  contactInfos: [{ phoneNumber: '9999999', code: '' }],
 };
 
 describe('FSUpdateProfileFormComponent', () => {

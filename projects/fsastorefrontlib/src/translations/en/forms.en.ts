@@ -12,5 +12,10 @@ export const forms = {
     dateOfBirth: {
       label: 'Date of Birth',
     },
+    phoneNumber: {
+      label: 'Phone number',
+      lengthValidation:
+        'Phone number should be between minimum 6 characters and maximum 20',
+    },
   },
 };
