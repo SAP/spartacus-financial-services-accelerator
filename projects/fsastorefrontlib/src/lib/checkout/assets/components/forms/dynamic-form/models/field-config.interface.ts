@@ -20,6 +20,7 @@ export interface FieldConfig {
   placeholder?: string;
   type: string;
   validation?: ValidatorFn[];
+  customValidators?: CustomValidator[];
   value?: any;
   hidden?: boolean;
   error?: string;
@@ -27,4 +28,14 @@ export interface FieldConfig {
 
 export enum FormSubmitType {
   PRICING,
+}
+
+export interface CustomValidator {
+  name: string;
+  args: CustomValidatorArgument[];
+}
+
+export interface CustomValidatorArgument {
+  type: string;
+  value: string;
 }

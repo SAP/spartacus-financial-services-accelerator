@@ -70,24 +70,28 @@ export class FSRegisterComponent extends RegisterComponent {
   );
 
   submit(): void {
-    this.emailToLowerCase();
+    this.userService.register(
+      this.collectDataFromRegisterForm(this.fsUserRegistrationForm.value)
+    );
+  }
+
+  collectDataFromRegisterForm(formData: any): FSUserSignUp {
     const {
       firstName,
       lastName,
-      dateOfBirth,
       email,
       password,
       titleCode,
-    } = this.fsUserRegistrationForm.value;
-    const userRegisterFormData: FSUserSignUp = {
+      dateOfBirth,
+    } = formData;
+
+    return {
       firstName,
       lastName,
-      dateOfBirth,
-      uid: email,
+      uid: email.toLowerCase(),
       password,
       titleCode,
+      dateOfBirth,
     };
-
-    this.fsUserService.register(userRegisterFormData);
   }
 }

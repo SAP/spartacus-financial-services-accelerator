@@ -2,12 +2,14 @@
   {{ 'fscommon.category.' + formCategoryCode | cxTranslate }}
   {{ 'fscommon.information' | cxTranslate }}
 </h3>
-<div *ngIf="categoryConfig" class="form">
-  <fsa-dynamic-form
-    #form="fsa-dynamicForm"
-    [config]="categoryConfig"
-    (submit)="submit($event)"
-  >
-  </fsa-dynamic-form>
-  {{ form.valid }}
-</div>
+<ng-container *ngIf="config$ | async as config">
+  <div *ngIf="config" class="form">
+    <fsa-dynamic-form
+      #form="fsa-dynamicForm"
+      [config]="config"
+      (submit)="submit($event)"
+    >
+    </fsa-dynamic-form>
+    {{ form.valid }}
+  </div>
+</ng-container>

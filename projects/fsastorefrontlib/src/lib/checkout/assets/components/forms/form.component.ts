@@ -7,6 +7,11 @@ import {
   FormDefinition,
   FormSubmitType,
 } from './dynamic-form/models/field-config.interface';
+import { OccYFormService } from 'projects/fsastorefrontlib/src/lib/occ/yform/yform.service';
+import { Observable, of, BehaviorSubject, config, ReplaySubject } from 'rxjs';
+import { ValidatorFn, Validators } from '@angular/forms';
+import { CustomFormValidators } from '../../../../cms-lib/util/validators/custom-form-validators';
+
 
 @Component({
   selector: 'fsa-form-component',
@@ -15,19 +20,37 @@ import {
 export class FormComponent implements OnInit {
   constructor(
     protected routingService: RoutingService,
-    protected pricingService: PricingService
+    protected pricingService: PricingService,
+    protected yFormService: OccYFormService
   ) {}
 
   @ViewChild(DynamicFormComponent, { static: false })
   form: DynamicFormComponent;
   @Input()
   formCategoryCode: string;
-  categoryConfig: FormDefinition;
+
+  config$ = new ReplaySubject<any>(1);
 
   ngOnInit() {
-    this.categoryConfig = FormSampleConfigurations.sampleConfigurations.filter(
-      item => item.categoryCode === this.formCategoryCode
-    )[0];
+    this.yFormService.getFormDefinition('test_form').subscribe(form => {
+        this.config$.next((JSON.parse(form.content, this.dataReviver)));
+      });
+  }
+
+  dataReviver(key, value) {
+      if (key === 'validation') {
+        const validations: ValidatorFn[] = [];
+        const functionNames = value.split(';');
+        functionNames.forEach(functionName => {
+          switch (functionName) {
+            case ('Validators.required') : validations.push(Validators.required);
+            case ('CustomFormValidators.compareToCurrentDate(shouldBeGreater)') :
+                validations.push(CustomFormValidators.compareToCurrentDate('shouldBeGreater'));
+          }
+        });
+        return validations;
+      }
+      return value;
   }
 
   submit(formData: { [name: string]: any }) {

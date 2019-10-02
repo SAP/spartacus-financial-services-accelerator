@@ -7,6 +7,7 @@ import { I18nModule } from '@spartacus/core';
 import { PricingService } from '../../services/pricing/pricing.service';
 import { DynamicFormModule } from './dynamic-form/dynamic-form.module';
 import { FormComponent } from './form.component';
+import { OccYFormService } from 'projects/fsastorefrontlib/src/lib/occ/yform/yform.service';
 
 @NgModule({
   imports: [
@@ -19,6 +20,6 @@ import { FormComponent } from './form.component';
   ],
   declarations: [FormComponent],
   exports: [FormComponent],
-  providers: [PricingService],
+  providers: [PricingService, OccYFormService],
 })
 export class FSFormsModule {}

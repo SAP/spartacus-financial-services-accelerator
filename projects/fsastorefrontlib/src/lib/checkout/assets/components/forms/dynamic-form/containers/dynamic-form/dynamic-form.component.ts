@@ -12,11 +12,11 @@ import {
   templateUrl: './dynamic-form.component.html',
 })
 export class DynamicFormComponent implements OnInit {
-  @Input()
-  config: FormDefinition;
   @Output()
   submit: EventEmitter<any> = new EventEmitter<any>();
   form: FormGroup;
+  @Input()
+  config: FormDefinition;
 
   allInputs: Array<FieldConfig> = [];
 

@@ -14,7 +14,7 @@ import {
   AuthRedirectService,
 } from '@spartacus/core';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 import { PipeTransform, Pipe } from '@angular/core';
 import { Store } from '@ngrx/store';
 
@@ -23,6 +23,10 @@ import createSpy = jasmine.createSpy;
 describe('FSRegisterComponent', () => {
   let component: FSRegisterComponent;
   let fixture: ComponentFixture<FSRegisterComponent>;
+
+  const registerUserIsSuccess: BehaviorSubject<boolean> = new BehaviorSubject(
+    false
+  );
 
   class MockStore {}
   class MockRoutingConfig {
@@ -37,6 +41,10 @@ describe('FSRegisterComponent', () => {
     getTitles(): Observable<Title[]> {
       return of([]);
     }
+    getRegisterUserResultSuccess(): Observable<boolean> {
+      return registerUserIsSuccess.asObservable();
+    }
+    resetRegisterUserProcessState(): void {}
   }
   class MockGlobalMessageService {
     remove() {}
@@ -45,6 +53,7 @@ describe('FSRegisterComponent', () => {
     }
   }
   class MockAuthService {
+    authorize = createSpy();
     getUserToken(): Observable<UserToken> {
       return of({ access_token: 'test' } as UserToken);
     }
