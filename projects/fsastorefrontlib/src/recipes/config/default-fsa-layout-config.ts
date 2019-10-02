@@ -55,5 +55,11 @@ export const fsaLayoutConfig: LayoutConfig = {
         'Section5',
       ],
     },
+    FindAgentListTemplate: {
+      slots: ['Section1', 'Section2A'],
+    },
+    StoreFinderPageTemplate: {
+      slots: ['SideContent', 'MiddleContent'],
+    },
   },
 };
