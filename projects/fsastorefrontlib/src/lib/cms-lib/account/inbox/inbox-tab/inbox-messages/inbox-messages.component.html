@@ -1,10 +1,13 @@
 <div class="messages">
-  <ng-container *ngIf="messagesObject$ | async as messagesObj">
+  <ng-container *ngIf="(messagesObject$ | async) as messagesObj">
     <ng-container *ngIf="messagesObj.messages?.length !== 0; else noMessages">
       <div
         class="message accordion border-bottom-grey"
-        *ngFor="let message of messagesObj.messages"
-        [ngClass]="{ read: message.readDate, active: message.opened }"
+        *ngFor="let message of messagesObj.messages; let i = index"
+        [ngClass]="{
+          read: message.readDate,
+          active: closed && selectedIndex === i
+        }"
       >
         <div class="inbox-header container-fluid">
           <div class="row">
@@ -20,17 +23,13 @@
             </div>
             <div
               class="col-6 col-md-3 text-truncate p-4"
-              (click)="
-                message.opened = !message.opened; readSingleMessage(message)
-              "
+              (click)="toggleActiveAccordion(i); readSingleMessage(message)"
             >
               {{ message.title }}
             </div>
             <div
               class="col-md-6 d-none d-md-block text-truncate p-4"
-              (click)="
-                message.opened = !message.opened; readSingleMessage(message)
-              "
+              (click)="toggleActiveAccordion(i); readSingleMessage(message)"
             >
               {{ message.content }}
             </div>
@@ -41,7 +40,7 @@
         </div>
         <div
           class="accordion-item-wrapper"
-          [ngClass]="{ active: message.opened }"
+          [ngClass]="{ active: closed && selectedIndex === i }"
         >
           <div class="box-shadow" [innerHtml]="message.richContent"></div>
         </div>

@@ -23,12 +23,13 @@ export class InboxMessagesComponent implements OnInit {
   constructor(
     protected inboxService: InboxService,
     protected store: Store<fromStore.UserState>
-  ) {}
+  ) { }
 
   searchConfig: FSSearchConfig = {};
   changeCheckboxes: Observable<boolean>;
   messagesObject$;
-  opened = false;
+  closed = true;
+  selectedIndex: number;
 
   ngOnInit() {
     this.inboxService.activeMessageGroup.subscribe(messageGroup => {
@@ -45,6 +46,9 @@ export class InboxMessagesComponent implements OnInit {
         }
       });
     });
+  }
+  toggleActiveAccordion(index: number) {
+    this.selectedIndex === index ? this.selectedIndex = -1 : this.selectedIndex = index;
   }
   readSingleMessage(message) {
     if (!message.ReadDate) {
