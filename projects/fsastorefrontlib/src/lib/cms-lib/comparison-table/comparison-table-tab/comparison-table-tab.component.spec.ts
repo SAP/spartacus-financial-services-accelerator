@@ -6,13 +6,12 @@ import { CmsComponentData } from '@spartacus/storefront';
 import { CMSComparisonTabComponent } from '../../../occ-models';
 import { ComparisonTableTabComponent } from './comparison-table-tab.component';
 
-
 @Directive({
-    // tslint:disable
-    selector: '[cxComponentWrapper]',
+  // tslint:disable
+  selector: '[cxComponentWrapper]',
 })
 export class MockComponentWrapperDirective {
-    @Input() cxComponentWrapper: ContentSlotComponentData;
+  @Input() cxComponentWrapper: ContentSlotComponentData;
 }
 
 describe('ComparisonTableContainerComponent', () => {
@@ -21,7 +20,7 @@ describe('ComparisonTableContainerComponent', () => {
 
   const componentData: CMSComparisonTabComponent = {
     uid: 'TestComparisonTabComponent',
-    typeCode: 'CMSComparisonTabComponent'
+    typeCode: 'CMSComparisonTabComponent',
   };
 
   const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
@@ -34,13 +33,13 @@ describe('ComparisonTableContainerComponent', () => {
       imports: [],
       declarations: [
         ComparisonTableTabComponent,
-        MockComponentWrapperDirective
+        MockComponentWrapperDirective,
       ],
       providers: [
         {
-            provide: CmsComponentData,
-            useValue: MockCmsComponentData,
-        }
+          provide: CmsComponentData,
+          useValue: MockCmsComponentData,
+        },
       ],
     }).compileComponents();
   }));

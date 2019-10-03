@@ -8,20 +8,17 @@ import { ComparisonTablePanelComponent } from './comparison-table-panel.componen
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { OccBillingTimeService } from './../../../occ/billing-time/billing-time.service';
 
-
 @Component({
-    // tslint:disable
-    selector: 'fsa-comparison-table-panel-item',
-    template: '' 
+  // tslint:disable
+  selector: 'fsa-comparison-table-panel-item',
+  template: '',
 })
 export class MockComparisonTablePanelItem {
-    @Input() productCode: string;
-    @Input() billingTimes: any;
+  @Input() productCode: string;
+  @Input() billingTimes: any;
 }
 
-class MockOccBillingTimeService {
-
-}
+class MockOccBillingTimeService {}
 
 describe('ComparisonTablePanelComponent', () => {
   let comparisonTablePanel: ComparisonTablePanelComponent;
@@ -29,7 +26,7 @@ describe('ComparisonTablePanelComponent', () => {
 
   const componentData: ComparisonPanelCMSComponent = {
     uid: 'TestComparisonTablePanelComponent',
-    typeCode: 'ComparisonPanelCMSComponent'
+    typeCode: 'ComparisonPanelCMSComponent',
   };
 
   const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
@@ -42,17 +39,17 @@ describe('ComparisonTablePanelComponent', () => {
       imports: [NgbTooltipModule],
       declarations: [
         ComparisonTablePanelComponent,
-        MockComparisonTablePanelItem
+        MockComparisonTablePanelItem,
       ],
       providers: [
         {
-            provide: CmsComponentData,
-            useValue: MockCmsComponentData,
+          provide: CmsComponentData,
+          useValue: MockCmsComponentData,
         },
         {
-            provide: OccBillingTimeService,
-            useValue: MockOccBillingTimeService,
-        }
+          provide: OccBillingTimeService,
+          useValue: MockOccBillingTimeService,
+        },
       ],
     }).compileComponents();
   }));
