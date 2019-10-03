@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { ProductService } from '@spartacus/core';
-import { CmsProductFeatureComponent } from './../../occ-models/cms-component.models';
+import { CmsProductFeatureComponent } from '../../occ-models/cms-component.models';
 
 @Component({
   selector: 'fsa-product-feature',
-  templateUrl: './product-feature-component.html',
+  templateUrl: './product-feature.component.html',
 })
 export class ProductFeatureComponent implements OnInit {
   constructor(
