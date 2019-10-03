@@ -1,13 +1,13 @@
 @import '../mixins-fsa';
 @import '../theme';
 
-.MultiTabsCategoryPageTemplate > cx-page-slot {
-  max-width: 1140px;
-  margin: 0 auto;
-}
 .FindAgentListTemplate,
 .MultiTabsCategoryPageTemplate {
-  padding: 3rem 1.5rem 0 1.5rem;
+  & > cx-page-slot {
+    max-width: 1140px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 0 1.5rem;
+  }
 }
 .close {
   width: inherit;
