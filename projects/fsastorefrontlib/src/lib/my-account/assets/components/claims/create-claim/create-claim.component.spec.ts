@@ -17,7 +17,6 @@ const selectedPolicy: BehaviorSubject<SelectedPolicy> = new BehaviorSubject(
 );
 
 class MockClaimService {
-
   createClaim = createSpy();
 
   getSelectedPolicy() {
@@ -73,9 +72,10 @@ describe('AddOptionsComponent', () => {
     component.startClaim();
 
     expect(mockClaimService.createClaim).toHaveBeenCalledWith(
-        mockSelectedPolicy.userId,
-        mockSelectedPolicy.policyId,
-        mockSelectedPolicy.contractId);
+      mockSelectedPolicy.userId,
+      mockSelectedPolicy.policyId,
+      mockSelectedPolicy.contractId
+    );
 
     expect(mockRoutingService.go).toHaveBeenCalledWith({
       cxRoute: 'claims',
