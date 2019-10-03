@@ -1,6 +1,6 @@
 <h2 class="heading-headline">{{ 'policy.policies' | cxTranslate }}</h2>
-<ng-container *ngIf="policies$ | async as policies">
-  <ng-container *ngIf="policiesLoaded$ | async; else loading">
+<ng-container *ngIf="(policies$ | async) as policies">
+  <ng-container *ngIf="(policiesLoaded$ | async); else loading">
     <div class="row" *ngIf="(policies | json) != '{}'; else noPolicies">
       <div *ngFor="let policy of policies.insurancePolicies" class="col-md-4">
         <div class="info-card border-bottom-secondary">

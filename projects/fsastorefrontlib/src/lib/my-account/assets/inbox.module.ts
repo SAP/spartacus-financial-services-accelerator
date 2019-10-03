@@ -3,7 +3,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { CmsPageGuard, SpinnerModule, PageLayoutComponent } from '@spartacus/storefront';
+import {
+  CmsPageGuard,
+  SpinnerModule,
+  PageLayoutComponent,
+} from '@spartacus/storefront';
 import {
   CmsModule,
   AuthGuard,
@@ -55,4 +59,4 @@ const routes: Routes = [
   entryComponents: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
   providers: [InboxService, InboxDataService, OccInboxService],
 })
-export class InboxModule { }
+export class InboxModule {}

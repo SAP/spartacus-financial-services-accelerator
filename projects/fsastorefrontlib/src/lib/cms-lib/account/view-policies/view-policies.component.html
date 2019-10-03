@@ -1,7 +1,7 @@
-<ng-container *ngIf="component$ | async as component">
+<ng-container *ngIf="(component$ | async) as component">
   <ng-container *ngIf="!anonymous$; else anonymousLogin">
-    <ng-container *ngIf="policiesLoaded$ | async; else loading">
-      <ng-container *ngIf="policies$ | async as policies">
+    <ng-container *ngIf="(policiesLoaded$ | async); else loading">
+      <ng-container *ngIf="(policies$ | async) as policies">
         <div class="review-wrapper">
           <ng-container
             *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies"
@@ -48,7 +48,7 @@
 
 <ng-template #policiesList let-policies="policies" let-max="max">
   <li
-    *ngFor="let policy of policies.insurancePolicies | slice: 0:max"
+    *ngFor="let policy of (policies.insurancePolicies | slice: 0:max)"
     class="fs-item"
   >
     <a

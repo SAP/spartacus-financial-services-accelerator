@@ -1,7 +1,7 @@
-<ng-container *ngIf="component$ | async as component">
+<ng-container *ngIf="(component$ | async) as component">
   <ng-container *ngIf="!anonymous$; else anonymousLogin">
-    <ng-container *ngIf="quotesLoaded$ | async; else loading">
-      <div *ngIf="quotes$ | async as quotes" class="review-wrapper">
+    <ng-container *ngIf="(quotesLoaded$ | async); else loading">
+      <div *ngIf="(quotes$ | async) as quotes" class="review-wrapper">
         <ng-container
           *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes"
         >
@@ -46,7 +46,7 @@
 
 <ng-template #quoteList let-quotes="quotes" let-max="max">
   <li
-    *ngFor="let quote of quotes.insuranceQuotes | slice: 0:max"
+    *ngFor="let quote of (quotes.insuranceQuotes | slice: 0:max)"
     class="fs-item"
   >
     <div class="fs-item-data-container">

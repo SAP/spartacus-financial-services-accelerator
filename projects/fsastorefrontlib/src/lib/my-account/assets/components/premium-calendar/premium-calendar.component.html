@@ -1,8 +1,8 @@
 <h2 class="heading-headline">
   {{ 'premiumCalendar.premiumCalendar' | cxTranslate }}
 </h2>
-<ng-container *ngIf="policies$ | async as policies; else noPolicies">
-  <ng-container *ngIf="policiesLoaded$ | async; else loading">
+<ng-container *ngIf="(policies$ | async) as policies; else noPolicies">
+  <ng-container *ngIf="(policiesLoaded$ | async); else loading">
     <ng-container
       *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies"
     >
@@ -87,7 +87,7 @@
           >
             <div class="container-fluid">
               <ng-container
-                *ngFor="let dueDate of policy.billingData | slice: 1"
+                *ngFor="let dueDate of (policy.billingData | slice: 1)"
               >
                 <div class="row">
                   <div class="col"></div>
@@ -210,7 +210,9 @@
                     >
                       <ul class="list-data">
                         <ng-container
-                          *ngFor="let dueDate of policy.billingData | slice: 1"
+                          *ngFor="
+                            let dueDate of (policy.billingData | slice: 1)
+                          "
                         >
                           <li class="row list-item border-bottom-grey">
                             <div

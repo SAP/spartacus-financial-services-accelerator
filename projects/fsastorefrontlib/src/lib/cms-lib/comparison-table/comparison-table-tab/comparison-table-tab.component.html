@@ -1,4 +1,4 @@
-<ng-container *ngIf="comparisonTab | async as tab">
+<ng-container *ngIf="(comparisonTab | async) as tab">
   <div class="table-tab d-flex">
     <ng-container
       *ngIf="tab.comparisonPanel"

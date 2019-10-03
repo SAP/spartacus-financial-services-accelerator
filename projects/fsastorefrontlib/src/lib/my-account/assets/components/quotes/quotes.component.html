@@ -1,6 +1,6 @@
 <h2 class="heading-headline">{{ 'quote.quotes' | cxTranslate }}</h2>
-<ng-container *ngIf="quotes$ | async as quotes">
-  <ng-container *ngIf="quotesLoaded$ | async; else loading">
+<ng-container *ngIf="(quotes$ | async) as quotes">
+  <ng-container *ngIf="(quotesLoaded$ | async); else loading">
     <div class="row" *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes">
       <div *ngFor="let quote of quotes.insuranceQuotes" class="col-md-4">
         <div class="info-card border-bottom-primary">
