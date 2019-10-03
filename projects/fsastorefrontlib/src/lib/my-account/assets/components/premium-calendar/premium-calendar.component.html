@@ -18,10 +18,10 @@
         <div *ngFor="let policy of policies.insurancePolicies">
           <div
             class="premium-data-row row"
-            (click)="policy.opened = !policy.opened"
+            (click)="opened = !opened"
             [ngClass]="{
               clickable: policy.billingData?.length > 1,
-              active: policy.opened
+              active: opened
             }"
           >
             <div class="col">
@@ -55,7 +55,7 @@
                   : 'notice'
               "
             >
-              {{ policy.billingData[0]?.billingDate | cxDate: 'dd-MM-yyyy' }}
+              {{ policy.billingData[0]?.dueDate | cxDate: 'dd MMM yyyy' }}
               <div
                 class="warn"
                 *ngIf="policy.billingData[0]?.paymentStatus == 'Overdue'"
@@ -83,7 +83,7 @@
           <div
             class="accordion row"
             *ngIf="policy.billingData?.length > 1"
-            [ngClass]="policy.opened ? 'opened' : ''"
+            [ngClass]="opened ? 'opened' : ''"
           >
             <div class="container-fluid">
               <ng-container
@@ -93,7 +93,7 @@
                   <div class="col"></div>
                   <div class="col"></div>
                   <div class="col color-dot">
-                    {{ dueDate.billingDate | cxDate: 'dd-MM-yyyy' }}
+                    {{ dueDate.dueDate | cxDate: 'dd MMM yyyy' }}
                   </div>
                   <div class="col color-dot">
                     {{ dueDate.paymentAmount }}
@@ -145,10 +145,10 @@
                   </div>
                   <div
                     class="container cards__data border-bottom-grey"
-                    (click)="policy.opened = !policy.opened"
+                    (click)="opened = !opened"
                     [ngClass]="{
                       clickable: policy.billingData.length > 1,
-                      active: policy.opened
+                      active: opened
                     }"
                   >
                     <div class="row">
@@ -169,8 +169,8 @@
                           "
                         >
                           {{
-                            policy.billingData[0]?.billingDate
-                              | cxDate: 'dd-MM-yyyy'
+                            policy.billingData[0]?.dueDate
+                              | cxDate: 'dd MMM yyyy'
                           }}
                           <div
                             class="warn"
@@ -206,7 +206,7 @@
                   <ng-container *ngIf="policy.billingData.length > 1">
                     <div
                       class="accordion container"
-                      [ngClass]="policy.opened ? 'opened' : ''"
+                      [ngClass]="opened ? 'opened' : ''"
                     >
                       <ul class="list-data">
                         <ng-container
@@ -216,7 +216,7 @@
                             <div
                               class="col-6 text-left d-flex justify-content-around"
                             >
-                              {{ dueDate.billingDate | cxDate: 'dd-MM-yyyy' }}
+                              {{ dueDate.dueDate | cxDate: 'dd MMM yyyy' }}
                             </div>
                             <div
                               class="col-6 text-left d-flex justify-content-around"

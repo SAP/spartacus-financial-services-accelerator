@@ -4,7 +4,7 @@
 .InsuranceLandingPageTemplate {
   //Service links specific styling - Overriding our own enriched banner :-(
   .Section2A {
-    @include width1400();
+    @include contentWidth();
     margin-bottom: 60px;
     flex-direction: row;
     justify-content: center;
@@ -90,7 +90,7 @@
   //Get a quote section & Make a claim paragraph
   .Section1 cx-paragraph,
   .Section3 {
-    @include width1400();
+    @include contentWidth();
     display: block;
     margin-top: 100px;
     padding: 0 15px;
@@ -120,7 +120,7 @@
   }
   //Find an agent paragraph
   .Section2B {
-    @include width1400();
+    @include contentWidth();
     cx-paragraph {
       color: var(--cx-color-text);
       width: 100%;
@@ -145,7 +145,7 @@
   }
   //Quotes & Policies review
   .Section2C {
-    @include width1400();
+    @include contentWidth();
     display: flex;
     @include media-breakpoint-down(xs) {
       flex-direction: column;

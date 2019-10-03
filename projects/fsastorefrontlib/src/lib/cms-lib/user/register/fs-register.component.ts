@@ -6,12 +6,7 @@ import {
   AuthRedirectService,
   GlobalMessageService,
 } from '@spartacus/core';
-import {
-  Validators,
-  FormGroup,
-  FormBuilder,
-  AbstractControl,
-} from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { FSUserSignUp } from '../../../occ-models';
 import { CustomFormValidators } from '../../util/validators/custom-form-validators';
 
@@ -20,8 +15,6 @@ import { CustomFormValidators } from '../../util/validators/custom-form-validato
   templateUrl: './fs-register.component.html',
 })
 export class FSRegisterComponent extends RegisterComponent {
-  private fsFormBuilder: FormBuilder = new FormBuilder();
-
   constructor(
     private authService: AuthService,
     private authRedService: AuthRedirectService,
@@ -42,6 +35,12 @@ export class FSRegisterComponent extends RegisterComponent {
       titleCode: ['', Validators.required],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      phoneNumber: [
+        '',
+        CustomFormValidators.regexValidator(
+          CustomFormValidators.phoneNumberRegex
+        ),
+      ],
       dateOfBirth: [
         '',
         [Validators.required, CustomFormValidators.dateOfBirthValidator(18)],
@@ -78,6 +77,7 @@ export class FSRegisterComponent extends RegisterComponent {
       email,
       password,
       titleCode,
+      phoneNumber,
     } = this.fsUserRegistrationForm.value;
     const userRegisterFormData: FSUserSignUp = {
       firstName,
@@ -86,6 +86,7 @@ export class FSRegisterComponent extends RegisterComponent {
       uid: email,
       password,
       titleCode,
+      phoneNumber,
     };
 
     this.fsUserService.register(userRegisterFormData);

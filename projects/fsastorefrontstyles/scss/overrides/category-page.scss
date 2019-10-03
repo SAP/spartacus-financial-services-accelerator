@@ -39,7 +39,7 @@
         }
       }
       &__details {
-        @include width1400;
+        @include contentWidth;
         display: block;
         margin: 30px auto 0;
         @include media-breakpoint-down(xs) {
@@ -70,7 +70,7 @@
   }
   .Section2A,
   .Section4 {
-    @include width1400;
+    @include contentWidth;
     padding: 0 10px;
   }
   .Section2A {
