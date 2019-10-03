@@ -1,4 +1,4 @@
-<ng-container *ngIf="(component$ | async) as component">
+<ng-container *ngIf="component$ | async as component">
   <a
     (click)="onTabClicked(component.messageGroup, component.title)"
     [ngClass]="{ 'active tabActive': active }"

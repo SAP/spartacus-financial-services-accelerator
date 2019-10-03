@@ -1,4 +1,4 @@
-<ng-container *ngIf="(component.data$ | async) as data">
+<ng-container *ngIf="component.data$ | async as data">
   <div class="enriched-banner">
     <div class="image-wrapper">
       <cx-media [container]="data.media"></cx-media>

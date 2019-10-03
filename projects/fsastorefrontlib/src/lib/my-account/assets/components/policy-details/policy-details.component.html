@@ -1,4 +1,4 @@
-<ng-container *ngIf="(policy$ | async) as policy">
+<ng-container *ngIf="policy$ | async as policy">
   <div class="overview-section mb-5">
     <span
       *ngIf="policy.mainProduct && policy.mainProduct.coverageProduct"

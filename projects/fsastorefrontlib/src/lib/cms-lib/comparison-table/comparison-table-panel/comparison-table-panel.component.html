@@ -1,5 +1,5 @@
-<ng-container *ngIf="(comparisonPanel | async) as panel">
-  <ng-container *ngIf="(billingData | async) as billingInfo">
+<ng-container *ngIf="comparisonPanel | async as panel">
+  <ng-container *ngIf="billingData | async as billingInfo">
     <div class="fixed-column">
       <div class="table-header"></div>
       <div class="table-cell-wrapper">
@@ -21,7 +21,7 @@
     </div>
     <div class="slide-column-wrapper">
       <div class="slide-column">
-        <ng-container *ngIf="(comparisonPanel | async) as panel">
+        <ng-container *ngIf="comparisonPanel | async as panel">
           <ng-container *ngFor="let productCode of getProductList()">
             <ng-container *ngIf="productCode">
               <fsa-comparison-table-panel-item

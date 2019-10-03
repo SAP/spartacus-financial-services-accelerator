@@ -1,5 +1,5 @@
 <div class="messages">
-  <ng-container *ngIf="(messagesObject$ | async) as messagesObj">
+  <ng-container *ngIf="messagesObject$ | async as messagesObj">
     <ng-container *ngIf="messagesObj.messages?.length !== 0; else noMessages">
       <div
         class="message accordion border-bottom-grey"

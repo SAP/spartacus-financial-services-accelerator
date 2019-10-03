@@ -1,4 +1,4 @@
-<ng-container *ngIf="(agentList$ | async) as agentList">
+<ng-container *ngIf="agentList$ | async as agentList">
   <div class="accordion">
     <fsa-accordion-item
       [opened]="false"
