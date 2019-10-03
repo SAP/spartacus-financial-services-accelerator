@@ -11,6 +11,7 @@ import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { ComparisonTableService } from '../comparison-table.service';
 
 @Directive({
+   // tslint:disable
   selector: '[cxComponentWrapper]',
 })
 export class MockComponentWrapperDirective {

@@ -8,6 +8,7 @@ import { EnrichedResponsiveBannerComponent } from './enriched-responsive-banner.
 import { CmsComponentData } from '@spartacus/storefront';
 
 @Component({
+    // tslint:disable
   selector: 'cx-media',
   template: '',
 })
