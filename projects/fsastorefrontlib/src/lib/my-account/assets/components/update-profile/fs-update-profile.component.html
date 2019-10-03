@@ -1,5 +1,5 @@
 <ng-container>
-  <div *ngIf="loading$ | async; else updateForm">
+  <div *ngIf="(loading$ | async); else updateForm">
     <div class="cx-spinner">
       <cx-spinner></cx-spinner>
     </div>
@@ -7,7 +7,7 @@
 
   <ng-template #updateForm>
     <div class="container">
-      <div class="row d-flex justify-content-center">
+      <div class="row justify-content-center">
         <fsa-update-profile-form
           *ngIf="(user$ | async)?.uid"
           class="col-md-6"
