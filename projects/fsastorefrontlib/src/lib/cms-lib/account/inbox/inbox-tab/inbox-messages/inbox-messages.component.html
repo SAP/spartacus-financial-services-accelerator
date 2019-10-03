@@ -6,7 +6,7 @@
         *ngFor="let message of messagesObj.messages; let i = index"
         [ngClass]="{
           read: message.readDate,
-          active: closed && selectedIndex === i
+          active: selectedIndex === i
         }"
       >
         <div class="inbox-header container-fluid">
@@ -40,7 +40,7 @@
         </div>
         <div
           class="accordion-item-wrapper"
-          [ngClass]="{ active: closed && selectedIndex === i }"
+          [ngClass]="{ active: selectedIndex === i }"
         >
           <div class="box-shadow" [innerHtml]="message.richContent"></div>
         </div>

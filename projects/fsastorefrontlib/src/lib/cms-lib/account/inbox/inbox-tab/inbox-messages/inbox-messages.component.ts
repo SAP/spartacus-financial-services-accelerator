@@ -28,7 +28,6 @@ export class InboxMessagesComponent implements OnInit {
   searchConfig: FSSearchConfig = {};
   changeCheckboxes: Observable<boolean>;
   messagesObject$;
-  closed = true;
   selectedIndex: number;
 
   ngOnInit() {
