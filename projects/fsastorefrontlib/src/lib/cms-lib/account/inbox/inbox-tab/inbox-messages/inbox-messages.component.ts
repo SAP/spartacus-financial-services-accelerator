@@ -28,7 +28,7 @@ export class InboxMessagesComponent implements OnInit {
   searchConfig: FSSearchConfig = {};
   changeCheckboxes: Observable<boolean>;
   messagesObject$;
-  opened = false;
+  selectedIndex: number;
 
   ngOnInit() {
     this.inboxService.activeMessageGroup.subscribe(messageGroup => {
@@ -45,6 +45,11 @@ export class InboxMessagesComponent implements OnInit {
         }
       });
     });
+  }
+  toggleActiveAccordion(index: number) {
+    this.selectedIndex === index
+      ? (this.selectedIndex = -1)
+      : (this.selectedIndex = index);
   }
   readSingleMessage(message) {
     if (!message.ReadDate) {

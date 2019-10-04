@@ -34,8 +34,9 @@
     transition: all 0.5s ease-in-out;
     max-height: 0;
     overflow: hidden;
+    padding: 0 2vw;
     &.active {
-      padding: 40px 0;
+      padding: 2.5rem 2vw;
       max-height: 1200px;
     }
   }

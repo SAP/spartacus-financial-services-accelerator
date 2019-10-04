@@ -3,8 +3,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { SpinnerModule, PageLayoutComponent } from '@spartacus/storefront';
-import { CmsPageGuard } from '@spartacus/storefront';
+import {
+  CmsPageGuard,
+  SpinnerModule,
+  PageLayoutComponent,
+} from '@spartacus/storefront';
 import {
   CmsModule,
   AuthGuard,

@@ -58,4 +58,17 @@ fsa-inbox {
     font-size: var(--cx-h5-font-size);
     cursor: pointer;
   }
+  .tab {
+    flex: 0 1 15%;
+    cursor: pointer;
+    background-color: var(--cx-color-4);
+    margin-right: 5px;
+    border: 1px solid var(--cx-color-3);
+    border-bottom: none;
+    text-align: center;
+    @include media-breakpoint-down(sm) {
+      border-top: none;
+      margin-right: 0;
+    }
+  }
 }
