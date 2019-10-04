@@ -23,7 +23,7 @@ describe('EnrichedResponsiveBannerComponent', () => {
 
   const componentData: CmsBannerComponent = {
     uid: 'SiteLogoComponent',
-    typeCode: 'EnrichedResponsiveeBannerComponent',
+    typeCode: 'EnrichedResponsiveBannerComponent',
     name: 'Site Logo Component',
     container: 'false',
     external: 'false',

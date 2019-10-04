@@ -27,12 +27,15 @@ describe('ComparisonTablePanelComponent', () => {
   const componentData: ComparisonPanelCMSComponent = {
     uid: 'TestComparisonTablePanelComponent',
     typeCode: 'ComparisonPanelCMSComponent',
+    products: 'Product1 Product2 Product3',
   };
 
   const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
     data$: of(componentData),
     uid: 'testComponent',
   };
+
+  const productList = ['Product1', 'Product2', 'Product3'];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -61,5 +64,10 @@ describe('ComparisonTablePanelComponent', () => {
 
   it('should create comparison panel component', () => {
     expect(comparisonTablePanel).toBeTruthy();
+  });
+
+  it('should have 3 products in panel', () => {
+    fixture.detectChanges();
+    expect(comparisonTablePanel.getProductList()).toEqual(productList);
   });
 });
