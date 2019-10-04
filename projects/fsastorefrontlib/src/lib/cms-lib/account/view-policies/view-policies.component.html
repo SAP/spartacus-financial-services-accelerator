@@ -71,7 +71,9 @@
           <span class="fs-item-title">{{ policy.categoryData?.name }}</span>
           <span class="fs-item-value">{{ policy.contractNumber }}</span>
         </div>
-        <span class="fs-item-add-infos">{{ policy.policyEndDate }}</span>
+        <span class="fs-item-add-infos">{{
+          policy.endDate | cxDate: 'dd MMM yyyy'
+        }}</span>
       </div>
     </a>
   </li>
