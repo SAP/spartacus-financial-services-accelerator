@@ -57,4 +57,4 @@ const routes: Routes = [
   entryComponents: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
   providers: [OccInboxService],
 })
-export class InboxModule { }
+export class InboxModule {}

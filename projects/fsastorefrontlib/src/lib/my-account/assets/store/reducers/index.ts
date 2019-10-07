@@ -24,7 +24,7 @@ export function getReducers(): ActionReducerMap<UserState> {
     policies: fromPolicyReducer.reducer,
     premiumCalendar: fromPremiumCalendarReducer.reducer,
     claims: fromClaimReducer.reducer,
-    claimPolicies: fromClaimPolicies.reducer
+    claimPolicies: fromClaimPolicies.reducer,
   };
 }
 

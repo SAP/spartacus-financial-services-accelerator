@@ -5,9 +5,7 @@ import { Message } from '../services/inbox-data.service';
 
 @Injectable()
 export class InboxService {
-  constructor(
-    protected auth: AuthService
-  ) { }
+  constructor(protected auth: AuthService) {}
 
   activeGroupTitleSource = new BehaviorSubject<string>('');
   activeMessageGroupSource = new BehaviorSubject<string>('');
@@ -45,7 +43,7 @@ export class InboxService {
   }
   getMessagesAction() {
     let readState = true;
-    this.messagesCollection.forEach(function (message) {
+    this.messagesCollection.forEach(function(message) {
       if (message.readDate) {
         readState = false;
       }

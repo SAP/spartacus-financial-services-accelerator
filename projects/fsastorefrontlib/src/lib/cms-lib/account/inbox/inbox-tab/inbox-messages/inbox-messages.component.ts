@@ -15,16 +15,13 @@ export interface Mapping extends StandardCmsComponentConfig {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InboxMessagesComponent implements OnInit {
-  constructor(
-  ) { }
+  constructor() {}
 
   changeCheckboxes: Observable<boolean>;
   messagesObject$;
   selectedIndex: number;
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
   toggleActiveAccordion(index: number) {
     this.selectedIndex === index
       ? (this.selectedIndex = -1)

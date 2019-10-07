@@ -7,7 +7,7 @@ export const effects: any[] = [
   QuoteEffects,
   PolicyEffects,
   ClaimEffects,
-  ClaimPoliciesEffects
+  ClaimPoliciesEffects,
 ];
 
 export * from './claim-policies.effect';

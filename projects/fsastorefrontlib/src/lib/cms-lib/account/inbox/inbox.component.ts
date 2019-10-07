@@ -17,9 +17,7 @@ export interface Mapping extends StandardCmsComponentConfig {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InboxComponent implements OnInit {
-  constructor(
-    protected componentData: CmsComponentData<CmsInboxComponent>,
-  ) { }
+  constructor(protected componentData: CmsComponentData<CmsInboxComponent>) {}
 
   component$: Observable<CmsInboxComponent>;
   messages$;
