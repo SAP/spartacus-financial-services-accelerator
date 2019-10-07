@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CmsComponent } from '@spartacus/core';
 import { of } from 'rxjs';
 import { CmsComponentData } from '@spartacus/storefront';
-import { ComparisonPanelCMSComponent } from 'fsastorefrontlib/lib/occ-models';
+import { ComparisonPanelCMSComponent } from './../../../occ-models/';
 import { ComparisonTablePanelComponent } from './comparison-table-panel.component';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { OccBillingTimeService } from './../../../occ/billing-time/billing-time.service';
