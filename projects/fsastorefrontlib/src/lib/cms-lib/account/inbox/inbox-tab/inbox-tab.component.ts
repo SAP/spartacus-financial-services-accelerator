@@ -5,8 +5,6 @@ import {
   Input,
 } from '@angular/core';
 import { CmsService } from '@spartacus/core';
-import { InboxService } from '../../../../my-account/assets/services/inbox.service';
-import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-inbox-tab',
@@ -24,21 +22,9 @@ export class InboxTabComponent implements OnInit {
 
   constructor(
     protected cmsService: CmsService,
-    protected inboxService: InboxService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.component$ = this.cmsService.getComponentData(this.tabId);
-    this.component$
-      .pipe(filter(data => data !== undefined && this.active))
-      .subscribe(data =>
-        this.inboxService.activeMessageGroupSource.next(data.messageGroup)
-      );
-  }
-  onTabClicked(messageGroup, title) {
-    this.inboxService.checkAllMessagesSource.next(false);
-    this.inboxService.setActiveGroupTitle(title);
-    this.inboxService.setActiveMessageGroup(messageGroup);
-    this.inboxService.resetMessagesToSend();
   }
 }
