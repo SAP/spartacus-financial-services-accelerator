@@ -1,6 +1,6 @@
 <ng-container *ngIf="component$ | async as component">
   <div class="product-feature-wrapper">
-    <h3 class="section-header-heading">{{component.title}}</h3>
+    <h3 class="section-header-heading">{{ component.title }}</h3>
     <div class="product-feature-image"></div>
     <div *ngIf="product$ | async as product">
       <ul class="product-feature-details" [innerHTML]="product.summary"></ul>

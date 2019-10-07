@@ -1,9 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { CmsConfig, CmsResponsiveBannerComponentMedia } from '@spartacus/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { CmsEnrichedResponsiveBannerComponent } from './../../occ-models';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-enriched-responsive-banner',
@@ -12,7 +9,6 @@ import { map } from 'rxjs/operators';
 })
 export class EnrichedResponsiveBannerComponent {
   constructor(
-    public component: CmsComponentData<CmsEnrichedResponsiveBannerComponent>,
-    protected config: CmsConfig
+    public component: CmsComponentData<CmsEnrichedResponsiveBannerComponent>
   ) {}
 }

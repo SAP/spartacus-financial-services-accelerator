@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductFeatureComponent } from './product-feature-component';
+import { ProductFeatureComponent } from './product-feature.component';
 import { ConfigModule, CmsConfig, I18nModule } from '@spartacus/core';
 
 @NgModule({
