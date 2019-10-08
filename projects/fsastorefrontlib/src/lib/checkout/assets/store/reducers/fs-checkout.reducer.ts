@@ -1,4 +1,4 @@
-import { Address, CheckoutActions, DeliveryMode, Order } from '@spartacus/core';
+import { CheckoutActions, Order } from '@spartacus/core';
 import * as fromAction from '../actions';
 import { FSCheckoutAction } from '../actions/fs-checkout.action';
 import { FSCheckoutStepsState } from '../fs-checkout-state';
