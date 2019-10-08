@@ -17,7 +17,7 @@ export interface Mapping extends StandardCmsComponentConfig {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InboxComponent implements OnInit {
-  constructor(protected componentData: CmsComponentData<CmsInboxComponent>) {}
+  constructor(protected componentData: CmsComponentData<CmsInboxComponent>) { }
 
   component$: Observable<CmsInboxComponent>;
   messages$;
@@ -34,5 +34,6 @@ export class InboxComponent implements OnInit {
 
   ngOnInit() {
     this.component$ = this.componentData.data$;
+    this.component$.subscribe(data => this.tabs = data.tabComponents.split(' '));
   }
 }
