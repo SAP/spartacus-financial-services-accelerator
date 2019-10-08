@@ -1,7 +1,3 @@
 <ng-container *ngIf="component$ | async as component">
-  <a
-    (click)="onTabClicked(component.messageGroup, component.title)"
-    [ngClass]="{ 'active tabActive': active }"
-    >{{ component.title }}</a
-  >
+  <a [ngClass]="{ 'active tabActive': active }">{{ component.title }}</a>
 </ng-container>

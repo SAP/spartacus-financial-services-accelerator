@@ -13,18 +13,13 @@
   </ng-container>
   <div
     class="FSA-icon m-4"
-    (click)="changeMessagesReadState()"
     [ngClass]="readState ? 'icon-FSA-envelope-open' : 'icon-FSA-envelope'"
   ></div>
   <div class="section-header-heading p-4 position-relative container-fluid">
     <div class="row d-none d-md-flex">
       <div class="col-1">
         <label class="checkbox-label">
-          <input
-            type="checkbox"
-            [checked]="mainCheckboxChecked"
-            (click)="checkAllCheckboxes()"
-          />
+          <input type="checkbox" [checked]="mainCheckboxChecked" />
           <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
         </label>
       </div>
@@ -33,8 +28,7 @@
         <span
           class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
           (click)="
-            subjectSortOrder = subjectSortOrder === 'desc' ? 'asc' : 'desc';
-            sortMessages('title', subjectSortOrder)
+            subjectSortOrder = subjectSortOrder === 'desc' ? 'asc' : 'desc'
           "
           [ngClass]="subjectSortOrder === 'asc' ? 'rotate' : ''"
         >
@@ -45,8 +39,7 @@
         <span
           class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
           (click)="
-            contentSortOrder = contentSortOrder === 'desc' ? 'asc' : 'desc';
-            sortMessages('content', contentSortOrder)
+            contentSortOrder = contentSortOrder === 'desc' ? 'asc' : 'desc'
           "
           [ngClass]="contentSortOrder === 'asc' ? 'rotate' : ''"
         ></span>
@@ -55,10 +48,7 @@
         {{ 'fscommon.date' | cxTranslate }}
         <span
           class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
-          (click)="
-            sentSortOrder = sentSortOrder === 'desc' ? 'asc' : 'desc';
-            sortMessages('sentdate', sentSortOrder)
-          "
+          (click)="sentSortOrder = sentSortOrder === 'desc' ? 'asc' : 'desc'"
           [ngClass]="sentSortOrder === 'asc' ? 'rotate' : ''"
         ></span>
       </div>
