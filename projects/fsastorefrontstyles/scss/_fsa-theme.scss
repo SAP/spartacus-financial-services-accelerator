@@ -9,11 +9,10 @@
 $fsSkipComponentStyles: () !default;
 
 // major version standard
-$fsSelectors:fsa-policy-details, fsa-premium-calendar, fsa-checkout-progress,
-             fsa-final-review, fsa-mini-cart, fsa-quote-review, fsa-enriched-responsive-banner,
-             fsa-agent-root, fsa-messages-inbox, fsa-inbox-tab, fsa-inbox, fsa-product-feature,
-             fsa-form-component
-            !default;
+$fsSelectors: fsa-policy-details, fsa-premium-calendar, fsa-checkout-progress,
+  fsa-final-review, fsa-mini-cart, fsa-quote-review,
+  fsa-enriched-responsive-banner, fsa-agent-root, fsa-messages-inbox,
+  fsa-inbox-tab, fsa-inbox, fsa-product-feature, fsa-form-component !default;
 
 // future theme's, can be introduced during minors
 $theme: '' !default;

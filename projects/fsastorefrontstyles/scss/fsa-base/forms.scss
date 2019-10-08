@@ -1,10 +1,10 @@
 // Global form errors and warnings
 .ng-invalid.ng-touched {
-    border-color: var(--cx-color-danger);
-    &:focus {
-      outline-color: var(--cx-color-danger);
-    }
+  border-color: var(--cx-color-danger);
+  &:focus {
+    outline-color: var(--cx-color-danger);
   }
-  .form-text {
-    color: var(--cx-color-danger);
-  }
+}
+.form-text {
+  color: var(--cx-color-danger);
+}
