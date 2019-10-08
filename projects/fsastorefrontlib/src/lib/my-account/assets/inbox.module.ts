@@ -22,6 +22,8 @@ import { InboxMessagesComponent } from '../../cms-lib/account/inbox/inbox-tab/in
 import { InboxTabComponent } from '../../cms-lib/account/inbox/inbox-tab/inbox-tab.component';
 import { InboxComponent } from '../../cms-lib/account/inbox/inbox.component';
 import { OccInboxService } from '../../occ/inbox/inbox.service';
+import { InboxDataService } from './services/inbox-data.service';
+import { InboxService } from './services/inbox.service';
 
 const routes: Routes = [
   {
@@ -54,7 +56,7 @@ const routes: Routes = [
   ],
   declarations: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
   exports: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
-  entryComponents: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
-  providers: [OccInboxService],
+  entryComponents: [InboxComponent, InboxTabComponent],
+  providers: [OccInboxService, InboxDataService, InboxService],
 })
-export class InboxModule {}
+export class InboxModule { }

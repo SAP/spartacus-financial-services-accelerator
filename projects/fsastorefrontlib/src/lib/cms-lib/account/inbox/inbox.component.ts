@@ -33,7 +33,6 @@ export class InboxComponent implements OnInit {
   shouldShow = false;
 
   ngOnInit() {
-    this.component$ = this.componentData.data$;
-    this.component$.subscribe(data => this.tabs = data.tabComponents.split(' '));
+    this.componentData.data$.subscribe(data => this.tabs = data.tabComponents.split(' '));
   }
 }

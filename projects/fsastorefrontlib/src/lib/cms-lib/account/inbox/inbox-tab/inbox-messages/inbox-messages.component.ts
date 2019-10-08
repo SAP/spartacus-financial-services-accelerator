@@ -4,6 +4,9 @@ import {
   StandardCmsComponentConfig,
 } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import { OccInboxService } from '../../../../../occ/inbox/inbox.service';
+import { FSSearchConfig, InboxDataService } from '../../../../../my-account/assets/services/inbox-data.service';
+import { InboxService } from 'projects/fsastorefrontlib/src/lib/my-account/assets/services/inbox.service';
 
 export interface Mapping extends StandardCmsComponentConfig {
   CMSInboxTabComponent?: CmsComponentMapping;
@@ -15,13 +18,21 @@ export interface Mapping extends StandardCmsComponentConfig {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InboxMessagesComponent implements OnInit {
-  constructor() {}
-
+  constructor(
+    private occInboxService: OccInboxService,
+    private inboxDataService: InboxDataService,
+    private inboxService: InboxService
+  ) { }
   changeCheckboxes: Observable<boolean>;
   messagesObject$;
   selectedIndex: number;
+  searchConfig: FSSearchConfig = {};
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.messagesObject$ = this.occInboxService.getSiteMessagesForUserAndGroup(
+      'current', 'autoInsuranceMessageGroup', this.searchConfig);
+  }
+
   toggleActiveAccordion(index: number) {
     this.selectedIndex === index
       ? (this.selectedIndex = -1)
