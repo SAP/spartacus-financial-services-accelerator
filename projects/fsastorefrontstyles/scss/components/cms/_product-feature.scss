@@ -1,4 +1,6 @@
-fsa-product-feature {
+@import '../../theme/fsa/variables';
+
+%fsa-product-feature {
   .product-feature {
     &-wrapper {
       background-color: var(--cx-color-4);

@@ -1,5 +1,8 @@
-.enriched-banner {
-  &__styled-text {
-    text-decoration: none;
+%fsa-enriched-responsive-banner {
+  .enriched-banner {
+    &__styled-text {
+      text-decoration: none;
+    }
   }
 }
+
