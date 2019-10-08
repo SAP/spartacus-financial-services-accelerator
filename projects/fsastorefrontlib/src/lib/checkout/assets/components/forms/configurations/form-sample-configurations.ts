@@ -454,8 +454,8 @@ export class FormSampleConfigurations {
               options: [
                 'Europe',
                 'Australia and New Zealand',
-                'Worldwide(excluding USA, Canada and the Caribbean)',
-                'Worldwide(including USA, Canada and the Caribbean)',
+                'Worldwide (excluding USA, Canada, and the Caribbean)',
+                'Worldwide (including USA, Canada and the Caribbean)',
                 'UK',
               ],
               validation: [Validators.required],

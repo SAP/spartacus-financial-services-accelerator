@@ -13,23 +13,19 @@
           <div class="row">
             <div class="col-1 p-4">
               <label class="checkbox-label">
-                <input
-                  type="checkbox"
-                  [checked]="changeCheckboxes | async"
-                  (change)="changeMessageState(message.readDate, message.uid)"
-                />
+                <input type="checkbox" [checked]="changeCheckboxes | async" />
                 <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
               </label>
             </div>
             <div
               class="col-6 col-md-3 text-truncate p-4"
-              (click)="toggleActiveAccordion(i); readSingleMessage(message)"
+              (click)="toggleActiveAccordion(i)"
             >
               {{ message.subject }}
             </div>
             <div
               class="col-md-6 d-none d-md-block text-truncate p-4"
-              (click)="toggleActiveAccordion(i); readSingleMessage(message)"
+              (click)="toggleActiveAccordion(i)"
             >
               {{ message.content }}
             </div>

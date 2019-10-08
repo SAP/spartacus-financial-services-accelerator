@@ -14,7 +14,7 @@ export class MockComponentWrapperDirective {
   @Input() cxComponentWrapper: ContentSlotComponentData;
 }
 
-describe('ComparisonTableContainerComponent', () => {
+describe('ComparisonTableTabComponent', () => {
   let comaparisonTableTabComponent: ComparisonTableTabComponent;
   let fixture: ComponentFixture<ComparisonTableTabComponent>;
 

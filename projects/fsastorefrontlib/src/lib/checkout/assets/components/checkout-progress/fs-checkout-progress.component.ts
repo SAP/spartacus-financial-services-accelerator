@@ -38,7 +38,6 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
     super.ngOnInit();
     this.setActiveCategory();
     this.filterSteps();
-    this.setActiveStepIndex();
   }
 
   setActiveStepIndex() {
@@ -95,6 +94,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
           ) === -1
         );
       });
+      this.setActiveStepIndex();
     });
   }
 }
