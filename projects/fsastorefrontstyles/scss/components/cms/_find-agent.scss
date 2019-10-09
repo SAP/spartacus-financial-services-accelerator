@@ -1,4 +1,6 @@
-fsa-agent-root {
+@import '../../theme/fsa/variables';
+
+%fsa-agent-root {
   cx-media img {
     background: var(--cx-color-7);
     border-radius: 50%;

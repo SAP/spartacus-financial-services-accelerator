@@ -1,4 +1,6 @@
-fsa-inbox-tab {
+@import '../../theme/fsa/variables';
+
+%fsa-inbox-tab {
   a:not([href]):not([tabindex]) {
     // needed this kind of selector to override the bootstrap's one
     @include transition;
