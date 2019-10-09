@@ -1,0 +1,27 @@
+//point to the theme variables
+//DO NOT load anything else here!
+@import 'theme/fsa/variables';
+@import './components/index';
+
+// the $skipComponentStyles is used as a list of component styles that can be ignore
+// during the sass compilation. Whenever the list contains a component selector, the
+// selector is not used.
+$fsSkipComponentStyles: () !default;
+
+// major version standard
+$fsSelectors: fsa-policy-details, fsa-premium-calendar, fsa-checkout-progress,
+  fsa-final-review, fsa-mini-cart, fsa-quote-review,
+  fsa-enriched-responsive-banner, fsa-agent-root, fsa-messages-inbox,
+  fsa-inbox-tab, fsa-inbox, fsa-product-feature, fsa-form-component !default;
+
+// future theme's, can be introduced during minors
+$theme: '' !default;
+
+@each $fsSelector in $fsSelectors {
+  #{$fsSelector} {
+    // skip selectors if they're added to the $skipComponentStyles list
+    @if (index($fsSkipComponentStyles, $fsSelector) == null) {
+      @extend %#{$fsSelector} !optional;
+    }
+  }
+}

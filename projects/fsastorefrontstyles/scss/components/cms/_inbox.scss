@@ -1,4 +1,6 @@
-fsa-inbox {
+@import '../../theme/fsa/variables';
+
+%fsa-inbox {
   .section-header-heading {
     text-align: left;
     font-size: var(--cx-h6-font-size);
