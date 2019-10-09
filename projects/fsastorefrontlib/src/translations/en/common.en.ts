@@ -70,6 +70,7 @@ export const fscommon = {
     whatDoesItCostMe: 'What Does It Cost Me?',
     legalInformation: 'Legal Information',
     listView: 'List View',
+    applications: 'Applications',
     mapView: 'Map View',
     register: {
       dateOfBirthMinimumAge: 'Must be over 18 years old',
