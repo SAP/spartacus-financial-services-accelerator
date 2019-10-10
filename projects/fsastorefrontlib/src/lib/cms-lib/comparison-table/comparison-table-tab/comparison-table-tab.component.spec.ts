@@ -5,7 +5,6 @@ import { of } from 'rxjs';
 import { CmsComponentData } from '@spartacus/storefront';
 import { CMSComparisonTabComponent } from '../../../occ-models';
 import { ComparisonTableTabComponent } from './comparison-table-tab.component';
-import { OccBillingTimeService } from './../../../occ/billing-time/billing-time.service';
 
 @Directive({
   // tslint:disable
@@ -19,12 +18,11 @@ describe('ComparisonTableTabComponent', () => {
   let comaparisonTableTabComponent: ComparisonTableTabComponent;
   let fixture: ComponentFixture<ComparisonTableTabComponent>;
 
-  const mockComponents = ['MockComparisonTablePanelComponent'];
-
   const componentData: CMSComparisonTabComponent = {
     uid: 'TestComparisonTabComponent',
     typeCode: 'CMSComparisonTabComponent',
-    comparisonPanel: mockComponents.join(' '),
+    comparisonPanel: 'MockComparisonTablePanelComponent',
+    title: 'TestCMSComparisonTabComponent'
   };
 
   const MockCmsComponentData = <CmsComponentData<CMSComparisonTabComponent>>{
