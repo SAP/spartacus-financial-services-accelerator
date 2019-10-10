@@ -18,7 +18,9 @@ export class MockComparisonTablePanelItem {
   @Input() billingTimes: any;
 }
 
-class MockOccBillingTimeService {}
+class MockOccBillingTimeService {
+  getBillingTimes(productCodes: string[]): any {}
+}
 
 describe('ComparisonTablePanelComponent', () => {
   let comparisonTablePanel: ComparisonTablePanelComponent;
