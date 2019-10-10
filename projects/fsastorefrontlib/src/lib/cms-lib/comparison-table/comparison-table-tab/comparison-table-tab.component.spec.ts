@@ -1,10 +1,11 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, Input, Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CmsComponent, ContentSlotComponentData } from '@spartacus/core';
 import { of } from 'rxjs';
 import { CmsComponentData } from '@spartacus/storefront';
 import { CMSComparisonTabComponent } from '../../../occ-models';
 import { ComparisonTableTabComponent } from './comparison-table-tab.component';
+import { OccBillingTimeService } from './../../../occ/billing-time/billing-time.service';
 
 @Directive({
   // tslint:disable
@@ -12,6 +13,10 @@ import { ComparisonTableTabComponent } from './comparison-table-tab.component';
 })
 export class MockComponentWrapperDirective {
   @Input() cxComponentWrapper: ContentSlotComponentData;
+}
+
+class MockOccBillingTimeService {
+  getBillingTimes(productCodes: string[]): any {}
 }
 
 describe('ComparisonTableTabComponent', () => {
@@ -39,6 +44,10 @@ describe('ComparisonTableTabComponent', () => {
         {
           provide: CmsComponentData,
           useValue: MockCmsComponentData,
+        },
+        {
+          provide: OccBillingTimeService,
+          useValue: MockOccBillingTimeService,
         },
       ],
     }).compileComponents();
