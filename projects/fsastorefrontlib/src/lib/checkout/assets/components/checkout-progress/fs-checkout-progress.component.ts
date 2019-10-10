@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import {
   CartService,
   RoutingConfigService,
@@ -63,7 +64,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
       } else if (params[formCode]) {
         this.categoryService.setActiveCategory(params[formCode]);
       } else {
-        this.cartService.getActive().subscribe(cart => {
+        this.cartService.getActive().pipe(take(1)).subscribe(cart => {
           if (
             cart.deliveryOrderGroups &&
             cart.deliveryOrderGroups.length > 0 &&
