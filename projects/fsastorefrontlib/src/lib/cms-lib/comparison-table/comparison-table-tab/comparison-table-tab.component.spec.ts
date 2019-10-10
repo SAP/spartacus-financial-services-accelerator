@@ -1,6 +1,6 @@
-import { Directive, Input, Component } from '@angular/core';
+import { Directive, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CmsComponent, ContentSlotComponentData } from '@spartacus/core';
+import { ContentSlotComponentData } from '@spartacus/core';
 import { of } from 'rxjs';
 import { CmsComponentData } from '@spartacus/storefront';
 import { CMSComparisonTabComponent } from '../../../occ-models';
@@ -15,22 +15,20 @@ export class MockComponentWrapperDirective {
   @Input() cxComponentWrapper: ContentSlotComponentData;
 }
 
-class MockOccBillingTimeService {
-  getBillingTimes(productCodes: string[]): any {}
-}
-
 describe('ComparisonTableTabComponent', () => {
   let comaparisonTableTabComponent: ComparisonTableTabComponent;
   let fixture: ComponentFixture<ComparisonTableTabComponent>;
 
+  const mockComponents = ['MockComparisonTablePanelComponent'];
+
   const componentData: CMSComparisonTabComponent = {
     uid: 'TestComparisonTabComponent',
     typeCode: 'CMSComparisonTabComponent',
+    comparisonPanel: mockComponents.join(' '),
   };
 
-  const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
+  const MockCmsComponentData = <CmsComponentData<CMSComparisonTabComponent>>{
     data$: of(componentData),
-    uid: 'testComponent',
   };
 
   beforeEach(async(() => {
@@ -44,10 +42,6 @@ describe('ComparisonTableTabComponent', () => {
         {
           provide: CmsComponentData,
           useValue: MockCmsComponentData,
-        },
-        {
-          provide: OccBillingTimeService,
-          useValue: MockOccBillingTimeService,
         },
       ],
     }).compileComponents();
