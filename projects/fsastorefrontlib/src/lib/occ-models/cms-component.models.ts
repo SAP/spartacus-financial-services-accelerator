@@ -16,6 +16,17 @@ export interface CmsProductFeatureComponent extends CmsComponent {
   media?: string;
 }
 
+export interface CmsCategoryFeatureComponent extends CmsComponent {
+  title?: string;
+  description?: string;
+  media?: string;
+}
+
+export interface CmsCategoryCarouselComponent extends CmsComponent {
+  title?: string;
+  categoryFeatures: string;
+}
+
 export interface CmsEnrichedResponsiveBannerComponent
   extends CmsBannerComponent {
   headingText?: string;

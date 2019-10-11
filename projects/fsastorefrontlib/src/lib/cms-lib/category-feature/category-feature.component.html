@@ -1,0 +1,23 @@
+<ng-container *ngIf="component$ | async as component">
+  <div class="row">
+    <div class="col-4">
+      <cx-media [container]="component.media"></cx-media>
+    </div>
+    <div class="col-4">
+      <h6>{{ component.title }}</h6>
+      <br />
+      <div
+        class="product-feature-details"
+        [innerHTML]="component.description"
+      ></div>
+      <a
+        class="cx-link"
+        [routerLink]="
+          { cxRoute: 'category', params: { code: component.category } } | cxUrl
+        "
+        >Checkout link</a
+      >
+    </div>
+    <br />
+  </div>
+</ng-container>

@@ -6,6 +6,8 @@ import { ComparisonTableModule } from './comparison-table/comparison-table.modul
 import { CategoryFormsModule } from './forms/cms-category-form-component/cms-category-forms.module';
 import { CustomContainerModule } from './container/cms-custom-container.module';
 import { AgentModule } from './agent/agent.module';
+import { CategoryFeatureModule } from './category-feature/category-feature.module';
+import { CategoryCarouselModule } from './category-carousel/category-carousel.module';
 
 @NgModule({
   imports: [
@@ -16,6 +18,8 @@ import { AgentModule } from './agent/agent.module';
     ComparisonTableModule,
     CategoryFormsModule,
     CustomContainerModule,
+    CategoryFeatureModule,
+    CategoryCarouselModule,
   ],
   exports: [
     AgentModule,
@@ -25,6 +29,8 @@ import { AgentModule } from './agent/agent.module';
     ComparisonTableModule,
     CategoryFormsModule,
     CustomContainerModule,
+    CategoryFeatureModule,
+    CategoryCarouselModule,
   ],
 })
 export class CmsLibModule {}
