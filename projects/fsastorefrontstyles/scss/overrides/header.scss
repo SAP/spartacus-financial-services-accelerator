@@ -23,7 +23,9 @@ header {
   cx-hamburger-menu {
     margin: 9px 0px;
     display: block;
-    .hamburger-inner, .hamburger-inner::before, .hamburger-inner::after {
+    .hamburger-inner,
+    .hamburger-inner::before,
+    .hamburger-inner::after {
       border-radius: 3px;
     }
   }
