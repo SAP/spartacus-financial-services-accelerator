@@ -34,7 +34,7 @@ context('Homepage', () => {
     cy.get('cx-page-slot.Footer').within(() => {
       cy.get('cx-navigation-ui > nav').should('have.length', 4);
       cy.get('h5').should('have.length', 4);
-      cy.get('cx-generic-link').should('have.length', 19);
+      cy.get('cx-generic-link').should('have.length', 17);
       cy.get('.notice').should(
         'contain',
         'SAP SE or an SAP affiliate company. All rights reserved.'
