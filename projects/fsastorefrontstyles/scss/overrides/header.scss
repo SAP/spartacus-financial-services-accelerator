@@ -23,6 +23,11 @@ header {
   cx-hamburger-menu {
     margin: 9px 0px;
     display: block;
+    .hamburger-inner,
+    .hamburger-inner::before,
+    .hamburger-inner::after {
+      border-radius: 3px;
+    }
   }
   .TopHeaderSlot {
     flex: 100%;
@@ -73,8 +78,12 @@ header {
       & > .wrapper {
         padding: 0;
         border: none;
+        @include box-shadow(0px, 1px, 6px, 0px, $color-dark-grey, 0.75);
         nav:last-child cx-generic-link a {
           border-bottom: none;
+        }
+        @include media-breakpoint-down(md) {
+          box-shadow: none;
         }
       }
       cx-generic-link {
@@ -124,7 +133,7 @@ header {
           margin-top: 0;
           padding: 0;
           font-size: var(--cx-title-font-size);
-          @include media-breakpoint-down(sm) {
+          @include media-breakpoint-down(md) {
             padding: 1rem;
           }
         }
@@ -135,7 +144,9 @@ header {
       }
     }
     cx-login {
-      color: var(--cx-color-11);
+      a {
+        color: var(--cx-color-11);
+      }
       .cx-login-greet {
         color: var(--cx-color-primary);
         margin-bottom: 10px;
