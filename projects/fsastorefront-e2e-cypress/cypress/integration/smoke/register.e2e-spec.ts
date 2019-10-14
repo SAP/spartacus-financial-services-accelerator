@@ -30,7 +30,7 @@ context('Register', () => {
       registrationUserWithoutPhone.email,
       registrationUserWithoutPhone.password
     );
-    register.validatePhoneNumber(registrationUserWithoutPhone.phoneNumber);
+    register.validatePhoneNumber('');
     register.logout();
   });
 });

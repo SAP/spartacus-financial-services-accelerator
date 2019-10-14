@@ -14,7 +14,6 @@ export const registrationUserWithoutPhone = {
   lastName: 'Moore',
   password: 'Password1.',
   email: generateMail('Alex'),
-  phoneNumber: '',
   dateOfBirth: '1990-12-12',
 };
 

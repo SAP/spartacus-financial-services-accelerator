@@ -3,35 +3,27 @@ export interface RegisterUser {
   firstName: string;
   lastName: string;
   dateOfBirth: string;
-  phoneNumber: string;
+  phoneNumber?: string;
   email: string;
   password: string;
 }
 
-export function registerUser({
-  titleCode,
-  firstName,
-  lastName,
-  password,
-  email,
-  phoneNumber,
-  dateOfBirth,
-}: RegisterUser) {
+export function registerUser(user: RegisterUser) {
   cy.getByText(/Sign in \/ Register/i).click();
   cy.get('cx-page-layout')
     .getByText('Register')
     .click({ force: true });
   cy.get('fsa-register form').within(() => {
-    cy.get('[formcontrolname="titleCode"]').select(titleCode);
-    cy.get('[formcontrolname="firstName"]').type(firstName);
-    cy.get('[formcontrolname="lastName"]').type(lastName);
-    cy.get('[formcontrolname="dateOfBirth"]').type(dateOfBirth);
-    if (phoneNumber !== '') {
-      cy.get('[formcontrolname="phoneNumber"]').type(phoneNumber);
+    cy.get('[formcontrolname="titleCode"]').select(user.titleCode);
+    cy.get('[formcontrolname="firstName"]').type(user.firstName);
+    cy.get('[formcontrolname="lastName"]').type(user.lastName);
+    cy.get('[formcontrolname="dateOfBirth"]').type(user.dateOfBirth);
+    if (user.phoneNumber) {
+      cy.get('[formcontrolname="phoneNumber"]').type(user.phoneNumber);
     }
-    cy.get('[formcontrolname="email"]').type(email);
-    cy.get('[formcontrolname="password"]').type(password);
-    cy.get('[formcontrolname="passwordconf"]').type(password);
+    cy.get('[formcontrolname="email"]').type(user.email);
+    cy.get('[formcontrolname="password"]').type(user.password);
+    cy.get('[formcontrolname="passwordconf"]').type(user.password);
     cy.get('[formcontrolname="termsandconditions"]').check();
     cy.get('button[type="submit"]').click();
   });
