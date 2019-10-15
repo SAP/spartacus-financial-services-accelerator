@@ -24,6 +24,5 @@ export function generateMail(name: string) {
 
 export const donaMooreUser = {
   name: 'donna@moore.com',
-  password: '123456'
-}
-
+  password: '123456',
+};
