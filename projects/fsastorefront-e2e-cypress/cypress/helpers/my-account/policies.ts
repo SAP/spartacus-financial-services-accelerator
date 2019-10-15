@@ -7,7 +7,3 @@ export function accessPoliciesPage() {
 export function checkPoliciesTitle() {
   cy.get('.heading-headline').should('contain', 'Policies');
 }
-
-export function checkNumberOfPolicies(numberOfPolicies) {
-  cy.get('.info-card').should('have.length', numberOfPolicies);
-}

@@ -7,7 +7,3 @@ export function accessApplicationsPage() {
 export function checkApplicationTitle() {
   cy.get('.heading-headline').should('contain', 'Applications');
 }
-
-export function checkNumberOfApplications(numberOfApplications) {
-  cy.get('.info-card').should('have.length', numberOfApplications);
-}
