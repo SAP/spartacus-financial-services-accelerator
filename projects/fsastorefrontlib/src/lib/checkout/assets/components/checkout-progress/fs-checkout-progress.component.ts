@@ -1,17 +1,15 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
 import {
-  CartService,
   RoutingConfigService,
   RoutingService,
+  WindowRef,
 } from '@spartacus/core';
 import {
   CheckoutConfig,
   CheckoutProgressComponent,
 } from '@spartacus/storefront';
-import { FSProduct } from '../../../../occ-models/occ.models';
 import { FSCategoryService } from '../../services/fs-category.service';
 import { FSCheckoutStep } from './fs-checkout-step.component';
 
@@ -27,12 +25,13 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
     protected routingService: RoutingService,
     protected routingConfigService: RoutingConfigService,
     protected activatedRoute: ActivatedRoute,
-    protected cartService: CartService,
-    protected categoryService: FSCategoryService
+    protected categoryService: FSCategoryService,
+    protected winRef: WindowRef
   ) {
     super(config, routingService, routingConfigService);
   }
 
+  protected CATEGORY = 'category';
   activeCategory$: Observable<string>;
 
   ngOnInit() {
@@ -61,29 +60,14 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
 
       if (params[categoryCode]) {
         this.categoryService.setActiveCategory(params[categoryCode]);
+        this.winRef.localStorage.setItem(this.CATEGORY, params[categoryCode]);
       } else if (params[formCode]) {
         this.categoryService.setActiveCategory(params[formCode]);
+        this.winRef.localStorage.setItem(this.CATEGORY, params[formCode]);
       } else {
-        this.cartService
-          .getActive()
-          .pipe(take(1))
-          .subscribe(cart => {
-            if (
-              cart.deliveryOrderGroups &&
-              cart.deliveryOrderGroups.length > 0 &&
-              cart.deliveryOrderGroups[0].entries &&
-              cart.deliveryOrderGroups[0].entries.length > 0
-            ) {
-              const fsProduct: FSProduct =
-                cart.deliveryOrderGroups[0].entries[0].product;
-
-              if (fsProduct && fsProduct.defaultCategory) {
-                this.categoryService.setActiveCategory(
-                  fsProduct.defaultCategory.code
-                );
-              }
-            }
-          });
+        this.categoryService.setActiveCategory(
+          this.winRef.localStorage.getItem(this.CATEGORY)
+        );
       }
     });
   }
