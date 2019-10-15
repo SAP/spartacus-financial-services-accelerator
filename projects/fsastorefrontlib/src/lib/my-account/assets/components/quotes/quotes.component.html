@@ -1,4 +1,4 @@
-<h2 class="heading-headline">{{ 'quote.quotes' | cxTranslate }}</h2>
+<h2 class="heading-headline">{{ 'fscommon.applications' | cxTranslate }}</h2>
 <ng-container *ngIf="quotes$ | async as quotes">
   <ng-container *ngIf="quotesLoaded$ | async; else loading">
     <div class="row" *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes">
@@ -47,7 +47,9 @@
             </div>
             <div class="info-card-data">
               <span class="title">{{ 'fscommon.price' | cxTranslate }}</span>
-              <span class="value">{{ quote.quotePrice }}</span>
+              <span class="value"
+                >{{ quote.quotePrice }} / {{ quote.paymentFrequency }}</span
+              >
             </div>
           </div>
           <div class="info-card-button-wrapper border-top-primary">
