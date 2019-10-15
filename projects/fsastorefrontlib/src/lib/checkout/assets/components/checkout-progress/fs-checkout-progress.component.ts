@@ -31,7 +31,6 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
     super(config, routingService, routingConfigService);
   }
 
-  protected CATEGORY = 'category';
   activeCategory$: Observable<string>;
 
   ngOnInit() {
@@ -57,16 +56,17 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
     this.activatedRoute.params.subscribe(params => {
       const categoryCode = 'categoryCode';
       const formCode = 'formCode';
+      const category = 'category';
 
       if (params[categoryCode]) {
         this.categoryService.setActiveCategory(params[categoryCode]);
-        this.winRef.localStorage.setItem(this.CATEGORY, params[categoryCode]);
+        this.winRef.localStorage.setItem(category, params[categoryCode]);
       } else if (params[formCode]) {
         this.categoryService.setActiveCategory(params[formCode]);
-        this.winRef.localStorage.setItem(this.CATEGORY, params[formCode]);
+        this.winRef.localStorage.setItem(category, params[formCode]);
       } else {
         this.categoryService.setActiveCategory(
-          this.winRef.localStorage.getItem(this.CATEGORY)
+          this.winRef.localStorage.getItem(category)
         );
       }
     });
