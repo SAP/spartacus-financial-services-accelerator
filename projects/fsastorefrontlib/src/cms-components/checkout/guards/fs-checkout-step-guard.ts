@@ -5,7 +5,7 @@ import {
   RoutingConfigService,
   CartService,
 } from '@spartacus/core';
-import { Observable, of, Subject, Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { FSCheckoutStep } from '../../../lib/checkout/assets/components/checkout-progress/fs-checkout-step.component';
 import { FSCheckoutConfigService } from '../../../lib/checkout/assets/services';
 import { FSProduct } from '../../../lib/occ-models';
@@ -21,7 +21,6 @@ export class FSCheckoutStepGuard implements CanActivate, OnDestroy {
     protected fsCheckoutConfigService: FSCheckoutConfigService,
     protected cartService: CartService
   ) {}
-  private unsubscribe$ = new Subject<void>();
   currentCategory: string;
   private subscription: Subscription;
 
