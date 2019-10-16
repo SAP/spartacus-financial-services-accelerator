@@ -77,10 +77,6 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
             ) {
               const fsProduct: FSProduct =
                 cart.deliveryOrderGroups[0].entries[0].product;
-              console.log(
-                'deliveryORder Groups::',
-                fsProduct.defaultCategory.code
-              );
               if (fsProduct && fsProduct.defaultCategory) {
                 this.categoryService.setActiveCategory(
                   fsProduct.defaultCategory.code
