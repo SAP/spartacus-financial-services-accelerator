@@ -7,5 +7,6 @@
     "CLIENT_ID": "financial_trusted",
     "CLIENT_SECRET": "secret",
     "API_URL": "https://10.27.241.116:9012"
-  }
+  },
+  "pluginsFile": false
 }
