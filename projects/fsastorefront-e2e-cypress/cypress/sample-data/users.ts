@@ -21,3 +21,8 @@ export function generateMail(name: string) {
   const timestamp = Date.now();
   return `user_${name}_${timestamp}@fsatest.com`;
 }
+
+export const donnaMooreUser = {
+  email: 'donna@moore.com',
+  password: '123456',
+};
