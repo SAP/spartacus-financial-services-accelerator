@@ -22,7 +22,7 @@ export function generateMail(name: string) {
   return `user_${name}_${timestamp}@fsatest.com`;
 }
 
-export const donaMooreUser = {
-  name: 'donna@moore.com',
+export const donnaMooreUser = {
+  email: 'donna@moore.com',
   password: '123456',
 };

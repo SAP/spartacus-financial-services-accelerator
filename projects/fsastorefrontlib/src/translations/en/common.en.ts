@@ -59,7 +59,7 @@ export const fscommon = {
     yearsPerformanse: 'Years Performance',
     riskAndReturningRate: 'Risk & Returning Rating',
     chooseCover: 'Choose a Cover',
-    whatsIncluded: 'What\'s included', // prettier-ignore
+    whatsIncluded: 'What\'s Included', // prettier-ignore
     addedByYou: 'Added by you',
     investementDetails: 'Investments Details',
     personalDetails: 'Personal Details',

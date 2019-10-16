@@ -21,7 +21,7 @@ import {
   cardShouldContain,
   checkNumberOfCards,
 } from '../../../helpers/my-account/cards';
-import { donaMooreUser } from '../../../sample-data/users';
+import { donnaMooreUser } from '../../../sample-data/users';
 
 context('Register', () => {
   before(() => {
@@ -31,7 +31,7 @@ context('Register', () => {
 
   it('should check my accout pages', () => {
     cy.visit('/login');
-    registerHelpers.login(donaMooreUser.name, donaMooreUser.password);
+    registerHelpers.login(donnaMooreUser.email, donnaMooreUser.password);
     cy.wait(2000);
     accessApplicationsPage();
     checkApplicationTitle();

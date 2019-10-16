@@ -69,7 +69,7 @@ export class FSRegisterComponent extends RegisterComponent {
   );
 
   submit(): void {
-    this.emailToLowerCase();
+    // this.emailToLowerCase();
     const {
       firstName,
       lastName,
