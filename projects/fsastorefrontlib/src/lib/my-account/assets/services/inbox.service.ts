@@ -2,15 +2,10 @@ import { Injectable } from '@angular/core';
 import { AuthService } from '@spartacus/core';
 import { BehaviorSubject } from 'rxjs';
 import { Message, InboxDataService } from '../services/inbox-data.service';
-import { Store } from '@ngrx/store';
-import * as fromAction from '../store/actions';
-import * as fromReducer from '../store/reducers';
-import * as fromSelector from '../store/selectors';
 
 @Injectable()
 export class InboxService {
   constructor(
-    private store: Store<fromReducer.UserState>,
     private inboxData: InboxDataService,
     protected auth: AuthService
   ) {
@@ -61,7 +56,7 @@ export class InboxService {
   }
   getMessagesAction() {
     let readState = true;
-    this.messagesCollection.forEach(function (message) {
+    this.messagesCollection.forEach(message => {
       if (message.readDate) {
         readState = false;
       }

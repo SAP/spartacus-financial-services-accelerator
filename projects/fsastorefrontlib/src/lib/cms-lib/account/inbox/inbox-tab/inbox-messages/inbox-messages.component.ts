@@ -1,12 +1,22 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  Input,
+  OnDestroy,
+} from '@angular/core';
 import {
   CmsComponentMapping,
   StandardCmsComponentConfig,
+  AuthService,
 } from '@spartacus/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { OccInboxService } from '../../../../../occ/inbox/inbox.service';
-import { FSSearchConfig, InboxDataService } from '../../../../../my-account/assets/services/inbox-data.service';
-import { InboxService } from 'projects/fsastorefrontlib/src/lib/my-account/assets/services/inbox.service';
+import {
+  FSSearchConfig,
+  InboxDataService,
+} from '../../../../../my-account/assets/services/inbox-data.service';
+import { InboxService } from '../../../../../my-account/assets/services/inbox.service';
 
 export interface Mapping extends StandardCmsComponentConfig {
   CMSInboxTabComponent?: CmsComponentMapping;
@@ -17,25 +27,51 @@ export interface Mapping extends StandardCmsComponentConfig {
   templateUrl: './inbox-messages.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class InboxMessagesComponent implements OnInit {
+export class InboxMessagesComponent implements OnInit, OnDestroy {
   constructor(
     private occInboxService: OccInboxService,
-    private inboxDataService: InboxDataService,
-    private inboxService: InboxService
-  ) { }
+    private inboxService: InboxService,
+    private inboxData: InboxDataService
+  ) {}
+
+  private subscription: Subscription;
   changeCheckboxes: Observable<boolean>;
-  messagesObject$;
+  messagesObject$: Observable<any>;
   selectedIndex: number;
   searchConfig: FSSearchConfig = {};
+  messageGroup: string;
+  @Input() initialGroup: string;
 
   ngOnInit() {
+    this.getCurrentMessageGroup();
+  }
+
+  getCurrentMessageGroup() {
+    this.subscription = this.inboxService.activeMessageGroup.subscribe(
+      group => {
+        this.messageGroup = group ? group : this.initialGroup;
+        this.getMessages();
+      }
+    );
+  }
+
+  getMessages() {
     this.messagesObject$ = this.occInboxService.getSiteMessagesForUserAndGroup(
-      'current', 'autoInsuranceMessageGroup', this.searchConfig);
+      this.inboxData.userId,
+      this.messageGroup,
+      this.searchConfig
+    );
   }
 
   toggleActiveAccordion(index: number) {
     this.selectedIndex === index
       ? (this.selectedIndex = -1)
       : (this.selectedIndex = index);
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
