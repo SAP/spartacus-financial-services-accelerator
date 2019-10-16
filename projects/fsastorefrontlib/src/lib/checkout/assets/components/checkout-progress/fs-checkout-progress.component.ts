@@ -1,10 +1,15 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import {
   RoutingConfigService,
   RoutingService,
-  WindowRef,
+  CartService,
 } from '@spartacus/core';
 import {
   CheckoutConfig,
@@ -12,6 +17,7 @@ import {
 } from '@spartacus/storefront';
 import { FSCategoryService } from '../../services/fs-category.service';
 import { FSCheckoutStep } from './fs-checkout-step.component';
+import { FSProduct } from '../../../../occ-models';
 
 @Component({
   selector: 'fsa-checkout-progress',
@@ -19,18 +25,18 @@ import { FSCheckoutStep } from './fs-checkout-step.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FSCheckoutProgressComponent extends CheckoutProgressComponent
-  implements OnInit {
+  implements OnInit, OnDestroy {
   constructor(
     protected config: CheckoutConfig,
     protected routingService: RoutingService,
     protected routingConfigService: RoutingConfigService,
     protected activatedRoute: ActivatedRoute,
     protected categoryService: FSCategoryService,
-    protected winRef: WindowRef
+    protected cartService: CartService
   ) {
     super(config, routingService, routingConfigService);
   }
-
+  private subscription = new Subscription();
   activeCategory$: Observable<string>;
 
   ngOnInit() {
@@ -56,33 +62,56 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
     this.activatedRoute.params.subscribe(params => {
       const categoryCode = 'categoryCode';
       const formCode = 'formCode';
-      const category = 'category';
-
       if (params[categoryCode]) {
         this.categoryService.setActiveCategory(params[categoryCode]);
-        this.winRef.localStorage.setItem(category, params[categoryCode]);
       } else if (params[formCode]) {
         this.categoryService.setActiveCategory(params[formCode]);
-        this.winRef.localStorage.setItem(category, params[formCode]);
       } else {
-        this.categoryService.setActiveCategory(
-          this.winRef.localStorage.getItem(category)
+        this.subscription.add(
+          this.cartService.getActive().subscribe(cart => {
+            if (
+              cart.deliveryOrderGroups &&
+              cart.deliveryOrderGroups.length > 0 &&
+              cart.deliveryOrderGroups[0].entries &&
+              cart.deliveryOrderGroups[0].entries.length > 0
+            ) {
+              const fsProduct: FSProduct =
+                cart.deliveryOrderGroups[0].entries[0].product;
+              console.log(
+                'deliveryORder Groups::',
+                fsProduct.defaultCategory.code
+              );
+              if (fsProduct && fsProduct.defaultCategory) {
+                this.categoryService.setActiveCategory(
+                  fsProduct.defaultCategory.code
+                );
+              }
+            }
+          })
         );
       }
     });
   }
 
   filterSteps() {
-    this.activeCategory$.subscribe(activeCategory => {
-      this.steps = this.steps.filter(step => {
-        return (
-          !(<FSCheckoutStep>step).restrictedCategories ||
-          (<FSCheckoutStep>step).restrictedCategories.indexOf(
-            activeCategory
-          ) === -1
-        );
-      });
-      this.setActiveStepIndex();
-    });
+    this.subscription.add(
+      this.activeCategory$.subscribe(activeCategory => {
+        this.steps = this.steps.filter(step => {
+          return (
+            !(<FSCheckoutStep>step).restrictedCategories ||
+            (<FSCheckoutStep>step).restrictedCategories.indexOf(
+              activeCategory
+            ) === -1
+          );
+        });
+        this.setActiveStepIndex();
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
