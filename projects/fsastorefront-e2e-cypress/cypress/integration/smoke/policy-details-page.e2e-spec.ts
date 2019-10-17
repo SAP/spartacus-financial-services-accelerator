@@ -7,13 +7,15 @@ export const ACCORDION_ITEM = 'fsa-accordion-item';
 
 context('Policy Details Page', () => {
   before(() => {
+    register.login(donnaMooreUser.email, donnaMooreUser.password);
+    cy.wait(1000);
     cy.visit(
       POLICIES_PAGE +
         sampleTripPolicyData.policyNumber +
         '/' +
         sampleTripPolicyData.contractId
     );
-    register.login(donnaMooreUser.email, donnaMooreUser.password);
+
   });
 
   it('Should render policy details ', () => {
