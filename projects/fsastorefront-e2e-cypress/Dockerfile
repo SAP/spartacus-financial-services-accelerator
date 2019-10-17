@@ -11,17 +11,12 @@ RUN npm install -g "cypress@${CYPRESS_VERSION}"
 RUN npm install -g typescript
 RUN npm link typescript
 RUN npm install -D ts-loader
+RUN npm install --save-dev webpack
 RUN npm link webpack
 RUN cypress verify
 
 # Cypress cache and installed version
 RUN cypress cache path
 RUN cypress cache list
-
-RUN echo  " node version:    $(node -v) \n" \
-  "npm version:     $(npm -v) \n" \
-  "yarn version:    $(yarn -v) \n" \
-  "debian version:  $(cat /etc/debian_version) \n" \
-  "user:            $(whoami) \n"
 
 ENTRYPOINT ["cypress", "run"]
