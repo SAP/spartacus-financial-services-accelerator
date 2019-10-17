@@ -1,7 +1,5 @@
 import * as register from '../../helpers/register';
-import {
-  donnaMooreUser,
-} from '../../sample-data/users';
+import { donnaMooreUser } from '../../sample-data/users';
 
 context('PremiumCalendar', () => {
   before(() => {
@@ -9,7 +7,7 @@ context('PremiumCalendar', () => {
     cy.visit('/login');
     register.login(donnaMooreUser.email, donnaMooreUser.password);
     cy.wait(1500);
-    cy.visit('/my-account/premium-calendar')
+    cy.visit('/my-account/premium-calendar');
   });
 
   it('should have premium calendar component', () => {
@@ -19,10 +17,10 @@ context('PremiumCalendar', () => {
   it('should have policy table', () => {
     cy.get('div.gradient-heading.row').within(() => {
       cy.get('h5').should('have.length', 5);
-    });;
+    });
   });
 
- it('should have policy entries', () => {
-    cy.get('div.premium-data-row.row').should('have.length', 1)
-  }); 
+  it('should have policy entries', () => {
+    cy.get('div.premium-data-row.row').should('have.length', 1);
+  });
 });
