@@ -12,6 +12,7 @@ RUN npm link typescript
 RUN npm install -D ts-loader
 RUN npm install --save-dev webpack
 RUN npm install --save-dev @cypress/webpack-preprocessor
+RUN npm install --save-dev @testing-library/cypress
 RUN npm link webpack
 RUN cypress verify
 
