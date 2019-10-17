@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { AuthService } from '@spartacus/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
+import { AuthService, CmsService } from '@spartacus/core';
 import { BehaviorSubject } from 'rxjs';
 import { Message, InboxDataService } from '../services/inbox-data.service';
 
@@ -7,7 +7,8 @@ import { Message, InboxDataService } from '../services/inbox-data.service';
 export class InboxService {
   constructor(
     private inboxData: InboxDataService,
-    protected auth: AuthService
+    protected auth: AuthService,
+    protected cmsService: CmsService
   ) {
     this.initInbox();
   }
@@ -25,6 +26,8 @@ export class InboxService {
   messagesCollection: Message[] = [];
   protected callback: Function;
 
+  // @Output() clicked = new EventEmitter<boolean>();
+
   initInbox() {
     this.auth.getUserToken().subscribe(userData => {
       if (this.inboxData.userId !== userData.userId) {
@@ -32,6 +35,10 @@ export class InboxService {
       }
     });
   }
+
+  // clickedTab(isClicked: boolean) {
+  //   this.clicked.emit(isClicked);
+  // }
 
   setActiveGroupTitle(title: string) {
     this.activeGroupTitleSource.next(title);

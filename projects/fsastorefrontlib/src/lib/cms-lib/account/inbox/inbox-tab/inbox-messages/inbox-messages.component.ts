@@ -4,11 +4,11 @@ import {
   OnInit,
   Input,
   OnDestroy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import {
   CmsComponentMapping,
   StandardCmsComponentConfig,
-  AuthService,
 } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { OccInboxService } from '../../../../../occ/inbox/inbox.service';
@@ -31,7 +31,8 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   constructor(
     private occInboxService: OccInboxService,
     private inboxService: InboxService,
-    private inboxData: InboxDataService
+    private inboxData: InboxDataService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   private subscription: Subscription;
@@ -40,6 +41,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   selectedIndex: number;
   searchConfig: FSSearchConfig = {};
   messageGroup: string;
+
   @Input() initialGroup: string;
 
   ngOnInit() {
@@ -51,10 +53,10 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
       group => {
         this.messageGroup = group ? group : this.initialGroup;
         this.getMessages();
+        this.cdr.detectChanges();
       }
     );
   }
-
   getMessages() {
     this.messagesObject$ = this.occInboxService.getSiteMessagesForUserAndGroup(
       this.inboxData.userId,
@@ -62,7 +64,6 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
       this.searchConfig
     );
   }
-
   toggleActiveAccordion(index: number) {
     this.selectedIndex === index
       ? (this.selectedIndex = -1)
