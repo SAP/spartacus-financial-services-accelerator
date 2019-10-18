@@ -15,7 +15,6 @@ context('Policy Details Page', () => {
         '/' +
         sampleTripPolicyData.contractId
     );
-
   });
 
   it('Should render policy details ', () => {
