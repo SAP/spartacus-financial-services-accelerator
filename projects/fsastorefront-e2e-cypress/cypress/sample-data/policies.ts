@@ -3,7 +3,7 @@ export const sampleTripPolicyData = {
   contractId: '00000001',
   policyDetails: [
     {
-      title: 'Policy Summary',
+      title: ' Policy Summary ',
       items: [
         {
           label: ' ContractId ',
@@ -28,7 +28,7 @@ export const sampleTripPolicyData = {
       ],
     },
     {
-      title: 'Who or What Is Insured',
+      title: ' Who or What Is Insured ',
       items: [
         {
           label: ' traveller ',
@@ -61,7 +61,7 @@ export const sampleTripPolicyData = {
       ],
     },
     {
-      title: "What's Included",
+      title: " What's Included ",
       items: [
         {
           label: ' Abandonment ',
@@ -142,7 +142,7 @@ export const sampleTripPolicyData = {
       ],
     },
     {
-      title: 'Optional Extras',
+      title: ' Optional Extras ',
       items: [
         {
           label: ' Winter Sports Cover ',
@@ -171,7 +171,7 @@ export const sampleTripPolicyData = {
       ],
     },
     {
-      title: 'What Does It Cost Me?',
+      title: ' What Does It Cost Me? ',
       items: [
         {
           label: ' Premium ',
@@ -188,7 +188,7 @@ export const sampleTripPolicyData = {
       ],
     },
     {
-      title: 'Documents',
+      title: ' Documents ',
       items: [
         {
           label: ' Policy ',

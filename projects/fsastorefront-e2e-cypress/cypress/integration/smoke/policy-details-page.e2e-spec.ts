@@ -28,17 +28,15 @@ context('Policy Details Page', () => {
     );
 
     cy.get(ACCORDION_ITEM)
-      .eq(0)
-      .should('have.attr', 'ng-reflect-opened', 'true');
+      .eq(0).within(()=>{
+        cy.get('.active').should('exist');
+      });
 
     cy.get(ACCORDION_ITEM).each((item, index, list) => {
       cy.get(ACCORDION_ITEM)
-        .eq(index)
-        .should(
-          'have.attr',
-          'ng-reflect-title',
-          sampleTripPolicyData.policyDetails[index].title
-        );
+        .eq(index).within(()=>{
+          cy.get('.accordion-heading').should('have.text', sampleTripPolicyData.policyDetails[index].title);
+        });
     });
   });
 
