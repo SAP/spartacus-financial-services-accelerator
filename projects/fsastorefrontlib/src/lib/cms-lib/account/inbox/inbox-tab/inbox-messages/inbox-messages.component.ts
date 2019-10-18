@@ -33,7 +33,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     private inboxService: InboxService,
     private inboxData: InboxDataService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   private subscription: Subscription;
   changeCheckboxes: Observable<boolean>;
@@ -53,7 +53,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
       group => {
         this.messageGroup = group ? group : this.initialGroup;
         this.getMessages();
-        this.cdr.detectChanges();
+        this.cdr.markForCheck();
       }
     );
   }
@@ -63,6 +63,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
       this.messageGroup,
       this.searchConfig
     );
+    this.selectedIndex = -1;
   }
   toggleActiveAccordion(index: number) {
     this.selectedIndex === index
