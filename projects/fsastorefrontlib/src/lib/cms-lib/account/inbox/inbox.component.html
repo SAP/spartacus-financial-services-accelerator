@@ -60,7 +60,7 @@
       </label>
     </div>
     <div class="col-8 text-center" (click)="shouldShow = !shouldShow">
-      {{ activeGroupTitle }}
+      {{ mobileGroupTitle }}
     </div>
     <div class="col-2">
       <span
@@ -73,13 +73,14 @@
     [ngClass]="{ opened: shouldShow, '': !shouldShow }"
   >
     <ul>
-      <fsa-inbox-tab
+      <li
+        class="tab"
         *ngFor="let tab of tabs; let i = index"
-        (click)="activeTabIndex = i; shouldShow = false"
-        [currentTab]="i === activeTabIndex"
-        [tabId]="tab"
+        (click)="activeTabIndex = i"
       >
-      </fsa-inbox-tab>
+        <fsa-inbox-tab [currentTab]="i === activeTabIndex" [tabId]="tab">
+        </fsa-inbox-tab>
+      </li>
     </ul>
   </div>
 </div>

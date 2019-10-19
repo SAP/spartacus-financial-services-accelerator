@@ -26,15 +26,13 @@ export class InboxTabComponent implements OnInit {
   constructor(
     protected cmsService: CmsService,
     private inboxService: InboxService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.component$ = this.cmsService.getComponentData(this.tabId);
   }
   onTabClicked(messageGroup, title) {
-    // this.inboxService.checkAllMessagesSource.next(false);
     this.inboxService.setActiveGroupTitle(title);
     this.inboxService.setActiveMessageGroup(messageGroup);
-    // this.inboxService.resetMessagesToSend();
   }
 }

@@ -6,10 +6,10 @@ import {
   OnDestroy,
   ChangeDetectorRef,
 } from '@angular/core';
-import {
-  CmsComponentMapping,
-  StandardCmsComponentConfig,
-} from '@spartacus/core';
+// import {
+//   CmsComponentMapping,
+//   StandardCmsComponentConfig,
+// } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { OccInboxService } from '../../../../../occ/inbox/inbox.service';
 import {
@@ -18,9 +18,9 @@ import {
 } from '../../../../../my-account/assets/services/inbox-data.service';
 import { InboxService } from '../../../../../my-account/assets/services/inbox.service';
 
-export interface Mapping extends StandardCmsComponentConfig {
-  CMSInboxTabComponent?: CmsComponentMapping;
-}
+// export interface Mapping extends StandardCmsComponentConfig {
+//   CMSInboxTabComponent?: CmsComponentMapping;
+// }
 
 @Component({
   selector: 'fsa-messages-inbox',
@@ -36,19 +36,19 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   ) { }
 
   private subscription: Subscription;
-  changeCheckboxes: Observable<boolean>;
+  searchConfig: FSSearchConfig = {};
+  changeCheckboxe$: Observable<boolean>;
   messagesObject$: Observable<any>;
   selectedIndex: number;
-  searchConfig: FSSearchConfig = {};
   messageGroup: string;
 
   @Input() initialGroup: string;
 
   ngOnInit() {
-    this.getCurrentMessageGroup();
+    this.loadCurrentMessageGroup();
   }
 
-  getCurrentMessageGroup() {
+  loadCurrentMessageGroup() {
     this.subscription = this.inboxService.activeMessageGroup.subscribe(
       group => {
         this.messageGroup = group ? group : this.initialGroup;
@@ -72,6 +72,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.inboxService.setActiveMessageGroup(null);
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

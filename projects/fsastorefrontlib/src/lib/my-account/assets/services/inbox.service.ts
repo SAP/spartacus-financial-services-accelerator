@@ -26,7 +26,6 @@ export class InboxService {
   messagesCollection: Message[] = [];
   protected callback: Function;
 
-  // @Output() clicked = new EventEmitter<boolean>();
 
   initInbox() {
     this.auth.getUserToken().subscribe(userData => {
@@ -35,10 +34,6 @@ export class InboxService {
       }
     });
   }
-
-  // clickedTab(isClicked: boolean) {
-  //   this.clicked.emit(isClicked);
-  // }
 
   setActiveGroupTitle(title: string) {
     this.activeGroupTitleSource.next(title);
