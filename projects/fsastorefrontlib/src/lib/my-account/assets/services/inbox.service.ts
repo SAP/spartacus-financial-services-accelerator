@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService, CmsService } from '@spartacus/core';
 import { BehaviorSubject } from 'rxjs';
-import { Message, InboxDataService } from '../services/inbox-data.service';
+import { Message, InboxDataService, MessageGroupAndTitle } from '../services/inbox-data.service';
 
 @Injectable()
 export class InboxService {
@@ -13,13 +13,13 @@ export class InboxService {
     this.initInbox();
   }
 
-  activeGroupTitleSource = new BehaviorSubject<string>('');
-  activeMessageGroupSource = new BehaviorSubject<string>('');
+  messageGroupAndTitleSource = new BehaviorSubject<MessageGroupAndTitle>(null);
+  activeMessageGroupAndTitle = this.messageGroupAndTitleSource.asObservable();
+
+  // Leftovers from previous implementation. Maybe can be used in the next task
   activeSortingFilterSource = new BehaviorSubject<string>('');
   readStatusSource = new BehaviorSubject<boolean>(false);
   checkAllMessagesSource = new BehaviorSubject<boolean>(false);
-  activeGroupTitle = this.activeGroupTitleSource.asObservable();
-  activeMessageGroup = this.activeMessageGroupSource.asObservable();
   activeSortingFilter = this.activeSortingFilterSource.asObservable();
   readStatus = this.readStatusSource.asObservable();
   checkAllMessages = this.checkAllMessagesSource.asObservable();
@@ -35,15 +35,14 @@ export class InboxService {
     });
   }
 
-  setActiveGroupTitle(title: string) {
-    this.activeGroupTitleSource.next(title);
+  setTitleAndMessageGroup(messageGroup: string, title: string) {
+    this.messageGroupAndTitleSource.next({ messageGroup, title });
   }
+
+  // Leftovers from previous implementation. Maybe can be used in the next task
   resetMessagesToSend() {
     this.messagesCollection = [];
     this.readStatusSource.next(false);
-  }
-  setActiveMessageGroup(messageGroup: string) {
-    this.activeMessageGroupSource.next(messageGroup);
   }
   selectedMessages(messageObject: Message) {
     const index = this.messagesCollection

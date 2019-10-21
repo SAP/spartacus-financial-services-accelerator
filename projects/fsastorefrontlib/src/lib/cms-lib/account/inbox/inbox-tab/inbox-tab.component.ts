@@ -19,9 +19,6 @@ export class InboxTabComponent implements OnInit {
   }
   component$;
   active;
-  activeGroupTitle: string;
-
-  tabValue: string;
 
   constructor(
     protected cmsService: CmsService,
@@ -32,7 +29,6 @@ export class InboxTabComponent implements OnInit {
     this.component$ = this.cmsService.getComponentData(this.tabId);
   }
   onTabClicked(messageGroup, title) {
-    this.inboxService.setActiveGroupTitle(title);
-    this.inboxService.setActiveMessageGroup(messageGroup);
+    this.inboxService.setTitleAndMessageGroup(messageGroup, title);
   }
 }

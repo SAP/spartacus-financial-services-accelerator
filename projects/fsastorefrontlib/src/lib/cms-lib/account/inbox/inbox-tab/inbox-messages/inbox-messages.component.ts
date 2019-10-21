@@ -6,10 +6,6 @@ import {
   OnDestroy,
   ChangeDetectorRef,
 } from '@angular/core';
-// import {
-//   CmsComponentMapping,
-//   StandardCmsComponentConfig,
-// } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { OccInboxService } from '../../../../../occ/inbox/inbox.service';
 import {
@@ -17,10 +13,6 @@ import {
   InboxDataService,
 } from '../../../../../my-account/assets/services/inbox-data.service';
 import { InboxService } from '../../../../../my-account/assets/services/inbox.service';
-
-// export interface Mapping extends StandardCmsComponentConfig {
-//   CMSInboxTabComponent?: CmsComponentMapping;
-// }
 
 @Component({
   selector: 'fsa-messages-inbox',
@@ -49,9 +41,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   }
 
   loadCurrentMessageGroup() {
-    this.subscription = this.inboxService.activeMessageGroup.subscribe(
+    this.subscription = this.inboxService.activeMessageGroupAndTitle.subscribe(
       group => {
-        this.messageGroup = group ? group : this.initialGroup;
+        this.messageGroup = group && group.messageGroup ? group.messageGroup : this.initialGroup;
         this.getMessages();
         this.cdr.markForCheck();
       }
@@ -72,7 +64,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.inboxService.setActiveMessageGroup(null);
+    this.inboxService.setTitleAndMessageGroup(null, null);
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

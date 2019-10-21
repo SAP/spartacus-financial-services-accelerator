@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { SearchConfig } from '@spartacus/core';
 
+export interface MessageGroupAndTitle {
+  messageGroup: string;
+  title: string;
+}
 export interface Message {
   messageCode?: string;
   readDate?: string;
@@ -22,7 +26,7 @@ export class InboxDataService {
   private _searchConfig?: SearchConfig;
   private _messagesCollection?: MessagesCollection;
 
-  constructor() {}
+  constructor() { }
 
   set userId(val) {
     this._userId = val;

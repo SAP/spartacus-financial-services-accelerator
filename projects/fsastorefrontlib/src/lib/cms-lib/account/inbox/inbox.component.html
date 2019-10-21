@@ -84,8 +84,6 @@
     </ul>
   </div>
 </div>
-<ng-container *ngIf="firstTab$ | async as firstTab">
-  <fsa-messages-inbox
-    [initialGroup]="firstTab?.messageGroup"
-  ></fsa-messages-inbox>
+<ng-container *ngIf="setInitialGroup">
+  <fsa-messages-inbox [initialGroup]="setInitialGroup"></fsa-messages-inbox>
 </ng-container>

@@ -5,20 +5,13 @@ import {
   OnDestroy,
 } from '@angular/core';
 import {
-  // CmsComponentMapping,
-  // StandardCmsComponentConfig,
-  CmsService,
+  CmsService
 } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { mergeMap, map } from 'rxjs/operators';
 import { CmsInboxComponent } from './../../../occ-models/cms-component.models';
 import { InboxService } from '../../../my-account/assets/services/inbox.service';
-import { CmsInboxTabComponent } from 'fsastorefrontlib/lib/occ-models';
-
-// export interface Mapping extends StandardCmsComponentConfig {
-//   CMSInboxTabComponent?: CmsComponentMapping;
-// }
 
 @Component({
   selector: 'fsa-inbox',
@@ -34,29 +27,33 @@ export class InboxComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
   component$: Observable<CmsInboxComponent>;
-  firstTab$: Observable<CmsInboxTabComponent>;
+  initialTab$: Observable<any>;
   tabs;
-  mainCheckboxChecked = false;
   mobileGroupTitle: string;
   activeMessageGroup: string;
   activeTabIndex = 0;
+  setInitialGroup: string;
+  shouldShow = false;
+
+  // To be used in the next Inbox task
+  mainCheckboxChecked = false;
   subjectSortOrder = 'desc';
   contentSortOrder = 'desc';
   sentSortOrder = 'desc';
   readState;
-  shouldShow = false;
 
   ngOnInit() {
     this.subscription.add(this.componentData.data$.subscribe(
       data => (this.tabs = data.tabComponents.split(' '))
     ));
-    this.firstTab$ = this.cmsService.getComponentData(this.tabs[0]); // taking the first tab as an active one on component load
+    this.initialTab$ = this.cmsService.getComponentData(this.tabs[0]); // taking the first tab as initial/active on component load
 
     this.subscription.add(
-      this.inboxService.activeGroupTitle.pipe(
-        mergeMap(currentTitle => this.firstTab$.pipe(
+      this.inboxService.activeMessageGroupAndTitle.pipe(
+        mergeMap(currentTitle => this.initialTab$.pipe(
           map(initial => {
-            this.mobileGroupTitle = currentTitle ? currentTitle : initial.title;
+            this.mobileGroupTitle = currentTitle && currentTitle.title ? currentTitle.title : initial.title;
+            this.setInitialGroup = initial.messageGroup;
           })
         ))
       ).subscribe()
