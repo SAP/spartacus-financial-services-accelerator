@@ -11,8 +11,8 @@ import {
 } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
-import { map, switchMap, tap, mergeMap } from 'rxjs/operators';
-import { CmsInboxComponent, CmsComponent } from './../../../occ-models/cms-component.models';
+import { mergeMap, map } from 'rxjs/operators';
+import { CmsInboxComponent } from './../../../occ-models/cms-component.models';
 import { InboxService } from '../../../my-account/assets/services/inbox.service';
 import { CmsInboxTabComponent } from 'fsastorefrontlib/lib/occ-models';
 

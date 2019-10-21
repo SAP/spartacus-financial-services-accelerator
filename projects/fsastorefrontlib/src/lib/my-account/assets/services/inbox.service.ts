@@ -1,4 +1,4 @@
-import { Injectable, Output, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AuthService, CmsService } from '@spartacus/core';
 import { BehaviorSubject } from 'rxjs';
 import { Message, InboxDataService } from '../services/inbox-data.service';
