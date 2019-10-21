@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AuthService, CmsService } from '@spartacus/core';
 import { BehaviorSubject } from 'rxjs';
-import { Message, InboxDataService, MessageGroupAndTitle } from '../services/inbox-data.service';
+import {
+  Message,
+  InboxDataService,
+  MessageGroupAndTitle,
+} from '../services/inbox-data.service';
 
 @Injectable()
 export class InboxService {
@@ -25,7 +29,6 @@ export class InboxService {
   checkAllMessages = this.checkAllMessagesSource.asObservable();
   messagesCollection: Message[] = [];
   protected callback: Function;
-
 
   initInbox() {
     this.auth.getUserToken().subscribe(userData => {

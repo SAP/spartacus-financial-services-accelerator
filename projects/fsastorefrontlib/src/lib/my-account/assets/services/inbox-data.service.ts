@@ -26,7 +26,7 @@ export class InboxDataService {
   private _searchConfig?: SearchConfig;
   private _messagesCollection?: MessagesCollection;
 
-  constructor() { }
+  constructor() {}
 
   set userId(val) {
     this._userId = val;

@@ -25,7 +25,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     private inboxService: InboxService,
     private inboxData: InboxDataService,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {}
 
   private subscription: Subscription;
   searchConfig: FSSearchConfig = {};
@@ -43,7 +43,8 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   loadCurrentMessageGroup() {
     this.subscription = this.inboxService.activeMessageGroupAndTitle.subscribe(
       group => {
-        this.messageGroup = group && group.messageGroup ? group.messageGroup : this.initialGroup;
+        this.messageGroup =
+          group && group.messageGroup ? group.messageGroup : this.initialGroup;
         this.getMessages();
         this.cdr.markForCheck();
       }

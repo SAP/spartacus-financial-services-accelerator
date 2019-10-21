@@ -23,7 +23,7 @@ export class InboxTabComponent implements OnInit {
   constructor(
     protected cmsService: CmsService,
     private inboxService: InboxService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.component$ = this.cmsService.getComponentData(this.tabId);

@@ -4,9 +4,7 @@ import {
   OnInit,
   OnDestroy,
 } from '@angular/core';
-import {
-  CmsService
-} from '@spartacus/core';
+import { CmsService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { mergeMap, map } from 'rxjs/operators';
@@ -23,7 +21,7 @@ export class InboxComponent implements OnInit, OnDestroy {
     protected componentData: CmsComponentData<CmsInboxComponent>,
     protected cmsService: CmsService,
     protected inboxService: InboxService
-  ) { }
+  ) {}
 
   subscription = new Subscription();
   component$: Observable<CmsInboxComponent>;
@@ -43,20 +41,29 @@ export class InboxComponent implements OnInit, OnDestroy {
   readState;
 
   ngOnInit() {
-    this.subscription.add(this.componentData.data$.subscribe(
-      data => (this.tabs = data.tabComponents.split(' '))
-    ));
+    this.subscription.add(
+      this.componentData.data$.subscribe(
+        data => (this.tabs = data.tabComponents.split(' '))
+      )
+    );
     this.initialTab$ = this.cmsService.getComponentData(this.tabs[0]); // taking the first tab as initial/active on component load
 
     this.subscription.add(
-      this.inboxService.activeMessageGroupAndTitle.pipe(
-        mergeMap(currentTitle => this.initialTab$.pipe(
-          map(initial => {
-            this.mobileGroupTitle = currentTitle && currentTitle.title ? currentTitle.title : initial.title;
-            this.setInitialGroup = initial.messageGroup;
-          })
-        ))
-      ).subscribe()
+      this.inboxService.activeMessageGroupAndTitle
+        .pipe(
+          mergeMap(currentTitle =>
+            this.initialTab$.pipe(
+              map(initial => {
+                this.mobileGroupTitle =
+                  currentTitle && currentTitle.title
+                    ? currentTitle.title
+                    : initial.title;
+                this.setInitialGroup = initial.messageGroup;
+              })
+            )
+          )
+        )
+        .subscribe()
     );
   }
 
