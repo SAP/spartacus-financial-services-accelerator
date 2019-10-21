@@ -76,7 +76,7 @@
       <li
         class="tab"
         *ngFor="let tab of tabs; let i = index"
-        (click)="activeTabIndex = i"
+        (click)="activeTabIndex = i; shouldShow = false"
       >
         <fsa-inbox-tab [currentTab]="i === activeTabIndex" [tabId]="tab">
         </fsa-inbox-tab>
