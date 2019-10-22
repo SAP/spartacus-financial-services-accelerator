@@ -8,7 +8,10 @@ import { CmsService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { mergeMap, map } from 'rxjs/operators';
-import { CmsInboxComponent } from './../../../occ-models/cms-component.models';
+import {
+  CmsInboxComponent,
+  CmsInboxTabComponent,
+} from './../../../occ-models/cms-component.models';
 import { InboxService } from '../../../my-account/assets/services/inbox.service';
 
 @Component({
@@ -25,7 +28,7 @@ export class InboxComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
   component$: Observable<CmsInboxComponent>;
-  initialTab$: Observable<any>;
+  initialTab$: Observable<CmsInboxTabComponent>;
   tabs;
   mobileGroupTitle: string;
   activeMessageGroup: string;
