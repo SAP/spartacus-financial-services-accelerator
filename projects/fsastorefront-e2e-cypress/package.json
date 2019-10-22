@@ -11,8 +11,7 @@
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^4.0.3",
-    "@testing-library/cypress": "^4.2.0",
-    "cypress": "^3.1.5",
-    "cypress-testing-library": "^2.3.5"
+    "@testing-library/cypress": "^5.0.0",
+    "cypress": "^3.1.5"
   }
 }
