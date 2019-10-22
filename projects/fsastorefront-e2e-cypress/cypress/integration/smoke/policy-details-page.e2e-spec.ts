@@ -7,13 +7,14 @@ export const ACCORDION_ITEM = 'fsa-accordion-item';
 
 context('Policy Details Page', () => {
   before(() => {
+    register.login(donnaMooreUser.email, donnaMooreUser.password);
+    cy.wait(1000);
     cy.visit(
       POLICIES_PAGE +
         sampleTripPolicyData.policyNumber +
         '/' +
         sampleTripPolicyData.contractId
     );
-    register.login(donnaMooreUser.email, donnaMooreUser.password);
   });
 
   it('Should render policy details ', () => {
@@ -28,16 +29,19 @@ context('Policy Details Page', () => {
 
     cy.get(ACCORDION_ITEM)
       .eq(0)
-      .should('have.attr', 'ng-reflect-opened', 'true');
+      .within(() => {
+        cy.get('.active').should('exist');
+      });
 
     cy.get(ACCORDION_ITEM).each((item, index, list) => {
       cy.get(ACCORDION_ITEM)
         .eq(index)
-        .should(
-          'have.attr',
-          'ng-reflect-title',
-          sampleTripPolicyData.policyDetails[index].title
-        );
+        .within(() => {
+          cy.get('.accordion-heading').should(
+            'have.text',
+            sampleTripPolicyData.policyDetails[index].title
+          );
+        });
     });
   });
 

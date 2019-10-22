@@ -17,35 +17,28 @@ import {
   checkPaymentMethod,
   shouldHaveCardNumber,
 } from '../../../helpers/my-account/payment-details';
-import {
-  cardShouldContain,
-  checkNumberOfCards,
-} from '../../../helpers/my-account/cards';
+import { cardShouldContain } from '../../../helpers/my-account/cards';
 import { donnaMooreUser } from '../../../sample-data/users';
 
-context('Register', () => {
+context('My Account', () => {
   before(() => {
     cy.window().then(win => win.sessionStorage.clear());
     cy.visit('/');
   });
 
-  it('should check my accout pages', () => {
-    cy.visit('/login');
+  it('should check my account pages', () => {
     registerHelpers.login(donnaMooreUser.email, donnaMooreUser.password);
     cy.wait(2000);
     accessApplicationsPage();
     checkApplicationTitle();
-    checkNumberOfCards(2);
     cardShouldContain('Event Insurance');
     cardShouldContain('Travel Insurance');
     accessPoliciesPage();
     checkPoliciesTitle();
-    checkNumberOfCards(2);
     cardShouldContain('Auto Insurance');
     cardShouldContain('Travel Insurance');
     accessClaimsPage();
     checkClaimsTitle();
-    checkNumberOfCards(2);
     cardShouldContain('CL00000001');
     cardShouldContain('CL00000000');
     accessPaymentDetailsPage();

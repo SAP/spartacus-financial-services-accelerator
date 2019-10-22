@@ -9,9 +9,9 @@ export interface RegisterUser {
 }
 
 export function registerUser(user: RegisterUser) {
-  cy.getByText(/Sign in \/ Register/i).click();
+  cy.findByText(/Sign in \/ Register/i).click();
   cy.get('cx-page-layout')
-    .getByText('Register')
+    .findByText('Register')
     .click({ force: true });
   cy.get('fsa-register form').within(() => {
     cy.get('[formcontrolname="titleCode"]').select(user.titleCode);
@@ -31,11 +31,12 @@ export function registerUser(user: RegisterUser) {
 
 export function validatePhoneNumber(expectedValue: string) {
   cy.get('[aria-label="My Account"]').invoke('mouseover');
-  cy.getByText('Personal Details').click({ force: true });
+  cy.findByText('Personal Details').click({ force: true });
   cy.get('[formcontrolname="phoneNumber"]').should('have.value', expectedValue);
 }
 
 export function login(username: string, password: string) {
+  cy.visit('/login');
   cy.get('cx-login-form form').should('be.visible');
   cy.get('cx-login-form form').within(() => {
     cy.get('[formcontrolname="userId"]')
@@ -49,5 +50,5 @@ export function login(username: string, password: string) {
 }
 
 export function logout() {
-  cy.getByText('Logout').click();
+  cy.findByText('Logout').click();
 }
