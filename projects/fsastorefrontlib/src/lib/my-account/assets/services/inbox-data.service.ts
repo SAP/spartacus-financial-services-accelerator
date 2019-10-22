@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SearchConfig } from '@spartacus/core';
 
-export interface MessageGroupAndTitle {
+export interface InboxTab {
   messageGroup: string;
   title: string;
 }

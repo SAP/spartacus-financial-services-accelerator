@@ -84,6 +84,6 @@
     </ul>
   </div>
 </div>
-<ng-container *ngIf="setInitialGroup">
-  <fsa-messages-inbox [initialGroup]="setInitialGroup"></fsa-messages-inbox>
+<ng-container *ngIf="initialGroupName">
+  <fsa-messages-inbox [initialGroup]="initialGroupName"></fsa-messages-inbox>
 </ng-container>

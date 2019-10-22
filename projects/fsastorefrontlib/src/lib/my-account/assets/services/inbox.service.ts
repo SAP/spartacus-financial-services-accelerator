@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 import {
   Message,
   InboxDataService,
-  MessageGroupAndTitle,
+  InboxTab,
 } from '../services/inbox-data.service';
 
 @Injectable()
@@ -17,7 +17,7 @@ export class InboxService {
     this.initInbox();
   }
 
-  messageGroupAndTitleSource = new BehaviorSubject<MessageGroupAndTitle>(null);
+  messageGroupAndTitleSource = new BehaviorSubject<InboxTab>(null);
   activeMessageGroupAndTitle = this.messageGroupAndTitleSource.asObservable();
 
   // Leftovers from previous implementation. Maybe can be used in the next task

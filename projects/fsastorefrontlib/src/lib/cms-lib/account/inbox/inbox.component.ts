@@ -30,7 +30,7 @@ export class InboxComponent implements OnInit, OnDestroy {
   mobileGroupTitle: string;
   activeMessageGroup: string;
   activeTabIndex = 0;
-  setInitialGroup: string;
+  initialGroupName: string;
   shouldShow = false;
 
   // To be used in the next Inbox task
@@ -58,7 +58,7 @@ export class InboxComponent implements OnInit, OnDestroy {
                   currentTitle && currentTitle.title
                     ? currentTitle.title
                     : initial.title;
-                this.setInitialGroup = initial.messageGroup;
+                this.initialGroupName = initial.messageGroup;
               })
             )
           )
