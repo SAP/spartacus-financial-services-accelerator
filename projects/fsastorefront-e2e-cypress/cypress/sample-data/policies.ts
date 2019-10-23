@@ -21,6 +21,10 @@ export const sampleTripPolicyData = {
           label: ' Payment method ',
           value: ' card ',
         },
+        {
+          label: ' Duration ',
+          value: ' 02 Jan 2019 - 02 Jan 2020 ',
+        },
       ],
     },
     {
@@ -52,7 +56,7 @@ export const sampleTripPolicyData = {
         },
         {
           label: ' tripStartDate ',
-          value: ' 02-01-2019 ',
+          value: ' 02 Jan 2019 ',
         },
       ],
     },
@@ -185,7 +189,12 @@ export const sampleTripPolicyData = {
     },
     {
       title: ' Documents ',
-      items: [],
+      items: [
+        {
+          label: ' Policy ',
+          value: ' 02 Jan 2019 - 02 Jan 2020 ',
+        },
+      ],
     },
   ],
 };

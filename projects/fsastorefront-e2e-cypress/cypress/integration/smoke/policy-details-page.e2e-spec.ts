@@ -50,22 +50,25 @@ context('Policy Details Page', () => {
       cy.get(ACCORDION_ITEM)
         .eq(index)
         .within(() => {
+          cy.get('li').should(
+            'have.length',
+            sampleTripPolicyData.policyDetails[index].items.length
+          );
+
           cy.get('li').each((listItem, listIndex, listElements) => {
             cy.get('li')
               .eq(listIndex)
               .within(() => {
-                if (sampleTripPolicyData.policyDetails.length < index) {
-                  cy.get('.item-label').should(
-                    'have.text',
-                    sampleTripPolicyData.policyDetails[index].items[listIndex]
-                      .label
-                  );
-                  cy.get('.value').should(
-                    'have.text',
-                    sampleTripPolicyData.policyDetails[index].items[listIndex]
-                      .value
-                  );
-                }
+                cy.get('.item-label').should(
+                  'have.text',
+                  sampleTripPolicyData.policyDetails[index].items[listIndex]
+                    .label
+                );
+                cy.get('.value').should(
+                  'have.text',
+                  sampleTripPolicyData.policyDetails[index].items[listIndex]
+                    .value
+                );
               });
           });
         });

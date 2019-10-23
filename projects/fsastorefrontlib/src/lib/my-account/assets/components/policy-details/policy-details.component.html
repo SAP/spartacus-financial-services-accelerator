@@ -91,7 +91,11 @@
             {{ insuredObjectItem.label }}
           </div>
           <div class="col-6 value notice">
-            {{ insuredObjectItem.value }}
+            {{
+              isDate(insuredObjectItem.value)
+                ? (insuredObjectItem.value | cxDate: 'dd MMM yyyy')
+                : insuredObjectItem.value
+            }}
           </div>
         </li>
       </ul>
