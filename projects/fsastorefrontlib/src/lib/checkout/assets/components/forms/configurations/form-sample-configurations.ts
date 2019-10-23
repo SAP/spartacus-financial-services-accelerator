@@ -706,7 +706,7 @@ export class FormSampleConfigurations {
               name: 'whereDidItHappen',
               type: 'input',
               validation: [Validators.required],
-            },      
+            },
             {
               label: 'Postcode',
               name: 'postcode',

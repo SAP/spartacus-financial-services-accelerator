@@ -24,7 +24,7 @@ const components: { [type: string]: Type<FormGenericComponent> } = {
   select: FormSelectComponent,
   title: FormTitleComponent,
   datepicker: FormDatePickerComponent,
-  radio: FormRadioComponent
+  radio: FormRadioComponent,
 };
 
 @Directive({
