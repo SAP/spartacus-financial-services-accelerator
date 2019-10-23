@@ -16,6 +16,7 @@ import { FormGenericComponent } from '../form-generic.component';
 import { FormInputComponent } from '../form-input/form-input.component';
 import { FormSelectComponent } from '../form-select/form-select.component';
 import { FormTitleComponent } from '../form-title/form-title.component';
+import { FormRadioComponent } from '../form-radio/form-radio.component';
 
 const components: { [type: string]: Type<FormGenericComponent> } = {
   button: FormButtonComponent,
@@ -23,6 +24,7 @@ const components: { [type: string]: Type<FormGenericComponent> } = {
   select: FormSelectComponent,
   title: FormTitleComponent,
   datepicker: FormDatePickerComponent,
+  radio: FormRadioComponent
 };
 
 @Directive({

@@ -662,5 +662,118 @@ export class FormSampleConfigurations {
         },
       ],
     },
+    {
+      formId: 'auto_claim_incident_info_form',
+      formGroups: [
+        {
+          groupName: 'incidentInfo',
+          fieldConfigs: [
+            {
+              label: 'What happened?',
+              name: 'whatHappened',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'When did it happen?',
+              name: 'whenHappen',
+              type: 'datepicker',
+              validation: [Validators.required],
+            },
+            {
+              label: 'What time did it happen?',
+              name: 'whatTime',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              type: 'select',
+              options: [
+                'Austira',
+                'Canada',
+                'France',
+                'Germany',
+                'Poland',
+                'Serbia',
+                'United States',
+              ],
+              label: 'Country',
+              name: 'country',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Where did it happen?',
+              name: 'whereDidItHappen',
+              type: 'input',
+              validation: [Validators.required],
+            },      
+            {
+              label: 'Postcode',
+              name: 'postcode',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Address',
+              name: 'address',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Description',
+              name: 'description',
+              type: 'input',
+              validation: [Validators.required],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      formId: 'auto_claim_incident_report_form',
+      formGroups: [
+        {
+          groupName: 'incidentReport',
+          fieldConfigs: [
+            {
+              label: 'Please describe how the accident occurred:',
+              name: 'howItHappen',
+              type: 'input',
+              validation: [Validators.required],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      formId: 'auto_claim_general_form',
+      formGroups: [
+        {
+          groupName: 'incidentReport',
+          fieldConfigs: [
+            {
+              label: 'Who is responsible for the accident?',
+              name: 'resposnible',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Were the police informed?',
+              name: 'policyInformed',
+              type: 'radio',
+              options: ['Yes', 'No'],
+              validation: [Validators.required],
+            },
+            {
+              label: 'Are there any witnesses we can contact?',
+              name: 'anyWitnesses',
+              type: 'radio',
+              options: ['Yes', 'No'],
+              validation: [Validators.required],
+            },
+          ],
+        },
+      ],
+    },
   ];
 }
