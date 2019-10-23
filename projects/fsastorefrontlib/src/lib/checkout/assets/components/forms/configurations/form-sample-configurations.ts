@@ -722,7 +722,7 @@ export class FormSampleConfigurations {
             {
               label: 'Description',
               name: 'description',
-              type: 'input',
+              type: 'textarea',
               validation: [Validators.required],
             },
           ],

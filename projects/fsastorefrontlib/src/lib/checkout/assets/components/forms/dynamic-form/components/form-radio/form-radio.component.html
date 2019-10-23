@@ -6,12 +6,14 @@
   <div class="row align-items-center">
     <label class="col-xs-12 col-md-6">{{ config.label }}</label>
     <div *ngFor="let option of config.options">
-      <input
-        type="radio"
-        value="{{ option }}"
-        [formControlName]="config.name"
-      />
-      <label>{{ option }}</label>
+      <div class="col-xs-12 col-md-6">
+        <input
+          type="radio"
+          value="{{ option }}"
+          [formControlName]="config.name"
+        />
+        <label>{{ option }}</label>
+      </div>
     </div>
   </div>
   <fsa-error-notice
