@@ -6,10 +6,6 @@ import { OccMockFormService } from '../../../../../../../occ/form/occ-mock-form.
   selector: 'fsa-form-radio',
   templateUrl: './form-radio.component.html',
 })
-export class FormRadioComponent extends FormGenericComponent implements OnInit {
-  constructor(protected formService: OccMockFormService) {
-    super();
-  }
+export class FormRadioComponent extends FormGenericComponent {
 
-  ngOnInit() {}
 }
