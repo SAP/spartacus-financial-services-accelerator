@@ -6,6 +6,4 @@ import { OccMockFormService } from '../../../../../../../occ/form/occ-mock-form.
   selector: 'fsa-form-radio',
   templateUrl: './form-radio.component.html',
 })
-export class FormRadioComponent extends FormGenericComponent {
-
-}
+export class FormRadioComponent extends FormGenericComponent {}

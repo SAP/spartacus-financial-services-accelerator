@@ -677,7 +677,7 @@ export class FormSampleConfigurations {
                 'Fire',
                 'Theft',
                 'Breakdown',
-                'Accident'
+                'Accident',
               ],
               label: 'What happened?',
               name: 'whatHappened',
@@ -687,8 +687,10 @@ export class FormSampleConfigurations {
               label: 'When did it happen?',
               name: 'whenHappen',
               type: 'datepicker',
-              validation: [Validators.required,
-              CustomFormValidators.compareToCurrentDate('shouldBeLess')],
+              validation: [
+                Validators.required,
+                CustomFormValidators.compareToCurrentDate('shouldBeLess'),
+              ],
             },
             {
               label: 'What time did it happen?',
