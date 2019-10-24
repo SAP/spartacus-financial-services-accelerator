@@ -22,11 +22,13 @@ export class FormComponent implements OnInit {
   form: DynamicFormComponent;
   @Input()
   formCategoryCode: string;
-  categoryConfig: FormDefinition;
+  @Input()
+  formId: string;
+  formConfig: FormDefinition;
 
   ngOnInit() {
-    this.categoryConfig = FormSampleConfigurations.sampleConfigurations.filter(
-      item => item.categoryCode === this.formCategoryCode
+    this.formConfig = FormSampleConfigurations.sampleConfigurations.filter(
+      item => item.formId === this.formId
     )[0];
   }
 
@@ -45,7 +47,7 @@ export class FormComponent implements OnInit {
   navigateNext() {
     this.routingService.go({
       cxRoute: 'category',
-      params: { code: this.form.config.categoryCode },
+      params: { code: this.formCategoryCode },
     });
   }
 }

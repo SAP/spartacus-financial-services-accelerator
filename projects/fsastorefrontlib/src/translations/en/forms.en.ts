@@ -17,5 +17,12 @@ export const forms = {
       lengthValidation:
         'Phone number should be between minimum 6 characters and maximum 20',
     },
+    titles: {
+      trip_details_form: 'Trip Information',
+      auto_details_form: 'Auto Information',
+      auto_claim_incident_info_form: 'Incident Information',
+      auto_claim_incident_report_form: 'Incident Report',
+      auto_claim_general_form: 'General Information',
+    },
   },
 };
