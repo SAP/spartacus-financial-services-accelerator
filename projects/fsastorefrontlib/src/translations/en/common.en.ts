@@ -90,15 +90,6 @@ export const fscommon = {
       banking_credit_card: 'Credit Card',
       banking_current_account: 'Current Account',
     },
-    forms: {
-      titles: {
-        trip_details_form: 'Trip Information',
-        auto_details_form: 'Auto Information',
-        auto_claim_incident_info_form: 'Incident Information',
-        auto_claim_incident_report_form: 'Incident Report',
-        auto_claim_general_form: 'General Information',
-      },
-    },
     pleaseSelect: 'Please select:',
     userIdentification: {
       title: 'User Identification',
