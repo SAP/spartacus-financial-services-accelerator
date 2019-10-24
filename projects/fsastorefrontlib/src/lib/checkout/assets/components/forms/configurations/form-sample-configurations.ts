@@ -669,16 +669,26 @@ export class FormSampleConfigurations {
           groupName: 'incidentInfo',
           fieldConfigs: [
             {
+              type: 'select',
+              options: [
+                'Other Accident',
+                'Glass Damage',
+                'Collision',
+                'Fire',
+                'Theft',
+                'Breakdown',
+                'Accident'
+              ],
               label: 'What happened?',
               name: 'whatHappened',
-              type: 'input',
               validation: [Validators.required],
             },
             {
               label: 'When did it happen?',
               name: 'whenHappen',
               type: 'datepicker',
-              validation: [Validators.required],
+              validation: [Validators.required,
+              CustomFormValidators.compareToCurrentDate('shouldBeLess')],
             },
             {
               label: 'What time did it happen?',
@@ -738,7 +748,7 @@ export class FormSampleConfigurations {
             {
               label: 'Please describe how the accident occurred:',
               name: 'howItHappen',
-              type: 'input',
+              type: 'textarea',
               validation: [Validators.required],
             },
           ],
