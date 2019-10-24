@@ -15,13 +15,10 @@ export class PolicyDetailsComponent implements OnInit {
     private routingService: RoutingService,
     private policyService: PolicyService,
     private config: OccConfig
-  ) {}
+  ) { }
 
   policy$;
   subscription: Subscription;
-  datePattern =
-    '^((19|20)[0-9][0-9])[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])[T]([01][1-9]|[2][0-3])[:]' +
-    '([0-5][0-9])[:]([0-5][0-9])([+|-]([01][0-9]|[2][0-3])[:]([0-5][0-9])){0,1}$';
 
   ngOnInit(): void {
     const params: Observable<any>[] = [
@@ -43,10 +40,5 @@ export class PolicyDetailsComponent implements OnInit {
   }
   public getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
-  }
-
-  public isDate(date: string): boolean {
-    const zoneDateRegex = new RegExp(this.datePattern);
-    return zoneDateRegex.test(date);
   }
 }
