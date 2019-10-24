@@ -54,10 +54,6 @@ export const sampleTripPolicyData = {
           label: ' NoOfDays ',
           value: ' 7 ',
         },
-        {
-          label: ' tripStartDate ',
-          value: ' 02 Jan 2019 ',
-        },
       ],
     },
     {
