@@ -15,7 +15,7 @@ export class PolicyDetailsComponent implements OnInit {
     private routingService: RoutingService,
     private policyService: PolicyService,
     private config: OccConfig
-  ) { }
+  ) {}
 
   policy$;
   subscription: Subscription;
