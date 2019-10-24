@@ -61,5 +61,8 @@ export const fsaLayoutConfig: LayoutConfig = {
     StoreFinderPageTemplate: {
       slots: ['SideContent', 'MiddleContent'],
     },
+    FSRequestPageTemplate: {
+      slots: ['TopContent', 'MiddleContent', 'BottomContent'],
+    },
   },
 };

@@ -10,7 +10,7 @@ export class FormSampleConfigurations {
   static sampleConfigurations: FormDefinition[] = [
     {
       submitType: FormSubmitType.PRICING,
-      categoryCode: 'insurances_auto',
+      formId: 'auto_details_form',
       formGroups: [
         {
           groupName: 'general',
@@ -442,7 +442,7 @@ export class FormSampleConfigurations {
     },
     {
       submitType: FormSubmitType.PRICING,
-      categoryCode: 'insurances_travel',
+      formId: 'trip_details_form',
       formGroups: [
         {
           groupName: 'trip',
