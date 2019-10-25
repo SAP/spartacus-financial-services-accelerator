@@ -2,17 +2,20 @@
 @import '../theme';
 
 .InsuranceLandingPageTemplate {
+  cx-page-slot:not(.Section1) {
+    padding: 3rem 1.5rem 0 1.5rem;
+  }
+
   //Service links specific styling - Overriding our own enriched banner :-(
   .Section2A {
     @include contentWidth();
-    margin-bottom: 60px;
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
     fsa-enriched-responsive-banner {
       width: 25%;
       text-align: center;
-      margin-bottom: 30px;
+      margin-bottom: 1.5rem;
       flex: 0 1 auto;
       @include media-breakpoint-down(sm) {
         width: 33.33%;
@@ -86,17 +89,10 @@
       }
     }
   }
-
-  //Get a quote section & Make a claim paragraph
   .Section1 cx-paragraph,
   .Section3 {
     @include contentWidth();
     display: block;
-    margin-top: 100px;
-    padding: 0 15px;
-    @include media-breakpoint-down(xs) {
-      margin-top: 60px;
-    }
     .main-title {
       &__headline-border {
         border-top: 3px solid var(--cx-color-5);
@@ -116,6 +112,14 @@
           width: 230px;
         }
       }
+    }
+  }
+
+  //Get a quote section
+  .Section1 cx-paragraph {
+    margin-top: 6rem;
+    @include media-breakpoint-down(xs) {
+      margin-top: 60px;
     }
   }
   //Find an agent paragraph
@@ -152,16 +156,22 @@
     }
     fsa-view-quotes,
     fsa-view-policies {
-      flex: 1;
-      margin: 0 15px;
+      flex: 1 1 50%;
       button {
         height: auto;
         padding: 33px 0;
       }
     }
-    fsa-view-quotes {
+    fsa-view-policies {
+      padding-left: 1rem;
       @include media-breakpoint-down(xs) {
-        margin-bottom: 20px;
+        padding: 0;
+      }
+    }
+    fsa-view-quotes {
+      padding-right: 1rem;
+      @include media-breakpoint-down(xs) {
+        padding: 0;
       }
     }
   }
