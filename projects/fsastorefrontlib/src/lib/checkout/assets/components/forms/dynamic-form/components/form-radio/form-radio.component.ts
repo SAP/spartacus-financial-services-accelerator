@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGenericComponent } from '../form-generic.component';
-import { OccMockFormService } from '../../../../../../../occ/form/occ-mock-form.service';
 
 @Component({
   selector: 'fsa-form-radio',

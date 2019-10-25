@@ -701,7 +701,7 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               options: [
-                'Austira',
+                'Austria',
                 'Canada',
                 'France',
                 'Germany',
