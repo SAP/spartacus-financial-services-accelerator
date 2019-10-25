@@ -30,6 +30,7 @@ export interface CmsInboxComponent extends CmsComponent {
 
 export interface CmsInboxTabComponent extends CmsComponent {
   title?: string;
+  messageGroup?: string;
 }
 
 export interface CmsMultiComparisonTabContainer extends CmsComponent {
