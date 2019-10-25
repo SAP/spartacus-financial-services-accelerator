@@ -3,7 +3,7 @@ import { ValidatorFn } from '@angular/forms';
 export interface FormDefinition {
   formGroups: FromGroup[];
   formId: string;
-  submitType: FormSubmitType;
+  submitType?: FormSubmitType;
 }
 export interface FromGroup {
   groupName: String;
