@@ -12,6 +12,8 @@ import { FormTitleComponent } from './components/form-title/form-title.component
 import { DynamicFormComponent } from './containers/dynamic-form/dynamic-form.component';
 import { FSFormService } from './form.service';
 import { OccMockFormService } from '../../../../../occ/form/occ-mock-form.service';
+import { FormRadioComponent } from './components/form-radio/form-radio.component';
+import { FormTextAreaComponent } from './components/form-text-area/form-text-area.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, I18nModule],
@@ -21,17 +23,21 @@ import { OccMockFormService } from '../../../../../occ/form/occ-mock-form.servic
     FormButtonComponent,
     FormInputComponent,
     FormSelectComponent,
+    FormRadioComponent,
     FormTitleComponent,
     FormDatePickerComponent,
     ErrorNoticeComponent,
+    FormTextAreaComponent,
   ],
   exports: [DynamicFormComponent],
   entryComponents: [
     FormButtonComponent,
     FormInputComponent,
     FormSelectComponent,
+    FormRadioComponent,
     FormTitleComponent,
     FormDatePickerComponent,
+    FormTextAreaComponent,
   ],
   providers: [FSFormService, OccMockFormService],
 })

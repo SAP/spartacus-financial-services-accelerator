@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { SearchConfig } from '@spartacus/core';
 
+export interface InboxTab {
+  messageGroup: string;
+  title: string;
+}
 export interface Message {
   messageCode?: string;
   readDate?: string;

@@ -1,11 +1,10 @@
 <h3 class="my-0 section-header-heading">
-  {{ 'fscommon.category.' + formCategoryCode | cxTranslate }}
-  {{ 'fscommon.information' | cxTranslate }}
+  {{ 'forms.titles.' + formId | cxTranslate }}
 </h3>
-<div *ngIf="categoryConfig" class="form">
+<div *ngIf="formConfig" class="form">
   <fsa-dynamic-form
     #form="fsa-dynamicForm"
-    [config]="categoryConfig"
+    [config]="formConfig"
     (submit)="submit($event)"
   >
   </fsa-dynamic-form>

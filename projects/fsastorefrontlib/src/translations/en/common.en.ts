@@ -59,7 +59,7 @@ export const fscommon = {
     yearsPerformanse: 'Years Performance',
     riskAndReturningRate: 'Risk & Returning Rating',
     chooseCover: 'Choose a Cover',
-    whatsIncluded: 'Whats Included',
+    whatsIncluded: 'What\'s Included', // prettier-ignore
     addedByYou: 'Added by you',
     investementDetails: 'Investments Details',
     personalDetails: 'Personal Details',
@@ -70,6 +70,7 @@ export const fscommon = {
     whatDoesItCostMe: 'What Does It Cost Me?',
     legalInformation: 'Legal Information',
     listView: 'List View',
+    applications: 'Applications',
     mapView: 'Map View',
     register: {
       dateOfBirthMinimumAge: 'Must be over 18 years old',
