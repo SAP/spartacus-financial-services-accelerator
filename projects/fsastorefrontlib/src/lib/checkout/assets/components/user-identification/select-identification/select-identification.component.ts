@@ -51,7 +51,7 @@ export class SelectIdentificationTypeComponent implements OnInit {
       .pipe(
         filter(identificationType => identificationType),
         take(1),
-        tap(ob => {
+        tap(next => {
           this.checkoutService.placeOrder();
           this.routingService.go({ cxRoute: 'orderConfirmation' });
         })
