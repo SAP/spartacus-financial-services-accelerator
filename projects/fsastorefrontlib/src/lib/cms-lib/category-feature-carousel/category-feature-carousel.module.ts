@@ -13,7 +13,7 @@ import {
   CarouselModule,
   PageComponentModule,
 } from '@spartacus/storefront';
-import { CategoryCarouselComponent } from './category-carousel.component';
+import { CategoryFeatureCarouselComponent } from './category-feature-carousel.component';
 
 @NgModule({
   imports: [
@@ -28,13 +28,13 @@ import { CategoryCarouselComponent } from './category-carousel.component';
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         FSCategoryFeatureCarouselComponent: {
-          component: CategoryCarouselComponent,
+          component: CategoryFeatureCarouselComponent,
         },
       },
     }),
   ],
-  declarations: [CategoryCarouselComponent],
-  exports: [CategoryCarouselComponent],
-  entryComponents: [CategoryCarouselComponent],
+  declarations: [CategoryFeatureCarouselComponent],
+  exports: [CategoryFeatureCarouselComponent],
+  entryComponents: [CategoryFeatureCarouselComponent],
 })
-export class CategoryCarouselModule {}
+export class CategoryFeatureCarouselModule {}
