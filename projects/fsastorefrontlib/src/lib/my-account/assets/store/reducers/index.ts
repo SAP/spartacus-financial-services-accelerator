@@ -4,18 +4,20 @@ import {
   createFeatureSelector,
   MemoizedSelector,
 } from '@ngrx/store';
-import * as fromClaimPolicies from './claim-policies.reducer';
+import * as fromClaimPoliciesReducer from './claim-policies.reducer';
 import * as fromClaimReducer from './claim.reducer';
 import * as fromPolicyReducer from './policy.reducer';
 import * as fromPremiumCalendarReducer from './premium-calendar.reducer';
 import * as fromQuoteReducer from './quote.reducer';
+import * as fromUserRequestReducer from './user-request.reducer';
 
 export interface UserState {
   quotes: fromQuoteReducer.QuoteState;
   policies: fromPolicyReducer.PolicyState;
   premiumCalendar: fromPremiumCalendarReducer.PremiumCalendarState;
   claims: fromClaimReducer.ClaimState;
-  claimPolicies: fromClaimPolicies.ClaimPoliciesState;
+  claimPolicies: fromClaimPoliciesReducer.ClaimPoliciesState;
+  userRequest: fromUserRequestReducer.UserRequestState;
 }
 
 export function getReducers(): ActionReducerMap<UserState> {
@@ -24,7 +26,8 @@ export function getReducers(): ActionReducerMap<UserState> {
     policies: fromPolicyReducer.reducer,
     premiumCalendar: fromPremiumCalendarReducer.reducer,
     claims: fromClaimReducer.reducer,
-    claimPolicies: fromClaimPolicies.reducer,
+    claimPolicies: fromClaimPoliciesReducer.reducer,
+    userRequest: fromUserRequestReducer.reducer,
   };
 }
 

@@ -13,6 +13,7 @@ import { OccFSCartService } from './cart/fs-cart.service';
 import { OccBillingTimeService } from './billing-time/billing-time.service';
 import { OccFSCheckoutService } from './checkout/fs-checkout.service';
 import { OccAgentService } from './agent/agent.service';
+import { OccUserRequestService } from './user-request/user-request.service';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
@@ -25,6 +26,7 @@ import { OccAgentService } from './agent/agent.service';
     OccFSCartService,
     OccBillingTimeService,
     OccFSCheckoutService,
+    OccUserRequestService,
     { provide: OccConfig, useExisting: Config },
   ],
 })

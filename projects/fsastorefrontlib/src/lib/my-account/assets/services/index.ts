@@ -4,6 +4,8 @@ import { QuoteDataService } from './quote-data.service';
 import { PolicyService } from './policy.service';
 import { PolicyDataService } from './policy-data.service';
 import { QuoteService } from './quote.service';
+import { UserRequestDataService } from './user-request-data.service';
+import { UserRequestService } from './user-request.service';
 
 export const services: any[] = [
   QuoteService,
@@ -12,6 +14,8 @@ export const services: any[] = [
   PolicyDataService,
   ClaimService,
   ClaimDataService,
+  UserRequestService,
+  UserRequestDataService,
 ];
 
 export * from './quote.service';
@@ -20,3 +24,5 @@ export * from './policy.service';
 export * from './policy-data.service';
 export * from './claim.service';
 export * from './claim-data.service';
+export * from './user-request.service';
+export * from './user-request-data.service';
