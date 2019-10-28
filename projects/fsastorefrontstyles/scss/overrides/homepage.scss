@@ -89,29 +89,65 @@
       }
     }
   }
-  .Section1 cx-paragraph,
-  .Section3 {
-    @include contentWidth();
-    display: block;
-    .main-title {
-      &__headline-border {
-        border-top: 3px solid var(--cx-color-5);
-        text-align: center;
+
+  // Carousel & Homepage headings
+  fsa-category-carousel h3,
+  .main-title__quote-heading {
+    position: relative;
+    text-align: center;
+    font-size: var(--cx-h2-font-size);
+    color: var(--cx-color-11);
+    font-weight: var(--cx-font-weight-semi);
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      border-bottom: 3px solid var(--cx-color-12);
+      width: 7rem;
+    }
+  }
+
+  // Carousel content
+  cx-carousel .carousel-panel {
+    align-items: center;
+    .slide-wrapper {
+      @include box-shadow(0, 2px, 20px, 1px, $color-grey, 1);
+    }
+    .slide-text-wrapper {
+      padding: 1rem;
+      p {
+        margin-bottom: 0.5rem;
       }
-      &__quote-heading {
-        color: var(--cx-color-text);
-        background-color: var(--cx-color-1);
-        display: inline-block;
-        position: relative;
-        width: 300px;
-        top: -20px;
-        margin-top: 0;
-        margin-bottom: 0;
-        font-weight: 500;
-        @include media-breakpoint-down(md) {
-          width: 230px;
-        }
+    }
+    .title {
+      font-size: var(--cx-title-font-size);
+      color: var(--cx-color-11);
+      font-weight: var(--cx-font-weight-semi);
+      text-transform: uppercase;
+      position: relative;
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        border-bottom: 3px solid var(--cx-color-12);
+        width: 1rem;
       }
+    }
+    .previous,
+    .next {
+      width: auto;
+      padding: 0;
+    }
+    .item {
+      flex: 1 1 50%;
     }
   }
 
@@ -122,7 +158,7 @@
       margin-top: 60px;
     }
   }
-  //Find an agent paragraph
+
   .Section2B {
     @include contentWidth();
     cx-paragraph {
@@ -175,23 +211,8 @@
       }
     }
   }
-  //Make a claim section
-  .Section3 .make-claim {
-    margin: 50px auto;
-    background-color: var(--cx-color-primary);
-    text-align: center;
-    .primary-button {
-      text-transform: none;
-      padding: 40px 0;
-      line-height: 0;
-      font-size: 22px;
-      display: block;
-      text-align: center;
-    }
-    @include media-breakpoint-down(sm) {
-      .hidden-xs {
-        display: none;
-      }
-    }
+  //Assistance and support section
+  .Section3 {
+    @include contentWidth();
   }
 }
