@@ -19,7 +19,6 @@ export class UserRequestEffects {
           requestId: this.userRequestData.requestId,
         };
       }
-      console.log(payload);
       return this.userRequestService
         .getUserRequest(payload.userId, payload.requestId)
         .pipe(
