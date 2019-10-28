@@ -312,7 +312,10 @@
                       {{ order.code }}
                     </div>
                   </div>
-                  <div class="short-overview-item row">
+                  <div
+                    *ngIf="order.insuranceQuote?.paymentFrequency"
+                    class="short-overview-item row"
+                  >
                     <div class="short-overview-title col-7">
                       {{ 'fscommon.paymentFrequency' | cxTranslate }}:
                     </div>
@@ -320,7 +323,10 @@
                       {{ order.insuranceQuote?.paymentFrequency }}
                     </div>
                   </div>
-                  <div class="short-overview-item row">
+                  <div
+                    *ngIf="order.insuranceQuote?.startDate"
+                    class="short-overview-item row"
+                  >
                     <div class="short-overview-title col-7">
                       {{ 'fscommon.startDate' | cxTranslate }}:
                     </div>
