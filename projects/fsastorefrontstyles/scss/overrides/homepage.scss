@@ -141,6 +141,20 @@
         width: 1rem;
       }
     }
+    .product-feature-details {
+      li {
+        text-indent: -20px;
+        margin-left: 20px;
+        &:before {
+          content: '';
+          display: inline-block;
+          vertical-align: middle;
+          width: 10px;
+          border-bottom: 3px solid var(--cx-color-12);
+          margin-right: 10px;
+        }
+      }
+    }
     .previous,
     .next {
       width: auto;
