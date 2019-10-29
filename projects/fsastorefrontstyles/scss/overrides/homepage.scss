@@ -118,7 +118,7 @@
     .slide-wrapper {
       @include box-shadow(0, 2px, 20px, 1px, $color-grey, 1);
     }
-    .slide-text-wrapper {
+    .slide-text-container {
       padding: 1rem;
       p {
         margin-bottom: 0.5rem;
@@ -129,17 +129,6 @@
       color: var(--cx-color-11);
       font-weight: var(--cx-font-weight-semi);
       text-transform: uppercase;
-      position: relative;
-      &:after {
-        content: '';
-        display: block;
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        border-bottom: 3px solid var(--cx-color-12);
-        width: 1rem;
-      }
     }
     .product-feature-details {
       li {
@@ -162,6 +151,9 @@
     }
     .item {
       flex: 1 1 50%;
+      @include media-breakpoint-down(sm) {
+        flex: 1 1 100%;
+      }
     }
   }
 

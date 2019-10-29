@@ -1,10 +1,10 @@
 <ng-container *ngIf="component$ | async as component">
   <div class="container">
     <div class="row no-gutters slide-wrapper">
-      <div class="col-sm-12 col-md-6 media-wrapper">
+      <div class="col-12 media-wrapper">
         <cx-media [container]="component.media"></cx-media>
       </div>
-      <div class="col-sm-12 col-md-6 slide-text-wrapper">
+      <div class="col-12 slide-text-container">
         <h4 class="title">{{ component.title }}</h4>
         <div
           class="product-feature-details"
