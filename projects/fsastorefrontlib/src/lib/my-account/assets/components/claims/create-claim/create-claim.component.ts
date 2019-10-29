@@ -32,7 +32,7 @@ export class CreateClaimComponent implements OnInit {
             policy.contractId
           );
           this.routingService.go({
-            cxRoute: 'claims',
+            cxRoute: 'fnolIncident',
           });
         }
       })
