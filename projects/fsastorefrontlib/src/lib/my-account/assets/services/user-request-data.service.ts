@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Claim } from '../store/reducers/claim.reducer';
 
 @Injectable()
 export class UserRequestDataService {

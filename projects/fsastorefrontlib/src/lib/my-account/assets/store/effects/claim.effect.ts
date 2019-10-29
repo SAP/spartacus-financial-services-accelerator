@@ -53,11 +53,11 @@ export class ClaimEffects {
         .createClaim(payload.userId, payload.policyId, payload.contractId)
         .pipe(
           map((claim: Claim) => {
-            const newPayload = {
+            const userRequest = {
               userId: payload.userId,
               requestId: claim.requestId,
             };
-            return new fromActions.LoadUserRequest(newPayload);
+            return new fromActions.LoadUserRequest(userRequest);
           }),
           catchError(error => of(new fromActions.CreateClaimFail(error)))
         );

@@ -1,9 +1,9 @@
 import { Action } from '@ngrx/store';
 
-export const LOAD_USER_REQUEST = '[User Request] Load User Requests';
+export const LOAD_USER_REQUEST = '[User Request] Load User Request';
 export const LOAD_USER_REQUEST_SUCCESS =
-  '[User Request] Load User Requests Success';
-export const LOAD_USER_REQUEST_FAIL = '[User Request] Load User Requests Fail';
+  '[User Request] Load User Request Success';
+export const LOAD_USER_REQUEST_FAIL = '[User Request] Load User Request Fail';
 
 export class LoadUserRequest implements Action {
   readonly type = LOAD_USER_REQUEST;
