@@ -3,8 +3,8 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { ProductActions } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import * as fromActions from '../../../../checkout/assets/store/actions/index';
-import { OccProductService } from '../../../../../occ/services/pricing/occ-product.service';
+import * as fromActions from '../actions/index';
+import { OccProductService } from '../../../../occ/services/pricing/occ-product.service';
 
 @Injectable()
 export class FSProductEffect {

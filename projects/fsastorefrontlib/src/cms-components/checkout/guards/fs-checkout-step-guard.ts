@@ -7,7 +7,7 @@ import {
 } from '@spartacus/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { FSCheckoutStep } from '../../../lib/checkout/assets/components/checkout-progress/fs-checkout-step.component';
-import { FSCheckoutConfigService } from '../../../lib/checkout/assets/services';
+import { FSCheckoutConfigService } from '../../../core/checkout/services';
 import { FSProduct } from '../../../occ/occ-models';
 import { take } from 'rxjs/operators';
 

@@ -9,8 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 import { OrderEntry, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
-import { FSCartService } from '../../services';
-import { FSCheckoutConfigService } from '../../services/fs-checkout-config.service';
+import { FSCartService } from '../../../../../core/checkout/services';
+import { FSCheckoutConfigService } from '../../../../../core/checkout/services/fs-checkout-config.service';
 
 @Component({
   selector: 'fsa-add-options',

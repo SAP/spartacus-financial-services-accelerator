@@ -3,8 +3,8 @@ import { select, Store } from '@ngrx/store';
 import { Product, ProductSelectors, StateWithProduct } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as fromActions from '../../../../checkout/assets/store/actions/index';
-import { PricingData } from '../../models/pricing.interface';
+import * as fromActions from '../../store/actions/index';
+import { PricingData } from '../../../models/pricing.interface';
 
 @Injectable()
 export class FSProductService {

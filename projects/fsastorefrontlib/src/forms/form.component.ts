@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
-import { PricingService } from '../lib/checkout/assets/services/pricing/pricing.service';
+import { PricingService } from '../core/checkout/services/pricing/pricing.service';
 import { FormSampleConfigurations } from './configurations/form-sample-configurations';
 import { DynamicFormComponent } from './dynamic-form/containers/dynamic-form/dynamic-form.component';
 import {

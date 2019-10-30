@@ -7,12 +7,12 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { CmsConfig, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { PricingData } from '../../../lib/checkout/assets/models/pricing.interface';
-import { FSCheckoutConfigService } from '../../../lib/checkout/assets/services/fs-checkout-config.service';
-import { PricingService } from '../../../lib/checkout/assets/services/pricing/pricing.service';
-import { FSProductService } from '../../../lib/checkout/assets/services/product/fs-product.service';
+import { PricingData } from '../../../core/models/pricing.interface';
+import { FSCheckoutConfigService } from '../../../core/checkout/services/fs-checkout-config.service';
+import { PricingService } from '../../../core/checkout/services/pricing/pricing.service';
+import { FSProductService } from '../../../core/checkout/services/product/fs-product.service';
 import { FSProduct, OneTimeChargeEntry } from '../../../occ/occ-models';
-import { FSCartService } from '../../../lib/checkout/assets/services';
+import { FSCartService } from '../../../core/checkout/services';
 
 @Component({
   selector: 'fsa-comparison-table-panel-item',

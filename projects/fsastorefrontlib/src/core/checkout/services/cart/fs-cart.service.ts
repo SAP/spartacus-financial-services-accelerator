@@ -9,10 +9,10 @@ import {
   CartSelectors,
   Cart,
 } from '@spartacus/core';
-import * as fromFSAction from '../../../checkout/assets/store/actions/index';
+import * as fromFSAction from '../../store/actions/index';
 import { BehaviorSubject } from 'rxjs';
 import { tap, filter, take } from 'rxjs/operators';
-import { PricingData } from '../models/pricing.interface';
+import { PricingData } from '../../../models/pricing.interface';
 
 @Injectable()
 export class FSCartService extends CartService {

@@ -3,7 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import {
   PriceAttributeGroup,
   PricingData,
-} from '../../models/pricing.interface';
+} from '../../../models/pricing.interface';
 
 @Injectable()
 export class PricingService {

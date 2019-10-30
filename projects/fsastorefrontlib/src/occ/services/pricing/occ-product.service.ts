@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
-import { PricingData } from '../../../lib/checkout/assets/models/pricing.interface';
+import { PricingData } from '../../../core/models/pricing.interface';
 
 const FULL_PARAMS = 'fields=DEFAULT';
 

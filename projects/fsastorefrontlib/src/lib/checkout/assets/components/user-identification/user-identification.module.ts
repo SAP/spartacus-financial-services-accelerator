@@ -9,7 +9,7 @@ import {
   RoutingConfig,
 } from '@spartacus/core';
 import { SelectIdentificationTypeComponent } from './select-identification/select-identification.component';
-import { FSCheckoutService } from '../../services';
+import { FSCheckoutService } from '../../../../../core/checkout/services';
 
 @NgModule({
   imports: [

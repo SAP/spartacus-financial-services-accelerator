@@ -12,9 +12,9 @@ import {
   UrlModule,
 } from '@spartacus/core';
 import { PageComponentModule, SpinnerModule } from '@spartacus/storefront';
-import { FSCartService } from '../../lib/checkout/assets/services';
-import { PricingService } from '../../lib/checkout/assets/services/pricing/pricing.service';
-import { FSProductService } from '../../lib/checkout/assets/services/product/fs-product.service';
+import { FSCartService } from '../../core/checkout/services';
+import { PricingService } from '../../core/checkout/services/pricing/pricing.service';
+import { FSProductService } from '../../core/checkout/services/product/fs-product.service';
 import { OccBillingTimeService } from '../../occ/services/billing-time/billing-time.service';
 import { OccProductService } from '../../occ/services/pricing/occ-product.service';
 import { ComparisonTableContainerComponent } from './comparison-table-container/comparison-table-container.component';

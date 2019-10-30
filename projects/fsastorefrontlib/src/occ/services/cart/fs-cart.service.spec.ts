@@ -6,7 +6,7 @@ import {
 import { async, TestBed } from '@angular/core/testing';
 import { OccFSCartService } from './fs-cart.service';
 import { OccConfig } from '@spartacus/core';
-import { PricingData } from '../../../lib/checkout/assets/models/pricing.interface';
+import { PricingData } from '../../../core/models/pricing.interface';
 
 const userId = 'userId';
 const cartId = 'cartId';

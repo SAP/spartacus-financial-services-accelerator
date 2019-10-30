@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
-import { FSCheckoutConfigService } from '../../../services';
-import { FSCheckoutService } from '../../../services/fs-checkout.service';
+import { FSCheckoutConfigService } from '../../../../../../core/checkout/services';
+import { FSCheckoutService } from '../../../../../../core/checkout/services/fs-checkout.service';
 
 @Component({
   selector: 'fsa-select-identification',
