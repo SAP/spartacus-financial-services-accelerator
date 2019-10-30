@@ -1,8 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CategoryFeatureCarouselComponent } from './category-feature-carousel.component';
-import { CmsCategoryFeatureCarouselComponent } from '../../occ-models';
+import {
+  CmsCategoryFeatureCarouselComponent,
+  CmsComponent,
+} from '../../occ-models';
 import { CmsComponentData } from '@spartacus/storefront';
-import { CmsComponent } from 'fsastorefrontlib/lib/occ-models';
 import { of } from 'rxjs';
 import { Component, Input, Directive } from '@angular/core';
 import { CmsService, ContentSlotComponentData } from '@spartacus/core';
