@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Claim } from '../store/reducers/claim.reducer';
+import { Claim } from '../../../occ-models';
 
 export interface SelectedPolicy {
   userId: string;
