@@ -28,7 +28,7 @@ export class MockComponentWrapperDirective {
 }
 
 class MockCmsService {
-  getComponentData(){
+  getComponentData() {
     return 'MockedCmsComponent';
   }
 }
@@ -41,7 +41,7 @@ describe('CategoryCarouselComponent', () => {
     uid: 'TestCmsCategoryFeatureCarouselComponent',
     typeCode: 'FSCategoryFeatureCarouselComponent',
     name: 'Test Cms Category Feature Carousel Component',
-    categoryFeatures: 'Feature1 Feature2'
+    categoryFeatures: 'Feature1 Feature2',
   };
 
   const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
@@ -51,7 +51,11 @@ describe('CategoryCarouselComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CategoryFeatureCarouselComponent, MockCarouselComponent, MockComponentWrapperDirective],
+      declarations: [
+        CategoryFeatureCarouselComponent,
+        MockCarouselComponent,
+        MockComponentWrapperDirective,
+      ],
       providers: [
         {
           provide: CmsComponentData,

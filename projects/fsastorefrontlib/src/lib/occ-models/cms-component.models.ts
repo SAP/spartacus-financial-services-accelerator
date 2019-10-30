@@ -1,4 +1,9 @@
-import { CmsComponent, CmsBannerComponent, Category, CmsBannerComponentMedia } from '@spartacus/core';
+import {
+  CmsComponent,
+  CmsBannerComponent,
+  Category,
+  CmsBannerComponentMedia,
+} from '@spartacus/core';
 
 export type CmsComponent = CmsComponent;
 
