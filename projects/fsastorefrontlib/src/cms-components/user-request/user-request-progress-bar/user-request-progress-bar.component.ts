@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import * as fromUserRequestStore from '../../../lib/my-account/assets/store';
+import * as fromUserRequestStore from '../../../core/myaccount/store';
 
 @Component({
   selector: 'fsa-user-request-progress-bar',

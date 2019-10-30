@@ -1,7 +1,7 @@
 import { MemoizedSelector, createSelector } from '@ngrx/store';
 
-import * as fromFeature from './../reducers';
-import * as fromClaim from './../reducers/claim.reducer';
+import * as fromFeature from '../reducers';
+import * as fromClaim from '../reducers/claim.reducer';
 
 export const getClaimsState: MemoizedSelector<
   any,

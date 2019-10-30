@@ -1,11 +1,11 @@
 import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import * as fromQuoteStore from '../../../lib/my-account/assets/store/index';
+import * as fromQuoteStore from '../../../core/myaccount/store/index';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
 import { AuthService } from '@spartacus/core';
 import { CmsViewQuotesComponent } from '../../../occ/occ-models/cms-component.models';
-import { QuoteService } from '../../../lib/my-account/assets/services/quote.service';
+import { QuoteService } from '../../../core/myaccount/services/quote.service';
 
 @Component({
   selector: 'fsa-view-quotes',

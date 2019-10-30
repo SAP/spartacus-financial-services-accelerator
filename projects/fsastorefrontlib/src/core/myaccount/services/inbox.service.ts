@@ -5,7 +5,7 @@ import {
   Message,
   InboxDataService,
   InboxTab,
-} from '../services/inbox-data.service';
+} from './inbox-data.service';
 
 @Injectable()
 export class InboxService {

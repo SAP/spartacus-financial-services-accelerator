@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import * as fromPolicyStore from '../../../lib/my-account/assets/store';
+import * as fromPolicyStore from '../../../core/myaccount/store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
-import { PolicyService } from '../../../lib/my-account/assets/services/policy.service';
+import { PolicyService } from '../../../core/myaccount/services/policy.service';
 
 @Component({
   selector: 'fsa-policies',

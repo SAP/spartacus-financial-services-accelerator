@@ -1,6 +1,6 @@
 import { MemoizedSelector, createSelector } from '@ngrx/store';
 
-import * as fromFeature from './../reducers';
+import * as fromFeature from '../reducers';
 import * as fromQuote from '../reducers/quote.reducer';
 
 export const getQuotesState: MemoizedSelector<

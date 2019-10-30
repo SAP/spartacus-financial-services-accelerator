@@ -1,7 +1,7 @@
 import { MemoizedSelector, createSelector } from '@ngrx/store';
 
-import * as fromFeature from './../reducers';
-import * as fromUserRequest from './../reducers/user-request.reducer';
+import * as fromFeature from '../reducers';
+import * as fromUserRequest from '../reducers/user-request.reducer';
 
 export const getUserRequestState: MemoizedSelector<
   any,

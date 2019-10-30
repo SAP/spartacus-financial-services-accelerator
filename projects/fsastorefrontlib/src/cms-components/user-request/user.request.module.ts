@@ -14,7 +14,7 @@ import {
   PageComponentModule,
   PageLayoutComponent,
 } from '@spartacus/storefront';
-import { UserRequestDataService } from '../../lib/my-account/assets/services';
+import { UserRequestDataService } from '../../core/myaccount/services';
 import { OccUserRequestService } from '../../occ/services/user-request/user-request.service';
 import { UserRequestNavigationComponent } from './user-request-navigation/user-request-navigation.component';
 import { UserRequestProgressBarComponent } from './user-request-progress-bar/user-request-progress-bar.component';

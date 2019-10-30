@@ -1,7 +1,7 @@
 import { MemoizedSelector, createSelector } from '@ngrx/store';
 
-import * as fromFeature from './../reducers';
-import * as fromPremiumCalendar from './../reducers/premium-calendar.reducer';
+import * as fromFeature from '../reducers';
+import * as fromPremiumCalendar from '../reducers/premium-calendar.reducer';
 
 export const getPremiumCalendarState: MemoizedSelector<
   any,

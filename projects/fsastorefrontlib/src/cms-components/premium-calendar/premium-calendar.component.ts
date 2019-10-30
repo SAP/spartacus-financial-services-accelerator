@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
-import * as fromStore from '../../lib/my-account/assets/store';
-import { PolicyService } from '../../lib/my-account/assets/services';
+import * as fromStore from '../../core/myaccount/store';
+import { PolicyService } from '../../core/myaccount/services';
 
 @Component({
   selector: 'fsa-premium-calendar',

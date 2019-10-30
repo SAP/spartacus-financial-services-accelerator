@@ -12,7 +12,7 @@ import {
   CmsInboxComponent,
   CmsInboxTabComponent,
 } from '../../occ/occ-models/cms-component.models';
-import { InboxService } from '../../lib/my-account/assets/services/inbox.service';
+import { InboxService } from '../../core/myaccount/services/inbox.service';
 
 @Component({
   selector: 'fsa-inbox',

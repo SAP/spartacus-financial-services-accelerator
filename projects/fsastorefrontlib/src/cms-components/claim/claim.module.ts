@@ -21,8 +21,8 @@ import { DeleteClaimDialogComponent } from './delete-claim-dialog/delete-claim-d
 import { ClaimPoliciesComponent } from './claim-policies/claim-policies.component';
 import { ClaimsComponent } from './claims/claims.component';
 import { CreateClaimComponent } from './create-claim/create-claim.component';
-import { ClaimDataService } from '../../lib/my-account/assets/services/claim-data.service';
-import { ClaimService } from '../../lib/my-account/assets/services/claim.service';
+import { ClaimDataService } from '../../core/myaccount/services/claim-data.service';
+import { ClaimService } from '../../core/myaccount/services/claim.service';
 
 const routes: Routes = [
   {

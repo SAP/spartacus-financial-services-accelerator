@@ -4,8 +4,8 @@ import { Store, select } from '@ngrx/store';
 import { CmsComponentData } from '@spartacus/storefront';
 import { OccConfig, AuthService } from '@spartacus/core';
 
-import { PolicyService } from '../../../lib/my-account/assets/services/policy.service';
-import * as fromUserStore from '../../../lib/my-account/assets/store/index';
+import { PolicyService } from '../../../core/myaccount/services/policy.service';
+import * as fromUserStore from '../../../core/myaccount/store/index';
 import { CmsViewPoliciesComponent } from '../../../occ/occ-models/cms-component.models';
 
 @Component({

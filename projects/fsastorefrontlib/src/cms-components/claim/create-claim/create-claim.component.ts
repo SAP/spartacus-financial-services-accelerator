@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
-import { ClaimService } from '../../../lib/my-account/assets/services';
+import { ClaimService } from '../../../core/myaccount/services';
 
 @Component({
   selector: 'fsa-create-claim',

@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { CreateClaimComponent } from './create-claim.component';
-import { ClaimService } from '../../../lib/my-account/assets/services/claim.service';
+import { ClaimService } from '../../../core/myaccount/services/claim.service';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';
-import { SelectedPolicy } from '../../../lib/my-account/assets/services';
+import { SelectedPolicy } from '../../../core/myaccount/services';
 import createSpy = jasmine.createSpy;
 
 class MockRoutingService {

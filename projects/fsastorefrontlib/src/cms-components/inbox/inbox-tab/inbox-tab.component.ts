@@ -5,7 +5,7 @@ import {
   Input,
 } from '@angular/core';
 import { CmsService } from '@spartacus/core';
-import { InboxService } from '../../../lib/my-account/assets/services/inbox.service';
+import { InboxService } from '../../../core/myaccount/services/inbox.service';
 
 @Component({
   selector: 'fsa-inbox-tab',

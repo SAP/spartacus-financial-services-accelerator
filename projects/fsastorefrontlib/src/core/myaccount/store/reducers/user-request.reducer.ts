@@ -1,4 +1,4 @@
-import * as fromAction from './../actions';
+import * as fromAction from '../actions';
 
 export interface UserRequest {
   requestId?: string;

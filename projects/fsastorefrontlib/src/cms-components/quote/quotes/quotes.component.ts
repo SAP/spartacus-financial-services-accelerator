@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import * as fromQuoteStore from '../../../lib/my-account/assets/store';
+import * as fromQuoteStore from '../../../core/myaccount/store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
-import { QuoteService } from '../../../lib/my-account/assets/services/quote.service';
+import { QuoteService } from '../../../core/myaccount/services/quote.service';
 
 @Component({
   selector: 'fsa-quotes',

@@ -22,8 +22,8 @@ import { InboxMessagesComponent } from './inbox-tab/inbox-messages/inbox-message
 import { InboxTabComponent } from './inbox-tab/inbox-tab.component';
 import { InboxComponent } from './inbox.component';
 import { OccInboxService } from '../../occ/services/inbox/inbox.service';
-import { InboxDataService } from '../../lib/my-account/assets/services/inbox-data.service';
-import { InboxService } from '../../lib/my-account/assets/services/inbox.service';
+import { InboxDataService } from '../../core/myaccount/services/inbox-data.service';
+import { InboxService } from '../../core/myaccount/services/inbox.service';
 
 const routes: Routes = [
   {

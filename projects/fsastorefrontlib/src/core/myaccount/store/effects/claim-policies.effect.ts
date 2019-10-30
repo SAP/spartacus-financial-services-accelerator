@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { OccPolicyService } from '../../../../../occ/services/policy/policy.service';
+import { OccPolicyService } from '../../../../occ/services/policy/policy.service';
 import { PolicyDataService } from '../../services/policy-data.service';
 import * as fromActions from '../actions';
 

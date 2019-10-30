@@ -11,8 +11,8 @@ import { OccInboxService } from '../../../../occ/services/inbox/inbox.service';
 import {
   FSSearchConfig,
   InboxDataService,
-} from '../../../../lib/my-account/assets/services/inbox-data.service';
-import { InboxService } from '../../../../lib/my-account/assets/services/inbox.service';
+} from '../../../../core/myaccount/services/inbox-data.service';
+import { InboxService } from '../../../../core/myaccount/services/inbox.service';
 
 @Component({
   selector: 'fsa-messages-inbox',

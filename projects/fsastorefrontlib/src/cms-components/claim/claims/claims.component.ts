@@ -1,12 +1,12 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { DeleteClaimDialogComponent } from '../delete-claim-dialog/delete-claim-dialog.component';
-import * as fromClaimStore from '../../../lib/my-account/assets/store';
+import * as fromClaimStore from '../../../core/myaccount/store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OccConfig } from '@spartacus/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { naIconImgSrc } from '../../../assets/icons/na-icon';
-import { ClaimService } from '../../../lib/my-account/assets/services';
+import { ClaimService } from '../../../core/myaccount/services';
 
 @Component({
   selector: 'fsa-claims',
