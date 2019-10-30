@@ -21,7 +21,7 @@ import { PolicyDataService } from './../../lib/my-account/assets/services/policy
 import { OccPolicyService } from '../../lib/occ/policy/policy.service';
 import { CMSViewPoliciesComponent } from './view-policies/view-policies.component';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
-import { AccordionModule } from '../../lib/accordion/accordion.module';
+import { AccordionModule } from '../../shared/accordion/accordion.module';
 
 const routes: Routes = [
   {

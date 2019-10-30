@@ -5,7 +5,7 @@ import * as fromClaimStore from '../../../lib/my-account/assets/store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OccConfig } from '@spartacus/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { naIconImgSrc } from '../../../lib/assets/na-icon';
+import { naIconImgSrc } from '../../../assets/icons/na-icon';
 import { ClaimService } from '../../../lib/my-account/assets/services';
 
 @Component({

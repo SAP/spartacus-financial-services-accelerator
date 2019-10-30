@@ -5,7 +5,7 @@ import { MediaModule, CmsComponentData } from '@spartacus/storefront';
 import { of, Observable, BehaviorSubject } from 'rxjs';
 
 import { AgentRootComponent } from './agent-root.component';
-import { AccordionModule } from '../../../lib/accordion/accordion.module';
+import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { CmsAgentRootComponent } from '../../../lib/occ-models';
 import { OccAgentService } from '../../../lib/occ/agent/agent.service';
 

@@ -25,7 +25,7 @@ import {
   SpinnerModule,
 } from '@spartacus/storefront';
 import { CatagoryStepGuard } from '../../cms-components/checkout/guards/category-step-guard';
-import { AccordionModule } from '../accordion/accordion.module';
+import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { OccFSCartService } from '../occ/cart/fs-cart.service';
 import { AddOptionsComponent } from './assets/components/add-options/add-options.component';
 import { FSCheckoutProgressComponent } from './assets/components/checkout-progress/fs-checkout-progress.component';
