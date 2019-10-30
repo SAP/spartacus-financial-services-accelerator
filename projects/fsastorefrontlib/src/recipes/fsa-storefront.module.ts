@@ -8,17 +8,18 @@ import {
 } from '@spartacus/storefront';
 import { translations, translationChunksConfig } from '@spartacus/assets';
 
-import { CmsLibModule } from './../cms-components/cms-lib.module';
+import { CmsLibModule } from '../cms-components/cms-lib.module';
 import { fstranslations } from '../assets/translations/index';
-import { fsaLayoutConfig } from './../recipes/config/default-fsa-layout-config';
-import { fsaRoutingConfig } from './../cms-structure/routing/default-fsa-routing-config';
-import { CheckoutModule } from './checkout/checkout.module';
+import { fsaLayoutConfig } from './config/default-fsa-layout-config';
+import { fsaRoutingConfig } from '../cms-structure/routing/default-fsa-routing-config';
+import { CheckoutModule } from '../cms-components/checkout/checkout.module';
 import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa-checkout-config';
 
 @NgModule({
   imports: [
     PageComponentModule,
     CmsLibModule,
+    CheckoutModule,
     B2cStorefrontModule,
     CheckoutModule,
     ConfigModule.forRoot(),

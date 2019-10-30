@@ -5,9 +5,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { SpinnerModule, MediaModule } from '@spartacus/storefront';
 import { I18nModule } from '@spartacus/core';
-import { AddOptionsComponent } from './components/add-options/add-options.component';
-import { FSCartService } from '../../../core/checkout/services';
-import { OccFSCartService } from '../../../occ/services/cart/fs-cart.service';
+import { AddOptionsComponent } from './add-options.component';
+import { FSCartService } from '../../../../core/checkout/services';
+import { OccFSCartService } from '../../../../occ/services/cart/fs-cart.service';
 
 @NgModule({
   imports: [

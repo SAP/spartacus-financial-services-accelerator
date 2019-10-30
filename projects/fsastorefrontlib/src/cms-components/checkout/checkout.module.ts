@@ -24,22 +24,22 @@ import {
   PaymentMethodModule,
   SpinnerModule,
 } from '@spartacus/storefront';
-import { CatagoryStepGuard } from '../../cms-components/checkout/guards/category-step-guard';
+import { CatagoryStepGuard } from './guards/category-step-guard';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { OccFSCartService } from '../../occ/services/cart/fs-cart.service';
-import { AddOptionsComponent } from './assets/components/add-options/add-options.component';
-import { FSCheckoutProgressComponent } from './assets/components/checkout-progress/fs-checkout-progress.component';
-import { FSCheckoutProgressModule } from './assets/components/checkout-progress/fs-checkout-progress.module';
-import { FinalReviewComponent } from './assets/components/final-review/final-review.component';
-import { LegalModule } from './assets/components/legal/legal.module';
-import { FSMiniCartComponent } from './assets/components/mini-cart/mini-cart.component';
-import { FsaOrderConfirmationComponent } from './assets/components/order-confirmation/order-confirmation.component';
-import { QuoteReviewComponent } from './assets/components/quote-review/quote-review.component';
-import { UserIdentificationModule } from './assets/components/user-identification/user-identification.module';
+import { AddOptionsComponent } from './components/add-options/add-options.component';
+import { FSCheckoutProgressComponent } from './components/checkout-progress/fs-checkout-progress.component';
+import { FSCheckoutProgressModule } from './components/checkout-progress/fs-checkout-progress.module';
+import { FinalReviewComponent } from './components/final-review/final-review.component';
+import { LegalModule } from './components/legal/legal.module';
+import { FSMiniCartComponent } from './components/mini-cart/mini-cart.component';
+import { FsaOrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
+import { QuoteReviewComponent } from './components/quote-review/quote-review.component';
+import { UserIdentificationModule } from './components/user-identification/user-identification.module';
 import { FSCartService } from '../../core/checkout/services/cart/fs-cart.service';
 import { FSCategoryService } from '../../core/checkout/services/category/fs-category.service';
 import { effects } from '../../core/checkout/store/effects/index';
-import { FSCheckoutStepGuard } from '../../cms-components/checkout/guards/fs-checkout-step-guard';
+import { FSCheckoutStepGuard } from './guards/fs-checkout-step-guard';
 import { reducerToken, reducerProvider } from '../../core/checkout/store/reducers/index';
 import { StoreModule } from '@ngrx/store';
 import { CHECKOUT_FEATURE } from '../../core/checkout/store';

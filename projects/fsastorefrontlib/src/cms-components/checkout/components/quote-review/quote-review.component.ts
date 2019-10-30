@@ -8,7 +8,7 @@ import {
   CheckoutDeliveryService,
 } from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
-import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
+import { FSCheckoutConfigService } from '../../../../core/checkout/services';
 
 @Component({
   selector: 'fsa-quote-review',

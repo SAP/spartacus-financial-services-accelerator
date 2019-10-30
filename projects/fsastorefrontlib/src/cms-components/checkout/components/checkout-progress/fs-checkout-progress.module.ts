@@ -8,7 +8,7 @@ import {
   I18nModule,
   UrlModule,
 } from '@spartacus/core';
-import { FSCheckoutConfig } from './../../../../../cms-components/checkout/config/fs-checkout-config';
+import { FSCheckoutConfig } from '../../config/fs-checkout-config';
 import { FSCheckoutProgressComponent } from './fs-checkout-progress.component';
 
 @NgModule({
