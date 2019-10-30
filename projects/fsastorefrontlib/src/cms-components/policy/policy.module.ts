@@ -60,17 +60,29 @@ const routes: Routes = [
           component: PoliciesComponent,
         },
         CMSViewPoliciesComponent: {
-            component: CMSViewPoliciesComponent,
+          component: CMSViewPoliciesComponent,
         },
         AccountPolicyDetailsSPAComponent: {
-            component: PolicyDetailsComponent,
-          },
+          component: PolicyDetailsComponent,
+        },
       },
     }),
   ],
-  declarations: [PoliciesComponent,CMSViewPoliciesComponent, PolicyDetailsComponent],
-  exports: [PoliciesComponent, CMSViewPoliciesComponent, PolicyDetailsComponent],
+  declarations: [
+    PoliciesComponent,
+    CMSViewPoliciesComponent,
+    PolicyDetailsComponent,
+  ],
+  exports: [
+    PoliciesComponent,
+    CMSViewPoliciesComponent,
+    PolicyDetailsComponent,
+  ],
   providers: [PolicyService, PolicyDataService, OccPolicyService],
-  entryComponents: [PoliciesComponent, CMSViewPoliciesComponent, PolicyDetailsComponent],
+  entryComponents: [
+    PoliciesComponent,
+    CMSViewPoliciesComponent,
+    PolicyDetailsComponent,
+  ],
 })
 export class PolicyModule {}

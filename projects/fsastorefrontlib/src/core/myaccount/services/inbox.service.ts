@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService, CmsService } from '@spartacus/core';
 import { BehaviorSubject } from 'rxjs';
-import {
-  Message,
-  InboxDataService,
-  InboxTab,
-} from './inbox-data.service';
+import { Message, InboxDataService, InboxTab } from './inbox-data.service';
 
 @Injectable()
 export class InboxService {

@@ -24,7 +24,6 @@ import { FSRegisterComponent } from './register/fs-register.component';
 import { FSUpdateProfileModule } from './update-profile/fs-update-profile.module';
 import { FSRegisterModule } from './register/fs-register.module';
 
-
 const routes: Routes = [
   {
     path: null,
@@ -129,6 +128,5 @@ const routes: Routes = [
       },
     }),
   ],
-
 })
 export class MyAccountModule {}

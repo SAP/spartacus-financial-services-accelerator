@@ -40,7 +40,10 @@ import { FSCartService } from '../../core/checkout/services/cart/fs-cart.service
 import { FSCategoryService } from '../../core/checkout/services/category/fs-category.service';
 import { effects } from '../../core/checkout/store/effects/index';
 import { FSCheckoutStepGuard } from './guards/fs-checkout-step-guard';
-import { reducerToken, reducerProvider } from '../../core/checkout/store/reducers/index';
+import {
+  reducerToken,
+  reducerProvider,
+} from '../../core/checkout/store/reducers/index';
 import { StoreModule } from '@ngrx/store';
 import { CHECKOUT_FEATURE } from '../../core/checkout/store';
 import { OccFSCheckoutService } from '../../occ/services/checkout/fs-checkout.service';

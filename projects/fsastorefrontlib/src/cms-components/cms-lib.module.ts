@@ -12,7 +12,10 @@ import { ClaimModule } from './claim/claim.module';
 import { PremiumCalendarModule } from './premium-calendar/premium-calendar.module';
 import { MyAccountModule } from './myaccount/myaccount.module';
 import { effects } from '../core/myaccount/store/effects/index';
-import { reducerProvider, reducerToken } from '../core/myaccount/store/reducers/index';
+import {
+  reducerProvider,
+  reducerToken,
+} from '../core/myaccount/store/reducers/index';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { UserRequestModule } from './user-request/user.request.module';
@@ -48,8 +51,8 @@ import { UserRequestModule } from './user-request/user.request.module';
     ClaimModule,
     PremiumCalendarModule,
     MyAccountModule,
-    UserRequestModule
+    UserRequestModule,
   ],
-  providers: [reducerProvider]
+  providers: [reducerProvider],
 })
 export class CmsLibModule {}

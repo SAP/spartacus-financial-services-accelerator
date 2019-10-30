@@ -54,7 +54,7 @@ const routes: Routes = [
     }),
   ],
   declarations: [QuotesComponent, CMSViewQuotesComponent],
-  exports: [QuotesComponent,CMSViewQuotesComponent],
+  exports: [QuotesComponent, CMSViewQuotesComponent],
   providers: [QuoteService, QuoteDataService, OccQuoteService],
   entryComponents: [QuotesComponent, CMSViewQuotesComponent],
 })

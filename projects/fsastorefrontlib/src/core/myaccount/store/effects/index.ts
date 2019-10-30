@@ -4,13 +4,12 @@ import { PolicyEffects } from './policy.effect';
 import { QuoteEffects } from './quote.effect';
 import { UserRequestEffects } from './user-request.effect';
 
-
 export const effects: any[] = [
   QuoteEffects,
   PolicyEffects,
   ClaimEffects,
   ClaimPoliciesEffects,
-  UserRequestEffects
+  UserRequestEffects,
 ];
 
 export * from './claim-policies.effect';
