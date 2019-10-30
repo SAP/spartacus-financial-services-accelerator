@@ -114,45 +114,50 @@
 
   // Carousel content
   cx-carousel .carousel-panel {
+    .item {
+      display: flex;
+      flex: 1 1 50%;
+      @include media-breakpoint-up(lg) {
+        max-width: 50%;
+      }
+    }
+    fsa-category-feature {
+      display: flex;
+      // align-items: stretch;
+    }
     align-items: center;
     .slide-wrapper {
       @include box-shadow(0, 2px, 20px, 1px, $color-grey, 1);
     }
     .slide-text-container {
-      padding: 1rem;
+      color: var(--cx-color-11);
+      padding: 2rem;
       p {
         margin-bottom: 0.5rem;
+      }
+      a {
+        font-weight: var(--cx-font-weight-semi);
+        text-decoration: underline;
+        text-transform: uppercase;
       }
     }
     .title {
       font-size: var(--cx-title-font-size);
-      color: var(--cx-color-11);
       font-weight: var(--cx-font-weight-semi);
       text-transform: uppercase;
-    }
-    .product-feature-details {
-      li {
-        text-indent: -20px;
-        margin-left: 20px;
-        &:before {
-          content: '';
-          display: inline-block;
-          vertical-align: middle;
-          width: 10px;
-          border-bottom: 3px solid var(--cx-color-12);
-          margin-right: 10px;
-        }
-      }
     }
     .previous,
     .next {
       width: auto;
       padding: 0;
     }
-    .item {
-      flex: 1 1 50%;
-      @include media-breakpoint-down(sm) {
-        flex: 1 1 100%;
+  }
+  cx-carousel .indicators {
+    margin-top: 2rem;
+    button {
+      width: 8%;
+      &:disabled {
+        opacity: 1;
       }
     }
   }
