@@ -181,6 +181,12 @@
         padding: 0 1rem;
         flex: 1 1 50%;
       }
+      cx-media {
+        overflow: hidden;
+      }
+      img:hover {
+        transform: scale(1.05);
+      }
     }
   }
 }
