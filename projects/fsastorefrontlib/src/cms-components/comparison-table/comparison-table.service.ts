@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { CmsService } from '@spartacus/core';
-import { CMSComparisonTabComponent } from '../../lib/occ-models';
+import { CMSComparisonTabComponent } from '../../occ/occ-models';
 
 @Injectable()
 export class ComparisonTableService {

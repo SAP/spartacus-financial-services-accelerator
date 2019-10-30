@@ -4,7 +4,7 @@ import * as fromQuoteStore from '../../../lib/my-account/assets/store/index';
 import { Store, select } from '@ngrx/store';
 import { OccConfig } from '@spartacus/core';
 import { AuthService } from '@spartacus/core';
-import { CmsViewQuotesComponent } from '../../../lib/occ-models/cms-component.models';
+import { CmsViewQuotesComponent } from '../../../occ/occ-models/cms-component.models';
 import { QuoteService } from '../../../lib/my-account/assets/services/quote.service';
 
 @Component({

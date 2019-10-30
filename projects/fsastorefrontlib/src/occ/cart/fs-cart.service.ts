@@ -4,7 +4,7 @@ import { CartModification, OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
-import { PricingData } from '../../checkout/assets/models/pricing.interface';
+import { PricingData } from '../../../lib/checkout/assets/models/pricing.interface';
 
 const FULL_PARAMS = '&fields=FULL';
 

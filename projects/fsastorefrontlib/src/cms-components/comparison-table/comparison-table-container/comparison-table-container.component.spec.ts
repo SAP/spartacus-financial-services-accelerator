@@ -5,8 +5,8 @@ import { of, Observable } from 'rxjs';
 import { CmsComponentData } from '@spartacus/storefront';
 import { By } from '@angular/platform-browser';
 import { ComparisonTableContainerComponent } from './comparison-table-container.component';
-import { CmsMultiComparisonTabContainer } from '../../../lib/occ-models';
-import { CMSComparisonTabComponent } from '../../../lib/occ-models';
+import { CmsMultiComparisonTabContainer } from '../../../occ/occ-models';
+import { CMSComparisonTabComponent } from '../../../occ/occ-models';
 import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { ComparisonTableService } from '../comparison-table.service';
 

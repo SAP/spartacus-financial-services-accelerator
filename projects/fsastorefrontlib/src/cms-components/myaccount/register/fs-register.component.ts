@@ -7,7 +7,7 @@ import {
   GlobalMessageService,
 } from '@spartacus/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { FSUserSignUp } from '../../../lib/occ-models';
+import { FSUserSignUp } from '../../../occ/occ-models';
 import { CustomFormValidators } from '../../../shared/util/validators/custom-form-validators';
 
 @Component({

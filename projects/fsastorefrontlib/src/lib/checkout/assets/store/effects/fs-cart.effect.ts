@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { CartActions } from '@spartacus/core';
-import { OccFSCartService } from '../../../../occ/cart/fs-cart.service';
+import { OccFSCartService } from '../../../../../occ/services/cart/fs-cart.service';
 import * as fromActions from './../actions/fs-cart.action';
 
 @Injectable()

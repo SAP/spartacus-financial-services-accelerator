@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import { CmsAgentRootComponent } from '../../../lib/occ-models';
-import { OccAgentService } from '../../../lib/occ/agent/agent.service';
+import { CmsAgentRootComponent } from '../../../occ/occ-models';
+import { OccAgentService } from '../../../occ/services/agent/agent.service';
 
 @Component({
   selector: 'fsa-agent-root',

@@ -6,7 +6,7 @@ import { OccConfig, AuthService } from '@spartacus/core';
 
 import { PolicyService } from '../../../lib/my-account/assets/services/policy.service';
 import * as fromUserStore from '../../../lib/my-account/assets/store/index';
-import { CmsViewPoliciesComponent } from '../../../lib/occ-models/cms-component.models';
+import { CmsViewPoliciesComponent } from '../../../occ/occ-models/cms-component.models';
 
 @Component({
   selector: 'fsa-view-policies',

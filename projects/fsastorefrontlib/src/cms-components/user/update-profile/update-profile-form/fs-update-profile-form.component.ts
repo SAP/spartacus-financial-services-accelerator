@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UpdateProfileFormComponent } from '@spartacus/storefront';
 import { CustomFormValidators } from '../../../../shared/util/validators/custom-form-validators';
-import { FSUser } from '../../../../lib/occ-models';
+import { FSUser } from '../../../../occ/occ-models';
 
 @Component({
   selector: 'fsa-update-profile-form',

@@ -6,8 +6,8 @@ import { of, Observable, BehaviorSubject } from 'rxjs';
 
 import { AgentRootComponent } from './agent-root.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
-import { CmsAgentRootComponent } from '../../../lib/occ-models';
-import { OccAgentService } from '../../../lib/occ/agent/agent.service';
+import { CmsAgentRootComponent } from '../../../occ/occ-models';
+import { OccAgentService } from '../../../occ/services/agent/agent.service';
 
 const mockedAgentList = ['testAgent'];
 

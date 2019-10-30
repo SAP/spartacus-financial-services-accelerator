@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import * as fromActions from './../actions';
 import { UserRequestDataService } from '../../services/user-request-data.service';
-import { OccUserRequestService } from './../../../../occ/user-request/user-request.service';
+import { OccUserRequestService } from '../../../../../occ/services/user-request/user-request.service';
 
 @Injectable()
 export class UserRequestEffects {

@@ -11,7 +11,7 @@ import { mergeMap, map } from 'rxjs/operators';
 import {
   CmsInboxComponent,
   CmsInboxTabComponent,
-} from './../../lib/occ-models/cms-component.models';
+} from '../../occ/occ-models/cms-component.models';
 import { InboxService } from '../../lib/my-account/assets/services/inbox.service';
 
 @Component({

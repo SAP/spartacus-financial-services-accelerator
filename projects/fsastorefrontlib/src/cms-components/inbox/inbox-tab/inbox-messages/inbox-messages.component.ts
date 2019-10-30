@@ -7,7 +7,7 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { OccInboxService } from '../../../../lib/occ/inbox/inbox.service';
+import { OccInboxService } from '../../../../occ/services/inbox/inbox.service';
 import {
   FSSearchConfig,
   InboxDataService,

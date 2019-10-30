@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { ComparisonPanelCMSComponent } from '../../../lib/occ-models';
-import { OccBillingTimeService } from '../../../lib/occ/billing-time/billing-time.service';
+import { ComparisonPanelCMSComponent } from '../../../occ/occ-models';
+import { OccBillingTimeService } from '../../../occ/services/billing-time/billing-time.service';
 
 @Component({
   selector: 'fsa-comparison-table-panel',

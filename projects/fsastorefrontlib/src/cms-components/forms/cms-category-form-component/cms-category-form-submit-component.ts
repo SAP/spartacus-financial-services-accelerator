@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import { CMSFormSubmitComponent, CmsComponent } from '../../../lib/occ-models';
+import { CMSFormSubmitComponent, CmsComponent } from '../../../occ/occ-models';
 import { ActivatedRoute } from '@angular/router';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { Observable } from 'rxjs';

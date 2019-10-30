@@ -11,7 +11,7 @@ import { PricingData } from '../../../lib/checkout/assets/models/pricing.interfa
 import { FSCheckoutConfigService } from '../../../lib/checkout/assets/services/fs-checkout-config.service';
 import { PricingService } from '../../../lib/checkout/assets/services/pricing/pricing.service';
 import { FSProductService } from '../../../lib/checkout/assets/services/product/fs-product.service';
-import { FSProduct, OneTimeChargeEntry } from '../../../lib/occ-models';
+import { FSProduct, OneTimeChargeEntry } from '../../../occ/occ-models';
 import { FSCartService } from '../../../lib/checkout/assets/services';
 
 @Component({

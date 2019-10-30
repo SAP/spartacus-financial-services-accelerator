@@ -26,7 +26,7 @@ import {
 } from '@spartacus/storefront';
 import { CatagoryStepGuard } from '../../cms-components/checkout/guards/category-step-guard';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
-import { OccFSCartService } from '../occ/cart/fs-cart.service';
+import { OccFSCartService } from '../../occ/services/cart/fs-cart.service';
 import { AddOptionsComponent } from './assets/components/add-options/add-options.component';
 import { FSCheckoutProgressComponent } from './assets/components/checkout-progress/fs-checkout-progress.component';
 import { FSCheckoutProgressModule } from './assets/components/checkout-progress/fs-checkout-progress.module';
@@ -43,7 +43,7 @@ import { FSCheckoutStepGuard } from '../../cms-components/checkout/guards/fs-che
 import { reducerToken, reducerProvider } from './assets/store/reducers/index';
 import { StoreModule } from '@ngrx/store';
 import { CHECKOUT_FEATURE } from './assets/store';
-import { OccFSCheckoutService } from '../occ/checkout/fs-checkout.service';
+import { OccFSCheckoutService } from '../../occ/services/checkout/fs-checkout.service';
 
 const routes: Routes = [
   {

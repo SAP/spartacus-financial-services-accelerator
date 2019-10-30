@@ -21,7 +21,7 @@ import {
 import { InboxMessagesComponent } from './inbox-tab/inbox-messages/inbox-messages.component';
 import { InboxTabComponent } from './inbox-tab/inbox-tab.component';
 import { InboxComponent } from './inbox.component';
-import { OccInboxService } from '../../lib/occ/inbox/inbox.service';
+import { OccInboxService } from '../../occ/services/inbox/inbox.service';
 import { InboxDataService } from '../../lib/my-account/assets/services/inbox-data.service';
 import { InboxService } from '../../lib/my-account/assets/services/inbox.service';
 

@@ -4,7 +4,7 @@ import { CmsComponent, ProductService, Product } from '@spartacus/core';
 import { of, Observable } from 'rxjs';
 import { CmsComponentData } from '@spartacus/storefront';
 import { ProductFeatureComponent } from './product-feature.component';
-import { CmsProductFeatureComponent } from '../../lib/occ-models';
+import { CmsProductFeatureComponent } from '../../occ/occ-models';
 import { By } from '@angular/platform-browser';
 
 const mockedProduct: Product = {

@@ -17,7 +17,7 @@ import {
 } from '@spartacus/storefront';
 import { FSCategoryService } from '../../services/fs-category.service';
 import { FSCheckoutStep } from './fs-checkout-step.component';
-import { FSProduct } from '../../../../occ-models';
+import { FSProduct } from '../../../../../occ/occ-models';
 
 @Component({
   selector: 'fsa-checkout-progress',

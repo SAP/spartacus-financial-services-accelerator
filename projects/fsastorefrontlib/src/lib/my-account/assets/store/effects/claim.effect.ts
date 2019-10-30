@@ -4,7 +4,7 @@ import * as fromActions from './../actions';
 import { Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap } from 'rxjs/operators';
-import { OccClaimService } from './../../../../occ/claim/claim.service';
+import { OccClaimService } from '../../../../../occ/services/claim/claim.service';
 import { ClaimDataService } from '../../services/claim-data.service';
 import { Claim } from './../reducers/claim.reducer';
 

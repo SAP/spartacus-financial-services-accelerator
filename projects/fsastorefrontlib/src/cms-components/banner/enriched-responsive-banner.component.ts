@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import { CmsEnrichedResponsiveBannerComponent } from '../../lib/occ-models';
+import { CmsEnrichedResponsiveBannerComponent } from '../../occ/occ-models';
 
 @Component({
   selector: 'fsa-enriched-responsive-banner',

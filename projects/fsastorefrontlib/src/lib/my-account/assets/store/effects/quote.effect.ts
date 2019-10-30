@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap } from 'rxjs/operators';
 import { QuoteDataService } from '../../services/quote-data.service';
-import { OccQuoteService } from './../../../../occ/quote/quote.service';
+import { OccQuoteService } from '../../../../../occ/services/quote/quote.service';
 
 @Injectable()
 export class QuoteEffects {

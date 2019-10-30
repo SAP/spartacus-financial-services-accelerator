@@ -18,7 +18,7 @@ import { CmsPageGuard } from '@spartacus/storefront';
 import { PoliciesComponent } from './policies/policies.component';
 import { PolicyService } from './../../lib/my-account/assets/services/policy.service';
 import { PolicyDataService } from './../../lib/my-account/assets/services/policy-data.service';
-import { OccPolicyService } from '../../lib/occ/policy/policy.service';
+import { OccPolicyService } from '../../occ/services/policy/policy.service';
 import { CMSViewPoliciesComponent } from './view-policies/view-policies.component';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
 import { AccordionModule } from '../../shared/accordion/accordion.module';

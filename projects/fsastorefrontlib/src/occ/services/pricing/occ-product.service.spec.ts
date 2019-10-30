@@ -9,7 +9,7 @@ import {
   PriceAttributeGroup,
   PricingAttribute,
   PricingData,
-} from '../../checkout/assets/models/pricing.interface';
+} from '../../../lib/checkout/assets/models/pricing.interface';
 import { OccProductService } from './occ-product.service';
 
 const productCode = 'testCode';

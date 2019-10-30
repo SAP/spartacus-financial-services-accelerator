@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import * as fromActions from '../actions/fs-checkout.action';
-import { OccFSCheckoutService } from '../../../../occ/checkout/fs-checkout.service';
+import { OccFSCheckoutService } from '../../../../../occ/services/checkout/fs-checkout.service';
 
 @Injectable()
 export class FSCheckoutEffects {

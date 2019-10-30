@@ -8,7 +8,7 @@ import {
 import { Observable, of, Subscription } from 'rxjs';
 import { FSCheckoutStep } from '../../../lib/checkout/assets/components/checkout-progress/fs-checkout-step.component';
 import { FSCheckoutConfigService } from '../../../lib/checkout/assets/services';
-import { FSProduct } from '../../../lib/occ-models';
+import { FSProduct } from '../../../occ/occ-models';
 import { take } from 'rxjs/operators';
 
 @Injectable({
