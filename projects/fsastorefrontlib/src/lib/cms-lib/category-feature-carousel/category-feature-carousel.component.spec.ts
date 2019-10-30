@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CategoryFeatureCarouselComponent } from './category-feature-carousel.component';
 
-
 describe('CategoryCarouselComponent', () => {
   let component: CategoryFeatureCarouselComponent;
   let fixture: ComponentFixture<CategoryFeatureCarouselComponent>;

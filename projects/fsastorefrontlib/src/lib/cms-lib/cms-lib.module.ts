@@ -19,7 +19,7 @@ import { CategoryFeatureCarouselModule } from './category-feature-carousel/categ
     CategoryFormsModule,
     CustomContainerModule,
     CategoryFeatureModule,
-    CategoryFeatureCarouselModule
+    CategoryFeatureCarouselModule,
   ],
   exports: [
     AgentModule,
@@ -30,7 +30,7 @@ import { CategoryFeatureCarouselModule } from './category-feature-carousel/categ
     CategoryFormsModule,
     CustomContainerModule,
     CategoryFeatureModule,
-    CategoryFeatureCarouselModule
+    CategoryFeatureCarouselModule,
   ],
 })
 export class CmsLibModule {}
