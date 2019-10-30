@@ -11,7 +11,7 @@ import { FormSelectComponent } from './components/form-select/form-select.compon
 import { FormTitleComponent } from './components/form-title/form-title.component';
 import { DynamicFormComponent } from './containers/dynamic-form/dynamic-form.component';
 import { FSFormService } from './form.service';
-import { OccMockFormService } from '../../../../../../occ/services/form/occ-mock-form.service';
+import { OccMockFormService } from '../../occ/services/form/occ-mock-form.service';
 import { FormRadioComponent } from './components/form-radio/form-radio.component';
 import { FormTextAreaComponent } from './components/form-text-area/form-text-area.component';
 

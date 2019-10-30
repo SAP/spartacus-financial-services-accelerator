@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGenericComponent } from '../form-generic.component';
-import { OccMockFormService } from '../../../../../../../../occ/services/form/occ-mock-form.service';
+import { OccMockFormService } from '../../../../occ/services/form/occ-mock-form.service';
 
 @Component({
   selector: 'fsa-form-select',
