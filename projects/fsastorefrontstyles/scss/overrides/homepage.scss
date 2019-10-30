@@ -112,55 +112,6 @@
     }
   }
 
-  // Carousel content
-  cx-carousel .carousel-panel {
-    .item {
-      display: flex;
-      flex: 1 1 50%;
-      @include media-breakpoint-up(lg) {
-        max-width: 50%;
-      }
-    }
-    fsa-category-feature {
-      display: flex;
-    }
-    align-items: center;
-    .slide-wrapper {
-      @include box-shadow(0, 2px, 20px, 1px, $color-grey, 1);
-    }
-    .slide-text-container {
-      color: var(--cx-color-11);
-      padding: 2rem;
-      p {
-        margin-bottom: 0.5rem;
-      }
-      a {
-        font-weight: var(--cx-font-weight-semi);
-        text-decoration: underline;
-        text-transform: uppercase;
-      }
-    }
-    .title {
-      font-size: var(--cx-title-font-size);
-      font-weight: var(--cx-font-weight-semi);
-      text-transform: uppercase;
-    }
-    .previous,
-    .next {
-      width: auto;
-      padding: 0;
-    }
-  }
-  cx-carousel .indicators {
-    margin-top: 2rem;
-    button {
-      width: 8%;
-      &:disabled {
-        opacity: 1;
-      }
-    }
-  }
-
   //Get a quote section
   .Section1 cx-paragraph {
     margin-top: 6rem;
