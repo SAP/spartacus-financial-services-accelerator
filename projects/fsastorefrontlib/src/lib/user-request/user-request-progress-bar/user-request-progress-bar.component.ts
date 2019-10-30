@@ -1,11 +1,19 @@
 import { Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import * as fromUserRequestStore from '../../my-account/assets/store';
 
 @Component({
   selector: 'fsa-user-request-progress-bar',
   templateUrl: './user-request-progress-bar.component.html',
 })
 export class UserRequestProgressBarComponent implements OnInit {
-  constructor() {}
+  constructor(protected store: Store<fromUserRequestStore.UserState>) {}
 
-  ngOnInit() {}
+  request$;
+
+  ngOnInit() {
+    this.request$ = this.store.pipe(
+      select(fromUserRequestStore.getUserRequestData)
+    );
+  }
 }

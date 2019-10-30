@@ -1,18 +1,46 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { ConfigModule, CmsConfig, I18nModule } from '@spartacus/core';
-import { MediaModule } from '@spartacus/storefront';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import {
+  AuthGuard,
+  CmsConfig,
+  ConfigModule,
+  I18nModule,
+  UrlModule,
+} from '@spartacus/core';
+import {
+  CmsPageGuard,
+  MediaModule,
+  PageComponentModule,
+  PageLayoutComponent,
+} from '@spartacus/storefront';
+import { UserRequestDataService } from '../my-account/assets/services';
+import { OccUserRequestService } from '../occ/user-request/user-request.service';
+import { UserRequestNavigationComponent } from './user-request-navigation/user-request-navigation.component';
 import { UserRequestProgressBarComponent } from './user-request-progress-bar/user-request-progress-bar.component';
 import { UserRequestSummaryComponent } from './user-request-summary/user-request-summary.component';
-import { UserRequestNavigationComponent } from './user-request-navigation/user-request-navigation.component';
+
+const routes: Routes = [
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'fnolIncident',
+      pageLabel: 'fnolIncidentPage',
+    },
+    component: PageLayoutComponent,
+  },
+];
 
 @NgModule({
   imports: [
     CommonModule,
-    RouterModule,
-    MediaModule,
+    PageComponentModule,
     I18nModule,
+    RouterModule,
+    UrlModule,
+    MediaModule,
+    RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         UserRequestProgressBarFlex: {
@@ -42,5 +70,6 @@ import { UserRequestNavigationComponent } from './user-request-navigation/user-r
     UserRequestSummaryComponent,
     UserRequestNavigationComponent,
   ],
+  providers: [OccUserRequestService, UserRequestDataService],
 })
 export class UserRequestModule {}
