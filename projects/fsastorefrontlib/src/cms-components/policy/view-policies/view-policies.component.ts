@@ -5,7 +5,7 @@ import { CmsComponentData } from '@spartacus/storefront';
 import { OccConfig, AuthService } from '@spartacus/core';
 
 import { PolicyService } from '../../../core/myaccount/services/policy.service';
-import * as fromUserStore from '../../../core/myaccount/store/index';
+import * as fromUserStore from '../../../core/myaccount/store/';
 import { CmsViewPoliciesComponent } from '../../../occ/occ-models/cms-component.models';
 
 @Component({
