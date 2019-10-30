@@ -10,7 +10,7 @@ import { translations, translationChunksConfig } from '@spartacus/assets';
 
 import { MyAccountModule } from './my-account/my-account.module';
 import { CmsLibModule } from './cms-lib/cms-lib.module';
-import { fstranslations } from '../translations/index';
+import { fstranslations } from '../assets/translations/index';
 import { fsaLayoutConfig } from './../recipes/config/default-fsa-layout-config';
 import { fsaRoutingConfig } from './../cms-structure/routing/default-fsa-routing-config';
 import { CheckoutModule } from './checkout/checkout.module';
