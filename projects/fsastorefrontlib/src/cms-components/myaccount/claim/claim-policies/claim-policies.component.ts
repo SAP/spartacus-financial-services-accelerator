@@ -1,7 +1,10 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AuthService, OccConfig } from '@spartacus/core';
-import { ClaimService, PolicyService } from '../../../../core/myaccount/services';
+import {
+  ClaimService,
+  PolicyService,
+} from '../../../../core/myaccount/services';
 import * as fromPolicyStore from '../../../../core/myaccount/store';
 
 @Component({
