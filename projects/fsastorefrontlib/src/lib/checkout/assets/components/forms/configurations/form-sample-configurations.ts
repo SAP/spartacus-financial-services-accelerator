@@ -1,6 +1,6 @@
 import { Validators } from '@angular/forms';
-import { FormHelpers } from '../../../../../cms-lib/util/helpers/form-helpers';
-import { CustomFormValidators } from '../../../../../cms-lib/util/validators/custom-form-validators';
+import { FormHelpers } from '../../../../../../shared/util/helpers/form-helpers';
+import { CustomFormValidators } from '../../../../../../shared/util/validators/custom-form-validators';
 import {
   FormDefinition,
   FormSubmitType,

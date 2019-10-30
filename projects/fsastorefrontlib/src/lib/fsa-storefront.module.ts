@@ -8,13 +8,12 @@ import {
 } from '@spartacus/storefront';
 import { translations, translationChunksConfig } from '@spartacus/assets';
 
-import { MyAccountModule } from './my-account/my-account.module';
-import { CmsLibModule } from './cms-lib/cms-lib.module';
+import { CmsLibModule } from './../cms-components/cms-lib.module';
 import { fstranslations } from '../assets/translations/index';
 import { fsaLayoutConfig } from './../recipes/config/default-fsa-layout-config';
 import { fsaRoutingConfig } from './../cms-structure/routing/default-fsa-routing-config';
 import { CheckoutModule } from './checkout/checkout.module';
-import { FSRegisterModule } from './cms-lib/user/register/fs-register.module';
+import { FSRegisterModule } from '../cms-components/myaccount/register/fs-register.module';
 import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa-checkout-config';
 import { UserRequestModule } from './user-request/user.request.module';
 
@@ -22,7 +21,6 @@ import { UserRequestModule } from './user-request/user.request.module';
   imports: [
     PageComponentModule,
     CmsLibModule,
-    MyAccountModule,
     B2cStorefrontModule,
     FSRegisterModule,
     UserRequestModule,
@@ -48,7 +46,7 @@ import { UserRequestModule } from './user-request/user.request.module';
     ConfigModule.withConfig(fsaRoutingConfig),
     ConfigModule.withConfig(fsaCheckoutConfig),
   ],
-  exports: [B2cStorefrontModule, MyAccountModule, CmsLibModule],
+  exports: [B2cStorefrontModule, CmsLibModule],
   declarations: [],
 })
 export class FSAStorefrontModule {
