@@ -19,10 +19,13 @@ import {
   UpdateEmailComponent,
   CloseAccountComponent,
 } from '@spartacus/storefront';
-import { FSUpdateProfileComponent } from './update-profile/fs-update-profile.component';
-import { FSRegisterComponent } from './register/fs-register.component';
 import { FSUpdateProfileModule } from './update-profile/fs-update-profile.module';
 import { FSRegisterModule } from './register/fs-register.module';
+import { InboxModule } from '../myaccount/inbox/inbox.module';
+import { PolicyModule } from '../myaccount/policy/policy.module';
+import { QuoteModule } from '../myaccount/quote/quote.module';
+import { ClaimModule } from './claim/claim.module';
+import { PremiumCalendarModule } from '../myaccount/premium-calendar/premium-calendar.module';
 
 const routes: Routes = [
   {
@@ -106,6 +109,11 @@ const routes: Routes = [
     I18nModule,
     FSUpdateProfileModule,
     FSRegisterModule,
+    InboxModule,
+    PolicyModule,
+    QuoteModule,
+    ClaimModule,
+    PremiumCalendarModule,
     RouterModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
