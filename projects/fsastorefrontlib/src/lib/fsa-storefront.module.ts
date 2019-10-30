@@ -13,17 +13,13 @@ import { fstranslations } from '../assets/translations/index';
 import { fsaLayoutConfig } from './../recipes/config/default-fsa-layout-config';
 import { fsaRoutingConfig } from './../cms-structure/routing/default-fsa-routing-config';
 import { CheckoutModule } from './checkout/checkout.module';
-import { FSRegisterModule } from '../cms-components/myaccount/register/fs-register.module';
 import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa-checkout-config';
-import { UserRequestModule } from './user-request/user.request.module';
 
 @NgModule({
   imports: [
     PageComponentModule,
     CmsLibModule,
     B2cStorefrontModule,
-    FSRegisterModule,
-    UserRequestModule,
     CheckoutModule,
     ConfigModule.forRoot(),
     ConfigModule.withConfig({

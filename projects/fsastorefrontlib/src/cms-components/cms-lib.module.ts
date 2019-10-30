@@ -15,6 +15,7 @@ import { effects } from '../lib/my-account/assets/store/effects/index';
 import { reducerProvider, reducerToken } from '../lib/my-account/assets/store/reducers/index';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { UserRequestModule } from './user-request/user.request.module';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { EffectsModule } from '@ngrx/effects';
     ClaimModule,
     PremiumCalendarModule,
     MyAccountModule,
+    UserRequestModule,
     StoreModule.forFeature('assets', reducerToken),
     EffectsModule.forFeature(effects),
   ],
@@ -45,7 +47,8 @@ import { EffectsModule } from '@ngrx/effects';
     QuoteModule,
     ClaimModule,
     PremiumCalendarModule,
-    MyAccountModule
+    MyAccountModule,
+    UserRequestModule
   ],
   providers: [reducerProvider]
 })
