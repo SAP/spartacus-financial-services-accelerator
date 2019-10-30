@@ -6,6 +6,7 @@ import { CmsCategoryFeatureComponent, CmsComponent } from '../../occ-models';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
+import { I18nTestingModule } from '@spartacus/core';
 
 @Component({
   // tslint:disable
@@ -46,7 +47,7 @@ describe('CategoryFeatureComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
+      imports: [I18nTestingModule, RouterTestingModule],
       declarations: [CategoryFeatureComponent, MockMediaComponent, MockUrlPipe],
       providers: [
         {
