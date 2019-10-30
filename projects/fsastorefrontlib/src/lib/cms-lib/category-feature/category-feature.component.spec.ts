@@ -1,12 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CategoryFeatureComponent } from './category-feature.component';
-import { Component, Input, PipeTransform, Pipe } from '@angular/core';
+import { Component, Input, PipeTransform, Pipe, Type } from '@angular/core';
 import { CmsCategoryFeatureComponent, CmsComponent } from '../../occ-models';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
-import { I18nTestingModule } from '@spartacus/core';
+import { I18nTestingModule, CmsService } from '@spartacus/core';
 
 @Component({
   // tslint:disable
@@ -24,26 +24,31 @@ class MockUrlPipe implements PipeTransform {
   transform() {}
 }
 
+const componentData: CmsCategoryFeatureComponent = {
+  uid: 'TestCategoryFeatureComponent',
+  typeCode: 'CategoryFeatureComponent',
+  name: 'Test Category Feature Component',
+  media: {
+    code: '/images/category-feature.jpg',
+    mime: 'image/svg+xml',
+    altText: 'Category Feature Component',
+    url: '/medias/category-feature.jpg',
+  },
+};
+
+const MockCmsService = {
+  getComponentData: () => of(componentData),
+};
+
+const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
+  data$: of(componentData),
+  uid: 'test',
+};
+
 describe('CategoryFeatureComponent', () => {
   let component: CategoryFeatureComponent;
   let fixture: ComponentFixture<CategoryFeatureComponent>;
-
-  const componentData: CmsCategoryFeatureComponent = {
-    uid: 'TestCategoryFeatureComponent',
-    typeCode: 'CategoryFeatureComponent',
-    name: 'Test Category Feature Component',
-    media: {
-      code: '/images/category-feature.jpg',
-      mime: 'image/svg+xml',
-      altText: 'Category Feature Component',
-      url: '/medias/category-feature.jpg',
-    },
-  };
-
-  const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
-    data$: of(componentData),
-    uid: 'test',
-  };
+  let cmsService: CmsService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -54,6 +59,10 @@ describe('CategoryFeatureComponent', () => {
           provide: CmsComponentData,
           useValue: MockCmsComponentData,
         },
+        {
+          provide: CmsService,
+          useValue: MockCmsService,
+        },
       ],
     }).compileComponents();
   }));
@@ -61,6 +70,7 @@ describe('CategoryFeatureComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CategoryFeatureComponent);
     component = fixture.componentInstance;
+    cmsService = TestBed.get(CmsService as Type<CmsService>);
     fixture.detectChanges();
   });
 
