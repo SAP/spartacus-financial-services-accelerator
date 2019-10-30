@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  CmsCategoryCarouselComponent,
   CmsCategoryFeatureComponent,
+  CmsCategoryFeatureCarouselComponent,
 } from '../../occ-models';
 import { CmsComponentData } from '@spartacus/storefront';
 import { CmsService } from '@spartacus/core';
@@ -9,11 +9,13 @@ import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'fsa-category-carousel',
-  templateUrl: './category-carousel.component.html',
+  templateUrl: './category-feature-carousel.component.html',
 })
-export class CategoryCarouselComponent implements OnInit {
+export class CategoryFeatureCarouselComponent implements OnInit {
   constructor(
-    protected componentData: CmsComponentData<CmsCategoryCarouselComponent>,
+    protected componentData: CmsComponentData<
+      CmsCategoryFeatureCarouselComponent
+    >,
     protected cmsService: CmsService
   ) {}
 

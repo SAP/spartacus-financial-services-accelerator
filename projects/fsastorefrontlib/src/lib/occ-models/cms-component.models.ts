@@ -22,7 +22,7 @@ export interface CmsCategoryFeatureComponent extends CmsComponent {
   media?: string;
 }
 
-export interface CmsCategoryCarouselComponent extends CmsComponent {
+export interface CmsCategoryFeatureCarouselComponent extends CmsComponent {
   title?: string;
   categoryFeatures: string;
 }

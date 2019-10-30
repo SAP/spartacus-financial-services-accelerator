@@ -31,15 +31,7 @@ export const fsaLayoutConfig: LayoutConfig = {
       slots: ['Section1', 'Section2'],
     },
     InsuranceLandingPageTemplate: {
-      slots: [
-        'Section1',
-        'Section2A',
-        'Section2B',
-        'Section2C',
-        'Section3',
-        'Section4',
-        'Section5',
-      ],
+      slots: ['Section1', 'Section2A', 'Section2B', 'Section2C', 'Section3'],
     },
     FSCategoryPageTemplate: {
       slots: ['Section1', 'Section2A', 'Section2B', 'Section4'],

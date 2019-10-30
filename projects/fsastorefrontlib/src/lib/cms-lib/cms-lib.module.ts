@@ -7,7 +7,7 @@ import { CategoryFormsModule } from './forms/cms-category-form-component/cms-cat
 import { CustomContainerModule } from './container/cms-custom-container.module';
 import { AgentModule } from './agent/agent.module';
 import { CategoryFeatureModule } from './category-feature/category-feature.module';
-import { CategoryCarouselModule } from './category-carousel/category-carousel.module';
+import { CategoryFeatureCarouselModule } from './category-feature-carousel/category-feature-carousel.module';
 
 @NgModule({
   imports: [
@@ -19,7 +19,7 @@ import { CategoryCarouselModule } from './category-carousel/category-carousel.mo
     CategoryFormsModule,
     CustomContainerModule,
     CategoryFeatureModule,
-    CategoryCarouselModule,
+    CategoryFeatureCarouselModule,
   ],
   exports: [
     AgentModule,
@@ -30,7 +30,7 @@ import { CategoryCarouselModule } from './category-carousel/category-carousel.mo
     CategoryFormsModule,
     CustomContainerModule,
     CategoryFeatureModule,
-    CategoryCarouselModule,
+    CategoryFeatureCarouselModule,
   ],
 })
 export class CmsLibModule {}
