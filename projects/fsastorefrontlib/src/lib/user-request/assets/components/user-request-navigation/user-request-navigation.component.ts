@@ -40,7 +40,7 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
                 this.configurationSteps,
                 this.activatedRoute.routeConfig.path
               );
-              this.activeStepIndex = Number(this.activeStepData.sequenceNumber);
+              this.activeStepIndex = this.configurationSteps.indexOf(this.activeStepData);
             }
           })
         )
@@ -67,7 +67,7 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     );
   }
 
-  back(currentStep: string): void {
+  back(currentStep: number): void {
     this.userRequestNavigationService.back(
       this.configurationSteps,
       currentStep

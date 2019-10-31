@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RoutingConfigService, RoutingService } from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
-import { FSStepData } from '../../../../occ-models';
+import { FSStepData } from '../../../../../lib/occ-models';
 
 @Injectable()
 export class UserRequestNavigationService {
@@ -25,24 +25,20 @@ export class UserRequestNavigationService {
     }
   }
 
-  next(configurationSteps: FSStepData[], currentStep: number): void {
-    if (configurationSteps) {
-      const nextStepRoute = configurationSteps.filter(
-        step => +step.sequenceNumber === +currentStep + 1
-      )[0];
+  next(configurationSteps: FSStepData[], currentIndex: number): void {
+    if (configurationSteps && currentIndex >= 0) {
+      const nextStep = configurationSteps [currentIndex + 1];
       this.routingService.go({
-        cxRoute: nextStepRoute.pageLabelOrId,
+        cxRoute: nextStep.pageLabelOrId,
       });
     }
   }
 
-  back(configurationSteps: FSStepData[], currentStep: string): void {
-    if (configurationSteps) {
-      const nextStepRoute = configurationSteps.filter(
-        step => +step.sequenceNumber === +currentStep - 1
-      )[0];
+  back(configurationSteps: FSStepData[], currentIndex: number): void {
+    if (configurationSteps && currentIndex >= 0) {
+      const previousStep = configurationSteps [currentIndex  - 1];
       this.routingService.go({
-        cxRoute: nextStepRoute.pageLabelOrId,
+        cxRoute: previousStep.pageLabelOrId,
       });
     }
   }
