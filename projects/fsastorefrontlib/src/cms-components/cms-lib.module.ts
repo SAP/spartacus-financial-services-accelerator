@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BannerModule } from './banner/banner.module';
-import { ProductFeatureModule } from './product-feature/product-feature.module';
+import { ProductFeatureModule } from './product/product-feature/product-feature.module';
 import { ComparisonTableModule } from './comparison-table/comparison-table.module';
 import { CategoryFormsModule } from './form/cms-category-form-component/cms-category-forms.module';
 import { CustomContainerModule } from './container/cms-custom-container.module';
@@ -14,6 +14,8 @@ import {
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { UserRequestModule } from './user-request/user.request.module';
+import { CategoryFeatureModule } from './category/category-feature/category-feature.module';
+import { CategoryFeatureCarouselModule } from './category/category-feature-carousel/category-feature-carousel.module';
 
 @NgModule({
   imports: [
@@ -27,6 +29,8 @@ import { UserRequestModule } from './user-request/user.request.module';
     UserRequestModule,
     StoreModule.forFeature('assets', reducerToken),
     EffectsModule.forFeature(effects),
+    CategoryFeatureModule,
+    CategoryFeatureCarouselModule,
   ],
   exports: [
     AgentModule,
@@ -37,6 +41,8 @@ import { UserRequestModule } from './user-request/user.request.module';
     CustomContainerModule,
     MyAccountModule,
     UserRequestModule,
+    CategoryFeatureModule,
+    CategoryFeatureCarouselModule,
   ],
   providers: [reducerProvider],
 })

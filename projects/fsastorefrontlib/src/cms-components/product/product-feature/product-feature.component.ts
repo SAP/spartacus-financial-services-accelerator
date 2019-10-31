@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { ProductService } from '@spartacus/core';
-import { CmsProductFeatureComponent } from '../../occ/occ-models/cms-component.models';
+import { CmsProductFeatureComponent } from '../../../occ/occ-models/cms-component.models';
 
 @Component({
   selector: 'fsa-product-feature',

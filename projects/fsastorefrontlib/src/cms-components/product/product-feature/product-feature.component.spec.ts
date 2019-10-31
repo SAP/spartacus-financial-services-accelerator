@@ -4,7 +4,7 @@ import { CmsComponent, ProductService, Product } from '@spartacus/core';
 import { of, Observable } from 'rxjs';
 import { CmsComponentData } from '@spartacus/storefront';
 import { ProductFeatureComponent } from './product-feature.component';
-import { CmsProductFeatureComponent } from '../../occ/occ-models';
+import { CmsProductFeatureComponent } from '../../../occ/occ-models';
 import { By } from '@angular/platform-browser';
 
 const mockedProduct: Product = {
@@ -65,6 +65,6 @@ describe('ProductFeatureComponent', () => {
 
   it('should display product summary', () => {
     fixture.detectChanges();
-    expect(el.query(By.css('.product-feature-details'))).toBeTruthy();
+    expect(el.query(By.css('.item-details'))).toBeTruthy();
   });
 });
