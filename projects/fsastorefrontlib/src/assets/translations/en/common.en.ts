@@ -72,6 +72,13 @@ export const fscommon = {
     listView: 'List View',
     applications: 'Applications',
     mapView: 'Map View',
+    application: {
+      applicationRequestSubmitted:
+        'Your application has been successfully saved in our system. An e-mail has been sent to your e-mail address.',
+      applicationNumber: 'Application number is',
+      myApplication: 'My Application',
+      applicationID: 'Application ID',
+    },
     register: {
       dateOfBirthMinimumAge: 'Must be over 18 years old',
       enterValidEmail: 'Please enter a valid email',

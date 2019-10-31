@@ -2,6 +2,9 @@ export const policy = {
   policy: {
     policies: 'Policies',
     policy: 'Policy',
+    policyId: 'Policy ID',
+    myPolicy: 'My Policy',
+    policyNumberIs: 'Policy number is',
     policyHolder: 'Policy Holder',
     viewPolicies: 'View Policies',
     viewYourPolicies: 'View your policies',
