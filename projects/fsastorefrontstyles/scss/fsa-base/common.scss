@@ -1,0 +1,15 @@
+.item-details {
+  li {
+    text-indent: -1.3rem;
+    margin-left: 1.3rem;
+    margin-bottom: 0.5rem;
+    &:before {
+      content: '';
+      display: inline-block;
+      vertical-align: middle;
+      width: 0.6rem;
+      border-bottom: 3px solid var(--cx-color-12);
+      margin-right: 0.6rem;
+    }
+  }
+}
