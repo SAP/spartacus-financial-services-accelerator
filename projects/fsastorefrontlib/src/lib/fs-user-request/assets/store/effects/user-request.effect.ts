@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import * as fromActions from './../actions';
-import { OccUserRequestService } from 'projects/fsastorefrontlib/src/lib/occ/claim/user-request.service';
+import { OccUserRequestService } from '../../../../../lib/occ/claim/user-request.service';
 import { UserRequestDataService } from '../../services';
 
 @Injectable()
@@ -13,11 +13,10 @@ export class UserRequestEffects {
     ofType(fromActions.LOAD_USER_REQUEST),
     map((action: fromActions.LoadUserRequest) => action.payload),
     mergeMap(payload => {
-      console.log(payload);
       if (payload === undefined || payload.userId === undefined) {
         payload = {
           userId: this.userRequestData.userId,
-          requestId: this.userRequestData.requestId
+          requestId: this.userRequestData.requestId,
         };
       }
       return this.userRequestService
@@ -34,6 +33,6 @@ export class UserRequestEffects {
   constructor(
     private actions$: Actions,
     private userRequestService: OccUserRequestService,
-     private userRequestData: UserRequestDataService
+    private userRequestData: UserRequestDataService
   ) {}
 }

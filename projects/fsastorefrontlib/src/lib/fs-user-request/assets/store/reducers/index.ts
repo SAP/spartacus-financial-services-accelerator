@@ -36,14 +36,11 @@ export const getUserState: MemoizedSelector<
   FSUserRequestState
 > = createFeatureSelector<FSUserRequestState>('userRequest');
 
-
 export function clearUserRequestState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return function(state, action) {
-    if (
-      action.type === AuthActions.LOGOUT
-    ) {
+    if (action.type === AuthActions.LOGOUT) {
       state = undefined;
     }
     return reducer(state, action);

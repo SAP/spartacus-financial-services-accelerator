@@ -1,26 +1,24 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserRequestService } from '../../services';
 import { Observable, Subscription } from 'rxjs';
-import { FSUserRequest } from 'projects/fsastorefrontlib/src/lib/occ-models';
 import { map } from 'rxjs/operators';
+import { FSUserRequest } from '../../../../../lib/occ-models';
 
 @Component({
   selector: 'fsa-user-request-progress-bar',
   templateUrl: './user-request-progress-bar.component.html',
 })
 export class UserRequestProgressBarComponent implements OnInit, OnDestroy {
-
   userRequest$: Observable<FSUserRequest>;
   configurationSteps;
   private subscription = new Subscription();
 
-  constructor(
-    protected userRequestService: UserRequestService
-  ) {}
+  constructor(protected userRequestService: UserRequestService) {}
 
   ngOnInit() {
     this.userRequest$ = this.userRequestService.getUserRequest();
-      this.subscription.add(this.userRequest$
+    this.subscription.add(
+      this.userRequest$
         .pipe(
           map(userRequestData => {
             if (
@@ -31,7 +29,8 @@ export class UserRequestProgressBarComponent implements OnInit, OnDestroy {
             }
           })
         )
-        .subscribe());
+        .subscribe()
+    );
   }
 
   ngOnDestroy(): void {
@@ -39,5 +38,4 @@ export class UserRequestProgressBarComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
     }
   }
-
 }

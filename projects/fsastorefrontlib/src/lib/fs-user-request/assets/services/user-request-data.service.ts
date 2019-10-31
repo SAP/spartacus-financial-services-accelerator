@@ -3,8 +3,9 @@ import { Store, select } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
 import { filter } from 'rxjs/operators';
 import { FSUserRequest } from '../../../occ-models';
-import { UserRequestSelector } from 'projects/fsastorefrontlib/src/lib/fs-user-request/assets/store';
-import * as fromReducer from 'projects/fsastorefrontlib/src/lib/fs-user-request/assets/store/reducers';
+import { UserRequestSelector } from '../../../../../src/lib/fs-user-request/assets/store';
+import * as fromReducer from '../../../../..//src/lib/fs-user-request/assets/store/reducers';
+
 export const ANONYMOUS_USERID = 'anonymous';
 
 @Injectable()
@@ -15,21 +16,22 @@ export class UserRequestDataService {
   constructor(
     private store: Store<fromReducer.FSUserRequestState>,
     protected authService: AuthService
-      ) {
+  ) {
     this.authService
-    .getUserToken()
-    .pipe(filter(userToken => this.userId !== userToken.userId))
-    .subscribe(userToken => {
-      if (Object.keys(userToken).length !== 0) {
-        this._userId = userToken.userId;
-      } else {
-        this._userId = ANONYMOUS_USERID;
-      }
-    });
-    this.store.pipe(select(UserRequestSelector.getUserRequestContent)).subscribe(userRequest => {
-      this._userRequest = userRequest;
-    });
-
+      .getUserToken()
+      .pipe(filter(userToken => this.userId !== userToken.userId))
+      .subscribe(userToken => {
+        if (Object.keys(userToken).length !== 0) {
+          this._userId = userToken.userId;
+        } else {
+          this._userId = ANONYMOUS_USERID;
+        }
+      });
+    this.store
+      .pipe(select(UserRequestSelector.getUserRequestContent))
+      .subscribe(userRequest => {
+        this._userRequest = userRequest;
+      });
   }
 
   set userId(val) {

@@ -3,7 +3,7 @@ import { UserRequestState } from '../user-request-state';
 
 export const initialState: UserRequestState = {
   content: {},
-  refresh: false
+  refresh: false,
 };
 
 export function reducer(

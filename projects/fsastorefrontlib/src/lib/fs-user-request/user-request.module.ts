@@ -94,9 +94,21 @@ const routes: Routes = [
       },
     }),
   ],
-  declarations: [UserRequestProgressBarComponent, UserRequestNavigationComponent],
+  declarations: [
+    UserRequestProgressBarComponent,
+    UserRequestNavigationComponent,
+  ],
   exports: [UserRequestProgressBarComponent, UserRequestNavigationComponent],
-  entryComponents: [UserRequestProgressBarComponent, UserRequestNavigationComponent],
-  providers: [UserRequestService, OccUserRequestService, reducerProvider, UserRequestDataService, UserRequestNavigationService],
+  entryComponents: [
+    UserRequestProgressBarComponent,
+    UserRequestNavigationComponent,
+  ],
+  providers: [
+    UserRequestService,
+    OccUserRequestService,
+    reducerProvider,
+    UserRequestDataService,
+    UserRequestNavigationService,
+  ],
 })
 export class UserRequestModule {}

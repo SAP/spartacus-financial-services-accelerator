@@ -5,7 +5,7 @@ import { UserRequestNavigationService } from './user-request/user-request-naviga
 export const services: any[] = [
   UserRequestService,
   UserRequestDataService,
-  UserRequestNavigationService
+  UserRequestNavigationService,
 ];
 
 export * from '../../../fs-user-request/assets/services/user-request/user-request.service';

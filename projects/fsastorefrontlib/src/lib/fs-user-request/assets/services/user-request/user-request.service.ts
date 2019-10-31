@@ -1,31 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromReducer from '../../store/reducers';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { FSUserRequest } from 'projects/fsastorefrontlib/src/lib/occ-models';
+import * as fromReducer from '../../store/reducers';
+import { FSUserRequest } from '../../../../../../src/lib/occ-models';
 import { UserRequestSelector } from '../../store';
 import * as fromAction from '../../store/actions/index';
-import { map } from 'rxjs/operators';
 import { UserRequestDataService } from '../user-request-data.service';
 
 @Injectable()
 export class UserRequestService {
-
   constructor(
     protected userRequestData: UserRequestDataService,
-    protected store: Store<fromReducer.FSUserRequestState>,
-    ) {
-  }
+    protected store: Store<fromReducer.FSUserRequestState>
+  ) {}
 
   getUserRequest(): Observable<FSUserRequest> {
-    this.store.select(UserRequestSelector.getUserRequestContent)
-    .pipe(
-      map(storedUserRequestData => {
-        if (!this.areConfigurationStepsCreated(storedUserRequestData)) {
-          this.loadUserRequestData();
-        }
-      })
-    ).subscribe();
+    this.store
+      .select(UserRequestSelector.getUserRequestContent)
+      .pipe(
+        map(storedUserRequestData => {
+          if (!this.areConfigurationStepsCreated(storedUserRequestData)) {
+            this.loadUserRequestData();
+          }
+        })
+      )
+      .subscribe();
     return this.store.select(UserRequestSelector.getUserRequestContent);
   }
 

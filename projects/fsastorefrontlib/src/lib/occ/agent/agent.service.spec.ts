@@ -39,8 +39,7 @@ describe('OccAgentService', () => {
 
   describe('getAgentsByCategory', () => {
     it('get Agents By Category', async(() => {
-      service.getAgentsByCategory(category).subscribe(res => {
-      });
+      service.getAgentsByCategory(category).subscribe(res => {});
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url === '/agents' &&
