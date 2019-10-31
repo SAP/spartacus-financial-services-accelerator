@@ -1,15 +1,9 @@
 import * as fromAction from '../actions';
-
-export interface UserRequestState {
-  userRequest: {};
-  refresh: boolean;
-  loaded: boolean;
-}
+import { UserRequestState } from '../user-request-state';
 
 export const initialState: UserRequestState = {
-  userRequest: {},
-  refresh: false,
-  loaded: false,
+  content: {},
+  refresh: false
 };
 
 export function reducer(
@@ -18,14 +12,11 @@ export function reducer(
 ): UserRequestState {
   switch (action.type) {
     case fromAction.LOAD_USER_REQUEST_SUCCESS: {
-      const userRequest = { ...action.payload };
-      console.log('REDUCER');
-      console.log(userRequest);
+      const content = { ...action.payload };
       return {
         ...state,
-        userRequest,
+        content,
         refresh: false,
-        loaded: true,
       };
     }
   }

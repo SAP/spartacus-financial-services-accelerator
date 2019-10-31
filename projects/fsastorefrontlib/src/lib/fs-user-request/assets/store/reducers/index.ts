@@ -3,11 +3,15 @@ import {
   ActionReducerMap,
   createFeatureSelector,
   MemoizedSelector,
+  MetaReducer,
+  ActionReducer,
 } from '@ngrx/store';
 import * as fromUserRequestReducer from './user-request.reducer';
+import { UserRequestState } from '../user-request-state';
+import { AuthActions } from '@spartacus/core';
 
 export interface FSUserRequestState {
-  userRequest: fromUserRequestReducer.UserRequestState;
+  userRequest: UserRequestState;
 }
 
 export function getReducers(): ActionReducerMap<FSUserRequestState> {
@@ -32,3 +36,18 @@ export const getUserState: MemoizedSelector<
   FSUserRequestState
 > = createFeatureSelector<FSUserRequestState>('userRequest');
 
+
+export function clearUserRequestState(
+  reducer: ActionReducer<any>
+): ActionReducer<any> {
+  return function(state, action) {
+    if (
+      action.type === AuthActions.LOGOUT
+    ) {
+      state = undefined;
+    }
+    return reducer(state, action);
+  };
+}
+
+export const metaReducers: MetaReducer<any>[] = [clearUserRequestState];

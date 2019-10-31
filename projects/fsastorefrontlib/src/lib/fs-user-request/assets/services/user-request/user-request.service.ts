@@ -7,7 +7,6 @@ import { UserRequestSelector } from '../../store';
 import * as fromAction from '../../store/actions/index';
 import { map } from 'rxjs/operators';
 import { UserRequestDataService } from '../user-request-data.service';
-import { UserRequestState } from '../../store/reducers/user-request.reducer';
 
 @Injectable()
 export class UserRequestService {
@@ -19,7 +18,7 @@ export class UserRequestService {
   }
 
   getUserRequest(): Observable<FSUserRequest> {
-    this.store.select(UserRequestSelector.getUserRequestData)
+    this.store.select(UserRequestSelector.getUserRequestContent)
     .pipe(
       map(storedUserRequestData => {
         if (!this.areConfigurationStepsCreated(storedUserRequestData)) {
@@ -27,7 +26,7 @@ export class UserRequestService {
         }
       })
     ).subscribe();
-    return this.store.select(UserRequestSelector.getUserRequestData);
+    return this.store.select(UserRequestSelector.getUserRequestContent);
   }
 
   loadUserRequestData(): void {
@@ -39,7 +38,7 @@ export class UserRequestService {
     );
   }
 
-  private areConfigurationStepsCreated(userRequest: UserRequestState): boolean {
+  private areConfigurationStepsCreated(userRequest: FSUserRequest): boolean {
     return userRequest && typeof userRequest !== 'undefined';
   }
 }

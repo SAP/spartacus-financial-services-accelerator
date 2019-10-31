@@ -26,11 +26,9 @@ export class UserRequestDataService {
         this._userId = ANONYMOUS_USERID;
       }
     });
-    this.store.pipe(select(UserRequestSelector.getUserRequestData)).subscribe(userRequest => {
+    this.store.pipe(select(UserRequestSelector.getUserRequestContent)).subscribe(userRequest => {
       this._userRequest = userRequest;
-      console.log(userRequest);
     });
-
 
   }
 

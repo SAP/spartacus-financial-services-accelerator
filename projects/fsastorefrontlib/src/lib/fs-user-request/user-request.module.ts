@@ -28,6 +28,7 @@ import { UserRequestProgressBarComponent } from './assets/components/user-reques
 import { UserRequestDataService } from './assets/services/user-request-data.service';
 import { UserRequestNavigationComponent } from './assets/components/user-request-navigation/user-request-navigation.component';
 import { UserRequestNavigationService } from './assets/services/user-request/user-request-navigation.service';
+import { UserRequestStoreModule } from './assets/store/user-request-store.module';
 
 const routes: Routes = [
   {
@@ -71,6 +72,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
+    UserRequestStoreModule,
     I18nModule,
     RouterModule,
     MediaModule,
