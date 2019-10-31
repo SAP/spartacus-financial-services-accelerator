@@ -4,7 +4,7 @@ import { AuthService } from '@spartacus/core';
 
 @Injectable()
 export class PolicyDataService {
-  private _userId = 'anonymous';
+  private _userId;
   private _policyCategoryCode: string;
   private _policies: Policy[];
 

@@ -10,7 +10,7 @@ export interface SelectedPolicy {
 
 @Injectable()
 export class ClaimDataService {
-  private _userId = 'anonymous';
+  private _userId;
   private _claims: Claim[];
 
   constructor(protected auth: AuthService) {

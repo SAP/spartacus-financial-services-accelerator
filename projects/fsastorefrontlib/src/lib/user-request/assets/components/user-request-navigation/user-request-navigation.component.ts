@@ -36,10 +36,9 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
               userRequestData.configurationSteps.length > 0
             ) {
               this.configurationSteps = userRequestData.configurationSteps;
-              const activeRoute = this.activatedRoute.routeConfig.path;
               this.activeStepData = this.userRequestNavigationService.getActiveStep(
                 this.configurationSteps,
-                activeRoute
+                this.activatedRoute.routeConfig.path
               );
               this.activeStepIndex = Number(this.activeStepData.sequenceNumber);
             }

@@ -39,6 +39,6 @@ export class UserRequestService {
   }
 
   private areConfigurationStepsCreated(userRequest: FSUserRequest): boolean {
-    return userRequest && typeof userRequest !== 'undefined';
+    return userRequest && typeof userRequest.configurationSteps !== 'undefined';
   }
 }

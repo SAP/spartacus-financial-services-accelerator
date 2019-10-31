@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { AuthService, RoutingService } from '@spartacus/core';
+import { AuthService } from '@spartacus/core';
 import { BehaviorSubject } from 'rxjs';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
@@ -12,7 +12,6 @@ export class ClaimService {
   constructor(
     protected store: Store<fromReducer.UserState>,
     protected claimData: ClaimDataService,
-    protected routingService: RoutingService,
     protected auth: AuthService
   ) {
     this.initClaims();

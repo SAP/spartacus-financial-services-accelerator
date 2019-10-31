@@ -6,11 +6,10 @@ import { FSUserRequest } from '../../../occ-models';
 import { UserRequestSelector } from '../store';
 import * as fromReducer from '../store/reducers';
 
-export const ANONYMOUS_USERID = 'anonymous';
 
 @Injectable()
 export class UserRequestDataService {
-  private _userId = ANONYMOUS_USERID;
+  private _userId;
   private _userRequest: FSUserRequest;
 
   constructor(
@@ -23,8 +22,6 @@ export class UserRequestDataService {
       .subscribe(userToken => {
         if (Object.keys(userToken).length !== 0) {
           this._userId = userToken.userId;
-        } else {
-          this._userId = ANONYMOUS_USERID;
         }
       });
     this.store
