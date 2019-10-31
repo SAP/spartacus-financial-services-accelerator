@@ -19,17 +19,17 @@ export class CategoryFeatureCarouselComponent implements OnInit {
     protected cmsService: CmsService
   ) {}
 
-  component$;
+  component$: Observable<CmsCategoryFeatureCarouselComponent>;
   items$: Observable<Observable<CmsCategoryFeatureComponent>[]>;
 
   ngOnInit() {
     this.component$ = this.componentData.data$;
     this.component$.subscribe(data => {
-      const categoryFeatures$ = [];
+      const categoryFeatures = [];
       data.categoryFeatures.split(' ').forEach(feature => {
-        categoryFeatures$.push(this.cmsService.getComponentData(feature));
+        categoryFeatures.push(this.cmsService.getComponentData(feature));
       });
-      this.items$ = of(categoryFeatures$);
+      this.items$ = of(categoryFeatures);
     });
   }
 }
