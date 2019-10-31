@@ -1,0 +1,24 @@
+cx-carousel .carousel-panel {
+  align-items: center;
+  .item {
+    display: flex;
+    flex: 1 1 50%;
+    @include media-breakpoint-up(lg) {
+      max-width: 50%;
+    }
+  }
+  .previous,
+  .next {
+    width: auto;
+    padding: 0;
+  }
+}
+cx-carousel .indicators {
+  margin-top: 2rem;
+  button {
+    width: 8%;
+    &:disabled {
+      opacity: 1;
+    }
+  }
+}

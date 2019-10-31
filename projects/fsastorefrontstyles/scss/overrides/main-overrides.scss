@@ -1,9 +1,16 @@
 @import '../mixins-fsa';
 @import '../theme';
 
+cx-page-layout {
+  & > cx-page-slot:not(.has-components) {
+    display: none;
+  }
+}
+
 .FindAgentListTemplate,
 .FSRequestPageTemplate,
-.MultiTabsCategoryPageTemplate {
+.MultiTabsCategoryPageTemplate,
+.GeneralLayoutPageTemplate {
   & > cx-page-slot {
     max-width: 1140px;
     margin: 0 auto;

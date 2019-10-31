@@ -1,0 +1,20 @@
+<ng-container *ngIf="component$ | async as component">
+  <ng-container *ngIf="items$">
+    <cx-carousel
+      [items]="items$ | async"
+      [title]="component.title"
+      [template]="carouselItem"
+      itemWidth="400px"
+    >
+    </cx-carousel>
+    <ng-template #carouselItem let-item="item">
+      <ng-container
+        [cxComponentWrapper]="{
+          flexType: 'CategoryFeatureComponent',
+          uid: item.uid
+        }"
+      >
+      </ng-container>
+    </ng-template>
+  </ng-container>
+</ng-container>

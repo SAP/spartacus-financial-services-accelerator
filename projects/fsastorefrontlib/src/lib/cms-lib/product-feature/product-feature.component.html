@@ -3,7 +3,7 @@
     <h3 class="section-header-heading">{{ component.title }}</h3>
     <div class="product-feature-image"></div>
     <div *ngIf="product$ | async as product">
-      <ul class="product-feature-details" [innerHTML]="product.summary"></ul>
+      <ul class="item-details" [innerHTML]="product.summary"></ul>
     </div>
   </div>
 </ng-container>
