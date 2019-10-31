@@ -1,4 +1,5 @@
 import { FSCheckoutConfig } from './fs-checkout-config';
+import { CheckoutStepType } from '@spartacus/storefront';
 
 export const fsaCheckoutConfig: FSCheckoutConfig = {
   checkout: {
@@ -76,7 +77,7 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         name: 'fscommon.paymentDetails',
         routeName: 'checkoutPaymentDetails',
         icon: 'icon-FSA-payment-cards',
-        type: [],
+        type: [CheckoutStepType.PAYMENT_DETAILS],
         restrictedCategories: [
           'banking_credit_card',
           'banking_current_account',

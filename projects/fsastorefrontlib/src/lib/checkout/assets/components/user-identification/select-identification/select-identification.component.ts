@@ -3,6 +3,7 @@ import { RoutingService } from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
 import { FSCheckoutConfigService } from '../../../services';
 import { FSCheckoutService } from '../../../services/fs-checkout.service';
+import { filter, take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-select-identification',
@@ -43,14 +44,19 @@ export class SelectIdentificationTypeComponent implements OnInit {
   setSelectedType(identificationType) {
     this.selected = identificationType.name;
   }
+
   setIdentificationType() {
     this.checkoutService
       .setIdentificationType(this.selected)
-      .subscribe(identificationType => {
-        if (identificationType) {
+      .pipe(
+        filter(identificationType => identificationType),
+        take(1),
+        tap(next => {
+          this.checkoutService.placeOrder();
           this.routingService.go({ cxRoute: 'orderConfirmation' });
-        }
-      });
+        })
+      )
+      .subscribe();
   }
 
   back() {
