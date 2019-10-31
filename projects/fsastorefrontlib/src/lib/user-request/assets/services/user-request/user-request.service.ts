@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import * as fromReducer from '../../store/reducers';
-import { FSUserRequest } from '../../../../../../src/lib/occ-models';
+import { FSUserRequest } from '../../../../occ-models';
 import { UserRequestSelector } from '../../store';
 import * as fromAction from '../../store/actions/index';
 import { UserRequestDataService } from '../user-request-data.service';

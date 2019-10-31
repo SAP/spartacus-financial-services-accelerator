@@ -6,7 +6,7 @@ import {
   UserRequestService,
   UserRequestNavigationService,
 } from '../../services';
-import { FSUserRequest, FSStepData } from '../../../../../lib/occ-models';
+import { FSUserRequest, FSStepData } from '../../../../occ-models';
 
 @Component({
   selector: 'fsa-user-request-navigation',

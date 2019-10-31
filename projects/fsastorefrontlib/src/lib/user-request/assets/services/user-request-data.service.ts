@@ -3,8 +3,8 @@ import { Store, select } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
 import { filter } from 'rxjs/operators';
 import { FSUserRequest } from '../../../occ-models';
-import { UserRequestSelector } from '../../../../../src/lib/fs-user-request/assets/store';
-import * as fromReducer from '../../../../..//src/lib/fs-user-request/assets/store/reducers';
+import { UserRequestSelector } from '../store';
+import * as fromReducer from '../store/reducers';
 
 export const ANONYMOUS_USERID = 'anonymous';
 

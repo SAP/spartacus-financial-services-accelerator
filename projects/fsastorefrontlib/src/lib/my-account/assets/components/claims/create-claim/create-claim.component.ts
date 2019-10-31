@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 import { ClaimService } from '../../../services';
 import { Store } from '@ngrx/store';
-import * as fromUserRequestStore from '../../../../../../../src/lib/fs-user-request/assets/store/reducers';
+import * as fromUserRequestStore from '../../../../../user-request/assets/store/reducers';
 
 @Component({
   selector: 'fsa-create-claim',

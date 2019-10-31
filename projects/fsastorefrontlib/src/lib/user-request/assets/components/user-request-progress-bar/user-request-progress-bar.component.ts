@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserRequestService } from '../../services';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FSUserRequest } from '../../../../../lib/occ-models';
+import { FSUserRequest } from '../../../../occ-models';
 
 @Component({
   selector: 'fsa-user-request-progress-bar',

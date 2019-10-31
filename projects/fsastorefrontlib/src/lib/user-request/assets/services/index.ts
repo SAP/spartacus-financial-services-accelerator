@@ -8,6 +8,6 @@ export const services: any[] = [
   UserRequestNavigationService,
 ];
 
-export * from '../../../fs-user-request/assets/services/user-request/user-request.service';
-export * from '../../../fs-user-request/assets/services/user-request/user-request-navigation.service';
-export * from '../../../fs-user-request/assets/services/user-request-data.service';
+export * from './user-request/user-request.service';
+export * from './user-request/user-request-navigation.service';
+export * from './user-request-data.service';

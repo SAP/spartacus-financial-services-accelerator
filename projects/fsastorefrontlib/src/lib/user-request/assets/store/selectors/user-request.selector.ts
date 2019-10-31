@@ -4,9 +4,9 @@ import {
   createFeatureSelector,
 } from '@ngrx/store';
 
-import * as fromFeature from './../reducers';
+import * as fromFeature from '../reducers';
 import { UserRequestState, StateWithUserRequest } from '../user-request-state';
-import { FSUserRequest } from '../../../../../lib/occ-models';
+import { FSUserRequest } from '../../../../occ-models';
 
 const getUserRequestContentSelector = (state: UserRequestState) =>
   state.content;

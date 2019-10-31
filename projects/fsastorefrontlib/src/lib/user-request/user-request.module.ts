@@ -101,13 +101,17 @@ const routes: Routes = [
   declarations: [
     UserRequestProgressBarComponent,
     UserRequestNavigationComponent,
-    UserRequestSummaryComponent
+    UserRequestSummaryComponent,
   ],
-  exports: [UserRequestProgressBarComponent, UserRequestNavigationComponent, UserRequestSummaryComponent],
+  exports: [
+    UserRequestProgressBarComponent,
+    UserRequestNavigationComponent,
+    UserRequestSummaryComponent,
+  ],
   entryComponents: [
     UserRequestProgressBarComponent,
     UserRequestNavigationComponent,
-    UserRequestSummaryComponent
+    UserRequestSummaryComponent,
   ],
   providers: [
     UserRequestService,

@@ -7,7 +7,7 @@ import { map, catchError, mergeMap } from 'rxjs/operators';
 import { OccClaimService } from './../../../../occ/claim/claim.service';
 import { ClaimDataService } from '../../services/claim-data.service';
 import { Claim } from '../../../../../lib/occ-models';
-import * as fromUserRequestActions from '../../../../../../src/lib/fs-user-request/assets/store/actions';
+import * as fromUserRequestActions from '../../../../user-request/assets/store/actions';
 
 @Injectable()
 export class ClaimEffects {
