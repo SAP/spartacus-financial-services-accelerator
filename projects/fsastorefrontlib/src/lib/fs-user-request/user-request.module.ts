@@ -21,7 +21,6 @@ import {
 import { UserRequestService } from './assets/services/user-request/user-request.service';
 import { EffectsModule } from '@ngrx/effects';
 import { effects } from './assets/store/effects/index';
-import { OccUserRequestService } from '../occ/claim/user-request.service';
 import { reducerToken, reducerProvider } from './assets/store/reducers/index';
 import { StoreModule } from '@ngrx/store';
 import { UserRequestProgressBarComponent } from './assets/components/user-request-progress-bar/user-request-progress-bar.component';
@@ -29,6 +28,8 @@ import { UserRequestDataService } from './assets/services/user-request-data.serv
 import { UserRequestNavigationComponent } from './assets/components/user-request-navigation/user-request-navigation.component';
 import { UserRequestNavigationService } from './assets/services/user-request/user-request-navigation.service';
 import { UserRequestStoreModule } from './assets/store/user-request-store.module';
+import { UserRequestSummaryComponent } from './assets/components/user-request-summary/user-request-summary.component';
+import { OccUserRequestService } from '../occ/user-request/user-request.service';
 
 const routes: Routes = [
   {
@@ -88,6 +89,9 @@ const routes: Routes = [
         UserRequestProgressBarFlex: {
           component: UserRequestProgressBarComponent,
         },
+        UserRequestSummaryFlex: {
+          component: UserRequestSummaryComponent,
+        },
         UserRequestNavigationFlex: {
           component: UserRequestNavigationComponent,
         },
@@ -97,11 +101,13 @@ const routes: Routes = [
   declarations: [
     UserRequestProgressBarComponent,
     UserRequestNavigationComponent,
+    UserRequestSummaryComponent
   ],
-  exports: [UserRequestProgressBarComponent, UserRequestNavigationComponent],
+  exports: [UserRequestProgressBarComponent, UserRequestNavigationComponent, UserRequestSummaryComponent],
   entryComponents: [
     UserRequestProgressBarComponent,
     UserRequestNavigationComponent,
+    UserRequestSummaryComponent
   ],
   providers: [
     UserRequestService,

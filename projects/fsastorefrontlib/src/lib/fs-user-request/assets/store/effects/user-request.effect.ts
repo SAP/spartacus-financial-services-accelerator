@@ -3,8 +3,8 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import * as fromActions from './../actions';
-import { OccUserRequestService } from '../../../../../lib/occ/claim/user-request.service';
 import { UserRequestDataService } from '../../services';
+import { OccUserRequestService } from '../../../../../../src/lib/occ/user-request/user-request.service';
 
 @Injectable()
 export class UserRequestEffects {
