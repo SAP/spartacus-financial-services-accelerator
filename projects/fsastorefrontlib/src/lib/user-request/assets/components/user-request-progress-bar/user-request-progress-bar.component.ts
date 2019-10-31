@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserRequestService } from '../../services';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FSUserRequest } from '../../../../occ-models';
+import { FSUserRequest, FSStepData } from '../../../../occ-models';
 
 @Component({
   selector: 'fsa-user-request-progress-bar',
@@ -10,7 +10,7 @@ import { FSUserRequest } from '../../../../occ-models';
 })
 export class UserRequestProgressBarComponent implements OnInit, OnDestroy {
   userRequest$: Observable<FSUserRequest>;
-  configurationSteps;
+  configurationSteps: FSStepData[];
   private subscription = new Subscription();
 
   constructor(protected userRequestService: UserRequestService) {}

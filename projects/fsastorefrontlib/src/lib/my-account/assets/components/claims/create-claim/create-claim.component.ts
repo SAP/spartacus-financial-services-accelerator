@@ -12,7 +12,7 @@ import * as fromUserRequestStore from '../../../../../user-request/assets/store/
 export class CreateClaimComponent implements OnInit {
   constructor(
     protected claimService: ClaimService,
-    private routingService: RoutingService,
+    protected routingService: RoutingService,
     protected store: Store<fromUserRequestStore.FSUserRequestState>
   ) {}
 
