@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Claim } from '../../../occ-models';
+import { AuthService } from '@spartacus/core';
 
 export interface SelectedPolicy {
   userId: string;
@@ -12,7 +13,13 @@ export class ClaimDataService {
   private _userId = 'anonymous';
   private _claims: Claim[];
 
-  constructor() {}
+  constructor(protected auth: AuthService) {
+    this.auth.getUserToken().subscribe(userData => {
+      if (this.userId !== userData.userId) {
+        this.userId = userData.userId;
+      }
+    });
+  }
 
   set userId(val) {
     this._userId = val;

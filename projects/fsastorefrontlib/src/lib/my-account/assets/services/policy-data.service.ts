@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Policy } from '../store/reducers/policy.reducer';
+import { AuthService } from '@spartacus/core';
 
 @Injectable()
 export class PolicyDataService {
@@ -7,7 +8,13 @@ export class PolicyDataService {
   private _policyCategoryCode: string;
   private _policies: Policy[];
 
-  constructor() {}
+  constructor(protected auth: AuthService) {
+    this.auth.getUserToken().subscribe(userData => {
+      if (this.userId !== userData.userId) {
+        this.userId = userData.userId;
+      }
+    });
+  }
 
   set userId(val) {
     this._userId = val;

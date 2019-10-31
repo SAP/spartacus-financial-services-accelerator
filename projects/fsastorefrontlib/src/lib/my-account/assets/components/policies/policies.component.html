@@ -77,7 +77,10 @@
               >
                 {{ 'fscommon.details' | cxTranslate }}
               </button>
-              <button class="primary-button">
+              <button
+                class="primary-button"
+                (click)="startClaim(policy.policyNumber, policy.contractNumber)"
+              >
                 {{ 'claim.makeClaim' | cxTranslate }}
               </button>
             </div>

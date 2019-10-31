@@ -15,17 +15,12 @@
             >
               <div
                 class="d-inline-block underline-effect progress-node mx-2"
-                [ngClass]="{
-                  ' is-active': step.status?.code === 'VISITED',
-                  ' is-disabled': step.status?.code === 'UNSET'
-                }"
                 [routerLink]="
                   {
                     cxRoute: step.pageLabelOrId
                   } | cxUrl
                 "
               >
-                {{ step.status.code | json }}
                 <p disabled class="label  position-relative mb-2">
                   {{ step.name }}
                 </p>

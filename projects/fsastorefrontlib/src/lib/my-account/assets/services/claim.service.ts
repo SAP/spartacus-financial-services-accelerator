@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { AuthService } from '@spartacus/core';
+import { AuthService, RoutingService } from '@spartacus/core';
 import { BehaviorSubject } from 'rxjs';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
@@ -10,8 +10,9 @@ import { ClaimDataService, SelectedPolicy } from './claim-data.service';
 @Injectable()
 export class ClaimService {
   constructor(
-    private store: Store<fromReducer.UserState>,
-    private claimData: ClaimDataService,
+    protected store: Store<fromReducer.UserState>,
+    protected claimData: ClaimDataService,
+    protected routingService: RoutingService,
     protected auth: AuthService
   ) {
     this.initClaims();
@@ -30,12 +31,6 @@ export class ClaimService {
       if (this.callback) {
         this.callback();
         this.callback = null;
-      }
-    });
-
-    this.auth.getUserToken().subscribe(userData => {
-      if (this.claimData.userId !== userData.userId) {
-        this.claimData.userId = userData.userId;
       }
     });
 
