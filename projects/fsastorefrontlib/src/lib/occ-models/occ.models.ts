@@ -38,3 +38,23 @@ export interface FSUser extends User {
   dateOfBirth?: string;
   contactInfos?: FSContactInfo[];
 }
+
+export interface FSStepDataStatus {
+  code?: string;
+}
+
+export interface FSStepData {
+  name?: string;
+  sequenceNumber?: string;
+  pageLabelOrId?: string;
+  status?: FSStepDataStatus;
+}
+
+export interface FSUserRequest {
+  requestId?: string;
+  configurationSteps?: FSStepData[];
+}
+
+export interface Claim extends FSUserRequest {
+  claimNumber?: string;
+}

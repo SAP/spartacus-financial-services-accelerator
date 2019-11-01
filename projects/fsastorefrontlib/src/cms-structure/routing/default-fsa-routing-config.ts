@@ -27,7 +27,10 @@ export const fsaStorefrontRoutesConfig: RoutesConfig = {
   premiumCalendar: { paths: ['my-account/premium-calendar'] },
   orderHistory: { paths: ['my-account/orders'] },
   accountOverview: { paths: ['my-account/account-overview'] },
-  fnolIncident: { paths: ['fnolIncident'] },
+  fnolIncidentPage: { paths: ['fnolIncidentPage'] },
+  fnolIncidentReportPage: { paths: ['fnolIncidentReportPage'] },
+  fnolGeneralInfoPage: { paths: ['fnolGeneralInfoPage'] },
+  fnolSummaryPage: { paths: ['fnolSummaryPage'] },
 };
 
 export const fsaRoutingConfig: RoutingConfig = {

@@ -2,10 +2,8 @@ export const quote = {
   quote: {
     quote: 'Quote',
     quotes: 'Quotes',
-    myQuote: 'My Quote',
     quoteId: 'Quote ID',
     quoteReview: 'Quote Review',
-    quoteNumberIs: 'Quote number is',
     viewQuotes: 'View Quotes',
     getQuote: 'Get a Quote',
     retrieveQuotes: 'Retrieve Quotes',

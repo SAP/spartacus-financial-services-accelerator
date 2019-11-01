@@ -20,7 +20,7 @@ export interface MessagesCollection {
 }
 @Injectable()
 export class InboxDataService {
-  private _userId = 'anonymous';
+  private _userId;
   private _messageGroup: string;
   private _messages: Message[];
   private _searchConfig?: SearchConfig;

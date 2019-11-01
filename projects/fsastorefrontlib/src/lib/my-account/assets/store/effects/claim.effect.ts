@@ -6,7 +6,8 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap } from 'rxjs/operators';
 import { OccClaimService } from './../../../../occ/claim/claim.service';
 import { ClaimDataService } from '../../services/claim-data.service';
-import { Claim } from './../reducers/claim.reducer';
+import { Claim } from '../../../../../lib/occ-models';
+import * as fromUserRequestActions from '../../../../user-request/assets/store/actions';
 
 @Injectable()
 export class ClaimEffects {
@@ -53,11 +54,10 @@ export class ClaimEffects {
         .createClaim(payload.userId, payload.policyId, payload.contractId)
         .pipe(
           map((claim: Claim) => {
-            const userRequest = {
+            return new fromUserRequestActions.LoadUserRequest({
               userId: payload.userId,
               requestId: claim.requestId,
-            };
-            return new fromActions.LoadUserRequest(userRequest);
+            });
           }),
           catchError(error => of(new fromActions.CreateClaimFail(error)))
         );
