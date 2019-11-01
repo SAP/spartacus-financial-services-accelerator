@@ -19,17 +19,9 @@
         }
       }
     }
-    &-details {
-      color: var(--cx-color-text);
-      padding: 0 1rem 1rem 3rem;
-      font-size: $font-size-base;
-      min-height: 120px;
-      li {
-        list-style-type: circle;
-      }
-      p {
-        margin: 0 0 10px;
-      }
-    }
+  }
+  .item-details {
+    padding: 0 1rem 1rem 2rem;
+    min-height: 120px;
   }
 }
