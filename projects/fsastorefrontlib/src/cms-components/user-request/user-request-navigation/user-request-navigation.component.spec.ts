@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { UserRequestNavigationComponent } from './user-request-navigation.component';
 import { I18nTestingModule } from '@spartacus/core';
-import { FSUserRequest } from 'fsastorefrontlib/lib/occ-models';
+import { FSUserRequest } from '../../../occ/occ-models';
 import { of } from 'rxjs';
 import { UserRequestService } from '../../../core/user-request/services/user-request/user-request.service';
 import { RouterTestingModule } from '@angular/router/testing';
