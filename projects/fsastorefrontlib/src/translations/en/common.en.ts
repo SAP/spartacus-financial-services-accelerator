@@ -72,6 +72,7 @@ export const fscommon = {
     listView: 'List View',
     applications: 'Applications',
     mapView: 'Map View',
+    makeClaim: 'Make a Claim Online',
     application: {
       applicationRequestSubmitted:
         'Your application has been successfully saved in our system. An e-mail has been sent to your e-mail address.',

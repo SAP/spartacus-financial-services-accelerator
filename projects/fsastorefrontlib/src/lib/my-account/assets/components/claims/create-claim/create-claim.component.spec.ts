@@ -78,7 +78,7 @@ describe('AddOptionsComponent', () => {
     );
 
     expect(mockRoutingService.go).toHaveBeenCalledWith({
-      cxRoute: 'fnolIncident',
+      cxRoute: 'fnolIncidentPage',
     });
   });
 });

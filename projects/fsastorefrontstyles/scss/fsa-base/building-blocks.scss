@@ -7,6 +7,10 @@
 .clickable {
   @include accordion-status();
 }
+.is-disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+}
 .pointer {
   cursor: pointer;
 }
