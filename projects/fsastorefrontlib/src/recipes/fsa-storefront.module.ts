@@ -18,9 +18,9 @@ import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa
 @NgModule({
   imports: [
     PageComponentModule,
-    CmsLibModule,
-    CheckoutModule,
     B2cStorefrontModule,
+    CheckoutModule,
+    CmsLibModule,
     CheckoutModule,
     ConfigModule.forRoot(),
     ConfigModule.withConfig({

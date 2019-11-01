@@ -20,7 +20,6 @@ import {
   CloseAccountComponent,
 } from '@spartacus/storefront';
 import { FSUpdateProfileModule } from './update-profile/fs-update-profile.module';
-import { FSRegisterModule } from './register/fs-register.module';
 import { InboxModule } from '../myaccount/inbox/inbox.module';
 import { PolicyModule } from '../myaccount/policy/policy.module';
 import { QuoteModule } from '../myaccount/quote/quote.module';
@@ -108,7 +107,6 @@ const routes: Routes = [
     CmsModule,
     I18nModule,
     FSUpdateProfileModule,
-    FSRegisterModule,
     InboxModule,
     PolicyModule,
     QuoteModule,
