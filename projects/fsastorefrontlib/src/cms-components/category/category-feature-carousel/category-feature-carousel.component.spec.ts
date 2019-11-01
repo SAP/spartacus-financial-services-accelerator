@@ -3,7 +3,7 @@ import { CategoryFeatureCarouselComponent } from './category-feature-carousel.co
 import {
   CmsCategoryFeatureCarouselComponent,
   CmsComponent,
-} from '../../occ-models';
+} from '../../../occ/occ-models';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of } from 'rxjs';
 import { Component, Input, Directive } from '@angular/core';

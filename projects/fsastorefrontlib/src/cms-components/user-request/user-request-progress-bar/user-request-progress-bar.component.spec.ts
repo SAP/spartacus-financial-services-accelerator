@@ -5,7 +5,7 @@ import { I18nTestingModule } from '@spartacus/core';
 import { Pipe, PipeTransform } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { FSUserRequest } from '../../../../occ-models';
+import { FSUserRequest } from '../../../occ/occ-models';
 import { UserRequestService } from '../../../core/user-request/services';
 
 @Pipe({
