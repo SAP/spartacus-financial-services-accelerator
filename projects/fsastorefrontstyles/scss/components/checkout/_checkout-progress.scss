@@ -6,6 +6,10 @@
     .progress-inner-wrapper {
       flex-basis: 0;
     }
+    .step-number:before {
+      content: attr(data-step);
+      font-family: 'Open Sans', sans-serif;
+    }
   }
   .progress-node {
     position: relative;

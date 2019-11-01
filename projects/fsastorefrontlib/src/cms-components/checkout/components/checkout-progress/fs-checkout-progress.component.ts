@@ -38,7 +38,6 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
   }
   private subscription = new Subscription();
   activeCategory$: Observable<string>;
-  checkotSteps: FSCheckoutStep[] = this.steps;
 
   ngOnInit() {
     super.ngOnInit();
@@ -48,7 +47,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
 
   setActiveStepIndex() {
     this.activeStepUrl = this.activatedRoute.routeConfig.path;
-    this.checkotSteps.forEach((step, index) => {
+    this.steps.forEach((step, index) => {
       const routeUrl = this.routingConfigService.getRouteConfig(step.routeName)
         .paths[0];
       if (routeUrl === this.activeStepUrl) {
