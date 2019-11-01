@@ -4,7 +4,6 @@ import { ClaimService } from '../../../../core/myaccount/services';
 import { Store } from '@ngrx/store';
 import * as fromUserRequestStore from '../../../../core/user-request/store/reducers';
 
-
 @Component({
   selector: 'fsa-create-claim',
   templateUrl: './create-claim.component.html',

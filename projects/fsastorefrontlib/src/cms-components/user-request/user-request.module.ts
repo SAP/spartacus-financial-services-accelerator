@@ -21,7 +21,10 @@ import {
 import { UserRequestService } from '../../core/user-request/services/user-request/user-request.service';
 import { EffectsModule } from '@ngrx/effects';
 import { effects } from '../../core/user-request/store/effects/index';
-import { reducerToken, reducerProvider } from '../../core/user-request/store/reducers/index';
+import {
+  reducerToken,
+  reducerProvider,
+} from '../../core/user-request/store/reducers/index';
 import { StoreModule } from '@ngrx/store';
 import { UserRequestProgressBarComponent } from './user-request-progress-bar/user-request-progress-bar.component';
 import { UserRequestDataService } from '../../core/user-request/services/user-request-data.service';

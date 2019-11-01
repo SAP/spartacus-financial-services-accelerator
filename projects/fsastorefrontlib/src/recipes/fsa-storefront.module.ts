@@ -15,7 +15,6 @@ import { fsaRoutingConfig } from '../cms-structure/routing/default-fsa-routing-c
 import { CheckoutModule } from '../cms-components/checkout/checkout.module';
 import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa-checkout-config';
 
-
 @NgModule({
   imports: [
     PageComponentModule,
