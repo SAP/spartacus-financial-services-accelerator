@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 import { ClaimService } from '../../../../core/myaccount/services';
+import { Store } from '@ngrx/store';
+import * as fromUserRequestStore from '../../../../core/user-request/store/reducers';
+
 
 @Component({
   selector: 'fsa-create-claim',
@@ -10,7 +13,8 @@ import { ClaimService } from '../../../../core/myaccount/services';
 export class CreateClaimComponent implements OnInit {
   constructor(
     protected claimService: ClaimService,
-    private routingService: RoutingService
+    protected routingService: RoutingService,
+    protected store: Store<fromUserRequestStore.FSUserRequestState>
   ) {}
 
   isPolicySelected$;
@@ -31,8 +35,9 @@ export class CreateClaimComponent implements OnInit {
             policy.policyId,
             policy.contractId
           );
+
           this.routingService.go({
-            cxRoute: 'fnolIncident',
+            cxRoute: 'fnolIncidentPage',
           });
         }
       })

@@ -10,8 +10,8 @@ import { ClaimDataService, SelectedPolicy } from './claim-data.service';
 @Injectable()
 export class ClaimService {
   constructor(
-    private store: Store<fromReducer.UserState>,
-    private claimData: ClaimDataService,
+    protected store: Store<fromReducer.UserState>,
+    protected claimData: ClaimDataService,
     protected auth: AuthService
   ) {
     this.initClaims();
@@ -30,12 +30,6 @@ export class ClaimService {
       if (this.callback) {
         this.callback();
         this.callback = null;
-      }
-    });
-
-    this.auth.getUserToken().subscribe(userData => {
-      if (this.claimData.userId !== userData.userId) {
-        this.claimData.userId = userData.userId;
       }
     });
 

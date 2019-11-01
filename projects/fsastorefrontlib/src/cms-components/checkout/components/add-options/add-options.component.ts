@@ -21,8 +21,8 @@ export class AddOptionsComponent implements OnInit {
   constructor(
     protected cartService: FSCartService,
     protected routingService: RoutingService,
-    private checkoutConfigService: FSCheckoutConfigService,
-    private activatedRoute: ActivatedRoute
+    protected checkoutConfigService: FSCheckoutConfigService,
+    protected activatedRoute: ActivatedRoute
   ) {}
 
   entries$: Observable<OrderEntry[]>;
