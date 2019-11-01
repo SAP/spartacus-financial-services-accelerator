@@ -6,7 +6,6 @@ import { FSUserRequest } from '../../../occ-models';
 import { UserRequestSelector } from '../store';
 import * as fromReducer from '../store/reducers';
 
-
 @Injectable()
 export class UserRequestDataService {
   private _userId;

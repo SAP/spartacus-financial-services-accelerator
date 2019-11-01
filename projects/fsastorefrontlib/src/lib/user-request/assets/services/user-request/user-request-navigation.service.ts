@@ -27,7 +27,7 @@ export class UserRequestNavigationService {
 
   next(configurationSteps: FSStepData[], currentIndex: number): void {
     if (configurationSteps && currentIndex >= 0) {
-      const nextStep = configurationSteps [currentIndex + 1];
+      const nextStep = configurationSteps[currentIndex + 1];
       this.routingService.go({
         cxRoute: nextStep.pageLabelOrId,
       });
@@ -36,7 +36,7 @@ export class UserRequestNavigationService {
 
   back(configurationSteps: FSStepData[], currentIndex: number): void {
     if (configurationSteps && currentIndex >= 0) {
-      const previousStep = configurationSteps [currentIndex  - 1];
+      const previousStep = configurationSteps[currentIndex - 1];
       this.routingService.go({
         cxRoute: previousStep.pageLabelOrId,
       });

@@ -40,7 +40,9 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
                 this.configurationSteps,
                 this.activatedRoute.routeConfig.path
               );
-              this.activeStepIndex = this.configurationSteps.indexOf(this.activeStepData);
+              this.activeStepIndex = this.configurationSteps.indexOf(
+                this.activeStepData
+              );
             }
           })
         )
