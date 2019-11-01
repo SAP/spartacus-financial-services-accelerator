@@ -74,7 +74,6 @@ describe('CategoryCarouselComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CategoryFeatureCarouselComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
