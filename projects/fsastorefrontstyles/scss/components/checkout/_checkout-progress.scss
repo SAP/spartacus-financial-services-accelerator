@@ -11,11 +11,20 @@
     position: relative;
     cursor: pointer;
     margin-bottom: 14px;
+    &:hover {
+      .step.visited {
+        @extend .icon-FSA-edit;
+      }
+    }
     .step {
       display: flex;
       justify-content: center;
       font-size: var(--cx-h5-font-size);
+      &.visited {
+        @extend .icon-FSA-ok;
+      }
       &:before {
+        color: var(--cx-color-primary);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -31,38 +40,9 @@
     .step-number:before {
       content: attr(data-step);
     }
-    .icon-FSA-ok {
-      color: var(--cx-color-primary);
-    }
     .label {
       font-size: var(--cx-title-font-size);
       font-weight: var(--cx-font-weight-semi);
-    }
-    &.is-active {
-      .FSA-icon {
-        color: var(--cx-color-primary);
-        background: var(--cx-color-1);
-      }
-      .label {
-        color: var(--cx-color-primary);
-      }
-      &:before {
-        width: 100%;
-        background-color: var(--cx-color-7);
-      }
-    }
-    &.is-disabled {
-      cursor: default;
-      pointer-events: none;
-      .FSA-icon {
-        background: var(--cx-color-1);
-      }
-      .label {
-        font-weight: var(--cx-font-weight-normal);
-      }
-      &:before {
-        background-color: transparent;
-      }
     }
   }
   .link-wrapper {
