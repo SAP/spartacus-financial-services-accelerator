@@ -42,7 +42,7 @@ $font-weight-normal: 400;
 $font-weight-semi: 600;
 $font-weight-bold: 700;
 
-$font-size-base: 0.875rem; //14px
+$font-size-base: 14px;
 
 $h1-font-size: $font-size-base * 2; //28px
 $h2-font-size: $font-size-base * 1.857; //26px
@@ -51,5 +51,6 @@ $h4-font-size: $font-size-base * 1.571; //22px
 $h5-font-size: $font-size-base * 1.428; //20px
 $h6-font-size: $font-size-base * 1.285; //18px
 $title-font-size: $font-size-base * 1.142; //16px
+$xs-font-size: $font-size-base * 0.7; // 12px
 
 $border-grey: 1px solid var(--cx-color-3);

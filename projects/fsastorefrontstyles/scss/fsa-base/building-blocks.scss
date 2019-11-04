@@ -78,6 +78,22 @@
   padding: 15px;
   text-align: center;
 }
+.main-heading {
+  font-size: var(--cx-h2-font-size);
+  color: var(--cx-color-11);
+  font-weight: var(--cx-font-weight-semi);
+  position: relative;
+  &:before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-bottom: 3px solid var(--cx-color-12);
+    width: 7rem;
+  }
+}
 .image-item {
   display: block;
   width: 100%;

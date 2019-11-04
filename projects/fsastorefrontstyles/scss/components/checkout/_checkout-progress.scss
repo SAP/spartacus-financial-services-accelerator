@@ -8,16 +8,16 @@
   }
   .progress-node {
     color: var(--cx-color-12);
+    font-weight: var(--cx-font-weight-semi);
     flex-flow: column;
     cursor: pointer;
     position: relative;
-    margin-bottom: 14px;
     &:hover {
       .step.visited {
         @extend .icon-FSA-edit;
         &:before {
-          color: var(--cx-color-1);
-          background-color: var(--cx-color-12);
+          color: var(--cx-color-12);
+          background-color: var(--cx-color-1);
         }
       }
       .label {
@@ -32,7 +32,8 @@
       &.visited {
         @extend .icon-FSA-ok;
         &:before {
-          border: 3px solid $new-color-blue;
+          color: var(--cx-color-1);
+          background-color: var(--cx-color-12);
           @include transition();
         }
       }
@@ -50,14 +51,30 @@
     .step-number:before {
       content: attr(data-step);
     }
-    .label {
-      font-size: var(--cx-title-font-size);
-      font-weight: var(--cx-font-weight-semi);
+    @include media-breakpoint-down(sm) {
+      .step:before {
+        font-size: var(--cx-title-font-size);
+        width: 35px;
+        height: 35px;
+      }
+      .label {
+        font-size: var(--cx-xs-font-size);
+      }
     }
   }
-  .link-wrapper {
-    font-weight: var(--cx-font-weight-bold);
-    text-align: right;
-    margin: 15px 10px 0 0;
+  .label {
+    font-size: var(--cx-title-font-size);
+    padding: 0 2px;
+  }
+  .is-disabled {
+    color: var(--cx-color-6);
+    .step-number:before {
+      color: var(--cx-color-6);
+      font-weight: var(--cx-font-weight-normal);
+      border: 2px solid $color-semi-dark-grey;
+    }
+    .label {
+      font-weight: var(--cx-font-weight-normal);
+    }
   }
 }
