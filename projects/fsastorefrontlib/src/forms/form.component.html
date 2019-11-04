@@ -2,11 +2,11 @@
   {{ 'forms.titles.' + formId | cxTranslate }}
 </h3>
 <div *ngIf="formConfig" class="form">
-  <fsa-dynamic-form
-    #form="fsa-dynamicForm"
+  <cx-dynamic-form
+    #form="cx-dynamicForm"
     [config]="formConfig"
     (submit)="submit($event)"
   >
-  </fsa-dynamic-form>
+  </cx-dynamic-form>
   {{ form.valid }}
 </div>

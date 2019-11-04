@@ -2,11 +2,11 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 import { PricingService } from '../core/checkout/services/pricing/pricing.service';
 import { FormSampleConfigurations } from './configurations/form-sample-configurations';
-import { DynamicFormComponent } from './dynamic-form/containers/dynamic-form/dynamic-form.component';
+import { DynamicFormComponent } from '@fsa/forms';
 import {
   FormDefinition,
   FormSubmitType,
-} from './dynamic-form/models/field-config.interface';
+} from '@fsa/forms';
 
 @Component({
   selector: 'fsa-form-component',

@@ -4,7 +4,7 @@ import { CustomFormValidators } from '../../shared/util/validators/custom-form-v
 import {
   FormDefinition,
   FormSubmitType,
-} from '../dynamic-form/models/field-config.interface';
+} from '@fsa/forms';
 
 export class FormSampleConfigurations {
   static sampleConfigurations: FormDefinition[] = [

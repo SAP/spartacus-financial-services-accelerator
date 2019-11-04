@@ -1,0 +1,23 @@
+<div
+  class="dynamic-field form-select container"
+  [formGroup]="group"
+  [hidden]="group.controls[config.name].disabled"
+>
+  <div class="row align-items-center">
+    <label class="col-xs-12 col-md-6">{{ config.label }}</label>
+    <div *ngFor="let option of config.options">
+      <div class="col-xs-12 col-md-6">
+        <input
+          type="radio"
+          value="{{ option }}"
+          [formControlName]="config.name"
+        />
+        <label>{{ option }}</label>
+      </div>
+    </div>
+  </div>
+  <cx-error-notice
+    [warn]="group.controls[config.name]"
+    [parentConfig]="config"
+  ></cx-error-notice>
+</div>

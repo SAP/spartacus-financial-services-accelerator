@@ -26,6 +26,15 @@
       ],
       "fsastorefrontlib/*": [
         "dist/fsastorefrontlib/*"
+      ],
+      "@fsa/forms": [
+        "projects/fsastorefrontforms/src/projects"
+      ],
+      "fsastorefrontforms": [
+        "dist/fsastorefrontforms"
+      ],
+      "fsastorefrontforms/*": [
+        "dist/fsastorefrontforms/*"
       ]
     }
   }

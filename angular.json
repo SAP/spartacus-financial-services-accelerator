@@ -178,6 +178,50 @@
           }
         }
       }
+    },
+    "fsastorefrontforms": {
+      "projectType": "library",
+      "root": "projects/fsastorefrontforms",
+      "sourceRoot": "projects/fsastorefrontforms/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/fsastorefrontforms/tsconfig.lib.json",
+            "project": "projects/fsastorefrontforms/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/fsastorefrontforms/src/test.ts",
+            "tsConfig": "projects/fsastorefrontforms/tsconfig.spec.json",
+            "karmaConfig": "projects/fsastorefrontforms/karma.conf.js"
+          },
+           "styles": [
+              "src/styles.scss"
+            ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "./projects/fsastorefrontstyles/scss",
+                "node_modules/@spartacus/styles/scss"
+              ]
+            }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/fsastorefrontforms/tsconfig.lib.json",
+              "projects/fsastorefrontforms/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "fsastorefrontapp"
