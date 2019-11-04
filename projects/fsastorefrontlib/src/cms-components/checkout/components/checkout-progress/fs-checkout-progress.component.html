@@ -15,7 +15,7 @@
               *ngFor="let step of steps; let i = index"
             >
               <div
-                class="d-inline-block underline-effect progress-node mx-2"
+                class="d-flex progress-node mx-2"
                 [ngClass]="{
                   ' is-active': i === activeStepIndex,
                   ' is-disabled': i > activeStepIndex

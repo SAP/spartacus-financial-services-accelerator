@@ -2,37 +2,47 @@
 
 %fsa-checkout-progress {
   .progress-wrapper {
-    border-top: 2px solid var(--cx-color-3);
     .progress-inner-wrapper {
       flex-basis: 0;
     }
   }
   .progress-node {
-    position: relative;
+    color: var(--cx-color-12);
+    flex-flow: column;
     cursor: pointer;
+    position: relative;
     margin-bottom: 14px;
     &:hover {
       .step.visited {
         @extend .icon-FSA-edit;
+        &:before {
+          color: var(--cx-color-1);
+          background-color: var(--cx-color-12);
+        }
+      }
+      .label {
+        text-decoration: underline;
       }
     }
     .step {
       display: flex;
       justify-content: center;
-      font-size: var(--cx-h5-font-size);
+      font-size: var(--cx-h6-font-size);
+      position: relative;
       &.visited {
         @extend .icon-FSA-ok;
+        &:before {
+          border: 3px solid $new-color-blue;
+          @include transition();
+        }
       }
       &:before {
-        color: var(--cx-color-primary);
         display: flex;
         align-items: center;
         justify-content: center;
-        background: var(--cx-color-5);
-        padding: 16px;
-        border: $border-grey;
+        border: 3px solid $new-color-blue;
         border-radius: 50%;
-        margin-bottom: 20px;
+        margin-bottom: 1rem;
         width: 50px;
         height: 50px;
       }
