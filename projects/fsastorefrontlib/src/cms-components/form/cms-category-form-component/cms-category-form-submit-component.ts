@@ -1,37 +1,57 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import { CMSFormSubmitComponent, CmsComponent } from '../../../occ/occ-models';
+import { CMSFormSubmitComponent } from '../../../occ/occ-models';
 import { ActivatedRoute } from '@angular/router';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
+import { FormSampleConfigurations } from '../../../../src/forms/configurations/form-sample-configurations';
+import { map, switchMap } from 'rxjs/operators';
+import { FormDefinition } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'fsa-cms-category-form-submit-component',
   templateUrl: './cms-category-form-submit-component.html',
 })
-export class CmsCategoryFormSubmitComponent implements OnInit {
+export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
+  
   constructor(
     protected componentData: CmsComponentData<CMSFormSubmitComponent>,
     protected activatedRoute: ActivatedRoute,
     protected cmsComponentConnector: CmsComponentConnector
   ) {
-    activatedRoute.params.subscribe(params => {
-      this.pageContext = new PageContext(
-        params[this.routeParamId],
-        PageType.CATEGORY_PAGE
-      );
-    });
   }
 
   routeParamId = 'formCode';
   pageContext: PageContext;
-
-  component$: Observable<CmsComponent>;
+  formConfig: FormDefinition;
+  component$: Observable<CMSFormSubmitComponent>;
+  private subscription = new Subscription();
 
   ngOnInit() {
-    this.component$ = this.cmsComponentConnector.get(
-      this.componentData.uid,
-      this.pageContext
-    );
+   this.activatedRoute.params.pipe(
+     switchMap(routeParam => {
+      this.pageContext = new PageContext(
+        routeParam[this.routeParamId],
+        PageType.CATEGORY_PAGE
+      );
+      return this.component$ = this.cmsComponentConnector.get(
+        this.componentData.uid,
+        this.pageContext
+      );
+     }), map(componentData => {
+      if (componentData && componentData.formId) {
+        this.formConfig = FormSampleConfigurations.sampleConfigurations.filter(
+          item => item.formId === componentData.formId
+        )[0];
+      }
+     })
+     ).subscribe();
+  }
+
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

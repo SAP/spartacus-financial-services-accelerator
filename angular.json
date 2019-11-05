@@ -179,27 +179,26 @@
         }
       }
     },
-    "fsastorefrontforms": {
+    "dynamicforms": {
       "projectType": "library",
-      "root": "projects/fsastorefrontforms",
-      "sourceRoot": "projects/fsastorefrontforms/src",
-      "prefix": "lib",
+      "root": "projects/dynamicforms",
+      "sourceRoot": "projects/dynamicforms/src",
+      "prefix": "cx",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/fsastorefrontforms/tsconfig.lib.json",
-            "project": "projects/fsastorefrontforms/ng-package.json"
+            "tsConfig": "projects/dynamicforms/tsconfig.lib.json",
+            "project": "projects/dynamicforms/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/fsastorefrontforms/src/test.ts",
-            "tsConfig": "projects/fsastorefrontforms/tsconfig.spec.json",
-            "karmaConfig": "projects/fsastorefrontforms/karma.conf.js"
-          },
-           "styles": [
+            "main": "projects/dynamicforms/src/test.ts",
+            "tsConfig": "projects/dynamicforms/tsconfig.spec.json",
+            "karmaConfig": "projects/dynamicforms/karma.conf.js",
+            "styles": [
               "src/styles.scss"
             ],
             "stylePreprocessorOptions": {
@@ -208,13 +207,14 @@
                 "node_modules/@spartacus/styles/scss"
               ]
             }
+          }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/fsastorefrontforms/tsconfig.lib.json",
-              "projects/fsastorefrontforms/tsconfig.spec.json"
+              "projects/dynamicforms/tsconfig.lib.json",
+              "projects/dynamicforms/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

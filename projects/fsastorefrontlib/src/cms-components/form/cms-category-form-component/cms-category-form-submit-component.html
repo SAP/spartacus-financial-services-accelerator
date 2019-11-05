@@ -1,6 +1,9 @@
 <ng-container *ngIf="component$ | async as component">
-  <fsa-form-component
+<ng-container *ngIf="formConfig && component.category && component.formId">
+    <cx-form-component
     [formCategoryCode]="component.category"
     [formId]="component.formId"
-  ></fsa-form-component>
+    [formConfig]="formConfig"
+  ></cx-form-component>
+  </ng-container>
 </ng-container>

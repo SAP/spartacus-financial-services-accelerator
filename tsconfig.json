@@ -27,14 +27,14 @@
       "fsastorefrontlib/*": [
         "dist/fsastorefrontlib/*"
       ],
-      "@fsa/forms": [
-        "projects/fsastorefrontforms/src/projects"
+      "dynamicforms": [
+        "dist/dynamicforms"
       ],
-      "fsastorefrontforms": [
-        "dist/fsastorefrontforms"
+      "dynamicforms/*": [
+        "dist/dynamicforms/*"
       ],
-      "fsastorefrontforms/*": [
-        "dist/fsastorefrontforms/*"
+      "@fsa/dynamicforms": [
+        "projects/dynamicforms/src/projects"
       ]
     }
   }

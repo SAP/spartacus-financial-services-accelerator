@@ -1,0 +1,16 @@
+<h3 class="my-0 section-header-heading">
+  {{ 'forms.titles.' + formId | cxTranslate }}
+</h3>
+<ng-container *ngIf="formConfig !== undefined">
+    <div  class="form">
+        <cx-dynamic-form
+          #form="cx-dynamicForm"
+          [config]="formConfig"
+          (submit)="submit($event)"
+        >
+        </cx-dynamic-form>
+        {{ form.valid }}
+      </div>
+</ng-container>
+
+
