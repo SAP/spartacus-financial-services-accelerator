@@ -1,12 +1,6 @@
-import {
-  CmsService,
-  OccConfig,
-  I18nTestingModule,
-  CmsComponent,
-} from '@spartacus/core';
+import { CmsService, I18nTestingModule } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
-import { mergeMap, map } from 'rxjs/operators';
 import {
   CmsInboxTabComponent,
   CmsInboxComponent,
