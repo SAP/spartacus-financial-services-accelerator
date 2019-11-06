@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { CMSFormSubmitComponent } from '../../../occ/occ-models';
 import { ActivatedRoute } from '@angular/router';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { FormSampleConfigurations } from '../../../../src/forms/configurations/form-sample-configurations';
+import { FormSampleConfigurations } from './form-sample-configurations';
 import { map, switchMap } from 'rxjs/operators';
 import { FormDefinition } from '@fsa/dynamicforms';
 

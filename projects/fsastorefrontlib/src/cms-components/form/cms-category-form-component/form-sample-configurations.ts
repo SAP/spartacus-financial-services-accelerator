@@ -1,6 +1,6 @@
 import { Validators } from '@angular/forms';
-import { FormHelpers } from '../../shared/util/helpers/form-helpers';
-import { CustomFormValidators } from '../../shared/util/validators/custom-form-validators';
+import { FormHelpers } from '../../../shared/util/helpers/form-helpers';
+import { CustomFormValidators } from '../../../shared/util/validators/custom-form-validators';
 import { FormDefinition, FormSubmitType } from '@fsa/dynamicforms';
 
 export class FormSampleConfigurations {

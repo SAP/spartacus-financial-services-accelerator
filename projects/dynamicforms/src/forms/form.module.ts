@@ -5,7 +5,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { I18nModule } from '@spartacus/core';
 import { FormComponent } from './form.component';
-import { DynamicFormModule } from '../core';
+import { DynamicFormModule } from '../core/dynamic-form.module';
 import { PricingService } from '../core/services/pricing/pricing.service';
 
 @NgModule({

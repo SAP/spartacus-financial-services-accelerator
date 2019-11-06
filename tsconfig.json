@@ -34,7 +34,7 @@
         "dist/dynamicforms/*"
       ],
       "@fsa/dynamicforms": [
-        "projects/dynamicforms/src/projects"
+        "projects/dynamicforms/public_api"
       ]
     }
   }
