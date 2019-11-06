@@ -9,6 +9,7 @@ import { FormComponentsModule } from '../form-components/form-components.module'
 import { FormService } from '../services/form.service';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { OccYformService } from '../../occ/services/form/occ-yform.service';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [FormComponent, DynamicFormComponent],
   exports: [FormComponent, DynamicFormComponent],
   entryComponents: [FormComponent, DynamicFormComponent],
-  providers: [PricingService, FormService, OccMockFormService],
+  providers: [PricingService, FormService, OccMockFormService, OccYformService],
 })
 export class FormContainerModule {}

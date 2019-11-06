@@ -1,0 +1,63 @@
+import { TestBed, async } from '@angular/core/testing';
+
+import { OccYformService } from './occ-yform.service';
+import { OccConfig } from '@spartacus/core';
+import {
+  HttpTestingController,
+  HttpClientTestingModule,
+} from '@angular/common/http/testing';
+import { HttpRequest } from '@angular/common/http';
+
+const MockOccModuleConfig: OccConfig = {
+  context: {
+    baseSite: [''],
+  },
+  backend: {
+    occ: {
+      baseUrl: '',
+      prefix: '',
+    },
+  },
+};
+
+const applicationId = 'application1';
+const formDefinitionId = 'definition1';
+
+describe('OccYformService', () => {
+  let service: OccYformService;
+  let httpMock: HttpTestingController;
+
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientTestingModule],
+      providers: [
+        OccYformService,
+        { provide: OccConfig, useValue: MockOccModuleConfig },
+      ],
+    });
+    service = TestBed.get(OccYformService);
+    httpMock = TestBed.get(HttpTestingController);
+  });
+
+  afterEach(() => {
+    httpMock.verify();
+  });
+
+  describe('persistFormData', () => {
+    it('saveFormData', async(() => {
+      service.saveFormData(formDefinitionId, applicationId, '', {}).subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        console.log(req.url);
+        console.log(req.url === '/forms/data');
+        return (
+          req.url === '/forms/data' &&
+          req.params.append('fields', 'FULL') &&
+          req.params.append('definitionId', formDefinitionId) &&
+          req.params.append('applicationId', applicationId) &&
+          req.params.append('formDataId', '') &&
+          req.method === 'PUT'
+        );
+      }, `PUT method and url`);
+    }));
+  });
+});
