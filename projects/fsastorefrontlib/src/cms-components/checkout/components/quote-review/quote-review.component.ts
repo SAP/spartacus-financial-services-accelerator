@@ -48,6 +48,16 @@ export class QuoteReviewComponent implements OnInit {
   }
   next() {
     this.checkoutDeliveryService.setDeliveryMode('financial-default');
+    // mocked delivery address
+    this.checkoutDeliveryService.createAndSetAddress({
+      id: 'testID',
+      country: { isocode: 'GB' },
+      firstName: 'Donna',
+      lastName: 'Moore',
+      town: 'London',
+      line1: 'line1',
+      postalCode: 'WC1V 6PL',
+    });
     this.routingService.go(this.checkoutStepUrlNext);
   }
 }
