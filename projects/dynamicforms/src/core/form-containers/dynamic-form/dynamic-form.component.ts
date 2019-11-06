@@ -33,12 +33,14 @@ export class DynamicFormComponent implements OnInit {
   constructor(private formService: FormService) {}
 
   ngOnInit() {
-    this.form = this.formService.createForm(this.config);
-    this.config.formGroups.map(formGroup => {
-      formGroup.fieldConfigs.map(inputField => {
-        this.allInputs.push(inputField);
+    if (this.config) {
+      this.form = this.formService.createForm(this.config);
+      this.config.formGroups.map(formGroup => {
+        formGroup.fieldConfigs.map(inputField => {
+          this.allInputs.push(inputField);
+        });
       });
-    });
+    }
   }
 
   handleSubmit(event: Event) {

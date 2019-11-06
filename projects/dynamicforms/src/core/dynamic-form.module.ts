@@ -11,7 +11,7 @@ import { FormContainerModule } from './form-containers/form-container.module';
     CommonModule,
     I18nModule,
     FormComponentsModule,
-    FormContainerModule
+    FormContainerModule,
   ],
   providers: [FormService, OccMockFormService],
 })

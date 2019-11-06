@@ -16,7 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     I18nModule,
     RouterModule,
     ReactiveFormsModule,
-    FormComponentsModule
+    FormComponentsModule,
   ],
   declarations: [FormComponent, DynamicFormComponent],
   exports: [FormComponent, DynamicFormComponent],
