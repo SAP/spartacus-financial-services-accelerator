@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { I18nModule } from '@spartacus/core';
 import { DynamicFieldDirective } from './dynamic-field/dynamic-field.directive';
-import { ErrorNoticeComponent } from './error-notice/error-notice.component';
+import { FormErrorNoticeComponent } from './form-error-notice/form-error-notice.component';
 import { FormButtonComponent } from './form-button/form-button.component';
 import { FormDatePickerComponent } from './form-datepicker/form-datepicker.component';
 import { FormInputComponent } from './form-input/form-input.component';
@@ -22,7 +22,7 @@ import { FormTextAreaComponent } from './form-text-area/form-text-area.component
     FormRadioComponent,
     FormTitleComponent,
     FormDatePickerComponent,
-    ErrorNoticeComponent,
+    FormErrorNoticeComponent,
     FormTextAreaComponent,
   ],
   entryComponents: [
@@ -42,7 +42,7 @@ import { FormTextAreaComponent } from './form-text-area/form-text-area.component
     FormRadioComponent,
     FormTitleComponent,
     FormDatePickerComponent,
-    ErrorNoticeComponent,
+    FormErrorNoticeComponent,
     FormTextAreaComponent,
   ],
 })

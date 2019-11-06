@@ -197,16 +197,7 @@
           "options": {
             "main": "projects/dynamicforms/src/test.ts",
             "tsConfig": "projects/dynamicforms/tsconfig.spec.json",
-            "karmaConfig": "projects/dynamicforms/karma.conf.js",
-            "styles": [
-              "src/styles.scss"
-            ],
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "./projects/fsastorefrontstyles/scss",
-                "node_modules/@spartacus/styles/scss"
-              ]
-            }
+            "karmaConfig": "projects/dynamicforms/karma.conf.js"
           }
         },
         "lint": {
