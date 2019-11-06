@@ -10,6 +10,7 @@
     "start:qa": "ng serve -c=qa",
     "start:ci": "ng serve -c=ci",
     "test": "ng test",
+    "test:all": "concurrently \"ng test dynamicforms\" \"ng test fsastorefrontlib\"",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "e2e:cy:open": "yarn --cwd ./projects/fsastorefront-e2e-cypress run cy:open",
