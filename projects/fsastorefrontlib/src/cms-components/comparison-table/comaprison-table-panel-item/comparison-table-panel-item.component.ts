@@ -9,10 +9,10 @@ import { CmsConfig, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { PricingData } from '../../../core/models/pricing.interface';
 import { FSCheckoutConfigService } from '../../../core/checkout/services/fs-checkout-config.service';
-import { PricingService } from '../../../core/checkout/services/pricing/pricing.service';
 import { FSProductService } from '../../../core/checkout/services/product/fs-product.service';
 import { FSProduct, OneTimeChargeEntry } from '../../../occ/occ-models';
 import { FSCartService } from '../../../core/checkout/services';
+import { PricingService } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'fsa-comparison-table-panel-item',
