@@ -2,7 +2,10 @@ import { Component, Input, ViewChild } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 
 import { PricingService } from '../core/services/pricing/pricing.service';
-import { FormDefinition, FormSubmitType } from '../core/models/field-config.interface';
+import {
+  FormDefinition,
+  FormSubmitType,
+} from '../core/models/field-config.interface';
 import { DynamicFormComponent } from '../core/containers/dynamic-form/dynamic-form.component';
 
 @Component({

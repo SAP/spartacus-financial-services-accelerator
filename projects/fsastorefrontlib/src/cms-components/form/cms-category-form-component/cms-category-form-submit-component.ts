@@ -13,13 +13,11 @@ import { FormDefinition } from '@fsa/dynamicforms';
   templateUrl: './cms-category-form-submit-component.html',
 })
 export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
-  
   constructor(
     protected componentData: CmsComponentData<CMSFormSubmitComponent>,
     protected activatedRoute: ActivatedRoute,
     protected cmsComponentConnector: CmsComponentConnector
-  ) {
-  }
+  ) {}
 
   routeParamId = 'formCode';
   pageContext: PageContext;
@@ -28,26 +26,28 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
 
   ngOnInit() {
-   this.activatedRoute.params.pipe(
-     switchMap(routeParam => {
-      this.pageContext = new PageContext(
-        routeParam[this.routeParamId],
-        PageType.CATEGORY_PAGE
-      );
-      return this.component$ = this.cmsComponentConnector.get(
-        this.componentData.uid,
-        this.pageContext
-      );
-     }), map(componentData => {
-      if (componentData && componentData.formId) {
-        this.formConfig = FormSampleConfigurations.sampleConfigurations.filter(
-          item => item.formId === componentData.formId
-        )[0];
-      }
-     })
-     ).subscribe();
+    this.activatedRoute.params
+      .pipe(
+        switchMap(routeParam => {
+          this.pageContext = new PageContext(
+            routeParam[this.routeParamId],
+            PageType.CATEGORY_PAGE
+          );
+          return (this.component$ = this.cmsComponentConnector.get(
+            this.componentData.uid,
+            this.pageContext
+          ));
+        }),
+        map(componentData => {
+          if (componentData && componentData.formId) {
+            this.formConfig = FormSampleConfigurations.sampleConfigurations.filter(
+              item => item.formId === componentData.formId
+            )[0];
+          }
+        })
+      )
+      .subscribe();
   }
-
 
   ngOnDestroy(): void {
     if (this.subscription) {

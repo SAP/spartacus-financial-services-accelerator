@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { PricingData, PriceAttributeGroup } from '../../models/form-pricing.interface';
+import {
+  PricingData,
+  PriceAttributeGroup,
+} from '../../models/form-pricing.interface';
 
 @Injectable()
 export class PricingService {
