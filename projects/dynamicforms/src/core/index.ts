@@ -1,4 +1,4 @@
 export * from './models/index';
-export * from './containers/index';
-export * from './components/index';
+export * from './form-containers/index';
+export * from './form-components/index';
 export * from './dynamic-form.module';
