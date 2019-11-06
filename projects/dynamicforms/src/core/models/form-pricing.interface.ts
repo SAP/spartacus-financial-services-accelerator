@@ -1,3 +1,4 @@
+// models should be moved to fsastorefrontlib once the form data is posted to backend
 export interface PricingData {
   priceAttributeGroups?: PriceAttributeGroup[];
 }
