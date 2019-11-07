@@ -44,6 +44,7 @@ export function reducer(
 
     case fromAction.CREATE_CLAIM_SUCCESS: {
       const content = {...action.payload};
+      console.log(content);
       return {
         ...state,
         content,
