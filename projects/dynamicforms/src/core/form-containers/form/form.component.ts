@@ -1,7 +1,6 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 
-import { PricingService } from '../../../../../fsastorefrontlib/src/core/checkout/services/pricing/pricing.service';
 import { FormDefinition } from '../../models/field-config.interface';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 import { OccYformService } from 'projects/dynamicforms/src/occ/services/form/occ-yform.service';
@@ -14,7 +13,6 @@ import { FormDataService } from '../../services/data/form-data.service';
 export class FormComponent {
   constructor(
     protected routingService: RoutingService,
-    protected pricingService: PricingService,
     protected yformService: OccYformService,
     protected formDataService: FormDataService
   ) {}
