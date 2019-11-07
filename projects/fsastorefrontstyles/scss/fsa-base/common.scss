@@ -13,3 +13,8 @@
     }
   }
 }
+cx-navigation-ui.flyout > nav > .wrapper {
+  @include media-breakpoint-down(lg) {
+    right: 0.5rem;
+  }
+}

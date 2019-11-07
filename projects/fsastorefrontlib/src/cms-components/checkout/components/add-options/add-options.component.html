@@ -58,7 +58,7 @@
                   orderEntryData.entryNumber
                 )
               "
-              class="secondary-button"
+              class="secondary-button btn-block"
             >
               {{ 'fscommon.add' | cxTranslate }}
             </button>
@@ -66,7 +66,7 @@
           <div *ngIf="orderEntryData.removeable">
             <button
               (click)="removeProductFromCart(orderEntryData)"
-              class="secondary-button "
+              class="secondary-button btn-block"
             >
               {{ 'common.remove' | cxTranslate }}
             </button>
