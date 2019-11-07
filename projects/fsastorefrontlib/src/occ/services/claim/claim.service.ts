@@ -27,6 +27,14 @@ export class OccClaimService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
+  public getClaim(userId: string, claimId: string): Observable<any> {
+    const url = this.getClaimsEndpoint(userId) + '/' + claimId;
+    const params = new HttpParams({ fromString: FULL_PARAMS });
+    return this.http
+      .get(url, { params: params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
   public deleteClaim(userId: string, claimId: string) {
     const url = this.getClaimsEndpoint(userId) + '/' + claimId;
     const headers = new HttpHeaders({
