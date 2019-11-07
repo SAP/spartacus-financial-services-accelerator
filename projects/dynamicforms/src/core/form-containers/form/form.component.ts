@@ -3,7 +3,7 @@ import { RoutingService } from '@spartacus/core';
 
 import { FormDefinition } from '../../models/field-config.interface';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
-import { OccYformService } from 'projects/dynamicforms/src/occ/services/form/occ-yform.service';
+import { OccYformService } from '../../../occ/services/yform/occ-yform.service';
 import { FormDataService } from '../../services/data/form-data.service';
 
 @Component({

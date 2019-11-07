@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { OccEndpointsService } from '@spartacus/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { YFormData } from 'projects/dynamicforms/src/core';
+import { YFormData } from '../../../core/models/form-occ.models';
 
 const FULL_PARAMS = 'fields=FULL';
 

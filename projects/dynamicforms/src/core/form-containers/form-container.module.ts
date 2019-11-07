@@ -8,7 +8,7 @@ import { FormComponentsModule } from '../form-components/form-components.module'
 import { FormBuilderService } from '../services/builder/form-builder.service';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { ReactiveFormsModule } from '@angular/forms';
-import { OccYformService } from '../../occ/services/form/occ-yform.service';
+import { OccYformService } from '../../occ/services/yform/occ-yform.service';
 import { FormDataService } from '../services/data/form-data.service';
 
 @NgModule({
