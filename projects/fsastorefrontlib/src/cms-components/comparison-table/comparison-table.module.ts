@@ -65,7 +65,7 @@ import { ComparisonTableService } from './comparison-table.service';
     ComparisonTableService,
     FSCartService,
     FSProductService,
-    PricingService
+    PricingService,
   ],
 })
 export class ComparisonTableModule {}

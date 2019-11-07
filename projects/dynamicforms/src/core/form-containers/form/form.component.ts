@@ -32,7 +32,11 @@ export class FormComponent {
       this.yformService
         .saveFormData(this.formId, 'insurance', '', filteredData)
         .subscribe(response => {
-          console.log(response);
+          this.formDataService.currentForm$.next({
+            id: response.id,
+            formDefinitionId: this.formId,
+            content: response.content,
+          });
         });
       this.navigateNext();
     }

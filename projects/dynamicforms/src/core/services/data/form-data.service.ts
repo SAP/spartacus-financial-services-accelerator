@@ -1,22 +1,23 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { YFormData } from '../../models';
 
 @Injectable()
 export class FormDataService {
-  currentForm$ = new BehaviorSubject<any>({});
+  currentForm$: BehaviorSubject<YFormData> = new BehaviorSubject({});
 
   buildFormData(formData: { [name: string]: Object }): any {
-    const filteredData = this.filterData(formData);
-    this.currentForm$.next(formData);
-    return filteredData;
+    return this.filterData(formData);
   }
 
-  filterData(formData: any): any {
-    // TO BE IMPLEMENTED
+  filterData(formData: { [name: string]: Object }): any {
+    if (formData.button) {
+      delete formData.button;
+    }
     return formData;
   }
 
-  getCurrentFormData(): Observable<any> {
+  getCurrentFormData(): Observable<YFormData> {
     return this.currentForm$.asObservable();
   }
 }

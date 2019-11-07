@@ -49,7 +49,9 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     );
 
     this.formDataService.getCurrentFormData().subscribe(formData => {
-      this.pricingData = this.pricingService.buildPricingData(formData);
+      this.pricingData = this.pricingService.buildPricingData(
+        JSON.parse(formData.content)
+      );
       this.product$ = this.productService.getCalculatedProductData(
         this.productCode,
         this.pricingData
