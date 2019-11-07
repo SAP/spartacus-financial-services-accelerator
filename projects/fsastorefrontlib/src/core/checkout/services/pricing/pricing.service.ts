@@ -1,15 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
 import {
   PricingData,
   PriceAttributeGroup,
-} from '../../models/form-pricing.interface';
+} from '../../../../occ/occ-models/form-pricing.interface';
 
 @Injectable()
 export class PricingService {
-  pricingSource$ = new BehaviorSubject<PricingData>({});
-
-  buildPricingData(formData: { [name: string]: Object }) {
+  buildPricingData(formData: { [name: string]: Object }): PricingData {
     const pricingAttributesData: PricingData = {
       priceAttributeGroups: [],
     };
@@ -30,10 +27,7 @@ export class PricingService {
         pricingAttributesData.priceAttributeGroups.push(priceAttributeGroup);
       }
     });
-    this.pricingSource$.next(pricingAttributesData);
-  }
 
-  getPricingAttributes(): Observable<PricingData> {
-    return this.pricingSource$.asObservable();
+    return pricingAttributesData;
   }
 }

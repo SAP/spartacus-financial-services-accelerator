@@ -12,7 +12,8 @@ import { FSCheckoutConfigService } from '../../../core/checkout/services/fs-chec
 import { FSProductService } from '../../../core/checkout/services/product/fs-product.service';
 import { FSProduct, OneTimeChargeEntry } from '../../../occ/occ-models';
 import { FSCartService } from '../../../core/checkout/services';
-import { PricingService } from '@fsa/dynamicforms';
+import { PricingService } from '../../../core/checkout/services/pricing/pricing.service';
+import { FormDataService } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'fsa-comparison-table-panel-item',
@@ -35,7 +36,8 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     protected checkoutConfigService: FSCheckoutConfigService,
     protected activatedRoute: ActivatedRoute,
     protected pricingService: PricingService,
-    protected productService: FSProductService
+    protected productService: FSProductService,
+    protected formDataService: FormDataService
   ) {}
 
   product$: Observable<FSProduct>;
@@ -45,8 +47,9 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
       this.activatedRoute
     );
-    this.pricingService.getPricingAttributes().subscribe(priceAttributes => {
-      this.pricingData = priceAttributes;
+
+    this.formDataService.getCurrentFormData().subscribe(formData => {
+      this.pricingData = this.pricingService.buildPricingData(formData);
       this.product$ = this.productService.getCalculatedProductData(
         this.productCode,
         this.pricingData
