@@ -6,11 +6,9 @@ import { ClaimDataService } from 'projects/fsastorefrontlib/src/core/my-account/
   templateUrl: './user-request-summary.component.html',
 })
 export class UserRequestSummaryComponent implements OnInit {
-  constructor(
-    protected claimData: ClaimDataService
-  ) {}
+  constructor(protected claimData: ClaimDataService) {}
 
   ngOnInit() {
-    console.log(this.claimData);
+    console.log(this.claimData.claimNumber);
   }
 }

@@ -23,6 +23,7 @@ import { ClaimsComponent } from './claims/claims.component';
 import { CreateClaimComponent } from './create-claim/create-claim.component';
 import { ClaimDataService } from '../../../core/my-account/services/claim-data.service';
 import { ClaimService } from '../../../core/my-account/services/claim.service';
+import { ClaimStoreModule } from 'projects/fsastorefrontlib/src/core/my-account/store/claim-store.module';
 
 const routes: Routes = [
   {
@@ -44,6 +45,7 @@ const routes: Routes = [
     FormsModule,
     NgSelectModule,
     SpinnerModule,
+    ClaimStoreModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {

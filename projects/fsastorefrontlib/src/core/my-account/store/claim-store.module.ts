@@ -12,12 +12,12 @@ import {
   ConfigModule,
 } from '@spartacus/core';
 
-export function userRequestConfigFactory(): StateConfig {
+export function claimConfigFactory(): StateConfig {
   const config: StateConfig = {
     state: {
       storageSync: {
         keys: {
-          [`assets.claim`]: StorageSyncType.LOCAL_STORAGE,
+          [`assets.claims`]: StorageSyncType.LOCAL_STORAGE,
         },
       },
     },
@@ -34,7 +34,7 @@ export function userRequestConfigFactory(): StateConfig {
       metaReducers,
     }),
     EffectsModule.forFeature(effects),
-    ConfigModule.withConfigFactory(userRequestConfigFactory),
+    ConfigModule.withConfigFactory(claimConfigFactory),
   ],
   providers: [reducerProvider],
 })

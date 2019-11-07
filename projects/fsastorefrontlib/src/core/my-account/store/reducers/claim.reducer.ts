@@ -11,7 +11,7 @@ export const initialState: ClaimState = {
   claims: {},
   refresh: false,
   loaded: false,
-  content: {}
+  content: {},
 };
 
 export function reducer(
@@ -43,7 +43,7 @@ export function reducer(
       };
 
     case fromAction.CREATE_CLAIM_SUCCESS: {
-      const content = {...action.payload};
+      const content = { ...action.payload };
       console.log(content);
       return {
         ...state,

@@ -19,18 +19,19 @@ export class ClaimDataService {
 
   constructor(
     protected store: Store<fromReducer.UserState>,
-    protected auth: AuthService) {
+    protected auth: AuthService
+  ) {
     this.auth.getUserToken().subscribe(userData => {
       if (this.userId !== userData.userId) {
         this.userId = userData.userId;
       }
     });
     this.store
-    .pipe(select(fromClaimStore.getClaimsContent))
-    .subscribe(claimData => {
-      console.log(claimData);
-      this._content = claimData;
-    });
+      .pipe(select(fromClaimStore.getClaimsContent))
+      .subscribe(claimData => {
+        console.log(claimData);
+        this._content = claimData;
+      });
   }
 
   set userId(val) {
@@ -43,6 +44,12 @@ export class ClaimDataService {
 
   get content(): Claim {
     return this._content;
+  }
+
+  get claimNumber(): string {
+    if (!!this.content) {
+      return this.content.claimNumber;
+    }
   }
 
   set claims(val: Claim[]) {
