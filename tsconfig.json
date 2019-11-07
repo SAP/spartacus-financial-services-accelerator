@@ -26,6 +26,15 @@
       ],
       "fsastorefrontlib/*": [
         "dist/fsastorefrontlib/*"
+      ],
+      "dynamicforms": [
+        "dist/dynamicforms"
+      ],
+      "dynamicforms/*": [
+        "dist/dynamicforms/*"
+      ],
+      "@fsa/dynamicforms": [
+        "projects/dynamicforms/public_api"
       ]
     }
   }
