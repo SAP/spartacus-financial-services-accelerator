@@ -9,8 +9,7 @@ button,
 .btn-secondary,
 .action-button,
 .btn-action {
-  padding: 5px;
-  margin: 6px 0;
+  min-height: 40px;
   border: 3px solid var(--cx-color-transparent);
   border-radius: 4px;
   font-size: 1rem;
