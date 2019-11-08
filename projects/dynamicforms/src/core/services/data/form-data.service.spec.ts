@@ -19,14 +19,14 @@ const mockFilteredData = {
 const mockData: Observable<YFormData> = of({
   formDefinitionId: 'formDefinitionId',
   id: 'formDataId',
-  content: '{test: test}'
+  content: '{test: test}',
 });
 
 const formId = 'formDefinitionId';
 const applicationId = 'applicationId';
 const formDataId = 'formDataId';
 const content = {
-  test: 'test'
+  test: 'test',
 };
 
 class MockOccYFormService {
@@ -46,7 +46,8 @@ describe('FormDataService', () => {
   beforeEach(() => {
     mockYFormService = new MockOccYFormService();
     TestBed.configureTestingModule({
-      providers: [FormDataService,
+      providers: [
+        FormDataService,
         { provide: OccYformService, useValue: mockYFormService },
       ],
     });
@@ -59,7 +60,9 @@ describe('FormDataService', () => {
   });
 
   it('should save data', () => {
-    expect(service.saveFormData(formId, applicationId, content)).toEqual(mockData);
+    expect(service.saveFormData(formId, applicationId, content)).toEqual(
+      mockData
+    );
   });
 
   it('should get data', () => {
