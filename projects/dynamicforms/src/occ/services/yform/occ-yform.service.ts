@@ -17,8 +17,8 @@ export class OccYformService {
   public saveFormData(
     definitionId: string,
     applicationId: string,
-    formDataId: string,
-    formContent: any
+    formContent: any,
+    formDataId?: string
   ) {
     console.log(applicationId);
     const url = this.getYFormsEndpoint() + '/data';

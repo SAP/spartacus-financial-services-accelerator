@@ -32,7 +32,7 @@ export class FormComponent {
     if (this.form.valid) {
       const filteredData = this.formDataService.buildFormData(formData);
       this.yformService
-        .saveFormData(this.formId, this.applicationId, '', filteredData)
+        .saveFormData(this.formId, this.applicationId, filteredData)
         .subscribe(response => {
           this.formDataService.currentForm$.next({
             id: response.id,

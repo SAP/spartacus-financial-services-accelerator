@@ -47,7 +47,7 @@ describe('OccYformService', () => {
 
   describe('persistFormData', () => {
     it('saveFormData', async(() => {
-      service.saveFormData(formDefinitionId, applicationId, '', {}).subscribe();
+      service.saveFormData(formDefinitionId, applicationId, {}).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         console.log(req.url);
         console.log(req.url === '/forms/data');
