@@ -36,6 +36,16 @@ export class OccYformService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
+  public getFormData(formDataId: string) {
+    const url = this.getYFormsEndpoint() + '/data';
+    const params = new HttpParams({
+      fromString: FULL_PARAMS + '&formDataId=' + formDataId,
+    });
+    return this.http
+      .get<YFormData>(url, { params: params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
   protected getYFormsEndpoint() {
     const formsEndpoint = '/forms';
     return this.occEndpointService.getBaseEndpoint() + formsEndpoint;

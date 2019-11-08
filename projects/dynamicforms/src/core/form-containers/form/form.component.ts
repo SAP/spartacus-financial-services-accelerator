@@ -36,12 +36,14 @@ export class FormComponent {
             id: response.id,
             formDefinitionId: this.formId,
             content: response.content,
+            categoryCode: this.formCategoryCode,
           });
+          this.navigateNext();
         });
-      this.navigateNext();
     }
   }
 
+  // Should be removed from dynamic forms module!!!
   // Should be more configurable to support other routes/pages
   navigateNext() {
     this.routingService.go({

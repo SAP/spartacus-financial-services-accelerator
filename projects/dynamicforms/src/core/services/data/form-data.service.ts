@@ -6,6 +6,10 @@ import { YFormData } from '../../models';
 export class FormDataService {
   currentForm$: BehaviorSubject<YFormData> = new BehaviorSubject({});
 
+  getCurrentFormData(): Observable<YFormData> {
+    return this.currentForm$.asObservable();
+  }
+
   buildFormData(formData: { [name: string]: Object }): any {
     return this.filterData(formData);
   }
@@ -15,9 +19,5 @@ export class FormDataService {
       delete formData.button;
     }
     return formData;
-  }
-
-  getCurrentFormData(): Observable<YFormData> {
-    return this.currentForm$.asObservable();
   }
 }
