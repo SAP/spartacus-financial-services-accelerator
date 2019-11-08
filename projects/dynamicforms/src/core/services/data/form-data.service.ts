@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { YFormData } from '../../models';
-import { OccYformService } from 'projects/dynamicforms/src/occ';
+import { OccYformService } from '../../../occ/services/yform/occ-yform.service';
 
 @Injectable()
 export class FormDataService {
