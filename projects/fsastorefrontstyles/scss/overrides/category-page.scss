@@ -2,35 +2,34 @@
 @import '../theme';
 
 .FSCategoryPageTemplate {
-  text-align: center;
+  cx-page-slot > * {
+    display: flex;
+  }
   .Section1 {
+    padding: 0;
+    max-width: 100%;
     .enriched-banner {
       position: relative;
-      &__title {
-        display: block;
-        font-size: 44px;
-        color: var(--cx-color-secondary);
-        @include media-breakpoint-down(md) {
-          color: var(--cx-color-text);
-          font-size: 4vw;
-        }
-        @include media-breakpoint-down(xs) {
-          font-size: 5vw;
-        }
-      }
       &__text {
-        position: absolute;
-        text-align: center;
-        left: 0;
-        bottom: 0;
         background: rgba(255, 255, 255, 0.7);
-        padding: 35px;
+        display: flex;
+        flex-flow: column;
+        text-align: center;
+        position: absolute;
+        bottom: 0;
+        padding: 2rem;
         width: 100%;
         @include media-breakpoint-down(md) {
-          padding: 20px 35px;
+          padding: 1rem;
         }
-        @include media-breakpoint-down(xs) {
-          padding: 10px 35px;
+      }
+      &__title {
+        font-size: var(--cx-h3-font-size);
+        color: var(--cx-color-11);
+        font-weight: var(--cx-font-weight-semi);
+        padding-bottom: 1.2rem;
+        @include media-breakpoint-down(md) {
+          font-size: var(--cx-title-font-size);
         }
       }
       .image-wrapper {
@@ -39,127 +38,90 @@
         }
       }
       &__details {
-        @include contentWidth;
-        display: block;
-        margin: 30px auto 0;
-        @include media-breakpoint-down(xs) {
-          margin-top: 10px;
-        }
+        display: flex;
+        justify-content: center;
       }
       &__styled-text {
-        padding: 0.5rem 1rem;
         @extend .primary-button;
+        font-weight: var(--cx-font-weight-semi);
+        padding: 0.5rem 1rem;
+        @include media-breakpoint-down(md) {
+          font-size: var(--cx-xs-font-size);
+        }
       }
     }
   }
   .Section2A,
-  .Section4 {
-    @include contentWidth;
-    padding: 0 10px;
+  .Section2B {
+    fsa-cms-custom-container {
+      @include box-shadow(0px, 7px, 9px, -1px, $color-dark-grey, 0.3);
+    }
   }
   .Section2A {
-    .enriched-banner {
-      background-color: var(--cx-color-4);
-      border: $border-grey;
-      margin: 30px auto 0;
-      padding: 20px;
+    fsa-cms-custom-container {
+      flex-direction: column;
       text-align: center;
-      .image-wrapper {
-        display: none;
-      }
-      &__details {
-        display: block;
-        margin: 30px auto 0;
-      }
-      &__title {
-        margin: 0 auto;
-        font-size: 28px;
-        @include media-breakpoint-down(md) {
-          font-size: 20px;
-        }
-      }
-      &__styled-text {
-        @include primary-btn-color;
-        display: inline-block;
-        font-size: 18px;
-        line-height: 0;
-        padding: 25px 0;
-        text-transform: uppercase;
-        width: 25%;
-        @include media-breakpoint-down(md) {
-          width: 70%;
-          font-size: 13px;
-        }
-      }
     }
   }
   .Section2B {
-    max-width: 1120px; // quick fix until we agree on the elements and their look on this page
-    width: calc(100% - 20px);
-    margin: 30px auto;
-    align-items: center;
-    border: 1px solid var(--cx-color-3);
-    background-color: var(--cx-color-4);
-    cx-banner,
-    cx-paragraph {
-      flex: 0 1 auto;
-      width: 50%;
+    fsa-cms-custom-container {
       @include media-breakpoint-down(sm) {
-        width: 100%;
+        flex-direction: column;
       }
-    }
-    cx-paragraph {
-      padding: 1rem;
-      text-align: left;
-      @include media-breakpoint-down(sm) {
-        text-align: center;
-        border: 1px solid var(--cx-color-3);
-        background-color: var(--cx-color-4);
+      cx-banner,
+      cx-paragraph {
+        flex: 1 1 50%;
       }
-      & > p {
-        margin-bottom: 0;
+      cx-paragraph {
+        padding: 1rem;
+        text-align: left;
+        @include media-breakpoint-down(sm) {
+          text-align: center;
+        }
+        & > p {
+          margin-bottom: 0;
+        }
       }
-    }
-    .category-primary-promotion-banner {
-      &__title,
-      &__text {
-        padding: 0 1rem;
+      .category-primary-promotion-banner {
+        &__title,
+        &__text {
+          padding: 0 1rem;
+        }
+        &__text {
+          margin-bottom: 0;
+        }
       }
-      &__text {
-        margin-bottom: 0;
-      }
-    }
-    @include media-breakpoint-down(sm) {
-      border: none;
-      background-color: transparent;
-      margin: 20px 0;
-      padding: 0 10px;
-      width: 100%;
     }
   }
   .Section4 {
-    display: flex;
-    text-align: left;
-    @include media-breakpoint-down(md) {
-      flex-direction: column;
-      padding: 0 10px;
-    }
-    fsa-product-feature {
-      display: block;
-      flex: 0 1 33.3333%;
-      &:first-of-type {
-        padding: 0 15px 0 0;
-      }
-      &:last-of-type {
-        padding: 0 0 0 15px;
-      }
-      @include media-breakpoint-down(md) {
-        margin: 20px 0;
+    fsa-cms-custom-container {
+      text-align: left;
+      flex-wrap: wrap;
+      justify-content: center;
+      fsa-product-feature {
+        display: flex;
+        flex: 0 1 33.3333%;
         &:first-of-type {
-          padding: 0;
+          padding: 0 15px 0 0;
         }
         &:last-of-type {
-          padding: 0;
+          padding: 0 0 0 15px;
+        }
+        @include media-breakpoint-down(md) {
+          flex: 0 1 50%;
+          margin: 20px 0;
+          &:last-of-type {
+            padding: 0;
+          }
+        }
+        @include media-breakpoint-down(xs) {
+          flex: 0 1 100%;
+          &:first-of-type {
+            padding: 0;
+          }
+        }
+        .product-feature-wrapper {
+          width: 100%;
         }
       }
     }
