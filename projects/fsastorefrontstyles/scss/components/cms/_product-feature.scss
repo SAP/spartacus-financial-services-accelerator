@@ -3,7 +3,6 @@
 %fsa-product-feature {
   .product-feature {
     &-wrapper {
-      background-color: var(--cx-color-4);
       .section-header-heading {
         text-transform: uppercase;
       }
@@ -21,7 +20,7 @@
     }
   }
   .item-details {
+    color: var(--cx-color-11);
     padding: 0 1rem 1rem 2rem;
-    min-height: 120px;
   }
 }
