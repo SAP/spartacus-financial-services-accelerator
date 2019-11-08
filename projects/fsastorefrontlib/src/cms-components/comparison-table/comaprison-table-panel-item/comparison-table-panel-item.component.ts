@@ -26,7 +26,7 @@ export class ComparisonTablePanelItemComponent implements OnInit {
   @Input()
   billingTimes: any;
   checkoutStepUrlNext: string;
-  pricingData: PricingData;
+  pricingData: PricingData = {};
   productPrice: string;
 
   constructor(
@@ -49,9 +49,13 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     );
 
     this.formDataService.getCurrentFormData().subscribe(formData => {
-      this.pricingData = this.pricingService.buildPricingData(
-        JSON.parse(formData.content)
-      );
+
+      if (formData && formData.content) {
+        this.pricingData = this.pricingService.buildPricingData(
+          JSON.parse(formData.content)
+        );
+      }
+
       this.product$ = this.productService.getCalculatedProductData(
         this.productCode,
         this.pricingData
