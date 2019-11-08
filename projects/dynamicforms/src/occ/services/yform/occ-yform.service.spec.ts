@@ -23,6 +23,8 @@ const MockOccModuleConfig: OccConfig = {
 const applicationId = 'application1';
 const formDefinitionId = 'definition1';
 
+const formDataId = 'formDataId';
+
 describe('OccYformService', () => {
   let service: OccYformService;
   let httpMock: HttpTestingController;
@@ -58,6 +60,22 @@ describe('OccYformService', () => {
           req.method === 'PUT'
         );
       }, `PUT method and url`);
+    }));
+  });
+
+  describe('loadFormData', () => {
+    it('loadFormData', async(() => {
+      service.getFormData(formDataId).subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        console.log(req.url);
+        console.log(req.url === '/forms/data');
+        return (
+          req.url === '/forms/data' &&
+          req.params.append('fields', 'FULL') &&
+          req.params.append('formDataId', formDataId) &&
+          req.method === 'GET'
+        );
+      }, `GET method and url`);
     }));
   });
 });

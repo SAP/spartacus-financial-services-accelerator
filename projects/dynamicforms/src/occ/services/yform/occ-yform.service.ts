@@ -20,6 +20,7 @@ export class OccYformService {
     formDataId: string,
     formContent: any
   ) {
+    console.log(applicationId);
     const url = this.getYFormsEndpoint() + '/data';
     const params = new HttpParams({
       fromString:
