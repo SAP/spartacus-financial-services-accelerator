@@ -5,7 +5,6 @@ import { take, map } from 'rxjs/operators';
 import { ComparisonPanelCMSComponent } from '../../../occ/occ-models';
 import { OccBillingTimeService } from '../../../occ/services/billing-time/billing-time.service';
 import { FormDataService } from '@fsa/dynamicforms';
-import { OccYformService } from '@fsa/dynamicforms';
 import { PricingService } from '../../../core/checkout/services/pricing/pricing.service';
 import { PricingData } from '../../../occ/occ-models';
 
@@ -25,7 +24,6 @@ export class ComparisonTablePanelComponent implements OnInit {
     protected componentData: CmsComponentData<ComparisonPanelCMSComponent>,
     protected billingTimeService: OccBillingTimeService,
     protected formDataService: FormDataService,
-    protected occYformService: OccYformService,
     protected pricingService: PricingService
   ) {}
 
@@ -42,7 +40,7 @@ export class ComparisonTablePanelComponent implements OnInit {
         .pipe(
           map(current => {
             if (current.id) {
-              this.occYformService.getFormData(current.id).subscribe(data => {
+              this.formDataService.getFormData(current.id).subscribe(data => {
                 if (data.content) {
                   this.pricingData = this.pricingService.buildPricingData(
                     JSON.parse(data.content)
