@@ -54,13 +54,16 @@ export class ClaimEffects {
         .createClaim(payload.userId, payload.policyId, payload.contractId)
         .pipe(
           switchMap((claim: Claim) => {
-            return [
-              new fromUserRequestActions.LoadUserRequest({
-                userId: payload.userId,
-                requestId: claim.requestId,
-              }),
-              new fromActions.CreateClaimSuccess(claim),
-            ];
+            if (claim.requestId !== undefined){
+              return [
+                new fromUserRequestActions.LoadUserRequest({
+                  userId: payload.userId,
+                  requestId: claim.requestId,
+                }),
+                new fromActions.CreateClaimSuccess(claim),
+              ];
+            }
+
           }),
           catchError(error => of(new fromActions.CreateClaimFail(error)))
         );

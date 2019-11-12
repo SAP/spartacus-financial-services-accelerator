@@ -16,7 +16,7 @@ import {
   CmsPageGuard,
   PageLayoutComponent,
   SpinnerModule,
-  MediaModule,
+  MediaModule
 } from '@spartacus/storefront';
 import { UserRequestService } from '../../core/user-request/services/user-request/user-request.service';
 import { EffectsModule } from '@ngrx/effects';
@@ -33,6 +33,7 @@ import { UserRequestNavigationService } from '../../core/user-request/services/u
 import { UserRequestStoreModule } from '../../core/user-request/store/user-request-store.module';
 import { UserRequestSummaryComponent } from './user-request-summary/user-request-summary.component';
 import { OccUserRequestService } from '../../occ/services/user-request/user-request.service';
+import { AccordionModule } from '../../shared/accordion/accordion.module';
 
 const routes: Routes = [
   {
@@ -82,6 +83,8 @@ const routes: Routes = [
     MediaModule,
     FormsModule,
     NgSelectModule,
+    AccordionModule,
+    MediaModule,
     UrlModule,
     SpinnerModule,
     EffectsModule.forFeature(effects),
