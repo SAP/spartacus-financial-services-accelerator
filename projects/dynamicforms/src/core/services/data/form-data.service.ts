@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { YFormData } from '../../models';
-import { OccYformService } from '../../../occ/services/yform/occ-yform.service';
+import { OccFormService } from '../../../occ/services/form/occ-form.service';
 
 @Injectable()
 export class FormDataService {
-  constructor(protected occYformsService: OccYformService) {}
+  constructor(protected occYformsService: OccFormService) {}
 
   currentForm$: BehaviorSubject<YFormData> = new BehaviorSubject({});
 

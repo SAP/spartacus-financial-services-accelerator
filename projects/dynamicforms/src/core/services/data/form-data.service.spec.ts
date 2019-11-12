@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { FormDataService } from './form-data.service';
 import { YFormData } from './../../models/form-occ.models';
-import { OccYformService } from './../../../occ/services/yform/occ-yform.service';
+import { OccFormService } from '../../../occ/services/form/occ-form.service';
 import { of, Observable } from 'rxjs';
 
 const mockFormData = {
@@ -48,7 +48,7 @@ describe('FormDataService', () => {
     TestBed.configureTestingModule({
       providers: [
         FormDataService,
-        { provide: OccYformService, useValue: mockYFormService },
+        { provide: OccFormService, useValue: mockYFormService },
       ],
     });
 
