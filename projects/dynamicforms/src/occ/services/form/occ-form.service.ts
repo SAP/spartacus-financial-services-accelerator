@@ -27,10 +27,11 @@ export class OccFormService {
         '&definitionId=' +
         definitionId +
         '&applicationId=' +
-        applicationId +
-        '&formDataId=' +
-        formDataId,
+        applicationId,
     });
+    if (formDataId) {
+      params.append('formDataId', formDataId);
+    }
     return this.http
       .put<YFormData>(url, formContent, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));

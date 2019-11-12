@@ -49,8 +49,6 @@ describe('OccYformService', () => {
     it('saveFormData', async(() => {
       service.saveFormData(formDefinitionId, applicationId, {}).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
-        console.log(req.url);
-        console.log(req.url === '/forms/data');
         return (
           req.url === '/forms/data' &&
           req.params.append('fields', 'FULL') &&
@@ -67,8 +65,6 @@ describe('OccYformService', () => {
     it('loadFormData', async(() => {
       service.getFormData(formDataId).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
-        console.log(req.url);
-        console.log(req.url === '/forms/data');
         return (
           req.url === '/forms/data' &&
           req.params.append('fields', 'FULL') &&
