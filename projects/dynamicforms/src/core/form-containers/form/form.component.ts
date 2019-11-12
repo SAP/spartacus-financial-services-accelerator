@@ -1,15 +1,18 @@
-import { Component, Input, ViewChild } from '@angular/core';
+import { Component, Input, ViewChild, OnDestroy } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 
 import { FormDefinition } from '../../models/field-config.interface';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 import { FormDataService } from '../../services/data/form-data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'cx-form-component',
   templateUrl: './form.component.html',
 })
-export class FormComponent {
+export class FormComponent implements OnDestroy {
+  private subscription = new Subscription();
+
   constructor(
     protected routingService: RoutingService,
     protected formDataService: FormDataService
@@ -28,17 +31,26 @@ export class FormComponent {
 
   submit(formData: { [name: string]: any }) {
     if (this.form.valid) {
-      this.formDataService
-        .saveFormData(this.formId, this.applicationId, formData)
-        .subscribe(response => {
-          this.formDataService.currentForm$.next({
-            id: response.id,
-            formDefinitionId: this.formId,
-            content: response.content,
-            categoryCode: this.formCategoryCode,
-          });
-          this.navigateNext();
-        });
+      this.subscription.add(
+        this.formDataService
+          .saveFormData(this.formId, this.applicationId, formData)
+          .subscribe(response => {
+            this.formDataService.currentForm$.next({
+              id: response.id,
+              formDefinitionId: this.formId,
+              content: response.content,
+              categoryCode: this.formCategoryCode,
+            });
+            this.navigateNext();
+          })
+      );
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      console.log('test');
+      this.subscription.unsubscribe();
     }
   }
 
