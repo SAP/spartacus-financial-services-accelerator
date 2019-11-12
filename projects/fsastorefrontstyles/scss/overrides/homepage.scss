@@ -3,91 +3,8 @@
 
 .InsuranceLandingPageTemplate {
   cx-page-slot:not(.Section1) {
-    padding: 3rem 1.5rem 0 1.5rem;
-  }
-
-  //Service links specific styling - Overriding our own enriched banner :-(
-  .Section2A {
     @include contentWidth();
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-    fsa-enriched-responsive-banner {
-      width: 25%;
-      text-align: center;
-      margin-bottom: 1.5rem;
-      flex: 0 1 auto;
-      @include media-breakpoint-down(sm) {
-        width: 33.33%;
-      }
-      @include media-breakpoint-down(xs) {
-        width: 50%;
-      }
-      .enriched-banner {
-        &__styled-text {
-          color: $color-link-hover;
-          font-weight: var(--cx-font-weight-semi);
-          font-size: 16px;
-          text-transform: uppercase;
-          border-bottom: 1px solid $color-link-hover;
-        }
-        &__text {
-          @include transition();
-          &:hover {
-            transform: scale(1.1);
-          }
-        }
-        .image-wrapper {
-          max-width: 150px;
-          width: 100%;
-        }
-      }
-    }
-  }
-  //Homepage banner specific styling
-  .Section1 fsa-enriched-responsive-banner {
-    .enriched-banner {
-      position: relative;
-      .responsive-image {
-        width: 100%;
-        display: block;
-      }
-      &__text {
-        padding: 2vw;
-        background-color: rgba(255, 255, 255, 0.7);
-        position: absolute;
-        text-align: left;
-        max-width: 410px;
-        top: 50%;
-        left: 30%;
-        transform: translate(-50%, -50%);
-        -webkit-transform: translate(-50%, -50%);
-        @include media-breakpoint-down(sm) {
-          left: 40%;
-        }
-      }
-      &__title {
-        font-size: 30px;
-        line-height: 1;
-        color: $color-dark-blue;
-        font-weight: var(--cx-font-weight-semi);
-        @include media-breakpoint-down(md) {
-          font-size: 4vw;
-        }
-      }
-      &__details {
-        display: block;
-        margin-top: 1vw;
-        pointer-events: none;
-        font-size: 20px;
-        @include media-breakpoint-down(sm) {
-          font-size: 3.5vw;
-        }
-        a {
-          color: $color-button-secondary-hover;
-        }
-      }
-    }
+    padding: 3rem 1.5rem 0 1.5rem;
   }
 
   // Carousel & Homepage headings
@@ -121,32 +38,15 @@
   }
 
   .Section2B {
-    @include contentWidth();
     cx-paragraph {
       color: var(--cx-color-text);
       width: 100%;
       padding: 0 15px;
       margin-bottom: 60px;
     }
-    .find-agent {
-      &__homepage {
-        font-size: 30px;
-        text-align: center;
-        background-color: var(--cx-color-4);
-        padding: 20px 15px;
-        @include media-breakpoint-down(md) {
-          font-size: 20px;
-        }
-      }
-      &__link {
-        color: var(--cx-color-primary);
-        text-decoration: none;
-      }
-    }
   }
   //Quotes & Policies review
   .Section2C {
-    @include contentWidth();
     display: flex;
     @include media-breakpoint-down(xs) {
       flex-direction: column;
@@ -174,7 +74,6 @@
   }
   //Assistance and support section
   .Section3 {
-    @include contentWidth();
     cx-banner {
       padding: 0 0 1.5rem;
       @include media-breakpoint-up(md) {
