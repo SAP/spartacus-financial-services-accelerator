@@ -21,6 +21,6 @@ export const claim = {
     'how-accident-occured': 'How the accident occured',
     'police-informed': 'Were the police informed:',
     'responsible-for-accident': 'Who is responsible for the accident:',
-    'claim.witnesses': 'Are there any witnesses we can contact'
+    'claim.witnesses': 'Are there any witnesses we can contact',
   },
 };

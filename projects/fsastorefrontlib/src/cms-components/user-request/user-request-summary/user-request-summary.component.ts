@@ -9,11 +9,10 @@ import { RoutingService } from '@spartacus/core';
   templateUrl: './user-request-summary.component.html',
 })
 export class UserRequestSummaryComponent implements OnInit {
-
   constructor(
     protected userRequestService: UserRequestService,
-    protected routingService: RoutingService,
-    ) {}
+    protected routingService: RoutingService
+  ) {}
 
   userRequest$: Observable<FSUserRequest>;
 

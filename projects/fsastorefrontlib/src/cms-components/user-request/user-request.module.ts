@@ -16,7 +16,7 @@ import {
   CmsPageGuard,
   PageLayoutComponent,
   SpinnerModule,
-  MediaModule
+  MediaModule,
 } from '@spartacus/storefront';
 import { UserRequestService } from '../../core/user-request/services/user-request/user-request.service';
 import { EffectsModule } from '@ngrx/effects';
@@ -84,7 +84,6 @@ const routes: Routes = [
     FormsModule,
     NgSelectModule,
     AccordionModule,
-    MediaModule,
     UrlModule,
     SpinnerModule,
     EffectsModule.forFeature(effects),

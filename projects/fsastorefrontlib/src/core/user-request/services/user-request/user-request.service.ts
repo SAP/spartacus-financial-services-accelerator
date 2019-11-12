@@ -16,26 +16,32 @@ export class UserRequestService {
   ) {}
 
   getUserRequest(): Observable<FSUserRequest> {
-    this.store
-      .select(UserRequestSelector.getUserRequestContent)
-      .pipe(
-        map(storedUserRequestData => {
-          if (!this.areConfigurationStepsCreated(storedUserRequestData)) {
-            this.loadUserRequestData();
-          }
-        })
-      )
-      .subscribe();
+    // Should read user request data from store. Commented until update of user request is finished.
+    // Currently, new request is triggered on every step.
+
+    // this.store
+    //   .select(UserRequestSelector.getUserRequestContent)
+    //   .pipe(
+    //     map(storedUserRequestData => {
+    //       if (!this.areConfigurationStepsCreated(storedUserRequestData)) {
+    //         this.loadUserRequestData();
+    //       }
+    //     })
+    //   )
+    //   .subscribe();
+    this.loadUserRequestData();
     return this.store.select(UserRequestSelector.getUserRequestContent);
   }
 
   loadUserRequestData(): void {
-    this.store.dispatch(
-      new fromAction.LoadUserRequest({
-        userId: this.userRequestData.userId,
-        requestId: this.userRequestData.requestId,
-      })
-    );
+    if (this.userRequestData.requestId) {
+      this.store.dispatch(
+        new fromAction.LoadUserRequest({
+          userId: this.userRequestData.userId,
+          requestId: this.userRequestData.requestId,
+        })
+      );
+    }
   }
 
   private areConfigurationStepsCreated(userRequest: FSUserRequest): boolean {

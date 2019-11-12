@@ -2,16 +2,19 @@
   {{ 'fscommon.summary' | cxTranslate }}
 </h2>
 <ng-container *ngIf="userRequest$ | async as userRequest">
-  <ng-container *ngFor="let configurationStep of userRequest?.configurationSteps">
+  <ng-container
+    *ngFor="let configurationStep of userRequest?.configurationSteps"
+  >
     <ng-container *ngIf="configurationStep.stepContent">
-        <div class="accordion">
-      <fsa-accordion-item [opened]="true" [title]="configurationStep.name">
+      <div class="accordion">
+        <fsa-accordion-item [opened]="true" [title]="configurationStep.name">
           <div class="container">
             <div class="row justify-content-center">
               <ul class="col-12 accordion-list">
                 <ng-container
                   *ngFor="
-                    let item of configurationStep?.stepContent?.contentData?.entry
+                    let item of configurationStep?.stepContent?.contentData
+                      ?.entry
                   "
                 >
                   <li class="accordion-list-item row">
@@ -25,13 +28,16 @@
                 </ng-container>
               </ul>
               <div class="col-12 col-md-6">
-                <button (click)="navigateTo(configurationStep.pageLabelOrId)" class="action-button">
+                <button
+                  (click)="navigateTo(configurationStep.pageLabelOrId)"
+                  class="action-button"
+                >
                   {{ 'fscommon.edit' | cxTranslate }}
                 </button>
               </div>
             </div>
           </div>
-      </fsa-accordion-item>
+        </fsa-accordion-item>
       </div>
     </ng-container>
   </ng-container>
