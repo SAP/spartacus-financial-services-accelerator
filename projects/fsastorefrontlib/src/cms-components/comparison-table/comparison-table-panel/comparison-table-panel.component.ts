@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
-import { take, map } from 'rxjs/operators';
+import { take, map, switchMap } from 'rxjs/operators';
 import { ComparisonPanelCMSComponent } from '../../../occ/occ-models';
 import { OccBillingTimeService } from '../../../occ/services/billing-time/billing-time.service';
 import { FormDataService } from '@fsa/dynamicforms';
@@ -38,21 +38,16 @@ export class ComparisonTablePanelComponent implements OnInit {
       this.formDataService
         .getCurrentFormData()
         .pipe(
-          map(currentForm => {
-            if (currentForm.id) {
-              this.formDataService
-                .getFormData(currentForm.id)
-                .subscribe(formData => {
-                  if (formData.content) {
-                    this.pricingData = this.pricingService.buildPricingData(
-                      JSON.parse(formData.content)
-                    );
-                  }
-                });
-            }
-          })
+          map(currentForm => currentForm.id),
+          switchMap(formDataId => this.formDataService.getFormData(formDataId))
         )
-        .subscribe()
+        .subscribe(formData => {
+          if (formData.content) {
+            this.pricingData = this.pricingService.buildPricingData(
+              JSON.parse(formData.content)
+            );
+          }
+        })
     );
   }
 
