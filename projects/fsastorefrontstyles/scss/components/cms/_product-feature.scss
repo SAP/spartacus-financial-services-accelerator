@@ -1,8 +1,20 @@
 @import '../../theme/fsa/variables';
 
 %fsa-product-feature {
+  display: flex;
+  flex: 0 1 33.3333%;
+  margin: 0.75rem 0.5rem;
+  @include box-shadow(0px, 7px, 9px, -1px, $color-dark-grey, 0.3);
+  @include media-breakpoint-down(md) {
+    flex: 0 1 calc(50% - 1rem);
+  }
+  @include media-breakpoint-down(xs) {
+    flex: 0 1 100%;
+    margin: 0.75rem 0;
+  }
   .product-feature {
     &-wrapper {
+      width: 100%;
       .section-header-heading {
         text-transform: uppercase;
       }
