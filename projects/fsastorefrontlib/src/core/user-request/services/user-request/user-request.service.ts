@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import * as fromReducer from '../../store/reducers';
@@ -34,12 +34,14 @@ export class UserRequestService {
   }
 
   loadUserRequestData(): void {
-    this.store.dispatch(
-      new fromAction.LoadUserRequest({
-        userId: this.userRequestData.userId,
-        requestId: this.userRequestData.requestId,
-      })
-    );
+    if (this.userRequestData.requestId) {
+      this.store.dispatch(
+        new fromAction.LoadUserRequest({
+          userId: this.userRequestData.userId,
+          requestId: this.userRequestData.requestId,
+        })
+      );
+    }
   }
 
   private areConfigurationStepsCreated(userRequest: FSUserRequest): boolean {
