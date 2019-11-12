@@ -1,6 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 
-import { OccYformService } from './occ-yform.service';
+import { OccFormService } from './occ-form.service';
 import { OccConfig } from '@spartacus/core';
 import {
   HttpTestingController,
@@ -26,18 +26,18 @@ const formDefinitionId = 'definition1';
 const formDataId = 'formDataId';
 
 describe('OccYformService', () => {
-  let service: OccYformService;
+  let service: OccFormService;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        OccYformService,
+        OccFormService,
         { provide: OccConfig, useValue: MockOccModuleConfig },
       ],
     });
-    service = TestBed.get(OccYformService);
+    service = TestBed.get(OccFormService);
     httpMock = TestBed.get(HttpTestingController);
   });
 

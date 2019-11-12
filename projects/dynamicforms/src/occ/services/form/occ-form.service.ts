@@ -8,7 +8,7 @@ import { YFormData } from '../../../core/models/form-occ.models';
 const FULL_PARAMS = 'fields=FULL';
 
 @Injectable()
-export class OccYformService {
+export class OccFormService {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService
