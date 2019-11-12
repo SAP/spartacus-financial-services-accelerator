@@ -58,7 +58,7 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
 
   getNumberOfConfigurationSteps(): number {
     if (this.configurationSteps) {
-      return this.configurationSteps.length;
+      return this.configurationSteps.length - 1;
     }
   }
 

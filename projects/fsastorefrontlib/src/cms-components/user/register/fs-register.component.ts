@@ -69,7 +69,12 @@ export class FSRegisterComponent extends RegisterComponent {
   );
 
   submit(): void {
-    this.emailToLowerCase();
+    this.userService.register(
+      this.collectDataFromRegisterForm(this.fsUserRegistrationForm.value)
+    );
+  }
+
+  collectDataFromRegisterForm(formData: any): FSUserSignUp {
     const {
       firstName,
       lastName,
@@ -78,17 +83,15 @@ export class FSRegisterComponent extends RegisterComponent {
       password,
       titleCode,
       phoneNumber,
-    } = this.fsUserRegistrationForm.value;
-    const userRegisterFormData: FSUserSignUp = {
+    } = formData;
+    return {
       firstName,
       lastName,
       dateOfBirth,
-      uid: email,
+      uid: email.toLowerCase(),
       password,
       titleCode,
       phoneNumber,
     };
-
-    this.fsUserService.register(userRegisterFormData);
   }
 }

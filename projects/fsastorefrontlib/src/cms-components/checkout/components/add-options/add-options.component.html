@@ -2,77 +2,79 @@
   {{ 'fscommon.addOptions' | cxTranslate }}
 </h2>
 <div class="cart-items-list">
-  <ng-container *ngIf="entries$ | async as entries">
-    <ng-container *ngFor="let orderEntryData of entries | slice: 1">
-      <div
-        class="row px-3 no-gutters position-relative py-3"
-        *ngIf="orderEntryData.product"
-      >
+  <ng-container *ngIf="cartLoaded$ | async; else loading">
+    <ng-container *ngIf="entries$ | async as entries">
+      <ng-container *ngFor="let orderEntryData of entries | slice: 1">
         <div
-          *ngIf="!orderEntryData.removeable && !orderEntryData.addable"
-          class="disabled-option"
-        ></div>
-        <div class="tooltip-wrapper">
-          <div
-            class="fsa-tooltip"
-            ngbTooltip="{{ orderEntryData.product?.description }}"
-            triggers="click:blur"
-            placement="left"
-          >
-            i
-          </div>
-        </div>
-        <div class="col-12 col-md-2 align-self-center">
-          <cx-media
-            class="cx-product-image-container"
-            [container]="orderEntryData.product?.images?.PRIMARY"
-            format="96Wx96H"
-          ></cx-media>
-        </div>
-        <div class="col-12 col-md-7 align-self-center">
-          <h3 class="text-truncate">{{ orderEntryData.product.name }}</h3>
-        </div>
-        <div
-          *ngIf="!orderEntryData.removeable && !orderEntryData.addable"
-          class="col-12 col-md-3 align-self-center"
+          class="row px-3 no-gutters position-relative py-3"
+          *ngIf="orderEntryData.product"
         >
-          <ng-container
-            *ngTemplateOutlet="
-              mandatoryNotAvailableButton;
-              context: {
-                title:
-                  orderEntryData.product?.bundleTemplates?.length == 3
-                    ? ('fscommon.mandatory' | cxTranslate)
-                    : ('fscommon.notAvailableFull' | cxTranslate)
-              }
-            "
+          <div
+            *ngIf="!orderEntryData.removeable && !orderEntryData.addable"
+            class="disabled-option"
+          ></div>
+          <div class="tooltip-wrapper">
+            <div
+              class="fsa-tooltip"
+              ngbTooltip="{{ orderEntryData.product?.description }}"
+              triggers="click:blur"
+              placement="left"
+            >
+              i
+            </div>
+          </div>
+          <div class="col-12 col-md-2 align-self-center">
+            <cx-media
+              class="cx-product-image-container"
+              [container]="orderEntryData.product?.images?.PRIMARY"
+              format="96Wx96H"
+            ></cx-media>
+          </div>
+          <div class="col-12 col-md-7 align-self-center">
+            <h3 class="text-truncate">{{ orderEntryData.product.name }}</h3>
+          </div>
+          <div
+            *ngIf="!orderEntryData.removeable && !orderEntryData.addable"
+            class="col-12 col-md-3 align-self-center"
           >
-          </ng-container>
-        </div>
-        <div class="col-12 col-md-3 align-self-center">
-          <div *ngIf="!orderEntryData.removeable && orderEntryData.addable">
-            <button
-              (click)="
-                addProductToCart(
-                  orderEntryData.product?.code,
-                  orderEntryData.entryNumber
-                )
+            <ng-container
+              *ngTemplateOutlet="
+                mandatoryNotAvailableButton;
+                context: {
+                  title:
+                    orderEntryData.product?.bundleTemplates?.length == 3
+                      ? ('fscommon.mandatory' | cxTranslate)
+                      : ('fscommon.notAvailableFull' | cxTranslate)
+                }
               "
-              class="secondary-button btn-block"
             >
-              {{ 'fscommon.add' | cxTranslate }}
-            </button>
+            </ng-container>
           </div>
-          <div *ngIf="orderEntryData.removeable">
-            <button
-              (click)="removeProductFromCart(orderEntryData)"
-              class="secondary-button btn-block"
-            >
-              {{ 'common.remove' | cxTranslate }}
-            </button>
+          <div class="col-12 col-md-3 align-self-center">
+            <div *ngIf="!orderEntryData.removeable && orderEntryData.addable">
+              <button
+                (click)="
+                  addProductToCart(
+                    orderEntryData.product?.code,
+                    orderEntryData.entryNumber
+                  )
+                "
+                class="secondary-button btn-block"
+              >
+                {{ 'fscommon.add' | cxTranslate }}
+              </button>
+            </div>
+            <div *ngIf="orderEntryData.removeable">
+              <button
+                (click)="removeProductFromCart(orderEntryData)"
+                class="secondary-button btn-block "
+              >
+                {{ 'common.remove' | cxTranslate }}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </ng-container>
     </ng-container>
   </ng-container>
 </div>
@@ -90,4 +92,7 @@
   <button disabled type="button" class="secondary-button btn-block">
     {{ title }}
   </button>
+</ng-template>
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
 </ng-template>
