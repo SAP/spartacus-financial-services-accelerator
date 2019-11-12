@@ -33,6 +33,7 @@ import { UserRequestNavigationService } from '../../core/user-request/services/u
 import { UserRequestStoreModule } from '../../core/user-request/store/user-request-store.module';
 import { UserRequestSummaryComponent } from './user-request-summary/user-request-summary.component';
 import { OccUserRequestService } from '../../occ/services/user-request/user-request.service';
+import { AccordionModule } from '../../shared/accordion/accordion.module';
 
 const routes: Routes = [
   {
@@ -84,6 +85,7 @@ const routes: Routes = [
     NgSelectModule,
     UrlModule,
     SpinnerModule,
+    AccordionModule,
     EffectsModule.forFeature(effects),
     RouterModule.forChild(routes),
     StoreModule.forFeature('userRequest', reducerToken),
