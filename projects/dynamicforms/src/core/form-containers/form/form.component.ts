@@ -49,7 +49,6 @@ export class FormComponent implements OnDestroy {
 
   ngOnDestroy() {
     if (this.subscription) {
-      console.log('test');
       this.subscription.unsubscribe();
     }
   }
