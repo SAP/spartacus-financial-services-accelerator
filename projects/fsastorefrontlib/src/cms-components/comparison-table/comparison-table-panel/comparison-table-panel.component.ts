@@ -1,9 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { take, map } from 'rxjs/operators';
 import { ComparisonPanelCMSComponent } from '../../../occ/occ-models';
 import { OccBillingTimeService } from '../../../occ/services/billing-time/billing-time.service';
+import { FormDataService } from '@fsa/dynamicforms';
+import { PricingService } from '../../../core/checkout/services/pricing/pricing.service';
+import { PricingData } from '../../../occ/occ-models';
 
 @Component({
   selector: 'fsa-comparison-table-panel',
@@ -11,13 +14,17 @@ import { OccBillingTimeService } from '../../../occ/services/billing-time/billin
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ComparisonTablePanelComponent implements OnInit {
+  private subscription = new Subscription();
   comparisonPanel: Observable<ComparisonPanelCMSComponent>;
   productList: string[];
   billingData: Observable<any>;
+  pricingData: PricingData = {};
 
   constructor(
     protected componentData: CmsComponentData<ComparisonPanelCMSComponent>,
-    protected billingTimeService: OccBillingTimeService
+    protected billingTimeService: OccBillingTimeService,
+    protected formDataService: FormDataService,
+    protected pricingService: PricingService
   ) {}
 
   ngOnInit() {
@@ -26,6 +33,31 @@ export class ComparisonTablePanelComponent implements OnInit {
       const productCodes = data.products.split(' ');
       this.billingData = this.billingTimeService.getBillingTimes(productCodes);
     });
+
+    this.subscription.add(
+      this.formDataService
+        .getCurrentFormData()
+        .pipe(
+          map(current => {
+            if (current.id) {
+              this.formDataService.getFormData(current.id).subscribe(data => {
+                if (data.content) {
+                  this.pricingData = this.pricingService.buildPricingData(
+                    JSON.parse(data.content)
+                  );
+                }
+              });
+            }
+          })
+        )
+        .subscribe()
+    );
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   getProductList(): string[] {

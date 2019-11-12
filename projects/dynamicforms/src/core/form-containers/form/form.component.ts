@@ -1,12 +1,9 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 
-import { PricingService } from '../../services/pricing/pricing.service';
-import {
-  FormDefinition,
-  FormSubmitType,
-} from '../../models/field-config.interface';
+import { FormDefinition } from '../../models/field-config.interface';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
+import { FormDataService } from '../../services/data/form-data.service';
 
 @Component({
   selector: 'cx-form-component',
@@ -15,7 +12,7 @@ import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 export class FormComponent {
   constructor(
     protected routingService: RoutingService,
-    protected pricingService: PricingService
+    protected formDataService: FormDataService
   ) {}
 
   @ViewChild(DynamicFormComponent, { static: false })
@@ -26,18 +23,26 @@ export class FormComponent {
   formId: string;
   @Input()
   formConfig: FormDefinition;
+  @Input()
+  applicationId: string;
 
   submit(formData: { [name: string]: any }) {
     if (this.form.valid) {
-      switch (this.form.config.submitType) {
-        case FormSubmitType.PRICING: {
-          this.pricingService.buildPricingData(formData);
-        }
-      }
-      this.navigateNext();
+      this.formDataService
+        .saveFormData(this.formId, this.applicationId, formData)
+        .subscribe(response => {
+          this.formDataService.currentForm$.next({
+            id: response.id,
+            formDefinitionId: this.formId,
+            content: response.content,
+            categoryCode: this.formCategoryCode,
+          });
+          this.navigateNext();
+        });
     }
   }
 
+  // Should be removed from dynamic forms module!!!
   // Should be more configurable to support other routes/pages
   navigateNext() {
     this.routingService.go({

@@ -4,7 +4,7 @@ import {
   FieldConfig,
   FormDefinition,
 } from '../../models/field-config.interface';
-import { FormService } from '../../services/form.service';
+import { FormBuilderService } from '../../services/builder/form-builder.service';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -30,7 +30,7 @@ export class DynamicFormComponent implements OnInit {
     return this.form.value;
   }
 
-  constructor(private formService: FormService) {}
+  constructor(private formService: FormBuilderService) {}
 
   ngOnInit() {
     if (this.config) {

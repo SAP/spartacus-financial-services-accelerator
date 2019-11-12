@@ -1,2 +1,2 @@
 export * from './field-config.interface';
-export * from './form-pricing.interface';
+export * from './form-occ.models';
