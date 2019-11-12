@@ -38,15 +38,17 @@ export class ComparisonTablePanelComponent implements OnInit {
       this.formDataService
         .getCurrentFormData()
         .pipe(
-          map(current => {
-            if (current.id) {
-              this.formDataService.getFormData(current.id).subscribe(data => {
-                if (data.content) {
-                  this.pricingData = this.pricingService.buildPricingData(
-                    JSON.parse(data.content)
-                  );
-                }
-              });
+          map(currentForm => {
+            if (currentForm.id) {
+              this.formDataService
+                .getFormData(currentForm.id)
+                .subscribe(formData => {
+                  if (formData.content) {
+                    this.pricingData = this.pricingService.buildPricingData(
+                      JSON.parse(formData.content)
+                    );
+                  }
+                });
             }
           })
         )
