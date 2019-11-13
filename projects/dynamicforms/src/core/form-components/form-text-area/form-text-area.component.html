@@ -1,6 +1,6 @@
 <div
   [hidden]="group.controls[config.name].disabled"
-  class="dynamic-field form-input container"
+  class="dynamic-field form-input {{ config.name }}"
   [formGroup]="group"
 >
   <div class="row align-items-center">
@@ -10,6 +10,7 @@
       [attr.placeholder]="config.placeholder"
       [formControlName]="config.name"
       rows="10"
+      name="{{ config.name }}"
     ></textarea>
   </div>
   <cx-form-error-notice
