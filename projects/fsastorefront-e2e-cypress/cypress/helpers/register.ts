@@ -30,8 +30,7 @@ export function registerUser(user: RegisterUser) {
 }
 
 export function validatePhoneNumber(expectedValue: string) {
-  cy.get('[aria-label="My Account"]').invoke('mouseover');
-  cy.findByText('Personal Details').click({ force: true });
+  cy.selectOptionFromDropdown({menuOption: 'My Account',dropdownItem: 'Personal Details'});
   cy.get('[formcontrolname="phoneNumber"]').should('have.value', expectedValue);
 }
 
