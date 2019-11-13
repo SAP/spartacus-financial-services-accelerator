@@ -39,6 +39,7 @@ export class SelectIdentificationTypeComponent implements OnInit {
     this.checkoutStepUrlBack = this.checkoutConfigService.getPreviousCheckoutStepUrl(
       this.activatedRoute
     );
+    this.checkoutService.mockDeliveryMode();
   }
 
   setSelectedType(identificationType) {
