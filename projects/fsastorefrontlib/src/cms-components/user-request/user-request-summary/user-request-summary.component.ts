@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserRequestService } from 'projects/fsastorefrontlib/src/core/user-request/services';
 import { Observable } from 'rxjs';
-import { FSUserRequest } from 'projects/fsastorefrontlib/src/occ/occ-models';
+import { UserRequestService } from '../../../../src/core/user-request/services';
+import { FSUserRequest } from '../../../../src/occ/occ-models';
 import { RoutingService } from '@spartacus/core';
 
 @Component({
@@ -20,7 +20,7 @@ export class UserRequestSummaryComponent implements OnInit {
     this.userRequest$ = this.userRequestService.getUserRequest();
   }
 
-  navigateTo(fnolCheckoutPage: string) {
-    this.routingService.go(fnolCheckoutPage);
+  navigateTo(pageLabel: string) {
+    this.routingService.go(pageLabel);
   }
 }
