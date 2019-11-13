@@ -20,37 +20,33 @@ const mockUserRequest: Observable<FSUserRequest> = of({
       name: 'step1',
       sequenceNumber: '1',
       pageLabelorId: 'configurationStep1',
-      stepContent:
-      {
-        contentData:
-        {
+      stepContent: {
+        contentData: {
           entry: [
             {
-              key : 'whatHappened',
-              value : 'accident'
-            }
-          ]
-        }
-      }
+              key: 'whatHappened',
+              value: 'accident',
+            },
+          ],
+        },
+      },
     },
     {
       name: 'step2',
       sequenceNumber: '2',
       pageLabelorId: 'configurationStep2',
-      stepContent:
-      {
-        contentData:
-        {
+      stepContent: {
+        contentData: {
           entry: [
             {
-              key : 'howAccidentOccured',
-              value : 'accident occurance explanation'
-            }
-          ]
-        }
-      }
-    }
-  ]
+              key: 'howAccidentOccured',
+              value: 'accident occurance explanation',
+            },
+          ],
+        },
+      },
+    },
+  ],
 });
 
 class MockUserRequestService {
@@ -96,7 +92,9 @@ describe('UserRequestSummaryComponent', () => {
   });
 
   it('should load configuration step content', () => {
-    const contentDataItems = fixture.debugElement.query(By.css('.accordion-list-item'));
+    const contentDataItems = fixture.debugElement.query(
+      By.css('.accordion-list-item')
+    );
     expect(contentDataItems).toBeTruthy();
   });
 });
