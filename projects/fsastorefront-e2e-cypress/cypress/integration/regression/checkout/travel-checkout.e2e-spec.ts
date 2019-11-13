@@ -18,12 +18,12 @@ context('Travel Insurance Checkout', () => {
     });
 
     it('Add main product to the cart', () => {
-      travelCheckout.addMainProductToCart();
+      travelCheckout.checkComparisonAndAddProduct();
       cy.wait(2000);
     });
 
     it('Add optional product to the cart', () => {
-      travelCheckout.addOptionalProduct();
+      travelCheckout.checkOptionalProductsAndPick();
       cy.wait(1000);
     });
 

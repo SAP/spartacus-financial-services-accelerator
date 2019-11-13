@@ -3,8 +3,6 @@ export function openCategoryPage() {
   cy.get('cx-category-navigation')
     .findByText('Travel')
     .click({ force: true });
-  cy.wait(1000);
-
   cy.get('fsa-enriched-responsive-banner').should('be.visible');
   cy.get('fsa-enriched-responsive-banner')
     .findByText('Get a quote')
@@ -23,23 +21,35 @@ export function populateInsuranceInfoForm() {
     cy.get('[name="submit"]')
       .findByText('Find Prices')
       .click();
-    cy.wait(3000);
   });
 }
 
-export function addMainProductToCart() {
+export function checkComparisonAndAddProduct() {
   cy.get('fsa-comparison-table-panel-item').should('have.length', 3);
+  cy.get('fsa-comparison-table-panel-item')
+    .eq(2)
+    .within(() => {
+      cy.get('h4').should('have.text', '€150.00');
+    });
+  cy.get('fsa-comparison-table-panel-item')
+    .eq(1)
+    .within(() => {
+      cy.get('h4').should('have.text', '€120.00');
+    });
   cy.get('fsa-comparison-table-panel-item')
     .eq(0)
     .within(() => {
+      cy.get('h4').should('have.text', '€90.00');
       cy.get('.primary-button').click();
     });
 }
 
-export function addOptionalProduct() {
+export function checkOptionalProductsAndPick() {
   cy.get('fsa-add-options').should('be.visible');
   cy.get('fsa-add-options').within(() => {
     cy.get('h3').should('have.length', 6);
+    cy.get('.secondary-button').should('have.length', 6);
+    cy.get('.disabled-option').should('have.length', 3);
     cy.get('.secondary-button')
       .eq(0)
       .click();
