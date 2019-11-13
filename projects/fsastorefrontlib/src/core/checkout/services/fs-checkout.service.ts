@@ -49,6 +49,8 @@ export class FSCheckoutService extends CheckoutService {
   }
 
   mockDeliveryAddress() {
-    this.checkoutDeliveryService.createAndSetAddress(this.mockedDeliveryAddress);
+    this.checkoutDeliveryService.createAndSetAddress(
+      this.mockedDeliveryAddress
+    );
   }
 }
