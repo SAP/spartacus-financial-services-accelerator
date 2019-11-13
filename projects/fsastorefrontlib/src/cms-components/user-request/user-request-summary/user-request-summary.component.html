@@ -13,13 +13,12 @@
               <ul class="col-12 accordion-list">
                 <ng-container
                   *ngFor="
-                    let item of configurationStep?.stepContent?.contentData
-                      ?.entry
+                    let item of configurationStep.stepContent.contentData?.entry
                   "
                 >
                   <li class="accordion-list-item row">
                     <div class="col-6 item-label">
-                      {{ 'claim.' + item.key | cxTranslate }}
+                      {{ 'userRequest.' + item.key | cxTranslate }}
                     </div>
                     <div class="col-6 value notice">
                       {{ item.value }}

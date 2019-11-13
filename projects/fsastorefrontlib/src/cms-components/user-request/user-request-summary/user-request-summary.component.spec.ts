@@ -7,6 +7,7 @@ import { AccordionModule } from '../../../../src/shared/accordion/accordion.modu
 import { FSUserRequest } from '../../../../src/occ/occ-models';
 import { UserRequestService } from '../../../../src/core/user-request/services';
 import { UserRequestSummaryComponent } from './user-request-summary.component';
+import { By } from '@angular/platform-browser';
 
 class MockRoutingService {
   go = createSpy();
@@ -14,6 +15,38 @@ class MockRoutingService {
 
 const mockUserRequest: Observable<FSUserRequest> = of({
   requestId: 'testRequestId',
+  configurationSteps: [
+    {
+      name: 'step1',
+      sequenceNumber: '1',
+      pageLabelorId: 'configurationStep1',
+      stepContent: {
+        contentData: {
+          entry: [
+            {
+              key: 'whatHappened',
+              value: 'accident',
+            },
+          ],
+        },
+      },
+    },
+    {
+      name: 'step2',
+      sequenceNumber: '2',
+      pageLabelorId: 'configurationStep2',
+      stepContent: {
+        contentData: {
+          entry: [
+            {
+              key: 'howAccidentOccured',
+              value: 'accident occurance explanation',
+            },
+          ],
+        },
+      },
+    },
+  ],
 });
 
 class MockUserRequestService {
@@ -49,7 +82,19 @@ describe('UserRequestSummaryComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create user request summary component', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should create configuration steps accordions', () => {
+    const accordionElement = fixture.debugElement.query(By.css('.accordion'));
+    expect(accordionElement).toBeTruthy();
+  });
+
+  it('should load configuration step content', () => {
+    const contentDataItems = fixture.debugElement.query(
+      By.css('.accordion-list-item')
+    );
+    expect(contentDataItems).toBeTruthy();
   });
 });
