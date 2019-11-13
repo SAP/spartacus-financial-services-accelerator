@@ -7,9 +7,7 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import {
-  Message,
-} from '../../../../../core/my-account/services/inbox-data.service';
+import { Message } from '../../../../../core/my-account/services/inbox-data.service';
 import { InboxService } from '../../../../../core/my-account/services/inbox.service';
 
 @Component({
@@ -21,7 +19,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   constructor(
     private inboxService: InboxService,
     private cdr: ChangeDetectorRef
-  ) { }
+  ) {}
 
   private subscription: Subscription;
   changeCheckboxes$: Observable<boolean>;
@@ -49,7 +47,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   }
 
   getMessages() {
-   this.inboxService.getMessages(this.messageGroup).subscribe(messages => this.inboxService.messagesSource.next(messages));
+    this.inboxService
+      .getMessages(this.messageGroup)
+      .subscribe(messages => this.inboxService.messagesSource.next(messages));
   }
 
   toggleActiveAccordion(index: number) {

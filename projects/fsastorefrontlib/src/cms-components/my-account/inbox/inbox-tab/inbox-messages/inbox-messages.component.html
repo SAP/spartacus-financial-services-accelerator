@@ -1,23 +1,40 @@
 <div class="messages">
   <ng-container *ngIf="messagesObject$ | async as messagesObj">
     <ng-container *ngIf="messagesObj.messages?.length !== 0; else noMessages">
-      <div class="message accordion border-bottom-grey" *ngFor="let message of messagesObj.messages; let i = index" [ngClass]="{
-        read: message.readDate,
-        active: selectedIndex === i
-      }">
+      <div
+        class="message accordion border-bottom-grey"
+        *ngFor="let message of messagesObj.messages; let i = index"
+        [ngClass]="{
+          read: message.readDate,
+          active: selectedIndex === i
+        }"
+      >
         <div class="inbox-header container-fluid">
           <div class="row">
             <div class="col-1 p-4">
               <label class="checkbox-label">
-                <input type="checkbox" [checked]="changeCheckboxes$ | async"
-                  (change)="changeMessageState(message.readDate, message.uid);" />
+                <input
+                  type="checkbox"
+                  [checked]="changeCheckboxes$ | async"
+                  (change)="changeMessageState(message.readDate, message.uid)"
+                />
                 <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
               </label>
             </div>
-            <div class="col-6 col-md-3 text-truncate p-4" (click)="toggleActiveAccordion(i); readMessage(message); message.readDate = getDate()">
+            <div
+              class="col-6 col-md-3 text-truncate p-4"
+              (click)="
+                toggleActiveAccordion(i);
+                readMessage(message);
+                message.readDate = getDate()
+              "
+            >
               {{ message.subject }}
             </div>
-            <div class="col-md-6 d-none d-md-block text-truncate p-4" (click)="toggleActiveAccordion(i); readMessage(message);">
+            <div
+              class="col-md-6 d-none d-md-block text-truncate p-4"
+              (click)="toggleActiveAccordion(i); readMessage(message)"
+            >
               {{ message.body }}
             </div>
             <div class="col-4 col-md-2 text-truncate cursor-default p-4">
@@ -25,7 +42,10 @@
             </div>
           </div>
         </div>
-        <div class="accordion-item-wrapper" [ngClass]="{ active: selectedIndex === i }">
+        <div
+          class="accordion-item-wrapper"
+          [ngClass]="{ active: selectedIndex === i }"
+        >
           <div class="box-shadow" [innerHtml]="message.richContent"></div>
         </div>
       </div>

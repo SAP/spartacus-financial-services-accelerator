@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AuthService, CmsService } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Message, InboxDataService, InboxTab, FSSearchConfig } from './inbox-data.service';
+import {
+  Message,
+  InboxDataService,
+  InboxTab,
+  FSSearchConfig,
+} from './inbox-data.service';
 import { OccInboxService } from 'projects/fsastorefrontlib/src/occ/services/inbox/inbox.service';
 
 @Injectable()
@@ -10,7 +15,7 @@ export class InboxService {
     private inboxData: InboxDataService,
     protected auth: AuthService,
     protected cmsService: CmsService,
-    protected occInboxService: OccInboxService,
+    protected occInboxService: OccInboxService
   ) {
     this.initInbox();
   }
@@ -102,5 +107,4 @@ export class InboxService {
   setMessagesState(uidList, read): Observable<any> {
     return this.occInboxService.setMessagesState('current', uidList, read);
   }
-
 }

@@ -27,7 +27,7 @@ export class InboxComponent implements OnInit, OnDestroy {
     protected cmsService: CmsService,
     protected inboxService: InboxService,
     protected cdr: ChangeDetectorRef
-  ) { }
+  ) {}
 
   subscription = new Subscription();
   component$: Observable<CmsInboxComponent>;
@@ -90,11 +90,14 @@ export class InboxComponent implements OnInit, OnDestroy {
       let group;
       if (groupTitle == null) {
         group = this.initialGroupName;
-      }
-      else {
+      } else {
         group = groupTitle.messageGroup;
       }
-      this.inboxService.sortMessages(sortCode, sortOrder, group).subscribe(sortedMessages => this.inboxService.messagesSource.next(sortedMessages))
+      this.inboxService
+        .sortMessages(sortCode, sortOrder, group)
+        .subscribe(sortedMessages =>
+          this.inboxService.messagesSource.next(sortedMessages)
+        );
     });
   }
 
