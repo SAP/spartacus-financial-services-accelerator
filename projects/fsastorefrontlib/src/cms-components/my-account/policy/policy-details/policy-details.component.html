@@ -76,47 +76,67 @@
         </li>
       </ul>
     </fsa-accordion-item>
-    <ng-container *ngFor="let insuredObject of policy.insuredObjects">
+    <ng-container
+      *ngIf="policy.insuredObjects && policy.insuredObjects.length > 0"
+    >
       <fsa-accordion-item [title]="'fscommon.whoOrWhatIsInsured' | cxTranslate">
-        <ul class="accordion-list container-fluid">
-          <li
-            *ngFor="let insuredObjectItem of insuredObject.insuredObjectItems"
-            class="accordion-list-item row"
-          >
-            <div class="col-6 item-label">
-              {{ insuredObjectItem.label }}
-            </div>
-            <div class="col-6 value notice">
-              {{ insuredObjectItem.value }}
-            </div>
-          </li>
+        <ng-container *ngFor="let insuredObject of policy.insuredObjects">
           <ng-container
             *ngIf="
-              insuredObject.childInsuredObjects &&
-              insuredObject.childInsuredObjects.length > 0
+              insuredObject.insuredObjectItems &&
+              insuredObject.insuredObjectItems.length > 0
             "
           >
-            <ng-container
-              *ngFor="
-                let childInsuredObject of insuredObject.childInsuredObjects
-              "
-            >
+            <ul class="accordion-list container-fluid">
               <li
                 *ngFor="
-                  let childInsuredObjectItem of childInsuredObject.insuredObjectItems
+                  let insuredObjectItem of insuredObject.insuredObjectItems
                 "
                 class="accordion-list-item row"
               >
                 <div class="col-6 item-label">
-                  {{ childInsuredObjectItem.label }}
+                  {{ insuredObjectItem.label }}
                 </div>
                 <div class="col-6 value notice">
-                  {{ childInsuredObjectItem.value }}
+                  {{ insuredObjectItem.value }}
                 </div>
               </li>
-            </ng-container>
+              <ng-container
+                *ngIf="
+                  insuredObject.childInsuredObjects &&
+                  insuredObject.childInsuredObjects.length > 0
+                "
+              >
+                <ng-container
+                  *ngFor="
+                    let childInsuredObject of insuredObject.childInsuredObjects
+                  "
+                >
+                  <ng-container
+                    *ngIf="
+                      childInsuredObject.insuredObjectItems &&
+                      childInsuredObject.insuredObjectItems.length > 0
+                    "
+                  >
+                    <li
+                      *ngFor="
+                        let childInsuredObjectItem of childInsuredObject.insuredObjectItems
+                      "
+                      class="accordion-list-item row"
+                    >
+                      <div class="col-6 item-label">
+                        {{ childInsuredObjectItem.label }}
+                      </div>
+                      <div class="col-6 value notice">
+                        {{ childInsuredObjectItem.value }}
+                      </div>
+                    </li>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </ul>
           </ng-container>
-        </ul>
+        </ng-container>
       </fsa-accordion-item>
     </ng-container>
     <fsa-accordion-item [title]="'fscommon.whatsIncluded' | cxTranslate">
