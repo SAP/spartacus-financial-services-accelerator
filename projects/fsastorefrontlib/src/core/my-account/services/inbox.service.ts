@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AuthService, CmsService } from '@spartacus/core';
+import { OccInboxService } from 'projects/fsastorefrontlib/src/occ/services/inbox/inbox.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {
-  Message,
+  FSSearchConfig,
   InboxDataService,
   InboxTab,
-  FSSearchConfig,
+  Message,
 } from './inbox-data.service';
-import { OccInboxService } from 'projects/fsastorefrontlib/src/occ/services/inbox/inbox.service';
 
 @Injectable()
 export class InboxService {
@@ -39,7 +39,7 @@ export class InboxService {
   searchConfig: FSSearchConfig = {};
 
   messagesSource = new BehaviorSubject<any>(false);
-  messages$ = this.messagesSource.asObservable();
+  messages = this.messagesSource.asObservable();
 
   initInbox() {
     this.checkAllMessagesSource.next(false);

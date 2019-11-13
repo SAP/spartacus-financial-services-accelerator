@@ -1,20 +1,18 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   OnDestroy,
-  ChangeDetectorRef,
+  OnInit,
 } from '@angular/core';
 import { CmsService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
-import { mergeMap, map } from 'rxjs/operators';
+import { map, mergeMap } from 'rxjs/operators';
+import { InboxService } from '../../../core/my-account/services/inbox.service';
 import {
   CmsInboxComponent,
   CmsInboxTabComponent,
 } from '../../../occ/occ-models/cms-component.models';
-import { InboxService } from '../../../core/my-account/services/inbox.service';
-import { Message } from 'projects/fsastorefrontlib/src/core/my-account/services/inbox-data.service';
 
 @Component({
   selector: 'fsa-inbox',
@@ -25,24 +23,22 @@ export class InboxComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CmsInboxComponent>,
     protected cmsService: CmsService,
-    protected inboxService: InboxService,
-    protected cdr: ChangeDetectorRef
+    protected inboxService: InboxService
   ) {}
 
   subscription = new Subscription();
   component$: Observable<CmsInboxComponent>;
   initialTab$: Observable<CmsInboxTabComponent>;
-  tabs;
-  mobileGroupTitle: string;
-  activeMessageGroup: string;
-  activeTabIndex = 0;
-  initialGroupName: string;
-  shouldShow = false;
-  messagesCollection: Message[] = [];
 
-  // To be used in the next Inbox task
-  readState = this.inboxService.readStatus;
+  initialGroupName: string;
+  mobileGroupTitle: string;
+  activeTabIndex = 0;
+  shouldShow = false;
+  readState;
+
+  tabs;
   mainCheckboxChecked;
+
   subjectSortOrder = 'desc';
   contentSortOrder = 'desc';
   sentSortOrder = 'desc';
@@ -72,17 +68,27 @@ export class InboxComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+
+    this.inboxService.checkAllMessages.subscribe(
+      check => (this.mainCheckboxChecked = check)
+    );
+
+    this.inboxService.readStatus.subscribe(state => (this.readState = state));
   }
 
   checkAllCheckboxes() {
-    this.mainCheckboxChecked = !this.mainCheckboxChecked;
-    this.inboxService.checkAllMessagesSource.next(this.mainCheckboxChecked);
+    this.inboxService.checkAllMessagesSource.next(!this.mainCheckboxChecked);
   }
 
   changeMessagesReadState() {
     const messagesUidList = this.inboxService.getUidsFromMessagesCollection();
-    const read = this.inboxService.getMessagesAction();
-    this.inboxService.setMessagesState(messagesUidList, read).subscribe();
+    if (messagesUidList.length === 0) {
+      return;
+    }
+    this.readState = this.inboxService.getMessagesAction();
+    this.inboxService
+      .setMessagesState(messagesUidList, this.readState)
+      .subscribe();
   }
 
   sortMessages(sortCode, sortOrder) {

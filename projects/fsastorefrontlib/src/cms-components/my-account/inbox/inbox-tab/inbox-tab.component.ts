@@ -28,7 +28,9 @@ export class InboxTabComponent implements OnInit {
   ngOnInit() {
     this.component$ = this.cmsService.getComponentData(this.tabId);
   }
+
   onTabClicked(messageGroup, title) {
     this.inboxService.setTitleAndMessageGroup(messageGroup, title);
+    this.inboxService.checkAllMessagesSource.next(false);
   }
 }

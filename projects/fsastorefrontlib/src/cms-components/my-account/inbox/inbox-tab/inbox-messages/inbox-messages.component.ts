@@ -1,12 +1,13 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  OnInit,
   Input,
   OnDestroy,
-  ChangeDetectorRef,
+  OnInit,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { Message } from '../../../../../core/my-account/services/inbox-data.service';
 import { InboxService } from '../../../../../core/my-account/services/inbox.service';
 
@@ -30,9 +31,19 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   @Input() initialGroup: string;
 
   ngOnInit() {
-    this.changeCheckboxes$ = this.inboxService.checkAllMessages;
     this.loadCurrentMessageGroup();
-    this.messagesObject$ = this.inboxService.messages$;
+    this.messagesObject$ = this.inboxService.messages;
+    this.changeCheckboxes$ = this.inboxService.checkAllMessages;
+    this.changeCheckboxes$.subscribe(allChecked => {
+      this.inboxService.resetMessagesToSend();
+      this.messagesObject$.pipe(take(1)).subscribe(data => {
+        if (allChecked) {
+          data.messages.forEach(message => {
+            this.changeMessageState(message.readDate, message.uid);
+          });
+        }
+      });
+    });
   }
 
   loadCurrentMessageGroup() {
