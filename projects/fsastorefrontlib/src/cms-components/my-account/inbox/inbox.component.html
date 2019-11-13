@@ -12,13 +12,14 @@
 </ng-container>
 <div
   class="FSA-icon m-4"
-  [ngClass]="readState ? 'icon-FSA-envelope-open' : 'icon-FSA-envelope'"
+  (click)="changeMessagesReadState()"
+  [ngClass]="(readState | async) ? 'icon-FSA-envelope-open' : 'icon-FSA-envelope'"
 ></div>
 <div class="section-header-heading p-4 position-relative container-fluid">
   <div class="row d-none d-md-flex">
     <div class="col-1">
       <label class="checkbox-label">
-        <input type="checkbox" [checked]="mainCheckboxChecked" />
+        <input type="checkbox" [checked] = "inboxService.checkAllMessages | async" (click)="checkAllCheckboxes()"/>
         <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
       </label>
     </div>
@@ -27,7 +28,8 @@
       <span
         class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
         (click)="
-          subjectSortOrder = subjectSortOrder === 'desc' ? 'asc' : 'desc'
+          subjectSortOrder = subjectSortOrder === 'desc' ? 'asc' : 'desc';
+          sortMessages('title', subjectSortOrder)
         "
         [ngClass]="subjectSortOrder === 'asc' ? 'rotate' : ''"
       >
@@ -38,7 +40,8 @@
       <span
         class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
         (click)="
-          contentSortOrder = contentSortOrder === 'desc' ? 'asc' : 'desc'
+          contentSortOrder = contentSortOrder === 'desc' ? 'asc' : 'desc';
+          sortMessages('content', contentSortOrder)
         "
         [ngClass]="contentSortOrder === 'asc' ? 'rotate' : ''"
       ></span>
@@ -47,7 +50,10 @@
       {{ 'fscommon.date' | cxTranslate }}
       <span
         class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
-        (click)="sentSortOrder = sentSortOrder === 'desc' ? 'asc' : 'desc'"
+        (click)="
+          sentSortOrder = sentSortOrder === 'desc' ? 'asc' : 'desc';
+          sortMessages('sentdate', sentSortOrder)
+        "
         [ngClass]="sentSortOrder === 'asc' ? 'rotate' : ''"
       ></span>
     </div>
@@ -55,7 +61,7 @@
   <div class="mobile-heading row d-md-none">
     <div class="col-2">
       <label class="checkbox-label">
-        <input type="checkbox" [checked]="mainCheckboxChecked" />
+        <input type="checkbox" [checked]="inboxService.checkAllMessages | async" />
         <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
       </label>
     </div>

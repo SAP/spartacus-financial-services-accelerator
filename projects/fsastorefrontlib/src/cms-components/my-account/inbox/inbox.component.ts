@@ -3,6 +3,7 @@ import {
   Component,
   OnInit,
   OnDestroy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { CmsService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
@@ -13,6 +14,7 @@ import {
   CmsInboxTabComponent,
 } from '../../../occ/occ-models/cms-component.models';
 import { InboxService } from '../../../core/my-account/services/inbox.service';
+import { Message } from 'projects/fsastorefrontlib/src/core/my-account/services/inbox-data.service';
 
 @Component({
   selector: 'fsa-inbox',
@@ -23,8 +25,9 @@ export class InboxComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CmsInboxComponent>,
     protected cmsService: CmsService,
-    protected inboxService: InboxService
-  ) {}
+    protected inboxService: InboxService,
+    protected cdr: ChangeDetectorRef
+  ) { }
 
   subscription = new Subscription();
   component$: Observable<CmsInboxComponent>;
@@ -35,13 +38,14 @@ export class InboxComponent implements OnInit, OnDestroy {
   activeTabIndex = 0;
   initialGroupName: string;
   shouldShow = false;
+  messagesCollection: Message[] = [];
 
   // To be used in the next Inbox task
-  mainCheckboxChecked = false;
+  readState = this.inboxService.readStatus;
+  mainCheckboxChecked;
   subjectSortOrder = 'desc';
   contentSortOrder = 'desc';
   sentSortOrder = 'desc';
-  readState;
 
   ngOnInit() {
     this.subscription.add(
@@ -68,6 +72,30 @@ export class InboxComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+  }
+
+  checkAllCheckboxes() {
+    this.mainCheckboxChecked = !this.mainCheckboxChecked;
+    this.inboxService.checkAllMessagesSource.next(this.mainCheckboxChecked);
+  }
+
+  changeMessagesReadState() {
+    const messagesUidList = this.inboxService.getUidsFromMessagesCollection();
+    const read = this.inboxService.getMessagesAction();
+    this.inboxService.setMessagesState(messagesUidList, read).subscribe();
+  }
+
+  sortMessages(sortCode, sortOrder) {
+    this.inboxService.activeMessageGroupAndTitle.subscribe(groupTitle => {
+      let group;
+      if (groupTitle == null) {
+        group = this.initialGroupName;
+      }
+      else {
+        group = groupTitle.messageGroup;
+      }
+      this.inboxService.sortMessages(sortCode, sortOrder, group).subscribe(sortedMessages => this.inboxService.messagesSource.next(sortedMessages))
+    });
   }
 
   ngOnDestroy() {

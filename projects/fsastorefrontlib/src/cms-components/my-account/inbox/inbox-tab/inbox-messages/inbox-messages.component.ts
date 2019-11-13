@@ -7,10 +7,8 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { OccInboxService } from '../../../../../occ/services/inbox/inbox.service';
 import {
-  FSSearchConfig,
-  InboxDataService,
+  Message,
 } from '../../../../../core/my-account/services/inbox-data.service';
 import { InboxService } from '../../../../../core/my-account/services/inbox.service';
 
@@ -21,15 +19,12 @@ import { InboxService } from '../../../../../core/my-account/services/inbox.serv
 })
 export class InboxMessagesComponent implements OnInit, OnDestroy {
   constructor(
-    private occInboxService: OccInboxService,
     private inboxService: InboxService,
-    private inboxData: InboxDataService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) { }
 
   private subscription: Subscription;
-  searchConfig: FSSearchConfig = {};
-  changeCheckboxe$: Observable<boolean>;
+  changeCheckboxes$: Observable<boolean>;
   messagesObject$: Observable<any>;
   selectedIndex: number;
   messageGroup: string;
@@ -37,7 +32,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   @Input() initialGroup: string;
 
   ngOnInit() {
+    this.changeCheckboxes$ = this.inboxService.checkAllMessages;
     this.loadCurrentMessageGroup();
+    this.messagesObject$ = this.inboxService.messages$;
   }
 
   loadCurrentMessageGroup() {
@@ -50,18 +47,38 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
       }
     );
   }
+
   getMessages() {
-    this.messagesObject$ = this.occInboxService.getSiteMessagesForUserAndGroup(
-      this.inboxData.userId,
-      this.messageGroup,
-      this.searchConfig
-    );
-    this.selectedIndex = -1;
+   this.inboxService.getMessages(this.messageGroup).subscribe(messages => this.inboxService.messagesSource.next(messages));
   }
+
   toggleActiveAccordion(index: number) {
-    this.selectedIndex === index
-      ? (this.selectedIndex = -1)
-      : (this.selectedIndex = index);
+    this.selectedIndex = this.selectedIndex === index ? -1 : index;
+  }
+
+  readMessage(message: Message) {
+    const uidList = [];
+    if (message.readDate === undefined) {
+      uidList.push(message.uid);
+      this.inboxService.setMessagesState(uidList, true).subscribe();
+    }
+  }
+
+  changeMessageState(readDate, messageUid) {
+    const messageObj = {
+      readDate: readDate,
+      uid: messageUid,
+    };
+    this.inboxService.selectedMessages(messageObj);
+    this.inboxService.getMessagesAction();
+  }
+
+  getDate() {
+    return new Date();
+  }
+
+  getReadMessages(): string[] {
+    return this.inboxService.readMessagesUidList;
   }
 
   ngOnDestroy() {
