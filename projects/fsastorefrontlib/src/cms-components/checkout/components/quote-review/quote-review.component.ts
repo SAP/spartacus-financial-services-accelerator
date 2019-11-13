@@ -6,9 +6,11 @@ import {
   OccConfig,
   RoutingService,
   CheckoutDeliveryService,
+  Address,
 } from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services';
+import { FSCheckoutService } from '../../../../core/checkout/services/fs-checkout.service';
 
 @Component({
   selector: 'fsa-quote-review',
@@ -26,8 +28,19 @@ export class QuoteReviewComponent implements OnInit {
     protected routingService: RoutingService,
     private checkoutConfigService: FSCheckoutConfigService,
     private activatedRoute: ActivatedRoute,
+    protected checkoutService: FSCheckoutService,
     protected checkoutDeliveryService: CheckoutDeliveryService
   ) {}
+
+  mockedDeliveryAddress: Address = {
+    id: 'testID',
+    country: { isocode: 'GB' },
+    firstName: 'Donna',
+    lastName: 'Moore',
+    town: 'London',
+    line1: 'line1',
+    postalCode: 'WC1V 6PL',
+  };
 
   ngOnInit() {
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
@@ -47,17 +60,9 @@ export class QuoteReviewComponent implements OnInit {
     this.routingService.go(this.checkoutStepUrlBack);
   }
   next() {
-    this.checkoutDeliveryService.setDeliveryMode('financial-default');
-    // mocked delivery address
-    this.checkoutDeliveryService.createAndSetAddress({
-      id: 'testID',
-      country: { isocode: 'GB' },
-      firstName: 'Donna',
-      lastName: 'Moore',
-      town: 'London',
-      line1: 'line1',
-      postalCode: 'WC1V 6PL',
-    });
+    this.checkoutDeliveryService.createAndSetAddress(
+      this.mockedDeliveryAddress
+    );
     this.routingService.go(this.checkoutStepUrlNext);
   }
 }
