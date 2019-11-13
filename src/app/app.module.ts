@@ -25,6 +25,9 @@ import { environment } from 'src/environments/environment';
       authentication: {
         client_id: 'financial_customer',
         client_secret: 'secret'
+      },
+      features: {
+        level: '1.3',
       }
     })
   ],

@@ -27,6 +27,7 @@ export class AddOptionsComponent implements OnInit {
 
   entries$: Observable<OrderEntry[]>;
   checkoutStepUrlNext: string;
+  cartLoaded$: Observable<boolean>;
 
   @Output()
   nextStep = new EventEmitter<any>();
@@ -35,6 +36,7 @@ export class AddOptionsComponent implements OnInit {
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
       this.activatedRoute
     );
+    this.cartLoaded$ = this.cartService.getLoaded();
     this.entries$ = this.cartService
       .getEntries()
       .pipe(filter(entries => entries.length > 0));

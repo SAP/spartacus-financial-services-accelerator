@@ -12,8 +12,7 @@ import {
   UrlModule,
 } from '@spartacus/core';
 import { PageComponentModule, SpinnerModule } from '@spartacus/storefront';
-import { FSCartService } from '../../core/checkout/services';
-import { PricingService } from '../../core/checkout/services/pricing/pricing.service';
+import { FSCartService, PricingService } from '../../core/checkout/services';
 import { FSProductService } from '../../core/checkout/services/product/fs-product.service';
 import { OccBillingTimeService } from '../../occ/services/billing-time/billing-time.service';
 import { OccProductService } from '../../occ/services/pricing/occ-product.service';
@@ -65,8 +64,8 @@ import { ComparisonTableService } from './comparison-table.service';
     OccProductService,
     ComparisonTableService,
     FSCartService,
-    PricingService,
     FSProductService,
+    PricingService,
   ],
 })
 export class ComparisonTableModule {}

@@ -8,7 +8,6 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         id: 'chooseCoverStep',
         name: 'fscommon.chooseCover',
         routeName: 'generalInformation',
-        icon: 'icon-FSA-lock',
         type: [],
         restrictedCategories: [
           'banking_current_account',
@@ -20,7 +19,6 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         id: 'comparisonCheckoutStep',
         name: 'fscommon.whatsIncluded',
         routeName: 'category',
-        icon: 'icon-FSA-selected-item',
         type: [],
         restrictedCategories: [],
       },
@@ -28,7 +26,6 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         id: 'addOptionsStep',
         name: 'fscommon.addOptions',
         routeName: 'addOptions',
-        icon: 'icon-FSA-list',
         type: [],
         restrictedCategories: [],
       },
@@ -36,7 +33,6 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         id: 'quoteReviewStep',
         name: 'quote.quoteReview',
         routeName: 'quoteReview',
-        icon: 'icon-FSA-shield',
         type: [],
         restrictedCategories: [],
       },
@@ -44,7 +40,6 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         id: 'legalInformationStep',
         name: 'fscommon.legalInformation',
         routeName: 'legalInformation',
-        icon: 'icon-FSA-card-verify',
         type: [],
         restrictedCategories: [
           'insurances_travel',
@@ -60,7 +55,6 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         id: 'userIdentificationStep',
         name: 'fscommon.userIdentification.title',
         routeName: 'userIdentification',
-        icon: 'icon-FSA-person',
         type: [],
         restrictedCategories: [
           'insurances_travel',
@@ -76,7 +70,6 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         id: 'checkoutPaymentDetailsStep',
         name: 'fscommon.paymentDetails',
         routeName: 'checkoutPaymentDetails',
-        icon: 'icon-FSA-payment-cards',
         type: [CheckoutStepType.PAYMENT_DETAILS],
         restrictedCategories: [
           'banking_credit_card',
@@ -87,7 +80,6 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
         id: 'finalReviewStep',
         name: 'fscommon.finalReview',
         routeName: 'finalReview',
-        icon: 'icon-FSA-review',
         type: [],
         restrictedCategories: [
           'banking_credit_card',
