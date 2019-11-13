@@ -29,16 +29,19 @@ export function checkComparisonAndAddProduct() {
   cy.get('fsa-comparison-table-panel-item')
     .eq(2)
     .within(() => {
+      cy.get('h3').should('have.text', 'Single - Gold Plan');
       cy.get('h4').should('have.text', '€150.00');
     });
   cy.get('fsa-comparison-table-panel-item')
     .eq(1)
     .within(() => {
+      cy.get('h3').should('have.text', 'Single - Silver Plan');
       cy.get('h4').should('have.text', '€120.00');
     });
   cy.get('fsa-comparison-table-panel-item')
     .eq(0)
     .within(() => {
+      cy.get('h3').should('have.text', 'Single - Budget Plan');
       cy.get('h4').should('have.text', '€90.00');
       cy.get('.primary-button').click();
     });
@@ -48,6 +51,24 @@ export function checkOptionalProductsAndPick() {
   cy.get('fsa-add-options').should('be.visible');
   cy.get('fsa-add-options').within(() => {
     cy.get('h3').should('have.length', 6);
+    cy.get('h3')
+      .eq(0)
+      .should('have.text', 'Winter Sports Cover');
+    cy.get('h3')
+      .eq(1)
+      .should('have.text', 'Golf Cover');
+    cy.get('h3')
+      .eq(2)
+      .should('have.text', 'Business Cover');
+    cy.get('h3')
+      .eq(3)
+      .should('have.text', 'Valuables Extension');
+    cy.get('h3')
+      .eq(4)
+      .should('have.text', 'Hazardous Activities');
+    cy.get('h3')
+      .eq(5)
+      .should('have.text', 'Excess waiver');
     cy.get('.secondary-button').should('have.length', 6);
     cy.get('.disabled-option').should('have.length', 3);
     cy.get('.secondary-button')
