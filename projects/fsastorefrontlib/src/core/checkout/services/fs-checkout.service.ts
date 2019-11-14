@@ -14,11 +14,10 @@ import { FSStateWithCheckout, FSCheckoutSelectors } from '../store';
 export class FSCheckoutService extends CheckoutService {
   constructor(
     protected fsStore: Store<FSStateWithCheckout>,
-    protected store: Store<StateWithCheckout>,
     protected cartData: CartDataService,
     protected checkoutDeliveryService: CheckoutDeliveryService
   ) {
-    super(store, cartData);
+    super(fsStore, cartData);
   }
 
   mockedDeliveryMode = 'financial-default';
