@@ -13,7 +13,6 @@ export function getReducers(): ActionReducerMap<FSCheckoutState> {
       CHECKOUT_DETAILS,
       fromCheckout.reducer
     ),
-
     cardTypes: fromCardTypes.reducer,
     addressVerification: fromAddressVerification.reducer,
   };
