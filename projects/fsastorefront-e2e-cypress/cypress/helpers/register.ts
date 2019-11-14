@@ -30,7 +30,10 @@ export function registerUser(user: RegisterUser) {
 }
 
 export function validatePhoneNumber(expectedValue: string) {
-  cy.selectOptionFromDropdown({menuOption: 'My Account',dropdownItem: 'Personal Details'});
+  cy.selectOptionFromDropdown({
+    menuOption: 'My Account',
+    dropdownItem: 'Personal Details',
+  });
   cy.get('[formcontrolname="phoneNumber"]').should('have.value', expectedValue);
 }
 
