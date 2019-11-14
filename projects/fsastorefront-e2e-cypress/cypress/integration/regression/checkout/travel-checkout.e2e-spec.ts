@@ -19,7 +19,6 @@ context('Travel Insurance Checkout', () => {
 
     it('Add main product to the cart', () => {
       travelCheckout.checkComparisonAndAddProduct();
-      cy.wait(2000);
     });
 
     it('Add optional product to the cart', () => {
@@ -37,7 +36,6 @@ context('Travel Insurance Checkout', () => {
 
     it('Place order on final review page', () => {
       travelCheckout.placeOrderOnFinalReivew();
-      cy.wait(2000);
     });
 
     it('Check order confirmation', () => {
