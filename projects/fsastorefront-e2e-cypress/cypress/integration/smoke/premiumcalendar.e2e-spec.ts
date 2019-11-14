@@ -21,6 +21,6 @@ context('PremiumCalendar', () => {
   });
 
   it('should have policy entries', () => {
-    cy.get('div.premium-data-row.row').should('have.length', 1);
+    cy.get('div.premium-data-row.row').should('be.visible');
   });
 });
