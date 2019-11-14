@@ -36,3 +36,17 @@ Cypress.Commands.add(
       .click({ force: true });
   }
 );
+
+Cypress.Commands.add(
+  'selectOptionFromDropdown',
+  ({
+    menuOption,
+    dropdownItem,
+  }: {
+    menuOption: string;
+    dropdownItem: string;
+  }) => {
+    cy.get('[aria-label="' + menuOption + '"]').invoke('mouseover');
+    cy.findByText(dropdownItem).click({ force: true });
+  }
+);

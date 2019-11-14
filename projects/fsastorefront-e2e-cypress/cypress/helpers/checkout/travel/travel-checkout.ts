@@ -1,8 +1,8 @@
 export function openCategoryPage() {
-  cy.get('cx-category-navigation')
-    .should('be.visible')
-    .findByText('Travel')
-    .click({ force: true });
+  cy.selectOptionFromDropdown({
+    menuOption: 'Insurance',
+    dropdownItem: 'Travel',
+  });
   cy.get('fsa-enriched-responsive-banner')
     .should('be.visible')
     .findByText('Get a quote')
@@ -48,34 +48,38 @@ export function checkComparisonAndAddProduct() {
 }
 
 export function checkOptionalProductsAndPick() {
-  cy.get('fsa-add-options').should('be.visible')
-  .within(() => {
-    cy.get('h3').should('have.length', 6);
-    cy.get('h3')
-      .eq(0)
-      .should('have.text', 'Winter Sports Cover');
-    cy.get('h3')
-      .eq(1)
-      .should('have.text', 'Golf Cover');
-    cy.get('h3')
-      .eq(2)
-      .should('have.text', 'Business Cover');
-    cy.get('h3')
-      .eq(3)
-      .should('have.text', 'Valuables Extension');
-    cy.get('h3')
-      .eq(4)
-      .should('have.text', 'Hazardous Activities');
-    cy.get('h3')
-      .eq(5)
-      .should('have.text', 'Excess waiver');
-    cy.get('.disabled-option').should('have.length', 3);
-    cy.get('.secondary-button').should('have.length', 6)
-      .eq(0)
-      .click();
-    cy.wait(1000);
-  });
-  cy.get('.primary-button').should('be.visible').click();
+  cy.get('fsa-add-options')
+    .should('be.visible')
+    .within(() => {
+      cy.get('h3').should('have.length', 6);
+      cy.get('h3')
+        .eq(0)
+        .should('have.text', 'Winter Sports Cover');
+      cy.get('h3')
+        .eq(1)
+        .should('have.text', 'Golf Cover');
+      cy.get('h3')
+        .eq(2)
+        .should('have.text', 'Business Cover');
+      cy.get('h3')
+        .eq(3)
+        .should('have.text', 'Valuables Extension');
+      cy.get('h3')
+        .eq(4)
+        .should('have.text', 'Hazardous Activities');
+      cy.get('h3')
+        .eq(5)
+        .should('have.text', 'Excess waiver');
+      cy.get('.disabled-option').should('have.length', 3);
+      cy.get('.secondary-button')
+        .should('have.length', 6)
+        .eq(0)
+        .click();
+      cy.wait(1000);
+    });
+  cy.get('.primary-button')
+    .should('be.visible')
+    .click();
 }
 
 export function checkQuoteReview() {
@@ -93,9 +97,34 @@ export function checkQuoteReview() {
 }
 
 export function checkPaymentPage() {
-  cy.get('cx-payment-method').within(() => {
-    cy.get('.btn-primary').click();
+  cy.get('cx-payment-form').within(() => {
+    cy.get('[bindValue="code"]').ngSelect('Visa');
+    cy.get('[formcontrolname="accountHolderName"]').type('Ben Moore');
+    cy.get('[formcontrolname="cardNumber"]').type('4111111111111111');
+    cy.get('[formcontrolname="cvn"]').type('1234');
+    cy.get('[bindValue="expiryMonth"]').ngSelect('08');
+    cy.get('[bindValue="expiryYear"]').ngSelect('2024');
+    cy.get('input[type="checkbox"]').click();
   });
+  cy.get('.cx-payment-form-billing').within(() => {
+    cy.get('[bindvalue="isocode"]').ngSelect('Germany');
+    cy.get('[formcontrolname="firstName"]')
+      .clear()
+      .type('Ben');
+    cy.get('[formcontrolname="lastName"]')
+      .clear()
+      .type('Moore');
+    cy.get('[formcontrolname="line1"]')
+      .clear()
+      .type('Test Address 1');
+    cy.get('[formcontrolname="town"]')
+      .clear()
+      .type('Test City');
+    cy.get('[formcontrolname="postalCode"]')
+      .clear()
+      .type('113232');
+  });
+  cy.get('.btn-primary').click();
 }
 
 export function placeOrderOnFinalReivew() {
@@ -113,5 +142,15 @@ export function checkOrderConfirmation() {
         'have.text',
         ' Thank you! Your policy request has been submitted '
       );
+  });
+}
+
+export function checkMyPoliciesPage() {
+  cy.selectOptionFromDropdown({
+    menuOption: 'My Account',
+    dropdownItem: 'Policies',
+  });
+  cy.get('fsa-policies').within(() => {
+    cy.get('.info-card').should('have.length', 1);
   });
 }

@@ -1,12 +1,14 @@
 import * as register from '../../../helpers/register';
-import { donnaMooreUser } from '../../../sample-data/users';
 import * as travelCheckout from '../../../helpers/checkout/travel/travel-checkout';
+import { registrationUser } from './../../../sample-data/users';
 
 context('Travel Insurance Checkout', () => {
   before(() => {
-    register.login(donnaMooreUser.email, donnaMooreUser.password);
-    cy.wait(1000);
     cy.visit('/');
+    register.registerUser(registrationUser);
+    cy.wait(3000);
+    register.login(registrationUser.email, registrationUser.password);
+    cy.wait(1500);
   });
 
   describe('Checkout', () => {
@@ -40,6 +42,10 @@ context('Travel Insurance Checkout', () => {
 
     it('Check order confirmation', () => {
       travelCheckout.checkOrderConfirmation();
+    });
+
+    it('Check my policies page', () => {
+      travelCheckout.checkMyPoliciesPage();
     });
   });
 });
