@@ -15,38 +15,38 @@ declare namespace Cypress {
     selectUserMenuOption: ({
       option,
       isMobile,
-    }
-    : {
-    option: string;
-    isMobile?: boolean;
+    }: {
+      option: string;
+      isMobile?: boolean;
+    }) => void;
   }
-
-) =>
-  void;
-}
 }
 
 Cypress.Commands.add(
   'selectUserMenuOption',
-  ({isMobile, option}: { option: string; isMobile?: boolean }) => {
+  ({ isMobile, option }: { option: string; isMobile?: boolean }) => {
     if (isMobile) {
       // below click is exactly the same as clickHamburger() but we cannot import it here
-      cy.get('cx-hamburger-menu [aria-label="Menu"]').click({force: true});
+      cy.get('cx-hamburger-menu [aria-label="Menu"]').click({ force: true });
     }
 
     cy.get('nav a')
       .getAllByText(new RegExp(option, 'i'))
       .first()
-      .click({force: true});
+      .click({ force: true });
   }
 );
 
 Cypress.Commands.add(
   'selectOptionFromDropdown',
-  ({menuOption, dropdownItem}: { menuOption: string; dropdownItem: string; }) => {
+  ({
+    menuOption,
+    dropdownItem,
+  }: {
+    menuOption: string;
+    dropdownItem: string;
+  }) => {
     cy.get('[aria-label="' + menuOption + '"]').invoke('mouseover');
-    cy.findByText(dropdownItem).click({force: true});
+    cy.findByText(dropdownItem).click({ force: true });
   }
 );
-
-
