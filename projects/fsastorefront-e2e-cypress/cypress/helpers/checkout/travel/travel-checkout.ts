@@ -1,10 +1,10 @@
 export function openCategoryPage() {
-  cy.get('cx-category-navigation').should('be.visible');
   cy.get('cx-category-navigation')
+    .should('be.visible')
     .findByText('Travel')
     .click({ force: true });
-  cy.get('fsa-enriched-responsive-banner').should('be.visible');
   cy.get('fsa-enriched-responsive-banner')
+    .should('be.visible')
     .findByText('Get a quote')
     .click({ force: true });
 }
@@ -48,8 +48,8 @@ export function checkComparisonAndAddProduct() {
 }
 
 export function checkOptionalProductsAndPick() {
-  cy.get('fsa-add-options').should('be.visible');
-  cy.get('fsa-add-options').within(() => {
+  cy.get('fsa-add-options').should('be.visible')
+  .within(() => {
     cy.get('h3').should('have.length', 6);
     cy.get('h3')
       .eq(0)
@@ -69,15 +69,13 @@ export function checkOptionalProductsAndPick() {
     cy.get('h3')
       .eq(5)
       .should('have.text', 'Excess waiver');
-    cy.get('.secondary-button').should('have.length', 6);
     cy.get('.disabled-option').should('have.length', 3);
-    cy.get('.secondary-button')
+    cy.get('.secondary-button').should('have.length', 6)
       .eq(0)
       .click();
     cy.wait(1000);
   });
-  cy.get('.primary-button').should('be.visible');
-  cy.get('.primary-button').click();
+  cy.get('.primary-button').should('be.visible').click();
 }
 
 export function checkQuoteReview() {
