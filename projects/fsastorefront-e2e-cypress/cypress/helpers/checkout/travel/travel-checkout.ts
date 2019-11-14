@@ -124,6 +124,7 @@ export function checkPaymentPage() {
       .clear()
       .type('113232');
   });
+  cy.wait(1000);
   cy.get('.btn-primary').click();
 }
 
