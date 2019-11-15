@@ -44,10 +44,15 @@ export function reducer(
 
     case fromAction.CREATE_CLAIM_SUCCESS: {
       const content = { ...action.payload };
-      console.log(content);
       return {
         ...state,
         content,
+        refresh: false,
+      };
+    }
+    case fromAction.UPDATE_CLAIM_SUCCESS: {
+      return {
+        ...state,
         refresh: false,
       };
     }

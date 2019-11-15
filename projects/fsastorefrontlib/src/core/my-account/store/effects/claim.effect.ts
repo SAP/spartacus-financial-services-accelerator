@@ -54,17 +54,35 @@ export class ClaimEffects {
         .createClaim(payload.userId, payload.policyId, payload.contractId)
         .pipe(
           switchMap((claim: Claim) => {
-            return [
-              new fromUserRequestActions.LoadUserRequest({
-                userId: payload.userId,
-                requestId: claim.requestId,
-              }),
-              new fromActions.CreateClaimSuccess(claim),
-            ];
+            if (claim.requestId !== undefined) {
+              return [
+                new fromUserRequestActions.LoadUserRequest({
+                  userId: payload.userId,
+                  requestId: claim.requestId,
+                }),
+                new fromActions.CreateClaimSuccess(claim),
+              ];
+            }
           }),
           catchError(error => of(new fromActions.CreateClaimFail(error)))
         );
     })
+  );
+
+  @Effect()
+  updateClaim$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.UPDATE_CLAIM),
+    map((action: fromActions.UpdateClaim) => action.payload),
+    mergeMap(payload =>
+      this.claimService
+        .updateClaim(payload.userId, payload.claimId)
+        .pipe(
+          map((claim) => {
+            return new fromActions.UpdateClaimSuccess(claim);
+          }),
+          catchError(error => of(new fromActions.UpdateClaimFail(error))),
+        ),
+    ),
   );
 
   constructor(

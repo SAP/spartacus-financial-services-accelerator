@@ -1,12 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import {
   UserRequestService,
   UserRequestNavigationService,
+  UserRequestDataService,
 } from '../../../core/user-request/services';
 import { FSUserRequest, FSStepData } from '../../../occ/occ-models';
+import {
+  ClaimDataService,
+  ClaimService,
+} from '../../../core/my-account/services';
+import { FormDataService } from '../../../../../dynamicforms/src/core/services';
 
 @Component({
   selector: 'fsa-user-request-navigation',
@@ -22,7 +28,11 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
   constructor(
     protected userRequestService: UserRequestService,
     protected activatedRoute: ActivatedRoute,
-    protected userRequestNavigationService: UserRequestNavigationService
+    protected userRequestNavigationService: UserRequestNavigationService,
+    protected formService: FormDataService,
+    protected claimService: ClaimService,
+    protected claimDataService: ClaimDataService,
+    protected userRequestDataService: UserRequestDataService
   ) {}
 
   ngOnInit() {
@@ -44,7 +54,17 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
                 this.activeStepData
               );
             }
-          })
+            return userRequestData;
+          }),
+          tap(userRequestData => {
+            console.log('stepDAta', this.activeStepData);
+            if (this.shouldClaimBeUpdated(userRequestData) && this.activeStepIndex > 0) {
+              return this.claimService.updateClaim(
+                'current',
+                this.claimDataService.content.claimNumber
+              );
+            }
+          }),
         )
         .subscribe()
     );
@@ -58,15 +78,47 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
 
   getNumberOfConfigurationSteps(): number {
     if (this.configurationSteps) {
-      return this.configurationSteps.length - 1;
+      return this.configurationSteps.length;
     }
   }
 
   next(currentStep: number): void {
+    this.formService.submitForm(currentStep.toString());
+
+    this.subscription.add(
+      this.formService
+        .getCurrentFormData()
+        .pipe(
+          map(data => {
+            const fsRequest = this.userRequestDataService.userRequest;
+            if (fsRequest.requestId && data.content !== undefined) {
+              const stepData = this.userRequestDataService.updateUserRequestDataWithCompletedStep(
+                fsRequest,
+                this.activeStepIndex,
+                data,
+              );
+              return this.userRequestService.updateUserRequest(
+                'current',
+                fsRequest.requestId,
+                stepData,
+              );
+            }
+          })).subscribe(),
+    );
     this.userRequestNavigationService.next(
       this.configurationSteps,
       currentStep
     );
+  }
+
+  shouldClaimBeUpdated(fsRequest: FSUserRequest): boolean {
+    if (
+      fsRequest.configurationSteps.filter(step => step.status === 'COMPLETED')
+        .length === fsRequest.configurationSteps.length
+    ) {
+      return true;
+    }
+    return false;
   }
 
   back(currentStep: number): void {

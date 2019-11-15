@@ -41,7 +41,9 @@ export class FormComponent implements OnDestroy {
               content: response.content,
               categoryCode: this.formCategoryCode,
             });
-            this.navigateNext();
+            if (this.formCategoryCode) {
+              this.navigateNext();
+            }
           })
       );
     }

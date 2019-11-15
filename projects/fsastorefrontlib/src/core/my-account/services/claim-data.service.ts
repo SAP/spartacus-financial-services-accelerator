@@ -29,7 +29,6 @@ export class ClaimDataService {
     this.store
       .pipe(select(fromClaimStore.getClaimsContent))
       .subscribe(claimData => {
-        console.log(claimData);
         this._content = claimData;
       });
   }

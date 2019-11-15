@@ -23,7 +23,7 @@ import { ClaimsComponent } from './claims/claims.component';
 import { CreateClaimComponent } from './create-claim/create-claim.component';
 import { ClaimDataService } from '../../../core/my-account/services/claim-data.service';
 import { ClaimService } from '../../../core/my-account/services/claim.service';
-import { ClaimStoreModule } from 'projects/fsastorefrontlib/src/core/my-account/store/claim-store.module';
+import { ClaimStoreModule } from '../../../core/my-account/store/claim-store.module';
 
 const routes: Routes = [
   {
@@ -39,6 +39,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
+    ClaimStoreModule,
     CommonModule,
     I18nModule,
     RouterModule,

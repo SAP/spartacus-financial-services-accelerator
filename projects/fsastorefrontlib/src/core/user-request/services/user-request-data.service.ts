@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
 import { filter } from 'rxjs/operators';
-import { FSUserRequest } from '../../../occ/occ-models';
+import { FSStepData, FSUserRequest } from '../../../occ/occ-models';
 import { UserRequestSelector } from '../store';
 import * as fromReducer from '../store/reducers';
+
+const STATUS_COMPLETED = 'COMPLETED';
 
 @Injectable()
 export class UserRequestDataService {
@@ -50,5 +52,20 @@ export class UserRequestDataService {
     if (this.hasUserRequest) {
       return this.userRequest.requestId;
     }
+  }
+
+  updateUserRequestDataWithCompletedStep(
+    fsRequest: FSUserRequest,
+    activeStepIndex: number,
+    data: any
+  ): FSStepData {
+    const stepData = Object.assign(
+      {
+        yformConfigurator: data['id'],
+      },
+      fsRequest.configurationSteps[activeStepIndex]
+    );
+    stepData.status = STATUS_COMPLETED;
+    return stepData;
   }
 }

@@ -1,4 +1,5 @@
 import { Product, Price, UserSignUp, Category, User } from '@spartacus/core';
+import { YFormData } from '../../../../dynamicforms/src/core/models';
 
 export interface FSProduct extends Product {
   price?: FSPrice;
@@ -39,15 +40,12 @@ export interface FSUser extends User {
   contactInfos?: FSContactInfo[];
 }
 
-export interface FSStepDataStatus {
-  code?: string;
-}
-
 export interface FSStepData {
   name?: string;
   sequenceNumber?: string;
   pageLabelOrId?: string;
-  status?: FSStepDataStatus;
+  yFormConfigurator?: string;
+  status?: string;
 }
 
 export interface FSUserRequest {

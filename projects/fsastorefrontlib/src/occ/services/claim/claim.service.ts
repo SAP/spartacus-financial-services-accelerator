@@ -62,4 +62,20 @@ export class OccClaimService {
       .post(url, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
+
+  public updateClaim(userId: string, claimId: string) {
+    const url = this.getClaimsEndpoint(userId) + '/' + claimId;
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    // mocked data
+    const claimBody = JSON.stringify({
+      claimNumber: claimId,
+      claimStatus: 'SUBMITTED',
+    });
+    return this.http
+      .patch(url, claimBody, { headers })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
 }

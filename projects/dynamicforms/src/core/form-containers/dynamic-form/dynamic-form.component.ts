@@ -1,17 +1,28 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   FieldConfig,
   FormDefinition,
 } from '../../models/field-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
+import { FormDataService } from '../../services/data/form-data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   exportAs: 'cx-dynamicForm',
   selector: 'cx-dynamic-form',
   templateUrl: './dynamic-form.component.html',
 })
-export class DynamicFormComponent implements OnInit {
+export class DynamicFormComponent implements OnInit, OnDestroy {
+  private subscription = new Subscription();
+
   @Input()
   config: FormDefinition;
   @Output()
@@ -30,7 +41,10 @@ export class DynamicFormComponent implements OnInit {
     return this.form.value;
   }
 
-  constructor(private formService: FormBuilderService) {}
+  constructor(
+    private formService: FormBuilderService,
+    protected formDataService: FormDataService
+  ) {}
 
   ngOnInit() {
     if (this.config) {
@@ -41,11 +55,25 @@ export class DynamicFormComponent implements OnInit {
         });
       });
     }
+
+    this.subscription.add(
+      this.formDataService.getSubmittedData().subscribe(data => {
+        if (data !== undefined && this.value !== undefined) {
+          this.submit.emit(this.value);
+        }
+      })
+    );
   }
 
   handleSubmit(event: Event) {
     event.preventDefault();
     event.stopPropagation();
     this.submit.emit(this.value);
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

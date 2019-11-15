@@ -6,6 +6,7 @@ import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
 import { ClaimDataService, SelectedPolicy } from './claim-data.service';
+import { FSStepData, FSUserRequest } from '../../../occ/occ-models';
 
 @Injectable()
 export class ClaimService {
@@ -75,6 +76,15 @@ export class ClaimService {
         userId: userId,
         policyId: policyId,
         contractId: contractId,
+      })
+    );
+  }
+
+  updateClaim(userId: string, claimId: string) {
+    this.store.dispatch(
+      new fromAction.UpdateClaim({
+        userId: userId,
+        claimId: claimId
       })
     );
   }

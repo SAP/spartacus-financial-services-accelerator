@@ -30,6 +30,27 @@ export class UserRequestEffects {
     })
   );
 
+  @Effect()
+  updateUserRequest$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.UPDATE_USER_REQUEST),
+    map((action: fromActions.UpdateUserRequest) => action.payload),
+    mergeMap(payload => {
+      if (payload === undefined || payload.userId === undefined) {
+        payload = {
+          userId: this.userRequestData.userId,
+          requestId: this.userRequestData.requestId,
+        };
+      }
+      return this.userRequestService
+        .updateUserRequest(payload.userId, payload.requestId, payload.stepData)
+        .pipe(
+          map((userRequest: any) => {
+            return new fromActions.LoadUserRequestSuccess(userRequest);
+          }),
+          catchError(error => of(new fromActions.UpdateUserRequestFail(error)))
+        );
+    })
+  );
   constructor(
     private actions$: Actions,
     private userRequestService: OccUserRequestService,

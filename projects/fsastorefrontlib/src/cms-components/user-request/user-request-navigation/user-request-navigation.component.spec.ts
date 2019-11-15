@@ -8,6 +8,12 @@ import { UserRequestService } from '../../../core/user-request/services/user-req
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserRequestNavigationService } from '../../../core/user-request/services/user-request/user-request-navigation.service';
 import { ActivatedRoute } from '@angular/router';
+import { FormDataService } from '@fsa/dynamicforms';
+import {
+  ClaimDataService,
+  ClaimService,
+} from '../../../core/my-account/services';
+import { UserRequestDataService } from '../../../core/user-request/services';
 
 const mockRequest: FSUserRequest = {
   requestId: 'test123',
@@ -67,6 +73,22 @@ describe('UserRequestNavigationComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: mockActivatedRoute,
+        },
+        {
+          provide: FormDataService,
+          useValue: FormDataService,
+        },
+        {
+          provide: ClaimService,
+          useValue: ClaimService,
+        },
+        {
+          provide: ClaimDataService,
+          useValue: ClaimDataService,
+        },
+        {
+          provide: UserRequestDataService,
+          useValue: UserRequestDataService,
         },
       ],
     }).compileComponents();

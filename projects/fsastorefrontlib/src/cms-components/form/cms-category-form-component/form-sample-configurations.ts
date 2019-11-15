@@ -1,7 +1,10 @@
 import { Validators } from '@angular/forms';
 import { FormHelpers } from '../../../shared/util/helpers/form-helpers';
 import { CustomFormValidators } from '../../../shared/util/validators/custom-form-validators';
-import { FormDefinition, FormSubmitType } from '@fsa/dynamicforms';
+import {
+  FormDefinition,
+  FormSubmitType,
+} from '../../../../../dynamicforms/src/core/models';
 
 export class FormSampleConfigurations {
   static sampleConfigurations: FormDefinition[] = [
