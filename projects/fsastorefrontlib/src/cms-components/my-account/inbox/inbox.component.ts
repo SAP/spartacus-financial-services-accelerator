@@ -32,8 +32,8 @@ export class InboxComponent implements OnInit, OnDestroy {
 
   initialGroupName: string;
   mobileGroupTitle: string;
-  activeTabIndex: number = 0;
-  shouldShow: boolean = false;
+  activeTabIndex = 0;
+  shouldShow = false;
   readState: boolean;
 
   tabs: string[];
