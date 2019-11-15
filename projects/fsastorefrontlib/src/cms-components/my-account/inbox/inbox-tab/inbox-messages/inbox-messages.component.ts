@@ -22,7 +22,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef
   ) {}
 
-  private subscription: Subscription;
+  private subscription: Subscription = new Subscription();
   changeCheckboxes$: Observable<boolean>;
   messagesObject$: Observable<any>;
   selectedIndex: number;

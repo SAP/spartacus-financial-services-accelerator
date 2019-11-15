@@ -74,10 +74,6 @@ export class InboxComponent implements OnInit, OnDestroy {
         check => (this.mainCheckboxChecked = check)
       )
     );
-
-    this.subscription.add(
-      this.inboxService.readStatus.subscribe(state => (this.readState = state))
-    );
   }
 
   checkAllCheckboxes() {

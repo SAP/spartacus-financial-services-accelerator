@@ -23,19 +23,13 @@ export class InboxService {
   messageGroupAndTitleSource = new BehaviorSubject<InboxTab>(null);
   activeMessageGroupAndTitle = this.messageGroupAndTitleSource.asObservable();
 
-  // Leftovers from previous implementation. Maybe can be used in the next task
-  activeSortingFilterSource = new BehaviorSubject<string>('');
-  readStatusSource = new BehaviorSubject<boolean>(false);
   checkAllMessagesSource = new BehaviorSubject<boolean>(false);
-  activeSortingFilter = this.activeSortingFilterSource.asObservable();
-  readStatus = this.readStatusSource.asObservable();
   checkAllMessages = this.checkAllMessagesSource.asObservable();
-  messagesCollection: Message[] = [];
-  protected callback: Function;
 
+  messagesCollection: Message[] = [];
   readMessagesUidList: string[] = [];
 
-  selectedIndex;
+  selectedIndex: number;
   searchConfig: FSSearchConfig = {};
 
   messagesSource = new BehaviorSubject<any>(false);
@@ -57,7 +51,6 @@ export class InboxService {
   // Leftovers from previous implementation. Maybe can be used in the next task
   resetMessagesToSend() {
     this.messagesCollection = [];
-    this.readStatusSource.next(false);
   }
 
   selectedMessages(messageObject: Message) {
@@ -80,7 +73,6 @@ export class InboxService {
         readState = false;
       }
     });
-    this.readStatusSource.next(readState);
     return readState;
   }
 
