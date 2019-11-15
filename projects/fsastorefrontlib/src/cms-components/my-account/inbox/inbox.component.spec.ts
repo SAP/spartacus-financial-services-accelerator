@@ -1,16 +1,16 @@
-import { InboxService } from './../../../core/my-account/services/inbox.service';
+import { Component, DebugElement, Input } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { CmsService, I18nTestingModule } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
-import {
-  CmsInboxTabComponent,
-  CmsInboxComponent,
-} from 'fsastorefrontlib/lib/occ-models';
 import { InboxTab } from '../../../core/my-account/services/inbox-data.service';
+import { InboxService } from './../../../core/my-account/services/inbox.service';
+import {
+  CmsInboxComponent,
+  CmsInboxTabComponent,
+} from './../../../occ/occ-models/cms-component.models';
 import { InboxComponent } from './inbox.component';
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
-import { DebugElement, Input, Component } from '@angular/core';
 
 @Component({
   template: '',
