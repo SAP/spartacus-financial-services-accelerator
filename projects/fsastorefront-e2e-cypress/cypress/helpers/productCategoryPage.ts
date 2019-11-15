@@ -12,20 +12,13 @@ export function checkComponets() {
 }
 
 export function checkQuoteButtons() {
-  cy.get('a.enriched-banner__styled-text').should('contain', 'Get a quote');
-  cy.get('a.enriched-banner__styled-text').should(
-    'contain',
-    'Retrieve a quote'
-  );
+  cy.get('a.enriched-banner__styled-text')
+    .should('contain', 'Get a quote')
+    .should('contain', 'Retrieve a quote');
 }
 
 export function checkApplicationButtons() {
-  cy.get('a.enriched-banner__styled-text').should(
-    'contain',
-    'Request a product'
-  );
-  cy.get('a.enriched-banner__styled-text').should(
-    'contain',
-    'Retrieve an Application'
-  );
+  cy.get('a.enriched-banner__styled-text')
+    .should('contain', 'Request a product')
+    .should('contain', 'Retrieve an Application');
 }
