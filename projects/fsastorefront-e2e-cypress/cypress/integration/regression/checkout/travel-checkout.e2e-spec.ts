@@ -30,10 +30,12 @@ context('Travel Insurance Checkout', () => {
 
     it('Check mini cart on quote review page', () => {
       travelCheckout.checkQuoteReview();
+      cy.wait(2000);
     });
 
     it('Select default payment details', () => {
       travelCheckout.checkPaymentPage();
+      cy.wait(2000);
     });
 
     it('Place order on final review page', () => {

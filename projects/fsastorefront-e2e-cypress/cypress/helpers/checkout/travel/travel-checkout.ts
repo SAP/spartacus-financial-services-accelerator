@@ -93,6 +93,7 @@ export function checkQuoteReview() {
       .should('have.text', ' Winter Sports Cover:  €9.00 ');
     cy.get('.highlighted').should('have.text', ' Total price:  €99.00 ');
   });
+  cy.wait(1000);
   cy.get('.primary-button').click();
 }
 
