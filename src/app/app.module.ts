@@ -27,7 +27,7 @@ import { environment } from 'src/environments/environment';
         client_secret: 'secret'
       },
       features: {
-        level: '1.3',
+        level: '1.4',
       }
     })
   ],

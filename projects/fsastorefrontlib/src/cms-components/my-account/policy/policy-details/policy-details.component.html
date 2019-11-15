@@ -247,15 +247,15 @@
       <ul class="accordion-list container-fluid">
         <li class="accordion-list-item row">
           <div class="col-6 col-sm-3 item-label">
-            {{ 'policy.policy' | cxTranslate }}
-          </div>
-          <div class="col-6 col-sm-3 value notice">
-            {{ policy.startDate | cxDate: 'dd MMM yyyy' }} -
-            {{ policy.endDate | cxDate: 'dd MMM yyyy' }}
+            Name
           </div>
           <div class="col-xs-12 col-sm-6 download">
-            {{ 'fscommon.donwloadPDFLink' | cxTranslate }}
+            Issue date
           </div>
+          {{ policy | json }}
+          <!-- <ng-container *ngFor>
+
+          </ng-container> -->
         </li>
       </ul>
     </fsa-accordion-item>
