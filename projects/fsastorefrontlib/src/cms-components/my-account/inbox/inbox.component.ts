@@ -32,12 +32,12 @@ export class InboxComponent implements OnInit, OnDestroy {
 
   initialGroupName: string;
   mobileGroupTitle: string;
-  activeTabIndex = 0;
-  shouldShow = false;
-  readState;
+  activeTabIndex: number = 0;
+  shouldShow: boolean = false;
+  readState: boolean;
 
-  tabs;
-  mainCheckboxChecked;
+  tabs: string[];
+  mainCheckboxChecked: boolean;
 
   subjectSortOrder = 'desc';
   contentSortOrder = 'desc';
@@ -69,11 +69,15 @@ export class InboxComponent implements OnInit, OnDestroy {
         .subscribe()
     );
 
-    this.inboxService.checkAllMessages.subscribe(
-      check => (this.mainCheckboxChecked = check)
+    this.subscription.add(
+      this.inboxService.checkAllMessages.subscribe(
+        check => (this.mainCheckboxChecked = check)
+      )
     );
 
-    this.inboxService.readStatus.subscribe(state => (this.readState = state));
+    this.subscription.add(
+      this.inboxService.readStatus.subscribe(state => (this.readState = state))
+    );
   }
 
   checkAllCheckboxes() {
@@ -92,19 +96,21 @@ export class InboxComponent implements OnInit, OnDestroy {
   }
 
   sortMessages(sortCode, sortOrder) {
-    this.inboxService.activeMessageGroupAndTitle.subscribe(groupTitle => {
-      let group;
-      if (groupTitle == null) {
-        group = this.initialGroupName;
-      } else {
-        group = groupTitle.messageGroup;
-      }
-      this.inboxService
-        .sortMessages(sortCode, sortOrder, group)
-        .subscribe(sortedMessages =>
-          this.inboxService.messagesSource.next(sortedMessages)
-        );
-    });
+    this.subscription.add(
+      this.inboxService.activeMessageGroupAndTitle.subscribe(groupTitle => {
+        let group;
+        if (groupTitle == null) {
+          group = this.initialGroupName;
+        } else {
+          group = groupTitle.messageGroup;
+        }
+        this.inboxService
+          .sortMessages(sortCode, sortOrder, group)
+          .subscribe(sortedMessages =>
+            this.inboxService.messagesSource.next(sortedMessages)
+          );
+      })
+    );
   }
 
   ngOnDestroy() {

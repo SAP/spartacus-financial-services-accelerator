@@ -34,16 +34,18 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     this.loadCurrentMessageGroup();
     this.messagesObject$ = this.inboxService.messages;
     this.changeCheckboxes$ = this.inboxService.checkAllMessages;
-    this.changeCheckboxes$.subscribe(allChecked => {
-      this.inboxService.resetMessagesToSend();
-      this.messagesObject$.pipe(take(1)).subscribe(data => {
-        if (allChecked) {
-          data.messages.forEach(message => {
-            this.changeMessageState(message.readDate, message.uid);
-          });
-        }
-      });
-    });
+    this.subscription.add(
+      this.changeCheckboxes$.subscribe(allChecked => {
+        this.inboxService.resetMessagesToSend();
+        this.messagesObject$.pipe(take(1)).subscribe(data => {
+          if (allChecked) {
+            data.messages.forEach(message => {
+              this.changeMessageState(message.readDate, message.uid);
+            });
+          }
+        });
+      })
+    );
   }
 
   loadCurrentMessageGroup() {
@@ -58,9 +60,11 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   }
 
   getMessages() {
-    this.inboxService
-      .getMessages(this.messageGroup)
-      .subscribe(messages => this.inboxService.messagesSource.next(messages));
+    this.subscription.add(
+      this.inboxService
+        .getMessages(this.messageGroup)
+        .subscribe(messages => this.inboxService.messagesSource.next(messages))
+    );
   }
 
   toggleActiveAccordion(index: number) {
@@ -71,7 +75,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     const uidList = [];
     if (message.readDate === undefined) {
       uidList.push(message.uid);
-      this.inboxService.setMessagesState(uidList, true).subscribe();
+      this.subscription.add(
+        this.inboxService.setMessagesState(uidList, true).subscribe()
+      );
     }
   }
 

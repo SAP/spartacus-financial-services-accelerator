@@ -1,3 +1,4 @@
+import { InboxService } from './../../../core/my-account/services/inbox.service';
 import { CmsService, I18nTestingModule } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
@@ -5,7 +6,6 @@ import {
   CmsInboxTabComponent,
   CmsInboxComponent,
 } from 'fsastorefrontlib/lib/occ-models';
-import { InboxService } from 'projects/fsastorefrontlib/src/core/my-account/services/inbox.service';
 import { InboxTab } from '../../../core/my-account/services/inbox-data.service';
 import { InboxComponent } from './inbox.component';
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';

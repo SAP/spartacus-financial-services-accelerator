@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService, CmsService } from '@spartacus/core';
-import { OccInboxService } from 'projects/fsastorefrontlib/src/occ/services/inbox/inbox.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { OccInboxService } from './../../../occ/services/inbox/inbox.service';
 import {
   FSSearchConfig,
   InboxDataService,
