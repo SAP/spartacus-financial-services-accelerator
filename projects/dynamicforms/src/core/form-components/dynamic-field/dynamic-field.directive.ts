@@ -39,8 +39,8 @@ export class DynamicFieldDirective implements OnChanges, OnInit {
   }
 
   ngOnInit() {
-    Object.entries(this.formConfig.components).forEach(([key, value]) => {
-      this.components[key] = value.component;
+    Object.entries(this.formConfig.components).forEach(([name, obj]) => {
+      this.components[name] = obj.component;
     });
 
     if (!this.components[this.config.type]) {
@@ -50,6 +50,7 @@ export class DynamicFieldDirective implements OnChanges, OnInit {
         Supported types: ${supportedTypes}`
       );
     }
+
     const component = this.resolver.resolveComponentFactory<
       FormGenericComponent
     >(this.components[this.config.type]);
