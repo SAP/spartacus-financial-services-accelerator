@@ -74,15 +74,13 @@ export class ClaimEffects {
     ofType(fromActions.UPDATE_CLAIM),
     map((action: fromActions.UpdateClaim) => action.payload),
     mergeMap(payload =>
-      this.claimService
-        .updateClaim(payload.userId, payload.claimId)
-        .pipe(
-          map((claim) => {
-            return new fromActions.UpdateClaimSuccess(claim);
-          }),
-          catchError(error => of(new fromActions.UpdateClaimFail(error))),
-        ),
-    ),
+      this.claimService.updateClaim(payload.userId, payload.claimId).pipe(
+        map(claim => {
+          return new fromActions.UpdateClaimSuccess(claim);
+        }),
+        catchError(error => of(new fromActions.UpdateClaimFail(error)))
+      )
+    )
   );
 
   constructor(

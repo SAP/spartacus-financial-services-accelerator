@@ -1,5 +1,4 @@
 import { Product, Price, UserSignUp, Category, User } from '@spartacus/core';
-import { YFormData } from '../../../../dynamicforms/src/core/models';
 
 export interface FSProduct extends Product {
   price?: FSPrice;

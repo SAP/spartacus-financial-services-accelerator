@@ -46,7 +46,6 @@ const routes: Routes = [
     FormsModule,
     NgSelectModule,
     SpinnerModule,
-    ClaimStoreModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {

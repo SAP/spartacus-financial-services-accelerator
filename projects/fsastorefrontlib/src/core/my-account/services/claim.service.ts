@@ -84,7 +84,7 @@ export class ClaimService {
     this.store.dispatch(
       new fromAction.UpdateClaim({
         userId: userId,
-        claimId: claimId
+        claimId: claimId,
       })
     );
   }

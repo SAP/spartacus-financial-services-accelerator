@@ -12,7 +12,7 @@ import {
   ClaimDataService,
   ClaimService,
 } from '../../../core/my-account/services';
-import { FormDataService } from '../../../../../dynamicforms/src/core/services';
+import { FormDataService } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'fsa-user-request-navigation',
@@ -57,14 +57,16 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
             return userRequestData;
           }),
           tap(userRequestData => {
-            console.log('stepDAta', this.activeStepData);
-            if (this.shouldClaimBeUpdated(userRequestData) && this.activeStepIndex > 0) {
+            if (
+              this.shouldClaimBeUpdated(userRequestData) &&
+              this.activeStepIndex > 0
+            ) {
               return this.claimService.updateClaim(
                 'current',
                 this.claimDataService.content.claimNumber
               );
             }
-          }),
+          })
         )
         .subscribe()
     );
@@ -95,15 +97,16 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
               const stepData = this.userRequestDataService.updateUserRequestDataWithCompletedStep(
                 fsRequest,
                 this.activeStepIndex,
-                data,
+                data
               );
               return this.userRequestService.updateUserRequest(
-                'current',
                 fsRequest.requestId,
-                stepData,
+                stepData
               );
             }
-          })).subscribe(),
+          })
+        )
+        .subscribe()
     );
     this.userRequestNavigationService.next(
       this.configurationSteps,

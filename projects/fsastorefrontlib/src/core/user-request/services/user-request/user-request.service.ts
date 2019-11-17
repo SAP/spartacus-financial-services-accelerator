@@ -16,16 +16,16 @@ export class UserRequestService {
   ) {}
 
   getUserRequest(): Observable<FSUserRequest> {
-     this.store
-       .select(UserRequestSelector.getUserRequestContent)
-       .pipe(
-         map(storedUserRequestData => {
-           if (!this.areConfigurationStepsCreated(storedUserRequestData)) {
-             this.loadUserRequestData();
-           }
-         })
-       )
-       .subscribe();
+    this.store
+      .select(UserRequestSelector.getUserRequestContent)
+      .pipe(
+        map(storedUserRequestData => {
+          if (!this.areConfigurationStepsCreated(storedUserRequestData)) {
+            this.loadUserRequestData();
+          }
+        })
+      )
+      .subscribe();
     return this.store.select(UserRequestSelector.getUserRequestContent);
   }
 
@@ -44,10 +44,10 @@ export class UserRequestService {
     return userRequest && typeof userRequest.configurationSteps !== 'undefined';
   }
 
-  updateUserRequest(userId: string, requestId: string, stepData: FSStepData) {
+  updateUserRequest(requestId: string, stepData: FSStepData) {
     this.store.dispatch(
       new fromAction.UpdateUserRequest({
-        userId: userId,
+        userId: this.userRequestData.userId,
         requestId: requestId,
         stepData: stepData,
       })
