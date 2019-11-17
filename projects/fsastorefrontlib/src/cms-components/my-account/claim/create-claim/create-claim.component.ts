@@ -30,8 +30,7 @@ export class CreateClaimComponent implements OnInit {
       .subscribe(policy => {
         if (policy) {
           this.claimService.createClaim(
-            policy.userId,
-            policy.policyId,
+           policy.policyId,
             policy.contractId
           );
 

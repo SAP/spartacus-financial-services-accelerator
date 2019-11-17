@@ -6,7 +6,7 @@ import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
 import { ClaimDataService, SelectedPolicy } from './claim-data.service';
-import { FSStepData, FSUserRequest } from '../../../occ/occ-models';
+
 
 @Injectable()
 export class ClaimService {
@@ -70,20 +70,20 @@ export class ClaimService {
     this.selectedPolicySource.next({ userId, policyId, contractId });
   }
 
-  createClaim(userId: string, policyId: string, contractId: string) {
+  createClaim(policyId: string, contractId: string) {
     this.store.dispatch(
       new fromAction.CreateClaim({
-        userId: userId,
+        userId: this.claimData.userId,
         policyId: policyId,
         contractId: contractId,
       })
     );
   }
 
-  updateClaim(userId: string, claimId: string) {
+  updateClaim(claimId: string) {
     this.store.dispatch(
       new fromAction.UpdateClaim({
-        userId: userId,
+        userId: this.claimData.userId,
         claimId: claimId,
       })
     );

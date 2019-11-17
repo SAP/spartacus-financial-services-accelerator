@@ -6,7 +6,6 @@ import { FSStepData, FSUserRequest } from '../../../occ/occ-models';
 import { UserRequestSelector } from '../store';
 import * as fromReducer from '../store/reducers';
 
-const STATUS_COMPLETED = 'COMPLETED';
 
 @Injectable()
 export class UserRequestDataService {
@@ -54,10 +53,11 @@ export class UserRequestDataService {
     }
   }
 
-  updateUserRequestDataWithCompletedStep(
+  updateUserRequestStep(
     fsRequest: FSUserRequest,
     activeStepIndex: number,
-    data: any
+    data: any,
+    stepStatus: string
   ): FSStepData {
     const stepData = Object.assign(
       {
@@ -65,7 +65,7 @@ export class UserRequestDataService {
       },
       fsRequest.configurationSteps[activeStepIndex]
     );
-    stepData.status = STATUS_COMPLETED;
+    stepData.status = stepStatus;
     return stepData;
   }
 }

@@ -35,6 +35,8 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     protected userRequestDataService: UserRequestDataService
   ) {}
 
+  completedStatus = 'COMPLETED';
+
   ngOnInit() {
     this.userRequest$ = this.userRequestService.getUserRequest();
     this.subscription.add(
@@ -62,7 +64,6 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
               this.activeStepIndex > 0
             ) {
               return this.claimService.updateClaim(
-                'current',
                 this.claimDataService.content.claimNumber
               );
             }
@@ -94,10 +95,11 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
           map(data => {
             const fsRequest = this.userRequestDataService.userRequest;
             if (fsRequest.requestId && data.content !== undefined) {
-              const stepData = this.userRequestDataService.updateUserRequestDataWithCompletedStep(
+              const stepData = this.userRequestDataService.updateUserRequestStep(
                 fsRequest,
                 this.activeStepIndex,
-                data
+                data,
+                this.completedStatus
               );
               return this.userRequestService.updateUserRequest(
                 fsRequest.requestId,
@@ -116,7 +118,7 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
 
   shouldClaimBeUpdated(fsRequest: FSUserRequest): boolean {
     if (
-      fsRequest.configurationSteps.filter(step => step.status === 'COMPLETED')
+      fsRequest.configurationSteps.filter(step => step.status === this.completedStatus)
         .length === fsRequest.configurationSteps.length
     ) {
       return true;

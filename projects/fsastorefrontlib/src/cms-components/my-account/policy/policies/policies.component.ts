@@ -41,7 +41,6 @@ export class PoliciesComponent implements OnInit {
   startClaim(policyId: string, contractNumber: string) {
     if (policyId && contractNumber) {
       this.claimService.createClaim(
-        this.policyData.userId,
         policyId,
         contractNumber
       );
