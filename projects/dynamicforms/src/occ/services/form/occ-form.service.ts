@@ -47,6 +47,16 @@ export class OccFormService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
+  public getFormDefinition(applicationId: string, formDefinitionId: string) {
+    const url = this.getYFormsEndpoint() + '/definitions/' + formDefinitionId;
+    const params = new HttpParams({
+      fromString: FULL_PARAMS + '&applicationId=' + applicationId,
+    });
+    return this.http
+      .get<YFormData>(url, { params: params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
   protected getYFormsEndpoint() {
     const formsEndpoint = '/forms';
     return this.occEndpointService.getBaseEndpoint() + formsEndpoint;
