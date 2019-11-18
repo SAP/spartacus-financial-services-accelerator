@@ -30,6 +30,16 @@ export class FormDataService {
     return this.occYformsService.getFormData(formDataId);
   }
 
+  getFormDefinition(
+    applicationId: string,
+    formDefinitionId: string
+  ): Observable<YFormData> {
+    return this.occYformsService.getFormDefinition(
+      applicationId,
+      formDefinitionId
+    );
+  }
+
   filterData(formData: { [name: string]: Object }): any {
     if (formData.button) {
       delete formData.button;

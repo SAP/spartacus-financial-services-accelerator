@@ -37,6 +37,10 @@ class MockOccYFormService {
   saveFormData() {
     return mockData;
   }
+
+  getFormDefinition() {
+    return mockData;
+  }
 }
 
 describe('FormDataService', () => {
@@ -67,6 +71,12 @@ describe('FormDataService', () => {
 
   it('should get data', () => {
     expect(service.getFormData(formDataId)).toEqual(mockData);
+  });
+
+  it('should get definition', () => {
+    expect(service.getFormDefinition(applicationId, formDataId)).toEqual(
+      mockData
+    );
   });
 
   it('should filter data', () => {

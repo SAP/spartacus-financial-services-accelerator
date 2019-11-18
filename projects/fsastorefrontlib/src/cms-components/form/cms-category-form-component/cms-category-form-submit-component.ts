@@ -1,10 +1,11 @@
+import { FormDataService } from './../../../../../dynamicforms/src/core/services/data/form-data.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormDefinition, OccFormService } from '@fsa/dynamicforms';
+import { FormDefinition } from '@fsa/dynamicforms';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
-import { switchMap, mergeMap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 import { CMSFormSubmitComponent } from '../../../occ/occ-models';
 import { FormSampleConfigurations } from './form-sample-configurations';
 
@@ -17,7 +18,7 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
     protected componentData: CmsComponentData<CMSFormSubmitComponent>,
     protected activatedRoute: ActivatedRoute,
     protected cmsComponentConnector: CmsComponentConnector,
-    protected yFormService: OccFormService
+    protected formDataService: FormDataService
   ) {}
 
   routeParamId = 'formCode';
@@ -40,27 +41,28 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
               this.pageContext
             ));
           }),
-          mergeMap(componentData => {
+          switchMap(componentData => {
             if (componentData && componentData.formId) {
               this.formConfig = FormSampleConfigurations.sampleConfigurations.filter(
                 item => item.formId === componentData.formId
               )[0];
             }
             if (!this.formConfig) {
-              return this.yFormService.getFormDefinition(
+              return this.formDataService.getFormDefinition(
                 componentData.applicationId,
                 componentData.formId
               );
             }
+          }),
+          map(formDefinition => {
+            if (formDefinition && formDefinition.content) {
+              this.formConfig = <FormDefinition>(
+                JSON.parse(formDefinition.content)
+              );
+            }
           })
         )
-        .subscribe(formDefinition => {
-          if (formDefinition && formDefinition.content) {
-            this.formConfig = <FormDefinition>(
-              JSON.parse(formDefinition.content)
-            );
-          }
-        })
+        .subscribe()
     );
   }
 
