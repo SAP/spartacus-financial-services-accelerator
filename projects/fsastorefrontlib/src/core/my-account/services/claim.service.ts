@@ -7,7 +7,6 @@ import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
 import { ClaimDataService, SelectedPolicy } from './claim-data.service';
 
-
 @Injectable()
 export class ClaimService {
   constructor(

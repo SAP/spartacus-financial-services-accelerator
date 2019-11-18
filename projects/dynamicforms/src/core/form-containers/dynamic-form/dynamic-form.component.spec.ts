@@ -5,6 +5,8 @@ import { Directive, Input } from '@angular/core';
 import { FieldConfig } from '../../models/field-config.interface';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
+import { FormDataService } from '../../services';
+import { of } from 'rxjs';
 
 @Directive({
   // tslint:disable
@@ -29,13 +31,23 @@ export class MockFormService {
   }
 }
 
+const formData = {};
+
+export class MockFormDataService {
+  getSubmittedData() {
+    return of(formData);
+  }
+}
+
 describe('DynamicFormComponent', () => {
   let component: DynamicFormComponent;
   let fixture: ComponentFixture<DynamicFormComponent>;
   let mockFormService: MockFormService;
+  let mockFormDataService: MockFormDataService;
 
   beforeEach(async(() => {
     mockFormService = new MockFormService();
+    mockFormDataService = new MockFormDataService();
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
       declarations: [DynamicFormComponent, MockDynamicFieldDirective],
@@ -43,6 +55,10 @@ describe('DynamicFormComponent', () => {
         {
           provide: FormBuilderService,
           useValue: mockFormService,
+        },
+        {
+          provide: FormDataService,
+          useValue: mockFormDataService,
         },
       ],
     }).compileComponents();

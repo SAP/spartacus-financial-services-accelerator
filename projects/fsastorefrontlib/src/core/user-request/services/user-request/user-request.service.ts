@@ -8,7 +8,6 @@ import { UserRequestSelector } from '../../store';
 import * as fromAction from '../../store/actions/index';
 import { UserRequestDataService } from '../user-request-data.service';
 
-
 @Injectable()
 export class UserRequestService {
   constructor(

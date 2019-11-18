@@ -47,6 +47,11 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.createFormDefinition();
+    this.addSubmitEvent();
+  }
+
+  createFormDefinition() {
     if (this.config) {
       this.form = this.formService.createForm(this.config);
       this.config.formGroups.map(formGroup => {
@@ -55,10 +60,12 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         });
       });
     }
+  }
 
+  addSubmitEvent() {
     this.subscription.add(
       this.formDataService.getSubmittedData().subscribe(data => {
-        if (data !== undefined && this.value !== undefined) {
+        if (data !== undefined && this.value !== undefined && this.valid) {
           this.submit.emit(this.value);
         }
       })
