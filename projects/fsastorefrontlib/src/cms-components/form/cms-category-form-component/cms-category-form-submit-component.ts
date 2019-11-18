@@ -22,7 +22,7 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
 
   routeParamId = 'formCode';
   pageContext: PageContext;
-  formConfig: any;
+  formConfig: FormDefinition;
   component$: Observable<CMSFormSubmitComponent>;
   private subscription = new Subscription();
 
@@ -54,9 +54,11 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
                       componentData.formId
                     )
                     .subscribe(data => {
-                      this.formConfig = <FormDefinition>(
-                        (<unknown>JSON.parse(data.content))
-                      );
+                      if (data && data.content) {
+                        this.formConfig = <FormDefinition>(
+                          (<unknown>JSON.parse(data.content))
+                        );
+                      }
                     })
                 );
               }
