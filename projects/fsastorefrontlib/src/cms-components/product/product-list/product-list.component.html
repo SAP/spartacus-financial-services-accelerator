@@ -1,0 +1,37 @@
+<div class="cx-page" *ngIf="model$ | async as model">
+  <ng-container *ngFor="let product of model.products">
+    <p>Product name: {{ product.name }}</p>
+    <p>
+      <cx-media
+        [container]="product.images?.PRIMARY"
+        format="40Wx40H_policy_responsive"
+      ></cx-media>
+    </p>
+    <p [innerHTML]="product.summary"></p>
+    <button
+      *ngIf="product.defaultCategory && product.defaultCategory.parentCategory"
+      class="primary-button"
+      [routerLink]="
+        {
+          cxRoute: 'category',
+          params: { code: product.defaultCategory.parentCategory.code }
+        } | cxUrl
+      "
+    >
+      {{ 'fscommon.moreInfo' | cxTranslate }}
+    </button>
+    <button
+      *ngIf="product.defaultCategory"
+      class="secondary-button"
+      [routerLink]="
+        {
+          cxRoute: 'generalInformation',
+          params: { code: product.defaultCategory.code }
+        } | cxUrl
+      "
+    >
+      {{ 'quote.getQuote' | cxTranslate }}
+    </button>
+    <br />
+  </ng-container>
+</div>
