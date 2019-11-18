@@ -12,7 +12,7 @@ export class ProductFeatureComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CmsProductFeatureComponent>,
     protected productService: ProductService
-  ) { }
+  ) {}
   private subscription = new Subscription();
   component$;
   product$;
