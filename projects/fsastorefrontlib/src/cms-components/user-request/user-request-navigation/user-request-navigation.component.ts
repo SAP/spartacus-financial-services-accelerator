@@ -117,13 +117,11 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
   }
 
   shouldClaimBeUpdated(fsRequest: FSUserRequest): boolean {
-    if (
-      fsRequest.configurationSteps.filter(step => step.status === this.completedStatus)
-        .length === fsRequest.configurationSteps.length
-    ) {
-      return true;
-    }
-    return false;
+    return (
+      fsRequest.configurationSteps.filter(
+        step => step.status === this.completedStatus
+      ).length === fsRequest.configurationSteps.length
+    );
   }
 
   back(currentStep: number): void {

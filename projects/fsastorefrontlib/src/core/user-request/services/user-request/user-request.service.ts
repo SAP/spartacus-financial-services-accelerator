@@ -8,6 +8,7 @@ import { UserRequestSelector } from '../../store';
 import * as fromAction from '../../store/actions/index';
 import { UserRequestDataService } from '../user-request-data.service';
 
+
 @Injectable()
 export class UserRequestService {
   constructor(
@@ -38,6 +39,16 @@ export class UserRequestService {
         })
       );
     }
+  }
+
+  resumeRequest(requestId: string): Observable<FSUserRequest> {
+    this.store.dispatch(
+      new fromAction.LoadUserRequest({
+        userId: this.userRequestData.userId,
+        requestId: requestId,
+      })
+    );
+    return this.store.select(UserRequestSelector.getUserRequestContent);
   }
 
   private areConfigurationStepsCreated(userRequest: FSUserRequest): boolean {

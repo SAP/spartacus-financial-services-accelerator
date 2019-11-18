@@ -89,7 +89,10 @@
                 else details
               "
             >
-              <button class="secondary-button">
+              <button
+                class="secondary-button"
+                (click)="resumeClaim(claim.requestId)"
+              >
                 {{ 'fscommon.resume' | cxTranslate }}
               </button>
             </div>

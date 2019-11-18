@@ -3,10 +3,11 @@ import { Store, select } from '@ngrx/store';
 import { DeleteClaimDialogComponent } from '../delete-claim-dialog/delete-claim-dialog.component';
 import * as fromClaimStore from '../../../../core/my-account/store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { OccConfig } from '@spartacus/core';
+import { OccConfig, RoutingService } from '@spartacus/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { naIconImgSrc } from '../../../../assets/icons/na-icon';
 import { ClaimService } from '../../../../core/my-account/services';
+import { UserRequestService } from '../../../../core/user-request/services/user-request/user-request.service';
 
 @Component({
   selector: 'fsa-claims',
@@ -19,7 +20,9 @@ export class ClaimsComponent implements OnInit {
     protected store: Store<fromClaimStore.UserState>,
     private config: OccConfig,
     private domSanitizer: DomSanitizer,
-    protected claimService: ClaimService
+    protected claimService: ClaimService,
+    protected userRequestService: UserRequestService,
+    protected routingService: RoutingService
   ) {}
 
   naIconImgSrc = naIconImgSrc;
@@ -42,6 +45,16 @@ export class ClaimsComponent implements OnInit {
 
   getNaImagelink() {
     return this.domSanitizer.bypassSecurityTrustUrl(naIconImgSrc);
+  }
+
+  resumeClaim(requestId: string) {
+    this.userRequestService.resumeRequest(requestId).subscribe(request => {
+      if (request.requestId === requestId) {
+        this.routingService.go({
+          cxRoute: request.configurationSteps[0].pageLabelOrId,
+        });
+      }
+    });
   }
 
   private openModal(claimNumber: string) {
