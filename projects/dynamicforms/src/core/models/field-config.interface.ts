@@ -14,7 +14,7 @@ export interface FieldConfig {
   label?: string;
   group?: string;
   name?: string;
-  options?: string[];
+  options?: FieldOptionItem[];
   depends?: string[];
   jsonField?: string;
   placeholder?: string;
@@ -23,6 +23,12 @@ export interface FieldConfig {
   value?: any;
   hidden?: boolean;
   error?: string;
+}
+
+export interface FieldOptionItem {
+  name: string;
+  label: string;
+  icon?: string;
 }
 
 export enum FormSubmitType {

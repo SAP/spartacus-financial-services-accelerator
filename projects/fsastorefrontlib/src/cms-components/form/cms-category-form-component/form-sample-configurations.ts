@@ -29,7 +29,10 @@ export class FormSampleConfigurations {
             },
             {
               type: 'select',
-              options: ['MONTHLY', 'YEARLY'],
+              options: [
+                { name: 'MONTHLY', label: 'Monthly' },
+                { name: 'YEARLY', label: 'Yearly' },
+              ],
               label: 'Payment Frequency',
               name: 'paymentFrequency',
               validation: [Validators.required],
@@ -100,7 +103,10 @@ export class FormSampleConfigurations {
             },
             {
               type: 'select',
-              options: ['Personal', 'Business'],
+              options: [
+                { name: 'Personal', label: 'Personal' },
+                { name: 'Business', label: 'Business' },
+              ],
               label: 'Vehicle Usage',
               name: 'vehicleUsage',
               validation: [Validators.required],
@@ -145,21 +151,33 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              options: ['Male', 'Female'],
+              options: [
+                { name: 'Male', label: 'Male' },
+                { name: 'Female', label: 'Female' },
+              ],
               validation: [Validators.required],
             },
             {
               type: 'select',
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
-              options: ['Single', 'Married', 'Widowed'],
+              options: [
+                { name: 'Single', label: 'Single' },
+                { name: 'Married', label: 'Married' },
+                { name: 'Widowed', label: 'Widowed' },
+              ],
               validation: [Validators.required],
             },
             {
               type: 'select',
               label: 'Driver`s Category',
               name: 'driverCategory',
-              options: ['Main'],
+              options: [
+                {
+                  label: 'Main',
+                  name: 'Main',
+                },
+              ],
               disabled: true,
             },
             {
@@ -184,7 +202,13 @@ export class FormSampleConfigurations {
             },
             {
               type: 'select',
-              options: ['0', '1', '2', '3', '4'],
+              options: [
+                { name: '0', label: '0' },
+                { name: '1', label: '1' },
+                { name: '2', label: '2' },
+                { name: '3', label: '3' },
+                { name: '4', label: '4' },
+              ],
               label: 'Number of Drivers',
               name: 'numberOfDrivers',
               validation: [
@@ -223,7 +247,10 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              options: ['Male', 'Female'],
+              options: [
+                { name: 'Male', label: 'Male' },
+                { name: 'Female', label: 'Female' },
+              ],
               validation: [Validators.required],
               hidden: true,
             },
@@ -231,7 +258,11 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
-              options: ['Single', 'Married', 'Widowed'],
+              options: [
+                { name: 'Single', label: 'Single' },
+                { name: 'Married', label: 'Married' },
+                { name: 'Widowed', label: 'Widowed' },
+              ],
               validation: [Validators.required],
               hidden: true,
             },
@@ -239,7 +270,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver`s Category',
               name: 'driverCategory',
-              options: ['Occasional'],
+              options: [{ name: 'Occasional', label: 'Occasional' }],
               disabled: true,
               hidden: true,
             },
@@ -280,7 +311,10 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              options: ['Male', 'Female'],
+              options: [
+                { name: 'Male', label: 'Male' },
+                { name: 'Female', label: 'Female' },
+              ],
               validation: [Validators.required],
               hidden: true,
             },
@@ -288,7 +322,11 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
-              options: ['Single', 'Married', 'Widowed'],
+              options: [
+                { name: 'Single', label: 'Single' },
+                { name: 'Married', label: 'Married' },
+                { name: 'Widowed', label: 'Widowed' },
+              ],
               validation: [Validators.required],
               hidden: true,
             },
@@ -296,7 +334,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver`s Category',
               name: 'driverCategory',
-              options: ['Occasional'],
+              options: [{ name: 'Occasional', label: 'Occasional' }],
               hidden: true,
             },
             {
@@ -336,7 +374,10 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              options: ['Male', 'Female'],
+              options: [
+                { name: 'Male', label: 'Male' },
+                { name: 'Female', label: 'Female' },
+              ],
               validation: [Validators.required],
               hidden: true,
             },
@@ -344,7 +385,11 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
-              options: ['Single', 'Married', 'Widowed'],
+              options: [
+                { name: 'Single', label: 'Single' },
+                { name: 'Married', label: 'Married' },
+                { name: 'Widowed', label: 'Widowed' },
+              ],
               validation: [Validators.required],
               hidden: true,
             },
@@ -352,7 +397,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver`s Category',
               name: 'driverCategory',
-              options: ['Occasional'],
+              options: [{ name: 'Occasional', label: 'Occasional' }],
               hidden: true,
             },
             {
@@ -392,7 +437,10 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              options: ['Male', 'Female'],
+              options: [
+                { name: 'Male', label: 'Male' },
+                { name: 'Female', label: 'Female' },
+              ],
               validation: [Validators.required],
               hidden: true,
             },
@@ -400,7 +448,11 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
-              options: ['Single', 'Married', 'Widowed'],
+              options: [
+                { name: 'Single', label: 'Single' },
+                { name: 'Married', label: 'Married' },
+                { name: 'Widowed', label: 'Widowed' },
+              ],
               validation: [Validators.required],
               hidden: true,
             },
@@ -408,7 +460,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver`s Category',
               name: 'driverCategory',
-              options: ['Occasional'],
+              options: [{ name: 'Occasional', label: 'Occasional' }],
               disabled: true,
               hidden: true,
             },
@@ -449,11 +501,20 @@ export class FormSampleConfigurations {
               label: 'Destination',
               name: 'tripDestination',
               options: [
-                'Europe',
-                'Australia and New Zealand',
-                'Worldwide (excluding USA, Canada, and the Caribbean)',
-                'Worldwide (including USA, Canada and the Caribbean)',
-                'UK',
+                { name: 'Europe', label: 'Europe' },
+                {
+                  name: 'Australia and New Zealand',
+                  label: 'Australia and New Zealand',
+                },
+                {
+                  name: 'Worldwide (excluding USA, Canada, and the Caribbean)',
+                  label: 'Worldwide (excluding USA, Canada, and the Caribbean)',
+                },
+                {
+                  name: 'Worldwide (including USA, Canada and the Caribbean)',
+                  label: 'Worldwide (including USA, Canada and the Caribbean)',
+                },
+                { name: 'UK', label: 'UK' },
               ],
               validation: [Validators.required],
               error: 'forms.enterValidValue',
@@ -497,7 +558,18 @@ export class FormSampleConfigurations {
             },
             {
               type: 'select',
-              options: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+              options: [
+                { label: '1', name: '1' },
+                { label: '2', name: '2' },
+                { label: '3', name: '3' },
+                { label: '4', name: '4' },
+                { label: '5', name: '5' },
+                { label: '6', name: '6' },
+                { label: '7', name: '7' },
+                { label: '8', name: '8' },
+                { label: '9', name: '9' },
+                { label: '10', name: '10' },
+              ],
               label: 'Number of Travelers',
               name: 'Travellers',
               validation: [
@@ -668,13 +740,34 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               options: [
-                'Other Accident',
-                'Glass Damage',
-                'Collision',
-                'Fire',
-                'Theft',
-                'Breakdown',
-                'Accident',
+                {
+                  name: 'AutoOtherAccident',
+                  label: 'Other Accident',
+                },
+                {
+                  name: 'AutoGlassDamage',
+                  label: 'Glass Damage',
+                },
+                {
+                  name: 'AutoCollision',
+                  label: 'Collision',
+                },
+                {
+                  name: 'AutoFire',
+                  label: 'Fire',
+                },
+                {
+                  name: 'AutoTheft',
+                  label: 'Theft',
+                },
+                {
+                  name: 'AutoBreakdown',
+                  label: 'Breakdown',
+                },
+                {
+                  name: 'AutoAccident',
+                  label: 'Accident',
+                },
               ],
               label: 'What happened?',
               name: 'whatHappened',
@@ -698,13 +791,34 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               options: [
-                'Austria',
-                'Canada',
-                'France',
-                'Germany',
-                'Poland',
-                'Serbia',
-                'United States',
+                {
+                  name: 'AT',
+                  label: 'Austria',
+                },
+                {
+                  name: 'CA',
+                  label: 'Canada',
+                },
+                {
+                  name: 'FR',
+                  label: 'France',
+                },
+                {
+                  name: 'DE',
+                  label: 'Germany',
+                },
+                {
+                  name: 'PL',
+                  label: 'Poland',
+                },
+                {
+                  name: 'RS',
+                  label: 'Serbia',
+                },
+                {
+                  name: 'US',
+                  label: 'United States',
+                },
               ],
               label: 'Country',
               name: 'country',
@@ -770,14 +884,32 @@ export class FormSampleConfigurations {
               label: 'Were the police informed?',
               name: 'policyInformed',
               type: 'radio',
-              options: ['Yes', 'No'],
+              options: [
+                {
+                  name: 'yes',
+                  label: 'Yes',
+                },
+                {
+                  name: 'no',
+                  label: 'No',
+                },
+              ],
               validation: [Validators.required],
             },
             {
               label: 'Are there any witnesses we can contact?',
               name: 'anyWitnesses',
               type: 'radio',
-              options: ['Yes', 'No'],
+              options: [
+                {
+                  name: 'yes',
+                  label: 'Yes',
+                },
+                {
+                  name: 'no',
+                  label: 'No',
+                },
+              ],
               validation: [Validators.required],
             },
           ],
