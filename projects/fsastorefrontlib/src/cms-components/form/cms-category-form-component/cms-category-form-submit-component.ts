@@ -4,7 +4,7 @@ import { FormDefinition, OccFormService } from '@fsa/dynamicforms';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { switchMap, mergeMap } from 'rxjs/operators';
 import { CMSFormSubmitComponent } from '../../../occ/occ-models';
 import { FormSampleConfigurations } from './form-sample-configurations';
 
@@ -40,32 +40,27 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
               this.pageContext
             ));
           }),
-          map(componentData => {
+          mergeMap(componentData => {
             if (componentData && componentData.formId) {
               this.formConfig = FormSampleConfigurations.sampleConfigurations.filter(
                 item => item.formId === componentData.formId
               )[0];
-
-              if (!this.formConfig) {
-                this.subscription.add(
-                  this.yFormService
-                    .getFormDefinition(
-                      componentData.applicationId,
-                      componentData.formId
-                    )
-                    .subscribe(data => {
-                      if (data && data.content) {
-                        this.formConfig = <FormDefinition>(
-                          (<unknown>JSON.parse(data.content))
-                        );
-                      }
-                    })
-                );
-              }
+            }
+            if (!this.formConfig) {
+              return this.yFormService.getFormDefinition(
+                componentData.applicationId,
+                componentData.formId
+              );
             }
           })
         )
-        .subscribe()
+        .subscribe(formDefinition => {
+          if (formDefinition && formDefinition.content) {
+            this.formConfig = <FormDefinition>(
+              JSON.parse(formDefinition.content)
+            );
+          }
+        })
     );
   }
 
