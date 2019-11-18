@@ -1,17 +1,17 @@
 declare namespace Cypress {
   interface Chainable {
     /**
-       * Select user menu option
-       *
-       * @memberof Cypress.Chainable
-       *
-       * @example
-        ```
-        cy.selectUserMenuOption({
+     * Select user menu option
+     *
+     * @memberof Cypress.Chainable
+     *
+     * @example
+     ```
+     cy.selectUserMenuOption({
           option: 'Sign out'
         })
-        ```
-       */
+     ```
+     */
     selectUserMenuOption: ({
       option,
       isMobile,
@@ -34,5 +34,19 @@ Cypress.Commands.add(
       .getAllByText(new RegExp(option, 'i'))
       .first()
       .click({ force: true });
+  }
+);
+
+Cypress.Commands.add(
+  'selectOptionFromDropdown',
+  ({
+    menuOption,
+    dropdownItem,
+  }: {
+    menuOption: string;
+    dropdownItem: string;
+  }) => {
+    cy.get('[aria-label="' + menuOption + '"]').invoke('mouseover');
+    cy.findByText(dropdownItem).click({ force: true });
   }
 );

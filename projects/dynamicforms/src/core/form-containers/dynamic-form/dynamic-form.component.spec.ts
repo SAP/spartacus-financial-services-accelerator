@@ -2,12 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DynamicFormComponent } from './dynamic-form.component';
 import { Directive, Input } from '@angular/core';
-import {
-  FieldConfig,
-  FormDefinition,
-} from '../../models/field-config.interface';
+import { FieldConfig } from '../../models/field-config.interface';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { FormService } from '../../services/form.service';
+import { FormBuilderService } from '../../services/builder/form-builder.service';
 
 @Directive({
   // tslint:disable
@@ -44,7 +41,7 @@ describe('DynamicFormComponent', () => {
       declarations: [DynamicFormComponent, MockDynamicFieldDirective],
       providers: [
         {
-          provide: FormService,
+          provide: FormBuilderService,
           useValue: mockFormService,
         },
       ],

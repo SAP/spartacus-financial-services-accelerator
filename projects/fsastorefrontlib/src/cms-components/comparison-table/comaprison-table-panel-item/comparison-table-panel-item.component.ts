@@ -12,7 +12,6 @@ import { FSCheckoutConfigService } from '../../../core/checkout/services/fs-chec
 import { FSProductService } from '../../../core/checkout/services/product/fs-product.service';
 import { FSProduct, OneTimeChargeEntry } from '../../../occ/occ-models';
 import { FSCartService } from '../../../core/checkout/services';
-import { PricingService } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'fsa-comparison-table-panel-item',
@@ -24,8 +23,9 @@ export class ComparisonTablePanelItemComponent implements OnInit {
   productCode: string;
   @Input()
   billingTimes: any;
-  checkoutStepUrlNext: string;
+  @Input()
   pricingData: PricingData;
+  checkoutStepUrlNext: string;
   productPrice: string;
 
   constructor(
@@ -34,7 +34,6 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     protected routingService: RoutingService,
     protected checkoutConfigService: FSCheckoutConfigService,
     protected activatedRoute: ActivatedRoute,
-    protected pricingService: PricingService,
     protected productService: FSProductService
   ) {}
 
@@ -45,26 +44,28 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
       this.activatedRoute
     );
-    this.pricingService.getPricingAttributes().subscribe(priceAttributes => {
-      this.pricingData = priceAttributes;
-      this.product$ = this.productService.getCalculatedProductData(
-        this.productCode,
-        this.pricingData
-      );
-      this.product$.subscribe(productData => {
-        if (productData) {
-          productData.price.oneTimeChargeEntries.forEach(oneTimeChargeEntry => {
-            if (oneTimeChargeEntry.billingTime.code === 'paynow') {
-              this.productPrice = oneTimeChargeEntry.price.formattedValue;
-            }
-          });
-          this.panelItemEntries = this.billingTimes.map(billingTime => {
-            return productData.price.oneTimeChargeEntries.find(
-              entry => entry.billingTime.code === billingTime.code
-            );
-          });
-        }
-      });
+
+    this.getProductData();
+  }
+
+  getProductData() {
+    this.product$ = this.productService.getCalculatedProductData(
+      this.productCode,
+      this.pricingData
+    );
+    this.product$.subscribe(product => {
+      if (product) {
+        product.price.oneTimeChargeEntries.forEach(oneTimeChargeEntry => {
+          if (oneTimeChargeEntry.billingTime.code === 'paynow') {
+            this.productPrice = oneTimeChargeEntry.price.formattedValue;
+          }
+        });
+        this.panelItemEntries = this.billingTimes.map(billingTime => {
+          return product.price.oneTimeChargeEntries.find(
+            entry => entry.billingTime.code === billingTime.code
+          );
+        });
+      }
     });
   }
 

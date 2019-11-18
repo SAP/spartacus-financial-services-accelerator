@@ -2,12 +2,12 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
   CheckoutPaymentService,
-  CheckoutService,
   PaymentDetails,
   RoutingService,
 } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/fs-checkout-config.service';
+import { FSCheckoutService } from '../../../../core/checkout/services/fs-checkout.service';
 
 @Component({
   selector: 'fsa-final-review',
@@ -20,7 +20,7 @@ export class FinalReviewComponent implements OnInit {
   goToQuoteReview = new EventEmitter<any>();
   tAndCToggler = false;
   constructor(
-    private checkoutService: CheckoutService,
+    private checkoutService: FSCheckoutService,
     private checkoutPaymentService: CheckoutPaymentService,
     private routingService: RoutingService,
     private checkoutConfigService: FSCheckoutConfigService,
@@ -34,6 +34,7 @@ export class FinalReviewComponent implements OnInit {
       this.activatedRoute
     );
     this.paymentDetails$ = this.checkoutPaymentService.getPaymentDetails();
+    this.checkoutService.mockDeliveryMode();
   }
 
   toggleTAndC(): void {

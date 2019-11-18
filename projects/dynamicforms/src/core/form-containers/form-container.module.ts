@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { I18nModule } from '@spartacus/core';
 import { FormComponent } from './form/form.component';
-import { PricingService } from '../services/pricing/pricing.service';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { FormComponentsModule } from '../form-components/form-components.module';
-import { FormService } from '../services/form.service';
+import { FormBuilderService } from '../services/builder/form-builder.service';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { OccFormService } from '../../occ/services/form/occ-form.service';
+import { FormDataService } from '../services/data/form-data.service';
 
 @NgModule({
   imports: [
@@ -21,6 +22,11 @@ import { ReactiveFormsModule } from '@angular/forms';
   declarations: [FormComponent, DynamicFormComponent],
   exports: [FormComponent, DynamicFormComponent],
   entryComponents: [FormComponent, DynamicFormComponent],
-  providers: [PricingService, FormService, OccMockFormService],
+  providers: [
+    FormBuilderService,
+    OccMockFormService,
+    OccFormService,
+    FormDataService,
+  ],
 })
 export class FormContainerModule {}

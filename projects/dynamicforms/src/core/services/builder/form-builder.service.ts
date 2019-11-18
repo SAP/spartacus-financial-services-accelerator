@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { FieldConfig } from '../models';
+import { FieldConfig } from '../../models';
 
 @Injectable()
-export class FormService {
+export class FormBuilderService {
   constructor(private fb: FormBuilder) {}
 
   createForm(config) {
