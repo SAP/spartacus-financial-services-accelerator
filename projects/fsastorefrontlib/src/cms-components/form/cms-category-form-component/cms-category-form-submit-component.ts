@@ -1,6 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormDataService, FormDefinition } from '@fsa/dynamicforms';
+import {
+  FormDataService,
+  FormDefinition,
+} from '@fsa/dynamicforms';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
@@ -23,6 +26,7 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
   routeParamId = 'formCode';
   pageContext: PageContext;
   formConfig: FormDefinition;
+  formLoaded$: Observable<boolean>;
   component$: Observable<CMSFormSubmitComponent>;
   private subscription = new Subscription();
 
@@ -52,10 +56,12 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
                 componentData.formId
               );
             }
+            this.formLoaded$ = of(true);
             return of(null);
           }),
           map(formDefinition => {
             if (formDefinition && formDefinition.content) {
+              this.formLoaded$ = of(true);
               this.formConfig = <FormDefinition>(
                 JSON.parse(formDefinition.content)
               );
