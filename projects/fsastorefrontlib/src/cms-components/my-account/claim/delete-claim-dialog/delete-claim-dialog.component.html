@@ -10,7 +10,7 @@
     <div class="row">
       <div class="col-xs-12 col-sm-6 col-sm-pull-6">
         <button
-          class="primary-button"
+          class="primary-button btn-block"
           (click)="activeModal.dismiss('Cross click')"
         >
           {{ 'common.cancel' | cxTranslate }}
@@ -18,7 +18,7 @@
       </div>
       <div class="col-xs-12 col-sm-6 col-sm-push-6">
         <button
-          class="secondary-button"
+          class="secondary-button btn-block"
           (click)="deleteClaim(); activeModal.dismiss('Cross click')"
         >
           {{ 'common.delete' | cxTranslate }}
