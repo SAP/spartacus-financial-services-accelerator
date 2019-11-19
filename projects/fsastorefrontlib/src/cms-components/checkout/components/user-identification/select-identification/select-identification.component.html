@@ -28,13 +28,13 @@
 </div>
 <div class="row mt-5">
   <div class="col-6">
-    <button class="secondary-button" type="button" (click)="back()">
+    <button class="secondary-button btn-block" type="button" (click)="back()">
       {{ 'common.back' | cxTranslate }}
     </button>
   </div>
   <div class="col-6">
     <button
-      class="primary-button"
+      class="primary-button btn-block"
       (click)="setIdentificationType()"
       [disabled]="!selected"
     >
