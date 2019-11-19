@@ -1,7 +1,6 @@
-import { FormDataService } from './../../../../../dynamicforms/src/core/services/data/form-data.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormDefinition } from '@fsa/dynamicforms';
+import { FormDataService, FormDefinition } from '@fsa/dynamicforms';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';

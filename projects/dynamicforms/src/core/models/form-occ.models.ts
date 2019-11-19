@@ -3,6 +3,7 @@ export interface YFormData {
   content?: string;
   type?: string;
   formDefinitionId?: string;
+  categoryCode?: string;
 }
 
 export interface YFormDefinition {
