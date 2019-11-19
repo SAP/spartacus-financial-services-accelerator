@@ -1,3 +1,4 @@
+import { YFormDefinition } from './../../models/form-occ.models';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { YFormData } from '../../models';
@@ -33,7 +34,7 @@ export class FormDataService {
   getFormDefinition(
     applicationId: string,
     formDefinitionId: string
-  ): Observable<YFormData> {
+  ): Observable<YFormDefinition> {
     return this.occYformsService.getFormDefinition(
       applicationId,
       formDefinitionId
