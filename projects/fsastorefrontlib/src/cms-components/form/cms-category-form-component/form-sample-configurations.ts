@@ -1,12 +1,11 @@
 import { Validators } from '@angular/forms';
 import { FormHelpers } from '../../../shared/util/helpers/form-helpers';
 import { CustomFormValidators } from '../../../shared/util/validators/custom-form-validators';
-import { FormDefinition, FormSubmitType } from '@fsa/dynamicforms';
+import { FormDefinition } from '@fsa/dynamicforms';
 
 export class FormSampleConfigurations {
   static sampleConfigurations: FormDefinition[] = [
     {
-      submitType: FormSubmitType.PRICING,
       formId: 'auto_details_form',
       formGroups: [
         {
@@ -490,7 +489,6 @@ export class FormSampleConfigurations {
       ],
     },
     {
-      submitType: FormSubmitType.PRICING,
       formId: 'trip_details_form',
       formGroups: [
         {
