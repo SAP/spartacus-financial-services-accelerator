@@ -10,7 +10,7 @@
     <p [innerHTML]="product.summary"></p>
     <button
       *ngIf="product.defaultCategory && product.defaultCategory.parentCategory"
-      class="primary-button"
+      class="primary-button btn-block"
       [routerLink]="
         {
           cxRoute: 'category',
@@ -22,7 +22,7 @@
     </button>
     <button
       *ngIf="product.defaultCategory"
-      class="secondary-button"
+      class="secondary-button btn-block"
       [routerLink]="
         {
           cxRoute: 'generalInformation',
@@ -32,6 +32,5 @@
     >
       {{ 'quote.getQuote' | cxTranslate }}
     </button>
-    <br />
   </ng-container>
 </div>
