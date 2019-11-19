@@ -23,7 +23,6 @@ const mockData: Observable<YFormData> = of({
 });
 
 const mockDefinition: Observable<YFormDefinition> = of({
-  formDefinitionId: 'formDefinitionId',
   id: 'formDataId',
   content: '{testDef: testDef}',
 });
@@ -80,7 +79,7 @@ describe('FormDataService', () => {
   });
 
   it('should get definition', () => {
-    expect(service.getFormDefinition(applicationId, formDataId)).toEqual(
+    expect(service.getFormDefinition(applicationId, formId)).toEqual(
       mockDefinition
     );
   });
