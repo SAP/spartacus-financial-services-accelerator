@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import * as fromQuoteStore from '../../../../core/my-account/store';
-import { Store, select } from '@ngrx/store';
-import { OccConfig } from '@spartacus/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { OccConfig, RoutingService } from '@spartacus/core';
 import { QuoteService } from '../../../../core/my-account/services/quote.service';
+import * as fromQuoteStore from '../../../../core/my-account/store';
 
 @Component({
   selector: 'fsa-quotes',
@@ -13,7 +13,8 @@ export class QuotesComponent implements OnInit {
   constructor(
     private store: Store<fromQuoteStore.UserState>,
     private config: OccConfig,
-    protected quoteService: QuoteService
+    protected quoteService: QuoteService,
+    protected routingService: RoutingService
   ) {}
 
   quotes$;
@@ -25,6 +26,20 @@ export class QuotesComponent implements OnInit {
     this.quotesLoaded$ = this.store.pipe(
       select(fromQuoteStore.getQuotesLoaded)
     );
+  }
+
+  retrieveQuote(quote: any) {
+    this.quoteService.retrieveQuote(quote);
+    if (quote.state.code === 'UNBIND') {
+      this.routingService.go({
+        cxRoute: 'addOptions',
+      });
+    }
+    if (quote.state.code === 'BIND') {
+      this.routingService.go({
+        cxRoute: 'quoteReview',
+      });
+    }
   }
 
   public getBaseUrl() {
