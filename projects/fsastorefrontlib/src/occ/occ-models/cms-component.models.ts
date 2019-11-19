@@ -72,6 +72,7 @@ export interface CMSFormSubmitComponent extends CmsComponent {
   uid?: string;
   category: Category;
   formId: string;
+  applicationId: string;
 }
 
 export interface CmsAgentRootComponent extends CmsComponent {
