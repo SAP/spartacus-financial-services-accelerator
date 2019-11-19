@@ -64,18 +64,10 @@
   border-bottom: $border-grey;
 }
 .section-header-heading {
-  @include linear-gradient-background(
-    var(--cx-color-primary),
-    var(--cx-color-9),
-    50%,
-    100%
-  );
-  border: none;
-  color: var(--cx-color-1);
+  @include heading-style;
   font-size: var(--cx-h5-font-size);
-  font-weight: var(--cx-font-weight-normal);
-  line-height: 1.6;
-  padding: 15px;
+  font-weight: var(--cx-font-weight-semi);
+  padding: 1rem;
   text-align: center;
 }
 .main-heading {

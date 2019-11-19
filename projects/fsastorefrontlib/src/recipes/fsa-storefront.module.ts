@@ -14,6 +14,7 @@ import { fsaLayoutConfig } from './config/default-fsa-layout-config';
 import { fsaRoutingConfig } from '../cms-structure/routing/default-fsa-routing-config';
 import { CheckoutModule } from '../cms-components/checkout/checkout.module';
 import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa-checkout-config';
+import { fsaOccProductConfig } from '../occ/services/default-occ-fsa-product-config';
 
 @NgModule({
   imports: [
@@ -42,6 +43,7 @@ import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa
     ConfigModule.withConfigFactory(defaultCmsContentConfig),
     ConfigModule.withConfig(fsaRoutingConfig),
     ConfigModule.withConfig(fsaCheckoutConfig),
+    ConfigModule.withConfig(fsaOccProductConfig),
   ],
   exports: [B2cStorefrontModule, CmsLibModule],
   declarations: [],

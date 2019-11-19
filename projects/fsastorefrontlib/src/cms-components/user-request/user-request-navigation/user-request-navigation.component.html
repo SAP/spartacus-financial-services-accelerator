@@ -1,7 +1,10 @@
 <section *ngIf="userRequest$ | async as userRequest">
   <div class="row mt-5">
     <div *ngIf="activeStepIndex !== 0" class="col-sm-6 col-xs-12">
-      <button class="secondary-button " (click)="back(activeStepIndex)">
+      <button
+        class="secondary-button btn-block"
+        (click)="back(activeStepIndex)"
+      >
         {{ 'common.back' | cxTranslate }}
       </button>
     </div>
@@ -9,7 +12,7 @@
       *ngIf="activeStepIndex !== getNumberOfConfigurationSteps()"
       class="col-md-6 col-sm-6 col-xs-12"
     >
-      <button class="primary-button " (click)="next(activeStepIndex)">
+      <button class="primary-button btn-block" (click)="next(activeStepIndex)">
         {{ 'common.continue' | cxTranslate }}
       </button>
     </div>
