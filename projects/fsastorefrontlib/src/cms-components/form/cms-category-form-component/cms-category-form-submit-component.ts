@@ -1,10 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormDataService, FormDefinition } from '@fsa/dynamicforms';
+import {
+  FormDataService,
+  FormDefinition,
+  YFormDefinition,
+} from '@fsa/dynamicforms';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import { Observable, Subscription } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { Observable, of, Subscription } from 'rxjs';
+import { map, switchMap, mergeMap } from 'rxjs/operators';
 import { CMSFormSubmitComponent } from '../../../occ/occ-models';
 import { FormSampleConfigurations } from './form-sample-configurations';
 
@@ -40,7 +44,7 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
               this.pageContext
             ));
           }),
-          switchMap(componentData => {
+          mergeMap(componentData => {
             if (componentData && componentData.formId) {
               this.formConfig = FormSampleConfigurations.sampleConfigurations.filter(
                 item => item.formId === componentData.formId
@@ -52,12 +56,17 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
                 componentData.formId
               );
             }
+            return of(this.formConfig);
           }),
           map(formDefinition => {
-            if (formDefinition && formDefinition.content) {
-              this.formConfig = <FormDefinition>(
-                JSON.parse(formDefinition.content)
-              );
+            if (formDefinition) {
+              if ((<YFormDefinition>formDefinition).content) {
+                this.formConfig = <FormDefinition>(
+                  JSON.parse((<YFormDefinition>formDefinition).content)
+                );
+              } else {
+                this.formConfig = <FormDefinition>formDefinition;
+              }
             }
           })
         )
