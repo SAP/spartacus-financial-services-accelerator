@@ -48,7 +48,6 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
               )[0];
             }
             if (!this.formConfig) {
-              this.formLoaded$ = of(true);
               return this.formDataService.getFormDefinition(
                 componentData.applicationId,
                 componentData.formId
@@ -59,10 +58,10 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
           }),
           map(formDefinition => {
             if (formDefinition && formDefinition.content) {
-              this.formLoaded$ = of(true);
               this.formConfig = <FormDefinition>(
                 JSON.parse(formDefinition.content)
               );
+              this.formLoaded$ = of(true);
             }
           })
         )
