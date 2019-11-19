@@ -1,6 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormDataService, FormDefinition, YFormDefinition } from '@fsa/dynamicforms';
+import {
+  FormDataService,
+  FormDefinition,
+  YFormDefinition,
+} from '@fsa/dynamicforms';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
@@ -18,7 +22,7 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected cmsComponentConnector: CmsComponentConnector,
     protected formDataService: FormDataService
-  ) { }
+  ) {}
 
   routeParamId = 'formCode';
   pageContext: PageContext;
