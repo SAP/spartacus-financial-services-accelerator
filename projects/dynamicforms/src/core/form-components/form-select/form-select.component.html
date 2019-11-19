@@ -8,9 +8,9 @@
     <select
       class="col-xs-12 col-md-6"
       name="{{ config.name }}"
-      [formControlName]="config.name"
+      formControlName="{{config.name}}"
     >
-      <option value="">{{ 'fscommon.pleaseSelect' | cxTranslate }}</option>
+      <option value="pleaseSelect" [selected]="'pleaseSelect'" disabled>{{ 'fscommon.pleaseSelect' | cxTranslate }}</option>
       <option *ngFor="let option of config.options" value="{{ option.name }}">
         {{ option.label }}
       </option>
