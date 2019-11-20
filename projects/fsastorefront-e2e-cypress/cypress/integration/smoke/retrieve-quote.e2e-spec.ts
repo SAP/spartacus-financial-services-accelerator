@@ -1,7 +1,3 @@
-import {
-  APPLICATIONS_PAGE,
-  accessApplicationsPage,
-} from './../../helpers/my-account/applications';
 import * as register from '../../helpers/register';
 import { registrationUser } from '../../sample-data/users';
 import * as travelCheckout from '../../helpers/checkout/travel/travel-checkout';
@@ -33,7 +29,6 @@ context('Applications Page', () => {
     });
 
     it('Should visit applications page and check if there is one quote created', () => {
-      //register.login(registrationUser.email, registrationUser.password);
       cy.selectOptionFromDropdown({
         menuOption: 'My Account',
         dropdownItem: 'Applications',
