@@ -22,3 +22,9 @@ export function checkApplicationButtons() {
     .should('contain', 'Request a product')
     .should('contain', 'Retrieve an Application');
 }
+
+export function startCheckoutForBanking() {
+  cy.get('a.enriched-banner__styled-text')
+    .should('contain', ' Request a product')
+    .click();
+}
