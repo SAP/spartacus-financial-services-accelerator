@@ -10,7 +10,8 @@ cx-page-layout {
 .FindAgentListTemplate,
 .FSRequestPageTemplate,
 .MultiTabsCategoryPageTemplate,
-.GeneralLayoutPageTemplate {
+.GeneralLayoutPageTemplate,
+.FSCategoryPageTemplate {
   & > cx-page-slot {
     max-width: 1140px;
     margin: 0 auto;

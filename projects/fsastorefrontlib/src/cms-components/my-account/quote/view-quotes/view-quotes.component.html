@@ -79,7 +79,7 @@
 </ng-template>
 
 <ng-template #showAllQuotesButton let-showAll="showAll">
-  <button class="primary-button" (click)="showAllQuotes(showAll)">
+  <button class="primary-button btn-block" (click)="showAllQuotes(showAll)">
     {{ quoteButtonText }}
   </button>
 </ng-template>
@@ -94,7 +94,7 @@
 </ng-template>
 
 <ng-template #anonymousLogin>
-  <button routerLink="/login" class="primary-button">
+  <button routerLink="/login" class="primary-button btn-block">
     {{ 'quote.viewYourQuotes' | cxTranslate }}
   </button>
 </ng-template>
