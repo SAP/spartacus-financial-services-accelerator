@@ -30,14 +30,16 @@ export class QuotesComponent implements OnInit {
 
   retrieveQuote(quote: any) {
     this.quoteService.retrieveQuote(quote);
-    if (quote.state.code === 'BIND') {
-      this.routingService.go({
-        cxRoute: 'quoteReview',
-      });
-    } else {
-      this.routingService.go({
-        cxRoute: 'addOptions',
-      });
+    if (quote && quote.state) {
+      if (quote.state.code === 'BIND') {
+        this.routingService.go({
+          cxRoute: 'quoteReview',
+        });
+      } else {
+        this.routingService.go({
+          cxRoute: 'addOptions',
+        });
+      }
     }
   }
 

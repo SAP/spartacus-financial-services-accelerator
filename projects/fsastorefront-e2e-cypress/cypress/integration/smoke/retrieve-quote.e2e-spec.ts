@@ -36,5 +36,15 @@ context('Applications Page', () => {
       cy.wait(1500);
       cy.get('fsa-quotes').should('have.length', 1);
     });
+
+    it('Should retrieve a quote and check if the user is on the correct page', () => {
+      cy.get('fsa-quotes').within(() => {
+        cy.get('.primary-button').click({ force: true });
+        cy.url().should('include', 'add-options');
+      });
+      cy.get('.is-active').within(() => {
+        cy.get('p').contains('Add Options');
+      });
+    });
   });
 });

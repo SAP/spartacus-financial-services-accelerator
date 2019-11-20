@@ -55,7 +55,6 @@ export class QuoteService {
   }
 
   retrieveQuote(quote: any) {
-    console.log('in');
     this.store.dispatch(
       new CartActions.LoadCart({
         cartId: quote.cartCode,
