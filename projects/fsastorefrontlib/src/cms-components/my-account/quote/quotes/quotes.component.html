@@ -1,4 +1,4 @@
-<h2 class="heading-headline">{{ 'fscommon.applications' | cxTranslate }}</h2>
+<h2 class="heading-headline py-3 mt-3 mb-5 text-center">{{ 'fscommon.applications' | cxTranslate }}</h2>
 <ng-container *ngIf="quotes$ | async as quotes">
   <ng-container *ngIf="quotesLoaded$ | async; else loading">
     <div class="row" *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes">
