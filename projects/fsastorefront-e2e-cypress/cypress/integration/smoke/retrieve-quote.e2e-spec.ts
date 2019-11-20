@@ -41,6 +41,7 @@ context('Applications Page', () => {
       cy.get('fsa-quotes').within(() => {
         cy.get('.primary-button').click({ force: true });
       });
+      cy.wait(1500);
       cy.url().should('include', 'add-options');
       cy.get('.is-active').within(() => {
         cy.get('p').contains('Add Options');
