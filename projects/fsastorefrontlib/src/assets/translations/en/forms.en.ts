@@ -20,6 +20,7 @@ export const forms = {
     titles: {
       trip_details_form: 'Trip Information',
       auto_details_form: 'Auto Information',
+      life_details_form: 'Coverage Information',
       auto_claim_incident_info_form: 'Incident Information',
       auto_claim_incident_report_form: 'Incident Report',
       auto_claim_general_form: 'General Information',

@@ -3,9 +3,9 @@ export function openCategoryPage() {
     menuOption: 'Insurance',
     dropdownItem: 'Travel',
   });
-  cy.get('fsa-enriched-responsive-banner')
+  cy.wait(500);
+  cy.get('.enriched-banner__styled-text')
     .should('be.visible')
-    .findByText('Get a quote')
     .click({ force: true });
 }
 
@@ -124,6 +124,7 @@ export function checkPaymentPage() {
       .clear()
       .type('113232');
   });
+  cy.wait(1000);
   cy.get('.btn-primary').click();
 }
 
