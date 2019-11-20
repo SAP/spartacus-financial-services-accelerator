@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { default as autoOptions } from './auto-options';
-import { FieldOptionItem } from '../../core';
+import { FieldOption } from '../../core';
 
 @Injectable()
 export class OccMockFormService {
   setInitialFormControlValues(nodes: any): any {
     let result = null;
-    const optionsArray: FieldOptionItem[] = [];
+    const optionsArray: FieldOption[] = [];
     if (nodes.length === 1) {
       result = autoOptions[nodes[0]];
     }
@@ -22,7 +22,7 @@ export class OccMockFormService {
   }
   getDropdownValues(nodesForParsing: any, val: string): any {
     let result = new Array(autoOptions);
-    const optionsArray: FieldOptionItem[] = [];
+    const optionsArray: FieldOption[] = [];
     if (nodesForParsing.length > 1) {
       for (let i = 0; i < nodesForParsing.length; i += 1) {
         const extractedResults = this.getNodes(result, i, val, nodesForParsing);
