@@ -26,6 +26,7 @@ export const forms = {
       auto_claim_general_form: 'General Information',
       insurance_personal_details: 'Personal Details',
       event_personal_details: 'Personal Details',
+      travel_personal_details: 'Personal Details',
     },
   },
 };

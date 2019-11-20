@@ -4,11 +4,12 @@ import {
   EventEmitter,
   OnInit,
   Output,
+  OnDestroy,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrderEntry, RoutingService } from '@spartacus/core';
-import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/checkout/services';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/fs-checkout-config.service';
 import { FSProduct } from '../../../../occ/occ-models';
@@ -18,7 +19,7 @@ import { FSProduct } from '../../../../occ/occ-models';
   templateUrl: './add-options.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddOptionsComponent implements OnInit {
+export class AddOptionsComponent implements OnInit, OnDestroy {
   constructor(
     protected cartService: FSCartService,
     protected routingService: RoutingService,
@@ -29,6 +30,7 @@ export class AddOptionsComponent implements OnInit {
   entries$: Observable<OrderEntry[]>;
   checkoutStepUrlNext: string;
   cartLoaded$: Observable<boolean>;
+  subscription = new Subscription();
 
   @Output()
   nextStep = new EventEmitter<any>();
@@ -58,14 +60,26 @@ export class AddOptionsComponent implements OnInit {
   }
 
   next() {
-    this.entries$.subscribe(entries => {
-      const product: FSProduct = entries[0].product;
-      if (product && product.defaultCategory) {
-        this.routingService.go({
-          cxRoute: 'personalDetails',
-          params: { formCode: product.defaultCategory.code },
-        });
-      }
-    });
+    this.subscription.add(
+      this.entries$
+        .pipe(
+          map(entries => {
+            const product: FSProduct = entries[0].product;
+            if (product && product.defaultCategory) {
+              this.routingService.go({
+                cxRoute: 'personalDetails',
+                params: { formCode: product.defaultCategory.code },
+              });
+            }
+          })
+        )
+        .subscribe()
+    );
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
