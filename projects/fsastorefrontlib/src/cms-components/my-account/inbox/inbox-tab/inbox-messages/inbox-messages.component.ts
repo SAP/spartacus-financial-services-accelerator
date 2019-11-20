@@ -7,7 +7,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { take, mergeMap, map } from 'rxjs/operators';
 import { Message } from '../../../../../core/my-account/services/inbox-data.service';
 import { InboxService } from '../../../../../core/my-account/services/inbox.service';
 
@@ -35,16 +35,23 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     this.messagesObject$ = this.inboxService.messages;
     this.changeCheckboxes$ = this.inboxService.checkAllMessages;
     this.subscription.add(
-      this.changeCheckboxes$.subscribe(allChecked => {
-        this.inboxService.resetMessagesToSend();
-        this.messagesObject$.pipe(take(1)).subscribe(data => {
-          if (allChecked) {
-            data.messages.forEach(message => {
-              this.changeMessageState(message.readDate, message.uid);
-            });
-          }
-        });
-      })
+      this.changeCheckboxes$
+        .pipe(
+          mergeMap(allChecked => {
+            this.inboxService.resetMessagesToSend();
+            return this.messagesObject$.pipe(
+              take(1),
+              map(data => {
+                if (allChecked) {
+                  return data.messages.forEach(message => {
+                    this.changeMessageState(message.readDate, message.uid);
+                  });
+                }
+              })
+            );
+          })
+        )
+        .subscribe()
     );
   }
 
