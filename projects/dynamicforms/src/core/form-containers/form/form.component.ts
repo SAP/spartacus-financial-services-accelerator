@@ -41,24 +41,16 @@ export class FormComponent implements OnDestroy {
               content: response.content,
               categoryCode: this.formCategoryCode,
             });
-            this.navigateNext();
+            this.formDataService.setSubmitted(true);
           })
       );
     }
   }
 
   ngOnDestroy() {
+    this.formDataService.setSubmitted(false);
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-  }
-
-  // Should be removed from dynamic forms module!!!
-  // Should be more configurable to support other routes/pages
-  navigateNext() {
-    this.routingService.go({
-      cxRoute: 'category',
-      params: { code: this.formCategoryCode },
-    });
   }
 }

@@ -9,9 +9,22 @@ export class FormDataService {
   constructor(protected occYformsService: OccFormService) {}
 
   currentForm$: BehaviorSubject<YFormData> = new BehaviorSubject({});
+  isSubmitted = new BehaviorSubject<boolean>(false);
 
   getCurrentFormData(): Observable<YFormData> {
     return this.currentForm$.asObservable();
+  }
+
+  submit() {
+    this.isSubmitted.next(false);
+  }
+
+  checkSubmitted() {
+    return this.isSubmitted.asObservable();
+  }
+
+  setSubmitted(submitted: boolean) {
+    this.isSubmitted.next(submitted);
   }
 
   saveFormData(

@@ -476,16 +476,6 @@ export class FormSampleConfigurations {
             },
           ],
         },
-        {
-          groupName: 'button',
-          fieldConfigs: [
-            {
-              label: 'Find Prices',
-              name: 'submit',
-              type: 'button',
-            },
-          ],
-        },
       ],
     },
     {
@@ -717,16 +707,6 @@ export class FormSampleConfigurations {
             },
           ],
         },
-        {
-          groupName: 'button',
-          fieldConfigs: [
-            {
-              label: 'Find Prices',
-              name: 'submit',
-              type: 'button',
-            },
-          ],
-        },
       ],
     },
     {
@@ -908,6 +888,38 @@ export class FormSampleConfigurations {
                   label: 'No',
                 },
               ],
+              validation: [Validators.required],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      formId: 'insurance_personal_details',
+      formGroups: [
+        {
+          groupName: 'personalDetails',
+          fieldConfigs: [
+            {
+              label: 'Test field',
+              name: 'testField',
+              type: 'input',
+              validation: [Validators.required],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      formId: 'event_personal_details',
+      formGroups: [
+        {
+          groupName: 'personalDetails',
+          fieldConfigs: [
+            {
+              label: 'Event field',
+              name: 'eventField',
+              type: 'input',
               validation: [Validators.required],
             },
           ],

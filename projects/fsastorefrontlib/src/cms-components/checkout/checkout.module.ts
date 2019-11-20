@@ -47,6 +47,7 @@ import {
 import { StoreModule } from '@ngrx/store';
 import { CHECKOUT_FEATURE } from '../../core/checkout/store';
 import { OccFSCheckoutService } from '../../occ/services/checkout/fs-checkout.service';
+import { FormNavigationComponent } from './components/form-navigation/form-navigation.component';
 
 const routes: Routes = [
   {
@@ -66,6 +67,15 @@ const routes: Routes = [
       pageLabel: 'add-options', // ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
     },
     component: PageLayoutComponent, // SPA LAYOUT Component you're targeting
+  },
+  {
+    path: null,
+    canActivate: [CmsPageGuard, CatagoryStepGuard, AuthGuard],
+    data: {
+      cxRoute: 'personalDetails',
+      pageLabel: 'personal-details',
+    },
+    component: PageLayoutComponent,
   },
   {
     path: null,
@@ -170,6 +180,9 @@ const routes: Routes = [
         DynamicProgressBarStepsComponent: {
           component: FSCheckoutProgressComponent,
         },
+        CheckoutFormNavigationFlex: {
+          component: FormNavigationComponent,
+        },
       },
     }),
   ],
@@ -179,6 +192,7 @@ const routes: Routes = [
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
     FSMiniCartComponent,
+    FormNavigationComponent,
   ],
   exports: [
     I18nModule,
@@ -190,6 +204,7 @@ const routes: Routes = [
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
     FSMiniCartComponent,
+    FormNavigationComponent,
   ],
   entryComponents: [
     FsaOrderConfirmationComponent,
@@ -197,6 +212,7 @@ const routes: Routes = [
     QuoteReviewComponent,
     FinalReviewComponent,
     FSMiniCartComponent,
+    FormNavigationComponent,
   ],
   providers: [
     FSCartService,

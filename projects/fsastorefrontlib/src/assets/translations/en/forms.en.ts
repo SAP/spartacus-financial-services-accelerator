@@ -24,6 +24,8 @@ export const forms = {
       auto_claim_incident_info_form: 'Incident Information',
       auto_claim_incident_report_form: 'Incident Report',
       auto_claim_general_form: 'General Information',
+      insurance_personal_details: 'Personal Details',
+      event_personal_details: 'Personal Details',
     },
   },
 };

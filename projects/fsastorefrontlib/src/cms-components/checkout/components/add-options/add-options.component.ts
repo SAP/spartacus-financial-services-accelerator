@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/checkout/services';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/fs-checkout-config.service';
+import { FSProduct } from '../../../../occ/occ-models';
 
 @Component({
   selector: 'fsa-add-options',
@@ -57,6 +58,14 @@ export class AddOptionsComponent implements OnInit {
   }
 
   next() {
-    this.routingService.go(this.checkoutStepUrlNext);
+    this.entries$.subscribe(entries => {
+      const product: FSProduct = entries[0].product;
+      if (product && product.defaultCategory) {
+        this.routingService.go({
+          cxRoute: 'personalDetails',
+          params: { formCode: product.defaultCategory.code },
+        });
+      }
+    });
   }
 }

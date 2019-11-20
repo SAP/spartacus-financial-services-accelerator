@@ -7,6 +7,9 @@ export const fsaStorefrontRoutesConfig: RoutesConfig = {
   },
   category: { paths: ['checkout/c/:categoryCode'] },
   addOptions: { paths: ['checkout/add-options'] },
+  personalDetails: {
+    paths: ['checkout/personal-details/:formCode'],
+  },
   quoteReview: { paths: ['checkout/quote-review'] },
   checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
   finalReview: { paths: ['checkout/final-review'] },
@@ -15,7 +18,6 @@ export const fsaStorefrontRoutesConfig: RoutesConfig = {
   orderConfirmation: { paths: ['checkout/order-confirmation'] },
   paymentDetails: { paths: ['my-account/payment-details'] },
   consentManagment: { paths: ['my-account/consents'] },
-  personalDetails: { paths: ['my-account/fs-update-profile'] },
   updateEmail: { paths: ['my-account/update-email'] },
   updatePasswordComp: { paths: ['my-account/update-password'] },
   closeAccount: { paths: ['my-account/close-account'] },

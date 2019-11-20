@@ -1,10 +1,19 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   FieldConfig,
   FormDefinition,
 } from '../../models/field-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
+import { Subscription } from 'rxjs';
+import { FormDataService } from '../../services';
+import { map } from 'rxjs/operators';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -17,6 +26,7 @@ export class DynamicFormComponent implements OnInit {
   @Output()
   submit: EventEmitter<any> = new EventEmitter<any>();
   form: FormGroup;
+  private subscription = new Subscription();
 
   allInputs: Array<FieldConfig> = [];
 
@@ -30,9 +40,17 @@ export class DynamicFormComponent implements OnInit {
     return this.form.value;
   }
 
-  constructor(private formService: FormBuilderService) {}
+  constructor(
+    private formService: FormBuilderService,
+    private formDataService: FormDataService
+  ) {}
 
   ngOnInit() {
+    this.createFormDefinition();
+    this.addSubmitEvent();
+  }
+
+  createFormDefinition() {
     if (this.config) {
       this.form = this.formService.createForm(this.config);
       this.config.formGroups.map(formGroup => {
@@ -41,6 +59,26 @@ export class DynamicFormComponent implements OnInit {
         });
       });
     }
+  }
+
+  addSubmitEvent() {
+    this.subscription.add(
+      this.formDataService
+        .checkSubmitted()
+        .pipe(
+          map(data => {
+            if (
+              data !== undefined &&
+              !data &&
+              this.value !== undefined &&
+              this.valid
+            ) {
+              this.submit.emit(this.value);
+            }
+          })
+        )
+        .subscribe()
+    );
   }
 
   handleSubmit(event: Event) {
