@@ -84,9 +84,9 @@ context('ProductCategoryPage', () => {
     productCategory.checkComponets();
     productCategory.checkQuoteButtons();
     cy.get('div.product-feature-wrapper').should('have.length', 3);
-    cy.get('h3.section-header-heading').should('contain', 'Two Stars Event');
-    cy.get('h3.section-header-heading').should('contain', 'Three Stars Event');
-    cy.get('h3.section-header-heading').should('contain', 'Four Stars Event');
+    cy.get('h3.section-header-heading').should('contain', 'Event Two Stars');
+    cy.get('h3.section-header-heading').should('contain', 'Event Three Stars');
+    cy.get('h3.section-header-heading').should('contain', 'Event Four Stars');
     cy.get('ul.item-details').should('have.length', 3);
   });
 
