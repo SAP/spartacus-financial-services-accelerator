@@ -1,32 +1,37 @@
 import { Injectable } from '@angular/core';
 import { default as autoOptions } from './auto-options';
+import { FieldOption } from '../../core';
 
 @Injectable()
 export class OccMockFormService {
   setInitialFormControlValues(nodes: any): any {
     let result = null;
-    const optionsArray = [];
+    const optionsArray: FieldOption[] = [];
     if (nodes.length === 1) {
       result = autoOptions[nodes[0]];
     }
     if (result) {
       result.forEach(node => {
-        optionsArray.push(node.code);
+        optionsArray.push({
+          name: node.code,
+          label: node.code,
+        });
       });
     }
     return optionsArray;
   }
   getDropdownValues(nodesForParsing: any, val: string): any {
     let result = new Array(autoOptions);
-    const optionsArray = [];
+    const optionsArray: FieldOption[] = [];
     if (nodesForParsing.length > 1) {
       for (let i = 0; i < nodesForParsing.length; i += 1) {
         const extractedResults = this.getNodes(result, i, val, nodesForParsing);
         if (nodesForParsing.length - 1 === i) {
           extractedResults.forEach(resultElement => {
-            optionsArray.push(
-              resultElement.code ? resultElement.code : resultElement
-            );
+            optionsArray.push({
+              name: resultElement.code ? resultElement.code : resultElement,
+              label: resultElement.code ? resultElement.code : resultElement,
+            });
           });
         } else {
           result = extractedResults;
