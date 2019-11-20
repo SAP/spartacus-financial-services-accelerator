@@ -56,13 +56,13 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   }
 
   loadCurrentMessageGroup() {
-    this.subscription = this.inboxService.activeMessageGroupAndTitle.subscribe(
-      group => {
+    this.subscription.add(
+      this.inboxService.activeMessageGroupAndTitle.subscribe(group => {
         this.messageGroup =
           group && group.messageGroup ? group.messageGroup : this.initialGroup;
         this.getMessages();
         this.cdr.markForCheck();
-      }
+      })
     );
   }
 
