@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { FormDataService, FormDefinition } from '@fsa/dynamicforms';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import { Observable, Subscription } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { Observable, of, Subscription } from 'rxjs';
+import { map, mergeMap, switchMap } from 'rxjs/operators';
 import { CMSFormSubmitComponent } from '../../../occ/occ-models';
 import { FormSampleConfigurations } from './form-sample-configurations';
 
@@ -23,6 +23,7 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
   routeParamId = 'formCode';
   pageContext: PageContext;
   formConfig: FormDefinition;
+  formLoaded$: Observable<boolean>;
   component$: Observable<CMSFormSubmitComponent>;
   private subscription = new Subscription();
 
@@ -40,7 +41,7 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
               this.pageContext
             ));
           }),
-          switchMap(componentData => {
+          mergeMap(componentData => {
             if (componentData && componentData.formId) {
               this.formConfig = FormSampleConfigurations.sampleConfigurations.filter(
                 item => item.formId === componentData.formId
@@ -52,12 +53,15 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
                 componentData.formId
               );
             }
+            this.formLoaded$ = of(true);
+            return of(null);
           }),
           map(formDefinition => {
             if (formDefinition && formDefinition.content) {
               this.formConfig = <FormDefinition>(
                 JSON.parse(formDefinition.content)
               );
+              this.formLoaded$ = of(true);
             }
           })
         )
