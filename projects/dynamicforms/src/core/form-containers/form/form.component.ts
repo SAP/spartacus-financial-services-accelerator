@@ -1,10 +1,11 @@
+import { YFormData } from './../../models/form-occ.models';
 import { Component, Input, ViewChild, OnDestroy } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 
 import { FormDefinition } from '../../models/field-config.interface';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 import { FormDataService } from '../../services/data/form-data.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'cx-form-component',
@@ -28,13 +29,12 @@ export class FormComponent implements OnDestroy {
   formConfig: FormDefinition;
   @Input()
   applicationId: string;
+  savedFormData: Observable<YFormData>;
 
   submit(formData: { [name: string]: any }) {
     if (this.form.valid) {
-      this.subscription.add(
-        this.formDataService
-          .saveFormData(this.formId, this.applicationId, formData)
-          .subscribe(response => {
+        this.savedFormData = this.formDataService.saveFormData(this.formId, this.applicationId, formData);
+        this.savedFormData.subscribe(response => {
             this.formDataService.currentForm$.next({
               id: response.id,
               formDefinitionId: this.formId,
@@ -44,8 +44,7 @@ export class FormComponent implements OnDestroy {
             if (this.formCategoryCode) {
               this.navigateNext();
             }
-          })
-      );
+          });
     }
   }
 

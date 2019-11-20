@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { YFormData } from '../../models';
 import { OccFormService } from '../../../occ/services/form/occ-form.service';
 
@@ -7,8 +7,8 @@ import { OccFormService } from '../../../occ/services/form/occ-form.service';
 export class FormDataService {
   constructor(protected occYformsService: OccFormService) {}
 
-  private formSubmitted = new Subject<{}>();
-  currentForm$: BehaviorSubject<YFormData> = new BehaviorSubject({});
+  private formSubmitted = new BehaviorSubject<any>(null);
+  currentForm$ = new BehaviorSubject<YFormData>({});
 
   getCurrentFormData(): Observable<YFormData> {
     return this.currentForm$.asObservable();

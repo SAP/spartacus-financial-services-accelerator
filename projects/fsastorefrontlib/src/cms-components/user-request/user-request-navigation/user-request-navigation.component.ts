@@ -87,33 +87,35 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
 
   next(currentStep: number): void {
     this.formService.submitForm(currentStep.toString());
-
-    this.subscription.add(
-      this.formService
-        .getCurrentFormData()
-        .pipe(
-          map(data => {
-            const fsRequest = this.userRequestDataService.userRequest;
-            if (fsRequest.requestId && data.content !== undefined) {
-              const stepData = this.userRequestDataService.updateUserRequestStep(
-                fsRequest,
-                this.activeStepIndex,
-                data,
-                this.completedStatus
-              );
-              return this.userRequestService.updateUserRequest(
-                fsRequest.requestId,
-                stepData
-              );
-            }
-          })
-        )
-        .subscribe()
-    );
-    this.userRequestNavigationService.next(
-      this.configurationSteps,
-      currentStep
-    );
+    setTimeout(() => {
+      this.subscription.add(
+        this.formService
+          .getCurrentFormData()
+          .pipe(
+            map(data => {
+              console.log(data);
+              const fsRequest = this.userRequestDataService.userRequest;
+              if (fsRequest.requestId && data.content !== undefined) {
+                const stepData = this.userRequestDataService.updateUserRequestStep(
+                  fsRequest,
+                  this.activeStepIndex,
+                  data,
+                  this.completedStatus
+                );
+                return this.userRequestService.updateUserRequest(
+                  fsRequest.requestId,
+                  stepData
+                );
+              }
+            })
+          )
+          .subscribe()
+      );
+      this.userRequestNavigationService.continue(
+        this.configurationSteps,
+        currentStep
+      );
+    }, 1000);
   }
 
   shouldClaimBeUpdated(fsRequest: FSUserRequest): boolean {

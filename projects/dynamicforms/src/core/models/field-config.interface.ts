@@ -6,7 +6,7 @@ export interface FormDefinition {
   submitType?: FormSubmitType;
 }
 export interface FromGroup {
-  groupName: String;
+  groupName?: String;
   fieldConfigs: FieldConfig[];
 }
 export interface FieldConfig {

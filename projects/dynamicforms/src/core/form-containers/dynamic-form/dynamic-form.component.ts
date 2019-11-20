@@ -14,6 +14,7 @@ import {
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 import { FormDataService } from '../../services/data/form-data.service';
 import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -64,11 +65,11 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
   addSubmitEvent() {
     this.subscription.add(
-      this.formDataService.getSubmittedData().subscribe(data => {
+      this.formDataService.getSubmittedData().pipe(map(data => {
         if (data !== undefined && this.value !== undefined && this.valid) {
           this.submit.emit(this.value);
         }
-      })
+      })).subscribe()
     );
   }
 
