@@ -13,7 +13,7 @@ export interface FieldConfig {
   label?: string;
   group?: string;
   name?: string;
-  options?: FieldOptionItem[];
+  options?: FieldOption[];
   depends?: string[];
   jsonField?: string;
   placeholder?: string;
@@ -24,7 +24,7 @@ export interface FieldConfig {
   error?: string;
 }
 
-export interface FieldOptionItem {
+export interface FieldOption {
   name: string;
   label: string;
   icon?: string;
