@@ -8,20 +8,35 @@ import { OccFormService } from '../../../occ/services/form/occ-form.service';
 export class FormDataService {
   constructor(protected occYformsService: OccFormService) {}
 
-  private formSubmitted = new BehaviorSubject<any>(null);
+  //private formSubmitted = new BehaviorSubject<any>(null);
   currentForm$ = new BehaviorSubject<YFormData>({});
+
+  private isSubmitted = new BehaviorSubject<boolean>(false);
 
   getCurrentFormData(): Observable<YFormData> {
     return this.currentForm$.asObservable();
   }
 
   getSubmittedData() {
-    return this.formSubmitted;
+    //return this.formSubmitted;
   }
 
   submitForm(data: {}) {
-    this.formSubmitted.next(data);
+    //this.formSubmitted.next(data);
   }
+
+  submit() {
+    this.isSubmitted.next(false);
+  }
+
+  checkSubmitted() {
+    return this.isSubmitted.asObservable();
+  }
+
+  setSubmitted() {
+    this.isSubmitted.next(true);
+  }
+
   saveFormData(
     formId: string,
     applicationId: string,

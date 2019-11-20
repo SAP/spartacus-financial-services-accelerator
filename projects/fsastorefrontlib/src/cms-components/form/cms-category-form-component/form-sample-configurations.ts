@@ -647,16 +647,6 @@ export class FormSampleConfigurations {
             },
           ],
         },
-        {
-          groupName: 'button',
-          fieldConfigs: [
-            {
-              label: 'Find Prices',
-              name: 'submit',
-              type: 'button',
-            },
-          ],
-        },
       ],
     },
     {

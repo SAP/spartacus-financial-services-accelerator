@@ -33,18 +33,20 @@ export class FormComponent implements OnDestroy {
 
   submit(formData: { [name: string]: any }) {
     if (this.form.valid) {
-        this.savedFormData = this.formDataService.saveFormData(this.formId, this.applicationId, formData);
-        this.savedFormData.subscribe(response => {
-            this.formDataService.currentForm$.next({
-              id: response.id,
-              formDefinitionId: this.formId,
-              content: response.content,
-              categoryCode: this.formCategoryCode,
-            });
-            if (this.formCategoryCode) {
-              this.navigateNext();
-            }
-          });
+      this.savedFormData = this.formDataService.saveFormData(
+        this.formId,
+        this.applicationId,
+        formData
+      );
+      this.savedFormData.subscribe(response => {
+        this.formDataService.currentForm$.next({
+          id: response.id,
+          formDefinitionId: this.formId,
+          content: response.content,
+          categoryCode: this.formCategoryCode,
+        });
+        this.formDataService.setSubmitted();
+      });
     }
   }
 
@@ -56,10 +58,10 @@ export class FormComponent implements OnDestroy {
 
   // Should be removed from dynamic forms module!!!
   // Should be more configurable to support other routes/pages
-  navigateNext() {
-    this.routingService.go({
-      cxRoute: 'category',
-      params: { code: this.formCategoryCode },
-    });
-  }
+  // navigateNext() {
+  //   this.routingService.go({
+  //     cxRoute: 'category',
+  //     params: { code: this.formCategoryCode },
+  //   });
+  // }
 }

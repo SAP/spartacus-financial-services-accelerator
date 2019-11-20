@@ -65,11 +65,21 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
   addSubmitEvent() {
     this.subscription.add(
-      this.formDataService.getSubmittedData().pipe(map(data => {
-        if (data !== undefined && this.value !== undefined && this.valid) {
-          this.submit.emit(this.value);
-        }
-      })).subscribe()
+      this.formDataService
+        .checkSubmitted()
+        .pipe(
+          map(data => {
+            if (
+              data !== undefined &&
+              !data &&
+              this.value !== undefined &&
+              this.valid
+            ) {
+              this.submit.emit(this.value);
+            }
+          })
+        )
+        .subscribe()
     );
   }
 
