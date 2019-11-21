@@ -59,10 +59,9 @@ export class DynamicFormComponent implements OnInit {
     this.subscription.add(
       this.formDataService.isSubmitted
         .pipe(
-          map(data => {
+          map(submitted => {
             if (
-              data !== undefined &&
-              !data &&
+              !submitted &&
               this.value !== undefined &&
               this.valid
             ) {
