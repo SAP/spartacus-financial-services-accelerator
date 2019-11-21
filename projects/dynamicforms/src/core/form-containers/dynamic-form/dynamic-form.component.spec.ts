@@ -32,14 +32,12 @@ export class MockFormBuilderService {
   }
 }
 
-const formData: YFormData = {
-
-} 
+const formData: YFormData = {};
 
 export class MockFormDataService {
   getSubmittedForm() {
     return new BehaviorSubject(formData);
-  } 
+  }
 }
 
 describe('DynamicFormComponent', () => {

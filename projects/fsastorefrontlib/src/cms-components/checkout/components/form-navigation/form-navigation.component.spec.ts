@@ -6,8 +6,7 @@ import { of } from 'rxjs';
 import { YFormData, FormDataService } from '@fsa/dynamicforms';
 import { ActivatedRoute } from '@angular/router';
 
-const mockedFormData: YFormData = {
-};
+const mockedFormData: YFormData = {};
 
 export class MockFormDataService {
   getSubmittedFrom() {
@@ -27,7 +26,7 @@ describe('FormNavigationComponent', () => {
   beforeEach(async(() => {
     mockFormDataService = new MockFormDataService();
     TestBed.configureTestingModule({
-      imports: [I18nTestingModule] ,
+      imports: [I18nTestingModule],
       providers: [
         {
           provide: FormDataService,

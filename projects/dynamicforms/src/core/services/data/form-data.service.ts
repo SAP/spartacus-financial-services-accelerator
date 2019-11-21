@@ -26,7 +26,7 @@ export class FormDataService {
   }
 
   setSubmittedForm(formData?: YFormData) {
-     this.submittedForm.next(formData);
+    this.submittedForm.next(formData);
   }
 
   saveFormData(

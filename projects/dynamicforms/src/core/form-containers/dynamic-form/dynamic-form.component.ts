@@ -57,14 +57,11 @@ export class DynamicFormComponent implements OnInit {
 
   addSubmitEvent() {
     this.subscription.add(
-      this.formDataService.getSubmittedForm()
+      this.formDataService
+        .getSubmittedForm()
         .pipe(
           map(submitted => {
-            if (
-              !submitted &&
-              this.value !== undefined &&
-              this.valid
-            ) {
+            if (!submitted && this.value !== undefined && this.valid) {
               this.submit.emit(this.value);
             }
           })
