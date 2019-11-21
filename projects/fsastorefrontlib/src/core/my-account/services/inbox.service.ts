@@ -26,10 +26,12 @@ export class InboxService {
   checkAllMessagesSource = new BehaviorSubject<boolean>(false);
   checkAllMessages = this.checkAllMessagesSource.asObservable();
 
+  accordionStateSource = new BehaviorSubject<number>(-1);
+  accordionState = this.accordionStateSource.asObservable();
+
   messagesCollection: Message[] = [];
   readMessagesUidList: string[] = [];
 
-  selectedIndex: number;
   searchConfig: FSSearchConfig = {};
 
   messagesSource = new BehaviorSubject<any>(false);
@@ -97,6 +99,6 @@ export class InboxService {
   }
 
   setMessagesState(uidList, read): Observable<any> {
-    return this.occInboxService.setMessagesState('current', uidList, read);
+    return this.occInboxService.setMessagesState(this.inboxData.userId, uidList, read);
   }
 }

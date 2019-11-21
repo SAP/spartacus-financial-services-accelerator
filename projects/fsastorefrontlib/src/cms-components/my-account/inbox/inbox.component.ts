@@ -24,7 +24,7 @@ export class InboxComponent implements OnInit, OnDestroy {
     protected componentData: CmsComponentData<CmsInboxComponent>,
     protected cmsService: CmsService,
     protected inboxService: InboxService
-  ) {}
+  ) { }
 
   subscription = new Subscription();
   component$: Observable<CmsInboxComponent>;
@@ -74,6 +74,10 @@ export class InboxComponent implements OnInit, OnDestroy {
         check => (this.mainCheckboxChecked = check)
       )
     );
+  }
+
+  resetAccordion() {
+    this.inboxService.accordionStateSource.next(-1);
   }
 
   checkAllCheckboxes() {

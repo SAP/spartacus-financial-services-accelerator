@@ -1,6 +1,5 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   Input,
   OnDestroy,
@@ -14,13 +13,12 @@ import { InboxService } from '../../../../../core/my-account/services/inbox.serv
 @Component({
   selector: 'fsa-messages-inbox',
   templateUrl: './inbox-messages.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InboxMessagesComponent implements OnInit, OnDestroy {
   constructor(
-    private inboxService: InboxService,
-    private cdr: ChangeDetectorRef
-  ) {}
+    private inboxService: InboxService
+  ) { }
 
   private subscription: Subscription = new Subscription();
   changeCheckboxes$: Observable<boolean>;
@@ -53,6 +51,11 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+    this.subscription.add(
+      this.inboxService.accordionState.subscribe(
+        globalAccordionIndex => this.selectedIndex = globalAccordionIndex
+      )
+    );
   }
 
   loadCurrentMessageGroup() {
@@ -61,7 +64,6 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
         this.messageGroup =
           group && group.messageGroup ? group.messageGroup : this.initialGroup;
         this.getMessages();
-        this.cdr.markForCheck();
       })
     );
   }
