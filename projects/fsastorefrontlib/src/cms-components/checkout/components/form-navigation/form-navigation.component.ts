@@ -3,7 +3,7 @@ import { FormDataService } from '@fsa/dynamicforms';
 import { ActivatedRoute } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/fs-checkout-config.service';
-import { map, switchMap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'fsa-form-navigation',
