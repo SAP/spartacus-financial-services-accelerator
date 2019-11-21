@@ -6,7 +6,7 @@ import { FieldConfig } from '../../models/field-config.interface';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 import { BehaviorSubject } from 'rxjs';
-import { FormDataService } from '../../services';
+import { FormDataService } from '../../services/data/form-data.service';
 import { YFormData } from '../../models';
 
 @Directive({
