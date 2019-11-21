@@ -3,6 +3,7 @@ import { FormDataService } from '@fsa/dynamicforms';
 import { ActivatedRoute } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/fs-checkout-config.service';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-form-navigation',
@@ -31,8 +32,8 @@ export class FormNavigationComponent implements OnInit {
 
   next() {
     this.formService.submit();
-    this.formService.checkSubmitted().subscribe(submitted => {
-      if (submitted) {
+    this.formService.getSubmitted().subscribe(formData => {
+      if (formData && formData.id) {
         this.activatedRoute.params.subscribe(params => {
           if (this.checkoutStepUrlNext.includes('categoryCode')) {
             this.routingService.go({
