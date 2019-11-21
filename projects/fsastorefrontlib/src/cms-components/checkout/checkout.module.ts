@@ -72,7 +72,7 @@ const routes: Routes = [
     path: null,
     canActivate: [CmsPageGuard, CategoryStepGuard, AuthGuard],
     data: {
-      cxRoute: 'personalDetails',
+      cxRoute: 'checkoutPersonalDetails',
       pageLabel: 'personal-details',
     },
     component: PageLayoutComponent,

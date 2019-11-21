@@ -32,7 +32,7 @@ export const fsaCheckoutConfig: FSCheckoutConfig = {
       {
         id: 'personalDetailsStep',
         name: 'fscommon.personalDetails',
-        routeName: 'personalDetails',
+        routeName: 'checkoutPersonalDetails',
         type: [],
         restrictedCategories: ['insurances_auto', 'banking_current_account'],
       },
