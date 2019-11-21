@@ -1,0 +1,4 @@
+<h3>Agent Details</h3>
+<ng-container *ngIf="agent$ | async as agent">
+  {{ agent.firstName }} {{ agent.lastName }}<br />
+</ng-container>

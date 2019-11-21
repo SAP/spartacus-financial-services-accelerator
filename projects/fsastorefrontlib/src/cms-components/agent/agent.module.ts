@@ -7,6 +7,9 @@ import { FindAgentNavigationComponent } from './find-agent-navigation/find-agent
 import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { MediaModule } from '@spartacus/storefront';
 import { RouterModule } from '@angular/router';
+import { AgentSearchBoxComponent } from './agent-search-box/agent-search-box.component';
+import { AgentSearchListComponent } from './agent-search-list/agent-search-list.component';
+import { AgentSearchDetailsComponent } from './agent-search-details/agent-search-details.component';
 
 @NgModule({
   imports: [
@@ -23,12 +26,39 @@ import { RouterModule } from '@angular/router';
         FindAgentNavigationTypeFlex: {
           component: FindAgentNavigationComponent,
         },
+        AgentSearchFlex: {
+          component: AgentSearchBoxComponent,
+        },
+        AgentSearchListFlex: {
+          component: AgentSearchListComponent,
+        },
+        AgentSearchDetailsFlex: {
+          component: AgentSearchDetailsComponent,
+        },
       },
     }),
   ],
-  declarations: [AgentRootComponent, FindAgentNavigationComponent],
-  exports: [AgentRootComponent, FindAgentNavigationComponent],
-  entryComponents: [AgentRootComponent, FindAgentNavigationComponent],
+  declarations: [
+    AgentRootComponent,
+    FindAgentNavigationComponent,
+    AgentSearchBoxComponent,
+    AgentSearchListComponent,
+    AgentSearchDetailsComponent,
+  ],
+  exports: [
+    AgentRootComponent,
+    FindAgentNavigationComponent,
+    AgentSearchBoxComponent,
+    AgentSearchListComponent,
+    AgentSearchDetailsComponent,
+  ],
+  entryComponents: [
+    AgentRootComponent,
+    FindAgentNavigationComponent,
+    AgentSearchBoxComponent,
+    AgentSearchListComponent,
+    AgentSearchDetailsComponent,
+  ],
   providers: [OccAgentService],
 })
 export class AgentModule {}

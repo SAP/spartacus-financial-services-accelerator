@@ -1,0 +1,13 @@
+<h3>Search Results</h3>
+<ng-container *ngIf="searchResults$ | async as result">
+  <ng-container class="agent-details" *ngFor="let agent of result.agents">
+    <div class="agent-list-item" (click)="showDetails(agent)">
+      {{ agent.firstName }} {{ agent.lastName }}<br />
+      <ng-container *ngFor="let pos of agent.pointsOfService">
+        {{ pos.address.line1 }} - {{ pos.formattedDistance }}<br />
+      </ng-container>
+      CITY
+      <br /><br />
+    </div>
+  </ng-container>
+</ng-container>

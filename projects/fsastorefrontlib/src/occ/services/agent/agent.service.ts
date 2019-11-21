@@ -20,6 +20,17 @@ export class OccAgentService {
       .get(url, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
+
+  public searchAgents(searhQuery: string) {
+    const url = this.getAgentsEndpoint() + '/search';
+    const queryParam = 'queryParam=' + searhQuery + '&fields=DEFAULT';
+    const params = new HttpParams({ fromString: queryParam });
+
+    return this.http
+      .get(url, { params: params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
   protected getAgentsEndpoint() {
     const agentsEndpoint = '/agents';
     return this.occEndpointService.getBaseEndpoint() + agentsEndpoint;
