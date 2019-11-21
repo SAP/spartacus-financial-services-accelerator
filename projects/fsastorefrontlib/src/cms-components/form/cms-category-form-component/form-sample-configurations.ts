@@ -950,7 +950,13 @@ export class FormSampleConfigurations {
               label: 'Email',
               name: 'email',
               type: 'input',
-              validation: [Validators.required],
+              validation: [
+                Validators.required,
+                CustomFormValidators.regexValidator(
+                  CustomFormValidators.emailRegex
+                ),
+              ],
+              error: 'forms.enterValidEmail',
             },
             {
               label: 'Address Line 1',
@@ -1029,6 +1035,7 @@ export class FormSampleConfigurations {
                 Validators.required,
                 CustomFormValidators.compareToCurrentDate('shouldBeGreater'),
               ],
+              error: 'forms.dateInFuture',
             },
             {
               label: 'Venue name',
@@ -1064,7 +1071,13 @@ export class FormSampleConfigurations {
               label: 'Email',
               name: 'email',
               type: 'input',
-              validation: [Validators.required],
+              validation: [
+                Validators.required,
+                CustomFormValidators.regexValidator(
+                  CustomFormValidators.emailRegex
+                ),
+              ],
+              error: 'forms.enterValidEmail',
             },
             {
               label: 'Address Line 1',
@@ -1155,7 +1168,13 @@ export class FormSampleConfigurations {
               label: 'Email',
               name: 'email',
               type: 'input',
-              validation: [Validators.required],
+              validation: [
+                Validators.required,
+                CustomFormValidators.regexValidator(
+                  CustomFormValidators.emailRegex
+                ),
+              ],
+              error: 'forms.enterValidEmail',
             },
             {
               label: 'Address Line 1',
