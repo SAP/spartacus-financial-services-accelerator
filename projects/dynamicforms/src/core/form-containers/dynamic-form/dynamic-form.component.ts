@@ -6,7 +6,7 @@ import {
 } from '../../models/field-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 import { Subscription } from 'rxjs';
-import { FormDataService } from '../../services';
+import { FormDataService } from '../../services/data/form-data.service';
 import { map } from 'rxjs/operators';
 
 @Component({
