@@ -28,9 +28,9 @@ export class FormDataService {
     return this.submittedForm.asObservable();
   }
 
-  setSubmitted(formData: YFormData) {
-    this.isSubmitted.next(true);
-    this.submittedForm.next(formData);
+  setSubmitted(submitted: boolean, formData?: YFormData) {
+      this.isSubmitted.next(submitted);
+      this.submittedForm.next(formData);
   }
 
   saveFormData(

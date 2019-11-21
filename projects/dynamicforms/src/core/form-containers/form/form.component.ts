@@ -41,14 +41,14 @@ export class FormComponent implements OnDestroy {
               content: response.content,
               categoryCode: this.formCategoryCode,
             });
-            this.formDataService.setSubmitted(response);
+            this.formDataService.setSubmitted(true, response);
           })
       );
     }
   }
 
   ngOnDestroy() {
-    this.formDataService.setSubmitted(null);
+    this.formDataService.setSubmitted(false);
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
