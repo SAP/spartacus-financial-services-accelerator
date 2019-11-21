@@ -4,20 +4,22 @@ import {
   EventEmitter,
   OnInit,
   Output,
+  OnDestroy,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OrderEntry, RoutingService } from '@spartacus/core';
-import { Observable } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/checkout/services';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/fs-checkout-config.service';
+import { FSProduct } from '../../../../occ/occ-models';
 
 @Component({
   selector: 'fsa-add-options',
   templateUrl: './add-options.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AddOptionsComponent implements OnInit {
+export class AddOptionsComponent implements OnInit, OnDestroy {
   constructor(
     protected cartService: FSCartService,
     protected routingService: RoutingService,
@@ -28,6 +30,7 @@ export class AddOptionsComponent implements OnInit {
   entries$: Observable<OrderEntry[]>;
   checkoutStepUrlNext: string;
   cartLoaded$: Observable<boolean>;
+  subscription = new Subscription();
 
   @Output()
   nextStep = new EventEmitter<any>();
@@ -56,7 +59,28 @@ export class AddOptionsComponent implements OnInit {
     this.cartService.removeEntry(item);
   }
 
-  next() {
-    this.routingService.go(this.checkoutStepUrlNext);
+  navigateNext() {
+    let mainProduct: FSProduct;
+    this.subscription.add(
+      this.entries$
+        .pipe(
+          map(entries => {
+            mainProduct = <FSProduct>entries[0].product;
+            if (mainProduct && mainProduct.defaultCategory) {
+              this.routingService.go({
+                cxRoute: 'checkoutPersonalDetails',
+                params: { formCode: mainProduct.defaultCategory.code },
+              });
+            }
+          })
+        )
+        .subscribe()
+    );
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

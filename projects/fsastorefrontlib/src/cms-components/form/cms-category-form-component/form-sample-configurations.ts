@@ -476,16 +476,6 @@ export class FormSampleConfigurations {
             },
           ],
         },
-        {
-          groupName: 'button',
-          fieldConfigs: [
-            {
-              label: 'Find Prices',
-              name: 'submit',
-              type: 'button',
-            },
-          ],
-        },
       ],
     },
     {
@@ -717,16 +707,6 @@ export class FormSampleConfigurations {
             },
           ],
         },
-        {
-          groupName: 'button',
-          fieldConfigs: [
-            {
-              label: 'Find Prices',
-              name: 'submit',
-              type: 'button',
-            },
-          ],
-        },
       ],
     },
     {
@@ -909,6 +889,308 @@ export class FormSampleConfigurations {
                 },
               ],
               validation: [Validators.required],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      formId: 'insurance_personal_details',
+      formGroups: [
+        {
+          groupName: 'personalDetails',
+          fieldConfigs: [
+            {
+              label: 'Title',
+              name: 'title',
+              type: 'select',
+              options: [
+                {
+                  name: 'mr',
+                  label: 'Mr.',
+                },
+                {
+                  name: 'mrs',
+                  label: 'Mrs.',
+                },
+                {
+                  name: 'miss',
+                  label: 'Miss.',
+                },
+                {
+                  name: 'dr',
+                  label: 'Dr.',
+                },
+                {
+                  name: 'rev',
+                  label: 'Rev.',
+                },
+              ],
+              validation: [Validators.required],
+            },
+            {
+              label: 'First name',
+              name: 'firstName',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Last name',
+              name: 'lastName',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Phone Number',
+              name: 'phoneNumber',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Email',
+              name: 'email',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Address Line 1',
+              name: 'address1',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Address Line 2',
+              name: 'address2',
+              type: 'input',
+            },
+            {
+              label: 'City',
+              name: 'city',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Postcode',
+              name: 'postcode',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Country',
+              name: 'country',
+              type: 'select',
+              validation: [Validators.required],
+              options: [
+                {
+                  label: 'Serbia',
+                  name: 'RS',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      formId: 'event_personal_details',
+      formGroups: [
+        {
+          groupName: 'personalDetails',
+          fieldConfigs: [
+            {
+              label: 'Event country',
+              name: 'eventCountry',
+              type: 'select',
+              options: [
+                {
+                  name: 'DE',
+                  label: 'Germany',
+                },
+                {
+                  name: 'CA',
+                  label: 'Canada',
+                },
+                {
+                  name: 'UK',
+                  label: 'United Kingdom',
+                },
+                {
+                  name: 'FR',
+                  label: 'France',
+                },
+              ],
+              validation: [Validators.required],
+            },
+            {
+              label: 'Event date',
+              name: 'eventData',
+              type: 'datepicker',
+              validation: [
+                Validators.required,
+                CustomFormValidators.compareToCurrentDate('shouldBeGreater'),
+              ],
+            },
+            {
+              label: 'Venue name',
+              name: 'eventVenue',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Venue address',
+              name: 'eventVenueAddress',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Venue city',
+              name: 'eventVenueCity',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'First name',
+              name: 'firstName',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Last name',
+              name: 'lastName',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Email',
+              name: 'email',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Address Line 1',
+              name: 'address1',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Address Line 2',
+              name: 'address2',
+              type: 'input',
+            },
+            {
+              label: 'Postcode',
+              name: 'postcode',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'City',
+              name: 'city',
+              type: 'input',
+              validation: [Validators.required],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      formId: 'travel_personal_details',
+      formGroups: [
+        {
+          groupName: 'personalDetails',
+          fieldConfigs: [
+            {
+              label: 'Title',
+              name: 'title',
+              type: 'select',
+              options: [
+                {
+                  name: 'mr',
+                  label: 'Mr.',
+                },
+                {
+                  name: 'mrs',
+                  label: 'Mrs.',
+                },
+                {
+                  name: 'miss',
+                  label: 'Miss.',
+                },
+                {
+                  name: 'dr',
+                  label: 'Dr.',
+                },
+                {
+                  name: 'rev',
+                  label: 'Rev.',
+                },
+              ],
+              validation: [Validators.required],
+            },
+            {
+              label: 'First name',
+              name: 'firstName',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Last name',
+              name: 'lastName',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Age',
+              name: 'age',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Phone Number',
+              name: 'phoneNumber',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Email',
+              name: 'email',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Address Line 1',
+              name: 'address1',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Address Line 2',
+              name: 'address2',
+              type: 'input',
+            },
+            {
+              label: 'City',
+              name: 'city',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Postcode',
+              name: 'postcode',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Country',
+              name: 'country',
+              type: 'select',
+              validation: [Validators.required],
+              options: [
+                {
+                  label: 'Serbia',
+                  name: 'RS',
+                },
+              ],
             },
           ],
         },
