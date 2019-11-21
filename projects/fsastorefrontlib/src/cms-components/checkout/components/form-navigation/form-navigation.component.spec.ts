@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormNavigationComponent } from './form-navigation.component';
 import { I18nTestingModule } from '@spartacus/core';
-import { BehaviorSubject, of } from 'rxjs';
+import { of } from 'rxjs';
 import { YFormData, FormDataService } from '@fsa/dynamicforms';
 import { ActivatedRoute } from '@angular/router';
 
@@ -10,9 +10,8 @@ const mockedFormData: YFormData = {
 };
 
 export class MockFormDataService {
-  isSubmitted = new BehaviorSubject<boolean>(true);
-  getSubmitted() {
-    of(mockedFormData);
+  getSubmittedFrom() {
+    return of(mockedFormData);
   }
 }
 

@@ -24,7 +24,7 @@ import {
   PaymentMethodModule,
   SpinnerModule,
 } from '@spartacus/storefront';
-import { CatagoryStepGuard } from './guards/category-step-guard';
+import { CategoryStepGuard } from './guards/category-step-guard';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { OccFSCartService } from '../../occ/services/cart/fs-cart.service';
 import { AddOptionsComponent } from './components/add-options/add-options.component';
@@ -52,7 +52,7 @@ import { FormNavigationComponent } from './components/form-navigation/form-navig
 const routes: Routes = [
   {
     path: null,
-    canActivate: [CmsPageGuard, CatagoryStepGuard],
+    canActivate: [CmsPageGuard, CategoryStepGuard],
     data: {
       cxRoute: 'generalInformation',
       pageLabel: 'generalInformationForm',
@@ -70,7 +70,7 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [CmsPageGuard, CatagoryStepGuard, AuthGuard],
+    canActivate: [CmsPageGuard, CategoryStepGuard, AuthGuard],
     data: {
       cxRoute: 'personalDetails',
       pageLabel: 'personal-details',

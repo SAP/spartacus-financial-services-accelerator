@@ -11,7 +11,7 @@ import { FSCheckoutConfigService } from '../../../core/checkout/services';
 @Injectable({
   providedIn: 'root',
 })
-export class CatagoryStepGuard implements CanActivate {
+export class CategoryStepGuard implements CanActivate {
   constructor(
     protected routingConfigService: RoutingConfigService,
     protected router: Router,

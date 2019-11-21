@@ -8,7 +8,7 @@ import { OccFormService } from '../../../occ/services/form/occ-form.service';
 export class FormDataService {
   constructor(protected occYformsService: OccFormService) {}
 
-  submittedForm: BehaviorSubject<YFormData> = new BehaviorSubject<YFormData>(null);
+  submittedForm = new BehaviorSubject<YFormData>(null);
 
   // ***SHOULD BE REMOVED WITH FSA-4419***
   currentForm$: BehaviorSubject<YFormData> = new BehaviorSubject({});
