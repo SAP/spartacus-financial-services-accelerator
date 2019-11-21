@@ -9,7 +9,6 @@
           active: selectedIndex === i
         }"
       >
-        {{ message.readDate }}
         <div class="inbox-header container-fluid">
           <div class="row">
             <div class="col-1 p-4">
@@ -34,7 +33,11 @@
             </div>
             <div
               class="col-md-6 d-none d-md-block text-truncate p-4"
-              (click)="toggleActiveAccordion(i); readMessage(message)"
+              (click)="
+                toggleActiveAccordion(i);
+                readMessage(message);
+                message.readDate = getDate()
+              "
             >
               {{ message.body }}
             </div>
