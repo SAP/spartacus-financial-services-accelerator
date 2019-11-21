@@ -60,15 +60,16 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
   }
 
   navigateNext() {
+    let mainProduct: FSProduct;
     this.subscription.add(
       this.entries$
         .pipe(
           map(entries => {
-            const product: FSProduct = entries[0].product;
-            if (product && product.defaultCategory) {
+            mainProduct = <FSProduct>entries[0].product;
+            if (mainProduct && mainProduct.defaultCategory) {
               this.routingService.go({
                 cxRoute: 'checkoutPersonalDetails',
-                params: { formCode: product.defaultCategory.code },
+                params: { formCode: mainProduct.defaultCategory.code },
               });
             }
           })
