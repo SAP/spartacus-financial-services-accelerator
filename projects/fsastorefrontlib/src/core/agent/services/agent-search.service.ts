@@ -16,8 +16,11 @@ export class AgentSearchService {
     this.occAgentService
       .searchAgents(searchQuery)
       .pipe(
-        map(agents => {
-          this.agentListSource.next(agents);
+        map(searchResults => {
+          this.agentListSource.next(searchResults);
+          if (searchResults.agents) {
+            this.agentDetailsSource.next(searchResults.agents[0]);
+          }
         })
       )
       .subscribe();

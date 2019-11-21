@@ -1,4 +1,13 @@
 <h3>Agent Details</h3>
 <ng-container *ngIf="agent$ | async as agent">
-  {{ agent.firstName }} {{ agent.lastName }}<br />
+  <div class="agent-details">
+    {{ agent.firstName }} {{ agent.lastName }}<br />
+    {{ agent.pointsOfService[0]?.displayName }} <br />
+    {{ agent.pointsOfService[0]?.address?.line1 }} <br />
+    {{ agent.pointsOfService[0]?.address?.town }} <br />
+  </div>
+  Categories:
+  <div class="agent-categories" *ngFor="let category of agent.categories">
+    {{ category.name }}
+  </div>
 </ng-container>

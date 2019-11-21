@@ -6,7 +6,7 @@
       <ng-container *ngFor="let pos of agent.pointsOfService">
         {{ pos.address.line1 }} - {{ pos.formattedDistance }}<br />
       </ng-container>
-      CITY
+      {{ agent.pointsOfService[0]?.address?.town }}
       <br /><br />
     </div>
   </ng-container>

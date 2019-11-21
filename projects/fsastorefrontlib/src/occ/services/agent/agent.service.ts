@@ -27,7 +27,7 @@ export class OccAgentService {
     const params = new HttpParams({ fromString: queryParam });
 
     return this.http
-      .get(url, { params: params })
+      .get<any>(url, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
