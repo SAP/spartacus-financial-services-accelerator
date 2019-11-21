@@ -7,6 +7,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 import { BehaviorSubject } from 'rxjs';
 import { FormDataService } from '../../services';
+import { YFormData } from '../../models';
 
 @Directive({
   // tslint:disable
@@ -31,8 +32,14 @@ export class MockFormBuilderService {
   }
 }
 
+const formData: YFormData = {
+
+} 
+
 export class MockFormDataService {
-  isSubmitted = new BehaviorSubject<boolean>(true);
+  getSubmittedForm() {
+    return new BehaviorSubject(formData);
+  } 
 }
 
 describe('DynamicFormComponent', () => {

@@ -32,7 +32,7 @@ export class FormNavigationComponent implements OnInit {
 
   next() {
     this.formService.submit();
-    this.formService.getSubmitted().subscribe(formData => {
+    this.formService.getSubmittedForm().subscribe(formData => {
       if (formData && formData.id) {
         this.activatedRoute.params.subscribe(params => {
           if (this.checkoutStepUrlNext.includes('categoryCode')) {
