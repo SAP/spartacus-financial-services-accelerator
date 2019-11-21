@@ -79,7 +79,6 @@ export class InboxService {
   }
 
   getMessages(messageGroup): Observable<any> {
-    this.selectedIndex = -1;
     return this.occInboxService.getSiteMessagesForUserAndGroup(
       this.inboxData.userId,
       messageGroup,
