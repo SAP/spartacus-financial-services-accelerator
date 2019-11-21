@@ -59,7 +59,7 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     this.cartService.removeEntry(item);
   }
 
-  next() {
+  navigateNext() {
     this.subscription.add(
       this.entries$
         .pipe(

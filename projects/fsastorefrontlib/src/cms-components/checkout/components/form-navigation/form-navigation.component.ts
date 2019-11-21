@@ -35,7 +35,7 @@ export class FormNavigationComponent implements OnInit {
     this.formService.getSubmittedForm().subscribe(formData => {
       if (formData && formData.id) {
         this.activatedRoute.params.subscribe(params => {
-          if (this.checkoutStepUrlNext.includes('categoryCode')) {
+          if (this.checkoutStepUrlNext.indexOf('categoryCode') !== -1) {
             this.routingService.go({
               cxRoute: 'category',
               params: { code: params['formCode'] },
