@@ -123,7 +123,7 @@ export const fscommon = {
     agentLocator: {
       contact: 'Contact',
       categories: 'Categories',
-      search: 'Search'
+      searchBox: 'Search agent or insurance type',
     },
   },
 };

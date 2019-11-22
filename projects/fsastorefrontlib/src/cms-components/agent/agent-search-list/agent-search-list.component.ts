@@ -27,7 +27,6 @@ export class AgentSearchListComponent {
     if (queryParams.query) {
       this.searchQuery = queryParams.query;
     }
-
     this.agentSearchService.search(this.searchQuery, 0);
   }
 

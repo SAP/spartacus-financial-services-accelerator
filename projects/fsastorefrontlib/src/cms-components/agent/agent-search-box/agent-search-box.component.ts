@@ -1,14 +1,28 @@
 import { Component } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
+import { FormControl } from '@angular/forms';
+import { StoreFinderSearchComponent } from '@spartacus/storefront';
 
 @Component({
   selector: 'fsa-agent-search-box',
   templateUrl: './agent-search-box.component.html',
 })
-export class AgentSearchBoxComponent {
-  constructor(protected routingService: RoutingService) {}
+export class AgentSearchBoxComponent extends StoreFinderSearchComponent {
+  constructor(protected fsRoutingService: RoutingService) {
+    super(fsRoutingService);
+  }
 
   findAgents(searchQuery: string) {
-    this.routingService.go(['agent-locator'], { query: searchQuery });
+    this.fsRoutingService.go(['agent-locator'], { query: searchQuery });
+  }
+
+  onKey(event: any) {
+    if (
+      this.searchBox.value &&
+      this.searchBox.value.length &&
+      event.key === 'Enter'
+    ) {
+      this.findAgents(this.searchBox.value);
+    }
   }
 }

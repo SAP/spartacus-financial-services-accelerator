@@ -9,11 +9,13 @@ import {
   MediaModule,
   StoreFinderModule,
   ListNavigationModule,
+  IconModule,
 } from '@spartacus/storefront';
 import { RouterModule } from '@angular/router';
 import { AgentSearchBoxComponent } from './agent-search-box/agent-search-box.component';
 import { AgentSearchListComponent } from './agent-search-list/agent-search-list.component';
 import { AgentSearchDetailsComponent } from './agent-search-details/agent-search-details.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -21,8 +23,10 @@ import { AgentSearchDetailsComponent } from './agent-search-details/agent-search
     AccordionModule,
     MediaModule,
     I18nModule,
+    IconModule,
     RouterModule,
     StoreFinderModule,
+    ReactiveFormsModule,
     ListNavigationModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
