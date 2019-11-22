@@ -4,14 +4,17 @@
     <div class="agent-list-item" (click)="showDetails(agent)">
       {{ agent.firstName }} {{ agent.lastName }}<br />
       <ng-container *ngFor="let pos of agent.pointsOfService">
-        {{ pos.address.line1 }} - {{ pos.formattedDistance }}<br />
+        {{pos.displayName}} {{ pos.address?.line1 }} - {{ pos.formattedDistance }}<br />
       </ng-container>
       {{ agent.pointsOfService[0]?.address?.town }}
       <br /><br />
     </div>
   </ng-container>
-  <cx-pagination
-    [pagination]="result.pagination"
-    (viewPageEvent)="pageChange($event)"
-  ></cx-pagination>
+ <ng-container *ngIf="result.pagination">
+    <cx-pagination *ngIf="result.pagination"
+      [pagination]="result.pagination"
+      (viewPageEvent)="pageChange($event)"
+    ></cx-pagination>
+    Total results: {{result.pagination.totalCount}}
+ </ng-container>
 </ng-container>

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AgentSearchBoxComponent } from './agent-search-box.component';
-import { RoutingService } from '@spartacus/core';
+import { RoutingService, I18nTestingModule } from '@spartacus/core';
 import { Type } from '@angular/core';
 
 const query = 'autoAgent';
@@ -12,6 +12,9 @@ describe('AgentSearchBoxComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        I18nTestingModule
+      ],
       providers: [
         {
           provide: RoutingService,

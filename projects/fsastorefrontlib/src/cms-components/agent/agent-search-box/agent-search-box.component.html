@@ -1,4 +1,6 @@
 <div class="searchbox">
   <input #searchInput />
-  <button (click)="findAgents(searchInput.value)">Search</button>
+  <button (click)="findAgents(searchInput.value)">
+      {{ 'fscommon.agentLocator.search' | cxTranslate }}
+  </button>
 </div>

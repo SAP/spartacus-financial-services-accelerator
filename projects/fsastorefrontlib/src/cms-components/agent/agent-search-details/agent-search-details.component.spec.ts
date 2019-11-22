@@ -3,6 +3,7 @@ import { AgentSearchDetailsComponent } from './agent-search-details.component';
 import { of } from 'rxjs';
 import { AgentSearchService } from 'projects/fsastorefrontlib/src/core/agent';
 import { Component, Input } from '@angular/core';
+import { I18nTestingModule } from '@spartacus/core';
 
 const agent = {};
 
@@ -38,6 +39,7 @@ describe('AgentSearchDetailsComponent', () => {
   beforeEach(async(() => {
     mockSearchService = new MockAgentSearchService();
     TestBed.configureTestingModule({
+      imports: [I18nTestingModule],
       providers: [
         {
           provide: AgentSearchService,

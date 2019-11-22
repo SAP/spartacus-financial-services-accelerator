@@ -120,5 +120,10 @@ export const fscommon = {
       totalNumberOfResults: 'Products found',
       youSeachedFor: 'You have searched for',
     },
+    agentLocator: {
+      contact: 'Contact',
+      categories: 'Categories',
+      search: 'Search'
+    },
   },
 };
