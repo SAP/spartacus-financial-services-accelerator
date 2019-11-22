@@ -10,4 +10,8 @@
       <br /><br />
     </div>
   </ng-container>
+    <cx-pagination
+    [pagination]="result.pagination"
+    (viewPageEvent)="pageChange($event)"
+    ></cx-pagination>
 </ng-container>

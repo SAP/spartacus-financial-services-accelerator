@@ -1,17 +1,24 @@
 <h3>Agent Details</h3>
 <ng-container *ngIf="agent$ | async as agent">
-  <div class="agent-details">
-    {{ agent.firstName }} {{ agent.lastName }}<br />
-    {{ agent.pointsOfService[0]?.displayName }} <br />
-    {{ agent.pointsOfService[0]?.address?.line1 }} <br />
-    {{ agent.pointsOfService[0]?.address?.town }} <br />
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6">
+        <div class="agent-details">
+            {{ agent.firstName }} {{ agent.lastName }}<br />
+            {{ agent.pointsOfService[0]?.displayName }} <br />
+            {{ agent.pointsOfService[0]?.address?.line1 }} <br />
+            {{ agent.pointsOfService[0]?.address?.town }} <br />
+          </div>
+          Categories:
+          <div class="agent-categories" *ngFor="let category of agent.categories">
+            {{ category.name }}
+          </div>
+        </div>
+        <div class="col-6">
+            <cx-store-finder-map
+            [locations]="agent.pointsOfService"
+          ></cx-store-finder-map>
+        </div>
+      </div>
   </div>
-  Categories:
-  <div class="agent-categories" *ngFor="let category of agent.categories">
-    {{ category.name }}
-  </div>
-
-  <cx-store-finder-map
-    [locations]="agent.pointsOfService"
-  ></cx-store-finder-map>
 </ng-container>

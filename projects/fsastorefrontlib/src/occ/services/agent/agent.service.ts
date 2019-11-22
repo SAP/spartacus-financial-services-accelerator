@@ -11,6 +11,8 @@ export class OccAgentService {
     protected occEndpointService: OccEndpointsService
   ) {}
 
+  private PAGE_SIZE = 2;
+
   public getAgentsByCategory(category: string): Observable<any> {
     const url = this.getAgentsEndpoint();
     const categoryParam = 'categoryCode=' + category + '&fields=DEFAULT';
@@ -21,9 +23,9 @@ export class OccAgentService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public searchAgents(searhQuery: string) {
+  public searchAgents(searhQuery: string, pageNumber: number) {
     const url = this.getAgentsEndpoint() + '/search';
-    const queryParam = 'queryParam=' + searhQuery + '&fields=DEFAULT';
+    const queryParam = 'queryParam=' + searhQuery + '&&page=' + pageNumber.toString() + '&pageSize=' + this.PAGE_SIZE + '&fields=DEFAULT';
     const params = new HttpParams({ fromString: queryParam });
 
     return this.http

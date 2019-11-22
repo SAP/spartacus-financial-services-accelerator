@@ -5,8 +5,8 @@ import { CmsConfig, ConfigModule, I18nModule } from '@spartacus/core';
 import { OccAgentService } from '../../occ/services/agent/agent.service';
 import { FindAgentNavigationComponent } from './find-agent-navigation/find-agent-navigation.component';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
-import { MediaModule, StoreFinderModule } from '@spartacus/storefront';
-import { RouterModule } from '@angular/router';
+import { MediaModule, StoreFinderModule, ListNavigationModule, PageLayoutComponent, CmsPageGuard } from '@spartacus/storefront';
+import { RouterModule, Routes } from '@angular/router';
 import { AgentSearchBoxComponent } from './agent-search-box/agent-search-box.component';
 import { AgentSearchListComponent } from './agent-search-list/agent-search-list.component';
 import { AgentSearchDetailsComponent } from './agent-search-details/agent-search-details.component';
@@ -19,6 +19,7 @@ import { AgentSearchDetailsComponent } from './agent-search-details/agent-search
     I18nModule,
     RouterModule,
     StoreFinderModule,
+    ListNavigationModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         CMSAgentRootComponent: {

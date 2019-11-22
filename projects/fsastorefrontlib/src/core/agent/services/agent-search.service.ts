@@ -12,9 +12,9 @@ export class AgentSearchService {
   agentListSource = new BehaviorSubject<any>(null);
   agentDetailsSource = new BehaviorSubject<any>(null);
 
-  search(searchQuery: string) {
+  search(searchQuery: string, pageNumber?: number) {
     this.occAgentService
-      .searchAgents(searchQuery)
+      .searchAgents(searchQuery, pageNumber)
       .pipe(
         map(searchResults => {
           this.agentListSource.next(searchResults);
