@@ -4,6 +4,7 @@ import {
   FormDataService,
   FormDefinition,
   YFormDefinition,
+  YFormData,
 } from '@fsa/dynamicforms';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
@@ -29,8 +30,8 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
   formConfig: FormDefinition;
   formDefintion$: Observable<YFormDefinition> = of({});
   component$: Observable<CMSFormSubmitComponent>;
+  formData$: Observable<YFormData>;
   private subscription = new Subscription();
-  private formId: string;
 
   ngOnInit() {
     this.subscription.add(
@@ -70,36 +71,19 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
           })
         )
         .subscribe()
-        
     );
-this.subscription.add(
-  this.component$.pipe(
-    mergeMap(componentData => {
-      if(componentData) {        
-        return this.formDataService.getFormData(componentData.formId).pipe(
-          map(data => {
-            console.log(data);
-          })
-        )
-      }
-    })
-  ).subscribe()
-);
-    // );
-    // this.component$.subscribe( componentData => {
-    //   if (componentData && componentData.formId) {
-    //     this.formDataService.getFormData(componentData.formId).subscribe( data => {
-    //       // console.log(JSON.parse(data.content));
-    //       this.mapDataToFormControls(JSON.parse(data.content))
-    //     });
-    //   }
-    // });
-    // if (this.formId) {
-    //   this.formDataService.getFormData(this.formId).subscribe( data => {
-    //     // console.log(JSON.parse(data.content));
-    //     this.mapDataToFormControls(JSON.parse(data.content))
-    //   });
-    // }
+    this.subscription.add(
+      this.component$.pipe(
+        map(componentData => {
+          if (componentData) {
+            const formDataId =  sessionStorage.getItem(componentData.formId);
+            if (formDataId) {
+              this.formData$ = this.formDataService.getFormData(formDataId);
+            }
+          }
+        })
+      ).subscribe()
+    );
   }
 
   ngOnDestroy(): void {

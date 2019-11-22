@@ -4,7 +4,8 @@ import { RoutingService } from '@spartacus/core';
 import { FormDefinition } from '../../models/field-config.interface';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 import { FormDataService } from '../../services/data/form-data.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { YFormData } from 'dynamicforms/src/core';
 
 @Component({
   selector: 'cx-form-component',
@@ -28,6 +29,8 @@ export class FormComponent implements OnDestroy {
   formConfig: FormDefinition;
   @Input()
   applicationId: string;
+  @Input()
+  formData: Observable<YFormData>;
 
   submit(formData: { [name: string]: any }) {
     if (this.form.valid) {
