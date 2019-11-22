@@ -23,7 +23,7 @@ export class FormComponent implements OnDestroy {
   @Input()
   formCategoryCode: string;
   @Input()
-  formId: string;
+  formName: string;
   @Input()
   formConfig: FormDefinition;
   @Input()
@@ -33,20 +33,20 @@ export class FormComponent implements OnDestroy {
     if (this.form.valid) {
       this.subscription.add(
         this.formDataService
-          .saveFormData(this.formId, this.applicationId, formData)
+          .saveFormData(this.formName, this.applicationId, formData)
           .subscribe(response => {
             this.formDataService.currentForm$.next({
               id: response.id,
-              formDefinitionId: this.formId,
+              formDefinitionId: this.formName,
               content: response.content,
               categoryCode: this.formCategoryCode,
             });
             this.navigateNext();
+            sessionStorage.setItem( this.formName, response.id );
           })
       );
     }
   }
-
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();

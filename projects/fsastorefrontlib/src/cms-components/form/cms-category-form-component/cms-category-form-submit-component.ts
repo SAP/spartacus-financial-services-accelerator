@@ -29,6 +29,7 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
   formLoaded$: Observable<boolean>;
   component$: Observable<CMSFormSubmitComponent>;
   private subscription = new Subscription();
+  private formId: string;
 
   ngOnInit() {
     this.subscription.add(
@@ -69,7 +70,36 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
           })
         )
         .subscribe()
+        
     );
+this.subscription.add(
+  this.component$.pipe(
+    mergeMap(componentData => {
+      if(componentData) {        
+        return this.formDataService.getFormData(componentData.formId).pipe(
+          map(data => {
+            console.log(data);
+          })
+        )
+      }
+    })
+  ).subscribe()
+);
+    // );
+    // this.component$.subscribe( componentData => {
+    //   if (componentData && componentData.formId) {
+    //     this.formDataService.getFormData(componentData.formId).subscribe( data => {
+    //       // console.log(JSON.parse(data.content));
+    //       this.mapDataToFormControls(JSON.parse(data.content))
+    //     });
+    //   }
+    // });
+    // if (this.formId) {
+    //   this.formDataService.getFormData(this.formId).subscribe( data => {
+    //     // console.log(JSON.parse(data.content));
+    //     this.mapDataToFormControls(JSON.parse(data.content))
+    //   });
+    // }
   }
 
   ngOnDestroy(): void {

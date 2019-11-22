@@ -5,6 +5,7 @@ import {
   FormDefinition,
 } from '../../models/field-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
+import { FormDataService } from '../../services/data/form-data.service';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -12,11 +13,13 @@ import { FormBuilderService } from '../../services/builder/form-builder.service'
   templateUrl: './dynamic-form.component.html',
 })
 export class DynamicFormComponent implements OnInit {
+  private formId: string;
+  private formData = {};
   @Input()
   config: FormDefinition;
   @Output()
   submit: EventEmitter<any> = new EventEmitter<any>();
-  form: FormGroup;
+  form: any;
 
   allInputs: Array<FieldConfig> = [];
 
@@ -30,7 +33,10 @@ export class DynamicFormComponent implements OnInit {
     return this.form.value;
   }
 
-  constructor(private formService: FormBuilderService) {}
+  constructor(
+    private formService: FormBuilderService,
+    protected formDataService: FormDataService
+  ) {}
 
   ngOnInit() {
     if (this.config) {
@@ -40,6 +46,31 @@ export class DynamicFormComponent implements OnInit {
           this.allInputs.push(inputField);
         });
       });
+    }
+    this.formId =  sessionStorage.getItem( this.config.formId );
+    if (this.formId) {
+      this.formDataService.getFormData(this.formId).subscribe( data => {
+        // console.log(JSON.parse(data.content));
+        this.mapDataToFormControls(JSON.parse(data.content))
+      });
+    }
+    this.form.updateValueAndValidity();
+  }
+  mapDataToFormControls(formData) {
+    console.log(formData);
+    for (let groupName of Object.keys(formData)) {
+      let groupData = formData[groupName];
+      // console.log(groupData)
+      for (let controlName of Object.keys(groupData)) {
+        // console.log(groupData[controlName]);
+        // console.log(this.form.controls[groupName].controls[controlName]);
+        this.form.controls[groupName].controls[controlName].setValue(groupData[controlName], {onlySelf: false, emitEvent: true});
+        // console.log( this.form.controls[groupName].controls[controlName].value );
+      }
+
+      // console.log(this.form.controls[groupName].controls);
+      // console.log(groupName);
+      // console.log(groupData);
     }
   }
 
