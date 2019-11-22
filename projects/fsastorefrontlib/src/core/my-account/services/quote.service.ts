@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
-import { AuthService } from '@spartacus/core';
+import { AuthService, CartActions } from '@spartacus/core';
 import { QuoteDataService } from './quote-data.service';
 
 @Injectable()
@@ -49,6 +49,15 @@ export class QuoteService {
   loadQuotes() {
     this.store.dispatch(
       new fromAction.LoadQuotes({
+        userId: this.quoteData.userId,
+      })
+    );
+  }
+
+  retrieveQuote(quote: any) {
+    this.store.dispatch(
+      new CartActions.LoadCart({
+        cartId: quote.cartCode,
         userId: this.quoteData.userId,
       })
     );
