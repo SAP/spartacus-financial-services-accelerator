@@ -9,10 +9,8 @@ import {
   MediaModule,
   StoreFinderModule,
   ListNavigationModule,
-  PageLayoutComponent,
-  CmsPageGuard,
 } from '@spartacus/storefront';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { AgentSearchBoxComponent } from './agent-search-box/agent-search-box.component';
 import { AgentSearchListComponent } from './agent-search-list/agent-search-list.component';
 import { AgentSearchDetailsComponent } from './agent-search-details/agent-search-details.component';

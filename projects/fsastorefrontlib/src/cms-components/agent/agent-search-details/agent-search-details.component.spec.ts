@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AgentSearchDetailsComponent } from './agent-search-details.component';
 import { of } from 'rxjs';
 import { AgentSearchService } from 'projects/fsastorefrontlib/src/core/agent';
+import { Component, Input } from '@angular/core';
 
 const agent = {};
 
@@ -9,6 +10,24 @@ class MockAgentSearchService {
   getAgent() {
     of(agent);
   }
+}
+
+@Component({
+  // tslint:disable
+  selector: 'cx-media',
+  template: '',
+})
+class MockMediaComponent {
+  @Input() container;
+}
+
+@Component({
+  // tslint:disable
+  selector: 'cx-store-finder-map',
+  template: '',
+})
+class MockMapComponent {
+  @Input() locations: any;
 }
 
 describe('AgentSearchDetailsComponent', () => {
@@ -25,7 +44,11 @@ describe('AgentSearchDetailsComponent', () => {
           useValue: mockSearchService,
         },
       ],
-      declarations: [AgentSearchDetailsComponent],
+      declarations: [
+        AgentSearchDetailsComponent,
+        MockMediaComponent,
+        MockMapComponent,
+      ],
     }).compileComponents();
   }));
 
