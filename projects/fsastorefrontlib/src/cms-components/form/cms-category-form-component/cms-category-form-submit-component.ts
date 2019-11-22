@@ -73,16 +73,18 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
         .subscribe()
     );
     this.subscription.add(
-      this.component$.pipe(
-        map(componentData => {
-          if (componentData) {
-            const formDataId =  sessionStorage.getItem(componentData.formId);
-            if (formDataId) {
-              this.formData$ = this.formDataService.getFormData(formDataId);
+      this.component$
+        .pipe(
+          map(componentData => {
+            if (componentData) {
+              const formDataId = sessionStorage.getItem(componentData.formId);
+              if (formDataId) {
+                this.formData$ = this.formDataService.getFormData(formDataId);
+              }
             }
-          }
-        })
-      ).subscribe()
+          })
+        )
+        .subscribe()
     );
   }
 

@@ -45,9 +45,8 @@ export class FormComponent implements OnDestroy {
               categoryCode: this.formCategoryCode,
             });
 
-            sessionStorage.setItem( this.formName, response.id );
+            sessionStorage.setItem(this.formName, response.id);
             this.formDataService.setSubmittedForm(response);
-
           })
       );
     }

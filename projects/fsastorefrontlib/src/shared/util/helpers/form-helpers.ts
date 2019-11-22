@@ -7,15 +7,9 @@ export class FormHelpers {
       if (control.parent) {
         controlNameArray.forEach((name, index) => {
           const targetControl = control.parent.controls[name];
-          // control.value > index
-          //   ? targetControl.enable()
-          //   : targetControl.disable();
-            if (control.value > index) {
-              targetControl.enable();
-              console.log(targetControl);
-            } else {
-              targetControl.disable();
-            }
+          control.value > index
+            ? targetControl.enable()
+            : targetControl.disable();
         });
       }
       return null;

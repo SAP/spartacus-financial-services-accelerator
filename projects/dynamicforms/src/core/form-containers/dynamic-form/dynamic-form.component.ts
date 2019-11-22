@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormArray } from '@angular/forms';
 import {
   FieldConfig,
   FormDefinition,
@@ -24,9 +24,8 @@ export class DynamicFormComponent implements OnInit {
   @Output()
   submit: EventEmitter<any> = new EventEmitter<any>();
 
-  form: any;
+  form: FormGroup;
   subscription = new Subscription();
-
   allInputs: Array<FieldConfig> = [];
 
   get changes() {
@@ -48,7 +47,7 @@ export class DynamicFormComponent implements OnInit {
     this.createFormDefinition();
     this.addSubmitEvent();
     if (this.formData) {
-      this.formData.subscribe( formData => {
+      this.formData.subscribe(formData => {
         this.mapDataToFormControls(JSON.parse(formData.content));
       });
     }
@@ -68,7 +67,10 @@ export class DynamicFormComponent implements OnInit {
     for (const groupName of Object.keys(formData)) {
       const groupData = formData[groupName];
       for (const controlName of Object.keys(groupData)) {
-        this.form.controls[groupName].controls[controlName].setValue(groupData[controlName]);
+        this.form
+          .get(groupName)
+          .get(controlName)
+          .setValue(groupData[controlName]);
       }
     }
   }
