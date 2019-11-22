@@ -12,7 +12,6 @@ export class FormHelpers {
           //   : targetControl.disable();
             if (control.value > index) {
               targetControl.enable();
-            
               console.log(targetControl);
             } else {
               targetControl.disable();
