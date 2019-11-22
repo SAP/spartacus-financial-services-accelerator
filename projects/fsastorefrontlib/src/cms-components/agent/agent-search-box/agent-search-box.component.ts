@@ -9,7 +9,8 @@ import { RoutingService } from '@spartacus/core';
 export class AgentSearchBoxComponent implements OnInit {
   constructor(
     protected agentSearchService: AgentSearchService,
-    protected routingService: RoutingService) {}
+    protected routingService: RoutingService
+  ) {}
 
   ngOnInit() {}
 

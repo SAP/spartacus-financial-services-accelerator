@@ -25,7 +25,14 @@ export class OccAgentService {
 
   public searchAgents(searhQuery: string, pageNumber: number) {
     const url = this.getAgentsEndpoint() + '/search';
-    const queryParam = 'queryParam=' + searhQuery + '&&page=' + pageNumber.toString() + '&pageSize=' + this.PAGE_SIZE + '&fields=DEFAULT';
+    const queryParam =
+      'queryParam=' +
+      searhQuery +
+      '&&page=' +
+      pageNumber.toString() +
+      '&pageSize=' +
+      this.PAGE_SIZE +
+      '&fields=DEFAULT';
     const params = new HttpParams({ fromString: queryParam });
 
     return this.http

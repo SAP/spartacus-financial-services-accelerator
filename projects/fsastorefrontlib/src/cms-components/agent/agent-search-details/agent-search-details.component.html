@@ -4,21 +4,26 @@
     <div class="row">
       <div class="col-6">
         <div class="agent-details">
-            {{ agent.firstName }} {{ agent.lastName }}<br />
-            {{ agent.pointsOfService[0]?.displayName }} <br />
-            {{ agent.pointsOfService[0]?.address?.line1 }} <br />
-            {{ agent.pointsOfService[0]?.address?.town }} <br />
-          </div>
-          Categories:
-          <div class="agent-categories" *ngFor="let category of agent.categories">
-            {{ category.name }}
-          </div>
+          <cx-media
+            class="cx-product-image-container"
+            [container]="agent.thumbnail"
+            format="thumbnail"
+          ></cx-media>
+          {{ agent.firstName }} {{ agent.lastName }}<br />
+          {{ agent.pointsOfService[0]?.displayName }} <br />
+          {{ agent.pointsOfService[0]?.address?.line1 }} <br />
+          {{ agent.pointsOfService[0]?.address?.town }} <br />
         </div>
-        <div class="col-6">
-            <cx-store-finder-map
-            [locations]="agent.pointsOfService"
-          ></cx-store-finder-map>
+        Categories:
+        <div class="agent-categories" *ngFor="let category of agent.categories">
+          {{ category.name }}
         </div>
       </div>
+      <div class="col-6">
+        <cx-store-finder-map
+          [locations]="agent.pointsOfService"
+        ></cx-store-finder-map>
+      </div>
+    </div>
   </div>
 </ng-container>

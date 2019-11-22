@@ -15,7 +15,7 @@ export class AgentSearchListComponent {
   constructor(
     private agentSearchService: AgentSearchService,
     private route: ActivatedRoute
-    ) {}
+  ) {}
 
   ngOnInit() {
     this.subscription = this.route.queryParams.subscribe(params =>
