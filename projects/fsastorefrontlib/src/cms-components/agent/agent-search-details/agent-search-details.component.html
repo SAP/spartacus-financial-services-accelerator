@@ -10,4 +10,8 @@
   <div class="agent-categories" *ngFor="let category of agent.categories">
     {{ category.name }}
   </div>
+
+  <cx-store-finder-map
+    [locations]="agent.pointsOfService"
+  ></cx-store-finder-map>
 </ng-container>
