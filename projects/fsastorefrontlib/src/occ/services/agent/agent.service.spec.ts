@@ -21,6 +21,9 @@ const MockOccModuleConfig: OccConfig = {
   },
 };
 
+const searchQuery = 'auto';
+const pageNumber = 1;
+
 describe('OccAgentService', () => {
   let service: OccAgentService;
   let httpMock: HttpTestingController;
@@ -44,6 +47,18 @@ describe('OccAgentService', () => {
         return (
           req.url === '/agents' &&
           req.params.append('categoryCode', category) &&
+          req.method === 'GET'
+        );
+      }, `GET method and url`);
+    }));
+  });
+
+  describe('searchAgents', () => {
+    it('search Agents By Query String', async(() => {
+      service.searchAgents(searchQuery, pageNumber).subscribe(res => {});
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url === '/agents/search' &&
           req.method === 'GET'
         );
       }, `GET method and url`);
