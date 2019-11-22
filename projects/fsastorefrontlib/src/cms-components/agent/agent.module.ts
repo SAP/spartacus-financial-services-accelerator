@@ -36,7 +36,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         FindAgentNavigationTypeFlex: {
           component: FindAgentNavigationComponent,
         },
-        AgentSearchFlex: {
+        AgentSearchBoxFlex: {
           component: AgentSearchBoxComponent,
         },
         AgentSearchListFlex: {
