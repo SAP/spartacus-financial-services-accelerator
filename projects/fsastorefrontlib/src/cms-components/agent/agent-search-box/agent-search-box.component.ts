@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
-import { FormControl } from '@angular/forms';
 import { StoreFinderSearchComponent } from '@spartacus/storefront';
 
 @Component({
