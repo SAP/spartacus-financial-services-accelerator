@@ -100,7 +100,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
       uid: messageUid,
     };
     this.inboxService.selectedMessages(messageObj);
-    this.inboxService.getMessagesAction();
+    if (this.checkBoxStatus === true) {
+      this.inboxService.getMessagesAction();
+    }
   }
 
   mainCheckboxSwitch() {

@@ -29,16 +29,16 @@ export class InboxService {
   accordionStateSource = new BehaviorSubject<number>(-1);
   accordionState = this.accordionStateSource.asObservable();
 
-  messagesCollection: Message[] = [];
-  readMessagesUidList: string[] = [];
-
-  searchConfig: FSSearchConfig = {};
+  mainCheckboxSource = new BehaviorSubject<boolean>(false);
+  mainCheckBox = this.mainCheckboxSource.asObservable();
 
   messagesSource = new BehaviorSubject<boolean>(false);
   messages = this.messagesSource.asObservable();
 
-  mainCheckboxSource = new BehaviorSubject<boolean>(false);
-  mainCheckBox = this.mainCheckboxSource.asObservable();
+  messagesCollection: Message[] = [];
+  readMessagesUidList: string[] = [];
+
+  searchConfig: FSSearchConfig = {};
 
   initInbox() {
     this.checkAllMessagesSource.next(false);

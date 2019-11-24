@@ -37,7 +37,7 @@ export class InboxComponent implements OnInit, OnDestroy {
   mobileGroupTitle: string;
   activeTabIndex = 0;
   shouldShow = false;
-  readState: boolean;
+  readState = false;
 
   tabs: string[];
   mainCheckboxChecked = false;
@@ -99,13 +99,14 @@ export class InboxComponent implements OnInit, OnDestroy {
     this.mainCheckboxChecked === true ?
       this.inboxService.checkAllMessagesSource.next(false) : this.inboxService.checkAllMessagesSource.next(true);
     this.subscription.add(
-      this.inboxService.checkAllMessages.subscribe(data => {
-        data === true ? this.childCheckboxes = true : this.childCheckboxes = false;
+      this.inboxService.checkAllMessages.subscribe(checked => {
+        checked === true ? this.childCheckboxes = true : this.childCheckboxes = false;
       })
     );
   }
 
   changeMessagesReadState() {
+    this.readState = !this.readState;
     const messagesUidList = this.inboxService.getUidsFromMessagesCollection();
     if (messagesUidList.length === 0) {
       return;
