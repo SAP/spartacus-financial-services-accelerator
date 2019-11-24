@@ -55,15 +55,17 @@ export class InboxComponent implements OnInit, OnDestroy {
         }
       })
     );
-    this.subscription.add(
-      this.inboxService.checkAllMessages.subscribe(data => this.mainCheckboxChecked = data)
-    );
+
     this.subscription.add(
       this.componentData.data$.subscribe(
         data => (this.tabs = data.tabComponents.split(' '))
       )
     );
+
     this.initialTab$ = this.cmsService.getComponentData(this.tabs[0]); // taking the first tab as initial/active on component load
+    this.subscription.add(
+      this.inboxService.checkAllMessages.subscribe(data => this.mainCheckboxChecked = data)
+    );
 
     this.subscription.add(
       this.inboxService.activeMessageGroupAndTitle
