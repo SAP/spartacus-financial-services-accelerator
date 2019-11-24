@@ -15,8 +15,9 @@
               <label class="checkbox-label">
                 <input
                   type="checkbox"
-                  [checked]="changeCheckboxes$ | async"
+                  [checked]="checkBoxStatus"
                   (change)="changeMessageState(message.readDate, message.uid)"
+                  (click)="mainCheckboxSwitch()"
                 />
                 <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
               </label>

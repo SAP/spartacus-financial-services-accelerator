@@ -65,7 +65,11 @@
   <div class="mobile-heading row d-md-none">
     <div class="col-2">
       <label class="checkbox-label">
-        <input type="checkbox" [checked]="mainCheckboxChecked" />
+        <input
+          type="checkbox"
+          [checked]="mainCheckboxChecked"
+          (click)="checkAllCheckboxes()"
+        />
         <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
       </label>
     </div>
@@ -95,5 +99,9 @@
   </div>
 </div>
 <ng-container *ngIf="initialGroupName">
-  <fsa-messages-inbox [initialGroup]="initialGroupName"></fsa-messages-inbox>
+  <fsa-messages-inbox
+    [initialGroup]="initialGroupName"
+    [checkBoxStatus]="childCheckboxes"
+    (mainCheckBoxState)="fromChildCheckbox($event)"
+  ></fsa-messages-inbox>
 </ng-container>

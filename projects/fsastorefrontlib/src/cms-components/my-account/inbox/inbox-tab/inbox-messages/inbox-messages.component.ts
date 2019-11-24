@@ -4,6 +4,8 @@ import {
   Input,
   OnDestroy,
   OnInit,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { take, mergeMap, map } from 'rxjs/operators';
@@ -27,6 +29,8 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   messageGroup: string;
 
   @Input() initialGroup: string;
+  @Input() checkBoxStatus: boolean;
+  @Output() mainCheckBoxState = new EventEmitter<boolean>();
 
   ngOnInit() {
     this.loadCurrentMessageGroup();
@@ -99,13 +103,14 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     this.inboxService.getMessagesAction();
   }
 
+  mainCheckboxSwitch() {
+    this.mainCheckBoxState.emit(false);
+  }
+
   getDate() {
     return new Date();
   }
 
-  getReadMessages(): string[] {
-    return this.inboxService.readMessagesUidList;
-  }
 
   ngOnDestroy() {
     this.inboxService.setTitleAndMessageGroup(null, null);

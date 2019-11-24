@@ -4,7 +4,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { CmsService } from '@spartacus/core';
+import { CmsService, AuthService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
@@ -13,6 +13,7 @@ import {
   CmsInboxComponent,
   CmsInboxTabComponent,
 } from '../../../occ/occ-models/cms-component.models';
+import { InboxDataService } from '../../../core/my-account/services/inbox-data.service';
 
 @Component({
   selector: 'fsa-inbox',
@@ -23,7 +24,9 @@ export class InboxComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CmsInboxComponent>,
     protected cmsService: CmsService,
-    protected inboxService: InboxService
+    protected inboxService: InboxService,
+    private inboxData: InboxDataService,
+    protected auth: AuthService,
   ) { }
 
   subscription = new Subscription();
@@ -37,13 +40,24 @@ export class InboxComponent implements OnInit, OnDestroy {
   readState: boolean;
 
   tabs: string[];
-  mainCheckboxChecked: boolean;
+  mainCheckboxChecked = false;
+  childCheckboxes = false;
 
   subjectSortOrder = 'desc';
   contentSortOrder = 'desc';
   sentSortOrder = 'desc';
 
   ngOnInit() {
+    this.subscription.add(
+      this.auth.getUserToken().subscribe(userData => {
+        if (this.inboxData.userId !== userData.userId) {
+          this.inboxData.userId = userData.userId;
+        }
+      })
+    );
+    this.subscription.add(
+      this.inboxService.checkAllMessages.subscribe(data => this.mainCheckboxChecked = data)
+    );
     this.subscription.add(
       this.componentData.data$.subscribe(
         data => (this.tabs = data.tabComponents.split(' '))
@@ -68,20 +82,25 @@ export class InboxComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-
-    this.subscription.add(
-      this.inboxService.checkAllMessages.subscribe(
-        check => (this.mainCheckboxChecked = check)
-      )
-    );
   }
 
   resetAccordion() {
     this.inboxService.accordionStateSource.next(-1);
   }
 
+  fromChildCheckbox($event) {
+    this.inboxService.checkAllMessagesSource.next($event);
+    this.mainCheckboxChecked = $event;
+  }
+
   checkAllCheckboxes() {
-    this.inboxService.checkAllMessagesSource.next(!this.mainCheckboxChecked);
+    this.mainCheckboxChecked === true ?
+      this.inboxService.checkAllMessagesSource.next(false) : this.inboxService.checkAllMessagesSource.next(true);
+    this.subscription.add(
+      this.inboxService.checkAllMessages.subscribe(data => {
+        data === true ? this.childCheckboxes = true : this.childCheckboxes = false;
+      })
+    );
   }
 
   changeMessagesReadState() {

@@ -34,16 +34,14 @@ export class InboxService {
 
   searchConfig: FSSearchConfig = {};
 
-  messagesSource = new BehaviorSubject<any>(false);
+  messagesSource = new BehaviorSubject<boolean>(false);
   messages = this.messagesSource.asObservable();
+
+  mainCheckboxSource = new BehaviorSubject<boolean>(false);
+  mainCheckBox = this.mainCheckboxSource.asObservable();
 
   initInbox() {
     this.checkAllMessagesSource.next(false);
-    this.auth.getUserToken().subscribe(userData => {
-      if (this.inboxData.userId !== userData.userId) {
-        this.inboxData.userId = userData.userId;
-      }
-    });
   }
 
   setTitleAndMessageGroup(messageGroup: string, title: string) {
@@ -60,7 +58,7 @@ export class InboxService {
       .map(e => e.uid)
       .indexOf(messageObject.uid);
     index === -1
-      ? this.messagesCollection.push(messageObject)
+      ? this.messagesCollection = [...this.messagesCollection, messageObject]
       : this.messagesCollection.splice(index, 1);
   }
 
