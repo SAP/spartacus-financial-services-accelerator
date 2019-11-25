@@ -39,7 +39,6 @@ export class CMSViewPoliciesComponent implements OnInit {
       .getOccUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
-        console.log(occUserId);
         if (occUserId === 'anonymous') {
           this.anonymous$ = true;
         } else {
