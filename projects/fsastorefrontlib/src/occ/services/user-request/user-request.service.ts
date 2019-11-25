@@ -1,3 +1,4 @@
+import { FSStepData } from './../../../../../../dist/fsastorefrontlib/occ/occ-models/occ.models.d';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
@@ -23,6 +24,19 @@ export class OccUserRequestService {
 
     return this.http
       .get(url, { params: params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  public updateUserRequest(
+    userId: string,
+    requestId: string,
+    stepData: FSStepData
+  ): Observable<any> {
+    const url = this.getUserRequestEndpoint(userId, requestId);
+    console.log('update occ');
+    console.log(stepData);
+    return this.http
+      .patch(url, stepData, {})
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 }

@@ -1,3 +1,4 @@
+import { FSStepData } from './../../../../../../../dist/fsastorefrontlib/occ/occ-models/occ.models.d';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { map } from 'rxjs/operators';
@@ -16,20 +17,16 @@ export class UserRequestService {
   ) {}
 
   getUserRequest(): Observable<FSUserRequest> {
-    // Should read user request data from store. Commented until update of user request is finished.
-    // New http request is triggered on every step currently.
-
-    // this.store
-    //   .select(UserRequestSelector.getUserRequestContent)
-    //   .pipe(
-    //     map(storedUserRequestData => {
-    //       if (!this.areConfigurationStepsCreated(storedUserRequestData)) {
-    //         this.loadUserRequestData();
-    //       }
-    //     })
-    //   )
-    //   .subscribe();
-    this.loadUserRequestData();
+    this.store
+      .select(UserRequestSelector.getUserRequestContent)
+      .pipe(
+        map(storedUserRequestData => {
+          if (!this.areConfigurationStepsCreated(storedUserRequestData)) {
+            this.loadUserRequestData();
+          }
+        })
+      )
+      .subscribe();
     return this.store.select(UserRequestSelector.getUserRequestContent);
   }
 
@@ -42,6 +39,28 @@ export class UserRequestService {
         })
       );
     }
+  }
+
+  resumeRequest(requestId: string): Observable<FSUserRequest> {
+    this.store.dispatch(
+      new fromAction.LoadUserRequest({
+        userId: this.userRequestData.userId,
+        requestId: requestId,
+      })
+    );
+    return this.store.select(UserRequestSelector.getUserRequestContent);
+  }
+
+  updateUserRequest(requestId: string, stepData: FSStepData): Observable<FSUserRequest> {
+    this.store.dispatch(
+      new fromAction.UpdateUserRequest({
+        userId: this.userRequestData.userId,
+        requestId: requestId,
+        stepData: stepData,
+      })
+    );
+    return this.store.select(UserRequestSelector.getUserRequestContent);
+
   }
 
   private areConfigurationStepsCreated(userRequest: FSUserRequest): boolean {
