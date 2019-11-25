@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 import { StoreFinderSearchComponent } from '@spartacus/storefront';
 
@@ -6,9 +6,14 @@ import { StoreFinderSearchComponent } from '@spartacus/storefront';
   selector: 'fsa-agent-search-box',
   templateUrl: './agent-search-box.component.html',
 })
-export class AgentSearchBoxComponent extends StoreFinderSearchComponent {
+export class AgentSearchBoxComponent extends StoreFinderSearchComponent
+  implements OnInit {
   constructor(protected fsRoutingService: RoutingService) {
     super(fsRoutingService);
+  }
+
+  ngOnInit() {
+    this.findAgents(null);
   }
 
   findAgents(searchQuery: string) {

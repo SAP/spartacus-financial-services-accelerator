@@ -55,7 +55,7 @@ describe('OccAgentService', () => {
 
   describe('searchAgents', () => {
     it('search Agents By Query String', async(() => {
-      service.searchAgents(searchQuery, pageNumber).subscribe(res => {});
+      service.getAgentsByQuery(searchQuery, pageNumber).subscribe(res => {});
       httpMock.expectOne((req: HttpRequest<any>) => {
         return req.url === '/agents/search' && req.method === 'GET';
       }, `GET method and url`);
