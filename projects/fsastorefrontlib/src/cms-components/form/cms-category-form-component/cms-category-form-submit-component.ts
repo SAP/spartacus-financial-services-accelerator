@@ -1,12 +1,16 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CmsComponentData } from '@spartacus/storefront';
-import { CMSFormSubmitComponent } from '../../../occ/occ-models';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import {
+  FormDataService,
+  FormDefinition,
+  YFormDefinition,
+} from '@fsa/dynamicforms';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
-import { Observable, Subscription } from 'rxjs';
+import { CmsComponentData } from '@spartacus/storefront';
+import { Observable, of, Subscription } from 'rxjs';
+import { map, mergeMap, switchMap } from 'rxjs/operators';
+import { CMSFormSubmitComponent } from '../../../occ/occ-models';
 import { FormSampleConfigurations } from './form-sample-configurations';
-import { map, switchMap } from 'rxjs/operators';
-import { FormDefinition } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'fsa-cms-category-form-submit-component',
@@ -16,37 +20,56 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CMSFormSubmitComponent>,
     protected activatedRoute: ActivatedRoute,
-    protected cmsComponentConnector: CmsComponentConnector
+    protected cmsComponentConnector: CmsComponentConnector,
+    protected formDataService: FormDataService
   ) {}
 
   routeParamId = 'formCode';
   pageContext: PageContext;
   formConfig: FormDefinition;
+  formDefintion$: Observable<YFormDefinition> = of({});
   component$: Observable<CMSFormSubmitComponent>;
   private subscription = new Subscription();
 
   ngOnInit() {
-    this.activatedRoute.params
-      .pipe(
-        switchMap(routeParam => {
-          this.pageContext = new PageContext(
-            routeParam[this.routeParamId],
-            PageType.CATEGORY_PAGE
-          );
-          return (this.component$ = this.cmsComponentConnector.get(
-            this.componentData.uid,
-            this.pageContext
-          ));
-        }),
-        map(componentData => {
-          if (componentData && componentData.formId) {
-            this.formConfig = FormSampleConfigurations.sampleConfigurations.filter(
-              item => item.formId === componentData.formId
-            )[0];
-          }
-        })
-      )
-      .subscribe();
+    this.subscription.add(
+      this.activatedRoute.params
+        .pipe(
+          switchMap(routeParam => {
+            this.pageContext = new PageContext(
+              routeParam[this.routeParamId],
+              PageType.CATEGORY_PAGE
+            );
+            return (this.component$ = this.cmsComponentConnector.get(
+              this.componentData.uid,
+              this.pageContext
+            ));
+          }),
+          mergeMap(componentData => {
+            if (componentData && componentData.formId) {
+              this.formConfig = FormSampleConfigurations.sampleConfigurations.filter(
+                item => item.formId === componentData.formId
+              )[0];
+              if (!this.formConfig) {
+                this.formDefintion$ = this.formDataService.getFormDefinition(
+                  componentData.applicationId,
+                  componentData.formId
+                );
+                return this.formDefintion$;
+              }
+              return of(null);
+            }
+          }),
+          map(formDefinition => {
+            if (formDefinition && formDefinition.content) {
+              this.formConfig = <FormDefinition>(
+                JSON.parse(formDefinition.content)
+              );
+            }
+          })
+        )
+        .subscribe()
+    );
   }
 
   ngOnDestroy(): void {

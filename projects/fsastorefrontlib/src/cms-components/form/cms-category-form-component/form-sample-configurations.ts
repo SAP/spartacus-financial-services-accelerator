@@ -1,12 +1,11 @@
 import { Validators } from '@angular/forms';
 import { FormHelpers } from '../../../shared/util/helpers/form-helpers';
 import { CustomFormValidators } from '../../../shared/util/validators/custom-form-validators';
-import { FormDefinition, FormSubmitType } from '@fsa/dynamicforms';
+import { FormDefinition } from '@fsa/dynamicforms';
 
 export class FormSampleConfigurations {
   static sampleConfigurations: FormDefinition[] = [
     {
-      submitType: FormSubmitType.PRICING,
       formId: 'auto_details_form',
       formGroups: [
         {
@@ -29,7 +28,10 @@ export class FormSampleConfigurations {
             },
             {
               type: 'select',
-              options: ['MONTHLY', 'YEARLY'],
+              options: [
+                { name: 'MONTHLY', label: 'Monthly' },
+                { name: 'YEARLY', label: 'Yearly' },
+              ],
               label: 'Payment Frequency',
               name: 'paymentFrequency',
               validation: [Validators.required],
@@ -100,7 +102,10 @@ export class FormSampleConfigurations {
             },
             {
               type: 'select',
-              options: ['Personal', 'Business'],
+              options: [
+                { name: 'Personal', label: 'Personal' },
+                { name: 'Business', label: 'Business' },
+              ],
               label: 'Vehicle Usage',
               name: 'vehicleUsage',
               validation: [Validators.required],
@@ -145,21 +150,33 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              options: ['Male', 'Female'],
+              options: [
+                { name: 'Male', label: 'Male' },
+                { name: 'Female', label: 'Female' },
+              ],
               validation: [Validators.required],
             },
             {
               type: 'select',
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
-              options: ['Single', 'Married', 'Widowed'],
+              options: [
+                { name: 'Single', label: 'Single' },
+                { name: 'Married', label: 'Married' },
+                { name: 'Widowed', label: 'Widowed' },
+              ],
               validation: [Validators.required],
             },
             {
               type: 'select',
               label: 'Driver`s Category',
               name: 'driverCategory',
-              options: ['Main'],
+              options: [
+                {
+                  label: 'Main',
+                  name: 'Main',
+                },
+              ],
               disabled: true,
             },
             {
@@ -184,7 +201,13 @@ export class FormSampleConfigurations {
             },
             {
               type: 'select',
-              options: ['0', '1', '2', '3', '4'],
+              options: [
+                { name: '0', label: '0' },
+                { name: '1', label: '1' },
+                { name: '2', label: '2' },
+                { name: '3', label: '3' },
+                { name: '4', label: '4' },
+              ],
               label: 'Number of Drivers',
               name: 'numberOfDrivers',
               validation: [
@@ -223,7 +246,10 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              options: ['Male', 'Female'],
+              options: [
+                { name: 'Male', label: 'Male' },
+                { name: 'Female', label: 'Female' },
+              ],
               validation: [Validators.required],
               hidden: true,
             },
@@ -231,7 +257,11 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
-              options: ['Single', 'Married', 'Widowed'],
+              options: [
+                { name: 'Single', label: 'Single' },
+                { name: 'Married', label: 'Married' },
+                { name: 'Widowed', label: 'Widowed' },
+              ],
               validation: [Validators.required],
               hidden: true,
             },
@@ -239,7 +269,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver`s Category',
               name: 'driverCategory',
-              options: ['Occasional'],
+              options: [{ name: 'Occasional', label: 'Occasional' }],
               disabled: true,
               hidden: true,
             },
@@ -280,7 +310,10 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              options: ['Male', 'Female'],
+              options: [
+                { name: 'Male', label: 'Male' },
+                { name: 'Female', label: 'Female' },
+              ],
               validation: [Validators.required],
               hidden: true,
             },
@@ -288,7 +321,11 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
-              options: ['Single', 'Married', 'Widowed'],
+              options: [
+                { name: 'Single', label: 'Single' },
+                { name: 'Married', label: 'Married' },
+                { name: 'Widowed', label: 'Widowed' },
+              ],
               validation: [Validators.required],
               hidden: true,
             },
@@ -296,7 +333,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver`s Category',
               name: 'driverCategory',
-              options: ['Occasional'],
+              options: [{ name: 'Occasional', label: 'Occasional' }],
               hidden: true,
             },
             {
@@ -336,7 +373,10 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              options: ['Male', 'Female'],
+              options: [
+                { name: 'Male', label: 'Male' },
+                { name: 'Female', label: 'Female' },
+              ],
               validation: [Validators.required],
               hidden: true,
             },
@@ -344,7 +384,11 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
-              options: ['Single', 'Married', 'Widowed'],
+              options: [
+                { name: 'Single', label: 'Single' },
+                { name: 'Married', label: 'Married' },
+                { name: 'Widowed', label: 'Widowed' },
+              ],
               validation: [Validators.required],
               hidden: true,
             },
@@ -352,7 +396,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver`s Category',
               name: 'driverCategory',
-              options: ['Occasional'],
+              options: [{ name: 'Occasional', label: 'Occasional' }],
               hidden: true,
             },
             {
@@ -392,7 +436,10 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              options: ['Male', 'Female'],
+              options: [
+                { name: 'Male', label: 'Male' },
+                { name: 'Female', label: 'Female' },
+              ],
               validation: [Validators.required],
               hidden: true,
             },
@@ -400,7 +447,11 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
-              options: ['Single', 'Married', 'Widowed'],
+              options: [
+                { name: 'Single', label: 'Single' },
+                { name: 'Married', label: 'Married' },
+                { name: 'Widowed', label: 'Widowed' },
+              ],
               validation: [Validators.required],
               hidden: true,
             },
@@ -408,7 +459,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver`s Category',
               name: 'driverCategory',
-              options: ['Occasional'],
+              options: [{ name: 'Occasional', label: 'Occasional' }],
               disabled: true,
               hidden: true,
             },
@@ -425,20 +476,9 @@ export class FormSampleConfigurations {
             },
           ],
         },
-        {
-          groupName: 'button',
-          fieldConfigs: [
-            {
-              label: 'Find Prices',
-              name: 'submit',
-              type: 'button',
-            },
-          ],
-        },
       ],
     },
     {
-      submitType: FormSubmitType.PRICING,
       formId: 'trip_details_form',
       formGroups: [
         {
@@ -449,11 +489,20 @@ export class FormSampleConfigurations {
               label: 'Destination',
               name: 'tripDestination',
               options: [
-                'Europe',
-                'Australia and New Zealand',
-                'Worldwide (excluding USA, Canada, and the Caribbean)',
-                'Worldwide (including USA, Canada and the Caribbean)',
-                'UK',
+                { name: 'Europe', label: 'Europe' },
+                {
+                  name: 'Australia and New Zealand',
+                  label: 'Australia and New Zealand',
+                },
+                {
+                  name: 'Worldwide (excluding USA, Canada, and the Caribbean)',
+                  label: 'Worldwide (excluding USA, Canada, and the Caribbean)',
+                },
+                {
+                  name: 'Worldwide (including USA, Canada and the Caribbean)',
+                  label: 'Worldwide (including USA, Canada and the Caribbean)',
+                },
+                { name: 'UK', label: 'UK' },
               ],
               validation: [Validators.required],
               error: 'forms.enterValidValue',
@@ -497,7 +546,18 @@ export class FormSampleConfigurations {
             },
             {
               type: 'select',
-              options: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'],
+              options: [
+                { label: '1', name: '1' },
+                { label: '2', name: '2' },
+                { label: '3', name: '3' },
+                { label: '4', name: '4' },
+                { label: '5', name: '5' },
+                { label: '6', name: '6' },
+                { label: '7', name: '7' },
+                { label: '8', name: '8' },
+                { label: '9', name: '9' },
+                { label: '10', name: '10' },
+              ],
               label: 'Number of Travelers',
               name: 'Travellers',
               validation: [
@@ -647,16 +707,6 @@ export class FormSampleConfigurations {
             },
           ],
         },
-        {
-          groupName: 'button',
-          fieldConfigs: [
-            {
-              label: 'Find Prices',
-              name: 'submit',
-              type: 'button',
-            },
-          ],
-        },
       ],
     },
     {
@@ -668,13 +718,34 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               options: [
-                'Other Accident',
-                'Glass Damage',
-                'Collision',
-                'Fire',
-                'Theft',
-                'Breakdown',
-                'Accident',
+                {
+                  name: 'AutoOtherAccident',
+                  label: 'Other Accident',
+                },
+                {
+                  name: 'AutoGlassDamage',
+                  label: 'Glass Damage',
+                },
+                {
+                  name: 'AutoCollision',
+                  label: 'Collision',
+                },
+                {
+                  name: 'AutoFire',
+                  label: 'Fire',
+                },
+                {
+                  name: 'AutoTheft',
+                  label: 'Theft',
+                },
+                {
+                  name: 'AutoBreakdown',
+                  label: 'Breakdown',
+                },
+                {
+                  name: 'AutoAccident',
+                  label: 'Accident',
+                },
               ],
               label: 'What happened?',
               name: 'whatHappened',
@@ -698,13 +769,34 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               options: [
-                'Austria',
-                'Canada',
-                'France',
-                'Germany',
-                'Poland',
-                'Serbia',
-                'United States',
+                {
+                  name: 'AT',
+                  label: 'Austria',
+                },
+                {
+                  name: 'CA',
+                  label: 'Canada',
+                },
+                {
+                  name: 'FR',
+                  label: 'France',
+                },
+                {
+                  name: 'DE',
+                  label: 'Germany',
+                },
+                {
+                  name: 'PL',
+                  label: 'Poland',
+                },
+                {
+                  name: 'RS',
+                  label: 'Serbia',
+                },
+                {
+                  name: 'US',
+                  label: 'United States',
+                },
               ],
               label: 'Country',
               name: 'country',
@@ -770,15 +862,354 @@ export class FormSampleConfigurations {
               label: 'Were the police informed?',
               name: 'policyInformed',
               type: 'radio',
-              options: ['Yes', 'No'],
+              options: [
+                {
+                  name: 'yes',
+                  label: 'Yes',
+                },
+                {
+                  name: 'no',
+                  label: 'No',
+                },
+              ],
               validation: [Validators.required],
             },
             {
               label: 'Are there any witnesses we can contact?',
               name: 'anyWitnesses',
               type: 'radio',
-              options: ['Yes', 'No'],
+              options: [
+                {
+                  name: 'yes',
+                  label: 'Yes',
+                },
+                {
+                  name: 'no',
+                  label: 'No',
+                },
+              ],
               validation: [Validators.required],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      formId: 'insurance_personal_details',
+      formGroups: [
+        {
+          groupName: 'personalDetails',
+          fieldConfigs: [
+            {
+              label: 'Title',
+              name: 'title',
+              type: 'select',
+              options: [
+                {
+                  name: 'mr',
+                  label: 'Mr.',
+                },
+                {
+                  name: 'mrs',
+                  label: 'Mrs.',
+                },
+                {
+                  name: 'miss',
+                  label: 'Miss.',
+                },
+                {
+                  name: 'dr',
+                  label: 'Dr.',
+                },
+                {
+                  name: 'rev',
+                  label: 'Rev.',
+                },
+              ],
+              validation: [Validators.required],
+            },
+            {
+              label: 'First name',
+              name: 'firstName',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Last name',
+              name: 'lastName',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Phone Number',
+              name: 'phoneNumber',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Email',
+              name: 'email',
+              type: 'input',
+              validation: [
+                Validators.required,
+                CustomFormValidators.regexValidator(
+                  CustomFormValidators.emailRegex
+                ),
+              ],
+              error: 'forms.enterValidEmail',
+            },
+            {
+              label: 'Address Line 1',
+              name: 'address1',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Address Line 2',
+              name: 'address2',
+              type: 'input',
+            },
+            {
+              label: 'City',
+              name: 'city',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Postcode',
+              name: 'postcode',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Country',
+              name: 'country',
+              type: 'select',
+              validation: [Validators.required],
+              options: [
+                {
+                  label: 'Serbia',
+                  name: 'RS',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      formId: 'event_personal_details',
+      formGroups: [
+        {
+          groupName: 'personalDetails',
+          fieldConfigs: [
+            {
+              label: 'Event country',
+              name: 'eventCountry',
+              type: 'select',
+              options: [
+                {
+                  name: 'DE',
+                  label: 'Germany',
+                },
+                {
+                  name: 'CA',
+                  label: 'Canada',
+                },
+                {
+                  name: 'UK',
+                  label: 'United Kingdom',
+                },
+                {
+                  name: 'FR',
+                  label: 'France',
+                },
+              ],
+              validation: [Validators.required],
+            },
+            {
+              label: 'Event date',
+              name: 'eventData',
+              type: 'datepicker',
+              validation: [
+                Validators.required,
+                CustomFormValidators.compareToCurrentDate('shouldBeGreater'),
+              ],
+              error: 'forms.dateInFuture',
+            },
+            {
+              label: 'Venue name',
+              name: 'eventVenue',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Venue address',
+              name: 'eventVenueAddress',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Venue city',
+              name: 'eventVenueCity',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'First name',
+              name: 'firstName',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Last name',
+              name: 'lastName',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Email',
+              name: 'email',
+              type: 'input',
+              validation: [
+                Validators.required,
+                CustomFormValidators.regexValidator(
+                  CustomFormValidators.emailRegex
+                ),
+              ],
+              error: 'forms.enterValidEmail',
+            },
+            {
+              label: 'Address Line 1',
+              name: 'address1',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Address Line 2',
+              name: 'address2',
+              type: 'input',
+            },
+            {
+              label: 'Postcode',
+              name: 'postcode',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'City',
+              name: 'city',
+              type: 'input',
+              validation: [Validators.required],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      formId: 'travel_personal_details',
+      formGroups: [
+        {
+          groupName: 'personalDetails',
+          fieldConfigs: [
+            {
+              label: 'Title',
+              name: 'title',
+              type: 'select',
+              options: [
+                {
+                  name: 'mr',
+                  label: 'Mr.',
+                },
+                {
+                  name: 'mrs',
+                  label: 'Mrs.',
+                },
+                {
+                  name: 'miss',
+                  label: 'Miss.',
+                },
+                {
+                  name: 'dr',
+                  label: 'Dr.',
+                },
+                {
+                  name: 'rev',
+                  label: 'Rev.',
+                },
+              ],
+              validation: [Validators.required],
+            },
+            {
+              label: 'First name',
+              name: 'firstName',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Last name',
+              name: 'lastName',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Age',
+              name: 'age',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Phone Number',
+              name: 'phoneNumber',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Email',
+              name: 'email',
+              type: 'input',
+              validation: [
+                Validators.required,
+                CustomFormValidators.regexValidator(
+                  CustomFormValidators.emailRegex
+                ),
+              ],
+              error: 'forms.enterValidEmail',
+            },
+            {
+              label: 'Address Line 1',
+              name: 'address1',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Address Line 2',
+              name: 'address2',
+              type: 'input',
+            },
+            {
+              label: 'City',
+              name: 'city',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Postcode',
+              name: 'postcode',
+              type: 'input',
+              validation: [Validators.required],
+            },
+            {
+              label: 'Country',
+              name: 'country',
+              type: 'select',
+              validation: [Validators.required],
+              options: [
+                {
+                  label: 'Serbia',
+                  name: 'RS',
+                },
+              ],
             },
           ],
         },

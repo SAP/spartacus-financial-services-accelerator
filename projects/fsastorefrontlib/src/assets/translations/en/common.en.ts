@@ -116,5 +116,14 @@ export const fscommon = {
         'I am authorized to accept' +
         'terms and conditions on behalf of a second account owner and agree to all the above terms on his behalf as well.',
     },
+    search: {
+      totalNumberOfResults: 'Products found',
+      youSeachedFor: 'You have searched for',
+    },
+    agentLocator: {
+      contact: 'Contact',
+      categories: 'Categories',
+      searchBox: 'Search agent or insurance type',
+    },
   },
 };
