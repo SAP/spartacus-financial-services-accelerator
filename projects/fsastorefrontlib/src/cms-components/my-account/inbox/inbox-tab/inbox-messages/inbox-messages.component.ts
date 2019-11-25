@@ -106,7 +106,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   }
 
   mainCheckboxSwitch() {
-    this.mainCheckBoxState.emit(false);
+    if (this.checkBoxStatus === true) {
+      this.mainCheckBoxState.emit(false);
+    }
   }
 
   getDate() {

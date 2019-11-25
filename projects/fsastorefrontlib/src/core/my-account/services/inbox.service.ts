@@ -58,7 +58,7 @@ export class InboxService {
       .map(e => e.uid)
       .indexOf(messageObject.uid);
     index === -1
-      ? this.messagesCollection = [...this.messagesCollection, messageObject]
+      ? this.messagesCollection.push(messageObject)
       : this.messagesCollection.splice(index, 1);
   }
 

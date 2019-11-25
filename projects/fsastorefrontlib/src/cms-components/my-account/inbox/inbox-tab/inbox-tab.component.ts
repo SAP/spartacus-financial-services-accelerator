@@ -33,6 +33,5 @@ export class InboxTabComponent implements OnInit {
   onTabClicked(messageGroup, title) {
     this.inboxService.setTitleAndMessageGroup(messageGroup, title);
     this.inboxService.checkAllMessagesSource.next(false);
-    this.inboxService.checkAllMessagesSource.next(false);
   }
 }
