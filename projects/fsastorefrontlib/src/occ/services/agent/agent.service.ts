@@ -28,7 +28,7 @@ export class OccAgentService {
     const queryParam =
       'queryParam=' +
       searhQuery +
-      '&&page=' +
+      '&page=' +
       pageNumber.toString() +
       '&pageSize=' +
       this.PAGE_SIZE +

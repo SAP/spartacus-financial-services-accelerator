@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { AgentSearchService } from 'projects/fsastorefrontlib/src/core/agent';
+import { Component, OnInit } from '@angular/core';
+import { AgentSearchService } from '../../../core/agent/services/agent-search.service';
 import { Params, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
   selector: 'fsa-agent-search-list',
   templateUrl: './agent-search-list.component.html',
 })
-export class AgentSearchListComponent {
+export class AgentSearchListComponent implements OnInit {
   subscription: Subscription;
   searchResults$ = this.agentSearchService.getResults();
   searchQuery: string;

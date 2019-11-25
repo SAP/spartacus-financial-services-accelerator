@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AgentSearchService } from 'projects/fsastorefrontlib/src/core/agent';
+import { AgentSearchService } from '../../../core/agent/services/agent-search.service';
 
 @Component({
   selector: 'fsa-agent-search-details',
