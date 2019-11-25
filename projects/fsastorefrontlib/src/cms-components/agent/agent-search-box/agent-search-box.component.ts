@@ -23,7 +23,7 @@ export class AgentSearchBoxComponent extends StoreFinderSearchComponent
   onKey(event: any) {
     if (
       this.searchBox.value &&
-      this.searchBox.value.length &&
+      this.searchBox.value.length > 0 &&
       event.key === 'Enter'
     ) {
       this.findAgents(this.searchBox.value);

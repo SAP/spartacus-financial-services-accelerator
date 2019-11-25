@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { OccAgentService } from '../../../occ/services/agent/agent.service';
-import { map } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -9,32 +9,31 @@ import { map } from 'rxjs/operators';
 export class AgentSearchService {
   constructor(protected occAgentService: OccAgentService) {}
 
-  agentListSource = new BehaviorSubject<any>(null);
-  agentDetailsSource = new BehaviorSubject<any>(null);
+  agents = new BehaviorSubject<any>(null);
+  agentDetails = new BehaviorSubject<any>(null);
 
   search(searchQuery: string, pageNumber: number) {
     this.occAgentService
       .getAgentsByQuery(searchQuery, pageNumber)
-      .pipe(
-        map(searchResults => {
-          this.agentListSource.next(searchResults);
-          if (searchResults.agents) {
-            this.agentDetailsSource.next(searchResults.agents[0]);
-          }
-        })
-      )
-      .subscribe();
+      .pipe(take(1))
+      .subscribe(searchResults => {
+        this.agents.next(searchResults);
+        if (searchResults.agents) {
+          this.agentDetails.next(searchResults.agents[0]);
+        }
+      });
   }
 
   getResults(): Observable<any> {
-    return this.agentListSource.asObservable();
+    console.log();
+    return this.agents.asObservable();
   }
 
   setAgent(agent: any) {
-    this.agentDetailsSource.next(agent);
+    this.agentDetails.next(agent);
   }
 
   getAgent() {
-    return this.agentDetailsSource.asObservable();
+    return this.agentDetails.asObservable();
   }
 }
