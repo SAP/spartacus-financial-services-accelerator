@@ -25,7 +25,6 @@ export class AgentSearchService {
   }
 
   getResults(): Observable<any> {
-    console.log();
     return this.agents.asObservable();
   }
 
