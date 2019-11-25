@@ -7,6 +7,7 @@ import { OccConfig, AuthService } from '@spartacus/core';
 import { PolicyService } from '../../../../core/my-account/services/policy.service';
 import * as fromUserStore from '../../../../core/my-account/store';
 import { CmsViewPoliciesComponent } from '../../../../occ/occ-models/cms-component.models';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-view-policies',
@@ -34,17 +35,22 @@ export class CMSViewPoliciesComponent implements OnInit {
   allPoliciesDisplayed$ = false;
 
   ngOnInit() {
-    this.authService.getUserToken().subscribe(token => {
-      if (token.userId !== undefined) {
-        this.policyService.loadPolicies();
-        this.policies$ = this.store.pipe(select(fromUserStore.getPolicyData));
-        this.policiesLoaded$ = this.store.pipe(
-          select(fromUserStore.getPoliciesLoaded)
-        );
-      } else {
-        this.anonymous$ = true;
-      }
-    });
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        console.log(occUserId);
+        if (occUserId === 'anonymous') {
+          this.anonymous$ = true;
+        } else {
+          this.policyService.loadPolicies();
+          this.policies$ = this.store.pipe(select(fromUserStore.getPolicyData));
+          this.policiesLoaded$ = this.store.pipe(
+            select(fromUserStore.getPoliciesLoaded)
+          );
+        }
+      });
+
     this.component$ = this.componentData.data$;
     this.policyButtonText = this.textAllPolicies$;
   }

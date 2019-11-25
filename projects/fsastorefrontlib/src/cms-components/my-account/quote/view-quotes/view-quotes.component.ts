@@ -2,10 +2,11 @@ import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import * as fromQuoteStore from '../../../../core/my-account/store';
 import { Store, select } from '@ngrx/store';
-import { OccConfig } from '@spartacus/core';
+import { OccConfig, RoutingService } from '@spartacus/core';
 import { AuthService } from '@spartacus/core';
 import { CmsViewQuotesComponent } from '../../../../occ/occ-models/cms-component.models';
 import { QuoteService } from '../../../../core/my-account/services/quote.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-view-quotes',
@@ -18,7 +19,8 @@ export class CMSViewQuotesComponent implements OnInit {
     protected authService: AuthService,
     private store: Store<fromQuoteStore.UserState>,
     private config: OccConfig,
-    private quoteService: QuoteService
+    private quoteService: QuoteService,
+    protected routingService: RoutingService
   ) {}
 
   component$;
@@ -30,17 +32,20 @@ export class CMSViewQuotesComponent implements OnInit {
   quoteButtonText;
   allQuotesDisplayed$ = false;
   ngOnInit() {
-    this.authService.getUserToken().subscribe(token => {
-      if (token.userId !== undefined) {
-        this.quoteService.loadQuotes();
-        this.quotes$ = this.store.pipe(select(fromQuoteStore.getQuotes));
-        this.quotesLoaded$ = this.store.pipe(
-          select(fromQuoteStore.getQuotesLoaded)
-        );
-      } else {
-        this.anonymous$ = true;
-      }
-    });
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        if (occUserId === 'anonymous') {
+          this.anonymous$ = true;
+        } else {
+          this.quoteService.loadQuotes();
+          this.quotes$ = this.store.pipe(select(fromQuoteStore.getQuotes));
+          this.quotesLoaded$ = this.store.pipe(
+            select(fromQuoteStore.getQuotesLoaded)
+          );
+        }
+      });
     this.component$ = this.componentData.data$;
     this.quoteButtonText = this.textAllQuotes$;
   }
@@ -54,6 +59,21 @@ export class CMSViewQuotesComponent implements OnInit {
       this.quoteButtonText = this.textLessQuotes$;
     } else {
       this.quoteButtonText = this.textAllQuotes$;
+    }
+  }
+
+  retrieveQuote(quote: any) {
+    this.quoteService.retrieveQuote(quote);
+    if (quote && quote.state) {
+      if (quote.state.code === 'BIND') {
+        this.routingService.go({
+          cxRoute: 'quoteReview',
+        });
+      } else {
+        this.routingService.go({
+          cxRoute: 'addOptions',
+        });
+      }
     }
   }
 }

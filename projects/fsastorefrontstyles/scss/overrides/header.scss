@@ -1,4 +1,4 @@
-@import '../mixins-fsa';
+git@import '../mixins-fsa';
 @import '../theme';
 
 header {
@@ -31,7 +31,7 @@ header {
       border-radius: 3px;
     }
   }
-  .TopHeaderSlot {
+  .FSTopHeaderSlot {
     flex: 100%;
     color: var(--cx-color-1);
     justify-content: flex-start;
@@ -179,7 +179,7 @@ header {
         color: var(--cx-color-11);
       }
     }
-    .TopHeaderSlot {
+    .FSTopHeaderSlot {
       padding: 0.5rem 1rem 0.25rem;
       select,
       cx-icon,

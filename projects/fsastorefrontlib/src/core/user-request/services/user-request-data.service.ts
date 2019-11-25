@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
-import { filter } from 'rxjs/operators';
+import { filter, take } from 'rxjs/operators';
 import { FSUserRequest } from '../../../occ/occ-models';
 import { UserRequestSelector } from '../store';
 import * as fromReducer from '../store/reducers';
@@ -16,13 +16,10 @@ export class UserRequestDataService {
     protected authService: AuthService
   ) {
     this.authService
-      .getUserToken()
-      .pipe(filter(userToken => this.userId !== userToken.userId))
-      .subscribe(userToken => {
-        if (Object.keys(userToken).length !== 0) {
-          this._userId = userToken.userId;
-        }
-      });
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => (this._userId = occUserId));
+
     this.store
       .pipe(select(UserRequestSelector.getUserRequestContent))
       .subscribe(userRequest => {

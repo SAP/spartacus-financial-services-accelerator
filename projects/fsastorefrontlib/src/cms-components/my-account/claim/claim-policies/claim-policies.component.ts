@@ -6,6 +6,7 @@ import {
   PolicyService,
 } from '../../../../core/my-account/services';
 import * as fromPolicyStore from '../../../../core/my-account/store';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-claim-policies',
@@ -41,8 +42,11 @@ export class ClaimPoliciesComponent implements OnInit {
     return this.config.backend.occ.baseUrl || '';
   }
   selectPolicy(policyId, contractId) {
-    this.authService.getUserToken().subscribe(token => {
-      this.claimService.setSelectedPolicy(token.userId, policyId, contractId);
-    });
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.claimService.setSelectedPolicy(occUserId, policyId, contractId)
+      );
   }
 }

@@ -49,32 +49,34 @@
     *ngFor="let quote of quotes.insuranceQuotes | slice: 0:max"
     class="fs-item"
   >
-    <div class="fs-item-data-container">
-      <span class="image-wrapper small p-1">
-        <img
-          class="image-item"
-          [src]="getBaseUrl() + quote.defaultCategory?.image?.url"
-          alt=""
-        />
-      </span>
-      <div class="fs-item-wrapper">
-        <span class="fs-item-title">{{ quote.planName }}</span>
-        <span class="fs-item-value">{{ quote.quoteId }}</span>
+    <a (click)="retrieveQuote(quote)" routerLinkActive="active">
+      <div class="fs-item-data-container background-hover-secondary">
+        <span class="image-wrapper small p-1">
+          <img
+            class="image-item"
+            [src]="getBaseUrl() + quote.defaultCategory?.image?.url"
+            alt=""
+          />
+        </span>
+        <div class="fs-item-wrapper">
+          <span class="fs-item-title">{{ quote.planName }}</span>
+          <span class="fs-item-value">{{ quote.quoteId }}</span>
+        </div>
+        <span
+          *ngIf="quote.quoteWorkflowStatus?.code === 'PENDING'"
+          class="fs-item-add-infos"
+        >
+          {{ 'quote.quoteStatus.unfinished' | cxTranslate }}
+        </span>
+        <span
+          *ngIf="quote.quoteWorkflowStatus?.code === 'APPROVED'"
+          class="fs-item-add-infos"
+        >
+          {{ 'quote.quoteStatus.expires' | cxTranslate }}:
+          {{ quote.expiryDate | cxDate: 'dd-MM-yyyy' }}
+        </span>
       </div>
-      <span
-        *ngIf="quote.quoteWorkflowStatus?.code === 'PENDING'"
-        class="fs-item-add-infos"
-      >
-        {{ 'quote.quoteStatus.unfinished' | cxTranslate }}
-      </span>
-      <span
-        *ngIf="quote.quoteWorkflowStatus?.code === 'APPROVED'"
-        class="fs-item-add-infos"
-      >
-        {{ 'quote.quoteStatus.expires' | cxTranslate }}:
-        {{ quote.expiryDate | cxDate: 'dd-MM-yyyy' }}
-      </span>
-    </div>
+    </a>
   </li>
 </ng-template>
 
