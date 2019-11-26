@@ -243,20 +243,29 @@
         </li>
       </ul>
     </fsa-accordion-item>
-    <fsa-accordion-item [title]="'fscommon.documents' | cxTranslate">
+    <fsa-accordion-item
+      *ngIf="policy.documents"
+      [title]="'fscommon.documents' | cxTranslate"
+    >
       <ul class="accordion-list container-fluid">
         <li class="accordion-list-item row">
-          <div class="col-6 col-sm-3 item-label">
-            {{ 'policy.policy' | cxTranslate }}
+          <div class="col-xs-12 col-sm-6">
+            {{ 'policy.documentName' | cxTranslate }}
           </div>
-          <div class="col-6 col-sm-3 value notice">
-            {{ policy.startDate | cxDate: 'dd MMM yyyy' }} -
-            {{ policy.endDate | cxDate: 'dd MMM yyyy' }}
-          </div>
-          <div class="col-xs-12 col-sm-6 download">
-            {{ 'fscommon.donwloadPDFLink' | cxTranslate }}
+          <div class="col-xs-12 col-sm-6">
+            {{ 'policy.documentIssueDate' | cxTranslate }}
           </div>
         </li>
+        <div *ngFor="let document of policy.documents">
+          <li class="accordion-list-item row">
+            <div class="col-xs-12 col-sm-6">
+              {{ document.altText }}
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              {{ document.itemTimestamp | cxDate: 'dd MMM yyyy' }}
+            </div>
+          </li>
+        </div>
       </ul>
     </fsa-accordion-item>
     <fsa-accordion-item
