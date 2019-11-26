@@ -97,11 +97,7 @@ context('ProductCategoryPage', () => {
     });
     productCategory.checkComponets();
     productCategory.checkQuoteButtons();
-    cy.get('div.product-feature-wrapper').should('have.length', 3);
-    cy.get('h3.section-header-heading').should('contain', 'Safe And Steady');
-    cy.get('h3.section-header-heading').should('contain', 'Balanced Deal');
-    cy.get('h3.section-header-heading').should('contain', 'Flexi-Max');
-    cy.get('ul.item-details').should('have.length', 3);
+    productCategory.checksSavingsCategoryPage();
   });
 
   it('should check Current Account product category page', () => {
