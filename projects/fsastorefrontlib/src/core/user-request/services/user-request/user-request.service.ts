@@ -61,9 +61,11 @@ export class UserRequestService {
       {
         yformConfigurator: data['id'],
       },
-      userRequest.configurationSteps[stepIndex]
+      userRequest.configurationSteps[stepIndex],
+      {
+        status: stepStatus
+      }
     );
-    stepData.status = stepStatus;
     this.store.dispatch(
       new fromAction.UpdateUserRequest({
         userId: this.userRequestData.userId,
