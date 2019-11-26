@@ -56,7 +56,7 @@ export function checkOptionalProductsAndPick() {
       {
         name: 'Winter Sports Cover',
         available: true,
-        shouldAdd: true
+        shouldAdd: true,
       },
       {
         name: 'Golf Cover',

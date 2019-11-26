@@ -81,7 +81,3 @@ export function checkminiCartCurrentAccount() {
     cy.get('.highlighted').should('have.text', ' Total price:  €9.99 ');
   });
 }
-
-
-
-

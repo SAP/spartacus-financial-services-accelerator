@@ -1,4 +1,4 @@
-import {register} from "ts-node";
+import { register } from 'ts-node';
 
 export interface RegisterUser {
   titleCode: string;
@@ -10,7 +10,7 @@ export interface RegisterUser {
   password: string;
 }
 
-export function populateRegistrationForm (user: RegisterUser) {
+export function populateRegistrationForm(user: RegisterUser) {
   cy.get('cx-page-layout')
     .findByText('Register')
     .click({ force: true });
