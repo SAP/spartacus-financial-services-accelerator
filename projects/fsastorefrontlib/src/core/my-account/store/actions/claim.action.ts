@@ -76,7 +76,6 @@ export class UpdateClaimSuccess implements Action {
   constructor(public payload: any) {}
 }
 
-
 export type ClaimAction =
   | DeleteClaim
   | DeleteClaimSuccess

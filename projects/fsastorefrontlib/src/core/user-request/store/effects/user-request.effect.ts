@@ -45,7 +45,6 @@ export class UserRequestEffects {
         .updateUserRequest(payload.userId, payload.requestId, payload.stepData)
         .pipe(
           map((userRequest: any) => {
-            console.log(userRequest);
             return new fromActions.LoadUserRequestSuccess(userRequest);
           }),
           catchError(error => of(new fromActions.UpdateUserRequestFail(error)))

@@ -37,7 +37,6 @@ export class UserRequestDataService {
     data: any,
     stepStatus: string
   ): FSStepData {
-    if (data) {}
     const stepData = Object.assign(
       {
         yformConfigurator: data['id'],

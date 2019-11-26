@@ -11,7 +11,6 @@ export const UPDATE_USER_REQUEST_SUCCESS =
 export const UPDATE_USER_REQUEST_FAIL =
   '[User Request] Update User Request Fail';
 
-
 export class LoadUserRequest implements Action {
   readonly type = LOAD_USER_REQUEST;
   constructor(public payload: any) {}

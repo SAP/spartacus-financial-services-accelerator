@@ -33,8 +33,6 @@ export class OccUserRequestService {
     stepData: FSStepData
   ): Observable<any> {
     const url = this.getUserRequestEndpoint(userId, requestId);
-    console.log('update occ');
-    console.log(stepData);
     return this.http
       .patch(url, stepData, {})
       .pipe(catchError((error: any) => throwError(error.json())));

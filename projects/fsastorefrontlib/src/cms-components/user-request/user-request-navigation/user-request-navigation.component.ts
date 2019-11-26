@@ -24,7 +24,7 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
   configurationSteps: FSStepData[];
   activeStepData: FSStepData;
   activeStepIndex: number;
-  updatedUserRequest:Observable<FSUserRequest>;
+  updatedUserRequest: Observable<FSUserRequest>;
 
   constructor(
     protected userRequestService: UserRequestService,
@@ -34,7 +34,7 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     protected claimService: ClaimService,
     protected claimDataService: ClaimDataService,
     protected userRequestDataService: UserRequestDataService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.userRequest$ = this.userRequestService.getUserRequest();
@@ -74,30 +74,38 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
   }
 
   next(currentStep: number): void {
-  this.formDataService.submit();
+    this.formDataService.submit();
     this.subscription.add(
-      this.formDataService.getSubmittedForm().pipe(map(formData => {
-        if (formData) {
-          const userRequest = this.userRequestDataService.userRequest;
-          if (userRequest && userRequest.requestId && formData.content !== undefined) {
-            const stepData = this.userRequestDataService.updateUserRequestStep(
-              userRequest,
-              this.activeStepIndex,
-              formData,
-              completedStatus
-            );
-           this.userRequestService.updateUserRequest(
-              userRequest.requestId,
-              stepData
-            ).subscribe(() => {
-              this.userRequestNavigationService.next(
-                this.configurationSteps,
-                currentStep
-              );
-            });
-          }
-        }
-      })).subscribe()
+      this.formDataService
+        .getSubmittedForm()
+        .pipe(
+          map(formData => {
+            if (formData) {
+              const userRequest = this.userRequestDataService.userRequest;
+              if (
+                userRequest &&
+                userRequest.requestId &&
+                formData.content !== undefined
+              ) {
+                const stepData = this.userRequestDataService.updateUserRequestStep(
+                  userRequest,
+                  this.activeStepIndex,
+                  formData,
+                  completedStatus
+                );
+                this.userRequestService
+                  .updateUserRequest(userRequest.requestId, stepData)
+                  .subscribe(() => {
+                    this.userRequestNavigationService.next(
+                      this.configurationSteps,
+                      currentStep
+                    );
+                  }).unsubscribe();
+              }
+            }
+          })
+        )
+        .subscribe()
     );
   }
 

@@ -35,7 +35,6 @@ export class FormComponent implements OnDestroy {
         this.formDataService
           .saveFormData(this.formId, this.applicationId, formData)
           .subscribe(response => {
-            console.log(response)
             this.formDataService.currentForm$.next({
               id: response.id,
               formDefinitionId: this.formId,

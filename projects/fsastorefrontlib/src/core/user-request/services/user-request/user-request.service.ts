@@ -51,7 +51,10 @@ export class UserRequestService {
     return this.store.select(UserRequestSelector.getUserRequestContent);
   }
 
-  updateUserRequest(requestId: string, stepData: FSStepData): Observable<FSUserRequest> {
+  updateUserRequest(
+    requestId: string,
+    stepData: FSStepData
+  ): Observable<FSUserRequest> {
     this.store.dispatch(
       new fromAction.UpdateUserRequest({
         userId: this.userRequestData.userId,
@@ -60,7 +63,6 @@ export class UserRequestService {
       })
     );
     return this.store.select(UserRequestSelector.getUserRequestContent);
-
   }
 
   private areConfigurationStepsCreated(userRequest: FSUserRequest): boolean {
