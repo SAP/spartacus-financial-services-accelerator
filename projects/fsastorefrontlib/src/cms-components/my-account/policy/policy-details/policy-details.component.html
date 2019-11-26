@@ -259,7 +259,9 @@
         <div *ngFor="let document of policy.documents">
           <li class="accordion-list-item row">
             <div class="col-xs-12 col-sm-6">
-              {{ document.altText }}
+              <a class="link" [href]="document.downloadUrl"
+                ><strong>{{ document.altText }}</strong></a
+              >
             </div>
             <div class="col-xs-12 col-sm-6">
               {{ document.itemTimestamp | cxDate: 'dd MMM yyyy' }}
