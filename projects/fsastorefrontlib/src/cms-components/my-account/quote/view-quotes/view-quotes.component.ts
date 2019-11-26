@@ -68,10 +68,6 @@ export class CMSViewQuotesComponent implements OnInit, OnDestroy {
     }
   }
 
-  retrieveQuote(quote: any) {
-    this.quoteService.retrieveQuote(quote);
-  }
-
   public getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
