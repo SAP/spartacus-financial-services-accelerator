@@ -83,19 +83,16 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
                 userRequestData.requestId &&
                 formData.content !== undefined
               ) {
-                this.userRequestService
-                  .updateUserRequestStep(
-                    userRequestData,
-                    this.activeStepIndex,
-                    formData,
-                    completedStatus
-                  )
-                  .subscribe(() => {
-                    this.userRequestNavigationService.continue(
-                      this.configurationSteps,
-                      currentStep
-                    );
-                  });
+                this.userRequestService.updateUserRequestStep(
+                  userRequestData,
+                  this.activeStepIndex,
+                  formData,
+                  completedStatus
+                );
+                this.userRequestNavigationService.continue(
+                  this.configurationSteps,
+                  currentStep
+                );
               }
             }
           })
