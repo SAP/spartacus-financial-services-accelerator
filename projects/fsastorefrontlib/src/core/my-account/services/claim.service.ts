@@ -78,13 +78,4 @@ export class ClaimService {
       })
     );
   }
-
-  updateClaim(claimId: string) {
-    this.store.dispatch(
-      new fromAction.UpdateClaim({
-        userId: this.claimData.userId,
-        claimId: claimId,
-      })
-    );
-  }
 }

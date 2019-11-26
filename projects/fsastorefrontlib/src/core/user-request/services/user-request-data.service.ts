@@ -1,4 +1,4 @@
-import { FSStepData } from './../../../../../../dist/fsastorefrontlib/occ/occ-models/occ.models.d';
+import { FSStepData } from './../../../occ/occ-models/occ.models';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';

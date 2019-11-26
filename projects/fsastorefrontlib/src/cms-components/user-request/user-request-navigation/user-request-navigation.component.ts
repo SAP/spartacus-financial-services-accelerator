@@ -96,11 +96,12 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
                 this.userRequestService
                   .updateUserRequest(userRequest.requestId, stepData)
                   .subscribe(() => {
-                    this.userRequestNavigationService.next(
+                    this.userRequestNavigationService.continue(
                       this.configurationSteps,
                       currentStep
                     );
-                  }).unsubscribe();
+                  })
+                  .unsubscribe();
               }
             }
           })

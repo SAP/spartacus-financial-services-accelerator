@@ -1,4 +1,3 @@
-import { FSStepData } from './../../../../../../../dist/fsastorefrontlib/occ/occ-models/occ.models.d';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { map } from 'rxjs/operators';
@@ -8,6 +7,7 @@ import { FSUserRequest } from '../../../../occ/occ-models';
 import { UserRequestSelector } from '../../store';
 import * as fromAction from '../../store/actions/index';
 import { UserRequestDataService } from '../user-request-data.service';
+import { FSStepData } from './../../../../occ/occ-models/occ.models';
 
 @Injectable()
 export class UserRequestService {

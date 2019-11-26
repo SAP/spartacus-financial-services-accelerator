@@ -1,10 +1,10 @@
-import { FSStepData } from './../../../../../../dist/fsastorefrontlib/occ/occ-models/occ.models.d';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
+import { FSStepData } from '../../occ-models';
 
 @Injectable()
 export class OccUserRequestService {

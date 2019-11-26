@@ -14,14 +14,6 @@ export class OccClaimService {
     protected occEndpointService: OccEndpointsService
   ) {}
 
-  public getClaim(userId: string, claimId: string): Observable<any> {
-    const url = this.getClaimsEndpoint(userId) + '/' + claimId;
-    const params = new HttpParams({ fromString: FULL_PARAMS });
-    return this.http
-      .get(url, { params: params })
-      .pipe(catchError((error: any) => throwError(error.json())));
-  }
-
   protected getClaimsEndpoint(userId: string) {
     const claimsEndpoint = '/users/' + userId + '/claims';
     return this.occEndpointService.getBaseEndpoint() + claimsEndpoint;
