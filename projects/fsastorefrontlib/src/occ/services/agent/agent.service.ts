@@ -20,6 +20,21 @@ export class OccAgentService {
       .get(url, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
+
+  public getAgentsByQuery(searchQuery: string, pageNumber: number) {
+    const url = this.getAgentsEndpoint() + '/search';
+    const query = '&page=' + pageNumber.toString() + '&fields=DEFAULT';
+    let params = new HttpParams({ fromString: query });
+
+    if (searchQuery) {
+      params = params.set('queryParam', searchQuery);
+    }
+
+    return this.http
+      .get<any>(url, { params: params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
   protected getAgentsEndpoint() {
     const agentsEndpoint = '/agents';
     return this.occEndpointService.getBaseEndpoint() + agentsEndpoint;

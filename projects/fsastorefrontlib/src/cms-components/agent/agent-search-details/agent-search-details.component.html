@@ -1,0 +1,38 @@
+<ng-container *ngIf="agent$ | async as agent">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-6">
+        <div class="row agent-details">
+          <div class="col-6">
+            <cx-media
+              class="cx-product-image-container"
+              [container]="agent.thumbnail"
+              format="thumbnail"
+            ></cx-media>
+            {{ agent.firstName }} {{ agent.lastName }}<br />
+            {{ agent.pointsOfService[0]?.displayName }} <br />
+            {{ agent.pointsOfService[0]?.address?.line1 }} <br />
+            {{ agent.pointsOfService[0]?.address?.town }} <br />
+          </div>
+          <div class="col-6">
+            {{ 'fscommon.agentLocator.categories' | cxTranslate }}:
+            <div
+              class="agent-categories"
+              *ngFor="let category of agent.categories"
+            >
+              {{ category.name }}
+            </div>
+            <button class="secondary-button btn-block">
+              {{ 'fscommon.agentLocator.contact' | cxTranslate }}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <cx-store-finder-map
+          [locations]="agent.pointsOfService"
+        ></cx-store-finder-map>
+      </div>
+    </div>
+  </div>
+</ng-container>
