@@ -1,8 +1,8 @@
 import { UserRequestDataService } from './../../../core/user-request/services/user-request-data.service';
 import { FormDataService } from '@fsa/dynamicforms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subscription, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import {
   UserRequestService,
@@ -22,7 +22,6 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
   configurationSteps: FSStepData[];
   activeStepData: FSStepData;
   activeStepIndex: number;
-  updatedUserRequest: Observable<FSUserRequest>;
 
   constructor(
     protected userRequestService: UserRequestService,
@@ -75,7 +74,7 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
       this.formDataService
         .getSubmittedForm()
         .pipe(
-          map(formData => {
+          switchMap(formData => {
             if (formData) {
               const userRequestData = this.userRequestDataService.userRequest;
               if (
@@ -83,18 +82,26 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
                 userRequestData.requestId &&
                 formData.content !== undefined
               ) {
-                this.userRequestService.updateUserRequestStep(
-                  userRequestData,
-                  this.activeStepIndex,
-                  formData,
-                  completedStatus
-                );
-                this.userRequestNavigationService.continue(
-                  this.configurationSteps,
-                  currentStep
-                );
+                return this.userRequestService
+                  .updateUserRequestStep(
+                    userRequestData,
+                    this.activeStepIndex,
+                    formData,
+                    completedStatus
+                  )
+                  .pipe(
+                    map(updatedUserRequest => {
+                      if (updatedUserRequest) {
+                        this.userRequestNavigationService.continue(
+                          this.configurationSteps,
+                          currentStep
+                        );
+                      }
+                    })
+                  );
               }
             }
+            return of(null);
           })
         )
         .subscribe()
