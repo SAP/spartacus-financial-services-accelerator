@@ -81,27 +81,26 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
         .pipe(
           map(formData => {
             if (formData) {
-              const userRequest = this.userRequestDataService.userRequest;
+              const userRequestData = this.userRequestDataService.userRequest;
               if (
-                userRequest &&
-                userRequest.requestId &&
+                userRequestData &&
+                userRequestData.requestId &&
                 formData.content !== undefined
               ) {
                 const stepData = this.userRequestDataService.updateUserRequestStep(
-                  userRequest,
+                  userRequestData,
                   this.activeStepIndex,
                   formData,
                   completedStatus
                 );
                 this.userRequestService
-                  .updateUserRequest(userRequest.requestId, stepData)
+                  .updateUserRequest(userRequestData.requestId, stepData)
                   .subscribe(() => {
                     this.userRequestNavigationService.continue(
                       this.configurationSteps,
                       currentStep
                     );
-                  })
-                  .unsubscribe();
+                  });
               }
             }
           })

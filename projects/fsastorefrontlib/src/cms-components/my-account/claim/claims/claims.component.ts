@@ -80,14 +80,9 @@ export class ClaimsComponent implements OnInit, OnDestroy {
         .resumeRequest(requestId)
         .pipe(
           map(userRequest => {
-            const indexOfLastCompletedStep = userRequest.configurationSteps
-              .map(configurationStep => configurationStep.status)
-              .lastIndexOf('COMPLETED');
             if (userRequest.requestId === requestId) {
               this.routingService.go({
-                cxRoute:
-                  userRequest.configurationSteps[indexOfLastCompletedStep]
-                    .pageLabelOrId,
+                cxRoute: userRequest.configurationSteps[0].pageLabelOrId,
               });
             }
           })
