@@ -247,27 +247,27 @@
       *ngIf="policy.documents"
       [title]="'fscommon.documents' | cxTranslate"
     >
-      <ul class="accordion-list container-fluid">
+      <ul class="accordion-list container-fluid documents">
         <li class="accordion-list-item row">
-          <div class="col-xs-12 col-sm-6">
+          <div class="col-6">
             {{ 'policy.documentName' | cxTranslate }}
           </div>
-          <div class="col-xs-12 col-sm-6">
+          <div class="col-6 value">
             {{ 'policy.documentIssueDate' | cxTranslate }}
           </div>
         </li>
-        <div *ngFor="let document of policy.documents">
+        <ng-container *ngFor="let document of policy.documents">
           <li class="accordion-list-item row">
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-6">
               <a class="link" [href]="document.downloadUrl"
-                ><strong>{{ document.altText }}</strong></a
+                >{{ document.altText }}</a
               >
             </div>
-            <div class="col-xs-12 col-sm-6">
+            <div class="col-6 value">
               {{ document.itemTimestamp | cxDate: 'dd MMM yyyy' }}
             </div>
           </li>
-        </div>
+        </ng-container>
       </ul>
     </fsa-accordion-item>
     <fsa-accordion-item
