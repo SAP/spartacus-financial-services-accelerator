@@ -1,18 +1,24 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { AuthService, OccConfig } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import * as fromQuoteStore from '../../../../core/my-account/store';
-import { Store, select } from '@ngrx/store';
-import { OccConfig } from '@spartacus/core';
-import { AuthService } from '@spartacus/core';
-import { CmsViewQuotesComponent } from '../../../../occ/occ-models/cms-component.models';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { QuoteService } from '../../../../core/my-account/services/quote.service';
+import * as fromQuoteStore from '../../../../core/my-account/store';
+import { CmsViewQuotesComponent } from '../../../../occ/occ-models/cms-component.models';
 
 @Component({
   selector: 'fsa-view-quotes',
   templateUrl: './view-quotes.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CMSViewQuotesComponent implements OnInit {
+export class CMSViewQuotesComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CmsViewQuotesComponent>,
     protected authService: AuthService,
@@ -20,6 +26,8 @@ export class CMSViewQuotesComponent implements OnInit {
     private config: OccConfig,
     private quoteService: QuoteService
   ) {}
+
+  subscription = new Subscription();
 
   component$;
   quotes$;
@@ -29,23 +37,26 @@ export class CMSViewQuotesComponent implements OnInit {
   textLessQuotes$ = 'Show less quotes';
   quoteButtonText;
   allQuotesDisplayed$ = false;
+
   ngOnInit() {
-    this.authService.getUserToken().subscribe(token => {
-      if (token.userId !== undefined) {
-        this.quoteService.loadQuotes();
-        this.quotes$ = this.store.pipe(select(fromQuoteStore.getQuotes));
-        this.quotesLoaded$ = this.store.pipe(
-          select(fromQuoteStore.getQuotesLoaded)
-        );
-      } else {
-        this.anonymous$ = true;
-      }
-    });
+    this.subscription.add(
+      this.authService
+        .getOccUserId()
+        .pipe(take(1))
+        .subscribe(occUserId => {
+          if (occUserId === 'anonymous') {
+            this.anonymous$ = true;
+          } else {
+            this.quoteService.loadQuotes();
+            this.quotes$ = this.store.pipe(select(fromQuoteStore.getQuotes));
+            this.quotesLoaded$ = this.store.pipe(
+              select(fromQuoteStore.getQuotesLoaded)
+            );
+          }
+        })
+    );
     this.component$ = this.componentData.data$;
     this.quoteButtonText = this.textAllQuotes$;
-  }
-  public getBaseUrl() {
-    return this.config.backend.occ.baseUrl || '';
   }
 
   public showAllQuotes(showAll) {
@@ -54,6 +65,16 @@ export class CMSViewQuotesComponent implements OnInit {
       this.quoteButtonText = this.textLessQuotes$;
     } else {
       this.quoteButtonText = this.textAllQuotes$;
+    }
+  }
+
+  public getBaseUrl() {
+    return this.config.backend.occ.baseUrl || '';
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }
