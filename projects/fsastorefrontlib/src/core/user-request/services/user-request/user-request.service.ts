@@ -56,14 +56,14 @@ export class UserRequestService {
     stepIndex: number,
     data: any,
     stepStatus: string
-  ) {
+  ): Observable<FSUserRequest> {
     const stepData = Object.assign(
       {
         yformConfigurator: data['id'],
       },
       userRequest.configurationSteps[stepIndex],
       {
-        status: stepStatus
+        status: stepStatus,
       }
     );
     this.store.dispatch(

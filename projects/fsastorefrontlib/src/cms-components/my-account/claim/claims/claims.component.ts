@@ -48,12 +48,6 @@ export class ClaimsComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
-
   deleteClaim(claimNumber: string) {
     this.openModal(claimNumber);
   }
@@ -89,5 +83,11 @@ export class ClaimsComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

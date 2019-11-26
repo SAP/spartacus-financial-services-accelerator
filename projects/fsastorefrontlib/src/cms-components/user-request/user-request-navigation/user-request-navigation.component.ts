@@ -1,6 +1,4 @@
 import { UserRequestDataService } from './../../../core/user-request/services/user-request-data.service';
-import { ClaimDataService } from './../../../core/my-account/services/claim-data.service';
-import { ClaimService } from './../../../core/my-account/services/claim.service';
 import { FormDataService } from '@fsa/dynamicforms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
@@ -31,8 +29,6 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected userRequestNavigationService: UserRequestNavigationService,
     protected formDataService: FormDataService,
-    protected claimService: ClaimService,
-    protected claimDataService: ClaimDataService,
     protected userRequestDataService: UserRequestDataService
   ) {}
 
@@ -87,18 +83,19 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
                 userRequestData.requestId &&
                 formData.content !== undefined
               ) {
-               this.userRequestService.updateUserRequestStep(
-                  userRequestData,
-                  this.activeStepIndex,
-                  formData,
-                  completedStatus
-                ).subscribe(() => {
-                  this.userRequestNavigationService.continue(
-                    this.configurationSteps,
-                    currentStep
-                  );
-                });
-
+                this.userRequestService
+                  .updateUserRequestStep(
+                    userRequestData,
+                    this.activeStepIndex,
+                    formData,
+                    completedStatus
+                  )
+                  .subscribe(() => {
+                    this.userRequestNavigationService.continue(
+                      this.configurationSteps,
+                      currentStep
+                    );
+                  });
               }
             }
           })
