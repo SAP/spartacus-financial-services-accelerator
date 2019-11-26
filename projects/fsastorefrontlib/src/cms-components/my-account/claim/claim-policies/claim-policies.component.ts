@@ -1,19 +1,25 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AuthService, OccConfig } from '@spartacus/core';
+import { Subscription } from 'rxjs';
+import { take } from 'rxjs/operators';
 import {
   ClaimService,
   PolicyService,
 } from '../../../../core/my-account/services';
 import * as fromPolicyStore from '../../../../core/my-account/store';
-import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-claim-policies',
   templateUrl: './claim-policies.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ClaimPoliciesComponent implements OnInit {
+export class ClaimPoliciesComponent implements OnInit, OnDestroy {
   constructor(
     protected store: Store<fromPolicyStore.UserState>,
     protected policyService: PolicyService,
@@ -21,6 +27,8 @@ export class ClaimPoliciesComponent implements OnInit {
     protected config: OccConfig,
     protected authService: AuthService
   ) {}
+
+  subscription = new Subscription();
 
   claimPolicies$;
   claimPoliciesLoaded$;
@@ -38,15 +46,23 @@ export class ClaimPoliciesComponent implements OnInit {
       select(fromPolicyStore.getClaimPoliciesLoaded)
     );
   }
+
+  selectPolicy(policyId, contractId) {
+    this.subscription.add(
+      this.authService
+        .getOccUserId()
+        .pipe(take(1))
+        .subscribe(occUserId =>
+          this.claimService.setSelectedPolicy(occUserId, policyId, contractId)
+        )
+    );
+  }
+
   public getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
-  selectPolicy(policyId, contractId) {
-    this.authService
-      .getOccUserId()
-      .pipe(take(1))
-      .subscribe(occUserId =>
-        this.claimService.setSelectedPolicy(occUserId, policyId, contractId)
-      );
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 }

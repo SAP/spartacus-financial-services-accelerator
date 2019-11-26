@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
-import { filter, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { FSUserRequest } from '../../../occ/occ-models';
 import { UserRequestSelector } from '../store';
 import * as fromReducer from '../store/reducers';

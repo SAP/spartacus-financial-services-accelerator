@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { OccConfig, RoutingService } from '@spartacus/core';
+import { OccConfig } from '@spartacus/core';
 import { QuoteService } from '../../../../core/my-account/services/quote.service';
 import * as fromQuoteStore from '../../../../core/my-account/store';
 
@@ -13,8 +13,7 @@ export class QuotesComponent implements OnInit {
   constructor(
     private store: Store<fromQuoteStore.UserState>,
     private config: OccConfig,
-    protected quoteService: QuoteService,
-    protected routingService: RoutingService
+    protected quoteService: QuoteService
   ) {}
 
   quotes$;
@@ -30,17 +29,6 @@ export class QuotesComponent implements OnInit {
 
   retrieveQuote(quote: any) {
     this.quoteService.retrieveQuote(quote);
-    if (quote && quote.state) {
-      if (quote.state.code === 'BIND') {
-        this.routingService.go({
-          cxRoute: 'quoteReview',
-        });
-      } else {
-        this.routingService.go({
-          cxRoute: 'addOptions',
-        });
-      }
-    }
   }
 
   public getBaseUrl() {

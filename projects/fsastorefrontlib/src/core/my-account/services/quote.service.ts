@@ -3,7 +3,7 @@ import { Store, select } from '@ngrx/store';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
-import { AuthService, CartActions } from '@spartacus/core';
+import { AuthService, CartActions, RoutingService } from '@spartacus/core';
 import { QuoteDataService } from './quote-data.service';
 
 @Injectable()
@@ -11,7 +11,8 @@ export class QuoteService {
   constructor(
     private store: Store<fromReducer.UserState>,
     private quoteData: QuoteDataService,
-    protected auth: AuthService
+    protected auth: AuthService,
+    protected routingService: RoutingService
   ) {
     this.initQuotes();
   }
@@ -61,5 +62,16 @@ export class QuoteService {
         userId: this.quoteData.userId,
       })
     );
+    if (quote && quote.state) {
+      if (quote.state.code === 'BIND') {
+        this.routingService.go({
+          cxRoute: 'quoteReview',
+        });
+      } else {
+        this.routingService.go({
+          cxRoute: 'addOptions',
+        });
+      }
+    }
   }
 }
