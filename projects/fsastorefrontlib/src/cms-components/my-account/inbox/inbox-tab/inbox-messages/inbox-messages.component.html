@@ -38,7 +38,20 @@
           class="accordion-item-wrapper"
           [ngClass]="{ active: selectedIndex === i }"
         >
-          <div class="box-shadow" [innerHtml]="message.richContent"></div>
+          <div class="box-shadow">
+            <div [innerHtml]="message.richContent"></div>
+            <div *ngIf="message.documents" class="documents">
+              {{ message.documents.length }}
+              {{ 'fscommon.attachments' | cxTranslate }}
+              <ul *ngFor="let document of message.documents">
+                <li>
+                  <a class="link" [href]="document.downloadUrl"
+                    ><strong>{{ document.altText }}</strong></a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </ng-container>
