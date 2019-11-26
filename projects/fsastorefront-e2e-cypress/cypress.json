@@ -1,6 +1,6 @@
 {
   "defaultCommandTimeout": 10000,
-  "baseUrl": "http://10.27.241.116/insurance/en/EUR/",
+  "baseUrl": "http://localhost:4200",
   "requestTimeout": 10000,
   "modifyObstructiveCode": false,
   "env": {
