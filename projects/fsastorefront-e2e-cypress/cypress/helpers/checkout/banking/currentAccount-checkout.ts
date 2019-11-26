@@ -1,3 +1,5 @@
+import * as addOptionsPage from '../../../helpers/checkout/addOptionsPage';
+
 export function openCategoryPage() {
   cy.selectOptionFromDropdown({
     menuOption: 'Banking',
@@ -39,3 +41,47 @@ export function selectFamilyAccount() {
       cy.get('.primary-button').click();
     });
 }
+
+export function checkOptionalProductsAddTransactionChest() {
+  const addOptionsContent: addOptionsPage.AddOptions = {
+    title: 'Your Current Account Insurance',
+    items: [
+      {
+        name: 'Expense Tracker',
+        available: false,
+      },
+      {
+        name: 'Transaction Pouch',
+        available: true,
+      },
+      {
+        name: 'Transaction Chest',
+        available: true,
+        shouldAdd: true,
+      },
+    ],
+  };
+
+  addOptionsPage.checkAddOptionsPageContent(addOptionsContent);
+
+  cy.get('.primary-button')
+    .should('be.visible')
+    .click();
+}
+
+export function checkminiCartCurrentAccount() {
+  cy.get('fsa-mini-cart').within(() => {
+    cy.get('.short-overview-item').should('have.length', 2);
+    cy.get('.short-overview-item')
+      .eq(0)
+      .should('have.text', ' Family Account:  €4.99 ');
+    /*      cy.get('short-overview-item')
+            .eq(1)
+            .should('have.text', ' Transaction Chest:  €5.00 ');*/
+    cy.get('.highlighted').should('have.text', ' Total price:  €9.99 ');
+  });
+}
+
+
+
+

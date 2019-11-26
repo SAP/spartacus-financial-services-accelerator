@@ -1,3 +1,5 @@
+import {register} from "ts-node";
+
 export interface RegisterUser {
   titleCode: string;
   firstName: string;
@@ -8,8 +10,7 @@ export interface RegisterUser {
   password: string;
 }
 
-export function registerUser(user: RegisterUser) {
-  cy.findByText(/Sign in \/ Register/i).click();
+export function populateRegistrationForm (user: RegisterUser) {
   cy.get('cx-page-layout')
     .findByText('Register')
     .click({ force: true });
@@ -27,6 +28,11 @@ export function registerUser(user: RegisterUser) {
     cy.get('[formcontrolname="termsandconditions"]').check();
     cy.get('button[type="submit"]').click();
   });
+}
+
+export function registerUser(user: RegisterUser) {
+  cy.findByText(/Sign in \/ Register/i).click();
+  this.populateRegistrationForm(user);
 }
 
 export function validatePhoneNumber(expectedValue: string) {
@@ -53,26 +59,6 @@ export function login(username: string, password: string) {
 
 export function logout() {
   cy.findByText('Logout').click();
-}
-
-export function registerUserInCheckout(user: RegisterUser) {
-  cy.get('cx-page-layout')
-    .findByText('Register')
-    .click({ force: true });
-  cy.get('fsa-register form').within(() => {
-    cy.get('[formcontrolname="titleCode"]').select(user.titleCode);
-    cy.get('[formcontrolname="firstName"]').type(user.firstName);
-    cy.get('[formcontrolname="lastName"]').type(user.lastName);
-    cy.get('[formcontrolname="dateOfBirth"]').type(user.dateOfBirth);
-    if (user.phoneNumber) {
-      cy.get('[formcontrolname="phoneNumber"]').type(user.phoneNumber);
-    }
-    cy.get('[formcontrolname="email"]').type(user.email);
-    cy.get('[formcontrolname="password"]').type(user.password);
-    cy.get('[formcontrolname="passwordconf"]').type(user.password);
-    cy.get('[formcontrolname="termsandconditions"]').check();
-    cy.get('button[type="submit"]').click();
-  });
 }
 
 export function loginInCheckout(username: string, password: string) {

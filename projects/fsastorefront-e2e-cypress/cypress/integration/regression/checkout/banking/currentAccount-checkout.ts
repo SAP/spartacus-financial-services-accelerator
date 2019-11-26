@@ -2,7 +2,6 @@ import * as productCategory from '../../../../helpers/productCategoryPage';
 import * as comparisonPage from '../../../../helpers/comparisonTable';
 import * as addOptionsPage from '../../../../helpers/checkout/addOptionsPage';
 import * as buttons from '../../../../helpers/checkout/buttons';
-import * as miniCart from '../../../../helpers/checkout/miniCart';
 import * as quoteReview from '../../../../helpers/checkout/quoteReview';
 import * as legalInformationPage from '../../../../helpers/checkout/banking/legalInformationPage';
 import * as userIdentificationPage from '../../../../helpers/checkout/banking/userIdentificationPage';
@@ -30,18 +29,14 @@ context('Current AccountCheckout', () => {
     comparisonPage.checkComparisonPageCurrentAccount();
   });
 
-  it('Should check prices in comparison table and select Familicy Account', () => {
+  it('Should check prices in comparison table and select Family Account', () => {
     currentAccount.checkComparisonTable();
     currentAccount.selectFamilyAccount();
   });
 
   it('Should check optional products for Current Account', () => {
     addOptionsPage.checkAddOptionsPage();
-    addOptionsPage.checkAddOptionsPageCurrentAccount();
-  });
-
-  it('Should add optional product Transaction Chest', () => {
-    addOptionsPage.addTransactionChest();
+    currentAccount.checkOptionalProductsAddTransactionChest();
   });
 
   it('Should Continue in checkout', () => {
@@ -49,14 +44,14 @@ context('Current AccountCheckout', () => {
   });
 
   it('Should register user in checkout', () => {
-    register.registerUserInCheckout(registrationUser);
+    register.populateRegistrationForm(registrationUser);
     cy.wait(3000);
     register.loginInCheckout(registrationUser.email, registrationUser.password);
     cy.wait(1500);
   });
 
   it('Should check Mini Cart', () => {
-    miniCart.checkminiCartCurrentAccount();
+    currentAccount.checkminiCartCurrentAccount();
   });
 
   it('Should check Quote Review page', () => {
