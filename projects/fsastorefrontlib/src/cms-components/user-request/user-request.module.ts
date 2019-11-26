@@ -34,6 +34,7 @@ import { UserRequestStoreModule } from '../../core/user-request/store/user-reque
 import { UserRequestSummaryComponent } from './user-request-summary/user-request-summary.component';
 import { OccUserRequestService } from '../../occ/services/user-request/user-request.service';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
+import { DynamicFormModule } from '@fsa/dynamicforms';
 
 const routes: Routes = [
   {

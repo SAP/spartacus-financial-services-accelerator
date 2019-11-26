@@ -1,14 +1,24 @@
 import { YFormDefinition } from './../../models/form-occ.models';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { YFormData } from '../../models';
+import { YFormData, FormStorageObject } from '../../models';
 import { OccFormService } from '../../../occ/services/form/occ-form.service';
 
 @Injectable()
 export class FormDataService {
-  constructor(protected occYformsService: OccFormService) {}
-
+  private formLocalStorageData: FormStorageObject[];
+  private formsLocalStorageKey = 'dynamicFormsData';
   submittedForm = new BehaviorSubject<YFormData>(null);
+  constructor(protected occYformsService: OccFormService) {
+    const initialStorageState = localStorage.getItem(this.formsLocalStorageKey);
+    if (initialStorageState === 'undefined' || initialStorageState === null) {
+      this.formLocalStorageData = [];
+      localStorage.setItem(
+        this.formsLocalStorageKey,
+        JSON.stringify(this.formLocalStorageData)
+      );
+    }
+  }
 
   // ***SHOULD BE REMOVED WITH FSA-4419***
   currentForm$: BehaviorSubject<YFormData> = new BehaviorSubject({});
@@ -27,6 +37,40 @@ export class FormDataService {
 
   setSubmittedForm(formData?: YFormData) {
     this.submittedForm.next(formData);
+  }
+
+  setFormDataToLocalStorage(formDefinitionId: string, formDataId: string) {
+    this.formLocalStorageData = JSON.parse(
+      localStorage.getItem(this.formsLocalStorageKey)
+    );
+    if (this.formLocalStorageData.length === 0) {
+      this.formLocalStorageData.push(
+        this.createDataForLocalStorage(formDataId, formDefinitionId)
+      );
+    } else {
+      const index = this.formLocalStorageData
+        .map(sessionData => sessionData.formDefinitionId)
+        .indexOf(formDefinitionId);
+      if (index !== -1) {
+        this.formLocalStorageData[index].formDataId = formDataId;
+      } else {
+        this.formLocalStorageData.push(
+          this.createDataForLocalStorage(formDataId, formDefinitionId)
+        );
+      }
+    }
+    localStorage.setItem(
+      this.formsLocalStorageKey,
+      JSON.stringify(this.formLocalStorageData)
+    );
+  }
+
+  private createDataForLocalStorage(formDataId, formDefinitionId) {
+    const newSessionObj: FormStorageObject = {
+      formDataId: formDataId,
+      formDefinitionId: formDefinitionId,
+    };
+    return newSessionObj;
   }
 
   saveFormData(

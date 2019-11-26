@@ -76,10 +76,18 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
       this.component$
         .pipe(
           map(componentData => {
-            if (componentData) {
-              const formDataId = sessionStorage.getItem(componentData.formId);
-              if (formDataId) {
-                this.formData$ = this.formDataService.getFormData(formDataId);
+            const formLocalStorageData = JSON.parse(
+              localStorage.getItem('dynamicFormsData')
+            );
+            if (formLocalStorageData) {
+              const index = formLocalStorageData
+                .map(sessionData => sessionData.formDefinitionId)
+                .indexOf(componentData.formId);
+              if (index !== -1) {
+                const formDataId = formLocalStorageData[index].formDataId;
+                if (formDataId) {
+                  this.formData$ = this.formDataService.getFormData(formDataId);
+                }
               }
             }
           })

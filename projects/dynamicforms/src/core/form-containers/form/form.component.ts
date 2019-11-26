@@ -13,7 +13,6 @@ import { YFormData } from 'dynamicforms/src/core';
 })
 export class FormComponent implements OnDestroy {
   private subscription = new Subscription();
-
   constructor(
     protected routingService: RoutingService,
     protected formDataService: FormDataService
@@ -44,8 +43,10 @@ export class FormComponent implements OnDestroy {
               content: response.content,
               categoryCode: this.formCategoryCode,
             });
-
-            sessionStorage.setItem(this.formName, response.id);
+            this.formDataService.setFormDataToLocalStorage(
+              this.formName,
+              response.id
+            );
             this.formDataService.setSubmittedForm(response);
           })
       );
