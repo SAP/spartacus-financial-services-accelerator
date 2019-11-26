@@ -51,14 +51,23 @@ export class UserRequestService {
     return this.store.select(UserRequestSelector.getUserRequestContent);
   }
 
-  updateUserRequest(
-    requestId: string,
-    stepData: FSStepData
-  ): Observable<FSUserRequest> {
+  updateUserRequestStep(
+    userRequest: FSUserRequest,
+    stepIndex: number,
+    data: any,
+    stepStatus: string
+  ) {
+    const stepData = Object.assign(
+      {
+        yformConfigurator: data['id'],
+      },
+      userRequest.configurationSteps[stepIndex]
+    );
+    stepData.status = stepStatus;
     this.store.dispatch(
       new fromAction.UpdateUserRequest({
         userId: this.userRequestData.userId,
-        requestId: requestId,
+        requestId: userRequest.requestId,
         stepData: stepData,
       })
     );

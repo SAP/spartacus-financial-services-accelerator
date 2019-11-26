@@ -1,4 +1,3 @@
-import { FSStepData } from './../../../occ/occ-models/occ.models';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
@@ -29,22 +28,6 @@ export class UserRequestDataService {
       .subscribe(userRequest => {
         this._userRequest = userRequest;
       });
-  }
-
-  updateUserRequestStep(
-    fsRequest: FSUserRequest,
-    activeStepIndex: number,
-    data: any,
-    stepStatus: string
-  ): FSStepData {
-    const stepData = Object.assign(
-      {
-        yformConfigurator: data['id'],
-      },
-      fsRequest.configurationSteps[activeStepIndex]
-    );
-    stepData.status = stepStatus;
-    return stepData;
   }
 
   set userId(val) {
