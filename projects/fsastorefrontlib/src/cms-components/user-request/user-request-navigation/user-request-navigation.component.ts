@@ -1,12 +1,16 @@
+import { UserRequestDataService } from './../../../core/user-request/services/user-request-data.service';
+import { FormDataService } from '@fsa/dynamicforms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, Subscription, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import {
   UserRequestService,
   UserRequestNavigationService,
 } from '../../../core/user-request/services';
 import { FSUserRequest, FSStepData } from '../../../occ/occ-models';
+
+const completedStatus = 'COMPLETED';
 
 @Component({
   selector: 'fsa-user-request-navigation',
@@ -22,7 +26,9 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
   constructor(
     protected userRequestService: UserRequestService,
     protected activatedRoute: ActivatedRoute,
-    protected userRequestNavigationService: UserRequestNavigationService
+    protected userRequestNavigationService: UserRequestNavigationService,
+    protected formDataService: FormDataService,
+    protected userRequestDataService: UserRequestDataService
   ) {}
 
   ngOnInit() {
@@ -58,14 +64,47 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
 
   getNumberOfConfigurationSteps(): number {
     if (this.configurationSteps) {
-      return this.configurationSteps.length - 1;
+      return this.configurationSteps.length;
     }
   }
 
   next(currentStep: number): void {
-    this.userRequestNavigationService.next(
-      this.configurationSteps,
-      currentStep
+    this.formDataService.submit();
+    this.subscription.add(
+      this.formDataService
+        .getSubmittedForm()
+        .pipe(
+          switchMap(formData => {
+            if (formData) {
+              const userRequestData = this.userRequestDataService.userRequest;
+              if (
+                userRequestData &&
+                userRequestData.requestId &&
+                formData.content !== undefined
+              ) {
+                return this.userRequestService
+                  .updateUserRequestStep(
+                    userRequestData,
+                    this.activeStepIndex,
+                    formData,
+                    completedStatus
+                  )
+                  .pipe(
+                    map(updatedUserRequest => {
+                      if (updatedUserRequest) {
+                        this.userRequestNavigationService.continue(
+                          this.configurationSteps,
+                          currentStep
+                        );
+                      }
+                    })
+                  );
+              }
+            }
+            return of(null);
+          })
+        )
+        .subscribe()
     );
   }
 

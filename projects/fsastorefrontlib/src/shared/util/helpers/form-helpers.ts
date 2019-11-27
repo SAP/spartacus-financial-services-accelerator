@@ -16,10 +16,10 @@ export class FormHelpers {
     };
   }
 
-  static shouldEnableDependentGroup(groupName: Array<string>) {
+  static shouldEnableDependentGroup(groupCode: Array<string>) {
     return (control: AbstractControl): ValidationErrors | null => {
       let targetGroup;
-      groupName.forEach((name, index) => {
+      groupCode.forEach((name, index) => {
         if (
           control.parent &&
           control.parent.parent &&
