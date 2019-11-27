@@ -66,6 +66,14 @@ header {
     }
   }
   cx-navigation-ui.flyout {
+    &.accNavComponent {
+      nav {
+        position: relative;
+        .wrapper {
+          top: 36px;
+        }
+      }
+    }
     .childs nav:not(:last-child) {
       padding-right: 0;
     }
@@ -76,6 +84,9 @@ header {
         @include media-breakpoint-down(md) {
           padding: 1rem;
         }
+      }
+      &:last-child {
+        overflow: inherit;
       }
       & > .wrapper {
         padding: 0;
