@@ -23,7 +23,7 @@
             >
               {{ message.subject }}
               <ng-container *ngIf="message.documents?.length > 0">
-                <span class="position-absolute icon-attachment FSA-icon"></span>
+                <span class="position-absolute FSA-icon icon-attachment"></span>
               </ng-container>
             </div>
             <div
@@ -45,12 +45,19 @@
             <div [innerHtml]="message.richContent"></div>
             <div *ngIf="message.documents" class="border-top-grey pt-4">
               <span class="notification">
-                {{ message.documents.length }} {{ 'fscommon.attachments' | cxTranslate }}
-              </span> 
+                {{ message.documents.length }}
+                {{ 'fscommon.attachments' | cxTranslate }}
+              </span>
               <ul class="mt-3 document-list">
-                <li class="pb-2 mb-1 document-list-item" *ngFor="let document of message.documents">
+                <li
+                  class="pb-2 mb-1 document-list-item"
+                  *ngFor="let document of message.documents"
+                >
                   <span class="icon-external-link FSA-icon"></span>
-                  <a class="document-link pl-2" [href]="document.downloadUrl" target="_blank"
+                  <a
+                    class="document-link pl-2"
+                    [href]="document.downloadUrl"
+                    target="_blank"
                     >{{ document.altText }}</a
                   >
                 </li>
