@@ -8,5 +8,4 @@ export abstract class UserRequestAdapter {
    * @param userId The user request id
    */
   abstract getUserRequest(userId: string, requestId: string): Observable<any>;
-
 }

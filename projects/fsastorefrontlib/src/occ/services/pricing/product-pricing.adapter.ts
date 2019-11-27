@@ -13,5 +13,4 @@ export abstract class ProductPricingAdapter {
     productCode: string,
     pricingData: PricingData
   ): Observable<Product>;
-
 }

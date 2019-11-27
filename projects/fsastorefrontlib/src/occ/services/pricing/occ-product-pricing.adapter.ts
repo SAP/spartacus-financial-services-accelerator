@@ -10,7 +10,7 @@ import { ProductPricingAdapter } from './product-pricing.adapter';
 const FULL_PARAMS = 'fields=DEFAULT';
 
 @Injectable()
-export class OccProductPricingAdapter implements ProductPricingAdapter{
+export class OccProductPricingAdapter implements ProductPricingAdapter {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService
