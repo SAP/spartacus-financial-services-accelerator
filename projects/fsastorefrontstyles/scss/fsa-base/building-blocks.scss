@@ -87,6 +87,22 @@
   padding: 1rem;
   text-align: center;
 }
+.documents {
+  li:first-child {
+    border-bottom: none;
+    text-transform: uppercase;
+    background: var(--cx-color-4);
+    font-weight: var(--cx-font-weight-semi);
+  }
+  .document-link {
+    color: var(--cx-color-12);
+    font-weight: var(--cx-font-weight-normal);
+  }
+  .document-title {
+    color: var(--cx-color-11);
+    font-weight: var(--cx-font-weight-semi);
+  }
+}
 .main-heading {
   font-size: var(--cx-h2-font-size);
   color: var(--cx-color-text);
