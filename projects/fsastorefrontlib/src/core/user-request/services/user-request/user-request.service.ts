@@ -7,6 +7,7 @@ import { FSUserRequest } from '../../../../occ/occ-models';
 import { UserRequestSelector } from '../../store';
 import * as fromAction from '../../store/actions/index';
 import { UserRequestDataService } from '../user-request-data.service';
+import { FSStepData } from './../../../../occ/occ-models/occ.models';
 
 @Injectable()
 export class UserRequestService {
@@ -16,20 +17,16 @@ export class UserRequestService {
   ) {}
 
   getUserRequest(): Observable<FSUserRequest> {
-    // Should read user request data from store. Commented until update of user request is finished.
-    // New http request is triggered on every step currently.
-
-    // this.store
-    //   .select(UserRequestSelector.getUserRequestContent)
-    //   .pipe(
-    //     map(storedUserRequestData => {
-    //       if (!this.areConfigurationStepsCreated(storedUserRequestData)) {
-    //         this.loadUserRequestData();
-    //       }
-    //     })
-    //   )
-    //   .subscribe();
-    this.loadUserRequestData();
+    this.store
+      .select(UserRequestSelector.getUserRequestContent)
+      .pipe(
+        map(storedUserRequestData => {
+          if (!this.areConfigurationStepsCreated(storedUserRequestData)) {
+            this.loadUserRequestData();
+          }
+        })
+      )
+      .subscribe();
     return this.store.select(UserRequestSelector.getUserRequestContent);
   }
 
@@ -42,6 +39,41 @@ export class UserRequestService {
         })
       );
     }
+  }
+
+  resumeRequest(requestId: string): Observable<FSUserRequest> {
+    this.store.dispatch(
+      new fromAction.LoadUserRequest({
+        userId: this.userRequestData.userId,
+        requestId: requestId,
+      })
+    );
+    return this.store.select(UserRequestSelector.getUserRequestContent);
+  }
+
+  updateUserRequestStep(
+    userRequest: FSUserRequest,
+    stepIndex: number,
+    data: any,
+    stepStatus: string
+  ): Observable<FSUserRequest> {
+    const stepData = Object.assign(
+      {
+        yformConfigurator: data['id'],
+      },
+      userRequest.configurationSteps[stepIndex],
+      {
+        status: stepStatus,
+      }
+    );
+    this.store.dispatch(
+      new fromAction.UpdateUserRequest({
+        userId: this.userRequestData.userId,
+        requestId: userRequest.requestId,
+        stepData: stepData,
+      })
+    );
+    return this.store.select(UserRequestSelector.getUserRequestContent);
   }
 
   private areConfigurationStepsCreated(userRequest: FSUserRequest): boolean {

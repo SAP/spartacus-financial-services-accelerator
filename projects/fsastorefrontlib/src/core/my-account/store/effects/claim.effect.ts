@@ -68,6 +68,7 @@ export class ClaimEffects {
         );
     })
   );
+
   constructor(
     private actions$: Actions,
     private claimService: OccClaimService,

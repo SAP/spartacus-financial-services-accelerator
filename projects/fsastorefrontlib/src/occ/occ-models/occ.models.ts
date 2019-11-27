@@ -39,15 +39,12 @@ export interface FSUser extends User {
   contactInfos?: FSContactInfo[];
 }
 
-export interface FSStepDataStatus {
-  code?: string;
-}
-
 export interface FSStepData {
   name?: string;
   sequenceNumber?: string;
   pageLabelOrId?: string;
-  status?: FSStepDataStatus;
+  status?: string;
+  yFormConfigurator?: string;
 }
 
 export interface FSUserRequest {

@@ -13,6 +13,9 @@
             >
               <div
                 class="d-inline-block underline-effect progress-node mx-2"
+                [ngClass]="{
+                  ' is-disabled': step.status === 'UNSET'
+                }"
                 [routerLink]="
                   {
                     cxRoute: step.pageLabelOrId
