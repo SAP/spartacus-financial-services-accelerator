@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { OccAgentService } from '../../../occ/services/agent/agent.service';
+import { OccAgentAdapter } from './../../../occ/services/agent/occ-agent.adapter';
 import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AgentSearchService {
-  constructor(protected occAgentService: OccAgentService) {}
+  constructor(protected occAgentAdapter: OccAgentAdapter) {}
 
   agents = new BehaviorSubject<any>(null);
   agentDetails = new BehaviorSubject<any>(null);
 
   search(searchQuery: string, pageNumber: number) {
-    this.occAgentService
+    this.occAgentAdapter
       .getAgentsByQuery(searchQuery, pageNumber)
       .pipe(take(1))
       .subscribe(searchResults => {
