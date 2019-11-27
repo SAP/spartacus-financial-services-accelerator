@@ -26,7 +26,7 @@ import {
 } from '@spartacus/storefront';
 import { CategoryStepGuard } from './guards/category-step-guard';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
-import { OccFSCartService } from '../../occ/services/cart/fs-cart.service';
+import { OccFSCartAdapter } from '../../occ/services/cart/occ-fs-cart.adapter';
 import { AddOptionsComponent } from './components/add-options/add-options.component';
 import { FSCheckoutProgressComponent } from './components/checkout-progress/fs-checkout-progress.component';
 import { FSCheckoutProgressModule } from './components/checkout-progress/fs-checkout-progress.module';
@@ -37,7 +37,7 @@ import { FsaOrderConfirmationComponent } from './components/order-confirmation/o
 import { QuoteReviewComponent } from './components/quote-review/quote-review.component';
 import { UserIdentificationModule } from './components/user-identification/user-identification.module';
 import { FSCartService } from '../../core/checkout/services/cart/fs-cart.service';
-import { FSCategoryService } from '../../core/checkout/services/category/fs-category.service';
+import { CategoryService } from '../../core/checkout/services/category/category.service';
 import { effects } from '../../core/checkout/store/effects/index';
 import { FSCheckoutStepGuard } from './guards/fs-checkout-step-guard';
 import {
@@ -46,7 +46,7 @@ import {
 } from '../../core/checkout/store/reducers/index';
 import { StoreModule } from '@ngrx/store';
 import { CHECKOUT_FEATURE } from '../../core/checkout/store';
-import { OccFSCheckoutService } from '../../occ/services/checkout/fs-checkout.service';
+import { OccFSCheckoutAdapter } from '../../occ/services/checkout/occ-fs-checkout.adapter';
 import { FormNavigationComponent } from './components/form-navigation/form-navigation.component';
 
 const routes: Routes = [
@@ -216,9 +216,9 @@ const routes: Routes = [
   ],
   providers: [
     FSCartService,
-    OccFSCheckoutService,
-    OccFSCartService,
-    FSCategoryService,
+    OccFSCheckoutAdapter,
+    OccFSCartAdapter,
+    CategoryService,
     reducerProvider,
   ],
 })

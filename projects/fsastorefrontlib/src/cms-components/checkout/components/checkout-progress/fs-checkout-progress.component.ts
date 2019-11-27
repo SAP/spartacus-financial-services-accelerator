@@ -15,7 +15,7 @@ import {
   CheckoutConfig,
   CheckoutProgressComponent,
 } from '@spartacus/storefront';
-import { FSCategoryService } from '../../../../core/checkout/services/category/fs-category.service';
+import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCheckoutStep } from './fs-checkout-step.component';
 import { FSProduct } from '../../../../occ/occ-models';
 
@@ -31,7 +31,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
     protected routingService: RoutingService,
     protected routingConfigService: RoutingConfigService,
     protected activatedRoute: ActivatedRoute,
-    protected categoryService: FSCategoryService,
+    protected categoryService: CategoryService,
     protected cartService: CartService
   ) {
     super(config, routingService, routingConfigService);

@@ -16,7 +16,7 @@ import {
   PageLayoutComponent,
   SpinnerModule,
 } from '@spartacus/storefront';
-import { OccClaimService } from '../../../occ/services/claim/claim.service';
+import { OccClaimAdapter } from '../../../occ/services/claim/occ-claim.adapter';
 import { DeleteClaimDialogComponent } from './delete-claim-dialog/delete-claim-dialog.component';
 import { ClaimPoliciesComponent } from './claim-policies/claim-policies.component';
 import { ClaimsComponent } from './claims/claims.component';
@@ -72,7 +72,7 @@ const routes: Routes = [
     ClaimService,
     ClaimDataService,
     ClaimPoliciesComponent,
-    OccClaimService,
+    OccClaimAdapter,
   ],
   entryComponents: [
     ClaimsComponent,

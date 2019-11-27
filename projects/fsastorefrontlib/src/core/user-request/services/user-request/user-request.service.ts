@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import * as fromReducer from '../../store/reducers';
@@ -7,7 +7,6 @@ import { FSUserRequest } from '../../../../occ/occ-models';
 import { UserRequestSelector } from '../../store';
 import * as fromAction from '../../store/actions/index';
 import { UserRequestDataService } from '../user-request-data.service';
-import { FSStepData } from './../../../../occ/occ-models/occ.models';
 
 @Injectable()
 export class UserRequestService {
@@ -66,6 +65,7 @@ export class UserRequestService {
         status: stepStatus,
       }
     );
+    console.log(stepData);
     this.store.dispatch(
       new fromAction.UpdateUserRequest({
         userId: this.userRequestData.userId,

@@ -1,14 +1,16 @@
+import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OccEndpointsService } from '@spartacus/core';
+import { OccEndpointsService, Product } from '@spartacus/core';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
 import { PricingData } from '../../../core/models/pricing.interface';
+import { ProductPricingAdapter } from './product-pricing.adapter';
 
 const FULL_PARAMS = 'fields=DEFAULT';
 
 @Injectable()
-export class OccProductService {
+export class OccProductPricingAdapter implements ProductPricingAdapter{
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService
@@ -17,7 +19,7 @@ export class OccProductService {
   public getCalculatedProductData(
     productCode: string,
     pricingData: PricingData
-  ): any {
+  ): Observable<Product> {
     const url = this.getCalculateProductPriceEndpoint(productCode);
     const params = new HttpParams({ fromString: FULL_PARAMS });
     const headers = new HttpHeaders({

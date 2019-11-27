@@ -4,7 +4,7 @@ import { ProductActions } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import * as fromActions from '../actions/index';
-import { OccProductService } from '../../../../occ/services/pricing/occ-product.service';
+import { OccProductPricingAdapter } from '../../../../occ/services/pricing/occ-product-pricing.adapter';
 
 @Injectable()
 export class FSProductEffect {
@@ -13,7 +13,7 @@ export class FSProductEffect {
     ofType(fromActions.LOAD_CALCULATED_PRODUCT_DATA),
     map((action: fromActions.LoadCalculatedProductData) => action.payload),
     mergeMap(payload => {
-      return this.occProductService
+      return this.occProductPricingAdapter
         .getCalculatedProductData(payload.productCode, payload.pricingData)
         .pipe(
           map((product: any) => {
@@ -28,6 +28,6 @@ export class FSProductEffect {
 
   constructor(
     private actions$: Actions,
-    private occProductService: OccProductService
+    private occProductPricingAdapter: OccProductPricingAdapter
   ) {}
 }

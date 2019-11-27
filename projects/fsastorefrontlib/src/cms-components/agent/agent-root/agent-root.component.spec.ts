@@ -7,11 +7,11 @@ import { of, Observable, BehaviorSubject } from 'rxjs';
 import { AgentRootComponent } from './agent-root.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { CmsAgentRootComponent } from '../../../occ/occ-models';
-import { OccAgentService } from '../../../occ/services/agent/agent.service';
+import { OccAgentAdapter } from '../../../occ/services/agent/occ-agent.adapter';
 
 const mockedAgentList = ['testAgent'];
 
-export class MockOccAgentService {
+export class MockOccAgentAdapter {
   getAgentsByCategory(): Observable<Object> {
     return new BehaviorSubject(mockedAgentList);
   }
@@ -20,7 +20,7 @@ export class MockOccAgentService {
 describe('AgentRootComponent', () => {
   let component: AgentRootComponent;
   let fixture: ComponentFixture<AgentRootComponent>;
-  let mockOccAgentService: MockOccAgentService;
+  let mockOccAgentAdapter: MockOccAgentAdapter;
   let el: DebugElement;
 
   const componentData: CmsAgentRootComponent = {
@@ -35,7 +35,7 @@ describe('AgentRootComponent', () => {
   };
 
   beforeEach(async(() => {
-    mockOccAgentService = new MockOccAgentService();
+    mockOccAgentAdapter = new MockOccAgentAdapter();
     TestBed.configureTestingModule({
       imports: [I18nTestingModule, AccordionModule, MediaModule],
       declarations: [AgentRootComponent],
@@ -45,8 +45,8 @@ describe('AgentRootComponent', () => {
           useValue: MockCmsComponentData,
         },
         {
-          provide: OccAgentService,
-          useValue: mockOccAgentService,
+          provide: OccAgentAdapter,
+          useValue: mockOccAgentAdapter,
         },
       ],
     }).compileComponents();
