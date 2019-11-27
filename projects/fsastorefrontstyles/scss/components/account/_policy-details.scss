@@ -65,20 +65,4 @@
       font-size: var(--cx-h6-font-size);
     }
   }
-  .documents {
-    li:first-child {
-      border-bottom: none;
-      text-transform: uppercase;
-      background: var(--cx-color-4);
-      font-weight: var(--cx-font-weight-semi);
-    }
-    .link {
-      color: var(--cx-color-12);
-      font-weight: var(--cx-font-weight-normal);
-    }
-    .value {
-      color: var(--cx-color-11);
-      font-weight: var(--cx-font-weight-semi);
-    }
-  }
 }
