@@ -29,7 +29,7 @@ export class CMSViewPoliciesComponent implements OnInit, OnDestroy {
     protected authService: AuthService
   ) {}
 
-  subscription: Subscription;
+  subscription = new Subscription();
 
   component$;
   policies$;
