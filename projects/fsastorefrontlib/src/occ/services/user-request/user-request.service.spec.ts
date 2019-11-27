@@ -6,12 +6,20 @@ import {
 import { async, TestBed } from '@angular/core/testing';
 import { OccConfig } from '@spartacus/core';
 import { OccUserRequestService } from './user-request.service';
+import { FSStepData } from './../../occ-models/occ.models';
 
 const userId = 'test@user.com';
 const requestId = '000001';
 
 const usersEndpoint = '/users';
 const requestEndpoint = '/requests';
+
+const stepData: FSStepData = {
+  name: 'testStepData',
+  pageLabelOrId: 'testPage',
+  sequenceNumber: '1',
+  status: 'COMPLETED',
+};
 
 const MockOccModuleConfig: OccConfig = {
   context: {
@@ -58,4 +66,16 @@ describe('OccUserRequestService', () => {
       }, `GET method and url`);
     }));
   });
+
+  it('update user request', async(() => {
+    service.updateUserRequest(userId, requestId, stepData).subscribe();
+    httpMock.expectOne((req: HttpRequest<any>) => {
+      return (
+        req.url ===
+          usersEndpoint + `/${userId}` + requestEndpoint + `/${requestId}` &&
+        req.body === stepData &&
+        req.method === 'PATCH'
+      );
+    }, `PATCH method and url`);
+  }));
 });

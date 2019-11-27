@@ -4,6 +4,7 @@ import { OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
+import { FSStepData } from '../../occ-models';
 
 @Injectable()
 export class OccUserRequestService {
@@ -23,6 +24,17 @@ export class OccUserRequestService {
 
     return this.http
       .get(url, { params: params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  public updateUserRequest(
+    userId: string,
+    requestId: string,
+    stepData: FSStepData
+  ): Observable<any> {
+    const url = this.getUserRequestEndpoint(userId, requestId);
+    return this.http
+      .patch(url, stepData, {})
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 }
