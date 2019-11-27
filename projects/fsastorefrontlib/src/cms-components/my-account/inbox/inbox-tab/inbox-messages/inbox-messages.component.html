@@ -50,7 +50,7 @@
               <ul class="mt-3 document-list">
                 <li class="pb-2 mb-1 document-list-item" *ngFor="let document of message.documents">
                   <span class="icon-external-link FSA-icon"></span>
-                  <a class="document-link pl-2" [href]="document.downloadUrl"
+                  <a class="document-link pl-2" [href]="document.downloadUrl" target="_blank"
                     >{{ document.altText }}</a
                   >
                 </li>
