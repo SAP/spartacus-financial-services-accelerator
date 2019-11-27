@@ -7,5 +7,4 @@ export abstract class QuoteAdapter {
    * @param userId The user id
    */
   abstract getQuotes(userId: string): Observable<any>;
-
 }

@@ -15,7 +15,7 @@ export abstract class InboxAdapter {
     searchConfig: FSSearchConfig
   ): Observable<any>;
 
-    /**
+  /**
    * Abstract method used to change state of site messages
    *
    * @param userId The user id
@@ -27,5 +27,4 @@ export abstract class InboxAdapter {
     messagesUidList: Array<string>,
     readStatus: boolean
   ): Observable<any>;
-
 }

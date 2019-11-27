@@ -71,6 +71,6 @@ import { OccUserRequestAdapter } from './services/user-request/occ-user-request.
       useClass: OccUserRequestAdapter,
     },
     { provide: OccConfig, useExisting: Config },
-  ]
+  ],
 })
 export class OccModule {}

@@ -8,7 +8,7 @@ export abstract class PolicyAdapter {
    */
   abstract getPolicies(userId: string): Observable<any>;
 
-    /**
+  /**
    * Abstract method used to get policies by category
    *
    * @param userId The user id
@@ -18,5 +18,4 @@ export abstract class PolicyAdapter {
     userId: string,
     policyCategoryCode: string
   ): Observable<any>;
-
 }
