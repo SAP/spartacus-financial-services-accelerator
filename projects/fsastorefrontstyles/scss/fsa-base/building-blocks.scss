@@ -54,6 +54,23 @@
     color: var(--cx-color-8);
   }
 }
+.notification {
+  background: var(--cx-color-warning);
+  color: var(--cx-color-2);
+  border-radius: 3px;
+  font-weight: var(--cx-font-weight-bold);
+  padding: 2px 8px;
+}
+.document-list {
+  .document-list-item {
+    .FSA-icon {
+      color: var(--cx-color-12);
+    }
+  }
+  .document-link {
+    text-decoration: underline;
+  }
+}
 .heading-headline {
   line-height: 35px;
   padding: 20px 0;
@@ -72,7 +89,7 @@
 }
 .main-heading {
   font-size: var(--cx-h2-font-size);
-  color: var(--cx-color-11);
+  color: var(--cx-color-text);
   font-weight: var(--cx-font-weight-semi);
   position: relative;
   &:before {

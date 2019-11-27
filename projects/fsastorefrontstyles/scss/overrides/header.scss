@@ -2,13 +2,13 @@
 @import '../theme';
 
 header {
-  color: var(--cx-color-11);
+  color: var(--cx-color-text);
   background-color: var(--cx-color-1);
   position: relative;
   z-index: 1;
   @include box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 0.3);
   @include media-breakpoint-down(md) {
-    background-color: var(--cx-color-11);
+    background-color: var(--cx-color-text);
   }
   &:before {
     content: '';
@@ -17,7 +17,7 @@ header {
     left: 0;
     width: 100%;
     height: 50px;
-    background: var(--cx-color-11);
+    background: var(--cx-color-text);
     @include media-breakpoint-down(md) {
       display: none;
     }
@@ -93,7 +93,7 @@ header {
         & > a {
           padding: 12px 60px 12px 20px;
           width: 100%;
-          color: var(--cx-color-11);
+          color: var(--cx-color-text);
           &:hover {
             background: var(--cx-color-10);
             color: var(--cx-color-primary);
@@ -115,7 +115,7 @@ header {
     }
     @include media-breakpoint-down(sm) {
       label {
-        background: var(--cx-color-11);
+        background: var(--cx-color-text);
         border: none;
       }
       cx-icon {
@@ -147,7 +147,7 @@ header {
     }
     cx-login {
       a {
-        color: var(--cx-color-11);
+        color: var(--cx-color-text);
       }
       .cx-login-greet {
         color: var(--cx-color-primary);
@@ -163,7 +163,7 @@ header {
     select {
       padding-right: 6px;
       option {
-        background: var(--cx-color-11);
+        background: var(--cx-color-text);
         color: var(--cx-color-1);
       }
     }
@@ -176,7 +176,7 @@ header {
     background: var(--cx-color-10);
     .SiteLogin {
       a {
-        color: var(--cx-color-11);
+        color: var(--cx-color-text);
       }
     }
     .TopHeaderSlot {
@@ -184,7 +184,7 @@ header {
       select,
       cx-icon,
       cx-generic-link a {
-        color: var(--cx-color-11);
+        color: var(--cx-color-text);
       }
     }
     .HeaderLinks {
