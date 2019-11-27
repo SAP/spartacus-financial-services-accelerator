@@ -45,7 +45,7 @@
               {{ 'fscommon.attachments' | cxTranslate }}
               <ul *ngFor="let document of message.documents">
                 <li>
-                  <a class="link" [href]="document.downloadUrl"
+                  <a class="link" [href]="document.downloadUrl" target="_blank"
                     ><strong>{{ document.altText }}</strong></a
                   >
                 </li>
