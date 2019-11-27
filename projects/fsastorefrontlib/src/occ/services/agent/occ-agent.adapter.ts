@@ -3,9 +3,10 @@ import { OccEndpointsService } from '@spartacus/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
+import { AgentAdapter } from './agent.adapter';
 
 @Injectable()
-export class OccAgentService {
+export class OccAgentAdapter implements AgentAdapter {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService
@@ -20,6 +21,7 @@ export class OccAgentService {
       .get(url, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
+
   protected getAgentsEndpoint() {
     const agentsEndpoint = '/agents';
     return this.occEndpointService.getBaseEndpoint() + agentsEndpoint;

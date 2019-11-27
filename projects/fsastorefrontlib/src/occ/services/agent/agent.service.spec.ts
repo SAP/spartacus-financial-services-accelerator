@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccConfig } from '@spartacus/core';
-import { OccAgentService } from './agent.service';
+import { OccAgentAdapter } from './occ-agent.adapter';
 
 const category = 'insurances_property_renters';
 
@@ -21,25 +21,25 @@ const MockOccModuleConfig: OccConfig = {
   },
 };
 
-describe('OccAgentService', () => {
-  let service: OccAgentService;
+describe('OccAgentAdapter', () => {
+  let adapter: OccAgentAdapter;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
-        OccAgentService,
+        OccAgentAdapter,
         { provide: OccConfig, useValue: MockOccModuleConfig },
       ],
     });
-    service = TestBed.get(OccAgentService);
+    adapter = TestBed.get(OccAgentAdapter);
     httpMock = TestBed.get(HttpTestingController);
   });
 
   describe('getAgentsByCategory', () => {
     it('get Agents By Category', async(() => {
-      service.getAgentsByCategory(category).subscribe(res => {});
+      adapter.getAgentsByCategory(category).subscribe(res => {});
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url === '/agents' &&

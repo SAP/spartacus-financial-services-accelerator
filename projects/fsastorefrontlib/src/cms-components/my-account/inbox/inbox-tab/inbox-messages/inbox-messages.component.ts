@@ -7,7 +7,7 @@ import {
   ChangeDetectorRef,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { OccInboxService } from '../../../../../occ/services/inbox/inbox.service';
+import { OccInboxAdapter } from '../../../../../occ/services/inbox/occ-inbox.adapter';
 import {
   FSSearchConfig,
   InboxDataService,
@@ -21,7 +21,7 @@ import { InboxService } from '../../../../../core/my-account/services/inbox.serv
 })
 export class InboxMessagesComponent implements OnInit, OnDestroy {
   constructor(
-    private occInboxService: OccInboxService,
+    private occInboxAdapter: OccInboxAdapter,
     private inboxService: InboxService,
     private inboxData: InboxDataService,
     private cdr: ChangeDetectorRef
@@ -51,7 +51,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     );
   }
   getMessages() {
-    this.messagesObject$ = this.occInboxService.getSiteMessagesForUserAndGroup(
+    this.messagesObject$ = this.occInboxAdapter.getSiteMessagesForUserAndGroup(
       this.inboxData.userId,
       this.messageGroup,
       this.searchConfig
