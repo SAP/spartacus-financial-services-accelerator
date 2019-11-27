@@ -70,7 +70,7 @@ export const fscommon = {
     whatDoesItCostMe: 'What Does It Cost Me?',
     legalInformation: 'Legal Information',
     listView: 'List View',
-    applications: 'Applications',
+    quotesAndApplications: 'Quotes & Applications',
     mapView: 'Map View',
     makeClaim: 'Make a Claim Online',
     summary: 'Summary',
@@ -115,6 +115,15 @@ export const fscommon = {
       iAmAuthorized:
         'I am authorized to accept' +
         'terms and conditions on behalf of a second account owner and agree to all the above terms on his behalf as well.',
+    },
+    search: {
+      totalNumberOfResults: 'Products found',
+      youSeachedFor: 'You have searched for',
+    },
+    agentLocator: {
+      contact: 'Contact',
+      categories: 'Categories',
+      searchBox: 'Search agent or insurance type',
     },
   },
 };

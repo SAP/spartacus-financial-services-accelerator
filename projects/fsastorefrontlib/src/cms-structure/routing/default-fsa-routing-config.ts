@@ -7,6 +7,9 @@ export const fsaStorefrontRoutesConfig: RoutesConfig = {
   },
   category: { paths: ['checkout/c/:categoryCode'] },
   addOptions: { paths: ['checkout/add-options'] },
+  checkoutPersonalDetails: {
+    paths: ['checkout/personal-details/:formCode'],
+  },
   quoteReview: { paths: ['checkout/quote-review'] },
   checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
   finalReview: { paths: ['checkout/final-review'] },

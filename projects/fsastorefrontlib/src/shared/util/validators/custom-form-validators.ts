@@ -10,7 +10,7 @@ export class CustomFormValidators {
   static regexValidator(regex) {
     return (control: AbstractControl): ValidationErrors | null => {
       const field = control.value as string;
-      return field.match(regex) ? null : { InvalidFormat: true };
+      return field && field.match(regex) ? null : { InvalidFormat: true };
     };
   }
 

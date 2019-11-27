@@ -11,7 +11,7 @@ export const fsaLayoutConfig: LayoutConfig = {
     header: {
       md: {
         slots: [
-          'TopHeaderSlot',
+          'SiteContext',
           'SiteLogo',
           'SearchBox',
           'SiteLogin',
