@@ -1,4 +1,5 @@
 .accordion {
+  color: var(--cx-color-11);
   .accordion-header-summary-caption {
     @include media-breakpoint-up(md) {
       text-align: left;
@@ -10,9 +11,9 @@
     padding: 2px;
   }
   .accordion-heading {
-    color: var(--cx-color-text);
+    color: var(--cx-color-11);
     background: var(--cx-color-4);
-    border-top: 5px solid var(--cx-color-primary);
+    border-top: 3px solid var(--cx-color-primary);
     font-weight: var(--cx-font-weight-semi);
     line-height: 1.6;
     margin-bottom: 0;

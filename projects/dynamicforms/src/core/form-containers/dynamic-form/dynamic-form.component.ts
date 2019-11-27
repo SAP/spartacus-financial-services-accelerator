@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  OnDestroy,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import {
   FieldConfig,
@@ -16,7 +23,7 @@ import { YFormData } from 'dynamicforms/src/core';
   selector: 'cx-dynamic-form',
   templateUrl: './dynamic-form.component.html',
 })
-export class DynamicFormComponent implements OnInit {
+export class DynamicFormComponent implements OnInit, OnDestroy {
   @Input()
   formData: Observable<YFormData>;
   @Input()
@@ -50,6 +57,12 @@ export class DynamicFormComponent implements OnInit {
       this.formData.subscribe(formData => {
         this.mapDataToFormControls(JSON.parse(formData.content));
       });
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 

@@ -14,5 +14,7 @@ export const policy = {
     yourPolicyHasBeenSubmited: 'Your policy has already been submited',
     finishQuoteToGetPolicy: 'You need to finish your quote to get a Policy',
     noValidPolicies: 'You have no valid policies',
+    documentName: 'Name',
+    documentIssueDate: 'Issue Date',
   },
 };
