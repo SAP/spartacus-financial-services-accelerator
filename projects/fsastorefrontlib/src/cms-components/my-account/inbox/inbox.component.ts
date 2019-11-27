@@ -26,8 +26,8 @@ export class InboxComponent implements OnInit, OnDestroy {
     protected cmsService: CmsService,
     protected inboxService: InboxService,
     private inboxData: InboxDataService,
-    protected auth: AuthService,
-  ) { }
+    protected auth: AuthService
+  ) {}
 
   subscription = new Subscription();
   component$: Observable<CmsInboxComponent>;
@@ -64,7 +64,9 @@ export class InboxComponent implements OnInit, OnDestroy {
 
     this.initialTab$ = this.cmsService.getComponentData(this.tabs[0]); // taking the first tab as initial/active on component load
     this.subscription.add(
-      this.inboxService.checkAllMessages.subscribe(data => this.mainCheckboxChecked = data)
+      this.inboxService.checkAllMessages.subscribe(
+        data => (this.mainCheckboxChecked = data)
+      )
     );
 
     this.subscription.add(
@@ -96,11 +98,14 @@ export class InboxComponent implements OnInit, OnDestroy {
   }
 
   checkAllCheckboxes() {
-    this.mainCheckboxChecked === true ?
-      this.inboxService.checkAllMessagesSource.next(false) : this.inboxService.checkAllMessagesSource.next(true);
+    this.mainCheckboxChecked === true
+      ? this.inboxService.checkAllMessagesSource.next(false)
+      : this.inboxService.checkAllMessagesSource.next(true);
     this.subscription.add(
       this.inboxService.checkAllMessages.subscribe(checked => {
-        checked === true ? this.childCheckboxes = true : this.childCheckboxes = false;
+        checked === true
+          ? (this.childCheckboxes = true)
+          : (this.childCheckboxes = false);
       })
     );
   }
@@ -108,13 +113,12 @@ export class InboxComponent implements OnInit, OnDestroy {
   changeMessagesReadState() {
     this.readState = !this.readState;
     const messagesUidList = this.inboxService.getUidsFromMessagesCollection();
-    if (messagesUidList.length === 0) {
-      return;
+    if (messagesUidList.length !== 0) {
+      this.readState = this.inboxService.getMessagesAction();
+      this.inboxService
+        .setMessagesState(messagesUidList, this.readState)
+        .subscribe();
     }
-    this.readState = this.inboxService.getMessagesAction();
-    this.inboxService
-      .setMessagesState(messagesUidList, this.readState)
-      .subscribe();
   }
 
   sortMessages(sortCode, sortOrder) {
