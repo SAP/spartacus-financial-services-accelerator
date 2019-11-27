@@ -1,4 +1,9 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import {
+  Component,
+  ChangeDetectionStrategy,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { Store, select } from '@ngrx/store';
 
 import { CmsComponentData } from '@spartacus/storefront';
@@ -7,13 +12,15 @@ import { OccConfig, AuthService } from '@spartacus/core';
 import { PolicyService } from '../../../../core/my-account/services/policy.service';
 import * as fromUserStore from '../../../../core/my-account/store';
 import { CmsViewPoliciesComponent } from '../../../../occ/occ-models/cms-component.models';
+import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'fsa-view-policies',
   templateUrl: './view-policies.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CMSViewPoliciesComponent implements OnInit {
+export class CMSViewPoliciesComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CmsViewPoliciesComponent>,
     private store: Store<fromUserStore.UserState>,
@@ -21,6 +28,8 @@ export class CMSViewPoliciesComponent implements OnInit {
     private policyService: PolicyService,
     protected authService: AuthService
   ) {}
+
+  subscription = new Subscription();
 
   component$;
   policies$;
@@ -34,17 +43,25 @@ export class CMSViewPoliciesComponent implements OnInit {
   allPoliciesDisplayed$ = false;
 
   ngOnInit() {
-    this.authService.getUserToken().subscribe(token => {
-      if (token.userId !== undefined) {
-        this.policyService.loadPolicies();
-        this.policies$ = this.store.pipe(select(fromUserStore.getPolicyData));
-        this.policiesLoaded$ = this.store.pipe(
-          select(fromUserStore.getPoliciesLoaded)
-        );
-      } else {
-        this.anonymous$ = true;
-      }
-    });
+    this.subscription.add(
+      this.authService
+        .getOccUserId()
+        .pipe(take(1))
+        .subscribe(occUserId => {
+          if (occUserId === 'anonymous') {
+            this.anonymous$ = true;
+          } else {
+            this.policyService.loadPolicies();
+            this.policies$ = this.store.pipe(
+              select(fromUserStore.getPolicyData)
+            );
+            this.policiesLoaded$ = this.store.pipe(
+              select(fromUserStore.getPoliciesLoaded)
+            );
+          }
+        })
+    );
+
     this.component$ = this.componentData.data$;
     this.policyButtonText = this.textAllPolicies$;
   }
@@ -58,6 +75,12 @@ export class CMSViewPoliciesComponent implements OnInit {
       this.policyButtonText = this.textLessPolicies$;
     } else {
       this.policyButtonText = this.textAllPolicies$;
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }

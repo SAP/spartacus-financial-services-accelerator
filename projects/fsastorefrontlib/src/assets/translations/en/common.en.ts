@@ -70,7 +70,7 @@ export const fscommon = {
     whatDoesItCostMe: 'What Does It Cost Me?',
     legalInformation: 'Legal Information',
     listView: 'List View',
-    applications: 'Applications',
+    quotesAndApplications: 'Quotes & Applications',
     mapView: 'Map View',
     makeClaim: 'Make a Claim Online',
     summary: 'Summary',
