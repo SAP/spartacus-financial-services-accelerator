@@ -79,6 +79,10 @@ export function reducer(
         paymentDetails: action.payload.paymentInfo,
       };
     }
+
+    case CheckoutActions.CLEAR_CHECKOUT_DATA: {
+      return initialState;
+    }
   }
   return state;
 }

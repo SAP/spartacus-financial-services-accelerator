@@ -51,7 +51,6 @@ export const fscommon = {
     paymentMethod: 'Payment method',
     confirmAndAgree: 'I confirm that I have read and agree with the',
     termsConditions: 'Terms & Conditions',
-    donwloadPDFLink: 'Download PDF Link',
     noMessagesForGroup: 'You have no messages for chosen group',
     modifyPlan: 'Modify Plan',
     thankYou: 'Thank you!',
@@ -70,7 +69,7 @@ export const fscommon = {
     whatDoesItCostMe: 'What Does It Cost Me?',
     legalInformation: 'Legal Information',
     listView: 'List View',
-    applications: 'Applications',
+    quotesAndApplications: 'Quotes & Applications',
     mapView: 'Map View',
     makeClaim: 'Make a Claim Online',
     summary: 'Summary',
@@ -120,5 +119,11 @@ export const fscommon = {
       totalNumberOfResults: 'Products found',
       youSeachedFor: 'You have searched for',
     },
+    agentLocator: {
+      contact: 'Contact',
+      categories: 'Categories',
+      searchBox: 'Search agent or insurance type',
+    },
+    attachments: 'Attachments',
   },
 };
