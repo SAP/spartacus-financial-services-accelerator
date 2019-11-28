@@ -752,7 +752,7 @@ export class FormSampleConfigurations {
             },
             {
               label: 'When did it happen?',
-              name: 'whenHappen',
+              name: 'whenHappened',
               type: 'datepicker',
               validation: [
                 Validators.required,
@@ -836,7 +836,7 @@ export class FormSampleConfigurations {
           fieldConfigs: [
             {
               label: 'Please describe how the accident occurred:',
-              name: 'howItHappen',
+              name: 'howAccidentOccured',
               type: 'textarea',
               validation: [Validators.required],
             },
@@ -851,13 +851,13 @@ export class FormSampleConfigurations {
           fieldConfigs: [
             {
               label: 'Who is responsible for the accident?',
-              name: 'resposnible',
+              name: 'responsibleForAccident',
               type: 'input',
               validation: [Validators.required],
             },
             {
               label: 'Were the police informed?',
-              name: 'policyInformed',
+              name: 'policeInformed',
               type: 'radio',
               options: [
                 {
@@ -873,7 +873,7 @@ export class FormSampleConfigurations {
             },
             {
               label: 'Are there any witnesses we can contact?',
-              name: 'anyWitnesses',
+              name: 'witnesses',
               type: 'radio',
               options: [
                 {
