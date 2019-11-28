@@ -259,9 +259,12 @@
         <ng-container *ngFor="let document of policy.documents">
           <li class="accordion-list-item row">
             <div class="col-6">
-              <a class="document-link" [href]="document.downloadUrl">{{
-                document.altText
-              }}</a>
+              <a
+                class="document-link"
+                [href]="document.downloadUrl"
+                target="_blank"
+                >{{ document.altText }}</a
+              >
             </div>
             <div class="col-6 document-title">
               {{ document.itemTimestamp | cxDate: 'dd MMM yyyy' }}

@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'font-FSA';
-  src: url('assets/fonts/font-FSA.eot?lh24ap');
-  src: url('assets/fonts/font-FSA.eot?lh24ap#iefix') format('embedded-opentype'),
-    url('assets/fonts/font-FSA.ttf?lh24ap') format('truetype'),
-    url('assets/fonts/font-FSA.woff?lh24ap') format('woff'),
-    url('assets/fonts/font-FSA.svg?lh24ap#font-FSA') format('svg');
+  src: url('assets/fonts/font-FSA.eot?wufwux');
+  src: url('assets/fonts/font-FSA.eot?wufwux#iefix') format('embedded-opentype'),
+    url('assets/fonts/font-FSA.ttf?wufwux') format('truetype'),
+    url('assets/fonts/font-FSA.woff?wufwux') format('woff'),
+    url('assets/fonts/font-FSA.svg?wufwux#font-FSA') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,6 +24,12 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-attachment:before {
+  content: '\e92e';
+}
+.icon-external-link:before {
+  content: '\e92f';
+}
 .icon-FSA-heart:before {
   content: '\e900';
 }
@@ -66,11 +72,8 @@
 .icon-FSA-youtube:before {
   content: '\e90d';
 }
-.icon-FSA-envelope-open:before {
+.icon-fsa-envelope-open:before {
   content: '\e90e';
-}
-.icon-FSA-folder-open:before {
-  content: '\e91a';
 }
 .icon-FSA-arrow-left:before {
   content: '\e90f';
@@ -102,11 +105,17 @@
 .icon-FSA-folder-close:before {
   content: '\e919';
 }
-.icon-FSA-list:before {
+.icon-FSA-folder-open:before {
+  content: '\e91a';
+}
+.icon-FSA-list1:before {
   content: '\e91b';
 }
 .icon-FSA-list-alt:before {
   content: '\e91c';
+}
+.icon-FSA-log-out:before {
+  content: '\e91d';
 }
 .icon-FSA-map-marker:before {
   content: '\e91e';
@@ -137,9 +146,6 @@
 }
 .icon-FSA-unchecked:before {
   content: '\e929';
-}
-.icon-FSA-log-out:before {
-  content: '\e91d';
 }
 .icon-FSA-list:before {
   content: '\e912';
