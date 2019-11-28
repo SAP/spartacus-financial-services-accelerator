@@ -65,7 +65,6 @@ export class UserRequestService {
         status: stepStatus,
       }
     );
-    console.log(stepData);
     this.store.dispatch(
       new fromAction.UpdateUserRequest({
         userId: this.userRequestData.userId,

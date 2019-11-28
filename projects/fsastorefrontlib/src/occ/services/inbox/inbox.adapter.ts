@@ -3,11 +3,11 @@ import { Observable } from 'rxjs';
 
 export abstract class InboxAdapter {
   /**
-   * Abstract method used to get site message for specific message group
+   * Abstract method used to get site messages for specified message group
    *
    * @param userId The user id
    * @param messageGroup The message group
-   * @param searchConfig The search configuratio defined by sort code and order
+   * @param searchConfig The search configuration defined by sort code and order
    */
   abstract getSiteMessagesForUserAndGroup(
     userId: string,

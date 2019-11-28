@@ -17,7 +17,7 @@ export abstract class ClaimAdapter {
   abstract deleteClaim(userId: string, claimId: string);
 
   /**
-   * Abstract method used to create claim for policy
+   * Abstract method used to create claim for insurance policy
    *
    * @param userId The user id
    * @param policyId The code of policy

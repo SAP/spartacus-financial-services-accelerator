@@ -6,10 +6,10 @@ export abstract class FSCartAdapter {
   /**
    * Abstract method used to add entry to cart
    *
-   * @param userId the user id
-   * @param cartId code of cart
-   * @param productCode code of product to add
-   * @param quantity the quantity of the product
+   * @param userId The user id
+   * @param cartId The cart id
+   * @param productCode The code of product to add
+   * @param quantity The quantity of the product
    */
   abstract addToCart(
     userId: string,
@@ -20,14 +20,14 @@ export abstract class FSCartAdapter {
   ): Observable<CartModification>;
 
   /**
-   * Abstract method used to start bundle for cart
+   * Abstract method used to start new bundle in cart
    *
    *
-   * @param userId the user id
-   * @param cartId code of cart
-   * @param bundleTemplateId the bundle template id
-   * @param productCode code of product to add
-   * @param quantity the quantity of the product
+   * @param userId The user id
+   * @param cartId The cart id
+   * @param bundleTemplateId The bundle template id
+   * @param productCode The code of product to add
+   * @param quantity The quantity of the product
    */
   abstract startBundle(
     userId: string,

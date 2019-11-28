@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 
 export abstract class BillingTimeAdapter {
   /**
-   * Abstract method used to get billing times for specific products
+   * Abstract method used to get billing times for specified products
    *
    * @param productCodes The `productCodes` used for fetching billing times
    */
