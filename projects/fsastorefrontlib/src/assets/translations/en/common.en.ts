@@ -51,7 +51,6 @@ export const fscommon = {
     paymentMethod: 'Payment method',
     confirmAndAgree: 'I confirm that I have read and agree with the',
     termsConditions: 'Terms & Conditions',
-    donwloadPDFLink: 'Download PDF Link',
     noMessagesForGroup: 'You have no messages for chosen group',
     modifyPlan: 'Modify Plan',
     thankYou: 'Thank you!',
@@ -125,5 +124,6 @@ export const fscommon = {
       categories: 'Categories',
       searchBox: 'Search agent or insurance type',
     },
+    attachments: 'Attachments',
   },
 };

@@ -54,9 +54,42 @@
     color: var(--cx-color-8);
   }
 }
+.notification {
+  background: var(--cx-color-warning);
+  color: var(--cx-color-2);
+  border-radius: 3px;
+  font-weight: var(--cx-font-weight-bold);
+  padding: 2px 8px;
+}
+.document-list {
+  .document-list-item {
+    .FSA-icon {
+      color: var(--cx-color-12);
+    }
+  }
+  .document-link {
+    text-decoration: underline;
+  }
+}
+.documents {
+  li:first-child {
+    border-bottom: none;
+    text-transform: uppercase;
+    background: var(--cx-color-4);
+    font-weight: var(--cx-font-weight-semi);
+  }
+  .document-link {
+    color: var(--cx-color-12);
+    font-weight: var(--cx-font-weight-normal);
+  }
+  .document-title {
+    color: var(--cx-color-11);
+    font-weight: var(--cx-font-weight-semi);
+  }
+}
 .heading-headline {
   font-size: var(--cx-h2-font-size);
-  color: var(--cx-color-11);
+  color: var(--cx-color-text);
   font-weight: var(--cx-font-weight-semi);
   position: relative;
   &:before {

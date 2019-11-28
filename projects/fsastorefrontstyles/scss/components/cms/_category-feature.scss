@@ -3,7 +3,7 @@
   .category-feature-wrapper {
     @include box-shadow(0, 2px, 20px, 1px, $color-grey, 1);
     .category-feature-text {
-      color: var(--cx-color-11);
+      color: var(--cx-color-text);
       padding: 2rem;
       p {
         margin-bottom: 0.5rem;

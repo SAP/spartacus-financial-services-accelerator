@@ -23,7 +23,7 @@
               </label>
             </div>
             <div
-              class="col-6 col-md-3 text-truncate p-4"
+              class="col-6 col-md-3 position-relative text-truncate p-4"
               (click)="
                 toggleActiveAccordion(i);
                 readMessage(message);
@@ -31,6 +31,9 @@
               "
             >
               {{ message.subject }}
+              <ng-container *ngIf="message.documents?.length > 0">
+                <span class="position-absolute FSA-icon icon-attachment"></span>
+              </ng-container>
             </div>
             <div
               class="col-md-6 d-none d-md-block text-truncate p-4"
@@ -51,7 +54,29 @@
           class="accordion-item-wrapper"
           [ngClass]="{ active: selectedIndex === i }"
         >
-          <div class="box-shadow" [innerHtml]="message.richContent"></div>
+          <div class="box-shadow">
+            <div [innerHtml]="message.richContent"></div>
+            <div *ngIf="message.documents" class="border-top-grey pt-4">
+              <span class="notification">
+                {{ message.documents.length }}
+                {{ 'fscommon.attachments' | cxTranslate }}
+              </span>
+              <ul class="mt-3 document-list">
+                <li
+                  class="pb-2 mb-1 document-list-item"
+                  *ngFor="let document of message.documents"
+                >
+                  <span class="icon-external-link FSA-icon"></span>
+                  <a
+                    class="document-link pl-2"
+                    [href]="document.downloadUrl"
+                    target="_blank"
+                    >{{ document.altText }}</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </ng-container>

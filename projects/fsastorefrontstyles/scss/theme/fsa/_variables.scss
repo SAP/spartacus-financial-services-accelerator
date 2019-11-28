@@ -22,7 +22,7 @@ $new-color-blue: #0066cc;
 $fsa-colors: (
   'primary': $color-blue,
   'secondary': $color-dark-blue,
-  'text': $color-dark-grey,
+  'text': $new-color-dark-blue,
   '1': $color-white,
   '2': $color-black,
   '3': $color-grey,
@@ -33,7 +33,7 @@ $fsa-colors: (
   '8': $color-button-secondary-hover,
   '9': $color-darkest-blue,
   '10': $new-color-light-grey,
-  '11': $new-color-dark-blue,
+  '11': $color-dark-grey,
   '12': $new-color-blue,
 );
 

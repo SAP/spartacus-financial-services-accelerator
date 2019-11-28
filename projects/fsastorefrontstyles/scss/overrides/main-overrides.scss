@@ -12,6 +12,7 @@ cx-page-layout {
 .FSRequestPageTemplate,
 .MultiTabsCategoryPageTemplate,
 .GeneralLayoutPageTemplate,
+.OrderConfirmationPageTemplate,
 .FSCategoryPageTemplate {
   & > cx-page-slot {
     max-width: 1140px;
