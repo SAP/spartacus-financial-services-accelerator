@@ -78,12 +78,11 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   }
   mapDataToFormControls(formData) {
     for (const groupName of Object.keys(formData)) {
-      const groupData = formData[groupName];
-      for (const controlName of Object.keys(groupData)) {
+      for (const controlName of Object.keys(formData[groupName])) {
         this.form
           .get(groupName)
           .get(controlName)
-          .setValue(groupData[controlName]);
+          .setValue(formData[groupName][controlName]);
       }
     }
   }

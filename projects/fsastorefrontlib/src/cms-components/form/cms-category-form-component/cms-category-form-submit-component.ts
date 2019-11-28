@@ -23,7 +23,7 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected cmsComponentConnector: CmsComponentConnector,
     protected formDataService: FormDataService
-  ) { }
+  ) {}
 
   routeParamId = 'formCode';
   pageContext: PageContext;
@@ -76,7 +76,9 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
       this.component$
         .pipe(
           map(componentData => {
-            const formDataId = this.formDataService.getFormDataIdFromLocalStorage(componentData.formId)
+            const formDataId = this.formDataService.getFormDataIdFromLocalStorage(
+              componentData.formId
+            );
             if (formDataId) {
               this.formData$ = this.formDataService.getFormData(formDataId);
             }

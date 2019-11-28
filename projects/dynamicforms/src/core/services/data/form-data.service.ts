@@ -31,37 +31,38 @@ export class FormDataService {
   }
 
   getFormDataIdFromLocalStorage(formDefinitionId) {
-    this.formLocalStorageData = JSON.parse(localStorage.getItem(this.formsLocalStorageKey));
-    if (this.formLocalStorageData === 'undefined' || this.formLocalStorageData === null) {
-      return null;
-    } else {
-      return this.formLocalStorageData.filter(formObj => formObj.formDefinitionId === formDefinitionId).map(
-      formObj =>  formObj.formDataId )[0];
+    this.formLocalStorageData = JSON.parse(
+      localStorage.getItem(this.formsLocalStorageKey)
+    );
+    if (this.formLocalStorageData) {
+      return this.formLocalStorageData
+        .filter(formObj => formObj.formDefinitionId === formDefinitionId)
+        .map(formObj => formObj.formDataId)[0];
     }
+    return null;
   }
 
   setFormDataToLocalStorage(formDefinitionId: string, formDataId: string) {
     this.formLocalStorageData = JSON.parse(
       localStorage.getItem(this.formsLocalStorageKey)
     );
-    if (this.formLocalStorageData === 'undefined' || this.formLocalStorageData === null) {
-      this.formLocalStorageData = [];
-    }
-    if (this.formLocalStorageData.length === 0) {
-      this.formLocalStorageData.push(
-        this.createDataForLocalStorage(formDataId, formDefinitionId)
-      );
+    if (
+      this.formLocalStorageData === 'undefined' ||
+      this.formLocalStorageData === null ||
+      this.formLocalStorageData.length === 0
+    ) {
+      this.formLocalStorageData = [
+        this.createDataForLocalStorage(formDataId, formDefinitionId),
+      ];
     } else {
       const index = this.formLocalStorageData
         .map(sessionData => sessionData.formDefinitionId)
         .indexOf(formDefinitionId);
-      if (index !== -1) {
-        this.formLocalStorageData[index].formDataId = formDataId;
-      } else {
-        this.formLocalStorageData.push(
-          this.createDataForLocalStorage(formDataId, formDefinitionId)
-        );
-      }
+      index !== -1
+        ? (this.formLocalStorageData[index].formDataId = formDataId)
+        : this.formLocalStorageData.push(
+            this.createDataForLocalStorage(formDataId, formDefinitionId)
+          );
     }
     localStorage.setItem(
       this.formsLocalStorageKey,
@@ -70,11 +71,10 @@ export class FormDataService {
   }
 
   createDataForLocalStorage(formDataId, formDefinitionId) {
-    const newSessionObj: FormStorageObject = {
+    return {
       formDataId: formDataId,
       formDefinitionId: formDefinitionId,
     };
-    return newSessionObj;
   }
 
   saveFormData(
