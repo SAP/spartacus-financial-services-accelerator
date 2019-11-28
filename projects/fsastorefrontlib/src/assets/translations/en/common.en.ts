@@ -124,5 +124,6 @@ export const fscommon = {
       categories: 'Categories',
       searchBox: 'Search agent or insurance type',
     },
+    attachments: 'Attachments',
   },
 };
