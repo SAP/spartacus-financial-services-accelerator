@@ -23,7 +23,7 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected cmsComponentConnector: CmsComponentConnector,
     protected formDataService: FormDataService
-  ) {}
+  ) { }
 
   routeParamId = 'formCode';
   pageContext: PageContext;
@@ -76,19 +76,9 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
       this.component$
         .pipe(
           map(componentData => {
-            const formLocalStorageData = JSON.parse(
-              localStorage.getItem('dynamicFormsData')
-            );
-            if (formLocalStorageData) {
-              const index = formLocalStorageData
-                .map(sessionData => sessionData.formDefinitionId)
-                .indexOf(componentData.formId);
-              if (index !== -1) {
-                const formDataId = formLocalStorageData[index].formDataId;
-                if (formDataId) {
-                  this.formData$ = this.formDataService.getFormData(formDataId);
-                }
-              }
+            const formDataId = this.formDataService.getFormDataIdFromLocalStorage(componentData.formId)
+            if (formDataId) {
+              this.formData$ = this.formDataService.getFormData(formDataId);
             }
           })
         )

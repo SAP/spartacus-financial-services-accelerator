@@ -6,7 +6,7 @@ import { AuthActions } from '@spartacus/core';
 export class FormStorageEffect {
   constructor(private actions$: Actions) {
     this.actions$.pipe(ofType(AuthActions.LOGOUT)).subscribe(() => {
-      localStorage.setItem('dynamicFormsData', '[]');
+      localStorage.removeItem('dynamicFormsData');
     });
   }
 }

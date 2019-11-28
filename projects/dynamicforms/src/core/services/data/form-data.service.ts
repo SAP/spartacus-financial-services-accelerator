@@ -6,19 +6,10 @@ import { OccFormService } from '../../../occ/services/form/occ-form.service';
 
 @Injectable()
 export class FormDataService {
-  private formLocalStorageData: FormStorageObject[];
+  private formLocalStorageData;
   private formsLocalStorageKey = 'dynamicFormsData';
   submittedForm = new BehaviorSubject<YFormData>(null);
-  constructor(protected occYformsService: OccFormService) {
-    const initialStorageState = localStorage.getItem(this.formsLocalStorageKey);
-    if (initialStorageState === 'undefined' || initialStorageState === null) {
-      this.formLocalStorageData = [];
-      localStorage.setItem(
-        this.formsLocalStorageKey,
-        JSON.stringify(this.formLocalStorageData)
-      );
-    }
-  }
+  constructor(protected occYformsService: OccFormService) {}
 
   // ***SHOULD BE REMOVED WITH FSA-4419***
   currentForm$: BehaviorSubject<YFormData> = new BehaviorSubject({});
@@ -39,10 +30,23 @@ export class FormDataService {
     this.submittedForm.next(formData);
   }
 
+  getFormDataIdFromLocalStorage(formDefinitionId) {
+    this.formLocalStorageData = JSON.parse(localStorage.getItem(this.formsLocalStorageKey));
+    if (this.formLocalStorageData === 'undefined' || this.formLocalStorageData === null) {
+      return null;
+    } else {
+      return this.formLocalStorageData.filter(formObj => formObj.formDefinitionId === formDefinitionId).map(
+      formObj =>  formObj.formDataId )[0];
+    }
+  }
+
   setFormDataToLocalStorage(formDefinitionId: string, formDataId: string) {
     this.formLocalStorageData = JSON.parse(
       localStorage.getItem(this.formsLocalStorageKey)
     );
+    if (this.formLocalStorageData === 'undefined' || this.formLocalStorageData === null) {
+      this.formLocalStorageData = [];
+    }
     if (this.formLocalStorageData.length === 0) {
       this.formLocalStorageData.push(
         this.createDataForLocalStorage(formDataId, formDefinitionId)
@@ -65,7 +69,7 @@ export class FormDataService {
     );
   }
 
-  private createDataForLocalStorage(formDataId, formDefinitionId) {
+  createDataForLocalStorage(formDataId, formDefinitionId) {
     const newSessionObj: FormStorageObject = {
       formDataId: formDataId,
       formDefinitionId: formDefinitionId,
