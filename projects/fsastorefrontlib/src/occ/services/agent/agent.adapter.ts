@@ -8,7 +8,7 @@ export abstract class AgentAdapter {
    */
   abstract getAgentsByCategory(category: string): Observable<any>;
 
-    /**
+  /**
    * Abstract method used to get agents using search query.
    *
    * @param searchQuery The search query

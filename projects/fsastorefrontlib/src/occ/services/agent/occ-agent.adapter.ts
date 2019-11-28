@@ -22,7 +22,6 @@ export class OccAgentAdapter implements AgentAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-
   public getAgentsByQuery(searchQuery: string, pageNumber: number) {
     const url = this.getAgentsEndpoint() + '/search';
     const query = '&page=' + pageNumber.toString() + '&fields=DEFAULT';
