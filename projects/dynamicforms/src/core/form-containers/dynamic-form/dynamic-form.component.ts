@@ -54,9 +54,15 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     this.createFormDefinition();
     this.addSubmitEvent();
     if (this.formData) {
-      this.formData.subscribe(formData => {
-        this.mapDataToFormControls(JSON.parse(formData.content));
-      });
+      this.subscription.add(
+        this.formData
+          .pipe(
+            map(formData => {
+              this.mapDataToFormControls(JSON.parse(formData.content));
+            })
+          )
+          .subscribe()
+      );
     }
   }
 

@@ -6,7 +6,6 @@ import { OccFormService } from '../../../occ/services/form/occ-form.service';
 
 @Injectable()
 export class FormDataService {
-  private formLocalStorageData;
   private formsLocalStorageKey = 'dynamicFormsData';
   submittedForm = new BehaviorSubject<YFormData>(null);
   constructor(protected occYformsService: OccFormService) {}
@@ -31,11 +30,11 @@ export class FormDataService {
   }
 
   getFormDataIdFromLocalStorage(formDefinitionId) {
-    this.formLocalStorageData = JSON.parse(
+    const formLocalStorageData = JSON.parse(
       localStorage.getItem(this.formsLocalStorageKey)
     );
-    if (this.formLocalStorageData) {
-      return this.formLocalStorageData
+    if (formLocalStorageData) {
+      return formLocalStorageData
         .filter(formObj => formObj.formDefinitionId === formDefinitionId)
         .map(formObj => formObj.formDataId)[0];
     }
@@ -43,30 +42,30 @@ export class FormDataService {
   }
 
   setFormDataToLocalStorage(formDefinitionId: string, formDataId: string) {
-    this.formLocalStorageData = JSON.parse(
+    let formLocalStorageData = JSON.parse(
       localStorage.getItem(this.formsLocalStorageKey)
     );
     if (
-      this.formLocalStorageData === 'undefined' ||
-      this.formLocalStorageData === null ||
-      this.formLocalStorageData.length === 0
+      formLocalStorageData === undefined ||
+      formLocalStorageData === null ||
+      formLocalStorageData.length === 0
     ) {
-      this.formLocalStorageData = [
+      formLocalStorageData = [
         this.createDataForLocalStorage(formDataId, formDefinitionId),
       ];
     } else {
-      const index = this.formLocalStorageData
+      const index = formLocalStorageData
         .map(sessionData => sessionData.formDefinitionId)
         .indexOf(formDefinitionId);
       index !== -1
-        ? (this.formLocalStorageData[index].formDataId = formDataId)
-        : this.formLocalStorageData.push(
+        ? (formLocalStorageData[index].formDataId = formDataId)
+        : formLocalStorageData.push(
             this.createDataForLocalStorage(formDataId, formDefinitionId)
           );
     }
     localStorage.setItem(
       this.formsLocalStorageKey,
-      JSON.stringify(this.formLocalStorageData)
+      JSON.stringify(formLocalStorageData)
     );
   }
 
