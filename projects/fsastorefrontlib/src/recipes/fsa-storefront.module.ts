@@ -20,7 +20,6 @@ import { fsaOccProductConfig } from '../occ/services/default-occ-fsa-product-con
   imports: [
     PageComponentModule,
     B2cStorefrontModule,
-    CheckoutModule,
     CmsLibModule,
     CheckoutModule,
     ConfigModule.forRoot(),
