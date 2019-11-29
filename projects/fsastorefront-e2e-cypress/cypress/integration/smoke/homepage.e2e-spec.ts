@@ -15,7 +15,7 @@ context('Homepage', () => {
     cy.get('cx-page-slot.Section1 fsa-enriched-responsive-banner');
   });
 
-  it('should contain category carouse component', () => {
+  it('should contain category carousel component', () => {
     cy.get('cx-page-slot.Section2A fsa-category-carousel');
   });
 
