@@ -8,7 +8,7 @@ import { Observable, of } from 'rxjs';
 import {
   PageLayoutService,
   ProductListComponentService,
-  ViewConfig,
+  // ViewConfig,
 } from '@spartacus/storefront';
 import createSpy = jasmine.createSpy;
 
@@ -25,7 +25,7 @@ class MockMediaComponent {
   name: 'cxUrl',
 })
 class MockUrlPipe implements PipeTransform {
-  transform() {}
+  transform() { }
 }
 
 class MockPageLayoutService {
@@ -45,15 +45,15 @@ export class MockProductListComponentService {
   model$ = of({});
 }
 
-export class MockViewConfig {
-  view = {
-    infiniteScroll: {
-      active: true,
-      productLimit: 0,
-      showMoreButton: false,
-    },
-  };
-}
+// export class MockViewConfig {
+//   view = {
+//     infiniteScroll: {
+//       active: true,
+//       productLimit: 0,
+//       showMoreButton: false,
+//     },
+//   };
+// }
 
 describe('ProductListComponent', () => {
   let component: FSProductListComponent;
@@ -72,10 +72,10 @@ describe('ProductListComponent', () => {
           provide: ProductListComponentService,
           useClass: MockProductListComponentService,
         },
-        {
-          provide: ViewConfig,
-          useClass: MockViewConfig,
-        },
+        // {
+        //   provide: ViewConfig,
+        //   useClass: MockViewConfig,
+        // },
       ],
     }).compileComponents();
   }));

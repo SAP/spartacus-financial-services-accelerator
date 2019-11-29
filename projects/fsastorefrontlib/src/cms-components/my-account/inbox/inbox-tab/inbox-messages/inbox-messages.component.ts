@@ -23,7 +23,6 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   ) { }
 
   private subscription: Subscription = new Subscription();
-  changeCheckboxes$: Observable<boolean>;
   messagesObject$: Observable<any>;
   selectedIndex: number;
   messageGroup: string;
@@ -35,9 +34,8 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadCurrentMessageGroup();
     this.messagesObject$ = this.inboxService.messages;
-    this.changeCheckboxes$ = this.inboxService.checkAllMessages;
     this.subscription.add(
-      this.changeCheckboxes$
+      this.inboxService.checkAllMessages
         .pipe(
           mergeMap(allChecked => {
             this.inboxService.resetMessagesToSend();

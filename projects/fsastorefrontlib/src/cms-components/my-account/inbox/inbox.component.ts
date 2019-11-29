@@ -27,7 +27,7 @@ export class InboxComponent implements OnInit, OnDestroy {
     protected inboxService: InboxService,
     private inboxData: InboxDataService,
     protected auth: AuthService
-  ) {}
+  ) { }
 
   subscription = new Subscription();
   component$: Observable<CmsInboxComponent>;
@@ -115,27 +115,26 @@ export class InboxComponent implements OnInit, OnDestroy {
     const messagesUidList = this.inboxService.getUidsFromMessagesCollection();
     if (messagesUidList.length !== 0) {
       this.readState = this.inboxService.getMessagesAction();
-      this.inboxService
-        .setMessagesState(messagesUidList, this.readState)
-        .subscribe();
+      this.subscription.add(
+        this.inboxService
+          .setMessagesState(messagesUidList, this.readState)
+          .subscribe()
+      );
     }
   }
 
   sortMessages(sortCode, sortOrder) {
     this.subscription.add(
-      this.inboxService.activeMessageGroupAndTitle.subscribe(groupTitle => {
-        let group;
-        if (groupTitle == null) {
-          group = this.initialGroupName;
-        } else {
-          group = groupTitle.messageGroup;
-        }
-        this.inboxService
-          .sortMessages(sortCode, sortOrder, group)
-          .subscribe(sortedMessages =>
-            this.inboxService.messagesSource.next(sortedMessages)
-          );
-      })
+      this.inboxService.activeMessageGroupAndTitle.pipe(
+        mergeMap(groupTitle => {
+          const group = groupTitle === null ? this.initialGroupName : groupTitle.messageGroup;
+          return this.inboxService
+            .sortMessages(sortCode, sortOrder, group).pipe(
+              map(sortedMessages =>
+                this.inboxService.messagesSource.next(sortedMessages))
+            );
+        })
+      ).subscribe()
     );
   }
 
