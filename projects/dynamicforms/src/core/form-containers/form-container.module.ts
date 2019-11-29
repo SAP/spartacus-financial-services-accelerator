@@ -20,7 +20,7 @@ import { FormDataService } from '../services/data/form-data.service';
     FormComponentsModule,
   ],
   declarations: [FormComponent, DynamicFormComponent],
-  exports: [FormComponent, DynamicFormComponent],
+  exports: [FormComponent, DynamicFormComponent, FormComponentsModule],
   entryComponents: [FormComponent, DynamicFormComponent],
   providers: [
     FormBuilderService,

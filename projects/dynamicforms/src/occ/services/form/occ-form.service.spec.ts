@@ -74,4 +74,18 @@ describe('OccYformService', () => {
       }, `GET method and url`);
     }));
   });
+
+  describe('loadFormDefinition', () => {
+    it('loadFormDefinition', async(() => {
+      service.getFormDefinition(applicationId, formDefinitionId).subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url === '/forms/definitions/' + formDefinitionId &&
+          req.params.append('fields', 'FULL') &&
+          req.params.append('applicationId', applicationId) &&
+          req.method === 'GET'
+        );
+      }, `GET method and url`);
+    }));
+  });
 });

@@ -4,7 +4,7 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OccBillingTimeService } from './billing-time.service';
+import { OccBillingTimeAdapter } from './occ-billing-time.adapter';
 import { OccConfig } from '@spartacus/core';
 
 const productCodes: string[] = ['product1', 'product2'];
@@ -21,20 +21,20 @@ const MockOccModuleConfig: OccConfig = {
   },
 };
 
-describe('OccBillingTimeService', () => {
-  let service: OccBillingTimeService;
+describe('OccBillingTimeAdapter', () => {
+  let adapter: OccBillingTimeAdapter;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
-        OccBillingTimeService,
+        OccBillingTimeAdapter,
         { provide: OccConfig, useValue: MockOccModuleConfig },
       ],
     });
 
-    service = TestBed.get(OccBillingTimeService);
+    adapter = TestBed.get(OccBillingTimeAdapter);
     httpMock = TestBed.get(HttpTestingController);
   });
 
@@ -44,7 +44,7 @@ describe('OccBillingTimeService', () => {
 
   describe('getBillingTimes', () => {
     it('get billing times', async(() => {
-      service.getBillingTimes(productCodes).subscribe();
+      adapter.getBillingTimes(productCodes).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url === '/billing-times' &&

@@ -28,6 +28,11 @@ context('Travel Insurance Checkout', () => {
       cy.wait(1000);
     });
 
+    it('Populate personal detials', () => {
+      travelCheckout.populatePersonalDetailsForm();
+      cy.wait(1000);
+    });
+
     it('Check mini cart on quote review page', () => {
       travelCheckout.checkQuoteReview();
     });

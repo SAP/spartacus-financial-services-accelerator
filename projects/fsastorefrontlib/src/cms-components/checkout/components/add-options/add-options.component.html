@@ -59,7 +59,7 @@
                     orderEntryData.entryNumber
                   )
                 "
-                class="secondary-button"
+                class="secondary-button btn-block"
               >
                 {{ 'fscommon.add' | cxTranslate }}
               </button>
@@ -67,7 +67,7 @@
             <div *ngIf="orderEntryData.removeable">
               <button
                 (click)="removeProductFromCart(orderEntryData)"
-                class="secondary-button "
+                class="secondary-button btn-block "
               >
                 {{ 'common.remove' | cxTranslate }}
               </button>
@@ -83,13 +83,15 @@
     class="primary-button col-md-3 col mt-4 float-right"
     type="button"
     data-checkout-url=""
-    (click)="next()"
+    (click)="navigateNext()"
   >
     {{ 'fscommon.next' | cxTranslate }}
   </button>
 </ng-container>
 <ng-template #mandatoryNotAvailableButton let-title="title">
-  <button disabled type="button" class="secondary-button">{{ title }}</button>
+  <button disabled type="button" class="secondary-button btn-block">
+    {{ title }}
+  </button>
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>

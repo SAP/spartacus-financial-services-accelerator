@@ -1,17 +1,17 @@
 declare namespace Cypress {
   interface Chainable {
     /**
-       * Select user menu option
-       *
-       * @memberof Cypress.Chainable
-       *
-       * @example
-        ```
-        cy.selectUserMenuOption({
+     * Select user menu option
+     *
+     * @memberof Cypress.Chainable
+     *
+     * @example
+     ```
+     cy.selectUserMenuOption({
           option: 'Sign out'
         })
-        ```
-       */
+     ```
+     */
     selectUserMenuOption: ({
       option,
       isMobile,

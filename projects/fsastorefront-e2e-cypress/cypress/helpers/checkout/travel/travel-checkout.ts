@@ -3,9 +3,9 @@ export function openCategoryPage() {
     menuOption: 'Insurance',
     dropdownItem: 'Travel',
   });
-  cy.get('fsa-enriched-responsive-banner')
+  cy.wait(500);
+  cy.get('.enriched-banner__styled-text')
     .should('be.visible')
-    .findByText('Get a quote')
     .click({ force: true });
 }
 
@@ -18,10 +18,10 @@ export function populateInsuranceInfoForm() {
     cy.get('[name="costOfTrip"]').type('3000');
     cy.get('[name="Travellers"]').select('1');
     cy.get('[name="tripDetailsTravellerAges"]').type('20');
-    cy.get('[name="submit"]')
-      .findByText('Find Prices')
-      .click();
   });
+  cy.get('fsa-form-navigation')
+    .findByText('Next')
+    .click();
 }
 
 export function checkComparisonAndAddProduct() {
@@ -82,6 +82,24 @@ export function checkOptionalProductsAndPick() {
     .click();
 }
 
+export function populatePersonalDetailsForm() {
+  cy.get('cx-dynamic-form').within(() => {
+    cy.get('[name=title]').select('Mr.');
+    cy.get('[name="firstName"]').type('Ben');
+    cy.get('[name="lastName"]').type('Moore');
+    cy.get('[name="age"]').type('30');
+    cy.get('[name="phoneNumber"]').type('1');
+    cy.get('[name="email"]').type('ben@moore.com');
+    cy.get('[name="address1"]').type('Test address');
+    cy.get('[name="city"]').type('Test city');
+    cy.get('[name="postcode"]').type('111111');
+    cy.get('[name=country]').select('Serbia');
+  });
+  cy.get('fsa-form-navigation')
+    .findByText('Next')
+    .click();
+}
+
 export function checkQuoteReview() {
   cy.get('fsa-mini-cart').within(() => {
     cy.get('.short-overview-item').should('have.length', 2);
@@ -124,6 +142,7 @@ export function checkPaymentPage() {
       .clear()
       .type('113232');
   });
+  cy.wait(1000);
   cy.get('.btn-primary').click();
 }
 

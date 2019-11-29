@@ -24,9 +24,9 @@ import {
   PaymentMethodModule,
   SpinnerModule,
 } from '@spartacus/storefront';
-import { CatagoryStepGuard } from './guards/category-step-guard';
+import { CategoryStepGuard } from './guards/category-step-guard';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
-import { OccFSCartService } from '../../occ/services/cart/fs-cart.service';
+import { OccFSCartAdapter } from '../../occ/services/cart/occ-fs-cart.adapter';
 import { AddOptionsComponent } from './components/add-options/add-options.component';
 import { FSCheckoutProgressComponent } from './components/checkout-progress/fs-checkout-progress.component';
 import { FSCheckoutProgressModule } from './components/checkout-progress/fs-checkout-progress.module';
@@ -37,7 +37,7 @@ import { FsaOrderConfirmationComponent } from './components/order-confirmation/o
 import { QuoteReviewComponent } from './components/quote-review/quote-review.component';
 import { UserIdentificationModule } from './components/user-identification/user-identification.module';
 import { FSCartService } from '../../core/checkout/services/cart/fs-cart.service';
-import { FSCategoryService } from '../../core/checkout/services/category/fs-category.service';
+import { CategoryService } from '../../core/checkout/services/category/category.service';
 import { effects } from '../../core/checkout/store/effects/index';
 import { FSCheckoutStepGuard } from './guards/fs-checkout-step-guard';
 import {
@@ -46,12 +46,13 @@ import {
 } from '../../core/checkout/store/reducers/index';
 import { StoreModule } from '@ngrx/store';
 import { CHECKOUT_FEATURE } from '../../core/checkout/store';
-import { OccFSCheckoutService } from '../../occ/services/checkout/fs-checkout.service';
+import { OccFSCheckoutAdapter } from '../../occ/services/checkout/occ-fs-checkout.adapter';
+import { FormNavigationComponent } from './components/form-navigation/form-navigation.component';
 
 const routes: Routes = [
   {
     path: null,
-    canActivate: [CmsPageGuard, CatagoryStepGuard],
+    canActivate: [CmsPageGuard, CategoryStepGuard],
     data: {
       cxRoute: 'generalInformation',
       pageLabel: 'generalInformationForm',
@@ -66,6 +67,15 @@ const routes: Routes = [
       pageLabel: 'add-options', // ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
     },
     component: PageLayoutComponent, // SPA LAYOUT Component you're targeting
+  },
+  {
+    path: null,
+    canActivate: [CmsPageGuard, CategoryStepGuard, AuthGuard],
+    data: {
+      cxRoute: 'checkoutPersonalDetails',
+      pageLabel: 'personal-details',
+    },
+    component: PageLayoutComponent,
   },
   {
     path: null,
@@ -170,6 +180,9 @@ const routes: Routes = [
         DynamicProgressBarStepsComponent: {
           component: FSCheckoutProgressComponent,
         },
+        CheckoutFormNavigationFlex: {
+          component: FormNavigationComponent,
+        },
       },
     }),
   ],
@@ -179,6 +192,7 @@ const routes: Routes = [
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
     FSMiniCartComponent,
+    FormNavigationComponent,
   ],
   exports: [
     I18nModule,
@@ -190,6 +204,7 @@ const routes: Routes = [
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
     FSMiniCartComponent,
+    FormNavigationComponent,
   ],
   entryComponents: [
     FsaOrderConfirmationComponent,
@@ -197,12 +212,13 @@ const routes: Routes = [
     QuoteReviewComponent,
     FinalReviewComponent,
     FSMiniCartComponent,
+    FormNavigationComponent,
   ],
   providers: [
     FSCartService,
-    OccFSCheckoutService,
-    OccFSCartService,
-    FSCategoryService,
+    OccFSCheckoutAdapter,
+    OccFSCartAdapter,
+    CategoryService,
     reducerProvider,
   ],
 })

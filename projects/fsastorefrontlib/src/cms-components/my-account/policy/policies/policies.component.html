@@ -69,7 +69,7 @@
           <div class="info-card-button-wrapper border-top-secondary">
             <div class="info-card-button">
               <button
-                class="secondary-button"
+                class="secondary-button btn-block"
                 routerLink="/my-account/my-policies/{{ policy.policyNumber }}/{{
                   policy.contractNumber
                 }}"
@@ -78,7 +78,12 @@
                 {{ 'fscommon.details' | cxTranslate }}
               </button>
               <button
-                class="primary-button"
+                class="primary-button btn-block"
+                [disabled]="
+                  !isPolicyCategoryAllowed(
+                    policy.categoryData?.allowedFSRequestTypes
+                  )
+                "
                 (click)="startClaim(policy.policyNumber, policy.contractNumber)"
               >
                 {{ 'claim.makeClaim' | cxTranslate }}

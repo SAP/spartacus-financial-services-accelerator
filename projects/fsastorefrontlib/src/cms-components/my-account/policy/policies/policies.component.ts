@@ -2,11 +2,14 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import * as fromPolicyStore from '../../../../core/my-account/store';
 import { Store, select } from '@ngrx/store';
 import { OccConfig, RoutingService } from '@spartacus/core';
+import { AllowedFSRequestType } from './../../../../occ/occ-models/occ.models';
 import {
   PolicyService,
   ClaimService,
   PolicyDataService,
 } from '../../../../core/my-account/services';
+
+const FSCLAIM = 'FSCLAIM';
 
 @Component({
   selector: 'fsa-policies',
@@ -48,6 +51,21 @@ export class PoliciesComponent implements OnInit {
       this.routingService.go({
         cxRoute: 'fnolIncidentPage',
       });
+    }
+  }
+
+  isPolicyCategoryAllowed(
+    allowedFSRequestTypes: AllowedFSRequestType[]
+  ): boolean {
+    if (
+      allowedFSRequestTypes !== undefined &&
+      allowedFSRequestTypes.length > 0
+    ) {
+      return (
+        allowedFSRequestTypes
+          .map(allowedRequestType => allowedRequestType.requestType.code)
+          .indexOf(FSCLAIM) > -1
+      );
     }
   }
 }

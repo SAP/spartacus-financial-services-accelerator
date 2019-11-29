@@ -3,7 +3,7 @@ import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { take, map, switchMap } from 'rxjs/operators';
 import { ComparisonPanelCMSComponent } from '../../../occ/occ-models';
-import { OccBillingTimeService } from '../../../occ/services/billing-time/billing-time.service';
+import { OccBillingTimeAdapter } from '../../../occ/services/billing-time/occ-billing-time.adapter';
 import { FormDataService } from '@fsa/dynamicforms';
 import { PricingService } from '../../../core/checkout/services/pricing/pricing.service';
 import { PricingData } from '../../../occ/occ-models';
@@ -22,7 +22,7 @@ export class ComparisonTablePanelComponent implements OnInit {
 
   constructor(
     protected componentData: CmsComponentData<ComparisonPanelCMSComponent>,
-    protected billingTimeService: OccBillingTimeService,
+    protected billingTimeAdapter: OccBillingTimeAdapter,
     protected formDataService: FormDataService,
     protected pricingService: PricingService
   ) {}
@@ -31,7 +31,7 @@ export class ComparisonTablePanelComponent implements OnInit {
     this.comparisonPanel = this.componentData.data$;
     this.componentData.data$.pipe(take(1)).subscribe(data => {
       const productCodes = data.products.split(' ');
-      this.billingData = this.billingTimeService.getBillingTimes(productCodes);
+      this.billingData = this.billingTimeAdapter.getBillingTimes(productCodes);
     });
 
     this.subscription.add(

@@ -1,0 +1,58 @@
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs/internal/observable/throwError';
+import { OccEndpointsService } from '@spartacus/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { ClaimAdapter } from './claim.adapter';
+
+const FULL_PARAMS = 'fields=FULL';
+
+@Injectable()
+export class OccClaimAdapter implements ClaimAdapter {
+  constructor(
+    protected http: HttpClient,
+    protected occEndpointService: OccEndpointsService
+  ) {}
+
+  protected getClaimsEndpoint(userId: string) {
+    const claimsEndpoint = '/users/' + userId + '/claims';
+    return this.occEndpointService.getBaseEndpoint() + claimsEndpoint;
+  }
+
+  public getClaims(userId: string): Observable<any> {
+    const url = this.getClaimsEndpoint(userId);
+    const params = new HttpParams({ fromString: FULL_PARAMS });
+    return this.http
+      .get(url, { params: params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  public deleteClaim(userId: string, claimId: string) {
+    const url = this.getClaimsEndpoint(userId) + '/' + claimId;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+
+    return this.http
+      .delete(url, { headers })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  public createClaim(userId: string, policyId: string, contractId: string) {
+    const url =
+      this.getClaimsEndpoint(userId) +
+      '/create?contractId=' +
+      contractId +
+      '&policyId=' +
+      policyId;
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+
+    return this.http
+      .post(url, { headers })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+}

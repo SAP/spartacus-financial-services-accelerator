@@ -4,7 +4,8 @@ import { RoutingService } from '@spartacus/core';
 import { FormDefinition } from '../../models/field-config.interface';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 import { FormDataService } from '../../services/data/form-data.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { YFormData } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'cx-form-component',
@@ -12,7 +13,6 @@ import { Subscription } from 'rxjs';
 })
 export class FormComponent implements OnDestroy {
   private subscription = new Subscription();
-
   constructor(
     protected routingService: RoutingService,
     protected formDataService: FormDataService
@@ -25,12 +25,14 @@ export class FormComponent implements OnDestroy {
   @Input()
   formId: string;
   @Input()
-  formConfig: FormDefinition;
+  formConfig: FormDefinition; // Should be changed to observable once configs are provided vie BE
   @Input()
   applicationId: string;
+  @Input()
+  formData: Observable<YFormData>;
 
   submit(formData: { [name: string]: any }) {
-    if (this.form.valid) {
+    if (this.form && this.form.valid) {
       this.subscription.add(
         this.formDataService
           .saveFormData(this.formId, this.applicationId, formData)
@@ -41,24 +43,19 @@ export class FormComponent implements OnDestroy {
               content: response.content,
               categoryCode: this.formCategoryCode,
             });
-            this.navigateNext();
+            this.formDataService.setFormDataToLocalStorage(
+              this.formId,
+              response.id
+            );
+            this.formDataService.setSubmittedForm(response);
           })
       );
     }
   }
-
   ngOnDestroy() {
+    this.formDataService.setSubmittedForm(null);
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-  }
-
-  // Should be removed from dynamic forms module!!!
-  // Should be more configurable to support other routes/pages
-  navigateNext() {
-    this.routingService.go({
-      cxRoute: 'category',
-      params: { code: this.formCategoryCode },
-    });
   }
 }

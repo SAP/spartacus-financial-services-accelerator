@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { FormDataService } from './form-data.service';
-import { YFormData } from './../../models/form-occ.models';
+import { YFormData, YFormDefinition } from './../../models/form-occ.models';
 import { OccFormService } from '../../../occ/services/form/occ-form.service';
 import { of, Observable } from 'rxjs';
 
@@ -22,6 +22,11 @@ const mockData: Observable<YFormData> = of({
   content: '{test: test}',
 });
 
+const mockDefinition: Observable<YFormDefinition> = of({
+  id: 'formDataId',
+  content: '{testDef: testDef}',
+});
+
 const formId = 'formDefinitionId';
 const applicationId = 'applicationId';
 const formDataId = 'formDataId';
@@ -36,6 +41,10 @@ class MockOccYFormService {
 
   saveFormData() {
     return mockData;
+  }
+
+  getFormDefinition() {
+    return mockDefinition;
   }
 }
 
@@ -67,6 +76,12 @@ describe('FormDataService', () => {
 
   it('should get data', () => {
     expect(service.getFormData(formDataId)).toEqual(mockData);
+  });
+
+  it('should get definition', () => {
+    expect(service.getFormDefinition(applicationId, formId)).toEqual(
+      mockDefinition
+    );
   });
 
   it('should filter data', () => {

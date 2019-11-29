@@ -1,4 +1,6 @@
-<h2 class="heading-headline">{{ 'fscommon.applications' | cxTranslate }}</h2>
+<h2 class="heading-headline">
+  {{ 'fscommon.quotesAndApplications' | cxTranslate }}
+</h2>
 <ng-container *ngIf="quotes$ | async as quotes">
   <ng-container *ngIf="quotesLoaded$ | async; else loading">
     <div class="row" *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes">
@@ -56,6 +58,7 @@
             <button
               class="primary-button col-6 my-5"
               [disabled]="quote.isExpired"
+              (click)="retrieveQuote(quote)"
             >
               {{ 'fscommon.retrieve' | cxTranslate }}
             </button>
