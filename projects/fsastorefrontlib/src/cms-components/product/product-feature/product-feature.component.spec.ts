@@ -1,6 +1,7 @@
+import { FSProductService } from './../../../core/checkout/services/product/fs-product.service';
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CmsComponent, ProductService, Product } from '@spartacus/core';
+import { CmsComponent, Product } from '@spartacus/core';
 import { of, Observable } from 'rxjs';
 import { CmsComponentData } from '@spartacus/storefront';
 import { ProductFeatureComponent } from './product-feature.component';
@@ -46,7 +47,7 @@ describe('ProductFeatureComponent', () => {
           useValue: MockCmsComponentData,
         },
         {
-          provide: ProductService,
+          provide: FSProductService,
           useValue: mockProductService,
         },
       ],

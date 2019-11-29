@@ -4,11 +4,12 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { OccEndpointsService } from '@spartacus/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { ClaimAdapter } from './claim.adapter';
 
 const FULL_PARAMS = 'fields=FULL';
 
 @Injectable()
-export class OccClaimService {
+export class OccClaimAdapter implements ClaimAdapter {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService

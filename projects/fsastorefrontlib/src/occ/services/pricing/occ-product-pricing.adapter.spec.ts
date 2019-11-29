@@ -10,7 +10,7 @@ import {
   PricingAttribute,
   PricingData,
 } from '../../../core/models/pricing.interface';
-import { OccProductService } from './occ-product.service';
+import { OccProductPricingAdapter } from './occ-product-pricing.adapter';
 
 const productCode = 'testCode';
 const pricingEndpoint = '/product-pricing';
@@ -43,20 +43,20 @@ const MockOccModuleConfig: OccConfig = {
   },
 };
 
-describe('OccProductService', () => {
-  let service: OccProductService;
+describe('OccProductPricingAdapter', () => {
+  let adapter: OccProductPricingAdapter;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
-        OccProductService,
+        OccProductPricingAdapter,
         { provide: OccConfig, useValue: MockOccModuleConfig },
       ],
     });
 
-    service = TestBed.get(OccProductService);
+    adapter = TestBed.get(OccProductPricingAdapter);
     httpMock = TestBed.get(HttpTestingController);
   });
 
@@ -66,7 +66,7 @@ describe('OccProductService', () => {
 
   describe('getCalculatedProductData', () => {
     it('should return product data with price included in response', async(() => {
-      service.getCalculatedProductData(productCode, pricingData).subscribe();
+      adapter.getCalculatedProductData(productCode, pricingData).subscribe();
       httpMock.expectOne(req => {
         return (
           req.url === pricingEndpoint + `/${productCode}` &&

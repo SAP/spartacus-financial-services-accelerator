@@ -18,7 +18,7 @@ import {
 import { QuotesComponent } from './quotes/quotes.component';
 import { QuoteService } from '../../../core/my-account/services/quote.service';
 import { QuoteDataService } from '../../../core/my-account/services/quote-data.service';
-import { OccQuoteService } from '../../../occ/services/quote/quote.service';
+import { OccQuoteAdapter } from '../../../occ/services/quote/occ-quote.adapter';
 import { CMSViewQuotesComponent } from './view-quotes/view-quotes.component';
 
 const routes: Routes = [
@@ -55,7 +55,7 @@ const routes: Routes = [
   ],
   declarations: [QuotesComponent, CMSViewQuotesComponent],
   exports: [QuotesComponent, CMSViewQuotesComponent],
-  providers: [QuoteService, QuoteDataService, OccQuoteService],
+  providers: [QuoteService, QuoteDataService, OccQuoteAdapter],
   entryComponents: [QuotesComponent, CMSViewQuotesComponent],
 })
 export class QuoteModule {}

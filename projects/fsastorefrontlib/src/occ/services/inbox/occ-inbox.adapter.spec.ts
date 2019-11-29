@@ -4,15 +4,14 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
+import { OccInboxAdapter } from './occ-inbox.adapter';
 import { OccConfig } from '@spartacus/core';
-import { OccFSCheckoutService } from './fs-checkout.service';
 
-const userId = 'userId';
-const cartId = 'cartId';
-const identificationType = 'video_identification';
+const userId = '123';
+const messageGroup = 'autoGroup';
 
 const usersEndpoint = '/users';
-const cartsEndpoint = '/carts';
+const messagesEndPoint = '/notifications/fssitemessages';
 
 const MockOccModuleConfig: OccConfig = {
   context: {
@@ -26,20 +25,20 @@ const MockOccModuleConfig: OccConfig = {
   },
 };
 
-describe('OccFSCheckoutService', () => {
-  let service: OccFSCheckoutService;
+describe('OccInboxAdapter', () => {
+  let adapter: OccInboxAdapter;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
-        OccFSCheckoutService,
+        OccInboxAdapter,
         { provide: OccConfig, useValue: MockOccModuleConfig },
       ],
     });
 
-    service = TestBed.get(OccFSCheckoutService);
+    adapter = TestBed.get(OccInboxAdapter);
     httpMock = TestBed.get(HttpTestingController);
   });
 
@@ -47,23 +46,21 @@ describe('OccFSCheckoutService', () => {
     httpMock.verify();
   });
 
-  describe('setIdentificationType', () => {
-    it('should set user identification type', async(() => {
-      service
-        .setIdentificationType(identificationType, cartId, userId)
+  describe('getMessagesForMessageGroup', () => {
+    it('should fetch user messages for specified group', async(() => {
+      adapter
+        .getSiteMessagesForUserAndGroup(userId, messageGroup, {})
         .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url ===
             usersEndpoint +
               `/${userId}` +
-              cartsEndpoint +
-              `/${cartId}` +
-              '/user-identification' &&
-          req.params.append('identificationType', identificationType) &&
-          req.method === 'PUT'
+              messagesEndPoint +
+              `?fields=FULL&messagegroup=${messageGroup}` &&
+          req.method === 'GET'
         );
-      }, `PUT method and url`);
+      }, `GET method and url`);
     }));
   });
 });
