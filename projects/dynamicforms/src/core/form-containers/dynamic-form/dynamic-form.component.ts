@@ -12,9 +12,11 @@ import {
   FormDefinition,
 } from '../../models/field-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
-import { Subscription } from 'rxjs';
+
 import { FormDataService } from '../../services/data/form-data.service';
+import { Subscription, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { YFormData } from '@fsa/dynamicforms';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -23,12 +25,14 @@ import { map } from 'rxjs/operators';
 })
 export class DynamicFormComponent implements OnInit, OnDestroy {
   @Input()
+  formData: Observable<YFormData>;
+  @Input()
   config: FormDefinition;
   @Output()
   submit: EventEmitter<any> = new EventEmitter<any>();
+
   form: FormGroup;
   subscription = new Subscription();
-
   allInputs: Array<FieldConfig> = [];
 
   get changes() {
@@ -49,6 +53,17 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.createFormDefinition();
     this.addSubmitEvent();
+    if (this.formData) {
+      this.subscription.add(
+        this.formData
+          .pipe(
+            map(formData => {
+              this.mapDataToFormControls(JSON.parse(formData.content));
+            })
+          )
+          .subscribe()
+      );
+    }
   }
 
   ngOnDestroy() {
@@ -67,7 +82,16 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
       });
     }
   }
-
+  mapDataToFormControls(formData) {
+    for (const groupCode of Object.keys(formData)) {
+      for (const controlName of Object.keys(formData[groupCode])) {
+        this.form
+          .get(groupCode)
+          .get(controlName)
+          .setValue(formData[groupCode][controlName]);
+      }
+    }
+  }
   addSubmitEvent() {
     this.subscription.add(
       this.formDataService
@@ -82,7 +106,6 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         .subscribe()
     );
   }
-
   handleSubmit(event: Event) {
     event.preventDefault();
     event.stopPropagation();

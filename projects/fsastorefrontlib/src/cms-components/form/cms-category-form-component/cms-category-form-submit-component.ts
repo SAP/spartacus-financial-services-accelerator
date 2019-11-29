@@ -4,6 +4,7 @@ import {
   FormDataService,
   FormDefinition,
   YFormDefinition,
+  YFormData,
 } from '@fsa/dynamicforms';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
@@ -29,6 +30,7 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
   formConfig: FormDefinition;
   formDefintion$: Observable<YFormDefinition> = of({});
   component$: Observable<CMSFormSubmitComponent>;
+  formData$: Observable<YFormData>;
   private subscription = new Subscription();
 
   ngOnInit() {
@@ -65,6 +67,20 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
               this.formConfig = <FormDefinition>(
                 JSON.parse(formDefinition.content)
               );
+            }
+          })
+        )
+        .subscribe()
+    );
+    this.subscription.add(
+      this.component$
+        .pipe(
+          map(componentData => {
+            const formDataId = this.formDataService.getFormDataIdFromLocalStorage(
+              componentData.formId
+            );
+            if (formDataId) {
+              this.formData$ = this.formDataService.getFormData(formDataId);
             }
           })
         )
