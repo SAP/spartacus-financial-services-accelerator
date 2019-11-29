@@ -31,7 +31,7 @@ context('Applications Page', () => {
     it('Should visit applications page and check if there is one quote created', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'My Account',
-        dropdownItem: 'Applications',
+        dropdownItem: 'Quotes & Applications',
       });
       cy.wait(1500);
       cy.get('fsa-quotes').should('have.length', 1);
