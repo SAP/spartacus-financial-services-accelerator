@@ -3,10 +3,10 @@ export function searchNoResults() {
     .should('be.visible')
     .within(() => {
       cy.get('input')
-        .type('üöäpda{enter}')
+        .type('notexist{enter}')
         .wait(1500);
     });
-  cy.get('cx-breadcrumb').should('contain', '0 results for "üöäpda"');
+  cy.get('cx-breadcrumb').should('contain', '0 results for "notexist"');
 }
 
 export function searchInsuranceProducts() {
