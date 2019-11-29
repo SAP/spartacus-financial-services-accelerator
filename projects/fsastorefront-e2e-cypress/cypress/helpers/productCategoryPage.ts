@@ -1,4 +1,4 @@
-export function checkComponets() {
+export function checkComponents() {
   cy.get('cx-page-slot.Section1 fsa-enriched-responsive-banner');
   cy.get('span.enriched-banner__title').should(
     'contain',

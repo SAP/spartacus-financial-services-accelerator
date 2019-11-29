@@ -22,8 +22,7 @@ context('Search', () => {
     search.searchSavingsProducts();
     search.seachResultsButtons();
     search.clickMoreInfoButton();
-    //checks user is redirected to correct page
-    productCategory.checkComponets();
+    productCategory.checkComponents();
     productCategory.checkQuoteButtons();
     productCategory.checksSavingsCategoryPage();
     search.clickGetAQuoteButton();
