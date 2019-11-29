@@ -15,12 +15,20 @@ context('Homepage', () => {
     cy.get('cx-page-slot.Section1 fsa-enriched-responsive-banner');
   });
 
-  it('should have policies component', () => {
-    cy.get('cx-page-slot.Section2C fsa-view-policies');
+  it('should contain category carouse component', () => {
+    cy.get('cx-page-slot.Section2A fsa-category-carousel');
   });
 
-  it('should have quotes component', () => {
-    cy.get('cx-page-slot.Section2C fsa-view-quotes');
+  it('should contain our services banner', () => {
+    cy.get('cx-page-slot.Section2B cx-banner');
+  });
+
+  it('should have assistance and support paragraph', () => {
+    cy.get('cx-page-slot.Section2C cx-paragraph');
+  });
+
+  it('should have assistance and support banners', () => {
+    cy.get('cx-page-slot.Section2C cx-banner').should('have.length', 2);
   });
 
   it('should have header navigation with nav nodes', () => {
