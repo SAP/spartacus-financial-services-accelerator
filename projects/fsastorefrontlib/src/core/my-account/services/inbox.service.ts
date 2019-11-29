@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AuthService, CmsService } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { OccInboxService } from './../../../occ/services/inbox/inbox.service';
+import { OccInboxAdapter } from './../../../occ/services/inbox/occ-inbox.adapter';
 import {
   FSSearchConfig,
   InboxDataService,
@@ -15,7 +15,7 @@ export class InboxService {
     private inboxData: InboxDataService,
     protected auth: AuthService,
     protected cmsService: CmsService,
-    protected occInboxService: OccInboxService
+    protected occInboxAdapter: OccInboxAdapter
   ) {
     this.initInbox();
   }
@@ -77,7 +77,7 @@ export class InboxService {
   }
 
   getMessages(messageGroup): Observable<any> {
-    return this.occInboxService.getSiteMessagesForUserAndGroup(
+    return this.occInboxAdapter.getSiteMessagesForUserAndGroup(
       this.inboxData.userId,
       messageGroup,
       this.searchConfig
@@ -88,7 +88,7 @@ export class InboxService {
     this.resetMessagesToSend();
     this.searchConfig.sortCode = sortCode;
     this.searchConfig.sortOrder = sortOrder;
-    return this.occInboxService.getSiteMessagesForUserAndGroup(
+    return this.occInboxAdapter.getSiteMessagesForUserAndGroup(
       this.inboxData.userId,
       messageGroup,
       this.searchConfig
@@ -96,6 +96,6 @@ export class InboxService {
   }
 
   setMessagesState(uidList, read): Observable<any> {
-    return this.occInboxService.setMessagesState(this.inboxData.userId, uidList, read);
+    return this.occInboxAdapter.setMessagesState(this.inboxData.userId, uidList, read);
   }
 }
