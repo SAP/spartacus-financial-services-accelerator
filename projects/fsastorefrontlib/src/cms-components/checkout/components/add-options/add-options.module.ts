@@ -7,7 +7,7 @@ import { SpinnerModule, MediaModule } from '@spartacus/storefront';
 import { I18nModule } from '@spartacus/core';
 import { AddOptionsComponent } from './add-options.component';
 import { FSCartService } from '../../../../core/checkout/services';
-import { OccFSCartService } from '../../../../occ/services/cart/fs-cart.service';
+import { OccFSCartAdapter } from '../../../../occ/services/cart/occ-fs-cart.adapter';
 
 @NgModule({
   imports: [
@@ -21,6 +21,6 @@ import { OccFSCartService } from '../../../../occ/services/cart/fs-cart.service'
   ],
   declarations: [AddOptionsComponent],
   exports: [AddOptionsComponent],
-  providers: [FSCartService, OccFSCartService],
+  providers: [FSCartService, OccFSCartAdapter],
 })
 export class AddOptionsModule {}

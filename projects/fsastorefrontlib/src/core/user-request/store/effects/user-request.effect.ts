@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import * as fromActions from '../actions';
 import { UserRequestDataService } from '../../services';
-import { OccUserRequestService } from '../../../../occ/services/user-request/user-request.service';
+import { OccUserRequestAdapter } from '../../../../occ/services/user-request/occ-user-request.adapter';
 
 @Injectable()
 export class UserRequestEffects {
@@ -19,7 +19,7 @@ export class UserRequestEffects {
           requestId: this.userRequestData.requestId,
         };
       }
-      return this.userRequestService
+      return this.userRequestAdapter
         .getUserRequest(payload.userId, payload.requestId)
         .pipe(
           map((userRequest: any) => {
@@ -41,7 +41,7 @@ export class UserRequestEffects {
           requestId: this.userRequestData.requestId,
         };
       }
-      return this.userRequestService
+      return this.userRequestAdapter
         .updateUserRequest(payload.userId, payload.requestId, payload.stepData)
         .pipe(
           map((userRequest: any) => {
@@ -54,7 +54,7 @@ export class UserRequestEffects {
 
   constructor(
     private actions$: Actions,
-    private userRequestService: OccUserRequestService,
+    private userRequestAdapter: OccUserRequestAdapter,
     private userRequestData: UserRequestDataService
   ) {}
 }

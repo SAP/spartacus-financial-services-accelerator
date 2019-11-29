@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
+import { FSCheckoutAdapter } from './fs-checkout.adapter';
 
 @Injectable()
-export class OccFSCheckoutService {
+export class OccFSCheckoutAdapter implements FSCheckoutAdapter {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService
@@ -28,6 +29,7 @@ export class OccFSCheckoutService {
       .put<any>(url, null, { headers, params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
+
   protected getUserIdentificationEndpoint(userId: string, cartId: string) {
     const userIdentificationEndpoint =
       '/users/' + userId + '/carts/' + cartId + '/user-identification';

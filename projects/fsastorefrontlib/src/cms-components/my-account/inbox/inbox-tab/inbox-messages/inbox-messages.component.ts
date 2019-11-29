@@ -115,7 +115,6 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     return new Date();
   }
 
-
   ngOnDestroy() {
     this.inboxService.setTitleAndMessageGroup(null, null);
     if (this.subscription) {
