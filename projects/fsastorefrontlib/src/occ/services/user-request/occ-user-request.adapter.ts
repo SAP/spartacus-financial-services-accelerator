@@ -5,9 +5,10 @@ import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
 import { FSStepData } from '../../occ-models';
+import { UserRequestAdapter } from './user-request.adapter';
 
 @Injectable()
-export class OccUserRequestService {
+export class OccUserRequestAdapter implements UserRequestAdapter {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService

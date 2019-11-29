@@ -4,7 +4,7 @@ import * as fromActions from '../actions';
 import { Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap, switchMap } from 'rxjs/operators';
-import { OccClaimService } from '../../../../occ/services/claim/claim.service';
+import { OccClaimAdapter } from '../../../../occ/services/claim/occ-claim.adapter';
 import { ClaimDataService } from '../../services/claim-data.service';
 import { Claim } from '../../../../occ/occ-models';
 import * as fromUserRequestActions from '../../../user-request/store/actions';
@@ -22,7 +22,7 @@ export class ClaimEffects {
           claims: this.claimData.claims,
         };
       }
-      return this.claimService.getClaims(payload.userId).pipe(
+      return this.claimAdapter.getClaims(payload.userId).pipe(
         map((claims: any) => {
           return new fromActions.LoadClaimsSuccess(claims);
         }),
@@ -36,7 +36,7 @@ export class ClaimEffects {
     ofType(fromActions.DELETE_CLAIM),
     map((action: fromActions.DeleteClaim) => action.payload),
     mergeMap(payload =>
-      this.claimService.deleteClaim(payload.userId, payload.claimId).pipe(
+      this.claimAdapter.deleteClaim(payload.userId, payload.claimId).pipe(
         map(() => {
           return new fromActions.DeleteClaimSuccess();
         }),
@@ -50,7 +50,7 @@ export class ClaimEffects {
     ofType(fromActions.CREATE_CLAIM),
     map((action: fromActions.CreateClaim) => action.payload),
     mergeMap(payload => {
-      return this.claimService
+      return this.claimAdapter
         .createClaim(payload.userId, payload.policyId, payload.contractId)
         .pipe(
           switchMap((claim: Claim) => {
@@ -71,7 +71,7 @@ export class ClaimEffects {
 
   constructor(
     private actions$: Actions,
-    private claimService: OccClaimService,
+    private claimAdapter: OccClaimAdapter,
     private claimData: ClaimDataService
   ) {}
 }

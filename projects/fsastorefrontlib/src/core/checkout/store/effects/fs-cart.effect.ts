@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { CartActions } from '@spartacus/core';
-import { OccFSCartService } from '../../../../occ/services/cart/fs-cart.service';
+import { OccFSCartAdapter } from '../../../../occ/services/cart/occ-fs-cart.adapter';
 import * as fromActions from '../actions/fs-cart.action';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class FSCartEffects {
     ofType(fromActions.ADD_OPTIONAL_PRODUCT),
     map((action: fromActions.AddOptionalProduct) => action.payload),
     switchMap(payload => {
-      return this.occCartService
+      return this.occCartAdapter
         .addToCart(
           payload.userId,
           payload.cartId,
@@ -35,7 +35,7 @@ export class FSCartEffects {
     ofType(fromActions.START_BUNDLE),
     map((action: fromActions.StartBundle) => action.payload),
     switchMap(payload => {
-      return this.occCartService
+      return this.occCartAdapter
         .startBundle(
           payload.userId,
           payload.cartId,
@@ -54,6 +54,6 @@ export class FSCartEffects {
 
   constructor(
     private actions$: Actions,
-    private occCartService: OccFSCartService
+    private occCartAdapter: OccFSCartAdapter
   ) {}
 }

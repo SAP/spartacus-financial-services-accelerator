@@ -55,3 +55,11 @@ export interface FSUserRequest {
 export interface Claim extends FSUserRequest {
   claimNumber?: string;
 }
+
+export interface AllowedFSRequestType {
+  requestType?: FSRequestType;
+}
+
+export interface FSRequestType {
+  code?: string;
+}

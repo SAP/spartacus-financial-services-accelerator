@@ -4,7 +4,7 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OccPolicyService } from './policy.service';
+import { OccPolicyAdapter } from './occ-policy.adapter';
 import { OccConfig } from '@spartacus/core';
 
 const userId = '123';
@@ -29,20 +29,20 @@ const MockOccModuleConfig: OccConfig = {
   },
 };
 
-describe('OccPolicyService', () => {
-  let service: OccPolicyService;
+describe('OccPolicyAdapter', () => {
+  let adapter: OccPolicyAdapter;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
-        OccPolicyService,
+        OccPolicyAdapter,
         { provide: OccConfig, useValue: MockOccModuleConfig },
       ],
     });
 
-    service = TestBed.get(OccPolicyService);
+    adapter = TestBed.get(OccPolicyAdapter);
     httpMock = TestBed.get(HttpTestingController);
   });
 
@@ -52,7 +52,7 @@ describe('OccPolicyService', () => {
 
   describe('getPolicies', () => {
     it('should fetch user Policies', async(() => {
-      service.getPolicies(userId).subscribe();
+      adapter.getPolicies(userId).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url === usersEndpoint + `/${userId}` + policiesEndpoint &&
@@ -64,7 +64,7 @@ describe('OccPolicyService', () => {
 
   describe('getPolicy', () => {
     it('should fetch a single policy', async(() => {
-      service.getPolicy(userId, policyId, contractId).subscribe();
+      adapter.getPolicy(userId, policyId, contractId).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url ===
@@ -81,7 +81,7 @@ describe('OccPolicyService', () => {
 
   describe('getPremiumCalendar', () => {
     it('should fetch user premium calendar', async(() => {
-      service.getPremiumCalendar(userId).subscribe();
+      adapter.getPremiumCalendar(userId).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url ===

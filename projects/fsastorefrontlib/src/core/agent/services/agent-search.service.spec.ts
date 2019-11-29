@@ -1,8 +1,8 @@
 import { TestBed, async } from '@angular/core/testing';
+import { of } from 'rxjs';
 
 import { AgentSearchService } from './agent-search.service';
-import { of } from 'rxjs';
-import { OccAgentService } from '../../../occ/services/agent/agent.service';
+import { OccAgentAdapter } from './../../../occ/services/agent/occ-agent.adapter';
 
 const searchResults = {
   agents: [
@@ -13,22 +13,22 @@ const searchResults = {
   ],
 };
 
-class MockOccAgentService {
+class MockOccAgentAdapter {
   searchAgents() {
     return of(searchResults);
   }
 }
 
 describe('AgentSearchService', () => {
-  let mockOccAgentService: MockOccAgentService;
+  let mockOccAgentAdapter: MockOccAgentAdapter;
 
   beforeEach(async(() => {
-    mockOccAgentService = new MockOccAgentService();
+    mockOccAgentAdapter = new MockOccAgentAdapter();
     TestBed.configureTestingModule({
       providers: [
         {
-          provide: OccAgentService,
-          useValue: mockOccAgentService,
+          provide: OccAgentAdapter,
+          useValue: mockOccAgentAdapter,
         },
       ],
     });

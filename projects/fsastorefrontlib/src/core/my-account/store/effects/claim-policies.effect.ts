@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import { OccPolicyService } from '../../../../occ/services/policy/policy.service';
+import { OccPolicyAdapter } from '../../../../occ/services/policy/occ-policy.adapter';
 import { PolicyDataService } from '../../services/policy-data.service';
 import * as fromActions from '../actions';
 
@@ -19,7 +19,7 @@ export class ClaimPoliciesEffects {
           policyCategoryCode: this.policyData.policyCategoryCode,
         };
       }
-      return this.policyService
+      return this.policyAdapter
         .getPoliciesByCategory(payload.userId, payload.policyCategoryCode)
         .pipe(
           map((claimPolicies: any) => {
@@ -33,6 +33,6 @@ export class ClaimPoliciesEffects {
   constructor(
     private actions$: Actions,
     private policyData: PolicyDataService,
-    private policyService: OccPolicyService
+    private policyAdapter: OccPolicyAdapter
   ) {}
 }

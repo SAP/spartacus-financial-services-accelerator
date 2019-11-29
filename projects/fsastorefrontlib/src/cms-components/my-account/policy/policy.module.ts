@@ -18,7 +18,7 @@ import { CmsPageGuard } from '@spartacus/storefront';
 import { PoliciesComponent } from './policies/policies.component';
 import { PolicyService } from '../../../core/my-account/services/policy.service';
 import { PolicyDataService } from '../../../core/my-account/services/policy-data.service';
-import { OccPolicyService } from '../../../occ/services/policy/policy.service';
+import { OccPolicyAdapter } from '../../../occ/services/policy/occ-policy.adapter';
 import { CMSViewPoliciesComponent } from './view-policies/view-policies.component';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
@@ -78,7 +78,7 @@ const routes: Routes = [
     CMSViewPoliciesComponent,
     PolicyDetailsComponent,
   ],
-  providers: [PolicyService, PolicyDataService, OccPolicyService],
+  providers: [PolicyService, PolicyDataService, OccPolicyAdapter],
   entryComponents: [
     PoliciesComponent,
     CMSViewPoliciesComponent,
