@@ -29,7 +29,7 @@ export class FormDataService {
     this.submittedForm.next(formData);
   }
 
-  getFormDataIdFromLocalStorage(formDefinitionId) {
+  getFormDataIdFromLocalStorage(formDefinitionId: string): string {
     const formLocalStorageData = JSON.parse(
       localStorage.getItem(this.formsLocalStorageKey)
     );
@@ -69,7 +69,7 @@ export class FormDataService {
     );
   }
 
-  createDataForLocalStorage(formDataId, formDefinitionId) {
+  createDataForLocalStorage(formDataId, formDefinitionId): FormStorageObject {
     return {
       formDataId: formDataId,
       formDefinitionId: formDefinitionId,

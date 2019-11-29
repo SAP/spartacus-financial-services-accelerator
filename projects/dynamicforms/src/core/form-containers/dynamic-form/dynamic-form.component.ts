@@ -16,7 +16,7 @@ import { FormBuilderService } from '../../services/builder/form-builder.service'
 import { FormDataService } from '../../services/data/form-data.service';
 import { Subscription, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { YFormData } from 'dynamicforms/src/core';
+import { YFormData } from '@fsa/dynamicforms';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -83,12 +83,12 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     }
   }
   mapDataToFormControls(formData) {
-    for (const groupName of Object.keys(formData)) {
-      for (const controlName of Object.keys(formData[groupName])) {
+    for (const groupCode of Object.keys(formData)) {
+      for (const controlName of Object.keys(formData[groupCode])) {
         this.form
-          .get(groupName)
+          .get(groupCode)
           .get(controlName)
-          .setValue(formData[groupName][controlName]);
+          .setValue(formData[groupCode][controlName]);
       }
     }
   }
