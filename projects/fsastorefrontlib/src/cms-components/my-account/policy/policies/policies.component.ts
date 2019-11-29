@@ -9,9 +9,7 @@ import {
   PolicyDataService,
 } from '../../../../core/my-account/services';
 
-export enum AllowedRequestType {
-  FSCLAIM = 'FSCLAIM',
-}
+const FSCLAIM = 'FSCLAIM';
 
 @Component({
   selector: 'fsa-policies',
@@ -66,7 +64,7 @@ export class PoliciesComponent implements OnInit {
       return (
         allowedFSRequestTypes
           .map(allowedRequestType => allowedRequestType.requestType.code)
-          .indexOf(AllowedRequestType.FSCLAIM) > -1
+          .indexOf(FSCLAIM) > -1
       );
     }
   }
