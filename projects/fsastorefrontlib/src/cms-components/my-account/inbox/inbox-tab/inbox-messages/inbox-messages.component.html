@@ -43,7 +43,10 @@
         >
           <div class="box-shadow">
             <div [innerHtml]="message.richContent"></div>
-            <div *ngIf="message.documents?.length > 0" class="border-top-grey pt-4">
+            <div
+              *ngIf="message.documents?.length > 0"
+              class="border-top-grey pt-4"
+            >
               <span class="notification">
                 {{ message.documents.length }}
                 {{ 'fscommon.attachments' | cxTranslate }}

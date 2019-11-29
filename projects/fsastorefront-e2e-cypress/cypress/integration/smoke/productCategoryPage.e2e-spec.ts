@@ -11,7 +11,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Homeowners',
     });
-    productCategory.checkComponets();
+    productCategory.checkComponents();
     productCategory.checkQuoteButtons();
     cy.get('div.product-feature-wrapper').should('have.length', 2);
     cy.get('h3.section-header-heading').should('contain', 'Homeowners Monthly');
@@ -27,7 +27,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Renters',
     });
-    productCategory.checkComponets();
+    productCategory.checkComponents();
     productCategory.checkQuoteButtons();
     cy.get('div.product-feature-wrapper').should('have.length', 2);
     cy.get('h3.section-header-heading').should('contain', 'Renters Monthly');
@@ -40,7 +40,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Auto',
     });
-    productCategory.checkComponets();
+    productCategory.checkComponents();
     productCategory.checkQuoteButtons();
     cy.get('div.product-feature-wrapper').should('have.length', 3);
     cy.get('h3.section-header-heading').should('contain', 'Auto Bronze');
@@ -54,7 +54,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Life',
     });
-    productCategory.checkComponets();
+    productCategory.checkComponents();
     productCategory.checkQuoteButtons();
     cy.get('div.product-feature-wrapper').should('have.length', 2);
     cy.get('h3.section-header-heading').should('contain', 'Life Basic');
@@ -67,7 +67,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Travel',
     });
-    productCategory.checkComponets();
+    productCategory.checkComponents();
     productCategory.checkQuoteButtons();
     cy.get('div.product-feature-wrapper').should('have.length', 3);
     cy.get('h3.section-header-heading').should('contain', 'Single Budget');
@@ -81,7 +81,7 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Event',
     });
-    productCategory.checkComponets();
+    productCategory.checkComponents();
     productCategory.checkQuoteButtons();
     cy.get('div.product-feature-wrapper').should('have.length', 3);
     cy.get('h3.section-header-heading').should('contain', 'Event Two Stars');
@@ -95,18 +95,14 @@ context('ProductCategoryPage', () => {
       menuOption: 'Insurance',
       dropdownItem: 'Savings',
     });
-    productCategory.checkComponets();
+    productCategory.checkComponents();
     productCategory.checkQuoteButtons();
-    cy.get('div.product-feature-wrapper').should('have.length', 3);
-    cy.get('h3.section-header-heading').should('contain', 'Safe And Steady');
-    cy.get('h3.section-header-heading').should('contain', 'Balanced Deal');
-    cy.get('h3.section-header-heading').should('contain', 'Flexi-Max');
-    cy.get('ul.item-details').should('have.length', 3);
+    productCategory.checksSavingsCategoryPage();
   });
 
   it('should check Current Account product category page', () => {
     cy.visit('Banking-Products/Credit-Card/c/banking_main_current_account');
-    productCategory.checkComponets();
+    productCategory.checkComponents();
     productCategory.checkApplicationButtons();
     cy.get('div.product-feature-wrapper').should('have.length', 3);
     cy.get('h3.section-header-heading').should('contain', 'Basic Account');
@@ -117,7 +113,7 @@ context('ProductCategoryPage', () => {
 
   it('should check Credit Card product category page', () => {
     cy.visit('Banking-Products/Credit-Card/c/banking_main_credit_card');
-    productCategory.checkComponets();
+    productCategory.checkComponents();
     productCategory.checkApplicationButtons();
     cy.get('div.product-feature-wrapper').should('have.length', 3);
     cy.get('h3.section-header-heading').should('contain', 'Basic Card');
@@ -128,7 +124,7 @@ context('ProductCategoryPage', () => {
 
   it('should check Loan product category page', () => {
     cy.visit('Banking-Products/Credit-Card/c/banking_main_loans');
-    productCategory.checkComponets();
+    productCategory.checkComponents();
     productCategory.checkApplicationButtons();
     cy.get('div.product-feature-wrapper').should('have.length', 1);
     cy.get('h3.section-header-heading').should('contain', 'Personal Loan');
@@ -137,7 +133,7 @@ context('ProductCategoryPage', () => {
 
   it('should check Fixed Term Deposit product category page', () => {
     cy.visit('Banking-Products/Credit-Card/c/banking_main_fixed_term_deposits');
-    productCategory.checkComponets();
+    productCategory.checkComponents();
     productCategory.checkApplicationButtons();
     cy.get('div.product-feature-wrapper').should('have.length', 1);
     cy.get('h3.section-header-heading').should('contain', 'Fixed Term Deposit');
