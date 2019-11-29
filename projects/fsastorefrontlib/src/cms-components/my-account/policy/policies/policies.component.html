@@ -81,6 +81,11 @@
               </button>
               <button
                 class="primary-button btn-block"
+                [disabled]="
+                  !isPolicyCategoryAllowed(
+                    policy.categoryData?.allowedFSRequestTypes
+                  )
+                "
                 (click)="startClaim(policy.policyNumber, policy.contractNumber)"
               >
                 {{ 'claim.makeClaim' | cxTranslate }}

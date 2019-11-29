@@ -21,7 +21,7 @@ context('Policy Details Page', () => {
     cy.get('fsa-policy-details').should('be.visible');
   });
 
-  it('Should have 6 accordions with correct titles and first one opened', () => {
+  it('Should have 5 accordions with correct titles and first one opened', () => {
     cy.get(ACCORDION_ITEM).should(
       'have.length',
       sampleTripPolicyData.policyDetails.length
