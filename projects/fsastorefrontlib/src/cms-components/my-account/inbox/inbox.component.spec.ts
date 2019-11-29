@@ -1,7 +1,13 @@
 import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
-import { AuthService, AuthRedirectService, CmsService, I18nTestingModule, UserToken } from '@spartacus/core';
+import {
+  AuthService,
+  AuthRedirectService,
+  CmsService,
+  I18nTestingModule,
+  UserToken,
+} from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { InboxTab } from '../../../core/my-account/services/inbox-data.service';
@@ -109,7 +115,7 @@ describe('InboxComponent', () => {
         {
           provide: AuthRedirectService,
           useClass: MockRedirectAfterAuthService,
-        }
+        },
       ],
     }).compileComponents();
   }));

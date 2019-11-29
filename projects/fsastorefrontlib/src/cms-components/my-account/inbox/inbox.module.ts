@@ -15,7 +15,7 @@ import {
   ConfigModule,
   CmsConfig,
   RoutesConfig,
-  RoutingConfig
+  RoutingConfig,
 } from '@spartacus/core';
 
 import { InboxMessagesComponent } from './inbox-tab/inbox-messages/inbox-messages.component';
@@ -59,4 +59,4 @@ const routes: Routes = [
   entryComponents: [InboxComponent, InboxTabComponent],
   providers: [OccInboxAdapter, InboxDataService, InboxService],
 })
-export class InboxModule { }
+export class InboxModule {}

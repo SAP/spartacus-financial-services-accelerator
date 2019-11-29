@@ -96,6 +96,10 @@ export class InboxService {
   }
 
   setMessagesState(uidList, read): Observable<any> {
-    return this.occInboxAdapter.setMessagesState(this.inboxData.userId, uidList, read);
+    return this.occInboxAdapter.setMessagesState(
+      this.inboxData.userId,
+      uidList,
+      read
+    );
   }
 }

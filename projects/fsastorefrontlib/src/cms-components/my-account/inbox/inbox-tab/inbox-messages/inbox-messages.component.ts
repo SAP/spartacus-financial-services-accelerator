@@ -15,12 +15,10 @@ import { InboxService } from '../../../../../core/my-account/services/inbox.serv
 @Component({
   selector: 'fsa-messages-inbox',
   templateUrl: './inbox-messages.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InboxMessagesComponent implements OnInit, OnDestroy {
-  constructor(
-    private inboxService: InboxService
-  ) { }
+  constructor(private inboxService: InboxService) {}
 
   private subscription: Subscription = new Subscription();
   messagesObject$: Observable<any>;
@@ -55,7 +53,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     );
     this.subscription.add(
       this.inboxService.accordionState.subscribe(
-        globalAccordionIndex => this.selectedIndex = globalAccordionIndex
+        globalAccordionIndex => (this.selectedIndex = globalAccordionIndex)
       )
     );
   }

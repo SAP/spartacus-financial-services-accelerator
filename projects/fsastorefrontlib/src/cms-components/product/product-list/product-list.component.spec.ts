@@ -25,7 +25,7 @@ class MockMediaComponent {
   name: 'cxUrl',
 })
 class MockUrlPipe implements PipeTransform {
-  transform() { }
+  transform() {}
 }
 
 class MockPageLayoutService {

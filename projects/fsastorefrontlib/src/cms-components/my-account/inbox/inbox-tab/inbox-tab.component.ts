@@ -16,7 +16,7 @@ export class InboxTabComponent implements OnInit {
   constructor(
     protected cmsService: CmsService,
     private inboxService: InboxService
-  ) { }
+  ) {}
 
   component$;
   active: boolean;
