@@ -3,7 +3,6 @@ import { Store, select } from '@ngrx/store';
 import {
   CartDataService,
   CheckoutService,
-  StateWithCheckout,
   CheckoutDeliveryService,
   Address,
 } from '@spartacus/core';

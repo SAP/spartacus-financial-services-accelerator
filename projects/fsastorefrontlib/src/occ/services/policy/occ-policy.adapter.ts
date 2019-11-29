@@ -5,11 +5,12 @@ import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
+import { PolicyAdapter } from './policy.adapter';
 
 const FULL_PARAMS = 'fields=FULL';
 
 @Injectable()
-export class OccPolicyService {
+export class OccPolicyAdapter implements PolicyAdapter {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService

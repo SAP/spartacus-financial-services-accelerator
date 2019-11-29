@@ -8,16 +8,16 @@ export class FormBuilderService {
 
   createForm(config) {
     const form = this.fb.group({});
-    let newGroup;
-    let groupName;
     config.formGroups.forEach(formGroup => {
-      newGroup = this.fb.group({});
-      groupName = formGroup.groupName;
+      const controlGroup =
+        formGroup.groupCode !== undefined ? this.fb.group({}) : form;
       formGroup.fieldConfigs.forEach(input => {
-        input.group = newGroup;
-        newGroup.addControl(input.name, this.createControl(input));
+        input.group = controlGroup;
+        controlGroup.addControl(input.name, this.createControl(input));
       });
-      form.addControl(groupName, newGroup);
+      if (formGroup.groupCode !== undefined) {
+        form.addControl(formGroup.groupCode, controlGroup);
+      }
     });
     return form;
   }

@@ -9,7 +9,7 @@ export class FormSampleConfigurations {
       formId: 'auto_details_form',
       formGroups: [
         {
-          groupName: 'general',
+          groupCode: 'general',
           fieldConfigs: [
             {
               type: 'title',
@@ -39,7 +39,7 @@ export class FormSampleConfigurations {
           ],
         },
         {
-          groupName: 'vehicle',
+          groupCode: 'vehicle',
           fieldConfigs: [
             {
               type: 'title',
@@ -129,7 +129,7 @@ export class FormSampleConfigurations {
           ],
         },
         {
-          groupName: 'mainDriver',
+          groupCode: 'mainDriver',
           fieldConfigs: [
             {
               type: 'title',
@@ -192,7 +192,7 @@ export class FormSampleConfigurations {
           ],
         },
         {
-          groupName: 'additionalDrivers',
+          groupCode: 'additionalDrivers',
           fieldConfigs: [
             {
               type: 'title',
@@ -223,7 +223,7 @@ export class FormSampleConfigurations {
           ],
         },
         {
-          groupName: 'additional-driver-1',
+          groupCode: 'additional-driver-1',
           fieldConfigs: [
             {
               type: 'title',
@@ -287,7 +287,7 @@ export class FormSampleConfigurations {
           ],
         },
         {
-          groupName: 'additional-driver-2',
+          groupCode: 'additional-driver-2',
           fieldConfigs: [
             {
               type: 'title',
@@ -350,7 +350,7 @@ export class FormSampleConfigurations {
           ],
         },
         {
-          groupName: 'additional-driver-3',
+          groupCode: 'additional-driver-3',
           fieldConfigs: [
             {
               type: 'title',
@@ -413,7 +413,7 @@ export class FormSampleConfigurations {
           ],
         },
         {
-          groupName: 'additional-driver-4',
+          groupCode: 'additional-driver-4',
           fieldConfigs: [
             {
               type: 'title',
@@ -482,7 +482,7 @@ export class FormSampleConfigurations {
       formId: 'trip_details_form',
       formGroups: [
         {
-          groupName: 'trip',
+          groupCode: 'trip',
           fieldConfigs: [
             {
               type: 'select',
@@ -713,7 +713,6 @@ export class FormSampleConfigurations {
       formId: 'auto_claim_incident_info_form',
       formGroups: [
         {
-          groupName: 'incidentInfo',
           fieldConfigs: [
             {
               type: 'select',
@@ -753,7 +752,7 @@ export class FormSampleConfigurations {
             },
             {
               label: 'When did it happen?',
-              name: 'whenHappen',
+              name: 'whenHappened',
               type: 'datepicker',
               validation: [
                 Validators.required,
@@ -834,11 +833,10 @@ export class FormSampleConfigurations {
       formId: 'auto_claim_incident_report_form',
       formGroups: [
         {
-          groupName: 'incidentReport',
           fieldConfigs: [
             {
               label: 'Please describe how the accident occurred:',
-              name: 'howItHappen',
+              name: 'howAccidentOccured',
               type: 'textarea',
               validation: [Validators.required],
             },
@@ -850,17 +848,16 @@ export class FormSampleConfigurations {
       formId: 'auto_claim_general_form',
       formGroups: [
         {
-          groupName: 'incidentReport',
           fieldConfigs: [
             {
               label: 'Who is responsible for the accident?',
-              name: 'resposnible',
+              name: 'responsibleForAccident',
               type: 'input',
               validation: [Validators.required],
             },
             {
               label: 'Were the police informed?',
-              name: 'policyInformed',
+              name: 'policeInformed',
               type: 'radio',
               options: [
                 {
@@ -876,7 +873,7 @@ export class FormSampleConfigurations {
             },
             {
               label: 'Are there any witnesses we can contact?',
-              name: 'anyWitnesses',
+              name: 'witnesses',
               type: 'radio',
               options: [
                 {
@@ -898,7 +895,7 @@ export class FormSampleConfigurations {
       formId: 'insurance_personal_details',
       formGroups: [
         {
-          groupName: 'personalDetails',
+          groupCode: 'personalDetails',
           fieldConfigs: [
             {
               label: 'Title',
@@ -1001,7 +998,7 @@ export class FormSampleConfigurations {
       formId: 'event_personal_details',
       formGroups: [
         {
-          groupName: 'personalDetails',
+          groupCode: 'personalDetails',
           fieldConfigs: [
             {
               label: 'Event country',
@@ -1110,7 +1107,7 @@ export class FormSampleConfigurations {
       formId: 'travel_personal_details',
       formGroups: [
         {
-          groupName: 'personalDetails',
+          groupCode: 'personalDetails',
           fieldConfigs: [
             {
               label: 'Title',

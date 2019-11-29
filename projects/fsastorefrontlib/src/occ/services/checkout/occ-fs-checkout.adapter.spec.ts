@@ -4,13 +4,15 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OccQuoteService } from './quote.service';
 import { OccConfig } from '@spartacus/core';
+import { OccFSCheckoutAdapter } from './occ-fs-checkout.adapter';
 
-const userId = '123';
+const userId = 'userId';
+const cartId = 'cartId';
+const identificationType = 'video_identification';
 
 const usersEndpoint = '/users';
-const quotesEndpoint = '/insurance-quotes';
+const cartsEndpoint = '/carts';
 
 const MockOccModuleConfig: OccConfig = {
   context: {
@@ -24,20 +26,20 @@ const MockOccModuleConfig: OccConfig = {
   },
 };
 
-describe('OccQuoteService', () => {
-  let service: OccQuoteService;
+describe('OccFSCheckoutAdapter', () => {
+  let service: OccFSCheckoutAdapter;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
-        OccQuoteService,
+        OccFSCheckoutAdapter,
         { provide: OccConfig, useValue: MockOccModuleConfig },
       ],
     });
 
-    service = TestBed.get(OccQuoteService);
+    service = TestBed.get(OccFSCheckoutAdapter);
     httpMock = TestBed.get(HttpTestingController);
   });
 
@@ -45,15 +47,23 @@ describe('OccQuoteService', () => {
     httpMock.verify();
   });
 
-  describe('getQuotes', () => {
-    it('should fetch user Quotes', async(() => {
-      service.getQuotes(userId).subscribe();
+  describe('setIdentificationType', () => {
+    it('should set user identification type', async(() => {
+      service
+        .setIdentificationType(identificationType, cartId, userId)
+        .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
-          req.url === usersEndpoint + `/${userId}` + quotesEndpoint &&
-          req.method === 'GET'
+          req.url ===
+            usersEndpoint +
+              `/${userId}` +
+              cartsEndpoint +
+              `/${cartId}` +
+              '/user-identification' &&
+          req.params.append('identificationType', identificationType) &&
+          req.method === 'PUT'
         );
-      }, `GET method and url`);
+      }, `PUT method and url`);
     }));
   });
 });

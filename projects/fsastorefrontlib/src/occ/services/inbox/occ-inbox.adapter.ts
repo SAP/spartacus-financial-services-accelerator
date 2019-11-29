@@ -5,11 +5,12 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { OccEndpointsService } from '@spartacus/core';
 import { FSSearchConfig } from '../../../core/my-account/services/inbox-data.service';
+import { InboxAdapter } from './inbox.adapter';
 
 const FULL_PARAMS = '&fields=FULL';
 
 @Injectable()
-export class OccInboxService {
+export class OccInboxAdapter implements InboxAdapter {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService

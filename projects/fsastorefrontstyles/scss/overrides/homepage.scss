@@ -46,7 +46,7 @@
     position: relative;
     text-align: center;
     font-size: var(--cx-h2-font-size);
-    color: var(--cx-color-11);
+    color: var(--cx-color-text);
     font-weight: var(--cx-font-weight-semi);
     margin-bottom: 3rem;
     padding-bottom: 1.5rem;
@@ -78,35 +78,9 @@
       margin-bottom: 60px;
     }
   }
-  //Quotes & Policies review
-  .Section2C {
-    display: flex;
-    @include media-breakpoint-down(xs) {
-      flex-direction: column;
-    }
-    fsa-view-quotes,
-    fsa-view-policies {
-      flex: 1 1 50%;
-      button {
-        height: auto;
-        padding: 33px 0;
-      }
-    }
-    fsa-view-policies {
-      padding-left: 1rem;
-      @include media-breakpoint-down(xs) {
-        padding: 0;
-      }
-    }
-    fsa-view-quotes {
-      padding-right: 1rem;
-      @include media-breakpoint-down(xs) {
-        padding: 0;
-      }
-    }
-  }
+
   //Assistance and support section
-  .Section3 {
+  .Section2C {
     cx-banner {
       padding: 0 0 1.5rem;
       @include media-breakpoint-up(md) {
