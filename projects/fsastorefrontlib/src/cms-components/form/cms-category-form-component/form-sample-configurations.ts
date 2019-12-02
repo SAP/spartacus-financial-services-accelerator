@@ -124,7 +124,14 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Vehicle Owner Postal Code',
               name: 'vehicleOwnerPostalCode',
-              validation: [Validators.required],
+              validation: [
+                Validators.required,
+                Validators.minLength(1),
+                CustomFormValidators.regexValidator(
+                  CustomFormValidators.postalCodeRegex
+                ),
+              ],
+              error: 'forms.containAtLeastOneNumber'
             },
           ],
         },

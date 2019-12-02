@@ -6,6 +6,7 @@ export class CustomFormValidators {
   // tslint:disable-next-line:max-line-length
   static emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   static phoneNumberRegex = /^(?:\d{6,20})?$/;
+  static postalCodeRegex = /^(?=.*[0-9])[A-Za-z0-9\s]+$/;
 
   static regexValidator(regex) {
     return (control: AbstractControl): ValidationErrors | null => {
