@@ -5,27 +5,22 @@ import { FormConfig } from '../../config';
 import { FormButtonComponent } from './../form-button/form-button.component';
 import { FieldConfig } from 'dynamicforms/src/core';
 
-
 @Component({
-    template: `
+  template: `
     <div>
-        <ng-container
-        cxDynamicField
-        [config]="filed"
-        [group]="group"
-        >
-        </ng-container>
+      <ng-container cxDynamicField [config]="filed" [group]="group">
+      </ng-container>
     </div>
   `,
 })
 class TestDynamicFormComponent {
-    filed: FieldConfig = {
-        name: 'test',
-        type: 'button'
-    };
+  filed: FieldConfig = {
+    name: 'test',
+    type: 'button',
+  };
 }
 
-class MockedButtonComponent { }
+class MockedButtonComponent {}
 
 // class MockViewContainerRef {
 //     createComponent() {
@@ -34,13 +29,12 @@ class MockedButtonComponent { }
 // }
 
 const MockFormConfig: FormConfig = {
-    components: {
-        button: {
-            component: FormButtonComponent
-        }
-    }
+  components: {
+    button: {
+      component: FormButtonComponent,
+    },
+  },
 };
-
 
 describe('Directive: DynamicField', () => {
   let fixture: ComponentFixture<TestDynamicFormComponent>;
@@ -48,17 +42,17 @@ describe('Directive: DynamicField', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestDynamicFormComponent, DynamicFieldDirective],
-      providers: [{ provide: FormConfig, useValue: MockFormConfig },
+      providers: [
+        { provide: FormConfig, useValue: MockFormConfig },
         // {provide: ViewContainerRef, useValue: MockViewContainerRef}
       ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(TestDynamicFormComponent);
-
   });
 
   it('should create an instance', () => {
-     fixture.detectChanges();
+    fixture.detectChanges();
     // expect(directive).toBeTruthy();
   });
 });

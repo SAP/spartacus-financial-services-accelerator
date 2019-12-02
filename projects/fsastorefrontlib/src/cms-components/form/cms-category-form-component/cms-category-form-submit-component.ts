@@ -5,6 +5,7 @@ import {
   FormDefinition,
   YFormDefinition,
   YFormData,
+  FormConfig,
 } from '@fsa/dynamicforms';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
@@ -22,7 +23,8 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
     protected componentData: CmsComponentData<CMSFormSubmitComponent>,
     protected activatedRoute: ActivatedRoute,
     protected cmsComponentConnector: CmsComponentConnector,
-    protected formDataService: FormDataService
+    protected formDataService: FormDataService,
+    private config: FormConfig
   ) {}
 
   routeParamId = 'formCode';
@@ -64,9 +66,13 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
           }),
           map(formDefinition => {
             if (formDefinition && formDefinition.content) {
+              // const validator: ValidatorFn = this.config.validations['dateCompare'].function;
+              // const newValidation = validator.apply(this, ['shouldBeGreater']);
+
               this.formConfig = <FormDefinition>(
                 JSON.parse(formDefinition.content)
               );
+              //this.formConfig.formGroups[0].fieldConfigs[3].validation = [newValidation];
             }
           })
         )

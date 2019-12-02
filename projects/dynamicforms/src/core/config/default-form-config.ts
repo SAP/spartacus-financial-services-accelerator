@@ -6,6 +6,8 @@ import { FormTitleComponent } from './../form-components/form-title/form-title.c
 import { FormDatePickerComponent } from './../form-components/form-datepicker/form-datepicker.component';
 import { FormRadioComponent } from './../form-components/form-radio/form-radio.component';
 import { FormTextAreaComponent } from './../form-components/form-text-area/form-text-area.component';
+import { Validators } from '@angular/forms';
+import { CustomFormValidators } from '../../../../fsastorefrontlib/src/shared/util/validators/custom-form-validators';
 
 export const defaultFormConfig: FormConfig = {
   components: {
@@ -24,11 +26,20 @@ export const defaultFormConfig: FormConfig = {
     datepicker: {
       component: FormDatePickerComponent,
     },
+
     radio: {
       component: FormRadioComponent,
     },
     textarea: {
       component: FormTextAreaComponent,
+    },
+  },
+  validations: {
+    required: {
+      function: Validators.required,
+    },
+    dateCompare: {
+      function: CustomFormValidators.compareToCurrentDate,
     },
   },
 };
