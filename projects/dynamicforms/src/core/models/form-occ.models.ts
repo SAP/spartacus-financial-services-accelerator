@@ -4,6 +4,7 @@ export interface YFormData {
   type?: string;
   formDefinitionId?: string;
   categoryCode?: string;
+  refId?: string;
 }
 
 export interface YFormDefinition {

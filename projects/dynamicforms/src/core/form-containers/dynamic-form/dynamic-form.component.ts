@@ -10,7 +10,7 @@ import { FormGroup } from '@angular/forms';
 import {
   FieldConfig,
   FormDefinition,
-} from '../../models/field-config.interface';
+} from '../../models/form-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 
 import { FormDataService } from '../../services/data/form-data.service';
@@ -58,7 +58,9 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         this.formData
           .pipe(
             map(formData => {
-              this.mapDataToFormControls(JSON.parse(formData.content));
+              if (formData.content) {
+                this.mapDataToFormControls(JSON.parse(formData.content));
+              }
             })
           )
           .subscribe()
@@ -97,8 +99,9 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
       this.formDataService
         .getSubmittedForm()
         .pipe(
-          map(submitted => {
-            if (!submitted && this.value !== undefined && this.valid) {
+          map(form => {
+            if (form && this.value !== undefined && this.valid) {
+              this.value.refId = form.refId;
               this.submit.emit(this.value);
             }
           })

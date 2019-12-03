@@ -29,3 +29,8 @@ export interface FieldOption {
   label: string;
   icon?: string;
 }
+
+export interface CategoryFormRelationMapping {
+  categoryCode: string;
+  formDefinitionId: string;
+}

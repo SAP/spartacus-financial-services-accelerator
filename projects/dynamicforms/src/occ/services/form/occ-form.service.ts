@@ -21,10 +21,11 @@ export class OccFormService {
     definitionId: string,
     applicationId: string,
     formContent: any,
-    formDataId?: string
+    formDataId?: string,
+    refId?: string
   ) {
     const url = this.getYFormsEndpoint() + '/data';
-    const params = new HttpParams({
+    let params = new HttpParams({
       fromString:
         FULL_PARAMS +
         '&definitionId=' +
@@ -33,7 +34,10 @@ export class OccFormService {
         applicationId,
     });
     if (formDataId) {
-      params.append('formDataId', formDataId);
+      params = params.append('formDataId', formDataId);
+    }
+    if (refId) {
+      params = params.append('refId', refId);
     }
     return this.http
       .put<YFormData>(url, formContent, { params: params })

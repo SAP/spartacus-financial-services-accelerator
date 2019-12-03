@@ -69,7 +69,7 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
   }
 
   next(currentStep: number): void {
-    this.formDataService.submit();
+    this.formDataService.submit({});
     this.subscription.add(
       this.formDataService
         .getSubmittedForm()

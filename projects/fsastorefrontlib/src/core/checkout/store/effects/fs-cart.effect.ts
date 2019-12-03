@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import { CartActions } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { CartActions } from '@spartacus/core';
 import { OccFSCartAdapter } from '../../../../occ/services/cart/occ-fs-cart.adapter';
 import * as fromActions from '../actions/fs-cart.action';
+import * as fromQuoteActions from '../../../my-account/store/actions/quote.action';
+import { categoryFormRelationMappings } from './../../../../cms-components/form/cms-category-form-component/form-sample-mapping-configurations';
+import { FormDataService } from '@fsa/dynamicforms';
 
 @Injectable()
 export class FSCartEffects {
@@ -45,15 +48,49 @@ export class FSCartEffects {
           payload.pricingData
         )
         .pipe(
-          map((cart: any) => {
-            return new CartActions.CartAddEntrySuccess(cart.entry);
-          })
+          switchMap((cart: any) => {
+            if (
+              cart &&
+              cart.entry &&
+              cart.entry.product &&
+              cart.entry.product.defaultCategory
+            ) {
+              const currentCategoryCode =
+                cart.entry.product.defaultCategory.code;
+              const formDefinitionId = categoryFormRelationMappings.find(
+                mapping => mapping.categoryCode === currentCategoryCode
+              ).formDefinitionId;
+
+              const quoteDetails = {
+                quoteDetails: {
+                  entry: [
+                    {
+                      key: 'formId',
+                      value: this.formDataService.getFormDataIdFromLocalStorage(
+                        formDefinitionId
+                      ),
+                    },
+                  ],
+                },
+              };
+              return [
+                new fromQuoteActions.UpdateQuote({
+                  userId: payload.userId,
+                  cartId: payload.cartId,
+                  quoteContent: quoteDetails,
+                }),
+                new CartActions.CartAddEntrySuccess(cart.entry),
+              ];
+            }
+          }),
+          catchError(error => of(new CartActions.CartAddEntryFail(error)))
         );
     })
   );
 
   constructor(
     private actions$: Actions,
-    private occCartAdapter: OccFSCartAdapter
+    private occCartAdapter: OccFSCartAdapter,
+    private formDataService: FormDataService
   ) {}
 }
