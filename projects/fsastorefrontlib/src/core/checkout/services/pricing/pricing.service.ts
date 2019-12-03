@@ -10,15 +10,15 @@ export class PricingService {
     const pricingAttributesData: PricingData = {
       priceAttributeGroups: [],
     };
-    Object.keys(formData).forEach(groupName => {
+    Object.keys(formData).forEach(groupCode => {
       const priceAttributeGroup: PriceAttributeGroup = {
         priceAttributes: [],
       };
-      priceAttributeGroup.name = groupName;
-      Object.keys(formData[groupName]).forEach(inputName => {
+      priceAttributeGroup.name = groupCode;
+      Object.keys(formData[groupCode]).forEach(inputName => {
         priceAttributeGroup.priceAttributes.push({
           key: inputName,
-          value: formData[groupName][inputName],
+          value: formData[groupCode][inputName],
         });
       });
       pricingAttributesData.priceAttributeGroups.push(priceAttributeGroup);

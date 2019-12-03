@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap } from 'rxjs/operators';
 import { QuoteDataService } from '../../services/quote-data.service';
-import { OccQuoteService } from '../../../../occ/services/quote/quote.service';
+import { OccQuoteAdapter } from '../../../../occ/services/quote/occ-quote.adapter';
 
 @Injectable()
 export class QuoteEffects {
@@ -20,7 +20,7 @@ export class QuoteEffects {
           quotes: this.quoteData.quotes,
         };
       }
-      return this.quoteService.getQuotes(payload.userId).pipe(
+      return this.quoteAdapter.getQuotes(payload.userId).pipe(
         map((quotes: any) => {
           return new fromActions.LoadQuotesSuccess(quotes);
         }),
@@ -31,7 +31,7 @@ export class QuoteEffects {
 
   constructor(
     private actions$: Actions,
-    private quoteService: OccQuoteService,
+    private quoteAdapter: OccQuoteAdapter,
     private quoteData: QuoteDataService
   ) {}
 }

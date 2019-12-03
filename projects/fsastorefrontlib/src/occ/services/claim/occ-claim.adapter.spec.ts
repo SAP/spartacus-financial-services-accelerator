@@ -4,7 +4,7 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OccClaimService } from './claim.service';
+import { OccClaimAdapter } from './occ-claim.adapter';
 import { OccConfig } from '@spartacus/core';
 
 const userId = '123';
@@ -29,19 +29,19 @@ const MockOccModuleConfig: OccConfig = {
 };
 
 describe('OccClaimsService', () => {
-  let service: OccClaimService;
+  let adapter: OccClaimAdapter;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
-        OccClaimService,
+        OccClaimAdapter,
         { provide: OccConfig, useValue: MockOccModuleConfig },
       ],
     });
 
-    service = TestBed.get(OccClaimService);
+    adapter = TestBed.get(OccClaimAdapter);
     httpMock = TestBed.get(HttpTestingController);
   });
 
@@ -51,7 +51,7 @@ describe('OccClaimsService', () => {
 
   describe('getClaims', () => {
     it('should fetch user Claims', async(() => {
-      service.getClaims(userId).subscribe();
+      adapter.getClaims(userId).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url === usersEndpoint + `/${userId}` + claimsEndpoint &&
@@ -63,7 +63,7 @@ describe('OccClaimsService', () => {
 
   describe('deleteClaim', () => {
     it('delete specified claim by id', async(() => {
-      service.deleteClaim(userId, claimNumber).subscribe();
+      adapter.deleteClaim(userId, claimNumber).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url ===
@@ -76,7 +76,7 @@ describe('OccClaimsService', () => {
 
   describe('createClaim', () => {
     it('create claim for specified policyId and contractId', async(() => {
-      service.createClaim(userId, policyNumber, contractNumber).subscribe();
+      adapter.createClaim(userId, policyNumber, contractNumber).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url ===

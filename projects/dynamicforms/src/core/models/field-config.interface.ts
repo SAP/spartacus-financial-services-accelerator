@@ -5,7 +5,7 @@ export interface FormDefinition {
   formId: string;
 }
 export interface FromGroup {
-  groupName: String;
+  groupCode?: String;
   fieldConfigs: FieldConfig[];
 }
 export interface FieldConfig {

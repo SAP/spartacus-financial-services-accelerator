@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
-import { OccPolicyService } from '../../../../occ/services/policy/policy.service';
+import { OccPolicyAdapter } from '../../../../occ/services/policy/occ-policy.adapter';
 import { PolicyDataService } from '../../services/policy-data.service';
 import * as fromActions from '../actions';
 
@@ -65,6 +65,6 @@ export class PolicyEffects {
   constructor(
     private actions$: Actions,
     private policyData: PolicyDataService,
-    private policyService: OccPolicyService
+    private policyService: OccPolicyAdapter
   ) {}
 }

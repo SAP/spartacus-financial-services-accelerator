@@ -1,4 +1,4 @@
-export function checkComponets() {
+export function checkComponents() {
   cy.get('cx-page-slot.Section1 fsa-enriched-responsive-banner');
   cy.get('span.enriched-banner__title').should(
     'contain',
@@ -21,6 +21,15 @@ export function checkApplicationButtons() {
     ' Request a product'
   );
   cy.get('cx-generic-link a').should('contain', 'Retrieve an Application');
+}
+
+export function checksSavingsCategoryPage() {
+  cy.get('div.product-feature-wrapper').should('have.length', 3);
+  cy.get('h3.section-header-heading').should('contain', 'Safe And Steady');
+  cy.get('h3.section-header-heading').should('contain', 'Balanced Deal');
+  cy.get('h3.section-header-heading').should('contain', 'Flexi-Max');
+  cy.get('ul.item-details').should('have.length', 3);
+  cy.go('back');
 }
 
 export function startCheckoutForBanking() {

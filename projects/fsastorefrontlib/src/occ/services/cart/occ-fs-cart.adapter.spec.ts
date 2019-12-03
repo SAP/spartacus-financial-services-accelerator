@@ -4,7 +4,7 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OccFSCartService } from './fs-cart.service';
+import { OccFSCartAdapter } from './occ-fs-cart.adapter';
 import { OccConfig } from '@spartacus/core';
 import { PricingData } from '../../../core/models/pricing.interface';
 
@@ -34,20 +34,20 @@ const MockOccModuleConfig: OccConfig = {
   },
 };
 
-describe('OccFSCartService', () => {
-  let service: OccFSCartService;
+describe('OccFSCartAdapter', () => {
+  let adapter: OccFSCartAdapter;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
-        OccFSCartService,
+        OccFSCartAdapter,
         { provide: OccConfig, useValue: MockOccModuleConfig },
       ],
     });
 
-    service = TestBed.get(OccFSCartService);
+    adapter = TestBed.get(OccFSCartAdapter);
     httpMock = TestBed.get(HttpTestingController);
   });
 
@@ -57,7 +57,7 @@ describe('OccFSCartService', () => {
 
   describe('addToCart', () => {
     it('should add product to cart', async(() => {
-      service
+      adapter
         .addToCart(userId, cartId, productCode, quantity, entryNumber)
         .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
@@ -79,7 +79,7 @@ describe('OccFSCartService', () => {
 
   describe('startBundle', () => {
     it('start bundle', async(() => {
-      service
+      adapter
         .startBundle(
           userId,
           cartId,

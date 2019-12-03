@@ -18,7 +18,7 @@
     }
     &__title {
       font-size: var(--cx-h3-font-size);
-      color: var(--cx-color-11);
+      color: var(--cx-color-text);
       font-weight: var(--cx-font-weight-semi);
       padding-bottom: 1.2rem;
       @include media-breakpoint-down(md) {
@@ -96,7 +96,7 @@
       .category-primary-promotion-banner {
         &__title,
         &__text {
-          color: var(--cx-color-11);
+          color: var(--cx-color-text);
           padding: 0;
         }
         &__title {

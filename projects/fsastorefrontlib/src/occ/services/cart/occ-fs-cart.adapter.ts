@@ -5,11 +5,12 @@ import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { PricingData } from '../../../core/models/pricing.interface';
+import { FSCartAdapter } from './fs-cart.adapter';
 
 const FULL_PARAMS = '&fields=FULL';
 
 @Injectable()
-export class OccFSCartService {
+export class OccFSCartAdapter implements FSCartAdapter {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService

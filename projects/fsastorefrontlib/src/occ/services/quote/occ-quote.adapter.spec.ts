@@ -4,14 +4,13 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OccInboxService } from './inbox.service';
+import { OccQuoteAdapter } from './occ-quote.adapter';
 import { OccConfig } from '@spartacus/core';
 
 const userId = '123';
-const messageGroup = 'autoGroup';
 
 const usersEndpoint = '/users';
-const messagesEndPoint = '/notifications/fssitemessages';
+const quotesEndpoint = '/insurance-quotes';
 
 const MockOccModuleConfig: OccConfig = {
   context: {
@@ -25,20 +24,20 @@ const MockOccModuleConfig: OccConfig = {
   },
 };
 
-describe('OccInboxService', () => {
-  let service: OccInboxService;
+describe('OccQuoteAdapter', () => {
+  let adapter: OccQuoteAdapter;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
-        OccInboxService,
+        OccQuoteAdapter,
         { provide: OccConfig, useValue: MockOccModuleConfig },
       ],
     });
 
-    service = TestBed.get(OccInboxService);
+    adapter = TestBed.get(OccQuoteAdapter);
     httpMock = TestBed.get(HttpTestingController);
   });
 
@@ -46,18 +45,12 @@ describe('OccInboxService', () => {
     httpMock.verify();
   });
 
-  describe('getMessagesForMessageGroup', () => {
-    it('should fetch user messages for specified group', async(() => {
-      service
-        .getSiteMessagesForUserAndGroup(userId, messageGroup, {})
-        .subscribe();
+  describe('getQuotes', () => {
+    it('should fetch user Quotes', async(() => {
+      adapter.getQuotes(userId).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
-          req.url ===
-            usersEndpoint +
-              `/${userId}` +
-              messagesEndPoint +
-              `?fields=FULL&messagegroup=${messageGroup}` &&
+          req.url === usersEndpoint + `/${userId}` + quotesEndpoint &&
           req.method === 'GET'
         );
       }, `GET method and url`);
