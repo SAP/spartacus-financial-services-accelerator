@@ -8,10 +8,10 @@
       </div>
     </ng-container>
     <ng-container
-      *ngIf="warn?.invalid && warn?.touched && !warn?.errors?.required"
+      *ngIf="warn?.invalid && warn?.touched && !warn?.errors?.required && parentConfig?.error"
     >
       <div class="form-text">
-        {{ parentConfig?.error | cxTranslate }}
+        {{ parentConfig.error | cxTranslate }}
       </div>
     </ng-container>
   </div>
