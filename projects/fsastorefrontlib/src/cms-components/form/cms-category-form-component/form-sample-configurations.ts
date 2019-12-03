@@ -963,7 +963,13 @@ export class FormSampleConfigurations {
               label: 'Phone Number',
               name: 'phoneNumber',
               type: 'input',
-              validation: [Validators.required],
+              validation: [
+                Validators.required,
+                Validators.minLength(4),
+                Validators.maxLength(20),
+                Validators.pattern('^[0-9]*$'),
+              ],
+              error: 'forms.between4And20Digits',
             },
             {
               label: 'Email',
@@ -1199,7 +1205,13 @@ export class FormSampleConfigurations {
               label: 'Phone Number',
               name: 'phoneNumber',
               type: 'input',
-              validation: [Validators.required],
+              validation: [
+                Validators.required,
+                Validators.minLength(4),
+                Validators.maxLength(20),
+                Validators.pattern('^[0-9]*$'),
+              ],
+              error: 'forms.between4And20Digits',
             },
             {
               label: 'Email',
