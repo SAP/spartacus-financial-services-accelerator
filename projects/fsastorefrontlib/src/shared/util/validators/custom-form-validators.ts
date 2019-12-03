@@ -55,4 +55,27 @@ export class CustomFormValidators {
       }
     };
   }
+
+  static compareDates(comparisonField: string, operator: string) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (control.parent) {
+        const currentField = Date.parse(control.value);
+        const compareToField = Date.parse(
+          control.parent.controls[comparisonField].value
+        );
+        if (currentField && compareToField) {
+          switch (operator) {
+            case 'shouldBeGreater':
+              return compareToField > currentField
+                ? null
+                : { travelBackInTime: true };
+            case 'shouldBeLess':
+              return currentField > compareToField
+                ? null
+                : { travelBackInTime: true };
+          }
+        }
+      }
+    };
+  }
 }

@@ -131,7 +131,7 @@ export class FormSampleConfigurations {
                   CustomFormValidators.postalCodeRegex
                 ),
               ],
-              error: 'forms.containAtLeastOneNumber'
+              error: 'forms.containAtLeastOneNumber',
             },
           ],
         },
@@ -521,8 +521,12 @@ export class FormSampleConfigurations {
               validation: [
                 Validators.required,
                 CustomFormValidators.compareToCurrentDate('shouldBeGreater'),
+                CustomFormValidators.compareDates(
+                  'tripEndDate',
+                  'shouldBeGreater'
+                ),
               ],
-              error: 'forms.dateInFuture',
+              error: 'forms.dateInFutureAfterEnd',
             },
             {
               type: 'datepicker',
@@ -531,8 +535,12 @@ export class FormSampleConfigurations {
               validation: [
                 Validators.required,
                 CustomFormValidators.compareToCurrentDate('shouldBeGreater'),
+                CustomFormValidators.compareDates(
+                  'tripStartDate',
+                  'shouldBeLess'
+                ),
               ],
-              error: 'forms.dateInFuture',
+              error: 'forms.dateInFutureBeforeStart',
             },
             {
               type: 'input',
