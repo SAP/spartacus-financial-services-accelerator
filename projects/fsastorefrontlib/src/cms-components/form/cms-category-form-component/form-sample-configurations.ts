@@ -777,7 +777,7 @@ export class FormSampleConfigurations {
             {
               label: 'What time did it happen?',
               name: 'whatTime',
-              type: 'input',
+              type: 'time',
               validation: [Validators.required],
             },
             {
