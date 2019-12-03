@@ -28,7 +28,6 @@ import { environment } from 'src/environments/environment';
       },
       features: {
         level: '1.3',
-        anonymousConsents: true,
       }
     })
   ],
