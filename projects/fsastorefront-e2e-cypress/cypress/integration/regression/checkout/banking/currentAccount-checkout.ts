@@ -51,7 +51,7 @@ context('Current AccountCheckout', () => {
   });
 
   it('Should check Mini Cart', () => {
-    currentAccount.checkminiCartCurrentAccount();
+    currentAccount.checkMiniCartCurrentAccount();
   });
 
   it('Should check Quote Review page', () => {
