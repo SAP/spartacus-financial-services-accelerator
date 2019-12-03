@@ -773,6 +773,7 @@ export class FormSampleConfigurations {
                 Validators.required,
                 CustomFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
+              error: 'forms.dateInPast',
             },
             {
               label: 'What time did it happen?',
@@ -817,8 +818,8 @@ export class FormSampleConfigurations {
               validation: [Validators.required],
             },
             {
-              label: 'Where did it happen?',
-              name: 'whereDidItHappen',
+              label: 'City',
+              name: 'city',
               type: 'input',
               validation: [Validators.required],
             },
@@ -826,7 +827,13 @@ export class FormSampleConfigurations {
               label: 'Postcode',
               name: 'postcode',
               type: 'input',
-              validation: [Validators.required],
+              validation: [
+                Validators.required,
+                CustomFormValidators.regexValidator(
+                  CustomFormValidators.postalCodeRegex
+                ),
+              ],
+              error: 'forms.containAtLeastOneNumber',
             },
             {
               label: 'Address',
@@ -991,19 +998,25 @@ export class FormSampleConfigurations {
               label: 'Postcode',
               name: 'postcode',
               type: 'input',
-              validation: [Validators.required],
+              validation: [
+                Validators.required,
+                CustomFormValidators.regexValidator(
+                  CustomFormValidators.postalCodeRegex
+                ),
+              ],
+              error: 'forms.containAtLeastOneNumber',
             },
             {
               label: 'Country',
               name: 'country',
               type: 'select',
-              validation: [Validators.required],
               options: [
                 {
                   label: 'Serbia',
                   name: 'RS',
                 },
               ],
+              validation: [Validators.required],
             },
           ],
         },
@@ -1041,7 +1054,7 @@ export class FormSampleConfigurations {
             },
             {
               label: 'Event date',
-              name: 'eventData',
+              name: 'eventDate',
               type: 'datepicker',
               validation: [
                 Validators.required,
@@ -1106,7 +1119,13 @@ export class FormSampleConfigurations {
               label: 'Postcode',
               name: 'postcode',
               type: 'input',
-              validation: [Validators.required],
+              validation: [
+                Validators.required,
+                CustomFormValidators.regexValidator(
+                  CustomFormValidators.postalCodeRegex
+                ),
+              ],
+              error: 'forms.containAtLeastOneNumber',
             },
             {
               label: 'City',
@@ -1168,7 +1187,13 @@ export class FormSampleConfigurations {
               label: 'Age',
               name: 'age',
               type: 'input',
-              validation: [Validators.required],
+              validation: [
+                Validators.required,
+                Validators.min(1),
+                Validators.max(150),
+                Validators.pattern('^[0-9]*$'),
+              ],
+              error: 'forms.lessThan150',
             },
             {
               label: 'Phone Number',
@@ -1209,7 +1234,13 @@ export class FormSampleConfigurations {
               label: 'Postcode',
               name: 'postcode',
               type: 'input',
-              validation: [Validators.required],
+              validation: [
+                Validators.required,
+                CustomFormValidators.regexValidator(
+                  CustomFormValidators.postalCodeRegex
+                ),
+              ],
+              error: 'forms.containAtLeastOneNumber',
             },
             {
               label: 'Country',

@@ -4,9 +4,9 @@ export const forms = {
     dateInPast: 'Date must be in the past',
     dateInFuture: 'Date must be in the future',
     dateInFutureAfterEnd:
-      'Date must be in the future, cannot be set after end date',
+      'Date must be in the future, cannot be after end date',
     dateInFutureBeforeStart:
-      'Date must be in the future, cannot be set before start date',
+      'Date must be in the future, cannot be before start date',
     lessThan100K: 'Value must be less than 100.000',
     lessThan1M: 'Value must be less than 1.000.000',
     dateOfBirthMinimumAge: 'Must be over 18 years old',
