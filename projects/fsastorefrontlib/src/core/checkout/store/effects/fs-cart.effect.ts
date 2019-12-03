@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
+import { FormDataService } from '@fsa/dynamicforms';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { CartActions } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { OccFSCartAdapter } from '../../../../occ/services/cart/occ-fs-cart.adapter';
-import * as fromActions from '../actions/fs-cart.action';
 import * as fromQuoteActions from '../../../my-account/store/actions/quote.action';
+import * as fromActions from '../actions/fs-cart.action';
 import { categoryFormRelationMappings } from './../../../../cms-components/form/cms-category-form-component/form-sample-mapping-configurations';
-import { FormDataService } from '@fsa/dynamicforms';
 
 @Injectable()
 export class FSCartEffects {
@@ -59,20 +59,23 @@ export class FSCartEffects {
                 cart.entry.product.defaultCategory.code;
               const formDefinitionId = categoryFormRelationMappings.find(
                 mapping => mapping.categoryCode === currentCategoryCode
-              ).formDefinitionId;
+              ).chooseCoverFormId;
 
-              const quoteDetails = {
-                quoteDetails: {
-                  entry: [
-                    {
-                      key: 'formId',
-                      value: this.formDataService.getFormDataIdFromLocalStorage(
-                        formDefinitionId
-                      ),
-                    },
-                  ],
-                },
-              };
+              let quoteDetails;
+              if (formDefinitionId) {
+                quoteDetails = {
+                  quoteDetails: {
+                    entry: [
+                      {
+                        key: 'formId',
+                        value: this.formDataService.getFormDataIdFromLocalStorage(
+                          formDefinitionId
+                        ),
+                      },
+                    ],
+                  },
+                };
+              }
               return [
                 new fromQuoteActions.UpdateQuote({
                   userId: payload.userId,

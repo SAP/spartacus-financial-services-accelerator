@@ -34,6 +34,7 @@ export class QuoteReviewComponent implements OnInit {
     this.cart$ = this.cartService.getActive();
     this.cartLoaded$ = this.cartService.getLoaded();
   }
+
   public getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
@@ -44,5 +45,9 @@ export class QuoteReviewComponent implements OnInit {
   next() {
     this.checkoutService.mockDeliveryAddress();
     this.routingService.go(this.checkoutStepUrlNext);
+  }
+
+  parseFormContentToJson(formContent: string): any {
+    return JSON.parse(formContent);
   }
 }

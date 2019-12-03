@@ -3,14 +3,21 @@ import { CategoryFormRelationMapping } from '@fsa/dynamicforms';
 export const categoryFormRelationMappings: CategoryFormRelationMapping[] = [
   {
     categoryCode: 'insurances_travel',
-    formDefinitionId: 'trip_details_form',
+    chooseCoverFormId: 'trip_details_form',
+    personalDetailsFormId: 'travel_personal_details',
   },
   {
     categoryCode: 'insurances_auto',
-    formDefinitionId: 'auto_details_form',
+    chooseCoverFormId: 'auto_details_form',
+    personalDetailsFormId: 'insurance_personal_details',
   },
   {
     categoryCode: 'insurances_life',
-    formDefinitionId: 'life_details_form',
+    chooseCoverFormId: 'life_details_form',
+    personalDetailsFormId: 'insurance_personal_details',
+  },
+  {
+    categoryCode: 'insurances_event',
+    personalDetailsFormId: 'event_personal_details',
   },
 ];

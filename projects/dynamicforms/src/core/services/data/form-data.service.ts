@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CartService } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 import { OccFormService } from '../../../occ/services/form/occ-form.service';
-import { YFormData, FormStorageObject } from '../../models';
+import { FormStorageObject, YFormData } from '../../models';
 import { YFormDefinition } from './../../models/form-occ.models';
 
 @Injectable()

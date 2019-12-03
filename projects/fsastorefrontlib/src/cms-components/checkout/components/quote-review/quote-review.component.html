@@ -193,60 +193,20 @@
           <div class="container">
             <div class="row justify-content-center">
               <ul class="col-12 accordion-list">
-                <li class="accordion-list-item row">
+                <li
+                  *ngFor="
+                    let quoteProperties of parseFormContentToJson(
+                      ((cart.deliveryOrderGroups[0]?.entries)[0]
+                        ?.formDataData)[0]?.content
+                    ).personalDetails | keyvalue
+                  "
+                  class="accordion-list-item row"
+                >
                   <div class="col-6 item-label">
-                    {{ 'policy.policyHolder' | cxTranslate }}
+                    {{ 'quote.' + quoteProperties.key | cxTranslate }}
                   </div>
                   <div class="col-6 value notice">
-                    Mrs. Test Tester
-                  </div>
-                </li>
-                <li class="accordion-list-item row">
-                  <div class="col-6 item-label">
-                    Phone Number
-                  </div>
-                  <div class="col-6 value notice">
-                    323535
-                  </div>
-                </li>
-                <li class="accordion-list-item row">
-                  <div class="col-6 item-label">
-                    Email Address
-                  </div>
-                  <div class="col-6 value notice">
-                    donna@moore.com
-                  </div>
-                </li>
-                <li class="accordion-list-item row">
-                  <div class="col-6 item-label">
-                    Address Line 1
-                  </div>
-                  <div class="col-6 value notice">
-                    Mocked Address
-                  </div>
-                </li>
-                <li class="accordion-list-item row">
-                  <div class="col-6 item-label">
-                    City
-                  </div>
-                  <div class="col-6 value notice">
-                    Belgrade
-                  </div>
-                </li>
-                <li class="accordion-list-item row">
-                  <div class="col-6 item-label">
-                    Postcode
-                  </div>
-                  <div class="col-6 value notice">
-                    11090
-                  </div>
-                </li>
-                <li class="accordion-list-item row">
-                  <div class="col-6 item-label">
-                    Country
-                  </div>
-                  <div class="col-6 value notice">
-                    Serbia
+                    {{ quoteProperties.value }}
                   </div>
                 </li>
               </ul>

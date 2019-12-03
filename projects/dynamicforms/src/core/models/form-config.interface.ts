@@ -32,5 +32,6 @@ export interface FieldOption {
 
 export interface CategoryFormRelationMapping {
   categoryCode: string;
-  formDefinitionId: string;
+  chooseCoverFormId?: string;
+  personalDetailsFormId?: string;
 }
