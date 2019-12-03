@@ -30,7 +30,6 @@ export class QuotesComponent implements OnInit {
 
   retrieveQuote(quote: any) {
     this.quoteService.retrieveQuote(quote);
-    console.log(quote);
     if (quote && quote.state) {
       if (quote.state.code === 'BIND') {
         this.routingService.go({
