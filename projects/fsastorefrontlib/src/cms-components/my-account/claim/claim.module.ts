@@ -47,7 +47,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
-        AccountMyClaimsSPAComponent: {
+        AccountMyClaimsFlex: {
           component: ClaimsComponent,
         },
         ClaimActivePoliciesFlex: {
