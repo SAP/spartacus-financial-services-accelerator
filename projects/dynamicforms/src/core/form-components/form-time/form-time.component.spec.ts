@@ -8,9 +8,8 @@ describe('FormTimeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FormTimeComponent ]
-    })
-    .compileComponents();
+      declarations: [FormTimeComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
