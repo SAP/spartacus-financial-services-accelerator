@@ -53,9 +53,8 @@ export class FSCartEffects {
                 userId: payload.userId,
                 cartId: cartCode,
               });
-            } else {
-              return new CartActions.CartAddEntrySuccess(cart.entry);
             }
+            return new CartActions.CartAddEntrySuccess(cart.entry);
           })
         );
     })
