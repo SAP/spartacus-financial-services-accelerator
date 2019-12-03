@@ -731,6 +731,8 @@ export class FormSampleConfigurations {
           fieldConfigs: [
             {
               type: 'select',
+              label: 'What happened?',
+              name: 'whatHappened',
               options: [
                 {
                   name: 'AutoOtherAccident',
@@ -761,8 +763,6 @@ export class FormSampleConfigurations {
                   label: 'Accident',
                 },
               ],
-              label: 'What happened?',
-              name: 'whatHappened',
               validation: [Validators.required],
             },
             {
