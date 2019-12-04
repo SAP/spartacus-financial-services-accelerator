@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UpdateProfileFormComponent } from '@spartacus/storefront';
-import { DefaultFormValidators } from '../../../../shared/util/validators/default-form-validators';
+import { DefaultFormValidators } from '@fsa/dynamicforms';
 import { FSUser } from '../../../../occ/occ-models';
 
 @Component({

@@ -1,5 +1,5 @@
 import { FormHelpers } from '../../../shared/util/helpers/form-helpers';
-import { DefaultFormValidators } from '../../../shared/util/validators/default-form-validators';
+import { DefaultFormValidators } from '@fsa/dynamicforms';
 import { FormDefinition } from '@fsa/dynamicforms';
 
 export class FormSampleConfigurations {

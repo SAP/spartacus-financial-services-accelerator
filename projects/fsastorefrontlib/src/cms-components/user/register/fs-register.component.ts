@@ -8,7 +8,7 @@ import {
 } from '@spartacus/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { FSUserSignUp } from '../../../occ/occ-models';
-import { DefaultFormValidators } from '../../../shared/util/validators/default-form-validators';
+import { DefaultFormValidators } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'fsa-register',
