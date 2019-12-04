@@ -1,15 +1,15 @@
 export interface CssClass {
-  formTitleClass?: string;
-  inputWrapperClass?: string;
-  labelClass?: string;
-  inputClass?: string;
-  radioInputWrapperClass?: string;
-  radioInputClass?: string;
-  radioLabelClass?: string;
-  radioOptionLabelClass: string;
-  validatorMessageWrapperClass?: string;
-  validatorMessageClass?: string;
-  submitButtonClass?: string;
+  formTitle?: string;
+  inputWrapper?: string;
+  label?: string;
+  input?: string;
+  radioInputWrapper?: string;
+  radioInput?: string;
+  radioLabel?: string;
+  radioOptionLabel: string;
+  validatorMessageWrapper?: string;
+  validatorMessage?: string;
+  submitButton?: string;
 }
 
 export abstract class FormConfig {

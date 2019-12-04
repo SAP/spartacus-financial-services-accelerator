@@ -3,10 +3,10 @@
   class="dynamic-field"
   [formGroup]="group"
 >
-  <div [ngClass]="formConfig.cssClass.inputWrapperClass">
-    <label [ngClass]="formConfig.cssClass.labelClass">{{ config.label }}</label>
+  <div [ngClass]="formConfig.cssClass.inputWrapper">
+    <label [ngClass]="formConfig.cssClass.label">{{ config.label }}</label>
     <input
-      [ngClass]="formConfig.cssClass.inputClass"
+      [ngClass]="formConfig.cssClass.input"
       type="text"
       [attr.placeholder]="config.placeholder"
       [formControlName]="config.name"

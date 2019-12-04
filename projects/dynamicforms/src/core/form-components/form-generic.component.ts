@@ -7,7 +7,7 @@ import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 @Injectable()
 export class FormGenericComponent {
   constructor(
-    protected formConfig: FormConfig,
+    public formConfig: FormConfig,
     protected formService: OccMockFormService
   ) {}
   config: FieldConfig;
