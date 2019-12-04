@@ -5,6 +5,156 @@ import { FormDefinition } from '@fsa/dynamicforms';
 export class FormSampleConfigurations {
   static sampleConfigurations: FormDefinition[] = [
     {
+      formId: 'homeowners_details_form',
+      formGroups: [
+        {
+          groupCode: 'general',
+          fieldConfigs: [
+            {
+              type: 'title',
+              label: 'General Information',
+              name: 'general',
+            },
+            {
+              type: 'radio',
+              label: 'Cover Required',
+              name: 'coverRequired',
+              options: [
+                { name: 'cuildingAndContents', label: 'Building and Contents' },
+                { name: 'buildings', label: 'Buildings Only' },
+                { name: 'contents', label: 'Contents Only' },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
+            {
+              type: 'datepicker',
+              label: 'Start Date',
+              name: 'startDate',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.compareToCurrentDate('shouldBeGreater'),
+              ],
+              error: 'forms.dateInFuture',
+            },
+          ],
+        },
+        {
+          groupCode: 'propertyDetails',
+          fieldConfigs: [
+            {
+              type: 'title',
+              label: 'Property Details',
+              name: 'propertyDetails',
+            },
+            {
+              type: 'select',
+              label: 'Property Type',
+              name: 'propertyType',
+              options: [
+                { name: 'House', label: 'House' },
+                { name: 'Bungalow', label: 'Bungalow' },
+                { name: 'Flat', label: 'Flat' },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
+            {
+              type: 'input',
+              label: 'Property Value',
+              name: 'propertyValue',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(10000),
+                DefaultFormValidators.max(1000000),
+                DefaultFormValidators.pattern('^[0-9]*$'),
+              ],
+              error: 'forms.from10Kto1M',
+            },
+            {
+              type: 'input',
+              label: 'Rebuild Value of Property',
+              name: 'rebuildValue',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.pattern('^[0-9]*$'),
+                DefaultFormValidators.compareNumbers(
+                  'propertyValue',
+                  'shouldBeLess'
+                ),
+              ],
+              error: 'forms.lessThanPropertyValue',
+            },
+            {
+              type: 'input',
+              label: 'Approximate Year Property Built',
+              name: 'ccaBuiltYear',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(1500),
+                DefaultFormValidators.max(Number(new Date().getFullYear())),
+                DefaultFormValidators.pattern('^[0-9]*$'),
+              ],
+              error: 'forms.dateFrom1000toCurrent',
+            },
+            {
+              type: 'input',
+              label: 'Number of Bedrooms',
+              name: 'numberOfBedrooms',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(1),
+                DefaultFormValidators.max(50),
+                DefaultFormValidators.pattern('^[0-9]*$'),
+              ],
+              error: 'forms.between1And50',
+            },
+            {
+              type: 'input',
+              label: 'Number of Bathrooms',
+              name: 'numberOfBathrooms',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(1),
+                DefaultFormValidators.max(50),
+                DefaultFormValidators.pattern('^[0-9]*$'),
+              ],
+              error: 'forms.between1And50',
+            },
+            {
+              type: 'radio',
+              label: 'Does anyone at the property smoke?',
+              name: 'smoking',
+              options: [
+                { name: 'yes', label: 'Yes' },
+                { name: 'no', label: 'No' },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
+            {
+              type: 'input',
+              label:
+                'How many days in a row is the property likely to be unoccupied?',
+              name: 'numberOfDaysUnoccupied',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(0),
+                DefaultFormValidators.pattern('^[0-9]*$'),
+              ],
+            },
+            {
+              type: 'radio',
+              label: 'Is the property normally occupied during the day?',
+              name: 'normallyOccupied',
+              options: [
+                { name: 'yes', label: 'Yes' },
+                { name: 'no', label: 'No' },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
+          ],
+        },
+      ],
+    },
+    {
       formId: 'auto_details_form',
       formGroups: [
         {
