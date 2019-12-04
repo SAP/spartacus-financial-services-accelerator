@@ -9,16 +9,17 @@ export const defaultFormConfig: FormConfig = {
     },
   },
   cssClasess: {
+    formTitleClasses: 'mt-3 pl-3',
     inputWrapperClasses: 'form-group',
     inputClasses: 'form-control',
+    labelClasses: 'col-form-label',
     radioInputWrapperClasses: 'form-check',
     radioInputClasses: 'form-check-input',
     radioLabelClasses: 'form-check-label mb-2',
     radioOptionLabelClasses: 'pl-3 pt-2',
-    labelClasses: 'col-form-label',
-    submitButtonClasses: 'btn btn-primary',
     validatorMessageWrapperClasses: 'px-4',
     validatorMessageClasses: 'text-danger mb-2',
-    formTitleClasses: 'mt-3 pl-3',
+    submitButtonClasses: 'btn btn-primary'
+    
   },
 };

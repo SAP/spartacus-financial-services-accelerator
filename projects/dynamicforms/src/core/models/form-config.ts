@@ -15,6 +15,7 @@ export abstract class ValidationConfig {
 }
 
 export interface CssClasses {
+formTitleClasses?: string;
   inputWrapperClasses?: string;
   labelClasses?: string;
   inputClasses?: string;
@@ -22,10 +23,9 @@ export interface CssClasses {
   radioInputClasses?: string;
   radioLabelClasses?: string;
   radioOptionLabelClasses: string;
-  submitButtonClasses?: string;
   validatorMessageWrapperClasses?: string;
   validatorMessageClasses?: string;
-  formTitleClasses?: string;
+  submitButtonClasses?: string;
 }
 
 export abstract class FormConfig {

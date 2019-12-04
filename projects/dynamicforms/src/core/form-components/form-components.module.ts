@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
-import { I18nModule, ConfigModule } from '@spartacus/core';
+import { I18nModule } from '@spartacus/core';
 import { DynamicFieldDirective } from './dynamic-field/dynamic-field.directive';
 import { FormErrorNoticeComponent } from './form-error-notice/form-error-notice.component';
 import { FormButtonComponent } from './form-button/form-button.component';
@@ -15,7 +15,6 @@ import { FormTimeComponent } from './form-time/form-time.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, I18nModule],
-
   declarations: [
     DynamicFieldDirective,
     FormButtonComponent,
