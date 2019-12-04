@@ -11,7 +11,7 @@ context('Travel Insurance Checkout', () => {
     cy.wait(1500);
   });
 
-  describe('Checkout', () => {
+  describe('Retrieve Travel Quote', () => {
     it('Should open travel category page', () => {
       travelCheckout.openCategoryPage();
     });

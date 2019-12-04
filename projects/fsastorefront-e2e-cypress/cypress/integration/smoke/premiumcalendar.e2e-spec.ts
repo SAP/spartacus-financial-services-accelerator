@@ -7,7 +7,10 @@ context('PremiumCalendar', () => {
     cy.visit('/login');
     register.login(donnaMooreUser.email, donnaMooreUser.password);
     cy.wait(1500);
-    cy.visit('/my-account/premium-calendar');
+    cy.selectOptionFromDropdown({
+      menuOption: 'My Account',
+      dropdownItem: 'Premium Calendar',
+    });
   });
 
   it('should have premium calendar component', () => {
