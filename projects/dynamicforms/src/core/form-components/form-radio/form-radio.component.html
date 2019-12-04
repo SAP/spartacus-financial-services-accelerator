@@ -4,9 +4,7 @@
   [hidden]="group.controls[config.name].disabled"
 >
   <div [ngClass]="formConfig.cssClass.radioInputWrapper">
-    <label [ngClass]="formConfig.cssClass.radioLabel">{{
-      config.label
-    }}</label>
+    <label [ngClass]="formConfig.cssClass.radioLabel">{{ config.label }}</label>
     <div *ngFor="let option of config.options">
       <input
         [ngClass]="formConfig.cssClass.radioInput"
