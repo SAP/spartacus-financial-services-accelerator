@@ -14,11 +14,7 @@ import { FormTextAreaComponent } from './form-text-area/form-text-area.component
 import { FormTimeComponent } from './form-time/form-time.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    I18nModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule, I18nModule],
 
   declarations: [
     DynamicFieldDirective,

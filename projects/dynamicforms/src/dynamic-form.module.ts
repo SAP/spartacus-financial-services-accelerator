@@ -1,10 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import {
-  I18nModule,
-  ConfigModule,
-  Config,
-} from '@spartacus/core';
+import { I18nModule, ConfigModule, Config } from '@spartacus/core';
 import { FormComponentsModule } from './core/form-components/form-components.module';
 import { FormContainerModule } from './core/form-containers/form-container.module';
 import { formEffects } from './core/effects/index';

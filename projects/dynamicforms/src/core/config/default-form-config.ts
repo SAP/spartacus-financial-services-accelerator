@@ -1,5 +1,4 @@
 import { Validators } from '@angular/forms';
-import { CustomFormValidators } from '../../../../fsastorefrontlib/src/shared/util/validators/custom-form-validators';
 import { FormConfig } from '../models/form-config';
 
 export const defaultFormConfig: FormConfig = {
@@ -7,9 +6,6 @@ export const defaultFormConfig: FormConfig = {
   validations: {
     required: {
       function: Validators.required,
-    },
-    dateCompare: {
-      function: CustomFormValidators.compareToCurrentDate,
     },
   },
   cssClasess: {
