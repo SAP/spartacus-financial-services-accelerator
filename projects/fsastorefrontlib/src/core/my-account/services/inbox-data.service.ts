@@ -8,7 +8,7 @@ export interface InboxTab {
 export interface Message {
   messageCode?: string;
   readDate?: string;
-  messageUid?: string;
+  uid?: string;
 }
 export interface FSSearchConfig extends SearchConfig {
   sortCode?: string;

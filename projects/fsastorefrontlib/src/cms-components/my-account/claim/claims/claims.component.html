@@ -1,4 +1,6 @@
-<h2 class="heading-headline">{{ 'claim.claims' | cxTranslate }}</h2>
+<h2 class="heading-headline py-3 mt-3 mb-5 text-center">
+  {{ 'claim.claims' | cxTranslate }}
+</h2>
 <ng-container *ngIf="claims$ | async as claims">
   <ng-container *ngIf="claimsLoaded$ | async; else loading">
     <div class="row" *ngIf="claims?.claims?.length > 0; else noClaims">
