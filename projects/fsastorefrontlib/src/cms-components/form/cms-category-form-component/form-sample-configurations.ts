@@ -1,6 +1,5 @@
-import { Validators } from '@angular/forms';
 import { FormHelpers } from '../../../shared/util/helpers/form-helpers';
-import { CustomFormValidators } from '../../../shared/util/validators/custom-form-validators';
+import { DefaultFormValidators } from '../../../shared/util/validators/default-form-validators';
 import { FormDefinition } from '@fsa/dynamicforms';
 
 export class FormSampleConfigurations {
@@ -21,8 +20,8 @@ export class FormSampleConfigurations {
               label: 'Coverage Start Date',
               name: 'coverageStartDate',
               validation: [
-                Validators.required,
-                CustomFormValidators.compareToCurrentDate('shouldBeGreater'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.compareToCurrentDate('shouldBeGreater'),
               ],
               error: 'forms.dateInFuture',
             },
@@ -34,7 +33,7 @@ export class FormSampleConfigurations {
               ],
               label: 'Payment Frequency',
               name: 'paymentFrequency',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
           ],
         },
@@ -51,7 +50,7 @@ export class FormSampleConfigurations {
               jsonField: 'make',
               label: 'Vehicle Make',
               name: 'vehicleMake',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               type: 'select',
@@ -59,7 +58,7 @@ export class FormSampleConfigurations {
               depends: ['vehicleMake'],
               label: 'Vehicle Model',
               name: 'vehicleModel',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               type: 'select',
@@ -67,7 +66,7 @@ export class FormSampleConfigurations {
               jsonField: 'make.model.type',
               label: 'Vehicle Type',
               name: 'vehicleType',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               type: 'select',
@@ -75,16 +74,16 @@ export class FormSampleConfigurations {
               jsonField: 'make.model.type.year',
               label: 'Vehicle Year',
               name: 'vehicleYear',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               type: 'input',
               label: 'Annual Mileage',
               name: 'vehicleAnnualMileage',
               validation: [
-                Validators.required,
-                Validators.max(100000),
-                Validators.pattern('^[0-9]*$'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.max(100000),
+                DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.lessThan100K',
             },
@@ -93,10 +92,10 @@ export class FormSampleConfigurations {
               label: 'Vehicle Value',
               name: 'vehicleValue',
               validation: [
-                Validators.required,
-                Validators.min(3000),
-                Validators.max(1000000),
-                Validators.pattern('^[0-9]*$'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(3000),
+                DefaultFormValidators.max(1000000),
+                DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.vehicleValue',
             },
@@ -108,15 +107,15 @@ export class FormSampleConfigurations {
               ],
               label: 'Vehicle Usage',
               name: 'vehicleUsage',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               type: 'datepicker',
               label: 'Vehicle Purchase Date',
               name: 'vehiclePurchaseDate',
               validation: [
-                Validators.required,
-                CustomFormValidators.compareToCurrentDate('shouldBeLess'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
               error: 'forms.dateInPast',
             },
@@ -125,10 +124,10 @@ export class FormSampleConfigurations {
               label: 'Vehicle Owner Postal Code',
               name: 'vehicleOwnerPostalCode',
               validation: [
-                Validators.required,
-                Validators.minLength(1),
-                CustomFormValidators.regexValidator(
-                  CustomFormValidators.postalCodeRegex
+                DefaultFormValidators.required,
+                DefaultFormValidators.minLength(1),
+                DefaultFormValidators.regexValidator(
+                  DefaultFormValidators.postalCodeRegex
                 ),
               ],
               error: 'forms.containAtLeastOneNumber',
@@ -148,8 +147,8 @@ export class FormSampleConfigurations {
               label: 'Driver Date of Birth',
               name: 'driverDob',
               validation: [
-                Validators.required,
-                CustomFormValidators.dateOfBirthValidator(18),
+                DefaultFormValidators.required,
+                DefaultFormValidators.dateOfBirthValidator(18),
               ],
               error: 'forms.dateOfBirthMinimumAge',
             },
@@ -161,7 +160,7 @@ export class FormSampleConfigurations {
                 { name: 'Male', label: 'Male' },
                 { name: 'Female', label: 'Female' },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               type: 'select',
@@ -172,7 +171,7 @@ export class FormSampleConfigurations {
                 { name: 'Married', label: 'Married' },
                 { name: 'Widowed', label: 'Widowed' },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               type: 'select',
@@ -191,8 +190,8 @@ export class FormSampleConfigurations {
               label: 'Driver Licence Date',
               name: 'driverLicenceDate',
               validation: [
-                Validators.required,
-                CustomFormValidators.compareToCurrentDate('shouldBeLess'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
               error: 'forms.dateInPast',
             },
@@ -218,7 +217,7 @@ export class FormSampleConfigurations {
               label: 'Number of Drivers',
               name: 'numberOfDrivers',
               validation: [
-                Validators.required,
+                DefaultFormValidators.required,
                 FormHelpers.shouldEnableDependentGroup([
                   'additional-driver-1',
                   'additional-driver-2',
@@ -243,8 +242,8 @@ export class FormSampleConfigurations {
               label: 'Driver Date of Birth',
               name: 'driverDob',
               validation: [
-                Validators.required,
-                CustomFormValidators.dateOfBirthValidator(18),
+                DefaultFormValidators.required,
+                DefaultFormValidators.dateOfBirthValidator(18),
               ],
               error: 'forms.dateOfBirthMinimumAge',
               hidden: true,
@@ -257,7 +256,7 @@ export class FormSampleConfigurations {
                 { name: 'Male', label: 'Male' },
                 { name: 'Female', label: 'Female' },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
               hidden: true,
             },
             {
@@ -269,7 +268,7 @@ export class FormSampleConfigurations {
                 { name: 'Married', label: 'Married' },
                 { name: 'Widowed', label: 'Widowed' },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
               hidden: true,
             },
             {
@@ -285,8 +284,8 @@ export class FormSampleConfigurations {
               label: 'Driver Licence Date',
               name: 'driverLicenceDate',
               validation: [
-                Validators.required,
-                CustomFormValidators.compareToCurrentDate('shouldBeLess'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
               error: 'forms.dateInPast',
               hidden: true,
@@ -307,8 +306,8 @@ export class FormSampleConfigurations {
               label: 'Driver Date of Birth',
               name: 'driverDob',
               validation: [
-                Validators.required,
-                CustomFormValidators.dateOfBirthValidator(18),
+                DefaultFormValidators.required,
+                DefaultFormValidators.dateOfBirthValidator(18),
               ],
               error: 'forms.dateOfBirthMinimumAge',
               hidden: true,
@@ -321,7 +320,7 @@ export class FormSampleConfigurations {
                 { name: 'Male', label: 'Male' },
                 { name: 'Female', label: 'Female' },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
               hidden: true,
             },
             {
@@ -333,7 +332,7 @@ export class FormSampleConfigurations {
                 { name: 'Married', label: 'Married' },
                 { name: 'Widowed', label: 'Widowed' },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
               hidden: true,
             },
             {
@@ -348,8 +347,8 @@ export class FormSampleConfigurations {
               label: 'Driver Licence Date',
               name: 'driverLicenceDate',
               validation: [
-                Validators.required,
-                CustomFormValidators.compareToCurrentDate('shouldBeLess'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
               error: 'forms.dateInPast',
               hidden: true,
@@ -370,8 +369,8 @@ export class FormSampleConfigurations {
               label: 'Driver Date of Birth',
               name: 'driverDob',
               validation: [
-                Validators.required,
-                CustomFormValidators.dateOfBirthValidator(18),
+                DefaultFormValidators.required,
+                DefaultFormValidators.dateOfBirthValidator(18),
               ],
               error: 'forms.dateOfBirthMinimumAge',
               hidden: true,
@@ -384,7 +383,7 @@ export class FormSampleConfigurations {
                 { name: 'Male', label: 'Male' },
                 { name: 'Female', label: 'Female' },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
               hidden: true,
             },
             {
@@ -396,7 +395,7 @@ export class FormSampleConfigurations {
                 { name: 'Married', label: 'Married' },
                 { name: 'Widowed', label: 'Widowed' },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
               hidden: true,
             },
             {
@@ -411,8 +410,8 @@ export class FormSampleConfigurations {
               label: 'Driver Licence Date',
               name: 'driverLicenceDate',
               validation: [
-                Validators.required,
-                CustomFormValidators.compareToCurrentDate('shouldBeLess'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
               error: 'forms.dateInPast',
               hidden: true,
@@ -433,8 +432,8 @@ export class FormSampleConfigurations {
               label: 'Driver Date of Birth',
               name: 'driverDob',
               validation: [
-                Validators.required,
-                CustomFormValidators.dateOfBirthValidator(18),
+                DefaultFormValidators.required,
+                DefaultFormValidators.dateOfBirthValidator(18),
               ],
               error: 'forms.dateOfBirthMinimumAge',
               hidden: true,
@@ -447,7 +446,7 @@ export class FormSampleConfigurations {
                 { name: 'Male', label: 'Male' },
                 { name: 'Female', label: 'Female' },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
               hidden: true,
             },
             {
@@ -459,7 +458,7 @@ export class FormSampleConfigurations {
                 { name: 'Married', label: 'Married' },
                 { name: 'Widowed', label: 'Widowed' },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
               hidden: true,
             },
             {
@@ -475,8 +474,8 @@ export class FormSampleConfigurations {
               label: 'Driver Licence Date',
               name: 'driverLicenceDate',
               validation: [
-                Validators.required,
-                CustomFormValidators.compareToCurrentDate('shouldBeLess'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
               error: 'forms.dateInPast',
               hidden: true,
@@ -511,7 +510,7 @@ export class FormSampleConfigurations {
                 },
                 { name: 'UK', label: 'UK' },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
               error: 'forms.enterValidValue',
             },
             {
@@ -519,9 +518,9 @@ export class FormSampleConfigurations {
               label: 'Start Date',
               name: 'tripStartDate',
               validation: [
-                Validators.required,
-                CustomFormValidators.compareToCurrentDate('shouldBeGreater'),
-                CustomFormValidators.compareDates(
+                DefaultFormValidators.required,
+                DefaultFormValidators.compareToCurrentDate('shouldBeGreater'),
+                DefaultFormValidators.compareDates(
                   'tripEndDate',
                   'shouldBeGreater'
                 ),
@@ -533,9 +532,9 @@ export class FormSampleConfigurations {
               label: 'End Date',
               name: 'tripEndDate',
               validation: [
-                Validators.required,
-                CustomFormValidators.compareToCurrentDate('shouldBeGreater'),
-                CustomFormValidators.compareDates(
+                DefaultFormValidators.required,
+                DefaultFormValidators.compareToCurrentDate('shouldBeGreater'),
+                DefaultFormValidators.compareDates(
                   'tripStartDate',
                   'shouldBeLess'
                 ),
@@ -552,10 +551,10 @@ export class FormSampleConfigurations {
               label: 'Trip Cost',
               name: 'costOfTrip',
               validation: [
-                Validators.required,
-                Validators.min(0),
-                Validators.max(1000000),
-                Validators.pattern('^[0-9]*$'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(0),
+                DefaultFormValidators.max(1000000),
+                DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.lessThan1M',
             },
@@ -576,7 +575,7 @@ export class FormSampleConfigurations {
               label: 'Number of Travelers',
               name: 'Travellers',
               validation: [
-                Validators.required,
+                DefaultFormValidators.required,
                 FormHelpers.shouldEnableDependentField([
                   'tripDetailsTravellerAges',
                   'tripDetailsTravellerAges2',
@@ -596,10 +595,10 @@ export class FormSampleConfigurations {
               label: 'Age of Traveller',
               name: 'tripDetailsTravellerAges',
               validation: [
-                Validators.required,
-                Validators.min(1),
-                Validators.max(150),
-                Validators.pattern('^[0-9]*$'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(1),
+                DefaultFormValidators.max(150),
+                DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.lessThan150',
             },
@@ -608,10 +607,10 @@ export class FormSampleConfigurations {
               label: 'Age of Traveller 2',
               name: 'tripDetailsTravellerAges2',
               validation: [
-                Validators.required,
-                Validators.min(1),
-                Validators.max(150),
-                Validators.pattern('^[0-9]*$'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(1),
+                DefaultFormValidators.max(150),
+                DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.lessThan150',
               hidden: true,
@@ -621,10 +620,10 @@ export class FormSampleConfigurations {
               label: 'Age of Traveller 3',
               name: 'tripDetailsTravellerAges3',
               validation: [
-                Validators.required,
-                Validators.min(1),
-                Validators.max(150),
-                Validators.pattern('^[0-9]*$'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(1),
+                DefaultFormValidators.max(150),
+                DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.lessThan150',
               hidden: true,
@@ -634,10 +633,10 @@ export class FormSampleConfigurations {
               label: 'Age of Traveller 4',
               name: 'tripDetailsTravellerAges4',
               validation: [
-                Validators.required,
-                Validators.min(1),
-                Validators.max(150),
-                Validators.pattern('^[0-9]*$'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(1),
+                DefaultFormValidators.max(150),
+                DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.lessThan150',
               hidden: true,
@@ -647,10 +646,10 @@ export class FormSampleConfigurations {
               label: 'Age of Traveller 5',
               name: 'tripDetailsTravellerAges5',
               validation: [
-                Validators.required,
-                Validators.min(1),
-                Validators.max(150),
-                Validators.pattern('^[0-9]*$'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(1),
+                DefaultFormValidators.max(150),
+                DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.lessThan150',
               hidden: true,
@@ -660,10 +659,10 @@ export class FormSampleConfigurations {
               label: 'Age of Traveller 6',
               name: 'tripDetailsTravellerAges6',
               validation: [
-                Validators.required,
-                Validators.min(1),
-                Validators.max(150),
-                Validators.pattern('^[0-9]*$'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(1),
+                DefaultFormValidators.max(150),
+                DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.lessThan150',
               hidden: true,
@@ -673,10 +672,10 @@ export class FormSampleConfigurations {
               label: 'Age of Traveller 7',
               name: 'tripDetailsTravellerAges7',
               validation: [
-                Validators.required,
-                Validators.min(1),
-                Validators.max(150),
-                Validators.pattern('^[0-9]*$'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(1),
+                DefaultFormValidators.max(150),
+                DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.lessThan150',
               hidden: true,
@@ -686,10 +685,10 @@ export class FormSampleConfigurations {
               label: 'Age of Traveller 8',
               name: 'tripDetailsTravellerAges8',
               validation: [
-                Validators.required,
-                Validators.min(1),
-                Validators.max(150),
-                Validators.pattern('^[0-9]*$'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(1),
+                DefaultFormValidators.max(150),
+                DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.lessThan150',
               hidden: true,
@@ -699,10 +698,10 @@ export class FormSampleConfigurations {
               label: 'Age of Traveller 9',
               name: 'tripDetailsTravellerAges9',
               validation: [
-                Validators.required,
-                Validators.min(1),
-                Validators.max(150),
-                Validators.pattern('^[0-9]*$'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(1),
+                DefaultFormValidators.max(150),
+                DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.lessThan150',
               hidden: true,
@@ -712,10 +711,10 @@ export class FormSampleConfigurations {
               label: 'Age of Traveller 10',
               name: 'tripDetailsTravellerAges10',
               validation: [
-                Validators.required,
-                Validators.min(1),
-                Validators.max(150),
-                Validators.pattern('^[0-9]*$'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(1),
+                DefaultFormValidators.max(150),
+                DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.lessThan150',
               hidden: true,
@@ -763,15 +762,15 @@ export class FormSampleConfigurations {
                   label: 'Accident',
                 },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'When did it happen?',
               name: 'whenHappened',
               type: 'datepicker',
               validation: [
-                Validators.required,
-                CustomFormValidators.compareToCurrentDate('shouldBeLess'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
               error: 'forms.dateInPast',
             },
@@ -779,7 +778,7 @@ export class FormSampleConfigurations {
               label: 'What time did it happen?',
               name: 'whatTime',
               type: 'time',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               type: 'select',
@@ -815,22 +814,22 @@ export class FormSampleConfigurations {
               ],
               label: 'Country',
               name: 'country',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'City',
               name: 'city',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Postcode',
               name: 'postcode',
               type: 'input',
               validation: [
-                Validators.required,
-                CustomFormValidators.regexValidator(
-                  CustomFormValidators.postalCodeRegex
+                DefaultFormValidators.required,
+                DefaultFormValidators.regexValidator(
+                  DefaultFormValidators.postalCodeRegex
                 ),
               ],
               error: 'forms.containAtLeastOneNumber',
@@ -839,13 +838,13 @@ export class FormSampleConfigurations {
               label: 'Address',
               name: 'address',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Description',
               name: 'description',
               type: 'textarea',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
           ],
         },
@@ -860,7 +859,7 @@ export class FormSampleConfigurations {
               label: 'Please describe how the accident occurred:',
               name: 'howAccidentOccured',
               type: 'textarea',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
           ],
         },
@@ -875,7 +874,7 @@ export class FormSampleConfigurations {
               label: 'Who is responsible for the accident?',
               name: 'responsibleForAccident',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Were the police informed?',
@@ -891,7 +890,7 @@ export class FormSampleConfigurations {
                   label: 'No',
                 },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Are there any witnesses we can contact?',
@@ -907,7 +906,7 @@ export class FormSampleConfigurations {
                   label: 'No',
                 },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
           ],
         },
@@ -945,29 +944,29 @@ export class FormSampleConfigurations {
                   label: 'Rev.',
                 },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'First name',
               name: 'firstName',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Last name',
               name: 'lastName',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Phone Number',
               name: 'phoneNumber',
               type: 'input',
               validation: [
-                Validators.required,
-                Validators.minLength(4),
-                Validators.maxLength(20),
-                Validators.pattern('^[0-9]*$'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.minLength(4),
+                DefaultFormValidators.maxLength(20),
+                DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.between4And20Digits',
             },
@@ -976,9 +975,9 @@ export class FormSampleConfigurations {
               name: 'email',
               type: 'input',
               validation: [
-                Validators.required,
-                CustomFormValidators.regexValidator(
-                  CustomFormValidators.emailRegex
+                DefaultFormValidators.required,
+                DefaultFormValidators.regexValidator(
+                  DefaultFormValidators.emailRegex
                 ),
               ],
               error: 'forms.enterValidEmail',
@@ -987,7 +986,7 @@ export class FormSampleConfigurations {
               label: 'Address Line 1',
               name: 'address1',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Address Line 2',
@@ -998,16 +997,16 @@ export class FormSampleConfigurations {
               label: 'City',
               name: 'city',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Postcode',
               name: 'postcode',
               type: 'input',
               validation: [
-                Validators.required,
-                CustomFormValidators.regexValidator(
-                  CustomFormValidators.postalCodeRegex
+                DefaultFormValidators.required,
+                DefaultFormValidators.regexValidator(
+                  DefaultFormValidators.postalCodeRegex
                 ),
               ],
               error: 'forms.containAtLeastOneNumber',
@@ -1022,7 +1021,7 @@ export class FormSampleConfigurations {
                   name: 'RS',
                 },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
           ],
         },
@@ -1056,15 +1055,15 @@ export class FormSampleConfigurations {
                   label: 'France',
                 },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Event date',
               name: 'eventDate',
               type: 'datepicker',
               validation: [
-                Validators.required,
-                CustomFormValidators.compareToCurrentDate('shouldBeGreater'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.compareToCurrentDate('shouldBeGreater'),
               ],
               error: 'forms.dateInFuture',
             },
@@ -1072,40 +1071,40 @@ export class FormSampleConfigurations {
               label: 'Venue name',
               name: 'eventVenue',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Venue address',
               name: 'eventVenueAddress',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Venue city',
               name: 'eventVenueCity',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'First name',
               name: 'firstName',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Last name',
               name: 'lastName',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Email',
               name: 'email',
               type: 'input',
               validation: [
-                Validators.required,
-                CustomFormValidators.regexValidator(
-                  CustomFormValidators.emailRegex
+                DefaultFormValidators.required,
+                DefaultFormValidators.regexValidator(
+                  DefaultFormValidators.emailRegex
                 ),
               ],
               error: 'forms.enterValidEmail',
@@ -1114,7 +1113,7 @@ export class FormSampleConfigurations {
               label: 'Address Line 1',
               name: 'address1',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Address Line 2',
@@ -1126,9 +1125,9 @@ export class FormSampleConfigurations {
               name: 'postcode',
               type: 'input',
               validation: [
-                Validators.required,
-                CustomFormValidators.regexValidator(
-                  CustomFormValidators.postalCodeRegex
+                DefaultFormValidators.required,
+                DefaultFormValidators.regexValidator(
+                  DefaultFormValidators.postalCodeRegex
                 ),
               ],
               error: 'forms.containAtLeastOneNumber',
@@ -1137,7 +1136,7 @@ export class FormSampleConfigurations {
               label: 'City',
               name: 'city',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
           ],
         },
@@ -1175,29 +1174,29 @@ export class FormSampleConfigurations {
                   label: 'Rev.',
                 },
               ],
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'First name',
               name: 'firstName',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Last name',
               name: 'lastName',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Age',
               name: 'age',
               type: 'input',
               validation: [
-                Validators.required,
-                Validators.min(1),
-                Validators.max(150),
-                Validators.pattern('^[0-9]*$'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(1),
+                DefaultFormValidators.max(150),
+                DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.lessThan150',
             },
@@ -1206,10 +1205,10 @@ export class FormSampleConfigurations {
               name: 'phoneNumber',
               type: 'input',
               validation: [
-                Validators.required,
-                Validators.minLength(4),
-                Validators.maxLength(20),
-                Validators.pattern('^[0-9]*$'),
+                DefaultFormValidators.required,
+                DefaultFormValidators.minLength(4),
+                DefaultFormValidators.maxLength(20),
+                DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.between4And20Digits',
             },
@@ -1218,9 +1217,9 @@ export class FormSampleConfigurations {
               name: 'email',
               type: 'input',
               validation: [
-                Validators.required,
-                CustomFormValidators.regexValidator(
-                  CustomFormValidators.emailRegex
+                DefaultFormValidators.required,
+                DefaultFormValidators.regexValidator(
+                  DefaultFormValidators.emailRegex
                 ),
               ],
               error: 'forms.enterValidEmail',
@@ -1229,7 +1228,7 @@ export class FormSampleConfigurations {
               label: 'Address Line 1',
               name: 'address1',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Address Line 2',
@@ -1240,16 +1239,16 @@ export class FormSampleConfigurations {
               label: 'City',
               name: 'city',
               type: 'input',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
             },
             {
               label: 'Postcode',
               name: 'postcode',
               type: 'input',
               validation: [
-                Validators.required,
-                CustomFormValidators.regexValidator(
-                  CustomFormValidators.postalCodeRegex
+                DefaultFormValidators.required,
+                DefaultFormValidators.regexValidator(
+                  DefaultFormValidators.postalCodeRegex
                 ),
               ],
               error: 'forms.containAtLeastOneNumber',
@@ -1258,7 +1257,7 @@ export class FormSampleConfigurations {
               label: 'Country',
               name: 'country',
               type: 'select',
-              validation: [Validators.required],
+              validation: [DefaultFormValidators.required],
               options: [
                 {
                   label: 'Serbia',

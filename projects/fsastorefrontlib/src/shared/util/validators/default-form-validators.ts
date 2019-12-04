@@ -1,7 +1,7 @@
 import { AbstractControl, ValidationErrors, Validators } from '@angular/forms';
 
 // @dynamic
-export class CustomFormValidators extends Validators {
+export class DefaultFormValidators extends Validators {
   static passwordRegex = /^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^*()_\-+{};:.,]).{6,}$/;
   // tslint:disable-next-line:max-line-length
   static emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
