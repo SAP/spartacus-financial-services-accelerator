@@ -150,6 +150,122 @@ export class FormSampleConfigurations {
               ],
               validation: [DefaultFormValidators.required],
             },
+            {
+              type: 'radio',
+              label: 'What is the exterior construction material?',
+              name: 'constructionMaterial',
+              options: [
+                { name: 'wood', label: 'Wood' },
+                { name: 'brick', label: 'Brick' },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
+            {
+              type: 'radio',
+              label: 'What locks are in place?',
+              name: 'locks',
+              options: [
+                { name: 'morticeDeadlock', label: 'Mortice Deadlock' },
+                {
+                  name: 'MultiPointLockingSystem',
+                  label: 'Multi-Point Locking System',
+                },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
+          ],
+        },
+        {
+          groupCode: 'buildingCover',
+          fieldConfigs: [
+            {
+              type: 'title',
+              label: 'Your Building Cover',
+              name: 'buildingCover',
+            },
+            {
+              type: 'select',
+              label:
+                'How many consecutive years have you held buildings insurance?',
+              name: 'alreadyHeldInsurance',
+              options: [
+                { name: '0', label: '0' },
+                { name: '1', label: '1' },
+                { name: '2', label: '2' },
+                { name: '3', label: '3' },
+                { name: '4', label: '4' },
+                { name: '5', label: '5+' },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
+            {
+              type: 'radio',
+              label:
+                'Would you like the accidental damage cover for your building?',
+              name: 'accidentalDamageCoverBuilding',
+              options: [
+                { name: 'yes', label: 'Yes' },
+                { name: 'no', label: 'No' },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
+          ],
+        },
+        {
+          groupCode: 'contentsCover',
+          fieldConfigs: [
+            {
+              type: 'title',
+              label: 'Your Contents Cover',
+              name: 'contentsCover',
+            },
+            {
+              type: 'radio',
+              label:
+                'We give you 50,000€ contents cover as a standard, is this enough?',
+              name: 'startAmountCover',
+              options: [
+                { name: 'yes', label: 'Yes' },
+                { name: 'no', label: 'No' },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
+            {
+              type: 'input',
+              label: 'Please enter the desired amount from 10,000€ upwards.',
+              name: 'desiredAmount',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(10000),
+                DefaultFormValidators.max(1000000),
+                DefaultFormValidators.pattern('^[0-9]*$'),
+              ],
+              error: 'forms.from10Kto1M',
+            },
+            {
+              type: 'input',
+              label:
+                'How many consecutive years have you held contents insurance?',
+              name: 'numberOfYearsHoldingInsurance',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(0),
+                DefaultFormValidators.max(150),
+                DefaultFormValidators.pattern('^[0-9]*$'),
+              ],
+              error: 'forms.lessThan150',
+            },
+            {
+              type: 'radio',
+              label:
+                'Would you like accidental damage cover for your contents?',
+              name: 'accidentalDamageCoverContents',
+              options: [
+                { name: 'yes', label: 'Yes' },
+                { name: 'no', label: 'No' },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
           ],
         },
       ],
@@ -251,12 +367,12 @@ export class FormSampleConfigurations {
             },
             {
               type: 'select',
+              label: 'Vehicle Usage',
+              name: 'vehicleUsage',
               options: [
                 { name: 'Personal', label: 'Personal' },
                 { name: 'Business', label: 'Business' },
               ],
-              label: 'Vehicle Usage',
-              name: 'vehicleUsage',
               validation: [DefaultFormValidators.required],
             },
             {
