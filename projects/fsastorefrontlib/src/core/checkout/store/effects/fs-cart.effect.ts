@@ -46,6 +46,14 @@ export class FSCartEffects {
         )
         .pipe(
           map((cart: any) => {
+            const cartCode =
+              payload.userId === 'anonymous' ? payload.cartId : cart.cartCode;
+            if (cart.cartCode !== payload.cartId) {
+              return new CartActions.LoadCart({
+                userId: payload.userId,
+                cartId: cartCode,
+              });
+            }
             return new CartActions.CartAddEntrySuccess(cart.entry);
           })
         );
