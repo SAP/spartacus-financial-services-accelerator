@@ -83,13 +83,11 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
       });
     }
   }
-  
+
   mapDataToFormControls(formData) {
     for (const groupCode of Object.keys(formData)) {
       if (GeneralHelpers.getObjectDepth(formData) === 1) {
-        this.form
-        .get(groupCode)
-        .setValue(formData[groupCode]);
+        this.form.get(groupCode).setValue(formData[groupCode]);
       } else {
         for (const controlName of Object.keys(formData[groupCode])) {
           this.form
