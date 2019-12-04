@@ -1,7 +1,7 @@
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, ValidationErrors, Validators } from '@angular/forms';
 
 // @dynamic
-export class CustomFormValidators {
+export class CustomFormValidators extends Validators {
   static passwordRegex = /^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^*()_\-+{};:.,]).{6,}$/;
   // tslint:disable-next-line:max-line-length
   static emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -68,11 +68,11 @@ export class CustomFormValidators {
             case 'shouldBeGreater':
               return compareToField > currentField
                 ? null
-                : { travelBackInTime: true };
+                : { timeConflict: true };
             case 'shouldBeLess':
               return currentField > compareToField
                 ? null
-                : { travelBackInTime: true };
+                : { timeConflict: true };
           }
         }
       }
