@@ -6,6 +6,7 @@ import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 import { FormDataService } from '../../services/data/form-data.service';
 import { Subscription, Observable } from 'rxjs';
 import { YFormData } from '@fsa/dynamicforms';
+import { FormConfig } from '../../models/form-config';
 
 @Component({
   selector: 'cx-form-component',

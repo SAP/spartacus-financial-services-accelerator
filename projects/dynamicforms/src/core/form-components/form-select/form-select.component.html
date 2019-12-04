@@ -1,12 +1,14 @@
 <div
-  class="dynamic-field form-select container"
+  class="dynamic-field"
   [formGroup]="group"
   [hidden]="group.controls[config.name].disabled"
 >
-  <div class="row align-items-center">
-    <label class="col-xs-12 col-md-6">{{ config.label }}</label>
+  <div [ngClass]="formConfig.cssClasess.inputWrapperClasses">
+    <label [ngClass]="formConfig.cssClasess.labelClasses">{{
+      config.label
+    }}</label>
     <select
-      class="col-xs-12 col-md-6"
+      [ngClass]="formConfig.cssClasess.inputClasses"
       name="{{ config.name }}"
       formControlName="{{ config.name }}"
     >
