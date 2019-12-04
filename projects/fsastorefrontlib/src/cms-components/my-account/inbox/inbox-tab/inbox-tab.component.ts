@@ -13,22 +13,25 @@ import { InboxService } from '../../../../core/my-account/services/inbox.service
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InboxTabComponent implements OnInit {
-  @Input() tabId: string;
-  @Input() set currentTab(currentTab: boolean) {
-    this.active = currentTab ? true : false;
-  }
-  component$;
-  active;
-
   constructor(
     protected cmsService: CmsService,
     private inboxService: InboxService
   ) {}
 
+  component$;
+  active: boolean;
+
+  @Input() tabId: string;
+  @Input() set currentTab(currentTab: boolean) {
+    this.active = currentTab ? true : false;
+  }
+
   ngOnInit() {
     this.component$ = this.cmsService.getComponentData(this.tabId);
   }
+
   onTabClicked(messageGroup, title) {
     this.inboxService.setTitleAndMessageGroup(messageGroup, title);
+    this.inboxService.checkAllMessagesSource.next(false);
   }
 }

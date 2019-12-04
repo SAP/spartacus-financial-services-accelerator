@@ -37,6 +37,10 @@ header {
     justify-content: flex-start;
     display: flex;
     position: relative;
+    &::after {
+      // overrides Spartacus' white line in the header
+      content: none;
+    }
     cx-site-context-selector {
       flex: none;
       select {
