@@ -3,10 +3,8 @@
   [formGroup]="group"
   [hidden]="group.controls[config.name].disabled"
 >
-  <div [ngClass]="formConfig.cssClasess.inputWrapperClasses">
-    <label [ngClass]="formConfig.cssClasess.labelClasses">{{
-      config.label
-    }}</label>
+  <div [ngClass]="formConfig.cssClass.inputWrapperClass">
+    <label [ngClass]="formConfig.cssClass.labelClass">{{ config.label }}</label>
     <input
       class="col-xs-12 col-md-6"
       type="time"

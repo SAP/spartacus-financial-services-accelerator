@@ -3,18 +3,18 @@
   [formGroup]="group"
   [hidden]="group.controls[config.name].disabled"
 >
-  <div [ngClass]="formConfig.cssClasess.radioInputWrapperClasses">
-    <label [ngClass]="formConfig.cssClasess.radioLabelClasses">{{
+  <div [ngClass]="formConfig.cssClass.radioInputWrapperClass">
+    <label [ngClass]="formConfig.cssClass.radioLabelClass">{{
       config.label
     }}</label>
     <div *ngFor="let option of config.options">
       <input
-        [ngClass]="formConfig.cssClasess.radioInputClasses"
+        [ngClass]="formConfig.cssClass.radioInputClass"
         type="radio"
         value="{{ option.name }}"
         [formControlName]="config.name"
       />
-      <label [ngClass]="formConfig.cssClasess.radioOptionLabelClasses">{{
+      <label [ngClass]="formConfig.cssClass.radioOptionLabelClass">{{
         option.label
       }}</label>
     </div>
