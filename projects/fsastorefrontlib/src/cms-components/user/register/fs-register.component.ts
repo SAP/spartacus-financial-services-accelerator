@@ -8,7 +8,7 @@ import {
 } from '@spartacus/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { FSUserSignUp } from '../../../occ/occ-models';
-import { CustomFormValidators } from '../../../shared/util/validators/custom-form-validators';
+import { DefaultFormValidators } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'fsa-register',
@@ -37,27 +37,29 @@ export class FSRegisterComponent extends RegisterComponent {
       lastName: ['', Validators.required],
       phoneNumber: [
         '',
-        CustomFormValidators.regexValidator(
-          CustomFormValidators.phoneNumberRegex
+        DefaultFormValidators.regexValidator(
+          DefaultFormValidators.phoneNumberRegex
         ),
       ],
       dateOfBirth: [
         '',
-        [Validators.required, CustomFormValidators.dateOfBirthValidator(18)],
+        [Validators.required, DefaultFormValidators.dateOfBirthValidator(18)],
       ],
       email: [
         '',
         [
           Validators.required,
-          CustomFormValidators.regexValidator(CustomFormValidators.emailRegex),
+          DefaultFormValidators.regexValidator(
+            DefaultFormValidators.emailRegex
+          ),
         ],
       ],
       password: [
         '',
         [
           Validators.required,
-          CustomFormValidators.regexValidator(
-            CustomFormValidators.passwordRegex
+          DefaultFormValidators.regexValidator(
+            DefaultFormValidators.passwordRegex
           ),
         ],
       ],
@@ -65,7 +67,7 @@ export class FSRegisterComponent extends RegisterComponent {
       newsletter: [false],
       termsandconditions: [false, Validators.requiredTrue],
     },
-    { validator: CustomFormValidators.matchFields('password', 'passwordconf') }
+    { validator: DefaultFormValidators.matchFields('password', 'passwordconf') }
   );
 
   submit(): void {

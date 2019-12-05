@@ -1,17 +1,15 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   Input,
   OnDestroy,
-  ChangeDetectorRef,
+  OnInit,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { OccInboxAdapter } from '../../../../../occ/services/inbox/occ-inbox.adapter';
-import {
-  FSSearchConfig,
-  InboxDataService,
-} from '../../../../../core/my-account/services/inbox-data.service';
+import { take, mergeMap, map } from 'rxjs/operators';
+import { Message } from '../../../../../core/my-account/services/inbox-data.service';
 import { InboxService } from '../../../../../core/my-account/services/inbox.service';
 
 @Component({
@@ -20,48 +18,97 @@ import { InboxService } from '../../../../../core/my-account/services/inbox.serv
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InboxMessagesComponent implements OnInit, OnDestroy {
-  constructor(
-    private occInboxAdapter: OccInboxAdapter,
-    private inboxService: InboxService,
-    private inboxData: InboxDataService,
-    private cdr: ChangeDetectorRef
-  ) {}
+  constructor(private inboxService: InboxService) {}
 
-  private subscription: Subscription;
-  searchConfig: FSSearchConfig = {};
-  changeCheckboxe$: Observable<boolean>;
+  private subscription: Subscription = new Subscription();
   messagesObject$: Observable<any>;
   selectedIndex: number;
   messageGroup: string;
 
   @Input() initialGroup: string;
+  @Input() checkBoxStatus: boolean;
+  @Output() mainCheckBoxState = new EventEmitter<boolean>();
 
   ngOnInit() {
     this.loadCurrentMessageGroup();
+    this.messagesObject$ = this.inboxService.messages;
+    this.subscription.add(
+      this.inboxService.checkAllMessages
+        .pipe(
+          mergeMap(allChecked => {
+            this.inboxService.resetMessagesToSend();
+            return this.messagesObject$.pipe(
+              take(1),
+              map(data => {
+                if (allChecked) {
+                  return data.messages.forEach(message => {
+                    this.changeMessageState(message.readDate, message.uid);
+                  });
+                }
+              })
+            );
+          })
+        )
+        .subscribe()
+    );
+    this.subscription.add(
+      this.inboxService.accordionState.subscribe(
+        globalAccordionIndex => (this.selectedIndex = globalAccordionIndex)
+      )
+    );
   }
 
   loadCurrentMessageGroup() {
-    this.subscription = this.inboxService.activeMessageGroupAndTitle.subscribe(
-      group => {
+    this.subscription.add(
+      this.inboxService.activeMessageGroupAndTitle.subscribe(group => {
         this.messageGroup =
           group && group.messageGroup ? group.messageGroup : this.initialGroup;
         this.getMessages();
-        this.cdr.markForCheck();
-      }
+      })
     );
   }
+
   getMessages() {
-    this.messagesObject$ = this.occInboxAdapter.getSiteMessagesForUserAndGroup(
-      this.inboxData.userId,
-      this.messageGroup,
-      this.searchConfig
+    this.subscription.add(
+      this.inboxService
+        .getMessages(this.messageGroup)
+        .subscribe(messages => this.inboxService.messagesSource.next(messages))
     );
-    this.selectedIndex = -1;
   }
+
   toggleActiveAccordion(index: number) {
-    this.selectedIndex === index
-      ? (this.selectedIndex = -1)
-      : (this.selectedIndex = index);
+    this.selectedIndex = this.selectedIndex === index ? -1 : index;
+  }
+
+  readMessage(message: Message) {
+    const uidList = [];
+    if (message.readDate === undefined) {
+      uidList.push(message.uid);
+      this.subscription.add(
+        this.inboxService.setMessagesState(uidList, true).subscribe()
+      );
+    }
+  }
+
+  changeMessageState(readDate, messageUid) {
+    const messageObj = {
+      readDate: readDate,
+      uid: messageUid,
+    };
+    this.inboxService.selectedMessages(messageObj);
+    if (this.checkBoxStatus === true) {
+      this.inboxService.getMessagesAction();
+    }
+  }
+
+  mainCheckboxSwitch() {
+    if (this.checkBoxStatus === true) {
+      this.mainCheckBoxState.emit(false);
+    }
+  }
+
+  getDate() {
+    return new Date();
   }
 
   ngOnDestroy() {

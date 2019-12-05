@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGenericComponent } from '../form-generic.component';
-import { OccMockFormService } from '../../../occ/services/occ-mock-form.service';
 
 @Component({
   selector: 'cx-form-select',
@@ -8,9 +7,6 @@ import { OccMockFormService } from '../../../occ/services/occ-mock-form.service'
 })
 export class FormSelectComponent extends FormGenericComponent
   implements OnInit {
-  constructor(protected formService: OccMockFormService) {
-    super();
-  }
   ngOnInit() {
     if (this.config.depends) {
       this.config.depends.forEach(dependField => {

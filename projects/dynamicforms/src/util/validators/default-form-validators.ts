@@ -1,11 +1,12 @@
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { AbstractControl, ValidationErrors, Validators } from '@angular/forms';
 
 // @dynamic
-export class CustomFormValidators {
+export class DefaultFormValidators extends Validators {
   static passwordRegex = /^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^*()_\-+{};:.,]).{6,}$/;
   // tslint:disable-next-line:max-line-length
   static emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   static phoneNumberRegex = /^(?:\d{6,20})?$/;
+  static postalCodeRegex = /^(?=.*[0-9])[A-Za-z0-9\s]+$/;
 
   static regexValidator(regex) {
     return (control: AbstractControl): ValidationErrors | null => {
@@ -51,6 +52,29 @@ export class CustomFormValidators {
           return inputVal.getTime() < today.getTime()
             ? null
             : { InvalidDate: true };
+      }
+    };
+  }
+
+  static compareDates(comparisonField: string, operator: string) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (control.parent) {
+        const currentField = Date.parse(control.value);
+        const compareToField = Date.parse(
+          control.parent.controls[comparisonField].value
+        );
+        if (currentField && compareToField) {
+          switch (operator) {
+            case 'shouldBeGreater':
+              return compareToField > currentField
+                ? null
+                : { timeConflict: true };
+            case 'shouldBeLess':
+              return currentField > compareToField
+                ? null
+                : { timeConflict: true };
+          }
+        }
       }
     };
   }

@@ -1,0 +1,19 @@
+<div
+  class="dynamic-field"
+  [formGroup]="group"
+  [hidden]="group.controls[config.name].disabled"
+>
+  <div [ngClass]="formConfig.cssClass.inputWrapper">
+    <label [ngClass]="formConfig.cssClass.label">{{ config.label }}</label>
+    <input
+      class="col-xs-12 col-md-6"
+      type="time"
+      [formControlName]="config.name"
+      name="{{ config.name }}"
+    />
+  </div>
+  <cx-form-error-notice
+    [warn]="group.controls[config.name]"
+    [parentConfig]="config"
+  ></cx-form-error-notice>
+</div>

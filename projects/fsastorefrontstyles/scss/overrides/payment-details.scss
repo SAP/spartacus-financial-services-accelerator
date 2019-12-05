@@ -5,11 +5,10 @@
   margin-bottom: 30px;
 }
 .cx-header h3 {
-  padding: 20px 0;
-  margin-bottom: 20px;
-  color: var(--cx-color-secondary);
-  font-weight: var(--cx-font-weight-bold);
-  border-bottom: $border-grey;
+  @extend .heading-headline;
+  padding: 1rem 0;
+  margin: 1rem auto 3rem;
+  text-align: center;
 }
 .cx-payment-card {
   margin-bottom: 20px;

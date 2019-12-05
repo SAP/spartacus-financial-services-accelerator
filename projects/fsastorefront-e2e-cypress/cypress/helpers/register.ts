@@ -1,3 +1,5 @@
+import { register } from 'ts-node';
+
 export interface RegisterUser {
   titleCode: string;
   firstName: string;
@@ -8,8 +10,7 @@ export interface RegisterUser {
   password: string;
 }
 
-export function registerUser(user: RegisterUser) {
-  cy.findByText(/Sign in \/ Register/i).click();
+export function populateRegistrationForm(user: RegisterUser) {
   cy.get('cx-page-layout')
     .findByText('Register')
     .click({ force: true });
@@ -27,6 +28,11 @@ export function registerUser(user: RegisterUser) {
     cy.get('[formcontrolname="termsandconditions"]').check();
     cy.get('button[type="submit"]').click();
   });
+}
+
+export function registerUser(user: RegisterUser) {
+  cy.findByText(/Sign in \/ Register/i).click();
+  this.populateRegistrationForm(user);
 }
 
 export function validatePhoneNumber(expectedValue: string) {
@@ -53,4 +59,19 @@ export function login(username: string, password: string) {
 
 export function logout() {
   cy.findByText('Logout').click();
+}
+
+export function loginInCheckout(username: string, password: string) {
+  //will be deleted once register user is working correctly
+  cy.get('.cx-login-link')
+    .should('be.visible')
+    .click();
+  // cy.get('.cx-login-link').within(() => {
+  cy.get('[formcontrolname="userId"]')
+    .clear()
+    .type(username);
+  cy.get('[formcontrolname="password"]')
+    .clear()
+    .type(password);
+  cy.get('button[type=submit]').click();
 }

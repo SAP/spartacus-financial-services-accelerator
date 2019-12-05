@@ -11,6 +11,7 @@ import { FormSelectComponent } from './form-select/form-select.component';
 import { FormTitleComponent } from './form-title/form-title.component';
 import { FormRadioComponent } from './form-radio/form-radio.component';
 import { FormTextAreaComponent } from './form-text-area/form-text-area.component';
+import { FormTimeComponent } from './form-time/form-time.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, I18nModule],
@@ -24,6 +25,7 @@ import { FormTextAreaComponent } from './form-text-area/form-text-area.component
     FormDatePickerComponent,
     FormErrorNoticeComponent,
     FormTextAreaComponent,
+    FormTimeComponent,
   ],
   entryComponents: [
     FormButtonComponent,
@@ -33,6 +35,7 @@ import { FormTextAreaComponent } from './form-text-area/form-text-area.component
     FormTitleComponent,
     FormDatePickerComponent,
     FormTextAreaComponent,
+    FormTimeComponent,
   ],
   exports: [
     DynamicFieldDirective,
@@ -44,6 +47,7 @@ import { FormTextAreaComponent } from './form-text-area/form-text-area.component
     FormDatePickerComponent,
     FormErrorNoticeComponent,
     FormTextAreaComponent,
+    FormTimeComponent,
   ],
 })
 export class FormComponentsModule {}
