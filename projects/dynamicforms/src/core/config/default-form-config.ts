@@ -15,5 +15,5 @@ export const defaultFormConfig: FormConfig = {
     validatorMessageWrapper: 'px-4',
     validatorMessage: 'text-danger mb-2',
     submitButton: 'btn btn-primary',
-  },
+  }
 };
