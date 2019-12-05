@@ -1,5 +1,9 @@
 <ng-container *ngIf="form">
-  <form class="dynamic-form" [formGroup]="form" (submit)="handleSubmit($event)">
+  <form
+    [ngClass]="formConfig.cssClass.form"
+    [formGroup]="form"
+    (submit)="handleSubmit($event)"
+  >
     <ng-container
       *ngFor="let field of allInputs"
       cxDynamicField

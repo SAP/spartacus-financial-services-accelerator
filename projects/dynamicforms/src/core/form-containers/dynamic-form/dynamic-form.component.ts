@@ -18,6 +18,7 @@ import { FormDataService } from '../../services/data/form-data.service';
 import { Subscription, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { YFormData } from '@fsa/dynamicforms';
+import { FormConfig } from '../../models/form-config';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -48,7 +49,8 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private formService: FormBuilderService,
-    private formDataService: FormDataService
+    private formDataService: FormDataService,
+    public formConfig: FormConfig
   ) {}
 
   ngOnInit() {

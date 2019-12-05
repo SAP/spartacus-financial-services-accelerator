@@ -1,7 +1,9 @@
-import { FormConfig } from '../models/form-config';
+import { FormConfig } from '@fsa/dynamicforms';
 
 export const defaultFormConfig: FormConfig = {
   cssClass: {
+    form: '',
+    controlElement: '',
     formTitle: 'mt-3 pl-3',
     inputWrapper: 'form-group',
     input: 'form-control',
