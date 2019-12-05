@@ -1,10 +1,10 @@
 <div
   [hidden]="group.controls[config.name].disabled"
-  class="dynamic-field form-input container"
+  class="dynamic-field"
   [formGroup]="group"
 >
-  <div class="row align-items-center">
-    <label class="col-xs-12 col-md-6">{{ config.label }}</label>
+  <div [ngClass]="formConfig.cssClass.inputWrapper">
+    <label [ngClass]="formConfig.cssClass.label">{{ config.label }}</label>
     <textarea
       class="col-xs-12 col-md-6"
       [attr.placeholder]="config.placeholder"

@@ -1,5 +1,5 @@
 <div
-  class="dynamic-field form-title"
+  [ngClass]="formConfig.cssClass.formTitle"
   [formGroup]="group"
   [hidden]="group.controls[config.name].disabled"
 >
