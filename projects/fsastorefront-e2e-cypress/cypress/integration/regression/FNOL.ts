@@ -1,7 +1,6 @@
-import {donnaMooreUser } from "../../sample-data/users";
-import * as register from "../../helpers/register";
-import * as FNOL from "../../helpers/FNOL";
-
+import { donnaMooreUser } from '../../sample-data/users';
+import * as register from '../../helpers/register';
+import * as FNOL from '../../helpers/FNOL';
 
 context('FNOL for sample data user', () => {
   before(() => {
@@ -31,10 +30,8 @@ context('FNOL for sample data user', () => {
       FNOL.populateIncidentReportStep();
     });
 
-    it('Should check and populate General Information page', () =>{
+    it('Should check and populate General Information page', () => {
       FNOL.populateGeneralInformationStep();
-
     });
-
   });
 });

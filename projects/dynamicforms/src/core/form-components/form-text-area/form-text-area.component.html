@@ -6,7 +6,7 @@
   <div [ngClass]="formConfig.cssClass.inputWrapper">
     <label [ngClass]="formConfig.cssClass.label">{{ config.label }}</label>
     <textarea
-      class="col-xs-12 col-md-6"
+      [ngClass]="formConfig.cssClass.input"
       [attr.placeholder]="config.placeholder"
       [formControlName]="config.name"
       rows="10"
