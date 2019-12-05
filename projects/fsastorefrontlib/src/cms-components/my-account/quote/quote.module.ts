@@ -46,7 +46,7 @@ const routes: Routes = [
       cmsComponents: {
         AccountMyQuotesFlex: {
           component: QuotesComponent,
-        }
+        },
       },
     }),
   ],

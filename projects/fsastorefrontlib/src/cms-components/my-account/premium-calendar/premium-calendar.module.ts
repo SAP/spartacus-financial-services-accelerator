@@ -37,7 +37,7 @@ const routes: Routes = [
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
         AccountPremiumCalendarFlex: {
-          component: PremiumCalendarComponent, 
+          component: PremiumCalendarComponent,
         },
       },
     }),

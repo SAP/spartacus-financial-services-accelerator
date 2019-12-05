@@ -1,24 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {
-  CmsConfig,
-  ConfigModule,
-  I18nModule,
-  CmsModule,
-  AuthGuard,
-  RoutingConfig,
-  RoutesConfig,
-} from '@spartacus/core';
-import {
-  PageLayoutComponent,
-  CmsPageGuard,
-  PaymentMethodsComponent,
-  ConsentManagementComponent,
-  UpdatePasswordComponent,
-  UpdateEmailComponent,
-  CloseAccountComponent,
-} from '@spartacus/storefront';
+import { I18nModule, CmsModule, AuthGuard } from '@spartacus/core';
+import { PageLayoutComponent, CmsPageGuard } from '@spartacus/storefront';
 import { FSUpdateProfileModule } from './update-profile/fs-update-profile.module';
 import { InboxModule } from './inbox/inbox.module';
 import { PolicyModule } from './policy/policy.module';
@@ -114,25 +98,6 @@ const routes: Routes = [
     PremiumCalendarModule,
     RouterModule,
     RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
-      cmsComponents: {
-        AccountPaymentDetailsSPAComponent: {
-          component: PaymentMethodsComponent,
-        },
-        ConsentManagementComponent: {
-          component: ConsentManagementComponent,
-        },
-        UpdateEmailComponent: {
-          component: UpdateEmailComponent,
-        },
-        UpdatePasswordComponent: {
-          component: UpdatePasswordComponent,
-        },
-        AccountCloseAccountSPAComponent: {
-          component: CloseAccountComponent,
-        },
-      },
-    }),
   ],
 })
 export class MyAccountModule {}
