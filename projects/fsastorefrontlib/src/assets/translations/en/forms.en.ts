@@ -8,11 +8,12 @@ export const forms = {
     dateInFutureBeforeStart:
       'Date must be in the future, cannot be before start date',
     lessThan100K: 'Value must be less than 100.000',
-    lessThan1M: 'Value must be less than 1.000.000',
+    lessThan1M: 'Value must be less than 1.000.000, cannot be 0',
     dateOfBirthMinimumAge: 'Must be over 18 years old',
     lessThan150: 'Value must be less than 150',
     enterValidEmail: 'Please enter a valid email',
     vehicleValue: 'Vehicle value must be a number between 3.000 and 1.000.000',
+    afterVehicleManufacture: 'Date must be in the past, during or after vehicle manufacture year',
     between4And20Digits: 'Phone number should contain between 4 and 20 digits',
     containAtLeastOneNumber:
       'Should contain at least one number, no special characters',
