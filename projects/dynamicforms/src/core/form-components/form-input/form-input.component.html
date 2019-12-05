@@ -10,7 +10,7 @@
       type="text"
       [attr.placeholder]="config.placeholder"
       [formControlName]="config.name"
-      name="{{ config.name }}"
+      [attr.name]="config.name"
     />
   </div>
   <cx-form-error-notice
