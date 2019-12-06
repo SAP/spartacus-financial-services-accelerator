@@ -1,24 +1,24 @@
-import * as registerHelpers from '../../../helpers/register';
+import * as registerHelpers from '../../helpers/register';
 import {
   accessApplicationsPage,
   checkApplicationTitle,
-} from '../../../helpers/my-account/applications';
+} from '../../helpers/my-account/applications';
 import {
   checkPoliciesTitle,
   accessPoliciesPage,
-} from '../../../helpers/my-account/policies';
+} from '../../helpers/my-account/policies';
 import {
   checkClaimsTitle,
   accessClaimsPage,
-} from '../../../helpers/my-account/claims';
+} from '../../helpers/my-account/claims';
 import {
   accessPaymentDetailsPage,
   checkPaymentDetailsTitle,
   checkPaymentMethod,
   shouldHaveCardNumber,
-} from '../../../helpers/my-account/payment-details';
-import { cardShouldContain } from '../../../helpers/my-account/cards';
-import { donnaMooreUser } from '../../../sample-data/users';
+} from '../../helpers/my-account/payment-details';
+import { cardShouldContain } from '../../helpers/my-account/cards';
+import { donnaMooreUser } from '../../sample-data/users';
 
 context('My Account', () => {
   before(() => {

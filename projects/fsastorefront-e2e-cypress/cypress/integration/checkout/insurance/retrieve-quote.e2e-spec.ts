@@ -1,8 +1,8 @@
 import * as register from '../../../helpers/register';
+import { registrationUser } from '../../../sample-data/users';
 import * as travelCheckout from '../../../helpers/checkout/travel/travel-checkout';
-import { registrationUser } from './../../../sample-data/users';
 
-context('Travel Insurance Checkout', () => {
+context('Applications Page', () => {
   before(() => {
     cy.visit('/');
     register.registerUser(registrationUser);
@@ -28,29 +28,24 @@ context('Travel Insurance Checkout', () => {
       cy.wait(1000);
     });
 
-    it('Populate personal detials', () => {
-      travelCheckout.populatePersonalDetailsForm();
-      cy.wait(1000);
+    it('Should visit applications page and check if there is one quote created', () => {
+      cy.selectOptionFromDropdown({
+        menuOption: 'My Account',
+        dropdownItem: 'Quotes & Applications',
+      });
+      cy.wait(1500);
+      cy.get('fsa-quotes').should('have.length', 1);
     });
 
-    it('Check mini cart on quote review page', () => {
-      travelCheckout.checkQuoteReview();
-    });
-
-    it('Select default payment details', () => {
-      travelCheckout.checkPaymentPage();
-    });
-
-    it('Place order on final review page', () => {
-      travelCheckout.placeOrderOnFinalReivew();
-    });
-
-    it('Check order confirmation', () => {
-      travelCheckout.checkOrderConfirmation();
-    });
-
-    it('Check my policies page', () => {
-      travelCheckout.checkMyPoliciesPage();
+    it('Should retrieve a quote and check if the user is on the correct page', () => {
+      cy.get('fsa-quotes').within(() => {
+        cy.get('.primary-button').click({ force: true });
+      });
+      cy.wait(1500);
+      cy.url().should('include', 'add-options');
+      cy.get('.is-active').within(() => {
+        cy.get('p').contains('Add Options');
+      });
     });
   });
 });

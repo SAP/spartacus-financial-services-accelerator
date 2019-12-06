@@ -1,4 +1,4 @@
-import * as productCategory from '../../helpers/productCategoryPage';
+import * as productCategory from '../../../helpers/productCategoryPage';
 
 context('ProductCategoryPage', () => {
   before(() => {
