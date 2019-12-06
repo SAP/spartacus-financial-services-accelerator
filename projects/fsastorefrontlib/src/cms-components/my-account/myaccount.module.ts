@@ -1,7 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { I18nModule, CmsModule, AuthGuard, ConfigModule, CmsConfig } from '@spartacus/core';
+import {
+  I18nModule,
+  CmsModule,
+  AuthGuard,
+  ConfigModule,
+  CmsConfig,
+} from '@spartacus/core';
 import { PageLayoutComponent, CmsPageGuard } from '@spartacus/storefront';
 import { FSUpdateProfileModule } from './update-profile/fs-update-profile.module';
 import { InboxModule } from './inbox/inbox.module';
