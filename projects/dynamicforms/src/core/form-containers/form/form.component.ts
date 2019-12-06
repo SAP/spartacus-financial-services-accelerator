@@ -31,11 +31,16 @@ export class FormComponent implements OnDestroy {
   @Input()
   formData: Observable<YFormData>;
 
-  submit(formData: { [name: string]: any; refId?: string }) {
+  submit(formData: YFormData) {
     if (this.form && this.form.valid) {
       this.subscription.add(
         this.formDataService
-          .saveFormData(this.formId, this.applicationId, formData)
+          .saveFormData(
+            this.formId,
+            this.applicationId,
+            formData.content,
+            formData.refId
+          )
           .subscribe(response => {
             this.formDataService.currentForm$.next({
               id: response.id,

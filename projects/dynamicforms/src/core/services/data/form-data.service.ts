@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { CartService } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { OccFormService } from '../../../occ/services/form/occ-form.service';
 import { FormStorageObject, YFormData } from '../../models';
@@ -9,10 +8,7 @@ import { YFormDefinition } from './../../models/form-occ.models';
 export class FormDataService {
   private formsLocalStorageKey = 'dynamicFormsData';
   submittedForm = new BehaviorSubject<YFormData>(null);
-  constructor(
-    protected occYformsService: OccFormService,
-    protected cartService: CartService
-  ) {}
+  constructor(protected occYformsService: OccFormService) {}
 
   // ***SHOULD BE REMOVED WITH FSA-4419***
   currentForm$: BehaviorSubject<YFormData> = new BehaviorSubject({});
@@ -83,16 +79,13 @@ export class FormDataService {
   saveFormData(
     formId: string,
     applicationId: string,
-    formContent: any
+    formContent: any,
+    refId?: string
   ): Observable<YFormData> {
-    const refId = formContent.refId;
-
-    const filteredData = this.filterData(formContent);
-
     return this.occYformsService.saveFormData(
       formId,
       applicationId,
-      filteredData,
+      formContent,
       undefined,
       refId
     );
@@ -110,15 +103,5 @@ export class FormDataService {
       applicationId,
       formDefinitionId
     );
-  }
-
-  filterData(formData: { [name: string]: Object }): any {
-    if (formData.button) {
-      delete formData.button;
-    }
-    if (formData.refId) {
-      delete formData.refId;
-    }
-    return formData;
   }
 }

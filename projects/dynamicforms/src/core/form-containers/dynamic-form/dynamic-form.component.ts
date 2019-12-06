@@ -1,3 +1,4 @@
+import { YFormData } from './../../models/form-occ.models';
 import {
   Component,
   EventEmitter,
@@ -17,7 +18,6 @@ import { GeneralHelpers } from '../../helpers/helpers';
 import { FormDataService } from '../../services/data/form-data.service';
 import { Subscription, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { YFormData } from '@fsa/dynamicforms';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -108,8 +108,11 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         .pipe(
           map(form => {
             if (form && this.value !== undefined && this.valid) {
-              this.value.refId = form.refId;
-              this.submit.emit(this.value);
+              const formData: YFormData = {
+                refId: form.refId,
+                content: this.value,
+              };
+              this.submit.emit(formData);
             }
           })
         )
