@@ -1,17 +1,22 @@
-<div class="row justify-content-end">
-  <div class="col-xs-12 col-md-6">
+<div class="row">
+  <div [ngClass]="formConfig.cssClass.validatorMessageWrapper">
     <ng-container
       *ngIf="(warn?.touched && warn?.errors?.required) || warn?.errors?.pattern"
     >
-      <div class="form-text">
+      <div [ngClass]="formConfig.cssClass.validatorMessage">
         {{ 'forms.enterValidValue' | cxTranslate }}
       </div>
     </ng-container>
     <ng-container
-      *ngIf="warn?.invalid && warn?.touched && !warn?.errors?.required"
+      *ngIf="
+        warn?.invalid &&
+        warn?.touched &&
+        !warn?.errors?.required &&
+        parentConfig?.error
+      "
     >
-      <div class="form-text">
-        {{ parentConfig?.error | cxTranslate }}
+      <div [ngClass]="formConfig.cssClass.validatorMessage">
+        {{ parentConfig.error | cxTranslate }}
       </div>
     </ng-container>
   </div>

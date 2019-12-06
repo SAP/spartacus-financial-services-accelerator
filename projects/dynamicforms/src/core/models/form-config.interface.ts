@@ -30,7 +30,7 @@ export interface FieldOption {
   icon?: string;
 }
 
-export interface CategoryFormRelationMapping {
+export interface CategoryFormRelation {
   categoryCode: string;
   chooseCoverFormId?: string;
   personalDetailsFormId?: string;

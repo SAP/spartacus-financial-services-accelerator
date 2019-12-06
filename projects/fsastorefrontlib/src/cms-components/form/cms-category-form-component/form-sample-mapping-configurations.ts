@@ -1,6 +1,6 @@
-import { CategoryFormRelationMapping } from '@fsa/dynamicforms';
+import { CategoryFormRelation } from '@fsa/dynamicforms';
 
-export const categoryFormRelationMappings: CategoryFormRelationMapping[] = [
+export const categoryFormRelations: CategoryFormRelation[] = [
   {
     categoryCode: 'insurances_travel',
     chooseCoverFormId: 'trip_details_form',

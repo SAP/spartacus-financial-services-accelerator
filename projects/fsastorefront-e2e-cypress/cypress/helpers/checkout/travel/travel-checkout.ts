@@ -1,3 +1,5 @@
+import * as addOptionsPage from '../../../helpers/checkout/addOptionsPage';
+
 export function openCategoryPage() {
   cy.selectOptionFromDropdown({
     menuOption: 'Insurance',
@@ -48,35 +50,39 @@ export function checkComparisonAndAddProduct() {
 }
 
 export function checkOptionalProductsAndPick() {
-  cy.get('fsa-add-options')
-    .should('be.visible')
-    .within(() => {
-      cy.get('h3').should('have.length', 6);
-      cy.get('h3')
-        .eq(0)
-        .should('have.text', 'Winter Sports Cover');
-      cy.get('h3')
-        .eq(1)
-        .should('have.text', 'Golf Cover');
-      cy.get('h3')
-        .eq(2)
-        .should('have.text', 'Business Cover');
-      cy.get('h3')
-        .eq(3)
-        .should('have.text', 'Valuables Extension');
-      cy.get('h3')
-        .eq(4)
-        .should('have.text', 'Hazardous Activities');
-      cy.get('h3')
-        .eq(5)
-        .should('have.text', 'Excess waiver');
-      cy.get('.disabled-option').should('have.length', 3);
-      cy.get('.secondary-button')
-        .should('have.length', 6)
-        .eq(0)
-        .click();
-      cy.wait(1000);
-    });
+  const addOptionsContent: addOptionsPage.AddOptions = {
+    title: 'Your Travel Insurance',
+    items: [
+      {
+        name: 'Winter Sports Cover',
+        available: true,
+        shouldAdd: true,
+      },
+      {
+        name: 'Golf Cover',
+        available: false,
+      },
+      {
+        name: 'Business Cover',
+        available: false,
+      },
+      {
+        name: 'Valuables Extension',
+        available: true,
+      },
+      {
+        name: 'Hazardous Activities',
+        available: false,
+      },
+      {
+        name: 'Excess waiver',
+        available: true,
+      },
+    ],
+  };
+
+  addOptionsPage.checkAddOptionsPageContent(addOptionsContent);
+
   cy.get('.primary-button')
     .should('be.visible')
     .click();

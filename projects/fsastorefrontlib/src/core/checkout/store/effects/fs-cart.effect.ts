@@ -7,7 +7,8 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { OccFSCartAdapter } from '../../../../occ/services/cart/occ-fs-cart.adapter';
 import * as fromQuoteActions from '../../../my-account/store/actions/quote.action';
 import * as fromActions from '../actions/fs-cart.action';
-import { categoryFormRelationMappings } from './../../../../cms-components/form/cms-category-form-component/form-sample-mapping-configurations';
+import { categoryFormRelations } from './../../../../cms-components/form/cms-category-form-component/form-sample-mapping-configurations';
+import { Action } from '@ngrx/store';
 
 @Injectable()
 export class FSCartEffects {
@@ -49,42 +50,63 @@ export class FSCartEffects {
         )
         .pipe(
           switchMap((cart: any) => {
+            let actions: Action[] = [];
+            const cartCode =
+              payload.userId === 'anonymous' ? payload.cartId : cart.cartCode;
+
             if (
-              cart &&
               cart.entry &&
               cart.entry.product &&
               cart.entry.product.defaultCategory
             ) {
               const currentCategoryCode =
                 cart.entry.product.defaultCategory.code;
-              const formDefinitionId = categoryFormRelationMappings.find(
+              const categoryFormRelation = categoryFormRelations.find(
                 mapping => mapping.categoryCode === currentCategoryCode
-              ).chooseCoverFormId;
+              );
 
               let quoteDetails;
-              if (formDefinitionId) {
+              if (
+                categoryFormRelation &&
+                categoryFormRelation.chooseCoverFormId
+              ) {
                 quoteDetails = {
                   quoteDetails: {
                     entry: [
                       {
                         key: 'formId',
                         value: this.formDataService.getFormDataIdFromLocalStorage(
-                          formDefinitionId
+                          categoryFormRelation.chooseCoverFormId
                         ),
                       },
                     ],
                   },
                 };
               }
-              return [
-                new fromQuoteActions.UpdateQuote({
-                  userId: payload.userId,
-                  cartId: payload.cartId,
-                  quoteContent: quoteDetails,
-                }),
-                new CartActions.CartAddEntrySuccess(cart.entry),
-              ];
+
+              if (quoteDetails) {
+                actions.push(
+                  new fromQuoteActions.UpdateQuote({
+                    userId: payload.userId,
+                    cartId: cartCode,
+                    quoteContent: quoteDetails,
+                  })
+                );
+              }
             }
+
+            if (cart.cartCode !== payload.cartId) {
+              actions.push(
+                new CartActions.LoadCart({
+                  userId: payload.userId,
+                  cartId: cartCode,
+                })
+              );
+            } else {
+              actions.push(new CartActions.CartAddEntrySuccess(cart.entry));
+            }
+
+            return actions;
           }),
           catchError(error => of(new CartActions.CartAddEntryFail(error)))
         );

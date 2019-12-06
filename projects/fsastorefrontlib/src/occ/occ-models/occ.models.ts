@@ -15,6 +15,7 @@ export interface FSProduct extends Product {
 }
 
 export interface FSCart extends Cart {
+  cartCode: string;
   insuranceQuote?: any;
 }
 

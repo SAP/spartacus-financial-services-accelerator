@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Cart, CartService, OccConfig, RoutingService } from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
+import { Cart, CartService, OccConfig, RoutingService } from '@spartacus/core';
+import { Observable } from 'rxjs';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services';
 import { FSCheckoutService } from '../../../../core/checkout/services/fs-checkout.service';
 
@@ -47,7 +47,16 @@ export class QuoteReviewComponent implements OnInit {
     this.routingService.go(this.checkoutStepUrlNext);
   }
 
-  parseFormContentToJson(formContent: string): any {
-    return JSON.parse(formContent);
+  getFormContentInJson(cart: any): any {
+    if (
+      cart &&
+      cart.deliveryOrderGroups.length > 0 &&
+      cart.deliveryOrderGroups[0].entries.length > 0 &&
+      cart.deliveryOrderGroups[0].entries[0].formDataData
+    ) {
+      return JSON.parse(
+        cart.deliveryOrderGroups[0].entries[0].formDataData[0].content
+      );
+    }
   }
 }

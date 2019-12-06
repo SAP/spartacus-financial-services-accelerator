@@ -12,6 +12,7 @@ import {
   FormDefinition,
 } from '../../models/form-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
+import { GeneralHelpers } from '../../helpers/helpers';
 
 import { FormDataService } from '../../services/data/form-data.service';
 import { Subscription, Observable } from 'rxjs';
@@ -84,16 +85,22 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   mapDataToFormControls(formData) {
     for (const groupCode of Object.keys(formData)) {
-      for (const controlName of Object.keys(formData[groupCode])) {
-        this.form
-          .get(groupCode)
-          .get(controlName)
-          .setValue(formData[groupCode][controlName]);
+      if (GeneralHelpers.getObjectDepth(formData) === 1) {
+        this.form.get(groupCode).setValue(formData[groupCode]);
+      } else {
+        for (const controlName of Object.keys(formData[groupCode])) {
+          this.form
+            .get(groupCode)
+            .get(controlName)
+            .setValue(formData[groupCode][controlName]);
+        }
       }
     }
   }
+
   addSubmitEvent() {
     this.subscription.add(
       this.formDataService

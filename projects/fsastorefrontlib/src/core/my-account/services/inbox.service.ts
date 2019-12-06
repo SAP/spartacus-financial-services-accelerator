@@ -1,14 +1,21 @@
 import { Injectable } from '@angular/core';
 import { AuthService, CmsService } from '@spartacus/core';
-import { BehaviorSubject } from 'rxjs';
-import { Message, InboxDataService, InboxTab } from './inbox-data.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { OccInboxAdapter } from './../../../occ/services/inbox/occ-inbox.adapter';
+import {
+  FSSearchConfig,
+  InboxDataService,
+  InboxTab,
+  Message,
+} from './inbox-data.service';
 
 @Injectable()
 export class InboxService {
   constructor(
     private inboxData: InboxDataService,
     protected auth: AuthService,
-    protected cmsService: CmsService
+    protected cmsService: CmsService,
+    protected occInboxAdapter: OccInboxAdapter
   ) {
     this.initInbox();
   }
@@ -16,22 +23,25 @@ export class InboxService {
   messageGroupAndTitleSource = new BehaviorSubject<InboxTab>(null);
   activeMessageGroupAndTitle = this.messageGroupAndTitleSource.asObservable();
 
-  // Leftovers from previous implementation. Maybe can be used in the next task
-  activeSortingFilterSource = new BehaviorSubject<string>('');
-  readStatusSource = new BehaviorSubject<boolean>(false);
   checkAllMessagesSource = new BehaviorSubject<boolean>(false);
-  activeSortingFilter = this.activeSortingFilterSource.asObservable();
-  readStatus = this.readStatusSource.asObservable();
   checkAllMessages = this.checkAllMessagesSource.asObservable();
+
+  accordionStateSource = new BehaviorSubject<number>(-1);
+  accordionState = this.accordionStateSource.asObservable();
+
+  mainCheckboxSource = new BehaviorSubject<boolean>(false);
+  mainCheckBox = this.mainCheckboxSource.asObservable();
+
+  messagesSource = new BehaviorSubject<boolean>(false);
+  messages = this.messagesSource.asObservable();
+
   messagesCollection: Message[] = [];
-  protected callback: Function;
+  readMessagesUidList: string[] = [];
+
+  searchConfig: FSSearchConfig = {};
 
   initInbox() {
-    this.auth.getUserToken().subscribe(userData => {
-      if (this.inboxData.userId !== userData.userId) {
-        this.inboxData.userId = userData.userId;
-      }
-    });
+    this.checkAllMessagesSource.next(false);
   }
 
   setTitleAndMessageGroup(messageGroup: string, title: string) {
@@ -41,26 +51,55 @@ export class InboxService {
   // Leftovers from previous implementation. Maybe can be used in the next task
   resetMessagesToSend() {
     this.messagesCollection = [];
-    this.readStatusSource.next(false);
   }
+
   selectedMessages(messageObject: Message) {
     const index = this.messagesCollection
-      .map(e => e.messageUid)
-      .indexOf(messageObject.messageUid);
+      .map(e => e.uid)
+      .indexOf(messageObject.uid);
     index === -1
       ? this.messagesCollection.push(messageObject)
       : this.messagesCollection.splice(index, 1);
   }
-  getUidsFromMessagesCollection(meesagesCollecton) {
-    return meesagesCollecton.map(messageObj => messageObj.messageUid);
+
+  getUidsFromMessagesCollection(): string[] {
+    return this.messagesCollection.map(messageObj => messageObj.uid);
   }
-  getMessagesAction() {
+
+  getMessagesAction(): boolean {
     let readState = true;
     this.messagesCollection.forEach(message => {
       if (message.readDate) {
         readState = false;
       }
     });
-    this.readStatusSource.next(readState);
+    return readState;
+  }
+
+  getMessages(messageGroup): Observable<any> {
+    return this.occInboxAdapter.getSiteMessagesForUserAndGroup(
+      this.inboxData.userId,
+      messageGroup,
+      this.searchConfig
+    );
+  }
+
+  sortMessages(sortCode, sortOrder, messageGroup): Observable<any> {
+    this.resetMessagesToSend();
+    this.searchConfig.sortCode = sortCode;
+    this.searchConfig.sortOrder = sortOrder;
+    return this.occInboxAdapter.getSiteMessagesForUserAndGroup(
+      this.inboxData.userId,
+      messageGroup,
+      this.searchConfig
+    );
+  }
+
+  setMessagesState(uidList, read): Observable<any> {
+    return this.occInboxAdapter.setMessagesState(
+      this.inboxData.userId,
+      uidList,
+      read
+    );
   }
 }

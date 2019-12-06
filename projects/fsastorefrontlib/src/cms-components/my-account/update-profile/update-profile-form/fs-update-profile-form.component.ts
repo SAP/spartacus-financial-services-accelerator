@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UpdateProfileFormComponent } from '@spartacus/storefront';
-import { CustomFormValidators } from '../../../../shared/util/validators/custom-form-validators';
+import { DefaultFormValidators } from '@fsa/dynamicforms';
 import { FSUser } from '../../../../occ/occ-models';
 
 @Component({
@@ -14,13 +14,13 @@ export class FSUpdateProfileFormComponent extends UpdateProfileFormComponent
     titleCode: ['', Validators.required],
     firstName: ['', Validators.required],
     lastName: ['', Validators.required],
-    dateOfBirth: ['', CustomFormValidators.dateOfBirthValidator(18)],
+    dateOfBirth: ['', DefaultFormValidators.dateOfBirthValidator(18)],
     contactInfos: this.formBuilder.group({
       code: [''],
       phoneNumber: [
         '',
-        CustomFormValidators.regexValidator(
-          CustomFormValidators.phoneNumberRegex
+        DefaultFormValidators.regexValidator(
+          DefaultFormValidators.phoneNumberRegex
         ),
       ],
     }),

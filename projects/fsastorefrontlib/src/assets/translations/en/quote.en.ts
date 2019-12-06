@@ -29,5 +29,10 @@ export const quote = {
     phoneNumber: 'Phone Number',
     postcode: 'Postcode',
     title: 'Title',
+    eventCountry: 'Event Country',
+    eventDate: 'Event Date',
+    eventVenue: 'Event Venue',
+    eventVenueAddress: 'Event Venue Address',
+    eventVenueCity: 'Event Venue City',
   },
 };

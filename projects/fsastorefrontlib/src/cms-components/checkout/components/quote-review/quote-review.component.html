@@ -192,13 +192,16 @@
         <fsa-accordion-item [title]="'fscommon.personalDetails' | cxTranslate">
           <div class="container">
             <div class="row justify-content-center">
-              <ul class="col-12 accordion-list">
+              <ul
+                *ngIf="
+                  ((cart?.deliveryOrderGroups)[0]?.entries)[0]?.formDataData
+                "
+                class="col-12 accordion-list"
+              >
                 <li
                   *ngFor="
-                    let quoteProperties of parseFormContentToJson(
-                      ((cart.deliveryOrderGroups[0]?.entries)[0]
-                        ?.formDataData)[0]?.content
-                    ).personalDetails | keyvalue
+                    let quoteProperties of getFormContentInJson(cart)
+                      ?.personalDetails | keyvalue
                   "
                   class="accordion-list-item row"
                 >

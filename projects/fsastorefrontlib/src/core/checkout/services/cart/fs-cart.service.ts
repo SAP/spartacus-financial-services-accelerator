@@ -1,3 +1,4 @@
+import { FSCart } from './../../../../occ/occ-models/occ.models';
 import { Injectable } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import {
@@ -78,6 +79,15 @@ export class FSCartService extends CartService {
           })
         );
       });
+  }
+
+  reLoadCart(cart: FSCart) {
+    this.store.dispatch(
+      new CartActions.LoadCart({
+        cartId: cart.cartCode,
+        userId: this.fsCartData.userId,
+      })
+    );
   }
 
   private isCartCreated(cart: Cart): boolean {

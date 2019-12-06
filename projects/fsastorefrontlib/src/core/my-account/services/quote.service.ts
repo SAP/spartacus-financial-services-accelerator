@@ -1,4 +1,3 @@
-import { categoryFormRelationMappings } from './../../../cms-components/form/cms-category-form-component/form-sample-mapping-configurations';
 import { Injectable } from '@angular/core';
 import { FormDataService } from '@fsa/dynamicforms';
 import { select, Store } from '@ngrx/store';
@@ -11,6 +10,7 @@ import {
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
+import { categoryFormRelations } from './../../../cms-components/form/cms-category-form-component/form-sample-mapping-configurations';
 import { QuoteDataService } from './quote-data.service';
 
 @Injectable()
@@ -81,21 +81,22 @@ export class QuoteService {
         const entry: FSOrderEntry = cart.deliveryOrderGroups[0].entries[0];
         const product: FSProduct = entry.product;
         const category = product.defaultCategory.code;
-        const personalDetailsFormDataId = entry.formDataData[0].id;
+        if (entry.formDataData && entry.formDataData.length > 0) {
+          const personalDetailsFormDataId = entry.formDataData[0].id;
+          const personalDetailsFormId = categoryFormRelations.find(
+            mapping => mapping.categoryCode === category
+          ).personalDetailsFormId;
 
-        const personalDetailsFormId = categoryFormRelationMappings.find(
-          mapping => mapping.categoryCode === category
-        ).personalDetailsFormId;
-
-        if (personalDetailsFormId && personalDetailsFormId) {
-          this.formDataService.setFormDataToLocalStorage(
-            personalDetailsFormId,
-            personalDetailsFormDataId
-          );
+          if (personalDetailsFormId && personalDetailsFormId) {
+            this.formDataService.setFormDataToLocalStorage(
+              personalDetailsFormId,
+              personalDetailsFormDataId
+            );
+          }
         }
 
         if (cart.insuranceQuote && cart.insuranceQuote.quoteDetails) {
-          const chooseCoverFormId = categoryFormRelationMappings.find(
+          const chooseCoverFormId = categoryFormRelations.find(
             mapping => mapping.categoryCode === category
           ).chooseCoverFormId;
 

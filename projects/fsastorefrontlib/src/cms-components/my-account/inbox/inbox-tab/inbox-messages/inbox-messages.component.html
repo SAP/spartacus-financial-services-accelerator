@@ -13,13 +13,22 @@
           <div class="row">
             <div class="col-1 p-4">
               <label class="checkbox-label">
-                <input type="checkbox" [checked]="changeCheckboxe$ | async" />
+                <input
+                  type="checkbox"
+                  [checked]="checkBoxStatus"
+                  (change)="changeMessageState(message.readDate, message.uid)"
+                  (click)="mainCheckboxSwitch()"
+                />
                 <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
               </label>
             </div>
             <div
               class="col-6 col-md-3 position-relative text-truncate p-4"
-              (click)="toggleActiveAccordion(i)"
+              (click)="
+                toggleActiveAccordion(i);
+                readMessage(message);
+                message.readDate = getDate()
+              "
             >
               {{ message.subject }}
               <ng-container *ngIf="message.documents?.length > 0">
@@ -28,7 +37,11 @@
             </div>
             <div
               class="col-md-6 d-none d-md-block text-truncate p-4"
-              (click)="toggleActiveAccordion(i)"
+              (click)="
+                toggleActiveAccordion(i);
+                readMessage(message);
+                message.readDate = getDate()
+              "
             >
               {{ message.body }}
             </div>
