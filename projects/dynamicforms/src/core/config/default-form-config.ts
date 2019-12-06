@@ -1,4 +1,4 @@
-import { FormConfig } from '@fsa/dynamicforms';
+import { FormConfig } from '../models/form-config';
 
 export const defaultFormConfig: FormConfig = {
   cssClass: {
