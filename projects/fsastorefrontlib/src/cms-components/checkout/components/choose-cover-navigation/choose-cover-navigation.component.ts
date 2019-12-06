@@ -1,10 +1,10 @@
-import { FormDataService } from '@fsa/dynamicforms';
-import { FSCheckoutConfigService } from './../../../../core/checkout/services/fs-checkout-config.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { FormDataService } from '@fsa/dynamicforms';
 import { RoutingService } from '@spartacus/core';
-import { Subscription, of } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { of, Subscription } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { FSCheckoutConfigService } from './../../../../core/checkout/services/fs-checkout-config.service';
 
 @Component({
   selector: 'fsa-choose-cover-navigation',
@@ -19,18 +19,8 @@ export class ChooseCoverNavigationComponent implements OnInit {
   ) {}
 
   subscription = new Subscription();
-  checkoutStepUrlNext: string;
-  checkoutStepUrlPrevious: string;
 
-  ngOnInit() {
-    this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-      this.activatedRoute
-    );
-
-    this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(
-      this.activatedRoute
-    );
-  }
+  ngOnInit() {}
 
   navigateNext() {
     this.formService.submit({});

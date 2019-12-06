@@ -1,11 +1,11 @@
 import {
-  Product,
-  Price,
-  UserSignUp,
-  Category,
-  User,
   Cart,
+  Category,
   OrderEntry,
+  Price,
+  Product,
+  User,
+  UserSignUp,
 } from '@spartacus/core';
 
 export interface FSProduct extends Product {
@@ -15,7 +15,6 @@ export interface FSProduct extends Product {
 }
 
 export interface FSCart extends Cart {
-  cartCode: string;
   insuranceQuote?: any;
 }
 

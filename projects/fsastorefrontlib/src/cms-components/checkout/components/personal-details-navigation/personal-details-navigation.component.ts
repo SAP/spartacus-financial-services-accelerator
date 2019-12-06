@@ -4,9 +4,7 @@ import { FormDataService } from '@fsa/dynamicforms';
 import { CartService, RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FSCartService } from './../../../../core/checkout/services/cart/fs-cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/fs-checkout-config.service';
-import { FSCart } from './../../../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'fsa-personal-details-navigation',
@@ -18,8 +16,7 @@ export class PersonalDetailsNavigationComponent implements OnInit {
     protected formService: FormDataService,
     protected activatedRoute: ActivatedRoute,
     protected routingService: RoutingService,
-    protected checkoutConfigService: FSCheckoutConfigService,
-    protected fsCartService: FSCartService
+    protected checkoutConfigService: FSCheckoutConfigService
   ) {}
 
   subscription = new Subscription();
@@ -37,40 +34,42 @@ export class PersonalDetailsNavigationComponent implements OnInit {
   }
 
   navigateNext() {
-    this.subscription.add(
-      this.cartService
-        .getActive()
-        .pipe(
-          map(cart => {
-            if (
-              cart &&
-              cart.code &&
-              cart.deliveryOrderGroups &&
-              cart.deliveryOrderGroups.length > 0 &&
-              cart.deliveryOrderGroups[0].entries.length > 0
-            ) {
-              this.formService.submit({
-                refId:
-                  cart.code +
-                  '_' +
-                  cart.deliveryOrderGroups[0].entries[0].entryNumber,
-              });
-            }
-            this.fsCartService.reLoadCart(<FSCart>cart);
-            this.formService
-              .getSubmittedForm()
-              .pipe(
-                map(formData => {
-                  if (formData && formData.id) {
-                    this.routingService.go(this.checkoutStepUrlNext);
-                  }
-                })
-              )
-              .subscribe();
-          })
-        )
-        .subscribe()
-    );
+    this.subscription
+      .add(
+        this.cartService
+          .getActive()
+          .pipe(
+            map(cart => {
+              if (
+                cart &&
+                cart.code &&
+                cart.deliveryOrderGroups &&
+                cart.deliveryOrderGroups.length > 0 &&
+                cart.deliveryOrderGroups[0].entries.length > 0
+              ) {
+                this.formService.submit({
+                  refId:
+                    cart.code +
+                    '_' +
+                    cart.deliveryOrderGroups[0].entries[0].entryNumber,
+                });
+              }
+            })
+          )
+          .subscribe()
+      )
+      .add(
+        this.formService
+          .getSubmittedForm()
+          .pipe(
+            map(formData => {
+              if (formData && formData.id) {
+                this.routingService.go(this.checkoutStepUrlNext);
+              }
+            })
+          )
+          .subscribe()
+      );
   }
 
   ngOnDestroy() {

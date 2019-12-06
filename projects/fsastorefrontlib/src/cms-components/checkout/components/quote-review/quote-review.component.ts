@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cart, CartService, OccConfig, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { FSCheckoutConfigService } from '../../../../core/checkout/services';
+import {
+  FSCartService,
+  FSCheckoutConfigService,
+} from '../../../../core/checkout/services';
 import { FSCheckoutService } from '../../../../core/checkout/services/fs-checkout.service';
 
 @Component({
@@ -21,10 +24,13 @@ export class QuoteReviewComponent implements OnInit {
     protected routingService: RoutingService,
     private checkoutConfigService: FSCheckoutConfigService,
     private activatedRoute: ActivatedRoute,
-    protected checkoutService: FSCheckoutService
+    protected checkoutService: FSCheckoutService,
+    protected fsCartService: FSCartService
   ) {}
 
   ngOnInit() {
+    this.fsCartService.reLoadCart();
+
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
       this.activatedRoute
     );

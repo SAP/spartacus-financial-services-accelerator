@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormDataService } from '@fsa/dynamicforms';
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Action } from '@ngrx/store';
 import { CartActions } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
@@ -8,7 +9,6 @@ import { OccFSCartAdapter } from '../../../../occ/services/cart/occ-fs-cart.adap
 import * as fromQuoteActions from '../../../my-account/store/actions/quote.action';
 import * as fromActions from '../actions/fs-cart.action';
 import { categoryFormRelations } from './../../../../cms-components/form/cms-category-form-component/form-sample-mapping-configurations';
-import { Action } from '@ngrx/store';
 
 @Injectable()
 export class FSCartEffects {
@@ -50,7 +50,7 @@ export class FSCartEffects {
         )
         .pipe(
           switchMap((cart: any) => {
-            let actions: Action[] = [];
+            const actions: Action[] = [];
             const cartCode =
               payload.userId === 'anonymous' ? payload.cartId : cart.cartCode;
 

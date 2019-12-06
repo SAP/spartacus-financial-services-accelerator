@@ -81,36 +81,71 @@ export class QuoteService {
         const entry: FSOrderEntry = cart.deliveryOrderGroups[0].entries[0];
         const product: FSProduct = entry.product;
         const category = product.defaultCategory.code;
-        if (entry.formDataData && entry.formDataData.length > 0) {
-          const personalDetailsFormDataId = entry.formDataData[0].id;
-          const personalDetailsFormId = categoryFormRelations.find(
-            mapping => mapping.categoryCode === category
-          ).personalDetailsFormId;
 
-          if (personalDetailsFormId && personalDetailsFormId) {
-            this.formDataService.setFormDataToLocalStorage(
-              personalDetailsFormId,
-              personalDetailsFormDataId
-            );
-          }
-        }
+        const personalDetailsForm = this.getPersonalDetailsFormFromEntry(
+          entry,
+          category
+        );
 
-        if (cart.insuranceQuote && cart.insuranceQuote.quoteDetails) {
-          const chooseCoverFormId = categoryFormRelations.find(
-            mapping => mapping.categoryCode === category
-          ).chooseCoverFormId;
+        this.putFormsInLocalStorage(
+          personalDetailsForm.formId,
+          personalDetailsForm.dataId
+        );
 
-          const chooseCoverFormDataId = cart.insuranceQuote.quoteDetails.entry
-            .filter(details => details.key === 'formId')
-            .map(mapEntry => mapEntry.value)[0];
-          if (chooseCoverFormId && chooseCoverFormDataId) {
-            this.formDataService.setFormDataToLocalStorage(
-              chooseCoverFormId,
-              chooseCoverFormDataId
-            );
-          }
-        }
+        const chooseCoverForm = this.getChooseCoverFormFromQuote(
+          cart.insuranceQuote,
+          category
+        );
+
+        this.putFormsInLocalStorage(
+          chooseCoverForm.formId,
+          chooseCoverForm.dataId
+        );
       }
     });
+  }
+
+  protected getPersonalDetailsFormFromEntry(
+    entry: FSOrderEntry,
+    category: string
+  ): { formId: string; dataId: string } {
+    let formId;
+    let dataId;
+    if (entry.formDataData && entry.formDataData.length > 0) {
+      formId = entry.formDataData[0].id;
+      dataId = categoryFormRelations.find(
+        mapping => mapping.categoryCode === category
+      ).personalDetailsFormId;
+    }
+    return { formId: formId, dataId: dataId };
+  }
+
+  protected getChooseCoverFormFromQuote(
+    insuranceQuote: any,
+    category: string
+  ): { formId: string; dataId: string } {
+    let formId;
+    let dataId;
+
+    if (insuranceQuote && insuranceQuote.quoteDetails) {
+      formId = categoryFormRelations.find(
+        mapping => mapping.categoryCode === category
+      ).chooseCoverFormId;
+
+      dataId = insuranceQuote.quoteDetails.entry
+        .filter(details => details.key === 'formId')
+        .map(mapEntry => mapEntry.value)[0];
+
+      return { formId: formId, dataId: dataId };
+    }
+  }
+
+  private putFormsInLocalStorage(formDefinitionId: string, formDataId: string) {
+    if (formDefinitionId && formDataId) {
+      this.formDataService.setFormDataToLocalStorage(
+        formDefinitionId,
+        formDataId
+      );
+    }
   }
 }
