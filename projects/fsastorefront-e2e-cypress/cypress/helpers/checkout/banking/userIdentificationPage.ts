@@ -1,5 +1,5 @@
 export function checkUserIdentificationPage() {
-  cy.get('h2.main-heading').contains('Your Current Account Insurance');
+  cy.get('h2.heading-headline').contains('Your Current Account Insurance');
   cy.get('div.progress-inner-wrapper').should('have.length', 5);
   cy.get('cx-paragraph').findByText('User Identification');
   cy.get('fsa-select-identification')

@@ -39,10 +39,6 @@ context('Current AccountCheckout', () => {
     currentAccount.checkOptionalProductsAddTransactionChest();
   });
 
-  it('Should Continue in checkout', () => {
-    buttons.clickNextButton();
-  });
-
   it('Should register user in checkout', () => {
     register.populateRegistrationForm(registrationUser);
     cy.wait(3000);
