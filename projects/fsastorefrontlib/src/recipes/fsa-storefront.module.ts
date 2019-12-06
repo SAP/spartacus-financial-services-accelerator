@@ -15,6 +15,7 @@ import { fsaRoutingConfig } from '../cms-structure/routing/default-fsa-routing-c
 import { CheckoutModule } from '../cms-components/checkout/checkout.module';
 import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa-checkout-config';
 import { fsaOccProductConfig } from '../occ/services/default-occ-fsa-product-config';
+import { fstranslationsDe } from '../assets/translations/index_de';
 
 @NgModule({
   imports: [
@@ -28,14 +29,16 @@ import { fsaOccProductConfig } from '../occ/services/default-occ-fsa-product-con
         resources: {
           en: translations.en,
         },
-        chunks: translationChunksConfig,
+        chunks: translationChunksConfig
       },
     }),
     ConfigModule.withConfig({
       i18n: {
         resources: {
-          en: fstranslations.en,
+          en: fstranslations,
+          de: fstranslationsDe
         },
+        fallbackLang: 'en'
       },
     }),
     ConfigModule.withConfig(fsaLayoutConfig),

@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment';
         baseSite: [
           'insurance',
         ],
-        language: ['en'],
+        language: ['en', 'de'],
         currency: ['EUR'],
         urlParameters: ['baseSite', 'language', 'currency'],
       },
@@ -35,4 +35,4 @@ import { environment } from 'src/environments/environment';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
