@@ -5,17 +5,6 @@ import { YFormData, YFormDefinition } from './../../models/form-occ.models';
 import { OccFormService } from '../../../occ/services/form/occ-form.service';
 import { of, Observable } from 'rxjs';
 
-const mockFormData = {
-  general: 'generalSection',
-  driver: 'driverSection',
-  button: 'submit',
-};
-
-const mockFilteredData = {
-  general: 'generalSection',
-  driver: 'driverSection',
-};
-
 const mockData: Observable<YFormData> = of({
   formDefinitionId: 'formDefinitionId',
   id: 'formDataId',
@@ -84,7 +73,4 @@ describe('FormDataService', () => {
     );
   });
 
-  it('should filter data', () => {
-    expect(service.filterData(mockFormData)).toEqual(mockFilteredData);
-  });
 });
