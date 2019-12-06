@@ -21,14 +21,9 @@ export class PersonalDetailsNavigationComponent implements OnInit {
 
   subscription = new Subscription();
   checkoutStepUrlNext: string;
-  checkoutStepUrlPrevious: string;
 
   ngOnInit() {
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-      this.activatedRoute
-    );
-
-    this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(
       this.activatedRoute
     );
   }

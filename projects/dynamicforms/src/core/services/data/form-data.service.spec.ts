@@ -1,3 +1,4 @@
+import { I18nTestingModule } from '@spartacus/core';
 import { TestBed } from '@angular/core/testing';
 
 import { FormDataService } from './form-data.service';
@@ -44,6 +45,7 @@ describe('FormDataService', () => {
   beforeEach(() => {
     mockYFormService = new MockOccYFormService();
     TestBed.configureTestingModule({
+      imports: [I18nTestingModule],
       providers: [
         FormDataService,
         { provide: OccFormService, useValue: mockYFormService },
@@ -72,5 +74,4 @@ describe('FormDataService', () => {
       mockDefinition
     );
   });
-
 });
