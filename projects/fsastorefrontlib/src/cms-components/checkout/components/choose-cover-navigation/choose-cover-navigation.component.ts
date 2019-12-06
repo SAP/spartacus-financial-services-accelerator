@@ -1,4 +1,3 @@
-import { YFormData } from './../../../../../../dynamicforms/src/core/models/form-occ.models';
 import { FormDataService } from '@fsa/dynamicforms';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/fs-checkout-config.service';
 import { Component, OnInit } from '@angular/core';
