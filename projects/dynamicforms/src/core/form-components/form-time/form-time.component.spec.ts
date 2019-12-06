@@ -1,4 +1,3 @@
-import { DynamicFormModule } from '@fsa/dynamicforms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormTimeComponent } from './form-time.component';
@@ -9,7 +8,6 @@ describe('FormTimeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [DynamicFormModule],
       declarations: [FormTimeComponent],
     }).compileComponents();
   }));
