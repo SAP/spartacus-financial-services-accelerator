@@ -2,11 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormDataService } from '@fsa/dynamicforms';
 import { select, Store } from '@ngrx/store';
 import { AuthService, CartActions, CartService } from '@spartacus/core';
-import { FSProduct } from 'fsastorefrontlib/occ/occ-models';
-import {
-  FSCart,
-  FSOrderEntry,
-} from 'projects/fsastorefrontlib/src/occ/occ-models';
+import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
