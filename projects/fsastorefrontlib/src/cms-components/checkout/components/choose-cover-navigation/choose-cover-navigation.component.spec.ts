@@ -28,9 +28,9 @@ describe('ChooseCoverNavigationComponent', () => {
           provide: FormDataService,
           useValue: FormDataService,
         },
-        { 
-          provide: RoutingService, 
-          useValue: MockRoutingService 
+        {
+          provide: RoutingService,
+          useValue: MockRoutingService,
         },
         {
           provide: FSCheckoutConfigService,
