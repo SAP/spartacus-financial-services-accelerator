@@ -266,6 +266,94 @@ export class FormSampleConfigurations {
               ],
               validation: [DefaultFormValidators.required],
             },
+            {
+              type: 'datepicker',
+              label: 'If you have a car, please tell us when your insurance is due for renewal',
+              name: 'coverageStartDate',
+              validation: [
+                DefaultFormValidators.required,
+              ],
+            },
+          ],
+        },
+        {
+          groupCode: 'propertyAddress',
+          fieldConfigs: [
+            {
+              type: 'title',
+              label: 'Your Property Address',
+              name: 'propertyAddress',
+            },
+            {
+              type: 'input',
+              label: 'Address Line 1',
+              name: 'addressLine1',
+              validation: [
+                DefaultFormValidators.required,
+              ],
+            },
+            {
+              type: 'input',
+              label: 'Address Line 2',
+              name: 'addressLine2',
+            },
+            {
+              type: 'input',
+              label: 'City',
+              name: 'city',
+              validation: [
+                DefaultFormValidators.required,
+              ],
+            },
+            {
+              type: 'input',
+              label: 'Vehicle Owner Postal Code',
+              name: 'vehicleOwnerPostalCode',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.minLength(1),
+                DefaultFormValidators.regexValidator(
+                  DefaultFormValidators.postalCodeRegex
+                ),
+              ],
+              error: 'forms.containAtLeastOneNumber',
+            },
+            {
+              type: 'select',
+              label: 'Country',
+              name: 'country',
+              options: [
+                {
+                  name: 'AT',
+                  label: 'Austria',
+                },
+                {
+                  name: 'CA',
+                  label: 'Canada',
+                },
+                {
+                  name: 'FR',
+                  label: 'France',
+                },
+                {
+                  name: 'DE',
+                  label: 'Germany',
+                },
+                {
+                  name: 'PL',
+                  label: 'Poland',
+                },
+                {
+                  name: 'RS',
+                  label: 'Serbia',
+                },
+                {
+                  name: 'US',
+                  label: 'United States',
+                },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
           ],
         },
       ],
@@ -1048,6 +1136,8 @@ export class FormSampleConfigurations {
             },
             {
               type: 'select',
+              label: 'Country',
+              name: 'country',
               options: [
                 {
                   name: 'AT',
@@ -1078,8 +1168,6 @@ export class FormSampleConfigurations {
                   label: 'United States',
                 },
               ],
-              label: 'Country',
-              name: 'country',
               validation: [DefaultFormValidators.required],
             },
             {
