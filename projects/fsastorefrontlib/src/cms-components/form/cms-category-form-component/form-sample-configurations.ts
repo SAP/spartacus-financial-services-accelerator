@@ -568,7 +568,7 @@ export class FormSampleConfigurations {
                 { name: '3', label: '3' },
                 { name: '4', label: '4' },
               ],
-              label: 'Number of Drivers',
+              label: 'Number of Additional Drivers',
               name: 'numberOfDrivers',
               validation: [
                 DefaultFormValidators.required,
