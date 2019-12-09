@@ -1,4 +1,6 @@
 export interface CssClass {
+  form?: string;
+  controlElement?: string;
   formTitle?: string;
   inputWrapper?: string;
   label?: string;
@@ -6,7 +8,7 @@ export interface CssClass {
   radioInputWrapper?: string;
   radioInput?: string;
   radioLabel?: string;
-  radioOptionLabel: string;
+  radioOptionLabel?: string;
   validatorMessageWrapper?: string;
   validatorMessage?: string;
   submitButton?: string;

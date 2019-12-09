@@ -7,16 +7,17 @@ import {
   Output,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { YFormData } from '@fsa/dynamicforms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GeneralHelpers } from '../../helpers/helpers';
+import { FormConfig } from '../../models/form-config';
 import {
   FieldConfig,
   FormDefinition,
 } from '../../models/form-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 import { FormDataService } from '../../services/data/form-data.service';
-import { YFormData } from './../../models/form-occ.models';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -47,7 +48,8 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
   constructor(
     private formService: FormBuilderService,
-    private formDataService: FormDataService
+    private formDataService: FormDataService,
+    public formConfig: FormConfig
   ) {}
 
   ngOnInit() {

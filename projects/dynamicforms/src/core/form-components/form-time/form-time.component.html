@@ -6,10 +6,10 @@
   <div [ngClass]="formConfig.cssClass.inputWrapper">
     <label [ngClass]="formConfig.cssClass.label">{{ config.label }}</label>
     <input
-      class="col-xs-12 col-md-6"
+      [ngClass]="formConfig.cssClass.input"
       type="time"
       [formControlName]="config.name"
-      name="{{ config.name }}"
+      [attr.name]="config.name"
     />
   </div>
   <cx-form-error-notice

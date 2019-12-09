@@ -116,8 +116,12 @@ export class FormSampleConfigurations {
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
+                DefaultFormValidators.compareDates(
+                  'vehicleYear',
+                  'shouldBeLess'
+                ),
               ],
-              error: 'forms.dateInPast',
+              error: 'forms.afterVehicleManufacture',
             },
             {
               type: 'input',
@@ -552,7 +556,7 @@ export class FormSampleConfigurations {
               name: 'costOfTrip',
               validation: [
                 DefaultFormValidators.required,
-                DefaultFormValidators.min(0),
+                DefaultFormValidators.min(1),
                 DefaultFormValidators.max(1000000),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],

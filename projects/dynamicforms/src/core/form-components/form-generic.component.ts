@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, HostBinding } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from '../models/form-config.interface';
 import { FormConfig } from '../models/form-config';
@@ -10,6 +10,7 @@ export class FormGenericComponent {
     public formConfig: FormConfig,
     protected formService: OccMockFormService
   ) {}
+  @HostBinding('class') class = this.formConfig.cssClass.controlElement;
   config: FieldConfig;
   group: FormGroup;
 }
