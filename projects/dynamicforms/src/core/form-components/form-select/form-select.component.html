@@ -7,7 +7,7 @@
     <label [ngClass]="formConfig.cssClass.label">{{ config.label }}</label>
     <select
       [ngClass]="formConfig.cssClass.input"
-      name="{{ config.name }}"
+      [attr.name]="config.name"
       formControlName="{{ config.name }}"
     >
       <option value="pleaseSelect" [selected]="'pleaseSelect'" disabled>{{

@@ -9,7 +9,7 @@
       [ngClass]="formConfig.cssClass.input"
       type="date"
       [formControlName]="config.name"
-      name="{{ config.name }}"
+      [attr.name]="config.name"
     />
   </div>
   <cx-form-error-notice
