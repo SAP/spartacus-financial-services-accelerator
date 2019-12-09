@@ -6,11 +6,11 @@
   <div [ngClass]="formConfig.cssClass.inputWrapper">
     <label [ngClass]="formConfig.cssClass.label">{{ config.label }}</label>
     <textarea
-      class="col-xs-12 col-md-6"
+      [ngClass]="formConfig.cssClass.input"
       [attr.placeholder]="config.placeholder"
       [formControlName]="config.name"
       rows="10"
-      name="{{ config.name }}"
+      [attr.name]="config.name"
     ></textarea>
   </div>
   <cx-form-error-notice

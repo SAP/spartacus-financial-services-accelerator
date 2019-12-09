@@ -8,7 +8,7 @@
       [ngClass]="formConfig.cssClass.submitButton"
       [disabled]="config.disabled"
       type="submit"
-      name="{{ config.name }}"
+      [attr.name]="config.name"
     >
       {{ config.label }}
     </button>

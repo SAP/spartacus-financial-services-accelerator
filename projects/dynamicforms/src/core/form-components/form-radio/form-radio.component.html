@@ -9,7 +9,7 @@
       <input
         [ngClass]="formConfig.cssClass.radioInput"
         type="radio"
-        name="{{ config.name }}"
+        [attr.name]="config.name"
         value="{{ option.name }}"
         [formControlName]="config.name"
       />

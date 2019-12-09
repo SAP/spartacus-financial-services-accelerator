@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
 import { FormGenericComponent } from '../form-generic.component';
 
 @Component({
@@ -8,4 +8,5 @@ import { FormGenericComponent } from '../form-generic.component';
 export class FormErrorNoticeComponent extends FormGenericComponent {
   @Input() warn: any;
   @Input() parentConfig: any;
+  @HostBinding('class') class = '';
 }
