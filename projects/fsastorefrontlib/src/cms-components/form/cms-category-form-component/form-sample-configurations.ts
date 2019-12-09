@@ -20,11 +20,18 @@ export class FormSampleConfigurations {
               label: 'Cover Required',
               name: 'coverRequired',
               options: [
-                { name: 'cuildingAndContents', label: 'Building and Contents' },
-                { name: 'buildings', label: 'Buildings Only' },
-                { name: 'contents', label: 'Contents Only' },
+                { name: 'buildingAndContents', label: 'Building and Contents' },
+                { name: 'buildingsOnly', label: 'Buildings Only' },
+                { name: 'contentsOnly', label: 'Contents Only' },
               ],
-              validation: [DefaultFormValidators.required],
+              validation: [
+                DefaultFormValidators.required,
+                FormHelpers.shouldEnableTargetGroup({
+                  buildingAndContents: ['buildingCover', 'contentsCover'],
+                  buildingsOnly: ['buildingCover'],
+                  contentsOnly: ['contentsCover']
+                }),
+              ],
             },
             {
               type: 'datepicker',
@@ -182,6 +189,7 @@ export class FormSampleConfigurations {
               type: 'title',
               label: 'Your Building Cover',
               name: 'buildingCover',
+              hidden: true,
             },
             {
               type: 'select',
@@ -197,6 +205,7 @@ export class FormSampleConfigurations {
                 { name: '5', label: '5+' },
               ],
               validation: [DefaultFormValidators.required],
+              hidden: true,
             },
             {
               type: 'radio',
@@ -208,6 +217,7 @@ export class FormSampleConfigurations {
                 { name: 'no', label: 'No' },
               ],
               validation: [DefaultFormValidators.required],
+              hidden: true,
             },
           ],
         },
@@ -218,6 +228,7 @@ export class FormSampleConfigurations {
               type: 'title',
               label: 'Your Contents Cover',
               name: 'contentsCover',
+              hidden: true,
             },
             {
               type: 'radio',
@@ -229,6 +240,7 @@ export class FormSampleConfigurations {
                 { name: 'no', label: 'No' },
               ],
               validation: [DefaultFormValidators.required],
+              hidden: true,
             },
             {
               type: 'input',
@@ -241,6 +253,7 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.from10Kto1M',
+              hidden: true,
             },
             {
               type: 'input',
@@ -254,6 +267,7 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: 'forms.lessThan150',
+              hidden: true,
             },
             {
               type: 'radio',
@@ -265,6 +279,7 @@ export class FormSampleConfigurations {
                 { name: 'no', label: 'No' },
               ],
               validation: [DefaultFormValidators.required],
+              hidden: true,
             },
             {
               type: 'datepicker',
@@ -273,6 +288,7 @@ export class FormSampleConfigurations {
               validation: [
                 DefaultFormValidators.required,
               ],
+              hidden: true,
             },
           ],
         },
@@ -565,6 +581,8 @@ export class FormSampleConfigurations {
             },
             {
               type: 'select',
+              label: 'Number of Drivers',
+              name: 'numberOfDrivers',
               options: [
                 { name: '0', label: '0' },
                 { name: '1', label: '1' },
@@ -572,8 +590,6 @@ export class FormSampleConfigurations {
                 { name: '3', label: '3' },
                 { name: '4', label: '4' },
               ],
-              label: 'Number of Additional Drivers',
-              name: 'numberOfDrivers',
               validation: [
                 DefaultFormValidators.required,
                 FormHelpers.shouldEnableDependentGroup([
