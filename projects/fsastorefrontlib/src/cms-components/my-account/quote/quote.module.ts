@@ -44,11 +44,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
-        AccountMyQuotesSPAComponent: {
+        AccountMyQuotesFlex: {
           component: QuotesComponent,
-        },
-        CMSViewQuotesComponent: {
-          component: CMSViewQuotesComponent,
         },
       },
     }),

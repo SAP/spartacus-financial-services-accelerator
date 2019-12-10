@@ -94,7 +94,7 @@ export function populatePersonalDetailsForm() {
     cy.get('[name="firstName"]').type('Ben');
     cy.get('[name="lastName"]').type('Moore');
     cy.get('[name="age"]').type('30');
-    cy.get('[name="phoneNumber"]').type('1');
+    cy.get('[name="phoneNumber"]').type('111111');
     cy.get('[name="email"]').type('ben@moore.com');
     cy.get('[name="address1"]').type('Test address');
     cy.get('[name="city"]').type('Test city');
@@ -149,7 +149,10 @@ export function checkPaymentPage() {
       .type('113232');
   });
   cy.wait(1000);
-  cy.get('.btn-primary').click();
+
+  cy.get('.cx-checkout-btns').within(() => {
+    cy.get('.btn-primary').click();
+  });
 }
 
 export function placeOrderOnFinalReivew() {

@@ -15,7 +15,7 @@ export function checkAddOptionsPage() {
 }
 
 export function checkAddOptionsPageContent(addOptions: AddOptions) {
-  cy.get('h2.main-heading').contains(addOptions.title);
+  cy.get('h2.heading-headline').contains(addOptions.title);
   cy.get('fsa-add-options')
     .should('be.visible')
     .within(() => {

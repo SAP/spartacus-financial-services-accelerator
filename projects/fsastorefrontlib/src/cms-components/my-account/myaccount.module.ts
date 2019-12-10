@@ -2,29 +2,20 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
-  CmsConfig,
-  ConfigModule,
   I18nModule,
   CmsModule,
   AuthGuard,
-  RoutingConfig,
-  RoutesConfig,
+  ConfigModule,
+  CmsConfig,
 } from '@spartacus/core';
-import {
-  PageLayoutComponent,
-  CmsPageGuard,
-  PaymentMethodsComponent,
-  ConsentManagementComponent,
-  UpdatePasswordComponent,
-  UpdateEmailComponent,
-  CloseAccountComponent,
-} from '@spartacus/storefront';
+import { PageLayoutComponent, CmsPageGuard } from '@spartacus/storefront';
 import { FSUpdateProfileModule } from './update-profile/fs-update-profile.module';
 import { InboxModule } from './inbox/inbox.module';
 import { PolicyModule } from './policy/policy.module';
 import { QuoteModule } from './quote/quote.module';
 import { ClaimModule } from './claim/claim.module';
 import { PremiumCalendarModule } from './premium-calendar/premium-calendar.module';
+import { FSUpdateProfileComponent } from './update-profile/fs-update-profile.component';
 
 const routes: Routes = [
   {
@@ -112,27 +103,15 @@ const routes: Routes = [
     QuoteModule,
     ClaimModule,
     PremiumCalendarModule,
-    RouterModule,
-    RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
+    ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
-        AccountPaymentDetailsSPAComponent: {
-          component: PaymentMethodsComponent,
-        },
-        ConsentManagementComponent: {
-          component: ConsentManagementComponent,
-        },
-        UpdateEmailComponent: {
-          component: UpdateEmailComponent,
-        },
-        UpdatePasswordComponent: {
-          component: UpdatePasswordComponent,
-        },
-        AccountCloseAccountSPAComponent: {
-          component: CloseAccountComponent,
+        UpdateProfileComponent: {
+          component: FSUpdateProfileComponent,
         },
       },
     }),
+    RouterModule,
+    RouterModule.forChild(routes),
   ],
 })
 export class MyAccountModule {}
