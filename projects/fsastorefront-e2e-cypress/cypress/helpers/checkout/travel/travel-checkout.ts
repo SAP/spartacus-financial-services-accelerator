@@ -154,7 +154,7 @@ export function addPaymentMethod(userId: string) {
           billingAddress: {
             firstName: 'Test',
             lastName: 'User',
-            titleCode: 'Mr',
+            titleCode: 'mr',
             line1: 'Some address',
             line2: '',
             town: 'Town',
