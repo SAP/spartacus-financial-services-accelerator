@@ -120,42 +120,56 @@ export function checkQuoteReview() {
   cy.get('.primary-button').click();
 }
 
-export function checkPaymentPage() {
-  cy.get('cx-payment-form').within(() => {
-    cy.get('[bindValue="code"]').ngSelect('Visa');
-    cy.get('[formcontrolname="accountHolderName"]').type('Ben Moore');
-    cy.get('[formcontrolname="cardNumber"]').type('4111111111111111');
-    cy.get('[formcontrolname="cvn"]').type('1234');
-    cy.get('[bindValue="expiryMonth"]').ngSelect('08');
-    cy.get('[bindValue="expiryYear"]').ngSelect('2024');
-    cy.get('input[type="checkbox"]').click();
-  });
-  cy.get('.cx-payment-form-billing').within(() => {
-    cy.get('[bindvalue="isocode"]').ngSelect('Germany');
-    cy.get('[formcontrolname="firstName"]')
-      .clear()
-      .type('Ben');
-    cy.get('[formcontrolname="lastName"]')
-      .clear()
-      .type('Moore');
-    cy.get('[formcontrolname="line1"]')
-      .clear()
-      .type('Test Address 1');
-    cy.get('[formcontrolname="town"]')
-      .clear()
-      .type('Test City');
-    cy.get('[formcontrolname="postalCode"]')
-      .clear()
-      .type('113232');
-  });
-  cy.wait(1000);
+export function selectPaymentMethod() {
+  cy.get('.cx-card-title').should('contain', 'Default Payment Method');
+  cy.get('.card-header').should('contain', 'Selected');
+  cy.get('button.btn-primary').click();
+}
 
-  cy.get('.cx-checkout-btns').within(() => {
-    cy.get('.btn-primary').click();
-  });
+export function addPaymentMethod(userId: string) {
+  cy.wait(3000);
+  cy.get('fsa-add-options')
+    .first()
+    .then(test => {
+      const localData = JSON.parse(
+        localStorage.getItem('spartacus-local-data')
+      );
+      const cartId = localData.cart.active.value.content.code;
+      cy.request({
+        method: 'POST',
+        url: `${Cypress.env(
+          'API_URL'
+        )}/rest/v2/financial/users/${userId}/carts/${cartId}/paymentdetails`,
+        headers: {
+          Authorization: `bearer ${localData.auth.userToken.token.access_token}`,
+        },
+        body: {
+          accountHolderName: 'Test User',
+          cardNumber: '4111111111111111',
+          cardType: { code: 'visa' },
+          expiryMonth: '01',
+          expiryYear: '2125',
+          defaultPayment: true,
+          saved: true,
+          billingAddress: {
+            firstName: 'Test',
+            lastName: 'User',
+            titleCode: 'mr',
+            line1: 'Some address',
+            line2: '',
+            town: 'Town',
+            postalCode: 'H4B3L4',
+            country: { isocode: 'US' },
+          },
+        },
+      }).then(response => {
+        expect(response.status).to.eq(201);
+      });
+    });
 }
 
 export function placeOrderOnFinalReivew() {
+  cy.wait(5000);
   cy.get('fsa-final-review').within(() => {
     cy.get('.form-check-input').click();
     cy.get('.primary-button').click();
