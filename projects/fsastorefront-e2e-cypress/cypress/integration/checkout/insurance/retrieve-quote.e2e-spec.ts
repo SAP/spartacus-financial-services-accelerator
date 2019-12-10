@@ -1,6 +1,6 @@
-import * as register from '../../helpers/register';
-import { registrationUser } from '../../sample-data/users';
-import * as travelCheckout from '../../helpers/checkout/travel/travel-checkout';
+import * as register from '../../../helpers/register';
+import { registrationUser } from '../../../sample-data/users';
+import * as travelCheckout from '../../../helpers/checkout/travel/travel-checkout';
 
 context('Applications Page', () => {
   before(() => {

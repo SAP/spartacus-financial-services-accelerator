@@ -62,13 +62,13 @@ export function seachResultsButtons() {
 export function clickMoreInfoButton() {
   cy.get('button.primary-button')
     .eq(0)
-    .click()
+    .click({ force: true })
     .wait(1500);
 }
 
 export function clickGetAQuoteButton() {
   cy.get('button.secondary-button')
     .eq(0)
-    .click()
+    .click({ force: true })
     .wait(1500);
 }
