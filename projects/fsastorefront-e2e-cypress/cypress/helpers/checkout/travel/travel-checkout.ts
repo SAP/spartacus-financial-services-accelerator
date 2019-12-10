@@ -156,6 +156,7 @@ export function checkPaymentPage() {
 }
 
 export function placeOrderOnFinalReivew() {
+  cy.wait(5000);
   cy.get('fsa-final-review').within(() => {
     cy.get('.form-check-input').click();
     cy.get('.primary-button').click();
