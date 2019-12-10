@@ -29,7 +29,7 @@ export class FormSampleConfigurations {
                 FormHelpers.shouldEnableTargetGroup({
                   buildingAndContents: ['buildingCover', 'contentsCover'],
                   buildingsOnly: ['buildingCover'],
-                  contentsOnly: ['contentsCover']
+                  contentsOnly: ['contentsCover'],
                 }),
               ],
             },
@@ -283,11 +283,10 @@ export class FormSampleConfigurations {
             },
             {
               type: 'datepicker',
-              label: 'If you have a car, please tell us when your insurance is due for renewal',
+              label:
+                'If you have a car, please tell us when your insurance is due for renewal',
               name: 'coverageStartDate',
-              validation: [
-                DefaultFormValidators.required,
-              ],
+              validation: [DefaultFormValidators.required],
               hidden: true,
             },
           ],
@@ -304,9 +303,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Address Line 1',
               name: 'addressLine1',
-              validation: [
-                DefaultFormValidators.required,
-              ],
+              validation: [DefaultFormValidators.required],
             },
             {
               type: 'input',
@@ -317,9 +314,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'City',
               name: 'city',
-              validation: [
-                DefaultFormValidators.required,
-              ],
+              validation: [DefaultFormValidators.required],
             },
             {
               type: 'input',

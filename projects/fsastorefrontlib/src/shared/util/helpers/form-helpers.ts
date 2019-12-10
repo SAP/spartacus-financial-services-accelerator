@@ -21,16 +21,16 @@ export class FormHelpers {
       if (control.parent) {
         for (const key in dependentObject) {
           if (dependentObject.hasOwnProperty(key)) {
-            const targetField = dependentObject[key];
-            targetField.forEach(name => {
-              // console.log('key: ', key, ' control.value: ', control.value, 'name: ', name);
-              if (key === control.value) {
-                console.log(control.parent.parent.controls[name]);
-                control.parent.parent.controls[name].enable();
-              } else {
-                control.parent.parent.controls[name].disable();
-              }
+            const allTargetFields = dependentObject[key];
+            allTargetFields.forEach(name => {
+              control.parent.parent.controls[name].disable();
             });
+            const targetField = dependentObject[control.value];
+            if (targetField) {
+              targetField.forEach(field => {
+                control.parent.parent.controls[field].enable();
+              });
+            }
           }
         }
       }
