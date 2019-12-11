@@ -107,10 +107,11 @@ export class QuoteService {
     let formId;
     let dataId;
     if (entry.formDataData && entry.formDataData.length > 0) {
-      formId = entry.formDataData[0].id;
-      dataId = categoryFormRelations.find(
+      formId = categoryFormRelations.find(
         mapping => mapping.categoryCode === category
       ).personalDetailsFormId;
+
+      dataId = entry.formDataData[0].id;
     }
     return { formId: formId, dataId: dataId };
   }
