@@ -59,10 +59,10 @@ export class FSCartEffects {
               cart.entry.product &&
               cart.entry.product.defaultCategory
             ) {
-              const currentCategoryCode =
-                cart.entry.product.defaultCategory.code;
               const categoryFormRelation = categoryFormRelations.find(
-                mapping => mapping.categoryCode === currentCategoryCode
+                mapping =>
+                  mapping.categoryCode ===
+                  cart.entry.product.defaultCategory.code
               );
 
               let quoteDetails;

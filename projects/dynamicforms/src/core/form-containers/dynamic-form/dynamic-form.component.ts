@@ -114,11 +114,10 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
               this.value !== undefined &&
               this.valid
             ) {
-              const formData: YFormData = {
+              this.submit.emit({
                 refId: form.refId,
                 content: this.value,
-              };
-              this.submit.emit(formData);
+              });
             }
           })
         )

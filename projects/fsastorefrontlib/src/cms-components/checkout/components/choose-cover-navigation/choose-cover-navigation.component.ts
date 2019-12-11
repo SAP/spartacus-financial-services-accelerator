@@ -4,7 +4,6 @@ import { FormDataService } from '@fsa/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { of, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { FSCheckoutConfigService } from './../../../../core/checkout/services/fs-checkout-config.service';
 
 @Component({
   selector: 'fsa-choose-cover-navigation',
@@ -14,8 +13,7 @@ export class ChooseCoverNavigationComponent implements OnInit {
   constructor(
     protected formService: FormDataService,
     protected activatedRoute: ActivatedRoute,
-    protected routingService: RoutingService,
-    protected checkoutConfigService: FSCheckoutConfigService
+    protected routingService: RoutingService
   ) {}
 
   subscription = new Subscription();
