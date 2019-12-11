@@ -33,8 +33,6 @@ export class ChooseCoverNavigationComponent implements OnInit {
 
   navigateNext() {
     const formDataId = this.formService.getFormDataIdByCategory(this.categoryCode);
-    console.log(this.categoryCode);
-    console.log(formDataId);
     const formData: YFormData = {};
     if (formDataId) {
       formData.id = formDataId;

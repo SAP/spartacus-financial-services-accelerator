@@ -57,9 +57,7 @@ export class UserRequestService {
     stepStatus: string
   ): Observable<FSUserRequest> {
     const stepData = Object.assign(
-      {
-        yformConfigurator: data['id'],
-      },
+      {},
       userRequest.configurationSteps[stepIndex],
       {
         status: stepStatus,

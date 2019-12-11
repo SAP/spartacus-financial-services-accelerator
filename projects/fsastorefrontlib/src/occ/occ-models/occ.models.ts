@@ -7,6 +7,7 @@ import {
   User,
   UserSignUp,
 } from '@spartacus/core';
+import { YFormData } from '@fsa/dynamicforms';
 
 export interface FSProduct extends Product {
   price?: FSPrice;
@@ -60,7 +61,7 @@ export interface FSStepData {
   sequenceNumber?: string;
   pageLabelOrId?: string;
   status?: string;
-  yFormConfigurator?: string;
+  yformConfigurator?: YFormData;
 }
 
 export interface FSUserRequest {
