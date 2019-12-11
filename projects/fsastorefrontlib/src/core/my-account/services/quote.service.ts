@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
 import { FormDataService } from '@fsa/dynamicforms';
 import { select, Store } from '@ngrx/store';
-import { AuthService, CartActions, CartService } from '@spartacus/core';
+import {
+  AuthService,
+  CartActions,
+  CartService,
+  OrderEntry,
+} from '@spartacus/core';
 import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
-import { categoryFormRelations } from './../../../cms-components/form/cms-category-form-component/form-sample-mapping-configurations';
 import { QuoteDataService } from './quote-data.service';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class QuoteService {
@@ -74,74 +79,46 @@ export class QuoteService {
         cart.deliveryOrderGroups[0].entries &&
         cart.deliveryOrderGroups[0].entries.length > 0
       ) {
-        const entry: FSOrderEntry = cart.deliveryOrderGroups[0].entries[0];
-        const product: FSProduct = entry.product;
-        const category = product.defaultCategory.code;
+        const orderEntry: OrderEntry = cart.deliveryOrderGroups[0].entries[0];
+        const product: FSProduct = orderEntry.product;
 
-        const personalDetailsForm = this.getPersonalDetailsFormFromEntry(
-          entry,
-          category
-        );
-
-        this.putFormsInLocalStorage(
-          personalDetailsForm.formId,
-          personalDetailsForm.dataId
-        );
-        const chooseCoverForm = this.getChooseCoverFormFromQuote(
+        this.getPersonalDetailsForm(cart.deliveryOrderGroups[0].entries[0]);
+        this.getChooseCoverForm(
           cart.insuranceQuote,
-          category
-        );
-
-        this.putFormsInLocalStorage(
-          chooseCoverForm.formId,
-          chooseCoverForm.dataId
+          product.defaultCategory.code
         );
       }
     });
   }
 
-  protected getPersonalDetailsFormFromEntry(
-    entry: FSOrderEntry,
-    category: string
-  ): { formId: string; dataId: string } {
-    let formId;
-    let dataId;
+  protected getPersonalDetailsForm(entry: FSOrderEntry) {
     if (entry.formDataData && entry.formDataData.length > 0) {
-      formId = categoryFormRelations.find(
-        mapping => mapping.categoryCode === category
-      ).personalDetailsFormId;
-
-      dataId = entry.formDataData[0].id;
+      this.formDataService.setFormDataToLocalStorage(
+        entry.formDataData[0].formDefinition.formId,
+        entry.formDataData[0].id
+      );
     }
-    return { formId: formId, dataId: dataId };
   }
 
-  protected getChooseCoverFormFromQuote(
-    insuranceQuote: any,
-    category: string
-  ): { formId: string; dataId: string } {
-    let formId;
-    let dataId;
-
+  protected getChooseCoverForm(insuranceQuote: any, categoryCode: string) {
     if (insuranceQuote && insuranceQuote.quoteDetails) {
-      formId = categoryFormRelations.find(
-        mapping => mapping.categoryCode === category
-      ).chooseCoverFormId;
-
-      dataId = insuranceQuote.quoteDetails.entry
+      const dataId = insuranceQuote.quoteDetails.entry
         .filter(details => details.key === 'formId')
         .map(mapEntry => mapEntry.value)[0];
-
-      return { formId: formId, dataId: dataId };
-    }
-  }
-
-  private putFormsInLocalStorage(formDefinitionId: string, formDataId: string) {
-    if (formDefinitionId && formDataId) {
-      this.formDataService.setFormDataToLocalStorage(
-        formDefinitionId,
-        formDataId
-      );
+      this.formDataService
+        .getFormData(dataId)
+        .pipe(
+          map(formData => {
+            if (formData.formDefinition) {
+              this.formDataService.setFormDataToLocalStorage(
+                formData.formDefinition.formId,
+                dataId,
+                categoryCode
+              );
+            }
+          })
+        )
+        .subscribe();
     }
   }
 }

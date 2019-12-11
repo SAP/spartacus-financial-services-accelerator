@@ -29,9 +29,3 @@ export interface FieldOption {
   label: string;
   icon?: string;
 }
-
-export interface CategoryFormRelation {
-  categoryCode: string;
-  chooseCoverFormId?: string;
-  personalDetailsFormId?: string;
-}
