@@ -17,30 +17,25 @@ export class OccFormService {
     protected occEndpointService: OccEndpointsService
   ) {}
 
-  public saveFormData(
-    definitionId: string,
-    applicationId: string,
-    formContent: any,
-    formDataId?: string,
-    refId?: string
-  ) {
+  public saveFormData(formData: YFormData) {
+    console.log(formData);
     const url = this.getYFormsEndpoint() + '/data';
     let params = new HttpParams({
       fromString:
         FULL_PARAMS +
         '&definitionId=' +
-        definitionId +
+        formData.formDefinition.formId +
         '&applicationId=' +
-        applicationId,
+        formData.formDefinition.applicationId,
     });
-    if (formDataId) {
-      params = params.append('formDataId', formDataId);
+    if (formData.id) {
+      params = params.append('formDataId', formData.id);
     }
-    if (refId) {
-      params = params.append('refId', refId);
+    if (formData.refId) {
+      params = params.append('refId', formData.refId);
     }
     return this.http
-      .put<YFormData>(url, formContent, { params: params })
+      .put<YFormData>(url, formData.content, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 

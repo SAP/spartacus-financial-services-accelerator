@@ -105,19 +105,8 @@ export class FormDataService {
     };
   }
 
-  saveFormData(
-    formId: string,
-    applicationId: string,
-    formContent: any,
-    refId?: string
-  ): Observable<YFormData> {
-    return this.occYformsService.saveFormData(
-      formId,
-      applicationId,
-      formContent,
-      undefined,
-      refId
-    );
+  saveFormData(formData: YFormData): Observable<YFormData> {
+    return this.occYformsService.saveFormData(formData);
   }
 
   getFormData(formDataId: string): Observable<YFormData> {

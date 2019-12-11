@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormDataService } from '@fsa/dynamicforms';
+import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { CartService, RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/fs-checkout-config.service';
+import { FSOrderEntry } from 'projects/fsastorefrontlib/src/occ/occ-models';
 
 @Component({
   selector: 'fsa-personal-details-navigation',
@@ -42,12 +43,19 @@ export class PersonalDetailsNavigationComponent implements OnInit {
                 cart.deliveryOrderGroups.length > 0 &&
                 cart.deliveryOrderGroups[0].entries.length > 0
               ) {
-                this.formService.submit({
+                const entry: FSOrderEntry =
+                  cart.deliveryOrderGroups[0].entries[0];
+                const yFormData: YFormData = {
                   refId:
                     cart.code +
                     '_' +
                     cart.deliveryOrderGroups[0].entries[0].entryNumber,
-                });
+                };
+                if (entry.formDataData && entry.formDataData.length > 0) {
+                  yFormData.id = entry.formDataData[0].id;
+                }
+
+                this.formService.submit(yFormData);
               }
             })
           )
@@ -58,7 +66,7 @@ export class PersonalDetailsNavigationComponent implements OnInit {
           .getSubmittedForm()
           .pipe(
             map(formData => {
-              if (formData && formData.id) {
+              if (formData && formData.content) {
                 this.routingService.go(this.checkoutStepUrlNext);
               }
             })

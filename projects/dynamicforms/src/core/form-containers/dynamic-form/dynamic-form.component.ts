@@ -115,6 +115,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
               this.valid
             ) {
               this.submit.emit({
+                id: form.id,
                 refId: form.refId,
                 content: this.value,
               });

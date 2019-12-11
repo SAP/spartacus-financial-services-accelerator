@@ -11,4 +11,5 @@ export interface YFormDefinition {
   formId?: string;
   title?: string;
   content?: string;
+  applicationId?: string;
 }
