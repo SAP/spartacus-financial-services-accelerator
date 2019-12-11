@@ -49,9 +49,11 @@ export const fscommon = {
     paymentDetails: 'Zahlungsdetails',
     paymentFrequency: 'Zahlungsrythmus',
     paymentMethod: 'Zahlungsmethode',
-    confirmAndAgree: 'Hiermit bestätige ich, dass ich die Datenschutzbestimmungen gelesen habe und damit einverstanden bin.',
+    confirmAndAgree:
+      'Hiermit bestätige ich, dass ich die Datenschutzbestimmungen gelesen habe und damit einverstanden bin.',
     termsConditions: 'Allgemeine Geschäftsbedingungen',
-    noMessagesForGroup: 'Sie haben zur Zeit keine Nachrichten für die ausgewählte Gruppe',
+    noMessagesForGroup:
+      'Sie haben zur Zeit keine Nachrichten für die ausgewählte Gruppe',
     modifyPlan: 'Plan ändern',
     thankYou: 'Vielen Dank!',
     yearPerformanse: 'Jahresperformance',

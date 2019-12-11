@@ -14,5 +14,5 @@ export const fstranslations: TranslationResources = {
   quote,
   policy,
   premiumCalendar,
-  userRequest
+  userRequest,
 };

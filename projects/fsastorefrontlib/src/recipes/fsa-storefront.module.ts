@@ -29,16 +29,16 @@ import { fstranslationsDe } from '../assets/translations/index_de';
         resources: {
           en: translations.en,
         },
-        chunks: translationChunksConfig
+        chunks: translationChunksConfig,
       },
     }),
     ConfigModule.withConfig({
       i18n: {
         resources: {
           en: fstranslations,
-          de: fstranslationsDe
+          de: fstranslationsDe,
         },
-        fallbackLang: 'en'
+        fallbackLang: 'en',
       },
     }),
     ConfigModule.withConfig(fsaLayoutConfig),

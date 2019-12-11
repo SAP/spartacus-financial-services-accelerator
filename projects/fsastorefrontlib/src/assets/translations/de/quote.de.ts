@@ -10,7 +10,8 @@ export const quote = {
     viewYourQuotes: 'Angebote ansehen',
     youHaveNoQuotes: 'Sie haben zur Zeit keine Angebote',
     noActiveQuotes: 'Sie haben zur Zeit keine aktiven Angebote',
-    getQuoteBySelecting: 'Starten sie Ihr Angebot, indem Sie eine der obigen Versicherungsarten auswählen',
+    getQuoteBySelecting:
+      'Starten sie Ihr Angebot, indem Sie eine der obigen Versicherungsarten auswählen',
     quoteStatus: {
       title: 'Antragsstatus',
       ready: 'Bereit zum Abschließen',

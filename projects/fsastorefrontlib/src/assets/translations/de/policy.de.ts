@@ -12,7 +12,8 @@ export const policy = {
     policySummary: 'Policenübersicht',
     policyRequestSubmitted: 'Ihr Antrag wird übermittelt.',
     yourPolicyHasBeenSubmited: 'Ihr Antrag wurde bereits übermittelt',
-    finishQuoteToGetPolicy: 'Sie müssen Ihren Antrag abschließen, um eine Police zu erhalten.',
+    finishQuoteToGetPolicy:
+      'Sie müssen Ihren Antrag abschließen, um eine Police zu erhalten.',
     noValidPolicies: 'Sie haben keine gültigen Policen.',
     documentName: 'Name',
     documentIssueDate: 'Erstelldatum',
