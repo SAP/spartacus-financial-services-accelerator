@@ -4,6 +4,7 @@ import { FormDataService } from '@fsa/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { of, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { YFormData } from 'dynamicforms/src/core';
 
 @Component({
   selector: 'fsa-choose-cover-navigation',
@@ -18,26 +19,38 @@ export class ChooseCoverNavigationComponent implements OnInit {
 
   subscription = new Subscription();
 
-  ngOnInit() {}
+  categoryCode: string;
+
+  ngOnInit() {
+    this.subscription.add(
+      this.activatedRoute.params.pipe(
+        map(params => {
+            this.categoryCode = params['formCode'];
+        })
+      ).subscribe()
+    );
+  }
 
   navigateNext() {
-    this.formService.submit({});
+    const formDataId = this.formService.getFormDataIdByCategory(this.categoryCode);
+    console.log(this.categoryCode);
+    console.log(formDataId);
+    const formData: YFormData = {};
+    if (formDataId) {
+      formData.id = formDataId;
+    }
+    this.formService.submit(formData);
     this.subscription.add(
       this.formService
         .getSubmittedForm()
         .pipe(
-          switchMap(formData => {
-            if (formData && formData.id) {
-              return this.activatedRoute.params.pipe(
-                map(params => {
-                  this.routingService.go({
-                    cxRoute: 'category',
-                    params: { code: params['formCode'] },
-                  });
-                })
-              );
+          map(data => {
+            if (data && data.content) {
+              this.routingService.go({
+                cxRoute: 'category',
+                params: {code: this.categoryCode}
+              });
             }
-            return of(null);
           })
         )
         .subscribe()

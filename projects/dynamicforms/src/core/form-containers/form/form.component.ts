@@ -56,7 +56,8 @@ export class FormComponent implements OnDestroy {
             });
             this.formDataService.setFormDataToLocalStorage(
               this.formId,
-              response.id
+              response.id,
+              this.formCategoryCode
             );
             this.formDataService.setSubmittedForm(response);
           })
