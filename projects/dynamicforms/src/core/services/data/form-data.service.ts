@@ -29,13 +29,13 @@ export class FormDataService {
     this.submittedForm.next(formData);
   }
 
-  getFormDataIdFromLocalStorage(categoryCode: string): string {
+  getFormDataIdFromLocalStorage(formDefinitionId: string): string {
     const formLocalStorageData = JSON.parse(
       localStorage.getItem(this.formsLocalStorageKey)
     );
     if (formLocalStorageData) {
       return formLocalStorageData
-        .filter(formObj => formObj.formCategoryCode === categoryCode)
+        .filter(formObj => formObj.formDefinitionId === formDefinitionId)
         .map(formObj => formObj.formDataId)[0];
     }
     return null;
