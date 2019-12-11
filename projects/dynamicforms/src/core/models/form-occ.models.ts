@@ -1,11 +1,8 @@
-import { FormDefinition } from 'dynamicforms/src/core';
-
 export interface YFormData {
   id?: string;
   content?: string;
   type?: string;
-  formDefinitionId?: string;
-  formDefinition?: FormDefinition;
+  formDefinition?: YFormDefinition;
   categoryCode?: string;
   refId?: string;
 }

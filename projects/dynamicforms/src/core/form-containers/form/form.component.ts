@@ -44,14 +44,15 @@ export class FormComponent implements OnDestroy {
           .subscribe(response => {
             this.formDataService.currentForm$.next({
               id: response.id,
-              formDefinitionId: this.formId,
+              formDefinition: {
+                formId: this.formId
+              },
               content: response.content,
               categoryCode: this.formCategoryCode,
             });
             this.formDataService.setFormDataToLocalStorage(
               this.formId,
-              response.id,
-              this.formCategoryCode
+              response.id
             );
             this.formDataService.setSubmittedForm(response);
           })
