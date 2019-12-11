@@ -1,8 +1,8 @@
-import * as register from '../../helpers/register';
+import * as register from '../../../helpers/register';
 import {
   registrationUser,
   registrationUserWithoutPhone,
-} from '../../sample-data/users';
+} from '../../../sample-data/users';
 
 context('Register', () => {
   before(() => {

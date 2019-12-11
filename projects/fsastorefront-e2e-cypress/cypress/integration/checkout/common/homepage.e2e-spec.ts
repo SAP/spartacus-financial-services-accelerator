@@ -43,7 +43,7 @@ context('Homepage', () => {
       cy.get('cx-navigation-ui > nav').should('have.length', 4);
       cy.get('h5').should('have.length', 4);
       cy.get('cx-generic-link').should('have.length', 17);
-      cy.get('.notice').should(
+      cy.get('.cx-notice').should(
         'contain',
         'SAP SE or an SAP affiliate company. All rights reserved.'
       );

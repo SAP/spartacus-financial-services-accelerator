@@ -56,13 +56,10 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
-        AccountMyPoliciesSPAComponent: {
+        AccountMyPoliciesFlex: {
           component: PoliciesComponent,
         },
-        CMSViewPoliciesComponent: {
-          component: CMSViewPoliciesComponent,
-        },
-        AccountPolicyDetailsSPAComponent: {
+        AccountPolicyDetailsFlex: {
           component: PolicyDetailsComponent,
         },
       },

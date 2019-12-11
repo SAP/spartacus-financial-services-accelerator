@@ -47,6 +47,6 @@ Cypress.Commands.add(
     dropdownItem: string;
   }) => {
     cy.get('[aria-label="' + menuOption + '"]').invoke('mouseover');
-    cy.findByText(dropdownItem).click({ force: true });
+    cy.findAllByText(dropdownItem).click({ multiple: true, force: true });
   }
 );

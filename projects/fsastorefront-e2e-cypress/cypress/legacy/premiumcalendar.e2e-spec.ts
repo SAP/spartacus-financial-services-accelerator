@@ -1,5 +1,5 @@
-import * as register from '../../helpers/register';
-import { donnaMooreUser } from '../../sample-data/users';
+import * as register from '../helpers/register';
+import { donnaMooreUser } from '../sample-data/users';
 
 context('PremiumCalendar', () => {
   before(() => {
