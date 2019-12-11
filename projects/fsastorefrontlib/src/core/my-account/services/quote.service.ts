@@ -87,7 +87,6 @@ export class QuoteService {
           personalDetailsForm.formId,
           personalDetailsForm.dataId
         );
-
         const chooseCoverForm = this.getChooseCoverFormFromQuote(
           cart.insuranceQuote,
           category

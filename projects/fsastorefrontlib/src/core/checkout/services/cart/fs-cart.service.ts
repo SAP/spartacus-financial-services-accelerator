@@ -80,7 +80,7 @@ export class FSCartService extends CartService {
       });
   }
 
-  reLoadCart() {
+  loadCart() {
     this.store.dispatch(
       new CartActions.LoadCart({
         cartId: this.fsCartData.cartId,

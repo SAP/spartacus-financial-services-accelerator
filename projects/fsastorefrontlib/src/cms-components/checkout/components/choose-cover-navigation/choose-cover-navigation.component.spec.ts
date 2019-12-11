@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { FormDataService } from '@fsa/dynamicforms';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { of } from 'rxjs';
-import { FSCheckoutConfigService } from './../../../../core/checkout/services/fs-checkout-config.service';
 import { ChooseCoverNavigationComponent } from './choose-cover-navigation.component';
 import createSpy = jasmine.createSpy;
 
@@ -31,10 +30,6 @@ describe('ChooseCoverNavigationComponent', () => {
         {
           provide: RoutingService,
           useValue: MockRoutingService,
-        },
-        {
-          provide: FSCheckoutConfigService,
-          useValue: FSCheckoutConfigService,
         },
         {
           provide: ActivatedRoute,
