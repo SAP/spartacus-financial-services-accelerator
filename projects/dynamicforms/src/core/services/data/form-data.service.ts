@@ -29,19 +29,23 @@ export class FormDataService {
     this.submittedForm.next(formData);
   }
 
-  getFormDataIdFromLocalStorage(formDefinitionId: string): string {
+  getFormDataIdFromLocalStorage(categoryCode: string): string {
     const formLocalStorageData = JSON.parse(
       localStorage.getItem(this.formsLocalStorageKey)
     );
     if (formLocalStorageData) {
       return formLocalStorageData
-        .filter(formObj => formObj.formDefinitionId === formDefinitionId)
+        .filter(formObj => formObj.formCategoryCode === categoryCode)
         .map(formObj => formObj.formDataId)[0];
     }
     return null;
   }
 
-  setFormDataToLocalStorage(formDefinitionId: string, formDataId: string) {
+  setFormDataToLocalStorage(
+    formDefinitionId: string,
+    formDataId: string,
+    formCategoryCode: string
+  ) {
     let formLocalStorageData = JSON.parse(
       localStorage.getItem(this.formsLocalStorageKey)
     );
@@ -51,7 +55,11 @@ export class FormDataService {
       formLocalStorageData.length === 0
     ) {
       formLocalStorageData = [
-        this.createDataForLocalStorage(formDataId, formDefinitionId),
+        this.createDataForLocalStorage(
+          formDataId,
+          formDefinitionId,
+          formCategoryCode
+        ),
       ];
     } else {
       const index = formLocalStorageData
@@ -60,7 +68,11 @@ export class FormDataService {
       index !== -1
         ? (formLocalStorageData[index].formDataId = formDataId)
         : formLocalStorageData.push(
-            this.createDataForLocalStorage(formDataId, formDefinitionId)
+            this.createDataForLocalStorage(
+              formDataId,
+              formDefinitionId,
+              formCategoryCode
+            )
           );
     }
     localStorage.setItem(
@@ -69,10 +81,15 @@ export class FormDataService {
     );
   }
 
-  createDataForLocalStorage(formDataId, formDefinitionId): FormStorageObject {
+  createDataForLocalStorage(
+    formDataId,
+    formDefinitionId,
+    formCategoryCode
+  ): FormStorageObject {
     return {
       formDataId: formDataId,
       formDefinitionId: formDefinitionId,
+      formCategoryCode: formCategoryCode,
     };
   }
 

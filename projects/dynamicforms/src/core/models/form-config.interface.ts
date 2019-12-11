@@ -33,5 +33,4 @@ export interface FieldOption {
 export interface CategoryFormRelation {
   categoryCode: string;
   chooseCoverFormId?: string;
-  personalDetailsFormId?: string;
 }

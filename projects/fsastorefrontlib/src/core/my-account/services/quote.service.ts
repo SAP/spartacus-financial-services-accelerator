@@ -78,15 +78,14 @@ export class QuoteService {
         const product: FSProduct = entry.product;
         const category = product.defaultCategory.code;
 
-        const personalDetailsForm = this.getPersonalDetailsFormFromEntry(
-          entry,
-          category
-        );
+        const personalDetailsForm = this.getPersonalDetailsFormFromEntry(entry);
 
         this.putFormsInLocalStorage(
           personalDetailsForm.formId,
-          personalDetailsForm.dataId
+          personalDetailsForm.dataId,
+          personalDetailsForm.categoryCode
         );
+
         const chooseCoverForm = this.getChooseCoverFormFromQuote(
           cart.insuranceQuote,
           category
@@ -94,26 +93,30 @@ export class QuoteService {
 
         this.putFormsInLocalStorage(
           chooseCoverForm.formId,
-          chooseCoverForm.dataId
+          chooseCoverForm.dataId,
+          category
         );
       }
     });
   }
 
   protected getPersonalDetailsFormFromEntry(
-    entry: FSOrderEntry,
-    category: string
-  ): { formId: string; dataId: string } {
+    entry: FSOrderEntry
+  ): { formId: string; dataId: string; categoryCode: string } {
     let formId;
     let dataId;
-    if (entry.formDataData && entry.formDataData.length > 0) {
-      formId = categoryFormRelations.find(
-        mapping => mapping.categoryCode === category
-      ).personalDetailsFormId;
+    let categoryCode;
+    if (
+      entry.formDataData &&
+      entry.formDataData.length > 0 &&
+      entry.formDataData[0].formDefinition
+    ) {
+      formId = entry.formDataData[0].formDefinition.formId;
 
       dataId = entry.formDataData[0].id;
+      categoryCode = entry.formDataData[0].category.code;
     }
-    return { formId: formId, dataId: dataId };
+    return { formId: formId, dataId: dataId, categoryCode: categoryCode };
   }
 
   protected getChooseCoverFormFromQuote(
@@ -136,11 +139,16 @@ export class QuoteService {
     }
   }
 
-  private putFormsInLocalStorage(formDefinitionId: string, formDataId: string) {
-    if (formDefinitionId && formDataId) {
+  private putFormsInLocalStorage(
+    formDefinitionId: string,
+    formDataId: string,
+    categoryCode: string
+  ) {
+    if (formDefinitionId && formDataId && categoryCode) {
       this.formDataService.setFormDataToLocalStorage(
         formDefinitionId,
-        formDataId
+        formDataId,
+        categoryCode
       );
     }
   }

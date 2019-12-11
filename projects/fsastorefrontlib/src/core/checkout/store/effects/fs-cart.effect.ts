@@ -8,7 +8,6 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 import { OccFSCartAdapter } from '../../../../occ/services/cart/occ-fs-cart.adapter';
 import * as fromQuoteActions from '../../../my-account/store/actions/quote.action';
 import * as fromActions from '../actions/fs-cart.action';
-import { categoryFormRelations } from './../../../../cms-components/form/cms-category-form-component/form-sample-mapping-configurations';
 
 @Injectable()
 export class FSCartEffects {
@@ -59,40 +58,29 @@ export class FSCartEffects {
               cart.entry.product &&
               cart.entry.product.defaultCategory
             ) {
-              const categoryFormRelation = categoryFormRelations.find(
-                mapping =>
-                  mapping.categoryCode ===
-                  cart.entry.product.defaultCategory.code
+              let quoteDetails;
+              const formDataId = this.formDataService.getFormDataIdFromLocalStorage(
+                cart.entry.product.defaultCategory.code
               );
 
-              let quoteDetails;
-              if (
-                categoryFormRelation &&
-                categoryFormRelation.chooseCoverFormId
-              ) {
-                quoteDetails = {
-                  quoteDetails: {
-                    entry: [
-                      {
-                        key: 'formId',
-                        value: this.formDataService.getFormDataIdFromLocalStorage(
-                          categoryFormRelation.chooseCoverFormId
-                        ),
-                      },
-                    ],
-                  },
-                };
-              }
+              quoteDetails = {
+                quoteDetails: {
+                  entry: [
+                    {
+                      key: 'formId',
+                      value: formDataId,
+                    },
+                  ],
+                },
+              };
 
-              if (quoteDetails) {
-                actions.push(
-                  new fromQuoteActions.UpdateQuote({
-                    userId: payload.userId,
-                    cartId: cartCode,
-                    quoteContent: quoteDetails,
-                  })
-                );
-              }
+              actions.push(
+                new fromQuoteActions.UpdateQuote({
+                  userId: payload.userId,
+                  cartId: cartCode,
+                  quoteContent: quoteDetails,
+                })
+              );
             }
 
             if (cart.cartCode !== payload.cartId) {
