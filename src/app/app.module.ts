@@ -16,7 +16,7 @@ import { environment } from 'src/environments/environment';
       },
       context: {
         baseSite: [
-          'insurance',
+          'financial',
         ],
         language: ['en', 'de'],
         currency: ['EUR'],

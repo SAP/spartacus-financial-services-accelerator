@@ -1,14 +1,14 @@
-import * as productCategory from '../../../../helpers/productCategoryPage';
-import * as comparisonPage from '../../../../helpers/comparisonTable';
-import * as addOptionsPage from '../../../../helpers/checkout/addOptionsPage';
-import * as buttons from '../../../../helpers/checkout/buttons';
-import * as quoteReview from '../../../../helpers/checkout/quoteReview';
-import * as legalInformationPage from '../../../../helpers/checkout/banking/legalInformationPage';
-import * as userIdentificationPage from '../../../../helpers/checkout/banking/userIdentificationPage';
-import * as orderConfirmationPage from '../../../../helpers/checkout/orderConfirmationPage';
-import * as currentAccount from '../../../../helpers/checkout/banking/currentAccount-checkout';
-import * as register from '../../../../helpers/register';
-import { registrationUser } from '../../../../sample-data/users';
+import * as productCategory from '../../../helpers/productCategoryPage';
+import * as comparisonPage from '../../../helpers/comparisonTable';
+import * as addOptionsPage from '../../../helpers/checkout/addOptionsPage';
+import * as buttons from '../../../helpers/checkout/buttons';
+import * as quoteReview from '../../../helpers/checkout/quoteReview';
+import * as legalInformationPage from '../../../helpers/checkout/banking/legalInformationPage';
+import * as userIdentificationPage from '../../../helpers/checkout/banking/userIdentificationPage';
+import * as orderConfirmationPage from '../../../helpers/checkout/orderConfirmationPage';
+import * as currentAccount from '../../../helpers/checkout/banking/currentAccount-checkout';
+import * as register from '../../../helpers/register';
+import { registrationUser } from '../../../sample-data/users';
 
 context('Current AccountCheckout', () => {
   before(() => {
@@ -37,10 +37,6 @@ context('Current AccountCheckout', () => {
   it('Should check optional products for Current Account', () => {
     addOptionsPage.checkAddOptionsPage();
     currentAccount.checkOptionalProductsAddTransactionChest();
-  });
-
-  it('Should Continue in checkout', () => {
-    buttons.clickNextButton();
   });
 
   it('Should register user in checkout', () => {

@@ -1,5 +1,5 @@
 export function checkComparisonPageCurrentAccount() {
-  cy.get('h2.main-heading').contains('Your Current Account Insurance');
+  cy.get('h2.heading-headline').contains('Your Current Account Insurance');
   //checking number checkout steps
   cy.get('div.progress-inner-wrapper').should('have.length', 5);
   cy.get('fsa-comparison-table-panel').should('be.visible');

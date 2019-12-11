@@ -1,7 +1,7 @@
-import * as register from '../../helpers/register';
-import { sampleTripPolicyData } from '../../sample-data/policies';
-import { donnaMooreUser } from '../../sample-data/users';
-import { POLICIES_PAGE } from '../../helpers/my-account/policies';
+import * as register from '../helpers/register';
+import { sampleTripPolicyData } from '../sample-data/policies';
+import { donnaMooreUser } from '../sample-data/users';
+import { POLICIES_PAGE } from '../helpers/my-account/policies';
 
 export const ACCORDION_ITEM = 'fsa-accordion-item';
 
