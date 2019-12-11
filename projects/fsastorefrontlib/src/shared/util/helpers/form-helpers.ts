@@ -21,8 +21,8 @@ export class FormHelpers {
       if (control.parent) {
         for (const key in dependentObject) {
           if (dependentObject.hasOwnProperty(key)) {
-            const allTargetFields = dependentObject[key];
-            allTargetFields.forEach(name => {
+            const allTargetGroup = dependentObject[key];
+            allTargetGroup.forEach(name => {
               control.parent.parent.controls[name].disable();
             });
             const targetField = dependentObject[control.value];
