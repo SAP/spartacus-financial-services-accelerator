@@ -93,10 +93,12 @@ export class QuoteService {
 
   protected getPersonalDetailsForm(entry: FSOrderEntry) {
     if (entry.formDataData && entry.formDataData.length > 0) {
-      this.formDataService.setFormDataToLocalStorage(
-        entry.formDataData[0].formDefinition.formId,
-        entry.formDataData[0].id
-      );
+      this.formDataService.setFormDataToLocalStorage({
+        id: entry.formDataData[0].id,
+        formDefinition: {
+          formId: entry.formDataData[0].formDefinition.formId,
+        },
+      });
     }
   }
 
@@ -110,11 +112,13 @@ export class QuoteService {
         .pipe(
           map(formData => {
             if (formData.formDefinition) {
-              this.formDataService.setFormDataToLocalStorage(
-                formData.formDefinition.formId,
-                dataId,
-                categoryCode
-              );
+              this.formDataService.setFormDataToLocalStorage({
+                id: dataId,
+                formDefinition: {
+                  formId: formData.formDefinition.formId,
+                },
+                categoryCode: categoryCode,
+              });
             }
           })
         )

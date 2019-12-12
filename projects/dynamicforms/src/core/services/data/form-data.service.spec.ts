@@ -13,15 +13,18 @@ const mockData: Observable<YFormData> = of({
 });
 
 const mockDefinition: Observable<YFormDefinition> = of({
-  id: 'formDataId',
+  formId: 'formDefinitionId',
   content: '{testDef: testDef}',
+  applicationId: 'applicationId',
 });
 
-const formId = 'formDefinitionId';
-const applicationId = 'applicationId';
-const formDataId = 'formDataId';
-const content = {
-  test: 'test',
+const mockFormData: YFormData = {
+  id: 'formDataId',
+  content: 'test',
+  formDefinition: {
+    formId: 'formDefinitionId',
+    applicationId: 'applicationId',
+  },
 };
 
 class MockOccYFormService {
@@ -60,18 +63,16 @@ describe('FormDataService', () => {
   });
 
   it('should save data', () => {
-    expect(service.saveFormData(formId, applicationId, content)).toEqual(
-      mockData
-    );
+    expect(service.saveFormData(mockFormData)).toEqual(mockData);
   });
 
   it('should get data', () => {
-    expect(service.getFormData(formDataId)).toEqual(mockData);
+    expect(service.getFormData(mockFormData.id)).toEqual(mockData);
   });
 
   it('should get definition', () => {
-    expect(service.getFormDefinition(applicationId, formId)).toEqual(
-      mockDefinition
-    );
+    expect(
+      service.getFormDefinition('formDefinitionId', 'applicationId')
+    ).toEqual(mockDefinition);
   });
 });

@@ -23,18 +23,20 @@ export class ChooseCoverNavigationComponent implements OnInit {
 
   ngOnInit() {
     this.subscription.add(
-      this.activatedRoute.params.pipe(
-        map(params => {
+      this.activatedRoute.params
+        .pipe(
+          map(params => {
             this.categoryCode = params['formCode'];
-        })
-      ).subscribe()
+          })
+        )
+        .subscribe()
     );
   }
 
   navigateNext() {
-    const formDataId = this.formService.getFormDataIdByCategory(this.categoryCode);
-    console.log(this.categoryCode);
-    console.log(formDataId);
+    const formDataId = this.formService.getFormDataIdByCategory(
+      this.categoryCode
+    );
     const formData: YFormData = {};
     if (formDataId) {
       formData.id = formDataId;
@@ -48,7 +50,7 @@ export class ChooseCoverNavigationComponent implements OnInit {
             if (data && data.content) {
               this.routingService.go({
                 cxRoute: 'category',
-                params: {code: this.categoryCode}
+                params: { code: this.categoryCode },
               });
             }
           })
