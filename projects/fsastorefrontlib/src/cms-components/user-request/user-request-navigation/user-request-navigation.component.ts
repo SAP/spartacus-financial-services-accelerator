@@ -69,10 +69,9 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
   }
 
   next(currentStep: number): void {
-    const formDataId = this.activeStepData.yformConfigurator.id;
     const formData: YFormData = {};
-    if (formDataId) {
-      formData.id = formDataId;
+    if (this.activeStepData.yformConfigurator) {
+      formData.id = this.activeStepData.yformConfigurator.id;
     }
     this.formDataService.submit(formData);
     this.subscription.add(

@@ -53,7 +53,6 @@ export class UserRequestService {
   updateUserRequestStep(
     userRequest: FSUserRequest,
     stepIndex: number,
-    data: any,
     stepStatus: string
   ): Observable<FSUserRequest> {
     const stepData = Object.assign(
