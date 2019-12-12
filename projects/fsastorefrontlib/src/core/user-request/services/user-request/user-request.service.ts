@@ -52,7 +52,7 @@ export class UserRequestService {
     return this.store.select(UserRequestSelector.getUserRequestContent);
   }
 
-  loadUserRequstFormData(userRequest: FSUserRequest) {
+  loadUserRequestFormData(userRequest: FSUserRequest) {
     userRequest.configurationSteps.forEach(stepData => {
       if (stepData.yformConfigurator) {
         this.formDataService.setFormDataToLocalStorage(
