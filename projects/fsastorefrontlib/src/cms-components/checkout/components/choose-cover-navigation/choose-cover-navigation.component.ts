@@ -4,7 +4,7 @@ import { FormDataService } from '@fsa/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { YFormData } from 'dynamicforms/src/core';
+import { YFormData } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'fsa-choose-cover-navigation',
