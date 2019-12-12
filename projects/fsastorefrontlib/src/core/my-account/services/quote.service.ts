@@ -82,8 +82,8 @@ export class QuoteService {
         const orderEntry: OrderEntry = cart.deliveryOrderGroups[0].entries[0];
         const product: FSProduct = orderEntry.product;
 
-        this.getPersonalDetailsForm(cart.deliveryOrderGroups[0].entries[0]);
-        this.getChooseCoverForm(
+        this.loadPersonalDetailsForm(cart.deliveryOrderGroups[0].entries[0]);
+        this.loadChooseCoverForm(
           cart.insuranceQuote,
           product.defaultCategory.code
         );
@@ -91,7 +91,7 @@ export class QuoteService {
     });
   }
 
-  protected getPersonalDetailsForm(entry: FSOrderEntry) {
+  protected loadPersonalDetailsForm(entry: FSOrderEntry) {
     if (entry.formDataData && entry.formDataData.length > 0) {
       this.formDataService.setFormDataToLocalStorage({
         id: entry.formDataData[0].id,
@@ -102,7 +102,7 @@ export class QuoteService {
     }
   }
 
-  protected getChooseCoverForm(insuranceQuote: any, categoryCode: string) {
+  protected loadChooseCoverForm(insuranceQuote: any, categoryCode: string) {
     if (insuranceQuote && insuranceQuote.quoteDetails) {
       const dataId = insuranceQuote.quoteDetails.entry
         .filter(details => details.key === 'formId')

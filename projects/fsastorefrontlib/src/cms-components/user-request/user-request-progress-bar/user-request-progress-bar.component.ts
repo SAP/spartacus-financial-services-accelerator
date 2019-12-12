@@ -3,7 +3,6 @@ import { UserRequestService } from '../../../core/user-request/services';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FSUserRequest, FSStepData } from '../../../occ/occ-models';
-import { FormDataService } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'fsa-user-request-progress-bar',
@@ -27,8 +26,8 @@ export class UserRequestProgressBarComponent implements OnInit, OnDestroy {
               userRequestData.configurationSteps.length > 0
             ) {
               this.configurationSteps = userRequestData.configurationSteps;
+              this.userRequestService.loadUserRequstFormData(userRequestData);
             }
-            this.userRequestService.loadUserRequstFormData(userRequestData);
           })
         )
         .subscribe()

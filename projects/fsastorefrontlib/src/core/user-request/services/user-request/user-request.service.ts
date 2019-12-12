@@ -54,9 +54,11 @@ export class UserRequestService {
 
   loadUserRequstFormData(userRequest: FSUserRequest) {
     userRequest.configurationSteps.forEach(stepData => {
-      this.formDataService.setFormDataToLocalStorage(
-        stepData.yformConfigurator
-      );
+      if (stepData.yformConfigurator) {
+        this.formDataService.setFormDataToLocalStorage(
+          stepData.yformConfigurator
+        );
+      }
     });
   }
 
