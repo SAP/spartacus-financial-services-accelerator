@@ -9,7 +9,7 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FieldConfig } from '../../models/field-config.interface';
+import { FieldConfig } from '../../models/form-config.interface';
 import { FormButtonComponent } from '../form-button/form-button.component';
 import { FormDatePickerComponent } from '../form-datepicker/form-datepicker.component';
 import { FormGenericComponent } from '../form-generic.component';

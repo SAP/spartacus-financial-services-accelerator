@@ -1,20 +1,10 @@
+import { I18nTestingModule } from '@spartacus/core';
 import { TestBed } from '@angular/core/testing';
 
 import { FormDataService } from './form-data.service';
 import { YFormData, YFormDefinition } from './../../models/form-occ.models';
 import { OccFormService } from '../../../occ/services/form/occ-form.service';
 import { of, Observable } from 'rxjs';
-
-const mockFormData = {
-  general: 'generalSection',
-  driver: 'driverSection',
-  button: 'submit',
-};
-
-const mockFilteredData = {
-  general: 'generalSection',
-  driver: 'driverSection',
-};
 
 const mockData: Observable<YFormData> = of({
   formDefinitionId: 'formDefinitionId',
@@ -23,15 +13,18 @@ const mockData: Observable<YFormData> = of({
 });
 
 const mockDefinition: Observable<YFormDefinition> = of({
-  id: 'formDataId',
+  formId: 'formDefinitionId',
   content: '{testDef: testDef}',
+  applicationId: 'applicationId',
 });
 
-const formId = 'formDefinitionId';
-const applicationId = 'applicationId';
-const formDataId = 'formDataId';
-const content = {
-  test: 'test',
+const mockFormData: YFormData = {
+  id: 'formDataId',
+  content: 'test',
+  formDefinition: {
+    formId: 'formDefinitionId',
+    applicationId: 'applicationId',
+  },
 };
 
 class MockOccYFormService {
@@ -55,6 +48,7 @@ describe('FormDataService', () => {
   beforeEach(() => {
     mockYFormService = new MockOccYFormService();
     TestBed.configureTestingModule({
+      imports: [I18nTestingModule],
       providers: [
         FormDataService,
         { provide: OccFormService, useValue: mockYFormService },
@@ -69,22 +63,16 @@ describe('FormDataService', () => {
   });
 
   it('should save data', () => {
-    expect(service.saveFormData(formId, applicationId, content)).toEqual(
-      mockData
-    );
+    expect(service.saveFormData(mockFormData)).toEqual(mockData);
   });
 
   it('should get data', () => {
-    expect(service.getFormData(formDataId)).toEqual(mockData);
+    expect(service.getFormData(mockFormData.id)).toEqual(mockData);
   });
 
   it('should get definition', () => {
-    expect(service.getFormDefinition(applicationId, formId)).toEqual(
-      mockDefinition
-    );
-  });
-
-  it('should filter data', () => {
-    expect(service.filterData(mockFormData)).toEqual(mockFilteredData);
+    expect(
+      service.getFormDefinition('formDefinitionId', 'applicationId')
+    ).toEqual(mockDefinition);
   });
 });

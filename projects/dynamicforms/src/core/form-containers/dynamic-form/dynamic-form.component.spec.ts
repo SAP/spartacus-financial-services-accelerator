@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DynamicFormComponent } from './dynamic-form.component';
 import { Directive, Input } from '@angular/core';
-import { FieldConfig } from '../../models/field-config.interface';
+import { FieldConfig } from '../../models/form-config.interface';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 import { BehaviorSubject } from 'rxjs';

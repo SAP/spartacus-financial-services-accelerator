@@ -7,6 +7,7 @@ import {
   HttpClientTestingModule,
 } from '@angular/common/http/testing';
 import { HttpRequest } from '@angular/common/http';
+import { YFormData } from '../../../core/models/form-occ.models';
 
 const MockOccModuleConfig: OccConfig = {
   context: {
@@ -20,10 +21,13 @@ const MockOccModuleConfig: OccConfig = {
   },
 };
 
-const applicationId = 'application1';
-const formDefinitionId = 'definition1';
-
-const formDataId = 'formDataId';
+const formData: YFormData = {
+  id: 'formDataId',
+  formDefinition: {
+    formId: 'fromDefintionId',
+    applicationId: 'applicationId',
+  },
+};
 
 describe('OccYformService', () => {
   let service: OccFormService;
@@ -47,13 +51,17 @@ describe('OccYformService', () => {
 
   describe('persistFormData', () => {
     it('saveFormData', async(() => {
-      service.saveFormData(formDefinitionId, applicationId, {}).subscribe();
+      console.log(formData);
+      service.saveFormData(formData).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url === '/forms/data' &&
           req.params.append('fields', 'FULL') &&
-          req.params.append('definitionId', formDefinitionId) &&
-          req.params.append('applicationId', applicationId) &&
+          req.params.append('definitionId', formData.formDefinition.formId) &&
+          req.params.append(
+            'applicationId',
+            formData.formDefinition.applicationId
+          ) &&
           req.params.append('formDataId', '') &&
           req.method === 'PUT'
         );
@@ -63,12 +71,12 @@ describe('OccYformService', () => {
 
   describe('loadFormData', () => {
     it('loadFormData', async(() => {
-      service.getFormData(formDataId).subscribe();
+      service.getFormData(formData.id).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url === '/forms/data' &&
           req.params.append('fields', 'FULL') &&
-          req.params.append('formDataId', formDataId) &&
+          req.params.append('formDataId', formData.id) &&
           req.method === 'GET'
         );
       }, `GET method and url`);
@@ -77,12 +85,20 @@ describe('OccYformService', () => {
 
   describe('loadFormDefinition', () => {
     it('loadFormDefinition', async(() => {
-      service.getFormDefinition(applicationId, formDefinitionId).subscribe();
+      service
+        .getFormDefinition(
+          formData.formDefinition.applicationId,
+          formData.formDefinition.formId
+        )
+        .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
-          req.url === '/forms/definitions/' + formDefinitionId &&
+          req.url === '/forms/definitions/' + formData.formDefinition.formId &&
           req.params.append('fields', 'FULL') &&
-          req.params.append('applicationId', applicationId) &&
+          req.params.append(
+            'applicationId',
+            formData.formDefinition.applicationId
+          ) &&
           req.method === 'GET'
         );
       }, `GET method and url`);

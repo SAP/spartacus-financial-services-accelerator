@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs/internal/Observable';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs/internal/observable/throwError';
+import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { throwError } from 'rxjs/internal/observable/throwError';
+import { catchError } from 'rxjs/operators';
 import { QuoteAdapter } from './quote.adapter';
 
 @Injectable()
@@ -18,6 +18,12 @@ export class OccQuoteAdapter implements QuoteAdapter {
     return this.occEndpointService.getBaseEndpoint() + quotesEndpoint;
   }
 
+  protected getQuotesFromCartEndpoint(userId: string, cartId: string) {
+    const quotesFromCartEndpoint =
+      '/users/' + userId + '/carts/' + cartId + '/insurance-quotes';
+    return this.occEndpointService.getBaseEndpoint() + quotesFromCartEndpoint;
+  }
+
   public getQuotes(userId: string): Observable<any> {
     const url = this.getQuotesEndpoint(userId);
     const params = new HttpParams();
@@ -25,5 +31,18 @@ export class OccQuoteAdapter implements QuoteAdapter {
     return this.http
       .get(url, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  public updateQuote(
+    userId: string,
+    cartId: string,
+    quoteContent: any
+  ): Observable<any> {
+    const url = this.getQuotesFromCartEndpoint(userId, cartId);
+    const params = new HttpParams();
+
+    return this.http
+      .patch(url, quoteContent, { params: params })
+      .pipe(catchError((error: any) => throwError(error.json)));
   }
 }

@@ -2,23 +2,22 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnDestroy,
   OnInit,
   Output,
-  OnDestroy,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { YFormData } from '@fsa/dynamicforms';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { GeneralHelpers } from '../../helpers/helpers';
+import { FormConfig } from '../../models/form-config';
 import {
   FieldConfig,
   FormDefinition,
-} from '../../models/field-config.interface';
+} from '../../models/form-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
-import { GeneralHelpers } from '../../helpers/helpers';
-
 import { FormDataService } from '../../services/data/form-data.service';
-import { Subscription, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { YFormData } from '@fsa/dynamicforms';
-import { FormConfig } from '../../models/form-config';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -61,7 +60,9 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         this.formData
           .pipe(
             map(formData => {
-              this.mapDataToFormControls(JSON.parse(formData.content));
+              if (formData.content) {
+                this.mapDataToFormControls(JSON.parse(formData.content));
+              }
             })
           )
           .subscribe()
@@ -106,9 +107,19 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
       this.formDataService
         .getSubmittedForm()
         .pipe(
-          map(submitted => {
-            if (!submitted && this.value !== undefined && this.valid) {
-              this.submit.emit(this.value);
+          map(form => {
+            if (
+              form &&
+              form.content === undefined &&
+              this.form &&
+              this.value !== undefined &&
+              this.valid
+            ) {
+              this.submit.emit({
+                id: form.id,
+                refId: form.refId,
+                content: this.value,
+              });
             }
           })
         )

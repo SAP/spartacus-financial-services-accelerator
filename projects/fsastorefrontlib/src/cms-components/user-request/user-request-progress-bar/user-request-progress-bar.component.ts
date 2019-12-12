@@ -26,6 +26,7 @@ export class UserRequestProgressBarComponent implements OnInit, OnDestroy {
               userRequestData.configurationSteps.length > 0
             ) {
               this.configurationSteps = userRequestData.configurationSteps;
+              this.userRequestService.loadUserRequstFormData(userRequestData);
             }
           })
         )

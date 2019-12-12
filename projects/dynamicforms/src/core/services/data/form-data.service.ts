@@ -1,8 +1,8 @@
-import { YFormDefinition } from './../../models/form-occ.models';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { YFormData, FormStorageObject } from '../../models';
 import { OccFormService } from '../../../occ/services/form/occ-form.service';
+import { FormStorageObject, YFormData } from '../../models';
+import { YFormDefinition } from './../../models/form-occ.models';
 
 @Injectable()
 export class FormDataService {
@@ -17,8 +17,8 @@ export class FormDataService {
   }
   // ***SHOULD BE REMOVED WITH FSA-4419***
 
-  submit() {
-    this.submittedForm.next(null);
+  submit(form: YFormData) {
+    this.submittedForm.next(form);
   }
 
   getSubmittedForm(): Observable<YFormData> {
@@ -41,7 +41,19 @@ export class FormDataService {
     return null;
   }
 
-  setFormDataToLocalStorage(formDefinitionId: string, formDataId: string) {
+  getFormDataIdByCategory(categoryCode: string): string {
+    const formLocalStorageData = JSON.parse(
+      localStorage.getItem(this.formsLocalStorageKey)
+    );
+    if (formLocalStorageData) {
+      return formLocalStorageData
+        .filter(formObj => formObj.categoryCode === categoryCode)
+        .map(formObj => formObj.formDataId)[0];
+    }
+    return null;
+  }
+
+  setFormDataToLocalStorage(formData: YFormData) {
     let formLocalStorageData = JSON.parse(
       localStorage.getItem(this.formsLocalStorageKey)
     );
@@ -50,18 +62,14 @@ export class FormDataService {
       formLocalStorageData === null ||
       formLocalStorageData.length === 0
     ) {
-      formLocalStorageData = [
-        this.createDataForLocalStorage(formDataId, formDefinitionId),
-      ];
+      formLocalStorageData = [this.createDataForLocalStorage(formData)];
     } else {
       const index = formLocalStorageData
         .map(sessionData => sessionData.formDefinitionId)
-        .indexOf(formDefinitionId);
+        .indexOf(formData.formDefinition.formId);
       index !== -1
-        ? (formLocalStorageData[index].formDataId = formDataId)
-        : formLocalStorageData.push(
-            this.createDataForLocalStorage(formDataId, formDefinitionId)
-          );
+        ? (formLocalStorageData[index].formDataId = formData.id)
+        : formLocalStorageData.push(this.createDataForLocalStorage(formData));
     }
     localStorage.setItem(
       this.formsLocalStorageKey,
@@ -69,24 +77,16 @@ export class FormDataService {
     );
   }
 
-  createDataForLocalStorage(formDataId, formDefinitionId): FormStorageObject {
+  createDataForLocalStorage(formData: YFormData): FormStorageObject {
     return {
-      formDataId: formDataId,
-      formDefinitionId: formDefinitionId,
+      formDataId: formData.id,
+      formDefinitionId: formData.formDefinition.formId,
+      categoryCode: formData.categoryCode,
     };
   }
 
-  saveFormData(
-    formId: string,
-    applicationId: string,
-    formContent: any
-  ): Observable<YFormData> {
-    const filteredData = this.filterData(formContent);
-    return this.occYformsService.saveFormData(
-      formId,
-      applicationId,
-      filteredData
-    );
+  saveFormData(formData: YFormData): Observable<YFormData> {
+    return this.occYformsService.saveFormData(formData);
   }
 
   getFormData(formDataId: string): Observable<YFormData> {
@@ -101,12 +101,5 @@ export class FormDataService {
       applicationId,
       formDefinitionId
     );
-  }
-
-  filterData(formData: { [name: string]: Object }): any {
-    if (formData.button) {
-      delete formData.button;
-    }
-    return formData;
   }
 }
