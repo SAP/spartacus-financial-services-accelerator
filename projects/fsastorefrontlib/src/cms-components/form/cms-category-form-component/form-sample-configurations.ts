@@ -5,6 +5,371 @@ import { FormDefinition } from '@fsa/dynamicforms';
 export class FormSampleConfigurations {
   static sampleConfigurations: FormDefinition[] = [
     {
+      formId: 'homeowners_details_form',
+      formGroups: [
+        {
+          groupCode: 'general',
+          fieldConfigs: [
+            {
+              type: 'title',
+              label: 'General Information',
+              name: 'general',
+            },
+            {
+              type: 'radio',
+              label: 'Cover Required',
+              name: 'coverRequired',
+              options: [
+                { name: 'buildingAndContents', label: 'Building and Contents' },
+                { name: 'buildingsOnly', label: 'Buildings Only' },
+                { name: 'contentsOnly', label: 'Contents Only' },
+              ],
+              validation: [
+                DefaultFormValidators.required,
+                FormHelpers.shouldEnableTargetGroup({
+                  buildingAndContents: ['buildingCover', 'contentsCover'],
+                  buildingsOnly: ['buildingCover'],
+                  contentsOnly: ['contentsCover'],
+                }),
+              ],
+            },
+            {
+              type: 'datepicker',
+              label: 'Start Date',
+              name: 'startDate',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.compareToCurrentDate('shouldBeGreater'),
+              ],
+              error: 'forms.dateInFuture',
+            },
+          ],
+        },
+        {
+          groupCode: 'propertyDetails',
+          fieldConfigs: [
+            {
+              type: 'title',
+              label: 'Property Details',
+              name: 'propertyDetails',
+            },
+            {
+              type: 'select',
+              label: 'Property Type',
+              name: 'propertyType',
+              options: [
+                { name: 'House', label: 'House' },
+                { name: 'Bungalow', label: 'Bungalow' },
+                { name: 'Flat', label: 'Flat' },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
+            {
+              type: 'input',
+              label: 'Property Value',
+              name: 'propertyValue',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(10000),
+                DefaultFormValidators.max(1000000),
+                DefaultFormValidators.pattern('^[0-9]*$'),
+              ],
+              error: 'forms.from10Kto1M',
+            },
+            {
+              type: 'input',
+              label: 'Rebuild Value of Property',
+              name: 'rebuildValue',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.pattern('^[0-9]*$'),
+                DefaultFormValidators.compareNumbers(
+                  'propertyValue',
+                  'shouldBeLess'
+                ),
+              ],
+              error: 'forms.lessThanPropertyValue',
+            },
+            {
+              type: 'input',
+              label: 'Approximate Year Property Built',
+              name: 'ccaBuiltYear',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(1500),
+                DefaultFormValidators.max(Number(new Date().getFullYear())),
+                DefaultFormValidators.pattern('^[0-9]*$'),
+              ],
+              error: 'forms.dateFrom1000toCurrent',
+            },
+            {
+              type: 'input',
+              label: 'Number of Bedrooms',
+              name: 'numberOfBedrooms',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(1),
+                DefaultFormValidators.max(50),
+                DefaultFormValidators.pattern('^[0-9]*$'),
+              ],
+              error: 'forms.between1And50',
+            },
+            {
+              type: 'input',
+              label: 'Number of Bathrooms',
+              name: 'numberOfBathrooms',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(1),
+                DefaultFormValidators.max(50),
+                DefaultFormValidators.pattern('^[0-9]*$'),
+              ],
+              error: 'forms.between1And50',
+            },
+            {
+              type: 'radio',
+              label: 'Does anyone at the property smoke?',
+              name: 'smoking',
+              options: [
+                { name: 'yes', label: 'Yes' },
+                { name: 'no', label: 'No' },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
+            {
+              type: 'input',
+              label:
+                'How many days in a row is the property likely to be unoccupied?',
+              name: 'numberOfDaysUnoccupied',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(0),
+                DefaultFormValidators.pattern('^[0-9]*$'),
+              ],
+            },
+            {
+              type: 'radio',
+              label: 'Is the property normally occupied during the day?',
+              name: 'normallyOccupied',
+              options: [
+                { name: 'yes', label: 'Yes' },
+                { name: 'no', label: 'No' },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
+            {
+              type: 'radio',
+              label: 'What is the exterior construction material?',
+              name: 'constructionMaterial',
+              options: [
+                { name: 'wood', label: 'Wood' },
+                { name: 'brick', label: 'Brick' },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
+            {
+              type: 'radio',
+              label: 'What locks are in place?',
+              name: 'locks',
+              options: [
+                { name: 'morticeDeadlock', label: 'Mortice Deadlock' },
+                {
+                  name: 'MultiPointLockingSystem',
+                  label: 'Multi-Point Locking System',
+                },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
+          ],
+        },
+        {
+          groupCode: 'buildingCover',
+          fieldConfigs: [
+            {
+              type: 'title',
+              label: 'Your Building Cover',
+              name: 'buildingCover',
+              hidden: true,
+            },
+            {
+              type: 'select',
+              label:
+                'How many consecutive years have you held buildings insurance?',
+              name: 'alreadyHeldInsurance',
+              options: [
+                { name: '0', label: '0' },
+                { name: '1', label: '1' },
+                { name: '2', label: '2' },
+                { name: '3', label: '3' },
+                { name: '4', label: '4' },
+                { name: '5', label: '5+' },
+              ],
+              validation: [DefaultFormValidators.required],
+              hidden: true,
+            },
+            {
+              type: 'radio',
+              label:
+                'Would you like the accidental damage cover for your building?',
+              name: 'accidentalDamageCoverBuilding',
+              options: [
+                { name: 'yes', label: 'Yes' },
+                { name: 'no', label: 'No' },
+              ],
+              validation: [DefaultFormValidators.required],
+              hidden: true,
+            },
+          ],
+        },
+        {
+          groupCode: 'contentsCover',
+          fieldConfigs: [
+            {
+              type: 'title',
+              label: 'Your Contents Cover',
+              name: 'contentsCover',
+              hidden: true,
+            },
+            {
+              type: 'radio',
+              label:
+                'We give you 50,000€ contents cover as a standard, is this enough?',
+              name: 'startAmountCover',
+              options: [
+                { name: 'yes', label: 'Yes' },
+                { name: 'no', label: 'No' },
+              ],
+              validation: [DefaultFormValidators.required],
+              hidden: true,
+            },
+            {
+              type: 'input',
+              label: 'Please enter the desired amount from 10,000€ upwards.',
+              name: 'desiredAmount',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(10000),
+                DefaultFormValidators.max(1000000),
+                DefaultFormValidators.pattern('^[0-9]*$'),
+              ],
+              error: 'forms.from10Kto1M',
+              hidden: true,
+            },
+            {
+              type: 'input',
+              label:
+                'How many consecutive years have you held contents insurance?',
+              name: 'numberOfYearsHoldingInsurance',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.min(0),
+                DefaultFormValidators.max(150),
+                DefaultFormValidators.pattern('^[0-9]*$'),
+              ],
+              error: 'forms.lessThan150',
+              hidden: true,
+            },
+            {
+              type: 'radio',
+              label:
+                'Would you like accidental damage cover for your contents?',
+              name: 'accidentalDamageCoverContents',
+              options: [
+                { name: 'yes', label: 'Yes' },
+                { name: 'no', label: 'No' },
+              ],
+              validation: [DefaultFormValidators.required],
+              hidden: true,
+            },
+            {
+              type: 'datepicker',
+              label:
+                'If you have a car, please tell us when your insurance is due for renewal',
+              name: 'coverageStartDate',
+              validation: [DefaultFormValidators.required],
+              hidden: true,
+            },
+          ],
+        },
+        {
+          groupCode: 'propertyAddress',
+          fieldConfigs: [
+            {
+              type: 'title',
+              label: 'Your Property Address',
+              name: 'propertyAddress',
+            },
+            {
+              type: 'input',
+              label: 'Address Line 1',
+              name: 'addressLine1',
+              validation: [DefaultFormValidators.required],
+            },
+            {
+              type: 'input',
+              label: 'Address Line 2',
+              name: 'addressLine2',
+            },
+            {
+              type: 'input',
+              label: 'City',
+              name: 'city',
+              validation: [DefaultFormValidators.required],
+            },
+            {
+              type: 'input',
+              label: 'Vehicle Owner Postal Code',
+              name: 'vehicleOwnerPostalCode',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.minLength(1),
+                DefaultFormValidators.regexValidator(
+                  DefaultFormValidators.postalCodeRegex
+                ),
+              ],
+              error: 'forms.containAtLeastOneNumber',
+            },
+            {
+              type: 'select',
+              label: 'Country',
+              name: 'country',
+              options: [
+                {
+                  name: 'AT',
+                  label: 'Austria',
+                },
+                {
+                  name: 'CA',
+                  label: 'Canada',
+                },
+                {
+                  name: 'FR',
+                  label: 'France',
+                },
+                {
+                  name: 'DE',
+                  label: 'Germany',
+                },
+                {
+                  name: 'PL',
+                  label: 'Poland',
+                },
+                {
+                  name: 'RS',
+                  label: 'Serbia',
+                },
+                {
+                  name: 'US',
+                  label: 'United States',
+                },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
+          ],
+        },
+      ],
+    },
+    {
       formId: 'auto_details_form',
       formGroups: [
         {
@@ -101,12 +466,12 @@ export class FormSampleConfigurations {
             },
             {
               type: 'select',
+              label: 'Vehicle Usage',
+              name: 'vehicleUsage',
               options: [
                 { name: 'Personal', label: 'Personal' },
                 { name: 'Business', label: 'Business' },
               ],
-              label: 'Vehicle Usage',
-              name: 'vehicleUsage',
               validation: [DefaultFormValidators.required],
             },
             {
@@ -211,6 +576,8 @@ export class FormSampleConfigurations {
             },
             {
               type: 'select',
+              label: 'Number of Drivers',
+              name: 'numberOfDrivers',
               options: [
                 { name: '0', label: '0' },
                 { name: '1', label: '1' },
@@ -218,8 +585,6 @@ export class FormSampleConfigurations {
                 { name: '3', label: '3' },
                 { name: '4', label: '4' },
               ],
-              label: 'Number of Drivers',
-              name: 'numberOfDrivers',
               validation: [
                 DefaultFormValidators.required,
                 FormHelpers.shouldEnableDependentGroup([
@@ -786,6 +1151,8 @@ export class FormSampleConfigurations {
             },
             {
               type: 'select',
+              label: 'Country',
+              name: 'country',
               options: [
                 {
                   name: 'AT',
@@ -816,8 +1183,6 @@ export class FormSampleConfigurations {
                   label: 'United States',
                 },
               ],
-              label: 'Country',
-              name: 'country',
               validation: [DefaultFormValidators.required],
             },
             {
