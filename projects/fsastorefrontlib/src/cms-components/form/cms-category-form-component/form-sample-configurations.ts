@@ -8,7 +8,7 @@ export class FormSampleConfigurations {
       formId: 'homeowners_details_form',
       formGroups: [
         {
-          groupCode: 'general',
+          groupCode: 'property',
           fieldConfigs: [
             {
               type: 'title',
@@ -36,7 +36,7 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: 'Start Date',
-              name: 'startDate',
+              name: 'propertyDetailsStartDate',
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeGreater'),
@@ -46,12 +46,12 @@ export class FormSampleConfigurations {
           ],
         },
         {
-          groupCode: 'propertyDetails',
+          groupCode: 'propertyDetailsCoverRequired',
           fieldConfigs: [
             {
               type: 'title',
               label: 'Property Details',
-              name: 'propertyDetails',
+              name: 'propertyDetailsCoverRequired',
             },
             {
               type: 'select',
@@ -79,7 +79,7 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: 'Rebuild Value of Property',
-              name: 'rebuildValue',
+              name: 'propertyRebuildCost',
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.pattern('^[0-9]*$'),
@@ -96,7 +96,7 @@ export class FormSampleConfigurations {
               name: 'ccaBuiltYear',
               validation: [
                 DefaultFormValidators.required,
-                DefaultFormValidators.min(1500),
+                DefaultFormValidators.min(1000),
                 DefaultFormValidators.max(Number(new Date().getFullYear())),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
@@ -144,8 +144,10 @@ export class FormSampleConfigurations {
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(0),
+                DefaultFormValidators.max(360),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
+              error: 'forms.between0And360',
             },
             {
               type: 'radio',
@@ -227,7 +229,7 @@ export class FormSampleConfigurations {
             {
               type: 'title',
               label: 'Your Contents Cover',
-              name: 'contentsCover',
+              name: 'propertyIsStandard50000ContentCover',
               hidden: true,
             },
             {
@@ -236,16 +238,21 @@ export class FormSampleConfigurations {
                 'We give you 50,000€ contents cover as a standard, is this enough?',
               name: 'startAmountCover',
               options: [
-                { name: 'yes', label: 'Yes' },
-                { name: 'no', label: 'No' },
+                { name: '0', label: 'Yes' },
+                { name: '1', label: 'No' },
               ],
-              validation: [DefaultFormValidators.required],
+              validation: [
+                DefaultFormValidators.required,
+                FormHelpers.shouldEnableDependentField([
+                  'propertyMultipleOf10000ContentCover',
+                ]),
+              ],
               hidden: true,
             },
             {
               type: 'input',
               label: 'Please enter the desired amount from 10,000€ upwards.',
-              name: 'desiredAmount',
+              name: 'propertyMultipleOf10000ContentCover',
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(10000),
@@ -286,7 +293,6 @@ export class FormSampleConfigurations {
               label:
                 'If you have a car, please tell us when your insurance is due for renewal',
               name: 'coverageStartDate',
-              validation: [DefaultFormValidators.required],
               hidden: true,
             },
           ],
@@ -302,24 +308,24 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: 'Address Line 1',
-              name: 'addressLine1',
+              name: 'property-address-line-1',
               validation: [DefaultFormValidators.required],
             },
             {
               type: 'input',
               label: 'Address Line 2',
-              name: 'addressLine2',
+              name: 'property-address-line-2',
             },
             {
               type: 'input',
               label: 'City',
-              name: 'city',
+              name: 'property-address-city',
               validation: [DefaultFormValidators.required],
             },
             {
               type: 'input',
-              label: 'Vehicle Owner Postal Code',
-              name: 'vehicleOwnerPostalCode',
+              label: 'Postcode',
+              name: 'property-address-postcode',
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.minLength(1),
@@ -332,7 +338,7 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: 'Country',
-              name: 'country',
+              name: 'property-address-country',
               options: [
                 {
                   name: 'AT',
