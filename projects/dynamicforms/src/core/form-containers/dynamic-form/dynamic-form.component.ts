@@ -111,7 +111,8 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
             if (
               form &&
               form.content === undefined &&
-              this.form && this.value !== undefined &&
+              this.form &&
+              this.value !== undefined &&
               this.valid
             ) {
               this.submit.emit({
