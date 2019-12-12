@@ -17,26 +17,24 @@ export class OccFormService {
     protected occEndpointService: OccEndpointsService
   ) {}
 
-  public saveFormData(
-    definitionId: string,
-    applicationId: string,
-    formContent: any,
-    formDataId?: string
-  ) {
+  public saveFormData(formData: YFormData) {
     const url = this.getYFormsEndpoint() + '/data';
-    const params = new HttpParams({
+    let params = new HttpParams({
       fromString:
         FULL_PARAMS +
         '&definitionId=' +
-        definitionId +
+        formData.formDefinition.formId +
         '&applicationId=' +
-        applicationId,
+        formData.formDefinition.applicationId,
     });
-    if (formDataId) {
-      params.append('formDataId', formDataId);
+    if (formData.id) {
+      params = params.append('formDataId', formData.id);
+    }
+    if (formData.refId) {
+      params = params.append('refId', formData.refId);
     }
     return this.http
-      .put<YFormData>(url, formContent, { params: params })
+      .put<YFormData>(url, formData.content, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 

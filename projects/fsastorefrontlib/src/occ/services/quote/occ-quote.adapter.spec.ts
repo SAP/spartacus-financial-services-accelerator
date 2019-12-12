@@ -8,9 +8,12 @@ import { OccQuoteAdapter } from './occ-quote.adapter';
 import { OccConfig } from '@spartacus/core';
 
 const userId = '123';
+const cartId = '123';
+const quoteContent = {};
 
 const usersEndpoint = '/users';
 const quotesEndpoint = '/insurance-quotes';
+const cartsEndpoint = '/carts';
 
 const MockOccModuleConfig: OccConfig = {
   context: {
@@ -54,6 +57,22 @@ describe('OccQuoteAdapter', () => {
           req.method === 'GET'
         );
       }, `GET method and url`);
+    }));
+  });
+
+  describe('updateQuote', () => {
+    it('should update user Quote', async(() => {
+      adapter.updateQuote(userId, cartId, quoteContent).subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url ===
+            usersEndpoint +
+              `/${userId}` +
+              cartsEndpoint +
+              `/${cartId}` +
+              quotesEndpoint && req.method === 'PATCH'
+        );
+      }, `PATCH method and url`);
     }));
   });
 });

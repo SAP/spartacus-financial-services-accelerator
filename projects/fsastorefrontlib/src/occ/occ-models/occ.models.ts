@@ -1,9 +1,26 @@
-import { Product, Price, UserSignUp, Category, User } from '@spartacus/core';
+import {
+  Cart,
+  Category,
+  OrderEntry,
+  Price,
+  Product,
+  User,
+  UserSignUp,
+} from '@spartacus/core';
+import { YFormData } from '@fsa/dynamicforms';
 
 export interface FSProduct extends Product {
   price?: FSPrice;
   cartDispalyName?: string;
   defaultCategory?: Category;
+}
+
+export interface FSCart extends Cart {
+  insuranceQuote?: any;
+}
+
+export interface FSOrderEntry extends OrderEntry {
+  formDataData?: any[];
 }
 
 export interface FSPrice extends Price {
@@ -44,7 +61,7 @@ export interface FSStepData {
   sequenceNumber?: string;
   pageLabelOrId?: string;
   status?: string;
-  yFormConfigurator?: string;
+  yformConfigurator?: YFormData;
 }
 
 export interface FSUserRequest {

@@ -1,7 +1,7 @@
 import { Component, Input, ViewChild, OnDestroy } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 
-import { FormDefinition } from '../../models/field-config.interface';
+import { FormDefinition } from '../../models/form-config.interface';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 import { FormDataService } from '../../services/data/form-data.service';
 import { Subscription, Observable } from 'rxjs';
@@ -31,29 +31,37 @@ export class FormComponent implements OnDestroy {
   @Input()
   formData: Observable<YFormData>;
 
-  submit(formData: { [name: string]: any }) {
+  submit(formData: YFormData) {
     if (this.form && this.form.valid) {
       this.subscription.add(
         this.formDataService
-          .saveFormData(this.formId, this.applicationId, formData)
+          .saveFormData({
+            formDefinition: {
+              formId: this.formId,
+              applicationId: this.applicationId,
+            },
+            content: formData.content,
+            refId: formData.refId,
+            id: formData.id,
+          })
           .subscribe(response => {
-            this.formDataService.currentForm$.next({
+            const savedForm = {
               id: response.id,
-              formDefinitionId: this.formId,
+              formDefinition: {
+                formId: response.formDefinition.formId,
+              },
               content: response.content,
               categoryCode: this.formCategoryCode,
-            });
-            this.formDataService.setFormDataToLocalStorage(
-              this.formId,
-              response.id
-            );
+            };
+            this.formDataService.currentForm$.next(savedForm);
+            this.formDataService.setFormDataToLocalStorage(savedForm);
             this.formDataService.setSubmittedForm(response);
           })
       );
     }
   }
   ngOnDestroy() {
-    this.formDataService.setSubmittedForm(null);
+    this.formDataService.setSubmittedForm({});
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

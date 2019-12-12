@@ -2,11 +2,14 @@ export interface YFormData {
   id?: string;
   content?: string;
   type?: string;
-  formDefinitionId?: string;
+  formDefinition?: YFormDefinition;
   categoryCode?: string;
+  refId?: string;
 }
 
 export interface YFormDefinition {
-  id?: string;
+  formId?: string;
+  title?: string;
   content?: string;
+  applicationId?: string;
 }
