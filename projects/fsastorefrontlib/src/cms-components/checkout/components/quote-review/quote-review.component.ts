@@ -53,7 +53,7 @@ export class QuoteReviewComponent implements OnInit {
     this.routingService.go(this.checkoutStepUrlNext);
   }
 
-  getFormContentInJson(cart: any): any {
+  getFormContent(cart: any): any {
     if (
       cart &&
       cart.deliveryOrderGroups.length > 0 &&

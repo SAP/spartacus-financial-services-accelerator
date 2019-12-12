@@ -200,16 +200,16 @@
               >
                 <li
                   *ngFor="
-                    let quoteProperties of getFormContentInJson(cart)
-                      ?.personalDetails | keyvalue
+                    let formEntry of getFormContent(cart)?.personalDetails
+                      | keyvalue
                   "
                   class="accordion-list-item row"
                 >
                   <div class="col-6 item-label">
-                    {{ 'quote.' + quoteProperties.key | cxTranslate }}
+                    {{ 'forms.personalDetails.' + formEntry.key | cxTranslate }}
                   </div>
                   <div class="col-6 value notice">
-                    {{ quoteProperties.value }}
+                    {{ formEntry.value }}
                   </div>
                 </li>
               </ul>
