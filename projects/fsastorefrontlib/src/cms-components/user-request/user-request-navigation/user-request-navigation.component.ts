@@ -90,7 +90,6 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
                   .updateUserRequestStep(
                     userRequestData,
                     this.activeStepIndex,
-                    submittedFormData,
                     completedStatus
                   )
                   .pipe(
