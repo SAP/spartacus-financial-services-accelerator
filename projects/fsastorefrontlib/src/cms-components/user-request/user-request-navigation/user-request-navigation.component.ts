@@ -1,5 +1,5 @@
 import { UserRequestDataService } from './../../../core/user-request/services/user-request-data.service';
-import { FormDataService } from '@fsa/dynamicforms';
+import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -69,24 +69,29 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
   }
 
   next(currentStep: number): void {
-    this.formDataService.submit({});
+    const formDataId = this.activeStepData.yformConfigurator.id;
+    const formData: YFormData = {};
+    if (formDataId) {
+      formData.id = formDataId;
+    }
+    this.formDataService.submit(formData);
     this.subscription.add(
       this.formDataService
         .getSubmittedForm()
         .pipe(
-          switchMap(formData => {
-            if (formData) {
+          switchMap(submittedFormData => {
+            if (submittedFormData) {
               const userRequestData = this.userRequestDataService.userRequest;
               if (
                 userRequestData &&
                 userRequestData.requestId &&
-                formData.content !== undefined
+                submittedFormData.content !== undefined
               ) {
                 return this.userRequestService
                   .updateUserRequestStep(
                     userRequestData,
                     this.activeStepIndex,
-                    formData,
+                    submittedFormData,
                     completedStatus
                   )
                   .pipe(

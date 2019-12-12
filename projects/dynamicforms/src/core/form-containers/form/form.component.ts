@@ -33,7 +33,6 @@ export class FormComponent implements OnDestroy {
 
   submit(formData: YFormData) {
     if (this.form && this.form.valid) {
-      console.log('in');
       this.subscription.add(
         this.formDataService
           .saveFormData({

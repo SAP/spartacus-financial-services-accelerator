@@ -18,7 +18,6 @@ export class OccFormService {
   ) {}
 
   public saveFormData(formData: YFormData) {
-    console.log(formData);
     const url = this.getYFormsEndpoint() + '/data';
     let params = new HttpParams({
       fromString:
