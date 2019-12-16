@@ -69,6 +69,36 @@ export class ClaimEffects {
     })
   );
 
+  @Effect()
+  updateClaim$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.UPDATE_CLAIM),
+    map((action: fromActions.UpdateClaim) => action.payload),
+    mergeMap(payload =>
+      this.claimAdapter
+        .updateClaim(payload.userId, payload.claimId, payload.stepData)
+        .pipe(
+          map(claim => {
+            return new fromActions.UpdateClaimSuccess(claim);
+          }),
+          catchError(error => of(new fromActions.UpdateClaimFail(error)))
+        )
+    )
+  );
+
+  @Effect()
+  submitClaim$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.SUBMIT_CLAIM),
+    map((action: fromActions.SubmitClaim) => action.payload),
+    mergeMap(payload =>
+      this.claimAdapter.submitClaim(payload.userId, payload.claimId).pipe(
+        map(claim => {
+          return new fromActions.SubmitClaimSuccess(claim);
+        }),
+        catchError(error => of(new fromActions.SubmitClaimFail(error)))
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private claimAdapter: OccClaimAdapter,

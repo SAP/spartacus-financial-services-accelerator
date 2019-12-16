@@ -69,8 +69,22 @@ export interface FSUserRequest {
   configurationSteps?: FSStepData[];
 }
 
+export interface FSLocationOfLoss {
+  countryCode?: string;
+  city?: string;
+  postcode?: string;
+  address?: string;
+  additionalDetails?: string;
+}
+
 export interface Claim extends FSUserRequest {
   claimNumber?: string;
+  locationOfLoss?: FSLocationOfLoss;
+  causeOfLoss?: string;
+  incidentType?: FSIncidentType;
+  dateOfLoss?: string;
+  timeOfLoss?: string;
+  claimStatus?: string;
 }
 
 export interface AllowedFSRequestType {
@@ -79,4 +93,8 @@ export interface AllowedFSRequestType {
 
 export interface FSRequestType {
   code?: string;
+}
+
+export interface FSIncidentType {
+  incidentCode?: string;
 }

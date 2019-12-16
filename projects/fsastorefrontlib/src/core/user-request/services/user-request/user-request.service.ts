@@ -8,13 +8,16 @@ import { UserRequestSelector } from '../../store';
 import * as fromAction from '../../store/actions/index';
 import { UserRequestDataService } from '../user-request-data.service';
 import { FormDataService } from '@fsa/dynamicforms';
+import { ClaimDataService } from '../../../my-account/services';
 
 @Injectable()
 export class UserRequestService {
   constructor(
     protected userRequestData: UserRequestDataService,
     protected store: Store<fromReducer.FSUserRequestState>,
-    protected formDataService: FormDataService
+
+    protected formDataService: FormDataService,
+    protected claimServiceData: ClaimDataService
   ) {}
 
   getUserRequest(): Observable<FSUserRequest> {
@@ -78,6 +81,7 @@ export class UserRequestService {
       new fromAction.UpdateUserRequest({
         userId: this.userRequestData.userId,
         requestId: userRequest.requestId,
+        claimId: this.claimServiceData.content.claimNumber,
         stepData: stepData,
       })
     );

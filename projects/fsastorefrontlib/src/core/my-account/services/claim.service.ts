@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { AuthService } from '@spartacus/core';
 import { BehaviorSubject } from 'rxjs';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
@@ -11,8 +10,7 @@ import { ClaimDataService, SelectedPolicy } from './claim-data.service';
 export class ClaimService {
   constructor(
     protected store: Store<fromReducer.UserState>,
-    protected claimData: ClaimDataService,
-    protected auth: AuthService
+    protected claimData: ClaimDataService
   ) {
     this.initClaims();
   }
@@ -75,6 +73,31 @@ export class ClaimService {
         userId: userId,
         policyId: policyId,
         contractId: contractId,
+      })
+    );
+  }
+
+  updateClaim(
+    userId: string,
+    requestId: string,
+    claimData: any,
+    claimId: string
+  ) {
+    this.store.dispatch(
+      new fromAction.UpdateClaim({
+        userId: userId,
+        requestId: requestId,
+        stepData: claimData,
+        claimId: claimId,
+      })
+    );
+  }
+
+  submitClaim(userId: string, claimId: string) {
+    this.store.dispatch(
+      new fromAction.SubmitClaim({
+        userId: userId,
+        claimId: claimId,
       })
     );
   }

@@ -2,13 +2,24 @@ import { UserRequestDataService } from './../../../core/user-request/services/us
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import {
   UserRequestService,
   UserRequestNavigationService,
 } from '../../../core/user-request/services';
-import { FSUserRequest, FSStepData } from '../../../occ/occ-models';
+import { FSUserRequest, FSStepData, Claim } from '../../../occ/occ-models';
+import {
+  ClaimDataService,
+  ClaimService,
+} from '../../../core/my-account/services';
+import {
+  GlobalMessageService,
+  GlobalMessageType,
+  RoutingService,
+} from '@spartacus/core';
+import { select, Store } from '@ngrx/store';
+import * as fromClaimStore from '../../../core/my-account/store';
 
 const completedStatus = 'COMPLETED';
 
@@ -19,6 +30,8 @@ const completedStatus = 'COMPLETED';
 export class UserRequestNavigationComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
   userRequest$: Observable<FSUserRequest>;
+  claim$: Observable<Claim>;
+
   configurationSteps: FSStepData[];
   activeStepData: FSStepData;
   activeStepIndex: number;
@@ -28,11 +41,17 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected userRequestNavigationService: UserRequestNavigationService,
     protected formDataService: FormDataService,
-    protected userRequestDataService: UserRequestDataService
+    protected userRequestDataService: UserRequestDataService,
+    protected claimService: ClaimService,
+    protected claimDataService: ClaimDataService,
+    protected globalMessageService: GlobalMessageService,
+    private store: Store<fromClaimStore.SubmitClaim>,
+    protected router?: RoutingService
   ) {}
 
   ngOnInit() {
     this.userRequest$ = this.userRequestService.getUserRequest();
+    this.claim$ = this.store.pipe(select(fromClaimStore.getClaimsContent));
     this.subscription.add(
       this.userRequest$
         .pipe(
@@ -50,16 +69,11 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
                 this.activeStepData
               );
             }
+            return userRequestData;
           })
         )
         .subscribe()
     );
-  }
-
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 
   getNumberOfConfigurationSteps(): number {
@@ -68,12 +82,29 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     }
   }
 
+  shouldClaimBeSubmitted(
+    activeStep: number,
+    configurationLength: number
+  ): boolean {
+    return activeStep === configurationLength;
+  }
   next(currentStep: number): void {
     const formData: YFormData = {};
     if (this.activeStepData.yformConfigurator) {
       formData.id = this.activeStepData.yformConfigurator.id;
     }
     this.formDataService.submit(formData);
+    if (
+      this.shouldClaimBeSubmitted(
+        this.activeStepIndex + 1,
+        this.configurationSteps.length
+      )
+    ) {
+      this.claimService.submitClaim(
+        this.userRequestDataService.userId,
+        this.claimDataService.content.claimNumber
+      );
+    }
     this.subscription.add(
       this.formDataService
         .getSubmittedForm()
@@ -109,6 +140,23 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+    this.subscription.add(
+      this.claim$
+        .pipe(
+          filter(
+            claim =>
+              claim.claimStatus !== undefined && claim.claimStatus !== 'OPEN'
+          ),
+          map(() => {
+            this.router.go('/');
+            this.globalMessageService.add(
+              'Your claim is submitted',
+              GlobalMessageType.MSG_TYPE_CONFIRMATION
+            );
+          })
+        )
+        .subscribe()
+    );
   }
 
   back(currentStep: number): void {
@@ -116,5 +164,11 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
       this.configurationSteps,
       currentStep
     );
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
