@@ -11,8 +11,6 @@ export function clickContinueButton() {
 }
 
 export function checkBackAndContinueButtons() {
-  cy.get('button.secondary-button')
-    .should('contain', 'Back');
-  cy.get('button.primary-button')
-    .should('contain', 'Continue');
+  cy.get('button.secondary-button').should('contain', 'Back');
+  cy.get('button.primary-button').should('contain', 'Continue');
 }
