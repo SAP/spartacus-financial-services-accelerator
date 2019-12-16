@@ -1,6 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { UserRequestNavigationComponent } from './user-request-navigation.component';
-import { I18nTestingModule } from '@spartacus/core';
+import {
+  GlobalMessageService,
+  I18nTestingModule,
+  RoutingService,
+} from '@spartacus/core';
 import { FSUserRequest } from '../../../occ/occ-models';
 import { of } from 'rxjs';
 import { UserRequestService } from '../../../core/user-request/services/user-request/user-request.service';
@@ -13,6 +17,7 @@ import {
 } from '../../../core/my-account/services';
 import { FormDataService } from '@fsa/dynamicforms';
 import { UserRequestDataService } from '../../../core/user-request/services';
+import { Store } from '@ngrx/store';
 
 const mockRequest: FSUserRequest = {
   requestId: 'test123',
@@ -36,6 +41,9 @@ const mockActivatedRoute = {
   },
 };
 
+class MockStore {
+  pipe() {}
+}
 export class MockUserRequestService {
   getUserRequest() {
     return of(mockRequest);
@@ -88,6 +96,18 @@ describe('UserRequestNavigationComponent', () => {
         {
           provide: UserRequestDataService,
           useValue: UserRequestDataService,
+        },
+        {
+          provide: GlobalMessageService,
+          useValue: GlobalMessageService,
+        },
+        {
+          provide: RoutingService,
+          useValue: RoutingService,
+        },
+        {
+          provide: Store,
+          useClass: MockStore,
         },
       ],
     }).compileComponents();

@@ -5,7 +5,7 @@ import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import * as fromActions from '../actions';
 import { UserRequestDataService } from '../../services';
 import { OccUserRequestAdapter } from '../../../../occ/services/user-request/occ-user-request.adapter';
-import { ClaimDataService, ClaimService } from '../../../my-account/services';
+import { ClaimService } from '../../../my-account/services';
 
 @Injectable()
 export class UserRequestEffects {
@@ -55,7 +55,7 @@ export class UserRequestEffects {
               userRequest.payload.configurationSteps[
                 payload.stepData.sequenceNumber - 1
               ].yformConfigurator.content,
-              this.claimServiceData.content.claimNumber
+              payload.claimId
             );
           }),
           catchError(error => of(new fromActions.UpdateUserRequestFail(error)))
@@ -67,7 +67,6 @@ export class UserRequestEffects {
     private actions$: Actions,
     private userRequestAdapter: OccUserRequestAdapter,
     private userRequestData: UserRequestDataService,
-    private claimServiceData: ClaimDataService,
     private claimService: ClaimService
   ) {}
 }
