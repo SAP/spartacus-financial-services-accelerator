@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
-import { take } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { FSUserRequest } from '../../../occ/occ-models';
 import { UserRequestSelector } from '../store';
 import * as fromReducer from '../store/reducers';
+import { OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
 
 @Injectable()
 export class UserRequestDataService {
@@ -16,9 +17,15 @@ export class UserRequestDataService {
     protected authService: AuthService
   ) {
     this.authService
-      .getOccUserId()
-      .pipe(take(1))
-      .subscribe(occUserId => (this._userId = occUserId));
+      .getUserToken()
+      .pipe(filter(userToken => this.userId !== userToken.userId))
+      .subscribe(userToken => {
+        if (Object.keys(userToken).length !== 0) {
+          this._userId = userToken.userId;
+        } else {
+          this._userId = OCC_USER_ID_ANONYMOUS;
+        }
+      });
 
     this.store
       .pipe(select(UserRequestSelector.getUserRequestContent))
