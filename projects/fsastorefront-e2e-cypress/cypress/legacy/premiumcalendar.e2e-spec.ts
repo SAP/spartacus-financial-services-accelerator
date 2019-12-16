@@ -1,5 +1,5 @@
-import * as register from '../../helpers/register';
-import { donnaMooreUser } from '../../sample-data/users';
+import * as register from '../helpers/register';
+import { donnaMooreUser } from '../sample-data/users';
 
 context('PremiumCalendar', () => {
   before(() => {
@@ -7,10 +7,7 @@ context('PremiumCalendar', () => {
     cy.visit('/login');
     register.login(donnaMooreUser.email, donnaMooreUser.password);
     cy.wait(1500);
-    cy.selectOptionFromDropdown({
-      menuOption: 'My Account',
-      dropdownItem: 'Premium Calendar',
-    });
+    cy.visit('/my-account/premium-calendar');
   });
 
   it('should have premium calendar component', () => {

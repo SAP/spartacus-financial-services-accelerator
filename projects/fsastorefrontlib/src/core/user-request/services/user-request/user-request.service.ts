@@ -7,12 +7,14 @@ import { FSUserRequest } from '../../../../occ/occ-models';
 import { UserRequestSelector } from '../../store';
 import * as fromAction from '../../store/actions/index';
 import { UserRequestDataService } from '../user-request-data.service';
+import { FormDataService } from '@fsa/dynamicforms';
 
 @Injectable()
 export class UserRequestService {
   constructor(
     protected userRequestData: UserRequestDataService,
-    protected store: Store<fromReducer.FSUserRequestState>
+    protected store: Store<fromReducer.FSUserRequestState>,
+    protected formDataService: FormDataService
   ) {}
 
   getUserRequest(): Observable<FSUserRequest> {
@@ -50,16 +52,23 @@ export class UserRequestService {
     return this.store.select(UserRequestSelector.getUserRequestContent);
   }
 
+  loadUserRequestFormData(userRequest: FSUserRequest) {
+    userRequest.configurationSteps.forEach(stepData => {
+      if (stepData.yformConfigurator) {
+        this.formDataService.setFormDataToLocalStorage(
+          stepData.yformConfigurator
+        );
+      }
+    });
+  }
+
   updateUserRequestStep(
     userRequest: FSUserRequest,
     stepIndex: number,
-    data: any,
     stepStatus: string
   ): Observable<FSUserRequest> {
     const stepData = Object.assign(
-      {
-        yformConfigurator: data['id'],
-      },
+      {},
       userRequest.configurationSteps[stepIndex],
       {
         status: stepStatus,

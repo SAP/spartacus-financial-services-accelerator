@@ -47,7 +47,8 @@ import {
 import { StoreModule } from '@ngrx/store';
 import { CHECKOUT_FEATURE } from '../../core/checkout/store';
 import { OccFSCheckoutAdapter } from '../../occ/services/checkout/occ-fs-checkout.adapter';
-import { FormNavigationComponent } from './components/form-navigation/form-navigation.component';
+import { ChooseCoverNavigationComponent } from './components/choose-cover-navigation/choose-cover-navigation.component';
+import { PersonalDetailsNavigationComponent } from './components/personal-details-navigation/personal-details-navigation.component';
 
 const routes: Routes = [
   {
@@ -180,8 +181,11 @@ const routes: Routes = [
         DynamicProgressBarStepsComponent: {
           component: FSCheckoutProgressComponent,
         },
-        CheckoutFormNavigationFlex: {
-          component: FormNavigationComponent,
+        ChooseCoverFormNavigationFlex: {
+          component: ChooseCoverNavigationComponent,
+        },
+        PersonalDetailsFormNavigationFlex: {
+          component: PersonalDetailsNavigationComponent,
         },
       },
     }),
@@ -192,7 +196,8 @@ const routes: Routes = [
     FsaOrderConfirmationComponent,
     AddOptionsComponent,
     FSMiniCartComponent,
-    FormNavigationComponent,
+    ChooseCoverNavigationComponent,
+    PersonalDetailsNavigationComponent,
   ],
   exports: [
     I18nModule,
@@ -204,7 +209,6 @@ const routes: Routes = [
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
     FSMiniCartComponent,
-    FormNavigationComponent,
   ],
   entryComponents: [
     FsaOrderConfirmationComponent,
@@ -212,7 +216,8 @@ const routes: Routes = [
     QuoteReviewComponent,
     FinalReviewComponent,
     FSMiniCartComponent,
-    FormNavigationComponent,
+    ChooseCoverNavigationComponent,
+    PersonalDetailsNavigationComponent,
   ],
   providers: [
     FSCartService,

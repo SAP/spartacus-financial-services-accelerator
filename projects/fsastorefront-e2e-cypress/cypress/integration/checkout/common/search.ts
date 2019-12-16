@@ -1,5 +1,5 @@
-import * as productCategory from '../../helpers/productCategoryPage';
-import * as search from '../../helpers/search';
+import * as productCategory from '../../../helpers/productCategoryPage';
+import * as search from '../../../helpers/search';
 
 context('Search', () => {
   before(() => {

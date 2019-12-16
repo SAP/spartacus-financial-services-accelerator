@@ -18,7 +18,7 @@ export function userRequestConfigFactory(): StateConfig {
     state: {
       storageSync: {
         keys: {
-          [`${USER_REQUEST_FEATURE}.userRequest`]: StorageSyncType.LOCAL_STORAGE,
+          [`${USER_REQUEST_FEATURE}.userRequest.content.requestId`]: StorageSyncType.LOCAL_STORAGE,
         },
       },
     },

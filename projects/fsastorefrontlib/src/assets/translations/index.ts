@@ -8,13 +8,11 @@ import { quote } from './en/quote.en';
 import { userRequest } from './en/userRequest.en';
 
 export const fstranslations: TranslationResources = {
-  en: {
-    claim,
-    forms,
-    fscommon,
-    quote,
-    policy,
-    premiumCalendar,
-    userRequest,
-  },
+  claim,
+  forms,
+  fscommon,
+  quote,
+  policy,
+  premiumCalendar,
+  userRequest,
 };

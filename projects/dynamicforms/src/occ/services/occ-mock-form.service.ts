@@ -41,12 +41,7 @@ export class OccMockFormService {
     }
   }
 
-  private getNodes(
-    result: any,
-    i: number,
-    value: string,
-    nodesForParsing: any
-  ): any {
+  getNodes(result: any, i: number, value: string, nodesForParsing: any): any {
     const values = [];
     function pushElements(obj) {
       if (obj.length) {

@@ -16,6 +16,28 @@ export class FormHelpers {
     };
   }
 
+  static shouldEnableTargetGroup(dependentObject: Object) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (control.parent) {
+        for (const key in dependentObject) {
+          if (dependentObject.hasOwnProperty(key)) {
+            const allTargetGroup = dependentObject[key];
+            allTargetGroup.forEach(name => {
+              control.parent.parent.controls[name].disable();
+            });
+            const targetField = dependentObject[control.value];
+            if (targetField) {
+              targetField.forEach(field => {
+                control.parent.parent.controls[field].enable();
+              });
+            }
+          }
+        }
+      }
+      return null;
+    };
+  }
+
   static shouldEnableDependentGroup(groupCode: Array<string>) {
     return (control: AbstractControl): ValidationErrors | null => {
       let targetGroup;

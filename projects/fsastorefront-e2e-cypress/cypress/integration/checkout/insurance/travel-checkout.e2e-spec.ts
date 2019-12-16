@@ -1,6 +1,6 @@
 import * as register from '../../../helpers/register';
 import * as travelCheckout from '../../../helpers/checkout/travel/travel-checkout';
-import { registrationUser } from './../../../sample-data/users';
+import { registrationUser } from '../../../sample-data/users';
 
 context('Travel Insurance Checkout', () => {
   before(() => {
@@ -11,7 +11,7 @@ context('Travel Insurance Checkout', () => {
     cy.wait(1500);
   });
 
-  describe('Retrieve Travel Quote', () => {
+  describe('Checkout', () => {
     it('Should open travel category page', () => {
       travelCheckout.openCategoryPage();
     });
@@ -21,6 +21,10 @@ context('Travel Insurance Checkout', () => {
 
     it('Add main product to the cart', () => {
       travelCheckout.checkComparisonAndAddProduct();
+    });
+
+    it('Add payment method for user', () => {
+      travelCheckout.addPaymentMethod(registrationUser.email);
     });
 
     it('Add optional product to the cart', () => {
@@ -38,7 +42,7 @@ context('Travel Insurance Checkout', () => {
     });
 
     it('Select default payment details', () => {
-      travelCheckout.checkPaymentPage();
+      travelCheckout.selectPaymentMethod();
     });
 
     it('Place order on final review page', () => {

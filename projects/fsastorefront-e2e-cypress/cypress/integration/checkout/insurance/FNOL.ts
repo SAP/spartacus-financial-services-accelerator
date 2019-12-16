@@ -1,7 +1,7 @@
-import {donnaMooreUser } from "../../sample-data/users";
-import * as register from "../../helpers/register";
-import * as FNOL from "../../helpers/FNOL";
-import * as buttons from '../../helpers/checkout/buttons';
+import {donnaMooreUser } from "../../../sample-data/users";
+import * as register from "../../../helpers/register";
+import * as FNOL from "../../../helpers/FNOL";
+import * as buttons from '../../../helpers/checkout/buttons';
 
 context('FNOL for sample data user', () => {
   before(() => {

@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import {
   AuthService,
+  Cart,
+  CartActions,
   CartDataService,
+  CartSelectors,
   CartService,
   StateWithCart,
-  CartActions,
-  CartSelectors,
-  Cart,
 } from '@spartacus/core';
-import * as fromFSAction from '../../store/actions/index';
 import { BehaviorSubject } from 'rxjs';
-import { tap, filter, take } from 'rxjs/operators';
+import { filter, take, tap } from 'rxjs/operators';
 import { PricingData } from '../../../models/pricing.interface';
+import * as fromFSAction from '../../store/actions/index';
 
 @Injectable()
 export class FSCartService extends CartService {
@@ -78,6 +78,15 @@ export class FSCartService extends CartService {
           })
         );
       });
+  }
+
+  loadCart() {
+    this.store.dispatch(
+      new CartActions.LoadCart({
+        cartId: this.fsCartData.cartId,
+        userId: this.fsCartData.userId,
+      })
+    );
   }
 
   private isCartCreated(cart: Cart): boolean {

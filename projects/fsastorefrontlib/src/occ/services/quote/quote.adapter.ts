@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 
 export abstract class QuoteAdapter {
   /**
@@ -7,4 +7,17 @@ export abstract class QuoteAdapter {
    * @param userId The user id
    */
   abstract getQuotes(userId: string): Observable<any>;
+
+  /**
+   * Abstract method used to update quote for specified user and cart
+   *
+   * @param userId the user id
+   * @param cartId the cart id
+   * @param quoteContent the quote content
+   */
+  abstract updateQuote(
+    userId: string,
+    cartId: string,
+    quoteContent: any
+  ): Observable<any>;
 }

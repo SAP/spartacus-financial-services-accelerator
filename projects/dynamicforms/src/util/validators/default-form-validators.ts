@@ -56,6 +56,29 @@ export class DefaultFormValidators extends Validators {
     };
   }
 
+  static compareNumbers(comparisonField: string, operator: string) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (control.parent) {
+        const currentField = Number(control.value);
+        const compareToField = Number(
+          control.parent.controls[comparisonField].value
+        );
+        if (currentField && compareToField) {
+          switch (operator) {
+            case 'shouldBeGreater':
+              return currentField > compareToField
+                ? null
+                : { valueConflict: true };
+            case 'shouldBeLess':
+              return compareToField > currentField
+                ? null
+                : { valueConflict: true };
+          }
+        }
+      }
+    };
+  }
+
   static compareDates(comparisonField: string, operator: string) {
     return (control: AbstractControl): ValidationErrors | null => {
       if (control.parent) {

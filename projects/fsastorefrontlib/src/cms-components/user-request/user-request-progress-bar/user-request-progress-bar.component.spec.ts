@@ -30,6 +30,8 @@ export class MockUserRequestService {
   getUserRequest() {
     return of(mockRequest);
   }
+
+  loadUserRequestFormData() {}
 }
 
 describe('UserRequestProgressBarComponent', () => {

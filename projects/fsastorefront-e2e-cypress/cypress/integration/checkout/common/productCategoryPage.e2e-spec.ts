@@ -1,4 +1,4 @@
-import * as productCategory from '../../helpers/productCategoryPage';
+import * as productCategory from '../../../helpers/productCategoryPage';
 
 context('ProductCategoryPage', () => {
   before(() => {
@@ -101,7 +101,10 @@ context('ProductCategoryPage', () => {
   });
 
   it('should check Current Account product category page', () => {
-    cy.visit('Banking-Products/Credit-Card/c/banking_main_current_account');
+    cy.selectOptionFromDropdown({
+      menuOption: 'Banking',
+      dropdownItem: 'Current Account',
+    });
     productCategory.checkComponents();
     productCategory.checkApplicationButtons();
     cy.get('div.product-feature-wrapper').should('have.length', 3);
@@ -112,7 +115,10 @@ context('ProductCategoryPage', () => {
   });
 
   it('should check Credit Card product category page', () => {
-    cy.visit('Banking-Products/Credit-Card/c/banking_main_credit_card');
+    cy.selectOptionFromDropdown({
+      menuOption: 'Banking',
+      dropdownItem: 'Credit Card',
+    });
     productCategory.checkComponents();
     productCategory.checkApplicationButtons();
     cy.get('div.product-feature-wrapper').should('have.length', 3);
@@ -123,7 +129,10 @@ context('ProductCategoryPage', () => {
   });
 
   it('should check Loan product category page', () => {
-    cy.visit('Banking-Products/Credit-Card/c/banking_main_loans');
+    cy.selectOptionFromDropdown({
+      menuOption: 'Banking',
+      dropdownItem: 'Loan',
+    });
     productCategory.checkComponents();
     productCategory.checkApplicationButtons();
     cy.get('div.product-feature-wrapper').should('have.length', 1);
@@ -132,7 +141,10 @@ context('ProductCategoryPage', () => {
   });
 
   it('should check Fixed Term Deposit product category page', () => {
-    cy.visit('Banking-Products/Credit-Card/c/banking_main_fixed_term_deposits');
+    cy.selectOptionFromDropdown({
+      menuOption: 'Banking',
+      dropdownItem: 'Fixed Term Deposit',
+    });
     productCategory.checkComponents();
     productCategory.checkApplicationButtons();
     cy.get('div.product-feature-wrapper').should('have.length', 1);

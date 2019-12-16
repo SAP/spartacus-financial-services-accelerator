@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Cart, CartService, OccConfig, RoutingService } from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
-import { FSCheckoutConfigService } from '../../../../core/checkout/services';
+import { Cart, CartService, OccConfig, RoutingService } from '@spartacus/core';
+import { Observable } from 'rxjs';
+import {
+  FSCartService,
+  FSCheckoutConfigService,
+} from '../../../../core/checkout/services';
 import { FSCheckoutService } from '../../../../core/checkout/services/fs-checkout.service';
 
 @Component({
@@ -21,10 +24,13 @@ export class QuoteReviewComponent implements OnInit {
     protected routingService: RoutingService,
     private checkoutConfigService: FSCheckoutConfigService,
     private activatedRoute: ActivatedRoute,
-    protected checkoutService: FSCheckoutService
+    protected checkoutService: FSCheckoutService,
+    protected fsCartService: FSCartService
   ) {}
 
   ngOnInit() {
+    this.fsCartService.loadCart();
+
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
       this.activatedRoute
     );
@@ -34,6 +40,7 @@ export class QuoteReviewComponent implements OnInit {
     this.cart$ = this.cartService.getActive();
     this.cartLoaded$ = this.cartService.getLoaded();
   }
+
   public getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
@@ -44,5 +51,18 @@ export class QuoteReviewComponent implements OnInit {
   next() {
     this.checkoutService.mockDeliveryAddress();
     this.routingService.go(this.checkoutStepUrlNext);
+  }
+
+  getFormContent(cart: any): any {
+    if (
+      cart &&
+      cart.deliveryOrderGroups.length > 0 &&
+      cart.deliveryOrderGroups[0].entries.length > 0 &&
+      cart.deliveryOrderGroups[0].entries[0].formDataData
+    ) {
+      return JSON.parse(
+        cart.deliveryOrderGroups[0].entries[0].formDataData[0].content
+      );
+    }
   }
 }
