@@ -5,6 +5,10 @@ import {
   AuthService,
   AuthRedirectService,
   GlobalMessageService,
+  RoutingService,
+  FeatureConfigService,
+  AnonymousConsentsService,
+  AnonymousConsentsConfig,
 } from '@spartacus/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { FSUserSignUp } from '../../../occ/occ-models';
@@ -16,21 +20,29 @@ import { DefaultFormValidators } from '@fsa/dynamicforms';
 })
 export class FSRegisterComponent extends RegisterComponent {
   constructor(
-    private authService: AuthService,
-    private authRedService: AuthRedirectService,
-    private fsUserService: UserService,
-    private globalMsgService: GlobalMessageService,
-    private formBuilder: FormBuilder
+    protected auth: AuthService,
+    protected authRedirectService: AuthRedirectService,
+    protected userService: UserService,
+    protected globalMessageService: GlobalMessageService,
+    protected fb: FormBuilder,
+    protected router?: RoutingService,
+    protected featureConfig?: FeatureConfigService,
+    protected anonymousConsentsService?: AnonymousConsentsService,
+    protected anonymousConsentsConfig?: AnonymousConsentsConfig
   ) {
     super(
-      authService,
-      authRedService,
-      fsUserService,
-      globalMsgService,
-      formBuilder
+      auth,
+      authRedirectService,
+      userService,
+      globalMessageService,
+      fb,
+      router,
+      featureConfig,
+      anonymousConsentsService,
+      anonymousConsentsConfig
     );
   }
-  fsUserRegistrationForm: FormGroup = this.formBuilder.group(
+  fsUserRegistrationForm: FormGroup = this.fb.group(
     {
       titleCode: ['', Validators.required],
       firstName: ['', Validators.required],
@@ -77,15 +89,8 @@ export class FSRegisterComponent extends RegisterComponent {
   }
 
   collectDataFromRegisterForm(formData: any): FSUserSignUp {
-    const {
-      firstName,
-      lastName,
-      dateOfBirth,
-      email,
-      password,
-      titleCode,
-      phoneNumber,
-    } = formData;
+    const { firstName, lastName, dateOfBirth, email, password, titleCode, phoneNumber} = formData;
+
     return {
       firstName,
       lastName,
@@ -93,7 +98,7 @@ export class FSRegisterComponent extends RegisterComponent {
       uid: email.toLowerCase(),
       password,
       titleCode,
-      phoneNumber,
+      phoneNumber
     };
   }
 }
