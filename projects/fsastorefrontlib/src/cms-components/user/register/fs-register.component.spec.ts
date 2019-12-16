@@ -11,6 +11,8 @@ import {
   I18nTestingModule,
   RoutesConfig,
   AuthRedirectService,
+  FeaturesConfig,
+  AnonymousConsentsConfig,
 } from '@spartacus/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Observable, of, BehaviorSubject } from 'rxjs';
@@ -78,6 +80,14 @@ describe('FSRegisterComponent', () => {
         {
           provide: AuthRedirectService,
           useClass: MockRedirectAfterAuthService,
+        },
+        {
+          provide: FeaturesConfig,
+          useValue: FeaturesConfig,
+        },
+        {
+          provide: AnonymousConsentsConfig,
+          useValue: AnonymousConsentsConfig,
         },
       ],
     }).compileComponents();
