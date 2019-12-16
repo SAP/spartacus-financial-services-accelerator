@@ -89,7 +89,15 @@ export class FSRegisterComponent extends RegisterComponent {
   }
 
   collectDataFromRegisterForm(formData: any): FSUserSignUp {
-    const { firstName, lastName, dateOfBirth, email, password, titleCode, phoneNumber} = formData;
+    const {
+      firstName,
+      lastName,
+      dateOfBirth,
+      email,
+      password,
+      titleCode,
+      phoneNumber,
+    } = formData;
 
     return {
       firstName,
@@ -98,7 +106,7 @@ export class FSRegisterComponent extends RegisterComponent {
       uid: email.toLowerCase(),
       password,
       titleCode,
-      phoneNumber
+      phoneNumber,
     };
   }
 }
