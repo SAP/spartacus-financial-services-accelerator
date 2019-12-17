@@ -136,13 +136,12 @@ context('FNOL for sample data user', () => {
     FNOL.selectAutoPolicyForFNOL();
   });
 
+
   it('Should check and populate Incident Information page', () => {
     FNOL.checkFNOLCheckoutPage();
     FNOL.checkFNOLSteps();
     FNOL.populateIncidentInformationStep();
-    //will be replaced with function once current account test is merged
-    cy.get('button.primary-button').click();
-    cy.wait(1000);
+    buttons.clickContinueButton();
   });
 
   it('Should check claim is created', () => {
@@ -151,47 +150,49 @@ context('FNOL for sample data user', () => {
     cy.get('.info-card')
       .last()
       .within(() => {
-        cy.get('.title').contains('Auto Insurance');
-        cy.get('.value').contains('BULK1T2000000552');
-        cy.get('.title').contains('Date of Loss');
-        cy.get('.value').contains('N/A');
-        cy.get('.title').contains('Status');
-        cy.get('.value').contains('OPEN');
-        cy.get('.secondary-button')
-          .contains('Resume')
-          .click();
+        FNOL.checkOpenClaimContent();
+        buttons.clickResumeButton();
       });
-    cy.wait(1000);
   });
 
   it('Should check user is navigated to first FNOL page', () => {
     FNOL.checkFNOLCheckoutPage();
     FNOL.checkFNOLSteps();
-    //will be removed once we fix anonymous issue
-    FNOL.populateIncidentInformationStep();
     cy.get('[name=whatHappened]').select('Breakdown');
     buttons.clickContinueButton();
-    cy.wait(1000);
   });
 
   it('Should check and populate Incident Report page', () => {
     FNOL.checkFNOLCheckoutPage();
     FNOL.populateIncidentReportStep();
     buttons.clickContinueButton();
-    cy.wait(1000);
   });
 
   it('Should check and populate General Information page', () => {
     FNOL.checkFNOLCheckoutPage();
     FNOL.populateGeneralInformationStep();
     buttons.clickContinueButton();
-    cy.wait(1000);
   });
 
   it('Should check summary page', () => {
     FNOL.checkFNOLCheckoutPage();
     FNOL.checkSummaryPage();
     buttons.checkBackAndContinueButtons();
-    //add more detailed checks once saving of form data is implemented
   });
+
+  it('Should check information in accordions on summary page', () => {
+    FNOL.checkIncidentInformationAccordion();
+    FNOL.checkIncidentReportAccordion();
+    FNOL.checkGeneralInformationAccordion();
+  });
+
+  it('Should start a claim checkout from homepage', () => {
+    cy.get('cx-page-slot.SiteLogo').click();
+
+    FNOL.startClaimFromHomepage();
+    FNOL.checkFnolEntryPage();
+    FNOL.selectPolicyOnEntryPage();
+    buttons.clickContinueButton();
+    FNOL.checkFNOLCheckoutPage();
+  })
 });

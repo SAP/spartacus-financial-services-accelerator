@@ -17,16 +17,14 @@ export function checkClaimsPage() {
 }
 
 export function selectAutoPolicyForFNOL() {
-  cy.get('.col-md-4')
-    //can we find better selector for this
-    .eq(0)
-    .within(() => {
-      cy.get('h4.info-card-caption').contains('Auto Insurance');
-      cy.get('div.info-card-caption').contains(' BULK1T2000000552 ');
-      cy.get('.primary-button')
-        .contains(' Make a Claim')
-        .click();
-    });
+      cy.get('div.info-card-caption').contains(' BULK1T2000000552 ')
+        .parentsUntil('.col-md-4')
+        .within(() => {
+          cy.get('h4.info-card-caption').contains('Auto Insurance');
+          cy.get('.primary-button')
+            .contains(' Make a Claim')
+            .click();
+        });
 }
 
 export function checkFNOLCheckoutPage() {
@@ -107,16 +105,71 @@ export function checkSummaryPage() {
     cy.get('h2').contains('Summary');
   });
   cy.get('.accordion-item')
-    .should('have.length', '3')
-    .within(() => {
-      cy.get('h4')
-        .eq(0)
-        .should('have.text', ' Incident Information ');
-      cy.get('h4')
-        .eq(1)
-        .should('have.text', ' Incident Report ');
-      cy.get('h4')
-        .eq(2)
-        .should('have.text', ' General Information ');
-    });
+    .should('have.length', '3');
+}
+
+export function checkIncidentInformationAccordion() {
+  cy.get('h4')
+    .eq(0)
+    .should('have.text', ' Incident Information ');
+  cy.get('.accordion-item-wrapper')
+    .eq(0)
+    .within( ()=> {
+      cy.get('.accordion-list-item').should('have.length', '8');
+    })
+  cy.get('.accordion-list-item').contains('AutoBreakdown');
+}
+
+export function checkIncidentReportAccordion() {
+  cy.get('h4')
+    .eq(1)
+    .should('have.text', ' Incident Report ');
+  cy.get('.accordion-item-wrapper')
+    .eq(1)
+    .within( ()=> {
+      cy.get('.accordion-list-item').should('have.length', '1');
+    })
+  cy.get('.accordion-list-item').contains('while buying tesla coils');
+}
+
+export function checkGeneralInformationAccordion() {
+  cy.get('h4')
+    .eq(2)
+    .should('have.text', ' General Information ');
+  cy.get('.accordion-item-wrapper')
+    .eq(2)
+    .within( ()=> {
+      cy.get('.accordion-list-item').should('have.length', '3');
+    })
+  cy.get('.accordion-list-item').contains('me');
+}
+
+export function checkOpenClaimContent() {
+  cy.get('.title').contains('Auto Insurance');
+  cy.get('.value').contains('BULK1T2000000552');
+  cy.get('.title').contains('Date of Loss');
+  cy.get('.value').contains('N/A');
+  cy.get('.title').contains('Status');
+  cy.get('.value').contains('OPEN');
+}
+
+export function startClaimFromHomepage() {
+  cy.get('cx-page-slot.Section2C cx-banner')
+    .eq(1)
+    .click();
+  cy.wait(500);
+}
+
+export function checkFnolEntryPage() {
+  cy.get('h2').contains('Make a claim online');
+  cy.get('h2').contains('Which car has been damaged?');
+  cy.get('fsa-claim-policies').should('be.visible');
+  cy.get('fsa-cms-custom-container').should('be.visible');
+}
+
+export function selectPolicyOnEntryPage() {
+  cy.get('div.fs-items')
+    .eq(0)
+    .click();
+  cy.get('.form-check-input').click();
 }
