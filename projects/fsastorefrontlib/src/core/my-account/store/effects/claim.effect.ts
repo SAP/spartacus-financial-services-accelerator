@@ -75,7 +75,7 @@ export class ClaimEffects {
     map((action: fromActions.UpdateClaim) => action.payload),
     mergeMap(payload =>
       this.claimAdapter
-        .updateClaim(payload.userId, payload.claimId, payload.stepData)
+        .updateClaim(payload.userId, payload.claimId, payload.claimData)
         .pipe(
           map(claim => {
             return new fromActions.UpdateClaimSuccess(claim);

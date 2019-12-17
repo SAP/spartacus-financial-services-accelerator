@@ -46,7 +46,7 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     protected claimDataService: ClaimDataService,
     protected globalMessageService: GlobalMessageService,
     private store: Store<fromClaimStore.SubmitClaim>,
-    protected router?: RoutingService
+    protected router: RoutingService
   ) {}
 
   ngOnInit() {
@@ -76,18 +76,6 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     );
   }
 
-  getNumberOfConfigurationSteps(): number {
-    if (this.configurationSteps) {
-      return this.configurationSteps.length;
-    }
-  }
-
-  shouldClaimBeSubmitted(
-    activeStep: number,
-    configurationLength: number
-  ): boolean {
-    return activeStep === configurationLength;
-  }
   next(currentStep: number): void {
     const formData: YFormData = {};
     if (this.activeStepData.yformConfigurator) {
@@ -170,5 +158,18 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  protected getNumberOfConfigurationSteps(): number {
+    if (this.configurationSteps) {
+      return this.configurationSteps.length;
+    }
+  }
+
+  protected shouldClaimBeSubmitted(
+    activeStep: number,
+    configurationLength: number
+  ): boolean {
+    return activeStep === configurationLength;
   }
 }

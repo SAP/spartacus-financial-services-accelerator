@@ -5,7 +5,6 @@ import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import * as fromActions from '../actions';
 import { UserRequestDataService } from '../../services';
 import { OccUserRequestAdapter } from '../../../../occ/services/user-request/occ-user-request.adapter';
-import { ClaimService } from '../../../my-account/services';
 
 @Injectable()
 export class UserRequestEffects {
@@ -45,18 +44,19 @@ export class UserRequestEffects {
       return this.userRequestAdapter
         .updateUserRequest(payload.userId, payload.requestId, payload.stepData)
         .pipe(
-          map((userRequest: any) => {
-            return new fromActions.LoadUserRequestSuccess(userRequest);
-          }),
-          tap(userRequest => {
-            this.claimService.updateClaim(
-              payload.userId,
-              payload.requestId,
-              userRequest.payload.configurationSteps[
-                payload.stepData.sequenceNumber - 1
-              ].yformConfigurator.content,
-              payload.claimId
-            );
+          mergeMap((userRequest: any) => {
+            return [
+              new fromActions.LoadUserRequestSuccess(userRequest),
+              new fromActions.UpdateClaim({
+                userId: payload.userId,
+                requestId: payload.requestId,
+                claimData:
+                  userRequest.configurationSteps[
+                    payload.stepData.sequenceNumber - 1
+                  ].yformConfigurator.content,
+                claimId: payload.claimId,
+              }),
+            ];
           }),
           catchError(error => of(new fromActions.UpdateUserRequestFail(error)))
         );
@@ -66,7 +66,6 @@ export class UserRequestEffects {
   constructor(
     private actions$: Actions,
     private userRequestAdapter: OccUserRequestAdapter,
-    private userRequestData: UserRequestDataService,
-    private claimService: ClaimService
+    private userRequestData: UserRequestDataService
   ) {}
 }

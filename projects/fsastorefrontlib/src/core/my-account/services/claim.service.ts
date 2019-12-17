@@ -77,22 +77,6 @@ export class ClaimService {
     );
   }
 
-  updateClaim(
-    userId: string,
-    requestId: string,
-    claimData: any,
-    claimId: string
-  ) {
-    this.store.dispatch(
-      new fromAction.UpdateClaim({
-        userId: userId,
-        requestId: requestId,
-        stepData: claimData,
-        claimId: claimId,
-      })
-    );
-  }
-
   submitClaim(userId: string, claimId: string) {
     this.store.dispatch(
       new fromAction.SubmitClaim({
