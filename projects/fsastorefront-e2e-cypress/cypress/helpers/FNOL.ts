@@ -17,14 +17,15 @@ export function checkClaimsPage() {
 }
 
 export function selectAutoPolicyForFNOL() {
-      cy.get('div.info-card-caption').contains(' BULK1T2000000552 ')
-        .parentsUntil('.col-md-4')
-        .within(() => {
-          cy.get('h4.info-card-caption').contains('Auto Insurance');
-          cy.get('.primary-button')
-            .contains(' Make a Claim')
-            .click();
-        });
+  cy.get('div.info-card-caption')
+    .contains(' BULK1T2000000552 ')
+    .parentsUntil('.col-md-4')
+    .within(() => {
+      cy.get('h4.info-card-caption').contains('Auto Insurance');
+      cy.get('.primary-button')
+        .contains(' Make a Claim')
+        .click();
+    });
 }
 
 export function checkFNOLCheckoutPage() {
@@ -104,8 +105,7 @@ export function checkSummaryPage() {
   cy.get('fsa-user-request-summary').within(() => {
     cy.get('h2').contains('Summary');
   });
-  cy.get('.accordion-item')
-    .should('have.length', '3');
+  cy.get('.accordion-item').should('have.length', '3');
 }
 
 export function checkIncidentInformationAccordion() {
@@ -114,9 +114,9 @@ export function checkIncidentInformationAccordion() {
     .should('have.text', ' Incident Information ');
   cy.get('.accordion-item-wrapper')
     .eq(0)
-    .within( ()=> {
+    .within(() => {
       cy.get('.accordion-list-item').should('have.length', '8');
-    })
+    });
   cy.get('.accordion-list-item').contains('AutoBreakdown');
 }
 
@@ -126,9 +126,9 @@ export function checkIncidentReportAccordion() {
     .should('have.text', ' Incident Report ');
   cy.get('.accordion-item-wrapper')
     .eq(1)
-    .within( ()=> {
+    .within(() => {
       cy.get('.accordion-list-item').should('have.length', '1');
-    })
+    });
   cy.get('.accordion-list-item').contains('while buying tesla coils');
 }
 
@@ -138,9 +138,9 @@ export function checkGeneralInformationAccordion() {
     .should('have.text', ' General Information ');
   cy.get('.accordion-item-wrapper')
     .eq(2)
-    .within( ()=> {
+    .within(() => {
       cy.get('.accordion-list-item').should('have.length', '3');
-    })
+    });
   cy.get('.accordion-list-item').contains('me');
 }
 

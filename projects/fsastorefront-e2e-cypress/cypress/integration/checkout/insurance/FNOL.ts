@@ -136,7 +136,6 @@ context('FNOL for sample data user', () => {
     FNOL.selectAutoPolicyForFNOL();
   });
 
-
   it('Should check and populate Incident Information page', () => {
     FNOL.checkFNOLCheckoutPage();
     FNOL.checkFNOLSteps();
@@ -194,5 +193,5 @@ context('FNOL for sample data user', () => {
     FNOL.selectPolicyOnEntryPage();
     buttons.clickContinueButton();
     FNOL.checkFNOLCheckoutPage();
-  })
+  });
 });
