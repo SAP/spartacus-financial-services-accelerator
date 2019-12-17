@@ -1,4 +1,4 @@
-<div class="products-wrapper d-md-flex justify-content-around mt-5 mb-2">
+<div class="products-wrapper d-md-flex justify-content-around mb-2">
   <ng-container *ngIf="component$ | async as component">
     <ngb-tabset [ngClass]="{ 'hide-tab-heading': tabs$.length === 1 }">
       <ngb-tab *ngFor="let tabElement of tabs$">
