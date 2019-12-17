@@ -64,7 +64,7 @@
 .document-list {
   .document-list-item {
     .FSA-icon {
-      color: var(--cx-color-12);
+      color: var(--cx-color-primary);
     }
   }
   .document-link {
@@ -79,7 +79,7 @@
     font-weight: var(--cx-font-weight-semi);
   }
   .document-link {
-    color: var(--cx-color-12);
+    color: var(--cx-color-primary);
     font-weight: var(--cx-font-weight-normal);
   }
   .document-title {
@@ -99,7 +99,7 @@
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    border-bottom: 3px solid var(--cx-color-12);
+    border-bottom: 3px solid var(--cx-color-primary);
     width: 7rem;
   }
 }

@@ -66,7 +66,7 @@ header {
       height: 2px;
       width: 100%;
       left: 0;
-      background-color: var(--cx-color-10);
+      background-color: var(--cx-color-4);
     }
   }
   cx-navigation-ui.flyout {
@@ -110,7 +110,7 @@ header {
           width: 100%;
           color: var(--cx-color-text);
           &:hover {
-            background: var(--cx-color-10);
+            background: var(--cx-color-4);
             color: var(--cx-color-primary);
           }
         }
@@ -188,7 +188,7 @@ header {
   }
   // Mobile Navigation
   .navigation {
-    background: var(--cx-color-10);
+    background: var(--cx-color-4);
     .SiteLogin {
       a {
         color: var(--cx-color-text);
