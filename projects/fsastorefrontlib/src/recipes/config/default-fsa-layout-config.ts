@@ -27,6 +27,9 @@ export const fsaLayoutConfig: LayoutConfig = {
         slots: ['SiteLogin', 'NavigationBar', 'TopHeaderSlot'],
       },
     },
+    LoginPageTemplate: {
+      slots: ['TopContent', 'BodyContent'],
+    },
     MultiTabsCategoryPageTemplate: {
       slots: ['Section1', 'Section2'],
     },
