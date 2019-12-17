@@ -29,8 +29,6 @@ export class QuoteReviewComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.fsCartService.loadCart();
-
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
       this.activatedRoute
     );
