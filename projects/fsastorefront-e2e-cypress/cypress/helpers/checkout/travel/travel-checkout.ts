@@ -21,7 +21,7 @@ export function populateInsuranceInfoForm() {
     cy.get('[name="Travellers"]').select('1');
     cy.get('[name="tripDetailsTravellerAges"]').type('20');
   });
-  cy.get('fsa-form-navigation')
+  cy.get('fsa-choose-cover-navigation')
     .findByText('Next')
     .click();
 }
@@ -101,7 +101,7 @@ export function populatePersonalDetailsForm() {
     cy.get('[name="postcode"]').type('111111');
     cy.get('[name=country]').select('Serbia');
   });
-  cy.get('fsa-form-navigation')
+  cy.get('fsa-personal-details-navigation')
     .findByText('Next')
     .click();
 }

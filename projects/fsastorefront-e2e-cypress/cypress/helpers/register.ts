@@ -63,10 +63,6 @@ export function logout() {
 
 export function loginInCheckout(username: string, password: string) {
   //will be deleted once register user is working correctly
-  cy.get('.cx-login-link')
-    .should('be.visible')
-    .click();
-  // cy.get('.cx-login-link').within(() => {
   cy.get('[formcontrolname="userId"]')
     .clear()
     .type(username);
