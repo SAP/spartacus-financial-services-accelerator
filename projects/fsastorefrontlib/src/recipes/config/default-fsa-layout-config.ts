@@ -30,6 +30,9 @@ export const fsaLayoutConfig: LayoutConfig = {
     LoginPageTemplate: {
       slots: ['TopContent', 'BodyContent'],
     },
+    AccountPageTemplate: {
+      slots: ['TopContent', 'BodyContent'],
+    },
     MultiTabsCategoryPageTemplate: {
       slots: ['Section1', 'Section2'],
     },
