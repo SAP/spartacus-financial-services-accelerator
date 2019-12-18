@@ -92,9 +92,6 @@ export function populateGeneralInformationStep() {
   cy.get('[name=policeInformed]')
     .eq(0)
     .click();
-  cy.get('[name=policeInformed]')
-    .eq(0)
-    .click();
   cy.get('[name=witnesses]')
     .eq(1)
     .click();
