@@ -76,7 +76,8 @@ export class InboxService {
     return readState;
   }
 
-  getMessages(messageGroup): Observable<any> {
+  getMessages(messageGroup, pageNumber): Observable<any> {
+    this.searchConfig.currentPage = pageNumber;
     return this.occInboxAdapter.getSiteMessagesForUserAndGroup(
       this.inboxData.userId,
       messageGroup,

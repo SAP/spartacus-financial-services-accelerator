@@ -11,6 +11,7 @@ import { Observable, Subscription } from 'rxjs';
 import { take, mergeMap, map } from 'rxjs/operators';
 import { Message } from '../../../../../core/my-account/services/inbox-data.service';
 import { InboxService } from '../../../../../core/my-account/services/inbox.service';
+import { SearchConfig } from '@spartacus/core';
 
 @Component({
   selector: 'fsa-messages-inbox',
@@ -24,6 +25,8 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   messagesObject$: Observable<any>;
   selectedIndex: number;
   messageGroup: string;
+
+  searchConfig: SearchConfig = {};
 
   @Input() initialGroup: string;
   @Input() checkBoxStatus: boolean;
@@ -63,15 +66,15 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
       this.inboxService.activeMessageGroupAndTitle.subscribe(group => {
         this.messageGroup =
           group && group.messageGroup ? group.messageGroup : this.initialGroup;
-        this.getMessages();
+        this.getMessages(this.searchConfig);
       })
     );
   }
 
-  getMessages() {
+  getMessages(searchConfig: SearchConfig) {
     this.subscription.add(
       this.inboxService
-        .getMessages(this.messageGroup)
+        .getMessages(this.messageGroup, searchConfig.currentPage)
         .subscribe(messages => this.inboxService.messagesSource.next(messages))
     );
   }
@@ -116,5 +119,10 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  pageChange(pageNumber: number) {
+    this.searchConfig.currentPage = pageNumber;
+    this.loadCurrentMessageGroup();
   }
 }

@@ -83,6 +83,14 @@
         </div>
       </div>
     </ng-container>
+
+    <cx-pagination
+      *ngIf="messagesObj.pagination"
+      [pagination]="messagesObj.pagination"
+      (viewPageEvent)="pageChange($event)"
+    ></cx-pagination>
+    Total results: {{ messagesObj.pagination.totalCount }}
+
   </ng-container>
 </div>
 <ng-template #noMessages>

@@ -43,10 +43,6 @@ export class InboxComponent implements OnInit, OnDestroy {
   mainCheckboxChecked = false;
   childCheckboxes = false;
 
-  subjectSortOrder = 'desc';
-  contentSortOrder = 'desc';
-  sentSortOrder = 'desc';
-
   ngOnInit() {
     this.subscription.add(
       this.auth.getUserToken().subscribe(userData => {
