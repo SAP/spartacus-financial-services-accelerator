@@ -17,7 +17,7 @@
   }
   .card-body.cx-card-body {
     background: var(--color-1);
-  }
+  } 
   .card-header {
     color: var(--cx-color-text);
     background: var(--cx-color-4);
@@ -29,3 +29,38 @@
     text-decoration: underline;
   }
 }
+cx-payment-method {
+  .cx-checkout-title {
+    @extend .section-header-heading;
+    text-transform: none;
+    // Since we don`t have access to html, we have to override d-none class
+    &.d-none.d-lg-block.d-xl-block {
+      display: block !important;
+    }
+  }
+  .cx-checkout-text {
+    display: none;
+  }
+  .cx-checkout-btns {
+    justify-content: flex-start;
+    margin: 20px 0;
+  }
+  cx-payment-form {
+    & > div > .row:not(.cx-checkout-btns) {
+      @include box-shadow(0px, 8px, 20px, 1px, $color-grey, 1);
+      margin: 0;
+      padding: 2rem;
+      @include media-breakpoint-down(xs) {
+        padding: 2rem 0;
+      }
+    }
+    .cx-payment-form-billing-address {
+      color: var(--cx-color-primary);
+    }
+    .col-md-12.col-lg-9 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+}
+
