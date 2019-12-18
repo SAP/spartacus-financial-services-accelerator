@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import * as fromActions from '../actions';
 import { UserRequestDataService } from '../../services';
 import { OccUserRequestAdapter } from '../../../../occ/services/user-request/occ-user-request.adapter';
@@ -54,7 +54,6 @@ export class UserRequestEffects {
                   userRequest.configurationSteps[
                     payload.stepData.sequenceNumber - 1
                   ].yformConfigurator.content,
-                claimId: payload.claimId,
               }),
             ];
           }),

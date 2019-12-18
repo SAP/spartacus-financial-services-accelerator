@@ -90,7 +90,7 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     ) {
       this.claimService.submitClaim(
         this.userRequestDataService.userId,
-        this.claimDataService.content.claimNumber
+        this.claimDataService.claimData.claimNumber
       );
     }
     this.subscription.add(

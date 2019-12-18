@@ -15,7 +15,7 @@ export interface SelectedPolicy {
 export class ClaimDataService {
   private _userId;
   private _claims: Claim[];
-  private _content: Claim;
+  private _claimData: Claim;
 
   constructor(
     protected store: Store<fromReducer.UserState>,
@@ -29,7 +29,7 @@ export class ClaimDataService {
     this.store
       .pipe(select(fromClaimStore.getClaimsContent))
       .subscribe(claimData => {
-        this._content = claimData;
+        this._claimData = claimData;
       });
   }
 
@@ -41,8 +41,8 @@ export class ClaimDataService {
     return this._userId;
   }
 
-  get content(): Claim {
-    return this._content;
+  get claimData(): Claim {
+    return this._claimData;
   }
 
   set claims(val: Claim[]) {

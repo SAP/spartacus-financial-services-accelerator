@@ -73,16 +73,23 @@ export class ClaimEffects {
   updateClaim$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.UPDATE_CLAIM),
     map((action: fromActions.UpdateClaim) => action.payload),
-    mergeMap(payload =>
-      this.claimAdapter
-        .updateClaim(payload.userId, payload.claimId, payload.claimData)
+    mergeMap(payload => {
+      let claimID = this.claimServiceData.claimData.claimNumber;
+      if (claimID === undefined && this.claimServiceData.claims !== undefined) {
+        // @ts-ignore
+        claimID = this.claimServiceData.claims.claims.find(
+          claim => claim.requestId === payload.requestId
+        ).claimNumber;
+      }
+      return this.claimAdapter
+        .updateClaim(payload.userId, claimID, payload.claimData)
         .pipe(
           map(claim => {
             return new fromActions.UpdateClaimSuccess(claim);
           }),
           catchError(error => of(new fromActions.UpdateClaimFail(error)))
-        )
-    )
+        );
+    })
   );
 
   @Effect()
@@ -102,6 +109,7 @@ export class ClaimEffects {
   constructor(
     private actions$: Actions,
     private claimAdapter: OccClaimAdapter,
-    private claimData: ClaimDataService
+    private claimData: ClaimDataService,
+    protected claimServiceData: ClaimDataService
   ) {}
 }

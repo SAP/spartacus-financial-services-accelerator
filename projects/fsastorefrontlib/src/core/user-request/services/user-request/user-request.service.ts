@@ -8,16 +8,13 @@ import { UserRequestSelector } from '../../store';
 import * as fromAction from '../../store/actions/index';
 import { UserRequestDataService } from '../user-request-data.service';
 import { FormDataService } from '@fsa/dynamicforms';
-import { ClaimDataService } from '../../../my-account/services';
 
 @Injectable()
 export class UserRequestService {
   constructor(
     protected userRequestData: UserRequestDataService,
     protected store: Store<fromReducer.FSUserRequestState>,
-
-    protected formDataService: FormDataService,
-    protected claimServiceData: ClaimDataService
+    protected formDataService: FormDataService
   ) {}
 
   getUserRequest(): Observable<FSUserRequest> {
@@ -77,20 +74,10 @@ export class UserRequestService {
         status: stepStatus,
       }
     );
-
-    let claimID = this.claimServiceData.content.claimNumber;
-    if (claimID === undefined && this.claimServiceData.claims !== undefined) {
-      // @ts-ignore
-      claimID = this.claimServiceData.claims.claims.find(
-        claim => claim.requestId === userRequest.requestId
-      ).claimNumber;
-    }
-
     this.store.dispatch(
       new fromAction.UpdateUserRequest({
         userId: this.userRequestData.userId,
         requestId: userRequest.requestId,
-        claimId: claimID,
         stepData: stepData,
       })
     );
