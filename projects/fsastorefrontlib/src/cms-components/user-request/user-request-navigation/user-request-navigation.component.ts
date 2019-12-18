@@ -82,12 +82,7 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
       formData.id = this.activeStepData.yformConfigurator.id;
     }
     this.formDataService.submit(formData);
-    if (
-      this.shouldClaimBeSubmitted(
-        this.activeStepIndex + 1,
-        this.configurationSteps.length
-      )
-    ) {
+    if (this.activeStepIndex + 1 === this.configurationSteps.length) {
       this.claimService.submitClaim(
         this.userRequestDataService.userId,
         this.claimDataService.claimData.claimNumber
@@ -164,12 +159,5 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     if (this.configurationSteps) {
       return this.configurationSteps.length;
     }
-  }
-
-  protected shouldClaimBeSubmitted(
-    activeStep: number,
-    configurationLength: number
-  ): boolean {
-    return activeStep === configurationLength;
   }
 }
