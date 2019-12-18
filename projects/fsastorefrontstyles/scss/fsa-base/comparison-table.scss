@@ -2,11 +2,11 @@
 @import '../theme';
 
 .products-wrapper {
+  @include box-shadow(0px, 2px, 20px, 1px, $color-grey, 1);
   ngb-tabset {
     flex: 0 1 100%;
   }
   fsa-comparison-table-tab {
-    background-color: var(--cx-color-4);
     display: flex;
     flex: 0 1 100%;
     border: $border-grey;
@@ -51,10 +51,13 @@
     z-index: 1;
     flex: 0 1 100%;
     padding: 0 5px;
-    border-left: 1px dashed var(--cx-color-3);
+    border-left: 1px dashed var(--cx-color-6);
     text-align: center;
     &:last-of-type {
       padding-right: 0;
+    }
+    &:first-of-type {
+      border-left: 1px solid var(--cx-color-6);
     }
     @include media-breakpoint-down(sm) {
       &:first-of-type {
@@ -65,7 +68,8 @@
   .table-header {
     min-height: 200px;
     &-title {
-      font-size: $h5-font-size;
+      font-size: var(--cx-h6-font-size);
+      font-weight: var(--cx-font-weight-semi);
       min-height: 50px;
       @include media-breakpoint-down(sm) {
         min-height: 60px;
@@ -74,9 +78,10 @@
     }
     &-value {
       margin: 20px 0;
-      font-size: $h1-font-size;
+      font-size: var(--cx-h1-font-size);
+      font-weight: var(--cx-font-weight-semi);
       @include media-breakpoint-down(sm) {
-        font-size: $h3-font-size;
+        font-size: var(--cx-h3-font-size);
       }
     }
   }
@@ -94,6 +99,7 @@
       line-height: 1.2;
       max-width: calc(100% - 6vw);
       vertical-align: middle;
+      font-weight: var(--cx-font-weight-semi);
     }
     &-value {
       @include media-breakpoint-down(sm) {
@@ -112,8 +118,5 @@
   .fsa-tooltip {
     @include absolute-center;
     right: 5%;
-  }
-  .ct-tooltip .arrow:before {
-    border-top-color: var(--cx-color-8);
   }
 }
