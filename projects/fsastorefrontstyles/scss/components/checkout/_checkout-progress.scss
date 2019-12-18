@@ -7,7 +7,7 @@
     }
   }
   .progress-node {
-    color: var(--cx-color-12);
+    color: var(--cx-color-primary);
     font-weight: var(--cx-font-weight-semi);
     flex-flow: column;
     cursor: pointer;
@@ -16,7 +16,7 @@
       .step.visited {
         @extend .icon-FSA-edit;
         &:before {
-          color: var(--cx-color-12);
+          color: var(--cx-color-primary);
           background-color: var(--cx-color-1);
         }
       }
@@ -33,7 +33,7 @@
         @extend .icon-FSA-ok;
         &:before {
           color: var(--cx-color-1);
-          background-color: var(--cx-color-12);
+          background-color: var(--cx-color-primary);
           @include transition();
         }
       }
@@ -41,7 +41,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        border: 3px solid $new-color-blue;
+        border: 3px solid $color-blue;
         border-radius: 50%;
         margin-bottom: 1rem;
         width: 50px;
