@@ -5,16 +5,16 @@
       <h4 class="table-header-value">{{ productPrice }}</h4>
     </ng-container>
     <a
-    class="link mt-1"
-    [routerLink]="
-      {
-        cxRoute: 'category',
-        params: { code: product.defaultCategory?.parentCategory?.code }
-      } | cxUrl
-    "
-  >
-    {{ 'fscommon.moreInfo' | cxTranslate }}
-  </a>
+      class="link mt-1"
+      [routerLink]="
+        {
+          cxRoute: 'category',
+          params: { code: product.defaultCategory?.parentCategory?.code }
+        } | cxUrl
+      "
+    >
+      {{ 'fscommon.moreInfo' | cxTranslate }}
+    </a>
   </div>
   <div class="table-cell-wrapper">
     <ng-container *ngFor="let item of panelItemEntries">
@@ -69,17 +69,17 @@
     </ng-container>
   </div>
   <button
-      (click)="
-        createCartAndStartBundleForProduct(
-          product.code,
-          product.bundleTemplates[0]?.id
-        )
-      "
-      class="primary-button btn-block"
-      type="button"
-    >
-      {{ 'fscommon.select' | cxTranslate }}
-    </button>
+    (click)="
+      createCartAndStartBundleForProduct(
+        product.code,
+        product.bundleTemplates[0]?.id
+      )
+    "
+    class="primary-button btn-block"
+    type="button"
+  >
+    {{ 'fscommon.select' | cxTranslate }}
+  </button>
 </ng-container>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
