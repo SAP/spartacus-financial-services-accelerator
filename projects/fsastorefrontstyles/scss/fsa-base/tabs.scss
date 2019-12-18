@@ -8,14 +8,22 @@ ul[role='tablist'].nav-tabs {
     display: block;
   }
   .nav-item .nav-link {
-    background-color: var(--cx-color-text);
-    color: var(--cx-color-1);
+    color: var(--cx-color-text);
     margin-right: 3px;
+    padding: 1rem 2rem;
+    @include transition;
     &.active {
+      font-weight: var(--cx-font-weight-bold);
       background-color: var(--cx-color-4);
       color: var(--cx-color-text);
-      border: $border-grey;
-      border-bottom: none;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      border-bottom: 3px solid var(--cx-color-primary);
+    }
+    &:hover {
+      color: var(--cx-color-primary);
+      border-bottom: 3px solid var(--cx-color-primary);
+      opacity: 0.8;
     }
     @include media-breakpoint-down(xs) {
       border-radius: 0;
