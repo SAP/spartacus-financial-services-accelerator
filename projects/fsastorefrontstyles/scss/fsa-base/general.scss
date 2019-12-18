@@ -46,6 +46,9 @@ button:focus {
   outline: none;
 }
 .link {
+  font-weight: var(--cx-font-weight-semi);
+  text-decoration: underline;
+  text-transform: uppercase;
   color: var(--cx-color-primary);
   &:hover {
     border-bottom: 1px solid var(--cx-color-primary);
