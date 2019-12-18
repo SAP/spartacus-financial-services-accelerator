@@ -11,32 +11,21 @@
   text-align: center;
 }
 .cx-payment-card {
-  margin-bottom: 20px;
-  .cx-payment-inner {
-    height: 100%;
+  .cx-card-title {
+    color: var(--cx-color-primary);
+    font-size: var(--cx-h6-font-size);
+  }
+  .card-body.cx-card-body {
+    background: var(--color-1);
   }
   .card-header {
-    @include linear-gradient-background(
-      var(--cx-color-primary),
-      var(--cx-color-9),
-      50%,
-      100%
-    );
-  }
-  .cx-card-body {
+    color: var(--cx-color-text);
     background: var(--cx-color-4);
   }
-  .cx-card-delete-msg,
-  .cx-card-label-bold {
-    font-weight: var(--cx-font-weight-semi);
-  }
-  .card-link.btn-link {
+  .cx-card-link.card-link.btn-link {
     text-transform: uppercase;
-    margin-left: 10px;
-    &:hover,
-    &:active {
-      color: var(--cx-color-7);
-      text-decoration: underline;
-    }
+    color: var(--cx-color-primary);
+    font-weight: var(--cx-font-weight-semi);
+    text-decoration: underline;
   }
 }
