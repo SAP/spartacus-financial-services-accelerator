@@ -1,12 +1,10 @@
-%LoginPageTemplate {
-  cx-login-form {
-    padding: 30px 20px;
-    @include box-shadow(0px, 2px, 20px, 1px, $color-grey, 1);
-    .btn-link {
-      font-size: $font-size-base;
-    }
-    .cx-section-title-alt {
-      margin-top: 1.5rem;
-    }
+%cx-login-form {
+  padding: 30px 20px;
+  @include box-shadow(0px, 2px, 20px, 1px, $color-grey, 1);
+  .btn-link {
+    font-size: $font-size-base;
+  }
+  .cx-section-title-alt {
+    margin-top: 1.5rem;
   }
 }
