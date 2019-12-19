@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  GeoPoint,
-  GlobalMessageService,
-  RoutingService,
-  WindowRef,
-} from '@spartacus/core';
+import { GeoPoint, WindowRef } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { OccAgentAdapter } from './../../../occ/services/agent/occ-agent.adapter';
@@ -15,9 +10,7 @@ import { OccAgentAdapter } from './../../../occ/services/agent/occ-agent.adapter
 export class AgentSearchService {
   constructor(
     protected occAgentAdapter: OccAgentAdapter,
-    protected winRef: WindowRef,
-    protected globalMessageService: GlobalMessageService,
-    protected routingService: RoutingService
+    protected winRef: WindowRef
   ) {}
 
   agents = new BehaviorSubject<any>(null);
