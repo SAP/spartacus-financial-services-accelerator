@@ -129,7 +129,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
         message.opened = false;
         return message.uid;
       });
-    this.inboxService.setMessagesState(selectedMessages, toRead).subscribe();
+      if (selectedMessages.length > 0) {
+        this.inboxService.setMessagesState(selectedMessages, toRead).subscribe();
+      }
   }
 
   sortMessages(sortCode, sortOrder) {
