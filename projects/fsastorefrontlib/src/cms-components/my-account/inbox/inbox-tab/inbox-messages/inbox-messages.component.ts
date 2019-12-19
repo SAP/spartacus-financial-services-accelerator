@@ -45,6 +45,13 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   loadCurrentMessageGroup() {
     this.subscription.add(
       this.inboxService.activeMessageGroupAndTitle.subscribe(group => {
+        if (
+          group &&
+          group.messageGroup &&
+          group.messageGroup !== this.messageGroup
+        ) {
+          this.clearSearchData();
+        }
         this.messageGroup =
           group && group.messageGroup ? group.messageGroup : this.initialGroup;
         this.mobileGroupTitle =
@@ -92,6 +99,10 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     this.mainCheckboxChecked = false;
     this.searchConfig.currentPage = pageNumber;
     this.loadCurrentMessageGroup();
+  }
+
+  clearSearchData() {
+    this.searchConfig.currentPage = 0;
   }
 
   checkMessage(messageUid: string, checked: boolean) {
