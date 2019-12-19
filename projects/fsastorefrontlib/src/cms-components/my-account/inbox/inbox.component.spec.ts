@@ -36,7 +36,8 @@ class InboxTabComponent {
 })
 class InboxMessagesComponent {
   @Input() initialGroup;
-  @Input() checkBoxStatus;
+  @Input() mobileTabs: string[];
+  @Input() mobileInitialTab: string;
 }
 
 const mockedCMSInboxTab: InboxTab = {
