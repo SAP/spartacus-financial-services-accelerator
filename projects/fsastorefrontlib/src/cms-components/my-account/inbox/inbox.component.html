@@ -11,12 +11,12 @@
   </ul>
 </ng-container>
 <ng-container *ngIf="initialGroupName">
-  <fsa-messages-inbox
+  <fsa-inbox-messages
     [mobileTabs]="tabs"
     [mobileInitialTab]="mobileGroupTitle"
     [initialGroup]="initialGroupName"
     (mainCheckBoxState)="fromChildCheckbox($event)"
-  ></fsa-messages-inbox>
+  ></fsa-inbox-messages>
 </ng-container>
 <ng-template #noMessages>
   <h1 class="mt-5 mb-3 text-center">

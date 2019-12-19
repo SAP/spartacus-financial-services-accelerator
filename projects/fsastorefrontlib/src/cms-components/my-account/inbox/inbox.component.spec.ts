@@ -32,7 +32,7 @@ class InboxTabComponent {
 
 @Component({
   template: '',
-  selector: 'fsa-messages-inbox',
+  selector: 'fsa-inbox-messages',
 })
 class InboxMessagesComponent {
   @Input() initialGroup;

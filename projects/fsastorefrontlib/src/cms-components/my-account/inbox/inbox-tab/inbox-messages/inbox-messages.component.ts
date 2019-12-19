@@ -13,7 +13,7 @@ import {
 } from '../../../../../core/my-account/services/inbox-data.service';
 
 @Component({
-  selector: 'fsa-messages-inbox',
+  selector: 'fsa-inbox-messages',
   templateUrl: './inbox-messages.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
