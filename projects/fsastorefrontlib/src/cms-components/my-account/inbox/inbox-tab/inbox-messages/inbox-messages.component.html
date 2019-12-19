@@ -1,12 +1,105 @@
 <div class="messages">
+  <!--  TABLE HEADER   -->
+  <div
+    class="FSA-icon m-4"
+    (click)="changeSelectedMessages(!envelopState)"
+    [ngClass]="envelopState ? 'icon-FSA-envelope-open' : 'icon-FSA-envelope'"
+  ></div>
+  <div class="section-header-heading p-4 position-relative container-fluid">
+    <div class="row d-none d-md-flex">
+      <div class="col-1">
+        <label class="checkbox-label">
+          <input
+            type="checkbox"
+            [checked]="mainCheckboxChecked"
+            (click)="checkAllCheckboxes(!mainCheckboxChecked)"
+          />
+          <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
+        </label>
+      </div>
+      <div class="col-3">
+        {{ 'fscommon.subject' | cxTranslate }}
+        <span
+          class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
+          (click)="
+            subjectSortOrder = subjectSortOrder === 'desc' ? 'asc' : 'desc';
+            sortMessages('subject', subjectSortOrder)
+          "
+          [ngClass]="subjectSortOrder === 'desc' ? 'rotate' : ''"
+        >
+        </span>
+      </div>
+      <div class="col-6">
+        {{ 'fscommon.preview' | cxTranslate }}
+        <span
+          class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
+          (click)="
+            contentSortOrder = contentSortOrder === 'desc' ? 'asc' : 'desc';
+            sortMessages('body', contentSortOrder)
+          "
+          [ngClass]="contentSortOrder === 'desc' ? 'rotate' : ''"
+        ></span>
+      </div>
+      <div class="col-2">
+        {{ 'fscommon.date' | cxTranslate }}
+        <span
+          class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
+          (click)="
+            sentSortOrder = sentSortOrder === 'desc' ? 'asc' : 'desc';
+            sortMessages('sentdate', sentSortOrder)
+          "
+          [ngClass]="sentSortOrder === 'desc' ? 'rotate' : ''"
+        ></span>
+      </div>
+    </div>
+
+    <div class="mobile-heading row d-md-none">
+      <div class="col-2">
+        <label class="checkbox-label">
+          <input
+            type="checkbox"
+            [checked]="mainCheckboxChecked"
+            (click)="checkAllCheckboxes()"
+          />
+          <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
+        </label>
+      </div>
+      <div class="col-8 text-center" (click)="shouldShow = !shouldShow">
+        {{ mobileGroupTitle }}
+      </div>
+      <div class="col-2">
+        <span
+          class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
+        ></span>
+      </div>
+    </div>
+    <div
+      class="select d-md-none"
+      [ngClass]="{ opened: shouldShow, '': !shouldShow }"
+    >
+      <ul>
+        <li
+          class="tab"
+          *ngFor="let tab of mobileTabs; let i = index"
+          (click)="activeTabIndex = i; shouldShow = false"
+        >
+          <fsa-inbox-tab [currentTab]="i === activeTabIndex" [tabId]="tab">
+          </fsa-inbox-tab>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!--  TABLE HEADER  END -->
+
   <ng-container *ngIf="messagesObject$ | async as messagesObj">
     <ng-container *ngIf="messagesObj.messages?.length !== 0; else noMessages">
       <div
         class="message accordion border-bottom-grey"
-        *ngFor="let message of messagesObj.messages; let i = index"
+        *ngFor="let message of loadedMessages; let i = index"
         [ngClass]="{
-          read: message.readDate,
-          active: selectedIndex === i
+          read: message.read,
+          active: message.opened
         }"
       >
         <div class="inbox-header container-fluid">
@@ -15,9 +108,8 @@
               <label class="checkbox-label">
                 <input
                   type="checkbox"
-                  [checked]="checkBoxStatus"
-                  (change)="changeMessageState(message.readDate, message.uid)"
-                  (click)="mainCheckboxSwitch()"
+                  [checked]="message.checked"
+                  (change)="checkMessage(message.uid, !message.checked)"
                 />
                 <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
               </label>
@@ -25,7 +117,7 @@
             <div
               class="col-6 col-md-3 position-relative text-truncate p-4"
               (click)="
-                toggleActiveAccordion(i);
+                message.opened = !message.opened;
                 readMessage(message);
                 message.readDate = getDate()
               "
@@ -38,7 +130,7 @@
             <div
               class="col-md-6 d-none d-md-block text-truncate p-4"
               (click)="
-                toggleActiveAccordion(i);
+                message.opened = !message.opened;
                 readMessage(message);
                 message.readDate = getDate()
               "
@@ -52,7 +144,7 @@
         </div>
         <div
           class="accordion-item-wrapper"
-          [ngClass]="{ active: selectedIndex === i }"
+          [ngClass]="{ active: message.opened }"
         >
           <div class="box-shadow">
             <div [innerHtml]="message.richContent"></div>
@@ -90,7 +182,6 @@
       (viewPageEvent)="pageChange($event)"
     ></cx-pagination>
     Total results: {{ messagesObj.pagination.totalCount }}
-
   </ng-container>
 </div>
 <ng-template #noMessages>

@@ -4,14 +4,16 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Output,
-  EventEmitter,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { take, mergeMap, map } from 'rxjs/operators';
-import { Message } from '../../../../../core/my-account/services/inbox-data.service';
+import { mergeMap, map } from 'rxjs/operators';
 import { InboxService } from '../../../../../core/my-account/services/inbox.service';
 import { SearchConfig } from '@spartacus/core';
+import {
+  Message,
+  FSSearchConfig,
+} from '../../../../../core/my-account/services/inbox-data.service';
+import { CmsInboxTabComponent } from 'fsastorefrontlib/occ/occ-models';
 
 @Component({
   selector: 'fsa-messages-inbox',
@@ -23,42 +25,22 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
   messagesObject$: Observable<any>;
-  selectedIndex: number;
   messageGroup: string;
 
-  searchConfig: SearchConfig = {};
+  searchConfig: FSSearchConfig = {};
+  loadedMessages: Message[] = [];
+
+  envelopState = false;
+  mainCheckboxChecked = false;
 
   @Input() initialGroup: string;
-  @Input() checkBoxStatus: boolean;
-  @Output() mainCheckBoxState = new EventEmitter<boolean>();
+  @Input() mobileTabs: string[];
+  @Input() mobileInitialTab: string;
+  mobileGroupTitle: string;
 
   ngOnInit() {
     this.loadCurrentMessageGroup();
     this.messagesObject$ = this.inboxService.messages;
-    this.subscription.add(
-      this.inboxService.checkAllMessages
-        .pipe(
-          mergeMap(allChecked => {
-            this.inboxService.resetMessagesToSend();
-            return this.messagesObject$.pipe(
-              take(1),
-              map(data => {
-                if (allChecked) {
-                  return data.messages.forEach(message => {
-                    this.changeMessageState(message.readDate, message.uid);
-                  });
-                }
-              })
-            );
-          })
-        )
-        .subscribe()
-    );
-    this.subscription.add(
-      this.inboxService.accordionState.subscribe(
-        globalAccordionIndex => (this.selectedIndex = globalAccordionIndex)
-      )
-    );
   }
 
   loadCurrentMessageGroup() {
@@ -66,52 +48,106 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
       this.inboxService.activeMessageGroupAndTitle.subscribe(group => {
         this.messageGroup =
           group && group.messageGroup ? group.messageGroup : this.initialGroup;
-        this.getMessages(this.searchConfig);
+        this.mobileGroupTitle =
+          group && group.title ? group.title : this.mobileInitialTab;
+        this.getMessages();
       })
     );
   }
 
-  getMessages(searchConfig: SearchConfig) {
+  getMessages() {
     this.subscription.add(
       this.inboxService
-        .getMessages(this.messageGroup, searchConfig.currentPage)
-        .subscribe(messages => this.inboxService.messagesSource.next(messages))
+        .getMessages(this.messageGroup, this.searchConfig)
+        .subscribe(response => {
+          this.loadedMessages = [];
+          this.inboxService.messagesSource.next(response);
+          this.searchConfig.currentPage = response.pagination.page;
+          this.searchConfig.sortCode = response.sorts[0].code;
+          this.searchConfig.sortOrder =
+            response.sorts[0].asc === true ? 'asc' : 'desc';
+          response.messages.forEach(message => {
+            this.loadedMessages.push(this.buildDisplayMessage(message));
+          });
+        })
     );
   }
 
-  toggleActiveAccordion(index: number) {
-    this.selectedIndex = this.selectedIndex === index ? -1 : index;
-  }
-
   readMessage(message: Message) {
-    const uidList = [];
-    if (message.readDate === undefined) {
-      uidList.push(message.uid);
-      this.subscription.add(
-        this.inboxService.setMessagesState(uidList, true).subscribe()
-      );
-    }
-  }
-
-  changeMessageState(readDate, messageUid) {
-    const messageObj = {
-      readDate: readDate,
-      uid: messageUid,
-    };
-    this.inboxService.selectedMessages(messageObj);
-    if (this.checkBoxStatus === true) {
-      this.inboxService.getMessagesAction();
-    }
-  }
-
-  mainCheckboxSwitch() {
-    if (this.checkBoxStatus === true) {
-      this.mainCheckBoxState.emit(false);
-    }
+    this.loadedMessages.forEach(msg => {
+      if (!msg.read && msg.uid === message.uid) {
+        msg.read = true;
+        this.inboxService.setMessagesState([msg.uid], true).subscribe();
+      }
+    });
   }
 
   getDate() {
     return new Date();
+  }
+
+  pageChange(pageNumber: number) {
+    this.mainCheckboxChecked = false;
+    this.searchConfig.currentPage = pageNumber;
+    this.loadCurrentMessageGroup();
+  }
+
+  checkMessage(messageUid: string, checked: boolean) {
+    this.loadedMessages.forEach(message => {
+      if (message.uid === messageUid) {
+        message.checked = checked;
+      }
+    });
+  }
+
+  checkAllCheckboxes(checked: boolean) {
+    this.mainCheckboxChecked = !this.mainCheckboxChecked;
+    this.loadedMessages.forEach(message => {
+      message.checked = checked;
+    });
+  }
+
+  changeSelectedMessages(toRead: boolean) {
+    this.envelopState = !this.envelopState;
+    this.loadedMessages.forEach(message => {
+      if (message.checked) {
+        this.inboxService.setMessagesState([message.uid], toRead).subscribe();
+        message.read = toRead;
+        message.opened = false;
+      }
+    });
+  }
+
+  sortMessages(sortCode, sortOrder) {
+    this.searchConfig.sortCode = sortCode;
+    this.searchConfig.sortOrder = sortOrder;
+    this.subscription.add(
+      this.inboxService
+        .getMessages(this.messageGroup, this.searchConfig)
+        .pipe(
+          map(sortedMessages => {
+            this.loadedMessages = [];
+            sortedMessages.messages.forEach(message => {
+              this.loadedMessages.push(this.buildDisplayMessage(message));
+            });
+            console.log(this.loadedMessages);
+          })
+        )
+        .subscribe()
+    );
+  }
+
+  buildDisplayMessage(message: any): Message {
+    return {
+      uid: message.uid,
+      subject: message.subject,
+      body: message.body,
+      richContent: message.richContent,
+      sentDate: message.sentDate,
+      read: message.readDate != null ? true : false,
+      checked: false,
+      opened: false,
+    };
   }
 
   ngOnDestroy() {
@@ -119,10 +155,5 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
-  }
-
-  pageChange(pageNumber: number) {
-    this.searchConfig.currentPage = pageNumber;
-    this.loadCurrentMessageGroup();
   }
 }
