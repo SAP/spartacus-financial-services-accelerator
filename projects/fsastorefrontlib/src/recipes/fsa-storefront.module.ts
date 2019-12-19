@@ -16,7 +16,7 @@ import { CheckoutModule } from '../cms-components/checkout/checkout.module';
 import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa-checkout-config';
 import { fsaOccProductConfig } from '../occ/services/default-occ-fsa-product-config';
 import { fstranslationsDe } from '../assets/translations/index_de';
-import { fsOverrides } from '../assets/translations/overrides';
+import { fsOverrides } from '../assets/translations/index';
 
 @NgModule({
   imports: [
