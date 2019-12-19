@@ -164,6 +164,7 @@ context('FNOL for sample data user', () => {
   it('Should check and populate Incident Report page', () => {
     FNOL.checkFNOLCheckoutPage();
     FNOL.populateIncidentReportStep();
+    buttons.checkBackAndContinueButtons();
     buttons.clickContinueButton();
   });
 

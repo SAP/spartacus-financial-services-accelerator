@@ -8,7 +8,7 @@ export function clickContinueButton() {
   cy.get('button.primary-button')
     .should('contain', 'Continue')
     .click();
-  cy.wait(500);
+  cy.wait(1000);
 }
 
 export function checkBackAndContinueButtons() {
@@ -20,5 +20,5 @@ export function clickResumeButton() {
   cy.get('.secondary-button')
     .contains('Resume')
     .click();
-  cy.wait(500);
+  cy.wait(1000);
 }
