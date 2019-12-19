@@ -11,7 +11,7 @@ export interface RegisterUser {
 }
 
 export function populateRegistrationForm(user: RegisterUser) {
-  cy.get('cx-page-layout')
+  cy.get('.register')
     .findByText('Register')
     .click({ force: true });
   cy.get('fsa-register form').within(() => {
