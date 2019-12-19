@@ -1,98 +1,98 @@
-<div class="messages">
-  <!--  TABLE HEADER   -->
-  <div
-    class="FSA-icon m-4"
-    (click)="changeSelectedMessages(!envelopState)"
-    [ngClass]="envelopState ? 'icon-FSA-envelope-open' : 'icon-FSA-envelope'"
-  ></div>
-  <div class="section-header-heading p-4 position-relative container-fluid">
-    <div class="row d-none d-md-flex">
-      <div class="col-1">
-        <label class="checkbox-label">
-          <input
-            type="checkbox"
-            [checked]="mainCheckboxChecked"
-            (click)="checkAllCheckboxes(!mainCheckboxChecked)"
-          />
-          <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
-        </label>
-      </div>
-      <div class="col-3">
-        {{ 'fscommon.subject' | cxTranslate }}
-        <span
-          class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
-          (click)="
-            subjectSortOrder = subjectSortOrder === 'desc' ? 'asc' : 'desc';
-            sortMessages('subject', subjectSortOrder)
-          "
-          [ngClass]="subjectSortOrder === 'asc' ? 'rotate' : ''"
-        >
-        </span>
-      </div>
-      <div class="col-6">
-        {{ 'fscommon.preview' | cxTranslate }}
-        <span
-          class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
-          (click)="
-            contentSortOrder = contentSortOrder === 'desc' ? 'asc' : 'desc';
-            sortMessages('body', contentSortOrder)
-          "
-          [ngClass]="contentSortOrder === 'asc' ? 'rotate' : ''"
-        ></span>
-      </div>
-      <div class="col-2">
-        {{ 'fscommon.date' | cxTranslate }}
-        <span
-          class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
-          (click)="
-            sentSortOrder = sentSortOrder === 'desc' ? 'asc' : 'desc';
-            sortMessages('sentdate', sentSortOrder)
-          "
-          [ngClass]="sentSortOrder === 'asc' ? 'rotate' : ''"
-        ></span>
-      </div>
+<!--  TABLE HEADER   -->
+<div
+  class="FSA-icon m-4"
+  (click)="changeSelectedMessages(!envelopState)"
+  [ngClass]="envelopState ? 'icon-FSA-envelope-open' : 'icon-FSA-envelope'"
+></div>
+<div class="section-header-heading p-4 position-relative container-fluid">
+  <div class="row d-none d-md-flex">
+    <div class="col-1">
+      <label class="checkbox-label">
+        <input
+          type="checkbox"
+          [checked]="mainCheckboxChecked"
+          (click)="checkAllCheckboxes(!mainCheckboxChecked)"
+        />
+        <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
+      </label>
     </div>
-
-    <div class="mobile-heading row d-md-none">
-      <div class="col-2">
-        <label class="checkbox-label">
-          <input
-            type="checkbox"
-            [checked]="mainCheckboxChecked"
-            (click)="checkAllCheckboxes(!mainCheckboxChecked)"
-          />
-          <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
-        </label>
-      </div>
-      <div class="col-8 text-center" (click)="shouldShow = !shouldShow">
-        {{ mobileGroupTitle }}
-      </div>
-      <div class="col-2">
-        <span
-          class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
-        ></span>
-      </div>
+    <div class="col-3">
+      {{ 'fscommon.subject' | cxTranslate }}
+      <span
+        class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
+        (click)="
+          subjectSortOrder = subjectSortOrder === 'desc' ? 'asc' : 'desc';
+          sortMessages('subject', subjectSortOrder)
+        "
+        [ngClass]="subjectSortOrder === 'asc' ? 'rotate' : ''"
+      >
+      </span>
     </div>
-    <div
-      class="select d-md-none"
-      [ngClass]="{ opened: shouldShow, '': !shouldShow }"
-    >
-      <ul>
-        <li
-          class="tab"
-          *ngFor="let tab of mobileTabs; let i = index"
-          (click)="activeTabIndex = i; shouldShow = false"
-        >
-          <fsa-inbox-tab [currentTab]="i === activeTabIndex" [tabId]="tab">
-          </fsa-inbox-tab>
-        </li>
-      </ul>
+    <div class="col-6">
+      {{ 'fscommon.preview' | cxTranslate }}
+      <span
+        class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
+        (click)="
+          contentSortOrder = contentSortOrder === 'desc' ? 'asc' : 'desc';
+          sortMessages('body', contentSortOrder)
+        "
+        [ngClass]="contentSortOrder === 'asc' ? 'rotate' : ''"
+      ></span>
+    </div>
+    <div class="col-2">
+      {{ 'fscommon.date' | cxTranslate }}
+      <span
+        class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
+        (click)="
+          sentSortOrder = sentSortOrder === 'desc' ? 'asc' : 'desc';
+          sortMessages('sentdate', sentSortOrder)
+        "
+        [ngClass]="sentSortOrder === 'asc' ? 'rotate' : ''"
+      ></span>
     </div>
   </div>
 
-  <!--  TABLE HEADER  END -->
+  <div class="mobile-heading row d-md-none">
+    <div class="col-2">
+      <label class="checkbox-label">
+        <input
+          type="checkbox"
+          [checked]="mainCheckboxChecked"
+          (click)="checkAllCheckboxes(!mainCheckboxChecked)"
+        />
+        <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
+      </label>
+    </div>
+    <div class="col-8 text-center" (click)="shouldShow = !shouldShow">
+      {{ mobileGroupTitle }}
+    </div>
+    <div class="col-2">
+      <span
+        class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
+      ></span>
+    </div>
+  </div>
+  <div
+    class="select d-md-none"
+    [ngClass]="{ opened: shouldShow, '': !shouldShow }"
+  >
+    <ul>
+      <li
+        class="tab"
+        *ngFor="let tab of mobileTabs; let i = index"
+        (click)="activeTabIndex = i; shouldShow = false"
+      >
+        <fsa-inbox-tab [currentTab]="i === activeTabIndex" [tabId]="tab">
+        </fsa-inbox-tab>
+      </li>
+    </ul>
+  </div>
+</div>
 
-  <ng-container *ngIf="messagesObject$ | async as messagesObj">
+<!--  TABLE HEADER  END -->
+
+<ng-container *ngIf="messagesObject$ | async as messagesObj">
+  <div class="messages">
     <div
       class="message accordion border-bottom-grey"
       *ngFor="let message of loadedMessages; let i = index"
@@ -173,15 +173,17 @@
         </div>
       </div>
     </div>
-
+  </div>
+  <div class="my-5">
     <cx-pagination
       *ngIf="messagesObj.pagination"
       [pagination]="messagesObj.pagination"
       (viewPageEvent)="pageChange($event)"
     ></cx-pagination>
     Total results: {{ messagesObj.pagination.totalCount }}
-  </ng-container>
-</div>
+  </div>
+</ng-container>
+
 <ng-template #noMessages>
   <p class="p-4 border-bottom-grey">
     {{ 'fscommon.noMessagesForGroup' | cxTranslate }}
