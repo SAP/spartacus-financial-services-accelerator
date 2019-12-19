@@ -122,13 +122,14 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
 
   changeSelectedMessages(toRead: boolean) {
     this.envelopState = !this.envelopState;
-    this.loadedMessages.forEach(message => {
-      if (message.checked) {
-        this.inboxService.setMessagesState([message.uid], toRead).subscribe();
+    const selectedMessages = this.loadedMessages
+      .filter(message => message.checked)
+      .map(message => {
         message.read = toRead;
         message.opened = false;
-      }
-    });
+        return message.uid;
+      });
+    this.inboxService.setMessagesState(selectedMessages, toRead).subscribe();
   }
 
   sortMessages(sortCode, sortOrder) {
