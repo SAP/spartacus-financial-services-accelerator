@@ -2,27 +2,22 @@
 
 //FSA variables
 $color-dark-grey: #666666;
-$color-blue: #0078c0;
-$color-dark-blue: #263950;
+$color-blue: #0066cc;
+$color-dark-blue: #000033;
 $color-white: #ffffff;
 $color-black: #000000;
 $color-grey: #cccccc;
-$color-light-grey: #f5f5f5;
+$color-light-grey: #eeeeee;
 $color-mild-grey: #e9e9e9;
 $color-semi-dark-grey: #999999;
 $color-link-hover: #3498db;
 $color-button-secondary-hover: #385980;
-$color-darkest-blue: #00528a;
-
-//new colors, when new style guide is done, old colors removed, rename new colors!!
-$new-color-light-grey: #eeeeee;
-$new-color-dark-blue: #000033;
-$new-color-blue: #0066cc;
+$color-darkest-blue: #000066;
 
 $fsa-colors: (
   'primary': $color-blue,
   'secondary': $color-dark-blue,
-  'text': $new-color-dark-blue,
+  'text': $color-dark-blue,
   '1': $color-white,
   '2': $color-black,
   '3': $color-grey,
@@ -32,9 +27,7 @@ $fsa-colors: (
   '7': $color-link-hover,
   '8': $color-button-secondary-hover,
   '9': $color-darkest-blue,
-  '10': $new-color-light-grey,
   '11': $color-dark-grey,
-  '12': $new-color-blue,
 );
 
 $font-weight-light: 300;

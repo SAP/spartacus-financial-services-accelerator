@@ -4,18 +4,17 @@
     <ng-container *ngIf="productPrice !== '0'; else na">
       <h4 class="table-header-value">{{ productPrice }}</h4>
     </ng-container>
-    <button
-      (click)="
-        createCartAndStartBundleForProduct(
-          product.code,
-          product.bundleTemplates[0]?.id
-        )
+    <a
+      class="link mt-1"
+      [routerLink]="
+        {
+          cxRoute: 'category',
+          params: { code: product.defaultCategory?.parentCategory?.code }
+        } | cxUrl
       "
-      class="primary-button btn-block"
-      type="button"
     >
-      {{ 'fscommon.select' | cxTranslate }}
-    </button>
+      {{ 'fscommon.moreInfo' | cxTranslate }}
+    </a>
   </div>
   <div class="table-cell-wrapper">
     <ng-container *ngFor="let item of panelItemEntries">
@@ -70,15 +69,16 @@
     </ng-container>
   </div>
   <button
-    class="secondary-button btn-block mt-5"
-    [routerLink]="
-      {
-        cxRoute: 'category',
-        params: { code: product.defaultCategory?.parentCategory?.code }
-      } | cxUrl
+    (click)="
+      createCartAndStartBundleForProduct(
+        product.code,
+        product.bundleTemplates[0]?.id
+      )
     "
+    class="primary-button btn-block mt-5"
+    type="button"
   >
-    {{ 'fscommon.moreInfo' | cxTranslate }}
+    {{ 'fscommon.select' | cxTranslate }}
   </button>
 </ng-container>
 <ng-template #loading>
