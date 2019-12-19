@@ -24,7 +24,6 @@ export class InboxService {
   }
 
   getMessages(messageGroup, searchConfig: SearchConfig): Observable<any> {
-    console.log(searchConfig);
     return this.occInboxAdapter.getSiteMessagesForUserAndGroup(
       this.inboxData.userId,
       messageGroup,

@@ -37,6 +37,14 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   @Input() mobileInitialTab: string;
   mobileGroupTitle: string;
 
+  // VARBIABLES WHICH ARE USED ONLY IN TEMPLATE AND COULD BE REMOVED
+  activeTabInde = 0;
+  shouldShow = false;
+  subjectSortCode = 'desc';
+  contentSortCode = 'desc';
+  sentDateSortCode = 'desc';
+  // END
+
   ngOnInit() {
     this.loadCurrentMessageGroup();
     this.messagesObject$ = this.inboxService.messages;
@@ -129,9 +137,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
         message.opened = false;
         return message.uid;
       });
-      if (selectedMessages.length > 0) {
-        this.inboxService.setMessagesState(selectedMessages, toRead).subscribe();
-      }
+    if (selectedMessages.length > 0) {
+      this.inboxService.setMessagesState(selectedMessages, toRead).subscribe();
+    }
   }
 
   sortMessages(sortCode, sortOrder) {
