@@ -2,7 +2,6 @@
 @import '../theme';
 
 .products-wrapper {
-  @include box-shadow(0px, 2px, 20px, 1px, $color-grey, 1);
   ngb-tabset {
     flex: 0 1 100%;
   }
@@ -17,6 +16,9 @@
         overflow: hidden;
       }
     }
+  }
+  .tab-pane {
+    @include box-shadow(0px, 16px, 20px, 1px, $color-grey, 1);
   }
   fsa-comparison-table-panel {
     display: block;
