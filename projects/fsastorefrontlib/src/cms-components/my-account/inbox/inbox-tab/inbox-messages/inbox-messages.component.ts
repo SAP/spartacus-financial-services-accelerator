@@ -6,14 +6,11 @@ import {
   OnInit,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { mergeMap, map } from 'rxjs/operators';
 import { InboxService } from '../../../../../core/my-account/services/inbox.service';
-import { SearchConfig } from '@spartacus/core';
 import {
   Message,
   FSSearchConfig,
 } from '../../../../../core/my-account/services/inbox-data.service';
-import { CmsInboxTabComponent } from 'fsastorefrontlib/occ/occ-models';
 
 @Component({
   selector: 'fsa-messages-inbox',
@@ -27,7 +24,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   messagesObject$: Observable<any>;
   messageGroup: string;
 
-  searchConfig: FSSearchConfig = {};
+  searchConfig: FSSearchConfig = {
+    currentPage: 0,
+  };
   loadedMessages: Message[] = [];
 
   envelopState = false;
@@ -56,19 +55,22 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   }
 
   getMessages() {
+    const newMessageList = [];
     this.subscription.add(
       this.inboxService
         .getMessages(this.messageGroup, this.searchConfig)
         .subscribe(response => {
-          this.loadedMessages = [];
           this.inboxService.messagesSource.next(response);
-          this.searchConfig.currentPage = response.pagination.page;
-          this.searchConfig.sortCode = response.sorts[0].code;
-          this.searchConfig.sortOrder =
-            response.sorts[0].asc === true ? 'asc' : 'desc';
+          if (response.sorts.length > 0 && response.pagination) {
+            this.searchConfig.currentPage = response.pagination.page;
+            this.searchConfig.sortCode = response.sorts[0].code;
+            this.searchConfig.sortOrder =
+              response.sorts[0].asc === true ? 'asc' : 'desc';
+          }
           response.messages.forEach(message => {
-            this.loadedMessages.push(this.buildDisplayMessage(message));
+            newMessageList.push(this.buildDisplayMessage(message));
           });
+          this.loadedMessages = newMessageList;
         })
     );
   }
@@ -121,20 +123,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   sortMessages(sortCode, sortOrder) {
     this.searchConfig.sortCode = sortCode;
     this.searchConfig.sortOrder = sortOrder;
-    this.subscription.add(
-      this.inboxService
-        .getMessages(this.messageGroup, this.searchConfig)
-        .pipe(
-          map(sortedMessages => {
-            this.loadedMessages = [];
-            sortedMessages.messages.forEach(message => {
-              this.loadedMessages.push(this.buildDisplayMessage(message));
-            });
-            console.log(this.loadedMessages);
-          })
-        )
-        .subscribe()
-    );
+    this.getMessages();
   }
 
   buildDisplayMessage(message: any): Message {

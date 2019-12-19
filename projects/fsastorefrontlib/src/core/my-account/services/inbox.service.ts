@@ -2,11 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthService, CmsService, SearchConfig } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { OccInboxAdapter } from './../../../occ/services/inbox/occ-inbox.adapter';
-import {
-  FSSearchConfig,
-  InboxDataService,
-  InboxTab,
-} from './inbox-data.service';
+import { InboxDataService, InboxTab } from './inbox-data.service';
 
 @Injectable()
 export class InboxService {
@@ -28,6 +24,7 @@ export class InboxService {
   }
 
   getMessages(messageGroup, searchConfig: SearchConfig): Observable<any> {
+    console.log(searchConfig);
     return this.occInboxAdapter.getSiteMessagesForUserAndGroup(
       this.inboxData.userId,
       messageGroup,
