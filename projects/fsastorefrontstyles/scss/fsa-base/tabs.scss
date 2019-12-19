@@ -10,9 +10,9 @@ ul[role='tablist'].nav-tabs {
   .nav-item .nav-link {
     @extend .fsa-tab;
   }
-  .hide-tab-heading {
-    .nav-item {
-      display: none;
-    }
+}
+.hide-tab-heading {
+  .nav-item {
+    display: none;
   }
 }
