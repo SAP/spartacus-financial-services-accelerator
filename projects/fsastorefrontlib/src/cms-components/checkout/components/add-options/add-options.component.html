@@ -35,7 +35,7 @@
           >
             <ng-container
               *ngTemplateOutlet="
-                includedNotAvailableButton;
+                includedNotAvailable;
                 context: {
                   title:
                     orderEntryData.product?.bundleTemplates?.length == 3
@@ -84,10 +84,8 @@
     {{ 'fscommon.next' | cxTranslate }}
   </button>
 </ng-container>
-<ng-template #includedNotAvailableButton let-title="title">
-  <span>
-    {{ title }}
-  </span>
+<ng-template #includedNotAvailable let-title="title">
+  <span>{{ title }}</span>
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
