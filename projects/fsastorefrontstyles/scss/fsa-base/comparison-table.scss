@@ -1,6 +1,9 @@
 @import '../mixins-fsa';
 @import '../theme';
 
+fsa-comparison-table-container {
+  overflow: hidden;
+}
 .products-wrapper {
   ngb-tabset {
     flex: 0 1 100%;
@@ -19,6 +22,9 @@
   }
   .tab-pane {
     @include box-shadow(0px, 16px, 20px, 1px, $color-grey, 1);
+    @include media-breakpoint-down(sm) {
+     box-shadow: none;
+    }
   }
   fsa-comparison-table-panel {
     display: block;
@@ -101,6 +107,7 @@
       line-height: 1.2;
       max-width: calc(100% - 6vw);
       vertical-align: middle;
+      text-transform: uppercase;
       font-weight: var(--cx-font-weight-semi);
     }
     &-value {
