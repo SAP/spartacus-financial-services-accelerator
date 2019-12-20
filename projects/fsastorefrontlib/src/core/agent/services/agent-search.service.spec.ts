@@ -3,6 +3,9 @@ import { of } from 'rxjs';
 
 import { AgentSearchService } from './agent-search.service';
 import { OccAgentAdapter } from './../../../occ/services/agent/occ-agent.adapter';
+import { GeoPoint, WindowRef } from '@spartacus/core';
+
+const geolocationWatchId = 1;
 
 const searchResults = {
   agents: [
@@ -11,6 +14,25 @@ const searchResults = {
       lastName: 'lastName',
     },
   ],
+};
+
+const longitudeLatitude: GeoPoint = {
+  longitude: 10.1,
+  latitude: 20.2,
+};
+
+const MockWindowRef = {
+  nativeWindow: {
+    navigator: {
+      geolocation: {
+        watchPosition: callback => {
+          callback({ coords: longitudeLatitude });
+          return geolocationWatchId;
+        },
+        clearWatch: () => {},
+      },
+    },
+  },
 };
 
 class MockOccAgentAdapter {
@@ -29,6 +51,10 @@ describe('AgentSearchService', () => {
         {
           provide: OccAgentAdapter,
           useValue: mockOccAgentAdapter,
+        },
+        {
+          provide: WindowRef,
+          useValue: MockWindowRef,
         },
       ],
     });

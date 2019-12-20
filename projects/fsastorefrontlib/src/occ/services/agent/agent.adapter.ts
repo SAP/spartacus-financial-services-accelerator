@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs';
+import { GeoPoint } from '@spartacus/core';
 
 export abstract class AgentAdapter {
   /**
@@ -13,6 +14,11 @@ export abstract class AgentAdapter {
    *
    * @param searchQuery The search query
    * @param pageNumber The number of page which enlisted agents
+   * @param longitudeLatitude The longitude and latitude provided
    */
-  abstract getAgentsByQuery(searchQuery: string, pageNumber: number);
+  abstract getAgentsByQuery(
+    searchQuery: string,
+    pageNumber: number,
+    longitudeLatitude?: GeoPoint
+  );
 }
