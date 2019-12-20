@@ -64,6 +64,6 @@ button:focus {
   text-transform: uppercase;
   color: var(--cx-color-primary);
   &:hover {
-    border-bottom: 1px solid var(--cx-color-primary);
+    text-decoration: underline;
   }
 }
