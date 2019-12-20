@@ -50,7 +50,7 @@ export class AgentSearchService {
     return this.agentDetails.asObservable();
   }
 
-  private getAgentsByQuery(
+  protected getAgentsByQuery(
     searchQuery: string,
     pageNumber: number,
     position?: GeoPoint
