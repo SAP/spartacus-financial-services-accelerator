@@ -32,9 +32,10 @@ export class OccAgentAdapter implements AgentAdapter {
     let params = new HttpParams({ fromString: query });
 
     if (longitudeLatitude) {
-      params = params.set('longitude', String(longitudeLatitude.longitude));
-      params = params.set('latitude', String(longitudeLatitude.latitude));
-      params = params.set('radius', String('10000000'));
+      params = params
+        .set('longitude', String(longitudeLatitude.longitude))
+        .set('latitude', String(longitudeLatitude.latitude))
+        .set('radius', String('10000000'));
     }
     if (searchQuery) {
       params = params.set('queryParam', searchQuery);
