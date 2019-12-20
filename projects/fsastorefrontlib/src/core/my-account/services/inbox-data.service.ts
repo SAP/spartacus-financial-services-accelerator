@@ -17,6 +17,7 @@ export interface Message {
   body?: string;
   richContent?: string;
   sentDate?: string;
+  documents?: any;
   read?: boolean;
   checked?: boolean;
   opened?: boolean;

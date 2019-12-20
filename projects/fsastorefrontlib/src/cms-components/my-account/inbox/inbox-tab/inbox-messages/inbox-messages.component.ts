@@ -155,6 +155,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
       body: message.body,
       richContent: message.richContent,
       sentDate: message.sentDate,
+      documents: message.documents,
       read: message.readDate != null ? true : false,
       checked: false,
       opened: false,
