@@ -11,7 +11,7 @@ export interface FSSearchConfig extends SearchConfig {
   sortOrder?: string;
 }
 
-export interface Message {
+export interface InboxMessage {
   uid: string;
   subject?: string;
   body?: string;

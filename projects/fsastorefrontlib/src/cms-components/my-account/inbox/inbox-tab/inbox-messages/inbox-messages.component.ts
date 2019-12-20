@@ -8,7 +8,7 @@ import {
 import { Observable, Subscription } from 'rxjs';
 import { InboxService } from '../../../../../core/my-account/services/inbox.service';
 import {
-  Message,
+  InboxMessage,
   FSSearchConfig,
 } from '../../../../../core/my-account/services/inbox-data.service';
 
@@ -27,7 +27,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   searchConfig: FSSearchConfig = {
     currentPage: 0,
   };
-  loadedMessages: Message[] = [];
+  loadedMessages: InboxMessage[] = [];
 
   envelopState = false;
   mainCheckboxChecked = false;
@@ -86,7 +86,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     );
   }
 
-  readMessage(message: Message) {
+  readMessage(message: InboxMessage) {
     this.loadedMessages.forEach(msg => {
       if (!msg.read && msg.uid === message.uid) {
         msg.read = true;
@@ -144,7 +144,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     this.getMessages();
   }
 
-  buildDisplayMessage(message: any): Message {
+  buildDisplayMessage(message: any): InboxMessage {
     return {
       uid: message.uid,
       subject: message.subject,
