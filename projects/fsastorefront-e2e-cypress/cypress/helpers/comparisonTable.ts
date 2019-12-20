@@ -7,7 +7,7 @@ export function checkComparisonPageCurrentAccount() {
   cy.get('button.primary-button')
     .should('contain', 'Select')
     .should('have.length', 3);
-  cy.get('button.secondary-button')
+  cy.get('a.link')
     .should('contain', 'More Info')
     .should('have.length', 3);
 }
