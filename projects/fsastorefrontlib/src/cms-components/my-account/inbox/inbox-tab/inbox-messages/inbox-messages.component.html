@@ -126,10 +126,7 @@
           </div>
           <div
             class="col-6 col-md-3 position-relative text-truncate p-4"
-            (click)="
-              message.opened = !message.opened;
-              readMessage(message);
-            "
+            (click)="message.opened = !message.opened; readMessage(message)"
           >
             {{ message.subject }}
             <ng-container *ngIf="message.documents?.length > 0">
@@ -138,10 +135,7 @@
           </div>
           <div
             class="col-md-6 d-none d-md-block text-truncate p-4"
-            (click)="
-              message.opened = !message.opened;
-              readMessage(message);
-            "
+            (click)="message.opened = !message.opened; readMessage(message)"
           >
             {{ message.body }}
           </div>
