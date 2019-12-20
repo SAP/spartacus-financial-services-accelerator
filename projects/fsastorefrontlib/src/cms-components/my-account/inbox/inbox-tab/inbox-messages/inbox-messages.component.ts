@@ -36,9 +36,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   @Input() mobileTabs: string[];
   @Input() mobileInitialTab: string;
   mobileGroupTitle: string;
+  displayMobileGroups = false;
 
   activeTabIndex = 0;
-  shouldShow = false;
   defaultSortOrder = 'desc';
 
   ngOnInit() {
