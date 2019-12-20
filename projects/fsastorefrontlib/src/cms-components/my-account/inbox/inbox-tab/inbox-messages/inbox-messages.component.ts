@@ -38,11 +38,11 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   mobileGroupTitle: string;
 
   // VARBIABLES WHICH ARE USED ONLY IN TEMPLATE AND COULD BE REMOVED
-  activeTabInde = 0;
+  activeTabIndex = 0;
   shouldShow = false;
-  subjectSortCode = 'desc';
-  contentSortCode = 'desc';
-  sentDateSortCode = 'desc';
+  subjectSortOrder = 'desc';
+  contentSortOrder = 'desc';
+  sentSortOrder = 'desc';
   // END
 
   ngOnInit() {
