@@ -95,10 +95,6 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     });
   }
 
-  getDate() {
-    return new Date();
-  }
-
   pageChange(pageNumber: number) {
     this.mainCheckboxChecked = false;
     this.searchConfig.currentPage = pageNumber;
