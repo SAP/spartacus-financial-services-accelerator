@@ -77,7 +77,7 @@ describe('InboxComponent', () => {
   let el: DebugElement;
 
   const componentData: CmsInboxComponent = {
-    uid: 'TestMultiComparisonTabContainer',
+    uid: 'TestCmsInboxComponent',
     typeCode: 'CMSInboxComponent',
     tabComponents: 'testTab1',
   };
