@@ -1,7 +1,7 @@
 <ng-container *ngIf="cart$ | async as cart">
   <ng-container *ngIf="cart.deliveryOrderGroups">
     <div class="short-overview">
-      <div class="gradient-heading text-center px-2">
+      <div class="section-header-heading px-2">
         {{
           (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.defaultCategory
             ?.name
