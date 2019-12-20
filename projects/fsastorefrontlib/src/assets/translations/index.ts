@@ -6,6 +6,7 @@ import { policy } from './en/policy.en';
 import { premiumCalendar } from './en/premiumCalendar.en';
 import { quote } from './en/quote.en';
 import { userRequest } from './en/userRequest.en';
+import { payment } from './overrides/en/payment';
 
 export const fstranslations: TranslationResources = {
   claim,
@@ -15,4 +16,8 @@ export const fstranslations: TranslationResources = {
   policy,
   premiumCalendar,
   userRequest,
+};
+
+export const fsOverrides: TranslationResources = {
+  payment,
 };
