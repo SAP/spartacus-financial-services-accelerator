@@ -4,7 +4,7 @@
   .section-header-heading {
     color: var(--cx-color-1);
     border-top: none;
-    background-color: var(--cx-color-12);
+    background-color: var(--cx-color-primary);
     text-align: left;
     font-size: var(--cx-h6-font-size);
     font-weight: var(--cx-font-weight-normal);
@@ -64,11 +64,9 @@
     cursor: pointer;
   }
   .tab {
-    flex: 0 1 15%;
     cursor: pointer;
     margin-right: 5px;
     border-bottom: none;
-    text-align: center;
     @include media-breakpoint-down(sm) {
       border-top: none;
       margin-right: 0;

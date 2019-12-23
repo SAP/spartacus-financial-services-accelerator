@@ -17,7 +17,6 @@ export const fscommon = {
     subject: 'Betreff',
     resume: 'Fortsetzen',
     details: 'Einzelheiten',
-    mandatory: 'Verpflichtend',
     status: 'Status',
     moreInfo: 'Weitere Informationen',
     product: 'Produkt',

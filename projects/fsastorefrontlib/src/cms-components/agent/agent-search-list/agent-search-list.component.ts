@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AgentSearchService } from '../../../core/agent/services/agent-search.service';
-import { Params, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AgentSearchService } from '../../../core/agent/services/agent-search.service';
 
 @Component({
   selector: 'fsa-agent-search-list',

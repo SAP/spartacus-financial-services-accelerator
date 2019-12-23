@@ -5,26 +5,28 @@ export interface InboxTab {
   messageGroup: string;
   title: string;
 }
-export interface Message {
-  messageCode?: string;
-  readDate?: string;
-  uid?: string;
-}
+
 export interface FSSearchConfig extends SearchConfig {
   sortCode?: string;
   sortOrder?: string;
 }
-export interface MessagesCollection {
-  messages?: Message[];
+
+export interface InboxMessage {
+  uid: string;
+  subject?: string;
+  body?: string;
+  richContent?: string;
+  sentDate?: string;
+  documents?: any;
   read?: boolean;
+  checked?: boolean;
+  opened?: boolean;
 }
+
 @Injectable()
 export class InboxDataService {
   private _userId;
-  private _messageGroup: string;
-  private _messages: Message[];
   private _searchConfig?: SearchConfig;
-  private _messagesCollection?: MessagesCollection;
 
   constructor() {}
 
@@ -42,29 +44,5 @@ export class InboxDataService {
 
   get searchConfig(): SearchConfig {
     return this._searchConfig;
-  }
-
-  set messagesCollection(val) {
-    this._messagesCollection = val;
-  }
-
-  get messagesCollection(): MessagesCollection {
-    return this._messagesCollection;
-  }
-
-  set messageGroup(val) {
-    this._messageGroup = val;
-  }
-
-  get messageGroup(): string {
-    return this._messageGroup;
-  }
-
-  set messages(val: Message[]) {
-    this._messages = val;
-  }
-
-  get messages(): Message[] {
-    return this._messages;
   }
 }

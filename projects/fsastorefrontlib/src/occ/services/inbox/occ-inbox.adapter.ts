@@ -30,6 +30,11 @@ export class OccInboxAdapter implements InboxAdapter {
         '&sortOrder=' +
         searchConfig.sortOrder;
     }
+
+    if (searchConfig.currentPage) {
+      siteMessagesEndpoint += '&currentPage=' + searchConfig.currentPage;
+    }
+
     if (messageGroup !== '') {
       siteMessagesEndpoint += '&messagegroup=' + messageGroup;
     }

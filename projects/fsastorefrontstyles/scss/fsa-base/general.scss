@@ -4,7 +4,20 @@ body {
   font-size: $font-size-base;
   color: var(--cx-color-text);
 }
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-weight: var(--cx-font-weight-semi);
+}
 h1,
 .h1 {
   font-size: var(--cx-h1-font-size);
@@ -46,8 +59,11 @@ button:focus {
   outline: none;
 }
 .link {
+  font-weight: var(--cx-font-weight-semi);
+  text-decoration: underline;
+  text-transform: uppercase;
   color: var(--cx-color-primary);
   &:hover {
-    border-bottom: 1px solid var(--cx-color-primary);
+    text-decoration: underline;
   }
 }

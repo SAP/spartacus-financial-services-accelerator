@@ -8,19 +8,7 @@ ul[role='tablist'].nav-tabs {
     display: block;
   }
   .nav-item .nav-link {
-    background-color: var(--cx-color-text);
-    color: var(--cx-color-1);
-    margin-right: 3px;
-    &.active {
-      background-color: var(--cx-color-4);
-      color: var(--cx-color-text);
-      border: $border-grey;
-      border-bottom: none;
-    }
-    @include media-breakpoint-down(xs) {
-      border-radius: 0;
-      margin-right: 0;
-    }
+    @extend .fsa-tab;
   }
 }
 .hide-tab-heading {

@@ -17,7 +17,6 @@ export const fscommon = {
     subject: 'Subject',
     resume: 'Resume',
     details: 'Details',
-    mandatory: 'Mandatory',
     status: 'Status',
     moreInfo: 'More Info',
     product: 'Product',
