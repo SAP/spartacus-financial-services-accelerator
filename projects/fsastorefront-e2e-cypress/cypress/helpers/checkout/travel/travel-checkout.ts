@@ -182,7 +182,7 @@ export function checkOrderConfirmation() {
       .eq(0)
       .should(
         'have.text',
-        ' Thank you! Your policy request has been submitted '
+        ' Thank you for your order!'
       );
   });
 }

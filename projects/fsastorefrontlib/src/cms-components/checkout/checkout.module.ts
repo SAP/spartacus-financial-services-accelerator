@@ -34,6 +34,7 @@ import { FinalReviewComponent } from './components/final-review/final-review.com
 import { LegalModule } from './components/legal/legal.module';
 import { FSMiniCartComponent } from './components/mini-cart/mini-cart.component';
 import { FsaOrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
+import { ThankYouMessageComponent } from './components/thank-you-message/thank-you-message.component';
 import { QuoteReviewComponent } from './components/quote-review/quote-review.component';
 import { UserIdentificationModule } from './components/user-identification/user-identification.module';
 import { FSCartService } from '../../core/checkout/services/cart/fs-cart.service';
@@ -178,6 +179,9 @@ const routes: Routes = [
         OrderConfirmationFlex: {
           component: FsaOrderConfirmationComponent,
         },
+        ThankYouMessageFlex: {
+          component: ThankYouMessageComponent,
+        },
         DynamicProgressBarStepsComponent: {
           component: FSCheckoutProgressComponent,
         },
@@ -193,11 +197,12 @@ const routes: Routes = [
   declarations: [
     QuoteReviewComponent,
     FinalReviewComponent,
-    FsaOrderConfirmationComponent,
     AddOptionsComponent,
-    FSMiniCartComponent,
     ChooseCoverNavigationComponent,
     PersonalDetailsNavigationComponent,
+    FsaOrderConfirmationComponent,
+    ThankYouMessageComponent,
+    FSMiniCartComponent
   ],
   exports: [
     I18nModule,
@@ -211,13 +216,14 @@ const routes: Routes = [
     FSMiniCartComponent,
   ],
   entryComponents: [
-    FsaOrderConfirmationComponent,
     AddOptionsComponent,
     QuoteReviewComponent,
     FinalReviewComponent,
-    FSMiniCartComponent,
     ChooseCoverNavigationComponent,
     PersonalDetailsNavigationComponent,
+    FsaOrderConfirmationComponent,
+    ThankYouMessageComponent,
+    FSMiniCartComponent,
   ],
   providers: [
     FSCartService,
@@ -227,4 +233,4 @@ const routes: Routes = [
     reducerProvider,
   ],
 })
-export class CheckoutModule {}
+export class CheckoutModule { }
