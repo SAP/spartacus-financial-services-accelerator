@@ -2,7 +2,7 @@
 @import '../theme';
 
 fsa-comparison-table-container {
-  overflow: hidden;
+  width: 100%;
 }
 .products-wrapper {
   ngb-tabset {
@@ -21,10 +21,7 @@ fsa-comparison-table-container {
     }
   }
   .tab-pane {
-    @include box-shadow(0px, 16px, 20px, 1px, $color-grey, 1);
-    @include media-breakpoint-down(sm) {
-     box-shadow: none;
-    }
+    @include box-shadow(0px, 2px, 20px, 1px, $color-grey, 1);
   }
   fsa-comparison-table-panel {
     display: block;
@@ -105,7 +102,7 @@ fsa-comparison-table-container {
     &-title {
       display: inline-block;
       line-height: 1.2;
-      max-width: calc(100% - 6vw);
+      max-width: calc(100% - 4vw);
       vertical-align: middle;
       text-transform: uppercase;
       font-weight: var(--cx-font-weight-semi);
