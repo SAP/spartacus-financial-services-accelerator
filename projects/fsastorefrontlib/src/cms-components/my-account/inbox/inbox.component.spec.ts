@@ -32,11 +32,12 @@ class InboxTabComponent {
 
 @Component({
   template: '',
-  selector: 'fsa-messages-inbox',
+  selector: 'fsa-inbox-messages',
 })
 class InboxMessagesComponent {
   @Input() initialGroup;
-  @Input() checkBoxStatus;
+  @Input() mobileTabs: string[];
+  @Input() mobileInitialTab: string;
 }
 
 const mockedCMSInboxTab: InboxTab = {
@@ -76,7 +77,7 @@ describe('InboxComponent', () => {
   let el: DebugElement;
 
   const componentData: CmsInboxComponent = {
-    uid: 'TestMultiComparisonTabContainer',
+    uid: 'TestCmsInboxComponent',
     typeCode: 'CMSInboxComponent',
     tabComponents: 'testTab1',
   };
