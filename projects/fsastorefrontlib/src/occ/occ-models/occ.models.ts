@@ -70,6 +70,7 @@ export interface FSUserRequest {
 }
 
 export interface FSLocationOfLoss {
+  code?: string;
   countryCode?: string;
   city?: string;
   postcode?: string;

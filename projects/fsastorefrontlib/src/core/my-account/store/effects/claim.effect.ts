@@ -75,14 +75,27 @@ export class ClaimEffects {
     map((action: fromActions.UpdateClaim) => action.payload),
     mergeMap(payload => {
       let claimID = this.claimServiceData.claimData.claimNumber;
+      let claimDataWithLocation = null;
+      if (this.claimServiceData.claimData.locationOfLoss !== undefined) {
+        claimDataWithLocation = Object.assign(payload.claimData, {
+          locationOfLoss: this.claimServiceData.claimData.locationOfLoss.code,
+        });
+      }
       if (claimID === undefined && this.claimServiceData.claims !== undefined) {
         // @ts-ignore
         claimID = this.claimServiceData.claims.claims.find(
           claim => claim.requestId === payload.requestId
         ).claimNumber;
       }
+
       return this.claimAdapter
-        .updateClaim(payload.userId, claimID, payload.claimData)
+        .updateClaim(
+          payload.userId,
+          claimID,
+          claimDataWithLocation !== null
+            ? claimDataWithLocation
+            : payload.claimData
+        )
         .pipe(
           map(claim => {
             return new fromActions.UpdateClaimSuccess(claim);
