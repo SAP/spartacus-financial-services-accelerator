@@ -1,4 +1,4 @@
-<h2 class="gradient-heading text-center col mb-0">
+<h2 class="section-header-heading text-center col mb-0">
   {{ 'fscommon.addOptions' | cxTranslate }}
 </h2>
 <div class="cart-items-list">
@@ -6,13 +6,9 @@
     <ng-container *ngIf="entries$ | async as entries">
       <ng-container *ngFor="let orderEntryData of entries | slice: 1">
         <div
-          class="row px-3 no-gutters position-relative py-3"
+          class="row mx-3 py-3 no-gutters position-relative"
           *ngIf="orderEntryData.product"
         >
-          <div
-            *ngIf="!orderEntryData.removeable && !orderEntryData.addable"
-            class="disabled-option"
-          ></div>
           <div class="tooltip-wrapper">
             <div
               class="fsa-tooltip"
@@ -31,19 +27,19 @@
             ></cx-media>
           </div>
           <div class="col-12 col-md-7 align-self-center">
-            <h3 class="text-truncate">{{ orderEntryData.product.name }}</h3>
+            <h6>{{ orderEntryData.product.name }}</h6>
           </div>
           <div
             *ngIf="!orderEntryData.removeable && !orderEntryData.addable"
-            class="col-12 col-md-3 align-self-center"
+            class="col-12 col-md-3 align-self-center text-center"
           >
             <ng-container
               *ngTemplateOutlet="
-                mandatoryNotAvailableButton;
+                includedNotAvailable;
                 context: {
                   title:
                     orderEntryData.product?.bundleTemplates?.length == 3
-                      ? ('fscommon.mandatory' | cxTranslate)
+                      ? ('fscommon.included' | cxTranslate)
                       : ('fscommon.notAvailableFull' | cxTranslate)
                 }
               "
@@ -59,7 +55,7 @@
                     orderEntryData.entryNumber
                   )
                 "
-                class="secondary-button btn-block"
+                class="secondary-button btn-block text-capitalize"
               >
                 {{ 'fscommon.add' | cxTranslate }}
               </button>
@@ -67,7 +63,7 @@
             <div *ngIf="orderEntryData.removeable">
               <button
                 (click)="removeProductFromCart(orderEntryData)"
-                class="secondary-button btn-block "
+                class="secondary-button btn-block text-capitalize"
               >
                 {{ 'common.remove' | cxTranslate }}
               </button>
@@ -88,10 +84,8 @@
     {{ 'fscommon.next' | cxTranslate }}
   </button>
 </ng-container>
-<ng-template #mandatoryNotAvailableButton let-title="title">
-  <button disabled type="button" class="secondary-button btn-block">
-    {{ title }}
-  </button>
+<ng-template #includedNotAvailable let-title="title">
+  <span>{{ title }}</span>
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
