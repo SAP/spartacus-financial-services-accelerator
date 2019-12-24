@@ -56,7 +56,7 @@ export class ClaimEffects {
           switchMap((claim: Claim) => {
             if (claim.requestId !== undefined) {
               return [
-                new fromUserRequestActions.LoadUserRequest({
+                new fromUserRequestActions.LoadUserRequestSuccess({
                   userId: payload.userId,
                   requestId: claim.requestId,
                 }),
