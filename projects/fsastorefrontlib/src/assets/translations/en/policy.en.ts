@@ -10,7 +10,7 @@ export const policy = {
     viewYourPolicies: 'View your policies',
     youHaveNoPolicies: 'You have no Policies!',
     policySummary: 'Policy Summary',
-    thankYou: 'Thank you for your order!',
+    thankYouForOrder: 'Thank you for your order!',
     yourPolicyHasBeenSubmited: 'Your policy has already been submited',
     finishQuoteToGetPolicy: 'You need to finish your quote to get a Policy',
     noValidPolicies: 'You have no valid policies',

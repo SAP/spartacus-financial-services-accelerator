@@ -64,6 +64,6 @@ export const fsaLayoutConfig: LayoutConfig = {
     },
     OrderConfirmationPageTemplate: {
       slots: ['TopContent', 'BodyContent'],
-    }
+    },
   },
 };
