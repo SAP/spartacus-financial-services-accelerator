@@ -1,5 +1,8 @@
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
-import { FSCart, BindingStateType } from './../../../../occ/occ-models/occ.models';
+import {
+  FSCart,
+  BindingStateType,
+} from './../../../../occ/occ-models/occ.models';
 import { map, take } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';

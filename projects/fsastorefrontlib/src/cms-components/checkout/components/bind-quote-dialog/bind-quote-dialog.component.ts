@@ -1,4 +1,7 @@
-import { FSCart, BindingStateType } from './../../../../occ/occ-models/occ.models';
+import {
+  FSCart,
+  BindingStateType,
+} from './../../../../occ/occ-models/occ.models';
 import { QuoteService } from './../../../../core/my-account/services/quote.service';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ModalService } from '@spartacus/storefront';

@@ -118,6 +118,9 @@ export function checkQuoteReview() {
     cy.get('.highlighted').should('have.text', ' Total price:  €99.00 ');
   });
   cy.get('.primary-button').click();
+  cy.get('fsa-bind-quote-dialog').within(() => {
+    cy.get('.secondary-button').click();
+  });
 }
 
 export function selectPaymentMethod() {
