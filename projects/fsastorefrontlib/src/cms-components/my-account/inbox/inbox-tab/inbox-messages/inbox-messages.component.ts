@@ -106,6 +106,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   }
 
   checkMessage(messageUid: string, checked: boolean) {
+    if (!checked) {
+      this.mainCheckboxChecked = false;
+    }
     this.loadedMessages.forEach(message => {
       if (message.uid === messageUid) {
         message.checked = checked;
