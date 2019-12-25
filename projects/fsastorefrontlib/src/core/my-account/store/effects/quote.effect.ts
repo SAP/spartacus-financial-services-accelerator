@@ -1,3 +1,4 @@
+import { CartActions } from '@spartacus/core';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
@@ -47,6 +48,25 @@ export class QuoteEffects {
           }),
           catchError(error => of(new fromActions.UpdateQuoteFail(error)))
         );
+    })
+  );
+
+  @Effect()
+  bindQuote$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.BIND_QUOTE),
+    map((action: fromActions.BindQuote) => action.payload),
+    mergeMap(payload => {
+      return this.quoteAdapter.bindQuote(payload.userId, payload.cartId).pipe(
+        mergeMap(() => {
+          return [
+            new CartActions.LoadCart({
+              userId: payload.userId,
+              cartId: payload.cartId,
+            }),
+          ];
+        }),
+        catchError(error => of(new fromActions.UpdateQuoteFail(error)))
+      );
     })
   );
 

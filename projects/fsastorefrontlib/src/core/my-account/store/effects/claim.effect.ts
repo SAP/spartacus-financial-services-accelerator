@@ -56,7 +56,7 @@ export class ClaimEffects {
           switchMap((claim: Claim) => {
             if (claim.requestId !== undefined) {
               return [
-                new fromUserRequestActions.LoadUserRequest({
+                new fromUserRequestActions.LoadUserRequestSuccess({
                   userId: payload.userId,
                   requestId: claim.requestId,
                 }),
@@ -69,9 +69,60 @@ export class ClaimEffects {
     })
   );
 
+  @Effect()
+  updateClaim$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.UPDATE_CLAIM),
+    map((action: fromActions.UpdateClaim) => action.payload),
+    mergeMap(payload => {
+      let claimID = this.claimServiceData.claimData.claimNumber;
+      let claimDataWithLocation = null;
+      if (this.claimServiceData.claimData.locationOfLoss !== undefined) {
+        claimDataWithLocation = Object.assign(payload.claimData, {
+          locationOfLoss: this.claimServiceData.claimData.locationOfLoss.code,
+        });
+      }
+      if (claimID === undefined && this.claimServiceData.claims !== undefined) {
+        // @ts-ignore
+        claimID = this.claimServiceData.claims.claims.find(
+          claim => claim.requestId === payload.requestId
+        ).claimNumber;
+      }
+
+      return this.claimAdapter
+        .updateClaim(
+          payload.userId,
+          claimID,
+          claimDataWithLocation !== null
+            ? claimDataWithLocation
+            : payload.claimData
+        )
+        .pipe(
+          map(claim => {
+            return new fromActions.UpdateClaimSuccess(claim);
+          }),
+          catchError(error => of(new fromActions.UpdateClaimFail(error)))
+        );
+    })
+  );
+
+  @Effect()
+  submitClaim$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.SUBMIT_CLAIM),
+    map((action: fromActions.SubmitClaim) => action.payload),
+    mergeMap(payload =>
+      this.claimAdapter.submitClaim(payload.userId, payload.claimId).pipe(
+        map(claim => {
+          return new fromActions.SubmitClaimSuccess(claim);
+        }),
+        catchError(error => of(new fromActions.SubmitClaimFail(error)))
+      )
+    )
+  );
+
   constructor(
     private actions$: Actions,
     private claimAdapter: OccClaimAdapter,
-    private claimData: ClaimDataService
+    private claimData: ClaimDataService,
+    protected claimServiceData: ClaimDataService
   ) {}
 }

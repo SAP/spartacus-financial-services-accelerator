@@ -53,7 +53,9 @@
               <span
                 class="value"
                 *ngIf="claim.dateOfLoss != undefined; else na"
-                >{{ claim.dateOfLoss | cxDate: 'dd MMM yyyy' }}</span
+                >{{
+                  claim.dateOfLoss | parseDate | cxDate: 'dd MMM yyyy'
+                }}</span
               >
             </div>
             <div class="info-card-data">
