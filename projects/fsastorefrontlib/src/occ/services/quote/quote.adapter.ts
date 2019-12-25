@@ -20,4 +20,12 @@ export abstract class QuoteAdapter {
     cartId: string,
     quoteContent: any
   ): Observable<any>;
+
+  /**
+   * Abstract method used to bind quote for specified user and cart
+   *
+   * @param userId the user id
+   * @param cartId the cart id
+   */
+  abstract bindQuote(userId: string, cartId: string): Observable<any>;
 }

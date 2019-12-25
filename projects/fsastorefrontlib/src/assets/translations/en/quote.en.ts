@@ -11,6 +11,10 @@ export const quote = {
     youHaveNoQuotes: 'You have no Quotes',
     noActiveQuotes: 'You have no active quotes',
     getQuoteBySelecting: 'Get a Quote by selecting an insurance type above',
+    expiryDate: 'Expiry date',
+    confirmInformation: 'Confirm Information',
+    bindingConfirmation:
+      'By clicking Continue I certify the information in this application is true and correct.',
     quoteStatus: {
       title: 'Quote status',
       ready: 'Ready for Purchase',

@@ -25,3 +25,8 @@ export const getClaimsLoaded: MemoizedSelector<any, boolean> = createSelector(
   getClaimsState,
   fromClaim.getLoaded
 );
+
+export const getClaimsContent: MemoizedSelector<any, any> = createSelector(
+  getClaimsState,
+  fromClaim.getContent
+);

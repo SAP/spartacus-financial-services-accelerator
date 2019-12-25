@@ -14,6 +14,7 @@ const quoteContent = {};
 const usersEndpoint = '/users';
 const quotesEndpoint = '/insurance-quotes';
 const cartsEndpoint = '/carts';
+const bindQuoteEndPoint = '/insurance-quotes/bind';
 
 const MockOccModuleConfig: OccConfig = {
   context: {
@@ -71,6 +72,22 @@ describe('OccQuoteAdapter', () => {
               cartsEndpoint +
               `/${cartId}` +
               quotesEndpoint && req.method === 'PATCH'
+        );
+      }, `PATCH method and url`);
+    }));
+  });
+
+  describe('bind quote', () => {
+    it('should bind user Quote', async(() => {
+      adapter.bindQuote(userId, cartId).subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url ===
+            usersEndpoint +
+              `/${userId}` +
+              cartsEndpoint +
+              `/${cartId}` +
+              bindQuoteEndPoint && req.method === 'PATCH'
         );
       }, `PATCH method and url`);
     }));

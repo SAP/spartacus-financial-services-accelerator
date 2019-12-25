@@ -1,3 +1,5 @@
+import { BindQuoteDialogComponent } from './components/bind-quote-dialog/bind-quote-dialog.component';
+import { OccQuoteAdapter } from './../../occ/services/quote/occ-quote.adapter';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -196,6 +198,7 @@ const routes: Routes = [
   ],
   declarations: [
     QuoteReviewComponent,
+    BindQuoteDialogComponent,
     FinalReviewComponent,
     AddOptionsComponent,
     ChooseCoverNavigationComponent,
@@ -211,6 +214,7 @@ const routes: Routes = [
     PaymentMethodModule,
     PaymentFormModule,
     QuoteReviewComponent,
+    BindQuoteDialogComponent,
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
     FSMiniCartComponent,
@@ -218,6 +222,7 @@ const routes: Routes = [
   entryComponents: [
     AddOptionsComponent,
     QuoteReviewComponent,
+    BindQuoteDialogComponent,
     FinalReviewComponent,
     ChooseCoverNavigationComponent,
     PersonalDetailsNavigationComponent,
@@ -229,6 +234,7 @@ const routes: Routes = [
     FSCartService,
     OccFSCheckoutAdapter,
     OccFSCartAdapter,
+    OccQuoteAdapter,
     CategoryService,
     reducerProvider,
   ],
