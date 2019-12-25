@@ -65,7 +65,7 @@ export class QuoteReviewComponent implements OnInit {
     this.routingService.go(this.checkoutStepUrlBack);
   }
 
-  next() {
+  continue() {
     if (this.bindingState === BindingStateType.UNBIND) {
       this.openModal();
     } else {
