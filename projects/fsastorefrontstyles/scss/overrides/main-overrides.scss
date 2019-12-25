@@ -26,6 +26,11 @@ cx-page-layout {
   padding: 0;
 }
 
+// TODO: Keep until we refactor the way we implement HTML content in impex files
+.TopContent cx-paragraph p {
+  margin-bottom: 0;
+}
+
 .close {
   width: inherit;
   margin: inherit;
