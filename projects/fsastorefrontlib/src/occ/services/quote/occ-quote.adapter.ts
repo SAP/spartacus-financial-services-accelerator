@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
@@ -24,6 +24,12 @@ export class OccQuoteAdapter implements QuoteAdapter {
     return this.occEndpointService.getBaseEndpoint() + quotesFromCartEndpoint;
   }
 
+  protected bindQuoteEndpoint(userId: string, cartId: string) {
+    const quotesFromCartEndpoint =
+      '/users/' + userId + '/carts/' + cartId + '/insurance-quotes/bind';
+    return this.occEndpointService.getBaseEndpoint() + quotesFromCartEndpoint;
+  }
+
   public getQuotes(userId: string): Observable<any> {
     const url = this.getQuotesEndpoint(userId);
     const params = new HttpParams();
@@ -43,6 +49,17 @@ export class OccQuoteAdapter implements QuoteAdapter {
 
     return this.http
       .patch(url, quoteContent, { params: params })
+      .pipe(catchError((error: any) => throwError(error.json)));
+  }
+
+  public bindQuote(userId: string, cartId: string): Observable<any> {
+    const url = this.bindQuoteEndpoint(userId, cartId);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    return this.http
+      .patch(url, JSON.stringify({}), { headers })
       .pipe(catchError((error: any) => throwError(error.json)));
   }
 }

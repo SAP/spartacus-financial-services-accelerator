@@ -17,8 +17,8 @@ import { map } from 'rxjs/operators';
 @Injectable()
 export class QuoteService {
   constructor(
-    private store: Store<fromReducer.UserState>,
-    private quoteData: QuoteDataService,
+    protected store: Store<fromReducer.UserState>,
+    protected quoteData: QuoteDataService,
     protected cartService: CartService,
     protected auth: AuthService,
     protected formDataService: FormDataService
@@ -124,5 +124,14 @@ export class QuoteService {
         )
         .subscribe();
     }
+  }
+
+  bindQuote(cartId: string) {
+    this.store.dispatch(
+      new fromAction.BindQuote({
+        userId: this.quoteData.userId,
+        cartId: cartId,
+      })
+    );
   }
 }

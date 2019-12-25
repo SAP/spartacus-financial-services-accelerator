@@ -1,12 +1,15 @@
+import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
+import {
+  FSCart,
+  BindingStateType,
+} from './../../../../occ/occ-models/occ.models';
+import { map, take } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cart, CartService, OccConfig, RoutingService } from '@spartacus/core';
-import { Observable } from 'rxjs';
-import {
-  FSCartService,
-  FSCheckoutConfigService,
-} from '../../../../core/checkout/services';
-import { FSCheckoutService } from '../../../../core/checkout/services/fs-checkout.service';
+import { Observable, Subscription } from 'rxjs';
+import { FSCheckoutConfigService } from '../../../../core/checkout/services';
+import { ModalService, ModalRef } from '@spartacus/storefront';
 
 @Component({
   selector: 'fsa-quote-review',
@@ -17,6 +20,10 @@ export class QuoteReviewComponent implements OnInit {
   cartLoaded$: Observable<boolean>;
   checkoutStepUrlNext: string;
   checkoutStepUrlBack: string;
+  subscription = new Subscription();
+  modalRef: ModalRef;
+  bindingState: string;
+  cartCode: string;
 
   constructor(
     protected cartService: CartService,
@@ -24,8 +31,7 @@ export class QuoteReviewComponent implements OnInit {
     protected routingService: RoutingService,
     private checkoutConfigService: FSCheckoutConfigService,
     private activatedRoute: ActivatedRoute,
-    protected checkoutService: FSCheckoutService,
-    protected fsCartService: FSCartService
+    protected modalService: ModalService
   ) {}
 
   ngOnInit() {
@@ -37,6 +43,18 @@ export class QuoteReviewComponent implements OnInit {
     );
     this.cart$ = this.cartService.getActive();
     this.cartLoaded$ = this.cartService.getLoaded();
+
+    this.subscription.add(
+      this.cart$
+        .pipe(
+          take(1),
+          map(activeCart => {
+            this.cartCode = activeCart.code;
+            this.bindingState = (<FSCart>activeCart).insuranceQuote.state.code;
+          })
+        )
+        .subscribe()
+    );
   }
 
   public getBaseUrl() {
@@ -46,9 +64,24 @@ export class QuoteReviewComponent implements OnInit {
   back() {
     this.routingService.go(this.checkoutStepUrlBack);
   }
-  next() {
-    this.checkoutService.mockDeliveryAddress();
-    this.routingService.go(this.checkoutStepUrlNext);
+
+  continue() {
+    if (this.bindingState === BindingStateType.UNBIND) {
+      this.openModal();
+    } else {
+      this.routingService.go(this.checkoutStepUrlNext);
+    }
+  }
+
+  private openModal() {
+    let modalInstance: any;
+    this.modalRef = this.modalService.open(BindQuoteDialogComponent, {
+      centered: true,
+      size: 'lg',
+    });
+    modalInstance = this.modalRef.componentInstance;
+    modalInstance.cartCode = this.cartCode;
+    modalInstance.nextStepUrl = this.checkoutStepUrlNext;
   }
 
   getFormContent(cart: any): any {
