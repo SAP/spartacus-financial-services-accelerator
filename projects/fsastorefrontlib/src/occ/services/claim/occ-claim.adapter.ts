@@ -5,6 +5,7 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 import { OccEndpointsService } from '@spartacus/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ClaimAdapter } from './claim.adapter';
+import { Claim, FSLocationOfLoss } from '../../occ-models';
 
 const FULL_PARAMS = 'fields=FULL';
 
@@ -54,5 +55,51 @@ export class OccClaimAdapter implements ClaimAdapter {
     return this.http
       .post(url, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  public updateClaim(userId: string, claimId: string, claimData: any) {
+    const url = this.getClaimsEndpoint(userId) + '/' + claimId;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    const claimBody: Claim =
+      claimData !== undefined
+        ? this.createClaimBody(claimData, {}, claimId)
+        : {};
+    return this.http
+      .patch(url, claimBody, { headers })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  public submitClaim(userId: string, claimId: string): Observable<any> {
+    const url = this.getClaimsEndpoint(userId) + '/' + claimId + '/submit';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http
+      .post(url, { headers })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  protected createClaimBody(claimData: any, claimBody: Claim, claimId: string) {
+    const claim = JSON.parse(claimData);
+    const location: FSLocationOfLoss = {
+      code: claimData.locationOfLoss,
+      city: claim.city,
+      address: claim.address,
+      countryCode: claim.country,
+      postcode: claim.postcode,
+      additionalDetails: claim.description,
+    };
+    claimBody = {
+      dateOfLoss: claim.whenHappened,
+      timeOfLoss: claim.whatTime,
+      causeOfLoss: claim.howAccidentOccured,
+      incidentType: { incidentCode: claim.whatHappened },
+      locationOfLoss: location.countryCode !== undefined ? location : null,
+      claimNumber: claimId,
+      requestId: claim.requestId,
+    };
+    return claimBody;
   }
 }

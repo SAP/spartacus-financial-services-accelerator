@@ -4,12 +4,14 @@ export interface ClaimState {
   claims: {};
   refresh: boolean;
   loaded: boolean;
+  content: {};
 }
 
 export const initialState: ClaimState = {
   claims: {},
   refresh: false,
   loaded: false,
+  content: {},
 };
 
 export function reducer(
@@ -41,9 +43,27 @@ export function reducer(
       };
 
     case fromAction.CREATE_CLAIM_SUCCESS: {
+      const content = { ...action.payload };
       return {
         ...state,
+        content,
         refresh: false,
+      };
+    }
+    case fromAction.UPDATE_CLAIM_SUCCESS: {
+      const content = { ...action.payload };
+      return {
+        ...state,
+        content,
+        refresh: false,
+      };
+    }
+    case fromAction.SUBMIT_CLAIM_SUCCESS: {
+      const content = { ...action.payload };
+      return {
+        ...state,
+        content,
+        refresh: true,
       };
     }
   }
@@ -54,3 +74,4 @@ export function reducer(
 export const getClaims = (state: ClaimState) => state.claims;
 export const getRefresh = (state: ClaimState) => state.refresh;
 export const getLoaded = (state: ClaimState) => state.loaded;
+export const getContent = (state: ClaimState) => state.content;
