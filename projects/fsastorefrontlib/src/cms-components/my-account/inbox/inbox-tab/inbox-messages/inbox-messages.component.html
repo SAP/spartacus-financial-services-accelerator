@@ -179,8 +179,8 @@
   </div>
   <div class="my-5">
     <cx-pagination
-      *ngIf="messagesObj.pagination"
-      [pagination]="messagesObj.pagination"
+      *ngIf="pagination"
+      [pagination]="pagination"
       (viewPageEvent)="pageChange($event)"
     ></cx-pagination>
   </div>

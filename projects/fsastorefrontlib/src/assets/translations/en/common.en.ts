@@ -79,6 +79,7 @@ export const fscommon = {
       applicationNumber: 'Application number is',
       myApplication: 'My Application',
       applicationID: 'Application ID',
+      applicationConfirmation: 'Confirmation of Application:',
     },
     register: {
       dateOfBirthMinimumAge: 'Must be over 18 years old',

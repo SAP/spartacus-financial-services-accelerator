@@ -1,391 +1,339 @@
 <ng-container *ngIf="order$ | async as order">
-  <ng-container *ngIf="order.code; else loading">
-    <div class="container-fluid">
-      <ng-container
-        *ngIf="order.deliveryOrderGroups?.length > 0; else orderComplete"
-      >
-        <div
-          *ngIf="
-            (order.deliveryOrderGroups[0]?.entries)[0]?.product?.defaultCategory
-              ?.code as categoryCode
-          "
-        >
-          <h2 class="mt-5 mb-5">
-            {{ 'fscommon.thankYou' | cxTranslate }}
-            {{
-              categoryCode.indexOf('banking') > -1
-                ? ('fscommon.application.applicationRequestSubmitted'
-                  | cxTranslate)
-                : ('policy.policyRequestSubmitted' | cxTranslate)
-            }}
-          </h2>
-          <div class="row">
-            <div class="col-12 col-md-8">
-              <div class="accordion">
-                <div class="row no-gutters section-header-heading">
-                  <div class="col-12 col-md-2">
-                    <span
-                      *ngIf="
-                        (order.deliveryOrderGroups[0]?.entries)[0]?.product
-                          ?.images?.length > 0
-                      "
-                      class="image-wrapper"
-                    >
-                      <img
-                        class="image-item"
-                        [src]="
-                          getBaseUrl() +
-                          ((order.deliveryOrderGroups[0]?.entries)[0]?.product
-                            ?.images)[1]?.url
-                        "
-                      />
-                    </span>
-                  </div>
-                  <div
-                    class="col-12 col-md-10 accordion-header-summary-caption"
-                  >
-                    <div class="row no-gutters">
-                      <div class="col-xs-12 col-6">
-                        {{ order.entries[0]?.product?.defaultCategory?.name }}
-                      </div>
-                      <div class="col-xs-12 col-6">
-                        {{
-                          categoryCode.indexOf('banking') > -1
-                            ? ('fscommon.application.applicationNumber'
-                              | cxTranslate)
-                            : ('policy.policyNumberIs' | cxTranslate)
-                        }}
-                        :
-                        {{ order.code }}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div #ref>
-                  <ng-container
-                    *ngIf="
-                      (order?.insuranceQuote?.quoteDetails | json) !== '{}'
-                    "
-                  >
-                    <fsa-accordion-item
-                      [opened]="true"
-                      [title]="
-                        order.entries[0]?.product?.defaultCategory?.name +
-                        ' ' +
-                        ('fscommon.information' | cxTranslate)
-                      "
-                    >
-                      <div class="container">
-                        <div class="row justify-content-center">
-                          <ul class="col-12 accordion-list">
-                            <!-- To be uncommented once we have data from yForms -->
-                            <!-- <ng-container *ngFor="let item of order?.insuranceQuote?.quoteDetails?.entry">
-                                                    <li class="accordion-list-item row">
-                                                        <div class="col-6">
-                                                            {{ item.key }}
-                                                        </div>
-                                                        <div class="col-6 value notice">
-                                                            {{ item.value }}
-                                                        </div>
-                                                    </li>
-                                                </ng-container> -->
-                            <li class="accordion-list-item row">
-                              <div class="col-6 item-label">
-                                {{ 'quote.quoteStatus' | cxTranslate }}
-                              </div>
-                              <div class="col-6 value notice">
-                                {{
-                                  order.insuranceQuote?.quoteWorkflowStatus
-                                    ?.code
-                                }}
-                              </div>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </fsa-accordion-item>
-                  </ng-container>
-                </div>
-                <fsa-accordion-item
-                  [opened]="ref.children.length > 0 ? false : true"
-                  [title]="'fscommon.whatsIncluded' | cxTranslate"
-                >
-                  <div class="container">
-                    <div class="row justify-content-center">
-                      <ul class="col-12 accordion-list">
-                        <ng-container
-                          *ngFor="
-                            let item of (order.deliveryOrderGroups[0]
-                              ?.entries)[0]?.product?.price
-                              ?.oneTimeChargeEntries
-                          "
-                        >
-                          <li class="accordion-list-item row">
-                            <div class="col-6 item-label">
-                              {{ item.billingTime?.name }}
-                            </div>
-                            <div class="col-6 value notice">
-                              <ng-container
-                                *ngIf="
-                                  item.price.value > 0;
-                                  then formattedPrice;
-                                  else item.chargeInformation
-                                    ? chargeInfo
-                                    : iconOk
-                                "
-                              >
-                              </ng-container>
-                              <ng-template #formattedPrice
-                                >{{ item.price.formattedValue }}
-                              </ng-template>
-                              <ng-template #chargeInfo>{{
-                                item.chargeInformation
-                              }}</ng-template>
-                              <ng-template #iconOk
-                                ><span class="FSA-icon icon-FSA-ok"></span>
-                              </ng-template>
-                            </div>
-                          </li>
-                        </ng-container>
-                      </ul>
-                    </div>
-                  </div>
-                </fsa-accordion-item>
-                <fsa-accordion-item
-                  [title]="'fscommon.addedByYou' | cxTranslate"
-                >
-                  <div class="container">
-                    <div class="row justify-content-center">
-                      <ul class="col-12 accordion-list">
-                        <ng-container
-                          *ngFor="
-                            let item of order.deliveryOrderGroups[0]?.entries
-                          "
-                        >
-                          <li class="accordion-list-item row">
-                            <div class="col-12 item-label">
-                              {{ item.product?.name }}
-                            </div>
-                          </li>
-                        </ng-container>
-                      </ul>
-                    </div>
-                  </div>
-                </fsa-accordion-item>
-                <ng-container
+  <ng-container *ngIf="order.code; else orderComplete">
+    <ng-container
+      *ngIf="
+        (order.deliveryOrderGroups[0]?.entries)[0]?.product?.defaultCategory
+          ?.code as categoryCode
+      "
+    >
+      <div class="row">
+        <div class="col-12 col-md-8 mb-5 mb-md-0">
+          <div class="accordion">
+            <div class="section-header-heading d-flex">
+              <div class="col-1">
+                <span
                   *ngIf="
-                    order.deliveryOrderGroups[0]?.entries.length > 0 &&
-                    (order.deliveryOrderGroups[0]?.entries)[0]?.product
-                      ?.investments
+                    (order.deliveryOrderGroups[0]?.entries)[0]?.product?.images
+                      ?.length > 0
                   "
+                  class="image-wrapper"
                 >
-                  <fsa-accordion-item
-                    [title]="'fscommon.investementDetails' | cxTranslate"
-                  >
-                    <div class="container">
-                      <div class="row justify-content-center">
-                        <ul class="col-12 accordion-list">
-                          <ng-container
-                            *ngFor="
-                              let item of order.deliveryOrderGroups[0]?.entries
-                            "
-                          >
-                            <ng-container
-                              *ngFor="
-                                let investmentDetail of item.product
-                                  ?.investments
-                              "
-                            >
-                              <li class="accordion-list-item row">
-                                <div class="col-12">
-                                  {{
-                                    investmentDetail.investmentType?.fundName
-                                  }}:
-                                  {{ investmentDetail.distributionPercentage }}%
-                                </div>
-                                <div class="col-12">
-                                  ISIN:
-                                  {{ investmentDetail.investmentType?.isin }}
-                                </div>
-                                <div class="col-12">
-                                  5
-                                  {{ 'fscommon.yearPerformanse' | cxTranslate }}
-                                  :
-                                  {{
-                                    investmentDetail.investmentType
-                                      ?.fiveYearPerformance
-                                  }}
-                                </div>
-                                <div class="col-12">
-                                  {{
-                                    'fscommon.riskAndReturningRate'
-                                      | cxTranslate
-                                  }}:
-                                  {{
-                                    investmentDetail.investmentType
-                                      ?.riskReturningRating
-                                  }}
-                                </div>
-                              </li>
-                            </ng-container>
-                          </ng-container>
-                        </ul>
-                      </div>
-                    </div>
-                  </fsa-accordion-item>
-                </ng-container>
-                <fsa-accordion-item
-                  [title]="'fscommon.personalDetails' | cxTranslate"
-                >
-                  <div class="container">
-                    <div class="row justify-content-center">
-                      <ul class="col-12 accordion-list">
-                        <li class="accordion-list-item row">
-                          <div class="col-6 item-label">
-                            {{ 'policy.policyHolder' | cxTranslate }}
-                          </div>
-                          <div class="col-6 value notice">
-                            Mrs. Test Tester
-                          </div>
-                        </li>
-                        <li class="accordion-list-item row">
-                          <div class="col-6 item-label">
-                            Phone Number
-                          </div>
-                          <div class="col-6 value notice">
-                            323535
-                          </div>
-                        </li>
-                        <li class="accordion-list-item row">
-                          <div class="col-6 item-label">
-                            Email Address
-                          </div>
-                          <div class="col-6 value notice">
-                            donna@moore.com
-                          </div>
-                        </li>
-                        <li class="accordion-list-item row">
-                          <div class="col-6 item-label">
-                            Address Line 1
-                          </div>
-                          <div class="col-6 value notice">
-                            Mocked Address
-                          </div>
-                        </li>
-                        <li class="accordion-list-item row">
-                          <div class="col-6 item-label">
-                            City
-                          </div>
-                          <div class="col-6 value notice">
-                            Belgrade
-                          </div>
-                        </li>
-                        <li class="accordion-list-item row">
-                          <div class="col-6 item-label">
-                            Postcode
-                          </div>
-                          <div class="col-6 value notice">
-                            11090
-                          </div>
-                        </li>
-                        <li class="accordion-list-item row">
-                          <div class="col-6 item-label">
-                            Country
-                          </div>
-                          <div class="col-6 value notice">
-                            Serbia
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </fsa-accordion-item>
+                  <img
+                    class="image-item"
+                    [src]="
+                      getBaseUrl() +
+                      ((order.deliveryOrderGroups[0]?.entries)[0]?.product
+                        ?.images)[1]?.url
+                    "
+                  />
+                </span>
+              </div>
+              <div class="col-10">
+                {{ order.entries[0]?.product?.defaultCategory?.name }}
               </div>
             </div>
-            <div class="col-12 col-md-4">
-              <div class="short-overview-wrapper">
-                <div class="short-overview">
-                  <div class="section-header-heading text-center">
+            <div #ref>
+              <ng-container
+                *ngIf="(order?.insuranceQuote?.quoteDetails | json) !== '{}'"
+              >
+                <fsa-accordion-item
+                  [opened]="true"
+                  [title]="
+                    order.entries[0]?.product?.defaultCategory?.name +
+                    ' ' +
+                    ('fscommon.information' | cxTranslate)
+                  "
+                >
+                  <div class="container">
+                    <div class="row justify-content-center">
+                      <ul class="col-12 accordion-list">
+                        <!-- To be uncommented once we have data from yForms -->
+                        <!-- <ng-container *ngFor="let item of order?.insuranceQuote?.quoteDetails?.entry">
+                                  <li class="accordion-list-item row">
+                                      <div class="col-6">
+                                          {{ item.key }}
+                                      </div>
+                                      <div class="col-6 value notice">
+                                          {{ item.value }}
+                                      </div>
+                                  </li>
+                              </ng-container> -->
+                        <li class="accordion-list-item row">
+                          <div class="col-6 item-label">
+                            {{ 'quote.quoteStatus.title' | cxTranslate }}
+                          </div>
+                          <div class="col-6 value notice">
+                            {{
+                              order.insuranceQuote?.quoteWorkflowStatus?.code
+                            }}
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </fsa-accordion-item>
+              </ng-container>
+            </div>
+            <fsa-accordion-item
+              [opened]="ref.children.length > 0 ? false : true"
+              [title]="'fscommon.whatsIncluded' | cxTranslate"
+            >
+              <div class="container">
+                <div class="row justify-content-center">
+                  <ul class="col-12 accordion-list">
+                    <ng-container
+                      *ngFor="
+                        let item of (order.deliveryOrderGroups[0]?.entries)[0]
+                          ?.product?.price?.oneTimeChargeEntries
+                      "
+                    >
+                      <li class="accordion-list-item row">
+                        <div class="col-6 item-label">
+                          {{ item.billingTime?.name }}
+                        </div>
+                        <div class="col-6 value notice">
+                          <ng-container
+                            *ngIf="
+                              item.price.value > 0;
+                              then formattedPrice;
+                              else item.chargeInformation ? chargeInfo : iconOk
+                            "
+                          >
+                          </ng-container>
+                          <ng-template #formattedPrice
+                            >{{ item.price.formattedValue }}
+                          </ng-template>
+                          <ng-template #chargeInfo>{{
+                            item.chargeInformation
+                          }}</ng-template>
+                          <ng-template #iconOk
+                            ><span class="FSA-icon icon-FSA-ok"></span>
+                          </ng-template>
+                        </div>
+                      </li>
+                    </ng-container>
+                  </ul>
+                </div>
+              </div>
+            </fsa-accordion-item>
+            <fsa-accordion-item [title]="'fscommon.addedByYou' | cxTranslate">
+              <div class="container">
+                <div class="row justify-content-center">
+                  <ul class="col-12 accordion-list">
+                    <ng-container
+                      *ngFor="let item of order.deliveryOrderGroups[0]?.entries"
+                    >
+                      <li class="accordion-list-item row">
+                        <div class="col-12 item-label">
+                          {{ item.product?.name }}
+                        </div>
+                      </li>
+                    </ng-container>
+                  </ul>
+                </div>
+              </div>
+            </fsa-accordion-item>
+            <ng-container
+              *ngIf="
+                order.deliveryOrderGroups[0]?.entries.length > 0 &&
+                (order.deliveryOrderGroups[0]?.entries)[0]?.product?.investments
+              "
+            >
+              <fsa-accordion-item
+                [title]="'fscommon.investementDetails' | cxTranslate"
+              >
+                <div class="container">
+                  <div class="row justify-content-center">
+                    <ul class="col-12 accordion-list">
+                      <ng-container
+                        *ngFor="
+                          let item of order.deliveryOrderGroups[0]?.entries
+                        "
+                      >
+                        <ng-container
+                          *ngFor="
+                            let investmentDetail of item.product?.investments
+                          "
+                        >
+                          <li class="accordion-list-item row">
+                            <div class="col-12">
+                              {{ investmentDetail.investmentType?.fundName }}:
+                              {{ investmentDetail.distributionPercentage }}%
+                            </div>
+                            <div class="col-12">
+                              ISIN:
+                              {{ investmentDetail.investmentType?.isin }}
+                            </div>
+                            <div class="col-12">
+                              5
+                              {{ 'fscommon.yearPerformanse' | cxTranslate }}
+                              :
+                              {{
+                                investmentDetail.investmentType
+                                  ?.fiveYearPerformance
+                              }}
+                            </div>
+                            <div class="col-12">
+                              {{
+                                'fscommon.riskAndReturningRate' | cxTranslate
+                              }}:
+                              {{
+                                investmentDetail.investmentType
+                                  ?.riskReturningRating
+                              }}
+                            </div>
+                          </li>
+                        </ng-container>
+                      </ng-container>
+                    </ul>
+                  </div>
+                </div>
+              </fsa-accordion-item>
+            </ng-container>
+            <fsa-accordion-item
+              [title]="'fscommon.personalDetails' | cxTranslate"
+            >
+              <div class="container">
+                <div class="row justify-content-center">
+                  <ul class="col-12 accordion-list">
+                    <li class="accordion-list-item row">
+                      <div class="col-6 item-label">
+                        {{ 'policy.policyHolder' | cxTranslate }}
+                      </div>
+                      <div class="col-6 value notice">
+                        Mrs. Test Tester
+                      </div>
+                    </li>
+                    <li class="accordion-list-item row">
+                      <div class="col-6 item-label">
+                        Phone Number
+                      </div>
+                      <div class="col-6 value notice">
+                        323535
+                      </div>
+                    </li>
+                    <li class="accordion-list-item row">
+                      <div class="col-6 item-label">
+                        Email Address
+                      </div>
+                      <div class="col-6 value notice">
+                        donna@moore.com
+                      </div>
+                    </li>
+                    <li class="accordion-list-item row">
+                      <div class="col-6 item-label">
+                        Address Line 1
+                      </div>
+                      <div class="col-6 value notice">
+                        Mocked Address
+                      </div>
+                    </li>
+                    <li class="accordion-list-item row">
+                      <div class="col-6 item-label">
+                        City
+                      </div>
+                      <div class="col-6 value notice">
+                        Belgrade
+                      </div>
+                    </li>
+                    <li class="accordion-list-item row">
+                      <div class="col-6 item-label">
+                        Postcode
+                      </div>
+                      <div class="col-6 value notice">
+                        11090
+                      </div>
+                    </li>
+                    <li class="accordion-list-item row">
+                      <div class="col-6 item-label">
+                        Country
+                      </div>
+                      <div class="col-6 value notice">
+                        Serbia
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </fsa-accordion-item>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="short-overview-wrapper">
+            <div class="short-overview">
+              <div class="section-header-heading text-center position-relative">
+                {{
+                  categoryCode.indexOf('banking') > -1
+                    ? ('fscommon.application.myApplication' | cxTranslate)
+                    : ('policy.myPolicy' | cxTranslate)
+                }}
+              </div>
+              <div class="short-overview-content">
+                <div class="short-overview-item row">
+                  <div class="short-overview-title col-7">
                     {{
                       categoryCode.indexOf('banking') > -1
-                        ? ('fscommon.application.myApplication' | cxTranslate)
-                        : ('policy.myPolicy' | cxTranslate)
+                        ? ('fscommon.application.applicationID' | cxTranslate)
+                        : ('policy.policyId' | cxTranslate)
+                    }}
+                    :
+                  </div>
+                  <div class="short-overview-value col-5">
+                    {{ order.code }}
+                  </div>
+                </div>
+                <div
+                  *ngIf="order.insuranceQuote?.paymentFrequency"
+                  class="short-overview-item row"
+                >
+                  <div class="short-overview-title col-7">
+                    {{ 'fscommon.paymentFrequency' | cxTranslate }}:
+                  </div>
+                  <div class="short-overview-value col-5">
+                    {{ order.insuranceQuote?.paymentFrequency }}
+                  </div>
+                </div>
+                <div
+                  *ngIf="order.insuranceQuote?.startDate"
+                  class="short-overview-item row"
+                >
+                  <div class="short-overview-title col-7">
+                    {{ 'fscommon.startDate' | cxTranslate }}:
+                  </div>
+                  <div class="short-overview-value col-5">
+                    {{
+                      order.insuranceQuote?.startDate | cxDate: 'dd MMM yyyy'
                     }}
                   </div>
-                  <div class="short-overview-content">
-                    <div class="short-overview-item row">
-                      <div class="short-overview-title col-7">
-                        {{
-                          categoryCode.indexOf('banking') > -1
-                            ? ('fscommon.application.applicationID'
-                              | cxTranslate)
-                            : ('policy.policyId' | cxTranslate)
-                        }}
-                        :
-                      </div>
-                      <div class="short-overview-value col-5">
-                        {{ order.code }}
-                      </div>
-                    </div>
-                    <div
-                      *ngIf="order.insuranceQuote?.paymentFrequency"
-                      class="short-overview-item row"
-                    >
-                      <div class="short-overview-title col-7">
-                        {{ 'fscommon.paymentFrequency' | cxTranslate }}:
-                      </div>
-                      <div class="short-overview-value col-5">
-                        {{ order.insuranceQuote?.paymentFrequency }}
-                      </div>
-                    </div>
-                    <div
-                      *ngIf="order.insuranceQuote?.startDate"
-                      class="short-overview-item row"
-                    >
-                      <div class="short-overview-title col-7">
-                        {{ 'fscommon.startDate' | cxTranslate }}:
-                      </div>
-                      <div class="short-overview-value col-5">
-                        {{
-                          order.insuranceQuote?.startDate
-                            | cxDate: 'dd MMM yyyy'
-                        }}
-                      </div>
-                    </div>
-                    <div class="short-overview-item row">
-                      <div class="short-overview-title col-7">
-                        {{
-                          (order.deliveryOrderGroups[0]?.entries)[0]?.product
-                            ?.name
-                        }}
-                      </div>
-                      <div class="short-overview-value col-5">
-                        {{ order.totalPrice?.formattedValue }}
-                      </div>
-                    </div>
-                    <div class="highlighted row">
-                      <div class="short-overview-title col-6">
-                        {{ 'fscommon.orderTotal' | cxTranslate }}:
-                      </div>
-                      <div class="short-overview-value col-6">
-                        {{ order.totalPrice?.formattedValue }}
-                      </div>
-                    </div>
+                </div>
+                <div class="short-overview-item row">
+                  <div class="short-overview-title col-7">
+                    {{
+                      (order.deliveryOrderGroups[0]?.entries)[0]?.product?.name
+                    }}
+                  </div>
+                  <div class="short-overview-value col-5">
+                    {{ order.totalPrice?.formattedValue }}
+                  </div>
+                </div>
+                <div class="highlighted row">
+                  <div class="short-overview-title col-6">
+                    {{ 'fscommon.orderTotal' | cxTranslate }}:
+                  </div>
+                  <div class="short-overview-value col-6">
+                    {{ order.totalPrice?.formattedValue }}
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </ng-container>
-    </div>
+      </div>
+    </ng-container>
   </ng-container>
 </ng-container>
 <ng-template #orderComplete>
   <h1 class="mt-5 mb-3 text-center">
     {{ 'policy.yourPolicyHasBeenSubmited' | cxTranslate }}
   </h1>
-</ng-template>
-<ng-template #loading>
-  <cx-spinner></cx-spinner>
 </ng-template>

@@ -16,7 +16,21 @@ export interface FSProduct extends Product {
 }
 
 export interface FSCart extends Cart {
-  insuranceQuote?: any;
+  insuranceQuote?: InsuranceQuote;
+}
+
+export interface InsuranceQuote {
+  quoteId?: string;
+  state?: QuoteBindingState;
+}
+
+export interface QuoteBindingState {
+  code?: string;
+}
+
+export enum BindingStateType {
+  BIND = 'BIND',
+  UNBIND = 'UNBIND',
 }
 
 export interface FSOrderEntry extends OrderEntry {

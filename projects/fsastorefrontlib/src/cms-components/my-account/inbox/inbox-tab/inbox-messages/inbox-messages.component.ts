@@ -23,6 +23,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   messagesObject$: Observable<any>;
   messageGroup: string;
+  pagination: any;
 
   searchConfig: FSSearchConfig = {
     currentPage: 0,
@@ -78,6 +79,8 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
             this.searchConfig.sortOrder =
               response.sorts[0].asc === true ? 'asc' : 'desc';
           }
+          this.pagination = response.pagination;
+          this.pagination.currentPage = response.pagination.page;
           response.messages.forEach(message => {
             newMessageList.push(this.buildDisplayMessage(message));
           });

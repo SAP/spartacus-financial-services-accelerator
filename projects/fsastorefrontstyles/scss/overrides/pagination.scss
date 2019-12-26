@@ -1,0 +1,12 @@
+@import '../theme';
+@import '../mixins-fsa';
+
+.page-item {
+  &:hover {
+    color: var(--cx-color-1);
+  }
+  &.active .page-link {
+    background-color: var(--cx-color-primary);
+    border-color: var(--cx-color-primary);
+  }
+}

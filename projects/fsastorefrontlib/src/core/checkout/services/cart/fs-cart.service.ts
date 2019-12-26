@@ -9,10 +9,13 @@ import {
   CartService,
   StateWithCart,
 } from '@spartacus/core';
-import { BehaviorSubject } from 'rxjs';
-import { filter, take, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { filter, take, tap, mergeMap, map } from 'rxjs/operators';
 import { PricingData } from '../../../models/pricing.interface';
 import * as fromFSAction from '../../store/actions/index';
+import { ActivatedRoute } from '@angular/router';
+import { CategoryService } from '../category/category.service';
+import { FSProduct } from '../../../../occ/occ-models';
 
 @Injectable()
 export class FSCartService extends CartService {
@@ -23,7 +26,9 @@ export class FSCartService extends CartService {
   constructor(
     protected fsStore: Store<StateWithCart>,
     protected fsCartData: CartDataService,
-    protected fsAuthService: AuthService
+    protected fsAuthService: AuthService,
+    protected activatedRoute: ActivatedRoute,
+    protected categoryService: CategoryService
   ) {
     super(fsStore, fsCartData, fsAuthService);
   }
@@ -85,6 +90,39 @@ export class FSCartService extends CartService {
       new CartActions.LoadCart({
         cartId: this.fsCartData.cartId,
         userId: this.fsCartData.userId,
+      })
+    );
+  }
+
+  setActiveCategory(): Observable<any> {
+    return this.activatedRoute.params.pipe(
+      mergeMap(params => {
+        return this.getActive().pipe(
+          map(cart => {
+            const categoryCode = 'categoryCode';
+            const formCode = 'formCode';
+            if (params[categoryCode]) {
+              this.categoryService.setActiveCategory(params[categoryCode]);
+            } else if (params[formCode]) {
+              this.categoryService.setActiveCategory(params[formCode]);
+            } else {
+              if (
+                cart.deliveryOrderGroups &&
+                cart.deliveryOrderGroups.length > 0 &&
+                cart.deliveryOrderGroups[0].entries &&
+                cart.deliveryOrderGroups[0].entries.length > 0
+              ) {
+                const fsProduct: FSProduct =
+                  cart.deliveryOrderGroups[0].entries[0].product;
+                if (fsProduct && fsProduct.defaultCategory) {
+                  this.categoryService.setActiveCategory(
+                    fsProduct.defaultCategory.code
+                  );
+                }
+              }
+            }
+          })
+        );
       })
     );
   }

@@ -1,4 +1,4 @@
-<h2 class="section-header-heading text-center col mb-0">
+<h2 class="section-header-heading col mb-0">
   {{ 'fscommon.addOptions' | cxTranslate }}
 </h2>
 <div class="cart-items-list">
@@ -75,14 +75,23 @@
   </ng-container>
 </div>
 <ng-container *ngIf="entries$ != undefined">
-  <button
-    class="primary-button col-md-3 col mt-4 float-right"
-    type="button"
-    data-checkout-url=""
-    (click)="navigateNext()"
-  >
-    {{ 'fscommon.next' | cxTranslate }}
-  </button>
+  <div class="row mt-5">
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <button class="action-button btn-block" (click)="back()">
+        {{ 'common.back' | cxTranslate }}
+      </button>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <button
+        class="primary-button btn-block"
+        type="button"
+        data-checkout-url=""
+        (click)="navigateNext()"
+      >
+        {{ 'common.continue' | cxTranslate }}
+      </button>
+    </div>
+  </div>
 </ng-container>
 <ng-template #includedNotAvailable let-title="title">
   <span>{{ title }}</span>

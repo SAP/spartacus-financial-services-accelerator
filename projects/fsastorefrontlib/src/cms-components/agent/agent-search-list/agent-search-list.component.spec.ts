@@ -5,7 +5,7 @@ import { AgentSearchService } from '../../../core/agent/services/agent-search.se
 import { ActivatedRoute } from '@angular/router';
 import { Type, Component, Input } from '@angular/core';
 
-const searchResults = {};
+const searchResults = { pagination: { page: 0 } };
 
 class ActivatedRouteMock {
   paramsSubscriptionHandler: Function;

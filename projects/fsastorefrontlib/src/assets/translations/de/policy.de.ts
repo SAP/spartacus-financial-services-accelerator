@@ -10,7 +10,7 @@ export const policy = {
     viewYourPolicies: 'Ihre aktuellen Policen ansehen',
     youHaveNoPolicies: 'Sie haben zur Zeit keine Versicherung bei uns!',
     policySummary: 'Policenübersicht',
-    policyRequestSubmitted: 'Ihr Antrag wird übermittelt.',
+    thankYouForOrder: '[DE] Thank you for your order!',
     yourPolicyHasBeenSubmited: 'Ihr Antrag wurde bereits übermittelt',
     finishQuoteToGetPolicy:
       'Sie müssen Ihren Antrag abschließen, um eine Police zu erhalten.',
