@@ -54,12 +54,12 @@ context('Current AccountCheckout', () => {
     quoteReview.checkQuoteReviewPage();
   });
 
-  it('Should Continue in checkout', () => {
-    buttons.clickContinueButton();
+  it('Should bind Insurance Quote', () => {
+    buttons.bindQuotePopup();
   });
 
   it('Should check Legal Information page', () => {
-    legalInformationPage.checkLegalInforamtionPage();
+    legalInformationPage.checkLegalInformationPage();
   });
 
   it('Should click Next in checkout', () => {

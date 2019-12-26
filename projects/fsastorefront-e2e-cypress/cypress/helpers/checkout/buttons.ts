@@ -4,8 +4,11 @@ export function clickNextButton() {
     .click();
 }
 
-export function clickContinueButton() {
+export function bindQuotePopup() {
   cy.get('button.primary-button')
     .should('contain', 'Continue')
     .click();
+  cy.get('fsa-bind-quote-dialog').within(() => {
+    cy.get('.secondary-button').click();
+  });
 }
