@@ -11,12 +11,12 @@
       <br /><br />
     </div>
   </ng-container>
-  <ng-container *ngIf="result.pagination">
+  <ng-container *ngIf="pagination">
     <cx-pagination
-      *ngIf="result.pagination"
-      [pagination]="result.pagination"
+      *ngIf="pagination"
+      [pagination]="pagination"
       (viewPageEvent)="pageChange($event)"
     ></cx-pagination>
-    Total results: {{ result.pagination.totalCount }}
+    Total results: {{ pagination.totalCount }}
   </ng-container>
 </ng-container>
