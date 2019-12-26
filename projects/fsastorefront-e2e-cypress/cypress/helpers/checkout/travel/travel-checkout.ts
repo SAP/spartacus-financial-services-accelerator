@@ -22,7 +22,7 @@ export function populateInsuranceInfoForm() {
     cy.get('[name="tripDetailsTravellerAges"]').type('20');
   });
   cy.get('fsa-choose-cover-navigation')
-    .findByText('Next')
+    .findByText('Continue')
     .click();
 }
 
@@ -102,7 +102,7 @@ export function populatePersonalDetailsForm() {
     cy.get('[name=country]').select('Serbia');
   });
   cy.get('fsa-personal-details-navigation')
-    .findByText('Next')
+    .findByText('Continue')
     .click();
 }
 
