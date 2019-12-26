@@ -19,22 +19,20 @@ export function checkAddOptionsPageContent(addOptions: AddOptions) {
   cy.get('fsa-add-options')
     .should('be.visible')
     .within(() => {
-      cy.get('h3').should('have.length', addOptions.items.length);
+      cy.get('h6').should('have.length', addOptions.items.length);
       addOptions.items.forEach((item, index) => {
-        cy.get('h3')
+        cy.get('.row.mx-3.py-3')
           .eq(index)
-          .should('have.text', item.name);
-        if (!item.available) {
-          cy.get('button.secondary-button')
-            .eq(index)
-            .should('contain', 'Not available');
-        }
-        if (item.shouldAdd) {
-          cy.get('.secondary-button')
-            .eq(index)
-            .click();
-          cy.wait(1000);
-        }
+          .within(() => {
+            cy.get('h6').should('have.text', item.name);
+            if (!item.available) {
+              cy.get('span').should('contain', 'Not available');
+            }
+            if (item.shouldAdd) {
+              cy.get('.secondary-button').click();
+              cy.wait(1000);
+            }
+          });
       });
     });
 }

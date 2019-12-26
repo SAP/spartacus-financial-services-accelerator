@@ -44,8 +44,18 @@ export class UserRequestEffects {
       return this.userRequestAdapter
         .updateUserRequest(payload.userId, payload.requestId, payload.stepData)
         .pipe(
-          map((userRequest: any) => {
-            return new fromActions.LoadUserRequestSuccess(userRequest);
+          mergeMap((userRequest: any) => {
+            return [
+              new fromActions.LoadUserRequestSuccess(userRequest),
+              new fromActions.UpdateClaim({
+                userId: payload.userId,
+                requestId: payload.requestId,
+                claimData:
+                  userRequest.configurationSteps[
+                    payload.stepData.sequenceNumber - 1
+                  ].yformConfigurator.content,
+              }),
+            ];
           }),
           catchError(error => of(new fromActions.UpdateUserRequestFail(error)))
         );

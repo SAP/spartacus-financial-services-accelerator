@@ -63,7 +63,7 @@ context('Current AccountCheckout', () => {
   });
 
   it('Should click Next in checkout', () => {
-    buttons.clickNextButton();
+    buttons.clickContinueButton();
   });
 
   it('Should check User Identification page', () => {
@@ -75,7 +75,7 @@ context('Current AccountCheckout', () => {
   });
 
   it('Should click Next in checkout', () => {
-    buttons.clickNextButton();
+    buttons.clickContinueButton();
   });
 
   it('Check order confirmation', () => {

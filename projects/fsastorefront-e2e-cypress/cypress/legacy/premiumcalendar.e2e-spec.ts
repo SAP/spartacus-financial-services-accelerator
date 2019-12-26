@@ -15,7 +15,7 @@ context('PremiumCalendar', () => {
   });
 
   it('should have policy table', () => {
-    cy.get('div.gradient-heading.row').within(() => {
+    cy.get('div.section-header-heading.row').within(() => {
       cy.get('h5').should('have.length', 5);
     });
   });

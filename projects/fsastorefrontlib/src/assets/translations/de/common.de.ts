@@ -17,7 +17,6 @@ export const fscommon = {
     subject: 'Betreff',
     resume: 'Fortsetzen',
     details: 'Einzelheiten',
-    mandatory: 'Verpflichtend',
     status: 'Status',
     moreInfo: 'Weitere Informationen',
     product: 'Produkt',
@@ -81,6 +80,7 @@ export const fscommon = {
       applicationNumber: 'Antragsnummer ist',
       myApplication: 'Meine Anträge',
       applicationID: 'Antrags ID',
+      applicationConfirmation: '[DE] Confirmation of Application:',
     },
     register: {
       dateOfBirthMinimumAge: 'Muss über 18 Jahre alt sein',

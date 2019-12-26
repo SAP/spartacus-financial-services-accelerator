@@ -1,6 +1,9 @@
 <h3>Search Results</h3>
-<ng-container *ngIf="searchResults$ | async as result">
-  <ng-container class="agent-details" *ngFor="let agent of result.agents">
+<ng-container *ngIf="searchResults">
+  <ng-container
+    class="agent-details"
+    *ngFor="let agent of searchResults.agents"
+  >
     <div class="agent-list-item" (click)="showDetails(agent)">
       {{ agent.firstName }} {{ agent.lastName }}<br />
       <ng-container *ngFor="let pos of agent.pointsOfService">
@@ -11,12 +14,12 @@
       <br /><br />
     </div>
   </ng-container>
-  <ng-container *ngIf="result.pagination">
+  <ng-container *ngIf="pagination">
     <cx-pagination
-      *ngIf="result.pagination"
-      [pagination]="result.pagination"
+      *ngIf="pagination"
+      [pagination]="pagination"
       (viewPageEvent)="pageChange($event)"
     ></cx-pagination>
-    Total results: {{ result.pagination.totalCount }}
+    Total results: {{ pagination.totalCount }}
   </ng-container>
 </ng-container>

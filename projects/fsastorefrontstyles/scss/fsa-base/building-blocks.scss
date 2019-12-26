@@ -1,8 +1,7 @@
 @import '../mixins-fsa';
 
 .info-container {
-  background-color: var(--cx-color-4);
-  border: $border-grey;
+  @include box-shadow(0px, 2px, 20px, 1px, $color-grey, 1);
 }
 .clickable {
   @include accordion-status();
@@ -109,6 +108,7 @@
   font-weight: var(--cx-font-weight-semi);
   padding: 1rem;
   text-align: center;
+  position: relative;
 }
 .image-item {
   display: block;
@@ -151,19 +151,6 @@
   border-radius: 50%;
   @include box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 70%);
   margin: 0 25px;
-}
-.gradient-heading {
-  color: var(--cx-color-1);
-  font-size: 20px;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  line-height: 1.6;
-  @include linear-gradient-background(
-    var(--cx-color-primary),
-    var(--cx-color-9),
-    50%,
-    100%
-  );
 }
 .list-data {
   margin: 0;
@@ -231,5 +218,30 @@
     color: var(--cx-color-text);
     background-color: var(--cx-color-4);
     font-size: $h6-font-size;
+  }
+}
+.fsa-tab {
+  color: var(--cx-color-text);
+  margin-right: 3px;
+  padding: 1rem 2rem;
+  display: flex;
+  border-bottom: 3px solid transparent;
+  @include transition;
+  &.active {
+    font-weight: var(--cx-font-weight-bold);
+    background-color: var(--cx-color-4);
+    color: var(--cx-color-text);
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    border-bottom: 3px solid var(--cx-color-primary);
+  }
+  &:hover {
+    color: var(--cx-color-primary);
+    border-bottom: 3px solid var(--cx-color-primary);
+    opacity: 0.8;
+  }
+  @include media-breakpoint-down(xs) {
+    border-radius: 0;
+    margin-right: 0;
   }
 }

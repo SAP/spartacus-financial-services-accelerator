@@ -36,6 +36,7 @@ import { FinalReviewComponent } from './components/final-review/final-review.com
 import { LegalModule } from './components/legal/legal.module';
 import { FSMiniCartComponent } from './components/mini-cart/mini-cart.component';
 import { FsaOrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
+import { OrderConfirmationMessageComponent } from './components/order-confirmation-message/order-confirmation-message.component';
 import { QuoteReviewComponent } from './components/quote-review/quote-review.component';
 import { UserIdentificationModule } from './components/user-identification/user-identification.module';
 import { FSCartService } from '../../core/checkout/services/cart/fs-cart.service';
@@ -180,6 +181,9 @@ const routes: Routes = [
         OrderConfirmationFlex: {
           component: FsaOrderConfirmationComponent,
         },
+        OrderConfirmationMessageFlex: {
+          component: OrderConfirmationMessageComponent,
+        },
         DynamicProgressBarStepsComponent: {
           component: FSCheckoutProgressComponent,
         },
@@ -196,11 +200,12 @@ const routes: Routes = [
     QuoteReviewComponent,
     BindQuoteDialogComponent,
     FinalReviewComponent,
-    FsaOrderConfirmationComponent,
     AddOptionsComponent,
-    FSMiniCartComponent,
     ChooseCoverNavigationComponent,
     PersonalDetailsNavigationComponent,
+    FsaOrderConfirmationComponent,
+    OrderConfirmationMessageComponent,
+    FSMiniCartComponent,
   ],
   exports: [
     I18nModule,
@@ -215,14 +220,15 @@ const routes: Routes = [
     FSMiniCartComponent,
   ],
   entryComponents: [
-    FsaOrderConfirmationComponent,
     AddOptionsComponent,
     QuoteReviewComponent,
     BindQuoteDialogComponent,
     FinalReviewComponent,
-    FSMiniCartComponent,
     ChooseCoverNavigationComponent,
     PersonalDetailsNavigationComponent,
+    FsaOrderConfirmationComponent,
+    OrderConfirmationMessageComponent,
+    FSMiniCartComponent,
   ],
   providers: [
     FSCartService,

@@ -1,90 +1,191 @@
-<div class="messages">
-  <ng-container *ngIf="messagesObject$ | async as messagesObj">
-    <ng-container *ngIf="messagesObj.messages?.length !== 0; else noMessages">
-      <div
-        class="message accordion border-bottom-grey"
-        *ngFor="let message of messagesObj.messages; let i = index"
-        [ngClass]="{
-          read: message.readDate,
-          active: selectedIndex === i
-        }"
-      >
-        <div class="inbox-header container-fluid">
-          <div class="row">
-            <div class="col-1 p-4">
-              <label class="checkbox-label">
-                <input
-                  type="checkbox"
-                  [checked]="checkBoxStatus"
-                  (change)="changeMessageState(message.readDate, message.uid)"
-                  (click)="mainCheckboxSwitch()"
-                />
-                <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
-              </label>
-            </div>
-            <div
-              class="col-6 col-md-3 position-relative text-truncate p-4"
-              (click)="
-                toggleActiveAccordion(i);
-                readMessage(message);
-                message.readDate = getDate()
-              "
-            >
-              {{ message.subject }}
-              <ng-container *ngIf="message.documents?.length > 0">
-                <span class="position-absolute FSA-icon icon-attachment"></span>
-              </ng-container>
-            </div>
-            <div
-              class="col-md-6 d-none d-md-block text-truncate p-4"
-              (click)="
-                toggleActiveAccordion(i);
-                readMessage(message);
-                message.readDate = getDate()
-              "
-            >
-              {{ message.body }}
-            </div>
-            <div class="col-4 col-md-2 text-truncate cursor-default p-4">
-              {{ message.sentDate | date: 'dd MMM, yyyy h:m aaa' }}
-            </div>
-          </div>
-        </div>
-        <div
-          class="accordion-item-wrapper"
-          [ngClass]="{ active: selectedIndex === i }"
+<!--  TABLE HEADER   -->
+<div
+  class="FSA-icon m-4"
+  (click)="changeSelectedMessages(!envelopState)"
+  [ngClass]="envelopState ? 'icon-FSA-envelope-open' : 'icon-FSA-envelope'"
+></div>
+<div class="section-header-heading p-4 position-relative container-fluid">
+  <div class="row d-none d-md-flex">
+    <div class="col-1">
+      <label class="checkbox-label">
+        <input
+          type="checkbox"
+          [checked]="mainCheckboxChecked"
+          (click)="checkAllCheckboxes(!mainCheckboxChecked)"
+        />
+        <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
+      </label>
+    </div>
+    <ng-container
+      *ngIf="{
+        subject: defaultSortOrder,
+        content: defaultSortOrder,
+        sentDate: defaultSortOrder
+      } as sorts"
+    >
+      <div class="col-3">
+        {{ 'fscommon.subject' | cxTranslate }}
+        <span
+          class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
+          (click)="
+            sorts.subject = sorts.subject === 'desc' ? 'asc' : 'desc';
+            sortMessages('subject', sorts.subject)
+          "
+          [ngClass]="sorts.subject === 'asc' ? 'rotate' : ''"
         >
-          <div class="box-shadow">
-            <div [innerHtml]="message.richContent"></div>
-            <div
-              *ngIf="message.documents?.length > 0"
-              class="border-top-grey pt-4"
-            >
-              <span class="notification">
-                {{ message.documents.length }}
-                {{ 'fscommon.attachments' | cxTranslate }}
-              </span>
-              <ul class="mt-3 document-list">
-                <li
-                  class="pb-2 mb-1 document-list-item"
-                  *ngFor="let document of message.documents"
-                >
-                  <span class="icon-external-link FSA-icon"></span>
-                  <a
-                    class="document-link pl-2"
-                    [href]="document.downloadUrl"
-                    target="_blank"
-                    >{{ document.altText }}</a
-                  >
-                </li>
-              </ul>
-            </div>
+        </span>
+      </div>
+      <div class="col-6">
+        {{ 'fscommon.preview' | cxTranslate }}
+        <span
+          class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
+          (click)="
+            sorts.content = sorts.content === 'desc' ? 'asc' : 'desc';
+            sortMessages('body', sorts.content)
+          "
+          [ngClass]="sorts.content === 'asc' ? 'rotate' : ''"
+        ></span>
+      </div>
+      <div class="col-2">
+        {{ 'fscommon.date' | cxTranslate }}
+        <span
+          class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
+          (click)="
+            sorts.sentDate = sorts.sentDate === 'desc' ? 'asc' : 'desc';
+            sortMessages('sentdate', sorts.sentDate)
+          "
+          [ngClass]="sorts.sentDate === 'asc' ? 'rotate' : ''"
+        ></span>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="mobile-heading row d-md-none">
+    <div class="col-2">
+      <label class="checkbox-label">
+        <input
+          type="checkbox"
+          [checked]="mainCheckboxChecked"
+          (click)="checkAllCheckboxes(!mainCheckboxChecked)"
+        />
+        <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
+      </label>
+    </div>
+    <div
+      class="col-8 text-center"
+      (click)="displayMobileGroups = !displayMobileGroups"
+    >
+      {{ mobileGroupTitle }}
+    </div>
+    <div class="col-2">
+      <span
+        class="filter position-absolute FSA-icon icon-FSA-triangle-bottom"
+      ></span>
+    </div>
+  </div>
+  <div
+    class="select d-md-none"
+    [ngClass]="{ opened: displayMobileGroups, '': displayMobileGroups }"
+  >
+    <ul>
+      <li
+        class="tab"
+        *ngFor="let tab of mobileTabs; let i = index"
+        (click)="activeTabIndex = i; displayMobileGroups = false"
+      >
+        <fsa-inbox-tab [currentTab]="i === activeTabIndex" [tabId]="tab">
+        </fsa-inbox-tab>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!--  TABLE HEADER  END -->
+
+<ng-container *ngIf="messagesObject$ | async as messagesObj">
+  <div class="messages">
+    <div
+      class="message accordion border-bottom-grey"
+      *ngFor="let message of loadedMessages; let i = index"
+      [ngClass]="{
+        read: message.read,
+        active: message.opened
+      }"
+    >
+      <div class="inbox-header container-fluid">
+        <div class="row">
+          <div class="col-1 p-4">
+            <label class="checkbox-label">
+              <input
+                type="checkbox"
+                [checked]="message.checked"
+                (change)="checkMessage(message.uid, !message.checked)"
+              />
+              <span class="checkbox-text FSA-icon icon-FSA-ok"></span>
+            </label>
+          </div>
+          <div
+            class="col-6 col-md-3 position-relative text-truncate p-4"
+            (click)="message.opened = !message.opened; readMessage(message)"
+          >
+            {{ message.subject }}
+            <ng-container *ngIf="message.documents?.length > 0">
+              <span class="position-absolute FSA-icon icon-attachment"></span>
+            </ng-container>
+          </div>
+          <div
+            class="col-md-6 d-none d-md-block text-truncate p-4"
+            (click)="message.opened = !message.opened; readMessage(message)"
+          >
+            {{ message.body }}
+          </div>
+          <div class="col-4 col-md-2 text-truncate cursor-default p-4">
+            {{ message.sentDate | date: 'dd MMM, yyyy h:m aaa' }}
           </div>
         </div>
       </div>
-    </ng-container>
-  </ng-container>
-</div>
+      <div
+        class="accordion-item-wrapper"
+        [ngClass]="{ active: message.opened }"
+      >
+        <div class="box-shadow">
+          <div [innerHtml]="message.richContent"></div>
+          <div
+            *ngIf="message.documents?.length > 0"
+            class="border-top-grey pt-4"
+          >
+            <span class="notification">
+              {{ message.documents.length }}
+              {{ 'fscommon.attachments' | cxTranslate }}
+            </span>
+            <ul class="mt-3 document-list">
+              <li
+                class="pb-2 mb-1 document-list-item"
+                *ngFor="let document of message.documents"
+              >
+                <span class="icon-external-link FSA-icon"></span>
+                <a
+                  class="document-link pl-2"
+                  [href]="document.downloadUrl"
+                  target="_blank"
+                  >{{ document.altText }}</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="my-5">
+    <cx-pagination
+      *ngIf="pagination"
+      [pagination]="pagination"
+      (viewPageEvent)="pageChange($event)"
+    ></cx-pagination>
+  </div>
+</ng-container>
+
 <ng-template #noMessages>
   <p class="p-4 border-bottom-grey">
     {{ 'fscommon.noMessagesForGroup' | cxTranslate }}

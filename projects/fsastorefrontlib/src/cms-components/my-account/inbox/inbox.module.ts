@@ -7,6 +7,7 @@ import {
   CmsPageGuard,
   SpinnerModule,
   PageLayoutComponent,
+  ListNavigationModule,
 } from '@spartacus/storefront';
 import {
   CmsModule,
@@ -45,6 +46,7 @@ const routes: Routes = [
     NgSelectModule,
     SpinnerModule,
     CmsModule,
+    ListNavigationModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {

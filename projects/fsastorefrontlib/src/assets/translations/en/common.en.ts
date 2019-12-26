@@ -5,6 +5,7 @@ export const fscommon = {
     add: 'Add',
     apply: 'Apply',
     next: 'Next',
+    continue: 'Continue',
     edit: 'Edit',
     your: 'Your',
     price: 'Price',
@@ -17,7 +18,6 @@ export const fscommon = {
     subject: 'Subject',
     resume: 'Resume',
     details: 'Details',
-    mandatory: 'Mandatory',
     status: 'Status',
     moreInfo: 'More Info',
     product: 'Product',
@@ -80,6 +80,7 @@ export const fscommon = {
       applicationNumber: 'Application number is',
       myApplication: 'My Application',
       applicationID: 'Application ID',
+      applicationConfirmation: 'Confirmation of Application:',
     },
     register: {
       dateOfBirthMinimumAge: 'Must be over 18 years old',

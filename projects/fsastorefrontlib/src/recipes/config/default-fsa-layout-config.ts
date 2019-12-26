@@ -62,5 +62,8 @@ export const fsaLayoutConfig: LayoutConfig = {
     FSRequestPageTemplate: {
       slots: ['TopContent', 'MiddleContent', 'BottomContent'],
     },
+    OrderConfirmationPageTemplate: {
+      slots: ['TopContent', 'BodyContent'],
+    },
   },
 };

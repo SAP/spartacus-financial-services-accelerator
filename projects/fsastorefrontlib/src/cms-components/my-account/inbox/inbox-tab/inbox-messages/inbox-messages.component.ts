@@ -4,16 +4,16 @@ import {
   Input,
   OnDestroy,
   OnInit,
-  Output,
-  EventEmitter,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { take, mergeMap, map } from 'rxjs/operators';
-import { Message } from '../../../../../core/my-account/services/inbox-data.service';
 import { InboxService } from '../../../../../core/my-account/services/inbox.service';
+import {
+  InboxMessage,
+  FSSearchConfig,
+} from '../../../../../core/my-account/services/inbox-data.service';
 
 @Component({
-  selector: 'fsa-messages-inbox',
+  selector: 'fsa-inbox-messages',
   templateUrl: './inbox-messages.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -22,93 +22,142 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
 
   private subscription: Subscription = new Subscription();
   messagesObject$: Observable<any>;
-  selectedIndex: number;
   messageGroup: string;
+  pagination: any;
+
+  searchConfig: FSSearchConfig = {
+    currentPage: 0,
+  };
+  loadedMessages: InboxMessage[] = [];
+
+  envelopState = false;
+  mainCheckboxChecked = false;
 
   @Input() initialGroup: string;
-  @Input() checkBoxStatus: boolean;
-  @Output() mainCheckBoxState = new EventEmitter<boolean>();
+  @Input() mobileTabs: string[];
+  @Input() mobileInitialTab: string;
+  mobileGroupTitle: string;
+  displayMobileGroups = false;
+
+  activeTabIndex = 0;
+  defaultSortOrder = 'desc';
 
   ngOnInit() {
     this.loadCurrentMessageGroup();
     this.messagesObject$ = this.inboxService.messages;
-    this.subscription.add(
-      this.inboxService.checkAllMessages
-        .pipe(
-          mergeMap(allChecked => {
-            this.inboxService.resetMessagesToSend();
-            return this.messagesObject$.pipe(
-              take(1),
-              map(data => {
-                if (allChecked) {
-                  return data.messages.forEach(message => {
-                    this.changeMessageState(message.readDate, message.uid);
-                  });
-                }
-              })
-            );
-          })
-        )
-        .subscribe()
-    );
-    this.subscription.add(
-      this.inboxService.accordionState.subscribe(
-        globalAccordionIndex => (this.selectedIndex = globalAccordionIndex)
-      )
-    );
   }
 
   loadCurrentMessageGroup() {
     this.subscription.add(
       this.inboxService.activeMessageGroupAndTitle.subscribe(group => {
+        if (
+          group &&
+          group.messageGroup &&
+          group.messageGroup !== this.messageGroup
+        ) {
+          this.clearSearchData();
+        }
         this.messageGroup =
           group && group.messageGroup ? group.messageGroup : this.initialGroup;
+        this.mobileGroupTitle =
+          group && group.title ? group.title : this.mobileInitialTab;
         this.getMessages();
       })
     );
   }
 
   getMessages() {
+    const newMessageList = [];
     this.subscription.add(
       this.inboxService
-        .getMessages(this.messageGroup)
-        .subscribe(messages => this.inboxService.messagesSource.next(messages))
+        .getMessages(this.messageGroup, this.searchConfig)
+        .subscribe(response => {
+          this.inboxService.messagesSource.next(response);
+          if (response.sorts.length > 0 && response.pagination) {
+            this.searchConfig.currentPage = response.pagination.page;
+            this.searchConfig.sortCode = response.sorts[0].code;
+            this.searchConfig.sortOrder =
+              response.sorts[0].asc === true ? 'asc' : 'desc';
+          }
+          this.pagination = response.pagination;
+          this.pagination.currentPage = response.pagination.page;
+          response.messages.forEach(message => {
+            newMessageList.push(this.buildDisplayMessage(message));
+          });
+          this.loadedMessages = newMessageList;
+        })
     );
   }
 
-  toggleActiveAccordion(index: number) {
-    this.selectedIndex = this.selectedIndex === index ? -1 : index;
+  readMessage(message: InboxMessage) {
+    this.loadedMessages.forEach(msg => {
+      if (!msg.read && msg.uid === message.uid) {
+        msg.read = true;
+        this.inboxService.setMessagesState([msg.uid], true).subscribe();
+      }
+    });
   }
 
-  readMessage(message: Message) {
-    const uidList = [];
-    if (message.readDate === undefined) {
-      uidList.push(message.uid);
-      this.subscription.add(
-        this.inboxService.setMessagesState(uidList, true).subscribe()
-      );
+  pageChange(pageNumber: number) {
+    this.mainCheckboxChecked = false;
+    this.searchConfig.currentPage = pageNumber;
+    this.loadCurrentMessageGroup();
+  }
+
+  clearSearchData() {
+    this.searchConfig.currentPage = 0;
+  }
+
+  checkMessage(messageUid: string, checked: boolean) {
+    if (!checked) {
+      this.mainCheckboxChecked = false;
+    }
+    this.loadedMessages.forEach(message => {
+      if (message.uid === messageUid) {
+        message.checked = checked;
+      }
+    });
+  }
+
+  checkAllCheckboxes(checked: boolean) {
+    this.mainCheckboxChecked = !this.mainCheckboxChecked;
+    this.loadedMessages.forEach(message => {
+      message.checked = checked;
+    });
+  }
+
+  changeSelectedMessages(toRead: boolean) {
+    this.envelopState = !this.envelopState;
+    const selectedMessages = this.loadedMessages
+      .filter(message => message.checked)
+      .map(message => {
+        message.read = toRead;
+        message.opened = false;
+        return message.uid;
+      });
+    if (selectedMessages.length > 0) {
+      this.inboxService.setMessagesState(selectedMessages, toRead).subscribe();
     }
   }
 
-  changeMessageState(readDate, messageUid) {
-    const messageObj = {
-      readDate: readDate,
-      uid: messageUid,
+  sortMessages(sortCode, sortOrder) {
+    this.searchConfig.sortCode = sortCode;
+    this.searchConfig.sortOrder = sortOrder;
+    this.getMessages();
+  }
+
+  buildDisplayMessage(message: any): InboxMessage {
+    return {
+      uid: message.uid,
+      subject: message.subject,
+      body: message.body,
+      richContent: message.richContent,
+      sentDate: message.sentDate,
+      documents: message.documents,
+      read: message.readDate != null ? true : false,
+      checked: false,
+      opened: false,
     };
-    this.inboxService.selectedMessages(messageObj);
-    if (this.checkBoxStatus === true) {
-      this.inboxService.getMessagesAction();
-    }
-  }
-
-  mainCheckboxSwitch() {
-    if (this.checkBoxStatus === true) {
-      this.mainCheckBoxState.emit(false);
-    }
-  }
-
-  getDate() {
-    return new Date();
   }
 
   ngOnDestroy() {

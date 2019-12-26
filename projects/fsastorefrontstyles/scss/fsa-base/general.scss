@@ -4,7 +4,21 @@ body {
   font-size: $font-size-base;
   color: var(--cx-color-text);
 }
-
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6,
+.title {
+  font-weight: var(--cx-font-weight-semi);
+}
 h1,
 .h1 {
   font-size: var(--cx-h1-font-size);
@@ -29,6 +43,9 @@ h6,
 .h6 {
   font-size: var(--cx-h6-font-size);
 }
+.title {
+  font-size: var(--cx-title-font-size);
+}
 p {
   font-size: var(--cx-text-font-size);
 }
@@ -51,6 +68,6 @@ button:focus {
   text-transform: uppercase;
   color: var(--cx-color-primary);
   &:hover {
-    border-bottom: 1px solid var(--cx-color-primary);
+    text-decoration: underline;
   }
 }

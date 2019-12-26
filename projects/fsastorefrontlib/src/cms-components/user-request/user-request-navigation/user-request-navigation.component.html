@@ -1,10 +1,7 @@
 <section *ngIf="userRequest$ | async as userRequest">
   <div class="row mt-5">
     <div *ngIf="activeStepIndex !== 0" class="col-sm-6 col-xs-12">
-      <button
-        class="secondary-button btn-block"
-        (click)="back(activeStepIndex)"
-      >
+      <button class="action-button btn-block" (click)="back(activeStepIndex)">
         {{ 'common.back' | cxTranslate }}
       </button>
     </div>
