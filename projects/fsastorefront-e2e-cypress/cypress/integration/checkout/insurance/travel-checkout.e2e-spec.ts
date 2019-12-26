@@ -32,7 +32,7 @@ context('Travel Insurance Checkout', () => {
       cy.wait(1000);
     });
 
-    it('Populate personal detials', () => {
+    it('Populate personal details', () => {
       travelCheckout.populatePersonalDetailsForm();
       cy.wait(1000);
     });
