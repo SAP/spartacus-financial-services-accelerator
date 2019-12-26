@@ -16,7 +16,21 @@ export interface FSProduct extends Product {
 }
 
 export interface FSCart extends Cart {
-  insuranceQuote?: any;
+  insuranceQuote?: InsuranceQuote;
+}
+
+export interface InsuranceQuote {
+  quoteId?: string;
+  state?: QuoteBindingState;
+}
+
+export interface QuoteBindingState {
+  code?: string;
+}
+
+export enum BindingStateType {
+  BIND = 'BIND',
+  UNBIND = 'UNBIND',
 }
 
 export interface FSOrderEntry extends OrderEntry {
@@ -69,8 +83,23 @@ export interface FSUserRequest {
   configurationSteps?: FSStepData[];
 }
 
+export interface FSLocationOfLoss {
+  code?: string;
+  countryCode?: string;
+  city?: string;
+  postcode?: string;
+  address?: string;
+  additionalDetails?: string;
+}
+
 export interface Claim extends FSUserRequest {
   claimNumber?: string;
+  locationOfLoss?: FSLocationOfLoss;
+  causeOfLoss?: string;
+  incidentType?: FSIncidentType;
+  dateOfLoss?: string;
+  timeOfLoss?: string;
+  claimStatus?: string;
 }
 
 export interface AllowedFSRequestType {
@@ -79,4 +108,8 @@ export interface AllowedFSRequestType {
 
 export interface FSRequestType {
   code?: string;
+}
+
+export interface FSIncidentType {
+  incidentCode?: string;
 }

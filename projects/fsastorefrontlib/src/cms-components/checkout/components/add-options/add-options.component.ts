@@ -13,6 +13,7 @@ import { filter, map } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/checkout/services';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/fs-checkout-config.service';
 import { FSProduct } from '../../../../occ/occ-models';
+import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 
 @Component({
   selector: 'fsa-add-options',
@@ -24,6 +25,7 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     protected cartService: FSCartService,
     protected routingService: RoutingService,
     protected checkoutConfigService: FSCheckoutConfigService,
+    protected categoryService: CategoryService,
     protected activatedRoute: ActivatedRoute
   ) {}
 
@@ -57,6 +59,22 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
       return;
     }
     this.cartService.removeEntry(item);
+  }
+
+  back() {
+    this.subscription.add(
+      this.categoryService
+        .getActiveCategory()
+        .pipe(
+          map(categoryCode => {
+            this.routingService.go({
+              cxRoute: 'category',
+              params: { code: categoryCode },
+            });
+          })
+        )
+        .subscribe()
+    );
   }
 
   navigateNext() {

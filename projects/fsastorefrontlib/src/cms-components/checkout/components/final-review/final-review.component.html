@@ -34,12 +34,12 @@
         </ul>
       </div>
       <div class="col-12 col-md-3">
-        <button class="secondary-button btn-block" (click)="edit()">
+        <button class="action-button btn-block" (click)="edit()">
           {{ 'fscommon.edit' | cxTranslate }}
         </button>
       </div>
     </div>
-    <div class="row my-5">
+    <div class="row my-5 align-items-start">
       <div class="col-12 col-md-8 cx-place-order-form form-check">
         <label>
           <input
@@ -49,7 +49,7 @@
           />
           <span class="form-check-label">
             {{ 'fscommon.confirmAndAgree' | cxTranslate }}
-            <a href="#" class="link">
+            <a href="#" class="link text-capitalize">
               {{ 'fscommon.termsConditions' | cxTranslate }}
             </a>
           </span>

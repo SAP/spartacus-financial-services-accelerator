@@ -118,12 +118,17 @@ export function checkQuoteReview() {
     cy.get('.highlighted').should('have.text', ' Total price:  €99.00 ');
   });
   cy.get('.primary-button').click();
+  cy.get('fsa-bind-quote-dialog').within(() => {
+    cy.get('.secondary-button').click();
+  });
 }
 
 export function selectPaymentMethod() {
   cy.get('.cx-card-title').should('contain', 'Default Payment Method');
   cy.get('.card-header').should('contain', 'Selected');
-  cy.get('button.btn-primary').click();
+  cy.get('cx-payment-method').within(() => {
+    cy.get('button.btn-primary').click();
+  });
 }
 
 export function addPaymentMethod(userId: string) {
@@ -177,13 +182,10 @@ export function placeOrderOnFinalReivew() {
 }
 
 export function checkOrderConfirmation() {
-  cy.get('fsa-order-confirmation').within(() => {
-    cy.get('h2')
+  cy.get('fsa-order-confirmation-message').within(() => {
+    cy.get('h5')
       .eq(0)
-      .should(
-        'have.text',
-        ' Thank you! Your policy request has been submitted '
-      );
+      .should('have.text', ' Thank you for your order! ');
   });
 }
 

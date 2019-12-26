@@ -28,4 +28,12 @@ export abstract class ClaimAdapter {
     policyId: string,
     contractNumber: string
   );
+
+  /**
+   * Abstract method used to submit claim
+   *
+   * @param userId The user id
+   * @param claimId The code of claim
+   */
+  abstract submitClaim(userId: string, claimId: string);
 }

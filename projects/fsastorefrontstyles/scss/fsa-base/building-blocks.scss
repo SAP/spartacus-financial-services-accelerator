@@ -1,8 +1,7 @@
 @import '../mixins-fsa';
 
 .info-container {
-  background-color: var(--cx-color-4);
-  border: $border-grey;
+  @include box-shadow(0px, 2px, 20px, 1px, $color-grey, 1);
 }
 .clickable {
   @include accordion-status();
@@ -109,6 +108,7 @@
   font-weight: var(--cx-font-weight-semi);
   padding: 1rem;
   text-align: center;
+  position: relative;
 }
 .image-item {
   display: block;

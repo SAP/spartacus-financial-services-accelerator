@@ -15,7 +15,8 @@ h6,
 .h3,
 .h4,
 .h5,
-.h6 {
+.h6,
+.title {
   font-weight: var(--cx-font-weight-semi);
 }
 h1,
@@ -41,6 +42,9 @@ h5,
 h6,
 .h6 {
   font-size: var(--cx-h6-font-size);
+}
+.title {
+  font-size: var(--cx-title-font-size);
 }
 p {
   font-size: var(--cx-text-font-size);

@@ -23,9 +23,6 @@ cx-page-layout {
 }
 
 .MultiStepCheckoutSummaryPageTemplate {
-  padding: 0;
-}
-.MultiStepCheckoutSummaryPageTemplate {
   .Section2 {
     padding: 0;
     margin-top: 3rem;
@@ -44,6 +41,12 @@ cx-page-layout {
     }
   }
 }
+
+// TODO: Keep until we refactor the way we implement HTML content in impex files
+.TopContent cx-paragraph p {
+  margin-bottom: 0;
+}
+
 .close {
   width: inherit;
   margin: inherit;
