@@ -54,8 +54,8 @@ context('Current AccountCheckout', () => {
     quoteReview.checkQuoteReviewPage();
   });
 
-  it('Should Continue in checkout', () => {
-    buttons.clickContinueButton();
+  it('Should bind Insurance Quote', () => {
+    buttons.bindQuotePopup();
   });
 
   it('Should check Legal Information page', () => {
