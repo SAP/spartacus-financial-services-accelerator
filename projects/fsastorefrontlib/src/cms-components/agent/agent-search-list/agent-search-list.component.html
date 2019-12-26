@@ -1,6 +1,9 @@
 <h3>Search Results</h3>
-<ng-container *ngIf="searchResults$ | async as result">
-  <ng-container class="agent-details" *ngFor="let agent of result.agents">
+<ng-container *ngIf="searchResults">
+  <ng-container
+    class="agent-details"
+    *ngFor="let agent of searchResults.agents"
+  >
     <div class="agent-list-item" (click)="showDetails(agent)">
       {{ agent.firstName }} {{ agent.lastName }}<br />
       <ng-container *ngFor="let pos of agent.pointsOfService">

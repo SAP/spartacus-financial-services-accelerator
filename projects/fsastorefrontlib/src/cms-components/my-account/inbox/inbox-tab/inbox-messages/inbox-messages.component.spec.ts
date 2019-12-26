@@ -20,7 +20,7 @@ class InboxTabComponent {
   selector: 'cx-pagination',
   template: '',
 })
-class MockPagintionComponent {
+class MockPaginationComponent {
   @Input() pagination;
 }
 
@@ -38,7 +38,7 @@ describe('InboxMessagesComponent', () => {
       declarations: [
         InboxMessagesComponent,
         InboxTabComponent,
-        MockPagintionComponent,
+        MockPaginationComponent,
       ],
       providers: [
         {
