@@ -1,13 +1,13 @@
 <ng-container *ngIf="cart$ | async as cart">
   <ng-container *ngIf="cart.deliveryOrderGroups">
     <div class="short-overview">
-      <div class="section-header-heading px-2">
+      <h2 class="section-header-heading col mb-0">
         {{
           (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.defaultCategory
             ?.name
         }}
         {{ 'quote.quote' | cxTranslate }}
-      </div>
+      </h2>
       <div class="short-overview-content">
         <div *ngIf="cart.insuranceQuote.state.code === 'BIND'">
           <div class="short-overview-item row">
