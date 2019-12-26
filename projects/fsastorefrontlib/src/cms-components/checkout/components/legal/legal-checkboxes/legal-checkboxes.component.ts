@@ -27,7 +27,7 @@ export class LegalCheckboxesComponent implements OnInit {
     );
   }
 
-  next() {
+  continue() {
     this.routingService.go(this.checkoutStepUrlNext);
   }
 

@@ -1,4 +1,4 @@
-export function checkLegalInforamtionPage() {
+export function checkLegalInformationPage() {
   cy.get('h2.heading-headline').contains('Your Current Account Insurance');
   //checking number checkout steps
   cy.get('div.progress-inner-wrapper').should('have.length', 5);

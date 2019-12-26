@@ -1,14 +1,17 @@
-export function clickNextButton() {
+export function bindQuotePopup() {
   cy.get('button.primary-button')
-    .should('contain', 'Next')
+    .should('contain', 'Continue')
     .click();
+  cy.get('fsa-bind-quote-dialog').within(() => {
+    cy.get('.secondary-button').click();
+  });
+  cy.wait(1000);
 }
 
 export function clickContinueButton() {
   cy.get('button.primary-button')
     .should('contain', 'Continue')
     .click();
-  cy.wait(1000);
 }
 
 export function checkBackAndContinueButtons() {

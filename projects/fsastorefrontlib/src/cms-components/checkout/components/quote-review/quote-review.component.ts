@@ -4,7 +4,7 @@ import {
   BindingStateType,
 } from './../../../../occ/occ-models/occ.models';
 import { map, take } from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cart, CartService, OccConfig, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
@@ -15,7 +15,7 @@ import { ModalService, ModalRef } from '@spartacus/storefront';
   selector: 'fsa-quote-review',
   templateUrl: './quote-review.component.html',
 })
-export class QuoteReviewComponent implements OnInit {
+export class QuoteReviewComponent implements OnInit, OnDestroy {
   cart$: Observable<Cart>;
   cartLoaded$: Observable<boolean>;
   checkoutStepUrlNext: string;
@@ -94,6 +94,12 @@ export class QuoteReviewComponent implements OnInit {
       return JSON.parse(
         cart.deliveryOrderGroups[0].entries[0].formDataData[0].content
       );
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }
