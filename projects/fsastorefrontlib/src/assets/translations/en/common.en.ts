@@ -5,6 +5,7 @@ export const fscommon = {
     add: 'Add',
     apply: 'Apply',
     next: 'Next',
+    continue: 'Continue',
     edit: 'Edit',
     your: 'Your',
     price: 'Price',
