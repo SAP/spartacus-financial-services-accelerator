@@ -78,6 +78,7 @@ export function populateIncidentReportStep() {
 }
 
 export function populateGeneralInformationStep() {
+  cy.wait(1000);
   cy.get('h3').contains('General Information');
   cy.get('[name=responsibleForAccident]').type('me');
   cy.get('[name=policeInformed]')
