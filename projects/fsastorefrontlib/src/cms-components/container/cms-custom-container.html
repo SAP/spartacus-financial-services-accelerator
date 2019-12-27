@@ -1,14 +1,12 @@
 <ng-container *ngIf="componentData.data$ | async as data">
-  <div class="{{data.styleCss}}">
-    <ng-container *ngFor="let component of (components$ | async)">
-      <ng-container
-        [cxComponentWrapper]="{
+  <ng-container *ngFor="let component of (components$ | async)">
+    <ng-container
+      [cxComponentWrapper]="{
                 flexType: component.typeCode,
                 uid: component?.uid,
                 properties: component?.styleCss
             }"
-      >
-      </ng-container>
+    >
     </ng-container>
-  </div>
+  </ng-container>
 </ng-container>
