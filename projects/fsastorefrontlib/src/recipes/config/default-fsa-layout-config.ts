@@ -37,7 +37,7 @@ export const fsaLayoutConfig: LayoutConfig = {
       slots: ['Section1', 'Section2'],
     },
     MultiStepCheckoutSummaryPageTemplate: {
-      slots: ['BodyContent', 'SideContent', 'Section1', 'Section2', 'Section3'],
+      slots: ['TopContent', 'BodyContent', 'SideContent', 'Section1', 'Section2', 'Section3'],
     },
     InsuranceLandingPageTemplate: {
       slots: ['Section1', 'Section2A', 'Section2B', 'Section2C', 'Section3'],
