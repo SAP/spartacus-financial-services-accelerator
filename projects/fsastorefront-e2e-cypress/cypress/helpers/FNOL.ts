@@ -39,7 +39,6 @@ export function checkFNOLSteps() {
 }
 
 export function populateIncidentInformationStep() {
-  cy.get('h3').contains('Incident Information');
   cy.get('cx-dynamic-form').within(() => {
     //TODO: can we make random choose
     cy.get('[name=whatHappened]').select('Collision');
@@ -57,14 +56,12 @@ export function populateIncidentInformationStep() {
 }
 
 export function populateIncidentReportStep() {
-  cy.get('h3').contains('Incident Report');
   cy.get('[name=howAccidentOccured]').type(
     'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
   );
 }
 
 export function populateGeneralInformationStep() {
-  //cy.get('h3').should('have.value', 'General Information');
   cy.get('[name=responsibleForAccident]').type('me');
   cy.get('[name=policeInformed]')
     .eq(0)
