@@ -8,14 +8,12 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Store, select } from '@ngrx/store';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OccConfig, RoutingService } from '@spartacus/core';
 
 import { DeleteClaimDialogComponent } from '../delete-claim-dialog/delete-claim-dialog.component';
 import { UserState } from './../../../../core/my-account/store/reducers/index';
 import { UserRequestService } from './../../../../core/user-request/services/user-request/user-request.service';
-import * as fromClaimStore from '../../../../core/my-account/store';
 import { naIconImgSrc } from '../../../../assets/icons/na-icon';
 import { ClaimService } from '../../../../core/my-account/services';
 
@@ -27,7 +25,6 @@ import { ClaimService } from '../../../../core/my-account/services';
 export class ClaimsComponent implements OnInit, OnDestroy {
   constructor(
     protected modalService: NgbModal,
-    protected store: Store<fromClaimStore.UserState>,
     protected config: OccConfig,
     protected domSanitizer: DomSanitizer,
     protected claimService: ClaimService,
@@ -42,10 +39,8 @@ export class ClaimsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.claimService.loadClaims();
-    this.claims$ = this.store.pipe(select(fromClaimStore.getClaims));
-    this.claimsLoaded$ = this.store.pipe(
-      select(fromClaimStore.getClaimsLoaded)
-    );
+    this.claims$ = this.claimService.getClaims();
+    this.claimsLoaded$ = this.claimService.getLoaded();
   }
 
   deleteClaim(claimNumber: string) {
