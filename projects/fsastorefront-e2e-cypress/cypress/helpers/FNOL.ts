@@ -1,17 +1,3 @@
-export function openMyAccountPolicySection() {
-  cy.selectOptionFromDropdown({
-    menuOption: 'My Account',
-    dropdownItem: 'Policies',
-  });
-}
-
-export function openMyAccountClaimsSection() {
-  cy.selectOptionFromDropdown({
-    menuOption: 'My Account',
-    dropdownItem: 'Claims',
-  });
-}
-
 export function checkClaimsPage() {
   cy.get('.heading-headline').contains('Claims');
 }
@@ -66,7 +52,7 @@ export function populateIncidentInformationStep() {
     cy.get('[name=description]').type(
       'my tesla S was stolen while I was in the shopping center'
     );
-    cy.wait(3000);
+    cy.wait(1000);
   });
 }
 
@@ -78,7 +64,7 @@ export function populateIncidentReportStep() {
 }
 
 export function populateGeneralInformationStep() {
-  cy.get('h3').contains('General Information');
+  //cy.get('h3').should('have.value', 'General Information');
   cy.get('[name=responsibleForAccident]').type('me');
   cy.get('[name=policeInformed]')
     .eq(0)
