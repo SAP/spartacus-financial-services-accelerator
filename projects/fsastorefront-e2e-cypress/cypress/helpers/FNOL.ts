@@ -1,17 +1,3 @@
-export function openMyAccountPolicySection() {
-  cy.selectOptionFromDropdown({
-    menuOption: 'My Account',
-    dropdownItem: 'Policies',
-  });
-}
-
-export function openMyAccountClaimsSection() {
-  cy.selectOptionFromDropdown({
-    menuOption: 'My Account',
-    dropdownItem: 'Claims',
-  });
-}
-
 export function checkClaimsPage() {
   cy.get('.heading-headline').contains('Claims');
 }
@@ -53,7 +39,6 @@ export function checkFNOLSteps() {
 }
 
 export function populateIncidentInformationStep() {
-  cy.get('h3').contains('Incident Information');
   cy.get('cx-dynamic-form').within(() => {
     //TODO: can we make random choose
     cy.get('[name=whatHappened]').select('Collision');
@@ -66,19 +51,17 @@ export function populateIncidentInformationStep() {
     cy.get('[name=description]').type(
       'my tesla S was stolen while I was in the shopping center'
     );
-    cy.wait(3000);
+    cy.wait(1000);
   });
 }
 
 export function populateIncidentReportStep() {
-  cy.get('h3').contains('Incident Report');
   cy.get('[name=howAccidentOccured]').type(
     'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
   );
 }
 
 export function populateGeneralInformationStep() {
-  cy.get('h3').contains('General Information');
   cy.get('[name=responsibleForAccident]').type('me');
   cy.get('[name=policeInformed]')
     .eq(0)
