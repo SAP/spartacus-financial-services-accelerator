@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
+import * as fromClaimStore from '../store/';
 import { ClaimDataService, SelectedPolicy } from './claim-data.service';
 
 @Injectable()
@@ -42,6 +43,14 @@ export class ClaimService {
           );
         }
       });
+  }
+
+  getClaims(): Observable<any> {
+    return this.store.pipe(select(fromClaimStore.getClaims));
+  }
+
+  getLoaded(): Observable<boolean> {
+    return this.store.pipe(select(fromClaimStore.getClaimsLoaded));
   }
 
   loadClaims() {

@@ -1,6 +1,6 @@
 import { donnaMooreUser } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
-import * as FNOL from '../../../helpers/FNOL';
+import * as fnol from '../../../helpers/FNOL';
 import * as buttons from '../../../helpers/checkout/buttons';
 
 context('FNOL for sample data user', () => {
@@ -132,67 +132,74 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should start a FNOL checkout', () => {
-    FNOL.openMyAccountPolicySection();
-    FNOL.selectAutoPolicyForFNOL();
+    cy.selectOptionFromDropdown({
+      menuOption: 'My Account',
+      dropdownItem: 'Policies',
+    });
+    fnol.selectAutoPolicyForFNOL();
   });
 
   it('Should check and populate Incident Information page', () => {
-    FNOL.checkFNOLCheckoutPage();
-    FNOL.checkFNOLSteps();
-    FNOL.populateIncidentInformationStep();
+    fnol.checkFNOLCheckoutPage();
+    fnol.checkFNOLSteps();
+    fnol.populateIncidentInformationStep();
     buttons.clickContinueButton();
   });
 
   it('Should check claim is created', () => {
-    FNOL.openMyAccountClaimsSection();
-    FNOL.checkClaimsPage();
+    cy.wait(1000);
+    cy.selectOptionFromDropdown({
+      menuOption: 'My Account',
+      dropdownItem: 'Claims',
+    });
+    fnol.checkClaimsPage();
     cy.get('.info-card')
       .last()
       .within(() => {
-        FNOL.checkOpenClaimContent();
+        fnol.checkOpenClaimContent();
         buttons.clickResumeButton();
       });
   });
 
   it('Should check user is navigated to first FNOL page', () => {
-    FNOL.checkFNOLCheckoutPage();
-    FNOL.checkFNOLSteps();
+    fnol.checkFNOLCheckoutPage();
+    fnol.checkFNOLSteps();
     cy.get('[name=whatHappened]').select('Breakdown');
     buttons.clickContinueButton();
   });
 
   it('Should check and populate Incident Report page', () => {
-    FNOL.checkFNOLCheckoutPage();
-    FNOL.populateIncidentReportStep();
+    fnol.checkFNOLCheckoutPage();
+    fnol.populateIncidentReportStep();
     buttons.checkBackAndContinueButtons();
     buttons.clickContinueButton();
   });
 
   it('Should check and populate General Information page', () => {
-    FNOL.checkFNOLCheckoutPage();
-    FNOL.populateGeneralInformationStep();
+    fnol.checkFNOLCheckoutPage();
+    fnol.populateGeneralInformationStep();
     buttons.clickContinueButton();
   });
 
   it('Should check summary page', () => {
-    FNOL.checkFNOLCheckoutPage();
-    FNOL.checkSummaryPage();
+    fnol.checkFNOLCheckoutPage();
+    fnol.checkSummaryPage();
     buttons.checkBackAndContinueButtons();
   });
 
   it('Should check information in accordions on summary page', () => {
-    FNOL.checkIncidentInformationAccordion();
-    FNOL.checkIncidentReportAccordion();
-    FNOL.checkGeneralInformationAccordion();
+    fnol.checkIncidentInformationAccordion();
+    fnol.checkIncidentReportAccordion();
+    fnol.checkGeneralInformationAccordion();
   });
 
   it('Should start a claim checkout from homepage', () => {
     cy.get('cx-page-slot.SiteLogo').click();
 
-    FNOL.startClaimFromHomepage();
-    FNOL.checkFnolEntryPage();
-    FNOL.selectPolicyOnEntryPage();
+    fnol.startClaimFromHomepage();
+    fnol.checkFnolEntryPage();
+    fnol.selectPolicyOnEntryPage();
     buttons.clickContinueButton();
-    FNOL.checkFNOLCheckoutPage();
+    fnol.checkFNOLCheckoutPage();
   });
 });
