@@ -59,7 +59,7 @@ describe('OccFSCheckoutAdapter', () => {
               `/${userId}` +
               cartsEndpoint +
               `/${cartId}` +
-              '/user-identification' &&
+              '/userIdentification' &&
           req.params.append('identificationType', identificationType) &&
           req.method === 'PUT'
         );

@@ -15,7 +15,8 @@ export class OccUserRequestAdapter implements UserRequestAdapter {
   ) {}
 
   protected getUserRequestEndpoint(userId: string, requestId: string) {
-    const userRequestEndpoint = '/users/' + userId + '/requests/' + requestId;
+    const userRequestEndpoint =
+      '/users/' + userId + '/fsUserRequests/' + requestId;
     return this.occEndpointService.getBaseEndpoint() + userRequestEndpoint;
   }
 

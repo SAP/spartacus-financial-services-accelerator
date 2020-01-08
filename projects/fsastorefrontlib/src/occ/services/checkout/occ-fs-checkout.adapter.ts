@@ -32,7 +32,7 @@ export class OccFSCheckoutAdapter implements FSCheckoutAdapter {
 
   protected getUserIdentificationEndpoint(userId: string, cartId: string) {
     const userIdentificationEndpoint =
-      '/users/' + userId + '/carts/' + cartId + '/user-identification';
+      '/users/' + userId + '/carts/' + cartId + '/userIdentification';
     return (
       this.occEndpointService.getBaseEndpoint() + userIdentificationEndpoint
     );
