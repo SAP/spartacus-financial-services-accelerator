@@ -3,7 +3,7 @@ export function bindQuotePopup() {
     .should('contain', 'Continue')
     .click();
   cy.get('fsa-bind-quote-dialog').within(() => {
-    cy.get('.secondary-button').click();
+    cy.get('.primary-button').click();
   });
   cy.wait(1000);
 }

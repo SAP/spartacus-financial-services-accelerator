@@ -1,8 +1,8 @@
 export function checkLegalInformationPage() {
   cy.get('h2.heading-headline').contains('Your Current Account Insurance');
   //checking number checkout steps
-  cy.get('div.progress-inner-wrapper').should('have.length', 5);
-  cy.get('div.section-header-heading').should('have.text', 'Legal information');
+  cy.get('.progress-inner-wrapper').should('have.length', 5);
+  cy.get('.section-header-heading').should('have.text', 'Legal information');
   cy.get('fsa-legal-documents')
     .should('be.visible')
     .within(() => {
