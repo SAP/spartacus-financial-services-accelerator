@@ -34,7 +34,7 @@ export const fsaLayoutConfig: LayoutConfig = {
       slots: ['TopContent', 'BodyContent'],
     },
     MultiTabsCategoryPageTemplate: {
-      slots: ['Section1', 'Section2'],
+      slots: ['Section1', 'Section2', 'Section3'],
     },
     MultiStepCheckoutSummaryPageTemplate: {
       slots: ['TopContent', 'BodyContent', 'SideContent', 'Section1', 'Section2', 'Section3'],
