@@ -178,8 +178,9 @@
     a {
       color: var(--cx-color-primary);
       text-decoration: underline;
-      font-size: var(--cx-title-font-size);
+      font-size: var(--cx-text-font-size);
       padding-left: 1rem;
+      display: inline-block;
     }
   }
 }
