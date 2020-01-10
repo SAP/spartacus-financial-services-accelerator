@@ -8,7 +8,6 @@ import {
   UserToken,
   AuthService,
   I18nTestingModule,
-  RoutesConfig,
   AuthRedirectService,
   RoutingService,
   FeatureConfigService,

@@ -42,7 +42,8 @@ export class FSRegisterComponent extends RegisterComponent {
       anonymousConsentsConfig
     );
   }
-  fsUserRegistrationForm: FormGroup = this.fb.group(
+
+  userRegistrationForm: FormGroup = this.fb.group(
     {
       titleCode: ['', Validators.required],
       firstName: ['', Validators.required],
@@ -81,12 +82,6 @@ export class FSRegisterComponent extends RegisterComponent {
     },
     { validator: DefaultFormValidators.matchFields('password', 'passwordconf') }
   );
-
-  submit(): void {
-    this.userService.register(
-      this.collectDataFromRegisterForm(this.fsUserRegistrationForm.value)
-    );
-  }
 
   collectDataFromRegisterForm(formData: any): FSUserSignUp {
     const {
