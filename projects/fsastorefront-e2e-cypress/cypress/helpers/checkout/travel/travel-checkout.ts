@@ -119,7 +119,7 @@ export function checkQuoteReview() {
   });
   cy.get('.primary-button').click();
   cy.get('fsa-bind-quote-dialog').within(() => {
-    cy.get('.secondary-button').click();
+    cy.get('.primary-button').click();
   });
 }
 

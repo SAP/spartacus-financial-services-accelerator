@@ -175,11 +175,11 @@
   li {
     color: var(--cx-color-primary);
     font-size: var(--cx-h5-font-size);
-    list-style-type: disc;
     a {
-      color: var(--cx-color-text);
+      color: var(--cx-color-primary);
+      text-decoration: underline;
       font-size: var(--cx-title-font-size);
-      font-weight: var(--cx-font-weight-semi);
+      padding-left: 1rem;
     }
   }
 }

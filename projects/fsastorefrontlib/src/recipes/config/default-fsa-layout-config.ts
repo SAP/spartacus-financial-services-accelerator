@@ -34,7 +34,7 @@ export const fsaLayoutConfig: LayoutConfig = {
       slots: ['TopContent', 'BodyContent'],
     },
     MultiTabsCategoryPageTemplate: {
-      slots: ['Section1', 'Section2'],
+      slots: ['Section1', 'Section2', 'Section3'],
     },
     InsuranceLandingPageTemplate: {
       slots: ['Section1', 'Section2A', 'Section2B', 'Section2C', 'Section3'],

@@ -2,7 +2,7 @@
   <ng-container *ngIf="cartLoaded$ | async; else loading">
     <ng-container *ngIf="cart.deliveryOrderGroups?.length > 0; else noQuotes">
       <div class="accordion">
-        <div class="row no-gutters section-header-heading">
+        <h2 class="row no-gutters section-header-heading">
           <div class="col-12 col-md-2">
             <span
               *ngIf="
@@ -28,11 +28,7 @@
             }}
             {{ 'quote.quote' | cxTranslate }}
           </div>
-          <div class="col-12 col-md-3 col-md-2">
-            <div class="accordion-header__id"></div>
-            <div class="accordion-header__expiry-date"></div>
-          </div>
-        </div>
+        </h2>
         <div #ref>
           <ng-container
             *ngIf="(cart?.insuranceQuote?.quoteDetails | json) !== '{}'"
@@ -222,7 +218,7 @@
           </div>
         </fsa-accordion-item>
         <div class="row mt-5">
-          <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="col-md-6 col-sm-6 col-xs-12 mb-3 mb-md-0">
             <button class="action-button btn-block" (click)="back()">
               {{ 'common.back' | cxTranslate }}
             </button>

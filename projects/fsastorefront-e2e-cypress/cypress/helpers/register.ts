@@ -31,7 +31,7 @@ export function populateRegistrationForm(user: RegisterUser) {
 }
 
 export function registerUser(user: RegisterUser) {
-  cy.findByText(/Sign in \/ Register/i).click();
+  cy.get('cx-login a').click();
   this.populateRegistrationForm(user);
 }
 
