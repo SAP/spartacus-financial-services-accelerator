@@ -61,9 +61,9 @@ describe('OccFSCheckoutAdapter', () => {
               `/${cartId}` +
               '/userIdentification' &&
           req.params.append('identificationType', identificationType) &&
-          req.method === 'PUT'
+          req.method === 'PATCH'
         );
-      }, `PUT method and url`);
+      }, `PATCH method and url`);
     }));
   });
 });
