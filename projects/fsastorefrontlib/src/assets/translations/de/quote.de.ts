@@ -6,6 +6,7 @@ export const quote = {
     quoteReview: 'Antragsüberprüfung',
     viewQuotes: 'Bisherige Anträge ansehen',
     getQuote: 'Angebot anfordern',
+    moreInfo: 'Mehr Informationen',
     retrieveQuotes: 'Antrag fortsetzen',
     viewYourQuotes: 'Angebote ansehen',
     youHaveNoQuotes: 'Sie haben zur Zeit keine Angebote',

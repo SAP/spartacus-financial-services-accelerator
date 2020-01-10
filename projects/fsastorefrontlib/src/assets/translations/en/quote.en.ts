@@ -6,6 +6,7 @@ export const quote = {
     quoteReview: 'Quote Review',
     viewQuotes: 'View Quotes',
     getQuote: 'Get a Quote',
+    moreInfo: 'More info',
     retrieveQuotes: 'Retrieve Quotes',
     viewYourQuotes: 'View your quotes',
     youHaveNoQuotes: 'You have no Quotes',
