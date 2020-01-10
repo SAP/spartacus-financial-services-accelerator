@@ -2,7 +2,7 @@
   <ng-container *ngIf="cart$ | async as cart">
     <ng-container *ngFor="let entry of cart.deliveryOrderGroups[0]?.entries">
       <ng-container *ngIf="entry.product?.documents.length > 0">
-        <ul class="bulleted-list pl-5 pt-1 mb-0">
+        <ul class="bulleted-list pl-3 pt-1 mb-0">
           <ng-container *ngFor="let document of entry.product?.documents">
             <li class="pb-1 pl-1">
               <span class=" FSA-icon icon-attachment"></span>
