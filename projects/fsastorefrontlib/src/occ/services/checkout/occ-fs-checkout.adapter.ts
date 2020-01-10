@@ -26,7 +26,7 @@ export class OccFSCheckoutAdapter implements FSCheckoutAdapter {
       'Content-Type': 'application/x-www-form-urlencoded',
     });
     return this.http
-      .put<any>(url, null, { headers, params })
+      .patch<any>(url, null, { headers, params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
