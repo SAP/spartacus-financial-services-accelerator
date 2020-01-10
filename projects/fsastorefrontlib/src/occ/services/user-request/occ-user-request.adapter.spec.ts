@@ -12,7 +12,7 @@ const userId = 'test@user.com';
 const requestId = '000001';
 
 const usersEndpoint = '/users';
-const requestEndpoint = '/requests';
+const requestEndpoint = '/fsUserRequests';
 
 const stepData: FSStepData = {
   name: 'testStepData',

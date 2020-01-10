@@ -26,7 +26,7 @@ export class OccQuoteAdapter implements QuoteAdapter {
 
   protected bindQuoteEndpoint(userId: string, cartId: string) {
     const quotesFromCartEndpoint =
-      '/users/' + userId + '/carts/' + cartId + '/insurance-quotes/bind';
+      '/users/' + userId + '/carts/' + cartId + '/insurance-quotes/action';
     return this.occEndpointService.getBaseEndpoint() + quotesFromCartEndpoint;
   }
 
@@ -58,8 +58,12 @@ export class OccQuoteAdapter implements QuoteAdapter {
       'Content-Type': 'application/json',
     });
 
+    const bindQuoteAction = {
+      actionName: 'BIND',
+    };
+
     return this.http
-      .patch(url, JSON.stringify({}), { headers })
+      .post(url, bindQuoteAction, { headers })
       .pipe(catchError((error: any) => throwError(error.json)));
   }
 }

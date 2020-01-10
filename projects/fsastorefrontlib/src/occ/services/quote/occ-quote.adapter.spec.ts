@@ -14,7 +14,7 @@ const quoteContent = {};
 const usersEndpoint = '/users';
 const quotesEndpoint = '/insurance-quotes';
 const cartsEndpoint = '/carts';
-const bindQuoteEndPoint = '/insurance-quotes/bind';
+const bindQuoteEndPoint = '/insurance-quotes/action';
 
 const MockOccModuleConfig: OccConfig = {
   context: {
@@ -87,9 +87,9 @@ describe('OccQuoteAdapter', () => {
               `/${userId}` +
               cartsEndpoint +
               `/${cartId}` +
-              bindQuoteEndPoint && req.method === 'PATCH'
+              bindQuoteEndPoint && req.method === 'POST'
         );
-      }, `PATCH method and url`);
+      }, `POST method and url`);
     }));
   });
 });
