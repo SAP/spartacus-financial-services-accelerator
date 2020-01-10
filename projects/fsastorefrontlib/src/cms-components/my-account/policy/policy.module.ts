@@ -19,7 +19,6 @@ import { PoliciesComponent } from './policies/policies.component';
 import { PolicyService } from '../../../core/my-account/services/policy.service';
 import { PolicyDataService } from '../../../core/my-account/services/policy-data.service';
 import { OccPolicyAdapter } from '../../../occ/services/policy/occ-policy.adapter';
-import { CMSViewPoliciesComponent } from './view-policies/view-policies.component';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 
@@ -65,21 +64,9 @@ const routes: Routes = [
       },
     }),
   ],
-  declarations: [
-    PoliciesComponent,
-    CMSViewPoliciesComponent,
-    PolicyDetailsComponent,
-  ],
-  exports: [
-    PoliciesComponent,
-    CMSViewPoliciesComponent,
-    PolicyDetailsComponent,
-  ],
+  declarations: [PoliciesComponent, PolicyDetailsComponent],
+  exports: [PoliciesComponent, PolicyDetailsComponent],
   providers: [PolicyService, PolicyDataService, OccPolicyAdapter],
-  entryComponents: [
-    PoliciesComponent,
-    CMSViewPoliciesComponent,
-    PolicyDetailsComponent,
-  ],
+  entryComponents: [PoliciesComponent, PolicyDetailsComponent],
 })
 export class PolicyModule {}
