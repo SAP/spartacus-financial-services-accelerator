@@ -26,8 +26,7 @@
 
 fsa-claim-policies,
 fsa-claim-policies + fsa-cms-custom-container {
-  background-color: var(--cx-color-4);
-  border: $border-grey;
+  @include box-shadow(0, 2px, 20px, 1px, $color-grey, 1);
 }
 fsa-claim-policies {
   border-bottom: none;
