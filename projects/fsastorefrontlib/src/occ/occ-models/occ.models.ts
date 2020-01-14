@@ -33,6 +33,15 @@ export enum BindingStateType {
   UNBIND = 'UNBIND',
 }
 
+export enum ClaimStatus {
+  OPEN = 'OPEN',
+  SUBMITTED = 'SUBMITTED',
+  PROCESSING = 'PROCESSING',
+  ERROR = 'ERROR',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
+}
+
 export interface FSOrderEntry extends OrderEntry {
   formDataData?: any[];
 }
@@ -99,7 +108,7 @@ export interface Claim extends FSUserRequest {
   incidentType?: FSIncidentType;
   dateOfLoss?: string;
   timeOfLoss?: string;
-  claimStatus?: string;
+  claimStatus?: ClaimStatus;
 }
 
 export interface AllowedFSRequestType {

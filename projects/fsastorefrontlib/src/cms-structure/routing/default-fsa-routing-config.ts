@@ -34,6 +34,7 @@ export const fsaStorefrontRoutesConfig: RoutesConfig = {
   fnolIncidentReportPage: { paths: ['fnolIncidentReportPage'] },
   fnolGeneralInfoPage: { paths: ['fnolGeneralInfoPage'] },
   fnolSummaryPage: { paths: ['fnolSummaryPage'] },
+  fnolConfirmation: { paths: ['fnolConfirmation'] },
 };
 
 export const fsaRoutingConfig: RoutingConfig = {
