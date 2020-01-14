@@ -2,6 +2,7 @@
 
 %fsa-mini-cart,
 .short-overview-wrapper {
+  // short-overview-wrapper is needed for order confirmation page, until better solution
   @include media-breakpoint-down(md) {
     width: 100%;
   }
