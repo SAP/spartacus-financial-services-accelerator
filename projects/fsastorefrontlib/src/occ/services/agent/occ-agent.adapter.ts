@@ -27,7 +27,7 @@ export class OccAgentAdapter implements AgentAdapter {
     pageNumber: number,
     longitudeLatitude?: GeoPoint
   ) {
-    const url = this.getAgentsEndpoint() + '/search';
+    const url = this.getAgentsEndpoint();
     const query = '&page=' + pageNumber.toString() + '&fields=DEFAULT';
     let params = new HttpParams({ fromString: query });
 
