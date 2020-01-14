@@ -5,7 +5,16 @@ export function openCategoryPage() {
     menuOption: 'Insurance',
     dropdownItem: 'Travel',
   });
-  cy.wait(500);
+  cy.wait(800);
+  cy.get('.enriched-banner__styled-text')
+    .invoke('text')
+    .then(text => {
+      if (text !== ' Get a Quote') {
+        console.log(text);
+        openCategoryPage();
+      }
+    });
+
   cy.get('.enriched-banner__styled-text')
     .should('be.visible')
     .click({ force: true });
@@ -118,6 +127,7 @@ export function checkQuoteReview() {
     cy.get('.highlighted').should('have.text', ' Total price:  €99.00 ');
   });
   cy.get('.primary-button').click();
+  cy.wait(2000);
   cy.get('fsa-bind-quote-dialog').within(() => {
     cy.get('.primary-button').click();
   });
