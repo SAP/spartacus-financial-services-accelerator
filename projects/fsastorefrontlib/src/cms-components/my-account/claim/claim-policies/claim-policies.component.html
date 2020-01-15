@@ -82,10 +82,10 @@
   </ng-container>
 </ng-container>
 <ng-template #noClaims>
-  <div class="notice-text">
-    <h3 class="notice-text__heading">
-      {{ 'policy.noValidPolicies' | cxTranslate }}
-    </h3>
+  <div class="text-center">
+    <div class="image-wrapper">
+      <img class="image-item" [src]="getImagelink()" alt="" />
+    </div>
   </div>
 </ng-template>
 <ng-template #loading>
