@@ -45,14 +45,14 @@
     padding: 0;
     max-width: 100%;
   }
-  .Section2A,
-  .Section2B {
+  .Section2,
+  .Section3 {
     fsa-cms-custom-container {
       border: 1px solid var(--cx-color-4);
       @include box-shadow(0px, 7px, 9px, -1px, $color-dark-grey, 0.3);
     }
   }
-  .Section2A {
+  .Section2 {
     fsa-cms-custom-container {
       @include heading-style;
       flex-direction: column;
@@ -72,7 +72,7 @@
       }
     }
   }
-  .Section2B {
+  .Section3 {
     fsa-cms-custom-container {
       @include media-breakpoint-down(sm) {
         flex-direction: column;

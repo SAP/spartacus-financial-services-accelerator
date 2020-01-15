@@ -27,43 +27,38 @@ export const fsaLayoutConfig: LayoutConfig = {
         slots: ['SiteLogin', 'NavigationBar', 'TopHeaderSlot'],
       },
     },
-    LoginPageTemplate: {
-      slots: ['TopContent', 'BodyContent'],
-    },
-    AccountPageTemplate: {
-      slots: ['TopContent', 'BodyContent'],
-    },
-    MultiTabsCategoryPageTemplate: {
-      slots: ['Section1', 'Section2', 'Section3'],
-    },
-    InsuranceLandingPageTemplate: {
-      slots: ['Section1', 'Section2A', 'Section2B', 'Section2C', 'Section3'],
-    },
-    FSCategoryPageTemplate: {
-      slots: ['Section1', 'Section2A', 'Section2B', 'Section4'],
-    },
-    GeneralLayoutPageTemplate: {
+    LandingPageTemplate: {
       slots: [
         'Section1',
-        'Section2A',
-        'Section2B',
-        'Section2C',
+        'Section2',
         'Section3',
         'Section4',
         'Section5',
+        'Section6',
       ],
     },
-    FindAgentListTemplate: {
-      slots: ['Section1'],
+    FSCategoryPageTemplate: {
+      slots: [
+        'Section1',
+        'Section2',
+        'Section3',
+        'Section4',
+        'Section5',
+        'Section6',
+      ],
     },
-    StoreFinderPageTemplate: {
-      slots: ['SideContent', 'MiddleContent'],
+    CheckoutPageTemplate: {
+      slots: ['TopContent', 'Title', 'BodyContent', 'BottomContent'],
     },
-    FSRequestPageTemplate: {
-      slots: ['TopContent', 'MiddleContent', 'BottomContent'],
-    },
-    OrderConfirmationPageTemplate: {
-      slots: ['TopContent', 'BodyContent'],
+    GeneralPageTemplate: {
+      slots: [
+        'Section1',
+        'Section2',
+        'Section3',
+        'Section4',
+        'Section5',
+        'Section6',
+      ],
     },
   },
 };

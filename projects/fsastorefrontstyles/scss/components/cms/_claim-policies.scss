@@ -4,9 +4,8 @@
   @include transition();
 }
 
-.GeneralLayoutPageTemplate {
-  padding: 3rem 1.5rem 0 1.5rem;
-  .Section2A.has-components {
+.GeneralPageTemplate {
+  .Section1.has-components {
     p {
       margin-bottom: 0;
       .container {
