@@ -24,6 +24,7 @@ import { CreateClaimComponent } from './create-claim/create-claim.component';
 import { ClaimDataService } from '../../../core/my-account/services/claim-data.service';
 import { ClaimService } from '../../../core/my-account/services/claim.service';
 import { ParseDatePipe } from '../../../shared/util/helpers/parseDate.pipe';
+import { ClaimPoliciesGuard } from './guards/claim-policies-guard';
 
 const routes: Routes = [
   {
@@ -32,6 +33,24 @@ const routes: Routes = [
     data: {
       cxRoute: 'claims',
       pageLabel: 'my-claims',
+    },
+    component: PageLayoutComponent,
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'noClaims',
+      pageLabel: 'noClaimsPage',
+    },
+    component: PageLayoutComponent,
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard, ClaimPoliciesGuard],
+    data: {
+      cxRoute: 'claimsPage',
+      pageLabel: 'claimsPage',
     },
     component: PageLayoutComponent,
   },
