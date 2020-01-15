@@ -7,7 +7,7 @@
     text-align: center;
     position: relative;
     .image-wrapper {
-      @include absolute-center;
+      @include vertical-center;
       left: 0;
       background-color: transparent;
       width: 46px;
@@ -34,7 +34,7 @@
       }
     }
     &-link {
-      @include absolute-center;
+      @include vertical-center;
       right: 48px;
       background: transparent;
       color: var(--cx-color-secondary);
