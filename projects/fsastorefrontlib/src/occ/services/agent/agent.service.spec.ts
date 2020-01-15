@@ -57,7 +57,7 @@ describe('OccAgentAdapter', () => {
     it('search Agents By Query String', async(() => {
       adapter.getAgentsByQuery(searchQuery, pageNumber).subscribe(res => {});
       httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === '/agents/search' && req.method === 'GET';
+        return req.url === '/agents' && req.method === 'GET';
       }, `GET method and url`);
     }));
   });
