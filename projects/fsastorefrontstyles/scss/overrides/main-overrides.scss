@@ -21,27 +21,6 @@ cx-page-layout {
   }
 }
 
-.CheckoutPageTemplate {
-  padding: 0 1.5rem;
-  & > cx-page-slot.Title {
-    margin-top: 3rem;
-    padding: 0;
-    p {
-      margin-bottom: 0;
-    }
-  }
-  // TODO: Keep until we spike the cms-custom-container component
-  .BodyContent {
-    @include box-shadow(0px, 10px, 20px, 1px, $color-grey, 1);
-    & > * {
-      max-width: 860px;
-      width: 100%;
-      margin: 1rem auto;
-    }
-    padding-bottom: 3rem;
-  }
-}
-
 // TODO: Keep until we refactor the way we implement HTML content in impex files
 .TopContent cx-paragraph p {
   margin-bottom: 0;
