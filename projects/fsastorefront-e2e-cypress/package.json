@@ -12,7 +12,8 @@
     "clean-reports": "rm -rf cypress/report",
     "merge-reports": "npx mochawesome-merge --reportDir cypress/report/mochawesome-report > cypress/report/mochawesome-report/Report.json",
     "generate-full-report": "npx mochawesome-report-generator --reportDir cypress/report/mochawesome-report cypress/report/mochawesome-report/Report.json",
-    "cypress-reports": "npm run clean-reports; npm run test; npm run merge-reports; npm run generate-full-report"
+    "cypress-test-execution": "npm run clean-reports; npm run test",
+    "cypress-report-creation": "npm run merge-reports; npm run generate-full-report"
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^4.0.3",
