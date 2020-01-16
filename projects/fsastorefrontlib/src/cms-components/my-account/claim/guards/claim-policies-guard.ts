@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
 import { select, Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PolicyService } from '../../../../core/my-account/services';
 import * as fromPolicyStore from '../../../../core/my-account/store';
@@ -15,7 +15,7 @@ export class ClaimPoliciesGuard implements CanActivate {
     protected store: Store<fromPolicyStore.UserState>,
     private routingService: RoutingService,
     protected policyService: PolicyService
-  ) {}
+  ) { }
 
   claimPolicies$: Observable<any>;
 
