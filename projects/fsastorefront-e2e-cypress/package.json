@@ -4,14 +4,23 @@
   "main": "index.js",
   "scripts": {
     "cy:open": "cypress open",
-    "cy:run": "cypress run --spec cypress/integration/checkout/**/* --browser=chrome",
+    "cy:run": "cypress run --spec cypress/integration/checkout/**/*  --browser=chrome",
     "cy:cli": "cypress run",
     "cy:run:mobile": "cypress run --config numTestsKeptInMemory=1 --spec cypress/integration/mobile/**/*",
-    "cy:run:regression": "find cypress/integration/regression -type f -name '*.ts' | tr '\n' ',' | xargs yarn run cypress run --config numTestsKeptInMemory=0 --spec"
+    "cy:run:regression": "find cypress/integration/regression -type f -name '*.ts' | tr '\n' ',' | xargs yarn run cypress run --config numTestsKeptInMemory=0 --spec",
+    "test": "cypress run --spec cypress/integration/checkout/**/*",
+    "clean-reports": "rm -rf cypress/report",
+    "merge-reports": "npx mochawesome-merge --reportDir cypress/report/mochawesome-report > cypress/report/mochawesome-report/Report.json",
+    "generate-full-report": "npx mochawesome-report-generator --reportDir cypress/report/mochawesome-report cypress/report/mochawesome-report/Report.json",
+    "cypress-reports": "npm run clean-reports; npm run test; npm run merge-reports; npm run generate-full-report"
   },
   "devDependencies": {
     "@cypress/webpack-preprocessor": "^4.0.3",
     "@testing-library/cypress": "^5.0.0",
-    "cypress": "^3.1.5"
+    "cypress": "3.8.2",
+    "mocha": "5.2.0",
+    "mochawesome": "^4.1.0",
+    "mochawesome-report-generator": "^4.0.1",
+    "mochawesome-merge": "^2.0.1"
   }
 }
