@@ -10,7 +10,6 @@ export function openCategoryPage() {
     .invoke('text')
     .then(text => {
       if (text !== ' Get a Quote') {
-        console.log(text);
         openCategoryPage();
       }
     });
