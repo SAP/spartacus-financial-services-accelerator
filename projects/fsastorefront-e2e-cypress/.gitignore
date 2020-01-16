@@ -4,3 +4,4 @@ cypress.env.json
 node_modules/
 
 cypress/fixtures/example.json
+cypress/report/
