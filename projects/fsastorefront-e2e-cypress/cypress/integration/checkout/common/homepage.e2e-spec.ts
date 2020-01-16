@@ -16,19 +16,19 @@ context('Homepage', () => {
   });
 
   it('should contain category carousel component', () => {
-    cy.get('cx-page-slot.Section2A fsa-category-carousel');
+    cy.get('cx-page-slot.Section2 fsa-category-carousel');
   });
 
   it('should contain our services banner', () => {
-    cy.get('cx-page-slot.Section2B cx-banner');
+    cy.get('cx-page-slot.Section3 cx-banner');
   });
 
   it('should have assistance and support paragraph', () => {
-    cy.get('cx-page-slot.Section2C cx-paragraph');
+    cy.get('cx-page-slot cx-paragraph .main-title.main-title__headline-border');
   });
 
   it('should have assistance and support banners', () => {
-    cy.get('cx-page-slot.Section2C cx-banner').should('have.length', 2);
+    cy.get('cx-page-slot.Section4 cx-banner').should('have.length', 2);
   });
 
   it('should have header navigation with nav nodes', () => {
