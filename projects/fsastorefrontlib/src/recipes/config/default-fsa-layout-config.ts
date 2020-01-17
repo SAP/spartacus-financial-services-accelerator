@@ -48,7 +48,7 @@ export const fsaLayoutConfig: LayoutConfig = {
       ],
     },
     CheckoutPageTemplate: {
-      slots: ['TopContent', 'Title', 'BodyContent', 'BottomContent'],
+      slots: ['TopContent', 'BodyContent', 'BottomContent'],
     },
     GeneralPageTemplate: {
       slots: [
