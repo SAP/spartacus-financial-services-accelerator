@@ -31,7 +31,7 @@ export function userRequestConfigFactory(): StateConfig {
     CommonModule,
     HttpClientModule,
     StateModule,
-    StoreModule.forFeature(USER_REQUEST_FEATURE, reducerToken, {
+    StoreModule.forRoot(reducerToken, {
       metaReducers,
     }),
     EffectsModule.forFeature(effects),
