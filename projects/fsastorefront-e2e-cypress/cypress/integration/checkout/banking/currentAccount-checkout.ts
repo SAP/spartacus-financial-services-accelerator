@@ -35,6 +35,7 @@ context('Current AccountCheckout', () => {
   });
 
   it('Should check optional products for Current Account', () => {
+    cy.wait(1500);
     addOptionsPage.checkAddOptionsPage();
     currentAccount.checkOptionalProductsAddTransactionChest();
   });
