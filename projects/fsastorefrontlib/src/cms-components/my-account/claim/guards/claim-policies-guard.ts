@@ -30,6 +30,7 @@ export class ClaimPoliciesGuard implements CanActivate {
       );
       return this.claimPolicies$.pipe(
         map(validPolicies => {
+          console.log(validPolicies);
           if (validPolicies && !validPolicies.insurancePolicies) {
             this.routingService.go({ cxRoute: 'noClaims' });
             return false;

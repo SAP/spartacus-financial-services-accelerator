@@ -5,9 +5,9 @@ import {
   OnInit,
 } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { AuthService, OccConfig } from '@spartacus/core';
-import { Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { AuthService, OccConfig, TranslationService } from '@spartacus/core';
+import { Subscription, Observable, combineLatest } from 'rxjs';
+import { take, map } from 'rxjs/operators';
 import {
   ClaimService,
   PolicyService,
@@ -15,6 +15,7 @@ import {
 import * as fromPolicyStore from '../../../../core/my-account/store';
 import { DomSanitizer } from '@angular/platform-browser';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
+import { Card } from '@spartacus/storefront';
 
 @Component({
   selector: 'fsa-claim-policies',
@@ -28,8 +29,9 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
     protected claimService: ClaimService,
     protected config: OccConfig,
     protected authService: AuthService,
-    protected domSanitizer: DomSanitizer
-  ) {}
+    protected domSanitizer: DomSanitizer,
+    protected translation: TranslationService,
+  ) { }
 
   subscription = new Subscription();
 
@@ -59,6 +61,42 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
           this.claimService.setSelectedPolicy(occUserId, policyId, contractId)
         )
     );
+  }
+
+  cardContent(cardObject): Observable<any> {
+    return combineLatest([
+      this.translation.translate('policy.policy'),
+      this.translation.translate('claim.vehicleMake'),
+      this.translation.translate('claim.vehicleModel'),
+    ]).pipe(
+      map(
+        ([
+          policy,
+          vahicleMake,
+          vehicleModel,
+        ]) => {
+          return this.createCard(cardObject, {
+            policy,
+            vahicleMake,
+            vehicleModel
+          });
+        }
+      )
+    );
+  }
+
+  createCard(cardValue, cardObject) {
+    console.log(cardValue);
+    return {
+      header: 'Proba proba',
+      title: `${cardObject.policy}`,
+      // textBold: cardObject.categoryData.name,
+      text: [
+        `${cardObject.vahicleMake}: ${cardValue.insuredObjects[0].insuredObjectItems[0].value}`,
+        `${cardObject.vehicleModel}: ${cardValue.insuredObjects[0].insuredObjectItems[1].value}`
+      ],
+      img: cardValue.insuredObjects[0].insuredObjectType.code
+    };
   }
 
   getImagelink() {
