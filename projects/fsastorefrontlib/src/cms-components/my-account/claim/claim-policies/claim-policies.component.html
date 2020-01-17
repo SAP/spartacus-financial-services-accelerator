@@ -6,8 +6,25 @@
         else noClaims
       "
     >
-      <div class="row">
+      <!-- <div class="row"> -->
+      <div class="cx-checkout-body row">
         <div
+          class="cx-payment-card col-md-12 col-lg-6"
+          *ngFor="
+            let claimPolicy of claimPolicies.insurancePolicies;
+            let i = index
+          "
+        >
+          <div class="cx-payment-card-inner">
+            <cx-card
+              [border]="true"
+              [fitToContainer]="true"
+              [content]="cardContent(claimPolicy) | async"
+            ></cx-card>
+          </div>
+        </div>
+      </div>
+      <!-- <div
           *ngFor="
             let claimPolicy of claimData.claimPoliciesData?.insurancePolicies;
             let i = index
@@ -79,8 +96,8 @@
               </li>
             </ul>
           </div>
-        </div>
-      </div>
+        </div> -->
+      <!-- </div> -->
     </ng-container>
   </ng-container>
 </ng-container>

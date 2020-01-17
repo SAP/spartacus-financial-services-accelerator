@@ -1,12 +1,7 @@
-@mixin hover-select {
-  border: 1px solid $color-link-hover;
-  @include box-shadow(0, 0, 10px, 1px, $color-link-hover, 100%);
-  @include transition();
-}
-
 .GeneralLayoutPageTemplate {
   padding: 3rem 1.5rem 0 1.5rem;
-  .Section2A.has-components {
+  .Section2A {
+    padding: 3rem 0 0;
     p {
       margin-bottom: 0;
       .container {
@@ -29,7 +24,7 @@
       max-width: 860px;
     }
     .claim-content {
-      padding: 2rem 0;
+      padding: 2rem 0 1rem;
       border-top: $border-grey;
     }
   }
@@ -53,10 +48,8 @@ fsa-claim-policies {
       text-align: center;
       @include transition();
       &:hover {
-        @include hover-select();
       }
       &.selected {
-        @include hover-select();
       }
     }
     &-feature-image {
@@ -85,8 +78,5 @@ fsa-claim-policies {
     padding-bottom: 65px;
     margin-bottom: 40px;
     border-top: none;
-    .content--blue {
-      color: var(--cx-color-primary);
-    }
   }
 }

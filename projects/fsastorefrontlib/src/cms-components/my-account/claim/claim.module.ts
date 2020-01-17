@@ -15,6 +15,9 @@ import {
   CmsPageGuard,
   PageLayoutComponent,
   SpinnerModule,
+  CardModule,
+  IconConfig,
+  IconResourceType,
 } from '@spartacus/storefront';
 import { OccClaimAdapter } from '../../../occ/services/claim/occ-claim.adapter';
 import { DeleteClaimDialogComponent } from './delete-claim-dialog/delete-claim-dialog.component';
@@ -64,8 +67,9 @@ const routes: Routes = [
     FormsModule,
     NgSelectModule,
     SpinnerModule,
+    CardModule,
     RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
+    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig | IconConfig>{
       cmsComponents: {
         AccountMyClaimsFlex: {
           component: ClaimsComponent,
