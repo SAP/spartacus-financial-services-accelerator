@@ -35,44 +35,10 @@ fsa-claim-policies {
   // @include media-breakpoint-down(lg) {
   //   padding: 60px 20px 25px;
   // }
-  .fs-items {
-    margin-bottom: 30px;
-    padding: 0 20px;
-    cursor: pointer;
-    &-feature-wrapper {
-      overflow: hidden;
-      @include box-shadow(0, 0, 6px, 2px, $color-mild-grey, 100%);
-      border-radius: 5px;
-      background-color: $color-white;
-      border: $border-grey;
-      text-align: center;
-      @include transition();
-      &:hover {
-      }
-      &.selected {
-      }
-    }
-    &-feature-image {
-      padding: 20px 0;
-      margin-bottom: 30px;
-      border-bottom: 5px solid $color-link-hover;
-    }
-    &-feature-details {
-      display: inline-block;
-      text-align: left;
-      margin-bottom: 30px;
-      .item-label {
-        color: var(--cx-color-text);
-        font-weight: $font-weight-semi;
-        font-size: 14px;
-        display: inline-block;
-      }
-      .item-data--blue {
-        color: var(--cx-color-primary);
-        font-weight: $font-weight-semi;
-      }
-    }
+  .cx-card-img-container .FSA-icon::before {
+    font-size: var(--cx-font-size, 48px);
   }
+
   & + fsa-cms-custom-container {
     // classes and markup for this come from impexes, no way to change them to have pairity
     padding-bottom: 65px;

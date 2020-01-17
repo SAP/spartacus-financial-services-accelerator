@@ -87,9 +87,7 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
 
   createCard(cardValue, cardObject) {
     return {
-      header: 'Proba proba',
-      title: `${cardObject.policy}`,
-      // textBold: cardObject.categoryData.name,
+      header: `${cardValue.categoryData.name} ${cardObject.policy}`,
       text: [
         `${cardObject.vahicleMake}: ${cardValue.insuredObjects[0].insuredObjectItems[0].value}`,
         `${cardObject.vehicleModel}: ${cardValue.insuredObjects[0].insuredObjectItems[1].value}`
