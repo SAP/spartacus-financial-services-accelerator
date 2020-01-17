@@ -11,8 +11,7 @@
 
 %cx-login-form,
 %fsa-register {
-  max-width: 50%;
-  @include media-breakpoint-down(md) {
-    max-width: 100%;
+  @include media-breakpoint-up(md) {
+    max-width: 50%;
   }
 }

@@ -125,7 +125,7 @@ export function checkOpenClaimContent() {
 }
 
 export function startClaimFromHomepage() {
-  cy.get('cx-page-slot.Section4 cx-banner')
+  cy.get('.Section4 cx-banner')
     .eq(1)
     .click();
   cy.wait(500);

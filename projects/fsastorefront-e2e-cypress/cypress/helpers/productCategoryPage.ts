@@ -1,5 +1,5 @@
 export function checkComponents() {
-  cy.get('cx-page-slot.Section1 fsa-enriched-responsive-banner');
+  cy.get('.Section1 fsa-enriched-responsive-banner');
   cy.get('span.enriched-banner__title').should(
     'contain',
     'Apply online and save your valuable time'
