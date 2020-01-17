@@ -13,6 +13,8 @@ import {
   PolicyService,
 } from '../../../../core/my-account/services';
 import * as fromPolicyStore from '../../../../core/my-account/store';
+import { DomSanitizer } from '@angular/platform-browser';
+import { genericIcons } from '../../../../assets/icons/generic-icons';
 
 @Component({
   selector: 'fsa-claim-policies',
@@ -25,7 +27,8 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
     protected policyService: PolicyService,
     protected claimService: ClaimService,
     protected config: OccConfig,
-    protected authService: AuthService
+    protected authService: AuthService,
+    protected domSanitizer: DomSanitizer
   ) {}
 
   subscription = new Subscription();
@@ -56,6 +59,10 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
           this.claimService.setSelectedPolicy(occUserId, policyId, contractId)
         )
     );
+  }
+
+  getImagelink() {
+    return this.domSanitizer.bypassSecurityTrustUrl(genericIcons.document);
   }
 
   public getBaseUrl() {

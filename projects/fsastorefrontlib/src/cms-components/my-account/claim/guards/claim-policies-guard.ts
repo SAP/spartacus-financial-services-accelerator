@@ -12,7 +12,6 @@ import * as fromPolicyStore from '../../../../core/my-account/store';
 })
 export class ClaimPoliciesGuard implements CanActivate, OnDestroy {
   private subscription: Subscription;
-  private validPolicies;
 
   constructor(
     protected store: Store<fromPolicyStore.UserState>,
@@ -33,7 +32,6 @@ export class ClaimPoliciesGuard implements CanActivate, OnDestroy {
           select(fromPolicyStore.getClaimPoliciesState),
           map(policies => {
             if (policies && policies.loaded) {
-              this.validPolicies = policies;
               if (
                 policies.claimPoliciesData &&
                 !policies.claimPoliciesData.insurancePolicies

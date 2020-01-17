@@ -22,27 +22,24 @@
       }
     }
   }
+  .Section2B {
+    @include box-shadow(0, 2px, 20px, 1px, $color-grey, 1);
+    & > * {
+      padding: 2rem 0 0;
+      max-width: 860px;
+    }
+    .claim-content {
+      padding: 2rem 0;
+      border-top: $border-grey;
+    }
+  }
 }
 
-fsa-claim-policies,
-fsa-claim-policies + fsa-cms-custom-container {
-  @include box-shadow(0, 2px, 20px, 1px, $color-grey, 1);
-}
 fsa-claim-policies {
   border-bottom: none;
-  padding: 60px 60px 30px;
-  @include media-breakpoint-down(lg) {
-    padding: 60px 20px 25px;
-  }
-  .notice-text {
-    text-align: center;
-    background-color: var(--cx-color-1);
-    border: $border-grey;
-    @include box-shadow(0, 0, 6px, 2px, $color-mild-grey, 100%);
-    border-radius: 5px;
-    padding: 25px 20px 20px;
-    margin: 20px 0;
-  }
+  // @include media-breakpoint-down(lg) {
+  //   padding: 60px 20px 25px;
+  // }
   .fs-items {
     margin-bottom: 30px;
     padding: 0 20px;
@@ -88,21 +85,6 @@ fsa-claim-policies {
     padding-bottom: 65px;
     margin-bottom: 40px;
     border-top: none;
-    .claim-content {
-      padding: 0 60px;
-      @include media-breakpoint-down(lg) {
-        padding: 0 20px;
-      }
-      .primary-button__default {
-        white-space: normal;
-        text-transform: none;
-        padding: 10px;
-        font-size: $h5-font-size;
-        font-weight: $font-weight-light;
-        text-align: center;
-        height: auto;
-      }
-    }
     .content--blue {
       color: var(--cx-color-primary);
     }
