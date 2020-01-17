@@ -86,7 +86,6 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
   }
 
   createCard(cardValue, cardObject) {
-    console.log(cardValue);
     return {
       header: 'Proba proba',
       title: `${cardObject.policy}`,

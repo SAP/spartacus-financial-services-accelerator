@@ -27,19 +27,6 @@ export class ClaimPoliciesGuard implements CanActivate, OnDestroy {
       // we get the BE part returning real categoryCode
       // we create dynamic content for FNOL page
       this.policyService.loadClaimPolicies('insurances_auto');
-      // this.claimPolicies$ = this.store.pipe(
-      //   select(fromPolicyStore.getClaimPolicies)
-      // );
-      // return this.claimPolicies$.pipe(
-      //   map(validPolicies => {
-      //     console.log(validPolicies);
-      //     if (validPolicies && !validPolicies.insurancePolicies) {
-      //       this.routingService.go({ cxRoute: 'noClaims' });
-      //       return false;
-      //     }
-      //     return true;
-      //   })
-      // );
       this.subscription = this.store
         .pipe(
           select(fromPolicyStore.getClaimPoliciesState),
