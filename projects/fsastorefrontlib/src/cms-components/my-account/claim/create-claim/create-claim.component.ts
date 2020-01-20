@@ -21,7 +21,6 @@ export class CreateClaimComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
   isPolicySelected$: Observable<SelectedPolicy>;
-  validPolicy;
   confirm;
 
   ngOnInit() {
@@ -34,8 +33,6 @@ export class CreateClaimComponent implements OnInit, OnDestroy {
       this.isPolicySelected$.pipe(
         map(policy => {
           if (policy && policy.userId) {
-            this.validPolicy = policy.userId;
-            console.log(this.validPolicy);
             this.claimService.createClaim(
               policy.userId,
               policy.policyId,
