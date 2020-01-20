@@ -8,7 +8,7 @@
     >
       <div class="row">
         <div
-          class="cx-payment-card col-md-12 col-lg-6"
+          class="cx-payment-card col-sm-12 col-md-6"
           *ngFor="
             let claimPolicy of claimData.claimPoliciesData?.insurancePolicies;
             let i = index
@@ -16,18 +16,18 @@
         >
           <div
             class="cx-payment-card-inner"
-            [ngClass]="{ selected: isSelected === i }"
+            [ngClass]="{ active: selectedIndex === i }"
           >
             <cx-card
               [border]="true"
               [fitToContainer]="true"
-              [content]="cardContent(claimPolicy) | async"
-              (click)="
+              [content]="cardContent(i, claimPolicy) | async"
+              (sendCard)="
                 selectPolicy(
+                  i,
                   claimPolicy.policyNumber,
                   claimPolicy.contractNumber
-                );
-                isSelected = i
+                )
               "
             ></cx-card>
           </div>

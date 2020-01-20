@@ -32,9 +32,6 @@
 
 fsa-claim-policies {
   border-bottom: none;
-  // @include media-breakpoint-down(lg) {
-  //   padding: 60px 20px 25px;
-  // }
   .cx-card-img-container .FSA-icon::before {
     font-size: var(--cx-font-size, 48px);
   }

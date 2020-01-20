@@ -1,22 +1,27 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, OnDestroy } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 import { ClaimService } from '../../../../core/my-account/services';
 import { Store } from '@ngrx/store';
 import * as fromUserRequestStore from '../../../../core/user-request/store/reducers';
+import { Subscription, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { SelectedPolicy } from '../../../../core/my-account/services/claim-data.service';
 
 @Component({
   selector: 'fsa-create-claim',
   templateUrl: './create-claim.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CreateClaimComponent implements OnInit {
+export class CreateClaimComponent implements OnInit, OnDestroy {
   constructor(
     protected claimService: ClaimService,
     protected routingService: RoutingService,
-    protected store: Store<fromUserRequestStore.FSUserRequestState>
-  ) {}
+    protected store: Store<fromUserRequestStore.FSUserRequestState>,
+  ) { }
 
-  isPolicySelected$;
+  subscription = new Subscription();
+  isPolicySelected$: Observable<SelectedPolicy>;
+  validPolicy;
   confirm;
 
   ngOnInit() {
@@ -25,21 +30,28 @@ export class CreateClaimComponent implements OnInit {
   }
 
   startClaim() {
-    this.claimService
-      .getSelectedPolicy()
-      .subscribe(policy => {
-        if (policy) {
-          this.claimService.createClaim(
-            policy.userId,
-            policy.policyId,
-            policy.contractId
-          );
+    this.subscription.add(
+      this.isPolicySelected$.pipe(
+        map(policy => {
+          if (policy && policy.userId) {
+            this.validPolicy = policy.userId;
+            console.log(this.validPolicy);
+            this.claimService.createClaim(
+              policy.userId,
+              policy.policyId,
+              policy.contractId
+            );
+            this.routingService.go({
+              cxRoute: 'fnolIncidentPage',
+            });
+          }
+        })).subscribe()
+    );
+  }
 
-          this.routingService.go({
-            cxRoute: 'fnolIncidentPage',
-          });
-        }
-      })
-      .unsubscribe();
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
