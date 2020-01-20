@@ -15,6 +15,7 @@ import {
 import * as fromPolicyStore from '../../../../core/my-account/store';
 import { DomSanitizer } from '@angular/platform-browser';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
+import { Card } from '@spartacus/storefront';
 
 @Component({
   selector: 'fsa-claim-policies',
@@ -59,7 +60,7 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
         .subscribe(occUserId => {
           if (this.policyId !== policyId) {
             this.policyId = policyId;
-            this.claimService.setSelectedPolicy(occUserId, policyId, contractId)
+            this.claimService.setSelectedPolicy(occUserId, policyId, contractId);
           } else {
             this.policyId = undefined;
             this.claimService.setSelectedPolicy(null, null, null);
@@ -68,7 +69,7 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
     );
   }
 
-  cardContent(idx, cardObject): Observable<any> {
+  cardContent(idx, cardObject): Observable<Card> {
     return combineLatest([
       this.translation.translate('policy.policy'),
       this.translation.translate('claim.vehicleMake'),
