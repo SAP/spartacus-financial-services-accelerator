@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormDataService } from '@fsa/dynamicforms';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import {
   AuthService,
   CartActions,
@@ -10,7 +10,6 @@ import {
 import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
-import * as fromSelector from '../store/selectors';
 import { QuoteDataService } from './quote-data.service';
 import { map } from 'rxjs/operators';
 
@@ -26,32 +25,10 @@ export class QuoteService {
     this.initQuotes();
   }
 
-  callback: Function;
-
   initQuotes() {
-    this.store.pipe(select(fromSelector.getQuotes)).subscribe(quotes => {
-      if (quotes) {
-        this.quoteData.quotes = quotes;
-      }
-      if (this.callback) {
-        this.callback();
-        this.callback = null;
-      }
-    });
-
     this.auth.getUserToken().subscribe(userData => {
       if (this.quoteData.userId !== userData.userId) {
         this.quoteData.userId = userData.userId;
-      }
-    });
-
-    this.store.pipe(select(fromSelector.getQuoteRefresh)).subscribe(refresh => {
-      if (refresh) {
-        this.store.dispatch(
-          new fromAction.LoadQuotes({
-            userId: this.quoteData.userId,
-          })
-        );
       }
     });
   }
