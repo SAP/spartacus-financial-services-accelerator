@@ -3,7 +3,6 @@ import { select, Store } from '@ngrx/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
-import * as fromSelector from '../store/selectors';
 import * as fromClaimStore from '../store/';
 import { ClaimDataService, SelectedPolicy } from './claim-data.service';
 
@@ -12,38 +11,10 @@ export class ClaimService {
   constructor(
     protected store: Store<fromReducer.UserState>,
     protected claimData: ClaimDataService
-  ) {
-    this.initClaims();
-  }
+  ) {}
 
   private selectedPolicySource = new BehaviorSubject<SelectedPolicy>(null);
   private selectedPolicy = this.selectedPolicySource.asObservable();
-
-  callback: Function;
-
-  initClaims() {
-    this.store.pipe(select(fromSelector.getClaims)).subscribe(claims => {
-      if (claims) {
-        this.claimData.claims = claims;
-      }
-      if (this.callback) {
-        this.callback();
-        this.callback = null;
-      }
-    });
-
-    this.store
-      .pipe(select(fromSelector.getClaimsRefresh))
-      .subscribe(refresh => {
-        if (refresh) {
-          this.store.dispatch(
-            new fromAction.LoadClaims({
-              userId: this.claimData.userId,
-            })
-          );
-        }
-      });
-  }
 
   getClaims(): Observable<any> {
     return this.store.pipe(select(fromClaimStore.getClaims));
