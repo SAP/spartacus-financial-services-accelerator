@@ -1,57 +1,20 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { AuthService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import * as fromStore from '../store';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
-import * as fromSelector from '../store/selectors';
 import { PolicyDataService } from './policy-data.service';
 
 @Injectable()
 export class PolicyService {
   constructor(
     private store: Store<fromReducer.UserState>,
-    private policyData: PolicyDataService,
-    protected auth: AuthService
-  ) {
-    this.initPolicies();
-  }
+    private policyData: PolicyDataService
+  ) {}
 
-  callback: Function;
-
-  readonly policyData$: Observable<any> = this.store.pipe(
-    select(fromStore.getPolicyData)
-  );
-
-  initPolicies() {
-    this.store.pipe(select(fromSelector.getPolicyData)).subscribe(policies => {
-      if (policies) {
-        this.policyData.policies = policies;
-      }
-      if (this.callback) {
-        this.callback();
-        this.callback = null;
-      }
-    });
-
-    this.auth.getUserToken().subscribe(userData => {
-      if (this.policyData.userId !== userData.userId) {
-        this.policyData.userId = userData.userId;
-      }
-    });
-
-    this.store
-      .pipe(select(fromSelector.getPoliciesRefresh))
-      .subscribe(refresh => {
-        if (refresh) {
-          this.store.dispatch(
-            new fromAction.LoadPolicies({
-              userId: this.policyData.userId,
-            })
-          );
-        }
-      });
+  getPolicies(): Observable<any> {
+    return this.store.pipe(select(fromStore.getPolicyData));
   }
 
   loadPolicies() {

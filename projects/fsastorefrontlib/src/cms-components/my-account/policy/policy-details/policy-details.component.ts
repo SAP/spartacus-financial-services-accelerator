@@ -36,7 +36,7 @@ export class PolicyDetailsComponent implements OnInit {
         }
       }
     );
-    this.policy$ = this.policyService.policyData$;
+    this.policy$ = this.policyService.getPolicies();
   }
   public getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
