@@ -1,24 +1,34 @@
-<ng-container *ngIf="claimPolicies$ | async as claimPolicies">
+<ng-container *ngIf="claimData$ | async as claimData">
   <ng-container *ngIf="claimPoliciesLoaded$ | async; else loading">
     <ng-container
-      *ngIf="claimPolicies?.insurancePolicies?.length > 0; else noClaims"
+      *ngIf="
+        claimData.claimPoliciesData?.insurancePolicies?.length > 0;
+        else noClaims
+      "
     >
       <div class="row">
         <div
-          class="cx-payment-card col-md-12 col-lg-6"
+          class="cx-payment-card col-sm-12 col-md-6"
           *ngFor="
-            let claimPolicy of claimPolicies.insurancePolicies;
+            let claimPolicy of claimData.claimPoliciesData?.insurancePolicies;
             let i = index
           "
         >
           <div
             class="cx-payment-card-inner"
-            [ngClass]="{ selected: isSelected === i }"
+            [ngClass]="{ active: selectedIndex === i }"
           >
             <cx-card
               [border]="true"
               [fitToContainer]="true"
-              [content]="cardContent(claimPolicy) | async"
+              [content]="cardContent(i, claimPolicy) | async"
+              (sendCard)="
+                selectPolicy(
+                  i,
+                  claimPolicy.policyNumber,
+                  claimPolicy.contractNumber
+                )
+              "
             ></cx-card>
           </div>
         </div>

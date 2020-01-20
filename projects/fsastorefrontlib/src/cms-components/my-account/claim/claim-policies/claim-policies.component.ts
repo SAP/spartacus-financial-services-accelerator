@@ -15,7 +15,6 @@ import {
 import * as fromPolicyStore from '../../../../core/my-account/store';
 import { DomSanitizer } from '@angular/platform-browser';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
-import { Card } from '@spartacus/storefront';
 
 @Component({
   selector: 'fsa-claim-policies',
@@ -37,7 +36,8 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
 
   claimData$;
   claimPoliciesLoaded$;
-  isSelected: number;
+  policyId;
+  selectedIndex: number;
 
   ngOnInit() {
     // Fixing insurances_auto until:
@@ -50,47 +50,62 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
     );
   }
 
-  selectPolicy(policyId, contractId) {
+  selectPolicy(index, policyId, contractId) {
+    this.selectedIndex = this.selectedIndex === index ? -1 : index;
     this.subscription.add(
       this.authService
         .getOccUserId()
         .pipe(take(1))
-        .subscribe(occUserId =>
-          this.claimService.setSelectedPolicy(occUserId, policyId, contractId)
-        )
+        .subscribe(occUserId => {
+          if (this.policyId !== policyId) {
+            this.policyId = policyId;
+            this.claimService.setSelectedPolicy(occUserId, policyId, contractId)
+          } else {
+            this.policyId = undefined;
+            this.claimService.setSelectedPolicy(null, null, null);
+          }
+        })
     );
   }
 
-  cardContent(cardObject): Observable<any> {
+  cardContent(idx, cardObject): Observable<any> {
     return combineLatest([
       this.translation.translate('policy.policy'),
       this.translation.translate('claim.vehicleMake'),
       this.translation.translate('claim.vehicleModel'),
+      this.translation.translate('fscommon.select'),
+      this.translation.translate('paymentCard.selected')
     ]).pipe(
       map(
         ([
           policy,
           vahicleMake,
           vehicleModel,
+          commonSelect,
+          selected
         ]) => {
-          return this.createCard(cardObject, {
+          return this.createCard(idx, cardObject, {
             policy,
             vahicleMake,
-            vehicleModel
+            vehicleModel,
+            commonSelect,
+            selected
           });
         }
       )
     );
   }
 
-  createCard(cardValue, cardObject) {
+  createCard(idx, cardValue, cardObject) {
     return {
-      header: `${cardValue.categoryData.name} ${cardObject.policy}`,
+      header: this.selectedIndex === idx && this.policyId ? cardObject.selected : undefined,
+      textBold: `${cardValue.categoryData.name} ${cardObject.policy}`,
       text: [
         `${cardObject.vahicleMake}: ${cardValue.insuredObjects[0].insuredObjectItems[0].value}`,
         `${cardObject.vehicleModel}: ${cardValue.insuredObjects[0].insuredObjectItems[1].value}`
       ],
-      img: cardValue.insuredObjects[0].insuredObjectType.code
+      img: cardValue.insuredObjects[0].insuredObjectType.code,
+      actions: [{ name: this.selectedIndex === idx && this.policyId ? cardObject.selected : cardObject.commonSelect, event: 'send' }],
     };
   }
 

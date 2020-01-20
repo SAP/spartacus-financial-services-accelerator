@@ -30,15 +30,15 @@ export class ClaimPoliciesGuard implements CanActivate, OnDestroy {
       this.subscription = this.store
         .pipe(
           select(fromPolicyStore.getClaimPoliciesState),
-          map(policies => {
-            if (policies && policies.loaded) {
-              if (
-                policies.claimPoliciesData &&
-                !policies.claimPoliciesData.insurancePolicies
-              ) {
-                this.routingService.go({ cxRoute: 'noClaims' });
-                return of(false);
-              }
+          map(claimData => {
+            if (
+              claimData &&
+              claimData.loaded &&
+              claimData.claimPoliciesData &&
+              !claimData.claimPoliciesData.insurancePolicies
+            ) {
+              this.routingService.go({ cxRoute: 'noClaims' });
+              return of(false);
             }
           })
         )
