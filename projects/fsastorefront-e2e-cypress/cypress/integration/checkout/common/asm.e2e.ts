@@ -29,7 +29,7 @@ context('ASM', () => {
     cy.contains('End Session').should('be.visible');
   });
 
-  it('should ends the session for user', () => {
+  it('should end the session for user', () => {
     cy.contains('End Session')
       .should('be.visible')
       .click();
