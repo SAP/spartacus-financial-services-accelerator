@@ -4,12 +4,12 @@ import {
   createFeatureSelector,
   MemoizedSelector,
 } from '@ngrx/store';
+import { AuthActions } from '@spartacus/core';
 import * as fromClaimPoliciesReducer from './claim-policies.reducer';
 import * as fromClaimReducer from './claim.reducer';
 import * as fromPolicyReducer from './policy.reducer';
 import * as fromPremiumCalendarReducer from './premium-calendar.reducer';
 import * as fromQuoteReducer from './quote.reducer';
-import { AuthActions } from '@spartacus/core';
 
 export interface UserState {
   quotes: fromQuoteReducer.QuoteState;

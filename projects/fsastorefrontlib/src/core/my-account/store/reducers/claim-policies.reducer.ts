@@ -1,11 +1,10 @@
-import * as fromAction from '../actions';
 import { Policy } from './policy.reducer';
+import * as fromAction from '../actions';
 
 export interface ClaimPoliciesState {
   claimPoliciesData: {
     insurancePolicies: Policy[];
   };
-  refresh: boolean;
   loaded: boolean;
 }
 
@@ -13,7 +12,6 @@ export const initialState: ClaimPoliciesState = {
   claimPoliciesData: {
     insurancePolicies: [],
   },
-  refresh: false,
   loaded: false,
 };
 
@@ -27,13 +25,11 @@ export function reducer(
       return {
         ...state,
         claimPoliciesData,
-        refresh: false,
         loaded: true,
       };
     }
   }
   return state;
 }
-
 export const getLoadedClaimPolicies = (state: ClaimPoliciesState) =>
   state.loaded;

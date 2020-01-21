@@ -69,7 +69,9 @@ const routes: Routes = [
     SpinnerModule,
     CardModule,
     RouterModule.forChild(routes),
-    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig | IconConfig>{
+    ConfigModule.withConfig(<
+      CmsConfig | RoutesConfig | RoutingConfig | IconConfig
+    >{
       cmsComponents: {
         AccountMyClaimsFlex: {
           component: ClaimsComponent,

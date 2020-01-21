@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 import { ClaimService } from '../../../../core/my-account/services';
 import { Store } from '@ngrx/store';
@@ -16,8 +21,8 @@ export class CreateClaimComponent implements OnInit, OnDestroy {
   constructor(
     protected claimService: ClaimService,
     protected routingService: RoutingService,
-    protected store: Store<fromUserRequestStore.FSUserRequestState>,
-  ) { }
+    protected store: Store<fromUserRequestStore.FSUserRequestState>
+  ) {}
 
   subscription = new Subscription();
   isPolicySelected$: Observable<SelectedPolicy>;
@@ -30,19 +35,22 @@ export class CreateClaimComponent implements OnInit, OnDestroy {
 
   startClaim() {
     this.subscription.add(
-      this.isPolicySelected$.pipe(
-        map(policy => {
-          if (policy && policy.userId) {
-            this.claimService.createClaim(
-              policy.userId,
-              policy.policyId,
-              policy.contractId
-            );
-            this.routingService.go({
-              cxRoute: 'fnolIncidentPage',
-            });
-          }
-        })).subscribe()
+      this.isPolicySelected$
+        .pipe(
+          map(policy => {
+            if (policy && policy.userId) {
+              this.claimService.createClaim(
+                policy.userId,
+                policy.policyId,
+                policy.contractId
+              );
+              this.routingService.go({
+                cxRoute: 'fnolIncidentPage',
+              });
+            }
+          })
+        )
+        .subscribe()
     );
   }
 
