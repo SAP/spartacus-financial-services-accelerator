@@ -15,13 +15,7 @@ export class ClaimEffects {
   loadClaims$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.LOAD_CLAIMS),
     map((action: fromActions.LoadClaims) => action.payload),
-    mergeMap(payload => {
-      if (payload === undefined || payload.userId === undefined) {
-        payload = {
-          userId: this.claimData.userId,
-          claims: this.claimData.claims,
-        };
-      }
+    switchMap(payload => {
       return this.claimAdapter.getClaims(payload.userId).pipe(
         map((claims: any) => {
           return new fromActions.LoadClaimsSuccess(claims);

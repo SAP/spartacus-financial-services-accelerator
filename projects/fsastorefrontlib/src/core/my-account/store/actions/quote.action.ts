@@ -51,5 +51,4 @@ export type QuoteAction =
   | LoadQuotesFail
   | UpdateQuote
   | UpdateQuoteSuccess
-  | UpdateQuoteSuccess
   | BindQuote;

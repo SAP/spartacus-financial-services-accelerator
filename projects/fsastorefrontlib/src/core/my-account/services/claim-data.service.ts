@@ -4,6 +4,8 @@ import { AuthService } from '@spartacus/core';
 import { Store, select } from '@ngrx/store';
 import * as fromReducer from '../store/reducers';
 import * as fromClaimStore from '../../../core/my-account/store/selectors';
+import { filter } from 'rxjs/operators';
+import { OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
 
 export interface SelectedPolicy {
   userId: string;
@@ -13,7 +15,7 @@ export interface SelectedPolicy {
 
 @Injectable()
 export class ClaimDataService {
-  private _userId;
+  private _userId = OCC_USER_ID_ANONYMOUS;
   private _claims: Claim[];
   private _claimData: Claim;
 
@@ -21,11 +23,16 @@ export class ClaimDataService {
     protected store: Store<fromReducer.UserState>,
     protected auth: AuthService
   ) {
-    this.auth.getUserToken().subscribe(userData => {
-      if (this.userId !== userData.userId) {
-        this.userId = userData.userId;
-      }
-    });
+    this.auth
+      .getUserToken()
+      .pipe(filter(userToken => this.userId !== userToken.userId))
+      .subscribe(userToken => {
+        if (Object.keys(userToken).length !== 0) {
+          this.userId = userToken.userId;
+        } else {
+          this.userId = OCC_USER_ID_ANONYMOUS;
+        }
+      });
     this.store
       .pipe(select(fromClaimStore.getClaimsContent))
       .subscribe(claimData => {

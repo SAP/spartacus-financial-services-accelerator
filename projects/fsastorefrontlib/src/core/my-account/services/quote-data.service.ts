@@ -1,12 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Quote } from '../store/reducers/quote.reducer';
+import { AuthService } from '@spartacus/core';
+import { OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
+import { filter } from 'rxjs/operators';
 
 @Injectable()
 export class QuoteDataService {
-  private _userId = 'anonymous';
-  private _quotes: Quote[];
+  private _userId = OCC_USER_ID_ANONYMOUS;
 
-  constructor() {}
+  constructor(protected auth: AuthService) {
+    this.auth
+      .getUserToken()
+      .pipe(filter(userToken => this.userId !== userToken.userId))
+      .subscribe(userToken => {
+        if (Object.keys(userToken).length !== 0) {
+          this.userId = userToken.userId;
+        } else {
+          this.userId = OCC_USER_ID_ANONYMOUS;
+        }
+      });
+  }
 
   set userId(val) {
     this._userId = val;
@@ -14,13 +26,5 @@ export class QuoteDataService {
 
   get userId(): string {
     return this._userId;
-  }
-
-  set quotes(val: Quote[]) {
-    this._quotes = val;
-  }
-
-  get quotes(): Quote[] {
-    return this._quotes;
   }
 }
