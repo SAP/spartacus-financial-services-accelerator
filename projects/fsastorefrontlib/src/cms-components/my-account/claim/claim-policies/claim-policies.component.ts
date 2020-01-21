@@ -30,8 +30,8 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
     protected config: OccConfig,
     protected authService: AuthService,
     protected domSanitizer: DomSanitizer,
-    protected translation: TranslationService,
-  ) { }
+    protected translation: TranslationService
+  ) {}
 
   subscription = new Subscription();
 
@@ -62,10 +62,14 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
         .subscribe(occUserId => {
           if (this.policyId !== policyId) {
             this.policyId = policyId;
-            this.claimService.setSelectedPolicy(occUserId, policyId, contractId);
+            this.claimService.setSelectedPolicy(
+              occUserId,
+              policyId,
+              contractId
+            );
           } else {
             this.policyId = undefined;
-            this.claimService.setSelectedPolicy(null, null, null);
+            this.claimService.resetPolicy();
           }
         })
     );
@@ -77,38 +81,41 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
       this.translation.translate('claim.vehicleMake'),
       this.translation.translate('claim.vehicleModel'),
       this.translation.translate('fscommon.select'),
-      this.translation.translate('paymentCard.selected')
+      this.translation.translate('paymentCard.selected'),
     ]).pipe(
-      map(
-        ([
+      map(([policy, vahicleMake, vehicleModel, commonSelect, selected]) => {
+        return this.createCard(idx, cardObject, {
           policy,
           vahicleMake,
           vehicleModel,
           commonSelect,
-          selected
-        ]) => {
-          return this.createCard(idx, cardObject, {
-            policy,
-            vahicleMake,
-            vehicleModel,
-            commonSelect,
-            selected
-          });
-        }
-      )
+          selected,
+        });
+      })
     );
   }
 
   createCard(idx, cardValue, cardObject) {
     return {
-      header: this.selectedIndex === idx && this.policyId ? cardObject.selected : undefined,
+      header:
+        this.selectedIndex === idx && this.policyId
+          ? cardObject.selected
+          : undefined,
       textBold: `${cardValue.categoryData.name} ${cardObject.policy}`,
       text: [
         `${cardObject.vahicleMake}: ${cardValue.insuredObjects[0].insuredObjectItems[0].value}`,
-        `${cardObject.vehicleModel}: ${cardValue.insuredObjects[0].insuredObjectItems[1].value}`
+        `${cardObject.vehicleModel}: ${cardValue.insuredObjects[0].insuredObjectItems[1].value}`,
       ],
       img: cardValue.insuredObjects[0].insuredObjectType.code,
-      actions: [{ name: this.selectedIndex === idx && this.policyId ? cardObject.selected : cardObject.commonSelect, event: 'send' }],
+      actions: [
+        {
+          name:
+            this.selectedIndex === idx && this.policyId
+              ? cardObject.selected
+              : cardObject.commonSelect,
+          event: 'send',
+        },
+      ],
     };
   }
 
