@@ -1,20 +1,5 @@
-.GeneralLayoutPageTemplate {
-  padding: 3rem 1.5rem 0 1.5rem;
-  .Section2A {
-    padding: 3rem 0 0;
-    p {
-      margin-bottom: 0;
-      .container {
-        max-width: 100%;
-      }
-    }
-  }
-  .Section2B {
-    @include box-shadow(0, 2px, 20px, 1px, $color-grey, 1);
-    & > * {
-      padding: 2rem 0 0;
-      max-width: 860px;
-    }
+.GeneralPageTemplate {
+  .Section2 {
     .claim-content {
       padding: 2rem 0 1rem;
       border-top: $border-grey;
