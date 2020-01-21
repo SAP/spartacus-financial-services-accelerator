@@ -5,12 +5,15 @@ import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromClaimStore from '../store/';
 import { ClaimDataService, SelectedPolicy } from './claim-data.service';
+import { AuthService } from '@spartacus/core';
+import { take } from 'rxjs/operators';
 
 @Injectable()
 export class ClaimService {
   constructor(
     protected store: Store<fromReducer.UserState>,
-    protected claimData: ClaimDataService
+    protected claimData: ClaimDataService,
+    protected authService: AuthService
   ) {}
 
   private selectedPolicySource = new BehaviorSubject<SelectedPolicy>(null);
@@ -47,14 +50,20 @@ export class ClaimService {
     this.selectedPolicySource.next({ userId, policyId, contractId });
   }
 
-  createClaim(userId: string, policyId: string, contractId: string) {
-    this.store.dispatch(
-      new fromAction.CreateClaim({
-        userId: userId,
-        policyId: policyId,
-        contractId: contractId,
-      })
-    );
+  createClaim(policyId: string, contractId: string) {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.CreateClaim({
+            userId: occUserId,
+            policyId: policyId,
+            contractId: contractId,
+          })
+        )
+      )
+      .unsubscribe();
   }
 
   submitClaim(userId: string, claimId: string) {

@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import * as fromStore from '../store';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
-import { PolicyDataService } from './policy-data.service';
+import { AuthService } from '@spartacus/core';
+import { take } from 'rxjs/operators';
 
 @Injectable()
 export class PolicyService {
   constructor(
     private store: Store<fromReducer.UserState>,
-    private policyData: PolicyDataService
+    private authService: AuthService
   ) {}
 
   getPolicies(): Observable<any> {
@@ -18,37 +19,61 @@ export class PolicyService {
   }
 
   loadPolicies() {
-    this.store.dispatch(
-      new fromAction.LoadPolicies({
-        userId: this.policyData.userId,
-      })
-    );
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.LoadPolicies({
+            userId: occUserId,
+          })
+        )
+      )
+      .unsubscribe();
   }
 
   loadClaimPolicies(policyCategoryCode: string) {
-    this.store.dispatch(
-      new fromAction.LoadClaimPolicies({
-        userId: this.policyData.userId,
-        policyCategoryCode: policyCategoryCode,
-      })
-    );
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.LoadClaimPolicies({
+            userId: occUserId,
+            policyCategoryCode: policyCategoryCode,
+          })
+        )
+      )
+      .unsubscribe();
   }
 
   loadPremiumCalendar() {
-    this.store.dispatch(
-      new fromAction.LoadPremiumCalendar({
-        userId: this.policyData.userId,
-      })
-    );
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.LoadPremiumCalendar({
+            userId: occUserId,
+          })
+        )
+      )
+      .unsubscribe();
   }
 
   loadPolicyDetails(policyId, contractId) {
-    this.store.dispatch(
-      new fromAction.LoadPolicyDetails({
-        userId: this.policyData.userId,
-        policyId: policyId,
-        contractId: contractId,
-      })
-    );
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.LoadPolicyDetails({
+            userId: occUserId,
+            policyId: policyId,
+            contractId: contractId,
+          })
+        )
+      )
+      .unsubscribe();
   }
 }

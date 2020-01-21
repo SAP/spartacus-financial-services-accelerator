@@ -29,11 +29,7 @@ export class CreateClaimComponent implements OnInit {
       .getSelectedPolicy()
       .subscribe(policy => {
         if (policy) {
-          this.claimService.createClaim(
-            policy.userId,
-            policy.policyId,
-            policy.contractId
-          );
+          this.claimService.createClaim(policy.policyId, policy.contractId);
 
           this.routingService.go({
             cxRoute: 'fnolIncidentPage',

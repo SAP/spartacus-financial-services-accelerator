@@ -72,7 +72,6 @@ describe('AddOptionsComponent', () => {
     component.startClaim();
 
     expect(mockClaimService.createClaim).toHaveBeenCalledWith(
-      mockSelectedPolicy.userId,
       mockSelectedPolicy.policyId,
       mockSelectedPolicy.contractId
     );

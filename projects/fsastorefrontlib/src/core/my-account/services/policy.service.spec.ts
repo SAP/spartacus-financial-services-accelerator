@@ -4,24 +4,28 @@ import { Store, StoreModule } from '@ngrx/store';
 import { Type } from '@angular/core';
 import { reducerProvider, reducerToken } from '../store/reducers/index';
 import { PolicyService } from './policy.service';
-import { PolicyDataService } from './policy-data.service';
 import * as fromAction from '../store/actions';
+import { OCC_USER_ID_CURRENT, AuthService } from '@spartacus/core';
+import { Observable, of } from 'rxjs';
 
-const userId = 'testUser';
+const userId = OCC_USER_ID_CURRENT;
 const policyId = 'PL00001';
 const contractId = 'CT00001';
 const testCategory = 'testCategory';
 
+class MockAuthService {
+  getOccUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
+  }
+}
+
 describe('PolicyServiceTest', () => {
   let service: PolicyService;
   let store: Store<fromReducer.UserState>;
-  let policyData: PolicyDataServiceStub;
-
-  class PolicyDataServiceStub {
-    userId = userId;
-  }
+  let authService: MockAuthService;
 
   beforeEach(() => {
+    authService = new MockAuthService();
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
@@ -30,12 +34,11 @@ describe('PolicyServiceTest', () => {
       providers: [
         PolicyService,
         reducerProvider,
-        { provide: PolicyDataService, useClass: PolicyDataServiceStub },
+        { provide: AuthService, useClass: MockAuthService },
       ],
     });
 
     service = TestBed.get(PolicyService as Type<PolicyService>);
-    policyData = TestBed.get(PolicyDataService as Type<PolicyDataService>);
     store = TestBed.get(Store as Type<Store<fromReducer.UserState>>);
 
     spyOn(store, 'dispatch').and.callThrough();

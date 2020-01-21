@@ -4,7 +4,6 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { OccQuoteAdapter } from '../../../../occ/services/quote/occ-quote.adapter';
-import { QuoteDataService } from '../../services/quote-data.service';
 import * as fromActions from '../actions';
 
 @Injectable()
@@ -60,7 +59,6 @@ export class QuoteEffects {
 
   constructor(
     private actions$: Actions,
-    private quoteAdapter: OccQuoteAdapter,
-    private quoteData: QuoteDataService
+    private quoteAdapter: OccQuoteAdapter
   ) {}
 }

@@ -4,13 +4,17 @@ import { Store, StoreModule } from '@ngrx/store';
 import { Type } from '@angular/core';
 import { reducerProvider, reducerToken } from '../store/reducers/index';
 import { QuoteService } from './quote.service';
-import { QuoteDataService } from './quote-data.service';
-import { CartService, AuthService, CartActions } from '@spartacus/core';
+import {
+  CartService,
+  AuthService,
+  CartActions,
+  OCC_USER_ID_CURRENT,
+} from '@spartacus/core';
 import { FormDataService } from '@fsa/dynamicforms';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import * as fromAction from '../store/actions';
 
-const userId = 'testUser';
+const userId = OCC_USER_ID_CURRENT;
 const cartId = '0000001';
 const formId = 'formId';
 const formDefinitionId = 'formDefinitionId';
@@ -43,10 +47,8 @@ const cartWithoutEntries = {
 };
 
 class MockAuthService {
-  getUserToken() {
-    return of({
-      userId: userId,
-    });
+  getOccUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
   }
 }
 
@@ -98,14 +100,9 @@ class MockCartService {
 describe('QuoteServiceTest', () => {
   let service: QuoteService;
   let store: Store<fromReducer.UserState>;
-  let quoteData: QuoteDataServiceStub;
   let cartService: MockCartService;
   let formDataService: MockFormDataService;
   let authService: MockAuthService;
-
-  class QuoteDataServiceStub {
-    userId = userId;
-  }
 
   beforeEach(() => {
     authService = new MockAuthService();
@@ -120,7 +117,6 @@ describe('QuoteServiceTest', () => {
       providers: [
         QuoteService,
         reducerProvider,
-        { provide: QuoteDataService, useClass: QuoteDataServiceStub },
         { provide: CartService, useValue: cartService },
         { provide: FormDataService, useValue: formDataService },
         { provide: AuthService, useValue: authService },
@@ -128,7 +124,6 @@ describe('QuoteServiceTest', () => {
     });
 
     service = TestBed.get(QuoteService as Type<QuoteService>);
-    quoteData = TestBed.get(QuoteDataService as Type<QuoteDataService>);
     cartService = TestBed.get(CartService as Type<CartService>);
     store = TestBed.get(Store as Type<Store<fromReducer.UserState>>);
 

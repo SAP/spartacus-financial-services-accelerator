@@ -6,16 +6,25 @@ import { ClaimDataService } from './claim-data.service';
 import { Type } from '@angular/core';
 import * as fromAction from '../store/actions';
 import { reducerProvider, reducerToken } from '../store/reducers/index';
+import { of, Observable } from 'rxjs';
+import { OCC_USER_ID_CURRENT, AuthService } from '@spartacus/core';
 
-const userId = 'testUser';
+const userId = OCC_USER_ID_CURRENT;
 const policyId = 'PL00001';
 const contractId = 'CT00001';
 const claimId = 'CL00001';
+
+class MockAuthService {
+  getOccUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
+  }
+}
 
 describe('ClaimServiceTest', () => {
   let service: ClaimService;
   let store: Store<fromReducer.UserState>;
   let claimData: ClaimDataServiceStub;
+  let authService: MockAuthService;
 
   class ClaimDataServiceStub {
     userId = userId;
@@ -23,6 +32,8 @@ describe('ClaimServiceTest', () => {
   }
 
   beforeEach(() => {
+    authService = new MockAuthService();
+
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
@@ -32,6 +43,7 @@ describe('ClaimServiceTest', () => {
         ClaimService,
         reducerProvider,
         { provide: ClaimDataService, useClass: ClaimDataServiceStub },
+        { provide: AuthService, useValue: authService },
       ],
     });
 
@@ -88,10 +100,10 @@ describe('ClaimServiceTest', () => {
   });
 
   it('should be able to create claim', () => {
-    service.createClaim(userId, policyId, contractId);
+    service.createClaim(policyId, contractId);
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.CreateClaim({
-        userId: userId,
+        userId: OCC_USER_ID_CURRENT,
         policyId: policyId,
         contractId: contractId,
       })
