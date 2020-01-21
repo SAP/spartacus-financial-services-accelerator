@@ -37,7 +37,7 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
 
   claimData$;
   claimPoliciesLoaded$;
-  policyId;
+  selectedPolicyId;
   selectedIndex: number;
 
   ngOnInit() {
@@ -60,15 +60,15 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
         .getOccUserId()
         .pipe(take(1))
         .subscribe(occUserId => {
-          if (this.policyId !== policyId) {
-            this.policyId = policyId;
+          if (this.selectedPolicyId !== policyId) {
+            this.selectedPolicyId = policyId;
             this.claimService.setSelectedPolicy(
               occUserId,
               policyId,
               contractId
             );
           } else {
-            this.policyId = undefined;
+            this.selectedPolicyId = undefined;
             this.claimService.resetPolicy();
           }
         })
@@ -98,7 +98,7 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
   createCard(idx, cardValue, cardObject) {
     return {
       header:
-        this.selectedIndex === idx && this.policyId
+        this.selectedIndex === idx && this.selectedPolicyId
           ? cardObject.selected
           : undefined,
       textBold: `${cardValue.categoryData.name} ${cardObject.policy}`,
@@ -110,7 +110,7 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
       actions: [
         {
           name:
-            this.selectedIndex === idx && this.policyId
+            this.selectedIndex === idx && this.selectedPolicyId
               ? cardObject.selected
               : cardObject.commonSelect,
           event: 'send',
