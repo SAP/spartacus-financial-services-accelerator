@@ -54,7 +54,7 @@ describe('ClaimServiceTest', () => {
     spyOn(store, 'dispatch').and.callThrough();
   });
 
-  it('should ClaimService is injected', inject(
+  it('should check if ClaimService is injected', inject(
     [ClaimService],
     (claimService: ClaimService) => {
       expect(claimService).toBeTruthy();
@@ -103,7 +103,7 @@ describe('ClaimServiceTest', () => {
     service.createClaim(policyId, contractId);
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.CreateClaim({
-        userId: OCC_USER_ID_CURRENT,
+        userId: userId,
         policyId: policyId,
         contractId: contractId,
       })

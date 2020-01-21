@@ -77,14 +77,14 @@ describe('InboxServiceTest', () => {
 
   it('test set message state to read', () => {
     const readStatus = true;
-    let readResp;
+    let messagesResponse;
     service
       .setMessagesState([messageUid], readStatus)
       .subscribe(messages => {
-        readResp = messages;
+        messagesResponse = messages;
       })
       .unsubscribe();
-    expect(readResp).toEqual({
+    expect(messagesResponse).toEqual({
       messages: [
         {
           uid: [messageUid],
