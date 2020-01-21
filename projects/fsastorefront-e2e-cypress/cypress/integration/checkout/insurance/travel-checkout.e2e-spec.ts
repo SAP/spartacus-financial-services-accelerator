@@ -8,7 +8,7 @@ context('Travel Insurance Checkout', () => {
     register.registerUser(registrationUser);
     cy.wait(3000);
     register.login(registrationUser.email, registrationUser.password);
-    cy.wait(1500);
+    cy.wait(2000);
   });
 
   describe('Checkout', () => {
@@ -20,6 +20,7 @@ context('Travel Insurance Checkout', () => {
     });
 
     it('Add main product to the cart', () => {
+      cy.wait(1000);
       travelCheckout.checkComparisonAndAddProduct();
     });
 
