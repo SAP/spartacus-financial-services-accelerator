@@ -58,10 +58,10 @@ import { categoryIcons } from '../assets/icons/generic-icons';
     ConfigModule.withConfig({
       icon: {
         symbols: {
-          ...categoryIcons
+          ...categoryIcons,
         },
       },
-    })
+    }),
   ],
   exports: [B2cStorefrontModule, CmsLibModule],
   declarations: [],

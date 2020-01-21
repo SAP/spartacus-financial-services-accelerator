@@ -17,7 +17,7 @@ export class ClaimPoliciesGuard implements CanActivate, OnDestroy {
     protected store: Store<fromPolicyStore.UserState>,
     private routingService: RoutingService,
     protected policyService: PolicyService
-  ) { }
+  ) {}
 
   claimPolicies$: Observable<any>;
 
