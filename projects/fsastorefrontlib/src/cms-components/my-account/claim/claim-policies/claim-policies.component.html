@@ -1,12 +1,15 @@
-<ng-container *ngIf="claimPolicies$ | async as claimPolicies">
+<ng-container *ngIf="claimData$ | async as claimData$">
   <ng-container *ngIf="claimPoliciesLoaded$ | async; else loading">
     <ng-container
-      *ngIf="claimPolicies?.insurancePolicies?.length > 0; else noClaims"
+      *ngIf="
+        claimData.claimPoliciesData?.insurancePolicies?.length > 0;
+        else noClaims
+      "
     >
       <div class="row">
         <div
           *ngFor="
-            let claimPolicy of claimPolicies.insurancePolicies;
+            let claimPolicy of claimData.claimPoliciesData?.insurancePolicies;
             let i = index
           "
           class="fs-items col-sm-6 col-md-4"

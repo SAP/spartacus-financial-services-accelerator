@@ -33,7 +33,7 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
 
-  claimPolicies$;
+  claimData$;
   claimPoliciesLoaded$;
   isSelected: number;
 
@@ -42,9 +42,7 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
     // we get the BE part returning real categoryCode
     // we create dynamic content for FNOL page
     this.policyService.loadClaimPolicies('insurances_auto');
-    this.claimPolicies$ = this.store.pipe(
-      select(fromPolicyStore.getClaimPolicies)
-    );
+    this.claimData$ = this.store.pipe(select(fromPolicyStore.getClaimPolicies));
     this.claimPoliciesLoaded$ = this.store.pipe(
       select(fromPolicyStore.getClaimPoliciesLoaded)
     );

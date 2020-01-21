@@ -9,6 +9,7 @@ import * as fromClaimReducer from './claim.reducer';
 import * as fromPolicyReducer from './policy.reducer';
 import * as fromPremiumCalendarReducer from './premium-calendar.reducer';
 import * as fromQuoteReducer from './quote.reducer';
+import { AuthActions } from '@spartacus/core';
 
 export interface UserState {
   quotes: fromQuoteReducer.QuoteState;
@@ -41,3 +42,12 @@ export const getUserState: MemoizedSelector<
   any,
   UserState
 > = createFeatureSelector<UserState>('assets');
+
+export function cleanUserState(reducer) {
+  return function(state, action) {
+    if (action.type === AuthActions.LOGOUT) {
+      state = undefined;
+    }
+    return reducer(state, action);
+  };
+}

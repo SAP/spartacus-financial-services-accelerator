@@ -102,4 +102,4 @@ const routes: Routes = [
     CreateClaimComponent,
   ],
 })
-export class ClaimModule { }
+export class ClaimModule {}

@@ -16,6 +16,9 @@ import { QuoteModule } from './quote/quote.module';
 import { ClaimModule } from './claim/claim.module';
 import { PremiumCalendarModule } from './premium-calendar/premium-calendar.module';
 import { FSUpdateProfileComponent } from './update-profile/fs-update-profile.component';
+import { StoreModule } from '@ngrx/store';
+import { cleanUserState } from './../../core/my-account/store/reducers/index';
+import { getReducers } from '../../core/user-request/store';
 
 const routes: Routes = [
   {
@@ -103,6 +106,7 @@ const routes: Routes = [
     QuoteModule,
     ClaimModule,
     PremiumCalendarModule,
+    StoreModule.forRoot(getReducers(), { metaReducers: [cleanUserState] }),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         UpdateProfileComponent: {
