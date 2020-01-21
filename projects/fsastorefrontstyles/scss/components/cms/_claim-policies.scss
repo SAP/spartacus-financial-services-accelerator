@@ -7,14 +7,6 @@
       .container {
         max-width: 100%;
       }
-      .checkout-progress__heading {
-        margin: 2.5rem auto;
-        text-transform: uppercase;
-      }
-      .section-header__heading {
-        margin-bottom: 0;
-        flex: 1 1 100%;
-      }
     }
   }
   .Section2B {
@@ -27,19 +19,8 @@
       padding: 2rem 0 1rem;
       border-top: $border-grey;
     }
-  }
-}
-
-fsa-claim-policies {
-  border-bottom: none;
-  .cx-card-img-container .FSA-icon::before {
-    font-size: var(--cx-font-size, 48px);
-  }
-
-  & + fsa-cms-custom-container {
-    // classes and markup for this come from impexes, no way to change them to have pairity
-    padding-bottom: 65px;
-    margin-bottom: 40px;
-    border-top: none;
+    fsa-claim-policies + fsa-cms-custom-container {
+      margin-bottom: 2.5rem;
+    }
   }
 }
