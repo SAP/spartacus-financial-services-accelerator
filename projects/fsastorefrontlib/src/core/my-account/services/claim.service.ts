@@ -76,7 +76,7 @@ export class ClaimService {
     this.selectedPolicySource.next({ userId, policyId, contractId });
   }
 
-  resetPolicy() {
+  resetSelectedPolicy() {
     this.selectedPolicySource.next(null);
   }
 

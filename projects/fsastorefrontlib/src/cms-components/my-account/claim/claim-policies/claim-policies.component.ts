@@ -41,10 +41,6 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
   selectedIndex: number;
 
   ngOnInit() {
-    // Fixing insurances_auto until:
-    // we get the BE part returning real categoryCode
-    // we create dynamic content for FNOL page
-    this.policyService.loadClaimPolicies('insurances_auto');
     this.claimData$ = this.store.pipe(
       select(fromPolicyStore.getClaimPoliciesState)
     );
@@ -69,7 +65,7 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
             );
           } else {
             this.selectedPolicyId = undefined;
-            this.claimService.resetPolicy();
+            this.claimService.resetSelectedPolicy();
           }
         })
     );
