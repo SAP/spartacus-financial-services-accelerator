@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AuthService, CmsService, SearchConfig } from '@spartacus/core';
+import { SearchConfig } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { OccInboxAdapter } from './../../../occ/services/inbox/occ-inbox.adapter';
 import { InboxDataService, InboxTab } from './inbox-data.service';
@@ -8,8 +8,6 @@ import { InboxDataService, InboxTab } from './inbox-data.service';
 export class InboxService {
   constructor(
     private inboxData: InboxDataService,
-    protected auth: AuthService,
-    protected cmsService: CmsService,
     protected occInboxAdapter: OccInboxAdapter
   ) {}
 

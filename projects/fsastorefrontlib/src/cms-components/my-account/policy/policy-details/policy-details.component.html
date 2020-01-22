@@ -76,11 +76,11 @@
         </li>
       </ul>
     </fsa-accordion-item>
-    <ng-container
-      *ngIf="policy.insuredObjects && policy.insuredObjects.length > 0"
-    >
+    <ng-container *ngIf="policy.insuredObjectList?.insuredObjects?.length > 0">
       <fsa-accordion-item [title]="'fscommon.whoOrWhatIsInsured' | cxTranslate">
-        <ng-container *ngFor="let insuredObject of policy.insuredObjects">
+        <ng-container
+          *ngFor="let insuredObject of policy.insuredObjectList.insuredObjects"
+        >
           <ng-container
             *ngIf="
               insuredObject.insuredObjectItems &&
@@ -103,13 +103,14 @@
               </li>
               <ng-container
                 *ngIf="
-                  insuredObject.childInsuredObjects &&
-                  insuredObject.childInsuredObjects.length > 0
+                  insuredObject.childInsuredObjectList?.insuredObjects?.length >
+                  0
                 "
               >
                 <ng-container
                   *ngFor="
-                    let childInsuredObject of insuredObject.childInsuredObjects
+                    let childInsuredObject of insuredObject
+                      .childInsuredObjectList.insuredObjects
                   "
                 >
                   <ng-container

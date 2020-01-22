@@ -41,14 +41,6 @@ export class InboxComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription.add(
-      this.auth.getUserToken().subscribe(userData => {
-        if (this.inboxData.userId !== userData.userId) {
-          this.inboxData.userId = userData.userId;
-        }
-      })
-    );
-
-    this.subscription.add(
       this.componentData.data$.subscribe(data => {
         this.tabs =
           data && data.tabComponents ? data.tabComponents.split(' ') : [];

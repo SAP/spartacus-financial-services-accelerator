@@ -19,14 +19,6 @@ export const getPremiumCalendarData: MemoizedSelector<
   fromPremiumCalendar.getPremiumCalendarData
 );
 
-export const getPremiumCalendarRefresh: MemoizedSelector<
-  any,
-  boolean
-> = createSelector(
-  getPremiumCalendarState,
-  fromPremiumCalendar.getRefresh
-);
-
 export const getPremiumCalendarLoaded: MemoizedSelector<
   any,
   boolean

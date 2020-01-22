@@ -39,11 +39,7 @@ export class CreateClaimComponent implements OnInit, OnDestroy {
         .pipe(
           map(policy => {
             if (policy && policy.userId) {
-              this.claimService.createClaim(
-                policy.userId,
-                policy.policyId,
-                policy.contractId
-              );
+              this.claimService.createClaim(policy.policyId, policy.contractId);
               this.routingService.go({
                 cxRoute: 'fnolIncidentPage',
               });
