@@ -1,7 +1,7 @@
 @import '../mixins-fsa';
 @import '../theme';
 
-.InsuranceLandingPageTemplate {
+.LandingPageTemplate {
   .enriched-banner {
     &__text {
       padding: 2vw;
@@ -70,7 +70,7 @@
     }
   }
 
-  .Section2B {
+  .Section2 {
     cx-paragraph {
       color: var(--cx-color-text);
       width: 100%;
@@ -80,7 +80,7 @@
   }
 
   //Assistance and support section
-  .Section2C {
+  .Section4 {
     cx-banner {
       padding: 0 0 1.5rem;
       @include media-breakpoint-up(md) {
