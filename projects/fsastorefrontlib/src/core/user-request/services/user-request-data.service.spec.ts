@@ -7,8 +7,8 @@ import * as fromReducers from '../store/reducers/index';
 import * as fromReducer from '../store/reducers';
 import { UserRequestDataService } from './user-request-data.service';
 import * as fromActions from 'projects/fsastorefrontlib/src/core/user-request/store/actions';
-import {FSUserRequest} from '../../../occ/occ-models';
-import {USER_REQUEST_FEATURE} from '../store/user-request-state';
+import { FSUserRequest } from '../../../occ/occ-models';
+import { USER_REQUEST_FEATURE } from '../store/user-request-state';
 
 const userToken$ = new ReplaySubject<UserToken | any>();
 
@@ -51,7 +51,10 @@ describe('UserRequestDataService', () => {
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
-        StoreModule.forFeature(USER_REQUEST_FEATURE, fromReducers.getReducers()),
+        StoreModule.forFeature(
+          USER_REQUEST_FEATURE,
+          fromReducers.getReducers()
+        ),
       ],
       providers: [
         UserRequestDataService,
@@ -61,7 +64,9 @@ describe('UserRequestDataService', () => {
         },
       ],
     });
-    service = TestBed.get(UserRequestDataService as Type<UserRequestDataService>);
+    service = TestBed.get(UserRequestDataService as Type<
+      UserRequestDataService
+    >);
     store = TestBed.get(Store as Type<Store<fromReducer.FSUserRequestState>>);
   });
 

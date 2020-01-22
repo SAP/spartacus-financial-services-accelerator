@@ -12,14 +12,14 @@ module.exports = function(config) {
       require('karma-coverage-istanbul-reporter'),
       require('@angular-devkit/build-angular/plugins/karma'),
     ],
-     browserConsoleLogOptions: {
+    browserConsoleLogOptions: {
       level: 'log',
-      terminal: true
+      terminal: true,
     },
     client: {
       captureConsole: true,
       mocha: {
-        bail: true
+        bail: true,
       },
       clearContext: false, // leave Jasmine Spec Runner output visible in browser
     },

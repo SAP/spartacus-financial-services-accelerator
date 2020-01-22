@@ -64,7 +64,7 @@ describe('AgentSearchService', () => {
             callback({ coords: longitudeLatitude });
             return geolocationWatchId;
           },
-          clearWatch: () => { },
+          clearWatch: () => {},
         },
       },
     },
@@ -113,7 +113,7 @@ describe('AgentSearchService', () => {
       .subscribe(result => (agentResult = result))
       .unsubscribe();
     expect(agentResult).toBeTruthy();
-    expect(agentResult).toBe(testAgent2);
+    expect(agentResult).toBe(testAgent1);
   });
 
   it('should set agent', () => {
@@ -124,7 +124,7 @@ describe('AgentSearchService', () => {
   it('should fetch agents by search query', () => {
     service.search(queryText, 0);
     let tempSearchResult = {
-      agents: []
+      agents: [],
     };
     service
       .getResults()
@@ -135,12 +135,14 @@ describe('AgentSearchService', () => {
   });
 
   it('should not return agents', () => {
-    spyOn(mockOccAgentAdapter, 'getAgentsByQuery').and.returnValue(of({
-      agents: [],
-    }));
+    spyOn(mockOccAgentAdapter, 'getAgentsByQuery').and.returnValue(
+      of({
+        agents: [],
+      })
+    );
     service.search(queryTextNoResults, 0);
     let tempSearchResult = {
-      agents: []
+      agents: [],
     };
     service
       .getResults()
@@ -149,5 +151,4 @@ describe('AgentSearchService', () => {
     expect(tempSearchResult.agents.length).toEqual(0);
     expect(service.agents).toBeTruthy();
   });
-
 });
