@@ -76,6 +76,10 @@ export class ClaimService {
     this.selectedPolicySource.next({ userId, policyId, contractId });
   }
 
+  resetSelectedPolicy() {
+    this.selectedPolicySource.next(null);
+  }
+
   createClaim(userId: string, policyId: string, contractId: string) {
     this.store.dispatch(
       new fromAction.CreateClaim({
