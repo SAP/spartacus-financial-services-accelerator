@@ -76,7 +76,7 @@ const routes: Routes = [
           component: ClaimPoliciesComponent,
           guards: [AuthGuard],
         },
-        StartClaimComponentFlex: {
+        StartClaimFlex: {
           component: CreateClaimComponent,
           guards: [AuthGuard],
         },
