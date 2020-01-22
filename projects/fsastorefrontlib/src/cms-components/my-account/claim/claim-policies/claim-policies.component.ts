@@ -4,15 +4,15 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { select, Store } from '@ngrx/store';
+import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService, OccConfig, TranslationService } from '@spartacus/core';
+import { Card } from '@spartacus/storefront';
 import { Subscription, Observable, combineLatest } from 'rxjs';
 import { take, map } from 'rxjs/operators';
+import { select, Store } from '@ngrx/store';
 import { ClaimService } from '../../../../core/my-account/services';
 import * as fromPolicyStore from '../../../../core/my-account/store';
-import { DomSanitizer } from '@angular/platform-browser';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
-import { Card } from '@spartacus/storefront';
 
 @Component({
   selector: 'fsa-claim-policies',
