@@ -5,12 +5,12 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
-import { ClaimService } from '../../../../core/my-account/services';
-import { Store } from '@ngrx/store';
-import * as fromUserRequestStore from '../../../../core/user-request/store/reducers';
 import { Subscription, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
 import { SelectedPolicy } from '../../../../core/my-account/services/claim-data.service';
+import { ClaimService } from '../../../../core/my-account/services';
+import * as fromUserRequestStore from '../../../../core/user-request/store/reducers';
 
 @Component({
   selector: 'fsa-create-claim',
