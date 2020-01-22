@@ -132,4 +132,16 @@ describe('ClaimServiceTest', () => {
       contractId: contractId,
     });
   });
+
+  it('should be able to reset selected policy', () => {
+    service.resetSelectedPolicy();
+    let selectedPolicy;
+    service
+      .getSelectedPolicy()
+      .subscribe(policy => {
+        selectedPolicy = policy;
+      })
+      .unsubscribe();
+    expect(selectedPolicy).toEqual(null);
+  });
 });

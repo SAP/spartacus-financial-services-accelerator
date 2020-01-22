@@ -43,11 +43,17 @@ export class ClaimService {
       })
     );
   }
+
   getSelectedPolicy() {
     return this.selectedPolicy;
   }
+
   setSelectedPolicy(userId: string, policyId: string, contractId: string) {
     this.selectedPolicySource.next({ userId, policyId, contractId });
+  }
+
+  resetSelectedPolicy() {
+    this.selectedPolicySource.next(null);
   }
 
   createClaim(policyId: string, contractId: string) {

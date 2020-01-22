@@ -4,6 +4,7 @@ import {
   createFeatureSelector,
   MemoizedSelector,
 } from '@ngrx/store';
+import { AuthActions } from '@spartacus/core';
 import * as fromClaimPoliciesReducer from './claim-policies.reducer';
 import * as fromClaimReducer from './claim.reducer';
 import * as fromPolicyReducer from './policy.reducer';
@@ -41,3 +42,12 @@ export const getUserState: MemoizedSelector<
   any,
   UserState
 > = createFeatureSelector<UserState>('assets');
+
+export function cleanUserState(reducer) {
+  return function(state, action) {
+    if (action.type === AuthActions.LOGOUT) {
+      state = undefined;
+    }
+    return reducer(state, action);
+  };
+}

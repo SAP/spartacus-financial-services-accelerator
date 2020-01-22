@@ -48,10 +48,6 @@
 }
 .notice {
   color: var(--cx-color-primary);
-  font-weight: bold;
-  &--dark {
-    color: var(--cx-color-8);
-  }
 }
 .notification {
   background: var(--cx-color-warning);
