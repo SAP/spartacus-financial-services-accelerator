@@ -38,10 +38,6 @@ export class UserRequestDataService {
     this._userId = val;
   }
 
-  hasUserRequest(): boolean {
-    return !!this.userRequest;
-  }
-
   get userId(): string {
     return this._userId;
   }
@@ -51,7 +47,7 @@ export class UserRequestDataService {
   }
 
   get requestId(): string {
-    if (this.hasUserRequest) {
+    if (!!this.userRequest) {
       return this.userRequest.requestId;
     }
   }
