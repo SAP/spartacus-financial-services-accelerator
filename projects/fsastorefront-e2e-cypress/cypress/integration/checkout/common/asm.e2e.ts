@@ -16,7 +16,7 @@ context('ASM', () => {
 
   it('should register a new user', () => {
     register.registerUser(registrationUserWithoutPhone);
-    cy.wait(3000);
+    cy.wait(1500);
     register.login(
       registrationUserWithoutPhone.email,
       registrationUserWithoutPhone.password

@@ -18,13 +18,14 @@ context('Consent Management', () => {
     cy.get('.register')
       .findByText('Register')
       .click({ force: true });
-    consentManagement.checkConsentCheckboxIsSelected();
+    cy.get('input[type="checkbox"]')
+      .first()
+      .should('be.checked');
   });
 
   it('should register a new user', () => {
     register.registerUser(registrationUserWithoutPhone);
     cy.wait(3000);
-    cy.wait(1500);
     register.login(
       registrationUserWithoutPhone.email,
       registrationUserWithoutPhone.password
@@ -37,6 +38,8 @@ context('Consent Management', () => {
       menuOption: 'My Account',
       dropdownItem: 'Consent Management',
     });
-    consentManagement.checkConsentCheckboxIsSelected();
+    cy.get('input[type="checkbox"]')
+      .first()
+      .should('be.checked');
   });
 });
