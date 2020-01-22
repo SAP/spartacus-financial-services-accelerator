@@ -78,7 +78,7 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should start a claim checkout from homepage', () => {
-    cy.get('cx-page-slot.SiteLogo').click();
+    cy.get('.SiteLogo').click();
 
     fnol.startClaimFromHomepage();
     fnol.checkFnolEntryPage();
