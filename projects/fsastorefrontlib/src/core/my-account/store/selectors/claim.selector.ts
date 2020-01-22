@@ -16,11 +16,6 @@ export const getClaims: MemoizedSelector<any, any> = createSelector(
   fromClaim.getClaims
 );
 
-export const getClaimsRefresh: MemoizedSelector<any, boolean> = createSelector(
-  getClaimsState,
-  fromClaim.getRefresh
-);
-
 export const getClaimsLoaded: MemoizedSelector<any, boolean> = createSelector(
   getClaimsState,
   fromClaim.getLoaded

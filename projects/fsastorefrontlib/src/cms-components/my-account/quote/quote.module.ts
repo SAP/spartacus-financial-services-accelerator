@@ -17,7 +17,6 @@ import {
 
 import { QuotesComponent } from './quotes/quotes.component';
 import { QuoteService } from '../../../core/my-account/services/quote.service';
-import { QuoteDataService } from '../../../core/my-account/services/quote-data.service';
 import { OccQuoteAdapter } from '../../../occ/services/quote/occ-quote.adapter';
 
 const routes: Routes = [
@@ -51,7 +50,7 @@ const routes: Routes = [
   ],
   declarations: [QuotesComponent],
   exports: [QuotesComponent],
-  providers: [QuoteService, QuoteDataService, OccQuoteAdapter],
+  providers: [QuoteService, OccQuoteAdapter],
   entryComponents: [QuotesComponent],
 })
 export class QuoteModule {}
