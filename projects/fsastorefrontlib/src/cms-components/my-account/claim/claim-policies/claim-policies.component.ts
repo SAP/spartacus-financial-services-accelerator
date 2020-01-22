@@ -8,10 +8,7 @@ import { select, Store } from '@ngrx/store';
 import { AuthService, OccConfig, TranslationService } from '@spartacus/core';
 import { Subscription, Observable, combineLatest } from 'rxjs';
 import { take, map } from 'rxjs/operators';
-import {
-  ClaimService,
-  PolicyService,
-} from '../../../../core/my-account/services';
+import { ClaimService } from '../../../../core/my-account/services';
 import * as fromPolicyStore from '../../../../core/my-account/store';
 import { DomSanitizer } from '@angular/platform-browser';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
@@ -25,7 +22,6 @@ import { Card } from '@spartacus/storefront';
 export class ClaimPoliciesComponent implements OnInit, OnDestroy {
   constructor(
     protected store: Store<fromPolicyStore.UserState>,
-    protected policyService: PolicyService,
     protected claimService: ClaimService,
     protected config: OccConfig,
     protected authService: AuthService,
