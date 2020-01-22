@@ -5,10 +5,10 @@ import { Store, StoreModule } from '@ngrx/store';
 import { Observable, ReplaySubject } from 'rxjs';
 import * as fromReducers from '../store/reducers/index';
 import * as fromReducer from '../store/reducers';
-import { FSUserRequest } from './../../../occ/occ-models/occ.models';
-import { USER_REQUEST_FEATURE } from './../store/user-request-state';
 import { UserRequestDataService } from './user-request-data.service';
 import * as fromActions from 'projects/fsastorefrontlib/src/core/user-request/store/actions';
+import {FSUserRequest} from '../../../occ/occ-models';
+import {USER_REQUEST_FEATURE} from '../store/user-request-state';
 
 const userToken$ = new ReplaySubject<UserToken | any>();
 
