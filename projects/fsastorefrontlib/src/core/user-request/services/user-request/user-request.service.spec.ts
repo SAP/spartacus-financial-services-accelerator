@@ -103,7 +103,7 @@ describe('UserRequestServiceTest', () => {
 
   it('should set form data after loading user request', () => {
     const userRequest: FSUserRequest = {
-      configurationSteps: [{ yformConfigurator: {id: 'id'} }],
+      configurationSteps: [{ yformConfigurator: { id: 'id' } }],
     };
     service.loadUserRequestFormData(userRequest);
     let formDataValue = null;
@@ -111,6 +111,7 @@ describe('UserRequestServiceTest', () => {
       formDataValue = formData;
     });
     expect(formDataValue).not.toBeNull();
+    expect(formDataValue).toBe(formId);
   });
 
   it('should not set from data after loading user request', () => {
