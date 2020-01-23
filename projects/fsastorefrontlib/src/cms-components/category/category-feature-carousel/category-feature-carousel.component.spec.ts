@@ -6,7 +6,7 @@ import {
 } from '../../../occ/occ-models';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of } from 'rxjs';
-import { Component, Input, Directive, Type } from '@angular/core';
+import { Component, Input, Directive } from '@angular/core';
 import { CmsService, ContentSlotComponentData } from '@spartacus/core';
 
 @Component({
