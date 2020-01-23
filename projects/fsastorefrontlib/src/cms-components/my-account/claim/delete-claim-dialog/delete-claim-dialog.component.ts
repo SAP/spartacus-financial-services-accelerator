@@ -39,9 +39,11 @@ export class DeleteClaimDialogComponent implements OnInit {
     this.authService
       .getOccUserId()
       .pipe(take(1))
-      .subscribe(occUserId =>
-        this.service.removeClaim(occUserId, this.claimNumber)
-      )
+      .subscribe(occUserId => {
+        if (occUserId) {
+          this.service.removeClaim(occUserId, this.claimNumber);
+        }
+      })
       .unsubscribe();
   }
 }

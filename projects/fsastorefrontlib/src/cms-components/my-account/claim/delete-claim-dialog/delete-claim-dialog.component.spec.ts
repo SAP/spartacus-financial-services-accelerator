@@ -74,8 +74,8 @@ describe('DeleteClaimDialogComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DeleteClaimDialogComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
     claimService = TestBed.get(ClaimService as Type<ClaimService>);
+    fixture.detectChanges();
   });
 
   it('should create delete claim popup', () => {
@@ -87,7 +87,6 @@ describe('DeleteClaimDialogComponent', () => {
 
   it('should be able to delete claim', () => {
     spyOn(claimService, 'removeClaim').and.stub();
-    fixture.detectChanges();
     component.deleteClaim();
     expect(claimService.removeClaim).toHaveBeenCalled();
   });

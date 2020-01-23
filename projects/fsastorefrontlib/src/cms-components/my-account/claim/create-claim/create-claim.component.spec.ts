@@ -68,7 +68,6 @@ describe('CreateClaimComponent', () => {
   it('should start claim', () => {
     selectedPolicy.next(mockSelectedPolicy);
     fixture.detectChanges();
-
     component.startClaim();
 
     expect(mockClaimService.createClaim).toHaveBeenCalledWith(
