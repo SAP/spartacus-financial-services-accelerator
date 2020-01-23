@@ -72,7 +72,7 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
     );
   }
 
-  cardContent(idx, cardObject): Observable<Card> {
+  cardContent(idx, cardValue): Observable<Card> {
     return combineLatest([
       this.translation.translate('policy.policy'),
       this.translation.translate('claim.vehicleMake'),
@@ -81,7 +81,7 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
       this.translation.translate('paymentCard.selected'),
     ]).pipe(
       map(([policy, vahicleMake, vehicleModel, commonSelect, selected]) => {
-        return this.createCard(idx, cardObject, {
+        return this.createCard(idx, cardValue, {
           policy,
           vahicleMake,
           vehicleModel,
