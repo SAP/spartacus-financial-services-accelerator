@@ -17,7 +17,6 @@ import { UserRequestService } from './../../../../core/user-request/services/use
 import { genericIcons } from '../../../../assets/icons/generic-icons';
 import { ClaimService } from '../../../../core/my-account/services';
 
-
 @Component({
   selector: 'fsa-claims',
   templateUrl: './claims.component.html',
