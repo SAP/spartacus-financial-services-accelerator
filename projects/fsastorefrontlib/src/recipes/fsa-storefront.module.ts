@@ -17,7 +17,6 @@ import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa
 import { fsaOccProductConfig } from '../occ/services/default-occ-fsa-product-config';
 import { fstranslationsDe } from '../assets/translations/index_de';
 import { fsOverrides } from '../assets/translations/index';
-import { categoryIcons } from '../assets/icons/generic-icons';
 
 @NgModule({
   imports: [
@@ -58,7 +57,11 @@ import { categoryIcons } from '../assets/icons/generic-icons';
     ConfigModule.withConfig({
       icon: {
         symbols: {
-          ...categoryIcons,
+          PROPERTY: 'FSA-icon icon-FSA-house',
+          AUTO: 'FSA-icon icon-FSA-auto',
+          PERSON: 'FSA-icon icon-FSA-heart',
+          TRIP: 'FSA-icon icon-FSA-plane',
+          EVENT: 'FSA-icon icon-FSA-event',
         },
       },
     }),
