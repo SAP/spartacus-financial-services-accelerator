@@ -72,7 +72,7 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
     );
   }
 
-  cardContent(idx, cardValue): Observable<Card> {
+  cardContent(idx, cardObject): Observable<Card> {
     return combineLatest([
       this.translation.translate('policy.policy'),
       this.translation.translate('claim.vehicleMake'),
@@ -81,7 +81,7 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
       this.translation.translate('paymentCard.selected'),
     ]).pipe(
       map(([policy, vahicleMake, vehicleModel, commonSelect, selected]) => {
-        return this.createCard(idx, cardValue, {
+        return this.createCard(idx, cardObject, {
           policy,
           vahicleMake,
           vehicleModel,
@@ -92,24 +92,25 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
     );
   }
 
-  createCard(idx, cardValue, cardObject) {
+  createCard(idx, cardObject, cardContent) {
     return {
       header:
         this.selectedIndex === idx && this.selectedPolicyId
-          ? cardObject.selected
+          ? cardContent.selected
           : undefined,
-      textBold: `${cardValue.categoryData.name} ${cardObject.policy}`,
+      textBold: `${cardObject.categoryData.name} ${cardContent.policy}`,
       text: [
-        `${cardObject.vahicleMake}: ${cardValue.insuredObjectList.insuredObjects[0].insuredObjectItems[0].value}`,
-        `${cardObject.vehicleModel}: ${cardValue.insuredObjectList.insuredObjects[0].insuredObjectItems[1].value}`,
+        `${cardContent.vahicleMake}: ${cardObject.insuredObjectList.insuredObjects[0].insuredObjectItems[0].value}`,
+        `${cardContent.vehicleModel}: ${cardObject.insuredObjectList.insuredObjects[0].insuredObjectItems[1].value}`,
       ],
-      img: cardValue.insuredObjectList.insuredObjects[0].insuredObjectType.code,
+      img:
+        cardObject.insuredObjectList.insuredObjects[0].insuredObjectType.code,
       actions: [
         {
           name:
             this.selectedIndex === idx && this.selectedPolicyId
-              ? cardObject.selected
-              : cardObject.commonSelect,
+              ? cardContent.selected
+              : cardContent.commonSelect,
           event: 'send',
         },
       ],
