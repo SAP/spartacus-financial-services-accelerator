@@ -34,20 +34,18 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
 
   claimData$;
-  claimPoliciesLoaded$;
   selectedPolicyId;
   selectedIndex: number;
 
   ngOnInit() {
-    // TODO: handle loading claims for every category
-    this.policyService.loadClaimPolicies('insurances_auto');
-
     this.claimData$ = this.store.pipe(
       select(fromPolicyStore.getClaimPoliciesState)
     );
-    this.claimPoliciesLoaded$ = this.store.pipe(
-      select(fromPolicyStore.getClaimPoliciesLoaded)
-    );
+    this.claimData$.subscribe(claimData => {
+      if (!claimData.loaded) {
+        this.policyService.loadClaimPolicies('insurances_auto');
+      }
+    });
   }
 
   selectPolicy(index, policyId, contractId) {
