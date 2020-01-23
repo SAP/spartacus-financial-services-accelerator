@@ -11,6 +11,7 @@ import { Subscription, Observable, combineLatest } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { ClaimService } from '../../../../core/my-account/services';
+import { PolicyService } from '../../../../core/my-account/services';
 import * as fromPolicyStore from '../../../../core/my-account/store';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
 
@@ -26,7 +27,8 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
     protected config: OccConfig,
     protected authService: AuthService,
     protected domSanitizer: DomSanitizer,
-    protected translation: TranslationService
+    protected translation: TranslationService,
+    protected policyService: PolicyService
   ) {}
 
   subscription = new Subscription();
@@ -37,6 +39,9 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
   selectedIndex: number;
 
   ngOnInit() {
+    // TODO: handle loading claims for every category
+    this.policyService.loadClaimPolicies('insurances_auto');
+
     this.claimData$ = this.store.pipe(
       select(fromPolicyStore.getClaimPoliciesState)
     );
