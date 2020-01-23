@@ -17,7 +17,9 @@ export class QuoteEffects {
         map((quotes: any) => {
           return new fromActions.LoadQuotesSuccess(quotes);
         }),
-        catchError(error => of(new fromActions.LoadQuotesFail(error)))
+        catchError(error =>
+          of(new fromActions.LoadQuotesFail(JSON.stringify(error)))
+        )
       );
     })
   );
@@ -27,13 +29,17 @@ export class QuoteEffects {
     ofType(fromActions.UPDATE_QUOTE),
     map((action: fromActions.UpdateQuote) => action.payload),
     switchMap(payload => {
+      console.log(payload);
       return this.quoteAdapter
         .updateQuote(payload.userId, payload.cartId, payload.quoteContent)
         .pipe(
-          map((quotes: any) => {
-            return new fromActions.UpdateQuoteSuccess(quotes);
+          map((quote: any) => {
+            console.log(quote);
+            return new fromActions.UpdateQuoteSuccess(quote);
           }),
-          catchError(error => of(new fromActions.UpdateQuoteFail(error)))
+          catchError(error =>
+            of(new fromActions.UpdateQuoteFail(JSON.stringify(error)))
+          )
         );
     })
   );
@@ -52,7 +58,9 @@ export class QuoteEffects {
             }),
           ];
         }),
-        catchError(error => of(new fromActions.UpdateQuoteFail(error)))
+        catchError(error =>
+          of(new fromActions.UpdateQuoteFail(JSON.stringify(error)))
+        )
       );
     })
   );
