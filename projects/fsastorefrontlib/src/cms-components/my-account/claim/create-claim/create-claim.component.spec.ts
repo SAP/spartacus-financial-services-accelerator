@@ -30,7 +30,7 @@ const mockSelectedPolicy: SelectedPolicy = {
   contractId: 'testContract',
 };
 
-describe('AddOptionsComponent', () => {
+describe('CreateClaimComponent', () => {
   let component: CreateClaimComponent;
   let fixture: ComponentFixture<CreateClaimComponent>;
   let mockClaimService: MockClaimService;
