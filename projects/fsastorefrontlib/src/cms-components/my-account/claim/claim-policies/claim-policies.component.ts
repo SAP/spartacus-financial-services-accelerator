@@ -98,7 +98,7 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
         `${cardObject.vahicleMake}: ${cardValue.insuredObjectList.insuredObjects[0].insuredObjectItems[0].value}`,
         `${cardObject.vehicleModel}: ${cardValue.insuredObjectList.insuredObjects[0].insuredObjectItems[1].value}`,
       ],
-      img: cardValue.mainProduct.coverageProduct.images[1].url,
+      img: cardValue.insuredObjectList.insuredObjects[0].insuredObjectType.code,
       actions: [
         {
           name:
