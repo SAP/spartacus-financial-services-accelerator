@@ -42,7 +42,7 @@ export class UserRequestDataService {
   }
 
   get requestId(): string {
-    if (!!this.userRequest) {
+    if (!!this._userRequest) {
       return this.userRequest.requestId;
     }
   }
