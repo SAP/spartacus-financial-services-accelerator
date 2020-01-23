@@ -16,6 +16,7 @@ import { UserState } from './../../../../core/my-account/store/reducers/index';
 import { UserRequestService } from './../../../../core/user-request/services/user-request/user-request.service';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
 import { ClaimService } from '../../../../core/my-account/services';
+import { getRefresh } from 'fsastorefrontlib/core/my-account/store/reducers/claim.reducer';
 
 @Component({
   selector: 'fsa-claims',
@@ -41,6 +42,15 @@ export class ClaimsComponent implements OnInit, OnDestroy {
     this.claimService.loadClaims();
     this.claims$ = this.claimService.getClaims();
     this.claimsLoaded$ = this.claimService.getLoaded();
+
+    this.subscription.add(
+      this.claimService.shouldReload().subscribe(reload => {
+        console.log(reload);
+        if (reload) {
+          this.claimService.loadClaims();
+        }
+      })
+    );
   }
 
   deleteClaim(claimNumber: string) {

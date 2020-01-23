@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CategoryFeatureComponent } from './category-feature.component';
-import { Component, Input, PipeTransform, Pipe, Type } from '@angular/core';
+import { Component, Input, PipeTransform, Pipe } from '@angular/core';
 import {
   CmsCategoryFeatureComponent,
   CmsComponent,
@@ -51,7 +51,6 @@ const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
 describe('CategoryFeatureComponent', () => {
   let component: CategoryFeatureComponent;
   let fixture: ComponentFixture<CategoryFeatureComponent>;
-  let cmsService: CmsService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -73,7 +72,6 @@ describe('CategoryFeatureComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CategoryFeatureComponent);
     component = fixture.componentInstance;
-    cmsService = TestBed.get(CmsService as Type<CmsService>);
     fixture.detectChanges();
   });
 

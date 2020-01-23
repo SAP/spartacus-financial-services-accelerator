@@ -6,7 +6,7 @@ import {
 } from '../../../occ/occ-models';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of } from 'rxjs';
-import { Component, Input, Directive } from '@angular/core';
+import { Component, Input, Directive, Type } from '@angular/core';
 import { CmsService, ContentSlotComponentData } from '@spartacus/core';
 
 @Component({
@@ -38,6 +38,7 @@ class MockCmsService {
 describe('CategoryCarouselComponent', () => {
   let component: CategoryFeatureCarouselComponent;
   let fixture: ComponentFixture<CategoryFeatureCarouselComponent>;
+  let mockCmsService;
 
   const componentData: CmsCategoryFeatureCarouselComponent = {
     uid: 'TestCmsCategoryFeatureCarouselComponent',
@@ -52,6 +53,7 @@ describe('CategoryCarouselComponent', () => {
   };
 
   beforeEach(async(() => {
+    mockCmsService = new MockCmsService();
     TestBed.configureTestingModule({
       declarations: [
         CategoryFeatureCarouselComponent,
@@ -65,7 +67,7 @@ describe('CategoryCarouselComponent', () => {
         },
         {
           provide: CmsService,
-          useValue: MockCmsService,
+          useValue: mockCmsService,
         },
       ],
     }).compileComponents();
@@ -74,6 +76,7 @@ describe('CategoryCarouselComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CategoryFeatureCarouselComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should create', () => {

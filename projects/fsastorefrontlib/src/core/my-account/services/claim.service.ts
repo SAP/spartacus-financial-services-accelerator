@@ -35,6 +35,10 @@ export class ClaimService {
     );
   }
 
+  shouldReload() {
+    return this.store.pipe(select(fromClaimStore.getClaimsRefresh));
+  }
+
   removeClaim(userId: string, claimId: string) {
     this.store.dispatch(
       new fromAction.DeleteClaim({
