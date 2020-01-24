@@ -5,7 +5,7 @@ import * as buttons from '../../../helpers/checkout/buttons';
 
 context('FNOL for sample data user', () => {
   before(() => {
-    cy.visit('/');
+    cy.visit('/login');
     register.login(donnaMooreUser.email, donnaMooreUser.password);
     cy.wait(1000);
   });

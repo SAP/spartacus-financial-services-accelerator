@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import { RoutingConfigService, RoutingService } from '@spartacus/core';
+import { RoutingService } from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
 import { FSStepData } from '../../../../occ/occ-models';
 
 @Injectable()
 export class UserRequestNavigationService {
   configurationSteps: FSStepData[];
-  activeStepIndex: number;
 
   constructor(
-    protected routingConfigService: RoutingConfigService,
     protected activatedRoute: ActivatedRoute,
     protected routingService: RoutingService
   ) {}

@@ -11,6 +11,7 @@ import { Subscription, Observable, combineLatest } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { ClaimService } from '../../../../core/my-account/services';
+import { PolicyService } from '../../../../core/my-account/services';
 import * as fromPolicyStore from '../../../../core/my-account/store';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
 
@@ -26,12 +27,13 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
     protected config: OccConfig,
     protected authService: AuthService,
     protected domSanitizer: DomSanitizer,
-    protected translation: TranslationService
+    protected translation: TranslationService,
+    protected policyService: PolicyService
   ) {}
 
   subscription = new Subscription();
 
-  claimData$;
+  claimData$: Observable<any>;
   claimPoliciesLoaded$;
   selectedPolicyId;
   selectedIndex: number;
@@ -40,8 +42,16 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
     this.claimData$ = this.store.pipe(
       select(fromPolicyStore.getClaimPoliciesState)
     );
-    this.claimPoliciesLoaded$ = this.store.pipe(
-      select(fromPolicyStore.getClaimPoliciesLoaded)
+    this.subscription.add(
+      this.claimData$
+        .pipe(
+          map(claimData => {
+            if (!claimData.loaded) {
+              this.policyService.loadClaimPolicies('insurances_auto');
+            }
+          })
+        )
+        .subscribe()
     );
   }
 
@@ -87,24 +97,25 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
     );
   }
 
-  createCard(idx, cardValue, cardObject) {
+  createCard(idx, cardObject, cardContent) {
     return {
       header:
         this.selectedIndex === idx && this.selectedPolicyId
-          ? cardObject.selected
+          ? cardContent.selected
           : undefined,
-      textBold: `${cardValue.categoryData.name} ${cardObject.policy}`,
+      textBold: `${cardObject.categoryData.name} ${cardContent.policy}`,
       text: [
-        `${cardObject.vahicleMake}: ${cardValue.insuredObjectList.insuredObjects[0].insuredObjectItems[0].value}`,
-        `${cardObject.vehicleModel}: ${cardValue.insuredObjectList.insuredObjects[0].insuredObjectItems[1].value}`,
+        `${cardContent.vahicleMake}: ${cardObject.insuredObjectList.insuredObjects[0].insuredObjectItems[0].value}`,
+        `${cardContent.vehicleModel}: ${cardObject.insuredObjectList.insuredObjects[0].insuredObjectItems[1].value}`,
       ],
-      img: cardValue.insuredObjectList.insuredObjects[0].insuredObjectType.code,
+      img:
+        cardObject.insuredObjectList.insuredObjects[0].insuredObjectType.code,
       actions: [
         {
           name:
             this.selectedIndex === idx && this.selectedPolicyId
-              ? cardObject.selected
-              : cardObject.commonSelect,
+              ? cardContent.selected
+              : cardContent.commonSelect,
           event: 'send',
         },
       ],
