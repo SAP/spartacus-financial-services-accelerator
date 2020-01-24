@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormDataService } from '@fsa/dynamicforms';
-import { select, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import {
   AuthService,
   CartActions,
@@ -10,67 +10,44 @@ import {
 import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
-import * as fromSelector from '../store/selectors';
-import { QuoteDataService } from './quote-data.service';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 
 @Injectable()
 export class QuoteService {
   constructor(
     protected store: Store<fromReducer.UserState>,
-    protected quoteData: QuoteDataService,
     protected cartService: CartService,
-    protected auth: AuthService,
+    protected authService: AuthService,
     protected formDataService: FormDataService
-  ) {
-    this.initQuotes();
-  }
-
-  callback: Function;
-
-  initQuotes() {
-    this.store.pipe(select(fromSelector.getQuotes)).subscribe(quotes => {
-      if (quotes) {
-        this.quoteData.quotes = quotes;
-      }
-      if (this.callback) {
-        this.callback();
-        this.callback = null;
-      }
-    });
-
-    this.auth.getUserToken().subscribe(userData => {
-      if (this.quoteData.userId !== userData.userId) {
-        this.quoteData.userId = userData.userId;
-      }
-    });
-
-    this.store.pipe(select(fromSelector.getQuoteRefresh)).subscribe(refresh => {
-      if (refresh) {
-        this.store.dispatch(
-          new fromAction.LoadQuotes({
-            userId: this.quoteData.userId,
-          })
-        );
-      }
-    });
-  }
+  ) {}
 
   loadQuotes() {
-    this.store.dispatch(
-      new fromAction.LoadQuotes({
-        userId: this.quoteData.userId,
-      })
-    );
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.LoadQuotes({
+            userId: occUserId,
+          })
+        )
+      )
+      .unsubscribe();
   }
 
   retrieveQuote(quote: any) {
-    this.store.dispatch(
-      new CartActions.LoadCart({
-        cartId: quote.cartCode,
-        userId: this.quoteData.userId,
-      })
-    );
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new CartActions.LoadCart({
+            cartId: quote.cartCode,
+            userId: occUserId,
+          })
+        )
+      )
+      .unsubscribe();
 
     this.cartService.getActive().subscribe((cart: FSCart) => {
       if (
@@ -127,11 +104,17 @@ export class QuoteService {
   }
 
   bindQuote(cartId: string) {
-    this.store.dispatch(
-      new fromAction.BindQuote({
-        userId: this.quoteData.userId,
-        cartId: cartId,
-      })
-    );
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.BindQuote({
+            userId: occUserId,
+            cartId: cartId,
+          })
+        )
+      )
+      .unsubscribe();
   }
 }

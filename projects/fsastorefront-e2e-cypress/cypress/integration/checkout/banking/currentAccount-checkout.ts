@@ -35,6 +35,7 @@ context('Current AccountCheckout', () => {
   });
 
   it('Should check optional products for Current Account', () => {
+    cy.wait(1500);
     addOptionsPage.checkAddOptionsPage();
     currentAccount.checkOptionalProductsAddTransactionChest();
   });
@@ -42,7 +43,7 @@ context('Current AccountCheckout', () => {
   it('Should register user in checkout', () => {
     register.populateRegistrationForm(registrationUser);
     cy.wait(3000);
-    register.loginInCheckout(registrationUser.email, registrationUser.password);
+    register.loginInUser(registrationUser.email, registrationUser.password);
     cy.wait(1500);
   });
 

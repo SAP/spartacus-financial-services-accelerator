@@ -7,6 +7,8 @@ import { PolicyService } from '../../../../core/my-account/services';
 
 class MockPolicyService {
   loadPolicyDetails(policyId: string, contractId: string): void {}
+
+  getPolicies() {}
 }
 
 class MockRoutingService {

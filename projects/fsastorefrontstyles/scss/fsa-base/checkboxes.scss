@@ -1,6 +1,15 @@
 @import '../mixins-fsa';
 @import '../theme';
 
+input[type='checkbox'],
+input[type='radio'] {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.form-check input[type='checkbox']:checked {
+  border-color: var(--cx-color-primary);
+  background-color: var(--cx-color-primary);
+}
 .checkbox-label {
   padding-left: 28px;
   position: relative;
@@ -34,8 +43,4 @@
       color: transparent;
     }
   }
-}
-.form-check input[type='checkbox']:checked {
-  border-color: var(--cx-color-primary);
-  background-color: var(--cx-color-primary);
 }

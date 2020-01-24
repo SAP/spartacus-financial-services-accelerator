@@ -12,7 +12,6 @@ import * as fromPolicyReducer from './policy.reducer';
 import * as fromPremiumCalendarReducer from './premium-calendar.reducer';
 import * as fromQuoteReducer from './quote.reducer';
 import { AuthActions } from '@spartacus/core';
-
 export interface UserState {
   quotes: fromQuoteReducer.QuoteState;
   policies: fromPolicyReducer.PolicyState;
@@ -20,7 +19,6 @@ export interface UserState {
   claims: fromClaimReducer.ClaimState;
   claimPolicies: fromClaimPoliciesReducer.ClaimPoliciesState;
 }
-
 export function getReducers(): ActionReducerMap<UserState> {
   return {
     quotes: fromQuoteReducer.reducer,
@@ -30,21 +28,17 @@ export function getReducers(): ActionReducerMap<UserState> {
     claimPolicies: fromClaimPoliciesReducer.reducer,
   };
 }
-
 export const reducerToken: InjectionToken<
   ActionReducerMap<UserState>
 > = new InjectionToken<ActionReducerMap<UserState>>('UserReducers');
-
 export const reducerProvider: Provider = {
   provide: reducerToken,
   useFactory: getReducers,
 };
-
 export const getUserState: MemoizedSelector<
   any,
   UserState
 > = createFeatureSelector<UserState>('assets');
-
 export function clearUserState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
@@ -55,5 +49,4 @@ export function clearUserState(
     return reducer(state, action);
   };
 }
-
 export const metaReducers: MetaReducer<any>[] = [clearUserState];

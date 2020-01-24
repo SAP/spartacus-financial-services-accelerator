@@ -23,6 +23,8 @@ export const fsaStorefrontRoutesConfig: RoutesConfig = {
   updatePasswordComp: { paths: ['my-account/update-password'] },
   closeAccount: { paths: ['my-account/close-account'] },
   claims: { paths: ['my-account/my-insurance-claims'] },
+  noClaims: { paths: ['noClaims'] },
+  claimsPage: { paths: ['claimsPage'] },
   inbox: { paths: ['my-account/inbox'] },
   policies: { paths: ['my-account/my-policies'] },
   policyDetails: { paths: ['my-account/my-policies/:policyId/:contractId'] },

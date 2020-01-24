@@ -14,7 +14,7 @@ import { OccConfig, RoutingService } from '@spartacus/core';
 import { DeleteClaimDialogComponent } from '../delete-claim-dialog/delete-claim-dialog.component';
 import { UserState } from './../../../../core/my-account/store/reducers/index';
 import { UserRequestService } from './../../../../core/user-request/services/user-request/user-request.service';
-import { naIconImgSrc } from '../../../../assets/icons/na-icon';
+import { genericIcons } from '../../../../assets/icons/generic-icons';
 import { ClaimService } from '../../../../core/my-account/services';
 
 @Component({
@@ -47,8 +47,8 @@ export class ClaimsComponent implements OnInit, OnDestroy {
     this.openModal(claimNumber);
   }
 
-  getNaImagelink() {
-    return this.domSanitizer.bypassSecurityTrustUrl(naIconImgSrc);
+  getImagelink() {
+    return this.domSanitizer.bypassSecurityTrustUrl(genericIcons.naIcon);
   }
 
   private openModal(claimNumber: string) {

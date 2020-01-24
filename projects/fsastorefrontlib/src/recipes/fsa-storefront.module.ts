@@ -17,6 +17,7 @@ import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa
 import { fsaOccProductConfig } from '../occ/services/default-occ-fsa-product-config';
 import { fstranslationsDe } from '../assets/translations/index_de';
 import { fsOverrides } from '../assets/translations/index';
+import { categoryIcons } from '../assets/icons/generic-icons';
 
 @NgModule({
   imports: [
@@ -54,6 +55,13 @@ import { fsOverrides } from '../assets/translations/index';
     ConfigModule.withConfig(fsaRoutingConfig),
     ConfigModule.withConfig(fsaCheckoutConfig),
     ConfigModule.withConfig(fsaOccProductConfig),
+    ConfigModule.withConfig({
+      icon: {
+        symbols: {
+          ...categoryIcons,
+        },
+      },
+    }),
   ],
   exports: [B2cStorefrontModule, CmsLibModule],
   declarations: [],

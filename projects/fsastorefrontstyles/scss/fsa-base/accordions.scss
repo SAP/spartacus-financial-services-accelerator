@@ -5,14 +5,16 @@
     }
   }
   .image-wrapper {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     padding: 2px;
+    @include media-breakpoint-up(md) {
+      @include absolute-center;
+    }
   }
   .accordion-heading {
     color: var(--cx-color-text);
     background: var(--cx-color-4);
-    border-top: 3px solid var(--cx-color-primary);
     font-weight: var(--cx-font-weight-semi);
     line-height: 1.6;
     margin-bottom: 0;
@@ -29,6 +31,16 @@
       }
     }
   }
+  .accordion-item {
+    border: 1px solid var(--cx-color-3);
+    margin-top: 20px;
+    @include box-shadow(0, 8px, 6px, -6px, $color-grey, 1);
+    position: relative;
+    .FSA-icon {
+      position: absolute;
+      z-index: 2;
+    }
+  }
   .accordion-item-wrapper {
     display: flex;
     transition: all 0.5s ease-in-out;
@@ -38,15 +50,6 @@
     &.active {
       padding: 2.5rem 2vw;
       max-height: 2000px;
-    }
-  }
-  .accordion-item {
-    margin-top: 20px;
-    @include box-shadow(0, 2px, 20px, 1px, $color-grey, 1);
-    position: relative;
-    .FSA-icon {
-      position: absolute;
-      z-index: 2;
     }
   }
   .accordion-list {
@@ -60,23 +63,16 @@
       border-bottom: none;
     }
     .item-label {
-      padding-left: 30px;
-      &::before {
-        display: block;
-        content: '';
-        width: 6px;
-        height: 6px;
-        position: absolute;
-        background-color: var(--cx-color-primary);
-        border-radius: 50%;
-        left: 10px;
-        top: 8px;
-      }
+      padding-left: 0;
+      font-weight: var(--cx-font-weight-semi);
+      text-transform: capitalize;
     }
   }
   .value {
     @include media-breakpoint-down(xs) {
       text-align: right;
+      overflow-wrap: break-word;
+      padding: 0;
     }
   }
 }

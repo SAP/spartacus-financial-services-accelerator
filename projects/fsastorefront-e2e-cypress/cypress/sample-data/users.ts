@@ -26,3 +26,8 @@ export const donnaMooreUser = {
   email: 'donna@moore.com',
   password: '123456',
 };
+
+export const amosAgent = {
+  email: 'amos.adkins@sapfsa.com',
+  password: '1234',
+};
