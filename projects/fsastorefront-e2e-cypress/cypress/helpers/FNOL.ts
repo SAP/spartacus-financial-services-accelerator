@@ -147,3 +147,10 @@ export function selectPolicyOnEntryPage() {
     .click();
   cy.get('.form-check-input').click();
 }
+
+export function deleleteClaim() {
+  cy.get('.action-links-secondary-button').click();
+  cy.get('fsa-deleted-claim-dialog .modal-header').within(() => {
+    cy.get('.primary-button').click();
+  });
+}

@@ -44,7 +44,6 @@ export class ClaimsComponent implements OnInit, OnDestroy {
 
     this.subscription.add(
       this.claimService.shouldReload().subscribe(reload => {
-        console.log(reload);
         if (reload) {
           this.claimService.loadClaims();
         }
