@@ -208,10 +208,7 @@ context('FNOL for sample data user', () => {
       menuOption: 'My Account',
       dropdownItem: 'Claims',
     });
-    cy.get('.info-card')
-      .last()
-      .within(() => {
-        fnol.deleleteClaim();
-      });
+
+    fnol.deleteClaimFromDialog();
   });
 });

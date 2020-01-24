@@ -148,9 +148,15 @@ export function selectPolicyOnEntryPage() {
   cy.get('.form-check-input').click();
 }
 
-export function deleleteClaim() {
-  cy.get('.action-links-secondary-button').click();
-  cy.get('fsa-deleted-claim-dialog .modal-header').within(() => {
+export function deleteClaimFromDialog() {
+  cy.get('.info-card')
+    .last()
+    .within(() => {
+      cy.get('.action-links-secondary-button').click();
+    });
+  cy.get('h3').contains('Delete started claim process');
+  cy.get('p').contains('The following claim process will be deleted');
+  cy.get('fsa-deleted-claim-dialog').within(() => {
     cy.get('.primary-button').click();
   });
 }
