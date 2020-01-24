@@ -21,12 +21,10 @@ export class DeleteClaimDialogComponent implements OnInit {
   claimNumber: string;
 
   ngOnInit() {
-    if (!this.form.controls[this.claimNumber]) {
-      this.form.setControl(
-        this.claimNumber,
-        this.createClaimFormGroup(this.claimNumber)
-      );
-    }
+    this.form.setControl(
+      this.claimNumber,
+      this.createClaimFormGroup(this.claimNumber)
+    );
   }
 
   private createClaimFormGroup(claimNumber) {

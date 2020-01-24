@@ -9,19 +9,11 @@ import { ModalService } from '@spartacus/storefront';
 import { DeleteClaimDialogComponent } from './delete-claim-dialog.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClaimService } from './../../../../core/my-account/services/claim.service';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 class MockModalService {
   dismissActiveModal(): void {}
-}
-
-let formGroup = {};
-
-class MockFormBuilder {
-  group() {
-    return new FormGroup(formGroup);
-  }
 }
 
 class MockAuthService {
@@ -73,9 +65,6 @@ describe('DeleteClaimDialogComponent', () => {
   });
 
   it('should create delete claim popup', () => {
-    formGroup = {
-      claimNumber: '000001',
-    };
     expect(component).toBeTruthy();
   });
 
@@ -83,5 +72,11 @@ describe('DeleteClaimDialogComponent', () => {
     spyOn(claimService, 'removeClaim').and.stub();
     component.deleteClaim();
     expect(claimService.removeClaim).toHaveBeenCalled();
+  });
+
+  it('should not be able to delete claim', () => {
+    spyOn(claimService, 'removeClaim').and.stub();
+    spyOn(authService, 'getOccUserId').and.returnValue(of(null));
+    component.deleteClaim();
   });
 });
