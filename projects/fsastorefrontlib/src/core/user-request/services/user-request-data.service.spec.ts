@@ -6,7 +6,7 @@ import { Observable, ReplaySubject } from 'rxjs';
 import * as fromReducers from '../store/reducers/index';
 import * as fromReducer from '../store/reducers';
 import { UserRequestDataService } from './user-request-data.service';
-import * as fromActions from 'projects/fsastorefrontlib/src/core/user-request/store/actions';
+import * as fromActions from './../store/actions';
 import { FSUserRequest } from '../../../occ/occ-models';
 import { USER_REQUEST_FEATURE } from '../store/user-request-state';
 
@@ -92,11 +92,6 @@ describe('UserRequestDataService', () => {
     userToken$.next(testUserToken);
     store.dispatch(new fromActions.LoadUserRequestSuccess(mockRequest));
     expect(service.requestId).toEqual(mockRequest.requestId);
-  });
-
-  it('should check if user request exist', () => {
-    store.dispatch(new fromActions.LoadUserRequestSuccess(mockRequest));
-    expect(service.hasUserRequest()).toEqual(true);
   });
 
   it('should not return request id', () => {

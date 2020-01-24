@@ -21,10 +21,9 @@ export class ClaimPoliciesGuard implements CanActivate, OnDestroy {
 
   canActivate(): Observable<boolean> {
     {
-      // Fixing policy to insurances_auto until:
-      // we get the BE part returning real categoryCode
-      // we create dynamic content for FNOL page
+      // TODO: handle loading claims for every category
       this.policyService.loadClaimPolicies('insurances_auto');
+
       this.subscription = this.store
         .pipe(
           select(fromPolicyStore.getClaimPoliciesState),
