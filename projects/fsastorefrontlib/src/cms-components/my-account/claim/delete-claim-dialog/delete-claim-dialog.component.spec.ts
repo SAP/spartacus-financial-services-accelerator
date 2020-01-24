@@ -9,7 +9,7 @@ import { ModalService } from '@spartacus/storefront';
 import { DeleteClaimDialogComponent } from './delete-claim-dialog.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ClaimService } from './../../../../core/my-account/services/claim.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 
 class MockModalService {
@@ -38,16 +38,14 @@ describe('DeleteClaimDialogComponent', () => {
   let component: DeleteClaimDialogComponent;
   let fixture: ComponentFixture<DeleteClaimDialogComponent>;
   let claimService: MockClaimService;
-  let mockFormBuilder: MockFormBuilder;
   let authService: MockAuthService;
 
   beforeEach(async(() => {
-    mockFormBuilder = new MockFormBuilder();
     authService = new MockAuthService();
     claimService = new MockClaimService();
 
     TestBed.configureTestingModule({
-      imports: [I18nTestingModule],
+      imports: [ReactiveFormsModule, I18nTestingModule],
       declarations: [DeleteClaimDialogComponent],
       providers: [
         {
@@ -57,10 +55,6 @@ describe('DeleteClaimDialogComponent', () => {
         {
           provide: ClaimService,
           useValue: claimService,
-        },
-        {
-          provide: FormBuilder,
-          useValue: mockFormBuilder,
         },
         {
           provide: AuthService,
