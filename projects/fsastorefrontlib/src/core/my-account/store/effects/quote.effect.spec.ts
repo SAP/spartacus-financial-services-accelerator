@@ -1,4 +1,4 @@
-import { CartActions } from '@spartacus/core';
+import { CartActions, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
@@ -19,7 +19,6 @@ const insuranceQuote1: any = {
   quoteId: 'test001',
   quoteStatus: 'unfinished',
 };
-
 const insuranceQuote2: any = {
   cartCode: 'test002',
   defaultCategory: {
@@ -28,26 +27,27 @@ const insuranceQuote2: any = {
   quoteId: 'test002',
   quoteStatus: 'unfinished',
 };
-
 const quoteDetails: any = {
   quoteDetails: {
     entry: [
       {
-        key: 'quotePropertyToUpdate',
-        value: 'fieldValue',
+        key: 'updateQuoteKey1',
+        value: 'testValue1',
       },
+      {
+        key: 'updateQuoteKey2',
+        value: 'testValue2',
+      }
     ],
   },
 };
-
 const updateQuotePayload: any = {
-  userId: 'current',
+  userId: OCC_USER_ID_CURRENT,
   cartId: 'test001',
   quoteContent: {
     quoteDetails: quoteDetails,
   },
 };
-
 const insuranceQuotes = {
   insuranceQuotes: [insuranceQuote1, insuranceQuote2],
 };
@@ -90,7 +90,9 @@ describe('Quote Effects', () => {
 
   describe('loadQuotes$', () => {
     it('should return quotes', () => {
-      const action = new fromActions.LoadQuotes({ userId: 'current' });
+      const action = new fromActions.LoadQuotes({
+        userId: OCC_USER_ID_CURRENT,
+      });
       const completion = new fromActions.LoadQuotesSuccess(insuranceQuotes);
 
       actions$ = hot('-a', { a: action });
@@ -102,7 +104,9 @@ describe('Quote Effects', () => {
       spyOn(mockOccQuoteAdapter, 'getQuotes').and.returnValue(
         throwError('Error')
       );
-      const action = new fromActions.LoadQuotes({ userId: 'current' });
+      const action = new fromActions.LoadQuotes({
+        userId: OCC_USER_ID_CURRENT,
+      });
       const completion = new fromActions.LoadQuotesFail(
         JSON.stringify('Error')
       );
@@ -141,11 +145,11 @@ describe('Quote Effects', () => {
   describe('bindQuote$', () => {
     it('should bind quote', () => {
       const action = new fromActions.BindQuote({
-        userId: 'current',
+        userId: OCC_USER_ID_CURRENT,
         cartId: 'test001',
       });
       const completion = new CartActions.LoadCart({
-        userId: 'current',
+        userId: OCC_USER_ID_CURRENT,
         cartId: 'test001',
       });
 
@@ -159,7 +163,7 @@ describe('Quote Effects', () => {
         throwError('Error')
       );
       const action = new fromActions.BindQuote({
-        userId: 'current',
+        userId: OCC_USER_ID_CURRENT,
         cartId: 'test001',
       });
       const completion = new fromActions.UpdateQuoteFail(

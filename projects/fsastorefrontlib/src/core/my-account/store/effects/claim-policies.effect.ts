@@ -18,7 +18,9 @@ export class ClaimPoliciesEffects {
           map((claimPolicies: any) => {
             return new fromActions.LoadClaimPoliciesSuccess(claimPolicies);
           }),
-          catchError(error => of(new fromActions.LoadClaimPoliciesFail(error)))
+          catchError(error =>
+            of(new fromActions.LoadClaimPoliciesFail(JSON.stringify(error)))
+          )
         );
     })
   );

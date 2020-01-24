@@ -29,12 +29,10 @@ export class QuoteEffects {
     ofType(fromActions.UPDATE_QUOTE),
     map((action: fromActions.UpdateQuote) => action.payload),
     switchMap(payload => {
-      console.log(payload);
       return this.quoteAdapter
         .updateQuote(payload.userId, payload.cartId, payload.quoteContent)
         .pipe(
           map((quote: any) => {
-            console.log(quote);
             return new fromActions.UpdateQuoteSuccess(quote);
           }),
           catchError(error =>

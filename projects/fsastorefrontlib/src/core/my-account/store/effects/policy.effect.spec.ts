@@ -1,3 +1,4 @@
+import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
@@ -20,7 +21,6 @@ const insurancePolicy1: any = {
     code: 'testCategoryCode',
   },
 };
-
 const insurancePolicy2: any = {
   policyNumber: 'test002',
   contractNumber: 'test002',
@@ -31,7 +31,6 @@ const insurancePolicy2: any = {
     code: 'testCategoryCode',
   },
 };
-
 const insurancePolicies = {
   insurancePolicies: [insurancePolicy1, insurancePolicy2],
 };
@@ -77,7 +76,9 @@ describe('Policy Effects', () => {
 
   describe('loadPolicies$', () => {
     it('should return policies', () => {
-      const action = new fromActions.LoadPolicies({ userId: 'current' });
+      const action = new fromActions.LoadPolicies({
+        userId: OCC_USER_ID_CURRENT,
+      });
       const completion = new fromActions.LoadPoliciesSuccess(insurancePolicies);
 
       actions$ = hot('-a', { a: action });
@@ -90,7 +91,9 @@ describe('Policy Effects', () => {
         throwError('Error')
       );
 
-      const action = new fromActions.LoadPolicies({ userId: 'current' });
+      const action = new fromActions.LoadPolicies({
+        userId: OCC_USER_ID_CURRENT,
+      });
       const completion = new fromActions.LoadPoliciesFail(
         JSON.stringify('Error')
       );
@@ -105,7 +108,7 @@ describe('Policy Effects', () => {
       const action = new fromActions.LoadPolicyDetails({
         contractId: 'test001',
         policyId: 'test001',
-        userId: 'current',
+        userId: OCC_USER_ID_CURRENT,
       });
       const completion = new fromActions.LoadPolicyDetailsSuccess(
         insurancePolicy1
@@ -124,7 +127,7 @@ describe('Policy Effects', () => {
       const action = new fromActions.LoadPolicyDetails({
         contractId: 'test001',
         policyId: 'test001',
-        userId: 'current',
+        userId: OCC_USER_ID_CURRENT,
       });
       const completion = new fromActions.LoadPolicyDetailsFail(
         JSON.stringify('Error')
@@ -137,7 +140,9 @@ describe('Policy Effects', () => {
 
   describe('premiumCalendar$', () => {
     it('should return premium calendar policies', () => {
-      const action = new fromActions.LoadPremiumCalendar({ userId: 'current' });
+      const action = new fromActions.LoadPremiumCalendar({
+        userId: OCC_USER_ID_CURRENT,
+      });
       const completion = new fromActions.LoadPremiumCalendarSuccess(
         premiumCalendarPolicies
       );
@@ -151,7 +156,9 @@ describe('Policy Effects', () => {
       spyOn(mockOccPolicyAdapter, 'getPremiumCalendar').and.returnValue(
         throwError('Error')
       );
-      const action = new fromActions.LoadPremiumCalendar({ userId: 'current' });
+      const action = new fromActions.LoadPremiumCalendar({
+        userId: OCC_USER_ID_CURRENT,
+      });
       const completion = new fromActions.LoadPremiumCalendarFail(
         JSON.stringify('Error')
       );

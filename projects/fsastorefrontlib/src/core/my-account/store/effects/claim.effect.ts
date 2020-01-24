@@ -20,7 +20,9 @@ export class ClaimEffects {
         map((claims: any) => {
           return new fromActions.LoadClaimsSuccess(claims);
         }),
-        catchError(error => of(new fromActions.LoadClaimsFail(error)))
+        catchError(error =>
+          of(new fromActions.LoadClaimsFail(JSON.stringify(error)))
+        )
       );
     })
   );
@@ -34,7 +36,9 @@ export class ClaimEffects {
         map(() => {
           return new fromActions.DeleteClaimSuccess();
         }),
-        catchError(error => of(new fromActions.DeleteClaimFail(error)))
+        catchError(error =>
+          of(new fromActions.DeleteClaimFail(JSON.stringify(error)))
+        )
       )
     )
   );
@@ -58,7 +62,7 @@ export class ClaimEffects {
               ];
             }
           }),
-          catchError(error => of(new fromActions.CreateClaimFail(error)))
+          catchError(error => of(new fromActions.CreateClaimFail(JSON.stringify(error))))
         );
     })
   );
@@ -68,9 +72,12 @@ export class ClaimEffects {
     ofType(fromActions.UPDATE_CLAIM),
     map((action: fromActions.UpdateClaim) => action.payload),
     mergeMap(payload => {
+      console.log(payload);
+      console.log(this.claimServiceData);
       let claimID = this.claimServiceData.claimData.claimNumber;
       let claimDataWithLocation = null;
       if (this.claimServiceData.claimData.locationOfLoss !== undefined) {
+        console.log(this.claimServiceData.claimData.locationOfLoss);
         claimDataWithLocation = Object.assign(payload.claimData, {
           locationOfLoss: this.claimServiceData.claimData.locationOfLoss.code,
         });
@@ -94,7 +101,7 @@ export class ClaimEffects {
           map(claim => {
             return new fromActions.UpdateClaimSuccess(claim);
           }),
-          catchError(error => of(new fromActions.UpdateClaimFail(error)))
+          catchError(error => of(new fromActions.UpdateClaimFail(JSON.stringify(error))))
         );
     })
   );
@@ -108,7 +115,9 @@ export class ClaimEffects {
         map(claim => {
           return new fromActions.SubmitClaimSuccess(claim);
         }),
-        catchError(error => of(new fromActions.SubmitClaimFail(error)))
+        catchError(error =>
+          of(new fromActions.SubmitClaimFail(JSON.stringify(error)))
+        )
       )
     )
   );
@@ -116,7 +125,6 @@ export class ClaimEffects {
   constructor(
     private actions$: Actions,
     private claimAdapter: OccClaimAdapter,
-    private claimData: ClaimDataService,
     protected claimServiceData: ClaimDataService
   ) {}
 }
