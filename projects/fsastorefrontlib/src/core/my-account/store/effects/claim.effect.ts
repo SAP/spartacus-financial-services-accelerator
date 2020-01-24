@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import * as fromActions from '../actions';
 import { Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap, switchMap } from 'rxjs/operators';
@@ -8,6 +7,7 @@ import { OccClaimAdapter } from '../../../../occ/services/claim/occ-claim.adapte
 import { ClaimDataService } from '../../services/claim-data.service';
 import { Claim } from '../../../../occ/occ-models';
 import * as fromUserRequestActions from '../../../user-request/store/actions';
+import * as fromActions from '../actions';
 
 @Injectable()
 export class ClaimEffects {
@@ -20,7 +20,9 @@ export class ClaimEffects {
         map((claims: any) => {
           return new fromActions.LoadClaimsSuccess(claims);
         }),
-        catchError(error => of(new fromActions.LoadClaimsFail(error)))
+        catchError(error =>
+          of(new fromActions.LoadClaimsFail(JSON.stringify(error)))
+        )
       );
     })
   );
@@ -34,7 +36,9 @@ export class ClaimEffects {
         map(() => {
           return new fromActions.DeleteClaimSuccess();
         }),
-        catchError(error => of(new fromActions.DeleteClaimFail(error)))
+        catchError(error =>
+          of(new fromActions.DeleteClaimFail(JSON.stringify(error)))
+        )
       )
     )
   );
@@ -58,7 +62,9 @@ export class ClaimEffects {
               ];
             }
           }),
-          catchError(error => of(new fromActions.CreateClaimFail(error)))
+          catchError(error =>
+            of(new fromActions.CreateClaimFail(JSON.stringify(error)))
+          )
         );
     })
   );
@@ -94,7 +100,9 @@ export class ClaimEffects {
           map(claim => {
             return new fromActions.UpdateClaimSuccess(claim);
           }),
-          catchError(error => of(new fromActions.UpdateClaimFail(error)))
+          catchError(error =>
+            of(new fromActions.UpdateClaimFail(JSON.stringify(error)))
+          )
         );
     })
   );
@@ -108,7 +116,9 @@ export class ClaimEffects {
         map(claim => {
           return new fromActions.SubmitClaimSuccess(claim);
         }),
-        catchError(error => of(new fromActions.SubmitClaimFail(error)))
+        catchError(error =>
+          of(new fromActions.SubmitClaimFail(JSON.stringify(error)))
+        )
       )
     )
   );
@@ -116,7 +126,6 @@ export class ClaimEffects {
   constructor(
     private actions$: Actions,
     private claimAdapter: OccClaimAdapter,
-    private claimData: ClaimDataService,
     protected claimServiceData: ClaimDataService
   ) {}
 }

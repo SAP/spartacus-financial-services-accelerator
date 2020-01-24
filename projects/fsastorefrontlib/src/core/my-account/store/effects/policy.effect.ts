@@ -16,7 +16,9 @@ export class PolicyEffects {
         map((policies: any) => {
           return new fromActions.LoadPoliciesSuccess(policies);
         }),
-        catchError(error => of(new fromActions.LoadPoliciesFail(error)))
+        catchError(error =>
+          of(new fromActions.LoadPoliciesFail(JSON.stringify(error)))
+        )
       );
     })
   );
@@ -31,7 +33,9 @@ export class PolicyEffects {
           map((policy: any) => {
             return new fromActions.LoadPolicyDetailsSuccess(policy);
           }),
-          catchError(error => of(new fromActions.LoadPolicyDetailsFail(error)))
+          catchError(error =>
+            of(new fromActions.LoadPolicyDetailsFail(JSON.stringify(error)))
+          )
         );
     })
   );
@@ -44,7 +48,9 @@ export class PolicyEffects {
         map((premiumCalendar: any) => {
           return new fromActions.LoadPremiumCalendarSuccess(premiumCalendar);
         }),
-        catchError(error => of(new fromActions.LoadPremiumCalendarFail(error)))
+        catchError(error =>
+          of(new fromActions.LoadPremiumCalendarFail(JSON.stringify(error)))
+        )
       );
     })
   );
