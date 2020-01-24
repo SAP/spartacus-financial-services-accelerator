@@ -94,11 +94,6 @@ describe('UserRequestDataService', () => {
     expect(service.requestId).toEqual(mockRequest.requestId);
   });
 
-  it('should check if user request exist', () => {
-    store.dispatch(new fromActions.LoadUserRequestSuccess(mockRequest));
-    expect(service.hasUserRequest()).toEqual(true);
-  });
-
   it('should not return request id', () => {
     store.dispatch(new fromActions.LoadUserRequestFail({}));
     expect(service.requestId).toEqual(undefined);

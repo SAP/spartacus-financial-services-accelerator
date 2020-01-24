@@ -33,10 +33,6 @@ export class UserRequestDataService {
       });
   }
 
-  hasUserRequest(): boolean {
-    return !!this.userRequest;
-  }
-
   get userId(): string {
     return this._userId;
   }
@@ -46,7 +42,7 @@ export class UserRequestDataService {
   }
 
   get requestId(): string {
-    if (this.hasUserRequest) {
+    if (!!this._userRequest) {
       return this.userRequest.requestId;
     }
   }
