@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 
-import * as fromActions from '../actions';
 import { Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap, switchMap } from 'rxjs/operators';
@@ -8,6 +7,7 @@ import { OccClaimAdapter } from '../../../../occ/services/claim/occ-claim.adapte
 import { ClaimDataService } from '../../services/claim-data.service';
 import { Claim } from '../../../../occ/occ-models';
 import * as fromUserRequestActions from '../../../user-request/store/actions';
+import * as fromActions from '../actions';
 
 @Injectable()
 export class ClaimEffects {
@@ -62,7 +62,9 @@ export class ClaimEffects {
               ];
             }
           }),
-          catchError(error => of(new fromActions.CreateClaimFail(JSON.stringify(error))))
+          catchError(error =>
+            of(new fromActions.CreateClaimFail(JSON.stringify(error)))
+          )
         );
     })
   );
@@ -72,12 +74,9 @@ export class ClaimEffects {
     ofType(fromActions.UPDATE_CLAIM),
     map((action: fromActions.UpdateClaim) => action.payload),
     mergeMap(payload => {
-      console.log(payload);
-      console.log(this.claimServiceData);
       let claimID = this.claimServiceData.claimData.claimNumber;
       let claimDataWithLocation = null;
       if (this.claimServiceData.claimData.locationOfLoss !== undefined) {
-        console.log(this.claimServiceData.claimData.locationOfLoss);
         claimDataWithLocation = Object.assign(payload.claimData, {
           locationOfLoss: this.claimServiceData.claimData.locationOfLoss.code,
         });
@@ -101,7 +100,9 @@ export class ClaimEffects {
           map(claim => {
             return new fromActions.UpdateClaimSuccess(claim);
           }),
-          catchError(error => of(new fromActions.UpdateClaimFail(JSON.stringify(error))))
+          catchError(error =>
+            of(new fromActions.UpdateClaimFail(JSON.stringify(error)))
+          )
         );
     })
   );

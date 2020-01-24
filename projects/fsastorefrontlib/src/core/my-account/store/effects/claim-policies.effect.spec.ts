@@ -41,6 +41,10 @@ class MockOccPolicyAdapter {
   }
 }
 
+const errorObject = {
+  errorMessage: 'Error message',
+};
+
 describe('Claim Policies Effects', () => {
   let actions$: Observable<fromActions.ClaimPoliciesAction>;
   let effects: fromEffects.ClaimPoliciesEffects;
@@ -82,7 +86,7 @@ describe('Claim Policies Effects', () => {
 
     it('should fail to return claim policies', () => {
       spyOn(mockOccPolicyAdapter, 'getPoliciesByCategory').and.returnValue(
-        throwError('Error')
+        throwError(errorObject)
       );
 
       const action = new fromActions.LoadClaimPolicies({
@@ -90,7 +94,7 @@ describe('Claim Policies Effects', () => {
         policyCategoryCode: 'testCategoryCode',
       });
       const completion = new fromActions.LoadClaimPoliciesFail(
-        JSON.stringify('Error')
+        JSON.stringify(errorObject)
       );
       actions$ = hot('-a', { a: action });
       const expected = cold('-b', { b: completion });
