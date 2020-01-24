@@ -202,4 +202,13 @@ context('FNOL for sample data user', () => {
     buttons.clickContinueButton();
     fnol.checkFNOLCheckoutPage();
   });
+
+  it('Should delete started claim', () => {
+    cy.selectOptionFromDropdown({
+      menuOption: 'My Account',
+      dropdownItem: 'Claims',
+    });
+
+    fnol.deleteClaimFromDialog();
+  });
 });
