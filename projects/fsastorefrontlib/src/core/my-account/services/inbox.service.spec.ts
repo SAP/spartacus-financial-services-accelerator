@@ -5,7 +5,7 @@ import { InboxService } from './inbox.service';
 import { InboxDataService } from './inbox-data.service';
 import { OccInboxAdapter } from './../../../occ/services/inbox/occ-inbox.adapter';
 import { of } from 'rxjs';
-import { InboxTab } from 'fsastorefrontlib/core/my-account/services/inbox-data.service';
+import { InboxTab } from './../services/inbox-data.service';
 
 const userId = 'testUser';
 const messageGroup = 'testGroup';
