@@ -85,6 +85,18 @@ describe('ClaimServiceTest', () => {
     expect(claimsLoaded).toEqual(true);
   });
 
+  it('should be able to get refresh flag to reload claims', () => {
+    store.dispatch(new fromAction.LoadClaimsSuccess({ claimId: claimId }));
+    let shouldReload;
+    service
+      .shouldReload()
+      .subscribe(reaload => {
+        shouldReload = reaload;
+      })
+      .unsubscribe();
+    expect(shouldReload).toEqual(false);
+  });
+
   it('should be able to load claims', () => {
     service.loadClaims();
     expect(store.dispatch).toHaveBeenCalledWith(

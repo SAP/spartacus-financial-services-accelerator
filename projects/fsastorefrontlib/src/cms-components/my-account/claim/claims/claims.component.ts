@@ -41,6 +41,14 @@ export class ClaimsComponent implements OnInit, OnDestroy {
     this.claimService.loadClaims();
     this.claims$ = this.claimService.getClaims();
     this.claimsLoaded$ = this.claimService.getLoaded();
+
+    this.subscription.add(
+      this.claimService.shouldReload().subscribe(reload => {
+        if (reload) {
+          this.claimService.loadClaims();
+        }
+      })
+    );
   }
 
   deleteClaim(claimNumber: string) {
