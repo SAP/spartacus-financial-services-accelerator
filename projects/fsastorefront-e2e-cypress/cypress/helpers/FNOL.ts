@@ -115,6 +115,15 @@ export function checkGeneralInformationAccordion() {
   cy.get('.accordion-list-item').contains('me');
 }
 
+export function checkConfirmationPage() {
+  cy.get('.heading-headline').contains('Claim Confirmation');
+  cy.get('.notice-text ').contains(' Your processing number is:');
+  cy.get('.content860 p')
+    .first()
+    .contains(
+      'Your claim request has been successfully saved in our system. You can find the confirmation email in the Inbox of your self-service portal and in your mailbox.'
+    );
+}
 export function checkOpenClaimContent() {
   cy.get('.title').contains('Auto Insurance');
   cy.get('.value').contains('BULK1T2000000552');

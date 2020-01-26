@@ -193,6 +193,11 @@ context('FNOL for sample data user', () => {
     fnol.checkGeneralInformationAccordion();
   });
 
+  it('Should check claim confirmation page', () => {
+    fnol.checkConfirmationPage();
+    buttons.checkBackAndContinueButtons();
+  });
+
   it('Should start a claim checkout from homepage', () => {
     cy.get('.SiteLogo').click();
 

@@ -19,6 +19,8 @@ export class UserRequestConfirmationComponent implements OnInit {
     this.claimNumber = this.claimDataService.claimData.claimNumber;
   }
   getImagelink() {
-    return this.domSanitizer.bypassSecurityTrustUrl(genericIcons.document);
+    return this.domSanitizer.bypassSecurityTrustUrl(
+      genericIcons.documentNotice
+    );
   }
 }
