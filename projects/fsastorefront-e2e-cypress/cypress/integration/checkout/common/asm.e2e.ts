@@ -33,6 +33,5 @@ context('ASM', () => {
     cy.contains('End Session')
       .should('be.visible')
       .click();
-    cy.contains('Start Session').should('be.disabled');
   });
 });
