@@ -21,24 +21,25 @@ export function checkInboxHeader() {
   });
 }
 
-export function checNewDocumentMessage() {
-  cy.get('.message')
-    .should('be.visible')
+export function readMessagesAndCheckAttachment(pageNumber, numberOfMessages) {
+  cy.get('a.page-link').contains(pageNumber).click();
+  for (let i = 0; i < numberOfMessages; i++) {
+    cy.get('.message')
+    .eq(i)
     .within(() => {
+      console.log(i);
       cy.contains('New documents received');
       cy.contains('Dear Donna Moore, New documents');
       cy.contains(todaysDate);
       cy.get('.icon-attachment')
         .should('be.visible')
         .click();
+      cy.get('.box-shadow').should('be.visible');
+      cy.get('.notification').contains('1 Attachments');
+      cy.get('.document-link').should(
+        'have.text',
+        'New Policy Effective Immediately'
+      );
     });
-}
-
-export function checkAttachmentsInMessage() {
-  cy.get('.box-shadow').should('be.visible');
-  cy.get('.notification').contains('1 Attachments');
-  cy.get('.document-link').should(
-    'have.text',
-    'New Policy Effective Immediately'
-  );
+  }
 }

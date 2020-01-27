@@ -1,5 +1,3 @@
-import { register } from 'ts-node';
-
 export interface RegisterUser {
   titleCode: string;
   firstName: string;

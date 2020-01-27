@@ -1,6 +1,6 @@
 import { donnaMooreUser } from '../../../sample-data/users';
 import * as registerHelpers from '../../../helpers/register';
-import { importDocuments } from '../../../helpers/payloads';
+import { createDocumentPayload } from '../../../helpers/payloads';
 import * as inbox from '../../../helpers/my-account/inbox';
 
 context('Inbox Correspondence for sample data user', () => {
@@ -9,10 +9,14 @@ context('Inbox Correspondence for sample data user', () => {
   });
 
   it('Should import documents for sample data user', () => {
-    cy.request(importDocuments);
+    for (let i = 1; i <= 6; i++) {
+      const documentToImport = createDocumentPayload(i);
+      cy.request(documentToImport);
+    }
   });
 
   it('Should login sample data user', () => {
+    cy.visit('/login');
     registerHelpers.login(donnaMooreUser.email, donnaMooreUser.password);
   });
 
@@ -24,8 +28,9 @@ context('Inbox Correspondence for sample data user', () => {
     inbox.checkInboxComponets();
     inbox.checkGeneralTab();
     inbox.checkInboxHeader();
-    //TODO: check read/unread status
-    inbox.checNewDocumentMessage();
-    inbox.checkAttachmentsInMessage();
+    // checks 5 messages on first page
+    inbox.readMessagesAndCheckAttachment(1, 5);
+    // checks 1 message on second page
+    inbox.readMessagesAndCheckAttachment(2, 1);
   });
 });
