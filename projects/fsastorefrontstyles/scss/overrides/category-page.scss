@@ -3,7 +3,7 @@
 
 .FSCategoryPageTemplate {
   .enriched-banner {
-    &__text {
+    &-text {
       background: rgba(255, 255, 255, 0.7);
       display: flex;
       flex-flow: column;
@@ -16,7 +16,7 @@
         padding: 1rem;
       }
     }
-    &__title {
+    &-title {
       font-size: var(--cx-h3-font-size);
       color: var(--cx-color-text);
       font-weight: var(--cx-font-weight-semi);
@@ -25,11 +25,11 @@
         font-size: var(--cx-title-font-size);
       }
     }
-    &__details {
+    &-details {
       display: flex;
       justify-content: center;
     }
-    &__styled-text {
+    &-styled-text {
       @extend .primary-button;
       font-weight: var(--cx-font-weight-semi);
       padding: 0.5rem 1rem;

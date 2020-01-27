@@ -24,7 +24,7 @@ context('Homepage', () => {
   });
 
   it('should have assistance and support paragraph', () => {
-    cy.get('cx-paragraph .main-title.main-title__headline-border');
+    cy.get('.heading-headline').should('contain', 'Assistance and Support');
   });
 
   it('should have assistance and support banners', () => {

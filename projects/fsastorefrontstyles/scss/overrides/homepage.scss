@@ -3,7 +3,7 @@
 
 .LandingPageTemplate {
   .enriched-banner {
-    &__text {
+    &-text {
       padding: 2vw;
       background-color: rgba(255, 255, 255, 0.7);
       position: absolute;
@@ -17,7 +17,7 @@
         left: 40%;
       }
     }
-    &__title {
+    &-title {
       font-size: var(--cx-h1-font-size);
       color: var(--cx-color-secondary);
       font-weight: var(--cx-font-weight-semi);
@@ -25,7 +25,7 @@
         font-size: 4vw;
       }
     }
-    &__details {
+    &-details {
       display: block;
       margin-top: 1vw;
       pointer-events: none;
@@ -41,25 +41,8 @@
   }
 
   // Carousel & Homepage headings
-  fsa-category-carousel h3,
-  .main-title__quote-heading {
-    position: relative;
-    text-align: center;
-    font-size: var(--cx-h2-font-size);
-    color: var(--cx-color-text);
-    font-weight: var(--cx-font-weight-semi);
-    margin-bottom: 3rem;
-    padding-bottom: 1.5rem;
-    &:before {
-      content: '';
-      display: block;
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      border-bottom: 3px solid var(--cx-color-primary);
-      width: 7rem;
-    }
+  fsa-category-carousel h3 {
+    @extend .heading-headline, .py-3, .mt-3, .mb-5, .text-center;
   }
 
   //Get a quote section
