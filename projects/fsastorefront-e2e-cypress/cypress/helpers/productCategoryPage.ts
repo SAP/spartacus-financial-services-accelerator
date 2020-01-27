@@ -8,7 +8,7 @@ export function checkComponents() {
     'be.visible'
   );
   cy.get('fsa-cms-custom-container cx-generic-link cx-media');
-  cy.get('fsa-cms-custom-container .category-primary-promotion-banner-title');
+  cy.get('fsa-cms-custom-container .title');
 }
 
 export function checkQuoteButtons() {
