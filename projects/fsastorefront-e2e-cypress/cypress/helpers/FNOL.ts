@@ -1,5 +1,10 @@
-export function checkClaimsPage() {
-  cy.get('.heading-headline').contains('Claims');
+let claimID = '';
+
+function setClaimIdFromLocalStorage() {
+  const localData = JSON.parse(
+    localStorage.getItem('spartacus-local-data')
+  );
+  claimID = localData.assets.claims.content.claimNumber;
 }
 
 export function selectAutoPolicyForFNOL() {
@@ -52,6 +57,7 @@ export function populateIncidentInformationStep() {
       'my tesla S was stolen while I was in the shopping center'
     );
     cy.wait(1000);
+    setClaimIdFromLocalStorage();
   });
 }
 
@@ -124,6 +130,7 @@ export function checkConfirmationPage() {
       'Your claim request has been successfully saved in our system. You can find the confirmation email in the Inbox of your self-service portal and in your mailbox.'
     );
 }
+
 export function checkOpenClaimContent() {
   cy.get('.title').contains('Auto Insurance');
   cy.get('.value').contains('BULK1T2000000552');
@@ -158,8 +165,8 @@ export function selectPolicyOnEntryPage() {
 }
 
 export function deleteClaimFromDialog() {
-  cy.get('.info-card')
-    .last()
+  cy
+    .contains( '.info-card', claimID)
     .within(() => {
       cy.get('.action-links-secondary-button').click();
     });
@@ -168,4 +175,16 @@ export function deleteClaimFromDialog() {
   cy.get('fsa-deleted-claim-dialog').within(() => {
     cy.get('.primary-button').click();
   });
+}
+
+export function checkClaimsPage() {
+  cy.selectOptionFromDropdown({
+    menuOption: 'My Account',
+    dropdownItem: 'Claims',
+  });
+  cy.get('.heading-headline').contains('Claims');
+  cy.contains( '.info-card', claimID)
+    .within(() => {
+      this.checkOpenClaimContent();
+    });
 }

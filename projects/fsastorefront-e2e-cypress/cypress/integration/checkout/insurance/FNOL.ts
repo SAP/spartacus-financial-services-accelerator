@@ -147,18 +147,9 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should check claim is created', () => {
-    cy.wait(1000);
-    cy.selectOptionFromDropdown({
-      menuOption: 'My Account',
-      dropdownItem: 'Claims',
-    });
+    cy.wait(5000);
     fnol.checkClaimsPage();
-    cy.get('.info-card')
-      .last()
-      .within(() => {
-        fnol.checkOpenClaimContent();
-        buttons.clickResumeButton();
-      });
+    buttons.clickResumeButton();
   });
 
   it('Should check user is navigated to first FNOL page', () => {
@@ -191,11 +182,11 @@ context('FNOL for sample data user', () => {
     fnol.checkIncidentInformationAccordion();
     fnol.checkIncidentReportAccordion();
     fnol.checkGeneralInformationAccordion();
+    buttons.clickContinueButton();
   });
 
   it('Should check claim confirmation page', () => {
     fnol.checkConfirmationPage();
-    buttons.checkBackAndContinueButtons();
   });
 
   it('Should start a claim checkout from homepage', () => {
@@ -213,7 +204,6 @@ context('FNOL for sample data user', () => {
       menuOption: 'My Account',
       dropdownItem: 'Claims',
     });
-
     fnol.deleteClaimFromDialog();
   });
 });
