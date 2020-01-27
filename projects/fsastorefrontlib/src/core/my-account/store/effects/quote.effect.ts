@@ -2,9 +2,8 @@ import { CartActions } from '@spartacus/core';
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { OccQuoteAdapter } from '../../../../occ/services/quote/occ-quote.adapter';
-import { QuoteDataService } from '../../services/quote-data.service';
 import * as fromActions from '../actions';
 
 @Injectable()
@@ -13,18 +12,14 @@ export class QuoteEffects {
   loadQuotes$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.LOAD_QUOTES),
     map((action: fromActions.LoadQuotes) => action.payload),
-    mergeMap(payload => {
-      if (payload === undefined || payload.userId === undefined) {
-        payload = {
-          userId: this.quoteData.userId,
-          quotes: this.quoteData.quotes,
-        };
-      }
+    switchMap(payload => {
       return this.quoteAdapter.getQuotes(payload.userId).pipe(
         map((quotes: any) => {
           return new fromActions.LoadQuotesSuccess(quotes);
         }),
-        catchError(error => of(new fromActions.LoadQuotesFail(error)))
+        catchError(error =>
+          of(new fromActions.LoadQuotesFail(JSON.stringify(error)))
+        )
       );
     })
   );
@@ -33,20 +28,16 @@ export class QuoteEffects {
   updateQuote$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.UPDATE_QUOTE),
     map((action: fromActions.UpdateQuote) => action.payload),
-    mergeMap(payload => {
-      if (payload === undefined || payload.userId === undefined) {
-        payload = {
-          userId: this.quoteData.userId,
-          quotes: this.quoteData.quotes,
-        };
-      }
+    switchMap(payload => {
       return this.quoteAdapter
         .updateQuote(payload.userId, payload.cartId, payload.quoteContent)
         .pipe(
-          map((quotes: any) => {
-            return new fromActions.UpdateQuoteSuccess(quotes);
+          map((quote: any) => {
+            return new fromActions.UpdateQuoteSuccess(quote);
           }),
-          catchError(error => of(new fromActions.UpdateQuoteFail(error)))
+          catchError(error =>
+            of(new fromActions.UpdateQuoteFail(JSON.stringify(error)))
+          )
         );
     })
   );
@@ -65,14 +56,15 @@ export class QuoteEffects {
             }),
           ];
         }),
-        catchError(error => of(new fromActions.UpdateQuoteFail(error)))
+        catchError(error =>
+          of(new fromActions.UpdateQuoteFail(JSON.stringify(error)))
+        )
       );
     })
   );
 
   constructor(
     private actions$: Actions,
-    private quoteAdapter: OccQuoteAdapter,
-    private quoteData: QuoteDataService
+    private quoteAdapter: OccQuoteAdapter
   ) {}
 }

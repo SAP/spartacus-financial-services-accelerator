@@ -80,7 +80,7 @@ export function checkSummaryPage() {
 }
 
 export function checkIncidentInformationAccordion() {
-  cy.get('h4')
+  cy.get('.accordion-heading')
     .eq(0)
     .should('have.text', ' Incident Information ');
   cy.get('.accordion-item-wrapper')
@@ -92,7 +92,7 @@ export function checkIncidentInformationAccordion() {
 }
 
 export function checkIncidentReportAccordion() {
-  cy.get('h4')
+  cy.get('.accordion-heading')
     .eq(1)
     .should('have.text', ' Incident Report ');
   cy.get('.accordion-item-wrapper')
@@ -104,7 +104,7 @@ export function checkIncidentReportAccordion() {
 }
 
 export function checkGeneralInformationAccordion() {
-  cy.get('h4')
+  cy.get('.accordion-heading')
     .eq(2)
     .should('have.text', ' General Information ');
   cy.get('.accordion-item-wrapper')
@@ -132,15 +132,31 @@ export function startClaimFromHomepage() {
 }
 
 export function checkFnolEntryPage() {
-  cy.get('h2').contains('Make a claim online');
-  cy.get('h2').contains('Which car has been damaged?');
+  cy.get('.heading-headline').contains('Make a Claim Online');
+  cy.get('.section-header-heading').contains('Which car has been damaged?');
   cy.get('fsa-claim-policies').should('be.visible');
   cy.get('fsa-cms-custom-container').should('be.visible');
 }
 
 export function selectPolicyOnEntryPage() {
-  cy.get('div.fs-items')
+  cy.get('.cx-payment-card')
     .eq(0)
+    .within(() => {
+      cy.get('.cx-card-link');
+    })
     .click();
   cy.get('.form-check-input').click();
+}
+
+export function deleteClaimFromDialog() {
+  cy.get('.info-card')
+    .last()
+    .within(() => {
+      cy.get('.action-links-secondary-button').click();
+    });
+  cy.get('h3').contains('Delete started claim process');
+  cy.get('p').contains('The following claim process will be deleted');
+  cy.get('fsa-deleted-claim-dialog').within(() => {
+    cy.get('.primary-button').click();
+  });
 }

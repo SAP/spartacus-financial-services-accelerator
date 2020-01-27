@@ -30,7 +30,7 @@ const mockSelectedPolicy: SelectedPolicy = {
   contractId: 'testContract',
 };
 
-describe('AddOptionsComponent', () => {
+describe('CreateClaimComponent', () => {
   let component: CreateClaimComponent;
   let fixture: ComponentFixture<CreateClaimComponent>;
   let mockClaimService: MockClaimService;
@@ -68,11 +68,9 @@ describe('AddOptionsComponent', () => {
   it('should start claim', () => {
     selectedPolicy.next(mockSelectedPolicy);
     fixture.detectChanges();
-
     component.startClaim();
 
     expect(mockClaimService.createClaim).toHaveBeenCalledWith(
-      mockSelectedPolicy.userId,
       mockSelectedPolicy.policyId,
       mockSelectedPolicy.contractId
     );

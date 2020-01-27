@@ -6,7 +6,6 @@ import { AllowedFSRequestType } from './../../../../occ/occ-models/occ.models';
 import {
   PolicyService,
   ClaimService,
-  PolicyDataService,
 } from '../../../../core/my-account/services';
 
 const FSCLAIM = 'FSCLAIM';
@@ -22,8 +21,7 @@ export class PoliciesComponent implements OnInit {
     private config: OccConfig,
     protected policyService: PolicyService,
     protected routingService: RoutingService,
-    protected claimService: ClaimService,
-    protected policyData: PolicyDataService
+    protected claimService: ClaimService
   ) {}
 
   policies$;
@@ -43,11 +41,7 @@ export class PoliciesComponent implements OnInit {
 
   startClaim(policyId: string, contractNumber: string) {
     if (policyId && contractNumber) {
-      this.claimService.createClaim(
-        this.policyData.userId,
-        policyId,
-        contractNumber
-      );
+      this.claimService.createClaim(policyId, contractNumber);
       this.routingService.go({
         cxRoute: 'fnolIncidentPage',
       });

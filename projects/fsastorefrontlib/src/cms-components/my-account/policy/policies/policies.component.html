@@ -32,21 +32,38 @@
               }}</span>
             </div>
             <div
-              *ngIf="policy.insuredObjects[0]?.insuredObjectItems"
+              *ngIf="
+                policy.insuredObjectList?.insuredObjects &&
+                policy.insuredObjectList?.insuredObjects.length > 0 &&
+                (policy.insuredObjectList?.insuredObjects)[0]
+                  ?.insuredObjectItems
+              "
               class="info-card-data"
             >
               <span
-                *ngIf="policy.insuredObjects[0]?.insuredObjectItems.length > 0"
+                *ngIf="
+                  policy.insuredObjectList?.insuredObjects &&
+                  policy.insuredObjectList?.insuredObjects.length > 0 &&
+                  (policy.insuredObjectList?.insuredObjects)[0]
+                    ?.insuredObjectItems.length > 0
+                "
                 class="title"
                 >{{
-                  (policy.insuredObjects[0]?.insuredObjectItems)[0]?.value
+                  ((policy.insuredObjectList?.insuredObjects)[0]
+                    ?.insuredObjectItems)[0]?.value
                 }}</span
               >
               <span
-                *ngIf="policy.insuredObjects[0]?.insuredObjectItems.length > 1"
+                *ngIf="
+                  policy.insuredObjectList?.insuredObjects &&
+                  policy.insuredObjectList?.insuredObjects.length > 0 &&
+                  (policy.insuredObjectList?.insuredObjects)[0]
+                    ?.insuredObjectItems.length > 1
+                "
                 class="value"
                 >{{
-                  (policy.insuredObjects[0]?.insuredObjectItems)[1]?.value
+                  ((policy.insuredObjectList?.insuredObjects)[0]
+                    ?.insuredObjectItems)[1]?.value
                 }}</span
               >
             </div>

@@ -30,6 +30,10 @@ class MockClaimService {
   getLoaded() {
     return of(true);
   }
+
+  shouldReload() {
+    return of(false);
+  }
 }
 
 class MockUserRequestService {
@@ -68,7 +72,7 @@ class MockRoutingService {
   go = createSpy();
 }
 
-describe('AddOptionsComponent', () => {
+describe('ClaimsComponent', () => {
   let component: ClaimsComponent;
   let fixture: ComponentFixture<ClaimsComponent>;
   let mockClaimService: MockClaimService;

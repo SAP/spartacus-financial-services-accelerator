@@ -54,6 +54,17 @@ import { fsOverrides } from '../assets/translations/index';
     ConfigModule.withConfig(fsaRoutingConfig),
     ConfigModule.withConfig(fsaCheckoutConfig),
     ConfigModule.withConfig(fsaOccProductConfig),
+    ConfigModule.withConfig({
+      icon: {
+        symbols: {
+          PROPERTY: 'FSA-icon icon-FSA-house',
+          AUTO: 'FSA-icon icon-FSA-auto',
+          PERSON: 'FSA-icon icon-FSA-heart',
+          TRIP: 'FSA-icon icon-FSA-plane',
+          EVENT: 'FSA-icon icon-FSA-event',
+        },
+      },
+    }),
   ],
   exports: [B2cStorefrontModule, CmsLibModule],
   declarations: [],

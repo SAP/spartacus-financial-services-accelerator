@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { AuthService } from '@spartacus/core';
+import { AuthService, OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
 import { filter } from 'rxjs/operators';
 import { FSUserRequest } from '../../../occ/occ-models';
 import { UserRequestSelector } from '../store';
 import * as fromReducer from '../store/reducers';
-import { OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
 
 @Injectable()
 export class UserRequestDataService {
-  private _userId;
+  private _userId = OCC_USER_ID_ANONYMOUS;
   private _userRequest: FSUserRequest;
 
   constructor(
@@ -34,14 +33,6 @@ export class UserRequestDataService {
       });
   }
 
-  set userId(val) {
-    this._userId = val;
-  }
-
-  hasUserRequest(): boolean {
-    return !!this.userRequest;
-  }
-
   get userId(): string {
     return this._userId;
   }
@@ -51,7 +42,7 @@ export class UserRequestDataService {
   }
 
   get requestId(): string {
-    if (this.hasUserRequest) {
+    if (!!this._userRequest) {
       return this.userRequest.requestId;
     }
   }

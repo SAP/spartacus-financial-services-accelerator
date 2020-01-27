@@ -60,7 +60,7 @@ export class AgentSearchService {
       .pipe(take(1))
       .subscribe(searchResults => {
         this.agents.next(searchResults);
-        if (searchResults.agents) {
+        if (searchResults.agents && searchResults.agents.length > 0) {
           this.agentDetails.next(searchResults.agents[0]);
         }
       });

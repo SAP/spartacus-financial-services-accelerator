@@ -16,11 +16,6 @@ export const getQuotes: MemoizedSelector<any, any> = createSelector(
   fromQuote.getQuotes
 );
 
-export const getQuoteRefresh: MemoizedSelector<any, boolean> = createSelector(
-  getQuotesState,
-  fromQuote.getRefresh
-);
-
 export const getQuotesLoaded: MemoizedSelector<any, boolean> = createSelector(
   getQuotesState,
   fromQuote.getLoaded
