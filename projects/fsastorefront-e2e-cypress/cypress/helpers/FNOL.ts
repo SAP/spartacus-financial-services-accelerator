@@ -1,9 +1,7 @@
 let claimID = '';
 
 function setClaimIdFromLocalStorage() {
-  const localData = JSON.parse(
-    localStorage.getItem('spartacus-local-data')
-  );
+  const localData = JSON.parse(localStorage.getItem('spartacus-local-data'));
   claimID = localData.assets.claims.content.claimNumber;
 }
 
@@ -165,11 +163,9 @@ export function selectPolicyOnEntryPage() {
 }
 
 export function deleteClaimFromDialog() {
-  cy
-    .contains( '.info-card', claimID)
-    .within(() => {
-      cy.get('.action-links-secondary-button').click();
-    });
+  cy.contains('.info-card', claimID).within(() => {
+    cy.get('.action-links-secondary-button').click();
+  });
   cy.get('h3').contains('Delete started claim process');
   cy.get('p').contains('The following claim process will be deleted');
   cy.get('fsa-deleted-claim-dialog').within(() => {
@@ -183,8 +179,7 @@ export function checkClaimsPage() {
     dropdownItem: 'Claims',
   });
   cy.get('.heading-headline').contains('Claims');
-  cy.contains( '.info-card', claimID)
-    .within(() => {
-      this.checkOpenClaimContent();
-    });
+  cy.contains('.info-card', claimID).within(() => {
+    this.checkOpenClaimContent();
+  });
 }
