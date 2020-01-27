@@ -71,7 +71,7 @@ describe('EnrichedResponsiveBannerComponent', () => {
 
   it('should contain title and text', () => {
     fixture.detectChanges();
-    expect(el.query(By.css('.enriched-banner__title'))).toBeTruthy();
-    expect(el.query(By.css('.enriched-banner__styled-text'))).toBeTruthy();
+    expect(el.query(By.css('.enriched-banner-title'))).toBeTruthy();
+    expect(el.query(By.css('.enriched-banner-styled-text'))).toBeTruthy();
   });
 });
