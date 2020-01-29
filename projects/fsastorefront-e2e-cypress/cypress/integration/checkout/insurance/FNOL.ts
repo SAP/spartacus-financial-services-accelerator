@@ -10,6 +10,8 @@ context('FNOL for sample data user', () => {
     cy.wait(1000);
   });
 
+  const claimId = fnol.getClaimIdFromLocalStorage();
+
   it('import auto policy', () => {
     cy.request({
       url: `${Cypress.env(
@@ -147,8 +149,8 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should check claim is created', () => {
-    cy.wait(5000);
-    fnol.checkClaimsPage();
+  
+    fnol.checkClaimsPage(claimId);
     buttons.clickResumeButton();
   });
 
@@ -186,7 +188,7 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should check claim confirmation page', () => {
-    fnol.checkConfirmationPage();
+    fnol.checkConfirmationPage(claimId);
   });
 
   it('Should start a claim checkout from homepage', () => {
@@ -204,6 +206,6 @@ context('FNOL for sample data user', () => {
       menuOption: 'My Account',
       dropdownItem: 'Claims',
     });
-    fnol.deleteClaimFromDialog();
+    fnol.deleteClaimFromDialog(claimId);
   });
 });

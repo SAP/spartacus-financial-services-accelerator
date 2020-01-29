@@ -1,8 +1,6 @@
-let claimID = '';
-
-function setClaimIdFromLocalStorage() {
+export function getClaimIdFromLocalStorage() {
   const localData = JSON.parse(localStorage.getItem('spartacus-local-data'));
-  claimID = localData.assets.claims.content.claimNumber;
+  return localData.assets.claims.content.claimNumber;
 }
 
 export function selectAutoPolicyForFNOL() {
@@ -119,9 +117,9 @@ export function checkGeneralInformationAccordion() {
   cy.get('.accordion-list-item').contains('me');
 }
 
-export function checkConfirmationPage() {
+export function checkConfirmationPage(claimId) {
   cy.get('.heading-headline').contains('Claim Confirmation');
-  cy.get('.notice-text ').contains(' Your processing number is:');
+  cy.get('.notice-text ').contains(' Your processing number is:' + claimId);
   cy.get('.content860 p')
     .first()
     .contains(
@@ -162,8 +160,8 @@ export function selectPolicyOnEntryPage() {
   cy.get('.form-check-input').click();
 }
 
-export function deleteClaimFromDialog() {
-  cy.contains('.info-card', claimID).within(() => {
+export function deleteClaimFromDialog(claimId) {
+  cy.contains('.info-card', claimId).within(() => {
     cy.get('.action-links-secondary-button').click();
   });
   cy.get('h3').contains('Delete started claim process');
@@ -173,13 +171,13 @@ export function deleteClaimFromDialog() {
   });
 }
 
-export function checkClaimsPage() {
+export function checkClaimsPage(claimId) {
   cy.selectOptionFromDropdown({
     menuOption: 'My Account',
     dropdownItem: 'Claims',
   });
   cy.get('.heading-headline').contains('Claims');
-  cy.contains('.info-card', claimID).within(() => {
+  cy.contains('.info-card', claimId).within(() => {
     this.checkOpenClaimContent();
   });
 }
