@@ -26,7 +26,9 @@ export function readMessagesAndCheckAttachment(pageNumber, numberOfMessages) {
     .contains(pageNumber)
     .click();
   for (let i = 0; i < numberOfMessages; i++) {
-    cy.get('.message').eq(i).should('not.have.class', 'read');
+    cy.get('.message')
+      .eq(i)
+      .should('not.have.class', 'read');
     cy.get('.message')
       .eq(i)
       .within(() => {
@@ -43,6 +45,8 @@ export function readMessagesAndCheckAttachment(pageNumber, numberOfMessages) {
           'New Policy Effective Immediately'
         );
       });
-      cy.get('.message').eq(i).should('have.class', 'read');
-    }
+    cy.get('.message')
+      .eq(i)
+      .should('have.class', 'read');
+  }
 }
