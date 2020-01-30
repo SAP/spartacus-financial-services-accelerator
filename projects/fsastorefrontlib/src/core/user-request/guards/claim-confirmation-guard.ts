@@ -5,6 +5,12 @@ import { Observable, of } from 'rxjs';
 import { ClaimStatus } from './../../../occ/occ-models/occ.models';
 import { ClaimDataService } from './../../my-account/services/claim-data.service';
 
+export const allowableStatuses = [
+  ClaimStatus.APPROVED,
+  ClaimStatus.SUBMITTED,
+  ClaimStatus.PROCESSING,
+];
+
 @Injectable({
   providedIn: 'root',
 })
@@ -18,11 +24,6 @@ export class ClaimConfirmationGuard implements CanActivate {
 
   canActivate(): Observable<boolean> {
     this.claimStatus = this.claimDataService.claimData.claimStatus;
-    const allowableStatuses = [
-      ClaimStatus.APPROVED,
-      ClaimStatus.SUBMITTED,
-      ClaimStatus.PROCESSING,
-    ];
     if (allowableStatuses.indexOf(this.claimStatus) === -1) {
       this.routingService.go({ cxRoute: 'home' });
       return of(false);

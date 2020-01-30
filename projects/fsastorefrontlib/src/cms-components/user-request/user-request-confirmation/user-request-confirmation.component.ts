@@ -10,8 +10,6 @@ import { genericIcons } from '../../../assets/icons/generic-icons';
 export class UserRequestConfirmationComponent implements OnInit {
   claimNumber;
 
-  imageSrc;
-
   constructor(
     protected claimDataService: ClaimDataService,
     protected domSanitizer: DomSanitizer
@@ -21,7 +19,7 @@ export class UserRequestConfirmationComponent implements OnInit {
     this.claimNumber = this.claimDataService.claimData.claimNumber;
   }
   getImagelink() {
-    this.imageSrc = this.domSanitizer.bypassSecurityTrustUrl(
+    return this.domSanitizer.bypassSecurityTrustUrl(
       genericIcons.documentNotice
     );
   }
