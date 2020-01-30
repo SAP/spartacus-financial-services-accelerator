@@ -13,7 +13,6 @@ import {
   CmsInboxComponent,
   CmsInboxTabComponent,
 } from '../../../occ/occ-models/cms-component.models';
-import { InboxDataService } from '../../../core/my-account/services/inbox-data.service';
 
 @Component({
   selector: 'fsa-inbox',
@@ -25,7 +24,6 @@ export class InboxComponent implements OnInit, OnDestroy {
     protected componentData: CmsComponentData<CmsInboxComponent>,
     protected cmsService: CmsService,
     protected inboxService: InboxService,
-    private inboxData: InboxDataService,
     protected auth: AuthService
   ) {}
 
