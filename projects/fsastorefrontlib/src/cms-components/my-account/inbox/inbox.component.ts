@@ -2,7 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnDestroy,
-  OnInit
+  OnInit,
 } from '@angular/core';
 import { CmsService, AuthService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
