@@ -149,7 +149,6 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should check claim is created', () => {
-  
     fnol.checkClaimsPage(claimId);
     buttons.clickResumeButton();
   });

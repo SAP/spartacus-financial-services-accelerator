@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ClaimDataService } from './../../../core/my-account/services/claim-data.service';
-import { genericIcons } from 'projects/fsastorefrontlib/src/assets/icons/generic-icons';
+import { genericIcons } from '../../../assets/icons/generic-icons';
 
 @Component({
   selector: 'fsa-user-request-confirmation',
@@ -9,6 +9,8 @@ import { genericIcons } from 'projects/fsastorefrontlib/src/assets/icons/generic
 })
 export class UserRequestConfirmationComponent implements OnInit {
   claimNumber;
+
+  imageSrc;
 
   constructor(
     protected claimDataService: ClaimDataService,
@@ -19,7 +21,7 @@ export class UserRequestConfirmationComponent implements OnInit {
     this.claimNumber = this.claimDataService.claimData.claimNumber;
   }
   getImagelink() {
-    return this.domSanitizer.bypassSecurityTrustUrl(
+    this.imageSrc = this.domSanitizer.bypassSecurityTrustUrl(
       genericIcons.documentNotice
     );
   }
