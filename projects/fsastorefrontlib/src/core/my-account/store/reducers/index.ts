@@ -3,14 +3,15 @@ import {
   ActionReducerMap,
   createFeatureSelector,
   MemoizedSelector,
+  ActionReducer,
+  MetaReducer,
 } from '@ngrx/store';
-import { AuthActions } from '@spartacus/core';
 import * as fromClaimPoliciesReducer from './claim-policies.reducer';
 import * as fromClaimReducer from './claim.reducer';
 import * as fromPolicyReducer from './policy.reducer';
 import * as fromPremiumCalendarReducer from './premium-calendar.reducer';
 import * as fromQuoteReducer from './quote.reducer';
-
+import { AuthActions } from '@spartacus/core';
 export interface UserState {
   quotes: fromQuoteReducer.QuoteState;
   policies: fromPolicyReducer.PolicyState;
@@ -18,7 +19,6 @@ export interface UserState {
   claims: fromClaimReducer.ClaimState;
   claimPolicies: fromClaimPoliciesReducer.ClaimPoliciesState;
 }
-
 export function getReducers(): ActionReducerMap<UserState> {
   return {
     quotes: fromQuoteReducer.reducer,
@@ -28,22 +28,20 @@ export function getReducers(): ActionReducerMap<UserState> {
     claimPolicies: fromClaimPoliciesReducer.reducer,
   };
 }
-
 export const reducerToken: InjectionToken<
   ActionReducerMap<UserState>
 > = new InjectionToken<ActionReducerMap<UserState>>('UserReducers');
-
 export const reducerProvider: Provider = {
   provide: reducerToken,
   useFactory: getReducers,
 };
-
 export const getUserState: MemoizedSelector<
   any,
   UserState
 > = createFeatureSelector<UserState>('assets');
-
-export function cleanUserState(reducer) {
+export function clearUserState(
+  reducer: ActionReducer<any>
+): ActionReducer<any> {
   return function(state, action) {
     if (action.type === AuthActions.LOGOUT) {
       state = undefined;
@@ -51,3 +49,4 @@ export function cleanUserState(reducer) {
     return reducer(state, action);
   };
 }
+export const metaReducers: MetaReducer<any>[] = [clearUserState];

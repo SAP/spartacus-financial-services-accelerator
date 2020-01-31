@@ -5,8 +5,9 @@ import * as buttons from '../../../helpers/checkout/buttons';
 import { importAutoPolicy } from '../../../helpers/payloads';
 
 context('FNOL for sample data user', () => {
+  let claimId;
   before(() => {
-    cy.visit('/');
+    cy.visit('/login');
     register.login(donnaMooreUser.email, donnaMooreUser.password);
     cy.wait(1000);
   });
@@ -27,22 +28,13 @@ context('FNOL for sample data user', () => {
     fnol.checkFNOLCheckoutPage();
     fnol.checkFNOLSteps();
     fnol.populateIncidentInformationStep();
+    claimId = fnol.getClaimIdFromLocalStorage();
     buttons.clickContinueButton();
   });
 
   it('Should check claim is created', () => {
-    cy.wait(1000);
-    cy.selectOptionFromDropdown({
-      menuOption: 'My Account',
-      dropdownItem: 'Claims',
-    });
     fnol.checkClaimsPage();
-    cy.get('.info-card')
-      .last()
-      .within(() => {
-        fnol.checkOpenClaimContent();
-        buttons.clickResumeButton();
-      });
+    fnol.checkAndResumeSpecificClaim(claimId);
   });
 
   it('Should check user is navigated to first FNOL page', () => {
@@ -75,15 +67,28 @@ context('FNOL for sample data user', () => {
     fnol.checkIncidentInformationAccordion();
     fnol.checkIncidentReportAccordion();
     fnol.checkGeneralInformationAccordion();
+    buttons.clickContinueButton();
+  });
+
+  it('Should check claim confirmation page', () => {
+    fnol.checkConfirmationPage(claimId);
   });
 
   it('Should start a claim checkout from homepage', () => {
     cy.get('.SiteLogo').click();
-
     fnol.startClaimFromHomepage();
     fnol.checkFnolEntryPage();
     fnol.selectPolicyOnEntryPage();
     buttons.clickContinueButton();
     fnol.checkFNOLCheckoutPage();
+  });
+
+  it('Should delete started claim', () => {
+    cy.selectOptionFromDropdown({
+      menuOption: 'My Account',
+      dropdownItem: 'Claims',
+    });
+    claimId = fnol.getClaimIdFromLocalStorage();
+    fnol.deleteClaimFromDialog(claimId);
   });
 });

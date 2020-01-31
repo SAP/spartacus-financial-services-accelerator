@@ -1,5 +1,6 @@
-export function checkClaimsPage() {
-  cy.get('.heading-headline').contains('Claims');
+export function getClaimIdFromLocalStorage() {
+  const localData = JSON.parse(localStorage.getItem('spartacus-local-data'));
+  return localData.assets.claims.content.claimNumber;
 }
 
 export function selectAutoPolicyForFNOL() {
@@ -115,6 +116,16 @@ export function checkGeneralInformationAccordion() {
   cy.get('.accordion-list-item').contains('me');
 }
 
+export function checkConfirmationPage(claimId) {
+  cy.get('.heading-headline').contains('Claim Confirmation');
+  cy.get('.notice-text ').contains(' Your processing number is: ' + claimId);
+  cy.get('.content860 p')
+    .first()
+    .contains(
+      'Your claim request has been successfully saved in our system. You can find the confirmation email in the Inbox of your self-service portal and in your mailbox.'
+    );
+}
+
 export function checkOpenClaimContent() {
   cy.get('.title').contains('Auto Insurance');
   cy.get('.value').contains('BULK1T2000000552');
@@ -148,15 +159,31 @@ export function selectPolicyOnEntryPage() {
   cy.get('.form-check-input').click();
 }
 
-export function deleteClaimFromDialog() {
-  cy.get('.info-card')
-    .last()
-    .within(() => {
-      cy.get('.action-links-secondary-button').click();
-    });
+export function deleteClaimFromDialog(claimId) {
+  cy.contains('.info-card', claimId).within(() => {
+    cy.get('.action-links-secondary-button').click();
+  });
   cy.get('h3').contains('Delete started claim process');
   cy.get('p').contains('The following claim process will be deleted');
   cy.get('fsa-deleted-claim-dialog').within(() => {
     cy.get('.primary-button').click();
+  });
+}
+
+export function checkClaimsPage(claimId) {
+  cy.selectOptionFromDropdown({
+    menuOption: 'My Account',
+    dropdownItem: 'Claims',
+  });
+  cy.get('.heading-headline').contains('Claims');
+}
+
+export function checkAndResumeSpecificClaim(claimId) {
+  cy.contains('.info-card', claimId).within(() => {
+    this.checkOpenClaimContent();
+    cy.get('.secondary-button')
+      .contains('Resume')
+      .click();
+    cy.wait(1000);
   });
 }

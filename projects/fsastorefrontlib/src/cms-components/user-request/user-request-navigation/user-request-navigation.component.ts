@@ -1,3 +1,4 @@
+import { ClaimStatus } from './../../../occ/occ-models/occ.models';
 import { UserRequestDataService } from './../../../core/user-request/services/user-request-data.service';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -13,11 +14,7 @@ import {
   ClaimDataService,
   ClaimService,
 } from '../../../core/my-account/services';
-import {
-  GlobalMessageService,
-  GlobalMessageType,
-  RoutingService,
-} from '@spartacus/core';
+import { GlobalMessageService, RoutingService } from '@spartacus/core';
 import { select, Store } from '@ngrx/store';
 import * as fromClaimStore from '../../../core/my-account/store';
 
@@ -128,14 +125,11 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
         .pipe(
           filter(
             claim =>
-              claim.claimStatus !== undefined && claim.claimStatus !== 'OPEN'
+              claim.claimStatus !== undefined &&
+              claim.claimStatus !== ClaimStatus.OPEN
           ),
           map(() => {
-            this.router.go('/');
-            this.globalMessageService.add(
-              'Your claim is submitted',
-              GlobalMessageType.MSG_TYPE_CONFIRMATION
-            );
+            this.router.go('/fnolConfirmation');
           })
         )
         .subscribe()

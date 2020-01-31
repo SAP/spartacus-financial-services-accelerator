@@ -29,11 +29,14 @@ import { StoreModule } from '@ngrx/store';
 import { UserRequestProgressBarComponent } from './user-request-progress-bar/user-request-progress-bar.component';
 import { UserRequestDataService } from '../../core/user-request/services/user-request-data.service';
 import { UserRequestNavigationComponent } from './user-request-navigation/user-request-navigation.component';
+import { UserRequestConfirmationComponent } from './user-request-confirmation/user-request-confirmation.component';
 import { UserRequestNavigationService } from '../../core/user-request/services/user-request/user-request-navigation.service';
 import { UserRequestStoreModule } from '../../core/user-request/store/user-request-store.module';
+import { ClaimStoreModule } from './../../core/my-account/store/claim-store.module';
 import { UserRequestSummaryComponent } from './user-request-summary/user-request-summary.component';
 import { OccUserRequestAdapter } from '../../occ/services/user-request/occ-user-request.adapter';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
+import { ClaimConfirmationGuard } from '../../core/user-request/guards/claim-confirmation-guard';
 
 const routes: Routes = [
   {
@@ -72,12 +75,22 @@ const routes: Routes = [
     },
     component: PageLayoutComponent,
   },
+  {
+    path: null,
+    canActivate: [ClaimConfirmationGuard, AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'fnolConfirmation',
+      pageLabel: 'fnolConfirmationPage',
+    },
+    component: PageLayoutComponent,
+  },
 ];
 
 @NgModule({
   imports: [
     CommonModule,
     UserRequestStoreModule,
+    ClaimStoreModule,
     I18nModule,
     RouterModule,
     MediaModule,
@@ -100,6 +113,9 @@ const routes: Routes = [
         UserRequestNavigationFlex: {
           component: UserRequestNavigationComponent,
         },
+        UserRequestConfirmationFlex: {
+          component: UserRequestConfirmationComponent,
+        },
       },
     }),
   ],
@@ -107,16 +123,19 @@ const routes: Routes = [
     UserRequestProgressBarComponent,
     UserRequestNavigationComponent,
     UserRequestSummaryComponent,
+    UserRequestConfirmationComponent,
   ],
   exports: [
     UserRequestProgressBarComponent,
     UserRequestNavigationComponent,
     UserRequestSummaryComponent,
+    UserRequestConfirmationComponent,
   ],
   entryComponents: [
     UserRequestProgressBarComponent,
     UserRequestNavigationComponent,
     UserRequestSummaryComponent,
+    UserRequestConfirmationComponent,
   ],
   providers: [
     UserRequestService,

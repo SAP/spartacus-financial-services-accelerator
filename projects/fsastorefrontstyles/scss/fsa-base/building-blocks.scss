@@ -1,5 +1,9 @@
 @import '../mixins-fsa';
-
+.content860 {
+  max-width: 860px;
+  width: 100%;
+  margin: 0 auto;
+}
 .info-container {
   @include box-shadow(0px, 2px, 20px, 1px, $color-grey, 1);
 }
@@ -36,11 +40,17 @@
 .border-color-3 {
   border: 1px solid var(--cx-color-3);
 }
+.border-color-6 {
+  border: 1px solid var(--cx-color-6);
+}
 .border-color-7 {
   border: 1px solid var(--cx-color-7);
 }
 .box-shadow {
   @include box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 0.3);
+}
+.flex-100 {
+  flex: 0 0 100%;
 }
 .warn {
   color: var(--cx-color-warning);

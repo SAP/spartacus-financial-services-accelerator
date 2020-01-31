@@ -1,13 +1,14 @@
 @import '../mixins-fsa';
 @import '../theme';
 
-.form-check input[type='checkbox'] {
+input[type='checkbox'],
+input[type='radio'] {
   -webkit-appearance: none;
   appearance: none;
-  &:checked {
-    border-color: var(--cx-color-primary);
-    background-color: var(--cx-color-primary);
-  }
+}
+.form-check input[type='checkbox']:checked {
+  border-color: var(--cx-color-primary);
+  background-color: var(--cx-color-primary);
 }
 .checkbox-label {
   padding-left: 28px;
