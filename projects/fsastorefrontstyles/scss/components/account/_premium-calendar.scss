@@ -1,12 +1,6 @@
 @import '../../theme/fsa/variables';
 
 %fsa-premium-calendar {
-  .section-header-heading {
-    padding: 20px;
-    & h3 {
-      font-weight: normal;
-    }
-  }
   .premium-data-row {
     background-color: var(--cx-color-4);
     border: $border-grey;

@@ -6,7 +6,7 @@ export function openCategoryPage() {
     dropdownItem: 'Travel',
   });
   cy.wait(800);
-  cy.get('.enriched-banner__styled-text')
+  cy.get('.enriched-banner-styled-text')
     .invoke('text')
     .then(text => {
       if (text !== ' Get a Quote') {
@@ -14,7 +14,7 @@ export function openCategoryPage() {
       }
     });
 
-  cy.get('.enriched-banner__styled-text')
+  cy.get('.enriched-banner-styled-text')
     .should('be.visible')
     .click({ force: true });
 }

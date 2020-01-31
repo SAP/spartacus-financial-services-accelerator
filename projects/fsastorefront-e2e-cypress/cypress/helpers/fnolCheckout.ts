@@ -53,7 +53,6 @@ export function populateIncidentInformationStep() {
       'my tesla S was stolen while I was in the shopping center'
     );
     cy.wait(1000);
-    setClaimIdFromLocalStorage();
   });
 }
 
@@ -119,7 +118,7 @@ export function checkGeneralInformationAccordion() {
 
 export function checkConfirmationPage(claimId) {
   cy.get('.heading-headline').contains('Claim Confirmation');
-  cy.get('.notice-text ').contains(' Your processing number is:' + claimId);
+  cy.get('.notice-text ').contains(' Your processing number is: ' + claimId);
   cy.get('.content860 p')
     .first()
     .contains(
@@ -177,7 +176,13 @@ export function checkClaimsPage(claimId) {
     dropdownItem: 'Claims',
   });
   cy.get('.heading-headline').contains('Claims');
+  
   cy.contains('.info-card', claimId).within(() => {
     this.checkOpenClaimContent();
+    cy.get('.secondary-button')
+    .contains('Resume')
+    .click();
+  cy.wait(1000);
   });
 }
+

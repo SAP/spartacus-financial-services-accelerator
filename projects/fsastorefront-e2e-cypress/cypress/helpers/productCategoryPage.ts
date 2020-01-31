@@ -1,6 +1,6 @@
 export function checkComponents() {
   cy.get('.Section1 fsa-enriched-responsive-banner');
-  cy.get('span.enriched-banner__title').should(
+  cy.get('span.enriched-banner-title').should(
     'contain',
     'Apply online and save your valuable time'
   );
@@ -8,16 +8,16 @@ export function checkComponents() {
     'be.visible'
   );
   cy.get('fsa-cms-custom-container cx-generic-link cx-media');
-  cy.get('fsa-cms-custom-container .category-primary-promotion-banner__title');
+  cy.get('fsa-cms-custom-container .title');
 }
 
 export function checkQuoteButtons() {
-  cy.get('a.enriched-banner__styled-text').should('contain', 'Get a Quote');
+  cy.get('a.enriched-banner-styled-text').should('contain', 'Get a Quote');
   cy.get('cx-generic-link a').should('contain', 'Retrieve a Quote');
 }
 
 export function checkApplicationButtons() {
-  cy.get('a.enriched-banner__styled-text').should(
+  cy.get('a.enriched-banner-styled-text').should(
     'contain',
     ' Request a product'
   );
@@ -34,7 +34,7 @@ export function checksSavingsCategoryPage() {
 }
 
 export function startCheckoutForBanking() {
-  cy.get('a.enriched-banner__styled-text')
+  cy.get('a.enriched-banner-styled-text')
     .should('contain', ' Request a product')
     .click();
 }

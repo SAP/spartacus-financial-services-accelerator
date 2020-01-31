@@ -60,7 +60,6 @@ describe('ClaimConfirmationGuard', () => {
       .canActivate()
       .subscribe(value => {
         result = value;
-        console.log(result);
       })
       .unsubscribe();
     expect(result).toEqual(true);
