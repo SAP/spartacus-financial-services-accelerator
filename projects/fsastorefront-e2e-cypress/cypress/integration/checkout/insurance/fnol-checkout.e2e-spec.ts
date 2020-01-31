@@ -33,7 +33,8 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should check claim is created', () => {
-    fnol.checkClaimsPage(claimId);
+    fnol.checkClaimsPage();
+    fnol.checkSpecificClaim(claimId);
   });
 
   it('Should check user is navigated to first FNOL page', () => {

@@ -176,13 +176,14 @@ export function checkClaimsPage(claimId) {
     dropdownItem: 'Claims',
   });
   cy.get('.heading-headline').contains('Claims');
-  
+}
+
+export function checkSpecificClaim(claimId) {
   cy.contains('.info-card', claimId).within(() => {
     this.checkOpenClaimContent();
     cy.get('.secondary-button')
-    .contains('Resume')
-    .click();
-  cy.wait(1000);
+      .contains('Resume')
+      .click();
+    cy.wait(1000);
   });
 }
-
