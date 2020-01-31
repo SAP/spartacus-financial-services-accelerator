@@ -178,7 +178,7 @@ export function checkClaimsPage(claimId) {
   cy.get('.heading-headline').contains('Claims');
 }
 
-export function checkSpecificClaim(claimId) {
+export function checkAndResumeSpecificClaim(claimId) {
   cy.contains('.info-card', claimId).within(() => {
     this.checkOpenClaimContent();
     cy.get('.secondary-button')
