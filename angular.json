@@ -162,7 +162,14 @@
                 "./projects/fsastorefrontstyles/scss",
                 "node_modules/@spartacus/styles/scss"
               ]
-            }
+            },
+            "sourceMap": true,
+            "codeCoverage": true,
+            "codeCoverageExclude": [
+              "**/index.ts",
+              "**/*.de.ts",
+              "**/*.en.ts"
+            ]
           }
         },
         "lint": {
