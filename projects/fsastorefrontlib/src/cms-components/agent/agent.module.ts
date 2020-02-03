@@ -16,6 +16,7 @@ import { AgentSearchBoxComponent } from './agent-search-box/agent-search-box.com
 import { AgentSearchListComponent } from './agent-search-list/agent-search-list.component';
 import { AgentSearchDetailsComponent } from './agent-search-details/agent-search-details.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-form.component';
 
 @NgModule({
   imports: [
@@ -54,6 +55,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AgentSearchBoxComponent,
     AgentSearchListComponent,
     AgentSearchDetailsComponent,
+    ContactAgentFormComponent
   ],
   exports: [
     AgentRootComponent,
@@ -71,4 +73,4 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   providers: [OccAgentAdapter],
 })
-export class AgentModule {}
+export class AgentModule { }
