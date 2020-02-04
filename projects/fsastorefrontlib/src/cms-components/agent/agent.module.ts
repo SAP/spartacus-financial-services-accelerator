@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AgentRootComponent } from './agent-root/agent-root.component';
-import { CmsConfig, ConfigModule, I18nModule } from '@spartacus/core';
+import {
+  CmsConfig,
+  ConfigModule,
+  I18nModule,
+  AuthGuard,
+} from '@spartacus/core';
 import { OccAgentAdapter } from '../../occ/services/agent/occ-agent.adapter';
 import { FindAgentNavigationComponent } from './find-agent-navigation/find-agent-navigation.component';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
@@ -10,6 +15,7 @@ import {
   StoreFinderModule,
   ListNavigationModule,
   IconModule,
+  PageLayoutComponent,
 } from '@spartacus/storefront';
 import { RouterModule } from '@angular/router';
 import { AgentSearchBoxComponent } from './agent-search-box/agent-search-box.component';
@@ -25,14 +31,27 @@ import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-fo
     MediaModule,
     I18nModule,
     IconModule,
-    RouterModule,
     StoreFinderModule,
     ReactiveFormsModule,
     ListNavigationModule,
+    RouterModule.forChild([
+      {
+        path: 'contact-agent',
+        canActivate: [AuthGuard],
+        data: {
+          cxRoute: 'contactAgent',
+          pageLabel: 'contactAgent',
+        },
+        component: PageLayoutComponent,
+      },
+    ]),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         CMSAgentRootComponent: {
           component: AgentRootComponent,
+        },
+        ContactAgentFormFlex: {
+          component: ContactAgentFormComponent,
         },
         FindAgentNavigationTypeFlex: {
           component: FindAgentNavigationComponent,
@@ -51,14 +70,16 @@ import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-fo
   ],
   declarations: [
     AgentRootComponent,
+    ContactAgentFormComponent,
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
     AgentSearchDetailsComponent,
-    ContactAgentFormComponent
+    ContactAgentFormComponent,
   ],
   exports: [
     AgentRootComponent,
+    ContactAgentFormComponent,
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
@@ -66,6 +87,7 @@ import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-fo
   ],
   entryComponents: [
     AgentRootComponent,
+    ContactAgentFormComponent,
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
@@ -73,4 +95,4 @@ import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-fo
   ],
   providers: [OccAgentAdapter],
 })
-export class AgentModule { }
+export class AgentModule {}
