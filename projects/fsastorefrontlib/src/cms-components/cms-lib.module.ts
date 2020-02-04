@@ -17,6 +17,7 @@ import { CategoryFeatureModule } from './category/category-feature/category-feat
 import { CategoryFeatureCarouselModule } from './category/category-feature-carousel/category-feature-carousel.module';
 import { FSRegisterModule } from './user/register/fs-register.module';
 import { ProductModule } from './product/product.module';
+import { ChangeProcessModule } from './change-process/change-process.module';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { ProductModule } from './product/product.module';
     MyAccountModule,
     FSRegisterModule,
     UserRequestModule,
+    ChangeProcessModule,
     StoreModule.forFeature('assets', reducerToken),
     EffectsModule.forFeature(effects),
     CategoryFeatureModule,
@@ -44,6 +46,7 @@ import { ProductModule } from './product/product.module';
     MyAccountModule,
     FSRegisterModule,
     UserRequestModule,
+    ChangeProcessModule,
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,
   ],

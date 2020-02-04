@@ -1644,5 +1644,26 @@ export class FormSampleConfigurations {
         },
       ],
     },
+    {
+      formId: 'auto_change_car_details_form',
+      formGroups: [
+        {
+          fieldConfigs: [
+            {
+              label: 'Change mileage',
+              name: 'newMileage',
+              type: 'input',
+              placeholder: 'Insert New Mileage',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.max(100000),
+                DefaultFormValidators.pattern('^[0-9]*$'),
+              ],
+              error: 'forms.lessThan100K',
+            },
+          ],
+        },
+      ],
+    },
   ];
 }
