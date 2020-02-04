@@ -42,6 +42,7 @@ export const forms = {
       insurance_personal_details: 'Personal Details',
       event_personal_details: 'Personal Details',
       travel_personal_details: 'Personal Details',
+      auto_change_car_details_form: 'Auto Information',
     },
     personalDetails: {
       address1: 'Address 1',
