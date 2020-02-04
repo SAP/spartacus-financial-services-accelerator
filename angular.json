@@ -163,8 +163,6 @@
                 "node_modules/@spartacus/styles/scss"
               ]
             },
-            "sourceMap": true,
-            "codeCoverage": true,
             "codeCoverageExclude": [
               "**/index.ts",
               "**/*.de.ts",
