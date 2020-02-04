@@ -46,8 +46,14 @@ export class OccAgentAdapter implements AgentAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
+  getAgentByID(id: string) {
+    const url = this.getAgentsEndpoint() + '/' + id + '?fields=DEFAULT';
+    return this.http
+      .get(url)
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
   protected getAgentsEndpoint() {
-    const agentsEndpoint = '/agents';
-    return this.occEndpointService.getBaseEndpoint() + agentsEndpoint;
+    return this.occEndpointService.getBaseEndpoint() + '/agents';
   }
 }

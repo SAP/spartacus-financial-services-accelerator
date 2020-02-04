@@ -6,6 +6,7 @@ import {
   ConfigModule,
   I18nModule,
   AuthGuard,
+  UrlModule,
 } from '@spartacus/core';
 import { OccAgentAdapter } from '../../occ/services/agent/occ-agent.adapter';
 import { FindAgentNavigationComponent } from './find-agent-navigation/find-agent-navigation.component';
@@ -16,6 +17,7 @@ import {
   ListNavigationModule,
   IconModule,
   PageLayoutComponent,
+  CmsPageGuard,
 } from '@spartacus/storefront';
 import { RouterModule } from '@angular/router';
 import { AgentSearchBoxComponent } from './agent-search-box/agent-search-box.component';
@@ -30,17 +32,18 @@ import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-fo
     AccordionModule,
     MediaModule,
     I18nModule,
+    UrlModule,
     IconModule,
     StoreFinderModule,
     ReactiveFormsModule,
     ListNavigationModule,
     RouterModule.forChild([
       {
-        path: 'contact-agent',
-        canActivate: [AuthGuard],
+        path: null,
+        canActivate: [AuthGuard, CmsPageGuard],
         data: {
           cxRoute: 'contactAgent',
-          pageLabel: 'contactAgent',
+          pageLabel: 'contactAgentPage',
         },
         component: PageLayoutComponent,
       },

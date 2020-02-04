@@ -1,1 +1,139 @@
-<p>contact-agent-form works!</p>
+<ng-container *ngIf="agent$ | async as agent">
+  <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
+    {{ 'fscommon.agentLocator.contact' | cxTranslate }} {{ agent.firstName }}
+    {{ agent.lastName }}
+  </h2>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="cx-section">
+        <form [formGroup]="contactAgentForm">
+          <div class="form-group">
+            <label>
+              <span class="label-content">{{
+                'register.firstName.label' | cxTranslate
+              }}</span>
+              <input
+                class="form-control"
+                type="text"
+                name="firstname"
+                placeholder="{{
+                  'register.firstName.placeholder' | cxTranslate
+                }}"
+                formControlName="firstName"
+              />
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label>
+              <span class="label-content">{{
+                'register.lastName.label' | cxTranslate
+              }}</span>
+              <input
+                class="form-control"
+                type="text"
+                name="lastname"
+                placeholder="{{
+                  'register.lastName.placeholder' | cxTranslate
+                }}"
+                formControlName="lastName"
+              />
+            </label>
+          </div>
+
+          <div class="form-group">
+            <label>
+              <span class="label-content">{{
+                'register.emailAddress.label' | cxTranslate
+              }}</span>
+              <input
+                class="form-control"
+                [class.is-invalid]="
+                  contactAgentForm.get('email').errors &&
+                  (contactAgentForm.get('email').errors['email'] ||
+                    contactAgentForm.get('email').errors['InvalidEmail']) &&
+                  contactAgentForm.get('email').dirty
+                "
+                type="email"
+                name="email"
+                placeholder="{{
+                  'register.emailAddress.placeholder' | cxTranslate
+                }}"
+                formControlName="email"
+              />
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <span class="label-content">{{
+                'forms.phoneNumber.label' | cxTranslate
+              }}</span>
+              <input
+                class="form-control"
+                type="text"
+                name="phoneNumber"
+                placeholder="{{ 'forms.phoneNumber.label' | cxTranslate }}"
+                formControlName="phoneNumber"
+              />
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <span class="label-content">{{
+                'forms.interest' | cxTranslate
+              }}</span>
+              <select formControlName="interest" class="form-control">
+                <option selected value="" disabled>{{
+                  'fscommon.pleaseSelect' | cxTranslate
+                }}</option>
+                <option>Problem</option>
+                <option>Incident</option>
+                <option>Complaint</option>
+                <option>Fraud</option>
+                <option>Note</option>
+                <option>Enquiry</option>
+              </select>
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <span class="label-content">{{
+                'forms.contactType' | cxTranslate
+              }}</span>
+              <select formControlName="contactType" class="form-control">
+                <option selected value="" disabled>{{
+                  'fscommon.pleaseSelect' | cxTranslate
+                }}</option>
+                <option>Email</option>
+                <option>Telephone Call</option>
+                <option>Instant message</option>
+                <option>Ticket Message</option>
+              </select>
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <span class="label-content">{{
+                'forms.enterMessage' | cxTranslate
+              }}</span>
+              <textarea
+                class="form-control"
+                formControlName="message"
+                name="message"
+                rows="8"
+                placeholder="{{ 'forms.enterMessage' | cxTranslate }}"
+              ></textarea>
+            </label>
+          </div>
+          <button
+            type="submit"
+            [disabled]="contactAgentForm.invalid"
+            class="btn btn-block btn-primary"
+          >
+            {{ 'forms.send' | cxTranslate }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-container>

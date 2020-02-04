@@ -50,6 +50,10 @@ export class AgentSearchService {
     return this.agentDetails.asObservable();
   }
 
+  getAgentByID(agentID) {
+    return this.occAgentAdapter.getAgentByID(agentID);
+  }
+
   protected getAgentsByQuery(
     searchQuery: string,
     pageNumber: number,

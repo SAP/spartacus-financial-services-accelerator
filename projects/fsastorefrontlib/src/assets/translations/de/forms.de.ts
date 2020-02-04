@@ -17,6 +17,10 @@ export const forms = {
       lengthValidation:
         'Die Telefonnummer sollte aus mindestens 6 und höchstens 20 Zeichen bestehen.',
     },
+    interest: '[DE] interest',
+    contactType: '[DE] Contact type',
+    enterMessage: '[DE] Your message',
+    send: '[DE] Send',
     titles: {
       trip_details_form: 'Reiseinformation',
       auto_details_form: 'Fahrzeuginformationen',
