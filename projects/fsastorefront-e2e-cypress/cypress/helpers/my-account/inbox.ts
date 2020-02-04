@@ -21,7 +21,7 @@ export function checkInboxHeader() {
   });
 }
 
-export function readMessagesAndCheckAttachment(pageNumber, numberOfMessages) {
+export function  readMessagesAndCheckAttachment(pageNumber, numberOfMessages) {
   cy.get('a.page-link')
     .contains(pageNumber)
     .click();
