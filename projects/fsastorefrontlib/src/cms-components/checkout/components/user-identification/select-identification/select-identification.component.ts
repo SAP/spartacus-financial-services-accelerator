@@ -23,15 +23,15 @@ export class SelectIdentificationTypeComponent implements OnInit {
   identificationTypes: Array<any> = [
     {
       name: 'nearest_branch',
-      icon: 'icon-FSA-person',
+      icon: 'icon-person',
     },
     {
       name: 'legal_identification',
-      icon: 'icon-FSA-payment-cards',
+      icon: 'icon-payment-cards',
     },
     {
       name: 'video_identification',
-      icon: 'icon-FSA-shield',
+      icon: 'icon-shield',
     },
   ];
 
