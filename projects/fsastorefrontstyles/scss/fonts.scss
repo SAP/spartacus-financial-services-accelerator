@@ -1,17 +1,17 @@
 @font-face {
-  font-family: 'fsa-icon';
-  src: url('assets/fonts/fsa-icon.eot?kunl1g');
-  src: url('assets/fonts/fsa-icon.eot?kunl1g#iefix') format('embedded-opentype'),
-    url('assets/fonts/fsa-icon.ttf?kunl1g') format('truetype'),
-    url('assets/fonts/fsa-icon.woff?kunl1g') format('woff'),
-    url('assets/fonts/fsa-icon.svg?kunl1g#fsa-icon') format('svg');
+  font-family: 'fsa-font';
+  src: url('assets/fonts/fsa-font.eot?svubpe');
+  src: url('assets/fonts/fsa-font.eot?svubpe#iefix') format('embedded-opentype'),
+    url('assets/fonts/fsa-font.ttf?svubpe') format('truetype'),
+    url('assets/fonts/fsa-font.woff?svubpe') format('woff'),
+    url('assets/fonts/fsa-font.svg?svubpe#fsa-font') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
 .fsa-icon {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'fsa-icon' !important;
+  font-family: 'fsa-font' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -68,9 +68,6 @@
 }
 .icon-ok:before {
   content: '\e922';
-}
-.icon-paperclip:before {
-  content: '\e923';
 }
 .icon-remove:before {
   content: '\e925';
