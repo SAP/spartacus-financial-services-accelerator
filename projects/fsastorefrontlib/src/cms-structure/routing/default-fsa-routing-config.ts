@@ -38,6 +38,9 @@ export const fsaStorefrontRoutesConfig: RoutesConfig = {
   fnolGeneralInfoPage: { paths: ['fnolGeneralInfoPage'] },
   fnolSummaryPage: { paths: ['fnolSummaryPage'] },
   fnolConfirmation: { paths: ['fnolConfirmation'] },
+  changeCarDetailsPage: { paths: ['changeCarDetailsPage'] },
+  changeCoveragePage: { paths: ['changeCoveragePage'] },
+  changeSimulationPage: { paths: ['changeSimulationPage'] },
 };
 
 export const fsaRoutingConfig: RoutingConfig = {
