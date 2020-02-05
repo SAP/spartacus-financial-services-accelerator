@@ -1,8 +1,8 @@
-import { OccAgentAdapter } from './../../../occ/services/agent/occ-agent.adapter';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CmsComponentData } from '@spartacus/storefront';
-import { CmsAgentRootComponent } from '../../../occ/occ-models';
 import { Subscription } from 'rxjs';
+import { CmsComponentData } from '@spartacus/storefront';
+import { OccAgentAdapter } from './../../../occ/services/agent/occ-agent.adapter';
+import { CmsAgentRootComponent } from '../../../occ/occ-models';
 
 @Component({
   selector: 'fsa-agent-root',
@@ -12,7 +12,7 @@ export class AgentRootComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CmsAgentRootComponent>,
     protected agentAdapter: OccAgentAdapter
-  ) {}
+  ) { }
 
   private subscription = new Subscription();
   agentList$;

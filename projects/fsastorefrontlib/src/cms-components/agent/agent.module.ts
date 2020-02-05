@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AgentRootComponent } from './agent-root/agent-root.component';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
 import {
   CmsConfig,
   ConfigModule,
@@ -8,9 +9,6 @@ import {
   AuthGuard,
   UrlModule,
 } from '@spartacus/core';
-import { OccAgentAdapter } from '../../occ/services/agent/occ-agent.adapter';
-import { FindAgentNavigationComponent } from './find-agent-navigation/find-agent-navigation.component';
-import { AccordionModule } from '../../shared/accordion/accordion.module';
 import {
   MediaModule,
   StoreFinderModule,
@@ -19,11 +17,13 @@ import {
   PageLayoutComponent,
   CmsPageGuard,
 } from '@spartacus/storefront';
-import { RouterModule } from '@angular/router';
+import { OccAgentAdapter } from '../../occ/services/agent/occ-agent.adapter';
+import { AgentRootComponent } from './agent-root/agent-root.component';
+import { FindAgentNavigationComponent } from './find-agent-navigation/find-agent-navigation.component';
+import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { AgentSearchBoxComponent } from './agent-search-box/agent-search-box.component';
 import { AgentSearchListComponent } from './agent-search-list/agent-search-list.component';
 import { AgentSearchDetailsComponent } from './agent-search-details/agent-search-details.component';
-import { ReactiveFormsModule } from '@angular/forms';
 import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-form.component';
 
 @NgModule({
@@ -77,8 +77,7 @@ import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-fo
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
-    AgentSearchDetailsComponent,
-    ContactAgentFormComponent,
+    AgentSearchDetailsComponent
   ],
   exports: [
     AgentRootComponent,
@@ -98,4 +97,4 @@ import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-fo
   ],
   providers: [OccAgentAdapter],
 })
-export class AgentModule {}
+export class AgentModule { }

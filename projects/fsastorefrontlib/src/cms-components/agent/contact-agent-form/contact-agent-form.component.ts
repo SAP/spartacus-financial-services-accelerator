@@ -6,11 +6,11 @@ import {
   Validators,
 } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
+import { Store, select } from '@ngrx/store';
 import {
   StateWithUser,
   UsersSelectors,
 } from '@spartacus/core';
-import { Store, select } from '@ngrx/store';
 import { DefaultFormValidators } from '@fsa/dynamicforms';
 import { AgentSearchService } from '../../../core/agent/services/agent-search.service';
 

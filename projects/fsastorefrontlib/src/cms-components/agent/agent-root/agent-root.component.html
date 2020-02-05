@@ -22,7 +22,12 @@
                 <div class="row">
                   <a
                     class="col-6 fsa-icon icon-envelope text-right position-relative"
-                    href="#"
+                    [routerLink]="
+                      {
+                        cxRoute: 'contactAgent',
+                        params: { agent: agent.contactEmail }
+                      } | cxUrl
+                    "
                   ></a>
                   <a
                     class="col-6 fsa-icon icon-map-marker text-left position-relative"
