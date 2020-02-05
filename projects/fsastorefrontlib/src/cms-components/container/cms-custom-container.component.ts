@@ -38,6 +38,7 @@ export class CmsCustomContainerComponent implements OnInit {
           data.simpleCMSComponents.split(' '),
           this.pageContext
         );
-      }).unsubscribe();
+      })
+      .unsubscribe();
   }
 }
