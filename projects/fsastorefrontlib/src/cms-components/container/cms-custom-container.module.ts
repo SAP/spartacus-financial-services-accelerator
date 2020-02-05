@@ -7,7 +7,7 @@ import {
   CmsModule,
 } from '@spartacus/core';
 import { CmsCustomContainerComponent } from './cms-custom-container';
-import { PageComponentModule } from '@spartacus/storefront';
+import { PageComponentModule, SpinnerModule } from '@spartacus/storefront';
 
 @NgModule({
   imports: [
@@ -15,6 +15,7 @@ import { PageComponentModule } from '@spartacus/storefront';
     I18nModule,
     PageComponentModule,
     CmsModule,
+    SpinnerModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         CMSCustomDefineStyleCMSComponentsContainer: {

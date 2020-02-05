@@ -32,11 +32,13 @@ export class CmsCustomContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.componentData.data$.subscribe(data => {
-      this.components$ = this.cmsComponentConnector.getList(
-        data.simpleCMSComponents.split(' '),
-        this.pageContext
-      );
-    });
+    this.componentData.data$
+      .subscribe(data => {
+        this.components$ = this.cmsComponentConnector.getList(
+          data.simpleCMSComponents.split(' '),
+          this.pageContext
+        );
+      })
+      .unsubscribe();
   }
 }
