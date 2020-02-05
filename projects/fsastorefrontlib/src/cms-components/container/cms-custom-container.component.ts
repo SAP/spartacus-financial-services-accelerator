@@ -10,7 +10,7 @@ import {
 
 @Component({
   selector: 'fsa-cms-custom-container',
-  templateUrl: './cms-custom-container.html',
+  templateUrl: './cms-custom-container.component.html',
 })
 export class CmsCustomContainerComponent implements OnInit {
   routeParamId = 'formCode';
@@ -32,11 +32,13 @@ export class CmsCustomContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.componentData.data$.subscribe(data => {
-      this.components$ = this.cmsComponentConnector.getList(
-        data.simpleCMSComponents.split(' '),
-        this.pageContext
-      );
-    });
+    this.componentData.data$
+      .subscribe(data => {
+        this.components$ = this.cmsComponentConnector.getList(
+          data.simpleCMSComponents.split(' '),
+          this.pageContext
+        );
+      })
+      .unsubscribe();
   }
 }
