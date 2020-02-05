@@ -4,15 +4,11 @@ import { Store, StoreModule } from '@ngrx/store';
 import { Type } from '@angular/core';
 import { reducerProvider, reducerToken } from '../store/reducers/index';
 import { QuoteService } from './quote.service';
-import {
-  CartService,
-  AuthService,
-  CartActions,
-  OCC_USER_ID_CURRENT,
-} from '@spartacus/core';
+import { AuthService, CartActions, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { FormDataService } from '@fsa/dynamicforms';
 import { of, Observable } from 'rxjs';
 import * as fromAction from '../store/actions';
+import { FSCartService } from '../../checkout/services';
 
 const userId = OCC_USER_ID_CURRENT;
 const cartId = '0000001';
@@ -117,14 +113,14 @@ describe('QuoteServiceTest', () => {
       providers: [
         QuoteService,
         reducerProvider,
-        { provide: CartService, useValue: cartService },
+        { provide: FSCartService, useValue: cartService },
         { provide: FormDataService, useValue: formDataService },
         { provide: AuthService, useValue: authService },
       ],
     });
 
     service = TestBed.get(QuoteService as Type<QuoteService>);
-    cartService = TestBed.get(CartService as Type<CartService>);
+    cartService = TestBed.get(FSCartService as Type<FSCartService>);
     store = TestBed.get(Store as Type<Store<fromReducer.UserState>>);
 
     spyOn(store, 'dispatch').and.callThrough();

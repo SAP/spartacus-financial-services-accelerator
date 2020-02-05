@@ -6,9 +6,12 @@ import {
 import { map, take } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Cart, CartService, OccConfig, RoutingService } from '@spartacus/core';
+import { Cart, OccConfig, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { FSCheckoutConfigService } from '../../../../core/checkout/services';
+import {
+  FSCheckoutConfigService,
+  FSCartService,
+} from '../../../../core/checkout/services';
 import { ModalService, ModalRef } from '@spartacus/storefront';
 
 @Component({
@@ -26,7 +29,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   cartCode: string;
 
   constructor(
-    protected cartService: CartService,
+    protected cartService: FSCartService,
     private config: OccConfig,
     protected routingService: RoutingService,
     private checkoutConfigService: FSCheckoutConfigService,

@@ -1,3 +1,4 @@
+import { FSCartService } from '../../../../core/checkout/services';
 import { filter, tap } from 'rxjs/operators';
 import {
   FSCart,
@@ -6,7 +7,7 @@ import {
 import { QuoteService } from './../../../../core/my-account/services/quote.service';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ModalService } from '@spartacus/storefront';
-import { RoutingService, CartService } from '@spartacus/core';
+import { RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -25,7 +26,7 @@ export class BindQuoteDialogComponent {
     protected modalService: ModalService,
     protected quoteService: QuoteService,
     protected routingService: RoutingService,
-    protected cartService: CartService
+    protected cartService: FSCartService
   ) {}
 
   dismissModal(reason?: any): void {

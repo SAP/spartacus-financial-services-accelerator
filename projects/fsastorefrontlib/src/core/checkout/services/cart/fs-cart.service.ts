@@ -9,8 +9,8 @@ import {
   CartService,
   StateWithCart,
 } from '@spartacus/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, take, tap, mergeMap, map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { filter, take, tap } from 'rxjs/operators';
 import { PricingData } from '../../../models/pricing.interface';
 import * as fromFSAction from '../../store/actions/index';
 import { ActivatedRoute } from '@angular/router';
@@ -67,7 +67,9 @@ export class FSCartService extends CartService {
             );
           }
         }),
-        filter(cartState => this.isCartCreated(cartState.value.content)),
+        filter(cartState => {
+          return this.isCartCreated(cartState.value.content);
+        }),
         take(1)
       )
       .subscribe(_ => {

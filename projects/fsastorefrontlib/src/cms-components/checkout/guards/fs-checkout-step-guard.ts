@@ -3,11 +3,13 @@ import { CanActivate, Router, UrlTree } from '@angular/router';
 import {
   CmsActivatedRouteSnapshot,
   RoutingConfigService,
-  CartService,
 } from '@spartacus/core';
 import { Observable, of, Subscription } from 'rxjs';
 import { FSCheckoutStep } from '../components/checkout-progress/fs-checkout-step.component';
-import { FSCheckoutConfigService } from '../../../core/checkout/services';
+import {
+  FSCheckoutConfigService,
+  FSCartService,
+} from '../../../core/checkout/services';
 import { FSProduct } from '../../../occ/occ-models';
 import { take } from 'rxjs/operators';
 
@@ -19,7 +21,7 @@ export class FSCheckoutStepGuard implements CanActivate, OnDestroy {
     protected routingConfigService: RoutingConfigService,
     protected router: Router,
     protected fsCheckoutConfigService: FSCheckoutConfigService,
-    protected cartService: CartService
+    protected cartService: FSCartService
   ) {}
   currentCategory: string;
   private subscription: Subscription;

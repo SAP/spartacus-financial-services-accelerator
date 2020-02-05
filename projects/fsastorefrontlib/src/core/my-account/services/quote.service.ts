@@ -1,22 +1,18 @@
 import { Injectable } from '@angular/core';
 import { FormDataService } from '@fsa/dynamicforms';
 import { Store } from '@ngrx/store';
-import {
-  AuthService,
-  CartActions,
-  CartService,
-  OrderEntry,
-} from '@spartacus/core';
+import { AuthService, CartActions, OrderEntry } from '@spartacus/core';
 import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import { map, take } from 'rxjs/operators';
+import { FSCartService } from '../../checkout/services';
 
 @Injectable()
 export class QuoteService {
   constructor(
     protected store: Store<fromReducer.UserState>,
-    protected cartService: CartService,
+    protected cartService: FSCartService,
     protected authService: AuthService,
     protected formDataService: FormDataService
   ) {}
