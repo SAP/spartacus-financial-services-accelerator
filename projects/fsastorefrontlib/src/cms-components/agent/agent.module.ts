@@ -77,7 +77,7 @@ import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-fo
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
-    AgentSearchDetailsComponent
+    AgentSearchDetailsComponent,
   ],
   exports: [
     AgentRootComponent,
@@ -97,4 +97,4 @@ import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-fo
   ],
   providers: [OccAgentAdapter],
 })
-export class AgentModule { }
+export class AgentModule {}

@@ -12,7 +12,7 @@ export class AgentRootComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CmsAgentRootComponent>,
     protected agentAdapter: OccAgentAdapter
-  ) { }
+  ) {}
 
   private subscription = new Subscription();
   agentList$;
