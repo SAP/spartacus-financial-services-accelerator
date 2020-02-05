@@ -1,5 +1,7 @@
 <ng-container *ngIf="claimData$ | async as claimData">
-  <ng-container *ngIf="claimPoliciesLoaded$ | async as claimPoliciesLoaded; else loading">
+  <ng-container
+    *ngIf="claimPoliciesLoaded$ | async as claimPoliciesLoaded; else loading"
+  >
     <ng-container
       *ngIf="
         claimData.claimPoliciesData?.insurancePolicies?.length > 0;
@@ -47,5 +49,5 @@
   </div>
 </ng-template>
 <ng-template #loading>
-    <cx-spinner></cx-spinner>
+  <cx-spinner></cx-spinner>
 </ng-template>
