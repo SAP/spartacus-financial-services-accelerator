@@ -49,9 +49,7 @@
               <input
                 class="form-control"
                 [class.is-invalid]="
-                  contactAgentForm.get('email').errors &&
-                  (contactAgentForm.get('email').errors['email'] ||
-                    contactAgentForm.get('email').errors['InvalidEmail']) &&
+                  contactAgentForm.get('email').invalid &&
                   contactAgentForm.get('email').dirty
                 "
                 type="email"
