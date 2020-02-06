@@ -1,6 +1,6 @@
 <ng-container *ngIf="claimData$ | async as claimData">
   <ng-container
-    *ngIf="claimPoliciesLoaded$ | async as claimPoliciesLoaded; else loading"
+    *ngIf="claimPoliciesLoaded$ | async; else loading"
   >
     <ng-container
       *ngIf="
