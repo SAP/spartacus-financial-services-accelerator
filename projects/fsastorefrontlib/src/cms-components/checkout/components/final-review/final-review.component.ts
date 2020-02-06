@@ -45,6 +45,7 @@ export class FinalReviewComponent implements OnInit {
   }
   placeOrder(): void {
     this.checkoutService.placeOrder();
+    this.checkoutService.orderPlaced = true;
     this.routingService.go({ cxRoute: 'orderConfirmation' });
   }
 }
