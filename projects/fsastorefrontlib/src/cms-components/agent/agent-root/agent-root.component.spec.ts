@@ -1,4 +1,4 @@
-import { DebugElement } from '@angular/core';
+import { DebugElement, PipeTransform, Pipe } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule, CmsComponent } from '@spartacus/core';
 import { MediaModule, CmsComponentData } from '@spartacus/storefront';
@@ -8,6 +8,7 @@ import { AgentRootComponent } from './agent-root.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { CmsAgentRootComponent } from '../../../occ/occ-models';
 import { OccAgentAdapter } from '../../../occ/services/agent/occ-agent.adapter';
+import { RouterTestingModule } from '@angular/router/testing';
 
 const mockedAgentList = ['testAgent'];
 
@@ -15,6 +16,13 @@ export class MockOccAgentAdapter {
   getAgentsByCategory(): Observable<Object> {
     return new BehaviorSubject(mockedAgentList);
   }
+}
+
+@Pipe({
+  name: 'cxUrl',
+})
+class MockUrlPipe implements PipeTransform {
+  transform() { }
 }
 
 describe('AgentRootComponent', () => {
@@ -37,8 +45,8 @@ describe('AgentRootComponent', () => {
   beforeEach(async(() => {
     mockOccAgentAdapter = new MockOccAgentAdapter();
     TestBed.configureTestingModule({
-      imports: [I18nTestingModule, AccordionModule, MediaModule],
-      declarations: [AgentRootComponent],
+      imports: [I18nTestingModule, AccordionModule, MediaModule, RouterTestingModule],
+      declarations: [AgentRootComponent, MockUrlPipe],
       providers: [
         {
           provide: CmsComponentData,

@@ -2,8 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AgentSearchDetailsComponent } from './agent-search-details.component';
 import { of } from 'rxjs';
 import { AgentSearchService } from '../../../core/agent/services/agent-search.service';
-import { Component, Input } from '@angular/core';
+import { Component, Input, PipeTransform, Pipe } from '@angular/core';
 import { I18nTestingModule } from '@spartacus/core';
+import { RouterTestingModule } from '@angular/router/testing';
 
 const agent = {};
 
@@ -11,6 +12,13 @@ class MockAgentSearchService {
   getAgent() {
     of(agent);
   }
+}
+
+@Pipe({
+  name: 'cxUrl',
+})
+class MockUrlPipe implements PipeTransform {
+  transform() { }
 }
 
 @Component({
@@ -39,7 +47,7 @@ describe('AgentSearchDetailsComponent', () => {
   beforeEach(async(() => {
     mockSearchService = new MockAgentSearchService();
     TestBed.configureTestingModule({
-      imports: [I18nTestingModule],
+      imports: [I18nTestingModule, RouterTestingModule],
       providers: [
         {
           provide: AgentSearchService,
@@ -50,6 +58,7 @@ describe('AgentSearchDetailsComponent', () => {
         AgentSearchDetailsComponent,
         MockMediaComponent,
         MockMapComponent,
+        MockUrlPipe
       ],
     }).compileComponents();
   }));
