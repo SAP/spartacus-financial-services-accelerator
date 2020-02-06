@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'fsa-font';
-  src: url('assets/fonts/fsa-font.eot?svubpe');
-  src: url('assets/fonts/fsa-font.eot?svubpe#iefix') format('embedded-opentype'),
-    url('assets/fonts/fsa-font.ttf?svubpe') format('truetype'),
-    url('assets/fonts/fsa-font.woff?svubpe') format('woff'),
-    url('assets/fonts/fsa-font.svg?svubpe#fsa-font') format('svg');
+  src: url('assets/fonts/fsa-font.eot?lvvmfz');
+  src: url('assets/fonts/fsa-font.eot?lvvmfz#iefix') format('embedded-opentype'),
+    url('assets/fonts/fsa-font.ttf?lvvmfz') format('truetype'),
+    url('assets/fonts/fsa-font.woff?lvvmfz') format('woff'),
+    url('assets/fonts/fsa-font.svg?lvvmfz#fsa-font') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -95,4 +95,7 @@
 }
 .icon-external-link:before {
   content: '\e92f';
+}
+.icon-person:before {
+  content: '\e901';
 }
