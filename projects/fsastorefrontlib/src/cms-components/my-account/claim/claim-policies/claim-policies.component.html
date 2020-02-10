@@ -1,5 +1,5 @@
 <ng-container *ngIf="claimData$ | async as claimData">
-  <ng-container *ngIf="claimPoliciesLoaded$; else loading">
+  <ng-container *ngIf="claimPoliciesLoaded$ | async; else loading">
     <ng-container
       *ngIf="
         claimData.claimPoliciesData?.insurancePolicies?.length > 0;

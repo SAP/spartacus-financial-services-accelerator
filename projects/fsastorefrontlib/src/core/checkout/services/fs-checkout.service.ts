@@ -19,6 +19,7 @@ export class FSCheckoutService extends CheckoutService {
     super(fsStore, cartData);
   }
 
+  orderPlaced: boolean;
   mockedDeliveryMode = 'financial-default';
 
   mockedDeliveryAddress: Address = {
