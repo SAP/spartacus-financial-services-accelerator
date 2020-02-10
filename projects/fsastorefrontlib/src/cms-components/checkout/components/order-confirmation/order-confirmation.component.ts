@@ -5,9 +5,10 @@ import {
   OnDestroy,
 } from '@angular/core';
 
-import { Order, CheckoutService, OccConfig } from '@spartacus/core';
+import { Order, OccConfig } from '@spartacus/core';
 
 import { Observable } from 'rxjs';
+import { FSCheckoutService } from './../../../../core/checkout/services/fs-checkout.service';
 
 @Component({
   selector: 'fsa-order-confirmation',
@@ -16,10 +17,11 @@ import { Observable } from 'rxjs';
 })
 export class FsaOrderConfirmationComponent implements OnInit, OnDestroy {
   order$: Observable<Order>;
+  orderPlaced = this.checkoutService.orderPlaced;
 
   constructor(
-    protected checkoutService: CheckoutService,
-    private config: OccConfig
+    protected checkoutService: FSCheckoutService,
+    protected config: OccConfig
   ) {}
 
   ngOnInit() {
@@ -29,6 +31,7 @@ export class FsaOrderConfirmationComponent implements OnInit, OnDestroy {
     return this.config.backend.occ.baseUrl || '';
   }
   ngOnDestroy() {
+    this.checkoutService.orderPlaced = false;
     this.checkoutService.clearCheckoutData();
   }
 }
