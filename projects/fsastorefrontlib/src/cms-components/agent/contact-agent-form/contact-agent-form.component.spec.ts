@@ -3,19 +3,22 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { RoutingService, I18nTestingModule, UserService } from '@spartacus/core';
+import {
+  RoutingService,
+  I18nTestingModule,
+  UserService,
+} from '@spartacus/core';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 
 import { ContactAgentFormComponent } from './contact-agent-form.component';
 import { OccAgentAdapter } from '../../../occ/services/agent/occ-agent.adapter';
 import { AgentSearchService } from '../../../core/agent/services/agent-search.service';
 
-
 const mockedAgentID = ['testAgent1@test.com'];
 const mockedUserDetails = {
   firstName: 'Test',
   lastName: 'Testera',
-  uid: 'test@testera.com'
+  uid: 'test@testera.com',
 };
 
 class ActivatedRouteMock {
@@ -30,15 +33,14 @@ class ActivatedRouteMock {
 const agentParams = 'agent@test.com';
 
 const mockAgentSearchService = {
-  getAgentByID: jasmine.createSpy().and.returnValue(of({}))
+  getAgentByID: jasmine.createSpy().and.returnValue(of({})),
 };
 
 @Pipe({
   name: 'cxUrl',
 })
-
 class MockUrlPipe implements PipeTransform {
-  transform() { }
+  transform() {}
 }
 
 class MockedUserService {
@@ -83,11 +85,11 @@ describe('ContactAgentFormComponent', () => {
         },
         {
           provide: AgentSearchService,
-          useValue: mockAgentSearchService
+          useValue: mockAgentSearchService,
         },
         {
           provide: ActivatedRoute,
-          useClass: ActivatedRouteMock
+          useClass: ActivatedRouteMock,
         },
       ],
     }).compileComponents();
@@ -109,25 +111,17 @@ describe('ContactAgentFormComponent', () => {
   });
 
   it('should get the user details', () => {
-    spyOn(userService, 'get').and.returnValue(
-      of(mockedUserDetails)
-    );
+    spyOn(userService, 'get').and.returnValue(of(mockedUserDetails));
     component.ngOnInit();
     fixture.detectChanges();
-    expect(
-      userService.get
-    ).toHaveBeenCalled();
+    expect(userService.get).toHaveBeenCalled();
   });
 
   it('should NOT get the user details', () => {
-    spyOn(userService, 'get').and.returnValue(
-      of(undefined)
-    );
+    spyOn(userService, 'get').and.returnValue(of(undefined));
     component.ngOnInit();
     fixture.detectChanges();
-    expect(
-      userService.get
-    ).toHaveBeenCalled();
+    expect(userService.get).toHaveBeenCalled();
   });
 
   it('should return an agent with agent params', () => {

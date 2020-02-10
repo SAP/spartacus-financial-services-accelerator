@@ -22,7 +22,7 @@ export class MockOccAgentAdapter {
   name: 'cxUrl',
 })
 class MockUrlPipe implements PipeTransform {
-  transform() { }
+  transform() {}
 }
 
 describe('AgentRootComponent', () => {
@@ -45,7 +45,12 @@ describe('AgentRootComponent', () => {
   beforeEach(async(() => {
     mockOccAgentAdapter = new MockOccAgentAdapter();
     TestBed.configureTestingModule({
-      imports: [I18nTestingModule, AccordionModule, MediaModule, RouterTestingModule],
+      imports: [
+        I18nTestingModule,
+        AccordionModule,
+        MediaModule,
+        RouterTestingModule,
+      ],
       declarations: [AgentRootComponent, MockUrlPipe],
       providers: [
         {

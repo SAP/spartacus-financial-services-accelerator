@@ -15,7 +15,7 @@ export class UserRequestService {
     protected userRequestData: UserRequestDataService,
     protected store: Store<fromReducer.FSUserRequestState>,
     protected formDataService: FormDataService
-  ) { }
+  ) {}
 
   getUserRequest(): Observable<FSUserRequest> {
     this.store

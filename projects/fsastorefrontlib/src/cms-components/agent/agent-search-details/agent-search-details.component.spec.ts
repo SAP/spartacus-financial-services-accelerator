@@ -18,7 +18,7 @@ class MockAgentSearchService {
   name: 'cxUrl',
 })
 class MockUrlPipe implements PipeTransform {
-  transform() { }
+  transform() {}
 }
 
 @Component({
@@ -58,7 +58,7 @@ describe('AgentSearchDetailsComponent', () => {
         AgentSearchDetailsComponent,
         MockMediaComponent,
         MockMapComponent,
-        MockUrlPipe
+        MockUrlPipe,
       ],
     }).compileComponents();
   }));

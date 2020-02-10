@@ -15,8 +15,8 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
     protected agentSearchService: AgentSearchService,
     protected userService: UserService,
     private route: ActivatedRoute,
-    protected fb: FormBuilder,
-  ) { }
+    protected fb: FormBuilder
+  ) {}
 
   private subscription = new Subscription();
 
@@ -42,16 +42,15 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
     this.subscription
       .add(this.route.params.subscribe(params => this.initialize(params)))
       .add(
-        this.userService.get()
-          .subscribe(user => {
-            if (user) {
-              this.contactAgentForm.patchValue({
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.uid,
-              });
-            }
-          })
+        this.userService.get().subscribe(user => {
+          if (user) {
+            this.contactAgentForm.patchValue({
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user.uid,
+            });
+          }
+        })
       );
   }
 
