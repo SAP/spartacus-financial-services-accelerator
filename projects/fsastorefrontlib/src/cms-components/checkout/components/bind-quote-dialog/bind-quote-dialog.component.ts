@@ -25,7 +25,7 @@ export class BindQuoteDialogComponent {
   subscription = new Subscription();
 
   @Output()
-  quoteBinded$: EventEmitter<any> = new EventEmitter<any>();
+  quoteBinding$: EventEmitter<any> = new EventEmitter<any>();
 
   @ViewChild('dialog', { static: false, read: ElementRef })
   dialog: ElementRef;
@@ -43,7 +43,7 @@ export class BindQuoteDialogComponent {
 
   bindQuote() {
     this.quoteService.bindQuote(this.cartCode);
-    this.quoteBinded$.emit(true);
+    this.quoteBinding$.emit(true);
     this.subscription.add(
       this.cartService
         .getActive()

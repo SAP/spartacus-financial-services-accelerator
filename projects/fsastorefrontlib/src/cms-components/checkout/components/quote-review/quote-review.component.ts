@@ -84,10 +84,11 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     modalInstance.cartCode = this.cartCode;
     modalInstance.nextStepUrl = this.checkoutStepUrlNext;
     this.subscription.add(
-      this.modalRef.componentInstance.quoteBinded$
+      this.modalRef.componentInstance.quoteBinding$
         .pipe(
-          map(quoteBinded => {
-            this.showContent$ = of(!quoteBinded);
+          map(quoteBinding => {
+            console.log(!quoteBinding);
+            this.showContent$ = of(!quoteBinding);
           })
         )
         .subscribe()
