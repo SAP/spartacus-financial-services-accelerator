@@ -69,12 +69,12 @@ const loadedMessages = [
   {
     uid: 'firstMessage',
     read: false,
-    checked: false
+    checked: false,
   },
   {
     uid: 'secondMessage',
     read: false,
-    checked: true
+    checked: true,
   },
 ];
 
@@ -172,5 +172,4 @@ describe('InboxMessagesComponent', () => {
     inboxMessagesComponent.changeSelectedMessages(true);
     expect(inboxMessagesComponent.loadedMessages[1].read).toEqual(true);
   });
-
 });
