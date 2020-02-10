@@ -1,27 +1,28 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Config, OccConfig, CartAdapter } from '@spartacus/core';
+import { Config, OccConfig } from '@spartacus/core';
 
-import { OccClaimAdapter } from './services/claim/occ-claim.adapter';
-import { OccQuoteAdapter } from './services/quote/occ-quote.adapter';
-import { OccPolicyAdapter } from './services/policy/occ-policy.adapter';
-import { OccInboxAdapter } from './services/inbox/occ-inbox.adapter';
-import { OccFSCartAdapter } from './services/cart/occ-fs-cart.adapter';
-import { OccBillingTimeAdapter } from './services/billing-time/occ-billing-time.adapter';
-import { OccFSCheckoutAdapter } from './services/checkout/occ-fs-checkout.adapter';
-import { OccAgentAdapter } from './services/agent/occ-agent.adapter';
-import { AgentAdapter } from './services/agent/agent.adapter';
-import { PolicyAdapter } from './services/policy/policy.adapter';
-import { ClaimAdapter } from './services/claim/claim.adapter';
-import { InboxAdapter } from './services/inbox/inbox.adapter';
-import { BillingTimeAdapter } from './services/billing-time/billing-time.adapter';
-import { FSCheckoutAdapter } from './services/checkout/fs-checkout.adapter';
-import { ProductPricingAdapter } from './services/pricing/product-pricing.adapter';
-import { OccProductPricingAdapter } from './services/pricing/occ-product-pricing.adapter';
-import { QuoteAdapter } from './services/quote/quote.adapter';
-import { UserRequestAdapter } from './services/user-request/user-request.adapter';
-import { OccUserRequestAdapter } from './services/user-request/occ-user-request.adapter';
+import { FSCartAdapter } from '../core/checkout/services/cart';
+import { AgentAdapter } from '../core/agent/connectors';
+import { OccAgentAdapter } from './adapters/agent/occ-agent.adapter';
+import { PolicyAdapter } from '../core/my-account/services/policy';
+import { OccPolicyAdapter } from './adapters/policy/occ-policy.adapter';
+import { ClaimAdapter } from '../core/my-account/services/claim';
+import { OccClaimAdapter } from './adapters/claim/occ-claim.adapter';
+import { InboxAdapter } from '../core/my-account/services/inbox';
+import { OccInboxAdapter } from './adapters/inbox/occ-inbox.adapter';
+import { OccFSCartAdapter } from './adapters/cart/occ-fs-cart.adapter';
+import { BillingTimeAdapter } from '../core/checkout/services/billing-time';
+import { OccBillingTimeAdapter } from './adapters/billing-time/occ-billing-time.adapter';
+import { OccFSCheckoutAdapter } from './adapters/checkout/occ-fs-checkout.adapter';
+import { FSCheckoutAdapter } from '../core/checkout/connectors/fs-checkout.adapter';
+import { ProductPricingAdapter } from '../core/checkout/services/pricing';
+import { OccProductPricingAdapter } from './adapters/pricing/occ-product-pricing.adapter';
+import { QuoteAdapter } from '../core/my-account/services/quote';
+import { OccQuoteAdapter } from './adapters/quote/occ-quote.adapter';
+import { UserRequestAdapter } from '../core/user-request/connectors';
+import { OccUserRequestAdapter } from './adapters/user-request/occ-user-request.adapter';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
@@ -43,7 +44,7 @@ import { OccUserRequestAdapter } from './services/user-request/occ-user-request.
       useClass: OccInboxAdapter,
     },
     {
-      provide: CartAdapter,
+      provide: FSCartAdapter,
       useClass: OccFSCartAdapter,
     },
     {

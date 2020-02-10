@@ -6,8 +6,10 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { SpinnerModule, MediaModule } from '@spartacus/storefront';
 import { I18nModule } from '@spartacus/core';
 import { AddOptionsComponent } from './add-options.component';
-import { FSCartService } from '../../../../core/checkout/services';
-import { OccFSCartAdapter } from '../../../../occ/services/cart/occ-fs-cart.adapter';
+import {
+  FsCartConnector,
+  FSCartService,
+} from '../../../../core/checkout/services';
 
 @NgModule({
   imports: [
@@ -21,6 +23,6 @@ import { OccFSCartAdapter } from '../../../../occ/services/cart/occ-fs-cart.adap
   ],
   declarations: [AddOptionsComponent],
   exports: [AddOptionsComponent],
-  providers: [FSCartService, OccFSCartAdapter],
+  providers: [FSCartService, FsCartConnector],
 })
 export class AddOptionsModule {}

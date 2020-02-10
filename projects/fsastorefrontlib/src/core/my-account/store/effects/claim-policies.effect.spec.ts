@@ -9,7 +9,7 @@ import { Observable, of, throwError } from 'rxjs';
 import * as fromActions from '../actions';
 import * as fromEffects from './claim-policies.effect';
 import * as fromUserReducers from './../../store/reducers/index';
-import { OccPolicyAdapter } from './../../../../occ/services/policy/occ-policy.adapter';
+import { PolicyConnector } from '../../services/policy';
 
 const insurancePolicy1: any = {
   policyNumber: 'test001',
@@ -59,7 +59,7 @@ describe('Claim Policies Effects', () => {
         StoreModule.forFeature('assets', fromUserReducers.getReducers()),
       ],
       providers: [
-        { provide: OccPolicyAdapter, useValue: mockOccPolicyAdapter },
+        { provide: PolicyConnector, useValue: mockOccPolicyAdapter },
         fromEffects.ClaimPoliciesEffects,
         provideMockActions(() => actions$),
       ],

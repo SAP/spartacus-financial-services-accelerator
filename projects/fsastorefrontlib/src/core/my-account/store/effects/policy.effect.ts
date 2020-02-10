@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { OccPolicyAdapter } from '../../../../occ/services/policy/occ-policy.adapter';
 import * as fromActions from '../actions';
+import { PolicyConnector } from '../../services/policy';
 
 @Injectable()
 export class PolicyEffects {
@@ -12,7 +12,7 @@ export class PolicyEffects {
     ofType(fromActions.LOAD_POLICIES),
     map((action: fromActions.LoadPolicies) => action.payload),
     switchMap(payload => {
-      return this.policyService.getPolicies(payload.userId).pipe(
+      return this.policyConnector.getPolicies(payload.userId).pipe(
         map((policies: any) => {
           return new fromActions.LoadPoliciesSuccess(policies);
         }),
@@ -27,7 +27,7 @@ export class PolicyEffects {
     ofType(fromActions.LOAD_POLICY_DETAILS),
     map((action: fromActions.LoadPolicyDetails) => action.payload),
     switchMap(payload => {
-      return this.policyService
+      return this.policyConnector
         .getPolicy(payload.userId, payload.policyId, payload.contractId)
         .pipe(
           map((policy: any) => {
@@ -44,7 +44,7 @@ export class PolicyEffects {
     ofType(fromActions.LOAD_PREMIUM_CALENDAR),
     map((action: fromActions.LoadPremiumCalendar) => action.payload),
     switchMap(payload => {
-      return this.policyService.getPremiumCalendar(payload.userId).pipe(
+      return this.policyConnector.getPremiumCalendar(payload.userId).pipe(
         map((premiumCalendar: any) => {
           return new fromActions.LoadPremiumCalendarSuccess(premiumCalendar);
         }),
@@ -57,6 +57,6 @@ export class PolicyEffects {
 
   constructor(
     private actions$: Actions,
-    private policyService: OccPolicyAdapter
+    private policyConnector: PolicyConnector
   ) {}
 }

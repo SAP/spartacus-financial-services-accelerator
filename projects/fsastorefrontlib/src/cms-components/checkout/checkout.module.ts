@@ -1,5 +1,5 @@
 import { BindQuoteDialogComponent } from './components/bind-quote-dialog/bind-quote-dialog.component';
-import { OccQuoteAdapter } from './../../occ/services/quote/occ-quote.adapter';
+import { OccQuoteAdapter } from '../../occ/adapters/quote/occ-quote.adapter';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -28,7 +28,7 @@ import {
 } from '@spartacus/storefront';
 import { CategoryStepGuard } from './guards/category-step-guard';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
-import { OccFSCartAdapter } from '../../occ/services/cart/occ-fs-cart.adapter';
+import { OccFSCartAdapter } from '../../occ/adapters/cart/occ-fs-cart.adapter';
 import { AddOptionsComponent } from './components/add-options/add-options.component';
 import { FSCheckoutProgressComponent } from './components/checkout-progress/fs-checkout-progress.component';
 import { FSCheckoutProgressModule } from './components/checkout-progress/fs-checkout-progress.module';
@@ -49,7 +49,7 @@ import {
 } from '../../core/checkout/store/reducers/index';
 import { StoreModule } from '@ngrx/store';
 import { CHECKOUT_FEATURE } from '../../core/checkout/store';
-import { OccFSCheckoutAdapter } from '../../occ/services/checkout/occ-fs-checkout.adapter';
+import { OccFSCheckoutAdapter } from '../../occ/adapters/checkout/occ-fs-checkout.adapter';
 import { ChooseCoverNavigationComponent } from './components/choose-cover-navigation/choose-cover-navigation.component';
 import { PersonalDetailsNavigationComponent } from './components/personal-details-navigation/personal-details-navigation.component';
 

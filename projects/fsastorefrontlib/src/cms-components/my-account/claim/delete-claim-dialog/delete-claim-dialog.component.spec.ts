@@ -8,7 +8,7 @@ import {
 import { ModalService } from '@spartacus/storefront';
 import { DeleteClaimDialogComponent } from './delete-claim-dialog.component';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ClaimService } from './../../../../core/my-account/services/claim.service';
+import { ClaimService } from '../../../../core/my-account/services/claim/claim.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 

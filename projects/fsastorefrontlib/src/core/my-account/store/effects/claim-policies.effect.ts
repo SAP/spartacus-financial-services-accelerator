@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { OccPolicyAdapter } from '../../../../occ/services/policy/occ-policy.adapter';
 import * as fromActions from '../actions';
+import { PolicyConnector } from '../../services/policy';
 
 @Injectable()
 export class ClaimPoliciesEffects {
@@ -12,7 +12,7 @@ export class ClaimPoliciesEffects {
     ofType(fromActions.LOAD_CLAIM_POLICIES),
     map((action: fromActions.LoadClaimPolicies) => action.payload),
     switchMap(payload => {
-      return this.policyAdapter
+      return this.policyConnector
         .getPoliciesByCategory(payload.userId, payload.policyCategoryCode)
         .pipe(
           map((claimPolicies: any) => {
@@ -27,6 +27,6 @@ export class ClaimPoliciesEffects {
 
   constructor(
     private actions$: Actions,
-    private policyAdapter: OccPolicyAdapter
+    private policyConnector: PolicyConnector
   ) {}
 }

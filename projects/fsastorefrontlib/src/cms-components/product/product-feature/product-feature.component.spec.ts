@@ -1,4 +1,4 @@
-import { FSProductService } from './../../../core/checkout/services/product/fs-product.service';
+import { FSProductService } from '../../../core/checkout/services/product/fs-product.service';
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CmsComponent, Product } from '@spartacus/core';

@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap, switchMap } from 'rxjs/operators';
-import { OccClaimAdapter } from '../../../../occ/services/claim/occ-claim.adapter';
-import { ClaimDataService } from '../../services/claim-data.service';
+import { ClaimDataService } from '../../services/claim/claim-data.service';
 import { Claim } from '../../../../occ/occ-models';
 import * as fromUserRequestActions from '../../../user-request/store/actions';
 import * as fromActions from '../actions';
+import { ClaimConnector } from '../../services/claim';
 
 @Injectable()
 export class ClaimEffects {
@@ -16,7 +16,7 @@ export class ClaimEffects {
     ofType(fromActions.LOAD_CLAIMS),
     map((action: fromActions.LoadClaims) => action.payload),
     switchMap(payload => {
-      return this.claimAdapter.getClaims(payload.userId).pipe(
+      return this.claimConnector.getClaims(payload.userId).pipe(
         map((claims: any) => {
           return new fromActions.LoadClaimsSuccess(claims);
         }),
@@ -32,7 +32,7 @@ export class ClaimEffects {
     ofType(fromActions.DELETE_CLAIM),
     map((action: fromActions.DeleteClaim) => action.payload),
     mergeMap(payload =>
-      this.claimAdapter.deleteClaim(payload.userId, payload.claimId).pipe(
+      this.claimConnector.deleteClaim(payload.userId, payload.claimId).pipe(
         map(() => {
           return new fromActions.DeleteClaimSuccess();
         }),
@@ -48,7 +48,7 @@ export class ClaimEffects {
     ofType(fromActions.CREATE_CLAIM),
     map((action: fromActions.CreateClaim) => action.payload),
     mergeMap(payload => {
-      return this.claimAdapter
+      return this.claimConnector
         .createClaim(payload.userId, payload.policyId, payload.contractId)
         .pipe(
           switchMap((claim: Claim) => {
@@ -88,7 +88,7 @@ export class ClaimEffects {
         ).claimNumber;
       }
 
-      return this.claimAdapter
+      return this.claimConnector
         .updateClaim(
           payload.userId,
           claimID,
@@ -112,7 +112,7 @@ export class ClaimEffects {
     ofType(fromActions.SUBMIT_CLAIM),
     map((action: fromActions.SubmitClaim) => action.payload),
     mergeMap(payload =>
-      this.claimAdapter.submitClaim(payload.userId, payload.claimId).pipe(
+      this.claimConnector.submitClaim(payload.userId, payload.claimId).pipe(
         map(claim => {
           return new fromActions.SubmitClaimSuccess(claim);
         }),
@@ -125,7 +125,7 @@ export class ClaimEffects {
 
   constructor(
     private actions$: Actions,
-    private claimAdapter: OccClaimAdapter,
+    private claimConnector: ClaimConnector,
     protected claimServiceData: ClaimDataService
   ) {}
 }

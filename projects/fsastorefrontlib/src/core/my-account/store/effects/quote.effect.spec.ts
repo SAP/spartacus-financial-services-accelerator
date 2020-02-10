@@ -9,7 +9,7 @@ import { Observable, of, throwError } from 'rxjs';
 import * as fromActions from '../actions';
 import * as fromEffects from './quote.effect';
 import * as fromUserReducers from './../../store/reducers/index';
-import { OccQuoteAdapter } from './../../../../occ/services/quote/occ-quote.adapter';
+import { QuoteConnector } from '../../services/quote';
 
 const insuranceQuote1: any = {
   cartCode: 'test001',
@@ -78,7 +78,7 @@ describe('Quote Effects', () => {
         StoreModule.forFeature('assets', fromUserReducers.getReducers()),
       ],
       providers: [
-        { provide: OccQuoteAdapter, useValue: mockOccQuoteAdapter },
+        { provide: QuoteConnector, useValue: mockOccQuoteAdapter },
         fromEffects.QuoteEffects,
         provideMockActions(() => actions$),
       ],

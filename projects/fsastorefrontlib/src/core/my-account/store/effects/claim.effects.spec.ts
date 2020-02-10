@@ -9,9 +9,10 @@ import { Observable, of, throwError } from 'rxjs';
 import * as fromActions from '../actions';
 import * as fromEffects from './claim.effect';
 import * as fromReducer from './../../store/reducers/index';
-import { OccClaimAdapter } from './../../../../occ/services/claim/occ-claim.adapter';
+import { OccClaimAdapter } from '../../../../occ/adapters/claim/occ-claim.adapter';
 import * as fromUserRequestActions from '../../../user-request/store/actions';
-import { ClaimDataService } from './../../services/claim-data.service';
+import { ClaimDataService } from '../../services/claim/claim-data.service';
+import { ClaimConnector } from '../../services/claim';
 
 const claim1 = {
   claimNumber: 'testClaim001',
@@ -74,7 +75,7 @@ describe('Claim Effects', () => {
         StoreModule.forFeature('assets', fromReducer.getReducers()),
       ],
       providers: [
-        { provide: OccClaimAdapter, useValue: mockOccClaimAdapter },
+        { provide: ClaimConnector, useValue: mockOccClaimAdapter },
         {
           provide: ClaimDataService,
           useValue: mockClaimDataService,

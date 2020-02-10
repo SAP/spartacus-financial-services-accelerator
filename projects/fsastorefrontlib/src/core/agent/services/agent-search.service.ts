@@ -2,14 +2,15 @@ import { Injectable } from '@angular/core';
 import { GeoPoint, WindowRef } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { OccAgentAdapter } from './../../../occ/services/agent/occ-agent.adapter';
+import { OccAgentAdapter } from '../../../occ/adapters/agent/occ-agent.adapter';
+import { AgentConnector } from '../connectors';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AgentSearchService {
   constructor(
-    protected occAgentAdapter: OccAgentAdapter,
+    protected agentConnector: AgentConnector,
     protected winRef: WindowRef
   ) {}
 
@@ -55,7 +56,7 @@ export class AgentSearchService {
     pageNumber: number,
     position?: GeoPoint
   ) {
-    this.occAgentAdapter
+    this.agentConnector
       .getAgentsByQuery(searchQuery, pageNumber, position)
       .pipe(take(1))
       .subscribe(searchResults => {

@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import * as fromActions from '../actions/fs-checkout.action';
-import { OccFSCheckoutAdapter } from '../../../../occ/services/checkout/occ-fs-checkout.adapter';
+import { FsCheckoutConnector } from '../../connectors/fs-checkout.connector';
 
 @Injectable()
 export class FSCheckoutEffects {
@@ -12,7 +12,7 @@ export class FSCheckoutEffects {
     ofType(fromActions.SET_IDENTIFICATION_TYPE),
     map((action: fromActions.SetIdentificationType) => action.payload),
     switchMap(payload => {
-      return this.occCheckoutService
+      return this.checkoutConnector
         .setIdentificationType(
           payload.identificationType,
           payload.cartId,
@@ -31,6 +31,6 @@ export class FSCheckoutEffects {
 
   constructor(
     private actions$: Actions,
-    private occCheckoutService: OccFSCheckoutAdapter
+    private checkoutConnector: FsCheckoutConnector
   ) {}
 }
