@@ -1,19 +1,18 @@
-import { PipeTransform, Pipe } from '@angular/core';
+import { PipeTransform, Pipe, Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { RoutingService, I18nTestingModule } from '@spartacus/core';
+import { RoutingService, I18nTestingModule, UserService } from '@spartacus/core';
 import { Observable, BehaviorSubject, of } from 'rxjs';
 
 import { ContactAgentFormComponent } from './contact-agent-form.component';
 import { OccAgentAdapter } from '../../../occ/services/agent/occ-agent.adapter';
-import { UserRequestService } from '../../../core/user-request/services';
 
 const mockedAgentID = ['testAgent1@test.com'];
 const mockedUserDetails = {
   firstName: 'Test',
   lastName: 'Testera',
-  email: 'test@testera.com'
+  uid: 'test@testera.com'
 };
 
 @Pipe({
@@ -25,7 +24,7 @@ class MockUrlPipe implements PipeTransform {
 }
 
 class MockedUserService {
-  getUserDetails() {
+  get() {
     return of(mockedUserDetails);
   }
 }
@@ -41,6 +40,7 @@ describe('ContactAgentFormComponent', () => {
   let fixture: ComponentFixture<ContactAgentFormComponent>;
   let mockOccAgentAdapter: MockOccAgentAdapter;
   let mockedUserService: MockedUserService;
+  let userService: UserService;
 
   beforeEach(async(() => {
     mockOccAgentAdapter = new MockOccAgentAdapter();
@@ -58,7 +58,7 @@ describe('ContactAgentFormComponent', () => {
           useValue: mockOccAgentAdapter,
         },
         {
-          provide: UserRequestService,
+          provide: UserService,
           useValue: mockedUserService,
         },
       ],
@@ -69,9 +69,41 @@ describe('ContactAgentFormComponent', () => {
     fixture = TestBed.createComponent(ContactAgentFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    userService = TestBed.get(UserService as Type<UserService>);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should get the user details', () => {
+    spyOn(userService, 'get').and.returnValue(
+      of(mockedUserDetails)
+    );
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(
+      userService.get
+    ).toHaveBeenCalled();
+  });
+
+  it('should NOT get the user details', () => {
+    spyOn(userService, 'get').and.returnValue(
+      of(undefined)
+    );
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(
+      userService.get
+    ).toHaveBeenCalled();
+  });
+
+  it('should unsubscribe from any subscriptions when destroyed', () => {
+    const subscriptions = component['subscription'];
+    spyOn(subscriptions, 'unsubscribe').and.callThrough();
+
+    component.ngOnInit();
+    component.ngOnDestroy();
+    expect(subscriptions.unsubscribe).toHaveBeenCalled();
   });
 });

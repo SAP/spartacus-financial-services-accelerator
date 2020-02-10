@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
+import { UserService } from '@spartacus/core';
 import { DefaultFormValidators } from '@fsa/dynamicforms';
 import { AgentSearchService } from '../../../core/agent/services/agent-search.service';
-import { UserRequestService } from '../../../core/user-request/services';
 
 @Component({
   selector: 'fsa-contact-agent-form',
@@ -13,7 +13,7 @@ import { UserRequestService } from '../../../core/user-request/services';
 export class ContactAgentFormComponent implements OnInit, OnDestroy {
   constructor(
     protected agentSearchService: AgentSearchService,
-    protected userService: UserRequestService,
+    protected userService: UserService,
     private route: ActivatedRoute,
     protected fb: FormBuilder,
   ) { }
@@ -42,13 +42,13 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
     this.subscription
       .add(this.route.params.subscribe(params => this.initialize(params)))
       .add(
-        this.userService.getUserDetails()
+        this.userService.get()
           .subscribe(user => {
-            if (user && user.account) {
+            if (user) {
               this.contactAgentForm.patchValue({
-                firstName: user.account.details.firstName,
-                lastName: user.account.details.lastName,
-                email: user.account.details.uid,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.uid,
               });
             }
           })

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { StateWithUser, UsersSelectors, UserState } from '@spartacus/core';
+import { Store } from '@ngrx/store';
 import * as fromReducer from '../../store/reducers';
 import { FSUserRequest } from '../../../../occ/occ-models';
 import { UserRequestSelector } from '../../store';
@@ -15,8 +14,7 @@ export class UserRequestService {
   constructor(
     protected userRequestData: UserRequestDataService,
     protected store: Store<fromReducer.FSUserRequestState>,
-    protected formDataService: FormDataService,
-    protected userStore: Store<StateWithUser>
+    protected formDataService: FormDataService
   ) { }
 
   getUserRequest(): Observable<FSUserRequest> {
@@ -31,10 +29,6 @@ export class UserRequestService {
       )
       .subscribe();
     return this.store.select(UserRequestSelector.getUserRequestContent);
-  }
-
-  getUserDetails(): Observable<UserState> {
-    return this.userStore.pipe(select(UsersSelectors.getUserState));
   }
 
   loadUserRequestData(): void {
