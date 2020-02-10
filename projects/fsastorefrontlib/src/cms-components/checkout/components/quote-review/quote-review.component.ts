@@ -87,7 +87,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
       this.modalRef.componentInstance.quoteBinding$
         .pipe(
           map(quoteBinding => {
-            console.log(!quoteBinding);
             this.showContent$ = of(!quoteBinding);
           })
         )
