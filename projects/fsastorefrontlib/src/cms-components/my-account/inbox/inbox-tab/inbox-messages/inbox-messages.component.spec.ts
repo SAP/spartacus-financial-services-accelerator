@@ -42,6 +42,8 @@ class MockInboxService {
     return of(mockMessages);
   }
 
+  setTitleAndMessageGroup(title, group) {}
+
   setMessagesState() {
     return of(true);
   }
@@ -65,26 +67,27 @@ class MockPaginationComponent {
   @Input() pagination;
 }
 
-const loadedMessages = [
-  {
-    uid: 'firstMessage',
-    read: false,
-    checked: false,
-  },
-  {
-    uid: 'secondMessage',
-    read: false,
-    checked: true,
-  },
-];
-
 describe('InboxMessagesComponent', () => {
+  let loadedMessages;
+
   let inboxMessagesComponent: InboxMessagesComponent;
   let mockInboxService: MockInboxService;
   let fixture: ComponentFixture<InboxMessagesComponent>;
 
   beforeEach(async(() => {
     mockInboxService = new MockInboxService();
+    loadedMessages = [
+      {
+        uid: 'firstMessage',
+        read: false,
+        checked: false,
+      },
+      {
+        uid: 'secondMessage',
+        read: false,
+        checked: true,
+      },
+    ];
 
     TestBed.configureTestingModule({
       imports: [I18nTestingModule],
@@ -171,5 +174,22 @@ describe('InboxMessagesComponent', () => {
     inboxMessagesComponent.loadedMessages = loadedMessages;
     inboxMessagesComponent.changeSelectedMessages(true);
     expect(inboxMessagesComponent.loadedMessages[1].read).toEqual(true);
+  });
+
+  it('should not change messages in case nothing is checked', () => {
+    loadedMessages[1].checked = false;
+    inboxMessagesComponent.loadedMessages = loadedMessages;
+    inboxMessagesComponent.changeSelectedMessages(true);
+    expect(inboxMessagesComponent.loadedMessages[0].read).toEqual(false);
+    expect(inboxMessagesComponent.loadedMessages[1].read).toEqual(false);
+  });
+
+  it('should remove subscriptions and reset title and group', () => {
+    inboxMessagesComponent.ngOnDestroy();
+  });
+
+  it('should destroy without subscriptions', () => {
+    inboxMessagesComponent.subscription = null;
+    inboxMessagesComponent.ngOnDestroy();
   });
 });
