@@ -24,4 +24,7 @@ export class AgentConnector {
       longitudeLatitude
     );
   }
+  getAgentByID(id: string): Observable<any> {
+    return this.agentAdapter.getAgentByID(id);
+  }
 }
