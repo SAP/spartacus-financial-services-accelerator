@@ -1,4 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
@@ -9,6 +14,7 @@ import { AgentSearchService } from '../../../core/agent/services/agent-search.se
 @Component({
   selector: 'fsa-contact-agent-form',
   templateUrl: './contact-agent-form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ContactAgentFormComponent implements OnInit, OnDestroy {
   constructor(
