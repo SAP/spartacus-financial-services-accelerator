@@ -3,7 +3,7 @@ node_js:
   - '10.15.2'
 
 install:
-  - npm install
+  - yarn install
 
 script:
-  - npm run build
+  - yarn build
