@@ -1,7 +1,7 @@
-import { ClaimService } from './claim.service';
-import { ClaimDataService } from './claim-data.service';
-import { PolicyService } from './policy.service';
-import { QuoteService } from './quote.service';
+import { ClaimService } from './claim/claim.service';
+import { ClaimDataService } from './claim/claim-data.service';
+import { PolicyService } from './policy/policy.service';
+import { QuoteService } from './quote/quote.service';
 
 export const services: any[] = [
   QuoteService,
@@ -10,7 +10,7 @@ export const services: any[] = [
   ClaimDataService,
 ];
 
-export * from './quote.service';
-export * from './policy.service';
-export * from './claim.service';
-export * from './claim-data.service';
+export * from './quote/quote.service';
+export * from './policy/policy.service';
+export * from './claim/claim.service';
+export * from './claim/claim-data.service';

@@ -1,0 +1,79 @@
+import { Injectable } from '@angular/core';
+import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import * as fromStore from '../../store';
+import * as fromAction from '../../store/actions';
+import * as fromReducer from '../../store/reducers';
+import { AuthService } from '@spartacus/core';
+import { take } from 'rxjs/operators';
+
+@Injectable()
+export class PolicyService {
+  constructor(
+    private store: Store<fromReducer.UserState>,
+    private authService: AuthService
+  ) {}
+
+  getPolicies(): Observable<any> {
+    return this.store.pipe(select(fromStore.getPolicyData));
+  }
+
+  loadPolicies() {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.LoadPolicies({
+            userId: occUserId,
+          })
+        )
+      )
+      .unsubscribe();
+  }
+
+  loadClaimPolicies(policyCategoryCode: string) {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.LoadClaimPolicies({
+            userId: occUserId,
+            policyCategoryCode: policyCategoryCode,
+          })
+        )
+      )
+      .unsubscribe();
+  }
+
+  loadPremiumCalendar() {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.LoadPremiumCalendar({
+            userId: occUserId,
+          })
+        )
+      )
+      .unsubscribe();
+  }
+
+  loadPolicyDetails(policyId, contractId) {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.LoadPolicyDetails({
+            userId: occUserId,
+            policyId: policyId,
+            contractId: contractId,
+          })
+        )
+      )
+      .unsubscribe();
+  }
+}
