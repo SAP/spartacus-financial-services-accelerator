@@ -51,7 +51,7 @@ export class AgentSearchService {
   }
 
   getAgentByID(agentID) {
-    return this.occAgentAdapter.getAgentByID(agentID);
+    return this.agentConnector.getAgentByID(agentID);
   }
 
   protected getAgentsByQuery(

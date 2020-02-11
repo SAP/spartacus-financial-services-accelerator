@@ -16,6 +16,9 @@ class MockAgentAdapter implements AgentAdapter {
   ): Observable<any> {
     return of();
   }
+  getAgentByID(id: string): Observable<any> {
+    return of();
+  }
 }
 
 const searchQuery = 'q=Indirra+Duffy';
@@ -24,6 +27,8 @@ const geoPoint = {
   latitude: 1.432,
   longitude: 3.5432,
 };
+
+const agentID = 'test@agent.com';
 const agentCategory = 'auto';
 const agentResultsQueryBy = {
   name: 'Indira Duffy',
@@ -66,6 +71,12 @@ describe('AgentConnector', () => {
     expect(agentAdapter.getAgentsByCategory).toHaveBeenCalledWith(
       agentCategory
     );
+  });
+
+  it('should call adapter for get agent by id', () => {
+    spyOn(agentAdapter, 'getAgentByID').and.stub();
+    agentConnector.getAgentsByCategory(agentID);
+    expect(agentAdapter.getAgentByID).toHaveBeenCalledWith(agentID);
   });
 
   it('should return getAgentsByCategory results ', () => {

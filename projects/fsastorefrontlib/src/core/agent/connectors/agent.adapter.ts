@@ -21,4 +21,11 @@ export abstract class AgentAdapter {
     pageNumber: number,
     longitudeLatitude?: GeoPoint
   ): Observable<any>;
+
+  /**
+   * Abstract method used to get agents using search query.
+   *
+   * @param id The search query
+   */
+  abstract getAgentByID(id: string): Observable<any>;
 }
