@@ -97,6 +97,7 @@ describe('ContactAgentFormComponent', () => {
 
   it('should NOT find agent', () => {
     mockParams = null;
+    fixture.detectChanges();
     expect(mockSearchService.getAgentByID).toHaveBeenCalled();
   });
 
