@@ -11,7 +11,6 @@ const mockInboxTab: InboxTab = {
   messageGroup: 'group',
 };
 
-//move to method level
 const mockMessages = {
   sorts: [
     {
@@ -38,11 +37,11 @@ class MockInboxService {
   activeMessageGroupAndTitle = of(mockInboxTab);
   messagesSource = new BehaviorSubject<any>(null);
 
-  getMessages(messageGroup, searchConfig) {
+  getMessages() {
     return of(mockMessages);
   }
 
-  setTitleAndMessageGroup(title, group) {}
+  setTitleAndMessageGroup() {}
 
   setMessagesState() {
     return of(true);
@@ -70,7 +69,7 @@ class MockPaginationComponent {
 describe('InboxMessagesComponent', () => {
   let loadedMessages;
 
-  let inboxMessagesComponent: InboxMessagesComponent;
+  let component: InboxMessagesComponent;
   let mockInboxService: MockInboxService;
   let fixture: ComponentFixture<InboxMessagesComponent>;
 
@@ -107,89 +106,79 @@ describe('InboxMessagesComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(InboxMessagesComponent);
-    inboxMessagesComponent = fixture.componentInstance;
+    component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should create', () => {
-    expect(inboxMessagesComponent).toBeTruthy();
+    expect(component).toBeTruthy();
   });
 
   it('should clear search data', () => {
-    inboxMessagesComponent.initialGroup = 'initial-group';
-    expect(inboxMessagesComponent.searchConfig.currentPage).toEqual(1);
+    component.initialGroup = 'initial-group';
+    expect(component.searchConfig.currentPage).toEqual(1);
   });
 
   it('should sort messages', () => {
-    inboxMessagesComponent.sortMessages('desc', 'date');
+    component.sortMessages('desc', 'date');
   });
 
   it('should change page and reset main checkbox', () => {
-    inboxMessagesComponent.mainCheckboxChecked = true;
-    inboxMessagesComponent.pageChange(2);
-    expect(inboxMessagesComponent.mainCheckboxChecked).toEqual(false);
-    //check pagination too
+    component.mainCheckboxChecked = true;
+    component.pageChange(2);
+    expect(component.mainCheckboxChecked).toEqual(false);
   });
 
   it('should read message', () => {
-    inboxMessagesComponent.loadedMessages = loadedMessages;
-    inboxMessagesComponent.readMessage({
+    component.loadedMessages = loadedMessages;
+    component.readMessage({
       uid: 'firstMessage',
     });
-    expect(inboxMessagesComponent.loadedMessages[0].read).toEqual(true);
+    expect(component.loadedMessages[0].read).toEqual(true);
   });
 
   it('should check message', () => {
-    inboxMessagesComponent.loadedMessages = loadedMessages;
-    inboxMessagesComponent.checkMessage('firstMessage', true);
-    expect(inboxMessagesComponent.loadedMessages[0].checked).toEqual(true);
+    component.loadedMessages = loadedMessages;
+    component.checkMessage('firstMessage', true);
+    expect(component.loadedMessages[0].checked).toEqual(true);
   });
 
   it('should uncheck message with main checkbox', () => {
-    inboxMessagesComponent.loadedMessages = loadedMessages;
-    inboxMessagesComponent.mainCheckboxChecked = true;
-    inboxMessagesComponent.checkMessage('secondMessage', false);
-    expect(inboxMessagesComponent.loadedMessages[1].checked).toEqual(false);
-    expect(inboxMessagesComponent.mainCheckboxChecked).toEqual(false);
+    component.loadedMessages = loadedMessages;
+    component.mainCheckboxChecked = true;
+    component.checkMessage('secondMessage', false);
+    expect(component.loadedMessages[1].checked).toEqual(false);
+    expect(component.mainCheckboxChecked).toEqual(false);
   });
 
   it('should check all messages with main checkbox', () => {
-    inboxMessagesComponent.loadedMessages = loadedMessages;
-    inboxMessagesComponent.checkAllCheckboxes(true);
-    expect(inboxMessagesComponent.loadedMessages[0].checked).toEqual(true);
-    expect(inboxMessagesComponent.loadedMessages[1].checked).toEqual(true);
-    expect(inboxMessagesComponent.mainCheckboxChecked).toEqual(true);
+    component.loadedMessages = loadedMessages;
+    component.checkAllCheckboxes(true);
+    expect(component.loadedMessages[0].checked).toEqual(true);
+    expect(component.loadedMessages[1].checked).toEqual(true);
+    expect(component.mainCheckboxChecked).toEqual(true);
   });
 
   it('should uncheck all messages with main checkbox', () => {
-    inboxMessagesComponent.loadedMessages = loadedMessages;
-    inboxMessagesComponent.mainCheckboxChecked = true;
-    inboxMessagesComponent.checkAllCheckboxes(false);
-    expect(inboxMessagesComponent.loadedMessages[0].checked).toEqual(false);
-    expect(inboxMessagesComponent.loadedMessages[1].checked).toEqual(false);
-    expect(inboxMessagesComponent.mainCheckboxChecked).toEqual(false);
+    component.loadedMessages = loadedMessages;
+    component.mainCheckboxChecked = true;
+    component.checkAllCheckboxes(false);
+    expect(component.loadedMessages[0].checked).toEqual(false);
+    expect(component.loadedMessages[1].checked).toEqual(false);
+    expect(component.mainCheckboxChecked).toEqual(false);
   });
 
   it('should change selected messages', () => {
-    inboxMessagesComponent.loadedMessages = loadedMessages;
-    inboxMessagesComponent.changeSelectedMessages(true);
-    expect(inboxMessagesComponent.loadedMessages[1].read).toEqual(true);
+    component.loadedMessages = loadedMessages;
+    component.changeSelectedMessages(true);
+    expect(component.loadedMessages[1].read).toEqual(true);
   });
 
   it('should not change messages in case nothing is checked', () => {
     loadedMessages[1].checked = false;
-    inboxMessagesComponent.loadedMessages = loadedMessages;
-    inboxMessagesComponent.changeSelectedMessages(true);
-    expect(inboxMessagesComponent.loadedMessages[0].read).toEqual(false);
-    expect(inboxMessagesComponent.loadedMessages[1].read).toEqual(false);
-  });
-
-  it('should remove subscriptions and reset title and group', () => {
-    inboxMessagesComponent.ngOnDestroy();
-  });
-
-  it('should destroy without subscriptions', () => {
-    inboxMessagesComponent.subscription = null;
-    inboxMessagesComponent.ngOnDestroy();
+    component.loadedMessages = loadedMessages;
+    component.changeSelectedMessages(true);
+    expect(component.loadedMessages[0].read).toEqual(false);
+    expect(component.loadedMessages[1].read).toEqual(false);
   });
 });
