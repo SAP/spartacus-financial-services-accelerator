@@ -4,7 +4,7 @@ import { InboxService } from '../../../../../core/my-account/services/inbox/inbo
 import { InboxMessagesComponent } from './inbox-messages.component';
 import { I18nTestingModule } from '@spartacus/core';
 import { of, BehaviorSubject } from 'rxjs';
-import { InboxTab } from './../../../../../core/my-account/services/inbox-data.service';
+import { InboxTab } from './../../../../../core/my-account/services/inbox/inbox-data.service';
 
 const mockInboxTab: InboxTab = {
   title: 'title',
