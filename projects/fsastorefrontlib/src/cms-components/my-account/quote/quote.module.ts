@@ -17,8 +17,7 @@ import {
 
 import { QuotesComponent } from './quotes/quotes.component';
 import { QuoteService } from '../../../core/my-account/services/quote/quote.service';
-import { QuoteConnector } from '../../../core/my-account/services/quote';
-
+import { QuoteConnector } from '../../../core/my-account/services/quote/connectors/quote.connector';
 const routes: Routes = [
   {
     path: null,

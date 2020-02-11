@@ -4,7 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import * as fromActions from '../actions';
 import { UserRequestDataService } from '../../services';
-import { UserRequestConnector } from '../../connectors';
+import { UserRequestConnector } from '../../connectors/user-request.connector';
 @Injectable()
 export class UserRequestEffects {
   @Effect()

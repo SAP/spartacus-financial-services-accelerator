@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { GeoPoint, WindowRef } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { OccAgentAdapter } from '../../../occ/adapters/agent/occ-agent.adapter';
-import { AgentConnector } from '../connectors';
+import { AgentConnector } from '../connectors/agent.connector';
 
 @Injectable({
   providedIn: 'root',

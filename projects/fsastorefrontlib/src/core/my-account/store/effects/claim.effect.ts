@@ -7,7 +7,7 @@ import { ClaimDataService } from '../../services/claim/claim-data.service';
 import { Claim } from '../../../../occ/occ-models';
 import * as fromUserRequestActions from '../../../user-request/store/actions';
 import * as fromActions from '../actions';
-import { ClaimConnector } from '../../services/claim';
+import { ClaimConnector } from '../../services/claim/connectors/claim.connector';
 
 @Injectable()
 export class ClaimEffects {

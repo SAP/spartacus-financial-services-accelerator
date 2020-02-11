@@ -25,7 +25,7 @@ import { ClaimDataService } from '../../../core/my-account/services/claim/claim-
 import { ClaimService } from '../../../core/my-account/services/claim/claim.service';
 import { ParseDatePipe } from '../../../shared/util/helpers/parseDate.pipe';
 import { ClaimPoliciesGuard } from './guards/claim-policies-guard';
-import { ClaimConnector } from '../../../core/my-account/services/claim';
+import { ClaimConnector } from '../../../core/my-account/services/claim/connectors/claim.connector';
 
 const routes: Routes = [
   {

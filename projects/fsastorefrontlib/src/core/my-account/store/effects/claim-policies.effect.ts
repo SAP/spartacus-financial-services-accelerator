@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import * as fromActions from '../actions';
-import { PolicyConnector } from '../../services/policy';
+import { PolicyConnector } from '../../services/policy/connectors/policy.connector';
 
 @Injectable()
 export class ClaimPoliciesEffects {

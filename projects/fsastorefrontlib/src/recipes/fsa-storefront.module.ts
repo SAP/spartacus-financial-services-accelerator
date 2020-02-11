@@ -17,7 +17,7 @@ import { fsaCheckoutConfig } from '../cms-components/checkout/config/default-fsa
 import { fsaOccProductConfig } from '../occ/services/default-occ-fsa-product-config';
 import { fstranslationsDe } from '../assets/translations/index_de';
 import { fsOverrides } from '../assets/translations/index';
-import { OccModule } from '../occ';
+import { OccModule } from '../occ/occ.module';
 
 @NgModule({
   imports: [

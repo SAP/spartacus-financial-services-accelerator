@@ -4,7 +4,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import * as fromActions from '../actions';
-import { QuoteConnector } from '../../services/quote';
+import { QuoteConnector } from '../../services/quote/connectors/quote.connector';
 
 @Injectable()
 export class QuoteEffects {

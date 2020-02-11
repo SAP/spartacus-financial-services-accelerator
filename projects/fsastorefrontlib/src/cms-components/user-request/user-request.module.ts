@@ -36,7 +36,7 @@ import { ClaimStoreModule } from './../../core/my-account/store/claim-store.modu
 import { UserRequestSummaryComponent } from './user-request-summary/user-request-summary.component';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { ClaimConfirmationGuard } from '../../core/user-request/guards/claim-confirmation-guard';
-import { UserRequestConnector } from '../../core/user-request/connectors';
+import { UserRequestConnector } from '../../core/user-request/connectors/user-request.connector';
 
 const routes: Routes = [
   {

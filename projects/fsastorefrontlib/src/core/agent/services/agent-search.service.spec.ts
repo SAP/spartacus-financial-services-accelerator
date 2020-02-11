@@ -3,8 +3,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { Type } from '@angular/core';
 import { of, BehaviorSubject } from 'rxjs';
 import { AgentSearchService } from './agent-search.service';
-import { OccAgentAdapter } from '../../../occ/adapters/agent/occ-agent.adapter';
-import { AgentAdapter, AgentConnector } from '../connectors';
+import { AgentConnector } from '../connectors/agent.connector';
 
 const testAgent1 = {
   contactEmail: 'testAgent1@test.com',
@@ -75,7 +74,7 @@ describe('AgentSearchService', () => {
     TestBed.configureTestingModule({
       providers: [
         {
-          provide: AgentAdapter,
+          provide: AgentConnector,
           useValue: mockOccAgentAdapter,
         },
         {

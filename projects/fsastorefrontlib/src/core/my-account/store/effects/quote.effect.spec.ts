@@ -9,7 +9,7 @@ import { Observable, of, throwError } from 'rxjs';
 import * as fromActions from '../actions';
 import * as fromEffects from './quote.effect';
 import * as fromUserReducers from './../../store/reducers/index';
-import { QuoteConnector } from '../../services/quote';
+import { QuoteConnector } from '../../services/quote/connectors/quote.connector';
 
 const insuranceQuote1: any = {
   cartCode: 'test001',

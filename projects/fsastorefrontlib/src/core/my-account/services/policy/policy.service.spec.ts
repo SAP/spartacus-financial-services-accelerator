@@ -2,7 +2,7 @@ import { TestBed, inject } from '@angular/core/testing';
 import * as fromReducer from '../../store/reducers';
 import { Store, StoreModule } from '@ngrx/store';
 import { Type } from '@angular/core';
-import { reducerProvider, reducerToken } from '../../store/reducers';
+import { reducerProvider, reducerToken } from '../../store/reducers/index';
 import { PolicyService } from './policy.service';
 import * as fromAction from '../../store/actions';
 import { OCC_USER_ID_CURRENT, AuthService } from '@spartacus/core';
