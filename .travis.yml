@@ -6,9 +6,13 @@ install:
   - yarn install
 
 script:
+  - yarn run ng lint
+  - yarn prettier
+  - sonar-scanner -D sonar.host.url=$sonar_host_url -D sonar.login=$sonar_token -X
   - yarn ng build dynamicforms
   - yarn ng build fsastorefrontlib
   - yarn run build:ci
-  - yarn run ng lint
-  - yarn prettier
   - yarn run test --watch=false
+
+addons:
+  sonarqube: true
