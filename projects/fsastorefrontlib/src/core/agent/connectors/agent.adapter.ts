@@ -23,7 +23,7 @@ export abstract class AgentAdapter {
   ): Observable<any>;
 
   /**
-   * Abstract method used to get agents using search query.
+   * Abstract method used to get agent by id
    *
    * @param id ID of an agent
    */
