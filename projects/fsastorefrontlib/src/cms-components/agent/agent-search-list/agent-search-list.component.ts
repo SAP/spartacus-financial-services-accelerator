@@ -39,7 +39,7 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   }
 
   private initialize(queryParams: Params) {
-    if (queryParams.query) {
+    if (queryParams && queryParams.query) {
       this.searchQuery = queryParams.query;
     }
     this.agentSearchService.search(this.searchQuery, 0);

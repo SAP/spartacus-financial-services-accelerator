@@ -6,17 +6,15 @@ import { ActivatedRoute } from '@angular/router';
 import { Type, Component, Input } from '@angular/core';
 
 const searchResults = { pagination: { page: 0 } };
-
-class ActivatedRouteMock {
-  paramsSubscriptionHandler: Function;
-
-  queryParams = {
-    subscribe: (observer: Function) => {
-      this.paramsSubscriptionHandler = observer;
-    },
-  };
-}
 const query = 'autoAgent';
+
+let queryParams = {
+  query: query,
+};
+
+class MockActivatedRoute {
+  queryParams = of(queryParams);
+}
 
 const mockAgentSearchService = {
   search: jasmine.createSpy(),
@@ -35,12 +33,12 @@ describe('AgentSearchListComponent', () => {
   let component: AgentSearchListComponent;
   let fixture: ComponentFixture<AgentSearchListComponent>;
   let mockSearchService: AgentSearchService;
-  let activatedRoute: ActivatedRouteMock;
+  let activatedRoute: MockActivatedRoute;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       providers: [
-        { provide: ActivatedRoute, useClass: ActivatedRouteMock },
+        { provide: ActivatedRoute, useClass: MockActivatedRoute },
         { provide: AgentSearchService, useValue: mockAgentSearchService },
       ],
       declarations: [AgentSearchListComponent, MockPagintionComponent],
@@ -62,9 +60,8 @@ describe('AgentSearchListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should find agents with query', () => {
-    activatedRoute.paramsSubscriptionHandler({ query: query });
-
+  it('should find agents without query', () => {
+    queryParams = null;
     expect(mockSearchService.search).toHaveBeenCalled();
   });
 });
