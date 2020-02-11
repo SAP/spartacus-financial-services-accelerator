@@ -26,9 +26,11 @@ export class CategoryFeatureCarouselComponent implements OnInit {
     this.component$ = this.componentData.data$;
     this.component$.subscribe(data => {
       const categoryFeatures = [];
-      data.categoryFeatures.split(' ').forEach(feature => {
-        categoryFeatures.push(this.cmsService.getComponentData(feature));
-      });
+      if (data.categoryFeatures) {
+        data.categoryFeatures.split(' ').forEach(feature => {
+          categoryFeatures.push(this.cmsService.getComponentData(feature));
+        });
+      }
       this.items$ = of(categoryFeatures);
     });
   }
