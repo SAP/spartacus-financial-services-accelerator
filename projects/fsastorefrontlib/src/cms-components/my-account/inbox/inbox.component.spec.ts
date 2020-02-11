@@ -10,9 +10,9 @@ import {
 } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
-import { InboxTab } from '../../../core/my-account/services/inbox-data.service';
-import { InboxService } from './../../../core/my-account/services/inbox.service';
-import { InboxDataService } from '../../../core/my-account/services/inbox-data.service';
+import { InboxTab } from '../../../core/my-account/services/inbox/inbox-data.service';
+import { InboxService } from '../../../core/my-account/services/inbox/inbox.service';
+import { InboxDataService } from '../../../core/my-account/services/inbox/inbox-data.service';
 import {
   CmsInboxComponent,
   CmsInboxTabComponent,

@@ -3,7 +3,7 @@ import {
   FSCart,
   BindingStateType,
 } from './../../../../occ/occ-models/occ.models';
-import { QuoteService } from './../../../../core/my-account/services/quote.service';
+import { QuoteService } from '../../../../core/my-account/services/quote/quote.service';
 import {
   Component,
   ElementRef,

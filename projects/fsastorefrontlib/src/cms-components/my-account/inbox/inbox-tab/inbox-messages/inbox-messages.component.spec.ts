@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { InboxService } from '../../../../../core/my-account/services/inbox.service';
+import { InboxService } from '../../../../../core/my-account/services/inbox/inbox.service';
 import { InboxMessagesComponent } from './inbox-messages.component';
 import { I18nTestingModule } from '@spartacus/core';
 import { of, BehaviorSubject } from 'rxjs';

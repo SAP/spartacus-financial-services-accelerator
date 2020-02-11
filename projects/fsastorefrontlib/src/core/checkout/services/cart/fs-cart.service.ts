@@ -9,8 +9,8 @@ import {
   CartService,
   StateWithCart,
 } from '@spartacus/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, take, tap, mergeMap, map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
+import { filter, take, tap } from 'rxjs/operators';
 import { PricingData } from '../../../models/pricing.interface';
 import * as fromFSAction from '../../store/actions/index';
 import { ActivatedRoute } from '@angular/router';
@@ -18,10 +18,7 @@ import { CategoryService } from '../category/category.service';
 
 @Injectable()
 export class FSCartService extends CartService {
-  protected callbackFunction: Function;
   protected productAddedSource = new BehaviorSubject<string>('');
-  public mainProductAdded = this.productAddedSource.asObservable();
-
   constructor(
     protected fsStore: Store<StateWithCart>,
     protected fsCartData: CartDataService,

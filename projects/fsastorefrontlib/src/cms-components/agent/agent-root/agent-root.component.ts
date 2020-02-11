@@ -1,7 +1,7 @@
-import { OccAgentAdapter } from './../../../occ/services/agent/occ-agent.adapter';
 import { Component, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { CmsAgentRootComponent } from '../../../occ/occ-models';
+import { AgentConnector } from '../../../core/agent/connectors/agent.connector';
 
 @Component({
   selector: 'fsa-agent-root',
@@ -10,7 +10,7 @@ import { CmsAgentRootComponent } from '../../../occ/occ-models';
 export class AgentRootComponent implements OnInit {
   constructor(
     protected componentData: CmsComponentData<CmsAgentRootComponent>,
-    protected agentAdapter: OccAgentAdapter
+    protected agentConnector: AgentConnector
   ) {}
 
   agentList$;
@@ -20,7 +20,7 @@ export class AgentRootComponent implements OnInit {
     this.componentData.data$
       .subscribe(data => {
         this.agentRootCategory = data.agentRootCategory;
-        this.agentList$ = this.agentAdapter.getAgentsByCategory(
+        this.agentList$ = this.agentConnector.getAgentsByCategory(
           data.agentRootCategory
         );
       })
