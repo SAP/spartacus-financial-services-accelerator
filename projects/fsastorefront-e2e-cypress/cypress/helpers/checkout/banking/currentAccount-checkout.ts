@@ -11,7 +11,7 @@ export function openCategoryPage() {
     .click({ force: true });
 }
 
-export function checkComparisonTable() {
+export function checkCurrentAccountComparisonTable() {
   cy.get('fsa-comparison-table-panel-item').should('have.length', 3);
   cy.get('fsa-comparison-table-panel-item')
     .eq(0)

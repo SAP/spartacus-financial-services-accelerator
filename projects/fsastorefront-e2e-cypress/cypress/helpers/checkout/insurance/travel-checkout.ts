@@ -96,19 +96,8 @@ export function checkOptionalProductsAndPick() {
     .click();
 }
 
-export function populatePersonalDetailsForm() {
-  cy.get('cx-dynamic-form').within(() => {
-    cy.get('[name=title]').select('Mr.');
-    cy.get('[name="firstName"]').type('Ben');
-    cy.get('[name="lastName"]').type('Moore');
-    cy.get('[name="age"]').type('30');
-    cy.get('[name="phoneNumber"]').type('111111');
-    cy.get('[name="email"]').type('ben@moore.com');
-    cy.get('[name="address1"]').type('Test address');
-    cy.get('[name="city"]').type('Test city');
-    cy.get('[name="postcode"]').type('111111');
-    cy.get('[name=country]').select('Serbia');
-  });
+export function populateAgeOnPersonalDetails() {
+  cy.get('[name="age"]').type('30');
   cy.get('fsa-personal-details-navigation')
     .findByText('Continue')
     .click();
@@ -132,57 +121,7 @@ export function checkQuoteReview() {
   });
 }
 
-export function selectPaymentMethod() {
-  cy.get('.cx-card-title').should('contain', 'Default Payment Method');
-  cy.get('.card-header').should('contain', 'Selected');
-  cy.get('cx-payment-method').within(() => {
-    cy.get('button.btn-primary').click();
-  });
-}
-
-export function addPaymentMethod(userId: string) {
-  cy.wait(3000);
-  cy.get('fsa-add-options')
-    .first()
-    .then(test => {
-      const localData = JSON.parse(
-        localStorage.getItem('spartacus-local-data')
-      );
-      const cartId = localData.cart.active.value.content.code;
-      cy.request({
-        method: 'POST',
-        url: `${Cypress.env(
-          'API_URL'
-        )}/rest/v2/financial/users/${userId}/carts/${cartId}/paymentdetails`,
-        headers: {
-          Authorization: `bearer ${localData.auth.userToken.token.access_token}`,
-        },
-        body: {
-          accountHolderName: 'Test User',
-          cardNumber: '4111111111111111',
-          cardType: { code: 'visa' },
-          expiryMonth: '01',
-          expiryYear: '2125',
-          defaultPayment: true,
-          saved: true,
-          billingAddress: {
-            firstName: 'Test',
-            lastName: 'User',
-            titleCode: 'mr',
-            line1: 'Some address',
-            line2: '',
-            town: 'Town',
-            postalCode: 'H4B3L4',
-            country: { isocode: 'US' },
-          },
-        },
-      }).then(response => {
-        expect(response.status).to.eq(201);
-      });
-    });
-}
-
-export function placeOrderOnFinalReivew() {
+export function placeOrderOnFinalReview() {
   cy.wait(5000);
   cy.get('fsa-final-review').within(() => {
     cy.get('.form-check-input').click();
@@ -206,4 +145,18 @@ export function checkMyPoliciesPage() {
   cy.get('fsa-policies').within(() => {
     cy.get('.info-card').should('have.length', 1);
   });
+}
+
+export function checkTravelQuoteReviewPage() {
+  cy.get('.progress-inner-wrapper').should('have.length', 5);
+  cy.get('fsa-accordion-item')
+    .should('have.length', 3)
+    .eq(0)
+    .should('contain', "What's Included");
+  cy.get('.accordion-heading')
+    .eq(1)
+    .should('contain', 'Added by you');
+  cy.get('.accordion-heading')
+    .eq(2)
+    .should('contain', 'Personal Details');
 }

@@ -1,6 +1,11 @@
 import * as register from '../../../helpers/register';
-import * as travelCheckout from '../../../helpers/checkout/travel/travel-checkout';
+import * as travelCheckout from '../../../helpers/checkout/insurance/travel-checkout';
 import { registrationUser } from '../../../sample-data/users';
+import * as checkout from '../../../helpers/checkout/checkoutSteps';
+import {
+  addPaymentMethod,
+  selectPaymentMethod,
+} from '../../../helpers/checkout/insurance/payment';
 
 context('Travel Insurance Checkout', () => {
   before(() => {
@@ -11,7 +16,7 @@ context('Travel Insurance Checkout', () => {
     cy.wait(2000);
   });
 
-  describe('Checkout', () => {
+  describe('Travel Checkout', () => {
     it('Should open travel category page', () => {
       travelCheckout.openCategoryPage();
     });
@@ -25,7 +30,7 @@ context('Travel Insurance Checkout', () => {
     });
 
     it('Add payment method for user', () => {
-      travelCheckout.addPaymentMethod(registrationUser.email);
+      addPaymentMethod(registrationUser.email);
     });
 
     it('Add optional product to the cart', () => {
@@ -34,7 +39,8 @@ context('Travel Insurance Checkout', () => {
     });
 
     it('Populate personal details', () => {
-      travelCheckout.populatePersonalDetailsForm();
+      checkout.populatePersonalDetailsPage();
+      travelCheckout.populateAgeOnPersonalDetails();
       cy.wait(1000);
     });
 
@@ -43,11 +49,11 @@ context('Travel Insurance Checkout', () => {
     });
 
     it('Select default payment details', () => {
-      travelCheckout.selectPaymentMethod();
+      selectPaymentMethod();
     });
 
     it('Place order on final review page', () => {
-      travelCheckout.placeOrderOnFinalReivew();
+      travelCheckout.placeOrderOnFinalReview();
     });
 
     it('Check order confirmation', () => {
@@ -56,6 +62,7 @@ context('Travel Insurance Checkout', () => {
 
     it('Check my policies page', () => {
       travelCheckout.checkMyPoliciesPage();
+      cy.get('h4.info-card-caption').contains('Travel Insurance');
     });
   });
 });
