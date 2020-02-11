@@ -8,7 +8,7 @@ import { CmsService, AuthService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { InboxService } from '../../../core/my-account/services/inbox.service';
+import { InboxService } from '../../../core/my-account/services/inbox/inbox.service';
 import {
   CmsInboxComponent,
   CmsInboxTabComponent,

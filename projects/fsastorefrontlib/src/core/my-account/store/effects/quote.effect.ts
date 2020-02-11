@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
-import { OccQuoteAdapter } from '../../../../occ/services/quote/occ-quote.adapter';
 import * as fromActions from '../actions';
+import { QuoteConnector } from '../../services/quote/connectors/quote.connector';
 
 @Injectable()
 export class QuoteEffects {
@@ -13,7 +13,7 @@ export class QuoteEffects {
     ofType(fromActions.LOAD_QUOTES),
     map((action: fromActions.LoadQuotes) => action.payload),
     switchMap(payload => {
-      return this.quoteAdapter.getQuotes(payload.userId).pipe(
+      return this.adapter.getQuotes(payload.userId).pipe(
         map((quotes: any) => {
           return new fromActions.LoadQuotesSuccess(quotes);
         }),
@@ -29,7 +29,7 @@ export class QuoteEffects {
     ofType(fromActions.UPDATE_QUOTE),
     map((action: fromActions.UpdateQuote) => action.payload),
     switchMap(payload => {
-      return this.quoteAdapter
+      return this.adapter
         .updateQuote(payload.userId, payload.cartId, payload.quoteContent)
         .pipe(
           map((quote: any) => {
@@ -47,7 +47,7 @@ export class QuoteEffects {
     ofType(fromActions.BIND_QUOTE),
     map((action: fromActions.BindQuote) => action.payload),
     mergeMap(payload => {
-      return this.quoteAdapter.bindQuote(payload.userId, payload.cartId).pipe(
+      return this.adapter.bindQuote(payload.userId, payload.cartId).pipe(
         mergeMap(() => {
           return [
             new CartActions.LoadCart({
@@ -63,8 +63,5 @@ export class QuoteEffects {
     })
   );
 
-  constructor(
-    private actions$: Actions,
-    private quoteAdapter: OccQuoteAdapter
-  ) {}
+  constructor(private actions$: Actions, private adapter: QuoteConnector) {}
 }

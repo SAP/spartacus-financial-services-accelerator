@@ -17,7 +17,6 @@ import {
   PageLayoutComponent,
   CmsPageGuard,
 } from '@spartacus/storefront';
-import { OccAgentAdapter } from '../../occ/services/agent/occ-agent.adapter';
 import { AgentRootComponent } from './agent-root/agent-root.component';
 import { FindAgentNavigationComponent } from './find-agent-navigation/find-agent-navigation.component';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
@@ -25,6 +24,8 @@ import { AgentSearchBoxComponent } from './agent-search-box/agent-search-box.com
 import { AgentSearchListComponent } from './agent-search-list/agent-search-list.component';
 import { AgentSearchDetailsComponent } from './agent-search-details/agent-search-details.component';
 import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-form.component';
+
+import { AgentConnector } from '../../core/agent/connectors/agent.connector';
 
 @NgModule({
   imports: [
@@ -95,6 +96,6 @@ import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-fo
     AgentSearchListComponent,
     AgentSearchDetailsComponent,
   ],
-  providers: [OccAgentAdapter],
+  providers: [AgentConnector],
 })
 export class AgentModule {}

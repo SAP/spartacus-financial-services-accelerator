@@ -3,12 +3,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule, CmsComponent } from '@spartacus/core';
 import { MediaModule, CmsComponentData } from '@spartacus/storefront';
 import { of, Observable, BehaviorSubject } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
 
 import { AgentRootComponent } from './agent-root.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { CmsAgentRootComponent } from '../../../occ/occ-models';
-import { OccAgentAdapter } from '../../../occ/services/agent/occ-agent.adapter';
-import { RouterTestingModule } from '@angular/router/testing';
+import { AgentAdapter } from '../../../core/agent/connectors/agent.adapter';
 
 const mockedAgentList = ['testAgent'];
 
@@ -58,7 +58,7 @@ describe('AgentRootComponent', () => {
           useValue: MockCmsComponentData,
         },
         {
-          provide: OccAgentAdapter,
+          provide: AgentAdapter,
           useValue: mockOccAgentAdapter,
         },
       ],
