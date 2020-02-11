@@ -6,4 +6,9 @@ install:
   - yarn install
 
 script:
-  - yarn build
+  - yarn ng build dynamicforms
+  - yarn ng build fsastorefrontlib
+  - yarn run build:ci
+  - yarn run ng lint
+  - yarn prettier
+  - yarn run test --watch=false
