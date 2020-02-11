@@ -75,7 +75,7 @@ describe('AgentConnector', () => {
 
   it('should call adapter for get agent by id', () => {
     spyOn(agentAdapter, 'getAgentByID').and.stub();
-    agentConnector.getAgentsByCategory(agentID);
+    agentConnector.getAgentByID(agentID);
     expect(agentAdapter.getAgentByID).toHaveBeenCalledWith(agentID);
   });
 
