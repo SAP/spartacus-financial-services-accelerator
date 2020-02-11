@@ -23,6 +23,9 @@ class MockPolicyAdapter implements PolicyAdapter {
   ).and.callFake(userId => of('getPremiumCalendar' + userId));
 }
 const user = 'user';
+const category = 'categoryId';
+const policy = 'policyId';
+const contract = 'contractId';
 
 describe('PolicyConnector', () => {
   let policyConnector: PolicyConnector;
@@ -45,18 +48,18 @@ describe('PolicyConnector', () => {
     expect(policyAdapter.getPolicies).toHaveBeenCalledWith(user);
   });
   it('should call adapter for getPoliciesByCategory', () => {
-    policyConnector.getPoliciesByCategory(user, 'categoryId');
+    policyConnector.getPoliciesByCategory(user, category);
     expect(policyAdapter.getPoliciesByCategory).toHaveBeenCalledWith(
       user,
-      'categoryId'
+      category
     );
   });
   it('should call adapter for getPolicy', () => {
-    policyConnector.getPolicy(user, 'policy', 'contractId');
+    policyConnector.getPolicy(user, policy, contract);
     expect(policyAdapter.getPolicy).toHaveBeenCalledWith(
       user,
-      'policy',
-      'contractId'
+      policy,
+      contract
     );
   });
   it('should call adapter for getPremiumCalendar', () => {

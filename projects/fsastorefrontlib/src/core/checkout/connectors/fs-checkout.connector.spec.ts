@@ -13,6 +13,8 @@ class MockFSCheckoutAdapter implements FSCheckoutAdapter {
   );
 }
 const user = 'user';
+const cart = 'cartId';
+const identification = 'video';
 
 describe('FsCheckoutConnector', () => {
   let fsCheckoutConnector: FsCheckoutConnector;
@@ -37,10 +39,10 @@ describe('FsCheckoutConnector', () => {
     expect(fsCheckoutConnector).toBeTruthy();
   });
   it('should call adapter for getUserRequest', () => {
-    fsCheckoutConnector.setIdentificationType('video', 'cartId', user);
+    fsCheckoutConnector.setIdentificationType(identification, cart, user);
     expect(fsCheckoutAdapter.setIdentificationType).toHaveBeenCalledWith(
-      'video',
-      'cartId',
+      identification,
+      cart,
       user
     );
   });

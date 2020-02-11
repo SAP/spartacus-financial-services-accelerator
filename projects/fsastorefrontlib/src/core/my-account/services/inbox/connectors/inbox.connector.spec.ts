@@ -8,8 +8,8 @@ import createSpy = jasmine.createSpy;
 class MockInboxAdapter implements InboxAdapter {
   getSiteMessagesForUserAndGroup = createSpy(
     'InboxAdapter.getSiteMessagesForUserAndGroup'
-  ).and.callFake((userId, messageGroup, searchConfig) =>
-    of('getSiteMessagesForUserAndGroup' + userId + messageGroup + searchConfig)
+  ).and.callFake((userId, msgGroup, searchConfig) =>
+    of('getSiteMessagesForUserAndGroup' + userId + msgGroup + searchConfig)
   );
   setMessagesState = createSpy('InboxAdapter.setMessagesState').and.callFake(
     (userId, messagesUidList, readStatus) =>
@@ -17,6 +17,7 @@ class MockInboxAdapter implements InboxAdapter {
   );
 }
 const user = 'user';
+const messageGroup = 'messageGroupId';
 
 describe('InboxConnector', () => {
   let inboxConnector: InboxConnector;
@@ -35,10 +36,10 @@ describe('InboxConnector', () => {
     expect(inboxConnector).toBeTruthy();
   });
   it('should call adapter for getSiteMessagesForUserAndGroup', () => {
-    inboxConnector.getSiteMessagesForUserAndGroup(user, 'messageGroup', {});
+    inboxConnector.getSiteMessagesForUserAndGroup(user, messageGroup, {});
     expect(inboxAdapter.getSiteMessagesForUserAndGroup).toHaveBeenCalledWith(
       user,
-      'messageGroup',
+      messageGroup,
       {}
     );
   });

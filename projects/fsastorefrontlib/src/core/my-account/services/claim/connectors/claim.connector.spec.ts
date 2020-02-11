@@ -25,8 +25,11 @@ class MockClaimAdapter implements ClaimAdapter {
   );
 }
 const user = 'user';
+const claim = 'claimId';
+const policy = 'policyId';
+const contract = 'contractId';
 
-describe('PolicyConnector', () => {
+describe('ClaimConnector', () => {
   let claimConnector: ClaimConnector;
   let claimAdapter: ClaimAdapter;
 
@@ -47,23 +50,23 @@ describe('PolicyConnector', () => {
     expect(claimAdapter.getClaims).toHaveBeenCalledWith(user);
   });
   it('should call adapter for createClaim', () => {
-    claimConnector.createClaim(user, 'policyId', 'contractId');
+    claimConnector.createClaim(user, policy, contract);
     expect(claimAdapter.createClaim).toHaveBeenCalledWith(
       user,
-      'policyId',
-      'contractId'
+      policy,
+      contract
     );
   });
   it('should call adapter for deleteClaim', () => {
-    claimConnector.deleteClaim(user, 'claimId');
-    expect(claimAdapter.deleteClaim).toHaveBeenCalledWith(user, 'claimId');
+    claimConnector.deleteClaim(user, claim);
+    expect(claimAdapter.deleteClaim).toHaveBeenCalledWith(user, claim);
   });
   it('should call adapter for submitClaim', () => {
-    claimConnector.submitClaim(user, 'claimId');
-    expect(claimAdapter.submitClaim).toHaveBeenCalledWith(user, 'claimId');
+    claimConnector.submitClaim(user, claim);
+    expect(claimAdapter.submitClaim).toHaveBeenCalledWith(user, claim);
   });
   it('should call adapter for updateClaim', () => {
-    claimConnector.updateClaim(user, 'claimId', {});
-    expect(claimAdapter.updateClaim).toHaveBeenCalledWith(user, 'claimId', {});
+    claimConnector.updateClaim(user, claim, {});
+    expect(claimAdapter.updateClaim).toHaveBeenCalledWith(user, claim, {});
   });
 });
