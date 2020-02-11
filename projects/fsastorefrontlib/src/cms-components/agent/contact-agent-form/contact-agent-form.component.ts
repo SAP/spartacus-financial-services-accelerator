@@ -14,7 +14,7 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
   constructor(
     protected agentSearchService: AgentSearchService,
     protected userService: UserService,
-    private route: ActivatedRoute,
+    protected route: ActivatedRoute,
     protected fb: FormBuilder
   ) {}
 

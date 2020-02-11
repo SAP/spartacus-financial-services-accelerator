@@ -43,6 +43,11 @@ class MockOccAgentAdapter {
       agents: agentsSearchWithResults,
     });
   }
+  getAgentByID() {
+    return of({
+      agent: testAgent1.contactEmail,
+    });
+  }
 }
 const queryText = 'test';
 const queryTextNoResults = 'noResults';
@@ -119,6 +124,21 @@ describe('AgentSearchService', () => {
   it('should set agent', () => {
     service.setAgent(testAgent1);
     expect(service.agentDetails.value).toBe(testAgent1);
+  });
+
+  it('should get agent by ID', () => {
+    let agentResult;
+    spyOn(mockOccAgentAdapter, 'getAgentByID').and.returnValue(
+      of({
+        agent: testAgent1.contactEmail,
+      })
+    );
+    service
+      .getAgentByID(testAgent1.contactEmail)
+      .subscribe(result => (agentResult = result))
+      .unsubscribe();
+    expect(agentResult).toBeTruthy();
+    expect(service.agentDetails).toBeTruthy();
   });
 
   it('should fetch agents by search query', () => {
