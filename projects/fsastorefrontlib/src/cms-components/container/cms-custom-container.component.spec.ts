@@ -1,12 +1,26 @@
-import { DebugElement } from '@angular/core';
+import { DebugElement, Input, Directive } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CmsComponentConnector, CmsModule } from '@spartacus/core';
+import { CmsComponentConnector, ContentSlotComponentData, I18nTestingModule } from '@spartacus/core';
 import { of } from 'rxjs';
-import { CmsComponentData, PageComponentModule, SpinnerModule } from '@spartacus/storefront';
+import { CmsComponentData, SpinnerModule } from '@spartacus/storefront';
 import { CmsCustomContainerComponent } from './cms-custom-container.component';
 import { CMSCustomComponentsContainer } from '../../occ/occ-models';
-import { RouterTestingModule } from '@angular/router/testing';
-
+import { ActivatedRoute } from '@angular/router';
+@Directive({
+  // tslint:disable
+  selector: '[cxComponentWrapper]',
+})
+export class MockComponentWrapperDirective {
+  @Input() cxComponentWrapper: ContentSlotComponentData;
+}
+class MockCmsComponentConnector {
+  getList() {
+    return mockComponentList;
+  }
+}
+class MockActivatedRoute {
+  params=of('pageContext');
+}
 const  mockComponentList = [
   { 
     uid: "ClaimActivePoliciesFlexComponent",
@@ -18,21 +32,6 @@ const  mockComponentList = [
     flexType: "ClaimActivePoliciesFlex"
   }
 ]
-class MockActivatedRoute {
-  snapshot = {
-    queryParams: {
-      forced: false,
-    },
-  };
-}
-class MockCmsComponentConnector {
-  getList() {
-    return mockComponentList;
-  }
-}
-class MockReducerManager {
-  addFeatures() {}
-}
 
 describe('ComparisonTableContainerComponent', () => {
   let component: CmsCustomContainerComponent;
@@ -50,20 +49,16 @@ describe('ComparisonTableContainerComponent', () => {
   beforeEach(async(() => {
     mockCmsComponentConnector = new MockCmsComponentConnector();
     TestBed.configureTestingModule({
-      imports: [ 
-        // PageComponentModule,
-        CmsModule,
-        // SpinnerModule,
-        RouterTestingModule
-      ],
+      imports: [SpinnerModule, I18nTestingModule ],
       declarations: [
-        CmsCustomContainerComponent
+        CmsCustomContainerComponent,
+        MockComponentWrapperDirective
       ],
       providers: [
-        // {
-        //   provide: ActivatedRoute,
-        //   useValue: MockActivatedRoute
-        // },
+        {
+          provide: ActivatedRoute,
+          useValue: MockActivatedRoute
+        },
         ,
         {
           provide: CmsComponentData,
@@ -73,10 +68,6 @@ describe('ComparisonTableContainerComponent', () => {
           provide: CmsComponentConnector,
           useValue: mockCmsComponentConnector
         },
-        // {
-        //   provide: ReducerManager,
-        //   useValue: MockReducerManager
-        // }
 
       ],
     }).compileComponents();
