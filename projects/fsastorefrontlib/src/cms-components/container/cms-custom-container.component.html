@@ -10,28 +10,28 @@
       </ng-container>
     </ng-container>
   </div>
-
-  <ng-template #loading>
-    <cx-spinner></cx-spinner>
-  </ng-template>
-
-  <ng-template #flexCmsComponent let-component>
-    <ng-container
-      [cxComponentWrapper]="{
-        flexType: component?.flexType,
-        uid: component?.uid
-      }"
-    >
-    </ng-container>
-  </ng-template>
-
-  <ng-template #simpleCmsComponent let-component>
-    <ng-container
-      [cxComponentWrapper]="{
-        flexType: component?.typeCode,
-        uid: component?.uid
-      }"
-    >
-    </ng-container>
-  </ng-template>
 </ng-container>
+
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
+</ng-template>
+
+<ng-template #flexCmsComponent let-component>
+  <ng-container
+    [cxComponentWrapper]="{
+      flexType: component?.flexType,
+      uid: component?.uid
+    }"
+  >
+  </ng-container>
+</ng-template>
+
+<ng-template #simpleCmsComponent let-component>
+  <ng-container
+    [cxComponentWrapper]="{
+      flexType: component?.typeCode,
+      uid: component?.uid
+    }"
+  >
+  </ng-container>
+</ng-template>

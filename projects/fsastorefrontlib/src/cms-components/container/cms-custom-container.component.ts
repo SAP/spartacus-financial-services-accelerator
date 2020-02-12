@@ -41,9 +41,5 @@ export class CmsCustomContainerComponent implements OnInit {
         );
       })
       .unsubscribe();
-      this.components$.subscribe( res => {
-        console.dir( res);
-      })
   }
-  
 }
