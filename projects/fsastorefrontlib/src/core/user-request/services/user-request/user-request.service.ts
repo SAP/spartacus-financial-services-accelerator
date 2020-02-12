@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
 import * as fromReducer from '../../store/reducers';
 import { FSUserRequest } from '../../../../occ/occ-models';
 import { UserRequestSelector } from '../../store';

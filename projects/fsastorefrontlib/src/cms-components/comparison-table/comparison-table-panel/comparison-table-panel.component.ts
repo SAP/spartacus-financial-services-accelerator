@@ -1,19 +1,24 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { take, map, switchMap } from 'rxjs/operators';
 import { ComparisonPanelCMSComponent } from '../../../occ/occ-models';
-import { OccBillingTimeAdapter } from '../../../occ/services/billing-time/occ-billing-time.adapter';
 import { FormDataService } from '@fsa/dynamicforms';
 import { PricingService } from '../../../core/checkout/services/pricing/pricing.service';
 import { PricingData } from '../../../occ/occ-models';
+import { BillingTimeConnector } from '../../../core/checkout/services/billing-time/connectors/billing-time.connector';
 
 @Component({
   selector: 'fsa-comparison-table-panel',
   templateUrl: './comparison-table-panel.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ComparisonTablePanelComponent implements OnInit {
+export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
   comparisonPanel: Observable<ComparisonPanelCMSComponent>;
   productList: string[];
@@ -22,7 +27,7 @@ export class ComparisonTablePanelComponent implements OnInit {
 
   constructor(
     protected componentData: CmsComponentData<ComparisonPanelCMSComponent>,
-    protected billingTimeAdapter: OccBillingTimeAdapter,
+    protected billingTimeConnector: BillingTimeConnector,
     protected formDataService: FormDataService,
     protected pricingService: PricingService
   ) {}
@@ -31,7 +36,9 @@ export class ComparisonTablePanelComponent implements OnInit {
     this.comparisonPanel = this.componentData.data$;
     this.componentData.data$.pipe(take(1)).subscribe(data => {
       const productCodes = data.products.split(' ');
-      this.billingData = this.billingTimeAdapter.getBillingTimes(productCodes);
+      this.billingData = this.billingTimeConnector.getBillingTimes(
+        productCodes
+      );
     });
 
     this.subscription.add(

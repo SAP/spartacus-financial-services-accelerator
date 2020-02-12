@@ -3,7 +3,7 @@ import { TestBed, async } from '@angular/core/testing';
 import { Type } from '@angular/core';
 import { of, BehaviorSubject } from 'rxjs';
 import { AgentSearchService } from './agent-search.service';
-import { OccAgentAdapter } from './../../../occ/services/agent/occ-agent.adapter';
+import { AgentConnector } from '../connectors/agent.connector';
 
 const testAgent1 = {
   contactEmail: 'testAgent1@test.com',
@@ -43,6 +43,11 @@ class MockOccAgentAdapter {
       agents: agentsSearchWithResults,
     });
   }
+  getAgentByID() {
+    return of({
+      agent: testAgent1.contactEmail,
+    });
+  }
 }
 const queryText = 'test';
 const queryTextNoResults = 'noResults';
@@ -74,7 +79,7 @@ describe('AgentSearchService', () => {
     TestBed.configureTestingModule({
       providers: [
         {
-          provide: OccAgentAdapter,
+          provide: AgentConnector,
           useValue: mockOccAgentAdapter,
         },
         {
@@ -119,6 +124,21 @@ describe('AgentSearchService', () => {
   it('should set agent', () => {
     service.setAgent(testAgent1);
     expect(service.agentDetails.value).toBe(testAgent1);
+  });
+
+  it('should get agent by ID', () => {
+    let agentResult;
+    spyOn(mockOccAgentAdapter, 'getAgentByID').and.returnValue(
+      of({
+        agent: testAgent1.contactEmail,
+      })
+    );
+    service
+      .getAgentByID(testAgent1.contactEmail)
+      .subscribe(result => (agentResult = result))
+      .unsubscribe();
+    expect(agentResult).toBeTruthy();
+    expect(service.agentDetails).toBeTruthy();
   });
 
   it('should fetch agents by search query', () => {

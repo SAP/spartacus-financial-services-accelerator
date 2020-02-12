@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { CreateClaimComponent } from './create-claim.component';
-import { ClaimService } from '../../../../core/my-account/services/claim.service';
+import { ClaimService } from '../../../../core/my-account/services/claim/claim.service';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { BehaviorSubject } from 'rxjs';

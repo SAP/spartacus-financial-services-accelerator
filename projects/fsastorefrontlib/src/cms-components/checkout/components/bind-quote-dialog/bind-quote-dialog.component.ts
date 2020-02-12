@@ -3,8 +3,14 @@ import {
   FSCart,
   BindingStateType,
 } from './../../../../occ/occ-models/occ.models';
-import { QuoteService } from './../../../../core/my-account/services/quote.service';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { QuoteService } from '../../../../core/my-account/services/quote/quote.service';
+import {
+  Component,
+  ElementRef,
+  ViewChild,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { ModalService } from '@spartacus/storefront';
 import { RoutingService, CartService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
@@ -17,6 +23,9 @@ export class BindQuoteDialogComponent {
   cartCode: string;
   nextStepUrl: string;
   subscription = new Subscription();
+
+  @Output()
+  quoteBinding$: EventEmitter<any> = new EventEmitter<any>();
 
   @ViewChild('dialog', { static: false, read: ElementRef })
   dialog: ElementRef;
@@ -34,6 +43,7 @@ export class BindQuoteDialogComponent {
 
   bindQuote() {
     this.quoteService.bindQuote(this.cartCode);
+    this.quoteBinding$.emit(true);
     this.subscription.add(
       this.cartService
         .getActive()

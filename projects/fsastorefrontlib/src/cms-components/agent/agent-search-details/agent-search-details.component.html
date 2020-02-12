@@ -22,7 +22,15 @@
             >
               {{ category.name }}
             </div>
-            <button class="secondary-button btn-block">
+            <button
+              class="secondary-button btn-block"
+              [routerLink]="
+                {
+                  cxRoute: 'contactAgent',
+                  params: { agent: agent.contactEmail }
+                } | cxUrl
+              "
+            >
               {{ 'fscommon.agentLocator.contact' | cxTranslate }}
             </button>
           </div>

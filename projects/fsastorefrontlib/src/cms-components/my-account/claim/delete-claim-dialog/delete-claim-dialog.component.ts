@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ClaimService } from '../../../../core/my-account/services/claim.service';
+import { ClaimService } from '../../../../core/my-account/services/claim/claim.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '@spartacus/core';
 import { take } from 'rxjs/operators';
