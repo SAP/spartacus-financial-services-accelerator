@@ -4,7 +4,7 @@ import { RoutingService } from '@spartacus/core';
 import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { Observable, of, Subscription } from 'rxjs';
-import { PolicyService } from '../../../../core/my-account/services';
+import { PolicyService } from '../../../../core/my-account/facade';
 import * as fromPolicyStore from '../../../../core/my-account/store';
 
 @Injectable({

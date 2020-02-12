@@ -3,11 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap, switchMap } from 'rxjs/operators';
-import { ClaimDataService } from '../../services/claim/claim-data.service';
+import { ClaimDataService } from '../../services/claim-data.service';
 import { Claim } from '../../../../occ/occ-models';
 import * as fromUserRequestActions from '../../../user-request/store/actions';
 import * as fromActions from '../actions';
-import { ClaimConnector } from '../../services/claim/connectors/claim.connector';
+import { ClaimConnector } from '../../connectors/claim.connector';
 
 @Injectable()
 export class ClaimEffects {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FSUserRequest } from '../../../occ/occ-models';
 import { RoutingService } from '@spartacus/core';
-import { UserRequestService } from '../../../core/user-request/services';
+import { UserRequestService } from '../../../core/user-request/facade/';
 
 @Component({
   selector: 'fsa-user-request-summary',

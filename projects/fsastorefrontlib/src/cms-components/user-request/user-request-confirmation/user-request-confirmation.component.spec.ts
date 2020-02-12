@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DomSanitizer } from '@angular/platform-browser';
 import { I18nTestingModule } from '@spartacus/core';
 import { ClaimStatus } from './../../../occ/occ-models/occ.models';
-import { ClaimDataService } from '../../../core/my-account/services/claim/claim-data.service';
+import { ClaimDataService } from '../../../core/my-account/services/claim-data.service';
 import { UserRequestConfirmationComponent } from './user-request-confirmation.component';
 import { Claim } from '../../../occ/occ-models';
 

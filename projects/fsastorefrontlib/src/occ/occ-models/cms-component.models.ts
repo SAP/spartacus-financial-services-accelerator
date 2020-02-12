@@ -58,6 +58,7 @@ export interface ComparisonPanelCMSComponent extends CmsComponent {
 export interface CMSCustomComponentsContainer extends CmsComponent {
   uid?: string;
   simpleCMSComponents?: string;
+  styleCss?: string;
 }
 
 export interface CMSFormSubmitComponent extends CmsComponent {

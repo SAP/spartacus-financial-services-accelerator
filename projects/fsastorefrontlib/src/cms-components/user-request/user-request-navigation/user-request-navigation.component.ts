@@ -8,15 +8,11 @@ import { ActivatedRoute } from '@angular/router';
 import {
   UserRequestService,
   UserRequestNavigationService,
-} from '../../../core/user-request/services';
+} from '../../../core/user-request/facade';
 import { FSUserRequest, FSStepData, Claim } from '../../../occ/occ-models';
-import {
-  ClaimDataService,
-  ClaimService,
-} from '../../../core/my-account/services';
+import { ClaimService } from '../../../core/my-account/facade';
+import { ClaimDataService } from '../../../core/my-account/services';
 import { GlobalMessageService, RoutingService } from '@spartacus/core';
-import { select, Store } from '@ngrx/store';
-import * as fromClaimStore from '../../../core/my-account/store';
 
 const completedStatus = 'COMPLETED';
 
@@ -42,13 +38,12 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     protected claimService: ClaimService,
     protected claimDataService: ClaimDataService,
     protected globalMessageService: GlobalMessageService,
-    protected store: Store<fromClaimStore.SubmitClaim>,
     protected router: RoutingService
   ) {}
 
   ngOnInit() {
     this.userRequest$ = this.userRequestService.getUserRequest();
-    this.claim$ = this.store.pipe(select(fromClaimStore.getClaimsContent));
+    this.claim$ = this.claimService.getCurrentClaim();
     this.subscription.add(
       this.userRequest$
         .pipe(

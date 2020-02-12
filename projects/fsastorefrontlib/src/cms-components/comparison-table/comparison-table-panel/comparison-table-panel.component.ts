@@ -9,9 +9,9 @@ import { Observable, Subscription } from 'rxjs';
 import { take, map, switchMap } from 'rxjs/operators';
 import { ComparisonPanelCMSComponent } from '../../../occ/occ-models';
 import { FormDataService } from '@fsa/dynamicforms';
-import { PricingService } from '../../../core/checkout/services/pricing/pricing.service';
+import { PricingService } from '../../../core/product-pricing/facade/pricing.service';
 import { PricingData } from '../../../occ/occ-models';
-import { BillingTimeConnector } from '../../../core/checkout/services/billing-time/connectors/billing-time.connector';
+import { BillingTimeConnector } from '../../../core/product-pricing/connectors/billing-time.connector';
 
 @Component({
   selector: 'fsa-comparison-table-panel',

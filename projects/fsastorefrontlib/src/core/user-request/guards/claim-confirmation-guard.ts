@@ -3,7 +3,7 @@ import { CanActivate } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { ClaimStatus } from './../../../occ/occ-models/occ.models';
-import { ClaimDataService } from '../../my-account/services/claim/claim-data.service';
+import { ClaimDataService } from '../../my-account/services/claim-data.service';
 
 export const allowableStatuses = [
   ClaimStatus.APPROVED,
