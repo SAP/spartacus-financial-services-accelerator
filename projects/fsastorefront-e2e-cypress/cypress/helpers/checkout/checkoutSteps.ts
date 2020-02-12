@@ -1,6 +1,6 @@
 export function checkProgressBarInsurance() {
-  cy.get('div.d-flex.progress-node').should('have.length', 7);
-  cy.get('h2.heading-headline').should('have.text', ' Your Life Insurance ');
+  cy.get('.d-flex.progress-node').should('have.length', 7);
+  cy.get('.heading-headline').should('have.text', ' Your Life Insurance ');
 }
 
 export function populatePersonalDetailsPage() {
@@ -40,7 +40,7 @@ export function ConfirmBindQuote() {
 }
 
 export function bindQuotePopup() {
-  cy.get('button.primary-button')
+  cy.get('.primary-button')
     .should('contain', 'Continue')
     .click();
   cy.get('fsa-bind-quote-dialog').within(() => {
@@ -56,8 +56,8 @@ export function clickContinueButton() {
 }
 
 export function checkBackAndContinueButtons() {
-  cy.get('button.action-button').should('contain', 'Back');
-  cy.get('button.primary-button').should('contain', 'Continue');
+  cy.get('.action-button').should('contain', 'Back');
+  cy.get('.primary-button').should('contain', 'Continue');
 }
 
 export function clickResumeButton() {

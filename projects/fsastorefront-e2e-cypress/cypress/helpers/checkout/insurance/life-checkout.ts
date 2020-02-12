@@ -24,7 +24,7 @@ export function checkLifeComparisonTable() {
   cy.get('fsa-comparison-table-panel-item')
     .eq(0)
     .within(() => {
-      cy.get('h3').should('have.text', 'Basic Life Insurance');
+      cy.get('.table-header-title').should('have.text', 'Basic Life Insurance');
       cy.get('h4').should('have.text', '€0.97');
     });
 }
