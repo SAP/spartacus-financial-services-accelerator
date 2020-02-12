@@ -1,24 +1,37 @@
 <ng-container *ngIf="components$ | async as components; else loading">
-  <ng-container *ngFor="let component of components">
-    <ng-container *ngIf="component.flexType; else simpleCmsComponent">
+  <div [ngClass]="[styleCss]">
+    <ng-container *ngFor="let component of components">
       <ng-container
+        *ngTemplateOutlet="
+          component.flexType ? flexCmsComponent : simpleCmsComponent;
+          context: { $implicit: component }
+        "
+      >
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <ng-template #loading>
+    <cx-spinner></cx-spinner>
+  </ng-template>
+
+  <ng-template #flexCmsComponent let-component>
+    <ng-container
       [cxComponentWrapper]="{
-        flexType: component.flexType,
+        flexType: component?.flexType,
         uid: component?.uid
       }"
     >
     </ng-container>
-  </ng-container>
+  </ng-template>
+
+  <ng-template #simpleCmsComponent let-component>
+    <ng-container
+      [cxComponentWrapper]="{
+        flexType: component?.typeCode,
+        uid: component?.uid
+      }"
+    >
+    </ng-container>
+  </ng-template>
 </ng-container>
-<ng-template #loading>
-  <cx-spinner></cx-spinner>
-</ng-template>
-<ng-template #simpleCmsComponent>
-  <ng-container
-    [cxComponentWrapper]="{
-      flexType: component.typeCode,
-      uid: component?.uid
-    }"
-  >
-  </ng-container>
-</ng-template>

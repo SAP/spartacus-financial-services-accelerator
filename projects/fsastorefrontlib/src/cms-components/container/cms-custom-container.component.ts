@@ -15,7 +15,7 @@ import {
 export class CmsCustomContainerComponent implements OnInit {
   routeParamId = 'formCode';
   pageContext: PageContext;
-
+  styleCss: string;
   components$: Observable<CmsComponent[]>;
 
   constructor(
@@ -34,11 +34,16 @@ export class CmsCustomContainerComponent implements OnInit {
   ngOnInit() {
     this.componentData.data$
       .subscribe(data => {
+        this.styleCss = data.styleCss;
         this.components$ = this.cmsComponentConnector.getList(
           data.simpleCMSComponents.split(' '),
           this.pageContext
         );
       })
       .unsubscribe();
+      this.components$.subscribe( res => {
+        console.dir( res);
+      })
   }
+  
 }
