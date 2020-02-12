@@ -37,7 +37,6 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     protected userRequestDataService: UserRequestDataService,
     protected claimService: ClaimService,
     protected claimDataService: ClaimDataService,
-    protected globalMessageService: GlobalMessageService,
     protected router: RoutingService
   ) {}
 
