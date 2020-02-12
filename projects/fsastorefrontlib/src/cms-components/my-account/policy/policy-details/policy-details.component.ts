@@ -12,9 +12,9 @@ import { OccConfig } from '@spartacus/core';
 })
 export class PolicyDetailsComponent implements OnInit {
   constructor(
-    private routingService: RoutingService,
-    private policyService: PolicyService,
-    private config: OccConfig
+    protected routingService: RoutingService,
+    protected policyService: PolicyService,
+    protected config: OccConfig
   ) {}
 
   policy$;

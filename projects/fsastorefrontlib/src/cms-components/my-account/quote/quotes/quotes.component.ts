@@ -11,8 +11,8 @@ import * as fromQuoteStore from '../../../../core/my-account/store';
 })
 export class QuotesComponent implements OnInit {
   constructor(
-    private store: Store<fromQuoteStore.UserState>,
-    private config: OccConfig,
+    protected store: Store<fromQuoteStore.UserState>,
+    protected config: OccConfig,
     protected quoteService: QuoteService,
     protected routingService: RoutingService
   ) {}

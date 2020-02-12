@@ -18,8 +18,8 @@ export class ClaimConfirmationGuard implements CanActivate {
   claimStatus: ClaimStatus;
 
   constructor(
-    private claimDataService: ClaimDataService,
-    private routingService: RoutingService
+    protected claimDataService: ClaimDataService,
+    protected routingService: RoutingService
   ) {}
 
   canActivate(): Observable<boolean> {

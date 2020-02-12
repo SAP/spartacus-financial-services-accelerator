@@ -17,8 +17,8 @@ const FSCLAIM = 'FSCLAIM';
 })
 export class PoliciesComponent implements OnInit {
   constructor(
-    private store: Store<fromPolicyStore.UserState>,
-    private config: OccConfig,
+    protected store: Store<fromPolicyStore.UserState>,
+    protected config: OccConfig,
     protected policyService: PolicyService,
     protected routingService: RoutingService,
     protected claimService: ClaimService

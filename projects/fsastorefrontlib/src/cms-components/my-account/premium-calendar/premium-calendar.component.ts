@@ -11,8 +11,8 @@ import { PolicyService } from '../../../core/my-account/services';
 })
 export class PremiumCalendarComponent implements OnInit {
   constructor(
-    private store: Store<fromStore.UserState>,
-    private config: OccConfig,
+    protected store: Store<fromStore.UserState>,
+    protected config: OccConfig,
     protected policyService: PolicyService
   ) {}
 

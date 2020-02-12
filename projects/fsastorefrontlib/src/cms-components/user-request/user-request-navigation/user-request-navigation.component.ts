@@ -42,7 +42,7 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     protected claimService: ClaimService,
     protected claimDataService: ClaimDataService,
     protected globalMessageService: GlobalMessageService,
-    private store: Store<fromClaimStore.SubmitClaim>,
+    protected store: Store<fromClaimStore.SubmitClaim>,
     protected router: RoutingService
   ) {}
 

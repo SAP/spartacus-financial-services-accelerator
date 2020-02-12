@@ -126,6 +126,6 @@ export class ClaimEffects {
   constructor(
     private actions$: Actions,
     private claimConnector: ClaimConnector,
-    protected claimServiceData: ClaimDataService
+    private claimServiceData: ClaimDataService
   ) {}
 }

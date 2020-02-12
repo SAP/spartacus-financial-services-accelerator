@@ -15,7 +15,7 @@ import { InboxService } from '../../../../core/my-account/services/inbox/inbox.s
 export class InboxTabComponent implements OnInit {
   constructor(
     protected cmsService: CmsService,
-    private inboxService: InboxService
+    protected inboxService: InboxService
   ) {}
 
   component$;

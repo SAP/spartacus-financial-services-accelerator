@@ -11,10 +11,10 @@ import { take } from 'rxjs/operators';
 })
 export class DeleteClaimDialogComponent implements OnInit {
   constructor(
-    public activeModal: NgbActiveModal,
-    private service: ClaimService,
+    protected service: ClaimService,
     protected fb: FormBuilder,
-    protected authService: AuthService
+    protected authService: AuthService,
+    public activeModal: NgbActiveModal
   ) {}
 
   form: FormGroup = this.fb.group({});

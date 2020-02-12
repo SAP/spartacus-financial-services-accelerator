@@ -10,8 +10,8 @@ import { take } from 'rxjs/operators';
 @Injectable()
 export class PolicyService {
   constructor(
-    private store: Store<fromReducer.UserState>,
-    private authService: AuthService
+    protected store: Store<fromReducer.UserState>,
+    protected authService: AuthService
   ) {}
 
   getPolicies(): Observable<any> {

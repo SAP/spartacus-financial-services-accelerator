@@ -15,8 +15,8 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   pagination: any;
 
   constructor(
-    private agentSearchService: AgentSearchService,
-    private route: ActivatedRoute
+    protected agentSearchService: AgentSearchService,
+    protected route: ActivatedRoute
   ) {}
 
   ngOnInit() {
