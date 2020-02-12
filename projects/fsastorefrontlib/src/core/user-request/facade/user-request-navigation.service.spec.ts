@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { Type } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
-import { FSStepData } from '../../../../occ/occ-models/occ.models';
+import { FSStepData } from '../../../occ/occ-models/occ.models';
 import { UserRequestNavigationService } from './user-request-navigation.service';
 import { ActivatedRoute } from '@angular/router';
 import createSpy = jasmine.createSpy;

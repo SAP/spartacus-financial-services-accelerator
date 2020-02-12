@@ -7,9 +7,9 @@ import {
 } from '@spartacus/core';
 import { FSUserRequest } from '../../../occ/occ-models';
 import { of } from 'rxjs';
-import { UserRequestService } from '../../../core/user-request/services/user-request/user-request.service';
+import { UserRequestService } from '../../../core/user-request/facade/user-request.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import { UserRequestNavigationService } from '../../../core/user-request/services/user-request/user-request-navigation.service';
+import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
 import { ActivatedRoute } from '@angular/router';
 import {
   ClaimDataService,

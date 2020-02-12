@@ -1,4 +1,4 @@
-import { PricingData } from '../../../../../occ/occ-models/form-pricing.interface';
+import { PricingData } from '../../../occ/occ-models/form-pricing.interface';
 import { CartModification } from '@spartacus/core';
 import { Observable } from 'rxjs';
 

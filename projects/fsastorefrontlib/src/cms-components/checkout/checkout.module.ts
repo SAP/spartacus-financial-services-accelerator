@@ -37,7 +37,7 @@ import { FsaOrderConfirmationComponent } from './components/order-confirmation/o
 import { OrderConfirmationMessageComponent } from './components/order-confirmation-message/order-confirmation-message.component';
 import { QuoteReviewComponent } from './components/quote-review/quote-review.component';
 import { UserIdentificationModule } from './components/user-identification/user-identification.module';
-import { FSCartService } from '../../core/checkout/services/cart/fs-cart.service';
+import { FSCartService } from '../../core/cart/facade/fs-cart.service';
 import { CategoryService } from '../../core/checkout/services/category/category.service';
 import { effects } from '../../core/checkout/store/effects/index';
 import { FSCheckoutStepGuard } from './guards/fs-checkout-step-guard';
@@ -50,7 +50,7 @@ import { CHECKOUT_FEATURE } from '../../core/checkout/store';
 import { ChooseCoverNavigationComponent } from './components/choose-cover-navigation/choose-cover-navigation.component';
 import { PersonalDetailsNavigationComponent } from './components/personal-details-navigation/personal-details-navigation.component';
 import { FsCheckoutConnector } from '../../core/checkout/connectors/fs-checkout.connector';
-import { FsCartConnector } from '../../core/checkout/services/cart/connectors/fs-cart.connector';
+import { FsCartConnector } from '../../core/cart/connectors/fs-cart.connector';
 import { QuoteConnector } from '../../core/my-account/services/quote/connectors/quote.connector';
 
 const routes: Routes = [

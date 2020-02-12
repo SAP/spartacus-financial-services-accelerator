@@ -2,7 +2,7 @@ import { CartModification } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { FSCartAdapter } from './fs-cart.adapter';
-import { PricingData } from '../../../../../occ/occ-models';
+import { PricingData } from '../../../occ/occ-models';
 
 @Injectable({
   providedIn: 'root',

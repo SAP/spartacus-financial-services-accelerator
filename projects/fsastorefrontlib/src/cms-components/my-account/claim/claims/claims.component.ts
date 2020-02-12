@@ -13,7 +13,7 @@ import { OccConfig, RoutingService } from '@spartacus/core';
 
 import { DeleteClaimDialogComponent } from '../delete-claim-dialog/delete-claim-dialog.component';
 import { UserState } from './../../../../core/my-account/store/reducers/index';
-import { UserRequestService } from './../../../../core/user-request/services/user-request/user-request.service';
+import { UserRequestService } from '../../../../core/user-request/facade/user-request.service';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
 import { ClaimService } from '../../../../core/my-account/services';
 

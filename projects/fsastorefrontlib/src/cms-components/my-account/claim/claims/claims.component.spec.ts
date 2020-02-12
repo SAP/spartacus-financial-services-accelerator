@@ -7,7 +7,7 @@ import { StoreModule } from '@ngrx/store';
 
 import createSpy = jasmine.createSpy;
 import { Component, Pipe, PipeTransform, DebugElement } from '@angular/core';
-import { UserRequestService } from '../../../../core/user-request/services/user-request/user-request.service';
+import { UserRequestService } from '../../../../core/user-request/facade/user-request.service';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
 

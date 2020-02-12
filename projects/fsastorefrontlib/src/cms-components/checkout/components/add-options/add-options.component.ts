@@ -10,14 +10,14 @@ import { ActivatedRoute } from '@angular/router';
 import { OrderEntry, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { FSCartService } from '../../../../core/checkout/services';
+import { FSCartService } from '../../../../core/cart/facade';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/fs-checkout-config.service';
 import { FSProduct } from '../../../../occ/occ-models';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 
 @Component({
   selector: 'fsa-add-options',
-  templateUrl: './add-options.component.html',
+templateUrl: './add-options.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddOptionsComponent implements OnInit, OnDestroy {

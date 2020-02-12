@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   PricingData,
   PriceAttributeGroup,
-} from '../../../../occ/occ-models/form-pricing.interface';
+} from '../../../occ/occ-models/form-pricing.interface';
 
 @Injectable()
 export class PricingService {

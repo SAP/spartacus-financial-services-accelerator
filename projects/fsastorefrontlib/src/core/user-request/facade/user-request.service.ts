@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import * as fromReducer from '../../store/reducers';
-import { FSUserRequest } from '../../../../occ/occ-models';
-import { UserRequestSelector } from '../../store';
-import * as fromAction from '../../store/actions/index';
-import { UserRequestDataService } from '../user-request-data.service';
+import * as fromReducer from '../store/reducers';
+import { FSUserRequest } from '../../../occ/occ-models';
+import { UserRequestSelector } from '../store';
+import * as fromAction from '../store/actions/index';
+import { UserRequestDataService } from './../services/user-request-data.service';
 import { FormDataService } from '@fsa/dynamicforms';
 
 @Injectable()

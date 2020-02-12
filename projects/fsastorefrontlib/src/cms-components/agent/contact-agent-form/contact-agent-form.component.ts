@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { UserService } from '@spartacus/core';
 import { DefaultFormValidators } from '@fsa/dynamicforms';
-import { AgentSearchService } from '../../../core/agent/services/agent-search.service';
+import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 
 @Component({
   selector: 'fsa-contact-agent-form',

@@ -11,10 +11,10 @@ import {
 } from '@spartacus/core';
 import { BehaviorSubject } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
-import { PricingData } from '../../../models/pricing.interface';
-import * as fromFSAction from '../../store/actions/index';
+import { PricingData } from '../../models/pricing.interface';
+import * as fromFSAction from '../../checkout/store/actions/index';
 import { ActivatedRoute } from '@angular/router';
-import { CategoryService } from '../category/category.service';
+import { CategoryService } from '../../checkout/services/category/category.service';
 
 @Injectable()
 export class FSCartService extends CartService {

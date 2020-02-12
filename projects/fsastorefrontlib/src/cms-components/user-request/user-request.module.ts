@@ -18,7 +18,7 @@ import {
   SpinnerModule,
   MediaModule,
 } from '@spartacus/storefront';
-import { UserRequestService } from '../../core/user-request/services/user-request/user-request.service';
+import { UserRequestService } from '../../core/user-request/facade/user-request.service';
 import { EffectsModule } from '@ngrx/effects';
 import { effects } from '../../core/user-request/store/effects/index';
 import {
@@ -30,7 +30,7 @@ import { UserRequestProgressBarComponent } from './user-request-progress-bar/use
 import { UserRequestDataService } from '../../core/user-request/services/user-request-data.service';
 import { UserRequestNavigationComponent } from './user-request-navigation/user-request-navigation.component';
 import { UserRequestConfirmationComponent } from './user-request-confirmation/user-request-confirmation.component';
-import { UserRequestNavigationService } from '../../core/user-request/services/user-request/user-request-navigation.service';
+import { UserRequestNavigationService } from '../../core/user-request/facade/user-request-navigation.service';
 import { UserRequestStoreModule } from '../../core/user-request/store/user-request-store.module';
 import { ClaimStoreModule } from './../../core/my-account/store/claim-store.module';
 import { UserRequestSummaryComponent } from './user-request-summary/user-request-summary.component';

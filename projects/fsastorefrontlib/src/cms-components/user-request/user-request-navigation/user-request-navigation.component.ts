@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import {
   UserRequestService,
   UserRequestNavigationService,
-} from '../../../core/user-request/services';
+} from '../../../core/user-request/facade';
 import { FSUserRequest, FSStepData, Claim } from '../../../occ/occ-models';
 import {
   ClaimDataService,

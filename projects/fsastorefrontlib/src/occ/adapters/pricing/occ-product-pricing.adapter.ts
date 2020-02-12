@@ -5,7 +5,7 @@ import { OccEndpointsService, Product } from '@spartacus/core';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
 import { PricingData } from '../../../core/models/pricing.interface';
-import { ProductPricingAdapter } from '../../../core/checkout/services/pricing/connectors/product-pricing.adapter';
+import { ProductPricingAdapter } from '../../../core/product-pricing/connectors/product-pricing.adapter';
 
 const FULL_PARAMS = 'fields=DEFAULT';
 

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
-import { FSStepData } from '../../../../occ/occ-models';
+import { FSStepData } from '../../../occ/occ-models';
 
 @Injectable()
 export class UserRequestNavigationService {

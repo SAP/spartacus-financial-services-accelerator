@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { PricingData } from '../../../core/models/pricing.interface';
-import { FSCartAdapter } from '../../../core/checkout/services/cart/connectors/fs-cart.adapter';
+import { FSCartAdapter } from '../../../core/cart/connectors/fs-cart.adapter';
 
 const FULL_PARAMS = '&fields=FULL';
 

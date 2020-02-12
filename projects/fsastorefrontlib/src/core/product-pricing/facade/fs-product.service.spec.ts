@@ -8,7 +8,7 @@ import {
   PriceAttributeGroup,
   PricingAttribute,
   PricingData,
-} from '../../../models/pricing.interface';
+} from '../../models/pricing.interface';
 import { FSProductService } from './fs-product.service';
 
 describe('FSProductService', () => {

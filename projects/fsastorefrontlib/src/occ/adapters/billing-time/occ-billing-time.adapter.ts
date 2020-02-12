@@ -4,7 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { OccEndpointsService } from '@spartacus/core';
-import { BillingTimeAdapter } from '../../../core/checkout/services/billing-time/connectors/billing-time.adapter';
+import { BillingTimeAdapter } from '../../../core/product-pricing/connectors/billing-time.adapter';
 
 const FULL_PARAMS = '&fields=FULL';
 
