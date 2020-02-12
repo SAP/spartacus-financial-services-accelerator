@@ -7,9 +7,11 @@ import { SpinnerModule, MediaModule } from '@spartacus/storefront';
 import { I18nModule } from '@spartacus/core';
 import { AddOptionsComponent } from './add-options.component';
 import {
-  FsCartConnector,
   FSCartService,
-} from '../../../../core/checkout/services';
+} from '../../../../core/cart/facade';
+import {
+  FsCartConnector,
+} from '../../../../core/cart/connectors';
 
 @NgModule({
   imports: [

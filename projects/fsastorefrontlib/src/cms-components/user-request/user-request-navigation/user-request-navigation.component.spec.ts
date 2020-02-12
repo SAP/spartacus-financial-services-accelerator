@@ -13,8 +13,10 @@ import { UserRequestNavigationService } from '../../../core/user-request/facade/
 import { ActivatedRoute } from '@angular/router';
 import {
   ClaimDataService,
-  ClaimService,
 } from '../../../core/my-account/services';
+import {
+  ClaimService,
+} from '../../../core/my-account/facade';
 import { FormDataService } from '@fsa/dynamicforms';
 import { UserRequestDataService } from '../../../core/user-request/services';
 import { Store } from '@ngrx/store';
