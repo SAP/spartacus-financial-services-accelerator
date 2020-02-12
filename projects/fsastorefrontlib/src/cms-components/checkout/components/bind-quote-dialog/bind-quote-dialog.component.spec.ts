@@ -1,6 +1,6 @@
 import { FSCartService } from '../../../../core/checkout/services';
 import { By } from '@angular/platform-browser';
-import { QuoteService } from './../../../../core/my-account/services/quote.service';
+import { QuoteService } from '../../../../core/my-account/services/quote/quote.service';
 import { BindQuoteDialogComponent } from './bind-quote-dialog.component';
 import { FSCart } from './../../../../occ/occ-models/occ.models';
 import { DebugElement, Type } from '@angular/core';

@@ -30,6 +30,10 @@ cx-page-layout {
   width: inherit;
   margin: inherit;
 }
-cx-spinner .loader {
-  border-left-color: var(--cx-color-primary);
+cx-spinner {
+  width: 100%;
+  padding: 1rem;
+  .loader {
+    border-left-color: var(--cx-color-primary);
+  }
 }

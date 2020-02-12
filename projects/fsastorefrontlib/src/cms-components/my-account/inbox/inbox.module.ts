@@ -22,9 +22,9 @@ import {
 import { InboxMessagesComponent } from './inbox-tab/inbox-messages/inbox-messages.component';
 import { InboxTabComponent } from './inbox-tab/inbox-tab.component';
 import { InboxComponent } from './inbox.component';
-import { OccInboxAdapter } from '../../../occ/services/inbox/occ-inbox.adapter';
-import { InboxDataService } from '../../../core/my-account/services/inbox-data.service';
-import { InboxService } from '../../../core/my-account/services/inbox.service';
+import { InboxDataService } from '../../../core/my-account/services/inbox/inbox-data.service';
+import { InboxService } from '../../../core/my-account/services/inbox/inbox.service';
+import { InboxConnector } from '../../../core/my-account/services/inbox/connectors/inbox.connector';
 
 const routes: Routes = [
   {
@@ -59,6 +59,6 @@ const routes: Routes = [
   declarations: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
   exports: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
   entryComponents: [InboxComponent, InboxTabComponent],
-  providers: [OccInboxAdapter, InboxDataService, InboxService],
+  providers: [InboxConnector, InboxDataService, InboxService],
 })
 export class InboxModule {}

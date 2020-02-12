@@ -54,6 +54,7 @@ export class SelectIdentificationTypeComponent implements OnInit {
         take(1),
         tap(next => {
           this.checkoutService.placeOrder();
+          this.checkoutService.orderPlaced = true;
           this.routingService.go({ cxRoute: 'orderConfirmation' });
         })
       )

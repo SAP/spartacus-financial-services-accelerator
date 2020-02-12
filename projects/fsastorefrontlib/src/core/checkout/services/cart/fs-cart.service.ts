@@ -3,34 +3,37 @@ import { select, Store } from '@ngrx/store';
 import {
   AuthService,
   Cart,
+  StateWithMultiCart,
+  ActiveCartService,
+  MultiCartService,
   CartActions,
-  CartDataService,
-  CartSelectors,
-  CartService,
-  StateWithCart,
 } from '@spartacus/core';
 import { BehaviorSubject } from 'rxjs';
-import { filter, take, tap } from 'rxjs/operators';
+import { filter, take, tap, switchMap } from 'rxjs/operators';
 import { PricingData } from '../../../models/pricing.interface';
 import * as fromFSAction from '../../store/actions/index';
 import { ActivatedRoute } from '@angular/router';
 import { CategoryService } from '../category/category.service';
 
 @Injectable()
-export class FSCartService extends CartService {
-  protected callbackFunction: Function;
+export class FSCartService extends ActiveCartService {
   protected productAddedSource = new BehaviorSubject<string>('');
-  public mainProductAdded = this.productAddedSource.asObservable();
-
   constructor(
-    protected fsStore: Store<StateWithCart>,
-    protected fsCartData: CartDataService,
+    protected fsStore: Store<StateWithMultiCart>,
+    protected fsMultiCartService: MultiCartService,
     protected fsAuthService: AuthService,
     protected activatedRoute: ActivatedRoute,
     protected categoryService: CategoryService
   ) {
-    super(fsStore, fsCartData, fsAuthService);
+    super(fsStore, fsAuthService, fsMultiCartService);
+    this.fsAuthService
+      .getOccUserId()
+      .subscribe(occUserId => (this.fsUserId = occUserId));
+    this.getActiveCartId().subscribe(cartId => (this.fsCartId = cartId));
   }
+
+  fsUserId;
+  fsCartId;
 
   addOptionalProduct(
     productCode: string,
@@ -39,8 +42,8 @@ export class FSCartService extends CartService {
   ): void {
     this.fsStore.dispatch(
       new fromFSAction.AddOptionalProduct({
-        userId: this.fsCartData.userId,
-        cartId: this.fsCartData.cartId,
+        userId: this.fsUserId,
+        cartId: this.fsCartId,
         productCode: productCode,
         quantity: quantity,
         entryNumber: entryNumber,
@@ -54,48 +57,47 @@ export class FSCartService extends CartService {
     quantity: number,
     pricingData: PricingData
   ): void {
-    this.fsStore
+    this.getActiveCartId()
       .pipe(
-        select(CartSelectors.getActiveCartState),
-        tap(cartState => {
-          if (
-            !this.isCartCreated(cartState.value.content) &&
-            !cartState.loading
-          ) {
-            this.fsStore.dispatch(
-              new CartActions.CreateCart({ userId: this.cartData.userId })
-            );
+        tap(cartId => {
+          if (!cartId) {
+            this.multiCartService.createCart({
+              userId: this.fsUserId,
+              extraData: {
+                active: true,
+              },
+            });
           }
         }),
-        filter(cartState => {
-          return this.isCartCreated(cartState.value.content);
-        }),
+        switchMap(cartId => this.multiCartService.getCartEntity(cartId)),
+        filter(cartState => !cartState.loading),
+        filter(cartState => cartState.success || cartState.error),
         take(1)
       )
-      .subscribe(_ => {
-        this.fsStore.dispatch(
-          new fromFSAction.StartBundle({
-            userId: this.fsCartData.userId,
-            cartId: this.fsCartData.cartId,
-            productCode: productCode,
-            bundleTemplateId: bundleTemplateId,
-            quantity: quantity,
-            pricingData: pricingData,
-          })
-        );
+      .subscribe(state => {
+        if (state.value.guid) {
+          this.fsCartId = state.value.guid;
+          this.fsStore.dispatch(
+            new fromFSAction.StartBundle({
+              userId: this.fsUserId,
+              cartId: state.value.guid,
+              productCode: productCode,
+              bundleTemplateId: bundleTemplateId,
+              quantity: quantity,
+              pricingData: pricingData,
+            })
+          );
+        }
       });
   }
 
   loadCart() {
     this.store.dispatch(
       new CartActions.LoadCart({
-        cartId: this.fsCartData.cartId,
-        userId: this.fsCartData.userId,
+        cartId: this.fsCartId,
+        userId: this.fsUserId,
       })
     );
   }
 
-  private isCartCreated(cart: Cart): boolean {
-    return cart && typeof cart.guid !== 'undefined';
-  }
 }

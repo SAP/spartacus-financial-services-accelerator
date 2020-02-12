@@ -9,7 +9,7 @@
         {{ 'quote.quote' | cxTranslate }}
       </h2>
       <div class="short-overview-content">
-        <div *ngIf="cart.insuranceQuote.state.code === 'BIND'">
+        <div *ngIf="cart.insuranceQuote?.state?.code === 'BIND'">
           <div class="short-overview-item row">
             <div class="short-overview-title col-7">
               {{ 'quote.quoteId' | cxTranslate }}:

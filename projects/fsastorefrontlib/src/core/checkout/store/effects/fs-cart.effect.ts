@@ -5,9 +5,9 @@ import { Action } from '@ngrx/store';
 import { CartActions } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { OccFSCartAdapter } from '../../../../occ/services/cart/occ-fs-cart.adapter';
 import * as fromQuoteActions from '../../../my-account/store/actions/quote.action';
 import * as fromActions from '../actions/fs-cart.action';
+import { FsCartConnector } from '../../services/cart/connectors/fs-cart.connector';
 
 @Injectable()
 export class FSCartEffects {
@@ -16,7 +16,7 @@ export class FSCartEffects {
     ofType(fromActions.ADD_OPTIONAL_PRODUCT),
     map((action: fromActions.AddOptionalProduct) => action.payload),
     switchMap(payload => {
-      return this.occCartAdapter
+      return this.cartConnector
         .addToCart(
           payload.userId,
           payload.cartId,
@@ -25,9 +25,10 @@ export class FSCartEffects {
           payload.entryNumber
         )
         .pipe(
-          map((entry: any) => {
-            return new CartActions.CartAddEntrySuccess(entry);
-          }),
+          switchMap((entry: any) => [
+            new CartActions.CartAddEntrySuccess(entry),
+            new CartActions.CartProcessesIncrement(payload.cartId),
+          ]),
           catchError(error => of(new CartActions.CartAddEntryFail(error)))
         );
     })
@@ -38,7 +39,7 @@ export class FSCartEffects {
     ofType(fromActions.START_BUNDLE),
     map((action: fromActions.StartBundle) => action.payload),
     switchMap(payload => {
-      return this.occCartAdapter
+      return this.cartConnector
         .startBundle(
           payload.userId,
           payload.cartId,
@@ -91,6 +92,9 @@ export class FSCartEffects {
               );
             } else {
               actions.push(new CartActions.CartAddEntrySuccess(cart.entry));
+              actions.push(
+                new CartActions.CartProcessesIncrement(payload.cartId)
+              );
             }
 
             return actions;
@@ -102,7 +106,7 @@ export class FSCartEffects {
 
   constructor(
     private actions$: Actions,
-    private occCartAdapter: OccFSCartAdapter,
+    private cartConnector: FsCartConnector,
     private formDataService: FormDataService
   ) {}
 }

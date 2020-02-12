@@ -34,9 +34,9 @@ import { UserRequestNavigationService } from '../../core/user-request/services/u
 import { UserRequestStoreModule } from '../../core/user-request/store/user-request-store.module';
 import { ClaimStoreModule } from './../../core/my-account/store/claim-store.module';
 import { UserRequestSummaryComponent } from './user-request-summary/user-request-summary.component';
-import { OccUserRequestAdapter } from '../../occ/services/user-request/occ-user-request.adapter';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { ClaimConfirmationGuard } from '../../core/user-request/guards/claim-confirmation-guard';
+import { UserRequestConnector } from '../../core/user-request/connectors/user-request.connector';
 
 const routes: Routes = [
   {
@@ -139,7 +139,7 @@ const routes: Routes = [
   ],
   providers: [
     UserRequestService,
-    OccUserRequestAdapter,
+    UserRequestConnector,
     reducerProvider,
     UserRequestDataService,
     UserRequestNavigationService,

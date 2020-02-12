@@ -6,8 +6,8 @@ import {
 import { map, take } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Cart, OccConfig, RoutingService } from '@spartacus/core';
-import { Observable, Subscription } from 'rxjs';
+import { Cart, CartService, OccConfig, RoutingService } from '@spartacus/core';
+import { Observable, Subscription, of } from 'rxjs';
 import {
   FSCheckoutConfigService,
   FSCartService,
@@ -20,6 +20,7 @@ import { ModalService, ModalRef } from '@spartacus/storefront';
 })
 export class QuoteReviewComponent implements OnInit, OnDestroy {
   cart$: Observable<Cart>;
+  showContent$: Observable<boolean> = of(true);
   cartLoaded$: Observable<boolean>;
   checkoutStepUrlNext: string;
   checkoutStepUrlBack: string;
@@ -85,6 +86,15 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     modalInstance = this.modalRef.componentInstance;
     modalInstance.cartCode = this.cartCode;
     modalInstance.nextStepUrl = this.checkoutStepUrlNext;
+    this.subscription.add(
+      this.modalRef.componentInstance.quoteBinding$
+        .pipe(
+          map(quoteBinding => {
+            this.showContent$ = of(!quoteBinding);
+          })
+        )
+        .subscribe()
+    );
   }
 
   getFormContent(cart: any): any {
