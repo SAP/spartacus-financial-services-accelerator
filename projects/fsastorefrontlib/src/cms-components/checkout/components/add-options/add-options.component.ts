@@ -17,7 +17,7 @@ import { CategoryService } from '../../../../core/checkout/services/category/cat
 
 @Component({
   selector: 'fsa-add-options',
-templateUrl: './add-options.component.html',
+  templateUrl: './add-options.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AddOptionsComponent implements OnInit, OnDestroy {
