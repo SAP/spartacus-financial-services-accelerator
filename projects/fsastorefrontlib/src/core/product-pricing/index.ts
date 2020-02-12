@@ -1,2 +1,2 @@
-export * from './connectors';
-export * from './facade';
+export * from './connectors/index';
+export * from './facade/index';

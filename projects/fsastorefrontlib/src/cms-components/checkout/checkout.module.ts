@@ -51,7 +51,7 @@ import { ChooseCoverNavigationComponent } from './components/choose-cover-naviga
 import { PersonalDetailsNavigationComponent } from './components/personal-details-navigation/personal-details-navigation.component';
 import { FsCheckoutConnector } from '../../core/checkout/connectors/fs-checkout.connector';
 import { FsCartConnector } from '../../core/cart/connectors/fs-cart.connector';
-import { QuoteConnector } from '../../core/my-account/services/quote/connectors/quote.connector';
+import { QuoteConnector } from '../../core/my-account/connectors/quote.connector';
 
 const routes: Routes = [
   {

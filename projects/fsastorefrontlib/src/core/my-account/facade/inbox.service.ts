@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { SearchConfig } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { InboxDataService, InboxTab } from './inbox-data.service';
-import { InboxConnector } from './connectors/inbox.connector';
+import { InboxDataService, InboxTab } from '../services/inbox-data.service';
+import { InboxConnector } from '../connectors/inbox.connector';
 
 @Injectable()
 export class InboxService {

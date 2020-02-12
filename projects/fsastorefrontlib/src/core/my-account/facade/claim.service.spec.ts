@@ -1,11 +1,11 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { ClaimService } from './claim.service';
-import * as fromReducer from '../../store/reducers';
+import * as fromReducer from '../store/reducers';
 import { Store, StoreModule } from '@ngrx/store';
-import { ClaimDataService } from './claim-data.service';
+import { ClaimDataService } from '../services/claim-data.service';
 import { Type } from '@angular/core';
-import * as fromAction from '../../store/actions';
-import { reducerProvider, reducerToken } from '../../store/reducers';
+import * as fromAction from '../store/actions';
+import { reducerProvider, reducerToken } from '../store/reducers';
 import { of, Observable } from 'rxjs';
 import { OCC_USER_ID_CURRENT, AuthService } from '@spartacus/core';
 

@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { BehaviorSubject, Observable } from 'rxjs';
-import * as fromAction from '../../store/actions';
-import * as fromReducer from '../../store/reducers';
-import * as fromClaimStore from '../../store';
-import { ClaimDataService, SelectedPolicy } from './claim-data.service';
+import * as fromAction from '../store/actions';
+import * as fromReducer from '../store/reducers';
+import * as fromClaimStore from '../store';
+import {
+  ClaimDataService,
+  SelectedPolicy,
+} from '../services/claim-data.service';
 import { AuthService } from '@spartacus/core';
 import { take } from 'rxjs/operators';
 

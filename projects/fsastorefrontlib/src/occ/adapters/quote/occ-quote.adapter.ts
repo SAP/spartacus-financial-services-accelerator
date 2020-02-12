@@ -4,7 +4,7 @@ import { OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
-import { QuoteAdapter } from '../../../core/my-account/services/quote/connectors/quote.adapter';
+import { QuoteAdapter } from '../../../core/my-account/connectors/quote.adapter';
 
 @Injectable()
 export class OccQuoteAdapter implements QuoteAdapter {

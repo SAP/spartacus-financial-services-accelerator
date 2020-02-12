@@ -1,4 +1,4 @@
-import { ClaimDataService } from '../../my-account/services/claim/claim-data.service';
+import { ClaimDataService } from '../../my-account/services/claim-data.service';
 import { ClaimConfirmationGuard } from './claim-confirmation-guard';
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';

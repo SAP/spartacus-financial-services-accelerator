@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import { ClaimsComponent } from './claims.component';
-import { ClaimService } from '../../../../core/my-account/services/claim/claim.service';
+import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 

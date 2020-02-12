@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/internal/Observable';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { OccEndpointsService } from '@spartacus/core';
-import { FSSearchConfig } from '../../../core/my-account/services/inbox/inbox-data.service';
-import { InboxAdapter } from '../../../core/my-account/services/inbox/connectors/inbox.adapter';
+import { FSSearchConfig } from '../../../core/my-account/services/inbox-data.service';
+import { InboxAdapter } from '../../../core/my-account/connectors/inbox.adapter';
 
 const FULL_PARAMS = '&fields=FULL';
 

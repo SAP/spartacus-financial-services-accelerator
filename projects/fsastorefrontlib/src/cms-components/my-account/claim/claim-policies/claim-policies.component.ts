@@ -10,8 +10,8 @@ import { Card } from '@spartacus/storefront';
 import { Subscription, Observable, combineLatest } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
-import { ClaimService } from '../../../../core/my-account/services';
-import { PolicyService } from '../../../../core/my-account/services';
+import { ClaimService } from '../../../../core/my-account/facade';
+import { PolicyService } from '../../../../core/my-account/facade';
 import * as fromPolicyStore from '../../../../core/my-account/store';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
 

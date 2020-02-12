@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Claim } from '../../../../occ/occ-models';
+import { Claim } from '../../../occ/occ-models';
 import { AuthService } from '@spartacus/core';
 import { Store, select } from '@ngrx/store';
-import * as fromReducer from '../../store/reducers';
-import * as fromClaimStore from '../../store/selectors';
+import * as fromReducer from '../store/reducers';
+import * as fromClaimStore from '../store/selectors';
 import { filter } from 'rxjs/operators';
 import { OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
 

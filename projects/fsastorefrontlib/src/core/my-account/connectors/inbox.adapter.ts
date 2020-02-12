@@ -1,4 +1,4 @@
-import { FSSearchConfig } from '../inbox-data.service';
+import { FSSearchConfig } from '../services/inbox-data.service';
 import { Observable } from 'rxjs';
 
 export abstract class InboxAdapter {

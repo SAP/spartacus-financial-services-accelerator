@@ -15,7 +15,7 @@ import { DeleteClaimDialogComponent } from '../delete-claim-dialog/delete-claim-
 import { UserState } from './../../../../core/my-account/store/reducers/index';
 import { UserRequestService } from '../../../../core/user-request/facade/user-request.service';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
-import { ClaimService } from '../../../../core/my-account/services';
+import { ClaimService } from '../../../../core/my-account/facade';
 
 @Component({
   selector: 'fsa-claims',

@@ -2,12 +2,10 @@ import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import { Observable, ReplaySubject } from 'rxjs';
-import * as fromReducers from '../../store/reducers';
+import * as fromReducers from '../store/reducers';
 import { UserToken, AuthService } from '@spartacus/core';
-import { Claim } from '../../../../occ/occ-models';
-import { ClaimDataService } from './claim-data.service';
-import * as fromReducer from '../../store/reducers';
-import * as fromAction from '../../store/actions';
+import * as fromReducer from '../store/reducers';
+import { InboxDataService } from './inbox-data.service';
 import { OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
 
 const userToken$ = new ReplaySubject<UserToken | any>();
@@ -26,12 +24,9 @@ const testUserToken: UserToken = {
   expires_in: 1,
   scope: ['scope'],
 };
-const testClaim: Claim = {
-  claimNumber: 'CL00001',
-};
 
-describe('ClaimDataService', () => {
-  let service: ClaimDataService;
+describe('InboxDataService', () => {
+  let service: InboxDataService;
   let store: Store<fromReducer.UserState>;
 
   beforeEach(() => {
@@ -41,14 +36,14 @@ describe('ClaimDataService', () => {
         StoreModule.forFeature('assets', fromReducers.getReducers()),
       ],
       providers: [
-        ClaimDataService,
+        InboxDataService,
         {
           provide: AuthService,
           useClass: AuthServiceStub,
         },
       ],
     });
-    service = TestBed.get(ClaimDataService as Type<ClaimDataService>);
+    service = TestBed.get(InboxDataService as Type<InboxDataService>);
     store = TestBed.get(Store as Type<Store<fromReducers.UserState>>);
   });
 
@@ -58,20 +53,9 @@ describe('ClaimDataService', () => {
       expect(service.userId).toEqual(testUserToken.userId);
     });
 
-    it('should return anonymous if user is not logged in', () => {
+    it('should not return userId when customer is not logged in', () => {
       userToken$.next({});
       expect(service.userId).toEqual(OCC_USER_ID_ANONYMOUS);
-    });
-  });
-
-  describe('claim', () => {
-    it('should return claimData', () => {
-      store.dispatch(
-        new fromAction.CreateClaimSuccess({
-          claimNumber: testClaim.claimNumber,
-        })
-      );
-      expect(service.claimData).toEqual(testClaim);
     });
   });
 });

@@ -7,9 +7,9 @@ import {
   CartService,
   OrderEntry,
 } from '@spartacus/core';
-import { FSCart, FSOrderEntry, FSProduct } from '../../../../occ/occ-models';
-import * as fromAction from '../../store/actions';
-import * as fromReducer from '../../store/reducers';
+import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
+import * as fromAction from './../store/actions';
+import * as fromReducer from './../store/reducers';
 import { map, take } from 'rxjs/operators';
 
 @Injectable()

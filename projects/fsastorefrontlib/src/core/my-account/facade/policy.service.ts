@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import * as fromStore from '../../store';
-import * as fromAction from '../../store/actions';
-import * as fromReducer from '../../store/reducers';
+import * as fromStore from '../store';
+import * as fromAction from '../store/actions';
+import * as fromReducer from '../store/reducers';
 import { AuthService } from '@spartacus/core';
 import { take } from 'rxjs/operators';
 

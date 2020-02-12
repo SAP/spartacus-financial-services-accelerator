@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { InboxAdapter } from './inbox.adapter';
-import { FSSearchConfig } from '../inbox-data.service';
+import { FSSearchConfig } from '../services/inbox-data.service';
 import { Observable } from 'rxjs';
 
 @Injectable({

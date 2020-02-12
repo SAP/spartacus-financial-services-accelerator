@@ -6,7 +6,7 @@ import { AllowedFSRequestType } from './../../../../occ/occ-models/occ.models';
 import {
   PolicyService,
   ClaimService,
-} from '../../../../core/my-account/services';
+} from '../../../../core/my-account/facade';
 
 const FSCLAIM = 'FSCLAIM';
 

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
 import { formatDate } from '@angular/common';
-import { PolicyAdapter } from '../../../core/my-account/services/policy/connectors/policy.adapter';
+import { PolicyAdapter } from '../../../core/my-account/connectors/policy.adapter';
 
 const FULL_PARAMS = 'fields=FULL';
 

@@ -1,11 +1,11 @@
 import { TestBed, inject } from '@angular/core/testing';
 import { Type } from '@angular/core';
-import { reducerProvider } from '../../store/reducers/index';
+import { reducerProvider } from '../store/reducers/index';
 import { InboxService } from './inbox.service';
-import { InboxDataService } from './inbox-data.service';
+import { InboxDataService } from '../services/inbox-data.service';
 import { of } from 'rxjs';
-import { InboxTab } from './inbox-data.service';
-import { InboxConnector } from './connectors/inbox.connector';
+import { InboxTab } from '../services/inbox-data.service';
+import { InboxConnector } from '../connectors/inbox.connector';
 
 const userId = 'testUser';
 const messageGroup = 'testGroup';

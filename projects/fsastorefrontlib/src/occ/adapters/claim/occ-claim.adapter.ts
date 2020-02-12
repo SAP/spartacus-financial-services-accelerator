@@ -4,7 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { OccEndpointsService } from '@spartacus/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { ClaimAdapter } from '../../../core/my-account/services/claim/connectors/claim.adapter';
+import { ClaimAdapter } from '../../../core/my-account/connectors/claim.adapter';
 import { Claim, FSLocationOfLoss } from '../../occ-models';
 
 const FULL_PARAMS = 'fields=FULL';

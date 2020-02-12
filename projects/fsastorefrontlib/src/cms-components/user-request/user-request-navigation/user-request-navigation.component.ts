@@ -10,10 +10,8 @@ import {
   UserRequestNavigationService,
 } from '../../../core/user-request/facade';
 import { FSUserRequest, FSStepData, Claim } from '../../../occ/occ-models';
-import {
-  ClaimDataService,
-  ClaimService,
-} from '../../../core/my-account/services';
+import { ClaimService } from '../../../core/my-account/facade';
+import { ClaimDataService } from '../../../core/my-account/services';
 import { GlobalMessageService, RoutingService } from '@spartacus/core';
 import { select, Store } from '@ngrx/store';
 import * as fromClaimStore from '../../../core/my-account/store';
