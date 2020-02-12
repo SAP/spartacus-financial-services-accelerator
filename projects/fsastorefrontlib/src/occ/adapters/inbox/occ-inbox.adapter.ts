@@ -47,7 +47,7 @@ export class OccInboxAdapter implements InboxAdapter {
     return this.occEndpointService.getBaseEndpoint() + readUnreadEndpoint;
   }
 
-  public getSiteMessagesForUserAndGroup(
+  getSiteMessagesForUserAndGroup(
     userId: string,
     messageGroup: string,
     searchConfig: FSSearchConfig
@@ -63,7 +63,7 @@ export class OccInboxAdapter implements InboxAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public setMessagesState(
+  setMessagesState(
     userId: string,
     messagesUidList: Array<string>,
     read: boolean

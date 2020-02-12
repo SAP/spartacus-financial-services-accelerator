@@ -28,7 +28,7 @@ export class PremiumCalendarComponent implements OnInit {
     );
   }
 
-  public getBaseUrl() {
+  getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
 }

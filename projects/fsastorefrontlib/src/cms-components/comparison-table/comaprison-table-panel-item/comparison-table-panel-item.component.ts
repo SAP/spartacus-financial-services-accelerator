@@ -82,7 +82,7 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     this.routingService.go(this.checkoutStepUrlNext);
   }
 
-  public getBaseUrl() {
+  getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
 }

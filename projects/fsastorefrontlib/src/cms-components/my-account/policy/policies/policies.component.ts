@@ -35,7 +35,7 @@ export class PoliciesComponent implements OnInit {
     );
   }
 
-  public getBaseUrl() {
+  getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
 

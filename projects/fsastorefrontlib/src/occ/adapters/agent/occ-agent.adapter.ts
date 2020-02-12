@@ -12,7 +12,7 @@ export class OccAgentAdapter implements AgentAdapter {
     protected occEndpointService: OccEndpointsService
   ) {}
 
-  public getAgentsByCategory(category: string): Observable<any> {
+  getAgentsByCategory(category: string): Observable<any> {
     const url = this.getAgentsEndpoint();
     const categoryParam = 'categoryCode=' + category + '&fields=DEFAULT';
     const params = new HttpParams({ fromString: categoryParam });
@@ -22,7 +22,7 @@ export class OccAgentAdapter implements AgentAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public getAgentsByQuery(
+  getAgentsByQuery(
     searchQuery: string,
     pageNumber: number,
     longitudeLatitude?: GeoPoint

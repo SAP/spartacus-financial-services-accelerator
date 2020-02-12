@@ -31,7 +31,7 @@ export class OccPolicyAdapter implements PolicyAdapter {
     return this.occEndpointService.getBaseEndpoint() + policyEndpoint;
   }
 
-  public getPolicies(userId: string): Observable<any> {
+  getPolicies(userId: string): Observable<any> {
     const url = this.getPoliciesEndpoint(userId);
     const params = new HttpParams();
 
@@ -40,7 +40,7 @@ export class OccPolicyAdapter implements PolicyAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public getPoliciesByCategory(
+  getPoliciesByCategory(
     userId: string,
     policyCategoryCode: string
   ): Observable<any> {
@@ -55,7 +55,7 @@ export class OccPolicyAdapter implements PolicyAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public getPremiumCalendar(userId: string): Observable<any> {
+  getPremiumCalendar(userId: string): Observable<any> {
     const url = this.getPoliciesEndpoint(userId) + '/premium-calendar';
     const params = new HttpParams({ fromString: FULL_PARAMS });
 
@@ -64,7 +64,7 @@ export class OccPolicyAdapter implements PolicyAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public getPolicy(
+  getPolicy(
     userId: string,
     policyId: string,
     contractId: string

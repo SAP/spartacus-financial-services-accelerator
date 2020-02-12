@@ -16,7 +16,7 @@ export class OccProductPricingAdapter implements ProductPricingAdapter {
     protected occEndpointService: OccEndpointsService
   ) {}
 
-  public getCalculatedProductData(
+  getCalculatedProductData(
     productCode: string,
     pricingData: PricingData
   ): Observable<Product> {

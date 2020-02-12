@@ -67,7 +67,7 @@ export class ClaimsComponent implements OnInit, OnDestroy {
     this.modalInstance.claimNumber = claimNumber;
   }
 
-  public getBaseUrl() {
+  getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
 

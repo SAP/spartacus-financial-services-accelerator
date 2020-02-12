@@ -17,7 +17,7 @@ export class OccFormService {
     protected occEndpointService: OccEndpointsService
   ) {}
 
-  public saveFormData(formData: YFormData) {
+  saveFormData(formData: YFormData) {
     const url = this.getYFormsEndpoint() + '/data';
     let params = new HttpParams({
       fromString:
@@ -38,7 +38,7 @@ export class OccFormService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public getFormData(formDataId: string) {
+  getFormData(formDataId: string) {
     const url = this.getYFormsEndpoint() + '/data';
     const params = new HttpParams({
       fromString: FULL_PARAMS + '&formDataId=' + formDataId,
@@ -48,7 +48,7 @@ export class OccFormService {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public getFormDefinition(applicationId: string, formDefinitionId: string) {
+  getFormDefinition(applicationId: string, formDefinitionId: string) {
     const url = this.getYFormsEndpoint() + '/definitions/' + formDefinitionId;
     const params = new HttpParams({
       fromString: FULL_PARAMS + '&applicationId=' + applicationId,

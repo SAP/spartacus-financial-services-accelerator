@@ -16,7 +16,7 @@ export class OccFSCartAdapter implements FSCartAdapter {
     protected occEndpointService: OccEndpointsService
   ) {}
 
-  public addToCart(
+  addToCart(
     userId: string,
     cartId: string,
     productCode: string,
@@ -43,7 +43,7 @@ export class OccFSCartAdapter implements FSCartAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public startBundle(
+  startBundle(
     userId: string,
     cartId: string,
     productCode: string,

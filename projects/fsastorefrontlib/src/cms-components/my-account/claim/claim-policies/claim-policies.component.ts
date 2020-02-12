@@ -121,7 +121,7 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
     return this.domSanitizer.bypassSecurityTrustUrl(genericIcons.document);
   }
 
-  public getBaseUrl() {
+  getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
 
