@@ -7,10 +7,8 @@ import {
 import { RoutingService } from '@spartacus/core';
 import { Subscription, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
 import { SelectedPolicy } from '../../../../core/my-account/services/claim-data.service';
 import { ClaimService } from '../../../../core/my-account/facade';
-import * as fromUserRequestStore from '../../../../core/user-request/store/reducers';
 
 @Component({
   selector: 'fsa-create-claim',
@@ -20,8 +18,7 @@ import * as fromUserRequestStore from '../../../../core/user-request/store/reduc
 export class CreateClaimComponent implements OnInit, OnDestroy {
   constructor(
     protected claimService: ClaimService,
-    protected routingService: RoutingService,
-    protected store: Store<fromUserRequestStore.FSUserRequestState>
+    protected routingService: RoutingService
   ) {}
 
   subscription = new Subscription();

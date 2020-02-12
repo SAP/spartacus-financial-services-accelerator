@@ -18,6 +18,10 @@ export class PolicyService {
     return this.store.pipe(select(fromStore.getPolicyData));
   }
 
+  getLoaded(): Observable<boolean> {
+    return this.store.pipe(select(fromStore.getPoliciesLoaded));
+  }
+
   loadPolicies() {
     this.authService
       .getOccUserId()
@@ -59,6 +63,14 @@ export class PolicyService {
         )
       )
       .unsubscribe();
+  }
+
+  getPremiumCalendar() {
+    return this.store.pipe(select(fromStore.getPremiumCalendarData));
+  }
+
+  getPremiumCalendarLoaded() {
+    return this.store.pipe(select(fromStore.getPremiumCalendarLoaded));
   }
 
   loadPolicyDetails(policyId, contractId) {

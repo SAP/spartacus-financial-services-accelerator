@@ -9,10 +9,8 @@ import { AuthService, OccConfig, TranslationService } from '@spartacus/core';
 import { Card } from '@spartacus/storefront';
 import { Subscription, Observable, combineLatest } from 'rxjs';
 import { take, map } from 'rxjs/operators';
-import { select, Store } from '@ngrx/store';
 import { ClaimService } from '../../../../core/my-account/facade';
 import { PolicyService } from '../../../../core/my-account/facade';
-import * as fromPolicyStore from '../../../../core/my-account/store';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
 
 @Component({
@@ -22,7 +20,6 @@ import { genericIcons } from '../../../../assets/icons/generic-icons';
 })
 export class ClaimPoliciesComponent implements OnInit, OnDestroy {
   constructor(
-    protected store: Store<fromPolicyStore.UserState>,
     protected claimService: ClaimService,
     protected config: OccConfig,
     protected authService: AuthService,
@@ -42,12 +39,8 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
     // TODO: handle loading claims for every category
     this.policyService.loadClaimPolicies('insurances_auto');
 
-    this.claimData$ = this.store.pipe(
-      select(fromPolicyStore.getClaimPoliciesState)
-    );
-    this.claimPoliciesLoaded$ = this.store.pipe(
-      select(fromPolicyStore.getClaimPoliciesLoaded)
-    );
+    this.claimData$ = this.claimService.getClaims();
+    this.claimPoliciesLoaded$ = this.claimService.getLoaded();
   }
 
   selectPolicy(index, policyId, contractId) {

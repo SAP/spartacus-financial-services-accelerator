@@ -34,7 +34,7 @@ export class ClaimDataService {
         }
       });
     this.store
-      .pipe(select(fromClaimStore.getClaimsContent))
+      .pipe(select(fromClaimStore.getClaimContent))
       .subscribe(claimData => {
         this._claimData = claimData;
       });

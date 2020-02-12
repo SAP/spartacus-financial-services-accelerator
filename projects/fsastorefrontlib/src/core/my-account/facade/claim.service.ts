@@ -30,6 +30,10 @@ export class ClaimService {
     return this.store.pipe(select(fromClaimStore.getClaimsLoaded));
   }
 
+  getCurrentClaim() {
+    return this.store.pipe(select(fromClaimStore.getClaimContent));
+  }
+
   loadClaims() {
     this.store.dispatch(
       new fromAction.LoadClaims({

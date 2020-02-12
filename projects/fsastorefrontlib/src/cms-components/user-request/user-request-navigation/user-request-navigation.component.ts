@@ -13,8 +13,6 @@ import { FSUserRequest, FSStepData, Claim } from '../../../occ/occ-models';
 import { ClaimService } from '../../../core/my-account/facade';
 import { ClaimDataService } from '../../../core/my-account/services';
 import { GlobalMessageService, RoutingService } from '@spartacus/core';
-import { select, Store } from '@ngrx/store';
-import * as fromClaimStore from '../../../core/my-account/store';
 
 const completedStatus = 'COMPLETED';
 
@@ -40,13 +38,12 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     protected claimService: ClaimService,
     protected claimDataService: ClaimDataService,
     protected globalMessageService: GlobalMessageService,
-    private store: Store<fromClaimStore.SubmitClaim>,
     protected router: RoutingService
   ) {}
 
   ngOnInit() {
     this.userRequest$ = this.userRequestService.getUserRequest();
-    this.claim$ = this.store.pipe(select(fromClaimStore.getClaimsContent));
+    this.claim$ = this.claimService.getCurrentClaim();
     this.subscription.add(
       this.userRequest$
         .pipe(

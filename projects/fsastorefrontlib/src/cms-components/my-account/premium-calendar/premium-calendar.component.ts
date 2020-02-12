@@ -11,7 +11,6 @@ import { PolicyService } from '../../../core/my-account/facade';
 })
 export class PremiumCalendarComponent implements OnInit {
   constructor(
-    private store: Store<fromStore.UserState>,
     private config: OccConfig,
     protected policyService: PolicyService
   ) {}
@@ -22,10 +21,8 @@ export class PremiumCalendarComponent implements OnInit {
 
   ngOnInit() {
     this.policyService.loadPremiumCalendar();
-    this.policies$ = this.store.pipe(select(fromStore.getPremiumCalendarData));
-    this.policiesLoaded$ = this.store.pipe(
-      select(fromStore.getPremiumCalendarLoaded)
-    );
+    this.policies$ = this.policyService.getPremiumCalendar();
+    this.policiesLoaded$ = this.policyService.getPremiumCalendarLoaded();
   }
 
   getBaseUrl() {

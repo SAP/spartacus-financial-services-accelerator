@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormDataService } from '@fsa/dynamicforms';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import {
   AuthService,
   CartActions,
@@ -11,6 +11,7 @@ import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
 import * as fromAction from './../store/actions';
 import * as fromReducer from './../store/reducers';
 import { map, take } from 'rxjs/operators';
+import * as fromQuoteStore from './../store';
 
 @Injectable()
 export class QuoteService {
@@ -33,6 +34,14 @@ export class QuoteService {
         )
       )
       .unsubscribe();
+  }
+
+  getQuotes() {
+    return this.store.pipe(select(fromQuoteStore.getQuotes));
+  }
+
+  getQuotesLoaded() {
+    return this.store.pipe(select(fromQuoteStore.getQuotesLoaded));
   }
 
   retrieveQuote(quote: any) {
