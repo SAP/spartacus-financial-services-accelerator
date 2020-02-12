@@ -1,14 +1,24 @@
+import { waitForPage } from './generalHelpers';
+import { waitForUserAssets } from './generalHelpers';
+
 export function getClaimIdFromLocalStorage() {
   const localData = JSON.parse(localStorage.getItem('spartacus-local-data'));
-  return localData.assets.claims.content.claimNumber;
+  if (
+    localData &&
+    localData.assets &&
+    localData.assets.claims &&
+    localData.assets.claims.content
+  ) {
+    return localData.assets.claims.content.claimNumber;
+  }
 }
 
 export function selectAutoPolicyForFNOL() {
-  cy.get('div.info-card-caption')
+  cy.get('.info-card-caption')
     .contains(' BULK1T2000000552 ')
     .parentsUntil('.col-md-4')
     .within(() => {
-      cy.get('h4.info-card-caption').contains('Auto Insurance');
+      cy.get('.info-card-caption').contains('Auto Insurance');
       cy.get('.primary-button')
         .contains(' Make a Claim')
         .click();
@@ -52,7 +62,6 @@ export function populateIncidentInformationStep() {
     cy.get('[name=description]').type(
       'my tesla S was stolen while I was in the shopping center'
     );
-    cy.wait(1000);
   });
 }
 
@@ -70,7 +79,6 @@ export function populateGeneralInformationStep() {
   cy.get('[name=witnesses]')
     .eq(1)
     .click();
-  cy.wait(1500);
 }
 
 export function checkSummaryPage() {
@@ -136,10 +144,13 @@ export function checkOpenClaimContent() {
 }
 
 export function startClaimFromHomepage() {
+  const claimsPage = waitForPage('claimsPage', 'claimsPage');
   cy.get('.Section4 cx-banner')
     .eq(1)
     .click();
-  cy.wait(500);
+  cy.wait(`@${claimsPage}`)
+    .its('status')
+    .should('eq', 200);
 }
 
 export function checkFnolEntryPage() {
@@ -170,20 +181,35 @@ export function deleteClaimFromDialog(claimId) {
   });
 }
 
-export function checkClaimsPage(claimId) {
+export function checkClaimsPage() {
+  const myClaims = waitForPage('my-claims', 'myClaims');
   cy.selectOptionFromDropdown({
     menuOption: 'My Account',
     dropdownItem: 'Claims',
   });
+  cy.wait(`@${myClaims}`)
+    .its('status')
+    .should('eq', 200);
   cy.get('.heading-headline').contains('Claims');
 }
 
 export function checkAndResumeSpecificClaim(claimId) {
+  // const claims = waitForUserAssets(
+  //   'claims?fields=FULL&lang=en&curr=EUR',
+  //   'claims'
+  // );
+  cy.server();
+  cy.route(
+    'GET',
+    `/rest/v2/financial/users/*/claims?fields=FULL&lang=en&curr=EUR`
+  ).as('claims');
+  cy.wait('@claims')
+    .its('status')
+    .should('eq', 200);
   cy.contains('.info-card', claimId).within(() => {
     this.checkOpenClaimContent();
     cy.get('.secondary-button')
       .contains('Resume')
       .click();
-    cy.wait(1000);
   });
 }
