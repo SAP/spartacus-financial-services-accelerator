@@ -89,11 +89,11 @@ describe('CmsCustomContainerComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should return agent list', () => {
+  it('should return component list', () => {
     expect(component.components$).toEqual(mockComponentList);
   });
 
-  it('should return agent list', () => {
+  it('should return container style class', () => {
     expect(component.styleCss).toEqual('Test Class');
   });
 });
