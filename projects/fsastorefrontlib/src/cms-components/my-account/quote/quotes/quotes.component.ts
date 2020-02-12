@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { OccConfig, RoutingService } from '@spartacus/core';
-import { QuoteService } from '../../../../core/my-account/services/quote/quote.service';
-import * as fromQuoteStore from '../../../../core/my-account/store';
+import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 
 @Component({
   selector: 'fsa-quotes',
@@ -11,7 +10,6 @@ import * as fromQuoteStore from '../../../../core/my-account/store';
 })
 export class QuotesComponent implements OnInit {
   constructor(
-    private store: Store<fromQuoteStore.UserState>,
     private config: OccConfig,
     protected quoteService: QuoteService,
     protected routingService: RoutingService
@@ -22,10 +20,8 @@ export class QuotesComponent implements OnInit {
 
   ngOnInit() {
     this.quoteService.loadQuotes();
-    this.quotes$ = this.store.pipe(select(fromQuoteStore.getQuotes));
-    this.quotesLoaded$ = this.store.pipe(
-      select(fromQuoteStore.getQuotesLoaded)
-    );
+    this.quotes$ = this.quoteService.getQuotes();
+    this.quotesLoaded$ = this.quoteService.getQuotesLoaded();
   }
 
   retrieveQuote(quote: any) {
@@ -43,7 +39,7 @@ export class QuotesComponent implements OnInit {
     }
   }
 
-  public getBaseUrl() {
+  getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
 }

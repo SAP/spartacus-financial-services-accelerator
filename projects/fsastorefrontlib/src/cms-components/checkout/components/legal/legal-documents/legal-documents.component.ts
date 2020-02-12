@@ -17,7 +17,7 @@ export class LegalDocumentsComponent implements OnInit {
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
   }
-  public getBaseUrl() {
+  getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
 }

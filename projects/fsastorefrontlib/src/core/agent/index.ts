@@ -1,2 +1,2 @@
-export * from './services/agent-search.service';
+export * from './facade/index';
 export * from './connectors/index';

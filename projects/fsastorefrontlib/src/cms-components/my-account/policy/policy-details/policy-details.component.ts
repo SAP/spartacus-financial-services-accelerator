@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { PolicyService } from '../../../../core/my-account/services/policy/policy.service';
+import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { RoutingService } from '@spartacus/core';
 import { map } from 'rxjs/operators';
 import { Subscription, combineLatest, Observable } from 'rxjs';
@@ -38,7 +38,7 @@ export class PolicyDetailsComponent implements OnInit {
     );
     this.policy$ = this.policyService.getPolicies();
   }
-  public getBaseUrl() {
+  getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
 }

@@ -7,7 +7,7 @@ import { I18nTestingModule, UserService } from '@spartacus/core';
 import { of } from 'rxjs';
 
 import { ContactAgentFormComponent } from './contact-agent-form.component';
-import { AgentSearchService } from '../../../core/agent/services/agent-search.service';
+import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 
 const mockedUserDetails = {
   firstName: 'Test',

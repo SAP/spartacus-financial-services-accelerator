@@ -20,7 +20,7 @@ export class OccUserRequestAdapter implements UserRequestAdapter {
     return this.occEndpointService.getBaseEndpoint() + userRequestEndpoint;
   }
 
-  public getUserRequest(userId: string, requestId: string): Observable<any> {
+  getUserRequest(userId: string, requestId: string): Observable<any> {
     const url = this.getUserRequestEndpoint(userId, requestId);
     const params = new HttpParams();
 
@@ -29,7 +29,7 @@ export class OccUserRequestAdapter implements UserRequestAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public updateUserRequest(
+  updateUserRequest(
     userId: string,
     requestId: string,
     stepData: FSStepData

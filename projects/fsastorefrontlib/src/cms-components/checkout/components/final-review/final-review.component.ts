@@ -7,7 +7,7 @@ import {
 } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/fs-checkout-config.service';
-import { FSCheckoutService } from '../../../../core/checkout/services/fs-checkout.service';
+import { FSCheckoutService } from '../../../../core/checkout/facade/fs-checkout.service';
 
 @Component({
   selector: 'fsa-final-review',

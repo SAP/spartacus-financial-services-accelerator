@@ -1,4 +1,4 @@
-import { FSProductService } from '../../../core/checkout/services/product/fs-product.service';
+import { FSProductService } from '../../../core/product-pricing/facade/fs-product.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { CmsProductFeatureComponent } from '../../../occ/occ-models/cms-component.models';
