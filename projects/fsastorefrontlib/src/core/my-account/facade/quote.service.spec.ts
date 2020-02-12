@@ -144,6 +144,40 @@ describe('QuoteServiceTest', () => {
     );
   });
 
+  it('should be able to check if quotes are loaded', () => {
+    store.dispatch(
+      new fromAction.LoadQuotesSuccess({
+        cartId: cartId,
+      })
+    );
+    let loaded;
+    service
+      .getQuotesLoaded()
+      .subscribe(response => {
+        loaded = response;
+      })
+      .unsubscribe();
+    expect(loaded).toEqual(true);
+  });
+
+  it('should be able to loade quotes', () => {
+    store.dispatch(
+      new fromAction.LoadQuotesSuccess({
+        cartId: cartId,
+      })
+    );
+    let loaded;
+    service
+      .getQuotes()
+      .subscribe(response => {
+        loaded = response;
+      })
+      .unsubscribe();
+    expect(loaded).toEqual({
+      cartId: cartId,
+    });
+  });
+
   it('should be able to bind quote', () => {
     service.bindQuote(cartId);
     expect(store.dispatch).toHaveBeenCalledWith(

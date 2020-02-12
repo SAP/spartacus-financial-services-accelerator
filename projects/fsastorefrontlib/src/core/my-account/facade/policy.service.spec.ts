@@ -13,6 +13,11 @@ const policyId = 'PL00001';
 const contractId = 'CT00001';
 const testCategory = 'testCategory';
 
+const mockedPolicy = {
+  policyId: policyId,
+  contractId: contractId,
+};
+
 class MockAuthService {
   getOccUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
@@ -52,12 +57,7 @@ describe('PolicyServiceTest', () => {
   ));
 
   it('should be able to get policies if data exists', () => {
-    store.dispatch(
-      new fromAction.LoadPoliciesSuccess({
-        policyId: policyId,
-        contractId: contractId,
-      })
-    );
+    store.dispatch(new fromAction.LoadPoliciesSuccess(mockedPolicy));
     let policiesResponse;
     service
       .getPolicies()
@@ -65,10 +65,19 @@ describe('PolicyServiceTest', () => {
         policiesResponse = policies;
       })
       .unsubscribe();
-    expect(policiesResponse).toEqual({
-      policyId: policyId,
-      contractId: contractId,
-    });
+    expect(policiesResponse).toEqual(mockedPolicy);
+  });
+
+  it('should be able to check if policies are loaded', () => {
+    store.dispatch(new fromAction.LoadPoliciesSuccess(mockedPolicy));
+    let loaded;
+    service
+      .getLoaded()
+      .subscribe(response => {
+        loaded = response;
+      })
+      .unsubscribe();
+    expect(loaded).toEqual(true);
   });
 
   it('should be able to load policies', () => {
@@ -104,5 +113,29 @@ describe('PolicyServiceTest', () => {
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.LoadPremiumCalendar({ userId: userId })
     );
+  });
+
+  it('should be able to load premium calendar', () => {
+    store.dispatch(new fromAction.LoadPremiumCalendarSuccess(mockedPolicy));
+    let loaded;
+    service
+      .getPremiumCalendar()
+      .subscribe(response => {
+        loaded = response;
+      })
+      .unsubscribe();
+    expect(loaded).toEqual(mockedPolicy);
+  });
+
+  it('should be able to check if premium calendar is loaded', () => {
+    store.dispatch(new fromAction.LoadPremiumCalendarSuccess(mockedPolicy));
+    let loaded;
+    service
+      .getPremiumCalendarLoaded()
+      .subscribe(response => {
+        loaded = response;
+      })
+      .unsubscribe();
+    expect(loaded).toEqual(true);
   });
 });

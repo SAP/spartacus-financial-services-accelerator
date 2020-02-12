@@ -73,6 +73,18 @@ describe('ClaimServiceTest', () => {
     expect(claimsResponse).toEqual({ claimId: claimId });
   });
 
+  it('should be able to get current claim', () => {
+    store.dispatch(new fromAction.UpdateClaimSuccess({ claimId: claimId }));
+    let claimsResponse;
+    service
+      .getCurrentClaim()
+      .subscribe(claims => {
+        claimsResponse = claims;
+      })
+      .unsubscribe();
+    expect(claimsResponse).toEqual({ claimId: claimId });
+  });
+
   it('should be able to get loaded claims flag', () => {
     store.dispatch(new fromAction.LoadClaimsSuccess({ claimId: claimId }));
     let claimsLoaded;
