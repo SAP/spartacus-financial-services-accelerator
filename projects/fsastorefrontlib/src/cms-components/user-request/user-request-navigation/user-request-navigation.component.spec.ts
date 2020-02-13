@@ -7,17 +7,14 @@ import {
 } from '@spartacus/core';
 import { FSUserRequest } from '../../../occ/occ-models';
 import { of } from 'rxjs';
-import { UserRequestService } from '../../../core/user-request/services/user-request/user-request.service';
+import { UserRequestService } from '../../../core/user-request/facade/user-request.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import { UserRequestNavigationService } from '../../../core/user-request/services/user-request/user-request-navigation.service';
+import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
 import { ActivatedRoute } from '@angular/router';
-import {
-  ClaimDataService,
-  ClaimService,
-} from '../../../core/my-account/services';
+import { ClaimDataService } from '../../../core/my-account/services';
+import { ClaimService } from '../../../core/my-account/facade';
 import { FormDataService } from '@fsa/dynamicforms';
 import { UserRequestDataService } from '../../../core/user-request/services';
-import { Store } from '@ngrx/store';
 
 const mockRequest: FSUserRequest = {
   requestId: 'test123',
@@ -41,9 +38,10 @@ const mockActivatedRoute = {
   },
 };
 
-class MockStore {
-  pipe() {}
+class MockClaimService {
+  getCurrentClaim() {}
 }
+
 export class MockUserRequestService {
   getUserRequest() {
     return of(mockRequest);
@@ -60,10 +58,12 @@ describe('UserRequestNavigationComponent', () => {
   let component: UserRequestNavigationComponent;
   let fixture: ComponentFixture<UserRequestNavigationComponent>;
   let mockUserRequestService: MockUserRequestService;
+  let mockClaimService: MockClaimService;
   let mockUserRequestNavigationService: MockUserRequestNavigationService;
 
   beforeEach(async(() => {
     mockUserRequestService = new MockUserRequestService();
+    mockClaimService = new MockClaimService();
     mockUserRequestNavigationService = new MockUserRequestNavigationService();
     TestBed.configureTestingModule({
       imports: [I18nTestingModule, RouterTestingModule],
@@ -87,7 +87,7 @@ describe('UserRequestNavigationComponent', () => {
         },
         {
           provide: ClaimService,
-          useValue: ClaimService,
+          useValue: mockClaimService,
         },
         {
           provide: ClaimDataService,
@@ -104,10 +104,6 @@ describe('UserRequestNavigationComponent', () => {
         {
           provide: RoutingService,
           useValue: RoutingService,
-        },
-        {
-          provide: Store,
-          useClass: MockStore,
         },
       ],
     }).compileComponents();

@@ -9,9 +9,9 @@ import { CmsConfig, RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { PricingData } from '../../../core/models/pricing.interface';
 import { FSCheckoutConfigService } from '../../../core/checkout/services/fs-checkout-config.service';
-import { FSProductService } from '../../../core/checkout/services/product/fs-product.service';
+import { FSProductService } from '../../../core/product-pricing/facade/fs-product.service';
 import { FSProduct, OneTimeChargeEntry } from '../../../occ/occ-models';
-import { FSCartService } from '../../../core/checkout/services';
+import { FSCartService } from '../../../core/cart/facade';
 
 @Component({
   selector: 'fsa-comparison-table-panel-item',
@@ -82,7 +82,7 @@ export class ComparisonTablePanelItemComponent implements OnInit {
     this.routingService.go(this.checkoutStepUrlNext);
   }
 
-  public getBaseUrl() {
+  getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
 }

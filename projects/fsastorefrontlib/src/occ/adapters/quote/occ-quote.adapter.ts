@@ -4,7 +4,7 @@ import { OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
-import { QuoteAdapter } from '../../../core/my-account/services/quote/connectors/quote.adapter';
+import { QuoteAdapter } from '../../../core/my-account/connectors/quote.adapter';
 
 @Injectable()
 export class OccQuoteAdapter implements QuoteAdapter {
@@ -30,7 +30,7 @@ export class OccQuoteAdapter implements QuoteAdapter {
     return this.occEndpointService.getBaseEndpoint() + quotesFromCartEndpoint;
   }
 
-  public getQuotes(userId: string): Observable<any> {
+  getQuotes(userId: string): Observable<any> {
     const url = this.getQuotesEndpoint(userId);
     const params = new HttpParams();
 
@@ -39,7 +39,7 @@ export class OccQuoteAdapter implements QuoteAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public updateQuote(
+  updateQuote(
     userId: string,
     cartId: string,
     quoteContent: any
@@ -52,7 +52,7 @@ export class OccQuoteAdapter implements QuoteAdapter {
       .pipe(catchError((error: any) => throwError(error.json)));
   }
 
-  public bindQuote(userId: string, cartId: string): Observable<any> {
+  bindQuote(userId: string, cartId: string): Observable<any> {
     const url = this.bindQuoteEndpoint(userId, cartId);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

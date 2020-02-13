@@ -16,8 +16,8 @@ import {
 } from '@spartacus/core';
 
 import { QuotesComponent } from './quotes/quotes.component';
-import { QuoteService } from '../../../core/my-account/services/quote/quote.service';
-import { QuoteConnector } from '../../../core/my-account/services/quote/connectors/quote.connector';
+import { QuoteService } from '../../../core/my-account/facade/quote.service';
+import { QuoteConnector } from '../../../core/my-account/connectors/quote.connector';
 const routes: Routes = [
   {
     path: null,

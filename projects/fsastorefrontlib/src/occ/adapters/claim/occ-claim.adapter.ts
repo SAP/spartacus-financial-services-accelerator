@@ -4,7 +4,7 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { OccEndpointsService } from '@spartacus/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { ClaimAdapter } from '../../../core/my-account/services/claim/connectors/claim.adapter';
+import { ClaimAdapter } from '../../../core/my-account/connectors/claim.adapter';
 import { Claim, FSLocationOfLoss } from '../../occ-models';
 
 const FULL_PARAMS = 'fields=FULL';
@@ -21,7 +21,7 @@ export class OccClaimAdapter implements ClaimAdapter {
     return this.occEndpointService.getBaseEndpoint() + claimsEndpoint;
   }
 
-  public getClaims(userId: string): Observable<any> {
+  getClaims(userId: string): Observable<any> {
     const url = this.getClaimsEndpoint(userId);
     const params = new HttpParams({ fromString: FULL_PARAMS });
     return this.http
@@ -29,7 +29,7 @@ export class OccClaimAdapter implements ClaimAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public deleteClaim(userId: string, claimId: string) {
+  deleteClaim(userId: string, claimId: string) {
     const url = this.getClaimsEndpoint(userId) + '/' + claimId;
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -40,7 +40,7 @@ export class OccClaimAdapter implements ClaimAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public createClaim(
+  createClaim(
     userId: string,
     policyId: string,
     contractId: string
@@ -61,7 +61,7 @@ export class OccClaimAdapter implements ClaimAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public updateClaim(
+  updateClaim(
     userId: string,
     claimId: string,
     claimData: any
@@ -79,7 +79,7 @@ export class OccClaimAdapter implements ClaimAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  public submitClaim(userId: string, claimId: string): Observable<any> {
+  submitClaim(userId: string, claimId: string): Observable<any> {
     const url = this.getClaimsEndpoint(userId) + '/' + claimId + '/action';
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

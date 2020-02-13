@@ -8,7 +8,7 @@ import {
 import { Order, OccConfig } from '@spartacus/core';
 
 import { Observable } from 'rxjs';
-import { FSCheckoutService } from './../../../../core/checkout/services/fs-checkout.service';
+import { FSCheckoutService } from '../../../../core/checkout/facade/fs-checkout.service';
 
 @Component({
   selector: 'fsa-order-confirmation',
@@ -27,7 +27,7 @@ export class FsaOrderConfirmationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.order$ = this.checkoutService.getOrderDetails();
   }
-  public getBaseUrl() {
+  getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
   ngOnDestroy() {

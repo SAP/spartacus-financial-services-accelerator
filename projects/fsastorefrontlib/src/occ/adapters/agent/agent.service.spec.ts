@@ -8,6 +8,7 @@ import { OccConfig } from '@spartacus/core';
 import { OccAgentAdapter } from './occ-agent.adapter';
 
 const category = 'insurances_property_renters';
+const id = 'test@agent.com';
 
 const MockOccModuleConfig: OccConfig = {
   context: {
@@ -50,6 +51,15 @@ describe('OccAgentAdapter', () => {
           req.method === 'GET'
         );
       }, `GET method and url`);
+    }));
+  });
+
+  describe('getAgentByID', () => {
+    it('gets Agent By ID', async(() => {
+      adapter.getAgentByID(id).subscribe(res => {});
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return req.url === '/agents' + '/' + id + '?fields=DEFAULT';
+      }, `GET url`);
     }));
   });
 

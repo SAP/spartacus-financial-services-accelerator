@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostBinding } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
@@ -15,8 +15,12 @@ import {
 export class CmsCustomContainerComponent implements OnInit {
   routeParamId = 'formCode';
   pageContext: PageContext;
-
+  styleCss: string;
   components$: Observable<CmsComponent[]>;
+
+  @HostBinding('class') get ContainerClass() {
+    return this.styleCss;
+  }
 
   constructor(
     protected componentData: CmsComponentData<CMSCustomComponentsContainer>,
@@ -34,6 +38,7 @@ export class CmsCustomContainerComponent implements OnInit {
   ngOnInit() {
     this.componentData.data$
       .subscribe(data => {
+        this.styleCss = data.styleCss ? data.styleCss : '';
         this.components$ = this.cmsComponentConnector.getList(
           data.simpleCMSComponents.split(' '),
           this.pageContext

@@ -10,8 +10,8 @@ import * as fromActions from '../actions';
 import * as fromEffects from './claim.effect';
 import * as fromReducer from './../../store/reducers/index';
 import * as fromUserRequestActions from '../../../user-request/store/actions';
-import { ClaimDataService } from '../../services/claim/claim-data.service';
-import { ClaimConnector } from '../../services/claim/connectors/claim.connector';
+import { ClaimDataService } from '../../services/claim-data.service';
+import { ClaimConnector } from '../../connectors/claim.connector';
 
 const claim1 = {
   claimNumber: 'testClaim001',

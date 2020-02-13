@@ -58,7 +58,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     );
   }
 
-  public getBaseUrl() {
+  getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
 

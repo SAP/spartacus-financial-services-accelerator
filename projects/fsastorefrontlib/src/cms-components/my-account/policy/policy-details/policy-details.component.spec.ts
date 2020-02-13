@@ -3,7 +3,7 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { RoutingService, OccConfig, I18nTestingModule } from '@spartacus/core';
 import { of, Observable } from 'rxjs';
 import { AccordionModule } from '../../../../shared/accordion/accordion.module';
-import { PolicyService } from '../../../../core/my-account/services';
+import { PolicyService } from '../../../../core/my-account/facade';
 
 class MockPolicyService {
   loadPolicyDetails(policyId: string, contractId: string): void {}

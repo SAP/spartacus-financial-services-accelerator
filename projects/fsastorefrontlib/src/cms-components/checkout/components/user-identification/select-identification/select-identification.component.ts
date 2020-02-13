@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
 import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
-import { FSCheckoutService } from '../../../../../core/checkout/services/fs-checkout.service';
+import { FSCheckoutService } from '../../../../../core/checkout/facade/fs-checkout.service';
 import { filter, take, tap } from 'rxjs/operators';
 
 @Component({
