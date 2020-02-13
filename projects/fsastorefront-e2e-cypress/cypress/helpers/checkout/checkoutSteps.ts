@@ -36,7 +36,7 @@ export function bindQuotePopup() {
 }
 
 export function clickContinueButton() {
-  cy.get('button.primary-button')
+  cy.get('.primary-button')
     .should('contain', 'Continue')
     .click();
 }

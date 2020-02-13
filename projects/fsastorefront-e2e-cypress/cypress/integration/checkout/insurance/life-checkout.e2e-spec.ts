@@ -2,11 +2,9 @@ import * as life from '../../../helpers/checkout/insurance/life-checkout';
 import { checkMiniCartLifeBasic } from '../../../helpers/checkout/insurance/life-checkout';
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
-import * as travelCheckout from '../../../helpers/checkout/insurance/travel-checkout';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import {
   clickContinueButton,
-  checkQuoteReviewAccordions,
 } from '../../../helpers/checkout/checkoutSteps';
 import {
   addPaymentMethod,
