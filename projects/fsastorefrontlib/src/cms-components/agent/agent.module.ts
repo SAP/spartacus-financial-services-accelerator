@@ -41,7 +41,7 @@ import { AgentConnector } from '../../core/agent/connectors/agent.connector';
     RouterModule.forChild([
       {
         path: null,
-        canActivate: [AuthGuard, CmsPageGuard],
+        canActivate: [CmsPageGuard],
         data: {
           cxRoute: 'contactAgent',
           pageLabel: 'contactAgentPage',

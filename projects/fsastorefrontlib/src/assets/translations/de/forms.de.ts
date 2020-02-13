@@ -20,6 +20,7 @@ export const forms = {
     interest: '[DE] Interest',
     contactType: '[DE] Contact type',
     enterMessage: '[DE] Your message',
+    subject: '[DE] Subject',
     send: '[DE] Send',
     titles: {
       trip_details_form: 'Reiseinformation',
