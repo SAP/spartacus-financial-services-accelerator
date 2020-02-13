@@ -3,9 +3,7 @@ import { checkMiniCartLifeBasic } from '../../../helpers/checkout/insurance/life
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import {
-  clickContinueButton,
-} from '../../../helpers/checkout/checkoutSteps';
+import { clickContinueButton } from '../../../helpers/checkout/checkoutSteps';
 import {
   addPaymentMethod,
   selectPaymentMethod,
