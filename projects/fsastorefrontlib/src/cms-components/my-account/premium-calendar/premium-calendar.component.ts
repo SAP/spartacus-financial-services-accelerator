@@ -11,7 +11,7 @@ import { PolicyService } from '../../../core/my-account/facade';
 })
 export class PremiumCalendarComponent implements OnInit {
   constructor(
-    private config: OccConfig,
+    protected config: OccConfig,
     protected policyService: PolicyService
   ) {}
 
