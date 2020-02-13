@@ -553,6 +553,16 @@ export class FormSampleConfigurations {
               label: 'Driver`s Category',
               name: 'driverCategory',
               options: [
+                { name: 'Main', label: 'Main' },
+                { name: 'Occasional', label: 'Occasional' },
+              ],
+              validation: [DefaultFormValidators.required],
+            },
+            {
+              type: 'select',
+              label: 'Driver`s Category',
+              name: 'driverCategory',
+              options: [
                 {
                   label: 'Main',
                   name: 'Main',
