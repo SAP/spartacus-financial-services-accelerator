@@ -1,3 +1,4 @@
+import { FSCartService } from './../../../../core/cart/facade/fs-cart.service';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 import {
   FSCart,
@@ -10,7 +11,6 @@ import { Cart, CartService, OccConfig, RoutingService } from '@spartacus/core';
 import { Observable, Subscription, of } from 'rxjs';
 import {
   FSCheckoutConfigService,
-  FSCartService,
 } from '../../../../core/checkout/services';
 import { ModalService, ModalRef } from '@spartacus/storefront';
 
@@ -31,10 +31,10 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
 
   constructor(
     protected cartService: FSCartService,
-    private config: OccConfig,
+    protected config: OccConfig,
     protected routingService: RoutingService,
-    private checkoutConfigService: FSCheckoutConfigService,
-    private activatedRoute: ActivatedRoute,
+    protected checkoutConfigService: FSCheckoutConfigService,
+    protected activatedRoute: ActivatedRoute,
     protected modalService: ModalService
   ) {}
 
@@ -61,7 +61,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     );
   }
 
-  public getBaseUrl() {
+  getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
 

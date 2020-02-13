@@ -6,11 +6,11 @@ import {
   OnInit,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { InboxService } from '../../../../../core/my-account/services/inbox/inbox.service';
+import { InboxService } from '../../../../../core/my-account/facade/inbox.service';
 import {
   InboxMessage,
   FSSearchConfig,
-} from '../../../../../core/my-account/services/inbox/inbox-data.service';
+} from '../../../../../core/my-account/services/inbox-data.service';
 
 @Component({
   selector: 'fsa-inbox-messages',
@@ -18,7 +18,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InboxMessagesComponent implements OnInit, OnDestroy {
-  constructor(private inboxService: InboxService) {}
+  constructor(protected inboxService: InboxService) {}
 
   private subscription: Subscription = new Subscription();
   messagesObject$: Observable<any>;

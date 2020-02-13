@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './find-agent-navigation.component.html',
 })
 export class FindAgentNavigationComponent {
-  constructor(private router: Router) {}
+  constructor(protected router: Router) {}
 
   disableByMatchingUrl(urlPartToMatch) {
     return this.router.url.indexOf(urlPartToMatch) !== -1 ? true : false;

@@ -1,0 +1,118 @@
+<ng-container *ngIf="agent$ | async as agent">
+  <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
+    {{ 'fscommon.agentLocator.contact' | cxTranslate }} {{ agent.firstName }}
+    {{ agent.lastName }}
+  </h2>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="cx-section">
+        <form [formGroup]="contactAgentForm">
+          <div class="form-group">
+            <label>
+              <span class="label-content">{{
+                'register.emailAddress.label' | cxTranslate
+              }}</span>
+              <input
+                class="form-control"
+                [class.is-invalid]="
+                  contactAgentForm.get('email').invalid &&
+                  contactAgentForm.get('email').dirty
+                "
+                type="email"
+                name="email"
+                placeholder="{{
+                  'register.emailAddress.placeholder' | cxTranslate
+                }}"
+                formControlName="email"
+              />
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <span class="label-content">{{
+                'forms.interest.title' | cxTranslate
+              }}</span>
+              <select formControlName="interest" class="form-control">
+                <option selected value="" disabled>{{
+                  'fscommon.pleaseSelect' | cxTranslate
+                }}</option>
+                <option value="PROBLEM">{{
+                  'forms.interest.problem' | cxTranslate
+                }}</option>
+                <option value="INCIDENT">{{
+                  'forms.interest.incident' | cxTranslate
+                }}</option>
+                <option value="COMPLAINT">{{
+                  'forms.interest.complaint' | cxTranslate
+                }}</option>
+                <option value="FRAUD">{{
+                  'forms.interest.fraud' | cxTranslate
+                }}</option>
+                <option value="NOTE">{{
+                  'forms.interest.note' | cxTranslate
+                }}</option>
+                <option value="ENQUIRY">{{
+                  'forms.interest.enquiry' | cxTranslate
+                }}</option>
+              </select>
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <span class="label-content">{{
+                'forms.contactType.title' | cxTranslate
+              }}</span>
+              <select formControlName="contactType" class="form-control">
+                <option selected value="" disabled>{{
+                  'fscommon.pleaseSelect' | cxTranslate
+                }}</option>
+                <option value="EMAIL">{{
+                  'forms.contactType.email' | cxTranslate
+                }}</option>
+                <option value="CALL">{{
+                  'forms.contactType.call' | cxTranslate
+                }}</option>
+              </select>
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <span class="label-content">{{
+                'forms.subject' | cxTranslate
+              }}</span>
+              <input
+                class="form-control"
+                type="text"
+                name="subject"
+                placeholder="{{ 'forms.subject' | cxTranslate }}"
+                formControlName="subject"
+              />
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <span class="label-content">{{
+                'forms.enterMessage' | cxTranslate
+              }}</span>
+              <textarea
+                class="form-control"
+                formControlName="message"
+                name="message"
+                rows="8"
+                placeholder="{{ 'forms.enterMessage' | cxTranslate }}"
+              ></textarea>
+            </label>
+          </div>
+          <button
+            type="submit"
+            (click)="submit()"
+            [disabled]="contactAgentForm.invalid"
+            class="btn btn-block btn-primary"
+          >
+            {{ 'forms.send' | cxTranslate }}
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</ng-container>

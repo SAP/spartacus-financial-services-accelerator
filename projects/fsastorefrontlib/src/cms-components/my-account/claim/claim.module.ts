@@ -21,11 +21,11 @@ import { DeleteClaimDialogComponent } from './delete-claim-dialog/delete-claim-d
 import { ClaimPoliciesComponent } from './claim-policies/claim-policies.component';
 import { ClaimsComponent } from './claims/claims.component';
 import { CreateClaimComponent } from './create-claim/create-claim.component';
-import { ClaimDataService } from '../../../core/my-account/services/claim/claim-data.service';
-import { ClaimService } from '../../../core/my-account/services/claim/claim.service';
+import { ClaimDataService } from '../../../core/my-account/services/claim-data.service';
+import { ClaimService } from '../../../core/my-account/facade/claim.service';
 import { ParseDatePipe } from '../../../shared/util/helpers/parseDate.pipe';
 import { ClaimPoliciesGuard } from './guards/claim-policies-guard';
-import { ClaimConnector } from '../../../core/my-account/services/claim/connectors/claim.connector';
+import { ClaimConnector } from '../../../core/my-account/connectors/claim.connector';
 
 const routes: Routes = [
   {

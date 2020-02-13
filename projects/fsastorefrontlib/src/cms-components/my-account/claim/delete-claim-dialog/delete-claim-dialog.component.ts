@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ClaimService } from '../../../../core/my-account/services/claim/claim.service';
+import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { AuthService } from '@spartacus/core';
 import { take } from 'rxjs/operators';
@@ -11,10 +11,10 @@ import { take } from 'rxjs/operators';
 })
 export class DeleteClaimDialogComponent implements OnInit {
   constructor(
-    public activeModal: NgbActiveModal,
-    private service: ClaimService,
+    protected service: ClaimService,
     protected fb: FormBuilder,
-    protected authService: AuthService
+    protected authService: AuthService,
+    public activeModal: NgbActiveModal
   ) {}
 
   form: FormGroup = this.fb.group({});

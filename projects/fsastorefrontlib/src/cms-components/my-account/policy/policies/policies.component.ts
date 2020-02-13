@@ -1,12 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import * as fromPolicyStore from '../../../../core/my-account/store';
-import { Store, select } from '@ngrx/store';
 import { OccConfig, RoutingService } from '@spartacus/core';
 import { AllowedFSRequestType } from './../../../../occ/occ-models/occ.models';
 import {
   PolicyService,
   ClaimService,
-} from '../../../../core/my-account/services';
+} from '../../../../core/my-account/facade';
 
 const FSCLAIM = 'FSCLAIM';
 
@@ -17,8 +15,7 @@ const FSCLAIM = 'FSCLAIM';
 })
 export class PoliciesComponent implements OnInit {
   constructor(
-    private store: Store<fromPolicyStore.UserState>,
-    private config: OccConfig,
+    protected config: OccConfig,
     protected policyService: PolicyService,
     protected routingService: RoutingService,
     protected claimService: ClaimService
@@ -29,13 +26,11 @@ export class PoliciesComponent implements OnInit {
 
   ngOnInit() {
     this.policyService.loadPolicies();
-    this.policies$ = this.store.pipe(select(fromPolicyStore.getPolicyData));
-    this.policiesLoaded$ = this.store.pipe(
-      select(fromPolicyStore.getPoliciesLoaded)
-    );
+    this.policies$ = this.policyService.getPolicies();
+    this.policiesLoaded$ = this.policyService.getPolicies();
   }
 
-  public getBaseUrl() {
+  getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
 

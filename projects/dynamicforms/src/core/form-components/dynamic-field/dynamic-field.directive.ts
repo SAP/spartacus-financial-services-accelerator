@@ -42,8 +42,8 @@ export class DynamicFieldDirective implements OnChanges, OnInit {
   component: ComponentRef<FormGenericComponent>;
 
   constructor(
-    private resolver: ComponentFactoryResolver,
-    private container: ViewContainerRef
+    protected resolver: ComponentFactoryResolver,
+    protected container: ViewContainerRef
   ) {}
 
   ngOnChanges() {

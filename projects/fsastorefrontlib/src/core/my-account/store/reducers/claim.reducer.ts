@@ -42,14 +42,7 @@ export function reducer(
         loaded: false,
       };
 
-    case fromAction.CREATE_CLAIM_SUCCESS: {
-      const content = { ...action.payload };
-      return {
-        ...state,
-        content,
-        refresh: false,
-      };
-    }
+    case fromAction.CREATE_CLAIM_SUCCESS:
     case fromAction.UPDATE_CLAIM_SUCCESS: {
       const content = { ...action.payload };
       return {
@@ -58,6 +51,7 @@ export function reducer(
         refresh: false,
       };
     }
+
     case fromAction.SUBMIT_CLAIM_SUCCESS: {
       const content = { ...action.payload };
       return {

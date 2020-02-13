@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AgentSearchListComponent } from './agent-search-list.component';
 import { of } from 'rxjs';
-import { AgentSearchService } from '../../../core/agent/services/agent-search.service';
+import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { ActivatedRoute } from '@angular/router';
 import { Type, Component, Input } from '@angular/core';
 

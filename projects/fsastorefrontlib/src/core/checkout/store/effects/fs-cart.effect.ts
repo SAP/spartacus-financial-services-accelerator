@@ -7,7 +7,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import * as fromQuoteActions from '../../../my-account/store/actions/quote.action';
 import * as fromActions from '../actions/fs-cart.action';
-import { FsCartConnector } from '../../services/cart/connectors/fs-cart.connector';
+import { FsCartConnector } from '../../../cart/connectors/fs-cart.connector';
 
 @Injectable()
 export class FSCartEffects {

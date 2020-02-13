@@ -1,16 +1,19 @@
 import * as productCategory from '../../../helpers/productCategoryPage';
 import * as comparisonPage from '../../../helpers/comparisonTable';
 import * as addOptionsPage from '../../../helpers/checkout/addOptionsPage';
-import * as buttons from '../../../helpers/checkout/buttons';
-import * as quoteReview from '../../../helpers/checkout/quoteReview';
 import * as legalInformationPage from '../../../helpers/checkout/banking/legalInformationPage';
 import * as userIdentificationPage from '../../../helpers/checkout/banking/userIdentificationPage';
-import * as orderConfirmationPage from '../../../helpers/checkout/orderConfirmationPage';
 import * as currentAccount from '../../../helpers/checkout/banking/currentAccount-checkout';
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
+import {
+  bindQuotePopup,
+  checkOrderConfirmationBanking,
+  clickContinueButton,
+  checkQuoteReviewAccordions,
+} from '../../../helpers/checkout/checkoutSteps';
 
-context('Current AccountCheckout', () => {
+context('Current Account Checkout', () => {
   before(() => {
     cy.visit('/');
   });
@@ -30,7 +33,7 @@ context('Current AccountCheckout', () => {
   });
 
   it('Should check prices in comparison table and select Family Account', () => {
-    currentAccount.checkComparisonTable();
+    currentAccount.checkCurrentAccountComparisonTable();
     currentAccount.selectFamilyAccount();
   });
 
@@ -52,11 +55,12 @@ context('Current AccountCheckout', () => {
   });
 
   it('Should check Quote Review page', () => {
-    quoteReview.checkQuoteReviewPage();
+    cy.get('.progress-inner-wrapper').should('have.length', 5);
+    checkQuoteReviewAccordions('currentAccount');
   });
 
   it('Should bind Insurance Quote', () => {
-    buttons.bindQuotePopup();
+    bindQuotePopup();
   });
 
   it('Should check Legal Information page', () => {
@@ -64,7 +68,7 @@ context('Current AccountCheckout', () => {
   });
 
   it('Should click Next in checkout', () => {
-    buttons.clickContinueButton();
+    clickContinueButton();
   });
 
   it('Should check User Identification page', () => {
@@ -76,10 +80,10 @@ context('Current AccountCheckout', () => {
   });
 
   it('Should click Next in checkout', () => {
-    buttons.clickContinueButton();
+    clickContinueButton();
   });
 
   it('Check order confirmation', () => {
-    orderConfirmationPage.checkOrderConfirmationBanking();
+    checkOrderConfirmationBanking();
   });
 });

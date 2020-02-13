@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ClaimDataService } from '../../../core/my-account/services/claim/claim-data.service';
+import { ClaimDataService } from '../../../core/my-account/services/claim-data.service';
 import { genericIcons } from '../../../assets/icons/generic-icons';
 
 @Component({

@@ -7,7 +7,7 @@ import {
 } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/fs-checkout-config.service';
-import { FSCheckoutService } from '../../../../core/checkout/services/fs-checkout.service';
+import { FSCheckoutService } from '../../../../core/checkout/facade/fs-checkout.service';
 
 @Component({
   selector: 'fsa-final-review',
@@ -20,11 +20,11 @@ export class FinalReviewComponent implements OnInit {
   goToQuoteReview = new EventEmitter<any>();
   tAndCToggler = false;
   constructor(
-    private checkoutService: FSCheckoutService,
-    private checkoutPaymentService: CheckoutPaymentService,
-    private routingService: RoutingService,
-    private checkoutConfigService: FSCheckoutConfigService,
-    private activatedRoute: ActivatedRoute
+    protected checkoutService: FSCheckoutService,
+    protected checkoutPaymentService: CheckoutPaymentService,
+    protected routingService: RoutingService,
+    protected checkoutConfigService: FSCheckoutConfigService,
+    protected activatedRoute: ActivatedRoute
   ) {}
 
   checkoutStepUrlNext: string;
