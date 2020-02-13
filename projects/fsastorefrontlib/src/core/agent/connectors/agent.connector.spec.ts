@@ -19,6 +19,9 @@ class MockAgentAdapter implements AgentAdapter {
   getAgentByID(id: string): Observable<any> {
     return of();
   }
+  createCsTicketForAgent(agentId: string, userId: string, ticketData: any): Observable<any> {
+    return of();
+  }
 }
 
 const searchQuery = 'q=Indirra+Duffy';
@@ -27,7 +30,11 @@ const geoPoint = {
   latitude: 1.432,
   longitude: 3.5432,
 };
-
+const ticketData = {
+  message: 'test message',
+  subject: 'test subject',
+  ticketCategory: 'PROBLEM'
+};
 const agentID = 'test@agent.com';
 const agentCategory = 'auto';
 const agentResultsQueryBy = {
@@ -111,5 +118,17 @@ describe('AgentConnector', () => {
       .subscribe(value => (results = value))
       .unsubscribe();
     expect(results).toEqual(agentResultsQueryBy);
+  });
+
+  it('should call adapter to create customer support ticket', () => {
+    spyOn(agentAdapter, 'createCsTicketForAgent').and.returnValue(
+      of(ticketData)
+    );
+    let results;
+    agentConnector
+      .createCsTicketForAgent(agentID, 'current', ticketData)
+      .subscribe(value => (results = value))
+      .unsubscribe();
+    expect(results).toEqual(ticketData);
   });
 });

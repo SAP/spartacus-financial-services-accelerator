@@ -1,3 +1,4 @@
+import { OccFsCsTicketAdapter } from './adapters/cs-ticket/occ-cs-ticket.adapter';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -23,6 +24,7 @@ import { QuoteAdapter } from '../core/my-account/connectors/quote.adapter';
 import { OccQuoteAdapter } from './adapters/quote/occ-quote.adapter';
 import { UserRequestAdapter } from '../core/user-request/connectors';
 import { OccUserRequestAdapter } from './adapters/user-request/occ-user-request.adapter';
+import { FSCsTicketAdapter } from '../core';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
@@ -70,6 +72,10 @@ import { OccUserRequestAdapter } from './adapters/user-request/occ-user-request.
     {
       provide: UserRequestAdapter,
       useClass: OccUserRequestAdapter,
+    },
+    {
+      provide: FSCsTicketAdapter,
+      useClass: OccFsCsTicketAdapter,
     },
     { provide: OccConfig, useExisting: Config },
   ],
