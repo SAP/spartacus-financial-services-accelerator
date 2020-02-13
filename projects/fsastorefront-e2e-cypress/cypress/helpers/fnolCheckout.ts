@@ -1,8 +1,4 @@
-import {
-  waitForPage,
-  waitForUserAssets,
-  waitForFlexComponent,
-} from './generalHelpers';
+import { waitForPage, waitForUserAssets } from './generalHelpers';
 
 export function getClaimIdFromLocalStorage() {
   const localData = JSON.parse(localStorage.getItem('spartacus-local-data'));
@@ -186,7 +182,6 @@ export function deleteClaimFromDialog(claimId) {
 }
 
 export function checkClaimsPage() {
-  const myClaims = waitForPage('my-claims', 'myClaims');
   cy.selectOptionFromDropdown({
     menuOption: 'My Account',
     dropdownItem: 'Claims',
