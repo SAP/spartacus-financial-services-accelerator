@@ -12,11 +12,7 @@ export class OccFsCsTicketAdapter implements FSCsTicketAdapter {
     protected occEndpointService: OccEndpointsService
   ) {}
 
-  createCsTicketForAgent(
-    agentId: string,
-    userId: string,
-    ticketData: any
-  ) {
+  createCsTicketForAgent(agentId: string, userId: string, ticketData: any) {
     const url = this.getCreateCsTicketEndpoint(userId);
 
     let params = new HttpParams({});
@@ -45,5 +41,4 @@ export class OccFsCsTicketAdapter implements FSCsTicketAdapter {
     const createTicketEndpoint = '/users/' + userId + '/csTickets';
     return this.occEndpointService.getBaseEndpoint() + createTicketEndpoint;
   }
-
 }

@@ -6,14 +6,18 @@ import { Type } from '@angular/core';
 import { FSCsTicketAdapter } from './cs-ticket.adapter';
 
 class MockCsTicketAdapter implements FSCsTicketAdapter {
-  createCsTicketForAgent(agentId: string, userId: string, ticketBody: any): Observable<any> {
+  createCsTicketForAgent(
+    agentId: string,
+    userId: string,
+    ticketBody: any
+  ): Observable<any> {
     return of();
   }
 }
 const ticketData = {
   message: 'test message',
   subject: 'test subject',
-  ticketCategory: 'PROBLEM'
+  ticketCategory: 'PROBLEM',
 };
 const agentID = 'test@agent.com';
 
@@ -23,10 +27,14 @@ describe('FSCsTicketConnector', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [{ provide: FSCsTicketAdapter, useClass: MockCsTicketAdapter }],
+      providers: [
+        { provide: FSCsTicketAdapter, useClass: MockCsTicketAdapter },
+      ],
     });
 
-    csTicketConnector = TestBed.get(FSCsTicketConnector as Type<FSCsTicketConnector>);
+    csTicketConnector = TestBed.get(FSCsTicketConnector as Type<
+      FSCsTicketConnector
+    >);
     csTicketAdapter = TestBed.get(FSCsTicketAdapter as Type<FSCsTicketAdapter>);
   });
 

@@ -3,7 +3,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { I18nTestingModule, UserService, GlobalMessageService, RoutingService } from '@spartacus/core';
+import {
+  I18nTestingModule,
+  UserService,
+  GlobalMessageService,
+  RoutingService,
+} from '@spartacus/core';
 import { FSCsTicketService } from './../../../core/cs-ticket/facade/cs-ticket.service';
 import { of } from 'rxjs';
 
@@ -20,7 +25,7 @@ const agentParams = 'agent@test.com';
 const ticketData = {
   interest: 'INCIDENT',
   contactType: 'EMAIL',
-  subject: 'Ticket subject'
+  subject: 'Ticket subject',
 };
 const mockAgentSearchService = {
   getAgentByID: jasmine.createSpy().and.returnValue(of({})),
@@ -30,9 +35,8 @@ const mockContactAgentForm: any = {
   interest: 'PROBLEM',
   contactType: 'CALL',
   subject: 'The Subject',
-  message: 'Test message'
+  message: 'Test message',
 };
-
 
 let mockParams = {
   agentParams: agentParams,
@@ -157,18 +161,22 @@ describe('ContactAgentFormComponent', () => {
     it('should return contact agent data', () => {
       const form = mockContactAgentForm;
 
-      expect(component.collectDataFromContactAgentForm(mockContactAgentForm)).toEqual({
+      expect(
+        component.collectDataFromContactAgentForm(mockContactAgentForm)
+      ).toEqual({
         email: form.email,
         interest: form.interest,
         contactType: form.contactType,
         subject: form.subject,
-        message: form.message
+        message: form.message,
       });
     });
   });
 
   it('should submit form', () => {
-    spyOn(mockedCsTicketService, 'createCsTicketForAgent').and.returnValue(of(ticketData));
+    spyOn(mockedCsTicketService, 'createCsTicketForAgent').and.returnValue(
+      of(ticketData)
+    );
     component.ngOnInit();
     component.submit();
   });

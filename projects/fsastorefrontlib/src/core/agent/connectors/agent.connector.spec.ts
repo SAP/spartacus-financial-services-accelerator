@@ -111,5 +111,4 @@ describe('AgentConnector', () => {
       .unsubscribe();
     expect(results).toEqual(agentResultsQueryBy);
   });
-
 });

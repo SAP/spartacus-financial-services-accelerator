@@ -5,9 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class FSCsTicketService {
-  constructor(
-    protected ticketConnector: FSCsTicketConnector,
-  ) {}
+  constructor(protected ticketConnector: FSCsTicketConnector) {}
 
   createCsTicketForAgent(agentId: string, userId: string, ticketData: any) {
     return this.ticketConnector.createCsTicketForAgent(
@@ -16,5 +14,4 @@ export class FSCsTicketService {
       ticketData
     );
   }
-
 }

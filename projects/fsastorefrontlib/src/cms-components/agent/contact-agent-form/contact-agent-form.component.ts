@@ -7,7 +7,13 @@ import {
 import { ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
-import { UserService, RoutingService, GlobalMessageService, OCC_USER_ID_ANONYMOUS, GlobalMessageType } from '@spartacus/core';
+import {
+  UserService,
+  RoutingService,
+  GlobalMessageService,
+  OCC_USER_ID_ANONYMOUS,
+  GlobalMessageType,
+} from '@spartacus/core';
 import { DefaultFormValidators } from '@fsa/dynamicforms';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { FSCsTicketService } from './../../../core/cs-ticket/facade/cs-ticket.service';
@@ -26,7 +32,7 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
     protected globalMessageService: GlobalMessageService,
     protected router: RoutingService,
     protected csTicketService: FSCsTicketService
-  ) { }
+  ) {}
 
   private subscription = new Subscription();
 
@@ -84,8 +90,8 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
   }
 
   submit(): void {
-    this.subscription
-      .add(this.csTicketService
+    this.subscription.add(
+      this.csTicketService
         .createCsTicketForAgent(
           this.agentId,
           this.userId,
@@ -99,7 +105,8 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
               GlobalMessageType.MSG_TYPE_CONFIRMATION
             );
           }
-        }));
+        })
+    );
   }
 
   ngOnDestroy() {
