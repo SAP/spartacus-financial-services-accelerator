@@ -10,40 +10,6 @@
           <div class="form-group">
             <label>
               <span class="label-content">{{
-                'register.firstName.label' | cxTranslate
-              }}</span>
-              <input
-                class="form-control"
-                type="text"
-                name="firstname"
-                placeholder="{{
-                  'register.firstName.placeholder' | cxTranslate
-                }}"
-                formControlName="firstName"
-              />
-            </label>
-          </div>
-
-          <div class="form-group">
-            <label>
-              <span class="label-content">{{
-                'register.lastName.label' | cxTranslate
-              }}</span>
-              <input
-                class="form-control"
-                type="text"
-                name="lastname"
-                placeholder="{{
-                  'register.lastName.placeholder' | cxTranslate
-                }}"
-                formControlName="lastName"
-              />
-            </label>
-          </div>
-
-          <div class="form-group">
-            <label>
-              <span class="label-content">{{
                 'register.emailAddress.label' | cxTranslate
               }}</span>
               <input
@@ -64,49 +30,63 @@
           <div class="form-group">
             <label>
               <span class="label-content">{{
-                'forms.phoneNumber.label' | cxTranslate
-              }}</span>
-              <input
-                class="form-control"
-                type="text"
-                name="phoneNumber"
-                placeholder="{{ 'forms.phoneNumber.label' | cxTranslate }}"
-                formControlName="phoneNumber"
-              />
-            </label>
-          </div>
-          <div class="form-group">
-            <label>
-              <span class="label-content">{{
-                'forms.interest' | cxTranslate
+                'forms.interest.title' | cxTranslate
               }}</span>
               <select formControlName="interest" class="form-control">
                 <option selected value="" disabled>{{
                   'fscommon.pleaseSelect' | cxTranslate
                 }}</option>
-                <option>Problem</option>
-                <option>Incident</option>
-                <option>Complaint</option>
-                <option>Fraud</option>
-                <option>Note</option>
-                <option>Enquiry</option>
+                <option value="PROBLEM">{{
+                  'forms.interest.problem' | cxTranslate
+                }}</option>
+                <option value="INCIDENT">{{
+                  'forms.interest.incident' | cxTranslate
+                }}</option>
+                <option value="COMPLAINT">{{
+                  'forms.interest.complaint' | cxTranslate
+                }}</option>
+                <option value="FRAUD">{{
+                  'forms.interest.fraud' | cxTranslate
+                }}</option>
+                <option value="NOTE">{{
+                  'forms.interest.note' | cxTranslate
+                }}</option>
+                <option value="ENQUIRY">{{
+                  'forms.interest.enquiry' | cxTranslate
+                }}</option>
               </select>
             </label>
           </div>
           <div class="form-group">
             <label>
               <span class="label-content">{{
-                'forms.contactType' | cxTranslate
+                'forms.contactType.title' | cxTranslate
               }}</span>
               <select formControlName="contactType" class="form-control">
                 <option selected value="" disabled>{{
                   'fscommon.pleaseSelect' | cxTranslate
                 }}</option>
-                <option>Email</option>
-                <option>Telephone Call</option>
-                <option>Instant message</option>
-                <option>Ticket Message</option>
+                <option value="EMAIL">{{
+                  'forms.contactType.email' | cxTranslate
+                }}</option>
+                <option value="CALL">{{
+                  'forms.contactType.call' | cxTranslate
+                }}</option>
               </select>
+            </label>
+          </div>
+          <div class="form-group">
+            <label>
+              <span class="label-content">{{
+                'forms.subject' | cxTranslate
+              }}</span>
+              <input
+                class="form-control"
+                type="text"
+                name="subject"
+                placeholder="{{ 'forms.subject' | cxTranslate }}"
+                formControlName="subject"
+              />
             </label>
           </div>
           <div class="form-group">
@@ -125,6 +105,7 @@
           </div>
           <button
             type="submit"
+            (click)="submit()"
             [disabled]="contactAgentForm.invalid"
             class="btn btn-block btn-primary"
           >

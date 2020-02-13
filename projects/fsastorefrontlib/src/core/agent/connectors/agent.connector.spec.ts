@@ -27,7 +27,6 @@ const geoPoint = {
   latitude: 1.432,
   longitude: 3.5432,
 };
-
 const agentID = 'test@agent.com';
 const agentCategory = 'auto';
 const agentResultsQueryBy = {
