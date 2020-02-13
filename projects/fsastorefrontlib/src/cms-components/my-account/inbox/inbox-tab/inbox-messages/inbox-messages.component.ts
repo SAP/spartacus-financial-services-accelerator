@@ -18,7 +18,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InboxMessagesComponent implements OnInit, OnDestroy {
-  constructor(private inboxService: InboxService) {}
+  constructor(protected inboxService: InboxService) {}
 
   private subscription: Subscription = new Subscription();
   messagesObject$: Observable<any>;

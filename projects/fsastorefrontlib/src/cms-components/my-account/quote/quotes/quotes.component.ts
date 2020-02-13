@@ -10,7 +10,7 @@ import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 })
 export class QuotesComponent implements OnInit {
   constructor(
-    private config: OccConfig,
+    protected config: OccConfig,
     protected quoteService: QuoteService,
     protected routingService: RoutingService
   ) {}

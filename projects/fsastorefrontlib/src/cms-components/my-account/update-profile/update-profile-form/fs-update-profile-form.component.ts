@@ -26,7 +26,7 @@ export class FSUpdateProfileFormComponent extends UpdateProfileFormComponent
     }),
   });
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(protected formBuilder: FormBuilder) {
     super(formBuilder);
   }
 

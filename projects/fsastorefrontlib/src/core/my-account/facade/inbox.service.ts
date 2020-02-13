@@ -7,7 +7,7 @@ import { InboxConnector } from '../connectors/inbox.connector';
 @Injectable()
 export class InboxService {
   constructor(
-    private inboxData: InboxDataService,
+    protected inboxData: InboxDataService,
     protected adapter: InboxConnector
   ) {}
 

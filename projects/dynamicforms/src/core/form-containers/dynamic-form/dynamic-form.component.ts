@@ -47,8 +47,8 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private formService: FormBuilderService,
-    private formDataService: FormDataService,
+    protected formService: FormBuilderService,
+    protected formDataService: FormDataService,
     public formConfig: FormConfig
   ) {}
 
