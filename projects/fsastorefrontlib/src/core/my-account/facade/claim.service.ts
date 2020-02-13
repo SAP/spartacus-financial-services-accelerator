@@ -34,6 +34,14 @@ export class ClaimService {
     return this.store.pipe(select(fromClaimStore.getClaimContent));
   }
 
+  getClaimPolicies(): Observable<any> {
+    return this.store.pipe(select(fromClaimStore.getClaimPoliciesState));
+  }
+
+  getClaimPoliciesLoaded(): Observable<any> {
+    return this.store.pipe(select(fromClaimStore.getClaimPoliciesLoaded));
+  }
+
   loadClaims() {
     this.store.dispatch(
       new fromAction.LoadClaims({
