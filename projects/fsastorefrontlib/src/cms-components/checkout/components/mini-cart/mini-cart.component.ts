@@ -1,4 +1,4 @@
-import { FSCartService } from '../../../../core/checkout/services';
+import { FSCartService } from './../../../../core/cart/facade/fs-cart.service';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Cart } from '@spartacus/core';
 import { Observable } from 'rxjs';

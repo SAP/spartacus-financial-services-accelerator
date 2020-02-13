@@ -1,4 +1,4 @@
-import { FSCartService } from '../../../../core/checkout/services';
+import { FSCartService } from './../../../../core/cart/facade/fs-cart.service';
 import { filter, tap } from 'rxjs/operators';
 import {
   FSCart,

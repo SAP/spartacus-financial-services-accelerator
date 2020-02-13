@@ -1,3 +1,4 @@
+import { FSCartService } from './../../../core/cart/facade/fs-cart.service';
 import { Injectable, OnDestroy } from '@angular/core';
 import { CanActivate, Router, UrlTree } from '@angular/router';
 import {
@@ -8,7 +9,6 @@ import { Observable, of, Subscription } from 'rxjs';
 import { FSCheckoutStep } from '../components/checkout-progress/fs-checkout-step.component';
 import {
   FSCheckoutConfigService,
-  FSCartService,
 } from '../../../core/checkout/services';
 import { FSProduct } from '../../../occ/occ-models';
 import { take } from 'rxjs/operators';

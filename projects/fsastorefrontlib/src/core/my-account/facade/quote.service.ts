@@ -4,7 +4,6 @@ import { Store, select } from '@ngrx/store';
 import {
   AuthService,
   CartActions,
-  CartService,
   OrderEntry,
 } from '@spartacus/core';
 import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';

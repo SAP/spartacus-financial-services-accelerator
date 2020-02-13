@@ -1,7 +1,7 @@
+import { FSCartService } from './../../../../../core/cart/facade/fs-cart.service';
 import { Component, OnInit } from '@angular/core';
 import { Cart, CmsConfig } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { FSCartService } from '../../../../../core/checkout/services';
 
 @Component({
   selector: 'fsa-legal-documents',
