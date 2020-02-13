@@ -9,6 +9,14 @@ import {
 } from '@spartacus/core';
 import { YFormData } from '@fsa/dynamicforms';
 
+export interface ContactAgentData {
+  email?: string;
+  interest?: string;
+  contactType?: string;
+  subject?: string;
+  message?: string;
+}
+
 export interface FSProduct extends Product {
   price?: FSPrice;
   cartDispalyName?: string;

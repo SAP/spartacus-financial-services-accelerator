@@ -14,6 +14,16 @@ const policyId = 'PL00001';
 const contractId = 'CT00001';
 const claimId = 'CL00001';
 
+const claimPolicies = {
+  insurancePolicies: [
+    {
+      policyId: policyId,
+      contractId: contractId,
+    },
+  ],
+  loaded: false,
+};
+
 class MockAuthService {
   getOccUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
@@ -95,6 +105,30 @@ describe('ClaimServiceTest', () => {
       })
       .unsubscribe();
     expect(claimsLoaded).toEqual(true);
+  });
+
+  it('should be able to get policies for new claim ', () => {
+    store.dispatch(new fromAction.LoadClaimPoliciesSuccess(claimPolicies));
+    let policiesResponse;
+    service
+      .getClaimPolicies()
+      .subscribe(state => {
+        policiesResponse = state.claimPoliciesData;
+      })
+      .unsubscribe();
+    expect(policiesResponse).toEqual(claimPolicies);
+  });
+
+  it('should be able to get policies for new claim loaded flag', () => {
+    store.dispatch(new fromAction.LoadClaimPoliciesSuccess(claimPolicies));
+    let policiesLoaded;
+    service
+      .getClaimPolicies()
+      .subscribe(state => {
+        policiesLoaded = state.loaded;
+      })
+      .unsubscribe();
+    expect(policiesLoaded).toEqual(true);
   });
 
   it('should be able to get refresh flag to reload claims', () => {
