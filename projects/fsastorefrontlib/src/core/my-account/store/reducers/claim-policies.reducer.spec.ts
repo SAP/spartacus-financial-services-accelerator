@@ -12,10 +12,11 @@ const policies = {
   insurancePolicies: [policy],
 };
 
+const { initialState } = fromReducer;
+
 describe('Claim Policies Reducer', () => {
   describe('undefined action', () => {
     it('should return the default state and not loaded', () => {
-      const { initialState } = fromReducer;
       const action = {} as fromAction.ClaimPoliciesAction;
       const state = fromReducer.reducer(undefined, action);
       expect(state).toBe(initialState);
@@ -26,7 +27,6 @@ describe('Claim Policies Reducer', () => {
 
   describe('LOAD_CLAIM_POLICIES_SUCCESS', () => {
     it('should load policies for which claim can be created', () => {
-      const { initialState } = fromReducer;
       const action = new fromAction.LoadClaimPoliciesSuccess(policies);
       const state = fromReducer.reducer(initialState, action);
       expect(state.claimPoliciesData).toEqual(policies);

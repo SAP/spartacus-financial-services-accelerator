@@ -1,15 +1,15 @@
 import * as fromReducer from '../reducers/claim.reducer';
 import * as fromAction from '../actions';
 
-const claimNumber = '0000001';
 const mockedClaim = {
-  claimNumber: claimNumber,
+  claimNumber: '0000001',
 };
+
+const { initialState } = fromReducer;
 
 describe('Claims Reducer', () => {
   describe('undefined action', () => {
     it('should return the default state', () => {
-      const { initialState } = fromReducer;
       const action = {} as fromAction.ClaimAction;
       const state = fromReducer.reducer(undefined, action);
 
@@ -19,7 +19,6 @@ describe('Claims Reducer', () => {
 
   describe('LOAD_CLAIMS_SUCCESS', () => {
     it('should load claims', () => {
-      const { initialState } = fromReducer;
       const action = new fromAction.LoadClaimsSuccess(mockedClaim);
       const state = fromReducer.reducer(initialState, action);
       expect(state.claims).toEqual(mockedClaim);
@@ -29,7 +28,6 @@ describe('Claims Reducer', () => {
 
   describe('DELETE_CLAIM_SUCESS', () => {
     it('should delete claim and check refresh state', () => {
-      const { initialState } = fromReducer;
       const action = new fromAction.DeleteClaimSuccess();
       const state = fromReducer.reducer(initialState, action);
       expect(state.refresh).toEqual(true);
@@ -38,7 +36,6 @@ describe('Claims Reducer', () => {
 
   describe('DELETE_CLAIM', () => {
     it('should delete claim and check loaded state', () => {
-      const { initialState } = fromReducer;
       const action = new fromAction.DeleteClaim(mockedClaim);
       const state = fromReducer.reducer(initialState, action);
       expect(state.loaded).toEqual(false);
@@ -47,7 +44,6 @@ describe('Claims Reducer', () => {
 
   describe('CREATE_CLAIM_SUCCESS', () => {
     it('should create claim', () => {
-      const { initialState } = fromReducer;
       const action = new fromAction.CreateClaimSuccess(mockedClaim);
       const state = fromReducer.reducer(initialState, action);
       expect(state.content).toEqual(mockedClaim);
@@ -56,7 +52,6 @@ describe('Claims Reducer', () => {
 
     describe('UPDATE_CLAIM_SUCCESS', () => {
       it('should update claim', () => {
-        const { initialState } = fromReducer;
         const action = new fromAction.UpdateClaimSuccess(mockedClaim);
         const state = fromReducer.reducer(initialState, action);
         expect(state.content).toEqual(mockedClaim);
@@ -66,7 +61,6 @@ describe('Claims Reducer', () => {
 
     describe('SUBMIT_CLAIM_SUCCESS', () => {
       it('should update claim', () => {
-        const { initialState } = fromReducer;
         const action = new fromAction.SubmitClaimSuccess(mockedClaim);
         const state = fromReducer.reducer(initialState, action);
         expect(state.content).toEqual(mockedClaim);

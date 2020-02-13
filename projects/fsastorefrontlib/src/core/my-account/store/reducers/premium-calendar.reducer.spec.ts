@@ -1,10 +1,11 @@
 import * as fromReducer from '../reducers/premium-calendar.reducer';
 import * as fromAction from '../actions';
 
+const { initialState } = fromReducer;
+
 describe('Premium Calendar Reducer', () => {
   describe('undefined action', () => {
     it('should return the default state', () => {
-      const { initialState } = fromReducer;
       const action = {} as fromAction.PolicyAction;
       const state = fromReducer.reducer(undefined, action);
 
@@ -19,7 +20,6 @@ describe('Premium Calendar Reducer', () => {
         contractId: 'contractId',
       };
 
-      const { initialState } = fromReducer;
       const action = new fromAction.LoadPremiumCalendarSuccess(premiumCalendar);
       const state = fromReducer.reducer(initialState, action);
       expect(state.data).toEqual(premiumCalendar);
