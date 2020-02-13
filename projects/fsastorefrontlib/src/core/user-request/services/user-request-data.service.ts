@@ -12,7 +12,7 @@ export class UserRequestDataService {
   private _userRequest: FSUserRequest;
 
   constructor(
-    private store: Store<fromReducer.FSUserRequestState>,
+    protected store: Store<fromReducer.FSUserRequestState>,
     protected authService: AuthService
   ) {
     this.authService
