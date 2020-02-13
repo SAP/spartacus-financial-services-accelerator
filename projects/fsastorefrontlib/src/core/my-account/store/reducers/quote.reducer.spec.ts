@@ -3,7 +3,7 @@ import * as fromAction from '../actions';
 
 const { initialState } = fromReducer;
 
-describe('Quotes Reducer', () => {
+describe('Quote Reducer', () => {
   describe('undefined action', () => {
     it('should return the default state', () => {
       const action = {} as fromAction.QuoteAction;

@@ -7,7 +7,7 @@ const mockedClaim = {
 
 const { initialState } = fromReducer;
 
-describe('Claims Reducer', () => {
+describe('Claim Reducer', () => {
   describe('undefined action', () => {
     it('should return the default state', () => {
       const action = {} as fromAction.ClaimAction;

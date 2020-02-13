@@ -8,7 +8,7 @@ const mockedPolicy = {
   contractId: 'contractId',
 };
 
-describe('Quotes Reducer', () => {
+describe('Policy Reducer', () => {
   describe('undefined action', () => {
     it('should return the default state', () => {
       const action = {} as fromAction.PolicyAction;
