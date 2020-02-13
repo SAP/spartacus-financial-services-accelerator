@@ -510,12 +510,12 @@ export class FormSampleConfigurations {
           ],
         },
         {
-          groupCode: 'mainDriver',
+          groupCode: 'main-driver',
           fieldConfigs: [
             {
               type: 'title',
               label: 'Main Driver',
-              name: 'mainDriver',
+              name: 'main-driver',
             },
             {
               type: 'datepicker',
@@ -583,7 +583,7 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: 'Number of Drivers',
-              name: 'numberOfDrivers',
+              name: 'noOfDrivers',
               options: [
                 { name: '0', label: '0' },
                 { name: '1', label: '1' },
