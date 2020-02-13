@@ -45,6 +45,7 @@ context('Travel Insurance Checkout', () => {
     });
 
     it('Check mini cart on quote review page', () => {
+      checkout.checkQuoteReviewAccordions('travel');
       travelCheckout.checkQuoteReview();
     });
 
@@ -53,15 +54,15 @@ context('Travel Insurance Checkout', () => {
     });
 
     it('Place order on final review page', () => {
-      travelCheckout.placeOrderOnFinalReview();
+      checkout.placeOrderOnFinalReview();
     });
 
     it('Check order confirmation', () => {
-      travelCheckout.checkOrderConfirmation();
+      checkout.checkOrderConfirmation();
     });
 
     it('Check my policies page', () => {
-      travelCheckout.checkMyPoliciesPage();
+      checkout.checkMyPoliciesPage();
       cy.get('.info-card-caption').contains('Travel Insurance');
     });
   });

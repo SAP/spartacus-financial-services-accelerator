@@ -10,8 +10,8 @@ import {
   bindQuotePopup,
   checkOrderConfirmationBanking,
   clickContinueButton,
+  checkQuoteReviewAccordions,
 } from '../../../helpers/checkout/checkoutSteps';
-import { checkTravelQuoteReviewPage } from '../../../helpers/checkout/insurance/travel-checkout';
 
 context('Current Account Checkout', () => {
   before(() => {
@@ -55,7 +55,8 @@ context('Current Account Checkout', () => {
   });
 
   it('Should check Quote Review page', () => {
-    checkTravelQuoteReviewPage();
+    cy.get('.progress-inner-wrapper').should('have.length', 5);
+    checkQuoteReviewAccordions('currentAccount');
   });
 
   it('Should bind Insurance Quote', () => {

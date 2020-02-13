@@ -4,7 +4,10 @@ import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
 import * as travelCheckout from '../../../helpers/checkout/insurance/travel-checkout';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import { clickContinueButton } from '../../../helpers/checkout/checkoutSteps';
+import {
+  clickContinueButton,
+  checkQuoteReviewAccordions,
+} from '../../../helpers/checkout/checkoutSteps';
 import {
   addPaymentMethod,
   selectPaymentMethod,
@@ -21,8 +24,10 @@ context('Life Insurance Checkout', () => {
         menuOption: 'Insurance',
         dropdownItem: 'Life',
       });
+      cy.wait(1000);
       cy.get('.enriched-banner-styled-text')
-        .contains('Get a Quote')
+        .eq(0)
+        .contains(' Get a Quote')
         .click();
     });
 
@@ -64,7 +69,7 @@ context('Life Insurance Checkout', () => {
     it('Should check quote review page', () => {
       checkout.checkProgressBarInsurance();
       checkMiniCartLifeBasic();
-      checkout.checkQuoteReviewAccordions();
+      checkout.checkQuoteReviewAccordions('life');
       clickContinueButton();
       checkout.ConfirmBindQuote();
     });
@@ -74,15 +79,15 @@ context('Life Insurance Checkout', () => {
     });
 
     it('Place order on final review page', () => {
-      travelCheckout.placeOrderOnFinalReview();
+      checkout.placeOrderOnFinalReview();
     });
 
     it('Check order confirmation', () => {
-      travelCheckout.checkOrderConfirmation();
+      checkout.checkOrderConfirmation();
     });
 
     it('Check my policies page', () => {
-      travelCheckout.checkMyPoliciesPage();
+      checkout.checkMyPoliciesPage();
       cy.get('.info-card-caption').contains('Life Insurance');
     });
   });

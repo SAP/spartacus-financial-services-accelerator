@@ -1,3 +1,5 @@
+import { quoteReviewAccordions } from './accordions';
+
 export function checkProgressBarInsurance() {
   cy.get('.d-flex.progress-node').should('have.length', 7);
   cy.get('.heading-headline').should('have.text', ' Your Life Insurance ');
@@ -15,22 +17,6 @@ export function populatePersonalDetailsPage() {
     cy.get('[name="postcode"]').type('111111');
     cy.get('[name=country]').select('Serbia');
   });
-}
-
-export function checkQuoteReviewAccordions() {
-  cy.get('fsa-accordion-item')
-    .should('have.length', 4)
-    .eq(0)
-    .should('contain', 'General Details');
-  cy.get('.accordion-heading')
-    .eq(1)
-    .should('contain', "What's Included");
-  cy.get('.accordion-heading')
-    .eq(2)
-    .should('contain', 'Added by you');
-  cy.get('.accordion-heading')
-    .eq(3)
-    .should('contain', 'Personal Details');
 }
 
 export function ConfirmBindQuote() {
@@ -72,5 +58,49 @@ export function checkOrderConfirmationBanking() {
     cy.get('h5')
       .eq(0)
       .should('have.text', ' Thank you for your order! ');
+  });
+}
+
+export function checkQuoteReviewAccordions(category) {
+  const accordion_item = 'fsa-accordion-item';
+  const accordion = quoteReviewAccordions.accordions.find(
+    acc => acc.category === category
+  );
+  cy.get(accordion_item).should('have.length', accordion.accordionItems.length);
+  cy.get(accordion_item).each((item, index) => {
+    cy.get(accordion_item)
+      .eq(index)
+      .within(() => {
+        cy.get('.accordion-heading').should(
+          'contain',
+          accordion.accordionItems[index]
+        );
+      });
+  });
+}
+
+export function placeOrderOnFinalReview() {
+  cy.wait(5000);
+  cy.get('fsa-final-review').within(() => {
+    cy.get('.form-check-input').click();
+    cy.get('.primary-button').click();
+  });
+}
+
+export function checkOrderConfirmation() {
+  cy.get('fsa-order-confirmation-message').within(() => {
+    cy.get('h5')
+      .eq(0)
+      .should('have.text', ' Thank you for your order! ');
+  });
+}
+
+export function checkMyPoliciesPage() {
+  cy.selectOptionFromDropdown({
+    menuOption: 'My Account',
+    dropdownItem: 'Policies',
+  });
+  cy.get('fsa-policies').within(() => {
+    cy.get('.info-card').should('have.length', 1);
   });
 }
