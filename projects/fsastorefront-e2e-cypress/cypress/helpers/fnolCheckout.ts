@@ -1,5 +1,4 @@
 import { waitForPage } from './generalHelpers';
-import { waitForUserAssets } from './generalHelpers';
 
 export function getClaimIdFromLocalStorage() {
   const localData = JSON.parse(localStorage.getItem('spartacus-local-data'));
@@ -194,18 +193,6 @@ export function checkClaimsPage() {
 }
 
 export function checkAndResumeSpecificClaim(claimId) {
-  // const claims = waitForUserAssets(
-  //   'claims?fields=FULL&lang=en&curr=EUR',
-  //   'claims'
-  // );
-  cy.server();
-  cy.route(
-    'GET',
-    `/rest/v2/financial/users/*/claims?fields=FULL&lang=en&curr=EUR`
-  ).as('claims');
-  cy.wait('@claims')
-    .its('status')
-    .should('eq', 200);
   cy.contains('.info-card', claimId).within(() => {
     this.checkOpenClaimContent();
     cy.get('.secondary-button')
