@@ -1,4 +1,8 @@
-import { waitForPage } from './generalHelpers';
+import {
+  waitForPage,
+  waitForUserAssets,
+  waitForFlexComponent,
+} from './generalHelpers';
 
 export function getClaimIdFromLocalStorage() {
   const localData = JSON.parse(localStorage.getItem('spartacus-local-data'));
@@ -155,8 +159,9 @@ export function startClaimFromHomepage() {
 export function checkFnolEntryPage() {
   cy.get('.heading-headline').contains('Make a Claim Online');
   cy.get('.section-header-heading').contains('Which car has been damaged?');
-  cy.get('fsa-claim-policies').should('be.visible');
-  cy.get('fsa-cms-custom-container').should('be.visible');
+  cy.get('fsa-cms-custom-container').within(() => {
+    cy.get('.cx-payment-card-inner').should('be.visible');
+  });
 }
 
 export function selectPolicyOnEntryPage() {
@@ -186,13 +191,13 @@ export function checkClaimsPage() {
     menuOption: 'My Account',
     dropdownItem: 'Claims',
   });
-  cy.wait(`@${myClaims}`)
-    .its('status')
-    .should('eq', 200);
-  cy.get('.heading-headline').contains('Claims');
 }
 
 export function checkAndResumeSpecificClaim(claimId) {
+  const claims = waitForUserAssets('claims', 'claims');
+  cy.wait(`@${claims}`)
+    .its('status')
+    .should('eq', 200);
   cy.contains('.info-card', claimId).within(() => {
     this.checkOpenClaimContent();
     cy.get('.secondary-button')
