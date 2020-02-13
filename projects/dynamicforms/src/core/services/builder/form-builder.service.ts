@@ -4,7 +4,7 @@ import { FieldConfig } from '../../models';
 
 @Injectable()
 export class FormBuilderService {
-  constructor(private fb: FormBuilder) {}
+  constructor(protected fb: FormBuilder) {}
 
   createForm(config) {
     const form = this.fb.group({});

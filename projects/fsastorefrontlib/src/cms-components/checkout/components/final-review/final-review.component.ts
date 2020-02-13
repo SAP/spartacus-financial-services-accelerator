@@ -20,11 +20,11 @@ export class FinalReviewComponent implements OnInit {
   goToQuoteReview = new EventEmitter<any>();
   tAndCToggler = false;
   constructor(
-    private checkoutService: FSCheckoutService,
-    private checkoutPaymentService: CheckoutPaymentService,
-    private routingService: RoutingService,
-    private checkoutConfigService: FSCheckoutConfigService,
-    private activatedRoute: ActivatedRoute
+    protected checkoutService: FSCheckoutService,
+    protected checkoutPaymentService: CheckoutPaymentService,
+    protected routingService: RoutingService,
+    protected checkoutConfigService: FSCheckoutConfigService,
+    protected activatedRoute: ActivatedRoute
   ) {}
 
   checkoutStepUrlNext: string;
