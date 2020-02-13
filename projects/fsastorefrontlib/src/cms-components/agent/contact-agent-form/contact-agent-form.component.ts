@@ -17,6 +17,7 @@ import {
 import { DefaultFormValidators } from '@fsa/dynamicforms';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { FSCsTicketService } from './../../../core/cs-ticket/facade/cs-ticket.service';
+import { ContactAgentData } from 'projects/fsastorefrontlib/src/occ/occ-models';
 
 @Component({
   selector: 'fsa-contact-agent-form',
@@ -78,7 +79,7 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  collectDataFromContactAgentForm(formData: any) {
+  collectDataFromContactAgentForm(formData: any): ContactAgentData {
     const { email, interest, contactType, subject, message } = formData;
     return {
       email,

@@ -20,12 +20,12 @@ export const forms = {
     enterMessage: '[DE] Your message',
     interest: {
       title: '[DE] Interest',
-      problem: '[DE]Problem',
-      incident: '[DE]Incident',
-      complaint: '[DE]Complaint',
-      fraud: '[DE]Fraud',
-      note: '[DE]Note',
-      enquiry: '[DE]Enquiry',
+      problem: '[DE] Problem',
+      incident: '[DE] Incident',
+      complaint: '[DE] Complaint',
+      fraud: '[DE] Fraud',
+      note: '[DE] Note',
+      enquiry: '[DE] Enquiry',
     },
     contactType: {
       title: '[DE]Contact type',

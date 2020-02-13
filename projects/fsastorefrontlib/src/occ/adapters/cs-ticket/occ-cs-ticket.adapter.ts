@@ -4,6 +4,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { FSCsTicketAdapter } from '../../../../src/core';
+import { ContactAgentData } from '../../occ-models';
 
 @Injectable()
 export class OccFsCsTicketAdapter implements FSCsTicketAdapter {
@@ -12,7 +13,11 @@ export class OccFsCsTicketAdapter implements FSCsTicketAdapter {
     protected occEndpointService: OccEndpointsService
   ) {}
 
-  createCsTicketForAgent(agentId: string, userId: string, ticketData: any) {
+  createCsTicketForAgent(
+    agentId: string,
+    userId: string,
+    ticketData: ContactAgentData
+  ) {
     const url = this.getCreateCsTicketEndpoint(userId);
 
     let params = new HttpParams({});
@@ -26,7 +31,7 @@ export class OccFsCsTicketAdapter implements FSCsTicketAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  protected createCsTicketBody(ticketData: any, ticketBody: any) {
+  protected createCsTicketBody(ticketData: ContactAgentData, ticketBody: any) {
     ticketBody = {
       primaryContactEmail: ticketData.email,
       subject: ticketData.subject,

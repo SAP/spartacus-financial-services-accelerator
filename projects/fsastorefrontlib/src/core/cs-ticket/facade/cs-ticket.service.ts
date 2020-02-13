@@ -1,5 +1,6 @@
 import { FSCsTicketConnector } from './../connectors/cs-ticket.connector';
 import { Injectable } from '@angular/core';
+import { ContactAgentData } from '../../../../src/occ/occ-models';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +8,11 @@ import { Injectable } from '@angular/core';
 export class FSCsTicketService {
   constructor(protected ticketConnector: FSCsTicketConnector) {}
 
-  createCsTicketForAgent(agentId: string, userId: string, ticketData: any) {
+  createCsTicketForAgent(
+    agentId: string,
+    userId: string,
+    ticketData: ContactAgentData
+  ) {
     return this.ticketConnector.createCsTicketForAgent(
       agentId,
       userId,

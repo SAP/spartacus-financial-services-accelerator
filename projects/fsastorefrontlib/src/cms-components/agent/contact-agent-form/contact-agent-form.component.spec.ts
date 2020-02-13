@@ -77,10 +77,12 @@ describe('ContactAgentFormComponent', () => {
   let mockedCsTicketService: MockCsTicketService;
   let mockSearchService: AgentSearchService;
   let globalMessageService: GlobalMessageService;
+  let mockRoutingService: MockRoutingService;
 
   beforeEach(async(() => {
     mockedUserService = new MockedUserService();
     mockedCsTicketService = new MockCsTicketService();
+    mockRoutingService = new MockRoutingService();
     TestBed.configureTestingModule({
       declarations: [ContactAgentFormComponent, MockUrlPipe],
       imports: [I18nTestingModule, RouterTestingModule, ReactiveFormsModule],
@@ -124,6 +126,7 @@ describe('ContactAgentFormComponent', () => {
     mockedCsTicketService = TestBed.get(FSCsTicketService as Type<
       FSCsTicketService
     >);
+    mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
   });
 
   it('should create', () => {
@@ -179,5 +182,6 @@ describe('ContactAgentFormComponent', () => {
     );
     component.ngOnInit();
     component.submit();
+    expect(mockRoutingService.go).toHaveBeenCalled();
   });
 });
