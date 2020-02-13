@@ -558,7 +558,6 @@ export class FormSampleConfigurations {
                   name: 'Main',
                 },
               ],
-              disabled: true,
             },
             {
               type: 'datepicker',
