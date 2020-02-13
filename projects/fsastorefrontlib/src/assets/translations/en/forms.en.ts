@@ -32,7 +32,7 @@ export const forms = {
         'Phone number should be between minimum 6 characters and maximum 20',
     },
     interest: {
-      title: 'interest',
+      title: 'Interest',
       problem: 'Problem',
       incident: 'Incident',
       complaint: 'Complaint',
