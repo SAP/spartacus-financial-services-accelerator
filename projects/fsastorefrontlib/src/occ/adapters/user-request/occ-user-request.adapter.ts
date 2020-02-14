@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
@@ -37,6 +37,19 @@ export class OccUserRequestAdapter implements UserRequestAdapter {
     const url = this.getUserRequestEndpoint(userId, requestId);
     return this.http
       .patch(url, stepData, {})
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+  submitUserRequest(userId: string, requestId: string): Observable<any> {
+    const url = this.getUserRequestEndpoint(userId, requestId) + '/action';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    const submitUserRequestAction = {
+      actionName: 'SUBMIT',
+    };
+    return this.http
+      .post(url, submitUserRequestAction, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 }

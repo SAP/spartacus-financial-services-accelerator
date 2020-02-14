@@ -14,8 +14,14 @@ class MockUserRequestAdapter implements UserRequestAdapter {
   ).and.callFake((userId, requestId, stepData) =>
     of('updateUserRequest' + userId + requestId + stepData)
   );
+  submitUserRequest = createSpy(
+    'UserRequestAdapter.submitUserRequest'
+  ).and.callFake((userId, requestId) =>
+    of('submitUserRequest' + userId + requestId)
+  );
 }
 const user = 'user';
+const requestId = 'requestId';
 
 describe('UserRequestConnector', () => {
   let userRequestConnector: UserRequestConnector;
@@ -40,18 +46,25 @@ describe('UserRequestConnector', () => {
     expect(userRequestConnector).toBeTruthy();
   });
   it('should call adapter for getUserRequest', () => {
-    userRequestConnector.getUserRequest(user, 'requestId');
+    userRequestConnector.getUserRequest(user, requestId);
     expect(userRequestAdapter.getUserRequest).toHaveBeenCalledWith(
       user,
-      'requestId'
+      requestId
     );
   });
   it('should call adapter for updateUserRequest', () => {
-    userRequestConnector.updateUserRequest(user, 'requestId', {});
+    userRequestConnector.updateUserRequest(user, requestId, {});
     expect(userRequestAdapter.updateUserRequest).toHaveBeenCalledWith(
       user,
-      'requestId',
+      requestId,
       {}
+    );
+  });
+  it('should call adapter for submitUserRequest', () => {
+    userRequestConnector.getUserRequest(user, requestId);
+    expect(userRequestAdapter.getUserRequest).toHaveBeenCalledWith(
+      user,
+      requestId
     );
   });
 });

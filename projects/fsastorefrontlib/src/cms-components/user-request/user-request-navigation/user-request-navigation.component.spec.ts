@@ -11,7 +11,6 @@ import { UserRequestService } from '../../../core/user-request/facade/user-reque
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
 import { ActivatedRoute } from '@angular/router';
-import { ClaimDataService } from '../../../core/my-account/services';
 import { ClaimService } from '../../../core/my-account/facade';
 import { FormDataService } from '@fsa/dynamicforms';
 import { UserRequestDataService } from '../../../core/user-request/services';
@@ -88,10 +87,6 @@ describe('UserRequestNavigationComponent', () => {
         {
           provide: ClaimService,
           useValue: mockClaimService,
-        },
-        {
-          provide: ClaimDataService,
-          useValue: ClaimDataService,
         },
         {
           provide: UserRequestDataService,

@@ -84,6 +84,18 @@ export class UserRequestService {
     return this.store.select(UserRequestSelector.getUserRequestContent);
   }
 
+  submitUserRequest(
+    userId: string,
+    requestId: string
+  ): Observable<FSUserRequest> {
+    this.store.dispatch(
+      new fromAction.SubmitUserRequest({
+        userId: userId,
+        requestId: requestId,
+      })
+    );
+    return this.store.select(UserRequestSelector.getUserRequestContent);
+  }
   private areConfigurationStepsCreated(userRequest: FSUserRequest): boolean {
     return userRequest && typeof userRequest.configurationSteps !== 'undefined';
   }

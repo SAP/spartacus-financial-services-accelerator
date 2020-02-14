@@ -3,7 +3,7 @@ import { UserRequestDataService } from './../../../core/user-request/services/us
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription, of } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { filter, map, mergeMap, switchMap, take } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import {
   UserRequestService,
@@ -11,8 +11,7 @@ import {
 } from '../../../core/user-request/facade';
 import { FSUserRequest, FSStepData, Claim } from '../../../occ/occ-models';
 import { ClaimService } from '../../../core/my-account/facade';
-import { ClaimDataService } from '../../../core/my-account/services';
-import { GlobalMessageService, RoutingService } from '@spartacus/core';
+import { RoutingService } from '@spartacus/core';
 
 const completedStatus = 'COMPLETED';
 
@@ -36,8 +35,6 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     protected formDataService: FormDataService,
     protected userRequestDataService: UserRequestDataService,
     protected claimService: ClaimService,
-    protected claimDataService: ClaimDataService,
-    protected globalMessageService: GlobalMessageService,
     protected router: RoutingService
   ) {}
 
@@ -74,10 +71,36 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
       formData.id = this.activeStepData.yformConfigurator.id;
     }
     this.formDataService.submit(formData);
+
     if (this.activeStepIndex + 1 === this.configurationSteps.length) {
-      this.claimService.submitClaim(
-        this.userRequestDataService.userId,
-        this.claimDataService.claimData.claimNumber
+      this.subscription.add(
+        this.userRequestService
+          .updateUserRequestStep(
+            this.userRequestDataService.userRequest,
+            this.activeStepIndex,
+            completedStatus
+          )
+          .pipe(
+            switchMap(response => {
+              if (response) {
+                return this.userRequestService
+                  .submitUserRequest(
+                    this.userRequestDataService.userId,
+                    this.userRequestDataService.userRequest.requestId
+                  )
+                  .pipe(
+                    filter(
+                      request => request.requestStatus === ClaimStatus.SUBMITTED
+                    ),
+                    map(() => {
+                      return this.router.go('/fnolConfirmation');
+                    })
+                  );
+              }
+              return of(null);
+            })
+          )
+          .subscribe()
       );
     }
     this.subscription.add(
@@ -111,20 +134,6 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
               }
             }
             return of(null);
-          })
-        )
-        .subscribe()
-    );
-    this.subscription.add(
-      this.claim$
-        .pipe(
-          filter(
-            claim =>
-              claim.claimStatus !== undefined &&
-              claim.claimStatus !== ClaimStatus.OPEN
-          ),
-          map(() => {
-            this.router.go('/fnolConfirmation');
           })
         )
         .subscribe()

@@ -61,6 +61,24 @@ export class UserRequestEffects {
     })
   );
 
+  @Effect()
+  submitUserRequest$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.SUBMIT_USER_REQUEST),
+    map((action: fromActions.SubmitUserRequest) => action.payload),
+    mergeMap(payload => {
+      return this.userRequestConnector
+        .submitUserRequest(payload.userId, payload.requestId)
+        .pipe(
+          map(userRequest => {
+            return new fromActions.SubmitUserRequestSuccess(userRequest);
+          }),
+          catchError(error =>
+            of(new fromActions.SubmitUserRequestFail(JSON.stringify(error)))
+          )
+        );
+    })
+  );
+
   constructor(
     private actions$: Actions,
     private userRequestConnector: UserRequestConnector,
