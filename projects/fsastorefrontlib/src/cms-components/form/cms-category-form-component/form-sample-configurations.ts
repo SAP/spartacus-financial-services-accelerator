@@ -520,7 +520,7 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: 'Driver Date of Birth',
-              name: 'dateOfBirth',
+              name: 'driverDob',
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
@@ -614,7 +614,7 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: 'Driver Date of Birth',
-              name: 'dateOfBirth',
+              name: 'driverDob',
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
@@ -678,7 +678,7 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: 'Driver Date of Birth',
-              name: 'dateOfBirth',
+              name: 'driverDob',
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
@@ -741,7 +741,7 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: 'Driver Date of Birth',
-              name: 'dateOfBirth',
+              name: 'driverDob',
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
@@ -804,7 +804,7 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: 'Driver Date of Birth',
-              name: 'dateOfBirth',
+              name: 'driverDob',
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
