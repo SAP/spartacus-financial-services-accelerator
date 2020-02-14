@@ -82,4 +82,13 @@ describe('CategoryCarouselComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should unsubscribe from any subscriptions when destroyed', () => {
+    const subscriptions = component['subscription'];
+    spyOn(subscriptions, 'unsubscribe').and.callThrough();
+
+    component.ngOnInit();
+    component.ngOnDestroy();
+    expect(subscriptions.unsubscribe).toHaveBeenCalled();
+  });
 });

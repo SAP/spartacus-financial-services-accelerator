@@ -9,7 +9,7 @@ import { Observable, of, throwError } from 'rxjs';
 import * as fromActions from '../actions';
 import * as fromEffects from './claim-policies.effect';
 import * as fromUserReducers from './../../store/reducers/index';
-import { PolicyConnector } from '../../services/policy/connectors/policy.connector';
+import { PolicyConnector } from './../../connectors/policy.connector';
 
 const insurancePolicy1: any = {
   policyNumber: 'test001',

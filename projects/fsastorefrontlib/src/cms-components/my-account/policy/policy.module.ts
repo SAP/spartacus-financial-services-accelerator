@@ -16,10 +16,10 @@ import {
 import { CmsPageGuard } from '@spartacus/storefront';
 
 import { PoliciesComponent } from './policies/policies.component';
-import { PolicyService } from '../../../core/my-account/services/policy/policy.service';
+import { PolicyService } from '../../../core/my-account/facade/policy.service';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
-import { PolicyConnector } from '../../../core/my-account/services/policy/connectors/policy.connector';
+import { PolicyConnector } from '../../../core/my-account/connectors/policy.connector';
 
 const routes: Routes = [
   {

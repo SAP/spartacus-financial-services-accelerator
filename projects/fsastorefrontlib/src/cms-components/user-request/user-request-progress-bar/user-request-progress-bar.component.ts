@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { UserRequestService } from '../../../core/user-request/services';
+import { UserRequestService } from '../../../core/user-request/facade';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FSUserRequest, FSStepData } from '../../../occ/occ-models';

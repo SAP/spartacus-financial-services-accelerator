@@ -12,7 +12,7 @@ export class OccFSCheckoutAdapter implements FSCheckoutAdapter {
     protected occEndpointService: OccEndpointsService
   ) {}
 
-  public setIdentificationType(
+  setIdentificationType(
     identificationType: string,
     cartId: string,
     userId: string

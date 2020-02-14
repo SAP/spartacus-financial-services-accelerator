@@ -5,7 +5,7 @@ import {
   Input,
 } from '@angular/core';
 import { CmsService } from '@spartacus/core';
-import { InboxService } from '../../../../core/my-account/services/inbox/inbox.service';
+import { InboxService } from '../../../../core/my-account/facade/inbox.service';
 
 @Component({
   selector: 'fsa-inbox-tab',
@@ -15,7 +15,7 @@ import { InboxService } from '../../../../core/my-account/services/inbox/inbox.s
 export class InboxTabComponent implements OnInit {
   constructor(
     protected cmsService: CmsService,
-    private inboxService: InboxService
+    protected inboxService: InboxService
   ) {}
 
   component$;

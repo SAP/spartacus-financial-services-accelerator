@@ -4,7 +4,7 @@ import { ProductActions } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import * as fromActions from '../actions/index';
-import { ProductPricingConnector } from '../../services/pricing/connectors/product-pricing.connector';
+import { ProductPricingConnector } from '../../../product-pricing/connectors/product-pricing.connector';
 
 @Injectable()
 export class FSProductEffect {

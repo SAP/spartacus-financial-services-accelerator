@@ -1,28 +1,30 @@
+import { OccFsCsTicketAdapter } from './adapters/cs-ticket/occ-cs-ticket.adapter';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Config, OccConfig } from '@spartacus/core';
 
-import { FSCartAdapter } from '../core/checkout/services/cart';
+import { FSCartAdapter } from '../core/cart';
 import { AgentAdapter } from '../core/agent/connectors';
 import { OccAgentAdapter } from './adapters/agent/occ-agent.adapter';
-import { PolicyAdapter } from '../core/my-account/services/policy';
+import { PolicyAdapter } from '../core/my-account/connectors/policy.adapter';
 import { OccPolicyAdapter } from './adapters/policy/occ-policy.adapter';
-import { ClaimAdapter } from '../core/my-account/services/claim';
+import { ClaimAdapter } from '../core/my-account/connectors';
 import { OccClaimAdapter } from './adapters/claim/occ-claim.adapter';
-import { InboxAdapter } from '../core/my-account/services/inbox';
+import { InboxAdapter } from '../core/my-account/connectors/inbox.adapter';
 import { OccInboxAdapter } from './adapters/inbox/occ-inbox.adapter';
 import { OccFSCartAdapter } from './adapters/cart/occ-fs-cart.adapter';
-import { BillingTimeAdapter } from '../core/checkout/services/billing-time';
+import { BillingTimeAdapter } from '../core/product-pricing/connectors/billing-time.adapter';
 import { OccBillingTimeAdapter } from './adapters/billing-time/occ-billing-time.adapter';
 import { OccFSCheckoutAdapter } from './adapters/checkout/occ-fs-checkout.adapter';
 import { FSCheckoutAdapter } from '../core/checkout/connectors/fs-checkout.adapter';
-import { ProductPricingAdapter } from '../core/checkout/services/pricing';
+import { ProductPricingAdapter } from '../core/product-pricing/connectors/product-pricing.adapter';
 import { OccProductPricingAdapter } from './adapters/pricing/occ-product-pricing.adapter';
-import { QuoteAdapter } from '../core/my-account/services/quote';
+import { QuoteAdapter } from '../core/my-account/connectors/quote.adapter';
 import { OccQuoteAdapter } from './adapters/quote/occ-quote.adapter';
 import { UserRequestAdapter } from '../core/user-request/connectors';
 import { OccUserRequestAdapter } from './adapters/user-request/occ-user-request.adapter';
+import { FSCsTicketAdapter } from '../core';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
@@ -70,6 +72,10 @@ import { OccUserRequestAdapter } from './adapters/user-request/occ-user-request.
     {
       provide: UserRequestAdapter,
       useClass: OccUserRequestAdapter,
+    },
+    {
+      provide: FSCsTicketAdapter,
+      useClass: OccFsCsTicketAdapter,
     },
     { provide: OccConfig, useExisting: Config },
   ],

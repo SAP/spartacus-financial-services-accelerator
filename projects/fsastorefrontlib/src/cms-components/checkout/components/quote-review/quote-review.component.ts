@@ -28,10 +28,10 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
 
   constructor(
     protected cartService: CartService,
-    private config: OccConfig,
+    protected config: OccConfig,
     protected routingService: RoutingService,
-    private checkoutConfigService: FSCheckoutConfigService,
-    private activatedRoute: ActivatedRoute,
+    protected checkoutConfigService: FSCheckoutConfigService,
+    protected activatedRoute: ActivatedRoute,
     protected modalService: ModalService
   ) {}
 
@@ -58,7 +58,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     );
   }
 
-  public getBaseUrl() {
+  getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
 

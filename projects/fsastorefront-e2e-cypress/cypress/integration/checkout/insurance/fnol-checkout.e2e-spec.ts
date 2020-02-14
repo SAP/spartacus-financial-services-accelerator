@@ -1,8 +1,11 @@
 import { donnaMooreUser } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as fnol from '../../../helpers/fnolCheckout';
-import * as buttons from '../../../helpers/checkout/buttons';
 import { importAutoPolicy } from '../../../helpers/payloads';
+import {
+  checkBackAndContinueButtons,
+  clickContinueButton,
+} from '../../../helpers/checkout/checkoutSteps';
 
 context('FNOL for sample data user', () => {
   let claimId;
@@ -29,7 +32,7 @@ context('FNOL for sample data user', () => {
     fnol.checkFNOLSteps();
     fnol.populateIncidentInformationStep();
     claimId = fnol.getClaimIdFromLocalStorage();
-    buttons.clickContinueButton();
+    clickContinueButton();
   });
 
   it('Should check claim is created', () => {
@@ -41,33 +44,33 @@ context('FNOL for sample data user', () => {
     fnol.checkFNOLCheckoutPage();
     fnol.checkFNOLSteps();
     cy.get('[name=whatHappened]').select('Breakdown');
-    buttons.clickContinueButton();
+    clickContinueButton();
   });
 
   it('Should check and populate Incident Report page', () => {
     fnol.checkFNOLCheckoutPage();
     fnol.populateIncidentReportStep();
-    buttons.checkBackAndContinueButtons();
-    buttons.clickContinueButton();
+    checkBackAndContinueButtons();
+    clickContinueButton();
   });
 
   it('Should check and populate General Information page', () => {
     fnol.checkFNOLCheckoutPage();
     fnol.populateGeneralInformationStep();
-    buttons.clickContinueButton();
+    clickContinueButton();
   });
 
   it('Should check summary page', () => {
     fnol.checkFNOLCheckoutPage();
     fnol.checkSummaryPage();
-    buttons.checkBackAndContinueButtons();
+    checkBackAndContinueButtons();
   });
 
   it('Should check information in accordions on summary page', () => {
     fnol.checkIncidentInformationAccordion();
     fnol.checkIncidentReportAccordion();
     fnol.checkGeneralInformationAccordion();
-    buttons.clickContinueButton();
+    clickContinueButton();
   });
 
   it('Should check claim confirmation page', () => {
@@ -79,7 +82,7 @@ context('FNOL for sample data user', () => {
     fnol.startClaimFromHomepage();
     fnol.checkFnolEntryPage();
     fnol.selectPolicyOnEntryPage();
-    buttons.clickContinueButton();
+    clickContinueButton();
     fnol.checkFNOLCheckoutPage();
   });
 

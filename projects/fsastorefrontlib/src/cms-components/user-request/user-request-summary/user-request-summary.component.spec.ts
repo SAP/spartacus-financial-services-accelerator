@@ -5,7 +5,7 @@ import { Observable, of } from 'rxjs';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { AccordionModule } from '../../../../src/shared/accordion/accordion.module';
 import { FSUserRequest } from '../../../../src/occ/occ-models';
-import { UserRequestService } from '../../../../src/core/user-request/services';
+import { UserRequestService } from '../../../../src/core/user-request/facade';
 import { UserRequestSummaryComponent } from './user-request-summary.component';
 import { By } from '@angular/platform-browser';
 

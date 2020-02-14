@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AgentSearchService } from '../../../core/agent/services/agent-search.service';
+import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { filter, map } from 'rxjs/operators';
 
 @Component({
@@ -15,8 +15,8 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   pagination: any;
 
   constructor(
-    private agentSearchService: AgentSearchService,
-    private route: ActivatedRoute
+    protected agentSearchService: AgentSearchService,
+    protected route: ActivatedRoute
   ) {}
 
   ngOnInit() {

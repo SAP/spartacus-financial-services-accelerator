@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AgentSearchDetailsComponent } from './agent-search-details.component';
 import { of } from 'rxjs';
-import { AgentSearchService } from '../../../core/agent/services/agent-search.service';
+import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { Component, Input, PipeTransform, Pipe } from '@angular/core';
 import { I18nTestingModule } from '@spartacus/core';
 import { RouterTestingModule } from '@angular/router/testing';

@@ -31,8 +31,21 @@ export const forms = {
       lengthValidation:
         'Phone number should be between minimum 6 characters and maximum 20',
     },
-    interest: 'Interest',
-    contactType: 'Contact type',
+    interest: {
+      title: 'Interest',
+      problem: 'Problem',
+      incident: 'Incident',
+      complaint: 'Complaint',
+      fraud: 'Fraud',
+      note: 'Note',
+      enquiry: 'Enquiry',
+    },
+    contactType: {
+      title: 'Contact type',
+      email: 'Email',
+      call: 'Call',
+    },
+    subject: 'Subject',
     enterMessage: 'Your message',
     send: 'Send',
     titles: {
