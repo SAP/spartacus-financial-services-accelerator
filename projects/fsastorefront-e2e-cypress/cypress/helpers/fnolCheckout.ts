@@ -1,4 +1,4 @@
-import { waitForPage, waitForUserAssets } from './generalHelpers';
+import { waitForPage, waitForCMSComponent } from './generalHelpers';
 
 export function getClaimIdFromLocalStorage() {
   const localData = JSON.parse(localStorage.getItem('spartacus-local-data'));
@@ -12,9 +12,11 @@ export function getClaimIdFromLocalStorage() {
   }
 }
 
+let claimNumber;
+
 export function selectAutoPolicyForFNOL() {
   cy.get('.info-card-caption')
-    .contains(' BULK1T2000000552 ')
+    .contains('BULK1T2000000552')
     .parentsUntil('.col-md-4')
     .within(() => {
       cy.get('.info-card-caption').contains('Auto Insurance');
@@ -55,12 +57,15 @@ export function populateIncidentInformationStep() {
     cy.get('[name=whenHappened]').type('2018-01-01');
     cy.get('[name=whatTime]').type('12:12:12');
     cy.get('[name=country]').select('Serbia');
-    cy.get('[name=city]').type('Belgräde');
+    cy.get('[name=city]').type('Belgrade');
     cy.get('[name=postcode]').type('11040');
     cy.get('[name=address]').type('Omladinskih Brigada 90g');
     cy.get('[name=description]').type(
       'my tesla S was stolen while I was in the shopping center'
     );
+    if (!claimNumber) {
+      claimNumber = this.getClaimIdFromLocalStorage();
+    }
   });
 }
 
@@ -96,7 +101,7 @@ export function checkIncidentInformationAccordion() {
     .within(() => {
       cy.get('.accordion-list-item').should('have.length', '8');
     });
-  cy.get('.accordion-list-item').contains('AutoBreakdown');
+  cy.get('.accordion-list-item').contains('AutoCollision');
 }
 
 export function checkIncidentReportAccordion() {
@@ -123,9 +128,9 @@ export function checkGeneralInformationAccordion() {
   cy.get('.accordion-list-item').contains('me');
 }
 
-export function checkConfirmationPage(claimId) {
+export function checkConfirmationPage() {
   cy.get('.heading-headline').contains('Claim Confirmation');
-  cy.get('.notice-text ').contains(' Your processing number is: ' + claimId);
+  cy.get('.notice-text ').contains(' Your processing number is: ' + claimNumber);
   cy.get('.content860 p')
     .first()
     .contains(
@@ -170,8 +175,8 @@ export function selectPolicyOnEntryPage() {
   cy.get('.form-check-input').click();
 }
 
-export function deleteClaimFromDialog(claimId) {
-  cy.contains('.info-card', claimId).within(() => {
+export function deleteClaimFromDialog() {
+  cy.contains('.info-card', claimNumber).within(() => {
     cy.get('.action-links-secondary-button').click();
   });
   cy.get('h3').contains('Delete started claim process');
@@ -181,22 +186,27 @@ export function deleteClaimFromDialog(claimId) {
   });
 }
 
-export function checkClaimsPage() {
+export function checkAndResumeSpecificClaim() {
+  const claims = waitForPage('my-claims', 'claims');
   cy.selectOptionFromDropdown({
     menuOption: 'My Account',
     dropdownItem: 'Claims',
-  });
-}
-
-export function checkAndResumeSpecificClaim(claimId) {
-  const claims = waitForUserAssets('claims', 'claims');
+  })
   cy.wait(`@${claims}`)
     .its('status')
-    .should('eq', 200);
-  cy.contains('.info-card', claimId).within(() => {
+    .should('eq', 200)
+  cy.get('.info-card').within(() => {
+    cy.get('h4.info-card-caption').contains(claimNumber);
     this.checkOpenClaimContent();
     cy.get('.secondary-button')
       .contains('Resume')
       .click();
   });
+
+}
+export function waitForIncidentReportStep() {
+  const incidentForm = waitForCMSComponent('AutoClaimIncidentReportFormComponent', 'incidentForm');
+  cy.wait(`@${incidentForm}`)
+    .its('status')
+    .should('eq', 200);
 }

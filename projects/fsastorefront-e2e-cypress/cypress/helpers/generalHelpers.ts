@@ -26,3 +26,4 @@ export function waitForCMSComponent(component: string, alias: string): string {
   cy.route('GET', `/rest/v2/financial/cms/components/${component}*`).as(alias);
   return alias;
 }
+
