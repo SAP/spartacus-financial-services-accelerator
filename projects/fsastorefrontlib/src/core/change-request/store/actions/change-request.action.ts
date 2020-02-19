@@ -1,8 +1,8 @@
 import { Action } from '@ngrx/store';
 
-export const CREATE_CHANGE_REQUEST = '[Change Request] Change Request Claim';
+export const CREATE_CHANGE_REQUEST = '[Change Request] Create Change Request';
 export const CREATE_CHANGE_REQUEST_FAIL =
-  '[Change Request] Change Request Claim Fail';
+  '[Change Request] Create Change Request Fail';
 export const CREATE_CHANGE_REQUEST_SUCCESS =
   '[Change Request] Create Change Request Success';
 

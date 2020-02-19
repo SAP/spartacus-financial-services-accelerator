@@ -16,3 +16,8 @@ export const getChangeRequest: MemoizedSelector<any, any> = createSelector(
   getChangeRequestState,
   fromChangeRequest.getChangeRequest
 );
+
+export const getLoaded: MemoizedSelector<any, any> = createSelector(
+  getChangeRequestState,
+  fromChangeRequest.getLoaded
+);

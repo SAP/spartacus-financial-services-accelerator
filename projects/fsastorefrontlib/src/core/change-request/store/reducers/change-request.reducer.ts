@@ -15,6 +15,12 @@ export function reducer(
   action: fromAction.ChangeRequestAction
 ): ChangeRequestState {
   switch (action.type) {
+    case fromAction.CREATE_CHANGE_REQUEST: {
+      return {
+        ...state,
+        loaded: false,
+      };
+    }
     case fromAction.CREATE_CHANGE_REQUEST_SUCCESS: {
       const content = { ...action.payload };
       return {
