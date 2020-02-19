@@ -32,11 +32,6 @@ const bundleTemplate = 'bundleId';
 const qty = 1;
 const entry = '2';
 
-const cartResult: CartModification = {
-  entry: { basePrice: {} },
-  quantity: 1,
-};
-
 describe('FsCartConnector', () => {
   let fsCartConnector: FsCartConnector;
   let fsCartAdapter: FSCartAdapter;

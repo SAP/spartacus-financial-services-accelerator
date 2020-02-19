@@ -4,6 +4,7 @@ import { RoutingService } from '@spartacus/core';
 import { map } from 'rxjs/operators';
 import { Subscription, combineLatest, Observable } from 'rxjs';
 import { OccConfig } from '@spartacus/core';
+import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 
 @Component({
   selector: 'fsa-policy-details',
@@ -14,7 +15,8 @@ export class PolicyDetailsComponent implements OnInit {
   constructor(
     protected routingService: RoutingService,
     protected policyService: PolicyService,
-    protected config: OccConfig
+    protected config: OccConfig,
+    protected changeRequestService: ChangeRequestService
   ) {}
 
   policy$;
@@ -40,5 +42,12 @@ export class PolicyDetailsComponent implements OnInit {
   }
   getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
+  }
+
+  changePolicyDetails(policyId, contractId) {
+    this.changeRequestService.createChangeRequest(policyId, contractId);
+    this.changeRequestService.getChangeRequest().subscribe(res => {
+      console.log(res);
+    });
   }
 }

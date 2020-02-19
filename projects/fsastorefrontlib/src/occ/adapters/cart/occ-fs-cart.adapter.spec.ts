@@ -13,7 +13,6 @@ const cartId = 'cartId';
 const productCode = 'product123';
 const quantity = 1;
 const entryNumber = '1';
-const identificationType = 'video_identification';
 
 const usersEndpoint = '/users';
 const cartsEndpoint = '/carts';

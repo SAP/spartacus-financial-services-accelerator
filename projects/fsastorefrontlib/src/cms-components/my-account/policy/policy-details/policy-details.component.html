@@ -293,5 +293,12 @@
         </div>
       </div>
     </fsa-accordion-item>
+    <!-- TO BE REMOVED WITH FSA-4764 -->
+    <button
+      class="primary-button btn-block"
+      (click)="changePolicyDetails(policy.policyNumber, policy.contractNumber)"
+    >
+      Change Policy
+    </button>
   </div>
 </ng-container>
