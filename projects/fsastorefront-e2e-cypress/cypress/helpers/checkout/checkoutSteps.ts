@@ -29,6 +29,7 @@ export function bindQuotePopup() {
   cy.get('.primary-button')
     .should('contain', 'Continue')
     .click();
+  cy.wait(500);
   cy.get('fsa-bind-quote-dialog').within(() => {
     cy.get('.primary-button').click();
   });

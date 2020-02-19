@@ -1,4 +1,4 @@
-import { donnaMooreUser } from '../../../sample-data/users';
+import {donnaMooreUser, registrationUser} from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as fnol from '../../../helpers/fnolCheckout';
 import { importAutoPolicy } from '../../../helpers/payloads';
@@ -11,11 +11,28 @@ context('FNOL for sample data user', () => {
   let claimId;
   before(() => {
     cy.visit('/login');
-    register.login(donnaMooreUser.email, donnaMooreUser.password);
-    cy.wait(1000);
   });
 
-  it('import auto policy', () => {
+  it('Should check anonymous user cannot access claims', () => {
+    cy.get('.SiteLogo').click();
+    fnol.startClaimFromHomepage();
+    cy.get('.heading-headline').should('have.text', 'Login');
+  });
+
+  it('Should check no policies page for new user', () => {
+    cy.visit('/login');
+    register.registerUser(registrationUser);
+    register.login(registrationUser.email, registrationUser.password);
+    fnol.startClaimFromHomepage();
+    cy.get('.heading-headline').should('have.text', 'Make a Claim Online');
+    cy.get('.notice.py-4').contains('You have no valid policies!');
+    cy.window().then(win => win.sessionStorage.clear());
+  });
+
+  it('Should import auto policy', () => {
+    cy.visit('/login');
+    register.login(donnaMooreUser.email, donnaMooreUser.password);
+    cy.wait(1000);
     cy.request(importAutoPolicy);
   });
 

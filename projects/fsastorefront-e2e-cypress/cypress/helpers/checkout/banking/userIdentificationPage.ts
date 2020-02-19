@@ -1,24 +1,49 @@
 export function checkUserIdentificationPage() {
-  cy.get('.heading-headline').contains('Your Current Account Insurance');
-  cy.get('div.progress-inner-wrapper').should('have.length', 5);
-  cy.get('cx-paragraph').contains('User Identification');
-  cy.get('fsa-select-identification')
+  cy.get('.progress-inner-wrapper').should('have.length', 5);
+  cy.get('.section-header-heading').should('have.text', 'User Identification');
+  cy.get('fsa-select-identification > .d-flex')
     .should('be.visible')
     .within(() => {
-      cy.get('.d-flex .position-relative:first-of-type p').contains(
+      cy.get('.position-relative')
+        .eq(0)
+        .contains(
         ' At the Nearest Branch '
       );
-      cy.get('.d-flex .position-relative:nth-of-type(2) p').contains(
+      cy.get('.position-relative')
+        .eq(1)
+        .contains(
         ' Legal Identification '
       );
-      cy.get('.d-flex .position-relative:nth-of-type(3) p').contains(
+      cy.get('.position-relative')
+        .eq(2)
+        .contains(
         ' Video Identification '
       );
     });
 }
 
 export function selectAtTheNearestBranch() {
-  cy.get('.d-flex .position-relative:first-of-type p')
-    .contains(' At the Nearest Branch ')
+  cy.get('fsa-select-identification > .d-flex')
+    .should('be.visible')
+    .within(() => {
+  cy.get('.position-relative')
+    .eq(0)
+    .contains(
+      ' At the Nearest Branch '
+    )
     .click();
+});
+}
+
+export function selectVideoIdentification() {
+  cy.get('fsa-select-identification > .d-flex')
+    .should('be.visible')
+    .within(() => {
+  cy.get('.position-relative')
+    .eq(2)
+    .contains(
+      ' Video Identification '
+    )
+    .click();
+    });
 }

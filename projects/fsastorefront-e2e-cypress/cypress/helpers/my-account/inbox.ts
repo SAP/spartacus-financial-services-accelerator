@@ -25,6 +25,7 @@ export function readMessagesAndCheckAttachment(pageNumber, numberOfMessages) {
   cy.get('a.page-link')
     .contains(pageNumber)
     .click();
+  cy.wait(500);
   for (let i = 0; i < numberOfMessages; i++) {
     cy.get('.message')
       .eq(i)
