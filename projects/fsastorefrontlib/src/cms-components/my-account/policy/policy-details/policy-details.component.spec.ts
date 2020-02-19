@@ -49,7 +49,7 @@ const MockOccModuleConfig: OccConfig = {
 
 const policyId = 'policyId';
 const contractId = 'contractId';
-const changeRequestType = 'requestType';
+const changeRequestType = 'FSINSUREDOBJECT_CHANGE';
 
 describe('PolicyDetailsComponent', () => {
   let component: PolicyDetailsComponent;
