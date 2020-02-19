@@ -11,6 +11,7 @@ import { ChangeRequestService } from './change-request.service';
 const userId = OCC_USER_ID_CURRENT;
 const policyId = 'PL00001';
 const contractId = 'CT00001';
+const changeRequestType = 'requestType';
 
 const mockChangeRequest = {
   submissionId: 'submssionId',
@@ -56,11 +57,12 @@ describe('ChangeRequestServiceTest', () => {
   ));
 
   it('should be able to create change request for policy', () => {
-    service.createChangeRequest(policyId, contractId);
+    service.createChangeRequest(policyId, contractId, changeRequestType);
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.CreateChangeRequest({
         userId: userId,
         policyId: policyId,
+        changeRequestType: changeRequestType,
         contractId: contractId,
       })
     );

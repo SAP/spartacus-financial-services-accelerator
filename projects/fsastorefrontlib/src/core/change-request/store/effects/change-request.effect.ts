@@ -16,6 +16,7 @@ export class ChangeRequestEffects {
         .createChangeRequestForPolicy(
           payload.policyId,
           payload.contractId,
+          payload.changeRequestType,
           payload.userId
         )
         .pipe(

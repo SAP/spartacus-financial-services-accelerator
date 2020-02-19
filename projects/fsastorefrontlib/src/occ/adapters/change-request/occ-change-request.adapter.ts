@@ -4,7 +4,7 @@ import { OccEndpointsService } from '@spartacus/core';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { ChangeRequestAdapter } from './../../../core/change-request/connectors/change-request.adapter';
-import { of } from 'rxjs';
+import { user } from '@spartacus/assets/translations/en/user';
 
 @Injectable()
 export class OccChangeRequestAdapter implements ChangeRequestAdapter {
@@ -16,11 +16,18 @@ export class OccChangeRequestAdapter implements ChangeRequestAdapter {
   createChangeRequestForPolicy(
     policyId: string,
     contractId: string,
+    changeRequestType: string,
     userId: string
   ) {
     const url = this.getChangeRequestEndpoint(userId);
     const params: HttpParams = new HttpParams({
-      fromString: 'policyId' + policyId + 'contractId' + contractId,
+      fromString:
+        'policyId=' +
+        policyId +
+        '&contractId=' +
+        contractId +
+        '&requestType=' +
+        changeRequestType,
     });
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',

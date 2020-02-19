@@ -14,16 +14,21 @@ export class ChangeRequestService {
     protected authService: AuthService
   ) {}
 
-  createChangeRequest(policyId: string, contractId: string) {
+  createChangeRequest(
+    policyId: string,
+    contractId: string,
+    changeRequestType: string
+  ) {
     this.authService
       .getOccUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         this.store.dispatch(
           new fromAction.CreateChangeRequest({
-            userId: occUserId,
             policyId: policyId,
             contractId: contractId,
+            changeRequestType: changeRequestType,
+            userId: occUserId,
           })
         );
       })

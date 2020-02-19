@@ -9,6 +9,7 @@ import { OccChangeRequestAdapter } from './occ-change-request.adapter';
 
 const userId = 'userId';
 const policyId = 'policyId';
+const changeRequestType = 'requestType';
 const contractId = 'contractId';
 
 const usersEndpoint = '/users';
@@ -50,13 +51,19 @@ describe('OccChangeRequestAdapter', () => {
   describe('createChangeRequest', () => {
     it('should create change request', async(() => {
       adapter
-        .createChangeRequestForPolicy(policyId, contractId, userId)
+        .createChangeRequestForPolicy(
+          policyId,
+          contractId,
+          changeRequestType,
+          userId
+        )
         .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url === usersEndpoint + `/${userId}` + changeRequestsEndpoint &&
           req.params.append('policyId', policyId) &&
           req.params.append('contractId', contractId) &&
+          req.params.append('requestType', changeRequestType) &&
           req.method === 'POST'
         );
       }, `POST method and url`);

@@ -17,6 +17,7 @@ const changeRequest = {
 
 const policyId = 'policyId';
 const contractId = 'contractId';
+const changeRequestType = 'requestType';
 
 class MockOccChangeRequestAdapter {
   createChangeRequestForPolicy() {
@@ -76,9 +77,10 @@ describe('Change Request Effects', () => {
       'createChangeRequestForPolicy'
     ).and.returnValue(throwError('Error'));
     const action = new fromActions.CreateChangeRequest({
-      userId: OCC_USER_ID_CURRENT,
       policyId: policyId,
       contractId: contractId,
+      changeRequestType: changeRequestType,
+      userId: OCC_USER_ID_CURRENT,
     });
     const completion = new fromActions.CreateChangeRequestFail(
       JSON.stringify('Error')

@@ -32,7 +32,7 @@ class MockChangeRequestService {
       requestId: 'requestId',
     });
   }
-  createChangeRequest(policyId, contractId) {}
+  createChangeRequest(policyId, contractId, changeRequestType) {}
 }
 
 const MockOccModuleConfig: OccConfig = {
@@ -49,6 +49,7 @@ const MockOccModuleConfig: OccConfig = {
 
 const policyId = 'policyId';
 const contractId = 'contractId';
+const changeRequestType = 'requestType';
 
 describe('PolicyDetailsComponent', () => {
   let component: PolicyDetailsComponent;
@@ -88,7 +89,8 @@ describe('PolicyDetailsComponent', () => {
     component.changePolicyDetails(policyId, contractId);
     expect(changeRequestService.createChangeRequest).toHaveBeenCalledWith(
       policyId,
-      contractId
+      contractId,
+      changeRequestType
     );
   });
 });

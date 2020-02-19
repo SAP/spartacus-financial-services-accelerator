@@ -8,10 +8,16 @@ import { Injectable } from '@angular/core';
 export class ChangeRequestConnector {
   constructor(protected changeRequestAdapter: ChangeRequestAdapter) {}
 
-  createChangeRequestForPolicy(policyId, contractId, userId): Observable<any> {
+  createChangeRequestForPolicy(
+    policyId,
+    contractId,
+    changeRequestType,
+    userId
+  ): Observable<any> {
     return this.changeRequestAdapter.createChangeRequestForPolicy(
       policyId,
       contractId,
+      changeRequestType,
       userId
     );
   }

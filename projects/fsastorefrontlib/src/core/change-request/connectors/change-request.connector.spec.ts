@@ -15,6 +15,7 @@ class MockChangeRequestAdapter implements ChangeRequestAdapter {
 
 const policy = 'policyId';
 const contract = 'contractId';
+const changeRequestType = 'changeRequestType';
 const user = 'userId';
 
 describe('ChangeRequestConnector', () => {
@@ -41,9 +42,14 @@ describe('ChangeRequestConnector', () => {
   });
 
   it('should call adapter for createChangeRequestForPolicy', () => {
-    changeRequestConnector.createChangeRequestForPolicy(policy, contract, user);
+    changeRequestConnector.createChangeRequestForPolicy(
+      policy,
+      contract,
+      changeRequestType,
+      user
+    );
     expect(
       changeRequestAdapter.createChangeRequestForPolicy
-    ).toHaveBeenCalledWith(policy, contract, user);
+    ).toHaveBeenCalledWith(policy, contract, changeRequestType, user);
   });
 });

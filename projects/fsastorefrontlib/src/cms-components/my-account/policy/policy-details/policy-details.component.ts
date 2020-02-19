@@ -45,7 +45,12 @@ export class PolicyDetailsComponent implements OnInit {
   }
 
   changePolicyDetails(policyId, contractId) {
-    this.changeRequestService.createChangeRequest(policyId, contractId);
+    const changeRequestType = 'FSINSUREDOBJECT_CHANGE';
+    this.changeRequestService.createChangeRequest(
+      policyId,
+      contractId,
+      changeRequestType
+    );
     this.changeRequestService.getChangeRequest().subscribe(res => {
       console.log(res);
     });
