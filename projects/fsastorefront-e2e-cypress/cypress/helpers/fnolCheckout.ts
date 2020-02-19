@@ -1,4 +1,8 @@
-import { waitForPage, waitForCMSComponent } from './generalHelpers';
+import {
+  waitForPage,
+  waitForCMSComponent,
+  waitForUserAssets,
+} from './generalHelpers';
 
 export function getClaimIdFromLocalStorage() {
   const localData = JSON.parse(localStorage.getItem('spartacus-local-data'));
@@ -16,7 +20,7 @@ let claimNumber;
 
 export function selectAutoPolicyForFNOL() {
   cy.get('.info-card-caption')
-    .contains('BULK1T2000000552')
+    .contains('00000035')
     .parentsUntil('.col-md-4')
     .within(() => {
       cy.get('.info-card-caption').contains('Auto Insurance');
@@ -47,22 +51,35 @@ export function checkFNOLSteps() {
     .should('have.text', ' General Information ');
   cy.get('p.label')
     .eq(3)
-    .should('have.text', ' Summary ');
+    .should('have.text', ' Summary ')
+    .then(() => {
+      claimNumber = this.getClaimIdFromLocalStorage();
+    });
 }
 
 export function populateIncidentInformationStep() {
   cy.get('cx-dynamic-form').within(() => {
     //TODO: can we make random choose
     cy.get('[name=whatHappened]').select('Collision');
-    cy.get('[name=whenHappened]').type('2018-01-01');
-    cy.get('[name=whatTime]').type('12:12:12');
+    cy.get('[name=whenHappened]')
+      .clear()
+      .type('2018-01-01');
+    cy.get('[name=whatTime]')
+      .clear()
+      .type('12:12:12');
     cy.get('[name=country]').select('Serbia');
-    cy.get('[name=city]').type('Belgräde');
-    cy.get('[name=postcode]').type('11040');
-    cy.get('[name=address]').type('Omladinskih Brigada 90g');
-    cy.get('[name=description]').type(
-      'my tesla S was stolen while I was in the shopping center'
-    );
+    cy.get('[name=city]')
+      .clear()
+      .type('Belgräde');
+    cy.get('[name=postcode]')
+      .clear()
+      .type('11040');
+    cy.get('[name=address]')
+      .clear()
+      .type('Omladinskih Brigada 90g');
+    cy.get('[name=description]')
+      .clear()
+      .type('my tesla S was stolen while I was in the shopping center');
     if (!claimNumber) {
       claimNumber = this.getClaimIdFromLocalStorage();
     }
@@ -76,7 +93,9 @@ export function populateIncidentReportStep() {
 }
 
 export function populateGeneralInformationStep() {
-  cy.get('[name=responsibleForAccident]').type('me');
+  cy.get('[name=responsibleForAccident]')
+    .clear()
+    .type('me');
   cy.get('[name=policeInformed]')
     .eq(0)
     .click();
@@ -101,7 +120,7 @@ export function checkIncidentInformationAccordion() {
     .within(() => {
       cy.get('.accordion-list-item').should('have.length', '8');
     });
-  cy.get('.accordion-list-item').contains('AutoCollision');
+  cy.get('.accordion-list-item').contains('AutoBreakdown');
 }
 
 export function checkIncidentReportAccordion() {
@@ -142,7 +161,7 @@ export function checkConfirmationPage() {
 
 export function checkOpenClaimContent() {
   cy.get('.title').contains('Auto Insurance');
-  cy.get('.value').contains('BULK1T2000000552');
+  cy.get('.value').contains('00000035');
   cy.get('.title').contains('Date of Loss');
   cy.get('.value').contains('01 Jan 2018');
   cy.get('.title').contains('Status');
@@ -168,24 +187,13 @@ export function checkFnolEntryPage() {
 }
 
 export function selectPolicyOnEntryPage() {
+  cy.get('.form-check-input').click();
   cy.get('.cx-payment-card')
     .eq(0)
     .within(() => {
       cy.get('.cx-card-link');
     })
     .click();
-  cy.get('.form-check-input').click();
-}
-
-export function deleteClaimFromDialog() {
-  cy.contains('.info-card', claimNumber).within(() => {
-    cy.get('.action-links-secondary-button').click();
-  });
-  cy.get('h3').contains('Delete started claim process');
-  cy.get('p').contains('The following claim process will be deleted');
-  cy.get('fsa-deleted-claim-dialog').within(() => {
-    cy.get('.primary-button').click();
-  });
 }
 
 export function checkAndResumeSpecificClaim() {
@@ -205,6 +213,26 @@ export function checkAndResumeSpecificClaim() {
       .click();
   });
 }
+
+export function deleteClaimFromDialog() {
+  const claims = waitForPage('my-claims', 'claims');
+  cy.selectOptionFromDropdown({
+    menuOption: 'My Account',
+    dropdownItem: 'Claims',
+  });
+  cy.wait(`@${claims}`)
+    .its('status')
+    .should('eq', 200);
+  cy.contains('.info-card', claimNumber).within(() => {
+    cy.get('.action-links-secondary-button').click();
+  });
+  cy.get('h3').contains('Delete started claim process');
+  cy.get('p').contains('The following claim process will be deleted');
+  cy.get('fsa-deleted-claim-dialog').within(() => {
+    cy.get('.primary-button').click();
+  });
+}
+
 export function waitForIncidentReportStep() {
   const incidentForm = waitForCMSComponent(
     'AutoClaimIncidentReportFormComponent',

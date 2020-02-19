@@ -23,8 +23,8 @@ export function generateMail(name: string) {
 }
 
 export const donnaMooreUser = {
-  email: 'donna@moore.com',
-  password: '123456',
+  email: 'pera@zdera.com',
+  password: 'Proba)34',
 };
 
 export const amosAgent = {

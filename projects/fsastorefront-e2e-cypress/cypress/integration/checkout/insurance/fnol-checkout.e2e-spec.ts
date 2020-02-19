@@ -46,9 +46,8 @@ context('FNOL for sample data user', () => {
 
   it('Should check and populate Incident Report page', () => {
     fnol.checkFNOLCheckoutPage();
-    fnol.populateIncidentInformationStep();
-    clickContinueButton();
     fnol.waitForIncidentReportStep();
+    clickContinueButton();
     fnol.populateIncidentReportStep();
     checkBackAndContinueButtons();
     clickContinueButton();
@@ -83,14 +82,10 @@ context('FNOL for sample data user', () => {
     fnol.checkFnolEntryPage();
     fnol.selectPolicyOnEntryPage();
     clickContinueButton();
-    fnol.checkFNOLCheckoutPage();
+    fnol.checkFNOLSteps();
   });
 
   it('Should delete started claim', () => {
-    cy.selectOptionFromDropdown({
-      menuOption: 'My Account',
-      dropdownItem: 'Claims',
-    });
     fnol.deleteClaimFromDialog();
   });
 });
