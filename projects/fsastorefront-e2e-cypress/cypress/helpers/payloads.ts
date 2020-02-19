@@ -186,22 +186,24 @@ export const importAutoPolicy = {
             externalValue: '2015-05-11T08:59:04',
           },
         ],
-        childInsuredObjects: [{
-          insuredObjectId: 'IO000002',
-          insuredObjectType: { code: 'DRIVER' },
-          insuredObjectItems: [
-            {
-              itemId: 'IOI1000001',
-              label: 'firstName',
-              externalValue: 'Donna',
-            },
-            {
-              itemId: 'IOI1000002',
-              label: 'lastName',
-              externalValue: 'Moore',
-            },
-        ]
-      }]
+        childInsuredObjects: [
+          {
+            insuredObjectId: 'IO000002',
+            insuredObjectType: { code: 'DRIVER' },
+            insuredObjectItems: [
+              {
+                itemId: 'IOI1000001',
+                label: 'firstName',
+                externalValue: 'Donna',
+              },
+              {
+                itemId: 'IOI1000002',
+                label: 'lastName',
+                externalValue: 'Moore',
+              },
+            ],
+          },
+        ],
       },
     ],
   },
