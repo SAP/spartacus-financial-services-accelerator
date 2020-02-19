@@ -27,7 +27,6 @@ export class ChangeRequestService {
           })
         );
       })
-
       .unsubscribe();
   }
 

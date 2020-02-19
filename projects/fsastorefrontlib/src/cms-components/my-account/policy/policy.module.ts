@@ -20,7 +20,7 @@ import { PolicyService } from '../../../core/my-account/facade/policy.service';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
-import { ChangeRequestStoreModule } from 'projects/fsastorefrontlib/src/core/change-request/store/change-request-store.module';
+import { ChangeRequestStoreModule } from './../../../core/change-request/store/change-request-store.module';
 
 const routes: Routes = [
   {

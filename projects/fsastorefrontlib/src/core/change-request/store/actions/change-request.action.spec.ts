@@ -15,10 +15,6 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.CREATE_CHANGE_REQUEST,
         payload: { policyId, contractId, userId },
-        // meta: StateEntityLoaderActions.entityLoadMeta(
-        //   PROCESS_FEATURE,
-        //   UPDATE_PASSWORD_PROCESS_ID
-        // ),
       });
     });
   });

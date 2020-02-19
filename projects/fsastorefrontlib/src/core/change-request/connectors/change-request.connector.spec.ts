@@ -17,7 +17,7 @@ const policy = 'policyId';
 const contract = 'contractId';
 const user = 'userId';
 
-describe('FsCartConnector', () => {
+describe('ChangeRequestConnector', () => {
   let changeRequestConnector: ChangeRequestConnector;
   let changeRequestAdapter: ChangeRequestAdapter;
 

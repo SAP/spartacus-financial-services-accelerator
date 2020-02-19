@@ -3,8 +3,8 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { RoutingService, OccConfig, I18nTestingModule } from '@spartacus/core';
 import { of, Observable } from 'rxjs';
 import { AccordionModule } from '../../../../shared/accordion/accordion.module';
-import { PolicyService } from '../../../../core/my-account/facade';
-import { ChangeRequestService } from 'projects/fsastorefrontlib/src/core';
+import { PolicyService } from '../../../../core/my-account/facade/policy.service';
+import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import { Type } from '@angular/core';
 
 class MockPolicyService {
