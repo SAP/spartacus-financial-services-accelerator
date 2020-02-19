@@ -57,7 +57,7 @@ export function populateIncidentInformationStep() {
     cy.get('[name=whenHappened]').type('2018-01-01');
     cy.get('[name=whatTime]').type('12:12:12');
     cy.get('[name=country]').select('Serbia');
-    cy.get('[name=city]').type('Belgrade');
+    cy.get('[name=city]').type('Belgräde');
     cy.get('[name=postcode]').type('11040');
     cy.get('[name=address]').type('Omladinskih Brigada 90g');
     cy.get('[name=description]').type(
@@ -130,7 +130,9 @@ export function checkGeneralInformationAccordion() {
 
 export function checkConfirmationPage() {
   cy.get('.heading-headline').contains('Claim Confirmation');
-  cy.get('.notice-text ').contains(' Your processing number is: ' + claimNumber);
+  cy.get('.notice-text ').contains(
+    ' Your processing number is: ' + claimNumber
+  );
   cy.get('.content860 p')
     .first()
     .contains(
@@ -191,10 +193,10 @@ export function checkAndResumeSpecificClaim() {
   cy.selectOptionFromDropdown({
     menuOption: 'My Account',
     dropdownItem: 'Claims',
-  })
+  });
   cy.wait(`@${claims}`)
     .its('status')
-    .should('eq', 200)
+    .should('eq', 200);
   cy.get('.info-card').within(() => {
     cy.get('h4.info-card-caption').contains(claimNumber);
     this.checkOpenClaimContent();
@@ -202,10 +204,12 @@ export function checkAndResumeSpecificClaim() {
       .contains('Resume')
       .click();
   });
-
 }
 export function waitForIncidentReportStep() {
-  const incidentForm = waitForCMSComponent('AutoClaimIncidentReportFormComponent', 'incidentForm');
+  const incidentForm = waitForCMSComponent(
+    'AutoClaimIncidentReportFormComponent',
+    'incidentForm'
+  );
   cy.wait(`@${incidentForm}`)
     .its('status')
     .should('eq', 200);

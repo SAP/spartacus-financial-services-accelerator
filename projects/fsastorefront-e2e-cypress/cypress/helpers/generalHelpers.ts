@@ -12,18 +12,8 @@ export function waitForUserAssets(asset: string, alias: string): string {
   return alias;
 }
 
-export function waitForFlexComponent(component: string, alias: string): string {
-  cy.server();
-  cy.route(
-    'GET',
-    `/rest/v2/financial/cms/components?fields=DEFAULT&currentPage=0&pageSize=*&componentIds=*${component}*`
-  ).as(alias);
-  return alias;
-}
-
 export function waitForCMSComponent(component: string, alias: string): string {
   cy.server();
   cy.route('GET', `/rest/v2/financial/cms/components/${component}*`).as(alias);
   return alias;
 }
-
