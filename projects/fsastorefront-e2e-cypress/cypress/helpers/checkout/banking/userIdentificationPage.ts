@@ -6,19 +6,13 @@ export function checkUserIdentificationPage() {
     .within(() => {
       cy.get('.position-relative')
         .eq(0)
-        .contains(
-        ' At the Nearest Branch '
-      );
+        .contains(' At the Nearest Branch ');
       cy.get('.position-relative')
         .eq(1)
-        .contains(
-        ' Legal Identification '
-      );
+        .contains(' Legal Identification ');
       cy.get('.position-relative')
         .eq(2)
-        .contains(
-        ' Video Identification '
-      );
+        .contains(' Video Identification ');
     });
 }
 
@@ -26,24 +20,20 @@ export function selectAtTheNearestBranch() {
   cy.get('fsa-select-identification > .d-flex')
     .should('be.visible')
     .within(() => {
-  cy.get('.position-relative')
-    .eq(0)
-    .contains(
-      ' At the Nearest Branch '
-    )
-    .click();
-});
+      cy.get('.position-relative')
+        .eq(0)
+        .contains(' At the Nearest Branch ')
+        .click();
+    });
 }
 
 export function selectVideoIdentification() {
   cy.get('fsa-select-identification > .d-flex')
     .should('be.visible')
     .within(() => {
-  cy.get('.position-relative')
-    .eq(2)
-    .contains(
-      ' Video Identification '
-    )
-    .click();
+      cy.get('.position-relative')
+        .eq(2)
+        .contains(' Video Identification ')
+        .click();
     });
 }

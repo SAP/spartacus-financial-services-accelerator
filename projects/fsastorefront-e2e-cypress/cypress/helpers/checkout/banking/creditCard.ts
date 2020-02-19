@@ -1,4 +1,4 @@
-import * as addOptionsPage from "../addOptionsPage";
+import * as addOptionsPage from '../addOptionsPage';
 
 export function checkOptionalProducts() {
   const addOptionsContent: addOptionsPage.AddOptions = {

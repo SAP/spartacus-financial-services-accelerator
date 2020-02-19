@@ -6,7 +6,7 @@ import * as currentAccount from '../../../helpers/checkout/banking/currentAccoun
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import {checkApprovedMessage} from "../../../helpers/my-account/inbox";
+import { checkApprovedMessage } from '../../../helpers/my-account/inbox';
 
 context('Current Account Checkout', () => {
   before(() => {

@@ -1,4 +1,4 @@
-import {donnaMooreUser, registrationUser} from '../../../sample-data/users';
+import { donnaMooreUser, registrationUser } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as fnol from '../../../helpers/fnolCheckout';
 import { importAutoPolicy } from '../../../helpers/payloads';

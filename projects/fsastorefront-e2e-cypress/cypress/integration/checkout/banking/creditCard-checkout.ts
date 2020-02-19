@@ -1,12 +1,15 @@
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
-import * as productCategory from "../../../helpers/productCategoryPage";
-import * as comparisonPage from "../../../helpers/comparisonTable";
-import * as creditCard from "../../../helpers/checkout/banking/creditCard";
+import * as productCategory from '../../../helpers/productCategoryPage';
+import * as comparisonPage from '../../../helpers/comparisonTable';
+import * as creditCard from '../../../helpers/checkout/banking/creditCard';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import * as legalInformationPage from "../../../helpers/checkout/banking/legalInformationPage";
-import * as userIdentificationPage from "../../../helpers/checkout/banking/userIdentificationPage";
-import {checkInboxComponets, checkPendingMessage} from "../../../helpers/my-account/inbox";
+import * as legalInformationPage from '../../../helpers/checkout/banking/legalInformationPage';
+import * as userIdentificationPage from '../../../helpers/checkout/banking/userIdentificationPage';
+import {
+  checkInboxComponets,
+  checkPendingMessage,
+} from '../../../helpers/my-account/inbox';
 
 context('Credit Card Checkout', () => {
   before(() => {
@@ -19,7 +22,7 @@ context('Credit Card Checkout', () => {
     cy.selectOptionFromDropdown({
       menuOption: 'Banking',
       dropdownItem: 'Credit Card',
-  });
+    });
   });
 
   it('Should start checkout for Credit Card', () => {
@@ -31,27 +34,26 @@ context('Credit Card Checkout', () => {
     comparisonPage.checkBankingComparisonPage();
   });
 
-
   it('Should check prices in comparison table and select Premium Card', () => {
-      cy.get('fsa-comparison-table-panel-item').should('have.length', 3);
-      cy.get('fsa-comparison-table-panel-item')
-        .eq(0)
-        .within(() => {
-          cy.get('h3').should('have.text', 'Basic Card');
-          cy.get('h4').should('have.text', '€49.00');
-        });
-      cy.get('fsa-comparison-table-panel-item')
-        .eq(1)
-        .within(() => {
-          cy.get('h3').should('have.text', 'Premium Card');
-          cy.get('h4').should('have.text', '€89.00');
-        });
-      cy.get('fsa-comparison-table-panel-item')
-        .eq(2)
-        .within(() => {
-          cy.get('h3').should('have.text', 'Exclusive Card');
-          cy.get('h4').should('have.text', '€169.00');
-        });
+    cy.get('fsa-comparison-table-panel-item').should('have.length', 3);
+    cy.get('fsa-comparison-table-panel-item')
+      .eq(0)
+      .within(() => {
+        cy.get('h3').should('have.text', 'Basic Card');
+        cy.get('h4').should('have.text', '€49.00');
+      });
+    cy.get('fsa-comparison-table-panel-item')
+      .eq(1)
+      .within(() => {
+        cy.get('h3').should('have.text', 'Premium Card');
+        cy.get('h4').should('have.text', '€89.00');
+      });
+    cy.get('fsa-comparison-table-panel-item')
+      .eq(2)
+      .within(() => {
+        cy.get('h3').should('have.text', 'Exclusive Card');
+        cy.get('h4').should('have.text', '€169.00');
+      });
     cy.get('fsa-comparison-table-panel-item')
       .eq(1)
       .within(() => {
@@ -111,5 +113,4 @@ context('Credit Card Checkout', () => {
     checkInboxComponets();
     cy.get('div.col-6').contains(' Order Pending ');
   });
-
 });
