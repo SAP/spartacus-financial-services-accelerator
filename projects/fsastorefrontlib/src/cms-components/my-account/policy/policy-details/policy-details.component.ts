@@ -10,6 +10,7 @@ import { map, takeLast, take } from 'rxjs/operators';
 import { Subscription, combineLatest, Observable, of } from 'rxjs';
 import { OccConfig } from '@spartacus/core';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
+import { AllowedFSRequestType } from 'fsastorefrontlib/occ/occ-models';
 
 @Component({
   selector: 'fsa-policy-details',
@@ -50,7 +51,10 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     return this.config.backend.occ.baseUrl || '';
   }
 
-  isChangeAllowed(allowedFSRequestTypes, requestType) {
+  isChangeAllowed(
+    allowedFSRequestTypes: AllowedFSRequestType[],
+    requestType: string
+  ): boolean {
     if (allowedFSRequestTypes) {
       return (
         allowedFSRequestTypes
