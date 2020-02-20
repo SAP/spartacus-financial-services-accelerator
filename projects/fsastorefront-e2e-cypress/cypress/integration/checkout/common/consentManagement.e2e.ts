@@ -23,12 +23,10 @@ context('Consent Management', () => {
 
   it('should register a new user', () => {
     register.registerUser(registrationUserWithoutPhone);
-    cy.wait(3000);
     register.login(
       registrationUserWithoutPhone.email,
       registrationUserWithoutPhone.password
     );
-    cy.wait(1500);
   });
 
   it('should check consent management page', () => {

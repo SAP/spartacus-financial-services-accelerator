@@ -8,11 +8,9 @@ import {
 } from '../../../helpers/checkout/checkoutSteps';
 
 context('FNOL for sample data user', () => {
-  let claimId;
   before(() => {
     cy.visit('/login');
     register.login(donnaMooreUser.email, donnaMooreUser.password);
-    cy.wait(1000);
   });
 
   it('import auto policy', () => {
@@ -31,24 +29,23 @@ context('FNOL for sample data user', () => {
     fnol.checkFNOLCheckoutPage();
     fnol.checkFNOLSteps();
     fnol.populateIncidentInformationStep();
-    claimId = fnol.getClaimIdFromLocalStorage();
     clickContinueButton();
+    fnol.waitForIncidentReportStep();
   });
 
   it('Should check claim is created', () => {
-    fnol.checkClaimsPage();
-    fnol.checkAndResumeSpecificClaim(claimId);
+    fnol.checkAndResumeSpecificClaim();
   });
 
   it('Should check user is navigated to first FNOL page', () => {
     fnol.checkFNOLCheckoutPage();
     fnol.checkFNOLSteps();
-    cy.get('[name=whatHappened]').select('Breakdown');
+    fnol.populateIncidentInformationStep();
     clickContinueButton();
+    fnol.checkFNOLCheckoutPage();
   });
 
   it('Should check and populate Incident Report page', () => {
-    fnol.checkFNOLCheckoutPage();
     fnol.populateIncidentReportStep();
     checkBackAndContinueButtons();
     clickContinueButton();
@@ -74,7 +71,7 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should check claim confirmation page', () => {
-    fnol.checkConfirmationPage(claimId);
+    fnol.checkConfirmationPage();
   });
 
   it('Should start a claim checkout from homepage', () => {
@@ -82,16 +79,11 @@ context('FNOL for sample data user', () => {
     fnol.startClaimFromHomepage();
     fnol.checkFnolEntryPage();
     fnol.selectPolicyOnEntryPage();
-    clickContinueButton();
-    fnol.checkFNOLCheckoutPage();
+    fnol.clickContinueAndGetNewClaimID();
+    fnol.checkFNOLSteps();
   });
 
   it('Should delete started claim', () => {
-    cy.selectOptionFromDropdown({
-      menuOption: 'My Account',
-      dropdownItem: 'Claims',
-    });
-    claimId = fnol.getClaimIdFromLocalStorage();
-    fnol.deleteClaimFromDialog(claimId);
+    fnol.deleteClaimFromDialog();
   });
 });
