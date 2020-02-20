@@ -206,8 +206,8 @@
         <ng-container
           *ngIf="
             isChangeAvailable(
-              policy.categoryData.allowedFSRequestTypes,
-              'FSINSUREDOBJECT_CHANGE'
+              policy.categoryData?.allowedFSRequestTypes,
+              'FSCOVERAGE_CHANGE'
             )
           "
         >

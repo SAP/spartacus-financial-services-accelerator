@@ -47,6 +47,7 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     if (allowedFSRequestTypes) {
       return (
         allowedFSRequestTypes
+          .filter(allowedRequestType => allowedRequestType.requestType)
           .map(allowedRequestType => allowedRequestType.requestType.code)
           .indexOf(requestType) > -1
       );
