@@ -43,10 +43,6 @@ export function checkFNOLSteps() {
   cy.get('p.label')
     .eq(0)
     .should('have.text', ' Incident Information ');
-  // .then(() => {
-  //   claimNumber = getClaimIdFromLocalStorage();
-  //   console.log('checkFNOLSteps', claimNumber);
-  // });
   cy.get('p.label')
     .eq(1)
     .should('have.text', ' Incident Report ');
