@@ -1,43 +1,64 @@
 import { Injectable } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import {
+  ActiveCartService,
   AuthService,
-  Cart,
-  CartActions,
-  CartDataService,
-  CartSelectors,
-  CartService,
-  StateWithCart,
+  MultiCartSelectors,
+  MultiCartService,
+  OCC_CART_ID_CURRENT,
+  OCC_USER_ID_ANONYMOUS,
+  StateWithMultiCart,
 } from '@spartacus/core';
 import { BehaviorSubject } from 'rxjs';
-import { filter, take, tap } from 'rxjs/operators';
-import { PricingData } from '../../models/pricing.interface';
-import * as fromFSAction from '../../checkout/store/actions/index';
-import { ActivatedRoute } from '@angular/router';
+import { map, switchMap } from 'rxjs/operators';
 import { CategoryService } from '../../checkout/services/category/category.service';
+import * as fromFSAction from '../../checkout/store/actions/index';
+import { PricingData } from '../../models/pricing.interface';
 
 @Injectable()
-export class FSCartService extends CartService {
+export class FSCartService extends ActiveCartService {
   protected productAddedSource = new BehaviorSubject<string>('');
   constructor(
-    protected fsStore: Store<StateWithCart>,
-    protected fsCartData: CartDataService,
+    protected fsMultiCartService: MultiCartService,
     protected fsAuthService: AuthService,
     protected activatedRoute: ActivatedRoute,
-    protected categoryService: CategoryService
+    protected categoryService: CategoryService,
+    protected multiCartStore: Store<StateWithMultiCart>
   ) {
-    super(fsStore, fsCartData, fsAuthService);
+    super(multiCartStore, fsAuthService, fsMultiCartService);
+    this.fsAuthService.getOccUserId().subscribe(userId => {
+      this.fsUserId = userId;
+    });
+    this.fsActiveCartId$.subscribe(cartId => {
+      this.fsCartId = cartId;
+    });
   }
+  fsUserId: string;
+  fsCartId: string;
+  fsActiveCartId$ = this.store.pipe(
+    select(MultiCartSelectors.getActiveCartId),
+    map(cartId => {
+      if (!cartId) {
+        return OCC_CART_ID_CURRENT;
+      }
+      this.fsCartId = cartId;
+      return cartId;
+    })
+  );
+  fsCartSelector$ = this.fsActiveCartId$.pipe(
+    switchMap(cartId => this.multiCartService.getCartEntity(cartId))
+  );
 
   addOptionalProduct(
     productCode: string,
     quantity: number,
     entryNumber: string
   ): void {
-    this.fsStore.dispatch(
+    this.multiCartStore.dispatch(
       new fromFSAction.AddOptionalProduct({
-        userId: this.fsCartData.userId,
-        cartId: this.fsCartData.cartId,
+        userId: this.fsUserId,
+        cartId: this.fsCartId,
         productCode: productCode,
         quantity: quantity,
         entryNumber: entryNumber,
@@ -51,46 +72,42 @@ export class FSCartService extends CartService {
     quantity: number,
     pricingData: PricingData
   ): void {
-    this.fsStore
-      .pipe(
-        select(CartSelectors.getActiveCartState),
-        tap(cartState => {
-          if (
-            !this.isCartCreated(cartState.value.content) &&
-            !cartState.loading
-          ) {
-            this.fsStore.dispatch(
-              new CartActions.CreateCart({ userId: this.cartData.userId })
-            );
-          }
-        }),
-        filter(cartState => this.isCartCreated(cartState.value.content)),
-        take(1)
-      )
-      .subscribe(_ => {
-        this.fsStore.dispatch(
-          new fromFSAction.StartBundle({
-            userId: this.fsCartData.userId,
-            cartId: this.fsCartData.cartId,
-            productCode: productCode,
-            bundleTemplateId: bundleTemplateId,
-            quantity: quantity,
-            pricingData: pricingData,
-          })
-        );
+    this.fsMultiCartService
+      .createCart({
+        userId: this.fsUserId,
+        extraData: {
+          active: true,
+        },
+      })
+      .subscribe(cartState => {
+        if (this.isCartCreated(cartState)) {
+          this.multiCartStore.dispatch(
+            new fromFSAction.StartBundle({
+              userId: this.fsUserId,
+              cartId: this.fsCartId,
+              productCode: productCode,
+              bundleTemplateId: bundleTemplateId,
+              quantity: quantity,
+              pricingData: pricingData,
+            })
+          );
+        }
       });
   }
 
-  loadCart() {
-    this.store.dispatch(
-      new CartActions.LoadCart({
-        cartId: this.fsCartData.cartId,
-        userId: this.fsCartData.userId,
-      })
-    );
+  private isCartCreated(cartState) {
+    return cartState && !cartState.loading && cartState.success;
   }
 
-  private isCartCreated(cart: Cart): boolean {
-    return cart && typeof cart.guid !== 'undefined';
+  loadCart(cartId: string): void {
+    if (this.fsUserId !== OCC_USER_ID_ANONYMOUS) {
+      this.multiCartService.loadCart({
+        userId: this.fsUserId,
+        cartId: cartId ? cartId : OCC_CART_ID_CURRENT,
+        extraData: {
+          active: true,
+        },
+      });
+    }
   }
 }

@@ -1,11 +1,12 @@
+import { FSCartService } from './../../../../core/cart/facade/fs-cart.service';
+import { FSOrderEntry } from '../../../../occ/occ-models';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
-import { CartService, RoutingService } from '@spartacus/core';
+import { RoutingService, Cart } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/fs-checkout-config.service';
-import { FSOrderEntry } from 'projects/fsastorefrontlib/src/occ/occ-models';
 
 @Component({
   selector: 'fsa-personal-details-navigation',
@@ -13,7 +14,7 @@ import { FSOrderEntry } from 'projects/fsastorefrontlib/src/occ/occ-models';
 })
 export class PersonalDetailsNavigationComponent implements OnInit {
   constructor(
-    protected cartService: CartService,
+    protected cartService: FSCartService,
     protected formService: FormDataService,
     protected activatedRoute: ActivatedRoute,
     protected routingService: RoutingService,
@@ -35,7 +36,7 @@ export class PersonalDetailsNavigationComponent implements OnInit {
         this.cartService
           .getActive()
           .pipe(
-            map(cart => {
+            map((cart: Cart) => {
               if (
                 cart &&
                 cart.code &&
