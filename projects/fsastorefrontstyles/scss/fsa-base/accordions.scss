@@ -39,6 +39,12 @@
     .fsa-icon {
       position: absolute;
       z-index: 2;
+      left: 15px;
+      top: 12px;
+      &:before {
+        font-size: 20px;
+        color: var(--cx-color-primary);
+      }
     }
   }
   .accordion-item-wrapper {
@@ -54,6 +60,11 @@
   }
   .accordion-list {
     padding: 0 8%;
+    .link {
+      top: -14px;
+      right: 0;
+      padding: inherit;
+    }
   }
   .accordion-list-item {
     border-bottom: 1px solid var(--cx-color-3);

@@ -25,6 +25,31 @@ class MockRoutingService {
     });
   }
 }
+const mockAllowedFSRequestTypes = [
+  {
+    code: 'fsclaim_request_type',
+    requestType: {
+      code: 'FSCLAIM',
+    },
+  },
+  {
+    code: 'fscoverage_change_request_type',
+    requestType: {
+      code: 'FSCOVERAGE_CHANGE',
+    },
+  },
+  {
+    code: 'fsinsuredobject_change_request_type',
+    requestType: {
+      code: 'FSINSUREDOBJECT_CHANGE',
+    },
+  },
+];
+const mockFaultyFSRequestTypes = [
+  {
+    code: 'fscoverage_change_request_type',
+  }
+];
 
 class MockChangeRequestService {
   getChangeRequest(): Observable<any> {
@@ -80,17 +105,29 @@ describe('PolicyDetailsComponent', () => {
     component.ngOnInit();
   });
 
-  it('should create', () => {
+  it('should check', () => {
     expect(component).toBeTruthy();
   });
 
   it('should create change request for policy', () => {
     spyOn(changeRequestService, 'createChangeRequest').and.stub();
-    component.changePolicyDetails(policyId, contractId);
+    component.changePolicyDetails(policyId, contractId, changeRequestType);
     expect(changeRequestService.createChangeRequest).toHaveBeenCalledWith(
       policyId,
       contractId,
       changeRequestType
     );
   });
+  it('should checkk if request type is allowed', () => {
+    expect(component.isChangeAllowed(mockAllowedFSRequestTypes, 'FSCOVERAGE_CHANGE')).toEqual(true);
+  });
+
+  it('should check if request type is not allowed', () => {
+    expect(component.isChangeAllowed(mockAllowedFSRequestTypes, 'NOT_EXISTING_TYPE')).toEqual(false);
+  });
+
+  it('should check if isChangeAllowed returns false with missing requestType', () => {
+    expect(component.isChangeAllowed(mockFaultyFSRequestTypes, 'NOT_EXISTING_TYPE')).toEqual(false);
+  });
+
 });

@@ -1,8 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  OnDestroy,
+} from '@angular/core';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { RoutingService } from '@spartacus/core';
-import { map } from 'rxjs/operators';
-import { Subscription, combineLatest, Observable } from 'rxjs';
+import { map, takeLast, take } from 'rxjs/operators';
+import { Subscription, combineLatest, Observable, of } from 'rxjs';
 import { OccConfig } from '@spartacus/core';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 
@@ -11,7 +16,7 @@ import { ChangeRequestService } from './../../../../core/change-request/facade/c
   templateUrl: './policy-details.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PolicyDetailsComponent implements OnInit {
+export class PolicyDetailsComponent implements OnInit, OnDestroy {
   constructor(
     protected routingService: RoutingService,
     protected policyService: PolicyService,
@@ -40,12 +45,23 @@ export class PolicyDetailsComponent implements OnInit {
     );
     this.policy$ = this.policyService.getPolicies();
   }
+
   getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
 
-  changePolicyDetails(policyId, contractId) {
-    const changeRequestType = 'FSCOVERAGE_CHANGE';
+  isChangeAllowed(allowedFSRequestTypes, requestType) {
+    if (allowedFSRequestTypes) {
+      return (
+        allowedFSRequestTypes
+          .filter(allowedRequestType => allowedRequestType.requestType)
+          .map(allowedRequestType => allowedRequestType.requestType.code)
+          .indexOf(requestType) > -1
+      );
+    }
+  }
+
+  changePolicyDetails(policyId, contractId, changeRequestType) {
     this.changeRequestService.createChangeRequest(
       policyId,
       contractId,
@@ -58,5 +74,11 @@ export class PolicyDetailsComponent implements OnInit {
         });
       }
     });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
