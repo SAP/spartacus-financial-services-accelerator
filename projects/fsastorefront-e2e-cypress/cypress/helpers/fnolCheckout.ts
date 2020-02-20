@@ -16,7 +16,7 @@ let claimNumber;
 
 export function selectAutoPolicyForFNOL() {
   cy.get('.info-card-caption')
-    .contains('00000035')
+    .contains('00000005')
     .parentsUntil('.col-md-4')
     .within(() => {
       cy.get('.info-card-caption').contains('Auto Insurance');
@@ -38,7 +38,11 @@ export function checkFNOLCheckoutPage() {
 export function checkFNOLSteps() {
   cy.get('p.label')
     .eq(0)
-    .should('have.text', ' Incident Information ');
+    .should('have.text', ' Incident Information ')
+    .then(() => {
+      claimNumber = this.getClaimIdFromLocalStorage();
+      console.log('checkFNOLSteps', claimNumber);
+    });
   cy.get('p.label')
     .eq(1)
     .should('have.text', ' Incident Report ');
@@ -47,10 +51,7 @@ export function checkFNOLSteps() {
     .should('have.text', ' General Information ');
   cy.get('p.label')
     .eq(3)
-    .should('have.text', ' Summary ')
-    .then(() => {
-      claimNumber = this.getClaimIdFromLocalStorage();
-    });
+    .should('have.text', ' Summary ');
 }
 
 export function populateIncidentInformationStep() {
@@ -78,14 +79,17 @@ export function populateIncidentInformationStep() {
       .type('my tesla S was stolen while I was in the shopping center');
     if (!claimNumber) {
       claimNumber = this.getClaimIdFromLocalStorage();
+      console.log('populateIncidentInformationStep', claimNumber);
     }
   });
 }
 
 export function populateIncidentReportStep() {
-  cy.get('[name=howAccidentOccured]').type(
-    'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
-  );
+  cy.get('[name=howAccidentOccured]')
+    .clear()
+    .type(
+      'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
+    );
 }
 
 export function populateGeneralInformationStep() {
@@ -116,7 +120,7 @@ export function checkIncidentInformationAccordion() {
     .within(() => {
       cy.get('.accordion-list-item').should('have.length', '8');
     });
-  cy.get('.accordion-list-item').contains('AutoBreakdown');
+  cy.get('.accordion-list-item').contains('AutoCollision');
 }
 
 export function checkIncidentReportAccordion() {
@@ -157,7 +161,7 @@ export function checkConfirmationPage() {
 
 export function checkOpenClaimContent() {
   cy.get('.title').contains('Auto Insurance');
-  cy.get('.value').contains('00000035');
+  cy.get('.value').contains('00000005');
   cy.get('.title').contains('Date of Loss');
   cy.get('.value').contains('01 Jan 2018');
   cy.get('.title').contains('Status');

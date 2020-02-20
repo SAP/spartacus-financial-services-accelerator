@@ -40,14 +40,13 @@ context('FNOL for sample data user', () => {
   it('Should check user is navigated to first FNOL page', () => {
     fnol.checkFNOLCheckoutPage();
     fnol.checkFNOLSteps();
-    cy.get('[name=whatHappened]').select('Breakdown');
+    fnol.populateIncidentInformationStep();
     clickContinueButton();
+    fnol.checkFNOLCheckoutPage();
   });
 
   it('Should check and populate Incident Report page', () => {
-    fnol.checkFNOLCheckoutPage();
     fnol.waitForIncidentReportStep();
-    clickContinueButton();
     fnol.populateIncidentReportStep();
     checkBackAndContinueButtons();
     clickContinueButton();
