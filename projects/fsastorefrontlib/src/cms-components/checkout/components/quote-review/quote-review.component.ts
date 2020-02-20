@@ -1,12 +1,13 @@
+import { FSCartService } from './../../../../core/cart/facade/fs-cart.service';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 import {
   FSCart,
   BindingStateType,
 } from './../../../../occ/occ-models/occ.models';
-import { map, take } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Cart, CartService, OccConfig, RoutingService } from '@spartacus/core';
+import { Cart, OccConfig, RoutingService } from '@spartacus/core';
 import { Observable, Subscription, of } from 'rxjs';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services';
 import { ModalService, ModalRef } from '@spartacus/storefront';
@@ -23,11 +24,10 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   checkoutStepUrlBack: string;
   subscription = new Subscription();
   modalRef: ModalRef;
-  bindingState: string;
   cartCode: string;
 
   constructor(
-    protected cartService: CartService,
+    protected cartService: FSCartService,
     protected config: OccConfig,
     protected routingService: RoutingService,
     protected checkoutConfigService: FSCheckoutConfigService,
@@ -44,18 +44,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     );
     this.cart$ = this.cartService.getActive();
     this.cartLoaded$ = this.cartService.getLoaded();
-
-    this.subscription.add(
-      this.cart$
-        .pipe(
-          take(1),
-          map(activeCart => {
-            this.cartCode = activeCart.code;
-            this.bindingState = (<FSCart>activeCart).insuranceQuote.state.code;
-          })
-        )
-        .subscribe()
-    );
   }
 
   getBaseUrl() {
@@ -67,11 +55,17 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   continue() {
-    if (this.bindingState === BindingStateType.UNBIND) {
-      this.openModal();
-    } else {
-      this.routingService.go(this.checkoutStepUrlNext);
-    }
+    this.cart$
+      .subscribe(activeCart => {
+        this.cartCode = activeCart.code;
+        const bindingState = (<FSCart>activeCart).insuranceQuote.state.code;
+        if (bindingState === BindingStateType.UNBIND) {
+          this.openModal();
+        } else {
+          this.routingService.go(this.checkoutStepUrlNext);
+        }
+      })
+      .unsubscribe();
   }
 
   private openModal() {

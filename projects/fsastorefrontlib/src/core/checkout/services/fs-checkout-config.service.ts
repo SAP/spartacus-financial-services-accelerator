@@ -11,8 +11,8 @@ import { CheckoutConfigService, CheckoutConfig } from '@spartacus/storefront';
 })
 export class FSCheckoutConfigService extends CheckoutConfigService {
   constructor(
-    private fsCheckoutConfig: CheckoutConfig,
-    private fsRoutingConfigService: RoutingConfigService
+    protected fsCheckoutConfig: CheckoutConfig,
+    protected fsRoutingConfigService: RoutingConfigService
   ) {
     super(fsCheckoutConfig, fsRoutingConfigService);
   }

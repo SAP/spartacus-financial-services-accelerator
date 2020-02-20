@@ -1,17 +1,17 @@
-import * as productCategory from '../../../helpers/productCategoryPage';
-import * as comparisonPage from '../../../helpers/comparisonTable';
 import * as addOptionsPage from '../../../helpers/checkout/addOptionsPage';
+import * as currentAccount from '../../../helpers/checkout/banking/currentAccount-checkout';
 import * as legalInformationPage from '../../../helpers/checkout/banking/legalInformationPage';
 import * as userIdentificationPage from '../../../helpers/checkout/banking/userIdentificationPage';
-import * as currentAccount from '../../../helpers/checkout/banking/currentAccount-checkout';
-import * as register from '../../../helpers/register';
-import { registrationUser } from '../../../sample-data/users';
 import {
   bindQuotePopup,
   checkOrderConfirmationBanking,
-  clickContinueButton,
   checkQuoteReviewAccordions,
+  clickContinueButton,
 } from '../../../helpers/checkout/checkoutSteps';
+import * as comparisonPage from '../../../helpers/comparisonTable';
+import * as productCategory from '../../../helpers/productCategoryPage';
+import * as register from '../../../helpers/register';
+import { registrationUser } from '../../../sample-data/users';
 
 context('Current Account Checkout', () => {
   before(() => {

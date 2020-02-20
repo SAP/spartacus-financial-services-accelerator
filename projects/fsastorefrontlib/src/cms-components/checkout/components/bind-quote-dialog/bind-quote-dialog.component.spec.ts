@@ -1,17 +1,13 @@
-import { By } from '@angular/platform-browser';
-import { QuoteService } from '../../../../core/my-account/facade/quote.service';
-import { BindQuoteDialogComponent } from './bind-quote-dialog.component';
-import { FSCart } from './../../../../occ/occ-models/occ.models';
 import { DebugElement, Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-  CartService,
-  I18nTestingModule,
-  Cart,
-  RoutingService,
-} from '@spartacus/core';
-import { Observable, of } from 'rxjs';
+import { By } from '@angular/platform-browser';
+import { Cart, I18nTestingModule, RoutingService } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
+import { Observable, of } from 'rxjs';
+import { QuoteService } from '../../../../core/my-account/facade/quote.service';
+import { FSCartService } from './../../../../core/cart/facade/fs-cart.service';
+import { FSCart } from './../../../../occ/occ-models/occ.models';
+import { BindQuoteDialogComponent } from './bind-quote-dialog.component';
 import createSpy = jasmine.createSpy;
 
 const mockCart: FSCart = {
@@ -44,7 +40,7 @@ describe('BindQuoteDialogComponent', () => {
   let component: BindQuoteDialogComponent;
   let fixture: ComponentFixture<BindQuoteDialogComponent>;
   let el: DebugElement;
-  let cartService: CartService;
+  let cartService: FSCartService;
   let modalService: MockModalService;
   let quoteService: MockQuoteService;
 
@@ -58,7 +54,7 @@ describe('BindQuoteDialogComponent', () => {
           useClass: MockModalService,
         },
         {
-          provide: CartService,
+          provide: FSCartService,
           useClass: MockCartService,
         },
         {
@@ -77,7 +73,7 @@ describe('BindQuoteDialogComponent', () => {
     fixture = TestBed.createComponent(BindQuoteDialogComponent);
     component = fixture.componentInstance;
     el = fixture.debugElement;
-    cartService = TestBed.get(CartService as Type<CartService>);
+    cartService = TestBed.get(FSCartService as Type<FSCartService>);
     quoteService = TestBed.get(QuoteService as Type<QuoteService>);
     modalService = TestBed.get(ModalService as Type<ModalService>);
 
