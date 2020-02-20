@@ -6,7 +6,7 @@ export default {
         {
           code: 'A5',
           type: {
-            code: 'A5 Quattro',
+            code: 'A5Quattro',
             year: [
               '2007',
               '2008',
@@ -27,7 +27,7 @@ export default {
         {
           code: 'A6',
           type: {
-            code: 'A6 Quattro',
+            code: 'A6Quattro',
             year: [
               '1994',
               '1995',
@@ -61,7 +61,7 @@ export default {
         {
           code: 'A8',
           type: {
-            code: 'A8 Quattro',
+            code: 'A8Quattro',
             year: [
               '1994',
               '1995',
