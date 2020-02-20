@@ -1,9 +1,9 @@
+import * as asm from '../../../helpers/asm';
 import * as register from '../../../helpers/register';
 import {
   amosAgent,
   registrationUserWithoutPhone,
 } from '../../../sample-data/users';
-import * as asm from '../../../helpers/asm';
 
 context('ASM', () => {
   before(() => {
@@ -26,11 +26,11 @@ context('ASM', () => {
 
   it('should login as agent', () => {
     register.loginInUser(amosAgent.email, amosAgent.password);
-    cy.contains('End Session').should('be.visible');
+    cy.get('cx-asm-session-timer').should('be.visible');
   });
 
   it('should end the session for user', () => {
-    cy.contains('End Session')
+    cy.get('.logout')
       .should('be.visible')
       .click();
   });

@@ -1,5 +1,6 @@
+import { FSCartService } from './../../../../../core/cart/facade/fs-cart.service';
 import { Component, OnInit } from '@angular/core';
-import { Cart, CartService, CmsConfig } from '@spartacus/core';
+import { Cart, CmsConfig } from '@spartacus/core';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,7 +11,7 @@ export class LegalDocumentsComponent implements OnInit {
   cart$: Observable<Cart>;
 
   constructor(
-    protected cartService: CartService,
+    protected cartService: FSCartService,
     protected config: CmsConfig
   ) {}
 

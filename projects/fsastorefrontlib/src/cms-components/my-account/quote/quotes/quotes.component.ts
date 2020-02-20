@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
 import { OccConfig, RoutingService } from '@spartacus/core';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 

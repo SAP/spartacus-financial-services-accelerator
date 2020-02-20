@@ -6,7 +6,6 @@ import {
   CmsConfig,
   ConfigModule,
   I18nModule,
-  AuthGuard,
   UrlModule,
 } from '@spartacus/core';
 import {

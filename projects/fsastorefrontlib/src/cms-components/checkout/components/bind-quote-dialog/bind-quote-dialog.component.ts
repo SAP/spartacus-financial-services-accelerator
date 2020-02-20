@@ -1,3 +1,4 @@
+import { FSCartService } from './../../../../core/cart/facade/fs-cart.service';
 import { filter, tap } from 'rxjs/operators';
 import {
   FSCart,
@@ -12,7 +13,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { ModalService } from '@spartacus/storefront';
-import { RoutingService, CartService } from '@spartacus/core';
+import { RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -34,7 +35,7 @@ export class BindQuoteDialogComponent {
     protected modalService: ModalService,
     protected quoteService: QuoteService,
     protected routingService: RoutingService,
-    protected cartService: CartService
+    protected cartService: FSCartService
   ) {}
 
   dismissModal(reason?: any): void {

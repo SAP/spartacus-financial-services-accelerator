@@ -1,3 +1,4 @@
+import { FSCartService } from './../../../../core/cart/facade/fs-cart.service';
 import { FSProduct } from './../../../../occ/occ-models/occ.models';
 import {
   ChangeDetectionStrategy,
@@ -7,11 +8,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import {
-  RoutingConfigService,
-  RoutingService,
-  CartService,
-} from '@spartacus/core';
+import { RoutingConfigService, RoutingService } from '@spartacus/core';
 import {
   CheckoutConfig,
   CheckoutProgressComponent,
@@ -32,7 +29,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
     protected routingConfigService: RoutingConfigService,
     protected activatedRoute: ActivatedRoute,
     protected categoryService: CategoryService,
-    protected cartService: CartService
+    protected cartService: FSCartService
   ) {
     super(config, routingService, routingConfigService);
   }
