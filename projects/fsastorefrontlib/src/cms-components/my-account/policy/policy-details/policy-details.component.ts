@@ -6,11 +6,11 @@ import {
 } from '@angular/core';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { RoutingService } from '@spartacus/core';
-import { map, takeLast, take } from 'rxjs/operators';
-import { Subscription, combineLatest, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Subscription, combineLatest, Observable } from 'rxjs';
 import { OccConfig } from '@spartacus/core';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
-import { AllowedFSRequestType } from 'fsastorefrontlib/occ/occ-models';
+import { AllowedFSRequestType } from './../../../../occ/occ-models';
 
 @Component({
   selector: 'fsa-policy-details',
