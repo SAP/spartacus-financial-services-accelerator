@@ -1,8 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  OnDestroy,
+} from '@angular/core';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { RoutingService } from '@spartacus/core';
-import { map } from 'rxjs/operators';
-import { Subscription, combineLatest, Observable } from 'rxjs';
+import { map, takeLast, take } from 'rxjs/operators';
+import { Subscription, combineLatest, Observable, of } from 'rxjs';
 import { OccConfig } from '@spartacus/core';
 
 @Component({
@@ -10,7 +15,7 @@ import { OccConfig } from '@spartacus/core';
   templateUrl: './policy-details.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PolicyDetailsComponent implements OnInit {
+export class PolicyDetailsComponent implements OnInit, OnDestroy {
   constructor(
     protected routingService: RoutingService,
     protected policyService: PolicyService,
@@ -38,7 +43,21 @@ export class PolicyDetailsComponent implements OnInit {
     );
     this.policy$ = this.policyService.getPolicies();
   }
+  isChangeAvailable(allowedFSRequestTypes, requestType) {
+    if (allowedFSRequestTypes) {
+      return (
+        allowedFSRequestTypes
+          .map(allowedRequestType => allowedRequestType.requestType.code)
+          .indexOf(requestType) > -1
+      );
+    }
+  }
   getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
+  }
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
