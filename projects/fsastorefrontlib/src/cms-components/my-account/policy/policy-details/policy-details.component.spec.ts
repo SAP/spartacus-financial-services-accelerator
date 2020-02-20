@@ -6,6 +6,7 @@ import { AccordionModule } from '../../../../shared/accordion/accordion.module';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import { Type } from '@angular/core';
+import { AllowedFSRequestType } from 'projects/fsastorefrontlib/src/occ/occ-models';
 
 class MockPolicyService {
   loadPolicyDetails(): void {}
@@ -25,29 +26,21 @@ class MockRoutingService {
     });
   }
 }
-const mockAllowedFSRequestTypes = [
+const mockAllowedFSRequestTypes: AllowedFSRequestType[] = [
   {
-    code: 'fsclaim_request_type',
     requestType: {
       code: 'FSCLAIM',
     },
   },
   {
-    code: 'fscoverage_change_request_type',
     requestType: {
       code: 'FSCOVERAGE_CHANGE',
     },
   },
   {
-    code: 'fsinsuredobject_change_request_type',
     requestType: {
       code: 'FSINSUREDOBJECT_CHANGE',
     },
-  },
-];
-const mockFaultyFSRequestTypes = [
-  {
-    code: 'fscoverage_change_request_type',
   },
 ];
 
@@ -127,12 +120,6 @@ describe('PolicyDetailsComponent', () => {
   it('should check if request type is not allowed', () => {
     expect(
       component.isChangeAllowed(mockAllowedFSRequestTypes, 'NOT_EXISTING_TYPE')
-    ).toEqual(false);
-  });
-
-  it('should check if isChangeAllowed returns false with missing requestType', () => {
-    expect(
-      component.isChangeAllowed(mockFaultyFSRequestTypes, 'NOT_EXISTING_TYPE')
     ).toEqual(false);
   });
 });
