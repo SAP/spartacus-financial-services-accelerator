@@ -112,9 +112,18 @@
                 </div>
                 <ng-container *ngIf="insuredObjectItem.changeable">
                   <div class="col-12 col-sm-2 value notice">
-                    <a href="#" class="link">{{
-                      'fscommon.edit' | cxTranslate
-                    }}</a>
+                    <p
+                      (click)="
+                        changePolicyDetails(
+                          policy.policyNumber,
+                          policy.contractNumber,
+                          'FSINSUREDOBJECT_CHANGE'
+                        )
+                      "
+                      class="link"
+                    >
+                      {{ 'fscommon.edit' | cxTranslate }}
+                    </p>
                   </div>
                 </ng-container>
               </li>
@@ -150,9 +159,18 @@
                       </div>
                       <ng-container *ngIf="childInsuredObjectItem.changeable">
                         <div class="col-6 col-sm-5 value notice">
-                          <a href="#" class="link">{{
-                            'fscommon.edit' | cxTranslate
-                          }}</a>
+                          <p
+                            (click)="
+                              changePolicyDetails(
+                                policy.policyNumber,
+                                policy.contractNumber,
+                                'FSINSUREDOBJECT_CHANGE'
+                              )
+                            "
+                            class="link"
+                          >
+                            {{ 'fscommon.edit' | cxTranslate }}
+                          </p>
                         </div>
                       </ng-container>
                     </li>
@@ -211,9 +229,18 @@
             )
           "
         >
-          <a href="#" class="link position-absolute">{{
-            'fscommon.edit' | cxTranslate
-          }}</a>
+          <p
+            (click)="
+              changePolicyDetails(
+                policy.policyNumber,
+                policy.contractNumber,
+                'FSCOVERAGE_CHANGE'
+              )
+            "
+            class="link"
+          >
+            {{ 'fscommon.edit' | cxTranslate }}
+          </p>
         </ng-container>
         <li
           *ngFor="let optionalCoverage of policy.optionalProducts"

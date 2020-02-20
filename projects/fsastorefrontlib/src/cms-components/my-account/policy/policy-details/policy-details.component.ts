@@ -9,6 +9,8 @@ import { RoutingService } from '@spartacus/core';
 import { map, takeLast, take } from 'rxjs/operators';
 import { Subscription, combineLatest, Observable, of } from 'rxjs';
 import { OccConfig } from '@spartacus/core';
+import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
+import { AllowedFSRequestType } from 'fsastorefrontlib/occ/occ-models';
 
 @Component({
   selector: 'fsa-policy-details',
@@ -19,7 +21,8 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
   constructor(
     protected routingService: RoutingService,
     protected policyService: PolicyService,
-    protected config: OccConfig
+    protected config: OccConfig,
+    protected changeRequestService: ChangeRequestService
   ) {}
 
   policy$;
@@ -43,7 +46,15 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     );
     this.policy$ = this.policyService.getPolicies();
   }
-  isChangeAllowed(allowedFSRequestTypes, requestType) {
+
+  getBaseUrl() {
+    return this.config.backend.occ.baseUrl || '';
+  }
+
+  isChangeAllowed(
+    allowedFSRequestTypes: AllowedFSRequestType[],
+    requestType: string
+  ): boolean {
     if (allowedFSRequestTypes) {
       return (
         allowedFSRequestTypes
@@ -53,9 +64,22 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
       );
     }
   }
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || '';
+
+  changePolicyDetails(policyId, contractId, changeRequestType) {
+    this.changeRequestService.createChangeRequest(
+      policyId,
+      contractId,
+      changeRequestType
+    );
+    this.changeRequestService.getChangeRequest().subscribe(changeRequest => {
+      if (changeRequest && changeRequest.configurationSteps) {
+        this.routingService.go({
+          cxRoute: changeRequest.configurationSteps[0].pageLabelOrId,
+        });
+      }
+    });
   }
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();

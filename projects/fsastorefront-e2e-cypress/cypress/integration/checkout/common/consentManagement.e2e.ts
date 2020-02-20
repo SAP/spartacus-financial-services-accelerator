@@ -1,8 +1,6 @@
-import * as register from '../../../helpers/register';
-import registrationUser, {
-  registrationUserWithoutPhone,
-} from '../../../sample-data/users';
 import * as consentManagement from '../../../helpers/consentManagement';
+import * as register from '../../../helpers/register';
+import { registrationUserWithoutPhone } from '../../../sample-data/users';
 
 context('Consent Management', () => {
   before(() => {

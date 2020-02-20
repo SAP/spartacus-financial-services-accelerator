@@ -1,5 +1,5 @@
 export function checkAsmHeader() {
-  cy.get('.fd-shellbar__product')
+  cy.get('.asm-bar')
     .should('be.visible')
     .should('contain', 'Assisted Service Mode');
   cy.get('[formcontrolname=userId]').should('be.visible');

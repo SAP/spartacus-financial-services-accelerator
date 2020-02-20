@@ -1,5 +1,6 @@
+import { FSCartService } from './../../../../core/cart/facade/fs-cart.service';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Cart, CartService } from '@spartacus/core';
+import { Cart } from '@spartacus/core';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,7 +11,7 @@ import { Observable } from 'rxjs';
 export class FSMiniCartComponent {
   cart$: Observable<Cart>;
 
-  constructor(protected cartService: CartService) {
+  constructor(protected cartService: FSCartService) {
     this.cart$ = this.cartService.getActive();
   }
 }

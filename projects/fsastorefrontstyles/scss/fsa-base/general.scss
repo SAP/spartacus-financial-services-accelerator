@@ -63,6 +63,7 @@ button:focus {
   outline: none;
 }
 .link {
+  cursor: pointer;
   font-weight: var(--cx-font-weight-semi);
   text-decoration: underline;
   text-transform: uppercase;
