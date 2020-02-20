@@ -1,4 +1,8 @@
-import { waitForPage, waitForCMSComponent } from './generalHelpers';
+import {
+  waitForPage,
+  waitForCMSComponent,
+  waitForUserAssets,
+} from './generalHelpers';
 
 export function getClaimIdFromLocalStorage() {
   const localData = JSON.parse(localStorage.getItem('spartacus-local-data'));
@@ -16,7 +20,7 @@ let claimNumber;
 
 export function selectAutoPolicyForFNOL() {
   cy.get('.info-card-caption')
-    .contains('00000005')
+    .contains('BULK1T2000000552')
     .parentsUntil('.col-md-4')
     .within(() => {
       cy.get('.info-card-caption').contains('Auto Insurance');
@@ -38,11 +42,11 @@ export function checkFNOLCheckoutPage() {
 export function checkFNOLSteps() {
   cy.get('p.label')
     .eq(0)
-    .should('have.text', ' Incident Information ')
-    .then(() => {
-      claimNumber = this.getClaimIdFromLocalStorage();
-      console.log('checkFNOLSteps', claimNumber);
-    });
+    .should('have.text', ' Incident Information ');
+  // .then(() => {
+  //   claimNumber = getClaimIdFromLocalStorage();
+  //   console.log('checkFNOLSteps', claimNumber);
+  // });
   cy.get('p.label')
     .eq(1)
     .should('have.text', ' Incident Report ');
@@ -57,7 +61,13 @@ export function checkFNOLSteps() {
 export function populateIncidentInformationStep() {
   cy.get('cx-dynamic-form').within(() => {
     //TODO: can we make random choose
-    cy.get('[name=whatHappened]').select('Collision');
+    cy.get('[name=whatHappened]')
+      .select('Collision')
+      .then(() => {
+        if (!claimNumber) {
+          claimNumber = this.getClaimIdFromLocalStorage();
+        }
+      });
     cy.get('[name=whenHappened]')
       .clear()
       .type('2018-01-01');
@@ -77,10 +87,6 @@ export function populateIncidentInformationStep() {
     cy.get('[name=description]')
       .clear()
       .type('my tesla S was stolen while I was in the shopping center');
-    if (!claimNumber) {
-      claimNumber = this.getClaimIdFromLocalStorage();
-      console.log('populateIncidentInformationStep', claimNumber);
-    }
   });
 }
 
@@ -161,7 +167,7 @@ export function checkConfirmationPage() {
 
 export function checkOpenClaimContent() {
   cy.get('.title').contains('Auto Insurance');
-  cy.get('.value').contains('00000005');
+  cy.get('.value').contains('BULK1T2000000552');
   cy.get('.title').contains('Date of Loss');
   cy.get('.value').contains('01 Jan 2018');
   cy.get('.title').contains('Status');
@@ -231,6 +237,24 @@ export function deleteClaimFromDialog() {
   cy.get('fsa-deleted-claim-dialog').within(() => {
     cy.get('.primary-button').click();
   });
+}
+
+export function clickContinueAndGetNewClaimID() {
+  cy.get('.primary-button')
+    .should('contain', 'Continue')
+    .click()
+    .then(() => {
+      const fsUserRequests = waitForUserAssets(
+        'fsUserRequests/',
+        'fsUserRequests'
+      );
+      cy.wait(`@${fsUserRequests}`)
+        .its('status')
+        .should('eq', 200);
+    })
+    .then(() => {
+      claimNumber = this.getClaimIdFromLocalStorage();
+    });
 }
 
 export function waitForIncidentReportStep() {

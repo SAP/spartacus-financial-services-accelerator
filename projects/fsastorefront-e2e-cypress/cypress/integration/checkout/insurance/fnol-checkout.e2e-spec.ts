@@ -46,7 +46,6 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should check and populate Incident Report page', () => {
-    fnol.waitForIncidentReportStep();
     fnol.populateIncidentReportStep();
     checkBackAndContinueButtons();
     clickContinueButton();
@@ -80,7 +79,7 @@ context('FNOL for sample data user', () => {
     fnol.startClaimFromHomepage();
     fnol.checkFnolEntryPage();
     fnol.selectPolicyOnEntryPage();
-    clickContinueButton();
+    fnol.clickContinueAndGetNewClaimID();
     fnol.checkFNOLSteps();
   });
 
