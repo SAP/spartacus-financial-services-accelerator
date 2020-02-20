@@ -32,7 +32,7 @@ class MockChangeRequestService {
       requestId: 'requestId',
     });
   }
-  createChangeRequest(policyId, contractId, changeRequestType) {}
+  createChangeRequest(policy, contract, changeRequest) {}
 }
 
 const MockOccModuleConfig: OccConfig = {

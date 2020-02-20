@@ -45,14 +45,18 @@ export class PolicyDetailsComponent implements OnInit {
   }
 
   changePolicyDetails(policyId, contractId) {
-    const changeRequestType = 'FSINSUREDOBJECT_CHANGE';
+    const changeRequestType = 'FSCOVERAGE_CHANGE';
     this.changeRequestService.createChangeRequest(
       policyId,
       contractId,
       changeRequestType
     );
-    this.changeRequestService.getChangeRequest().subscribe(res => {
-      console.log(res);
+    this.changeRequestService.getChangeRequest().subscribe(changeRequest => {
+      if (changeRequest && changeRequest.configurationSteps) {
+        this.routingService.go({
+          cxRoute: changeRequest.configurationSteps[0].pageLabelOrId,
+        });
+      }
     });
   }
 }
