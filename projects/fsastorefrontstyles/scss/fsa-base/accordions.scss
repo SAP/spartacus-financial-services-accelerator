@@ -37,12 +37,11 @@
     @include box-shadow(0, 8px, 6px, -6px, $color-grey, 1);
     position: relative;
     .fsa-icon {
-      position: absolute;
+      @include vertical-center;
       z-index: 2;
       left: 15px;
-      top: 12px;
       &:before {
-        font-size: 20px;
+        font-size: var(--cx-h5-font-size);
         color: var(--cx-color-primary);
       }
     }
