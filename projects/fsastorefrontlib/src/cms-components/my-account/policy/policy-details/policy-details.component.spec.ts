@@ -48,7 +48,7 @@ const mockAllowedFSRequestTypes = [
 const mockFaultyFSRequestTypes = [
   {
     code: 'fscoverage_change_request_type',
-  }
+  },
 ];
 
 class MockChangeRequestService {
@@ -119,15 +119,20 @@ describe('PolicyDetailsComponent', () => {
     );
   });
   it('should checkk if request type is allowed', () => {
-    expect(component.isChangeAllowed(mockAllowedFSRequestTypes, 'FSCOVERAGE_CHANGE')).toEqual(true);
+    expect(
+      component.isChangeAllowed(mockAllowedFSRequestTypes, 'FSCOVERAGE_CHANGE')
+    ).toEqual(true);
   });
 
   it('should check if request type is not allowed', () => {
-    expect(component.isChangeAllowed(mockAllowedFSRequestTypes, 'NOT_EXISTING_TYPE')).toEqual(false);
+    expect(
+      component.isChangeAllowed(mockAllowedFSRequestTypes, 'NOT_EXISTING_TYPE')
+    ).toEqual(false);
   });
 
   it('should check if isChangeAllowed returns false with missing requestType', () => {
-    expect(component.isChangeAllowed(mockFaultyFSRequestTypes, 'NOT_EXISTING_TYPE')).toEqual(false);
+    expect(
+      component.isChangeAllowed(mockFaultyFSRequestTypes, 'NOT_EXISTING_TYPE')
+    ).toEqual(false);
   });
-
 });
