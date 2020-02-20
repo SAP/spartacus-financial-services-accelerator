@@ -6,13 +6,13 @@ export function checkUserIdentificationPage() {
     .within(() => {
       cy.get('.position-relative')
         .eq(0)
-        .contains(' At the Nearest Branch ');
+        .contains('At the Nearest Branch');
       cy.get('.position-relative')
         .eq(1)
-        .contains(' Legal Identification ');
+        .contains('Legal Identification');
       cy.get('.position-relative')
         .eq(2)
-        .contains(' Video Identification ');
+        .contains('Video Identification');
     });
 }
 
@@ -22,7 +22,7 @@ export function selectAtTheNearestBranch() {
     .within(() => {
       cy.get('.position-relative')
         .eq(0)
-        .contains(' At the Nearest Branch ')
+        .contains('At the Nearest Branch')
         .click();
     });
 }
@@ -33,7 +33,7 @@ export function selectVideoIdentification() {
     .within(() => {
       cy.get('.position-relative')
         .eq(2)
-        .contains(' Video Identification ')
+        .contains('Video Identification')
         .click();
     });
 }

@@ -30,3 +30,34 @@ export function checkMiniCartCreditCard() {
     cy.get('.highlighted').should('have.text', ' Total price:  €89.00 ');
   });
 }
+
+export function checkCreditCardComparisonTable() {
+  cy.get('fsa-comparison-table-panel-item').should('have.length', 3);
+  cy.get('fsa-comparison-table-panel-item')
+    .eq(0)
+    .within(() => {
+      cy.get('.table-header-title').should('have.text', 'Basic Card');
+      cy.get('.table-header-value').should('have.text', '€49.00');
+    });
+  cy.get('fsa-comparison-table-panel-item')
+    .eq(1)
+    .within(() => {
+      cy.get('.table-header-title').should('have.text', 'Premium Card');
+      cy.get('.table-header-value').should('have.text', '€89.00');
+    });
+  cy.get('fsa-comparison-table-panel-item')
+    .eq(2)
+    .within(() => {
+      cy.get('.table-header-title').should('have.text', 'Exclusive Card');
+      cy.get('.table-header-value').should('have.text', '€169.00');
+    });
+}
+
+export function selectPremiumCard() {
+  cy.get('fsa-comparison-table-panel-item')
+    .eq(1)
+    .within(() => {
+      cy.get('.table-header-title').should('have.text', 'Premium Card');
+      cy.get('.primary-button').click();
+    });
+}

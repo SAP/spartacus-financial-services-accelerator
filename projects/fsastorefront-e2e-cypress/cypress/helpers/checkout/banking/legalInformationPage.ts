@@ -6,8 +6,7 @@ export function checkLegalInformationPage() {
     .within(() => {
       cy.get('li.pb-1').should('have.length', 4);
     });
-  cy.get('input[name="readAndAgree"]').click({ force: true });
-  cy.get('input[name="actOnMyBehalf"]').click({ force: true });
-  cy.get('input[name="usePersonalData"]').click({ force: true });
-  cy.get('input[name="authorizedToAccept"]').click({ force: true });
+  cy.get('fsa-legal-checkboxes').within(() => {
+    cy.get('input[type="checkbox"]').click({multiple:true, force:true});
+});
 }

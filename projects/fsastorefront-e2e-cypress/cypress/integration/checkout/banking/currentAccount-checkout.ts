@@ -35,7 +35,7 @@ context('Current Account Checkout', () => {
 
   it('Should check optional products for Current Account', () => {
     cy.wait(3000);
-    cy.get('.d-flex.progress-node').should('have.length', 5);
+    cy.get('.progress-node').should('have.length', 5);
     currentAccount.checkOptionalProductsAddTransactionChest();
   });
 

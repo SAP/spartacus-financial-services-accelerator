@@ -19,6 +19,7 @@ context('Credit Card Checkout', () => {
   it('Should register a new user and start Credit Card checkout', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
+    cy.wait(500);
     cy.selectOptionFromDropdown({
       menuOption: 'Banking',
       dropdownItem: 'Credit Card',
@@ -35,35 +36,12 @@ context('Credit Card Checkout', () => {
   });
 
   it('Should check prices in comparison table and select Premium Card', () => {
-    cy.get('fsa-comparison-table-panel-item').should('have.length', 3);
-    cy.get('fsa-comparison-table-panel-item')
-      .eq(0)
-      .within(() => {
-        cy.get('h3').should('have.text', 'Basic Card');
-        cy.get('h4').should('have.text', '€49.00');
-      });
-    cy.get('fsa-comparison-table-panel-item')
-      .eq(1)
-      .within(() => {
-        cy.get('h3').should('have.text', 'Premium Card');
-        cy.get('h4').should('have.text', '€89.00');
-      });
-    cy.get('fsa-comparison-table-panel-item')
-      .eq(2)
-      .within(() => {
-        cy.get('h3').should('have.text', 'Exclusive Card');
-        cy.get('h4').should('have.text', '€169.00');
-      });
-    cy.get('fsa-comparison-table-panel-item')
-      .eq(1)
-      .within(() => {
-        cy.get('h3').should('have.text', 'Premium Card');
-        cy.get('.primary-button').click();
-      });
+    creditCard.checkCreditCardComparisonTable();
+    creditCard.selectPremiumCard();
   });
 
   it('Should check optional products for Credit Card', () => {
-    cy.get('.d-flex.progress-node').should('have.length', 5);
+    cy.get('.progress-node').should('have.length', 5);
     creditCard.checkOptionalProducts();
   });
 
