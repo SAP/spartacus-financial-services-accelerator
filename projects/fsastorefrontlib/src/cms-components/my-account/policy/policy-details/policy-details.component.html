@@ -79,7 +79,7 @@
     <ng-container *ngIf="policy.insuredObjectList?.insuredObjects?.length > 0">
       <fsa-accordion-item
         [icon]="
-          isChangeAvailable(
+          isChangeAllowed(
             policy.categoryData.allowedFSRequestTypes,
             'FSINSUREDOBJECT_CHANGE'
           )
@@ -193,7 +193,7 @@
     </fsa-accordion-item>
     <fsa-accordion-item
       [icon]="
-        isChangeAvailable(
+        isChangeAllowed(
           policy.categoryData?.allowedFSRequestTypes,
           'FSCOVERAGE_CHANGE'
         )
@@ -205,7 +205,7 @@
       <ul class="accordion-list container-fluid position-relative">
         <ng-container
           *ngIf="
-            isChangeAvailable(
+            isChangeAllowed(
               policy.categoryData?.allowedFSRequestTypes,
               'FSCOVERAGE_CHANGE'
             )

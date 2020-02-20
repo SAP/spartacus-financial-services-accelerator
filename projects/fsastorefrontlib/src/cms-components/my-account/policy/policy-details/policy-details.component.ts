@@ -43,7 +43,7 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     );
     this.policy$ = this.policyService.getPolicies();
   }
-  isChangeAvailable(allowedFSRequestTypes, requestType) {
+  isChangeAllowed(allowedFSRequestTypes, requestType) {
     if (allowedFSRequestTypes) {
       return (
         allowedFSRequestTypes
