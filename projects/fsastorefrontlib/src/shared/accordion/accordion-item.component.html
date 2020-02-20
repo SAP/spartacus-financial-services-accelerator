@@ -1,8 +1,8 @@
 <div class="accordion-item">
-  <ng-container *ngIf="icon !== undefined">
-    <span [ngClass]="[icon]"></span>
-  </ng-container>
   <h6 class="accordion-heading" (click)="onItemClick()" [class.active]="opened">
+    <ng-container *ngIf="icon !== undefined">
+      <span [ngClass]="[icon]"></span>
+    </ng-container>
     {{ title }}
   </h6>
   <div class="accordion-item-wrapper" [class.active]="opened">
