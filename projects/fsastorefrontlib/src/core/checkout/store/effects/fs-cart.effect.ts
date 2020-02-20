@@ -3,11 +3,11 @@ import { FormDataService } from '@fsa/dynamicforms';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { CartActions } from '@spartacus/core';
-import { Observable, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { from, Observable, of } from 'rxjs';
+import { catchError, concatMap, map } from 'rxjs/operators';
+import { FsCartConnector } from '../../../cart/connectors/fs-cart.connector';
 import * as fromQuoteActions from '../../../my-account/store/actions/quote.action';
 import * as fromActions from '../actions/fs-cart.action';
-import { FsCartConnector } from '../../../cart/connectors/fs-cart.connector';
 
 @Injectable()
 export class FSCartEffects {
@@ -15,7 +15,7 @@ export class FSCartEffects {
   addOptionalProduct$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.ADD_OPTIONAL_PRODUCT),
     map((action: fromActions.AddOptionalProduct) => action.payload),
-    switchMap(payload => {
+    concatMap(payload => {
       return this.cartConnector
         .addToCart(
           payload.userId,
@@ -25,11 +25,23 @@ export class FSCartEffects {
           payload.entryNumber
         )
         .pipe(
-          switchMap((entry: any) => [
-            new CartActions.CartAddEntrySuccess(entry),
-            new CartActions.CartProcessesIncrement(payload.cartId),
+          concatMap((cart: any) => [
+            new CartActions.CartAddEntrySuccess({
+              ...cart.entry,
+              userId: payload.userId,
+              cartId: payload.cartId,
+            }),
           ]),
-          catchError(error => of(new CartActions.CartAddEntryFail(error)))
+          catchError(error =>
+            from([
+              new CartActions.CartAddEntryFail(error),
+              new CartActions.CartProcessesDecrement(payload.cartId),
+              new CartActions.LoadCart({
+                cartId: payload.cartId,
+                userId: payload.userId,
+              }),
+            ])
+          )
         );
     })
   );
@@ -38,7 +50,7 @@ export class FSCartEffects {
   startBundle$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.START_BUNDLE),
     map((action: fromActions.StartBundle) => action.payload),
-    switchMap(payload => {
+    concatMap(payload => {
       return this.cartConnector
         .startBundle(
           payload.userId,
@@ -49,7 +61,7 @@ export class FSCartEffects {
           payload.pricingData
         )
         .pipe(
-          switchMap((cart: any) => {
+          concatMap((cart: any) => {
             const actions: Action[] = [];
             const cartCode =
               payload.userId === 'anonymous' ? payload.cartId : cart.cartCode;
@@ -82,26 +94,30 @@ export class FSCartEffects {
                 );
               }
             }
-
-            if (cart.cartCode !== payload.cartId) {
-              actions.push(
-                new CartActions.LoadCart({
-                  userId: payload.userId,
-                  cartId: cartCode,
-                })
-              );
-            } else {
-              actions.push(new CartActions.CartAddEntrySuccess(cart.entry));
-              actions.push(
-                new CartActions.CartProcessesIncrement(payload.cartId)
-              );
-            }
-
+            actions.push(
+              new CartActions.CartAddEntrySuccess({
+                ...cart.entry,
+                userId: payload.userId,
+                cartId: payload.cartId,
+              })
+            );
             return actions;
           }),
           catchError(error => of(new CartActions.CartAddEntryFail(error)))
         );
     })
+  );
+
+  @Effect()
+  processesIncrement$: Observable<
+    CartActions.CartProcessesIncrement
+  > = this.actions$.pipe(
+    ofType(fromActions.ADD_OPTIONAL_PRODUCT, fromActions.START_BUNDLE),
+    map(
+      (action: fromActions.AddOptionalProduct | fromActions.StartBundle) =>
+        action.payload
+    ),
+    map(payload => new CartActions.CartProcessesIncrement(payload.cartId))
   );
 
   constructor(

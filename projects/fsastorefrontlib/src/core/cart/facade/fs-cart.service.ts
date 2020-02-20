@@ -1,45 +1,61 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { ActivatedRoute } from '@angular/router';
+import { select, Store } from '@ngrx/store';
 import {
-  AuthService,
-  StateWithMultiCart,
   ActiveCartService,
+  AuthService,
+  MultiCartSelectors,
   MultiCartService,
-  CartActions,
+  OCC_CART_ID_CURRENT,
+  OCC_USER_ID_ANONYMOUS,
+  StateWithMultiCart,
 } from '@spartacus/core';
 import { BehaviorSubject } from 'rxjs';
-import { filter, take, tap, switchMap } from 'rxjs/operators';
-import { PricingData } from '../../models/pricing.interface';
-import * as fromFSAction from '../../checkout/store/actions/index';
-import { ActivatedRoute } from '@angular/router';
+import { map, switchMap } from 'rxjs/operators';
 import { CategoryService } from '../../checkout/services/category/category.service';
+import * as fromFSAction from '../../checkout/store/actions/index';
+import { PricingData } from '../../models/pricing.interface';
 
 @Injectable()
 export class FSCartService extends ActiveCartService {
   protected productAddedSource = new BehaviorSubject<string>('');
   constructor(
-    protected fsStore: Store<StateWithMultiCart>,
     protected fsMultiCartService: MultiCartService,
     protected fsAuthService: AuthService,
     protected activatedRoute: ActivatedRoute,
-    protected categoryService: CategoryService
+    protected categoryService: CategoryService,
+    protected multiCartStore: Store<StateWithMultiCart>
   ) {
-    super(fsStore, fsAuthService, fsMultiCartService);
-    this.fsAuthService
-      .getOccUserId()
-      .subscribe(occUserId => (this.fsUserId = occUserId));
-    this.getActiveCartId().subscribe(cartId => (this.fsCartId = cartId));
+    super(multiCartStore, fsAuthService, fsMultiCartService);
+    this.fsAuthService.getOccUserId().subscribe(userId => {
+      this.fsUserId = userId;
+    });
+    this.fsActiveCartId$.subscribe(cartId => {
+      this.fsCartId = cartId;
+    });
   }
-
-  fsUserId;
-  fsCartId;
+  fsUserId: string;
+  fsCartId: string;
+  fsActiveCartId$ = this.store.pipe(
+    select(MultiCartSelectors.getActiveCartId),
+    map(cartId => {
+      if (!cartId) {
+        return OCC_CART_ID_CURRENT;
+      }
+      this.fsCartId = cartId;
+      return cartId;
+    })
+  );
+  fsCartSelector$ = this.fsActiveCartId$.pipe(
+    switchMap(cartId => this.multiCartService.getCartEntity(cartId))
+  );
 
   addOptionalProduct(
     productCode: string,
     quantity: number,
     entryNumber: string
   ): void {
-    this.fsStore.dispatch(
+    this.multiCartStore.dispatch(
       new fromFSAction.AddOptionalProduct({
         userId: this.fsUserId,
         cartId: this.fsCartId,
@@ -56,30 +72,19 @@ export class FSCartService extends ActiveCartService {
     quantity: number,
     pricingData: PricingData
   ): void {
-    this.getActiveCartId()
-      .pipe(
-        tap(cartId => {
-          if (!cartId) {
-            this.multiCartService.createCart({
-              userId: this.fsUserId,
-              extraData: {
-                active: true,
-              },
-            });
-          }
-        }),
-        switchMap(cartId => this.multiCartService.getCartEntity(cartId)),
-        filter(cartState => !cartState.loading),
-        filter(cartState => cartState.success || cartState.error),
-        take(1)
-      )
-      .subscribe(state => {
-        if (state.value.guid) {
-          this.fsCartId = state.value.guid;
-          this.fsStore.dispatch(
+    this.fsMultiCartService
+      .createCart({
+        userId: this.fsUserId,
+        extraData: {
+          active: true,
+        },
+      })
+      .subscribe(cartState => {
+        if (this.isCartCreated(cartState)) {
+          this.multiCartStore.dispatch(
             new fromFSAction.StartBundle({
               userId: this.fsUserId,
-              cartId: state.value.guid,
+              cartId: this.fsCartId,
               productCode: productCode,
               bundleTemplateId: bundleTemplateId,
               quantity: quantity,
@@ -90,13 +95,19 @@ export class FSCartService extends ActiveCartService {
       });
   }
 
-  loadCart() {
-    this.store.dispatch(
-      new CartActions.LoadCart({
-        cartId: this.fsCartId,
-        userId: this.fsUserId,
-      })
-    );
+  private isCartCreated(cartState) {
+    return cartState && !cartState.loading && cartState.success;
   }
 
+  loadCart(cartId: string): void {
+    if (this.fsUserId !== OCC_USER_ID_ANONYMOUS) {
+      this.multiCartService.loadCart({
+        userId: this.fsUserId,
+        cartId: cartId ? cartId : OCC_CART_ID_CURRENT,
+        extraData: {
+          active: true,
+        },
+      });
+    }
+  }
 }

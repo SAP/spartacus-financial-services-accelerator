@@ -1,14 +1,14 @@
-import { TestBed, inject } from '@angular/core/testing';
-import * as fromReducer from './../store/reducers';
-import { Store, StoreModule } from '@ngrx/store';
 import { Type } from '@angular/core';
+import { inject, TestBed } from '@angular/core/testing';
+import { FormDataService } from '@fsa/dynamicforms';
+import { Store, StoreModule } from '@ngrx/store';
+import { AuthService, OCC_USER_ID_CURRENT } from '@spartacus/core';
+import { Observable, of } from 'rxjs';
+import { FSCartService } from '../../cart/facade/fs-cart.service';
+import * as fromAction from './../store/actions';
+import * as fromReducer from './../store/reducers';
 import { reducerProvider, reducerToken } from './../store/reducers/index';
 import { QuoteService } from './quote.service';
-import { AuthService, CartActions, OCC_USER_ID_CURRENT } from '@spartacus/core';
-import { FormDataService } from '@fsa/dynamicforms';
-import { of, Observable } from 'rxjs';
-import * as fromAction from './../store/actions';
-import { FSCartService } from '../../cart/facade/fs-cart.service';
 
 const userId = OCC_USER_ID_CURRENT;
 const cartId = '0000001';
@@ -91,6 +91,7 @@ class MockCartService {
   getActive() {
     return of(this.cart);
   }
+  loadCart() {}
 }
 
 describe('QuoteServiceTest', () => {
@@ -182,27 +183,24 @@ describe('QuoteServiceTest', () => {
   });
 
   it('should be able to retrieve quote with full cart', () => {
+    const spy = spyOn(cartService, 'loadCart');
     cartService.cart = mockCart;
     formDataService.formData = mockFormData;
     service.retrieveQuote({ cartCode: cartId });
-    expect(store.dispatch).toHaveBeenCalledWith(
-      new CartActions.LoadCart({ cartId: cartId, userId: userId })
-    );
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should be able to retrieve quote with empty cart', () => {
+    const spy = spyOn(cartService, 'loadCart');
     cartService.cart = cartWithoutEntries;
     service.retrieveQuote({ cartCode: cartId });
-    expect(store.dispatch).toHaveBeenCalledWith(
-      new CartActions.LoadCart({ cartId: cartId, userId: userId })
-    );
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should be able to retrieve quote with entries without forms', () => {
+    const spy = spyOn(cartService, 'loadCart');
     cartService.cart = cartWithOneEntry;
     service.retrieveQuote({ cartCode: cartId });
-    expect(store.dispatch).toHaveBeenCalledWith(
-      new CartActions.LoadCart({ cartId: cartId, userId: userId })
-    );
+    expect(spy).toHaveBeenCalled();
   });
 });

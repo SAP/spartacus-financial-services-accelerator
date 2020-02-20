@@ -1,17 +1,13 @@
 import { Injectable } from '@angular/core';
 import { FormDataService } from '@fsa/dynamicforms';
-import { Store, select } from '@ngrx/store';
-import {
-  AuthService,
-  CartActions,
-  OrderEntry,
-} from '@spartacus/core';
+import { select, Store } from '@ngrx/store';
+import { AuthService, OrderEntry } from '@spartacus/core';
+import { map, take } from 'rxjs/operators';
 import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
+import { FSCartService } from '../../cart/facade/fs-cart.service';
+import * as fromQuoteStore from './../store';
 import * as fromAction from './../store/actions';
 import * as fromReducer from './../store/reducers';
-import { map, take } from 'rxjs/operators';
-import * as fromQuoteStore from './../store';
-import { FSCartService } from '../../cart/facade/fs-cart.service';
 
 @Injectable()
 export class QuoteService {
@@ -48,19 +44,17 @@ export class QuoteService {
     this.authService
       .getOccUserId()
       .pipe(take(1))
-      .subscribe(occUserId =>
-        this.store.dispatch(
-          new CartActions.LoadCart({
-            cartId: quote.cartCode,
-            userId: occUserId,
-          })
-        )
-      )
+      .subscribe(occUserId => {
+        if (occUserId) {
+          this.cartService.loadCart(quote.cartCode);
+        }
+      })
       .unsubscribe();
 
     this.cartService.getActive().subscribe((cart: FSCart) => {
       if (
         cart &&
+        cart.deliveryOrderGroups &&
         cart.deliveryOrderGroups.length > 0 &&
         cart.deliveryOrderGroups[0].entries &&
         cart.deliveryOrderGroups[0].entries.length > 0
@@ -89,7 +83,11 @@ export class QuoteService {
   }
 
   protected loadChooseCoverForm(insuranceQuote: any, categoryCode: string) {
-    if (insuranceQuote && insuranceQuote.quoteDetails) {
+    if (
+      insuranceQuote &&
+      insuranceQuote.quoteDetails &&
+      insuranceQuote.quoteDetails.entry
+    ) {
       const dataId = insuranceQuote.quoteDetails.entry
         .filter(details => details.key === 'formId')
         .map(mapEntry => mapEntry.value)[0];

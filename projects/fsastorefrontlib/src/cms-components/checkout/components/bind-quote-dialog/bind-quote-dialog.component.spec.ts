@@ -1,13 +1,13 @@
-import { FSCartService } from '../../../../core/checkout/services';
-import { By } from '@angular/platform-browser';
-import { QuoteService } from '../../../../core/my-account/facade/quote.service';
-import { BindQuoteDialogComponent } from './bind-quote-dialog.component';
-import { FSCart } from './../../../../occ/occ-models/occ.models';
 import { DebugElement, Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { I18nTestingModule, Cart, RoutingService } from '@spartacus/core';
-import { Observable, of } from 'rxjs';
+import { By } from '@angular/platform-browser';
+import { Cart, I18nTestingModule, RoutingService } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
+import { Observable, of } from 'rxjs';
+import { QuoteService } from '../../../../core/my-account/facade/quote.service';
+import { FSCartService } from './../../../../core/cart/facade/fs-cart.service';
+import { FSCart } from './../../../../occ/occ-models/occ.models';
+import { BindQuoteDialogComponent } from './bind-quote-dialog.component';
 import createSpy = jasmine.createSpy;
 
 const mockCart: FSCart = {
