@@ -119,26 +119,89 @@ export const importAutoPolicy = {
     ],
     insuredObjects: [
       {
-        insuredObjectId: 'BULK1000000551T2IO1V1',
-        insuredObjectType: {
-          code: 'PERSON',
-        },
+        insuredObjectId: 'IO000001',
+        insuredObjectType: { code: 'AUTO' },
         insuredObjectItems: [
           {
-            itemId: 'BULK1000000551T2IO1IT1V1',
-            label: 'firstName',
+            itemId: 'IOI000001',
+            label: 'vehicleMake',
+            externalValue: 'Opel',
+          },
+          {
+            itemId: 'IOI000002',
+            label: 'vehicleModel',
+            externalValue: 'Astra',
+          },
+          {
+            itemId: 'IOI000003',
+            label: 'vehicleType',
+            externalValue: 'OPELAstra5Doors1.6EcotecTurbo6AT',
+          },
+          {
+            itemId: 'IOI000004',
+            label: 'vehicleAnnualMileage',
+            externalValue: '12000',
+          },
+          {
+            itemId: 'IOI000005',
+            label: 'vehicleValue',
+            externalValue: '23000',
+          },
+          {
+            itemId: 'IOI000006',
+            label: 'vehiclePurchaseDate',
+            format: 'DATE',
+            externalValue: '2018-05-11T08:59:04',
+          },
+          {
+            itemId: 'IOI000007',
+            label: 'vehicleIdentificationNumber',
+            externalValue: '31232131313312312',
+          },
+          {
+            itemId: 'IOI000008',
+            label: 'dateOfBirth',
+            format: 'DATE',
+            externalValue: '1988-05-11T08:59:04',
+          },
+          {
+            itemId: 'IOI000009',
+            label: 'mainDriverFirstName',
             externalValue: 'Donna',
           },
           {
-            itemId: 'BULK1000000551T2IO1IT2V1',
-            label: 'lastName',
+            itemId: 'IOI000010',
+            label: 'mainDriverLastName',
             externalValue: 'Moore',
           },
           {
-            itemId: 'BULK1000000551T2IO1IT3V1',
-            label: 'birthday',
+            itemId: 'IOI0000011',
+            label: 'mainDriverLicenceNumber',
+            externalValue: 'LS32313',
+          },
+          {
+            itemId: 'IOI0000012',
+            label: 'mainDriverLicenseDate',
             format: 'DATE',
-            externalValue: '2018-05-11T08:59:04',
+            externalValue: '2015-05-11T08:59:04',
+          },
+        ],
+        childInsuredObjects: [
+          {
+            insuredObjectId: 'IO000002',
+            insuredObjectType: { code: 'DRIVER' },
+            insuredObjectItems: [
+              {
+                itemId: 'IOI1000001',
+                label: 'firstName',
+                externalValue: 'Donna',
+              },
+              {
+                itemId: 'IOI1000002',
+                label: 'lastName',
+                externalValue: 'Moore',
+              },
+            ],
           },
         ],
       },
