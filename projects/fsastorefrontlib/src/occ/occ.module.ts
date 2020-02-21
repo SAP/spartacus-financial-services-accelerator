@@ -24,7 +24,11 @@ import { QuoteAdapter } from '../core/my-account/connectors/quote.adapter';
 import { OccQuoteAdapter } from './adapters/quote/occ-quote.adapter';
 import { UserRequestAdapter } from '../core/user-request/connectors';
 import { OccUserRequestAdapter } from './adapters/user-request/occ-user-request.adapter';
-import { FSCsTicketAdapter } from '../core';
+import { FSCsTicketAdapter } from '../core/cs-ticket/connectors/cs-ticket.adapter';
+import { ChangeRequestAdapter } from '../core/change-request/connectors/change-request.adapter';
+import { OccChangeRequestAdapter } from './adapters/change-request/occ-change-request.adapter';
+import { OccFSProductAssignmentAdapter } from './adapters/product-assignment/occ-product-assignment.adapter';
+import { FSProductAssignmentAdapter } from '../core';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
@@ -76,6 +80,14 @@ import { FSCsTicketAdapter } from '../core';
     {
       provide: FSCsTicketAdapter,
       useClass: OccFsCsTicketAdapter,
+    },
+    {
+      provide: ChangeRequestAdapter,
+      useClass: OccChangeRequestAdapter,
+    },
+    {
+      provide: FSProductAssignmentAdapter,
+      useClass: OccFSProductAssignmentAdapter,
     },
     { provide: OccConfig, useExisting: Config },
   ],
