@@ -18,6 +18,7 @@ import { CategoryFeatureCarouselModule } from './category/category-feature-carou
 import { FSRegisterModule } from './user/register/fs-register.module';
 import { ProductModule } from './product/product.module';
 import { ChangeProcessModule } from './change-process/change-process.module';
+import { GroupPolicyModule } from './group-policy/group-policy.module';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { ChangeProcessModule } from './change-process/change-process.module';
     CustomContainerModule,
     MyAccountModule,
     FSRegisterModule,
+    GroupPolicyModule,
     UserRequestModule,
     ChangeProcessModule,
     StoreModule.forFeature('assets', reducerToken),
@@ -45,6 +47,7 @@ import { ChangeProcessModule } from './change-process/change-process.module';
     CustomContainerModule,
     MyAccountModule,
     FSRegisterModule,
+    GroupPolicyModule,
     UserRequestModule,
     ChangeProcessModule,
     CategoryFeatureModule,
