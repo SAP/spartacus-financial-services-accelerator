@@ -7,6 +7,6 @@ export function checkLegalInformationPage() {
       cy.get('li.pb-1').should('have.length', 4);
     });
   cy.get('fsa-legal-checkboxes').within(() => {
-    cy.get('input[type="checkbox"]').click({multiple:true, force:true});
-});
+    cy.get('input[type="checkbox"]').click({ multiple: true, force: true });
+  });
 }
