@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FSAStorefrontModule } from '@fsa/storefront';
 import { AppComponent } from './app.component';
 import { environment } from 'src/environments/environment';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +32,9 @@ import { environment } from 'src/environments/environment';
         level: '1.3',
         anonymousConsents: true,
       }
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
     })
   ],
   providers: [],

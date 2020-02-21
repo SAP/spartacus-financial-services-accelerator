@@ -1,8 +1,6 @@
-import * as register from '../../../helpers/register';
-import registrationUser, {
-  registrationUserWithoutPhone,
-} from '../../../sample-data/users';
 import * as consentManagement from '../../../helpers/consentManagement';
+import * as register from '../../../helpers/register';
+import { registrationUserWithoutPhone } from '../../../sample-data/users';
 
 context('Consent Management', () => {
   before(() => {
@@ -25,12 +23,10 @@ context('Consent Management', () => {
 
   it('should register a new user', () => {
     register.registerUser(registrationUserWithoutPhone);
-    cy.wait(3000);
     register.login(
       registrationUserWithoutPhone.email,
       registrationUserWithoutPhone.password
     );
-    cy.wait(1500);
   });
 
   it('should check consent management page', () => {

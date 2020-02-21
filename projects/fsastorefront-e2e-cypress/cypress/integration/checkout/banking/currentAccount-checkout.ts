@@ -1,12 +1,11 @@
-import * as productCategory from '../../../helpers/productCategoryPage';
-import * as comparisonPage from '../../../helpers/comparisonTable';
+import * as currentAccount from '../../../helpers/checkout/banking/currentAccount';
 import * as legalInformationPage from '../../../helpers/checkout/banking/legalInformationPage';
 import * as userIdentificationPage from '../../../helpers/checkout/banking/userIdentificationPage';
-import * as currentAccount from '../../../helpers/checkout/banking/currentAccount';
+import * as comparisonPage from '../../../helpers/comparisonTable';
+import * as productCategory from '../../../helpers/productCategoryPage';
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import { checkApprovedMessage } from '../../../helpers/my-account/inbox';
 
 context('Current Account Checkout', () => {
   before(() => {

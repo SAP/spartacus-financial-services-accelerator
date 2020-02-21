@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { RoutingService } from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
-import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
-import { FSCheckoutService } from '../../../../../core/checkout/facade/fs-checkout.service';
+import { RoutingService } from '@spartacus/core';
 import { filter, take, tap } from 'rxjs/operators';
+import { FSCheckoutService } from '../../../../../core/checkout/facade/fs-checkout.service';
+import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
 
 @Component({
   selector: 'fsa-select-identification',
@@ -52,7 +52,7 @@ export class SelectIdentificationTypeComponent implements OnInit {
       .pipe(
         filter(identificationType => identificationType),
         take(1),
-        tap(next => {
+        tap(() => {
           this.checkoutService.placeOrder();
           this.checkoutService.orderPlaced = true;
           this.routingService.go({ cxRoute: 'orderConfirmation' });
