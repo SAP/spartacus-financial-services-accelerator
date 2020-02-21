@@ -26,6 +26,7 @@ export const fsaStorefrontRoutesConfig: RoutesConfig = {
   noClaims: { paths: ['noClaims'] },
   claimsPage: { paths: ['claimsPage'] },
   contactAgent: { paths: ['contact-agent/:agent'] },
+  productAssignments: { paths: ['orgUnit/:orgUnitId/productAssignments'] },
   inbox: { paths: ['my-account/inbox'] },
   policies: { paths: ['my-account/my-policies'] },
   policyDetails: { paths: ['my-account/my-policies/:policyId/:contractId'] },

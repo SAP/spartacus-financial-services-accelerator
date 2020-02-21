@@ -18,6 +18,7 @@ import { CategoryFeatureCarouselModule } from './category/category-feature-carou
 import { FSRegisterModule } from './user/register/fs-register.module';
 import { ProductModule } from './product/product.module';
 import { ChangeProcessModule } from './change-process/change-process.module';
+import { ProductAssignmentModule } from './product-assignment/product-assignment.module';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { ChangeProcessModule } from './change-process/change-process.module';
     EffectsModule.forFeature(effects),
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,
+    ProductAssignmentModule
   ],
   exports: [
     AgentModule,
@@ -49,7 +51,8 @@ import { ChangeProcessModule } from './change-process/change-process.module';
     ChangeProcessModule,
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,
+    ProductAssignmentModule
   ],
   providers: [reducerProvider],
 })
-export class CmsLibModule {}
+export class CmsLibModule { }
