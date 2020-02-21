@@ -1,3 +1,4 @@
+import { ProductAssignmentStoreModule } from './../../core/product-assignment/store/product-assignments-store.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -15,7 +16,6 @@ import {
 } from '@spartacus/storefront';
 import { ProductAssignmentsComponent } from './product-assignments/product-assignments.component';
 
-
 @NgModule({
   imports: [
     CommonModule,
@@ -23,6 +23,7 @@ import { ProductAssignmentsComponent } from './product-assignments/product-assig
     I18nModule,
     UrlModule,
     ReactiveFormsModule,
+    ProductAssignmentStoreModule,
     RouterModule.forChild([
       {
         path: null,
@@ -38,12 +39,12 @@ import { ProductAssignmentsComponent } from './product-assignments/product-assig
       cmsComponents: {
         ProductAssignmentsFlex: {
           component: ProductAssignmentsComponent,
-        }
+        },
       },
     }),
   ],
   declarations: [ProductAssignmentsComponent],
   exports: [ProductAssignmentsComponent],
-  entryComponents: [ProductAssignmentsComponent]
+  entryComponents: [ProductAssignmentsComponent],
 })
-export class ProductAssignmentModule { }
+export class ProductAssignmentModule {}

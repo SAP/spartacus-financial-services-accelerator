@@ -36,7 +36,7 @@ import { ProductAssignmentModule } from './product-assignment/product-assignment
     EffectsModule.forFeature(effects),
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,
-    ProductAssignmentModule
+    ProductAssignmentModule,
   ],
   exports: [
     AgentModule,
@@ -51,8 +51,8 @@ import { ProductAssignmentModule } from './product-assignment/product-assignment
     ChangeProcessModule,
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,
-    ProductAssignmentModule
+    ProductAssignmentModule,
   ],
   providers: [reducerProvider],
 })
-export class CmsLibModule { }
+export class CmsLibModule {}
