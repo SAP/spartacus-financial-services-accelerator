@@ -3,10 +3,13 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { RoutingService, OccConfig, I18nTestingModule } from '@spartacus/core';
 import { of, Observable } from 'rxjs';
 import { AccordionModule } from '../../../../shared/accordion/accordion.module';
-import { PolicyService } from '../../../../core/my-account/facade';
+import { PolicyService } from '../../../../core/my-account/facade/policy.service';
+import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
+import { Type } from '@angular/core';
+import { AllowedFSRequestType } from 'projects/fsastorefrontlib/src/occ/occ-models';
 
 class MockPolicyService {
-  loadPolicyDetails(policyId: string, contractId: string): void {}
+  loadPolicyDetails(): void {}
 
   getPolicies() {}
 }
@@ -23,31 +26,32 @@ class MockRoutingService {
     });
   }
 }
-const mockAllowedFSRequestTypes = [
+const mockAllowedFSRequestTypes: AllowedFSRequestType[] = [
   {
-    code: 'fsclaim_request_type',
     requestType: {
       code: 'FSCLAIM',
     },
   },
   {
-    code: 'fscoverage_change_request_type',
     requestType: {
       code: 'FSCOVERAGE_CHANGE',
     },
   },
   {
-    code: 'fsinsuredobject_change_request_type',
     requestType: {
       code: 'FSINSUREDOBJECT_CHANGE',
     },
   },
 ];
-const mockFaultyFSRequestTypes = [
-  {
-    code: 'fscoverage_change_request_type',
-  },
-];
+
+class MockChangeRequestService {
+  getChangeRequest(): Observable<any> {
+    return of({
+      requestId: 'requestId',
+    });
+  }
+  createChangeRequest(policy, contract, changeRequest) {}
+}
 
 const MockOccModuleConfig: OccConfig = {
   context: {
@@ -61,9 +65,14 @@ const MockOccModuleConfig: OccConfig = {
   },
 };
 
+const policyId = 'policyId';
+const contractId = 'contractId';
+const changeRequestType = 'FSINSUREDOBJECT_CHANGE';
+
 describe('PolicyDetailsComponent', () => {
   let component: PolicyDetailsComponent;
   let fixture: ComponentFixture<PolicyDetailsComponent>;
+  let changeRequestService: MockChangeRequestService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -72,9 +81,14 @@ describe('PolicyDetailsComponent', () => {
         { provide: RoutingService, useClass: MockRoutingService },
         { provide: PolicyService, useClass: MockPolicyService },
         { provide: OccConfig, useValue: MockOccModuleConfig },
+        { provide: ChangeRequestService, useClass: MockChangeRequestService },
       ],
       declarations: [PolicyDetailsComponent],
     }).compileComponents();
+
+    changeRequestService = TestBed.get(ChangeRequestService as Type<
+      ChangeRequestService
+    >);
   }));
 
   beforeEach(() => {
@@ -88,6 +102,15 @@ describe('PolicyDetailsComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should create change request for policy', () => {
+    spyOn(changeRequestService, 'createChangeRequest').and.stub();
+    component.changePolicyDetails(policyId, contractId, changeRequestType);
+    expect(changeRequestService.createChangeRequest).toHaveBeenCalledWith(
+      policyId,
+      contractId,
+      changeRequestType
+    );
+  });
   it('should checkk if request type is allowed', () => {
     expect(
       component.isChangeAllowed(mockAllowedFSRequestTypes, 'FSCOVERAGE_CHANGE')
@@ -97,12 +120,6 @@ describe('PolicyDetailsComponent', () => {
   it('should check if request type is not allowed', () => {
     expect(
       component.isChangeAllowed(mockAllowedFSRequestTypes, 'NOT_EXISTING_TYPE')
-    ).toEqual(false);
-  });
-
-  it('should check if isChangeAllowed returns false with missing requestType', () => {
-    expect(
-      component.isChangeAllowed(mockFaultyFSRequestTypes, 'NOT_EXISTING_TYPE')
     ).toEqual(false);
   });
 });
