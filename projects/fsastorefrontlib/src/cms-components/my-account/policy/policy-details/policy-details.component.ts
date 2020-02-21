@@ -71,13 +71,20 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
       contractId,
       changeRequestType
     );
-    this.changeRequestService.getChangeRequest().subscribe(changeRequest => {
-      if (changeRequest && changeRequest.configurationSteps) {
-        this.routingService.go({
-          cxRoute: changeRequest.configurationSteps[0].pageLabelOrId,
-        });
-      }
-    });
+    this.subscription.add(
+      this.changeRequestService
+        .getChangeRequest()
+        .pipe(
+          map(changeRequest => {
+            if (changeRequest && changeRequest.configurationSteps) {
+              this.routingService.go({
+                cxRoute: changeRequest.configurationSteps[0].pageLabelOrId,
+              });
+            }
+          })
+        )
+        .subscribe()
+    );
   }
 
   ngOnDestroy() {
