@@ -14,7 +14,9 @@ context('FNOL for sample data user', () => {
 
   it('Should check anonymous user cannot access claims', () => {
     cy.visit('/');
-    fnol.startClaimFromHomepage();
+    cy.get('.Section4 cx-banner')
+      .eq(1)
+      .click();
     cy.get('.heading-headline').should('have.text', 'Login');
   });
 
