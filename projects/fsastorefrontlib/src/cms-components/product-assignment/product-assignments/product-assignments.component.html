@@ -1,12 +1,16 @@
+<h2>{{ 'b2b.selectProducts' | cxTranslate }}</h2>
 <ng-container *ngIf="productAssignments$ | async as productAssignments">
   <div class="card-row container">
-    <ul class="row">
-      <li
-        class="single-card col-3"
+    <div class="row">
+      <div
+        class="single-card col-4"
         *ngFor="let productAssignment of productAssignments.assignments"
       >
-        {{ productAssignment.product.name }}
-      </li>
-    </ul>
+        <ul>
+          <li>{{ productAssignment.product.name }}</li>
+          <li>{{ productAssignment.product.defaultCategory.name }}</li>
+        </ul>
+      </div>
+    </div>
   </div>
 </ng-container>

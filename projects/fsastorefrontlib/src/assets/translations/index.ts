@@ -1,4 +1,5 @@
 import { TranslationResources } from '@spartacus/core';
+import { b2b } from './en/b2b.en';
 import { claim } from './en/claim.en';
 import { fscommon } from './en/common.en';
 import { forms } from './en/forms.en';
@@ -9,6 +10,7 @@ import { userRequest } from './en/userRequest.en';
 import { payment } from './overrides/en/payment';
 
 export const fstranslations: TranslationResources = {
+  b2b,
   claim,
   forms,
   fscommon,
