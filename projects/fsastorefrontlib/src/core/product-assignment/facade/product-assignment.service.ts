@@ -15,7 +15,7 @@ export class FSProductAssignmentService {
     userId: string,
     orgUnitId: string,
     pageSize?: number,
-    currentCode?: number,
+    currentPage?: number,
     sort?: string
   ) {
     this.store.dispatch(
@@ -23,7 +23,7 @@ export class FSProductAssignmentService {
         userId,
         orgUnitId,
         pageSize,
-        currentCode,
+        currentPage,
         sort,
       })
     );
