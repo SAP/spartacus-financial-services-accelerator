@@ -8,6 +8,7 @@ import {
   ConfigModule,
   I18nModule,
   UrlModule,
+  AuthGuard,
 } from '@spartacus/core';
 import {
   MediaModule,
@@ -15,6 +16,7 @@ import {
   CmsPageGuard,
 } from '@spartacus/storefront';
 import { ProductAssignmentsComponent } from './product-assignments/product-assignments.component';
+import { ActiveProductsComponent } from './unit-details/active-products.component';
 
 @NgModule({
   imports: [
@@ -27,24 +29,36 @@ import { ProductAssignmentsComponent } from './product-assignments/product-assig
     RouterModule.forChild([
       {
         path: null,
-        canActivate: [CmsPageGuard],
+        canActivate: [AuthGuard, CmsPageGuard],
         data: {
           cxRoute: 'productAssignments',
           pageLabel: 'productAssignmentsPage',
         },
         component: PageLayoutComponent,
       },
+      {
+        path: null,
+        canActivate: [AuthGuard, CmsPageGuard],
+        data: {
+          cxRoute: 'unitDetails',
+          pageLabel: 'orgUnitDetailsPage',
+        },
+        component: PageLayoutComponent,
+      }
     ]),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         ProductAssignmentsFlex: {
           component: ProductAssignmentsComponent,
         },
+        ActiveProductsFlex: {
+          component: ActiveProductsComponent,
+        },
       },
     }),
   ],
-  declarations: [ProductAssignmentsComponent],
-  exports: [ProductAssignmentsComponent],
-  entryComponents: [ProductAssignmentsComponent],
+  declarations: [ProductAssignmentsComponent, ActiveProductsComponent],
+  exports: [ProductAssignmentsComponent, ActiveProductsComponent],
+  entryComponents: [ProductAssignmentsComponent, ActiveProductsComponent],
 })
 export class ProductAssignmentModule {}
