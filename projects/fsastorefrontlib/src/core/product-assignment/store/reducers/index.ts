@@ -33,6 +33,7 @@ export const getProductAssignmentState: MemoizedSelector<
   any,
   ProductAssignmentState
 > = createFeatureSelector<ProductAssignmentState>('productAssignments');
+
 export function clearProductAssignmentState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {

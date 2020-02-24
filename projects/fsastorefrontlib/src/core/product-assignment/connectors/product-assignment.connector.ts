@@ -1,5 +1,5 @@
-import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { FSProductAssignmentAdapter } from './product-assignment.adapter';
 
 @Injectable({
@@ -8,10 +8,19 @@ import { FSProductAssignmentAdapter } from './product-assignment.adapter';
 export class FSProductAssignmentConnector {
   constructor(protected productAssignmentAdapter: FSProductAssignmentAdapter) {}
 
-  loadProductAssignmentsForUnit(userId, orgUnitId): Observable<any> {
+  loadProductAssignmentsForUnit(
+    userId: string,
+    orgUnitId: string,
+    pageSize?: number,
+    currentPage?: number,
+    sort?: string
+  ): Observable<any> {
     return this.productAssignmentAdapter.loadProductAssignmentsForUnit(
       userId,
-      orgUnitId
+      orgUnitId,
+      pageSize,
+      currentPage,
+      sort
     );
   }
 }

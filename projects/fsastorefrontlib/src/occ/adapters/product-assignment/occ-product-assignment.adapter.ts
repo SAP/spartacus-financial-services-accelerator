@@ -16,15 +16,27 @@ export class OccFSProductAssignmentAdapter
 
   loadProductAssignmentsForUnit(
     userId: string,
-    orgUnitId: string
+    orgUnitId: string,
+    pageSize?: number,
+    currentPage?: number,
+    sort?: string
   ): Observable<any> {
-    // TODO: search config - sorting, pagination, etc
     const url = this.getChangeRequestEndpoint(userId, orgUnitId);
-    const params = new HttpParams();
+    const params = {};
+    if (pageSize) {
+      params['pageSize'] = pageSize.toString();
+    }
+    if (currentPage) {
+      params['currentPage'] = currentPage.toString();
+    }
+    if (sort) {
+      params['sortCode'] = sort.toString();
+    }
     return this.http
       .get(url, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
+
   protected getChangeRequestEndpoint(userId: string, orgUnitId: string) {
     const productAssignmentsEndpoint =
       '/users/' + userId + '/orgUnits/' + orgUnitId + '/fsProductAssignments';
