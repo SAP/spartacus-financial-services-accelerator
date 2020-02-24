@@ -26,7 +26,7 @@ export class ProductAssignmentsComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
   userId: string;
   orgUnitId: string;
-  productAssignments: Observable<any>;
+  productAssignments$: Observable<any>;
 
   ngOnInit() {
     this.subscription
@@ -45,7 +45,7 @@ export class ProductAssignmentsComponent implements OnInit, OnDestroy {
             }
           })
       );
-    this.productAssignments = this.productAssignmentService.getProductAssignments();
+    this.productAssignments$ = this.productAssignmentService.getProductAssignments();
   }
 
   private initialize(params: Params) {
