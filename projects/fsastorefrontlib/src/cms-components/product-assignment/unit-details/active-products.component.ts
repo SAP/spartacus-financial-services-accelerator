@@ -18,7 +18,7 @@ export class ActiveProductsComponent implements OnInit, OnDestroy {
     protected route: ActivatedRoute
   ) { }
   private subscription = new Subscription();
-  productAssignments: Observable<any>;
+  productAssignments$: Observable<any>;
   userId: string;
   orgUnitId: string;
   
@@ -36,14 +36,10 @@ export class ActiveProductsComponent implements OnInit, OnDestroy {
                 this.userId,
                 this.orgUnitId
               );
-              console.log('baba');
-               this.productAssignmentService.getProductAssignments().subscribe( res => {
-                console.log(res);
-              });
-              
             }
           })
       );
+      this.productAssignments$ = this.productAssignmentService.getProductAssignments();
   }
 
   private initialize(params: Params) {

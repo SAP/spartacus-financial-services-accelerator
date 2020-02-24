@@ -1,1 +1,16 @@
-<p>group-policy works!</p>
+<h2>{{ 'b2b.activeProducts' | cxTranslate }}</h2>
+<ng-container *ngIf="productAssignments$ | async as productAssignments">
+  <div class="card-row container">
+    <div class="row">
+      <div
+        class="single-card col-4"
+        *ngFor="let productAssignment of productAssignments.assignments"
+      >
+        <ul>
+          <li>{{ productAssignment.product.name }}</li>
+          <li>{{ productAssignment.product.defaultCategory.name }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</ng-container>

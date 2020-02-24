@@ -29,7 +29,7 @@ import { ActiveProductsComponent } from './unit-details/active-products.componen
     RouterModule.forChild([
       {
         path: null,
-        canActivate: [AuthGuard, CmsPageGuard],
+        canActivate: [CmsPageGuard],
         data: {
           cxRoute: 'productAssignments',
           pageLabel: 'productAssignmentsPage',
@@ -38,7 +38,7 @@ import { ActiveProductsComponent } from './unit-details/active-products.componen
       },
       {
         path: null,
-        canActivate: [AuthGuard, CmsPageGuard],
+        canActivate: [CmsPageGuard],
         data: {
           cxRoute: 'unitDetails',
           pageLabel: 'orgUnitDetailsPage',
