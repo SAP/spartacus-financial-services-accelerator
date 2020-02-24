@@ -1,4 +1,4 @@
-import { StateEntityLoaderActions } from '@spartacus/core';
+import { Action } from '@ngrx/store';
 
 export const LOAD_PRODUCT_ASSIGNMENTS =
   '[Product Assignment] Load Product Assignments';
@@ -7,27 +7,19 @@ export const LOAD_PRODUCT_ASSIGNMENTS_FAIL =
 export const LOAD_PRODUCT_ASSIGNMENTS_SUCCESS =
   '[Product Assignment] Load Product Assignments Success';
 
-export const PRODUCT_ASSIGNMENT_FEATURE = 'productAssignments';
-
-export class LoadProductAssignments extends StateEntityLoaderActions.EntityLoadAction {
+export class LoadProductAssignments implements Action {
   readonly type = LOAD_PRODUCT_ASSIGNMENTS;
-  constructor(public payload: any) {
-    super(PRODUCT_ASSIGNMENT_FEATURE, payload);
-  }
+  constructor(public payload: any) {}
 }
 
-export class LoadProductAssignmentsFail extends StateEntityLoaderActions.EntityFailAction {
+export class LoadProductAssignmentsFail implements Action {
   readonly type = LOAD_PRODUCT_ASSIGNMENTS_FAIL;
-  constructor(public payload: { error?: any }) {
-    super(PRODUCT_ASSIGNMENT_FEATURE, payload.error);
-  }
+  constructor(public payload: any) {}
 }
 
-export class LoadProductAssignmentsSuccess extends StateEntityLoaderActions.EntitySuccessAction {
+export class LoadProductAssignmentsSuccess implements Action {
   readonly type = LOAD_PRODUCT_ASSIGNMENTS_SUCCESS;
-  constructor(public payload: any) {
-    super(PRODUCT_ASSIGNMENT_FEATURE, payload);
-  }
+  constructor(public payload: any) {}
 }
 
 export type ProductAssignmentActions =
