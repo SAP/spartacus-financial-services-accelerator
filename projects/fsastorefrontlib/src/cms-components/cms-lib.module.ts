@@ -19,6 +19,7 @@ import { FSRegisterModule } from './user/register/fs-register.module';
 import { ProductModule } from './product/product.module';
 import { ChangeProcessModule } from './change-process/change-process.module';
 import { GroupPolicyModule } from './group-policy/group-policy.module';
+import { ProductAssignmentModule } from './product-assignment/product-assignment.module';
 
 @NgModule({
   imports: [
@@ -37,6 +38,7 @@ import { GroupPolicyModule } from './group-policy/group-policy.module';
     EffectsModule.forFeature(effects),
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,
+    ProductAssignmentModule,
   ],
   exports: [
     AgentModule,
@@ -52,6 +54,7 @@ import { GroupPolicyModule } from './group-policy/group-policy.module';
     ChangeProcessModule,
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,
+    ProductAssignmentModule,
   ],
   providers: [reducerProvider],
 })

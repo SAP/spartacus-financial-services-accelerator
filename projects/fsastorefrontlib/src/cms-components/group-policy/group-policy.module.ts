@@ -25,7 +25,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
       cxRoute: 'unitDetails',
-      pageLabel: 'groupPolicyUnitDetailsPage',
+      pageLabel: 'unitDetailsPage',
     },
     component: PageLayoutComponent,
   }
