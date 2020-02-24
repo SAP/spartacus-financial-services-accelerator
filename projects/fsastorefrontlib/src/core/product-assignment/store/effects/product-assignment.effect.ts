@@ -13,7 +13,13 @@ export class FSProductAssignmentEffects {
     map((action: fromActions.LoadProductAssignments) => action.payload),
     mergeMap(payload => {
       return this.productAssignmentConnector
-        .loadProductAssignmentsForUnit(payload.userId, payload.orgUnitId)
+        .loadProductAssignmentsForUnit(
+          payload.userId,
+          payload.orgUnitId,
+          payload.pageSize,
+          payload.currentPage,
+          payload.sort
+        )
         .pipe(
           map((productAssignments: any) => {
             return new fromActions.LoadProductAssignmentsSuccess(
