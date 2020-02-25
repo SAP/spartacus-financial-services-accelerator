@@ -25,5 +25,9 @@ export const quoteReviewAccordions = {
       category: 'currentAccount',
       accordionItems: this.quoteReviewAccordionGroup1,
     },
+    {
+      category: 'creditCard',
+      accordionItems: this.quoteReviewAccordionGroup1,
+    },
   ],
 };

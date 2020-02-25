@@ -2,7 +2,7 @@ import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
 import * as travelCheckout from '../../../helpers/checkout/insurance/travel-checkout';
 
-context('Applications Page', () => {
+context('Retrieve Quote', () => {
   before(() => {
     cy.visit('/');
     register.registerUser(registrationUser);
@@ -11,7 +11,7 @@ context('Applications Page', () => {
     cy.wait(2000);
   });
 
-  describe('Checkout', () => {
+  describe('Create and Retrieve Travel Quote', () => {
     it('Should open travel category page', () => {
       travelCheckout.openCategoryPage();
     });
