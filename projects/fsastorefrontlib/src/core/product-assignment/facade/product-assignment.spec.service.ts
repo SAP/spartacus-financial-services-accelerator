@@ -64,6 +64,7 @@ describe('FSProductAssignmentServiceTest', () => {
     service.loadProductAssignmentsForUnit(
       OCC_USER_ID_CURRENT,
       mockedOrgUnitId,
+      false,
       pageSize,
       currentPage,
       sortCode
@@ -72,6 +73,7 @@ describe('FSProductAssignmentServiceTest', () => {
       new fromAction.LoadProductAssignments({
         userId: OCC_USER_ID_CURRENT,
         orgUnitId: mockedOrgUnitId,
+        active: false,
         pageSize: pageSize,
         currentPage: currentPage,
         sort: sortCode,

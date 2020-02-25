@@ -6,6 +6,7 @@ export abstract class FSProductAssignmentAdapter {
    *
    * @param userId The user id
    * @param orgUnitId The org unit id
+   * @param active: The assignment state
    * @param pageSize The page size
    * @param currentPage The current page
    * @param sort The sorting method
@@ -13,6 +14,7 @@ export abstract class FSProductAssignmentAdapter {
   abstract loadProductAssignmentsForUnit(
     userId: string,
     orgUnitId: string,
+    active: boolean,
     pageSize: number,
     currentPage: number,
     sort: string

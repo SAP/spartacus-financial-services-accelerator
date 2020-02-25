@@ -44,7 +44,7 @@ import { ActiveProductsComponent } from './unit-details/active-products.componen
           pageLabel: 'orgUnitDetailsPage',
         },
         component: PageLayoutComponent,
-      }
+      },
     ]),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {

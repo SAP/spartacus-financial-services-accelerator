@@ -17,12 +17,16 @@ export class OccFSProductAssignmentAdapter
   loadProductAssignmentsForUnit(
     userId: string,
     orgUnitId: string,
+    active?: boolean,
     pageSize?: number,
     currentPage?: number,
     sort?: string
   ): Observable<any> {
     const url = this.getChangeRequestEndpoint(userId, orgUnitId);
     const params = {};
+    if (active) {
+      params['active'] = active.toString();
+    }
     if (pageSize) {
       params['pageSize'] = pageSize.toString();
     }

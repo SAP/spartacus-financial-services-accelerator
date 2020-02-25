@@ -40,7 +40,8 @@ export class ProductAssignmentsComponent implements OnInit, OnDestroy {
               this.userId = user;
               this.productAssignmentService.loadProductAssignmentsForUnit(
                 this.userId,
-                this.orgUnitId
+                this.orgUnitId,
+                true
               );
             }
           })

@@ -16,6 +16,7 @@ export class FSProductAssignmentEffects {
         .loadProductAssignmentsForUnit(
           payload.userId,
           payload.orgUnitId,
+          payload.active,
           payload.pageSize,
           payload.currentPage,
           payload.sort

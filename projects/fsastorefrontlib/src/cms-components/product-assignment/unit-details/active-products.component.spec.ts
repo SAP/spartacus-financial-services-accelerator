@@ -2,15 +2,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ActiveProductsComponent } from './active-products.component';
 
-describe('GroupPolicyComponent', () => {
+describe('ActiveProductsComponent', () => {
   let component: ActiveProductsComponent;
   let fixture: ComponentFixture<ActiveProductsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActiveProductsComponent ]
-    })
-    .compileComponents();
+      declarations: [ActiveProductsComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

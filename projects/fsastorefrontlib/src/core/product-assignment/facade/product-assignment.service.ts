@@ -14,6 +14,7 @@ export class FSProductAssignmentService {
   loadProductAssignmentsForUnit(
     userId: string,
     orgUnitId: string,
+    active?: boolean,
     pageSize?: number,
     currentPage?: number,
     sort?: string
@@ -22,6 +23,7 @@ export class FSProductAssignmentService {
       new fromAction.LoadProductAssignments({
         userId,
         orgUnitId,
+        active,
         pageSize,
         currentPage,
         sort,
