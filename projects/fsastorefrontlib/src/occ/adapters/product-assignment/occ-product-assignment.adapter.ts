@@ -24,7 +24,7 @@ export class OccFSProductAssignmentAdapter
   ): Observable<any> {
     const url = this.getChangeRequestEndpoint(userId, orgUnitId);
     const params = {};
-    if (active) {
+    if (active !== undefined) {
       params['active'] = active.toString();
     }
     if (pageSize) {
