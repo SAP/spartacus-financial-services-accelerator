@@ -5,11 +5,15 @@ import { filter, switchMap, take } from 'rxjs/operators';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
+import { AuthService } from '@spartacus/core';
 @Injectable({
   providedIn: 'root',
 })
 export class FSProductAssignmentService {
-  constructor(protected store: Store<fromReducer.ProductAssignmentState>) {}
+  constructor(
+    protected store: Store<fromReducer.ProductAssignmentState>,
+    protected authService: AuthService
+  ) {}
 
   loadProductAssignmentsForUnit(
     userId: string,
