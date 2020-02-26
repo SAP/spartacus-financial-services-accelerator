@@ -4,12 +4,13 @@
     <div class="row">
       <div
         class="single-card col-4"
-        *ngFor="let productAssignment of productAssignments.assignments"
+        *ngFor="let productAssignment of productAssignments"
       >
-        <ul>
-          <li>{{ productAssignment.product?.name }}</li>
-          <li>{{ productAssignment.product?.defaultCategory?.name }}</li>
-        </ul>
+        <fsa-product-assignment-item
+          [productAssignment]="productAssignment"
+          [orgUnitId]="orgUnitId"
+        >
+        </fsa-product-assignment-item>
       </div>
     </div>
   </div>

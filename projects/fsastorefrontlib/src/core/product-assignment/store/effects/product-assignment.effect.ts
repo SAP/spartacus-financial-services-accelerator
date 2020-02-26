@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { map, catchError, mergeMap } from 'rxjs/operators';
-import * as fromActions from '../actions';
+import { Observable, of } from 'rxjs';
+import { catchError, concatMap, map, mergeMap } from 'rxjs/operators';
 import { FSProductAssignmentConnector } from '../../connectors';
+import * as fromActions from '../actions';
 
 @Injectable()
 export class FSProductAssignmentEffects {
@@ -14,8 +14,9 @@ export class FSProductAssignmentEffects {
     mergeMap(payload => {
       return this.productAssignmentConnector
         .loadProductAssignmentsForUnit(
-          payload.userId,
+          payload.occUserId,
           payload.orgUnitId,
+          payload.active,
           payload.pageSize,
           payload.currentPage,
           payload.sort
@@ -29,6 +30,35 @@ export class FSProductAssignmentEffects {
           catchError(error =>
             of(
               new fromActions.LoadProductAssignmentsFail({
+                error: JSON.stringify(error),
+              })
+            )
+          )
+        );
+    })
+  );
+
+  @Effect()
+  changeActiveStatus$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.UPDATE_PRODUCT_ASSIGNMENT),
+    map((action: fromActions.UpdateProductAssignment) => action.payload),
+    concatMap(payload => {
+      return this.productAssignmentConnector
+        .changeActiveStatus(
+          payload.userId,
+          payload.orgUnitId,
+          payload.productAssignmentCode,
+          payload.active
+        )
+        .pipe(
+          map((productAssignment: any) => {
+            return new fromActions.UpdateProductAssignmentSuccess(
+              productAssignment
+            );
+          }),
+          catchError(error =>
+            of(
+              new fromActions.UpdateProductAssignmentFail({
                 error: JSON.stringify(error),
               })
             )

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { AuthService, OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { filter, switchMap, take } from 'rxjs/operators';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
-import { AuthService } from '@spartacus/core';
 @Injectable({
   providedIn: 'root',
 })
@@ -15,20 +15,48 @@ export class FSProductAssignmentService {
     protected authService: AuthService
   ) {}
 
+  user: string;
+
   loadProductAssignmentsForUnit(
-    userId: string,
     orgUnitId: string,
+    active?: boolean,
     pageSize?: number,
     currentPage?: number,
     sort?: string
   ) {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        if (occUserId && occUserId !== OCC_USER_ID_ANONYMOUS) {
+          this.user = occUserId;
+          this.store.dispatch(
+            new fromAction.LoadProductAssignments({
+              occUserId,
+              orgUnitId,
+              active,
+              pageSize,
+              currentPage,
+              sort,
+            })
+          );
+        }
+      })
+      .unsubscribe();
+  }
+
+  changeActiveStatus(
+    orgUnitId: string,
+    productAssignmentCode: string,
+    active: boolean
+  ) {
+    const userId = this.user;
     this.store.dispatch(
-      new fromAction.LoadProductAssignments({
+      new fromAction.UpdateProductAssignment({
         userId,
         orgUnitId,
-        pageSize,
-        currentPage,
-        sort,
+        productAssignmentCode,
+        active,
       })
     );
   }

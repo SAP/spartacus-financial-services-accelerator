@@ -6,6 +6,7 @@ export abstract class FSProductAssignmentAdapter {
    *
    * @param userId The user id
    * @param orgUnitId The org unit id
+   * @param active: The assignment state
    * @param pageSize The page size
    * @param currentPage The current page
    * @param sort The sorting method
@@ -13,8 +14,24 @@ export abstract class FSProductAssignmentAdapter {
   abstract loadProductAssignmentsForUnit(
     userId: string,
     orgUnitId: string,
+    active: boolean,
     pageSize: number,
     currentPage: number,
     sort: string
   ): Observable<any>;
+
+  /**
+   * Abstract method used to change active status of product assignment by its code
+   *
+   * @param userId The user id
+   * @param orgUnitId The org unit id
+   * @param productAssignmentCode The product assignment code
+   * @param active The current active status of assignment
+   */
+  abstract changeActiveStatus(
+    userId: string,
+    orgUnitId: string,
+    productAssignmentCode: string,
+    active: boolean
+  );
 }

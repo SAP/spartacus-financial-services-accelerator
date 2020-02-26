@@ -1,10 +1,12 @@
 import { Component, Input, Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { I18nTestingModule } from '@spartacus/core';
+import {} from '@angular/router/testing';
+import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
+import { ActiveProductAssignmentsComponent } from './active-product-assignments.component';
+import createSpy = jasmine.createSpy;
 import { FSProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
-import { ProductAssignmentsComponent } from './product-assignments.component';
 
 @Component({
   template: '',
@@ -12,24 +14,18 @@ import { ProductAssignmentsComponent } from './product-assignments.component';
 })
 class ProductAssignmentItemComponent {
   @Input() productAssignment: any;
+  @Input() active: boolean;
   @Input() orgUnitId: string;
 }
 
-const mockProductAssignments = [
+class MockRoutingService {
+  go = createSpy();
+}
+
+const activeProductAssignments = [
   {
     active: true,
     code: 'testOne',
-    product: {
-      name: 'productTestName',
-      code: 'testProduct',
-      defaultCategory: {
-        name: 'testCategory',
-      },
-    },
-  },
-  {
-    active: false,
-    code: 'testTwo',
     product: {
       name: 'productTestName',
       code: 'testProduct',
@@ -52,20 +48,22 @@ class ActivatedRouteMock {
 class MockedProductAssignmentService {
   loadProductAssignmentsForUnit(): void {}
   getProductAssignments(): Observable<any> {
-    return of(mockProductAssignments);
+    return of(activeProductAssignments);
   }
 }
 
-describe('ProductAssignmentsComponent', () => {
-  let component: ProductAssignmentsComponent;
-  let fixture: ComponentFixture<ProductAssignmentsComponent>;
+describe('ActiveProductAssignmentsComponent', () => {
+  let component: ActiveProductAssignmentsComponent;
+  let fixture: ComponentFixture<ActiveProductAssignmentsComponent>;
   let mockedProductAssignmentService: MockedProductAssignmentService;
+  let mockRoutingService: MockRoutingService;
 
   beforeEach(async(() => {
     mockedProductAssignmentService = new MockedProductAssignmentService();
+    mockRoutingService = new MockRoutingService();
     TestBed.configureTestingModule({
       declarations: [
-        ProductAssignmentsComponent,
+        ActiveProductAssignmentsComponent,
         ProductAssignmentItemComponent,
       ],
       imports: [I18nTestingModule],
@@ -78,21 +76,31 @@ describe('ProductAssignmentsComponent', () => {
           provide: FSProductAssignmentService,
           useValue: mockedProductAssignmentService,
         },
+        {
+          provide: RoutingService,
+          useClass: MockRoutingService,
+        },
       ],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProductAssignmentsComponent);
+    fixture = TestBed.createComponent(ActiveProductAssignmentsComponent);
     component = fixture.componentInstance;
     mockedProductAssignmentService = TestBed.get(
       FSProductAssignmentService as Type<FSProductAssignmentService>
     );
+    mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    let result;
+    component.productAssignments$
+      .subscribe(assignments => (result = assignments))
+      .unsubscribe();
+    expect(result).toEqual(activeProductAssignments);
   });
 
   it('should unsubscribe from any subscriptions when destroyed', () => {

@@ -34,10 +34,13 @@ const mockedOrgUnitId = 'SAP';
 const pageSize = 5;
 const currentPage = 1;
 const sortCode = 'name';
-
+const productAssignmentCode = 'testOne';
 class MockProductAssignmentConnector {
   loadProductAssignmentsForUnit() {
     return of(mockProductAssignments);
+  }
+  changeActiveStatus() {
+    return of({});
   }
 }
 
@@ -72,7 +75,7 @@ describe('Product Assignment Effects', () => {
   });
 
   describe('loadProductAssignments$', () => {
-    it('should load product assignemnts', () => {
+    it('should load product assignments', () => {
       const action = new fromActions.LoadProductAssignments({
         userId: OCC_USER_ID_CURRENT,
         orgUnitId: mockedOrgUnitId,
@@ -107,5 +110,42 @@ describe('Product Assignment Effects', () => {
     actions$ = hot('-a', { a: action });
     const expected = cold('-b', { b: completion });
     expect(effects.loadProductAssignments$).toBeObservable(expected);
+  });
+
+  describe('changeActiveStatus$', () => {
+    it('should change active status', () => {
+      const updatedProductAssignment = {
+        active: false,
+        code: 'testOne',
+        product: {
+          code: 'testProduct',
+        },
+      };
+      const action = new fromActions.UpdateProductAssignmentSuccess(
+        updatedProductAssignment
+      );
+      expect({ ...action }).toEqual({
+        type: fromActions.UPDATE_PRODUCT_ASSIGNMENT_SUCCESS,
+        payload: updatedProductAssignment,
+      });
+    });
+  });
+
+  it('should fail to change active status', () => {
+    spyOn(mockProductAssignmentConnector, 'changeActiveStatus').and.returnValue(
+      throwError('Error')
+    );
+    const action = new fromActions.UpdateProductAssignment({
+      userId: 'not_valid_user',
+      orgUnitId: mockedOrgUnitId,
+      productAssignmentCode: productAssignmentCode,
+      active: false,
+    });
+    const completion = new fromActions.UpdateProductAssignmentFail({
+      error: JSON.stringify('Error'),
+    });
+    actions$ = hot('-a', { a: action });
+    const expected = cold('-b', { b: completion });
+    expect(effects.changeActiveStatus$).toBeObservable(expected);
   });
 });

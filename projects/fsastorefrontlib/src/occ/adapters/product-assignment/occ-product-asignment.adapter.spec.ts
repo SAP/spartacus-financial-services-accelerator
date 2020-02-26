@@ -1,9 +1,9 @@
-import { Type } from '@angular/core';
-import { TestBed, async } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { OccFSProductAssignmentAdapter } from './occ-product-assignment.adapter';
-import { OccConfig } from '@spartacus/core';
 import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Type } from '@angular/core';
+import { async, TestBed } from '@angular/core/testing';
+import { OccConfig } from '@spartacus/core';
+import { OccFSProductAssignmentAdapter } from './occ-product-assignment.adapter';
 
 const MockOccModuleConfig: OccConfig = {
   context: {
@@ -20,6 +20,7 @@ const MockOccModuleConfig: OccConfig = {
 const payload = {
   userId: 'TestID',
   orgUnitId: 'AcmeCorp',
+  active: true,
   pageSize: 5,
   currentPage: 1,
   sort: 'asc',
@@ -47,6 +48,7 @@ describe('OccFSProductAssignmentAdapter', () => {
         .loadProductAssignmentsForUnit(
           payload.userId,
           payload.orgUnitId,
+          payload.active,
           payload.pageSize,
           payload.currentPage,
           payload.sort
