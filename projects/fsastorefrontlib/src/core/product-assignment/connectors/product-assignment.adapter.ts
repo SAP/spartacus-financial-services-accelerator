@@ -19,4 +19,8 @@ export abstract class FSProductAssignmentAdapter {
     currentPage: number,
     sort: string
   ): Observable<any>;
+
+  abstract activateProductAssignment(
+    userId: string,
+    productAssignmentCode, active);
 }

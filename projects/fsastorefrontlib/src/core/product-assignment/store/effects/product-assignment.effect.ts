@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { map, catchError, mergeMap } from 'rxjs/operators';
-import * as fromActions from '../actions';
+import { Observable, of } from 'rxjs';
+import { catchError, concatMap, map, mergeMap } from 'rxjs/operators';
 import { FSProductAssignmentConnector } from '../../connectors';
+import * as fromActions from '../actions';
 
 @Injectable()
 export class FSProductAssignmentEffects {
@@ -30,6 +30,34 @@ export class FSProductAssignmentEffects {
           catchError(error =>
             of(
               new fromActions.LoadProductAssignmentsFail({
+                error: JSON.stringify(error),
+              })
+            )
+          )
+        );
+    })
+  );
+
+  @Effect()
+  activateProductAssignment$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.ACTIVATE_PRODUCT_ASSIGNMENTS),
+    map((action: fromActions.ActivateProductAssignment) => action.payload),
+    concatMap(payload => {
+      return this.productAssignmentConnector
+        .activateProductAssignment(
+          payload.userId,
+          payload.productAssignmentCode,
+          payload.active,
+        )
+        .pipe(
+          map((productAssignment: any) => {
+            return new fromActions.ActivateProductAssignmentSuccess(
+              productAssignment
+            );
+          }),
+          catchError(error =>
+            of(
+              new fromActions.ActivateProductAssignmentFail({
                 error: JSON.stringify(error),
               })
             )

@@ -1,15 +1,10 @@
-import { Observable } from 'rxjs/internal/Observable';
-import { FSProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
-import {
-  Component,
-  OnInit,
-  ChangeDetectionStrategy,
-  OnDestroy,
-} from '@angular/core';
-import { Subscription } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AuthService, OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
+import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 import { take } from 'rxjs/operators';
+import { FSProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
 
 @Component({
   selector: 'fsa-product-assignments',
@@ -47,6 +42,10 @@ export class ProductAssignmentsComponent implements OnInit, OnDestroy {
           })
       );
     this.productAssignments$ = this.productAssignmentService.getProductAssignments();
+  }
+
+  activate(producAssignmentCode: string, activeStatus) {
+      return this.productAssignmentService.activateProductAssignment(this.userId, producAssignmentCode, activeStatus);
   }
 
   private initialize(params: Params) {

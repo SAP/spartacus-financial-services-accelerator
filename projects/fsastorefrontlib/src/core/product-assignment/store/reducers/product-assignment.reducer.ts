@@ -2,12 +2,16 @@ import * as fromAction from '../actions/';
 
 export interface ProductAssignmentState {
   loaded: boolean;
-  content: {};
+  content: {
+    assignments: any[]
+  };
 }
 
 export const initialState: ProductAssignmentState = {
   loaded: false,
-  content: {},
+  content: {
+    assignments: []
+  },
 };
 
 export function reducer(
@@ -29,10 +33,37 @@ export function reducer(
         loaded: true,
       };
     }
+    case fromAction.ACTIVATE_PRODUCT_ASSIGNMENTS_SUCCESS: {
+      let content = { ...action.payload };
+      const productAssignmentContent = state.content;
+      let result;
+      if (content.code) {
+        result = productAssignmentContent.assignments.map(assignment => {
+          if (content.code === assignment.code) {
+            assignment = content;
+          }
+          return assignment;
+        });
+      }
+      productAssignmentContent.assignments = result;
+      content = productAssignmentContent;
+      console.log({
+        ...state,
+        content: content,
+        loaded: true
+      });
+      return {
+        ...state,
+        content,
+        loaded: false
+      };
+    }
   }
   return state;
 }
 
 export const getProductAssignment = (state: ProductAssignmentState) =>
   state.content;
+  export const getProductAssignment2 = (state: ProductAssignmentState) =>
+  state.content.assignments;
 export const getLoaded = (state: ProductAssignmentState) => state.loaded;

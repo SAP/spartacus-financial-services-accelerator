@@ -25,4 +25,9 @@ export class FSProductAssignmentConnector {
       sort
     );
   }
+
+  activateProductAssignment(userId: string, productAssignmentCode: string, active: boolean): Observable<any> {
+      return this.productAssignmentAdapter.activateProductAssignment(
+        userId, productAssignmentCode, active);
+  }
 }

@@ -35,6 +35,16 @@ export class FSProductAssignmentService {
     );
   }
 
+  activateProductAssignment(userId, productAssignmentCode: string, active: boolean) {
+    this.store.dispatch(
+      new fromAction.ActivateProductAssignment({
+        userId,
+        productAssignmentCode,
+        active,
+      })
+    );
+  }
+
   getProductAssignments(): Observable<any> {
     return this.store.select(fromSelector.getLoaded).pipe(
       filter(loaded => loaded),
