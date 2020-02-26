@@ -2,8 +2,17 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { CmsConfig, ConfigModule, I18nModule, UrlModule } from '@spartacus/core';
-import { CmsPageGuard, MediaModule, PageLayoutComponent } from '@spartacus/storefront';
+import {
+  CmsConfig,
+  ConfigModule,
+  I18nModule,
+  UrlModule,
+} from '@spartacus/core';
+import {
+  CmsPageGuard,
+  MediaModule,
+  PageLayoutComponent,
+} from '@spartacus/storefront';
 import { ProductAssignmentStoreModule } from './../../core/product-assignment/store/product-assignments-store.module';
 import { ActiveProductAssignmentsComponent } from './active-product-assignments/active-product-assignments.component';
 import { ProductAssignmentItemComponent } from './product-assignment-item/product-assignment-item.component';
