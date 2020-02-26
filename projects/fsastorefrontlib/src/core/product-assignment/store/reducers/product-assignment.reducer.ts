@@ -57,7 +57,7 @@ export function reducer(
   return state;
 }
 
-// Return entire response from backend with sorting and pagination data
+// Returns entire response from backend with sorting and pagination data
 export const getProductAssignmentContent = (state: ProductAssignmentState) =>
   state.content;
 export const getProductAssignments = (state: ProductAssignmentState) =>
