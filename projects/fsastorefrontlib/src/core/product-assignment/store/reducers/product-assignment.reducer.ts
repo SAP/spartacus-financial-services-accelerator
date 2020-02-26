@@ -3,14 +3,14 @@ import * as fromAction from '../actions/';
 export interface ProductAssignmentState {
   loaded: boolean;
   content: {
-    assignments: any[]
+    assignments: any[];
   };
 }
 
 export const initialState: ProductAssignmentState = {
   loaded: false,
   content: {
-    assignments: []
+    assignments: [],
   },
 };
 
@@ -33,37 +33,33 @@ export function reducer(
         loaded: true,
       };
     }
-    case fromAction.ACTIVATE_PRODUCT_ASSIGNMENTS_SUCCESS: {
+    case fromAction.UPDATE_PRODUCT_ASSIGNMENT_SUCCESS: {
       let content = { ...action.payload };
       const productAssignmentContent = state.content;
-      let result;
-      if (content.code) {
-        result = productAssignmentContent.assignments.map(assignment => {
+      let assignments;
+      if (content && content.code) {
+        assignments = productAssignmentContent.assignments.map(assignment => {
           if (content.code === assignment.code) {
             assignment = content;
           }
           return assignment;
         });
       }
-      productAssignmentContent.assignments = result;
+      productAssignmentContent.assignments = assignments;
       content = productAssignmentContent;
-      console.log({
-        ...state,
-        content: content,
-        loaded: true
-      });
       return {
         ...state,
         content,
-        loaded: false
+        loaded: true,
       };
     }
   }
   return state;
 }
 
-export const getProductAssignment = (state: ProductAssignmentState) =>
+// Return entire response from backend with sorting and pagination data
+export const getProductAssignmentContent = (state: ProductAssignmentState) =>
   state.content;
-  export const getProductAssignment2 = (state: ProductAssignmentState) =>
+export const getProductAssignments = (state: ProductAssignmentState) =>
   state.content.assignments;
 export const getLoaded = (state: ProductAssignmentState) => state.loaded;

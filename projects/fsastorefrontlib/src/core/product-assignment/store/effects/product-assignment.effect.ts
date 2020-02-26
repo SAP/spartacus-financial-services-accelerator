@@ -14,7 +14,7 @@ export class FSProductAssignmentEffects {
     mergeMap(payload => {
       return this.productAssignmentConnector
         .loadProductAssignmentsForUnit(
-          payload.userId,
+          payload.occUserId,
           payload.orgUnitId,
           payload.active,
           payload.pageSize,

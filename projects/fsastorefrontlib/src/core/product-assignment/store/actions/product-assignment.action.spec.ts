@@ -111,5 +111,4 @@ describe('Product Assignment Actions', () => {
       });
     });
   });
-
 });

@@ -1,7 +1,13 @@
 import { Type } from '@angular/core';
 import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-import { OCC_USER_ID_CURRENT } from '@spartacus/core';
+import {
+  AuthService,
+  OCC_CART_ID_CURRENT,
+  OCC_USER_ID_CURRENT,
+} from '@spartacus/core';
+import { of } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import { reducerProvider, reducerToken } from '../store/reducers';
@@ -29,18 +35,33 @@ const mockedOrgUnitId = 'SAP';
 const pageSize = 5;
 const currentPage = 1;
 const sortCode = 'name';
+const productAssignmentCode = 'testOne';
 
+class MockAuthService {
+  getOccUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
+  }
+}
 describe('FSProductAssignmentServiceTest', () => {
   let service: FSProductAssignmentService;
   let store: Store<fromReducer.ProductAssignmentState>;
+  let mockAuthService: MockAuthService;
 
   beforeEach(() => {
+    mockAuthService = new MockAuthService();
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
         StoreModule.forFeature('productAssignments', reducerToken),
       ],
-      providers: [FSProductAssignmentService, reducerProvider],
+      providers: [
+        FSProductAssignmentService,
+        reducerProvider,
+        {
+          provide: AuthService,
+          useValue: mockAuthService,
+        },
+      ],
     });
 
     service = TestBed.get(FSProductAssignmentService as Type<
@@ -49,7 +70,7 @@ describe('FSProductAssignmentServiceTest', () => {
     store = TestBed.get(Store as Type<
       Store<fromReducer.ProductAssignmentState>
     >);
-
+    service.user = OCC_CART_ID_CURRENT;
     spyOn(store, 'dispatch').and.callThrough();
   });
 
@@ -62,7 +83,6 @@ describe('FSProductAssignmentServiceTest', () => {
 
   it('should be able to get product assignments', () => {
     service.loadProductAssignmentsForUnit(
-      OCC_USER_ID_CURRENT,
       mockedOrgUnitId,
       false,
       pageSize,
@@ -71,7 +91,7 @@ describe('FSProductAssignmentServiceTest', () => {
     );
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.LoadProductAssignments({
-        userId: OCC_USER_ID_CURRENT,
+        occUserId: OCC_USER_ID_CURRENT,
         orgUnitId: mockedOrgUnitId,
         active: false,
         pageSize: pageSize,
@@ -95,8 +115,20 @@ describe('FSProductAssignmentServiceTest', () => {
     expect(response).toEqual(mockProductAssignments.assignments);
   });
 
+  it('should be able to dispatch product assignment update action', () => {
+    service.changeActiveStatus(mockedOrgUnitId, productAssignmentCode, false);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.UpdateProductAssignment({
+        userId: OCC_USER_ID_CURRENT,
+        orgUnitId: mockedOrgUnitId,
+        productAssignmentCode: productAssignmentCode,
+        active: false,
+      })
+    );
+  });
+
   it('should be able to change active status', () => {
-    const updatedProductAssignment =  {
+    const updatedProductAssignment = {
       active: false,
       code: 'testOne',
       product: {

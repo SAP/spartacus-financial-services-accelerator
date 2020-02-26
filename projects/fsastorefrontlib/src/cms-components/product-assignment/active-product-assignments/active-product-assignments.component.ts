@@ -1,26 +1,24 @@
 import {
-  Component,
-  OnInit,
-  OnDestroy,
   ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
 } from '@angular/core';
-import { Subscription, Observable } from 'rxjs';
-import { AuthService, OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
-import { take } from 'rxjs/operators';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 import { FSProductAssignmentService } from '../../../core/product-assignment/facade/product-assignment.service';
-import { Params, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'fsa-active-products',
-  templateUrl: './active-products.component.html',
+  templateUrl: './active-product-assignments.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ActiveProductsComponent implements OnInit, OnDestroy {
+export class ActiveProductAssignmentsComponent implements OnInit, OnDestroy {
   constructor(
-    protected authService: AuthService,
     protected productAssignmentService: FSProductAssignmentService,
     protected route: ActivatedRoute
   ) {}
+
   private subscription = new Subscription();
   productAssignments$: Observable<any>;
   userId: string;
@@ -30,19 +28,10 @@ export class ActiveProductsComponent implements OnInit, OnDestroy {
     this.subscription
       .add(this.route.params.subscribe(params => this.initialize(params)))
       .add(
-        this.authService
-          .getOccUserId()
-          .pipe(take(1))
-          .subscribe(user => {
-            if (user && user !== OCC_USER_ID_ANONYMOUS) {
-              this.userId = user;
-              this.productAssignmentService.loadProductAssignmentsForUnit(
-                this.userId,
-                this.orgUnitId,
-                true
-              );
-            }
-          })
+        this.productAssignmentService.loadProductAssignmentsForUnit(
+          this.orgUnitId,
+          true
+        )
       );
     this.productAssignments$ = this.productAssignmentService.getProductAssignments();
   }

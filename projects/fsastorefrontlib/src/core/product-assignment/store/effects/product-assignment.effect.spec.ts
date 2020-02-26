@@ -126,16 +126,15 @@ describe('Product Assignment Effects', () => {
       );
       expect({ ...action }).toEqual({
         type: fromActions.UPDATE_PRODUCT_ASSIGNMENT_SUCCESS,
-        payload: updatedProductAssignment
+        payload: updatedProductAssignment,
       });
     });
   });
 
   it('should fail to change active status', () => {
-    spyOn(
-      mockProductAssignmentConnector,
-      'changeActiveStatus'
-    ).and.returnValue(throwError('Error'));
+    spyOn(mockProductAssignmentConnector, 'changeActiveStatus').and.returnValue(
+      throwError('Error')
+    );
     const action = new fromActions.UpdateProductAssignment({
       userId: 'not_valid_user',
       orgUnitId: mockedOrgUnitId,

@@ -1,0 +1,25 @@
+<ul>
+  <li>{{ productAssignment.product.name }}</li>
+  <li>{{ productAssignment.product.defaultCategory.name }}</li>
+  <li>{{ productAssignment.active }}</li>
+  <div *ngIf="active === true">
+    <button
+      class="action-button btn-block"
+      (click)="
+        changeActiveStatus(productAssignment.code, productAssignment.active)
+      "
+    >
+      {{ 'fscommon.deactivate' | cxTranslate }}
+    </button>
+  </div>
+  <div *ngIf="active === false">
+    <button
+      class="action-button btn-block"
+      (click)="
+        changeActiveStatus(productAssignment.code, productAssignment.active)
+      "
+    >
+      {{ 'fscommon.activate' | cxTranslate }}
+    </button>
+  </div>
+</ul>

@@ -5,10 +5,8 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { AuthService, OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import { take } from 'rxjs/operators';
 import { FSProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
 
 @Component({
@@ -19,7 +17,6 @@ import { FSProductAssignmentService } from './../../../core/product-assignment/f
 export class ProductAssignmentsComponent implements OnInit, OnDestroy {
   constructor(
     protected route: ActivatedRoute,
-    protected authService: AuthService,
     protected productAssignmentService: FSProductAssignmentService
   ) {}
 
@@ -32,32 +29,11 @@ export class ProductAssignmentsComponent implements OnInit, OnDestroy {
     this.subscription
       .add(this.route.params.subscribe(params => this.initialize(params)))
       .add(
-        this.authService
-          .getOccUserId()
-          .pipe(take(1))
-          .subscribe(user => {
-            if (user && user !== OCC_USER_ID_ANONYMOUS) {
-              this.userId = user;
-              this.productAssignmentService.loadProductAssignmentsForUnit(
-                this.userId,
-                this.orgUnitId,
-                true
-              );
-            }
-          })
+        this.productAssignmentService.loadProductAssignmentsForUnit(
+          this.orgUnitId
+        )
       );
     this.productAssignments$ = this.productAssignmentService.getProductAssignments();
-  }
-
-  changeActiveStatus(productAssignmentCode: string, activeStatus: boolean) {
-    if (this.productAssignments$) {
-      return this.productAssignmentService.changeActiveStatus(
-        this.userId,
-        this.userId,
-        productAssignmentCode,
-        activeStatus
-      );
-    }
   }
 
   private initialize(params: Params) {

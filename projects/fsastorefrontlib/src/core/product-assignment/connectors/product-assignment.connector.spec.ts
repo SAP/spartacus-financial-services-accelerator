@@ -23,10 +23,10 @@ class MockProductAssignmentAdapter implements FSProductAssignmentAdapter {
     (userId, orgUnitId, productAssignmentCode, active) =>
       of(
         'changeActiveStatus' +
-        userId +
-        orgUnitId +
-        productAssignmentCode +
-        active
+          userId +
+          orgUnitId +
+          productAssignmentCode +
+          active
       )
   );
 }
@@ -59,7 +59,12 @@ describe('FSProductAssignmentConnector', () => {
 
   it('should call adapter to loadProductAssignmentsForUnit', () => {
     productAssignmentConnector.loadProductAssignmentsForUnit(
-      OCC_CART_ID_CURRENT, 'SAP', undefined, 5, 1);
+      OCC_CART_ID_CURRENT,
+      'SAP',
+      undefined,
+      5,
+      1
+    );
     expect(
       productAssignmentAdapter.loadProductAssignmentsForUnit
     ).toHaveBeenCalledWith(
@@ -72,12 +77,18 @@ describe('FSProductAssignmentConnector', () => {
     );
   });
 
-
   it('should call adapter to changeActiveStatus', () => {
     productAssignmentConnector.changeActiveStatus(
-      OCC_CART_ID_CURRENT, 'SAP', 'PA-test', false);
-    expect(
-      productAssignmentAdapter.changeActiveStatus
-    ).toHaveBeenCalledWith(OCC_CART_ID_CURRENT, 'SAP', 'PA-test', false);
+      OCC_CART_ID_CURRENT,
+      'SAP',
+      'PA-test',
+      false
+    );
+    expect(productAssignmentAdapter.changeActiveStatus).toHaveBeenCalledWith(
+      OCC_CART_ID_CURRENT,
+      'SAP',
+      'PA-test',
+      false
+    );
   });
 });

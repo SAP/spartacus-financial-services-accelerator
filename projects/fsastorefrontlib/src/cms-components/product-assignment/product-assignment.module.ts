@@ -1,22 +1,22 @@
-import { ProductAssignmentStoreModule } from './../../core/product-assignment/store/product-assignments-store.module';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import {
   CmsConfig,
   ConfigModule,
   I18nModule,
   UrlModule,
-  AuthGuard,
 } from '@spartacus/core';
 import {
+  CmsPageGuard,
   MediaModule,
   PageLayoutComponent,
-  CmsPageGuard,
 } from '@spartacus/storefront';
+import { ProductAssignmentStoreModule } from './../../core/product-assignment/store/product-assignments-store.module';
 import { ProductAssignmentsComponent } from './product-assignments/product-assignments.component';
-import { ActiveProductsComponent } from './unit-details/active-products.component';
+import { ActiveProductAssignmentsComponent } from './active-product-assignments/active-product-assignments.component';
+import { ProductAssignmentItemComponent } from './product-assignment-item/product-assignment-item.component';
 
 @NgModule({
   imports: [
@@ -52,13 +52,25 @@ import { ActiveProductsComponent } from './unit-details/active-products.componen
           component: ProductAssignmentsComponent,
         },
         ActiveProductsFlex: {
-          component: ActiveProductsComponent,
+          component: ActiveProductAssignmentsComponent,
         },
       },
     }),
   ],
-  declarations: [ProductAssignmentsComponent, ActiveProductsComponent],
-  exports: [ProductAssignmentsComponent, ActiveProductsComponent],
-  entryComponents: [ProductAssignmentsComponent, ActiveProductsComponent],
+  declarations: [
+    ProductAssignmentsComponent,
+    ActiveProductAssignmentsComponent,
+    ProductAssignmentItemComponent,
+  ],
+  exports: [
+    ProductAssignmentsComponent,
+    ActiveProductAssignmentsComponent,
+    ProductAssignmentItemComponent,
+  ],
+  entryComponents: [
+    ProductAssignmentsComponent,
+    ActiveProductAssignmentsComponent,
+    ProductAssignmentItemComponent,
+  ],
 })
 export class ProductAssignmentModule {}
