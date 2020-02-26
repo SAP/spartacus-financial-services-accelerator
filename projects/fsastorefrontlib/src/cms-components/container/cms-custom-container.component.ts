@@ -1,18 +1,17 @@
-import { Component, OnInit, HostBinding } from '@angular/core';
+import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import { Observable } from 'rxjs';
-import {
-  CMSCustomComponentsContainer,
-} from '../../occ/occ-models';
+import { Observable, Subscription } from 'rxjs';
+import { CMSCustomComponentsContainer } from '../../occ/occ-models';
 import { CmsComponent } from 'fsastorefrontlib/occ/occ-models';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-cms-custom-container',
   templateUrl: './cms-custom-container.component.html',
 })
-export class CmsCustomContainerComponent implements OnInit {
+export class CmsCustomContainerComponent implements OnInit, OnDestroy {
   routeParamId = 'formCode';
   pageContext: PageContext;
   styleCss: string;
@@ -22,17 +21,25 @@ export class CmsCustomContainerComponent implements OnInit {
     return this.styleCss;
   }
 
+  private subscription = new Subscription();
+
   constructor(
     protected componentData: CmsComponentData<CMSCustomComponentsContainer>,
     protected activatedRoute: ActivatedRoute,
     protected cmsComponentConnector: CmsComponentConnector
   ) {
-    activatedRoute.params.subscribe(params => {
-      this.pageContext = new PageContext(
-        params[this.routeParamId],
-        PageType.CATEGORY_PAGE
-      );
-    });
+    this.subscription.add(
+      activatedRoute.params
+        .pipe(
+          map(params => {
+            this.pageContext = new PageContext(
+              params[this.routeParamId],
+              PageType.CATEGORY_PAGE
+            );
+          })
+        )
+        .subscribe()
+    );
   }
 
   ngOnInit() {
@@ -45,5 +52,11 @@ export class CmsCustomContainerComponent implements OnInit {
         );
       })
       .unsubscribe();
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
