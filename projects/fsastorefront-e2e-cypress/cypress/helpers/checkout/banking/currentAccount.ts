@@ -16,20 +16,20 @@ export function checkCurrentAccountComparisonTable() {
   cy.get('fsa-comparison-table-panel-item')
     .eq(0)
     .within(() => {
-      cy.get('h3').should('have.text', 'Basic Account');
-      cy.get('h4').should('have.text', '€0.00');
+      cy.get('.table-header-title').should('have.text', 'Basic Account');
+      cy.get('.table-header-value').should('have.text', '€0.00');
     });
   cy.get('fsa-comparison-table-panel-item')
     .eq(1)
     .within(() => {
-      cy.get('h3').should('have.text', 'Family Account');
-      cy.get('h4').should('have.text', '€4.99');
+      cy.get('.table-header-title').should('have.text', 'Family Account');
+      cy.get('.table-header-value').should('have.text', '€4.99');
     });
   cy.get('fsa-comparison-table-panel-item')
     .eq(2)
     .within(() => {
-      cy.get('h3').should('have.text', 'Premium Account');
-      cy.get('h4').should('have.text', '€9.99');
+      cy.get('.table-header-title').should('have.text', 'Premium Account');
+      cy.get('.table-header-value').should('have.text', '€9.99');
     });
 }
 
@@ -37,7 +37,7 @@ export function selectFamilyAccount() {
   cy.get('fsa-comparison-table-panel-item')
     .eq(1)
     .within(() => {
-      cy.get('h3').should('have.text', 'Family Account');
+      cy.get('.table-header-title').should('have.text', 'Family Account');
       cy.get('.primary-button').click();
     });
 }

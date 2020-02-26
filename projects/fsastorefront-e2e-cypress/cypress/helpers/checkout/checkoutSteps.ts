@@ -1,7 +1,7 @@
 import { quoteReviewAccordions } from './accordions';
 
 export function checkProgressBarInsurance() {
-  cy.get('.d-flex.progress-node').should('have.length', 7);
+  cy.get('.progress-node').should('have.length', 7);
   cy.get('.heading-headline').should('have.text', ' Your Life Insurance ');
 }
 
@@ -29,6 +29,7 @@ export function bindQuotePopup() {
   cy.get('.primary-button')
     .should('contain', 'Continue')
     .click();
+  cy.wait(500);
   cy.get('fsa-bind-quote-dialog').within(() => {
     cy.get('.primary-button').click();
   });

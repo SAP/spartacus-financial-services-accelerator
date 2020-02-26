@@ -1,17 +1,11 @@
-import * as addOptionsPage from '../../../helpers/checkout/addOptionsPage';
-import * as currentAccount from '../../../helpers/checkout/banking/currentAccount-checkout';
+import * as currentAccount from '../../../helpers/checkout/banking/currentAccount';
 import * as legalInformationPage from '../../../helpers/checkout/banking/legalInformationPage';
 import * as userIdentificationPage from '../../../helpers/checkout/banking/userIdentificationPage';
-import {
-  bindQuotePopup,
-  checkOrderConfirmationBanking,
-  checkQuoteReviewAccordions,
-  clickContinueButton,
-} from '../../../helpers/checkout/checkoutSteps';
 import * as comparisonPage from '../../../helpers/comparisonTable';
 import * as productCategory from '../../../helpers/productCategoryPage';
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
+import * as checkout from '../../../helpers/checkout/checkoutSteps';
 
 context('Current Account Checkout', () => {
   before(() => {
@@ -29,7 +23,8 @@ context('Current Account Checkout', () => {
   });
 
   it('Should check comparison page', () => {
-    comparisonPage.checkComparisonPageCurrentAccount();
+    cy.get('.heading-headline').contains('Your Current Account Insurance');
+    comparisonPage.checkBankingComparisonPage();
   });
 
   it('Should check prices in comparison table and select Family Account', () => {
@@ -39,7 +34,7 @@ context('Current Account Checkout', () => {
 
   it('Should check optional products for Current Account', () => {
     cy.wait(3000);
-    addOptionsPage.checkAddOptionsPage();
+    cy.get('.progress-node').should('have.length', 5);
     currentAccount.checkOptionalProductsAddTransactionChest();
   });
 
@@ -56,34 +51,32 @@ context('Current Account Checkout', () => {
 
   it('Should check Quote Review page', () => {
     cy.get('.progress-inner-wrapper').should('have.length', 5);
-    checkQuoteReviewAccordions('currentAccount');
+    checkout.checkQuoteReviewAccordions('currentAccount');
   });
 
-  it('Should bind Insurance Quote', () => {
-    bindQuotePopup();
+  it('Should bind Quote', () => {
+    checkout.bindQuotePopup();
   });
 
   it('Should check Legal Information page', () => {
+    cy.get('.heading-headline').contains('Your Current Account Insurance');
     legalInformationPage.checkLegalInformationPage();
   });
 
   it('Should click Next in checkout', () => {
-    clickContinueButton();
+    checkout.clickContinueButton();
   });
 
   it('Should check User Identification page', () => {
+    cy.get('.heading-headline').contains('Your Current Account Insurance');
     userIdentificationPage.checkUserIdentificationPage();
   });
 
-  it('Should select At the Nearest Brach for user identification', () => {
-    userIdentificationPage.selectAtTheNearestBranch();
+  it('Should select Video for user identification', () => {
+    userIdentificationPage.selectVideoIdentification();
   });
 
   it('Should click Next in checkout', () => {
-    clickContinueButton();
-  });
-
-  it('Check order confirmation', () => {
-    checkOrderConfirmationBanking();
+    checkout.clickContinueButton();
   });
 });
