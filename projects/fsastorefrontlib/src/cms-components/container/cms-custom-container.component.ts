@@ -4,9 +4,9 @@ import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
 import {
-  CmsComponent,
   CMSCustomComponentsContainer,
 } from '../../occ/occ-models';
+import { CmsComponent } from 'fsastorefrontlib/occ/occ-models';
 
 @Component({
   selector: 'fsa-cms-custom-container',

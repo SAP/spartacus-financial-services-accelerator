@@ -11,6 +11,7 @@ import {
   InboxMessage,
   FSSearchConfig,
 } from '../../../../../core/my-account/services/inbox-data.service';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-inbox-messages',
@@ -49,20 +50,26 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
 
   loadCurrentMessageGroup() {
     this.subscription.add(
-      this.inboxService.activeMessageGroupAndTitle.subscribe(group => {
-        if (
-          group &&
-          group.messageGroup &&
-          group.messageGroup !== this.messageGroup
-        ) {
-          this.clearSearchData();
-        }
-        this.messageGroup =
-          group && group.messageGroup ? group.messageGroup : this.initialGroup;
-        this.mobileGroupTitle =
-          group && group.title ? group.title : this.mobileInitialTab;
-        this.getMessages();
-      })
+      this.inboxService.activeMessageGroupAndTitle
+        .pipe(
+          map(group => {
+            if (
+              group &&
+              group.messageGroup &&
+              group.messageGroup !== this.messageGroup
+            ) {
+              this.clearSearchData();
+            }
+            this.messageGroup =
+              group && group.messageGroup
+                ? group.messageGroup
+                : this.initialGroup;
+            this.mobileGroupTitle =
+              group && group.title ? group.title : this.mobileInitialTab;
+            this.getMessages();
+          })
+        )
+        .subscribe()
     );
   }
 
@@ -71,21 +78,24 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.inboxService
         .getMessages(this.messageGroup, this.searchConfig)
-        .subscribe(response => {
-          this.inboxService.messagesSource.next(response);
-          if (response.sorts.length > 0 && response.pagination) {
-            this.searchConfig.currentPage = response.pagination.page;
-            this.searchConfig.sortCode = response.sorts[0].code;
-            this.searchConfig.sortOrder =
-              response.sorts[0].asc === true ? 'asc' : 'desc';
-          }
-          this.pagination = response.pagination;
-          this.pagination.currentPage = response.pagination.page;
-          response.messages.forEach(message => {
-            newMessageList.push(this.buildDisplayMessage(message));
-          });
-          this.loadedMessages = newMessageList;
-        })
+        .pipe(
+          map(response => {
+            this.inboxService.messagesSource.next(response);
+            if (response.sorts.length > 0 && response.pagination) {
+              this.searchConfig.currentPage = response.pagination.page;
+              this.searchConfig.sortCode = response.sorts[0].code;
+              this.searchConfig.sortOrder =
+                response.sorts[0].asc === true ? 'asc' : 'desc';
+            }
+            this.pagination = response.pagination;
+            this.pagination.currentPage = response.pagination.page;
+            response.messages.forEach(message => {
+              newMessageList.push(this.buildDisplayMessage(message));
+            });
+            this.loadedMessages = newMessageList;
+          })
+        )
+        .subscribe()
     );
   }
 
