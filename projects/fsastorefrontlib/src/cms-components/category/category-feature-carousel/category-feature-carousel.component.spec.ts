@@ -4,7 +4,11 @@ import { CmsCategoryFeatureCarouselComponent } from '../../../occ/occ-models';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of } from 'rxjs';
 import { Component, Input, Directive } from '@angular/core';
-import { CmsService, ContentSlotComponentData, CmsComponent } from '@spartacus/core';
+import {
+  CmsService,
+  ContentSlotComponentData,
+  CmsComponent,
+} from '@spartacus/core';
 
 @Component({
   // tslint:disable
