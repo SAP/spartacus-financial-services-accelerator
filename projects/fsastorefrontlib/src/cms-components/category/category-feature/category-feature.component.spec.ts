@@ -6,8 +6,7 @@ import { CmsCategoryFeatureComponent } from '../../../occ/occ-models';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
-import { I18nTestingModule, CmsService } from '@spartacus/core';
-import { CmsComponent } from 'fsastorefrontlib/occ/occ-models';
+import { I18nTestingModule, CmsService, CmsComponent } from '@spartacus/core';
 
 @Component({
   // tslint:disable
