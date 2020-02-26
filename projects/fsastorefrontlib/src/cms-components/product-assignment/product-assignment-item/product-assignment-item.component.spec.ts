@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform, Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule } from '@spartacus/core';
-import { FSProductAssignmentService } from 'projects/fsastorefrontlib/src/core';
 import { ProductAssignmentItemComponent } from './product-assignment-item.component';
+import { FSProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
 
 @Pipe({
   name: 'cxTranslate',

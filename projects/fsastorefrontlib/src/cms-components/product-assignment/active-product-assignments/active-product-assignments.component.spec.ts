@@ -3,10 +3,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import {} from '@angular/router/testing';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
-import { FSProductAssignmentService } from 'projects/fsastorefrontlib/src/core';
 import { Observable, of } from 'rxjs';
 import { ActiveProductAssignmentsComponent } from './active-product-assignments.component';
 import createSpy = jasmine.createSpy;
+import { FSProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
 
 @Component({
   template: '',
