@@ -48,7 +48,6 @@ describe('ProductAssignmentItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductAssignmentItemComponent);
     component = fixture.componentInstance;
-    component.active = false;
     component.orgUnitId = 'SAP';
     component.productAssignment = mockedProductAssignment;
     spyOn(
@@ -66,7 +65,7 @@ describe('ProductAssignmentItemComponent', () => {
   });
 
   it('should change active status', () => {
-    component.changeActiveStatus('PA-test', false);
+    component.changeActiveStatus('PA-test');
     expect(
       mockedProductAssignmentService.changeActiveStatus
     ).toHaveBeenCalled();

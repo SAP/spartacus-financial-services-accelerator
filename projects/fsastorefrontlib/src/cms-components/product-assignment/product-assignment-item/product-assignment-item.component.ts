@@ -8,15 +8,14 @@ import { FSProductAssignmentService } from '../../../core/product-assignment/fac
 })
 export class ProductAssignmentItemComponent {
   @Input() productAssignment: any;
-  @Input() active: boolean;
   @Input() orgUnitId: string;
   constructor(protected productAssignmentService: FSProductAssignmentService) {}
 
-  changeActiveStatus(productAssignmentCode: string, activeStatus: boolean) {
+  changeActiveStatus(productAssignmentCode: string) {
     return this.productAssignmentService.changeActiveStatus(
       this.orgUnitId,
       productAssignmentCode,
-      activeStatus
+      !this.productAssignment.active
     );
   }
 }

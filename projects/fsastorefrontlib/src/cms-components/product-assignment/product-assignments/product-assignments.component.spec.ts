@@ -1,10 +1,9 @@
 import { Component, Input, Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import {} from '@angular/router/testing';
 import { I18nTestingModule } from '@spartacus/core';
-import { FSProductAssignmentService } from 'projects/fsastorefrontlib/src/core';
 import { Observable, of } from 'rxjs';
+import { FSProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
 import { ProductAssignmentsComponent } from './product-assignments.component';
 
 @Component({
@@ -13,7 +12,6 @@ import { ProductAssignmentsComponent } from './product-assignments.component';
 })
 class ProductAssignmentItemComponent {
   @Input() productAssignment: any;
-  @Input() active: boolean;
   @Input() orgUnitId: string;
 }
 

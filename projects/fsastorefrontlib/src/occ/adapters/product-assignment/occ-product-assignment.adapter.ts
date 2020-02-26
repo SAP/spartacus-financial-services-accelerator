@@ -56,7 +56,7 @@ export class OccFSProductAssignmentAdapter
       'Content-Type': 'application/json',
     });
     const productAssignmentBody = {
-      active: !active,
+      active: active,
     };
     return this.http
       .patch<any>(url, productAssignmentBody, { headers })
@@ -76,7 +76,7 @@ export class OccFSProductAssignmentAdapter
     orgUnitId,
     productAssignmentCode: string
   ) {
-    const productAssignmentsEndpoint =
+    const updateProductAssignmentEndpoint =
       '/users/' +
       userId +
       '/orgUnits/' +
@@ -84,7 +84,7 @@ export class OccFSProductAssignmentAdapter
       '/fsProductAssignments/' +
       productAssignmentCode;
     return (
-      this.occEndpointService.getBaseEndpoint() + productAssignmentsEndpoint
+      this.occEndpointService.getBaseEndpoint() + updateProductAssignmentEndpoint
     );
   }
 }

@@ -5,6 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { FSProductAssignmentService } from '../../../core/product-assignment/facade/product-assignment.service';
 
@@ -16,7 +17,8 @@ import { FSProductAssignmentService } from '../../../core/product-assignment/fac
 export class ActiveProductAssignmentsComponent implements OnInit, OnDestroy {
   constructor(
     protected productAssignmentService: FSProductAssignmentService,
-    protected route: ActivatedRoute
+    protected route: ActivatedRoute,
+    protected routingService: RoutingService
   ) {}
 
   private subscription = new Subscription();
@@ -40,6 +42,13 @@ export class ActiveProductAssignmentsComponent implements OnInit, OnDestroy {
     if (params) {
       this.orgUnitId = params.orgUnitId;
     }
+  }
+
+  navigateTo() {
+    this.routingService.go({
+      cxRoute: 'productAssignments',
+      params: { orgUnitId: this.orgUnitId },
+    });
   }
 
   ngOnDestroy() {

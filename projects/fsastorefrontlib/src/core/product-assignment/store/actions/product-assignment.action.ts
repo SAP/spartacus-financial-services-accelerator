@@ -9,7 +9,7 @@ export const LOAD_PRODUCT_ASSIGNMENTS_SUCCESS =
 export const UPDATE_PRODUCT_ASSIGNMENT =
   '[Product Assignment] Update Product Assignment';
 export const UPDATE_PRODUCT_ASSIGNMENT_FAIL =
-  '[Product Assignment] ACTIVATE Product Assignments FAIL';
+  '[Product Assignment] Update Product Assignments FAIL';
 export const UPDATE_PRODUCT_ASSIGNMENT_SUCCESS =
   '[Product Assignment] Update Product Assignment Success';
 

@@ -7,7 +7,6 @@
           <div class="single-card col-4">
             <fsa-product-assignment-item
               [productAssignment]="productAssignment"
-              [active]="productAssignment.active"
               [orgUnitId]="orgUnitId"
             >
             </fsa-product-assignment-item>
@@ -15,5 +14,8 @@
         </ng-container>
       </ng-container>
     </div>
+    <button class="action-button btn-block" (click)="navigateTo()">
+      {{ 'common.continue' | cxTranslate }}
+    </button>
   </div>
 </ng-container>

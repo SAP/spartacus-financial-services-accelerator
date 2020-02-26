@@ -36,16 +36,16 @@ export function reducer(
     case fromAction.UPDATE_PRODUCT_ASSIGNMENT_SUCCESS: {
       let content = { ...action.payload };
       const productAssignmentContent = state.content;
-      let assignments;
       if (content && content.code) {
-        assignments = productAssignmentContent.assignments.map(assignment => {
-          if (content.code === assignment.code) {
-            assignment = content;
+        productAssignmentContent.assignments = productAssignmentContent.assignments.map(
+          assignment => {
+            if (content.code === assignment.code) {
+              assignment = content;
+            }
+            return assignment;
           }
-          return assignment;
-        });
+        );
       }
-      productAssignmentContent.assignments = assignments;
       content = productAssignmentContent;
       return {
         ...state,
