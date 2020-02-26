@@ -1,7 +1,7 @@
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs/internal/Observable';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
 import { FSProductAssignmentAdapter } from '../../../core/product-assignment/connectors';
