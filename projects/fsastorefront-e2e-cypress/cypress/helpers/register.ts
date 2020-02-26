@@ -42,6 +42,7 @@ export function validatePhoneNumber(expectedValue: string) {
 }
 
 export function login(username: string, password: string) {
+  cy.get('.heading-headline').should('be.visible');
   cy.get('cx-login-form form').should('be.visible');
   cy.get('cx-login-form form').within(() => {
     cy.get('[formcontrolname="userId"]')
