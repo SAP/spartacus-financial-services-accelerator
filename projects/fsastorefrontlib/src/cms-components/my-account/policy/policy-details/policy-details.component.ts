@@ -6,9 +6,11 @@ import {
 } from '@angular/core';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { RoutingService } from '@spartacus/core';
-import { map, takeLast, take } from 'rxjs/operators';
-import { Subscription, combineLatest, Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Subscription, combineLatest, Observable } from 'rxjs';
 import { OccConfig } from '@spartacus/core';
+import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
+import { AllowedFSRequestType } from './../../../../occ/occ-models';
 
 @Component({
   selector: 'fsa-policy-details',
@@ -19,7 +21,8 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
   constructor(
     protected routingService: RoutingService,
     protected policyService: PolicyService,
-    protected config: OccConfig
+    protected config: OccConfig,
+    protected changeRequestService: ChangeRequestService
   ) {}
 
   policy$;
@@ -43,7 +46,15 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     );
     this.policy$ = this.policyService.getPolicies();
   }
-  isChangeAllowed(allowedFSRequestTypes, requestType) {
+
+  getBaseUrl() {
+    return this.config.backend.occ.baseUrl || '';
+  }
+
+  isChangeAllowed(
+    allowedFSRequestTypes: AllowedFSRequestType[],
+    requestType: string
+  ): boolean {
     if (allowedFSRequestTypes) {
       return (
         allowedFSRequestTypes
@@ -53,9 +64,29 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
       );
     }
   }
-  getBaseUrl() {
-    return this.config.backend.occ.baseUrl || '';
+
+  changePolicyDetails(policyId, contractId, changeRequestType) {
+    this.changeRequestService.createChangeRequest(
+      policyId,
+      contractId,
+      changeRequestType
+    );
+    this.subscription.add(
+      this.changeRequestService
+        .getChangeRequest()
+        .pipe(
+          map(changeRequest => {
+            if (changeRequest && changeRequest.configurationSteps) {
+              this.routingService.go({
+                cxRoute: changeRequest.configurationSteps[0].pageLabelOrId,
+              });
+            }
+          })
+        )
+        .subscribe()
+    );
   }
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();

@@ -19,7 +19,8 @@ import { PoliciesComponent } from './policies/policies.component';
 import { PolicyService } from '../../../core/my-account/facade/policy.service';
 import { PolicyDetailsComponent } from './policy-details/policy-details.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
-import { PolicyConnector } from '../../../core/my-account/connectors/policy.connector';
+import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
+import { ChangeRequestStoreModule } from './../../../core/change-request/store/change-request-store.module';
 
 const routes: Routes = [
   {
@@ -51,6 +52,7 @@ const routes: Routes = [
     NgSelectModule,
     SpinnerModule,
     AccordionModule,
+    ChangeRequestStoreModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
@@ -65,7 +67,7 @@ const routes: Routes = [
   ],
   declarations: [PoliciesComponent, PolicyDetailsComponent],
   exports: [PoliciesComponent, PolicyDetailsComponent],
-  providers: [PolicyService, PolicyConnector],
+  providers: [PolicyService, ChangeRequestService],
   entryComponents: [PoliciesComponent, PolicyDetailsComponent],
 })
 export class PolicyModule {}
