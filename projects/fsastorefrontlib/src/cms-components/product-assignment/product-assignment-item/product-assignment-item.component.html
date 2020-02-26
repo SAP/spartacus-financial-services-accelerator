@@ -5,9 +5,7 @@
   <div *ngIf="productAssignment.active === true">
     <button
       class="action-button btn-block"
-      (click)="
-        changeActiveStatus(productAssignment.code, productAssignment.active)
-      "
+      (click)="changeActiveStatus(productAssignment.code)"
     >
       {{ 'fscommon.deactivate' | cxTranslate }}
     </button>
@@ -15,9 +13,7 @@
   <div *ngIf="productAssignment.active === false">
     <button
       class="action-button btn-block"
-      (click)="
-        changeActiveStatus(productAssignment.code, productAssignment.active)
-      "
+      (click)="changeActiveStatus(productAssignment.code)"
     >
       {{ 'fscommon.activate' | cxTranslate }}
     </button>

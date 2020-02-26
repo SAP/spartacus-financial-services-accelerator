@@ -84,7 +84,8 @@ export class OccFSProductAssignmentAdapter
       '/fsProductAssignments/' +
       productAssignmentCode;
     return (
-      this.occEndpointService.getBaseEndpoint() + updateProductAssignmentEndpoint
+      this.occEndpointService.getBaseEndpoint() +
+      updateProductAssignmentEndpoint
     );
   }
 }
