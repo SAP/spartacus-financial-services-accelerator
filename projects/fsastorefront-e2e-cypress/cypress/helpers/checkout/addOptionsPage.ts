@@ -9,13 +9,8 @@ export interface AddOptions {
   items: AddOptionItem[];
 }
 
-export function checkAddOptionsPage() {
-  cy.get('div.progress-inner-wrapper').should('have.length', 5);
-  cy.get('fsa-add-options').should('be.visible');
-}
-
 export function checkAddOptionsPageContent(addOptions: AddOptions) {
-  cy.get('h2.heading-headline').contains(addOptions.title);
+  cy.get('.heading-headline').contains(addOptions.title);
   cy.get('fsa-add-options')
     .should('be.visible')
     .within(() => {
