@@ -28,6 +28,7 @@ context('FNOL for sample data user', () => {
     cy.get('.heading-headline').should('have.text', 'Make a Claim Online');
     cy.get('.notice.py-4').contains('You have no valid policies!');
     cy.window().then(win => win.sessionStorage.clear());
+    cy.wait(1000);
   });
 
   it('Should import auto policy', () => {
