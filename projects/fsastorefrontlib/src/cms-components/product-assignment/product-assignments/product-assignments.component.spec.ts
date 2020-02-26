@@ -11,7 +11,7 @@ import {
 
 import { Observable, of } from 'rxjs';
 import { ProductAssignmentsComponent } from './product-assignments.component';
-import { FSProductAssignmentService } from 'projects/fsastorefrontlib/src/core';
+import { FSProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
 
 @Pipe({
   name: 'cxTranslate',
