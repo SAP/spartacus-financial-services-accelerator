@@ -20,7 +20,18 @@ export abstract class FSProductAssignmentAdapter {
     sort: string
   ): Observable<any>;
 
-  abstract activateProductAssignment(
+  /**
+   * Abstract method used to change active status of product assignment by its code
+   *
+   * @param userId The user id
+   * @param orgUnitId The org unit id
+   * @param productAssignmentCode The product assignment code
+   * @param active The current active status of assignment
+   */
+  abstract changeActiveStatus(
     userId: string,
-    productAssignmentCode, active);
+    orgUnitId: string,
+    productAssignmentCode: string,
+    active: boolean
+  );
 }

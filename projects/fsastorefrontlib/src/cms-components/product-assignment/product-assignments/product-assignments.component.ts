@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AuthService, OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
 import { Subscription } from 'rxjs';
@@ -44,8 +49,15 @@ export class ProductAssignmentsComponent implements OnInit, OnDestroy {
     this.productAssignments$ = this.productAssignmentService.getProductAssignments();
   }
 
-  activate(producAssignmentCode: string, activeStatus) {
-      return this.productAssignmentService.activateProductAssignment(this.userId, producAssignmentCode, activeStatus);
+  changeActiveStatus(productAssignmentCode: string, activeStatus: boolean) {
+    if (this.productAssignments$) {
+      return this.productAssignmentService.changeActiveStatus(
+        this.userId,
+        this.userId,
+        productAssignmentCode,
+        activeStatus
+      );
+    }
   }
 
   private initialize(params: Params) {

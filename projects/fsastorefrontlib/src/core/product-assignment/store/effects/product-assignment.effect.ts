@@ -39,25 +39,26 @@ export class FSProductAssignmentEffects {
   );
 
   @Effect()
-  activateProductAssignment$: Observable<any> = this.actions$.pipe(
-    ofType(fromActions.ACTIVATE_PRODUCT_ASSIGNMENTS),
-    map((action: fromActions.ActivateProductAssignment) => action.payload),
+  changeActiveStatus$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.UPDATE_PRODUCT_ASSIGNMENT),
+    map((action: fromActions.UpdateProductAssignment) => action.payload),
     concatMap(payload => {
       return this.productAssignmentConnector
-        .activateProductAssignment(
+        .changeActiveStatus(
           payload.userId,
+          payload.orgUnitId,
           payload.productAssignmentCode,
-          payload.active,
+          payload.active
         )
         .pipe(
           map((productAssignment: any) => {
-            return new fromActions.ActivateProductAssignmentSuccess(
+            return new fromActions.UpdateProductAssignmentSuccess(
               productAssignment
             );
           }),
           catchError(error =>
             of(
-              new fromActions.ActivateProductAssignmentFail({
+              new fromActions.UpdateProductAssignmentFail({
                 error: JSON.stringify(error),
               })
             )

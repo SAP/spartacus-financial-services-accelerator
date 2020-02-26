@@ -10,7 +10,7 @@
           <li>{{ productAssignment.product.name }}</li>
           <li>{{ productAssignment.product.defaultCategory.name }}</li>
           <li>{{ productAssignment.active}}</li>
-          <button class="action-button btn-block" (click)="activate(productAssignment.code, productAssignment.active)">
+          <button class="action-button btn-block" (click)="changeActiveStatus(productAssignment.code, productAssignment.active)">
             {{ 'Activate' }}
           </button>
         </ul>

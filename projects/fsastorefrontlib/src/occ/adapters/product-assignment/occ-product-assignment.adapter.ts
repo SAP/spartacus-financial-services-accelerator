@@ -41,30 +41,48 @@ export class OccFSProductAssignmentAdapter
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  activateProductAssignment(userId, productAssignmentCode, active) {
-    const url = this.getUpdateProductAssignmentEndpoint(userId, productAssignmentCode);
+  changeActiveStatus(
+    userId: string,
+    orgUnitId: string,
+    productAssignmentCode: string,
+    active: boolean
+  ) {
+    const url = this.getUpdateProductAssignmentEndpoint(
+      userId,
+      orgUnitId,
+      productAssignmentCode
+    );
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    const productAssignmentContent = {
-      active: false
+    const productAssignmentBody = {
+      active: !active,
     };
     return this.http
-      .patch<any>(url, productAssignmentContent, { headers })
+      .patch<any>(url, productAssignmentBody, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
-  }
-
-  protected getUpdateProductAssignmentEndpoint(userId: string, productAssignmentCode: string) {
-    const productAssignmentsEndpoint =
-      '/users/' + userId + '/orgUnits/' + 'SAP' + '/fsProductAssignments/' + productAssignmentCode;
-    return (
-      this.occEndpointService.getBaseEndpoint() + productAssignmentsEndpoint
-    );
   }
 
   protected getChangeRequestEndpoint(userId: string, orgUnitId: string) {
     const productAssignmentsEndpoint =
       '/users/' + userId + '/orgUnits/' + orgUnitId + '/fsProductAssignments';
+    return (
+      this.occEndpointService.getBaseEndpoint() + productAssignmentsEndpoint
+    );
+  }
+
+  protected getUpdateProductAssignmentEndpoint(
+    userId: string,
+    orgUnitId,
+    productAssignmentCode: string
+  ) {
+    const productAssignmentsEndpoint =
+      '/users/' +
+      userId +
+      '/orgUnits/' +
+      orgUnitId +
+      '/fsProductAssignments/' +
+      productAssignmentCode;
     return (
       this.occEndpointService.getBaseEndpoint() + productAssignmentsEndpoint
     );

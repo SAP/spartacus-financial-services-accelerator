@@ -60,4 +60,56 @@ describe('Product Assignment Actions', () => {
       });
     });
   });
+
+  describe('ProductAssignment Action', () => {
+    it('should create the action', () => {
+      const userId = OCC_USER_ID_CURRENT;
+      const orgUnitId = 'SAP';
+      const productAssignmentCode = 'PA-test';
+      const active = false;
+      const action = new fromAction.UpdateProductAssignment({
+        userId: userId,
+        orgUnitId: orgUnitId,
+        productAssignmentCode: productAssignmentCode,
+        active: active,
+      });
+      expect({ ...action }).toEqual({
+        type: fromAction.UPDATE_PRODUCT_ASSIGNMENT,
+        payload: { userId, orgUnitId, productAssignmentCode, active },
+      });
+    });
+  });
+
+  describe('UpdateProductAssignmentSuccess Action', () => {
+    const updatedProductAssignmnet = {
+      active: false,
+      code: 'testOne',
+      product: {
+        code: 'testProduct',
+      },
+    };
+    it('should create the action', () => {
+      const action = new fromAction.UpdateProductAssignmentSuccess(
+        updatedProductAssignmnet
+      );
+      expect({ ...action }).toEqual({
+        type: fromAction.UPDATE_PRODUCT_ASSIGNMENT_SUCCESS,
+        payload: updatedProductAssignmnet,
+      });
+    });
+  });
+
+  describe('UpdateProductAssignmentFail Action', () => {
+    it('should create the action', () => {
+      const error = 'error';
+      const action = new fromAction.UpdateProductAssignmentFail({ error });
+      expect({ ...action }).toEqual({
+        type: fromAction.UPDATE_PRODUCT_ASSIGNMENT_FAIL,
+        payload: {
+          error: error,
+        },
+      });
+    });
+  });
+
 });

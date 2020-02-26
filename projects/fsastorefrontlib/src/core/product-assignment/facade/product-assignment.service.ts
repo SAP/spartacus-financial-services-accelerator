@@ -35,10 +35,16 @@ export class FSProductAssignmentService {
     );
   }
 
-  activateProductAssignment(userId, productAssignmentCode: string, active: boolean) {
+  changeActiveStatus(
+    userId: string,
+    orgUnitId: string,
+    productAssignmentCode: string,
+    active: boolean
+  ) {
     this.store.dispatch(
-      new fromAction.ActivateProductAssignment({
+      new fromAction.UpdateProductAssignment({
         userId,
+        orgUnitId,
         productAssignmentCode,
         active,
       })

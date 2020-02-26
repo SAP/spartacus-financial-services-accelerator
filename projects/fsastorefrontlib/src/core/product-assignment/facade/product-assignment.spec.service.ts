@@ -92,6 +92,31 @@ describe('FSProductAssignmentServiceTest', () => {
         response = productAssignments;
       })
       .unsubscribe();
-    expect(response).toEqual(mockProductAssignments);
+    expect(response).toEqual(mockProductAssignments.assignments);
+  });
+
+  it('should be able to change active status', () => {
+    const updatedProductAssignment =  {
+      active: false,
+      code: 'testOne',
+      product: {
+        code: 'testProduct',
+      },
+    };
+    store.dispatch(
+      new fromAction.LoadProductAssignmentsSuccess(mockProductAssignments)
+    );
+    store.dispatch(
+      new fromAction.UpdateProductAssignmentSuccess(updatedProductAssignment)
+    );
+    let response;
+    service
+      .getProductAssignments()
+      .subscribe(productAssignments => {
+        response = productAssignments;
+      })
+      .unsubscribe();
+    expect(response[0].code).toEqual('testOne');
+    expect(response[0].active).toEqual(false);
   });
 });

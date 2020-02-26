@@ -26,8 +26,17 @@ export class FSProductAssignmentConnector {
     );
   }
 
-  activateProductAssignment(userId: string, productAssignmentCode: string, active: boolean): Observable<any> {
-      return this.productAssignmentAdapter.activateProductAssignment(
-        userId, productAssignmentCode, active);
+  changeActiveStatus(
+    userId: string,
+    orgUnitId: string,
+    productAssignmentCode: string,
+    active: boolean
+  ): Observable<any> {
+    return this.productAssignmentAdapter.changeActiveStatus(
+      userId,
+      orgUnitId,
+      productAssignmentCode,
+      active
+    );
   }
 }
