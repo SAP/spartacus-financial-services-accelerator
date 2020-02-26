@@ -1,10 +1,9 @@
 import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
+import { CmsComponentConnector, PageContext, PageType, CmsComponent } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { CMSCustomComponentsContainer } from '../../occ/occ-models';
-import { CmsComponent } from 'fsastorefrontlib/occ/occ-models';
 import { map } from 'rxjs/operators';
 
 @Component({
