@@ -10,7 +10,7 @@ import { AgentSearchService } from '../../../core/agent/facade/agent-search.serv
 export class AgentSearchListComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   searchResults: Observable<any>;
-  searchQuery: any;
+  searchQuery: string;
   pagination: any;
   selectedAgent$: Observable<any>;
 

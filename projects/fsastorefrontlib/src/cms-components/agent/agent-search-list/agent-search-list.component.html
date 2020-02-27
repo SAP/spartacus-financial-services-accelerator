@@ -18,12 +18,15 @@
             format="thumbnail"
           ></cx-media>
           {{ agent.firstName }} {{ agent.lastName }}<br />
-          <ng-container *ngFor="let pos of agent.pointsOfService">
-            {{ pos.displayName }} {{ pos.address?.line1 }} -
-            {{ pos.formattedDistance }}<br />
+          <ng-container *ngIf="agent.pointsOfService">
+            <ng-container *ngFor="let pos of agent.pointsOfService">
+              {{ pos.displayName }} {{ pos.address?.line1 }} -
+              {{ pos.formattedDistance }}<br />
+            </ng-container>
+            {{ agent.pointsOfService[0]?.address?.town }}
+            <br />
           </ng-container>
-          {{ agent.pointsOfService[0]?.address?.town }}
-          <br />
+
           {{ 'fscommon.agentLocator.categories' | cxTranslate }}:
           <div
             class="agent-categories"
@@ -63,7 +66,7 @@
     <div
       class="col-6"
       style="max-height: 300px;"
-      *ngIf="!selectedAgent$ && results.agents[0]"
+      *ngIf="!selectedAgent$ && results && results.agents[0]"
     >
       <ng-container
         *ngTemplateOutlet="

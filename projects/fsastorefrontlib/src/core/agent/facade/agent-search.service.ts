@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GeoPoint, WindowRef } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { take, map } from 'rxjs/operators';
 import { AgentConnector } from '../connectors/agent.connector';
 
 @Injectable({
@@ -54,12 +54,14 @@ export class AgentSearchService {
   ) {
     this.agentConnector
       .getAgentsByQuery(searchQuery, pageNumber, position)
-      .pipe(take(1))
-      .subscribe(searchResults => {
-        if (searchResults) {
-          this.agents.next(searchResults);
-        }
-      });
+      .pipe(
+        map(searchResults => {
+          if (searchResults) {
+            this.agents.next(searchResults);
+          }
+        })
+      )
+      .subscribe();
   }
 
   private clearWatchGeolocation() {
