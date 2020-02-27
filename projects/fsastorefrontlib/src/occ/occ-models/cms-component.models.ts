@@ -5,12 +5,11 @@ import {
   CmsBannerComponentMedia,
 } from '@spartacus/core';
 
-export type CmsComponent = CmsComponent;
-
 export interface CmsProductFeatureComponent extends CmsComponent {
   title?: string;
   description?: string;
   media?: string;
+  product: string;
 }
 
 export interface CmsCategoryFeatureComponent extends CmsComponent {

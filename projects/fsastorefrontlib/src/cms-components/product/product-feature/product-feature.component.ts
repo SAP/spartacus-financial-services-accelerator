@@ -2,7 +2,8 @@ import { FSProductService } from '../../../core/product-pricing/facade/fs-produc
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { CmsProductFeatureComponent } from '../../../occ/occ-models/cms-component.models';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-product-feature',
@@ -14,14 +15,18 @@ export class ProductFeatureComponent implements OnInit, OnDestroy {
     protected productService: FSProductService
   ) {}
   private subscription = new Subscription();
-  component$;
+  component$: Observable<CmsProductFeatureComponent>;
   product$;
   ngOnInit() {
     this.component$ = this.componentData.data$;
     this.subscription.add(
-      this.component$.subscribe(data => {
-        this.product$ = this.productService.get(data.product);
-      })
+      this.component$
+        .pipe(
+          map(data => {
+            this.product$ = this.productService.get(data.product);
+          })
+        )
+        .subscribe()
     );
   }
 

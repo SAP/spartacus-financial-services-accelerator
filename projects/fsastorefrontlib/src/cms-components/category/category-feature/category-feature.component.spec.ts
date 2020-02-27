@@ -2,14 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CategoryFeatureComponent } from './category-feature.component';
 import { Component, Input, PipeTransform, Pipe } from '@angular/core';
-import {
-  CmsCategoryFeatureComponent,
-  CmsComponent,
-} from '../../../occ/occ-models';
+import { CmsCategoryFeatureComponent } from '../../../occ/occ-models';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
-import { I18nTestingModule, CmsService } from '@spartacus/core';
+import { I18nTestingModule, CmsService, CmsComponent } from '@spartacus/core';
 
 @Component({
   // tslint:disable

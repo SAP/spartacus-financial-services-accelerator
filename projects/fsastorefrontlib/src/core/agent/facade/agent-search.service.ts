@@ -28,7 +28,6 @@ export class AgentSearchService {
             latitude: pos.coords.latitude,
           };
           this.getAgentsByQuery(searchQuery, pageNumber, position);
-
           this.clearWatchGeolocation();
         },
         () => {
@@ -63,7 +62,9 @@ export class AgentSearchService {
       .getAgentsByQuery(searchQuery, pageNumber, position)
       .pipe(take(1))
       .subscribe(searchResults => {
-        this.agents.next(searchResults);
+        if (searchResults) {
+          this.agents.next(searchResults);
+        }
         if (searchResults.agents && searchResults.agents.length > 0) {
           this.agentDetails.next(searchResults.agents[0]);
         }

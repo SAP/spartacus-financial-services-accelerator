@@ -34,12 +34,18 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.comparisonPanel = this.componentData.data$;
-    this.componentData.data$.pipe(take(1)).subscribe(data => {
-      const productCodes = data.products.split(' ');
-      this.billingData = this.billingTimeConnector.getBillingTimes(
-        productCodes
-      );
-    });
+    this.subscription.add(
+      this.comparisonPanel
+        .pipe(
+          map(data => {
+            const productCodes = data.products.split(' ');
+            this.billingData = this.billingTimeConnector.getBillingTimes(
+              productCodes
+            );
+          })
+        )
+        .subscribe()
+    );
 
     this.subscription.add(
       this.formDataService
@@ -58,16 +64,16 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy(): void {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
-
   getProductList(): string[] {
     this.componentData.data$.subscribe(data => {
       this.productList = data.products.split(' ');
     });
     return this.productList;
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

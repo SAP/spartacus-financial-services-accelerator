@@ -29,6 +29,7 @@ describe('ProductFeatureComponent', () => {
     typeCode: 'CMSProductFeatureComponent',
     title: 'Product Feature Component',
     description: 'Component used to describe product features',
+    product: 'testProduct',
   };
 
   const MockCmsComponentData = <CmsComponentData<CmsComponent>>{

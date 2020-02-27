@@ -27,7 +27,7 @@ export class PoliciesComponent implements OnInit {
   ngOnInit() {
     this.policyService.loadPolicies();
     this.policies$ = this.policyService.getPolicies();
-    this.policiesLoaded$ = this.policyService.getPolicies();
+    this.policiesLoaded$ = this.policyService.getLoaded();
   }
 
   getBaseUrl() {
