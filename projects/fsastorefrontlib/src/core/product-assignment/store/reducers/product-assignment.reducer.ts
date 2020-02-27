@@ -20,6 +20,7 @@ export function reducer(
 ): ProductAssignmentState {
   switch (action.type) {
     case fromAction.LOAD_PRODUCT_ASSIGNMENTS: {
+      console.log('from reducer LOAD_PRODUCT_ASSIGNMENTS');
       return {
         ...state,
         loaded: false,
@@ -27,6 +28,7 @@ export function reducer(
     }
     case fromAction.LOAD_PRODUCT_ASSIGNMENTS_SUCCESS: {
       const content = { ...action.payload };
+      console.log('from reducer LOAD_PRODUCT_ASSIGNMENTS_SUCCESS:', content);
       return {
         ...state,
         content,

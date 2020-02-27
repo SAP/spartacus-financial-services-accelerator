@@ -23,6 +23,10 @@ export class FSProductAssignmentEffects {
         )
         .pipe(
           map((productAssignments: any) => {
+            console.log(
+              'from effect via loadProductAssignmentsForUnit:',
+              productAssignments
+            );
             return new fromActions.LoadProductAssignmentsSuccess(
               productAssignments
             );

@@ -16,6 +16,7 @@ export class FSProductAssignmentConnector {
     currentPage?: number,
     sort?: string
   ): Observable<any> {
+    console.log('from connector -> loadProductAssignmentsForUnit', orgUnitId);
     return this.productAssignmentAdapter.loadProductAssignmentsForUnit(
       userId,
       orgUnitId,

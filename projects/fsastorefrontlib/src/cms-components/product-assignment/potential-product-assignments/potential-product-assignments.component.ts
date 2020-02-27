@@ -26,14 +26,14 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
   productAssignments$: Observable<any>;
 
   ngOnInit() {
-    this.subscription
-      .add(this.route.params.subscribe(params => this.initialize(params)))
-      .add(
-        this.productAssignmentService.loadProductAssignmentsForUnit(
-          this.orgUnitId
-        )
-      );
-    this.productAssignments$ = this.productAssignmentService.getProductAssignments();
+    // this.subscription
+    //   .add(this.route.params.subscribe(params => this.initialize(params)))
+    //   .add(
+    //     this.productAssignmentService.loadProductAssignmentsForUnit(
+    //       this.orgUnitId
+    //     )
+    //   );
+    // this.productAssignments$ = this.productAssignmentService.getProductAssignments();
   }
 
   private initialize(params: Params) {
