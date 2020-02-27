@@ -46,7 +46,7 @@ export class ActiveProductAssignmentsComponent implements OnInit, OnDestroy {
 
   navigateTo() {
     this.routingService.go({
-      cxRoute: 'productAssignments',
+      cxRoute: 'productActivation',
       params: { orgUnitId: this.orgUnitId },
     });
   }

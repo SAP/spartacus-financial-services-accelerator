@@ -31,8 +31,8 @@ import { ProductAssignmentsComponent } from './product-assignments/product-assig
         path: null,
         canActivate: [CmsPageGuard],
         data: {
-          cxRoute: 'productAssignments',
-          pageLabel: 'productAssignmentsPage',
+          cxRoute: 'productActivation',
+          pageLabel: 'productActivationPage',
         },
         component: PageLayoutComponent,
       },
