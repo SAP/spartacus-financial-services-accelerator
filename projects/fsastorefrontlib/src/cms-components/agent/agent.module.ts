@@ -21,7 +21,6 @@ import { FindAgentNavigationComponent } from './find-agent-navigation/find-agent
 import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { AgentSearchBoxComponent } from './agent-search-box/agent-search-box.component';
 import { AgentSearchListComponent } from './agent-search-list/agent-search-list.component';
-import { AgentSearchDetailsComponent } from './agent-search-details/agent-search-details.component';
 import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-form.component';
 
 import { AgentConnector } from '../../core/agent/connectors/agent.connector';
@@ -65,9 +64,6 @@ import { AgentConnector } from '../../core/agent/connectors/agent.connector';
         AgentSearchListFlex: {
           component: AgentSearchListComponent,
         },
-        AgentSearchDetailsFlex: {
-          component: AgentSearchDetailsComponent,
-        },
       },
     }),
   ],
@@ -77,7 +73,6 @@ import { AgentConnector } from '../../core/agent/connectors/agent.connector';
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
-    AgentSearchDetailsComponent,
   ],
   exports: [
     AgentRootComponent,
@@ -85,7 +80,6 @@ import { AgentConnector } from '../../core/agent/connectors/agent.connector';
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
-    AgentSearchDetailsComponent,
   ],
   entryComponents: [
     AgentRootComponent,
@@ -93,7 +87,6 @@ import { AgentConnector } from '../../core/agent/connectors/agent.connector';
     FindAgentNavigationComponent,
     AgentSearchBoxComponent,
     AgentSearchListComponent,
-    AgentSearchDetailsComponent,
   ],
   providers: [AgentConnector],
 })
