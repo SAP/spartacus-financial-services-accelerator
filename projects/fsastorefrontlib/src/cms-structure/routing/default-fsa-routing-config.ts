@@ -41,6 +41,12 @@ export const fsaStorefrontRoutesConfig: RoutesConfig = {
   changeCarDetailsPage: { paths: ['changeCarDetailsPage'] },
   changeCoveragePage: { paths: ['changeCoveragePage'] },
   changeSimulationPage: { paths: ['changeSimulationPage'] },
+  agentLogin: { paths: ['agent-portal'] },
+  agentDashboard: { paths: ['agent-portal/dashboard'] },
+  customerOverview: { 
+    paths: ['agent-portal/customer-overview'],
+    paramsMapping: { uid: 'uid' }, 
+  },
 };
 
 export const fsaRoutingConfig: RoutingConfig = {

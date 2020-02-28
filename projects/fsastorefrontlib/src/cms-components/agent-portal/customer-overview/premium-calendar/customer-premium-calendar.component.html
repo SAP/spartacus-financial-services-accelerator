@@ -1,0 +1,44 @@
+<ng-container *ngIf="policies$ | async as policies">
+    <ng-container *ngIf="policiesLoaded$ | async">
+        <ng-container *ngIf="policies?.insurancePolicies?.length > 0">
+            <fd-layout-grid [col]="6">
+                <!-- first row -->
+                <fd-panel fd-layout-grid-span [columnSpan]="4">
+                    <fd-panel-body>
+                        <div fd-table-responsive-wrapper>
+                            <table fd-table>
+                                <thead fd-table-header>
+                                    <tr fd-table-row>
+                                        <th fd-table-cell>Policy</th>
+                                        <th fd-table-cell>Payment Frequency</th>
+                                        <th fd-table-cell>Due Date</th>
+                                        <th fd-table-cell>Premium</th>
+                                        <th fd-table-cell>Payment Method</th>
+                                    </tr>
+                                </thead>
+                                <tbody fd-table-body>
+                                    <tr *ngFor="let policy of policies.insurancePolicies" fd-table-row>
+                                        <td fd-table-cell>
+                                            {{ policy.categoryData?.name }} <br />
+                                            {{ policy.contractNumber }}
+                                        </td>
+                                        <td fd-table-cell>{{ policy.paymentFrequency }}</td>
+                                        <td fd-table-cell>{{ policy.billingData[0]?.dueDate | cxDate: 'dd MMM yyyy' }}
+                                        </td>
+                                        <td fd-table-cell>{{ policy.policyPremium?.formattedValue }}</td>
+                                        <td fd-table-cell>
+                                            <ng-container *ngIf="policy.paymentMethod">
+                                                {{ policy.paymentMethod.cardType?.code | uppercase }}
+                                                {{ policy.paymentMethod?.cardNumber }}
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </fd-panel-body>
+                </fd-panel>
+            </fd-layout-grid>
+        </ng-container>
+    </ng-container>
+</ng-container>

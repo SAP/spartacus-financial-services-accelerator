@@ -1,0 +1,32 @@
+<ng-container *ngIf="quotes$ | async as quotes">
+    <ng-container *ngIf="quotesLoaded$ | async">
+        <fd-layout-grid [col]="6">
+            <fd-panel fd-layout-grid-span [columnSpan]="4">
+                <fd-panel-body>
+                    <div fd-table-responsive-wrapper>
+                        <table fd-table>
+                            <thead fd-table-header>
+                                <tr fd-table-row>
+                                    <th fd-table-cell>Category</th>
+                                    <th fd-table-cell>Plan Name</th>
+                                    <th fd-table-cell>Quote Expiry Date</th>
+                                    <th fd-table-cell>Price</th>
+                                </tr>
+                            </thead>
+                            <tbody fd-table-body>
+                                <tr *ngFor="let quote of quotes.insuranceQuotes" fd-table-row>
+                                    <td fd-table-cell class="fd-has-font-weight-semi">{{ quote.defaultCategory?.name }}</td>
+                                    <td fd-table-cell>{{ quote.planName }} <br/>
+                                        {{ quote.quoteId }}
+                                    </td>
+                                    <td fd-table-cell>{{quote.expiryDate | cxDate: 'dd MMM yyyy'}}</td>
+                                    <td fd-table-cell>{{ quote.quotePrice }} / {{ quote.paymentFrequency }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fd-panel-body>
+            </fd-panel>
+        </fd-layout-grid>
+    </ng-container>
+</ng-container>

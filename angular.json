@@ -24,7 +24,9 @@
               "src/webApplicationInjector.js"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/fundamental-styles/dist/fonts.css",
+              "node_modules/fundamental-styles/dist/icon.css"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [

@@ -1,0 +1,20 @@
+<fd-layout-grid [col]="8">
+    <!-- first row -->
+    <fd-panel fd-layout-grid-span [columnSpan]="2">
+        <fd-panel-body>
+            <div fd-form-item>
+                <label fd-form-label for="input-1">Default Input</label>
+                <input fd-form-control type="text" id="input-1" placeholder="Field placeholder text">
+            </div>
+        </fd-panel-body>
+    </fd-panel>
+    <fd-panel fd-layout-grid-span [columnSpan]="2">
+        <fd-panel-body>
+            <div fd-form-item>
+                <label fd-form-label [required]="true" for="input-2">Required Input:</label>
+                <input fd-form-control type="text" id="input-2" placeholder="Field placeholder text"
+                    aria-required="true">
+            </div>
+        </fd-panel-body>
+    </fd-panel>
+</fd-layout-grid>
