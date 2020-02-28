@@ -17,7 +17,7 @@ import {
 import { DefaultFormValidators } from '@fsa/dynamicforms';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { FSCsTicketService } from './../../../core/cs-ticket/facade/cs-ticket.service';
-import { ContactAgentData } from 'projects/fsastorefrontlib/src/occ/occ-models';
+import { ContactAgentData } from './../../../occ/occ-models';
 
 @Component({
   selector: 'fsa-contact-agent-form',

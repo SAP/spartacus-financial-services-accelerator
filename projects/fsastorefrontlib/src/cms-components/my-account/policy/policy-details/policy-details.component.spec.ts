@@ -6,7 +6,7 @@ import { AccordionModule } from '../../../../shared/accordion/accordion.module';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import { Type } from '@angular/core';
-import { AllowedFSRequestType } from 'projects/fsastorefrontlib/src/occ/occ-models';
+import { AllowedFSRequestType } from './../../../../occ/occ-models';
 
 class MockPolicyService {
   loadPolicyDetails(): void {}
