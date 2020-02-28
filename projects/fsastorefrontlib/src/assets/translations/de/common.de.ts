@@ -25,6 +25,8 @@ export const fscommon = {
     duration: 'Dauer',
     included: 'Inbegriffen',
     excluded: 'Ausgeschlossen',
+    activate: '[DE] Activate',
+    deactivate: '[DE] Deactivate',
     premium: 'Prämie',
     retrieve: 'Abrufen',
     notAvailable: 'N/V',

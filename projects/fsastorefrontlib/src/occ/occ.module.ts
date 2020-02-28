@@ -27,6 +27,8 @@ import { OccUserRequestAdapter } from './adapters/user-request/occ-user-request.
 import { FSCsTicketAdapter } from '../core/cs-ticket/connectors/cs-ticket.adapter';
 import { ChangeRequestAdapter } from '../core/change-request/connectors/change-request.adapter';
 import { OccChangeRequestAdapter } from './adapters/change-request/occ-change-request.adapter';
+import { OccFSProductAssignmentAdapter } from './adapters/product-assignment/occ-product-assignment.adapter';
+import { FSProductAssignmentAdapter } from '../core';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
@@ -82,6 +84,10 @@ import { OccChangeRequestAdapter } from './adapters/change-request/occ-change-re
     {
       provide: ChangeRequestAdapter,
       useClass: OccChangeRequestAdapter,
+    },
+    {
+      provide: FSProductAssignmentAdapter,
+      useClass: OccFSProductAssignmentAdapter,
     },
     { provide: OccConfig, useExisting: Config },
   ],

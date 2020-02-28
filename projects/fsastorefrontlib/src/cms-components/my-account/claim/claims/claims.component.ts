@@ -43,11 +43,14 @@ export class ClaimsComponent implements OnInit, OnDestroy {
     this.claimsLoaded$ = this.claimService.getLoaded();
 
     this.subscription.add(
-      this.claimService.shouldReload().subscribe(reload => {
-        if (reload) {
-          this.claimService.loadClaims();
-        }
-      })
+      this.claimService
+        .shouldReload()
+        .pipe(
+          map(_ => {
+            this.claimService.loadClaims();
+          })
+        )
+        .subscribe()
     );
   }
 

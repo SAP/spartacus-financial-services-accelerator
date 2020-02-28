@@ -26,6 +26,8 @@ export const fscommon = {
     duration: 'Duration',
     included: 'Included',
     excluded: 'Excluded',
+    activate: 'Activate',
+    deactivate: 'Deactivate',
     premium: 'Premium',
     retrieve: 'Retrieve',
     notAvailable: 'N/A',

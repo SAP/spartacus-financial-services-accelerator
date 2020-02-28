@@ -1,13 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CategoryFeatureCarouselComponent } from './category-feature-carousel.component';
-import {
-  CmsCategoryFeatureCarouselComponent,
-  CmsComponent,
-} from '../../../occ/occ-models';
+import { CmsCategoryFeatureCarouselComponent } from '../../../occ/occ-models';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of } from 'rxjs';
 import { Component, Input, Directive } from '@angular/core';
-import { CmsService, ContentSlotComponentData } from '@spartacus/core';
+import {
+  CmsService,
+  ContentSlotComponentData,
+  CmsComponent,
+} from '@spartacus/core';
 
 @Component({
   // tslint:disable

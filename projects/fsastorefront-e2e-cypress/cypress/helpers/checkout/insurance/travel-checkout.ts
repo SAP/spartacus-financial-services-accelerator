@@ -39,20 +39,20 @@ export function checkComparisonAndAddProduct() {
   cy.get('fsa-comparison-table-panel-item')
     .eq(2)
     .within(() => {
-      cy.get('h3').should('have.text', 'Single - Gold Plan');
-      cy.get('h4').should('have.text', '€150.00');
+      cy.get('.table-header-title').should('have.text', 'Single - Gold Plan');
+      cy.get('.table-header-value').should('have.text', '€150.00');
     });
   cy.get('fsa-comparison-table-panel-item')
     .eq(1)
     .within(() => {
-      cy.get('h3').should('have.text', 'Single - Silver Plan');
-      cy.get('h4').should('have.text', '€120.00');
+      cy.get('.table-header-title').should('have.text', 'Single - Silver Plan');
+      cy.get('.table-header-value').should('have.text', '€120.00');
     });
   cy.get('fsa-comparison-table-panel-item')
     .eq(0)
     .within(() => {
-      cy.get('h3').should('have.text', 'Single - Budget Plan');
-      cy.get('h4').should('have.text', '€90.00');
+      cy.get('.table-header-title').should('have.text', 'Single - Budget Plan');
+      cy.get('.table-header-value').should('have.text', '€90.00');
       cy.get('.primary-button').click();
     });
 }
