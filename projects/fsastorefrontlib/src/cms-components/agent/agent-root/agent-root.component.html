@@ -31,7 +31,8 @@
                   ></a>
                   <a
                     class="col-6 fsa-icon icon-map-marker text-left position-relative"
-                    href="#"
+                    [routerLink]="['/agent-locator']"
+                    [queryParams]="{ query: agent.contactEmail }"
                   ></a>
                 </div>
               </div>

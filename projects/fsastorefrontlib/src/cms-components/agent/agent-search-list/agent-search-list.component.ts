@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
-import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-agent-search-list',
@@ -10,9 +9,10 @@ import { filter, map } from 'rxjs/operators';
 })
 export class AgentSearchListComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
-  searchResults: any;
+  searchResults: Observable<any>;
   searchQuery: string;
   pagination: any;
+  selectedAgent$: Observable<any>;
 
   constructor(
     protected agentSearchService: AgentSearchService,
@@ -23,19 +23,8 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.route.queryParams.subscribe(params => this.initialize(params))
     );
-    this.subscription.add(
-      this.agentSearchService
-        .getResults()
-        .pipe(
-          filter(result => result !== null),
-          map(result => {
-            this.searchResults = result;
-            this.pagination = result.pagination;
-            this.pagination.currentPage = result.pagination.page;
-          })
-        )
-        .subscribe()
-    );
+
+    this.searchResults = this.agentSearchService.getResults();
   }
 
   private initialize(queryParams: Params) {
@@ -46,7 +35,9 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   }
 
   showDetails(agent) {
-    this.agentSearchService.setAgent(agent);
+    this.selectedAgent$ = this.agentSearchService.getAgentByID(
+      agent.contactEmail
+    );
   }
 
   pageChange(page: number): void {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GeoPoint, WindowRef } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { take, map } from 'rxjs/operators';
 import { AgentConnector } from '../connectors/agent.connector';
 
 @Injectable({
@@ -14,13 +14,16 @@ export class AgentSearchService {
   ) {}
 
   agents = new BehaviorSubject<any>(null);
-  agentDetails = new BehaviorSubject<any>(null);
 
   private geolocationWatchId: number = null;
 
   search(searchQuery: string, pageNumber: number) {
     let position: GeoPoint;
     if (this.winRef.nativeWindow) {
+      if (this.geolocationWatchId) {
+        this.clearWatchGeolocation();
+      }
+
       this.geolocationWatchId = this.winRef.nativeWindow.navigator.geolocation.watchPosition(
         (pos: Position) => {
           position = {
@@ -28,7 +31,6 @@ export class AgentSearchService {
             latitude: pos.coords.latitude,
           };
           this.getAgentsByQuery(searchQuery, pageNumber, position);
-          this.clearWatchGeolocation();
         },
         () => {
           this.getAgentsByQuery(searchQuery, pageNumber);
@@ -41,15 +43,7 @@ export class AgentSearchService {
     return this.agents.asObservable();
   }
 
-  setAgent(agent: any) {
-    this.agentDetails.next(agent);
-  }
-
-  getAgent() {
-    return this.agentDetails.asObservable();
-  }
-
-  getAgentByID(agentID) {
+  getAgentByID(agentID): Observable<any> {
     return this.agentConnector.getAgentByID(agentID);
   }
 
@@ -60,15 +54,14 @@ export class AgentSearchService {
   ) {
     this.agentConnector
       .getAgentsByQuery(searchQuery, pageNumber, position)
-      .pipe(take(1))
-      .subscribe(searchResults => {
-        if (searchResults) {
-          this.agents.next(searchResults);
-        }
-        if (searchResults.agents && searchResults.agents.length > 0) {
-          this.agentDetails.next(searchResults.agents[0]);
-        }
-      });
+      .pipe(
+        map(searchResults => {
+          if (searchResults) {
+            this.agents.next(searchResults);
+          }
+        })
+      )
+      .subscribe();
   }
 
   private clearWatchGeolocation() {
