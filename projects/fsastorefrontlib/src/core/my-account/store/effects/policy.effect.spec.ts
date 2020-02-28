@@ -38,7 +38,7 @@ const premiumCalendarPolicies = {
   insurancePolicies: [insurancePolicy2],
 };
 
-class MockOccPolicyAdapter {
+class MockPolicyConnector {
   getPolicies() {
     return of(insurancePolicies);
   }
@@ -53,10 +53,10 @@ class MockOccPolicyAdapter {
 describe('Policy Effects', () => {
   let actions$: Observable<fromActions.PolicyAction>;
   let effects: fromEffects.PolicyEffects;
-  let mockOccPolicyAdapter: MockOccPolicyAdapter;
+  let mockPolicyConnector: MockPolicyConnector;
 
   beforeEach(() => {
-    mockOccPolicyAdapter = new MockOccPolicyAdapter();
+    mockPolicyConnector = new MockPolicyConnector();
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
@@ -64,7 +64,7 @@ describe('Policy Effects', () => {
         StoreModule.forFeature('assets', fromUserReducers.getReducers()),
       ],
       providers: [
-        { provide: PolicyConnector, useValue: mockOccPolicyAdapter },
+        { provide: PolicyConnector, useValue: mockPolicyConnector },
         fromEffects.PolicyEffects,
         provideMockActions(() => actions$),
       ],
@@ -87,7 +87,7 @@ describe('Policy Effects', () => {
     });
 
     it('should fail to return policies', () => {
-      spyOn(mockOccPolicyAdapter, 'getPolicies').and.returnValue(
+      spyOn(mockPolicyConnector, 'getPolicies').and.returnValue(
         throwError('Error')
       );
 
@@ -120,7 +120,7 @@ describe('Policy Effects', () => {
     });
 
     it('should fail to return policy', () => {
-      spyOn(mockOccPolicyAdapter, 'getPolicy').and.returnValue(
+      spyOn(mockPolicyConnector, 'getPolicy').and.returnValue(
         throwError('Error')
       );
 
@@ -153,7 +153,7 @@ describe('Policy Effects', () => {
     });
 
     it('should fail to return premium calendar policies', () => {
-      spyOn(mockOccPolicyAdapter, 'getPremiumCalendar').and.returnValue(
+      spyOn(mockPolicyConnector, 'getPremiumCalendar').and.returnValue(
         throwError('Error')
       );
       const action = new fromActions.LoadPremiumCalendar({

@@ -17,7 +17,7 @@ const cart = {
   cartId: cartId,
 };
 
-class MockOccCheckoutAdapter {
+class MockCheckoutConnector {
   setIdentificationType() {
     return of(cart);
   }
@@ -26,14 +26,14 @@ class MockOccCheckoutAdapter {
 describe('FS Checkout Effects', () => {
   let actions$: Observable<fromActions.SetIdentificationType>;
   let effects: fromEffects.FSCheckoutEffects;
-  let mockOccCheckoutAdapter: MockOccCheckoutAdapter;
+  let mockCheckoutConnector: MockCheckoutConnector;
 
   beforeEach(() => {
-    mockOccCheckoutAdapter = new MockOccCheckoutAdapter();
+    mockCheckoutConnector = new MockCheckoutConnector();
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, StoreModule.forRoot({})],
       providers: [
-        { provide: FsCheckoutConnector, useValue: mockOccCheckoutAdapter },
+        { provide: FsCheckoutConnector, useValue: mockCheckoutConnector },
         fromEffects.FSCheckoutEffects,
         provideMockActions(() => actions$),
       ],
@@ -59,7 +59,7 @@ describe('FS Checkout Effects', () => {
     });
 
     it('should fail to set user identification type', () => {
-      spyOn(mockOccCheckoutAdapter, 'setIdentificationType').and.returnValue(
+      spyOn(mockCheckoutConnector, 'setIdentificationType').and.returnValue(
         throwError('Error')
       );
       const action = new fromActions.SetIdentificationType({
