@@ -16,8 +16,6 @@ const contractNumber = 'CO0000012';
 const usersEndpoint = '/users';
 const claimsEndpoint = '/claims';
 
-const claimsActionEndpoit = '/action';
-
 const MockOccModuleConfig: OccConfig = {
   context: {
     baseSite: [''],
@@ -91,21 +89,5 @@ describe('OccClaimsService', () => {
         );
       }, `POST method and url`);
     }));
-
-    describe('submit claim', () => {
-      it('should submit user claim', async(() => {
-        adapter.submitClaim(userId, claimNumber).subscribe();
-        httpMock.expectOne((req: HttpRequest<any>) => {
-          return (
-            req.url ===
-              usersEndpoint +
-                `/${userId}` +
-                claimsEndpoint +
-                `/${claimNumber}` +
-                claimsActionEndpoit && req.method === 'POST'
-          );
-        }, `POST method and url`);
-      }));
-    });
   });
 });

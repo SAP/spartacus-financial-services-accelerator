@@ -90,13 +90,4 @@ export class ClaimService {
       )
       .unsubscribe();
   }
-
-  submitClaim(userId: string, claimId: string) {
-    this.store.dispatch(
-      new fromAction.SubmitClaim({
-        userId: userId,
-        claimId: claimId,
-      })
-    );
-  }
 }

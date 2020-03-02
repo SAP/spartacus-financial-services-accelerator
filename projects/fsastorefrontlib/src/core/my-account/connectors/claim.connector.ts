@@ -24,10 +24,6 @@ export class ClaimConnector {
     return this.adapter.createClaim(userId, policyId, contractNumber);
   }
 
-  submitClaim(userId: string, claimId: string): Observable<any> {
-    return this.adapter.submitClaim(userId, claimId);
-  }
-
   updateClaim(
     userId: string,
     claimId: string,

@@ -72,10 +72,10 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
       this.translation.translate('fscommon.select'),
       this.translation.translate('paymentCard.selected'),
     ]).pipe(
-      map(([policy, vahicleMake, vehicleModel, commonSelect, selected]) => {
+      map(([policy, vehicleMake, vehicleModel, commonSelect, selected]) => {
         return this.createCard(idx, cardObject, {
           policy,
-          vahicleMake,
+          vehicleMake,
           vehicleModel,
           commonSelect,
           selected,
@@ -92,7 +92,7 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
           : undefined,
       textBold: `${cardObject.categoryData.name} ${cardContent.policy}`,
       text: [
-        `${cardContent.vahicleMake}: ${cardObject.insuredObjectList.insuredObjects[0].insuredObjectItems[0].value}`,
+        `${cardContent.vehicleMake}: ${cardObject.insuredObjectList.insuredObjects[0].insuredObjectItems[0].value}`,
         `${cardContent.vehicleModel}: ${cardObject.insuredObjectList.insuredObjects[0].insuredObjectItems[1].value}`,
       ],
       img:

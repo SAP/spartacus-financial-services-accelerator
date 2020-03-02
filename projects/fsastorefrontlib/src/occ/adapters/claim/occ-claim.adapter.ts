@@ -79,21 +79,6 @@ export class OccClaimAdapter implements ClaimAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  submitClaim(userId: string, claimId: string): Observable<any> {
-    const url = this.getClaimsEndpoint(userId) + '/' + claimId + '/action';
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-
-    const submitClaimAction = {
-      actionName: 'SUBMIT',
-    };
-
-    return this.http
-      .post(url, submitClaimAction, { headers })
-      .pipe(catchError((error: any) => throwError(error.json())));
-  }
-
   protected createClaimBody(claimData: any, claimBody: Claim, claimId: string) {
     const claim = JSON.parse(claimData);
     const location: FSLocationOfLoss = {

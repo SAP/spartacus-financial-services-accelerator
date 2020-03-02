@@ -16,9 +16,7 @@ class MockClaimAdapter implements ClaimAdapter {
     (userId, policyId, contractId) =>
       of('createClaim' + userId + policyId + contractId)
   );
-  submitClaim = createSpy('ClaimAdapter.submitClaim').and.callFake(
-    (userId, claimId) => of('submitClaim' + userId + claimId)
-  );
+
   updateClaim = createSpy('ClaimAdapter.updateClaim').and.callFake(
     (userId, claimId, claimData) =>
       of('updateClaim' + userId + claimId + claimData)
@@ -60,10 +58,6 @@ describe('ClaimConnector', () => {
   it('should call adapter for deleteClaim', () => {
     claimConnector.deleteClaim(user, claim);
     expect(claimAdapter.deleteClaim).toHaveBeenCalledWith(user, claim);
-  });
-  it('should call adapter for submitClaim', () => {
-    claimConnector.submitClaim(user, claim);
-    expect(claimAdapter.submitClaim).toHaveBeenCalledWith(user, claim);
   });
   it('should call adapter for updateClaim', () => {
     claimConnector.updateClaim(user, claim, {});

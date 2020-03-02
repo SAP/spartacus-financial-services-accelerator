@@ -10,9 +10,11 @@ import { FSStepData } from '../../occ-models/occ.models';
 
 const userId = 'test@user.com';
 const requestId = '000001';
+const claimNumber = '000001';
 
 const usersEndpoint = '/users';
 const requestEndpoint = '/fsUserRequests';
+const userRequestActionEndpoit = '/action';
 
 const stepData: FSStepData = {
   name: 'testStepData',
@@ -78,4 +80,20 @@ describe('OccUserRequestAdapter', () => {
       );
     }, `PATCH method and url`);
   }));
+
+  describe('submit user request', () => {
+    it('should submit user request', async(() => {
+      adapter.submitUserRequest(userId, claimNumber).subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url ===
+            usersEndpoint +
+              `/${userId}` +
+              requestEndpoint +
+              `/${claimNumber}` +
+              userRequestActionEndpoit && req.method === 'POST'
+        );
+      }, `POST method and url`);
+    }));
+  });
 });

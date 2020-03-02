@@ -144,35 +144,6 @@ describe('Claim Effects', () => {
     });
   });
 
-  describe('submitClaim$', () => {
-    it('should submit claim', () => {
-      const action = new fromActions.SubmitClaim({
-        userId: OCC_USER_ID_CURRENT,
-        claimId: 'testClaim001',
-      });
-      const completion = new fromActions.SubmitClaimSuccess(claim1);
-      actions$ = hot('-a', { a: action });
-      const expected = cold('-b', { b: completion });
-      expect(effects.submitClaim$).toBeObservable(expected);
-    });
-
-    it('should fail to submit claims', () => {
-      spyOn(mockClaimConnector, 'submitClaim').and.returnValue(
-        throwError('Error')
-      );
-      const action = new fromActions.SubmitClaim({
-        userId: OCC_USER_ID_CURRENT,
-        claimId: 'testClaim001',
-      });
-      const completion = new fromActions.SubmitClaimFail(
-        JSON.stringify('Error')
-      );
-      actions$ = hot('-a', { a: action });
-      const expected = cold('-b', { b: completion });
-      expect(effects.submitClaim$).toBeObservable(expected);
-    });
-  });
-
   describe('createClaim$', () => {
     it('should create claim', () => {
       const action = new fromActions.CreateClaim({

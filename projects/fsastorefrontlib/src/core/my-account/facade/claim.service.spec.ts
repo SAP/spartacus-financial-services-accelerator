@@ -150,13 +150,6 @@ describe('ClaimServiceTest', () => {
     );
   });
 
-  it('should be able to submit claim', () => {
-    service.submitClaim(userId, claimId);
-    expect(store.dispatch).toHaveBeenCalledWith(
-      new fromAction.SubmitClaim({ userId: userId, claimId: claimId })
-    );
-  });
-
   it('should be able to create claim', () => {
     service.createClaim(policyId, contractId);
     expect(store.dispatch).toHaveBeenCalledWith(

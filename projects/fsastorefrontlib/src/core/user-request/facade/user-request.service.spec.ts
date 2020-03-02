@@ -146,4 +146,17 @@ describe('UserRequestServiceTest', () => {
       new fromAction.LoadUserRequest({ userId: userId, requestId: requestId })
     );
   });
+
+  it('should be able to get actions', () => {
+    let result = null;
+    const actionName = fromAction.UPDATE_USER_REQUEST;
+    service.getAction(actionName).subscribe(action => (result = action));
+    store.dispatch(
+      new fromAction.UpdateUserRequest({
+        userId: userId,
+        requestId: requestId,
+      })
+    );
+    expect(result.type).toBe(actionName);
+  });
 });

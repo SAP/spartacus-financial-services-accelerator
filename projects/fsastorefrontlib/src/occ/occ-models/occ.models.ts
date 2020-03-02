@@ -98,6 +98,7 @@ export interface FSStepData {
 export interface FSUserRequest {
   requestId?: string;
   configurationSteps?: FSStepData[];
+  requestStatus?: string;
 }
 
 export interface FSLocationOfLoss {

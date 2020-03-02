@@ -107,22 +107,6 @@ export class ClaimEffects {
     })
   );
 
-  @Effect()
-  submitClaim$: Observable<any> = this.actions$.pipe(
-    ofType(fromActions.SUBMIT_CLAIM),
-    map((action: fromActions.SubmitClaim) => action.payload),
-    mergeMap(payload =>
-      this.claimConnector.submitClaim(payload.userId, payload.claimId).pipe(
-        map(claim => {
-          return new fromActions.SubmitClaimSuccess(claim);
-        }),
-        catchError(error =>
-          of(new fromActions.SubmitClaimFail(JSON.stringify(error)))
-        )
-      )
-    )
-  );
-
   constructor(
     private actions$: Actions,
     private claimConnector: ClaimConnector,
