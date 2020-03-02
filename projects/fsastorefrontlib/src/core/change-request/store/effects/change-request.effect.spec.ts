@@ -9,7 +9,7 @@ import { Observable, of, throwError } from 'rxjs';
 import * as fromActions from '../actions';
 import * as fromEffects from './change-request.effect';
 import * as fromUserReducers from './../../store/reducers/index';
-import { ChangeRequestAdapter } from '../../connectors';
+import { ChangeRequestConnector } from '../../connectors';
 
 const changeRequest = {
   requestID: 'REQ0001',
@@ -19,7 +19,7 @@ const policyId = 'policyId';
 const contractId = 'contractId';
 const changeRequestType = 'requestType';
 
-class MockOccChangeRequestAdapter {
+class MockChangeRequestConnector {
   createChangeRequestForPolicy() {
     return of(changeRequest);
   }
@@ -28,10 +28,10 @@ class MockOccChangeRequestAdapter {
 describe('Change Request Effects', () => {
   let actions$: Observable<fromActions.ChangeRequestAction>;
   let effects: fromEffects.ChangeRequestEffects;
-  let mockOccChangeRequestAdapter: MockOccChangeRequestAdapter;
+  let mockChangeRequestConnector: MockChangeRequestConnector;
 
   beforeEach(() => {
-    mockOccChangeRequestAdapter = new MockOccChangeRequestAdapter();
+    mockChangeRequestConnector = new MockChangeRequestConnector();
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
@@ -43,8 +43,8 @@ describe('Change Request Effects', () => {
       ],
       providers: [
         {
-          provide: ChangeRequestAdapter,
-          useValue: mockOccChangeRequestAdapter,
+          provide: ChangeRequestConnector,
+          useValue: mockChangeRequestConnector,
         },
         fromEffects.ChangeRequestEffects,
         provideMockActions(() => actions$),
@@ -73,7 +73,7 @@ describe('Change Request Effects', () => {
 
   it('should fail to create change request', () => {
     spyOn(
-      mockOccChangeRequestAdapter,
+      mockChangeRequestConnector,
       'createChangeRequestForPolicy'
     ).and.returnValue(throwError('Error'));
     const action = new fromActions.CreateChangeRequest({

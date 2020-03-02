@@ -36,7 +36,7 @@ const agentsSearchWithResults: any[] = [testAgent1, testAgent2, testAgent3];
 
 const mockAgentsBS = new BehaviorSubject(agentsInitialResult);
 
-class MockOccAgentAdapter {
+class MockOccAgentConnector {
   getAgentsByQuery() {
     return of({
       agents: agentsSearchWithResults,
@@ -52,7 +52,7 @@ const queryText = 'test';
 const queryTextNoResults = 'noResults';
 
 describe('AgentSearchService', () => {
-  let mockOccAgentAdapter: MockOccAgentAdapter;
+  let mockOccAgentConnector: MockOccAgentConnector;
   let service: AgentSearchService;
   let winRef: WindowRef;
   const geolocationWatchId = 1;
@@ -74,12 +74,12 @@ describe('AgentSearchService', () => {
     },
   };
   beforeEach(async(() => {
-    mockOccAgentAdapter = new MockOccAgentAdapter();
+    mockOccAgentConnector = new MockOccAgentConnector();
     TestBed.configureTestingModule({
       providers: [
         {
           provide: AgentConnector,
-          useValue: mockOccAgentAdapter,
+          useValue: mockOccAgentConnector,
         },
         {
           provide: WindowRef,
@@ -111,7 +111,7 @@ describe('AgentSearchService', () => {
 
   it('should get agent by ID', () => {
     let agentResult;
-    spyOn(mockOccAgentAdapter, 'getAgentByID').and.returnValue(
+    spyOn(mockOccAgentConnector, 'getAgentByID').and.returnValue(
       of({
         agent: testAgent1.contactEmail,
       })
@@ -137,7 +137,7 @@ describe('AgentSearchService', () => {
   });
 
   it('should not return agents', () => {
-    spyOn(mockOccAgentAdapter, 'getAgentsByQuery').and.returnValue(
+    spyOn(mockOccAgentConnector, 'getAgentsByQuery').and.returnValue(
       of({
         agents: [],
       })

@@ -8,11 +8,11 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AgentRootComponent } from './agent-root.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { CmsAgentRootComponent } from '../../../occ/occ-models';
-import { AgentAdapter } from '../../../core/agent/connectors/agent.adapter';
+import { AgentConnector } from '../../../core/agent/connectors/agent.connector';
 
 const mockedAgentList = ['testAgent'];
 
-export class MockOccAgentAdapter {
+export class MockOccAgentConnector {
   getAgentsByCategory(): Observable<Object> {
     return new BehaviorSubject(mockedAgentList);
   }
@@ -28,7 +28,7 @@ class MockUrlPipe implements PipeTransform {
 describe('AgentRootComponent', () => {
   let component: AgentRootComponent;
   let fixture: ComponentFixture<AgentRootComponent>;
-  let mockOccAgentAdapter: MockOccAgentAdapter;
+  let mockOccAgentAConnector: MockOccAgentConnector;
   let el: DebugElement;
 
   const componentData: CmsAgentRootComponent = {
@@ -43,7 +43,7 @@ describe('AgentRootComponent', () => {
   };
 
   beforeEach(async(() => {
-    mockOccAgentAdapter = new MockOccAgentAdapter();
+    mockOccAgentAConnector = new MockOccAgentConnector();
     TestBed.configureTestingModule({
       imports: [
         I18nTestingModule,
@@ -58,8 +58,8 @@ describe('AgentRootComponent', () => {
           useValue: MockCmsComponentData,
         },
         {
-          provide: AgentAdapter,
-          useValue: mockOccAgentAdapter,
+          provide: AgentConnector,
+          useValue: mockOccAgentAConnector,
         },
       ],
     }).compileComponents();
