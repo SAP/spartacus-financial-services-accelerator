@@ -19,7 +19,7 @@ const product: Product = {
   code: productCode,
 };
 
-class MockOccProductPricingAdapter {
+class MockProductPricingConnector {
   getCalculatedProductData() {
     return of(product);
   }
@@ -28,16 +28,16 @@ class MockOccProductPricingAdapter {
 describe('FS Product Effects', () => {
   let actions$: Observable<fromActions.SetIdentificationType>;
   let effects: fromEffects.FSProductEffect;
-  let mockProductPricingAdapter: MockOccProductPricingAdapter;
+  let mockProductPricingConnector: MockProductPricingConnector;
 
   beforeEach(() => {
-    mockProductPricingAdapter = new MockOccProductPricingAdapter();
+    mockProductPricingConnector = new MockProductPricingConnector();
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, StoreModule.forRoot({})],
       providers: [
         {
           provide: ProductPricingConnector,
-          useValue: mockProductPricingAdapter,
+          useValue: mockProductPricingConnector,
         },
         fromEffects.FSProductEffect,
         provideMockActions(() => actions$),
