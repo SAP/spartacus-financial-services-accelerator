@@ -4,7 +4,6 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { FSProductAssignmentService } from '../../../core/product-assignment/facade/product-assignment.service';
@@ -15,10 +14,7 @@ import { FSProductAssignmentService } from '../../../core/product-assignment/fac
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
-  constructor(
-    protected route: ActivatedRoute,
-    protected productAssignmentService: FSProductAssignmentService
-  ) {}
+  constructor(protected productAssignmentService: FSProductAssignmentService) {}
 
   private subscription = new Subscription();
   userId: string;
@@ -26,20 +22,11 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
   productAssignments$: Observable<any>;
 
   ngOnInit() {
-    // this.subscription
-    //   .add(this.route.params.subscribe(params => this.initialize(params)))
-    //   .add(
-    //     this.productAssignmentService.loadProductAssignmentsForUnit(
-    //       this.orgUnitId
-    //     )
-    //   );
-    // this.productAssignments$ = this.productAssignmentService.getProductAssignments();
-  }
-
-  private initialize(params: Params) {
-    if (params) {
-      this.orgUnitId = params.orgUnitId;
-    }
+    this.subscription.add(
+      this.productAssignmentService.loadCustomerProfile(
+        'thomas.schmidt@sapfsa.com.com'
+      )
+    );
   }
 
   ngOnDestroy() {

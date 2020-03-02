@@ -4,6 +4,7 @@ export interface ProductAssignmentState {
   loaded: boolean;
   content: {
     assignments: any[];
+    potentialAssignments: any[];
   };
 }
 
@@ -11,6 +12,7 @@ export const initialState: ProductAssignmentState = {
   loaded: false,
   content: {
     assignments: [],
+    potentialAssignments: [],
   },
 };
 
@@ -20,7 +22,6 @@ export function reducer(
 ): ProductAssignmentState {
   switch (action.type) {
     case fromAction.LOAD_PRODUCT_ASSIGNMENTS: {
-      console.log('from reducer LOAD_PRODUCT_ASSIGNMENTS');
       return {
         ...state,
         loaded: false,
@@ -28,11 +29,18 @@ export function reducer(
     }
     case fromAction.LOAD_PRODUCT_ASSIGNMENTS_SUCCESS: {
       const content = { ...action.payload };
-      console.log('from reducer LOAD_PRODUCT_ASSIGNMENTS_SUCCESS:', content);
       return {
         ...state,
         content,
         loaded: true,
+      };
+    }
+    case fromAction.LOAD_CUSTOMER_PROFILE: {
+      const content = { ...action.payload };
+      // console.log('from reducer: ', content);
+      return {
+        ...state,
+        content,
       };
     }
     case fromAction.UPDATE_PRODUCT_ASSIGNMENT_SUCCESS: {

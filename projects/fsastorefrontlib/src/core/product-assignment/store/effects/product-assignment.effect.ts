@@ -23,10 +23,6 @@ export class FSProductAssignmentEffects {
         )
         .pipe(
           map((productAssignments: any) => {
-            console.log(
-              'from effect via loadProductAssignmentsForUnit:',
-              productAssignments
-            );
             return new fromActions.LoadProductAssignmentsSuccess(
               productAssignments
             );
@@ -39,6 +35,31 @@ export class FSProductAssignmentEffects {
             )
           )
         );
+    })
+  );
+
+  @Effect()
+  loadCustomerProfile$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.LOAD_CUSTOMER_PROFILE),
+    map((action: fromActions.LoadCustomerProfile) => action.payload),
+    mergeMap(payload => {
+      return (
+        this.productAssignmentConnector
+          .loadCustomerProfile(payload.userId, payload.orgCustomerId)
+          .pipe(
+            map((productAssignment: any) => {
+              console.log(productAssignment);
+              return new fromActions.LoadCustomerProfile(productAssignment);
+            })
+          ),
+        catchError(error =>
+          of(
+            new fromActions.LoadCustomerProfileFail({
+              error: JSON.stringify(error),
+            })
+          )
+        )
+      );
     })
   );
 

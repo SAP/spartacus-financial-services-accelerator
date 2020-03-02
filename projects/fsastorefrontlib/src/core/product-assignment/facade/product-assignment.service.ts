@@ -45,6 +45,16 @@ export class FSProductAssignmentService {
       .unsubscribe();
   }
 
+  loadCustomerProfile(orgCustomerId: string) {
+    const userId = this.user;
+    this.store.dispatch(
+      new fromAction.LoadCustomerProfile({
+        userId,
+        orgCustomerId,
+      })
+    );
+  }
+
   changeActiveStatus(
     orgUnitId: string,
     productAssignmentCode: string,

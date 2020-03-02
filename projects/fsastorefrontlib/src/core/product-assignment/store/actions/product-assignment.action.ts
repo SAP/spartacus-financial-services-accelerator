@@ -6,6 +6,10 @@ export const LOAD_PRODUCT_ASSIGNMENTS_FAIL =
   '[Product Assignment] Load Product Assignments Fail';
 export const LOAD_PRODUCT_ASSIGNMENTS_SUCCESS =
   '[Product Assignment] Load Product Assignments Success';
+export const LOAD_CUSTOMER_PROFILE =
+  '[Product Assignment] Load Customer Profile';
+export const LOAD_CUSTOMER_PROFILE_FAIL =
+  '[Product Assignment] Load Customer Profile FAIL';
 export const UPDATE_PRODUCT_ASSIGNMENT =
   '[Product Assignment] Update Product Assignment';
 export const UPDATE_PRODUCT_ASSIGNMENT_FAIL =
@@ -28,6 +32,16 @@ export class LoadProductAssignmentsSuccess implements Action {
   constructor(public payload: any) {}
 }
 
+export class LoadCustomerProfile implements Action {
+  readonly type = LOAD_CUSTOMER_PROFILE;
+  constructor(public payload: any) {}
+}
+
+export class LoadCustomerProfileFail implements Action {
+  readonly type = LOAD_CUSTOMER_PROFILE_FAIL;
+  constructor(public payload: any) {}
+}
+
 export class UpdateProductAssignment implements Action {
   readonly type = UPDATE_PRODUCT_ASSIGNMENT;
   constructor(public payload: any) {}
@@ -45,6 +59,8 @@ export type ProductAssignmentActions =
   | LoadProductAssignments
   | LoadProductAssignmentsFail
   | LoadProductAssignmentsSuccess
+  | LoadCustomerProfile
+  | LoadCustomerProfileFail
   | UpdateProductAssignment
   | UpdateProductAssignmentFail
   | UpdateProductAssignmentSuccess;

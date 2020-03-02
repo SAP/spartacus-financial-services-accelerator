@@ -41,6 +41,13 @@ export class OccFSProductAssignmentAdapter
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
+  loadCustomerProfile(userId: string, orgCustomerId: string) {
+    const url = this.getOrgCustomerProfile(userId, orgCustomerId);
+    return this.http
+      .get(url)
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
   changeActiveStatus(
     userId: string,
     orgUnitId: string,
@@ -69,6 +76,10 @@ export class OccFSProductAssignmentAdapter
     return (
       this.occEndpointService.getBaseEndpoint() + productAssignmentsEndpoint
     );
+  }
+
+  protected getOrgCustomerProfile(userId: string, orgCustomerId: string) {
+    return `${this.occEndpointService.getBaseEndpoint()}/users/${userId}/orgUnits/${orgCustomerId}`;
   }
 
   protected getUpdateProductAssignmentEndpoint(
