@@ -33,7 +33,7 @@ const claim3 = {
 };
 const claimList = [claim1, claim2, claim3];
 
-class MockOccClaimAdapter {
+class MockClaimConnector {
   getClaims() {
     return of(claimList);
   }
@@ -61,11 +61,11 @@ class MockClaimDataService {
 describe('Claim Effects', () => {
   let actions$: Observable<fromActions.ClaimAction>;
   let effects: fromEffects.ClaimEffects;
-  let mockOccClaimAdapter: MockOccClaimAdapter;
+  let mockClaimConnector: MockClaimConnector;
   let mockClaimDataService: MockClaimDataService;
 
   beforeEach(() => {
-    mockOccClaimAdapter = new MockOccClaimAdapter();
+    mockClaimConnector = new MockClaimConnector();
     mockClaimDataService = new MockClaimDataService();
     TestBed.configureTestingModule({
       imports: [
@@ -74,7 +74,7 @@ describe('Claim Effects', () => {
         StoreModule.forFeature('assets', fromReducer.getReducers()),
       ],
       providers: [
-        { provide: ClaimConnector, useValue: mockOccClaimAdapter },
+        { provide: ClaimConnector, useValue: mockClaimConnector },
         {
           provide: ClaimDataService,
           useValue: mockClaimDataService,
@@ -100,7 +100,7 @@ describe('Claim Effects', () => {
     });
 
     it('should fail to return claims', () => {
-      spyOn(mockOccClaimAdapter, 'getClaims').and.returnValue(
+      spyOn(mockClaimConnector, 'getClaims').and.returnValue(
         throwError('Error')
       );
       const action = new fromActions.LoadClaims({
@@ -128,7 +128,7 @@ describe('Claim Effects', () => {
     });
 
     it('should fail to remove claims', () => {
-      spyOn(mockOccClaimAdapter, 'deleteClaim').and.returnValue(
+      spyOn(mockClaimConnector, 'deleteClaim').and.returnValue(
         throwError('Error')
       );
       const action = new fromActions.DeleteClaim({
@@ -157,7 +157,7 @@ describe('Claim Effects', () => {
     });
 
     it('should fail to submit claims', () => {
-      spyOn(mockOccClaimAdapter, 'submitClaim').and.returnValue(
+      spyOn(mockClaimConnector, 'submitClaim').and.returnValue(
         throwError('Error')
       );
       const action = new fromActions.SubmitClaim({
@@ -197,7 +197,7 @@ describe('Claim Effects', () => {
     });
 
     it('should fail to create claims', () => {
-      spyOn(mockOccClaimAdapter, 'createClaim').and.returnValue(
+      spyOn(mockClaimConnector, 'createClaim').and.returnValue(
         throwError('Error')
       );
       const action = new fromActions.CreateClaim({
@@ -270,7 +270,7 @@ describe('Claim Effects', () => {
     });
 
     it('should fail to update claims', () => {
-      spyOn(mockOccClaimAdapter, 'updateClaim').and.returnValue(
+      spyOn(mockClaimConnector, 'updateClaim').and.returnValue(
         throwError('Error')
       );
       const action = new fromActions.UpdateClaim({

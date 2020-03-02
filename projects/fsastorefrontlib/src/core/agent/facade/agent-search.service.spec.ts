@@ -1,6 +1,6 @@
 import { GeoPoint, WindowRef } from '@spartacus/core';
 import { TestBed, async } from '@angular/core/testing';
-import { Type } from '@angular/core';
+import { Type, Component, Input } from '@angular/core';
 import { of, BehaviorSubject } from 'rxjs';
 import { AgentSearchService } from './agent-search.service';
 import { AgentConnector } from '../connectors/agent.connector';
@@ -35,9 +35,8 @@ const agentsInitialResult: any[] = [testAgent1, testAgent2];
 const agentsSearchWithResults: any[] = [testAgent1, testAgent2, testAgent3];
 
 const mockAgentsBS = new BehaviorSubject(agentsInitialResult);
-const mockAgentDetailsBS = new BehaviorSubject(testAgent1);
 
-class MockOccAgentAdapter {
+class MockOccAgentConnector {
   getAgentsByQuery() {
     return of({
       agents: agentsSearchWithResults,
@@ -53,7 +52,7 @@ const queryText = 'test';
 const queryTextNoResults = 'noResults';
 
 describe('AgentSearchService', () => {
-  let mockOccAgentAdapter: MockOccAgentAdapter;
+  let mockOccAgentConnector: MockOccAgentConnector;
   let service: AgentSearchService;
   let winRef: WindowRef;
   const geolocationWatchId = 1;
@@ -75,12 +74,12 @@ describe('AgentSearchService', () => {
     },
   };
   beforeEach(async(() => {
-    mockOccAgentAdapter = new MockOccAgentAdapter();
+    mockOccAgentConnector = new MockOccAgentConnector();
     TestBed.configureTestingModule({
       providers: [
         {
           provide: AgentConnector,
-          useValue: mockOccAgentAdapter,
+          useValue: mockOccAgentConnector,
         },
         {
           provide: WindowRef,
@@ -91,7 +90,6 @@ describe('AgentSearchService', () => {
     service = TestBed.get(AgentSearchService as Type<AgentSearchService>);
     winRef = TestBed.get(WindowRef as Type<WindowRef>);
     service.agents = mockAgentsBS;
-    service.agentDetails = mockAgentDetailsBS;
   }));
 
   it('should be created', () => {
@@ -111,24 +109,9 @@ describe('AgentSearchService', () => {
     expect(tempSearchResult[1]).toBe(testAgent2);
   });
 
-  it('should get agent', () => {
-    let agentResult;
-    service
-      .getAgent()
-      .subscribe(result => (agentResult = result))
-      .unsubscribe();
-    expect(agentResult).toBeTruthy();
-    expect(agentResult).toBe(testAgent1);
-  });
-
-  it('should set agent', () => {
-    service.setAgent(testAgent1);
-    expect(service.agentDetails.value).toBe(testAgent1);
-  });
-
   it('should get agent by ID', () => {
     let agentResult;
-    spyOn(mockOccAgentAdapter, 'getAgentByID').and.returnValue(
+    spyOn(mockOccAgentConnector, 'getAgentByID').and.returnValue(
       of({
         agent: testAgent1.contactEmail,
       })
@@ -138,7 +121,6 @@ describe('AgentSearchService', () => {
       .subscribe(result => (agentResult = result))
       .unsubscribe();
     expect(agentResult).toBeTruthy();
-    expect(service.agentDetails).toBeTruthy();
   });
 
   it('should fetch agents by search query', () => {
@@ -155,7 +137,7 @@ describe('AgentSearchService', () => {
   });
 
   it('should not return agents', () => {
-    spyOn(mockOccAgentAdapter, 'getAgentsByQuery').and.returnValue(
+    spyOn(mockOccAgentConnector, 'getAgentsByQuery').and.returnValue(
       of({
         agents: [],
       })

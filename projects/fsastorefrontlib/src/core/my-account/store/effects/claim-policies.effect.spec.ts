@@ -35,7 +35,7 @@ const claimPolicies = {
   insurancePolicies: [insurancePolicy1, insurancePolicy2],
 };
 
-class MockOccPolicyAdapter {
+class MockPolicyConnector {
   getPoliciesByCategory() {
     return of(claimPolicies);
   }
@@ -48,10 +48,10 @@ const errorObject = {
 describe('Claim Policies Effects', () => {
   let actions$: Observable<fromActions.ClaimPoliciesAction>;
   let effects: fromEffects.ClaimPoliciesEffects;
-  let mockOccPolicyAdapter: MockOccPolicyAdapter;
+  let mockPolicyConnector: MockPolicyConnector;
 
   beforeEach(() => {
-    mockOccPolicyAdapter = new MockOccPolicyAdapter();
+    mockPolicyConnector = new MockPolicyConnector();
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
@@ -59,7 +59,7 @@ describe('Claim Policies Effects', () => {
         StoreModule.forFeature('assets', fromUserReducers.getReducers()),
       ],
       providers: [
-        { provide: PolicyConnector, useValue: mockOccPolicyAdapter },
+        { provide: PolicyConnector, useValue: mockPolicyConnector },
         fromEffects.ClaimPoliciesEffects,
         provideMockActions(() => actions$),
       ],
@@ -85,7 +85,7 @@ describe('Claim Policies Effects', () => {
     });
 
     it('should fail to return claim policies', () => {
-      spyOn(mockOccPolicyAdapter, 'getPoliciesByCategory').and.returnValue(
+      spyOn(mockPolicyConnector, 'getPoliciesByCategory').and.returnValue(
         throwError(errorObject)
       );
 
