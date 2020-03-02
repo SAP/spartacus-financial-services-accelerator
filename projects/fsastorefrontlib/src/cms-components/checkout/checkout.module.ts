@@ -200,12 +200,10 @@ const routes: Routes = [
     QuoteReviewComponent,
     BindQuoteDialogComponent,
     FinalReviewComponent,
-    AddOptionsComponent,
     ChooseCoverNavigationComponent,
     PersonalDetailsNavigationComponent,
     FsaOrderConfirmationComponent,
-    OrderConfirmationMessageComponent,
-    FSMiniCartComponent,
+    OrderConfirmationMessageComponent
   ],
   exports: [
     I18nModule,
@@ -216,8 +214,7 @@ const routes: Routes = [
     QuoteReviewComponent,
     BindQuoteDialogComponent,
     FinalReviewComponent,
-    FsaOrderConfirmationComponent,
-    FSMiniCartComponent,
+    FsaOrderConfirmationComponent
   ],
   entryComponents: [
     AddOptionsComponent,
