@@ -34,6 +34,7 @@ export class FinalReviewComponent implements OnInit {
       this.activatedRoute
     );
     this.paymentDetails$ = this.checkoutPaymentService.getPaymentDetails();
+    this.checkoutService.mockDeliveryAddress();
     this.checkoutService.mockDeliveryMode();
   }
 
