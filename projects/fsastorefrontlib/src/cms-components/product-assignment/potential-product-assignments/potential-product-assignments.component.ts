@@ -4,9 +4,11 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
+import { UserService } from '@spartacus/core';
 import { FSProductAssignmentService } from '../../../core/product-assignment/facade/product-assignment.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-potential-product-assignments',
@@ -14,17 +16,30 @@ import { FSProductAssignmentService } from '../../../core/product-assignment/fac
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
-  constructor(protected productAssignmentService: FSProductAssignmentService) {}
+  constructor(
+    protected productAssignmentService: FSProductAssignmentService,
+    protected userService: UserService
+  ) {}
 
   private subscription = new Subscription();
-  userId: string;
   orgUnitId: string;
   productAssignments$: Observable<any>;
 
   ngOnInit() {
     this.subscription.add(
-      this.productAssignmentService
-        .loadCustomerProfile('thomas.schmidt@sapfsa.com.com')
+      this.userService
+        .get()
+        .pipe(
+          switchMap(user => {
+            if (user && user.uid) {
+              return this.productAssignmentService.loadCustomerProfile(
+                `${user.uid}.com`
+              );
+            } else {
+              return of();
+            }
+          })
+        )
         .subscribe(data => console.log(data))
     );
   }

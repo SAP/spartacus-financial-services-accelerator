@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthService, OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { filter, switchMap, take, map } from 'rxjs/operators';
+import { filter, switchMap, take } from 'rxjs/operators';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
