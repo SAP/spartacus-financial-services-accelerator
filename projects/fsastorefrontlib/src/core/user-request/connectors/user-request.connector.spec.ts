@@ -7,17 +7,17 @@ import { UserRequestConnector } from './user-request.connector';
 
 class MockUserRequestAdapter implements UserRequestAdapter {
   getUserRequest = createSpy('UserRequestAdapter.getUserRequest').and.callFake(
-    (userId, requestId) => of('getUserRequest' + userId + requestId)
+    (userId, request) => of('getUserRequest' + userId + request)
   );
   updateUserRequest = createSpy(
     'UserRequestAdapter.updateUserRequest'
-  ).and.callFake((userId, requestId, stepData) =>
-    of('updateUserRequest' + userId + requestId + stepData)
+  ).and.callFake((userId, request, stepData) =>
+    of('updateUserRequest' + userId + request + stepData)
   );
   submitUserRequest = createSpy(
     'UserRequestAdapter.submitUserRequest'
-  ).and.callFake((userId, requestId) =>
-    of('submitUserRequest' + userId + requestId)
+  ).and.callFake((userId, request) =>
+    of('submitUserRequest' + userId + request)
   );
 }
 const user = 'user';

@@ -1,4 +1,9 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { ComparisonTableService } from '../comparison-table.service';
 import { CmsComponentData } from '@spartacus/storefront';
 import { CmsMultiComparisonTabContainer } from '../../../occ/occ-models';
@@ -10,7 +15,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './comparison-table-container.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ComparisonTableContainerComponent implements OnInit {
+export class ComparisonTableContainerComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CmsMultiComparisonTabContainer>,
     protected comparisonTableService: ComparisonTableService
