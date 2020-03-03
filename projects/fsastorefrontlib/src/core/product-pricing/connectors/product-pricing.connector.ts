@@ -2,7 +2,7 @@ import { Product } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ProductPricingAdapter } from './product-pricing.adapter';
-import { PricingData } from '../../models/pricing.interface';
+import { PricingData } from '../../../occ/occ-models/form-pricing.interface';
 
 @Injectable({
   providedIn: 'root',

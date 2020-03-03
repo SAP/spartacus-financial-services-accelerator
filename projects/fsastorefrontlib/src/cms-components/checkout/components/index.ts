@@ -1,6 +1,7 @@
 export * from './add-options/add-options.component';
 export * from './add-options/add-options.module';
 export * from './bind-quote-dialog/bind-quote-dialog.component';
+export * from './checkout-progress/fs-checkout-progress.component'; 
 export * from './checkout-progress/fs-checkout-step.component';
 export * from './checkout-progress/fs-checkout-progress.module';
 export * from './choose-cover-navigation/choose-cover-navigation.component';

@@ -4,12 +4,8 @@ import { Store, StoreModule } from '@ngrx/store';
 import * as fromStoreReducers from '@spartacus/core';
 import { Product, PRODUCT_FEATURE, StateWithProduct } from '@spartacus/core';
 import { of } from 'rxjs';
-import {
-  PriceAttributeGroup,
-  PricingAttribute,
-  PricingData,
-} from '../../models/pricing.interface';
 import { FSProductService } from './fs-product.service';
+import { PricingAttribute, PriceAttributeGroup, PricingData } from 'fsastorefrontlib/occ/occ-models';
 
 describe('FSProductService', () => {
   let store: Store<StateWithProduct>;
@@ -64,7 +60,7 @@ describe('FSProductService', () => {
       );
       let result: Product;
       service
-        .getCalculatedProductData('testId', pricingData)
+        .getCalculatedProductData({ productCode: 'testId', pricingData })
         .subscribe(product => {
           result = product;
         })

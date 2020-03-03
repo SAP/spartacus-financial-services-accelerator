@@ -7,7 +7,7 @@ export * from './checkout/index';
 export * from './comparison-table/index';
 export * from './container/index';
 export * from './form/cms-category-form-component/index';
-export * from './my-account/inbox';
+export * from './my-account/index';
 export * from './product/index';
 export * from './product-assignment/index';
 export * from './user/index';
