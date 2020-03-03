@@ -6,7 +6,6 @@ const { initialState } = fromReducer;
 const requestId = 'testUserRequest';
 const mockedUserRequest = {
   requestId: requestId,
-  claimNumber: '001',
 };
 describe('User Request Reducer', () => {
   describe('undefined action', () => {

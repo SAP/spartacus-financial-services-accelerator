@@ -66,10 +66,12 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
           take(1),
           filter(
             ({ payload }) =>
-              payload && payload.requestStatus === ClaimStatus.SUBMITTED
+              payload &&
+              payload.requestStatus === ClaimStatus.SUBMITTED &&
+              payload.fsStepGroupDefinition
           ),
-          tap(() => {
-            this.router.go('fnolConfirmationPage');
+          tap(({ payload }) => {
+            this.router.go(payload.fsStepGroupDefinition.confirmationUrl);
           })
         )
         .subscribe()
