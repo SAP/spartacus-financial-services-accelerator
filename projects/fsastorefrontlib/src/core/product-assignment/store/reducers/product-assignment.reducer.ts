@@ -35,14 +35,6 @@ export function reducer(
         loaded: true,
       };
     }
-    case fromAction.LOAD_CUSTOMER_PROFILE: {
-      const content = { ...action.payload };
-      // console.log('from reducer: ', content);
-      return {
-        ...state,
-        content,
-      };
-    }
     case fromAction.UPDATE_PRODUCT_ASSIGNMENT_SUCCESS: {
       let content = { ...action.payload };
       const productAssignmentContent = state.content;

@@ -26,7 +26,7 @@ export class FSProductAssignmentConnector {
     );
   }
 
-  loadCustomerProfile(userId: string, orgCustomerId: string): Observable<any> {
+  loadCustomerProfile(userId: string, orgCustomerId: string) {
     return this.productAssignmentAdapter.loadCustomerProfile(
       userId,
       orgCustomerId

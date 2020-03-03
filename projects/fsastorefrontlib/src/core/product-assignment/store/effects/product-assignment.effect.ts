@@ -39,31 +39,6 @@ export class FSProductAssignmentEffects {
   );
 
   @Effect()
-  loadCustomerProfile$: Observable<any> = this.actions$.pipe(
-    ofType(fromActions.LOAD_CUSTOMER_PROFILE),
-    map((action: fromActions.LoadCustomerProfile) => action.payload),
-    mergeMap(payload => {
-      return (
-        this.productAssignmentConnector
-          .loadCustomerProfile(payload.userId, payload.orgCustomerId)
-          .pipe(
-            map((productAssignment: any) => {
-              console.log(productAssignment);
-              return new fromActions.LoadCustomerProfile(productAssignment);
-            })
-          ),
-        catchError(error =>
-          of(
-            new fromActions.LoadCustomerProfileFail({
-              error: JSON.stringify(error),
-            })
-          )
-        )
-      );
-    })
-  );
-
-  @Effect()
   changeActiveStatus$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.UPDATE_PRODUCT_ASSIGNMENT),
     map((action: fromActions.UpdateProductAssignment) => action.payload),

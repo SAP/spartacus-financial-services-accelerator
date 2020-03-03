@@ -23,9 +23,9 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription.add(
-      this.productAssignmentService.loadCustomerProfile(
-        'thomas.schmidt@sapfsa.com.com'
-      )
+      this.productAssignmentService
+        .loadCustomerProfile('thomas.schmidt@sapfsa.com.com')
+        .subscribe(data => console.log(data))
     );
   }
 
