@@ -1,13 +1,13 @@
 import { InjectionToken, Provider } from '@angular/core';
 import {
+  ActionReducer,
   ActionReducerMap,
   createFeatureSelector,
   MemoizedSelector,
-  ActionReducer,
   MetaReducer,
 } from '@ngrx/store';
-import * as fromReducer from './change-request.reducer';
 import { AuthActions } from '@spartacus/core';
+import * as fromReducer from './change-request.reducer';
 
 export interface ChangeRequestState {
   changeRequest: fromReducer.ChangeRequestState;
@@ -31,7 +31,7 @@ export const getChangeRequestState: MemoizedSelector<
   any,
   ChangeRequestState
 > = createFeatureSelector<ChangeRequestState>('changeRequests');
-export function clearUserState(
+export function clearChangeProcessState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return function(state, action) {
@@ -41,4 +41,4 @@ export function clearUserState(
     return reducer(state, action);
   };
 }
-export const metaReducers: MetaReducer<any>[] = [clearUserState];
+export const metaReducers: MetaReducer<any>[] = [clearChangeProcessState];

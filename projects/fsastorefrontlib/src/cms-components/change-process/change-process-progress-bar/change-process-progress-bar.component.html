@@ -1,0 +1,40 @@
+<div class="cx-multi-step-checkout">
+  <div class="row">
+    <div class="col-12">
+      <section *ngIf="changeRequest$ | async as changeRequest">
+        <h2 class="py-4 text-center text-uppercase">
+          {{ 'fscommon.change' | cxTranslate }}
+          {{ changeRequest.insurancePolicy.categoryData.name }}
+          {{ changeRequest.insurancePolicy.policyNumber }}
+        </h2>
+        <div class="progress-wrapper my-2">
+          <div class="d-flex flex-wrap my-4">
+            <div
+              class="progress-inner-wrapper flex-grow-1 flex-shrink-1 text-center"
+              *ngFor="
+                let step of changeRequest.configurationSteps;
+                let i = index
+              "
+            >
+              <div
+                class="d-inline-block underline-effect progress-node mx-2"
+                [ngClass]="{
+                  ' is-disabled': step.status === 'UNSET'
+                }"
+                [routerLink]="
+                  {
+                    cxRoute: step.pageLabelOrId
+                  } | cxUrl
+                "
+              >
+                <p class="label position-relative mb-2">
+                  {{ step.name }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<form [formGroup]="changeCarDetailsForm">
+  <div class="form-group">
+    <label>
+      <span class="label-content">{{
+        'forms.effectiveDate' | cxTranslate
+      }}</span>
+      <input
+        class="form-control"
+        type="date"
+        name="effectiveDate"
+        formControlName="effectiveDate"
+      />
+    </label>
+  </div>
+  <div class="form-group">
+    <label>
+      <span class="label-content">{{
+        'forms.changeMileage' | cxTranslate
+      }}</span>
+      <input
+        class="form-control"
+        type="text"
+        name="mileage"
+        placeholder="{{ 'forms.changeMileage' | cxTranslate }}"
+        formControlName="mileage"
+      />
+    </label>
+  </div>
+</form>

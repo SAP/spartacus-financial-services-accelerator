@@ -1,5 +1,4 @@
-import { MemoizedSelector, createSelector } from '@ngrx/store';
-
+import { createSelector, MemoizedSelector } from '@ngrx/store';
 import * as fromFeature from '../reducers';
 import * as fromChangeRequest from './../reducers/change-request.reducer';
 
