@@ -35,6 +35,25 @@ export function reducer(
         loaded: true,
       };
     }
+    case fromAction.LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS_SUCCESS: {
+      let content = { ...action.payload };
+      const potentialProductAssignmentContent = state.content;
+      if (content && content.assignments.length > 0) {
+        potentialProductAssignmentContent.potentialAssignments =
+          content.assignments;
+      }
+      content = potentialProductAssignmentContent.potentialAssignments.filter(
+        elem =>
+          !potentialProductAssignmentContent.assignments
+            .map(data => data.product.code)
+            .includes(elem.product.code)
+      );
+      return {
+        ...state,
+        content,
+        loaded: true,
+      };
+    }
     case fromAction.UPDATE_PRODUCT_ASSIGNMENT_SUCCESS: {
       let content = { ...action.payload };
       const productAssignmentContent = state.content;
@@ -64,4 +83,7 @@ export const getProductAssignmentContent = (state: ProductAssignmentState) =>
   state.content;
 export const getProductAssignments = (state: ProductAssignmentState) =>
   state.content.assignments;
+
+export const getPotentialProductAssignments = (state: ProductAssignmentState) =>
+  state.content.potentialAssignments;
 export const getLoaded = (state: ProductAssignmentState) => state.loaded;

@@ -47,6 +47,43 @@ export class FSProductAssignmentService {
       .unsubscribe();
   }
 
+  loadPotentialProductAssignments(orgUnitId: string) {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        if (occUserId && occUserId !== OCC_USER_ID_ANONYMOUS) {
+          this.user = occUserId;
+          this.store.dispatch(
+            new fromAction.LoadPotentialProductAssignments({
+              occUserId,
+              orgUnitId,
+            })
+          );
+        }
+      })
+      .unsubscribe();
+  }
+
+  getAllProductAssignments(): Observable<any> {
+    return this.store.select(fromSelector.getLoaded).pipe(
+      filter(loaded => loaded),
+      take(1),
+      switchMap(() => {
+        return this.store.select(fromSelector.getPotentialProductAssignments);
+      })
+    );
+  }
+  getProductAssignments(): Observable<any> {
+    return this.store.select(fromSelector.getLoaded).pipe(
+      filter(loaded => loaded),
+      take(1),
+      switchMap(() => {
+        return this.store.select(fromSelector.getProductAssignments);
+      })
+    );
+  }
+
   loadCustomerProfile(orgCustomerId: string) {
     return this.authService.getOccUserId().pipe(
       take(1),
@@ -71,16 +108,6 @@ export class FSProductAssignmentService {
         orgUnitId,
         productAssignmentCode,
         active,
-      })
-    );
-  }
-
-  getProductAssignments(): Observable<any> {
-    return this.store.select(fromSelector.getLoaded).pipe(
-      filter(loaded => loaded),
-      take(1),
-      switchMap(() => {
-        return this.store.select(fromSelector.getProductAssignments);
       })
     );
   }

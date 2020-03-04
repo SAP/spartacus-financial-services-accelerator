@@ -11,7 +11,7 @@ export class FSProductAssignmentConnector {
   loadProductAssignmentsForUnit(
     userId: string,
     orgUnitId: string,
-    active: boolean,
+    active?: boolean,
     pageSize?: number,
     currentPage?: number,
     sort?: string

@@ -23,6 +23,16 @@ export interface FSProduct extends Product {
   defaultCategory?: Category;
 }
 
+export interface OrgUnit {
+  uid: string;
+  name?: string;
+  active?: boolean;
+}
+
+export interface B2BAdministrator {
+  orgUnit: OrgUnit;
+}
+
 export interface FSCart extends Cart {
   insuranceQuote?: InsuranceQuote;
 }
