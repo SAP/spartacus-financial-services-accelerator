@@ -3,7 +3,7 @@ import { OccEndpointsService } from '@spartacus/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { FSCsTicketAdapter } from '../../../../src/core';
+import { FSCsTicketAdapter } from '../../../core/cs-ticket/connectors';
 import { ContactAgentData } from '../../occ-models';
 
 @Injectable()

@@ -9,7 +9,7 @@ import {
   PriceAttributeGroup,
   PricingAttribute,
   PricingData,
-} from '../../../core/models/pricing.interface';
+} from '../../../occ/occ-models';
 import { OccProductPricingAdapter } from './occ-product-pricing.adapter';
 
 const productCode = 'testCode';
