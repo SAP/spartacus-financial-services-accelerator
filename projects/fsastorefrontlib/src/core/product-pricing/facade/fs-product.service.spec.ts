@@ -5,7 +5,7 @@ import * as fromStoreReducers from '@spartacus/core';
 import { Product, PRODUCT_FEATURE, StateWithProduct } from '@spartacus/core';
 import { of } from 'rxjs';
 import { FSProductService } from './fs-product.service';
-import { PricingAttribute, PriceAttributeGroup, PricingData } from 'fsastorefrontlib/occ/occ-models';
+import { PricingAttribute, PriceAttributeGroup, PricingData } from './../../../occ/occ-models';
 
 describe('FSProductService', () => {
   let store: Store<StateWithProduct>;

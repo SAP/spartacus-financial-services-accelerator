@@ -6,7 +6,7 @@ import {
 import { async, TestBed } from '@angular/core/testing';
 import { OccFSCartAdapter } from './occ-fs-cart.adapter';
 import { OccConfig } from '@spartacus/core';
-import { PricingData } from 'fsastorefrontlib/occ/occ-models';
+import { PricingData } from './../../occ-models';
 
 const userId = 'userId';
 const cartId = 'cartId';
