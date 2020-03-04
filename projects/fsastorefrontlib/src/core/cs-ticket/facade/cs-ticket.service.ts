@@ -1,6 +1,6 @@
 import { FSCsTicketConnector } from './../connectors/cs-ticket.connector';
 import { Injectable } from '@angular/core';
-import { ContactAgentData } from '../../../../src/occ/occ-models';
+import { ContactAgentData } from '../../../occ/occ-models';
 
 @Injectable({
   providedIn: 'root',

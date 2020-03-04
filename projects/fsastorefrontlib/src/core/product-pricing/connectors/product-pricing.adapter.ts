@@ -1,6 +1,6 @@
 import { Product } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { PricingData } from '../../models/pricing.interface';
+import { PricingData } from '../../../occ/occ-models/form-pricing.interface';
 
 export abstract class ProductPricingAdapter {
   /**

@@ -52,6 +52,8 @@ import { PersonalDetailsNavigationComponent } from './components/personal-detail
 import { FsCheckoutConnector } from '../../core/checkout/connectors/fs-checkout.connector';
 import { FsCartConnector } from '../../core/cart/connectors/fs-cart.connector';
 import { QuoteConnector } from '../../core/my-account/connectors/quote.connector';
+import { AddOptionsModule } from './components/add-options/add-options.module';
+import { MiniCartModule } from './components/mini-cart/mini-cart.module';
 
 const routes: Routes = [
   {
@@ -145,6 +147,8 @@ const routes: Routes = [
 @NgModule({
   imports: [
     I18nModule,
+    AddOptionsModule,
+    MiniCartModule,
     NgbTooltipModule,
     CommonModule,
     PageComponentModule,
@@ -200,12 +204,10 @@ const routes: Routes = [
     QuoteReviewComponent,
     BindQuoteDialogComponent,
     FinalReviewComponent,
-    AddOptionsComponent,
     ChooseCoverNavigationComponent,
     PersonalDetailsNavigationComponent,
     FsaOrderConfirmationComponent,
     OrderConfirmationMessageComponent,
-    FSMiniCartComponent,
   ],
   exports: [
     I18nModule,
@@ -217,7 +219,6 @@ const routes: Routes = [
     BindQuoteDialogComponent,
     FinalReviewComponent,
     FsaOrderConfirmationComponent,
-    FSMiniCartComponent,
   ],
   entryComponents: [
     AddOptionsComponent,
