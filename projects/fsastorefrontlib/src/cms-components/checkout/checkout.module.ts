@@ -207,7 +207,7 @@ const routes: Routes = [
     ChooseCoverNavigationComponent,
     PersonalDetailsNavigationComponent,
     FsaOrderConfirmationComponent,
-    OrderConfirmationMessageComponent
+    OrderConfirmationMessageComponent,
   ],
   exports: [
     I18nModule,
@@ -218,7 +218,7 @@ const routes: Routes = [
     QuoteReviewComponent,
     BindQuoteDialogComponent,
     FinalReviewComponent,
-    FsaOrderConfirmationComponent
+    FsaOrderConfirmationComponent,
   ],
   entryComponents: [
     AddOptionsComponent,

@@ -9,5 +9,5 @@ export * from './cms-components/index';
 export * from './recipes/config/index';
 export * from './cms-structure/index';
 export * from './shared/index';
-export * from './occ/index'; 
-export * from './occ/occ-models/index'; 
+export * from './occ/index';
+export * from './occ/occ-models/index';

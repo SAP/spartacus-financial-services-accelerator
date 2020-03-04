@@ -10,7 +10,11 @@ import { CmsConfig, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { FSCheckoutConfigService } from '../../../core/checkout/services/fs-checkout-config.service';
 import { FSProductService } from '../../../core/product-pricing/facade/fs-product.service';
-import { FSProduct, OneTimeChargeEntry, PricingData } from '../../../occ/occ-models';
+import {
+  FSProduct,
+  OneTimeChargeEntry,
+  PricingData,
+} from '../../../occ/occ-models';
 import { FSCartService } from '../../../core/cart/facade';
 import { map } from 'rxjs/operators';
 

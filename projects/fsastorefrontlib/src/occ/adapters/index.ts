@@ -10,4 +10,4 @@ export * from './policy/occ-policy.adapter';
 export * from './pricing/occ-product-pricing.adapter';
 export * from './product-assignment/occ-product-assignment.adapter';
 export * from './quote/occ-quote.adapter';
-export * from './user-request/occ-user-request.adapter'; 
+export * from './user-request/occ-user-request.adapter';

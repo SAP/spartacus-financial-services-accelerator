@@ -16,9 +16,7 @@ import { CategoryService } from '../../checkout/services/category/category.servi
 import * as fromFSAction from '../../checkout/store/actions/index';
 import { PricingData } from '../../../occ/occ-models/form-pricing.interface';
 
-
 @Injectable()
-
 export class FSCartService extends ActiveCartService {
   protected productAddedSource = new BehaviorSubject<string>('');
   constructor(
