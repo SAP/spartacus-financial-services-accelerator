@@ -25,6 +25,7 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
   orgUnitId: string;
   productAssignments$: Observable<any>;
+  availableProductAssignments$: Observable<any>;
 
   ngOnInit() {
     this.productAssignments$ = this.userService.get().pipe(
@@ -48,11 +49,7 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
         }
       })
     );
-    this.productAssignmentService.getAllProductAssignments().subscribe(data => {
-      if (data) {
-        console.log(data);
-      }
-    });
+    this.availableProductAssignments$ = this.productAssignmentService.getAllProductAssignments();
   }
 
   ngOnDestroy() {

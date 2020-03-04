@@ -42,12 +42,14 @@ export function reducer(
         potentialProductAssignmentContent.potentialAssignments =
           content.assignments;
       }
-      content = potentialProductAssignmentContent.potentialAssignments.filter(
+      const availableProducts = state.content;
+      availableProducts.potentialAssignments = potentialProductAssignmentContent.potentialAssignments.filter(
         elem =>
           !potentialProductAssignmentContent.assignments
             .map(data => data.product.code)
             .includes(elem.product.code)
       );
+      content = potentialProductAssignmentContent;
       return {
         ...state,
         content,

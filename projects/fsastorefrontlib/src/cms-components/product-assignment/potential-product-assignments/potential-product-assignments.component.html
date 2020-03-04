@@ -1,18 +1,19 @@
-<!-- <h2>{{ 'b2b.selectProducts' | cxTranslate }}</h2>
-<ng-container *ngIf="productAssignments$ | async as productAssignments">
+<h2>{{ 'b2b.notAssigned' | cxTranslate }}</h2>
+<ng-container
+  *ngIf="availableProductAssignments$ | async as availableProductAssignments"
+>
   <div class="card-row container">
     <div class="row">
       <div
         class="single-card col-4"
-        *ngFor="let productAssignment of productAssignments"
+        *ngFor="let availableProductAssignment of availableProductAssignments"
       >
         <fsa-product-assignment-item
-          [productAssignment]="productAssignment"
+          [productAssignment]="availableProductAssignment"
           [orgUnitId]="orgUnitId"
         >
         </fsa-product-assignment-item>
       </div>
     </div>
   </div>
-</ng-container> -->
-POTENTIAL PRODUCT ASSIGNMENT WOKRS!
+</ng-container>
