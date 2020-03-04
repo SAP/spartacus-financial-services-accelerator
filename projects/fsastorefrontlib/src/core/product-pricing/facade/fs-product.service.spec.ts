@@ -64,7 +64,7 @@ describe('FSProductService', () => {
       );
       let result: Product;
       service
-        .getCalculatedProductData({ productCode: 'testId', pricingData })
+        .getCalculatedProductData('testId', pricingData)
         .subscribe(product => {
           result = product;
         })
