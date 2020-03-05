@@ -10,7 +10,6 @@ import * as fromSelector from '../store/selectors';
 
 @Injectable()
 export class ChangeRequestService {
-
   requestId: string;
 
   constructor(

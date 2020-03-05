@@ -23,7 +23,7 @@ class MockChangeRequestConnector {
   createChangeRequestForPolicy() {
     return of(changeRequest);
   }
-  getChangeRequest(){
+  getChangeRequest() {
     return of(changeRequest);
   }
 }
@@ -109,10 +109,9 @@ describe('Change Request Effects', () => {
   });
 
   it('should fail to load change request', () => {
-    spyOn(
-      mockChangeRequestConnector,
-      'getChangeRequest'
-    ).and.returnValue(throwError('Error'));
+    spyOn(mockChangeRequestConnector, 'getChangeRequest').and.returnValue(
+      throwError('Error')
+    );
     const action = new fromActions.LoadChangeRequest({
       userId: OCC_USER_ID_CURRENT,
       requestId: requestID,
@@ -124,5 +123,4 @@ describe('Change Request Effects', () => {
     const expected = cold('-b', { b: completion });
     expect(effects.loadChangeRequest$).toBeObservable(expected);
   });
-
 });

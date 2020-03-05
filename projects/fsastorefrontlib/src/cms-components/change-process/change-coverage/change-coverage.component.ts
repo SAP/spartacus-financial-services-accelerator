@@ -1,6 +1,6 @@
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
-import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'fsa-change-coverage',

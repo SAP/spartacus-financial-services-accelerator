@@ -1,5 +1,12 @@
-import { HttpClientModule, HttpErrorResponse, HttpRequest } from '@angular/common/http';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientModule,
+  HttpErrorResponse,
+  HttpRequest,
+} from '@angular/common/http';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccConfig } from '@spartacus/core';
 import { OccChangeRequestAdapter } from './occ-change-request.adapter';
@@ -69,12 +76,11 @@ describe('OccChangeRequestAdapter', () => {
   });
 
   it('load change request', async(() => {
-    adapter
-      .getChangeRequest(userId, requestId)
-      .subscribe();
+    adapter.getChangeRequest(userId, requestId).subscribe();
     const mockReq = httpMock.expectOne((req: HttpRequest<any>) => {
       return (
-        req.url === '/users' + `/${userId}` + '/fsChangeRequests'  + `/${requestId}` &&
+        req.url ===
+          '/users' + `/${userId}` + '/fsChangeRequests' + `/${requestId}` &&
         req.method === 'GET'
       );
     });
@@ -91,14 +97,17 @@ describe('OccChangeRequestAdapter', () => {
       statusText: 'Bad Request',
     });
     adapter
-     .getChangeRequest(userId, requestId)
+      .getChangeRequest(userId, requestId)
       .subscribe(res => (response = res), err => (errResponse = err));
-    httpMock.expectOne((req: HttpRequest<any>) => {
+    httpMock
+      .expectOne((req: HttpRequest<any>) => {
         return (
-          req.url === '/users' + `/${userId}` + '/fsChangeRequests'  + `/${requestId}` &&
+          req.url ===
+            '/users' + `/${userId}` + '/fsChangeRequests' + `/${requestId}` &&
           req.method === 'GET'
         );
-      }).flush(errorResponse);
+      })
+      .flush(errorResponse);
     expect(errorResponse.status).toEqual(400);
     expect(errorResponse.name).toEqual('HttpErrorResponse');
   });

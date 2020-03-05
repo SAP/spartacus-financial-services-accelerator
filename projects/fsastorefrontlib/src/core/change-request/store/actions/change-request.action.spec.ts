@@ -47,7 +47,7 @@ describe('Change Request Actions', () => {
   describe('LoadChangeRequest Action', () => {
     const changeRequest = {
       requestId: 'requestId',
-      userId: OCC_CART_ID_CURRENT
+      userId: OCC_CART_ID_CURRENT,
     };
     it('should create the action', () => {
       const action = new fromAction.LoadChangeRequest(changeRequest);
@@ -63,9 +63,9 @@ describe('Change Request Actions', () => {
       requestId: 'requestId',
       insurancePolicy: {
         categoryData: {
-          code: 'test_category'
-        }
-      }
+          code: 'test_category',
+        },
+      },
     };
     it('should create the action', () => {
       const action = new fromAction.LoadChangeRequestSuccess(changeRequest);
@@ -86,6 +86,4 @@ describe('Change Request Actions', () => {
       });
     });
   });
-
-
 });
