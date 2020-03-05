@@ -46,5 +46,4 @@ export class FSCheckoutService extends CheckoutService {
   mockDeliveryMode() {
     this.checkoutDeliveryService.setDeliveryMode(this.mockedDeliveryMode);
   }
-
 }
