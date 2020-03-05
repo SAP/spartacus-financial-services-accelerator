@@ -26,6 +26,8 @@ export const forms = {
     dateOfBirth: {
       label: 'Date of Birth',
     },
+    effectiveDate: 'Effective data',
+    changeMileage: 'Change mileage',
     phoneNumber: {
       label: 'Phone number',
       lengthValidation:

@@ -1,9 +1,10 @@
-import { TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
 import { Type } from '@angular/core';
-import createSpy = jasmine.createSpy;
+import { TestBed } from '@angular/core/testing';
+import { OCC_CART_ID_CURRENT } from '@spartacus/core';
+import { of } from 'rxjs';
 import { ChangeRequestAdapter } from './change-request.adapter';
 import { ChangeRequestConnector } from './change-request.connector';
+import createSpy = jasmine.createSpy;
 
 class MockChangeRequestAdapter implements ChangeRequestAdapter {
   createChangeRequestForPolicy = createSpy(
@@ -11,10 +12,14 @@ class MockChangeRequestAdapter implements ChangeRequestAdapter {
   ).and.callFake((policyId, contractId, userId) =>
     of('createChangeRequestForPolicy' + policyId + contractId + userId)
   );
+  getChangeRequest = createSpy('ChangeRequestAdapter.getChangeRequest').and.callFake(
+    (userId, requestId) => of('getChangeRequest' + userId + requestId)
+  );
 }
 
 const policy = 'policyId';
 const contract = 'contractId';
+const requestID = 'requestId';
 const changeRequestType = 'changeRequestType';
 const user = 'userId';
 
@@ -51,5 +56,15 @@ describe('ChangeRequestConnector', () => {
     expect(
       changeRequestAdapter.createChangeRequestForPolicy
     ).toHaveBeenCalledWith(policy, contract, changeRequestType, user);
+  });
+
+  it('should call adapter for getChangeRequest', () => {
+    changeRequestConnector.getChangeRequest(
+      OCC_CART_ID_CURRENT,
+      requestID
+    );
+    expect(
+      changeRequestAdapter.getChangeRequest
+    ).toHaveBeenCalledWith(OCC_CART_ID_CURRENT, requestID);
   });
 });

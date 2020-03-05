@@ -17,6 +17,17 @@ describe('Change Request Reducer', () => {
     });
   });
 
+  describe('LOAD_CHANGE_REQUEST_SUCCESS', () => {
+    it('should load change request', () => {
+      const action = new fromAction.LoadChangeRequestSuccess(
+        mockedChangeRequest
+      );
+      const state = fromReducer.reducer(initialState, action);
+      expect(state.content).toEqual(mockedChangeRequest);
+      expect(state.loaded).toEqual(true);
+    });
+  });
+
   describe('CREATE_CHANGE_REQUEST_SUCESS', () => {
     it('should create change request', () => {
       const action = new fromAction.CreateChangeRequestSuccess(

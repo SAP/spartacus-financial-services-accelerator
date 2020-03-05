@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { StoreModule } from '@ngrx/store';
@@ -11,14 +11,8 @@ import {
   I18nModule,
   UrlModule,
 } from '@spartacus/core';
-import {
-  CmsPageGuard,
-  MediaModule,
-  PageLayoutComponent,
-  SpinnerModule,
-} from '@spartacus/storefront';
+import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 import { reducerToken } from '../../core/change-request/store/reducers/index';
-import { AccordionModule } from './../../shared/accordion/accordion.module';
 import { ChangeCarDetailsComponent } from './change-carDetails/change-carDetails.component';
 import { ChangeCoverageComponent } from './change-coverage/change-coverage.component';
 import { ChangeProcessNavigationComponent } from './change-process-navigation/change-process-navigation.component';
@@ -58,14 +52,9 @@ const routes: Routes = [
   imports: [
     CommonModule,
     I18nModule,
-    RouterModule,
-    MediaModule,
-    FormsModule,
     NgSelectModule,
     ReactiveFormsModule,
     UrlModule,
-    SpinnerModule,
-    AccordionModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('changeRequests', reducerToken),
     ConfigModule.withConfig(<CmsConfig>{
