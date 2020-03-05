@@ -44,19 +44,53 @@ export class UserRequestEffects {
         .updateUserRequest(payload.userId, payload.requestId, payload.stepData)
         .pipe(
           mergeMap((userRequest: any) => {
-            return [
-              new fromActions.LoadUserRequestSuccess(userRequest),
-              new fromActions.UpdateClaim({
-                userId: payload.userId,
-                requestId: payload.requestId,
-                claimData:
-                  userRequest.configurationSteps[
-                    payload.stepData.sequenceNumber - 1
-                  ].yformConfigurator.content,
-              }),
-            ];
+            const configSteps = userRequest.configurationSteps;
+            if (
+              configSteps &&
+              configSteps.length > 0 &&
+              configSteps[configSteps.length - 1].status === 'COMPLETED'
+            ) {
+              return [
+                new fromActions.SubmitUserRequest({
+                  userId: payload.userId,
+                  requestId: payload.requestId,
+                }),
+              ];
+            } else {
+              return [
+                new fromActions.UpdateUserRequestSuccess(userRequest),
+                new fromActions.UpdateClaim({
+                  userId: payload.userId,
+                  requestId: payload.requestId,
+                  claimData:
+                    configSteps[payload.stepData.sequenceNumber - 1]
+                      .yformConfigurator.content,
+                }),
+              ];
+            }
           }),
           catchError(error => of(new fromActions.UpdateUserRequestFail(error)))
+        );
+    })
+  );
+
+  @Effect()
+  submitUserRequest$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.SUBMIT_USER_REQUEST),
+    map((action: fromActions.SubmitUserRequest) => action.payload),
+    mergeMap(payload => {
+      return this.userRequestConnector
+        .submitUserRequest(payload.userId, payload.requestId)
+        .pipe(
+          mergeMap(userRequest => {
+            return [
+              new fromActions.LoadUserRequest(userRequest),
+              new fromActions.SubmitUserRequestSuccess(userRequest),
+            ];
+          }),
+          catchError(error =>
+            of(new fromActions.SubmitUserRequestFail(JSON.stringify(error)))
+          )
         );
     })
   );

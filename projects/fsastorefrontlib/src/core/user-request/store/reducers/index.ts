@@ -31,7 +31,7 @@ export const reducerProvider: Provider = {
   useFactory: getReducers,
 };
 
-export const getUserState: MemoizedSelector<
+export const getUserRequestState: MemoizedSelector<
   any,
   FSUserRequestState
 > = createFeatureSelector<FSUserRequestState>('userRequest');

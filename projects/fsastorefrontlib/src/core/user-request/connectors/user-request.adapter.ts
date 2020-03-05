@@ -22,4 +22,15 @@ export abstract class UserRequestAdapter {
     requestId: string,
     stepData: FSStepData
   ): Observable<any>;
+
+  /**
+   * Abstract method used to submit user request
+   *
+   * @param userId The user id
+   * @param requestId The user request id
+   */
+  abstract submitUserRequest(
+    userId: string,
+    requestId: string
+  ): Observable<any>;
 }
