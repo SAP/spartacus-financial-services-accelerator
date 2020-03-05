@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { I18nTestingModule } from '@spartacus/core';
-import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
-import { ChangeCarDetailsComponent } from './change-carDetails.component';
+import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
+import { ChangeCarDetailsFormComponent } from './change-car-details-form.component';
 
 class MockChangeRequestService {}
 
@@ -11,10 +11,10 @@ const mockChangeCarDetailsForm: any = {
   mileage: '10000',
 };
 
-describe('ChangeCarDetailsComponent', () => {
+describe('ChangeCarDetailsFormComponent', () => {
   let controls;
-  let component: ChangeCarDetailsComponent;
-  let fixture: ComponentFixture<ChangeCarDetailsComponent>;
+  let component: ChangeCarDetailsFormComponent;
+  let fixture: ComponentFixture<ChangeCarDetailsFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -22,12 +22,12 @@ describe('ChangeCarDetailsComponent', () => {
       providers: [
         { provide: ChangeRequestService, useClass: MockChangeRequestService },
       ],
-      declarations: [ChangeCarDetailsComponent],
+      declarations: [ChangeCarDetailsFormComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChangeCarDetailsComponent);
+    fixture = TestBed.createComponent(ChangeCarDetailsFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     controls = component.changeCarDetailsForm.controls;

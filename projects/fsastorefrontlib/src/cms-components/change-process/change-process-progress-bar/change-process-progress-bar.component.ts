@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 
@@ -10,7 +9,6 @@ import { ChangeRequestService } from './../../../core/change-request/facade/chan
 export class ChangeProcessProgressBarComponent implements OnInit {
   constructor(protected changeRequestService: ChangeRequestService) {}
 
-  subscription: Subscription;
   changeRequest$: Observable<any>;
 
   ngOnInit() {

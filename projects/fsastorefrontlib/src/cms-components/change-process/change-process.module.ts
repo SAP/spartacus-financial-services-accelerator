@@ -13,7 +13,7 @@ import {
 } from '@spartacus/core';
 import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 import { reducerToken } from '../../core/change-request/store/reducers/index';
-import { ChangeCarDetailsComponent } from './change-carDetails/change-carDetails.component';
+import { ChangeCarDetailsFormComponent } from './change-carDetails/change-car-details-form.component';
 import { ChangeCoverageComponent } from './change-coverage/change-coverage.component';
 import { ChangeProcessNavigationComponent } from './change-process-navigation/change-process-navigation.component';
 import { ChangeProcessProgressBarComponent } from './change-process-progress-bar/change-process-progress-bar.component';
@@ -66,7 +66,7 @@ const routes: Routes = [
           component: ChangeCoverageComponent,
         },
         ChangeCarDetailsFlex: {
-          component: ChangeCarDetailsComponent,
+          component: ChangeCarDetailsFormComponent,
         },
         ChangeSimulationFlex: {
           component: ChangeSimulationComponent,
@@ -81,21 +81,21 @@ const routes: Routes = [
     ChangeCoverageComponent,
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
-    ChangeCarDetailsComponent,
+    ChangeCarDetailsFormComponent,
     ChangeProcessNavigationComponent,
   ],
   exports: [
     ChangeCoverageComponent,
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
-    ChangeCarDetailsComponent,
+    ChangeCarDetailsFormComponent,
     ChangeProcessNavigationComponent,
   ],
   entryComponents: [
     ChangeCoverageComponent,
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
-    ChangeCarDetailsComponent,
+    ChangeCarDetailsFormComponent,
     ChangeProcessNavigationComponent,
   ],
 })
