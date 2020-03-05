@@ -30,12 +30,11 @@ export class FinalReviewComponent implements OnInit {
   checkoutStepUrlNext: string;
 
   ngOnInit() {
+    this.checkoutService.mockDeliveryMode();
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
       this.activatedRoute
     );
     this.paymentDetails$ = this.checkoutPaymentService.getPaymentDetails();
-    this.checkoutService.mockDeliveryAddress();
-    this.checkoutService.mockDeliveryMode();
   }
 
   toggleTAndC(): void {
