@@ -1,1 +1,28 @@
-<p>change-coverage works!</p>
+<ng-container *ngIf="changeRequest$ | async as changeRequest">
+  <div
+    *ngIf="changeRequest.insurancePolicy?.optionalProducts as optionalProducts"
+  >
+    <ng-container *ngFor="let optionalProduct of optionalProducts">
+      <div
+        class="row mx-3 py-3 no-gutters position-relative"
+        *ngIf="optionalProduct.coverageProduct"
+      >
+        <div class="col-12 col-md-7 align-self-center">
+          <h6>{{ optionalProduct.coverageProduct.cartDisplayName }}</h6>
+        </div>
+        <div class="col-12 col-md-3 align-self-center">
+          <ng-container *ngIf="!optionalProduct.coverageIsIncluded">
+            <button class="secondary-button btn-block text-capitalize">
+              {{ 'fscommon.add' | cxTranslate }}
+            </button>
+          </ng-container>
+          <ng-container *ngIf="optionalProduct.coverageIsIncluded">
+            <div class="col-12 col-md-3 align-self-center">
+              {{ 'fscommon.included' | cxTranslate }}
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>

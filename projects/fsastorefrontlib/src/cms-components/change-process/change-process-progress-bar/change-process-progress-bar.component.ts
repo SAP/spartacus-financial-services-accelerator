@@ -3,10 +3,10 @@ import { Observable } from 'rxjs/internal/Observable';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 
 @Component({
-  selector: 'fsa-change-coverage',
-  templateUrl: './change-coverage.component.html',
+  selector: 'fsa-change-process-progress-bar',
+  templateUrl: './change-process-progress-bar.component.html',
 })
-export class ChangeCoverageComponent implements OnInit {
+export class ChangeProcessProgressBarComponent implements OnInit {
   constructor(protected changeRequestService: ChangeRequestService) {}
 
   changeRequest$: Observable<any>;

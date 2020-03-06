@@ -1,6 +1,6 @@
-import { ChangeRequestAdapter } from './change-request.adapter';
-import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ChangeRequestAdapter } from './change-request.adapter';
 
 @Injectable({
   providedIn: 'root',
@@ -20,5 +20,9 @@ export class ChangeRequestConnector {
       changeRequestType,
       userId
     );
+  }
+
+  getChangeRequest(userId, requestId): Observable<any> {
+    return this.changeRequestAdapter.getChangeRequest(userId, requestId);
   }
 }
