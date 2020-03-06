@@ -22,7 +22,7 @@ export class ChangeCarDetailsFormComponent implements OnInit {
       { value: new Date().toISOString().substr(0, 10), disabled: true },
       Validators.required
     ),
-    mileage: ['', [Validators.required]],
+    mileage: ['', [Validators.required, Validators.max(100000)]],
   });
 
   ngOnInit() {}

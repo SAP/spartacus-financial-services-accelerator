@@ -12,10 +12,7 @@
           <div class="d-flex flex-wrap my-4">
             <div
               class="progress-inner-wrapper flex-grow-1 flex-shrink-1 text-center"
-              *ngFor="
-                let step of changeRequest.configurationSteps;
-                let i = index
-              "
+              *ngFor="let step of changeRequest.configurationSteps"
             >
               <div
                 class="d-inline-block underline-effect progress-node mx-2"

@@ -11,16 +11,16 @@
           <h6>{{ optionalProduct.coverageProduct.cartDisplayName }}</h6>
         </div>
         <div class="col-12 col-md-3 align-self-center">
-          <div *ngIf="!optionalProduct.coverageIsIncluded">
+          <ng-container *ngIf="!optionalProduct.coverageIsIncluded">
             <button class="secondary-button btn-block text-capitalize">
               {{ 'fscommon.add' | cxTranslate }}
             </button>
-          </div>
-          <div *ngIf="optionalProduct.coverageIsIncluded">
+          </ng-container>
+          <ng-container *ngIf="optionalProduct.coverageIsIncluded">
             <div class="col-12 col-md-3 align-self-center">
               {{ 'fscommon.included' | cxTranslate }}
             </div>
-          </div>
+          </ng-container>
         </div>
       </div>
     </ng-container>
