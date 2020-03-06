@@ -99,3 +99,16 @@ button,
     color: var(--cx-color-secondary);
   }
 }
+.add-remove {
+  @include toggle-status();
+  &:before,
+  &:after {
+    background-color: var(--cx-color-text);
+  }
+  &.active {
+    &:before,
+    &:after {
+      background-color: var(--cx-color-primary);
+    }
+  }
+}

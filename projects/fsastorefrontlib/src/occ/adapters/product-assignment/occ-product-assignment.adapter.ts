@@ -22,7 +22,7 @@ export class OccFSProductAssignmentAdapter
     currentPage?: number,
     sort?: string
   ): Observable<any> {
-    const url = this.getChangeRequestEndpoint(userId, orgUnitId);
+    const url = this.getProductAssignmentsEndpoint(userId, orgUnitId);
     const params = {};
     if (active !== undefined) {
       params['active'] = active.toString();
@@ -48,6 +48,20 @@ export class OccFSProductAssignmentAdapter
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
+  createProductAssignment(
+    userId: string,
+    orgUnitId: string,
+    productCode: string
+  ) {
+    const url = this.getProductAssignmentsEndpoint(userId, orgUnitId);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http
+      .post<any>(`${url}?productCode=${productCode}`, { headers })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
   changeActiveStatus(
     userId: string,
     orgUnitId: string,
@@ -70,7 +84,7 @@ export class OccFSProductAssignmentAdapter
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  protected getChangeRequestEndpoint(userId: string, orgUnitId: string) {
+  protected getProductAssignmentsEndpoint(userId: string, orgUnitId: string) {
     const productAssignmentsEndpoint =
       '/users/' + userId + '/orgUnits/' + orgUnitId + '/fsProductAssignments';
     return (

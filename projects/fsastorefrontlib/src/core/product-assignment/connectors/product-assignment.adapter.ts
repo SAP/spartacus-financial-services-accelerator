@@ -21,6 +21,19 @@ export abstract class FSProductAssignmentAdapter {
   ): Observable<any>;
 
   /**
+   * Abstract method used to create product assingnment for unit
+   *
+   * @param userId The user id
+   * @param orgUnitId The org unit id
+   * @param productCode The product code
+   */
+  abstract createProductAssignment(
+    userId: string,
+    orgUnitId: string,
+    productCode: string
+  );
+
+  /**
    * Abstract method used to load customer profile
    *
    * @param userId The user id

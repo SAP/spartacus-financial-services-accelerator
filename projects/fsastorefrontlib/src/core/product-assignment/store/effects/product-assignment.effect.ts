@@ -39,6 +39,34 @@ export class FSProductAssignmentEffects {
   );
 
   @Effect()
+  createProductAssignment$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.CREATE_PRODUCT_ASSIGNMENT),
+    map((action: fromActions.CreateProductAssignment) => action.payload),
+    mergeMap(payload => {
+      return this.productAssignmentConnector
+        .createProductAssignment(
+          payload.userId,
+          payload.orgUnitId,
+          payload.productCode
+        )
+        .pipe(
+          map((productAssignments: any) => {
+            return new fromActions.CreateProductAssignmentSuccess(
+              productAssignments
+            );
+          }),
+          catchError(error =>
+            of(
+              new fromActions.CreateProductAssignmentFail({
+                error: JSON.stringify(error),
+              })
+            )
+          )
+        );
+    })
+  );
+
+  @Effect()
   loadPotentialProductAssignments$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS),
     map(

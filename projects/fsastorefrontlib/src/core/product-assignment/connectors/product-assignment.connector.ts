@@ -26,6 +26,18 @@ export class FSProductAssignmentConnector {
     );
   }
 
+  createProductAssignment(
+    userId: string,
+    orgUnitId: string,
+    productCode: string
+  ) {
+    return this.productAssignmentAdapter.createProductAssignment(
+      userId,
+      orgUnitId,
+      productCode
+    );
+  }
+
   loadCustomerProfile(userId: string, orgCustomerId: string) {
     return this.productAssignmentAdapter.loadCustomerProfile(
       userId,

@@ -3,5 +3,12 @@
 %fsa-active-products {
   .single-card {
     border: 1px solid var(--cx-color-3);
+    display: flex;
+    flex-direction: column;
+  }
+  .add-remove {
+    width: 17px;
+    height: 20px;
+    align-self: flex-end;
   }
 }

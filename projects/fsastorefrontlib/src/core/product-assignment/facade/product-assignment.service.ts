@@ -65,6 +65,28 @@ export class FSProductAssignmentService {
       .unsubscribe();
   }
 
+  createProductAssignment(orgUnitId: string, productCode: string) {
+    const userId = this.user;
+    this.store.dispatch(
+      new fromAction.CreateProductAssignment({
+        userId,
+        orgUnitId,
+        productCode,
+      })
+    );
+  }
+
+  removeProductAssignment(orgUnitId: string, productAssignmentCode: string) {
+    const userId = this.user;
+    this.store.dispatch(
+      new fromAction.CreateProductAssignment({
+        userId,
+        orgUnitId,
+        productAssignmentCode,
+      })
+    );
+  }
+
   getAllProductAssignments(): Observable<any> {
     return this.store.select(fromSelector.getLoaded).pipe(
       filter(loaded => loaded),
