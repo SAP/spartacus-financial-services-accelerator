@@ -87,6 +87,22 @@ export class FSProductAssignmentService {
     );
   }
 
+  changeActiveStatus(
+    orgUnitId: string,
+    productAssignmentCode: string,
+    active: boolean
+  ) {
+    const userId = this.user;
+    this.store.dispatch(
+      new fromAction.UpdateProductAssignment({
+        userId,
+        orgUnitId,
+        productAssignmentCode,
+        active,
+      })
+    );
+  }
+
   getAllProductAssignments(): Observable<any> {
     return this.store.select(fromSelector.getLoaded).pipe(
       filter(loaded => loaded),
@@ -114,22 +130,6 @@ export class FSProductAssignmentService {
           occUserId,
           orgCustomerId
         );
-      })
-    );
-  }
-
-  changeActiveStatus(
-    orgUnitId: string,
-    productAssignmentCode: string,
-    active: boolean
-  ) {
-    const userId = this.user;
-    this.store.dispatch(
-      new fromAction.UpdateProductAssignment({
-        userId,
-        orgUnitId,
-        productAssignmentCode,
-        active,
       })
     );
   }

@@ -16,7 +16,7 @@ import { Params, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'fsa-potential-product-assignments',
   templateUrl: './potential-product-assignments.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
   constructor(
@@ -28,6 +28,7 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
 
   private subscription = new Subscription();
   orgUnitId: string;
+  parentOrgUnit: string;
   customerProfile$: Observable<any>;
   productAssignments$: Observable<any>;
   availableProductAssignments$: Observable<any>;
@@ -49,11 +50,13 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
       .add(
         this.customerProfile$
           .pipe(
-            map(orgUnitCustomer => {
-              this.orgUnitId = (<B2BAdministrator>orgUnitCustomer).orgUnit.uid;
-              if (this.orgUnitId) {
+            map(orgParentData => {
+              this.parentOrgUnit = (<B2BAdministrator>(
+                orgParentData
+              )).orgUnit.uid;
+              if (this.parentOrgUnit) {
                 this.productAssignmentService.loadPotentialProductAssignments(
-                  this.orgUnitId
+                  this.parentOrgUnit
                 );
               }
             })
@@ -65,22 +68,17 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
           this.orgUnitId
         )
       );
+    console.log(this.orgUnitId);
     this.availableProductAssignments$ = this.productAssignmentService.getAllProductAssignments();
     // this.availableProductAssignments$.subscribe(data => console.log(data));
     this.productAssignments$ = this.productAssignmentService.getProductAssignments();
     // this.productAssignments$.subscribe(data => console.log(data));
   }
 
-  private initialize(params: Params) {
-    if (params) {
-      this.orgUnitId = params.orgUnitId;
-    }
-  }
-
   onAssign(productCode) {
     this.cd.markForCheck();
     return this.productAssignmentService.createProductAssignment(
-      'AirlineCompany',
+      this.orgUnitId,
       productCode
     );
   }
@@ -90,6 +88,12 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
     //   'AirlineCompany',
     //   productAssignmentCode
     // );
+  }
+
+  private initialize(params: Params) {
+    if (params) {
+      this.orgUnitId = params.orgUnitId;
+    }
   }
 
   ngOnDestroy() {
