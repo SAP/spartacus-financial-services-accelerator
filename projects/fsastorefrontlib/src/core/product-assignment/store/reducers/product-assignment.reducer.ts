@@ -60,13 +60,17 @@ export function reducer(
       let content = { ...action.payload };
       const productAssignmentContent = state.content;
       if (content && content.code) {
-        productAssignmentContent.assignments.push(content);
-        const createdProductAssignment = productAssignmentContent.potentialAssignments.find(
+        const assignments = [...productAssignmentContent.assignments];
+        assignments.push(content);
+        productAssignmentContent.assignments = assignments;
+
+        const potentialAssignment = productAssignmentContent.potentialAssignments.find(
           productAssignment =>
-            (productAssignment.product.code = content.product.code)
+            productAssignment.product.code === content.product.code
         );
+
         const currentProduct = productAssignmentContent.potentialAssignments.indexOf(
-          createdProductAssignment
+          potentialAssignment
         );
         if (currentProduct > -1) {
           productAssignmentContent.potentialAssignments.splice(
@@ -74,8 +78,8 @@ export function reducer(
             1
           );
         }
-        content = productAssignmentContent;
       }
+      content = productAssignmentContent;
       return {
         ...state,
         content,
@@ -114,4 +118,5 @@ export const getProductAssignments = (state: ProductAssignmentState) =>
 
 export const getPotentialProductAssignments = (state: ProductAssignmentState) =>
   state.content.potentialAssignments;
+
 export const getLoaded = (state: ProductAssignmentState) => state.loaded;
