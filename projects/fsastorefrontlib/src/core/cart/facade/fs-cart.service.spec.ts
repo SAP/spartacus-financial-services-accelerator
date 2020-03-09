@@ -11,12 +11,10 @@ import {
   MultiCartService,
   ProcessesLoaderState,
   OCC_CART_ID_CURRENT,
-  MultiCartSelectors,
   OCC_USER_ID_ANONYMOUS,
 } from '@spartacus/core';
 import { Observable, ReplaySubject, of, BehaviorSubject } from 'rxjs';
 
-import createSpy = jasmine.createSpy;
 import { ActivatedRoute } from '@angular/router';
 import { Type } from '@angular/core';
 import * as fromReducer from '@spartacus/core';
