@@ -12,7 +12,6 @@ import {
 } from '@spartacus/core';
 import { BehaviorSubject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { CategoryService } from '../../checkout/services/category/category.service';
 import * as fromFSAction from '../../checkout/store/actions/index';
 import { PricingData } from '../../../occ/occ-models/form-pricing.interface';
 
@@ -23,7 +22,6 @@ export class FSCartService extends ActiveCartService {
     protected fsMultiCartService: MultiCartService,
     protected fsAuthService: AuthService,
     protected activatedRoute: ActivatedRoute,
-    protected categoryService: CategoryService,
     protected multiCartStore: Store<StateWithMultiCart>
   ) {
     super(multiCartStore, fsAuthService, fsMultiCartService);
