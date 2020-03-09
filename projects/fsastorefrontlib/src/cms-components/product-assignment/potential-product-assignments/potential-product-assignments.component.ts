@@ -68,7 +68,6 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
           this.orgUnitId
         )
       );
-    console.log(this.orgUnitId);
     this.availableProductAssignments$ = this.productAssignmentService.getAllProductAssignments();
     // this.availableProductAssignments$.subscribe(data => console.log(data));
     this.productAssignments$ = this.productAssignmentService.getProductAssignments();
@@ -76,7 +75,6 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
   }
 
   onAssign(productCode) {
-    this.cd.markForCheck();
     return this.productAssignmentService.createProductAssignment(
       this.orgUnitId,
       productCode
