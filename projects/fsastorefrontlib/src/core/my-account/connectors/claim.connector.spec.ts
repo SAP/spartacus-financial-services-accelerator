@@ -5,9 +5,13 @@ import createSpy = jasmine.createSpy;
 import { ClaimAdapter } from './claim.adapter';
 import { ClaimConnector } from './claim.connector';
 
-class MockClaimAdapter implements ClaimAdapter {
+class MockClaimAdapter extends ClaimAdapter {
   getClaims = createSpy('ClaimAdapter.getClaims').and.callFake(userId =>
     of('getClaims' + userId)
+  );
+
+  getClaim = createSpy('ClaimAdapter.getClaim').and.callFake(
+    (userId, claimId) => of('getClaim' + userId + claimId)
   );
   deleteClaim = createSpy('ClaimAdapter.deleteClaim').and.callFake(
     (userId, claimId) => of('deleteClaim' + userId + claimId)

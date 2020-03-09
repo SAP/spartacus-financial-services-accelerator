@@ -6,7 +6,6 @@ import { FormDataService } from '@fsa/dynamicforms';
 import * as fromReducer from '../store/reducers';
 import * as fromAction from '../store/actions';
 import { of } from 'rxjs';
-import { UserRequestDataService } from './../services/user-request-data.service';
 import { UserRequestService } from './user-request.service';
 import { reducerProvider, reducerToken } from '../store/reducers/index';
 import { FSUserRequest } from '../../../occ/occ-models/occ.models';
@@ -50,7 +49,6 @@ describe('UserRequestServiceTest', () => {
       providers: [
         UserRequestService,
         reducerProvider,
-        { provide: UserRequestDataService, useValue: userRequestDataService },
         { provide: FormDataService, useValue: formDataService },
       ],
     });
@@ -65,26 +63,6 @@ describe('UserRequestServiceTest', () => {
       expect(userRequestService).toBeTruthy();
     }
   ));
-
-  it('should be able to load user request', () => {
-    service.loadUserRequestData();
-    expect(store.dispatch).toHaveBeenCalledWith(
-      new fromAction.LoadUserRequest({ userId: userId, requestId: requestId })
-    );
-  });
-  it('should not load user request with null requestId', () => {
-    userRequestDataService.requestId = null;
-    service.loadUserRequestData();
-    expect(store.dispatch).not.toHaveBeenCalledWith(
-      new fromAction.LoadUserRequest({ userId: userId, requestId: requestId })
-    );
-  });
-  it('should be able to resume user request', () => {
-    service.resumeRequest(requestId);
-    expect(store.dispatch).toHaveBeenCalledWith(
-      new fromAction.LoadUserRequest({ userId: userId, requestId: requestId })
-    );
-  });
 
   it('should be able to update user request', () => {
     service.updateUserRequestStep(
@@ -124,27 +102,6 @@ describe('UserRequestServiceTest', () => {
     });
     service.loadUserRequestFormData(userRequest);
     expect(formDataValue).toBe(undefined);
-  });
-
-  it('should not load user request', () => {
-    store.dispatch(
-      new fromAction.LoadUserRequestSuccess({
-        requestId: requestId,
-        configurationSteps: [{}],
-      })
-    );
-    service.getUserRequest();
-    expect(store.dispatch).not.toHaveBeenCalledWith(
-      new fromAction.LoadUserRequest({ userId: userId, requestId: requestId })
-    );
-  });
-
-  it('should load user request', () => {
-    store.dispatch(new fromAction.LoadUserRequestSuccess({}));
-    service.getUserRequest();
-    expect(store.dispatch).toHaveBeenCalledWith(
-      new fromAction.LoadUserRequest({ userId: userId, requestId: requestId })
-    );
   });
 
   it('should be able to get actions', () => {
