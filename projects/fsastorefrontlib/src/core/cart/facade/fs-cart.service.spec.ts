@@ -119,6 +119,7 @@ describe('FSCartServiceTest', () => {
       quantity,
       pricingData
     );
+
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromFSAction.StartBundle({
         userId: userId,
