@@ -19,6 +19,7 @@ import { FSRegisterModule } from './user/register/fs-register.module';
 import { ProductModule } from './product/product.module';
 import { ChangeProcessModule } from './change-process/change-process.module';
 import { ProductAssignmentModule } from './product-assignment/product-assignment.module';
+import { FSProgressBarModule } from './progress-bar/progress-bar.module';
 
 @NgModule({
   imports: [
@@ -52,6 +53,7 @@ import { ProductAssignmentModule } from './product-assignment/product-assignment
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,
     ProductAssignmentModule,
+    FSProgressBarModule,
   ],
   providers: [reducerProvider],
 })

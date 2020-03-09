@@ -37,6 +37,7 @@ import { UserRequestSummaryComponent } from './user-request-summary/user-request
 import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { ClaimConfirmationGuard } from '../../core/user-request/guards/claim-confirmation-guard';
 import { UserRequestConnector } from '../../core/user-request/connectors/user-request.connector';
+import { FSProgressBarModule } from '../progress-bar/progress-bar.module';
 
 const routes: Routes = [
   {
@@ -99,6 +100,7 @@ const routes: Routes = [
     UrlModule,
     SpinnerModule,
     AccordionModule,
+    FSProgressBarModule,
     EffectsModule.forFeature(effects),
     RouterModule.forChild(routes),
     StoreModule.forFeature('userRequest', reducerToken),
