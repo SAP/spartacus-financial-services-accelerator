@@ -2,6 +2,18 @@
   <div
     *ngIf="changeRequest.insurancePolicy?.optionalProducts as optionalProducts"
   >
+    <label>
+      <span class="label-content">{{
+        'forms.effectiveDate' | cxTranslate
+      }}</span>
+      <input
+        class="form-control"
+        type="date"
+        name="effectiveDate"
+        value="{{ currentDate }}"
+        disabled
+      />
+    </label>
     <ng-container *ngFor="let optionalProduct of optionalProducts">
       <div
         class="row mx-3 py-3 no-gutters position-relative"
