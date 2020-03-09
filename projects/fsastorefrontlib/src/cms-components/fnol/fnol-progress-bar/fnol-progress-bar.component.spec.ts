@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FNOLProgressBarComponent } from './fnol-progress-bar.component';
 import { I18nTestingModule } from '@spartacus/core';
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform, Component, Input } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { FSUserRequest } from '../../../occ/occ-models';
@@ -14,6 +14,15 @@ import { ClaimService } from './../../../core/my-account/facade/claim.service';
 })
 class MockUrlPipe implements PipeTransform {
   transform() {}
+}
+
+@Component({
+  // tslint:disable
+  selector: 'fsa-progress-bar',
+  template: '',
+})
+class MockProgressBarComponent {
+  @Input() steps;
 }
 
 const claimRequest: FSUserRequest = {
@@ -50,7 +59,11 @@ describe('FNOLProgressBarComponent', () => {
     mockClaimService = new MockClaimService();
     TestBed.configureTestingModule({
       imports: [I18nTestingModule, RouterTestingModule],
-      declarations: [FNOLProgressBarComponent, MockUrlPipe],
+      declarations: [
+        FNOLProgressBarComponent,
+        MockUrlPipe,
+        MockProgressBarComponent,
+      ],
       providers: [
         {
           provide: UserRequestService,

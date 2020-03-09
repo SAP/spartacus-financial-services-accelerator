@@ -6,8 +6,8 @@ import { ClaimDataService } from '../services/claim-data.service';
 import { Type } from '@angular/core';
 import * as fromAction from '../store/actions';
 import { reducerProvider, reducerToken } from '../store/reducers';
-import { of, Observable } from 'rxjs';
-import { OCC_USER_ID_CURRENT, AuthService } from '@spartacus/core';
+import { of, Observable, ReplaySubject } from 'rxjs';
+import { OCC_USER_ID_CURRENT, AuthService, UserToken } from '@spartacus/core';
 
 const userId = OCC_USER_ID_CURRENT;
 const policyId = 'PL00001';
@@ -24,9 +24,14 @@ const claimPolicies = {
   loaded: false,
 };
 
+const userToken$ = new ReplaySubject<UserToken>();
+
 class MockAuthService {
   getOccUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
+  }
+  getUserToken(): Observable<UserToken> {
+    return userToken$.asObservable();
   }
 }
 
