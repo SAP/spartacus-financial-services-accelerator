@@ -63,7 +63,6 @@ export function reducer(
         const assignments = [...productAssignmentContent.assignments];
         assignments.push(content);
         productAssignmentContent.assignments = assignments;
-
         const potentialAssignment = productAssignmentContent.potentialAssignments.find(
           productAssignment =>
             productAssignment.product.code === content.product.code
@@ -83,9 +82,43 @@ export function reducer(
       return {
         ...state,
         content,
-        loaded: true,
       };
     }
+    case fromAction.REMOVE_PRODUCT_ASSIGNMENT: {
+      let content = { ...action.payload };
+      const productAssignmentContent = state.content;
+      if (content && content.code) {
+        const assignments = productAssignmentContent.assignments.find(
+          currentProductAssignment =>
+            currentProductAssignment.product.code === content.product.code
+        );
+        const currentProduct = productAssignmentContent.assignments.indexOf(
+          assignments
+        );
+        if (currentProduct > -1) {
+          productAssignmentContent.assignments.splice(currentProduct, 1);
+        }
+        // productAssignmentContent.assignments = assignments;
+        // const potentialAssignments = [
+        //   ...productAssignmentContent.potentialAssignments,
+        // ];
+        // potentialAssignments.push(content);
+      }
+      content = productAssignmentContent;
+      return {
+        ...state,
+        content,
+      };
+    }
+
+    case fromAction.REMOVE_PRODUCT_ASSIGNMENT_SUCCESS: {
+      // const content = state.content;
+      return {
+        ...state,
+        // content,
+      };
+    }
+
     case fromAction.UPDATE_PRODUCT_ASSIGNMENT_SUCCESS: {
       let content = { ...action.payload };
       const productAssignmentContent = state.content;

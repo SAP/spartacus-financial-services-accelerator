@@ -10,16 +10,16 @@ export const LOAD_PRODUCT_ASSIGNMENTS_SUCCESS =
 export const CREATE_PRODUCT_ASSIGNMENT =
   '[Product Assignment] Create Product Assignment';
 export const CREATE_PRODUCT_ASSIGNMENT_SUCCESS =
-  '[Product Assignment] Create Product Assignment Succes';
+  '[Product Assignment] Create Product Assignment Success';
 export const CREATE_PRODUCT_ASSIGNMENT_FAIL =
   '[Product Assignment] Create Product Assignment Fail';
 
 export const REMOVE_PRODUCT_ASSIGNMENT =
-  '[Product Assignment] Create Product Assignment';
+  '[Product Assignment] Remove Product Assignment';
 export const REMOVE_PRODUCT_ASSIGNMENT_SUCCESS =
-  '[Product Assignment] Create Product Assignment Succes';
+  '[Product Assignment] Remove Product Assignment Success';
 export const REMOVE_PRODUCT_ASSIGNMENT_FAIL =
-  '[Product Assignment] Create Product Assignment Fail';
+  '[Product Assignment] Remove Product Assignment Fail';
 
 export const LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS =
   '[Product Assignment] Load Potential Product Assignments';
@@ -57,6 +57,21 @@ export class CreateProductAssignmentSuccess implements Action {
 
 export class CreateProductAssignmentFail implements Action {
   readonly type = CREATE_PRODUCT_ASSIGNMENT_FAIL;
+  constructor(public payload: any) {}
+}
+
+export class RemoveProductAssignment implements Action {
+  readonly type = REMOVE_PRODUCT_ASSIGNMENT;
+  constructor(public payload: any) {}
+}
+
+export class RemoveProductAssignmentSuccess implements Action {
+  readonly type = REMOVE_PRODUCT_ASSIGNMENT_SUCCESS;
+  constructor() {}
+}
+
+export class RemoveProductAssignmentFail implements Action {
+  readonly type = REMOVE_PRODUCT_ASSIGNMENT_FAIL;
   constructor(public payload: any) {}
 }
 
@@ -100,6 +115,9 @@ export type ProductAssignmentActions =
   | CreateProductAssignment
   | CreateProductAssignmentSuccess
   | CreateProductAssignmentFail
+  | RemoveProductAssignment
+  | RemoveProductAssignmentSuccess
+  | RemoveProductAssignmentFail
   | LoadPotentialProductAssignments
   | LoadPotentialProductAssignmentsFail
   | LoadPotentialProductAssignmentsSuccess

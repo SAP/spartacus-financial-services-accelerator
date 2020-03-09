@@ -34,6 +34,19 @@ export abstract class FSProductAssignmentAdapter {
   );
 
   /**
+   * Abstract method used to remove product assingnment for unit
+   *
+   * @param userId The user id
+   * @param orgUnitId The org unit id
+   * @param productCode The product code
+   */
+  abstract removeProductAssignment(
+    userId: string,
+    orgUnitId: string,
+    productCode: string
+  );
+
+  /**
    * Abstract method used to load customer profile
    *
    * @param userId The user id

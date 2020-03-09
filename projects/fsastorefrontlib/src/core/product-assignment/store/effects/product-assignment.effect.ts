@@ -67,6 +67,32 @@ export class FSProductAssignmentEffects {
   );
 
   @Effect()
+  removeProductAssignment$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.REMOVE_PRODUCT_ASSIGNMENT),
+    map((action: fromActions.RemoveProductAssignment) => action.payload),
+    mergeMap(payload => {
+      return this.productAssignmentConnector
+        .removeProductAssignment(
+          payload.userId,
+          payload.orgUnitId,
+          payload.productCode
+        )
+        .pipe(
+          map(() => {
+            return new fromActions.RemoveProductAssignmentSuccess();
+          }),
+          catchError(error =>
+            of(
+              new fromActions.RemoveProductAssignmentFail({
+                error: JSON.stringify(error),
+              })
+            )
+          )
+        );
+    })
+  );
+
+  @Effect()
   loadPotentialProductAssignments$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS),
     map(

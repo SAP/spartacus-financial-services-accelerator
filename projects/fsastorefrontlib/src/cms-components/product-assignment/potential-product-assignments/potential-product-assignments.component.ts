@@ -16,7 +16,7 @@ import { Params, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'fsa-potential-product-assignments',
   templateUrl: './potential-product-assignments.component.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
   constructor(
@@ -69,9 +69,7 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
         )
       );
     this.availableProductAssignments$ = this.productAssignmentService.getAllProductAssignments();
-    // this.availableProductAssignments$.subscribe(data => console.log(data));
     this.productAssignments$ = this.productAssignmentService.getProductAssignments();
-    // this.productAssignments$.subscribe(data => console.log(data));
   }
 
   onAssign(productCode) {
@@ -81,11 +79,11 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
     );
   }
 
-  onDessign(productAssignmentCode) {
-    // this.productAssignmentService.createProductAssignment(
-    //   'AirlineCompany',
-    //   productAssignmentCode
-    // );
+  onDessign(productCode) {
+    return this.productAssignmentService.removeProductAssignment(
+      this.orgUnitId,
+      productCode
+    );
   }
 
   private initialize(params: Params) {

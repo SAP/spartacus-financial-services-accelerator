@@ -62,6 +62,20 @@ export class OccFSProductAssignmentAdapter
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
+  removeProductAssignment(
+    userId: string,
+    orgUnitId: string,
+    productCode: string
+  ) {
+    const url = this.getProductAssignmentsEndpoint(userId, orgUnitId);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http
+      .delete<any>(`${url}/${productCode}`, { headers })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
   changeActiveStatus(
     userId: string,
     orgUnitId: string,
