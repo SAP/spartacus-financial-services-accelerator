@@ -44,15 +44,14 @@ class MockActivatedRoute {
 }
 
 class MultiCartServiceStub {
-  loadCart() {}
-  createCart() {}
+  loadCart() { }
+  createCart() { }
 }
 
 describe('FSCartServiceTest', () => {
   let service: FSCartService;
   let store: Store<StateWithMultiCart>;
   let authService: MockAuthService;
-  const activatedRoute: MockActivatedRoute;
   let multiCartService: MultiCartService;
 
   beforeEach(() => {
@@ -75,7 +74,7 @@ describe('FSCartServiceTest', () => {
         },
         {
           provide: ActivatedRoute,
-          useValue: activatedRoute,
+          useValue: MockActivatedRoute,
         },
         {
           provide: MultiCartService,
