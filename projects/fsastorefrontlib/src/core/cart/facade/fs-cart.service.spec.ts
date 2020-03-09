@@ -52,7 +52,7 @@ describe('FSCartServiceTest', () => {
   let service: FSCartService;
   let store: Store<StateWithMultiCart>;
   let authService: MockAuthService;
-  let activatedRoute: MockActivatedRoute;
+  const activatedRoute: MockActivatedRoute;
   let multiCartService: MultiCartService;
 
   beforeEach(() => {
