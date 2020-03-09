@@ -26,14 +26,12 @@ import {
   reducerProvider,
 } from '../../core/user-request/store/reducers/index';
 import { StoreModule } from '@ngrx/store';
-import { UserRequestProgressBarComponent } from './user-request-progress-bar/user-request-progress-bar.component';
-import { UserRequestDataService } from '../../core/user-request/services/user-request-data.service';
-import { UserRequestNavigationComponent } from './user-request-navigation/user-request-navigation.component';
-import { UserRequestConfirmationComponent } from './user-request-confirmation/user-request-confirmation.component';
+import { FNOLProgressBarComponent } from './fnol-progress-bar/fnol-progress-bar.component';
+import { FNOLNavigationComponent } from './fnol-navigation/fnol-navigation.component';
+import { FNOLConfirmationComponent } from './fnol-confirmation/fnol-confirmation.component';
 import { UserRequestNavigationService } from '../../core/user-request/facade/user-request-navigation.service';
-import { UserRequestStoreModule } from '../../core/user-request/store/user-request-store.module';
-import { ClaimStoreModule } from './../../core/my-account/store/claim-store.module';
-import { UserRequestSummaryComponent } from './user-request-summary/user-request-summary.component';
+import { ClaimStoreModule } from '../../core/my-account/store/claim-store.module';
+import { FNOLSummaryComponent } from './fnol-summary/fnol-summary.component';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { ClaimConfirmationGuard } from '../../core/user-request/guards/claim-confirmation-guard';
 import { UserRequestConnector } from '../../core/user-request/connectors/user-request.connector';
@@ -90,7 +88,6 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    UserRequestStoreModule,
     ClaimStoreModule,
     I18nModule,
     RouterModule,
@@ -107,43 +104,42 @@ const routes: Routes = [
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
         UserRequestProgressBarFlex: {
-          component: UserRequestProgressBarComponent,
+          component: FNOLProgressBarComponent,
         },
         UserRequestSummaryFlex: {
-          component: UserRequestSummaryComponent,
+          component: FNOLSummaryComponent,
         },
         UserRequestNavigationFlex: {
-          component: UserRequestNavigationComponent,
+          component: FNOLNavigationComponent,
         },
         UserRequestConfirmationFlex: {
-          component: UserRequestConfirmationComponent,
+          component: FNOLConfirmationComponent,
         },
       },
     }),
   ],
   declarations: [
-    UserRequestProgressBarComponent,
-    UserRequestNavigationComponent,
-    UserRequestSummaryComponent,
-    UserRequestConfirmationComponent,
+    FNOLProgressBarComponent,
+    FNOLNavigationComponent,
+    FNOLSummaryComponent,
+    FNOLConfirmationComponent,
   ],
   exports: [
-    UserRequestProgressBarComponent,
-    UserRequestNavigationComponent,
-    UserRequestSummaryComponent,
-    UserRequestConfirmationComponent,
+    FNOLProgressBarComponent,
+    FNOLNavigationComponent,
+    FNOLSummaryComponent,
+    FNOLConfirmationComponent,
   ],
   entryComponents: [
-    UserRequestProgressBarComponent,
-    UserRequestNavigationComponent,
-    UserRequestSummaryComponent,
-    UserRequestConfirmationComponent,
+    FNOLProgressBarComponent,
+    FNOLNavigationComponent,
+    FNOLSummaryComponent,
+    FNOLConfirmationComponent,
   ],
   providers: [
     UserRequestService,
     UserRequestConnector,
     reducerProvider,
-    UserRequestDataService,
     UserRequestNavigationService,
   ],
 })

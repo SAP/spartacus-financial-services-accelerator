@@ -3,10 +3,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import createSpy = jasmine.createSpy;
 import { Observable, of } from 'rxjs';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
-import { AccordionModule } from '../../../../src/shared/accordion/accordion.module';
-import { FSUserRequest } from '../../../../src/occ/occ-models';
-import { UserRequestService } from '../../../../src/core/user-request/facade';
-import { UserRequestSummaryComponent } from './user-request-summary.component';
+import { AccordionModule } from '../../../shared/accordion/accordion.module';
+import { FSUserRequest } from '../../../occ/occ-models';
+import { UserRequestService } from '../../../core/user-request/facade';
+import { UserRequestSummaryComponent } from './fnol-summary.component';
 import { By } from '@angular/platform-browser';
 
 class MockRoutingService {

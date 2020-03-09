@@ -29,6 +29,15 @@ export function reducer(
       };
     }
 
+    case fromAction.LOAD_CURRENT_CLAIM_SUCCESS: {
+      const content = { ...action.payload };
+      return {
+        ...state,
+        content,
+        loaded: true,
+      };
+    }
+
     case fromAction.DELETE_CLAIM_SUCCESS: {
       return {
         ...state,

@@ -1,5 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { UserRequestNavigationComponent } from './user-request-navigation.component';
+import { UserRequestNavigationComponent } from './fnol-navigation.component';
 import {
   GlobalMessageService,
   I18nTestingModule,

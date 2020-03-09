@@ -11,4 +11,4 @@ export * from './my-account/index';
 export * from './product/index';
 export * from './product-assignment/index';
 export * from './user/index';
-export * from './user-request/index';
+export * from './fnol/index';

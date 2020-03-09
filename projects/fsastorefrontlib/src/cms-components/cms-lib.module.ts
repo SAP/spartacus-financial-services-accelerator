@@ -12,7 +12,7 @@ import {
 } from '../core/my-account/store/reducers/index';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { UserRequestModule } from './user-request/user-request.module';
+import { UserRequestModule } from './fnol/fnol.module';
 import { CategoryFeatureModule } from './category/category-feature/category-feature.module';
 import { CategoryFeatureCarouselModule } from './category/category-feature-carousel/category-feature-carousel.module';
 import { FSRegisterModule } from './user/register/fs-register.module';

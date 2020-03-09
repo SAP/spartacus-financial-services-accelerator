@@ -29,6 +29,17 @@ export class OccClaimAdapter implements ClaimAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
+  getClaim(userId: string, claimId: string) {
+    const url = this.getClaimsEndpoint(userId) + '/' + claimId;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+
+    return this.http
+      .get(url, { headers })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
   deleteClaim(userId: string, claimId: string) {
     const url = this.getClaimsEndpoint(userId) + '/' + claimId;
     const headers = new HttpHeaders({

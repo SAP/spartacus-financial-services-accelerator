@@ -1,5 +1,4 @@
-import { ClaimStatus } from './../../../occ/occ-models/occ.models';
-import { UserRequestDataService } from './../../../core/user-request/services/user-request-data.service';
+import { ClaimStatus } from '../../../occ/occ-models/occ.models';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
@@ -12,16 +11,17 @@ import {
 } from '../../../core/user-request/facade';
 import { FSUserRequest, FSStepData } from '../../../occ/occ-models';
 import * as fromAction from '../../../core/user-request/store/actions';
+import { ClaimService } from '../../../core/my-account/facade/claim.service';
 
 const completedStatus = 'COMPLETED';
 
 @Component({
-  selector: 'fsa-user-request-navigation',
-  templateUrl: './user-request-navigation.component.html',
+  selector: 'fsa-fnol-navigation',
+  templateUrl: './fnol-navigation.component.html',
 })
-export class UserRequestNavigationComponent implements OnInit, OnDestroy {
+export class FNOLNavigationComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
-  userRequest$: Observable<FSUserRequest>;
+  claimRequest$: Observable<FSUserRequest>;
   configurationSteps: FSStepData[];
   activeStepData: FSStepData;
   activeStepIndex: number;
@@ -31,21 +31,21 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected userRequestNavigationService: UserRequestNavigationService,
     protected formDataService: FormDataService,
-    protected userRequestDataService: UserRequestDataService,
-    protected router: RoutingService
+    protected router: RoutingService,
+    protected claimService: ClaimService
   ) {}
 
   ngOnInit() {
-    this.userRequest$ = this.userRequestService.getUserRequest();
+    this.claimRequest$ = this.claimService.getCurrentClaim();
     this.subscription.add(
-      this.userRequest$
+      this.claimRequest$
         .pipe(
-          map(userRequestData => {
+          map(claimData => {
             if (
-              userRequestData.configurationSteps != null &&
-              userRequestData.configurationSteps.length > 0
+              claimData.configurationSteps != null &&
+              claimData.configurationSteps.length > 0
             ) {
-              this.configurationSteps = userRequestData.configurationSteps;
+              this.configurationSteps = claimData.configurationSteps;
               this.activeStepData = this.userRequestNavigationService.getActiveStep(
                 this.configurationSteps,
                 this.activatedRoute.routeConfig.path
@@ -78,7 +78,7 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     );
   }
 
-  next(currentStep: number): void {
+  next(currentStep: number, claimData: any): void {
     this.subscription.add(
       this.userRequestService
         .getAction(fromAction.UPDATE_USER_REQUEST_SUCCESS)
@@ -105,7 +105,7 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
     this.formDataService.submit(formData);
     if (this.activeStepIndex + 1 === this.configurationSteps.length) {
       this.userRequestService.updateUserRequestStep(
-        this.userRequestDataService.userRequest,
+        claimData,
         this.activeStepIndex,
         completedStatus
       );
@@ -116,18 +116,11 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
         .pipe(
           switchMap(submittedFormData => {
             if (submittedFormData) {
-              const userRequestData = this.userRequestDataService.userRequest;
-              if (
-                userRequestData &&
-                userRequestData.requestId &&
-                submittedFormData.content !== undefined
-              ) {
-                this.userRequestService.updateUserRequestStep(
-                  userRequestData,
-                  this.activeStepIndex,
-                  completedStatus
-                );
-              }
+              this.userRequestService.updateUserRequestStep(
+                claimData,
+                this.activeStepIndex,
+                completedStatus
+              );
             }
             return of(null);
           })

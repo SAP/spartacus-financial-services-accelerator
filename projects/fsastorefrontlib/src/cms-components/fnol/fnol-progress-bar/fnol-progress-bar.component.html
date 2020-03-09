@@ -4,8 +4,8 @@
       <h2 class="py-4 text-center text-uppercase">
         {{ 'fscommon.makeClaim' | cxTranslate }}
       </h2>
-      <section *ngIf="userRequest$ | async as userRequest">
-        <fsa-progress-bar [steps]="userRequest.configurationSteps">
+      <section *ngIf="claimRequest$ | async as claimRequest">
+        <fsa-progress-bar [steps]="claimRequest.configurationSteps">
         </fsa-progress-bar>
       </section>
     </div>

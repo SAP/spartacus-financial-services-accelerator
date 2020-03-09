@@ -17,15 +17,15 @@ export const getUserRequestState: MemoizedSelector<
     userRequestState.userRequest
 );
 
-export const getUserRequest: MemoizedSelector<any, any> = createSelector(
-  getUserRequestState,
-  fromUserRequest.getUserRequest
-);
+// export const getUserRequest: MemoizedSelector<any, any> = createSelector(
+//   getUserRequestState,
+//   fromUserRequest.getUserRequest
+// );
 
-export const getLoaded: MemoizedSelector<any, any> = createSelector(
-  getUserRequestState,
-  fromUserRequest.getLoaded
-);
+// export const getLoaded: MemoizedSelector<any, any> = createSelector(
+//   getUserRequestState,
+//   fromUserRequest.getLoaded
+// );
 export const getUserRequestContent: MemoizedSelector<
   StateWithUserRequest,
   FSUserRequest

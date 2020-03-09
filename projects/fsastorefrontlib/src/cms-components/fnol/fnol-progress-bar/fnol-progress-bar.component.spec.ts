@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UserRequestProgressBarComponent } from './user-request-progress-bar.component';
+import { UserRequestProgressBarComponent } from './fnol-confirmation.component';
 import { I18nTestingModule } from '@spartacus/core';
 import { Pipe, PipeTransform } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
