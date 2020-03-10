@@ -60,8 +60,7 @@ export function reducer(
       let content = { ...action.payload };
       const productAssignmentContent = state.content;
       if (content && content.code) {
-        const assignments = [...productAssignmentContent.assignments];
-        assignments.push(content);
+        const assignments = [...productAssignmentContent.assignments, content];
         productAssignmentContent.assignments = assignments;
         const potentialAssignment = productAssignmentContent.potentialAssignments.find(
           productAssignment =>
@@ -97,7 +96,12 @@ export function reducer(
         );
         if (currentProduct > -1) {
           productAssignmentContent.assignments.splice(currentProduct, 1);
+          productAssignmentContent.potentialAssignments = [
+            ...productAssignmentContent.potentialAssignments,
+            content,
+          ];
         }
+        console.log(content);
       }
       content = productAssignmentContent;
       return {

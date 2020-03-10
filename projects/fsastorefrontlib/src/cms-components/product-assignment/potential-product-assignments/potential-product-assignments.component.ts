@@ -82,7 +82,8 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
   onDessign(productCode) {
     return this.productAssignmentService.removeProductAssignment(
       this.orgUnitId,
-      productCode
+      productCode,
+      this.parentOrgUnit
     );
   }
 

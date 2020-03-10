@@ -76,13 +76,18 @@ export class FSProductAssignmentService {
     );
   }
 
-  removeProductAssignment(orgUnitId: string, productCode: string) {
+  removeProductAssignment(
+    orgUnitId: string,
+    productCode: string,
+    parentOrgUnit: string
+  ) {
     const userId = this.user;
     this.store.dispatch(
       new fromAction.RemoveProductAssignment({
         userId,
         orgUnitId,
         productCode,
+        parentOrgUnit,
       })
     );
   }

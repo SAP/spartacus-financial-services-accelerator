@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, Effect, ofType, act } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, concatMap, map, mergeMap } from 'rxjs/operators';
 import { FSProductAssignmentConnector } from '../../connectors';
@@ -79,7 +79,16 @@ export class FSProductAssignmentEffects {
         )
         .pipe(
           map(() => {
-            return new fromActions.RemoveProductAssignmentSuccess();
+            const currentPayload = {
+              occUserId: payload.userId,
+              orgUnitId: payload.parentOrgUnit,
+            };
+            const actions = [];
+            actions.push(new fromActions.RemoveProductAssignmentSuccess());
+            actions.push(
+              new fromActions.LoadPotentialProductAssignments(currentPayload)
+            );
+            return actions;
           }),
           catchError(error =>
             of(
