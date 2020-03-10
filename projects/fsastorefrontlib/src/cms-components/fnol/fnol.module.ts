@@ -97,16 +97,16 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
-        UserRequestProgressBarFlex: {
+        FNOLProgressBarFlex: {
           component: FNOLProgressBarComponent,
         },
-        UserRequestSummaryFlex: {
+        FNOLSummaryFlex: {
           component: FNOLSummaryComponent,
         },
-        UserRequestNavigationFlex: {
+        FNOLNavigationFlex: {
           component: FNOLNavigationComponent,
         },
-        UserRequestConfirmationFlex: {
+        FNOLConfirmationFlex: {
           component: FNOLConfirmationComponent,
         },
       },
