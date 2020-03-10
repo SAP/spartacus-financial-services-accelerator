@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType, act } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { catchError, concatMap, map, mergeMap } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  map,
+  mergeMap,
+  switchMap,
+} from 'rxjs/operators';
 import { FSProductAssignmentConnector } from '../../connectors';
 import * as fromActions from '../actions';
 
@@ -78,17 +84,14 @@ export class FSProductAssignmentEffects {
           payload.productCode
         )
         .pipe(
-          map(() => {
-            const currentPayload = {
-              occUserId: payload.userId,
-              orgUnitId: payload.parentOrgUnit,
-            };
-            const actions = [];
-            actions.push(new fromActions.RemoveProductAssignmentSuccess());
-            actions.push(
-              new fromActions.LoadPotentialProductAssignments(currentPayload)
-            );
-            return actions;
+          switchMap(() => {
+            return [
+              new fromActions.RemoveProductAssignmentSuccess(),
+              new fromActions.LoadPotentialProductAssignments({
+                occUserId: payload.userId,
+                orgUnitId: payload.parentOrgUnit,
+              }),
+            ];
           }),
           catchError(error =>
             of(
