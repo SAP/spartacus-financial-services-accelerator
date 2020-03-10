@@ -60,22 +60,17 @@ export function reducer(
       let content = { ...action.payload };
       const productAssignmentContent = state.content;
       if (content && content.code) {
-        const assignments = [...productAssignmentContent.assignments, content];
-        productAssignmentContent.assignments = assignments;
+        productAssignmentContent.assignments = [
+          ...productAssignmentContent.assignments,
+          content,
+        ];
         const potentialAssignment = productAssignmentContent.potentialAssignments.find(
           productAssignment =>
             productAssignment.product.code === content.product.code
         );
-
-        const currentProduct = productAssignmentContent.potentialAssignments.indexOf(
-          potentialAssignment
+        productAssignmentContent.potentialAssignments = productAssignmentContent.potentialAssignments.filter(
+          elem => !potentialAssignment.product.code.includes(elem.product.code)
         );
-        if (currentProduct > -1) {
-          productAssignmentContent.potentialAssignments.splice(
-            currentProduct,
-            1
-          );
-        }
       }
       content = productAssignmentContent;
       return {
@@ -91,17 +86,9 @@ export function reducer(
           currentProductAssignment =>
             currentProductAssignment.code === content.productCode
         );
-        const currentProduct = productAssignmentContent.assignments.indexOf(
-          assignments
+        productAssignmentContent.assignments = productAssignmentContent.assignments.filter(
+          elem => !assignments.code.includes(elem.code)
         );
-        if (currentProduct > -1) {
-          productAssignmentContent.assignments.splice(currentProduct, 1);
-          productAssignmentContent.potentialAssignments = [
-            ...productAssignmentContent.potentialAssignments,
-            content,
-          ];
-        }
-        console.log(content);
       }
       content = productAssignmentContent;
       return {
@@ -109,13 +96,11 @@ export function reducer(
         content,
       };
     }
-
     case fromAction.REMOVE_PRODUCT_ASSIGNMENT_SUCCESS: {
       return {
         ...state,
       };
     }
-
     case fromAction.UPDATE_PRODUCT_ASSIGNMENT_SUCCESS: {
       let content = { ...action.payload };
       const productAssignmentContent = state.content;
