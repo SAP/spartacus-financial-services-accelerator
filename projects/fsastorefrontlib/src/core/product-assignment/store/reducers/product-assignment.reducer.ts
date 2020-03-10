@@ -87,10 +87,10 @@ export function reducer(
     case fromAction.REMOVE_PRODUCT_ASSIGNMENT: {
       let content = { ...action.payload };
       const productAssignmentContent = state.content;
-      if (content && content.code) {
+      if (content && content.productCode) {
         const assignments = productAssignmentContent.assignments.find(
           currentProductAssignment =>
-            currentProductAssignment.product.code === content.product.code
+            currentProductAssignment.code === content.productCode
         );
         const currentProduct = productAssignmentContent.assignments.indexOf(
           assignments
@@ -98,11 +98,6 @@ export function reducer(
         if (currentProduct > -1) {
           productAssignmentContent.assignments.splice(currentProduct, 1);
         }
-        // productAssignmentContent.assignments = assignments;
-        // const potentialAssignments = [
-        //   ...productAssignmentContent.potentialAssignments,
-        // ];
-        // potentialAssignments.push(content);
       }
       content = productAssignmentContent;
       return {
@@ -112,10 +107,8 @@ export function reducer(
     }
 
     case fromAction.REMOVE_PRODUCT_ASSIGNMENT_SUCCESS: {
-      // const content = state.content;
       return {
         ...state,
-        // content,
       };
     }
 
