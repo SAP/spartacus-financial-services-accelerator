@@ -1,3 +1,4 @@
+import { YFormData } from '@fsa/dynamicforms';
 import {
   Cart,
   Category,
@@ -7,7 +8,6 @@ import {
   User,
   UserSignUp,
 } from '@spartacus/core';
-import { YFormData } from '@fsa/dynamicforms';
 
 export interface ContactAgentData {
   email?: string;
@@ -130,4 +130,10 @@ export interface FSRequestType {
 
 export interface FSIncidentType {
   incidentCode?: string;
+}
+
+export interface ChangedPolicyData {
+  label?: string;
+  oldValue?: string;
+  newValue?: string;
 }
