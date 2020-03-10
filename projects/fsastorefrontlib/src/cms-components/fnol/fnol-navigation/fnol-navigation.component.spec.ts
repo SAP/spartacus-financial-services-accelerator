@@ -5,7 +5,7 @@ import {
   I18nTestingModule,
   RoutingService,
 } from '@spartacus/core';
-import { FSUserRequest } from '../../../occ/occ-models';
+import { Claim } from '../../../occ/occ-models';
 import { of } from 'rxjs';
 import { UserRequestService } from '../../../core/user-request/facade/user-request.service';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormDataService } from '@fsa/dynamicforms';
 import { ClaimService } from './../../../core/my-account/facade/claim.service';
 
-const claimRequest: FSUserRequest = {
+const claimRequest: Claim = {
   requestId: 'test123',
   configurationSteps: [
     {

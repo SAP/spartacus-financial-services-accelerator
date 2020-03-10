@@ -5,7 +5,7 @@ import { I18nTestingModule } from '@spartacus/core';
 import { Pipe, PipeTransform, Component, Input } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
-import { FSUserRequest } from '../../../occ/occ-models';
+import { Claim } from '../../../occ/occ-models';
 import { UserRequestService } from '../../../core/user-request/facade';
 import { ClaimService } from './../../../core/my-account/facade/claim.service';
 
@@ -25,7 +25,7 @@ class MockProgressBarComponent {
   @Input() steps;
 }
 
-const claimRequest: FSUserRequest = {
+const claimRequest: Claim = {
   requestId: 'test123',
   configurationSteps: [
     {

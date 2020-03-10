@@ -9,7 +9,7 @@ import {
   UserRequestService,
   UserRequestNavigationService,
 } from '../../../core/user-request/facade';
-import { FSUserRequest, FSStepData } from '../../../occ/occ-models';
+import { Claim, FSStepData } from '../../../occ/occ-models';
 import * as fromAction from '../../../core/user-request/store/actions';
 import { ClaimService } from '../../../core/my-account/facade/claim.service';
 
@@ -21,7 +21,7 @@ const completedStatus = 'COMPLETED';
 })
 export class FNOLNavigationComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
-  claimRequest$: Observable<FSUserRequest>;
+  claimRequest$: Observable<Claim>;
   configurationSteps: FSStepData[];
   activeStepData: FSStepData;
   activeStepIndex: number;

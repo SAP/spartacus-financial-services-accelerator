@@ -4,7 +4,7 @@ import createSpy = jasmine.createSpy;
 import { Observable, of } from 'rxjs';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
-import { FSUserRequest } from '../../../occ/occ-models';
+import { Claim } from '../../../occ/occ-models';
 import { FNOLSummaryComponent } from './fnol-summary.component';
 import { By } from '@angular/platform-browser';
 import { ClaimService } from './../../../core/my-account/facade/claim.service';
@@ -13,7 +13,7 @@ class MockRoutingService {
   go = createSpy();
 }
 
-const mockClaimRequest: Observable<FSUserRequest> = of({
+const mockClaimRequest: Observable<Claim> = of({
   claimNumber: 'testNumber',
   requestId: 'testRequestId',
   configurationSteps: [

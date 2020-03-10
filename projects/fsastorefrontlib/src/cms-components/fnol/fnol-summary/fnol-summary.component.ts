@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FSUserRequest } from '../../../occ/occ-models';
+import { Claim } from '../../../occ/occ-models';
 import { RoutingService } from '@spartacus/core';
 import { ClaimService } from './../../../core/my-account/facade/claim.service';
 
@@ -14,7 +14,7 @@ export class FNOLSummaryComponent implements OnInit {
     protected routingService: RoutingService
   ) {}
 
-  claimRequest$: Observable<FSUserRequest>;
+  claimRequest$: Observable<Claim>;
 
   ngOnInit() {
     this.claimRequest$ = this.claimService.getCurrentClaim();
