@@ -44,8 +44,8 @@ class MockActivatedRoute {
 }
 
 class MultiCartServiceStub {
-  loadCart() { }
-  createCart() { }
+  loadCart() {}
+  createCart() {}
 }
 
 describe('FSCartServiceTest', () => {
