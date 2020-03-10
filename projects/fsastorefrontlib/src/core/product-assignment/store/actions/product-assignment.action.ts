@@ -40,6 +40,11 @@ export class LoadProductAssignments implements Action {
   constructor(public payload: any) {}
 }
 
+export class LoadProductAssignmentsSuccess implements Action {
+  readonly type = LOAD_PRODUCT_ASSIGNMENTS_SUCCESS;
+  constructor(public payload: any) {}
+}
+
 export class LoadProductAssignmentsFail implements Action {
   readonly type = LOAD_PRODUCT_ASSIGNMENTS_FAIL;
   constructor(public payload: any) {}
@@ -72,11 +77,6 @@ export class RemoveProductAssignmentSuccess implements Action {
 
 export class RemoveProductAssignmentFail implements Action {
   readonly type = REMOVE_PRODUCT_ASSIGNMENT_FAIL;
-  constructor(public payload: any) {}
-}
-
-export class LoadProductAssignmentsSuccess implements Action {
-  readonly type = LOAD_PRODUCT_ASSIGNMENTS_SUCCESS;
   constructor(public payload: any) {}
 }
 
