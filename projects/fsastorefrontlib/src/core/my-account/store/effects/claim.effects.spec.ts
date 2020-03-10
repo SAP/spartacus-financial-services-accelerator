@@ -13,20 +13,28 @@ import * as fromUserRequestActions from '../../../user-request/store/actions';
 import { ClaimDataService } from '../../services/claim-data.service';
 import { ClaimConnector } from '../../connectors/claim.connector';
 
+const claimId1 = 'testClaim001';
+const claimId2 = 'testClaim002';
+const claimId3 = 'testClaim003';
+const requestId1 = 'testRequest001';
+const requestId2 = 'testRequest002';
+const requestId3 = 'testRequest003';
+const policyId1 = 'testInsurancePolicy001';
+
 const claim1 = {
-  claimNumber: 'testClaim001',
+  claimNumber: claimId1,
   claimStatus: 'OPEN',
-  requestId: 'testRequest001',
+  requestId: requestId1,
 };
 const claim2 = {
-  claimNumber: 'testClaim002',
+  claimNumber: claimId2,
   claimStatus: 'PROCESSING',
-  requestId: 'testRequest002',
+  requestId: requestId2,
 };
 const claim3 = {
-  claimNumber: 'testClaim003',
+  claimNumber: claimId3,
   claimStatus: 'OPEN',
-  requestId: 'testRequest003',
+  requestId: requestId3,
   locationOfLoss: {
     code: 'testCode',
   },
@@ -48,6 +56,9 @@ class MockClaimConnector {
   }
   updateClaim() {
     return of(claim3);
+  }
+  getClaim() {
+    return of(claim1);
   }
 }
 
@@ -115,11 +126,36 @@ describe('Claim Effects', () => {
     });
   });
 
+  it('should return claim', () => {
+    const action = new fromActions.LoadCurrentClaim({
+      userId: OCC_USER_ID_CURRENT,
+      claimId: claimId1,
+    });
+    const completion = new fromActions.LoadCurrentClaimSuccess(claim1);
+    actions$ = hot('-a', { a: action });
+    const expected = cold('-b', { b: completion });
+    expect(effects.loadCurrentClaim$).toBeObservable(expected);
+  });
+
+  it('should fail to return claim', () => {
+    spyOn(mockClaimConnector, 'getClaim').and.returnValue(throwError('Error'));
+    const action = new fromActions.LoadCurrentClaim({
+      userId: OCC_USER_ID_CURRENT,
+      claimId: claimId1,
+    });
+    const completion = new fromActions.LoadCurrentClaimFail(
+      JSON.stringify('Error')
+    );
+    actions$ = hot('-a', { a: action });
+    const expected = cold('-b', { b: completion });
+    expect(effects.loadCurrentClaim$).toBeObservable(expected);
+  });
+
   describe('removeClaim$', () => {
     it('should remove claim', () => {
       const action = new fromActions.DeleteClaim({
         userId: OCC_USER_ID_CURRENT,
-        claimId: 'testClaim002',
+        claimId: claimId2,
       });
       const completion = new fromActions.DeleteClaimSuccess();
       actions$ = hot('-a', { a: action });
@@ -127,13 +163,13 @@ describe('Claim Effects', () => {
       expect(effects.removeClaim$).toBeObservable(expected);
     });
 
-    it('should fail to remove claims', () => {
+    it('should fail to remove claim', () => {
       spyOn(mockClaimConnector, 'deleteClaim').and.returnValue(
         throwError('Error')
       );
       const action = new fromActions.DeleteClaim({
         userId: OCC_USER_ID_CURRENT,
-        claimId: 'testClaim001',
+        claimId: claimId1,
       });
       const completion = new fromActions.DeleteClaimFail(
         JSON.stringify('Error')
@@ -148,13 +184,13 @@ describe('Claim Effects', () => {
     it('should create claim', () => {
       const action = new fromActions.CreateClaim({
         userId: OCC_USER_ID_CURRENT,
-        requestId: 'testRequest003',
-        claimData: 'testInsurancePolicy001',
+        requestId: requestId3,
+        claimData: policyId1,
       });
       const loadUserRequestCompletion = new fromUserRequestActions.LoadUserRequestSuccess(
         {
           userId: OCC_USER_ID_CURRENT,
-          requestId: 'testRequest003',
+          requestId: requestId3,
         }
       );
       const createClaimCompletion = new fromActions.CreateClaimSuccess(claim3);
@@ -167,14 +203,14 @@ describe('Claim Effects', () => {
       expect(effects.createClaim$).toBeObservable(expected);
     });
 
-    it('should fail to create claims', () => {
+    it('should fail to create claim', () => {
       spyOn(mockClaimConnector, 'createClaim').and.returnValue(
         throwError('Error')
       );
       const action = new fromActions.CreateClaim({
         userId: OCC_USER_ID_CURRENT,
-        policyId: 'testInsurancePolicy001',
-        contractId: 'testInsurancePolicy001',
+        policyId: policyId1,
+        contractId: policyId1,
       });
       const completion = new fromActions.CreateClaimFail(
         JSON.stringify('Error')
@@ -189,7 +225,7 @@ describe('Claim Effects', () => {
     it('should update claim', () => {
       const action = new fromActions.UpdateClaim({
         userId: OCC_USER_ID_CURRENT,
-        requestId: 'testRequest001',
+        requestId: requestId1,
         claimData: {
           policeInformed: 'yes',
           witnesses: 'yes',
@@ -206,7 +242,7 @@ describe('Claim Effects', () => {
       mockClaimDataService.claimData = claim3;
       const action = new fromActions.UpdateClaim({
         userId: OCC_USER_ID_CURRENT,
-        requestId: 'testRequest003',
+        requestId: requestId3,
         claimData: {
           policeInformed: 'yes',
           witnesses: 'yes',
@@ -240,13 +276,13 @@ describe('Claim Effects', () => {
       expect(effects.updateClaim$).toBeObservable(expected);
     });
 
-    it('should fail to update claims', () => {
+    it('should fail to update claim', () => {
       spyOn(mockClaimConnector, 'updateClaim').and.returnValue(
         throwError('Error')
       );
       const action = new fromActions.UpdateClaim({
         userId: OCC_USER_ID_CURRENT,
-        requestId: 'testRequest003',
+        requestId: requestId3,
         claimData: {
           policeInformed: 'invalidData',
         },

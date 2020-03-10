@@ -1,18 +1,20 @@
 import { Injectable } from '@angular/core';
-import { filter } from 'rxjs/operators';
+import { filter, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ActionsSubject, Store } from '@ngrx/store';
 import * as fromReducer from '../store/reducers';
 import { FSUserRequest } from '../../../occ/occ-models';
 import * as fromAction from '../store/actions/index';
 import { FormDataService } from '@fsa/dynamicforms';
+import { AuthService } from '@spartacus/core';
 
 @Injectable()
 export class UserRequestService {
   constructor(
     protected actions$: ActionsSubject,
     protected store: Store<fromReducer.FSUserRequestState>,
-    protected formDataService: FormDataService
+    protected formDataService: FormDataService,
+    protected authService: AuthService
   ) {}
 
   getAction(actionName): Observable<any> {
@@ -34,7 +36,6 @@ export class UserRequestService {
     stepIndex: number,
     stepStatus: string
   ) {
-    console.log(userRequest);
     const stepData = Object.assign(
       {},
       userRequest.configurationSteps[stepIndex],
@@ -42,12 +43,19 @@ export class UserRequestService {
         status: stepStatus,
       }
     );
-    this.store.dispatch(
-      new fromAction.UpdateUserRequest({
-        userId: 'current',
-        requestId: userRequest.requestId,
-        stepData: stepData,
+
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.store.dispatch(
+          new fromAction.UpdateUserRequest({
+            userId: occUserId,
+            requestId: userRequest.requestId,
+            stepData: stepData,
+          })
+        );
       })
-    );
+      .unsubscribe();
   }
 }

@@ -59,11 +59,6 @@ class MockOccUserRequestAdapter {
 
 class MockActions {}
 
-class MockUserRequestDataService {
-  userId = OCC_USER_ID_CURRENT;
-  requestId = 'testRequest001';
-}
-
 describe('User Request Effects', () => {
   let actions$: Observable<fromActions.UserRequestActions>;
   let effects: fromEffects.UserRequestEffects;
