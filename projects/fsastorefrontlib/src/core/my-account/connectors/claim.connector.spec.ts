@@ -51,6 +51,10 @@ describe('ClaimConnector', () => {
     claimConnector.getClaims(user);
     expect(claimAdapter.getClaims).toHaveBeenCalledWith(user);
   });
+  it('should call adapter for getClaim', () => {
+    claimConnector.getClaim(user, claim);
+    expect(claimAdapter.getClaim).toHaveBeenCalledWith(user, claim);
+  });
   it('should call adapter for createClaim', () => {
     claimConnector.createClaim(user, policy, contract);
     expect(claimAdapter.createClaim).toHaveBeenCalledWith(
