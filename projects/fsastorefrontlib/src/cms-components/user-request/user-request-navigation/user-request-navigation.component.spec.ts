@@ -11,8 +11,6 @@ import { UserRequestService } from '../../../core/user-request/facade/user-reque
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
 import { ActivatedRoute } from '@angular/router';
-import { ClaimDataService } from '../../../core/my-account/services';
-import { ClaimService } from '../../../core/my-account/facade';
 import { FormDataService } from '@fsa/dynamicforms';
 import { UserRequestDataService } from '../../../core/user-request/services';
 
@@ -38,13 +36,15 @@ const mockActivatedRoute = {
   },
 };
 
-class MockClaimService {
-  getCurrentClaim() {}
-}
-
 export class MockUserRequestService {
   getUserRequest() {
     return of(mockRequest);
+  }
+
+  loadUserRequestData() {}
+
+  getAction() {
+    return of('');
   }
 }
 
@@ -58,12 +58,10 @@ describe('UserRequestNavigationComponent', () => {
   let component: UserRequestNavigationComponent;
   let fixture: ComponentFixture<UserRequestNavigationComponent>;
   let mockUserRequestService: MockUserRequestService;
-  let mockClaimService: MockClaimService;
   let mockUserRequestNavigationService: MockUserRequestNavigationService;
 
   beforeEach(async(() => {
     mockUserRequestService = new MockUserRequestService();
-    mockClaimService = new MockClaimService();
     mockUserRequestNavigationService = new MockUserRequestNavigationService();
     TestBed.configureTestingModule({
       imports: [I18nTestingModule, RouterTestingModule],
@@ -84,14 +82,6 @@ describe('UserRequestNavigationComponent', () => {
         {
           provide: FormDataService,
           useValue: FormDataService,
-        },
-        {
-          provide: ClaimService,
-          useValue: mockClaimService,
-        },
-        {
-          provide: ClaimDataService,
-          useValue: ClaimDataService,
         },
         {
           provide: UserRequestDataService,

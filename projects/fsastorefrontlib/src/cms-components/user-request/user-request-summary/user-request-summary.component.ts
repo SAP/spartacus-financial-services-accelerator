@@ -17,6 +17,7 @@ export class UserRequestSummaryComponent implements OnInit {
   userRequest$: Observable<FSUserRequest>;
 
   ngOnInit() {
+    this.userRequestService.loadUserRequestData();
     this.userRequest$ = this.userRequestService.getUserRequest();
   }
 

@@ -3,17 +3,15 @@ import { Observable } from 'rxjs/internal/Observable';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 
 @Component({
-  selector: 'fsa-change-coverage',
-  templateUrl: './change-coverage.component.html',
+  selector: 'fsa-change-process-navigation',
+  templateUrl: './change-process-navigation.component.html',
 })
-export class ChangeCoverageComponent implements OnInit {
+export class ChangeProcessNavigationComponent implements OnInit {
   constructor(protected changeRequestService: ChangeRequestService) {}
 
   changeRequest$: Observable<any>;
-  currentDate;
 
   ngOnInit() {
-    this.currentDate = new Date().toISOString().substr(0, 10);
     this.changeRequest$ = this.changeRequestService.getChangeRequest();
   }
 }

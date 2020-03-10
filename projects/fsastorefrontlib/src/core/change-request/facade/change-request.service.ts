@@ -1,18 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { AuthService } from '@spartacus/core';
+import { combineLatest } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
+import { filter, switchMap, take } from 'rxjs/operators';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
-import { AuthService } from '@spartacus/core';
-import { take, filter, tap, switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class ChangeRequestService {
+  requestId: string;
+
   constructor(
     protected store: Store<fromReducer.ChangeRequestState>,
     protected authService: AuthService
-  ) {}
+  ) {
+    combineLatest([
+      this.store.select(fromSelector.getChangeRequest),
+      this.authService.getUserToken(),
+    ])
+      .subscribe(([changeRequest, userToken]) => {
+        this.requestId = changeRequest.requestId;
+        if (
+          !this.isCreated(changeRequest) &&
+          this.isLoggedIn(userToken.userId)
+        ) {
+          this.loadChangeRequest();
+        }
+      })
+      .unsubscribe();
+  }
 
   createChangeRequest(
     policyId: string,
@@ -43,5 +61,28 @@ export class ChangeRequestService {
         return this.store.select(fromSelector.getChangeRequest);
       })
     );
+  }
+
+  loadChangeRequest() {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.store.dispatch(
+          new fromAction.LoadChangeRequest({
+            userId: occUserId,
+            requestId: this.requestId,
+          })
+        );
+      })
+      .unsubscribe();
+  }
+
+  private isCreated(changeRequest: any): boolean {
+    return changeRequest && changeRequest.configurationSteps !== undefined;
+  }
+
+  private isLoggedIn(userId: string): boolean {
+    return typeof userId !== undefined;
   }
 }

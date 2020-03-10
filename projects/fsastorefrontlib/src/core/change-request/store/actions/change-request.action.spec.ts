@@ -1,3 +1,4 @@
+import { OCC_CART_ID_CURRENT } from '@spartacus/core';
 import * as fromAction from './change-request.action';
 
 describe('Change Request Actions', () => {
@@ -39,6 +40,49 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.CREATE_CHANGE_REQUEST_SUCCESS,
         payload: changeRequest,
+      });
+    });
+  });
+
+  describe('LoadChangeRequest Action', () => {
+    const changeRequest = {
+      requestId: 'requestId',
+      userId: OCC_CART_ID_CURRENT,
+    };
+    it('should create the action', () => {
+      const action = new fromAction.LoadChangeRequest(changeRequest);
+      expect({ ...action }).toEqual({
+        type: fromAction.LOAD_CHANGE_REQUEST,
+        payload: changeRequest,
+      });
+    });
+  });
+
+  describe('LoadChangeRequestSuccess Action', () => {
+    const changeRequest = {
+      requestId: 'requestId',
+      insurancePolicy: {
+        categoryData: {
+          code: 'test_category',
+        },
+      },
+    };
+    it('should create the action', () => {
+      const action = new fromAction.LoadChangeRequestSuccess(changeRequest);
+      expect({ ...action }).toEqual({
+        type: fromAction.LOAD_CHANGE_REQUEST_SUCCESS,
+        payload: changeRequest,
+      });
+    });
+  });
+
+  describe('LoadChangeRequestFail Action', () => {
+    it('should create the action', () => {
+      const error = 'error';
+      const action = new fromAction.LoadChangeRequestFail(error);
+      expect({ ...action }).toEqual({
+        type: fromAction.LOAD_CHANGE_REQUEST_FAIL,
+        payload: error,
       });
     });
   });

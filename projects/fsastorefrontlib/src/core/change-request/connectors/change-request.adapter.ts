@@ -2,6 +2,14 @@ import { Observable } from 'rxjs';
 
 export abstract class ChangeRequestAdapter {
   /**
+   * Abstract method used to get change request
+   *
+   * @param userId The user id
+   * @param requestId The user request id
+   */
+  abstract getChangeRequest(userId: string, requestId: string): Observable<any>;
+
+  /**
    * Abstract method used to create change request for insurance policy version
    *
    * @param policyId The policy id

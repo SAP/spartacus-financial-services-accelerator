@@ -1,4 +1,8 @@
-import { HttpClientModule, HttpRequest } from '@angular/common/http';
+import {
+  HttpClientModule,
+  HttpErrorResponse,
+  HttpRequest,
+} from '@angular/common/http';
 import {
   HttpClientTestingModule,
   HttpTestingController,
@@ -11,6 +15,7 @@ const userId = 'userId';
 const policyId = 'policyId';
 const changeRequestType = 'requestType';
 const contractId = 'contractId';
+const requestId = 'requestId';
 
 const usersEndpoint = '/users';
 const changeRequestsEndpoint = '/fsChangeRequests';
@@ -68,5 +73,42 @@ describe('OccChangeRequestAdapter', () => {
         );
       }, `POST method and url`);
     }));
+  });
+
+  it('load change request', async(() => {
+    adapter.getChangeRequest(userId, requestId).subscribe();
+    const mockReq = httpMock.expectOne((req: HttpRequest<any>) => {
+      return (
+        req.url ===
+          '/users' + `/${userId}` + '/fsChangeRequests' + `/${requestId}` &&
+        req.method === 'GET'
+      );
+    });
+    expect(mockReq.cancelled).toBeFalsy();
+    expect(mockReq.request.responseType).toEqual('json');
+  }));
+
+  it('should throw an error when loading change request', () => {
+    let response: any;
+    let errResponse: any;
+    const errorResponse = new HttpErrorResponse({
+      error: '400 error',
+      status: 400,
+      statusText: 'Bad Request',
+    });
+    adapter
+      .getChangeRequest(userId, requestId)
+      .subscribe(res => (response = res), err => (errResponse = err));
+    httpMock
+      .expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url ===
+            '/users' + `/${userId}` + '/fsChangeRequests' + `/${requestId}` &&
+          req.method === 'GET'
+        );
+      })
+      .flush(errorResponse);
+    expect(errorResponse.status).toEqual(400);
+    expect(errorResponse.name).toEqual('HttpErrorResponse');
   });
 });

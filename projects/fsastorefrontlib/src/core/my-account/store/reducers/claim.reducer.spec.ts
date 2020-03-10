@@ -58,14 +58,5 @@ describe('Claim Reducer', () => {
         expect(state.refresh).toEqual(false);
       });
     });
-
-    describe('SUBMIT_CLAIM_SUCCESS', () => {
-      it('should update claim', () => {
-        const action = new fromAction.SubmitClaimSuccess(mockedClaim);
-        const state = fromReducer.reducer(initialState, action);
-        expect(state.content).toEqual(mockedClaim);
-        expect(state.refresh).toEqual(true);
-      });
-    });
   });
 });

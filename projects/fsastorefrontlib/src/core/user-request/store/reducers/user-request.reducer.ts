@@ -3,22 +3,38 @@ import { UserRequestState } from '../user-request-state';
 
 export const initialState: UserRequestState = {
   content: {},
-  refresh: false,
+  loaded: false,
 };
 
 export function reducer(
   state = initialState,
-  action: fromAction.UserRequestAction
+  action: fromAction.UserRequestActions
 ): UserRequestState {
   switch (action.type) {
+    case fromAction.SUBMIT_USER_REQUEST_SUCCESS: {
+      const content = { ...action.payload };
+      return {
+        ...state,
+        content,
+        loaded: false,
+      };
+    }
+    case fromAction.LOAD_USER_REQUEST: {
+      return {
+        ...state,
+        loaded: false,
+      };
+    }
     case fromAction.LOAD_USER_REQUEST_SUCCESS: {
       const content = { ...action.payload };
       return {
         ...state,
         content,
-        refresh: false,
+        loaded: true,
       };
     }
   }
   return state;
 }
+export const getUserRequest = (state: UserRequestState) => state.content;
+export const getLoaded = (state: UserRequestState) => state.loaded;

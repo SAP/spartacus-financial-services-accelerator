@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { CartModification } from '@spartacus/core';
 import { Type } from '@angular/core';
 import { FSCartAdapter } from './fs-cart.adapter';
 import { FsCartConnector } from './fs-cart.connector';

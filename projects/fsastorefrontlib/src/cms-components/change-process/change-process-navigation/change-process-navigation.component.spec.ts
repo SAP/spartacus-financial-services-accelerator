@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule } from '@spartacus/core';
 import { of } from 'rxjs';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
-import { ChangeCoverageComponent } from './change-coverage.component';
+import { ChangeProcessNavigationComponent } from './change-process-navigation.component';
 
 const mockChangeRequest = {
   requestId: 'testRequestId',
@@ -11,18 +11,6 @@ const mockChangeRequest = {
     categoryCode: {
       code: 'testCategory',
     },
-    optionalProducts: [
-      {
-        coverageProduct: {
-          cartDisplayName: 'product_one',
-        },
-      },
-      {
-        coverageProduct: {
-          cartDisplayName: 'product_two',
-        },
-      },
-    ],
   },
 };
 class MockChangeRequestService {
@@ -30,9 +18,10 @@ class MockChangeRequestService {
     return of(mockChangeRequest);
   }
 }
-describe('ChangeCoverageComponent', () => {
-  let component: ChangeCoverageComponent;
-  let fixture: ComponentFixture<ChangeCoverageComponent>;
+
+describe('ChangeProcessNavigationComponent', () => {
+  let component: ChangeProcessNavigationComponent;
+  let fixture: ComponentFixture<ChangeProcessNavigationComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -40,12 +29,12 @@ describe('ChangeCoverageComponent', () => {
       providers: [
         { provide: ChangeRequestService, useClass: MockChangeRequestService },
       ],
-      declarations: [ChangeCoverageComponent],
+      declarations: [ChangeProcessNavigationComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChangeCoverageComponent);
+    fixture = TestBed.createComponent(ChangeProcessNavigationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
