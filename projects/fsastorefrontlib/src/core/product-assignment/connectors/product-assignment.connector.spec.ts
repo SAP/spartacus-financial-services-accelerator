@@ -19,6 +19,19 @@ class MockProductAssignmentAdapter implements FSProductAssignmentAdapter {
           sort
       )
   );
+
+  createProductAssignment = createSpy().and.callFake(
+    (userId, orgUnitId, productCode) => of(userId + orgUnitId + productCode)
+  );
+
+  removeProductAssignment = createSpy().and.callFake(
+    (userId, orgUnitId, productCode) => of(userId + orgUnitId + productCode)
+  );
+
+  loadCustomerProfile = createSpy().and.callFake((userId, orgCustomerId) =>
+    of(userId + orgCustomerId)
+  );
+
   changeActiveStatus = createSpy().and.callFake(
     (userId, orgUnitId, productAssignmentCode, active) =>
       of(

@@ -18,6 +18,22 @@ const mockProductAssignments = {
       },
     },
   ],
+  potentialAssignments: [
+    {
+      active: true,
+      code: 'testOne',
+      product: {
+        code: 'testProduct',
+      },
+    },
+    {
+      active: false,
+      code: 'testTwo',
+      product: {
+        code: 'testProduct',
+      },
+    },
+  ],
 };
 
 const { initialState } = fromReducer;
