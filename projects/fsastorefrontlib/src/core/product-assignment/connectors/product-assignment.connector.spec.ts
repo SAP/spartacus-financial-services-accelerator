@@ -21,15 +21,17 @@ class MockProductAssignmentAdapter implements FSProductAssignmentAdapter {
   );
 
   createProductAssignment = createSpy().and.callFake(
-    (userId, orgUnitId, productCode) => of(userId + orgUnitId + productCode)
+    (userId, orgUnitId, productCode) =>
+      of('createProductAssignment' + userId + orgUnitId + productCode)
   );
 
   removeProductAssignment = createSpy().and.callFake(
-    (userId, orgUnitId, productCode) => of(userId + orgUnitId + productCode)
+    (userId, orgUnitId, productCode) =>
+      of('removeProductAssignment', userId + orgUnitId + productCode)
   );
 
   loadCustomerProfile = createSpy().and.callFake((userId, orgCustomerId) =>
-    of(userId + orgCustomerId)
+    of('loadCustomerProfile', userId + orgCustomerId)
   );
 
   changeActiveStatus = createSpy().and.callFake(
@@ -87,6 +89,39 @@ describe('FSProductAssignmentConnector', () => {
       5,
       1,
       undefined
+    );
+  });
+
+  it('should call adapter to createProductAssignment', () => {
+    productAssignmentConnector.createProductAssignment(
+      OCC_CART_ID_CURRENT,
+      'SAP',
+      '012345'
+    );
+    expect(
+      productAssignmentAdapter.createProductAssignment
+    ).toHaveBeenCalledWith(OCC_CART_ID_CURRENT, 'SAP', '012345');
+  });
+
+  it('should call adapter to removeProductAssignment', () => {
+    productAssignmentConnector.removeProductAssignment(
+      OCC_CART_ID_CURRENT,
+      'SAP',
+      '012345'
+    );
+    expect(
+      productAssignmentAdapter.removeProductAssignment
+    ).toHaveBeenCalledWith(OCC_CART_ID_CURRENT, 'SAP', '012345');
+  });
+
+  it('should call adapter to loadCustomerProfile', () => {
+    productAssignmentConnector.loadCustomerProfile(
+      OCC_CART_ID_CURRENT,
+      'Corona'
+    );
+    expect(productAssignmentAdapter.loadCustomerProfile).toHaveBeenCalledWith(
+      OCC_CART_ID_CURRENT,
+      'Corona'
     );
   });
 
