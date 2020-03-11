@@ -35,6 +35,7 @@ export function reducer(
         loaded: true,
       };
     }
+
     case fromAction.LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS_SUCCESS: {
       let content = { ...action.payload };
       const potentialProductAssignmentContent = state.content;
@@ -56,6 +57,7 @@ export function reducer(
         loaded: true,
       };
     }
+
     case fromAction.CREATE_PRODUCT_ASSIGNMENT_SUCCESS: {
       let content = { ...action.payload };
       const productAssignmentContent = state.content;
@@ -78,6 +80,7 @@ export function reducer(
         content,
       };
     }
+
     case fromAction.REMOVE_PRODUCT_ASSIGNMENT: {
       let content = { ...action.payload };
       const productAssignmentContent = state.content;
@@ -96,11 +99,13 @@ export function reducer(
         content,
       };
     }
+
     case fromAction.REMOVE_PRODUCT_ASSIGNMENT_SUCCESS: {
       return {
         ...state,
       };
     }
+
     case fromAction.UPDATE_PRODUCT_ASSIGNMENT_SUCCESS: {
       let content = { ...action.payload };
       const productAssignmentContent = state.content;

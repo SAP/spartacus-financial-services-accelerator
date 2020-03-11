@@ -21,19 +21,33 @@ const mockProductAssignments = {
   potentialAssignments: [
     {
       active: true,
-      code: 'testOne',
+      code: 'ewqeqw',
       product: {
         code: 'testProduct',
       },
     },
     {
       active: false,
-      code: 'testTwo',
+      code: 'test-product',
       product: {
-        code: 'testProduct',
+        code: 'test-product',
       },
     },
   ],
+};
+
+const removeProductAssignment = {
+  orgUnitId: 'SomeCompany',
+  productCode: '0011221',
+  parentOrgUnit: 'SAPParentCompany',
+};
+
+const createdProductAssignment = {
+  code: '85565',
+  product: {
+    code: 'test-product',
+    name: 'CORONA',
+  },
 };
 
 const { initialState } = fromReducer;
@@ -48,6 +62,17 @@ describe('Product Assignment Reducer', () => {
     });
   });
 
+  describe('LOAD_PRODUCT_ASSIGNMENTS', () => {
+    it('should load product assignments', () => {
+      const action = new fromAction.LoadProductAssignments(
+        mockProductAssignments
+      );
+      const state = fromReducer.reducer(initialState, action);
+      expect(state.content).toEqual(mockProductAssignments);
+      expect(state.loaded).toEqual(true);
+    });
+  });
+
   describe('LOAD_PRODUCT_ASSIGNMENTS_SUCCESS', () => {
     it('should load product assignments', () => {
       const action = new fromAction.LoadProductAssignmentsSuccess(
@@ -56,6 +81,56 @@ describe('Product Assignment Reducer', () => {
       const state = fromReducer.reducer(initialState, action);
       expect(state.content).toEqual(mockProductAssignments);
       expect(state.loaded).toEqual(true);
+    });
+  });
+
+  describe('LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS_SUCCESS', () => {
+    it('should load potential product assignments', () => {
+      const action = new fromAction.LoadPotentialProductAssignmentsSuccess(
+        mockProductAssignments
+      );
+      const state = fromReducer.reducer(initialState, action);
+      expect(state.content).toEqual(mockProductAssignments);
+      expect(state.loaded).toEqual(true);
+    });
+  });
+
+  describe('CREATE_PRODUCT_ASSIGNMENT_SUCCESS', () => {
+    it('should create product assignment', () => {
+      const loadProductAssignments = new fromAction.LoadProductAssignmentsSuccess(
+        mockProductAssignments
+      );
+      const action = new fromAction.CreateProductAssignmentSuccess(
+        createdProductAssignment
+      );
+      const state = fromReducer.reducer(initialState, loadProductAssignments);
+      const changedState = fromReducer.reducer(state, action);
+
+      expect(changedState.content.potentialAssignments.length).toEqual(1);
+      expect(changedState.content.assignments.length).toEqual(3);
+    });
+  });
+
+  describe('REMOVE_PRODUCT_ASSIGNMENT', () => {
+    it('should remove product assignments', () => {
+      const loadProductAssignments = new fromAction.LoadProductAssignmentsSuccess(
+        mockProductAssignments
+      );
+      const action = new fromAction.RemoveProductAssignment(
+        removeProductAssignment
+      );
+      const state = fromReducer.reducer(initialState, loadProductAssignments);
+      const changedState = fromReducer.reducer(state, action);
+      expect(changedState.content.potentialAssignments.length).toEqual(2);
+      expect(changedState.content.assignments.length).toEqual(2);
+    });
+  });
+
+  describe('REMOVE_PRODUCT_ASSIGNMENT_SUCCESS', () => {
+    it('should remove product assignments sussesfully', () => {
+      const action = new fromAction.RemoveProductAssignmentSuccess();
+      const state = fromReducer.reducer(initialState, action);
+      expect(state.content).toEqual(mockProductAssignments);
     });
   });
 

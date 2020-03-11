@@ -85,13 +85,13 @@ export class LoadPotentialProductAssignments implements Action {
   constructor(public payload: any) {}
 }
 
-export class LoadPotentialProductAssignmentsFail implements Action {
-  readonly type = LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS_FAIL;
+export class LoadPotentialProductAssignmentsSuccess implements Action {
+  readonly type = LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS_SUCCESS;
   constructor(public payload: any) {}
 }
 
-export class LoadPotentialProductAssignmentsSuccess implements Action {
-  readonly type = LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS_SUCCESS;
+export class LoadPotentialProductAssignmentsFail implements Action {
+  readonly type = LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS_FAIL;
   constructor(public payload: any) {}
 }
 
