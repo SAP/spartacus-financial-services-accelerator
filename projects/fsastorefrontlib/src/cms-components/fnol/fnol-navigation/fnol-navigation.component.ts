@@ -102,9 +102,10 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
     if (this.activeStepData.yformConfigurator) {
       formData.id = this.activeStepData.yformConfigurator.id;
     }
+
     this.formDataService.submit(formData);
     if (this.activeStepIndex + 1 === this.configurationSteps.length) {
-      this.userRequestService.updateUserRequestStep(
+      this.claimService.updateClaim(
         claimData,
         this.activeStepIndex,
         completedStatus
@@ -116,7 +117,7 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
         .pipe(
           switchMap(submittedFormData => {
             if (submittedFormData) {
-              this.userRequestService.updateUserRequestStep(
+              this.claimService.updateClaim(
                 claimData,
                 this.activeStepIndex,
                 completedStatus

@@ -90,12 +90,19 @@ export class ClaimEffects {
     ofType(fromActions.UPDATE_CLAIM),
     map((action: fromActions.UpdateClaim) => action.payload),
     mergeMap(payload => {
+
       let claimID = this.claimServiceData.claimData.claimNumber;
       let claimDataWithLocation = null;
-      if (this.claimServiceData.claimData.locationOfLoss !== undefined) {
-        claimDataWithLocation = Object.assign(payload.claimData, {
-          locationOfLoss: this.claimServiceData.claimData.locationOfLoss.code,
-        });
+      let updateClaimData = null;
+
+      if (payload.stepData.yformConfigurator) {
+        updateClaimData = payload.stepData.yformConfigurator.content;
+
+        if (this.claimServiceData.claimData.locationOfLoss !== undefined) {
+          claimDataWithLocation = Object.assign(updateClaimData, {
+            locationOfLoss: this.claimServiceData.claimData.locationOfLoss.code,
+          });
+        }
       }
       if (claimID === undefined && this.claimServiceData.claims !== undefined) {
         // @ts-ignore
@@ -104,17 +111,21 @@ export class ClaimEffects {
         ).claimNumber;
       }
 
+
       return this.claimConnector
         .updateClaim(
           payload.userId,
           claimID,
           claimDataWithLocation !== null
             ? claimDataWithLocation
-            : payload.claimData
+            : updateClaimData
         )
         .pipe(
-          map(claim => {
-            return new fromActions.UpdateClaimSuccess(claim);
+          mergeMap(claim => {
+            return [
+              new fromActions.UpdateClaimSuccess(claim),
+              new fromUserRequestActions.UpdateUserRequest({ userId: payload.userId, requestId: claim.requestId, stepData: payload.stepData })
+            ];
           }),
           catchError(error =>
             of(new fromActions.UpdateClaimFail(JSON.stringify(error)))
@@ -127,5 +138,5 @@ export class ClaimEffects {
     private actions$: Actions,
     private claimConnector: ClaimConnector,
     private claimServiceData: ClaimDataService
-  ) {}
+  ) { }
 }

@@ -31,31 +31,4 @@ export class UserRequestService {
     });
   }
 
-  updateUserRequestStep(
-    userRequest: FSUserRequest,
-    stepIndex: number,
-    stepStatus: string
-  ) {
-    const stepData = Object.assign(
-      {},
-      userRequest.configurationSteps[stepIndex],
-      {
-        status: stepStatus,
-      }
-    );
-
-    this.authService
-      .getOccUserId()
-      .pipe(take(1))
-      .subscribe(occUserId => {
-        this.store.dispatch(
-          new fromAction.UpdateUserRequest({
-            userId: occUserId,
-            requestId: userRequest.requestId,
-            stepData: stepData,
-          })
-        );
-      })
-      .unsubscribe();
-  }
 }

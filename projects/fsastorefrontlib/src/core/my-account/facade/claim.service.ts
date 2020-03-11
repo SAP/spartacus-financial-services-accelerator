@@ -1,3 +1,4 @@
+import { Claim } from './../../../occ/occ-models/occ.models';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
@@ -132,6 +133,34 @@ export class ClaimService {
           new fromAction.LoadCurrentClaim({
             userId: occUserId,
             claimId: claimNumber,
+          })
+        );
+      })
+      .unsubscribe();
+  }
+
+  updateClaim(
+    claim: Claim,
+    stepIndex: number,
+    stepStatus: string
+  ) {
+    const stepData = Object.assign(
+      {},
+      claim.configurationSteps[stepIndex],
+      {
+        status: stepStatus,
+      }
+    );
+
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.store.dispatch(
+          new fromAction.UpdateClaim({
+            userId: occUserId,
+            claimData: claim,
+            stepData: stepData
           })
         );
       })

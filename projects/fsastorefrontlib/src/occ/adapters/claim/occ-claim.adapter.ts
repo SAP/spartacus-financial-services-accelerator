@@ -14,7 +14,7 @@ export class OccClaimAdapter implements ClaimAdapter {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService
-  ) {}
+  ) { }
 
   protected getClaimsEndpoint(userId: string) {
     const claimsEndpoint = '/users/' + userId + '/claims';
@@ -92,23 +92,28 @@ export class OccClaimAdapter implements ClaimAdapter {
 
   protected createClaimBody(claimData: any, claimBody: Claim, claimId: string) {
     const claim = JSON.parse(claimData);
-    const location: FSLocationOfLoss = {
-      code: claimData.locationOfLoss,
-      city: claim.city,
-      address: claim.address,
-      countryCode: claim.country,
-      postcode: claim.postcode,
-      additionalDetails: claim.description,
-    };
-    claimBody = {
-      dateOfLoss: claim.whenHappened,
-      timeOfLoss: claim.whatTime,
-      causeOfLoss: claim.howAccidentOccured,
-      incidentType: { incidentCode: claim.whatHappened },
-      locationOfLoss: location.countryCode !== undefined ? location : null,
-      claimNumber: claimId,
-      requestId: claim.requestId,
-    };
+    let location: FSLocationOfLoss;
+    if (claim) {
+      if (claimData.locationOfLoss) {
+        location = {
+          code: claimData.locationOfLoss,
+          city: claim.city,
+          address: claim.address,
+          countryCode: claim.country,
+          postcode: claim.postcode,
+          additionalDetails: claim.description,
+        };
+      }
+      claimBody = {
+        dateOfLoss: claim.whenHappened,
+        timeOfLoss: claim.whatTime,
+        causeOfLoss: claim.howAccidentOccured,
+        incidentType: { incidentCode: claim.whatHappened },
+        locationOfLoss: location && location.countryCode !== undefined ? location : null,
+        claimNumber: claimId,
+        requestId: claim.requestId,
+      };
+    }
     return claimBody;
   }
 }
