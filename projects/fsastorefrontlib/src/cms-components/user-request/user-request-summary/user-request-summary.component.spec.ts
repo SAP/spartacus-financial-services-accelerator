@@ -55,6 +55,7 @@ class MockUserRequestService {
   getUserRequest() {
     return mockUserRequest;
   }
+  loadUserRequestData() {}
 }
 
 describe('UserRequestSummaryComponent', () => {

@@ -5,6 +5,4 @@ import { ProductListComponent } from '@spartacus/storefront';
   selector: 'fsa-product-list',
   templateUrl: './product-list.component.html',
 })
-export class FSProductListComponent extends ProductListComponent {
-  ngOnInit() {}
-}
+export class FSProductListComponent extends ProductListComponent {}

@@ -21,6 +21,8 @@ export function reducer(
         loaded: false,
       };
     }
+
+    case fromAction.LOAD_CHANGE_REQUEST_SUCCESS:
     case fromAction.CREATE_CHANGE_REQUEST_SUCCESS: {
       const content = { ...action.payload };
       return {

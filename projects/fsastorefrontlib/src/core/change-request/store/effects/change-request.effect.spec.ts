@@ -1,26 +1,29 @@
-import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
+import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
+import { ChangeRequestConnector } from '../../connectors';
 import * as fromActions from '../actions';
-import * as fromEffects from './change-request.effect';
 import * as fromUserReducers from './../../store/reducers/index';
-import { ChangeRequestAdapter } from '../../connectors';
+import * as fromEffects from './change-request.effect';
 
-const changeRequest = {
-  requestID: 'REQ0001',
-};
-
+const requestID = 'REQ0001';
 const policyId = 'policyId';
 const contractId = 'contractId';
 const changeRequestType = 'requestType';
+const changeRequest = {
+  requestID: requestID,
+};
 
-class MockOccChangeRequestAdapter {
+class MockChangeRequestConnector {
   createChangeRequestForPolicy() {
+    return of(changeRequest);
+  }
+  getChangeRequest() {
     return of(changeRequest);
   }
 }
@@ -28,10 +31,10 @@ class MockOccChangeRequestAdapter {
 describe('Change Request Effects', () => {
   let actions$: Observable<fromActions.ChangeRequestAction>;
   let effects: fromEffects.ChangeRequestEffects;
-  let mockOccChangeRequestAdapter: MockOccChangeRequestAdapter;
+  let mockChangeRequestConnector: MockChangeRequestConnector;
 
   beforeEach(() => {
-    mockOccChangeRequestAdapter = new MockOccChangeRequestAdapter();
+    mockChangeRequestConnector = new MockChangeRequestConnector();
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
@@ -43,8 +46,8 @@ describe('Change Request Effects', () => {
       ],
       providers: [
         {
-          provide: ChangeRequestAdapter,
-          useValue: mockOccChangeRequestAdapter,
+          provide: ChangeRequestConnector,
+          useValue: mockChangeRequestConnector,
         },
         fromEffects.ChangeRequestEffects,
         provideMockActions(() => actions$),
@@ -73,7 +76,7 @@ describe('Change Request Effects', () => {
 
   it('should fail to create change request', () => {
     spyOn(
-      mockOccChangeRequestAdapter,
+      mockChangeRequestConnector,
       'createChangeRequestForPolicy'
     ).and.returnValue(throwError('Error'));
     const action = new fromActions.CreateChangeRequest({
@@ -88,5 +91,36 @@ describe('Change Request Effects', () => {
     actions$ = hot('-a', { a: action });
     const expected = cold('-b', { b: completion });
     expect(effects.createChangeRequest$).toBeObservable(expected);
+  });
+
+  describe('loadChangeRequest$', () => {
+    it('should load change request', () => {
+      const action = new fromActions.LoadChangeRequest({
+        userId: OCC_USER_ID_CURRENT,
+        requestId: requestID,
+      });
+      const completion = new fromActions.LoadChangeRequestSuccess(
+        changeRequest
+      );
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.loadChangeRequest$).toBeObservable(expected);
+    });
+  });
+
+  it('should fail to load change request', () => {
+    spyOn(mockChangeRequestConnector, 'getChangeRequest').and.returnValue(
+      throwError('Error')
+    );
+    const action = new fromActions.LoadChangeRequest({
+      userId: OCC_USER_ID_CURRENT,
+      requestId: requestID,
+    });
+    const completion = new fromActions.LoadChangeRequestFail(
+      JSON.stringify('Error')
+    );
+    actions$ = hot('-a', { a: action });
+    const expected = cold('-b', { b: completion });
+    expect(effects.loadChangeRequest$).toBeObservable(expected);
   });
 });

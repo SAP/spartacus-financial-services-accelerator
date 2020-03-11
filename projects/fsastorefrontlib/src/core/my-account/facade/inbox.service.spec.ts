@@ -15,13 +15,13 @@ const messageUid = '00001';
 describe('InboxServiceTest', () => {
   let service: InboxService;
   let inboxData: InboxDataServiceStub;
-  let inboxAdapter: MockInboxAdapter;
+  let inboxConnector: MockInboxConnector;
 
   class InboxDataServiceStub {
     userId = userId;
   }
 
-  class MockInboxAdapter {
+  class MockInboxConnector {
     getSiteMessagesForUserAndGroup() {
       return of({
         messages: [],
@@ -40,14 +40,14 @@ describe('InboxServiceTest', () => {
   }
 
   beforeEach(() => {
-    inboxAdapter = new MockInboxAdapter();
+    inboxConnector = new MockInboxConnector();
     TestBed.configureTestingModule({
       imports: [],
       providers: [
         InboxService,
         reducerProvider,
         { provide: InboxDataService, useClass: InboxDataServiceStub },
-        { provide: InboxConnector, useValue: inboxAdapter },
+        { provide: InboxConnector, useValue: inboxConnector },
       ],
     });
 

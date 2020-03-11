@@ -20,4 +20,8 @@ export class UserRequestConnector {
   ): Observable<any> {
     return this.adapter.updateUserRequest(userId, requestId, stepData);
   }
+
+  submitUserRequest(userId: string, requestId: string): Observable<any> {
+    return this.adapter.submitUserRequest(userId, requestId);
+  }
 }

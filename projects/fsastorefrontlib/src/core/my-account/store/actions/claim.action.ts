@@ -16,10 +16,6 @@ export const UPDATE_CLAIM = '[Claim] Update Claim';
 export const UPDATE_CLAIM_FAIL = '[Claim] Update Claim Fail';
 export const UPDATE_CLAIM_SUCCESS = '[Claim] Update Claim Success';
 
-export const SUBMIT_CLAIM = '[Claim] Submit Claim';
-export const SUBMIT_CLAIM_FAIL = '[Claim] Submit Claim Fail';
-export const SUBMIT_CLAIM_SUCCESS = '[Claim] Submit Claim Success';
-
 export class DeleteClaim implements Action {
   readonly type = DELETE_CLAIM;
   constructor(public payload: any) {}
@@ -79,20 +75,6 @@ export class UpdateClaimSuccess implements Action {
   readonly type = UPDATE_CLAIM_SUCCESS;
   constructor(public payload: any) {}
 }
-export class SubmitClaim implements Action {
-  readonly type = SUBMIT_CLAIM;
-  constructor(public payload: any) {}
-}
-
-export class SubmitClaimFail implements Action {
-  readonly type = SUBMIT_CLAIM_FAIL;
-  constructor(public payload: any) {}
-}
-
-export class SubmitClaimSuccess implements Action {
-  readonly type = SUBMIT_CLAIM_SUCCESS;
-  constructor(public payload: any) {}
-}
 
 export type ClaimAction =
   | DeleteClaim
@@ -106,7 +88,4 @@ export type ClaimAction =
   | CreateClaimFail
   | UpdateClaim
   | UpdateClaimSuccess
-  | UpdateClaimFail
-  | SubmitClaim
-  | SubmitClaimSuccess
-  | SubmitClaimFail;
+  | UpdateClaimFail;

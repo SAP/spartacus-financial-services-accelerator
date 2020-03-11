@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { Store } from '@ngrx/store';
+import { ActionsSubject, Store } from '@ngrx/store';
 import * as fromReducer from '../store/reducers';
 import { FSUserRequest } from '../../../occ/occ-models';
-import { UserRequestSelector } from '../store';
+import { UserRequestSelector } from '../store/selectors';
 import * as fromAction from '../store/actions/index';
 import { UserRequestDataService } from './../services/user-request-data.service';
 import { FormDataService } from '@fsa/dynamicforms';
@@ -12,12 +12,17 @@ import { FormDataService } from '@fsa/dynamicforms';
 @Injectable()
 export class UserRequestService {
   constructor(
+    protected actions$: ActionsSubject,
     protected userRequestData: UserRequestDataService,
     protected store: Store<fromReducer.FSUserRequestState>,
     protected formDataService: FormDataService
   ) {}
 
-  getUserRequest(): Observable<FSUserRequest> {
+  getAction(actionName): Observable<any> {
+    return this.actions$.pipe(filter(action => action.type === actionName));
+  }
+
+  getUserRequest(): Observable<any> {
     this.store
       .select(UserRequestSelector.getUserRequestContent)
       .pipe(
@@ -28,7 +33,13 @@ export class UserRequestService {
         })
       )
       .subscribe();
-    return this.store.select(UserRequestSelector.getUserRequestContent);
+
+    return this.store.select(UserRequestSelector.getLoaded).pipe(
+      filter(loaded => loaded),
+      switchMap(() => {
+        return this.store.select(UserRequestSelector.getUserRequest);
+      })
+    );
   }
 
   loadUserRequestData(): void {
@@ -49,7 +60,7 @@ export class UserRequestService {
         requestId: requestId,
       })
     );
-    return this.store.select(UserRequestSelector.getUserRequestContent);
+    return this.store.select(UserRequestSelector.getUserRequest);
   }
 
   loadUserRequestFormData(userRequest: FSUserRequest) {
@@ -66,7 +77,7 @@ export class UserRequestService {
     userRequest: FSUserRequest,
     stepIndex: number,
     stepStatus: string
-  ): Observable<FSUserRequest> {
+  ) {
     const stepData = Object.assign(
       {},
       userRequest.configurationSteps[stepIndex],
@@ -81,7 +92,6 @@ export class UserRequestService {
         stepData: stepData,
       })
     );
-    return this.store.select(UserRequestSelector.getUserRequestContent);
   }
 
   private areConfigurationStepsCreated(userRequest: FSUserRequest): boolean {

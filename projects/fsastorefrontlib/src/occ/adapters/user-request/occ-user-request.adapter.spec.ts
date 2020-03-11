@@ -13,6 +13,7 @@ const requestId = '000001';
 
 const usersEndpoint = '/users';
 const requestEndpoint = '/fsUserRequests';
+const userRequestActionEndpoit = '/action';
 
 const stepData: FSStepData = {
   name: 'testStepData',
@@ -78,4 +79,20 @@ describe('OccUserRequestAdapter', () => {
       );
     }, `PATCH method and url`);
   }));
+
+  describe('submit user request', () => {
+    it('should submit user request', async(() => {
+      adapter.submitUserRequest(userId, requestId).subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url ===
+            usersEndpoint +
+              `/${userId}` +
+              requestEndpoint +
+              `/${requestId}` +
+              userRequestActionEndpoit && req.method === 'POST'
+        );
+      }, `POST method and url`);
+    }));
+  });
 });

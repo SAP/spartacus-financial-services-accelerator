@@ -51,15 +51,6 @@ export function reducer(
         refresh: false,
       };
     }
-
-    case fromAction.SUBMIT_CLAIM_SUCCESS: {
-      const content = { ...action.payload };
-      return {
-        ...state,
-        content,
-        refresh: true,
-      };
-    }
   }
 
   return state;

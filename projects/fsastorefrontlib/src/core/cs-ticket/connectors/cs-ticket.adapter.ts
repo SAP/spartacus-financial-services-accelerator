@@ -1,4 +1,4 @@
-import { ContactAgentData } from '../../../../src/occ/occ-models';
+import { ContactAgentData } from './../../../occ/occ-models';
 
 export abstract class FSCsTicketAdapter {
   /**

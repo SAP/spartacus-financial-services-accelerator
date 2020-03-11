@@ -52,7 +52,7 @@ const insuranceQuotes = {
   insuranceQuotes: [insuranceQuote1, insuranceQuote2],
 };
 
-class MockOccQuoteAdapter {
+class MockQuoteConnector {
   getQuotes() {
     return of(insuranceQuotes);
   }
@@ -67,10 +67,10 @@ class MockOccQuoteAdapter {
 describe('Quote Effects', () => {
   let actions$: Observable<fromActions.QuoteAction>;
   let effects: fromEffects.QuoteEffects;
-  let mockOccQuoteAdapter: MockOccQuoteAdapter;
+  let mockQuoteConnector: MockQuoteConnector;
 
   beforeEach(() => {
-    mockOccQuoteAdapter = new MockOccQuoteAdapter();
+    mockQuoteConnector = new MockQuoteConnector();
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
@@ -78,7 +78,7 @@ describe('Quote Effects', () => {
         StoreModule.forFeature('assets', fromUserReducers.getReducers()),
       ],
       providers: [
-        { provide: QuoteConnector, useValue: mockOccQuoteAdapter },
+        { provide: QuoteConnector, useValue: mockQuoteConnector },
         fromEffects.QuoteEffects,
         provideMockActions(() => actions$),
       ],
@@ -101,7 +101,7 @@ describe('Quote Effects', () => {
     });
 
     it('should fail to return quotes', () => {
-      spyOn(mockOccQuoteAdapter, 'getQuotes').and.returnValue(
+      spyOn(mockQuoteConnector, 'getQuotes').and.returnValue(
         throwError('Error')
       );
       const action = new fromActions.LoadQuotes({
@@ -128,7 +128,7 @@ describe('Quote Effects', () => {
     });
 
     it('should fail to update quote', () => {
-      spyOn(mockOccQuoteAdapter, 'updateQuote').and.returnValue(
+      spyOn(mockQuoteConnector, 'updateQuote').and.returnValue(
         throwError('Error')
       );
       const action = new fromActions.UpdateQuote(updateQuotePayload);
@@ -159,7 +159,7 @@ describe('Quote Effects', () => {
     });
 
     it('should fail to bind quote', () => {
-      spyOn(mockOccQuoteAdapter, 'bindQuote').and.returnValue(
+      spyOn(mockQuoteConnector, 'bindQuote').and.returnValue(
         throwError('Error')
       );
       const action = new fromActions.BindQuote({

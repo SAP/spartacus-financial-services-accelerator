@@ -49,7 +49,7 @@ const cart = {
   },
 };
 
-class MockOccFSCartAdapter {
+class MockFSCartConnector {
   addToCart() {
     return of(cart);
   }
@@ -68,16 +68,16 @@ class MockFormDataService {
 describe('FS Checkout Effects', () => {
   let actions$: Observable<fromActions.FSCartAction>;
   let effects: fromEffects.FSCartEffects;
-  let mockOccCartAdapter: MockOccFSCartAdapter;
+  let mockCartConnector: MockFSCartConnector;
   let mockFormDataService: MockFormDataService;
 
   beforeEach(() => {
-    mockOccCartAdapter = new MockOccFSCartAdapter();
+    mockCartConnector = new MockFSCartConnector();
     mockFormDataService = new MockFormDataService();
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, StoreModule.forRoot({})],
       providers: [
-        { provide: FsCartConnector, useValue: mockOccCartAdapter },
+        { provide: FsCartConnector, useValue: mockCartConnector },
         { provide: FormDataService, useValue: mockFormDataService },
 
         fromEffects.FSCartEffects,
