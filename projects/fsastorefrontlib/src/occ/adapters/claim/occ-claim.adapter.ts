@@ -109,7 +109,7 @@ export class OccClaimAdapter implements ClaimAdapter {
         timeOfLoss: claim.whatTime,
         causeOfLoss: claim.howAccidentOccured,
         incidentType: { incidentCode: claim.whatHappened },
-        locationOfLoss: location && location.countryCode !== undefined ? location : null,
+        locationOfLoss: location && location.countryCode !== undefined ? location : {},
         claimNumber: claimId,
         requestId: claim.requestId,
       };
