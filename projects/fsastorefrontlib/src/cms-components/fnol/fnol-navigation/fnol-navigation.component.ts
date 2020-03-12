@@ -1,17 +1,17 @@
-import { ClaimStatus } from '../../../occ/occ-models/occ.models';
-import { FormDataService, YFormData } from '@fsa/dynamicforms';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RoutingService } from '@spartacus/core';
-import { Observable, Subscription, of } from 'rxjs';
-import { filter, map, switchMap, take, tap, mergeMap } from 'rxjs/operators';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  UserRequestService,
-  UserRequestNavigationService,
-} from '../../../core/user-request/facade';
-import { Claim, FSStepData } from '../../../occ/occ-models';
-import * as fromAction from '../../../core/user-request/store/actions';
+import { FormDataService, YFormData } from '@fsa/dynamicforms';
+import { RoutingService } from '@spartacus/core';
+import { Observable, of, Subscription } from 'rxjs';
+import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import { ClaimService } from '../../../core/my-account/facade/claim.service';
+import {
+  UserRequestNavigationService,
+  UserRequestService,
+} from '../../../core/user-request/facade';
+import * as fromAction from '../../../core/user-request/store/actions';
+import { Claim, FSStepData } from '../../../occ/occ-models';
+import { ClaimStatus } from '../../../occ/occ-models/occ.models';
 
 const completedStatus = 'COMPLETED';
 
