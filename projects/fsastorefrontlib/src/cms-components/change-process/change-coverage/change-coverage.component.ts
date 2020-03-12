@@ -10,8 +10,10 @@ export class ChangeCoverageComponent implements OnInit {
   constructor(protected changeRequestService: ChangeRequestService) {}
 
   changeRequest$: Observable<any>;
+  currentDate;
 
   ngOnInit() {
+    this.currentDate = new Date().toISOString().substr(0, 10);
     this.changeRequest$ = this.changeRequestService.getChangeRequest();
   }
 }
