@@ -80,10 +80,10 @@
             {{ currentDate | date: 'dd-MM-yyyy' }}
           </div>
           <div class="col-4 semi-bold">
-            € 225.00/Annually
+            {{ changeRequest.insurancePolicy.policyPremium.formattedValue }}
           </div>
           <div class="col-3 semi-bold">
-            € 200.00/Annually
+            {{ changeRequest.changedPolicy.policyPremium.formattedValue }}
           </div>
         </div>
       </div>
