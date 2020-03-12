@@ -21,7 +21,12 @@
         <ng-container
           *ngFor="let changedPolicyObject of changedPolicyObjects; index as i"
         >
-          <ng-container *ngIf="changeType === 'FSINSUREDOBJECT_CHANGE'">
+          <ng-container
+            *ngIf="
+              changeRequest.fsStepGroupDefinition.requestType.code ===
+              'FSINSUREDOBJECT_CHANGE'
+            "
+          >
             <div class="row p-3 font-weight-bold">
               <div class="col-1">{{ i + 1 }}.</div>
               <div class="col-4">
@@ -35,7 +40,12 @@
               </div>
             </div>
           </ng-container>
-          <ng-container *ngIf="changeType === 'FSCOVERAGE_CHANGE'">
+          <ng-container
+            *ngIf="
+              changeRequest.fsStepGroupDefinition.requestType.code ===
+              'FSCOVERAGE_CHANGE'
+            "
+          >
             <div class="row p-3 font-weight-bold border-bottom-color-4">
               <div class="col-1 ">{{ i + 1 }}.</div>
               <div class="col-4">
@@ -133,32 +143,32 @@
             </div>
           </div>
         </div>
-        </ng-container>
-        <div class="container-fluid p-3 background-color-4">
-            <div class="row">
-                <div class="col-6 text-uppercase semi-bold">
-                    {{ 'forms.effectiveDate' | cxTranslate }}:
-                </div>
-                <div class="col-6 text-right semi-bold text-sm-left">
-                    {{ currentDate | date: 'dd-MM-yyyy' }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-6 text-uppercase semi-bold">
-                    {{ 'changeRequest.currentPremium' | cxTranslate }}
-                </div>
-                <div class="col-6 text-right semi-bold text-sm-left">
-                    € 225.00/Annually
-                </div>
-            </div>
-            <div class="row" >
-                <div class="col-6 text-uppercase semi-bold">
-                    {{ 'changeRequest.newPremium' | cxTranslate }}:
-                </div>
-                <div class="col-6 text-right semi-bold text-sm-left">
-                    € 200.00/Annually
-                </div>
-            </div>
+      </ng-container>
+      <div class="container-fluid p-3 background-color-4">
+        <div class="row">
+          <div class="col-6 text-uppercase semi-bold">
+            {{ 'forms.effectiveDate' | cxTranslate }}:
+          </div>
+          <div class="col-6 text-right semi-bold text-sm-left">
+            {{ currentDate | date: 'dd-MM-yyyy' }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 text-uppercase semi-bold">
+            {{ 'changeRequest.currentPremium' | cxTranslate }}
+          </div>
+          <div class="col-6 text-right semi-bold text-sm-left">
+            € 225.00/Annually
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 text-uppercase semi-bold">
+            {{ 'changeRequest.newPremium' | cxTranslate }}:
+          </div>
+          <div class="col-6 text-right semi-bold text-sm-left">
+            € 200.00/Annually
+          </div>
+        </div>
       </div>
     </div>
   </ng-container>

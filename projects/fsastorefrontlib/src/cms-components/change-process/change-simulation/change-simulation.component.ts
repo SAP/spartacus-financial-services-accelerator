@@ -19,7 +19,7 @@ export class ChangeSimulationComponent implements OnInit {
   ) {}
 
   changeRequest$: Observable<any>;
-  changedPolicyObjects: ChangedPolicyData[];
+  changedPolicyObjects: ChangedPolicyData[] = [];
   subscription = new Subscription();
   currentDate: Date = new Date();
   changeType: string;
@@ -29,47 +29,56 @@ export class ChangeSimulationComponent implements OnInit {
   }
 
   getChangedPolicyObjects(changeRequestData: any): ChangedPolicyData[] {
-    const changedPolicyObjects: ChangedPolicyData[] = [];
     if (changeRequestData.fsStepGroupDefinition) {
-      const changeRequestType =
-        changeRequestData.fsStepGroupDefinition.requestType;
-      if (changeRequestType.code === ChangeRequestType.INSURED_OBJECT_CHANGE) {
-        this.changeType = ChangeRequestType.INSURED_OBJECT_CHANGE;
-        const changeableInsuredObjectItems = changeRequestData.insurancePolicy.insuredObjectList.insuredObjects[0].insuredObjectItems.filter(
-          insuredObjectItem => insuredObjectItem.changeable === true
-        );
-        if (changeableInsuredObjectItems) {
-          changeableInsuredObjectItems.forEach(insuredObjectItem => {
-            const changedPolicyData = {} as ChangedPolicyData;
-            changedPolicyData.label = insuredObjectItem.label;
-            changedPolicyData.oldValue = insuredObjectItem.value;
-            changedPolicyData.newValue = this.getChangedValue(
-              changedPolicyData.label,
-              changeRequestData.changedPolicy
-            );
-            changedPolicyObjects.push(changedPolicyData);
-          });
+      switch (changeRequestData.fsStepGroupDefinition.requestType.code) {
+        case ChangeRequestType.INSURED_OBJECT_CHANGE: {
+          const changeableInsuredObjectItems = changeRequestData.insurancePolicy.insuredObjectList.insuredObjects[0].insuredObjectItems.filter(
+            insuredObjectItem => insuredObjectItem.changeable === true
+          );
+          if (changeableInsuredObjectItems) {
+            changeableInsuredObjectItems.forEach(insuredObjectItem => {
+              const newVal = this.getChangedValue(
+                insuredObjectItem.label,
+                changeRequestData.changedPolicy
+              );
+              this.setChangedPolicyObject(
+                insuredObjectItem.label,
+                insuredObjectItem.value,
+                newVal
+              );
+            });
+          }
+          break;
         }
-      } else if (changeRequestType.code === ChangeRequestType.COVERAGE_CHANGE) {
-        this.changeType = ChangeRequestType.COVERAGE_CHANGE;
-        const optionalProducts =
-          changeRequestData.insurancePolicy.optionalProducts;
-        if (optionalProducts) {
-          optionalProducts.forEach(optionalProduct => {
-            const changedPolicyData = {} as ChangedPolicyData;
-            changedPolicyData.label =
-              optionalProduct.coverageProduct.cartDisplayName;
-            changedPolicyData.oldValue = optionalProduct.coverageIsIncluded;
-            changedPolicyData.newValue = this.getChangedCoverageValue(
-              changedPolicyData.label,
-              changeRequestData.changedPolicy
-            );
-            changedPolicyObjects.push(changedPolicyData);
-          });
+        case ChangeRequestType.COVERAGE_CHANGE: {
+          const optionalProducts =
+            changeRequestData.insurancePolicy.optionalProducts;
+          if (optionalProducts) {
+            optionalProducts.forEach(optionalProduct => {
+              const newVal = this.getChangedCoverageValue(
+                optionalProduct.coverageProduct.cartDisplayName,
+                changeRequestData.changedPolicy
+              );
+              this.setChangedPolicyObject(
+                optionalProduct.coverageProduct.cartDisplayName,
+                optionalProduct.coverageIsIncluded,
+                newVal
+              );
+            });
+          }
+          break;
         }
       }
+      return this.changedPolicyObjects;
     }
-    return changedPolicyObjects;
+  }
+
+  setChangedPolicyObject(label: any, value: string, newValue: any) {
+    const changedPolicyData = {} as ChangedPolicyData;
+    changedPolicyData.label = label;
+    changedPolicyData.oldValue = value;
+    changedPolicyData.newValue = newValue;
+    this.changedPolicyObjects.push(changedPolicyData);
   }
 
   getChangedValue(label: string, changedPolicy: any): string {
