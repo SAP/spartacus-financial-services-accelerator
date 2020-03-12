@@ -65,8 +65,7 @@
           </ng-container>
         </ng-container>
         <div class="row p-3 background-color-4">
-          <div class="col-1"></div>
-          <div class="col-4 pb-3 text-uppercase semi-bold">
+          <div class="offset-1 col-4 pb-3 text-uppercase semi-bold">
             {{ 'forms.effectiveDate' | cxTranslate }}:
           </div>
           <div class="col-4 pb-3 text-uppercase semi-bold">
@@ -75,8 +74,7 @@
           <div class="col-3 pb-3 text-uppercase semi-bold">
             {{ 'changeRequest.newPremium' | cxTranslate }}:
           </div>
-          <div class="col-1 "></div>
-          <div class="col-4 semi-bold">
+          <div class="offset-1 col-4 semi-bold">
             {{ currentDate | date: 'dd-MM-yyyy' }}
           </div>
           <div class="col-4 semi-bold">
@@ -158,7 +156,7 @@
             {{ 'changeRequest.currentPremium' | cxTranslate }}
           </div>
           <div class="col-6 text-right semi-bold text-sm-left">
-            € 225.00/Annually
+            {{ changeRequest.insurancePolicy.policyPremium.formattedValue }}
           </div>
         </div>
         <div class="row">
@@ -166,7 +164,7 @@
             {{ 'changeRequest.newPremium' | cxTranslate }}:
           </div>
           <div class="col-6 text-right semi-bold text-sm-left">
-            € 200.00/Annually
+            {{ changeRequest.changedPolicy.policyPremium.formattedValue }}
           </div>
         </div>
       </div>
