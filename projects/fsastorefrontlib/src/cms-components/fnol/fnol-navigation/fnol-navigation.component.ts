@@ -3,7 +3,7 @@ import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 import { Observable, Subscription, of } from 'rxjs';
-import { filter, map, switchMap, take, tap } from 'rxjs/operators';
+import { filter, map, switchMap, take, tap, mergeMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import {
   UserRequestService,
@@ -116,7 +116,10 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
         .getSubmittedForm()
         .pipe(
           switchMap(submittedFormData => {
-            if (submittedFormData) {
+            if (submittedFormData && submittedFormData.content) {
+              claimData.configurationSteps[
+                this.activeStepIndex
+              ].stepContent.contentData = submittedFormData;
               this.claimService.updateClaim(
                 claimData,
                 this.activeStepIndex,

@@ -94,8 +94,11 @@ export class ClaimEffects {
       let claimDataWithLocation = null;
       let updateClaimData = null;
 
-      if (payload.stepData.yformConfigurator) {
-        updateClaimData = payload.stepData.yformConfigurator.content;
+      if (
+        payload.stepData.stepContent &&
+        payload.stepData.stepContent.contentData
+      ) {
+        updateClaimData = payload.stepData.stepContent.contentData;
 
         if (this.claimServiceData.claimData.locationOfLoss !== undefined) {
           claimDataWithLocation = Object.assign(updateClaimData, {

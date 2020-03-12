@@ -82,8 +82,8 @@ export class OccClaimAdapter implements ClaimAdapter {
       'Content-Type': 'application/json',
     });
     const claimBody: Claim =
-      claimData !== undefined
-        ? this.createClaimBody(claimData, {}, claimId)
+      claimData && claimData.content
+        ? this.createClaimBody(claimData.content, {}, claimId)
         : {};
     return this.http
       .patch(url, claimBody, { headers })
