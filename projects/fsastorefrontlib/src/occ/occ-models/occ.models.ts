@@ -41,6 +41,11 @@ export enum BindingStateType {
   UNBIND = 'UNBIND',
 }
 
+export enum ChangeRequestType {
+  INSURED_OBJECT_CHANGE = 'FSINSUREDOBJECT_CHANGE',
+  COVERAGE_CHANGE = 'FSCOVERAGE_CHANGE',
+}
+
 export enum ClaimStatus {
   OPEN = 'OPEN',
   SUBMITTED = 'SUBMITTED',
@@ -133,6 +138,7 @@ export interface FSIncidentType {
 }
 
 export interface ChangedPolicyData {
+  changeType?: string;
   label?: string;
   oldValue?: string;
   newValue?: string;

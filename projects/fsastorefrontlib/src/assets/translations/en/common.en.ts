@@ -1,5 +1,6 @@
 export const fscommon = {
   fscommon: {
+    no: 'NO',
     mr: 'Mr.',
     mrs: 'Mrs.',
     add: 'Add',
