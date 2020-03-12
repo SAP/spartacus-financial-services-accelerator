@@ -14,7 +14,7 @@ export class OccClaimAdapter implements ClaimAdapter {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService
-  ) { }
+  ) {}
 
   protected getClaimsEndpoint(userId: string) {
     const claimsEndpoint = '/users/' + userId + '/claims';
@@ -109,7 +109,8 @@ export class OccClaimAdapter implements ClaimAdapter {
         timeOfLoss: claim.whatTime,
         causeOfLoss: claim.howAccidentOccured,
         incidentType: { incidentCode: claim.whatHappened },
-        locationOfLoss: location && location.countryCode !== undefined ? location : {},
+        locationOfLoss:
+          location && location.countryCode !== undefined ? location : {},
         claimNumber: claimId,
         requestId: claim.requestId,
       };

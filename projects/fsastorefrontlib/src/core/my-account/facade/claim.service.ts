@@ -26,7 +26,7 @@ export class ClaimService {
     ])
       .subscribe(([claim, userToken]) => {
         this.currentClaimId = claim.claimNumber;
-        if (!this.isCreated(claim) && this.isLoggedIn(userToken.userId)) {
+        if (this.isCreated(claim) && this.isLoggedIn(userToken.userId)) {
           this.loadCurrentClaim();
         }
       })
@@ -139,18 +139,10 @@ export class ClaimService {
       .unsubscribe();
   }
 
-  updateClaim(
-    claim: Claim,
-    stepIndex: number,
-    stepStatus: string
-  ) {
-    const stepData = Object.assign(
-      {},
-      claim.configurationSteps[stepIndex],
-      {
-        status: stepStatus,
-      }
-    );
+  updateClaim(claim: Claim, stepIndex: number, stepStatus: string) {
+    const stepData = Object.assign({}, claim.configurationSteps[stepIndex], {
+      status: stepStatus,
+    });
 
     this.authService
       .getOccUserId()
@@ -160,7 +152,7 @@ export class ClaimService {
           new fromAction.UpdateClaim({
             userId: occUserId,
             claimData: claim,
-            stepData: stepData
+            stepData: stepData,
           })
         );
       })
@@ -168,7 +160,7 @@ export class ClaimService {
   }
 
   private isCreated(claim: any): boolean {
-    return claim && claim.paymentFrequency !== undefined;
+    return claim && claim.claimNumber !== undefined;
   }
 
   private isLoggedIn(userId: string): boolean {

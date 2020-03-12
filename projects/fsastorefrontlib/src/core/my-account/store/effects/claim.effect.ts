@@ -90,7 +90,6 @@ export class ClaimEffects {
     ofType(fromActions.UPDATE_CLAIM),
     map((action: fromActions.UpdateClaim) => action.payload),
     mergeMap(payload => {
-
       let claimID = this.claimServiceData.claimData.claimNumber;
       let claimDataWithLocation = null;
       let updateClaimData = null;
@@ -107,10 +106,9 @@ export class ClaimEffects {
       if (claimID === undefined && this.claimServiceData.claims !== undefined) {
         // @ts-ignore
         claimID = this.claimServiceData.claims.claims.find(
-          claim => claim.requestId === payload.requestId
+          claim => claim.requestId === payload.claimData.requestId
         ).claimNumber;
       }
-
 
       return this.claimConnector
         .updateClaim(
@@ -124,7 +122,11 @@ export class ClaimEffects {
           mergeMap(claim => {
             return [
               new fromActions.UpdateClaimSuccess(claim),
-              new fromUserRequestActions.UpdateUserRequest({ userId: payload.userId, requestId: claim.requestId, stepData: payload.stepData })
+              new fromUserRequestActions.UpdateUserRequest({
+                userId: payload.userId,
+                requestId: claim.requestId,
+                stepData: payload.stepData,
+              }),
             ];
           }),
           catchError(error =>
@@ -138,5 +140,5 @@ export class ClaimEffects {
     private actions$: Actions,
     private claimConnector: ClaimConnector,
     private claimServiceData: ClaimDataService
-  ) { }
+  ) {}
 }

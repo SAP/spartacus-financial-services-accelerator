@@ -225,16 +225,36 @@ describe('Claim Effects', () => {
     it('should update claim', () => {
       const action = new fromActions.UpdateClaim({
         userId: OCC_USER_ID_CURRENT,
-        requestId: requestId1,
         claimData: {
+          requestId: requestId3,
           policeInformed: 'yes',
           witnesses: 'yes',
         },
+        stepData: {
+          yformConfigurator: {
+            content: 'formContent',
+          },
+        },
       });
-      const completion = new fromActions.UpdateClaimSuccess(claim3);
+
+      const updateClaimSuccess = new fromActions.UpdateClaimSuccess(claim3);
+      const updateRequestSuccess = new fromUserRequestActions.UpdateUserRequest(
+        {
+          userId: OCC_USER_ID_CURRENT,
+          requestId: requestId3,
+          stepData: {
+            yformConfigurator: {
+              content: 'formContent',
+            },
+          },
+        }
+      );
 
       actions$ = hot('-a', { a: action });
-      const expected = cold('-b', { b: completion });
+      const expected = cold('-(bc)', {
+        b: updateClaimSuccess,
+        c: updateRequestSuccess,
+      });
       expect(effects.updateClaim$).toBeObservable(expected);
     });
 
@@ -242,16 +262,35 @@ describe('Claim Effects', () => {
       mockClaimDataService.claimData = claim3;
       const action = new fromActions.UpdateClaim({
         userId: OCC_USER_ID_CURRENT,
-        requestId: requestId3,
         claimData: {
+          requestId: requestId3,
           policeInformed: 'yes',
           witnesses: 'yes',
         },
+        stepData: {
+          yformConfigurator: {
+            content: 'formContent',
+          },
+        },
       });
-      const completion = new fromActions.UpdateClaimSuccess(claim3);
+      const updateClaimSuccess = new fromActions.UpdateClaimSuccess(claim3);
+      const updateRequestSuccess = new fromUserRequestActions.UpdateUserRequest(
+        {
+          userId: OCC_USER_ID_CURRENT,
+          requestId: requestId3,
+          stepData: {
+            yformConfigurator: {
+              content: 'formContent',
+            },
+          },
+        }
+      );
 
       actions$ = hot('-a', { a: action });
-      const expected = cold('-b', { b: completion });
+      const expected = cold('-(bc)', {
+        b: updateClaimSuccess,
+        c: updateRequestSuccess,
+      });
       expect(effects.updateClaim$).toBeObservable(expected);
     });
 
@@ -263,16 +302,34 @@ describe('Claim Effects', () => {
       };
       const action = new fromActions.UpdateClaim({
         userId: OCC_USER_ID_CURRENT,
-        requestId: 'testRequest003',
         claimData: {
+          requestId: 'testRequest003',
           policeInformed: 'yes',
           witnesses: 'yes',
         },
+        stepData: {
+          yformConfigurator: {
+            content: 'formContent',
+          },
+        },
       });
-      const completion = new fromActions.UpdateClaimSuccess(claim3);
-
+      const updateClaimSuccess = new fromActions.UpdateClaimSuccess(claim3);
+      const updateRequestSuccess = new fromUserRequestActions.UpdateUserRequest(
+        {
+          userId: OCC_USER_ID_CURRENT,
+          requestId: requestId3,
+          stepData: {
+            yformConfigurator: {
+              content: 'formContent',
+            },
+          },
+        }
+      );
       actions$ = hot('-a', { a: action });
-      const expected = cold('-b', { b: completion });
+      const expected = cold('-(bc)', {
+        b: updateClaimSuccess,
+        c: updateRequestSuccess,
+      });
       expect(effects.updateClaim$).toBeObservable(expected);
     });
 
@@ -285,6 +342,11 @@ describe('Claim Effects', () => {
         requestId: requestId3,
         claimData: {
           policeInformed: 'invalidData',
+        },
+        stepData: {
+          yformConfigurator: {
+            content: 'formContent',
+          },
         },
       });
       const completion = new fromActions.UpdateClaimFail(
