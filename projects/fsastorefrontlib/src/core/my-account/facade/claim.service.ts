@@ -1,3 +1,4 @@
+import { Claim } from './../../../occ/occ-models/occ.models';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
@@ -25,7 +26,7 @@ export class ClaimService {
     ])
       .subscribe(([claim, userToken]) => {
         this.currentClaimId = claim.claimNumber;
-        if (!this.isCreated(claim) && this.isLoggedIn(userToken.userId)) {
+        if (this.isCreated(claim) && this.isLoggedIn(userToken.userId)) {
           this.loadCurrentClaim();
         }
       })
@@ -138,8 +139,28 @@ export class ClaimService {
       .unsubscribe();
   }
 
+  updateClaim(claim: Claim, stepIndex: number, stepStatus: string) {
+    const stepData = Object.assign({}, claim.configurationSteps[stepIndex], {
+      status: stepStatus,
+    });
+
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.store.dispatch(
+          new fromAction.UpdateClaim({
+            userId: occUserId,
+            claimData: claim,
+            stepData: stepData,
+          })
+        );
+      })
+      .unsubscribe();
+  }
+
   private isCreated(claim: any): boolean {
-    return claim && claim.paymentFrequency !== undefined;
+    return claim && claim.claimNumber !== undefined;
   }
 
   private isLoggedIn(userId: string): boolean {

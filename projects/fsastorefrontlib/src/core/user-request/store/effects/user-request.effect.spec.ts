@@ -42,6 +42,9 @@ const userRequestCompleted = {
       },
     },
   ],
+  stepData: {
+    sequenceNumber: 1,
+  },
 };
 class MockOccUserRequestAdapter {
   getUserRequest() {
@@ -137,16 +140,9 @@ describe('User Request Effects', () => {
       const updateSuccess = new fromActions.UpdateUserRequestSuccess(
         userRequest
       );
-      const updateClaim = new fromActions.UpdateClaim({
-        userId: OCC_USER_ID_CURRENT,
-        requestId: 'testRequest001',
-        claimData: {},
-      });
-
       actions$ = hot('-a', { a: action });
-      const expected = cold('-(bc)', {
+      const expected = cold('-b', {
         b: updateSuccess,
-        c: updateClaim,
       });
       expect(effects.updateUserRequest$).toBeObservable(expected);
     });

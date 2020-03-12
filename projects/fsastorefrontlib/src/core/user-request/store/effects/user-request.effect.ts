@@ -21,30 +21,21 @@ export class UserRequestEffects {
       return this.userRequestConnector
         .updateUserRequest(payload.userId, payload.requestId, payload.stepData)
         .pipe(
-          mergeMap((userRequest: any) => {
+          map((userRequest: any) => {
+            const sequenceNumber = payload.stepData.sequenceNumber;
             const configSteps = userRequest.configurationSteps;
             if (
               configSteps &&
               configSteps.length > 0 &&
+              sequenceNumber === configSteps.length &&
               configSteps[configSteps.length - 1].status === 'COMPLETED'
             ) {
-              return [
-                new fromActions.SubmitUserRequest({
-                  userId: payload.userId,
-                  requestId: payload.requestId,
-                }),
-              ];
+              return new fromActions.SubmitUserRequest({
+                userId: payload.userId,
+                requestId: payload.requestId,
+              });
             } else {
-              return [
-                new fromActions.UpdateUserRequestSuccess(userRequest),
-                new fromActions.UpdateClaim({
-                  userId: payload.userId,
-                  requestId: payload.requestId,
-                  claimData:
-                    configSteps[payload.stepData.sequenceNumber - 1]
-                      .yformConfigurator.content,
-                }),
-              ];
+              return new fromActions.UpdateUserRequestSuccess(userRequest);
             }
           }),
           catchError(error => of(new fromActions.UpdateUserRequestFail(error)))
