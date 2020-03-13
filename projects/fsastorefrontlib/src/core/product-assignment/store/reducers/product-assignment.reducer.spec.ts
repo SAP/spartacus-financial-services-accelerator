@@ -36,10 +36,12 @@ const mockProductAssignments = {
   ],
 };
 
+const initialLoadedProducts = { assignments: [], potentialAssignments: [] };
+
 const removeProductAssignment = {
   orgUnitId: 'SomeCompany',
   productCode: '0011221',
-  parentOrgUnit: 'SAPParentCompany',
+  parentOrgUnit: 'ParentCompany',
 };
 
 const createdProductAssignment = {
@@ -65,11 +67,11 @@ describe('Product Assignment Reducer', () => {
   describe('LOAD_PRODUCT_ASSIGNMENTS', () => {
     it('should load product assignments', () => {
       const action = new fromAction.LoadProductAssignments(
-        mockProductAssignments
+        initialLoadedProducts
       );
       const state = fromReducer.reducer(initialState, action);
       expect(state.content).toEqual(mockProductAssignments);
-      expect(state.loaded).toEqual(true);
+      expect(state.loaded).toEqual(false);
     });
   });
 
@@ -121,8 +123,7 @@ describe('Product Assignment Reducer', () => {
       );
       const state = fromReducer.reducer(initialState, loadProductAssignments);
       const changedState = fromReducer.reducer(state, action);
-      expect(changedState.content.potentialAssignments.length).toEqual(2);
-      expect(changedState.content.assignments.length).toEqual(2);
+      expect(state.content).toEqual(mockProductAssignments);
     });
   });
 

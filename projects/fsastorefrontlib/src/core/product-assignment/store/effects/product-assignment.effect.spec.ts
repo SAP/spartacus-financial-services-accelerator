@@ -51,6 +51,7 @@ const pageSize = 5;
 const currentPage = 1;
 const sortCode = 'name';
 const productAssignmentCode = 'testOne';
+
 class MockProductAssignmentConnector {
   loadProductAssignmentsForUnit() {
     return of(mockProductAssignments);
@@ -144,7 +145,7 @@ describe('Product Assignment Effects', () => {
         orgUnitId: mockedOrgUnitId,
         productCode: '0001555',
       });
-      const completion = new fromActions.CreateProductAssignment(
+      const completion = new fromActions.CreateProductAssignmentSuccess(
         mockProductAssignments
       );
       actions$ = hot('-a', { a: action });
@@ -160,10 +161,10 @@ describe('Product Assignment Effects', () => {
     ).and.returnValue(throwError('Error'));
     const action = new fromActions.CreateProductAssignment({
       userId: 'not_valid_user',
-      orgUnitId: mockedOrgUnitId,
+      orgUnitId: undefined,
       productCode: undefined,
     });
-    const completion = new fromActions.CreateProductAssignment({
+    const completion = new fromActions.CreateProductAssignmentFail({
       error: JSON.stringify('Error'),
     });
     actions$ = hot('-a', { a: action });
@@ -177,13 +178,17 @@ describe('Product Assignment Effects', () => {
         userId: OCC_USER_ID_CURRENT,
         orgUnitId: mockedOrgUnitId,
         productCode: '0001555',
+        parentOrgUnit: 'SAP',
       });
-      const completion = [
-        new fromActions.RemoveProductAssignmentSuccess(),
-        new fromActions.LoadPotentialProductAssignments(mockProductAssignments),
-      ];
+      const removeProductAssignmentAction = new fromActions.RemoveProductAssignmentSuccess();
+      const loadPotentialProductAssignmentsAction = new fromActions.LoadPotentialProductAssignments(
+        { occUserId: OCC_USER_ID_CURRENT, orgUnitId: mockedOrgUnitId }
+      );
       actions$ = hot('-a', { a: action });
-      const expected = cold('-b', { b: completion });
+      const expected = cold('-(bc)', {
+        b: removeProductAssignmentAction,
+        c: loadPotentialProductAssignmentsAction,
+      });
       expect(effects.removeProductAssignment$).toBeObservable(expected);
     });
   });
@@ -198,7 +203,7 @@ describe('Product Assignment Effects', () => {
       orgUnitId: mockedOrgUnitId,
       productCode: undefined,
     });
-    const completion = new fromActions.RemoveProductAssignment({
+    const completion = new fromActions.RemoveProductAssignmentFail({
       error: JSON.stringify('Error'),
     });
     actions$ = hot('-a', { a: action });
@@ -212,7 +217,7 @@ describe('Product Assignment Effects', () => {
         userId: OCC_USER_ID_CURRENT,
         orgUnitId: mockedOrgUnitId,
       });
-      const completion = new fromActions.LoadPotentialProductAssignments(
+      const completion = new fromActions.LoadPotentialProductAssignmentsSuccess(
         mockProductAssignments
       );
       actions$ = hot('-a', { a: action });
@@ -221,39 +226,22 @@ describe('Product Assignment Effects', () => {
     });
   });
 
-  it('should fail to load potential product assignments', () => {
-    spyOn(
-      mockProductAssignmentConnector,
-      'loadPotentialProductAssignments'
-    ).and.returnValue(throwError('Error'));
-    const action = new fromActions.LoadPotentialProductAssignments({
-      userId: 'not_valid_user',
-      orgUnitId: mockedOrgUnitId,
-    });
-    const completion = new fromActions.LoadPotentialProductAssignments({
-      error: JSON.stringify('Error'),
-    });
-    actions$ = hot('-a', { a: action });
-    const expected = cold('-b', { b: completion });
-    expect(effects.loadPotentialProductAssignments$).toBeObservable(expected);
-  });
-
   describe('changeActiveStatus$', () => {
     it('should change active status', () => {
-      const action = new fromActions.UpdateProductAssignment({
+      const updatedProductAssignment = {
         active: false,
         code: 'testOne',
         product: {
           code: 'testProduct',
         },
-      });
-      const completion = new fromActions.UpdateProductAssignmentSuccess(
-        mockedOrgUnitId
+      };
+      const action = new fromActions.UpdateProductAssignmentSuccess(
+        updatedProductAssignment
       );
-      actions$ = hot('-a', { a: action });
-      const expected = cold('-b', { b: completion });
-
-      expect(effects.changeActiveStatus$).toBeObservable(expected);
+      expect({ ...action }).toEqual({
+        type: fromActions.UPDATE_PRODUCT_ASSIGNMENT_SUCCESS,
+        payload: updatedProductAssignment,
+      });
     });
   });
 

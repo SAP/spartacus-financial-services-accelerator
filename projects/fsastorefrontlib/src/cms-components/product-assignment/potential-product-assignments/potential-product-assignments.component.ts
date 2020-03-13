@@ -1,6 +1,5 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
@@ -22,8 +21,7 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
   constructor(
     protected route: ActivatedRoute,
     protected productAssignmentService: FSProductAssignmentService,
-    protected userService: UserService,
-    protected cd: ChangeDetectorRef
+    protected userService: UserService
   ) {}
 
   private subscription = new Subscription();
@@ -68,7 +66,7 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
           this.orgUnitId
         )
       );
-    this.availableProductAssignments$ = this.productAssignmentService.getAllProductAssignments();
+    this.availableProductAssignments$ = this.productAssignmentService.getPotentialProductAssignments();
     this.productAssignments$ = this.productAssignmentService.getProductAssignments();
   }
 
@@ -79,7 +77,7 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
     );
   }
 
-  onDessign(productCode) {
+  onDeassign(productCode) {
     return this.productAssignmentService.removeProductAssignment(
       this.orgUnitId,
       productCode,

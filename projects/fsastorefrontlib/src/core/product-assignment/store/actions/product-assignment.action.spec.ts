@@ -85,6 +85,7 @@ describe('Product Assignment Actions', () => {
       const action = new fromAction.CreateProductAssignment({
         userId: userId,
         orgUnitId: orgUnitId,
+        productCode: productCode,
       });
 
       expect({ ...action }).toEqual({
@@ -124,15 +125,15 @@ describe('Product Assignment Actions', () => {
       const userId = OCC_USER_ID_CURRENT;
       const orgUnitId = 'Corona';
       const productCode = '000014';
-      const parentOrgUnit = 'CoronaDaddy';
       const action = new fromAction.RemoveProductAssignment({
         userId: userId,
         orgUnitId: orgUnitId,
+        productCode: productCode,
       });
 
       expect({ ...action }).toEqual({
         type: fromAction.REMOVE_PRODUCT_ASSIGNMENT,
-        payload: { userId, orgUnitId, productCode, parentOrgUnit },
+        payload: { userId, orgUnitId, productCode },
       });
     });
   });

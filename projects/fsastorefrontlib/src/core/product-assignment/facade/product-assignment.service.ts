@@ -108,7 +108,7 @@ export class FSProductAssignmentService {
     );
   }
 
-  getAllProductAssignments(): Observable<any> {
+  getPotentialProductAssignments(): Observable<any> {
     return this.store.select(fromSelector.getLoaded).pipe(
       filter(loaded => loaded),
       take(1),
@@ -127,7 +127,7 @@ export class FSProductAssignmentService {
     );
   }
 
-  loadCustomerProfile(orgCustomerId: string) {
+  loadCustomerProfile(orgCustomerId: string): Observable<any> {
     return this.authService.getOccUserId().pipe(
       take(1),
       switchMap(occUserId => {
