@@ -70,21 +70,46 @@ export class ClaimEffects {
   );
 
   @Effect()
+  loadCurrentClaim$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.LOAD_CURRENT_CLAIM),
+    map((action: fromActions.LoadCurrentClaim) => action.payload),
+    switchMap(payload => {
+      return this.claimConnector.getClaim(payload.userId, payload.claimId).pipe(
+        map((claims: any) => {
+          return new fromActions.LoadCurrentClaimSuccess(claims);
+        }),
+        catchError(error =>
+          of(new fromActions.LoadCurrentClaimFail(JSON.stringify(error)))
+        )
+      );
+    })
+  );
+
+  @Effect()
   updateClaim$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.UPDATE_CLAIM),
     map((action: fromActions.UpdateClaim) => action.payload),
     mergeMap(payload => {
       let claimID = this.claimServiceData.claimData.claimNumber;
       let claimDataWithLocation = null;
-      if (this.claimServiceData.claimData.locationOfLoss !== undefined) {
-        claimDataWithLocation = Object.assign(payload.claimData, {
-          locationOfLoss: this.claimServiceData.claimData.locationOfLoss.code,
-        });
+      let updateClaimData = null;
+
+      if (
+        payload.stepData.stepContent &&
+        payload.stepData.stepContent.contentData
+      ) {
+        updateClaimData = payload.stepData.stepContent.contentData;
+
+        if (this.claimServiceData.claimData.locationOfLoss !== undefined) {
+          claimDataWithLocation = Object.assign(updateClaimData, {
+            locationOfLoss: this.claimServiceData.claimData.locationOfLoss.code,
+          });
+        }
       }
       if (claimID === undefined && this.claimServiceData.claims !== undefined) {
         // @ts-ignore
         claimID = this.claimServiceData.claims.claims.find(
-          claim => claim.requestId === payload.requestId
+          claim => claim.requestId === payload.claimData.requestId
         ).claimNumber;
       }
 
@@ -94,11 +119,18 @@ export class ClaimEffects {
           claimID,
           claimDataWithLocation !== null
             ? claimDataWithLocation
-            : payload.claimData
+            : updateClaimData
         )
         .pipe(
-          map(claim => {
-            return new fromActions.UpdateClaimSuccess(claim);
+          mergeMap(claim => {
+            return [
+              new fromActions.UpdateClaimSuccess(claim),
+              new fromUserRequestActions.UpdateUserRequest({
+                userId: payload.userId,
+                requestId: claim.requestId,
+                stepData: payload.stepData,
+              }),
+            ];
           }),
           catchError(error =>
             of(new fromActions.UpdateClaimFail(JSON.stringify(error)))

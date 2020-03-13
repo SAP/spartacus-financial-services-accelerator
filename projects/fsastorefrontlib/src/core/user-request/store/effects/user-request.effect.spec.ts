@@ -11,7 +11,6 @@ import * as fromActions from '../actions';
 import * as fromReducer from './../../store/reducers/index';
 import * as fromEffects from './user-request.effect';
 import { UserRequestConnector } from '../../connectors/user-request.connector';
-import { UserRequestDataService } from '../../services/user-request-data.service';
 
 const userRequest = {
   requestStatus: 'OPEN',
@@ -43,6 +42,9 @@ const userRequestCompleted = {
       },
     },
   ],
+  stepData: {
+    sequenceNumber: 1,
+  },
 };
 class MockOccUserRequestAdapter {
   getUserRequest() {
@@ -60,11 +62,6 @@ class MockOccUserRequestAdapter {
 
 class MockActions {}
 
-class MockUserRequestDataService {
-  userId = OCC_USER_ID_CURRENT;
-  requestId = 'testRequest001';
-}
-
 describe('User Request Effects', () => {
   let actions$: Observable<fromActions.UserRequestActions>;
   let effects: fromEffects.UserRequestEffects;
@@ -81,10 +78,6 @@ describe('User Request Effects', () => {
       providers: [
         { provide: UserRequestConnector, useValue: mockOccUserRequestAdapter },
         {
-          provide: UserRequestDataService,
-          useClass: MockUserRequestDataService,
-        },
-        {
           provide: Actions,
           useClass: MockActions,
         },
@@ -95,38 +88,6 @@ describe('User Request Effects', () => {
     effects = TestBed.get(fromEffects.UserRequestEffects as Type<
       fromEffects.UserRequestEffects
     >);
-  });
-  describe('loadUserRequest$', () => {
-    it('should return userRequest', () => {
-      const action = new fromActions.LoadUserRequest({
-        userId: OCC_USER_ID_CURRENT,
-        requestId: 'requestID',
-      });
-      const completion = new fromActions.LoadUserRequestSuccess(userRequest);
-      actions$ = hot('-a', { a: action });
-      const expected = cold('-b', { b: completion });
-      expect(effects.loadUserRequest$).toBeObservable(expected);
-    });
-    it('should return userRequest - call without userId in payload', () => {
-      const action = new fromActions.LoadUserRequest({});
-      const completion = new fromActions.LoadUserRequestSuccess(userRequest);
-      actions$ = hot('-a', { a: action });
-      const expected = cold('-b', { b: completion });
-      expect(effects.loadUserRequest$).toBeObservable(expected);
-    });
-    it('should fail to return userRequest', () => {
-      spyOn(mockOccUserRequestAdapter, 'getUserRequest').and.returnValue(
-        throwError('Error')
-      );
-      const action = new fromActions.LoadUserRequest({
-        userId: OCC_USER_ID_CURRENT,
-        requestId: 'requestID',
-      });
-      const completion = new fromActions.LoadUserRequestFail('Error');
-      actions$ = hot('-a', { a: action });
-      const expected = cold('-b', { b: completion });
-      expect(effects.loadUserRequest$).toBeObservable(expected);
-    });
   });
 
   describe('submitUserRequest$', () => {
@@ -179,16 +140,9 @@ describe('User Request Effects', () => {
       const updateSuccess = new fromActions.UpdateUserRequestSuccess(
         userRequest
       );
-      const updateClaim = new fromActions.UpdateClaim({
-        userId: OCC_USER_ID_CURRENT,
-        requestId: 'testRequest001',
-        claimData: {},
-      });
-
       actions$ = hot('-a', { a: action });
-      const expected = cold('-(bc)', {
+      const expected = cold('-b', {
         b: updateSuccess,
-        c: updateClaim,
       });
       expect(effects.updateUserRequest$).toBeObservable(expected);
     });

@@ -3,70 +3,33 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import * as fromActions from '../actions';
-import { UserRequestDataService } from '../../services';
 import { UserRequestConnector } from '../../connectors/user-request.connector';
+
 @Injectable()
 export class UserRequestEffects {
-  @Effect()
-  loadUserRequest$: Observable<any> = this.actions$.pipe(
-    ofType(fromActions.LOAD_USER_REQUEST),
-    map((action: fromActions.LoadUserRequest) => action.payload),
-    mergeMap(payload => {
-      if (payload === undefined || payload.userId === undefined) {
-        payload = {
-          userId: this.userRequestData.userId,
-          requestId: this.userRequestData.requestId,
-        };
-      }
-      return this.userRequestConnector
-        .getUserRequest(payload.userId, payload.requestId)
-        .pipe(
-          map((userRequest: any) => {
-            return new fromActions.LoadUserRequestSuccess(userRequest);
-          }),
-          catchError(error => of(new fromActions.LoadUserRequestFail(error)))
-        );
-    })
-  );
-
   @Effect()
   updateUserRequest$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.UPDATE_USER_REQUEST),
     map((action: fromActions.UpdateUserRequest) => action.payload),
     switchMap(payload => {
-      if (payload === undefined || payload.userId === undefined) {
-        payload = {
-          userId: this.userRequestData.userId,
-          requestId: this.userRequestData.requestId,
-        };
-      }
       return this.userRequestConnector
         .updateUserRequest(payload.userId, payload.requestId, payload.stepData)
         .pipe(
-          mergeMap((userRequest: any) => {
+          map((userRequest: any) => {
+            const sequenceNumber = payload.stepData.sequenceNumber;
             const configSteps = userRequest.configurationSteps;
             if (
               configSteps &&
               configSteps.length > 0 &&
+              sequenceNumber === configSteps.length &&
               configSteps[configSteps.length - 1].status === 'COMPLETED'
             ) {
-              return [
-                new fromActions.SubmitUserRequest({
-                  userId: payload.userId,
-                  requestId: payload.requestId,
-                }),
-              ];
+              return new fromActions.SubmitUserRequest({
+                userId: payload.userId,
+                requestId: payload.requestId,
+              });
             } else {
-              return [
-                new fromActions.UpdateUserRequestSuccess(userRequest),
-                new fromActions.UpdateClaim({
-                  userId: payload.userId,
-                  requestId: payload.requestId,
-                  claimData:
-                    configSteps[payload.stepData.sequenceNumber - 1]
-                      .yformConfigurator.content,
-                }),
-              ];
+              return new fromActions.UpdateUserRequestSuccess(userRequest);
             }
           }),
           catchError(error => of(new fromActions.UpdateUserRequestFail(error)))
@@ -97,7 +60,6 @@ export class UserRequestEffects {
 
   constructor(
     private actions$: Actions,
-    private userRequestConnector: UserRequestConnector,
-    private userRequestData: UserRequestDataService
+    private userRequestConnector: UserRequestConnector
   ) {}
 }
