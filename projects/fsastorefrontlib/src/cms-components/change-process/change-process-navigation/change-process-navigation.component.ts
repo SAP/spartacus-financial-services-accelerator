@@ -1,7 +1,7 @@
+import { FSStepData } from './../../../occ/occ-models/occ.models';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
-import { FSStepData } from '../../../../../../dist/fsastorefrontlib/occ/occ-models';
 import { ChangeRequestService } from '../../../core/change-request/facade';
 import { UserRequestNavigationService } from '../../../core/user-request/facade';
 import { Subscription } from 'rxjs';
