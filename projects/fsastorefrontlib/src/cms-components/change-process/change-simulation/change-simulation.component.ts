@@ -5,7 +5,6 @@ import {
 } from 'projects/fsastorefrontlib/src/occ';
 import { Observable } from 'rxjs/internal/Observable';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
-import { Subscription } from 'rxjs';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -20,7 +19,6 @@ export class ChangeSimulationComponent implements OnInit {
 
   changeRequest$: Observable<any>;
   changedPolicyObjects: ChangedPolicyData[] = [];
-  subscription = new Subscription();
   currentDate: Date = new Date();
   changeType: string;
 
@@ -73,7 +71,7 @@ export class ChangeSimulationComponent implements OnInit {
     }
   }
 
-  setChangedPolicyObject(label: any, value: string, newValue: any) {
+  setChangedPolicyObject(label: string, value: string, newValue: string) {
     const changedPolicyData = {} as ChangedPolicyData;
     changedPolicyData.label = label;
     changedPolicyData.oldValue = value;
@@ -92,11 +90,5 @@ export class ChangeSimulationComponent implements OnInit {
       coverage => coverage.coverageProduct.cartDisplayName === label
     );
     return changedCoverage.coverageIsIncluded;
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 }

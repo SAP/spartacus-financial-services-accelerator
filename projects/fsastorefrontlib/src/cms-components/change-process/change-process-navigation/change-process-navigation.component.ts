@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { FSStepData } from '../../../../../../dist/fsastorefrontlib/occ/occ-models';
 import { ChangeRequestService } from '../../../core/change-request/facade';
 import { UserRequestNavigationService } from '../../../core/user-request/facade';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'fsa-change-process-navigation',
   templateUrl: './change-process-navigation.component.html',
 })
-export class ChangeProcessNavigationComponent implements OnInit {
+export class ChangeProcessNavigationComponent implements OnInit, OnDestroy {
   constructor(
     protected changeRequestService: ChangeRequestService,
     protected activatedRoute: ActivatedRoute,
@@ -19,19 +20,22 @@ export class ChangeProcessNavigationComponent implements OnInit {
   changeRequest$: Observable<any>;
   configurationSteps: FSStepData[];
   activeStepIndex: number;
+  subscription = new Subscription();
 
   ngOnInit() {
     this.changeRequest$ = this.changeRequestService.getChangeRequest();
-    this.changeRequest$.subscribe(changeRequestData => {
-      this.configurationSteps = this.userRequestNavigationService.getConfigurationSteps(
-        changeRequestData
-      );
-      const activeStepData = this.userRequestNavigationService.getActiveStep(
-        this.configurationSteps,
-        this.activatedRoute.routeConfig.path
-      );
-      this.activeStepIndex = this.configurationSteps.indexOf(activeStepData);
-    });
+    this.subscription.add(
+      this.changeRequest$.subscribe(changeRequestData => {
+        this.configurationSteps = this.userRequestNavigationService.getConfigurationSteps(
+          changeRequestData
+        );
+        const activeStepData = this.userRequestNavigationService.getActiveStep(
+          this.configurationSteps,
+          this.activatedRoute.routeConfig.path
+        );
+        this.activeStepIndex = this.configurationSteps.indexOf(activeStepData);
+      })
+    );
   }
 
   navigateNext(currentStep: number) {
@@ -40,5 +44,11 @@ export class ChangeProcessNavigationComponent implements OnInit {
       this.configurationSteps,
       currentStep
     );
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
