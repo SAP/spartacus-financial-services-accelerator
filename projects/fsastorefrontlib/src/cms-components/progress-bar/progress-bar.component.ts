@@ -5,8 +5,6 @@ import { Component, Input } from '@angular/core';
   templateUrl: './progress-bar.component.html',
 })
 export class FSProgressBarComponent {
-
   @Input()
   steps: any;
-
 }

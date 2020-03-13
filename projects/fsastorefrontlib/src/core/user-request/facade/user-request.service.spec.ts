@@ -72,21 +72,6 @@ describe('UserRequestServiceTest', () => {
     }
   ));
 
-  it('should be able to update user request', () => {
-    service.updateUserRequestStep(
-      { requestId: requestId, configurationSteps: [{}, {}] },
-      0,
-      status
-    );
-    expect(store.dispatch).toHaveBeenCalledWith(
-      new fromAction.UpdateUserRequest({
-        userId: userId,
-        requestId: requestId,
-        stepData: { status: status },
-      })
-    );
-  });
-
   it('should set form data after loading user request', () => {
     const userRequest: FSUserRequest = {
       configurationSteps: [{ yformConfigurator: { id: 'id' } }],
