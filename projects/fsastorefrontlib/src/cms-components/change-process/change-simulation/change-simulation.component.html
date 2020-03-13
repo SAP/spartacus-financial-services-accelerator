@@ -102,10 +102,20 @@
               {{ 'changeRequest.description' | cxTranslate }}
             </div>
             <div class="col-6 text-right text-sm-left">
-              <ng-container *ngIf="changeRequest.fsStepGroupDefinition.requestType.code === 'FSINSUREDOBJECT_CHANGE'">
+              <ng-container
+                *ngIf="
+                  changeRequest.fsStepGroupDefinition.requestType.code ===
+                  'FSINSUREDOBJECT_CHANGE'
+                "
+              >
                 {{ 'forms.auto.' + changedPolicyObject.label | cxTranslate }}
               </ng-container>
-              <ng-container *ngIf="changeRequest.fsStepGroupDefinition.requestType.code === 'FSCOVERAGE_CHANGE'">
+              <ng-container
+                *ngIf="
+                  changeRequest.fsStepGroupDefinition.requestType.code ===
+                  'FSCOVERAGE_CHANGE'
+                "
+              >
                 {{ changedPolicyObject.label }}
               </ng-container>
             </div>
@@ -115,10 +125,20 @@
               {{ 'changeRequest.currentSelection' | cxTranslate }}
             </div>
             <div class="col-6 text-right text-sm-left">
-              <ng-container *ngIf="changeRequest.fsStepGroupDefinition.requestType.code === 'FSINSUREDOBJECT_CHANGE'">
+              <ng-container
+                *ngIf="
+                  changeRequest.fsStepGroupDefinition.requestType.code ===
+                  'FSINSUREDOBJECT_CHANGE'
+                "
+              >
                 {{ changedPolicyObject.oldValue }}
               </ng-container>
-              <ng-container *ngIf="changeRequest.fsStepGroupDefinition.requestType.code === 'FSCOVERAGE_CHANGE'">
+              <ng-container
+                *ngIf="
+                  changeRequest.fsStepGroupDefinition.requestType.code ===
+                  'FSCOVERAGE_CHANGE'
+                "
+              >
                 {{
                   'changeRequest.' + changedPolicyObject.oldValue | cxTranslate
                 }}
@@ -130,10 +150,20 @@
               {{ 'changeRequest.newSelection' | cxTranslate }}
             </div>
             <div class="col-6 text-right text-sm-left">
-              <ng-container *ngIf="changeRequest.fsStepGroupDefinition.requestType.code === 'FSINSUREDOBJECT_CHANGE'">
+              <ng-container
+                *ngIf="
+                  changeRequest.fsStepGroupDefinition.requestType.code ===
+                  'FSINSUREDOBJECT_CHANGE'
+                "
+              >
                 {{ changedPolicyObject.newValue }}
               </ng-container>
-              <ng-container *ngIf="changeRequest.fsStepGroupDefinition.requestType.code === 'FSCOVERAGE_CHANGE'">
+              <ng-container
+                *ngIf="
+                  changeRequest.fsStepGroupDefinition.requestType.code ===
+                  'FSCOVERAGE_CHANGE'
+                "
+              >
                 {{
                   'changeRequest.' + changedPolicyObject.newValue | cxTranslate
                 }}
