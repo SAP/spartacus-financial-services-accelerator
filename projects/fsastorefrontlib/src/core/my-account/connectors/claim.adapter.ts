@@ -9,6 +9,15 @@ export abstract class ClaimAdapter {
   abstract getClaims(userId: string): Observable<any>;
 
   /**
+   * Abstract method used to get claim for user
+   *
+   * @param userId The user id
+   * @param claimId The claim id
+
+   */
+  abstract getClaim(userId: string, claimId: string): Observable<any>;
+
+  /**
    * Abstract method used to delete claim
    *
    * @param userId The user id
