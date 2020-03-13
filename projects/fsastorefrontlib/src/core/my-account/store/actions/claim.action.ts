@@ -8,6 +8,10 @@ export const LOAD_CLAIMS = '[Claim] Load Claims';
 export const LOAD_CLAIMS_SUCCESS = '[Claim] Load Claims Success';
 export const LOAD_CLAIMS_FAIL = '[Claim] Load Claims Fail';
 
+export const LOAD_CURRENT_CLAIM = '[Claim] Load Current Claim';
+export const LOAD_CURRENT_CLAIM_FAIL = '[Claim] Load Current Claim Fail';
+export const LOAD_CURRENT_CLAIM_SUCCESS = '[Claim] Load Current Claim Success';
+
 export const CREATE_CLAIM = '[Claim] Create Claim';
 export const CREATE_CLAIM_FAIL = '[Claim] Create Claim Fail';
 export const CREATE_CLAIM_SUCCESS = '[Claim] Create Claim Success';
@@ -43,6 +47,21 @@ export class LoadClaimsSuccess implements Action {
 
 export class LoadClaimsFail implements Action {
   readonly type = LOAD_CLAIMS_FAIL;
+  constructor(public payload: any) {}
+}
+
+export class LoadCurrentClaim implements Action {
+  readonly type = LOAD_CURRENT_CLAIM;
+  constructor(public payload: any) {}
+}
+
+export class LoadCurrentClaimSuccess implements Action {
+  readonly type = LOAD_CURRENT_CLAIM_SUCCESS;
+  constructor(public payload: any) {}
+}
+
+export class LoadCurrentClaimFail implements Action {
+  readonly type = LOAD_CURRENT_CLAIM_FAIL;
   constructor(public payload: any) {}
 }
 
@@ -83,6 +102,9 @@ export type ClaimAction =
   | LoadClaims
   | LoadClaimsSuccess
   | LoadClaimsFail
+  | LoadCurrentClaim
+  | LoadCurrentClaimSuccess
+  | LoadCurrentClaimFail
   | CreateClaim
   | CreateClaimSuccess
   | CreateClaimFail

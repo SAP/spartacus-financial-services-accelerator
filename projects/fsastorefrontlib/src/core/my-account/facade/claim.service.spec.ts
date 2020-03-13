@@ -6,8 +6,8 @@ import { ClaimDataService } from '../services/claim-data.service';
 import { Type } from '@angular/core';
 import * as fromAction from '../store/actions';
 import { reducerProvider, reducerToken } from '../store/reducers';
-import { of, Observable } from 'rxjs';
-import { OCC_USER_ID_CURRENT, AuthService } from '@spartacus/core';
+import { of, Observable, ReplaySubject } from 'rxjs';
+import { OCC_USER_ID_CURRENT, AuthService, UserToken } from '@spartacus/core';
 
 const userId = OCC_USER_ID_CURRENT;
 const policyId = 'PL00001';
@@ -24,9 +24,14 @@ const claimPolicies = {
   loaded: false,
 };
 
+const userToken$ = new ReplaySubject<UserToken>();
+
 class MockAuthService {
   getOccUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
+  }
+  getUserToken(): Observable<UserToken> {
+    return userToken$.asObservable();
   }
 }
 
@@ -84,15 +89,25 @@ describe('ClaimServiceTest', () => {
   });
 
   it('should be able to get current claim', () => {
-    store.dispatch(new fromAction.UpdateClaimSuccess({ claimId: claimId }));
-    let claimsResponse;
+    store.dispatch(
+      new fromAction.LoadCurrentClaimSuccess({ claimId: claimId })
+    );
+    let claimResponse;
     service
       .getCurrentClaim()
-      .subscribe(claims => {
-        claimsResponse = claims;
+      .subscribe(claim => {
+        claimResponse = claim;
       })
       .unsubscribe();
-    expect(claimsResponse).toEqual({ claimId: claimId });
+    expect(claimResponse).toEqual({ claimId: claimId });
+  });
+
+  it('should be able to load claim by id', () => {
+    service.currentClaimId = claimId;
+    service.loadCurrentClaim();
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.LoadCurrentClaim({ userId: userId, claimId: claimId })
+    );
   });
 
   it('should be able to get loaded claims flag', () => {
@@ -165,6 +180,13 @@ describe('ClaimServiceTest', () => {
     service.removeClaim(userId, claimId);
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.DeleteClaim({ userId: userId, claimId: claimId })
+    );
+  });
+
+  it('should be able to resume claim', () => {
+    service.resumeClaim(claimId);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.LoadCurrentClaim({ userId: userId, claimId: claimId })
     );
   });
 

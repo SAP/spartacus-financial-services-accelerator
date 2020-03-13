@@ -1,9 +1,9 @@
 <h2 class="section-header-heading text-center col mb-0">
   {{ 'fscommon.summary' | cxTranslate }}
 </h2>
-<ng-container *ngIf="userRequest$ | async as userRequest">
+<ng-container *ngIf="claimRequest$ | async as claimRequest">
   <ng-container
-    *ngFor="let configurationStep of userRequest?.configurationSteps"
+    *ngFor="let configurationStep of claimRequest?.configurationSteps"
   >
     <ng-container *ngIf="configurationStep.stepContent">
       <div class="accordion">

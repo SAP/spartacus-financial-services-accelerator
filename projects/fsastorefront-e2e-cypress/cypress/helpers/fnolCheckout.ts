@@ -31,7 +31,7 @@ export function selectAutoPolicyForFNOL() {
 }
 
 export function checkFNOLCheckoutPage() {
-  cy.get('fsa-user-request-progress-bar')
+  cy.get('fsa-fnol-progress-bar')
     .should('be.visible')
     .within(() => {
       cy.get('h2').contains('Make a Claim Online');
@@ -107,7 +107,7 @@ export function populateGeneralInformationStep() {
 }
 
 export function checkSummaryPage() {
-  cy.get('fsa-user-request-summary').within(() => {
+  cy.get('fsa-fnol-summary').within(() => {
     cy.get('h2').contains('Summary');
   });
   cy.get('.accordion-item').should('have.length', '3');

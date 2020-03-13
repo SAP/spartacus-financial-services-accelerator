@@ -29,6 +29,17 @@ export class OccClaimAdapter implements ClaimAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
+  getClaim(userId: string, claimId: string) {
+    const url = this.getClaimsEndpoint(userId) + '/' + claimId;
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+
+    return this.http
+      .get(url, { headers })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
   deleteClaim(userId: string, claimId: string) {
     const url = this.getClaimsEndpoint(userId) + '/' + claimId;
     const headers = new HttpHeaders({
@@ -71,8 +82,8 @@ export class OccClaimAdapter implements ClaimAdapter {
       'Content-Type': 'application/json',
     });
     const claimBody: Claim =
-      claimData !== undefined
-        ? this.createClaimBody(claimData, {}, claimId)
+      claimData && claimData.content
+        ? this.createClaimBody(claimData.content, {}, claimId)
         : {};
     return this.http
       .patch(url, claimBody, { headers })
@@ -81,23 +92,29 @@ export class OccClaimAdapter implements ClaimAdapter {
 
   protected createClaimBody(claimData: any, claimBody: Claim, claimId: string) {
     const claim = JSON.parse(claimData);
-    const location: FSLocationOfLoss = {
-      code: claimData.locationOfLoss,
-      city: claim.city,
-      address: claim.address,
-      countryCode: claim.country,
-      postcode: claim.postcode,
-      additionalDetails: claim.description,
-    };
-    claimBody = {
-      dateOfLoss: claim.whenHappened,
-      timeOfLoss: claim.whatTime,
-      causeOfLoss: claim.howAccidentOccured,
-      incidentType: { incidentCode: claim.whatHappened },
-      locationOfLoss: location.countryCode !== undefined ? location : null,
-      claimNumber: claimId,
-      requestId: claim.requestId,
-    };
+    let location: FSLocationOfLoss;
+    if (claim) {
+      if (claimData.locationOfLoss) {
+        location = {
+          code: claimData.locationOfLoss,
+          city: claim.city,
+          address: claim.address,
+          countryCode: claim.country,
+          postcode: claim.postcode,
+          additionalDetails: claim.description,
+        };
+      }
+      claimBody = {
+        dateOfLoss: claim.whenHappened,
+        timeOfLoss: claim.whatTime,
+        causeOfLoss: claim.howAccidentOccured,
+        incidentType: { incidentCode: claim.whatHappened },
+        locationOfLoss:
+          location && location.countryCode !== undefined ? location : {},
+        claimNumber: claimId,
+        requestId: claim.requestId,
+      };
+    }
     return claimBody;
   }
 }

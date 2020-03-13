@@ -1,26 +1,52 @@
+import { Claim } from './../../../occ/occ-models/occ.models';
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromClaimStore from '../store';
-import {
-  ClaimDataService,
-  SelectedPolicy,
-} from '../services/claim-data.service';
+import { SelectedPolicy } from '../services/claim-data.service';
 import { AuthService } from '@spartacus/core';
 import { take } from 'rxjs/operators';
+import * as fromSelector from '../store/selectors';
 
 @Injectable()
 export class ClaimService {
-  constructor(
-    protected store: Store<fromReducer.UserState>,
-    protected claimData: ClaimDataService,
-    protected authService: AuthService
-  ) {}
-
+  currentClaimId;
   private selectedPolicySource = new BehaviorSubject<SelectedPolicy>(null);
   private selectedPolicy = this.selectedPolicySource.asObservable();
+
+  constructor(
+    protected store: Store<fromReducer.UserState>,
+    protected authService: AuthService
+  ) {
+    combineLatest([
+      this.store.select(fromSelector.getClaimContent),
+      this.authService.getUserToken(),
+    ])
+      .subscribe(([claim, userToken]) => {
+        this.currentClaimId = claim.claimNumber;
+        if (this.isCreated(claim) && this.isLoggedIn(userToken.userId)) {
+          this.loadCurrentClaim();
+        }
+      })
+      .unsubscribe();
+  }
+
+  loadCurrentClaim() {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.store.dispatch(
+          new fromAction.LoadCurrentClaim({
+            userId: occUserId,
+            claimId: this.currentClaimId,
+          })
+        );
+      })
+      .unsubscribe();
+  }
 
   getClaims(): Observable<any> {
     return this.store.pipe(select(fromClaimStore.getClaims));
@@ -43,11 +69,17 @@ export class ClaimService {
   }
 
   loadClaims() {
-    this.store.dispatch(
-      new fromAction.LoadClaims({
-        userId: this.claimData.userId,
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.store.dispatch(
+          new fromAction.LoadClaims({
+            userId: occUserId,
+          })
+        );
       })
-    );
+      .unsubscribe();
   }
 
   shouldReload() {
@@ -89,5 +121,49 @@ export class ClaimService {
         )
       )
       .unsubscribe();
+  }
+
+  resumeClaim(claimNumber: string) {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.currentClaimId = claimNumber;
+        this.store.dispatch(
+          new fromAction.LoadCurrentClaim({
+            userId: occUserId,
+            claimId: claimNumber,
+          })
+        );
+      })
+      .unsubscribe();
+  }
+
+  updateClaim(claim: Claim, stepIndex: number, stepStatus: string) {
+    const stepData = Object.assign({}, claim.configurationSteps[stepIndex], {
+      status: stepStatus,
+    });
+
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.store.dispatch(
+          new fromAction.UpdateClaim({
+            userId: occUserId,
+            claimData: claim,
+            stepData: stepData,
+          })
+        );
+      })
+      .unsubscribe();
+  }
+
+  private isCreated(claim: any): boolean {
+    return claim && claim.claimNumber !== undefined;
+  }
+
+  private isLoggedIn(userId: string): boolean {
+    return typeof userId !== undefined;
   }
 }
