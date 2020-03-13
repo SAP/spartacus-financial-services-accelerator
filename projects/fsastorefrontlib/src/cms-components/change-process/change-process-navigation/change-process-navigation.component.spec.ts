@@ -45,6 +45,9 @@ export class MockUserRequestNavigationService {
   getActiveStep() {
     return mockRequest.configurationSteps[0];
   }
+  getConfigurationSteps() {
+    return mockRequest.configurationSteps;
+  }
 }
 
 describe('ChangeProcessNavigationComponent', () => {

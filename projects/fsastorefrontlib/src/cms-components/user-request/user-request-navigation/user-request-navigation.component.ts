@@ -42,7 +42,7 @@ export class UserRequestNavigationComponent implements OnInit, OnDestroy {
         .pipe(
           map(userRequestData => {
             if (
-              userRequestData.configurationSteps != null &&
+              userRequestData.configurationSteps !== null &&
               userRequestData.configurationSteps.length > 0
             ) {
               this.configurationSteps = userRequestData.configurationSteps;
