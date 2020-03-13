@@ -12,12 +12,6 @@ export class UserRequestEffects {
     ofType(fromActions.UPDATE_USER_REQUEST),
     map((action: fromActions.UpdateUserRequest) => action.payload),
     switchMap(payload => {
-      if (payload === undefined || payload.userId === undefined) {
-        payload = {
-          userId: payload.userId,
-          requestId: payload.requestId,
-        };
-      }
       return this.userRequestConnector
         .updateUserRequest(payload.userId, payload.requestId, payload.stepData)
         .pipe(

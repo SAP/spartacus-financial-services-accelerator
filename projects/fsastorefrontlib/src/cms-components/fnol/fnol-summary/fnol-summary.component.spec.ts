@@ -98,4 +98,9 @@ describe('FNOLSummaryComponent', () => {
     );
     expect(contentDataItems).toBeTruthy();
   });
+
+  it('should navigate to page', () => {
+    component.navigateTo('pageLabel');
+    expect(mockRoutingService.go).toHaveBeenCalledWith('pageLabel');
+  });
 });

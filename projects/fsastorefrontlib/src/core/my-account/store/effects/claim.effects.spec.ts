@@ -230,8 +230,30 @@ describe('Claim Effects', () => {
           policeInformed: 'yes',
           witnesses: 'yes',
         },
+<<<<<<< Updated upstream
       });
       const completion = new fromActions.UpdateClaimSuccess(claim3);
+=======
+        stepData: {
+          stepContent: {
+            contentData: 'formContent',
+          },
+        },
+      });
+
+      const updateClaimSuccess = new fromActions.UpdateClaimSuccess(claim3);
+      const updateRequestSuccess = new fromUserRequestActions.UpdateUserRequest(
+        {
+          userId: OCC_USER_ID_CURRENT,
+          requestId: requestId3,
+          stepData: {
+            stepContent: {
+              contentData: 'formContent',
+            },
+          },
+        }
+      );
+>>>>>>> Stashed changes
 
       actions$ = hot('-a', { a: action });
       const expected = cold('-b', { b: completion });
@@ -247,8 +269,29 @@ describe('Claim Effects', () => {
           policeInformed: 'yes',
           witnesses: 'yes',
         },
+<<<<<<< Updated upstream
       });
       const completion = new fromActions.UpdateClaimSuccess(claim3);
+=======
+        stepData: {
+          stepContent: {
+            contentData: 'formContent',
+          },
+        },
+      });
+      const updateClaimSuccess = new fromActions.UpdateClaimSuccess(claim3);
+      const updateRequestSuccess = new fromUserRequestActions.UpdateUserRequest(
+        {
+          userId: OCC_USER_ID_CURRENT,
+          requestId: requestId3,
+          stepData: {
+            stepContent: {
+              contentData: 'formContent',
+            },
+          },
+        }
+      );
+>>>>>>> Stashed changes
 
       actions$ = hot('-a', { a: action });
       const expected = cold('-b', { b: completion });
@@ -268,9 +311,30 @@ describe('Claim Effects', () => {
           policeInformed: 'yes',
           witnesses: 'yes',
         },
+<<<<<<< Updated upstream
       });
       const completion = new fromActions.UpdateClaimSuccess(claim3);
 
+=======
+        stepData: {
+          stepData: {
+            contentData: 'formContent',
+          },
+        },
+      });
+      const updateClaimSuccess = new fromActions.UpdateClaimSuccess(claim3);
+      const updateRequestSuccess = new fromUserRequestActions.UpdateUserRequest(
+        {
+          userId: OCC_USER_ID_CURRENT,
+          requestId: requestId3,
+          stepData: {
+            stepData: {
+              contentData: 'formContent',
+            },
+          },
+        }
+      );
+>>>>>>> Stashed changes
       actions$ = hot('-a', { a: action });
       const expected = cold('-b', { b: completion });
       expect(effects.updateClaim$).toBeObservable(expected);
@@ -286,6 +350,14 @@ describe('Claim Effects', () => {
         claimData: {
           policeInformed: 'invalidData',
         },
+<<<<<<< Updated upstream
+=======
+        stepData: {
+          stepContent: {
+            contentData: 'formContent',
+          },
+        },
+>>>>>>> Stashed changes
       });
       const completion = new fromActions.UpdateClaimFail(
         JSON.stringify('Error')
