@@ -1,22 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ClaimDataService } from '../../../core/my-account/services/claim-data.service';
 import { genericIcons } from '../../../assets/icons/generic-icons';
+import { ClaimService } from './../../../core/my-account/facade/claim.service';
 
 @Component({
-  selector: 'fsa-user-request-confirmation',
-  templateUrl: './user-request-confirmation.component.html',
+  selector: 'fsa-fnol-confirmation',
+  templateUrl: './fnol-confirmation.component.html',
 })
-export class UserRequestConfirmationComponent implements OnInit {
-  claimNumber;
+export class FNOLConfirmationComponent implements OnInit {
+  claim$;
 
   constructor(
-    protected claimDataService: ClaimDataService,
+    protected claimService: ClaimService,
     protected domSanitizer: DomSanitizer
   ) {}
 
   ngOnInit() {
-    this.claimNumber = this.claimDataService.claimData.claimNumber;
+    this.claim$ = this.claimService.getCurrentClaim();
   }
   getImagelink() {
     return this.domSanitizer.bypassSecurityTrustUrl(

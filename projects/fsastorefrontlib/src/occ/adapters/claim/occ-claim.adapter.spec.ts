@@ -61,6 +61,19 @@ describe('OccClaimsService', () => {
     }));
   });
 
+  describe('getClaim', () => {
+    it('get specified claim by id', async(() => {
+      adapter.getClaim(userId, claimNumber).subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url ===
+            usersEndpoint + `/${userId}` + claimsEndpoint + `/${claimNumber}` &&
+          req.method === 'GET'
+        );
+      }, `GET method and url`);
+    }));
+  });
+
   describe('deleteClaim', () => {
     it('delete specified claim by id', async(() => {
       adapter.deleteClaim(userId, claimNumber).subscribe();

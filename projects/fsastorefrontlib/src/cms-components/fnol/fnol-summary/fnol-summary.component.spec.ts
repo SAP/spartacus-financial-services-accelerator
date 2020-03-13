@@ -3,17 +3,18 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import createSpy = jasmine.createSpy;
 import { Observable, of } from 'rxjs';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
-import { AccordionModule } from '../../../../src/shared/accordion/accordion.module';
-import { FSUserRequest } from '../../../../src/occ/occ-models';
-import { UserRequestService } from '../../../../src/core/user-request/facade';
-import { UserRequestSummaryComponent } from './user-request-summary.component';
+import { AccordionModule } from '../../../shared/accordion/accordion.module';
+import { Claim } from '../../../occ/occ-models';
+import { FNOLSummaryComponent } from './fnol-summary.component';
 import { By } from '@angular/platform-browser';
+import { ClaimService } from './../../../core/my-account/facade/claim.service';
 
 class MockRoutingService {
   go = createSpy();
 }
 
-const mockUserRequest: Observable<FSUserRequest> = of({
+const mockClaimRequest: Observable<Claim> = of({
+  claimNumber: 'testNumber',
   requestId: 'testRequestId',
   configurationSteps: [
     {
@@ -49,36 +50,35 @@ const mockUserRequest: Observable<FSUserRequest> = of({
   ],
 });
 
-class MockUserRequestService {
+class MockClaimService {
   createClaim = createSpy();
 
-  getUserRequest() {
-    return mockUserRequest;
+  getCurrentClaim() {
+    return mockClaimRequest;
   }
-  loadUserRequestData() {}
 }
 
-describe('UserRequestSummaryComponent', () => {
-  let component: UserRequestSummaryComponent;
-  let fixture: ComponentFixture<UserRequestSummaryComponent>;
+describe('FNOLSummaryComponent', () => {
+  let component: FNOLSummaryComponent;
+  let fixture: ComponentFixture<FNOLSummaryComponent>;
   let mockRoutingService: MockRoutingService;
-  let mockUserRequestService: MockUserRequestService;
+  let mockClaimService: MockClaimService;
 
   beforeEach(async(() => {
     mockRoutingService = new MockRoutingService();
-    mockUserRequestService = new MockUserRequestService();
+    mockClaimService = new MockClaimService();
     TestBed.configureTestingModule({
       imports: [I18nTestingModule, AccordionModule],
       providers: [
         { provide: RoutingService, useValue: mockRoutingService },
-        { provide: UserRequestService, useValue: mockUserRequestService },
+        { provide: ClaimService, useValue: mockClaimService },
       ],
-      declarations: [UserRequestSummaryComponent],
+      declarations: [FNOLSummaryComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserRequestSummaryComponent);
+    fixture = TestBed.createComponent(FNOLSummaryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -97,5 +97,10 @@ describe('UserRequestSummaryComponent', () => {
       By.css('.accordion-list-item')
     );
     expect(contentDataItems).toBeTruthy();
+  });
+
+  it('should navigate to page', () => {
+    component.navigateTo('pageLabel');
+    expect(mockRoutingService.go).toHaveBeenCalledWith('pageLabel');
   });
 });

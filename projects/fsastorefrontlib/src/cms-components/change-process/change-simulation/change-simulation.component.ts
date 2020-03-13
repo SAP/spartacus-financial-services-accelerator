@@ -30,7 +30,10 @@ export class ChangeSimulationComponent implements OnInit {
     if (changeRequestData.fsStepGroupDefinition) {
       switch (changeRequestData.fsStepGroupDefinition.requestType.code) {
         case ChangeRequestType.INSURED_OBJECT_CHANGE: {
-          const changeableInsuredObjectItems = changeRequestData.insurancePolicy.insuredObjectList.insuredObjects[0].insuredObjectItems.filter(
+          const insuredObject =
+            changeRequestData.insurancePolicy.insuredObjectList
+              .insuredObjects[0];
+          const changeableInsuredObjectItems = insuredObject.insuredObjectItems.filter(
             insuredObjectItem => insuredObjectItem.changeable === true
           );
           if (changeableInsuredObjectItems) {

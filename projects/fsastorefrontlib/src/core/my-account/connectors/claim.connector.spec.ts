@@ -5,9 +5,13 @@ import createSpy = jasmine.createSpy;
 import { ClaimAdapter } from './claim.adapter';
 import { ClaimConnector } from './claim.connector';
 
-class MockClaimAdapter implements ClaimAdapter {
+class MockClaimAdapter extends ClaimAdapter {
   getClaims = createSpy('ClaimAdapter.getClaims').and.callFake(userId =>
     of('getClaims' + userId)
+  );
+
+  getClaim = createSpy('ClaimAdapter.getClaim').and.callFake(
+    (userId, claimId) => of('getClaim' + userId + claimId)
   );
   deleteClaim = createSpy('ClaimAdapter.deleteClaim').and.callFake(
     (userId, claimId) => of('deleteClaim' + userId + claimId)
@@ -46,6 +50,10 @@ describe('ClaimConnector', () => {
   it('should call adapter for getClaims', () => {
     claimConnector.getClaims(user);
     expect(claimAdapter.getClaims).toHaveBeenCalledWith(user);
+  });
+  it('should call adapter for getClaim', () => {
+    claimConnector.getClaim(user, claim);
+    expect(claimAdapter.getClaim).toHaveBeenCalledWith(user, claim);
   });
   it('should call adapter for createClaim', () => {
     claimConnector.createClaim(user, policy, contract);

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { UserRequestNavigationComponent } from './user-request-navigation.component';
+import { FNOLNavigationComponent } from './fnol-navigation.component';
 import {
   GlobalMessageService,
   I18nTestingModule,
   RoutingService,
 } from '@spartacus/core';
-import { FSUserRequest } from '../../../occ/occ-models';
+import { Claim } from '../../../occ/occ-models';
 import { of } from 'rxjs';
 import { UserRequestService } from '../../../core/user-request/facade/user-request.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService } from '@fsa/dynamicforms';
-import { UserRequestDataService } from '../../../core/user-request/services';
+import { ClaimService } from './../../../core/my-account/facade/claim.service';
 
-const mockRequest: FSUserRequest = {
+const claimRequest: Claim = {
   requestId: 'test123',
   configurationSteps: [
     {
@@ -37,39 +37,46 @@ const mockActivatedRoute = {
 };
 
 export class MockUserRequestService {
-  getUserRequest() {
-    return of(mockRequest);
-  }
-
-  loadUserRequestData() {}
-
+  d;
   getAction() {
     return of('');
   }
 }
 
-export class MockUserRequestNavigationService {
-  getActiveStep() {
-    return mockRequest.configurationSteps[0];
+export class MockClaimService {
+  getCurrentClaim() {
+    return of(claimRequest);
   }
 }
 
-describe('UserRequestNavigationComponent', () => {
-  let component: UserRequestNavigationComponent;
-  let fixture: ComponentFixture<UserRequestNavigationComponent>;
+export class MockUserRequestNavigationService {
+  getActiveStep() {
+    return claimRequest.configurationSteps[0];
+  }
+}
+
+describe('FNOLNavigationComponent', () => {
+  let component: FNOLNavigationComponent;
+  let fixture: ComponentFixture<FNOLNavigationComponent>;
   let mockUserRequestService: MockUserRequestService;
+  let mockClaimService: MockClaimService;
   let mockUserRequestNavigationService: MockUserRequestNavigationService;
 
   beforeEach(async(() => {
     mockUserRequestService = new MockUserRequestService();
+    mockClaimService = new MockClaimService();
     mockUserRequestNavigationService = new MockUserRequestNavigationService();
     TestBed.configureTestingModule({
       imports: [I18nTestingModule, RouterTestingModule],
-      declarations: [UserRequestNavigationComponent],
+      declarations: [FNOLNavigationComponent],
       providers: [
         {
           provide: UserRequestService,
           useValue: mockUserRequestService,
+        },
+        {
+          provide: ClaimService,
+          useValue: mockClaimService,
         },
         {
           provide: UserRequestNavigationService,
@@ -84,10 +91,6 @@ describe('UserRequestNavigationComponent', () => {
           useValue: FormDataService,
         },
         {
-          provide: UserRequestDataService,
-          useValue: UserRequestDataService,
-        },
-        {
           provide: GlobalMessageService,
           useValue: GlobalMessageService,
         },
@@ -100,7 +103,7 @@ describe('UserRequestNavigationComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UserRequestNavigationComponent);
+    fixture = TestBed.createComponent(FNOLNavigationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
