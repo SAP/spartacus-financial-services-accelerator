@@ -60,6 +60,7 @@ class MockedUserService {
     return of('mockUser@user.com');
   }
 }
+
 describe('PotentialProductAssignmentsComponent', () => {
   let component: PotentialProductAssignmentsComponent;
   let fixture: ComponentFixture<PotentialProductAssignmentsComponent>;

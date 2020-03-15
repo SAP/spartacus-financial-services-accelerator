@@ -228,14 +228,14 @@ describe('FSProductAssignmentServiceTest', () => {
     expect(response[0].active).toEqual(false);
   });
 
-  it('should be able to remove product assignment', () => {
+  it('should not be able to load customer profile', () => {
     let response;
     service
-      .loadCustomerProfile(OCC_USER_ID_CURRENT)
+      .loadCustomerProfile(undefined)
       .subscribe(potentialAssignments => {
         response = potentialAssignments;
       })
       .unsubscribe();
-    expect(response).toEqual(MockCustomerProfile);
+    expect(response).toEqual(undefined);
   });
 });
