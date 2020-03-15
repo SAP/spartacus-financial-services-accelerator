@@ -13,7 +13,6 @@ import { OccConfig, RoutingService } from '@spartacus/core';
 
 import { DeleteClaimDialogComponent } from '../delete-claim-dialog/delete-claim-dialog.component';
 import { UserState } from './../../../../core/my-account/store/reducers/index';
-import { UserRequestService } from '../../../../core/user-request/facade/user-request.service';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
 import { ClaimService } from '../../../../core/my-account/facade';
 
@@ -28,7 +27,6 @@ export class ClaimsComponent implements OnInit, OnDestroy {
     protected config: OccConfig,
     protected domSanitizer: DomSanitizer,
     protected claimService: ClaimService,
-    protected userRequestService: UserRequestService,
     protected routingService: RoutingService
   ) {}
 
@@ -74,15 +72,16 @@ export class ClaimsComponent implements OnInit, OnDestroy {
     return this.config.backend.occ.baseUrl || '';
   }
 
-  resumeClaim(requestId: string) {
+  resumeClaim(claimNumber: string) {
+    this.claimService.resumeClaim(claimNumber);
     this.subscription.add(
-      this.userRequestService
-        .resumeRequest(requestId)
+      this.claimService
+        .getCurrentClaim()
         .pipe(
-          map(userRequest => {
-            if (userRequest.requestId === requestId) {
+          map(claim => {
+            if (claim.claimNumber === claimNumber) {
               this.routingService.go({
-                cxRoute: userRequest.configurationSteps[0].pageLabelOrId,
+                cxRoute: claim.configurationSteps[0].pageLabelOrId,
               });
             }
           })
