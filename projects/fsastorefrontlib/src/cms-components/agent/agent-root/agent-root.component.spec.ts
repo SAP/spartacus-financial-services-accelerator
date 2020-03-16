@@ -12,8 +12,9 @@ import { CmsAgentRootComponent } from '../../../occ/occ-models';
 import { AgentConnector } from '../../../core/agent/connectors/agent.connector';
 
 @Component({
-  template: '',
+  // tslint:disable
   selector: 'cx-media',
+  template: '',
 })
 class MockMediaComponent {
   @Input() container;
