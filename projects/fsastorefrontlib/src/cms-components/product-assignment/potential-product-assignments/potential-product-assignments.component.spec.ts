@@ -31,9 +31,8 @@ const mockProductAssignments = [
   },
 ];
 
-const assignmentGroupParams = 'TestGroup';
 const mockParams = {
-  assignmentGroupParams: assignmentGroupParams,
+  assignmentGroupParams: 'TestGroup',
 };
 
 class ActivatedRouteMock {
