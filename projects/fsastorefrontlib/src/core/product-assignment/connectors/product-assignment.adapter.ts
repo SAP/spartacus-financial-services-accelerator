@@ -38,12 +38,12 @@ export abstract class FSProductAssignmentAdapter {
    *
    * @param userId The user id
    * @param orgUnitId The org unit id
-   * @param productCode The product code
+   * @param productAssignmentCode The product code
    */
   abstract removeProductAssignment(
     userId: string,
     orgUnitId: string,
-    productCode: string
+    productAssignmentCode: string
   );
 
   /**

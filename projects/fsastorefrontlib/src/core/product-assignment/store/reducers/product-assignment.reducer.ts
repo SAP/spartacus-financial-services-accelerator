@@ -84,10 +84,10 @@ export function reducer(
     case fromAction.REMOVE_PRODUCT_ASSIGNMENT: {
       let content = { ...action.payload };
       const productAssignmentContent = state.content;
-      if (content && content.productCode) {
+      if (content && content.productAssignmentCode) {
         const assignments = productAssignmentContent.assignments.find(
           currentProductAssignment =>
-            currentProductAssignment.code === content.productCode
+            currentProductAssignment.code === content.productAssignmentCode
         );
         productAssignmentContent.assignments = productAssignmentContent.assignments.filter(
           elem => !assignments.code.includes(elem.code)

@@ -78,7 +78,7 @@ export class FSProductAssignmentService {
 
   removeProductAssignment(
     orgUnitId: string,
-    productCode: string,
+    productAssignmentCode: string,
     parentOrgUnit: string
   ) {
     const userId = this.user;
@@ -86,7 +86,7 @@ export class FSProductAssignmentService {
       new fromAction.RemoveProductAssignment({
         userId,
         orgUnitId,
-        productCode,
+        productAssignmentCode,
         parentOrgUnit,
       })
     );
@@ -117,6 +117,7 @@ export class FSProductAssignmentService {
       })
     );
   }
+
   getProductAssignments(): Observable<any> {
     return this.store.select(fromSelector.getLoaded).pipe(
       filter(loaded => loaded),

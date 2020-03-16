@@ -41,12 +41,12 @@ export class FSProductAssignmentConnector {
   removeProductAssignment(
     userId: string,
     orgUnitId: string,
-    productCode: string
+    productAssignmentCode: string
   ) {
     return this.productAssignmentAdapter.removeProductAssignment(
       userId,
       orgUnitId,
-      productCode
+      productAssignmentCode
     );
   }
 

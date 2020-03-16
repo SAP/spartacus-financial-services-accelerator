@@ -81,7 +81,7 @@ export class FSProductAssignmentEffects {
         .removeProductAssignment(
           payload.userId,
           payload.orgUnitId,
-          payload.productCode
+          payload.productAssignmentCode
         )
         .pipe(
           switchMap(() => {
