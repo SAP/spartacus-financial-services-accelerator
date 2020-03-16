@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { ChangeProcessNavigationComponent } from './change-process-navigation.component';
 import { ActivatedRoute } from '@angular/router';
-import { FSUserRequest } from '../../../../../../dist/fsastorefrontlib/occ/occ-models';
+import { FSUserRequest, FSStepData } from '../../../occ/occ-models/occ.models';
 import { UserRequestNavigationService } from '../../../core/user-request/facade';
 
 const mockRequest: FSUserRequest = {
@@ -42,6 +42,7 @@ class MockChangeRequestService {
   }
 }
 export class MockUserRequestNavigationService {
+  continue(configurationSteps: FSStepData[], step: number) {}
   getActiveStep() {
     return mockRequest.configurationSteps[0];
   }
@@ -79,5 +80,14 @@ describe('ChangeProcessNavigationComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should navigateNext', () => {
+    spyOn(mockUserRequestNavigationService, 'continue');
+    component.navigateNext(1);
+    expect(mockUserRequestNavigationService.continue).toHaveBeenCalledWith(
+      mockRequest.configurationSteps,
+      1
+    );
   });
 });

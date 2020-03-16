@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { ChangeRequestService } from '../../../core/change-request/facade';
 import { UserRequestNavigationService } from '../../../core/user-request/facade';
 import { Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-change-process-navigation',
@@ -25,16 +26,22 @@ export class ChangeProcessNavigationComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.changeRequest$ = this.changeRequestService.getChangeRequest();
     this.subscription.add(
-      this.changeRequest$.subscribe(changeRequestData => {
-        this.configurationSteps = this.userRequestNavigationService.getConfigurationSteps(
-          changeRequestData
-        );
-        const activeStepData = this.userRequestNavigationService.getActiveStep(
-          this.configurationSteps,
-          this.activatedRoute.routeConfig.path
-        );
-        this.activeStepIndex = this.configurationSteps.indexOf(activeStepData);
-      })
+      this.changeRequest$
+        .pipe(
+          map(changeRequestData => {
+            this.configurationSteps = this.userRequestNavigationService.getConfigurationSteps(
+              changeRequestData
+            );
+            const activeStepData = this.userRequestNavigationService.getActiveStep(
+              this.configurationSteps,
+              this.activatedRoute.routeConfig.path
+            );
+            this.activeStepIndex = this.configurationSteps.indexOf(
+              activeStepData
+            );
+          })
+        )
+        .subscribe()
     );
   }
 

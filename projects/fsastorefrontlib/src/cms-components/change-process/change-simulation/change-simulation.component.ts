@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {
   ChangedPolicyData,
   ChangeRequestType,
-} from 'projects/fsastorefrontlib/src/occ';
+} from '../../../occ/occ-models/occ.models';
 import { Observable } from 'rxjs/internal/Observable';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { DatePipe } from '@angular/common';
@@ -20,7 +20,6 @@ export class ChangeSimulationComponent implements OnInit {
   changeRequest$: Observable<any>;
   changedPolicyObjects: ChangedPolicyData[] = [];
   currentDate: Date = new Date();
-  changeType: string;
 
   ngOnInit() {
     this.changeRequest$ = this.changeRequestService.getChangeRequest();
