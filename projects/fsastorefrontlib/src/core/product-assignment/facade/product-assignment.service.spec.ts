@@ -185,7 +185,7 @@ describe('FSProductAssignmentServiceTest', () => {
       new fromAction.RemoveProductAssignment({
         userId: OCC_USER_ID_CURRENT,
         orgUnitId: mockedOrgUnitId,
-        productCode: productAssignmentCode,
+        productAssignmentCode: productAssignmentCode,
         parentOrgUnit: parentOrgUnit,
       })
     );

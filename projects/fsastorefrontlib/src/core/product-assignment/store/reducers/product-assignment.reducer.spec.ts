@@ -40,7 +40,7 @@ const mockProductAssignments = {
 const productAssignmentPayload = {
   userId: OCC_USER_ID_CURRENT,
   orgUnitId: 'AirlineCompany',
-  productCode: 'testOne',
+  productAssignmentCode: 'testOne',
   parentOrgUnit: 'SAP',
 };
 
