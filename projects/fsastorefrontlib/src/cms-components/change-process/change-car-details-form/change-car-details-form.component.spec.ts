@@ -4,11 +4,13 @@ import { I18nTestingModule } from '@spartacus/core';
 import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
 import { ChangeCarDetailsFormComponent } from './change-car-details-form.component';
 
-class MockChangeRequestService {}
+class MockChangeRequestService {
+  getChangeRequest() {}
+}
 
 const mockChangeCarDetailsForm: any = {
   effectiveDate: '10/10/2020',
-  mileage: '10000',
+  vehicleAnnualMileage: '10000',
 };
 
 describe('ChangeCarDetailsFormComponent', () => {
@@ -42,7 +44,7 @@ describe('ChangeCarDetailsFormComponent', () => {
     component.ngOnInit();
 
     controls['effectiveDate'].setValue(form.effectiveDate);
-    controls['mileage'].setValue('');
+    controls['vehicleAnnualMileage'].setValue('');
 
     expect(component.changeCarDetailsForm.valid).toBeFalsy();
   });
