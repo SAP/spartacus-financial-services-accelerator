@@ -1,25 +1,27 @@
-<h2>{{ 'b2b.selectProducts' | cxTranslate }}</h2>
 <ng-container *ngIf="productAssignments$ | async as productAssignments">
-  <div class="card-row container">
-    <div class="row">
-      <div
-        class="single-card col-4"
-        *ngFor="let productAssignment of productAssignments"
-      >
+  <ng-container *ngIf="productAssignments.length > 0">
+    <h2>{{ 'b2b.selectProducts' | cxTranslate }}</h2>
+    <div class="card-row container">
+      <div class="row">
         <div
-          class="add-remove active"
-          (click)="onDeassign(productAssignment.code)"
-        ></div>
-        <ul>
-          <li>{{ productAssignment.product?.name }}</li>
-          <li>
-            {{ productAssignment.product?.defaultCategory?.name }}
-          </li>
-          <li>{{ productAssignment.active }}</li>
-        </ul>
+          class="single-card col-4"
+          *ngFor="let productAssignment of productAssignments"
+        >
+          <div
+            class="add-remove active"
+            (click)="onDeassign(productAssignment.code)"
+          ></div>
+          <ul>
+            <li>{{ productAssignment.product?.name }}</li>
+            <li>
+              {{ productAssignment.product?.defaultCategory?.name }}
+            </li>
+            <li>{{ productAssignment.active }}</li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 </ng-container>
 <ng-container
   *ngIf="availableProductAssignments$ | async as availableProductAssignments"

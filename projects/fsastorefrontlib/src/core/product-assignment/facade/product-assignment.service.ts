@@ -126,16 +126,4 @@ export class FSProductAssignmentService {
       })
     );
   }
-
-  loadCustomerProfile(orgCustomerId: string): Observable<any> {
-    return this.authService.getOccUserId().pipe(
-      take(1),
-      switchMap(occUserId => {
-        return this.productAssignmentConnector.loadCustomerProfile(
-          occUserId,
-          orgCustomerId
-        );
-      })
-    );
-  }
 }

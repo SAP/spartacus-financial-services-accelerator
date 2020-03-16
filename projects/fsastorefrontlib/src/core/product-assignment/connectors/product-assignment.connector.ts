@@ -50,13 +50,6 @@ export class FSProductAssignmentConnector {
     );
   }
 
-  loadCustomerProfile(userId: string, orgCustomerId: string) {
-    return this.productAssignmentAdapter.loadCustomerProfile(
-      userId,
-      orgCustomerId
-    );
-  }
-
   changeActiveStatus(
     userId: string,
     orgUnitId: string,

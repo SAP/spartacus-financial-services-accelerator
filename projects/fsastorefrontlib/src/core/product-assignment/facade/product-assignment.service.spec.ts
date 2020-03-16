@@ -12,7 +12,7 @@ import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import { reducerProvider, reducerToken } from '../store/reducers';
 import { FSProductAssignmentService } from './product-assignment.service';
-import { FSProductAssignmentAdapter } from '../connectors';
+import { FSProductAssignmentAdapter } from '../connectors/product-assignment.adapter';
 
 const mockProductAssignments = {
   assignments: [
@@ -226,16 +226,5 @@ describe('FSProductAssignmentServiceTest', () => {
       .unsubscribe();
     expect(response[0].code).toEqual('testOne');
     expect(response[0].active).toEqual(false);
-  });
-
-  it('should not be able to load customer profile', () => {
-    let response;
-    service
-      .loadCustomerProfile(undefined)
-      .subscribe(potentialAssignments => {
-        response = potentialAssignments;
-      })
-      .unsubscribe();
-    expect(response).toEqual(undefined);
   });
 });

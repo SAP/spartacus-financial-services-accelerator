@@ -41,7 +41,6 @@ class ActivatedRouteMock {
 }
 
 class MockedProductAssignmentService {
-  loadCustomerProfile(): void {}
   loadProductAssignmentsForUnit(): void {}
   loadPotentialProductAssignments(): void {}
   getPotentialProductAssignments(): Observable<any> {

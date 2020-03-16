@@ -41,13 +41,6 @@ export class OccFSProductAssignmentAdapter
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  loadCustomerProfile(userId: string, orgCustomerId: string) {
-    const url = this.getOrgCustomerProfile(userId, orgCustomerId);
-    return this.http
-      .get(url)
-      .pipe(catchError((error: any) => throwError(error.json())));
-  }
-
   createProductAssignment(
     userId: string,
     orgUnitId: string,

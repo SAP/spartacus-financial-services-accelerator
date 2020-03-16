@@ -32,30 +32,20 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
   availableProductAssignments$: Observable<any>;
 
   ngOnInit() {
-    this.customerProfile$ = this.userService.get().pipe(
-      switchMap(user => {
-        if (user && user.uid) {
-          return this.productAssignmentService.loadCustomerProfile(
-            `${user.uid}.com`
-          );
-        } else {
-          return of();
-        }
-      })
-    );
     this.subscription
       .add(this.route.params.subscribe(params => this.initialize(params)))
       .add(
-        this.customerProfile$
+        this.userService
+          .get()
           .pipe(
-            map(orgParentData => {
-              this.parentOrgUnit = (<B2BAdministrator>(
-                orgParentData
-              )).orgUnit.uid;
-              if (this.parentOrgUnit) {
-                this.productAssignmentService.loadPotentialProductAssignments(
-                  this.parentOrgUnit
-                );
+            map(user => {
+              if (user && user.uid) {
+                this.parentOrgUnit = (<B2BAdministrator>user).orgUnit.uid;
+                if (this.parentOrgUnit) {
+                  this.productAssignmentService.loadPotentialProductAssignments(
+                    this.parentOrgUnit
+                  );
+                }
               }
             })
           )

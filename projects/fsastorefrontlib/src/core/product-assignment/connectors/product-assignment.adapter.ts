@@ -47,14 +47,6 @@ export abstract class FSProductAssignmentAdapter {
   );
 
   /**
-   * Abstract method used to load customer profile
-   *
-   * @param userId The user id
-   * @param orgCustomerId The org customer Id
-   */
-  abstract loadCustomerProfile(userId: string, orgCustomerId: string);
-
-  /**
    * Abstract method used to change active status of product assignment by its code
    *
    * @param userId The user id
