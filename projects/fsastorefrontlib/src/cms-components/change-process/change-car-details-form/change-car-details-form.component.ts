@@ -22,8 +22,52 @@ export class ChangeCarDetailsFormComponent implements OnInit {
       { value: new Date().toISOString().substr(0, 10), disabled: true },
       Validators.required
     ),
-    mileage: ['', [Validators.required, Validators.max(100000)]],
+    vehicleAnnualMileage: ['', [Validators.required, Validators.max(100000)]],
   });
 
-  ngOnInit() {}
+  changeRequest$;
+
+  ngOnInit() {
+    this.changeRequest$ = this.changeRequestService.getChangeRequest();
+  }
+
+  simulateChanges(changeRequest) {
+    if (this.changeCarDetailsForm.valid) {
+      let changedInsuredObject;
+      if (
+        changeRequest.insurancePolicy &&
+        changeRequest.insurancePolicy.insuredObjectList &&
+        changeRequest.insurancePolicy.insuredObjectList.insuredObjects &&
+        changeRequest.insurancePolicy.insuredObjectList.insuredObjects.length >
+          0
+      ) {
+        changeRequest.insurancePolicy.insuredObjectList.insuredObjects.forEach(
+          insuredObject => {
+            const changedItem = insuredObject.insuredObjectItems.filter(
+              item => item.label === 'vehicleAnnualMileage'
+            );
+            if (changedItem) {
+              changedInsuredObject = {
+                insuredObjectId: insuredObject.insuredObjectId,
+                insuredObjectItems: [
+                  {
+                    label: changedItem[0].label,
+                    value: this.changeCarDetailsForm.value.vehicleAnnualMileage,
+                  },
+                ],
+              };
+            }
+          }
+        );
+      }
+      this.changeRequestService.simulateChangeRequest({
+        requestId: changeRequest.requestId,
+        insurancePolicy: {
+          insuredObjectList: {
+            insuredObjects: [changedInsuredObject],
+          },
+        },
+      });
+    }
+  }
 }

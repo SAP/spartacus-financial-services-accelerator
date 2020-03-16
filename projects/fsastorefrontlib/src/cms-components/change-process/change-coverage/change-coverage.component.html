@@ -14,21 +14,16 @@
         disabled
       />
     </label>
-    <ng-container *ngFor="let optionalProduct of optionalProducts">
+    <ng-container *ngFor="let includedCoverage of includedCoverages">
       <div
         class="row mx-3 py-3 no-gutters position-relative"
-        *ngIf="optionalProduct.coverageProduct"
+        *ngIf="includedCoverage.coverageProduct"
       >
         <div class="col-12 col-md-7 align-self-center">
-          <h6>{{ optionalProduct.coverageProduct.cartDisplayName }}</h6>
+          <h6>{{ includedCoverage.coverageProduct.cartDisplayName }}</h6>
         </div>
         <div class="col-12 col-md-3 align-self-center">
-          <ng-container *ngIf="!optionalProduct.coverageIsIncluded">
-            <button class="secondary-button btn-block text-capitalize">
-              {{ 'fscommon.add' | cxTranslate }}
-            </button>
-          </ng-container>
-          <ng-container *ngIf="optionalProduct.coverageIsIncluded">
+          <ng-container *ngIf="includedCoverage.coverageIsIncluded">
             <div class="col-12 col-md-3 align-self-center">
               {{ 'fscommon.included' | cxTranslate }}
             </div>
@@ -36,5 +31,44 @@
         </div>
       </div>
     </ng-container>
+    <ng-container *ngFor="let potentialCoverage of potentialCoverages">
+      <div
+        class="row mx-3 py-3 no-gutters position-relative"
+        *ngIf="potentialCoverage.coverageProduct"
+      >
+        <div class="col-12 col-md-7 align-self-center">
+          <h6>{{ potentialCoverage.coverageProduct.cartDisplayName }}</h6>
+        </div>
+        <div class="col-12 col-md-3 align-self-center">
+          <ng-container *ngIf="!potentialCoverage.coverageIsIncluded">
+            <button
+              class="secondary-button btn-block text-capitalize"
+              (click)="addCoverage(potentialCoverage)"
+            >
+              {{ 'fscommon.add' | cxTranslate }}
+            </button>
+          </ng-container>
+          <ng-container *ngIf="potentialCoverage.coverageIsIncluded">
+            <button
+              class="secondary-button btn-block text-capitalize"
+              (click)="removeCoverage(potentialCoverage)"
+            >
+              {{ 'common.remove' | cxTranslate }}
+            </button>
+          </ng-container>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="row mt-5">
+    <button class="action-button btn-block">
+      {{ 'common.back' | cxTranslate }}
+    </button>
+    <button
+      class="primary-button btn-block"
+      (click)="simulateChanges(changeRequest)"
+    >
+      {{ 'common.continue' | cxTranslate }}
+    </button>
   </div>
 </ng-container>

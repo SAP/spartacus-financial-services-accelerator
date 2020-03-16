@@ -15,7 +15,6 @@ import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 import { reducerToken } from '../../core/change-request/store/reducers/index';
 import { ChangeCarDetailsFormComponent } from './change-car-details-form/change-car-details-form.component';
 import { ChangeCoverageComponent } from './change-coverage/change-coverage.component';
-import { ChangeProcessNavigationComponent } from './change-process-navigation/change-process-navigation.component';
 import { ChangeProcessProgressBarComponent } from './change-process-progress-bar/change-process-progress-bar.component';
 import { ChangeSimulationComponent } from './change-simulation/change-simulation.component';
 import { FSProgressBarModule } from '../progress-bar/progress-bar.module';
@@ -73,9 +72,6 @@ const routes: Routes = [
         ChangeSimulationFlex: {
           component: ChangeSimulationComponent,
         },
-        ChangeRequestNavigationFlex: {
-          component: ChangeProcessNavigationComponent,
-        },
       },
     }),
   ],
@@ -84,21 +80,18 @@ const routes: Routes = [
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
     ChangeCarDetailsFormComponent,
-    ChangeProcessNavigationComponent,
   ],
   exports: [
     ChangeCoverageComponent,
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
     ChangeCarDetailsFormComponent,
-    ChangeProcessNavigationComponent,
   ],
   entryComponents: [
     ChangeCoverageComponent,
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
     ChangeCarDetailsFormComponent,
-    ChangeProcessNavigationComponent,
   ],
 })
 export class ChangeProcessModule {}

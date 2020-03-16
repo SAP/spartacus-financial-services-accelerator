@@ -45,6 +45,14 @@ export class OccChangeRequestAdapter implements ChangeRequestAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
+  simulateChangeRequst(userId: string, requestId: string, changeRequest: any) {
+    const url =
+      this.getChangeRequestEndpoint(userId) + '/' + requestId + '/simulation';
+    return this.http
+      .post<any>(url, changeRequest)
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
   protected getChangeRequestEndpoint(userId: string) {
     const changeRequestEndpoint = '/users/' + userId + '/fsChangeRequests';
     return this.occEndpointService.getBaseEndpoint() + changeRequestEndpoint;

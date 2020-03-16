@@ -48,6 +48,29 @@ export class ChangeRequestEffects {
     })
   );
 
+  @Effect()
+  simulateChangeRequest$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.SIMULATE_CHANGE_REQUEST),
+    map((action: fromActions.SimulateChangeRequest) => action.payload),
+    mergeMap(payload => {
+      console.log(payload);
+      return this.changeRequestConnector
+        .simulateChangeRequest(
+          payload.userId,
+          payload.requestId,
+          payload.changeRequest
+        )
+        .pipe(
+          map((changeRequest: any) => {
+            return new fromActions.SimulateChangeRequestSucess(changeRequest);
+          }),
+          catchError(error =>
+            of(new fromActions.SimulateChangeRequestFail(JSON.stringify(error)))
+          )
+        );
+    })
+  );
+
   constructor(
     private actions$: Actions,
     private changeRequestConnector: ChangeRequestConnector

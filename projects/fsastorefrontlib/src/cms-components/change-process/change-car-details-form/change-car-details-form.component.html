@@ -1,29 +1,42 @@
-<form [formGroup]="changeCarDetailsForm">
-  <div class="form-group">
-    <label>
-      <span class="label-content">{{
-        'forms.effectiveDate' | cxTranslate
-      }}</span>
-      <input
-        class="form-control"
-        type="date"
-        name="effectiveDate"
-        formControlName="effectiveDate"
-      />
-    </label>
+<ng-container *ngIf="changeRequest$ | async as changeRequest">
+  <form [formGroup]="changeCarDetailsForm">
+    <div class="form-group">
+      <label>
+        <span class="label-content">{{
+          'forms.effectiveDate' | cxTranslate
+        }}</span>
+        <input
+          class="form-control"
+          type="date"
+          name="effectiveDate"
+          formControlName="effectiveDate"
+        />
+      </label>
+    </div>
+    <div class="form-group">
+      <label>
+        <span class="label-content">{{
+          'forms.changeMileage' | cxTranslate
+        }}</span>
+        <input
+          class="form-control"
+          type="text"
+          name="vehicleAnnualMileage"
+          placeholder="{{ 'forms.changeMileage' | cxTranslate }}"
+          formControlName="vehicleAnnualMileage"
+        />
+      </label>
+    </div>
+  </form>
+  <div class="row mt-5">
+    <button class="action-button btn-block">
+      {{ 'common.back' | cxTranslate }}
+    </button>
+    <button
+      class="primary-button btn-block"
+      (click)="simulateChanges(changeRequest)"
+    >
+      {{ 'common.continue' | cxTranslate }}
+    </button>
   </div>
-  <div class="form-group">
-    <label>
-      <span class="label-content">{{
-        'forms.changeMileage' | cxTranslate
-      }}</span>
-      <input
-        class="form-control"
-        type="text"
-        name="mileage"
-        placeholder="{{ 'forms.changeMileage' | cxTranslate }}"
-        formControlName="mileage"
-      />
-    </label>
-  </div>
-</form>
+</ng-container>
