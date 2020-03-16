@@ -4,13 +4,34 @@ import { I18nTestingModule, CmsComponent } from '@spartacus/core';
 import { MediaModule, CmsComponentData } from '@spartacus/storefront';
 import { of, Observable, BehaviorSubject } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
+import { Component, Input } from '@angular/core';
 
 import { AgentRootComponent } from './agent-root.component';
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { CmsAgentRootComponent } from '../../../occ/occ-models';
 import { AgentConnector } from '../../../core/agent/connectors/agent.connector';
 
-const mockedAgentList = ['testAgent'];
+@Component({
+  template: '',
+  selector: 'cx-media',
+})
+class MockMediaComponent {
+  @Input() container;
+  @Input() format;
+}
+
+const mockedAgentList = {
+  agents: [
+    {
+      email: 'testagent1@test.com',
+      displayName: 'Test agent 1',
+    },
+    {
+      email: 'testagent2@test.com',
+      displayName: 'Test agent 2',
+    },
+  ],
+};
 
 export class MockOccAgentConnector {
   getAgentsByCategory(): Observable<Object> {
@@ -45,13 +66,8 @@ describe('AgentRootComponent', () => {
   beforeEach(async(() => {
     mockOccAgentAConnector = new MockOccAgentConnector();
     TestBed.configureTestingModule({
-      imports: [
-        I18nTestingModule,
-        AccordionModule,
-        MediaModule,
-        RouterTestingModule,
-      ],
-      declarations: [AgentRootComponent, MockUrlPipe],
+      imports: [I18nTestingModule, AccordionModule, RouterTestingModule],
+      declarations: [AgentRootComponent, MockUrlPipe, MockMediaComponent],
       providers: [
         {
           provide: CmsComponentData,
@@ -77,8 +93,10 @@ describe('AgentRootComponent', () => {
   });
 
   it('should return agent list', () => {
-    component.agentList$.subscribe(result => {
-      expect(result).toEqual(mockedAgentList);
-    });
+    component.agentList$
+      .subscribe(result => {
+        expect(result).toEqual(mockedAgentList);
+      })
+      .unsubscribe();
   });
 });
