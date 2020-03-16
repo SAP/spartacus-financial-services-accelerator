@@ -38,4 +38,15 @@ describe('Change Request Reducer', () => {
       expect(state.loaded).toEqual(true);
     });
   });
+
+  describe('SIMULATE_CHANGE_REQUEST_SUCESS', () => {
+    it('should simulate change request', () => {
+      const action = new fromAction.SimulateChangeRequestSucess(
+        mockedChangeRequest
+      );
+      const state = fromReducer.reducer(initialState, action);
+      expect(state.content).toEqual(mockedChangeRequest);
+      expect(state.loaded).toEqual(true);
+    });
+  });
 });

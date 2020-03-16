@@ -53,7 +53,6 @@ export class ChangeRequestEffects {
     ofType(fromActions.SIMULATE_CHANGE_REQUEST),
     map((action: fromActions.SimulateChangeRequest) => action.payload),
     mergeMap(payload => {
-      console.log(payload);
       return this.changeRequestConnector
         .simulateChangeRequest(
           payload.userId,

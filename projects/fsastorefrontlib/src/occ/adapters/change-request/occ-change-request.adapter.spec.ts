@@ -20,6 +20,8 @@ const requestId = 'requestId';
 const usersEndpoint = '/users';
 const changeRequestsEndpoint = '/fsChangeRequests';
 
+const changeRequestData = {};
+
 const MockOccModuleConfig: OccConfig = {
   context: {
     baseSite: [''],
@@ -70,6 +72,24 @@ describe('OccChangeRequestAdapter', () => {
           req.params.append('contractId', contractId) &&
           req.params.append('requestType', changeRequestType) &&
           req.method === 'POST'
+        );
+      }, `POST method and url`);
+    }));
+  });
+
+  describe('simulateChangeRequest', () => {
+    it('should simulate change request', async(() => {
+      adapter
+        .simulateChangeRequst(userId, requestId, changeRequestData)
+        .subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url ===
+            usersEndpoint +
+              `/${userId}` +
+              changeRequestsEndpoint +
+              `/${requestId}` +
+              '/simulation' && req.method === 'POST'
         );
       }, `POST method and url`);
     }));
