@@ -1,6 +1,6 @@
 <ng-container *ngIf="agentList$ | async as agentList">
   <div class="accordion">
-    <ng-container *ngIf="agentList && agentList.length > 0">
+    <ng-container *ngIf="agentList && agentList.agents.length > 0">
       <fsa-accordion-item
         [opened]="false"
         [title]="
