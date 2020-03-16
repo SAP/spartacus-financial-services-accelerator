@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
@@ -50,8 +50,9 @@ export class OccFSProductAssignmentAdapter
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
+    const params = new HttpParams().set('productCode', productCode);
     return this.http
-      .post<any>(`${url}?productCode=${productCode}`, { headers })
+      .post<any>(url, JSON.stringify({}), { headers, params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
