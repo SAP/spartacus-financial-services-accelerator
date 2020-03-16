@@ -15,6 +15,7 @@ import {
 } from '@spartacus/storefront';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCheckoutStep } from './fs-checkout-step.component';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-checkout-progress',
@@ -35,6 +36,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
   }
   private subscription = new Subscription();
   activeCategory$: Observable<string>;
+  activeCategorySteps = [];
 
   ngOnInit() {
     super.ngOnInit();
@@ -43,40 +45,46 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
   }
 
   setActiveCategory() {
-    this.activeCategory$ = this.categoryService.getActiveCategory();
-    this.activatedRoute.params.subscribe(params => {
-      const categoryCode = 'categoryCode';
-      const formCode = 'formCode';
-      if (params[categoryCode]) {
-        this.categoryService.setActiveCategory(params[categoryCode]);
-      } else if (params[formCode]) {
-        this.categoryService.setActiveCategory(params[formCode]);
-      } else {
-        this.subscription.add(
-          this.cartService.getActive().subscribe(cart => {
-            if (
-              cart.deliveryOrderGroups &&
-              cart.deliveryOrderGroups.length > 0 &&
-              cart.deliveryOrderGroups[0].entries &&
-              cart.deliveryOrderGroups[0].entries.length > 0
-            ) {
-              const fsProduct: FSProduct =
-                cart.deliveryOrderGroups[0].entries[0].product;
-              if (fsProduct && fsProduct.defaultCategory) {
-                this.categoryService.setActiveCategory(
-                  fsProduct.defaultCategory.code
-                );
-              }
+    this.subscription.add(
+      this.activatedRoute.params
+        .pipe(
+          map(params => {
+            const categoryCode = 'categoryCode';
+            const formCode = 'formCode';
+            if (params[categoryCode]) {
+              this.categoryService.setActiveCategory(params[categoryCode]);
+            } else if (params[formCode]) {
+              this.categoryService.setActiveCategory(params[formCode]);
+            } else {
+              this.subscription.add(
+                this.cartService.getActive().subscribe(cart => {
+                  if (
+                    cart.deliveryOrderGroups &&
+                    cart.deliveryOrderGroups.length > 0 &&
+                    cart.deliveryOrderGroups[0].entries &&
+                    cart.deliveryOrderGroups[0].entries.length > 0
+                  ) {
+                    const fsProduct: FSProduct =
+                      cart.deliveryOrderGroups[0].entries[0].product;
+                    if (fsProduct && fsProduct.defaultCategory) {
+                      this.categoryService.setActiveCategory(
+                        fsProduct.defaultCategory.code
+                      );
+                    }
+                  }
+                })
+              );
             }
+            this.activeCategory$ = this.categoryService.getActiveCategory();
           })
-        );
-      }
-    });
+        )
+        .subscribe()
+    );
   }
 
   setActiveStepIndex() {
     this.activeStepUrl = this.activatedRoute.routeConfig.path;
-    this.steps.forEach((step, index) => {
+    this.activeCategorySteps.forEach((step, index) => {
       const routeUrl = this.routingConfigService.getRouteConfig(step.routeName)
         .paths[0];
       if (routeUrl === this.activeStepUrl) {
@@ -88,7 +96,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
   filterSteps() {
     this.subscription.add(
       this.activeCategory$.subscribe(activeCategory => {
-        this.steps = this.steps.filter(step => {
+        this.activeCategorySteps = this.steps.filter(step => {
           return (
             !(<FSCheckoutStep>step).restrictedCategories ||
             (<FSCheckoutStep>step).restrictedCategories.indexOf(
