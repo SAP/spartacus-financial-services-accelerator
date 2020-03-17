@@ -1,1 +1,203 @@
-<p>change-simulation works!</p>
+<ng-container *ngIf="changeRequest$ | async as changeRequest">
+  <ng-container
+    *ngIf="getChangedPolicyObjects(changeRequest) as changedPolicyObjects"
+  >
+    <div class="box-shadow d-none d-md-block">
+      <div class="container-fluid">
+        <div class="row p-3 background-color-4 border-top-primary-fat">
+          <div class="col-1 text-uppercase semi-bold">
+            {{ 'fscommon.no' | cxTranslate }}.
+          </div>
+          <div class="col-4 text-uppercase semi-bold">
+            {{ 'changeRequest.description' | cxTranslate }}
+          </div>
+          <div class="col-4 text-uppercase semi-bold">
+            {{ 'changeRequest.currentSelection' | cxTranslate }}
+          </div>
+          <div class="col-3 text-uppercase semi-bold">
+            {{ 'changeRequest.newSelection' | cxTranslate }}
+          </div>
+        </div>
+        <ng-container
+          *ngFor="let changedPolicyObject of changedPolicyObjects; index as i"
+        >
+          <ng-container
+            *ngIf="
+              changeRequest.fsStepGroupDefinition.requestType.code ===
+              'FSINSUREDOBJECT_CHANGE'
+            "
+          >
+            <div class="row p-3 font-weight-bold">
+              <div class="col-1">{{ i + 1 }}.</div>
+              <div class="col-4">
+                {{ 'forms.auto.' + changedPolicyObject.label | cxTranslate }}
+              </div>
+              <div class="col-4">
+                {{ changedPolicyObject.oldValue }}
+              </div>
+              <div class="col-3 notice">
+                {{ changedPolicyObject.newValue }}
+              </div>
+            </div>
+          </ng-container>
+          <ng-container
+            *ngIf="
+              changeRequest.fsStepGroupDefinition.requestType.code ===
+              'FSCOVERAGE_CHANGE'
+            "
+          >
+            <div class="row p-3 font-weight-bold border-bottom-color-4">
+              <div class="col-1 ">{{ i + 1 }}.</div>
+              <div class="col-4">
+                {{ changedPolicyObject.label }}
+              </div>
+              <div class="col-4">
+                {{
+                  'changeRequest.' + changedPolicyObject.oldValue | cxTranslate
+                }}
+              </div>
+              <div class="col-3 notice">
+                {{
+                  'changeRequest.' + changedPolicyObject.newValue | cxTranslate
+                }}
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+        <div class="row p-3 background-color-4">
+          <div class="offset-1 col-4 pb-3 text-uppercase semi-bold">
+            {{ 'forms.effectiveDate' | cxTranslate }}:
+          </div>
+          <div class="col-4 pb-3 text-uppercase semi-bold">
+            {{ 'changeRequest.currentPremium' | cxTranslate }}:
+          </div>
+          <div class="col-3 pb-3 text-uppercase semi-bold">
+            {{ 'changeRequest.newPremium' | cxTranslate }}:
+          </div>
+          <div class="offset-1 col-4 semi-bold">
+            {{ currentDate | date: 'dd-MM-yyyy' }}
+          </div>
+          <div class="col-4 semi-bold">
+            {{ changeRequest.insurancePolicy.policyPremium.formattedValue }}
+          </div>
+          <div class="col-3 semi-bold">
+            {{ changeRequest.changedPolicy.policyPremium.formattedValue }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="box-shadow d-block d-md-none border-top-primary-fat ">
+      <ng-container
+        *ngFor="let changedPolicyObject of changedPolicyObjects; index as i"
+      >
+        <div class="container-fluid p-3 border-bottom-color-4">
+          <div class="row p-1">
+            <div class="col-6 text-uppercase semi-bold">
+              {{ 'fscommon.no' | cxTranslate }}.:
+            </div>
+            <div class="col-6 text-right text-sm-left">{{ i + 1 }}.</div>
+          </div>
+          <div class="row p-1">
+            <div class="col-6 text-uppercase semi-bold">
+              {{ 'changeRequest.description' | cxTranslate }}
+            </div>
+            <div class="col-6 text-right text-sm-left">
+              <ng-container
+                *ngIf="
+                  changeRequest.fsStepGroupDefinition.requestType.code ===
+                  'FSINSUREDOBJECT_CHANGE'
+                "
+              >
+                {{ 'forms.auto.' + changedPolicyObject.label | cxTranslate }}
+              </ng-container>
+              <ng-container
+                *ngIf="
+                  changeRequest.fsStepGroupDefinition.requestType.code ===
+                  'FSCOVERAGE_CHANGE'
+                "
+              >
+                {{ changedPolicyObject.label }}
+              </ng-container>
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-6 text-uppercase semi-bold">
+              {{ 'changeRequest.currentSelection' | cxTranslate }}
+            </div>
+            <div class="col-6 text-right text-sm-left">
+              <ng-container
+                *ngIf="
+                  changeRequest.fsStepGroupDefinition.requestType.code ===
+                  'FSINSUREDOBJECT_CHANGE'
+                "
+              >
+                {{ changedPolicyObject.oldValue }}
+              </ng-container>
+              <ng-container
+                *ngIf="
+                  changeRequest.fsStepGroupDefinition.requestType.code ===
+                  'FSCOVERAGE_CHANGE'
+                "
+              >
+                {{
+                  'changeRequest.' + changedPolicyObject.oldValue | cxTranslate
+                }}
+              </ng-container>
+            </div>
+          </div>
+          <div class="row p-1">
+            <div class="col-6 text-uppercase semi-bold">
+              {{ 'changeRequest.newSelection' | cxTranslate }}
+            </div>
+            <div class="col-6 text-right text-sm-left">
+              <ng-container
+                *ngIf="
+                  changeRequest.fsStepGroupDefinition.requestType.code ===
+                  'FSINSUREDOBJECT_CHANGE'
+                "
+              >
+                {{ changedPolicyObject.newValue }}
+              </ng-container>
+              <ng-container
+                *ngIf="
+                  changeRequest.fsStepGroupDefinition.requestType.code ===
+                  'FSCOVERAGE_CHANGE'
+                "
+              >
+                {{
+                  'changeRequest.' + changedPolicyObject.newValue | cxTranslate
+                }}
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <div class="container-fluid p-3 background-color-4">
+        <div class="row">
+          <div class="col-6 text-uppercase semi-bold">
+            {{ 'forms.effectiveDate' | cxTranslate }}:
+          </div>
+          <div class="col-6 text-right semi-bold text-sm-left">
+            {{ currentDate | date: 'dd-MM-yyyy' }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 text-uppercase semi-bold">
+            {{ 'changeRequest.currentPremium' | cxTranslate }}
+          </div>
+          <div class="col-6 text-right semi-bold text-sm-left">
+            {{ changeRequest.insurancePolicy.policyPremium.formattedValue }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6 text-uppercase semi-bold">
+            {{ 'changeRequest.newPremium' | cxTranslate }}:
+          </div>
+          <div class="col-6 text-right semi-bold text-sm-left">
+            {{ changeRequest.changedPolicy.policyPremium.formattedValue }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>

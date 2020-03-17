@@ -91,18 +91,14 @@ export class OccClaimAdapter implements ClaimAdapter {
 
   protected createClaimBody(claimData: any, claimBody: Claim, claimId: string) {
     const claim = claimData.content ? JSON.parse(claimData.content) : {};
-    let location: FSLocationOfLoss;
     if (claim) {
-      if (claimData.locationOfLoss) {
-        location = {
-          code: claimData.locationOfLoss,
-          city: claim.city,
-          address: claim.address,
-          countryCode: claim.country,
-          postcode: claim.postcode,
-          additionalDetails: claim.description,
-        };
-      }
+      const location: FSLocationOfLoss = {
+        city: claim.city,
+        address: claim.address,
+        countryCode: claim.country,
+        postcode: claim.postcode,
+        additionalDetails: claim.description,
+      };
       claimBody = {
         dateOfLoss: claim.whenHappened,
         timeOfLoss: claim.whatTime,
