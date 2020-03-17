@@ -6,23 +6,26 @@ import {
   Validators,
 } from '@angular/forms';
 import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
-import { FSStepData } from './../../../occ/occ-models';
 import { UserRequestNavigationService } from './../../../core/user-request/facade/user-request-navigation.service';
 import { ActivatedRoute } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { ChangeProcessStepComponent } from '../change-process-step/change-process-step.component';
 
 @Component({
   selector: 'fsa-change-car-details-form',
   templateUrl: './change-car-details-form.component.html',
 })
-export class ChangeCarDetailsFormComponent implements OnInit, OnDestroy {
+export class ChangeCarDetailsFormComponent extends ChangeProcessStepComponent
+  implements OnInit, OnDestroy {
   constructor(
     protected changeRequestService: ChangeRequestService,
     protected fb: FormBuilder,
     protected userRequestNavigationService: UserRequestNavigationService,
     protected activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+    super(userRequestNavigationService, activatedRoute);
+  }
 
   changeCarDetailsForm: FormGroup = this.fb.group({
     effectiveDate: new FormControl(
@@ -34,9 +37,6 @@ export class ChangeCarDetailsFormComponent implements OnInit, OnDestroy {
 
   changeRequest$;
 
-  configurationSteps: FSStepData[];
-  activeStepIndex: number;
-
   private subscription = new Subscription();
 
   ngOnInit() {
@@ -45,29 +45,21 @@ export class ChangeCarDetailsFormComponent implements OnInit, OnDestroy {
       this.changeRequest$
         .pipe(
           map(changeRequest => {
-            this.populateStepsAndNavigate(changeRequest);
+            this.populateSteps(changeRequest);
+            if (this.isSimulated(changeRequest)) {
+              this.userRequestNavigationService.continue(
+                this.configurationSteps,
+                this.activeStepIndex
+              );
+            }
           })
         )
         .subscribe()
     );
   }
 
-  populateStepsAndNavigate(changeRequest) {
-    this.configurationSteps = this.userRequestNavigationService.getConfigurationSteps(
-      changeRequest
-    );
-    const activeStepData = this.userRequestNavigationService.getActiveStep(
-      this.configurationSteps,
-      this.activatedRoute.routeConfig.path
-    );
-    this.activeStepIndex = this.configurationSteps.indexOf(activeStepData);
-
-    if (changeRequest.changedPolicy) {
-      this.userRequestNavigationService.continue(
-        this.configurationSteps,
-        this.activeStepIndex
-      );
-    }
+  isSimulated(changeRequest) {
+    return changeRequest.changedPolicy;
   }
 
   simulateChanges(changeRequest) {

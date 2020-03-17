@@ -6,25 +6,28 @@ import { map } from 'rxjs/operators';
 import { FSStepData } from './../../../occ/occ-models/occ.models';
 import { UserRequestNavigationService } from './../../../core/user-request/facade/user-request-navigation.service';
 import { ActivatedRoute } from '@angular/router';
+import { ChangeProcessStepComponent } from '../change-process-step/change-process-step.component';
+import { changeRequest } from 'projects/fsastorefrontlib/src/assets/translations/en/changeRequest.en';
 
 @Component({
   selector: 'fsa-change-coverage',
   templateUrl: './change-coverage.component.html',
 })
-export class ChangeCoverageComponent implements OnInit, OnDestroy {
+export class ChangeCoverageComponent extends ChangeProcessStepComponent
+  implements OnInit, OnDestroy {
   constructor(
     protected changeRequestService: ChangeRequestService,
     protected userRequestNavigationService: UserRequestNavigationService,
     protected activatedRoute: ActivatedRoute
-  ) {}
+  ) {
+    super(userRequestNavigationService, activatedRoute);
+  }
 
   changeRequest$: Observable<any>;
   currentDate;
 
   includedCoverages = [];
   potentialCoverages = [];
-  configurationSteps: FSStepData[];
-  activeStepIndex: number;
 
   private subscription = new Subscription();
 
@@ -39,16 +42,17 @@ export class ChangeCoverageComponent implements OnInit, OnDestroy {
               changeRequest.insurancePolicy &&
               changeRequest.insurancePolicy.optionalProducts
             ) {
-              this.includedCoverages = [];
-              this.potentialCoverages = [];
-              this.populateStepsAndNavigate(changeRequest);
-              changeRequest.insurancePolicy.optionalProducts.map(coverage => {
-                if (coverage.coverageIsIncluded) {
-                  this.includedCoverages.push(coverage);
-                } else {
-                  this.potentialCoverages.push(coverage);
-                }
-              });
+              this.populateSteps(changeRequest);
+              if (this.isSimulated(changeRequest)) {
+                this.userRequestNavigationService.continue(
+                  this.configurationSteps,
+                  this.activeStepIndex
+                );
+              } else {
+                this.populatelCoverages(
+                  changeRequest.insurancePolicy.optionalProducts
+                );
+              }
             }
           })
         )
@@ -56,22 +60,20 @@ export class ChangeCoverageComponent implements OnInit, OnDestroy {
     );
   }
 
-  populateStepsAndNavigate(changeRequest) {
-    this.configurationSteps = this.userRequestNavigationService.getConfigurationSteps(
-      changeRequest
-    );
-    const activeStepData = this.userRequestNavigationService.getActiveStep(
-      this.configurationSteps,
-      this.activatedRoute.routeConfig.path
-    );
-    this.activeStepIndex = this.configurationSteps.indexOf(activeStepData);
+  isSimulated(request: any) {
+    return request.changedPolicy;
+  }
 
-    if (changeRequest.changedPolicy) {
-      this.userRequestNavigationService.continue(
-        this.configurationSteps,
-        this.activeStepIndex
-      );
-    }
+  populatelCoverages(optionalProducts: any) {
+    this.includedCoverages = [];
+    this.potentialCoverages = [];
+    optionalProducts.map(coverage => {
+      if (coverage.coverageIsIncluded) {
+        this.includedCoverages.push(coverage);
+      } else {
+        this.potentialCoverages.push(coverage);
+      }
+    });
   }
 
   addCoverage(coverage: any) {
@@ -94,7 +96,7 @@ export class ChangeCoverageComponent implements OnInit, OnDestroy {
     });
   }
 
-  simulateChanges(changeRequest) {
+  simulateChanges(changeRequestData) {
     const optionalProducts = [];
     this.potentialCoverages.forEach(coverage => {
       if (coverage.coverageIsIncluded) {
@@ -107,7 +109,7 @@ export class ChangeCoverageComponent implements OnInit, OnDestroy {
       }
     });
     this.changeRequestService.simulateChangeRequest({
-      requestId: changeRequest.requestId,
+      requestId: changeRequestData.requestId,
       insurancePolicy: {
         optionalProducts: optionalProducts,
       },

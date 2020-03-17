@@ -19,6 +19,7 @@ import { ChangeProcessProgressBarComponent } from './change-process-progress-bar
 import { ChangeSimulationComponent } from './change-simulation/change-simulation.component';
 import { FSProgressBarModule } from '../progress-bar/progress-bar.module';
 import { ChangeProcessNavigationComponent } from './change-process-navigation/change-process-navigation.component';
+
 const routes: Routes = [
   {
     path: null,
@@ -84,18 +85,21 @@ const routes: Routes = [
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
     ChangeCarDetailsFormComponent,
+    ChangeProcessNavigationComponent,
   ],
   exports: [
     ChangeCoverageComponent,
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
     ChangeCarDetailsFormComponent,
+    ChangeProcessNavigationComponent,
   ],
   entryComponents: [
     ChangeCoverageComponent,
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
     ChangeCarDetailsFormComponent,
+    ChangeProcessNavigationComponent,
   ],
   providers: [DatePipe],
 })
