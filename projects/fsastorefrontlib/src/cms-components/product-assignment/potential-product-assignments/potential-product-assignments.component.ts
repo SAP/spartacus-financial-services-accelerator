@@ -38,7 +38,7 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
           .get()
           .pipe(
             map(user => {
-              if (user && user.uid) {
+              if (user && (<B2BAdministrator>user).orgUnit) {
                 this.parentOrgUnit = (<B2BAdministrator>user).orgUnit.uid;
                 if (this.parentOrgUnit) {
                   this.productAssignmentService.loadPotentialProductAssignments(
