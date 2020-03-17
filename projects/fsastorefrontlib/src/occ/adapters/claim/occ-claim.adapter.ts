@@ -81,29 +81,24 @@ export class OccClaimAdapter implements ClaimAdapter {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    const claimBody: Claim =
-      claimData && claimData.content
-        ? this.createClaimBody(claimData.content, {}, claimId)
-        : {};
+    const claimBody: Claim = claimData
+      ? this.createClaimBody(claimData, {}, claimId)
+      : {};
     return this.http
       .patch(url, claimBody, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   protected createClaimBody(claimData: any, claimBody: Claim, claimId: string) {
-    const claim = JSON.parse(claimData);
-    let location: FSLocationOfLoss;
+    const claim = claimData.content ? JSON.parse(claimData.content) : {};
     if (claim) {
-      if (claimData.locationOfLoss) {
-        location = {
-          code: claimData.locationOfLoss,
-          city: claim.city,
-          address: claim.address,
-          countryCode: claim.country,
-          postcode: claim.postcode,
-          additionalDetails: claim.description,
-        };
-      }
+      const location: FSLocationOfLoss = {
+        city: claim.city,
+        address: claim.address,
+        countryCode: claim.country,
+        postcode: claim.postcode,
+        additionalDetails: claim.description,
+      };
       claimBody = {
         dateOfLoss: claim.whenHappened,
         timeOfLoss: claim.whatTime,
