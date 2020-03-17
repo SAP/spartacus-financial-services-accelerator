@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -6,15 +6,22 @@ import {
   Validators,
 } from '@angular/forms';
 import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
+import { FSStepData } from './../../../occ/occ-models';
+import { UserRequestNavigationService } from './../../../core/user-request/facade/user-request-navigation.service';
+import { ActivatedRoute } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'fsa-change-car-details-form',
   templateUrl: './change-car-details-form.component.html',
 })
-export class ChangeCarDetailsFormComponent implements OnInit {
+export class ChangeCarDetailsFormComponent implements OnInit, OnDestroy {
   constructor(
     protected changeRequestService: ChangeRequestService,
-    protected fb: FormBuilder
+    protected fb: FormBuilder,
+    protected userRequestNavigationService: UserRequestNavigationService,
+    protected activatedRoute: ActivatedRoute
   ) {}
 
   changeCarDetailsForm: FormGroup = this.fb.group({
@@ -27,8 +34,40 @@ export class ChangeCarDetailsFormComponent implements OnInit {
 
   changeRequest$;
 
+  configurationSteps: FSStepData[];
+  activeStepIndex: number;
+
+  private subscription = new Subscription();
+
   ngOnInit() {
     this.changeRequest$ = this.changeRequestService.getChangeRequest();
+    this.subscription.add(
+      this.changeRequest$
+        .pipe(
+          map(changeRequest => {
+            this.populateStepsAndNavigate(changeRequest);
+          })
+        )
+        .subscribe()
+    );
+  }
+
+  populateStepsAndNavigate(changeRequest) {
+    this.configurationSteps = this.userRequestNavigationService.getConfigurationSteps(
+      changeRequest
+    );
+    const activeStepData = this.userRequestNavigationService.getActiveStep(
+      this.configurationSteps,
+      this.activatedRoute.routeConfig.path
+    );
+    this.activeStepIndex = this.configurationSteps.indexOf(activeStepData);
+
+    if (changeRequest.changedPolicy) {
+      this.userRequestNavigationService.continue(
+        this.configurationSteps,
+        this.activeStepIndex
+      );
+    }
   }
 
   simulateChanges(changeRequest) {
@@ -68,6 +107,12 @@ export class ChangeCarDetailsFormComponent implements OnInit {
           },
         },
       });
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }

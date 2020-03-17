@@ -18,6 +18,7 @@ import { ChangeCoverageComponent } from './change-coverage/change-coverage.compo
 import { ChangeProcessProgressBarComponent } from './change-process-progress-bar/change-process-progress-bar.component';
 import { ChangeSimulationComponent } from './change-simulation/change-simulation.component';
 import { FSProgressBarModule } from '../progress-bar/progress-bar.module';
+import { ChangeProcessNavigationComponent } from './change-process-navigation/change-process-navigation.component';
 const routes: Routes = [
   {
     path: null,
@@ -71,6 +72,9 @@ const routes: Routes = [
         },
         ChangeSimulationFlex: {
           component: ChangeSimulationComponent,
+        },
+        ChangeRequestNavigationFlex: {
+          component: ChangeProcessNavigationComponent,
         },
       },
     }),

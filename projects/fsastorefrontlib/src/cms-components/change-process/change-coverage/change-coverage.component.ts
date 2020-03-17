@@ -3,19 +3,28 @@ import { Observable } from 'rxjs/internal/Observable';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { FSStepData } from './../../../occ/occ-models/occ.models';
+import { UserRequestNavigationService } from './../../../core/user-request/facade/user-request-navigation.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'fsa-change-coverage',
   templateUrl: './change-coverage.component.html',
 })
 export class ChangeCoverageComponent implements OnInit, OnDestroy {
-  constructor(protected changeRequestService: ChangeRequestService) {}
+  constructor(
+    protected changeRequestService: ChangeRequestService,
+    protected userRequestNavigationService: UserRequestNavigationService,
+    protected activatedRoute: ActivatedRoute
+  ) {}
 
   changeRequest$: Observable<any>;
   currentDate;
 
   includedCoverages = [];
   potentialCoverages = [];
+  configurationSteps: FSStepData[];
+  activeStepIndex: number;
 
   private subscription = new Subscription();
 
@@ -30,6 +39,9 @@ export class ChangeCoverageComponent implements OnInit, OnDestroy {
               changeRequest.insurancePolicy &&
               changeRequest.insurancePolicy.optionalProducts
             ) {
+              this.includedCoverages = [];
+              this.potentialCoverages = [];
+              this.populateStepsAndNavigate(changeRequest);
               changeRequest.insurancePolicy.optionalProducts.map(coverage => {
                 if (coverage.coverageIsIncluded) {
                   this.includedCoverages.push(coverage);
@@ -42,6 +54,24 @@ export class ChangeCoverageComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+  }
+
+  populateStepsAndNavigate(changeRequest) {
+    this.configurationSteps = this.userRequestNavigationService.getConfigurationSteps(
+      changeRequest
+    );
+    const activeStepData = this.userRequestNavigationService.getActiveStep(
+      this.configurationSteps,
+      this.activatedRoute.routeConfig.path
+    );
+    this.activeStepIndex = this.configurationSteps.indexOf(activeStepData);
+
+    if (changeRequest.changedPolicy) {
+      this.userRequestNavigationService.continue(
+        this.configurationSteps,
+        this.activeStepIndex
+      );
+    }
   }
 
   addCoverage(coverage: any) {

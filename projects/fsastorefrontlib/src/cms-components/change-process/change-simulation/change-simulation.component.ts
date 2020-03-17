@@ -26,6 +26,7 @@ export class ChangeSimulationComponent implements OnInit {
   }
 
   getChangedPolicyObjects(changeRequestData: any): ChangedPolicyData[] {
+    this.changedPolicyObjects = [];
     if (changeRequestData.fsStepGroupDefinition) {
       switch (changeRequestData.fsStepGroupDefinition.requestType.code) {
         case ChangeRequestType.INSURED_OBJECT_CHANGE: {
