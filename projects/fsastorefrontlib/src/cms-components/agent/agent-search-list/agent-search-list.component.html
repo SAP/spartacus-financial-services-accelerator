@@ -17,7 +17,7 @@
             [container]="agent.thumbnail"
             format="thumbnail"
           ></cx-media>
-          {{ agent.firstName }} {{ agent.lastName }}<br />
+          {{ agent.displayName }}<br />
           <ng-container *ngIf="agent.pointsOfService">
             <ng-container *ngFor="let pos of agent.pointsOfService">
               {{ pos.displayName }} {{ pos.address?.line1 }} -
