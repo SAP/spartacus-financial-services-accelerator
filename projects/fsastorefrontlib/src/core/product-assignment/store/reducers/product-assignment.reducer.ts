@@ -38,18 +38,17 @@ export function reducer(
 
     case fromAction.LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS_SUCCESS: {
       let content = { ...action.payload };
-      const potentialProductAssignmentContent = state.content;
+      const assignmentsContent = state.content;
       if (content && content.assignments.length > 0) {
-        potentialProductAssignmentContent.potentialAssignments =
-          content.assignments;
+        assignmentsContent.potentialAssignments = content.assignments;
       }
-      potentialProductAssignmentContent.potentialAssignments = potentialProductAssignmentContent.potentialAssignments.filter(
+      assignmentsContent.potentialAssignments = assignmentsContent.potentialAssignments.filter(
         elem =>
-          !potentialProductAssignmentContent.assignments
+          !assignmentsContent.assignments
             .map(data => data.product.code)
             .includes(elem.product.code)
       );
-      content = potentialProductAssignmentContent;
+      content = assignmentsContent;
       return {
         ...state,
         content,
