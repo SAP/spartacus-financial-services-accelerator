@@ -61,8 +61,10 @@ export class OccFSProductAssignmentAdapter
     orgUnitId: string,
     productCode: string
   ) {
-    const url =
-      this.getProductAssignmentsEndpoint(userId, orgUnitId) + productCode;
+    const url = `${this.getProductAssignmentsEndpoint(
+      userId,
+      orgUnitId
+    )}/${productCode}`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
