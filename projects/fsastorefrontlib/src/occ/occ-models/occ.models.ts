@@ -1,3 +1,4 @@
+import { YFormData } from '@fsa/dynamicforms';
 import {
   Cart,
   Category,
@@ -7,7 +8,6 @@ import {
   User,
   UserSignUp,
 } from '@spartacus/core';
-import { YFormData } from '@fsa/dynamicforms';
 
 export interface ContactAgentData {
   email?: string;
@@ -39,6 +39,11 @@ export interface QuoteBindingState {
 export enum BindingStateType {
   BIND = 'BIND',
   UNBIND = 'UNBIND',
+}
+
+export enum ChangeRequestType {
+  INSURED_OBJECT_CHANGE = 'FSINSUREDOBJECT_CHANGE',
+  COVERAGE_CHANGE = 'FSCOVERAGE_CHANGE',
 }
 
 export enum ClaimStatus {
@@ -130,4 +135,11 @@ export interface FSRequestType {
 
 export interface FSIncidentType {
   incidentCode?: string;
+}
+
+export interface ChangedPolicyData {
+  changeType?: string;
+  label?: string;
+  oldValue?: string;
+  newValue?: string;
 }

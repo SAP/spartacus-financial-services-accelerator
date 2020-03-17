@@ -45,5 +45,8 @@ export const forms = {
       event_personal_details: 'Persönliche Angaben',
       travel_personal_details: 'Persönliche Angaben',
     },
+    auto: {
+      vehicleAnnualMileage: '[DE] Annual Mileage',
+    },
   },
 };
