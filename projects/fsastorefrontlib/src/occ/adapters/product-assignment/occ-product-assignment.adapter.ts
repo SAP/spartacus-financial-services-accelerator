@@ -100,10 +100,6 @@ export class OccFSProductAssignmentAdapter
     );
   }
 
-  protected getOrgCustomerProfile(userId: string, orgCustomerId: string) {
-    return `${this.occEndpointService.getBaseEndpoint()}/users/${userId}/orgCustomers/${orgCustomerId}`;
-  }
-
   protected getUpdateProductAssignmentEndpoint(
     userId: string,
     orgUnitId,
