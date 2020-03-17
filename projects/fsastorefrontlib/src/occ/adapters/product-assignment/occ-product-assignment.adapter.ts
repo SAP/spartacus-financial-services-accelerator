@@ -65,8 +65,9 @@ export class OccFSProductAssignmentAdapter
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
+    const params = new HttpParams().set('productCode', productCode);
     return this.http
-      .delete<any>(`${url}/${productCode}`, { headers })
+      .delete<any>(url, { headers, params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
