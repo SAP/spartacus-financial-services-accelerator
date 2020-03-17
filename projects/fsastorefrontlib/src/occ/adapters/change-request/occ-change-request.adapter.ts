@@ -52,11 +52,11 @@ export class OccChangeRequestAdapter implements ChangeRequestAdapter {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-    const cancelChangeRequest = {
+    const cancelChangeRequestBody = {
       actionName: 'CANCEL',
     };
     return this.http
-      .post(url, cancelChangeRequest, { headers })
+      .post(url, cancelChangeRequestBody, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
