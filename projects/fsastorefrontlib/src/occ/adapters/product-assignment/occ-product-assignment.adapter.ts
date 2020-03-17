@@ -61,15 +61,12 @@ export class OccFSProductAssignmentAdapter
     orgUnitId: string,
     productCode: string
   ) {
-    const url = `${this.getProductAssignmentsEndpoint(
-      userId,
-      orgUnitId
-    )}/${productCode}`;
+    const url = this.getProductAssignmentsEndpoint(userId, orgUnitId);
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
     return this.http
-      .delete<any>(url, { headers })
+      .delete<any>(`${url}/${productCode}`, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
