@@ -25,14 +25,13 @@ export abstract class ChangeRequestAdapter {
   ): Observable<any>;
 
   /**
- * Abstract method used to cancel change request
- *
- * @param userId The user id
- * @param requestId The request id
- */
+   * Abstract method used to cancel change request
+   *
+   * @param userId The user id
+   * @param requestId The request id
+   */
   abstract cancelChangeRequest(
     userId: string,
     requestId: string
   ): Observable<any>;
-
 }

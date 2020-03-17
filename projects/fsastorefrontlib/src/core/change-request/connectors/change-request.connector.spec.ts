@@ -17,6 +17,11 @@ class MockChangeRequestAdapter implements ChangeRequestAdapter {
   ).and.callFake((userId, requestId) =>
     of('getChangeRequest' + userId + requestId)
   );
+  cancelChangeRequest = createSpy(
+    'ChangeRequestAdapter.cancelChangeRequest'
+  ).and.callFake((userId, requestId) =>
+    of('cancelChangeRequest' + userId + requestId)
+  );
 }
 
 const policy = 'policyId';
@@ -63,6 +68,14 @@ describe('ChangeRequestConnector', () => {
   it('should call adapter for getChangeRequest', () => {
     changeRequestConnector.getChangeRequest(OCC_CART_ID_CURRENT, requestID);
     expect(changeRequestAdapter.getChangeRequest).toHaveBeenCalledWith(
+      OCC_CART_ID_CURRENT,
+      requestID
+    );
+  });
+
+  it('should call adapter for cancelChangeRequest', () => {
+    changeRequestConnector.cancelChangeRequest(OCC_CART_ID_CURRENT, requestID);
+    expect(changeRequestAdapter.cancelChangeRequest).toHaveBeenCalledWith(
       OCC_CART_ID_CURRENT,
       requestID
     );

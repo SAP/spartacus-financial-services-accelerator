@@ -1,5 +1,5 @@
-import * as fromReducer from '../reducers/change-request.reducer';
 import * as fromAction from '../actions';
+import * as fromReducer from '../reducers/change-request.reducer';
 
 const mockedChangeRequest = {
   requestId: '0000001',
@@ -36,6 +36,16 @@ describe('Change Request Reducer', () => {
       const state = fromReducer.reducer(initialState, action);
       expect(state.content).toEqual(mockedChangeRequest);
       expect(state.loaded).toEqual(true);
+    });
+  });
+
+  describe('CANCEL_CHANGE_REQUEST_SUCCESS', () => {
+    it('should cancel change request', () => {
+      const action = new fromAction.CancelChangeRequestSuccess(
+        mockedChangeRequest
+      );
+      const state = fromReducer.reducer(initialState, action);
+      expect(state.content).toEqual(mockedChangeRequest);
     });
   });
 });

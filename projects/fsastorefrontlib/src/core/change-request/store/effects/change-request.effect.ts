@@ -53,7 +53,6 @@ export class ChangeRequestEffects {
     ofType(fromActions.CANCEL_CHANGE_REQUEST),
     map((action: fromActions.CancelChangeRequest) => action.payload),
     mergeMap(payload => {
-      console.log(payload);
       return this.changeRequestConnector
         .cancelChangeRequest(payload.userId, payload.requestId)
         .pipe(
@@ -70,5 +69,5 @@ export class ChangeRequestEffects {
   constructor(
     private actions$: Actions,
     private changeRequestConnector: ChangeRequestConnector
-  ) { }
+  ) {}
 }

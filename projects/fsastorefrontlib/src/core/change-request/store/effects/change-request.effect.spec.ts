@@ -26,6 +26,9 @@ class MockChangeRequestConnector {
   getChangeRequest() {
     return of(changeRequest);
   }
+  cancelChangeRequest() {
+    return of(changeRequest);
+  }
 }
 
 describe('Change Request Effects', () => {
@@ -122,5 +125,36 @@ describe('Change Request Effects', () => {
     actions$ = hot('-a', { a: action });
     const expected = cold('-b', { b: completion });
     expect(effects.loadChangeRequest$).toBeObservable(expected);
+  });
+
+  describe('cancelChangeRequest$', () => {
+    it('should cancel change request', () => {
+      const action = new fromActions.CancelChangeRequest({
+        userId: OCC_USER_ID_CURRENT,
+        requestId: requestID,
+      });
+      const completion = new fromActions.CancelChangeRequestSuccess(
+        changeRequest
+      );
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.cancelChangeRequest$).toBeObservable(expected);
+    });
+
+    it('should fail to cancel change request', () => {
+      spyOn(mockChangeRequestConnector, 'cancelChangeRequest').and.returnValue(
+        throwError('Error')
+      );
+      const action = new fromActions.CancelChangeRequest({
+        userId: OCC_USER_ID_CURRENT,
+        requestId: requestID,
+      });
+      const completion = new fromActions.CancelChangeRequestFail(
+        JSON.stringify('Error')
+      );
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.cancelChangeRequest$).toBeObservable(expected);
+    });
   });
 });

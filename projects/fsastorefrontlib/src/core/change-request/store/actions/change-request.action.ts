@@ -20,47 +20,47 @@ export const CANCEL_CHANGE_REQUEST_SUCCESS =
 
 export class CreateChangeRequest implements Action {
   readonly type = CREATE_CHANGE_REQUEST;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class CreateChangeRequestFail implements Action {
   readonly type = CREATE_CHANGE_REQUEST_FAIL;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class CreateChangeRequestSuccess implements Action {
   readonly type = CREATE_CHANGE_REQUEST_SUCCESS;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class LoadChangeRequest implements Action {
   readonly type = LOAD_CHANGE_REQUEST;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class LoadChangeRequestFail implements Action {
   readonly type = LOAD_CHANGE_REQUEST_FAIL;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class LoadChangeRequestSuccess implements Action {
   readonly type = LOAD_CHANGE_REQUEST_SUCCESS;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class CancelChangeRequest implements Action {
   readonly type = CANCEL_CHANGE_REQUEST;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class CancelChangeRequestSuccess implements Action {
   readonly type = CANCEL_CHANGE_REQUEST_SUCCESS;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export class CancelChangeRequestFail implements Action {
   readonly type = CANCEL_CHANGE_REQUEST_FAIL;
-  constructor(public payload: any) { }
+  constructor(public payload: any) {}
 }
 
 export type ChangeRequestAction =
@@ -69,4 +69,7 @@ export type ChangeRequestAction =
   | CreateChangeRequestSuccess
   | LoadChangeRequest
   | LoadChangeRequestFail
-  | LoadChangeRequestSuccess;
+  | LoadChangeRequestSuccess
+  | CancelChangeRequest
+  | CancelChangeRequestSuccess
+  | CancelChangeRequestFail;
