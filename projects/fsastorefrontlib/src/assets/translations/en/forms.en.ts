@@ -63,6 +63,9 @@ export const forms = {
       travel_personal_details: 'Personal Details',
       auto_change_car_details_form: 'Auto Information',
     },
+    auto: {
+      vehicleAnnualMileage: 'Annual Mileage',
+    },
     personalDetails: {
       address1: 'Address 1',
       address2: 'Address 2',
