@@ -78,6 +78,21 @@ export class ChangeRequestService {
       .unsubscribe();
   }
 
+  cancelChangeRequest(requestId: string) {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.store.dispatch(
+          new fromAction.CancelChangeRequest({
+            userId: occUserId,
+            requestId: requestId,
+          })
+        );
+      })
+      .unsubscribe();
+  }
+
   private isCreated(changeRequest: any): boolean {
     return changeRequest && changeRequest.configurationSteps !== undefined;
   }

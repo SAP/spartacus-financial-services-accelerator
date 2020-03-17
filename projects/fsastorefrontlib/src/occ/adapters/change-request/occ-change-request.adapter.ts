@@ -10,7 +10,8 @@ export class OccChangeRequestAdapter implements ChangeRequestAdapter {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService
-  ) {}
+  ) { }
+
 
   getChangeRequest(userId: string, requestId: string) {
     const url = this.getChangeRequestEndpoint(userId) + '/' + requestId;
@@ -42,6 +43,20 @@ export class OccChangeRequestAdapter implements ChangeRequestAdapter {
     const toCreate = JSON.stringify({});
     return this.http
       .post<any>(url, toCreate, { headers, params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  cancelChangeRequest(userId: string, requestId: string) {
+    const url = this.getChangeRequestEndpoint(userId) + '/' + requestId + '/action';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    const cancelChangeRequest = {
+      actionName: 'CANCEL',
+    };
+    console.log(url);
+    return this.http
+      .post(url, cancelChangeRequest, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 

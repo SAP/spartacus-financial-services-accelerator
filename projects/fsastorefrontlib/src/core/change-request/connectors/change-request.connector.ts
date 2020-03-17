@@ -6,7 +6,7 @@ import { ChangeRequestAdapter } from './change-request.adapter';
   providedIn: 'root',
 })
 export class ChangeRequestConnector {
-  constructor(protected changeRequestAdapter: ChangeRequestAdapter) {}
+  constructor(protected changeRequestAdapter: ChangeRequestAdapter) { }
 
   createChangeRequestForPolicy(
     policyId,
@@ -24,5 +24,9 @@ export class ChangeRequestConnector {
 
   getChangeRequest(userId, requestId): Observable<any> {
     return this.changeRequestAdapter.getChangeRequest(userId, requestId);
+  }
+
+  cancelChangeRequest(userId: string, requestId: string) {
+    return this.changeRequestAdapter.cancelChangeRequest(userId, requestId);
   }
 }

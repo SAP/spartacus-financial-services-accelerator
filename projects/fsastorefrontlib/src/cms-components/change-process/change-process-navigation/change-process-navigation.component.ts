@@ -7,11 +7,15 @@ import { ChangeRequestService } from './../../../core/change-request/facade/chan
   templateUrl: './change-process-navigation.component.html',
 })
 export class ChangeProcessNavigationComponent implements OnInit {
-  constructor(protected changeRequestService: ChangeRequestService) {}
+  constructor(protected changeRequestService: ChangeRequestService) { }
 
   changeRequest$: Observable<any>;
 
   ngOnInit() {
     this.changeRequest$ = this.changeRequestService.getChangeRequest();
+  }
+
+  cancelRequest(requestId: string) {
+    this.changeRequestService.cancelChangeRequest(requestId);
   }
 }
