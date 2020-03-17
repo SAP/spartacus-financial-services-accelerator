@@ -35,11 +35,16 @@ const mockProductAssignments = {
     },
   ],
 };
+const userId = OCC_USER_ID_CURRENT;
+const orgUnitId = 'TestOrgUnit';
+const productCode = '000014';
+const productAssignmentCode = 'PA-test';
+const active = false;
+const error = 'error';
+
 describe('Product Assignment Actions', () => {
   describe('LoadProductAssignments Action', () => {
     it('should create the action', () => {
-      const userId = OCC_USER_ID_CURRENT;
-      const orgUnitId = 'SAP';
       const action = new fromAction.LoadProductAssignments({
         userId: userId,
         orgUnitId: orgUnitId,
@@ -54,7 +59,6 @@ describe('Product Assignment Actions', () => {
 
   describe('LoadProductAssignmentsFail Action', () => {
     it('should create the action', () => {
-      const error = 'error';
       const action = new fromAction.LoadProductAssignmentsFail({ error });
       expect({ ...action }).toEqual({
         type: fromAction.LOAD_PRODUCT_ASSIGNMENTS_FAIL,
@@ -79,9 +83,6 @@ describe('Product Assignment Actions', () => {
 
   describe('CreateProductAssignment Action', () => {
     it('should create the action', () => {
-      const userId = OCC_USER_ID_CURRENT;
-      const orgUnitId = 'Corona';
-      const productCode = '000014';
       const action = new fromAction.CreateProductAssignment({
         userId: userId,
         orgUnitId: orgUnitId,
@@ -109,7 +110,6 @@ describe('Product Assignment Actions', () => {
 
   describe('CreateProductAssignmentFail Action', () => {
     it('should create the action', () => {
-      const error = 'error';
       const action = new fromAction.CreateProductAssignmentFail({ error });
       expect({ ...action }).toEqual({
         type: fromAction.CREATE_PRODUCT_ASSIGNMENT_FAIL,
@@ -122,9 +122,6 @@ describe('Product Assignment Actions', () => {
 
   describe('RemoveProductAssignment Action', () => {
     it('should create the action', () => {
-      const userId = OCC_USER_ID_CURRENT;
-      const orgUnitId = 'Corona';
-      const productCode = '000014';
       const action = new fromAction.RemoveProductAssignment({
         userId: userId,
         orgUnitId: orgUnitId,
@@ -149,7 +146,6 @@ describe('Product Assignment Actions', () => {
 
   describe('RemoveProductAssignmentFail Action', () => {
     it('should create the action', () => {
-      const error = 'error';
       const action = new fromAction.RemoveProductAssignmentFail({ error });
       expect({ ...action }).toEqual({
         type: fromAction.REMOVE_PRODUCT_ASSIGNMENT_FAIL,
@@ -162,8 +158,6 @@ describe('Product Assignment Actions', () => {
 
   describe('LoadPotentialProductAssignments Action', () => {
     it('should create the action', () => {
-      const userId = OCC_USER_ID_CURRENT;
-      const orgUnitId = 'Corona';
       const action = new fromAction.LoadPotentialProductAssignments({
         userId: userId,
         orgUnitId: orgUnitId,
@@ -178,7 +172,6 @@ describe('Product Assignment Actions', () => {
 
   describe('LoadPotentialProductAssignmentsFail Action', () => {
     it('should create the action', () => {
-      const error = 'error';
       const action = new fromAction.LoadPotentialProductAssignmentsFail({
         error,
       });
@@ -205,10 +198,6 @@ describe('Product Assignment Actions', () => {
 
   describe('ProductAssignment Action', () => {
     it('should create the action', () => {
-      const userId = OCC_USER_ID_CURRENT;
-      const orgUnitId = 'SAP';
-      const productAssignmentCode = 'PA-test';
-      const active = false;
       const action = new fromAction.UpdateProductAssignment({
         userId: userId,
         orgUnitId: orgUnitId,
@@ -223,7 +212,7 @@ describe('Product Assignment Actions', () => {
   });
 
   describe('UpdateProductAssignmentSuccess Action', () => {
-    const updatedProductAssignmnet = {
+    const updatedProductAssignment = {
       active: false,
       code: 'testOne',
       product: {
@@ -232,18 +221,17 @@ describe('Product Assignment Actions', () => {
     };
     it('should create the action', () => {
       const action = new fromAction.UpdateProductAssignmentSuccess(
-        updatedProductAssignmnet
+        updatedProductAssignment
       );
       expect({ ...action }).toEqual({
         type: fromAction.UPDATE_PRODUCT_ASSIGNMENT_SUCCESS,
-        payload: updatedProductAssignmnet,
+        payload: updatedProductAssignment,
       });
     });
   });
 
   describe('UpdateProductAssignmentFail Action', () => {
     it('should create the action', () => {
-      const error = 'error';
       const action = new fromAction.UpdateProductAssignmentFail({ error });
       expect({ ...action }).toEqual({
         type: fromAction.UPDATE_PRODUCT_ASSIGNMENT_FAIL,

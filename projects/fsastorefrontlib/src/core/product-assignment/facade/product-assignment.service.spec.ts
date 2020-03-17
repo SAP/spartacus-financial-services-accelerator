@@ -34,7 +34,7 @@ const mockProductAssignments = {
   potentialAssignments: [
     {
       active: true,
-      code: 'ewqeqw',
+      code: 'potential-test',
       product: {
         code: 'testProduct',
       },

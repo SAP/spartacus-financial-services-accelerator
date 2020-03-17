@@ -27,7 +27,6 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
   orgUnitId: string;
   parentOrgUnit: string;
-  customerProfile$: Observable<any>;
   productAssignments$: Observable<any>;
   availableProductAssignments$: Observable<any>;
 
@@ -67,10 +66,10 @@ export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
     );
   }
 
-  onDeassign(productCode) {
+  onDeassign(productAssignmentCode) {
     return this.productAssignmentService.removeProductAssignment(
       this.orgUnitId,
-      productCode,
+      productAssignmentCode,
       this.parentOrgUnit
     );
   }
