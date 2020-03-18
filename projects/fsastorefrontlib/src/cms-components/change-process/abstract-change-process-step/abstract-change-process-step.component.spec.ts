@@ -7,7 +7,11 @@ import { ChangeRequestService } from './../../../core/change-request/facade/chan
 import { Type, PipeTransform } from '@angular/core';
 import createSpy = jasmine.createSpy;
 import { DatePipe } from '@angular/common';
-import { GlobalMessage, GlobalMessageService, RoutingService } from '@spartacus/core';
+import {
+  GlobalMessage,
+  GlobalMessageService,
+  RoutingService,
+} from '@spartacus/core';
 import { ReactiveFormsModule } from '@angular/forms';
 
 const configurationSteps = [
@@ -99,9 +103,9 @@ describe('ChangeProcessStepComponent', () => {
     mockChangeRequestService = TestBed.get(ChangeRequestService as Type<
       ChangeRequestService
     >);
-    mockUserRequestNavigationService = TestBed.get(UserRequestNavigationService as Type<
-      UserRequestNavigationService
-    >);
+    mockUserRequestNavigationService = TestBed.get(
+      UserRequestNavigationService as Type<UserRequestNavigationService>
+    );
     mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
     globalMessageService = TestBed.get(GlobalMessageService as Type<
       GlobalMessageService
@@ -120,42 +124,46 @@ describe('ChangeProcessStepComponent', () => {
 
   it('should continue if request is already simulated', () => {
     spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
-        of({
-          requestId: requestId,
-          changedPolicy: {
-            policyNumber: policyId,
-          },
-        })
-      );
-      component.ngOnInit();
-      expect(mockUserRequestNavigationService.continue).toHaveBeenCalled();
-    });
+      of({
+        requestId: requestId,
+        changedPolicy: {
+          policyNumber: policyId,
+        },
+      })
+    );
+    component.ngOnInit();
+    expect(mockUserRequestNavigationService.continue).toHaveBeenCalled();
+  });
 
-    it('should go to policy details in case request is cancelled', () => {
-      spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
-          of({
-            requestId: requestId,
-            requestStatus: 'CANCELED',
-            insurancePolicy: {
-              policyNumber: policyId,
-              contractNumber: contractId
-            }
-          })
-        );
-        component.ngOnInit();
-        expect(mockRoutingService.go).toHaveBeenCalledWith({
-          cxRoute: 'policyDetails',
-          params: { policyId: policyId, contractId: contractId },
-        });
-      });
-
-    it('should call simulate change request', () => {
-      component.simulateChangeRequest(changeRequest);
-      expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalledWith(changeRequest);
+  it('should go to policy details in case request is cancelled', () => {
+    spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
+      of({
+        requestId: requestId,
+        requestStatus: 'CANCELED',
+        insurancePolicy: {
+          policyNumber: policyId,
+          contractNumber: contractId,
+        },
+      })
+    );
+    component.ngOnInit();
+    expect(mockRoutingService.go).toHaveBeenCalledWith({
+      cxRoute: 'policyDetails',
+      params: { policyId: policyId, contractId: contractId },
     });
+  });
 
-    it('should call cancel change request', () => {
-      component.cancelChangeRequest(requestId);
-      expect(mockChangeRequestService.cancelChangeRequest).toHaveBeenCalledWith(requestId);
-    });
+  it('should call simulate change request', () => {
+    component.simulateChangeRequest(changeRequest);
+    expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalledWith(
+      changeRequest
+    );
+  });
+
+  it('should call cancel change request', () => {
+    component.cancelChangeRequest(requestId);
+    expect(mockChangeRequestService.cancelChangeRequest).toHaveBeenCalledWith(
+      requestId
+    );
+  });
 });
