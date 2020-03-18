@@ -68,12 +68,14 @@ export class ChangeRequestService {
       .getOccUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
-        this.store.dispatch(
-          new fromAction.LoadChangeRequest({
-            userId: occUserId,
-            requestId: this.requestId,
-          })
-        );
+        if (this.requestId) {
+          this.store.dispatch(
+            new fromAction.LoadChangeRequest({
+              userId: occUserId,
+              requestId: this.requestId,
+            })
+          );
+        }
       })
       .unsubscribe();
   }

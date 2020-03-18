@@ -20,6 +20,7 @@ const MockOccModuleConfig: OccConfig = {
 const payload = {
   userId: 'TestID',
   orgUnitId: 'AcmeCorp',
+  productCode: 'TestCode',
   active: true,
   pageSize: 5,
   currentPage: 1,
@@ -52,6 +53,40 @@ describe('OccFSProductAssignmentAdapter', () => {
           payload.pageSize,
           payload.currentPage,
           payload.sort
+        )
+        .subscribe(res => {});
+    }));
+  });
+  describe('Create Product Assignment', () => {
+    it('should create product assignments', async(() => {
+      productAssignmentAdapter
+        .createProductAssignment(
+          payload.userId,
+          payload.orgUnitId,
+          payload.productCode
+        )
+        .subscribe(res => {});
+    }));
+  });
+  describe('Remove Product Assignment', () => {
+    it('should remove product assignments', async(() => {
+      productAssignmentAdapter
+        .removeProductAssignment(
+          payload.userId,
+          payload.orgUnitId,
+          payload.productCode
+        )
+        .subscribe(res => {});
+    }));
+  });
+  describe('Change Active Status', () => {
+    it('should change active status', async(() => {
+      productAssignmentAdapter
+        .changeActiveStatus(
+          payload.userId,
+          payload.orgUnitId,
+          payload.productCode,
+          payload.active
         )
         .subscribe(res => {});
     }));

@@ -11,6 +11,9 @@ import { of } from 'rxjs';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { ChangeProcessNavigationComponent } from './change-process-navigation.component';
 import createSpy = jasmine.createSpy;
+import { ActivatedRoute } from '@angular/router';
+import { FSUserRequest, FSStepData } from '../../../occ/occ-models/occ.models';
+import { UserRequestNavigationService } from '../../../core/user-request/facade';
 
 const mockChangeRequest = {
   requestId: 'testRequestId',
@@ -22,6 +25,18 @@ const mockChangeRequest = {
     },
   },
   requestStatus: 'CANCELED',
+  configurationSteps: [
+    {
+      name: 'step1',
+      pageLabelOrId: 'page1',
+      sequenceNumber: '1',
+    },
+    {
+      name: 'step2',
+      pageLabelOrId: 'page2',
+      sequenceNumber: '2',
+    },
+  ],
 };
 
 class MockRoutingService {
@@ -32,12 +47,26 @@ class GlobalMessageServiceMock {
   add(_message: GlobalMessage): void {}
 }
 
+const mockActivatedRoute = {
+  routeConfig: {
+    path: {},
+  },
+};
 class MockChangeRequestService {
   getChangeRequest() {
     return of(mockChangeRequest);
   }
   cancelChangeRequest() {
     return of(mockChangeRequest);
+  }
+}
+export class MockUserRequestNavigationService {
+  continue(configurationSteps: FSStepData[], step: number) {}
+  getActiveStep() {
+    return mockChangeRequest.configurationSteps[0];
+  }
+  getConfigurationSteps() {
+    return mockChangeRequest.configurationSteps;
   }
 }
 
@@ -47,10 +76,12 @@ describe('ChangeProcessNavigationComponent', () => {
   let mockRoutingService: MockRoutingService;
   let globalMessageService: GlobalMessageService;
   let mockChangeRequestService: MockChangeRequestService;
+  let mockUserRequestNavigationService: MockUserRequestNavigationService;
 
   beforeEach(async(() => {
     mockRoutingService = new MockRoutingService();
     mockChangeRequestService = new MockChangeRequestService();
+    mockUserRequestNavigationService = new MockUserRequestNavigationService();
     TestBed.configureTestingModule({
       imports: [I18nTestingModule],
       providers: [
@@ -62,6 +93,11 @@ describe('ChangeProcessNavigationComponent', () => {
         {
           provide: GlobalMessageService,
           useClass: GlobalMessageServiceMock,
+        },
+        { provide: ActivatedRoute, useValue: mockActivatedRoute },
+        {
+          provide: UserRequestNavigationService,
+          useValue: mockUserRequestNavigationService,
         },
       ],
       declarations: [ChangeProcessNavigationComponent],
@@ -95,6 +131,15 @@ describe('ChangeProcessNavigationComponent', () => {
     expect(globalMessageService.add).toHaveBeenCalledWith(
       expectedInfoMessage,
       GlobalMessageType.MSG_TYPE_INFO
+    );
+  });
+
+  it('should navigateNext', () => {
+    spyOn(mockUserRequestNavigationService, 'continue');
+    component.navigateNext(1);
+    expect(mockUserRequestNavigationService.continue).toHaveBeenCalledWith(
+      mockChangeRequest.configurationSteps,
+      1
     );
   });
 });

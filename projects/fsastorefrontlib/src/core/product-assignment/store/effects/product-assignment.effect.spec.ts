@@ -29,14 +29,40 @@ const mockProductAssignments = {
       },
     },
   ],
+  potentialAssignments: [
+    {
+      active: true,
+      code: 'testOne',
+      product: {
+        code: 'testProduct',
+      },
+    },
+    {
+      active: false,
+      code: 'testTwo',
+      product: {
+        code: 'testProduct',
+      },
+    },
+  ],
 };
 const mockedOrgUnitId = 'SAP';
 const pageSize = 5;
 const currentPage = 1;
 const sortCode = 'name';
 const productAssignmentCode = 'testOne';
+
 class MockProductAssignmentConnector {
   loadProductAssignmentsForUnit() {
+    return of(mockProductAssignments);
+  }
+  createProductAssignment() {
+    return of(mockProductAssignments);
+  }
+  removeProductAssignment() {
+    return of(mockProductAssignments);
+  }
+  loadPotentialProductAssignments() {
     return of(mockProductAssignments);
   }
   changeActiveStatus() {
@@ -110,6 +136,94 @@ describe('Product Assignment Effects', () => {
     actions$ = hot('-a', { a: action });
     const expected = cold('-b', { b: completion });
     expect(effects.loadProductAssignments$).toBeObservable(expected);
+  });
+
+  describe('createProductAssignment$', () => {
+    it('should create product assignment', () => {
+      const action = new fromActions.CreateProductAssignment({
+        userId: OCC_USER_ID_CURRENT,
+        orgUnitId: mockedOrgUnitId,
+        productCode: '0001555',
+      });
+      const completion = new fromActions.CreateProductAssignmentSuccess(
+        mockProductAssignments
+      );
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.createProductAssignment$).toBeObservable(expected);
+    });
+  });
+
+  it('should fail to create product assignment', () => {
+    spyOn(
+      mockProductAssignmentConnector,
+      'createProductAssignment'
+    ).and.returnValue(throwError('Error'));
+    const action = new fromActions.CreateProductAssignment({
+      userId: 'not_valid_user',
+      orgUnitId: undefined,
+      productCode: undefined,
+    });
+    const completion = new fromActions.CreateProductAssignmentFail({
+      error: JSON.stringify('Error'),
+    });
+    actions$ = hot('-a', { a: action });
+    const expected = cold('-b', { b: completion });
+    expect(effects.createProductAssignment$).toBeObservable(expected);
+  });
+
+  describe('removeProductAssignment$', () => {
+    it('should remove product assignment', () => {
+      const action = new fromActions.RemoveProductAssignment({
+        userId: OCC_USER_ID_CURRENT,
+        orgUnitId: mockedOrgUnitId,
+        productCode: '0001555',
+        parentOrgUnit: 'SAP',
+      });
+      const removeProductAssignmentAction = new fromActions.RemoveProductAssignmentSuccess();
+      const loadPotentialProductAssignmentsAction = new fromActions.LoadPotentialProductAssignments(
+        { occUserId: OCC_USER_ID_CURRENT, orgUnitId: mockedOrgUnitId }
+      );
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-(bc)', {
+        b: removeProductAssignmentAction,
+        c: loadPotentialProductAssignmentsAction,
+      });
+      expect(effects.removeProductAssignment$).toBeObservable(expected);
+    });
+  });
+
+  it('should fail to remove product assignment', () => {
+    spyOn(
+      mockProductAssignmentConnector,
+      'removeProductAssignment'
+    ).and.returnValue(throwError('Error'));
+    const action = new fromActions.RemoveProductAssignment({
+      userId: 'not_valid_user',
+      orgUnitId: mockedOrgUnitId,
+      productCode: undefined,
+    });
+    const completion = new fromActions.RemoveProductAssignmentFail({
+      error: JSON.stringify('Error'),
+    });
+    actions$ = hot('-a', { a: action });
+    const expected = cold('-b', { b: completion });
+    expect(effects.removeProductAssignment$).toBeObservable(expected);
+  });
+
+  describe('loadPotentialProductAssignments$', () => {
+    it('should load potential product assignments', () => {
+      const action = new fromActions.LoadPotentialProductAssignments({
+        userId: OCC_USER_ID_CURRENT,
+        orgUnitId: mockedOrgUnitId,
+      });
+      const completion = new fromActions.LoadPotentialProductAssignmentsSuccess(
+        mockProductAssignments
+      );
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.loadPotentialProductAssignments$).toBeObservable(expected);
+    });
   });
 
   describe('changeActiveStatus$', () => {

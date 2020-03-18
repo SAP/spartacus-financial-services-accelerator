@@ -1,3 +1,4 @@
+import { FSUserRequest } from './../../../occ/occ-models/occ.models';
 import { TestBed, inject } from '@angular/core/testing';
 import { Type } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
@@ -29,9 +30,14 @@ const configurationSteps: FSStepData[] = [
   {
     sequenceNumber: '2',
     name: 'step3',
-    pageLabelOrId: 'page3',
+    pageLabelOrId: undefined,
   },
 ];
+
+const userRequestData: FSUserRequest = {
+  configurationSteps: configurationSteps,
+};
+
 describe('UserRequestNavigationServiceTest', () => {
   let service: UserRequestNavigationService;
   let mockRoutingService: MockRoutingService;
@@ -75,12 +81,19 @@ describe('UserRequestNavigationServiceTest', () => {
     const activeStep = service.getActiveStep(undefined, page2);
     expect(activeStep).toBe(undefined);
   });
+
   it('should be able to route to the next step', () => {
     service.continue(configurationSteps, 0);
     expect(mockRoutingService.go).toHaveBeenCalledWith({ cxRoute: page2 });
   });
+
   it('should not able to route to the next step', () => {
     service.continue(undefined, 0);
+    expect(mockRoutingService.go).not.toHaveBeenCalledWith({ cxRoute: page2 });
+  });
+
+  it('should not be able to route to the next step with undefined page label', () => {
+    service.continue(configurationSteps, 1);
     expect(mockRoutingService.go).not.toHaveBeenCalledWith({ cxRoute: page2 });
   });
 
@@ -92,5 +105,25 @@ describe('UserRequestNavigationServiceTest', () => {
   it('should be able to route back to the previous step', () => {
     service.back(configurationSteps, 2);
     expect(mockRoutingService.go).toHaveBeenCalledWith({ cxRoute: page2 });
+  });
+
+  it('should get configuration steps', () => {
+    const steps = service.getConfigurationSteps(userRequestData);
+    expect(steps).toEqual(configurationSteps);
+  });
+
+  it('should not get configuration steps with undefined user request data', () => {
+    const steps = service.getConfigurationSteps(undefined);
+    expect(steps).toEqual(undefined);
+  });
+
+  it('should not get configuration steps with empty user request data', () => {
+    const steps = service.getConfigurationSteps({});
+    expect(steps).toEqual(undefined);
+  });
+
+  it('should not get configuration steps with empty configuration steps from user request data', () => {
+    const steps = service.getConfigurationSteps({ configurationSteps: [] });
+    expect(steps).toEqual(undefined);
   });
 });

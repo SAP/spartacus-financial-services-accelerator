@@ -6,7 +6,10 @@
     >
       {{ 'common.back' | cxTranslate }}
     </button>
-    <button class="primary-button btn-block">
+    <button
+      class="primary-button btn-block"
+      (click)="navigateNext(activeStepIndex)"
+    >
       {{ 'common.continue' | cxTranslate }}
     </button>
   </div>
