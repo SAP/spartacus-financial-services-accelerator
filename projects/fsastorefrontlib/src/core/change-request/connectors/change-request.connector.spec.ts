@@ -17,6 +17,12 @@ class MockChangeRequestAdapter implements ChangeRequestAdapter {
   ).and.callFake((userId, requestId) =>
     of('getChangeRequest' + userId + requestId)
   );
+
+  simulateChangeRequst = createSpy(
+    'ChangeRequestAdapter.simulateChangeRequst'
+  ).and.callFake((userId, requestId, changeRequestData) =>
+    of('createChangeRequestForPolicy' + userId + requestId + changeRequestData)
+  );
   cancelChangeRequest = createSpy(
     'ChangeRequestAdapter.cancelChangeRequest'
   ).and.callFake((userId, requestId) =>

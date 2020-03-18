@@ -35,9 +35,7 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   }
 
   showDetails(agent) {
-    this.selectedAgent$ = this.agentSearchService.getAgentByID(
-      agent.contactEmail
-    );
+    this.selectedAgent$ = this.agentSearchService.getAgentByID(agent.email);
   }
 
   pageChange(page: number): void {

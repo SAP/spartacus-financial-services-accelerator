@@ -10,14 +10,12 @@ import {
   OCC_USER_ID_ANONYMOUS,
   StateWithMultiCart,
 } from '@spartacus/core';
-import { BehaviorSubject } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
 import * as fromFSAction from '../../checkout/store/actions/index';
 import { PricingData } from '../../../occ/occ-models/form-pricing.interface';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class FSCartService extends ActiveCartService {
-  protected productAddedSource = new BehaviorSubject<string>('');
   constructor(
     protected fsMultiCartService: MultiCartService,
     protected fsAuthService: AuthService,
@@ -38,14 +36,12 @@ export class FSCartService extends ActiveCartService {
     select(MultiCartSelectors.getActiveCartId),
     map(cartId => {
       if (!cartId) {
+        this.loadCart(OCC_CART_ID_CURRENT);
         return OCC_CART_ID_CURRENT;
       }
       this.fsCartId = cartId;
       return cartId;
     })
-  );
-  fsCartSelector$ = this.fsActiveCartId$.pipe(
-    switchMap(cartId => this.multiCartService.getCartEntity(cartId))
   );
 
   addOptionalProduct(
