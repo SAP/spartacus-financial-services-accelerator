@@ -27,13 +27,12 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
           map(changeRequestData => {
             if (
               changeRequestData.insurancePolicy &&
-              changeRequestData.insurancePolicy.optionalProducts
+              changeRequestData.insurancePolicy.optionalProducts &&
+              !this.isSimulated(changeRequestData)
             ) {
-              if (!this.isSimulated(changeRequestData)) {
-                this.populatelCoverages(
-                  changeRequestData.insurancePolicy.optionalProducts
-                );
-              }
+              this.populatelCoverages(
+                changeRequestData.insurancePolicy.optionalProducts
+              );
             }
           })
         )
