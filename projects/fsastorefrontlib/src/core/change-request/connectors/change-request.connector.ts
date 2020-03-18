@@ -34,4 +34,8 @@ export class ChangeRequestConnector {
   getChangeRequest(userId, requestId): Observable<any> {
     return this.changeRequestAdapter.getChangeRequest(userId, requestId);
   }
+
+  cancelChangeRequest(userId: string, requestId: string): Observable<any> {
+    return this.changeRequestAdapter.cancelChangeRequest(userId, requestId);
+  }
 }

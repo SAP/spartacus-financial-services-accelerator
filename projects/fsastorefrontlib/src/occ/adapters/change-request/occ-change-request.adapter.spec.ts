@@ -131,4 +131,43 @@ describe('OccChangeRequestAdapter', () => {
     expect(errorResponse.status).toEqual(400);
     expect(errorResponse.name).toEqual('HttpErrorResponse');
   });
+
+  it('cancel change request', async(() => {
+    const cancelChangeRequestBody = {
+      actionName: 'CANCEL',
+    };
+    adapter.cancelChangeRequest(userId, requestId).subscribe();
+    const mockReq = httpMock.expectOne((req: HttpRequest<any>) => {
+      return (
+        req.url === `/users/${userId}/fsChangeRequests/${requestId}/action` &&
+        req.method === 'POST'
+      );
+    });
+    expect(mockReq.request.body).toEqual(cancelChangeRequestBody);
+    expect(mockReq.cancelled).toBeFalsy();
+    expect(mockReq.request.responseType).toEqual('json');
+  }));
+
+  it('should throw an error when canceling change request', () => {
+    let response: any;
+    let errResponse: any;
+    const errorResponse = new HttpErrorResponse({
+      error: '400 error',
+      status: 400,
+      statusText: 'Bad Request',
+    });
+    adapter
+      .cancelChangeRequest(userId, requestId)
+      .subscribe(res => (response = res), err => (errResponse = err));
+    httpMock
+      .expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url === `/users/${userId}/fsChangeRequests/${requestId}/action` &&
+          req.method === 'POST'
+        );
+      })
+      .flush(errorResponse);
+    expect(errorResponse.status).toEqual(400);
+    expect(errorResponse.name).toEqual('HttpErrorResponse');
+  });
 });

@@ -133,4 +133,47 @@ describe('Change Request Actions', () => {
       });
     });
   });
+
+  describe('CancelChangeRequest Action', () => {
+    const changeRequest = {
+      requestId: 'requestId',
+      userId: OCC_CART_ID_CURRENT,
+    };
+    it('should create the action', () => {
+      const action = new fromAction.CancelChangeRequest(changeRequest);
+      expect({ ...action }).toEqual({
+        type: fromAction.CANCEL_CHANGE_REQUEST,
+        payload: changeRequest,
+      });
+    });
+  });
+
+  describe('CancelChangeRequestSuccess Action', () => {
+    const changeRequest = {
+      requestId: 'requestId',
+      insurancePolicy: {
+        categoryData: {
+          code: 'test_category',
+        },
+      },
+    };
+    it('should create the action', () => {
+      const action = new fromAction.CancelChangeRequestSuccess(changeRequest);
+      expect({ ...action }).toEqual({
+        type: fromAction.CANCEL_CHANGE_REQUEST_SUCCESS,
+        payload: changeRequest,
+      });
+    });
+  });
+
+  describe('CancelChangeRequestFail Action', () => {
+    it('should create the action', () => {
+      const error = 'error';
+      const action = new fromAction.CancelChangeRequestFail(error);
+      expect({ ...action }).toEqual({
+        type: fromAction.CANCEL_CHANGE_REQUEST_FAIL,
+        payload: error,
+      });
+    });
+  });
 });

@@ -49,7 +49,6 @@ describe('ChangeCarDetailsFormComponent', () => {
   let mockChangeRequestService: MockChangeRequestService;
   let mockUserRequestNavigationService: MockUserRequestNavigationService;
 
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [I18nTestingModule, ReactiveFormsModule],
@@ -71,9 +70,12 @@ describe('ChangeCarDetailsFormComponent', () => {
       declarations: [ChangeCarDetailsFormComponent],
     }).compileComponents();
 
-    mockChangeRequestService = TestBed.get(ChangeRequestService as Type<ChangeRequestService>);
-    mockUserRequestNavigationService = TestBed.get(UserRequestNavigationService as Type<UserRequestNavigationService>);
-
+    mockChangeRequestService = TestBed.get(ChangeRequestService as Type<
+      ChangeRequestService
+    >);
+    mockUserRequestNavigationService = TestBed.get(
+      UserRequestNavigationService as Type<UserRequestNavigationService>
+    );
   }));
 
   beforeEach(() => {
@@ -88,12 +90,14 @@ describe('ChangeCarDetailsFormComponent', () => {
   });
 
   it('should redirect if policy is simulated', () => {
-    spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(of({
-      requestId: 'requestId',
-      changedPolicy: {
-        policyId: 'policyId'
-      }
-    }));
+    spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
+      of({
+        requestId: 'requestId',
+        changedPolicy: {
+          policyId: 'policyId',
+        },
+      })
+    );
     component.ngOnInit();
     expect(mockUserRequestNavigationService.continue).toHaveBeenCalled();
   });

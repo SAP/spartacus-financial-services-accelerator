@@ -4,6 +4,7 @@ import { OccEndpointsService } from '@spartacus/core';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { ChangeRequestAdapter } from './../../../core/change-request/connectors/change-request.adapter';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class OccChangeRequestAdapter implements ChangeRequestAdapter {
@@ -50,6 +51,20 @@ export class OccChangeRequestAdapter implements ChangeRequestAdapter {
       this.getChangeRequestEndpoint(userId) + '/' + requestId + '/simulation';
     return this.http
       .post<any>(url, changeRequest)
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  cancelChangeRequest(userId: string, requestId: string): Observable<any> {
+    const url =
+      this.getChangeRequestEndpoint(userId) + '/' + requestId + '/action';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    const cancelChangeRequestBody = {
+      actionName: 'CANCEL',
+    };
+    return this.http
+      .post(url, cancelChangeRequestBody, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 

@@ -1,6 +1,9 @@
 <section *ngIf="changeRequest$ | async as changeRequest">
   <div class="row mt-5">
-    <button class="action-button btn-block">
+    <button
+      class="action-button btn-block"
+      (click)="cancelRequest(changeRequest.requestId)"
+    >
       {{ 'common.back' | cxTranslate }}
     </button>
     <button

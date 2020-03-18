@@ -13,22 +13,16 @@
     }
   }
   .accordion-heading {
+    @extend .add-remove;
     color: var(--cx-color-text);
     background: var(--cx-color-4);
     font-weight: var(--cx-font-weight-semi);
     line-height: 1.6;
     margin-bottom: 0;
     padding: 8px 60px 12px;
-    @include accordion-status();
     &:before,
     &:after {
-      background-color: var(--cx-color-text);
-    }
-    &.active {
-      &:before,
-      &:after {
-        background-color: var(--cx-color-primary);
-      }
+      right: 15px;
     }
   }
   .accordion-item {

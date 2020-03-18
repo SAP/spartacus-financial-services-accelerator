@@ -1,45 +1,47 @@
 <ng-container *ngIf="agentList$ | async as agentList">
-  <div class="accordion">
-    <fsa-accordion-item
-      [opened]="false"
-      [title]="
-        ('fscommon.category.' + agentRootCategory | cxTranslate) +
-        ' ' +
-        ('fscommon.insurance' | cxTranslate)
-      "
-    >
-      <div class="container-fluid">
-        <div class="row">
-          <ng-container *ngFor="let agent of agentList.agents">
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="agent-container px-3 py-5 m-5 text-center">
-                <cx-media
-                  class="cx-product-image-container"
-                  [container]="agent.thumbnail"
-                  format="thumbnail"
-                ></cx-media>
-                <p class="py-3">{{ agent.firstName }} {{ agent.lastName }}</p>
-                <div class="row">
-                  <a
-                    class="col-6 fsa-icon icon-envelope text-right position-relative"
-                    [routerLink]="
-                      {
-                        cxRoute: 'contactAgent',
-                        params: { agent: agent.contactEmail }
-                      } | cxUrl
-                    "
-                  ></a>
-                  <a
-                    class="col-6 fsa-icon icon-map-marker text-left position-relative"
-                    [routerLink]="['/agent-locator']"
-                    [queryParams]="{ query: agent.contactEmail }"
-                  ></a>
+  <ng-container *ngIf="agentList && agentList.agents.length > 0">
+    <div class="accordion">
+      <fsa-accordion-item
+        [opened]="false"
+        [title]="
+          ('fscommon.category.' + agentRootCategory | cxTranslate) +
+          ' ' +
+          ('fscommon.insurance' | cxTranslate)
+        "
+      >
+        <div class="container-fluid">
+          <div class="row">
+            <ng-container *ngFor="let agent of agentList.agents">
+              <div class="col-12 col-md-6 col-lg-4">
+                <div class="agent-container px-3 py-5 m-5 text-center">
+                  <cx-media
+                    class="cx-product-image-container"
+                    [container]="agent.thumbnail"
+                    format="thumbnail"
+                  ></cx-media>
+                  <p class="py-3">{{ agent.displayName }}</p>
+                  <div class="row">
+                    <a
+                      class="col-6 fsa-icon icon-envelope text-right position-relative"
+                      [routerLink]="
+                        {
+                          cxRoute: 'contactAgent',
+                          params: { agent: agent.contactEmail }
+                        } | cxUrl
+                      "
+                    ></a>
+                    <a
+                      class="col-6 fsa-icon icon-map-marker text-left position-relative"
+                      [routerLink]="['/agent-locator']"
+                      [queryParams]="{ query: agent.contactEmail }"
+                    ></a>
+                  </div>
                 </div>
               </div>
-            </div>
-          </ng-container>
+            </ng-container>
+          </div>
         </div>
-      </div>
-    </fsa-accordion-item>
-  </div>
+      </fsa-accordion-item>
+    </div>
+  </ng-container>
 </ng-container>

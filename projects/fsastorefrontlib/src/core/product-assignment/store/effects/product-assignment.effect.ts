@@ -1,7 +1,13 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType } from '@ngrx/effects';
+import { Actions, Effect, ofType, act } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { catchError, concatMap, map, mergeMap } from 'rxjs/operators';
+import {
+  catchError,
+  concatMap,
+  map,
+  mergeMap,
+  switchMap,
+} from 'rxjs/operators';
 import { FSProductAssignmentConnector } from '../../connectors';
 import * as fromActions from '../actions';
 
@@ -30,6 +36,92 @@ export class FSProductAssignmentEffects {
           catchError(error =>
             of(
               new fromActions.LoadProductAssignmentsFail({
+                error: JSON.stringify(error),
+              })
+            )
+          )
+        );
+    })
+  );
+
+  @Effect()
+  createProductAssignment$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.CREATE_PRODUCT_ASSIGNMENT),
+    map((action: fromActions.CreateProductAssignment) => action.payload),
+    mergeMap(payload => {
+      return this.productAssignmentConnector
+        .createProductAssignment(
+          payload.userId,
+          payload.orgUnitId,
+          payload.productCode
+        )
+        .pipe(
+          map((productAssignments: any) => {
+            return new fromActions.CreateProductAssignmentSuccess(
+              productAssignments
+            );
+          }),
+          catchError(error =>
+            of(
+              new fromActions.CreateProductAssignmentFail({
+                error: JSON.stringify(error),
+              })
+            )
+          )
+        );
+    })
+  );
+
+  @Effect()
+  removeProductAssignment$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.REMOVE_PRODUCT_ASSIGNMENT),
+    map((action: fromActions.RemoveProductAssignment) => action.payload),
+    mergeMap(payload => {
+      return this.productAssignmentConnector
+        .removeProductAssignment(
+          payload.userId,
+          payload.orgUnitId,
+          payload.productAssignmentCode
+        )
+        .pipe(
+          switchMap(() => {
+            return [
+              new fromActions.RemoveProductAssignmentSuccess(),
+              new fromActions.LoadPotentialProductAssignments({
+                occUserId: payload.userId,
+                orgUnitId: payload.parentOrgUnit,
+              }),
+            ];
+          }),
+          catchError(error =>
+            of(
+              new fromActions.RemoveProductAssignmentFail({
+                error: JSON.stringify(error),
+              })
+            )
+          )
+        );
+    })
+  );
+
+  @Effect()
+  loadPotentialProductAssignments$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS),
+    map(
+      (action: fromActions.LoadPotentialProductAssignments) => action.payload
+    ),
+    mergeMap(payload => {
+      return this.productAssignmentConnector
+        .loadProductAssignmentsForUnit(payload.occUserId, payload.orgUnitId)
+        .pipe(
+          map((productAssignments: any) => {
+            return new fromActions.LoadPotentialProductAssignmentsSuccess(
+              productAssignments
+            );
+          }),
+          catchError(error =>
+            of(
+              new fromActions.LoadPotentialProductAssignmentsFail({
                 error: JSON.stringify(error),
               })
             )
