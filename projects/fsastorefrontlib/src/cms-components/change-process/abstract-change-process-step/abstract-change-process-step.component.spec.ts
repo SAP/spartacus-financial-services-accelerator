@@ -4,7 +4,7 @@ import { UserRequestNavigationService } from '../../../core/user-request/facade/
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
-import { Type, PipeTransform } from '@angular/core';
+import { Type } from '@angular/core';
 import createSpy = jasmine.createSpy;
 import {
   GlobalMessage,

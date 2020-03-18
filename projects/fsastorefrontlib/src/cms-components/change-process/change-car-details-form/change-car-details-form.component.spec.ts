@@ -119,19 +119,6 @@ describe('ChangeCarDetailsFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should redirect if policy is simulated', () => {
-    spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
-      of({
-        requestId: requestId,
-        changedPolicy: {
-          policyId: policyId,
-        },
-      })
-    );
-    component.ngOnInit();
-    expect(mockUserRequestNavigationService.continue).toHaveBeenCalled();
-  });
-
   it('should execute simulation request', () => {
     controls['effectiveDate'].setValue(mockChangeCarDetailsForm.effectiveDate);
     controls['vehicleAnnualMileage'].setValue(
