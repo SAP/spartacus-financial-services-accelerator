@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ChangeRequestConnector } from '../../connectors/change-request.connector';
 import * as fromActions from '../actions';
+import { GlobalMessageService, GlobalMessageType } from '@spartacus/core';
 
 @Injectable()
 export class ChangeRequestEffects {
@@ -23,9 +24,12 @@ export class ChangeRequestEffects {
           map((changeRequest: any) => {
             return new fromActions.CreateChangeRequestSuccess(changeRequest);
           }),
-          catchError(error =>
-            of(new fromActions.CreateChangeRequestFail(JSON.stringify(error)))
-          )
+          catchError(error => {
+            this.showGlobalMessage('policy.changeError');
+            return of(
+              new fromActions.CreateChangeRequestFail(JSON.stringify(error))
+            );
+          })
         );
     })
   );
@@ -47,9 +51,12 @@ export class ChangeRequestEffects {
         );
     })
   );
-
+  private showGlobalMessage(text: string) {
+    this.messageService.add({ key: text }, GlobalMessageType.MSG_TYPE_ERROR);
+  }
   constructor(
     private actions$: Actions,
-    private changeRequestConnector: ChangeRequestConnector
+    private changeRequestConnector: ChangeRequestConnector,
+    private messageService: GlobalMessageService
   ) {}
 }

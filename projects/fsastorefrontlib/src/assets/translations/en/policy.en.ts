@@ -16,5 +16,7 @@ export const policy = {
     noValidPolicies: 'You have no valid policies!',
     documentName: 'Name',
     documentIssueDate: 'Issue Date',
+    changeError:
+      'Sorry, the requested change can\'t be executed online, please contact your agent' // prettier-ignore
   },
 };

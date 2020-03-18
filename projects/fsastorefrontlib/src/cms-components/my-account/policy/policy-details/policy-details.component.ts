@@ -67,7 +67,7 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
 
   changePolicyDetails(policyId, contractId, changeRequestType) {
     this.changeRequestService.createChangeRequest(
-      policyId,
+      'hfgfg',
       contractId,
       changeRequestType
     );
