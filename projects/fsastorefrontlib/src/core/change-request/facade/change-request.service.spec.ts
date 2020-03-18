@@ -85,9 +85,44 @@ describe('ChangeRequestServiceTest', () => {
     );
   });
 
-  it('should be able to create change request', () => {
+  it('should be able to simulate change request for policy', () => {
+    service.simulateChangeRequest(mockChangeRequest);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.SimulateChangeRequest({
+        userId: userId,
+        requestId: mockChangeRequest.requestId,
+        changeRequest: mockChangeRequest,
+      })
+    );
+  });
+
+  it('should be able to get change request', () => {
     store.dispatch(
       new fromAction.CreateChangeRequestSuccess(mockChangeRequest)
+    );
+    let response;
+    service
+      .getChangeRequest()
+      .subscribe(changeRequest => {
+        response = changeRequest;
+      })
+      .unsubscribe();
+    expect(response).toEqual(mockChangeRequest);
+  });
+
+  it('should be able to cancel change request', () => {
+    service.cancelChangeRequest(requestId);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.CancelChangeRequest({
+        userId: userId,
+        requestId: requestId,
+      })
+    );
+  });
+
+  it('should be able to get change request after cancelation', () => {
+    store.dispatch(
+      new fromAction.CancelChangeRequestSuccess(mockChangeRequest)
     );
     let response;
     service

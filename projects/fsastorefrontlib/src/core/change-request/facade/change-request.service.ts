@@ -96,6 +96,36 @@ export class ChangeRequestService {
       .unsubscribe();
   }
 
+  simulateChangeRequest(changeRequest) {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.store.dispatch(
+          new fromAction.SimulateChangeRequest({
+            userId: occUserId,
+            requestId: changeRequest.requestId,
+            changeRequest: changeRequest,
+          })
+        );
+      })
+      .unsubscribe();
+  }
+  cancelChangeRequest(requestId: string) {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.store.dispatch(
+          new fromAction.CancelChangeRequest({
+            userId: occUserId,
+            requestId: requestId,
+          })
+        );
+      })
+      .unsubscribe();
+  }
+
   private isCreated(changeRequest: any): boolean {
     return changeRequest && changeRequest.configurationSteps !== undefined;
   }

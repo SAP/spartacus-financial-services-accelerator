@@ -11,7 +11,7 @@ const searchResults = {
   pagination: { page: 0 },
   agents: [
     {
-      contactEmail: 'test@test.com',
+      email: 'test@test.com',
     },
   ],
 };

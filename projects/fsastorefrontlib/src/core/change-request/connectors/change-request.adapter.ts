@@ -10,6 +10,20 @@ export abstract class ChangeRequestAdapter {
   abstract getChangeRequest(userId: string, requestId: string): Observable<any>;
 
   /**
+   * Abstract method used to simulate change request
+   *
+   * @param userId The user id
+   * @param requestId The user request id
+   * @param changeRequest The change request data
+
+   */
+  abstract simulateChangeRequst(
+    userId: string,
+    requestId: string,
+    changeRequest: any
+  ): Observable<any>;
+
+  /**
    * Abstract method used to create change request for insurance policy version
    *
    * @param policyId The policy id
@@ -22,5 +36,16 @@ export abstract class ChangeRequestAdapter {
     contractId: string,
     changeRequestType: string,
     userId: string
+  ): Observable<any>;
+
+  /**
+   * Abstract method used to cancel change request
+   *
+   * @param userId The user id
+   * @param requestId The request id
+   */
+  abstract cancelChangeRequest(
+    userId: string,
+    requestId: string
   ): Observable<any>;
 }

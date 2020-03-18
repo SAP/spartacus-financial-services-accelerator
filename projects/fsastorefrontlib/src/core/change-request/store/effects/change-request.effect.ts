@@ -48,6 +48,46 @@ export class ChangeRequestEffects {
     })
   );
 
+  @Effect()
+  simulateChangeRequest$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.SIMULATE_CHANGE_REQUEST),
+    map((action: fromActions.SimulateChangeRequest) => action.payload),
+    mergeMap(payload => {
+      return this.changeRequestConnector
+        .simulateChangeRequest(
+          payload.userId,
+          payload.requestId,
+          payload.changeRequest
+        )
+        .pipe(
+          map((changeRequest: any) => {
+            return new fromActions.SimulateChangeRequestSucess(changeRequest);
+          }),
+          catchError(error =>
+            of(new fromActions.SimulateChangeRequestFail(JSON.stringify(error)))
+          )
+        );
+    })
+  );
+
+  @Effect()
+  cancelChangeRequest$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.CANCEL_CHANGE_REQUEST),
+    map((action: fromActions.CancelChangeRequest) => action.payload),
+    mergeMap(payload => {
+      return this.changeRequestConnector
+        .cancelChangeRequest(payload.userId, payload.requestId)
+        .pipe(
+          map((changeRequest: any) => {
+            return new fromActions.CancelChangeRequestSuccess(changeRequest);
+          }),
+          catchError(error =>
+            of(new fromActions.CancelChangeRequestFail(JSON.stringify(error)))
+          )
+        );
+    })
+  );
+
   constructor(
     private actions$: Actions,
     private changeRequestConnector: ChangeRequestConnector

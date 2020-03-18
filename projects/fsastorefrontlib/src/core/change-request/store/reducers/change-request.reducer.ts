@@ -23,6 +23,8 @@ export function reducer(
     }
 
     case fromAction.LOAD_CHANGE_REQUEST_SUCCESS:
+    case fromAction.SIMULATE_CHANGE_REQUEST_SUCCESS:
+    case fromAction.CANCEL_CHANGE_REQUEST_SUCCESS:
     case fromAction.CREATE_CHANGE_REQUEST_SUCCESS: {
       const content = { ...action.payload };
       return {
