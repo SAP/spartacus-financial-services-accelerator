@@ -119,12 +119,8 @@ describe('OccChangeRequestAdapter', () => {
     adapter.cancelChangeRequest(userId, requestId).subscribe();
     const mockReq = httpMock.expectOne((req: HttpRequest<any>) => {
       return (
-        req.url ===
-          '/users' +
-            `/${userId}` +
-            '/fsChangeRequests' +
-            `/${requestId}` +
-            `/action` && req.method === 'POST'
+        req.url === `/users/${userId}/fsChangeRequests/${requestId}/action` &&
+        req.method === 'POST'
       );
     });
     expect(mockReq.request.body).toEqual(cancelChangeRequestBody);
