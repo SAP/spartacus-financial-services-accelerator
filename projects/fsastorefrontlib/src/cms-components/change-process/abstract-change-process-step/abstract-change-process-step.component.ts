@@ -64,7 +64,7 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
     );
   }
 
-  populateSteps(changeRequest) {
+  populateSteps(changeRequest: any) {
     this.configurationSteps = this.userRequestNavigationService.getConfigurationSteps(
       changeRequest
     );
@@ -75,13 +75,13 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
     this.activeStepIndex = this.configurationSteps.indexOf(activeStepData);
   }
 
-  isSimulated(changeRequest) {
+  isSimulated(changeRequest: any) {
     return (
       changeRequest.changedPolicy && changeRequest.changedPolicy.policyNumber
     );
   }
 
-  simulateChangeRequest(changeRequest) {
+  simulateChangeRequest(changeRequest: any) {
     this.changeRequestService.simulateChangeRequest(changeRequest);
   }
 
