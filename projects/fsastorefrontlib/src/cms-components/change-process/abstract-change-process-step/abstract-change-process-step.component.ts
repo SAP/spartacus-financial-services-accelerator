@@ -78,7 +78,7 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
   }
 
   isSimulated(changeRequest) {
-    return changeRequest.changedPolicy;
+    return changeRequest.changedPolicy && changeRequest.changedPolicy.policyNumber;
   }
 
   simulateChangeRequest(changeRequest) {
