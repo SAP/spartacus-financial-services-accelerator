@@ -148,21 +148,6 @@ describe('ChangeCarDetailsFormComponent', () => {
     expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalled();
   });
 
-  it('should execute simulation, policy not populated', () => {
-    controls['effectiveDate'].setValue(mockChangeCarDetailsForm.effectiveDate);
-    controls['vehicleAnnualMileage'].setValue(
-      mockChangeCarDetailsForm.vehicleAnnualMileage
-    );
-
-    component.ngOnInit();
-
-    const changedRequestData = {
-      requestId: requestId,
-    };
-    component.simulateChanges(changedRequestData);
-    expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalled();
-  });
-
   it('should not execute simulation if form is not populated', () => {
     component.ngOnInit();
 
