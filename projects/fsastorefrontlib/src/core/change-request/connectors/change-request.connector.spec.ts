@@ -20,8 +20,8 @@ class MockChangeRequestAdapter implements ChangeRequestAdapter {
 
   simulateChangeRequst = createSpy(
     'ChangeRequestAdapter.simulateChangeRequst'
-  ).and.callFake((user, requestID, changeRequest) =>
-    of('createChangeRequestForPolicy' + user + requestID + changeRequest)
+  ).and.callFake((userId, requestId, changeRequestData) =>
+    of('createChangeRequestForPolicy' + userId + requestId + changeRequestData)
   );
   cancelChangeRequest = createSpy(
     'ChangeRequestAdapter.cancelChangeRequest'
@@ -35,7 +35,6 @@ const contract = 'contractId';
 const requestID = 'requestId';
 const changeRequestType = 'changeRequestType';
 const user = 'userId';
-const changeRequest = {};
 
 describe('ChangeRequestConnector', () => {
   let changeRequestConnector: ChangeRequestConnector;
