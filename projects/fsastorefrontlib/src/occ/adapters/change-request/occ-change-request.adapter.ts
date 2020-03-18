@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
-import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { ChangeRequestAdapter } from './../../../core/change-request/connectors/change-request.adapter';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class OccChangeRequestAdapter implements ChangeRequestAdapter {
@@ -43,6 +43,14 @@ export class OccChangeRequestAdapter implements ChangeRequestAdapter {
     const toCreate = JSON.stringify({});
     return this.http
       .post<any>(url, toCreate, { headers, params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  simulateChangeRequst(userId: string, requestId: string, changeRequest: any) {
+    const url =
+      this.getChangeRequestEndpoint(userId) + '/' + requestId + '/simulation';
+    return this.http
+      .post<any>(url, changeRequest)
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 

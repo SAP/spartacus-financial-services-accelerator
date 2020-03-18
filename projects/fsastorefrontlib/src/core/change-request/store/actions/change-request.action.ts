@@ -12,6 +12,13 @@ export const CREATE_CHANGE_REQUEST_FAIL =
 export const CREATE_CHANGE_REQUEST_SUCCESS =
   '[Change Request] Create Change Request Success';
 
+export const SIMULATE_CHANGE_REQUEST =
+  '[Change Request] Simulate Change Request';
+export const SIMULATE_CHANGE_REQUEST_FAIL =
+  '[Change Request] Simulate Change Request Fail';
+export const SIMULATE_CHANGE_REQUEST_SUCCESS =
+  '[Change Request] Simulate Change Request Success';
+
 export const CANCEL_CHANGE_REQUEST = '[Change Request] Cancel Change Request';
 export const CANCEL_CHANGE_REQUEST_FAIL =
   '[Change Request] Cancel Change Request Fail';
@@ -48,6 +55,21 @@ export class LoadChangeRequestSuccess implements Action {
   constructor(public payload: any) {}
 }
 
+export class SimulateChangeRequest implements Action {
+  readonly type = SIMULATE_CHANGE_REQUEST;
+  constructor(public payload: any) {}
+}
+
+export class SimulateChangeRequestFail implements Action {
+  readonly type = SIMULATE_CHANGE_REQUEST_FAIL;
+  constructor(public payload: any) {}
+}
+
+export class SimulateChangeRequestSucess implements Action {
+  readonly type = SIMULATE_CHANGE_REQUEST_SUCCESS;
+  constructor(public payload: any) {}
+}
+
 export class CancelChangeRequest implements Action {
   readonly type = CANCEL_CHANGE_REQUEST;
   constructor(public payload: any) {}
@@ -70,6 +92,9 @@ export type ChangeRequestAction =
   | LoadChangeRequest
   | LoadChangeRequestFail
   | LoadChangeRequestSuccess
+  | SimulateChangeRequest
+  | SimulateChangeRequestFail
+  | SimulateChangeRequestSucess
   | CancelChangeRequest
   | CancelChangeRequestSuccess
   | CancelChangeRequestFail;

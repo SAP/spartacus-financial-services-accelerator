@@ -39,6 +39,17 @@ describe('Change Request Reducer', () => {
     });
   });
 
+  describe('SIMULATE_CHANGE_REQUEST_SUCESS', () => {
+    it('should simulate change request', () => {
+      const action = new fromAction.SimulateChangeRequestSucess(
+        mockedChangeRequest
+      );
+      const state = fromReducer.reducer(initialState, action);
+      expect(state.content).toEqual(mockedChangeRequest);
+      expect(state.loaded).toEqual(true);
+    });
+  });
+
   describe('CANCEL_CHANGE_REQUEST_SUCCESS', () => {
     it('should cancel change request', () => {
       const action = new fromAction.CancelChangeRequestSuccess(

@@ -26,6 +26,10 @@ class MockChangeRequestConnector {
   getChangeRequest() {
     return of(changeRequest);
   }
+
+  simulateChangeRequest() {
+    return of(changeRequest);
+  }
   cancelChangeRequest() {
     return of(changeRequest);
   }
@@ -75,25 +79,59 @@ describe('Change Request Effects', () => {
       const expected = cold('-b', { b: completion });
       expect(effects.createChangeRequest$).toBeObservable(expected);
     });
+
+    it('should fail to create change request', () => {
+      spyOn(
+        mockChangeRequestConnector,
+        'createChangeRequestForPolicy'
+      ).and.returnValue(throwError('Error'));
+      const action = new fromActions.CreateChangeRequest({
+        policyId: policyId,
+        contractId: contractId,
+        changeRequestType: changeRequestType,
+        userId: OCC_USER_ID_CURRENT,
+      });
+      const completion = new fromActions.CreateChangeRequestFail(
+        JSON.stringify('Error')
+      );
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.createChangeRequest$).toBeObservable(expected);
+    });
   });
 
-  it('should fail to create change request', () => {
-    spyOn(
-      mockChangeRequestConnector,
-      'createChangeRequestForPolicy'
-    ).and.returnValue(throwError('Error'));
-    const action = new fromActions.CreateChangeRequest({
-      policyId: policyId,
-      contractId: contractId,
-      changeRequestType: changeRequestType,
-      userId: OCC_USER_ID_CURRENT,
+  describe('simulateChangeRequest$', () => {
+    it('should simulate change request', () => {
+      const action = new fromActions.SimulateChangeRequest({
+        userId: OCC_USER_ID_CURRENT,
+        requestId: requestID,
+        changeRequest: changeRequest,
+      });
+      const completion = new fromActions.SimulateChangeRequestSucess(
+        changeRequest
+      );
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.simulateChangeRequest$).toBeObservable(expected);
     });
-    const completion = new fromActions.CreateChangeRequestFail(
-      JSON.stringify('Error')
-    );
-    actions$ = hot('-a', { a: action });
-    const expected = cold('-b', { b: completion });
-    expect(effects.createChangeRequest$).toBeObservable(expected);
+
+    it('should fail to simulate change request', () => {
+      spyOn(
+        mockChangeRequestConnector,
+        'simulateChangeRequest'
+      ).and.returnValue(throwError('Error'));
+      const action = new fromActions.SimulateChangeRequest({
+        userId: OCC_USER_ID_CURRENT,
+        requestId: requestID,
+        changeRequest: changeRequest,
+      });
+      const completion = new fromActions.SimulateChangeRequestFail(
+        JSON.stringify('Error')
+      );
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.simulateChangeRequest$).toBeObservable(expected);
+    });
   });
 
   describe('loadChangeRequest$', () => {
