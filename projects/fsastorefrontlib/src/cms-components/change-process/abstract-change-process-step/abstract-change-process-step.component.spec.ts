@@ -6,7 +6,6 @@ import { of } from 'rxjs';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { Type, PipeTransform } from '@angular/core';
 import createSpy = jasmine.createSpy;
-import { DatePipe } from '@angular/common';
 import {
   GlobalMessage,
   GlobalMessageService,
@@ -55,10 +54,6 @@ class GlobalMessageServiceMock {
   add(_message: GlobalMessage): void {}
 }
 
-class MockParseDatePipe implements PipeTransform {
-  transform() {}
-}
-
 describe('ChangeProcessStepComponent', () => {
   let component: AbstractChangeProcessStepComponent;
   let fixture: ComponentFixture<AbstractChangeProcessStepComponent>;
@@ -87,7 +82,6 @@ describe('ChangeProcessStepComponent', () => {
           provide: GlobalMessageService,
           useClass: GlobalMessageServiceMock,
         },
-        { provide: DatePipe, useClass: MockParseDatePipe },
         {
           provide: ActivatedRoute,
           useValue: {
