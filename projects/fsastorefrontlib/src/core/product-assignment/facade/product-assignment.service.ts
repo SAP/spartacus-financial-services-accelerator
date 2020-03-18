@@ -6,13 +6,15 @@ import { filter, switchMap, take } from 'rxjs/operators';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
+import { FSProductAssignmentConnector } from '../connectors';
 @Injectable({
   providedIn: 'root',
 })
 export class FSProductAssignmentService {
   constructor(
     protected store: Store<fromReducer.ProductAssignmentState>,
-    protected authService: AuthService
+    protected authService: AuthService,
+    protected productAssignmentConnector: FSProductAssignmentConnector
   ) {}
 
   user: string;
@@ -45,6 +47,51 @@ export class FSProductAssignmentService {
       .unsubscribe();
   }
 
+  loadPotentialProductAssignments(orgUnitId: string) {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        if (occUserId && occUserId !== OCC_USER_ID_ANONYMOUS) {
+          this.user = occUserId;
+          this.store.dispatch(
+            new fromAction.LoadPotentialProductAssignments({
+              occUserId,
+              orgUnitId,
+            })
+          );
+        }
+      })
+      .unsubscribe();
+  }
+
+  createProductAssignment(orgUnitId: string, productCode: string) {
+    const userId = this.user;
+    this.store.dispatch(
+      new fromAction.CreateProductAssignment({
+        userId,
+        orgUnitId,
+        productCode,
+      })
+    );
+  }
+
+  removeProductAssignment(
+    orgUnitId: string,
+    productAssignmentCode: string,
+    parentOrgUnit: string
+  ) {
+    const userId = this.user;
+    this.store.dispatch(
+      new fromAction.RemoveProductAssignment({
+        userId,
+        orgUnitId,
+        productAssignmentCode,
+        parentOrgUnit,
+      })
+    );
+  }
+
   changeActiveStatus(
     orgUnitId: string,
     productAssignmentCode: string,
@@ -57,6 +104,16 @@ export class FSProductAssignmentService {
         orgUnitId,
         productAssignmentCode,
         active,
+      })
+    );
+  }
+
+  getPotentialProductAssignments(): Observable<any> {
+    return this.store.select(fromSelector.getLoaded).pipe(
+      filter(loaded => loaded),
+      take(1),
+      switchMap(() => {
+        return this.store.select(fromSelector.getPotentialProductAssignments);
       })
     );
   }

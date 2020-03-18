@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
@@ -22,7 +22,7 @@ export class OccFSProductAssignmentAdapter
     currentPage?: number,
     sort?: string
   ): Observable<any> {
-    const url = this.getChangeRequestEndpoint(userId, orgUnitId);
+    const url = this.getProductAssignmentsEndpoint(userId, orgUnitId);
     const params = {};
     if (active !== undefined) {
       params['active'] = active.toString();
@@ -38,6 +38,35 @@ export class OccFSProductAssignmentAdapter
     }
     return this.http
       .get(url, { params: params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  createProductAssignment(
+    userId: string,
+    orgUnitId: string,
+    productCode: string
+  ) {
+    const url = this.getProductAssignmentsEndpoint(userId, orgUnitId);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    const params = new HttpParams().set('productCode', productCode);
+    return this.http
+      .post<any>(url, JSON.stringify({}), { headers, params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  removeProductAssignment(
+    userId: string,
+    orgUnitId: string,
+    productCode: string
+  ) {
+    const url = this.getProductAssignmentsEndpoint(userId, orgUnitId);
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    return this.http
+      .delete<any>(`${url}/${productCode}`, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
@@ -63,7 +92,7 @@ export class OccFSProductAssignmentAdapter
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  protected getChangeRequestEndpoint(userId: string, orgUnitId: string) {
+  protected getProductAssignmentsEndpoint(userId: string, orgUnitId: string) {
     const productAssignmentsEndpoint =
       '/users/' + userId + '/orgUnits/' + orgUnitId + '/fsProductAssignments';
     return (
