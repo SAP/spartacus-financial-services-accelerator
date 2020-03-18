@@ -6,7 +6,7 @@ import { AgentSearchService } from './agent-search.service';
 import { AgentConnector } from '../connectors/agent.connector';
 
 const testAgent1 = {
-  contactEmail: 'testAgent1@test.com',
+  email: 'testAgent1@test.com',
   categories: [
     {
       code: 'test_category1',
@@ -14,7 +14,7 @@ const testAgent1 = {
   ],
 };
 const testAgent2 = {
-  contactEmail: 'testAgent2@test.com',
+  email: 'testAgent2@test.com',
   categories: [
     {
       code: 'test_category2',
@@ -23,7 +23,7 @@ const testAgent2 = {
 };
 
 const testAgent3 = {
-  contactEmail: 'testAgent3@test.com',
+  email: 'testAgent3@test.com',
   categories: [
     {
       code: 'test_category3',
@@ -44,7 +44,7 @@ class MockOccAgentConnector {
   }
   getAgentByID() {
     return of({
-      agent: testAgent1.contactEmail,
+      agent: testAgent1.email,
     });
   }
 }
@@ -113,11 +113,11 @@ describe('AgentSearchService', () => {
     let agentResult;
     spyOn(mockOccAgentConnector, 'getAgentByID').and.returnValue(
       of({
-        agent: testAgent1.contactEmail,
+        agent: testAgent1.email,
       })
     );
     service
-      .getAgentByID(testAgent1.contactEmail)
+      .getAgentByID(testAgent1.email)
       .subscribe(result => (agentResult = result))
       .unsubscribe();
     expect(agentResult).toBeTruthy();

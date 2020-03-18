@@ -26,14 +26,14 @@
                       [routerLink]="
                         {
                           cxRoute: 'contactAgent',
-                          params: { agent: agent.contactEmail }
+                          params: { agent: agent.email }
                         } | cxUrl
                       "
                     ></a>
                     <a
                       class="col-6 fsa-icon icon-map-marker text-left position-relative"
                       [routerLink]="['/agent-locator']"
-                      [queryParams]="{ query: agent.contactEmail }"
+                      [queryParams]="{ query: agent.email }"
                     ></a>
                   </div>
                 </div>
