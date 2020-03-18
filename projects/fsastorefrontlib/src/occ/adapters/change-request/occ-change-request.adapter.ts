@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
+import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { ChangeRequestAdapter } from './../../../core/change-request/connectors/change-request.adapter';
@@ -42,6 +43,20 @@ export class OccChangeRequestAdapter implements ChangeRequestAdapter {
     const toCreate = JSON.stringify({});
     return this.http
       .post<any>(url, toCreate, { headers, params })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  cancelChangeRequest(userId: string, requestId: string): Observable<any> {
+    const url =
+      this.getChangeRequestEndpoint(userId) + '/' + requestId + '/action';
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+    const cancelChangeRequestBody = {
+      actionName: 'CANCEL',
+    };
+    return this.http
+      .post(url, cancelChangeRequestBody, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
