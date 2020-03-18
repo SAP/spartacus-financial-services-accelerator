@@ -16,7 +16,6 @@ export class UserRequestEffects {
         .updateUserRequest(payload.userId, payload.requestId, payload.stepData)
         .pipe(
           map((userRequest: any) => {
-            console.log(userRequest);
             const sequenceNumber = payload.stepData.sequenceNumber;
             const configSteps = userRequest.configurationSteps;
             if (
@@ -24,7 +23,6 @@ export class UserRequestEffects {
               configSteps.length > 0 &&
               sequenceNumber === configSteps.length
             ) {
-              console.log(userRequest);
               return new fromActions.SubmitUserRequest({
                 userId: payload.userId,
                 requestId: payload.requestId,
@@ -47,7 +45,6 @@ export class UserRequestEffects {
         .submitUserRequest(payload.userId, payload.requestId)
         .pipe(
           mergeMap(userRequest => {
-            console.log(userRequest);
             return [
               new fromActions.LoadUserRequest(userRequest),
               new fromActions.SubmitUserRequestSuccess(userRequest),

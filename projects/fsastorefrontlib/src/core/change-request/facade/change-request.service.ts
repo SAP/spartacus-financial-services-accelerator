@@ -54,9 +54,7 @@ export class ChangeRequestService {
       .unsubscribe();
   }
 
-  submitChangeRequest(
-    changeRequestId: string
-  ) {
+  submitChangeRequest(changeRequestId: string) {
     this.authService
       .getOccUserId()
       .pipe(take(1))
@@ -64,7 +62,7 @@ export class ChangeRequestService {
         this.store.dispatch(
           new fromUserRequestAction.SubmitUserRequest({
             userId: occUserId,
-            requestId: changeRequestId
+            requestId: changeRequestId,
           })
         );
       })

@@ -6,6 +6,7 @@ import { ChangeRequestService } from '../../../core/change-request/facade';
 import { UserRequestNavigationService } from '../../../core/user-request/facade';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { RoutingService } from '@spartacus/core';
 
 @Component({
   selector: 'fsa-change-process-navigation',
@@ -15,7 +16,8 @@ export class ChangeProcessNavigationComponent implements OnInit, OnDestroy {
   constructor(
     protected changeRequestService: ChangeRequestService,
     protected activatedRoute: ActivatedRoute,
-    protected userRequestNavigationService: UserRequestNavigationService
+    protected userRequestNavigationService: UserRequestNavigationService,
+    protected routingService: RoutingService,
   ) {}
 
   changeRequest$: Observable<any>;
@@ -46,14 +48,21 @@ export class ChangeProcessNavigationComponent implements OnInit, OnDestroy {
   }
   submitChangeRequest(changeRequestId) {
     this.changeRequestService.submitChangeRequest(changeRequestId);
+    this.routingService.go({
+      cxRoute: '/'
+    });
   }
 
-  navigateNext(currentStep: number) {
+  navigateNext(currentStep: number, changeRequestId: string) {
+    if(currentStep == 1) {
+      this.submitChangeRequest(changeRequestId);
+    } else { 
     // TODO: FSA-4682 - Before navigation, simulation request has to be executed from ChangeRequestService
     this.userRequestNavigationService.continue(
-      this.configurationSteps,
-      currentStep
-    );
+        this.configurationSteps,
+        currentStep
+      );
+    }
   }
 
   ngOnDestroy() {
