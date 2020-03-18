@@ -3,11 +3,9 @@ import { Observable } from 'rxjs/internal/Observable';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FSStepData } from './../../../occ/occ-models/occ.models';
 import { UserRequestNavigationService } from './../../../core/user-request/facade/user-request-navigation.service';
 import { ActivatedRoute } from '@angular/router';
 import { ChangeProcessStepComponent } from '../change-process-step/change-process-step.component';
-import { changeRequest } from 'projects/fsastorefrontlib/src/assets/translations/en/changeRequest.en';
 
 @Component({
   selector: 'fsa-change-coverage',
@@ -37,20 +35,20 @@ export class ChangeCoverageComponent extends ChangeProcessStepComponent
     this.subscription.add(
       this.changeRequest$
         .pipe(
-          map(changeRequest => {
+          map(changeRequestData => {
             if (
-              changeRequest.insurancePolicy &&
-              changeRequest.insurancePolicy.optionalProducts
+              changeRequestData.insurancePolicy &&
+              changeRequestData.insurancePolicy.optionalProducts
             ) {
-              this.populateSteps(changeRequest);
-              if (this.isSimulated(changeRequest)) {
+              this.populateSteps(changeRequestData);
+              if (this.isSimulated(changeRequestData)) {
                 this.userRequestNavigationService.continue(
                   this.configurationSteps,
                   this.activeStepIndex
                 );
               } else {
                 this.populatelCoverages(
-                  changeRequest.insurancePolicy.optionalProducts
+                  changeRequestData.insurancePolicy.optionalProducts
                 );
               }
             }
