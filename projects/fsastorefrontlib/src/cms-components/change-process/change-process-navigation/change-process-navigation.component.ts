@@ -1,20 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {
   GlobalMessageService,
   GlobalMessageType,
   RoutingService,
 } from '@spartacus/core';
 import { Subscription } from 'rxjs';
-import { FSStepData } from './../../../occ/occ-models/occ.models';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
-import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { ChangeRequestService } from '../../../core/change-request/facade';
 import { UserRequestNavigationService } from '../../../core/user-request/facade';
-import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { FSStepData } from './../../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'fsa-change-process-navigation',
@@ -29,7 +25,6 @@ export class ChangeProcessNavigationComponent implements OnInit, OnDestroy {
     protected userRequestNavigationService: UserRequestNavigationService
   ) {}
 
-  subscription: Subscription;
   changeRequest$: Observable<any>;
   configurationSteps: FSStepData[];
   activeStepIndex: number;
@@ -67,24 +62,27 @@ export class ChangeProcessNavigationComponent implements OnInit, OnDestroy {
 
   cancelRequest(requestId: string) {
     this.changeRequestService.cancelChangeRequest(requestId);
-    this.subscription = this.changeRequest$
-      .pipe(
-        map(changeRequest => {
-          if (changeRequest && changeRequest.requestStatus === 'CANCELED') {
-            const policyNumber = changeRequest.insurancePolicy.policyNumber;
-            const contractNumber = changeRequest.insurancePolicy.contractNumber;
-            this.routingService.go({
-              cxRoute: 'policyDetails',
-              params: { policyId: policyNumber, contractId: contractNumber },
-            });
-            this.globalMessageService.add(
-              'Your policy change request has been canceled',
-              GlobalMessageType.MSG_TYPE_INFO
-            );
-          }
-        })
-      )
-      .subscribe();
+    this.subscription.add(
+      this.changeRequest$
+        .pipe(
+          map(changeRequest => {
+            if (changeRequest && changeRequest.requestStatus === 'CANCELED') {
+              const policyNumber = changeRequest.insurancePolicy.policyNumber;
+              const contractNumber =
+                changeRequest.insurancePolicy.contractNumber;
+              this.routingService.go({
+                cxRoute: 'policyDetails',
+                params: { policyId: policyNumber, contractId: contractNumber },
+              });
+              this.globalMessageService.add(
+                'Your policy change request has been canceled',
+                GlobalMessageType.MSG_TYPE_INFO
+              );
+            }
+          })
+        )
+        .subscribe()
+    );
   }
 
   ngOnDestroy() {

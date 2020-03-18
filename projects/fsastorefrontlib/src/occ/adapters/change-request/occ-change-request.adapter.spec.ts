@@ -146,12 +146,8 @@ describe('OccChangeRequestAdapter', () => {
     httpMock
       .expectOne((req: HttpRequest<any>) => {
         return (
-          req.url ===
-            '/users' +
-              `/${userId}` +
-              '/fsChangeRequests' +
-              `/${requestId}` +
-              `/action` && req.method === 'POST'
+          req.url === `/users/${userId}/fsChangeRequests/${requestId}/action` &&
+          req.method === 'POST'
         );
       })
       .flush(errorResponse);

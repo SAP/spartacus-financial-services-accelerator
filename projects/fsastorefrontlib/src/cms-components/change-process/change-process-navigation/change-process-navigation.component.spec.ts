@@ -10,10 +10,10 @@ import {
 import { of } from 'rxjs';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { ChangeProcessNavigationComponent } from './change-process-navigation.component';
-import createSpy = jasmine.createSpy;
 import { ActivatedRoute } from '@angular/router';
-import { FSUserRequest, FSStepData } from '../../../occ/occ-models/occ.models';
+import { FSStepData } from '../../../occ/occ-models/occ.models';
 import { UserRequestNavigationService } from '../../../core/user-request/facade';
+import createSpy = jasmine.createSpy;
 
 const mockChangeRequest = {
   requestId: 'testRequestId',
