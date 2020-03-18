@@ -1,17 +1,16 @@
-import { OnInit, OnDestroy, Component } from '@angular/core';
-import { FSStepData } from '../../../occ/occ-models';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
-import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
-import { Subscription, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import {
-  RoutingService,
   GlobalMessageService,
   GlobalMessageType,
+  RoutingService,
 } from '@spartacus/core';
-import { FormBuilder } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
+import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
+import { FSStepData } from '../../../occ/occ-models';
 
 @Component({ template: '' })
 export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
@@ -21,8 +20,7 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected routingService: RoutingService,
     protected globalMessageService: GlobalMessageService,
-    protected fb: FormBuilder,
-    protected datePipe: DatePipe
+    protected fb: FormBuilder
   ) {}
 
   configurationSteps: FSStepData[];
@@ -86,7 +84,6 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
   }
 
   cancelChangeRequest(requestId: string) {
-    console.log(requestId);
     this.changeRequestService.cancelChangeRequest(requestId);
   }
 

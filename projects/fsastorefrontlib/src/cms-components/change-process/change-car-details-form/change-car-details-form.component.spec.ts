@@ -1,12 +1,17 @@
+import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { I18nTestingModule } from '@spartacus/core';
-import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
-import { ChangeCarDetailsFormComponent } from './change-car-details-form.component';
-import { UserRequestNavigationService } from './../../../core/user-request/facade';
 import { ActivatedRoute } from '@angular/router';
+import {
+  GlobalMessage,
+  GlobalMessageService,
+  I18nTestingModule,
+  RoutingService,
+} from '@spartacus/core';
 import { of } from 'rxjs';
-import { Type } from '@angular/core';
+import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
+import { UserRequestNavigationService } from './../../../core/user-request/facade';
+import { ChangeCarDetailsFormComponent } from './change-car-details-form.component';
 import createSpy = jasmine.createSpy;
 
 const requestId = 'request1';
@@ -30,6 +35,14 @@ const configurationSteps = [
   },
 ];
 
+class MockRoutingService {
+  go = createSpy();
+}
+
+class GlobalMessageServiceMock {
+  add(_message: GlobalMessage): void {}
+}
+
 class MockUserRequestNavigationService {
   continue = createSpy();
 
@@ -51,6 +64,8 @@ describe('ChangeCarDetailsFormComponent', () => {
   let fixture: ComponentFixture<ChangeCarDetailsFormComponent>;
   let mockChangeRequestService: MockChangeRequestService;
   let mockUserRequestNavigationService: MockUserRequestNavigationService;
+  let mockRoutingService: MockRoutingService;
+  let globalMessageService: GlobalMessageService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -60,6 +75,14 @@ describe('ChangeCarDetailsFormComponent', () => {
         {
           provide: UserRequestNavigationService,
           useClass: MockUserRequestNavigationService,
+        },
+        {
+          provide: RoutingService,
+          useClass: MockRoutingService,
+        },
+        {
+          provide: GlobalMessageService,
+          useClass: GlobalMessageServiceMock,
         },
         {
           provide: ActivatedRoute,
@@ -73,8 +96,12 @@ describe('ChangeCarDetailsFormComponent', () => {
       declarations: [ChangeCarDetailsFormComponent],
     }).compileComponents();
 
+    mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
     mockChangeRequestService = TestBed.get(ChangeRequestService as Type<
       ChangeRequestService
+    >);
+    globalMessageService = TestBed.get(GlobalMessageService as Type<
+      GlobalMessageService
     >);
     mockUserRequestNavigationService = TestBed.get(
       UserRequestNavigationService as Type<UserRequestNavigationService>

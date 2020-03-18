@@ -1,7 +1,12 @@
 import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { I18nTestingModule } from '@spartacus/core';
+import {
+  GlobalMessageService,
+  I18nTestingModule,
+  RoutingService,
+} from '@spartacus/core';
 import { of } from 'rxjs';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { UserRequestNavigationService } from './../../../core/user-request/facade/user-request-navigation.service';
@@ -75,20 +80,36 @@ class MockUserRequestNavigationService {
   getActiveStep() {}
 }
 
+class MockRoutingService {
+  go = createSpy();
+}
+
+class GlobalMessageServiceMock {}
+
 describe('ChangeCoverageComponent', () => {
   let component: ChangeCoverageComponent;
   let fixture: ComponentFixture<ChangeCoverageComponent>;
   let mockUserRequestNavigationService: MockUserRequestNavigationService;
   let mockChangeRequestService: MockChangeRequestService;
+  let mockRoutingService: MockRoutingService;
+  let globalMessageService: GlobalMessageService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [I18nTestingModule],
+      imports: [I18nTestingModule, ReactiveFormsModule],
       providers: [
         { provide: ChangeRequestService, useClass: MockChangeRequestService },
         {
           provide: UserRequestNavigationService,
           useClass: MockUserRequestNavigationService,
+        },
+        {
+          provide: RoutingService,
+          useClass: MockRoutingService,
+        },
+        {
+          provide: GlobalMessageService,
+          useClass: GlobalMessageServiceMock,
         },
         {
           provide: ActivatedRoute,
@@ -105,6 +126,10 @@ describe('ChangeCoverageComponent', () => {
     mockUserRequestNavigationService = TestBed.get(
       UserRequestNavigationService as Type<UserRequestNavigationService>
     );
+    mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
+    globalMessageService = TestBed.get(GlobalMessageService as Type<
+      GlobalMessageService
+    >);
     mockChangeRequestService = TestBed.get(ChangeRequestService as Type<
       ChangeRequestService
     >);
