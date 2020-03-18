@@ -22,13 +22,25 @@ const mockChangeRequest = {
     },
   },
 };
+
+const configurationSteps = [
+  {
+    code: 'step1',
+  },
+];
+
 class MockChangeRequestService {
   getChangeRequest() {
     return of(mockChangeRequest);
   }
 }
 
-class MockUserRequestNavigationService {}
+class MockUserRequestNavigationService {
+  getConfigurationSteps() {
+    return configurationSteps;
+  }
+  getActiveStep() {}
+}
 
 class MockRoutingService {
   go = createSpy();
