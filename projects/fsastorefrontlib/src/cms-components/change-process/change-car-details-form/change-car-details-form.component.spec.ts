@@ -6,6 +6,8 @@ import { ChangeCarDetailsFormComponent } from './change-car-details-form.compone
 import { UserRequestNavigationService } from './../../../core/user-request/facade';
 import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
+import { Type } from '@angular/core';
+import createSpy = jasmine.createSpy;
 
 const requestId = 'request1';
 
@@ -26,6 +28,8 @@ const configurationSteps = [
 ];
 
 class MockUserRequestNavigationService {
+  continue = createSpy();
+
   getConfigurationSteps() {
     return configurationSteps;
   }
@@ -42,6 +46,9 @@ describe('ChangeCarDetailsFormComponent', () => {
   let controls;
   let component: ChangeCarDetailsFormComponent;
   let fixture: ComponentFixture<ChangeCarDetailsFormComponent>;
+  let mockChangeRequestService: MockChangeRequestService;
+  let mockUserRequestNavigationService: MockUserRequestNavigationService;
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -63,6 +70,10 @@ describe('ChangeCarDetailsFormComponent', () => {
       ],
       declarations: [ChangeCarDetailsFormComponent],
     }).compileComponents();
+
+    mockChangeRequestService = TestBed.get(ChangeRequestService as Type<ChangeRequestService>);
+    mockUserRequestNavigationService = TestBed.get(UserRequestNavigationService as Type<UserRequestNavigationService>);
+
   }));
 
   beforeEach(() => {
@@ -74,6 +85,17 @@ describe('ChangeCarDetailsFormComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should redirect if policy is simulated', () => {
+    spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(of({
+      requestId: 'requestId',
+      changedPolicy: {
+        policyId: 'policyId'
+      }
+    }));
+    component.ngOnInit();
+    expect(mockUserRequestNavigationService.continue).toHaveBeenCalled();
   });
 
   it('form invalid when not all required fields filled', () => {
