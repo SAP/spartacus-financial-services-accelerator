@@ -12,13 +12,32 @@
           <div class="tooltip-wrapper">
             <div
               class="fsa-tooltip"
-              ngbTooltip="{{ orderEntryData.product?.description }}"
+              [ngbTooltip]="tooltipContent"
               triggers="click:blur"
               placement="left"
             >
               i
             </div>
           </div>
+          <ng-template #tooltipContent>
+            <span>{{ orderEntryData.product?.description }}</span>
+            <ng-container
+              *ngIf="orderEntryData.product.classifications as classifications"
+            >
+              <hr />
+              <div
+                class="row no-gutters mb-2"
+                *ngFor="let feature of classifications[0]?.features"
+              >
+                <span class="short-overview-title col-6 text-left">{{
+                  feature.name
+                }}</span>
+                <span class="short-overview-value col-6 text-right">{{
+                  feature.featureValues[0]?.value
+                }}</span>
+              </div>
+            </ng-container>
+          </ng-template>
           <div class="col-12 col-md-2 align-self-center">
             <cx-media
               class="cx-product-image-container"
