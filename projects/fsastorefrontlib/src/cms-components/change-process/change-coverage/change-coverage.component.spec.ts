@@ -53,6 +53,8 @@ const mockChangeRequest = {
   changedPolicy: {},
 };
 class MockChangeRequestService {
+  simulateChangeRequest = createSpy();
+
   getChangeRequest() {
     return of(mockChangeRequest);
   }
@@ -160,5 +162,15 @@ describe('ChangeCoverageComponent', () => {
     component.ngOnInit();
     component.removeCoverage(coverage);
     expect(component.potentialCoverages[0].coverageIsIncluded).toEqual(false);
+  });
+
+  it('should execute simulation', () => {
+    spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
+      of(mockChangeRequest)
+    );
+
+    component.ngOnInit();
+    component.simulateChanges(mockChangeRequest);
+    expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalled();
   });
 });
