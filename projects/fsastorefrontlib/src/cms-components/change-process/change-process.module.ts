@@ -18,6 +18,7 @@ import { ChangeCoverageComponent } from './change-coverage/change-coverage.compo
 import { ChangeProcessProgressBarComponent } from './change-process-progress-bar/change-process-progress-bar.component';
 import { ChangeSimulationComponent } from './change-simulation/change-simulation.component';
 import { FSProgressBarModule } from '../progress-bar/progress-bar.module';
+import { AbstractChangeProcessStepComponent } from './abstract-change-process-step/abstract-change-process-step.component';
 
 const routes: Routes = [
   {
@@ -81,18 +82,21 @@ const routes: Routes = [
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
     ChangeCarDetailsFormComponent,
+    AbstractChangeProcessStepComponent
   ],
   exports: [
     ChangeCoverageComponent,
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
     ChangeCarDetailsFormComponent,
+    AbstractChangeProcessStepComponent
   ],
   entryComponents: [
     ChangeCoverageComponent,
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
     ChangeCarDetailsFormComponent,
+    AbstractChangeProcessStepComponent
   ],
   providers: [DatePipe],
 })
