@@ -7,7 +7,7 @@ import { UserRequestNavigationService } from './../../../core/user-request/facad
   selector: 'fsa-change-process-step',
   templateUrl: './change-process-step.component.html',
 })
-export abstract class ChangeProcessStepComponent implements OnInit {
+export class ChangeProcessStepComponent implements OnInit {
   constructor(
     protected userRequestNavigationService: UserRequestNavigationService,
     protected activatedRoute: ActivatedRoute
