@@ -5,27 +5,52 @@ import { ChangeRequestService } from './../../../core/change-request/facade/chan
 import { ChangeCoverageComponent } from './change-coverage.component';
 import { UserRequestNavigationService } from './../../../core/user-request/facade/user-request-navigation.service';
 import { ActivatedRoute } from '@angular/router';
+import { Type } from '@angular/core';
+import createSpy = jasmine.createSpy;
+
+const requestId = 'testRequestId';
+const policyId = 'testPolicy';
+
+const product1 = 'product1';
+const product2 = 'product2';
+const product3 = 'product3';
+const product4 = 'product4';
 
 const mockChangeRequest = {
-  requestId: 'testRequestId',
+  requestId: requestId,
   insurancePolicy: {
-    policyNumber: 'testPolicy',
+    policyNumber: policyId,
     categoryCode: {
       code: 'testCategory',
     },
     optionalProducts: [
       {
         coverageProduct: {
-          cartDisplayName: 'product_one',
+          code: product1,
         },
+        coverageIsIncluded: true,
       },
       {
         coverageProduct: {
-          cartDisplayName: 'product_two',
+          code: product2,
         },
+        coverageIsIncluded: true,
+      },
+      {
+        coverageProduct: {
+          code: product3,
+        },
+        coverageIsIncluded: false,
+      },
+      {
+        coverageProduct: {
+          code: product4,
+        },
+        coverageIsIncluded: false,
       },
     ],
   },
+  changedPolicy: {},
 };
 class MockChangeRequestService {
   getChangeRequest() {
@@ -40,6 +65,8 @@ const configurationSteps = [
 ];
 
 class MockUserRequestNavigationService {
+  continue = createSpy();
+
   getConfigurationSteps() {
     return configurationSteps;
   }
@@ -49,6 +76,8 @@ class MockUserRequestNavigationService {
 describe('ChangeCoverageComponent', () => {
   let component: ChangeCoverageComponent;
   let fixture: ComponentFixture<ChangeCoverageComponent>;
+  let mockUserRequestNavigationService: MockUserRequestNavigationService;
+  let mockChangeRequestService: MockChangeRequestService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -70,6 +99,13 @@ describe('ChangeCoverageComponent', () => {
       ],
       declarations: [ChangeCoverageComponent],
     }).compileComponents();
+
+    mockUserRequestNavigationService = TestBed.get(
+      UserRequestNavigationService as Type<UserRequestNavigationService>
+    );
+    mockChangeRequestService = TestBed.get(ChangeRequestService as Type<
+      ChangeRequestService
+    >);
   }));
 
   beforeEach(() => {
@@ -80,5 +116,49 @@ describe('ChangeCoverageComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should navigate if policy is simulated', () => {
+    const simulatedRequest = mockChangeRequest;
+    simulatedRequest.changedPolicy = {
+      policyNumber: policyId,
+    };
+    spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
+      of(simulatedRequest)
+    );
+    component.ngOnInit();
+    expect(mockUserRequestNavigationService.continue).toHaveBeenCalled();
+  });
+
+  it('should add coverage', () => {
+    const coverage = {
+      coverageProduct: {
+        code: product3,
+      },
+    };
+
+    spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
+      of(mockChangeRequest)
+    );
+
+    component.ngOnInit();
+    component.addCoverage(coverage);
+    expect(component.potentialCoverages[0].coverageIsIncluded).toEqual(true);
+  });
+
+  it('should remove coverage', () => {
+    const coverage = {
+      coverageProduct: {
+        code: product3,
+      },
+    };
+
+    spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
+      of(mockChangeRequest)
+    );
+
+    component.ngOnInit();
+    component.removeCoverage(coverage);
+    expect(component.potentialCoverages[0].coverageIsIncluded).toEqual(false);
   });
 });

@@ -59,7 +59,7 @@ export class ChangeCoverageComponent extends ChangeProcessStepComponent
   }
 
   isSimulated(request: any) {
-    return request.changedPolicy;
+    return request.changedPolicy.policyNumber;
   }
 
   populatelCoverages(optionalProducts: any) {

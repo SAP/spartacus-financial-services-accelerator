@@ -10,12 +10,15 @@ import { Type } from '@angular/core';
 import createSpy = jasmine.createSpy;
 
 const requestId = 'request1';
+const policyId = 'policy1';
 
 const changeRequest = {
   requestId: requestId,
 };
 
 class MockChangeRequestService {
+  simulateChangeRequest = createSpy();
+
   getChangeRequest() {
     return of(changeRequest);
   }
@@ -92,14 +95,70 @@ describe('ChangeCarDetailsFormComponent', () => {
   it('should redirect if policy is simulated', () => {
     spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
       of({
-        requestId: 'requestId',
+        requestId: requestId,
         changedPolicy: {
-          policyId: 'policyId',
+          policyId: policyId,
         },
       })
     );
     component.ngOnInit();
     expect(mockUserRequestNavigationService.continue).toHaveBeenCalled();
+  });
+
+  it('should execute simulation request', () => {
+    controls['effectiveDate'].setValue(mockChangeCarDetailsForm.effectiveDate);
+    controls['vehicleAnnualMileage'].setValue(
+      mockChangeCarDetailsForm.vehicleAnnualMileage
+    );
+
+    component.ngOnInit();
+
+    const changedRequestData = {
+      requestId: requestId,
+      insurancePolicy: {
+        insuredObjectList: {
+          insuredObjects: [
+            {
+              insuredObjectItems: [
+                {
+                  label: 'vehicleAnnualMileage',
+                  value: '3000',
+                },
+              ],
+            },
+          ],
+        },
+      },
+    };
+    component.simulateChanges(changedRequestData);
+    expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalled();
+  });
+
+  it('should execute simulation, policy not populated', () => {
+    controls['effectiveDate'].setValue(mockChangeCarDetailsForm.effectiveDate);
+    controls['vehicleAnnualMileage'].setValue(
+      mockChangeCarDetailsForm.vehicleAnnualMileage
+    );
+
+    component.ngOnInit();
+
+    const changedRequestData = {
+      requestId: requestId,
+    };
+    component.simulateChanges(changedRequestData);
+    expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalled();
+  });
+
+  it('should not execute simulation if form is not populated', () => {
+    component.ngOnInit();
+
+    const changedRequestData = {
+      requestId: requestId,
+    };
+    component.simulateChanges(changedRequestData);
+    expect(
+      mockChangeRequestService.simulateChangeRequest
+    ).not.toHaveBeenCalled();
   });
 
   it('form invalid when not all required fields filled', () => {
