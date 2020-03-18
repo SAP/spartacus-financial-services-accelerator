@@ -33,20 +33,18 @@ export class ChangeCarDetailsFormComponent
       let changedInsuredObject;
       changeRequest.insurancePolicy.insuredObjectList.insuredObjects.forEach(
         insuredObject => {
-          const changedItem = insuredObject.insuredObjectItems.filter(
-            item => item.label === 'vehicleAnnualMileage'
-          );
-          if (changedItem) {
-            changedInsuredObject = {
-              insuredObjectId: insuredObject.insuredObjectId,
-              insuredObjectItems: [
-                {
-                  label: changedItem[0].label,
-                  value: this.changeCarDetailsForm.value.vehicleAnnualMileage,
-                },
-              ],
-            };
-          }
+          changedInsuredObject = {
+            insuredObjectId: insuredObject.insuredObjectId,
+            insuredObjectItems: [],
+          };
+          insuredObject.insuredObjectItems
+            .filter(item => item.changeable)
+            .forEach(item => {
+              changedInsuredObject.insuredObjectItems.push({
+                label: item.label,
+                value: this.changeCarDetailsForm.controls[item.label].value,
+              });
+            });
         }
       );
       this.simulateChangeRequest({
