@@ -44,6 +44,9 @@ export class ChangeProcessNavigationComponent implements OnInit, OnDestroy {
         .subscribe()
     );
   }
+  submitChangeRequest(changeRequestId) {
+    this.changeRequestService.submitChangeRequest(changeRequestId);
+  }
 
   navigateNext(currentStep: number) {
     // TODO: FSA-4682 - Before navigation, simulation request has to be executed from ChangeRequestService

@@ -5,9 +5,14 @@
     </button>
     <button
       class="primary-button btn-block"
-      (click)="navigateNext(activeStepIndex)"
-    >
-      {{ 'common.continue' | cxTranslate }}
+      (click)="submitChangeRequest(changeRequest.requestId)"
+    > 
+    <ng-container *ngIf="activeStepIndex !== 1; else submit">
+        {{ 'common.continue' | cxTranslate }}
+    </ng-container>
     </button>
   </div>
 </section>
+<ng-template #submit>
+  {{ 'common.submit' | cxTranslate }}
+</ng-template>

@@ -78,6 +78,7 @@ export const fscommon = {
     mapView: 'Map View',
     makeClaim: 'Make a Claim Online',
     summary: 'Summary',
+    submit: 'submit',
     application: {
       applicationRequestSubmitted:
         'Your application has been successfully saved in our system. An e-mail has been sent to your e-mail address.',
