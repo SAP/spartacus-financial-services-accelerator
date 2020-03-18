@@ -82,21 +82,21 @@ const routes: Routes = [
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
     ChangeCarDetailsFormComponent,
-    AbstractChangeProcessStepComponent
+    AbstractChangeProcessStepComponent,
   ],
   exports: [
     ChangeCoverageComponent,
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
     ChangeCarDetailsFormComponent,
-    AbstractChangeProcessStepComponent
+    AbstractChangeProcessStepComponent,
   ],
   entryComponents: [
     ChangeCoverageComponent,
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
     ChangeCarDetailsFormComponent,
-    AbstractChangeProcessStepComponent
+    AbstractChangeProcessStepComponent,
   ],
   providers: [DatePipe],
 })
