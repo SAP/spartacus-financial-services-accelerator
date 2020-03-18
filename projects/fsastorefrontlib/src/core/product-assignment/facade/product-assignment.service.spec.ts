@@ -12,6 +12,7 @@ import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import { reducerProvider, reducerToken } from '../store/reducers';
 import { FSProductAssignmentService } from './product-assignment.service';
+import { FSProductAssignmentAdapter } from '../connectors/product-assignment.adapter';
 
 const mockProductAssignments = {
   assignments: [
@@ -30,12 +31,33 @@ const mockProductAssignments = {
       },
     },
   ],
+  potentialAssignments: [
+    {
+      active: true,
+      code: 'potential-test',
+      product: {
+        code: 'testProduct',
+      },
+    },
+    {
+      active: false,
+      code: 'test-product',
+      product: {
+        code: 'test-product',
+      },
+    },
+  ],
 };
 const mockedOrgUnitId = 'SAP';
 const pageSize = 5;
 const currentPage = 1;
 const sortCode = 'name';
 const productAssignmentCode = 'testOne';
+const parentOrgUnit = 'TestParentOrg';
+const MockCustomerProfile = {
+  occUserId: 'TestOrg',
+  orgCustomerId: 'TestCustomerId',
+};
 
 class MockAuthService {
   getOccUserId(): Observable<string> {
@@ -57,6 +79,7 @@ describe('FSProductAssignmentServiceTest', () => {
       providers: [
         FSProductAssignmentService,
         reducerProvider,
+        FSProductAssignmentAdapter,
         {
           provide: AuthService,
           useValue: mockAuthService,
@@ -113,6 +136,59 @@ describe('FSProductAssignmentServiceTest', () => {
       })
       .unsubscribe();
     expect(response).toEqual(mockProductAssignments.assignments);
+  });
+
+  it('should be able to get potential product assignments', () => {
+    service.loadPotentialProductAssignments(mockedOrgUnitId);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.LoadPotentialProductAssignments({
+        occUserId: OCC_USER_ID_CURRENT,
+        orgUnitId: mockedOrgUnitId,
+      })
+    );
+  });
+
+  it('should be able to load potential product assignments', () => {
+    store.dispatch(
+      new fromAction.LoadPotentialProductAssignmentsSuccess(
+        mockProductAssignments
+      )
+    );
+    let response;
+    service
+      .getPotentialProductAssignments()
+      .subscribe(potentialAssignments => {
+        response = potentialAssignments;
+      })
+      .unsubscribe();
+    expect(response).toEqual(mockProductAssignments.assignments);
+  });
+
+  it('should be able to create product assignment', () => {
+    service.createProductAssignment(mockedOrgUnitId, productAssignmentCode);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.CreateProductAssignment({
+        userId: OCC_USER_ID_CURRENT,
+        orgUnitId: mockedOrgUnitId,
+        productCode: productAssignmentCode,
+      })
+    );
+  });
+
+  it('should be able to remove product assignment', () => {
+    service.removeProductAssignment(
+      mockedOrgUnitId,
+      productAssignmentCode,
+      parentOrgUnit
+    );
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.RemoveProductAssignment({
+        userId: OCC_USER_ID_CURRENT,
+        orgUnitId: mockedOrgUnitId,
+        productAssignmentCode: productAssignmentCode,
+        parentOrgUnit: parentOrgUnit,
+      })
+    );
   });
 
   it('should be able to dispatch product assignment update action', () => {

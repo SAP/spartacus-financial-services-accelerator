@@ -126,14 +126,13 @@
     display: block;
     content: '';
     position: absolute;
-    right: 15px;
     top: 50%;
     width: 16px;
     height: 16px;
     @include transition();
   }
 }
-@mixin accordion-status {
+@mixin toggle-status {
   cursor: pointer;
   position: relative;
   @include status();

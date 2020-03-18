@@ -19,6 +19,17 @@ class MockProductAssignmentAdapter implements FSProductAssignmentAdapter {
           sort
       )
   );
+
+  createProductAssignment = createSpy().and.callFake(
+    (userId, orgUnitId, productCode) =>
+      of('createProductAssignment' + userId + orgUnitId + productCode)
+  );
+
+  removeProductAssignment = createSpy().and.callFake(
+    (userId, orgUnitId, productCode) =>
+      of('removeProductAssignment', userId + orgUnitId + productCode)
+  );
+
   changeActiveStatus = createSpy().and.callFake(
     (userId, orgUnitId, productAssignmentCode, active) =>
       of(
@@ -75,6 +86,28 @@ describe('FSProductAssignmentConnector', () => {
       1,
       undefined
     );
+  });
+
+  it('should call adapter to createProductAssignment', () => {
+    productAssignmentConnector.createProductAssignment(
+      OCC_CART_ID_CURRENT,
+      'SAP',
+      '012345'
+    );
+    expect(
+      productAssignmentAdapter.createProductAssignment
+    ).toHaveBeenCalledWith(OCC_CART_ID_CURRENT, 'SAP', '012345');
+  });
+
+  it('should call adapter to removeProductAssignment', () => {
+    productAssignmentConnector.removeProductAssignment(
+      OCC_CART_ID_CURRENT,
+      'SAP',
+      '012345'
+    );
+    expect(
+      productAssignmentAdapter.removeProductAssignment
+    ).toHaveBeenCalledWith(OCC_CART_ID_CURRENT, 'SAP', '012345');
   });
 
   it('should call adapter to changeActiveStatus', () => {

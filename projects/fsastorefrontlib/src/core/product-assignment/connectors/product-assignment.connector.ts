@@ -11,7 +11,7 @@ export class FSProductAssignmentConnector {
   loadProductAssignmentsForUnit(
     userId: string,
     orgUnitId: string,
-    active: boolean,
+    active?: boolean,
     pageSize?: number,
     currentPage?: number,
     sort?: string
@@ -23,6 +23,30 @@ export class FSProductAssignmentConnector {
       pageSize,
       currentPage,
       sort
+    );
+  }
+
+  createProductAssignment(
+    userId: string,
+    orgUnitId: string,
+    productCode: string
+  ) {
+    return this.productAssignmentAdapter.createProductAssignment(
+      userId,
+      orgUnitId,
+      productCode
+    );
+  }
+
+  removeProductAssignment(
+    userId: string,
+    orgUnitId: string,
+    productAssignmentCode: string
+  ) {
+    return this.productAssignmentAdapter.removeProductAssignment(
+      userId,
+      orgUnitId,
+      productAssignmentCode
     );
   }
 
