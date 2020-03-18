@@ -1,11 +1,11 @@
+import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule } from '@spartacus/core';
 import { of } from 'rxjs';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
-import { ChangeCoverageComponent } from './change-coverage.component';
 import { UserRequestNavigationService } from './../../../core/user-request/facade/user-request-navigation.service';
-import { ActivatedRoute } from '@angular/router';
-import { Type } from '@angular/core';
+import { ChangeCoverageComponent } from './change-coverage.component';
 import createSpy = jasmine.createSpy;
 
 const requestId = 'testRequestId';
@@ -133,25 +133,28 @@ describe('ChangeCoverageComponent', () => {
   });
 
   it('should add coverage', () => {
+    component.potentialCoverages =
+      mockChangeRequest.insurancePolicy.optionalProducts;
     const coverage = {
       coverageProduct: {
-        code: product3,
+        code: product1,
       },
     };
 
     spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
       of(mockChangeRequest)
     );
-
-    component.ngOnInit();
+    console.log(component.potentialCoverages);
     component.addCoverage(coverage);
     expect(component.potentialCoverages[0].coverageIsIncluded).toEqual(true);
   });
 
   it('should remove coverage', () => {
+    component.potentialCoverages =
+      mockChangeRequest.insurancePolicy.optionalProducts;
     const coverage = {
       coverageProduct: {
-        code: product3,
+        code: product1,
       },
     };
 
@@ -159,7 +162,6 @@ describe('ChangeCoverageComponent', () => {
       of(mockChangeRequest)
     );
 
-    component.ngOnInit();
     component.removeCoverage(coverage);
     expect(component.potentialCoverages[0].coverageIsIncluded).toEqual(false);
   });
