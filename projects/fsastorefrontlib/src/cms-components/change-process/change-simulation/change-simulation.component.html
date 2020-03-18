@@ -207,8 +207,11 @@
     >
       {{ 'common.back' | cxTranslate }}
     </button>
-    <button class="primary-button btn-block">
-      {{ 'common.continue' | cxTranslate }}
+    <button
+      class="primary-button btn-block"
+      (click)="submitChangeRequest(changeRequest.requestId)"
+    >
+      {{ 'common.submit' | cxTranslate }}
     </button>
   </div>
 </ng-container>

@@ -88,4 +88,10 @@ export class ChangeSimulationComponent
     );
     return changedCoverage.coverageIsIncluded;
   }
+  submitChangeRequest(changeRequestId) {
+    this.changeRequestService.submitChangeRequest(changeRequestId);
+    this.routingService.go({
+      cxRoute: '/',
+    });
+  }
 }
