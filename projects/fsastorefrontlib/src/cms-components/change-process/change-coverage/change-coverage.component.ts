@@ -1,38 +1,27 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
-import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { UserRequestNavigationService } from './../../../core/user-request/facade/user-request-navigation.service';
-import { ActivatedRoute } from '@angular/router';
-import { ChangeProcessStepComponent } from '../change-process-step/change-process-step.component';
+import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
 
 @Component({
   selector: 'fsa-change-coverage',
   templateUrl: './change-coverage.component.html',
 })
-export class ChangeCoverageComponent extends ChangeProcessStepComponent
+export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
   implements OnInit, OnDestroy {
-  constructor(
-    protected changeRequestService: ChangeRequestService,
-    protected userRequestNavigationService: UserRequestNavigationService,
-    protected activatedRoute: ActivatedRoute
-  ) {
-    super(userRequestNavigationService, activatedRoute);
-  }
-
   changeRequest$: Observable<any>;
   currentDate;
 
   includedCoverages = [];
   potentialCoverages = [];
 
-  private subscription = new Subscription();
+  private sub = new Subscription();
 
   ngOnInit() {
+    super.ngOnInit();
     this.currentDate = new Date().toISOString().substr(0, 10);
-    this.changeRequest$ = this.changeRequestService.getChangeRequest();
-    this.subscription.add(
+    this.sub.add(
       this.changeRequest$
         .pipe(
           map(changeRequestData => {
@@ -40,13 +29,7 @@ export class ChangeCoverageComponent extends ChangeProcessStepComponent
               changeRequestData.insurancePolicy &&
               changeRequestData.insurancePolicy.optionalProducts
             ) {
-              this.populateSteps(changeRequestData);
-              if (this.isSimulated(changeRequestData)) {
-                this.userRequestNavigationService.continue(
-                  this.configurationSteps,
-                  this.activeStepIndex
-                );
-              } else {
+              if (!this.isSimulated(changeRequestData)) {
                 this.populatelCoverages(
                   changeRequestData.insurancePolicy.optionalProducts
                 );
@@ -56,10 +39,6 @@ export class ChangeCoverageComponent extends ChangeProcessStepComponent
         )
         .subscribe()
     );
-  }
-
-  isSimulated(request: any) {
-    return request.changedPolicy && request.changedPolicy.policyNumber;
   }
 
   populatelCoverages(optionalProducts: any) {
@@ -106,7 +85,7 @@ export class ChangeCoverageComponent extends ChangeProcessStepComponent
         });
       }
     });
-    this.changeRequestService.simulateChangeRequest({
+    this.simulateChangeRequest({
       requestId: changeRequestData.requestId,
       insurancePolicy: {
         optionalProducts: optionalProducts,
@@ -115,8 +94,8 @@ export class ChangeCoverageComponent extends ChangeProcessStepComponent
   }
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+    if (this.sub) {
+      this.sub.unsubscribe();
     }
   }
 }

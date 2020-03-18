@@ -1,32 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
-import { UserRequestNavigationService } from './../../../core/user-request/facade/user-request-navigation.service';
-import { ActivatedRoute } from '@angular/router';
-import { map } from 'rxjs/operators';
-import { Subscription } from 'rxjs';
-import { ChangeProcessStepComponent } from '../change-process-step/change-process-step.component';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
 
 @Component({
   selector: 'fsa-change-car-details-form',
   templateUrl: './change-car-details-form.component.html',
 })
-export class ChangeCarDetailsFormComponent extends ChangeProcessStepComponent
+export class ChangeCarDetailsFormComponent
+  extends AbstractChangeProcessStepComponent
   implements OnInit, OnDestroy {
-  constructor(
-    protected changeRequestService: ChangeRequestService,
-    protected fb: FormBuilder,
-    protected userRequestNavigationService: UserRequestNavigationService,
-    protected activatedRoute: ActivatedRoute
-  ) {
-    super(userRequestNavigationService, activatedRoute);
-  }
-
   changeCarDetailsForm: FormGroup = this.fb.group({
     effectiveDate: new FormControl(
       { value: new Date().toISOString().substr(0, 10), disabled: true },
@@ -35,31 +18,8 @@ export class ChangeCarDetailsFormComponent extends ChangeProcessStepComponent
     vehicleAnnualMileage: ['', [Validators.required, Validators.max(100000)]],
   });
 
-  changeRequest$;
-
-  private subscription = new Subscription();
-
   ngOnInit() {
-    this.changeRequest$ = this.changeRequestService.getChangeRequest();
-    this.subscription.add(
-      this.changeRequest$
-        .pipe(
-          map(changeRequest => {
-            this.populateSteps(changeRequest);
-            if (this.isSimulated(changeRequest)) {
-              this.userRequestNavigationService.continue(
-                this.configurationSteps,
-                this.activeStepIndex
-              );
-            }
-          })
-        )
-        .subscribe()
-    );
-  }
-
-  isSimulated(changeRequest) {
-    return changeRequest.changedPolicy;
+    super.ngOnInit();
   }
 
   simulateChanges(changeRequest) {
@@ -91,7 +51,7 @@ export class ChangeCarDetailsFormComponent extends ChangeProcessStepComponent
           }
         );
       }
-      this.changeRequestService.simulateChangeRequest({
+      this.simulateChangeRequest({
         requestId: changeRequest.requestId,
         insurancePolicy: {
           insuredObjectList: {
@@ -99,12 +59,6 @@ export class ChangeCarDetailsFormComponent extends ChangeProcessStepComponent
           },
         },
       });
-    }
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
     }
   }
 }

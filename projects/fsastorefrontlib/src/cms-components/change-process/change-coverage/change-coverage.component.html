@@ -61,7 +61,10 @@
     </ng-container>
   </div>
   <div class="row mt-5">
-    <button class="action-button btn-block">
+    <button
+      class="action-button btn-block"
+      (click)="cancelChangeRequest(changeRequest.requestId)"
+    >
       {{ 'common.back' | cxTranslate }}
     </button>
     <button

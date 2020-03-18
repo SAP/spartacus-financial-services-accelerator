@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChangeProcessStepComponent } from './change-process-step.component';
-import { UserRequestNavigationService } from './../../../core/user-request/facade/user-request-navigation.service';
+import { AbstractChangeProcessStepComponent } from './abstract-change-process-step.component';
+import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
 import { ActivatedRoute } from '@angular/router';
 
 const configurationSteps = [
@@ -17,8 +17,8 @@ class MockUserRequestNavigationService {
 }
 
 describe('ChangeProcessStepComponent', () => {
-  let component: ChangeProcessStepComponent;
-  let fixture: ComponentFixture<ChangeProcessStepComponent>;
+  let component: AbstractChangeProcessStepComponent;
+  let fixture: ComponentFixture<AbstractChangeProcessStepComponent>;
   let mockUserRequestNavigationService: MockUserRequestNavigationService;
 
   beforeEach(async(() => {
@@ -38,12 +38,12 @@ describe('ChangeProcessStepComponent', () => {
           },
         },
       ],
-      declarations: [ChangeProcessStepComponent],
+      declarations: [AbstractChangeProcessStepComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChangeProcessStepComponent);
+    fixture = TestBed.createComponent(AbstractChangeProcessStepComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

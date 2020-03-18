@@ -3,26 +3,20 @@ import {
   ChangedPolicyData,
   ChangeRequestType,
 } from '../../../occ/occ-models/occ.models';
-import { Observable } from 'rxjs/internal/Observable';
-import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
-import { DatePipe } from '@angular/common';
+import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
 
 @Component({
   selector: 'fsa-change-simulation',
   templateUrl: './change-simulation.component.html',
 })
-export class ChangeSimulationComponent implements OnInit {
-  constructor(
-    protected changeRequestService: ChangeRequestService,
-    protected datePipe: DatePipe
-  ) {}
-
-  changeRequest$: Observable<any>;
+export class ChangeSimulationComponent
+  extends AbstractChangeProcessStepComponent
+  implements OnInit {
   changedPolicyObjects: ChangedPolicyData[] = [];
   currentDate: Date = new Date();
 
   ngOnInit() {
-    this.changeRequest$ = this.changeRequestService.getChangeRequest();
+    super.ngOnInit();
   }
 
   getChangedPolicyObjects(changeRequestData: any): ChangedPolicyData[] {
