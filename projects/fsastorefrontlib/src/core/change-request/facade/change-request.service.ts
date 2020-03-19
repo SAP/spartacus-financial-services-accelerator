@@ -7,6 +7,7 @@ import { filter, switchMap, take } from 'rxjs/operators';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
+import * as fromUserRequestAction from './../../../core/user-request/store/actions';
 
 @Injectable()
 export class ChangeRequestService {
@@ -80,7 +81,15 @@ export class ChangeRequestService {
       .unsubscribe();
   }
 
-  simulateChangeRequest(changeRequest) {
+  simulateChangeRequest(changeRequest, stepIndex) {
+    const stepData = Object.assign(
+      {},
+      changeRequest.configurationSteps[stepIndex],
+      {
+        status: 'COMPLETED',
+      }
+    );
+
     this.authService
       .getOccUserId()
       .pipe(take(1))
@@ -90,6 +99,7 @@ export class ChangeRequestService {
             userId: occUserId,
             requestId: changeRequest.requestId,
             changeRequest: changeRequest,
+            stepData: stepData,
           })
         );
       })
@@ -108,6 +118,33 @@ export class ChangeRequestService {
         );
       })
       .unsubscribe();
+  }
+
+  updateChangeRequest(changeRequest, stepIndex) {
+    const stepData = this.buildStepData(changeRequest, stepIndex);
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.store.dispatch(
+          new fromUserRequestAction.UpdateUserRequest({
+            userId: occUserId,
+            requestId: changeRequest.requestId,
+            stepData: stepData,
+          })
+        );
+      })
+      .unsubscribe();
+  }
+
+  private buildStepData(changeRequest: any, stepIndex): any {
+    return Object.assign(
+      {},
+      changeRequest.configurationSteps[stepIndex],
+      {
+        status: 'COMPLETED',
+      }
+    );
   }
 
   private isCreated(changeRequest: any): boolean {

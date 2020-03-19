@@ -45,6 +45,13 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
               );
             }
 
+            if (this.isSimulated(changeRequest)) {
+              this.userRequestNavigationService.continue(
+                this.configurationSteps,
+                this.activeStepIndex
+              );
+            }
+
             if (changeRequest && changeRequest.requestStatus === 'CANCELED') {
               const policyNumber = changeRequest.insurancePolicy.policyNumber;
               const contractNumber =
@@ -82,7 +89,10 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
   }
 
   simulateChangeRequest(changeRequest: any) {
-    this.changeRequestService.simulateChangeRequest(changeRequest);
+    this.changeRequestService.simulateChangeRequest(
+      changeRequest,
+      this.activeStepIndex
+    );
   }
 
   cancelChangeRequest(requestId: string) {

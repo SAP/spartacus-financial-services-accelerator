@@ -211,7 +211,10 @@
     >
       {{ 'common.back' | cxTranslate }}
     </button>
-    <button class="primary-button btn-block">
+    <button
+      class="primary-button btn-block"
+      (click)="updateChangeRequest(changeRequest)"
+    >
       {{ 'common.continue' | cxTranslate }}
     </button>
   </div>
