@@ -4,7 +4,11 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { ChangeRequestConnector } from '../../connectors/change-request.connector';
 import * as fromActions from '../actions';
-import { GlobalMessageService, GlobalMessageType } from '@spartacus/core';
+import {
+  GlobalMessageService,
+  GlobalMessageType,
+  RoutingService,
+} from '@spartacus/core';
 
 @Injectable()
 export class ChangeRequestEffects {
@@ -67,9 +71,15 @@ export class ChangeRequestEffects {
           map((changeRequest: any) => {
             return new fromActions.SimulateChangeRequestSucess(changeRequest);
           }),
-          catchError(error =>
-            of(new fromActions.SimulateChangeRequestFail(JSON.stringify(error)))
-          )
+          catchError(error => {
+            this.routingService.go({
+              cxRoute: '/',
+            });
+            this.showGlobalMessage('policy.changeError');
+            return of(
+              new fromActions.SimulateChangeRequestFail(JSON.stringify(error))
+            );
+          })
         );
     })
   );
@@ -93,12 +103,17 @@ export class ChangeRequestEffects {
   );
 
   private showGlobalMessage(text: string) {
-    this.messageService.add({ key: text }, GlobalMessageType.MSG_TYPE_ERROR);
+    this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+    this.globalMessageService.add(
+      { key: text },
+      GlobalMessageType.MSG_TYPE_ERROR
+    );
   }
 
   constructor(
     private actions$: Actions,
     private changeRequestConnector: ChangeRequestConnector,
-    private messageService: GlobalMessageService
+    private globalMessageService: GlobalMessageService,
+    protected routingService: RoutingService
   ) {}
 }

@@ -53,14 +53,17 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
                 cxRoute: 'policyDetails',
                 params: { policyId: policyNumber, contractId: contractNumber },
               });
-              this.globalMessageService.add(
-                'Your policy change request has been canceled',
-                GlobalMessageType.MSG_TYPE_INFO
-              );
+              this.showGlobalMessage('policy.policyCanceled');
             }
           })
         )
         .subscribe()
+    );
+  }
+  private showGlobalMessage(text: string) {
+    this.globalMessageService.add(
+      { key: text },
+      GlobalMessageType.MSG_TYPE_INFO
     );
   }
 
