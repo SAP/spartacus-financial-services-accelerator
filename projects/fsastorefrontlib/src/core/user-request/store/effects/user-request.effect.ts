@@ -21,7 +21,8 @@ export class UserRequestEffects {
             if (
               configSteps &&
               configSteps.length > 0 &&
-              sequenceNumber === configSteps.length
+              sequenceNumber === configSteps.length &&
+              configSteps[configSteps.length - 1].status === 'COMPLETED'
             ) {
               return new fromActions.SubmitUserRequest({
                 userId: payload.userId,

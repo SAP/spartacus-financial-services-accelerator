@@ -28,11 +28,13 @@ const configurationSteps = [
     code: 'step1',
   },
 ];
+const mockChangeId = '00000000';
 
 class MockChangeRequestService {
   getChangeRequest() {
     return of(mockChangeRequest);
   }
+  submitChangeRequest = createSpy();
 }
 
 class MockUserRequestNavigationService {
@@ -102,7 +104,13 @@ describe('ChangeSimulationComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should call submitChangeRequest and redirect to homepage', () => {
+    component.submitChangeRequest(mockChangeId);
+    expect(mockChangeRequestService.submitChangeRequest).toHaveBeenCalledWith(
+      mockChangeId
+    );
+    expect(mockRoutingService.go).toHaveBeenCalledWith({
+      cxRoute: '/',
+    });
   });
 });

@@ -4,13 +4,16 @@ import { Store, StoreModule } from '@ngrx/store';
 import { AuthService, OCC_USER_ID_CURRENT, UserToken } from '@spartacus/core';
 import { Observable, of, ReplaySubject } from 'rxjs';
 import * as fromAction from '../store/actions';
+import * as fromUserRequestAction from '../../../core/user-request/store/actions'
 import * as fromReducer from '../store/reducers';
 import { reducerProvider, reducerToken } from '../store/reducers';
 import { ChangeRequestService } from './change-request.service';
 
+
 const userId = OCC_USER_ID_CURRENT;
 const policyId = 'PL00001';
 const contractId = 'CT00001';
+const changeRequestId = '00000000';
 const requestId = 'requestId';
 const changeRequestType = 'requestType';
 
@@ -81,6 +84,16 @@ describe('ChangeRequestServiceTest', () => {
         policyId: policyId,
         changeRequestType: changeRequestType,
         contractId: contractId,
+      })
+    );
+  });
+
+  it('should be able to submit change request for policy', () => {
+    service.submitChangeRequest(changeRequestId);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromUserRequestAction.SubmitUserRequest({
+        userId: userId,
+        requestId: changeRequestId
       })
     );
   });
