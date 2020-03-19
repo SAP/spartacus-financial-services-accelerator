@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, ActionsSubject } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
@@ -15,7 +15,8 @@ export class ChangeRequestService {
 
   constructor(
     protected store: Store<fromReducer.ChangeRequestState>,
-    protected authService: AuthService
+    protected authService: AuthService,
+    protected actions$: ActionsSubject
   ) {
     combineLatest([
       this.store.select(fromSelector.getChangeRequest),
@@ -135,6 +136,10 @@ export class ChangeRequestService {
         );
       })
       .unsubscribe();
+  }
+
+  getAction(actionName): Observable<any> {
+    return this.actions$.pipe(filter(action => action.type === actionName));
   }
 
   private buildStepData(changeRequest: any, stepIndex): any {
