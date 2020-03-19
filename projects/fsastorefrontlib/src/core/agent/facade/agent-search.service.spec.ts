@@ -1,6 +1,6 @@
 import { GeoPoint, WindowRef } from '@spartacus/core';
 import { TestBed, async } from '@angular/core/testing';
-import { Type, Component, Input } from '@angular/core';
+import { Type } from '@angular/core';
 import { of, BehaviorSubject } from 'rxjs';
 import { AgentSearchService } from './agent-search.service';
 import { AgentConnector } from '../connectors/agent.connector';
