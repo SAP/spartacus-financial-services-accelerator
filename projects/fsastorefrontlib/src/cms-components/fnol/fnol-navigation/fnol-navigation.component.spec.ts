@@ -1,18 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FNOLNavigationComponent } from './fnol-navigation.component';
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormDataService } from '@fsa/dynamicforms';
 import {
   GlobalMessageService,
   I18nTestingModule,
   RoutingService,
 } from '@spartacus/core';
-import { Claim } from '../../../occ/occ-models';
 import { of } from 'rxjs';
-import { UserRequestService } from '../../../core/user-request/facade/user-request.service';
-import { RouterTestingModule } from '@angular/router/testing';
 import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
-import { ActivatedRoute } from '@angular/router';
-import { FormDataService } from '@fsa/dynamicforms';
+import { UserRequestService } from '../../../core/user-request/facade/user-request.service';
+import { Claim } from '../../../occ/occ-models';
 import { ClaimService } from './../../../core/my-account/facade/claim.service';
+import { FNOLNavigationComponent } from './fnol-navigation.component';
 
 const claimRequest: Claim = {
   requestId: 'test123',
@@ -37,7 +37,6 @@ const mockActivatedRoute = {
 };
 
 export class MockUserRequestService {
-  d;
   getAction() {
     return of('');
   }

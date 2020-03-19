@@ -6,7 +6,7 @@ import { FSCsTicketConnector } from './../connectors/cs-ticket.connector';
 import { of } from 'rxjs';
 
 const testAgent1 = {
-  contactEmail: 'testAgent1@test.com',
+  email: 'testAgent1@test.com',
   categories: [
     {
       code: 'test_category1',
@@ -51,11 +51,7 @@ describe('FSCsTicketService', () => {
     );
     let tempResult;
     service
-      .createCsTicketForAgent(
-        testAgent1.contactEmail,
-        OCC_USER_ID_CURRENT,
-        ticketData
-      )
+      .createCsTicketForAgent(testAgent1.email, OCC_USER_ID_CURRENT, ticketData)
       .subscribe(result => (tempResult = result))
       .unsubscribe();
     expect(tempResult).toBeTruthy();
