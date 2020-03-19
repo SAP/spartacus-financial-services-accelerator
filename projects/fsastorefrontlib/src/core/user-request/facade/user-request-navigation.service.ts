@@ -37,7 +37,7 @@ export class UserRequestNavigationService {
   continue(configurationSteps: FSStepData[], currentIndex: number): void {
     if (configurationSteps && currentIndex >= 0) {
       const nextStep = configurationSteps[currentIndex + 1];
-      if (nextStep.pageLabelOrId) {
+      if (nextStep && nextStep.pageLabelOrId) {
         this.routingService.go({
           cxRoute: nextStep.pageLabelOrId,
         });

@@ -93,6 +93,11 @@ describe('ProductAssignmentsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    let result;
+    component.productAssignments$
+      .subscribe(assignments => (result = assignments))
+      .unsubscribe();
+    expect(result).toEqual(mockProductAssignments);
   });
 
   it('should unsubscribe from any subscriptions when destroyed', () => {

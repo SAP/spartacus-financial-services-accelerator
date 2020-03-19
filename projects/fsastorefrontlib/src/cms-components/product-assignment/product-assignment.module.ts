@@ -17,6 +17,7 @@ import { ProductAssignmentStoreModule } from './../../core/product-assignment/st
 import { ActiveProductAssignmentsComponent } from './active-product-assignments/active-product-assignments.component';
 import { ProductAssignmentItemComponent } from './product-assignment-item/product-assignment-item.component';
 import { ProductAssignmentsComponent } from './product-assignments/product-assignments.component';
+import { PotentialProductAssignmentsComponent } from './potential-product-assignments/potential-product-assignments.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,15 @@ import { ProductAssignmentsComponent } from './product-assignments/product-assig
     ReactiveFormsModule,
     ProductAssignmentStoreModule,
     RouterModule.forChild([
+      {
+        path: null,
+        canActivate: [CmsPageGuard],
+        data: {
+          cxRoute: 'productAssignment',
+          pageLabel: 'productAssignmentsPage',
+        },
+        component: PageLayoutComponent,
+      },
       {
         path: null,
         canActivate: [CmsPageGuard],
@@ -51,6 +61,9 @@ import { ProductAssignmentsComponent } from './product-assignments/product-assig
         ProductAssignmentsFlex: {
           component: ProductAssignmentsComponent,
         },
+        PotentialProductAssignmentsFlex: {
+          component: PotentialProductAssignmentsComponent,
+        },
         ActiveProductAssignmentsFlex: {
           component: ActiveProductAssignmentsComponent,
         },
@@ -59,16 +72,19 @@ import { ProductAssignmentsComponent } from './product-assignments/product-assig
   ],
   declarations: [
     ProductAssignmentsComponent,
+    PotentialProductAssignmentsComponent,
     ActiveProductAssignmentsComponent,
     ProductAssignmentItemComponent,
   ],
   exports: [
     ProductAssignmentsComponent,
+    PotentialProductAssignmentsComponent,
     ActiveProductAssignmentsComponent,
     ProductAssignmentItemComponent,
   ],
   entryComponents: [
     ProductAssignmentsComponent,
+    PotentialProductAssignmentsComponent,
     ActiveProductAssignmentsComponent,
     ProductAssignmentItemComponent,
   ],

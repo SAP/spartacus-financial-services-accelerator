@@ -30,13 +30,13 @@
             <div class="row p-3 font-weight-bold">
               <div class="col-1">{{ i + 1 }}.</div>
               <div class="col-4">
-                {{ 'forms.auto.' + changedPolicyObject.label | cxTranslate }}
+                {{ 'forms.auto.' + changedPolicyObject?.label | cxTranslate }}
               </div>
               <div class="col-4">
-                {{ changedPolicyObject.oldValue }}
+                {{ changedPolicyObject?.oldValue }}
               </div>
               <div class="col-3 notice">
-                {{ changedPolicyObject.newValue }}
+                {{ changedPolicyObject?.newValue }}
               </div>
             </div>
           </ng-container>
@@ -49,16 +49,16 @@
             <div class="row p-3 font-weight-bold border-bottom-color-4">
               <div class="col-1 ">{{ i + 1 }}.</div>
               <div class="col-4">
-                {{ changedPolicyObject.label }}
+                {{ changedPolicyObject?.label }}
               </div>
               <div class="col-4">
                 {{
-                  'changeRequest.' + changedPolicyObject.oldValue | cxTranslate
+                  'changeRequest.' + changedPolicyObject?.oldValue | cxTranslate
                 }}
               </div>
               <div class="col-3 notice">
                 {{
-                  'changeRequest.' + changedPolicyObject.newValue | cxTranslate
+                  'changeRequest.' + changedPolicyObject?.newValue | cxTranslate
                 }}
               </div>
             </div>
@@ -78,10 +78,12 @@
             {{ currentDate | date: 'dd-MM-yyyy' }}
           </div>
           <div class="col-4 semi-bold">
-            {{ changeRequest.insurancePolicy.policyPremium.formattedValue }}
+            {{ changeRequest.insurancePolicy?.policyPremium?.formattedValue }} /
+            {{ changeRequest.insurancePolicy?.paymentFrequency }}
           </div>
           <div class="col-3 semi-bold">
-            {{ changeRequest.changedPolicy.policyPremium.formattedValue }}
+            {{ changeRequest.changedPolicy?.policyPremium?.formattedValue }} /
+            {{ changeRequest.changedPolicy?.paymentFrequency }}
           </div>
         </div>
       </div>
@@ -108,7 +110,7 @@
                   'FSINSUREDOBJECT_CHANGE'
                 "
               >
-                {{ 'forms.auto.' + changedPolicyObject.label | cxTranslate }}
+                {{ 'forms.auto.' + changedPolicyObject?.label | cxTranslate }}
               </ng-container>
               <ng-container
                 *ngIf="
@@ -116,7 +118,7 @@
                   'FSCOVERAGE_CHANGE'
                 "
               >
-                {{ changedPolicyObject.label }}
+                {{ changedPolicyObject?.label }}
               </ng-container>
             </div>
           </div>
@@ -131,7 +133,7 @@
                   'FSINSUREDOBJECT_CHANGE'
                 "
               >
-                {{ changedPolicyObject.oldValue }}
+                {{ changedPolicyObject?.oldValue }}
               </ng-container>
               <ng-container
                 *ngIf="
@@ -140,7 +142,7 @@
                 "
               >
                 {{
-                  'changeRequest.' + changedPolicyObject.oldValue | cxTranslate
+                  'changeRequest.' + changedPolicyObject?.oldValue | cxTranslate
                 }}
               </ng-container>
             </div>
@@ -156,7 +158,7 @@
                   'FSINSUREDOBJECT_CHANGE'
                 "
               >
-                {{ changedPolicyObject.newValue }}
+                {{ changedPolicyObject?.newValue }}
               </ng-container>
               <ng-container
                 *ngIf="
@@ -165,7 +167,7 @@
                 "
               >
                 {{
-                  'changeRequest.' + changedPolicyObject.newValue | cxTranslate
+                  'changeRequest.' + changedPolicyObject?.newValue | cxTranslate
                 }}
               </ng-container>
             </div>
@@ -186,7 +188,8 @@
             {{ 'changeRequest.currentPremium' | cxTranslate }}
           </div>
           <div class="col-6 text-right semi-bold text-sm-left">
-            {{ changeRequest.insurancePolicy.policyPremium.formattedValue }}
+            {{ changeRequest.insurancePolicy?.policyPremium?.formattedValue }} /
+            {{ changeRequest.insurancePolicy?.paymentFrequency }}
           </div>
         </div>
         <div class="row">
@@ -194,10 +197,22 @@
             {{ 'changeRequest.newPremium' | cxTranslate }}:
           </div>
           <div class="col-6 text-right semi-bold text-sm-left">
-            {{ changeRequest.changedPolicy.policyPremium.formattedValue }}
+            {{ changeRequest.changedPolicy?.policyPremium?.formattedValue }} /
+            {{ changeRequest.changedPolicy?.paymentFrequency }}
           </div>
         </div>
       </div>
     </div>
   </ng-container>
+  <div class="row mt-5">
+    <button
+      class="action-button btn-block"
+      (click)="cancelChangeRequest(changeRequest.requestId)"
+    >
+      {{ 'common.back' | cxTranslate }}
+    </button>
+    <button class="primary-button btn-block">
+      {{ 'common.continue' | cxTranslate }}
+    </button>
+  </div>
 </ng-container>
