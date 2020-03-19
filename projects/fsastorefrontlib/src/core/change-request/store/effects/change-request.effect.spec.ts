@@ -3,13 +3,20 @@ import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
-import { OCC_USER_ID_CURRENT } from '@spartacus/core';
+import {
+  OCC_USER_ID_CURRENT,
+  GlobalMessage,
+  GlobalMessageService,
+  RoutingService,
+  GlobalMessageType,
+} from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
 import { ChangeRequestConnector } from '../../connectors';
 import * as fromActions from '../actions';
 import * as fromUserReducers from './../../store/reducers/index';
 import * as fromEffects from './change-request.effect';
+import createSpy = jasmine.createSpy;
 
 const requestID = 'REQ0001';
 const policyId = 'policyId';
@@ -18,6 +25,7 @@ const changeRequestType = 'requestType';
 const changeRequest = {
   requestID: requestID,
 };
+const globalMessage = 'Test Error!';
 
 class MockChangeRequestConnector {
   createChangeRequestForPolicy() {
@@ -35,10 +43,20 @@ class MockChangeRequestConnector {
   }
 }
 
+class MockRoutingService {
+  go = createSpy();
+}
+class GlobalMessageServiceMock {
+  remove(): void {}
+  add(_message: GlobalMessage): void {}
+}
+
 describe('Change Request Effects', () => {
   let actions$: Observable<fromActions.ChangeRequestAction>;
   let effects: fromEffects.ChangeRequestEffects;
   let mockChangeRequestConnector: MockChangeRequestConnector;
+  let mockRoutingService: MockRoutingService;
+  let globalMessageService: GlobalMessageService;
 
   beforeEach(() => {
     mockChangeRequestConnector = new MockChangeRequestConnector();
@@ -56,12 +74,24 @@ describe('Change Request Effects', () => {
           provide: ChangeRequestConnector,
           useValue: mockChangeRequestConnector,
         },
+        {
+          provide: RoutingService,
+          useClass: MockRoutingService,
+        },
+        {
+          provide: GlobalMessageService,
+          useClass: GlobalMessageServiceMock,
+        },
         fromEffects.ChangeRequestEffects,
         provideMockActions(() => actions$),
       ],
     });
     effects = TestBed.get(fromEffects.ChangeRequestEffects as Type<
       fromEffects.ChangeRequestEffects
+    >);
+    mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
+    globalMessageService = TestBed.get(GlobalMessageService as Type<
+      GlobalMessageService
     >);
   });
 
