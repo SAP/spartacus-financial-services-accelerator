@@ -138,13 +138,9 @@ export class ChangeRequestService {
   }
 
   private buildStepData(changeRequest: any, stepIndex): any {
-    return Object.assign(
-      {},
-      changeRequest.configurationSteps[stepIndex],
-      {
-        status: 'COMPLETED',
-      }
-    );
+    return Object.assign({}, changeRequest.configurationSteps[stepIndex], {
+      status: 'COMPLETED',
+    });
   }
 
   private isCreated(changeRequest: any): boolean {
