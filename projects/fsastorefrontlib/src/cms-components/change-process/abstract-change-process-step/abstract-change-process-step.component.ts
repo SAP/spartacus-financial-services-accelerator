@@ -44,14 +44,11 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
                 this.activeStepIndex
               );
             }
-
-            if (this.isSimulated(changeRequest)) {
-              this.userRequestNavigationService.continue(
-                this.configurationSteps,
-                this.activeStepIndex
-              );
+            if (changeRequest && changeRequest.requestStatus === 'SUBMITTED') {
+              this.routingService.go({
+                cxRoute: '/',
+              });
             }
-
             if (changeRequest && changeRequest.requestStatus === 'CANCELED') {
               const policyNumber = changeRequest.insurancePolicy.policyNumber;
               const contractNumber =
