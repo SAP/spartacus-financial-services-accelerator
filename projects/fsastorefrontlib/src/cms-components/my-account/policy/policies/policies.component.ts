@@ -6,7 +6,7 @@ import {
   ClaimService,
 } from '../../../../core/my-account/facade';
 
-const FSCLAIM = 'FSCLAIM';
+export const FSCLAIM = 'FSCLAIM';
 
 @Component({
   selector: 'fsa-policies',
