@@ -143,7 +143,16 @@ describe('ChangeRequestServiceTest', () => {
         userId: userId,
         requestId: mockChangeRequest.requestId,
         changeRequest: mockChangeRequest,
-        stepData: stepData,
+        stepData: stepData,    })
+    );
+  });
+
+  it('should be able to cancel change request', () => {
+    service.cancelChangeRequest(requestId);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.CancelChangeRequest({
+        userId: userId,
+        requestId: requestId,
       })
     );
   });
