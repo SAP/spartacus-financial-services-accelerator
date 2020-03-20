@@ -126,7 +126,7 @@ describe('ChangeRequestServiceTest', () => {
   });
 
   it('should be able to update change request', () => {
-    service.updateChangeRequest(mockChangeRequest, 0);
+    service.updateChangeRequest(mockChangeRequest, stepIndex);
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromUserRequestAction.UpdateUserRequest({
         userId: userId,
