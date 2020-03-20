@@ -44,13 +44,10 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
                 this.configurationSteps,
                 this.activeStepIndex
               );
-            }
-            if (changeRequest && changeRequest.requestStatus === 'SUBMITTED') {
-              this.routingService.go({
-                cxRoute: '/',
-              });
-            }
-            if (changeRequest && changeRequest.requestStatus === 'CANCELED') {
+            } else if (
+              changeRequest &&
+              changeRequest.requestStatus === 'CANCELED'
+            ) {
               const policyNumber = changeRequest.insurancePolicy.policyNumber;
               const contractNumber =
                 changeRequest.insurancePolicy.contractNumber;
@@ -67,7 +64,6 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-
     this.subscription.add(
       this.changeRequestService
         .getAction(fromUserRequestAction.SUBMIT_USER_REQUEST_SUCCESS)
@@ -79,7 +75,7 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
               payload.requestStatus === 'SUBMITTED' &&
               payload.fsStepGroupDefinition
           ),
-          tap(({ payload }) => {
+          map(({ payload }) => {
             this.routingService.go(
               payload.fsStepGroupDefinition.confirmationUrl
             );
