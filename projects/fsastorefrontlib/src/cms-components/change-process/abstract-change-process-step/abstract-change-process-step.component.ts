@@ -11,9 +11,7 @@ import { map, take, filter } from 'rxjs/operators';
 import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
 import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
 import { FSStepData, StepStatus } from '../../../occ/occ-models';
-
 import * as fromUserRequestAction from './../../../core/user-request/store/actions';
-
 
 @Component({ template: '' })
 export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
