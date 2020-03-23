@@ -1,19 +1,12 @@
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { NavigationExtras } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
-  UrlCommands,
-  RoutingService,
   RoutingConfigService,
   CmsActivatedRouteSnapshot,
 } from '@spartacus/core';
 import { CategoryStepGuard } from './category-step-guard';
 import { FSCheckoutConfigService } from './../../../core/checkout/services/fs-checkout-config.service';
-
-class RoutingServiceStub {
-  go(_path: any[] | UrlCommands, _query?: object, _extras?: NavigationExtras) {}
-}
 
 class MockRoutingConfigService {
   getRouteConfig() {
@@ -47,25 +40,22 @@ class MockCheckoutConfigService {
 
 describe('CategoryStepGuard', () => {
   let guard: CategoryStepGuard;
-  let routing: RoutingService;
   let routingConfigService: MockRoutingConfigService;
   let checkoutConfigService: MockCheckoutConfigService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
       providers: [
-        { provide: RoutingService, useClass: RoutingServiceStub },
         { provide: RoutingConfigService, useClass: MockRoutingConfigService },
         {
           provide: FSCheckoutConfigService,
           useClass: MockCheckoutConfigService,
         },
       ],
-      imports: [RouterTestingModule],
     }).compileComponents();
 
     guard = TestBed.get(CategoryStepGuard as Type<CategoryStepGuard>);
-    routing = TestBed.get(RoutingService as Type<RoutingService>);
     routingConfigService = TestBed.get(RoutingConfigService as Type<
       RoutingConfigService
     >);

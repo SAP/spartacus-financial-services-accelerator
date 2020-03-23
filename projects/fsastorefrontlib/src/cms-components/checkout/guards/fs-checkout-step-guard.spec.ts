@@ -1,10 +1,7 @@
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { NavigationExtras } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
-  UrlCommands,
-  RoutingService,
   RoutingConfigService,
   CmsActivatedRouteSnapshot,
 } from '@spartacus/core';
@@ -12,10 +9,6 @@ import { FSCheckoutConfigService } from './../../../core/checkout/services/fs-ch
 import { FSCheckoutStepGuard } from './fs-checkout-step-guard';
 import { FSCartService } from './../../../core/cart/facade/fs-cart.service';
 import { of } from 'rxjs';
-
-class RoutingServiceStub {
-  go(_path: any[] | UrlCommands, _query?: object, _extras?: NavigationExtras) {}
-}
 
 class MockRoutingConfigService {
   getRouteConfig() {
@@ -75,7 +68,6 @@ class MockCartService {
 
 describe('FSCheckoutStepGuard', () => {
   let guard: FSCheckoutStepGuard;
-  let routing: RoutingService;
   let routingConfigService: MockRoutingConfigService;
   let checkoutConfigService: MockCheckoutConfigService;
   let cartService: MockCartService;
@@ -83,7 +75,6 @@ describe('FSCheckoutStepGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        { provide: RoutingService, useClass: RoutingServiceStub },
         { provide: RoutingConfigService, useClass: MockRoutingConfigService },
         {
           provide: FSCheckoutConfigService,
@@ -98,7 +89,6 @@ describe('FSCheckoutStepGuard', () => {
     }).compileComponents();
 
     guard = TestBed.get(FSCheckoutStepGuard as Type<FSCheckoutStepGuard>);
-    routing = TestBed.get(RoutingService as Type<RoutingService>);
     routingConfigService = TestBed.get(RoutingConfigService as Type<
       RoutingConfigService
     >);

@@ -4,7 +4,6 @@ import { ClaimsComponent } from './claims.component';
 import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
-
 import createSpy = jasmine.createSpy;
 import { Component, Pipe, PipeTransform, DebugElement } from '@angular/core';
 import { UserRequestService } from '../../../../core/user-request/facade/user-request.service';
