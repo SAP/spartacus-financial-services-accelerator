@@ -143,7 +143,8 @@ describe('ChangeRequestServiceTest', () => {
         userId: userId,
         requestId: mockChangeRequest.requestId,
         changeRequest: mockChangeRequest,
-        stepData: stepData,    })
+        stepData: stepData,
+      })
     );
   });
 
