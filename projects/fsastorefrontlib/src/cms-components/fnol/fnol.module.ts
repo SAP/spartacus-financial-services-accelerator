@@ -26,11 +26,12 @@ import { FNOLProgressBarComponent } from './fnol-progress-bar/fnol-progress-bar.
 import { FNOLNavigationComponent } from './fnol-navigation/fnol-navigation.component';
 import { FNOLConfirmationComponent } from './fnol-confirmation/fnol-confirmation.component';
 import { UserRequestNavigationService } from '../../core/user-request/facade/user-request-navigation.service';
-import { ClaimStoreModule } from '../../core/my-account/store/claim-store.module';
+import { MyAccountStoreModule } from '../../core/my-account/store/my-account-store.module';
 import { FNOLSummaryComponent } from './fnol-summary/fnol-summary.component';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { ClaimConfirmationGuard } from '../../core/user-request/guards/claim-confirmation-guard';
 import { FSProgressBarModule } from '../progress-bar/progress-bar.module';
+import { UserRequestStoreModule } from '../../core/user-request/store/user-request-store.module';
 
 const routes: Routes = [
   {
@@ -83,7 +84,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    ClaimStoreModule,
+    MyAccountStoreModule,
     I18nModule,
     RouterModule,
     MediaModule,
@@ -93,6 +94,7 @@ const routes: Routes = [
     SpinnerModule,
     AccordionModule,
     FSProgressBarModule,
+  //  UserRequestStoreModule,
     EffectsModule.forFeature(effects),
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
@@ -136,4 +138,4 @@ const routes: Routes = [
     UserRequestNavigationService,
   ],
 })
-export class UserRequestModule {}
+export class FnolModule {}

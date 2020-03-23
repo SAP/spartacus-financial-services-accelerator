@@ -9,10 +9,10 @@ import {
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import * as fromAction from '../store/actions';
-import * as fromReducer from '../store/reducers';
 import { reducerProvider, reducerToken } from '../store/reducers';
 import { FSProductAssignmentService } from './product-assignment.service';
 import { FSProductAssignmentAdapter } from '../connectors/product-assignment.adapter';
+import { StateWithProductAssignment } from '../store/product-assignments-state';
 
 const mockProductAssignments = {
   assignments: [
@@ -66,7 +66,7 @@ class MockAuthService {
 }
 describe('FSProductAssignmentServiceTest', () => {
   let service: FSProductAssignmentService;
-  let store: Store<fromReducer.ProductAssignmentState>;
+  let store: Store<StateWithProductAssignment>;
   let mockAuthService: MockAuthService;
 
   beforeEach(() => {
@@ -90,9 +90,7 @@ describe('FSProductAssignmentServiceTest', () => {
     service = TestBed.get(FSProductAssignmentService as Type<
       FSProductAssignmentService
     >);
-    store = TestBed.get(Store as Type<
-      Store<fromReducer.ProductAssignmentState>
-    >);
+    store = TestBed.get(Store as Type<Store<StateWithProductAssignment>>);
     service.user = OCC_CART_ID_CURRENT;
     spyOn(store, 'dispatch').and.callThrough();
   });

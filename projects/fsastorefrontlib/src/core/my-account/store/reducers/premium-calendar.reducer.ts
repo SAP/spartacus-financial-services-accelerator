@@ -1,9 +1,5 @@
 import * as fromAction from '../actions';
-
-export interface PremiumCalendarState {
-  data: {};
-  loaded: boolean;
-}
+import { PremiumCalendarState } from '../my-account-state';
 
 export const initialState: PremiumCalendarState = {
   data: {},

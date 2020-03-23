@@ -1,5 +1,5 @@
 import { OnInit, OnDestroy } from '@angular/core';
-import { FSStepData } from '../../../occ/occ-models';
+import { FSStepData, StepStatus } from '../../../occ/occ-models';
 import { ActivatedRoute } from '@angular/router';
 import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
 import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
@@ -42,7 +42,10 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
               );
             }
 
-            if (changeRequest && changeRequest.requestStatus === 'CANCELED') {
+            if (
+              changeRequest &&
+              changeRequest.requestStatus === StepStatus.CANCELED
+            ) {
               const policyNumber = changeRequest.insurancePolicy.policyNumber;
               const contractNumber =
                 changeRequest.insurancePolicy.contractNumber;

@@ -169,7 +169,6 @@ describe('ChangeCoverageComponent', () => {
     spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
       of(mockChangeRequest)
     );
-    console.log(component.potentialCoverages);
     component.addCoverage(coverage);
     expect(component.potentialCoverages[0].coverageIsIncluded).toEqual(true);
   });

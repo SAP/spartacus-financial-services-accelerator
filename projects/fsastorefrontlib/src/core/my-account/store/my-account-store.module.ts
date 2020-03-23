@@ -11,6 +11,7 @@ import {
   StateModule,
   ConfigModule,
 } from '@spartacus/core';
+import { MY_ACCOUNT_FEATURE } from './my-account-state';
 
 export function claimConfigFactory(): StateConfig {
   const config: StateConfig = {
@@ -31,7 +32,7 @@ export function claimConfigFactory(): StateConfig {
     CommonModule,
     HttpClientModule,
     StateModule,
-    StoreModule.forFeature('assets', reducerToken, {
+    StoreModule.forFeature(MY_ACCOUNT_FEATURE, reducerToken, {
       metaReducers,
     }),
     EffectsModule.forFeature(effects),
@@ -39,4 +40,4 @@ export function claimConfigFactory(): StateConfig {
   ],
   providers: [reducerProvider],
 })
-export class ClaimStoreModule {}
+export class MyAccountStoreModule {}

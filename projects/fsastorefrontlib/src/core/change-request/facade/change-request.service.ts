@@ -5,15 +5,15 @@ import { combineLatest } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { filter, switchMap, take } from 'rxjs/operators';
 import * as fromAction from '../store/actions';
-import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
+import { StateWithChangeRequest } from '../store/change-request-state';
 
 @Injectable()
 export class ChangeRequestService {
   requestId: string;
 
   constructor(
-    protected store: Store<fromReducer.ChangeRequestState>,
+    protected store: Store<StateWithChangeRequest>,
     protected authService: AuthService
   ) {
     combineLatest([

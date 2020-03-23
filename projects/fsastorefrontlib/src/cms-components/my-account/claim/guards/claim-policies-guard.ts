@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { Observable, of, Subscription } from 'rxjs';
 import { PolicyService } from '../../../../core/my-account/facade';
 import * as fromPolicyStore from '../../../../core/my-account/store';
+import { StateWithMyAccount } from '../../../../core/my-account/store/my-account-state';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,7 @@ export class ClaimPoliciesGuard implements CanActivate, OnDestroy {
   private subscription: Subscription;
 
   constructor(
-    protected store: Store<fromPolicyStore.UserState>,
+    protected store: Store<StateWithMyAccount>,
     protected routingService: RoutingService,
     protected policyService: PolicyService
   ) {}

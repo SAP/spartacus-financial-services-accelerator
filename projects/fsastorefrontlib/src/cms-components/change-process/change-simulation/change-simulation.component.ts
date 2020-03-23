@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {
   ChangedPolicyData,
-  ChangeRequestType,
+  RequestType,
 } from '../../../occ/occ-models/occ.models';
 import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
 
@@ -23,7 +23,7 @@ export class ChangeSimulationComponent
     this.changedPolicyObjects = [];
     if (changeRequestData.fsStepGroupDefinition) {
       switch (changeRequestData.fsStepGroupDefinition.requestType.code) {
-        case ChangeRequestType.INSURED_OBJECT_CHANGE: {
+        case RequestType.INSURED_OBJECT_CHANGE: {
           const insuredObject =
             changeRequestData.insurancePolicy.insuredObjectList
               .insuredObjects[0];
@@ -45,7 +45,7 @@ export class ChangeSimulationComponent
           }
           break;
         }
-        case ChangeRequestType.COVERAGE_CHANGE: {
+        case RequestType.COVERAGE_CHANGE: {
           const optionalProducts =
             changeRequestData.insurancePolicy.optionalProducts;
           if (optionalProducts) {

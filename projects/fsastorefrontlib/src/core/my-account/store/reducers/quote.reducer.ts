@@ -1,13 +1,5 @@
 import * as fromAction from '../actions';
-
-export interface Quote {
-  quoteId?: string;
-}
-
-export interface QuoteState {
-  quotes: any;
-  loaded: boolean;
-}
+import { QuoteState } from '../my-account-state';
 
 export const initialState: QuoteState = {
   quotes: {},
