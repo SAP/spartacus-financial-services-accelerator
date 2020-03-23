@@ -70,12 +70,12 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
         .pipe(
           take(1),
           filter(
-            ({payload}) =>
-            payload &&
-            payload.requestStatus === 'SUBMITTED' &&
-            payload.fsStepGroupDefinition
+            ({ payload }) =>
+              payload &&
+              payload.requestStatus === 'SUBMITTED' &&
+              payload.fsStepGroupDefinition
           ),
-          map(({payload}) => {
+          map(({ payload }) => {
             this.routingService.go(
               payload.fsStepGroupDefinition.confirmationUrl
             );
