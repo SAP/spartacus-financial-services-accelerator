@@ -1,12 +1,13 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { OccConfig, RoutingService } from '@spartacus/core';
-import { AllowedFSRequestType } from './../../../../occ/occ-models/occ.models';
+import {
+  AllowedFSRequestType,
+  RequestType,
+} from './../../../../occ/occ-models/occ.models';
 import {
   PolicyService,
   ClaimService,
 } from '../../../../core/my-account/facade';
-
-const FSCLAIM = 'FSCLAIM';
 
 @Component({
   selector: 'fsa-policies',
@@ -53,7 +54,7 @@ export class PoliciesComponent implements OnInit {
       return (
         allowedFSRequestTypes
           .map(allowedRequestType => allowedRequestType.requestType.code)
-          .indexOf(FSCLAIM) > -1
+          .indexOf(RequestType.FSCLAIM) > -1
       );
     }
   }

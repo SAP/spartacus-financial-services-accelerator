@@ -26,7 +26,7 @@ import { FNOLProgressBarComponent } from './fnol-progress-bar/fnol-progress-bar.
 import { FNOLNavigationComponent } from './fnol-navigation/fnol-navigation.component';
 import { FNOLConfirmationComponent } from './fnol-confirmation/fnol-confirmation.component';
 import { UserRequestNavigationService } from '../../core/user-request/facade/user-request-navigation.service';
-import { ClaimStoreModule } from '../../core/my-account/store/claim-store.module';
+import { MyAccountStoreModule } from '../../core/my-account/store/my-account-store.module';
 import { FNOLSummaryComponent } from './fnol-summary/fnol-summary.component';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { ClaimConfirmationGuard } from '../../core/user-request/guards/claim-confirmation-guard';
@@ -83,7 +83,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     CommonModule,
-    ClaimStoreModule,
+    MyAccountStoreModule,
     I18nModule,
     RouterModule,
     MediaModule,
@@ -136,4 +136,4 @@ const routes: Routes = [
     UserRequestNavigationService,
   ],
 })
-export class UserRequestModule {}
+export class FnolModule {}

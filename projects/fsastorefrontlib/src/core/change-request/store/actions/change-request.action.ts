@@ -1,7 +1,6 @@
 import { Action } from '@ngrx/store';
 import { StateLoaderActions } from '@spartacus/core';
-
-export const CHANGE_REQUEST_DATA = 'Change Request Data';
+import { CHANGE_REQUEST_DATA } from '../change-request-state';
 
 export const LOAD_CHANGE_REQUEST = '[Change Request] Load Change Request';
 export const LOAD_CHANGE_REQUEST_FAIL =
@@ -38,9 +37,11 @@ export class CreateChangeRequestFail implements Action {
   constructor(public payload: any) {}
 }
 
-export class CreateChangeRequestSuccess implements Action {
+export class CreateChangeRequestSuccess extends StateLoaderActions.LoaderSuccessAction {
   readonly type = CREATE_CHANGE_REQUEST_SUCCESS;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA);
+  }
 }
 
 export class LoadChangeRequest extends StateLoaderActions.LoaderLoadAction {
@@ -55,11 +56,9 @@ export class LoadChangeRequestFail implements Action {
   constructor(public payload: any) {}
 }
 
-export class LoadChangeRequestSuccess extends StateLoaderActions.LoaderSuccessAction {
+export class LoadChangeRequestSuccess implements Action {
   readonly type = LOAD_CHANGE_REQUEST_SUCCESS;
-  constructor(public payload: any) {
-    super(CHANGE_REQUEST_DATA);
-  }
+  constructor(public payload: any) {}
 }
 
 export class SimulateChangeRequest implements Action {

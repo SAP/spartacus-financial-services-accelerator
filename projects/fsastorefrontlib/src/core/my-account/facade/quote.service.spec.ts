@@ -6,9 +6,9 @@ import { AuthService, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from '../../cart/facade/fs-cart.service';
 import * as fromAction from './../store/actions';
-import * as fromReducer from './../store/reducers';
 import { reducerProvider, reducerToken } from './../store/reducers/index';
 import { QuoteService } from './quote.service';
+import { StateWithMyAccount } from '../store/my-account-state';
 
 const userId = OCC_USER_ID_CURRENT;
 const cartId = '0000001';
@@ -96,7 +96,7 @@ class MockCartService {
 
 describe('QuoteServiceTest', () => {
   let service: QuoteService;
-  let store: Store<fromReducer.UserState>;
+  let store: Store<StateWithMyAccount>;
   let cartService: MockCartService;
   let formDataService: MockFormDataService;
   let authService: MockAuthService;
@@ -122,7 +122,7 @@ describe('QuoteServiceTest', () => {
 
     service = TestBed.get(QuoteService as Type<QuoteService>);
     cartService = TestBed.get(FSCartService as Type<FSCartService>);
-    store = TestBed.get(Store as Type<Store<fromReducer.UserState>>);
+    store = TestBed.get(Store as Type<Store<StateWithMyAccount>>);
 
     spyOn(store, 'dispatch').and.callThrough();
   });

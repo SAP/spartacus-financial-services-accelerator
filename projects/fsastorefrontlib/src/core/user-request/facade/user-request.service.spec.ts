@@ -3,12 +3,12 @@ import { Store, StoreModule } from '@ngrx/store';
 import { OCC_USER_ID_CURRENT, UserToken, AuthService } from '@spartacus/core';
 import { Type } from '@angular/core';
 import { FormDataService } from '@fsa/dynamicforms';
-import * as fromReducer from '../store/reducers';
 import * as fromAction from '../store/actions';
 import { of, Observable, ReplaySubject } from 'rxjs';
 import { UserRequestService } from './user-request.service';
 import { reducerProvider, reducerToken } from '../store/reducers/index';
 import { FSUserRequest } from '../../../occ/occ-models/occ.models';
+import { FSUserRequestState } from '../store/user-request-state';
 
 const userId = OCC_USER_ID_CURRENT;
 const formId = 'formId';
@@ -40,7 +40,7 @@ class MockAuthService {
 
 describe('UserRequestServiceTest', () => {
   let service: UserRequestService;
-  let store: Store<fromReducer.FSUserRequestState>;
+  let store: Store<FSUserRequestState>;
   let formDataService: MockFormDataService;
   let authService: MockAuthService;
 
@@ -61,7 +61,7 @@ describe('UserRequestServiceTest', () => {
       ],
     });
     service = TestBed.get(UserRequestService as Type<UserRequestService>);
-    store = TestBed.get(Store as Type<Store<fromReducer.FSUserRequestState>>);
+    store = TestBed.get(Store as Type<Store<FSUserRequestState>>);
     spyOn(store, 'dispatch').and.callThrough();
   });
 

@@ -51,9 +51,10 @@ export enum BindingStateType {
   UNBIND = 'UNBIND',
 }
 
-export enum ChangeRequestType {
+export enum RequestType {
   INSURED_OBJECT_CHANGE = 'FSINSUREDOBJECT_CHANGE',
   COVERAGE_CHANGE = 'FSCOVERAGE_CHANGE',
+  FSCLAIM = 'FSCLAIM',
 }
 
 export enum ClaimStatus {
@@ -63,6 +64,11 @@ export enum ClaimStatus {
   ERROR = 'ERROR',
   APPROVED = 'APPROVED',
   REJECTED = 'REJECTED',
+}
+
+export enum StepStatus {
+  COMPLETED = 'COMPLETED',
+  CANCELED = 'CANCELED',
 }
 
 export interface FSOrderEntry extends OrderEntry {

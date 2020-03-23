@@ -10,11 +10,10 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OccConfig, RoutingService } from '@spartacus/core';
-
 import { DeleteClaimDialogComponent } from '../delete-claim-dialog/delete-claim-dialog.component';
-import { UserState } from './../../../../core/my-account/store/reducers/index';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
 import { ClaimService } from '../../../../core/my-account/facade';
+import { StateWithMyAccount } from '../../../../core/my-account/store/my-account-state';
 
 @Component({
   selector: 'fsa-claims',
@@ -31,7 +30,7 @@ export class ClaimsComponent implements OnInit, OnDestroy {
   ) {}
 
   private subscription = new Subscription();
-  claims$: Observable<UserState>;
+  claims$: Observable<StateWithMyAccount>;
   claimsLoaded$: Observable<boolean>;
   modalInstance: any;
 

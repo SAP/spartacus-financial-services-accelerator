@@ -1,32 +1,46 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
-import * as fromFeature from '../reducers';
-import * as fromChangeRequest from './../reducers/change-request.reducer';
+import * as fromFeature from './feature.selector';
+import {
+  ChangeRequestsState,
+  ChangeRequestState,
+  StateWithChangeRequest,
+} from '../change-request-state';
 import { LoaderState, StateLoaderSelectors } from '@spartacus/core';
 
 export const getChangeRequestState: MemoizedSelector<
-  any,
-  LoaderState<fromChangeRequest.ChangeRequestState>
+  StateWithChangeRequest,
+  LoaderState<ChangeRequestState>
 > = createSelector(
   fromFeature.getChangeRequestState,
-  (changeRequestState: fromFeature.ChangeRequestState) =>
-    changeRequestState.changeRequest
+  (changeRequestsState: ChangeRequestsState) =>
+    changeRequestsState.changeRequest
 );
 
-export const getChangeRequest: MemoizedSelector<any, any> = createSelector(
+export const getChangeRequest: MemoizedSelector<
+  StateWithChangeRequest,
+  any
+> = createSelector(
   getChangeRequestState,
-  state => StateLoaderSelectors.loaderValueSelector(state)
+  (state: LoaderState<ChangeRequestState>) =>
+    StateLoaderSelectors.loaderValueSelector(state)
 );
 
-export const getLoaded: MemoizedSelector<any, any> = createSelector(
+export const getLoaded: MemoizedSelector<
+  StateWithChangeRequest,
+  any
+> = createSelector(
   getChangeRequestState,
-  state => StateLoaderSelectors.loaderLoadingSelector(state)
+  (state: LoaderState<ChangeRequestState>) =>
+    StateLoaderSelectors.loaderLoadingSelector(state)
 );
 
-export function getProcessErrorFactory<T>(
-  processId: string
-): MemoizedSelector<fromFeature.ChangeRequestState, boolean> {
+export function getChangeRequestErrorFactory(): MemoizedSelector<
+  StateWithChangeRequest,
+  boolean
+> {
   return createSelector(
     getChangeRequestState,
-    loaderState => StateLoaderSelectors.loaderErrorSelector(loaderState)
+    (loaderState: LoaderState<ChangeRequestState>) =>
+      StateLoaderSelectors.loaderErrorSelector(loaderState)
   );
 }

@@ -1,12 +1,5 @@
 import * as fromAction from '../actions/';
-
-export interface ProductAssignmentState {
-  loaded: boolean;
-  content: {
-    assignments: any[];
-    potentialAssignments: any[];
-  };
-}
+import { ProductAssignmentState } from '../product-assignments-state';
 
 export const initialState: ProductAssignmentState = {
   loaded: false,

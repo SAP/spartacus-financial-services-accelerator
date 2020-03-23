@@ -1,11 +1,5 @@
 import * as fromAction from '../actions';
-
-export interface ClaimState {
-  claims: {};
-  refresh: boolean;
-  loaded: boolean;
-  content: {};
-}
+import { ClaimState } from '../my-account-state';
 
 export const initialState: ClaimState = {
   claims: {},

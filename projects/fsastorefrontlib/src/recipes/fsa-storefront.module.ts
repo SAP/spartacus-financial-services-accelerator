@@ -18,6 +18,7 @@ import { fsaOccProductConfig } from '../occ/services/default-occ-fsa-product-con
 import { fstranslationsDe } from '../assets/translations/index_de';
 import { fsOverrides } from '../assets/translations/index';
 import { OccModule } from '../occ/occ.module';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { OccModule } from '../occ/occ.module';
     CheckoutModule,
     ConfigModule.forRoot(),
     OccModule,
+    StoreModule.forRoot({}),
     ConfigModule.withConfig({
       i18n: {
         resources: {

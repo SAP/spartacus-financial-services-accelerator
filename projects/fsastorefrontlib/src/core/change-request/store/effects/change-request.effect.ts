@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { ChangeRequestConnector } from '../../connectors/change-request.connector';
 import * as fromActions from '../actions';
 import {
@@ -9,6 +9,7 @@ import {
   GlobalMessageType,
   RoutingService,
 } from '@spartacus/core';
+import * as fromUserRequestActions from './../../../../core/user-request/store/actions';
 
 @Injectable()
 export class ChangeRequestEffects {
@@ -68,8 +69,15 @@ export class ChangeRequestEffects {
           payload.changeRequest
         )
         .pipe(
-          map((changeRequest: any) => {
-            return new fromActions.SimulateChangeRequestSucess(changeRequest);
+          switchMap((changeRequest: any) => {
+            return [
+              new fromActions.SimulateChangeRequestSucess(changeRequest),
+              new fromUserRequestActions.UpdateUserRequest({
+                userId: payload.userId,
+                requestId: payload.requestId,
+                stepData: payload.stepData,
+              }),
+            ];
           }),
           catchError(error => {
             this.showGlobalMessage('policy.changeError');

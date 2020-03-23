@@ -1,37 +1,25 @@
 import { InjectionToken, Provider } from '@angular/core';
+import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
+import { AuthActions, loaderReducer } from '@spartacus/core';
 import {
-  ActionReducer,
-  ActionReducerMap,
-  createFeatureSelector,
-  MemoizedSelector,
-  MetaReducer,
-} from '@ngrx/store';
-import { AuthActions, LoaderState, loaderReducer } from '@spartacus/core';
-import * as fromReducer from './change-request.reducer';
-import { CHANGE_REQUEST_DATA } from '../actions';
+  CHANGE_REQUEST_DATA,
+  ChangeRequestsState,
+} from '../change-request-state';
 
-export interface ChangeRequestState {
-  changeRequest: LoaderState<fromReducer.ChangeRequestState>;
-}
-
-export function getReducers(): ActionReducerMap<ChangeRequestState> {
+export function getReducers(): ActionReducerMap<ChangeRequestsState> {
   return {
     changeRequest: loaderReducer(CHANGE_REQUEST_DATA),
   };
 }
 export const reducerToken: InjectionToken<
-  ActionReducerMap<ChangeRequestState>
-> = new InjectionToken<ActionReducerMap<ChangeRequestState>>(
+  ActionReducerMap<ChangeRequestsState>
+> = new InjectionToken<ActionReducerMap<ChangeRequestsState>>(
   'ChangeRequestReducers'
 );
 export const reducerProvider: Provider = {
   provide: reducerToken,
   useFactory: getReducers,
 };
-export const getChangeRequestState: MemoizedSelector<
-  any,
-  ChangeRequestState
-> = createFeatureSelector<ChangeRequestState>('changeRequests');
 export function clearChangeProcessState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {

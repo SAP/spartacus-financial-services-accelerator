@@ -1,29 +1,34 @@
 import { Injectable } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+
+import { Store, select, ActionsSubject } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { filter, switchMap, take } from 'rxjs/operators';
 import * as fromAction from '../store/actions';
-import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
-import { CHANGE_REQUEST_DATA } from '../store/actions';
-import { getProcessErrorFactory } from '../store/selectors';
+import { StateWithChangeRequest } from '../store/change-request-state';
+import * as fromUserRequestAction from './../../../core/user-request/store/actions';
+import { StepStatus } from '../../../occ/occ-models';
+import { getChangeRequestErrorFactory } from '../store/selectors';
 
 @Injectable()
 export class ChangeRequestService {
   requestId: string;
 
   constructor(
-    protected store: Store<fromReducer.ChangeRequestState>,
-    protected authService: AuthService
+    protected store: Store<StateWithChangeRequest>,
+    protected authService: AuthService,
+    protected actions$: ActionsSubject
   ) {
     combineLatest([
       this.store.select(fromSelector.getChangeRequest),
       this.authService.getUserToken(),
     ])
       .subscribe(([changeRequest, userToken]) => {
-        this.requestId = changeRequest.requestId;
+        if (changeRequest) {
+          this.requestId = changeRequest.requestId;
+        }
         if (
           !this.isCreated(changeRequest) &&
           this.isLoggedIn(userToken.userId)
@@ -56,7 +61,7 @@ export class ChangeRequestService {
   }
 
   getChangeRequest(): Observable<any> {
-    return this.store.select(fromSelector.getLoaded).pipe(
+    return this.store.select(fromSelector.getChangeRequest).pipe(
       filter(loaded => loaded),
       take(1),
       switchMap(_ => {
@@ -82,7 +87,8 @@ export class ChangeRequestService {
       .unsubscribe();
   }
 
-  simulateChangeRequest(changeRequest) {
+  simulateChangeRequest(changeRequest, stepIndex) {
+    const stepData = this.buildStepData(changeRequest, stepIndex);
     this.authService
       .getOccUserId()
       .pipe(take(1))
@@ -92,6 +98,7 @@ export class ChangeRequestService {
             userId: occUserId,
             requestId: changeRequest.requestId,
             changeRequest: changeRequest,
+            stepData: stepData,
           })
         );
       })
@@ -112,8 +119,35 @@ export class ChangeRequestService {
       .unsubscribe();
   }
 
-  getsimulateChangeRequestError(): Observable<boolean> {
-    return this.store.pipe(select(getProcessErrorFactory(CHANGE_REQUEST_DATA)));
+  getSimulateChangeRequestError(): Observable<boolean> {
+    return this.store.pipe(select(getChangeRequestErrorFactory()));
+  }
+
+  updateChangeRequest(changeRequest, stepIndex) {
+    const stepData = this.buildStepData(changeRequest, stepIndex);
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.store.dispatch(
+          new fromUserRequestAction.UpdateUserRequest({
+            userId: occUserId,
+            requestId: changeRequest.requestId,
+            stepData: stepData,
+          })
+        );
+      })
+      .unsubscribe();
+  }
+
+  getAction(actionName: string): Observable<any> {
+    return this.actions$.pipe(filter(action => action.type === actionName));
+  }
+
+  private buildStepData(changeRequest: any, stepIndex: number): any {
+    return Object.assign({}, changeRequest.configurationSteps[stepIndex], {
+      status: StepStatus.COMPLETED,
+    });
   }
 
   private isCreated(changeRequest: any): boolean {

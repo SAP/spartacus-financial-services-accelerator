@@ -44,6 +44,14 @@ class MockChangeRequestService {
   getChangeRequest() {
     return of(changeRequest);
   }
+  getAction() {
+    return of({
+      configurationSteps: [{}],
+      requestStatus: 'SUBMITTED',
+      fsStepGroupDefinition: {},
+      requestId: '00001012',
+    });
+  }
 }
 
 class MockRoutingService {
@@ -150,7 +158,8 @@ describe('ChangeProcessStepComponent', () => {
   it('should call simulate change request', () => {
     component.simulateChangeRequest(changeRequest);
     expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalledWith(
-      changeRequest
+      changeRequest,
+      -1
     );
   });
 
@@ -158,6 +167,14 @@ describe('ChangeProcessStepComponent', () => {
     component.cancelChangeRequest(requestId);
     expect(mockChangeRequestService.cancelChangeRequest).toHaveBeenCalledWith(
       requestId
+    );
+  });
+
+  it('should call simulate change request', () => {
+    component.simulateChangeRequest(changeRequest);
+    expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalledWith(
+      changeRequest,
+      -1
     );
   });
 });

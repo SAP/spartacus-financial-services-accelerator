@@ -63,6 +63,12 @@ class MockChangeRequestService {
   getChangeRequest() {
     return of(mockChangeRequest);
   }
+  getAction() {
+    return of({
+      requestStatus: 'OPEN',
+      fsStepGroupDefinition: 'test',
+    });
+  }
 }
 
 const configurationSteps = [
@@ -169,7 +175,6 @@ describe('ChangeCoverageComponent', () => {
     spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
       of(mockChangeRequest)
     );
-    console.log(component.potentialCoverages);
     component.addCoverage(coverage);
     expect(component.potentialCoverages[0].coverageIsIncluded).toEqual(true);
   });
