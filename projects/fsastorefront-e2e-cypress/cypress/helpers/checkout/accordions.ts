@@ -18,6 +18,10 @@ export const quoteReviewAccordions = {
       accordionItems: this.quoteReviewAccordionGroup2,
     },
     {
+      category: 'auto',
+      accordionItems: this.quoteReviewAccordionGroup1,
+    },
+    {
       category: 'travel',
       accordionItems: this.quoteReviewAccordionGroup2,
     },

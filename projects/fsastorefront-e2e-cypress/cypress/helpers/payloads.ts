@@ -40,10 +40,10 @@ export const importAutoPolicy = {
   body: {
     '@odata.context': '$metadata#InsurancePolicy/$entity',
     user: {
-      externalId: 'SMOKE001',
+      externalId: 'EXT00000000',
     },
-    policyId: 'BULK1T2000000552',
-    contractId: 'BULK1T2000000552',
+    policyId: '32',
+    contractId: '23',
     versionNumber: '1',
     policyEffectiveDate: '2018-05-11T08:59:04',
     policyStartDate: '2018-05-11T08:59:04',
@@ -82,7 +82,7 @@ export const importAutoPolicy = {
           code: 'ADDITIONAL',
         },
         coverageAmount: '124.23',
-        coverageId: 'BULK1000000551T2C1V1',
+        coverageId: 'BULK1000000551T2C1V11',
       },
       {
         coverageProduct: {
@@ -98,10 +98,10 @@ export const importAutoPolicy = {
           code: 'MAIN',
         },
         coverageAmount: '121.23',
-        coverageId: 'BULK1000000551T2C2V1',
+        coverageId: 'BULK1000000551T2C2V11',
       },
       {
-        coverageId: 'BULK1000000551T2C3V1',
+        coverageId: 'BULK1000000551T2C3V11',
         coverageProduct: {
           code: 'AUTO_ROADSIDE_ASSISTANCE',
           catalogVersion: {
@@ -119,68 +119,68 @@ export const importAutoPolicy = {
     ],
     insuredObjects: [
       {
-        insuredObjectId: 'IO000001',
+        insuredObjectId: 'IO0000011',
         insuredObjectType: { code: 'AUTO' },
         insuredObjectItems: [
           {
-            itemId: 'IOI000001',
+            itemId: 'IOI0000011',
             label: 'vehicleMake',
             externalValue: 'Opel',
           },
           {
-            itemId: 'IOI000002',
+            itemId: 'IOI0000021',
             label: 'vehicleModel',
             externalValue: 'Astra',
           },
           {
-            itemId: 'IOI000003',
+            itemId: 'IOI0000031',
             label: 'vehicleType',
             externalValue: 'OPELAstra5Doors1.6EcotecTurbo6AT',
           },
           {
-            itemId: 'IOI000004',
+            itemId: 'IOI0000041',
             label: 'vehicleAnnualMileage',
             externalValue: '12000',
           },
           {
-            itemId: 'IOI000005',
+            itemId: 'IOI0000051',
             label: 'vehicleValue',
             externalValue: '23000',
           },
           {
-            itemId: 'IOI000006',
+            itemId: 'IOI0000061',
             label: 'vehiclePurchaseDate',
             format: 'DATE',
             externalValue: '2018-05-11T08:59:04',
           },
           {
-            itemId: 'IOI000007',
+            itemId: 'IOI0000071',
             label: 'vehicleIdentificationNumber',
             externalValue: '31232131313312312',
           },
           {
-            itemId: 'IOI000008',
+            itemId: 'IOI0000081',
             label: 'dateOfBirth',
             format: 'DATE',
             externalValue: '1988-05-11T08:59:04',
           },
           {
-            itemId: 'IOI000009',
+            itemId: 'IOI0000091',
             label: 'mainDriverFirstName',
             externalValue: 'Donna',
           },
           {
-            itemId: 'IOI000010',
+            itemId: 'IOI0000101',
             label: 'mainDriverLastName',
             externalValue: 'Moore',
           },
           {
-            itemId: 'IOI0000011',
+            itemId: 'IOI00000111',
             label: 'mainDriverLicenceNumber',
             externalValue: 'LS32313',
           },
           {
-            itemId: 'IOI0000012',
+            itemId: 'IOI00000121',
             label: 'mainDriverLicenseDate',
             format: 'DATE',
             externalValue: '2015-05-11T08:59:04',
@@ -188,16 +188,16 @@ export const importAutoPolicy = {
         ],
         childInsuredObjects: [
           {
-            insuredObjectId: 'IO000002',
+            insuredObjectId: 'IO0000021',
             insuredObjectType: { code: 'DRIVER' },
             insuredObjectItems: [
               {
-                itemId: 'IOI1000001',
+                itemId: 'IOI10000011',
                 label: 'firstName',
                 externalValue: 'Donna',
               },
               {
-                itemId: 'IOI1000002',
+                itemId: 'IOI10000021',
                 label: 'lastName',
                 externalValue: 'Moore',
               },

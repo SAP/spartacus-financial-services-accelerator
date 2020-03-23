@@ -105,3 +105,7 @@ export function checkMyPoliciesPage() {
     cy.get('.info-card').should('have.length', 1);
   });
 }
+
+export function getPolicyIdFromString(string: string) {
+  return string.split(':')[1]
+}
