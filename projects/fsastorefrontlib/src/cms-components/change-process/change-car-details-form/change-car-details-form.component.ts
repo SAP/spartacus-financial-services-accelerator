@@ -54,6 +54,7 @@ export class ChangeCarDetailsFormComponent
             insuredObjects: [changedInsuredObject],
           },
         },
+        configurationSteps: changeRequest.configurationSteps,
       });
     }
   }

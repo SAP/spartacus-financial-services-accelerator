@@ -16,7 +16,7 @@ export class UserRequestConnector {
   updateUserRequest(
     userId: string,
     requestId: string,
-    stepData: FSStepData
+    stepData?: FSStepData
   ): Observable<any> {
     return this.adapter.updateUserRequest(userId, requestId, stepData);
   }

@@ -5,6 +5,7 @@ import { AuthService, OCC_USER_ID_CURRENT, UserToken } from '@spartacus/core';
 import { Observable, of, ReplaySubject } from 'rxjs';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
+import * as fromUserRequestAction from './../../../core/user-request/store/actions';
 import { reducerProvider, reducerToken } from '../store/reducers';
 import { ChangeRequestService } from './change-request.service';
 
@@ -13,10 +14,23 @@ const policyId = 'PL00001';
 const contractId = 'CT00001';
 const requestId = 'requestId';
 const changeRequestType = 'requestType';
-
+const stepIndex = '0';
 const mockChangeRequest = {
   requestId: requestId,
-  submissionId: 'submssionId',
+  configurationSteps: [
+    {
+      name: 'Change Car Details',
+      pageLabelOrId: 'changeCarDetailsPage',
+      sequenceNumber: 1,
+      status: 'UNSET',
+    },
+  ],
+};
+const stepData = {
+  name: 'Change Car Details',
+  pageLabelOrId: 'changeCarDetailsPage',
+  sequenceNumber: 1,
+  status: 'COMPLETED',
 };
 
 const userToken$ = new ReplaySubject<UserToken>();
@@ -86,12 +100,13 @@ describe('ChangeRequestServiceTest', () => {
   });
 
   it('should be able to simulate change request for policy', () => {
-    service.simulateChangeRequest(mockChangeRequest);
+    service.simulateChangeRequest(mockChangeRequest, stepIndex);
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.SimulateChangeRequest({
         userId: userId,
         requestId: mockChangeRequest.requestId,
         changeRequest: mockChangeRequest,
+        stepData: stepData,
       })
     );
   });
@@ -108,6 +123,29 @@ describe('ChangeRequestServiceTest', () => {
       })
       .unsubscribe();
     expect(response).toEqual(mockChangeRequest);
+  });
+
+  it('should be able to update change request', () => {
+    service.updateChangeRequest(mockChangeRequest, stepIndex);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromUserRequestAction.UpdateUserRequest({
+        userId: userId,
+        requestId: requestId,
+        stepData: stepData,
+      })
+    );
+  });
+
+  it('should be able to simulate change request for policy', () => {
+    service.simulateChangeRequest(mockChangeRequest, stepIndex);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.SimulateChangeRequest({
+        userId: userId,
+        requestId: mockChangeRequest.requestId,
+        changeRequest: mockChangeRequest,
+        stepData: stepData,
+      })
+    );
   });
 
   it('should be able to cancel change request', () => {

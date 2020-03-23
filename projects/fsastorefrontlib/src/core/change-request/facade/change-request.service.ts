@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { Store, ActionsSubject } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
@@ -7,6 +7,7 @@ import { filter, switchMap, take } from 'rxjs/operators';
 import * as fromAction from '../store/actions';
 import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
+import * as fromUserRequestAction from './../../../core/user-request/store/actions';
 
 @Injectable()
 export class ChangeRequestService {
@@ -14,7 +15,8 @@ export class ChangeRequestService {
 
   constructor(
     protected store: Store<fromReducer.ChangeRequestState>,
-    protected authService: AuthService
+    protected authService: AuthService,
+    protected actions$: ActionsSubject
   ) {
     combineLatest([
       this.store.select(fromSelector.getChangeRequest),
@@ -80,7 +82,8 @@ export class ChangeRequestService {
       .unsubscribe();
   }
 
-  simulateChangeRequest(changeRequest) {
+  simulateChangeRequest(changeRequest, stepIndex) {
+    const stepData = this.buildStepData(changeRequest, stepIndex);
     this.authService
       .getOccUserId()
       .pipe(take(1))
@@ -90,6 +93,7 @@ export class ChangeRequestService {
             userId: occUserId,
             requestId: changeRequest.requestId,
             changeRequest: changeRequest,
+            stepData: stepData,
           })
         );
       })
@@ -108,6 +112,33 @@ export class ChangeRequestService {
         );
       })
       .unsubscribe();
+  }
+
+  updateChangeRequest(changeRequest, stepIndex) {
+    const stepData = this.buildStepData(changeRequest, stepIndex);
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.store.dispatch(
+          new fromUserRequestAction.UpdateUserRequest({
+            userId: occUserId,
+            requestId: changeRequest.requestId,
+            stepData: stepData,
+          })
+        );
+      })
+      .unsubscribe();
+  }
+
+  getAction(actionName: string): Observable<any> {
+    return this.actions$.pipe(filter(action => action.type === actionName));
+  }
+
+  private buildStepData(changeRequest: any, stepIndex: number): any {
+    return Object.assign({}, changeRequest.configurationSteps[stepIndex], {
+      status: 'COMPLETED',
+    });
   }
 
   private isCreated(changeRequest: any): boolean {
