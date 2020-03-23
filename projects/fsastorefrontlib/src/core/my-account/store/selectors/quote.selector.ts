@@ -4,7 +4,7 @@ import * as fromQuote from '../reducers/quote.reducer';
 import {
   MyAccountState,
   QuoteState,
-  StateWithMyAccount
+  StateWithMyAccount,
 } from '../my-account-state';
 
 export const getQuotesState: MemoizedSelector<
