@@ -1,22 +1,33 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
-import * as fromFeature from '../reducers';
-import * as fromChangeRequest from './../reducers/change-request.reducer';
+import * as fromChangeRequest from '../reducers/change-request.reducer';
+import * as fromFeature from './feature.selector';
+import {
+  ChangeRequestsState,
+  ChangeRequestState,
+  StateWithChangeRequest,
+} from '../change-request-state';
 
 export const getChangeRequestState: MemoizedSelector<
-  any,
-  fromChangeRequest.ChangeRequestState
+  StateWithChangeRequest,
+  ChangeRequestState
 > = createSelector(
   fromFeature.getChangeRequestState,
-  (changeRequestState: fromFeature.ChangeRequestState) =>
-    changeRequestState.changeRequest
+  (changeRequestsState: ChangeRequestsState) =>
+    changeRequestsState.changeRequest
 );
 
-export const getChangeRequest: MemoizedSelector<any, any> = createSelector(
+export const getChangeRequest: MemoizedSelector<
+  StateWithChangeRequest,
+  any
+> = createSelector(
   getChangeRequestState,
   fromChangeRequest.getChangeRequest
 );
 
-export const getLoaded: MemoizedSelector<any, any> = createSelector(
+export const getLoaded: MemoizedSelector<
+  StateWithChangeRequest,
+  any
+> = createSelector(
   getChangeRequestState,
   fromChangeRequest.getLoaded
 );
