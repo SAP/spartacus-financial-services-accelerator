@@ -24,7 +24,7 @@ export class FSCheckoutStepGuard implements CanActivate, OnDestroy {
   currentCategory: string;
   private subscription: Subscription;
 
-  canActivate(route: CmsActivatedRouteSnapshot): Observable<boolean | UrlTree> {
+  canActivate(route: any): Observable<boolean | UrlTree> {
     const currentStepIndex = this.fsCheckoutConfigService.getCurrentStepIndex(
       route
     );
