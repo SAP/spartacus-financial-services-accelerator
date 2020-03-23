@@ -6,6 +6,7 @@ import {
   UrlCommands,
   RoutingService,
   RoutingConfigService,
+  CmsActivatedRouteSnapshot,
 } from '@spartacus/core';
 import { FSCheckoutConfigService } from './../../../core/checkout/services/fs-checkout-config.service';
 import { FSCheckoutStepGuard } from './fs-checkout-step-guard';
@@ -120,7 +121,7 @@ describe('FSCheckoutStepGuard', () => {
       ],
     };
     guard
-      .canActivate(mockActivatedRoute)
+      .canActivate(mockActivatedRoute as CmsActivatedRouteSnapshot)
       .subscribe(value => (result = value))
       .unsubscribe();
     expect(result).not.toEqual(true);
@@ -140,7 +141,7 @@ describe('FSCheckoutStepGuard', () => {
       ],
     };
     guard
-      .canActivate(mockActivatedRoute)
+      .canActivate(mockActivatedRoute as CmsActivatedRouteSnapshot)
       .subscribe(value => (result = value))
       .unsubscribe();
     expect(result).toEqual(true);
@@ -165,7 +166,7 @@ describe('FSCheckoutStepGuard', () => {
       ],
     };
     guard
-      .canActivate(mockActivatedRoute)
+      .canActivate(mockActivatedRoute as CmsActivatedRouteSnapshot)
       .subscribe(value => (result = value))
       .unsubscribe();
 

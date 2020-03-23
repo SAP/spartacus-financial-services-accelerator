@@ -6,6 +6,7 @@ import {
   UrlCommands,
   RoutingService,
   RoutingConfigService,
+  CmsActivatedRouteSnapshot,
 } from '@spartacus/core';
 import { CategoryStepGuard } from './category-step-guard';
 import { FSCheckoutConfigService } from './../../../core/checkout/services/fs-checkout-config.service';
@@ -86,7 +87,7 @@ describe('CategoryStepGuard', () => {
       ],
     };
     guard
-      .canActivate(mockActivatedRoute)
+      .canActivate(mockActivatedRoute as CmsActivatedRouteSnapshot)
       .subscribe(value => (result = value))
       .unsubscribe();
     expect(result).not.toEqual(true);
@@ -105,7 +106,7 @@ describe('CategoryStepGuard', () => {
       ],
     };
     guard
-      .canActivate(mockActivatedRoute)
+      .canActivate(mockActivatedRoute as CmsActivatedRouteSnapshot)
       .subscribe(value => (result = value))
       .unsubscribe();
     expect(result).toEqual(true);
@@ -125,7 +126,7 @@ describe('CategoryStepGuard', () => {
       ],
     };
     guard
-      .canActivate(mockActivatedRoute)
+      .canActivate(mockActivatedRoute as CmsActivatedRouteSnapshot)
       .subscribe(value => (result = value))
       .unsubscribe();
     expect(result).toEqual(true);
