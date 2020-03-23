@@ -88,4 +88,11 @@ export class ChangeSimulationComponent
     );
     return changedCoverage.coverageIsIncluded;
   }
+
+  updateChangeRequest(changeRequest) {
+    this.changeRequestService.updateChangeRequest(
+      changeRequest,
+      this.activeStepIndex
+    );
+  }
 }

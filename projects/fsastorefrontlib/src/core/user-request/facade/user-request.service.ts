@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { filter, take } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ActionsSubject, Store } from '@ngrx/store';
 import { FSUserRequest } from '../../../occ/occ-models';

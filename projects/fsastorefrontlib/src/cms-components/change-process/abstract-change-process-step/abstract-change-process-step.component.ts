@@ -7,10 +7,13 @@ import {
   RoutingService,
 } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take, filter } from 'rxjs/operators';
 import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
 import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
 import { FSStepData, StepStatus } from '../../../occ/occ-models';
+
+import * as fromUserRequestAction from './../../../core/user-request/store/actions';
+
 
 @Component({ template: '' })
 export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
@@ -43,9 +46,7 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
                 this.configurationSteps,
                 this.activeStepIndex
               );
-            }
-
-            if (
+            } else if (
               changeRequest &&
               changeRequest.requestStatus === StepStatus.CANCELED
             ) {
@@ -61,6 +62,25 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
                 GlobalMessageType.MSG_TYPE_INFO
               );
             }
+          })
+        )
+        .subscribe()
+    );
+    this.subscription.add(
+      this.changeRequestService
+        .getAction(fromUserRequestAction.SUBMIT_USER_REQUEST_SUCCESS)
+        .pipe(
+          take(1),
+          filter(
+            ({ payload }) =>
+              payload &&
+              payload.requestStatus === 'SUBMITTED' &&
+              payload.fsStepGroupDefinition
+          ),
+          map(({ payload }) => {
+            this.routingService.go(
+              payload.fsStepGroupDefinition.confirmationUrl
+            );
           })
         )
         .subscribe()
@@ -85,7 +105,10 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
   }
 
   simulateChangeRequest(changeRequest: any) {
-    this.changeRequestService.simulateChangeRequest(changeRequest);
+    this.changeRequestService.simulateChangeRequest(
+      changeRequest,
+      this.activeStepIndex
+    );
   }
 
   cancelChangeRequest(requestId: string) {

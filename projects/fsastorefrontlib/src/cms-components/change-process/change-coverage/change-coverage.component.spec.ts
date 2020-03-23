@@ -63,6 +63,12 @@ class MockChangeRequestService {
   getChangeRequest() {
     return of(mockChangeRequest);
   }
+  getAction() {
+    return of({
+      requestStatus: 'OPEN',
+      fsStepGroupDefinition: 'test',
+    });
+  }
 }
 
 const configurationSteps = [
