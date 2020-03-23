@@ -1,12 +1,10 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
-import { select, Store } from '@ngrx/store';
 import { map } from 'rxjs/operators';
 import { Observable, of, Subscription } from 'rxjs';
 import { PolicyService } from '../../../../core/my-account/facade';
-import * as fromPolicyStore from '../../../../core/my-account/store';
-import { StateWithMyAccount } from '../../../../core/my-account/store/my-account-state';
+import { ClaimService } from './../../../../core/my-account/';
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +13,9 @@ export class ClaimPoliciesGuard implements CanActivate, OnDestroy {
   private subscription: Subscription;
 
   constructor(
-    protected store: Store<StateWithMyAccount>,
     protected routingService: RoutingService,
-    protected policyService: PolicyService
+    protected policyService: PolicyService,
+    protected claimService: ClaimService
   ) {}
 
   canActivate(): Observable<boolean> {
@@ -25,9 +23,9 @@ export class ClaimPoliciesGuard implements CanActivate, OnDestroy {
       // TODO: handle loading claims for every category
       this.policyService.loadClaimPolicies('insurances_auto');
 
-      this.subscription = this.store
+      this.subscription = this.claimService
+        .getClaimPolicies()
         .pipe(
-          select(fromPolicyStore.getClaimPoliciesState),
           map(claimData => {
             if (
               claimData &&
