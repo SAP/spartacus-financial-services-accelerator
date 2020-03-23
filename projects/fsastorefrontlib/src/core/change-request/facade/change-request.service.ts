@@ -83,14 +83,7 @@ export class ChangeRequestService {
   }
 
   simulateChangeRequest(changeRequest, stepIndex) {
-    const stepData = Object.assign(
-      {},
-      changeRequest.configurationSteps[stepIndex],
-      {
-        status: 'COMPLETED',
-      }
-    );
-
+    const stepData = this.buildStepData(changeRequest, stepIndex);
     this.authService
       .getOccUserId()
       .pipe(take(1))
@@ -138,11 +131,11 @@ export class ChangeRequestService {
       .unsubscribe();
   }
 
-  getAction(actionName): Observable<any> {
+  getAction(actionName: string): Observable<any> {
     return this.actions$.pipe(filter(action => action.type === actionName));
   }
 
-  private buildStepData(changeRequest: any, stepIndex): any {
+  private buildStepData(changeRequest: any, stepIndex: number): any {
     return Object.assign({}, changeRequest.configurationSteps[stepIndex], {
       status: 'COMPLETED',
     });

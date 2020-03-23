@@ -7,7 +7,7 @@ import {
   RoutingService,
 } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { map, take, filter, tap } from 'rxjs/operators';
+import { map, take, filter } from 'rxjs/operators';
 import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
 import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
 import { FSStepData } from '../../../occ/occ-models';
@@ -70,12 +70,12 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
         .pipe(
           take(1),
           filter(
-            ({ payload }) =>
-              payload &&
-              payload.requestStatus === 'SUBMITTED' &&
-              payload.fsStepGroupDefinition
+            ({payload}) =>
+            payload &&
+            payload.requestStatus === 'SUBMITTED' &&
+            payload.fsStepGroupDefinition
           ),
-          map(({ payload }) => {
+          map(({payload}) => {
             this.routingService.go(
               payload.fsStepGroupDefinition.confirmationUrl
             );

@@ -35,9 +35,6 @@ export class OccUserRequestAdapter implements UserRequestAdapter {
     stepData: FSStepData
   ): Observable<any> {
     const url = this.getUserRequestEndpoint(userId, requestId);
-    if (!stepData) {
-      stepData = {};
-    }
     return this.http
       .patch(url, stepData, {})
       .pipe(catchError((error: any) => throwError(error.json())));
