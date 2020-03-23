@@ -72,9 +72,6 @@ export class ChangeRequestEffects {
             return new fromActions.SimulateChangeRequestSucess(changeRequest);
           }),
           catchError(error => {
-            this.routingService.go({
-              cxRoute: '/',
-            });
             this.showGlobalMessage('policy.changeError');
             return of(
               new fromActions.SimulateChangeRequestFail(JSON.stringify(error))

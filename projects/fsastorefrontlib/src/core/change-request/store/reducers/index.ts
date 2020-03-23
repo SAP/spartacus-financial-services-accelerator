@@ -6,16 +6,17 @@ import {
   MemoizedSelector,
   MetaReducer,
 } from '@ngrx/store';
-import { AuthActions } from '@spartacus/core';
+import { AuthActions, LoaderState, loaderReducer } from '@spartacus/core';
 import * as fromReducer from './change-request.reducer';
+import { CHANGE_REQUEST_DATA } from '../actions';
 
 export interface ChangeRequestState {
-  changeRequest: fromReducer.ChangeRequestState;
+  changeRequest: LoaderState<fromReducer.ChangeRequestState>;
 }
 
 export function getReducers(): ActionReducerMap<ChangeRequestState> {
   return {
-    changeRequest: fromReducer.reducer,
+    changeRequest: loaderReducer(CHANGE_REQUEST_DATA),
   };
 }
 export const reducerToken: InjectionToken<

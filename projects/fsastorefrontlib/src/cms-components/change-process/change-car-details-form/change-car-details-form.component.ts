@@ -20,6 +20,13 @@ export class ChangeCarDetailsFormComponent
 
   ngOnInit() {
     super.ngOnInit();
+    // this.subscription.add(
+    this.changeRequestService
+      .getsimulateChangeRequestError()
+      .subscribe(error => {
+        this.onError(error);
+        // })
+      });
   }
 
   simulateChanges(changeRequest) {
@@ -48,12 +55,20 @@ export class ChangeCarDetailsFormComponent
         }
       );
       this.simulateChangeRequest({
-        requestId: changeRequest.requestId,
+        requestId: 'changeRequest.requestId',
         insurancePolicy: {
           insuredObjectList: {
             insuredObjects: [changedInsuredObject],
           },
         },
+      });
+    }
+  }
+
+  protected onError(error: boolean) {
+    if (error) {
+      this.routingService.go({
+        cxRoute: '/',
       });
     }
   }

@@ -51,19 +51,19 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
                 changeRequest.insurancePolicy.contractNumber;
               this.routingService.go({
                 cxRoute: 'policyDetails',
-                params: { policyId: policyNumber, contractId: contractNumber },
+                params: {
+                  policyId: policyNumber,
+                  contractId: contractNumber,
+                },
               });
-              this.showGlobalMessage('policy.policyCanceled');
+              this.globalMessageService.add(
+                { key: 'policy.policyCanceled' },
+                GlobalMessageType.MSG_TYPE_INFO
+              );
             }
           })
         )
         .subscribe()
-    );
-  }
-  private showGlobalMessage(text: string) {
-    this.globalMessageService.add(
-      { key: text },
-      GlobalMessageType.MSG_TYPE_INFO
     );
   }
 
