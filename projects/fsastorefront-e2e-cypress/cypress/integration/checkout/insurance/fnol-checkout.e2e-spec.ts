@@ -12,6 +12,8 @@ import {addPaymentMethod, selectPaymentMethod} from "../../../helpers/checkout/i
 import * as travelCheckout from "../../../helpers/checkout/insurance/travel-checkout";
 import * as checkout from "../../../helpers/checkout/checkoutSteps";
 
+let baba;
+
 context('FNOL for sample data user', () => {
   before(() => {
     cy.visit('/login');
@@ -25,6 +27,7 @@ context('FNOL for sample data user', () => {
       .eq(1)
       .click();
     cy.get('.heading-headline').should('have.text', 'Login');
+    this.baba = 'teeeeeest';
   });
 
    it('Should check no policies page for new user', () => {
@@ -78,14 +81,12 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should remember Policy ID', () => {
-    const text = '';
     cy.get('.notice-text').then(($element) => {
-      this.text = $element.text();
+      this.baba = checkout.getPolicyIdFromString($element.text());
+      let policyId = checkout.getPolicyIdFromString($element.text());
+      cy.log(policyId);
     });
-    cy.log(this.text);
-
-    const policyId = checkout.getPolicyIdFromString( text );
-    cy.log(policyId);
+    cy.log(this.baba);
   });
 
 
