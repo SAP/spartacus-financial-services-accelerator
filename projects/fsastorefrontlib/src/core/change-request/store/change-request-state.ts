@@ -1,7 +1,7 @@
 export const CHANGE_REQUEST_FEATURE = 'changeRequests';
 
 export interface StateWithChangeRequest {
-  [CHANGE_REQUEST_FEATURE]: ChangeRequestState;
+  [CHANGE_REQUEST_FEATURE]: ChangeRequestsState;
 }
 
 export interface ChangeRequestsState {

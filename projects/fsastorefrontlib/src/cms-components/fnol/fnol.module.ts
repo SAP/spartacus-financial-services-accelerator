@@ -31,7 +31,6 @@ import { FNOLSummaryComponent } from './fnol-summary/fnol-summary.component';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { ClaimConfirmationGuard } from '../../core/user-request/guards/claim-confirmation-guard';
 import { FSProgressBarModule } from '../progress-bar/progress-bar.module';
-import { UserRequestStoreModule } from '../../core/user-request/store/user-request-store.module';
 
 const routes: Routes = [
   {
@@ -94,7 +93,6 @@ const routes: Routes = [
     SpinnerModule,
     AccordionModule,
     FSProgressBarModule,
-  //  UserRequestStoreModule,
     EffectsModule.forFeature(effects),
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
