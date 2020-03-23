@@ -8,6 +8,7 @@ import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
 import { ChangeRequestConnector } from '../../connectors';
 import * as fromActions from '../actions';
+import * as fromUserRequestActions from './../../../../core/user-request/store/actions';
 import * as fromUserReducers from './../../store/reducers/index';
 import * as fromEffects from './change-request.effect';
 
@@ -107,11 +108,20 @@ describe('Change Request Effects', () => {
         requestId: requestID,
         changeRequest: changeRequest,
       });
+
       const completion = new fromActions.SimulateChangeRequestSucess(
         changeRequest
       );
+      const updateUserRequest = new fromUserRequestActions.UpdateUserRequest({
+        userId: OCC_USER_ID_CURRENT,
+        requestId: requestID,
+        stepData: undefined,
+      });
       actions$ = hot('-a', { a: action });
-      const expected = cold('-b', { b: completion });
+      const expected = cold('-(bc)', {
+        b: completion,
+        c: updateUserRequest,
+      });
       expect(effects.simulateChangeRequest$).toBeObservable(expected);
     });
 
