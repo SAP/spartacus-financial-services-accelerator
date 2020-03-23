@@ -10,10 +10,8 @@ import {
   UserRequestService,
 } from '../../../core/user-request/facade';
 import * as fromAction from '../../../core/user-request/store/actions';
-import { Claim, FSStepData } from '../../../occ/occ-models';
+import { Claim, FSStepData, StepStatus } from '../../../occ/occ-models';
 import { ClaimStatus } from '../../../occ/occ-models/occ.models';
-
-const completedStatus = 'COMPLETED';
 
 @Component({
   selector: 'fsa-fnol-navigation',
@@ -108,7 +106,7 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
       this.claimService.updateClaim(
         claimData,
         this.activeStepIndex,
-        completedStatus
+        StepStatus.COMPLETED
       );
     }
     this.subscription.add(
@@ -123,7 +121,7 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
               this.claimService.updateClaim(
                 claimData,
                 this.activeStepIndex,
-                completedStatus
+                StepStatus.COMPLETED
               );
             }
             return of(null);

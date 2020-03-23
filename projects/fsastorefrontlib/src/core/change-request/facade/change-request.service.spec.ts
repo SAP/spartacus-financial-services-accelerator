@@ -8,6 +8,7 @@ import * as fromReducer from '../store/reducers';
 import * as fromUserRequestAction from './../../../core/user-request/store/actions';
 import { reducerProvider, reducerToken } from '../store/reducers';
 import { ChangeRequestService } from './change-request.service';
+import { StateWithChangeRequest } from '../store/change-request-state';
 
 const userId = OCC_USER_ID_CURRENT;
 const policyId = 'PL00001';
@@ -46,7 +47,7 @@ class MockAuthService {
 
 describe('ChangeRequestServiceTest', () => {
   let service: ChangeRequestService;
-  let store: Store<fromReducer.ChangeRequestState>;
+  let store: Store<StateWithChangeRequest>;
   let authService: MockAuthService;
 
   beforeEach(() => {
@@ -64,7 +65,7 @@ describe('ChangeRequestServiceTest', () => {
       ],
     });
     service = TestBed.get(ChangeRequestService as Type<ChangeRequestService>);
-    store = TestBed.get(Store as Type<Store<fromReducer.ChangeRequestState>>);
+    store = TestBed.get(Store as Type<Store<StateWithChangeRequest>>);
 
     spyOn(store, 'dispatch').and.callThrough();
   });

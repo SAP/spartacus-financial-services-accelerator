@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Store, select } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import {
   CartDataService,
-  CheckoutService,
   CheckoutDeliveryService,
-  Address,
+  CheckoutService,
 } from '@spartacus/core';
 import * as fromFSAction from '../store/actions/index';
-import { FSStateWithCheckout, FSCheckoutSelectors } from '../store';
+import { FSCheckoutSelectors, FSStateWithCheckout } from '../store';
 
 @Injectable()
 export class FSCheckoutService extends CheckoutService {
@@ -21,16 +20,6 @@ export class FSCheckoutService extends CheckoutService {
 
   orderPlaced: boolean;
   mockedDeliveryMode = 'financial-default';
-
-  mockedDeliveryAddress: Address = {
-    id: 'testID',
-    country: { isocode: 'GB' },
-    firstName: 'Donna',
-    lastName: 'Moore',
-    town: 'London',
-    line1: 'line1',
-    postalCode: 'WC1V 6PL',
-  };
 
   setIdentificationType(identificationType: string) {
     this.fsStore.dispatch(

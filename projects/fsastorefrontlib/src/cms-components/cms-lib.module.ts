@@ -12,7 +12,7 @@ import {
 } from '../core/my-account/store/reducers/index';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { UserRequestModule } from './fnol/fnol.module';
+import { FnolModule } from './fnol/fnol.module';
 import { CategoryFeatureModule } from './category/category-feature/category-feature.module';
 import { CategoryFeatureCarouselModule } from './category/category-feature-carousel/category-feature-carousel.module';
 import { FSRegisterModule } from './user/register/fs-register.module';
@@ -31,7 +31,7 @@ import { FSProgressBarModule } from './progress-bar/progress-bar.module';
     CustomContainerModule,
     MyAccountModule,
     FSRegisterModule,
-    UserRequestModule,
+    FnolModule,
     ChangeProcessModule,
     StoreModule.forFeature('assets', reducerToken),
     EffectsModule.forFeature(effects),
@@ -48,7 +48,7 @@ import { FSProgressBarModule } from './progress-bar/progress-bar.module';
     CustomContainerModule,
     MyAccountModule,
     FSRegisterModule,
-    UserRequestModule,
+    FnolModule,
     ChangeProcessModule,
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,

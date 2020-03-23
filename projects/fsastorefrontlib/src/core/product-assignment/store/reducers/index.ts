@@ -1,39 +1,23 @@
 import { InjectionToken, Provider } from '@angular/core';
-import {
-  ActionReducerMap,
-  createFeatureSelector,
-  MemoizedSelector,
-  ActionReducer,
-  MetaReducer,
-} from '@ngrx/store';
-import * as fromReducer from './product-assignment.reducer';
+import { ActionReducerMap, ActionReducer, MetaReducer } from '@ngrx/store';
 import { AuthActions } from '@spartacus/core';
+import { ProductAssignmentsState } from '../product-assignments-state';
+import * as fromReducer from './product-assignment.reducer';
 
-export const PRODUCT_ASSIGNMENT_FEATURE = 'productAssignments';
-
-export interface ProductAssignmentState {
-  productAssignments: fromReducer.ProductAssignmentState;
-}
-
-export function getReducers(): ActionReducerMap<ProductAssignmentState> {
+export function getReducers(): ActionReducerMap<ProductAssignmentsState> {
   return {
     productAssignments: fromReducer.reducer,
   };
 }
 export const reducerToken: InjectionToken<
-  ActionReducerMap<ProductAssignmentState>
-> = new InjectionToken<ActionReducerMap<ProductAssignmentState>>(
+  ActionReducerMap<ProductAssignmentsState>
+> = new InjectionToken<ActionReducerMap<ProductAssignmentsState>>(
   'ProductAssignmentsReducers'
 );
 export const reducerProvider: Provider = {
   provide: reducerToken,
   useFactory: getReducers,
 };
-export const getProductAssignmentState: MemoizedSelector<
-  any,
-  ProductAssignmentState
-> = createFeatureSelector<ProductAssignmentState>('productAssignments');
-
 export function clearProductAssignmentState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {

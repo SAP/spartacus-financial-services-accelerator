@@ -22,3 +22,5 @@ export function reducer(
   }
   return state;
 }
+
+export const getUserRequestContent = (state: UserRequestState) => state.content;

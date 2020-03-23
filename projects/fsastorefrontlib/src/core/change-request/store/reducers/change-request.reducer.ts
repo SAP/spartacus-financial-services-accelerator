@@ -1,9 +1,5 @@
 import * as fromAction from '../actions/';
-
-export interface ChangeRequestState {
-  loaded: boolean;
-  content: {};
-}
+import { ChangeRequestState } from '../change-request-state';
 
 export const initialState: ChangeRequestState = {
   loaded: false,
@@ -36,6 +32,5 @@ export function reducer(
   }
   return state;
 }
-
 export const getChangeRequest = (state: ChangeRequestState) => state.content;
 export const getLoaded = (state: ChangeRequestState) => state.loaded;
