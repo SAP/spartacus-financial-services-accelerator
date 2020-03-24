@@ -4,11 +4,12 @@ import { AuthActions, loaderReducer } from '@spartacus/core';
 import {
   CHANGE_REQUEST_DATA,
   ChangeRequestsState,
+  ChangeRequestState,
 } from '../change-request-state';
 
 export function getReducers(): ActionReducerMap<ChangeRequestsState> {
   return {
-    changeRequest: loaderReducer(CHANGE_REQUEST_DATA),
+    changeRequest: loaderReducer<ChangeRequestState>(CHANGE_REQUEST_DATA),
   };
 }
 export const reducerToken: InjectionToken<

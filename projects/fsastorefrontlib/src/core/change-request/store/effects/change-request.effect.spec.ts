@@ -139,7 +139,7 @@ describe('Change Request Effects', () => {
         changeRequest: changeRequest,
       });
 
-      const completion = new fromActions.SimulateChangeRequestSucess(
+      const completion = new fromActions.SimulateChangeRequestSuccess(
         changeRequest
       );
       const updateUserRequest = new fromUserRequestActions.UpdateUserRequest({

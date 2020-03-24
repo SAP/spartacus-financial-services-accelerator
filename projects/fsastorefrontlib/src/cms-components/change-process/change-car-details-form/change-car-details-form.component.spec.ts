@@ -24,6 +24,9 @@ const changeRequest = {
 class MockChangeRequestService {
   simulateChangeRequest = createSpy();
 
+  getSimulateChangeRequestError() {
+    return of();
+  }
   getChangeRequest() {
     return of(changeRequest);
   }

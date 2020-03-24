@@ -31,7 +31,7 @@ describe('Change Request Selectors', () => {
       store
         .pipe(select(fromSelectors.getChangeRequest))
         .subscribe(value => (result = value));
-      expect(result).toEqual({});
+      expect(result).toEqual(undefined);
 
       store.dispatch(
         new fromActions.CreateChangeRequestSuccess(mockChangeRequest)

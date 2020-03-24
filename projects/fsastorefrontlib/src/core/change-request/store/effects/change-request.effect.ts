@@ -71,7 +71,7 @@ export class ChangeRequestEffects {
         .pipe(
           switchMap((changeRequest: any) => {
             return [
-              new fromActions.SimulateChangeRequestSucess(changeRequest),
+              new fromActions.SimulateChangeRequestSuccess(changeRequest),
               new fromUserRequestActions.UpdateUserRequest({
                 userId: payload.userId,
                 requestId: payload.requestId,

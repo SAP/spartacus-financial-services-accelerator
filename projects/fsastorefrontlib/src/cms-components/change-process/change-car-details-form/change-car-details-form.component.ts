@@ -55,7 +55,7 @@ export class ChangeCarDetailsFormComponent
         }
       );
       this.simulateChangeRequest({
-        requestId: 'changeRequest.requestId',
+        requestId: changeRequest.requestId,
         insurancePolicy: {
           insuredObjectList: {
             insuredObjects: [changedInsuredObject],
