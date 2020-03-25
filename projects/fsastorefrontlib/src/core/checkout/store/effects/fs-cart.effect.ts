@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { FormDataService } from '@fsa/dynamicforms';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
-import { CartActions } from '@spartacus/core';
-import { from, Observable, of } from 'rxjs';
+import { CartActions, OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
+import { from, Observable } from 'rxjs';
 import { catchError, concatMap, map } from 'rxjs/operators';
 import { FsCartConnector } from '../../../cart/connectors/fs-cart.connector';
 import * as fromQuoteActions from '../../../my-account/store/actions/quote.action';
@@ -94,16 +94,32 @@ export class FSCartEffects {
                 );
               }
             }
-            actions.push(
-              new CartActions.CartAddEntrySuccess({
+            if (cartCode !== payload.cartId && payload.userId !== OCC_USER_ID_ANONYMOUS) {
+              actions.push(
+                new CartActions.CartProcessesDecrement(payload.cartId),
+              );
+            } else {
+              actions.push(new CartActions.CartAddEntrySuccess({
                 ...cart.entry,
                 userId: payload.userId,
-                cartId: payload.cartId,
-              })
-            );
-            return actions;
+                cartId: cartCode,
+              }));
+            }
+            console.log(actions);
+            return [
+              new CartActions.LoadCart({
+                userId: payload.userId,
+                cartId: cartCode,
+                extraData: {
+                  active: true
+                }
+              }),
+              ...actions,
+            ];
           }),
-          catchError(error => of(new CartActions.CartAddEntryFail(error)))
+          catchError(error => from([
+            new CartActions.CartAddEntryFail(JSON.stringify(error)),
+          ]))
         );
     })
   );
@@ -124,5 +140,5 @@ export class FSCartEffects {
     private actions$: Actions,
     private cartConnector: FsCartConnector,
     private formDataService: FormDataService
-  ) {}
+  ) { }
 }
