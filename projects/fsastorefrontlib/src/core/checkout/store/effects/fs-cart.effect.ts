@@ -94,32 +94,36 @@ export class FSCartEffects {
                 );
               }
             }
-            if (cartCode !== payload.cartId && payload.userId !== OCC_USER_ID_ANONYMOUS) {
+            if (
+              cartCode !== payload.cartId &&
+              OCC_USER_ID_ANONYMOUS !== payload.userId
+            ) {
               actions.push(
-                new CartActions.CartProcessesDecrement(payload.cartId),
+                new CartActions.CartProcessesDecrement(payload.cartId)
               );
             } else {
-              actions.push(new CartActions.CartAddEntrySuccess({
-                ...cart.entry,
-                userId: payload.userId,
-                cartId: cartCode,
-              }));
+              actions.push(
+                new CartActions.CartAddEntrySuccess({
+                  ...cart.entry,
+                  userId: payload.userId,
+                  cartId: cartCode,
+                })
+              );
             }
-            console.log(actions);
             return [
               new CartActions.LoadCart({
                 userId: payload.userId,
                 cartId: cartCode,
                 extraData: {
-                  active: true
-                }
+                  active: true,
+                },
               }),
               ...actions,
             ];
           }),
-          catchError(error => from([
-            new CartActions.CartAddEntryFail(JSON.stringify(error)),
-          ]))
+          catchError(error =>
+            from([new CartActions.CartAddEntryFail(JSON.stringify(error))])
+          )
         );
     })
   );
@@ -140,5 +144,5 @@ export class FSCartEffects {
     private actions$: Actions,
     private cartConnector: FsCartConnector,
     private formDataService: FormDataService
-  ) { }
+  ) {}
 }
