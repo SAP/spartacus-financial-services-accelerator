@@ -15,6 +15,7 @@ import {
 } from '@spartacus/storefront';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCheckoutStep } from './fs-checkout-step.component';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'fsa-checkout-progress',
@@ -45,35 +46,39 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
 
   setActiveCategory() {
     this.subscription.add(
-      this.activatedRoute.params.subscribe(params => {
-        const categoryCode = 'categoryCode';
-        const formCode = 'formCode';
-        if (params[categoryCode]) {
-          this.categoryService.setActiveCategory(params[categoryCode]);
-        } else if (params[formCode]) {
-          this.categoryService.setActiveCategory(params[formCode]);
-        } else {
-          this.subscription.add(
-            this.cartService.getActive().subscribe(cart => {
-              if (
-                cart.deliveryOrderGroups &&
-                cart.deliveryOrderGroups.length > 0 &&
-                cart.deliveryOrderGroups[0].entries &&
-                cart.deliveryOrderGroups[0].entries.length > 0
-              ) {
-                const fsProduct: FSProduct =
-                  cart.deliveryOrderGroups[0].entries[0].product;
-                if (fsProduct && fsProduct.defaultCategory) {
-                  this.categoryService.setActiveCategory(
-                    fsProduct.defaultCategory.code
-                  );
-                }
-              }
-            })
-          );
-        }
-        this.activeCategory$ = this.categoryService.getActiveCategory();
-      })
+      this.activatedRoute.params
+        .pipe(
+          map(params => {
+            const categoryCode = 'categoryCode';
+            const formCode = 'formCode';
+            if (params[categoryCode]) {
+              this.categoryService.setActiveCategory(params[categoryCode]);
+            } else if (params[formCode]) {
+              this.categoryService.setActiveCategory(params[formCode]);
+            } else {
+              this.subscription.add(
+                this.cartService.getActive().subscribe(cart => {
+                  if (
+                    cart.deliveryOrderGroups &&
+                    cart.deliveryOrderGroups.length > 0 &&
+                    cart.deliveryOrderGroups[0].entries &&
+                    cart.deliveryOrderGroups[0].entries.length > 0
+                  ) {
+                    const fsProduct: FSProduct =
+                      cart.deliveryOrderGroups[0].entries[0].product;
+                    if (fsProduct && fsProduct.defaultCategory) {
+                      this.categoryService.setActiveCategory(
+                        fsProduct.defaultCategory.code
+                      );
+                    }
+                  }
+                })
+              );
+            }
+            this.activeCategory$ = this.categoryService.getActiveCategory();
+          })
+        )
+        .subscribe()
     );
   }
 
