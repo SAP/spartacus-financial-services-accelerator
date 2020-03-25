@@ -1,0 +1,21 @@
+<div class="box-shadow p-4 my-5">
+  <div class="content860 d-flex justify-content-center flex-wrap">
+    <div class="text-center w-100 my-5">
+      <div class="image-wrapper">
+        <img class="image-item" [src]="getImagelink()" alt="" />
+      </div>
+    </div>
+    <div class="text-center">
+      <p>
+        {{ 'fscommon.pageNotFoundMessage' | cxTranslate }}
+      </p>
+      <button
+        class="primary-button btn-block"
+        routerLink="/"
+        routerLinkActive="active"
+      >
+        {{ 'fscommon.home' | cxTranslate }}
+      </button>
+    </div>
+  </div>
+</div>

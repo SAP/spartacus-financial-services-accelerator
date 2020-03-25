@@ -10,16 +10,18 @@
         </div>
       </div>
       <div class="flex-100 border-color-6 mb-5"></div>
-      <p>
-        {{ 'changeRequest.confirmation.message' | cxTranslate }}
+      <div class="text-center">
+        <p>
+          {{ 'changeRequest.confirmation.message' | cxTranslate }}
 
-        <a
-          class="overview-section-link"
-          routerLink="/my-account/inbox/"
-          routerLinkActive="active"
-          >{{ 'changeRequest.confirmation.inbox' | cxTranslate }}</a
-        >
-      </p>
+          <a
+            class="overview-section-link"
+            routerLink="/my-account/inbox/"
+            routerLinkActive="active"
+            >{{ 'changeRequest.confirmation.inbox' | cxTranslate }}</a
+          >
+        </p>
+      </div>
     </div>
   </div>
 </ng-container>
