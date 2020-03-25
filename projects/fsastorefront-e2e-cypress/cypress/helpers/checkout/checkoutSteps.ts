@@ -106,6 +106,31 @@ export function checkMyPoliciesPage() {
   });
 }
 
-export function getPolicyIdFromString(string: string) {
-  return string.split(':')[1]
+export function rememberPolicyId () {
+  cy.get('div.info-card-caption').then(($element) => {
+    const payload = this.getPayloadForPolicyUpdate($element.text().trim());
+    cy.request(payload);
+    cy.get('.primary-button')
+      .contains(' Make a Claim')
+      .click();
+  });
+}
+
+export function getPayloadForPolicyUpdate(policyId) {
+  return {url: `${Cypress.env(
+    'API_URL'
+  )}/odata2webservices/InboundInsurancePolicy/InsurancePolicies`,
+  method: 'POST',
+  headers: {
+    Authorization: 'Basic ZnNpbnRlZ3JhdGlvbmFkbWluOjEyMzQ1Ng==',
+    'Content-Type': 'application/json',
+  },
+  body: {
+    '@odata.context': '$metadata#InsurancePolicy/$entity',
+    policyId: policyId,
+    contractId: policyId,
+    versionNumber: '1',
+    policyEffectiveDate: '2018-05-11T08:59:04',
+    policyStartDate: '2018-05-11T08:59:04',
+}}
 }

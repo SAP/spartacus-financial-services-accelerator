@@ -1,3 +1,4 @@
+///<reference path="../../../helpers/checkout/checkoutSteps.ts"/>
 import { donnaMooreUser, registrationUser } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as fnol from '../../../helpers/fnolCheckout';
@@ -6,7 +7,7 @@ import * as auto from '../../../helpers/checkout/insurance/auto';
 import { importAutoPolicy } from '../../../helpers/payloads';
 import {
   checkBackAndContinueButtons,
-  clickContinueButton,
+  clickContinueButton, importAutoPolicyID,
 } from '../../../helpers/checkout/checkoutSteps';
 import {addPaymentMethod, selectPaymentMethod} from "../../../helpers/checkout/insurance/payment";
 import * as travelCheckout from "../../../helpers/checkout/insurance/travel-checkout";
@@ -80,26 +81,10 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should remember Policy ID', () => {
-    cy.get('.notice-text').then(($element) => {
-      let policyId = checkout.getPolicyIdFromString($element.text());
-    });
+    checkout.checkMyPoliciesPage();
+    checkout.rememberPolicyId();
   });
 
-
-/*  it('Should import auto policy', () => {
-        cy.visit('/login');
-        register.login(donnaMooreUser.email, donnaMooreUser.password);
-        cy.wait(1000);
-        cy.request(importAutoPolicy);
-      });*/
-
-    /*  it('Should start a FNOL checkout', () => {
-        cy.selectOptionFromDropdown({
-          menuOption: 'My Account',
-          dropdownItem: 'Policies',
-        });
-        fnol.selectAutoPolicyForFNOL();
-      });
 
       it('Should check and populate Incident Information page', () => {
         fnol.checkFNOLCheckoutPage();
@@ -161,5 +146,5 @@ context('FNOL for sample data user', () => {
 
       it('Should delete started claim', () => {
         fnol.deleteClaimFromDialog();
-      });*/
+      });
 });
