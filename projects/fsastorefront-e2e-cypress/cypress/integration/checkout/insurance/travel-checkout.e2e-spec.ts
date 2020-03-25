@@ -11,9 +11,7 @@ context('Travel Insurance Checkout', () => {
   before(() => {
     cy.visit('/');
     register.registerUser(registrationUser);
-    cy.wait(3000);
     register.login(registrationUser.email, registrationUser.password);
-    cy.wait(2000);
   });
 
   describe('Travel Checkout', () => {
@@ -25,7 +23,6 @@ context('Travel Insurance Checkout', () => {
     });
 
     it('Add main product to the cart', () => {
-      cy.wait(1000);
       travelCheckout.checkComparisonAndAddProduct();
     });
 
@@ -35,13 +32,11 @@ context('Travel Insurance Checkout', () => {
 
     it('Add optional product to the cart', () => {
       travelCheckout.checkOptionalProductsAndPick();
-      cy.wait(1000);
     });
 
     it('Populate personal details', () => {
       checkout.populatePersonalDetailsPage();
       travelCheckout.populateAgeOnPersonalDetails();
-      cy.wait(1000);
     });
 
     it('Check mini cart on quote review page', () => {
@@ -53,7 +48,7 @@ context('Travel Insurance Checkout', () => {
       selectPaymentMethod();
     });
 
-    it('Place order on final review page', () => {
+    it('Place order on final review pages', () => {
       checkout.placeOrderOnFinalReview();
     });
 
