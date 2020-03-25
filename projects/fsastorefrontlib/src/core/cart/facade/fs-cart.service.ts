@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { ActiveCartService, AuthService, MultiCartSelectors, MultiCartService, OCC_CART_ID_CURRENT, OCC_USER_ID_ANONYMOUS, StateWithCart, StateWithMultiCart } from '@spartacus/core';
-import { map, switchMap, takeLast, tap } from 'rxjs/operators';
+import { map, switchMap, take, tap } from 'rxjs/operators';
 import { PricingData } from '../../../occ/occ-models/form-pricing.interface';
 import * as fromFSAction from '../../checkout/store/actions/index';
 
@@ -121,20 +121,18 @@ export class FSCartService extends ActiveCartService {
               });
           }
         }),
-        takeLast(1)
+        take(1)
       ).subscribe(_ => {
-        if (!this.isTempCartId(this.fsCartId)) {
-          this.multiCartStore.dispatch(
-            new fromFSAction.StartBundle({
-              userId: this.fsUserId,
-              cartId: this.fsCartId,
-              productCode: productCode,
-              bundleTemplateId: bundleTemplateId,
-              quantity: quantity,
-              pricingData: pricingData,
-            })
-          );
-        }
+        this.multiCartStore.dispatch(
+          new fromFSAction.StartBundle({
+            userId: this.fsUserId,
+            cartId: this.fsCartId,
+            productCode: productCode,
+            bundleTemplateId: bundleTemplateId,
+            quantity: quantity,
+            pricingData: pricingData,
+          })
+        );
       });
   }
 
