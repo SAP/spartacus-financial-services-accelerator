@@ -8,7 +8,7 @@ export function selectPaymentMethod() {
 
 export function addPaymentMethod(userId: string) {
   //updated to the selector had is on every page so payment can be imported from everywhere in checkout
-  cy.wait(1000);
+
   cy.get('.progress-node')
     .first()
     .then(test => {

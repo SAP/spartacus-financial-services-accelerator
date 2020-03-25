@@ -19,7 +19,7 @@ context('Life Insurance Checkout', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Life',
-        nextPageUrlPart: 'Insurance'
+        nextPageUrlPart: 'Insurance',
       });
 
       cy.get('.enriched-banner-styled-text')
@@ -27,7 +27,6 @@ context('Life Insurance Checkout', () => {
         .contains(' Get a Quote')
         .click();
     });
-   
 
     it('Should check progress bar', () => {
       checkout.checkProgressBarInsurance();

@@ -26,16 +26,13 @@ context('Travel Insurance Checkout', () => {
       travelCheckout.checkComparisonAndAddProduct();
     });
 
-    it('Add payment method for user', () => {
-      addPaymentMethod(registrationUser.email);
-    });
-
     it('Add optional product to the cart', () => {
       travelCheckout.checkOptionalProductsAndPick();
     });
 
-    it('Populate personal details', () => {
+    it('Populate personal details and add payment method', () => {
       checkout.populatePersonalDetailsPage();
+      addPaymentMethod(registrationUser.email);
       travelCheckout.populateAgeOnPersonalDetails();
     });
 

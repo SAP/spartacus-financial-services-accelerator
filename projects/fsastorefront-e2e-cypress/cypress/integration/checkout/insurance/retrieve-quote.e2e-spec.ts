@@ -29,7 +29,7 @@ context('Retrieve Quote', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'My Account',
         dropdownItem: 'Quotes & Applications',
-        nextPageUrlPart: 'my-financial-applications'
+        nextPageUrlPart: 'my-financial-applications',
       });
       cy.get('fsa-quotes').should('have.length', 1);
     });

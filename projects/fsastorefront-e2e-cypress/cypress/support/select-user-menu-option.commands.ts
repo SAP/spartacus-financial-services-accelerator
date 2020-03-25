@@ -51,8 +51,10 @@ Cypress.Commands.add(
     cy.get('[aria-label="' + menuOption + '"]').invoke('mouseover');
     cy.findAllByText(dropdownItem).click({ multiple: true, force: true });
     if (nextPageUrlPart) {
-      cy.location('pathname', {timeout: 10000})
-      .should('include', nextPageUrlPart);
+      cy.location('pathname', { timeout: 10000 }).should(
+        'include',
+        nextPageUrlPart
+      );
     }
   }
 );
