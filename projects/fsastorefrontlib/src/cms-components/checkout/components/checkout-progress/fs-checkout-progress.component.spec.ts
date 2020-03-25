@@ -18,7 +18,7 @@ import { of, Observable } from 'rxjs';
 
 const mockCheckoutConfig: CheckoutConfig = fsaCheckoutConfig;
 
-const MockRoutesConfig: RoutesConfig = fsaStorefrontRoutesConfig;
+const mockRoutesConfig: RoutesConfig = fsaStorefrontRoutesConfig;
 
 let mockParams = {};
 
@@ -68,7 +68,7 @@ class MockActivatedRoute {
 
 class MockRoutingConfigService {
   getRouteConfig(routeName: string) {
-    return MockRoutesConfig[routeName];
+    return mockRoutesConfig[routeName];
   }
 }
 
