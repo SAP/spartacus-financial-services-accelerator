@@ -1,12 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  AuthGuard,
-  CmsConfig,
-  ConfigModule,
-  I18nModule,
-} from '@spartacus/core';
+import { AuthGuard, CmsConfig, ConfigModule, I18nModule } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
 import { FSUpdateProfileFormComponent } from './update-profile-form/update-profile-form.component';
 import { FSUpdateProfileComponent } from './update-profile.component';
@@ -31,4 +26,4 @@ import { FSUpdateProfileComponent } from './update-profile.component';
   exports: [FSUpdateProfileComponent],
   entryComponents: [FSUpdateProfileComponent],
 })
-export class FSUpdateProfileModule {}
+export class UpdateProfileModule { }

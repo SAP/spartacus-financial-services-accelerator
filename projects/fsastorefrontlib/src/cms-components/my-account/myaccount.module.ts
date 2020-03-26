@@ -1,7 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard, CmsConfig, CmsModule, ConfigModule, I18nModule } from '@spartacus/core';
+import {
+  AuthGuard,
+  CmsConfig,
+  CmsModule,
+  ConfigModule,
+  I18nModule,
+} from '@spartacus/core';
 import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 import { UserRequestStoreModule } from '../../core/user-request/store/user-request-store.module';
 import { ClaimModule } from './claim/claim.module';
@@ -109,4 +115,4 @@ const routes: Routes = [
     RouterModule.forChild(routes),
   ],
 })
-export class MyAccountModule { }
+export class MyAccountModule {}

@@ -2,7 +2,12 @@ import { Pipe, PipeTransform, Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { I18nTestingModule, RoutesConfig, RoutingConfigService, RoutingService } from '@spartacus/core';
+import {
+  I18nTestingModule,
+  RoutesConfig,
+  RoutingConfigService,
+  RoutingService,
+} from '@spartacus/core';
 import { CheckoutConfig } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { storefrontRoutesConfig } from '../../../../cms-structure/routing/default-routing-config';
@@ -37,11 +42,11 @@ let mockCart = {
   name: 'cxUrl',
 })
 class MockUrlPipe implements PipeTransform {
-  transform() { }
+  transform() {}
 }
 
 class MockRoutingService {
-  go() { }
+  go() {}
 
   getRouterState(): Observable<any> {
     return of({
@@ -68,7 +73,7 @@ class MockRoutingConfigService {
 }
 
 class MockCategoryService {
-  setActiveCategory(category: string) { }
+  setActiveCategory(category: string) {}
 
   getActiveCategory(): Observable<string> {
     return of('testCategory');

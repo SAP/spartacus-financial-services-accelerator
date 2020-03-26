@@ -31,7 +31,7 @@ context('Retrieve Quote', () => {
         dropdownItem: 'Quotes & Applications',
         nextPageUrlPart: 'my-financial-applications',
       });
-      cy.get('fsa-quotes').should('have.length', 1);
+      cy.get('cx-fs-quotes').should('have.length', 1);
     });
 
     it('Should retrieve a quote and check if the user is on the correct page', () => {

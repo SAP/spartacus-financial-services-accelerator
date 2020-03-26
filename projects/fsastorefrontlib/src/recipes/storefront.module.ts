@@ -2,7 +2,12 @@ import { ModuleWithProviders, NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { translationChunksConfig, translations } from '@spartacus/assets';
 import { ConfigModule, provideConfig } from '@spartacus/core';
-import { B2cStorefrontModule, defaultCmsContentConfig, PageComponentModule, StorefrontConfig } from '@spartacus/storefront';
+import {
+  B2cStorefrontModule,
+  defaultCmsContentConfig,
+  PageComponentModule,
+  StorefrontConfig,
+} from '@spartacus/storefront';
 import { fsOverrides, fstranslations } from '../assets/translations/index';
 import { fstranslationsDe } from '../assets/translations/index_de';
 import { CheckoutModule } from '../cms-components/checkout/checkout.module';
