@@ -119,7 +119,7 @@ export class ChangeRequestService {
       .unsubscribe();
   }
 
-  getSimulateChangeRequestError(): Observable<boolean> {
+  getChangeRequestError(): Observable<boolean> {
     return this.store.pipe(select(getChangeRequestErrorFactory));
   }
 

@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'fsa-change-car-details-form',
@@ -18,15 +17,9 @@ export class ChangeCarDetailsFormComponent
     ),
     vehicleAnnualMileage: ['', [Validators.required, Validators.max(100000)]],
   });
-  private carDetailsSubscription = new Subscription();
 
   ngOnInit() {
     super.ngOnInit();
-    this.carDetailsSubscription.add(
-      this.changeRequestService
-        .getSimulateChangeRequestError()
-        .subscribe(error => this.onError(error))
-    );
   }
 
   simulateChanges(changeRequest) {
@@ -63,20 +56,6 @@ export class ChangeCarDetailsFormComponent
         },
         configurationSteps: changeRequest.configurationSteps,
       });
-    }
-  }
-
-  protected onError(error: boolean) {
-    if (error) {
-      this.routingService.go({
-        cxRoute: '/',
-      });
-    }
-  }
-
-  ngOnDestroy() {
-    if (this.carDetailsSubscription) {
-      this.carDetailsSubscription.unsubscribe();
     }
   }
 }

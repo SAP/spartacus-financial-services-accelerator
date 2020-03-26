@@ -32,6 +32,11 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
 
   ngOnInit() {
+    this.subscription.add(
+      this.changeRequestService
+        .getChangeRequestError()
+        .subscribe(error => this.onError(error))
+    );
     this.changeRequest$ = this.changeRequestService.getChangeRequest();
     this.subscription.add(
       this.changeRequest$
@@ -113,6 +118,14 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
 
   cancelChangeRequest(requestId: string) {
     this.changeRequestService.cancelChangeRequest(requestId);
+  }
+
+  protected onError(error: boolean) {
+    if (error) {
+      this.routingService.go({
+        cxRoute: '/',
+      });
+    }
   }
 
   ngOnDestroy() {
