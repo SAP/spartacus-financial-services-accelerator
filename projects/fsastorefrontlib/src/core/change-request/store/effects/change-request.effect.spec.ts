@@ -7,8 +7,6 @@ import {
   OCC_USER_ID_CURRENT,
   GlobalMessage,
   GlobalMessageService,
-  RoutingService,
-  GlobalMessageType,
 } from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
@@ -26,7 +24,6 @@ const changeRequestType = 'requestType';
 const changeRequest = {
   requestID: requestID,
 };
-const globalMessage = 'Test Error!';
 
 class MockChangeRequestConnector {
   createChangeRequestForPolicy() {
@@ -44,9 +41,6 @@ class MockChangeRequestConnector {
   }
 }
 
-class MockRoutingService {
-  go = createSpy();
-}
 class GlobalMessageServiceMock {
   remove(): void {}
   add(_message: GlobalMessage): void {}
@@ -56,7 +50,6 @@ describe('Change Request Effects', () => {
   let actions$: Observable<fromActions.ChangeRequestAction>;
   let effects: fromEffects.ChangeRequestEffects;
   let mockChangeRequestConnector: MockChangeRequestConnector;
-  let mockRoutingService: MockRoutingService;
   let globalMessageService: GlobalMessageService;
 
   beforeEach(() => {
@@ -76,10 +69,6 @@ describe('Change Request Effects', () => {
           useValue: mockChangeRequestConnector,
         },
         {
-          provide: RoutingService,
-          useClass: MockRoutingService,
-        },
-        {
           provide: GlobalMessageService,
           useClass: GlobalMessageServiceMock,
         },
@@ -90,7 +79,6 @@ describe('Change Request Effects', () => {
     effects = TestBed.get(fromEffects.ChangeRequestEffects as Type<
       fromEffects.ChangeRequestEffects
     >);
-    mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
     globalMessageService = TestBed.get(GlobalMessageService as Type<
       GlobalMessageService
     >);

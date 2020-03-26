@@ -15,7 +15,6 @@ import { ChangeCarDetailsFormComponent } from './change-car-details-form.compone
 import createSpy = jasmine.createSpy;
 
 const requestId = 'request1';
-const policyId = 'policy1';
 
 const changeRequest = {
   requestId: requestId,
@@ -24,7 +23,7 @@ const changeRequest = {
 class MockChangeRequestService {
   simulateChangeRequest = createSpy();
 
-  getSimulateChangeRequestError() {
+  getChangeRequestError() {
     return of();
   }
   getChangeRequest() {

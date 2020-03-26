@@ -38,6 +38,9 @@ class MockChangeRequestService {
 
   cancelChangeRequest = createSpy();
 
+  getChangeRequestError() {
+    return of();
+  }
   getChangeRequest() {
     return of(mockChangeRequest);
   }
