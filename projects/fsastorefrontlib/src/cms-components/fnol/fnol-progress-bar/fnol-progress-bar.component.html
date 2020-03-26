@@ -5,8 +5,8 @@
         {{ 'fscommon.makeClaim' | cxTranslate }}
       </h2>
       <section *ngIf="claimRequest$ | async as claimRequest">
-        <fsa-progress-bar [steps]="claimRequest.configurationSteps">
-        </fsa-progress-bar>
+        <cx-fs-progress-bar [steps]="claimRequest.configurationSteps">
+        </cx-fs-progress-bar>
       </section>
     </div>
   </div>

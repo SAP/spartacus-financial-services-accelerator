@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
 
 @Component({
-  selector: 'fsa-change-coverage',
+  selector: 'cx-fs-change-coverage',
   templateUrl: './change-coverage.component.html',
 })
 export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent

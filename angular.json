@@ -139,7 +139,7 @@
       "root": "projects/fsastorefrontlib",
       "sourceRoot": "projects/fsastorefrontlib/src",
       "projectType": "library",
-      "prefix": "fsa",
+      "prefix": "cx-fs",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",

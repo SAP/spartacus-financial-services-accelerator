@@ -1,6 +1,6 @@
 import { ContactAgentData } from './../../../occ/occ-models';
 
-export abstract class FSCsTicketAdapter {
+export abstract class CsTicketAdapter {
   /**
    * Abstract method used to create customer support ticket
    *

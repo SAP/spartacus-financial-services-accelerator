@@ -1,8 +1,8 @@
 import { Pipe, PipeTransform, Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule } from '@spartacus/core';
+import { ProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
 import { ProductAssignmentItemComponent } from './product-assignment-item.component';
-import { FSProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
 
 @Pipe({
   name: 'cxTranslate',
@@ -38,7 +38,7 @@ describe('ProductAssignmentItemComponent', () => {
       imports: [I18nTestingModule],
       providers: [
         {
-          provide: FSProductAssignmentService,
+          provide: ProductAssignmentService,
           useValue: mockedProductAssignmentService,
         },
       ],
@@ -55,7 +55,7 @@ describe('ProductAssignmentItemComponent', () => {
       'changeActiveStatus'
     ).and.callThrough();
     mockedProductAssignmentService = TestBed.get(
-      FSProductAssignmentService as Type<FSProductAssignmentService>
+      ProductAssignmentService as Type<ProductAssignmentService>
     );
     fixture.detectChanges();
   });

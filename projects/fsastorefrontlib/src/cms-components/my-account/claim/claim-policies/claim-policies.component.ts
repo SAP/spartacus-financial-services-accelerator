@@ -7,14 +7,16 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService, OccConfig, TranslationService } from '@spartacus/core';
 import { Card } from '@spartacus/storefront';
-import { Subscription, Observable, combineLatest } from 'rxjs';
-import { take, map } from 'rxjs/operators';
-import { ClaimService } from '../../../../core/my-account/facade';
-import { PolicyService } from '../../../../core/my-account/facade';
+import { combineLatest, Observable, Subscription } from 'rxjs';
+import { map, take } from 'rxjs/operators';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
+import {
+  ClaimService,
+  PolicyService,
+} from '../../../../core/my-account/facade';
 
 @Component({
-  selector: 'fsa-claim-policies',
+  selector: 'cx-fs-claim-policies',
   templateUrl: './claim-policies.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

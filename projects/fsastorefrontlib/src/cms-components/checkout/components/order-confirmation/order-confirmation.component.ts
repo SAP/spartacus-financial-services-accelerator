@@ -1,21 +1,19 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  OnInit,
+  Component,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
-
-import { Order, OccConfig } from '@spartacus/core';
-
+import { OccConfig, Order } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { FSCheckoutService } from '../../../../core/checkout/facade/fs-checkout.service';
+import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 
 @Component({
-  selector: 'fsa-order-confirmation',
+  selector: 'cx-fs-order-confirmation',
   templateUrl: './order-confirmation.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FsaOrderConfirmationComponent implements OnInit, OnDestroy {
+export class OrderConfirmationComponent implements OnInit, OnDestroy {
   order$: Observable<Order>;
   orderPlaced = this.checkoutService.orderPlaced;
 

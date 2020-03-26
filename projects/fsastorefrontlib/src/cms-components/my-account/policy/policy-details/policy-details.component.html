@@ -28,7 +28,7 @@
     >
   </div>
   <div class="accordion">
-    <fsa-accordion-item
+    <cx-fs-accordion-item
       [opened]="true"
       [title]="'policy.policySummary' | cxTranslate"
     >
@@ -75,15 +75,15 @@
           </div>
         </li>
       </ul>
-    </fsa-accordion-item>
+    </cx-fs-accordion-item>
     <ng-container *ngIf="policy.insuredObjectList?.insuredObjects?.length > 0">
-      <fsa-accordion-item
+      <cx-fs-accordion-item
         [icon]="
           isChangeAllowed(
             policy.categoryData.allowedFSRequestTypes,
             'FSINSUREDOBJECT_CHANGE'
           )
-            ? 'fsa-icon icon-edit'
+            ? 'fs-icon icon-edit'
             : ''
         "
         [title]="'fscommon.whoOrWhatIsInsured' | cxTranslate"
@@ -180,9 +180,9 @@
             </ul>
           </ng-container>
         </ng-container>
-      </fsa-accordion-item>
+      </cx-fs-accordion-item>
     </ng-container>
-    <fsa-accordion-item [title]="'fscommon.whatsIncluded' | cxTranslate">
+    <cx-fs-accordion-item [title]="'fscommon.whatsIncluded' | cxTranslate">
       <ul
         class="accordion-list container-fluid"
         *ngIf="policy.mainProduct && policy.mainProduct.benefits"
@@ -208,14 +208,14 @@
           </div>
         </li>
       </ul>
-    </fsa-accordion-item>
-    <fsa-accordion-item
+    </cx-fs-accordion-item>
+    <cx-fs-accordion-item
       [icon]="
         isChangeAllowed(
           policy.categoryData?.allowedFSRequestTypes,
           'FSCOVERAGE_CHANGE'
         )
-          ? 'fsa-icon icon-edit'
+          ? 'fs-icon icon-edit'
           : ''
       "
       [title]="'fscommon.optionalExtras' | cxTranslate"
@@ -263,8 +263,8 @@
           </div>
         </li>
       </ul>
-    </fsa-accordion-item>
-    <fsa-accordion-item
+    </cx-fs-accordion-item>
+    <cx-fs-accordion-item
       *ngIf="policy.mainProduct?.investmentInfo"
       [title]="'fscommon.investmentDetails' | cxTranslate"
     >
@@ -291,8 +291,8 @@
           </li>
         </ng-container>
       </ul>
-    </fsa-accordion-item>
-    <fsa-accordion-item [title]="'fscommon.whatDoesItCostMe' | cxTranslate">
+    </cx-fs-accordion-item>
+    <cx-fs-accordion-item [title]="'fscommon.whatDoesItCostMe' | cxTranslate">
       <ul class="accordion-list container-fluid">
         <li class="accordion-list-item row">
           <div class="col-6 col-sm-5 item-label">
@@ -319,8 +319,8 @@
           </div>
         </li>
       </ul>
-    </fsa-accordion-item>
-    <fsa-accordion-item
+    </cx-fs-accordion-item>
+    <cx-fs-accordion-item
       *ngIf="policy.documents"
       [title]="'fscommon.documents' | cxTranslate"
     >
@@ -349,8 +349,8 @@
           </li>
         </ng-container>
       </ul>
-    </fsa-accordion-item>
-    <fsa-accordion-item
+    </cx-fs-accordion-item>
+    <cx-fs-accordion-item
       *ngIf="policy.responsibleAgent"
       [title]="'fscommon.myAgent' | cxTranslate"
     >
@@ -368,6 +368,6 @@
           </div>
         </div>
       </div>
-    </fsa-accordion-item>
+    </cx-fs-accordion-item>
   </div>
 </ng-container>

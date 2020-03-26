@@ -1,14 +1,14 @@
 export function checkComponents() {
-  cy.get('.Section1 fsa-enriched-responsive-banner');
+  cy.get('.Section1 cx-fs-enriched-responsive-banner');
   cy.get('span.enriched-banner-title').should(
     'contain',
     'Apply online and save your valuable time'
   );
-  cy.get('.Section2 fsa-cms-custom-container cx-paragraph p').should(
+  cy.get('.Section2 cx-fs-cms-custom-container cx-paragraph p').should(
     'be.visible'
   );
-  cy.get('fsa-cms-custom-container cx-generic-link cx-media');
-  cy.get('fsa-cms-custom-container .title');
+  cy.get('cx-fs-cms-custom-container cx-generic-link cx-media');
+  cy.get('cx-fs-cms-custom-container .title');
 }
 
 export function checkQuoteButtons() {

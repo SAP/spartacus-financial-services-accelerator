@@ -14,8 +14,8 @@ export function populateFirstStep() {
 }
 
 export function checkLifeComparisonTable() {
-  cy.get('fsa-comparison-table-panel-item').should('have.length', 2);
-  cy.get('fsa-comparison-table-panel-item')
+  cy.get('cx-fs-comparison-table-panel-item').should('have.length', 2);
+  cy.get('cx-fs-comparison-table-panel-item')
     .eq(1)
     .within(() => {
       cy.get('.table-header-title').should(
@@ -24,7 +24,7 @@ export function checkLifeComparisonTable() {
       );
       cy.get('.table-header-value').should('have.text', '€1.21');
     });
-  cy.get('fsa-comparison-table-panel-item')
+  cy.get('cx-fs-comparison-table-panel-item')
     .eq(0)
     .within(() => {
       cy.get('.table-header-title').should('have.text', 'Basic Life Insurance');
@@ -33,7 +33,7 @@ export function checkLifeComparisonTable() {
 }
 
 export function selectBasicLifeProduct() {
-  cy.get('fsa-comparison-table-panel-item')
+  cy.get('cx-fs-comparison-table-panel-item')
     .eq(0)
     .within(() => {
       cy.get('.table-header-title').should('have.text', 'Basic Life Insurance');
@@ -64,7 +64,7 @@ export function checkOptionalProductsAddRenewalOption() {
 }
 
 export function checkMiniCartLifeBasic() {
-  cy.get('fsa-mini-cart').within(() => {
+  cy.get('cx-fs-mini-cart').within(() => {
     cy.get('.short-overview-item').should('have.length', 2);
     cy.get('.short-overview-item')
       .eq(0)
