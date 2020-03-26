@@ -51,7 +51,7 @@ export class OccChangeRequestAdapter implements ChangeRequestAdapter {
       this.getChangeRequestEndpoint(userId) + '/' + requestId + '/simulation';
     return this.http
       .post<any>(url, changeRequest)
-      .pipe(catchError((error: any) => throwError(error)));
+      .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   cancelChangeRequest(userId: string, requestId: string): Observable<any> {

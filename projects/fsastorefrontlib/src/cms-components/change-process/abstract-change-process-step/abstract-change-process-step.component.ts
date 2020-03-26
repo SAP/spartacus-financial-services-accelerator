@@ -29,7 +29,7 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
 
   changeRequest$: Observable<any>;
 
-  private subscription = new Subscription();
+  subscription = new Subscription();
 
   ngOnInit() {
     this.changeRequest$ = this.changeRequestService.getChangeRequest();

@@ -4,11 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { ChangeRequestConnector } from '../../connectors/change-request.connector';
 import * as fromActions from '../actions';
-import {
-  GlobalMessageService,
-  GlobalMessageType,
-  RoutingService,
-} from '@spartacus/core';
+import { GlobalMessageService, GlobalMessageType } from '@spartacus/core';
 import * as fromUserRequestActions from './../../../../core/user-request/store/actions';
 
 @Injectable()
@@ -118,7 +114,6 @@ export class ChangeRequestEffects {
   constructor(
     private actions$: Actions,
     private changeRequestConnector: ChangeRequestConnector,
-    private globalMessageService: GlobalMessageService,
-    protected routingService: RoutingService
+    private globalMessageService: GlobalMessageService
   ) {}
 }
