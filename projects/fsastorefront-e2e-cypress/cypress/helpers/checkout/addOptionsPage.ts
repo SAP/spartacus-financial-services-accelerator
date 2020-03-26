@@ -25,7 +25,6 @@ export function checkAddOptionsPageContent(addOptions: AddOptions) {
             }
             if (item.shouldAdd) {
               cy.get('.secondary-button').click();
-              cy.wait(1000);
             }
           });
       });
