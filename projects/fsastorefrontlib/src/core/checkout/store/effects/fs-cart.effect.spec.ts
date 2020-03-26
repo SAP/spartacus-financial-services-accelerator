@@ -1,20 +1,20 @@
-import {
-  OCC_USER_ID_CURRENT,
-  CartActions,
-  OCC_USER_ID_ANONYMOUS,
-} from '@spartacus/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { FormDataService } from '@fsa/dynamicforms';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
+import {
+  CartActions,
+  OCC_USER_ID_ANONYMOUS,
+  OCC_USER_ID_CURRENT,
+} from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of } from 'rxjs';
+import { FsCartConnector } from '../../../cart';
+import * as fromQuoteActions from '../../../my-account/store/actions/quote.action';
 import * as fromActions from '../actions';
 import * as fromEffects from './fs-cart.effect';
-import { FsCartConnector } from '../../../cart';
-import { FormDataService } from '@fsa/dynamicforms';
-import * as fromQuoteActions from '../../../my-account/store/actions/quote.action';
 
 const cartId = 'cartId';
 const productCode = 'product1';
@@ -123,6 +123,14 @@ describe('FS Checkout Effects', () => {
         pricingData: pricingData,
       });
 
+      const loadCartCompletion = new CartActions.LoadCart({
+        userId: OCC_USER_ID_ANONYMOUS,
+        cartId: cartId,
+        extraData: {
+          active: true,
+        },
+      });
+
       const updateQuoteCompletion = new fromQuoteActions.UpdateQuote({
         userId: OCC_USER_ID_ANONYMOUS,
         cartId: cartId,
@@ -136,9 +144,10 @@ describe('FS Checkout Effects', () => {
       });
 
       actions$ = hot('-a', { a: action });
-      const expected = cold('-(bc)', {
-        b: updateQuoteCompletion,
-        c: addEntrycompletion,
+      const expected = cold('-(bcd)', {
+        b: loadCartCompletion,
+        c: updateQuoteCompletion,
+        d: addEntrycompletion,
       });
       expect(effects.startBundle$).toBeObservable(expected);
     });
@@ -155,6 +164,14 @@ describe('FS Checkout Effects', () => {
         pricingData: pricingData,
       });
 
+      const loadCartCompletion = new CartActions.LoadCart({
+        userId: OCC_USER_ID_ANONYMOUS,
+        cartId: cartId,
+        extraData: {
+          active: true,
+        },
+      });
+
       const addEntrycompletion = new CartActions.CartAddEntrySuccess({
         ...cart.entry,
         userId: OCC_USER_ID_ANONYMOUS,
@@ -162,8 +179,9 @@ describe('FS Checkout Effects', () => {
       });
 
       actions$ = hot('-a', { a: action });
-      const expected = cold('-(b)', {
-        b: addEntrycompletion,
+      const expected = cold('-(bc)', {
+        b: loadCartCompletion,
+        c: addEntrycompletion,
       });
       expect(effects.startBundle$).toBeObservable(expected);
     });
@@ -179,6 +197,14 @@ describe('FS Checkout Effects', () => {
         pricingData: pricingData,
       });
 
+      const loadCartCompletion = new CartActions.LoadCart({
+        userId: OCC_USER_ID_CURRENT,
+        cartId: cartId,
+        extraData: {
+          active: true,
+        },
+      });
+
       const addEntrycompletion = new CartActions.CartAddEntrySuccess({
         ...cart.entry,
         userId: OCC_USER_ID_CURRENT,
@@ -186,8 +212,9 @@ describe('FS Checkout Effects', () => {
       });
 
       actions$ = hot('-a', { a: action });
-      const expected = cold('-(b)', {
-        b: addEntrycompletion,
+      const expected = cold('-(bc)', {
+        b: loadCartCompletion,
+        c: addEntrycompletion,
       });
       expect(effects.startBundle$).toBeObservable(expected);
     });
