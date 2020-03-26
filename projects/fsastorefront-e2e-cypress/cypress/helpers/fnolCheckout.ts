@@ -56,7 +56,6 @@ export function checkFNOLSteps() {
 
 export function populateIncidentInformationStep() {
   cy.get('cx-dynamic-form').within(() => {
-    //TODO: can we make random choose
     cy.get('[name=whatHappened]')
       .select('Collision')
       .then(() => {
@@ -83,6 +82,11 @@ export function populateIncidentInformationStep() {
     cy.get('[name=description]')
       .clear()
       .type('my tesla S was stolen while I was in the shopping center');
+  });
+}
+export function updateIncidentType() {
+  cy.get('cx-dynamic-form').within(() => {
+    cy.get('[name=whatHappened]').select('Glass Damage');
   });
 }
 
@@ -182,14 +186,14 @@ export function startClaimFromHomepage() {
 
 export function checkFnolEntryPage() {
   cy.get('.heading-headline').contains('Make a Claim Online');
-  cy.get('.section-header-heading').contains('Which car has been damaged?');
+  cy.get('h3.section-header-heading').contains('Which car has been damaged?');
   cy.get('fsa-cms-custom-container').within(() => {
     cy.get('.cx-payment-card-inner').should('be.visible');
   });
 }
 
 export function selectPolicyOnEntryPage() {
-  cy.get('.form-check-input').click();
+  cy.get('.cx-card-link').click();
   cy.get('.cx-payment-card')
     .eq(0)
     .within(() => {

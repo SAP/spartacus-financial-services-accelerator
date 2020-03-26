@@ -35,20 +35,25 @@ export function populateAutoInformation() {
 }
 
 export function populateMainDriverInfo() {
-    cy.get('[name=dateOfBirth]').eq('0')
-      .type('1982-01-01');
-    cy.get('[name="driverGender"]').eq('0')
-      .select('Female');
-    cy.get('[name="driverMaritalStatus"]').eq('0')
-      .select('Single');
-    cy.get('[name="driverCategory"]').eq('0')
-      .select('Main');
-    cy.get('[name="driverLicenceDate"]').eq('0')
-      .type('2018-01-01');
+  cy.get('[name=dateOfBirth]')
+    .eq('0')
+    .type('1982-01-01');
+  cy.get('[name="driverGender"]')
+    .eq('0')
+    .select('Female');
+  cy.get('[name="driverMaritalStatus"]')
+    .eq('0')
+    .select('Single');
+  cy.get('[name="driverCategory"]')
+    .eq('0')
+    .select('Main');
+  cy.get('[name="driverLicenceDate"]')
+    .eq('0')
+    .type('2018-01-01');
 }
 
 export function selectNoAdditionalDrivers() {
-    cy.get('[name=noOfDrivers]').select('0');
+  cy.get('[name=noOfDrivers]').select('0');
 }
 
 export function checkPricesOnComparisonTable() {
@@ -91,4 +96,3 @@ export function checkMiniCart() {
     cy.get('.primary-button').click();
   });
 }
-
