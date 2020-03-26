@@ -4,15 +4,17 @@ import { select, Store } from '@ngrx/store';
 import {
   ActiveCartService,
   AuthService,
+  Cart,
   MultiCartSelectors,
   MultiCartService,
   OCC_CART_ID_CURRENT,
   OCC_USER_ID_ANONYMOUS,
+  ProcessesLoaderState,
   StateWithMultiCart,
 } from '@spartacus/core';
-import * as fromFSAction from '../../checkout/store/actions/index';
+import { filter, map } from 'rxjs/operators';
 import { PricingData } from '../../../occ/occ-models/form-pricing.interface';
-import { map } from 'rxjs/operators';
+import * as fromFSAction from '../../checkout/store/actions/index';
 
 @Injectable()
 export class FSCartService extends ActiveCartService {
@@ -27,7 +29,9 @@ export class FSCartService extends ActiveCartService {
       this.fsUserId = userId;
     });
     this.fsActiveCartId$.subscribe(cartId => {
-      this.fsCartId = cartId;
+      if (cartId) {
+        this.fsCartId = cartId;
+      }
     });
   }
   fsUserId: string;
@@ -60,37 +64,58 @@ export class FSCartService extends ActiveCartService {
     );
   }
 
-  createCartAndStartBundle(
+  createCartForProduct(
     productCode: string,
     bundleTemplateId: string,
     quantity: number,
     pricingData: PricingData
   ): void {
-    this.fsMultiCartService
-      .createCart({
-        userId: this.fsUserId,
-        extraData: {
-          active: true,
-        },
-      })
-      .subscribe(cartState => {
-        if (this.isCartCreated(cartState)) {
-          this.multiCartStore.dispatch(
-            new fromFSAction.StartBundle({
-              userId: this.fsUserId,
-              cartId: this.fsCartId,
-              productCode: productCode,
-              bundleTemplateId: bundleTemplateId,
-              quantity: quantity,
-              pricingData: pricingData,
-            })
-          );
-        }
-      });
+    if (!this.fsCartId || this.fsCartId === OCC_CART_ID_CURRENT) {
+      this.fsMultiCartService
+        .createCart({
+          userId: this.fsUserId,
+          extraData: {
+            active: true,
+          },
+        })
+        .pipe(
+          filter(cartState => this.isCartCreated(cartState)),
+          map(_ => {
+            this.startBundleForCart(
+              productCode,
+              bundleTemplateId,
+              quantity,
+              pricingData
+            );
+          })
+        )
+        .subscribe();
+    } else {
+      this.startBundleForCart(
+        productCode,
+        bundleTemplateId,
+        quantity,
+        pricingData
+      );
+    }
   }
 
-  private isCartCreated(cartState) {
-    return cartState && !cartState.loading && cartState.success;
+  startBundleForCart(
+    productCode: string,
+    bundleTemplateId: string,
+    quantity: number,
+    pricingData: PricingData
+  ) {
+    this.multiCartStore.dispatch(
+      new fromFSAction.StartBundle({
+        userId: this.fsUserId,
+        cartId: this.fsCartId,
+        productCode: productCode,
+        bundleTemplateId: bundleTemplateId,
+        quantity: quantity,
+        pricingData: pricingData,
+      })
+    );
   }
 
   loadCart(cartId: string): void {
@@ -103,5 +128,9 @@ export class FSCartService extends ActiveCartService {
         },
       });
     }
+  }
+
+  private isCartCreated(cartState: ProcessesLoaderState<Cart>) {
+    return cartState && cartState.success && !cartState.loading;
   }
 }

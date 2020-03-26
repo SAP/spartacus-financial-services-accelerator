@@ -20,6 +20,7 @@ import { ProductModule } from './product/product.module';
 import { ChangeProcessModule } from './change-process/change-process.module';
 import { ProductAssignmentModule } from './product-assignment/product-assignment.module';
 import { FSProgressBarModule } from './progress-bar/progress-bar.module';
+import { NotFoundModule } from './not-found/not-found.module';
 
 @NgModule({
   imports: [
@@ -38,6 +39,7 @@ import { FSProgressBarModule } from './progress-bar/progress-bar.module';
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,
     ProductAssignmentModule,
+    NotFoundModule,
   ],
   exports: [
     AgentModule,
@@ -54,6 +56,7 @@ import { FSProgressBarModule } from './progress-bar/progress-bar.module';
     CategoryFeatureCarouselModule,
     ProductAssignmentModule,
     FSProgressBarModule,
+    NotFoundModule,
   ],
   providers: [reducerProvider],
 })

@@ -1,24 +1,23 @@
-import { reducerProvider } from './../../product-assignment/store/reducers/index';
-import { TestBed, inject } from '@angular/core/testing';
+import { Type } from '@angular/core';
+import { inject, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import { Store, StoreModule } from '@ngrx/store';
-import { FSCartService } from './fs-cart.service';
+import * as fromReducer from '@spartacus/core';
 import {
-  OCC_USER_ID_CURRENT,
-  UserToken,
-  StateWithMultiCart,
-  Cart,
   AuthService,
+  Cart,
   MultiCartService,
-  ProcessesLoaderState,
   OCC_CART_ID_CURRENT,
   OCC_USER_ID_ANONYMOUS,
+  OCC_USER_ID_CURRENT,
+  ProcessesLoaderState,
+  StateWithMultiCart,
+  UserToken,
 } from '@spartacus/core';
-import { Observable, ReplaySubject, of, BehaviorSubject } from 'rxjs';
-
-import { ActivatedRoute } from '@angular/router';
-import { Type } from '@angular/core';
-import * as fromReducer from '@spartacus/core';
+import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 import * as fromFSAction from '../../checkout/store/actions/index';
+import { reducerProvider } from './../../product-assignment/store/reducers/index';
+import { FSCartService } from './fs-cart.service';
 
 const productCode = 'PRODUCT_CODE';
 const bundleTemplateId = 'BUNDLE_ID';
@@ -112,7 +111,7 @@ describe('FSCartServiceTest', () => {
       return cart$;
     });
 
-    service.createCartAndStartBundle(
+    service.createCartForProduct(
       productCode,
       bundleTemplateId,
       quantity,
@@ -146,7 +145,7 @@ describe('FSCartServiceTest', () => {
       return cart$;
     });
 
-    service.createCartAndStartBundle(
+    service.createCartForProduct(
       productCode,
       bundleTemplateId,
       quantity,

@@ -42,11 +42,19 @@ Cypress.Commands.add(
   ({
     menuOption,
     dropdownItem,
+    nextPageUrlPart,
   }: {
     menuOption: string;
     dropdownItem: string;
+    nextPageUrlPart: string;
   }) => {
     cy.get('[aria-label="' + menuOption + '"]').invoke('mouseover');
     cy.findAllByText(dropdownItem).click({ multiple: true, force: true });
+    if (nextPageUrlPart) {
+      cy.location('pathname', { timeout: 10000 }).should(
+        'include',
+        nextPageUrlPart
+      );
+    }
   }
 );
