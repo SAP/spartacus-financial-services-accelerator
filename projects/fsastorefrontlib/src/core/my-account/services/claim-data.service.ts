@@ -6,6 +6,7 @@ import * as fromReducer from '../store/reducers';
 import * as fromClaimStore from '../store/selectors';
 import { filter } from 'rxjs/operators';
 import { OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
+import { StateWithMyAccount } from '../store/my-account-state';
 
 export interface SelectedPolicy {
   userId: string;
@@ -20,7 +21,7 @@ export class ClaimDataService {
   private _claimData: Claim;
 
   constructor(
-    protected store: Store<fromReducer.UserState>,
+    protected store: Store<StateWithMyAccount>,
     protected auth: AuthService
   ) {
     this.auth

@@ -81,7 +81,6 @@ export function checkQuoteReviewAccordions(category) {
 }
 
 export function placeOrderOnFinalReview() {
-  cy.wait(5000);
   cy.get('fsa-final-review').within(() => {
     cy.get('.form-check-input').click();
     cy.get('.primary-button').click();

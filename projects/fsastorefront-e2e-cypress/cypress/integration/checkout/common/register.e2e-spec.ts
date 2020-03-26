@@ -12,9 +12,7 @@ context('Register', () => {
 
   it('should be able to register user with phone number', () => {
     register.registerUser(registrationUser);
-    cy.wait(3000);
     register.login(registrationUser.email, registrationUser.password);
-    cy.wait(1500);
     register.validatePhoneNumber(registrationUser.phoneNumber);
     register.logout();
   });
@@ -22,8 +20,6 @@ context('Register', () => {
   it('should be able to register user without phone number', () => {
     cy.window().then(win => win.sessionStorage.clear());
     register.registerUser(registrationUserWithoutPhone);
-    cy.wait(3000);
-    cy.wait(1500);
     register.login(
       registrationUserWithoutPhone.email,
       registrationUserWithoutPhone.password

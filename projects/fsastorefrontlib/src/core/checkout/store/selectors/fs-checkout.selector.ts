@@ -1,27 +1,15 @@
-import {
-  MemoizedSelector,
-  createSelector,
-  createFeatureSelector,
-} from '@ngrx/store';
+import { MemoizedSelector, createSelector } from '@ngrx/store';
 
 import {
   FSStateWithCheckout,
   FSCheckoutState,
   FSCheckoutStepsState,
 } from '../fs-checkout-state';
-import {
-  CHECKOUT_FEATURE,
-  LoaderState,
-  StateLoaderSelectors,
-} from '@spartacus/core';
+import { LoaderState, StateLoaderSelectors } from '@spartacus/core';
+import { getCheckoutState } from './feature.selector';
 
 const getIdentificationTypeSelector = (state: FSCheckoutStepsState) =>
   state.identificationType;
-
-export const getCheckoutState: MemoizedSelector<
-  FSStateWithCheckout,
-  FSCheckoutState
-> = createFeatureSelector<FSCheckoutState>(CHECKOUT_FEATURE);
 
 export const getCheckoutStepsState: MemoizedSelector<
   FSStateWithCheckout,

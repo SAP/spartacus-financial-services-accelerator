@@ -1,38 +1,49 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
-import * as fromFeature from '../reducers';
 import * as fromProductAssignment from './../reducers/product-assignment.reducer';
+import {
+  ProductAssignmentsState,
+  ProductAssignmentState,
+  StateWithProductAssignment,
+} from '../product-assignments-state';
+import * as fromFeature from './feature.selector';
 
 export const getProductAssignmentState: MemoizedSelector<
-  any,
-  fromProductAssignment.ProductAssignmentState
+  StateWithProductAssignment,
+  ProductAssignmentState
 > = createSelector(
   fromFeature.getProductAssignmentState,
-  (productAssignmentState: fromFeature.ProductAssignmentState) =>
+  (productAssignmentState: ProductAssignmentsState) =>
     productAssignmentState.productAssignments
 );
 
 export const getProductAssignmentContent: MemoizedSelector<
-  any,
+  StateWithProductAssignment,
   any
 > = createSelector(
   getProductAssignmentState,
   fromProductAssignment.getProductAssignmentContent
 );
 
-export const getProductAssignments: MemoizedSelector<any, any> = createSelector(
+export const getProductAssignments: MemoizedSelector<
+  StateWithProductAssignment,
+  any
+> = createSelector(
   getProductAssignmentState,
   fromProductAssignment.getProductAssignments
 );
 
 export const getPotentialProductAssignments: MemoizedSelector<
-  any,
+  StateWithProductAssignment,
   any
 > = createSelector(
   getProductAssignmentState,
   fromProductAssignment.getPotentialProductAssignments
 );
 
-export const getLoaded: MemoizedSelector<any, any> = createSelector(
+export const getLoaded: MemoizedSelector<
+  StateWithProductAssignment,
+  any
+> = createSelector(
   getProductAssignmentState,
   fromProductAssignment.getLoaded
 );

@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import * as fromActions from '../actions';
 import { UserRequestConnector } from '../../connectors/user-request.connector';
+import { StepStatus } from '../../../../occ/occ-models';
 
 @Injectable()
 export class UserRequestEffects {
@@ -22,7 +23,8 @@ export class UserRequestEffects {
               configSteps &&
               configSteps.length > 0 &&
               sequenceNumber === configSteps.length &&
-              configSteps[configSteps.length - 1].status === 'COMPLETED'
+              configSteps[configSteps.length - 1].status ===
+                StepStatus.COMPLETED
             ) {
               return new fromActions.SubmitUserRequest({
                 userId: payload.userId,

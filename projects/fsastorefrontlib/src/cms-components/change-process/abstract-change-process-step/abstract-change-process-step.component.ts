@@ -10,7 +10,7 @@ import { Observable, Subscription } from 'rxjs';
 import { map, take, filter } from 'rxjs/operators';
 import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
 import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
-import { FSStepData } from '../../../occ/occ-models';
+import { FSStepData, StepStatus } from '../../../occ/occ-models';
 import * as fromUserRequestAction from './../../../core/user-request/store/actions';
 
 @Component({ template: '' })
@@ -46,7 +46,7 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
               );
             } else if (
               changeRequest &&
-              changeRequest.requestStatus === 'CANCELED'
+              changeRequest.requestStatus === StepStatus.CANCELED
             ) {
               const policyNumber = changeRequest.insurancePolicy.policyNumber;
               const contractNumber =

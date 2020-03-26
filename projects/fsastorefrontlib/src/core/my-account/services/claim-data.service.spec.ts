@@ -6,9 +6,9 @@ import * as fromReducers from '../store/reducers';
 import { UserToken, AuthService } from '@spartacus/core';
 import { Claim } from '../../../occ/occ-models';
 import { ClaimDataService } from './claim-data.service';
-import * as fromReducer from '../store/reducers';
 import * as fromAction from '../store/actions';
 import { OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
+import { StateWithMyAccount } from '../store/my-account-state';
 
 const userToken$ = new ReplaySubject<UserToken | any>();
 
@@ -32,7 +32,7 @@ const testClaim: Claim = {
 
 describe('ClaimDataService', () => {
   let service: ClaimDataService;
-  let store: Store<fromReducer.UserState>;
+  let store: Store<StateWithMyAccount>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -49,7 +49,7 @@ describe('ClaimDataService', () => {
       ],
     });
     service = TestBed.get(ClaimDataService as Type<ClaimDataService>);
-    store = TestBed.get(Store as Type<Store<fromReducers.UserState>>);
+    store = TestBed.get(Store as Type<Store<StateWithMyAccount>>);
   });
 
   describe('userId', () => {

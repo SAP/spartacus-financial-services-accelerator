@@ -19,8 +19,9 @@ context('Life Insurance Checkout', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Life',
+        nextPageUrlPart: 'Insurance',
       });
-      cy.wait(1000);
+
       cy.get('.enriched-banner-styled-text')
         .eq(0)
         .contains(' Get a Quote')

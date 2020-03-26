@@ -1,9 +1,5 @@
 import * as fromAction from '../actions';
-
-export interface PolicyState {
-  data: {};
-  loaded: boolean;
-}
+import { PolicyState } from '../my-account-state';
 
 export const initialState: PolicyState = {
   data: {},

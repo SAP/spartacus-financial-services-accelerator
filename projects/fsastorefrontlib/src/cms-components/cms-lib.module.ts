@@ -12,7 +12,7 @@ import {
 } from '../core/my-account/store/reducers/index';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { UserRequestModule } from './fnol/fnol.module';
+import { FnolModule } from './fnol/fnol.module';
 import { CategoryFeatureModule } from './category/category-feature/category-feature.module';
 import { CategoryFeatureCarouselModule } from './category/category-feature-carousel/category-feature-carousel.module';
 import { FSRegisterModule } from './user/register/fs-register.module';
@@ -20,6 +20,7 @@ import { ProductModule } from './product/product.module';
 import { ChangeProcessModule } from './change-process/change-process.module';
 import { ProductAssignmentModule } from './product-assignment/product-assignment.module';
 import { FSProgressBarModule } from './progress-bar/progress-bar.module';
+import { NotFoundModule } from './not-found/not-found.module';
 
 @NgModule({
   imports: [
@@ -31,13 +32,14 @@ import { FSProgressBarModule } from './progress-bar/progress-bar.module';
     CustomContainerModule,
     MyAccountModule,
     FSRegisterModule,
-    UserRequestModule,
+    FnolModule,
     ChangeProcessModule,
     StoreModule.forFeature('assets', reducerToken),
     EffectsModule.forFeature(effects),
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,
     ProductAssignmentModule,
+    NotFoundModule,
   ],
   exports: [
     AgentModule,
@@ -48,12 +50,13 @@ import { FSProgressBarModule } from './progress-bar/progress-bar.module';
     CustomContainerModule,
     MyAccountModule,
     FSRegisterModule,
-    UserRequestModule,
+    FnolModule,
     ChangeProcessModule,
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,
     ProductAssignmentModule,
     FSProgressBarModule,
+    NotFoundModule,
   ],
   providers: [reducerProvider],
 })

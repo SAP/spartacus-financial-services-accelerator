@@ -7,6 +7,7 @@ import { PolicyService } from './policy.service';
 import * as fromAction from '../store/actions';
 import { OCC_USER_ID_CURRENT, AuthService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
+import { StateWithMyAccount } from '../store/my-account-state';
 
 const userId = OCC_USER_ID_CURRENT;
 const policyId = 'PL00001';
@@ -26,7 +27,7 @@ class MockAuthService {
 
 describe('PolicyServiceTest', () => {
   let service: PolicyService;
-  let store: Store<fromReducer.UserState>;
+  let store: Store<StateWithMyAccount>;
   let authService: MockAuthService;
 
   beforeEach(() => {
@@ -44,7 +45,7 @@ describe('PolicyServiceTest', () => {
     });
 
     service = TestBed.get(PolicyService as Type<PolicyService>);
-    store = TestBed.get(Store as Type<Store<fromReducer.UserState>>);
+    store = TestBed.get(Store as Type<Store<StateWithMyAccount>>);
 
     spyOn(store, 'dispatch').and.callThrough();
   });
