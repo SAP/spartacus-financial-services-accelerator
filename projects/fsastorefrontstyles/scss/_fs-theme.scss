@@ -1,6 +1,6 @@
 //point to the theme variables
 //DO NOT load anything else here!
-@import 'theme/fsa/variables';
+@import 'theme/fs/variables';
 @import './components/index';
 
 // the $skipComponentStyles is used as a list of component styles that can be ignore
@@ -9,13 +9,13 @@
 $fsSkipComponentStyles: () !default;
 
 // major version standard
-$fsSelectors: fsa-policy-details, fsa-premium-calendar, fsa-checkout-progress,
-  fsa-final-review, fsa-mini-cart, fsa-quote-review,
-  fsa-enriched-responsive-banner, fsa-agent-root, fsa-inbox-messages, fsa-inbox,
-  fsa-product-feature, fsa-form-component, fsa-category-feature, fsa-register,
-  fsa-update-profile-form, fsa-product-assignments,
-  fsa-potential-product-assignments, cx-login-form, cx-update-email,
-  cx-update-password, fsa-active-products !default;
+$fsSelectors: cx-fs-policy-details, cx-fs-premium-calendar,
+  cx-fs-checkout-progress, cx-fs-final-review, cx-fs-mini-cart,
+  cx-fs-quote-review, cx-fs-enriched-responsive-banner, cx-fs-agent-root,
+  cx-fs-inbox-messages, cx-fs-inbox, cx-form-component, cx-fs-product-feature,
+  cx-fs-category-feature, cx-fs-register, cx-fs-update-profile-form,
+  cx-fs-product-assignments, cx-fs-potential-product-assignments, cx-login-form,
+  cx-update-email, cx-update-password, cx-fs-active-products !default;
 // future theme's, can be introduced during minors
 $theme: '' !default;
 

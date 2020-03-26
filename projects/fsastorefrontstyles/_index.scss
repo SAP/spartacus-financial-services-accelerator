@@ -2,12 +2,12 @@
 @import '~@spartacus/styles/index';
 //FSA styling
 @import 'scss/root.scss';
-@import 'scss/mixins-fsa';
+@import 'scss/fs-mixins';
 @import 'scss/overrides';
-@import 'scss/fsa-base';
+@import 'scss/base';
 
 @import 'scss/theme';
 @import 'scss/fonts';
 
 // components
-@import './scss/fsa-theme';
+@import './scss/fs-theme';
