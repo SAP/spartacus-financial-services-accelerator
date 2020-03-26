@@ -71,7 +71,6 @@ export class FSCartService extends ActiveCartService {
     pricingData: PricingData
   ): void {
     if (!this.fsCartId || this.fsCartId === OCC_CART_ID_CURRENT) {
-      console.log(this.fsCartId);
       this.fsMultiCartService
         .createCart({
           userId: this.fsUserId,
