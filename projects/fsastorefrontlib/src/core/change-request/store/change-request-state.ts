@@ -2,7 +2,7 @@ import { LoaderState } from '@spartacus/core';
 
 export const CHANGE_REQUEST_FEATURE = 'changeRequests';
 
-export const CHANGE_REQUEST_DATA = 'Change Request Data';
+export const CHANGE_REQUEST_DATA = '[Change Request] Change Request Data';
 
 export interface StateWithChangeRequest {
   [CHANGE_REQUEST_FEATURE]: ChangeRequestsState;

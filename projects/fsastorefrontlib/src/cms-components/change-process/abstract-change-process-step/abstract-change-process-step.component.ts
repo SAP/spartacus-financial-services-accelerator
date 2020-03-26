@@ -38,7 +38,6 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
         .pipe(
           map(changeRequest => {
             this.populateSteps(changeRequest);
-
             if (this.isSimulated(changeRequest)) {
               this.userRequestNavigationService.continue(
                 this.configurationSteps,

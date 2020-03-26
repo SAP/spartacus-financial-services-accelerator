@@ -21,8 +21,9 @@ export const getChangeRequest: MemoizedSelector<
   any
 > = createSelector(
   getChangeRequestState,
-  (state: LoaderState<ChangeRequestState>) =>
-    StateLoaderSelectors.loaderValueSelector(state)
+  (state: LoaderState<ChangeRequestState>) => {
+    return StateLoaderSelectors.loaderValueSelector(state).content;
+  }
 );
 
 export const getLoaded: MemoizedSelector<
@@ -31,16 +32,14 @@ export const getLoaded: MemoizedSelector<
 > = createSelector(
   getChangeRequestState,
   (state: LoaderState<ChangeRequestState>) =>
-    StateLoaderSelectors.loaderLoadingSelector(state)
+    StateLoaderSelectors.loaderValueSelector(state).loaded
 );
 
-export function getChangeRequestErrorFactory(): MemoizedSelector<
+export const getChangeRequestErrorFactory: MemoizedSelector<
   StateWithChangeRequest,
   boolean
-> {
-  return createSelector(
-    getChangeRequestState,
-    (loaderState: LoaderState<ChangeRequestState>) =>
-      StateLoaderSelectors.loaderErrorSelector(loaderState)
-  );
-}
+> = createSelector(
+  getChangeRequestState,
+  (loaderState: LoaderState<ChangeRequestState>) =>
+    StateLoaderSelectors.loaderErrorSelector(loaderState)
+);

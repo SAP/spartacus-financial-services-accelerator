@@ -11,6 +11,9 @@ export function reducer(
   action: fromAction.ChangeRequestAction
 ): ChangeRequestState {
   switch (action.type) {
+    case fromAction.LOAD_CHANGE_REQUEST:
+    case fromAction.SIMULATE_CHANGE_REQUEST:
+    case fromAction.CANCEL_CHANGE_REQUEST:
     case fromAction.CREATE_CHANGE_REQUEST: {
       return {
         ...state,

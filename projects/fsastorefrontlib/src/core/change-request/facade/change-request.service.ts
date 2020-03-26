@@ -61,7 +61,7 @@ export class ChangeRequestService {
   }
 
   getChangeRequest(): Observable<any> {
-    return this.store.select(fromSelector.getChangeRequest).pipe(
+    return this.store.select(fromSelector.getLoaded).pipe(
       filter(loaded => loaded),
       take(1),
       switchMap(_ => {
@@ -120,7 +120,7 @@ export class ChangeRequestService {
   }
 
   getSimulateChangeRequestError(): Observable<boolean> {
-    return this.store.pipe(select(getChangeRequestErrorFactory()));
+    return this.store.pipe(select(getChangeRequestErrorFactory));
   }
 
   updateChangeRequest(changeRequest, stepIndex) {
