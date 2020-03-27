@@ -1,0 +1,27 @@
+%fsa-agent-search-box {
+    --cx-flex-basis: 50%;
+    flex: 1 1 var(--cx-flex-basis, 50%);
+    .search-wrapper{
+        border: 1px solid var(--cx-color-3);
+        display: flex;
+        align-content: stretch;
+        margin: 0;
+        padding: 6px 6px 6px 10px;
+    }
+    input {
+        border: none;
+        outline: none;
+        display: block;
+        flex-basis: 100%;
+        height: 30px;
+        color: currentColor;
+        z-index: 20;
+    }
+    .search {
+        font-size: var(--cx-h4-font-size);
+        color: currentColor;
+        flex-basis: 48px;
+        text-align: center;
+        cursor: pointer;
+    }
+}

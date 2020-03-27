@@ -1,0 +1,16 @@
+%fsa-agent-search-list {
+    .agent-list {
+        border: 1px solid var(--cx-color-3);
+        max-height: 700px;
+        overflow-y: auto;
+    }
+    .cx-product-image-container img {
+        border-radius: 50%;
+    }
+    .counter {
+        left: 6px;
+    }
+    cx-pagination {
+        display: inline-flex;
+    }
+}
