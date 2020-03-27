@@ -1,4 +1,8 @@
-import { OCC_USER_ID_CURRENT } from '@spartacus/core';
+import {
+  OCC_USER_ID_CURRENT,
+  GlobalMessageService,
+  GlobalMessage,
+} from '@spartacus/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
@@ -59,6 +63,10 @@ class MockOccUserRequestAdapter {
     return of(userRequest);
   }
 }
+class GlobalMessageServiceMock {
+  remove(): void {}
+  add(_message: GlobalMessage): void {}
+}
 
 class MockActions {}
 
@@ -66,6 +74,7 @@ describe('User Request Effects', () => {
   let actions$: Observable<fromActions.UserRequestActions>;
   let effects: fromEffects.UserRequestEffects;
   let mockOccUserRequestAdapter: MockOccUserRequestAdapter;
+  let globalMessageService: GlobalMessageService;
 
   beforeEach(() => {
     mockOccUserRequestAdapter = new MockOccUserRequestAdapter();
@@ -81,12 +90,19 @@ describe('User Request Effects', () => {
           provide: Actions,
           useClass: MockActions,
         },
+        {
+          provide: GlobalMessageService,
+          useClass: GlobalMessageServiceMock,
+        },
         fromEffects.UserRequestEffects,
         provideMockActions(() => actions$),
       ],
     });
     effects = TestBed.get(fromEffects.UserRequestEffects as Type<
       fromEffects.UserRequestEffects
+    >);
+    globalMessageService = TestBed.get(GlobalMessageService as Type<
+      GlobalMessageService
     >);
   });
 
@@ -154,7 +170,9 @@ describe('User Request Effects', () => {
       const action = new fromActions.UpdateUserRequest({
         userId: OCC_USER_ID_CURRENT,
       });
-      const completion = new fromActions.UpdateUserRequestFail('Error');
+      const completion = new fromActions.UpdateUserRequestFail(
+        JSON.stringify('Error')
+      );
       actions$ = hot('-a', { a: action });
       const expected = cold('-b', { b: completion });
       expect(effects.updateUserRequest$).toBeObservable(expected);

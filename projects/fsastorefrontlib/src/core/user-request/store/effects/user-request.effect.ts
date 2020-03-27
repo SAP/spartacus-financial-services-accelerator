@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
+import { GlobalMessageService, GlobalMessageType } from '@spartacus/core';
 import * as fromActions from '../actions';
 import { UserRequestConnector } from '../../connectors/user-request.connector';
 import { StepStatus } from '../../../../occ/occ-models';
@@ -34,7 +35,12 @@ export class UserRequestEffects {
               return new fromActions.UpdateUserRequestSuccess(userRequest);
             }
           }),
-          catchError(error => of(new fromActions.UpdateUserRequestFail(error)))
+          catchError(error => {
+            this.showGlobalMessage('policy.changeError');
+            return of(
+              new fromActions.UpdateUserRequestFail(JSON.stringify(error))
+            );
+          })
         );
     })
   );
@@ -60,8 +66,17 @@ export class UserRequestEffects {
     })
   );
 
+  private showGlobalMessage(text: string) {
+    this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+    this.globalMessageService.add(
+      { key: text },
+      GlobalMessageType.MSG_TYPE_ERROR
+    );
+  }
+
   constructor(
     private actions$: Actions,
-    private userRequestConnector: UserRequestConnector
+    private userRequestConnector: UserRequestConnector,
+    private globalMessageService: GlobalMessageService
   ) {}
 }
