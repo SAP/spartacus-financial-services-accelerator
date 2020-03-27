@@ -41,7 +41,7 @@ describe('Change Request Reducer', () => {
 
   describe('SIMULATE_CHANGE_REQUEST_SUCESS', () => {
     it('should simulate change request', () => {
-      const action = new fromAction.SimulateChangeRequestSucess(
+      const action = new fromAction.SimulateChangeRequestSuccess(
         mockedChangeRequest
       );
       const state = fromReducer.reducer(initialState, action);

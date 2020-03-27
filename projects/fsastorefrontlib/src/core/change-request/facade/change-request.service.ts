@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Store, ActionsSubject } from '@ngrx/store';
+
+import { Store, select, ActionsSubject } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
@@ -9,6 +10,7 @@ import * as fromSelector from '../store/selectors';
 import { StateWithChangeRequest } from '../store/change-request-state';
 import * as fromUserRequestAction from './../../../core/user-request/store/actions';
 import { StepStatus } from '../../../occ/occ-models';
+import { getChangeRequestErrorFactory } from '../store/selectors';
 
 @Injectable()
 export class ChangeRequestService {
@@ -24,7 +26,9 @@ export class ChangeRequestService {
       this.authService.getUserToken(),
     ])
       .subscribe(([changeRequest, userToken]) => {
-        this.requestId = changeRequest.requestId;
+        if (changeRequest) {
+          this.requestId = changeRequest.requestId;
+        }
         if (
           !this.isCreated(changeRequest) &&
           this.isLoggedIn(userToken.userId)
@@ -113,6 +117,10 @@ export class ChangeRequestService {
         );
       })
       .unsubscribe();
+  }
+
+  getChangeRequestError(): Observable<boolean> {
+    return this.store.pipe(select(getChangeRequestErrorFactory));
   }
 
   updateChangeRequest(changeRequest, stepIndex) {

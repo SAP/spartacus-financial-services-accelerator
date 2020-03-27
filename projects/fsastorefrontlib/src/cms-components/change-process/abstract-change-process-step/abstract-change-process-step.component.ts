@@ -29,16 +29,20 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
 
   changeRequest$: Observable<any>;
 
-  private subscription = new Subscription();
+  subscription = new Subscription();
 
   ngOnInit() {
+    this.subscription.add(
+      this.changeRequestService
+        .getChangeRequestError()
+        .subscribe(error => this.onError(error))
+    );
     this.changeRequest$ = this.changeRequestService.getChangeRequest();
     this.subscription.add(
       this.changeRequest$
         .pipe(
           map(changeRequest => {
             this.populateSteps(changeRequest);
-
             if (this.isSimulated(changeRequest)) {
               this.userRequestNavigationService.continue(
                 this.configurationSteps,
@@ -53,10 +57,13 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
                 changeRequest.insurancePolicy.contractNumber;
               this.routingService.go({
                 cxRoute: 'policyDetails',
-                params: { policyId: policyNumber, contractId: contractNumber },
+                params: {
+                  policyId: policyNumber,
+                  contractId: contractNumber,
+                },
               });
               this.globalMessageService.add(
-                'Your policy change request has been canceled',
+                { key: 'policy.policyCanceled' },
                 GlobalMessageType.MSG_TYPE_INFO
               );
             }
@@ -111,6 +118,14 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
 
   cancelChangeRequest(requestId: string) {
     this.changeRequestService.cancelChangeRequest(requestId);
+  }
+
+  protected onError(error: boolean) {
+    if (error) {
+      this.routingService.go({
+        cxRoute: '/',
+      });
+    }
   }
 
   ngOnDestroy() {

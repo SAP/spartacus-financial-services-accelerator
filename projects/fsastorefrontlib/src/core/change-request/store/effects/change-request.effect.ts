@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import { ChangeRequestConnector } from '../../connectors/change-request.connector';
 import * as fromActions from '../actions';
+import { GlobalMessageService, GlobalMessageType } from '@spartacus/core';
 import * as fromUserRequestActions from './../../../../core/user-request/store/actions';
 
 @Injectable()
@@ -24,9 +25,12 @@ export class ChangeRequestEffects {
           map((changeRequest: any) => {
             return new fromActions.CreateChangeRequestSuccess(changeRequest);
           }),
-          catchError(error =>
-            of(new fromActions.CreateChangeRequestFail(JSON.stringify(error)))
-          )
+          catchError(error => {
+            this.showGlobalMessage('policy.changeError');
+            return of(
+              new fromActions.CreateChangeRequestFail(JSON.stringify(error))
+            );
+          })
         );
     })
   );
@@ -63,7 +67,7 @@ export class ChangeRequestEffects {
         .pipe(
           switchMap((changeRequest: any) => {
             return [
-              new fromActions.SimulateChangeRequestSucess(changeRequest),
+              new fromActions.SimulateChangeRequestSuccess(changeRequest),
               new fromUserRequestActions.UpdateUserRequest({
                 userId: payload.userId,
                 requestId: payload.requestId,
@@ -71,9 +75,12 @@ export class ChangeRequestEffects {
               }),
             ];
           }),
-          catchError(error =>
-            of(new fromActions.SimulateChangeRequestFail(JSON.stringify(error)))
-          )
+          catchError(error => {
+            this.showGlobalMessage('policy.changeError');
+            return of(
+              new fromActions.SimulateChangeRequestFail(JSON.stringify(error))
+            );
+          })
         );
     })
   );
@@ -96,8 +103,17 @@ export class ChangeRequestEffects {
     })
   );
 
+  private showGlobalMessage(text: string) {
+    this.globalMessageService.remove(GlobalMessageType.MSG_TYPE_ERROR);
+    this.globalMessageService.add(
+      { key: text },
+      GlobalMessageType.MSG_TYPE_ERROR
+    );
+  }
+
   constructor(
     private actions$: Actions,
-    private changeRequestConnector: ChangeRequestConnector
+    private changeRequestConnector: ChangeRequestConnector,
+    private globalMessageService: GlobalMessageService
   ) {}
 }
