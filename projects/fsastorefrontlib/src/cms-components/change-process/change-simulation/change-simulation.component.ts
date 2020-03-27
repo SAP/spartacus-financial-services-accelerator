@@ -6,7 +6,7 @@ import {
 import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
 
 @Component({
-  selector: 'fsa-change-simulation',
+  selector: 'cx-fs-change-simulation',
   templateUrl: './change-simulation.component.html',
 })
 export class ChangeSimulationComponent

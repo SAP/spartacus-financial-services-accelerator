@@ -12,14 +12,14 @@ import {
   UrlModule,
 } from '@spartacus/core';
 import { PageComponentModule, SpinnerModule } from '@spartacus/storefront';
+import { FSCartService } from '../../core/cart/facade';
 import { PricingService } from '../../core/product-pricing/facade';
-import { FSProductService } from '../../core/product-pricing/facade/fs-product.service';
-import { ComparisonTableContainerComponent } from './comparison-table-container/comparison-table-container.component';
+import { FSProductService } from '../../core/product-pricing/facade/product.service';
 import { ComparisonTablePanelItemComponent } from './comaprison-table-panel-item/comparison-table-panel-item.component';
+import { ComparisonTableContainerComponent } from './comparison-table-container/comparison-table-container.component';
 import { ComparisonTablePanelComponent } from './comparison-table-panel/comparison-table-panel.component';
 import { ComparisonTableTabComponent } from './comparison-table-tab/comparison-table-tab.component';
 import { ComparisonTableService } from './comparison-table.service';
-import { FSCartService } from '../../core/cart/facade';
 
 @NgModule({
   imports: [

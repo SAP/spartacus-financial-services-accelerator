@@ -1,9 +1,9 @@
-import { TestBed, async } from '@angular/core/testing';
 import { Type } from '@angular/core';
+import { async, TestBed } from '@angular/core/testing';
 import { OCC_USER_ID_CURRENT } from '@spartacus/core';
-import { FSCsTicketService } from './cs-ticket.service';
-import { FSCsTicketConnector } from './../connectors/cs-ticket.connector';
 import { of } from 'rxjs';
+import { CsTicketConnector } from './../connectors/cs-ticket.connector';
+import { CsTicketService } from './cs-ticket.service';
 
 const testAgent1 = {
   email: 'testAgent1@test.com',
@@ -25,20 +25,20 @@ class MockOccTicketConnector {
   }
 }
 
-describe('FSCsTicketService', () => {
+describe('CsTicketService', () => {
   let mockOccTicketConnector: MockOccTicketConnector;
-  let service: FSCsTicketService;
+  let service: CsTicketService;
   beforeEach(async(() => {
     mockOccTicketConnector = new MockOccTicketConnector();
     TestBed.configureTestingModule({
       providers: [
         {
-          provide: FSCsTicketConnector,
+          provide: CsTicketConnector,
           useValue: mockOccTicketConnector,
         },
       ],
     });
-    service = TestBed.get(FSCsTicketService as Type<FSCsTicketService>);
+    service = TestBed.get(CsTicketService as Type<CsTicketService>);
   }));
 
   it('should be created', () => {

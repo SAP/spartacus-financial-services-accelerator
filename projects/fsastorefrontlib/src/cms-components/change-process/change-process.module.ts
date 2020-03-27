@@ -13,13 +13,13 @@ import {
 } from '@spartacus/core';
 import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 import { reducerToken } from '../../core/change-request/store/reducers/index';
+import { ProgressBarModule } from '../progress-bar/progress-bar.module';
+import { AbstractChangeProcessStepComponent } from './abstract-change-process-step/abstract-change-process-step.component';
 import { ChangeCarDetailsFormComponent } from './change-car-details-form/change-car-details-form.component';
 import { ChangeCoverageComponent } from './change-coverage/change-coverage.component';
+import { ChangeProcessConfirmationComponent } from './change-process-confirmation/change-process-confirmation.component';
 import { ChangeProcessProgressBarComponent } from './change-process-progress-bar/change-process-progress-bar.component';
 import { ChangeSimulationComponent } from './change-simulation/change-simulation.component';
-import { FSProgressBarModule } from '../progress-bar/progress-bar.module';
-import { AbstractChangeProcessStepComponent } from './abstract-change-process-step/abstract-change-process-step.component';
-import { ChangeProcessConfirmationComponent } from './change-process-confirmation/change-process-confirmation.component';
 
 const routes: Routes = [
   {
@@ -58,7 +58,7 @@ const routes: Routes = [
     NgSelectModule,
     ReactiveFormsModule,
     UrlModule,
-    FSProgressBarModule,
+    ProgressBarModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature('changeRequests', reducerToken),
     ConfigModule.withConfig(<CmsConfig>{

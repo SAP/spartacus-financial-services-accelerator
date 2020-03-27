@@ -12,7 +12,7 @@ export function populateRegistrationForm(user: RegisterUser) {
   cy.get('.register')
     .findByText('Register')
     .click({ force: true });
-  cy.get('fsa-register form').within(() => {
+  cy.get('cx-fs-register form').within(() => {
     cy.get('[formcontrolname="titleCode"]').select(user.titleCode);
     cy.get('[formcontrolname="firstName"]').type(user.firstName);
     cy.get('[formcontrolname="lastName"]').type(user.lastName);

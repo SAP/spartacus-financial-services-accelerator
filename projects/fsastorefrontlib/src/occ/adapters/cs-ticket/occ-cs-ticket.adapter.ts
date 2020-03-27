@@ -1,13 +1,13 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import { FSCsTicketAdapter } from '../../../core/cs-ticket/connectors';
+import { catchError } from 'rxjs/operators';
+import { CsTicketAdapter } from '../../../core/cs-ticket/connectors';
 import { ContactAgentData } from '../../occ-models';
 
 @Injectable()
-export class OccFsCsTicketAdapter implements FSCsTicketAdapter {
+export class OccCsTicketAdapter implements CsTicketAdapter {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService

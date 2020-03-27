@@ -1,6 +1,6 @@
 <ng-container *ngIf="component$ | async as component">
   <a
-    class="fsa-tab"
+    class="fs-tab"
     (click)="onTabClicked(component.messageGroup, component.title)"
     [ngClass]="{ 'active tabActive': active }"
     >{{ component.title }}</a

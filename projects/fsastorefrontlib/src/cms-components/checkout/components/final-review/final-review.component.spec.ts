@@ -1,15 +1,15 @@
-import { FSCheckoutConfigService } from './../../../../core/checkout/services/fs-checkout-config.service';
-import { CheckoutConfigService } from '@spartacus/storefront';
+import { Type } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import {
   CheckoutPaymentService,
-  RoutingService,
   I18nTestingModule,
+  RoutingService,
 } from '@spartacus/core';
-import { FSCheckoutService } from './../../../../core/checkout/facade/fs-checkout.service';
-import { ComponentFixture, async, TestBed } from '@angular/core/testing';
+import { CheckoutConfigService } from '@spartacus/storefront';
+import { FSCheckoutService } from './../../../../core/checkout/facade/checkout.service';
+import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { FinalReviewComponent } from './final-review.component';
-import { ActivatedRoute } from '@angular/router';
-import { Type } from '@angular/core';
 
 class MockCheckoutService {
   mockDeliveryMode() {}

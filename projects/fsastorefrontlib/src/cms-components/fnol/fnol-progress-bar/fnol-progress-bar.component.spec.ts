@@ -1,13 +1,12 @@
+import { Component, Input, Pipe, PipeTransform } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FNOLProgressBarComponent } from './fnol-progress-bar.component';
-import { I18nTestingModule } from '@spartacus/core';
-import { Pipe, PipeTransform, Component, Input } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
+import { I18nTestingModule } from '@spartacus/core';
 import { of } from 'rxjs';
-import { Claim } from '../../../occ/occ-models';
 import { UserRequestService } from '../../../core/user-request/facade';
+import { Claim } from '../../../occ/occ-models';
 import { ClaimService } from './../../../core/my-account/facade/claim.service';
+import { FNOLProgressBarComponent } from './fnol-progress-bar.component';
 
 @Pipe({
   name: 'cxUrl',
@@ -18,7 +17,7 @@ class MockUrlPipe implements PipeTransform {
 
 @Component({
   // tslint:disable
-  selector: 'fsa-progress-bar',
+  selector: 'cx-fs-progress-bar',
   template: '',
 })
 class MockProgressBarComponent {

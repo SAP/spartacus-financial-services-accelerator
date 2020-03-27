@@ -1,10 +1,9 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-
 import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
 
 @Component({
-  selector: 'fsa-change-car-details-form',
+  selector: 'cx-fs-change-car-details-form',
   templateUrl: './change-car-details-form.component.html',
 })
 export class ChangeCarDetailsFormComponent

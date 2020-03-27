@@ -6,11 +6,11 @@ import { StoreModule } from '@ngrx/store';
 import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
-import { FSProductAssignmentConnector } from '../../connectors';
+import { ProductAssignmentConnector } from '../../connectors';
 import * as fromActions from '../actions';
+import { PRODUCT_ASSIGNMENT_FEATURE } from '../product-assignments-state';
 import * as fromUserReducers from './../../store/reducers/index';
 import * as fromEffects from './product-assignment.effect';
-import { PRODUCT_ASSIGNMENT_FEATURE } from '../product-assignments-state';
 
 const mockProductAssignments = {
   assignments: [
@@ -72,7 +72,7 @@ class MockProductAssignmentConnector {
 
 describe('Product Assignment Effects', () => {
   let actions$: Observable<fromActions.ProductAssignmentActions>;
-  let effects: fromEffects.FSProductAssignmentEffects;
+  let effects: fromEffects.ProductAssignmentEffects;
   let mockProductAssignmentConnector: MockProductAssignmentConnector;
 
   beforeEach(() => {
@@ -88,15 +88,15 @@ describe('Product Assignment Effects', () => {
       ],
       providers: [
         {
-          provide: FSProductAssignmentConnector,
+          provide: ProductAssignmentConnector,
           useValue: mockProductAssignmentConnector,
         },
-        fromEffects.FSProductAssignmentEffects,
+        fromEffects.ProductAssignmentEffects,
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.FSProductAssignmentEffects as Type<
-      fromEffects.FSProductAssignmentEffects
+    effects = TestBed.get(fromEffects.ProductAssignmentEffects as Type<
+      fromEffects.ProductAssignmentEffects
     >);
   });
 

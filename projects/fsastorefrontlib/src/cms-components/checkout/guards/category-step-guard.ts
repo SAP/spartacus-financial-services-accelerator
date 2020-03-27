@@ -5,8 +5,8 @@ import {
   RoutingConfigService,
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { FSCheckoutStep } from '../components/checkout-progress/fs-checkout-step.component';
 import { FSCheckoutConfigService } from '../../../core/checkout/services';
+import { FSCheckoutStep } from '../components/checkout-progress/checkout-step.component';
 
 @Injectable({
   providedIn: 'root',

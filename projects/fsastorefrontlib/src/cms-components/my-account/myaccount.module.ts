@@ -2,21 +2,21 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import {
-  I18nModule,
-  CmsModule,
   AuthGuard,
-  ConfigModule,
   CmsConfig,
+  CmsModule,
+  ConfigModule,
+  I18nModule,
 } from '@spartacus/core';
-import { PageLayoutComponent, CmsPageGuard } from '@spartacus/storefront';
-import { FSUpdateProfileModule } from './update-profile/fs-update-profile.module';
+import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
+import { UserRequestStoreModule } from '../../core/user-request/store/user-request-store.module';
+import { ClaimModule } from './claim/claim.module';
 import { InboxModule } from './inbox/inbox.module';
 import { PolicyModule } from './policy/policy.module';
-import { QuoteModule } from './quote/quote.module';
-import { ClaimModule } from './claim/claim.module';
 import { PremiumCalendarModule } from './premium-calendar/premium-calendar.module';
-import { FSUpdateProfileComponent } from './update-profile/fs-update-profile.component';
-import { UserRequestStoreModule } from '../../core/user-request/store/user-request-store.module';
+import { QuoteModule } from './quote/quote.module';
+import { FSUpdateProfileComponent } from './update-profile/update-profile.component';
+import { UpdateProfileModule } from './update-profile/update-profile.module';
 const routes: Routes = [
   {
     path: null,
@@ -97,7 +97,7 @@ const routes: Routes = [
     CommonModule,
     CmsModule,
     I18nModule,
-    FSUpdateProfileModule,
+    UpdateProfileModule,
     InboxModule,
     PolicyModule,
     QuoteModule,

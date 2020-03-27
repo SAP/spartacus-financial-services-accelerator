@@ -1,6 +1,6 @@
-@import '../../theme/fsa/variables';
+@import '../../theme/fs/variables';
 
-%fsa-mini-cart,
+%cx-fs-mini-cart,
 .short-overview-wrapper {
   // short-overview-wrapper is needed for order confirmation page, until better solution
   @include media-breakpoint-down(md) {

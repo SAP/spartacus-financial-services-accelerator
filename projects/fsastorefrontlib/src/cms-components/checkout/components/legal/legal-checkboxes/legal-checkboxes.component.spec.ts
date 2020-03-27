@@ -1,11 +1,11 @@
+import { Type } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { FSCheckoutConfigService } from './../../../../../core/checkout/services/fs-checkout-config.service';
 import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
-import { ComponentFixture, async, TestBed } from '@angular/core/testing';
-import { LegalCheckboxesComponent } from './legal-checkboxes.component';
 import { of } from 'rxjs';
-import { Type } from '@angular/core';
+import { FSCheckoutConfigService } from './../../../../../core/checkout/services/checkout-config.service';
+import { LegalCheckboxesComponent } from './legal-checkboxes.component';
 
 class MockActivatedRoute {
   params = of();

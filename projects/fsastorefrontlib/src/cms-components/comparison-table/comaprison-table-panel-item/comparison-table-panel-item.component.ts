@@ -10,8 +10,8 @@ import { CmsConfig, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FSCartService } from '../../../core/cart/facade';
-import { FSCheckoutConfigService } from '../../../core/checkout/services/fs-checkout-config.service';
-import { FSProductService } from '../../../core/product-pricing/facade/fs-product.service';
+import { FSCheckoutConfigService } from '../../../core/checkout/services/checkout-config.service';
+import { FSProductService } from '../../../core/product-pricing/facade/product.service';
 import {
   FSProduct,
   OneTimeChargeEntry,
@@ -19,7 +19,7 @@ import {
 } from '../../../occ/occ-models';
 
 @Component({
-  selector: 'fsa-comparison-table-panel-item',
+  selector: 'cx-fs-comparison-table-panel-item',
   templateUrl: './comparison-table-panel-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

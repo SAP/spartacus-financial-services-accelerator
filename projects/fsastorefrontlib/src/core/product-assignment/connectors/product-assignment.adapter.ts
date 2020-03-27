@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-export abstract class FSProductAssignmentAdapter {
+export abstract class ProductAssignmentAdapter {
   /**
    * Abstract method used to load product assignments of organizational unit
    *

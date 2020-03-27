@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import { CmsAgentRootComponent } from '../../../occ/occ-models';
+import { Subscription } from 'rxjs';
 import { AgentConnector } from '../../../core/agent/connectors/agent.connector';
+import { CmsAgentRootComponent } from '../../../occ/occ-models';
 
 @Component({
-  selector: 'fsa-agent-root',
+  selector: 'cx-fs-agent-root',
   templateUrl: './agent-root.component.html',
 })
 export class AgentRootComponent implements OnInit, OnDestroy {

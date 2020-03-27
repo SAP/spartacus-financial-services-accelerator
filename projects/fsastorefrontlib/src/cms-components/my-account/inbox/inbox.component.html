@@ -5,17 +5,18 @@
       *ngFor="let tab of tabs; let i = index"
       (click)="activeTabIndex = i"
     >
-      <fsa-inbox-tab [currentTab]="i === activeTabIndex" [tabId]="tab">
-      </fsa-inbox-tab>
+      <cx-fs-inbox-tab [currentTab]="i === activeTabIndex" [tabId]="tab">
+      </cx-fs-inbox-tab>
     </li>
   </ul>
 </ng-container>
 <ng-container *ngIf="initialGroupName">
-  <fsa-inbox-messages
+  <cx-fs-inbox-messages
     [mobileTabs]="tabs"
     [mobileInitialTab]="mobileGroupTitle"
     [initialGroup]="initialGroupName"
-  ></fsa-inbox-messages>
+  >
+  </cx-fs-inbox-messages>
 </ng-container>
 <ng-template #noMessages>
   <h1 class="mt-5 mb-3 text-center">

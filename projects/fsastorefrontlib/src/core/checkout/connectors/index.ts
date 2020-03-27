@@ -1,2 +1,2 @@
-export * from './fs-checkout.adapter';
-export * from './fs-checkout.connector';
+export * from './checkout.adapter';
+export * from './checkout.connector';

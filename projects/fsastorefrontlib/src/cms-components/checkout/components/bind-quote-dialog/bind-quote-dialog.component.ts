@@ -1,23 +1,23 @@
-import { FSCartService } from './../../../../core/cart/facade/fs-cart.service';
-import { filter, tap } from 'rxjs/operators';
-import {
-  FSCart,
-  BindingStateType,
-} from './../../../../occ/occ-models/occ.models';
-import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import {
   Component,
   ElementRef,
-  ViewChild,
-  Output,
   EventEmitter,
+  Output,
+  ViewChild,
 } from '@angular/core';
-import { ModalService } from '@spartacus/storefront';
 import { RoutingService } from '@spartacus/core';
+import { ModalService } from '@spartacus/storefront';
 import { Subscription } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
+import { QuoteService } from '../../../../core/my-account/facade/quote.service';
+import { FSCartService } from './../../../../core/cart/facade/cart.service';
+import {
+  BindingStateType,
+  FSCart,
+} from './../../../../occ/occ-models/occ.models';
 
 @Component({
-  selector: 'fsa-bind-quote-dialog',
+  selector: 'cx-fs-bind-quote-dialog',
   templateUrl: './bind-quote-dialog.component.html',
 })
 export class BindQuoteDialogComponent {

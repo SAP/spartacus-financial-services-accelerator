@@ -1,5 +1,5 @@
-import { FSProductAssignmentEffects } from './product-assignment.effect';
+import { ProductAssignmentEffects } from './product-assignment.effect';
 
-export const effects: any[] = [FSProductAssignmentEffects];
+export const effects: any[] = [ProductAssignmentEffects];
 
 export * from './product-assignment.effect';
