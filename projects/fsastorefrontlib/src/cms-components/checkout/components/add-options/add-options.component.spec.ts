@@ -1,4 +1,3 @@
-import { FSProduct } from './../../../../occ/occ-models/occ.models';
 import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
@@ -6,9 +5,10 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { I18nTestingModule, OrderEntry, RoutingService } from '@spartacus/core';
 import { MediaModule, SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
-import { FSCartService } from './../../../../core/cart/facade/fs-cart.service';
+import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { CategoryService } from './../../../../core/checkout/services/category/category.service';
-import { FSCheckoutConfigService } from './../../../../core/checkout/services/fs-checkout-config.service';
+import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
+import { FSProduct } from './../../../../occ/occ-models/occ.models';
 import { AddOptionsComponent } from './add-options.component';
 
 const product: FSProduct = {

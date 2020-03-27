@@ -1,19 +1,18 @@
 import {
-  Component,
-  OnInit,
   ChangeDetectionStrategy,
+  Component,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
-import { PolicyService } from '../../../../core/my-account/facade/policy.service';
-import { RoutingService } from '@spartacus/core';
+import { OccConfig, RoutingService } from '@spartacus/core';
+import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Subscription, combineLatest, Observable } from 'rxjs';
-import { OccConfig } from '@spartacus/core';
+import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import { AllowedFSRequestType } from './../../../../occ/occ-models';
 
 @Component({
-  selector: 'fsa-policy-details',
+  selector: 'cx-fs-policy-details',
   templateUrl: './policy-details.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

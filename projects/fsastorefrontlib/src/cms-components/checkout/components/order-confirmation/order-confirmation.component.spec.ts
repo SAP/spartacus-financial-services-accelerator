@@ -1,10 +1,10 @@
-import { AccordionModule } from './../../../../shared/accordion/accordion.module';
 import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule, OccConfig } from '@spartacus/core';
-import { FSCheckoutService } from './../../../../core/checkout/facade/fs-checkout.service';
-import { FsaOrderConfirmationComponent } from './order-confirmation.component';
 import { SpinnerModule } from '@spartacus/storefront';
+import { FSCheckoutService } from './../../../../core/checkout/facade/checkout.service';
+import { AccordionModule } from './../../../../shared/accordion/accordion.module';
+import { OrderConfirmationComponent } from './order-confirmation.component';
 
 class FSCheckoutServiceStub {
   orderPlaced: boolean;
@@ -23,14 +23,14 @@ const MockOccModuleConfig: OccConfig = {
 };
 
 describe('OrderConfirmationComponent', () => {
-  let component: FsaOrderConfirmationComponent;
-  let fixture: ComponentFixture<FsaOrderConfirmationComponent>;
+  let component: OrderConfirmationComponent;
+  let fixture: ComponentFixture<OrderConfirmationComponent>;
   let checkoutService: FSCheckoutService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SpinnerModule, AccordionModule, I18nTestingModule],
-      declarations: [FsaOrderConfirmationComponent],
+      declarations: [OrderConfirmationComponent],
       providers: [
         {
           provide: FSCheckoutService,
@@ -45,7 +45,7 @@ describe('OrderConfirmationComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FsaOrderConfirmationComponent);
+    fixture = TestBed.createComponent(OrderConfirmationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
     checkoutService = TestBed.get(FSCheckoutService as Type<FSCheckoutService>);

@@ -1,9 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { OccConfig } from '@spartacus/core';
 import { PolicyService } from '../../../core/my-account/facade';
 
 @Component({
-  selector: 'fsa-premium-calendar',
+  selector: 'cx-fs-premium-calendar',
   templateUrl: './premium-calendar.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

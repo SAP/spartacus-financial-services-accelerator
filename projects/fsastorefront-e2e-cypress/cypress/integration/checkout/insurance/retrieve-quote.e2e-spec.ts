@@ -1,6 +1,6 @@
+import * as travelCheckout from '../../../helpers/checkout/insurance/travel-checkout';
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
-import * as travelCheckout from '../../../helpers/checkout/insurance/travel-checkout';
 
 context('Retrieve Quote', () => {
   before(() => {
@@ -31,11 +31,11 @@ context('Retrieve Quote', () => {
         dropdownItem: 'Quotes & Applications',
         nextPageUrlPart: 'my-financial-applications',
       });
-      cy.get('fsa-quotes').should('have.length', 1);
+      cy.get('cx-fs-quotes').should('have.length', 1);
     });
 
     it('Should retrieve a quote and check if the user is on the correct page', () => {
-      cy.get('fsa-quotes').within(() => {
+      cy.get('cx-fs-quotes').within(() => {
         cy.get('.primary-button').click({ force: true });
       });
       cy.url().should('include', 'add-options');

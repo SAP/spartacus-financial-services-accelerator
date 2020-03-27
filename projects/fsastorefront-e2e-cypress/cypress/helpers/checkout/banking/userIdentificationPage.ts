@@ -1,7 +1,7 @@
 export function checkUserIdentificationPage() {
   cy.get('.progress-inner-wrapper').should('have.length', 5);
   cy.get('.section-header-heading').should('have.text', 'User Identification');
-  cy.get('fsa-select-identification > .d-flex')
+  cy.get('cx-fs-select-identification > .d-flex')
     .should('be.visible')
     .within(() => {
       cy.get('.position-relative')
@@ -17,7 +17,7 @@ export function checkUserIdentificationPage() {
 }
 
 export function selectAtTheNearestBranch() {
-  cy.get('fsa-select-identification > .d-flex')
+  cy.get('cx-fs-select-identification > .d-flex')
     .should('be.visible')
     .within(() => {
       cy.get('.position-relative')
@@ -28,7 +28,7 @@ export function selectAtTheNearestBranch() {
 }
 
 export function selectVideoIdentification() {
-  cy.get('fsa-select-identification > .d-flex')
+  cy.get('cx-fs-select-identification > .d-flex')
     .should('be.visible')
     .within(() => {
       cy.get('.position-relative')

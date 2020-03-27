@@ -1,12 +1,12 @@
-import { FSCsTicketConnector } from './../connectors/cs-ticket.connector';
 import { Injectable } from '@angular/core';
 import { ContactAgentData } from '../../../occ/occ-models';
+import { CsTicketConnector } from './../connectors/cs-ticket.connector';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FSCsTicketService {
-  constructor(protected ticketConnector: FSCsTicketConnector) {}
+export class CsTicketService {
+  constructor(protected ticketConnector: CsTicketConnector) {}
 
   createCsTicketForAgent(
     agentId: string,

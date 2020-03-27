@@ -3,12 +3,12 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { FSProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
+import { ProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
 import { ProductAssignmentsComponent } from './product-assignments.component';
 
 @Component({
   template: '',
-  selector: 'fsa-product-assignment-item',
+  selector: 'cx-fs-product-assignment-item',
 })
 class ProductAssignmentItemComponent {
   @Input() productAssignment: any;
@@ -75,7 +75,7 @@ describe('ProductAssignmentsComponent', () => {
           useClass: ActivatedRouteMock,
         },
         {
-          provide: FSProductAssignmentService,
+          provide: ProductAssignmentService,
           useValue: mockedProductAssignmentService,
         },
       ],
@@ -86,7 +86,7 @@ describe('ProductAssignmentsComponent', () => {
     fixture = TestBed.createComponent(ProductAssignmentsComponent);
     component = fixture.componentInstance;
     mockedProductAssignmentService = TestBed.get(
-      FSProductAssignmentService as Type<FSProductAssignmentService>
+      ProductAssignmentService as Type<ProductAssignmentService>
     );
     fixture.detectChanges();
   });

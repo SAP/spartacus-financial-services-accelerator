@@ -11,7 +11,7 @@ context('PremiumCalendar', () => {
   });
 
   it('should have premium calendar component', () => {
-    cy.get('fsa-premium-calendar').should('be.visible');
+    cy.get('cx-fs-premium-calendar').should('be.visible');
   });
 
   it('should have policy table', () => {

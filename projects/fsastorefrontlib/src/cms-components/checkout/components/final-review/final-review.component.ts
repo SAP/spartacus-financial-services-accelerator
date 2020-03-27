@@ -6,11 +6,11 @@ import {
   RoutingService,
 } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { FSCheckoutConfigService } from '../../../../core/checkout/services/fs-checkout-config.service';
-import { FSCheckoutService } from '../../../../core/checkout/facade/fs-checkout.service';
+import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
+import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
 
 @Component({
-  selector: 'fsa-final-review',
+  selector: 'cx-fs-final-review',
   templateUrl: './final-review.component.html',
 })
 export class FinalReviewComponent implements OnInit {

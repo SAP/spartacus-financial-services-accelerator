@@ -1,7 +1,7 @@
 import {
   HttpClientModule,
-  HttpRequest,
   HttpErrorResponse,
+  HttpRequest,
 } from '@angular/common/http';
 import {
   HttpClientTestingModule,
@@ -9,7 +9,7 @@ import {
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccConfig, OCC_USER_ID_CURRENT } from '@spartacus/core';
-import { OccFsCsTicketAdapter } from './occ-cs-ticket.adapter';
+import { OccCsTicketAdapter } from './occ-cs-ticket.adapter';
 
 const MockOccModuleConfig: OccConfig = {
   context: {
@@ -29,22 +29,22 @@ const ticketData = {
   contactType: 'EMAIL',
   subject: 'Ticket subject',
 };
-describe('OccFsCsTicketAdapter', () => {
+describe('OccCsTicketAdapter', () => {
   let httpClientSpy: { get: jasmine.Spy };
-  let adapter: OccFsCsTicketAdapter;
+  let adapter: OccCsTicketAdapter;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
-        OccFsCsTicketAdapter,
+        OccCsTicketAdapter,
         { provide: OccConfig, useValue: MockOccModuleConfig },
       ],
     });
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
 
-    adapter = TestBed.get(OccFsCsTicketAdapter);
+    adapter = TestBed.get(OccCsTicketAdapter);
     httpMock = TestBed.get(HttpTestingController);
   });
 

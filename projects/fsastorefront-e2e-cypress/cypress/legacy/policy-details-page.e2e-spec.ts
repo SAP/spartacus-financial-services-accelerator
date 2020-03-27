@@ -1,9 +1,9 @@
+import { POLICIES_PAGE } from '../helpers/my-account/policies';
 import * as register from '../helpers/register';
 import { sampleTripPolicyData } from '../sample-data/policies';
 import { donnaMooreUser } from '../sample-data/users';
-import { POLICIES_PAGE } from '../helpers/my-account/policies';
 
-export const ACCORDION_ITEM = 'fsa-accordion-item';
+export const ACCORDION_ITEM = 'cx-fs-accordion-item';
 
 context('Policy Details Page', () => {
   before(() => {
@@ -18,7 +18,7 @@ context('Policy Details Page', () => {
   });
 
   it('Should render policy details ', () => {
-    cy.get('fsa-policy-details').should('be.visible');
+    cy.get('cx-fs-policy-details').should('be.visible');
   });
 
   it('Should have 5 accordions with correct titles and first one opened', () => {

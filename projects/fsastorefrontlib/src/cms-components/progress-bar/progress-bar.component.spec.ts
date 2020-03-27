@@ -1,12 +1,11 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { FSProgressBarComponent } from './progress-bar.component';
-import { RouterTestingModule } from '@angular/router/testing';
 import { Pipe, PipeTransform } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ProgressBarComponent } from './progress-bar.component';
 
-describe('FSProgressBarComponent', () => {
-  let component: FSProgressBarComponent;
-  let fixture: ComponentFixture<FSProgressBarComponent>;
+describe('ProgressBarComponent', () => {
+  let component: ProgressBarComponent;
+  let fixture: ComponentFixture<ProgressBarComponent>;
 
   @Pipe({
     name: 'cxUrl',
@@ -18,12 +17,12 @@ describe('FSProgressBarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
-      declarations: [FSProgressBarComponent, MockUrlPipe],
+      declarations: [ProgressBarComponent, MockUrlPipe],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FSProgressBarComponent);
+    fixture = TestBed.createComponent(ProgressBarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

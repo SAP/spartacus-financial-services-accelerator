@@ -6,15 +6,15 @@ import {
   OnInit,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { InboxService } from '../../../../../core/my-account/facade/inbox.service';
 import {
-  InboxMessage,
   FSSearchConfig,
+  InboxMessage,
 } from '../../../../../core/my-account/services/inbox-data.service';
-import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'fsa-inbox-messages',
+  selector: 'cx-fs-inbox-messages',
   templateUrl: './inbox-messages.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -3,7 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { OccConfig } from '@spartacus/core';
-import { OccFSProductAssignmentAdapter } from './occ-product-assignment.adapter';
+import { OccProductAssignmentAdapter } from './occ-product-assignment.adapter';
 
 const MockOccModuleConfig: OccConfig = {
   context: {
@@ -27,21 +27,21 @@ const payload = {
   sort: 'asc',
 };
 
-describe('OccFSProductAssignmentAdapter', () => {
-  let productAssignmentAdapter: OccFSProductAssignmentAdapter;
+describe('OccProductAssignmentAdapter', () => {
+  let productAssignmentAdapter: OccProductAssignmentAdapter;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
-        OccFSProductAssignmentAdapter,
+        OccProductAssignmentAdapter,
         { provide: OccConfig, useValue: MockOccModuleConfig },
       ],
     });
-    productAssignmentAdapter = TestBed.get(
-      OccFSProductAssignmentAdapter as Type<OccFSProductAssignmentAdapter>
-    );
-    productAssignmentAdapter = TestBed.get(OccFSProductAssignmentAdapter);
+    productAssignmentAdapter = TestBed.get(OccProductAssignmentAdapter as Type<
+      OccProductAssignmentAdapter
+    >);
+    productAssignmentAdapter = TestBed.get(OccProductAssignmentAdapter);
   });
   describe('Load Product Assignments For Unit', () => {
     it('should load ', async(() => {

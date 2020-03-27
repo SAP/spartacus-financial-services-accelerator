@@ -3,7 +3,7 @@ import { RoutingService } from '@spartacus/core';
 import { StoreFinderSearchComponent } from '@spartacus/storefront';
 
 @Component({
-  selector: 'fsa-agent-search-box',
+  selector: 'cx-fs-agent-search-box',
   templateUrl: './agent-search-box.component.html',
 })
 export class AgentSearchBoxComponent extends StoreFinderSearchComponent

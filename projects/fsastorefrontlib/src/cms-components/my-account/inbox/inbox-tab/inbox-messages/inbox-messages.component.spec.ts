@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { InboxService } from '../../../../../core/my-account/facade/inbox.service';
-import { InboxMessagesComponent } from './inbox-messages.component';
 import { I18nTestingModule } from '@spartacus/core';
-import { of, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
+import { InboxService } from '../../../../../core/my-account/facade/inbox.service';
 import { InboxTab } from '../../../../../core/my-account/services/inbox-data.service';
+import { InboxMessagesComponent } from './inbox-messages.component';
 
 const mockInboxTab: InboxTab = {
   title: 'title',
@@ -50,7 +50,7 @@ class MockInboxService {
 
 @Component({
   template: '',
-  selector: 'fsa-inbox-tab',
+  selector: 'cx-fs-inbox-tab',
 })
 class InboxTabComponent {
   @Input() currentTab;

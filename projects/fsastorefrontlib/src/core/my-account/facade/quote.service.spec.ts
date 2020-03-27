@@ -4,11 +4,11 @@ import { FormDataService } from '@fsa/dynamicforms';
 import { Store, StoreModule } from '@ngrx/store';
 import { AuthService, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { FSCartService } from '../../cart/facade/fs-cart.service';
+import { FSCartService } from '../../cart/facade/cart.service';
+import { StateWithMyAccount } from '../store/my-account-state';
 import * as fromAction from './../store/actions';
 import { reducerProvider, reducerToken } from './../store/reducers/index';
 import { QuoteService } from './quote.service';
-import { StateWithMyAccount } from '../store/my-account-state';
 
 const userId = OCC_USER_ID_CURRENT;
 const cartId = '0000001';

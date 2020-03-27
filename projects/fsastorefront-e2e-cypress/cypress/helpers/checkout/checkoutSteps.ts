@@ -20,7 +20,7 @@ export function populatePersonalDetailsPage() {
 }
 
 export function ConfirmBindQuote() {
-  cy.get('fsa-bind-quote-dialog').within(() => {
+  cy.get('cx-fs-bind-quote-dialog').within(() => {
     cy.get('.primary-button').click();
   });
 }
@@ -30,7 +30,7 @@ export function bindQuotePopup() {
     .should('contain', 'Continue')
     .click();
   cy.wait(500);
-  cy.get('fsa-bind-quote-dialog').within(() => {
+  cy.get('cx-fs-bind-quote-dialog').within(() => {
     cy.get('.primary-button').click();
   });
   cy.wait(1000);
@@ -55,7 +55,7 @@ export function clickResumeButton() {
 }
 
 export function checkOrderConfirmationBanking() {
-  cy.get('fsa-order-confirmation-message').within(() => {
+  cy.get('cx-fs-order-confirmation-message').within(() => {
     cy.get('h5')
       .eq(0)
       .should('have.text', ' Thank you for your order! ');
@@ -63,7 +63,7 @@ export function checkOrderConfirmationBanking() {
 }
 
 export function checkQuoteReviewAccordions(category) {
-  const accordion_item = 'fsa-accordion-item';
+  const accordion_item = 'cx-fs-accordion-item';
   const accordion = quoteReviewAccordions.accordions.find(
     acc => acc.category === category
   );
@@ -81,14 +81,14 @@ export function checkQuoteReviewAccordions(category) {
 }
 
 export function placeOrderOnFinalReview() {
-  cy.get('fsa-final-review').within(() => {
+  cy.get('cx-fs-final-review').within(() => {
     cy.get('.form-check-input').click();
     cy.get('.primary-button').click();
   });
 }
 
 export function checkOrderConfirmation() {
-  cy.get('fsa-order-confirmation-message').within(() => {
+  cy.get('cx-fs-order-confirmation-message').within(() => {
     cy.get('h5')
       .eq(0)
       .should('have.text', ' Thank you for your order! ');
@@ -100,7 +100,7 @@ export function checkMyPoliciesPage() {
     menuOption: 'My Account',
     dropdownItem: 'Policies',
   });
-  cy.get('fsa-policies').within(() => {
+  cy.get('cx-fs-policies').within(() => {
     cy.get('.info-card').should('have.length', 1);
   });
 }
