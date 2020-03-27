@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 
 @Component({
-  selector: 'fsa-change-process-progress-bar',
+  selector: 'cx-fs-change-process-progress-bar',
   templateUrl: './change-process-progress-bar.component.html',
 })
 export class ChangeProcessProgressBarComponent implements OnInit {

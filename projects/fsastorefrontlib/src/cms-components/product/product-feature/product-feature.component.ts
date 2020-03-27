@@ -1,12 +1,12 @@
-import { FSProductService } from '../../../core/product-pricing/facade/fs-product.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import { CmsProductFeatureComponent } from '../../../occ/occ-models/cms-component.models';
-import { Subscription, Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { FSProductService } from '../../../core/product-pricing/facade/product.service';
+import { CmsProductFeatureComponent } from '../../../occ/occ-models/cms-component.models';
 
 @Component({
-  selector: 'fsa-product-feature',
+  selector: 'cx-fs-product-feature',
   templateUrl: './product-feature.component.html',
 })
 export class ProductFeatureComponent implements OnInit, OnDestroy {

@@ -1,18 +1,18 @@
-import { Component, OnInit, HostBinding, OnDestroy } from '@angular/core';
+import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
+  CmsComponent,
   CmsComponentConnector,
   PageContext,
   PageType,
-  CmsComponent,
 } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
-import { CMSCustomComponentsContainer } from '../../occ/occ-models';
 import { map } from 'rxjs/operators';
+import { CMSCustomComponentsContainer } from '../../occ/occ-models';
 
 @Component({
-  selector: 'fsa-cms-custom-container',
+  selector: 'cx-fs-cms-custom-container',
   templateUrl: './cms-custom-container.component.html',
 })
 export class CmsCustomContainerComponent implements OnInit, OnDestroy {

@@ -8,7 +8,7 @@
             {{ item.name }}
           </span>
           <div
-            class="fsa-tooltip"
+            class="fs-tooltip"
             tooltipClass="ct-tooltip"
             ngbTooltip="{{ item.helpContent }}"
             triggers="click:blur"
@@ -24,11 +24,11 @@
         <ng-container *ngIf="comparisonPanel | async as panel">
           <ng-container *ngFor="let productCode of getProductList()">
             <ng-container *ngIf="productCode">
-              <fsa-comparison-table-panel-item
+              <cx-fs-comparison-table-panel-item
                 [productCode]="productCode"
                 [billingTimes]="billingInfo.billingTimes"
                 [pricingData]="pricingData"
-              ></fsa-comparison-table-panel-item>
+              ></cx-fs-comparison-table-panel-item>
             </ng-container>
           </ng-container>
         </ng-container>

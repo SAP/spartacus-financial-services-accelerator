@@ -1,1 +1,1 @@
-export * from './fs-checkout.service';
+export * from './checkout.service';

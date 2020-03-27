@@ -4,23 +4,23 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { Subscription, of } from 'rxjs';
-import { Observable } from 'rxjs/internal/Observable';
+import { ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '@spartacus/core';
-import { FSProductAssignmentService } from '../../../core/product-assignment/facade/product-assignment.service';
-import { switchMap, map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/operators';
+import { ProductAssignmentService } from '../../../core/product-assignment/facade/product-assignment.service';
 import { B2BAdministrator } from '../../../occ/occ-models';
-import { Params, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'fsa-potential-product-assignments',
+  selector: 'cx-fs-potential-product-assignments',
   templateUrl: './potential-product-assignments.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PotentialProductAssignmentsComponent implements OnInit, OnDestroy {
   constructor(
     protected route: ActivatedRoute,
-    protected productAssignmentService: FSProductAssignmentService,
+    protected productAssignmentService: ProductAssignmentService,
     protected userService: UserService
   ) {}
 

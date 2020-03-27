@@ -5,7 +5,7 @@ import { Cart, I18nTestingModule, RoutingService } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
-import { FSCartService } from './../../../../core/cart/facade/fs-cart.service';
+import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCart } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './bind-quote-dialog.component';
 import createSpy = jasmine.createSpy;

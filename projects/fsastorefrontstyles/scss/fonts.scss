@@ -1,17 +1,17 @@
 @font-face {
-  font-family: 'fsa-font';
-  src: url('assets/fonts/fsa-font.eot?lvvmfz');
-  src: url('assets/fonts/fsa-font.eot?lvvmfz#iefix') format('embedded-opentype'),
-    url('assets/fonts/fsa-font.ttf?lvvmfz') format('truetype'),
-    url('assets/fonts/fsa-font.woff?lvvmfz') format('woff'),
-    url('assets/fonts/fsa-font.svg?lvvmfz#fsa-font') format('svg');
+  font-family: 'fs-font';
+  src: url('assets/fonts/fs-font.eot?lvvmfz');
+  src: url('assets/fonts/fs-font.eot?lvvmfz#iefix') format('embedded-opentype'),
+    url('assets/fonts/fs-font.ttf?lvvmfz') format('truetype'),
+    url('assets/fonts/fs-font.woff?lvvmfz') format('woff'),
+    url('assets/fonts/fs-font.svg?lvvmfz#fs-font') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 
-.fsa-icon {
+.fs-icon {
   /* use !important to prevent issues with browser extensions that change fonts */
-  font-family: 'fsa-font' !important;
+  font-family: 'fs-font' !important;
   speak: none;
   font-style: normal;
   font-weight: normal;

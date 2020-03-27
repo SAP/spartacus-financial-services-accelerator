@@ -46,7 +46,7 @@ export function searchSavingsProducts() {
 }
 
 export function seachResultsButtons() {
-  cy.get('fsa-product-list')
+  cy.get('cx-fs-product-list')
     .should('be.visible')
     .within(() => {
       cy.get('cx-media').should('have.length', 3);

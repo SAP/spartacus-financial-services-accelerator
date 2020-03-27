@@ -1,19 +1,19 @@
-import { FSCartService } from './../../../../core/cart/facade/fs-cart.service';
-import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
-import {
-  FSCart,
-  BindingStateType,
-} from './../../../../occ/occ-models/occ.models';
-import { map } from 'rxjs/operators';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Cart, OccConfig, RoutingService } from '@spartacus/core';
-import { Observable, Subscription, of } from 'rxjs';
+import { ModalRef, ModalService } from '@spartacus/storefront';
+import { Observable, of, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services';
-import { ModalService, ModalRef } from '@spartacus/storefront';
+import { FSCartService } from './../../../../core/cart/facade/cart.service';
+import {
+  BindingStateType,
+  FSCart,
+} from './../../../../occ/occ-models/occ.models';
+import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 
 @Component({
-  selector: 'fsa-quote-review',
+  selector: 'cx-fs-quote-review',
   templateUrl: './quote-review.component.html',
 })
 export class QuoteReviewComponent implements OnInit, OnDestroy {

@@ -1,15 +1,15 @@
-import { FSCartService } from './../../../../core/cart/facade/fs-cart.service';
-import { FSOrderEntry } from '../../../../occ/occ-models';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
-import { RoutingService, Cart } from '@spartacus/core';
+import { Cart, RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FSCheckoutConfigService } from './../../../../core/checkout/services/fs-checkout-config.service';
+import { FSOrderEntry } from '../../../../occ/occ-models';
+import { FSCartService } from './../../../../core/cart/facade/cart.service';
+import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 
 @Component({
-  selector: 'fsa-personal-details-navigation',
+  selector: 'cx-fs-personal-details-navigation',
   templateUrl: './personal-details-navigation.component.html',
 })
 export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {

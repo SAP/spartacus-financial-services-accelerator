@@ -14,7 +14,7 @@ import { Claim, FSStepData, StepStatus } from '../../../occ/occ-models';
 import { ClaimStatus } from '../../../occ/occ-models/occ.models';
 
 @Component({
-  selector: 'fsa-fnol-navigation',
+  selector: 'cx-fs-fnol-navigation',
   templateUrl: './fnol-navigation.component.html',
 })
 export class FNOLNavigationComponent implements OnInit, OnDestroy {

@@ -4,11 +4,10 @@ import { OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/operators';
-import { FSProductAssignmentAdapter } from '../../../core/product-assignment/connectors';
+import { ProductAssignmentAdapter } from '../../../core/product-assignment/connectors';
 
 @Injectable()
-export class OccFSProductAssignmentAdapter
-  implements FSProductAssignmentAdapter {
+export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService

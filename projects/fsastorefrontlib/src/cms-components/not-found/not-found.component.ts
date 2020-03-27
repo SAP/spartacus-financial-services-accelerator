@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { genericIcons } from '../../assets/icons/generic-icons';
 
 @Component({
-  selector: 'fsa-not-found',
+  selector: 'cx-fs-not-found',
   templateUrl: './not-found.component.html',
 })
 export class NotFoundComponent {

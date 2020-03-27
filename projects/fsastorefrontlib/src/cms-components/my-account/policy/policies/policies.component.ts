@@ -1,16 +1,16 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { OccConfig, RoutingService } from '@spartacus/core';
+import {
+  ClaimService,
+  PolicyService,
+} from '../../../../core/my-account/facade';
 import {
   AllowedFSRequestType,
   RequestType,
 } from './../../../../occ/occ-models/occ.models';
-import {
-  PolicyService,
-  ClaimService,
-} from '../../../../core/my-account/facade';
 
 @Component({
-  selector: 'fsa-policies',
+  selector: 'cx-fs-policies',
   templateUrl: './policies.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

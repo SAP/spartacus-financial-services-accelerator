@@ -12,11 +12,11 @@ import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/cart/facade';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
-import { FSCheckoutConfigService } from '../../../../core/checkout/services/fs-checkout-config.service';
+import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
 import { FSProduct } from '../../../../occ/occ-models';
 
 @Component({
-  selector: 'fsa-add-options',
+  selector: 'cx-fs-add-options',
   templateUrl: './add-options.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
