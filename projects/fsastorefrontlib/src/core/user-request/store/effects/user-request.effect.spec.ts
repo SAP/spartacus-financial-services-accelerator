@@ -1,4 +1,4 @@
-import { OCC_USER_ID_CURRENT, GlobalMessageService } from '@spartacus/core';
+import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
