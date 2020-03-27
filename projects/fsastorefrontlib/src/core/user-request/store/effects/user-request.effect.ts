@@ -35,12 +35,9 @@ export class UserRequestEffects {
               return new fromActions.UpdateUserRequestSuccess(userRequest);
             }
           }),
-          catchError(error => {
-            this.showGlobalMessage('policy.changeError');
-            return of(
-              new fromActions.UpdateUserRequestFail(JSON.stringify(error))
-            );
-          })
+          catchError(error =>
+            of(new fromActions.UpdateUserRequestFail(JSON.stringify(error)))
+          )
         );
     })
   );
