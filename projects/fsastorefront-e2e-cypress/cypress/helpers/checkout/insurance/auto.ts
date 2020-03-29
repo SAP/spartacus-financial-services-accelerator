@@ -3,7 +3,6 @@ export function openCategoryPage() {
     menuOption: 'Insurance',
     dropdownItem: 'Auto',
   });
-  cy.wait(800);
   cy.get('.enriched-banner-styled-text')
     .invoke('text')
     .then(text => {
@@ -50,10 +49,6 @@ export function populateMainDriverInfo() {
   cy.get('[name="driverLicenceDate"]')
     .eq('0')
     .type('2018-01-01');
-}
-
-export function selectNoAdditionalDrivers() {
-  cy.get('[name=noOfDrivers]').select('0');
 }
 
 export function checkPricesOnComparisonTable() {

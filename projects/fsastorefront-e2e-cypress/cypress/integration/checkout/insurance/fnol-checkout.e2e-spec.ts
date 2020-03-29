@@ -1,20 +1,15 @@
-///<reference path="../../../helpers/checkout/checkoutSteps.ts"/>
 import { donnaMooreUser, registrationUser } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as fnol from '../../../helpers/fnolCheckout';
 import * as auto from '../../../helpers/checkout/insurance/auto';
-
-import { importAutoPolicy } from '../../../helpers/payloads';
 import {
   checkBackAndContinueButtons,
   clickContinueButton,
-  importAutoPolicyID,
 } from '../../../helpers/checkout/checkoutSteps';
 import {
   addPaymentMethod,
   selectPaymentMethod,
 } from '../../../helpers/checkout/insurance/payment';
-import * as travelCheckout from '../../../helpers/checkout/insurance/travel-checkout';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 
 context('FNOL for sample data user', () => {
@@ -22,15 +17,12 @@ context('FNOL for sample data user', () => {
     cy.visit('/login');
   });
 
-  //to be added - status on claims page
-
   it('Should check anonymous user cannot access claims', () => {
     cy.visit('/');
     cy.get('.Section4 cx-banner')
       .eq(1)
       .click();
     cy.get('.heading-headline').should('have.text', 'Login');
-    this.baba = 'teeeeeest';
   });
 
   it('Should check no policies page for new user', () => {
@@ -46,8 +38,7 @@ context('FNOL for sample data user', () => {
     auto.openCategoryPage();
     auto.populateAutoInformation();
     auto.populateMainDriverInfo();
-    auto.selectNoAdditionalDrivers();
-    cy.wait(500);
+    cy.get('[name=noOfDrivers]').select('0');
     clickContinueButton();
   });
   it('Should complete auto checkout', () => {
@@ -63,8 +54,6 @@ context('FNOL for sample data user', () => {
   });
 
   it('Check mini cart on quote review page', () => {
-    //checkout.checkQuoteReviewAccordions('auto');
-    //auto.checkMiniCart();
     clickContinueButton();
     checkout.ConfirmBindQuote();
   });
@@ -83,7 +72,7 @@ context('FNOL for sample data user', () => {
 
   it('Should remember Policy ID', () => {
     checkout.checkMyPoliciesPage();
-    checkout.rememberPolicyId();
+    checkout.updatePolicyEffectiveAndStartDate();
   });
 
   it('Should check and populate Incident Information page', () => {

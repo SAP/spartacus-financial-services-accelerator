@@ -105,9 +105,10 @@ export function checkMyPoliciesPage() {
   });
 }
 
-export function rememberPolicyId() {
+export function updatePolicyEffectiveAndStartDate() {
   cy.get('div.info-card-caption').then($element => {
-    const payload = this.getPayloadForPolicyUpdate($element.text().trim());
+    const policyId = ($element.text().trim());
+    const payload = this.getPayloadForPolicyUpdate(policyId);
     cy.request(payload);
     cy.get('.primary-button')
       .contains(' Make a Claim')
