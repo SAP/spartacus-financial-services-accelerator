@@ -13,6 +13,7 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   searchQuery: string;
   pagination: any;
   selectedAgent$: Observable<any>;
+  selectedIndex: number = null;
 
   constructor(
     protected agentSearchService: AgentSearchService,
@@ -40,6 +41,10 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
 
   pageChange(page: number): void {
     this.agentSearchService.search(this.searchQuery, page);
+  }
+
+  setIndex(index: number) {
+    this.selectedIndex = index;
   }
 
   ngOnDestroy() {

@@ -1,16 +1,39 @@
 %fsa-agent-search-list {
-    .agent-list {
-        border: 1px solid var(--cx-color-3);
-        max-height: 700px;
-        overflow-y: auto;
+  .agent-list {
+    border: 1px solid var(--cx-color-3);
+    max-height: 700px;
+    overflow-y: auto;
+    .agent-list-item {
+      &.active {
+        background-color: var(--cx-color-4);
+        .cx-product-image-container img {
+          border: 1px solid var(--cx-color-primary);
+        }
+      }
+      .agent-name {
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
     }
-    .cx-product-image-container img {
-        border-radius: 50%;
-    }
-    .counter {
-        left: 6px;
-    }
-    cx-pagination {
-        display: inline-flex;
-    }
+  }
+  .cx-product-image-container img {
+    @include transition;
+    background-color: var(--cx-color-1);
+    border-radius: 50%;
+  }
+  .counter {
+    left: 0;
+    top: -6px;
+    font-size: 12px;
+    width: 19px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: var(--cx-color-1);
+    font-size: var(--cx-xs-font-size);
+  }
+  cx-pagination {
+    display: inline-flex;
+  }
 }

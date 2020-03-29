@@ -1,105 +1,118 @@
 <ng-container *ngIf="searchResults | async as results">
-  <div class="container mt-5">
+  <div class="container-fluid mt-5">
     <div class="row">
-    <ng-container *ngIf="results.pagination as pagination">
-      <div class="col-6 mb-5  text-center">
-        {{ currentPage}}
-        <cx-pagination
-          *ngIf="pagination"
-          [pagination]="pagination"
-          queryParam="currentPage"
-        ></cx-pagination>
-      </div>
-      <div class="col-6 mb-5">
-        Total results: {{ pagination.totalCount }}
-      </div>
-    </ng-container>
-    <div class="agent-list col-6">
-      
-      <ng-container *ngFor="let agent of results.agents; let i = index">
-        <div class="row agent-list-item py-3 px-2 border-bottom-grey" (click)="showDetails(agent)">
-          <div class="col-2 position-relative">
-            <div class="counter semi-bold position-absolute">
-              {{i +1}}
-            </div>
-            <cx-media
-              class="cx-product-image-container pl-2"
-              [container]="agent.thumbnail"
-              format="thumbnail"
-            ></cx-media>
-          </div>
-          <div class="col-10">
-              <h5 class="text-uppercase notice">{{ agent.displayName }}</h5>
-              <div class="border-bottom-grey my-3">
-                <ng-container *ngIf="agent.pointsOfService">
-                  <ng-container *ngFor="let pos of agent.pointsOfService">
-                    <div class="row no-gutters mb-2">
-                      <div class="col-10 semi-bold">
-                        {{ pos.displayName }} {{ pos.address?.line1 }}, {{ agent.pointsOfService[0]?.address?.town }}
-                      </div>
-                      <div class="col-2 semi-bold notice">
-                        {{ pos.formattedDistance }}
-                      </div>
-                    </div>
-                  </ng-container>
-                </ng-container>
-              </div>
-              <div class="mb-3">
-                <ng-container *ngFor="let category of agent.categories; let i = index">
-                  {{ category.name }}
-                  <ng-container *ngIf="i + 1 !== agent.categories.length">
-                    , 
-                  </ng-container>
-                </ng-container>
-              </div>
-              <button
-                class="action-button btn-block"
-                [routerLink]="
-                  {
-                    cxRoute: 'contactAgent',
-                    params: { agent: agent.email }
-                  } | cxUrl
-                "
-              >
-                {{ 'fscommon.agentLocator.contact' | cxTranslate }}
-              </button>
-            
-          </div>
+      <ng-container *ngIf="results.pagination as pagination">
+        <div class="col-md-6 col-12 mb-5  text-center">
+          {{ currentPage }}
+          <cx-pagination
+            *ngIf="pagination"
+            [pagination]="pagination"
+            queryParam="currentPage"
+          ></cx-pagination>
+        </div>
+        <div
+          class="col-md-6 col-12 mb-5 d-flex justify-content-center align-items-center semi-bold"
+        >
+          Total results: {{ pagination.totalCount }}
         </div>
       </ng-container>
-    </div>
-    <div
-      class="col-6"
-      *ngIf="selectedAgent$ | async as selectedAgent"
-    >
-      <ng-container
-        *ngTemplateOutlet="
-          agentMap;
-          context: {
-            agent: selectedAgent
-          }
-        "
+      <div class="col-md-6 col-12 mb-5">
+        <div class="container-fluid agent-list">
+          <ng-container *ngFor="let agent of results.agents; let i = index">
+            <div
+              class="row agent-list-item py-3 px-2 border-bottom-grey"
+              [class.active]="selectedIndex === i"
+            >
+              <div class="col-1 col-sm-2 position-relative">
+                <div class="counter semi-bold position-absolute">
+                  {{ i + 1 }}
+                </div>
+                <cx-media
+                  class="cx-product-image-container pl-2 d-none d-sm-block"
+                  [container]="agent.thumbnail"
+                  format="thumbnail"
+                ></cx-media>
+              </div>
+              <div class="col-10">
+                <h5
+                  class="agent-name text-uppercase notice"
+                  (click)="showDetails(agent); setIndex(i)"
+                >
+                  {{ agent.displayName }}
+                </h5>
+                <div class="border-bottom-grey my-3">
+                  <ng-container *ngIf="agent.pointsOfService">
+                    <ng-container *ngFor="let pos of agent.pointsOfService">
+                      <div class="row no-gutters mb-2">
+                        <div class="col-10 semi-bold">
+                          {{ pos.displayName }} {{ pos.address?.line1 }},
+                          {{ agent.pointsOfService[0]?.address?.town }}
+                        </div>
+                        <div class="col-2 semi-bold notice">
+                          {{ pos.formattedDistance }}
+                        </div>
+                      </div>
+                    </ng-container>
+                  </ng-container>
+                </div>
+                <div class="mb-3">
+                  <ng-container
+                    *ngFor="let category of agent.categories; let i = index"
+                  >
+                    {{ category.name }}
+                    <ng-container *ngIf="i + 1 !== agent.categories.length">
+                      ,
+                    </ng-container>
+                  </ng-container>
+                </div>
+                <button
+                  class="action-button btn-block"
+                  [routerLink]="
+                    {
+                      cxRoute: 'contactAgent',
+                      params: { agent: agent.email }
+                    } | cxUrl
+                  "
+                >
+                  {{ 'fscommon.agentLocator.contact' | cxTranslate }}
+                </button>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div
+        class="col-md-6 col-12 mb-5"
+        *ngIf="selectedAgent$ | async as selectedAgent"
       >
-      </ng-container>
-    </div>
-    <div
-      class="col-6"
-      *ngIf="!selectedAgent$ && results && results.agents[0]"
-    >
-      <ng-container
-        *ngTemplateOutlet="
-          agentMap;
-          context: {
-            agent: results.agents[0]
-          }
-        "
+        <ng-container
+          *ngTemplateOutlet="
+            agentMap;
+            context: {
+              agent: selectedAgent
+            }
+          "
+        >
+        </ng-container>
+      </div>
+      <div
+        class="col-md-6 col-12 mb-5"
+        *ngIf="!selectedAgent$ && results && results.agents[0]"
       >
-      </ng-container>
+        <ng-container
+          *ngTemplateOutlet="
+            agentMap;
+            context: {
+              agent: results.agents[0]
+            }
+          "
+        >
+        </ng-container>
+      </div>
     </div>
   </div>
-</div>
 </ng-container>
- 
+
 <ng-template #agentMap let-agent="agent">
   <cx-store-finder-map
     [locations]="agent.pointsOfService"
