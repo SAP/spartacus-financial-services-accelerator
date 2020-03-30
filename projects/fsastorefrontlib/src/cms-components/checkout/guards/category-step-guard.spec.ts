@@ -2,11 +2,11 @@ import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
-  RoutingConfigService,
   CmsActivatedRouteSnapshot,
+  RoutingConfigService,
 } from '@spartacus/core';
+import { FSCheckoutConfigService } from './../../../core/checkout/services/checkout-config.service';
 import { CategoryStepGuard } from './category-step-guard';
-import { FSCheckoutConfigService } from './../../../core/checkout/services/fs-checkout-config.service';
 
 class MockRoutingConfigService {
   getRouteConfig() {

@@ -1,6 +1,6 @@
 import {
-  waitForPage,
   waitForCMSComponent,
+  waitForPage,
   waitForUserAssets,
 } from './generalHelpers';
 
@@ -31,7 +31,7 @@ export function selectAutoPolicyForFNOL() {
 }
 
 export function checkFNOLCheckoutPage() {
-  cy.get('fsa-fnol-progress-bar')
+  cy.get('cx-fs-fnol-progress-bar')
     .should('be.visible')
     .within(() => {
       cy.get('h2').contains('Make a Claim Online');
@@ -111,7 +111,7 @@ export function populateGeneralInformationStep() {
 }
 
 export function checkSummaryPage() {
-  cy.get('fsa-fnol-summary').within(() => {
+  cy.get('cx-fs-fnol-summary').within(() => {
     cy.get('h2').contains('Summary');
   });
   cy.get('.accordion-item').should('have.length', '3');
@@ -233,7 +233,7 @@ export function deleteClaimFromDialog() {
   });
   cy.get('h3').contains('Delete started claim process');
   cy.get('p').contains('The following claim process will be deleted');
-  cy.get('fsa-deleted-claim-dialog').within(() => {
+  cy.get('cx-fs-deleted-claim-dialog').within(() => {
     cy.get('.primary-button').click();
   });
 }

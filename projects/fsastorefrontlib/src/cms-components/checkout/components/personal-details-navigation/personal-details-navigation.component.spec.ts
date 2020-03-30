@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { FormDataService } from '@fsa/dynamicforms';
 import { Cart, I18nTestingModule, RoutingService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { FSCartService } from './../../../../core/cart/facade/fs-cart.service';
-import { FSCheckoutConfigService } from './../../../../core/checkout/services/fs-checkout-config.service';
+import { FSCartService } from './../../../../core/cart/facade/cart.service';
+import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { PersonalDetailsNavigationComponent } from './personal-details-navigation.component';
 import createSpy = jasmine.createSpy;
 

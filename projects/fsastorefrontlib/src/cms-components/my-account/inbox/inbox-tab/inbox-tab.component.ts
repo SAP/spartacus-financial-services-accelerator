@@ -1,14 +1,14 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   Input,
+  OnInit,
 } from '@angular/core';
 import { CmsService } from '@spartacus/core';
 import { InboxService } from '../../../../core/my-account/facade/inbox.service';
 
 @Component({
-  selector: 'fsa-inbox-tab',
+  selector: 'cx-fs-inbox-tab',
   templateUrl: './inbox-tab.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

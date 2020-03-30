@@ -3,7 +3,11 @@ import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
-import { OCC_USER_ID_CURRENT } from '@spartacus/core';
+import {
+  OCC_USER_ID_CURRENT,
+  GlobalMessage,
+  GlobalMessageService,
+} from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
 import { ChangeRequestConnector } from '../../connectors';
@@ -11,6 +15,7 @@ import * as fromActions from '../actions';
 import * as fromUserRequestActions from './../../../../core/user-request/store/actions';
 import * as fromUserReducers from './../../store/reducers/index';
 import * as fromEffects from './change-request.effect';
+import createSpy = jasmine.createSpy;
 
 const requestID = 'REQ0001';
 const policyId = 'policyId';
@@ -36,10 +41,16 @@ class MockChangeRequestConnector {
   }
 }
 
+class GlobalMessageServiceMock {
+  remove(): void {}
+  add(_message: GlobalMessage): void {}
+}
+
 describe('Change Request Effects', () => {
   let actions$: Observable<fromActions.ChangeRequestAction>;
   let effects: fromEffects.ChangeRequestEffects;
   let mockChangeRequestConnector: MockChangeRequestConnector;
+  let globalMessageService: GlobalMessageService;
 
   beforeEach(() => {
     mockChangeRequestConnector = new MockChangeRequestConnector();
@@ -57,12 +68,19 @@ describe('Change Request Effects', () => {
           provide: ChangeRequestConnector,
           useValue: mockChangeRequestConnector,
         },
+        {
+          provide: GlobalMessageService,
+          useClass: GlobalMessageServiceMock,
+        },
         fromEffects.ChangeRequestEffects,
         provideMockActions(() => actions$),
       ],
     });
     effects = TestBed.get(fromEffects.ChangeRequestEffects as Type<
       fromEffects.ChangeRequestEffects
+    >);
+    globalMessageService = TestBed.get(GlobalMessageService as Type<
+      GlobalMessageService
     >);
   });
 
@@ -109,7 +127,7 @@ describe('Change Request Effects', () => {
         changeRequest: changeRequest,
       });
 
-      const completion = new fromActions.SimulateChangeRequestSucess(
+      const completion = new fromActions.SimulateChangeRequestSuccess(
         changeRequest
       );
       const updateUserRequest = new fromUserRequestActions.UpdateUserRequest({

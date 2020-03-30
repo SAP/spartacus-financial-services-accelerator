@@ -17,5 +17,8 @@ export const policy = {
     noValidPolicies: 'Sie haben keine gültigen Policen!',
     documentName: 'Name',
     documentIssueDate: 'Erstelldatum',
+    policyCanceled: '[DE] Your policy change request has been canceled',
+    changeError:
+      '[DE] Sorry, the requested change can\'t be executed online, please contact your agent' // prettier-ignore
   },
 };

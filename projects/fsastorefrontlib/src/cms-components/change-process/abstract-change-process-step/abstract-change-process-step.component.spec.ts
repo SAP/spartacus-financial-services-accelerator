@@ -38,9 +38,11 @@ class MockUserRequestNavigationService {
 
 class MockChangeRequestService {
   simulateChangeRequest = createSpy();
-
   cancelChangeRequest = createSpy();
 
+  getChangeRequestError() {
+    return of();
+  }
   getChangeRequest() {
     return of(changeRequest);
   }

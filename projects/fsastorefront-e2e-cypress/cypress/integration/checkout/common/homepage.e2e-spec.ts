@@ -12,11 +12,11 @@ context('Homepage', () => {
   });
 
   it('should have enriched banner', () => {
-    cy.get('fsa-enriched-responsive-banner');
+    cy.get('cx-fs-enriched-responsive-banner');
   });
 
   it('should contain category carousel component', () => {
-    cy.get('fsa-category-carousel');
+    cy.get('cx-fs-category-carousel');
   });
 
   it('should contain our services banner', () => {

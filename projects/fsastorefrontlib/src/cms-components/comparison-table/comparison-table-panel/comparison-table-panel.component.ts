@@ -4,17 +4,19 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { FormDataService } from '@fsa/dynamicforms';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
-import { take, map, switchMap } from 'rxjs/operators';
-import { ComparisonPanelCMSComponent } from '../../../occ/occ-models';
-import { FormDataService } from '@fsa/dynamicforms';
-import { PricingService } from '../../../core/product-pricing/facade/pricing.service';
-import { PricingData } from '../../../occ/occ-models';
+import { map, switchMap } from 'rxjs/operators';
 import { BillingTimeConnector } from '../../../core/product-pricing/connectors/billing-time.connector';
+import { PricingService } from '../../../core/product-pricing/facade/pricing.service';
+import {
+  ComparisonPanelCMSComponent,
+  PricingData,
+} from '../../../occ/occ-models';
 
 @Component({
-  selector: 'fsa-comparison-table-panel',
+  selector: 'cx-fs-comparison-table-panel',
   templateUrl: './comparison-table-panel.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

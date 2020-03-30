@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Actions, Effect, ofType, act } from '@ngrx/effects';
+import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import {
   catchError,
@@ -8,11 +8,11 @@ import {
   mergeMap,
   switchMap,
 } from 'rxjs/operators';
-import { FSProductAssignmentConnector } from '../../connectors';
+import { ProductAssignmentConnector } from '../../connectors';
 import * as fromActions from '../actions';
 
 @Injectable()
-export class FSProductAssignmentEffects {
+export class ProductAssignmentEffects {
   @Effect()
   loadProductAssignments$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.LOAD_PRODUCT_ASSIGNMENTS),
@@ -161,6 +161,6 @@ export class FSProductAssignmentEffects {
 
   constructor(
     private actions$: Actions,
-    private productAssignmentConnector: FSProductAssignmentConnector
+    private productAssignmentConnector: ProductAssignmentConnector
   ) {}
 }

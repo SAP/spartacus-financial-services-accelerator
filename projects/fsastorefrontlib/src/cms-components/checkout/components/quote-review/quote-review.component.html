@@ -34,7 +34,7 @@
             <ng-container
               *ngIf="(cart?.insuranceQuote?.quoteDetails | json) !== '{}'"
             >
-              <fsa-accordion-item
+              <cx-fs-accordion-item
                 [opened]="true"
                 [title]="'fscommon.generalDetails' | cxTranslate"
               >
@@ -63,10 +63,10 @@
                     </div>
                   </div>
                 </div>
-              </fsa-accordion-item>
+              </cx-fs-accordion-item>
             </ng-container>
           </div>
-          <fsa-accordion-item
+          <cx-fs-accordion-item
             [opened]="ref.children.length > 0 ? false : true"
             [title]="'fscommon.whatsIncluded' | cxTranslate"
           >
@@ -99,7 +99,7 @@
                           item.chargeInformation
                         }}</ng-template>
                         <ng-template #iconOk
-                          ><span class="fsa-icon icon-ok"></span
+                          ><span class="fs-icon icon-ok"></span
                         ></ng-template>
                       </div>
                     </li>
@@ -112,8 +112,8 @@
                 </div>
               </div>
             </div>
-          </fsa-accordion-item>
-          <fsa-accordion-item [title]="'fscommon.addedByYou' | cxTranslate">
+          </cx-fs-accordion-item>
+          <cx-fs-accordion-item [title]="'fscommon.addedByYou' | cxTranslate">
             <div class="container">
               <div class="row justify-content-center">
                 <ul class="col-12 accordion-list">
@@ -134,14 +134,14 @@
                 </div>
               </div>
             </div>
-          </fsa-accordion-item>
+          </cx-fs-accordion-item>
           <ng-container
             *ngIf="
               cart.deliveryOrderGroups[0]?.entries.length > 0 &&
               (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.investments
             "
           >
-            <fsa-accordion-item
+            <cx-fs-accordion-item
               [title]="'fscommon.investementDetails' | cxTranslate"
             >
               <div class="container">
@@ -188,9 +188,9 @@
                   </div>
                 </div>
               </div>
-            </fsa-accordion-item>
+            </cx-fs-accordion-item>
           </ng-container>
-          <fsa-accordion-item
+          <cx-fs-accordion-item
             [title]="'fscommon.personalDetails' | cxTranslate"
           >
             <div class="container">
@@ -225,7 +225,7 @@
                 </div>
               </div>
             </div>
-          </fsa-accordion-item>
+          </cx-fs-accordion-item>
           <div class="row mt-5">
             <div class="col-md-6 col-sm-6 col-xs-12 mb-3 mb-md-0">
               <button class="action-button btn-block" (click)="back()">

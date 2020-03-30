@@ -1,19 +1,19 @@
-import { PipeTransform, Pipe, Type } from '@angular/core';
+import { Pipe, PipeTransform, Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
-  I18nTestingModule,
-  UserService,
   GlobalMessageService,
+  I18nTestingModule,
   RoutingService,
+  UserService,
 } from '@spartacus/core';
-import { FSCsTicketService } from './../../../core/cs-ticket/facade/cs-ticket.service';
 import { of } from 'rxjs';
-
-import { ContactAgentFormComponent } from './contact-agent-form.component';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
+import { CsTicketService } from './../../../core/cs-ticket/facade/cs-ticket.service';
+import { ContactAgentFormComponent } from './contact-agent-form.component';
+
 import createSpy = jasmine.createSpy;
 
 const mockedUserDetails = {
@@ -108,7 +108,7 @@ describe('ContactAgentFormComponent', () => {
           useClass: MockRoutingService,
         },
         {
-          provide: FSCsTicketService,
+          provide: CsTicketService,
           useValue: mockedCsTicketService,
         },
       ],
@@ -123,8 +123,8 @@ describe('ContactAgentFormComponent', () => {
     mockSearchService = TestBed.get(AgentSearchService as Type<
       AgentSearchService
     >);
-    mockedCsTicketService = TestBed.get(FSCsTicketService as Type<
-      FSCsTicketService
+    mockedCsTicketService = TestBed.get(CsTicketService as Type<
+      CsTicketService
     >);
     mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
   });

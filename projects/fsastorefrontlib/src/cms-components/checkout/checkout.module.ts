@@ -1,9 +1,9 @@
-import { BindQuoteDialogComponent } from './components/bind-quote-dialog/bind-quote-dialog.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import {
   AuthGuard,
   CmsConfig,
@@ -25,35 +25,35 @@ import {
   PaymentMethodModule,
   SpinnerModule,
 } from '@spartacus/storefront';
-import { CategoryStepGuard } from './guards/category-step-guard';
+import { CartConnector } from '../../core/cart/connectors/cart.connector';
+import { FSCartService } from '../../core/cart/facade/cart.service';
+import { CheckoutConnector } from '../../core/checkout/connectors/checkout.connector';
+import { CategoryService } from '../../core/checkout/services/category/category.service';
+import { CHECKOUT_FEATURE } from '../../core/checkout/store';
+import { effects } from '../../core/checkout/store/effects/index';
+import {
+  reducerProvider,
+  reducerToken,
+} from '../../core/checkout/store/reducers/index';
+import { QuoteConnector } from '../../core/my-account/connectors/quote.connector';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { AddOptionsComponent } from './components/add-options/add-options.component';
-import { FSCheckoutProgressComponent } from './components/checkout-progress/fs-checkout-progress.component';
-import { FSCheckoutProgressModule } from './components/checkout-progress/fs-checkout-progress.module';
+import { AddOptionsModule } from './components/add-options/add-options.module';
+import { BindQuoteDialogComponent } from './components/bind-quote-dialog/bind-quote-dialog.component';
+import { FSCheckoutProgressComponent } from './components/checkout-progress/checkout-progress.component';
+import { FSCheckoutProgressModule } from './components/checkout-progress/checkout-progress.module';
+import { ChooseCoverNavigationComponent } from './components/choose-cover-navigation/choose-cover-navigation.component';
 import { FinalReviewComponent } from './components/final-review/final-review.component';
 import { LegalModule } from './components/legal/legal.module';
-import { FSMiniCartComponent } from './components/mini-cart/mini-cart.component';
-import { FsaOrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
+import { MiniCartComponent } from './components/mini-cart/mini-cart.component';
+import { MiniCartModule } from './components/mini-cart/mini-cart.module';
 import { OrderConfirmationMessageComponent } from './components/order-confirmation-message/order-confirmation-message.component';
+import { OrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
+import { PersonalDetailsNavigationComponent } from './components/personal-details-navigation/personal-details-navigation.component';
 import { QuoteReviewComponent } from './components/quote-review/quote-review.component';
 import { UserIdentificationModule } from './components/user-identification/user-identification.module';
-import { FSCartService } from '../../core/cart/facade/fs-cart.service';
-import { CategoryService } from '../../core/checkout/services/category/category.service';
-import { effects } from '../../core/checkout/store/effects/index';
-import { FSCheckoutStepGuard } from './guards/fs-checkout-step-guard';
-import {
-  reducerToken,
-  reducerProvider,
-} from '../../core/checkout/store/reducers/index';
-import { StoreModule } from '@ngrx/store';
-import { CHECKOUT_FEATURE } from '../../core/checkout/store';
-import { ChooseCoverNavigationComponent } from './components/choose-cover-navigation/choose-cover-navigation.component';
-import { PersonalDetailsNavigationComponent } from './components/personal-details-navigation/personal-details-navigation.component';
-import { FsCheckoutConnector } from '../../core/checkout/connectors/fs-checkout.connector';
-import { FsCartConnector } from '../../core/cart/connectors/fs-cart.connector';
-import { QuoteConnector } from '../../core/my-account/connectors/quote.connector';
-import { AddOptionsModule } from './components/add-options/add-options.module';
-import { MiniCartModule } from './components/mini-cart/mini-cart.module';
+import { CategoryStepGuard } from './guards/category-step-guard';
+import { CheckoutStepGuard } from './guards/checkout-step-guard';
 
 const routes: Routes = [
   {
@@ -94,7 +94,7 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard, FSCheckoutStepGuard],
+    canActivate: [AuthGuard, CmsPageGuard, CheckoutStepGuard],
     data: {
       cxRoute: 'checkoutPaymentDetails',
       pageLabel: 'checkout-payment-details',
@@ -126,7 +126,7 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard, FSCheckoutStepGuard],
+    canActivate: [AuthGuard, CmsPageGuard, CheckoutStepGuard],
     data: {
       cxRoute: 'legalInformation',
       pageLabel: 'legalInformationPage',
@@ -135,7 +135,7 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard, FSCheckoutStepGuard],
+    canActivate: [AuthGuard, CmsPageGuard, CheckoutStepGuard],
     data: {
       cxRoute: 'userIdentification',
       pageLabel: 'userIdentificationPage',
@@ -171,7 +171,7 @@ const routes: Routes = [
           component: AddOptionsComponent, // to SPA component
         },
         MiniCartFlex: {
-          component: FSMiniCartComponent,
+          component: MiniCartComponent,
         },
         QuoteReviewFlex: {
           component: QuoteReviewComponent,
@@ -183,7 +183,7 @@ const routes: Routes = [
           component: FinalReviewComponent,
         },
         OrderConfirmationFlex: {
-          component: FsaOrderConfirmationComponent,
+          component: OrderConfirmationComponent,
         },
         OrderConfirmationMessageFlex: {
           component: OrderConfirmationMessageComponent,
@@ -206,7 +206,7 @@ const routes: Routes = [
     FinalReviewComponent,
     ChooseCoverNavigationComponent,
     PersonalDetailsNavigationComponent,
-    FsaOrderConfirmationComponent,
+    OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
   ],
   exports: [
@@ -218,7 +218,7 @@ const routes: Routes = [
     QuoteReviewComponent,
     BindQuoteDialogComponent,
     FinalReviewComponent,
-    FsaOrderConfirmationComponent,
+    OrderConfirmationComponent,
   ],
   entryComponents: [
     AddOptionsComponent,
@@ -227,14 +227,14 @@ const routes: Routes = [
     FinalReviewComponent,
     ChooseCoverNavigationComponent,
     PersonalDetailsNavigationComponent,
-    FsaOrderConfirmationComponent,
+    OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
-    FSMiniCartComponent,
+    MiniCartComponent,
   ],
   providers: [
     FSCartService,
-    FsCheckoutConnector,
-    FsCartConnector,
+    CheckoutConnector,
+    CartConnector,
     QuoteConnector,
     CategoryService,
     reducerProvider,

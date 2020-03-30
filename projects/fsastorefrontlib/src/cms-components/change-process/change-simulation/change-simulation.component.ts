@@ -6,7 +6,7 @@ import {
 import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
 
 @Component({
-  selector: 'fsa-change-simulation',
+  selector: 'cx-fs-change-simulation',
   templateUrl: './change-simulation.component.html',
 })
 export class ChangeSimulationComponent
@@ -77,10 +77,17 @@ export class ChangeSimulationComponent
   }
 
   getChangedValue(label: string, changedPolicy: any): string {
-    const changedInsuredObjectItem = changedPolicy.insuredObjectList.insuredObjects[0].insuredObjectItems.find(
-      insuredObjectItem => insuredObjectItem.label === label
-    );
-    return changedInsuredObjectItem.value;
+    if (
+      changedPolicy &&
+      changedPolicy.insuredObjectList &&
+      changedPolicy.insuredObjectList.insuredObjects[0] &&
+      changedPolicy.insuredObjectList.insuredObjects[0].insuredObjectItems
+    ) {
+      const changedInsuredObjectItem = changedPolicy.insuredObjectList.insuredObjects[0].insuredObjectItems.find(
+        insuredObjectItem => insuredObjectItem.label === label
+      );
+      return changedInsuredObjectItem.value;
+    }
   }
   getChangedCoverageValue(label: string, changedPolicy: any): string {
     const changedCoverage = changedPolicy.optionalProducts.find(

@@ -1,2 +1,2 @@
-import * as FSCheckoutSelectors from './fs-checkout-group.selectors';
-export { FSCheckoutSelectors };
+import * as CheckoutSelectors from './checkout-group.selectors';
+export { CheckoutSelectors };

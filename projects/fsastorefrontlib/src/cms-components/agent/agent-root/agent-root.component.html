@@ -1,7 +1,7 @@
 <ng-container *ngIf="agentList$ | async as agentList">
   <ng-container *ngIf="agentList && agentList.agents.length > 0">
     <div class="accordion">
-      <fsa-accordion-item
+      <cx-fs-accordion-item
         [opened]="false"
         [title]="
           ('fscommon.category.' + agentRootCategory | cxTranslate) +
@@ -18,11 +18,12 @@
                     class="cx-product-image-container"
                     [container]="agent.thumbnail"
                     format="thumbnail"
-                  ></cx-media>
+                  >
+                  </cx-media>
                   <p class="py-3">{{ agent.displayName }}</p>
                   <div class="row">
                     <a
-                      class="col-6 fsa-icon icon-envelope text-right position-relative"
+                      class="col-6 fs-icon icon-envelope text-right position-relative"
                       [routerLink]="
                         {
                           cxRoute: 'contactAgent',
@@ -31,7 +32,7 @@
                       "
                     ></a>
                     <a
-                      class="col-6 fsa-icon icon-map-marker text-left position-relative"
+                      class="col-6 fs-icon icon-map-marker text-left position-relative"
                       [routerLink]="['/agent-locator']"
                       [queryParams]="{ query: agent.email }"
                     ></a>
@@ -41,7 +42,7 @@
             </ng-container>
           </div>
         </div>
-      </fsa-accordion-item>
+      </cx-fs-accordion-item>
     </div>
   </ng-container>
 </ng-container>

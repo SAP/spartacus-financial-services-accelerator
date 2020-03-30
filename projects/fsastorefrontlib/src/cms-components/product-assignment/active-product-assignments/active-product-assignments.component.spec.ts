@@ -4,13 +4,13 @@ import { ActivatedRoute } from '@angular/router';
 import {} from '@angular/router/testing';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
+import { ProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
 import { ActiveProductAssignmentsComponent } from './active-product-assignments.component';
 import createSpy = jasmine.createSpy;
-import { FSProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
 
 @Component({
   template: '',
-  selector: 'fsa-product-assignment-item',
+  selector: 'cx-fs-product-assignment-item',
 })
 class ProductAssignmentItemComponent {
   @Input() productAssignment: any;
@@ -73,7 +73,7 @@ describe('ActiveProductAssignmentsComponent', () => {
           useClass: ActivatedRouteMock,
         },
         {
-          provide: FSProductAssignmentService,
+          provide: ProductAssignmentService,
           useValue: mockedProductAssignmentService,
         },
         {
@@ -88,7 +88,7 @@ describe('ActiveProductAssignmentsComponent', () => {
     fixture = TestBed.createComponent(ActiveProductAssignmentsComponent);
     component = fixture.componentInstance;
     mockedProductAssignmentService = TestBed.get(
-      FSProductAssignmentService as Type<FSProductAssignmentService>
+      ProductAssignmentService as Type<ProductAssignmentService>
     );
     mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
     fixture.detectChanges();

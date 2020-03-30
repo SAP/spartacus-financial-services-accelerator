@@ -1,13 +1,13 @@
-import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { FSCsTicketAdapter } from './cs-ticket.adapter';
+import { Observable } from 'rxjs';
 import { ContactAgentData } from '../../../occ/occ-models';
+import { CsTicketAdapter } from './cs-ticket.adapter';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FSCsTicketConnector {
-  constructor(protected csTicketAdapter: FSCsTicketAdapter) {}
+export class CsTicketConnector {
+  constructor(protected csTicketAdapter: CsTicketAdapter) {}
 
   createCsTicketForAgent(
     agentId: string,

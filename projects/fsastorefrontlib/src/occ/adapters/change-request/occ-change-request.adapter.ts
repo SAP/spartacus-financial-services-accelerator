@@ -46,7 +46,7 @@ export class OccChangeRequestAdapter implements ChangeRequestAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  simulateChangeRequst(userId: string, requestId: string, changeRequest: any) {
+  simulateChangeRequest(userId: string, requestId: string, changeRequest: any) {
     const url =
       this.getChangeRequestEndpoint(userId) + '/' + requestId + '/simulation';
     return this.http

@@ -1,2 +1,2 @@
-export * from './fs-cart.adapter';
-export * from './fs-cart.connector';
+export * from './cart.adapter';
+export * from './cart.connector';

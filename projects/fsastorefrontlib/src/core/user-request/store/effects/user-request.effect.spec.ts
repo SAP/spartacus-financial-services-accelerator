@@ -154,7 +154,9 @@ describe('User Request Effects', () => {
       const action = new fromActions.UpdateUserRequest({
         userId: OCC_USER_ID_CURRENT,
       });
-      const completion = new fromActions.UpdateUserRequestFail('Error');
+      const completion = new fromActions.UpdateUserRequestFail(
+        JSON.stringify('Error')
+      );
       actions$ = hot('-a', { a: action });
       const expected = cold('-b', { b: completion });
       expect(effects.updateUserRequest$).toBeObservable(expected);

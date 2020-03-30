@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { RoutingService } from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
+import { RoutingService } from '@spartacus/core';
 import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
 
 @Component({
-  selector: 'fsa-legal-checkboxes',
+  selector: 'cx-fs-legal-checkboxes',
   templateUrl: './legal-checkboxes.component.html',
 })
 export class LegalCheckboxesComponent implements OnInit {

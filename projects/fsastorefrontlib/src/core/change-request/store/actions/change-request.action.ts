@@ -1,4 +1,5 @@
-import { Action } from '@ngrx/store';
+import { StateLoaderActions } from '@spartacus/core';
+import { CHANGE_REQUEST_DATA } from '../change-request-state';
 
 export const LOAD_CHANGE_REQUEST = '[Change Request] Load Change Request';
 export const LOAD_CHANGE_REQUEST_FAIL =
@@ -25,64 +26,88 @@ export const CANCEL_CHANGE_REQUEST_FAIL =
 export const CANCEL_CHANGE_REQUEST_SUCCESS =
   '[Change Request] Cancel Change Request Success';
 
-export class CreateChangeRequest implements Action {
+export class CreateChangeRequest extends StateLoaderActions.LoaderLoadAction {
   readonly type = CREATE_CHANGE_REQUEST;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA);
+  }
 }
 
-export class CreateChangeRequestFail implements Action {
+export class CreateChangeRequestFail extends StateLoaderActions.LoaderFailAction {
   readonly type = CREATE_CHANGE_REQUEST_FAIL;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA, payload);
+  }
 }
 
-export class CreateChangeRequestSuccess implements Action {
+export class CreateChangeRequestSuccess extends StateLoaderActions.LoaderSuccessAction {
   readonly type = CREATE_CHANGE_REQUEST_SUCCESS;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA);
+  }
 }
 
-export class LoadChangeRequest implements Action {
+export class LoadChangeRequest extends StateLoaderActions.LoaderLoadAction {
   readonly type = LOAD_CHANGE_REQUEST;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA);
+  }
 }
 
-export class LoadChangeRequestFail implements Action {
+export class LoadChangeRequestFail extends StateLoaderActions.LoaderFailAction {
   readonly type = LOAD_CHANGE_REQUEST_FAIL;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA, payload);
+  }
 }
 
-export class LoadChangeRequestSuccess implements Action {
+export class LoadChangeRequestSuccess extends StateLoaderActions.LoaderSuccessAction {
   readonly type = LOAD_CHANGE_REQUEST_SUCCESS;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA);
+  }
 }
 
-export class SimulateChangeRequest implements Action {
+export class SimulateChangeRequest extends StateLoaderActions.LoaderLoadAction {
   readonly type = SIMULATE_CHANGE_REQUEST;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA);
+  }
 }
 
-export class SimulateChangeRequestFail implements Action {
+export class SimulateChangeRequestFail extends StateLoaderActions.LoaderFailAction {
   readonly type = SIMULATE_CHANGE_REQUEST_FAIL;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA, payload);
+  }
 }
 
-export class SimulateChangeRequestSucess implements Action {
+export class SimulateChangeRequestSuccess extends StateLoaderActions.LoaderSuccessAction {
   readonly type = SIMULATE_CHANGE_REQUEST_SUCCESS;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA);
+  }
 }
 
-export class CancelChangeRequest implements Action {
+export class CancelChangeRequest extends StateLoaderActions.LoaderLoadAction {
   readonly type = CANCEL_CHANGE_REQUEST;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA);
+  }
 }
 
-export class CancelChangeRequestSuccess implements Action {
+export class CancelChangeRequestSuccess extends StateLoaderActions.LoaderSuccessAction {
   readonly type = CANCEL_CHANGE_REQUEST_SUCCESS;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA);
+  }
 }
 
-export class CancelChangeRequestFail implements Action {
+export class CancelChangeRequestFail extends StateLoaderActions.LoaderFailAction {
   readonly type = CANCEL_CHANGE_REQUEST_FAIL;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA, payload);
+  }
 }
 
 export type ChangeRequestAction =
@@ -94,7 +119,7 @@ export type ChangeRequestAction =
   | LoadChangeRequestSuccess
   | SimulateChangeRequest
   | SimulateChangeRequestFail
-  | SimulateChangeRequestSucess
+  | SimulateChangeRequestSuccess
   | CancelChangeRequest
   | CancelChangeRequestSuccess
   | CancelChangeRequestFail;

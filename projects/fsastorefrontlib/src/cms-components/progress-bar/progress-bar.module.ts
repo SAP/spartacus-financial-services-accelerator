@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { I18nModule, UrlModule } from '@spartacus/core';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { FSProgressBarComponent } from './progress-bar.component';
+import { I18nModule, UrlModule } from '@spartacus/core';
+import { ProgressBarComponent } from './progress-bar.component';
 
 @NgModule({
   imports: [CommonModule, I18nModule, UrlModule, RouterModule],
-  declarations: [FSProgressBarComponent],
-  exports: [FSProgressBarComponent],
-  entryComponents: [FSProgressBarComponent],
+  declarations: [ProgressBarComponent],
+  exports: [ProgressBarComponent],
+  entryComponents: [ProgressBarComponent],
 })
-export class FSProgressBarModule {}
+export class ProgressBarModule {}
