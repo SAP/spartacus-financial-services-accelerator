@@ -4,7 +4,7 @@ import { genericIcons } from '../../../assets/icons/generic-icons';
 import { ClaimService } from './../../../core/my-account/facade/claim.service';
 
 @Component({
-  selector: 'fsa-fnol-confirmation',
+  selector: 'cx-fs-fnol-confirmation',
   templateUrl: './fnol-confirmation.component.html',
 })
 export class FNOLConfirmationComponent implements OnInit {

@@ -7,16 +7,16 @@ import {
 import { ActivatedRoute, Params } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { FSProductAssignmentService } from '../../../core/product-assignment/facade/product-assignment.service';
+import { ProductAssignmentService } from '../../../core/product-assignment/facade/product-assignment.service';
 
 @Component({
-  selector: 'fsa-active-products',
+  selector: 'cx-fs-active-products',
   templateUrl: './active-product-assignments.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ActiveProductAssignmentsComponent implements OnInit, OnDestroy {
   constructor(
-    protected productAssignmentService: FSProductAssignmentService,
+    protected productAssignmentService: ProductAssignmentService,
     protected route: ActivatedRoute,
     protected routingService: RoutingService
   ) {}

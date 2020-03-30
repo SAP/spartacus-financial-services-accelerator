@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
 
 @Component({
-  selector: 'fsa-change-coverage',
+  selector: 'cx-fs-change-coverage',
   templateUrl: './change-coverage.component.html',
 })
 export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
@@ -16,12 +16,10 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
   includedCoverages = [];
   potentialCoverages = [];
 
-  private sub = new Subscription();
-
   ngOnInit() {
     super.ngOnInit();
     this.currentDate = new Date().toISOString().substr(0, 10);
-    this.sub.add(
+    this.subscription.add(
       this.changeRequest$
         .pipe(
           map(changeRequestData => {
@@ -30,7 +28,7 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
               changeRequestData.insurancePolicy.optionalProducts &&
               !this.isSimulated(changeRequestData)
             ) {
-              this.populatelCoverages(
+              this.populateCoverages(
                 changeRequestData.insurancePolicy.optionalProducts
               );
             }
@@ -40,7 +38,7 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
     );
   }
 
-  populatelCoverages(optionalProducts: any) {
+  populateCoverages(optionalProducts: any) {
     this.includedCoverages = [];
     this.potentialCoverages = [];
     optionalProducts.map(coverage => {
@@ -91,11 +89,5 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
       },
       configurationSteps: changeRequestData.configurationSteps,
     });
-  }
-
-  ngOnDestroy() {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
   }
 }

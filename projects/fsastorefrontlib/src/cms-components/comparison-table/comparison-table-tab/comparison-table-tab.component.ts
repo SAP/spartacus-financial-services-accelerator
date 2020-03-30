@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { CMSComparisonTabComponent } from '../../../occ/occ-models';
 
 @Component({
-  selector: 'fsa-comparison-table-tab',
+  selector: 'cx-fs-comparison-table-tab',
   templateUrl: './comparison-table-tab.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

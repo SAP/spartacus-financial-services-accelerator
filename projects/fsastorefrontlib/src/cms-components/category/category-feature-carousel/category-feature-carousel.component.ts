@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import {
-  CmsCategoryFeatureComponent,
-  CmsCategoryFeatureCarouselComponent,
-} from '../../../occ/occ-models';
-import { CmsComponentData } from '@spartacus/storefront';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CmsService } from '@spartacus/core';
+import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
+import {
+  CmsCategoryFeatureCarouselComponent,
+  CmsCategoryFeatureComponent,
+} from '../../../occ/occ-models';
 
 @Component({
-  selector: 'fsa-category-carousel',
+  selector: 'cx-fs-category-carousel',
   templateUrl: './category-feature-carousel.component.html',
 })
 export class CategoryFeatureCarouselComponent implements OnInit, OnDestroy {

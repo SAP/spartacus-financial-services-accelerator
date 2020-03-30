@@ -1,11 +1,11 @@
-import { OCC_USER_ID_CURRENT } from '@spartacus/core';
-import { FSCsTicketConnector } from './cs-ticket.connector';
-import { TestBed } from '@angular/core/testing';
-import { Observable, of } from 'rxjs';
 import { Type } from '@angular/core';
-import { FSCsTicketAdapter } from './cs-ticket.adapter';
+import { TestBed } from '@angular/core/testing';
+import { OCC_USER_ID_CURRENT } from '@spartacus/core';
+import { Observable, of } from 'rxjs';
+import { CsTicketAdapter } from './cs-ticket.adapter';
+import { CsTicketConnector } from './cs-ticket.connector';
 
-class MockCsTicketAdapter implements FSCsTicketAdapter {
+class MockCsTicketAdapter implements CsTicketAdapter {
   createCsTicketForAgent(
     agentId: string,
     userId: string,
@@ -21,21 +21,19 @@ const ticketData = {
 };
 const agentID = 'test@agent.com';
 
-describe('FSCsTicketConnector', () => {
-  let csTicketConnector: FSCsTicketConnector;
-  let csTicketAdapter: FSCsTicketAdapter;
+describe('CsTicketConnector', () => {
+  let csTicketConnector: CsTicketConnector;
+  let csTicketAdapter: CsTicketAdapter;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [
-        { provide: FSCsTicketAdapter, useClass: MockCsTicketAdapter },
-      ],
+      providers: [{ provide: CsTicketAdapter, useClass: MockCsTicketAdapter }],
     });
 
-    csTicketConnector = TestBed.get(FSCsTicketConnector as Type<
-      FSCsTicketConnector
+    csTicketConnector = TestBed.get(CsTicketConnector as Type<
+      CsTicketConnector
     >);
-    csTicketAdapter = TestBed.get(FSCsTicketAdapter as Type<FSCsTicketAdapter>);
+    csTicketAdapter = TestBed.get(CsTicketAdapter as Type<CsTicketAdapter>);
   });
 
   it('should be created', () => {

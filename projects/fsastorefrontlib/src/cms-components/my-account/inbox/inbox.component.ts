@@ -4,7 +4,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { CmsService, AuthService } from '@spartacus/core';
+import { AuthService, CmsService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
@@ -15,7 +15,7 @@ import {
 } from '../../../occ/occ-models/cms-component.models';
 
 @Component({
-  selector: 'fsa-inbox',
+  selector: 'cx-fs-inbox',
   templateUrl: './inbox.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

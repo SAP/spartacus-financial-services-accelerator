@@ -1,14 +1,23 @@
 import { InjectionToken, Provider } from '@angular/core';
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
-import { AuthActions } from '@spartacus/core';
-import { ChangeRequestsState } from '../change-request-state';
+import { AuthActions, loaderReducer } from '@spartacus/core';
 import * as fromReducer from './change-request.reducer';
+
+import {
+  CHANGE_REQUEST_DATA,
+  ChangeRequestsState,
+  ChangeRequestState,
+} from '../change-request-state';
 
 export function getReducers(): ActionReducerMap<ChangeRequestsState> {
   return {
-    changeRequest: fromReducer.reducer,
+    changeRequest: loaderReducer<ChangeRequestState>(
+      CHANGE_REQUEST_DATA,
+      fromReducer.reducer
+    ),
   };
 }
+
 export const reducerToken: InjectionToken<
   ActionReducerMap<ChangeRequestsState>
 > = new InjectionToken<ActionReducerMap<ChangeRequestsState>>(

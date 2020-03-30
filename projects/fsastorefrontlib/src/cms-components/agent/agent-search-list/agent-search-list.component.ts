@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription, Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 
 @Component({
-  selector: 'fsa-agent-search-list',
+  selector: 'cx-fs-agent-search-list',
   templateUrl: './agent-search-list.component.html',
 })
 export class AgentSearchListComponent implements OnInit, OnDestroy {

@@ -1,17 +1,17 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
-import { Subscription, Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { SelectedPolicy } from '../../../../core/my-account/services/claim-data.service';
 import { ClaimService } from '../../../../core/my-account/facade';
+import { SelectedPolicy } from '../../../../core/my-account/services/claim-data.service';
 
 @Component({
-  selector: 'fsa-create-claim',
+  selector: 'cx-fs-create-claim',
   templateUrl: './create-claim.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

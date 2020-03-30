@@ -5,11 +5,11 @@
       <ng-container *ngFor="let productAssignment of productAssignments">
         <ng-container *ngIf="productAssignment.active === true">
           <div class="single-card col-4">
-            <fsa-product-assignment-item
+            <cx-fs-product-assignment-item
               [productAssignment]="productAssignment"
               [orgUnitId]="orgUnitId"
             >
-            </fsa-product-assignment-item>
+            </cx-fs-product-assignment-item>
           </div>
         </ng-container>
       </ng-container>

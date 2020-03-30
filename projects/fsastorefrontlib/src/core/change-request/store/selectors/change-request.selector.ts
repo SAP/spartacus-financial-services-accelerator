@@ -1,15 +1,15 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
-import * as fromChangeRequest from '../reducers/change-request.reducer';
 import * as fromFeature from './feature.selector';
 import {
   ChangeRequestsState,
   ChangeRequestState,
   StateWithChangeRequest,
 } from '../change-request-state';
+import { LoaderState, StateLoaderSelectors } from '@spartacus/core';
 
 export const getChangeRequestState: MemoizedSelector<
   StateWithChangeRequest,
-  ChangeRequestState
+  LoaderState<ChangeRequestState>
 > = createSelector(
   fromFeature.getChangeRequestState,
   (changeRequestsState: ChangeRequestsState) =>
@@ -21,7 +21,9 @@ export const getChangeRequest: MemoizedSelector<
   any
 > = createSelector(
   getChangeRequestState,
-  fromChangeRequest.getChangeRequest
+  (state: LoaderState<ChangeRequestState>) => {
+    return StateLoaderSelectors.loaderValueSelector(state).content;
+  }
 );
 
 export const getLoaded: MemoizedSelector<
@@ -29,5 +31,15 @@ export const getLoaded: MemoizedSelector<
   any
 > = createSelector(
   getChangeRequestState,
-  fromChangeRequest.getLoaded
+  (state: LoaderState<ChangeRequestState>) =>
+    StateLoaderSelectors.loaderValueSelector(state).loaded
+);
+
+export const getChangeRequestErrorFactory: MemoizedSelector<
+  StateWithChangeRequest,
+  boolean
+> = createSelector(
+  getChangeRequestState,
+  (loaderState: LoaderState<ChangeRequestState>) =>
+    StateLoaderSelectors.loaderErrorSelector(loaderState)
 );

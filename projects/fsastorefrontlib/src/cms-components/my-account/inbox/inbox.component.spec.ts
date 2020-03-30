@@ -2,17 +2,19 @@ import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import {
-  AuthService,
   AuthRedirectService,
+  AuthService,
   CmsService,
   I18nTestingModule,
   UserToken,
 } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
-import { InboxTab } from '../../../core/my-account/services/inbox-data.service';
 import { InboxService } from '../../../core/my-account/facade/inbox.service';
-import { InboxDataService } from '../../../core/my-account/services/inbox-data.service';
+import {
+  InboxDataService,
+  InboxTab,
+} from '../../../core/my-account/services/inbox-data.service';
 import {
   CmsInboxComponent,
   CmsInboxTabComponent,
@@ -23,7 +25,7 @@ import createSpy = jasmine.createSpy;
 
 @Component({
   template: '',
-  selector: 'fsa-inbox-tab',
+  selector: 'cx-fs-inbox-tab',
 })
 class InboxTabComponent {
   @Input() currentTab;
@@ -32,7 +34,7 @@ class InboxTabComponent {
 
 @Component({
   template: '',
-  selector: 'fsa-inbox-messages',
+  selector: 'cx-fs-inbox-messages',
 })
 class InboxMessagesComponent {
   @Input() initialGroup;

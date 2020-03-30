@@ -1,6 +1,6 @@
 <!--  TABLE HEADER   -->
 <div
-  class="fsa-icon m-4"
+  class="fs-icon m-4"
   (click)="changeSelectedMessages(!envelopState)"
   [ngClass]="envelopState ? 'icon-envelope-open' : 'icon-envelope'"
 ></div>
@@ -13,7 +13,7 @@
           [checked]="mainCheckboxChecked"
           (click)="checkAllCheckboxes(!mainCheckboxChecked)"
         />
-        <span class="checkbox-text fsa-icon icon-ok"></span>
+        <span class="checkbox-text fs-icon icon-ok"></span>
       </label>
     </div>
     <ng-container
@@ -26,7 +26,7 @@
       <div class="col-3">
         {{ 'fscommon.subject' | cxTranslate }}
         <span
-          class="filter position-absolute fsa-icon icon-triangle-bottom"
+          class="filter position-absolute fs-icon icon-triangle-bottom"
           (click)="
             sorts.subject = sorts.subject === 'desc' ? 'asc' : 'desc';
             sortMessages('subject', sorts.subject)
@@ -38,7 +38,7 @@
       <div class="col-6">
         {{ 'fscommon.preview' | cxTranslate }}
         <span
-          class="filter position-absolute fsa-icon icon-triangle-bottom"
+          class="filter position-absolute fs-icon icon-triangle-bottom"
           (click)="
             sorts.content = sorts.content === 'desc' ? 'asc' : 'desc';
             sortMessages('body', sorts.content)
@@ -49,7 +49,7 @@
       <div class="col-2">
         {{ 'fscommon.date' | cxTranslate }}
         <span
-          class="filter position-absolute fsa-icon icon-triangle-bottom"
+          class="filter position-absolute fs-icon icon-triangle-bottom"
           (click)="
             sorts.sentDate = sorts.sentDate === 'desc' ? 'asc' : 'desc';
             sortMessages('sentdate', sorts.sentDate)
@@ -68,7 +68,7 @@
           [checked]="mainCheckboxChecked"
           (click)="checkAllCheckboxes(!mainCheckboxChecked)"
         />
-        <span class="checkbox-text fsa-icon icon-ok"></span>
+        <span class="checkbox-text fs-icon icon-ok"></span>
       </label>
     </div>
     <div
@@ -79,7 +79,7 @@
     </div>
     <div class="col-2">
       <span
-        class="filter position-absolute fsa-icon icon-triangle-bottom"
+        class="filter position-absolute fs-icon icon-triangle-bottom"
       ></span>
     </div>
   </div>
@@ -93,8 +93,8 @@
         *ngFor="let tab of mobileTabs; let i = index"
         (click)="activeTabIndex = i; displayMobileGroups = false"
       >
-        <fsa-inbox-tab [currentTab]="i === activeTabIndex" [tabId]="tab">
-        </fsa-inbox-tab>
+        <cx-fs-inbox-tab [currentTab]="i === activeTabIndex" [tabId]="tab">
+        </cx-fs-inbox-tab>
       </li>
     </ul>
   </div>
@@ -121,7 +121,7 @@
                 [checked]="message.checked"
                 (change)="checkMessage(message.uid, !message.checked)"
               />
-              <span class="checkbox-text fsa-icon icon-ok"></span>
+              <span class="checkbox-text fs-icon icon-ok"></span>
             </label>
           </div>
           <div
@@ -130,7 +130,7 @@
           >
             {{ message.subject }}
             <ng-container *ngIf="message.documents?.length > 0">
-              <span class="position-absolute fsa-icon icon-attachment"></span>
+              <span class="position-absolute fs-icon icon-attachment"></span>
             </ng-container>
           </div>
           <div
@@ -163,7 +163,7 @@
                 class="pb-2 mb-1 document-list-item"
                 *ngFor="let document of message.documents"
               >
-                <span class="icon-external-link fsa-icon"></span>
+                <span class="icon-external-link fs-icon"></span>
                 <a
                   class="document-link pl-2"
                   [href]="document.downloadUrl"

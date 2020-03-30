@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FSAStorefrontModule } from '@fsa/storefront';
-import { AppComponent } from './app.component';
-import { environment } from 'src/environments/environment';
+import { FSStorefrontModule } from '@fsa/storefront';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment';
+import { AppComponent } from './app.component';
 
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    FSAStorefrontModule.withConfig({
+    FSStorefrontModule.withConfig({
       backend: {
         occ: {
           baseUrl: environment.occBaseUrl
@@ -40,4 +40,4 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

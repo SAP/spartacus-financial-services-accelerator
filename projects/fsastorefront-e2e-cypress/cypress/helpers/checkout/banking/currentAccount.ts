@@ -5,27 +5,27 @@ export function openCategoryPage() {
     menuOption: 'Banking',
     dropdownItem: 'Current Account',
   });
-  cy.get('fsa-enriched-responsive-banner')
+  cy.get('cx-fs-enriched-responsive-banner')
     .should('be.visible')
     .findByText('Request a product')
     .click({ force: true });
 }
 
 export function checkCurrentAccountComparisonTable() {
-  cy.get('fsa-comparison-table-panel-item').should('have.length', 3);
-  cy.get('fsa-comparison-table-panel-item')
+  cy.get('cx-fs-comparison-table-panel-item').should('have.length', 3);
+  cy.get('cx-fs-comparison-table-panel-item')
     .eq(0)
     .within(() => {
       cy.get('.table-header-title').should('have.text', 'Basic Account');
       cy.get('.table-header-value').should('have.text', '€0.00');
     });
-  cy.get('fsa-comparison-table-panel-item')
+  cy.get('cx-fs-comparison-table-panel-item')
     .eq(1)
     .within(() => {
       cy.get('.table-header-title').should('have.text', 'Family Account');
       cy.get('.table-header-value').should('have.text', '€4.99');
     });
-  cy.get('fsa-comparison-table-panel-item')
+  cy.get('cx-fs-comparison-table-panel-item')
     .eq(2)
     .within(() => {
       cy.get('.table-header-title').should('have.text', 'Premium Account');
@@ -34,7 +34,7 @@ export function checkCurrentAccountComparisonTable() {
 }
 
 export function selectFamilyAccount() {
-  cy.get('fsa-comparison-table-panel-item')
+  cy.get('cx-fs-comparison-table-panel-item')
     .eq(1)
     .within(() => {
       cy.get('.table-header-title').should('have.text', 'Family Account');
@@ -70,7 +70,7 @@ export function checkOptionalProductsAddTransactionChest() {
 }
 
 export function checkMiniCartCurrentAccount() {
-  cy.get('fsa-mini-cart').within(() => {
+  cy.get('cx-fs-mini-cart').within(() => {
     cy.get('.short-overview-item').should('have.length', 2);
     cy.get('.short-overview-item')
       .eq(0)

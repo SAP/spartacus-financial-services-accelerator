@@ -2,24 +2,24 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnInit,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CmsConfig, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { FSCheckoutConfigService } from '../../../core/checkout/services/fs-checkout-config.service';
-import { FSProductService } from '../../../core/product-pricing/facade/fs-product.service';
+import { map } from 'rxjs/operators';
+import { FSCartService } from '../../../core/cart/facade';
+import { FSCheckoutConfigService } from '../../../core/checkout/services/checkout-config.service';
+import { FSProductService } from '../../../core/product-pricing/facade/product.service';
 import {
   FSProduct,
   OneTimeChargeEntry,
   PricingData,
 } from '../../../occ/occ-models';
-import { FSCartService } from '../../../core/cart/facade';
-import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'fsa-comparison-table-panel-item',
+  selector: 'cx-fs-comparison-table-panel-item',
   templateUrl: './comparison-table-panel-item.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -85,7 +85,7 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
     productCode: string,
     bundleTemplateId: string
   ) {
-    this.cartService.createCartAndStartBundle(
+    this.cartService.createCartForProduct(
       productCode,
       bundleTemplateId,
       1,

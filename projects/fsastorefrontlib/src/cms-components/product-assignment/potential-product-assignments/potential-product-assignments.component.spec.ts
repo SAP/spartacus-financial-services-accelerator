@@ -1,9 +1,9 @@
-import { Component, Type } from '@angular/core';
+import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule, UserService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { FSProductAssignmentService } from '../../../core/product-assignment/facade/product-assignment.service';
+import { ProductAssignmentService } from '../../../core/product-assignment/facade/product-assignment.service';
 import { PotentialProductAssignmentsComponent } from './potential-product-assignments.component';
 
 const mockProductAssignments = [
@@ -77,7 +77,7 @@ describe('PotentialProductAssignmentsComponent', () => {
           useClass: ActivatedRouteMock,
         },
         {
-          provide: FSProductAssignmentService,
+          provide: ProductAssignmentService,
           useValue: mockedProductAssignmentService,
         },
         {
@@ -92,21 +92,21 @@ describe('PotentialProductAssignmentsComponent', () => {
     fixture = TestBed.createComponent(PotentialProductAssignmentsComponent);
     component = fixture.componentInstance;
     mockedProductAssignmentService = TestBed.get(
-      FSProductAssignmentService as Type<FSProductAssignmentService>
+      ProductAssignmentService as Type<ProductAssignmentService>
     );
     spyOn(
       mockedProductAssignmentService,
       'createProductAssignment'
     ).and.callThrough();
     mockedProductAssignmentService = TestBed.get(
-      FSProductAssignmentService as Type<FSProductAssignmentService>
+      ProductAssignmentService as Type<ProductAssignmentService>
     );
     spyOn(
       mockedProductAssignmentService,
       'removeProductAssignment'
     ).and.callThrough();
     mockedProductAssignmentService = TestBed.get(
-      FSProductAssignmentService as Type<FSProductAssignmentService>
+      ProductAssignmentService as Type<ProductAssignmentService>
     );
     fixture.detectChanges();
   });

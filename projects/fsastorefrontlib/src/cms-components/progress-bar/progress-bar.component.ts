@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'fsa-progress-bar',
+  selector: 'cx-fs-progress-bar',
   templateUrl: './progress-bar.component.html',
 })
-export class FSProgressBarComponent {
+export class ProgressBarComponent {
   @Input()
   steps: any;
 }

@@ -1,6 +1,6 @@
 export function checkBankingComparisonPage() {
   cy.get('.progress-inner-wrapper').should('have.length', 5);
-  cy.get('fsa-comparison-table-panel').should('be.visible');
+  cy.get('cx-fs-comparison-table-panel').should('be.visible');
   cy.get('.fixed-column').should('have.length', 1);
   cy.get('.primary-button')
     .should('contain', 'Select')

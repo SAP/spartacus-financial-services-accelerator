@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { SpinnerModule, MediaModule } from '@spartacus/storefront';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { I18nModule } from '@spartacus/core';
-import { AddOptionsComponent } from './add-options.component';
+import { MediaModule, SpinnerModule } from '@spartacus/storefront';
+import { CartConnector } from '../../../../core/cart/connectors';
 import { FSCartService } from '../../../../core/cart/facade';
-import { FsCartConnector } from '../../../../core/cart/connectors';
+import { AddOptionsComponent } from './add-options.component';
 
 @NgModule({
   imports: [
@@ -21,6 +21,6 @@ import { FsCartConnector } from '../../../../core/cart/connectors';
   ],
   declarations: [AddOptionsComponent],
   exports: [AddOptionsComponent],
-  providers: [FSCartService, FsCartConnector],
+  providers: [FSCartService, CartConnector],
 })
 export class AddOptionsModule {}

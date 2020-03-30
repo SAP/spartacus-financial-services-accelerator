@@ -1,1 +1,1 @@
-export * from './routing/default-fsa-routing-config';
+export * from './routing/default-routing-config';

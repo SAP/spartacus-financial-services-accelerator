@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FSProductAssignmentAdapter } from './product-assignment.adapter';
+import { ProductAssignmentAdapter } from './product-assignment.adapter';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FSProductAssignmentConnector {
-  constructor(protected productAssignmentAdapter: FSProductAssignmentAdapter) {}
+export class ProductAssignmentConnector {
+  constructor(protected productAssignmentAdapter: ProductAssignmentAdapter) {}
 
   loadProductAssignmentsForUnit(
     userId: string,

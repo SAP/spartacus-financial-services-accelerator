@@ -1,26 +1,26 @@
 import {
-  Component,
-  OnInit,
-  OnDestroy,
   ChangeDetectionStrategy,
+  Component,
+  OnDestroy,
+  OnInit,
 } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
-import {
-  UserService,
-  RoutingService,
-  GlobalMessageService,
-  OCC_USER_ID_ANONYMOUS,
-  GlobalMessageType,
-} from '@spartacus/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { DefaultFormValidators } from '@fsa/dynamicforms';
+import {
+  GlobalMessageService,
+  GlobalMessageType,
+  OCC_USER_ID_ANONYMOUS,
+  RoutingService,
+  UserService,
+} from '@spartacus/core';
+import { Observable, Subscription } from 'rxjs';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
-import { FSCsTicketService } from './../../../core/cs-ticket/facade/cs-ticket.service';
+import { CsTicketService } from './../../../core/cs-ticket/facade/cs-ticket.service';
 import { ContactAgentData } from './../../../occ/occ-models';
 
 @Component({
-  selector: 'fsa-contact-agent-form',
+  selector: 'cx-fs-contact-agent-form',
   templateUrl: './contact-agent-form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -32,7 +32,7 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
     protected fb: FormBuilder,
     protected globalMessageService: GlobalMessageService,
     protected router: RoutingService,
-    protected csTicketService: FSCsTicketService
+    protected csTicketService: CsTicketService
   ) {}
 
   private subscription = new Subscription();
