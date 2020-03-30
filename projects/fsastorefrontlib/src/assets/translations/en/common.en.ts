@@ -80,6 +80,7 @@ export const fscommon = {
     makeClaim: 'Make a Claim Online',
     summary: 'Summary',
     submit: 'Submit',
+    totalResults: 'Total results',
     application: {
       applicationRequestSubmitted:
         'Your application has been successfully saved in our system. An e-mail has been sent to your e-mail address.',

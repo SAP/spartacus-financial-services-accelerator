@@ -1,4 +1,7 @@
 %fsa-find-agent-navigation {
   --cx-flex-basis: 50%;
   flex: 1 1 var(--cx-flex-basis, 50%);
+  @include media-breakpoint-down(sm) {
+    --cx-flex-basis: 100%;
+  }
 }

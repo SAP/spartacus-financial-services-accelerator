@@ -15,6 +15,9 @@
         &:hover {
           text-decoration: underline;
         }
+        @include media-breakpoint-down(sm) {
+          text-align: center;
+        }
       }
     }
   }
@@ -25,10 +28,7 @@
   }
   .counter {
     left: 0;
-    top: -6px;
-    font-size: 12px;
     width: 19px;
-    text-align: center;
     border-radius: 50%;
     background-color: var(--cx-color-1);
     font-size: var(--cx-xs-font-size);

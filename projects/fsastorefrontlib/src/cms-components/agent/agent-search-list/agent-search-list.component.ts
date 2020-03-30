@@ -43,8 +43,8 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
     this.agentSearchService.search(this.searchQuery, page);
   }
 
-  setIndex(index: number) {
-    this.selectedIndex = index;
+  setIndex(selectedIndex: number) {
+    this.selectedIndex = selectedIndex;
   }
 
   ngOnDestroy() {

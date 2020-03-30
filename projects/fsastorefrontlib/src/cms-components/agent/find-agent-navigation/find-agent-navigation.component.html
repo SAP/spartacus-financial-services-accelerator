@@ -1,8 +1,8 @@
-<div class="container mt-5">
-  <div class="row d-flex justify-content-end">
+<div class="mt-5 pl-md-3">
+  <div class="row no-gutters d-flex justify-content-end">
     <div class="col-6">
       <button
-        class="primary-button btn-block"
+        class="primary-button btn-block pr-3"
         routerLink="/find-agent"
         routerLinkActive="active"
         [disabled]="disableByMatchingUrl('find-agent')"
@@ -10,7 +10,7 @@
         {{ 'fscommon.listView' | cxTranslate }}
       </button>
     </div>
-    <div class="col-6">
+    <div class="col-6 pl-3">
       <button
         class="secondary-button btn-block"
         routerLink="/agent-locator"
