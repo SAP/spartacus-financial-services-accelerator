@@ -109,7 +109,7 @@ describe('AgentSearchListComponent', () => {
     expect(mockSearchService.search).toHaveBeenCalled();
   });
   it('should set index for active agent', () => {
-    component.setIndex(selectedIndex);
+    component.setActiveAgentIndex(selectedIndex);
     expect(component.selectedIndex).toEqual(selectedIndex);
   });
 });

@@ -43,7 +43,7 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
     this.agentSearchService.search(this.searchQuery, page);
   }
 
-  setIndex(selectedIndex: number) {
+  setActiveAgentIndex(selectedIndex: number) {
     this.selectedIndex = selectedIndex;
   }
 
