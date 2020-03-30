@@ -1,4 +1,4 @@
-import { donnaMooreUser, registrationUser } from '../../../sample-data/users';
+import { registrationUser } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as fnol from '../../../helpers/fnolCheckout';
 import * as auto from '../../../helpers/checkout/insurance/auto';
@@ -34,7 +34,7 @@ context('FNOL for sample data user', () => {
     cy.get('.notice.py-4').contains('You have no valid policies!');
   });
 
-  it('Should complete auto checkout', () => {
+  it('Should complete first step auto checkout', () => {
     auto.openCategoryPage();
     auto.populateAutoInformation();
     auto.populateMainDriverInfo();

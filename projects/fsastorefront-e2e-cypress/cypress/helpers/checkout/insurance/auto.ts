@@ -52,20 +52,20 @@ export function populateMainDriverInfo() {
 }
 
 export function checkPricesOnComparisonTable() {
-  cy.get('fsa-comparison-table-panel-item').should('have.length', 3);
-  cy.get('fsa-comparison-table-panel-item')
+  cy.get('cx-fs-comparison-table-panel-item').should('have.length', 3);
+  cy.get('cx-fs-comparison-table-panel-item')
     .eq(2)
     .within(() => {
       cy.get('.table-header-title').should('have.text', 'Auto Gold');
       cy.get('.table-header-value').should('have.text', '€20.74');
     });
-  cy.get('fsa-comparison-table-panel-item')
+  cy.get('cx-fs-comparison-table-panel-item')
     .eq(1)
     .within(() => {
       cy.get('.table-header-title').should('have.text', 'Auto Silver');
       cy.get('.table-header-value').should('have.text', '€10.95');
     });
-  cy.get('fsa-comparison-table-panel-item')
+  cy.get('cx-fs-comparison-table-panel-item')
     .eq(0)
     .within(() => {
       cy.get('.table-header-title').should('have.text', 'Auto Bronze');
