@@ -35,12 +35,12 @@ export const forms = {
     },
     interest: {
       title: 'Interest',
-      problem: 'Problem',
-      incident: 'Incident',
       complaint: 'Complaint',
-      fraud: 'Fraud',
       note: 'Note',
-      enquiry: 'Enquiry',
+      financialAdvisory: 'Financial Advisory',
+      productInfo: 'Product Information',
+      quotePolicy: 'Quote & Policy',
+      claimInfo: 'Claim Information',
     },
     contactType: {
       title: 'Contact type',
