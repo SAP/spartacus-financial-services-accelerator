@@ -1,4 +1,4 @@
-import { ChangedPolicyData } from 'projects/fsastorefrontlib/src/occ';
+import { ChangedPolicyData } from '../../../../src/occ';
 import { RequestType } from './../../../occ/occ-models/occ.models';
 import { Injectable } from '@angular/core';
 

@@ -12,7 +12,7 @@ import { ChangeRequestService } from '../../../core/change-request/facade/change
 import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
 import { FSStepData, StepStatus } from '../../../occ/occ-models';
 import * as fromUserRequestAction from './../../../core/user-request/store/actions';
-import { ChangePolicyService } from 'projects/fsastorefrontlib/src/core/change-request/services/change-policy.service';
+import { ChangePolicyService } from '../../../core/change-request/services/change-policy.service';
 
 @Component({ template: '' })
 export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
