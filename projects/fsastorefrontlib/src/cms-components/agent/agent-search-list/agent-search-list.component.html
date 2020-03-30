@@ -7,7 +7,6 @@
           <cx-pagination
             *ngIf="pagination"
             [pagination]="pagination"
-            queryParam="currentPage"
             (viewPageEvent)="pageChange($event)"
           ></cx-pagination>
         </div>
