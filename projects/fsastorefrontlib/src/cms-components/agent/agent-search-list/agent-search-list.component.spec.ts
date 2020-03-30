@@ -26,7 +26,7 @@ class ActivatedRouteMock {
   };
 }
 const query = 'autoAgent';
-
+const selectedIndex = 1;
 const mockAgentSearchService = {
   search: jasmine.createSpy(),
   getResults: jasmine.createSpy().and.returnValue(of(searchResults)),
@@ -106,7 +106,10 @@ describe('AgentSearchListComponent', () => {
 
   it('should find agents with query', () => {
     activatedRoute.paramsSubscriptionHandler({ query: query });
-
     expect(mockSearchService.search).toHaveBeenCalled();
+  });
+  it('should set index for active agent', () => {
+    component.setIndex(selectedIndex);
+    expect(component.selectedIndex).toEqual(selectedIndex);
   });
 });
