@@ -1,3 +1,4 @@
+import { InsuranceQuote } from './../../../../../../dist/fsastorefrontlib/occ/occ-models/occ.models.d';
 import { Policy } from './reducers/claim-policies.reducer';
 
 export const MY_ACCOUNT_FEATURE = 'assets';
@@ -19,7 +20,7 @@ export interface Quote {
 }
 
 export interface QuoteState {
-  quotes: any;
+  quotes: InsuranceQuote[];
   loaded: boolean;
 }
 

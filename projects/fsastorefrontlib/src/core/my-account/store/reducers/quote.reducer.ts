@@ -2,7 +2,7 @@ import * as fromAction from '../actions';
 import { QuoteState } from '../my-account-state';
 
 export const initialState: QuoteState = {
-  quotes: {},
+  quotes: [],
   loaded: false,
 };
 
@@ -11,7 +11,7 @@ export function reducer(
   action: fromAction.QuoteAction
 ): QuoteState {
   if (action.type === fromAction.LOAD_QUOTES_SUCCESS) {
-    const quotes = { ...action.payload };
+    const quotes = [...action.payload];
     return {
       ...state,
       quotes,

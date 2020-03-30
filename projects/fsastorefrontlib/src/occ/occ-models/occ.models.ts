@@ -7,6 +7,7 @@ import {
   Product,
   User,
   UserSignUp,
+  Occ,
 } from '@spartacus/core';
 
 export interface ContactAgentData {
@@ -37,12 +38,24 @@ export interface FSCart extends Cart {
   insuranceQuote?: InsuranceQuote;
 }
 
+export interface InsuranceQuoteList {
+  insuranceQuotes: InsuranceQuote[];
+}
+
 export interface InsuranceQuote {
   quoteId?: string;
   state?: QuoteBindingState;
+  defaultCategory?: Occ.Category;
+  quoteStatus?: QuoteStatus;
+  quotePrice?: Occ.Price;
+  paymentFrequency?: string;
 }
 
 export interface QuoteBindingState {
+  code?: string;
+}
+
+export interface QuoteStatus {
   code?: string;
 }
 
