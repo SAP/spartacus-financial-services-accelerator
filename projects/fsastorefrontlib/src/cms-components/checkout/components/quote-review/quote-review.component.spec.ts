@@ -166,7 +166,7 @@ describe('Quote Review Component', () => {
 
   it('should not get form content 4', () => {
     const content = component.getFormContent({
-      deliveryOrderGroups: [{ entries: [{ formDataData: [] }] }],
+      deliveryOrderGroups: [{ entries: [{ formData: [] }] }],
     });
     expect(content).toEqual(undefined);
   });
