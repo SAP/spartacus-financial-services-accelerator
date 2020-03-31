@@ -13,5 +13,6 @@ export const changeRequest = {
         '[DE] Your change has been sucesfully submitted. You can find processing email in the',
       inbox: '[DE] Inbox',
     },
+    autoInformation: '[DE] Auto Information',
   },
 };
