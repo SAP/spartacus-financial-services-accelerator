@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'cx-datepicker',
   templateUrl: './datepicker.component.html',
 })
-export class DatepickerComponent implements OnInit {
+export class DatePickerComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
