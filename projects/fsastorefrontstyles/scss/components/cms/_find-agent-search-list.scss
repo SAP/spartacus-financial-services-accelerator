@@ -1,0 +1,39 @@
+%cx-fs-agent-search-list {
+  .agent-list {
+    border: 1px solid var(--cx-color-3);
+    max-height: 700px;
+    overflow-y: auto;
+    .agent-list-item {
+      &.active {
+        background-color: var(--cx-color-4);
+        .cx-product-image-container img {
+          border: 1px solid var(--cx-color-primary);
+        }
+      }
+      .agent-name {
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
+        @include media-breakpoint-down(sm) {
+          text-align: center;
+        }
+      }
+    }
+  }
+  .cx-product-image-container img {
+    @include transition;
+    background-color: var(--cx-color-1);
+    border-radius: 50%;
+  }
+  .counter {
+    left: 0;
+    width: 19px;
+    border-radius: 50%;
+    background-color: var(--cx-color-1);
+    font-size: var(--cx-xs-font-size);
+  }
+  cx-pagination {
+    display: inline-flex;
+  }
+}
