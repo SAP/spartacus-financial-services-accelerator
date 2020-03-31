@@ -10,8 +10,8 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from '../core/models/form-config.interface';
-import { FormGenericComponent } from '../core';
-import { FormConfig } from '../core/config/form-config';
+import { GenericComponent } from './generic.component';
+import { FormConfig } from '../core/config';
 
 @Directive({
   selector: '[cxFormComponent]',
@@ -21,8 +21,8 @@ export class FormComponentDirective implements OnChanges, OnInit {
   config: FieldConfig;
   @Input()
   group: FormGroup;
-  component: ComponentRef<FormGenericComponent>;
-  components: { [type: string]: Type<FormGenericComponent> } = {};
+  component: ComponentRef<GenericComponent>;
+  components: { [type: string]: Type<GenericComponent> } = {};
 
   constructor(
     protected resolver: ComponentFactoryResolver,
@@ -48,9 +48,9 @@ export class FormComponentDirective implements OnChanges, OnInit {
         Supported types: ${supportedTypes}`
       );
     }
-    const component = this.resolver.resolveComponentFactory<
-      FormGenericComponent
-    >(this.components[this.config.type]);
+    const component = this.resolver.resolveComponentFactory<GenericComponent>(
+      this.components[this.config.type]
+    );
     this.component = this.container.createComponent(component);
     this.component.instance.config = this.config;
     this.component.instance.group = this.group;

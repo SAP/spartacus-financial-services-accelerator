@@ -11,13 +11,14 @@ import { YFormData } from '@fsa/dynamicforms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GeneralHelpers } from '../../helpers/helpers';
-import { FormConfig } from '../../models/form-config';
+
 import {
   FieldConfig,
   FormDefinition,
 } from '../../models/form-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 import { FormDataService } from '../../services/data/form-data.service';
+import { FormConfig } from '../../config';
 
 @Component({
   exportAs: 'cx-dynamicForm',
