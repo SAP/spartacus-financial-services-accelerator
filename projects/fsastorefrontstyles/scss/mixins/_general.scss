@@ -19,6 +19,12 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+@mixin reset-appearance {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: none;
+}
 @mixin box-shadow($x, $y, $a, $b, $color, $opacity) {
   box-shadow: $x $y $a $b rgba($color, $opacity);
   -moz-box-shadow: $x $y $a $b rgba($color, $opacity);
