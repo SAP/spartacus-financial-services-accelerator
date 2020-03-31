@@ -77,6 +77,7 @@ export const fscommon = {
     makeClaim: 'Melden Sie einen Schaden online',
     summary: 'Zusammenfassung',
     submit: '[DE] Submit',
+    totalResults: '[DE] Total results',
     application: {
       applicationRequestSubmitted:
         'Ihr Antrag wurde erfolgreich in unserem System gespeichert. Eine E-Mail mit weiteren Informationen wurde an Ihre E-Mail Adresse gesendet.',
