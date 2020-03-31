@@ -7,12 +7,11 @@ import {
   ActionReducer,
 } from '@ngrx/store';
 import * as fromUserRequestReducer from './user-request.reducer';
-import { UserRequestState } from '../user-request-state';
+import {
+  FSUserRequestState,
+  StateWithUserRequest,
+} from '../user-request-state';
 import { AuthActions } from '@spartacus/core';
-
-export interface FSUserRequestState {
-  userRequest: UserRequestState;
-}
 
 export function getReducers(): ActionReducerMap<FSUserRequestState> {
   return {
@@ -31,8 +30,8 @@ export const reducerProvider: Provider = {
   useFactory: getReducers,
 };
 
-export const getUserState: MemoizedSelector<
-  any,
+export const getUserRequestState: MemoizedSelector<
+  StateWithUserRequest,
   FSUserRequestState
 > = createFeatureSelector<FSUserRequestState>('userRequest');
 

@@ -6,11 +6,11 @@ import {
   RoutingService,
 } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { FSCheckoutConfigService } from '../../../../core/checkout/services/fs-checkout-config.service';
-import { FSCheckoutService } from '../../../../core/checkout/services/fs-checkout.service';
+import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
+import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
 
 @Component({
-  selector: 'fsa-final-review',
+  selector: 'cx-fs-final-review',
   templateUrl: './final-review.component.html',
 })
 export class FinalReviewComponent implements OnInit {
@@ -20,21 +20,21 @@ export class FinalReviewComponent implements OnInit {
   goToQuoteReview = new EventEmitter<any>();
   tAndCToggler = false;
   constructor(
-    private checkoutService: FSCheckoutService,
-    private checkoutPaymentService: CheckoutPaymentService,
-    private routingService: RoutingService,
-    private checkoutConfigService: FSCheckoutConfigService,
-    private activatedRoute: ActivatedRoute
+    protected checkoutService: FSCheckoutService,
+    protected checkoutPaymentService: CheckoutPaymentService,
+    protected routingService: RoutingService,
+    protected checkoutConfigService: FSCheckoutConfigService,
+    protected activatedRoute: ActivatedRoute
   ) {}
 
   checkoutStepUrlNext: string;
 
   ngOnInit() {
+    this.checkoutService.mockDeliveryMode();
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
       this.activatedRoute
     );
     this.paymentDetails$ = this.checkoutPaymentService.getPaymentDetails();
-    this.checkoutService.mockDeliveryMode();
   }
 
   toggleTAndC(): void {
@@ -45,6 +45,7 @@ export class FinalReviewComponent implements OnInit {
   }
   placeOrder(): void {
     this.checkoutService.placeOrder();
+    this.checkoutService.orderPlaced = true;
     this.routingService.go({ cxRoute: 'orderConfirmation' });
   }
 }

@@ -26,11 +26,30 @@ export const forms = {
     dateOfBirth: {
       label: 'Date of Birth',
     },
+    effectiveDate: 'Effective date',
+    changeMileage: 'Change mileage',
     phoneNumber: {
       label: 'Phone number',
       lengthValidation:
         'Phone number should be between minimum 6 characters and maximum 20',
     },
+    interest: {
+      title: 'Interest',
+      complaint: 'Complaint',
+      note: 'Note',
+      financialAdvisory: 'Financial Advisory',
+      productInfo: 'Product Information',
+      quotePolicy: 'Quote & Policy',
+      claimInfo: 'Claim Information',
+    },
+    contactType: {
+      title: 'Contact type',
+      email: 'Email',
+      call: 'Call',
+    },
+    subject: 'Subject',
+    enterMessage: 'Your message',
+    send: 'Send',
     titles: {
       homeowners_details_form: 'Homeowners Information',
       trip_details_form: 'Trip Information',
@@ -42,6 +61,10 @@ export const forms = {
       insurance_personal_details: 'Personal Details',
       event_personal_details: 'Personal Details',
       travel_personal_details: 'Personal Details',
+      auto_change_car_details_form: 'Auto Information',
+    },
+    auto: {
+      vehicleAnnualMileage: 'Annual Mileage',
     },
     personalDetails: {
       address1: 'Address 1',

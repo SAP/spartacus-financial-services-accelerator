@@ -1,0 +1,27 @@
+<ng-container *ngIf="changeRequest$ | async as changeRequest">
+  <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
+    {{ 'changeRequest.confirmation.title' | cxTranslate }}
+  </h2>
+  <div class="box-shadow p-4">
+    <div class="content860 d-flex flex-row justify-content-center flex-wrap">
+      <div class="text-center w-100 my-5">
+        <div class="image-wrapper">
+          <img class="image-item" [src]="getImagelink()" alt="" />
+        </div>
+      </div>
+      <div class="flex-100 border-color-6 mb-5"></div>
+      <div class="text-center">
+        <p>
+          {{ 'changeRequest.confirmation.message' | cxTranslate }}
+
+          <a
+            class="overview-section-link"
+            routerLink="/my-account/inbox/"
+            routerLinkActive="active"
+            >{{ 'changeRequest.confirmation.inbox' | cxTranslate }}</a
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</ng-container>

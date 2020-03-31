@@ -1,11 +1,5 @@
 import * as fromAction from '../actions';
-
-export interface ClaimState {
-  claims: {};
-  refresh: boolean;
-  loaded: boolean;
-  content: {};
-}
+import { ClaimState } from '../my-account-state';
 
 export const initialState: ClaimState = {
   claims: {},
@@ -29,6 +23,15 @@ export function reducer(
       };
     }
 
+    case fromAction.LOAD_CURRENT_CLAIM_SUCCESS: {
+      const content = { ...action.payload };
+      return {
+        ...state,
+        content,
+        loaded: true,
+      };
+    }
+
     case fromAction.DELETE_CLAIM_SUCCESS: {
       return {
         ...state,
@@ -42,28 +45,13 @@ export function reducer(
         loaded: false,
       };
 
-    case fromAction.CREATE_CLAIM_SUCCESS: {
-      const content = { ...action.payload };
-      return {
-        ...state,
-        content,
-        refresh: false,
-      };
-    }
+    case fromAction.CREATE_CLAIM_SUCCESS:
     case fromAction.UPDATE_CLAIM_SUCCESS: {
       const content = { ...action.payload };
       return {
         ...state,
         content,
         refresh: false,
-      };
-    }
-    case fromAction.SUBMIT_CLAIM_SUCCESS: {
-      const content = { ...action.payload };
-      return {
-        ...state,
-        content,
-        refresh: true,
       };
     }
   }

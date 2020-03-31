@@ -1,11 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AgentSearchListComponent } from './agent-search-list.component';
 import { of } from 'rxjs';
-import { AgentSearchService } from '../../../core/agent/services/agent-search.service';
+import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { ActivatedRoute } from '@angular/router';
-import { Type, Component, Input } from '@angular/core';
+import { Type, Component, Input, Pipe, PipeTransform } from '@angular/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { I18nTestingModule } from '@spartacus/core';
 
-const searchResults = { pagination: { page: 0 } };
+const searchResults = {
+  pagination: { page: 0 },
+  agents: [
+    {
+      email: 'test@test.com',
+    },
+  ],
+};
 
 class ActivatedRouteMock {
   paramsSubscriptionHandler: Function;
@@ -17,11 +26,27 @@ class ActivatedRouteMock {
   };
 }
 const query = 'autoAgent';
-
+const selectedIndex = 1;
 const mockAgentSearchService = {
   search: jasmine.createSpy(),
   getResults: jasmine.createSpy().and.returnValue(of(searchResults)),
 };
+
+@Component({
+  // tslint:disable
+  selector: 'cx-media',
+  template: '',
+})
+class MockMediaComponent {
+  @Input() container;
+}
+
+@Pipe({
+  name: 'cxUrl',
+})
+class MockUrlPipe implements PipeTransform {
+  transform() {}
+}
 
 @Component({
   // tslint:disable
@@ -31,6 +56,16 @@ const mockAgentSearchService = {
 class MockPagintionComponent {
   @Input() pagination;
 }
+
+@Component({
+  // tslint:disable
+  selector: 'cx-store-finder-map',
+  template: '',
+})
+class MockMapComponent {
+  @Input() locations: any;
+}
+
 describe('AgentSearchListComponent', () => {
   let component: AgentSearchListComponent;
   let fixture: ComponentFixture<AgentSearchListComponent>;
@@ -39,11 +74,18 @@ describe('AgentSearchListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [I18nTestingModule, RouterTestingModule],
       providers: [
         { provide: ActivatedRoute, useClass: ActivatedRouteMock },
         { provide: AgentSearchService, useValue: mockAgentSearchService },
       ],
-      declarations: [AgentSearchListComponent, MockPagintionComponent],
+      declarations: [
+        AgentSearchListComponent,
+        MockPagintionComponent,
+        MockMediaComponent,
+        MockUrlPipe,
+        MockMapComponent,
+      ],
     }).compileComponents();
   }));
 
@@ -64,7 +106,10 @@ describe('AgentSearchListComponent', () => {
 
   it('should find agents with query', () => {
     activatedRoute.paramsSubscriptionHandler({ query: query });
-
     expect(mockSearchService.search).toHaveBeenCalled();
+  });
+  it('should set index for active agent', () => {
+    component.setActiveAgentIndex(selectedIndex);
+    expect(component.selectedIndex).toEqual(selectedIndex);
   });
 });

@@ -1,13 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import { ClaimsComponent } from './claims.component';
-import { ClaimService } from '../../../../core/my-account/services/claim.service';
+import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
-
 import createSpy = jasmine.createSpy;
 import { Component, Pipe, PipeTransform, DebugElement } from '@angular/core';
-import { UserRequestService } from '../../../../core/user-request/services/user-request/user-request.service';
+import { UserRequestService } from '../../../../core/user-request/facade/user-request.service';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
 
@@ -29,6 +28,10 @@ class MockClaimService {
 
   getLoaded() {
     return of(true);
+  }
+
+  shouldReload() {
+    return of(false);
   }
 }
 
@@ -68,7 +71,7 @@ class MockRoutingService {
   go = createSpy();
 }
 
-describe('AddOptionsComponent', () => {
+describe('ClaimsComponent', () => {
   let component: ClaimsComponent;
   let fixture: ComponentFixture<ClaimsComponent>;
   let mockClaimService: MockClaimService;

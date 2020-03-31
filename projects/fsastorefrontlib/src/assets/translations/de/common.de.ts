@@ -25,6 +25,8 @@ export const fscommon = {
     duration: 'Dauer',
     included: 'Inbegriffen',
     excluded: 'Ausgeschlossen',
+    activate: '[DE] Activate',
+    deactivate: '[DE] Deactivate',
     premium: 'Prämie',
     retrieve: 'Abrufen',
     notAvailable: 'N/V',
@@ -74,6 +76,8 @@ export const fscommon = {
     mapView: 'Kartenansicht',
     makeClaim: 'Melden Sie einen Schaden online',
     summary: 'Zusammenfassung',
+    submit: '[DE] Submit',
+    totalResults: '[DE] Total results',
     application: {
       applicationRequestSubmitted:
         'Ihr Antrag wurde erfolgreich in unserem System gespeichert. Eine E-Mail mit weiteren Informationen wurde an Ihre E-Mail Adresse gesendet.',

@@ -1,14 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService } from '@fsa/dynamicforms';
-import {
-  CartService,
-  I18nTestingModule,
-  RoutingService,
-  Cart,
-} from '@spartacus/core';
-import { of, Observable } from 'rxjs';
-import { FSCheckoutConfigService } from './../../../../core/checkout/services/fs-checkout-config.service';
+import { Cart, I18nTestingModule, RoutingService } from '@spartacus/core';
+import { Observable, of } from 'rxjs';
+import { FSCartService } from './../../../../core/cart/facade/cart.service';
+import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { PersonalDetailsNavigationComponent } from './personal-details-navigation.component';
 import createSpy = jasmine.createSpy;
 
@@ -45,7 +41,7 @@ describe('PersonalDetailsNavigationComponent', () => {
       declarations: [PersonalDetailsNavigationComponent],
       providers: [
         {
-          provide: CartService,
+          provide: FSCartService,
           useClass: MockCartService,
         },
         {

@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import {
   FormDataService,
   FormDefinition,
-  YFormDefinition,
   YFormData,
+  YFormDefinition,
 } from '@fsa/dynamicforms';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
@@ -14,7 +14,7 @@ import { CMSFormSubmitComponent } from '../../../occ/occ-models';
 import { FormSampleConfigurations } from './form-sample-configurations';
 
 @Component({
-  selector: 'fsa-cms-category-form-submit-component',
+  selector: 'cx-fs-cms-category-form-submit-component',
   templateUrl: './cms-category-form-submit-component.html',
 })
 export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {

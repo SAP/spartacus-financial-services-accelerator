@@ -1,15 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CategoryFeatureComponent } from './category-feature.component';
-import { Component, Input, PipeTransform, Pipe, Type } from '@angular/core';
-import {
-  CmsCategoryFeatureComponent,
-  CmsComponent,
-} from '../../../occ/occ-models';
+import { Component, Input, PipeTransform, Pipe } from '@angular/core';
+import { CmsCategoryFeatureComponent } from '../../../occ/occ-models';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
-import { I18nTestingModule, CmsService } from '@spartacus/core';
+import { I18nTestingModule, CmsService, CmsComponent } from '@spartacus/core';
 
 @Component({
   // tslint:disable
@@ -51,7 +48,6 @@ const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
 describe('CategoryFeatureComponent', () => {
   let component: CategoryFeatureComponent;
   let fixture: ComponentFixture<CategoryFeatureComponent>;
-  let cmsService: CmsService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -73,7 +69,6 @@ describe('CategoryFeatureComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CategoryFeatureComponent);
     component = fixture.componentInstance;
-    cmsService = TestBed.get(CmsService as Type<CmsService>);
     fixture.detectChanges();
   });
 

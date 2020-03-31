@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NgSelectModule } from '@ng-select/ng-select';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { SpinnerModule, MediaModule } from '@spartacus/storefront';
+import { NgSelectModule } from '@ng-select/ng-select';
 import { I18nModule } from '@spartacus/core';
+import { MediaModule, SpinnerModule } from '@spartacus/storefront';
+import { CartConnector } from '../../../../core/cart/connectors';
+import { FSCartService } from '../../../../core/cart/facade';
 import { AddOptionsComponent } from './add-options.component';
-import { FSCartService } from '../../../../core/checkout/services';
-import { OccFSCartAdapter } from '../../../../occ/services/cart/occ-fs-cart.adapter';
 
 @NgModule({
   imports: [
@@ -21,6 +21,6 @@ import { OccFSCartAdapter } from '../../../../occ/services/cart/occ-fs-cart.adap
   ],
   declarations: [AddOptionsComponent],
   exports: [AddOptionsComponent],
-  providers: [FSCartService, OccFSCartAdapter],
+  providers: [FSCartService, CartConnector],
 })
 export class AddOptionsModule {}

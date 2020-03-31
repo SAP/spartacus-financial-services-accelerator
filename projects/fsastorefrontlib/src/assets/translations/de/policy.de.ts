@@ -14,8 +14,11 @@ export const policy = {
     yourPolicyHasBeenSubmited: 'Ihr Antrag wurde bereits übermittelt',
     finishQuoteToGetPolicy:
       'Sie müssen Ihren Antrag abschließen, um eine Police zu erhalten.',
-    noValidPolicies: 'Sie haben keine gültigen Policen.',
+    noValidPolicies: 'Sie haben keine gültigen Policen!',
     documentName: 'Name',
     documentIssueDate: 'Erstelldatum',
+    policyCanceled: '[DE] Your policy change request has been canceled',
+    changeError:
+      '[DE] Sorry, the requested change can\'t be executed online, please contact your agent' // prettier-ignore
   },
 };

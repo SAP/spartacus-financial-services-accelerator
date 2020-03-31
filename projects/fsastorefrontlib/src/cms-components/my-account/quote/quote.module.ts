@@ -16,10 +16,8 @@ import {
 } from '@spartacus/core';
 
 import { QuotesComponent } from './quotes/quotes.component';
-import { QuoteService } from '../../../core/my-account/services/quote.service';
-import { QuoteDataService } from '../../../core/my-account/services/quote-data.service';
-import { OccQuoteAdapter } from '../../../occ/services/quote/occ-quote.adapter';
-
+import { QuoteService } from '../../../core/my-account/facade/quote.service';
+import { QuoteConnector } from '../../../core/my-account/connectors/quote.connector';
 const routes: Routes = [
   {
     path: null,
@@ -51,7 +49,7 @@ const routes: Routes = [
   ],
   declarations: [QuotesComponent],
   exports: [QuotesComponent],
-  providers: [QuoteService, QuoteDataService, OccQuoteAdapter],
+  providers: [QuoteService, QuoteConnector],
   entryComponents: [QuotesComponent],
 })
 export class QuoteModule {}

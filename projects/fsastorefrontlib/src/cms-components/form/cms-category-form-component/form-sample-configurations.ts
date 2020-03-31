@@ -510,17 +510,17 @@ export class FormSampleConfigurations {
           ],
         },
         {
-          groupCode: 'mainDriver',
+          groupCode: 'main-driver',
           fieldConfigs: [
             {
               type: 'title',
               label: 'Main Driver',
-              name: 'mainDriver',
+              name: 'main-driver',
             },
             {
               type: 'datepicker',
               label: 'Driver Date of Birth',
-              name: 'driverDob',
+              name: 'dateOfBirth',
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
@@ -558,7 +558,6 @@ export class FormSampleConfigurations {
                   name: 'Main',
                 },
               ],
-              disabled: true,
             },
             {
               type: 'datepicker',
@@ -583,7 +582,7 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: 'Number of Drivers',
-              name: 'numberOfDrivers',
+              name: 'noOfDrivers',
               options: [
                 { name: '0', label: '0' },
                 { name: '1', label: '1' },
@@ -615,7 +614,7 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: 'Driver Date of Birth',
-              name: 'driverDob',
+              name: 'dateOfBirth',
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
@@ -679,7 +678,7 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: 'Driver Date of Birth',
-              name: 'driverDob',
+              name: 'dateOfBirth',
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
@@ -742,7 +741,7 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: 'Driver Date of Birth',
-              name: 'driverDob',
+              name: 'dateOfBirth',
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
@@ -805,7 +804,7 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: 'Driver Date of Birth',
-              name: 'driverDob',
+              name: 'dateOfBirth',
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
@@ -1639,6 +1638,27 @@ export class FormSampleConfigurations {
                   name: 'RS',
                 },
               ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      formId: 'auto_change_car_details_form',
+      formGroups: [
+        {
+          fieldConfigs: [
+            {
+              label: 'Change mileage',
+              name: 'newMileage',
+              type: 'input',
+              placeholder: 'Insert New Mileage',
+              validation: [
+                DefaultFormValidators.required,
+                DefaultFormValidators.max(100000),
+                DefaultFormValidators.pattern('^[0-9]*$'),
+              ],
+              error: 'forms.lessThan100K',
             },
           ],
         },

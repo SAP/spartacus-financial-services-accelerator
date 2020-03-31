@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { RoutingService } from '@spartacus/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
-import { FSCheckoutService } from '../../../../../core/checkout/services/fs-checkout.service';
+import { RoutingService } from '@spartacus/core';
+import { Subscription } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
+import { FSCheckoutService } from '../../../../../core/checkout/facade/checkout.service';
+import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
 
 @Component({
-  selector: 'fsa-select-identification',
+  selector: 'cx-fs-select-identification',
   templateUrl: './select-identification.component.html',
 })
-export class SelectIdentificationTypeComponent implements OnInit {
+export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
   checkoutStepUrlBack: string;
 
   constructor(
@@ -19,19 +20,20 @@ export class SelectIdentificationTypeComponent implements OnInit {
     protected checkoutService: FSCheckoutService
   ) {}
 
+  private subscription = new Subscription();
   selected: string;
   identificationTypes: Array<any> = [
     {
       name: 'nearest_branch',
-      icon: 'icon-FSA-person',
+      icon: 'icon-person',
     },
     {
       name: 'legal_identification',
-      icon: 'icon-FSA-payment-cards',
+      icon: 'icon-payment-cards',
     },
     {
       name: 'video_identification',
-      icon: 'icon-FSA-shield',
+      icon: 'icon-shield',
     },
   ];
 
@@ -47,20 +49,29 @@ export class SelectIdentificationTypeComponent implements OnInit {
   }
 
   setIdentificationType() {
-    this.checkoutService
-      .setIdentificationType(this.selected)
-      .pipe(
-        filter(identificationType => identificationType),
-        take(1),
-        tap(next => {
-          this.checkoutService.placeOrder();
-          this.routingService.go({ cxRoute: 'orderConfirmation' });
-        })
-      )
-      .subscribe();
+    this.subscription.add(
+      this.checkoutService
+        .setIdentificationType(this.selected)
+        .pipe(
+          filter(identificationType => identificationType),
+          take(1),
+          tap(() => {
+            this.checkoutService.placeOrder();
+            this.checkoutService.orderPlaced = true;
+            this.routingService.go({ cxRoute: 'orderConfirmation' });
+          })
+        )
+        .subscribe()
+    );
   }
 
   back() {
     this.routingService.go(this.checkoutStepUrlBack);
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

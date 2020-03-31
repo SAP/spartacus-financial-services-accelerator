@@ -1,17 +1,20 @@
 import * as register from '../../../helpers/register';
-import * as travelCheckout from '../../../helpers/checkout/travel/travel-checkout';
+import * as travelCheckout from '../../../helpers/checkout/insurance/travel-checkout';
 import { registrationUser } from '../../../sample-data/users';
+import * as checkout from '../../../helpers/checkout/checkoutSteps';
+import {
+  addPaymentMethod,
+  selectPaymentMethod,
+} from '../../../helpers/checkout/insurance/payment';
 
 context('Travel Insurance Checkout', () => {
   before(() => {
     cy.visit('/');
     register.registerUser(registrationUser);
-    cy.wait(3000);
     register.login(registrationUser.email, registrationUser.password);
-    cy.wait(2000);
   });
 
-  describe('Checkout', () => {
+  describe('Travel Checkout', () => {
     it('Should open travel category page', () => {
       travelCheckout.openCategoryPage();
     });
@@ -20,42 +23,39 @@ context('Travel Insurance Checkout', () => {
     });
 
     it('Add main product to the cart', () => {
-      cy.wait(1000);
       travelCheckout.checkComparisonAndAddProduct();
-    });
-
-    it('Add payment method for user', () => {
-      travelCheckout.addPaymentMethod(registrationUser.email);
     });
 
     it('Add optional product to the cart', () => {
       travelCheckout.checkOptionalProductsAndPick();
-      cy.wait(1000);
     });
 
-    it('Populate personal details', () => {
-      travelCheckout.populatePersonalDetailsForm();
-      cy.wait(1000);
+    it('Populate personal details and add payment method', () => {
+      checkout.populatePersonalDetailsPage();
+      addPaymentMethod(registrationUser.email);
+      travelCheckout.populateAgeOnPersonalDetails();
     });
 
     it('Check mini cart on quote review page', () => {
+      checkout.checkQuoteReviewAccordions('travel');
       travelCheckout.checkQuoteReview();
     });
 
     it('Select default payment details', () => {
-      travelCheckout.selectPaymentMethod();
+      selectPaymentMethod();
     });
 
-    it('Place order on final review page', () => {
-      travelCheckout.placeOrderOnFinalReivew();
+    it('Place order on final review pages', () => {
+      checkout.placeOrderOnFinalReview();
     });
 
     it('Check order confirmation', () => {
-      travelCheckout.checkOrderConfirmation();
+      checkout.checkOrderConfirmation();
     });
 
     it('Check my policies page', () => {
-      travelCheckout.checkMyPoliciesPage();
+      checkout.checkMyPoliciesPage();
+      cy.get('.info-card-caption').contains('Travel Insurance');
     });
   });
 });

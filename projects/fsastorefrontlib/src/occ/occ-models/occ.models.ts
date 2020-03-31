@@ -1,3 +1,4 @@
+import { YFormData } from '@fsa/dynamicforms';
 import {
   Cart,
   Category,
@@ -7,12 +8,29 @@ import {
   User,
   UserSignUp,
 } from '@spartacus/core';
-import { YFormData } from '@fsa/dynamicforms';
+
+export interface ContactAgentData {
+  email?: string;
+  interest?: string;
+  contactType?: string;
+  subject?: string;
+  message?: string;
+}
 
 export interface FSProduct extends Product {
   price?: FSPrice;
   cartDispalyName?: string;
   defaultCategory?: Category;
+}
+
+export interface OrgUnit {
+  uid: string;
+  name?: string;
+  active?: boolean;
+}
+
+export interface B2BAdministrator {
+  orgUnit: OrgUnit;
 }
 
 export interface FSCart extends Cart {
@@ -31,6 +49,26 @@ export interface QuoteBindingState {
 export enum BindingStateType {
   BIND = 'BIND',
   UNBIND = 'UNBIND',
+}
+
+export enum RequestType {
+  INSURED_OBJECT_CHANGE = 'FSINSUREDOBJECT_CHANGE',
+  COVERAGE_CHANGE = 'FSCOVERAGE_CHANGE',
+  FSCLAIM = 'FSCLAIM',
+}
+
+export enum ClaimStatus {
+  OPEN = 'OPEN',
+  SUBMITTED = 'SUBMITTED',
+  PROCESSING = 'PROCESSING',
+  ERROR = 'ERROR',
+  APPROVED = 'APPROVED',
+  REJECTED = 'REJECTED',
+}
+
+export enum StepStatus {
+  COMPLETED = 'COMPLETED',
+  CANCELED = 'CANCELED',
 }
 
 export interface FSOrderEntry extends OrderEntry {
@@ -81,6 +119,7 @@ export interface FSStepData {
 export interface FSUserRequest {
   requestId?: string;
   configurationSteps?: FSStepData[];
+  requestStatus?: string;
 }
 
 export interface FSLocationOfLoss {
@@ -99,7 +138,7 @@ export interface Claim extends FSUserRequest {
   incidentType?: FSIncidentType;
   dateOfLoss?: string;
   timeOfLoss?: string;
-  claimStatus?: string;
+  claimStatus?: ClaimStatus;
 }
 
 export interface AllowedFSRequestType {
@@ -112,4 +151,11 @@ export interface FSRequestType {
 
 export interface FSIncidentType {
   incidentCode?: string;
+}
+
+export interface ChangedPolicyData {
+  changeType?: string;
+  label?: string;
+  oldValue?: string;
+  newValue?: string;
 }

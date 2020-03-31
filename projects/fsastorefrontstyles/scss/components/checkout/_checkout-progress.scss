@@ -1,6 +1,6 @@
-@import '../../theme/fsa/variables';
+@import '../../theme/fs/variables';
 
-%fsa-checkout-progress {
+%cx-fs-checkout-progress {
   .progress-wrapper {
     .progress-inner-wrapper {
       flex-basis: 0;
@@ -14,7 +14,7 @@
     position: relative;
     &:hover {
       .step.visited {
-        @extend .icon-FSA-edit;
+        @extend .icon-edit;
         &:before {
           color: var(--cx-color-primary);
           background-color: var(--cx-color-1);
@@ -30,7 +30,7 @@
       font-size: var(--cx-h6-font-size);
       position: relative;
       &.visited {
-        @extend .icon-FSA-ok;
+        @extend .icon-ok;
         &:before {
           color: var(--cx-color-1);
           background-color: var(--cx-color-primary);

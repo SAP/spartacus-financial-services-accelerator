@@ -1,11 +1,13 @@
 export const fscommon = {
   fscommon: {
+    no: 'no',
     mr: 'Mr.',
     mrs: 'Mrs.',
     add: 'Add',
     apply: 'Apply',
     next: 'Next',
     continue: 'Continue',
+    home: 'Home',
     edit: 'Edit',
     your: 'Your',
     price: 'Price',
@@ -14,6 +16,7 @@ export const fscommon = {
     inbox: 'Inbox',
     date: 'Date',
     preview: 'Preview',
+    change: 'Change',
     select: 'Select',
     subject: 'Subject',
     resume: 'Resume',
@@ -25,7 +28,9 @@ export const fscommon = {
     information: 'Information',
     duration: 'Duration',
     included: 'Included',
-    excluded: 'Excluded',
+    notIncluded: 'Not Included',
+    activate: 'Activate',
+    deactivate: 'Deactivate',
     premium: 'Premium',
     retrieve: 'Retrieve',
     notAvailable: 'N/A',
@@ -74,6 +79,8 @@ export const fscommon = {
     mapView: 'Map View',
     makeClaim: 'Make a Claim Online',
     summary: 'Summary',
+    submit: 'Submit',
+    totalResults: 'Total results',
     application: {
       applicationRequestSubmitted:
         'Your application has been successfully saved in our system. An e-mail has been sent to your e-mail address.',
@@ -127,5 +134,7 @@ export const fscommon = {
       searchBox: 'Search agent or insurance type',
     },
     attachments: 'Attachments',
+    pageNotFoundMessage:
+      'Whoops! Sorry, we couldn\'t find that way! Try getting back.' // prettier-ignore
   },
 };

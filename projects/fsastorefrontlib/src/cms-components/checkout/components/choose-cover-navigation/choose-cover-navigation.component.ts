@@ -1,16 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormDataService } from '@fsa/dynamicforms';
+import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { YFormData } from '@fsa/dynamicforms';
 
 @Component({
-  selector: 'fsa-choose-cover-navigation',
+  selector: 'cx-fs-choose-cover-navigation',
   templateUrl: './choose-cover-navigation.component.html',
 })
-export class ChooseCoverNavigationComponent implements OnInit {
+export class ChooseCoverNavigationComponent implements OnInit, OnDestroy {
   constructor(
     protected formService: FormDataService,
     protected activatedRoute: ActivatedRoute,

@@ -13,8 +13,11 @@ export const policy = {
     thankYouForOrder: 'Thank you for your order!',
     yourPolicyHasBeenSubmited: 'Your policy has already been submited',
     finishQuoteToGetPolicy: 'You need to finish your quote to get a Policy',
-    noValidPolicies: 'You have no valid policies',
+    noValidPolicies: 'You have no valid policies!',
     documentName: 'Name',
     documentIssueDate: 'Issue Date',
+    policyCanceled: 'Your policy change request has been canceled',
+    changeError:
+      'Sorry, the requested change can\'t be executed online, please contact your agent' // prettier-ignore
   },
 };

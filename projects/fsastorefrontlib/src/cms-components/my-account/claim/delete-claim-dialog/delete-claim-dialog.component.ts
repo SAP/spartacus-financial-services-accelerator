@@ -1,40 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ClaimService } from '../../../../core/my-account/services/claim.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '@spartacus/core';
+import { take } from 'rxjs/operators';
+import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 
 @Component({
-  selector: 'fsa-deleted-claim-dialog',
+  selector: 'cx-fs-deleted-claim-dialog',
   templateUrl: './delete-claim-dialog.component.html',
 })
 export class DeleteClaimDialogComponent implements OnInit {
   constructor(
-    public activeModal: NgbActiveModal,
-    private service: ClaimService,
+    protected service: ClaimService,
     protected fb: FormBuilder,
-    protected auth: AuthService
+    protected authService: AuthService,
+    public activeModal: NgbActiveModal
   ) {}
 
   form: FormGroup = this.fb.group({});
-  private subscription: Subscription;
-  private user_id: string;
-  private claimNumber: string;
+  claimNumber: string;
 
   ngOnInit() {
-    this.subscription = this.auth.getUserToken().subscribe(userData => {
-      if (userData && userData.userId) {
-        this.user_id = userData.userId;
-      }
-    });
-
-    if (!this.form.controls[this.claimNumber]) {
-      this.form.setControl(
-        this.claimNumber,
-        this.createClaimFormGroup(this.claimNumber)
-      );
-    }
+    this.form.setControl(
+      this.claimNumber,
+      this.createClaimFormGroup(this.claimNumber)
+    );
   }
 
   private createClaimFormGroup(claimNumber) {
@@ -44,9 +34,14 @@ export class DeleteClaimDialogComponent implements OnInit {
   }
 
   deleteClaim() {
-    this.service.removeClaim(this.user_id, this.claimNumber);
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        if (occUserId) {
+          this.service.removeClaim(occUserId, this.claimNumber);
+        }
+      })
+      .unsubscribe();
   }
 }

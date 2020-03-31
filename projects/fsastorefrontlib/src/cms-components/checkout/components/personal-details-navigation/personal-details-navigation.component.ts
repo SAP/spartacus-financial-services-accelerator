@@ -1,19 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
-import { CartService, RoutingService } from '@spartacus/core';
+import { Cart, RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FSCheckoutConfigService } from './../../../../core/checkout/services/fs-checkout-config.service';
-import { FSOrderEntry } from 'projects/fsastorefrontlib/src/occ/occ-models';
+import { FSOrderEntry } from '../../../../occ/occ-models';
+import { FSCartService } from './../../../../core/cart/facade/cart.service';
+import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 
 @Component({
-  selector: 'fsa-personal-details-navigation',
+  selector: 'cx-fs-personal-details-navigation',
   templateUrl: './personal-details-navigation.component.html',
 })
-export class PersonalDetailsNavigationComponent implements OnInit {
+export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
   constructor(
-    protected cartService: CartService,
+    protected cartService: FSCartService,
     protected formService: FormDataService,
     protected activatedRoute: ActivatedRoute,
     protected routingService: RoutingService,
@@ -35,7 +36,7 @@ export class PersonalDetailsNavigationComponent implements OnInit {
         this.cartService
           .getActive()
           .pipe(
-            map(cart => {
+            map((cart: Cart) => {
               if (
                 cart &&
                 cart.code &&

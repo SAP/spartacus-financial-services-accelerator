@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FSAStorefrontModule } from '@fsa/storefront';
-import { AppComponent } from './app.component';
+import { FSStorefrontModule } from '@fsa/storefront';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
+import { AppComponent } from './app.component';
+
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    FSAStorefrontModule.withConfig({
+    FSStorefrontModule.withConfig({
       backend: {
         occ: {
           baseUrl: environment.occBaseUrl
@@ -30,9 +32,12 @@ import { environment } from 'src/environments/environment';
         level: '1.3',
         anonymousConsents: true,
       }
+    }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
     })
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

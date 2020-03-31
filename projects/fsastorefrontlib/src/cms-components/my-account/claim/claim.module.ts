@@ -15,15 +15,17 @@ import {
   CmsPageGuard,
   PageLayoutComponent,
   SpinnerModule,
+  CardModule,
 } from '@spartacus/storefront';
-import { OccClaimAdapter } from '../../../occ/services/claim/occ-claim.adapter';
 import { DeleteClaimDialogComponent } from './delete-claim-dialog/delete-claim-dialog.component';
 import { ClaimPoliciesComponent } from './claim-policies/claim-policies.component';
 import { ClaimsComponent } from './claims/claims.component';
 import { CreateClaimComponent } from './create-claim/create-claim.component';
 import { ClaimDataService } from '../../../core/my-account/services/claim-data.service';
-import { ClaimService } from '../../../core/my-account/services/claim.service';
+import { ClaimService } from '../../../core/my-account/facade/claim.service';
 import { ParseDatePipe } from '../../../shared/util/helpers/parseDate.pipe';
+import { ClaimPoliciesGuard } from './guards/claim-policies-guard';
+import { ClaimConnector } from '../../../core/my-account/connectors/claim.connector';
 
 const routes: Routes = [
   {
@@ -32,6 +34,24 @@ const routes: Routes = [
     data: {
       cxRoute: 'claims',
       pageLabel: 'my-claims',
+    },
+    component: PageLayoutComponent,
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'noClaims',
+      pageLabel: 'noClaimsPage',
+    },
+    component: PageLayoutComponent,
+  },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard, ClaimPoliciesGuard],
+    data: {
+      cxRoute: 'claimsPage',
+      pageLabel: 'claimsPage',
     },
     component: PageLayoutComponent,
   },
@@ -45,6 +65,7 @@ const routes: Routes = [
     FormsModule,
     NgSelectModule,
     SpinnerModule,
+    CardModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
@@ -55,7 +76,7 @@ const routes: Routes = [
           component: ClaimPoliciesComponent,
           guards: [AuthGuard],
         },
-        StartClaimComponentFlex: {
+        StartClaimFlex: {
           component: CreateClaimComponent,
           guards: [AuthGuard],
         },
@@ -74,7 +95,7 @@ const routes: Routes = [
     ClaimService,
     ClaimDataService,
     ClaimPoliciesComponent,
-    OccClaimAdapter,
+    ClaimConnector,
   ],
   entryComponents: [
     ClaimsComponent,

@@ -1,18 +1,8 @@
 import * as fromAction from '../actions';
-
-export interface Policy {
-  policy: any;
-}
-
-export interface PolicyState {
-  data: {};
-  refresh: boolean;
-  loaded: boolean;
-}
+import { PolicyState } from '../my-account-state';
 
 export const initialState: PolicyState = {
   data: {},
-  refresh: false,
   loaded: false,
 };
 
@@ -27,7 +17,6 @@ export function reducer(
       return {
         ...state,
         data,
-        refresh: false,
         loaded: true,
       };
     }
@@ -40,5 +29,4 @@ export function reducer(
 }
 
 export const getPolicyData = (state: PolicyState) => state.data;
-export const getRefresh = (state: PolicyState) => state.refresh;
 export const getLoaded = (state: PolicyState) => state.loaded;

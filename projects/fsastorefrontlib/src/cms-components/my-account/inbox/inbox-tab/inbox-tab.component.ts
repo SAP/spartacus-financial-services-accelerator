@@ -1,21 +1,21 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  OnInit,
   Input,
+  OnInit,
 } from '@angular/core';
 import { CmsService } from '@spartacus/core';
-import { InboxService } from '../../../../core/my-account/services/inbox.service';
+import { InboxService } from '../../../../core/my-account/facade/inbox.service';
 
 @Component({
-  selector: 'fsa-inbox-tab',
+  selector: 'cx-fs-inbox-tab',
   templateUrl: './inbox-tab.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InboxTabComponent implements OnInit {
   constructor(
     protected cmsService: CmsService,
-    private inboxService: InboxService
+    protected inboxService: InboxService
   ) {}
 
   component$;

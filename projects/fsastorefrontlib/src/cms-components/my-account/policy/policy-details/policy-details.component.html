@@ -28,59 +28,69 @@
     >
   </div>
   <div class="accordion">
-    <fsa-accordion-item
+    <cx-fs-accordion-item
       [opened]="true"
       [title]="'policy.policySummary' | cxTranslate"
     >
       <ul class="accordion-list container-fluid">
         <li class="accordion-list-item row">
-          <div class="col-6 item-label">
+          <div class="col-6 col-sm-5 item-label">
             {{ 'fscommon.contractId' | cxTranslate }}
           </div>
-          <div class="col-6 value notice">
+          <div class="col-6 col-sm-5 value notice">
             {{ policy.contractNumber }}
           </div>
         </li>
         <li class="accordion-list-item row">
-          <div class="col-6 item-label">
+          <div class="col-6 col-sm-5 item-label">
             {{ 'fscommon.product' | cxTranslate }}
           </div>
-          <div class="col-6 value notice">
+          <div class="col-6 col-sm-5 value notice">
             {{ policy.mainProduct?.coverageProduct?.name }}
           </div>
         </li>
         <li class="accordion-list-item row">
-          <div class="col-6 item-label">
+          <div class="col-6 col-sm-5 item-label">
             {{ 'fscommon.paymentFrequency' | cxTranslate }}
           </div>
-          <div class="col-6 value notice">
+          <div class="col-6 col-sm-5 value notice">
             {{ policy.paymentFrequency }}
           </div>
         </li>
         <li class="accordion-list-item row">
-          <div class="col-6 item-label">
+          <div class="col-6 col-sm-5 item-label">
             {{ 'fscommon.paymentMethod' | cxTranslate }}
           </div>
-          <div class="col-6 value notice">
+          <div class="col-6 col-sm-5 value notice">
             {{ policy.paymentMethod?.paymentOption }}
           </div>
         </li>
         <li class="accordion-list-item row">
-          <div class="col-6 item-label">
+          <div class="col-6 col-sm-5 item-label">
             {{ 'fscommon.duration' | cxTranslate }}
           </div>
-          <div class="col-6 value notice">
+          <div class="col-6 col-sm-5 value notice">
             {{ policy.startDate | cxDate: 'dd MMM yyyy' }} -
             {{ policy.endDate | cxDate: 'dd MMM yyyy' }}
           </div>
         </li>
       </ul>
-    </fsa-accordion-item>
-    <ng-container
-      *ngIf="policy.insuredObjects && policy.insuredObjects.length > 0"
-    >
-      <fsa-accordion-item [title]="'fscommon.whoOrWhatIsInsured' | cxTranslate">
-        <ng-container *ngFor="let insuredObject of policy.insuredObjects">
+    </cx-fs-accordion-item>
+    <ng-container *ngIf="policy.insuredObjectList?.insuredObjects?.length > 0">
+      <cx-fs-accordion-item
+        [icon]="
+          isChangeAllowed(
+            policy.categoryData.allowedFSRequestTypes,
+            'FSINSUREDOBJECT_CHANGE'
+          )
+            ? 'fs-icon icon-edit'
+            : ''
+        "
+        [title]="'fscommon.whoOrWhatIsInsured' | cxTranslate"
+      >
+        <ng-container
+          *ngFor="let insuredObject of policy.insuredObjectList.insuredObjects"
+        >
           <ng-container
             *ngIf="
               insuredObject.insuredObjectItems &&
@@ -94,22 +104,39 @@
                 "
                 class="accordion-list-item row"
               >
-                <div class="col-6 item-label">
+                <div class="col-6 col-sm-5 item-label">
                   {{ insuredObjectItem.label }}
                 </div>
-                <div class="col-6 value notice">
+                <div class="col-6 col-sm-5 value notice">
                   {{ insuredObjectItem.value }}
                 </div>
+                <ng-container *ngIf="insuredObjectItem.changeable">
+                  <div class="col-12 col-sm-2 value notice">
+                    <p
+                      (click)="
+                        changePolicyDetails(
+                          policy.policyNumber,
+                          policy.contractNumber,
+                          'FSINSUREDOBJECT_CHANGE'
+                        )
+                      "
+                      class="link mb-0"
+                    >
+                      {{ 'fscommon.edit' | cxTranslate }}
+                    </p>
+                  </div>
+                </ng-container>
               </li>
               <ng-container
                 *ngIf="
-                  insuredObject.childInsuredObjects &&
-                  insuredObject.childInsuredObjects.length > 0
+                  insuredObject.childInsuredObjectList?.insuredObjects?.length >
+                  0
                 "
               >
                 <ng-container
                   *ngFor="
-                    let childInsuredObject of insuredObject.childInsuredObjects
+                    let childInsuredObject of insuredObject
+                      .childInsuredObjectList.insuredObjects
                   "
                 >
                   <ng-container
@@ -124,12 +151,28 @@
                       "
                       class="accordion-list-item row"
                     >
-                      <div class="col-6 item-label">
+                      <div class="col-6 col-sm-5 item-label">
                         {{ childInsuredObjectItem.label }}
                       </div>
-                      <div class="col-6 value notice">
+                      <div class="col-6 col-sm-5 value notice">
                         {{ childInsuredObjectItem.value }}
                       </div>
+                      <ng-container *ngIf="childInsuredObjectItem.changeable">
+                        <div class="col-6 col-sm-5 value notice">
+                          <p
+                            (click)="
+                              changePolicyDetails(
+                                policy.policyNumber,
+                                policy.contractNumber,
+                                'FSINSUREDOBJECT_CHANGE'
+                              )
+                            "
+                            class="link"
+                          >
+                            {{ 'fscommon.edit' | cxTranslate }}
+                          </p>
+                        </div>
+                      </ng-container>
                     </li>
                   </ng-container>
                 </ng-container>
@@ -137,9 +180,9 @@
             </ul>
           </ng-container>
         </ng-container>
-      </fsa-accordion-item>
+      </cx-fs-accordion-item>
     </ng-container>
-    <fsa-accordion-item [title]="'fscommon.whatsIncluded' | cxTranslate">
+    <cx-fs-accordion-item [title]="'fscommon.whatsIncluded' | cxTranslate">
       <ul
         class="accordion-list container-fluid"
         *ngIf="policy.mainProduct && policy.mainProduct.benefits"
@@ -148,46 +191,80 @@
           *ngFor="let benefit of policy.mainProduct.benefits"
           class="accordion-list-item row"
         >
-          <div class="col-6 item-label">
+          <div class="col-6 col-sm-5 item-label">
             {{ benefit.name }}
           </div>
-          <div *ngIf="benefit.coverageValue" class="col-6 value notice">
+          <div
+            *ngIf="benefit.coverageValue"
+            class="col-6 col-sm-5 value notice"
+          >
             {{ benefit.coverageValue }}
           </div>
           <div
             *ngIf="!benefit.coverageValue && benefit.coverageInformation"
-            class="col-6 value notice"
+            class="col-6 col-sm-5 value notice"
           >
             {{ benefit.coverageInformation }}
           </div>
         </li>
       </ul>
-    </fsa-accordion-item>
-    <fsa-accordion-item [title]="'fscommon.optionalExtras' | cxTranslate">
-      <ul class="accordion-list container-fluid">
+    </cx-fs-accordion-item>
+    <cx-fs-accordion-item
+      [icon]="
+        isChangeAllowed(
+          policy.categoryData?.allowedFSRequestTypes,
+          'FSCOVERAGE_CHANGE'
+        )
+          ? 'fs-icon icon-edit'
+          : ''
+      "
+      [title]="'fscommon.optionalExtras' | cxTranslate"
+    >
+      <ul class="accordion-list container-fluid position-relative">
+        <ng-container
+          *ngIf="
+            isChangeAllowed(
+              policy.categoryData?.allowedFSRequestTypes,
+              'FSCOVERAGE_CHANGE'
+            )
+          "
+        >
+          <p
+            (click)="
+              changePolicyDetails(
+                policy.policyNumber,
+                policy.contractNumber,
+                'FSCOVERAGE_CHANGE'
+              )
+            "
+            class="link position-absolute"
+          >
+            {{ 'fscommon.edit' | cxTranslate }}
+          </p>
+        </ng-container>
         <li
           *ngFor="let optionalCoverage of policy.optionalProducts"
           class="accordion-list-item row"
         >
-          <div class="col-6 item-label">
+          <div class="col-6 col-sm-5 item-label">
             {{ optionalCoverage.coverageProduct.name }}
           </div>
           <div
             *ngIf="optionalCoverage.coverageIsIncluded"
-            class="col-6 value notice"
+            class="col-6 col-sm-5 value notice"
           >
             {{ 'fscommon.included' | cxTranslate }}
           </div>
           <div
             *ngIf="!optionalCoverage.coverageIsIncluded"
-            class="col-6 value notice"
+            class="col-6 col-sm-5 value notice"
           >
-            {{ 'fscommon.excluded' | cxTranslate }}
+            {{ 'fscommon.notIncluded' | cxTranslate }}
           </div>
         </li>
       </ul>
-    </fsa-accordion-item>
-    <fsa-accordion-item
+    </cx-fs-accordion-item>
+    <cx-fs-accordion-item
       *ngIf="policy.mainProduct?.investmentInfo"
       [title]="'fscommon.investmentDetails' | cxTranslate"
     >
@@ -214,11 +291,11 @@
           </li>
         </ng-container>
       </ul>
-    </fsa-accordion-item>
-    <fsa-accordion-item [title]="'fscommon.whatDoesItCostMe' | cxTranslate">
+    </cx-fs-accordion-item>
+    <cx-fs-accordion-item [title]="'fscommon.whatDoesItCostMe' | cxTranslate">
       <ul class="accordion-list container-fluid">
         <li class="accordion-list-item row">
-          <div class="col-6 item-label">
+          <div class="col-6 col-sm-5 item-label">
             {{ 'fscommon.premium' | cxTranslate }}
           </div>
           <div class="col-xs-12 col-sm-6 value notice">
@@ -226,24 +303,24 @@
           </div>
         </li>
         <li class="accordion-list-item row">
-          <div class="col-6 item-label">
+          <div class="col-6 col-sm-5 item-label">
             {{ 'fscommon.paymentFrequency' | cxTranslate }}
           </div>
-          <div class="col-6 value notice">
+          <div class="col-6 col-sm-5 value notice">
             {{ policy.paymentFrequency }}
           </div>
         </li>
         <li class="accordion-list-item row">
-          <div class="col-6 item-label">
+          <div class="col-6 col-sm-5 item-label">
             {{ 'fscommon.paymentMethod' | cxTranslate }}
           </div>
-          <div class="col-6 value notice">
+          <div class="col-6 col-sm-5 value notice">
             {{ policy.paymentMethod?.paymentOption }}
           </div>
         </li>
       </ul>
-    </fsa-accordion-item>
-    <fsa-accordion-item
+    </cx-fs-accordion-item>
+    <cx-fs-accordion-item
       *ngIf="policy.documents"
       [title]="'fscommon.documents' | cxTranslate"
     >
@@ -272,8 +349,8 @@
           </li>
         </ng-container>
       </ul>
-    </fsa-accordion-item>
-    <fsa-accordion-item
+    </cx-fs-accordion-item>
+    <cx-fs-accordion-item
       *ngIf="policy.responsibleAgent"
       [title]="'fscommon.myAgent' | cxTranslate"
     >
@@ -291,6 +368,6 @@
           </div>
         </div>
       </div>
-    </fsa-accordion-item>
+    </cx-fs-accordion-item>
   </div>
 </ng-container>

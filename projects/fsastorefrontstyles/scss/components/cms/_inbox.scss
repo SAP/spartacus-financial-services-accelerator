@@ -1,6 +1,7 @@
-@import '../../theme/fsa/variables';
+@import '../../theme/fs/variables';
 
-%fsa-inbox {
+%cx-fs-inbox {
+  width: 100%;
   .section-header-heading {
     color: var(--cx-color-1);
     border-top: none;
@@ -57,8 +58,8 @@
     margin: 0;
     padding: 0;
   }
-  .icon-FSA-envelope,
-  .icon-FSA-envelope-open {
+  .icon-envelope,
+  .icon-envelope-open {
     color: var(--cx-color-primary);
     font-size: var(--cx-h5-font-size);
     cursor: pointer;

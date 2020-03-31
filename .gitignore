@@ -41,3 +41,4 @@ Thumbs.db
 src/assets/fonts/*
 package-lock.json
 .vscode/settings.json
+.vscode/launch.json

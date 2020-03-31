@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
-import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
-import { OccPolicyAdapter } from '../../../../occ/services/policy/occ-policy.adapter';
-import { PolicyDataService } from '../../services/policy-data.service';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import * as fromActions from '../actions';
+import { PolicyConnector } from '../../connectors/policy.connector';
 
 @Injectable()
 export class PolicyEffects {
@@ -12,18 +11,14 @@ export class PolicyEffects {
   loadPolicies$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.LOAD_POLICIES),
     map((action: fromActions.LoadPolicies) => action.payload),
-    mergeMap(payload => {
-      if (payload === undefined || payload.userId === undefined) {
-        payload = {
-          userId: this.policyData.userId,
-          policies: this.policyData.policies,
-        };
-      }
-      return this.policyService.getPolicies(payload.userId).pipe(
+    switchMap(payload => {
+      return this.policyConnector.getPolicies(payload.userId).pipe(
         map((policies: any) => {
           return new fromActions.LoadPoliciesSuccess(policies);
         }),
-        catchError(error => of(new fromActions.LoadPoliciesFail(error)))
+        catchError(error =>
+          of(new fromActions.LoadPoliciesFail(JSON.stringify(error)))
+        )
       );
     })
   );
@@ -32,13 +27,15 @@ export class PolicyEffects {
     ofType(fromActions.LOAD_POLICY_DETAILS),
     map((action: fromActions.LoadPolicyDetails) => action.payload),
     switchMap(payload => {
-      return this.policyService
+      return this.policyConnector
         .getPolicy(payload.userId, payload.policyId, payload.contractId)
         .pipe(
           map((policy: any) => {
             return new fromActions.LoadPolicyDetailsSuccess(policy);
           }),
-          catchError(error => of(new fromActions.LoadPolicyDetailsFail(error)))
+          catchError(error =>
+            of(new fromActions.LoadPolicyDetailsFail(JSON.stringify(error)))
+          )
         );
     })
   );
@@ -46,25 +43,20 @@ export class PolicyEffects {
   loadPremiumCalendar$: Observable<any> = this.actions$.pipe(
     ofType(fromActions.LOAD_PREMIUM_CALENDAR),
     map((action: fromActions.LoadPremiumCalendar) => action.payload),
-    mergeMap(payload => {
-      if (payload === undefined || payload.userId === undefined) {
-        payload = {
-          userId: this.policyData.userId,
-          policies: this.policyData.policies,
-        };
-      }
-      return this.policyService.getPremiumCalendar(payload.userId).pipe(
+    switchMap(payload => {
+      return this.policyConnector.getPremiumCalendar(payload.userId).pipe(
         map((premiumCalendar: any) => {
           return new fromActions.LoadPremiumCalendarSuccess(premiumCalendar);
         }),
-        catchError(error => of(new fromActions.LoadPremiumCalendarFail(error)))
+        catchError(error =>
+          of(new fromActions.LoadPremiumCalendarFail(JSON.stringify(error)))
+        )
       );
     })
   );
 
   constructor(
     private actions$: Actions,
-    private policyData: PolicyDataService,
-    private policyService: OccPolicyAdapter
+    private policyConnector: PolicyConnector
   ) {}
 }

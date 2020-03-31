@@ -17,6 +17,23 @@ export const forms = {
       lengthValidation:
         'Die Telefonnummer sollte aus mindestens 6 und höchstens 20 Zeichen bestehen.',
     },
+    enterMessage: '[DE] Your message',
+    interest: {
+      title: '[DE] Interest',
+      complaint: '[DE] Complaint',
+      note: '[DE] Note',
+      financialAdvisory: '[DE] Financial Advisory',
+      productInfo: '[DE] Product Information',
+      quotePolicy: '[DE] Quote & Policy',
+      claimInfo: '[DE] Claim Information',
+    },
+    contactType: {
+      title: '[DE]Contact type',
+      email: '[DE]Email',
+      call: '[DE]Call',
+    },
+    subject: '[DE] Subject',
+    send: '[DE] Send',
     titles: {
       trip_details_form: 'Reiseinformation',
       auto_details_form: 'Fahrzeuginformationen',
@@ -27,6 +44,9 @@ export const forms = {
       insurance_personal_details: 'Persönliche Angaben',
       event_personal_details: 'Persönliche Angaben',
       travel_personal_details: 'Persönliche Angaben',
+    },
+    auto: {
+      vehicleAnnualMileage: '[DE] Annual Mileage',
     },
   },
 };

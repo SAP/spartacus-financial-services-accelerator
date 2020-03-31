@@ -95,7 +95,7 @@
             >
               <button
                 class="secondary-button"
-                (click)="resumeClaim(claim.requestId)"
+                (click)="resumeClaim(claim.claimNumber)"
               >
                 {{ 'fscommon.resume' | cxTranslate }}
               </button>
@@ -120,7 +120,7 @@
   {{ 'fscommon.notAvailable' | cxTranslate }}
 </ng-template>
 <ng-template #noIncidentType>
-  <img class="image-item" [src]="getNaImagelink()" alt="" />
+  <img class="image-item" [src]="getImagelink()" alt="" />
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>

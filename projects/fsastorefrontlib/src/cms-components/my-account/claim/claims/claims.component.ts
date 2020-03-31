@@ -1,24 +1,22 @@
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs/internal/Observable';
-import { Subscription } from 'rxjs';
 import {
-  Component,
-  OnInit,
   ChangeDetectionStrategy,
+  Component,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OccConfig, RoutingService } from '@spartacus/core';
-
+import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/operators';
+import { genericIcons } from '../../../../assets/icons/generic-icons';
+import { ClaimService } from '../../../../core/my-account/facade';
+import { StateWithMyAccount } from '../../../../core/my-account/store/my-account-state';
 import { DeleteClaimDialogComponent } from '../delete-claim-dialog/delete-claim-dialog.component';
-import { UserState } from './../../../../core/my-account/store/reducers/index';
-import { UserRequestService } from './../../../../core/user-request/services/user-request/user-request.service';
-import { naIconImgSrc } from '../../../../assets/icons/na-icon';
-import { ClaimService } from '../../../../core/my-account/services';
 
 @Component({
-  selector: 'fsa-claims',
+  selector: 'cx-fs-claims',
   templateUrl: './claims.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -28,12 +26,11 @@ export class ClaimsComponent implements OnInit, OnDestroy {
     protected config: OccConfig,
     protected domSanitizer: DomSanitizer,
     protected claimService: ClaimService,
-    protected userRequestService: UserRequestService,
     protected routingService: RoutingService
   ) {}
 
   private subscription = new Subscription();
-  claims$: Observable<UserState>;
+  claims$: Observable<StateWithMyAccount>;
   claimsLoaded$: Observable<boolean>;
   modalInstance: any;
 
@@ -41,14 +38,25 @@ export class ClaimsComponent implements OnInit, OnDestroy {
     this.claimService.loadClaims();
     this.claims$ = this.claimService.getClaims();
     this.claimsLoaded$ = this.claimService.getLoaded();
+
+    this.subscription.add(
+      this.claimService
+        .shouldReload()
+        .pipe(
+          map(_ => {
+            this.claimService.loadClaims();
+          })
+        )
+        .subscribe()
+    );
   }
 
   deleteClaim(claimNumber: string) {
     this.openModal(claimNumber);
   }
 
-  getNaImagelink() {
-    return this.domSanitizer.bypassSecurityTrustUrl(naIconImgSrc);
+  getImagelink() {
+    return this.domSanitizer.bypassSecurityTrustUrl(genericIcons.naIcon);
   }
 
   private openModal(claimNumber: string) {
@@ -59,19 +67,20 @@ export class ClaimsComponent implements OnInit, OnDestroy {
     this.modalInstance.claimNumber = claimNumber;
   }
 
-  public getBaseUrl() {
+  getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
 
-  resumeClaim(requestId: string) {
+  resumeClaim(claimNumber: string) {
+    this.claimService.resumeClaim(claimNumber);
     this.subscription.add(
-      this.userRequestService
-        .resumeRequest(requestId)
+      this.claimService
+        .getCurrentClaim()
         .pipe(
-          map(userRequest => {
-            if (userRequest.requestId === requestId) {
+          map(claim => {
+            if (claim.claimNumber === claimNumber) {
               this.routingService.go({
-                cxRoute: userRequest.configurationSteps[0].pageLabelOrId,
+                cxRoute: claim.configurationSteps[0].pageLabelOrId,
               });
             }
           })

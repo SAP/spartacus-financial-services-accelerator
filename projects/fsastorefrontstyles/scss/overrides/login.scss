@@ -8,3 +8,10 @@
     margin-top: 1.5rem;
   }
 }
+
+%cx-login-form,
+%cx-fs-register {
+  @include media-breakpoint-up(md) {
+    max-width: 50%;
+  }
+}

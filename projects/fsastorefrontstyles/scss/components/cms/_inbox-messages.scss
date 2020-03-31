@@ -1,6 +1,6 @@
-@import '../../theme/fsa/variables';
+@import '../../theme/fs/variables';
 
-%fsa-inbox-messages {
+%cx-fs-inbox-messages {
   .messages {
     border-left: 1px solid var(--cx-color-3);
     border-right: 1px solid var(--cx-color-3);
@@ -15,7 +15,7 @@
         &:hover {
           color: var(--cx-color-primary);
         }
-        .FSA-icon {
+        .fs-icon {
           right: 0.5rem;
           top: calc(50% - 6px);
         }

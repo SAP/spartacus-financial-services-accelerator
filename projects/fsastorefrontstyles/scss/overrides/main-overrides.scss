@@ -1,4 +1,4 @@
-@import '../mixins-fsa';
+@import '../fs-mixins';
 @import '../theme';
 
 cx-page-layout {
@@ -7,38 +7,17 @@ cx-page-layout {
   }
 }
 
-.FindAgentListTemplate,
-.StoreFinderPageTemplate,
 .FSRequestPageTemplate,
 .MultiTabsCategoryPageTemplate,
 .MultiStepCheckoutSummaryPageTemplate,
-.GeneralLayoutPageTemplate,
-.OrderConfirmationPageTemplate,
-.FSCategoryPageTemplate {
+.FSCategoryPageTemplate,
+.CheckoutPageTemplate,
+.GeneralPageTemplate {
+  padding: 0;
   & > cx-page-slot {
     max-width: 1140px;
     margin: 0 auto;
     padding: 3rem 1.5rem 0 1.5rem;
-  }
-}
-
-.MultiTabsCategoryPageTemplate {
-  .Section2 {
-    padding: 0;
-    margin-top: 3rem;
-    cx-paragraph p {
-      margin-bottom: 0;
-    }
-  }
-  .Section3 {
-    padding: 3rem 1.5rem;
-    margin-bottom: 3rem;
-    @include box-shadow(0px, 10px, 20px, 1px, $color-grey, 1);
-    & > * {
-      max-width: 860px;
-      width: 100%;
-      margin: 1rem auto;
-    }
   }
 }
 
@@ -51,6 +30,22 @@ cx-page-layout {
   width: inherit;
   margin: inherit;
 }
-cx-spinner .loader {
-  border-left-color: var(--cx-color-primary);
+cx-spinner {
+  width: 100%;
+  padding: 1rem;
+  .loader {
+    border-left-color: var(--cx-color-primary);
+  }
+}
+cx-fs-cms-custom-container {
+  @include box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 0.3);
+  padding: 3rem;
+  @include media-breakpoint-down(md) {
+    padding: 2rem;
+  }
+}
+// temporary solution, untill forms are wrapped in different container component
+.CheckoutPageTemplate .BottomContent cx-fs-cms-custom-container {
+  padding: 0;
+  box-shadow: none;
 }

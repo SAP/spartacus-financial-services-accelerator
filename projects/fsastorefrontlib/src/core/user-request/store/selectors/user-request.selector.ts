@@ -1,30 +1,20 @@
+import { MemoizedSelector, createSelector } from '@ngrx/store';
 import {
-  MemoizedSelector,
-  createSelector,
-  createFeatureSelector,
-} from '@ngrx/store';
+  UserRequestState,
+  StateWithUserRequest,
+  FSUserRequestState,
+} from '../user-request-state';
 
 import * as fromFeature from '../reducers';
-import { UserRequestState, StateWithUserRequest } from '../user-request-state';
+import * as fromUserRequest from '../reducers/user-request.reducer';
 import { FSUserRequest } from '../../../../occ/occ-models';
-
-const getUserRequestContentSelector = (state: UserRequestState) =>
-  state.content;
-const getUserRequestRefreshSelector = (state: UserRequestState) =>
-  state.refresh;
-
-export const getFSUserRequestState: MemoizedSelector<
-  StateWithUserRequest,
-  fromFeature.FSUserRequestState
-> = createFeatureSelector<fromFeature.FSUserRequestState>('userRequest');
 
 export const getUserRequestState: MemoizedSelector<
   StateWithUserRequest,
   UserRequestState
 > = createSelector(
-  fromFeature.getUserState,
-  (userRequestState: fromFeature.FSUserRequestState) =>
-    userRequestState.userRequest
+  fromFeature.getUserRequestState,
+  (userRequestState: FSUserRequestState) => userRequestState.userRequest
 );
 
 export const getUserRequestContent: MemoizedSelector<
@@ -32,13 +22,5 @@ export const getUserRequestContent: MemoizedSelector<
   FSUserRequest
 > = createSelector(
   getUserRequestState,
-  getUserRequestContentSelector
-);
-
-export const getUserRequestRefresh: MemoizedSelector<
-  StateWithUserRequest,
-  boolean
-> = createSelector(
-  getUserRequestState,
-  getUserRequestRefreshSelector
+  fromUserRequest.getUserRequestContent
 );

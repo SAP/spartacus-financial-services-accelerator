@@ -12,6 +12,5 @@ export const userRequest = {
     policeInformed: 'Were the police informed:',
     responsibleForAccident: 'Who is responsible for the accident:',
     witnesses: 'Are there any witnesses we can contact',
-    description: 'Description',
   },
 };

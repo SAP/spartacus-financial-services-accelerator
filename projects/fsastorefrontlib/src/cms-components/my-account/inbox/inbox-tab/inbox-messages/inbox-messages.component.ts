@@ -6,19 +6,20 @@ import {
   OnInit,
 } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
-import { InboxService } from '../../../../../core/my-account/services/inbox.service';
+import { map } from 'rxjs/operators';
+import { InboxService } from '../../../../../core/my-account/facade/inbox.service';
 import {
-  InboxMessage,
   FSSearchConfig,
+  InboxMessage,
 } from '../../../../../core/my-account/services/inbox-data.service';
 
 @Component({
-  selector: 'fsa-inbox-messages',
+  selector: 'cx-fs-inbox-messages',
   templateUrl: './inbox-messages.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InboxMessagesComponent implements OnInit, OnDestroy {
-  constructor(private inboxService: InboxService) {}
+  constructor(protected inboxService: InboxService) {}
 
   private subscription: Subscription = new Subscription();
   messagesObject$: Observable<any>;
@@ -49,20 +50,26 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
 
   loadCurrentMessageGroup() {
     this.subscription.add(
-      this.inboxService.activeMessageGroupAndTitle.subscribe(group => {
-        if (
-          group &&
-          group.messageGroup &&
-          group.messageGroup !== this.messageGroup
-        ) {
-          this.clearSearchData();
-        }
-        this.messageGroup =
-          group && group.messageGroup ? group.messageGroup : this.initialGroup;
-        this.mobileGroupTitle =
-          group && group.title ? group.title : this.mobileInitialTab;
-        this.getMessages();
-      })
+      this.inboxService.activeMessageGroupAndTitle
+        .pipe(
+          map(group => {
+            if (
+              group &&
+              group.messageGroup &&
+              group.messageGroup !== this.messageGroup
+            ) {
+              this.clearSearchData();
+            }
+            this.messageGroup =
+              group && group.messageGroup
+                ? group.messageGroup
+                : this.initialGroup;
+            this.mobileGroupTitle =
+              group && group.title ? group.title : this.mobileInitialTab;
+            this.getMessages();
+          })
+        )
+        .subscribe()
     );
   }
 
@@ -71,21 +78,24 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.inboxService
         .getMessages(this.messageGroup, this.searchConfig)
-        .subscribe(response => {
-          this.inboxService.messagesSource.next(response);
-          if (response.sorts.length > 0 && response.pagination) {
-            this.searchConfig.currentPage = response.pagination.page;
-            this.searchConfig.sortCode = response.sorts[0].code;
-            this.searchConfig.sortOrder =
-              response.sorts[0].asc === true ? 'asc' : 'desc';
-          }
-          this.pagination = response.pagination;
-          this.pagination.currentPage = response.pagination.page;
-          response.messages.forEach(message => {
-            newMessageList.push(this.buildDisplayMessage(message));
-          });
-          this.loadedMessages = newMessageList;
-        })
+        .pipe(
+          map(response => {
+            this.inboxService.messagesSource.next(response);
+            if (response.sorts.length > 0 && response.pagination) {
+              this.searchConfig.currentPage = response.pagination.page;
+              this.searchConfig.sortCode = response.sorts[0].code;
+              this.searchConfig.sortOrder =
+                response.sorts[0].asc === true ? 'asc' : 'desc';
+            }
+            this.pagination = response.pagination;
+            this.pagination.currentPage = response.pagination.page;
+            response.messages.forEach(message => {
+              newMessageList.push(this.buildDisplayMessage(message));
+            });
+            this.loadedMessages = newMessageList;
+          })
+        )
+        .subscribe()
     );
   }
 
@@ -93,7 +103,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
     this.loadedMessages.forEach(msg => {
       if (!msg.read && msg.uid === message.uid) {
         msg.read = true;
-        this.inboxService.setMessagesState([msg.uid], true).subscribe();
+        this.subscription.add(
+          this.inboxService.setMessagesState([msg.uid], true).subscribe()
+        );
       }
     });
   }
@@ -136,7 +148,9 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
         return message.uid;
       });
     if (selectedMessages.length > 0) {
-      this.inboxService.setMessagesState(selectedMessages, toRead).subscribe();
+      this.subscription.add(
+        this.inboxService.setMessagesState(selectedMessages, toRead).subscribe()
+      );
     }
   }
 

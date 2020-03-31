@@ -1,6 +1,6 @@
-@import '../../theme/fsa/variables';
+@import '../../theme/fs/variables';
 
-%fsa-agent-root {
+%cx-fs-agent-root {
   cx-media img {
     background: var(--cx-color-7);
     border-radius: 50%;
@@ -15,22 +15,22 @@
     p {
       font-weight: var(--cx-font-weight-semi);
     }
-    .FSA-icon:before {
+    .fs-icon:before {
       padding: 8px;
       border: 1px solid var(--cx-color-3);
       border-radius: 50%;
       font-size: var(--cx-h3-font-size);
       @include transition;
     }
-    .icon-FSA-envelope {
+    .icon-envelope {
       color: var(--cx-color-text);
       &:hover:before {
-        color: var(--cx-color-text);
+        color: var(--cx-color-1);
         background: var(--cx-color-text);
         border: 1px solid var(--cx-color-text);
       }
     }
-    .icon-FSA-map-marker:hover:before {
+    .icon-map-marker:hover:before {
       color: var(--cx-color-1);
       background: var(--cx-color-primary);
       border: 1px solid var(--cx-color-primary);

@@ -1,14 +1,14 @@
 import * as fromAction from '../actions';
+import { ClaimPoliciesState } from '../my-account-state';
 
-export interface ClaimPoliciesState {
-  claimPoliciesData: {};
-  refresh: boolean;
-  loaded: boolean;
+export interface Policy {
+  policy: any;
 }
 
 export const initialState: ClaimPoliciesState = {
-  claimPoliciesData: {},
-  refresh: false,
+  claimPoliciesData: {
+    insurancePolicies: [],
+  },
   loaded: false,
 };
 
@@ -16,23 +16,16 @@ export function reducer(
   state = initialState,
   action: fromAction.ClaimPoliciesAction
 ): ClaimPoliciesState {
-  switch (action.type) {
-    case fromAction.LOAD_CLAIM_POLICIES_SUCCESS: {
-      const claimPoliciesData = { ...action.payload };
-      return {
-        ...state,
-        claimPoliciesData,
-        refresh: false,
-        loaded: true,
-      };
-    }
+  if (action.type === fromAction.LOAD_CLAIM_POLICIES_SUCCESS) {
+    const claimPoliciesData = { ...action.payload };
+    return {
+      ...state,
+      claimPoliciesData,
+      loaded: true,
+    };
   }
   return state;
 }
 
-export const getClaimPoliciesData = (state: ClaimPoliciesState) =>
-  state.claimPoliciesData;
-export const getRefreshClaimPolicies = (state: ClaimPoliciesState) =>
-  state.refresh;
 export const getLoadedClaimPolicies = (state: ClaimPoliciesState) =>
   state.loaded;

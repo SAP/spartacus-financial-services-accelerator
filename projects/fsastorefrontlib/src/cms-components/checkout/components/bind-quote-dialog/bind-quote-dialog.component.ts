@@ -1,22 +1,32 @@
-import { filter, tap } from 'rxjs/operators';
 import {
-  FSCart,
-  BindingStateType,
-} from './../../../../occ/occ-models/occ.models';
-import { QuoteService } from './../../../../core/my-account/services/quote.service';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+  Component,
+  ElementRef,
+  EventEmitter,
+  Output,
+  ViewChild,
+} from '@angular/core';
+import { RoutingService } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
-import { RoutingService, CartService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
+import { QuoteService } from '../../../../core/my-account/facade/quote.service';
+import { FSCartService } from './../../../../core/cart/facade/cart.service';
+import {
+  BindingStateType,
+  FSCart,
+} from './../../../../occ/occ-models/occ.models';
 
 @Component({
-  selector: 'fsa-bind-quote-dialog',
+  selector: 'cx-fs-bind-quote-dialog',
   templateUrl: './bind-quote-dialog.component.html',
 })
 export class BindQuoteDialogComponent {
   cartCode: string;
   nextStepUrl: string;
   subscription = new Subscription();
+
+  @Output()
+  quoteBinding$: EventEmitter<any> = new EventEmitter<any>();
 
   @ViewChild('dialog', { static: false, read: ElementRef })
   dialog: ElementRef;
@@ -25,7 +35,7 @@ export class BindQuoteDialogComponent {
     protected modalService: ModalService,
     protected quoteService: QuoteService,
     protected routingService: RoutingService,
-    protected cartService: CartService
+    protected cartService: FSCartService
   ) {}
 
   dismissModal(reason?: any): void {
@@ -34,6 +44,7 @@ export class BindQuoteDialogComponent {
 
   bindQuote() {
     this.quoteService.bindQuote(this.cartCode);
+    this.quoteBinding$.emit(true);
     this.subscription.add(
       this.cartService
         .getActive()

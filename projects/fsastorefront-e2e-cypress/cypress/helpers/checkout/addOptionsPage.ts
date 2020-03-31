@@ -9,14 +9,9 @@ export interface AddOptions {
   items: AddOptionItem[];
 }
 
-export function checkAddOptionsPage() {
-  cy.get('div.progress-inner-wrapper').should('have.length', 5);
-  cy.get('fsa-add-options').should('be.visible');
-}
-
 export function checkAddOptionsPageContent(addOptions: AddOptions) {
-  cy.get('h2.heading-headline').contains(addOptions.title);
-  cy.get('fsa-add-options')
+  cy.get('.heading-headline').contains(addOptions.title);
+  cy.get('cx-fs-add-options')
     .should('be.visible')
     .within(() => {
       cy.get('h6').should('have.length', addOptions.items.length);
@@ -30,7 +25,6 @@ export function checkAddOptionsPageContent(addOptions: AddOptions) {
             }
             if (item.shouldAdd) {
               cy.get('.secondary-button').click();
-              cy.wait(1000);
             }
           });
       });

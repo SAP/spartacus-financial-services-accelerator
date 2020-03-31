@@ -1,4 +1,4 @@
-@import '../mixins-fsa';
+@import '../fs-mixins';
 @import '../theme';
 
 .cx-msg {
@@ -9,25 +9,6 @@
   padding: 1rem 0;
   margin: 1rem auto 3rem;
   text-align: center;
-}
-.cx-payment-card {
-  .cx-card-title {
-    color: var(--cx-color-primary);
-    font-size: var(--cx-h6-font-size);
-  }
-  .card-body.cx-card-body {
-    background: var(--color-1);
-  }
-  .card-header {
-    color: var(--cx-color-text);
-    background: var(--cx-color-4);
-  }
-  .cx-card-link.card-link.btn-link {
-    text-transform: uppercase;
-    color: var(--cx-color-primary);
-    font-weight: var(--cx-font-weight-semi);
-    text-decoration: underline;
-  }
 }
 cx-payment-method {
   .cx-checkout-title {

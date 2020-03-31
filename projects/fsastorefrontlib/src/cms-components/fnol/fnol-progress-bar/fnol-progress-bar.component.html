@@ -1,0 +1,13 @@
+<div class="cx-multi-step-checkout">
+  <div class="row">
+    <div class="col-12">
+      <h2 class="py-4 text-center text-uppercase">
+        {{ 'fscommon.makeClaim' | cxTranslate }}
+      </h2>
+      <section *ngIf="claimRequest$ | async as claimRequest">
+        <cx-fs-progress-bar [steps]="claimRequest.configurationSteps">
+        </cx-fs-progress-bar>
+      </section>
+    </div>
+  </div>
+</div>

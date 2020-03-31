@@ -4,19 +4,18 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { CmsService, AuthService } from '@spartacus/core';
+import { AuthService, CmsService } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
-import { InboxService } from '../../../core/my-account/services/inbox.service';
+import { InboxService } from '../../../core/my-account/facade/inbox.service';
 import {
   CmsInboxComponent,
   CmsInboxTabComponent,
 } from '../../../occ/occ-models/cms-component.models';
-import { InboxDataService } from '../../../core/my-account/services/inbox-data.service';
 
 @Component({
-  selector: 'fsa-inbox',
+  selector: 'cx-fs-inbox',
   templateUrl: './inbox.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -25,7 +24,6 @@ export class InboxComponent implements OnInit, OnDestroy {
     protected componentData: CmsComponentData<CmsInboxComponent>,
     protected cmsService: CmsService,
     protected inboxService: InboxService,
-    private inboxData: InboxDataService,
     protected auth: AuthService
   ) {}
 
@@ -40,14 +38,6 @@ export class InboxComponent implements OnInit, OnDestroy {
   activeTabIndex = 0;
 
   ngOnInit() {
-    this.subscription.add(
-      this.auth.getUserToken().subscribe(userData => {
-        if (this.inboxData.userId !== userData.userId) {
-          this.inboxData.userId = userData.userId;
-        }
-      })
-    );
-
     this.subscription.add(
       this.componentData.data$.subscribe(data => {
         this.tabs =

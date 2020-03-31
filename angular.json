@@ -139,7 +139,7 @@
       "root": "projects/fsastorefrontlib",
       "sourceRoot": "projects/fsastorefrontlib/src",
       "projectType": "library",
-      "prefix": "fsa",
+      "prefix": "cx-fs",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
@@ -162,7 +162,12 @@
                 "./projects/fsastorefrontstyles/scss",
                 "node_modules/@spartacus/styles/scss"
               ]
-            }
+            },
+            "codeCoverageExclude": [
+              "**/index.ts",
+              "**/*.de.ts",
+              "**/*.en.ts"
+            ]
           }
         },
         "lint": {

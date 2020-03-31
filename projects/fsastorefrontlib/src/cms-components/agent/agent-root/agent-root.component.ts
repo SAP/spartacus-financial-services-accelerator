@@ -1,29 +1,36 @@
-import { OccAgentAdapter } from './../../../occ/services/agent/occ-agent.adapter';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
+import { Subscription } from 'rxjs';
+import { AgentConnector } from '../../../core/agent/connectors/agent.connector';
 import { CmsAgentRootComponent } from '../../../occ/occ-models';
 
 @Component({
-  selector: 'fsa-agent-root',
+  selector: 'cx-fs-agent-root',
   templateUrl: './agent-root.component.html',
 })
-export class AgentRootComponent implements OnInit {
+export class AgentRootComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CmsAgentRootComponent>,
-    protected agentAdapter: OccAgentAdapter
+    protected agentConnector: AgentConnector
   ) {}
 
+  private subscription = new Subscription();
   agentList$;
   agentRootCategory;
 
   ngOnInit() {
-    this.componentData.data$
-      .subscribe(data => {
+    this.subscription.add(
+      this.componentData.data$.subscribe(data => {
         this.agentRootCategory = data.agentRootCategory;
-        this.agentList$ = this.agentAdapter.getAgentsByCategory(
+        this.agentList$ = this.agentConnector.getAgentsByCategory(
           data.agentRootCategory
         );
       })
-      .unsubscribe();
+    );
+  }
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

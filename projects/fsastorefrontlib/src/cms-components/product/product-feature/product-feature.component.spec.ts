@@ -1,12 +1,12 @@
-import { FSProductService } from './../../../core/checkout/services/product/fs-product.service';
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CmsComponent, Product } from '@spartacus/core';
-import { of, Observable } from 'rxjs';
-import { CmsComponentData } from '@spartacus/storefront';
-import { ProductFeatureComponent } from './product-feature.component';
-import { CmsProductFeatureComponent } from '../../../occ/occ-models';
 import { By } from '@angular/platform-browser';
+import { CmsComponent, Product } from '@spartacus/core';
+import { CmsComponentData } from '@spartacus/storefront';
+import { Observable, of } from 'rxjs';
+import { FSProductService } from '../../../core/product-pricing/facade/product.service';
+import { CmsProductFeatureComponent } from '../../../occ/occ-models';
+import { ProductFeatureComponent } from './product-feature.component';
 
 const mockedProduct: Product = {
   summary: 'Product Summary',
@@ -29,6 +29,7 @@ describe('ProductFeatureComponent', () => {
     typeCode: 'CMSProductFeatureComponent',
     title: 'Product Feature Component',
     description: 'Component used to describe product features',
+    product: 'testProduct',
   };
 
   const MockCmsComponentData = <CmsComponentData<CmsComponent>>{

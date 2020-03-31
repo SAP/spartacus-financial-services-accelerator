@@ -1,34 +1,30 @@
 import { MemoizedSelector, createSelector } from '@ngrx/store';
-
-import * as fromFeature from '../reducers';
+import * as fromFeature from './feature.selector';
 import * as fromPremiumCalendar from '../reducers/premium-calendar.reducer';
+import {
+  MyAccountState,
+  PremiumCalendarState,
+  StateWithMyAccount,
+} from '../my-account-state';
 
 export const getPremiumCalendarState: MemoizedSelector<
-  any,
-  fromPremiumCalendar.PremiumCalendarState
+  StateWithMyAccount,
+  PremiumCalendarState
 > = createSelector(
   fromFeature.getUserState,
-  (userState: fromFeature.UserState) => userState.premiumCalendar
+  (myAccountState: MyAccountState) => myAccountState.premiumCalendar
 );
 
 export const getPremiumCalendarData: MemoizedSelector<
-  any,
+  StateWithMyAccount,
   any
 > = createSelector(
   getPremiumCalendarState,
   fromPremiumCalendar.getPremiumCalendarData
 );
 
-export const getPremiumCalendarRefresh: MemoizedSelector<
-  any,
-  boolean
-> = createSelector(
-  getPremiumCalendarState,
-  fromPremiumCalendar.getRefresh
-);
-
 export const getPremiumCalendarLoaded: MemoizedSelector<
-  any,
+  StateWithMyAccount,
   boolean
 > = createSelector(
   getPremiumCalendarState,

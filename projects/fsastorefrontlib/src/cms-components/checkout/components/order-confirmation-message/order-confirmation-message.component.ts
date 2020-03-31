@@ -1,9 +1,9 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
-import { Order, CheckoutService } from '@spartacus/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { CheckoutService, Order } from '@spartacus/core';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'fsa-order-confirmation-message',
+  selector: 'cx-fs-order-confirmation-message',
   templateUrl: './order-confirmation-message.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

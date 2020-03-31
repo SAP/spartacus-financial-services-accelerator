@@ -1,13 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CategoryFeatureCarouselComponent } from './category-feature-carousel.component';
-import {
-  CmsCategoryFeatureCarouselComponent,
-  CmsComponent,
-} from '../../../occ/occ-models';
+import { CmsCategoryFeatureCarouselComponent } from '../../../occ/occ-models';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of } from 'rxjs';
 import { Component, Input, Directive } from '@angular/core';
-import { CmsService, ContentSlotComponentData } from '@spartacus/core';
+import {
+  CmsService,
+  ContentSlotComponentData,
+  CmsComponent,
+} from '@spartacus/core';
 
 @Component({
   // tslint:disable
@@ -38,6 +39,7 @@ class MockCmsService {
 describe('CategoryCarouselComponent', () => {
   let component: CategoryFeatureCarouselComponent;
   let fixture: ComponentFixture<CategoryFeatureCarouselComponent>;
+  let mockCmsService;
 
   const componentData: CmsCategoryFeatureCarouselComponent = {
     uid: 'TestCmsCategoryFeatureCarouselComponent',
@@ -52,6 +54,7 @@ describe('CategoryCarouselComponent', () => {
   };
 
   beforeEach(async(() => {
+    mockCmsService = new MockCmsService();
     TestBed.configureTestingModule({
       declarations: [
         CategoryFeatureCarouselComponent,
@@ -65,7 +68,7 @@ describe('CategoryCarouselComponent', () => {
         },
         {
           provide: CmsService,
-          useValue: MockCmsService,
+          useValue: mockCmsService,
         },
       ],
     }).compileComponents();
@@ -74,9 +77,19 @@ describe('CategoryCarouselComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CategoryFeatureCarouselComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should unsubscribe from any subscriptions when destroyed', () => {
+    const subscriptions = component['subscription'];
+    spyOn(subscriptions, 'unsubscribe').and.callThrough();
+
+    component.ngOnInit();
+    component.ngOnDestroy();
+    expect(subscriptions.unsubscribe).toHaveBeenCalled();
   });
 });

@@ -1,11 +1,11 @@
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { CmsService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
+import { InboxService } from '../../../../core/my-account/facade/inbox.service';
 import { CmsInboxTabComponent } from './../../../../occ/occ-models/cms-component.models';
 import { InboxTabComponent } from './inbox-tab.component';
-import { InboxService } from '../../../../core/my-account/services/inbox.service';
-import { CmsService } from '@spartacus/core';
-import { By } from '@angular/platform-browser';
 
 const componentData: CmsInboxTabComponent = {
   uid: 'TestInboxTabContainer',
@@ -58,6 +58,6 @@ describe('InboxTabComponent', () => {
 
   it('should render tab', () => {
     fixture.detectChanges();
-    expect(el.query(By.css('.fsa-tab'))).toBeTruthy();
+    expect(el.query(By.css('.fs-tab'))).toBeTruthy();
   });
 });

@@ -3,10 +3,17 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { RoutingService, OccConfig, I18nTestingModule } from '@spartacus/core';
 import { of, Observable } from 'rxjs';
 import { AccordionModule } from '../../../../shared/accordion/accordion.module';
-import { PolicyService } from '../../../../core/my-account/services';
+import { PolicyService } from '../../../../core/my-account/facade/policy.service';
+import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
+import { Type } from '@angular/core';
+import {
+  AllowedFSRequestType,
+  RequestType,
+} from './../../../../occ/occ-models';
 
 class MockPolicyService {
-  loadPolicyDetails(policyId: string, contractId: string): void {}
+  loadPolicyDetails(): void {}
+  getPolicies() {}
 }
 
 class MockRoutingService {
@@ -21,6 +28,32 @@ class MockRoutingService {
     });
   }
 }
+const mockAllowedFSRequestTypes: AllowedFSRequestType[] = [
+  {
+    requestType: {
+      code: RequestType.FSCLAIM,
+    },
+  },
+  {
+    requestType: {
+      code: RequestType.COVERAGE_CHANGE,
+    },
+  },
+  {
+    requestType: {
+      code: RequestType.INSURED_OBJECT_CHANGE,
+    },
+  },
+];
+
+class MockChangeRequestService {
+  getChangeRequest(): Observable<any> {
+    return of({
+      requestId: 'requestId',
+    });
+  }
+  createChangeRequest(policy, contract, changeRequest) {}
+}
 
 const MockOccModuleConfig: OccConfig = {
   context: {
@@ -34,9 +67,13 @@ const MockOccModuleConfig: OccConfig = {
   },
 };
 
+const policyId = 'policyId';
+const contractId = 'contractId';
+
 describe('PolicyDetailsComponent', () => {
   let component: PolicyDetailsComponent;
   let fixture: ComponentFixture<PolicyDetailsComponent>;
+  let changeRequestService: MockChangeRequestService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -45,9 +82,14 @@ describe('PolicyDetailsComponent', () => {
         { provide: RoutingService, useClass: MockRoutingService },
         { provide: PolicyService, useClass: MockPolicyService },
         { provide: OccConfig, useValue: MockOccModuleConfig },
+        { provide: ChangeRequestService, useClass: MockChangeRequestService },
       ],
       declarations: [PolicyDetailsComponent],
     }).compileComponents();
+
+    changeRequestService = TestBed.get(ChangeRequestService as Type<
+      ChangeRequestService
+    >);
   }));
 
   beforeEach(() => {
@@ -57,7 +99,35 @@ describe('PolicyDetailsComponent', () => {
     component.ngOnInit();
   });
 
-  it('should create', () => {
+  it('should check', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should create change request for policy', () => {
+    spyOn(changeRequestService, 'createChangeRequest').and.stub();
+    component.changePolicyDetails(
+      policyId,
+      contractId,
+      RequestType.INSURED_OBJECT_CHANGE
+    );
+    expect(changeRequestService.createChangeRequest).toHaveBeenCalledWith(
+      policyId,
+      contractId,
+      RequestType.INSURED_OBJECT_CHANGE
+    );
+  });
+  it('should checkk if request type is allowed', () => {
+    expect(
+      component.isChangeAllowed(
+        mockAllowedFSRequestTypes,
+        RequestType.COVERAGE_CHANGE
+      )
+    ).toEqual(true);
+  });
+
+  it('should check if request type is not allowed', () => {
+    expect(
+      component.isChangeAllowed(mockAllowedFSRequestTypes, 'NOT_EXISTING_TYPE')
+    ).toEqual(false);
   });
 });
