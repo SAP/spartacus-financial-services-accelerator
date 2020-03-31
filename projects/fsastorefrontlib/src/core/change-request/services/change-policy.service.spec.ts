@@ -6,6 +6,10 @@ describe('ChangePolicyService', () => {
   let service: ChangePolicyService;
 
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      providers: [ChangePolicyService],
+    });
+
     service = TestBed.get(ChangePolicyService);
   });
 
