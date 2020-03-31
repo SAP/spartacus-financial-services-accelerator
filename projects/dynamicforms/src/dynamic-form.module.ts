@@ -7,6 +7,7 @@ import { formEffects } from './core/effects/index';
 import { EffectsModule } from '@ngrx/effects';
 import { defaultFormConfig } from './core/config/default-form-config';
 import { FormConfig } from './core/models/form-config';
+import { ComponentsModule } from './components/components.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { FormConfig } from './core/models/form-config';
     FormContainerModule,
     EffectsModule.forFeature(formEffects),
     ConfigModule.withConfig(defaultFormConfig),
+    ComponentsModule,
   ],
   exports: [FormContainerModule],
   providers: [{ provide: FormConfig, useExisting: Config }],
