@@ -82,7 +82,10 @@ export function checkQuoteReviewAccordions(category) {
 }
 
 export function placeOrderOnFinalReview() {
-  const confirmationPage = waitForPage('orderConfirmationPage', 'confirmationPage');
+  const confirmationPage = waitForPage(
+    'orderConfirmationPage',
+    'confirmationPage'
+  );
   cy.get('cx-fs-final-review').within(() => {
     cy.get('.form-check-input').click();
     cy.get('.primary-button').click();
