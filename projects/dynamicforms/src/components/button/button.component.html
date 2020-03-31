@@ -1,1 +1,16 @@
-<p>button works!</p>
+<div
+  class="dynamic-field"
+  [formGroup]="group"
+  [hidden]="group.controls[config.name].disabled"
+>
+  <div class="row justify-content-end">
+    <button
+      [ngClass]="formConfig.cssClass.submitButton"
+      [disabled]="config.disabled"
+      type="submit"
+      [attr.name]="config.name"
+    >
+      {{ config.label }}
+    </button>
+  </div>
+</div>

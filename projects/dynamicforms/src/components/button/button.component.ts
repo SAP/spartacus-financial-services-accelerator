@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { GenericComponent } from '../generic.component';
 
 @Component({
   selector: 'cx-button',
   templateUrl: './button.component.html',
 })
-export class ButtonComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class ButtonComponent extends GenericComponent {}

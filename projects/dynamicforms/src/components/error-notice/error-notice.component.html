@@ -1,1 +1,23 @@
-<p>error-notice works!</p>
+<div class="row">
+  <div [ngClass]="formConfig.cssClass.validatorMessageWrapper">
+    <ng-container
+      *ngIf="(warn?.touched && warn?.errors?.required) || warn?.errors?.pattern"
+    >
+      <div [ngClass]="formConfig.cssClass.validatorMessage">
+        {{ 'forms.enterValidValue' | cxTranslate }}
+      </div>
+    </ng-container>
+    <ng-container
+      *ngIf="
+        warn?.invalid &&
+        warn?.touched &&
+        !warn?.errors?.required &&
+        parentConfig?.error
+      "
+    >
+      <div [ngClass]="formConfig.cssClass.validatorMessage">
+        {{ parentConfig.error | cxTranslate }}
+      </div>
+    </ng-container>
+  </div>
+</div>

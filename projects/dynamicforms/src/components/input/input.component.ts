@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { GenericComponent } from '../generic.component';
 
 @Component({
   selector: 'cx-input',
   templateUrl: './input.component.html',
 })
-export class InputComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class InputComponent extends GenericComponent {}

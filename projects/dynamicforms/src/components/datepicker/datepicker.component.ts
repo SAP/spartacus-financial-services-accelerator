@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { GenericComponent } from '../generic.component';
 
 @Component({
   selector: 'cx-datepicker',
   templateUrl: './datepicker.component.html',
 })
-export class DatePickerComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class DatePickerComponent extends GenericComponent {}

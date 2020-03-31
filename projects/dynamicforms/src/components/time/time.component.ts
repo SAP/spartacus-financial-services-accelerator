@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { GenericComponent } from '../generic.component';
 
 @Component({
   selector: 'cx-time',
   templateUrl: './time.component.html',
 })
-export class TimeComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class TimeComponent extends GenericComponent {}

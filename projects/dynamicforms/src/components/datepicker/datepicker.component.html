@@ -1,1 +1,19 @@
-<p>datepicker works!</p>
+<div
+  class="dynamic-field"
+  [formGroup]="group"
+  [hidden]="group.controls[config.name].disabled"
+>
+  <div [ngClass]="formConfig.cssClass.inputWrapper">
+    <label [ngClass]="formConfig.cssClass.label">{{ config.label }}</label>
+    <input
+      [ngClass]="formConfig.cssClass.input"
+      type="date"
+      [formControlName]="config.name"
+      [attr.name]="config.name"
+    />
+  </div>
+  <cx-error-notice
+    [warn]="group.controls[config.name]"
+    [parentConfig]="config"
+  ></cx-error-notice>
+</div>

@@ -1,1 +1,25 @@
-<p>radio works!</p>
+<div
+  class="dynamic-field"
+  [formGroup]="group"
+  [hidden]="group.controls[config.name].disabled"
+>
+  <div [ngClass]="formConfig.cssClass.radioInputWrapper">
+    <label [ngClass]="formConfig.cssClass.radioLabel">{{ config.label }}</label>
+    <div *ngFor="let option of config.options">
+      <input
+        [ngClass]="formConfig.cssClass.radioInput"
+        type="radio"
+        [attr.name]="config.name"
+        value="{{ option.name }}"
+        [formControlName]="config.name"
+      />
+      <label [ngClass]="formConfig.cssClass.radioOptionLabel">{{
+        option.label
+      }}</label>
+    </div>
+  </div>
+  <cx-error-notice
+    [warn]="group.controls[config.name]"
+    [parentConfig]="config"
+  ></cx-error-notice>
+</div>

@@ -1,1 +1,25 @@
-<p>select works!</p>
+<div
+  class="dynamic-field"
+  [formGroup]="group"
+  [hidden]="group.controls[config.name].disabled"
+>
+  <div [ngClass]="formConfig.cssClass.inputWrapper">
+    <label [ngClass]="formConfig.cssClass.label">{{ config.label }}</label>
+    <select
+      [ngClass]="formConfig.cssClass.input"
+      [attr.name]="config.name"
+      formControlName="{{ config.name }}"
+    >
+      <option value="pleaseSelect" [selected]="'pleaseSelect'" disabled>{{
+        'fscommon.pleaseSelect' | cxTranslate
+      }}</option>
+      <option *ngFor="let option of config.options" value="{{ option.name }}">
+        {{ option.label }}
+      </option>
+    </select>
+  </div>
+  <cx-error-notice
+    [warn]="group.controls[config.name]"
+    [parentConfig]="config"
+  ></cx-error-notice>
+</div>

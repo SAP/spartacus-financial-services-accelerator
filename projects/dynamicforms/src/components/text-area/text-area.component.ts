@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { GenericComponent } from '../generic.component';
 
 @Component({
   selector: 'cx-text-area',
   templateUrl: './text-area.component.html',
 })
-export class TextAreaComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit() {}
-}
+export class TextAreaComponent extends GenericComponent {}
