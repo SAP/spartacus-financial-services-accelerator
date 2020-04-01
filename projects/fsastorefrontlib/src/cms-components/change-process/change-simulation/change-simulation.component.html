@@ -205,7 +205,7 @@
     </div>
   </ng-container>
   <div class="row mt-5">
-    <div class="col-6">
+    <div class="col-12 col-md-5 pb-2">
       <button
         class="action-button btn-block"
         (click)="cancelChangeRequest(changeRequest.requestId)"
@@ -213,7 +213,7 @@
         {{ 'common.back' | cxTranslate }}
       </button>
     </div>
-    <div class="col-6">
+    <div class="col-12 col-md-5 offset-0 offset-md-2 pb-2">
       <button
         class="primary-button btn-block"
         (click)="updateChangeRequest(changeRequest)"
