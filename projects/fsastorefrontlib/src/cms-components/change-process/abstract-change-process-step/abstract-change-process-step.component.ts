@@ -12,6 +12,7 @@ import { ChangeRequestService } from '../../../core/change-request/facade/change
 import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
 import { FSStepData, StepStatus } from '../../../occ/occ-models';
 import * as fromUserRequestAction from './../../../core/user-request/store/actions';
+import { ChangePolicyService } from '../../../core/change-request/services/change-policy.service';
 
 @Component({ template: '' })
 export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
@@ -21,7 +22,8 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected routingService: RoutingService,
     protected globalMessageService: GlobalMessageService,
-    protected fb: FormBuilder
+    protected fb: FormBuilder,
+    protected changePolicyService: ChangePolicyService
   ) {}
 
   configurationSteps: FSStepData[];

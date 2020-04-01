@@ -1,16 +1,20 @@
+import { QUOTE_NORMALIZER } from '../../../core/my-account/connectors/converters';
+import { InsuranceQuoteList } from './../../occ-models/occ.models';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OccEndpointsService } from '@spartacus/core';
+import { OccEndpointsService, ConverterService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
-import { catchError } from 'rxjs/operators';
+import { catchError, pluck } from 'rxjs/operators';
 import { QuoteAdapter } from '../../../core/my-account/connectors/quote.adapter';
+import { Models } from '../../../../src/model/quote.model';
 
 @Injectable()
 export class OccQuoteAdapter implements QuoteAdapter {
   constructor(
     protected http: HttpClient,
-    protected occEndpointService: OccEndpointsService
+    protected occEndpointService: OccEndpointsService,
+    protected converterService: ConverterService
   ) {}
 
   protected getQuotesEndpoint(userId: string) {
@@ -30,13 +34,15 @@ export class OccQuoteAdapter implements QuoteAdapter {
     return this.occEndpointService.getBaseEndpoint() + quotesFromCartEndpoint;
   }
 
-  getQuotes(userId: string): Observable<any> {
+  getQuotes(userId: string): Observable<Models.InsuranceQuote[]> {
     const url = this.getQuotesEndpoint(userId);
     const params = new HttpParams();
 
-    return this.http
-      .get(url, { params: params })
-      .pipe(catchError((error: any) => throwError(error.json())));
+    return this.http.get<InsuranceQuoteList>(url, { params: params }).pipe(
+      pluck('insuranceQuotes'),
+      this.converterService.pipeableMany(QUOTE_NORMALIZER),
+      catchError((error: any) => throwError(error.json()))
+    );
   }
 
   updateQuote(

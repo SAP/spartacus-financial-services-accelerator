@@ -1,3 +1,4 @@
+import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AbstractChangeProcessStepComponent } from './abstract-change-process-step.component';
 import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
@@ -64,6 +65,8 @@ class GlobalMessageServiceMock {
   add(_message: GlobalMessage): void {}
 }
 
+class ChangePolicyServiceMock {}
+
 describe('ChangeProcessStepComponent', () => {
   let component: AbstractChangeProcessStepComponent;
   let fixture: ComponentFixture<AbstractChangeProcessStepComponent>;
@@ -91,6 +94,10 @@ describe('ChangeProcessStepComponent', () => {
         {
           provide: GlobalMessageService,
           useClass: GlobalMessageServiceMock,
+        },
+        {
+          provide: ChangePolicyService,
+          useClass: ChangePolicyServiceMock,
         },
         {
           provide: ActivatedRoute,
