@@ -11,6 +11,7 @@ import {
   selectPaymentMethod,
 } from '../../../helpers/checkout/insurance/payment';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
+import { waitForPage } from '../../../helpers/generalHelpers';
 
 context('FNOL for sample data user', () => {
   before(() => {
@@ -41,19 +42,16 @@ context('FNOL for sample data user', () => {
     cy.get('[name=noOfDrivers]').select('0');
     clickContinueButton();
   });
-  it('Should complete auto checkout', () => {
-    auto.checkPricesOnComparisonTable();
-    //on add options page
-    clickContinueButton();
-    //on quote review page
+
+  it('Should continue in add options and quote review pages', () => {
+    auto.checkPricesOnComparisonTableAndSelectAutoBronze();
+    //add options page
     clickContinueButton();
   });
 
-  it('Add payment method for user', () => {
+  it('Should add new payment and bind quote', () => {
+    fnol.waitForQuoteReviewPage();
     addPaymentMethod(registrationUser.email);
-  });
-
-  it('Check mini cart on quote review page', () => {
     clickContinueButton();
     checkout.ConfirmBindQuote();
   });

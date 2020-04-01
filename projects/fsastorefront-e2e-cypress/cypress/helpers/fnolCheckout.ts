@@ -18,18 +18,6 @@ export function getClaimIdFromLocalStorage() {
 
 let claimNumber;
 
-export function selectAutoPolicyForFNOL() {
-  cy.get('.info-card-caption')
-    .contains('BULK1T2000000552')
-    .parentsUntil('.col-md-4')
-    .within(() => {
-      cy.get('.info-card-caption').contains('Auto Insurance');
-      cy.get('.primary-button')
-        .contains(' Make a Claim')
-        .click();
-    });
-}
-
 export function checkFNOLCheckoutPage() {
   cy.get('cx-fs-fnol-progress-bar')
     .should('be.visible')
@@ -262,6 +250,13 @@ export function waitForIncidentReportStep() {
     'incidentForm'
   );
   cy.wait(`@${incidentForm}`)
+    .its('status')
+    .should('eq', 200);
+}
+
+export function waitForQuoteReviewPage() {
+  const quoteReview = waitForPage('quote-review', 'quoteReview');
+  cy.wait(`@${quoteReview}`)
     .its('status')
     .should('eq', 200);
 }

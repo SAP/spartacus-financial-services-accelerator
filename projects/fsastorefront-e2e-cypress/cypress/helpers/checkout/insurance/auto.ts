@@ -51,7 +51,7 @@ export function populateMainDriverInfo() {
     .type('2018-01-01');
 }
 
-export function checkPricesOnComparisonTable() {
+export function checkPricesOnComparisonTableAndSelectAutoBronze() {
   cy.get('cx-fs-comparison-table-panel-item').should('have.length', 3);
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(2)
