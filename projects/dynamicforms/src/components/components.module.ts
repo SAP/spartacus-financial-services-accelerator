@@ -50,6 +50,5 @@ import { FormConfig } from '../core/config/form-config';
     TimeComponent,
     TitleComponent,
   ],
-  providers: [{ provide: FormConfig, useExisting: Config }],
 })
 export class ComponentsModule {}
