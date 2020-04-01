@@ -4,41 +4,36 @@
     class="box-shadow"
   >
     <div class="row no-gutters section-header-heading">
-      <div class="col-6 offset-3">
+      <div class="col-12 col-md-6 offset-md-3">
         {{ 'fscommon.optionalExtras' | cxTranslate }}
       </div>
-      <div class="col-3 text-left">
-        <div class="small">{{ 'forms.effectiveDate' | cxTranslate }}:</div>
-        <div class="notice small">{{ currentDate }}</div>
+      <div class="col-12 col-md-3 effective-date">
+        <div class="small text-uppercase">
+          {{ 'forms.effectiveDate' | cxTranslate }} :
+        </div>
+        <div class="notice small pl-2 pl-md-0">{{ currentDate }}</div>
       </div>
     </div>
-    <ng-container *ngFor="let includedCoverage of includedCoverages">
-      <ng-container
-        [ngTemplateOutlet]="addOption"
-        [ngTemplateOutletContext]="{ coverage: includedCoverage }"
-      >
+    <div class="change-coverage-wrapper">
+      <ng-container *ngFor="let includedCoverage of includedCoverages">
+        <ng-container
+          [ngTemplateOutlet]="addOption"
+          [ngTemplateOutletContext]="{ coverage: includedCoverage }"
+        >
+        </ng-container>
       </ng-container>
-
-      <!-- <div
-        class="row mx-3 py-3 no-gutters position-relative"
-        *ngIf="includedCoverage.coverageProduct"
-      >
-        <div class="col-12 col-md-7 align-self-center">
-          <h6>{{ includedCoverage.coverageProduct.cartDisplayName }}</h6>
-        </div>
-        <div class="col-12 col-md-3 align-self-center">
-          <ng-container *ngIf="includedCoverage.coverageIsIncluded">
-            <div class="col-12 col-md-3 align-self-center">
-              {{ 'fscommon.included' | cxTranslate }}
-            </div>
-          </ng-container>
-        </div>
-      </div> -->
-    </ng-container>
+      <ng-container *ngFor="let potentialCoverage of potentialCoverages">
+        <ng-container
+          [ngTemplateOutlet]="addOption"
+          [ngTemplateOutletContext]="{ coverage: potentialCoverage }"
+        >
+        </ng-container>
+      </ng-container>
+    </div>
 
     <ng-template #addOption let-coverage="coverage">
       <div
-        class="row mx-3 py-3 no-gutters position-relative"
+        class="row mx-3 py-3 no-gutters position-relative "
         *ngIf="coverage.coverageProduct"
       >
         <div class="tooltip-wrapper">
@@ -54,74 +49,23 @@
         <ng-template #tooltipContent>
           <span>{{ coverage.coverageProduct?.description }}</span>
         </ng-template>
-        <!-- {{ coverage.coverageProduct?.images | json }} -->
         <div class="col-12 col-md-2 align-self-center">
           <cx-media
             class="cx-product-image-container"
-            [container]="{
-              '96Wx96H': {
-                format: '96Wx96H',
-                imageType: 'PRIMARY',
-                url:
-                  'https://financialservices.local:9002/medias/?context=bWFzdGVyfGltYWdlc3wyMjM2fGltYWdlL3BuZ3xpbWFnZXMvaGIyL2gwNC84Nzk2MTUwNTYyODQ2LnBuZ3xmNjFjMWVjMTY3NjU1NDQ3ZjU5MGRmZmU5ODVlYjUxZjVjNDZmOTFiY2YxOWZiODEzNDc2YjI2ZWY0ODk0Yzcz'
-              }
-            }"
+            [container]="(coverage.coverageProduct?.images)[0]"
             format="96Wx96H"
           ></cx-media>
         </div>
         <div class="col-12 col-md-7 align-self-center">
           <h6>{{ coverage.coverageProduct.name }}</h6>
         </div>
-        <!-- <div
-            *ngIf="!coverage.removeable && !coverage.addable"
-            class="col-12 col-md-3 align-self-center text-center"
-          >
-            <ng-container
-              *ngTemplateOutlet="
-                includedNotAvailable;
-                context: {
-                  title:
-                    coverage.product?.bundleTemplates?.length == 3
-                      ? ('fscommon.included' | cxTranslate)
-                      : ('fscommon.notAvailableFull' | cxTranslate)
-                }
-              "
-            >
-            </ng-container>
-          </div> -->
-        <div class="col-12 col-md-3 align-self-center">
-          <div *ngIf="!coverage.removeable && coverage.addable">
-            <button
-              (click)="
-                addProductToCart(coverage.product?.code, coverage.entryNumber)
-              "
-              class="secondary-button btn-block text-capitalize"
-            >
-              {{ 'fscommon.add' | cxTranslate }}
-            </button>
-          </div>
-          <div *ngIf="coverage.removeable">
-            <button
-              (click)="removeProductFromCart(coverage)"
-              class="secondary-button btn-block text-capitalize"
-            >
-              {{ 'common.remove' | cxTranslate }}
-            </button>
-          </div>
-        </div>
-      </div>
-    </ng-template>
-
-    <!-- <ng-container *ngFor="let potentialCoverage of potentialCoverages">
-      <div
-        class="row mx-3 py-3 no-gutters position-relative"
-        *ngIf="potentialCoverage.coverageProduct"
-      >
-        <div class="col-12 col-md-7 align-self-center">
-          <h6>{{ potentialCoverage.coverageProduct.cartDisplayName }}</h6>
-        </div>
-        <div class="col-12 col-md-3 align-self-center">
-          <ng-container *ngIf="!potentialCoverage.coverageIsIncluded">
+        <div class="col-12 col-md-3 align-self-center text-center">
+          <ng-container *ngIf="coverage.coverageIsIncluded">
+            <div class="semi-bold">
+              {{ 'fscommon.included' | cxTranslate }}
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!coverage.coverageIsIncluded">
             <button
               class="secondary-button btn-block text-capitalize"
               (click)="addCoverage(potentialCoverage)"
@@ -129,17 +73,9 @@
               {{ 'fscommon.add' | cxTranslate }}
             </button>
           </ng-container>
-          <ng-container *ngIf="potentialCoverage.coverageIsIncluded">
-            <button
-              class="secondary-button btn-block text-capitalize"
-              (click)="removeCoverage(potentialCoverage)"
-            >
-              {{ 'common.remove' | cxTranslate }}
-            </button>
-          </ng-container>
         </div>
       </div>
-    </ng-container> -->
+    </ng-template>
   </div>
   <div class="row mt-5">
     <div class="col-6">

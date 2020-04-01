@@ -30,18 +30,7 @@
       border-top: $border-grey;
     }
   }
-  .tooltip-wrapper {
-    @include vertical-center;
-    right: 30%;
-    z-index: 2000;
-    @include media-breakpoint-down(sm) {
-      top: 15%;
-      right: 30px;
-    }
-    .tooltip .arrow:before {
-      border-left-color: var(--cx-color-9);
-    }
-  }
+
   @include media-breakpoint-down(sm) {
     text-align: center;
   }
