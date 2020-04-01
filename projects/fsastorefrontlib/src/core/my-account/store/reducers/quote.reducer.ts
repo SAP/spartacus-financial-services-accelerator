@@ -11,7 +11,7 @@ export function reducer(
   action: fromAction.QuoteAction
 ): QuoteState {
   if (action.type === fromAction.LOAD_QUOTES_SUCCESS) {
-    const quotes = [...action.payload];
+    const quotes = action.payload ? [...action.payload] : [];
     return {
       ...state,
       quotes,
