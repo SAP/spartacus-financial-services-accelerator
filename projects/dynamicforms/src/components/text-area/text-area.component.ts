@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { GenericComponent } from '../generic.component';
+import { CommonComponentConfig } from '../common-component-config';
 
 @Component({
   selector: 'cx-text-area',
   templateUrl: './text-area.component.html',
 })
-export class TextAreaComponent extends GenericComponent {}
+export class TextAreaComponent extends CommonComponentConfig {}

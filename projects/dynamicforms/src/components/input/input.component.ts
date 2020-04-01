@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { GenericComponent } from '../generic.component';
+import { CommonComponentConfig } from '../common-component-config';
 
 @Component({
   selector: 'cx-input',
   templateUrl: './input.component.html',
 })
-export class InputComponent extends GenericComponent {}
+export class InputComponent extends CommonComponentConfig {}

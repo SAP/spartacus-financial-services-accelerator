@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { GenericComponent } from '../generic.component';
+import { CommonComponentConfig } from '../common-component-config';
 
 @Component({
   selector: 'cx-datepicker',
   templateUrl: './datepicker.component.html',
 })
-export class DatePickerComponent extends GenericComponent {}
+export class DatePickerComponent extends CommonComponentConfig {}

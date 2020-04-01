@@ -5,7 +5,7 @@ import { FormConfig } from '../core/config/form-config';
 import { OccMockFormService } from '../occ/services/occ-mock-form.service';
 
 @Injectable()
-export class GenericComponent {
+export abstract class CommonComponentConfig {
   constructor(
     protected formService: OccMockFormService,
     public formConfig: FormConfig

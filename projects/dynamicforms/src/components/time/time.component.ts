@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { GenericComponent } from '../generic.component';
+import { CommonComponentConfig } from '../common-component-config';
 
 @Component({
   selector: 'cx-time',
   templateUrl: './time.component.html',
 })
-export class TimeComponent extends GenericComponent {}
+export class TimeComponent extends CommonComponentConfig {}

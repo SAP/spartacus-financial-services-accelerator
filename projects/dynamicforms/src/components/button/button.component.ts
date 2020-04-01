@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { GenericComponent } from '../generic.component';
+import { CommonComponentConfig } from '../common-component-config';
 
 @Component({
   selector: 'cx-button',
   templateUrl: './button.component.html',
 })
-export class ButtonComponent extends GenericComponent {}
+export class ButtonComponent extends CommonComponentConfig {}
