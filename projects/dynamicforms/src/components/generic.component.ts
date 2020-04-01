@@ -1,7 +1,7 @@
 import { Injectable, HostBinding } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from '../core/models/form-config.interface';
-import { FormConfig } from '../core/models/form-config';
+import { FormConfig } from '../core/config/form-config';
 import { OccMockFormService } from '../occ/services/occ-mock-form.service';
 
 @Injectable()
