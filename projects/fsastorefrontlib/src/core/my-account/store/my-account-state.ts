@@ -1,4 +1,5 @@
 import { Policy } from './reducers/claim-policies.reducer';
+import { Models } from '../../../../src/model/quote.model';
 
 export const MY_ACCOUNT_FEATURE = 'assets';
 
@@ -19,7 +20,7 @@ export interface Quote {
 }
 
 export interface QuoteState {
-  quotes: any;
+  quotes: Models.InsuranceQuote[];
   loaded: boolean;
 }
 

@@ -14,13 +14,15 @@ describe('Quote Reducer', () => {
 
   describe('LOAD_QUOTES_SUCCESS', () => {
     it('should load quotes', () => {
-      const mockQuote = {
-        quoteId: 'quoteId',
-      };
+      const mockQuotes = [
+        {
+          quoteId: 'quoteId',
+        },
+      ];
 
-      const action = new fromAction.LoadQuotesSuccess(mockQuote);
+      const action = new fromAction.LoadQuotesSuccess(mockQuotes);
       const state = fromReducer.reducer(initialState, action);
-      expect(state.quotes).toEqual(mockQuote);
+      expect(state.quotes).toEqual(mockQuotes);
       expect(state.loaded).toEqual(true);
     });
   });
