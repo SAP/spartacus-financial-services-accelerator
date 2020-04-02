@@ -42,7 +42,7 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-    this.policy$ = this.policyService.getPolicies();
+    this.policy$ = this.policyService.getPolicyDetails();
   }
 
   getBaseUrl() {

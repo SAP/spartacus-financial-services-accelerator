@@ -13,7 +13,7 @@ import {
 
 class MockPolicyService {
   loadPolicyDetails() {}
-  getPolicies() {}
+  getPolicyDetails() {}
 }
 
 class MockRoutingService {
