@@ -61,6 +61,7 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
           .indexOf(requestType) > -1
       );
     }
+    return false;
   }
 
   changePolicyDetails(policyId, contractId, changeRequestType) {
