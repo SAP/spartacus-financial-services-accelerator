@@ -8,6 +8,7 @@ import * as fromAction from '../store/actions';
 import { reducerProvider, reducerToken } from '../store/reducers';
 import { of, Observable, ReplaySubject } from 'rxjs';
 import { OCC_USER_ID_CURRENT, AuthService, UserToken } from '@spartacus/core';
+import { StateWithMyAccount } from '../store/my-account-state';
 
 const userId = OCC_USER_ID_CURRENT;
 const policyId = 'PL00001';
@@ -37,7 +38,7 @@ class MockAuthService {
 
 describe('ClaimServiceTest', () => {
   let service: ClaimService;
-  let store: Store<fromReducer.UserState>;
+  let store: Store<StateWithMyAccount>;
   let claimData: ClaimDataServiceStub;
   let authService: MockAuthService;
 
@@ -64,7 +65,7 @@ describe('ClaimServiceTest', () => {
 
     service = TestBed.get(ClaimService as Type<ClaimService>);
     claimData = TestBed.get(ClaimDataService as Type<ClaimDataService>);
-    store = TestBed.get(Store as Type<Store<fromReducer.UserState>>);
+    store = TestBed.get(Store as Type<Store<StateWithMyAccount>>);
 
     spyOn(store, 'dispatch').and.callThrough();
   });

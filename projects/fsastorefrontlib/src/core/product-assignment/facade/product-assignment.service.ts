@@ -4,17 +4,15 @@ import { AuthService, OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { filter, switchMap, take } from 'rxjs/operators';
 import * as fromAction from '../store/actions';
-import * as fromReducer from '../store/reducers';
 import * as fromSelector from '../store/selectors';
-import { FSProductAssignmentConnector } from '../connectors';
+import { StateWithProductAssignment } from '../store/product-assignments-state';
 @Injectable({
   providedIn: 'root',
 })
 export class FSProductAssignmentService {
   constructor(
-    protected store: Store<fromReducer.ProductAssignmentState>,
-    protected authService: AuthService,
-    protected productAssignmentConnector: FSProductAssignmentConnector
+    protected store: Store<StateWithProductAssignment>,
+    protected authService: AuthService
   ) {}
 
   user: string;

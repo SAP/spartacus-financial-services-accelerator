@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import * as fromAction from '../store/actions';
-import * as fromReducer from '../store/reducers';
 import * as fromClaimStore from '../store';
 import { SelectedPolicy } from '../services/claim-data.service';
 import { AuthService } from '@spartacus/core';
 import { take } from 'rxjs/operators';
 import * as fromSelector from '../store/selectors';
+import { StateWithMyAccount } from '../store/my-account-state';
 
 @Injectable()
 export class ClaimService {
@@ -17,7 +17,7 @@ export class ClaimService {
   private selectedPolicy = this.selectedPolicySource.asObservable();
 
   constructor(
-    protected store: Store<fromReducer.UserState>,
+    protected store: Store<StateWithMyAccount>,
     protected authService: AuthService
   ) {
     combineLatest([

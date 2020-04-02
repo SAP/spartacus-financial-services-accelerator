@@ -11,6 +11,7 @@ import {
 } from '@spartacus/core';
 import { effects } from './effects/index';
 import { metaReducers, reducerProvider, reducerToken } from './reducers/index';
+import { CHANGE_REQUEST_FEATURE } from './change-request-state';
 
 export function userRequestConfigFactory(): StateConfig {
   const config: StateConfig = {
@@ -30,7 +31,7 @@ export function userRequestConfigFactory(): StateConfig {
     CommonModule,
     HttpClientModule,
     StateModule,
-    StoreModule.forRoot(reducerToken, {
+    StoreModule.forFeature(CHANGE_REQUEST_FEATURE, reducerToken, {
       metaReducers,
     }),
     EffectsModule.forFeature(effects),

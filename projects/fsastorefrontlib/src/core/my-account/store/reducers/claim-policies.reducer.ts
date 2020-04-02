@@ -1,14 +1,8 @@
 import * as fromAction from '../actions';
+import { ClaimPoliciesState } from '../my-account-state';
 
 export interface Policy {
   policy: any;
-}
-
-export interface ClaimPoliciesState {
-  claimPoliciesData: {
-    insurancePolicies: Policy[];
-  };
-  loaded: boolean;
 }
 
 export const initialState: ClaimPoliciesState = {

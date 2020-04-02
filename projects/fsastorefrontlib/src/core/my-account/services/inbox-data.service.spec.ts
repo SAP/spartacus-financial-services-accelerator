@@ -4,9 +4,9 @@ import { Store, StoreModule } from '@ngrx/store';
 import { Observable, ReplaySubject } from 'rxjs';
 import * as fromReducers from '../store/reducers';
 import { UserToken, AuthService } from '@spartacus/core';
-import * as fromReducer from '../store/reducers';
 import { InboxDataService } from './inbox-data.service';
 import { OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
+import { StateWithMyAccount } from '../store/my-account-state';
 
 const userToken$ = new ReplaySubject<UserToken | any>();
 
@@ -27,7 +27,7 @@ const testUserToken: UserToken = {
 
 describe('InboxDataService', () => {
   let service: InboxDataService;
-  let store: Store<fromReducer.UserState>;
+  let store: Store<StateWithMyAccount>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -44,7 +44,7 @@ describe('InboxDataService', () => {
       ],
     });
     service = TestBed.get(InboxDataService as Type<InboxDataService>);
-    store = TestBed.get(Store as Type<Store<fromReducers.UserState>>);
+    store = TestBed.get(Store as Type<Store<StateWithMyAccount>>);
   });
 
   describe('userId', () => {

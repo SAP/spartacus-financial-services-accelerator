@@ -6,11 +6,13 @@ import { AccordionModule } from '../../../../shared/accordion/accordion.module';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import { Type } from '@angular/core';
-import { AllowedFSRequestType } from './../../../../occ/occ-models';
+import {
+  AllowedFSRequestType,
+  RequestType,
+} from './../../../../occ/occ-models';
 
 class MockPolicyService {
   loadPolicyDetails(): void {}
-
   getPolicies() {}
 }
 
@@ -29,17 +31,17 @@ class MockRoutingService {
 const mockAllowedFSRequestTypes: AllowedFSRequestType[] = [
   {
     requestType: {
-      code: 'FSCLAIM',
+      code: RequestType.FSCLAIM,
     },
   },
   {
     requestType: {
-      code: 'FSCOVERAGE_CHANGE',
+      code: RequestType.COVERAGE_CHANGE,
     },
   },
   {
     requestType: {
-      code: 'FSINSUREDOBJECT_CHANGE',
+      code: RequestType.INSURED_OBJECT_CHANGE,
     },
   },
 ];
@@ -67,7 +69,6 @@ const MockOccModuleConfig: OccConfig = {
 
 const policyId = 'policyId';
 const contractId = 'contractId';
-const changeRequestType = 'FSINSUREDOBJECT_CHANGE';
 
 describe('PolicyDetailsComponent', () => {
   let component: PolicyDetailsComponent;
@@ -104,16 +105,23 @@ describe('PolicyDetailsComponent', () => {
 
   it('should create change request for policy', () => {
     spyOn(changeRequestService, 'createChangeRequest').and.stub();
-    component.changePolicyDetails(policyId, contractId, changeRequestType);
+    component.changePolicyDetails(
+      policyId,
+      contractId,
+      RequestType.INSURED_OBJECT_CHANGE
+    );
     expect(changeRequestService.createChangeRequest).toHaveBeenCalledWith(
       policyId,
       contractId,
-      changeRequestType
+      RequestType.INSURED_OBJECT_CHANGE
     );
   });
   it('should checkk if request type is allowed', () => {
     expect(
-      component.isChangeAllowed(mockAllowedFSRequestTypes, 'FSCOVERAGE_CHANGE')
+      component.isChangeAllowed(
+        mockAllowedFSRequestTypes,
+        RequestType.COVERAGE_CHANGE
+      )
     ).toEqual(true);
   });
 

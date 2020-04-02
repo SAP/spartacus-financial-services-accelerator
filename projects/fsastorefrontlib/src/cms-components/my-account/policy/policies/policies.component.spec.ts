@@ -8,10 +8,13 @@ import {
 import { RouterTestingModule } from '@angular/router/testing';
 import { SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
-import { FSCLAIM, PoliciesComponent } from './policies.component';
+import { PoliciesComponent } from './policies.component';
 import { PolicyService } from '../../../../core/my-account/facade';
 import { ClaimService } from '../../../../core/my-account/facade/claim.service';
-import { AllowedFSRequestType } from './../../../../occ/occ-models/occ.models';
+import {
+  AllowedFSRequestType,
+  RequestType,
+} from './../../../../occ/occ-models/occ.models';
 import { Type } from '@angular/core';
 import createSpy = jasmine.createSpy;
 
@@ -106,7 +109,7 @@ describe('PoliciesComponent', () => {
   });
   it('should get allowed policy category', () => {
     const requestTypes: AllowedFSRequestType[] = [
-      { requestType: { code: FSCLAIM } },
+      { requestType: { code: RequestType.FSCLAIM } },
     ];
     const allowedRequestTypes = component.isPolicyCategoryAllowed(requestTypes);
     expect(allowedRequestTypes).toBe(true);

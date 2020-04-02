@@ -22,6 +22,10 @@ const mockChangeRequest = {
     },
   },
 };
+const requestId = 'request1';
+const changeRequest = {
+  requestId: requestId,
+};
 
 const configurationSteps = [
   {
@@ -30,8 +34,18 @@ const configurationSteps = [
 ];
 
 class MockChangeRequestService {
+  simulateChangeRequest = createSpy();
+
+  cancelChangeRequest = createSpy();
+
   getChangeRequest() {
     return of(mockChangeRequest);
+  }
+  getAction() {
+    return of({
+      requestStatus: 'SUBMITTED',
+      fsStepGroupDefinition: 'test',
+    });
   }
 }
 
@@ -104,5 +118,13 @@ describe('ChangeSimulationComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should call update change request', () => {
+    component.simulateChangeRequest(changeRequest);
+    expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalledWith(
+      changeRequest,
+      -1
+    );
   });
 });

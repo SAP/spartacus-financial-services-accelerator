@@ -9,8 +9,8 @@ import { Observable, of, throwError } from 'rxjs';
 import { FSProductAssignmentConnector } from '../../connectors';
 import * as fromActions from '../actions';
 import * as fromUserReducers from './../../store/reducers/index';
-import { PRODUCT_ASSIGNMENT_FEATURE } from './../reducers/index';
 import * as fromEffects from './product-assignment.effect';
+import { PRODUCT_ASSIGNMENT_FEATURE } from '../product-assignments-state';
 
 const mockProductAssignments = {
   assignments: [

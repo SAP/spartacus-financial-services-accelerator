@@ -20,7 +20,7 @@ export abstract class UserRequestAdapter {
   abstract updateUserRequest(
     userId: string,
     requestId: string,
-    stepData: FSStepData
+    stepData?: FSStepData
   ): Observable<any>;
 
   /**

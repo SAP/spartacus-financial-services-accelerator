@@ -89,6 +89,7 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
       insurancePolicy: {
         optionalProducts: optionalProducts,
       },
+      configurationSteps: changeRequestData.configurationSteps,
     });
   }
 
