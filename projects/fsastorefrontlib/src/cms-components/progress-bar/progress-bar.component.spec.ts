@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ProgressBarComponent } from './progress-bar.component';
 import { UserRequestNavigationService } from '../../core/user-request/facade/user-request-navigation.service';
+import { ActivatedRoute } from '@angular/router';
 
 describe('ProgressBarComponent', () => {
   let component: ProgressBarComponent;
@@ -16,11 +17,22 @@ describe('ProgressBarComponent', () => {
   }
   class MockUserRequestNavigationService {
     getActiveStep() {
-      return 1;
+      let result = {
+        sequenceNumber : '1',
+      }
+      return result;
     }
   }
+  class MockActivatedRoute {
+    routeConfig = {
+      path : "test"
+    }
+  }
+
   let mockUserRequestNavigationService: MockUserRequestNavigationService;
+  let mockActivatedRoute: MockActivatedRoute;
   beforeEach(async(() => {
+    mockActivatedRoute = new MockActivatedRoute();
     mockUserRequestNavigationService = new MockUserRequestNavigationService();
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
@@ -28,6 +40,10 @@ describe('ProgressBarComponent', () => {
         {
           provide: UserRequestNavigationService,
           useValue: mockUserRequestNavigationService,
+        },
+        {
+          provide: ActivatedRoute,
+          useValue: mockActivatedRoute,
         }
       ],
       declarations: [ProgressBarComponent, MockUrlPipe],
@@ -42,6 +58,9 @@ describe('ProgressBarComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
-    // expect(component.activeStepIndex).toEqual('1');
+  });
+
+  it('should populate activeIndex', () => {
+    expect(component.activeStepIndex).toEqual('1');
   });
 });
