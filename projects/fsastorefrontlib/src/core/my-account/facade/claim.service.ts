@@ -6,7 +6,7 @@ import * as fromAction from '../store/actions';
 import * as fromClaimStore from '../store';
 import { SelectedPolicy } from '../services/claim-data.service';
 import { AuthService } from '@spartacus/core';
-import { take } from 'rxjs/operators';
+import { take, filter, switchMap } from 'rxjs/operators';
 import * as fromSelector from '../store/selectors';
 import { StateWithMyAccount } from '../store/my-account-state';
 
@@ -56,8 +56,14 @@ export class ClaimService {
     return this.store.pipe(select(fromClaimStore.getClaimsLoaded));
   }
 
-  getCurrentClaim() {
-    return this.store.pipe(select(fromClaimStore.getClaimContent));
+  getCurrentClaim(): Observable<any> {
+    return this.store.select(fromClaimStore.getClaimsLoaded).pipe(
+      filter(loaded => loaded),
+      take(1),
+      switchMap(_ => {
+        return this.store.select(fromSelector.getClaimContent);
+      })
+    );
   }
 
   getClaimPolicies(): Observable<any> {
