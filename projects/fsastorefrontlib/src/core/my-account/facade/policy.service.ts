@@ -15,11 +15,11 @@ export class PolicyService {
   ) {}
 
   getPolicies(): Observable<any> {
-    return this.store.pipe(select(fromStore.getPolicies));
+    return this.store.pipe(select(fromStore.getPoliciesContent));
   }
 
   getPolicyDetails(): Observable<any> {
-    return this.store.pipe(select(fromStore.getPolicyDetails));
+    return this.store.pipe(select(fromStore.getPoliciesContent));
   }
 
   getLoaded(): Observable<boolean> {
