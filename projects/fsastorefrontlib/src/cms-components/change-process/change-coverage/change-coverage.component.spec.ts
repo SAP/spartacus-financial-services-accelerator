@@ -12,6 +12,8 @@ import { ChangeRequestService } from './../../../core/change-request/facade/chan
 import { UserRequestNavigationService } from './../../../core/user-request/facade/user-request-navigation.service';
 import { ChangeCoverageComponent } from './change-coverage.component';
 import createSpy = jasmine.createSpy;
+import { MediaModule } from '@spartacus/storefront';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 const requestId = 'testRequestId';
 const policyId = 'testPolicy';
@@ -105,7 +107,7 @@ describe('ChangeCoverageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [I18nTestingModule, ReactiveFormsModule],
+      imports: [I18nTestingModule, ReactiveFormsModule, MediaModule, NgbTooltipModule],
       providers: [
         { provide: ChangeRequestService, useClass: MockChangeRequestService },
         {
