@@ -5,6 +5,7 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { YFormData } from '@fsa/dynamicforms';
@@ -24,6 +25,7 @@ import { FormConfig } from '../../config';
   exportAs: 'cx-dynamicForm',
   selector: 'cx-dynamic-form',
   templateUrl: './dynamic-form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DynamicFormComponent implements OnInit, OnDestroy {
   @Input()

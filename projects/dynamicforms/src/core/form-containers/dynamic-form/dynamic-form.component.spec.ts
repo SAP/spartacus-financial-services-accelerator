@@ -7,7 +7,8 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 import { BehaviorSubject } from 'rxjs';
 import { FormDataService } from '../../services/data/form-data.service';
-import { YFormData, FormConfig } from '../../models';
+import { YFormData } from '../../models';
+import { FormConfig } from '../../config';
 
 @Directive({
   // tslint:disable
