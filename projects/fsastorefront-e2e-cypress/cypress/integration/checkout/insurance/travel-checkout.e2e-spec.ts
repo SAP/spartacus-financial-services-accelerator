@@ -1,11 +1,9 @@
 import * as register from '../../../helpers/register';
 import * as travelCheckout from '../../../helpers/checkout/insurance/travel-checkout';
-import { registrationUser } from '../../../sample-data/users';
+import {registrationUser} from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import {
-  addPaymentMethod,
-  selectPaymentMethod,
-} from '../../../helpers/checkout/insurance/payment';
+import {addPaymentMethod, selectPaymentMethod,} from '../../../helpers/checkout/insurance/payment';
+import {checkMyPoliciesPage} from "../../../helpers/my-account/policies";
 
 context('Travel Insurance Checkout', () => {
   before(() => {
@@ -54,7 +52,7 @@ context('Travel Insurance Checkout', () => {
     });
 
     it('Check my policies page', () => {
-      checkout.checkMyPoliciesPage();
+      checkMyPoliciesPage();
       cy.get('.info-card-caption').contains('Travel Insurance');
     });
   });

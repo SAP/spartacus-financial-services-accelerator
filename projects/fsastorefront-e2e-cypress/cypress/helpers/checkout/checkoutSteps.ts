@@ -1,5 +1,5 @@
-import { quoteReviewAccordions } from './accordions';
-import { waitForPage } from '../generalHelpers';
+import {quoteReviewAccordions} from './accordions';
+import {waitForPage} from '../generalHelpers';
 
 export function checkProgressBarInsurance() {
   cy.get('.progress-node').should('have.length', 7);
@@ -100,16 +100,6 @@ export function checkOrderConfirmation() {
     cy.get('h5')
       .eq(0)
       .should('have.text', ' Thank you for your order! ');
-  });
-}
-
-export function checkMyPoliciesPage() {
-  cy.selectOptionFromDropdown({
-    menuOption: 'My Account',
-    dropdownItem: 'Policies',
-  });
-  cy.get('cx-fs-policies').within(() => {
-    cy.get('.info-card').should('have.length', 1);
   });
 }
 
