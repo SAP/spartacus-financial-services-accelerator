@@ -1,11 +1,17 @@
-import {registrationUser} from '../../../sample-data/users';
+import { registrationUser } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as fnol from '../../../helpers/fnolCheckout';
 import * as auto from '../../../helpers/checkout/insurance/auto';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import {checkBackAndContinueButtons, clickContinueButton,} from '../../../helpers/checkout/checkoutSteps';
-import {addPaymentMethod, selectPaymentMethod,} from '../../../helpers/checkout/insurance/payment';
-import {checkMyPoliciesPage} from "../../../helpers/my-account/policies";
+import {
+  checkBackAndContinueButtons,
+  clickContinueButton,
+} from '../../../helpers/checkout/checkoutSteps';
+import {
+  addPaymentMethod,
+  selectPaymentMethod,
+} from '../../../helpers/checkout/insurance/payment';
+import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 
 context('FNOL for sample data user', () => {
   before(() => {

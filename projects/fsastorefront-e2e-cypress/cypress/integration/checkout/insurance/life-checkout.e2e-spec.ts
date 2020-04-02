@@ -1,11 +1,14 @@
 import * as life from '../../../helpers/checkout/insurance/life-checkout';
-import {checkMiniCartLifeBasic} from '../../../helpers/checkout/insurance/life-checkout';
+import { checkMiniCartLifeBasic } from '../../../helpers/checkout/insurance/life-checkout';
 import * as register from '../../../helpers/register';
-import {registrationUser} from '../../../sample-data/users';
+import { registrationUser } from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import {clickContinueButton} from '../../../helpers/checkout/checkoutSteps';
-import {addPaymentMethod, selectPaymentMethod,} from '../../../helpers/checkout/insurance/payment';
-import {checkMyPoliciesPage} from "../../../helpers/my-account/policies";
+import { clickContinueButton } from '../../../helpers/checkout/checkoutSteps';
+import {
+  addPaymentMethod,
+  selectPaymentMethod,
+} from '../../../helpers/checkout/insurance/payment';
+import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 
 context('Life Insurance Checkout', () => {
   before(() => {

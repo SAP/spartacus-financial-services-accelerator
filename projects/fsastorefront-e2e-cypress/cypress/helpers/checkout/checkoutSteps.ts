@@ -1,5 +1,5 @@
-import {quoteReviewAccordions} from './accordions';
-import {waitForPage} from '../generalHelpers';
+import { quoteReviewAccordions } from './accordions';
+import { waitForPage } from '../generalHelpers';
 
 export function checkProgressBarInsurance() {
   cy.get('.progress-node').should('have.length', 7);
