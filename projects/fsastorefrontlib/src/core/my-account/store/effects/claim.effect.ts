@@ -7,6 +7,7 @@ import { Claim } from '../../../../occ/occ-models';
 import * as fromUserRequestActions from '../../../user-request/store/actions';
 import * as fromActions from '../actions';
 import { ClaimConnector } from '../../connectors/claim.connector';
+import { GlobalMessageService, GlobalMessageType } from '@spartacus/core';
 
 @Injectable()
 export class ClaimEffects {
@@ -62,6 +63,10 @@ export class ClaimEffects {
             }
           }),
           catchError(error => {
+            this.showGlobalMessage(
+              'claim.createFailed',
+              GlobalMessageType.MSG_TYPE_ERROR
+            );
             return of(new fromActions.CreateClaimFail(JSON.stringify(error)));
           })
         );
@@ -138,9 +143,15 @@ export class ClaimEffects {
     })
   );
 
+  private showGlobalMessage(text: string, messageType: GlobalMessageType) {
+    this.globalMessageService.remove(messageType);
+    this.globalMessageService.add({ key: text }, messageType);
+  }
+
   constructor(
     private actions$: Actions,
     private claimConnector: ClaimConnector,
-    private claimServiceData: ClaimDataService
+    private claimServiceData: ClaimDataService,
+    private globalMessageService: GlobalMessageService
   ) {}
 }
