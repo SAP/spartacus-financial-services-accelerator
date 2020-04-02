@@ -8,6 +8,7 @@ import {
   addPaymentMethod,
   selectPaymentMethod,
 } from '../../../helpers/checkout/insurance/payment';
+import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 
 context('Life Insurance Checkout', () => {
   before(() => {
@@ -84,7 +85,7 @@ context('Life Insurance Checkout', () => {
     });
 
     it('Check my policies page', () => {
-      checkout.checkMyPoliciesPage();
+      checkMyPoliciesPage();
       cy.get('.info-card-caption').contains('Life Insurance');
     });
   });
