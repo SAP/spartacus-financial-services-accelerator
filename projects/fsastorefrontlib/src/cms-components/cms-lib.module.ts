@@ -34,7 +34,6 @@ import { NotFoundModule } from './not-found/not-found.module';
     FSRegisterModule,
     FnolModule,
     ChangeProcessModule,
-    StoreModule.forFeature('assets', reducerToken),
     EffectsModule.forFeature(effects),
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,

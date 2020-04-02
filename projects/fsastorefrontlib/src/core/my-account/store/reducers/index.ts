@@ -13,6 +13,7 @@ import * as fromPremiumCalendarReducer from './premium-calendar.reducer';
 import * as fromQuoteReducer from './quote.reducer';
 import { AuthActions } from '@spartacus/core';
 import { MyAccountState } from '../my-account-state';
+import * as fromClaimAction from './../actions/claim.action';
 
 export function getReducers(): ActionReducerMap<MyAccountState> {
   return {
@@ -35,7 +36,10 @@ export function clearUserState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return function(state, action) {
-    if (action.type === AuthActions.LOGOUT) {
+    if (
+      action.type === AuthActions.LOGOUT ||
+      action.type === fromClaimAction.DELETE_CLAIM_SUCCESS
+    ) {
       state = undefined;
     }
     return reducer(state, action);

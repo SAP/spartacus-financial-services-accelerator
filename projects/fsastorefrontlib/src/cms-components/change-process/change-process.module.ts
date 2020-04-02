@@ -60,7 +60,6 @@ const routes: Routes = [
     UrlModule,
     ProgressBarModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature('changeRequests', reducerToken),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         ChangeRequestProgressBarFlex: {
