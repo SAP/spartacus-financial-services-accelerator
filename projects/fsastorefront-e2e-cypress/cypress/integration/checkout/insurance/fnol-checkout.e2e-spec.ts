@@ -11,7 +11,10 @@ import {
   addPaymentMethod,
   selectPaymentMethod,
 } from '../../../helpers/checkout/insurance/payment';
-import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
+import {
+  checkMyPoliciesPage,
+  updatePolicyEffectiveAndStartDate,
+} from '../../../helpers/my-account/policies';
 
 context('FNOL for sample data user', () => {
   before(() => {
@@ -70,7 +73,7 @@ context('FNOL for sample data user', () => {
 
   it('Should remember Policy ID', () => {
     checkMyPoliciesPage();
-    checkout.updatePolicyEffectiveAndStartDate();
+    updatePolicyEffectiveAndStartDate();
   });
 
   it('Should check and populate Incident Information page', () => {
