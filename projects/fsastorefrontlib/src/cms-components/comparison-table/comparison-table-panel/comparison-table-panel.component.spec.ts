@@ -1,13 +1,12 @@
 import { Component, DebugElement, Input, Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { CmsComponent } from '@spartacus/core';
 import { CmsComponentData, MediaModule } from '@spartacus/storefront';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import { YFormData } from './../../../../../dynamicforms/src/core/models/form-occ.models';
-import { FormDataService } from './../../../../../dynamicforms/src/core/services/data/form-data.service';
 import { BillingTimeConnector } from './../../../core/product-pricing/connectors/billing-time.connector';
 import { PricingService } from './../../../core/product-pricing/facade/pricing.service';
 import { ComparisonPanelCMSComponent } from './../../../occ/occ-models/cms-component.models';
