@@ -39,6 +39,7 @@ export function reducer(
       };
     }
 
+    case fromAction.CREATE_CLAIM:
     case fromAction.DELETE_CLAIM:
       return {
         ...state,
@@ -52,6 +53,7 @@ export function reducer(
         ...state,
         content,
         refresh: false,
+        loaded: true,
       };
     }
   }
