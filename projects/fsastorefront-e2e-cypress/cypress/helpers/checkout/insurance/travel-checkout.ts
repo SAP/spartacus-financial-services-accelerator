@@ -102,7 +102,7 @@ export function populateAgeOnPersonalDetails() {
     .click();
 }
 
-export function checkQuoteReview() {
+export function checkQuoteReviewMiniCart() {
   cy.get('cx-fs-mini-cart').within(() => {
     cy.get('.short-overview-item').should('have.length', 2);
     cy.get('.short-overview-item')

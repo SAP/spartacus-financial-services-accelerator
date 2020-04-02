@@ -1,8 +1,8 @@
+import { QUOTE_NORMALIZER } from '../core/my-account/connectors/converters';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { Config, OccConfig } from '@spartacus/core';
-import { ProductAssignmentAdapter } from '../core';
 import { AgentAdapter } from '../core/agent/connectors';
 import { CartAdapter } from '../core/cart';
 import { ChangeRequestAdapter } from '../core/change-request/connectors/change-request.adapter';
@@ -28,6 +28,8 @@ import { OccProductPricingAdapter } from './adapters/pricing/occ-product-pricing
 import { OccProductAssignmentAdapter } from './adapters/product-assignment/occ-product-assignment.adapter';
 import { OccQuoteAdapter } from './adapters/quote/occ-quote.adapter';
 import { OccUserRequestAdapter } from './adapters/user-request/occ-user-request.adapter';
+import { OccQuoteNormalizer } from './adapters/quote/converters/occ-quote-normalizer';
+import { ProductAssignmentAdapter } from '../core/product-assignment/connectors/product-assignment.adapter';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
@@ -71,6 +73,11 @@ import { OccUserRequestAdapter } from './adapters/user-request/occ-user-request.
     {
       provide: QuoteAdapter,
       useClass: OccQuoteAdapter,
+    },
+    {
+      provide: QUOTE_NORMALIZER,
+      useExisting: OccQuoteNormalizer,
+      multi: true,
     },
     {
       provide: UserRequestAdapter,

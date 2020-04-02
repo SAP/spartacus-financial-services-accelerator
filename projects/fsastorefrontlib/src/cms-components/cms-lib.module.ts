@@ -1,11 +1,7 @@
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
 import { effects } from '../core/my-account/store/effects/index';
-import {
-  reducerProvider,
-  reducerToken,
-} from '../core/my-account/store/reducers/index';
+import { reducerProvider } from '../core/my-account/store/reducers/index';
 import { AgentModule } from './agent/agent.module';
 import { BannerModule } from './banner/banner.module';
 import { CategoryFeatureCarouselModule } from './category/category-feature-carousel/category-feature-carousel.module';
@@ -34,7 +30,6 @@ import { NotFoundModule } from './not-found/not-found.module';
     FSRegisterModule,
     FnolModule,
     ChangeProcessModule,
-    StoreModule.forFeature('assets', reducerToken),
     EffectsModule.forFeature(effects),
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,

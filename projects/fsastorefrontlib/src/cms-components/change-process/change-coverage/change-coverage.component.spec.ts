@@ -1,3 +1,4 @@
+import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
 import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -95,6 +96,8 @@ class MockRoutingService {
 
 class GlobalMessageServiceMock {}
 
+class MockChangePolicyService {}
+
 describe('ChangeCoverageComponent', () => {
   let component: ChangeCoverageComponent;
   let fixture: ComponentFixture<ChangeCoverageComponent>;
@@ -119,6 +122,10 @@ describe('ChangeCoverageComponent', () => {
         {
           provide: GlobalMessageService,
           useClass: GlobalMessageServiceMock,
+        },
+        {
+          provide: ChangePolicyService,
+          useClass: MockChangePolicyService,
         },
         {
           provide: ActivatedRoute,
