@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { OccConfig, RoutingService } from '@spartacus/core';
-import { combineLatest, Observable, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
@@ -25,23 +25,22 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
   ) {}
 
   policy$;
-  subscription: Subscription;
+  subscription = new Subscription();
 
   ngOnInit(): void {
-    const params: Observable<any>[] = [
+    this.subscription.add(
       this.routingService
         .getRouterState()
-        .pipe(map(routingData => routingData.state.params.policyId)),
-      this.routingService
-        .getRouterState()
-        .pipe(map(routingData => routingData.state.params.contractId)),
-    ];
-    this.subscription = combineLatest(params).subscribe(
-      ([policyId, contractId]) => {
-        if (policyId && contractId) {
-          this.policyService.loadPolicyDetails(policyId, contractId);
-        }
-      }
+        .pipe(
+          map(routingData => {
+            const policyId = routingData.state.params.policyId;
+            const contractId = routingData.state.params.contractId;
+            if (policyId && contractId) {
+              this.policyService.loadPolicyDetails(policyId, contractId);
+            }
+          })
+        )
+        .subscribe()
     );
     this.policy$ = this.policyService.getPolicies();
   }
