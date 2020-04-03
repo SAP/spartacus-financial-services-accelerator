@@ -11,7 +11,9 @@
         <div class="small text-uppercase d-inline-flex d-md-flex">
           {{ 'forms.effectiveDate' | cxTranslate }} :
         </div>
-        <div class="notice small pl-2 pl-md-0 d-inline-flex d-md-flex">{{ currentDate }}</div>
+        <div class="notice small pl-2 pl-md-0 d-inline-flex d-md-flex">
+          {{ currentDate }}
+        </div>
       </div>
     </div>
     <div class="change-coverage-wrapper">
@@ -82,7 +84,7 @@
       <ng-container *ngIf="coverage.coverageProduct?.images">
         <cx-media
           class="cx-product-image-container"
-          [container]="coverage.coverageProduct?.images[0]"
+          [container]="(coverage.coverageProduct?.images)[0]"
           format="96Wx96H"
         ></cx-media>
       </ng-container>
