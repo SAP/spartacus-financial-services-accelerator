@@ -2,7 +2,7 @@ import * as fromAction from '../actions';
 import { PolicyState } from '../my-account-state';
 
 export const initialState: PolicyState = {
-  policies: {} ,
+  policies: {},
   policyDetails: {},
   loaded: false,
 };
