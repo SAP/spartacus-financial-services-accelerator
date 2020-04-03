@@ -1,1 +1,1 @@
-export * from './default-fsa-layout-config';
+export * from './default-layout-config';

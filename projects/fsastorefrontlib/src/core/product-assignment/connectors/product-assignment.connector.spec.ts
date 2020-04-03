@@ -2,11 +2,11 @@ import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { OCC_CART_ID_CURRENT } from '@spartacus/core';
 import { of } from 'rxjs';
-import { FSProductAssignmentAdapter } from './product-assignment.adapter';
-import { FSProductAssignmentConnector } from './product-assignment.connector';
+import { ProductAssignmentAdapter } from './product-assignment.adapter';
+import { ProductAssignmentConnector } from './product-assignment.connector';
 import createSpy = jasmine.createSpy;
 
-class MockProductAssignmentAdapter implements FSProductAssignmentAdapter {
+class MockProductAssignmentAdapter implements ProductAssignmentAdapter {
   loadProductAssignmentsForUnit = createSpy().and.callFake(
     (userId, orgUnitId, active, pageSize, currentPage, sort) =>
       of(
@@ -42,25 +42,25 @@ class MockProductAssignmentAdapter implements FSProductAssignmentAdapter {
   );
 }
 
-describe('FSProductAssignmentConnector', () => {
-  let productAssignmentConnector: FSProductAssignmentConnector;
-  let productAssignmentAdapter: FSProductAssignmentAdapter;
+describe('ProductAssignmentConnector', () => {
+  let productAssignmentConnector: ProductAssignmentConnector;
+  let productAssignmentAdapter: ProductAssignmentAdapter;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         {
-          provide: FSProductAssignmentAdapter,
+          provide: ProductAssignmentAdapter,
           useClass: MockProductAssignmentAdapter,
         },
       ],
     });
 
-    productAssignmentConnector = TestBed.get(
-      FSProductAssignmentConnector as Type<FSProductAssignmentConnector>
-    );
-    productAssignmentAdapter = TestBed.get(FSProductAssignmentAdapter as Type<
-      FSProductAssignmentAdapter
+    productAssignmentConnector = TestBed.get(ProductAssignmentConnector as Type<
+      ProductAssignmentConnector
+    >);
+    productAssignmentAdapter = TestBed.get(ProductAssignmentAdapter as Type<
+      ProductAssignmentAdapter
     >);
   });
 

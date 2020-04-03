@@ -8,6 +8,7 @@ import {
   addPaymentMethod,
   selectPaymentMethod,
 } from '../../../helpers/checkout/insurance/payment';
+import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 
 context('Life Insurance Checkout', () => {
   before(() => {
@@ -19,8 +20,9 @@ context('Life Insurance Checkout', () => {
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Life',
+        nextPageUrlPart: 'Insurance',
       });
-      cy.wait(1000);
+
       cy.get('.enriched-banner-styled-text')
         .eq(0)
         .contains(' Get a Quote')
@@ -83,7 +85,7 @@ context('Life Insurance Checkout', () => {
     });
 
     it('Check my policies page', () => {
-      checkout.checkMyPoliciesPage();
+      checkMyPoliciesPage();
       cy.get('.info-card-caption').contains('Life Insurance');
     });
   });

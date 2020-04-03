@@ -4,14 +4,14 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { ComparisonTableService } from '../comparison-table.service';
 import { CmsComponentData } from '@spartacus/storefront';
-import { CmsMultiComparisonTabContainer } from '../../../occ/occ-models';
-import { Subscription, Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { CmsMultiComparisonTabContainer } from '../../../occ/occ-models';
+import { ComparisonTableService } from '../comparison-table.service';
 
 @Component({
-  selector: 'fsa-comparison-table-container',
+  selector: 'cx-fs-comparison-table-container',
   templateUrl: './comparison-table-container.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -1,0 +1,45 @@
+@import '../fs-mixins';
+@import '../theme';
+
+.fs-tooltip {
+  border: 1px solid var(--cx-color-9);
+  color: var(--cx-color-9);
+  cursor: pointer;
+  font-style: italic;
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  font-weight: var(--cx-font-weight-semi);
+  border-radius: 50%;
+  &:hover {
+    color: var(--cx-color-1);
+    background: var(--cx-color-9);
+  }
+}
+.tooltip {
+  .tooltip-inner {
+    max-width: 250px;
+    width: 250px;
+    background-color: var(--cx-color-9);
+    opacity: 0.95;
+    border-radius: 6px;
+  }
+  .arrow:before {
+    border-top-color: var(--cx-color-9);
+  }
+  hr {
+    border-color: var(--cx-color-1);
+  }
+}
+.tooltip-wrapper {
+  @include vertical-center;
+  right: 30%;
+  z-index: 2000;
+  @include media-breakpoint-down(sm) {
+    top: 15%;
+    right: 30px;
+  }
+  .tooltip .arrow:before {
+    border-left-color: var(--cx-color-9);
+  }
+}

@@ -1,3 +1,4 @@
+import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
 import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -38,6 +39,9 @@ class MockChangeRequestService {
 
   cancelChangeRequest = createSpy();
 
+  getChangeRequestError() {
+    return of();
+  }
   getChangeRequest() {
     return of(mockChangeRequest);
   }
@@ -47,6 +51,10 @@ class MockChangeRequestService {
       fsStepGroupDefinition: 'test',
     });
   }
+}
+
+class MockChangePolicyService {
+  getChangedPolicyObjects() {}
 }
 
 class MockUserRequestNavigationService {
@@ -69,6 +77,7 @@ describe('ChangeSimulationComponent', () => {
   let mockChangeRequestService: MockChangeRequestService;
   let mockRoutingService: MockRoutingService;
   let globalMessageService: GlobalMessageService;
+  let changePolicyService: ChangePolicyService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -86,6 +95,10 @@ describe('ChangeSimulationComponent', () => {
         {
           provide: GlobalMessageService,
           useClass: GlobalMessageServiceMock,
+        },
+        {
+          provide: ChangePolicyService,
+          useClass: MockChangePolicyService,
         },
         {
           provide: ActivatedRoute,
@@ -108,6 +121,11 @@ describe('ChangeSimulationComponent', () => {
     mockChangeRequestService = TestBed.get(ChangeRequestService as Type<
       ChangeRequestService
     >);
+
+    changePolicyService = TestBed.get(ChangePolicyService as Type<
+      ChangePolicyService
+    >);
+    spyOn(changePolicyService, 'getChangedPolicyObjects').and.callThrough();
   }));
 
   beforeEach(() => {

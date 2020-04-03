@@ -1,3 +1,4 @@
+import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
 import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -15,7 +16,6 @@ import { ChangeCarDetailsFormComponent } from './change-car-details-form.compone
 import createSpy = jasmine.createSpy;
 
 const requestId = 'request1';
-const policyId = 'policy1';
 
 const changeRequest = {
   requestId: requestId,
@@ -24,6 +24,9 @@ const changeRequest = {
 class MockChangeRequestService {
   simulateChangeRequest = createSpy();
 
+  getChangeRequestError() {
+    return of();
+  }
   getChangeRequest() {
     return of(changeRequest);
   }
@@ -35,6 +38,8 @@ class MockChangeRequestService {
     });
   }
 }
+
+class MockChangePolicyService {}
 
 const configurationSteps = [
   {
@@ -90,6 +95,10 @@ describe('ChangeCarDetailsFormComponent', () => {
         {
           provide: GlobalMessageService,
           useClass: GlobalMessageServiceMock,
+        },
+        {
+          provide: ChangePolicyService,
+          useClass: MockChangePolicyService,
         },
         {
           provide: ActivatedRoute,

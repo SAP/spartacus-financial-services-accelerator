@@ -5,7 +5,6 @@ export function openCategoryPage() {
     menuOption: 'Insurance',
     dropdownItem: 'Travel',
   });
-  cy.wait(800);
   cy.get('.enriched-banner-styled-text')
     .invoke('text')
     .then(text => {
@@ -29,26 +28,26 @@ export function populateInsuranceInfoForm() {
     cy.get('[name="Travellers"]').select('1');
     cy.get('[name="tripDetailsTravellerAges"]').type('20');
   });
-  cy.get('fsa-choose-cover-navigation')
+  cy.get('cx-fs-choose-cover-navigation')
     .findByText('Continue')
     .click();
 }
 
 export function checkComparisonAndAddProduct() {
-  cy.get('fsa-comparison-table-panel-item').should('have.length', 3);
-  cy.get('fsa-comparison-table-panel-item')
+  cy.get('cx-fs-comparison-table-panel-item').should('have.length', 3);
+  cy.get('cx-fs-comparison-table-panel-item')
     .eq(2)
     .within(() => {
       cy.get('.table-header-title').should('have.text', 'Single - Gold Plan');
       cy.get('.table-header-value').should('have.text', '€150.00');
     });
-  cy.get('fsa-comparison-table-panel-item')
+  cy.get('cx-fs-comparison-table-panel-item')
     .eq(1)
     .within(() => {
       cy.get('.table-header-title').should('have.text', 'Single - Silver Plan');
       cy.get('.table-header-value').should('have.text', '€120.00');
     });
-  cy.get('fsa-comparison-table-panel-item')
+  cy.get('cx-fs-comparison-table-panel-item')
     .eq(0)
     .within(() => {
       cy.get('.table-header-title').should('have.text', 'Single - Budget Plan');
@@ -98,13 +97,13 @@ export function checkOptionalProductsAndPick() {
 
 export function populateAgeOnPersonalDetails() {
   cy.get('[name="age"]').type('30');
-  cy.get('fsa-personal-details-navigation')
+  cy.get('cx-fs-personal-details-navigation')
     .findByText('Continue')
     .click();
 }
 
-export function checkQuoteReview() {
-  cy.get('fsa-mini-cart').within(() => {
+export function checkQuoteReviewMiniCart() {
+  cy.get('cx-fs-mini-cart').within(() => {
     cy.get('.short-overview-item').should('have.length', 2);
     cy.get('.short-overview-item')
       .eq(0)
@@ -115,8 +114,7 @@ export function checkQuoteReview() {
     cy.get('.highlighted').should('have.text', ' Total price:  €99.00 ');
   });
   cy.get('.primary-button').click();
-  cy.wait(2000);
-  cy.get('fsa-bind-quote-dialog').within(() => {
+  cy.get('cx-fs-bind-quote-dialog').within(() => {
     cy.get('.primary-button').click();
   });
 }

@@ -1,4 +1,5 @@
 import { quoteReviewAccordions } from './accordions';
+import { waitForPage } from '../generalHelpers';
 
 export function checkProgressBarInsurance() {
   cy.get('.progress-node').should('have.length', 7);
@@ -20,7 +21,7 @@ export function populatePersonalDetailsPage() {
 }
 
 export function ConfirmBindQuote() {
-  cy.get('fsa-bind-quote-dialog').within(() => {
+  cy.get('cx-fs-bind-quote-dialog').within(() => {
     cy.get('.primary-button').click();
   });
 }
@@ -30,7 +31,7 @@ export function bindQuotePopup() {
     .should('contain', 'Continue')
     .click();
   cy.wait(500);
-  cy.get('fsa-bind-quote-dialog').within(() => {
+  cy.get('cx-fs-bind-quote-dialog').within(() => {
     cy.get('.primary-button').click();
   });
   cy.wait(1000);
@@ -55,7 +56,7 @@ export function clickResumeButton() {
 }
 
 export function checkOrderConfirmationBanking() {
-  cy.get('fsa-order-confirmation-message').within(() => {
+  cy.get('cx-fs-order-confirmation-message').within(() => {
     cy.get('h5')
       .eq(0)
       .should('have.text', ' Thank you for your order! ');
@@ -63,7 +64,7 @@ export function checkOrderConfirmationBanking() {
 }
 
 export function checkQuoteReviewAccordions(category) {
-  const accordion_item = 'fsa-accordion-item';
+  const accordion_item = 'cx-fs-accordion-item';
   const accordion = quoteReviewAccordions.accordions.find(
     acc => acc.category === category
   );
@@ -81,27 +82,44 @@ export function checkQuoteReviewAccordions(category) {
 }
 
 export function placeOrderOnFinalReview() {
-  cy.wait(5000);
-  cy.get('fsa-final-review').within(() => {
+  const confirmationPage = waitForPage(
+    'orderConfirmationPage',
+    'confirmationPage'
+  );
+  cy.get('cx-fs-final-review').within(() => {
     cy.get('.form-check-input').click();
     cy.get('.primary-button').click();
   });
+  cy.wait(`@${confirmationPage}`)
+    .its('status')
+    .should('eq', 200);
 }
 
 export function checkOrderConfirmation() {
-  cy.get('fsa-order-confirmation-message').within(() => {
+  cy.get('cx-fs-order-confirmation-message').within(() => {
     cy.get('h5')
       .eq(0)
       .should('have.text', ' Thank you for your order! ');
   });
 }
 
-export function checkMyPoliciesPage() {
-  cy.selectOptionFromDropdown({
-    menuOption: 'My Account',
-    dropdownItem: 'Policies',
-  });
-  cy.get('fsa-policies').within(() => {
-    cy.get('.info-card').should('have.length', 1);
-  });
+export function getPayloadForPolicyUpdate(policyId) {
+  return {
+    url: `${Cypress.env(
+      'API_URL'
+    )}/odata2webservices/InboundInsurancePolicy/InsurancePolicies`,
+    method: 'POST',
+    headers: {
+      Authorization: 'Basic ZnNpbnRlZ3JhdGlvbmFkbWluOjEyMzQ1Ng==',
+      'Content-Type': 'application/json',
+    },
+    body: {
+      '@odata.context': '$metadata#InsurancePolicy/$entity',
+      policyId: policyId,
+      contractId: policyId,
+      versionNumber: '1',
+      policyEffectiveDate: '2018-05-11T08:59:04',
+      policyStartDate: '2018-05-11T08:59:04',
+    },
+  };
 }

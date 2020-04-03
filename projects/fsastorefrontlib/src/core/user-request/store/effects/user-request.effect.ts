@@ -34,7 +34,9 @@ export class UserRequestEffects {
               return new fromActions.UpdateUserRequestSuccess(userRequest);
             }
           }),
-          catchError(error => of(new fromActions.UpdateUserRequestFail(error)))
+          catchError(error =>
+            of(new fromActions.UpdateUserRequestFail(JSON.stringify(error)))
+          )
         );
     })
   );

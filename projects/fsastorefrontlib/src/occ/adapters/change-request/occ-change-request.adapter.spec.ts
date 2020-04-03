@@ -80,7 +80,7 @@ describe('OccChangeRequestAdapter', () => {
   describe('simulateChangeRequest', () => {
     it('should simulate change request', async(() => {
       adapter
-        .simulateChangeRequst(userId, requestId, changeRequestData)
+        .simulateChangeRequest(userId, requestId, changeRequestData)
         .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (

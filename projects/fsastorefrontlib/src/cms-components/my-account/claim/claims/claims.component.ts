@@ -1,22 +1,22 @@
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs/internal/Observable';
-import { Subscription } from 'rxjs';
 import {
-  Component,
-  OnInit,
   ChangeDetectionStrategy,
+  Component,
   OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OccConfig, RoutingService } from '@spartacus/core';
-import { DeleteClaimDialogComponent } from '../delete-claim-dialog/delete-claim-dialog.component';
+import { Subscription } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
+import { map } from 'rxjs/operators';
 import { genericIcons } from '../../../../assets/icons/generic-icons';
 import { ClaimService } from '../../../../core/my-account/facade';
 import { StateWithMyAccount } from '../../../../core/my-account/store/my-account-state';
+import { DeleteClaimDialogComponent } from '../delete-claim-dialog/delete-claim-dialog.component';
 
 @Component({
-  selector: 'fsa-claims',
+  selector: 'cx-fs-claims',
   templateUrl: './claims.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

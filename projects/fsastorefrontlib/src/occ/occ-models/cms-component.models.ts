@@ -1,8 +1,8 @@
 import {
-  CmsComponent,
-  CmsBannerComponent,
   Category,
+  CmsBannerComponent,
   CmsBannerComponentMedia,
+  CmsComponent,
 } from '@spartacus/core';
 
 export interface CmsProductFeatureComponent extends CmsComponent {
@@ -46,7 +46,7 @@ export interface CmsMultiComparisonTabContainer extends CmsComponent {
 
 export interface CMSComparisonTabComponent extends CmsComponent {
   title?: string;
-  comparisonPanel?: string;
+  comparisonPanel?: ComparisonPanelCMSComponent;
 }
 
 export interface ComparisonPanelCMSComponent extends CmsComponent {

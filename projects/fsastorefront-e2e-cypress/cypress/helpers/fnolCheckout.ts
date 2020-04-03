@@ -1,6 +1,6 @@
 import {
-  waitForPage,
   waitForCMSComponent,
+  waitForPage,
   waitForUserAssets,
 } from './generalHelpers';
 
@@ -18,20 +18,8 @@ export function getClaimIdFromLocalStorage() {
 
 let claimNumber;
 
-export function selectAutoPolicyForFNOL() {
-  cy.get('.info-card-caption')
-    .contains('BULK1T2000000552')
-    .parentsUntil('.col-md-4')
-    .within(() => {
-      cy.get('.info-card-caption').contains('Auto Insurance');
-      cy.get('.primary-button')
-        .contains(' Make a Claim')
-        .click();
-    });
-}
-
 export function checkFNOLCheckoutPage() {
-  cy.get('fsa-fnol-progress-bar')
+  cy.get('cx-fs-fnol-progress-bar')
     .should('be.visible')
     .within(() => {
       cy.get('h2').contains('Make a Claim Online');
@@ -56,7 +44,6 @@ export function checkFNOLSteps() {
 
 export function populateIncidentInformationStep() {
   cy.get('cx-dynamic-form').within(() => {
-    //TODO: can we make random choose
     cy.get('[name=whatHappened]')
       .select('Collision')
       .then(() => {
@@ -85,6 +72,11 @@ export function populateIncidentInformationStep() {
       .type('my tesla S was stolen while I was in the shopping center');
   });
 }
+export function updateIncidentType() {
+  cy.get('cx-dynamic-form').within(() => {
+    cy.get('[name=whatHappened]').select('Glass Damage');
+  });
+}
 
 export function populateIncidentReportStep() {
   cy.get('[name=howAccidentOccured]')
@@ -107,7 +99,7 @@ export function populateGeneralInformationStep() {
 }
 
 export function checkSummaryPage() {
-  cy.get('fsa-fnol-summary').within(() => {
+  cy.get('cx-fs-fnol-summary').within(() => {
     cy.get('h2').contains('Summary');
   });
   cy.get('.accordion-item').should('have.length', '3');
@@ -163,7 +155,6 @@ export function checkConfirmationPage() {
 
 export function checkOpenClaimContent() {
   cy.get('.title').contains('Auto Insurance');
-  cy.get('.value').contains('BULK1T2000000552');
   cy.get('.title').contains('Date of Loss');
   cy.get('.value').contains('01 Jan 2018');
   cy.get('.title').contains('Status');
@@ -182,14 +173,14 @@ export function startClaimFromHomepage() {
 
 export function checkFnolEntryPage() {
   cy.get('.heading-headline').contains('Make a Claim Online');
-  cy.get('.section-header-heading').contains('Which car has been damaged?');
+  cy.get('h3.section-header-heading').contains('Which car has been damaged?');
   cy.get('fsa-cms-custom-container').within(() => {
     cy.get('.cx-payment-card-inner').should('be.visible');
   });
 }
 
 export function selectPolicyOnEntryPage() {
-  cy.get('.form-check-input').click();
+  cy.get('.cx-card-link').click();
   cy.get('.cx-payment-card')
     .eq(0)
     .within(() => {
@@ -230,7 +221,7 @@ export function deleteClaimFromDialog() {
   });
   cy.get('h3').contains('Delete started claim process');
   cy.get('p').contains('The following claim process will be deleted');
-  cy.get('fsa-deleted-claim-dialog').within(() => {
+  cy.get('cx-fs-deleted-claim-dialog').within(() => {
     cy.get('.primary-button').click();
   });
 }
@@ -259,6 +250,13 @@ export function waitForIncidentReportStep() {
     'incidentForm'
   );
   cy.wait(`@${incidentForm}`)
+    .its('status')
+    .should('eq', 200);
+}
+
+export function waitForQuoteReviewPage() {
+  const quoteReview = waitForPage('quote-review', 'quoteReview');
+  cy.wait(`@${quoteReview}`)
     .its('status')
     .should('eq', 200);
 }

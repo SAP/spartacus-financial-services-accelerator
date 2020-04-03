@@ -1,13 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
-import { filter, take, tap } from 'rxjs/operators';
-import { FSCheckoutService } from '../../../../../core/checkout/facade/fs-checkout.service';
-import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
 import { Subscription } from 'rxjs';
+import { filter, take, tap } from 'rxjs/operators';
+import { FSCheckoutService } from '../../../../../core/checkout/facade/checkout.service';
+import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
 
 @Component({
-  selector: 'fsa-select-identification',
+  selector: 'cx-fs-select-identification',
   templateUrl: './select-identification.component.html',
 })
 export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {

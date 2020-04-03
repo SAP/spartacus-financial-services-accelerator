@@ -8,11 +8,11 @@ import {
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
+import { ProductAssignmentAdapter } from '../connectors/product-assignment.adapter';
 import * as fromAction from '../store/actions';
-import { reducerProvider, reducerToken } from '../store/reducers';
-import { FSProductAssignmentService } from './product-assignment.service';
-import { FSProductAssignmentAdapter } from '../connectors/product-assignment.adapter';
 import { StateWithProductAssignment } from '../store/product-assignments-state';
+import { reducerProvider, reducerToken } from '../store/reducers';
+import { ProductAssignmentService } from './product-assignment.service';
 
 const mockProductAssignments = {
   assignments: [
@@ -64,8 +64,8 @@ class MockAuthService {
     return of(OCC_USER_ID_CURRENT);
   }
 }
-describe('FSProductAssignmentServiceTest', () => {
-  let service: FSProductAssignmentService;
+describe('ProductAssignmentServiceTest', () => {
+  let service: ProductAssignmentService;
   let store: Store<StateWithProductAssignment>;
   let mockAuthService: MockAuthService;
 
@@ -77,9 +77,9 @@ describe('FSProductAssignmentServiceTest', () => {
         StoreModule.forFeature('productAssignments', reducerToken),
       ],
       providers: [
-        FSProductAssignmentService,
+        ProductAssignmentService,
         reducerProvider,
-        FSProductAssignmentAdapter,
+        ProductAssignmentAdapter,
         {
           provide: AuthService,
           useValue: mockAuthService,
@@ -87,17 +87,17 @@ describe('FSProductAssignmentServiceTest', () => {
       ],
     });
 
-    service = TestBed.get(FSProductAssignmentService as Type<
-      FSProductAssignmentService
+    service = TestBed.get(ProductAssignmentService as Type<
+      ProductAssignmentService
     >);
     store = TestBed.get(Store as Type<Store<StateWithProductAssignment>>);
     service.user = OCC_CART_ID_CURRENT;
     spyOn(store, 'dispatch').and.callThrough();
   });
 
-  it('should check if FSProductAssignmentService is injected', inject(
-    [FSProductAssignmentService],
-    (productAssignmentService: FSProductAssignmentService) => {
+  it('should check if ProductAssignmentService is injected', inject(
+    [ProductAssignmentService],
+    (productAssignmentService: ProductAssignmentService) => {
       expect(productAssignmentService).toBeTruthy();
     }
   ));

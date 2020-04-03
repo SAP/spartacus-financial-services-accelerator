@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from '@spartacus/core';
 import { take } from 'rxjs/operators';
+import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 
 @Component({
-  selector: 'fsa-deleted-claim-dialog',
+  selector: 'cx-fs-deleted-claim-dialog',
   templateUrl: './delete-claim-dialog.component.html',
 })
 export class DeleteClaimDialogComponent implements OnInit {

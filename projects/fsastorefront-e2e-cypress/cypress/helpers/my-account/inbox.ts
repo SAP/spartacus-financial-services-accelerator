@@ -1,13 +1,13 @@
-const todaysDate = Cypress.moment().format('DD MMM, YYYY');
+const todaysDate = Cypress.moment().format('DD MMM YYYY');
 
 export function checkInboxComponets() {
   cy.get('.heading-headline').should('have.text', 'Inbox');
-  cy.get('fsa-inbox').should('be.visible');
+  cy.get('cx-fs-inbox').should('be.visible');
   cy.get('.pagination').should('be.visible');
 }
 
 export function checkGeneralTab() {
-  cy.get('.fsa-tab')
+  cy.get('.fs-tab')
     .should('be.visible')
     .contains('General');
 }

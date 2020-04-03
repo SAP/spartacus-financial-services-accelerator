@@ -22,8 +22,21 @@ class MockRoutingService {
   go = createSpy();
 }
 
+const claimNumber = '0000001';
+
 class MockClaimService {
   createClaim() {}
+
+  getCurrentClaim(): Observable<any> {
+    return of({
+      claimNumber: claimNumber,
+      configurationSteps: [
+        {
+          pageLabelOrId: 'testPage',
+        },
+      ],
+    });
+  }
 }
 
 class MockPolicyService {
@@ -95,8 +108,17 @@ describe('PoliciesComponent', () => {
   it('should call create claim', () => {
     spyOn(claimService, 'createClaim').and.stub();
     component.startClaim('policyId', contractNumber);
-    expect(claimService.createClaim).toHaveBeenCalled();
     expect(routingService.go).toHaveBeenCalled();
+  });
+  it('should call create claim without redirection', () => {
+    spyOn(claimService, 'createClaim').and.stub();
+    spyOn(claimService, 'getCurrentClaim').and.returnValue(
+      of({
+        claimNumber: claimNumber,
+      })
+    );
+    component.startClaim('policyId', contractNumber);
+    expect(routingService.go).not.toHaveBeenCalled();
   });
   it('should not call create claim', () => {
     spyOn(claimService, 'createClaim').and.stub();

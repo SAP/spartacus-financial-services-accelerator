@@ -1,10 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription, Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 
 @Component({
-  selector: 'fsa-agent-search-list',
+  selector: 'cx-fs-agent-search-list',
   templateUrl: './agent-search-list.component.html',
 })
 export class AgentSearchListComponent implements OnInit, OnDestroy {
@@ -13,6 +13,7 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   searchQuery: string;
   pagination: any;
   selectedAgent$: Observable<any>;
+  selectedIndex: number = null;
 
   constructor(
     protected agentSearchService: AgentSearchService,
@@ -40,6 +41,10 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
 
   pageChange(page: number): void {
     this.agentSearchService.search(this.searchQuery, page);
+  }
+
+  setActiveAgentIndex(selectedIndex: number) {
+    this.selectedIndex = selectedIndex;
   }
 
   ngOnDestroy() {

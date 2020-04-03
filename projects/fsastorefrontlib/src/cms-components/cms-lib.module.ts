@@ -1,25 +1,22 @@
 import { NgModule } from '@angular/core';
-import { BannerModule } from './banner/banner.module';
-import { ComparisonTableModule } from './comparison-table/comparison-table.module';
-import { CategoryFormsModule } from './form/cms-category-form-component/cms-category-forms.module';
-import { CustomContainerModule } from './container/cms-custom-container.module';
-import { AgentModule } from './agent/agent.module';
-import { MyAccountModule } from './my-account/myaccount.module';
-import { effects } from '../core/my-account/store/effects/index';
-import {
-  reducerProvider,
-  reducerToken,
-} from '../core/my-account/store/reducers/index';
-import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { FnolModule } from './fnol/fnol.module';
-import { CategoryFeatureModule } from './category/category-feature/category-feature.module';
+import { effects } from '../core/my-account/store/effects/index';
+import { reducerProvider } from '../core/my-account/store/reducers/index';
+import { AgentModule } from './agent/agent.module';
+import { BannerModule } from './banner/banner.module';
 import { CategoryFeatureCarouselModule } from './category/category-feature-carousel/category-feature-carousel.module';
-import { FSRegisterModule } from './user/register/fs-register.module';
-import { ProductModule } from './product/product.module';
+import { CategoryFeatureModule } from './category/category-feature/category-feature.module';
 import { ChangeProcessModule } from './change-process/change-process.module';
+import { ComparisonTableModule } from './comparison-table/comparison-table.module';
+import { CustomContainerModule } from './container/cms-custom-container.module';
+import { FnolModule } from './fnol/fnol.module';
+import { CategoryFormsModule } from './form/cms-category-form-component/cms-category-forms.module';
+import { MyAccountModule } from './my-account/myaccount.module';
 import { ProductAssignmentModule } from './product-assignment/product-assignment.module';
-import { FSProgressBarModule } from './progress-bar/progress-bar.module';
+import { ProductModule } from './product/product.module';
+import { ProgressBarModule } from './progress-bar/progress-bar.module';
+import { FSRegisterModule } from './user/register/register.module';
+import { NotFoundModule } from './not-found/not-found.module';
 
 @NgModule({
   imports: [
@@ -33,11 +30,11 @@ import { FSProgressBarModule } from './progress-bar/progress-bar.module';
     FSRegisterModule,
     FnolModule,
     ChangeProcessModule,
-    StoreModule.forFeature('assets', reducerToken),
     EffectsModule.forFeature(effects),
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,
     ProductAssignmentModule,
+    NotFoundModule,
   ],
   exports: [
     AgentModule,
@@ -53,7 +50,8 @@ import { FSProgressBarModule } from './progress-bar/progress-bar.module';
     CategoryFeatureModule,
     CategoryFeatureCarouselModule,
     ProductAssignmentModule,
-    FSProgressBarModule,
+    ProgressBarModule,
+    NotFoundModule,
   ],
   providers: [reducerProvider],
 })

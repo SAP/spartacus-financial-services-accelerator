@@ -4,11 +4,11 @@ import { FormDataService } from '@fsa/dynamicforms';
 import { Store, StoreModule } from '@ngrx/store';
 import { AuthService, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { FSCartService } from '../../cart/facade/fs-cart.service';
+import { FSCartService } from '../../cart/facade/cart.service';
+import { StateWithMyAccount } from '../store/my-account-state';
 import * as fromAction from './../store/actions';
 import { reducerProvider, reducerToken } from './../store/reducers/index';
 import { QuoteService } from './quote.service';
-import { StateWithMyAccount } from '../store/my-account-state';
 
 const userId = OCC_USER_ID_CURRENT;
 const cartId = '0000001';
@@ -143,9 +143,11 @@ describe('QuoteServiceTest', () => {
 
   it('should be able to check if quotes are loaded', () => {
     store.dispatch(
-      new fromAction.LoadQuotesSuccess({
-        cartId: cartId,
-      })
+      new fromAction.LoadQuotesSuccess([
+        {
+          cartId: cartId,
+        },
+      ])
     );
     let loaded;
     service
@@ -157,11 +159,13 @@ describe('QuoteServiceTest', () => {
     expect(loaded).toEqual(true);
   });
 
-  it('should be able to loade quotes', () => {
+  it('should be able to load quotes', () => {
     store.dispatch(
-      new fromAction.LoadQuotesSuccess({
-        cartId: cartId,
-      })
+      new fromAction.LoadQuotesSuccess([
+        {
+          cartId: cartId,
+        },
+      ])
     );
     let loaded;
     service
@@ -170,9 +174,11 @@ describe('QuoteServiceTest', () => {
         loaded = response;
       })
       .unsubscribe();
-    expect(loaded).toEqual({
-      cartId: cartId,
-    });
+    expect(loaded).toEqual([
+      {
+        cartId: cartId,
+      },
+    ]);
   });
 
   it('should be able to bind quote', () => {

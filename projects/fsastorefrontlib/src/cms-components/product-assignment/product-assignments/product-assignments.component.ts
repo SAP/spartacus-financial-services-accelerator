@@ -7,17 +7,17 @@ import {
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import { FSProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
+import { ProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
 
 @Component({
-  selector: 'fsa-product-assignments',
+  selector: 'cx-fs-product-assignments',
   templateUrl: './product-assignments.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductAssignmentsComponent implements OnInit, OnDestroy {
   constructor(
     protected route: ActivatedRoute,
-    protected productAssignmentService: FSProductAssignmentService
+    protected productAssignmentService: ProductAssignmentService
   ) {}
 
   private subscription = new Subscription();

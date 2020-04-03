@@ -1,6 +1,6 @@
-@import '../../theme/fsa/variables';
+@import '../../theme/fs/variables';
 
-%fsa-agent-root {
+%cx-fs-agent-root {
   cx-media img {
     background: var(--cx-color-7);
     border-radius: 50%;
@@ -15,7 +15,7 @@
     p {
       font-weight: var(--cx-font-weight-semi);
     }
-    .fsa-icon:before {
+    .fs-icon:before {
       padding: 8px;
       border: 1px solid var(--cx-color-3);
       border-radius: 50%;

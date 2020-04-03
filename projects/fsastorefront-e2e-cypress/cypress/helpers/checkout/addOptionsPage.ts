@@ -11,7 +11,7 @@ export interface AddOptions {
 
 export function checkAddOptionsPageContent(addOptions: AddOptions) {
   cy.get('.heading-headline').contains(addOptions.title);
-  cy.get('fsa-add-options')
+  cy.get('cx-fs-add-options')
     .should('be.visible')
     .within(() => {
       cy.get('h6').should('have.length', addOptions.items.length);
@@ -25,7 +25,6 @@ export function checkAddOptionsPageContent(addOptions: AddOptions) {
             }
             if (item.shouldAdd) {
               cy.get('.secondary-button').click();
-              cy.wait(1000);
             }
           });
       });

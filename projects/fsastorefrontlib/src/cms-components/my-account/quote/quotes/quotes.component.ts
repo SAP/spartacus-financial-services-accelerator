@@ -3,7 +3,7 @@ import { OccConfig, RoutingService } from '@spartacus/core';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 
 @Component({
-  selector: 'fsa-quotes',
+  selector: 'cx-fs-quotes',
   templateUrl: './quotes.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

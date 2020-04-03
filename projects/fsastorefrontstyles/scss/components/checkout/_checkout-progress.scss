@@ -1,6 +1,7 @@
-@import '../../theme/fsa/variables';
+@import '../../theme/fs/variables';
 
-%fsa-checkout-progress {
+%cx-fs-checkout-progress,
+%cx-fs-progress-bar {
   .progress-wrapper {
     .progress-inner-wrapper {
       flex-basis: 0;

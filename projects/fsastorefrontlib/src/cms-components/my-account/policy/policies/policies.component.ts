@@ -1,20 +1,27 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { OccConfig, RoutingService } from '@spartacus/core';
+import {
+  ClaimService,
+  PolicyService,
+} from '../../../../core/my-account/facade';
 import {
   AllowedFSRequestType,
   RequestType,
 } from './../../../../occ/occ-models/occ.models';
-import {
-  PolicyService,
-  ClaimService,
-} from '../../../../core/my-account/facade';
+import { map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'fsa-policies',
+  selector: 'cx-fs-policies',
   templateUrl: './policies.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PoliciesComponent implements OnInit {
+export class PoliciesComponent implements OnInit, OnDestroy {
   constructor(
     protected config: OccConfig,
     protected policyService: PolicyService,
@@ -24,6 +31,8 @@ export class PoliciesComponent implements OnInit {
 
   policies$;
   policiesLoaded$;
+
+  private subscription = new Subscription();
 
   ngOnInit() {
     this.policyService.loadPolicies();
@@ -38,9 +47,20 @@ export class PoliciesComponent implements OnInit {
   startClaim(policyId: string, contractNumber: string) {
     if (policyId && contractNumber) {
       this.claimService.createClaim(policyId, contractNumber);
-      this.routingService.go({
-        cxRoute: 'fnolIncidentPage',
-      });
+      this.subscription.add(
+        this.claimService
+          .getCurrentClaim()
+          .pipe(
+            map(claim => {
+              if (claim && claim.configurationSteps) {
+                this.routingService.go({
+                  cxRoute: claim.configurationSteps[0].pageLabelOrId,
+                });
+              }
+            })
+          )
+          .subscribe()
+      );
     }
   }
 
@@ -56,6 +76,12 @@ export class PoliciesComponent implements OnInit {
           .map(allowedRequestType => allowedRequestType.requestType.code)
           .indexOf(RequestType.FSCLAIM) > -1
       );
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }

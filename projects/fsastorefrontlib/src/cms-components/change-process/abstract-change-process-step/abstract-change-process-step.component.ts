@@ -12,6 +12,7 @@ import { ChangeRequestService } from '../../../core/change-request/facade/change
 import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
 import { FSStepData, StepStatus } from '../../../occ/occ-models';
 import * as fromUserRequestAction from './../../../core/user-request/store/actions';
+import { ChangePolicyService } from '../../../core/change-request/services/change-policy.service';
 
 @Component({ template: '' })
 export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
@@ -21,7 +22,8 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected routingService: RoutingService,
     protected globalMessageService: GlobalMessageService,
-    protected fb: FormBuilder
+    protected fb: FormBuilder,
+    protected changePolicyService: ChangePolicyService
   ) {}
 
   configurationSteps: FSStepData[];
@@ -29,16 +31,20 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
 
   changeRequest$: Observable<any>;
 
-  private subscription = new Subscription();
+  subscription = new Subscription();
 
   ngOnInit() {
+    this.subscription.add(
+      this.changeRequestService
+        .getChangeRequestError()
+        .subscribe(error => this.onError(error))
+    );
     this.changeRequest$ = this.changeRequestService.getChangeRequest();
     this.subscription.add(
       this.changeRequest$
         .pipe(
           map(changeRequest => {
             this.populateSteps(changeRequest);
-
             if (this.isSimulated(changeRequest)) {
               this.userRequestNavigationService.continue(
                 this.configurationSteps,
@@ -53,10 +59,13 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
                 changeRequest.insurancePolicy.contractNumber;
               this.routingService.go({
                 cxRoute: 'policyDetails',
-                params: { policyId: policyNumber, contractId: contractNumber },
+                params: {
+                  policyId: policyNumber,
+                  contractId: contractNumber,
+                },
               });
               this.globalMessageService.add(
-                'Your policy change request has been canceled',
+                { key: 'policy.policyCanceled' },
                 GlobalMessageType.MSG_TYPE_INFO
               );
             }
@@ -111,6 +120,14 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
 
   cancelChangeRequest(requestId: string) {
     this.changeRequestService.cancelChangeRequest(requestId);
+  }
+
+  protected onError(error: boolean) {
+    if (error) {
+      this.routingService.go({
+        cxRoute: '/',
+      });
+    }
   }
 
   ngOnDestroy() {

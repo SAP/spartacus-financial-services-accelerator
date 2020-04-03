@@ -17,7 +17,7 @@ export abstract class ChangeRequestAdapter {
    * @param changeRequest The change request data
 
    */
-  abstract simulateChangeRequst(
+  abstract simulateChangeRequest(
     userId: string,
     requestId: string,
     changeRequest: any

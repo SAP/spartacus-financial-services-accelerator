@@ -9,7 +9,7 @@ export const quote = {
     moreInfo: 'More info',
     retrieveQuotes: 'Retrieve Quotes',
     viewYourQuotes: 'View your quotes',
-    youHaveNoQuotes: 'You have no Quotes',
+    youHaveNoQuotes: 'You have no Quotes and Applications',
     noActiveQuotes: 'You have no active quotes',
     getQuoteBySelecting: 'Get a Quote by selecting an insurance type above',
     expiryDate: 'Expiry date',

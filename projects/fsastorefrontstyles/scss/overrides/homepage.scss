@@ -1,4 +1,4 @@
-@import '../mixins-fsa';
+@import '../fs-mixins';
 @import '../theme';
 
 .LandingPageTemplate {
@@ -41,7 +41,7 @@
   }
 
   // Carousel & Homepage headings
-  fsa-category-carousel h3 {
+  cx-fs-category-carousel h3 {
     @extend .heading-headline, .py-3, .mt-3, .mb-5, .text-center;
   }
 
