@@ -1,11 +1,4 @@
 %cx-fs-change-coverage {
-  .effective-date {
-    @include media-breakpoint-down(sm) {
-      > div {
-        display: inline-flex;
-      }
-    }
-  }
   .change-coverage-wrapper {
     & > .row:not(:first-of-type) {
       border-top: $border-grey;
