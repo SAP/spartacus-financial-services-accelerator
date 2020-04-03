@@ -1,5 +1,5 @@
 import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
-import { Type } from '@angular/core';
+import { Type, Input, Component } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -12,9 +12,18 @@ import { of } from 'rxjs';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { UserRequestNavigationService } from './../../../core/user-request/facade/user-request-navigation.service';
 import { ChangeCoverageComponent } from './change-coverage.component';
-import createSpy = jasmine.createSpy;
-import { MediaModule } from '@spartacus/storefront';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import createSpy = jasmine.createSpy;
+
+@Component({
+  // tslint:disable
+  selector: 'cx-media',
+  template: '',
+})
+class MockMediaComponent {
+  @Input() container;
+  @Input() format;
+}
 
 const requestId = 'testRequestId';
 const policyId = 'testPolicy';
@@ -110,7 +119,7 @@ describe('ChangeCoverageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [I18nTestingModule, ReactiveFormsModule, MediaModule, NgbTooltipModule],
+      imports: [ NgbTooltipModule, I18nTestingModule, ReactiveFormsModule, ],
       providers: [
         { provide: ChangeRequestService, useClass: MockChangeRequestService },
         {
@@ -138,7 +147,7 @@ describe('ChangeCoverageComponent', () => {
           },
         },
       ],
-      declarations: [ChangeCoverageComponent],
+      declarations: [ChangeCoverageComponent, MockMediaComponent],
     }).compileComponents();
 
     mockUserRequestNavigationService = TestBed.get(

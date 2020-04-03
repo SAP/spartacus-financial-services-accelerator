@@ -59,11 +59,13 @@
           <div class="pl-2 semi-bold text-left">{{ coverage.index + 1 }}.</div>
         </div>
         <div class="col-12 col-md-2 align-self-center">
-          <cx-media
-            class="cx-product-image-container"
-            [container]="(coverage.coverageProduct?.images)[0]"
-            format="96Wx96H"
-          ></cx-media>
+          <ng-container *ngIf="coverage.coverageProduct?.images">
+            <cx-media
+              class="cx-product-image-container"
+              [container]="coverage.coverageProduct?.images[0]"
+              format="96Wx96H"
+            ></cx-media>
+          </ng-container>
         </div>
         <div class="col-12 col-md-6 align-self-center">
           <h6>{{ coverage.coverageProduct.name }}</h6>
