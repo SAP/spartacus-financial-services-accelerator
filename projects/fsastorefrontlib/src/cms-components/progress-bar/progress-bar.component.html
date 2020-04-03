@@ -8,9 +8,10 @@
             *ngFor="let step of steps; let i = index"
           >
             <div
-              class="d-inline-block underline-effect progress-node mx-2"
+              class="d-flex progress-node"
               [ngClass]="{
-                ' is-disabled': step.status === 'UNSET'
+                ' is-active': i + 1 === activeStepIndex,
+                ' is-disabled': i + 1 > activeStepIndex
               }"
               [routerLink]="
                 {
@@ -18,6 +19,13 @@
                 } | cxUrl
               "
             >
+              <div
+                class="step"
+                [ngClass]="[
+                  activeStepIndex > i + 1 ? 'fs-icon visited' : 'step-number'
+                ]"
+                [attr.data-step]="i + 1"
+              ></div>
               <p class="label position-relative mb-2">
                 {{ step.name }}
               </p>

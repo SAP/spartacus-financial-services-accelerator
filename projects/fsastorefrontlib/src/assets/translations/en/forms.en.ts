@@ -9,6 +9,7 @@ export const forms = {
     dateInFutureBeforeStart:
       'Date must be in the future, cannot be before start date',
     lessThan100K: 'Value must be less than 100.000',
+    lessThan200K: 'Range must be between 0 -200,000',
     from10Kto1M: 'Must be in the range from 10.000 to 1.000.000',
     lessThanPropertyValue: 'Must be less than property value.',
     lessThan1M: 'Value must be less than 1.000.000, cannot be 0',
