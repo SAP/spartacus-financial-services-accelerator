@@ -119,7 +119,7 @@ describe('ChangeCoverageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ NgbTooltipModule, I18nTestingModule, ReactiveFormsModule, ],
+      imports: [NgbTooltipModule, I18nTestingModule, ReactiveFormsModule],
       providers: [
         { provide: ChangeRequestService, useClass: MockChangeRequestService },
         {

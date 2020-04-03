@@ -7,7 +7,7 @@
       <div class="col-12 col-md-6 offset-md-3">
         {{ 'fscommon.optionalExtras' | cxTranslate }}
       </div>
-      <div class="col-12 col-md-3 effective-date">
+      <div class="col-12 col-md-3 effective-date text-center text-md-left">
         <div class="small text-uppercase">
           {{ 'forms.effectiveDate' | cxTranslate }} :
         </div>
@@ -20,7 +20,7 @@
           [ngTemplateOutlet]="addOption"
           [ngTemplateOutletContext]="{
             coverage: includedCoverage,
-            hangable: false
+            changable: false
           }"
         >
         </ng-container>
@@ -62,13 +62,13 @@
           <ng-container *ngIf="coverage.coverageProduct?.images">
             <cx-media
               class="cx-product-image-container"
-              [container]="coverage.coverageProduct?.images[0]"
+              [container]="(coverage.coverageProduct?.images)[0]"
               format="96Wx96H"
             ></cx-media>
           </ng-container>
         </div>
         <div class="col-12 col-md-6 align-self-center">
-          <h6>{{ coverage.coverageProduct.name }}</h6>
+          <h6>{{ coverage.coverageProduct?.name }}</h6>
         </div>
         <div class="col-12 col-md-3 align-self-center text-center">
           <ng-container *ngIf="coverage.coverageIsIncluded && !changable">

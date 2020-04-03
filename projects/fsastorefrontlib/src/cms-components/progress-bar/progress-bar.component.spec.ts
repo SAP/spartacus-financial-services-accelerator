@@ -18,15 +18,15 @@ describe('ProgressBarComponent', () => {
   class MockUserRequestNavigationService {
     getActiveStep() {
       let result = {
-        sequenceNumber : '1',
-      }
+        sequenceNumber: '1',
+      };
       return result;
     }
   }
   class MockActivatedRoute {
     routeConfig = {
-      path : "test"
-    }
+      path: 'test',
+    };
   }
 
   let mockUserRequestNavigationService: MockUserRequestNavigationService;
@@ -44,7 +44,7 @@ describe('ProgressBarComponent', () => {
         {
           provide: ActivatedRoute,
           useValue: mockActivatedRoute,
-        }
+        },
       ],
       declarations: [ProgressBarComponent, MockUrlPipe],
     }).compileComponents();
@@ -60,7 +60,7 @@ describe('ProgressBarComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should populate activeIndex', () => {
+  it('should set activeIndex', () => {
     expect(component.activeStepIndex).toEqual('1');
   });
 });

@@ -1,8 +1,6 @@
 %cx-fs-change-coverage {
   .effective-date {
-    text-align: left;
     @include media-breakpoint-down(sm) {
-      text-align: center;
       > div {
         display: inline-flex;
       }
