@@ -12,11 +12,13 @@ import {
 } from './../../../../occ/occ-models';
 
 class MockPolicyService {
-  loadPolicyDetails(): void {}
-  getPolicies() {}
+  loadPolicyDetails() {}
+  getPolicyDetails() {}
 }
 
 class MockRoutingService {
+  go = jasmine.createSpy();
+
   getRouterState(): Observable<any> {
     return of({
       state: {
@@ -50,12 +52,17 @@ class MockChangeRequestService {
   getChangeRequest(): Observable<any> {
     return of({
       requestId: 'requestId',
+      configurationSteps: [
+        {
+          pageLabelOrId: 'testStep',
+        },
+      ],
     });
   }
   createChangeRequest(policy, contract, changeRequest) {}
 }
 
-const MockOccModuleConfig: OccConfig = {
+const mockOccModuleConfig: OccConfig = {
   context: {
     baseSite: [''],
   },
@@ -74,6 +81,8 @@ describe('PolicyDetailsComponent', () => {
   let component: PolicyDetailsComponent;
   let fixture: ComponentFixture<PolicyDetailsComponent>;
   let changeRequestService: MockChangeRequestService;
+  let routingService: MockRoutingService;
+  let policyService: PolicyService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -81,7 +90,7 @@ describe('PolicyDetailsComponent', () => {
       providers: [
         { provide: RoutingService, useClass: MockRoutingService },
         { provide: PolicyService, useClass: MockPolicyService },
-        { provide: OccConfig, useValue: MockOccModuleConfig },
+        { provide: OccConfig, useValue: mockOccModuleConfig },
         { provide: ChangeRequestService, useClass: MockChangeRequestService },
       ],
       declarations: [PolicyDetailsComponent],
@@ -90,6 +99,8 @@ describe('PolicyDetailsComponent', () => {
     changeRequestService = TestBed.get(ChangeRequestService as Type<
       ChangeRequestService
     >);
+    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    policyService = TestBed.get(PolicyService as Type<PolicyService>);
   }));
 
   beforeEach(() => {
@@ -101,6 +112,23 @@ describe('PolicyDetailsComponent', () => {
 
   it('should check', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should check if policyId and contractId are not provided', () => {
+    spyOn(policyService, 'loadPolicyDetails').and.stub();
+    spyOn(routingService, 'getRouterState').and.returnValue(
+      of({
+        state: {
+          params: {},
+        },
+      })
+    );
+    component.ngOnInit();
+    expect(policyService.loadPolicyDetails).not.toHaveBeenCalled();
+  });
+
+  it('should return baseUrl', () => {
+    expect(component.getBaseUrl()).toEqual('');
   });
 
   it('should create change request for policy', () => {
@@ -115,7 +143,20 @@ describe('PolicyDetailsComponent', () => {
       contractId,
       RequestType.INSURED_OBJECT_CHANGE
     );
+    expect(routingService.go).toHaveBeenCalled();
   });
+
+  it('should not redirect if change request is not created', () => {
+    spyOn(changeRequestService, 'createChangeRequest').and.stub();
+    spyOn(changeRequestService, 'getChangeRequest').and.returnValue(of(null));
+    component.changePolicyDetails(
+      policyId,
+      contractId,
+      RequestType.INSURED_OBJECT_CHANGE
+    );
+    expect(routingService.go).not.toHaveBeenCalledWith();
+  });
+
   it('should checkk if request type is allowed', () => {
     expect(
       component.isChangeAllowed(
@@ -129,5 +170,9 @@ describe('PolicyDetailsComponent', () => {
     expect(
       component.isChangeAllowed(mockAllowedFSRequestTypes, 'NOT_EXISTING_TYPE')
     ).toEqual(false);
+  });
+
+  it('should check if request type is not allowed when allowed request types are not defined', () => {
+    expect(component.isChangeAllowed(null, 'NOT_EXISTING_TYPE')).toEqual(false);
   });
 });

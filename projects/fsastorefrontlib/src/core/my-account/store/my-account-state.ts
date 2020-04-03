@@ -25,7 +25,8 @@ export interface QuoteState {
 }
 
 export interface PolicyState {
-  data: {};
+  policies: {};
+  policyDetails: {};
   loaded: boolean;
 }
 

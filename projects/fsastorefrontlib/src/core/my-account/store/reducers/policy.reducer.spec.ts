@@ -21,25 +21,25 @@ describe('Policy Reducer', () => {
     it('should load policies', () => {
       const action = new fromAction.LoadPoliciesSuccess(mockedPolicy);
       const state = fromReducer.reducer(initialState, action);
-      expect(state.data).toEqual(mockedPolicy);
+      expect(state.policies).toEqual(mockedPolicy);
       expect(state.loaded).toEqual(true);
     });
   });
 
   describe('LOAD_POLICY_DETAILS', () => {
     it('should load policy details', () => {
-      const action = new fromAction.LoadPoliciesSuccess(mockedPolicy);
+      const action = new fromAction.LoadPolicyDetailsSuccess(mockedPolicy);
       const state = fromReducer.reducer(initialState, action);
-      expect(state.data).toEqual(mockedPolicy);
+      expect(state.policyDetails).toEqual(mockedPolicy);
       expect(state.loaded).toEqual(true);
     });
+  });
 
-    describe('CLEAR_POLICY_DETAILS', () => {
-      it('should clear policy details', () => {
-        const action = new fromAction.ClearPolicyDetails();
-        const state = fromReducer.reducer(initialState, action);
-        expect(state).toBe(initialState);
-      });
+  describe('CLEAR_POLICY_DETAILS', () => {
+    it('should clear policy details', () => {
+      const action = new fromAction.ClearPolicyDetails();
+      const state = fromReducer.reducer(initialState, action);
+      expect(state).toBe(initialState);
     });
   });
 });
