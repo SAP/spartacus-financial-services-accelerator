@@ -1,6 +1,6 @@
 %cx-fs-change-coverage {
   .box-shadow {
-    .row:nth-of-type(n+3) {
+    .row:nth-of-type(n + 3) {
       border-top: $border-grey;
     }
     @include media-breakpoint-down(sm) {
