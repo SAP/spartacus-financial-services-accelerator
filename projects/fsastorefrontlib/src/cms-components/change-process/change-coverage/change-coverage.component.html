@@ -16,28 +16,26 @@
         </div>
       </div>
     </div>
-    <div class="change-coverage-wrapper">
-      <ng-container *ngFor="let includedCoverage of includedCoverages">
-        <ng-container
-          [ngTemplateOutlet]="addOption"
-          [ngTemplateOutletContext]="{
-            coverage: includedCoverage,
-            changable: false
-          }"
-        >
-        </ng-container>
+    <ng-container *ngFor="let includedCoverage of includedCoverages">
+      <ng-container
+        [ngTemplateOutlet]="addOption"
+        [ngTemplateOutletContext]="{
+          coverage: includedCoverage,
+          changable: false
+        }"
+      >
       </ng-container>
-      <ng-container *ngFor="let potentialCoverage of potentialCoverages">
-        <ng-container
-          [ngTemplateOutlet]="addOption"
-          [ngTemplateOutletContext]="{
-            coverage: potentialCoverage,
-            changable: true
-          }"
-        >
-        </ng-container>
+    </ng-container>
+    <ng-container *ngFor="let potentialCoverage of potentialCoverages">
+      <ng-container
+        [ngTemplateOutlet]="addOption"
+        [ngTemplateOutletContext]="{
+          coverage: potentialCoverage,
+          changable: true
+        }"
+      >
       </ng-container>
-    </div>
+    </ng-container>
   </div>
   <div class="row mt-5">
     <div class="col-12 col-md-5 pb-2">
