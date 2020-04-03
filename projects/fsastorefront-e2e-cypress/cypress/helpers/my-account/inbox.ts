@@ -1,4 +1,4 @@
-const todaysDate = Cypress.moment().format('DD MMM, YYYY');
+const todaysDate = Cypress.moment().format('DD MMM YYYY');
 
 export function checkInboxComponets() {
   cy.get('.heading-headline').should('have.text', 'Inbox');

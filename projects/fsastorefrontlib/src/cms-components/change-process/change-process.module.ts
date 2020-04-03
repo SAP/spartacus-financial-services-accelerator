@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { StoreModule } from '@ngrx/store';
 import {
   AuthGuard,
   CmsConfig,
@@ -16,7 +15,6 @@ import {
   PageLayoutComponent,
   MediaModule,
 } from '@spartacus/storefront';
-import { reducerToken } from '../../core/change-request/store/reducers/index';
 import { ProgressBarModule } from '../progress-bar/progress-bar.module';
 import { AbstractChangeProcessStepComponent } from './abstract-change-process-step/abstract-change-process-step.component';
 import { ChangeCarDetailsFormComponent } from './change-car-details-form/change-car-details-form.component';
@@ -67,7 +65,6 @@ const routes: Routes = [
     NgbTooltipModule,
     ProgressBarModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature('changeRequests', reducerToken),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         ChangeRequestProgressBarFlex: {

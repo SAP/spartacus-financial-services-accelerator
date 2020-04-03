@@ -1,14 +1,16 @@
 import { DebugElement, Directive, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CmsComponent, ContentSlotComponentData } from '@spartacus/core';
-import { of, Observable } from 'rxjs';
-import { CmsComponentData } from '@spartacus/storefront';
 import { By } from '@angular/platform-browser';
-import { ComparisonTableContainerComponent } from './comparison-table-container.component';
-import { CmsMultiComparisonTabContainer } from '../../../occ/occ-models';
-import { CMSComparisonTabComponent } from '../../../occ/occ-models';
 import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
+import { CmsComponent, ContentSlotComponentData } from '@spartacus/core';
+import { CmsComponentData } from '@spartacus/storefront';
+import { Observable, of } from 'rxjs';
+import {
+  CMSComparisonTabComponent,
+  CmsMultiComparisonTabContainer,
+} from '../../../occ/occ-models';
 import { ComparisonTableService } from '../comparison-table.service';
+import { ComparisonTableContainerComponent } from './comparison-table-container.component';
 
 @Directive({
   // tslint:disable
@@ -41,7 +43,7 @@ describe('ComparisonTableContainerComponent', () => {
     simpleCMSComponents: 'tab1,tab2,tab3',
   };
 
-  const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
+  const mockCmsComponentData = <CmsComponentData<CmsComponent>>{
     data$: of(componentData),
     uid: 'test',
   };
@@ -57,7 +59,7 @@ describe('ComparisonTableContainerComponent', () => {
       providers: [
         {
           provide: CmsComponentData,
-          useValue: MockCmsComponentData,
+          useValue: mockCmsComponentData,
         },
         {
           provide: ComparisonTableService,

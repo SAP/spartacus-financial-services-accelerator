@@ -1,11 +1,20 @@
-import { donnaMooreUser, registrationUser } from '../../../sample-data/users';
+import { registrationUser } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as fnol from '../../../helpers/fnolCheckout';
-import { importAutoPolicy } from '../../../helpers/payloads';
+import * as auto from '../../../helpers/checkout/insurance/auto';
+import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import {
   checkBackAndContinueButtons,
   clickContinueButton,
 } from '../../../helpers/checkout/checkoutSteps';
+import {
+  addPaymentMethod,
+  selectPaymentMethod,
+} from '../../../helpers/checkout/insurance/payment';
+import {
+  checkMyPoliciesPage,
+  updatePolicyEffectiveAndStartDate,
+} from '../../../helpers/my-account/policies';
 
 context('FNOL for sample data user', () => {
   before(() => {
@@ -27,23 +36,44 @@ context('FNOL for sample data user', () => {
     fnol.startClaimFromHomepage();
     cy.get('.heading-headline').should('have.text', 'Make a Claim Online');
     cy.get('.notice.py-4').contains('You have no valid policies!');
-    cy.window().then(win => win.sessionStorage.clear());
-    cy.wait(1000);
   });
 
-  it('Should import auto policy', () => {
-    cy.visit('/login');
-    register.login(donnaMooreUser.email, donnaMooreUser.password);
-    cy.wait(1000);
-    cy.request(importAutoPolicy);
+  it('Should complete first step auto checkout', () => {
+    auto.openCategoryPage();
+    auto.populateAutoInformation();
+    auto.populateMainDriverInfo();
+    cy.get('[name=noOfDrivers]').select('0');
+    clickContinueButton();
   });
 
-  it('Should start a FNOL checkout', () => {
-    cy.selectOptionFromDropdown({
-      menuOption: 'My Account',
-      dropdownItem: 'Policies',
-    });
-    fnol.selectAutoPolicyForFNOL();
+  it('Should continue in add options and quote review pages', () => {
+    auto.checkPricesOnComparisonTableAndSelectAutoBronze();
+    //add options page
+    clickContinueButton();
+  });
+
+  it('Should add new payment and bind quote', () => {
+    fnol.waitForQuoteReviewPage();
+    addPaymentMethod(registrationUser.email);
+    clickContinueButton();
+    checkout.ConfirmBindQuote();
+  });
+
+  it('Select default payment details', () => {
+    selectPaymentMethod();
+  });
+
+  it('Place order on final review page', () => {
+    checkout.placeOrderOnFinalReview();
+  });
+
+  it('Check order confirmation', () => {
+    checkout.checkOrderConfirmation();
+  });
+
+  it('Should remember Policy ID', () => {
+    checkMyPoliciesPage();
+    updatePolicyEffectiveAndStartDate();
   });
 
   it('Should check and populate Incident Information page', () => {
