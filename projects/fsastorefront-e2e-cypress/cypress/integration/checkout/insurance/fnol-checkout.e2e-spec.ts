@@ -71,7 +71,7 @@ context('FNOL for sample data user', () => {
     checkout.checkOrderConfirmation();
   });
 
-  it('Should remember Policy ID', () => {
+  it('Should update policy details', () => {
     checkMyPoliciesPage();
     updatePolicyEffectiveAndStartDate();
   });
