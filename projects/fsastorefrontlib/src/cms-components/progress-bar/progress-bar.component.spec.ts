@@ -17,7 +17,7 @@ describe('ProgressBarComponent', () => {
   }
   class MockUserRequestNavigationService {
     getActiveStep() {
-      let result = {
+      const result = {
         sequenceNumber: '1',
       };
       return result;
