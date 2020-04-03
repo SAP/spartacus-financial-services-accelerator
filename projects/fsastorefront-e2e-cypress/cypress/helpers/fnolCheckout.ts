@@ -174,13 +174,13 @@ export function startClaimFromHomepage() {
 export function checkFnolEntryPage() {
   cy.get('.heading-headline').contains('Make a Claim Online');
   cy.get('h3.section-header-heading').contains('Which car has been damaged?');
-  cy.get('fsa-cms-custom-container').within(() => {
+  cy.get('cx-fs-cms-custom-container').within(() => {
     cy.get('.cx-payment-card-inner').should('be.visible');
   });
 }
 
 export function selectPolicyOnEntryPage() {
-  cy.get('.cx-card-link').click();
+  cy.get('.form-check-input').click();
   cy.get('.cx-payment-card')
     .eq(0)
     .within(() => {
@@ -227,18 +227,16 @@ export function deleteClaimFromDialog() {
 }
 
 export function clickContinueAndGetNewClaimID() {
+  const incidentInfoForm = waitForCMSComponent(
+    'AutoClaimIncidentFormComponent',
+    'incidentInfoForm'
+  );
   cy.get('.primary-button')
     .should('contain', 'Continue')
-    .click()
-    .then(() => {
-      const fsUserRequests = waitForUserAssets(
-        'fsUserRequests/',
-        'fsUserRequests'
-      );
-      cy.wait(`@${fsUserRequests}`)
-        .its('status')
-        .should('eq', 200);
-    })
+    .click();
+  cy.wait(`@${incidentInfoForm}`)
+    .its('status')
+    .should('eq', 200)
     .then(() => {
       claimNumber = this.getClaimIdFromLocalStorage();
     });
