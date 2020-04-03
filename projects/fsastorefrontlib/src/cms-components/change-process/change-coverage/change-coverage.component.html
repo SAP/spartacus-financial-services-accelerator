@@ -36,65 +36,6 @@
         </ng-container>
       </ng-container>
     </div>
-
-    <ng-template #addOption let-coverage="coverage" let-changable="changable">
-      <div
-        class="row mx-3 py-3 no-gutters position-relative "
-        *ngIf="coverage.coverageProduct"
-      >
-        <div class="tooltip-wrapper">
-          <div
-            class="fs-tooltip"
-            [ngbTooltip]="tooltipContent"
-            triggers="click:blur"
-            placement="left"
-          >
-            i
-          </div>
-        </div>
-        <ng-template #tooltipContent>
-          <span>{{ coverage.coverageProduct?.description }}</span>
-        </ng-template>
-        <div class="col-12 col-md-1 align-self-center">
-          <div class="pl-2 semi-bold text-left">{{ coverage.index + 1 }}.</div>
-        </div>
-        <div class="col-12 col-md-2 align-self-center">
-          <ng-container *ngIf="coverage.coverageProduct?.images">
-            <cx-media
-              class="cx-product-image-container"
-              [container]="(coverage.coverageProduct?.images)[0]"
-              format="96Wx96H"
-            ></cx-media>
-          </ng-container>
-        </div>
-        <div class="col-12 col-md-6 align-self-center">
-          <h6>{{ coverage.coverageProduct?.name }}</h6>
-        </div>
-        <div class="col-12 col-md-3 align-self-center text-center">
-          <ng-container *ngIf="coverage.coverageIsIncluded && !changable">
-            <div class="semi-bold">
-              {{ 'fscommon.included' | cxTranslate }}
-            </div>
-          </ng-container>
-          <ng-container *ngIf="!coverage.coverageIsIncluded">
-            <button
-              class="secondary-button btn-block text-capitalize"
-              (click)="addCoverage(coverage)"
-            >
-              {{ 'fscommon.add' | cxTranslate }}
-            </button>
-          </ng-container>
-          <ng-container *ngIf="coverage.coverageIsIncluded && changable">
-            <button
-              class="secondary-button btn-block text-capitalize"
-              (click)="removeCoverage(coverage)"
-            >
-              {{ 'common.remove' | cxTranslate }}
-            </button>
-          </ng-container>
-        </div>
-      </div>
-    </ng-template>
   </div>
   <div class="row mt-5">
     <div class="col-12 col-md-5 pb-2">
@@ -115,3 +56,62 @@
     </div>
   </div>
 </ng-container>
+
+<ng-template #addOption let-coverage="coverage" let-changable="changable">
+  <div
+    class="row mx-3 py-3 no-gutters position-relative "
+    *ngIf="coverage.coverageProduct"
+  >
+    <div class="tooltip-wrapper">
+      <div
+        class="fs-tooltip"
+        [ngbTooltip]="tooltipContent"
+        triggers="click:blur"
+        placement="left"
+      >
+        i
+      </div>
+    </div>
+    <ng-template #tooltipContent>
+      <span>{{ coverage.coverageProduct?.description }}</span>
+    </ng-template>
+    <div class="col-12 col-md-1 align-self-center">
+      <div class="pl-2 semi-bold text-left">{{ coverage.index + 1 }}.</div>
+    </div>
+    <div class="col-12 col-md-2 align-self-center">
+      <ng-container *ngIf="coverage.coverageProduct?.images">
+        <cx-media
+          class="cx-product-image-container"
+          [container]="coverage.coverageProduct?.images[0]"
+          format="96Wx96H"
+        ></cx-media>
+      </ng-container>
+    </div>
+    <div class="col-12 col-md-6 align-self-center">
+      <h6>{{ coverage.coverageProduct?.name }}</h6>
+    </div>
+    <div class="col-12 col-md-3 align-self-center text-center">
+      <ng-container *ngIf="coverage.coverageIsIncluded && !changable">
+        <div class="semi-bold">
+          {{ 'fscommon.included' | cxTranslate }}
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!coverage.coverageIsIncluded">
+        <button
+          class="secondary-button btn-block text-capitalize"
+          (click)="addCoverage(coverage)"
+        >
+          {{ 'fscommon.add' | cxTranslate }}
+        </button>
+      </ng-container>
+      <ng-container *ngIf="coverage.coverageIsIncluded && changable">
+        <button
+          class="secondary-button btn-block text-capitalize"
+          (click)="removeCoverage(coverage)"
+        >
+          {{ 'common.remove' | cxTranslate }}
+        </button>
+      </ng-container>
+    </div>
+  </div>
+</ng-template>
