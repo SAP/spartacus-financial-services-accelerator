@@ -31,7 +31,7 @@ export interface ValidatorFunction {
 }
 
 export interface ValidationArgument {
-  name: string;
+  value: string;
 }
 
 export interface FieldOption {
