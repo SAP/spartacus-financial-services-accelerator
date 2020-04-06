@@ -2,7 +2,8 @@ import * as fromAction from '../actions';
 import { PolicyState } from '../my-account-state';
 
 export const initialState: PolicyState = {
-  data: {},
+  policies: {},
+  policyDetails: {},
   loaded: false,
 };
 
@@ -11,12 +12,19 @@ export function reducer(
   action: fromAction.PolicyAction
 ): PolicyState {
   switch (action.type) {
-    case fromAction.LOAD_POLICIES_SUCCESS:
-    case fromAction.LOAD_POLICY_DETAILS_SUCCESS: {
-      const data = { ...action.payload };
+    case fromAction.LOAD_POLICIES_SUCCESS: {
+      const policies = { ...action.payload };
       return {
         ...state,
-        data,
+        policies,
+        loaded: true,
+      };
+    }
+    case fromAction.LOAD_POLICY_DETAILS_SUCCESS: {
+      const policyDetails = { ...action.payload };
+      return {
+        ...state,
+        policyDetails,
         loaded: true,
       };
     }
@@ -28,5 +36,6 @@ export function reducer(
   return state;
 }
 
-export const getPolicyData = (state: PolicyState) => state.data;
+export const getPolicyData = (state: PolicyState) => state.policyDetails;
+export const getPolicies = (state: PolicyState) => state.policies;
 export const getLoaded = (state: PolicyState) => state.loaded;

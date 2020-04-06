@@ -3,8 +3,8 @@
 </h2>
 <ng-container *ngIf="quotes$ | async as quotes">
   <ng-container *ngIf="quotesLoaded$ | async; else loading">
-    <div class="row" *ngIf="quotes?.insuranceQuotes?.length > 0; else noQuotes">
-      <div *ngFor="let quote of quotes.insuranceQuotes" class="col-md-4">
+    <div class="row" *ngIf="quotes.length > 0; else noQuotes">
+      <div *ngFor="let quote of quotes" class="col-md-4">
         <div class="info-card border-bottom-primary">
           <div class="info-card-title border-bottom-primary">
             <span class="image-wrapper">

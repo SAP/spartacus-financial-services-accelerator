@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { Observable, of } from 'rxjs';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap, switchMap } from 'rxjs/operators';
@@ -8,6 +7,7 @@ import { Claim } from '../../../../occ/occ-models';
 import * as fromUserRequestActions from '../../../user-request/store/actions';
 import * as fromActions from '../actions';
 import { ClaimConnector } from '../../connectors/claim.connector';
+import { GlobalMessageService, GlobalMessageType } from '@spartacus/core';
 
 @Injectable()
 export class ClaimEffects {
@@ -62,9 +62,13 @@ export class ClaimEffects {
               ];
             }
           }),
-          catchError(error =>
-            of(new fromActions.CreateClaimFail(JSON.stringify(error)))
-          )
+          catchError(error => {
+            this.showGlobalMessage(
+              'claim.createFailed',
+              GlobalMessageType.MSG_TYPE_ERROR
+            );
+            return of(new fromActions.CreateClaimFail(JSON.stringify(error)));
+          })
         );
     })
   );
@@ -139,9 +143,15 @@ export class ClaimEffects {
     })
   );
 
+  private showGlobalMessage(text: string, messageType: GlobalMessageType) {
+    this.globalMessageService.remove(messageType);
+    this.globalMessageService.add({ key: text }, messageType);
+  }
+
   constructor(
     private actions$: Actions,
     private claimConnector: ClaimConnector,
-    private claimServiceData: ClaimDataService
+    private claimServiceData: ClaimDataService,
+    private globalMessageService: GlobalMessageService
   ) {}
 }

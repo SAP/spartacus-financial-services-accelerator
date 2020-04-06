@@ -1,4 +1,4 @@
-import { OCC_USER_ID_CURRENT } from '@spartacus/core';
+import { OCC_USER_ID_CURRENT, GlobalMessageService } from '@spartacus/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
@@ -62,6 +62,11 @@ class MockClaimConnector {
   }
 }
 
+class MockGlobalMessageService {
+  add = jasmine.createSpy();
+  remove = jasmine.createSpy();
+}
+
 class MockClaimDataService {
   claimData = claim1;
   userID = OCC_USER_ID_CURRENT;
@@ -74,6 +79,7 @@ describe('Claim Effects', () => {
   let effects: fromEffects.ClaimEffects;
   let mockClaimConnector: MockClaimConnector;
   let mockClaimDataService: MockClaimDataService;
+  let globalMessageService: MockGlobalMessageService;
 
   beforeEach(() => {
     mockClaimConnector = new MockClaimConnector();
@@ -86,6 +92,7 @@ describe('Claim Effects', () => {
       ],
       providers: [
         { provide: ClaimConnector, useValue: mockClaimConnector },
+        { provide: GlobalMessageService, useClass: MockGlobalMessageService },
         {
           provide: ClaimDataService,
           useValue: mockClaimDataService,
@@ -96,6 +103,9 @@ describe('Claim Effects', () => {
     });
     effects = TestBed.get(fromEffects.ClaimEffects as Type<
       fromEffects.ClaimEffects
+    >);
+    globalMessageService = TestBed.get(GlobalMessageService as Type<
+      GlobalMessageService
     >);
   });
 
