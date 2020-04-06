@@ -12,7 +12,7 @@ import { FormConfig } from '../../config';
 
 @Directive({
   // tslint:disable
-  selector: '[cxDynamicField]',
+  selector: '[cxFormComponent]',
 })
 export class MockDynamicFieldDirective {
   @Input()
@@ -56,7 +56,7 @@ describe('DynamicFormComponent', () => {
     mockFormConfig = new MockFormConfig();
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
-      declarations: [DynamicFormComponent, MockDynamicFieldDirective],
+      declarations: [DynamicFormComponent],
       providers: [
         {
           provide: FormBuilderService,

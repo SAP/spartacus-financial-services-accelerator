@@ -11,7 +11,7 @@ export interface FromGroup {
 export interface FieldConfig {
   disabled?: boolean;
   label?: string;
-  group?: string;
+  group?: FromGroup;
   name?: string;
   options?: FieldOption[];
   depends?: string[];
