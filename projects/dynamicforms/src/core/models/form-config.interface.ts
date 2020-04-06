@@ -22,6 +22,16 @@ export interface FieldConfig {
   value?: any;
   hidden?: boolean;
   error?: string;
+  validations?: ValidatorFunction[];
+}
+
+export interface ValidatorFunction {
+  name: string;
+  args?: ValidationArgument[];
+}
+
+export interface ValidationArgument {
+  name: string;
 }
 
 export interface FieldOption {

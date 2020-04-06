@@ -5,6 +5,7 @@ import {
   FormDefinition,
   YFormData,
   YFormDefinition,
+  FormConfig,
 } from '@fsa/dynamicforms';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
@@ -22,7 +23,8 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
     protected componentData: CmsComponentData<CMSFormSubmitComponent>,
     protected activatedRoute: ActivatedRoute,
     protected cmsComponentConnector: CmsComponentConnector,
-    protected formDataService: FormDataService
+    protected formDataService: FormDataService,
+    protected generalFormConfig: FormConfig
   ) {}
 
   routeParamId = 'formCode';
@@ -67,6 +69,7 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
               this.formConfig = <FormDefinition>(
                 JSON.parse(formDefinition.content)
               );
+              this.addValidations();
             }
           })
         )
@@ -86,6 +89,26 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+  }
+
+  addValidations() {
+    this.formConfig.formGroups.forEach(group => {
+      group.fieldConfigs.forEach(field => {
+        if (field.validations) {
+          field.validation = [];
+          field.validations.forEach(validation => {
+            const configValidation = this.generalFormConfig.validations[validation.name];
+            if (configValidation && configValidation.function) {
+              const validatorFunction = configValidation.function;
+              if (validation.args) {
+                const targetValidation = validatorFunction.apply(this, validation.args.map(arg =>  arg.name));
+                field.validation.push(targetValidation);
+              }
+            }
+          });
+        }
+      });
+    });
   }
 
   ngOnDestroy(): void {

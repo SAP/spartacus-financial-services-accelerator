@@ -7,6 +7,8 @@ import { TitleComponent } from '../../components/title/title.component';
 import { RadioComponent } from '../../components/radio/radio.component';
 import { TextAreaComponent } from '../../components/text-area/text-area.component';
 import { TimeComponent } from '../../components/time/time.component';
+import { Validators } from '@angular/forms';
+import { DefaultFormValidators } from '../../util';
 
 export const defaultFormConfig: FormConfig = {
   cssClass: {
@@ -50,4 +52,12 @@ export const defaultFormConfig: FormConfig = {
       component: TimeComponent,
     },
   },
+  validations: {
+    required: {
+      function: Validators.required
+    },
+    compareToCurrentDate: {
+      function:  DefaultFormValidators.compareToCurrentDate
+    }
+  }
 };
