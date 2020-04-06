@@ -105,7 +105,7 @@ describe('TextAreaComponent', () => {
   });
 
   it('should render textarea component', () => {
-    const component = el.query(By.css('.dynamic-field')).nativeElement;
-    expect(component).toBeTruthy();
+    const TextAreaComponent = el.query(By.css('.dynamic-field')).nativeElement;
+    expect(TextAreaComponent).toBeTruthy();
   });
 });

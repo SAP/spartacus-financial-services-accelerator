@@ -1,15 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, Input, DebugElement } from '@angular/core';
+import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
+import { I18nTestingModule } from '@spartacus/core';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { FormConfig, CssClass } from '../../core/config/form-config';
 import { FieldConfig } from '../../core';
 
 import { ErrorNoticeComponent } from './error-notice.component';
+import { ButtonComponent } from './../button/button.component';
 
 const mockData: Observable<any> = of({});
+
+const mockCssClass: CssClass = {
+  form: '',
+  validatorMessageWrapper: 'testErrorClass',
+};
 
 class MockOccFormService {
   setInitialFormControlValues() {
@@ -25,16 +32,29 @@ class MockOccFormService {
   }
 }
 const mockField: FieldConfig = {
-  type: 'textarea',
+  type: 'button',
   name: 'testGroup',
-  label: 'What time did it happen?',
+  label: 'Test button',
   group: {
     fieldConfigs: [
       {
-        type: 'textarea',
+        type: 'button',
       },
     ],
     groupCode: 'testGroup',
+  },
+};
+
+const mockFormGroup = new FormGroup({
+  testGroup: new FormControl(),
+});
+
+const mockFormConfig: FormConfig = {
+  cssClass: mockCssClass,
+  components: {
+    button: {
+      component: ButtonComponent,
+    },
   },
 };
 
@@ -47,9 +67,13 @@ describe('ErrorNoticeComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ErrorNoticeComponent],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
         { provide: OccMockFormService, useValue: mockOccFormService },
+        {
+          provide: FormConfig,
+          useValue: mockFormConfig,
+        },
       ],
     }).compileComponents();
   }));
@@ -58,10 +82,17 @@ describe('ErrorNoticeComponent', () => {
     fixture = TestBed.createComponent(ErrorNoticeComponent);
     component = fixture.componentInstance;
     mockOccFormService = new MockOccFormService();
+    component.group = mockFormGroup;
+    component.config = mockField;
+    el = fixture.debugElement;
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  it('should render textarea component', () => {
+    const errorComponent = el.query(By.css('.testErrorClass')).nativeElement;
+    expect(errorComponent).toBeTruthy();
   });
 });
