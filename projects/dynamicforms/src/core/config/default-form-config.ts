@@ -58,6 +58,9 @@ export const defaultFormConfig: FormConfig = {
     },
     compareToCurrentDate: {
       function:  DefaultFormValidators.compareToCurrentDate
+    },
+    dateOfBirth: {
+      function: DefaultFormValidators.dateOfBirthValidator
     }
   }
 };

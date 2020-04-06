@@ -101,8 +101,10 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
             if (configValidation && configValidation.function) {
               const validatorFunction = configValidation.function;
               if (validation.args) {
-                const targetValidation = validatorFunction.apply(this, validation.args.map(arg =>  arg.name));
+                const targetValidation = validatorFunction.apply(this, validation.args.map(arg =>  arg.value));
                 field.validation.push(targetValidation);
+              } else {
+                field.validation.push(validatorFunction);
               }
             }
           });
