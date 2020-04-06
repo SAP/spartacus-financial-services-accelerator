@@ -26,6 +26,7 @@ import { ClaimService } from '../../../core/my-account/facade/claim.service';
 import { ParseDatePipe } from '../../../shared/util/helpers/parseDate.pipe';
 import { ClaimPoliciesGuard } from './guards/claim-policies-guard';
 import { ClaimConnector } from '../../../core/my-account/connectors/claim.connector';
+import { NoClaimPoliciesGuard } from './guards/no-claim-policies.guard';
 
 const routes: Routes = [
   {
@@ -39,7 +40,7 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard],
+    canActivate: [AuthGuard, CmsPageGuard, NoClaimPoliciesGuard],
     data: {
       cxRoute: 'noClaims',
       pageLabel: 'noClaimsPage',
