@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 import { ClaimService } from './../../../../core/my-account/facade/claim.service';
 import createSpy = jasmine.createSpy;
 import { NoClaimPoliciesGuard } from './no-claim-policies.guard';
+import { PolicyService } from 'projects/fsastorefrontlib/src/core';
 
 class MockRoutingService {
   go = createSpy();
@@ -32,10 +33,16 @@ class MockClaimService {
   }
 }
 
+class MockPolicyService {
+  loadClaimPolicies() {
+  }
+}
+
 describe('NoClaimPoliciesGuard', () => {
   let guard: NoClaimPoliciesGuard;
   let routing: RoutingService;
   let claimService: MockClaimService;
+  let policyService: MockPolicyService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -46,12 +53,17 @@ describe('NoClaimPoliciesGuard', () => {
           provide: ClaimService,
           useClass: MockClaimService,
         },
+        {
+          provide: PolicyService,
+          useClass: MockPolicyService,
+        },
       ],
     }).compileComponents();
 
     guard = TestBed.get(NoClaimPoliciesGuard as Type<NoClaimPoliciesGuard>);
     routing = TestBed.get(RoutingService as Type<RoutingService>);
     claimService = TestBed.get(ClaimService as Type<ClaimService>);
+    policyService = TestBed.get(PolicyService as Type<PolicyService>);
   });
 
   it('should redirect to claims page in case there are policies', () => {

@@ -3,7 +3,7 @@ import { CanActivate } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
 import { map } from 'rxjs/operators';
 import { Observable, of, Subscription } from 'rxjs';
-import { ClaimService } from './../../../../core/my-account/';
+import { ClaimService, PolicyService } from './../../../../core/my-account/';
 
 @Injectable({
   providedIn: 'root',
@@ -13,10 +13,13 @@ export class NoClaimPoliciesGuard implements CanActivate, OnDestroy {
 
   constructor(
     protected routingService: RoutingService,
-    protected claimService: ClaimService
+    protected claimService: ClaimService,
+    protected policyService: PolicyService
   ) {}
 
   canActivate(): Observable<boolean> {
+    // TODO: handle loading claims for every category
+    this.policyService.loadClaimPolicies('insurances_auto');
     this.subscription = this.claimService
       .getClaimPolicies()
       .pipe(
