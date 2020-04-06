@@ -12,7 +12,6 @@ import { TextAreaComponent } from './text-area/text-area.component';
 import { TimeComponent } from './time/time.component';
 import { TitleComponent } from './title/title.component';
 import { FormComponentDirective } from './form-component.directive';
-import { FormConfig } from '../core/config/form-config';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, I18nModule],

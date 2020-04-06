@@ -16,7 +16,9 @@ export const forms = {
     dateOfBirthMinimumAge: 'Must be over 18 years old',
     lessThan150: 'Value must be less than 150',
     between1And50: 'Value must be a number between 1 and 50',
+    between1And100: 'Value must be a number between 1 and 100',
     between0And360: 'Value must be a number between 0 and 360',
+    between10kAnd1M: 'Value must be a number between 10000 and 1000000',
     enterValidEmail: 'Please enter a valid email',
     vehicleValue: 'Vehicle value must be a number between 3.000 and 1.000.000',
     afterVehicleManufacture:

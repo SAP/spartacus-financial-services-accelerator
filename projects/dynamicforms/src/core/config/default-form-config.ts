@@ -61,6 +61,12 @@ export const defaultFormConfig: FormConfig = {
     },
     dateOfBirth: {
       function: DefaultFormValidators.dateOfBirthValidator
+    },
+    maxValue: {
+      function: DefaultFormValidators.max
+    },
+    minValue: {
+      function: DefaultFormValidators.min
     }
   }
 };

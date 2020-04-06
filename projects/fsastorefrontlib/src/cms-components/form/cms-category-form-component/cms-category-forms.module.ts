@@ -18,11 +18,11 @@ import { SpinnerModule } from '@spartacus/storefront';
           component: CmsCategoryFormSubmitComponent,
         },
       },
-      components: {
-        input: {
-          component: TestFormComponent,
-        },
-      },
+      // components: {
+      //   input: {
+      //     component: TestFormComponent,
+      //   },
+      // },
     }),
   ],
   declarations: [CmsCategoryFormSubmitComponent, TestFormComponent],
