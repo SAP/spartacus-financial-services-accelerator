@@ -10,13 +10,14 @@ $fsSkipComponentStyles: () !default;
 
 // major version standard
 $fsSelectors: cx-fs-policy-details, cx-fs-premium-calendar,
-  cx-fs-checkout-progress, cx-fs-final-review, cx-fs-mini-cart,
-  cx-fs-quote-review, cx-fs-enriched-responsive-banner, cx-fs-agent-root,
-  cx-fs-agent-search-box, cx-fs-agent-search-list, cx-fs-find-agent-navigation,
-  cx-fs-inbox-messages, cx-fs-inbox, cx-form-component, cx-fs-product-feature,
-  cx-fs-category-feature, cx-fs-register, cx-fs-update-profile-form,
-  cx-fs-product-assignments, cx-fs-potential-product-assignments, cx-login-form,
-  cx-update-email, cx-update-password, cx-fs-active-products !default;
+  cx-fs-checkout-progress, cx-fs-progress-bar, cx-fs-final-review,
+  cx-fs-mini-cart, cx-fs-quote-review, cx-fs-enriched-responsive-banner,
+  cx-fs-agent-root, cx-fs-agent-search-box, cx-fs-agent-search-list,
+  cx-fs-find-agent-navigation, cx-fs-inbox-messages, cx-fs-inbox,
+  cx-form-component, cx-fs-product-feature, cx-fs-category-feature,
+  cx-fs-register, cx-fs-update-profile-form, cx-fs-product-assignments,
+  cx-fs-potential-product-assignments, cx-login-form, cx-update-email,
+  cx-update-password, cx-fs-active-products, cx-fs-change-coverage !default;
 // future theme's, can be introduced during minors
 $theme: '' !default;
 

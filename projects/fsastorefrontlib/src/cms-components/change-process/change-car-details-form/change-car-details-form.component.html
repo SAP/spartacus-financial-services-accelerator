@@ -1,45 +1,67 @@
 <ng-container *ngIf="changeRequest$ | async as changeRequest">
-  <form [formGroup]="changeCarDetailsForm">
-    <div class="form-group">
-      <label>
-        <span class="label-content">{{
-          'forms.effectiveDate' | cxTranslate
-        }}</span>
-        <input
-          class="form-control"
-          type="date"
-          name="effectiveDate"
-          formControlName="effectiveDate"
-        />
-      </label>
-    </div>
-    <div class="form-group">
-      <label>
-        <span class="label-content">{{
-          'forms.changeMileage' | cxTranslate
-        }}</span>
-        <input
-          class="form-control"
-          type="text"
-          name="vehicleAnnualMileage"
-          placeholder="{{ 'forms.changeMileage' | cxTranslate }}"
-          formControlName="vehicleAnnualMileage"
-        />
-      </label>
-    </div>
-  </form>
+  <div class="box-shadow">
+    <h3 class="section-header-heading mb-0">
+      {{ 'changeRequest.autoInformation' | cxTranslate }}
+    </h3>
+    <form [formGroup]="changeCarDetailsForm" class="p-5">
+      <div class="form-group">
+        <label>
+          <span class="label-content">{{
+            'forms.effectiveDate' | cxTranslate
+          }}</span>
+          <input
+            class="form-control"
+            type="date"
+            name="effectiveDate"
+            formControlName="effectiveDate"
+          />
+        </label>
+      </div>
+      <div class="form-group">
+        <label>
+          <span class="label-content">{{
+            'forms.changeMileage' | cxTranslate
+          }}</span>
+          <input
+            class="form-control"
+            [class.is-invalid]="
+              changeCarDetailsForm.get('vehicleAnnualMileage').invalid &&
+              changeCarDetailsForm.get('vehicleAnnualMileage').dirty
+            "
+            type="number"
+            name="vehicleAnnualMileage"
+            placeholder="{{ 'forms.changeMileage' | cxTranslate }}"
+            formControlName="vehicleAnnualMileage"
+          />
+          <div
+            class="invalid-feedback"
+            *ngIf="
+              changeCarDetailsForm.get('vehicleAnnualMileage').invalid &&
+              changeCarDetailsForm.get('vehicleAnnualMileage').dirty
+            "
+          >
+            <span>{{ 'forms.lessThan200K' | cxTranslate }}</span>
+          </div>
+        </label>
+      </div>
+    </form>
+  </div>
   <div class="row mt-5">
-    <button
-      class="action-button btn-block"
-      (click)="cancelChangeRequest(changeRequest.requestId)"
-    >
-      {{ 'common.back' | cxTranslate }}
-    </button>
-    <button
-      class="primary-button btn-block"
-      (click)="simulateChanges(changeRequest)"
-    >
-      {{ 'common.continue' | cxTranslate }}
-    </button>
+    <div class="col-12 col-md-5 pb-2">
+      <button
+        class="action-button btn-block"
+        (click)="cancelChangeRequest(changeRequest.requestId)"
+      >
+        {{ 'common.cancel' | cxTranslate }}
+      </button>
+    </div>
+    <div class="col-12 col-md-5 offset-0 offset-md-2 pb-2git merge develop">
+      <button
+        class="primary-button btn-block"
+        (click)="simulateChanges(changeRequest)"
+      >
+        {{ 'common.continue' | cxTranslate }}
+      </button>
+    </div>
   </div>
 </ng-container>

@@ -10,7 +10,11 @@ import {
   I18nModule,
   UrlModule,
 } from '@spartacus/core';
-import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
+import {
+  CmsPageGuard,
+  PageLayoutComponent,
+  MediaModule,
+} from '@spartacus/storefront';
 import { ProgressBarModule } from '../progress-bar/progress-bar.module';
 import { AbstractChangeProcessStepComponent } from './abstract-change-process-step/abstract-change-process-step.component';
 import { ChangeCarDetailsFormComponent } from './change-car-details-form/change-car-details-form.component';
@@ -18,6 +22,7 @@ import { ChangeCoverageComponent } from './change-coverage/change-coverage.compo
 import { ChangeProcessConfirmationComponent } from './change-process-confirmation/change-process-confirmation.component';
 import { ChangeProcessProgressBarComponent } from './change-process-progress-bar/change-process-progress-bar.component';
 import { ChangeSimulationComponent } from './change-simulation/change-simulation.component';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   {
@@ -56,6 +61,8 @@ const routes: Routes = [
     NgSelectModule,
     ReactiveFormsModule,
     UrlModule,
+    MediaModule,
+    NgbTooltipModule,
     ProgressBarModule,
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig>{
