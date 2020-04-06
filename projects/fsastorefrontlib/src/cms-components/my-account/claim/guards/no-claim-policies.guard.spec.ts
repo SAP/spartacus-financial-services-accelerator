@@ -34,8 +34,7 @@ class MockClaimService {
 }
 
 class MockPolicyService {
-  loadClaimPolicies() {
-  }
+  loadClaimPolicies() {}
 }
 
 describe('NoClaimPoliciesGuard', () => {
@@ -70,6 +69,12 @@ describe('NoClaimPoliciesGuard', () => {
     spyOn(claimService, 'getClaimPolicies').and.returnValue(of(claimPolicies));
     guard.canActivate();
     expect(routing.go).toHaveBeenCalled();
+  });
+
+  it('should not redirect to claims page in case there are no valid policies', () => {
+    spyOn(claimService, 'getClaimPolicies').and.returnValue(of(null));
+    guard.canActivate();
+    expect(routing.go).not.toHaveBeenCalled();
   });
 
   it('should unsubscribe on destroy', () => {
