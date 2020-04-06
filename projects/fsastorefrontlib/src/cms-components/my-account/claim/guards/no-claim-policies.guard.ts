@@ -17,7 +17,7 @@ export class NoClaimPoliciesGuard implements CanActivate, OnDestroy {
   ) {}
 
   canActivate(): Observable<boolean> {
-    this.claimService
+    this.subscription = this.claimService
       .getClaimPolicies()
       .pipe(
         map(claimData => {
