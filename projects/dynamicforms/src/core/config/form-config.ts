@@ -22,7 +22,16 @@ export interface CssClass {
   submitButton?: string;
 }
 
+export interface ValidationMapping {
+  function: any;
+}
+
+export abstract class ValidationConfig {
+  [_: string]: ValidationMapping;
+}
+
 export abstract class FormConfig {
   cssClass: CssClass;
   components: FormComponentConfig;
+  validations?: ValidationConfig;
 }
