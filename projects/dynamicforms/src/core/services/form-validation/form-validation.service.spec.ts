@@ -46,7 +46,7 @@ describe('FormValidationService', () => {
     expect(service.getValidatorsForField(field).length).toEqual(1);
   });
 
-  it('should not validators for field in case they are not defined', () => {
+  it('should not return validators for field in case they are not defined', () => {
     expect(
       service.getValidatorsForField({
         name: fieldName,
