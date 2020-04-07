@@ -25,8 +25,10 @@ export class FormBuilderService {
   }
 
   createControl(fieldConfig: FieldConfig) {
-    const { disabled, value } = fieldConfig;
-    return this.fb.control({ disabled, value }, this.defineValidationsForField(fieldConfig));
+    const { disabled, validation, value } = fieldConfig;
+    // TODO: Replace attribute 'validation' with 'validations' in form sample configuration
+    const validations = validation ? validation : this.defineValidationsForField(fieldConfig);
+    return this.fb.control({ disabled, value }, validations);
   }
 
 
