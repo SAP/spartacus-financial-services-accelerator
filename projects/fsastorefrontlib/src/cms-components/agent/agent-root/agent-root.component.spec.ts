@@ -1,7 +1,7 @@
 import { DebugElement, PipeTransform, Pipe } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule, CmsComponent } from '@spartacus/core';
-import { MediaModule, CmsComponentData } from '@spartacus/storefront';
+import { CmsComponentData } from '@spartacus/storefront';
 import { of, Observable, BehaviorSubject } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Component, Input } from '@angular/core';

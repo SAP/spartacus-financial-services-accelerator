@@ -1,4 +1,5 @@
 import { quoteReviewAccordions } from './accordions';
+import { waitForPage } from '../generalHelpers';
 
 export function checkProgressBarInsurance() {
   cy.get('.progress-node').should('have.length', 7);
@@ -81,10 +82,17 @@ export function checkQuoteReviewAccordions(category) {
 }
 
 export function placeOrderOnFinalReview() {
+  const confirmationPage = waitForPage(
+    'orderConfirmationPage',
+    'confirmationPage'
+  );
   cy.get('cx-fs-final-review').within(() => {
     cy.get('.form-check-input').click();
     cy.get('.primary-button').click();
   });
+  cy.wait(`@${confirmationPage}`)
+    .its('status')
+    .should('eq', 200);
 }
 
 export function checkOrderConfirmation() {
@@ -92,15 +100,5 @@ export function checkOrderConfirmation() {
     cy.get('h5')
       .eq(0)
       .should('have.text', ' Thank you for your order! ');
-  });
-}
-
-export function checkMyPoliciesPage() {
-  cy.selectOptionFromDropdown({
-    menuOption: 'My Account',
-    dropdownItem: 'Policies',
-  });
-  cy.get('cx-fs-policies').within(() => {
-    cy.get('.info-card').should('have.length', 1);
   });
 }

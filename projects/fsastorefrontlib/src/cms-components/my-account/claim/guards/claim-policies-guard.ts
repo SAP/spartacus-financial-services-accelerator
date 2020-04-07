@@ -19,28 +19,26 @@ export class ClaimPoliciesGuard implements CanActivate, OnDestroy {
   ) {}
 
   canActivate(): Observable<boolean> {
-    {
-      // TODO: handle loading claims for every category
-      this.policyService.loadClaimPolicies('insurances_auto');
+    // TODO: handle loading claims for every category
+    this.policyService.loadClaimPolicies('insurances_auto');
 
-      this.subscription = this.claimService
-        .getClaimPolicies()
-        .pipe(
-          map(claimData => {
-            if (
-              claimData &&
-              claimData.loaded &&
-              claimData.claimPoliciesData &&
-              !claimData.claimPoliciesData.insurancePolicies
-            ) {
-              this.routingService.go({ cxRoute: 'noClaims' });
-              return of(false);
-            }
-          })
-        )
-        .subscribe();
-      return of(true);
-    }
+    this.subscription = this.claimService
+      .getClaimPolicies()
+      .pipe(
+        map(claimData => {
+          if (
+            claimData &&
+            claimData.loaded &&
+            claimData.claimPoliciesData &&
+            !claimData.claimPoliciesData.insurancePolicies
+          ) {
+            this.routingService.go({ cxRoute: 'noClaims' });
+            return of(false);
+          }
+        })
+      )
+      .subscribe();
+    return of(true);
   }
 
   ngOnDestroy(): void {

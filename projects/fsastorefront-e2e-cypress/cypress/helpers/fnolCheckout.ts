@@ -18,18 +18,6 @@ export function getClaimIdFromLocalStorage() {
 
 let claimNumber;
 
-export function selectAutoPolicyForFNOL() {
-  cy.get('.info-card-caption')
-    .contains('BULK1T2000000552')
-    .parentsUntil('.col-md-4')
-    .within(() => {
-      cy.get('.info-card-caption').contains('Auto Insurance');
-      cy.get('.primary-button')
-        .contains(' Make a Claim')
-        .click();
-    });
-}
-
 export function checkFNOLCheckoutPage() {
   cy.get('cx-fs-fnol-progress-bar')
     .should('be.visible')
@@ -56,7 +44,6 @@ export function checkFNOLSteps() {
 
 export function populateIncidentInformationStep() {
   cy.get('cx-dynamic-form').within(() => {
-    //TODO: can we make random choose
     cy.get('[name=whatHappened]')
       .select('Collision')
       .then(() => {
@@ -83,6 +70,11 @@ export function populateIncidentInformationStep() {
     cy.get('[name=description]')
       .clear()
       .type('my tesla S was stolen while I was in the shopping center');
+  });
+}
+export function updateIncidentType() {
+  cy.get('cx-dynamic-form').within(() => {
+    cy.get('[name=whatHappened]').select('Glass Damage');
   });
 }
 
@@ -163,7 +155,6 @@ export function checkConfirmationPage() {
 
 export function checkOpenClaimContent() {
   cy.get('.title').contains('Auto Insurance');
-  cy.get('.value').contains('BULK1T2000000552');
   cy.get('.title').contains('Date of Loss');
   cy.get('.value').contains('01 Jan 2018');
   cy.get('.title').contains('Status');
@@ -182,7 +173,7 @@ export function startClaimFromHomepage() {
 
 export function checkFnolEntryPage() {
   cy.get('.heading-headline').contains('Make a Claim Online');
-  cy.get('.section-header-heading').contains('Which car has been damaged?');
+  cy.get('h3.section-header-heading').contains('Which car has been damaged?');
   cy.get('cx-fs-cms-custom-container').within(() => {
     cy.get('.cx-payment-card-inner').should('be.visible');
   });
@@ -236,18 +227,16 @@ export function deleteClaimFromDialog() {
 }
 
 export function clickContinueAndGetNewClaimID() {
+  const incidentInfoForm = waitForCMSComponent(
+    'AutoClaimIncidentFormComponent',
+    'incidentInfoForm'
+  );
   cy.get('.primary-button')
     .should('contain', 'Continue')
-    .click()
-    .then(() => {
-      const fsUserRequests = waitForUserAssets(
-        'fsUserRequests/',
-        'fsUserRequests'
-      );
-      cy.wait(`@${fsUserRequests}`)
-        .its('status')
-        .should('eq', 200);
-    })
+    .click();
+  cy.wait(`@${incidentInfoForm}`)
+    .its('status')
+    .should('eq', 200)
     .then(() => {
       claimNumber = this.getClaimIdFromLocalStorage();
     });
@@ -259,6 +248,13 @@ export function waitForIncidentReportStep() {
     'incidentForm'
   );
   cy.wait(`@${incidentForm}`)
+    .its('status')
+    .should('eq', 200);
+}
+
+export function waitForQuoteReviewPage() {
+  const quoteReview = waitForPage('quote-review', 'quoteReview');
+  cy.wait(`@${quoteReview}`)
     .its('status')
     .should('eq', 200);
 }

@@ -6,6 +6,7 @@ import {
   addPaymentMethod,
   selectPaymentMethod,
 } from '../../../helpers/checkout/insurance/payment';
+import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 
 context('Travel Insurance Checkout', () => {
   before(() => {
@@ -38,7 +39,7 @@ context('Travel Insurance Checkout', () => {
 
     it('Check mini cart on quote review page', () => {
       checkout.checkQuoteReviewAccordions('travel');
-      travelCheckout.checkQuoteReview();
+      travelCheckout.checkQuoteReviewMiniCart();
     });
 
     it('Select default payment details', () => {
@@ -54,7 +55,7 @@ context('Travel Insurance Checkout', () => {
     });
 
     it('Check my policies page', () => {
-      checkout.checkMyPoliciesPage();
+      checkMyPoliciesPage();
       cy.get('.info-card-caption').contains('Travel Insurance');
     });
   });

@@ -7,6 +7,7 @@ export const forms = {
     lessThan1M: 'Der Wert muss unter 1.000.000 liegen',
     dateOfBirthMinimumAge: 'Mindestens 18 Jahre alt',
     lessThan150: 'Wert muss unter 150 liegen.',
+    lessThan200K: '[DE] Range must be between 0 -200,000',
     enterValidEmail: 'Bitte geben Sie eine gültige Email Adresse ein.',
     vehicleValue: 'Der Fahrzeugwert muss zwischen 3.000 und 1.000.000 liegen.',
     dateOfBirth: {
@@ -20,12 +21,12 @@ export const forms = {
     enterMessage: '[DE] Your message',
     interest: {
       title: '[DE] Interest',
-      problem: '[DE] Problem',
-      incident: '[DE] Incident',
       complaint: '[DE] Complaint',
-      fraud: '[DE] Fraud',
       note: '[DE] Note',
-      enquiry: '[DE] Enquiry',
+      financialAdvisory: '[DE] Financial Advisory',
+      productInfo: '[DE] Product Information',
+      quotePolicy: '[DE] Quote & Policy',
+      claimInfo: '[DE] Claim Information',
     },
     contactType: {
       title: '[DE]Contact type',

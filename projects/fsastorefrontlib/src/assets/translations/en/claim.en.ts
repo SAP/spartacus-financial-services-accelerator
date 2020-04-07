@@ -19,5 +19,6 @@ export const claim = {
       questionsOrConcerns:
         'If you have any questions, do not hesitate to contact your claim handler.',
     },
+    createFailed: 'Claim for given policy cannot be created.',
   },
 };

@@ -1,3 +1,4 @@
+import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
 import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -37,6 +38,8 @@ class MockChangeRequestService {
     });
   }
 }
+
+class MockChangePolicyService {}
 
 const configurationSteps = [
   {
@@ -92,6 +95,10 @@ describe('ChangeCarDetailsFormComponent', () => {
         {
           provide: GlobalMessageService,
           useClass: GlobalMessageServiceMock,
+        },
+        {
+          provide: ChangePolicyService,
+          useClass: MockChangePolicyService,
         },
         {
           provide: ActivatedRoute,
