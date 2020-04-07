@@ -2,11 +2,15 @@ import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { FormConfig } from '../../config';
 import { FieldConfig } from '../../models';
+import { FormValidationService } from './../validation/form-validation.service';
 
 @Injectable()
 export class FormBuilderService {
-  constructor(protected fb: FormBuilder, protected formConfig: FormConfig,
-  ) { }
+  constructor(
+    protected fb: FormBuilder,
+    protected formConfig: FormConfig,
+    protected formValidationService: FormValidationService
+  ) {}
 
   createForm(config) {
     const form = this.fb.group({});
@@ -27,27 +31,9 @@ export class FormBuilderService {
   createControl(fieldConfig: FieldConfig) {
     const { disabled, validation, value } = fieldConfig;
     // TODO: Replace attribute 'validation' with 'validations' in form sample configuration
-    const validations = validation ? validation : this.defineValidationsForField(fieldConfig);
+    const validations = validation
+      ? validation
+      : this.formValidationService.getValidatorsForField(fieldConfig);
     return this.fb.control({ disabled, value }, validations);
-  }
-
-
-  defineValidationsForField(fieldConfig: FieldConfig) {
-    if (fieldConfig.validations) {
-      const definedValidationFunctions = [];
-      fieldConfig.validations.forEach(validation => {
-        const configValidation = this.formConfig.validations[validation.name];
-        if (configValidation && configValidation.function) {
-          const validatorFunction = configValidation.function;
-          if (validation.args) {
-            const targetValidation = validatorFunction.apply(this, validation.args.map(arg => arg.value));
-            definedValidationFunctions.push(targetValidation);
-          } else {
-            definedValidationFunctions.push(validatorFunction);
-          }
-        }
-      });
-      return definedValidationFunctions;
-    }
   }
 }
