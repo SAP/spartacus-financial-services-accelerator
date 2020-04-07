@@ -47,7 +47,6 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 describe('DatePickerComponent', () => {
   let component: DatePickerComponent;
   let fixture: ComponentFixture<DatePickerComponent>;
-  let mockOccFormService: MockOccFormService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -55,7 +54,7 @@ describe('DatePickerComponent', () => {
       declarations: [DatePickerComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide: OccMockFormService, useValue: mockOccFormService },
+        { provide: OccMockFormService, useClass: MockOccFormService },
         {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
@@ -67,7 +66,6 @@ describe('DatePickerComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DatePickerComponent);
     component = fixture.componentInstance;
-    mockOccFormService = new MockOccFormService();
     component.group = mockFormGroup;
     component.config = mockField;
     el = fixture.debugElement;

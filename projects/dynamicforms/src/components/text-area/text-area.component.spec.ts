@@ -47,7 +47,6 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 describe('TextAreaComponent', () => {
   let component: TextAreaComponent;
   let fixture: ComponentFixture<TextAreaComponent>;
-  let mockOccFormService: MockOccFormService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -55,7 +54,7 @@ describe('TextAreaComponent', () => {
       declarations: [TextAreaComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide: OccMockFormService, useValue: mockOccFormService },
+        { provide: OccMockFormService, useClass: MockOccFormService },
         {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
@@ -67,7 +66,6 @@ describe('TextAreaComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TextAreaComponent);
     component = fixture.componentInstance;
-    mockOccFormService = new MockOccFormService();
     component.group = mockFormGroup;
     component.config = mockField;
     el = fixture.debugElement;

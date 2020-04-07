@@ -40,7 +40,6 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 describe('ErrorNoticeComponent', () => {
   let component: ErrorNoticeComponent;
   let fixture: ComponentFixture<ErrorNoticeComponent>;
-  let mockOccFormService: MockOccFormService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -48,7 +47,7 @@ describe('ErrorNoticeComponent', () => {
       declarations: [ErrorNoticeComponent],
       imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
-        { provide: OccMockFormService, useValue: mockOccFormService },
+        { provide: OccMockFormService, useClass: MockOccFormService },
         {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
@@ -60,7 +59,6 @@ describe('ErrorNoticeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ErrorNoticeComponent);
     component = fixture.componentInstance;
-    mockOccFormService = new MockOccFormService();
     component.group = mockFormGroup;
     component.config = mockField;
     el = fixture.debugElement;

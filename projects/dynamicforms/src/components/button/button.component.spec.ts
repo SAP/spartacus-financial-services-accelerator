@@ -37,7 +37,6 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 describe('ButtonComponent', () => {
   let component: ButtonComponent;
   let fixture: ComponentFixture<ButtonComponent>;
-  let mockOccFormService: MockOccFormService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -45,7 +44,7 @@ describe('ButtonComponent', () => {
       declarations: [ButtonComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide: OccMockFormService, useValue: mockOccFormService },
+        { provide: OccMockFormService, useClass: MockOccFormService },
         {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
@@ -56,7 +55,6 @@ describe('ButtonComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ButtonComponent);
-    mockOccFormService = new MockOccFormService();
     component = fixture.componentInstance;
     component.group = mockFormGroup;
     component.config = mockField;

@@ -47,7 +47,6 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 describe('InputComponent', () => {
   let component: InputComponent;
   let fixture: ComponentFixture<InputComponent>;
-  let mockOccFormService: MockOccFormService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -55,7 +54,7 @@ describe('InputComponent', () => {
       declarations: [InputComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide: OccMockFormService, useValue: mockOccFormService },
+        { provide: OccMockFormService, useClass: MockOccFormService },
         {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
@@ -67,7 +66,6 @@ describe('InputComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(InputComponent);
     component = fixture.componentInstance;
-    mockOccFormService = new MockOccFormService();
     component.group = mockFormGroup;
     component.config = mockField;
     el = fixture.debugElement;

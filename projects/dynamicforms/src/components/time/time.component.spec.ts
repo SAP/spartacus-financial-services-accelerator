@@ -47,7 +47,6 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 describe('TimeComponent', () => {
   let component: TimeComponent;
   let fixture: ComponentFixture<TimeComponent>;
-  let mockOccFormService: MockOccFormService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -55,7 +54,7 @@ describe('TimeComponent', () => {
       declarations: [TimeComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide: OccMockFormService, useValue: mockOccFormService },
+        { provide: OccMockFormService, useClass: MockOccFormService },
         {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
@@ -66,7 +65,6 @@ describe('TimeComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TimeComponent);
-    mockOccFormService = new MockOccFormService();
     component = fixture.componentInstance;
     component.group = mockFormGroup;
     component.config = mockField;

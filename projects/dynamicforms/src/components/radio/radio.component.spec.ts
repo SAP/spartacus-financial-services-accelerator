@@ -49,7 +49,6 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 describe('RadioComponent', () => {
   let component: RadioComponent;
   let fixture: ComponentFixture<RadioComponent>;
-  let mockOccFormService: MockOccFormService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -57,7 +56,7 @@ describe('RadioComponent', () => {
       declarations: [RadioComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide: OccMockFormService, useValue: mockOccFormService },
+        { provide: OccMockFormService, useClass: MockOccFormService },
         {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
@@ -69,7 +68,6 @@ describe('RadioComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RadioComponent);
     component = fixture.componentInstance;
-    mockOccFormService = new MockOccFormService();
     component.group = mockFormGroup;
     component.config = mockField;
     el = fixture.debugElement;

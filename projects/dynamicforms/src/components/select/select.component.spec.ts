@@ -98,7 +98,6 @@ describe('SelectComponent', () => {
       OccMockFormService
     >);
     component = fixture.componentInstance;
-    mockOccFormService = new MockOccFormService();
     component.group = mockFormGroup;
     component.config = mockField;
     el = fixture.debugElement;
