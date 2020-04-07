@@ -1,15 +1,20 @@
 import { TestBed } from '@angular/core/testing';
 import { FormValidationService } from './form-validation.service';
 import { defaultFormConfig } from './../../config/default-form-config';
-import { DynamicFormsConfig } from '../../config';
-import { FieldConfig } from '../../models';
+import { DynamicFormsConfig } from '../../config/form-config';
+import { FieldConfig } from '../../models/form-config.interface';
+
+const fieldName = 'testField';
+const fieldType = 'input';
+const minValue = 'minValue';
+const notExist = 'notExist';
 
 const field: FieldConfig = {
-  name: 'testField',
-  type: 'input',
+  name: fieldName,
+  type: fieldType,
   validations: [
     {
-      name: 'minValue',
+      name: minValue,
       arguments: [
         {
           value: '10',
@@ -38,7 +43,43 @@ describe('FormValidationService', () => {
   });
 
   it('should return list of validators for field', () => {
-    service.getValidatorsForField(field);
     expect(service.getValidatorsForField(field).length).toEqual(1);
+  });
+
+  it('should not validators for field in case they are not defined', () => {
+    expect(
+      service.getValidatorsForField({
+        name: fieldName,
+        type: fieldType,
+      }).length
+    ).toEqual(0);
+  });
+
+  it('should return validator without arguments', () => {
+    expect(
+      service.getValidatorsForField({
+        name: fieldName,
+        type: fieldType,
+        validations: [
+          {
+            name: minValue,
+          },
+        ],
+      }).length
+    ).toEqual(1);
+  });
+
+  it('should not return validator if it does not exist in config', () => {
+    expect(
+      service.getValidatorsForField({
+        name: fieldName,
+        type: fieldType,
+        validations: [
+          {
+            name: notExist,
+          },
+        ],
+      }).length
+    ).toEqual(0);
   });
 });
