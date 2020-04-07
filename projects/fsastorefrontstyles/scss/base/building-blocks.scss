@@ -16,42 +16,6 @@
 .pointer {
   cursor: pointer;
 }
-.fs-border-primary {
-  border: 1px solid var(--cx-color-primary) !important;
-}
-.border-top-primary-fat {
-  border-top: 3px solid var(--cx-color-primary);
-}
-.border-top-primary {
-  border-top-color: var(--cx-color-primary);
-}
-.border-bottom-primary {
-  border-bottom-color: var(--cx-color-primary);
-}
-.border-top-grey {
-  border-top: 1px solid var(--cx-color-3);
-}
-.border-bottom-grey {
-  border-bottom: $border-grey;
-}
-.border-bottom-color-4 {
-  border-bottom: 1px solid var(--cx-color-4);
-}
-.border-bottom-secondary {
-  border-bottom-color: var(--cx-color-secondary);
-}
-.border-top-secondary {
-  border-top-color: var(--cx-color-secondary);
-}
-.border-color-3 {
-  // border: 1px solid var(--cx-color-3);
-}
-.border-color-6 {
-  border: 1px solid var(--cx-color-6);
-}
-.border-color-7 {
-  border: 1px solid var(--cx-color-7);
-}
 .background-color-4 {
   background-color: var(--cx-color-4);
 }
