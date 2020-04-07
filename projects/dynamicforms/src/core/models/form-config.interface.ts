@@ -17,7 +17,7 @@ export interface FieldConfig {
   jsonField?: string;
   placeholder?: string;
   type: string;
-  validation?: ValidatorFn[];
+  validation?: ValidatorFn[]; // TO-DO Remove validation attribute once all definitions are moved to back-end
   value?: any;
   hidden?: boolean;
   error?: string;
@@ -26,10 +26,10 @@ export interface FieldConfig {
 
 export interface ValidatorFunction {
   name: string;
-  args?: ValidationArgument[];
+  arguments?: ValidatorArgument[];
 }
 
-export interface ValidationArgument {
+export interface ValidatorArgument {
   value: string;
 }
 
