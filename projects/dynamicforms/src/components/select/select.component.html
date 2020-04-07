@@ -3,10 +3,12 @@
   [formGroup]="group"
   [hidden]="group.controls[config.name].disabled"
 >
-  <div [ngClass]="formConfig.cssClass.inputWrapper">
-    <label [ngClass]="formConfig.cssClass.label">{{ config.label }}</label>
+  <div [ngClass]="formConfig.dynamicForms.cssClass.inputWrapper">
+    <label [ngClass]="formConfig.dynamicForms.cssClass.label">{{
+      config.label
+    }}</label>
     <select
-      [ngClass]="formConfig.cssClass.input"
+      [ngClass]="formConfig.dynamicForms.cssClass.input"
       [attr.name]="config.name"
       formControlName="{{ config.name }}"
     >

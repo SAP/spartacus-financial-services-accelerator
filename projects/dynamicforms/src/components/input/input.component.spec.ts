@@ -3,9 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { FormConfig, CssClass } from '../../core/config/form-config';
+import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
 import { FieldConfig } from '../../core';
-
 import { InputComponent } from './input.component';
 
 @Component({
@@ -22,42 +21,25 @@ const mockCssClass: CssClass = {
   form: '',
 };
 
-class MockOccFormService {
-  setInitialFormControlValues() {
-    return {};
-  }
+class MockOccFormService {}
 
-  getDropdownValues() {
-    return {};
-  }
-
-  getNodes() {
-    return {};
-  }
-}
 const mockField: FieldConfig = {
   type: 'input',
   name: 'testGroup',
   label: 'Test Input Label',
-  group: {
-    fieldConfigs: [
-      {
-        type: 'input',
-      },
-    ],
-    groupCode: 'testGroup',
-  },
 };
 
 const mockFormGroup = new FormGroup({
   testGroup: new FormControl(),
 });
 
-const mockFormConfig: FormConfig = {
-  cssClass: mockCssClass,
-  components: {
-    input: {
-      component: InputComponent,
+const mockDynamicFormsConfig: DynamicFormsConfig = {
+  dynamicForms: {
+    cssClass: mockCssClass,
+    components: {
+      input: {
+        component: InputComponent,
+      },
     },
   },
 };
@@ -75,8 +57,8 @@ describe('InputComponent', () => {
       providers: [
         { provide: OccMockFormService, useValue: mockOccFormService },
         {
-          provide: FormConfig,
-          useValue: mockFormConfig,
+          provide: DynamicFormsConfig,
+          useValue: mockDynamicFormsConfig,
         },
       ],
     }).compileComponents();
@@ -101,7 +83,7 @@ describe('InputComponent', () => {
   });
 
   it('should render input component', () => {
-    const inputComponent = el.query(By.css('.dynamic-field')).nativeElement;
+    const inputComponent = el.query(By.css('input[type="text"]')).nativeElement;
     expect(inputComponent).toBeTruthy();
   });
 });

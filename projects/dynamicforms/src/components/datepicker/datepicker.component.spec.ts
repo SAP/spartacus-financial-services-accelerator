@@ -3,9 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { FormConfig, CssClass } from '../../core/config/form-config';
+import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
 import { FieldConfig } from '../../core';
-
 import { DatePickerComponent } from './datepicker.component';
 
 @Component({
@@ -22,42 +21,25 @@ const mockCssClass: CssClass = {
   form: '',
 };
 
-class MockOccFormService {
-  setInitialFormControlValues() {
-    return {};
-  }
+class MockOccFormService {}
 
-  getDropdownValues() {
-    return {};
-  }
-
-  getNodes() {
-    return {};
-  }
-}
 const mockField: FieldConfig = {
   type: 'datepicker',
   name: 'testGroup',
   label: 'What time did it happen?',
-  group: {
-    fieldConfigs: [
-      {
-        type: 'datepicker',
-      },
-    ],
-    groupCode: 'testGroup',
-  },
 };
 
 const mockFormGroup = new FormGroup({
   testGroup: new FormControl(),
 });
 
-const mockFormConfig: FormConfig = {
-  cssClass: mockCssClass,
-  components: {
-    datepicker: {
-      component: DatePickerComponent,
+const mockDynamicFormsConfig: DynamicFormsConfig = {
+  dynamicForms: {
+    cssClass: mockCssClass,
+    components: {
+      datepicker: {
+        component: DatePickerComponent,
+      },
     },
   },
 };
@@ -75,8 +57,8 @@ describe('DatePickerComponent', () => {
       providers: [
         { provide: OccMockFormService, useValue: mockOccFormService },
         {
-          provide: FormConfig,
-          useValue: mockFormConfig,
+          provide: DynamicFormsConfig,
+          useValue: mockDynamicFormsConfig,
         },
       ],
     }).compileComponents();
@@ -102,7 +84,7 @@ describe('DatePickerComponent', () => {
   });
 
   it('should render datepicker component', () => {
-    const heading = el.query(By.css('.dynamic-field')).nativeElement;
+    const heading = el.query(By.css('input[type="date"]')).nativeElement;
     expect(heading).toBeTruthy();
   });
 });

@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { FormConfig, CssClass } from '../../core/config/form-config';
+import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
 import { FieldConfig } from '../../core';
 
 import { SelectComponent } from './select.component';
@@ -47,6 +47,7 @@ class MockOccFormService {
     return dependentOptions;
   }
 }
+
 const dependentTestField: FieldConfig = {
   type: 'select',
   name: 'dependentTestField',
@@ -64,18 +65,6 @@ const mockField: FieldConfig = {
   type: 'select',
   name: 'testGroup',
   label: 'What time did it happen?',
-  group: {
-    fieldConfigs: [
-      {
-        type: 'select',
-        options: [
-          { name: 'MONTHLY', label: 'Monthly' },
-          { name: 'YEARLY', label: 'Yearly' },
-        ],
-      },
-    ],
-    groupCode: 'testGroup',
-  },
   depends: ['dependentTestField'],
   jsonField: 'testGroup.dependentTestField',
 };
@@ -85,11 +74,13 @@ const mockFormGroup = new FormGroup({
   testGroup: new FormControl(),
 });
 
-const mockFormConfig: FormConfig = {
-  cssClass: mockCssClass,
-  components: {
-    select: {
-      component: SelectComponent,
+const mockDynamicFormsConfig: DynamicFormsConfig = {
+  dynamicForms: {
+    cssClass: mockCssClass,
+    components: {
+      select: {
+        component: SelectComponent,
+      },
     },
   },
 };
@@ -107,8 +98,8 @@ describe('SelectComponent', () => {
       providers: [
         { provide: OccMockFormService, useClass: MockOccFormService },
         {
-          provide: FormConfig,
-          useValue: mockFormConfig,
+          provide: DynamicFormsConfig,
+          useValue: mockDynamicFormsConfig,
         },
       ],
     }).compileComponents();
@@ -142,7 +133,7 @@ describe('SelectComponent', () => {
   });
 
   it('should render select component', () => {
-    const selectComponent = el.query(By.css('.dynamic-field')).nativeElement;
+    const selectComponent = el.query(By.css('select')).nativeElement;
     expect(selectComponent).toBeTruthy();
   });
 });

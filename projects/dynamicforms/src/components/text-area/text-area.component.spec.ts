@@ -3,9 +3,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { FormConfig, CssClass } from '../../core/config/form-config';
+import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
 import { FieldConfig } from '../../core';
-
 import { TextAreaComponent } from './text-area.component';
 
 @Component({
@@ -22,42 +21,25 @@ const mockCssClass: CssClass = {
   form: '',
 };
 
-class MockOccFormService {
-  setInitialFormControlValues() {
-    return {};
-  }
+class MockOccFormService {}
 
-  getDropdownValues() {
-    return {};
-  }
-
-  getNodes() {
-    return {};
-  }
-}
 const mockField: FieldConfig = {
   type: 'textarea',
   name: 'testGroup',
   label: 'What time did it happen?',
-  group: {
-    fieldConfigs: [
-      {
-        type: 'textarea',
-      },
-    ],
-    groupCode: 'testGroup',
-  },
 };
 
 const mockFormGroup = new FormGroup({
   testGroup: new FormControl(),
 });
 
-const mockFormConfig: FormConfig = {
-  cssClass: mockCssClass,
-  components: {
-    textarea: {
-      component: TextAreaComponent,
+const mockDynamicFormsConfig: DynamicFormsConfig = {
+  dynamicForms: {
+    cssClass: mockCssClass,
+    components: {
+      textarea: {
+        component: TextAreaComponent,
+      },
     },
   },
 };
@@ -75,8 +57,8 @@ describe('TextAreaComponent', () => {
       providers: [
         { provide: OccMockFormService, useValue: mockOccFormService },
         {
-          provide: FormConfig,
-          useValue: mockFormConfig,
+          provide: DynamicFormsConfig,
+          useValue: mockDynamicFormsConfig,
         },
       ],
     }).compileComponents();
@@ -102,7 +84,7 @@ describe('TextAreaComponent', () => {
   });
 
   it('should render textarea component', () => {
-    const TextAreaComponent = el.query(By.css('.dynamic-field')).nativeElement;
+    const TextAreaComponent = el.query(By.css('textarea')).nativeElement;
     expect(TextAreaComponent).toBeTruthy();
   });
 });

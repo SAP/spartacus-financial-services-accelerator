@@ -1,17 +1,17 @@
 import { ValidatorFn } from '@angular/forms';
 
 export interface FormDefinition {
-  formGroups: FromGroup[];
+  formGroups: DynamicFormGroup[];
   formId: string;
 }
-export interface FromGroup {
-  groupCode?: String;
+export interface DynamicFormGroup {
+  groupCode?: string;
   fieldConfigs: FieldConfig[];
 }
 export interface FieldConfig {
   disabled?: boolean;
   label?: string;
-  group?: FromGroup;
+  group?: DynamicFormGroup;
   name?: string;
   options?: FieldOption[];
   depends?: string[];

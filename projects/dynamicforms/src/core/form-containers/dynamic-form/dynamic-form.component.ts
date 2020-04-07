@@ -19,7 +19,7 @@ import {
 } from '../../models/form-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 import { FormDataService } from '../../services/data/form-data.service';
-import { FormConfig } from '../../config';
+import { DynamicFormsConfig } from '../../config';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -52,7 +52,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   constructor(
     protected formService: FormBuilderService,
     protected formDataService: FormDataService,
-    public formConfig: FormConfig
+    public formConfig: DynamicFormsConfig
   ) {}
 
   ngOnInit() {

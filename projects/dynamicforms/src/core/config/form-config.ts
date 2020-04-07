@@ -22,7 +22,9 @@ export interface CssClass {
   submitButton?: string;
 }
 
-export abstract class FormConfig {
-  cssClass: CssClass;
-  components: FormComponentConfig;
+export abstract class DynamicFormsConfig {
+  dynamicForms: {
+    cssClass: CssClass;
+    components: FormComponentConfig;
+  };
 }

@@ -2,33 +2,17 @@ import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Observable, of } from 'rxjs';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { FormConfig, CssClass } from '../../core/config/form-config';
+import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
 import { FieldConfig } from '../../core';
-
 import { TitleComponent } from './title.component';
-
-const mockData: Observable<any> = of({});
 
 const mockCssClass: CssClass = {
   form: '',
   formTitle: 'testTitle',
 };
 
-class MockOccFormService {
-  setInitialFormControlValues() {
-    return mockData;
-  }
-
-  getDropdownValues() {
-    return mockData;
-  }
-
-  getNodes() {
-    return mockData;
-  }
-}
+class MockOccFormService {}
 
 const mockField: FieldConfig = {
   type: 'title',
@@ -48,11 +32,13 @@ const mockFormGroup = new FormGroup({
   testGroup: new FormControl(),
 });
 
-const mockFormConfig: FormConfig = {
-  cssClass: mockCssClass,
-  components: {
-    title: {
-      component: TitleComponent,
+const mockDynamicFormsConfig: DynamicFormsConfig = {
+  dynamicForms: {
+    cssClass: mockCssClass,
+    components: {
+      title: {
+        component: TitleComponent,
+      },
     },
   },
 };
@@ -70,8 +56,8 @@ describe('TitleComponent', () => {
       providers: [
         { provide: OccMockFormService, useValue: mockOccFormService },
         {
-          provide: FormConfig,
-          useValue: mockFormConfig,
+          provide: DynamicFormsConfig,
+          useValue: mockDynamicFormsConfig,
         },
       ],
     }).compileComponents();

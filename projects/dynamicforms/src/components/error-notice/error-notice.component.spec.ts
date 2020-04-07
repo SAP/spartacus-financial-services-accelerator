@@ -4,9 +4,8 @@ import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { I18nTestingModule } from '@spartacus/core';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { FormConfig, CssClass } from '../../core/config/form-config';
+import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
 import { FieldConfig } from '../../core';
-
 import { ErrorNoticeComponent } from './error-notice.component';
 import { ButtonComponent } from './../button/button.component';
 
@@ -15,42 +14,25 @@ const mockCssClass: CssClass = {
   validatorMessageWrapper: 'testErrorClass',
 };
 
-class MockOccFormService {
-  setInitialFormControlValues() {
-    return {};
-  }
+class MockOccFormService {}
 
-  getDropdownValues() {
-    return {};
-  }
-
-  getNodes() {
-    return {};
-  }
-}
 const mockField: FieldConfig = {
   type: 'button',
   name: 'testGroup',
   label: 'Test button',
-  group: {
-    fieldConfigs: [
-      {
-        type: 'button',
-      },
-    ],
-    groupCode: 'testGroup',
-  },
 };
 
 const mockFormGroup = new FormGroup({
   testGroup: new FormControl(),
 });
 
-const mockFormConfig: FormConfig = {
-  cssClass: mockCssClass,
-  components: {
-    button: {
-      component: ButtonComponent,
+const mockDynamicFormsConfig: DynamicFormsConfig = {
+  dynamicForms: {
+    cssClass: mockCssClass,
+    components: {
+      button: {
+        component: ButtonComponent,
+      },
     },
   },
 };
@@ -68,8 +50,8 @@ describe('ErrorNoticeComponent', () => {
       providers: [
         { provide: OccMockFormService, useValue: mockOccFormService },
         {
-          provide: FormConfig,
-          useValue: mockFormConfig,
+          provide: DynamicFormsConfig,
+          useValue: mockDynamicFormsConfig,
         },
       ],
     }).compileComponents();

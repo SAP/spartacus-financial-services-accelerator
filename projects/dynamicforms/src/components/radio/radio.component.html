@@ -3,17 +3,19 @@
   [formGroup]="group"
   [hidden]="group.controls[config.name].disabled"
 >
-  <div [ngClass]="formConfig.cssClass.radioInputWrapper">
-    <label [ngClass]="formConfig.cssClass.radioLabel">{{ config.label }}</label>
+  <div [ngClass]="formConfig.dynamicForms.cssClass.radioInputWrapper">
+    <label [ngClass]="formConfig.dynamicForms.cssClass.radioLabel">{{
+      config.label
+    }}</label>
     <div *ngFor="let option of config.options">
       <input
-        [ngClass]="formConfig.cssClass.radioInput"
+        [ngClass]="formConfig.dynamicForms.cssClass.radioInput"
         type="radio"
         [attr.name]="config.name"
         value="{{ option.name }}"
         [formControlName]="config.name"
       />
-      <label [ngClass]="formConfig.cssClass.radioOptionLabel">{{
+      <label [ngClass]="formConfig.dynamicForms.cssClass.radioOptionLabel">{{
         option.label
       }}</label>
     </div>
