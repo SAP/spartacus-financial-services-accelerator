@@ -39,7 +39,7 @@ export class OccFormService {
   }
 
   getFormData(formDataId: string) {
-    const url = this.getYFormsEndpoint() + '/data/' + formDataId;
+    const url = this.getYFormsEndpoint() + '/formData/' + formDataId;
     return this.http
       .get<YFormData>(url)
       .pipe(catchError((error: any) => throwError(error.json())));
