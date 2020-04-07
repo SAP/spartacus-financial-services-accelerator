@@ -1,12 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  FormDataService,
-  FormDefinition,
-  YFormData,
-  YFormDefinition,
-  FormConfig,
-} from '@fsa/dynamicforms';
+import { FormDataService, FormDefinition, YFormData, YFormDefinition } from '@fsa/dynamicforms';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
@@ -24,8 +18,7 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected cmsComponentConnector: CmsComponentConnector,
     protected formDataService: FormDataService,
-    protected generalFormConfig: FormConfig
-  ) {}
+  ) { }
 
   routeParamId = 'formCode';
   pageContext: PageContext;
@@ -69,7 +62,6 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
               this.formConfig = <FormDefinition>(
                 JSON.parse(formDefinition.content)
               );
-              this.addValidations();
             }
           })
         )
@@ -89,28 +81,6 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-  }
-
-  addValidations() {
-    this.formConfig.formGroups.forEach(group => {
-      group.fieldConfigs.forEach(field => {
-        if (field.validations) {
-          field.validation = [];
-          field.validations.forEach(validation => {
-            const configValidation = this.generalFormConfig.validations[validation.name];
-            if (configValidation && configValidation.function) {
-              const validatorFunction = configValidation.function;
-              if (validation.args) {
-                const targetValidation = validatorFunction.apply(this, validation.args.map(arg =>  arg.value));
-                field.validation.push(targetValidation);
-              } else {
-                field.validation.push(validatorFunction);
-              }
-            }
-          });
-        }
-      });
-    });
   }
 
   ngOnDestroy(): void {

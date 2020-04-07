@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { FormConfig } from '../../config';
 import { FieldConfig } from '../../models';
 
 @Injectable()
 export class FormBuilderService {
-  constructor(protected fb: FormBuilder) {}
+  constructor(protected fb: FormBuilder, protected formConfig: FormConfig,
+  ) { }
 
   createForm(config) {
     const form = this.fb.group({});
@@ -22,8 +24,28 @@ export class FormBuilderService {
     return form;
   }
 
-  createControl(config: FieldConfig) {
-    const { disabled, validation, value } = config;
-    return this.fb.control({ disabled, value }, validation);
+  createControl(fieldConfig: FieldConfig) {
+    const { disabled, value } = fieldConfig;
+    return this.fb.control({ disabled, value }, this.defineValidationsForField(fieldConfig));
+  }
+
+
+  defineValidationsForField(fieldConfig: FieldConfig) {
+    if (fieldConfig.validations) {
+      const definedValidationFunctions = [];
+      fieldConfig.validations.forEach(validation => {
+        const configValidation = this.formConfig.validations[validation.name];
+        if (configValidation && configValidation.function) {
+          const validatorFunction = configValidation.function;
+          if (validation.args) {
+            const targetValidation = validatorFunction.apply(this, validation.args.map(arg => arg.value));
+            definedValidationFunctions.push(targetValidation);
+          } else {
+            definedValidationFunctions.push(validatorFunction);
+          }
+        }
+      });
+      return definedValidationFunctions;
+    }
   }
 }
