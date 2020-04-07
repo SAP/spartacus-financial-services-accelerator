@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { FormConfig, CssClass } from '../../core/config/form-config';
+import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
 import { FieldConfig } from '../../core';
 
 import { RadioComponent } from './radio.component';
@@ -20,45 +20,28 @@ class MockErrorNoticeComponent {
 
 const mockCssClass: CssClass = {
   form: '',
-  formTitle: 'testTitle',
+  radioLabel: 'testRadioInputLabel',
 };
 
-class MockOccFormService {
-  setInitialFormControlValues() {
-    return {};
-  }
+class MockOccFormService {}
 
-  getDropdownValues() {
-    return {};
-  }
-
-  getNodes() {
-    return {};
-  }
-}
 const mockField: FieldConfig = {
   type: 'radio',
   name: 'testGroup',
   label: 'What time did it happen?',
-  group: {
-    fieldConfigs: [
-      {
-        type: 'radio',
-      },
-    ],
-    groupCode: 'testGroup',
-  },
 };
 
 const mockFormGroup = new FormGroup({
   testGroup: new FormControl(),
 });
 
-const mockFormConfig: FormConfig = {
-  cssClass: mockCssClass,
-  components: {
-    radio: {
-      component: RadioComponent,
+const mockDynamicFormsConfig: DynamicFormsConfig = {
+  dynamicForms: {
+    cssClass: mockCssClass,
+    components: {
+      radio: {
+        component: RadioComponent,
+      },
     },
   },
 };
@@ -66,7 +49,6 @@ const mockFormConfig: FormConfig = {
 describe('RadioComponent', () => {
   let component: RadioComponent;
   let fixture: ComponentFixture<RadioComponent>;
-  let mockOccFormService: MockOccFormService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -74,10 +56,10 @@ describe('RadioComponent', () => {
       declarations: [RadioComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide: OccMockFormService, useValue: mockOccFormService },
+        { provide: OccMockFormService, useClass: MockOccFormService },
         {
-          provide: FormConfig,
-          useValue: mockFormConfig,
+          provide: DynamicFormsConfig,
+          useValue: mockDynamicFormsConfig,
         },
       ],
     }).compileComponents();
@@ -86,7 +68,6 @@ describe('RadioComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RadioComponent);
     component = fixture.componentInstance;
-    mockOccFormService = new MockOccFormService();
     component.group = mockFormGroup;
     component.config = mockField;
     el = fixture.debugElement;
@@ -102,7 +83,8 @@ describe('RadioComponent', () => {
   });
 
   it('should render radio component', () => {
-    const radioComponent = el.query(By.css('.dynamic-field')).nativeElement;
+    const radioComponent = el.query(By.css('.testRadioInputLabel'))
+      .nativeElement;
     expect(radioComponent).toBeTruthy();
   });
 });

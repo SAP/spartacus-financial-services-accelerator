@@ -11,7 +11,7 @@ import {
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from '../core/models/form-config.interface';
 import { AbstractFormComponent } from './abstract-form.component';
-import { FormConfig } from '../core/config';
+import { DynamicFormsConfig } from '../core/config';
 
 @Directive({
   selector: '[cxFormComponent]',
@@ -27,7 +27,7 @@ export class FormComponentDirective implements OnChanges, OnInit {
   constructor(
     protected resolver: ComponentFactoryResolver,
     protected container: ViewContainerRef,
-    protected formConfig: FormConfig
+    protected formConfig: DynamicFormsConfig
   ) {}
 
   ngOnChanges() {
@@ -38,7 +38,9 @@ export class FormComponentDirective implements OnChanges, OnInit {
   }
 
   ngOnInit() {
-    for (const [name, obj] of Object.entries(this.formConfig.components)) {
+    for (const [name, obj] of Object.entries(
+      this.formConfig.dynamicForms.components
+    )) {
       this.components[name] = obj.component;
     }
     if (!this.components[this.config.type]) {

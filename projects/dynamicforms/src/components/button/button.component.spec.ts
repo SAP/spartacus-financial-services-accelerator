@@ -2,52 +2,34 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { ButtonComponent } from './button.component';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { FormConfig, CssClass } from '../../core/config/form-config';
+import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
 import { FieldConfig } from '../../core';
+import { ButtonComponent } from './button.component';
 
 const mockCssClass: CssClass = {
   form: '',
 };
 
-class MockOccFormService {
-  setInitialFormControlValues() {
-    return {};
-  }
-
-  getDropdownValues() {
-    return {};
-  }
-
-  getNodes() {
-    return {};
-  }
-}
+class MockOccFormService {}
 
 const mockField: FieldConfig = {
   type: 'button',
   name: 'testGroup',
   label: 'Test button',
-  group: {
-    fieldConfigs: [
-      {
-        type: 'button',
-      },
-    ],
-    groupCode: 'testGroup',
-  },
 };
 
 const mockFormGroup = new FormGroup({
   testGroup: new FormControl(),
 });
 
-const mockFormConfig: FormConfig = {
-  cssClass: mockCssClass,
-  components: {
-    button: {
-      component: ButtonComponent,
+const mockDynamicFormsConfig: DynamicFormsConfig = {
+  dynamicForms: {
+    cssClass: mockCssClass,
+    components: {
+      button: {
+        component: ButtonComponent,
+      },
     },
   },
 };
@@ -55,7 +37,6 @@ const mockFormConfig: FormConfig = {
 describe('ButtonComponent', () => {
   let component: ButtonComponent;
   let fixture: ComponentFixture<ButtonComponent>;
-  let mockOccFormService: MockOccFormService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -63,10 +44,10 @@ describe('ButtonComponent', () => {
       declarations: [ButtonComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide: OccMockFormService, useValue: mockOccFormService },
+        { provide: OccMockFormService, useClass: MockOccFormService },
         {
-          provide: FormConfig,
-          useValue: mockFormConfig,
+          provide: DynamicFormsConfig,
+          useValue: mockDynamicFormsConfig,
         },
       ],
     }).compileComponents();
@@ -74,7 +55,6 @@ describe('ButtonComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ButtonComponent);
-    mockOccFormService = new MockOccFormService();
     component = fixture.componentInstance;
     component.group = mockFormGroup;
     component.config = mockField;
@@ -93,7 +73,7 @@ describe('ButtonComponent', () => {
   });
 
   it('should render button component', () => {
-    const buttonEl = el.query(By.css('.dynamic-field')).nativeElement;
+    const buttonEl = el.query(By.css('button')).nativeElement;
     expect(buttonEl).toBeTruthy();
   });
 });

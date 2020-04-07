@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { FormConfig } from '../../config';
 import { FieldConfig } from '../../models';
 import { FormValidationService } from './../validation/form-validation.service';
 
@@ -8,7 +7,6 @@ import { FormValidationService } from './../validation/form-validation.service';
 export class FormBuilderService {
   constructor(
     protected fb: FormBuilder,
-    protected formConfig: FormConfig,
     protected formValidationService: FormValidationService
   ) {}
 

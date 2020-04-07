@@ -1,7 +1,7 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { FormComponentDirective } from './form-component.directive';
-import { FormConfig } from '../core/config';
+import { DynamicFormsConfig } from '../core/config';
 import { ButtonComponent } from './button/button.component';
 import { FieldConfig } from 'dynamicforms/src/core';
 
@@ -25,14 +25,16 @@ class TestDynamicFormComponent {
 })
 class MockedButtonComponent {}
 
-const MockFormConfig: FormConfig = {
-  components: {
-    button: {
-      component: ButtonComponent,
+const MockDynamicFormsConfig: DynamicFormsConfig = {
+  dynamicForms: {
+    components: {
+      button: {
+        component: ButtonComponent,
+      },
     },
-  },
-  cssClass: {
-    input: 'testInput',
+    cssClass: {
+      input: 'testInput',
+    },
   },
 };
 
@@ -43,7 +45,7 @@ describe('Directive: DynamicField', () => {
     TestBed.configureTestingModule({
       declarations: [TestDynamicFormComponent, FormComponentDirective],
       providers: [
-        { provide: FormConfig, useValue: MockFormConfig },
+        { provide: DynamicFormsConfig, useValue: MockDynamicFormsConfig },
         // {provide: ViewContainerRef, useValue: MockViewContainerRef}
       ],
     }).compileComponents();

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfigModule, CmsConfig, I18nModule } from '@spartacus/core';
 import { CmsCategoryFormSubmitComponent } from './cms-category-form-submit-component';
-import { DynamicFormModule, FormConfig } from '@fsa/dynamicforms';
+import { DynamicFormModule, DynamicFormsConfig } from '@fsa/dynamicforms';
 import { SpinnerModule } from '@spartacus/storefront';
 
 @NgModule({
@@ -11,7 +11,7 @@ import { SpinnerModule } from '@spartacus/storefront';
     I18nModule,
     DynamicFormModule,
     SpinnerModule,
-    ConfigModule.withConfig(<CmsConfig | FormConfig>{
+    ConfigModule.withConfig(<CmsConfig | DynamicFormsConfig>{
       cmsComponents: {
         CMSFormSubmitComponent: {
           component: CmsCategoryFormSubmitComponent,

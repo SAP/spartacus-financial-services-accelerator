@@ -5,7 +5,7 @@ import { FormContainerModule } from './core/form-containers/form-container.modul
 import { formEffects } from './core/effects/index';
 import { EffectsModule } from '@ngrx/effects';
 import { defaultFormConfig } from './core/config/default-form-config';
-import { FormConfig } from './core/config/form-config';
+import { DynamicFormsConfig } from './core/config/form-config';
 import { ComponentsModule } from './components/components.module';
 
 @NgModule({
@@ -18,6 +18,6 @@ import { ComponentsModule } from './components/components.module';
     ComponentsModule,
   ],
   exports: [FormContainerModule],
-  providers: [{ provide: FormConfig, useExisting: Config }],
+  providers: [{ provide: DynamicFormsConfig, useExisting: Config }],
 })
 export class DynamicFormModule {}

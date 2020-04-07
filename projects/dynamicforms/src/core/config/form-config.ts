@@ -30,8 +30,10 @@ export abstract class ValidationConfig {
   [_: string]: ValidationMapping;
 }
 
-export abstract class FormConfig {
-  cssClass: CssClass;
-  components: FormComponentConfig;
-  validations?: ValidationConfig;
+export abstract class DynamicFormsConfig {
+  dynamicForms: {
+    cssClass: CssClass;
+    components: FormComponentConfig;
+    validations: ValidationConfig;
+  };
 }

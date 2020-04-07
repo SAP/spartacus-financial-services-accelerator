@@ -8,7 +8,7 @@ import { FormBuilderService } from '../../services/builder/form-builder.service'
 import { BehaviorSubject } from 'rxjs';
 import { FormDataService } from '../../services/data/form-data.service';
 import { YFormData } from '../../models';
-import { FormConfig } from '../../config';
+import { DynamicFormsConfig } from '../../config';
 
 @Directive({
   // tslint:disable
@@ -27,7 +27,7 @@ const mockFormGroup = {
   },
 };
 
-export class MockFormConfig {}
+export class MockDynamicFormsConfig {}
 
 export class MockFormBuilderService {
   createForm() {
@@ -48,12 +48,12 @@ describe('DynamicFormComponent', () => {
   let fixture: ComponentFixture<DynamicFormComponent>;
   let mockFormBuilderService: MockFormBuilderService;
   let mockFormDataService: MockFormDataService;
-  let mockFormConfig: MockFormConfig;
+  let mockDynamicFormsConfig: MockDynamicFormsConfig;
 
   beforeEach(async(() => {
     mockFormBuilderService = new MockFormBuilderService();
     mockFormDataService = new MockFormDataService();
-    mockFormConfig = new MockFormConfig();
+    mockDynamicFormsConfig = new MockDynamicFormsConfig();
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
       declarations: [DynamicFormComponent],
@@ -67,8 +67,8 @@ describe('DynamicFormComponent', () => {
           useValue: mockFormDataService,
         },
         {
-          provide: FormConfig,
-          useValue: mockFormConfig,
+          provide: DynamicFormsConfig,
+          useValue: mockDynamicFormsConfig,
         },
       ],
     }).compileComponents();

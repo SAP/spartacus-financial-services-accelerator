@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { FormConfig, CssClass } from '../../core/config/form-config';
+import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
 import { FieldConfig } from '../../core';
 import { TimeComponent } from './time.component';
 
@@ -21,42 +21,25 @@ const mockCssClass: CssClass = {
   form: '',
 };
 
-class MockOccFormService {
-  setInitialFormControlValues() {
-    return {};
-  }
+class MockOccFormService {}
 
-  getDropdownValues() {
-    return {};
-  }
-
-  getNodes() {
-    return {};
-  }
-}
 const mockField: FieldConfig = {
   type: 'time',
   name: 'testGroup',
   label: 'What time did it happen?',
-  group: {
-    fieldConfigs: [
-      {
-        type: 'time',
-      },
-    ],
-    groupCode: 'testGroup',
-  },
 };
 
 const mockFormGroup = new FormGroup({
   testGroup: new FormControl(),
 });
 
-const mockFormConfig: FormConfig = {
-  cssClass: mockCssClass,
-  components: {
-    time: {
-      component: TimeComponent,
+const mockDynamicFormsConfig: DynamicFormsConfig = {
+  dynamicForms: {
+    cssClass: mockCssClass,
+    components: {
+      time: {
+        component: TimeComponent,
+      },
     },
   },
 };
@@ -64,7 +47,6 @@ const mockFormConfig: FormConfig = {
 describe('TimeComponent', () => {
   let component: TimeComponent;
   let fixture: ComponentFixture<TimeComponent>;
-  let mockOccFormService: MockOccFormService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -72,10 +54,10 @@ describe('TimeComponent', () => {
       declarations: [TimeComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide: OccMockFormService, useValue: mockOccFormService },
+        { provide: OccMockFormService, useClass: MockOccFormService },
         {
-          provide: FormConfig,
-          useValue: mockFormConfig,
+          provide: DynamicFormsConfig,
+          useValue: mockDynamicFormsConfig,
         },
       ],
     }).compileComponents();
@@ -83,7 +65,6 @@ describe('TimeComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TimeComponent);
-    mockOccFormService = new MockOccFormService();
     component = fixture.componentInstance;
     component.group = mockFormGroup;
     component.config = mockField;
@@ -102,7 +83,7 @@ describe('TimeComponent', () => {
   });
 
   it('should render time component', () => {
-    const timeComponent = el.query(By.css('.dynamic-field')).nativeElement;
+    const timeComponent = el.query(By.css('input[type="time"]')).nativeElement;
     expect(timeComponent).toBeTruthy();
   });
 });
