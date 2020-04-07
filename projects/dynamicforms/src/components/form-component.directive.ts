@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from '../core/models/form-config.interface';
-import { CommonComponentConfig } from './common-component-config';
+import { AbstractFormComponent } from './abstract-form.component';
 import { FormConfig } from '../core/config';
 
 @Directive({
@@ -21,8 +21,8 @@ export class FormComponentDirective implements OnChanges, OnInit {
   config: FieldConfig;
   @Input()
   group: FormGroup;
-  component: ComponentRef<CommonComponentConfig>;
-  components: { [type: string]: Type<CommonComponentConfig> } = {};
+  component: ComponentRef<AbstractFormComponent>;
+  components: { [type: string]: Type<AbstractFormComponent> } = {};
 
   constructor(
     protected resolver: ComponentFactoryResolver,
@@ -49,7 +49,7 @@ export class FormComponentDirective implements OnChanges, OnInit {
       );
     }
     const component = this.resolver.resolveComponentFactory<
-      CommonComponentConfig
+      AbstractFormComponent
     >(this.components[this.config.type]);
     this.component = this.container.createComponent(component);
     this.component.instance.config = this.config;

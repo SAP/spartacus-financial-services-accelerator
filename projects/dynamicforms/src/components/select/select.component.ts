@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonComponentConfig } from '../common-component-config';
+import { AbstractFormComponent } from '../abstract-form.component';
 
 @Component({
   selector: 'cx-select',
   templateUrl: './select.component.html',
 })
-export class SelectComponent extends CommonComponentConfig implements OnInit {
+export class SelectComponent extends AbstractFormComponent implements OnInit {
   ngOnInit() {
     if (this.config.depends) {
       this.config.depends.forEach(dependField => {

@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { CommonComponentConfig } from '../common-component-config';
+import { AbstractFormComponent } from '../abstract-form.component';
 
 @Component({
   selector: 'cx-text-area',
   templateUrl: './text-area.component.html',
 })
-export class TextAreaComponent extends CommonComponentConfig {}
+export class TextAreaComponent extends AbstractFormComponent {}

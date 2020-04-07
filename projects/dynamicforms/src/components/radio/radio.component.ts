@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { CommonComponentConfig } from '../common-component-config';
+import { AbstractFormComponent } from '../abstract-form.component';
 
 @Component({
   selector: 'cx-radio',
   templateUrl: './radio.component.html',
 })
-export class RadioComponent extends CommonComponentConfig {}
+export class RadioComponent extends AbstractFormComponent {}

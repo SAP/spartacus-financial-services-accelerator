@@ -1,11 +1,11 @@
 import { Component, Input, HostBinding } from '@angular/core';
-import { CommonComponentConfig } from '../common-component-config';
+import { AbstractFormComponent } from '../abstract-form.component';
 
 @Component({
   selector: 'cx-error-notice',
   templateUrl: './error-notice.component.html',
 })
-export class ErrorNoticeComponent extends CommonComponentConfig {
+export class ErrorNoticeComponent extends AbstractFormComponent {
   @Input() warn: any;
   @Input() parentConfig: any;
   @HostBinding('class') class = '';

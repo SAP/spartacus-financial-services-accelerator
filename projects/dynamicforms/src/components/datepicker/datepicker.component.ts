@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { CommonComponentConfig } from '../common-component-config';
+import { AbstractFormComponent } from '../abstract-form.component';
 
 @Component({
   selector: 'cx-datepicker',
   templateUrl: './datepicker.component.html',
 })
-export class DatePickerComponent extends CommonComponentConfig {}
+export class DatePickerComponent extends AbstractFormComponent {}

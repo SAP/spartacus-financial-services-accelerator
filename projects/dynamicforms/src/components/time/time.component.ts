@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { CommonComponentConfig } from '../common-component-config';
+import { AbstractFormComponent } from '../abstract-form.component';
 
 @Component({
   selector: 'cx-time',
   templateUrl: './time.component.html',
 })
-export class TimeComponent extends CommonComponentConfig {}
+export class TimeComponent extends AbstractFormComponent {}
