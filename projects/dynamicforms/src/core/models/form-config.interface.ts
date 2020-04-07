@@ -11,7 +11,6 @@ export interface DynamicFormGroup {
 export interface FieldConfig {
   disabled?: boolean;
   label?: string;
-  group?: DynamicFormGroup;
   name?: string;
   options?: FieldOption[];
   depends?: string[];

@@ -18,14 +18,6 @@ const mockField: FieldConfig = {
   type: 'title',
   name: 'testGroup',
   label: 'Test Title',
-  group: {
-    fieldConfigs: [
-      {
-        type: 'title',
-      },
-    ],
-    groupCode: 'testGroup',
-  },
 };
 
 const mockFormGroup = new FormGroup({

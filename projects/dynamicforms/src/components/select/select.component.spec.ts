@@ -48,19 +48,6 @@ class MockOccFormService {
   }
 }
 
-const dependentTestField: FieldConfig = {
-  type: 'select',
-  name: 'dependentTestField',
-  label: 'Dependent Test Field',
-  group: {
-    fieldConfigs: [
-      {
-        type: 'select',
-      },
-    ],
-    groupCode: 'testGroup',
-  },
-};
 const mockField: FieldConfig = {
   type: 'select',
   name: 'testGroup',
