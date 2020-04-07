@@ -105,7 +105,7 @@
 <ng-container *ngIf="messagesObject$ | async as messagesObj">
   <div class="messages">
     <div
-      class="message accordion border-bottom-grey"
+      class="message accordion border-bottom border-color-3"
       *ngFor="let message of loadedMessages; let i = index"
       [ngClass]="{
         read: message.read,
@@ -152,7 +152,7 @@
           <div [innerHtml]="message.richContent"></div>
           <div
             *ngIf="message.documents?.length > 0"
-            class="border-top-grey pt-4"
+            class="border-top border-color-3 pt-4"
           >
             <span class="notification">
               {{ message.documents.length }}
@@ -187,7 +187,7 @@
 </ng-container>
 
 <ng-template #noMessages>
-  <p class="p-4 border-bottom-grey">
+  <p class="p-4 border-bottom border-color-3">
     {{ 'fscommon.noMessagesForGroup' | cxTranslate }}
   </p>
 </ng-template>

@@ -5,7 +5,7 @@
   <ng-container *ngIf="quotesLoaded$ | async; else loading">
     <div class="row" *ngIf="quotes.length > 0; else noQuotes">
       <div *ngFor="let quote of quotes" class="col-md-4">
-        <div class="info-card border-bottom-primary">
+        <div class="info-card border border-color-3">
           <div class="info-card-title border-bottom-primary">
             <span class="image-wrapper">
               <img
@@ -54,7 +54,7 @@
               >
             </div>
           </div>
-          <div class="info-card-button-wrapper border-top-primary">
+          <div class="info-card-button-wrapper border-top border-bottom border-color-primary">
             <button
               class="primary-button col-6 my-5"
               [disabled]="quote.isExpired"

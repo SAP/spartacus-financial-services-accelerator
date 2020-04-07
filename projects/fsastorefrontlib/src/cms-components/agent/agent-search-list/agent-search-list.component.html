@@ -20,7 +20,7 @@
         <div class="agent-list">
           <ng-container *ngFor="let agent of results.agents; let i = index">
             <div
-              class="row no-gutters agent-list-item py-3 px-4 border-bottom-grey"
+              class="row no-gutters agent-list-item py-3 px-4 border-bottom border-color-3"
               [class.active]="selectedIndex === i"
             >
               <div class="col-12 col-sm-3 position-relative text-center mb-3">
@@ -40,7 +40,7 @@
                 >
                   {{ agent.displayName }}
                 </h5>
-                <div class="border-bottom-grey my-3">
+                <div class="border-bottom border-color-3 my-3">
                   <ng-container *ngIf="agent.pointsOfService">
                     <ng-container *ngFor="let pos of agent.pointsOfService">
                       <div class="row no-gutters mb-2">

@@ -1,0 +1,12 @@
+@each $color, $value in $fs-colors {
+    .border-color-#{$color} {
+      border-color: $value !important;
+    }
+  }
+
+  .border-top-3 {
+      border-top:3px solid;
+  }
+  .border-bottom-3 {
+    border-bottom:3px solid;
+  }
