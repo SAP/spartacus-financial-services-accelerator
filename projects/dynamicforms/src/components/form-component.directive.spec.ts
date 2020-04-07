@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormComponentDirective } from './form-component.directive';
 import { DynamicFormsConfig } from '../core/config';
 import { ButtonComponent } from './button/button.component';
-import { FieldConfig } from 'dynamicforms/src/core';
+import { FieldConfig } from './../core/models/form-config.interface';
 
 @Component({
   template: `

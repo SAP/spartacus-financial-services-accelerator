@@ -54,17 +54,17 @@ export const defaultFormConfig: DynamicFormsConfig = {
     },
     validations: {
       compareToCurrentDate: {
-        function:  DefaultFormValidators.compareToCurrentDate
+        function: DefaultFormValidators.compareToCurrentDate,
       },
       dateOfBirth: {
-        function: DefaultFormValidators.dateOfBirthValidator
+        function: DefaultFormValidators.dateOfBirthValidator,
       },
       maxValue: {
-        function: DefaultFormValidators.max
+        function: DefaultFormValidators.max,
       },
       minValue: {
-        function: DefaultFormValidators.min
-      }
-    }
+        function: DefaultFormValidators.min,
+      },
+    },
   },
 };

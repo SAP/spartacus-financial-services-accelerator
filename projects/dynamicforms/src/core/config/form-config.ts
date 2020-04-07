@@ -32,8 +32,8 @@ export abstract class ValidationConfig {
 
 export abstract class DynamicFormsConfig {
   dynamicForms: {
-    cssClass: CssClass;
-    components: FormComponentConfig;
-    validations: ValidationConfig;
+    cssClass?: CssClass;
+    components?: FormComponentConfig;
+    validations?: ValidationConfig;
   };
 }
