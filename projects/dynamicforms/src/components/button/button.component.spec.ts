@@ -15,12 +15,12 @@ class MockOccFormService {}
 
 const mockField: FieldConfig = {
   type: 'button',
-  name: 'testButton',
+  name: 'testGroup',
   label: 'Test button',
 };
 
 const mockFormGroup = new FormGroup({
-  testButton: new FormControl(),
+  testGroup: new FormControl(),
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
