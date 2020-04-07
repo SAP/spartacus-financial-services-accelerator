@@ -2,7 +2,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { Observable, of } from 'rxjs';
 import { I18nTestingModule } from '@spartacus/core';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { FormConfig, CssClass } from '../../core/config/form-config';
@@ -11,8 +10,6 @@ import { FieldConfig } from '../../core';
 import { ErrorNoticeComponent } from './error-notice.component';
 import { ButtonComponent } from './../button/button.component';
 
-const mockData: Observable<any> = of({});
-
 const mockCssClass: CssClass = {
   form: '',
   validatorMessageWrapper: 'testErrorClass',
@@ -20,15 +17,15 @@ const mockCssClass: CssClass = {
 
 class MockOccFormService {
   setInitialFormControlValues() {
-    return mockData;
+    return {};
   }
 
   getDropdownValues() {
-    return mockData;
+    return {};
   }
 
   getNodes() {
-    return mockData;
+    return {};
   }
 }
 const mockField: FieldConfig = {

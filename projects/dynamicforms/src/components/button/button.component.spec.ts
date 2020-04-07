@@ -3,12 +3,9 @@ import { By } from '@angular/platform-browser';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ButtonComponent } from './button.component';
-import { Observable, of } from 'rxjs';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { FormConfig, CssClass } from '../../core/config/form-config';
 import { FieldConfig } from '../../core';
-
-const mockData: Observable<any> = of({});
 
 const mockCssClass: CssClass = {
   form: '',
@@ -16,15 +13,15 @@ const mockCssClass: CssClass = {
 
 class MockOccFormService {
   setInitialFormControlValues() {
-    return mockData;
+    return {};
   }
 
   getDropdownValues() {
-    return mockData;
+    return {};
   }
 
   getNodes() {
-    return mockData;
+    return {};
   }
 }
 
