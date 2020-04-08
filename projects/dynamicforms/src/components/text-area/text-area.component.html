@@ -4,10 +4,7 @@
   [formGroup]="group"
 >
   <div [ngClass]="cssClass.inputWrapper">
-    <cx-label
-      [config]="config"
-      [cssLabelClass]="cssClass.label"
-    ></cx-label>
+    <cx-label [config]="config" [cssLabelClass]="cssClass.label"></cx-label>
     <textarea
       [ngClass]="cssClass.input"
       [attr.placeholder]="config.placeholder"

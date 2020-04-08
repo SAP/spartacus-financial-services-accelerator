@@ -4,10 +4,7 @@
   [formGroup]="group"
 >
   <div [ngClass]="formConfig.dynamicForms.cssClass.inputWrapper">
-    <cx-label
-      [config]="config"
-      [cssLabelClass]="cssClass.label"
-    ></cx-label>
+    <cx-label [config]="config" [cssLabelClass]="cssClass.label"></cx-label>
     <input
       [ngClass]="cssClass.input"
       type="text"

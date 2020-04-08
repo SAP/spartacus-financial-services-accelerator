@@ -4,10 +4,8 @@
   [hidden]="group.controls[config.name].disabled"
 >
   <div [ngClass]="cssClass.inputWrapper">
-    <cx-label
-      [config]="config"
-      [cssLabelClass]="cssClass.label"
-    ></cx-label>    <input
+    <cx-label [config]="config" [cssLabelClass]="cssClass.label"></cx-label>
+    <input
       [ngClass]="cssClass.input"
       type="time"
       [formControlName]="config.name"

@@ -7,7 +7,8 @@
     <cx-label
       [config]="config"
       [cssLabelClass]="cssClass.radioLabel"
-    ></cx-label>    <div *ngFor="let option of config.options">
+    ></cx-label>
+    <div *ngFor="let option of config.options">
       <input
         [ngClass]="cssClass.radioInput"
         type="radio"

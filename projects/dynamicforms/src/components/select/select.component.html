@@ -4,10 +4,7 @@
   [hidden]="group.controls[config.name].disabled"
 >
   <div [ngClass]="cssClass.inputWrapper">
-    <cx-label
-      [config]="config"
-      [cssLabelClass]="cssClass.labe"
-    ></cx-label>
+    <cx-label [config]="config" [cssLabelClass]="cssClass.labe"></cx-label>
     <select
       [ngClass]="cssClass.input"
       [attr.name]="config.name"
