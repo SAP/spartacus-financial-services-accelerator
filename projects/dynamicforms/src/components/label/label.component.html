@@ -1,0 +1,6 @@
+<label [ngClass]="cssLabelClass">
+  <ng-container *ngIf="!config.required">
+    {{ 'forms.optional' | cxTranslate }}
+  </ng-container>
+  {{ config.label }}
+</label>

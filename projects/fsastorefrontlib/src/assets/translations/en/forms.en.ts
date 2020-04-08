@@ -51,6 +51,7 @@ export const forms = {
       call: 'Call',
     },
     subject: 'Subject',
+    optional: '(Optional)',
     enterMessage: 'Your message',
     send: 'Send',
     titles: {

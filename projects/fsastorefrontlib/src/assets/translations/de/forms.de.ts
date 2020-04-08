@@ -34,6 +34,7 @@ export const forms = {
       call: '[DE]Call',
     },
     subject: '[DE] Subject',
+    optional: '(Optional)',
     send: '[DE] Send',
     titles: {
       trip_details_form: 'Reiseinformation',

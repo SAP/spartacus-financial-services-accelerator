@@ -4,9 +4,10 @@
   [hidden]="group.controls[config.name].disabled"
 >
   <div [ngClass]="formConfig.dynamicForms.cssClass.radioInputWrapper">
-    <label [ngClass]="formConfig.dynamicForms.cssClass.radioLabel">{{
-      config.label
-    }}</label>
+    <cx-label
+      [config]="config"
+      [cssLabelClass]="formConfig.dynamicForms.cssClass.radioLabel"
+    ></cx-label>
     <div *ngFor="let option of config.options">
       <input
         [ngClass]="formConfig.dynamicForms.cssClass.radioInput"

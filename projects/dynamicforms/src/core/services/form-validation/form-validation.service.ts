@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ValidatorFn } from '@angular/forms';
+import { ValidatorFn, Validators } from '@angular/forms';
 import { DynamicFormsConfig } from '../../config/form-config';
 import { FieldConfig } from '../../models/form-config.interface';
 
@@ -27,6 +27,9 @@ export class FormValidationService {
           }
         }
       });
+    }
+    if (fieldConfig.required) {
+      validators.push(Validators.required);
     }
     return validators;
   }
