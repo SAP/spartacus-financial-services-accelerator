@@ -5,7 +5,7 @@ import { DynamicFormsConfig } from '../core/config/form-config';
 import { OccMockFormService } from '../occ/services/occ-mock-form.service';
 
 @Component({ template: '' })
-export abstract class AbstractFormComponent {
+export class AbstractFormComponent {
   constructor(
     protected formService: OccMockFormService,
     public formConfig: DynamicFormsConfig
