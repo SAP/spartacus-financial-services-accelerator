@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ValidatorFn } from '@angular/forms';
-import { DynamicFormsConfig } from '../../config';
+import { DynamicFormsConfig } from '../../config/form-config';
 import { FieldConfig } from '../../models/form-config.interface';
 
 @Injectable()
