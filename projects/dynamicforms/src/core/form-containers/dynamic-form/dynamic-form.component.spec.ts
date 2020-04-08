@@ -105,13 +105,22 @@ describe('DynamicFormComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create and handle submit', () => {
+    spyOn(component.submit, 'emit').and.callThrough();
+    component.config = config;
+    component.formData = of(formData);
+    fixture.detectChanges();
+    component.ngOnInit();
+    component.handleSubmit(new Event('testEvent'));
+    expect(component.submit.emit).toHaveBeenCalled();
+  });
+
+  it('should submit in case form content is not defined', () => {
+    spyOn(component.submit, 'emit').and.callThrough();
+    formData.content = undefined;
     component.formData = of(formData);
     component.config = config;
     component.ngOnInit();
-    console.log(mockFormGroup);
-    mockFormGroup.get('testGroupCode').value;
-    component.form = mockFormGroup;
-    expect(component).toBeTruthy();
+    expect(component.submit.emit).toHaveBeenCalled();
   });
 });
