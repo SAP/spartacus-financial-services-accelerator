@@ -19,7 +19,7 @@ import {
 } from '../../models/form-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 import { FormDataService } from '../../services/data/form-data.service';
-import { DynamicFormsConfig } from '../../config';
+import { DynamicFormsConfig } from '../../config/form-config';
 
 @Component({
   exportAs: 'cx-dynamicForm',
