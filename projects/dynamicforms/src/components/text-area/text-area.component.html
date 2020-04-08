@@ -3,13 +3,13 @@
   [hidden]="group.controls[config.name].disabled"
   [formGroup]="group"
 >
-  <div [ngClass]="formConfig.dynamicForms.cssClass.inputWrapper">
+  <div [ngClass]="cssClass.inputWrapper">
     <cx-label
       [config]="config"
-      [cssLabelClass]="formConfig.dynamicForms.cssClass.label"
+      [cssLabelClass]="cssClass.label"
     ></cx-label>
     <textarea
-      [ngClass]="formConfig.dynamicForms.cssClass.input"
+      [ngClass]="cssClass.input"
       [attr.placeholder]="config.placeholder"
       [formControlName]="config.name"
       rows="10"

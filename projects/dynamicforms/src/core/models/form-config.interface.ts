@@ -12,6 +12,7 @@ export interface FieldConfig {
   name?: string;
   required?: boolean;
   disabled?: boolean;
+  group?: string;
   label?: string;
   options?: FieldOption[];
   depends?: string[];

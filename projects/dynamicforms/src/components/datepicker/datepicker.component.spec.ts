@@ -1,10 +1,10 @@
 import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { FieldConfig } from '../../core';
-import { CssClass, DynamicFormsConfig } from '../../core/config/form-config';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
+import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
+import { FieldConfig } from '../../core/models/form-config.interface';
 import { DatePickerComponent } from './datepicker.component';
 
 @Component({
@@ -17,6 +17,7 @@ class MockErrorNoticeComponent {
   @Input() parentConfig;
 }
 
+const mockCssClass: CssClass = {};
 @Component({
   // tslint:disable
   selector: 'cx-label',
@@ -35,12 +36,12 @@ class MockOccFormService {}
 
 const mockField: FieldConfig = {
   type: 'datepicker',
-  name: 'testGroup',
+  name: 'testDatePicker',
   label: 'What time did it happen?',
 };
 
 const mockFormGroup = new FormGroup({
-  testGroup: new FormControl(),
+  testDatePicker: new FormControl(),
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {

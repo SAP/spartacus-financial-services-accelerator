@@ -1,10 +1,10 @@
 import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { FieldConfig } from '../../core';
-import { CssClass, DynamicFormsConfig } from '../../core/config/form-config';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
+import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
+import { FieldConfig } from '../../core/models/form-config.interface';
 import { RadioComponent } from './radio.component';
 
 @Component({
@@ -28,7 +28,6 @@ class MockLabelComponent {
 }
 
 const mockCssClass: CssClass = {
-  form: '',
   radioLabel: 'testRadioInputLabel',
 };
 
@@ -36,12 +35,12 @@ class MockOccFormService {}
 
 const mockField: FieldConfig = {
   type: 'radio',
-  name: 'testGroup',
+  name: 'testRadio',
   label: 'What time did it happen?',
 };
 
 const mockFormGroup = new FormGroup({
-  testGroup: new FormControl(),
+  testRadio: new FormControl(),
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
