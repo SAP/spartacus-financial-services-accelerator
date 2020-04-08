@@ -3,12 +3,10 @@
   [hidden]="group.controls[config.name].disabled"
   [formGroup]="group"
 >
-  <div [ngClass]="formConfig.dynamicForms.cssClass.inputWrapper">
-    <label [ngClass]="formConfig.dynamicForms.cssClass.label">{{
-      config.label
-    }}</label>
+  <div [ngClass]="cssClass.inputWrapper">
+    <label [ngClass]="cssClass.label">{{ config.label }}</label>
     <textarea
-      [ngClass]="formConfig.dynamicForms.cssClass.input"
+      [ngClass]="cssClass.input"
       [attr.placeholder]="config.placeholder"
       [formControlName]="config.name"
       rows="10"

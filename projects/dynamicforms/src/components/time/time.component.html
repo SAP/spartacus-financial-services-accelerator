@@ -3,12 +3,10 @@
   [formGroup]="group"
   [hidden]="group.controls[config.name].disabled"
 >
-  <div [ngClass]="formConfig.dynamicForms.cssClass.inputWrapper">
-    <label [ngClass]="formConfig.dynamicForms.cssClass.label">{{
-      config.label
-    }}</label>
+  <div [ngClass]="cssClass.inputWrapper">
+    <label [ngClass]="cssClass.label">{{ config.label }}</label>
     <input
-      [ngClass]="formConfig.dynamicForms.cssClass.input"
+      [ngClass]="cssClass.input"
       type="time"
       [formControlName]="config.name"
       [attr.name]="config.name"

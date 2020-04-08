@@ -4,8 +4,7 @@ import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
-import { FieldConfig } from '../../core';
-
+import { FieldConfig } from '../../core/models/form-config.interface';
 import { RadioComponent } from './radio.component';
 
 @Component({
