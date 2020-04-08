@@ -6,7 +6,7 @@
     <div class="row" *ngIf="(policies | json) != '{}'; else noPolicies">
       <div *ngFor="let policy of policies.insurancePolicies" class="col-md-4">
         <div class="info-card border border-color-3">
-          <div class="info-card-title border border-color-3">
+          <div class="info-card-title border-bottom-3 border-color-secondary">
             <span class="image-wrapper">
               <img
                 class="image-item"
