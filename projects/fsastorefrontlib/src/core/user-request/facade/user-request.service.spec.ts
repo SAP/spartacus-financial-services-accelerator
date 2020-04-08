@@ -12,7 +12,6 @@ import { FSUserRequestState } from '../store/user-request-state';
 
 const userId = OCC_USER_ID_CURRENT;
 const formId = 'formId';
-const status = 'VISITED';
 const requestId = '001';
 
 class MockFormDataService {
