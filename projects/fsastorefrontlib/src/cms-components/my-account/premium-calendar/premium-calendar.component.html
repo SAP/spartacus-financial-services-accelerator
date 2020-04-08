@@ -17,7 +17,7 @@
         </div>
         <div *ngFor="let policy of policies.insurancePolicies">
           <div
-            class="premium-data-row row"
+            class="premium-data-row row border boder-color-3"
             (click)="opened = !opened"
             [ngClass]="{
               clickable: policy.billingData?.length > 1,

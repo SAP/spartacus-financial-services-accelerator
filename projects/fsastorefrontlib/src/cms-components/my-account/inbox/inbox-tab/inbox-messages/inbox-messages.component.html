@@ -148,7 +148,7 @@
         class="accordion-item-wrapper"
         [ngClass]="{ active: message.opened }"
       >
-        <div class="box-shadow">
+        <div class="box-shadow border border-color-3">
           <div [innerHtml]="message.richContent"></div>
           <div
             *ngIf="message.documents?.length > 0"
