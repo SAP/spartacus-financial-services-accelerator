@@ -10,8 +10,8 @@ export abstract class AbstractFormComponent {
     protected formService: OccMockFormService,
     public formConfig: DynamicFormsConfig
   ) {}
-  @HostBinding('class') class = this.formConfig.dynamicForms.cssClass
-    .controlElement;
+  cssClass = this.formConfig.dynamicForms.cssClass;
+  @HostBinding('class') class = this.cssClass.controlElement;
   config: FieldConfig;
   group: FormGroup;
 }

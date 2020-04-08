@@ -10,6 +10,7 @@ export interface DynamicFormGroup {
 }
 export interface FieldConfig {
   disabled?: boolean;
+  group?: string;
   label?: string;
   name?: string;
   options?: FieldOption[];

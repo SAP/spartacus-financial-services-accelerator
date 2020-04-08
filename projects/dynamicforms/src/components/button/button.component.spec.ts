@@ -4,7 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
-import { FieldConfig } from '../../core';
+import { FieldConfig } from '../../core/models/form-config.interface';
 import { ButtonComponent } from './button.component';
 
 const mockCssClass: CssClass = {
