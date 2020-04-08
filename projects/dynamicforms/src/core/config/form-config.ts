@@ -22,18 +22,18 @@ export interface CssClass {
   submitButton?: string;
 }
 
-export interface ValidationMapping {
-  function: any;
+export interface ValidatorMapping {
+  validator: any;
 }
 
-export abstract class ValidationConfig {
-  [_: string]: ValidationMapping;
+export abstract class ValidatorConfig {
+  [_: string]: ValidatorMapping;
 }
 
 export abstract class DynamicFormsConfig {
   dynamicForms: {
     cssClass?: CssClass;
     components?: FormComponentConfig;
-    validations?: ValidationConfig;
+    validators?: ValidatorConfig;
   };
 }

@@ -7,23 +7,23 @@ import { FieldConfig } from '../../models/form-config.interface';
 export class FormValidationService {
   constructor(protected formConfig: DynamicFormsConfig) {}
 
+  configValidators = this.formConfig.dynamicForms.validators;
+
   getValidatorsForField(fieldConfig: FieldConfig): ValidatorFn[] {
     const validators: ValidatorFn[] = [];
     if (fieldConfig.validations) {
-      fieldConfig.validations.forEach(validation => {
-        const configValidator = this.formConfig.dynamicForms.validations[
-          validation.name
-        ];
-        if (configValidator && configValidator.function) {
-          if (validation.arguments) {
+      fieldConfig.validations.forEach(fieldValidation => {
+        const validatorMapping = this.configValidators[fieldValidation.name];
+        if (validatorMapping && validatorMapping.validator) {
+          if (fieldValidation.arguments) {
             validators.push(
-              configValidator.function.apply(
+              validatorMapping.validator.apply(
                 this,
-                validation.arguments.map(arg => arg.value)
+                fieldValidation.arguments.map(arg => arg.value)
               )
             );
           } else {
-            validators.push(configValidator.function);
+            validators.push(validatorMapping.validator);
           }
         }
       });
