@@ -1,10 +1,10 @@
-import { Component, Input, DebugElement } from '@angular/core';
+import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
 import { FieldConfig } from '../../core';
+import { CssClass, DynamicFormsConfig } from '../../core/config/form-config';
+import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { TextAreaComponent } from './text-area.component';
 
 @Component({
@@ -15,6 +15,16 @@ import { TextAreaComponent } from './text-area.component';
 class MockErrorNoticeComponent {
   @Input() warn;
   @Input() parentConfig;
+}
+
+@Component({
+  // tslint:disable
+  selector: 'cx-label',
+  template: '',
+})
+class MockLabelComponent {
+  @Input() config;
+  @Input() cssLabelClass;
 }
 
 const mockCssClass: CssClass = {
@@ -51,7 +61,11 @@ describe('TextAreaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TextAreaComponent, MockErrorNoticeComponent],
+      declarations: [
+        TextAreaComponent,
+        MockErrorNoticeComponent,
+        MockLabelComponent,
+      ],
       imports: [ReactiveFormsModule],
       providers: [
         { provide: OccMockFormService, useClass: MockOccFormService },
