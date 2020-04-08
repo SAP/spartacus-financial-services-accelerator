@@ -12,11 +12,13 @@ import { TextAreaComponent } from './text-area/text-area.component';
 import { TimeComponent } from './time/time.component';
 import { TitleComponent } from './title/title.component';
 import { FormComponentDirective } from './form-component.directive';
+import { AbstractFormComponent } from './abstract-form.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, I18nModule],
   declarations: [
     FormComponentDirective,
+    AbstractFormComponent,
     ButtonComponent,
     DatePickerComponent,
     ErrorNoticeComponent,
@@ -28,6 +30,7 @@ import { FormComponentDirective } from './form-component.directive';
     TitleComponent,
   ],
   entryComponents: [
+    AbstractFormComponent,
     ButtonComponent,
     DatePickerComponent,
     InputComponent,
@@ -39,6 +42,7 @@ import { FormComponentDirective } from './form-component.directive';
   ],
   exports: [
     FormComponentDirective,
+    AbstractFormComponent,
     ButtonComponent,
     DatePickerComponent,
     ErrorNoticeComponent,
