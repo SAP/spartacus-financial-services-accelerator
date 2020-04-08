@@ -3,7 +3,7 @@
 @import '~bootstrap/scss/mixins/breakpoints';
 
 ul[role='tablist'].nav-tabs {
-  border-bottom: $border-grey;
+  border-bottom: 1px solid var(--cx-color-3);
   @include media-breakpoint-down(xs) {
     display: block;
   }

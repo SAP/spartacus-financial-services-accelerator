@@ -17,7 +17,7 @@
         </div>
         <div *ngFor="let policy of policies.insurancePolicies">
           <div
-            class="premium-data-row row"
+            class="premium-data-row row border boder-color-3"
             (click)="opened = !opened"
             [ngClass]="{
               clickable: policy.billingData?.length > 1,
@@ -133,7 +133,7 @@
                   </div>
                 </div>
                 <div class="cards__details-wrapper">
-                  <div class="cards__data border-bottom-grey">
+                  <div class="cards__data border-bottom border-color-3">
                     <span class="title">
                       {{ 'fscommon.paymentFrequency' | cxTranslate }}
                     </span>
@@ -142,7 +142,7 @@
                     </span>
                   </div>
                   <div
-                    class="container cards__data border-bottom-grey"
+                    class="container cards__data border-bottom border-color-3"
                     (click)="opened = !opened"
                     [ngClass]="{
                       clickable: policy.billingData.length > 1,
@@ -210,7 +210,9 @@
                         <ng-container
                           *ngFor="let dueDate of policy.billingData | slice: 1"
                         >
-                          <li class="row list-item border-bottom-grey">
+                          <li
+                            class="row list-item border-bottom border-color-3"
+                          >
                             <div
                               class="col-6 text-left d-flex justify-content-around"
                             >
