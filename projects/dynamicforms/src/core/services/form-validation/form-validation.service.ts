@@ -11,7 +11,7 @@ export class FormValidationService {
 
   getValidatorsForField(fieldConfig: FieldConfig): ValidatorFn[] {
     const validators: ValidatorFn[] = [];
-    if (fieldConfig.validations) {
+    if (fieldConfig && fieldConfig.validations) {
       fieldConfig.validations.forEach(fieldValidation => {
         const validatorMapping = this.configValidators[fieldValidation.name];
         if (validatorMapping && validatorMapping.validator) {
