@@ -1,11 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DynamicFormComponent } from './dynamic-form.component';
 import { Directive, Input } from '@angular/core';
-import { FieldConfig } from '../../models/form-config.interface';
-import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FieldConfig,
+  FormDefinition,
+} from '../../models/form-config.interface';
+import { FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of } from 'rxjs';
 import { FormDataService } from '../../services/data/form-data.service';
 import { YFormData } from '../../models';
 import { DynamicFormsConfig } from '../../config';
@@ -13,6 +15,7 @@ import { DynamicFormsConfig } from '../../config';
 @Directive({
   // tslint:disable
   selector: '[cxFormComponent]',
+  inputs: ['config', 'group'],
 })
 export class MockDynamicFieldDirective {
   @Input()
@@ -21,13 +24,16 @@ export class MockDynamicFieldDirective {
   group: FormGroup;
 }
 
-const mockFormGroup = {
-  config: {
-    formGroups: [],
+const mockDynamicFormsConfig: DynamicFormsConfig = {
+  dynamicForms: {
+    cssClass: {},
+    components: {},
   },
 };
 
-export class MockDynamicFormsConfig {}
+const mockFormGroup = new FormGroup({
+  testGroupCode: new FormControl('testValue'),
+});
 
 export class MockFormBuilderService {
   createForm() {
@@ -35,7 +41,28 @@ export class MockFormBuilderService {
   }
 }
 
-const formData: YFormData = {};
+const formData: YFormData = {
+  id: 'test-formData',
+  type: 'DATA',
+  content:
+    '{"testContent":{"tripDestination":"Europe","tripStartDate":"2022-02-02"}}',
+};
+
+const mockField: FieldConfig = {
+  type: 'datepicker',
+  name: 'testDatePicker',
+  label: 'What time did it happen?',
+};
+
+const config: FormDefinition = {
+  formGroups: [
+    {
+      groupCode: 'testGroupCode',
+      fieldConfigs: [mockField],
+    },
+  ],
+  formId: 'testFormID',
+};
 
 export class MockFormDataService {
   getSubmittedForm() {
@@ -48,15 +75,13 @@ describe('DynamicFormComponent', () => {
   let fixture: ComponentFixture<DynamicFormComponent>;
   let mockFormBuilderService: MockFormBuilderService;
   let mockFormDataService: MockFormDataService;
-  let mockDynamicFormsConfig: MockDynamicFormsConfig;
 
   beforeEach(async(() => {
     mockFormBuilderService = new MockFormBuilderService();
     mockFormDataService = new MockFormDataService();
-    mockDynamicFormsConfig = new MockDynamicFormsConfig();
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
-      declarations: [DynamicFormComponent],
+      declarations: [DynamicFormComponent, MockDynamicFieldDirective],
       providers: [
         {
           provide: FormBuilderService,
@@ -81,6 +106,12 @@ describe('DynamicFormComponent', () => {
   });
 
   it('should create', () => {
+    component.formData = of(formData);
+    component.config = config;
+    component.ngOnInit();
+    console.log(mockFormGroup);
+    mockFormGroup.get('testGroupCode').value;
+    component.form = mockFormGroup;
     expect(component).toBeTruthy();
   });
 });

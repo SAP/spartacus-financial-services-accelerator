@@ -18,9 +18,7 @@ class MockErrorNoticeComponent {
   @Input() parentConfig;
 }
 
-const mockCssClass: CssClass = {
-  form: '',
-};
+const mockCssClass: CssClass = {};
 
 const dependentOptions = [
   {
@@ -49,15 +47,15 @@ class MockOccFormService {
 
 const mockField: FieldConfig = {
   type: 'select',
-  name: 'testGroup',
+  name: 'testSelect',
   label: 'What time did it happen?',
   depends: ['dependentTestField'],
-  jsonField: 'testGroup.dependentTestField',
+  jsonField: 'testSelect.dependentTestField',
 };
 
 const mockFormGroup = new FormGroup({
   dependentTestField: new FormControl(),
-  testGroup: new FormControl(),
+  testSelect: new FormControl(),
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {

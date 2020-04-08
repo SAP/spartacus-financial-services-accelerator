@@ -17,20 +17,18 @@ class MockErrorNoticeComponent {
   @Input() parentConfig;
 }
 
-const mockCssClass: CssClass = {
-  form: '',
-};
+const mockCssClass: CssClass = {};
 
 class MockOccFormService {}
 
 const mockField: FieldConfig = {
   type: 'input',
-  name: 'testGroup',
+  name: 'testInput',
   label: 'Test Input Label',
 };
 
 const mockFormGroup = new FormGroup({
-  testGroup: new FormControl(),
+  testInput: new FormControl(),
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
