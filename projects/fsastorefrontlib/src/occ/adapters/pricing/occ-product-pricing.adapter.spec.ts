@@ -69,7 +69,7 @@ describe('OccProductPricingAdapter', () => {
       adapter.getCalculatedProductData(productCode, pricingData).subscribe();
       httpMock.expectOne(req => {
         return (
-          req.url === pricingEndpoint + `/${productCode}/prices` &&
+          req.url === pricingEndpoint + `/${productCode}/calculation` &&
           req.method === 'POST'
         );
       }, `POST method and url`);
