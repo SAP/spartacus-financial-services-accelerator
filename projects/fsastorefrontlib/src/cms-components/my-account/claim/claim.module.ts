@@ -91,7 +91,12 @@ const routes: Routes = [
     ClaimPoliciesComponent,
     CreateClaimComponent,
   ],
-  exports: [ClaimsComponent, ClaimPoliciesComponent, ParseDatePipe],
+  exports: [
+    ClaimsComponent,
+    ClaimPoliciesComponent,
+    DeleteClaimDialogComponent,
+    ParseDatePipe,
+  ],
   providers: [
     ClaimService,
     ClaimDataService,

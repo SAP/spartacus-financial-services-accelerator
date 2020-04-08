@@ -5,7 +5,6 @@ import {
   OnInit,
 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OccConfig, RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
@@ -14,6 +13,7 @@ import { genericIcons } from '../../../../assets/icons/generic-icons';
 import { ClaimService } from '../../../../core/my-account/facade';
 import { StateWithMyAccount } from '../../../../core/my-account/store/my-account-state';
 import { DeleteClaimDialogComponent } from '../delete-claim-dialog/delete-claim-dialog.component';
+import { ModalService } from '@spartacus/storefront';
 
 @Component({
   selector: 'cx-fs-claims',
@@ -22,7 +22,7 @@ import { DeleteClaimDialogComponent } from '../delete-claim-dialog/delete-claim-
 })
 export class ClaimsComponent implements OnInit, OnDestroy {
   constructor(
-    protected modalService: NgbModal,
+    protected modalService: ModalService,
     protected config: OccConfig,
     protected domSanitizer: DomSanitizer,
     protected claimService: ClaimService,
@@ -43,8 +43,10 @@ export class ClaimsComponent implements OnInit, OnDestroy {
       this.claimService
         .shouldReload()
         .pipe(
-          map(_ => {
-            this.claimService.loadClaims();
+          map(reload => {
+            if (reload) {
+              this.claimService.loadClaims();
+            }
           })
         )
         .subscribe()
