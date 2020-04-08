@@ -1,27 +1,27 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { FormComponentDirective } from './form-component.directive';
 import { DynamicFormsConfig } from '../core/config';
-import { ButtonComponent } from './button/button.component';
 import { FieldConfig } from './../core/models/form-config.interface';
 
 @Component({
   template: `
     <div>
-      <ng-container cxFormComponent [config]="filed" [group]="group">
+      <ng-container cxFormComponent [config]="field" [group]="group">
       </ng-container>
     </div>
   `,
 })
 class TestDynamicFormComponent {
-  filed: FieldConfig = {
+  field: FieldConfig = {
     name: 'test',
     type: 'button',
   };
+  component: any;
 }
 
 @Component({
-  template: '<ng-container [cxFormComponent]="component">' + '</ng-container>',
+  template: '',
 })
 class MockedButtonComponent {}
 
@@ -29,7 +29,7 @@ const MockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {
     components: {
       button: {
-        component: ButtonComponent,
+        component: MockedButtonComponent,
       },
     },
     cssClass: {
@@ -38,23 +38,39 @@ const MockDynamicFormsConfig: DynamicFormsConfig = {
   },
 };
 
-describe('Directive: DynamicField', () => {
+@NgModule({
+  declarations: [MockedButtonComponent],
+  entryComponents: [MockedButtonComponent],
+  exports: [MockedButtonComponent],
+})
+class TestModule {}
+
+describe('FormCmponentDirective', () => {
   let fixture: ComponentFixture<TestDynamicFormComponent>;
+  let testDynamicFormComponent: TestDynamicFormComponent;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
+      imports: [TestModule],
       declarations: [TestDynamicFormComponent, FormComponentDirective],
       providers: [
         { provide: DynamicFormsConfig, useValue: MockDynamicFormsConfig },
-        // {provide: ViewContainerRef, useValue: MockViewContainerRef}
       ],
     }).compileComponents();
-
     fixture = TestBed.createComponent(TestDynamicFormComponent);
+    testDynamicFormComponent = fixture.componentInstance;
   });
 
   it('should create an instance', () => {
     fixture.detectChanges();
-    // expect(directive).toBeTruthy();
+    expect(testDynamicFormComponent).toBeTruthy();
+  });
+
+  it('should not render component', () => {
+    testDynamicFormComponent.field = {
+      name: 'test',
+      type: 'unknown',
+    };
+    expect(() => fixture.detectChanges()).toThrowError();
   });
 });

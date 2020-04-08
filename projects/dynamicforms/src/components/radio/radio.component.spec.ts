@@ -18,7 +18,6 @@ class MockErrorNoticeComponent {
 }
 
 const mockCssClass: CssClass = {
-  form: '',
   radioLabel: 'testRadioInputLabel',
 };
 
@@ -26,12 +25,12 @@ class MockOccFormService {}
 
 const mockField: FieldConfig = {
   type: 'radio',
-  name: 'testGroup',
+  name: 'testRadio',
   label: 'What time did it happen?',
 };
 
 const mockFormGroup = new FormGroup({
-  testGroup: new FormControl(),
+  testRadio: new FormControl(),
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {

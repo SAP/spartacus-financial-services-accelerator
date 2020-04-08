@@ -7,9 +7,7 @@ import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { ButtonComponent } from './button.component';
 
-const mockCssClass: CssClass = {
-  form: '',
-};
+const mockCssClass: CssClass = {};
 
 class MockOccFormService {}
 

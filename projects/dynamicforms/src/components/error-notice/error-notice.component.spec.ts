@@ -5,22 +5,13 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { I18nTestingModule } from '@spartacus/core';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
-import { FieldConfig } from '../../core/models/form-config.interface';
 import { ErrorNoticeComponent } from './error-notice.component';
-import { ButtonComponent } from './../button/button.component';
 
 const mockCssClass: CssClass = {
-  form: '',
   validatorMessageWrapper: 'testErrorClass',
 };
 
 class MockOccFormService {}
-
-const mockField: FieldConfig = {
-  type: 'button',
-  name: 'testGroup',
-  label: 'Test button',
-};
 
 const mockFormGroup = new FormGroup({
   testGroup: new FormControl(),
@@ -29,11 +20,7 @@ const mockFormGroup = new FormGroup({
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {
     cssClass: mockCssClass,
-    components: {
-      button: {
-        component: ButtonComponent,
-      },
-    },
+    components: {},
   },
 };
 
@@ -60,7 +47,6 @@ describe('ErrorNoticeComponent', () => {
     fixture = TestBed.createComponent(ErrorNoticeComponent);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
-    component.config = mockField;
     el = fixture.debugElement;
     fixture.detectChanges();
   });
