@@ -1,6 +1,5 @@
+import { DefaultFormValidators, FormDefinition } from '@fsa/dynamicforms';
 import { FormHelpers } from '../../../shared/util/helpers/form-helpers';
-import { DefaultFormValidators } from '@fsa/dynamicforms';
-import { FormDefinition } from '@fsa/dynamicforms';
 
 export class FormSampleConfigurations {
   static sampleConfigurations: FormDefinition[] = [
@@ -24,6 +23,7 @@ export class FormSampleConfigurations {
                 { name: 'buildingsOnly', label: 'Buildings Only' },
                 { name: 'contentsOnly', label: 'Contents Only' },
               ],
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 FormHelpers.shouldEnableTargetGroup({
@@ -37,6 +37,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: 'Start Date',
               name: 'propertyDetailsStartDate',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeGreater'),
@@ -68,6 +69,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Property Value',
               name: 'propertyValue',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(10000),
@@ -80,6 +82,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Rebuild Value of Property',
               name: 'propertyRebuildCost',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.pattern('^[0-9]*$'),
@@ -94,6 +97,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Approximate Year Property Built',
               name: 'ccaBuiltYear',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(1000),
@@ -106,6 +110,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Number of Bedrooms',
               name: 'numberOfBedrooms',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(1),
@@ -118,6 +123,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Number of Bathrooms',
               name: 'numberOfBathrooms',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(1),
@@ -134,6 +140,7 @@ export class FormSampleConfigurations {
                 { name: 'yes', label: 'Yes' },
                 { name: 'no', label: 'No' },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
@@ -141,6 +148,7 @@ export class FormSampleConfigurations {
               label:
                 'How many days in a row is the property likely to be unoccupied?',
               name: 'numberOfDaysUnoccupied',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(0),
@@ -157,6 +165,7 @@ export class FormSampleConfigurations {
                 { name: 'yes', label: 'Yes' },
                 { name: 'no', label: 'No' },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
@@ -167,6 +176,7 @@ export class FormSampleConfigurations {
                 { name: 'wood', label: 'Wood' },
                 { name: 'brick', label: 'Brick' },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
@@ -180,6 +190,7 @@ export class FormSampleConfigurations {
                   label: 'Multi-Point Locking System',
                 },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
             },
           ],
@@ -206,6 +217,7 @@ export class FormSampleConfigurations {
                 { name: '4', label: '4' },
                 { name: '5', label: '5+' },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
@@ -218,6 +230,7 @@ export class FormSampleConfigurations {
                 { name: 'yes', label: 'Yes' },
                 { name: 'no', label: 'No' },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
@@ -241,6 +254,7 @@ export class FormSampleConfigurations {
                 { name: '0', label: 'Yes' },
                 { name: '1', label: 'No' },
               ],
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 FormHelpers.shouldEnableDependentField([
@@ -253,6 +267,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Please enter the desired amount from 10,000€ upwards.',
               name: 'propertyMultipleOf10000ContentCover',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(10000),
@@ -267,6 +282,7 @@ export class FormSampleConfigurations {
               label:
                 'How many consecutive years have you held contents insurance?',
               name: 'numberOfYearsHoldingInsurance',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(0),
@@ -285,6 +301,7 @@ export class FormSampleConfigurations {
                 { name: 'yes', label: 'Yes' },
                 { name: 'no', label: 'No' },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
@@ -309,6 +326,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Address Line 1',
               name: 'property-address-line-1',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
@@ -320,12 +338,14 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'City',
               name: 'property-address-city',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               type: 'input',
               label: 'Postcode',
               name: 'property-address-postcode',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.minLength(1),
@@ -369,6 +389,7 @@ export class FormSampleConfigurations {
                   label: 'United States',
                 },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
             },
           ],
@@ -390,6 +411,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: 'Coverage Start Date',
               name: 'coverageStartDate',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeGreater'),
@@ -404,6 +426,7 @@ export class FormSampleConfigurations {
               ],
               label: 'Payment Frequency',
               name: 'paymentFrequency',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
           ],
@@ -421,6 +444,7 @@ export class FormSampleConfigurations {
               jsonField: 'make',
               label: 'Vehicle Make',
               name: 'vehicleMake',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
@@ -429,6 +453,7 @@ export class FormSampleConfigurations {
               depends: ['vehicleMake'],
               label: 'Vehicle Model',
               name: 'vehicleModel',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
@@ -437,6 +462,7 @@ export class FormSampleConfigurations {
               jsonField: 'make.model.type',
               label: 'Vehicle Type',
               name: 'vehicleType',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
@@ -445,12 +471,14 @@ export class FormSampleConfigurations {
               jsonField: 'make.model.type.year',
               label: 'Vehicle Year',
               name: 'vehicleYear',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               type: 'input',
               label: 'Annual Mileage',
               name: 'vehicleAnnualMileage',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.max(100000),
@@ -462,6 +490,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Vehicle Value',
               name: 'vehicleValue',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(3000),
@@ -478,12 +507,14 @@ export class FormSampleConfigurations {
                 { name: 'Personal', label: 'Personal' },
                 { name: 'Business', label: 'Business' },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               type: 'datepicker',
               label: 'Vehicle Purchase Date',
               name: 'vehiclePurchaseDate',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
@@ -498,6 +529,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Vehicle Owner Postal Code',
               name: 'vehicleOwnerPostalCode',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.minLength(1),
@@ -521,6 +553,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: 'Driver Date of Birth',
               name: 'dateOfBirth',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
@@ -535,6 +568,7 @@ export class FormSampleConfigurations {
                 { name: 'Male', label: 'Male' },
                 { name: 'Female', label: 'Female' },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
@@ -546,6 +580,7 @@ export class FormSampleConfigurations {
                 { name: 'Married', label: 'Married' },
                 { name: 'Widowed', label: 'Widowed' },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
@@ -563,6 +598,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: 'Driver Licence Date',
               name: 'driverLicenceDate',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
@@ -590,6 +626,7 @@ export class FormSampleConfigurations {
                 { name: '3', label: '3' },
                 { name: '4', label: '4' },
               ],
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 FormHelpers.shouldEnableDependentGroup([
@@ -615,6 +652,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: 'Driver Date of Birth',
               name: 'dateOfBirth',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
@@ -630,6 +668,7 @@ export class FormSampleConfigurations {
                 { name: 'Male', label: 'Male' },
                 { name: 'Female', label: 'Female' },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
@@ -642,6 +681,7 @@ export class FormSampleConfigurations {
                 { name: 'Married', label: 'Married' },
                 { name: 'Widowed', label: 'Widowed' },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
@@ -657,6 +697,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: 'Driver Licence Date',
               name: 'driverLicenceDate',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
@@ -679,6 +720,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: 'Driver Date of Birth',
               name: 'dateOfBirth',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
@@ -694,6 +736,7 @@ export class FormSampleConfigurations {
                 { name: 'Male', label: 'Male' },
                 { name: 'Female', label: 'Female' },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
@@ -706,6 +749,7 @@ export class FormSampleConfigurations {
                 { name: 'Married', label: 'Married' },
                 { name: 'Widowed', label: 'Widowed' },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
@@ -720,6 +764,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: 'Driver Licence Date',
               name: 'driverLicenceDate',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
@@ -742,6 +787,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: 'Driver Date of Birth',
               name: 'dateOfBirth',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
@@ -757,6 +803,7 @@ export class FormSampleConfigurations {
                 { name: 'Male', label: 'Male' },
                 { name: 'Female', label: 'Female' },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
@@ -783,6 +830,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: 'Driver Licence Date',
               name: 'driverLicenceDate',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
@@ -805,6 +853,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: 'Driver Date of Birth',
               name: 'dateOfBirth',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
@@ -832,6 +881,7 @@ export class FormSampleConfigurations {
                 { name: 'Married', label: 'Married' },
                 { name: 'Widowed', label: 'Widowed' },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
@@ -847,6 +897,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: 'Driver Licence Date',
               name: 'driverLicenceDate',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
@@ -884,6 +935,7 @@ export class FormSampleConfigurations {
                 },
                 { name: 'UK', label: 'UK' },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
               error: 'forms.enterValidValue',
             },
@@ -891,6 +943,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: 'Start Date',
               name: 'tripStartDate',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeGreater'),
@@ -905,6 +958,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: 'End Date',
               name: 'tripEndDate',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeGreater'),
@@ -924,6 +978,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Trip Cost',
               name: 'costOfTrip',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(1),
@@ -948,6 +1003,7 @@ export class FormSampleConfigurations {
               ],
               label: 'Number of Travelers',
               name: 'Travellers',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 FormHelpers.shouldEnableDependentField([
@@ -968,6 +1024,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Age of Traveller',
               name: 'tripDetailsTravellerAges',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(1),
@@ -980,6 +1037,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Age of Traveller 2',
               name: 'tripDetailsTravellerAges2',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(1),
@@ -993,6 +1051,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Age of Traveller 3',
               name: 'tripDetailsTravellerAges3',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(1),
@@ -1006,6 +1065,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Age of Traveller 4',
               name: 'tripDetailsTravellerAges4',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(1),
@@ -1019,6 +1079,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Age of Traveller 5',
               name: 'tripDetailsTravellerAges5',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(1),
@@ -1032,6 +1093,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Age of Traveller 6',
               name: 'tripDetailsTravellerAges6',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(1),
@@ -1045,6 +1107,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Age of Traveller 7',
               name: 'tripDetailsTravellerAges7',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(1),
@@ -1058,6 +1121,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Age of Traveller 8',
               name: 'tripDetailsTravellerAges8',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(1),
@@ -1071,6 +1135,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Age of Traveller 9',
               name: 'tripDetailsTravellerAges9',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(1),
@@ -1084,6 +1149,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: 'Age of Traveller 10',
               name: 'tripDetailsTravellerAges10',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(1),
@@ -1136,12 +1202,14 @@ export class FormSampleConfigurations {
                   label: 'Accident',
                 },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               label: 'When did it happen?',
               name: 'whenHappened',
               type: 'datepicker',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
@@ -1152,6 +1220,7 @@ export class FormSampleConfigurations {
               label: 'What time did it happen?',
               name: 'whatTime',
               type: 'time',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
@@ -1188,18 +1257,21 @@ export class FormSampleConfigurations {
                   label: 'United States',
                 },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               label: 'City',
               name: 'city',
               type: 'input',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               label: 'Postcode',
               name: 'postcode',
               type: 'input',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.regexValidator(
@@ -1212,12 +1284,14 @@ export class FormSampleConfigurations {
               label: 'Address',
               name: 'address',
               type: 'input',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               label: 'Description',
               name: 'description',
               type: 'textarea',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
           ],
@@ -1233,6 +1307,7 @@ export class FormSampleConfigurations {
               label: 'Please describe how the accident occurred:',
               name: 'howAccidentOccured',
               type: 'textarea',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
           ],
@@ -1248,6 +1323,7 @@ export class FormSampleConfigurations {
               label: 'Who is responsible for the accident?',
               name: 'responsibleForAccident',
               type: 'input',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
@@ -1264,6 +1340,7 @@ export class FormSampleConfigurations {
                   label: 'No',
                 },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
@@ -1280,6 +1357,7 @@ export class FormSampleConfigurations {
                   label: 'No',
                 },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
             },
           ],
@@ -1318,24 +1396,28 @@ export class FormSampleConfigurations {
                   label: 'Rev.',
                 },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               label: 'First name',
               name: 'firstName',
               type: 'input',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               label: 'Last name',
               name: 'lastName',
               type: 'input',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               label: 'Phone Number',
               name: 'phoneNumber',
               type: 'input',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.minLength(4),
@@ -1348,6 +1430,7 @@ export class FormSampleConfigurations {
               label: 'Email',
               name: 'email',
               type: 'input',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.regexValidator(
@@ -1360,6 +1443,7 @@ export class FormSampleConfigurations {
               label: 'Address Line 1',
               name: 'address1',
               type: 'input',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
@@ -1371,12 +1455,14 @@ export class FormSampleConfigurations {
               label: 'City',
               name: 'city',
               type: 'input',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               label: 'Postcode',
               name: 'postcode',
               type: 'input',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.regexValidator(
@@ -1395,6 +1481,7 @@ export class FormSampleConfigurations {
                   name: 'RS',
                 },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
             },
           ],
@@ -1429,12 +1516,14 @@ export class FormSampleConfigurations {
                   label: 'France',
                 },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               label: 'Event date',
               name: 'eventDate',
               type: 'datepicker',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeGreater'),
@@ -1445,36 +1534,42 @@ export class FormSampleConfigurations {
               label: 'Venue name',
               name: 'eventVenue',
               type: 'input',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               label: 'Venue address',
               name: 'eventVenueAddress',
               type: 'input',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               label: 'Venue city',
               name: 'eventVenueCity',
               type: 'input',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               label: 'First name',
               name: 'firstName',
               type: 'input',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               label: 'Last name',
               name: 'lastName',
               type: 'input',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               label: 'Email',
               name: 'email',
               type: 'input',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.regexValidator(
@@ -1487,6 +1582,7 @@ export class FormSampleConfigurations {
               label: 'Address Line 1',
               name: 'address1',
               type: 'input',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
@@ -1498,6 +1594,7 @@ export class FormSampleConfigurations {
               label: 'Postcode',
               name: 'postcode',
               type: 'input',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.regexValidator(
@@ -1510,6 +1607,7 @@ export class FormSampleConfigurations {
               label: 'City',
               name: 'city',
               type: 'input',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
           ],
@@ -1548,12 +1646,14 @@ export class FormSampleConfigurations {
                   label: 'Rev.',
                 },
               ],
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               label: 'First name',
               name: 'firstName',
               type: 'input',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
@@ -1566,6 +1666,7 @@ export class FormSampleConfigurations {
               label: 'Age',
               name: 'age',
               type: 'input',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.min(1),
@@ -1578,6 +1679,7 @@ export class FormSampleConfigurations {
               label: 'Phone Number',
               name: 'phoneNumber',
               type: 'input',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.minLength(4),
@@ -1590,6 +1692,7 @@ export class FormSampleConfigurations {
               label: 'Email',
               name: 'email',
               type: 'input',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.regexValidator(
@@ -1601,6 +1704,7 @@ export class FormSampleConfigurations {
             {
               label: 'Address Line 1',
               name: 'address1',
+              required: true,
               type: 'input',
               validation: [DefaultFormValidators.required],
             },
@@ -1613,12 +1717,14 @@ export class FormSampleConfigurations {
               label: 'City',
               name: 'city',
               type: 'input',
+              required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               label: 'Postcode',
               name: 'postcode',
               type: 'input',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.regexValidator(
@@ -1631,6 +1737,7 @@ export class FormSampleConfigurations {
               label: 'Country',
               name: 'country',
               type: 'select',
+              required: true,
               validation: [DefaultFormValidators.required],
               options: [
                 {
@@ -1653,6 +1760,7 @@ export class FormSampleConfigurations {
               name: 'newMileage',
               type: 'input',
               placeholder: 'Insert New Mileage',
+              required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.max(100000),
