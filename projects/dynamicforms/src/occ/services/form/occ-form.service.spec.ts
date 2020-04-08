@@ -73,9 +73,8 @@ describe('OccYformService', () => {
       service.getFormData(formData.id).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
-          req.url === '/forms/data' &&
+          req.url === '/forms/formData/' + formData.id &&
           req.params.append('fields', 'FULL') &&
-          req.params.append('formDataId', formData.id) &&
           req.method === 'GET'
         );
       }, `GET method and url`);

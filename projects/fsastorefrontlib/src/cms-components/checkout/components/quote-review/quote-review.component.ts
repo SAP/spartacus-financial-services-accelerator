@@ -94,11 +94,11 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
       cart.deliveryOrderGroups &&
       cart.deliveryOrderGroups.length > 0 &&
       cart.deliveryOrderGroups[0].entries.length > 0 &&
-      cart.deliveryOrderGroups[0].entries[0].formDataData &&
-      cart.deliveryOrderGroups[0].entries[0].formDataData.length > 0
+      cart.deliveryOrderGroups[0].entries[0].formData &&
+      cart.deliveryOrderGroups[0].entries[0].formData.length > 0
     ) {
       return JSON.parse(
-        cart.deliveryOrderGroups[0].entries[0].formDataData[0].content
+        cart.deliveryOrderGroups[0].entries[0].formData[0].content
       );
     }
   }

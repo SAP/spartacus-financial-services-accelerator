@@ -85,7 +85,7 @@ export enum StepStatus {
 }
 
 export interface FSOrderEntry extends OrderEntry {
-  formDataData?: any[];
+  formData?: any[];
 }
 
 export interface FSPrice extends Price {
