@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError, pluck } from 'rxjs/operators';
 import { QuoteAdapter } from '../../../core/my-account/connectors/quote.adapter';
-import { Models } from '../../../../src/model/quote.model';
+import { Models } from '../../../model/quote.model';
 
 @Injectable()
 export class OccQuoteAdapter implements QuoteAdapter {

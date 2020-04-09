@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { FormValidationService } from './form-validation.service';
-import { defaultFormConfig } from './../../config/default-form-config';
 import { DynamicFormsConfig } from '../../config/form-config';
 import { FieldConfig } from '../../models/form-config.interface';
+import { defaultFormConfig } from './../../config/default-form-config';
+import { FormValidationService } from './form-validation.service';
 
 const fieldName = 'testField';
 const fieldType = 'input';
@@ -81,5 +81,24 @@ describe('FormValidationService', () => {
         ],
       }).length
     ).toEqual(0);
+  });
+
+  it('should add required validator', () => {
+    const testFieldConfig: FieldConfig = {
+      name: fieldName,
+      type: fieldType,
+      required: true,
+      validations: [
+        {
+          name: minValue,
+          arguments: [
+            {
+              value: '10',
+            },
+          ],
+        },
+      ],
+    };
+    expect(service.getValidatorsForField(testFieldConfig).length).toEqual(2);
   });
 });

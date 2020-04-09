@@ -9,10 +9,11 @@ export interface DynamicFormGroup {
   fieldConfigs: FieldConfig[];
 }
 export interface FieldConfig {
+  name?: string;
+  required?: boolean;
   disabled?: boolean;
   group?: string;
   label?: string;
-  name?: string;
   options?: FieldOption[];
   depends?: string[];
   jsonField?: string;

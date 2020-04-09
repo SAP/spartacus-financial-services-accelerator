@@ -9,6 +9,9 @@
         .cx-product-image-container img {
           border: 1px solid var(--cx-color-primary);
         }
+        .agent-name {
+          text-decoration: underline;
+        }
       }
       .agent-name {
         cursor: pointer;

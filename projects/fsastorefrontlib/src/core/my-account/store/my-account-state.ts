@@ -1,5 +1,5 @@
 import { Policy } from './reducers/claim-policies.reducer';
-import { Models } from '../../../../src/model/quote.model';
+import { Models } from './../../../model/quote.model';
 
 export const MY_ACCOUNT_FEATURE = 'assets';
 

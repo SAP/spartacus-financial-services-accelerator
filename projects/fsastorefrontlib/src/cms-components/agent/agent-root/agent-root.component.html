@@ -21,9 +21,9 @@
                   >
                   </cx-media>
                   <p class="py-3">{{ agent.displayName }}</p>
-                  <div class="row">
+                  <div class="row no-gutters">
                     <a
-                      class="col-6 fs-icon icon-envelope text-right position-relative"
+                      class="col-6 fs-icon icon-envelope text-right position-relative pr-2"
                       [routerLink]="
                         {
                           cxRoute: 'contactAgent',
@@ -32,7 +32,7 @@
                       "
                     ></a>
                     <a
-                      class="col-6 fs-icon icon-map-marker text-left position-relative"
+                      class="col-6 fs-icon icon-map-marker text-left position-relative pl-2"
                       [routerLink]="['/agent-locator']"
                       [queryParams]="{ query: agent.email }"
                     ></a>

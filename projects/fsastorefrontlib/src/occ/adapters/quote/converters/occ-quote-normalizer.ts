@@ -1,7 +1,7 @@
 import { Converter } from '@spartacus/core';
 import { Injectable } from '@angular/core';
-import { Models } from '../../../../../src/model/quote.model';
-import { InsuranceQuote } from '../../../../occ';
+import { Models } from '../../../../model/quote.model';
+import { InsuranceQuote } from './../../../occ-models/occ.models';
 
 @Injectable({ providedIn: 'root' })
 export class OccQuoteNormalizer
