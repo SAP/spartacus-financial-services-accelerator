@@ -25,7 +25,7 @@ class TestDynamicFormComponent {
 })
 class MockedButtonComponent {}
 
-const MockDynamicFormsConfig: DynamicFormsConfig = {
+const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {
     components: {
       button: {
@@ -54,7 +54,7 @@ describe('FormCmponentDirective', () => {
       imports: [TestModule],
       declarations: [TestDynamicFormComponent, FormComponentDirective],
       providers: [
-        { provide: DynamicFormsConfig, useValue: MockDynamicFormsConfig },
+        { provide: DynamicFormsConfig, useValue: mockDynamicFormsConfig },
       ],
     }).compileComponents();
     fixture = TestBed.createComponent(TestDynamicFormComponent);

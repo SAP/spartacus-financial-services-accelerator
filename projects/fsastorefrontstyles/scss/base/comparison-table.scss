@@ -11,7 +11,7 @@ cx-fs-comparison-table-container {
   cx-fs-comparison-table-tab {
     display: flex;
     flex: 0 1 100%;
-    border: $border-grey;
+    border: 1px solid var(--cx-color-3);
     border-top: none;
     .table-tab {
       flex: 0 1 100%;
@@ -43,7 +43,7 @@ cx-fs-comparison-table-container {
       overflow-x: auto;
       @include media-breakpoint-down(sm) {
         width: 54%;
-        border-left: $border-grey;
+        border-left: 1px solid var(--cx-color-3);
       }
       .slide-column {
         display: flex;

@@ -4,7 +4,9 @@
   >
     <div class="box-shadow d-none d-md-block">
       <div class="container-fluid">
-        <div class="row p-3 background-color-4 border-top-primary-fat">
+        <div
+          class="row p-3 background-color-4 border-top-3 border-color-primary"
+        >
           <div class="col-1 text-uppercase semi-bold">
             {{ 'fscommon.no' | cxTranslate }}.
           </div>
@@ -46,7 +48,7 @@
               'FSCOVERAGE_CHANGE'
             "
           >
-            <div class="row p-3 font-weight-bold border-bottom-color-4">
+            <div class="row p-3 font-weight-bold border-bottom border-color-4">
               <div class="col-1 ">{{ i + 1 }}.</div>
               <div class="col-4">
                 {{ changedPolicyObject?.label }}
@@ -88,11 +90,11 @@
         </div>
       </div>
     </div>
-    <div class="box-shadow d-block d-md-none border-top-primary-fat ">
+    <div class="box-shadow d-block d-md-none border-top-3 border-color-primary">
       <ng-container
         *ngFor="let changedPolicyObject of changedPolicyObjects; index as i"
       >
-        <div class="container-fluid p-3 border-bottom-color-4">
+        <div class="container-fluid p-3 border-bottom border-color-4">
           <div class="row p-1">
             <div class="col-6 text-uppercase semi-bold">
               {{ 'fscommon.no' | cxTranslate }}.:
