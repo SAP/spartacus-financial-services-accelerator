@@ -4,7 +4,12 @@
   [hidden]="group.controls[config.name].disabled"
 >
   <div [ngClass]="cssClass.inputWrapper">
-    <label [ngClass]="cssClass.label">{{ config.label }}</label>
+    <label [ngClass]="cssClass.label">
+      <ng-container *ngIf="!config.required">
+        {{ 'forms.optional' | cxTranslate }}
+      </ng-container>
+      {{ config.label }}
+    </label>
     <select
       [ngClass]="cssClass.input"
       [attr.name]="config.name"

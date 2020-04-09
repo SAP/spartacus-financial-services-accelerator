@@ -1,10 +1,11 @@
-import { Component, Input, DebugElement } from '@angular/core';
+import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
+import { I18nTestingModule } from '@spartacus/core';
+import { CssClass, DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
+import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { RadioComponent } from './radio.component';
 
 @Component({
@@ -52,7 +53,7 @@ describe('RadioComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [RadioComponent, MockErrorNoticeComponent],
-      imports: [ReactiveFormsModule],
+      imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
         { provide: OccMockFormService, useClass: MockOccFormService },
         {

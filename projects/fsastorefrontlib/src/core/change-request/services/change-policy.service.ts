@@ -1,5 +1,5 @@
 import { PolicyModule } from './../../../cms-components/my-account/policy/policy.module';
-import { ChangedPolicyData } from '../../../../src/occ';
+import { ChangedPolicyData } from './../../../occ/occ-models/occ.models';
 import { RequestType } from './../../../occ/occ-models/occ.models';
 import { Injectable } from '@angular/core';
 
