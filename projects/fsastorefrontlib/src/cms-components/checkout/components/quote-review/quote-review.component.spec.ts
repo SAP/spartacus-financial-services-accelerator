@@ -166,7 +166,7 @@ describe('Quote Review Component', () => {
 
   it('should not get form content 4', () => {
     const content = component.getFormContent({
-      deliveryOrderGroups: [{ entries: [{ formDataData: [] }] }],
+      deliveryOrderGroups: [{ entries: [{ formData: [] }] }],
     });
     expect(content).toEqual(undefined);
   });
@@ -174,7 +174,7 @@ describe('Quote Review Component', () => {
   it('should get form content', () => {
     const content = component.getFormContent({
       deliveryOrderGroups: [
-        { entries: [{ formDataData: [{ content: formDataContent }] }] },
+        { entries: [{ formData: [{ content: formDataContent }] }] },
       ],
     });
     const parsedContent = JSON.parse(formDataContent);

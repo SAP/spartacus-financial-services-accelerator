@@ -5,24 +5,27 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { YFormData } from '@fsa/dynamicforms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GeneralHelpers } from '../../helpers/helpers';
-import { FormConfig } from '../../models/form-config';
+
 import {
   FieldConfig,
   FormDefinition,
 } from '../../models/form-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 import { FormDataService } from '../../services/data/form-data.service';
+import { DynamicFormsConfig } from '../../config/form-config';
 
 @Component({
   exportAs: 'cx-dynamicForm',
   selector: 'cx-dynamic-form',
   templateUrl: './dynamic-form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DynamicFormComponent implements OnInit, OnDestroy {
   @Input()
@@ -49,7 +52,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   constructor(
     protected formService: FormBuilderService,
     protected formDataService: FormDataService,
-    public formConfig: FormConfig
+    public formConfig: DynamicFormsConfig
   ) {}
 
   ngOnInit() {

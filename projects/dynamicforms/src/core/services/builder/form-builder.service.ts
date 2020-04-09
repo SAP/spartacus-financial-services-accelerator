@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { FieldConfig } from '../../models';
+import { FormValidationService } from '../form-validation/form-validation.service';
 
 @Injectable()
 export class FormBuilderService {
-  constructor(protected fb: FormBuilder) {}
+  constructor(
+    protected fb: FormBuilder,
+    protected formValidationService: FormValidationService
+  ) {}
 
   createForm(config) {
     const form = this.fb.group({});
@@ -22,8 +26,12 @@ export class FormBuilderService {
     return form;
   }
 
-  createControl(config: FieldConfig) {
-    const { disabled, validation, value } = config;
-    return this.fb.control({ disabled, value }, validation);
+  createControl(fieldConfig: FieldConfig) {
+    const { disabled, validation, value } = fieldConfig;
+    // TODO: Replace attribute 'validation' with 'validations' in form sample configuration
+    const validations = validation
+      ? validation
+      : this.formValidationService.getValidatorsForField(fieldConfig);
+    return this.fb.control({ disabled, value }, validations);
   }
 }

@@ -196,9 +196,7 @@
             <div class="container">
               <div class="row justify-content-center">
                 <ul
-                  *ngIf="
-                    ((cart?.deliveryOrderGroups)[0]?.entries)[0]?.formDataData
-                  "
+                  *ngIf="((cart?.deliveryOrderGroups)[0]?.entries)[0]?.formData"
                   class="col-12 accordion-list"
                 >
                   <li

@@ -9,10 +9,10 @@
         ></div>
       </div>
       <div
-        class="p-5 mx-2 border-color-3 box-shadow"
+        class="p-5 mx-2 border box-shadow"
         (click)="setSelectedType(identificationType)"
         [ngClass]="{
-          'selected fs-border-primary':
+          'selected border border-color-primary':
             identificationType.name === this.selected
         }"
       >
