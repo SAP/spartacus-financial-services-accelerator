@@ -1,15 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { I18nModule } from '@spartacus/core';
-import { FormComponent } from './form/form.component';
-import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
-import { FormBuilderService } from '../services/builder/form-builder.service';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { ReactiveFormsModule } from '@angular/forms';
-import { OccFormService } from '../../occ/services/form/occ-form.service';
-import { FormDataService } from '../services/data/form-data.service';
 import { ComponentsModule } from '../../components/components.module';
+import { OccFormService } from '../../occ/services/form/occ-form.service';
+import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
+import { FormBuilderService } from '../services/builder/form-builder.service';
+import { FormDataService } from '../services/data/form-data.service';
+import { FormValidationService } from '../services/form-validation/form-validation.service';
+import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
+import { FormComponent } from './form/form.component';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { ComponentsModule } from '../../components/components.module';
   entryComponents: [FormComponent, DynamicFormComponent],
   providers: [
     FormBuilderService,
+    FormValidationService,
     OccMockFormService,
     OccFormService,
     FormDataService,

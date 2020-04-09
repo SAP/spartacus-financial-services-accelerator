@@ -7,6 +7,7 @@ import { TitleComponent } from '../../components/title/title.component';
 import { RadioComponent } from '../../components/radio/radio.component';
 import { TextAreaComponent } from '../../components/text-area/text-area.component';
 import { TimeComponent } from '../../components/time/time.component';
+import { DefaultFormValidators } from '../../util/validators/default-form-validators';
 
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
@@ -49,6 +50,20 @@ export const defaultFormConfig: DynamicFormsConfig = {
       },
       time: {
         component: TimeComponent,
+      },
+    },
+    validators: {
+      compareToCurrentDate: {
+        validator: DefaultFormValidators.compareToCurrentDate,
+      },
+      dateOfBirth: {
+        validator: DefaultFormValidators.dateOfBirthValidator,
+      },
+      maxValue: {
+        validator: DefaultFormValidators.max,
+      },
+      minValue: {
+        validator: DefaultFormValidators.min,
       },
     },
   },
