@@ -1,0 +1,7 @@
+<div
+  [ngClass]="cssClass.formTitle"
+  [formGroup]="group"
+  [hidden]="group.controls[config.name].disabled"
+>
+  <h4>{{ config.label }}</h4>
+</div>

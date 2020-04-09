@@ -2,8 +2,8 @@
   <div class="product-feature-wrapper">
     <h3 class="section-header-heading text-uppercase">{{ component.title }}</h3>
     <div class="product-feature-image"></div>
-    <div *ngIf="product$ | async as product">
-      <ul class="item-details" [innerHTML]="product.summary"></ul>
+    <div class="item-details" *ngIf="product$ | async as product">
+      <ul [innerHTML]="product.summary"></ul>
     </div>
   </div>
 </ng-container>
