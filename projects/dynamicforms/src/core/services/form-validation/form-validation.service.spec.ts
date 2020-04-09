@@ -101,13 +101,4 @@ describe('FormValidationService', () => {
     };
     expect(service.getValidatorsForField(testFieldConfig).length).toEqual(2);
   });
-
-  it('should not add required validator', () => {
-    const testFieldConfig: FieldConfig = {
-      name: fieldName,
-      type: fieldType,
-      required: false,
-    };
-    expect(service.getValidatorsForField(testFieldConfig)).toBe(undefined);
-  });
 });
