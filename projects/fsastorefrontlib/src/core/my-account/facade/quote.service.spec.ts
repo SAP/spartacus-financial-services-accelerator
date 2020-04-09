@@ -62,7 +62,7 @@ const mockCart = {
     {
       entries: [
         {
-          formDataData: [
+          formData: [
             {
               id: 'formDataId',
               formDefinition: {
