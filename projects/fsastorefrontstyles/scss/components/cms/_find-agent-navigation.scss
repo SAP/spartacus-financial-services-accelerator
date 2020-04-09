@@ -1,5 +1,8 @@
 %cx-fs-find-agent-navigation {
   max-width: 50%;
+  @include media-breakpoint-down(md) {
+    max-width: 100%;
+  }
   --cx-flex-basis: 50%;
   flex: 1 1 var(--cx-flex-basis, 50%);
   @include media-breakpoint-down(sm) {
