@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  ChangedPolicyData,
-  RequestType,
-} from '../../../occ/occ-models/occ.models';
+import { ChangedPolicyData } from '../../../occ/occ-models/occ.models';
 import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
 
 @Component({
