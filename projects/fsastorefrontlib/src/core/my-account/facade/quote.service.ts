@@ -72,11 +72,11 @@ export class QuoteService {
   }
 
   protected loadPersonalDetailsForm(entry: FSOrderEntry) {
-    if (entry.formDataData && entry.formDataData.length > 0) {
+    if (entry.formData && entry.formData.length > 0) {
       this.formDataService.setFormDataToLocalStorage({
-        id: entry.formDataData[0].id,
+        id: entry.formData[0].id,
         formDefinition: {
-          formId: entry.formDataData[0].formDefinition.formId,
+          formId: entry.formData[0].formDefinition.formId,
         },
       });
     }

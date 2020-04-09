@@ -8,7 +8,7 @@
         *ngFor="let claim of claims.claims"
         class="col-xs-12 col-sm-6 col-md-4"
       >
-        <div class="info-card border-bottom-secondary">
+        <div class="info-card border border-color-3">
           <div
             class="account-cards-actions"
             *ngIf="
@@ -21,7 +21,7 @@
               >x</a
             >
           </div>
-          <div class="info-card-title border-bottom-secondary">
+          <div class="info-card-title border-bottom-3 border-color-secondary">
             <span class="image-wrapper">
               <img
                 *ngIf="claim.incidentType != undefined; else noIncidentType"
@@ -85,7 +85,9 @@
               </span>
             </div>
           </div>
-          <div class="info-card-button-wrapper border-top-secondary">
+          <div
+            class="info-card-button-wrapper border-top border-bottom border-color-secondary"
+          >
             <div
               class="info-card-button"
               *ngIf="

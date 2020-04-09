@@ -55,6 +55,10 @@ a {
     text-decoration: none;
   }
 }
+ul {
+  list-style: none;
+  padding-inline-start: 0;
+}
 button[disabled],
 html input[disabled] {
   cursor: default;

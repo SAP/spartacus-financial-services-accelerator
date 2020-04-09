@@ -26,7 +26,6 @@
       width: 100%;
       margin: 0 auto;
       padding: 20px;
-      border: $border-grey;
       color: var(--cx-color-11);
       @include box-shadow(0px, 3px, 10px, 1px, $color-dark-grey, 0.3);
       @include media-breakpoint-down(lg) {

@@ -1,0 +1,23 @@
+<div class="row">
+  <div [ngClass]="cssClass.validatorMessageWrapper">
+    <ng-container
+      *ngIf="(warn?.touched && warn?.errors?.required) || warn?.errors?.pattern"
+    >
+      <div [ngClass]="cssClass.validatorMessage">
+        {{ 'forms.enterValidValue' | cxTranslate }}
+      </div>
+    </ng-container>
+    <ng-container
+      *ngIf="
+        warn?.invalid &&
+        warn?.touched &&
+        !warn?.errors?.required &&
+        parentConfig?.error
+      "
+    >
+      <div [ngClass]="cssClass.validatorMessage">
+        {{ parentConfig.error | cxTranslate }}
+      </div>
+    </ng-container>
+  </div>
+</div>

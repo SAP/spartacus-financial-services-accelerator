@@ -1,4 +1,10 @@
-import { Component, Input, ViewChild, OnDestroy } from '@angular/core';
+import {
+  Component,
+  Input,
+  ViewChild,
+  OnDestroy,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { RoutingService } from '@spartacus/core';
 
 import { FormDefinition } from '../../models/form-config.interface';
@@ -10,6 +16,7 @@ import { YFormData } from '@fsa/dynamicforms';
 @Component({
   selector: 'cx-form-component',
   templateUrl: './form.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FormComponent implements OnDestroy {
   private subscription = new Subscription();

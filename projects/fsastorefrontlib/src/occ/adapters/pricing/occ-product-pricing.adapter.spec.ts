@@ -13,7 +13,7 @@ import {
 import { OccProductPricingAdapter } from './occ-product-pricing.adapter';
 
 const productCode = 'testCode';
-const pricingEndpoint = '/product-pricing';
+const pricingEndpoint = '/fsproducts';
 
 const costOfTrip: PricingAttribute = {
   key: 'costOfTrip',
@@ -69,7 +69,7 @@ describe('OccProductPricingAdapter', () => {
       adapter.getCalculatedProductData(productCode, pricingData).subscribe();
       httpMock.expectOne(req => {
         return (
-          req.url === pricingEndpoint + `/${productCode}` &&
+          req.url === pricingEndpoint + `/${productCode}/calculation` &&
           req.method === 'POST'
         );
       }, `POST method and url`);

@@ -33,7 +33,8 @@ export class OccProductPricingAdapter implements ProductPricingAdapter {
   }
 
   protected getCalculateProductPriceEndpoint(productCode: string) {
-    const calculateProductPriceEndpoint = '/product-pricing/' + productCode;
+    const calculateProductPriceEndpoint =
+      '/fsproducts/' + productCode + '/calculation';
     return (
       this.occEndpointService.getBaseEndpoint() + calculateProductPriceEndpoint
     );

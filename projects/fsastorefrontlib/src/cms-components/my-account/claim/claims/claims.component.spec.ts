@@ -5,15 +5,25 @@ import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import createSpy = jasmine.createSpy;
-import { Component, Pipe, PipeTransform, DebugElement } from '@angular/core';
+import {
+  Component,
+  Pipe,
+  PipeTransform,
+  DebugElement,
+  Type,
+} from '@angular/core';
 import { UserRequestService } from '../../../../core/user-request/facade/user-request.service';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
+import { ModalService } from '@spartacus/storefront';
+import { DeleteClaimDialogComponent } from './../delete-claim-dialog/delete-claim-dialog.component';
+
+const claimNumber = '000001';
 
 const mockedClaims = {
   claims: [
     {
-      claimNumber: '000001',
+      claimNumber: claimNumber,
       claimStatus: 'OPEN',
     },
   ],
@@ -21,6 +31,7 @@ const mockedClaims = {
 
 class MockClaimService {
   loadClaims = createSpy();
+  resumeClaim = createSpy();
 
   getClaims() {
     return of(mockedClaims);
@@ -32,6 +43,17 @@ class MockClaimService {
 
   shouldReload() {
     return of(false);
+  }
+
+  getCurrentClaim() {
+    return of({
+      claimNumber: claimNumber,
+      configurationSteps: [
+        {
+          pageLabelOrId: 'testPage',
+        },
+      ],
+    });
   }
 }
 
@@ -55,13 +77,15 @@ class MockParseDatePipe implements PipeTransform {
   transform() {}
 }
 
-const MockOccModuleConfig: OccConfig = {
+const testBaseUrl = 'testBaseUrl';
+
+const mockOccModuleConfig: OccConfig = {
   context: {
     baseSite: [''],
   },
   backend: {
     occ: {
-      baseUrl: '',
+      baseUrl: testBaseUrl,
       prefix: '',
     },
   },
@@ -71,23 +95,35 @@ class MockRoutingService {
   go = createSpy();
 }
 
+const modalInstance: any = {
+  componentInstance: {
+    claimNumber: claimNumber,
+  },
+};
+
+const modalService = jasmine.createSpyObj('ModalService', ['open']);
+
 describe('ClaimsComponent', () => {
   let component: ClaimsComponent;
   let fixture: ComponentFixture<ClaimsComponent>;
-  let mockClaimService: MockClaimService;
+  let claimService: MockClaimService;
   let mockUserRequestService: MockUserRequestService;
+  let routingService: MockRoutingService;
   let el: DebugElement;
 
   beforeEach(async(() => {
-    mockClaimService = new MockClaimService();
     mockUserRequestService = new MockUserRequestService();
     TestBed.configureTestingModule({
       imports: [I18nTestingModule, FormsModule, StoreModule.forRoot({})],
       providers: [
-        { provide: ClaimService, useValue: mockClaimService },
-        { provide: OccConfig, useValue: MockOccModuleConfig },
+        { provide: ClaimService, useClass: MockClaimService },
+        { provide: OccConfig, useValue: mockOccModuleConfig },
         { provide: UserRequestService, useValue: mockUserRequestService },
         { provide: RoutingService, useClass: MockRoutingService },
+        {
+          provide: ModalService,
+          useValue: modalService,
+        },
       ],
       declarations: [
         ClaimsComponent,
@@ -95,6 +131,9 @@ describe('ClaimsComponent', () => {
         MockParseDatePipe,
       ],
     }).compileComponents();
+
+    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    claimService = TestBed.get(ClaimService as Type<ClaimService>);
   }));
 
   beforeEach(() => {
@@ -105,6 +144,7 @@ describe('ClaimsComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(claimService.loadClaims).not.toHaveBeenCalled();
   });
 
   it('should render claim object', () => {
@@ -115,5 +155,40 @@ describe('ClaimsComponent', () => {
   it('should render delete icon', () => {
     fixture.detectChanges();
     expect(el.query(By.css('.action-links'))).toBeTruthy();
+  });
+
+  it('should reload when flag is set to true', () => {
+    spyOn(claimService, 'shouldReload').and.returnValue(of(true));
+    component.ngOnInit();
+    expect(claimService.loadClaims).toHaveBeenCalled();
+  });
+
+  it('should delete claim', () => {
+    modalService.open.and.returnValue(modalInstance);
+    component.deleteClaim(claimNumber);
+    expect(modalService.open).toHaveBeenCalledWith(DeleteClaimDialogComponent, {
+      centered: true,
+      size: 'lg',
+    });
+  });
+
+  it('should resume claim and redirect', () => {
+    component.resumeClaim(claimNumber);
+    expect(routingService.go).toHaveBeenCalled();
+  });
+
+  it('should not redirect in case claim is not loaded', () => {
+    spyOn(claimService, 'getCurrentClaim').and.returnValue(
+      of({
+        claimNumber: '111',
+        configurationSteps: [],
+      })
+    );
+    component.resumeClaim(claimNumber);
+    expect(routingService.go).not.toHaveBeenCalled();
+  });
+
+  it('should return base Url from config', () => {
+    expect(component.getBaseUrl()).toEqual(testBaseUrl);
   });
 });
