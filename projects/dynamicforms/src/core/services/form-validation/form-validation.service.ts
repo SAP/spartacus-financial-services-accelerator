@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ValidatorFn } from '@angular/forms';
+import { ValidatorFn, Validators } from '@angular/forms';
 import { DynamicFormsConfig } from '../../config/form-config';
 import { FieldConfig } from '../../models/form-config.interface';
 
@@ -11,27 +11,29 @@ export class FormValidationService {
 
   getValidatorsForField(fieldConfig: FieldConfig): ValidatorFn[] {
     const validators: ValidatorFn[] = [];
-    if (fieldConfig.required === false && !fieldConfig.validations) {
-      return;
-    } else if (fieldConfig.required) {
-      validators.push(Validators.required);
-    }
-    if (fieldConfig.validations) {
-      fieldConfig.validations.forEach(fieldValidation => {
-        const validatorMapping = this.configValidators[fieldValidation.name];
-        if (validatorMapping && validatorMapping.validator) {
-          if (fieldValidation.arguments) {
-            validators.push(
-              validatorMapping.validator.apply(
-                this,
-                fieldValidation.arguments.map(arg => arg.value)
-              )
-            );
-          } else {
-            validators.push(validatorMapping.validator);
+    if (fieldConfig) {
+      if (fieldConfig.required === false && !fieldConfig.validations) {
+        return;
+      } else if (fieldConfig.required) {
+        validators.push(Validators.required);
+      }
+      if (fieldConfig.validations) {
+        fieldConfig.validations.forEach(fieldValidation => {
+          const validatorMapping = this.configValidators[fieldValidation.name];
+          if (validatorMapping && validatorMapping.validator) {
+            if (fieldValidation.arguments) {
+              validators.push(
+                validatorMapping.validator.apply(
+                  this,
+                  fieldValidation.arguments.map(arg => arg.value)
+                )
+              );
+            } else {
+              validators.push(validatorMapping.validator);
+            }
           }
-        }
-      });
+        });
+      }
     }
     return validators;
   }
