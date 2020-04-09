@@ -20,16 +20,6 @@ class MockErrorNoticeComponent {
 
 const mockCssClass: CssClass = {};
 
-@Component({
-  // tslint:disable
-  selector: 'cx-label',
-  template: '',
-})
-class MockLabelComponent {
-  @Input() config;
-  @Input() cssLabelClass;
-}
-
 const dependentOptions = [
   {
     name: 'TestName',
@@ -87,11 +77,7 @@ describe('SelectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        SelectComponent,
-        MockErrorNoticeComponent,
-        MockLabelComponent,
-      ],
+      declarations: [SelectComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
         { provide: OccMockFormService, useClass: MockOccFormService },

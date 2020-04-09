@@ -8,7 +8,6 @@ import { DatePickerComponent } from './datepicker/datepicker.component';
 import { ErrorNoticeComponent } from './error-notice/error-notice.component';
 import { FormComponentDirective } from './form-component.directive';
 import { InputComponent } from './input/input.component';
-import { LabelComponent } from './label/label.component';
 import { RadioComponent } from './radio/radio.component';
 import { SelectComponent } from './select/select.component';
 import { TextAreaComponent } from './text-area/text-area.component';
@@ -29,7 +28,6 @@ import { TitleComponent } from './title/title.component';
     TextAreaComponent,
     TimeComponent,
     TitleComponent,
-    LabelComponent,
   ],
   entryComponents: [
     AbstractFormComponent,
@@ -41,7 +39,6 @@ import { TitleComponent } from './title/title.component';
     TextAreaComponent,
     TimeComponent,
     TitleComponent,
-    LabelComponent,
   ],
   exports: [
     FormComponentDirective,
@@ -55,7 +52,6 @@ import { TitleComponent } from './title/title.component';
     TextAreaComponent,
     TimeComponent,
     TitleComponent,
-    LabelComponent,
   ],
 })
 export class ComponentsModule {}

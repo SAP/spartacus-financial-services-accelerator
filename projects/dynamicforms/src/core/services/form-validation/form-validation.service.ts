@@ -11,6 +11,11 @@ export class FormValidationService {
 
   getValidatorsForField(fieldConfig: FieldConfig): ValidatorFn[] {
     const validators: ValidatorFn[] = [];
+    if (fieldConfig.required === false && !fieldConfig.validations) {
+      return;
+    } else if (fieldConfig.required) {
+      validators.push(Validators.required);
+    }
     if (fieldConfig.validations) {
       fieldConfig.validations.forEach(fieldValidation => {
         const validatorMapping = this.configValidators[fieldValidation.name];
@@ -27,9 +32,6 @@ export class FormValidationService {
           }
         }
       });
-    }
-    if (fieldConfig.required) {
-      validators.push(Validators.required);
     }
     return validators;
   }

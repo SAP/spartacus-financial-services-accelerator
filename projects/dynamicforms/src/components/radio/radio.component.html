@@ -4,10 +4,12 @@
   [hidden]="group.controls[config.name].disabled"
 >
   <div [ngClass]="cssClass.radioInputWrapper">
-    <cx-label
-      [config]="config"
-      [cssLabelClass]="cssClass.radioLabel"
-    ></cx-label>
+    <label [ngClass]="cssClass.radioLabel">
+      <ng-container *ngIf="!config.required">
+        {{ 'forms.optional' | cxTranslate }}
+      </ng-container>
+      {{ config.label }}
+    </label>
     <div *ngFor="let option of config.options">
       <input
         [ngClass]="cssClass.radioInput"
