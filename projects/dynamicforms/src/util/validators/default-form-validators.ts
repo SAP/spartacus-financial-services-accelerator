@@ -79,6 +79,23 @@ export class DefaultFormValidators extends Validators {
     };
   }
 
+  static number(control: AbstractControl) {
+    const field: string = control.value;
+    const numberRegex = /^[0-9]*$/;
+    if (field) {
+      const valid = numberRegex.test(field);
+      return valid
+        ? null
+        : {
+            pattern: {
+              requiredPattern: numberRegex,
+              actualValue: control.value,
+            },
+          };
+    }
+    return null;
+  }
+
   static compareDates(comparisonField: string, operator: string) {
     return (control: AbstractControl): ValidationErrors | null => {
       if (control.parent) {
