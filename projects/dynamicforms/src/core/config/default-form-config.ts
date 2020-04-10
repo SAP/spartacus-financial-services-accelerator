@@ -65,6 +65,9 @@ export const defaultFormConfig: DynamicFormsConfig = {
       minValue: {
         validator: DefaultFormValidators.min,
       },
+      number: {
+        validator: DefaultFormValidators.pattern('^[0-9]*$'),
+      },
     },
   },
 };
