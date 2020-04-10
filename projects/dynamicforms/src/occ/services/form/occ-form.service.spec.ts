@@ -28,7 +28,12 @@ const formData: YFormData = {
     applicationId: 'applicationId',
   },
 };
-
+const formDataNew: YFormData = {
+  formDefinition: {
+    formId: 'fromDefintionId',
+    applicationId: 'applicationId',
+  },
+};
 describe('OccYformService', () => {
   let service: OccFormService;
   let httpMock: HttpTestingController;
@@ -50,11 +55,11 @@ describe('OccYformService', () => {
   });
 
   describe('persistFormData', () => {
-    it('saveFormData', async(() => {
+    it('updateFormData', async(() => {
       service.saveFormData(formData).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
-          req.url === '/forms/data' &&
+          req.url === '/forms/formData/' + formData.id &&
           req.params.append('fields', 'FULL') &&
           req.params.append('definitionId', formData.formDefinition.formId) &&
           req.params.append(
@@ -68,6 +73,24 @@ describe('OccYformService', () => {
     }));
   });
 
+  describe('persistFormData', () => {
+    it('createFormData', async(() => {
+      service.saveFormData(formDataNew).subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url === '/forms/formData' &&
+          req.params.append('fields', 'FULL') &&
+          req.params.append('definitionId', formData.formDefinition.formId) &&
+          req.params.append(
+            'applicationId',
+            formData.formDefinition.applicationId
+          ) &&
+          req.params.append('formDataId', '') &&
+          req.method === 'POST'
+        );
+      }, `POST method and url`);
+    }));
+  });
   describe('loadFormData', () => {
     it('loadFormData', async(() => {
       service.getFormData(formData.id).subscribe();
