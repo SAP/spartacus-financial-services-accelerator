@@ -1365,130 +1365,6 @@ export class FormSampleConfigurations {
       ],
     },
     {
-      formId: 'insurance_personal_details',
-      formGroups: [
-        {
-          groupCode: 'personalDetails',
-          fieldConfigs: [
-            {
-              label: 'Title',
-              name: 'title',
-              type: 'select',
-              options: [
-                {
-                  name: 'mr',
-                  label: 'Mr.',
-                },
-                {
-                  name: 'mrs',
-                  label: 'Mrs.',
-                },
-                {
-                  name: 'miss',
-                  label: 'Miss.',
-                },
-                {
-                  name: 'dr',
-                  label: 'Dr.',
-                },
-                {
-                  name: 'rev',
-                  label: 'Rev.',
-                },
-              ],
-              required: true,
-              validation: [DefaultFormValidators.required],
-            },
-            {
-              label: 'First name',
-              name: 'firstName',
-              type: 'input',
-              required: true,
-              validation: [DefaultFormValidators.required],
-            },
-            {
-              label: 'Last name',
-              name: 'lastName',
-              type: 'input',
-              required: true,
-              validation: [DefaultFormValidators.required],
-            },
-            {
-              label: 'Phone Number',
-              name: 'phoneNumber',
-              type: 'input',
-              required: true,
-              validation: [
-                DefaultFormValidators.required,
-                DefaultFormValidators.minLength(4),
-                DefaultFormValidators.maxLength(20),
-                DefaultFormValidators.pattern('^[0-9]*$'),
-              ],
-              error: 'forms.between4And20Digits',
-            },
-            {
-              label: 'Email',
-              name: 'email',
-              type: 'input',
-              required: true,
-              validation: [
-                DefaultFormValidators.required,
-                DefaultFormValidators.regexValidator(
-                  DefaultFormValidators.emailRegex
-                ),
-              ],
-              error: 'forms.enterValidEmail',
-            },
-            {
-              label: 'Address Line 1',
-              name: 'address1',
-              type: 'input',
-              required: true,
-              validation: [DefaultFormValidators.required],
-            },
-            {
-              label: 'Address Line 2',
-              name: 'address2',
-              type: 'input',
-            },
-            {
-              label: 'City',
-              name: 'city',
-              type: 'input',
-              required: true,
-              validation: [DefaultFormValidators.required],
-            },
-            {
-              label: 'Postcode',
-              name: 'postcode',
-              type: 'input',
-              required: true,
-              validation: [
-                DefaultFormValidators.required,
-                DefaultFormValidators.regexValidator(
-                  DefaultFormValidators.postalCodeRegex
-                ),
-              ],
-              error: 'forms.containAtLeastOneNumber',
-            },
-            {
-              label: 'Country',
-              name: 'country',
-              type: 'select',
-              options: [
-                {
-                  label: 'Serbia',
-                  name: 'RS',
-                },
-              ],
-              required: true,
-              validation: [DefaultFormValidators.required],
-            },
-          ],
-        },
-      ],
-    },
-    {
       formId: 'event_personal_details',
       formGroups: [
         {
@@ -1572,9 +1448,7 @@ export class FormSampleConfigurations {
               required: true,
               validation: [
                 DefaultFormValidators.required,
-                DefaultFormValidators.regexValidator(
-                  DefaultFormValidators.emailRegex
-                ),
+                DefaultFormValidators.email,
               ],
               error: 'forms.enterValidEmail',
             },
@@ -1695,9 +1569,7 @@ export class FormSampleConfigurations {
               required: true,
               validation: [
                 DefaultFormValidators.required,
-                DefaultFormValidators.regexValidator(
-                  DefaultFormValidators.emailRegex
-                ),
+                DefaultFormValidators.email,
               ],
               error: 'forms.enterValidEmail',
             },
