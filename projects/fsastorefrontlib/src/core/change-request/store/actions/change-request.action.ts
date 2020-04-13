@@ -26,6 +26,18 @@ export const CANCEL_CHANGE_REQUEST_FAIL =
 export const CANCEL_CHANGE_REQUEST_SUCCESS =
   '[Change Request] Cancel Change Request Success';
 
+export const SUBMIT_CHANGE_REQUEST = '[Change Request] Submit Change Request';
+export const SUBMIT_CHANGE_REQUEST_FAIL =
+  '[Change Request] Submit Change Request Fail';
+export const SUBMIT_CHANGE_REQUEST_SUCCESS =
+  '[Change Request] Submit Change Request Success';
+
+export const UPDATE_CHANGE_REQUEST = '[Change Request] Update Change Request';
+export const UPDATE_CHANGE_REQUEST_FAIL =
+  '[Change Request] Update Change Request Fail';
+export const UPDATE_CHANGE_REQUEST_SUCCESS =
+  '[Change Request] Update Change Request Success';
+
 export class CreateChangeRequest extends StateLoaderActions.LoaderLoadAction {
   readonly type = CREATE_CHANGE_REQUEST;
   constructor(public payload: any) {
@@ -110,6 +122,48 @@ export class CancelChangeRequestFail extends StateLoaderActions.LoaderFailAction
   }
 }
 
+export class UpdateChangeRequest extends StateLoaderActions.LoaderLoadAction {
+  readonly type = UPDATE_CHANGE_REQUEST;
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA);
+  }
+}
+
+export class UpdateChangeRequestFail extends StateLoaderActions.LoaderFailAction {
+  readonly type = UPDATE_CHANGE_REQUEST_FAIL;
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA, payload);
+  }
+}
+
+export class UpdateChangeRequestSuccess extends StateLoaderActions.LoaderSuccessAction {
+  readonly type = UPDATE_CHANGE_REQUEST_SUCCESS;
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA);
+  }
+}
+
+export class SubmitChangeRequest extends StateLoaderActions.LoaderLoadAction {
+  readonly type = SUBMIT_CHANGE_REQUEST;
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA);
+  }
+}
+
+export class SubmitChangeRequestFail extends StateLoaderActions.LoaderFailAction {
+  readonly type = SUBMIT_CHANGE_REQUEST_FAIL;
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA, payload);
+  }
+}
+
+export class SubmitChangeRequestSuccess extends StateLoaderActions.LoaderSuccessAction {
+  readonly type = SUBMIT_CHANGE_REQUEST_SUCCESS;
+  constructor(public payload: any) {
+    super(CHANGE_REQUEST_DATA);
+  }
+}
+
 export type ChangeRequestAction =
   | CreateChangeRequest
   | CreateChangeRequestFail
@@ -122,4 +176,10 @@ export type ChangeRequestAction =
   | SimulateChangeRequestSuccess
   | CancelChangeRequest
   | CancelChangeRequestSuccess
-  | CancelChangeRequestFail;
+  | CancelChangeRequestFail
+  | UpdateChangeRequest
+  | UpdateChangeRequestSuccess
+  | UpdateChangeRequestFail
+  | SubmitChangeRequest
+  | SubmitChangeRequestSuccess
+  | SubmitChangeRequestFail;

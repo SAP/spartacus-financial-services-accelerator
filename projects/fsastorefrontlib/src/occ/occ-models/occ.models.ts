@@ -78,7 +78,9 @@ export enum ClaimStatus {
   APPROVED = 'APPROVED',
   REJECTED = 'REJECTED',
 }
-
+export enum ChangeRequestStatus {
+  SUBMITTED = 'SUBMITTED',
+}
 export enum StepStatus {
   COMPLETED = 'COMPLETED',
   CANCELED = 'CANCELED',

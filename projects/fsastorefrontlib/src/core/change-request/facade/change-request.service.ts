@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Store, select, ActionsSubject } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
@@ -8,7 +8,6 @@ import { filter, switchMap, take } from 'rxjs/operators';
 import * as fromAction from '../store/actions';
 import * as fromSelector from '../store/selectors';
 import { StateWithChangeRequest } from '../store/change-request-state';
-import * as fromUserRequestAction from './../../../core/user-request/store/actions';
 import { StepStatus } from '../../../occ/occ-models';
 import { getChangeRequestErrorFactory } from '../store/selectors';
 
@@ -18,8 +17,7 @@ export class ChangeRequestService {
 
   constructor(
     protected store: Store<StateWithChangeRequest>,
-    protected authService: AuthService,
-    protected actions$: ActionsSubject
+    protected authService: AuthService
   ) {
     combineLatest([
       this.store.select(fromSelector.getChangeRequest),
@@ -130,7 +128,7 @@ export class ChangeRequestService {
       .pipe(take(1))
       .subscribe(occUserId => {
         this.store.dispatch(
-          new fromUserRequestAction.UpdateUserRequest({
+          new fromAction.UpdateChangeRequest({
             userId: occUserId,
             requestId: changeRequest.requestId,
             stepData: stepData,
@@ -138,10 +136,6 @@ export class ChangeRequestService {
         );
       })
       .unsubscribe();
-  }
-
-  getAction(actionName: string): Observable<any> {
-    return this.actions$.pipe(filter(action => action.type === actionName));
   }
 
   private buildStepData(changeRequest: any, stepIndex: number): any {
