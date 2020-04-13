@@ -40,7 +40,7 @@ const mockClaimRequest: Observable<Claim> = of({
         contentData: {
           entry: [
             {
-              key: 'howAccidentOccured',
+              key: 'howAccidentOccurred',
               value: 'accident occurance explanation',
             },
           ],
