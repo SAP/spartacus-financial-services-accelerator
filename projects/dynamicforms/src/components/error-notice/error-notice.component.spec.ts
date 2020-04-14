@@ -4,12 +4,8 @@ import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { I18nTestingModule } from '@spartacus/core';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
+import { DynamicFormsConfig } from '../../core/config/form-config';
 import { ErrorNoticeComponent } from './error-notice.component';
-
-const mockCssClass: CssClass = {
-  validatorMessageWrapper: 'testErrorClass',
-};
 
 class MockOccFormService {}
 
@@ -19,7 +15,7 @@ const mockFormGroup = new FormGroup({
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {
-    cssClass: mockCssClass,
+    errorWrapperClass: 'testErrorClass',
     components: {},
   },
 };
