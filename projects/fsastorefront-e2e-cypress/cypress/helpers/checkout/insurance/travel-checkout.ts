@@ -1,4 +1,4 @@
-import * as addOptionsPage from '../../../helpers/checkout/addOptionsPage';
+import * as shared from '../sharedFunctions';
 
 export function openCategoryPage() {
   cy.selectOptionFromDropdown({
@@ -33,25 +33,30 @@ export function populateInsuranceInfoForm() {
     .click();
 }
 
-export function checkComparisonAndAddProduct() {
-  cy.get('cx-fs-comparison-table-panel-item').should('have.length', 3);
-  cy.get('cx-fs-comparison-table-panel-item')
-    .eq(2)
-    .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Single - Gold Plan');
-      cy.get('.table-header-value').should('have.text', '€150.00');
-    });
-  cy.get('cx-fs-comparison-table-panel-item')
-    .eq(1)
-    .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Single - Silver Plan');
-      cy.get('.table-header-value').should('have.text', '€120.00');
-    });
+export function checkTravelComparisonTable() {
+  const comparisonTableContent: addOptionsPage.ComparisonTable = {
+    mainProducts: [
+      {
+        name: 'Single - Budget Plan',
+        price: '€90.00',
+      },
+      {
+        name: 'Single - Silver Plan',
+        price: '€120.00',
+      },
+      {
+        name: 'Single - Gold Plan',
+        price: '€150.00',
+      },
+    ],
+  };
+  shared.checkComparisonTable(comparisonTableContent);
+}
+
+export function selectSingleBudgetPlan() {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(0)
     .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Single - Budget Plan');
-      cy.get('.table-header-value').should('have.text', '€90.00');
       cy.get('.primary-button').click();
     });
 }
@@ -88,33 +93,26 @@ export function checkOptionalProductsAndPick() {
     ],
   };
 
-  addOptionsPage.checkAddOptionsPageContent(addOptionsContent);
+  shared.checkAddOptionsPageContent(addOptionsContent);
 
   cy.get('.primary-button')
     .should('be.visible')
     .click();
 }
 
-export function populateAgeOnPersonalDetails() {
-  cy.get('[name="age"]').type('30');
-  cy.get('cx-fs-personal-details-navigation')
-    .findByText('Continue')
-    .click();
-}
-
-export function checkQuoteReviewMiniCart() {
-  cy.get('cx-fs-mini-cart').within(() => {
-    cy.get('.short-overview-item').should('have.length', 2);
-    cy.get('.short-overview-item')
-      .eq(0)
-      .should('have.text', ' Single - Budget Plan:  €90.00 ');
-    cy.get('.short-overview-item')
-      .eq(1)
-      .should('have.text', ' Winter Sports Cover:  €9.00 ');
-    cy.get('.highlighted').should('have.text', ' Total price:  €99.00 ');
-  });
-  cy.get('.primary-button').click();
-  cy.get('cx-fs-bind-quote-dialog').within(() => {
-    cy.get('.primary-button').click();
-  });
+export function checkTravelMiniCart() {
+  const miniCartContent: addOptionsPage.MiniCart = {
+    price: ' €99.00 ',
+    products: [
+      {
+        title: ' Single - Budget Plan: ',
+        value: ' €90.00 ',
+      },
+      {
+        title: ' Winter Sports Cover: ',
+        value: ' €9.00 ',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
 }

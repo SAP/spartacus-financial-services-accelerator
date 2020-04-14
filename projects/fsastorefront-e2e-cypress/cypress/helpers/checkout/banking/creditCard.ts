@@ -1,4 +1,4 @@
-import * as addOptionsPage from '../addOptionsPage';
+import * as shared from '../sharedFunctions';
 
 export function checkOptionalProducts() {
   const addOptionsContent: addOptionsPage.AddOptions = {
@@ -18,39 +18,40 @@ export function checkOptionalProducts() {
       },
     ],
   };
-  addOptionsPage.checkAddOptionsPageContent(addOptionsContent);
+  shared.checkAddOptionsPageContent(addOptionsContent);
 }
 
 export function checkMiniCartCreditCard() {
-  cy.get('cx-fs-mini-cart').within(() => {
-    cy.get('.short-overview-item').should('have.length', 1);
-    cy.get('.short-overview-item')
-      .eq(0)
-      .should('have.text', ' Premium Card:  €89.00 ');
-    cy.get('.highlighted').should('have.text', ' Total price:  €89.00 ');
-  });
+  const miniCartContent: addOptionsPage.MiniCart = {
+    price: ' €89.00 ',
+    products: [
+      {
+        title: ' Premium Card: ',
+        value: ' €89.00 ',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
 }
 
 export function checkCreditCardComparisonTable() {
-  cy.get('cx-fs-comparison-table-panel-item').should('have.length', 3);
-  cy.get('cx-fs-comparison-table-panel-item')
-    .eq(0)
-    .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Basic Card');
-      cy.get('.table-header-value').should('have.text', '€49.00');
-    });
-  cy.get('cx-fs-comparison-table-panel-item')
-    .eq(1)
-    .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Premium Card');
-      cy.get('.table-header-value').should('have.text', '€89.00');
-    });
-  cy.get('cx-fs-comparison-table-panel-item')
-    .eq(2)
-    .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Exclusive Card');
-      cy.get('.table-header-value').should('have.text', '€169.00');
-    });
+  const comparisonTableContent: addOptionsPage.ComparisonTable = {
+    mainProducts: [
+      {
+        name: 'Basic Card',
+        price: '€49.00',
+      },
+      {
+        name: 'Premium Card',
+        price: '€89.00',
+      },
+      {
+        name: 'Exclusive Card',
+        price: '€169.00',
+      },
+    ],
+  };
+  shared.checkComparisonTable(comparisonTableContent);
 }
 
 export function selectPremiumCard() {

@@ -52,7 +52,7 @@ context('Credit Card Checkout', () => {
 
   it('Should check Quote Review page', () => {
     cy.get('.progress-inner-wrapper').should('have.length', 5);
-    checkout.checkQuoteReviewAccordions('creditCard');
+    checkout.checkAccordions('creditCard');
   });
 
   it('Should bind Quote', () => {
@@ -80,6 +80,7 @@ context('Credit Card Checkout', () => {
 
   it('Should check order confirmation', () => {
     checkout.checkOrderConfirmationBanking();
+    checkout.checkAccordions('creditCard');
   });
 
   it('Should check Pending message is received', () => {

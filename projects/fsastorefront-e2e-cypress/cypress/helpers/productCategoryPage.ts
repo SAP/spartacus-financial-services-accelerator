@@ -1,3 +1,5 @@
+import { AddOptionItem, AddOptions } from './checkout/sharedFunctions';
+
 export function checkComponents() {
   cy.get('.Section1 cx-fs-enriched-responsive-banner');
   cy.get('span.enriched-banner-title').should(
@@ -29,7 +31,7 @@ export function checksSavingsCategoryPage() {
   cy.get('h3.section-header-heading').should('contain', 'Safe And Steady');
   cy.get('h3.section-header-heading').should('contain', 'Balanced Deal');
   cy.get('h3.section-header-heading').should('contain', 'Flexi-Max');
-  cy.get('ul.item-details').should('have.length', 3);
+  cy.get('.item-details').should('have.length', 3);
   cy.go('back');
 }
 
