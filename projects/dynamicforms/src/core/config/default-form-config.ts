@@ -11,45 +11,71 @@ import { DefaultFormValidators } from '../../util/validators/default-form-valida
 
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
-    cssClass: {
-      form: '',
-      controlElement: '',
-      formTitle: 'mt-3 pl-3',
-      inputWrapper: 'form-group',
-      input: 'form-control',
-      label: 'col-form-label',
-      radioInputWrapper: 'form-check',
-      radioInput: 'form-check-input',
-      radioLabel: 'form-check-label mb-2',
-      radioOptionLabel: 'pl-3 pt-2',
-      validatorMessageWrapper: 'px-4',
-      validatorMessage: 'text-danger mb-2',
-      submitButton: 'btn btn-primary',
-    },
+    formClass: '',
+    errorWrapperClass: 'px-4',
+    errorClass: 'text-danger mb-2',
+    errorMessageClass: 'text-danger mb-2',
     components: {
       button: {
         component: ButtonComponent,
+        cssEntries: {
+          elementClass: 'btn btn-primary',
+        },
       },
       input: {
         component: InputComponent,
+        cssEntries: {
+          wrapperClass: 'form-group',
+          labelClass: 'col-form-label',
+          elementClass: 'form-control',
+        },
       },
       select: {
         component: SelectComponent,
+        cssEntries: {
+          wrapperClass: 'form-group',
+          labelClass: 'col-form-label',
+          elementClass: 'form-control',
+        },
       },
       title: {
         component: TitleComponent,
+        cssEntries: {
+          elementClass: 'mt-3',
+        },
       },
       datepicker: {
         component: DatePickerComponent,
+        cssEntries: {
+          wrapperClass: 'form-group',
+          labelClass: 'col-form-label',
+          elementClass: 'form-control',
+        },
       },
       radio: {
         component: RadioComponent,
+        cssEntries: {
+          wrapperClass: 'form-check',
+          labelClass: 'form-check-label mb-2',
+          optionalClass: 'pl-3 pt-2',
+          elementClass: 'form-check-input',
+        },
       },
       textarea: {
         component: TextAreaComponent,
+        cssEntries: {
+          wrapperClass: 'form-group',
+          labelClass: 'col-form-label',
+          elementClass: 'form-control',
+        },
       },
       time: {
         component: TimeComponent,
+        cssEntries: {
+          wrapperClass: 'form-group',
+          labelClass: 'col-form-label',
+          elementClass: 'form-control',
+        },
       },
     },
     validators: {

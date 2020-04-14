@@ -3,15 +3,15 @@
   [formGroup]="group"
   [hidden]="group.controls[config.name].disabled"
 >
-  <div [ngClass]="cssClass.inputWrapper">
-    <label [ngClass]="cssClass.label">
+  <div [ngClass]="componentStyle[config.type]?.cssEntries?.wrapperClass">
+    <label [ngClass]="componentStyle[config.type]?.cssEntries?.labelClass">
       <ng-container *ngIf="!config.required">
         {{ 'forms.optional' | cxTranslate }}
       </ng-container>
       {{ config.label }}
     </label>
     <input
-      [ngClass]="cssClass.input"
+      [ngClass]="componentStyle[config.type]?.cssEntries?.elementClass"
       type="date"
       [formControlName]="config.name"
       [attr.name]="config.name"

@@ -1,5 +1,5 @@
 <div
-  [ngClass]="cssClass.formTitle"
+  [ngClass]="componentStyle[config.type]?.cssEntries?.elementClass"
   [formGroup]="group"
   [hidden]="group.controls[config.name].disabled"
 >

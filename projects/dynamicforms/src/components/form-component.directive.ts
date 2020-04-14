@@ -11,7 +11,7 @@ import {
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from '../core/models/form-config.interface';
 import { AbstractFormComponent } from './abstract-form.component';
-import { DynamicFormsConfig } from '../core/config/form-config';
+import { DynamicFormsConfig, ComponentCss } from '../core/config/form-config';
 
 @Directive({
   selector: '[cxFormComponent]',
@@ -23,6 +23,7 @@ export class FormComponentDirective implements OnChanges, OnInit {
   group: FormGroup;
   component: ComponentRef<AbstractFormComponent>;
   components: { [type: string]: Type<AbstractFormComponent> } = {};
+  styleClass: ComponentCss;
 
   constructor(
     protected resolver: ComponentFactoryResolver,
