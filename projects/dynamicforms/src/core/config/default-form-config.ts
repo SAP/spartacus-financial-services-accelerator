@@ -65,8 +65,20 @@ export const defaultFormConfig: DynamicFormsConfig = {
       minValue: {
         validator: DefaultFormValidators.min,
       },
+      maxLength: {
+        validator: DefaultFormValidators.maxLength,
+      },
+      minLength: {
+        validator: DefaultFormValidators.minLength,
+      },
       number: {
         validator: DefaultFormValidators.number,
+      },
+      email: {
+        validator: DefaultFormValidators.email,
+      },
+      postalCode: {
+        validator: DefaultFormValidators.postalCode,
       },
     },
   },
