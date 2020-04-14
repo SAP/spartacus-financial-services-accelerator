@@ -8,9 +8,10 @@ export const userRequest = {
     postcode: 'Postcode',
     whenHappened: 'When it happened',
     whatTime: 'What time it happened',
-    howAccidentOccured: 'How the accident occured',
+    howAccidentOccurred: 'How the accident occured',
     policeInformed: 'Were the police informed:',
     responsibleForAccident: 'Who is responsible for the accident:',
     witnesses: 'Are there any witnesses we can contact',
+    description: 'Description',
   },
 };

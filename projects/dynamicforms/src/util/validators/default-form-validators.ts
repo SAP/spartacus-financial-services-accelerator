@@ -3,8 +3,6 @@ import { AbstractControl, ValidationErrors, Validators } from '@angular/forms';
 // @dynamic
 export class DefaultFormValidators extends Validators {
   static passwordRegex = /^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^*()_\-+{};:.,]).{6,}$/;
-  // tslint:disable-next-line:max-line-length
-  static emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   static phoneNumberRegex = /^(?:\d{6,20})?$/;
   static postalCodeRegex = /^(?=.*[0-9])[A-Za-z0-9\s]+$/;
 
@@ -89,6 +87,23 @@ export class DefaultFormValidators extends Validators {
         : {
             pattern: {
               requiredPattern: numberRegex,
+              actualValue: control.value,
+            },
+          };
+    }
+    return null;
+  }
+
+  static postalCode(control: AbstractControl) {
+    const field: string = control.value;
+    const postalCodeRegex = /^(?=.*[0-9])[A-Za-z0-9\s]+$/;
+    if (field) {
+      const valid = postalCodeRegex.test(field);
+      return valid
+        ? null
+        : {
+            pattern: {
+              requiredPattern: postalCodeRegex,
               actualValue: control.value,
             },
           };
