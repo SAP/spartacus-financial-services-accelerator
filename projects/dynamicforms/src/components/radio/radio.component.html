@@ -3,23 +3,23 @@
   [formGroup]="group"
   [hidden]="group.controls[config.name].disabled"
 >
-  <label [ngClass]="componentStyle[config.type]?.cssEntries?.labelClass">
+  <label [ngClass]="formComponent[config.type]?.cssEntries?.labelClass">
     <ng-container *ngIf="!config.required">
       {{ 'forms.optional' | cxTranslate }}
     </ng-container>
     {{ config.label }}
   </label>
-  <div [ngClass]="componentStyle[config.type]?.cssEntries?.wrapperClass">
+  <div [ngClass]="formComponent[config.type]?.cssEntries?.wrapperClass">
     <div *ngFor="let option of config.options">
       <input
-        [ngClass]="componentStyle[config.type]?.cssEntries?.elementClass"
+        [ngClass]="formComponent[config.type]?.cssEntries?.elementClass"
         type="radio"
         [attr.name]="config.name"
         value="{{ option.name }}"
         [formControlName]="config.name"
       />
       <label
-        [ngClass]="componentStyle[config.type]?.cssEntries?.optionalClass"
+        [ngClass]="formComponent[config.type]?.cssEntries?.optionalClass"
         >{{ option.label }}</label
       >
     </div>

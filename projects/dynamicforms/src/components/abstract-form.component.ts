@@ -11,9 +11,10 @@ export class AbstractFormComponent {
     public formConfig: DynamicFormsConfig
   ) {}
 
-  @HostBinding('class') class = this.formConfig.dynamicForms.formClass;
+  dynamicForms = this.formConfig.dynamicForms;
+
+  @HostBinding('class') class = this.dynamicForms.formClass;
   config: FieldConfig;
   group: FormGroup;
-  dynamicForms = this.formConfig.dynamicForms;
-  componentStyle = this.formConfig.dynamicForms.components;
+  formComponent = this.dynamicForms.components;
 }
