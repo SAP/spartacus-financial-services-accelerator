@@ -43,6 +43,7 @@ class MockOccFormService {
 const mockField: FieldConfig = {
   type: 'select',
   name: 'testSelect',
+  options: [],
   label: 'What time did it happen?',
   depends: ['dependentTestField'],
   apiUrl: 'testUrl',
@@ -100,14 +101,11 @@ describe('SelectComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should check components type', () => {
-  //   expect(component.config).toBe(mockField);
-  //   expect(component.config.type).toEqual('select');
-  // });
-
-  it('should set form control values from API', () => {
-    component.setFormControlValues('testGroup');
-    expect(component.config.options).toEqual(apiValues.values);
+  it('should not call external API', () => {
+    spyOn(mockOccFormService, 'getValuesFromAPI').and.stub();
+    mockField.apiUrl = undefined;
+    fixture.detectChanges();
+    expect(mockOccFormService.getValuesFromAPI).not.toHaveBeenCalled();
   });
 
   it('should render select component', () => {
