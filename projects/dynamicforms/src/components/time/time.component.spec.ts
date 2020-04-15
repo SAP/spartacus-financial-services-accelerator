@@ -16,6 +16,9 @@ import { TimeComponent } from './time.component';
 class MockErrorNoticeComponent {
   @Input() warn;
   @Input() parentConfig;
+  @Input() errorWrapperClass;
+  @Input() errorClass;
+  @Input() errorMessageClass;
 }
 
 class MockOccFormService {}

@@ -14,10 +14,7 @@ const mockFormGroup = new FormGroup({
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
-  dynamicForms: {
-    errorWrapperClass: 'testErrorClass',
-    components: {},
-  },
+  dynamicForms: {},
 };
 
 describe('ErrorNoticeComponent', () => {
@@ -51,7 +48,7 @@ describe('ErrorNoticeComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should render textarea component', () => {
-    const errorComponent = el.query(By.css('.testErrorClass')).nativeElement;
+    const errorComponent = el.query(By.css('.px-4')).nativeElement;
     expect(errorComponent).toBeTruthy();
   });
 });

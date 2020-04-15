@@ -16,6 +16,9 @@ import { SelectComponent } from './select.component';
 class MockErrorNoticeComponent {
   @Input() warn;
   @Input() parentConfig;
+  @Input() errorWrapperClass;
+  @Input() errorClass;
+  @Input() errorMessageClass;
 }
 
 const dependentOptions = [
