@@ -3,40 +3,29 @@
   [formGroup]="group"
   [hidden]="group.controls[config.name].disabled"
 >
-  <label [ngClass]="formComponent[config.type]?.cssEntries?.labelClass">
+  <label [ngClass]="formComponent?.labelClass">
     <ng-container *ngIf="!config.required">
       {{ 'forms.optional' | cxTranslate }}
     </ng-container>
     {{ config.label }}
   </label>
-  <div [ngClass]="formComponent[config.type]?.cssEntries?.wrapperClass">
+  <div [ngClass]="formComponent?.wrapperClass">
     <div *ngFor="let option of config.options">
       <input
-        [ngClass]="
-          formComponent[config.type]?.cssEntries?.elementClass +
-          ' ' +
-          config.cssClass
-        "
+        [ngClass]="formComponent?.elementClass + ' ' + config.cssClass"
         type="radio"
         [attr.name]="config.name"
         value="{{ option.name }}"
         [formControlName]="config.name"
       />
-      <label
-        [ngClass]="formComponent[config.type]?.cssEntries?.optionalClass"
-        >{{ option.label }}</label
-      >
+      <label [ngClass]="formComponent?.optionalClass">{{ option.label }}</label>
     </div>
   </div>
   <cx-error-notice
     [warn]="group.controls[config.name]"
     [parentConfig]="config"
-    [errorWrapperClass]="
-      formComponent[config.type]?.cssEntries?.errorWrapperClass
-    "
-    [errorClass]="formComponent[config.type]?.cssEntries?.errorClass"
-    [errorMessageClass]="
-      formComponent[config.type]?.cssEntries?.errorMessageClass
-    "
+    [errorWrapperClass]="formComponent?.errorWrapperClass"
+    [errorClass]="formComponent?.errorClass"
+    [errorMessageClass]="formComponent?.errorMessageClass"
   ></cx-error-notice>
 </div>

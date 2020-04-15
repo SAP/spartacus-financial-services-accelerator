@@ -4,6 +4,7 @@ export interface FormComponentMapping {
 }
 
 export interface ComponentCss {
+  controlContainerClass?: string;
   wrapperClass?: string;
   labelClass?: string;
   optionalClass?: string;

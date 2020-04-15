@@ -3,19 +3,15 @@
   [formGroup]="group"
   [hidden]="group.controls[config.name].disabled"
 >
-  <div [ngClass]="formComponent[config.type]?.cssEntries?.wrapperClass">
-    <label [ngClass]="formComponent[config.type]?.cssEntries?.labelClass">
+  <div [ngClass]="formComponent?.wrapperClass">
+    <label [ngClass]="formComponent?.labelClass">
       <ng-container *ngIf="!config.required">
         {{ 'forms.optional' | cxTranslate }}
       </ng-container>
       {{ config.label }}
     </label>
     <input
-      [ngClass]="
-        formComponent[config.type]?.cssEntries?.elementClass +
-        ' ' +
-        config.cssClass
-      "
+      [ngClass]="formComponent?.elementClass + ' ' + config.cssClass"
       type="time"
       [formControlName]="config.name"
       [attr.name]="config.name"
@@ -24,12 +20,8 @@
   <cx-error-notice
     [warn]="group.controls[config.name]"
     [parentConfig]="config"
-    [errorWrapperClass]="
-      formComponent[config.type]?.cssEntries?.errorWrapperClass
-    "
-    [errorClass]="formComponent[config.type]?.cssEntries?.errorClass"
-    [errorMessageClass]="
-      formComponent[config.type]?.cssEntries?.errorMessageClass
-    "
+    [errorWrapperClass]="formComponent?.errorWrapperClass"
+    [errorClass]="formComponent?.errorClass"
+    [errorMessageClass]="formComponent?.errorMessageClass"
   ></cx-error-notice>
 </div>

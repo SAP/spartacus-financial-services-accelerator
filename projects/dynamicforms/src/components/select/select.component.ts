@@ -7,6 +7,7 @@ import { AbstractFormComponent } from '../abstract-form.component';
 })
 export class SelectComponent extends AbstractFormComponent implements OnInit {
   ngOnInit() {
+    super.ngOnInit();
     if (this.config.depends) {
       this.config.depends.forEach(dependField => {
         this.group.get(dependField).valueChanges.subscribe(val => {

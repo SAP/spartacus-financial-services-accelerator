@@ -1,20 +1,40 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from '../core/models/form-config.interface';
 import { DynamicFormsConfig } from '../core/config/form-config';
 import { OccMockFormService } from '../occ/services/occ-mock-form.service';
 
 @Component({ template: '' })
-export class AbstractFormComponent {
+export class AbstractFormComponent implements OnInit {
   constructor(
     protected formService: OccMockFormService,
     public formConfig: DynamicFormsConfig
   ) {}
 
-  dynamicForms = this.formConfig.dynamicForms;
-
-  @HostBinding('class') class = this.dynamicForms.formClass;
+  @HostBinding('class') hostComponentClass;
   config: FieldConfig;
   group: FormGroup;
-  formComponent = this.dynamicForms.components;
+  formComponent;
+
+  ngOnInit() {
+    if (
+      this.config &&
+      this.config.type &&
+      this.formConfig &&
+      this.formConfig.dynamicForms &&
+      this.formConfig.dynamicForms.components &&
+      this.formConfig.dynamicForms.components[this.config.type] &&
+      this.formConfig.dynamicForms.components[this.config.type].cssEntries
+    ) {
+      this.hostComponentClass = this.formConfig.dynamicForms.components[
+        this.config.type
+      ].cssEntries.controlContainerClass
+        ? this.formConfig.dynamicForms.components[this.config.type].cssEntries
+            .controlContainerClass
+        : '';
+      this.formComponent = this.formConfig.dynamicForms.components[
+        this.config.type
+      ].cssEntries;
+    }
+  }
 }
