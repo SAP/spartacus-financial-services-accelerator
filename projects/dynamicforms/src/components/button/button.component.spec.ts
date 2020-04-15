@@ -3,11 +3,9 @@ import { By } from '@angular/platform-browser';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
+import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { ButtonComponent } from './button.component';
-
-const mockCssClass: CssClass = {};
 
 class MockOccFormService {}
 
@@ -23,7 +21,6 @@ const mockFormGroup = new FormGroup({
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {
-    cssClass: mockCssClass,
     components: {
       button: {
         component: ButtonComponent,
