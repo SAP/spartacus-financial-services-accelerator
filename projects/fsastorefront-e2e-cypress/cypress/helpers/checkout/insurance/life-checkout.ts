@@ -1,4 +1,4 @@
-import * as shared from '../sharedFunctions';
+import * as shared from '../shared-checkout';
 
 export function populateFirstStep() {
   cy.get('.formTitle').contains('Coverage Information');

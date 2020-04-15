@@ -1,4 +1,4 @@
-import { AddOptionItem, AddOptions } from './checkout/sharedFunctions';
+import { AddOptionItem, AddOptions } from './checkout/shared-checkout';
 
 export function checkComponents() {
   cy.get('.Section1 cx-fs-enriched-responsive-banner');

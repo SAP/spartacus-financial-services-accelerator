@@ -1,13 +1,4 @@
-export interface AddOptionItem {
-  name: string;
-  available?: boolean;
-  shouldAdd?: boolean;
-}
-
-export interface AddOptions {
-  title: string;
-  items: AddOptionItem[];
-}
+import { ComparisonTable, AddOptions } from './shared-checkout.interface';
 
 export function checkAddOptionsPageContent(addOptions: AddOptions) {
   cy.get('.heading-headline').contains(addOptions.title);
@@ -29,16 +20,6 @@ export function checkAddOptionsPageContent(addOptions: AddOptions) {
           });
       });
     });
-}
-
-export interface MiniCart {
-  price: string;
-  products: ProductItem[];
-}
-
-export interface ProductItem {
-  title: string;
-  value: string;
 }
 
 export function checkMiniCart(miniCart: MiniCart) {
@@ -68,15 +49,6 @@ export function checkMiniCart(miniCart: MiniCart) {
           });
       });
     });
-}
-
-export interface ComparisonTable {
-  mainProducts: MainProductItem[];
-}
-
-export interface MainProductItem {
-  name: string;
-  price: string;
 }
 
 export function checkComparisonTable(comparisonTable: ComparisonTable) {

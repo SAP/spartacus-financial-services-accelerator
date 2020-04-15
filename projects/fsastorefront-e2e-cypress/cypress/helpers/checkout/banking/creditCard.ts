@@ -1,4 +1,4 @@
-import * as shared from '../sharedFunctions';
+import * as shared from '../shared-checkout';
 
 export function checkOptionalProducts() {
   const addOptionsContent: addOptionsPage.AddOptions = {

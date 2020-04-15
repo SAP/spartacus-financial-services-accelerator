@@ -1,4 +1,4 @@
-import * as shared from '../sharedFunctions';
+import * as shared from '../shared-checkout';
 
 export function openCategoryPage() {
   cy.selectOptionFromDropdown({
@@ -10,28 +10,6 @@ export function openCategoryPage() {
     .findByText('Request a product')
     .click({ force: true });
 }
-
-/*export function checkCurrentAccountComparisonTable() {
-  cy.get('cx-fs-comparison-table-panel-item').should('have.length', 3);
-  cy.get('cx-fs-comparison-table-panel-item')
-    .eq(0)
-    .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Basic Account');
-      cy.get('.table-header-value').should('have.text', '€0.00');
-    });
-  cy.get('cx-fs-comparison-table-panel-item')
-    .eq(1)
-    .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Family Account');
-      cy.get('.table-header-value').should('have.text', '€4.99');
-    });
-  cy.get('cx-fs-comparison-table-panel-item')
-    .eq(2)
-    .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Premium Account');
-      cy.get('.table-header-value').should('have.text', '€9.99');
-    });
-}*/
 
 export function checkCurrentAccountComparisonTable() {
   const comparisonTableContent: addOptionsPage.ComparisonTable = {
@@ -86,19 +64,6 @@ export function checkOptionalProductsAddTransactionChest() {
     .should('be.visible')
     .click();
 }
-
-/*export function checkMiniCartCurrentAccount() {
-  cy.get('cx-fs-mini-cart').within(() => {
-    cy.get('.short-overview-item').should('have.length', 2);
-    cy.get('.short-overview-item')
-      .eq(0)
-      .should('have.text', ' Family Account:  €4.99 ');
-    cy.get('.short-overview-item')
-      .eq(1)
-      .should('have.text', ' Transaction Chest:  €5.00 ');
-    cy.get('.highlighted').should('have.text', ' Total price:  €9.99 ');
-  });
-}*/
 
 export function checkMiniCartCurrentAccount() {
   const miniCartContent: addOptionsPage.MiniCart = {
