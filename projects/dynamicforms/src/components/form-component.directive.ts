@@ -11,7 +11,7 @@ import {
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from '../core/models/form-config.interface';
 import { AbstractFormComponent } from './abstract-form.component';
-import { DynamicFormsConfig, ComponentCss } from '../core/config/form-config';
+import { DynamicFormsConfig } from '../core/config/form-config';
 
 @Directive({
   selector: '[cxFormComponent]',
