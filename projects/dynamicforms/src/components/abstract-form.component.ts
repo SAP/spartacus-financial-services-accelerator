@@ -26,15 +26,12 @@ export class AbstractFormComponent implements OnInit {
       this.formConfig.dynamicForms.components[this.config.type] &&
       this.formConfig.dynamicForms.components[this.config.type].cssEntries
     ) {
-      this.hostComponentClass = this.formConfig.dynamicForms.components[
-        this.config.type
-      ].cssEntries.controlContainerClass
-        ? this.formConfig.dynamicForms.components[this.config.type].cssEntries
-            .controlContainerClass
+      const component = this.formConfig.dynamicForms.components;
+      this.hostComponentClass = component[this.config.type].cssEntries
+        .controlContainerClass
+        ? component[this.config.type].cssEntries.controlContainerClass
         : '';
-      this.formComponent = this.formConfig.dynamicForms.components[
-        this.config.type
-      ].cssEntries;
+      this.formComponent = component[this.config.type].cssEntries;
     }
   }
 }
