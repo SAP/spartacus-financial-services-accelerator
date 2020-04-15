@@ -14,4 +14,8 @@ export class AbstractFormComponent {
   @HostBinding('class') class = this.cssClass.controlElement;
   config: FieldConfig;
   group: FormGroup;
+
+  getValuesFromAPI(apiUrl: string) {
+    return this.formService.getValuesFromAPI(apiUrl);
+  }
 }

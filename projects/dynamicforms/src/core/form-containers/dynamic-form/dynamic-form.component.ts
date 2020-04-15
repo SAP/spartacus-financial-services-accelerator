@@ -82,8 +82,8 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   createFormDefinition() {
     if (this.config) {
       this.form = this.formService.createForm(this.config);
-      this.config.formGroups.map(formGroup => {
-        formGroup.fieldConfigs.map(inputField => {
+      this.config.formGroups.forEach(formGroup => {
+        formGroup.fieldConfigs.forEach(inputField => {
           this.allInputs.push(inputField);
         });
       });

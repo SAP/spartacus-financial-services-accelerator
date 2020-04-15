@@ -16,7 +16,7 @@ import { DynamicFormsConfig } from '../core/config/form-config';
 @Directive({
   selector: '[cxFormComponent]',
 })
-export class FormComponentDirective implements OnChanges, OnInit {
+export class FormComponentDirective implements OnInit {
   @Input()
   config: FieldConfig;
   @Input()
@@ -29,13 +29,6 @@ export class FormComponentDirective implements OnChanges, OnInit {
     protected container: ViewContainerRef,
     protected formConfig: DynamicFormsConfig
   ) {}
-
-  ngOnChanges() {
-    if (this.component) {
-      this.component.instance.config = this.config;
-      this.component.instance.group = this.group;
-    }
-  }
 
   ngOnInit() {
     for (const [name, obj] of Object.entries(

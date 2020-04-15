@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractFormComponent } from '../abstract-form.component';
+import { map } from 'rxjs/operators';
+import { FieldOption } from 'dynamicforms/src/core';
 
 @Component({
   selector: 'cx-select',
@@ -18,15 +20,24 @@ export class SelectComponent extends AbstractFormComponent implements OnInit {
   }
 
   setFormControlValues(val: string) {
-    if (this.config.jsonField) {
-      const nodes = this.config.jsonField.split('.');
-      if (val !== null) {
-        this.config.options = this.formService.getDropdownValues(nodes, val);
-      } else {
-        this.config.options = this.formService.setInitialFormControlValues(
-          nodes
-        );
-      }
+    if (this.config.apiUrl) {
+      this.config.options = [];
+      this.getValuesFromAPI(this.config.apiUrl)
+        .pipe(
+          map(result => {
+            if (result.values) {
+              const apiValues: FieldOption[] = [];
+              result.values.forEach(item => {
+                apiValues.push({
+                  name: item.key,
+                  label: item.value,
+                });
+              });
+              this.config.options = apiValues;
+            }
+          })
+        )
+        .subscribe();
     }
   }
 }
