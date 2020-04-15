@@ -8,5 +8,8 @@ import { AbstractFormComponent } from '../abstract-form.component';
 export class ErrorNoticeComponent extends AbstractFormComponent {
   @Input() warn: any;
   @Input() parentConfig: any;
+  @Input() errorWrapperClass: string;
+  @Input() errorClass: string;
+  @Input() errorMessageClass: string;
   @HostBinding('class') class = '';
 }

@@ -12,9 +12,6 @@ import { DefaultFormValidators } from '../../util/validators/default-form-valida
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
     formClass: '',
-    errorWrapperClass: 'px-4',
-    errorClass: 'text-danger mb-2',
-    errorMessageClass: 'text-danger mb-2',
     components: {
       button: {
         component: ButtonComponent,

@@ -25,5 +25,12 @@
   <cx-error-notice
     [warn]="group.controls[config.name]"
     [parentConfig]="config"
+    [errorWrapperClass]="
+      formComponent[config.type]?.cssEntries?.errorWrapperClass
+    "
+    [errorClass]="formComponent[config.type]?.cssEntries?.errorClass"
+    [errorMessageClass]="
+      formComponent[config.type]?.cssEntries?.errorMessageClass
+    "
   ></cx-error-notice>
 </div>

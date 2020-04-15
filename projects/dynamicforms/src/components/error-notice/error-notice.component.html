@@ -1,9 +1,9 @@
 <div class="row">
-  <div [ngClass]="dynamicForms.errorWrapperClass">
+  <div [ngClass]="errorWrapperClass ? errorWrapperClass : 'px-4'">
     <ng-container
       *ngIf="(warn?.touched && warn?.errors?.required) || warn?.errors?.pattern"
     >
-      <div [ngClass]="dynamicForms.errorClass">
+      <div [ngClass]="errorClass ? errorClass : 'text-danger mb-2'">
         {{ 'forms.enterValidValue' | cxTranslate }}
       </div>
     </ng-container>
@@ -15,7 +15,9 @@
         parentConfig?.error
       "
     >
-      <div [ngClass]="dynamicForms.errorMessageClass">
+      <div
+        [ngClass]="errorMessageClass ? errorMessageClass : 'text-danger mb-2'"
+      >
         {{ parentConfig.error | cxTranslate }}
       </div>
     </ng-container>
