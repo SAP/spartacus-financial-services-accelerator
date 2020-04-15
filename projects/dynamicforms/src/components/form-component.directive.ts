@@ -23,7 +23,6 @@ export class FormComponentDirective implements OnChanges, OnInit {
   group: FormGroup;
   component: ComponentRef<AbstractFormComponent>;
   components: { [type: string]: Type<AbstractFormComponent> } = {};
-  styleClass: ComponentCss;
 
   constructor(
     protected resolver: ComponentFactoryResolver,
