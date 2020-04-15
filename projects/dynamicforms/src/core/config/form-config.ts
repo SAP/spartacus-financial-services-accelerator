@@ -1,13 +1,11 @@
 export interface FormComponentMapping {
   component: any;
-  cssEntries?: ComponentCss;
-}
-
-export interface ComponentCss {
-  wrapperClass?: string;
-  labelClass?: string;
-  optionalClass?: string;
-  elementClass?: string;
+  cssEntries?: {
+    wrapperClass?: string;
+    labelClass?: string;
+    optionalClass?: string;
+    elementClass?: string;
+  };
 }
 
 export abstract class FormComponentConfig {
