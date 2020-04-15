@@ -13,7 +13,7 @@ export interface FieldConfig {
   required?: boolean;
   disabled?: boolean;
   group?: string;
-  label?: string;
+  label?: Label;
   options?: FieldOption[];
   depends?: string[];
   jsonField?: string;
@@ -25,7 +25,10 @@ export interface FieldConfig {
   error?: string;
   validations?: ValidatorFunction[];
 }
-
+export interface Label {
+  default: string;
+  [key: string]: string
+}
 export interface ValidatorFunction {
   name: string;
   arguments?: ValidatorArgument[];
