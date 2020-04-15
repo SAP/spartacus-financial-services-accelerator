@@ -470,6 +470,8 @@ export class FormSampleConfigurations {
               type: 'select',
               depends: ['vehicleMake', 'vehicleModel', 'vehicleType'],
               label: 'Vehicle Year',
+              apiUrl:
+                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/autoVehicleYear',
               name: 'vehicleYear',
               required: true,
               validation: [DefaultFormValidators.required],
@@ -653,10 +655,8 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              options: [
-                { name: 'Male', label: 'Male' },
-                { name: 'Female', label: 'Female' },
-              ],
+              apiUrl:
+                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/gender',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
@@ -665,11 +665,8 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
-              options: [
-                { name: 'Single', label: 'Single' },
-                { name: 'Married', label: 'Married' },
-                { name: 'Widowed', label: 'Widowed' },
-              ],
+              apiUrl:
+                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/maritalStatus',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
@@ -721,10 +718,8 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              options: [
-                { name: 'Male', label: 'Male' },
-                { name: 'Female', label: 'Female' },
-              ],
+              apiUrl:
+                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/gender',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
@@ -733,11 +728,8 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
-              options: [
-                { name: 'Single', label: 'Single' },
-                { name: 'Married', label: 'Married' },
-                { name: 'Widowed', label: 'Widowed' },
-              ],
+              apiUrl:
+                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/maritalStatus',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
@@ -788,10 +780,8 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              options: [
-                { name: 'Male', label: 'Male' },
-                { name: 'Female', label: 'Female' },
-              ],
+              apiUrl:
+                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/gender',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
@@ -800,11 +790,8 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
-              options: [
-                { name: 'Single', label: 'Single' },
-                { name: 'Married', label: 'Married' },
-                { name: 'Widowed', label: 'Widowed' },
-              ],
+              apiUrl:
+                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/maritalStatus',
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
@@ -854,10 +841,8 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              options: [
-                { name: 'Male', label: 'Male' },
-                { name: 'Female', label: 'Female' },
-              ],
+              apiUrl:
+                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/gender',
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
@@ -865,11 +850,8 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
-              options: [
-                { name: 'Single', label: 'Single' },
-                { name: 'Married', label: 'Married' },
-                { name: 'Widowed', label: 'Widowed' },
-              ],
+              apiUrl:
+                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/maritalStatus',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
