@@ -1,15 +1,14 @@
 import { I18nTestingModule } from '@spartacus/core';
 import { TestBed } from '@angular/core/testing';
-
+import { Type } from '@angular/core';
+import { Store, StoreModule } from '@ngrx/store';
 import { FormDataService } from './form-data.service';
 import { YFormData, YFormDefinition } from './../../models/form-occ.models';
-import { OccFormAdapter } from '../../../occ/adapters/form/occ-form.adapter';
 import { Observable, of } from 'rxjs';
 import * as fromAction from '../../store/actions';
-import { Store, StoreModule } from '@ngrx/store';
 import { reducerProvider, reducerToken } from '../../store/reducers';
 import { StateWithFormDefinition } from '../../store/form-definition-state';
-import { Type } from '@angular/core';
+import { FormAdapter } from '../../connectors/form.adapter';
 
 const mockData: Observable<YFormData> = of({
   formDefinitionId: 'formDefinitionId',
@@ -40,7 +39,7 @@ const mockFormDataNew: YFormData = {
   },
 };
 
-class MockOccYFormService {
+class MockOccFormAdapter {
   getFormData() {
     return mockData;
   }
@@ -57,11 +56,11 @@ class MockOccYFormService {
 
 describe('FormDataService', () => {
   let service: FormDataService;
-  let mockYFormService: MockOccYFormService;
+  let mockFormAdapter: MockOccFormAdapter;
   let store: Store<StateWithFormDefinition>;
 
   beforeEach(() => {
-    mockYFormService = new MockOccYFormService();
+    mockFormAdapter = new MockOccFormAdapter();
     TestBed.configureTestingModule({
       imports: [
         I18nTestingModule,
@@ -71,7 +70,7 @@ describe('FormDataService', () => {
       providers: [
         FormDataService,
         reducerProvider,
-        { provide: OccFormAdapter, useValue: mockYFormService },
+        { provide: FormAdapter, useValue: mockFormAdapter },
       ],
     });
 
@@ -85,15 +84,15 @@ describe('FormDataService', () => {
   });
 
   it('should update form data', () => {
-    spyOn(mockYFormService, 'updateFormData').and.callThrough();
+    spyOn(mockFormAdapter, 'updateFormData').and.callThrough();
     expect(service.saveFormData(mockFormData));
-    expect(mockYFormService.updateFormData).toHaveBeenCalled();
+    expect(mockFormAdapter.updateFormData).toHaveBeenCalled();
   });
 
   it('should create form data', () => {
-    spyOn(mockYFormService, 'createFormData').and.callThrough();
+    spyOn(mockFormAdapter, 'createFormData').and.callThrough();
     expect(service.saveFormData(mockFormDataNew));
-    expect(mockYFormService.createFormData).toHaveBeenCalled();
+    expect(mockFormAdapter.createFormData).toHaveBeenCalled();
   });
 
   it('should get data', () => {

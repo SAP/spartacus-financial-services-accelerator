@@ -32,7 +32,6 @@ describe('Change Request Effects', () => {
   let actions$: Observable<fromActions.FormDefinitionAction>;
   let effects: fromEffects.FormDefinitionEffects;
   let mockChangeRequestConnector: MockFormConnector;
-  let globalMessageService: GlobalMessageService;
 
   beforeEach(() => {
     mockChangeRequestConnector = new MockFormConnector();
