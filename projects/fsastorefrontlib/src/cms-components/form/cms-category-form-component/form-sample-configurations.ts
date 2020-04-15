@@ -421,7 +421,7 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               apiUrl:
-                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/paymentFrequency?categoryCode=insurances_auto',
+                '/catalogs/financialProductCatalog/valueLists/paymentFrequency?categoryCode=insurances_auto',
               label: 'Payment Frequency',
               name: 'paymentFrequency',
               required: true,
@@ -440,7 +440,7 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               apiUrl:
-                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/autoVehicleMake',
+                '/catalogs/financialProductCatalog/valueLists/autoVehicleMake',
               label: 'Vehicle Make',
               name: 'vehicleMake',
               required: true,
@@ -449,7 +449,7 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               apiUrl:
-                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/autoVehicleModel',
+                '/catalogs/financialProductCatalog/valueLists/autoVehicleModel',
               depends: ['vehicleMake'],
               label: 'Vehicle Model',
               name: 'vehicleModel',
@@ -460,7 +460,7 @@ export class FormSampleConfigurations {
               type: 'select',
               depends: ['vehicleMake', 'vehicleModel'],
               apiUrl:
-                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/autoVehicleType',
+                '/catalogs/financialProductCatalog/valueLists/autoVehicleType',
               label: 'Vehicle Type',
               name: 'vehicleType',
               required: true,
@@ -471,7 +471,7 @@ export class FormSampleConfigurations {
               depends: ['vehicleMake', 'vehicleModel', 'vehicleType'],
               label: 'Vehicle Year',
               apiUrl:
-                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/autoVehicleYear',
+                '/catalogs/financialProductCatalog/valueLists/autoVehicleYear',
               name: 'vehicleYear',
               required: true,
               validation: [DefaultFormValidators.required],
@@ -506,7 +506,7 @@ export class FormSampleConfigurations {
               label: 'Vehicle Usage',
               name: 'vehicleUsage',
               apiUrl:
-                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/autoVehicleUsage',
+                '/catalogs/financialProductCatalog/valueLists/autoVehicleUsage',
               required: true,
               validation: [DefaultFormValidators.required],
             },
@@ -564,8 +564,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              apiUrl:
-                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/gender',
+              apiUrl: '/catalogs/financialProductCatalog/valueLists/gender',
               required: true,
               validation: [DefaultFormValidators.required],
             },
@@ -574,7 +573,7 @@ export class FormSampleConfigurations {
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
               apiUrl:
-                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/maritalStatus',
+                '/catalogs/financialProductCatalog/valueLists/maritalStatus',
               required: true,
               validation: [DefaultFormValidators.required],
             },
@@ -583,7 +582,7 @@ export class FormSampleConfigurations {
               label: 'Driver`s Category',
               name: 'driverCategory',
               apiUrl:
-                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/autoDriverCategory',
+                '/catalogs/financialProductCatalog/valueLists/autoDriverCategory',
             },
             {
               type: 'datepicker',
@@ -655,8 +654,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              apiUrl:
-                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/gender',
+              apiUrl: '/catalogs/financialProductCatalog/valueLists/gender',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
@@ -666,7 +664,7 @@ export class FormSampleConfigurations {
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
               apiUrl:
-                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/maritalStatus',
+                '/catalogs/financialProductCatalog/valueLists/maritalStatus',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
@@ -718,8 +716,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              apiUrl:
-                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/gender',
+              apiUrl: '/catalogs/financialProductCatalog/valueLists/gender',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
@@ -729,7 +726,7 @@ export class FormSampleConfigurations {
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
               apiUrl:
-                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/maritalStatus',
+                '/catalogs/financialProductCatalog/valueLists/maritalStatus',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
@@ -780,8 +777,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              apiUrl:
-                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/gender',
+              apiUrl: '/catalogs/financialProductCatalog/valueLists/gender',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
@@ -791,7 +787,7 @@ export class FormSampleConfigurations {
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
               apiUrl:
-                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/maritalStatus',
+                '/catalogs/financialProductCatalog/valueLists/maritalStatus',
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
@@ -841,8 +837,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: 'Driver Gender',
               name: 'driverGender',
-              apiUrl:
-                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/gender',
+              apiUrl: '/catalogs/financialProductCatalog/valueLists/gender',
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
@@ -851,7 +846,7 @@ export class FormSampleConfigurations {
               label: 'Driver Marital Status',
               name: 'driverMaritalStatus',
               apiUrl:
-                'https://financialservices.local:9002/rest/v2/financial/catalogs/financialProductCatalog/valueLists/maritalStatus',
+                '/catalogs/financialProductCatalog/valueLists/maritalStatus',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,

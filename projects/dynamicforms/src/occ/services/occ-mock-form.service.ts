@@ -13,16 +13,27 @@ export class OccMockFormService {
 
   velueListsCache = new Map();
 
-  public getValuesFromAPI(apiUrl: string): Observable<any> {
-    const cacheValues = this.velueListsCache.get(apiUrl);
+  httpRegex = /(http(s?)):\/\//;
+
+  public getValuesFromAPI(fieldUrl: string): Observable<any> {
+    const url = this.getFullAPIUrl(fieldUrl);
+
+    const cacheValues = this.velueListsCache.get(url);
     if (cacheValues) {
       return of(cacheValues);
     }
-    return this.httpClient.get<any>(apiUrl).pipe(
+    return this.httpClient.get<any>(url).pipe(
       map(values => {
-        this.velueListsCache.set(apiUrl, values);
+        this.velueListsCache.set(url, values);
         return values;
       })
     );
+  }
+
+  getFullAPIUrl(fieldUrl) {
+    if (fieldUrl.match(this.httpRegex)) {
+      return fieldUrl;
+    }
+    return this.occEndpointService.getBaseEndpoint() + fieldUrl;
   }
 }
