@@ -5,7 +5,11 @@
 >
   <div class="row justify-content-end">
     <button
-      [ngClass]="formComponent[config.type]?.cssEntries?.elementClass"
+      [ngClass]="
+        formComponent[config.type]?.cssEntries?.elementClass +
+        ' ' +
+        config.cssClass
+      "
       [disabled]="config.disabled"
       type="submit"
       [attr.name]="config.name"

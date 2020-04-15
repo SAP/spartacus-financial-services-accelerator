@@ -11,7 +11,11 @@
       {{ config.label }}
     </label>
     <input
-      [ngClass]="formComponent[config.type]?.cssEntries?.elementClass"
+      [ngClass]="
+        formComponent[config.type]?.cssEntries?.elementClass +
+        ' ' +
+        config.cssClass
+      "
       type="date"
       [formControlName]="config.name"
       [attr.name]="config.name"

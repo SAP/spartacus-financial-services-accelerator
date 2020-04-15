@@ -15,6 +15,7 @@ export interface FieldConfig {
   group?: string;
   label?: string;
   options?: FieldOption[];
+  cssClass?: string;
   depends?: string[];
   jsonField?: string;
   placeholder?: string;

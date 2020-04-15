@@ -11,7 +11,11 @@
       {{ config.label }}
     </label>
     <textarea
-      [ngClass]="formComponent[config.type]?.cssEntries?.elementClass"
+      [ngClass]="
+        formComponent[config.type]?.cssEntries?.elementClass +
+        ' ' +
+        config.cssClass
+      "
       [attr.placeholder]="config.placeholder"
       [formControlName]="config.name"
       rows="10"
