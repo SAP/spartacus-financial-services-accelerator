@@ -10,7 +10,6 @@ import {
 import { FormSampleConfigurations } from '../../../util/form-sample-configurations';
 import { FormAdapter } from '../../../core/connectors/form.adapter';
 
-
 const FULL_PARAMS = 'fields=FULL';
 
 @Injectable()
