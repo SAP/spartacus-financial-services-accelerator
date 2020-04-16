@@ -14,7 +14,7 @@ export class FormDefinitionEffects {
     map((action: fromActions.LoadFormDefinition) => action.payload),
     mergeMap(payload => {
       return this.formConnector
-        .getFormDefinition(payload.applicationId, 'payload.formDefinitionId')
+        .getFormDefinition(payload.applicationId, payload.formDefinitionId)
         .pipe(
           map((formDefinition: any) => {
             return new fromActions.LoadFormDefinitionSuccess(formDefinition);
