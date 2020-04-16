@@ -15,6 +15,7 @@ export class SelectComponent extends AbstractFormComponent
   options: Observable<any>;
 
   ngOnInit() {
+    this.optionsSubject.next(this.config.options);
     if (this.config.apiUrl) {
       this.setFormControlValuesFromAPI();
     }
@@ -22,6 +23,9 @@ export class SelectComponent extends AbstractFormComponent
 
   setFormControlValuesFromAPI() {
     let options = [];
+    if (this.config.options) {
+      options = this.config.options;
+    }
     this.sub.add(
       this.formService
         .getValuesFromAPI(this.config.apiUrl)
