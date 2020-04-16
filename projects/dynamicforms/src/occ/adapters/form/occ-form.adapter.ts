@@ -8,7 +8,8 @@ import {
   YFormDefinition,
 } from '../../../core/models/form-occ.models';
 import { FormSampleConfigurations } from '../../../util/form-sample-configurations';
-import { FormAdapter } from '@fsa/dynamicforms';
+import { FormAdapter } from '../../../core/connectors/form.adapter';
+
 
 const FULL_PARAMS = 'fields=FULL';
 

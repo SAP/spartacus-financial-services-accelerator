@@ -12,8 +12,8 @@ export const getFormDefinitionState: MemoizedSelector<
   LoaderState<FormDefinitionState>
 > = createSelector(
   fromFeature.getFormDefinitionState,
-  (changeRequestsState: FormDefinitionsState) =>
-    changeRequestsState.formDefinition
+  (formDefinitionsState: FormDefinitionsState) =>
+    formDefinitionsState.formDefinition
 );
 
 export const getFormDefinition: MemoizedSelector<

@@ -20,7 +20,7 @@ describe('Form Definition Actions', () => {
 
   describe('LoadFormDefinitionSuccess Action', () => {
     const formDefinition = {
-      formId: 'requestId',
+      formId: 'formId',
       formGroups: {},
     };
     it('should create the action', () => {
