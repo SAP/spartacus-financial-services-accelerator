@@ -47,7 +47,8 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should continue in add options and quote review pages', () => {
-    auto.checkPricesOnComparisonTableAndSelectAutoBronze();
+    auto.checkAutoComparisonTable();
+    auto.selectAutoBronze();
     //add options page
     clickContinueButton();
   });
