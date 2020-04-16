@@ -56,6 +56,7 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
             );
             this.formDefintion$ = this.formDataService.getFormDefinition().pipe(
               map(formDefinition => {
+                // TO-DO Refactor when form-sample-configurations.ts is removed
                 if (formDefinition.content) {
                   this.formConfig = <FormDefinition>(
                     JSON.parse(formDefinition.content)

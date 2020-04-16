@@ -34,8 +34,8 @@ const formDataNew: YFormData = {
     applicationId: 'applicationId',
   },
 };
-describe('OccYformService', () => {
-  let service: OccFormAdapter;
+describe('OccFormAdapter', () => {
+  let occFormAdapter: OccFormAdapter;
   let httpMock: HttpTestingController;
 
   beforeEach(() => {
@@ -46,7 +46,7 @@ describe('OccYformService', () => {
         { provide: OccConfig, useValue: MockOccModuleConfig },
       ],
     });
-    service = TestBed.get(OccFormAdapter);
+    occFormAdapter = TestBed.get(OccFormAdapter);
     httpMock = TestBed.get(HttpTestingController);
   });
 
@@ -56,7 +56,7 @@ describe('OccYformService', () => {
 
   describe('persistFormData', () => {
     it('updateFormData', async(() => {
-      service.updateFormData(formData).subscribe();
+      occFormAdapter.updateFormData(formData).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url === '/forms/formData/' + formData.id &&
@@ -75,7 +75,7 @@ describe('OccYformService', () => {
 
   describe('persistFormData', () => {
     it('createFormData', async(() => {
-      service.createFormData(formDataNew).subscribe();
+      occFormAdapter.createFormData(formDataNew).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url === '/forms/formData' &&
@@ -93,7 +93,7 @@ describe('OccYformService', () => {
   });
   describe('loadFormData', () => {
     it('loadFormData', async(() => {
-      service.getFormData(formData.id).subscribe();
+      occFormAdapter.getFormData(formData.id).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url === '/forms/formData/' + formData.id &&
@@ -106,7 +106,7 @@ describe('OccYformService', () => {
 
   describe('loadFormDefinition', () => {
     it('loadFormDefinition', async(() => {
-      service
+      occFormAdapter
         .getFormDefinition(
           formData.formDefinition.applicationId,
           formData.formDefinition.formId
