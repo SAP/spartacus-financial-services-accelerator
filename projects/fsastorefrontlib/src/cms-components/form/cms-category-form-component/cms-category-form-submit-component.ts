@@ -56,7 +56,6 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
             );
             this.formDefintion$ = this.formDataService.getFormDefinition().pipe(
               map(formDefinition => {
-                console.log(formDefinition);
                 if (formDefinition.content) {
                   this.formConfig = <FormDefinition>(
                     JSON.parse(formDefinition.content)
