@@ -18,7 +18,10 @@
       <option value="pleaseSelect" [selected]="'pleaseSelect'" disabled>{{
         'fscommon.pleaseSelect' | cxTranslate
       }}</option>
-      <option *ngFor="let option of config.options" value="{{ option.name }}">
+      <option
+        *ngFor="let option of getOptions() | async as options"
+        value="{{ option.name }}"
+      >
         {{ option.label }}
       </option>
     </select>

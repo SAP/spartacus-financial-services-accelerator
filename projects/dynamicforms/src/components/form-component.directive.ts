@@ -3,7 +3,6 @@ import {
   ComponentRef,
   Directive,
   Input,
-  OnChanges,
   OnInit,
   Type,
   ViewContainerRef,
