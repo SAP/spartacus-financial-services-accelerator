@@ -27,38 +27,38 @@ const applicationId = 'app';
 const yformData = {};
 
 describe('FormConnector', () => {
-  let changeRequestConnector: FormConnector;
-  let changeRequestAdapter: FormAdapter;
+  let formConnector: FormConnector;
+  let formAdapter: FormAdapter;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [{ provide: FormAdapter, useClass: MockFormAdapter }],
     });
-    changeRequestConnector = TestBed.get(FormConnector as Type<FormConnector>);
-    changeRequestAdapter = TestBed.get(FormAdapter as Type<FormAdapter>);
+    formConnector = TestBed.get(FormConnector as Type<FormConnector>);
+    formAdapter = TestBed.get(FormAdapter as Type<FormAdapter>);
   });
 
   it('should be created', () => {
-    expect(changeRequestConnector).toBeTruthy();
+    expect(formConnector).toBeTruthy();
   });
 
   it('should call adapter for getFormDefinition', () => {
-    changeRequestConnector.getFormDefinition(applicationId, formDefinitionId);
-    expect(changeRequestAdapter.getFormDefinition).toHaveBeenCalledWith(
+    formConnector.getFormDefinition(applicationId, formDefinitionId);
+    expect(formAdapter.getFormDefinition).toHaveBeenCalledWith(
       applicationId,
       formDefinitionId
     );
   });
   it('should call adapter for get form data', () => {
-    changeRequestConnector.getFormData(formDataId);
-    expect(changeRequestAdapter.getFormData).toHaveBeenCalledWith(formDataId);
+    formConnector.getFormData(formDataId);
+    expect(formAdapter.getFormData).toHaveBeenCalledWith(formDataId);
   });
   it('should call adapter for create form data', () => {
-    changeRequestConnector.createFormData(yformData);
-    expect(changeRequestAdapter.createFormData).toHaveBeenCalledWith(yformData);
+    formConnector.createFormData(yformData);
+    expect(formAdapter.createFormData).toHaveBeenCalledWith(yformData);
   });
   it('should call adapter for update form data', () => {
-    changeRequestConnector.updateFormData(yformData);
-    expect(changeRequestAdapter.updateFormData).toHaveBeenCalledWith(yformData);
+    formConnector.updateFormData(yformData);
+    expect(formAdapter.updateFormData).toHaveBeenCalledWith(yformData);
   });
 });

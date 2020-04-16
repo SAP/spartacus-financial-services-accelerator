@@ -14,7 +14,7 @@ export class FormDataService {
   submittedForm = new BehaviorSubject<YFormData>(null);
 
   constructor(
-    protected occYformsService: FormConnector,
+    protected formConnector: FormConnector,
     protected store: Store<StateWithFormDefinition>
   ) {}
 
@@ -98,12 +98,12 @@ export class FormDataService {
   saveFormData(formData: YFormData): Observable<YFormData> {
     // TO DO - Replace with actions instead of direct call to OCC
     return formData.id
-      ? this.occYformsService.updateFormData(formData)
-      : this.occYformsService.createFormData(formData);
+      ? this.formConnector.updateFormData(formData)
+      : this.formConnector.createFormData(formData);
   }
 
   getFormData(formDataId: string): Observable<YFormData> {
-    return this.occYformsService.getFormData(formDataId);
+    return this.formConnector.getFormData(formDataId);
   }
 
   loadFormDefinition(applicationId: string, formDefinitionId: string) {

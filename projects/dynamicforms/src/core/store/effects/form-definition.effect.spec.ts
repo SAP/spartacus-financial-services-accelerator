@@ -28,13 +28,13 @@ class GlobalMessageServiceMock {
   add(_message: GlobalMessage): void {}
 }
 
-describe('Change Request Effects', () => {
+describe('Form Definition Effects', () => {
   let actions$: Observable<fromActions.FormDefinitionAction>;
   let effects: fromEffects.FormDefinitionEffects;
-  let mockChangeRequestConnector: MockFormConnector;
+  let mockFormConnector: MockFormConnector;
 
   beforeEach(() => {
-    mockChangeRequestConnector = new MockFormConnector();
+    mockFormConnector = new MockFormConnector();
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
@@ -47,7 +47,7 @@ describe('Change Request Effects', () => {
       providers: [
         {
           provide: FormConnector,
-          useValue: mockChangeRequestConnector,
+          useValue: mockFormConnector,
         },
         {
           provide: GlobalMessageService,
@@ -62,8 +62,8 @@ describe('Change Request Effects', () => {
     >);
   });
 
-  describe('loadChangeRequest$', () => {
-    it('should load change request', () => {
+  describe('loadFormDefinition$', () => {
+    it('should load form definition', () => {
       const action = new fromActions.LoadFormDefinition({
         formId: formId,
       });
@@ -77,7 +77,7 @@ describe('Change Request Effects', () => {
   });
 
   it('should fail to load form definition', () => {
-    spyOn(mockChangeRequestConnector, 'getFormDefinition').and.returnValue(
+    spyOn(mockFormConnector, 'getFormDefinition').and.returnValue(
       throwError('Error')
     );
     const action = new fromActions.LoadFormDefinition({

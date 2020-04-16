@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { YFormData, YFormDefinition } from '@fsa/dynamicforms';
+import { YFormData, YFormDefinition } from '../models';
 
 export abstract class FormAdapter {
   /**
