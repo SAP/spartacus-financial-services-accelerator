@@ -24,6 +24,12 @@
       >
         {{ option.label }}
       </option>
+      <option
+        *ngFor="let option of this.config.options"
+        value="{{ option.name }}"
+      >
+        {{ option.label }}
+      </option>
     </select>
   </div>
   <cx-error-notice

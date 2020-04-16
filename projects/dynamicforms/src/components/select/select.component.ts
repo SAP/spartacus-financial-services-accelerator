@@ -21,7 +21,7 @@ export class SelectComponent extends AbstractFormComponent
   }
 
   setFormControlValuesFromAPI() {
-    this.config.options = [];
+    let options = [];
     this.sub.add(
       this.formService
         .getValuesFromAPI(this.config.apiUrl)
@@ -29,12 +29,12 @@ export class SelectComponent extends AbstractFormComponent
           map(result => {
             if (result.values) {
               result.values.forEach(item => {
-                this.config.options.push({
+                options.push({
                   name: item.key,
                   label: item.value,
                 });
               });
-              this.optionsSubject.next(this.config.options);
+              this.optionsSubject.next(options);
             }
           })
         )
