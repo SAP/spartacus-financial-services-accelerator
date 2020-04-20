@@ -13,7 +13,7 @@ export class FormSampleConfigurations {
               type: 'title',
               label: {
                 en: 'General Information',
-                de: '[DE] General Information',
+                de: 'Allgemeine Informationen',
               },
               name: 'general',
             },
@@ -43,7 +43,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: {
                 en: 'Start Date',
-                de: '[DE] Start Date',
+                de: 'Startdatum',
               },
               name: 'propertyDetailsStartDate',
               required: true,
@@ -452,7 +452,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'City',
-                de: '[DE] City',
+                de: 'Stadt',
               },
               name: 'property-address-city',
               required: true,
@@ -462,7 +462,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Postcode',
-                de: '[DE] Postcode',
+                de: 'Postleitzahl',
               },
               name: 'property-address-postcode',
               required: true,
@@ -484,7 +484,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Country',
-                de: '[DE] Country',
+                de: 'Land',
               },
               name: 'property-address-country',
               options: [
