@@ -3,14 +3,12 @@
   class="dynamic-field"
   [formGroup]="group"
 >
-asdhgashdghasghd
-{{ currentLanguage }}
   <div [ngClass]="cssClass.inputWrapper">
     <label [ngClass]="cssClass.label">
       <ng-container *ngIf="!config.required">
         {{ 'forms.optional' | cxTranslate }}
       </ng-container>
-     {{ label }}
+      {{ label }}
     </label>
     <input
       [ngClass]="cssClass.input"

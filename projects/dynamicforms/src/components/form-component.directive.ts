@@ -38,7 +38,6 @@ export class FormComponentDirective implements OnChanges, OnInit {
   }
 
   ngOnInit() {
-    console.log('1');
     for (const [name, obj] of Object.entries(
       this.formConfig.dynamicForms.components
     )) {

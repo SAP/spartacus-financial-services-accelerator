@@ -6,32 +6,27 @@ import { OccMockFormService } from '../occ/services/occ-mock-form.service';
 import { LanguageService } from '@spartacus/core';
 
 @Component({ template: '' })
-export class AbstractFormComponent implements OnInit{
+export class AbstractFormComponent implements OnInit {
   constructor(
     protected formService: OccMockFormService,
     public formConfig: DynamicFormsConfig,
     public language: LanguageService
   ) {}
   label: string;
-  currentLanguage: string;
   cssClass = this.formConfig.dynamicForms.cssClass;
   @HostBinding('class') class = this.cssClass.controlElement;
   config: FieldConfig;
   group: FormGroup;
 
   ngOnInit() {
-    console.log('2');
-    this.language.getActive().subscribe( lang => this.currentLanguage = lang);
-    if(this.config) {
-      if(this.config.label[this.currentLanguage]) {
-        this.label = this.config.label[this.currentLanguage];
-      } else {
-        this.label = this.config.label.default;
+    this.language.getActive().subscribe(lang => {
+      if (this.config) {
+        if (this.config.label[lang]) {
+          this.label = this.config.label[lang];
+        } else {
+          this.label = this.config.label.default;
+        }
       }
-    }
-   
+    });
   }
-  
-  
- 
 }
