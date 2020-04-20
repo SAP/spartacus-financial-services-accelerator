@@ -12,7 +12,6 @@ export class FormSampleConfigurations {
             {
               type: 'title',
               label: {
-                default: 'General Information',
                 en: 'General Information',
                 de: 'DE General Information',
               },
@@ -21,7 +20,6 @@ export class FormSampleConfigurations {
             {
               type: 'radio',
               label: {
-                default: 'Cover Required',
                 en: 'Cover Required',
                 de: 'DE Cover Required',
               },
@@ -44,7 +42,6 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: {
-                default: 'Start Date',
                 en: 'Start Date',
                 de: 'DE Start Date',
               },
@@ -55,7 +52,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.compareToCurrentDate('shouldBeGreater'),
               ],
               error: {
-                default: 'Date must be in the future.',
                 en: 'Date must be in the future.',
                 de: 'Datum muss in der Zukunft liegen.',
               },
@@ -68,7 +64,6 @@ export class FormSampleConfigurations {
             {
               type: 'title',
               label: {
-                default: 'Property Details',
                 en: 'Property Details',
                 de: 'DE Property Details',
               },
@@ -77,7 +72,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Property Type',
                 en: 'Property Type',
                 de: 'DE Property Type',
               },
@@ -92,7 +86,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Property Value',
                 en: 'Property Value',
                 de: 'DE value',
               },
@@ -105,7 +98,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Must be in the range from 10.000 to 1.000.000.',
                 en: 'Must be in the range from 10.000 to 1.000.000.',
                 de: 'DE Must be in the range from 10.000 to 1.000.000.',
               },
@@ -113,7 +105,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Rebuild Value of Property',
                 en: 'Rebuild Value of Property',
                 de: 'DE Rebuild Value of Property',
               },
@@ -128,7 +119,6 @@ export class FormSampleConfigurations {
                 ),
               ],
               error: {
-                default: 'Must be less than property value.',
                 en: 'Must be less than property value.',
                 de: 'DE Must be less than property value.',
               },
@@ -136,7 +126,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Approximate Year Property Built',
                 en: 'Approximate Year Property Built',
                 de: 'DE Approximate Year Property Built',
               },
@@ -149,7 +138,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Year must be from AD 1000 till current.',
                 en: 'Year must be from AD 1000 till current.',
                 de: 'DE Year must be from AD 1000 till current.',
               },
@@ -157,7 +145,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Number of Bedrooms',
                 en: 'Number of Bedrooms',
                 de: 'DE Number of Bedrooms',
               },
@@ -170,7 +157,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Value must be a number between 1 and 50.',
                 en: 'Value must be a number between 1 and 50.',
                 de: 'DE Value must be a number between 1 and 50.',
               },
@@ -178,7 +164,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Number of Bathrooms',
                 en: 'Number of Bathrooms',
                 de: 'DE Number of Bathrooms',
               },
@@ -191,7 +176,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Value must be a number between 1 and 50.',
                 en: 'Value must be a number between 1 and 50.',
                 de: 'DE Value must be a number between 1 and 50.',
               },
@@ -199,7 +183,6 @@ export class FormSampleConfigurations {
             {
               type: 'radio',
               label: {
-                default: 'Does anyone at the property smoke?',
                 en: 'Does anyone at the property smoke?',
                 de: 'DE Does anyone at the property smoke?',
               },
@@ -214,8 +197,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default:
-                  'How many days in a row is the property likely to be unoccupied?',
                 en:
                   'How many days in a row is the property likely to be unoccupied?',
                 de:
@@ -230,7 +211,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Value must be a number between 0 and 360.',
                 en: 'Value must be a number between 0 and 360.',
                 de: 'DE Value must be a number between 0 and 360.',
               },
@@ -238,7 +218,6 @@ export class FormSampleConfigurations {
             {
               type: 'radio',
               label: {
-                default: 'Is the property normally occupied during the day?',
                 en: 'Is the property normally occupied during the day?',
                 de: 'DE Is the property normally occupied during the day?',
               },
@@ -253,7 +232,6 @@ export class FormSampleConfigurations {
             {
               type: 'radio',
               label: {
-                default: 'What is the exterior construction material?',
                 en: 'What is the exterior construction material?',
                 de: 'DE What is the exterior construction material?',
               },
@@ -268,7 +246,6 @@ export class FormSampleConfigurations {
             {
               type: 'radio',
               label: {
-                default: 'What locks are in place?',
                 en: 'What locks are in place?',
                 de: 'DE What locks are in place?',
               },
@@ -291,7 +268,6 @@ export class FormSampleConfigurations {
             {
               type: 'title',
               label: {
-                default: 'Your Building Cover',
                 en: 'Your Building Cover',
                 de: 'DE Your Building Cover',
               },
@@ -301,8 +277,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default:
-                  'How many consecutive years have you held buildings insurance?',
                 en:
                   'How many consecutive years have you held buildings insurance?',
                 de:
@@ -324,8 +298,6 @@ export class FormSampleConfigurations {
             {
               type: 'radio',
               label: {
-                default:
-                  'Would you like the accidental damage cover for your building?',
                 en:
                   'Would you like the accidental damage cover for your building?',
                 de:
@@ -348,7 +320,6 @@ export class FormSampleConfigurations {
             {
               type: 'title',
               label: {
-                default: 'Your Contents Cover',
                 en: 'Your Contents Cover',
                 de: 'DE Your Contents Cover',
               },
@@ -358,8 +329,6 @@ export class FormSampleConfigurations {
             {
               type: 'radio',
               label: {
-                default:
-                  'We give you 50,000€ contents cover as a standard, is this enough?',
                 en:
                   'We give you 50,000€ contents cover as a standard, is this enough?',
                 de:
@@ -382,8 +351,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default:
-                  'Please enter the desired amount from 10,000€ upwards.',
                 en: 'Please enter the desired amount from 10,000€ upwards.',
                 de: 'DE Please enter the desired amount from 10,000€ upwards.',
               },
@@ -396,7 +363,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Date must be in the future.',
                 en: 'Date must be in the future.',
                 de: 'Datum muss in der Zukunft liegen.',
               },
@@ -405,8 +371,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default:
-                  'How many consecutive years have you held contents insurance?',
                 en:
                   'How many consecutive years have you held contents insurance?',
                 de:
@@ -421,7 +385,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Value must be less than 150.',
                 en: 'Value must be less than 150.',
                 de: 'Wert muss unter 150 liegen.',
               },
@@ -430,8 +393,6 @@ export class FormSampleConfigurations {
             {
               type: 'radio',
               label: {
-                default:
-                  'Would you like accidental damage cover for your contents?',
                 en: 'Would you like accidental damage cover for your contents?',
                 de:
                   'DE Would you like accidental damage cover for your contents?',
@@ -448,8 +409,6 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: {
-                default:
-                  'If you have a car, please tell us when your insurance is due for renewal',
                 en:
                   'If you have a car, please tell us when your insurance is due for renewal',
                 de:
@@ -466,7 +425,6 @@ export class FormSampleConfigurations {
             {
               type: 'title',
               label: {
-                default: 'Your Property Address',
                 en: 'Your Property Address',
                 de: 'DE Your Property Address',
               },
@@ -475,7 +433,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Address Line 1',
                 en: 'Address Line 1',
                 de: 'DE Address Line 1',
               },
@@ -486,7 +443,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Address Line 2',
                 en: 'Address Line 2',
                 de: 'DE Address Line 2',
               },
@@ -495,7 +451,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'City',
                 en: 'City',
                 de: 'DE City',
               },
@@ -506,7 +461,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Postcode',
                 en: 'Postcode',
                 de: 'DE Postcode',
               },
@@ -520,8 +474,6 @@ export class FormSampleConfigurations {
                 ),
               ],
               error: {
-                default:
-                  'Should contain at least one number, no special characters.',
                 en:
                   'Should contain at least one number, no special characters.',
                 de:
@@ -531,7 +483,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Country',
                 en: 'Country',
                 de: 'DE Country',
               },
@@ -582,7 +533,6 @@ export class FormSampleConfigurations {
             {
               type: 'title',
               label: {
-                default: 'General',
                 en: 'General',
                 de: 'DE General',
               },
@@ -591,7 +541,6 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: {
-                default: 'Coverage Start Date',
                 en: 'Coverage Start Date',
                 de: 'DE Coverage Start Date',
               },
@@ -602,7 +551,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.compareToCurrentDate('shouldBeGreater'),
               ],
               error: {
-                default: 'Date must be in the future.',
                 en: 'Date must be in the future.',
                 de: 'Datum muss in der Zukunft liegen.',
               },
@@ -614,7 +562,6 @@ export class FormSampleConfigurations {
                 { name: 'YEARLY', label: 'Yearly' },
               ],
               label: {
-                default: 'Payment Frequency',
                 en: 'Payment Frequency',
                 de: 'DE value',
               },
@@ -630,7 +577,6 @@ export class FormSampleConfigurations {
             {
               type: 'title',
               label: {
-                default: 'Vehicle',
                 en: 'Vehicle',
                 de: 'DE Vehicle',
               },
@@ -640,7 +586,6 @@ export class FormSampleConfigurations {
               type: 'select',
               jsonField: 'make',
               label: {
-                default: 'Vehicle Make',
                 en: 'Vehicle Make',
                 de: 'DE value',
               },
@@ -653,7 +598,6 @@ export class FormSampleConfigurations {
               jsonField: 'make.model',
               depends: ['vehicleMake'],
               label: {
-                default: 'Vehicle Model',
                 en: 'Vehicle Model',
                 de: 'DE value',
               },
@@ -666,7 +610,6 @@ export class FormSampleConfigurations {
               depends: ['vehicleMake', 'vehicleModel'],
               jsonField: 'make.model.type',
               label: {
-                default: 'Vehicle Type',
                 en: 'Vehicle Type',
                 de: 'DE value',
               },
@@ -679,7 +622,6 @@ export class FormSampleConfigurations {
               depends: ['vehicleMake', 'vehicleModel', 'vehicleType'],
               jsonField: 'make.model.type.year',
               label: {
-                default: 'Vehicle Year',
                 en: 'Vehicle Year',
                 de: 'DE value',
               },
@@ -690,7 +632,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Annual Mileage',
                 en: 'Annual Mileage',
                 de: 'DE value',
               },
@@ -702,7 +643,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Value must be less than 100.000',
                 en: 'Value must be less than 100.000',
                 de: 'Der Wert muss unter 100.000 liegen',
               },
@@ -710,7 +650,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Vehicle Value',
                 en: 'Vehicle Value',
                 de: 'DE value',
               },
@@ -723,8 +662,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default:
-                  'Vehicle value must be a number between 3.000 and 1.000.000.',
                 en:
                   'Vehicle value must be a number between 3.000 and 1.000.000.',
                 de:
@@ -734,7 +671,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Vehicle Usage',
                 en: 'Vehicle Usage',
                 de: 'DE value',
               },
@@ -749,7 +685,6 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: {
-                default: 'Vehicle Purchase Date',
                 en: 'Vehicle Purchase Date',
                 de: 'DE value',
               },
@@ -764,8 +699,6 @@ export class FormSampleConfigurations {
                 ),
               ],
               error: {
-                default:
-                  'Date must be in the past, during or after vehicle manufacture year.',
                 en:
                   'Date must be in the past, during or after vehicle manufacture year.',
                 de:
@@ -775,7 +708,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Vehicle Owner Postal Code',
                 en: 'Vehicle Owner Postal Code',
                 de: 'DE value',
               },
@@ -789,8 +721,6 @@ export class FormSampleConfigurations {
                 ),
               ],
               error: {
-                default:
-                  'Should contain at least one number, no special characters.',
                 en:
                   'Should contain at least one number, no special characters.',
                 de:
@@ -805,7 +735,6 @@ export class FormSampleConfigurations {
             {
               type: 'title',
               label: {
-                default: 'Main Driver',
                 en: 'Main Driver',
                 de: 'DE Main Driver',
               },
@@ -814,7 +743,6 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: {
-                default: 'Driver Date of Birth',
                 en: 'Driver Date of Birth',
                 de: 'DE Driver Date of Birth',
               },
@@ -825,7 +753,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.dateOfBirthValidator(18),
               ],
               error: {
-                default: 'Must be over 18 years old.',
                 en: 'Must be over 18 years old.',
                 de: 'Muss über 18 Jahre alt sein.',
               },
@@ -833,7 +760,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Driver Gender',
                 en: 'Driver Gender',
                 de: 'DE Driver Gender',
               },
@@ -848,7 +774,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Driver Marital Status',
                 en: 'Driver Marital Status',
                 de: 'DE Driver Marital Status',
               },
@@ -864,7 +789,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Driver`s Category',
                 en: 'Driver`s Category',
                 de: 'DE Driver`s Category',
               },
@@ -879,7 +803,6 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: {
-                default: 'Driver Licence Date',
                 en: 'Driver Licence Date',
                 de: 'DE Driver Licence Date',
               },
@@ -890,7 +813,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
               error: {
-                default: 'Date must be in the past.',
                 en: 'Date must be in the past.',
                 de: 'Datum muss in der Vergangenheit liegen.',
               },
@@ -903,7 +825,6 @@ export class FormSampleConfigurations {
             {
               type: 'title',
               label: {
-                default: 'Additional Driver(s)',
                 en: 'Additional Driver(s)',
                 de: 'DE Additional Driver(s)',
               },
@@ -912,7 +833,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Number of Drivers',
                 en: 'Number of Drivers',
                 de: 'DE Number of Drivers',
               },
@@ -943,7 +863,6 @@ export class FormSampleConfigurations {
             {
               type: 'title',
               label: {
-                default: 'Additional Driver 1',
                 en: 'Additional Driver 1',
                 de: 'DE Additional Driver 1',
               },
@@ -953,7 +872,6 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: {
-                default: 'Driver Date of Birth',
                 en: 'Driver Date of Birth',
                 de: 'DE Driver Date of Birth',
               },
@@ -964,7 +882,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.dateOfBirthValidator(18),
               ],
               error: {
-                default: 'Must be over 18 years old.',
                 en: 'Must be over 18 years old.',
                 de: 'Muss über 18 Jahre alt sein.',
               },
@@ -973,7 +890,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Driver Gender',
                 en: 'Driver Gender',
                 de: 'DE Driver Gender',
               },
@@ -989,7 +905,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Driver Marital Status',
                 en: 'Driver Marital Status',
                 de: 'DE Driver Marital Status',
               },
@@ -1006,7 +921,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Driver`s Category',
                 en: 'Driver`s Category',
                 de: 'DE Driver`s Category',
               },
@@ -1018,7 +932,6 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: {
-                default: 'Driver Licence Date',
                 en: 'Driver Licence Date',
                 de: 'DE Driver Licence Date',
               },
@@ -1029,7 +942,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
               error: {
-                default: 'Date must be in the past',
                 en: 'Date must be in the past',
                 de: 'Datum muss in der Vergangenheit liegen',
               },
@@ -1043,7 +955,6 @@ export class FormSampleConfigurations {
             {
               type: 'title',
               label: {
-                default: 'Additional Driver 2',
                 en: 'Additional Driver 2',
                 de: 'DE Additional Driver 2',
               },
@@ -1053,7 +964,6 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: {
-                default: 'Driver Date of Birth',
                 en: 'Driver Date of Birth',
                 de: 'DE Driver Date of Birth',
               },
@@ -1064,7 +974,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.dateOfBirthValidator(18),
               ],
               error: {
-                default: 'Must be over 18 years old.',
                 en: 'Must be over 18 years old.',
                 de: 'Muss über 18 Jahre alt sein.',
               },
@@ -1073,7 +982,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Driver Gender',
                 en: 'Driver Gender',
                 de: 'DE Driver Gender',
               },
@@ -1089,7 +997,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Driver Marital Status',
                 en: 'Driver Marital Status',
                 de: 'DE Driver Marital Status',
               },
@@ -1106,7 +1013,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Driver`s Category',
                 en: 'Driver`s Category',
                 de: 'DE Driver`s Category',
               },
@@ -1117,7 +1023,6 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: {
-                default: 'Driver Licence Date',
                 en: 'Driver Licence Date',
                 de: 'DE Driver Licence Date',
               },
@@ -1128,7 +1033,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
               error: {
-                default: 'Date must be in the past.',
                 en: 'Date must be in the past.',
                 de: 'Datum muss in der Vergangenheit liegen.',
               },
@@ -1142,7 +1046,6 @@ export class FormSampleConfigurations {
             {
               type: 'title',
               label: {
-                default: 'Additional Driver 3',
                 en: 'Additional Driver 3',
                 de: 'DE Additional Driver 3',
               },
@@ -1152,7 +1055,6 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: {
-                default: 'Driver Date of Birth',
                 en: 'Driver Date of Birth',
                 de: 'DE Driver Date of Birth',
               },
@@ -1163,7 +1065,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.dateOfBirthValidator(18),
               ],
               error: {
-                default: 'Must be over 18 years old.',
                 en: 'Must be over 18 years old.',
                 de: 'Muss über 18 Jahre alt sein.',
               },
@@ -1172,7 +1073,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Driver Gender',
                 en: 'Driver Gender',
                 de: 'DE Driver Gender',
               },
@@ -1188,7 +1088,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Driver Marital Status',
                 en: 'Driver Marital Status',
                 de: 'DE Driver Marital Status',
               },
@@ -1204,7 +1103,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Driver`s Category',
                 en: 'Driver`s Category',
                 de: 'DE Driver`s Category',
               },
@@ -1215,7 +1113,6 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: {
-                default: 'Driver Licence Date',
                 en: 'Driver Licence Date',
                 de: 'DE Driver Licence Date',
               },
@@ -1226,7 +1123,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
               error: {
-                default: 'Date must be in the past.',
                 en: 'Date must be in the past.',
                 de: 'Datum muss in der Vergangenheit liegen.',
               },
@@ -1240,7 +1136,6 @@ export class FormSampleConfigurations {
             {
               type: 'title',
               label: {
-                default: 'Additional Driver 4',
                 en: 'Additional Driver 4',
                 de: 'DE Additional Driver 4',
               },
@@ -1250,7 +1145,6 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: {
-                default: 'Driver Date of Birth',
                 en: 'Driver Date of Birth',
                 de: 'DE Driver Date of Birth',
               },
@@ -1261,7 +1155,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.dateOfBirthValidator(18),
               ],
               error: {
-                default: 'Must be over 18 years old.',
                 en: 'Must be over 18 years old.',
                 de: 'Muss über 18 Jahre alt sein.',
               },
@@ -1270,7 +1163,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Driver Gender',
                 en: 'Driver Gender',
                 de: 'DE Driver Gender',
               },
@@ -1285,7 +1177,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Driver Marital Status',
                 en: 'Driver Marital Status',
                 de: 'DE Driver Marital Status',
               },
@@ -1302,7 +1193,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Driver`s Category',
                 en: 'Driver`s Category',
                 de: 'DE Driver`s Category',
               },
@@ -1314,7 +1204,6 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: {
-                default: 'Driver Licence Date',
                 en: 'Driver Licence Date',
                 de: 'DE Driver Licence Date',
               },
@@ -1325,7 +1214,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
               error: {
-                default: 'Date must be in the past.',
                 en: 'Date must be in the past.',
                 de: 'Datum muss in der Vergangenheit liegen.',
               },
@@ -1344,7 +1232,6 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                default: 'Destination',
                 en: 'Destination',
                 de: 'DE Destination',
               },
@@ -1368,7 +1255,6 @@ export class FormSampleConfigurations {
               required: true,
               validation: [DefaultFormValidators.required],
               error: {
-                default: 'Please enter valid value.',
                 en: 'Please enter valid value.',
                 de: 'Bitte geben Sie einen gültigen Wert ein.',
               },
@@ -1376,7 +1262,6 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: {
-                default: 'Start Date',
                 en: 'Start Date',
                 de: 'DE Start Date',
               },
@@ -1391,8 +1276,6 @@ export class FormSampleConfigurations {
                 ),
               ],
               error: {
-                default:
-                  'Date must be in the future, cannot be after end date.',
                 en: 'Date must be in the future, cannot be after end date.',
                 de: 'DE Date must be in the future, cannot be after end date.',
               },
@@ -1400,7 +1283,6 @@ export class FormSampleConfigurations {
             {
               type: 'datepicker',
               label: {
-                default: 'End Date',
                 en: 'End Date',
                 de: 'DE End Date',
               },
@@ -1415,8 +1297,6 @@ export class FormSampleConfigurations {
                 ),
               ],
               error: {
-                default:
-                  'Date must be in the future, cannot be before start date.',
                 en: 'Date must be in the future, cannot be before start date.',
                 de:
                   'DE Date must be in the future, cannot be before start date.',
@@ -1425,7 +1305,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Duration in Days',
                 en: 'Duration in Days',
                 de: 'DE Duration in Days',
               },
@@ -1434,7 +1313,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Trip Cost',
                 en: 'Trip Cost',
                 de: 'DE Trip Cost',
               },
@@ -1447,7 +1325,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Value must be less than 1.000.000, cannot be 0.',
                 en: 'Value must be less than 1.000.000, cannot be 0.',
                 de: 'Der Wert muss unter 1.000.000 liegen.',
               },
@@ -1467,7 +1344,6 @@ export class FormSampleConfigurations {
                 { label: '10', name: '10' },
               ],
               label: {
-                default: 'Number of Travelers',
                 en: 'Number of Travelers',
                 de: 'DE Number of Travelers',
               },
@@ -1492,7 +1368,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Age of Traveller',
                 en: 'Age of Traveller',
                 de: 'DE Age of Traveller',
               },
@@ -1505,7 +1380,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Value must be less than 150.',
                 en: 'Value must be less than 150.',
                 de: 'Wert muss unter 150 liegen.',
               },
@@ -1513,7 +1387,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Age of Traveller 2',
                 en: 'Age of Traveller 2',
                 de: 'DE Age of Traveller 2',
               },
@@ -1526,7 +1399,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Value must be less than 150.',
                 en: 'Value must be less than 150.',
                 de: 'Wert muss unter 150 liegen..',
               },
@@ -1535,7 +1407,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Age of Traveller 3',
                 en: 'Age of Traveller 3',
                 de: 'DE Age of Traveller 3',
               },
@@ -1548,7 +1419,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Value must be less than 150.',
                 en: 'Value must be less than 150.',
                 de: 'Wert muss unter 150 liegen.',
               },
@@ -1557,7 +1427,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Age of Traveller 4',
                 en: 'Age of Traveller 4',
                 de: 'DE Age of Traveller 4',
               },
@@ -1570,7 +1439,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Value must be less than 150.',
                 en: 'Value must be less than 150.',
                 de: 'Wert muss unter 150 liegen.',
               },
@@ -1579,7 +1447,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Age of Traveller 5',
                 en: 'Age of Traveller 5',
                 de: 'DE Age of Traveller 5',
               },
@@ -1592,7 +1459,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Value must be less than 150.',
                 en: 'Value must be less than 150.',
                 de: 'Wert muss unter 150 liegen.',
               },
@@ -1601,7 +1467,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Age of Traveller 6',
                 en: 'Age of Traveller 6',
                 de: 'DE Age of Traveller 6',
               },
@@ -1614,7 +1479,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Value must be less than 150.',
                 en: 'Value must be less than 150.',
                 de: 'Wert muss unter 150 liegen.',
               },
@@ -1623,7 +1487,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Age of Traveller 7',
                 en: 'Age of Traveller 7',
                 de: 'DE Age of Traveller 7',
               },
@@ -1636,7 +1499,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Value must be less than 150.',
                 en: 'Value must be less than 150.',
                 de: 'Wert muss unter 150 liegen.',
               },
@@ -1645,7 +1507,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Age of Traveller 8',
                 en: 'Age of Traveller 8',
                 de: 'DE Age of Traveller 8',
               },
@@ -1658,7 +1519,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Value must be less than 150.',
                 en: 'Value must be less than 150.',
                 de: 'Wert muss unter 150 liegen.',
               },
@@ -1667,7 +1527,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Age of Traveller 9',
                 en: 'Age of Traveller 9',
                 de: 'DE Age of Traveller 9',
               },
@@ -1680,7 +1539,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Value must be less than 150.',
                 en: 'Value must be less than 150.',
                 de: 'Wert muss unter 150 liegen.',
               },
@@ -1689,7 +1547,6 @@ export class FormSampleConfigurations {
             {
               type: 'input',
               label: {
-                default: 'Age of Traveller 10',
                 en: 'Age of Traveller 10',
                 de: 'DE Age of Traveller 10',
               },
@@ -1702,7 +1559,6 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
               error: {
-                default: 'Value must be less than 150.',
                 en: 'Value must be less than 150.',
                 de: 'Wert muss unter 150 liegen.',
               },

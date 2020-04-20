@@ -23,8 +23,10 @@ export class AbstractFormComponent implements OnInit {
       if (this.config) {
         if (this.config.label[lang]) {
           this.label = this.config.label[lang];
-        } else {
+        } else if (this.config.label.default) {
           this.label = this.config.label.default;
+        } else {
+          this.label = '';
         }
       }
     });

@@ -17,8 +17,10 @@ export class ErrorNoticeComponent extends AbstractFormComponent
       if (this.parentConfig.error) {
         if (this.parentConfig.error[lang]) {
           this.errorMessage = this.parentConfig.error[lang];
-        } else {
+        } else if (this.parentConfig.error.default) {
           this.errorMessage = this.parentConfig.error.default;
+        } else {
+          this.errorMessage = '';
         }
       }
     });

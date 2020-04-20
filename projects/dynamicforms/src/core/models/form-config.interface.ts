@@ -26,7 +26,7 @@ export interface FieldConfig {
   validations?: ValidatorFunction[];
 }
 export interface TranslatableString {
-  default: string;
+  default?: string;
   [key: string]: string;
 }
 export interface ValidatorFunction {
