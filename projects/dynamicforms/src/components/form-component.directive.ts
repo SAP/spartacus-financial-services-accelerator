@@ -54,7 +54,6 @@ export class FormComponentDirective implements OnChanges, OnInit {
       AbstractFormComponent
     >(this.components[this.config.type]);
     this.component = this.container.createComponent(component);
-
     this.component.instance.config = this.config;
     this.component.instance.group = this.group;
   }

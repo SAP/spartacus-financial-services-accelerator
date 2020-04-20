@@ -13,7 +13,7 @@ export class FormSampleConfigurations {
               type: 'title',
               label: {
                 en: 'General Information',
-                de: 'DE General Information',
+                de: '[DE] General Information',
               },
               name: 'general',
             },
@@ -21,7 +21,7 @@ export class FormSampleConfigurations {
               type: 'radio',
               label: {
                 en: 'Cover Required',
-                de: 'DE Cover Required',
+                de: '[DE] Cover Required',
               },
               name: 'coverRequired',
               options: [
@@ -43,7 +43,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: {
                 en: 'Start Date',
-                de: 'DE Start Date',
+                de: '[DE] Start Date',
               },
               name: 'propertyDetailsStartDate',
               required: true,
@@ -65,7 +65,7 @@ export class FormSampleConfigurations {
               type: 'title',
               label: {
                 en: 'Property Details',
-                de: 'DE Property Details',
+                de: '[DE] Property Details',
               },
               name: 'propertyDetailsCoverRequired',
             },
@@ -73,7 +73,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Property Type',
-                de: 'DE Property Type',
+                de: '[DE] Property Type',
               },
               name: 'propertyType',
               options: [
@@ -87,7 +87,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Property Value',
-                de: 'DE value',
+                de: '[DE] value',
               },
               name: 'propertyValue',
               required: true,
@@ -99,14 +99,14 @@ export class FormSampleConfigurations {
               ],
               error: {
                 en: 'Must be in the range from 10.000 to 1.000.000.',
-                de: 'DE Must be in the range from 10.000 to 1.000.000.',
+                de: '[DE] Must be in the range from 10.000 to 1.000.000.',
               },
             },
             {
               type: 'input',
               label: {
                 en: 'Rebuild Value of Property',
-                de: 'DE Rebuild Value of Property',
+                de: '[DE] Rebuild Value of Property',
               },
               name: 'propertyRebuildCost',
               required: true,
@@ -120,14 +120,14 @@ export class FormSampleConfigurations {
               ],
               error: {
                 en: 'Must be less than property value.',
-                de: 'DE Must be less than property value.',
+                de: '[DE] Must be less than property value.',
               },
             },
             {
               type: 'input',
               label: {
                 en: 'Approximate Year Property Built',
-                de: 'DE Approximate Year Property Built',
+                de: '[DE] Approximate Year Property Built',
               },
               name: 'ccaBuiltYear',
               required: true,
@@ -139,14 +139,14 @@ export class FormSampleConfigurations {
               ],
               error: {
                 en: 'Year must be from AD 1000 till current.',
-                de: 'DE Year must be from AD 1000 till current.',
+                de: '[DE] Year must be from AD 1000 till current.',
               },
             },
             {
               type: 'input',
               label: {
                 en: 'Number of Bedrooms',
-                de: 'DE Number of Bedrooms',
+                de: '[DE] Number of Bedrooms',
               },
               name: 'numberOfBedrooms',
               required: true,
@@ -158,14 +158,14 @@ export class FormSampleConfigurations {
               ],
               error: {
                 en: 'Value must be a number between 1 and 50.',
-                de: 'DE Value must be a number between 1 and 50.',
+                de: '[DE] Value must be a number between 1 and 50.',
               },
             },
             {
               type: 'input',
               label: {
                 en: 'Number of Bathrooms',
-                de: 'DE Number of Bathrooms',
+                de: '[DE] Number of Bathrooms',
               },
               name: 'numberOfBathrooms',
               required: true,
@@ -177,14 +177,14 @@ export class FormSampleConfigurations {
               ],
               error: {
                 en: 'Value must be a number between 1 and 50.',
-                de: 'DE Value must be a number between 1 and 50.',
+                de: '[DE] Value must be a number between 1 and 50.',
               },
             },
             {
               type: 'radio',
               label: {
                 en: 'Does anyone at the property smoke?',
-                de: 'DE Does anyone at the property smoke?',
+                de: '[DE] Does anyone at the property smoke?',
               },
               name: 'smoking',
               options: [
@@ -200,7 +200,7 @@ export class FormSampleConfigurations {
                 en:
                   'How many days in a row is the property likely to be unoccupied?',
                 de:
-                  'DE How many days in a row is the property likely to be unoccupied?',
+                  '[DE] How many days in a row is the property likely to be unoccupied?',
               },
               name: 'numberOfDaysUnoccupied',
               required: true,
@@ -212,14 +212,14 @@ export class FormSampleConfigurations {
               ],
               error: {
                 en: 'Value must be a number between 0 and 360.',
-                de: 'DE Value must be a number between 0 and 360.',
+                de: '[DE] Value must be a number between 0 and 360.',
               },
             },
             {
               type: 'radio',
               label: {
                 en: 'Is the property normally occupied during the day?',
-                de: 'DE Is the property normally occupied during the day?',
+                de: '[DE] Is the property normally occupied during the day?',
               },
               name: 'normallyOccupied',
               options: [
@@ -233,7 +233,7 @@ export class FormSampleConfigurations {
               type: 'radio',
               label: {
                 en: 'What is the exterior construction material?',
-                de: 'DE What is the exterior construction material?',
+                de: '[DE] What is the exterior construction material?',
               },
               name: 'constructionMaterial',
               options: [
@@ -247,7 +247,7 @@ export class FormSampleConfigurations {
               type: 'radio',
               label: {
                 en: 'What locks are in place?',
-                de: 'DE What locks are in place?',
+                de: '[DE] What locks are in place?',
               },
               name: 'locks',
               options: [
@@ -269,7 +269,7 @@ export class FormSampleConfigurations {
               type: 'title',
               label: {
                 en: 'Your Building Cover',
-                de: 'DE Your Building Cover',
+                de: '[DE] Your Building Cover',
               },
               name: 'buildingCover',
               hidden: true,
@@ -280,7 +280,7 @@ export class FormSampleConfigurations {
                 en:
                   'How many consecutive years have you held buildings insurance?',
                 de:
-                  'DE How many consecutive years have you held buildings insurance?',
+                  '[DE] How many consecutive years have you held buildings insurance?',
               },
               name: 'alreadyHeldInsurance',
               options: [
@@ -301,7 +301,7 @@ export class FormSampleConfigurations {
                 en:
                   'Would you like the accidental damage cover for your building?',
                 de:
-                  'DE Would you like the accidental damage cover for your building?',
+                  '[DE] Would you like the accidental damage cover for your building?',
               },
               name: 'accidentalDamageCoverBuilding',
               options: [
@@ -321,7 +321,7 @@ export class FormSampleConfigurations {
               type: 'title',
               label: {
                 en: 'Your Contents Cover',
-                de: 'DE Your Contents Cover',
+                de: '[DE] Your Contents Cover',
               },
               name: 'propertyIsStandard50000ContentCover',
               hidden: true,
@@ -332,7 +332,7 @@ export class FormSampleConfigurations {
                 en:
                   'We give you 50,000€ contents cover as a standard, is this enough?',
                 de:
-                  'DE We give you 50,000€ contents cover as a standard, is this enough?',
+                  '[DE] We give you 50,000€ contents cover as a standard, is this enough?',
               },
               name: 'startAmountCover',
               options: [
@@ -352,7 +352,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Please enter the desired amount from 10,000€ upwards.',
-                de: 'DE Please enter the desired amount from 10,000€ upwards.',
+                de: '[DE] Please enter the desired amount from 10,000€ upwards.',
               },
               name: 'propertyMultipleOf10000ContentCover',
               required: true,
@@ -374,7 +374,7 @@ export class FormSampleConfigurations {
                 en:
                   'How many consecutive years have you held contents insurance?',
                 de:
-                  'DE How many consecutive years have you held contents insurance?',
+                  '[DE] How many consecutive years have you held contents insurance?',
               },
               name: 'numberOfYearsHoldingInsurance',
               required: true,
@@ -395,7 +395,7 @@ export class FormSampleConfigurations {
               label: {
                 en: 'Would you like accidental damage cover for your contents?',
                 de:
-                  'DE Would you like accidental damage cover for your contents?',
+                  '[DE] Would you like accidental damage cover for your contents?',
               },
               name: 'accidentalDamageCoverContents',
               options: [
@@ -412,7 +412,7 @@ export class FormSampleConfigurations {
                 en:
                   'If you have a car, please tell us when your insurance is due for renewal',
                 de:
-                  'DE If you have a car, please tell us when your insurance is due for renewal',
+                  '[DE] If you have a car, please tell us when your insurance is due for renewal',
               },
               name: 'coverageStartDate',
               hidden: true,
@@ -426,7 +426,7 @@ export class FormSampleConfigurations {
               type: 'title',
               label: {
                 en: 'Your Property Address',
-                de: 'DE Your Property Address',
+                de: '[DE] Your Property Address',
               },
               name: 'propertyAddress',
             },
@@ -434,7 +434,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Address Line 1',
-                de: 'DE Address Line 1',
+                de: '[DE] Address Line 1',
               },
               name: 'property-address-line-1',
               required: true,
@@ -444,7 +444,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Address Line 2',
-                de: 'DE Address Line 2',
+                de: '[DE] Address Line 2',
               },
               name: 'property-address-line-2',
             },
@@ -452,7 +452,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'City',
-                de: 'DE City',
+                de: '[DE] City',
               },
               name: 'property-address-city',
               required: true,
@@ -462,7 +462,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Postcode',
-                de: 'DE Postcode',
+                de: '[DE] Postcode',
               },
               name: 'property-address-postcode',
               required: true,
@@ -477,14 +477,14 @@ export class FormSampleConfigurations {
                 en:
                   'Should contain at least one number, no special characters.',
                 de:
-                  'DE Should contain at least one number, no special characters.',
+                  '[DE] Should contain at least one number, no special characters.',
               },
             },
             {
               type: 'select',
               label: {
                 en: 'Country',
-                de: 'DE Country',
+                de: '[DE] Country',
               },
               name: 'property-address-country',
               options: [
@@ -501,7 +501,7 @@ export class FormSampleConfigurations {
                   label: 'France',
                 },
                 {
-                  name: 'DE',
+                  name: '[DE]',
                   label: 'Germany',
                 },
                 {
@@ -534,7 +534,7 @@ export class FormSampleConfigurations {
               type: 'title',
               label: {
                 en: 'General',
-                de: 'DE General',
+                de: '[DE] General',
               },
               name: 'general',
             },
@@ -542,7 +542,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: {
                 en: 'Coverage Start Date',
-                de: 'DE Coverage Start Date',
+                de: '[DE] Coverage Start Date',
               },
               name: 'coverageStartDate',
               required: true,
@@ -563,7 +563,7 @@ export class FormSampleConfigurations {
               ],
               label: {
                 en: 'Payment Frequency',
-                de: 'DE value',
+                de: '[DE] value',
               },
               name: 'paymentFrequency',
               required: true,
@@ -578,7 +578,7 @@ export class FormSampleConfigurations {
               type: 'title',
               label: {
                 en: 'Vehicle',
-                de: 'DE Vehicle',
+                de: '[DE] Vehicle',
               },
               name: 'vehicle',
             },
@@ -587,7 +587,7 @@ export class FormSampleConfigurations {
               jsonField: 'make',
               label: {
                 en: 'Vehicle Make',
-                de: 'DE value',
+                de: '[DE] value',
               },
               name: 'vehicleMake',
               required: true,
@@ -599,7 +599,7 @@ export class FormSampleConfigurations {
               depends: ['vehicleMake'],
               label: {
                 en: 'Vehicle Model',
-                de: 'DE value',
+                de: '[DE] value',
               },
               name: 'vehicleModel',
               required: true,
@@ -611,7 +611,7 @@ export class FormSampleConfigurations {
               jsonField: 'make.model.type',
               label: {
                 en: 'Vehicle Type',
-                de: 'DE value',
+                de: '[DE] value',
               },
               name: 'vehicleType',
               required: true,
@@ -623,7 +623,7 @@ export class FormSampleConfigurations {
               jsonField: 'make.model.type.year',
               label: {
                 en: 'Vehicle Year',
-                de: 'DE value',
+                de: '[DE] value',
               },
               name: 'vehicleYear',
               required: true,
@@ -633,7 +633,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Annual Mileage',
-                de: 'DE value',
+                de: '[DE] value',
               },
               name: 'vehicleAnnualMileage',
               required: true,
@@ -644,14 +644,14 @@ export class FormSampleConfigurations {
               ],
               error: {
                 en: 'Value must be less than 100.000',
-                de: 'Der Wert muss unter 100.000 liegen',
+                de: '[DE]r Wert muss unter 100.000 liegen',
               },
             },
             {
               type: 'input',
               label: {
                 en: 'Vehicle Value',
-                de: 'DE value',
+                de: '[DE] value',
               },
               name: 'vehicleValue',
               required: true,
@@ -665,14 +665,14 @@ export class FormSampleConfigurations {
                 en:
                   'Vehicle value must be a number between 3.000 and 1.000.000.',
                 de:
-                  'Der Fahrzeugwert muss zwischen 3.000 und 1.000.000 liegen.',
+                  '[DE]r Fahrzeugwert muss zwischen 3.000 und 1.000.000 liegen.',
               },
             },
             {
               type: 'select',
               label: {
                 en: 'Vehicle Usage',
-                de: 'DE value',
+                de: '[DE] value',
               },
               name: 'vehicleUsage',
               options: [
@@ -686,7 +686,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: {
                 en: 'Vehicle Purchase Date',
-                de: 'DE value',
+                de: '[DE] value',
               },
               name: 'vehiclePurchaseDate',
               required: true,
@@ -709,7 +709,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Vehicle Owner Postal Code',
-                de: 'DE value',
+                de: '[DE] value',
               },
               name: 'vehicleOwnerPostalCode',
               required: true,
@@ -736,7 +736,7 @@ export class FormSampleConfigurations {
               type: 'title',
               label: {
                 en: 'Main Driver',
-                de: 'DE Main Driver',
+                de: '[DE] Main Driver',
               },
               name: 'main-driver',
             },
@@ -744,7 +744,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: {
                 en: 'Driver Date of Birth',
-                de: 'DE Driver Date of Birth',
+                de: '[DE] Driver Date of Birth',
               },
               name: 'dateOfBirth',
               required: true,
@@ -761,7 +761,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Driver Gender',
-                de: 'DE Driver Gender',
+                de: '[DE] Driver Gender',
               },
               name: 'driverGender',
               options: [
@@ -775,7 +775,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Driver Marital Status',
-                de: 'DE Driver Marital Status',
+                de: '[DE] Driver Marital Status',
               },
               name: 'driverMaritalStatus',
               options: [
@@ -790,7 +790,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Driver`s Category',
-                de: 'DE Driver`s Category',
+                de: '[DE] Driver`s Category',
               },
               name: 'driverCategory',
               options: [
@@ -804,7 +804,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: {
                 en: 'Driver Licence Date',
-                de: 'DE Driver Licence Date',
+                de: '[DE] Driver Licence Date',
               },
               name: 'driverLicenceDate',
               required: true,
@@ -826,7 +826,7 @@ export class FormSampleConfigurations {
               type: 'title',
               label: {
                 en: 'Additional Driver(s)',
-                de: 'DE Additional Driver(s)',
+                de: '[DE] Additional Driver(s)',
               },
               name: 'additionalDrivers',
             },
@@ -834,7 +834,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Number of Drivers',
-                de: 'DE Number of Drivers',
+                de: '[DE] Number of Drivers',
               },
               name: 'noOfDrivers',
               options: [
@@ -864,7 +864,7 @@ export class FormSampleConfigurations {
               type: 'title',
               label: {
                 en: 'Additional Driver 1',
-                de: 'DE Additional Driver 1',
+                de: '[DE] Additional Driver 1',
               },
               name: 'additional-driver-1',
               hidden: true,
@@ -873,7 +873,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: {
                 en: 'Driver Date of Birth',
-                de: 'DE Driver Date of Birth',
+                de: '[DE] Driver Date of Birth',
               },
               name: 'dateOfBirth',
               required: true,
@@ -891,7 +891,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Driver Gender',
-                de: 'DE Driver Gender',
+                de: '[DE] Driver Gender',
               },
               name: 'driverGender',
               options: [
@@ -906,7 +906,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Driver Marital Status',
-                de: 'DE Driver Marital Status',
+                de: '[DE] Driver Marital Status',
               },
               name: 'driverMaritalStatus',
               options: [
@@ -922,7 +922,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Driver`s Category',
-                de: 'DE Driver`s Category',
+                de: '[DE] Driver`s Category',
               },
               name: 'driverCategory',
               options: [{ name: 'Occasional', label: 'Occasional' }],
@@ -933,7 +933,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: {
                 en: 'Driver Licence Date',
-                de: 'DE Driver Licence Date',
+                de: '[DE] Driver Licence Date',
               },
               name: 'driverLicenceDate',
               required: true,
@@ -956,7 +956,7 @@ export class FormSampleConfigurations {
               type: 'title',
               label: {
                 en: 'Additional Driver 2',
-                de: 'DE Additional Driver 2',
+                de: '[DE] Additional Driver 2',
               },
               name: 'additional-driver-2',
               hidden: true,
@@ -965,7 +965,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: {
                 en: 'Driver Date of Birth',
-                de: 'DE Driver Date of Birth',
+                de: '[DE] Driver Date of Birth',
               },
               name: 'dateOfBirth',
               required: true,
@@ -983,7 +983,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Driver Gender',
-                de: 'DE Driver Gender',
+                de: '[DE] Driver Gender',
               },
               name: 'driverGender',
               options: [
@@ -998,7 +998,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Driver Marital Status',
-                de: 'DE Driver Marital Status',
+                de: '[DE] Driver Marital Status',
               },
               name: 'driverMaritalStatus',
               options: [
@@ -1014,7 +1014,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Driver`s Category',
-                de: 'DE Driver`s Category',
+                de: '[DE] Driver`s Category',
               },
               name: 'driverCategory',
               options: [{ name: 'Occasional', label: 'Occasional' }],
@@ -1024,7 +1024,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: {
                 en: 'Driver Licence Date',
-                de: 'DE Driver Licence Date',
+                de: '[DE] Driver Licence Date',
               },
               name: 'driverLicenceDate',
               required: true,
@@ -1047,7 +1047,7 @@ export class FormSampleConfigurations {
               type: 'title',
               label: {
                 en: 'Additional Driver 3',
-                de: 'DE Additional Driver 3',
+                de: '[DE] Additional Driver 3',
               },
               name: 'additional-driver-3',
               hidden: true,
@@ -1056,7 +1056,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: {
                 en: 'Driver Date of Birth',
-                de: 'DE Driver Date of Birth',
+                de: '[DE] Driver Date of Birth',
               },
               name: 'dateOfBirth',
               required: true,
@@ -1074,7 +1074,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Driver Gender',
-                de: 'DE Driver Gender',
+                de: '[DE] Driver Gender',
               },
               name: 'driverGender',
               options: [
@@ -1089,7 +1089,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Driver Marital Status',
-                de: 'DE Driver Marital Status',
+                de: '[DE] Driver Marital Status',
               },
               name: 'driverMaritalStatus',
               options: [
@@ -1104,7 +1104,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Driver`s Category',
-                de: 'DE Driver`s Category',
+                de: '[DE] Driver`s Category',
               },
               name: 'driverCategory',
               options: [{ name: 'Occasional', label: 'Occasional' }],
@@ -1114,7 +1114,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: {
                 en: 'Driver Licence Date',
-                de: 'DE Driver Licence Date',
+                de: '[DE] Driver Licence Date',
               },
               name: 'driverLicenceDate',
               required: true,
@@ -1137,7 +1137,7 @@ export class FormSampleConfigurations {
               type: 'title',
               label: {
                 en: 'Additional Driver 4',
-                de: 'DE Additional Driver 4',
+                de: '[DE] Additional Driver 4',
               },
               name: 'additional-driver-4',
               hidden: true,
@@ -1146,7 +1146,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: {
                 en: 'Driver Date of Birth',
-                de: 'DE Driver Date of Birth',
+                de: '[DE] Driver Date of Birth',
               },
               name: 'dateOfBirth',
               required: true,
@@ -1164,7 +1164,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Driver Gender',
-                de: 'DE Driver Gender',
+                de: '[DE] Driver Gender',
               },
               name: 'driverGender',
               options: [
@@ -1178,7 +1178,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Driver Marital Status',
-                de: 'DE Driver Marital Status',
+                de: '[DE] Driver Marital Status',
               },
               name: 'driverMaritalStatus',
               options: [
@@ -1194,7 +1194,7 @@ export class FormSampleConfigurations {
               type: 'select',
               label: {
                 en: 'Driver`s Category',
-                de: 'DE Driver`s Category',
+                de: '[DE] Driver`s Category',
               },
               name: 'driverCategory',
               options: [{ name: 'Occasional', label: 'Occasional' }],
@@ -1205,7 +1205,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: {
                 en: 'Driver Licence Date',
-                de: 'DE Driver Licence Date',
+                de: '[DE] Driver Licence Date',
               },
               name: 'driverLicenceDate',
               required: true,
@@ -1232,8 +1232,8 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                en: 'Destination',
-                de: 'DE Destination',
+                en: '[DE]stination',
+                de: '[DE] Destination',
               },
               name: 'tripDestination',
               options: [
@@ -1263,7 +1263,7 @@ export class FormSampleConfigurations {
               type: 'datepicker',
               label: {
                 en: 'Start Date',
-                de: 'DE Start Date',
+                de: '[DE] Start Date',
               },
               name: 'tripStartDate',
               required: true,
@@ -1277,14 +1277,14 @@ export class FormSampleConfigurations {
               ],
               error: {
                 en: 'Date must be in the future, cannot be after end date.',
-                de: 'DE Date must be in the future, cannot be after end date.',
+                de: '[DE] Date must be in the future, cannot be after end date.',
               },
             },
             {
               type: 'datepicker',
               label: {
                 en: 'End Date',
-                de: 'DE End Date',
+                de: '[DE] End Date',
               },
               name: 'tripEndDate',
               required: true,
@@ -1299,14 +1299,14 @@ export class FormSampleConfigurations {
               error: {
                 en: 'Date must be in the future, cannot be before start date.',
                 de:
-                  'DE Date must be in the future, cannot be before start date.',
+                  '[DE] Date must be in the future, cannot be before start date.',
               },
             },
             {
               type: 'input',
               label: {
                 en: 'Duration in Days',
-                de: 'DE Duration in Days',
+                de: '[DE] Duration in Days',
               },
               name: 'NoOfDays',
             },
@@ -1314,7 +1314,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Trip Cost',
-                de: 'DE Trip Cost',
+                de: '[DE] Trip Cost',
               },
               name: 'costOfTrip',
               required: true,
@@ -1326,7 +1326,7 @@ export class FormSampleConfigurations {
               ],
               error: {
                 en: 'Value must be less than 1.000.000, cannot be 0.',
-                de: 'Der Wert muss unter 1.000.000 liegen.',
+                de: '[DE]r Wert muss unter 1.000.000 liegen.',
               },
             },
             {
@@ -1345,7 +1345,7 @@ export class FormSampleConfigurations {
               ],
               label: {
                 en: 'Number of Travelers',
-                de: 'DE Number of Travelers',
+                de: '[DE] Number of Travelers',
               },
               name: 'Travellers',
               required: true,
@@ -1369,7 +1369,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Age of Traveller',
-                de: 'DE Age of Traveller',
+                de: '[DE] Age of Traveller',
               },
               name: 'tripDetailsTravellerAges',
               required: true,
@@ -1388,7 +1388,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Age of Traveller 2',
-                de: 'DE Age of Traveller 2',
+                de: '[DE] Age of Traveller 2',
               },
               name: 'tripDetailsTravellerAges2',
               required: true,
@@ -1408,7 +1408,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Age of Traveller 3',
-                de: 'DE Age of Traveller 3',
+                de: '[DE] Age of Traveller 3',
               },
               name: 'tripDetailsTravellerAges3',
               required: true,
@@ -1428,7 +1428,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Age of Traveller 4',
-                de: 'DE Age of Traveller 4',
+                de: '[DE] Age of Traveller 4',
               },
               name: 'tripDetailsTravellerAges4',
               required: true,
@@ -1448,7 +1448,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Age of Traveller 5',
-                de: 'DE Age of Traveller 5',
+                de: '[DE] Age of Traveller 5',
               },
               name: 'tripDetailsTravellerAges5',
               required: true,
@@ -1468,7 +1468,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Age of Traveller 6',
-                de: 'DE Age of Traveller 6',
+                de: '[DE] Age of Traveller 6',
               },
               name: 'tripDetailsTravellerAges6',
               required: true,
@@ -1488,7 +1488,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Age of Traveller 7',
-                de: 'DE Age of Traveller 7',
+                de: '[DE] Age of Traveller 7',
               },
               name: 'tripDetailsTravellerAges7',
               required: true,
@@ -1508,7 +1508,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Age of Traveller 8',
-                de: 'DE Age of Traveller 8',
+                de: '[DE] Age of Traveller 8',
               },
               name: 'tripDetailsTravellerAges8',
               required: true,
@@ -1528,7 +1528,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Age of Traveller 9',
-                de: 'DE Age of Traveller 9',
+                de: '[DE] Age of Traveller 9',
               },
               name: 'tripDetailsTravellerAges9',
               required: true,
@@ -1548,7 +1548,7 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Age of Traveller 10',
-                de: 'DE Age of Traveller 10',
+                de: '[DE] Age of Traveller 10',
               },
               name: 'tripDetailsTravellerAges10',
               required: true,
