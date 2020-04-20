@@ -1232,7 +1232,7 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               label: {
-                en: '[DE]stination',
+                en: 'Destination',
                 de: '[DE] Destination',
               },
               name: 'tripDestination',
