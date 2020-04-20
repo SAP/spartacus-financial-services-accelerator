@@ -1,4 +1,4 @@
-import { ValidatorFn } from '@angular/forms';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 export interface FormDefinition {
   formGroups: DynamicFormGroup[];
@@ -7,7 +7,9 @@ export interface FormDefinition {
 export interface DynamicFormGroup {
   groupCode?: string;
   fieldConfigs: FieldConfig[];
+  dependsOn?: DependencyFn[];
 }
+
 export interface FieldConfig {
   name?: string;
   required?: boolean;
@@ -24,6 +26,13 @@ export interface FieldConfig {
   hidden?: boolean;
   error?: string;
   validations?: ValidatorFunction[];
+  dependsOn?: DependencyFn[];
+}
+
+export interface DependencyFn {
+  (control: AbstractControl);
+  name?: string;
+  conditions?: ValidatorFunction[];
 }
 
 export interface ValidatorFunction {

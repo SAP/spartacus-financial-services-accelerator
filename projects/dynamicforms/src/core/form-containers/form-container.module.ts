@@ -9,6 +9,7 @@ import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { FormBuilderService } from '../services/builder/form-builder.service';
 import { FormDataService } from '../services/data/form-data.service';
 import { FormValidationService } from '../services/form-validation/form-validation.service';
+import { FormDependencyResolverService } from './../services/form-dependencies/form-dependency-resolver.service';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { FormComponent } from './form/form.component';
 
@@ -26,6 +27,7 @@ import { FormComponent } from './form/form.component';
   providers: [
     FormBuilderService,
     FormValidationService,
+    FormDependencyResolverService,
     OccMockFormService,
     OccFormService,
     FormDataService,

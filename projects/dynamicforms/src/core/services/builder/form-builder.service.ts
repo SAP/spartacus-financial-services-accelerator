@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { FieldConfig } from '../../models';
+import { FormDependencyResolverService } from '../form-dependencies/form-dependency-resolver.service';
 import { FormValidationService } from '../form-validation/form-validation.service';
+import { FieldConfig } from './../../models/form-config.interface';
 
 @Injectable()
 export class FormBuilderService {
   constructor(
     protected fb: FormBuilder,
-    protected formValidationService: FormValidationService
+    protected formValidationService: FormValidationService,
+    protected formDependencyResolverService: FormDependencyResolverService
   ) {}
 
   createForm(config) {
@@ -15,13 +17,31 @@ export class FormBuilderService {
     config.formGroups.forEach(formGroup => {
       const controlGroup =
         formGroup.groupCode !== undefined ? this.fb.group({}) : form;
-      formGroup.fieldConfigs.forEach(input => {
-        input.group = controlGroup;
-        controlGroup.addControl(input.name, this.createControl(input));
-      });
       if (formGroup.groupCode !== undefined) {
         form.addControl(formGroup.groupCode, controlGroup);
       }
+
+      formGroup.fieldConfigs.forEach(fieldConfig => {
+        fieldConfig.group = controlGroup;
+        const fieldControl = this.createControl(fieldConfig);
+        controlGroup.addControl(fieldConfig.name, fieldControl);
+        if (fieldConfig.dependsOn) {
+          this.formDependencyResolverService.resolveFormControlDependencies(
+            fieldConfig.dependsOn,
+            fieldControl,
+            form,
+            config
+          );
+        }
+        if (formGroup.dependsOn) {
+          this.formDependencyResolverService.resolveFormControlDependencies(
+            formGroup.dependsOn,
+            fieldControl,
+            form,
+            config
+          );
+        }
+      });
     });
     return form;
   }
