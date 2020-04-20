@@ -58,15 +58,7 @@ export class FSRegisterComponent extends RegisterComponent {
         '',
         [Validators.required, DefaultFormValidators.dateOfBirthValidator(18)],
       ],
-      email: [
-        '',
-        [
-          Validators.required,
-          DefaultFormValidators.regexValidator(
-            DefaultFormValidators.emailRegex
-          ),
-        ],
-      ],
+      email: ['', [Validators.required, DefaultFormValidators.email]],
       password: [
         '',
         [

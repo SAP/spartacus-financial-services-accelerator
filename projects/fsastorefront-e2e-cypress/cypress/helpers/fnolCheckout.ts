@@ -79,7 +79,7 @@ export function updateIncidentType() {
 }
 
 export function populateIncidentReportStep() {
-  cy.get('[name=howAccidentOccured]')
+  cy.get('[name=howAccidentOccurred]')
     .clear()
     .type(
       'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'

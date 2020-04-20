@@ -42,13 +42,7 @@ export class ContactAgentFormComponent implements OnInit, OnDestroy {
   userId: string;
 
   contactAgentForm: FormGroup = this.fb.group({
-    email: [
-      '',
-      [
-        Validators.required,
-        DefaultFormValidators.regexValidator(DefaultFormValidators.emailRegex),
-      ],
-    ],
+    email: ['', [Validators.required, DefaultFormValidators.email]],
     interest: ['', [Validators.required]],
     contactType: ['', [Validators.required]],
     subject: ['', [Validators.required]],
