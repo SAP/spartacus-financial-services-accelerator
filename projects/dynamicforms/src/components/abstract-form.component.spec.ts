@@ -21,11 +21,11 @@ class MockLanguageService {
   }
 }
 
-const mockField: FieldConfig = {
+let mockField: FieldConfig = {
   type: 'abstract',
   name: 'testTitle',
   label: {
-    en: 'Test string',
+    default: 'Test string',
   },
 };
 
@@ -36,11 +36,6 @@ const mockFormGroup = new FormGroup({
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {
     cssClass: mockCssClass,
-    components: {
-      title: {
-        component: AbstractFormComponent,
-      },
-    },
   },
 };
 
@@ -75,7 +70,13 @@ describe('AbstractFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set label', () => {
+  it('should set default label', () => {
     expect(component.label).toEqual('Test string');
+  });
+
+  it('should set english label', () => {
+    component.config.label.en = 'En test string';
+    component.ngOnInit();
+    expect(component.label).toEqual('En test string');
   });
 });

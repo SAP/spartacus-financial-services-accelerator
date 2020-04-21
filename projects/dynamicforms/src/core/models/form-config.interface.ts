@@ -13,7 +13,7 @@ export interface FieldConfig {
   required?: boolean;
   disabled?: boolean;
   group?: string;
-  label?: TranslatableString;
+  label?: LocalizedString;
   options?: FieldOption[];
   depends?: string[];
   apiUrl?: string;
@@ -22,10 +22,10 @@ export interface FieldConfig {
   validation?: ValidatorFn[]; // TO-DO Remove validation attribute once all definitions are moved to back-end
   value?: any;
   hidden?: boolean;
-  error?: TranslatableString;
+  error?: LocalizedString;
   validations?: ValidatorFunction[];
 }
-export interface TranslatableString {
+export interface LocalizedString {
   default?: string;
   [key: string]: string;
 }

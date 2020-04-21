@@ -20,9 +20,9 @@ class MockLanguageService {
   }
 }
 
-const mockParentConfig = {
+let mockParentConfig = {
   error: {
-    en: 'test string',
+    default: 'test string',
   },
 };
 
@@ -76,12 +76,18 @@ describe('ErrorNoticeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set errorMessage', () => {
-    expect(component.errorMessage).toEqual('test string');
-  });
-
   it('should render textarea component', () => {
     const errorComponent = el.query(By.css('.testErrorClass')).nativeElement;
     expect(errorComponent).toBeTruthy();
+  });
+
+  it('should set default errorMessage', () => {
+    expect(component.errorMessage).toEqual('test string');
+  });
+
+  it('should set english error message', () => {
+    component.parentConfig.error.en = 'En test string';
+    component.ngOnInit();
+    expect(component.errorMessage).toEqual('En test string');
   });
 });
