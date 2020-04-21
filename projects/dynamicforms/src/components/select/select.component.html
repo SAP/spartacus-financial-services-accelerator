@@ -15,11 +15,11 @@
       [attr.name]="config.name"
       formControlName="{{ config.name }}"
     >
-      <option value="pleaseSelect" [selected]="'pleaseSelect'" disabled>{{
+      <option [defaultSelected]="true" disabled value="null">{{
         'fscommon.pleaseSelect' | cxTranslate
       }}</option>
       <option
-        *ngFor="let option of getOptions() | async as options"
+        *ngFor="let option of options$ | async as options"
         value="{{ option.name }}"
       >
         {{ option.label }}

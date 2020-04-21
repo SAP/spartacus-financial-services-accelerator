@@ -11,20 +11,20 @@ export class OccMockFormService {
     protected occEndpointService: OccEndpointsService
   ) {}
 
-  velueListsCache = new Map();
+  valueListsCache = new Map();
 
   httpRegex = /(http(s?)):\/\//;
 
   public getValuesFromAPI(fieldUrl: string): Observable<any> {
     const url = this.getFullAPIUrl(fieldUrl);
 
-    const cacheValues = this.velueListsCache.get(url);
+    const cacheValues = this.valueListsCache.get(url);
     if (cacheValues) {
       return of(cacheValues);
     }
     return this.httpClient.get<any>(url).pipe(
       map(values => {
-        this.velueListsCache.set(url, values);
+        this.valueListsCache.set(url, values);
         return values;
       })
     );

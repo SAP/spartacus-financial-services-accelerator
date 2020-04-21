@@ -9,11 +9,10 @@ import { map } from 'rxjs/operators';
 })
 export class SelectComponent extends AbstractFormComponent
   implements OnInit, OnDestroy {
-
   private subscription = new Subscription();
 
   optionsSubject = new BehaviorSubject<any>([]);
-  options: Observable<any>;
+  options$: Observable<any> = this.optionsSubject.asObservable();
 
   ngOnInit() {
     this.optionsSubject.next(this.config.options);
@@ -23,32 +22,28 @@ export class SelectComponent extends AbstractFormComponent
   }
 
   setFormControlValuesFromAPI() {
-    let options = [];
-    if (this.config.options) {
-      options = this.config.options;
-    }
-    this.subscription.add(
-      this.formService
-        .getValuesFromAPI(this.config.apiUrl)
-        .pipe(
-          map(result => {
-            if (result.values) {
-              result.values.forEach(item => {
-                options.push({
-                  name: item.key,
-                  label: item.value,
+    if (this.config.apiUrl) {
+      const options = [];
+      this.subscription.add(
+        this.formService
+          .getValuesFromAPI(this.config.apiUrl)
+          .pipe(
+            map(result => {
+              if (result.values) {
+                result.values.forEach(item => {
+                  options.push({
+                    name: item.key,
+                    label: item.value,
+                  });
                 });
-              });
-              this.optionsSubject.next(options);
-            }
-          })
-        )
-        .subscribe()
-    );
-  }
-
-  getOptions(): Observable<any> {
-    return this.optionsSubject.asObservable();
+                this.optionsSubject.next(options);
+                this.group.get(this.config.name).setValue(null);
+              }
+            })
+          )
+          .subscribe()
+      );
+    }
   }
 
   ngOnDestroy() {
