@@ -21,12 +21,10 @@ export class ErrorNoticeComponent extends AbstractFormComponent
         .getActive()
         .pipe(
           map(lang => {
-            if (this.parentConfig.error) {
-              if (this.parentConfig.error[lang]) {
-                this.errorMessage = this.parentConfig.error[lang];
-              } else if (this.parentConfig.error.default) {
-                this.errorMessage = this.parentConfig.error.default;
-              }
+            if (this.parentConfig && this.parentConfig.error) {
+              this.errorMessage = this.parentConfig.error[lang]
+                ? this.parentConfig.error[lang]
+                : this.parentConfig.error.default;
             }
           })
         )

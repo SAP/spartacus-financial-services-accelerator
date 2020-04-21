@@ -27,12 +27,10 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
         .getActive()
         .pipe(
           map(lang => {
-            if (this.config) {
-              if (this.config.label[lang]) {
-                this.label = this.config.label[lang];
-              } else if (this.config.label.default) {
-                this.label = this.config.label.default;
-              }
+            if (this.config && this.config.label) {
+              this.label = this.config.label[lang]
+                ? this.config.label[lang]
+                : this.config.label.default;
             }
           })
         )
