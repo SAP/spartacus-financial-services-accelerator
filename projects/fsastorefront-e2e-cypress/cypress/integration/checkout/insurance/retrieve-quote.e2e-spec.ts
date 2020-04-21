@@ -18,7 +18,8 @@ context('Retrieve Quote', () => {
     });
 
     it('Add main product to the cart', () => {
-      travelCheckout.checkComparisonAndAddProduct();
+      travelCheckout.checkTravelComparisonTable();
+      travelCheckout.selectSingleBudgetPlan();
     });
 
     it('Add optional product to the cart', () => {

@@ -1,5 +1,6 @@
-import { DefaultFormValidators, FormDefinition } from '@fsa/dynamicforms';
-import { FormHelpers } from '../../../shared/util/helpers/form-helpers';
+import { FormHelpers } from './form-helpers';
+import { FormDefinition } from '../core/models';
+import { DefaultFormValidators } from './validators/default-form-validators';
 
 export class FormSampleConfigurations {
   static sampleConfigurations: FormDefinition[] = [
