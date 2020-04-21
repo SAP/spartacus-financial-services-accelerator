@@ -19,7 +19,7 @@ class MockLanguageService {
   }
 }
 
-let mockField: FieldConfig = {
+const mockField: FieldConfig = {
   type: 'abstract',
   name: 'testTitle',
   label: {

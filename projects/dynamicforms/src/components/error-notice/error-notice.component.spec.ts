@@ -20,7 +20,7 @@ class MockLanguageService {
   }
 }
 
-let mockParentConfig = {
+const mockParentConfig = {
   error: {
     default: 'test string',
   },
