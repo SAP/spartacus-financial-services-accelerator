@@ -9,7 +9,8 @@ import { map } from 'rxjs/operators';
 })
 export class SelectComponent extends AbstractFormComponent
   implements OnInit, OnDestroy {
-  private sub = new Subscription();
+
+  private subscription = new Subscription();
 
   optionsSubject = new BehaviorSubject<any>([]);
   options: Observable<any>;
@@ -26,7 +27,7 @@ export class SelectComponent extends AbstractFormComponent
     if (this.config.options) {
       options = this.config.options;
     }
-    this.sub.add(
+    this.subscription.add(
       this.formService
         .getValuesFromAPI(this.config.apiUrl)
         .pipe(
@@ -51,8 +52,8 @@ export class SelectComponent extends AbstractFormComponent
   }
 
   ngOnDestroy() {
-    if (this.sub) {
-      this.sub.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }
