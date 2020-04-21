@@ -10,7 +10,11 @@ import { Observable, Subscription } from 'rxjs';
 import { map, take, filter } from 'rxjs/operators';
 import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
 import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
-import { FSStepData, StepStatus } from '../../../occ/occ-models';
+import {
+  ChangeRequestStatus,
+  FSStepData,
+  StepStatus,
+} from '../../../occ/occ-models';
 import * as fromUserRequestAction from './../../../core/user-request/store/actions';
 import { ChangePolicyService } from '../../../core/change-request/services/change-policy.service';
 
@@ -69,25 +73,14 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
                 GlobalMessageType.MSG_TYPE_INFO
               );
             }
-          })
-        )
-        .subscribe()
-    );
-    this.subscription.add(
-      this.changeRequestService
-        .getAction(fromUserRequestAction.SUBMIT_USER_REQUEST_SUCCESS)
-        .pipe(
-          take(1),
-          filter(
-            ({ payload }) =>
-              payload &&
-              payload.requestStatus === 'SUBMITTED' &&
-              payload.fsStepGroupDefinition
-          ),
-          map(({ payload }) => {
-            this.routingService.go(
-              payload.fsStepGroupDefinition.confirmationUrl
-            );
+            if (
+              changeRequest &&
+              changeRequest.requestStatus === ChangeRequestStatus.SUBMITTED
+            ) {
+              this.routingService.go(
+                changeRequest.fsStepGroupDefinition.confirmationUrl
+              );
+            }
           })
         )
         .subscribe()

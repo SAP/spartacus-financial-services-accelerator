@@ -1,1 +1,1 @@
-export * from './services/index';
+export * from './adapters/form/occ-form.adapter';

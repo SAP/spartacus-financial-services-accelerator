@@ -11,20 +11,32 @@ import {
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
 import { ChangeRequestConnector } from '../../connectors';
+import { UserRequestConnector } from '../../../user-request/connectors';
 import * as fromActions from '../actions';
-import * as fromUserRequestActions from './../../../../core/user-request/store/actions';
 import * as fromUserReducers from './../../store/reducers/index';
 import * as fromEffects from './change-request.effect';
-import createSpy = jasmine.createSpy;
 
 const requestID = 'REQ0001';
 const policyId = 'policyId';
 const contractId = 'contractId';
 const changeRequestType = 'requestType';
 const changeRequest = {
-  requestID: requestID,
+  requestId: requestID,
 };
-
+const changeRequestCompleted = {
+  requestStatus: 'COMPLETED',
+  requestId: 'testRequest001',
+  userId: OCC_USER_ID_CURRENT,
+  configurationSteps: [
+    {
+      status: 'COMPLETED',
+      sequenceNumber: '1',
+    },
+  ],
+  stepData: {
+    sequenceNumber: 1,
+  },
+};
 class MockChangeRequestConnector {
   createChangeRequestForPolicy() {
     return of(changeRequest);
@@ -41,6 +53,14 @@ class MockChangeRequestConnector {
   }
 }
 
+class MockUserRequestConnector {
+  submitUserRequest() {
+    return of(changeRequest);
+  }
+  updateUserRequest() {
+    return of(changeRequest);
+  }
+}
 class GlobalMessageServiceMock {
   remove(): void {}
   add(_message: GlobalMessage): void {}
@@ -50,10 +70,12 @@ describe('Change Request Effects', () => {
   let actions$: Observable<fromActions.ChangeRequestAction>;
   let effects: fromEffects.ChangeRequestEffects;
   let mockChangeRequestConnector: MockChangeRequestConnector;
+  let mockUserRequestConnector: MockUserRequestConnector;
   let globalMessageService: GlobalMessageService;
 
   beforeEach(() => {
     mockChangeRequestConnector = new MockChangeRequestConnector();
+    mockUserRequestConnector = new MockUserRequestConnector();
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
@@ -67,6 +89,10 @@ describe('Change Request Effects', () => {
         {
           provide: ChangeRequestConnector,
           useValue: mockChangeRequestConnector,
+        },
+        {
+          provide: UserRequestConnector,
+          useValue: mockUserRequestConnector,
         },
         {
           provide: GlobalMessageService,
@@ -130,7 +156,7 @@ describe('Change Request Effects', () => {
       const completion = new fromActions.SimulateChangeRequestSuccess(
         changeRequest
       );
-      const updateUserRequest = new fromUserRequestActions.UpdateUserRequest({
+      const updateUserRequest = new fromActions.UpdateChangeRequest({
         userId: OCC_USER_ID_CURRENT,
         requestId: requestID,
         stepData: undefined,
@@ -221,6 +247,95 @@ describe('Change Request Effects', () => {
       actions$ = hot('-a', { a: action });
       const expected = cold('-b', { b: completion });
       expect(effects.cancelChangeRequest$).toBeObservable(expected);
+    });
+  });
+
+  describe('submitChangeRequest$', () => {
+    it('should submit user request', () => {
+      const action = new fromActions.SubmitChangeRequest({
+        changeRequest,
+      });
+      const loadUserRequest = new fromActions.LoadChangeRequest(changeRequest);
+      const submitUserRequestSuccess = new fromActions.SubmitChangeRequestSuccess(
+        changeRequest
+      );
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-(bc)', {
+        b: loadUserRequest,
+        c: submitUserRequestSuccess,
+      });
+      expect(effects.submitChangeRequest$).toBeObservable(expected);
+    });
+
+    it('should fail to submit change request', () => {
+      spyOn(mockUserRequestConnector, 'submitUserRequest').and.returnValue(
+        throwError('Error')
+      );
+      const action = new fromActions.SubmitChangeRequest({
+        userId: OCC_USER_ID_CURRENT,
+        requestId: 'testRequest001',
+      });
+      const completion = new fromActions.SubmitChangeRequestFail(
+        JSON.stringify('Error')
+      );
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.submitChangeRequest$).toBeObservable(expected);
+    });
+  });
+  describe('updateChanageRequest$', () => {
+    it('should update change request', () => {
+      const action = new fromActions.UpdateChangeRequest({
+        userId: OCC_USER_ID_CURRENT,
+        requestId: 'testRequest001',
+        stepData: {
+          sequenceNumber: 1,
+        },
+        configurationSteps: [
+          {
+            status: 'OPEN',
+          },
+        ],
+      });
+      const updateSuccess = new fromActions.UpdateChangeRequestSuccess(
+        changeRequest
+      );
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', {
+        b: updateSuccess,
+      });
+      expect(effects.updateChangeRequest$).toBeObservable(expected);
+    });
+
+    it('should fail to update change request', () => {
+      spyOn(mockUserRequestConnector, 'updateUserRequest').and.returnValue(
+        throwError('Error')
+      );
+      const action = new fromActions.UpdateChangeRequest({
+        userId: OCC_USER_ID_CURRENT,
+      });
+      const completion = new fromActions.UpdateChangeRequestFail(
+        JSON.stringify('Error')
+      );
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.updateChangeRequest$).toBeObservable(expected);
+    });
+
+    it('should update change request - last step - submit', () => {
+      spyOn(mockUserRequestConnector, 'updateUserRequest').and.returnValue(
+        of(changeRequestCompleted)
+      );
+      const action = new fromActions.UpdateChangeRequest(
+        changeRequestCompleted
+      );
+      const completion = new fromActions.SubmitChangeRequest({
+        userId: OCC_USER_ID_CURRENT,
+        requestId: 'testRequest001',
+      });
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.updateChangeRequest$).toBeObservable(expected);
     });
   });
 });

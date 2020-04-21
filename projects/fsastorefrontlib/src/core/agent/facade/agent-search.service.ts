@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GeoPoint, WindowRef } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { take, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { AgentConnector } from '../connectors/agent.connector';
 
 @Injectable({

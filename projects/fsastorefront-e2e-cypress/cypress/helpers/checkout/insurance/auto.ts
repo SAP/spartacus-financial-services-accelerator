@@ -1,3 +1,5 @@
+import * as shared from '../shared-checkout';
+
 export function openCategoryPage() {
   cy.selectOptionFromDropdown({
     menuOption: 'Insurance',
@@ -51,20 +53,27 @@ export function populateMainDriverInfo() {
     .type('2018-01-01');
 }
 
-export function checkPricesOnComparisonTableAndSelectAutoBronze() {
-  cy.get('cx-fs-comparison-table-panel-item').should('have.length', 3);
-  cy.get('cx-fs-comparison-table-panel-item')
-    .eq(2)
-    .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Auto Gold');
-      cy.get('.table-header-value').should('have.text', '€20.74');
-    });
-  cy.get('cx-fs-comparison-table-panel-item')
-    .eq(1)
-    .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Auto Silver');
-      cy.get('.table-header-value').should('have.text', '€10.95');
-    });
+export function checkAutoComparisonTable() {
+  const comparisonTableContent: addOptionsPage.ComparisonTable = {
+    mainProducts: [
+      {
+        name: 'Auto Bronze',
+        price: '€4.98',
+      },
+      {
+        name: 'Auto Silver',
+        price: '€10.95',
+      },
+      {
+        name: 'Auto Gold',
+        price: '€20.74',
+      },
+    ],
+  };
+  shared.checkComparisonTable(comparisonTableContent);
+}
+
+export function selectAutoBronze() {
   cy.get('cx-fs-comparison-table-panel-item')
     .eq(0)
     .within(() => {
@@ -72,22 +81,4 @@ export function checkPricesOnComparisonTableAndSelectAutoBronze() {
       cy.get('.table-header-value').should('have.text', '€4.98');
       cy.get('.primary-button').click();
     });
-}
-
-export function checkMiniCart() {
-  cy.get('fsa-mini-cart').within(() => {
-    cy.get('.short-overview-item').should('have.length', 3);
-    cy.get('.short-overview-item')
-      .eq(0)
-      .should('have.text', 'Payment fequency:  Monthly');
-    cy.get('.short-overview-item')
-      .eq(1)
-      .should('have.text', ' Auto Silver  €9.00 ');
-    cy.get('.highlighted').should('have.text', ' Total price:  €99.00 ');
-  });
-  cy.get('.primary-button').click();
-  cy.wait(2000);
-  cy.get('fsa-bind-quote-dialog').within(() => {
-    cy.get('.primary-button').click();
-  });
 }

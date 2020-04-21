@@ -11,7 +11,10 @@ export class ChangePolicyService {
 
   getChangedPolicyObjects(changeRequestData: any): ChangedPolicyData[] {
     this.changedPolicyObjects = [];
-    if (changeRequestData.fsStepGroupDefinition) {
+    if (
+      changeRequestData.fsStepGroupDefinition &&
+      changeRequestData.insurancePolicy
+    ) {
       switch (changeRequestData.fsStepGroupDefinition.requestType.code) {
         case RequestType.INSURED_OBJECT_CHANGE: {
           const insuredObject =

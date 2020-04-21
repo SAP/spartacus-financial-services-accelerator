@@ -65,11 +65,14 @@ export const defaultFormConfig: DynamicFormsConfig = {
       minValue: {
         validator: DefaultFormValidators.min,
       },
-      number: {
-        validator: DefaultFormValidators.number,
+      maxLength: {
+        validator: DefaultFormValidators.maxLength,
       },
       minLength: {
         validator: DefaultFormValidators.minLength,
+      },
+      number: {
+        validator: DefaultFormValidators.number,
       },
       compareDates: {
         validator: DefaultFormValidators.compareDates,
@@ -79,6 +82,12 @@ export const defaultFormConfig: DynamicFormsConfig = {
       },
       compareNumbers: {
         validator: DefaultFormValidators.compareNumbers,
+      },
+      email: {
+        validator: DefaultFormValidators.email,
+      },
+      postalCode: {
+        validator: DefaultFormValidators.postalCode,
       },
     },
   },
