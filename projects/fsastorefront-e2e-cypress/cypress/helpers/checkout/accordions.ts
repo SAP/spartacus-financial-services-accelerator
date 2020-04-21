@@ -11,10 +11,24 @@ export const quoteReviewAccordionGroup2 = [
   'Personal Details',
 ];
 
-export const quoteReviewAccordions = {
+export const finalReviewAccordionLife = [
+  'Life Insurance Information',
+  "What's Included",
+  'Added by you',
+  'Personal Details',
+];
+
+export const finalReviewAccordionTravel = [
+  'Travel Insurance Information',
+  "What's Included",
+  'Added by you',
+  'Personal Details',
+];
+
+export const Accordions = {
   accordions: [
     {
-      category: 'life',
+      category: 'lifeQuoteReview',
       accordionItems: this.quoteReviewAccordionGroup2,
     },
     {
@@ -22,7 +36,7 @@ export const quoteReviewAccordions = {
       accordionItems: this.quoteReviewAccordionGroup1,
     },
     {
-      category: 'travel',
+      category: 'travelQuoteReview',
       accordionItems: this.quoteReviewAccordionGroup2,
     },
     {
@@ -32,6 +46,14 @@ export const quoteReviewAccordions = {
     {
       category: 'creditCard',
       accordionItems: this.quoteReviewAccordionGroup1,
+    },
+    {
+      category: 'lifeFinalReview',
+      accordionItems: this.finalReviewAccordionLife,
+    },
+    {
+      category: 'travelFinalReview',
+      accordionItems: this.finalReviewAccordionTravel,
     },
   ],
 };

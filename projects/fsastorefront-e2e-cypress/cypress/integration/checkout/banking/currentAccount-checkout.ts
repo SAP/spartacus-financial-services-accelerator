@@ -51,7 +51,7 @@ context('Current Account Checkout', () => {
 
   it('Should check Quote Review page', () => {
     cy.get('.progress-inner-wrapper').should('have.length', 5);
-    checkout.checkQuoteReviewAccordions('currentAccount');
+    checkout.checkAccordions('currentAccount');
   });
 
   it('Should bind Quote', () => {
@@ -78,5 +78,10 @@ context('Current Account Checkout', () => {
 
   it('Should click Next in checkout', () => {
     checkout.clickContinueButton();
+  });
+
+  it('Should check order confirmation', () => {
+    checkout.checkOrderConfirmationBanking();
+    checkout.checkAccordions('currentAccount');
   });
 });
