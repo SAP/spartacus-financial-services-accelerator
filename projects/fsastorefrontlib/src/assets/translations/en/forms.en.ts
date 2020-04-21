@@ -88,5 +88,6 @@ export const forms = {
       eventVenueAddress: 'Event Venue Address',
       eventVenueCity: 'Event Venue City',
     },
+    definitionLoadError: 'Error occurred. Form could not be loaded.',
   },
 };

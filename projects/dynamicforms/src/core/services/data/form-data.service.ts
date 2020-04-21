@@ -1,20 +1,30 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { OccFormService } from '../../../occ/services/form/occ-form.service';
-import { FormStorageObject, YFormData } from '../../models';
-import { YFormDefinition } from './../../models/form-occ.models';
+import { FormStorageObject, YFormData, YFormDefinition } from '../../models';
+import * as fromSelector from '../../store/selectors';
+import { filter, switchMap, take } from 'rxjs/operators';
+import { Store } from '@ngrx/store';
+import { StateWithFormDefinition } from '../../store/form-definition-state';
+import * as fromAction from '../../store/actions';
+import { FormConnector } from '../../connectors/form-connector';
 
 @Injectable()
 export class FormDataService {
   private formsLocalStorageKey = 'dynamicFormsData';
   submittedForm = new BehaviorSubject<YFormData>(null);
-  constructor(protected occYformsService: OccFormService) {}
+
+  constructor(
+    protected formConnector: FormConnector,
+    protected store: Store<StateWithFormDefinition>
+  ) {}
 
   // ***SHOULD BE REMOVED WITH FSA-4419***
   currentForm$: BehaviorSubject<YFormData> = new BehaviorSubject({});
+
   getCurrentFormData(): Observable<YFormData> {
     return this.currentForm$.asObservable();
   }
+
   // ***SHOULD BE REMOVED WITH FSA-4419***
 
   submit(form: YFormData) {
@@ -86,20 +96,31 @@ export class FormDataService {
   }
 
   saveFormData(formData: YFormData): Observable<YFormData> {
-    return this.occYformsService.saveFormData(formData);
+    // TO DO - Replace with actions instead of direct call to OCC
+    return formData.id
+      ? this.formConnector.updateFormData(formData)
+      : this.formConnector.createFormData(formData);
   }
 
   getFormData(formDataId: string): Observable<YFormData> {
-    return this.occYformsService.getFormData(formDataId);
+    return this.formConnector.getFormData(formDataId);
   }
 
-  getFormDefinition(
-    applicationId: string,
-    formDefinitionId: string
-  ): Observable<YFormDefinition> {
-    return this.occYformsService.getFormDefinition(
-      applicationId,
-      formDefinitionId
+  loadFormDefinition(applicationId: string, formDefinitionId: string) {
+    this.store.dispatch(
+      new fromAction.LoadFormDefinition({
+        applicationId: applicationId,
+        formDefinitionId: formDefinitionId,
+      })
+    );
+  }
+  getFormDefinition(): Observable<YFormDefinition> {
+    return this.store.select(fromSelector.getLoaded).pipe(
+      filter(loaded => loaded),
+      take(1),
+      switchMap(_ => {
+        return this.store.select(fromSelector.getFormDefinition);
+      })
     );
   }
 }
