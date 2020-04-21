@@ -352,7 +352,8 @@ export class FormSampleConfigurations {
               type: 'input',
               label: {
                 en: 'Please enter the desired amount from 10,000€ upwards.',
-                de: '[DE] Please enter the desired amount from 10,000€ upwards.',
+                de:
+                  '[DE] Please enter the desired amount from 10,000€ upwards.',
               },
               name: 'propertyMultipleOf10000ContentCover',
               required: true,
@@ -1277,7 +1278,8 @@ export class FormSampleConfigurations {
               ],
               error: {
                 en: 'Date must be in the future, cannot be after end date.',
-                de: '[DE] Date must be in the future, cannot be after end date.',
+                de:
+                  '[DE] Date must be in the future, cannot be after end date.',
               },
             },
             {

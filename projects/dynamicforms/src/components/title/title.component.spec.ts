@@ -6,6 +6,8 @@ import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { TitleComponent } from './title.component';
+import { LanguageService } from '@spartacus/core';
+import { of } from 'rxjs';
 
 const mockCssClass: CssClass = {
   formTitle: 'testTitle',
@@ -13,10 +15,18 @@ const mockCssClass: CssClass = {
 
 class MockOccFormService {}
 
+class MockLanguageService {
+  getActive() {
+    return of('en');
+  }
+}
+
 const mockField: FieldConfig = {
   type: 'title',
   name: 'testTitle',
-  label: 'Test Title',
+  label: {
+    en: 'Test Title',
+  },
 };
 
 const mockFormGroup = new FormGroup({
@@ -45,6 +55,7 @@ describe('TitleComponent', () => {
       imports: [ReactiveFormsModule],
       providers: [
         { provide: OccMockFormService, useClass: MockOccFormService },
+        { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,

@@ -1,5 +1,6 @@
 import { Component, Input, HostBinding, OnInit } from '@angular/core';
 import { AbstractFormComponent } from '../abstract-form.component';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-error-notice',
@@ -11,18 +12,25 @@ export class ErrorNoticeComponent extends AbstractFormComponent
   @Input() parentConfig: any;
   @HostBinding('class') class = '';
   errorMessage: string;
+
   ngOnInit() {
     super.ngOnInit();
-    this.language.getActive().subscribe(lang => {
-      if (this.parentConfig.error) {
-        if (this.parentConfig.error[lang]) {
-          this.errorMessage = this.parentConfig.error[lang];
-        } else if (this.parentConfig.error.default) {
-          this.errorMessage = this.parentConfig.error.default;
-        } else {
-          this.errorMessage = '';
-        }
-      }
-    });
+
+    this.subscription.add(
+      this.languageService
+        .getActive()
+        .pipe(
+          map(lang => {
+            if (this.parentConfig.error) {
+              if (this.parentConfig.error[lang]) {
+                this.errorMessage = this.parentConfig.error[lang];
+              } else if (this.parentConfig.error.default) {
+                this.errorMessage = this.parentConfig.error.default;
+              }
+            }
+          })
+        )
+        .subscribe()
+    );
   }
 }

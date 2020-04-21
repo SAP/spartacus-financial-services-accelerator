@@ -1,15 +1,17 @@
 import { DebugElement } from '@angular/core';
-import { By } from '@angular/platform-browser';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
-import { FieldConfig } from '../../core/models/form-config.interface';
-import { ButtonComponent } from './button.component';
+import { OccMockFormService } from '../occ/services/occ-mock-form.service';
+import { DynamicFormsConfig, CssClass } from '../core/config/form-config';
+import { FieldConfig } from '../core/models/form-config.interface';
 import { LanguageService } from '@spartacus/core';
 import { of } from 'rxjs';
+import { AbstractFormComponent } from '.';
 
-const mockCssClass: CssClass = {};
+const mockCssClass: CssClass = {
+  formTitle: 'testTitle',
+};
 
 class MockOccFormService {}
 
@@ -20,36 +22,35 @@ class MockLanguageService {
 }
 
 const mockField: FieldConfig = {
-  type: 'button',
-  name: 'testButton',
+  type: 'abstract',
+  name: 'testTitle',
   label: {
-    en: 'Test button',
+    en: 'Test string',
   },
 };
 
 const mockFormGroup = new FormGroup({
-  testButton: new FormControl(),
+  testTitle: new FormControl(),
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {
     cssClass: mockCssClass,
     components: {
-      button: {
-        component: ButtonComponent,
+      title: {
+        component: AbstractFormComponent,
       },
     },
   },
 };
 
-describe('ButtonComponent', () => {
-  let component: ButtonComponent;
-  let fixture: ComponentFixture<ButtonComponent>;
-  let el: DebugElement;
+describe('AbstractFormComponent', () => {
+  let component: AbstractFormComponent;
+  let fixture: ComponentFixture<AbstractFormComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ButtonComponent],
+      declarations: [AbstractFormComponent],
       imports: [ReactiveFormsModule],
       providers: [
         { provide: OccMockFormService, useClass: MockOccFormService },
@@ -63,12 +64,10 @@ describe('ButtonComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ButtonComponent);
+    fixture = TestBed.createComponent(AbstractFormComponent);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
     component.config = mockField;
-    el = fixture.debugElement;
-
     fixture.detectChanges();
   });
 
@@ -76,13 +75,7 @@ describe('ButtonComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should check components type', () => {
-    expect(component.config).toBe(mockField);
-    expect(component.config.type).toEqual('button');
-  });
-
-  it('should render button component', () => {
-    const buttonEl = el.query(By.css('button')).nativeElement;
-    expect(buttonEl).toBeTruthy();
+  it('should set label', () => {
+    expect(component.label).toEqual('Test string');
   });
 });
