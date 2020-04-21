@@ -1,12 +1,7 @@
 export const forms = {
   forms: {
     enterValidValue: 'Bitte geben Sie einen gültigen Wert ein',
-    dateInPast: 'Datum muss in der Vergangenheit liegen',
-    dateInFuture: 'Datum muss in der Zukunft liegen',
-    lessThan100K: 'Der Wert muss unter 100.000 liegen',
-    lessThan1M: 'Der Wert muss unter 1.000.000 liegen',
     dateOfBirthMinimumAge: 'Mindestens 18 Jahre alt',
-    lessThan150: 'Wert muss unter 150 liegen.',
     lessThan200K: '[DE] Range must be between 0 -200,000',
     enterValidEmail: 'Bitte geben Sie eine gültige Email Adresse ein.',
     vehicleValue: 'Der Fahrzeugwert muss zwischen 3.000 und 1.000.000 liegen.',
@@ -39,13 +34,6 @@ export const forms = {
     titles: {
       trip_details_form: 'Reiseinformation',
       auto_details_form: 'Fahrzeuginformationen',
-      life_details_form: 'Informationen zur Abdeckung',
-      auto_claim_incident_info_form: 'Informationen zum Vorfall',
-      auto_claim_incident_report_form: 'Vorfallsbericht',
-      auto_claim_general_form: 'Allgemeine Informationen',
-      insurance_personal_details: 'Persönliche Angaben',
-      event_personal_details: 'Persönliche Angaben',
-      travel_personal_details: 'Persönliche Angaben',
     },
     auto: {
       vehicleAnnualMileage: '[DE] Annual Mileage',
