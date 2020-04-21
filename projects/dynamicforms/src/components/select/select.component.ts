@@ -1,32 +1,54 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AbstractFormComponent } from '../abstract-form.component';
+import { Subscription, BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-select',
   templateUrl: './select.component.html',
 })
-export class SelectComponent extends AbstractFormComponent implements OnInit {
+export class SelectComponent extends AbstractFormComponent
+  implements OnInit, OnDestroy {
+  private subscription = new Subscription();
+
+  optionsSubject = new BehaviorSubject<any>([]);
+  options$: Observable<any> = this.optionsSubject.asObservable();
+
   ngOnInit() {
-    if (this.config.depends) {
-      this.config.depends.forEach(dependField => {
-        this.group.get(dependField).valueChanges.subscribe(val => {
-          this.setFormControlValues(val);
-        });
-      });
+    this.optionsSubject.next(this.config.options);
+    if (this.config.apiUrl) {
+      this.setFormControlValuesFromAPI();
     }
-    this.setFormControlValues(null);
   }
 
-  setFormControlValues(val: string) {
-    if (this.config.jsonField) {
-      const nodes = this.config.jsonField.split('.');
-      if (val !== null) {
-        this.config.options = this.formService.getDropdownValues(nodes, val);
-      } else {
-        this.config.options = this.formService.setInitialFormControlValues(
-          nodes
-        );
-      }
+  setFormControlValuesFromAPI() {
+    if (this.config.apiUrl) {
+      const options = [];
+      this.subscription.add(
+        this.formService
+          .getValuesFromAPI(this.config.apiUrl)
+          .pipe(
+            map(result => {
+              if (result.values) {
+                result.values.forEach(item => {
+                  options.push({
+                    name: item.key,
+                    label: item.value,
+                  });
+                });
+                this.optionsSubject.next(options);
+                this.group.get(this.config.name).setValue(null);
+              }
+            })
+          )
+          .subscribe()
+      );
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }
