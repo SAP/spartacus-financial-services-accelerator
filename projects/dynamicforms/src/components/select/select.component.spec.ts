@@ -20,35 +20,28 @@ class MockErrorNoticeComponent {
 }
 
 const mockCssClass: CssClass = {};
-
 class MockLanguageService {
   getActive() {
     return of('en');
   }
 }
 
-const dependentOptions = [
-  {
-    name: 'TestName',
-    label: 'TestLabel',
-  },
-  {
-    name: 'TestName2',
-    label: 'TestLabel2',
-  },
-];
+const apiValues = {
+  values: [
+    {
+      name: 'TestName',
+      label: 'TestLabel',
+    },
+    {
+      name: 'TestName2',
+      label: 'TestLabel2',
+    },
+  ],
+};
 
 class MockOccFormService {
-  setInitialFormControlValues() {
-    return dependentOptions;
-  }
-
-  getDropdownValues() {
-    return dependentOptions;
-  }
-
-  getNodes() {
-    return dependentOptions;
+  getValuesFromAPI() {
+    return of(apiValues);
   }
 }
 
@@ -58,8 +51,9 @@ const mockField: FieldConfig = {
   label: {
     en: 'TestLabel',
   },
+  options: [],
   depends: ['dependentTestField'],
-  jsonField: 'testSelect.dependentTestField',
+  apiUrl: 'testUrl',
 };
 
 const mockFormGroup = new FormGroup({
@@ -115,14 +109,11 @@ describe('SelectComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should check components type', () => {
-    expect(component.config).toBe(mockField);
-    expect(component.config.type).toEqual('select');
-  });
-
-  it('should set form control values', () => {
-    component.setFormControlValues('testGroup');
-    expect(component.config.options).toEqual(dependentOptions);
+  it('should not call external API', () => {
+    spyOn(mockOccFormService, 'getValuesFromAPI').and.stub();
+    mockField.apiUrl = undefined;
+    fixture.detectChanges();
+    expect(mockOccFormService.getValuesFromAPI).not.toHaveBeenCalled();
   });
 
   it('should render select component', () => {

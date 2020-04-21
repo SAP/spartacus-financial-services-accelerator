@@ -16,7 +16,7 @@ export interface FieldConfig {
   label?: TranslatableString;
   options?: FieldOption[];
   depends?: string[];
-  jsonField?: string;
+  apiUrl?: string;
   placeholder?: string;
   type: string;
   validation?: ValidatorFn[]; // TO-DO Remove validation attribute once all definitions are moved to back-end
