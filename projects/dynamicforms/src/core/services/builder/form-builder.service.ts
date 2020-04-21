@@ -29,16 +29,14 @@ export class FormBuilderService {
           this.formDependencyResolverService.resolveFormControlDependencies(
             fieldConfig.dependsOn,
             fieldControl,
-            form,
-            config
+            form
           );
         }
         if (formGroup.dependsOn) {
           this.formDependencyResolverService.resolveFormControlDependencies(
             formGroup.dependsOn,
             fieldControl,
-            form,
-            config
+            form
           );
         }
       });

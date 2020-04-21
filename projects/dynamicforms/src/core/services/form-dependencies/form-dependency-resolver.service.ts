@@ -2,14 +2,11 @@ import { Injectable } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
+  FormControl,
   FormGroup,
   ValidatorFn,
 } from '@angular/forms';
-import {
-  DependencyFn,
-  FieldConfig,
-  FormDefinition,
-} from './../../models/form-config.interface';
+import { DependencyFn } from './../../models/form-config.interface';
 import { FormValidationService } from './../form-validation/form-validation.service';
 
 @Injectable()
@@ -19,23 +16,18 @@ export class FormDependencyResolverService {
     protected fb: FormBuilder
   ) {}
 
-  formDefinition: FormDefinition;
-
   /**
    * Method used to enable/disable dependent control based on conditions defined at parent control
    *
    * @param dependencyConditions The conditions of parent control that need to be fullfilled
    * @param dependentControl The dependent field control for which dependencies are resolved
    * @param formGroup The form group which tracks value and validity of parent form controls
-   * @param formDefinition The form definition
    */
   resolveFormControlDependencies(
-    dependencyConditions: any,
-    dependentControl: AbstractControl,
-    formGroup: FormGroup,
-    formConfig: FormDefinition
+    dependencyConditions: DependencyFn[],
+    dependentControl: FormControl,
+    formGroup: FormGroup
   ) {
-    this.formDefinition = formConfig;
     dependencyConditions.forEach(parentDependancy => {
       const parentFormControl = this.getFormControlForCode(
         parentDependancy.name,
@@ -49,13 +41,8 @@ export class FormDependencyResolverService {
           const dependancyValidations = this.getDependencyConditionsForFunction(
             parentDependancy
           );
-          const parentFieldConfig = this.getFieldConfigForCode(
-            parentDependancy.name
-          );
-          parentFieldConfig.value = fieldValue;
-          const { disabled, value } = parentFieldConfig;
           const dependancyControl = this.fb.control(
-            { disabled, value },
+            { disabled: false, value: fieldValue },
             dependancyValidations
           );
           dependancyControl.valid
@@ -93,18 +80,6 @@ export class FormDependencyResolverService {
       }
     }
     return abstractFormControl;
-  }
-
-  getFieldConfigForCode(fieldName: string): FieldConfig {
-    let fieldConfig: FieldConfig;
-    if (this.formDefinition && this.formDefinition.formGroups) {
-      this.formDefinition.formGroups.forEach(formGroup => {
-        fieldConfig = formGroup.fieldConfigs.find(
-          field => (field.name = fieldName)
-        );
-      });
-    }
-    return fieldConfig;
   }
 
   getDependencyConditionsForFunction(

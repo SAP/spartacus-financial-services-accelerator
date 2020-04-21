@@ -74,6 +74,12 @@ export const defaultFormConfig: DynamicFormsConfig = {
       compareDates: {
         validator: DefaultFormValidators.compareDates,
       },
+      checkValue: {
+        validator: DefaultFormValidators.checkValue,
+      },
+      compareNumbers: {
+        validator: DefaultFormValidators.compareNumbers,
+      },
     },
   },
 };

@@ -55,10 +55,12 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
   }
 
   getProductData() {
-    this.product$ = this.productService.getCalculatedProductData(
-      this.productCode,
-      this.pricingData
-    );
+    if (this.pricingData) {
+      this.product$ = this.productService.getCalculatedProductData(
+        this.productCode,
+        this.pricingData
+      );
+    }
     this.subscription.add(
       this.product$
         .pipe(
