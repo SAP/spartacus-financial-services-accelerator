@@ -1,5 +1,4 @@
 import * as life from '../../../helpers/checkout/insurance/life-checkout';
-import { checkMiniCartLifeBasic } from '../../../helpers/checkout/insurance/life-checkout';
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
@@ -45,7 +44,7 @@ context('Life Insurance Checkout', () => {
 
     it('Should check comparison table and add Payment protection', () => {
       life.checkOptionalProductsAddRenewalOption();
-      life.checkMiniCartLifeBasic();
+      life.checkLifeBasicMiniCart();
       clickContinueButton();
     });
 
@@ -66,8 +65,8 @@ context('Life Insurance Checkout', () => {
 
     it('Should check quote review page', () => {
       checkout.checkProgressBarInsurance();
-      checkMiniCartLifeBasic();
-      checkout.checkQuoteReviewAccordions('life');
+      life.checkLifeBasicMiniCart();
+      checkout.checkAccordions('lifeQuoteReview');
       clickContinueButton();
       checkout.ConfirmBindQuote();
     });
@@ -81,6 +80,7 @@ context('Life Insurance Checkout', () => {
     });
 
     it('Check order confirmation', () => {
+      checkout.checkAccordions('lifeFinalReview');
       checkout.checkOrderConfirmation();
     });
 
