@@ -17,7 +17,10 @@ export class FormValidationService {
     if (fieldConfig) {
       if (fieldConfig.validations) {
         fieldConfig.validations.forEach(fieldValidation => {
-          validators.push(this.getValidatorForFunction(fieldValidation));
+          const validatorFn = this.getValidatorForFunction(fieldValidation);
+          if (validatorFn) {
+            validators.push(validatorFn);
+          }
         });
       }
       if (fieldConfig.required) {

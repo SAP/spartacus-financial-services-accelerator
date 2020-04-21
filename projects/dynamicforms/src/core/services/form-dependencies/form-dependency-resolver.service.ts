@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
   ValidatorFn,
 } from '@angular/forms';
@@ -25,7 +24,7 @@ export class FormDependencyResolverService {
    */
   resolveFormControlDependencies(
     dependencyConditions: DependencyFn[],
-    dependentControl: FormControl,
+    dependentControl: AbstractControl,
     formGroup: FormGroup
   ) {
     dependencyConditions.forEach(parentDependancy => {
