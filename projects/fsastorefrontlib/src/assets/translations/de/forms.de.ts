@@ -31,8 +31,16 @@ export const forms = {
     optional: '(Optional)',
     send: '[DE] Send',
     titles: {
+      homeowners_details_form: 'Immobilieninformationen',
       trip_details_form: 'Reiseinformation',
       auto_details_form: 'Fahrzeuginformationen',
+      life_details_form: 'Informationen zur Abdeckung',
+      auto_claim_incident_info_form: 'Informationen zum Vorfall',
+      auto_claim_incident_report_form: 'Vorfallsbericht',
+      auto_claim_general_form: 'Allgemeine Informationen',
+      insurance_personal_details: 'Persönliche Angaben',
+      event_personal_details: 'Persönliche Angaben',
+      travel_personal_details: 'Persönliche Angaben',
     },
   },
 };
