@@ -11,7 +11,6 @@ import { DefaultFormValidators } from '../../util/validators/default-form-valida
 
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
-    formClass: '',
     components: {
       button: {
         component: ButtonComponent,

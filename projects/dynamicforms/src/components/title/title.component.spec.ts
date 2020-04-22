@@ -34,9 +34,6 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
     components: {
       title: {
         component: TitleComponent,
-        cssEntries: {
-          elementClass: 'testTitle',
-        },
       },
     },
   },
@@ -81,7 +78,7 @@ describe('TitleComponent', () => {
   });
 
   it('should render title component', () => {
-    const heading = el.query(By.css('.testTitle')).nativeElement;
+    const heading = el.query(By.css('h4')).nativeElement;
     expect(heading).toBeTruthy();
   });
 });

@@ -1,17 +1,5 @@
 export interface FormComponentMapping {
   component: any;
-  cssEntries?: ComponentCss;
-}
-
-export interface ComponentCss {
-  controlContainerClass?: string;
-  wrapperClass?: string;
-  labelClass?: string;
-  optionalClass?: string;
-  elementClass?: string;
-  errorWrapperClass?: string;
-  errorClass?: string;
-  errorMessageClass?: string;
 }
 
 export abstract class FormComponentConfig {
@@ -28,7 +16,6 @@ export abstract class ValidatorConfig {
 
 export abstract class DynamicFormsConfig {
   dynamicForms: {
-    formClass?: string;
     components?: FormComponentConfig;
     validators?: ValidatorConfig;
   };

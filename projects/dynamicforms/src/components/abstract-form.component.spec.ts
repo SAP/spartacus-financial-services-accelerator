@@ -1,16 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { OccMockFormService } from '../occ/services/occ-mock-form.service';
-import { DynamicFormsConfig, CssClass } from '../core/config/form-config';
+import { DynamicFormsConfig } from '../core/config/form-config';
 import { FieldConfig } from '../core/models/form-config.interface';
 import { LanguageService } from '@spartacus/core';
 import { of } from 'rxjs';
 import { AbstractFormComponent } from '.';
 import { Type } from '@angular/core';
-
-const mockCssClass: CssClass = {
-  formTitle: 'testTitle',
-};
 
 class MockOccFormService {}
 
@@ -34,9 +30,7 @@ const mockFormGroup = new FormGroup({
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
-  dynamicForms: {
-    cssClass: mockCssClass,
-  },
+  dynamicForms: {},
 };
 
 describe('AbstractFormComponent', () => {

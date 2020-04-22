@@ -71,7 +71,7 @@ describe('ErrorNoticeComponent', () => {
   });
 
   it('should render textarea component', () => {
-    const errorComponent = el.query(By.css('.px-4')).nativeElement;
+    const errorComponent = el.query(By.css('.text-danger')).nativeElement;
     expect(errorComponent).toBeTruthy();
   });
 
