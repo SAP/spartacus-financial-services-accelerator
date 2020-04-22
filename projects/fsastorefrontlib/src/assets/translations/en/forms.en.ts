@@ -4,7 +4,6 @@ export const forms = {
     lessThan200K: 'Range must be between 0 -200,000',
     dateOfBirthMinimumAge: 'Must be over 18 years old',
     enterValidEmail: 'Please enter a valid email',
-    vehicleValue: 'Vehicle value must be a number between 3.000 and 1.000.000',
     dateOfBirth: {
       label: 'Date of Birth',
     },
@@ -33,14 +32,6 @@ export const forms = {
     optional: '(Optional)',
     enterMessage: 'Your message',
     send: 'Send',
-    titles: {
-      homeowners_details_form: 'Homeowners Information',
-      trip_details_form: 'Trip Information',
-      auto_details_form: 'Auto Information',
-    },
-    auto: {
-      vehicleAnnualMileage: 'Annual Mileage',
-    },
     definitionLoadError: 'Error occurred. Form could not be loaded.',
   },
 };

@@ -4,7 +4,6 @@ export const forms = {
     dateOfBirthMinimumAge: 'Mindestens 18 Jahre alt',
     lessThan200K: '[DE] Range must be between 0 -200,000',
     enterValidEmail: 'Bitte geben Sie eine gültige Email Adresse ein.',
-    vehicleValue: 'Der Fahrzeugwert muss zwischen 3.000 und 1.000.000 liegen.',
     dateOfBirth: {
       label: 'Geburtsdatum',
     },
@@ -31,12 +30,5 @@ export const forms = {
     subject: '[DE] Subject',
     optional: '(Optional)',
     send: '[DE] Send',
-    titles: {
-      trip_details_form: 'Reiseinformation',
-      auto_details_form: 'Fahrzeuginformationen',
-    },
-    auto: {
-      vehicleAnnualMileage: '[DE] Annual Mileage',
-    },
   },
 };
