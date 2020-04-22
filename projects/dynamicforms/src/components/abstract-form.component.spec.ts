@@ -6,6 +6,7 @@ import { FieldConfig } from '../core/models/form-config.interface';
 import { LanguageService } from '@spartacus/core';
 import { of } from 'rxjs';
 import { AbstractFormComponent } from '.';
+import { Type } from '@angular/core';
 
 const mockCssClass: CssClass = {
   formTitle: 'testTitle',
@@ -19,12 +20,13 @@ class MockLanguageService {
   }
 }
 
+const enLabel = 'En test string';
+const defaultLabel = 'Test string';
+
 const mockField: FieldConfig = {
   type: 'abstract',
   name: 'testTitle',
-  label: {
-    default: 'Test string',
-  },
+  label: {},
 };
 
 const mockFormGroup = new FormGroup({
@@ -40,7 +42,7 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 describe('AbstractFormComponent', () => {
   let component: AbstractFormComponent;
   let fixture: ComponentFixture<AbstractFormComponent>;
-
+  let mockLanguageService: LanguageService;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AbstractFormComponent],
@@ -54,13 +56,13 @@ describe('AbstractFormComponent', () => {
         },
       ],
     }).compileComponents();
+    mockLanguageService = TestBed.get(LanguageService as Type<LanguageService>);
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AbstractFormComponent);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
-    component.config = mockField;
     fixture.detectChanges();
   });
 
@@ -69,12 +71,18 @@ describe('AbstractFormComponent', () => {
   });
 
   it('should set default label', () => {
-    expect(component.label).toEqual('Test string');
+    component.config = mockField;
+    mockField.label.default = defaultLabel;
+    component.config = mockField;
+    component.ngOnInit();
+    expect(component.label).toEqual(defaultLabel);
   });
 
   it('should set english label', () => {
-    component.config.label.en = 'En test string';
+    component.config = mockField;
+    mockField.label.default = enLabel;
+    component.config = mockField;
     component.ngOnInit();
-    expect(component.label).toEqual('En test string');
+    expect(component.label).toEqual(enLabel);
   });
 });

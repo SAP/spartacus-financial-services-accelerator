@@ -27,7 +27,7 @@ export interface FieldConfig {
 }
 export interface LocalizedString {
   default?: string;
-  [key: string]: string;
+  [lang: string]: string;
 }
 export interface ValidatorFunction {
   name: string;
