@@ -90,6 +90,31 @@
           </div>
         </div>
       </ng-container>
+      <ng-container *ngFor="let TPL of entries | slice:0:1">
+        <ng-container *ngIf="TPL.product.classifications" >
+          <div
+          class="row mx-3 py-3 no-gutters position-relative">
+          <div class="col-12 col-md-2 align-self-center">
+            <cx-media
+              class="cx-product-image-container"
+              [container]="TPL.product?.images?.PRIMARY"
+              format="96Wx96H"
+            ></cx-media>
+          </div>
+          <div class="col-12 col-md-7 align-self-center">
+            <h6>{{ TPL.product?.classifications?.features?.name }}</h6>
+          </div>
+          <div
+            class="col-12 col-md-3 align-self-center text-center"
+          >
+          </div>
+          <div class="col-12 col-md-3 align-self-center">
+
+           
+          </div>
+        </div>
+        </ng-container>
+      </ng-container>
     </ng-container>
   </ng-container>
 </div>
