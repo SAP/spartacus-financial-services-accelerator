@@ -1,4 +1,3 @@
-import { QUOTE_NORMALIZER } from '../core/my-account/connectors/converters';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
@@ -17,7 +16,6 @@ import { OccCsTicketAdapter } from './adapters/cs-ticket/occ-cs-ticket.adapter';
 import { OccInboxAdapter } from './adapters/inbox/occ-inbox.adapter';
 import { OccProductPricingAdapter } from './adapters/pricing/occ-product-pricing.adapter';
 import { OccProductAssignmentAdapter } from './adapters/product-assignment/occ-product-assignment.adapter';
-import { OccQuoteNormalizer } from './adapters/quote/converters/occ-quote-normalizer';
 import { ProductAssignmentAdapter } from '../core/product-assignment/connectors/product-assignment.adapter';
 import { ChangeRequestOccModule } from './adapters/change-request/change-request-occ.module';
 import { ClaimOccModule } from './adapters/claim/claim-occ.module';
@@ -65,12 +63,6 @@ import { Config, OccConfig } from '@spartacus/core';
       provide: ProductPricingAdapter,
       useClass: OccProductPricingAdapter,
     },
-    {
-      provide: QUOTE_NORMALIZER,
-      useExisting: OccQuoteNormalizer,
-      multi: true,
-    },
-
     {
       provide: CsTicketAdapter,
       useClass: OccCsTicketAdapter,
