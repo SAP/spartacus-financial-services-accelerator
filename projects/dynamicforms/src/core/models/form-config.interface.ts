@@ -3,10 +3,12 @@ import { ValidatorFn } from '@angular/forms';
 export interface FormDefinition {
   formGroups: DynamicFormGroup[];
   formId: string;
+  cssClass?: string;
 }
 export interface DynamicFormGroup {
   groupCode?: string;
   fieldConfigs: FieldConfig[];
+  cssClass?: string;
 }
 export interface FieldConfig {
   name?: string;
