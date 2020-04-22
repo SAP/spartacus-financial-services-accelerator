@@ -86,6 +86,7 @@ describe('ErrorNoticeComponent', () => {
     component.parentConfig = mockParentConfig;
     mockParentConfig.error.default = defaultErrorMessage;
     component.ngOnInit();
+    component.ngOnDestroy();
     expect(component.errorMessage).toEqual(defaultErrorMessage);
   });
 
@@ -93,6 +94,7 @@ describe('ErrorNoticeComponent', () => {
     component.parentConfig = mockParentConfig;
     mockParentConfig.error.en = enErrorMessage;
     component.ngOnInit();
+    component.ngOnDestroy();
     expect(component.errorMessage).toEqual('En test string');
   });
 });
