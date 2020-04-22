@@ -1,5 +1,6 @@
-import { DefaultFormValidators, FormDefinition } from '@fsa/dynamicforms';
-import { FormHelpers } from '../../../shared/util/helpers/form-helpers';
+import { FormHelpers } from './form-helpers';
+import { FormDefinition } from '../core/models';
+import { DefaultFormValidators } from './validators/default-form-validators';
 
 export class FormSampleConfigurations {
   static sampleConfigurations: FormDefinition[] = [
@@ -11,12 +12,18 @@ export class FormSampleConfigurations {
           fieldConfigs: [
             {
               type: 'title',
-              label: 'General Information',
+              label: {
+                en: 'General Information',
+                de: 'Allgemeine Informationen',
+              },
               name: 'general',
             },
             {
               type: 'radio',
-              label: 'Cover Required',
+              label: {
+                en: 'Cover Required',
+                de: '[DE] Cover Required',
+              },
               name: 'coverRequired',
               options: [
                 { name: 'buildingAndContents', label: 'Building and Contents' },
@@ -35,14 +42,20 @@ export class FormSampleConfigurations {
             },
             {
               type: 'datepicker',
-              label: 'Start Date',
+              label: {
+                en: 'Start Date',
+                de: 'Startdatum',
+              },
               name: 'propertyDetailsStartDate',
               required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeGreater'),
               ],
-              error: 'forms.dateInFuture',
+              error: {
+                en: 'Date must be in the future.',
+                de: 'Datum muss in der Zukunft liegen.',
+              },
             },
           ],
         },
@@ -51,12 +64,18 @@ export class FormSampleConfigurations {
           fieldConfigs: [
             {
               type: 'title',
-              label: 'Property Details',
+              label: {
+                en: 'Property Details',
+                de: '[DE] Property Details',
+              },
               name: 'propertyDetailsCoverRequired',
             },
             {
               type: 'select',
-              label: 'Property Type',
+              label: {
+                en: 'Property Type',
+                de: '[DE] Property Type',
+              },
               name: 'propertyType',
               options: [
                 { name: 'House', label: 'House' },
@@ -67,7 +86,10 @@ export class FormSampleConfigurations {
             },
             {
               type: 'input',
-              label: 'Property Value',
+              label: {
+                en: 'Property Value',
+                de: '[DE] value',
+              },
               name: 'propertyValue',
               required: true,
               validation: [
@@ -76,11 +98,17 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(1000000),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.from10Kto1M',
+              error: {
+                en: 'Must be in the range from 10.000 to 1.000.000.',
+                de: '[DE] Must be in the range from 10.000 to 1.000.000.',
+              },
             },
             {
               type: 'input',
-              label: 'Rebuild Value of Property',
+              label: {
+                en: 'Rebuild Value of Property',
+                de: '[DE] Rebuild Value of Property',
+              },
               name: 'propertyRebuildCost',
               required: true,
               validation: [
@@ -91,11 +119,17 @@ export class FormSampleConfigurations {
                   'shouldBeLess'
                 ),
               ],
-              error: 'forms.lessThanPropertyValue',
+              error: {
+                en: 'Must be less than property value.',
+                de: '[DE] Must be less than property value.',
+              },
             },
             {
               type: 'input',
-              label: 'Approximate Year Property Built',
+              label: {
+                en: 'Approximate Year Property Built',
+                de: '[DE] Approximate Year Property Built',
+              },
               name: 'ccaBuiltYear',
               required: true,
               validation: [
@@ -104,11 +138,17 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(Number(new Date().getFullYear())),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.dateFrom1000toCurrent',
+              error: {
+                en: 'Year must be from AD 1000 till current.',
+                de: '[DE] Year must be from AD 1000 till current.',
+              },
             },
             {
               type: 'input',
-              label: 'Number of Bedrooms',
+              label: {
+                en: 'Number of Bedrooms',
+                de: '[DE] Number of Bedrooms',
+              },
               name: 'numberOfBedrooms',
               required: true,
               validation: [
@@ -117,11 +157,17 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(50),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.between1And50',
+              error: {
+                en: 'Value must be a number between 1 and 50.',
+                de: '[DE] Value must be a number between 1 and 50.',
+              },
             },
             {
               type: 'input',
-              label: 'Number of Bathrooms',
+              label: {
+                en: 'Number of Bathrooms',
+                de: '[DE] Number of Bathrooms',
+              },
               name: 'numberOfBathrooms',
               required: true,
               validation: [
@@ -130,11 +176,17 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(50),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.between1And50',
+              error: {
+                en: 'Value must be a number between 1 and 50.',
+                de: '[DE] Value must be a number between 1 and 50.',
+              },
             },
             {
               type: 'radio',
-              label: 'Does anyone at the property smoke?',
+              label: {
+                en: 'Does anyone at the property smoke?',
+                de: '[DE] Does anyone at the property smoke?',
+              },
               name: 'smoking',
               options: [
                 { name: 'yes', label: 'Yes' },
@@ -145,8 +197,12 @@ export class FormSampleConfigurations {
             },
             {
               type: 'input',
-              label:
-                'How many days in a row is the property likely to be unoccupied?',
+              label: {
+                en:
+                  'How many days in a row is the property likely to be unoccupied?',
+                de:
+                  '[DE] How many days in a row is the property likely to be unoccupied?',
+              },
               name: 'numberOfDaysUnoccupied',
               required: true,
               validation: [
@@ -155,11 +211,17 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(360),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.between0And360',
+              error: {
+                en: 'Value must be a number between 0 and 360.',
+                de: '[DE] Value must be a number between 0 and 360.',
+              },
             },
             {
               type: 'radio',
-              label: 'Is the property normally occupied during the day?',
+              label: {
+                en: 'Is the property normally occupied during the day?',
+                de: '[DE] Is the property normally occupied during the day?',
+              },
               name: 'normallyOccupied',
               options: [
                 { name: 'yes', label: 'Yes' },
@@ -170,7 +232,10 @@ export class FormSampleConfigurations {
             },
             {
               type: 'radio',
-              label: 'What is the exterior construction material?',
+              label: {
+                en: 'What is the exterior construction material?',
+                de: '[DE] What is the exterior construction material?',
+              },
               name: 'constructionMaterial',
               options: [
                 { name: 'wood', label: 'Wood' },
@@ -181,7 +246,10 @@ export class FormSampleConfigurations {
             },
             {
               type: 'radio',
-              label: 'What locks are in place?',
+              label: {
+                en: 'What locks are in place?',
+                de: '[DE] What locks are in place?',
+              },
               name: 'locks',
               options: [
                 { name: 'morticeDeadlock', label: 'Mortice Deadlock' },
@@ -200,14 +268,21 @@ export class FormSampleConfigurations {
           fieldConfigs: [
             {
               type: 'title',
-              label: 'Your Building Cover',
+              label: {
+                en: 'Your Building Cover',
+                de: '[DE] Your Building Cover',
+              },
               name: 'buildingCover',
               hidden: true,
             },
             {
               type: 'select',
-              label:
-                'How many consecutive years have you held buildings insurance?',
+              label: {
+                en:
+                  'How many consecutive years have you held buildings insurance?',
+                de:
+                  '[DE] How many consecutive years have you held buildings insurance?',
+              },
               name: 'alreadyHeldInsurance',
               options: [
                 { name: '0', label: '0' },
@@ -223,8 +298,12 @@ export class FormSampleConfigurations {
             },
             {
               type: 'radio',
-              label:
-                'Would you like the accidental damage cover for your building?',
+              label: {
+                en:
+                  'Would you like the accidental damage cover for your building?',
+                de:
+                  '[DE] Would you like the accidental damage cover for your building?',
+              },
               name: 'accidentalDamageCoverBuilding',
               options: [
                 { name: 'yes', label: 'Yes' },
@@ -241,14 +320,21 @@ export class FormSampleConfigurations {
           fieldConfigs: [
             {
               type: 'title',
-              label: 'Your Contents Cover',
+              label: {
+                en: 'Your Contents Cover',
+                de: '[DE] Your Contents Cover',
+              },
               name: 'propertyIsStandard50000ContentCover',
               hidden: true,
             },
             {
               type: 'radio',
-              label:
-                'We give you 50,000€ contents cover as a standard, is this enough?',
+              label: {
+                en:
+                  'We give you 50,000€ contents cover as a standard, is this enough?',
+                de:
+                  '[DE] We give you 50,000€ contents cover as a standard, is this enough?',
+              },
               name: 'startAmountCover',
               options: [
                 { name: '0', label: 'Yes' },
@@ -265,7 +351,11 @@ export class FormSampleConfigurations {
             },
             {
               type: 'input',
-              label: 'Please enter the desired amount from 10,000€ upwards.',
+              label: {
+                en: 'Please enter the desired amount from 10,000€ upwards.',
+                de:
+                  '[DE] Please enter the desired amount from 10,000€ upwards.',
+              },
               name: 'propertyMultipleOf10000ContentCover',
               required: true,
               validation: [
@@ -274,13 +364,20 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(1000000),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.from10Kto1M',
+              error: {
+                en: 'Date must be in the future.',
+                de: 'Datum muss in der Zukunft liegen.',
+              },
               hidden: true,
             },
             {
               type: 'input',
-              label:
-                'How many consecutive years have you held contents insurance?',
+              label: {
+                en:
+                  'How many consecutive years have you held contents insurance?',
+                de:
+                  '[DE] How many consecutive years have you held contents insurance?',
+              },
               name: 'numberOfYearsHoldingInsurance',
               required: true,
               validation: [
@@ -289,13 +386,19 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(150),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.lessThan150',
+              error: {
+                en: 'Value must be less than 150.',
+                de: 'Wert muss unter 150 liegen.',
+              },
               hidden: true,
             },
             {
               type: 'radio',
-              label:
-                'Would you like accidental damage cover for your contents?',
+              label: {
+                en: 'Would you like accidental damage cover for your contents?',
+                de:
+                  '[DE] Would you like accidental damage cover for your contents?',
+              },
               name: 'accidentalDamageCoverContents',
               options: [
                 { name: 'yes', label: 'Yes' },
@@ -307,8 +410,12 @@ export class FormSampleConfigurations {
             },
             {
               type: 'datepicker',
-              label:
-                'If you have a car, please tell us when your insurance is due for renewal',
+              label: {
+                en:
+                  'If you have a car, please tell us when your insurance is due for renewal',
+                de:
+                  '[DE] If you have a car, please tell us when your insurance is due for renewal',
+              },
               name: 'coverageStartDate',
               hidden: true,
             },
@@ -319,31 +426,46 @@ export class FormSampleConfigurations {
           fieldConfigs: [
             {
               type: 'title',
-              label: 'Your Property Address',
+              label: {
+                en: 'Your Property Address',
+                de: '[DE] Your Property Address',
+              },
               name: 'propertyAddress',
             },
             {
               type: 'input',
-              label: 'Address Line 1',
+              label: {
+                en: 'Address Line 1',
+                de: '[DE] Address Line 1',
+              },
               name: 'property-address-line-1',
               required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               type: 'input',
-              label: 'Address Line 2',
+              label: {
+                en: 'Address Line 2',
+                de: '[DE] Address Line 2',
+              },
               name: 'property-address-line-2',
             },
             {
               type: 'input',
-              label: 'City',
+              label: {
+                en: 'City',
+                de: 'Stadt',
+              },
               name: 'property-address-city',
               required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               type: 'input',
-              label: 'Postcode',
+              label: {
+                en: 'Postcode',
+                de: 'Postleitzahl',
+              },
               name: 'property-address-postcode',
               required: true,
               validation: [
@@ -353,11 +475,19 @@ export class FormSampleConfigurations {
                   DefaultFormValidators.postalCodeRegex
                 ),
               ],
-              error: 'forms.containAtLeastOneNumber',
+              error: {
+                en:
+                  'Should contain at least one number, no special characters.',
+                de:
+                  '[DE] Should contain at least one number, no special characters.',
+              },
             },
             {
               type: 'select',
-              label: 'Country',
+              label: {
+                en: 'Country',
+                de: 'Land',
+              },
               name: 'property-address-country',
               options: [
                 {
@@ -373,7 +503,7 @@ export class FormSampleConfigurations {
                   label: 'France',
                 },
                 {
-                  name: 'DE',
+                  name: '[DE]',
                   label: 'Germany',
                 },
                 {
@@ -404,27 +534,38 @@ export class FormSampleConfigurations {
           fieldConfigs: [
             {
               type: 'title',
-              label: 'General',
+              label: {
+                en: 'General',
+                de: '[DE] General',
+              },
               name: 'general',
             },
             {
               type: 'datepicker',
-              label: 'Coverage Start Date',
+              label: {
+                en: 'Coverage Start Date',
+                de: '[DE] Coverage Start Date',
+              },
               name: 'coverageStartDate',
               required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeGreater'),
               ],
-              error: 'forms.dateInFuture',
+              error: {
+                en: 'Date must be in the future.',
+                de: 'Datum muss in der Zukunft liegen.',
+              },
             },
             {
               type: 'select',
-              options: [
-                { name: 'MONTHLY', label: 'Monthly' },
-                { name: 'YEARLY', label: 'Yearly' },
-              ],
-              label: 'Payment Frequency',
+              label: {
+                en: 'Payment Frequency',
+                de: '[DE] value',
+              },
+              apiUrl:
+                '/catalogs/financialProductCatalog/valueLists/paymentFrequency?categoryCode=insurances_auto',
+
               name: 'paymentFrequency',
               required: true,
               validation: [DefaultFormValidators.required],
@@ -436,22 +577,35 @@ export class FormSampleConfigurations {
           fieldConfigs: [
             {
               type: 'title',
-              label: 'Vehicle',
+              label: {
+                en: 'Vehicle',
+                de: '[DE] Vehicle',
+              },
               name: 'vehicle',
             },
             {
               type: 'select',
-              jsonField: 'make',
-              label: 'Vehicle Make',
+              label: {
+                en: 'Vehicle Make',
+                de: '[DE] value',
+              },
+
+              apiUrl:
+                '/catalogs/financialProductCatalog/valueLists/autoVehicleMake',
+
               name: 'vehicleMake',
               required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               type: 'select',
-              jsonField: 'make.model',
+              apiUrl:
+                '/catalogs/financialProductCatalog/valueLists/autoVehicleModel',
               depends: ['vehicleMake'],
-              label: 'Vehicle Model',
+              label: {
+                en: 'Vehicle Model',
+                de: '[DE] value',
+              },
               name: 'vehicleModel',
               required: true,
               validation: [DefaultFormValidators.required],
@@ -459,8 +613,12 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               depends: ['vehicleMake', 'vehicleModel'],
-              jsonField: 'make.model.type',
-              label: 'Vehicle Type',
+              label: {
+                en: 'Vehicle Type',
+                de: '[DE] value',
+              },
+              apiUrl:
+                '/catalogs/financialProductCatalog/valueLists/autoVehicleType',
               name: 'vehicleType',
               required: true,
               validation: [DefaultFormValidators.required],
@@ -468,15 +626,23 @@ export class FormSampleConfigurations {
             {
               type: 'select',
               depends: ['vehicleMake', 'vehicleModel', 'vehicleType'],
-              jsonField: 'make.model.type.year',
-              label: 'Vehicle Year',
+              label: {
+                en: 'Vehicle Year',
+                de: '[DE] value',
+              },
+
+              apiUrl:
+                '/catalogs/financialProductCatalog/valueLists/autoVehicleYear',
               name: 'vehicleYear',
               required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               type: 'input',
-              label: 'Annual Mileage',
+              label: {
+                en: 'Annual Mileage',
+                de: '[DE] value',
+              },
               name: 'vehicleAnnualMileage',
               required: true,
               validation: [
@@ -484,11 +650,17 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(100000),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.lessThan100K',
+              error: {
+                en: 'Value must be less than 100.000',
+                de: '[DE]r Wert muss unter 100.000 liegen',
+              },
             },
             {
               type: 'input',
-              label: 'Vehicle Value',
+              label: {
+                en: 'Vehicle Value',
+                de: '[DE] value',
+              },
               name: 'vehicleValue',
               required: true,
               validation: [
@@ -497,22 +669,31 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(1000000),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.vehicleValue',
+              error: {
+                en:
+                  'Vehicle value must be a number between 3.000 and 1.000.000.',
+                de:
+                  '[DE]r Fahrzeugwert muss zwischen 3.000 und 1.000.000 liegen.',
+              },
             },
             {
               type: 'select',
-              label: 'Vehicle Usage',
+              label: {
+                en: 'Vehicle Usage',
+                de: '[DE] value',
+              },
               name: 'vehicleUsage',
-              options: [
-                { name: 'Personal', label: 'Personal' },
-                { name: 'Business', label: 'Business' },
-              ],
+              apiUrl:
+                '/catalogs/financialProductCatalog/valueLists/autoVehicleUsage',
               required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               type: 'datepicker',
-              label: 'Vehicle Purchase Date',
+              label: {
+                en: 'Vehicle Purchase Date',
+                de: '[DE] value',
+              },
               name: 'vehiclePurchaseDate',
               required: true,
               validation: [
@@ -523,11 +704,19 @@ export class FormSampleConfigurations {
                   'shouldBeLess'
                 ),
               ],
-              error: 'forms.afterVehicleManufacture',
+              error: {
+                en:
+                  'Date must be in the past, during or after vehicle manufacture year.',
+                de:
+                  '[DE] Date must be in the past, during or after vehicle manufacture year.',
+              },
             },
             {
               type: 'input',
-              label: 'Vehicle Owner Postal Code',
+              label: {
+                en: 'Vehicle Owner Postal Code',
+                de: '[DE] value',
+              },
               name: 'vehicleOwnerPostalCode',
               required: true,
               validation: [
@@ -537,7 +726,12 @@ export class FormSampleConfigurations {
                   DefaultFormValidators.postalCodeRegex
                 ),
               ],
-              error: 'forms.containAtLeastOneNumber',
+              error: {
+                en:
+                  'Should contain at least one number, no special characters.',
+                de:
+                  'Should contain at least one number, no special characters.',
+              },
             },
           ],
         },
@@ -546,64 +740,78 @@ export class FormSampleConfigurations {
           fieldConfigs: [
             {
               type: 'title',
-              label: 'Main Driver',
+              label: {
+                en: 'Main Driver',
+                de: '[DE] Main Driver',
+              },
               name: 'main-driver',
             },
             {
               type: 'datepicker',
-              label: 'Driver Date of Birth',
+              label: {
+                en: 'Driver Date of Birth',
+                de: '[DE] Driver Date of Birth',
+              },
               name: 'dateOfBirth',
               required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
               ],
-              error: 'forms.dateOfBirthMinimumAge',
+              error: {
+                en: 'Must be over 18 years old.',
+                de: 'Muss über 18 Jahre alt sein.',
+              },
             },
             {
               type: 'select',
-              label: 'Driver Gender',
+              label: {
+                en: 'Driver Gender',
+                de: '[DE] Driver Gender',
+              },
               name: 'driverGender',
-              options: [
-                { name: 'Male', label: 'Male' },
-                { name: 'Female', label: 'Female' },
-              ],
+              apiUrl: '/catalogs/financialProductCatalog/valueLists/gender',
               required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               type: 'select',
-              label: 'Driver Marital Status',
+              label: {
+                en: 'Driver Marital Status',
+                de: '[DE] Driver Marital Status',
+              },
               name: 'driverMaritalStatus',
-              options: [
-                { name: 'Single', label: 'Single' },
-                { name: 'Married', label: 'Married' },
-                { name: 'Widowed', label: 'Widowed' },
-              ],
+              apiUrl:
+                '/catalogs/financialProductCatalog/valueLists/maritalStatus',
               required: true,
               validation: [DefaultFormValidators.required],
             },
             {
               type: 'select',
-              label: 'Driver`s Category',
+              label: {
+                en: 'Driver`s Category',
+                de: '[DE] Driver`s Category',
+              },
               name: 'driverCategory',
-              options: [
-                {
-                  label: 'Main',
-                  name: 'Main',
-                },
-              ],
+              apiUrl:
+                '/catalogs/financialProductCatalog/valueLists/autoDriverCategory',
             },
             {
               type: 'datepicker',
-              label: 'Driver Licence Date',
+              label: {
+                en: 'Driver Licence Date',
+                de: '[DE] Driver Licence Date',
+              },
               name: 'driverLicenceDate',
               required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
-              error: 'forms.dateInPast',
+              error: {
+                en: 'Date must be in the past.',
+                de: 'Datum muss in der Vergangenheit liegen.',
+              },
             },
           ],
         },
@@ -612,12 +820,18 @@ export class FormSampleConfigurations {
           fieldConfigs: [
             {
               type: 'title',
-              label: 'Additional Driver(s)',
+              label: {
+                en: 'Additional Driver(s)',
+                de: '[DE] Additional Driver(s)',
+              },
               name: 'additionalDrivers',
             },
             {
               type: 'select',
-              label: 'Number of Drivers',
+              label: {
+                en: 'Number of Drivers',
+                de: '[DE] Number of Drivers',
+              },
               name: 'noOfDrivers',
               options: [
                 { name: '0', label: '0' },
@@ -644,50 +858,62 @@ export class FormSampleConfigurations {
           fieldConfigs: [
             {
               type: 'title',
-              label: 'Additional Driver 1',
+              label: {
+                en: 'Additional Driver 1',
+                de: '[DE] Additional Driver 1',
+              },
               name: 'additional-driver-1',
               hidden: true,
             },
             {
               type: 'datepicker',
-              label: 'Driver Date of Birth',
+              label: {
+                en: 'Driver Date of Birth',
+                de: '[DE] Driver Date of Birth',
+              },
               name: 'dateOfBirth',
               required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
               ],
-              error: 'forms.dateOfBirthMinimumAge',
+              error: {
+                en: 'Must be over 18 years old.',
+                de: 'Muss über 18 Jahre alt sein.',
+              },
               hidden: true,
             },
             {
               type: 'select',
-              label: 'Driver Gender',
+              label: {
+                en: 'Driver Gender',
+                de: '[DE] Driver Gender',
+              },
               name: 'driverGender',
-              options: [
-                { name: 'Male', label: 'Male' },
-                { name: 'Female', label: 'Female' },
-              ],
+              apiUrl: '/catalogs/financialProductCatalog/valueLists/gender',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
             {
               type: 'select',
-              label: 'Driver Marital Status',
+              label: {
+                en: 'Driver Marital Status',
+                de: '[DE] Driver Marital Status',
+              },
               name: 'driverMaritalStatus',
-              options: [
-                { name: 'Single', label: 'Single' },
-                { name: 'Married', label: 'Married' },
-                { name: 'Widowed', label: 'Widowed' },
-              ],
+              apiUrl:
+                '/catalogs/financialProductCatalog/valueLists/maritalStatus',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
             {
               type: 'select',
-              label: 'Driver`s Category',
+              label: {
+                en: 'Driver`s Category',
+                de: '[DE] Driver`s Category',
+              },
               name: 'driverCategory',
               options: [{ name: 'Occasional', label: 'Occasional' }],
               disabled: true,
@@ -695,14 +921,20 @@ export class FormSampleConfigurations {
             },
             {
               type: 'datepicker',
-              label: 'Driver Licence Date',
+              label: {
+                en: 'Driver Licence Date',
+                de: '[DE] Driver Licence Date',
+              },
               name: 'driverLicenceDate',
               required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
-              error: 'forms.dateInPast',
+              error: {
+                en: 'Date must be in the past',
+                de: 'Datum muss in der Vergangenheit liegen',
+              },
               hidden: true,
             },
           ],
@@ -712,64 +944,82 @@ export class FormSampleConfigurations {
           fieldConfigs: [
             {
               type: 'title',
-              label: 'Additional Driver 2',
+              label: {
+                en: 'Additional Driver 2',
+                de: '[DE] Additional Driver 2',
+              },
               name: 'additional-driver-2',
               hidden: true,
             },
             {
               type: 'datepicker',
-              label: 'Driver Date of Birth',
+              label: {
+                en: 'Driver Date of Birth',
+                de: '[DE] Driver Date of Birth',
+              },
               name: 'dateOfBirth',
               required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
               ],
-              error: 'forms.dateOfBirthMinimumAge',
+              error: {
+                en: 'Must be over 18 years old.',
+                de: 'Muss über 18 Jahre alt sein.',
+              },
               hidden: true,
             },
             {
               type: 'select',
-              label: 'Driver Gender',
+              label: {
+                en: 'Driver Gender',
+                de: '[DE] Driver Gender',
+              },
               name: 'driverGender',
-              options: [
-                { name: 'Male', label: 'Male' },
-                { name: 'Female', label: 'Female' },
-              ],
+              apiUrl: '/catalogs/financialProductCatalog/valueLists/gender',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
             {
               type: 'select',
-              label: 'Driver Marital Status',
+              label: {
+                en: 'Driver Marital Status',
+                de: '[DE] Driver Marital Status',
+              },
               name: 'driverMaritalStatus',
-              options: [
-                { name: 'Single', label: 'Single' },
-                { name: 'Married', label: 'Married' },
-                { name: 'Widowed', label: 'Widowed' },
-              ],
+              apiUrl:
+                '/catalogs/financialProductCatalog/valueLists/maritalStatus',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
             {
               type: 'select',
-              label: 'Driver`s Category',
+              label: {
+                en: 'Driver`s Category',
+                de: '[DE] Driver`s Category',
+              },
               name: 'driverCategory',
               options: [{ name: 'Occasional', label: 'Occasional' }],
               hidden: true,
             },
             {
               type: 'datepicker',
-              label: 'Driver Licence Date',
+              label: {
+                en: 'Driver Licence Date',
+                de: '[DE] Driver Licence Date',
+              },
               name: 'driverLicenceDate',
               required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
-              error: 'forms.dateInPast',
+              error: {
+                en: 'Date must be in the past.',
+                de: 'Datum muss in der Vergangenheit liegen.',
+              },
               hidden: true,
             },
           ],
@@ -779,63 +1029,81 @@ export class FormSampleConfigurations {
           fieldConfigs: [
             {
               type: 'title',
-              label: 'Additional Driver 3',
+              label: {
+                en: 'Additional Driver 3',
+                de: '[DE] Additional Driver 3',
+              },
               name: 'additional-driver-3',
               hidden: true,
             },
             {
               type: 'datepicker',
-              label: 'Driver Date of Birth',
+              label: {
+                en: 'Driver Date of Birth',
+                de: '[DE] Driver Date of Birth',
+              },
               name: 'dateOfBirth',
               required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
               ],
-              error: 'forms.dateOfBirthMinimumAge',
+              error: {
+                en: 'Must be over 18 years old.',
+                de: 'Muss über 18 Jahre alt sein.',
+              },
               hidden: true,
             },
             {
               type: 'select',
-              label: 'Driver Gender',
+              label: {
+                en: 'Driver Gender',
+                de: '[DE] Driver Gender',
+              },
               name: 'driverGender',
-              options: [
-                { name: 'Male', label: 'Male' },
-                { name: 'Female', label: 'Female' },
-              ],
+              apiUrl: '/catalogs/financialProductCatalog/valueLists/gender',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
             {
               type: 'select',
-              label: 'Driver Marital Status',
+              label: {
+                en: 'Driver Marital Status',
+                de: '[DE] Driver Marital Status',
+              },
               name: 'driverMaritalStatus',
-              options: [
-                { name: 'Single', label: 'Single' },
-                { name: 'Married', label: 'Married' },
-                { name: 'Widowed', label: 'Widowed' },
-              ],
+              apiUrl:
+                '/catalogs/financialProductCatalog/valueLists/maritalStatus',
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
             {
               type: 'select',
-              label: 'Driver`s Category',
+              label: {
+                en: 'Driver`s Category',
+                de: '[DE] Driver`s Category',
+              },
               name: 'driverCategory',
               options: [{ name: 'Occasional', label: 'Occasional' }],
               hidden: true,
             },
             {
               type: 'datepicker',
-              label: 'Driver Licence Date',
+              label: {
+                en: 'Driver Licence Date',
+                de: '[DE] Driver Licence Date',
+              },
               name: 'driverLicenceDate',
               required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
-              error: 'forms.dateInPast',
+              error: {
+                en: 'Date must be in the past.',
+                de: 'Datum muss in der Vergangenheit liegen.',
+              },
               hidden: true,
             },
           ],
@@ -845,49 +1113,61 @@ export class FormSampleConfigurations {
           fieldConfigs: [
             {
               type: 'title',
-              label: 'Additional Driver 4',
+              label: {
+                en: 'Additional Driver 4',
+                de: '[DE] Additional Driver 4',
+              },
               name: 'additional-driver-4',
               hidden: true,
             },
             {
               type: 'datepicker',
-              label: 'Driver Date of Birth',
+              label: {
+                en: 'Driver Date of Birth',
+                de: '[DE] Driver Date of Birth',
+              },
               name: 'dateOfBirth',
               required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.dateOfBirthValidator(18),
               ],
-              error: 'forms.dateOfBirthMinimumAge',
+              error: {
+                en: 'Must be over 18 years old.',
+                de: 'Muss über 18 Jahre alt sein.',
+              },
               hidden: true,
             },
             {
               type: 'select',
-              label: 'Driver Gender',
+              label: {
+                en: 'Driver Gender',
+                de: '[DE] Driver Gender',
+              },
               name: 'driverGender',
-              options: [
-                { name: 'Male', label: 'Male' },
-                { name: 'Female', label: 'Female' },
-              ],
+              apiUrl: '/catalogs/financialProductCatalog/valueLists/gender',
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
             {
               type: 'select',
-              label: 'Driver Marital Status',
+              label: {
+                en: 'Driver Marital Status',
+                de: '[DE] Driver Marital Status',
+              },
               name: 'driverMaritalStatus',
-              options: [
-                { name: 'Single', label: 'Single' },
-                { name: 'Married', label: 'Married' },
-                { name: 'Widowed', label: 'Widowed' },
-              ],
+              apiUrl:
+                '/catalogs/financialProductCatalog/valueLists/maritalStatus',
               required: true,
               validation: [DefaultFormValidators.required],
               hidden: true,
             },
             {
               type: 'select',
-              label: 'Driver`s Category',
+              label: {
+                en: 'Driver`s Category',
+                de: '[DE] Driver`s Category',
+              },
               name: 'driverCategory',
               options: [{ name: 'Occasional', label: 'Occasional' }],
               disabled: true,
@@ -895,14 +1175,20 @@ export class FormSampleConfigurations {
             },
             {
               type: 'datepicker',
-              label: 'Driver Licence Date',
+              label: {
+                en: 'Driver Licence Date',
+                de: '[DE] Driver Licence Date',
+              },
               name: 'driverLicenceDate',
               required: true,
               validation: [
                 DefaultFormValidators.required,
                 DefaultFormValidators.compareToCurrentDate('shouldBeLess'),
               ],
-              error: 'forms.dateInPast',
+              error: {
+                en: 'Date must be in the past.',
+                de: 'Datum muss in der Vergangenheit liegen.',
+              },
               hidden: true,
             },
           ],
@@ -917,7 +1203,10 @@ export class FormSampleConfigurations {
           fieldConfigs: [
             {
               type: 'select',
-              label: 'Destination',
+              label: {
+                en: 'Destination',
+                de: '[DE] Destination',
+              },
               name: 'tripDestination',
               options: [
                 { name: 'Europe', label: 'Europe' },
@@ -937,11 +1226,17 @@ export class FormSampleConfigurations {
               ],
               required: true,
               validation: [DefaultFormValidators.required],
-              error: 'forms.enterValidValue',
+              error: {
+                en: 'Please enter valid value.',
+                de: 'Bitte geben Sie einen gültigen Wert ein.',
+              },
             },
             {
               type: 'datepicker',
-              label: 'Start Date',
+              label: {
+                en: 'Start Date',
+                de: '[DE] Start Date',
+              },
               name: 'tripStartDate',
               required: true,
               validation: [
@@ -952,11 +1247,18 @@ export class FormSampleConfigurations {
                   'shouldBeGreater'
                 ),
               ],
-              error: 'forms.dateInFutureAfterEnd',
+              error: {
+                en: 'Date must be in the future, cannot be after end date.',
+                de:
+                  '[DE] Date must be in the future, cannot be after end date.',
+              },
             },
             {
               type: 'datepicker',
-              label: 'End Date',
+              label: {
+                en: 'End Date',
+                de: '[DE] End Date',
+              },
               name: 'tripEndDate',
               required: true,
               validation: [
@@ -967,16 +1269,26 @@ export class FormSampleConfigurations {
                   'shouldBeLess'
                 ),
               ],
-              error: 'forms.dateInFutureBeforeStart',
+              error: {
+                en: 'Date must be in the future, cannot be before start date.',
+                de:
+                  '[DE] Date must be in the future, cannot be before start date.',
+              },
             },
             {
               type: 'input',
-              label: 'Duration in Days',
+              label: {
+                en: 'Duration in Days',
+                de: '[DE] Duration in Days',
+              },
               name: 'NoOfDays',
             },
             {
               type: 'input',
-              label: 'Trip Cost',
+              label: {
+                en: 'Trip Cost',
+                de: '[DE] Trip Cost',
+              },
               name: 'costOfTrip',
               required: true,
               validation: [
@@ -985,7 +1297,10 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(1000000),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.lessThan1M',
+              error: {
+                en: 'Value must be less than 1.000.000, cannot be 0.',
+                de: '[DE]r Wert muss unter 1.000.000 liegen.',
+              },
             },
             {
               type: 'select',
@@ -1001,7 +1316,10 @@ export class FormSampleConfigurations {
                 { label: '9', name: '9' },
                 { label: '10', name: '10' },
               ],
-              label: 'Number of Travelers',
+              label: {
+                en: 'Number of Travelers',
+                de: '[DE] Number of Travelers',
+              },
               name: 'Travellers',
               required: true,
               validation: [
@@ -1022,7 +1340,10 @@ export class FormSampleConfigurations {
             },
             {
               type: 'input',
-              label: 'Age of Traveller',
+              label: {
+                en: 'Age of Traveller',
+                de: '[DE] Age of Traveller',
+              },
               name: 'tripDetailsTravellerAges',
               required: true,
               validation: [
@@ -1031,11 +1352,17 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(150),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.lessThan150',
+              error: {
+                en: 'Value must be less than 150.',
+                de: 'Wert muss unter 150 liegen.',
+              },
             },
             {
               type: 'input',
-              label: 'Age of Traveller 2',
+              label: {
+                en: 'Age of Traveller 2',
+                de: '[DE] Age of Traveller 2',
+              },
               name: 'tripDetailsTravellerAges2',
               required: true,
               validation: [
@@ -1044,12 +1371,18 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(150),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.lessThan150',
+              error: {
+                en: 'Value must be less than 150.',
+                de: 'Wert muss unter 150 liegen..',
+              },
               hidden: true,
             },
             {
               type: 'input',
-              label: 'Age of Traveller 3',
+              label: {
+                en: 'Age of Traveller 3',
+                de: '[DE] Age of Traveller 3',
+              },
               name: 'tripDetailsTravellerAges3',
               required: true,
               validation: [
@@ -1058,12 +1391,18 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(150),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.lessThan150',
+              error: {
+                en: 'Value must be less than 150.',
+                de: 'Wert muss unter 150 liegen.',
+              },
               hidden: true,
             },
             {
               type: 'input',
-              label: 'Age of Traveller 4',
+              label: {
+                en: 'Age of Traveller 4',
+                de: '[DE] Age of Traveller 4',
+              },
               name: 'tripDetailsTravellerAges4',
               required: true,
               validation: [
@@ -1072,12 +1411,18 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(150),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.lessThan150',
+              error: {
+                en: 'Value must be less than 150.',
+                de: 'Wert muss unter 150 liegen.',
+              },
               hidden: true,
             },
             {
               type: 'input',
-              label: 'Age of Traveller 5',
+              label: {
+                en: 'Age of Traveller 5',
+                de: '[DE] Age of Traveller 5',
+              },
               name: 'tripDetailsTravellerAges5',
               required: true,
               validation: [
@@ -1086,12 +1431,18 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(150),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.lessThan150',
+              error: {
+                en: 'Value must be less than 150.',
+                de: 'Wert muss unter 150 liegen.',
+              },
               hidden: true,
             },
             {
               type: 'input',
-              label: 'Age of Traveller 6',
+              label: {
+                en: 'Age of Traveller 6',
+                de: '[DE] Age of Traveller 6',
+              },
               name: 'tripDetailsTravellerAges6',
               required: true,
               validation: [
@@ -1100,12 +1451,18 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(150),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.lessThan150',
+              error: {
+                en: 'Value must be less than 150.',
+                de: 'Wert muss unter 150 liegen.',
+              },
               hidden: true,
             },
             {
               type: 'input',
-              label: 'Age of Traveller 7',
+              label: {
+                en: 'Age of Traveller 7',
+                de: '[DE] Age of Traveller 7',
+              },
               name: 'tripDetailsTravellerAges7',
               required: true,
               validation: [
@@ -1114,12 +1471,18 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(150),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.lessThan150',
+              error: {
+                en: 'Value must be less than 150.',
+                de: 'Wert muss unter 150 liegen.',
+              },
               hidden: true,
             },
             {
               type: 'input',
-              label: 'Age of Traveller 8',
+              label: {
+                en: 'Age of Traveller 8',
+                de: '[DE] Age of Traveller 8',
+              },
               name: 'tripDetailsTravellerAges8',
               required: true,
               validation: [
@@ -1128,12 +1491,18 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(150),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.lessThan150',
+              error: {
+                en: 'Value must be less than 150.',
+                de: 'Wert muss unter 150 liegen.',
+              },
               hidden: true,
             },
             {
               type: 'input',
-              label: 'Age of Traveller 9',
+              label: {
+                en: 'Age of Traveller 9',
+                de: '[DE] Age of Traveller 9',
+              },
               name: 'tripDetailsTravellerAges9',
               required: true,
               validation: [
@@ -1142,12 +1511,18 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(150),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.lessThan150',
+              error: {
+                en: 'Value must be less than 150.',
+                de: 'Wert muss unter 150 liegen.',
+              },
               hidden: true,
             },
             {
               type: 'input',
-              label: 'Age of Traveller 10',
+              label: {
+                en: 'Age of Traveller 10',
+                de: '[DE] Age of Traveller 10',
+              },
               name: 'tripDetailsTravellerAges10',
               required: true,
               validation: [
@@ -1156,7 +1531,10 @@ export class FormSampleConfigurations {
                 DefaultFormValidators.max(150),
                 DefaultFormValidators.pattern('^[0-9]*$'),
               ],
-              error: 'forms.lessThan150',
+              error: {
+                en: 'Value must be less than 150.',
+                de: 'Wert muss unter 150 liegen.',
+              },
               hidden: true,
             },
           ],

@@ -7,7 +7,7 @@
     <ng-container *ngIf="!config.required">
       {{ 'forms.optional' | cxTranslate }}
     </ng-container>
-    {{ config.label }}
+    {{ label }}
   </label>
   <div [ngClass]="formComponent?.wrapperClass">
     <div *ngFor="let option of config.options">

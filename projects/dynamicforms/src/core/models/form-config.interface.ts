@@ -13,20 +13,23 @@ export interface FieldConfig {
   required?: boolean;
   disabled?: boolean;
   group?: string;
-  label?: string;
+  label?: LocalizedString;
   options?: FieldOption[];
   cssClass?: string;
   depends?: string[];
-  jsonField?: string;
+  apiUrl?: string;
   placeholder?: string;
   type: string;
   validation?: ValidatorFn[]; // TO-DO Remove validation attribute once all definitions are moved to back-end
   value?: any;
   hidden?: boolean;
-  error?: string;
+  error?: LocalizedString;
   validations?: ValidatorFunction[];
 }
-
+export interface LocalizedString {
+  default?: string;
+  [lang: string]: string;
+}
 export interface ValidatorFunction {
   name: string;
   arguments?: ValidatorArgument[];

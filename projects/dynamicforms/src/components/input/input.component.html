@@ -8,7 +8,7 @@
       <ng-container *ngIf="!config.required">
         {{ 'forms.optional' | cxTranslate }}
       </ng-container>
-      {{ config.label }}
+      {{ label }}
     </label>
     <input
       [ngClass]="formComponent?.elementClass + ' ' + config.cssClass"

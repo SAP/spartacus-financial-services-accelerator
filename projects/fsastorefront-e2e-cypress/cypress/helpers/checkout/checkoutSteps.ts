@@ -1,4 +1,4 @@
-import { quoteReviewAccordions } from './accordions';
+import { Accordions } from './accordions';
 import { waitForPage } from '../generalHelpers';
 
 export function checkProgressBarInsurance() {
@@ -63,9 +63,9 @@ export function checkOrderConfirmationBanking() {
   });
 }
 
-export function checkQuoteReviewAccordions(category) {
+export function checkAccordions(category) {
   const accordion_item = 'cx-fs-accordion-item';
-  const accordion = quoteReviewAccordions.accordions.find(
+  const accordion = Accordions.accordions.find(
     acc => acc.category === category
   );
   cy.get(accordion_item).should('have.length', accordion.accordionItems.length);
