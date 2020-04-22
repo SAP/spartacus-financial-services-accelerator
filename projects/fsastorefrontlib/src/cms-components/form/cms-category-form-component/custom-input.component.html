@@ -1,20 +1,16 @@
-<div
-  class="dynamic-field"
-  [formGroup]="group"
-  [hidden]="group.controls[config.name].disabled"
->
-  <div class="form-group">
-    <label class="col-form-label">
+<div [formGroup]="group">
+  <div [ngClass]="formComponent?.wrapperClass">
+    <label style="color: #334eca; font-weight: bold;">
       <ng-container *ngIf="!config.required">
         {{ 'forms.optional' | cxTranslate }}
       </ng-container>
-      {{ label }}
+      {{ config.label }}
     </label>
     <input
-      class="form-control"
-      type="date"
+      [ngClass]="formComponent?.elementClass"
+      type="text"
       [formControlName]="config.name"
-      [attr.name]="config.name"
+      style="border: 3px dashed #334eca; width: 100%;"
     />
   </div>
   <cx-error-notice

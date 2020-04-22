@@ -3,15 +3,15 @@
   [hidden]="group.controls[config.name].disabled"
   [formGroup]="group"
 >
-  <div [ngClass]="formComponent?.wrapperClass">
-    <label [ngClass]="formComponent?.labelClass">
+  <div class="form-group">
+    <label class="col-form-label">
       <ng-container *ngIf="!config.required">
         {{ 'forms.optional' | cxTranslate }}
       </ng-container>
       {{ label }}
     </label>
     <textarea
-      [ngClass]="formComponent?.elementClass + ' ' + config.cssClass"
+      class="form-control"
       [attr.placeholder]="config.placeholder"
       [formControlName]="config.name"
       rows="10"
@@ -21,8 +21,5 @@
   <cx-error-notice
     [warn]="group.controls[config.name]"
     [parentConfig]="config"
-    [errorWrapperClass]="formComponent?.errorWrapperClass"
-    [errorClass]="formComponent?.errorClass"
-    [errorMessageClass]="formComponent?.errorMessageClass"
   ></cx-error-notice>
 </div>

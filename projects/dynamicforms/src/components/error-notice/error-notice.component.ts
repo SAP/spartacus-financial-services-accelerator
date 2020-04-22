@@ -10,9 +10,6 @@ export class ErrorNoticeComponent extends AbstractFormComponent
   implements OnInit {
   @Input() warn: any;
   @Input() parentConfig: any;
-  @Input() errorWrapperClass: string;
-  @Input() errorClass: string;
-  @Input() errorMessageClass: string;
   @HostBinding('class') class = '';
   errorMessage: string;
 

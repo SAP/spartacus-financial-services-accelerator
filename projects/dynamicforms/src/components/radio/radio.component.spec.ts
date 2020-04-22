@@ -17,9 +17,6 @@ import { of } from 'rxjs';
 class MockErrorNoticeComponent {
   @Input() warn;
   @Input() parentConfig;
-  @Input() errorWrapperClass;
-  @Input() errorClass;
-  @Input() errorMessageClass;
 }
 
 const mockCssClass: CssClass = {
