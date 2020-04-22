@@ -9,18 +9,20 @@ import {
 } from '@angular/forms';
 import { of } from 'rxjs';
 import { DynamicFormsConfig } from '../../config/form-config';
-import { FieldConfig } from '../../models/form-config.interface';
+import {
+  ControlDependency,
+  FieldConfig,
+} from '../../models/form-config.interface';
 import { defaultFormConfig } from './../../config/default-form-config';
-import { DependencyFn } from './../../models/form-config.interface';
 import { FormValidationService } from './../form-validation/form-validation.service';
 import { FormDependencyResolverService } from './form-dependency-resolver.service';
 
 const fieldType = 'input';
 const minValue = 'minValue';
 
-const dependencyConditions: DependencyFn[] = [
+const dependencyConditions: ControlDependency[] = [
   {
-    name: 'testField2',
+    controlName: 'testField2',
     conditions: [
       {
         name: minValue,

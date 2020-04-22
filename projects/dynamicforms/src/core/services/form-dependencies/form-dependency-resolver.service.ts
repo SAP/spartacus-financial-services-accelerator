@@ -5,7 +5,7 @@ import {
   FormGroup,
   ValidatorFn,
 } from '@angular/forms';
-import { DependencyFn } from './../../models/form-config.interface';
+import { ControlDependency } from './../../models/form-config.interface';
 import { FormValidationService } from './../form-validation/form-validation.service';
 
 @Injectable()
@@ -16,28 +16,28 @@ export class FormDependencyResolverService {
   ) {}
 
   /**
-   * Method used to enable/disable dependent control based on conditions defined at parent control
+   * Method used to enable/disable dependent control based on conditions defined at master control
    *
-   * @param dependencyConditions The conditions of parent control that need to be fullfilled
+   * @param dependencyConditions The conditions of master control that need to be fullfilled
    * @param dependentControl The dependent field control for which dependencies are resolved
-   * @param formGroup The form group which tracks value and validity of parent form controls
+   * @param formGroup The form group which tracks value and validity of master form controls
    */
   resolveFormControlDependencies(
-    dependencyConditions: DependencyFn[],
+    dependencyConditions: ControlDependency[],
     dependentControl: AbstractControl,
     formGroup: FormGroup
   ) {
     dependencyConditions.forEach(condition => {
-      const parentFormControl = this.getFormControlForCode(
-        condition.name,
+      const masterFormControl = this.getFormControlForCode(
+        condition.controlName,
         formGroup
       );
-      if (parentFormControl) {
-        if (!parentFormControl.value) {
+      if (masterFormControl) {
+        if (!masterFormControl.value) {
           dependentControl.disable();
         }
-        parentFormControl.valueChanges.subscribe(fieldValue => {
-          const dependancyValidations = this.getDependencyConditionsForFunction(
+        masterFormControl.valueChanges.subscribe(fieldValue => {
+          const dependancyValidations = this.geValidationsForCondition(
             condition
           );
           const dependancyControl = this.fb.control(
@@ -53,7 +53,7 @@ export class FormDependencyResolverService {
   }
 
   /**
-   * Method used to recursively find parent form control by its code in specified form group
+   * Method used to recursively find master form control by its code in specified form group
    *
    * @param formControlCode The form control code
    * @param formGroup The form group
@@ -81,9 +81,7 @@ export class FormDependencyResolverService {
     return abstractFormControl;
   }
 
-  getDependencyConditionsForFunction(
-    dependencyFn: DependencyFn
-  ): ValidatorFn[] {
+  geValidationsForCondition(dependencyFn: ControlDependency): ValidatorFn[] {
     const dependencyFunctions: ValidatorFn[] = [];
     if (dependencyFn && dependencyFn.conditions) {
       dependencyFn.conditions.forEach(conditionFunction => {
