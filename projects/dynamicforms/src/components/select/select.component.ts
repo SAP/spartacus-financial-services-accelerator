@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AbstractFormComponent } from '../abstract-form.component';
-import { Subscription, BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -9,12 +9,11 @@ import { map } from 'rxjs/operators';
 })
 export class SelectComponent extends AbstractFormComponent
   implements OnInit, OnDestroy {
-  private subscription = new Subscription();
-
   optionsSubject = new BehaviorSubject<any>([]);
   options$: Observable<any> = this.optionsSubject.asObservable();
 
   ngOnInit() {
+    super.ngOnInit();
     this.optionsSubject.next(this.config.options);
     if (this.config.apiUrl) {
       this.setFormControlValuesFromAPI();

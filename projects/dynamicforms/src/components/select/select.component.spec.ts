@@ -2,7 +2,7 @@ import { Component, DebugElement, Input, Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { I18nTestingModule } from '@spartacus/core';
+import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { CssClass, DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
@@ -20,6 +20,11 @@ class MockErrorNoticeComponent {
 }
 
 const mockCssClass: CssClass = {};
+class MockLanguageService {
+  getActive() {
+    return of('en');
+  }
+}
 
 const apiValues = {
   values: [
@@ -43,8 +48,10 @@ class MockOccFormService {
 const mockField: FieldConfig = {
   type: 'select',
   name: 'testSelect',
+  label: {
+    en: 'TestLabel',
+  },
   options: [],
-  label: 'What time did it happen?',
   depends: ['dependentTestField'],
   apiUrl: 'testUrl',
 };
@@ -77,6 +84,7 @@ describe('SelectComponent', () => {
       imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
         { provide: OccMockFormService, useClass: MockOccFormService },
+        { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,

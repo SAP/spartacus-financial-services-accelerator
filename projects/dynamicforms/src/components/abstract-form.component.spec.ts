@@ -1,13 +1,12 @@
-import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
-import { FieldConfig } from '../../core/models/form-config.interface';
-import { TitleComponent } from './title.component';
+import { OccMockFormService } from '../occ/services/occ-mock-form.service';
+import { DynamicFormsConfig, CssClass } from '../core/config/form-config';
+import { FieldConfig } from '../core/models/form-config.interface';
 import { LanguageService } from '@spartacus/core';
 import { of } from 'rxjs';
+import { AbstractFormComponent } from '.';
+import { Type } from '@angular/core';
 
 const mockCssClass: CssClass = {
   formTitle: 'testTitle',
@@ -21,12 +20,13 @@ class MockLanguageService {
   }
 }
 
+const enLabel = 'En test string';
+const defaultLabel = 'Test string';
+
 const mockField: FieldConfig = {
-  type: 'title',
+  type: 'abstract',
   name: 'testTitle',
-  label: {
-    en: 'Test Title',
-  },
+  label: {},
 };
 
 const mockFormGroup = new FormGroup({
@@ -36,22 +36,16 @@ const mockFormGroup = new FormGroup({
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {
     cssClass: mockCssClass,
-    components: {
-      title: {
-        component: TitleComponent,
-      },
-    },
   },
 };
 
-describe('TitleComponent', () => {
-  let component: TitleComponent;
-  let fixture: ComponentFixture<TitleComponent>;
-  let el: DebugElement;
-
+describe('AbstractFormComponent', () => {
+  let component: AbstractFormComponent;
+  let fixture: ComponentFixture<AbstractFormComponent>;
+  let mockLanguageService: LanguageService;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TitleComponent],
+      declarations: [AbstractFormComponent],
       imports: [ReactiveFormsModule],
       providers: [
         { provide: OccMockFormService, useClass: MockOccFormService },
@@ -62,14 +56,13 @@ describe('TitleComponent', () => {
         },
       ],
     }).compileComponents();
+    mockLanguageService = TestBed.get(LanguageService as Type<LanguageService>);
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TitleComponent);
+    fixture = TestBed.createComponent(AbstractFormComponent);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
-    component.config = mockField;
-    el = fixture.debugElement;
     fixture.detectChanges();
   });
 
@@ -77,13 +70,19 @@ describe('TitleComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should check components type', () => {
-    expect(component.config).toBe(mockField);
-    expect(component.config.type).toEqual('title');
+  it('should set default label', () => {
+    component.config = mockField;
+    mockField.label.default = defaultLabel;
+    component.config = mockField;
+    component.ngOnInit();
+    expect(component.label).toEqual(defaultLabel);
   });
 
-  it('should render title component', () => {
-    const heading = el.query(By.css('.testTitle')).nativeElement;
-    expect(heading).toBeTruthy();
+  it('should set english label', () => {
+    component.config = mockField;
+    mockField.label.default = enLabel;
+    component.config = mockField;
+    component.ngOnInit();
+    expect(component.label).toEqual(enLabel);
   });
 });
