@@ -27,9 +27,9 @@ export class FormDependencyResolverService {
     dependentControl: AbstractControl,
     formGroup: FormGroup
   ) {
-    dependencyConditions.forEach(parentDependancy => {
+    dependencyConditions.forEach(condition => {
       const parentFormControl = this.getFormControlForCode(
-        parentDependancy.name,
+        condition.name,
         formGroup
       );
       if (parentFormControl) {
@@ -38,7 +38,7 @@ export class FormDependencyResolverService {
         }
         parentFormControl.valueChanges.subscribe(fieldValue => {
           const dependancyValidations = this.getDependencyConditionsForFunction(
-            parentDependancy
+            condition
           );
           const dependancyControl = this.fb.control(
             { disabled: false, value: fieldValue },
