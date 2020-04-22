@@ -1,4 +1,10 @@
-import { Component, Input, HostBinding, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  HostBinding,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { AbstractFormComponent } from '../abstract-form.component';
 import { map } from 'rxjs/operators';
 
@@ -7,7 +13,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './error-notice.component.html',
 })
 export class ErrorNoticeComponent extends AbstractFormComponent
-  implements OnInit {
+  implements OnInit, OnDestroy {
   @Input() warn: any;
   @Input() parentConfig: any;
   @HostBinding('class') class = '';
