@@ -2,11 +2,12 @@ import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { I18nTestingModule } from '@spartacus/core';
+import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { CssClass, DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { InputComponent } from './input.component';
+import { of } from 'rxjs';
 
 @Component({
   // tslint:disable
@@ -21,11 +22,17 @@ class MockErrorNoticeComponent {
 const mockCssClass: CssClass = {};
 
 class MockOccFormService {}
-
+class MockLanguageService {
+  getActive() {
+    return of('en');
+  }
+}
 const mockField: FieldConfig = {
   type: 'input',
   name: 'testInput',
-  label: 'Test Input Label',
+  label: {
+    en: 'Test Input Label',
+  },
 };
 
 const mockFormGroup = new FormGroup({
@@ -54,6 +61,7 @@ describe('InputComponent', () => {
       imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
         { provide: OccMockFormService, useClass: MockOccFormService },
+        { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,

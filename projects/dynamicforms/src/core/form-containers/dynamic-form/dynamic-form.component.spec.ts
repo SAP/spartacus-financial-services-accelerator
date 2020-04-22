@@ -51,7 +51,9 @@ const formData: YFormData = {
 const mockField: FieldConfig = {
   type: 'datepicker',
   name: 'testDatePicker',
-  label: 'What time did it happen?',
+  label: {
+    en: 'What time did it happen?',
+  },
 };
 
 const config: FormDefinition = {
