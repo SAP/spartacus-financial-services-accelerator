@@ -30,5 +30,9 @@ export const forms = {
     subject: '[DE] Subject',
     optional: '(Optional)',
     send: '[DE] Send',
+    titles: {
+      trip_details_form: 'Reiseinformation',
+      auto_details_form: 'Fahrzeuginformationen',
+    },
   },
 };

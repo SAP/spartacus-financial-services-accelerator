@@ -32,6 +32,11 @@ export const forms = {
     optional: '(Optional)',
     enterMessage: 'Your message',
     send: 'Send',
+    titles: {
+      homeowners_details_form: 'Homeowners Information',
+      trip_details_form: 'Trip Information',
+      auto_details_form: 'Auto Information',
+    },
     definitionLoadError: 'Error occurred. Form could not be loaded.',
   },
 };
