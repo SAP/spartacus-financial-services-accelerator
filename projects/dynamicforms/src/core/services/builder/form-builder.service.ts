@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { FormDependencyResolverService } from '../form-dependencies/form-dependency-resolver.service';
 import { FormValidationService } from '../form-validation/form-validation.service';
 import { FieldConfig } from './../../models/form-config.interface';
+import { FieldDependencyResolverService } from './../form-dependencies/field-dependency-resolver.service';
 
 @Injectable()
 export class FormBuilderService {
   constructor(
     protected fb: FormBuilder,
     protected formValidationService: FormValidationService,
-    protected formDependencyResolverService: FormDependencyResolverService
+    protected fieldDependencyResolverService: FieldDependencyResolverService
   ) {}
 
   createForm(config) {
@@ -26,14 +26,14 @@ export class FormBuilderService {
         const fieldControl = this.createControl(fieldConfig);
         controlGroup.addControl(fieldConfig.name, fieldControl);
         if (fieldConfig.dependsOn) {
-          this.formDependencyResolverService.resolveFormControlDependencies(
+          this.fieldDependencyResolverService.resolveFormControlDependencies(
             fieldConfig.dependsOn,
             fieldControl,
             form
           );
         }
         if (formGroup.dependsOn) {
-          this.formDependencyResolverService.resolveFormControlDependencies(
+          this.fieldDependencyResolverService.resolveFormControlDependencies(
             formGroup.dependsOn,
             fieldControl,
             form

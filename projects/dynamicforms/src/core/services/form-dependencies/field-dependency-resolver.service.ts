@@ -9,7 +9,7 @@ import { ControlDependency } from './../../models/form-config.interface';
 import { FormValidationService } from './../form-validation/form-validation.service';
 
 @Injectable()
-export class FormDependencyResolverService {
+export class FieldDependencyResolverService {
   constructor(
     protected formValidationService: FormValidationService,
     protected fb: FormBuilder

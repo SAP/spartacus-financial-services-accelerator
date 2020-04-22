@@ -15,7 +15,7 @@ import {
 } from '../../models/form-config.interface';
 import { defaultFormConfig } from './../../config/default-form-config';
 import { FormValidationService } from './../form-validation/form-validation.service';
-import { FormDependencyResolverService } from './form-dependency-resolver.service';
+import { FieldDependencyResolverService } from './field-dependency-resolver.service';
 
 const fieldType = 'input';
 const minValue = 'minValue';
@@ -58,14 +58,14 @@ class MockFormValidationService {
   }
 }
 
-describe('FormDependencyResolverService', () => {
-  let service: FormDependencyResolverService;
+describe('FieldDependencyResolverService', () => {
+  let service: FieldDependencyResolverService;
   let mockFormValidationService: FormValidationService;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
       providers: [
-        FormDependencyResolverService,
+        FieldDependencyResolverService,
         { provide: DynamicFormsConfig, useValue: defaultFormConfig },
         {
           provide: FormValidationService,
@@ -76,7 +76,7 @@ describe('FormDependencyResolverService', () => {
     mockFormValidationService = TestBed.get(FormValidationService as Type<
       FormValidationService
     >);
-    service = new FormDependencyResolverService(
+    service = new FieldDependencyResolverService(
       mockFormValidationService as FormValidationService,
       new FormBuilder()
     );
