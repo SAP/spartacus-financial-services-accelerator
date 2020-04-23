@@ -1,10 +1,10 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OccEndpointsService } from '@spartacus/core';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError } from 'rxjs/internal/operators/catchError';
 import { ChangeRequestAdapter } from './../../../core/change-request/connectors/change-request.adapter';
 import { Observable } from 'rxjs';
+import { OccEndpointsService } from '@spartacus/core';
 
 @Injectable()
 export class OccChangeRequestAdapter implements ChangeRequestAdapter {
@@ -14,10 +14,12 @@ export class OccChangeRequestAdapter implements ChangeRequestAdapter {
   ) {}
 
   getChangeRequest(userId: string, requestId: string) {
-    const url = this.getChangeRequestEndpoint(userId) + '/' + requestId;
-    const params = new HttpParams();
+    const url = this.occEndpointService.getUrl('changeRequest', {
+      userId,
+      requestId,
+    });
     return this.http
-      .get(url, { params: params })
+      .get(url)
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
@@ -27,36 +29,36 @@ export class OccChangeRequestAdapter implements ChangeRequestAdapter {
     changeRequestType: string,
     userId: string
   ) {
-    const url = this.getChangeRequestEndpoint(userId);
-    const params: HttpParams = new HttpParams({
-      fromString:
-        'policyId=' +
-        policyId +
-        '&contractId=' +
-        contractId +
-        '&requestType=' +
-        changeRequestType,
-    });
+    const httpParams: HttpParams = new HttpParams()
+      .set('policyId', policyId)
+      .set('contractId', contractId)
+      .set('requestType', changeRequestType);
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });
-    const toCreate = JSON.stringify({});
+    const url = this.occEndpointService.getUrl('createChangeRequest', {
+      userId,
+    });
     return this.http
-      .post<any>(url, toCreate, { headers, params })
+      .post<any>(url, httpParams, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   simulateChangeRequest(userId: string, requestId: string, changeRequest: any) {
-    const url =
-      this.getChangeRequestEndpoint(userId) + '/' + requestId + '/simulation';
+    const url = this.occEndpointService.getUrl('simulateChangeRequest', {
+      userId,
+      requestId,
+    });
     return this.http
       .post<any>(url, changeRequest)
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   cancelChangeRequest(userId: string, requestId: string): Observable<any> {
-    const url =
-      this.getChangeRequestEndpoint(userId) + '/' + requestId + '/action';
+    const url = this.occEndpointService.getUrl('cancelChangeRequest', {
+      userId,
+      requestId,
+    });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
@@ -66,10 +68,5 @@ export class OccChangeRequestAdapter implements ChangeRequestAdapter {
     return this.http
       .post(url, cancelChangeRequestBody, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
-  }
-
-  protected getChangeRequestEndpoint(userId: string) {
-    const changeRequestEndpoint = '/users/' + userId + '/fsChangeRequests';
-    return this.occEndpointService.getBaseEndpoint() + changeRequestEndpoint;
   }
 }

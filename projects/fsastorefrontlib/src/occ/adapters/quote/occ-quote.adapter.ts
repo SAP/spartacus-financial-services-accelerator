@@ -17,28 +17,9 @@ export class OccQuoteAdapter implements QuoteAdapter {
     protected converterService: ConverterService
   ) {}
 
-  protected getQuotesEndpoint(userId: string) {
-    const quotesEndpoint = '/users/' + userId + '/insurance-quotes';
-    return this.occEndpointService.getBaseEndpoint() + quotesEndpoint;
-  }
-
-  protected getQuotesFromCartEndpoint(userId: string, cartId: string) {
-    const quotesFromCartEndpoint =
-      '/users/' + userId + '/carts/' + cartId + '/insurance-quotes';
-    return this.occEndpointService.getBaseEndpoint() + quotesFromCartEndpoint;
-  }
-
-  protected bindQuoteEndpoint(userId: string, cartId: string) {
-    const quotesFromCartEndpoint =
-      '/users/' + userId + '/carts/' + cartId + '/insurance-quotes/action';
-    return this.occEndpointService.getBaseEndpoint() + quotesFromCartEndpoint;
-  }
-
   getQuotes(userId: string): Observable<Models.InsuranceQuote[]> {
-    const url = this.getQuotesEndpoint(userId);
-    const params = new HttpParams();
-
-    return this.http.get<InsuranceQuoteList>(url, { params: params }).pipe(
+    const url = this.occEndpointService.getUrl('quotes', { userId });
+    return this.http.get<InsuranceQuoteList>(url).pipe(
       pluck('insuranceQuotes'),
       this.converterService.pipeableMany(QUOTE_NORMALIZER),
       catchError((error: any) => throwError(error.json()))
@@ -50,16 +31,17 @@ export class OccQuoteAdapter implements QuoteAdapter {
     cartId: string,
     quoteContent: any
   ): Observable<any> {
-    const url = this.getQuotesFromCartEndpoint(userId, cartId);
-    const params = new HttpParams();
-
+    const url = this.occEndpointService.getUrl('updateQuote', {
+      userId,
+      cartId,
+    });
     return this.http
-      .patch(url, quoteContent, { params: params })
+      .patch(url, quoteContent)
       .pipe(catchError((error: any) => throwError(error.json)));
   }
 
   bindQuote(userId: string, cartId: string): Observable<any> {
-    const url = this.bindQuoteEndpoint(userId, cartId);
+    const url = this.occEndpointService.getUrl('bindQuote', { userId, cartId });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });

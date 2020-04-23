@@ -4,16 +4,15 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OccConfig } from '@spartacus/core';
+import { OccEndpointsService } from '@spartacus/core';
 import { OccUserRequestAdapter } from './occ-user-request.adapter';
 import { FSStepData } from '../../occ-models/occ.models';
 
 const userId = 'test@user.com';
 const requestId = '000001';
 
-const usersEndpoint = '/users';
-const requestEndpoint = '/fsUserRequests';
-const userRequestActionEndpoit = '/action';
+const userRequestEndpoint = 'userRequest';
+const submitUserRequestEndpoint = 'submitUserRequest';
 
 const stepData: FSStepData = {
   name: 'testStepData',
@@ -22,33 +21,32 @@ const stepData: FSStepData = {
   status: 'COMPLETED',
 };
 
-const MockOccModuleConfig: OccConfig = {
-  context: {
-    baseSite: [''],
-  },
-  backend: {
-    occ: {
-      baseUrl: '',
-      prefix: '',
-    },
-  },
-};
+class MockOccEndpointsService {
+  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+    return this.getEndpoint(endpoint);
+  }
+  getEndpoint(url: string) {
+    return url;
+  }
+}
 
 describe('OccUserRequestAdapter', () => {
   let adapter: OccUserRequestAdapter;
   let httpMock: HttpTestingController;
-
+  let occEndpointService: OccEndpointsService;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
         OccUserRequestAdapter,
-        { provide: OccConfig, useValue: MockOccModuleConfig },
+        { provide: OccEndpointsService, useClass: MockOccEndpointsService },
       ],
     });
 
     adapter = TestBed.get(OccUserRequestAdapter);
     httpMock = TestBed.get(HttpTestingController);
+    occEndpointService = TestBed.get(OccEndpointsService);
+    spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -59,12 +57,15 @@ describe('OccUserRequestAdapter', () => {
     it('should fetch user request', async(() => {
       adapter.getUserRequest(userId, requestId).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url ===
-            usersEndpoint + `/${userId}` + requestEndpoint + `/${requestId}` &&
-          req.method === 'GET'
-        );
+        return req.url === userRequestEndpoint && req.method === 'GET';
       }, `GET method and url`);
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        userRequestEndpoint,
+        {
+          userId,
+          requestId,
+        }
+      );
     }));
   });
 
@@ -72,27 +73,33 @@ describe('OccUserRequestAdapter', () => {
     adapter.updateUserRequest(userId, requestId, stepData).subscribe();
     httpMock.expectOne((req: HttpRequest<any>) => {
       return (
-        req.url ===
-          usersEndpoint + `/${userId}` + requestEndpoint + `/${requestId}` &&
+        req.url === userRequestEndpoint &&
         req.body === stepData &&
         req.method === 'PATCH'
       );
     }, `PATCH method and url`);
+    expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+      userRequestEndpoint,
+      {
+        userId,
+        requestId,
+      }
+    );
   }));
 
   describe('submit user request', () => {
     it('should submit user request', async(() => {
       adapter.submitUserRequest(userId, requestId).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url ===
-            usersEndpoint +
-              `/${userId}` +
-              requestEndpoint +
-              `/${requestId}` +
-              userRequestActionEndpoit && req.method === 'POST'
-        );
+        return req.url === submitUserRequestEndpoint && req.method === 'POST';
       }, `POST method and url`);
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        submitUserRequestEndpoint,
+        {
+          userId,
+          requestId,
+        }
+      );
     }));
   });
 });
