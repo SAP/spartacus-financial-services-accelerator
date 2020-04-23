@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './error-notice.component.html',
 })
 export class ErrorNoticeComponent extends AbstractFormComponent
-  implements OnInit, OnDestroy {
+  implements OnInit {
   @Input() warn: any;
   @Input() parentConfig: any;
   @HostBinding('class') class = '';
@@ -36,11 +36,5 @@ export class ErrorNoticeComponent extends AbstractFormComponent
         )
         .subscribe()
     );
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 }
