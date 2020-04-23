@@ -13,7 +13,7 @@ export class ChangeRequestSubmissionGuard implements CanActivate {
   constructor(
     protected routingService: RoutingService,
     protected changeRequestService: ChangeRequestService
-  ) { }
+  ) {}
 
   canActivate(): Observable<boolean | UrlTree> {
     return this.changeRequestService.getChangeRequest().pipe(
