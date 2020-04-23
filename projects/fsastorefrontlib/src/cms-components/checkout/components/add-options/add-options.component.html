@@ -91,10 +91,8 @@
         </div>
       </ng-container>
       <ng-container *ngFor="let TPL of entries | slice: 0:1">
-        <ng-container *ngIf="TPL.product.classifications">
-          <div
-            class="additional-info row mx-3 py-3 no-gutters position-relative"
-          >
+        <ng-container *ngIf="TPL.product?.classifications">
+          <div class="row mx-3 py-3 no-gutters">
             <div class="col-12 col-md-2 align-self-center">
               <div class="info-icon p-3 d-inline-flex"></div>
             </div>
