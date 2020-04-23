@@ -74,11 +74,12 @@ describe('ErrorNoticeComponent', () => {
     component.parentConfig = mockParentConfig;
     mockParentConfig.error.default = defaultErrorMessage;
     component.ngOnInit();
-    console.log('defaultErrorMessage', defaultErrorMessage);
     expect(component.errorMessage).toEqual(defaultErrorMessage);
+    component.ngOnDestroy();
   });
 
   it('should set english error message', () => {
+    component.ngOnDestroy();
     component.parentConfig = mockParentConfig;
     mockParentConfig.error.en = enErrorMessage;
     component.ngOnInit();
