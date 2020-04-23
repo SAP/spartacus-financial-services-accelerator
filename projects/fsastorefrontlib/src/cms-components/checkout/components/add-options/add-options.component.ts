@@ -76,7 +76,7 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
         .subscribe()
     );
   }
-
+  
   navigateNext() {
     let mainProduct: FSProduct;
     this.subscription.add(

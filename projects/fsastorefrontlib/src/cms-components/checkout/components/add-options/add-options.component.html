@@ -95,11 +95,7 @@
           <div
           class="additional-info row mx-3 py-3 no-gutters position-relative">
           <div class="col-12 col-md-2 align-self-center">
-            <cx-media
-              class="cx-product-image-container"
-              [container]="TPL.product?.images?.PRIMARY"
-              format="40Wx40H_policy_responsive"
-            ></cx-media>
+            <div class="info-icon p-3 d-inline-flex"></div>
           </div>
           <div class="col-12 col-md-5 align-self-center">
             <h6>{{ 'fscommon.coveredWith' | cxTranslate }} {{ TPL.product?.cartDisplayName }}</h6>
@@ -107,19 +103,16 @@
           <div
             class="col-12 col-md-5 align-self-center text-center"
           >
-          <div class="row">
-            <div class="col-12 my-1" *ngFor="let feature of TPL.product?.classifications[0]?.features">
-              <div class="row">
-                <div class="col-8 text-left additional-info">
+            <ng-container *ngFor="let feature of TPL.product?.classifications[0]?.features">
+              <div class="row mb-2">
+                <div class="col-8 text-left normal-weight">
                   {{ feature.name  }}
                 </div>
-                <div class="col-4 text-right additional-info">
-                  {{ feature.featureValues[0]?.value}}
+                <div class="col-4 text-right normal-weight">
+                  {{feature.featureValues[0]?.value | currency}}
                 </div>
               </div>
-              
-            </div>
-          </div>
+            </ng-container>
           </div>
         </div>
         </ng-container>
