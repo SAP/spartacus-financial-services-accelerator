@@ -30,6 +30,12 @@ class MockOccFormService {}
 const mockField: FieldConfig = {
   type: 'radio',
   name: 'testRadio',
+  options: [
+    {
+      label: 'testOptionLabel',
+      name: 'testOptionName',
+    },
+  ],
   label: {
     en: 'What time did it happen?',
   },
@@ -87,9 +93,8 @@ describe('RadioComponent', () => {
   });
 
   it('should render radio component', () => {
-    const radioComponent = el.query(
-      By.css('.dynamic-field input[type="radio"]')
-    ).nativeElement;
+    const radioComponent = el.query(By.css('input[type="radio"]'))
+      .nativeElement;
     expect(radioComponent).toBeTruthy();
   });
 });

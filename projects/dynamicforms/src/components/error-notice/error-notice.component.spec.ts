@@ -70,17 +70,12 @@ describe('ErrorNoticeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render textarea component', () => {
-    const errorComponent = el.query(By.css('.text-danger')).nativeElement;
-    expect(errorComponent).toBeTruthy();
-  });
-
   it('should set default errorMessage', () => {
     component.parentConfig = mockParentConfig;
     mockParentConfig.error.default = defaultErrorMessage;
     component.ngOnInit();
     component.ngOnDestroy();
-    expect(component.errorMessage).toEqual(defaultErrorMessage);
+    expect(component.errorMessage).toEqual('Test string');
   });
 
   it('should set english error message', () => {
@@ -89,5 +84,10 @@ describe('ErrorNoticeComponent', () => {
     component.ngOnInit();
     component.ngOnDestroy();
     expect(component.errorMessage).toEqual('En test string');
+  });
+
+  it('should render error component', () => {
+    const errorComponent = el.query(By.css('.px-4')).nativeElement;
+    expect(errorComponent).toBeTruthy();
   });
 });

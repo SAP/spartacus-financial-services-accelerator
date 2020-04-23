@@ -18,6 +18,7 @@ class MockLanguageService {
 
 const enLabel = 'En test string';
 const defaultLabel = 'Test string';
+const mockCssClass = 'testClass';
 
 const mockField: FieldConfig = {
   type: 'abstract',
@@ -66,17 +67,19 @@ describe('AbstractFormComponent', () => {
 
   it('should set default label', () => {
     component.config = mockField;
+    component.config.cssClass = mockCssClass;
     mockField.label.default = defaultLabel;
-    component.config = mockField;
     component.ngOnInit();
-    expect(component.label).toEqual(defaultLabel);
+    expect(component.hostComponentClass).toEqual('testClass');
+    expect(component.label).toEqual('Test string');
   });
 
   it('should set english label', () => {
     component.config = mockField;
+    component.config.cssClass = mockCssClass;
     mockField.label.default = enLabel;
-    component.config = mockField;
     component.ngOnInit();
-    expect(component.label).toEqual(enLabel);
+    expect(component.hostComponentClass).toEqual('testClass');
+    expect(component.label).toEqual('En test string');
   });
 });

@@ -6,11 +6,9 @@ export class FormSampleConfigurations {
   static sampleConfigurations: FormDefinition[] = [
     {
       formId: 'homeowners_details_form',
-      cssClass: 'FormKlasa',
       formGroups: [
         {
           groupCode: 'property',
-          cssClass: 'GrupKlasa',
           fieldConfigs: [
             {
               type: 'title',
