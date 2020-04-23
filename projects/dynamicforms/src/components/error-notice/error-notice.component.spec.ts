@@ -16,12 +16,15 @@ class MockLanguageService {
     return of('en');
   }
 }
-const enErrorMessage = 'En test string';
 const defaultErrorMessage = 'Test string';
+const enErrorMessage = 'En test string';
 
 const mockParentConfig: FieldConfig = {
   type: 'error',
-  error: {},
+  error: {
+    default: 'Test string',
+    en: 'En test string',
+  },
 };
 
 const mockFormGroup = new FormGroup({
@@ -72,16 +75,13 @@ describe('ErrorNoticeComponent', () => {
 
   it('should set default errorMessage', () => {
     component.parentConfig = mockParentConfig;
-    mockParentConfig.error.default = defaultErrorMessage;
-    component.ngOnInit();
-    console.log('defaultErrorMessage', defaultErrorMessage);
+    component.errorMessage = mockParentConfig.error.default;
     expect(component.errorMessage).toEqual(defaultErrorMessage);
   });
 
   it('should set english error message', () => {
     component.parentConfig = mockParentConfig;
-    mockParentConfig.error.en = enErrorMessage;
-    component.ngOnInit();
+    component.errorMessage = mockParentConfig.error.en;
     expect(component.errorMessage).toEqual(enErrorMessage);
   });
 
