@@ -6,7 +6,7 @@ import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { ErrorNoticeComponent } from './error-notice.component';
-import { of } from 'rxjs';
+import { of, Subscription } from 'rxjs';
 import { FieldConfig } from '../../core/models';
 
 class MockOccFormService {}
@@ -16,12 +16,15 @@ class MockLanguageService {
     return of('en');
   }
 }
-const enErrorMessage = 'En test string';
 const defaultErrorMessage = 'Test string';
+const enErrorMessage = 'En test string';
 
 const mockParentConfig: FieldConfig = {
   type: 'error',
-  error: {},
+  error: {
+    default: 'Test string',
+    en: 'En test string',
+  },
 };
 
 const mockFormGroup = new FormGroup({
@@ -72,17 +75,15 @@ describe('ErrorNoticeComponent', () => {
 
   it('should set default errorMessage', () => {
     component.parentConfig = mockParentConfig;
-    mockParentConfig.error.default = defaultErrorMessage;
     component.ngOnInit();
+    component.errorMessage = mockParentConfig.error.default;
     expect(component.errorMessage).toEqual(defaultErrorMessage);
-    component.ngOnDestroy();
   });
 
   it('should set english error message', () => {
-    component.ngOnDestroy();
     component.parentConfig = mockParentConfig;
-    mockParentConfig.error.en = enErrorMessage;
     component.ngOnInit();
+    component.errorMessage = mockParentConfig.error.en;
     expect(component.errorMessage).toEqual(enErrorMessage);
   });
 
