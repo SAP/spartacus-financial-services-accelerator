@@ -90,31 +90,37 @@
           </div>
         </div>
       </ng-container>
-      <ng-container *ngFor="let TPL of entries | slice:0:1">
-        <ng-container *ngIf="TPL.product.classifications" >
+      <ng-container *ngFor="let TPL of entries | slice: 0:1">
+        <ng-container *ngIf="TPL.product.classifications">
           <div
-          class="additional-info row mx-3 py-3 no-gutters position-relative">
-          <div class="col-12 col-md-2 align-self-center">
-            <div class="info-icon p-3 d-inline-flex"></div>
-          </div>
-          <div class="col-12 col-md-5 align-self-center">
-            <h6>{{ 'fscommon.coveredWith' | cxTranslate }} {{ TPL.product?.cartDisplayName }}</h6>
-          </div>
-          <div
-            class="col-12 col-md-5 align-self-center text-center"
+            class="additional-info row mx-3 py-3 no-gutters position-relative"
           >
-            <ng-container *ngFor="let feature of TPL.product?.classifications[0]?.features">
-              <div class="row mb-2">
-                <div class="col-8 text-left normal-weight">
-                  {{ feature.name  }}
+            <div class="col-12 col-md-2 align-self-center">
+              <div class="info-icon p-3 d-inline-flex"></div>
+            </div>
+            <div class="col-12 col-md-5 align-self-center">
+              <h6>
+                {{ 'fscommon.coveredWith' | cxTranslate }}
+                {{ TPL.product?.cartDisplayName }}
+              </h6>
+            </div>
+            <div class="col-12 col-md-5 align-self-center text-center">
+              <ng-container
+                *ngFor="
+                  let feature of (TPL.product?.classifications)[0]?.features
+                "
+              >
+                <div class="row mb-2">
+                  <div class="col-8 text-left normal-weight">
+                    {{ feature.name }}
+                  </div>
+                  <div class="col-4 text-right normal-weight">
+                    {{ feature.featureValues[0]?.value | currency }}
+                  </div>
                 </div>
-                <div class="col-4 text-right normal-weight">
-                  {{feature.featureValues[0]?.value | currency}}
-                </div>
-              </div>
-            </ng-container>
+              </ng-container>
+            </div>
           </div>
-        </div>
         </ng-container>
       </ng-container>
     </ng-container>
