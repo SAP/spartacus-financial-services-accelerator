@@ -6,7 +6,7 @@ import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { ErrorNoticeComponent } from './error-notice.component';
-import { of, Subscription } from 'rxjs';
+import { of } from 'rxjs';
 import { FieldConfig } from '../../core/models';
 
 class MockOccFormService {}
