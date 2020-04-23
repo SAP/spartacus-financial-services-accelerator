@@ -18,7 +18,7 @@ export function addPaymentMethod(userId: string) {
         method: 'POST',
         url: `${Cypress.env(
           'API_URL'
-        )}/rest/v2/financial/users/${userId}/carts/${cartId}/paymentdetails`,
+        )}/occ/v2/financial/users/${userId}/carts/${cartId}/paymentdetails`,
         headers: {
           Authorization: `bearer ${localData.auth.userToken.token.access_token}`,
         },
