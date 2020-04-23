@@ -46,13 +46,7 @@ const mockFormGroup = new FormGroup({
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
-  dynamicForms: {
-    components: {
-      radio: {
-        component: RadioComponent,
-      },
-    },
-  },
+  dynamicForms: {},
 };
 
 describe('RadioComponent', () => {

@@ -40,13 +40,7 @@ const mockFormGroup = new FormGroup({
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
-  dynamicForms: {
-    components: {
-      textarea: {
-        component: TextAreaComponent,
-      },
-    },
-  },
+  dynamicForms: {},
 };
 
 describe('TextAreaComponent', () => {

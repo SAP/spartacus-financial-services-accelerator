@@ -39,13 +39,7 @@ const mockFormGroup = new FormGroup({
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
-  dynamicForms: {
-    components: {
-      datepicker: {
-        component: DatePickerComponent,
-      },
-    },
-  },
+  dynamicForms: {},
 };
 
 describe('DatePickerComponent', () => {

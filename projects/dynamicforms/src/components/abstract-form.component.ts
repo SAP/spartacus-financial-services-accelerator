@@ -23,7 +23,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     if (this.config && this.config.cssClass) {
-      this.hostComponentClass = this.config.cssClass;
+      this.hostComponentClass = `${this.hostComponentClass} ${this.config.cssClass}`;
     }
     this.subscription.add(
       this.languageService

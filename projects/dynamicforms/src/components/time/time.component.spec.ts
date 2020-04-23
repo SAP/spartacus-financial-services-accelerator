@@ -39,13 +39,7 @@ const mockFormGroup = new FormGroup({
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
-  dynamicForms: {
-    components: {
-      time: {
-        component: TimeComponent,
-      },
-    },
-  },
+  dynamicForms: {},
 };
 
 describe('TimeComponent', () => {

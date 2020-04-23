@@ -30,13 +30,7 @@ const mockFormGroup = new FormGroup({
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
-  dynamicForms: {
-    components: {
-      button: {
-        component: ButtonComponent,
-      },
-    },
-  },
+  dynamicForms: {},
 };
 
 describe('ButtonComponent', () => {
