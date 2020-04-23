@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
-import { CssClass, DynamicFormsConfig } from '../../core/config/form-config';
+import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { InputComponent } from './input.component';
@@ -18,8 +18,6 @@ class MockErrorNoticeComponent {
   @Input() warn;
   @Input() parentConfig;
 }
-
-const mockCssClass: CssClass = {};
 
 class MockOccFormService {}
 class MockLanguageService {
@@ -40,14 +38,7 @@ const mockFormGroup = new FormGroup({
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
-  dynamicForms: {
-    cssClass: mockCssClass,
-    components: {
-      input: {
-        component: InputComponent,
-      },
-    },
-  },
+  dynamicForms: {},
 };
 
 describe('InputComponent', () => {

@@ -4,14 +4,10 @@ import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
+import { DynamicFormsConfig } from '../../core/config/form-config';
 import { ErrorNoticeComponent } from './error-notice.component';
 import { of } from 'rxjs';
 import { FieldConfig } from '../../core/models';
-
-const mockCssClass: CssClass = {
-  validatorMessageWrapper: 'testErrorClass',
-};
 
 class MockOccFormService {}
 
@@ -33,10 +29,7 @@ const mockFormGroup = new FormGroup({
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
-  dynamicForms: {
-    cssClass: mockCssClass,
-    components: {},
-  },
+  dynamicForms: {},
 };
 
 describe('ErrorNoticeComponent', () => {
@@ -77,16 +70,11 @@ describe('ErrorNoticeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render textarea component', () => {
-    const errorComponent = el.query(By.css('.testErrorClass')).nativeElement;
-    expect(errorComponent).toBeTruthy();
-  });
-
   it('should set default errorMessage', () => {
     component.parentConfig = mockParentConfig;
     mockParentConfig.error.default = defaultErrorMessage;
     component.ngOnInit();
-    component.ngOnDestroy();
+    console.log('defaultErrorMessage', defaultErrorMessage);
     expect(component.errorMessage).toEqual(defaultErrorMessage);
   });
 
@@ -94,7 +82,11 @@ describe('ErrorNoticeComponent', () => {
     component.parentConfig = mockParentConfig;
     mockParentConfig.error.en = enErrorMessage;
     component.ngOnInit();
-    component.ngOnDestroy();
-    expect(component.errorMessage).toEqual('En test string');
+    expect(component.errorMessage).toEqual(enErrorMessage);
+  });
+
+  it('should render error component', () => {
+    const errorComponent = el.query(By.css('.px-4')).nativeElement;
+    expect(errorComponent).toBeTruthy();
   });
 });
