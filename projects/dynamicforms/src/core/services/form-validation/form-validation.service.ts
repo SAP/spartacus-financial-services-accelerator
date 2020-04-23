@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { ValidatorFn, Validators } from '@angular/forms';
 import { DynamicFormsConfig } from '../../config/form-config';
-import { FieldConfig } from '../../models/form-config.interface';
+import {
+  FieldConfig,
+  ValidatorFunction,
+} from './../../models/form-config.interface';
 
 @Injectable()
 export class FormValidationService {
@@ -14,18 +17,9 @@ export class FormValidationService {
     if (fieldConfig) {
       if (fieldConfig.validations) {
         fieldConfig.validations.forEach(fieldValidation => {
-          const validatorMapping = this.configValidators[fieldValidation.name];
-          if (validatorMapping && validatorMapping.validator) {
-            if (fieldValidation.arguments) {
-              validators.push(
-                validatorMapping.validator.apply(
-                  this,
-                  fieldValidation.arguments.map(arg => arg.value)
-                )
-              );
-            } else {
-              validators.push(validatorMapping.validator);
-            }
+          const validatorFn = this.getValidatorForFunction(fieldValidation);
+          if (validatorFn) {
+            validators.push(validatorFn);
           }
         });
       }
@@ -34,5 +28,19 @@ export class FormValidationService {
       }
     }
     return validators;
+  }
+
+  getValidatorForFunction(validatorFunction: ValidatorFunction): ValidatorFn {
+    const validatorMapping = this.configValidators[validatorFunction.name];
+    if (validatorMapping && validatorMapping.validator) {
+      if (validatorFunction.arguments) {
+        return validatorMapping.validator.apply(
+          this,
+          validatorFunction.arguments.map(arg => arg.value)
+        );
+      } else {
+        return validatorMapping.validator;
+      }
+    }
   }
 }

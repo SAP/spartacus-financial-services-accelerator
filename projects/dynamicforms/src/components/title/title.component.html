@@ -1,7 +1,7 @@
 <div
   class="mt-3"
   [formGroup]="group"
-  [hidden]="group.controls[config.name].disabled"
+  [hidden]="(group?.controls)[config.name]?.disabled"
 >
   <h4>{{ label }}</h4>
 </div>

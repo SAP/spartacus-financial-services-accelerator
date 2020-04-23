@@ -1,7 +1,7 @@
 <div
   class="dynamic-field"
   [formGroup]="group"
-  [hidden]="group.controls[config.name].disabled"
+  [hidden]="(group?.controls)[config.name]?.disabled"
 >
   <div class="form-group">
     <label class="col-form-label">

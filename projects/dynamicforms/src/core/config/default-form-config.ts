@@ -1,13 +1,13 @@
-import { DynamicFormsConfig } from './form-config';
 import { ButtonComponent } from '../../components/button/button.component';
 import { DatePickerComponent } from '../../components/datepicker/datepicker.component';
 import { InputComponent } from '../../components/input/input.component';
-import { SelectComponent } from '../../components/select/select.component';
-import { TitleComponent } from '../../components/title/title.component';
 import { RadioComponent } from '../../components/radio/radio.component';
+import { SelectComponent } from '../../components/select/select.component';
 import { TextAreaComponent } from '../../components/text-area/text-area.component';
 import { TimeComponent } from '../../components/time/time.component';
-import { DefaultFormValidators } from '../../util/validators/default-form-validators';
+import { TitleComponent } from '../../components/title/title.component';
+import { DefaultFormValidators } from './../../util/validators/default-form-validators';
+import { DynamicFormsConfig } from './form-config';
 
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
@@ -58,6 +58,15 @@ export const defaultFormConfig: DynamicFormsConfig = {
       },
       number: {
         validator: DefaultFormValidators.number,
+      },
+      compareDates: {
+        validator: DefaultFormValidators.compareDates,
+      },
+      checkValue: {
+        validator: DefaultFormValidators.checkValue,
+      },
+      compareNumbers: {
+        validator: DefaultFormValidators.compareNumbers,
       },
       email: {
         validator: DefaultFormValidators.email,
