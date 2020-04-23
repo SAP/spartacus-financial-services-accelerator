@@ -1,14 +1,13 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { FormAdapter } from '../../../core/connectors/form.adapter';
 import {
   YFormData,
   YFormDefinition,
 } from '../../../core/models/form-occ.models';
-import { FormSampleConfigurations } from '../../../util/form-sample-configurations';
-import { FormAdapter } from '../../../core/connectors/form.adapter';
 
 const FULL_PARAMS = 'fields=FULL';
 
@@ -66,12 +65,6 @@ export class OccFormAdapter implements FormAdapter {
     applicationId: string,
     formDefinitionId: string
   ): Observable<any> {
-    const formConfig = FormSampleConfigurations.sampleConfigurations.filter(
-      item => item.formId === formDefinitionId
-    )[0];
-    if (formConfig !== undefined) {
-      return of(formConfig);
-    }
     const url = this.getYFormsEndpoint() + '/definitions/' + formDefinitionId;
     const params = new HttpParams({
       fromString: FULL_PARAMS + '&applicationId=' + applicationId,
