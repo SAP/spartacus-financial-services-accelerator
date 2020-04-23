@@ -7,16 +7,15 @@ import {
   RoutingService,
 } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { map, take, filter } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
+import { ChangePolicyService } from '../../../core/change-request/services/change-policy.service';
 import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
 import {
   ChangeRequestStatus,
   FSStepData,
   StepStatus,
 } from '../../../occ/occ-models';
-import * as fromUserRequestAction from './../../../core/user-request/store/actions';
-import { ChangePolicyService } from '../../../core/change-request/services/change-policy.service';
 
 @Component({ template: '' })
 export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
