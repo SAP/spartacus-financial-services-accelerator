@@ -190,4 +190,96 @@ describe('Change Request Actions', () => {
       });
     });
   });
+
+  describe('UpdateChangeRequest Action', () => {
+    const changeRequest = {
+      requestId: 'requestId',
+      userId: OCC_CART_ID_CURRENT,
+    };
+    it('should create the action', () => {
+      const action = new fromAction.UpdateChangeRequest(changeRequest);
+      expect({ ...action }).toEqual({
+        type: fromAction.UPDATE_CHANGE_REQUEST,
+        payload: changeRequest,
+        meta: StateLoaderActions.loadMeta(CHANGE_REQUEST_DATA),
+      });
+    });
+  });
+
+  describe('UpdateChangeRequestSuccess Action', () => {
+    const changeRequest = {
+      requestId: 'requestId',
+      insurancePolicy: {
+        categoryData: {
+          code: 'test_category',
+        },
+      },
+    };
+    it('should create the action', () => {
+      const action = new fromAction.UpdateChangeRequestSuccess(changeRequest);
+      expect({ ...action }).toEqual({
+        type: fromAction.UPDATE_CHANGE_REQUEST_SUCCESS,
+        payload: changeRequest,
+        meta: StateLoaderActions.successMeta(CHANGE_REQUEST_DATA),
+      });
+    });
+  });
+
+  describe('UpdateChangeRequestFail Action', () => {
+    it('should create the action', () => {
+      const error = 'error';
+      const action = new fromAction.UpdateChangeRequestFail(error);
+      expect({ ...action }).toEqual({
+        type: fromAction.UPDATE_CHANGE_REQUEST_FAIL,
+        payload: error,
+        meta: StateLoaderActions.failMeta(CHANGE_REQUEST_DATA, error),
+      });
+    });
+  });
+
+  describe('SubmitChangeRequest Action', () => {
+    const changeRequest = {
+      requestId: 'requestId',
+      userId: OCC_CART_ID_CURRENT,
+    };
+    it('should create the action', () => {
+      const action = new fromAction.SubmitChangeRequest(changeRequest);
+      expect({ ...action }).toEqual({
+        type: fromAction.SUBMIT_CHANGE_REQUEST,
+        payload: changeRequest,
+        meta: StateLoaderActions.loadMeta(CHANGE_REQUEST_DATA),
+      });
+    });
+  });
+
+  describe('SubmitChangeRequestSuccess Action', () => {
+    const changeRequest = {
+      requestId: 'requestId',
+      insurancePolicy: {
+        categoryData: {
+          code: 'test_category',
+        },
+      },
+    };
+    it('should create the action', () => {
+      const action = new fromAction.SubmitChangeRequestSuccess(changeRequest);
+      expect({ ...action }).toEqual({
+        type: fromAction.SUBMIT_CHANGE_REQUEST_SUCCESS,
+        payload: changeRequest,
+        meta: StateLoaderActions.successMeta(CHANGE_REQUEST_DATA),
+      });
+    });
+  });
+
+  describe('SubmitChangeRequestFail Action', () => {
+    it('should create the action', () => {
+      const error = 'error';
+      const action = new fromAction.SubmitChangeRequestFail(error);
+      expect({ ...action }).toEqual({
+        type: fromAction.SUBMIT_CHANGE_REQUEST_FAIL,
+        payload: error,
+        meta: StateLoaderActions.failMeta(CHANGE_REQUEST_DATA, error),
+      });
+    });
+  });
 });

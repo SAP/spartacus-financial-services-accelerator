@@ -1,9 +1,9 @@
 <div class="row">
-  <div [ngClass]="cssClass.validatorMessageWrapper">
+  <div class="px-4">
     <ng-container
       *ngIf="(warn?.touched && warn?.errors?.required) || warn?.errors?.pattern"
     >
-      <div [ngClass]="cssClass.validatorMessage">
+      <div class="text-danger mb-2">
         {{ 'forms.enterValidValue' | cxTranslate }}
       </div>
     </ng-container>
@@ -15,8 +15,8 @@
         parentConfig?.error
       "
     >
-      <div [ngClass]="cssClass.validatorMessage">
-        {{ parentConfig.error | cxTranslate }}
+      <div class="text-danger mb-2">
+        {{ errorMessage }}
       </div>
     </ng-container>
   </div>

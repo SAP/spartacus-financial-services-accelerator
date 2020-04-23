@@ -1,35 +1,22 @@
-import * as addOptionsPage from '../../../helpers/checkout/addOptionsPage';
+import * as shared from '../shared-checkout';
 
 export function populateFirstStep() {
-  cy.get('.formTitle').contains('Coverage Information');
+  cy.get('.form-title').contains('Coverage Information');
   cy.get('[name=lifeWhoCovered]')
     .eq(0)
     .click();
-  cy.get('[name="lifeCoverageRequire"]').type('3000');
+  cy.get('[name="lifeCoverageRequire"]').type('30000');
   cy.get('[name="lifeCoverageLast"]').type('24');
   cy.get('[name="lifeCoverageStartDate"]').type('2022-09-25');
+  cy.get('[name="lifeMainDob"]').type('1987-09-25');
   cy.get('[name=lifeMainSmoke]')
     .eq(1)
     .click();
-}
-
-export function checkLifeComparisonTable() {
-  cy.get('cx-fs-comparison-table-panel-item').should('have.length', 2);
-  cy.get('cx-fs-comparison-table-panel-item')
-    .eq(1)
-    .within(() => {
-      cy.get('.table-header-title').should(
-        'have.text',
-        'Premium Life Insurance'
-      );
-      cy.get('.table-header-value').should('have.text', '€1.21');
-    });
-  cy.get('cx-fs-comparison-table-panel-item')
+  cy.get('[name="lifeSecondDob"]').type('1981-09-25');
+  cy.get('[name=lifeSecondSmoke]')
     .eq(0)
-    .within(() => {
-      cy.get('.table-header-title').should('have.text', 'Basic Life Insurance');
-      cy.get('.table-header-value').should('have.text', '€0.97');
-    });
+    .click();
+  cy.get('[name="lifeRelationship"]').select('Civil Partner');
 }
 
 export function selectBasicLifeProduct() {
@@ -60,18 +47,38 @@ export function checkOptionalProductsAddRenewalOption() {
       },
     ],
   };
-  addOptionsPage.checkAddOptionsPageContent(addOptionsContent);
+  shared.checkAddOptionsPageContent(addOptionsContent);
 }
 
-export function checkMiniCartLifeBasic() {
-  cy.get('cx-fs-mini-cart').within(() => {
-    cy.get('.short-overview-item').should('have.length', 2);
-    cy.get('.short-overview-item')
-      .eq(0)
-      .should('have.text', ' Basic Life Insurance:  €0.97 ');
-    cy.get('.short-overview-item')
-      .eq(1)
-      .should('have.text', ' Renewal Option:  €0.26 ');
-    cy.get('.highlighted').should('have.text', ' Total price:  €1.23 ');
-  });
+export function checkLifeBasicMiniCart() {
+  const miniCartContent: addOptionsPage.MiniCart = {
+    price: ' €9.75 ',
+    products: [
+      {
+        title: ' Basic Life Insurance: ',
+        value: ' €7.69 ',
+      },
+      {
+        title: ' Renewal Option: ',
+        value: ' €2.06 ',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
+}
+
+export function checkLifeComparisonTable() {
+  const comparisonTableContent: addOptionsPage.ComparisonTable = {
+    mainProducts: [
+      {
+        name: 'Basic Life Insurance',
+        price: '€7.69',
+      },
+      {
+        name: 'Premium Life Insurance',
+        price: '€9.62',
+      },
+    ],
+  };
+  shared.checkComparisonTable(comparisonTableContent);
 }

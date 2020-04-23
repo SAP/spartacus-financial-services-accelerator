@@ -26,7 +26,6 @@ export class MockDynamicFieldDirective {
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {
-    cssClass: {},
     components: {},
   },
 };
@@ -51,7 +50,9 @@ const formData: YFormData = {
 const mockField: FieldConfig = {
   type: 'datepicker',
   name: 'testDatePicker',
-  label: 'What time did it happen?',
+  label: {
+    en: 'What time did it happen?',
+  },
 };
 
 const config: FormDefinition = {
@@ -99,18 +100,29 @@ describe('DynamicFormComponent', () => {
     }).compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeEach(async(() => {
     fixture = TestBed.createComponent(DynamicFormComponent);
     component = fixture.componentInstance;
+    component.config = config;
+    component.formData = of(formData);
     fixture.detectChanges();
+  }));
+
+  it('should create form with defintion but without data', () => {
+    component.formData = undefined;
+    component.ngOnInit();
+    expect(component).toBeTruthy();
+  });
+
+  it('should not create for if config is not defined', () => {
+    spyOn(mockFormBuilderService, 'createForm').and.callThrough();
+    component.config = undefined;
+    component.ngOnInit();
+    expect(mockFormBuilderService.createForm).not.toHaveBeenCalled();
   });
 
   it('should create and handle submit', () => {
     spyOn(component.submit, 'emit').and.callThrough();
-    component.config = config;
-    component.formData = of(formData);
-    fixture.detectChanges();
-    component.ngOnInit();
     component.handleSubmit(new Event('testEvent'));
     expect(component.submit.emit).toHaveBeenCalled();
   });
@@ -118,8 +130,6 @@ describe('DynamicFormComponent', () => {
   it('should submit in case form content is not defined', () => {
     spyOn(component.submit, 'emit').and.callThrough();
     formData.content = undefined;
-    component.formData = of(formData);
-    component.config = config;
     component.ngOnInit();
     expect(component.submit.emit).toHaveBeenCalled();
   });

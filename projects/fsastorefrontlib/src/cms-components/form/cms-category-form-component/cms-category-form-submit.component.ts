@@ -9,13 +9,12 @@ import {
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
-import { map, mergeMap, switchMap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { CMSFormSubmitComponent } from '../../../occ/occ-models';
-import { FormSampleConfigurations } from './form-sample-configurations';
 
 @Component({
   selector: 'cx-fs-cms-category-form-submit-component',
-  templateUrl: './cms-category-form-submit-component.html',
+  templateUrl: './cms-category-form-submit.component.html',
 })
 export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
   constructor(
@@ -47,27 +46,27 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
               this.pageContext
             ));
           }),
-          mergeMap(componentData => {
-            if (componentData && componentData.formId) {
-              this.formConfig = FormSampleConfigurations.sampleConfigurations.filter(
-                item => item.formId === componentData.formId
-              )[0];
-              if (!this.formConfig) {
-                this.formDefintion$ = this.formDataService.getFormDefinition(
-                  componentData.applicationId,
-                  componentData.formId
-                );
-                return this.formDefintion$;
-              }
-              return of(null);
-            }
-          }),
-          map(formDefinition => {
-            if (formDefinition && formDefinition.content) {
-              this.formConfig = <FormDefinition>(
-                JSON.parse(formDefinition.content)
-              );
-            }
+          filter(
+            componentData => componentData && componentData.formId !== undefined
+          ),
+          map(componentData => {
+            this.formDataService.loadFormDefinition(
+              componentData.applicationId,
+              componentData.formId
+            );
+            this.formDefintion$ = this.formDataService.getFormDefinition().pipe(
+              map(formDefinition => {
+                // TO-DO Refactor when form-sample-configurations.ts is removed
+                if (formDefinition.content) {
+                  this.formConfig = <FormDefinition>(
+                    JSON.parse(formDefinition.content)
+                  );
+                } else {
+                  this.formConfig = <FormDefinition>formDefinition;
+                }
+                return this.formConfig;
+              })
+            );
           })
         )
         .subscribe()

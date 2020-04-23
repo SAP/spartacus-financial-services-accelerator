@@ -7,6 +7,8 @@ import {
   selectPaymentMethod,
 } from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
+import { clickContinueButton } from '../../../helpers/checkout/checkoutSteps';
+import * as fnol from '../../../helpers/fnolCheckout';
 
 context('Travel Insurance Checkout', () => {
   before(() => {
@@ -24,22 +26,28 @@ context('Travel Insurance Checkout', () => {
     });
 
     it('Add main product to the cart', () => {
-      travelCheckout.checkComparisonAndAddProduct();
+      travelCheckout.checkTravelComparisonTable();
+      travelCheckout.selectSingleBudgetPlan();
     });
 
     it('Add optional product to the cart', () => {
       travelCheckout.checkOptionalProductsAndPick();
+      clickContinueButton();
     });
 
     it('Populate personal details and add payment method', () => {
       checkout.populatePersonalDetailsPage();
+      cy.get('[name="age"]').type('30');
+      clickContinueButton();
+      fnol.waitForQuoteReviewPage();
+      clickContinueButton();
       addPaymentMethod(registrationUser.email);
-      travelCheckout.populateAgeOnPersonalDetails();
+      checkout.ConfirmBindQuote();
     });
 
     it('Check mini cart on quote review page', () => {
-      checkout.checkQuoteReviewAccordions('travel');
-      travelCheckout.checkQuoteReviewMiniCart();
+      checkout.checkAccordions('travelQuoteReview');
+      travelCheckout.checkTravelMiniCart();
     });
 
     it('Select default payment details', () => {
@@ -52,6 +60,7 @@ context('Travel Insurance Checkout', () => {
 
     it('Check order confirmation', () => {
       checkout.checkOrderConfirmation();
+      checkout.checkAccordions('travelFinalReview');
     });
 
     it('Check my policies page', () => {

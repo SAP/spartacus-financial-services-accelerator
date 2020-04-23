@@ -2,12 +2,12 @@ import { YFormData } from '@fsa/dynamicforms';
 import {
   Cart,
   Category,
+  Occ,
   OrderEntry,
   Price,
   Product,
   User,
   UserSignUp,
-  Occ,
 } from '@spartacus/core';
 
 export interface ContactAgentData {
@@ -78,7 +78,10 @@ export enum ClaimStatus {
   APPROVED = 'APPROVED',
   REJECTED = 'REJECTED',
 }
-
+export enum ChangeRequestStatus {
+  SUBMITTED = 'SUBMITTED',
+  REFERRED = 'REFERRED',
+}
 export enum StepStatus {
   COMPLETED = 'COMPLETED',
   CANCELED = 'CANCELED',

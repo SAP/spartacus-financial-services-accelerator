@@ -3,20 +3,26 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
+import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { TitleComponent } from './title.component';
-
-const mockCssClass: CssClass = {
-  formTitle: 'testTitle',
-};
+import { LanguageService } from '@spartacus/core';
+import { of } from 'rxjs';
 
 class MockOccFormService {}
+
+class MockLanguageService {
+  getActive() {
+    return of('en');
+  }
+}
 
 const mockField: FieldConfig = {
   type: 'title',
   name: 'testTitle',
-  label: 'Test Title',
+  label: {
+    en: 'Test Title',
+  },
 };
 
 const mockFormGroup = new FormGroup({
@@ -24,14 +30,7 @@ const mockFormGroup = new FormGroup({
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
-  dynamicForms: {
-    cssClass: mockCssClass,
-    components: {
-      title: {
-        component: TitleComponent,
-      },
-    },
-  },
+  dynamicForms: {},
 };
 
 describe('TitleComponent', () => {
@@ -45,6 +44,7 @@ describe('TitleComponent', () => {
       imports: [ReactiveFormsModule],
       providers: [
         { provide: OccMockFormService, useClass: MockOccFormService },
+        { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
@@ -72,7 +72,7 @@ describe('TitleComponent', () => {
   });
 
   it('should render title component', () => {
-    const heading = el.query(By.css('.testTitle')).nativeElement;
+    const heading = el.query(By.css('h4')).nativeElement;
     expect(heading).toBeTruthy();
   });
 });

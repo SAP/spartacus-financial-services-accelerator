@@ -9,9 +9,9 @@ import {
   StateModule,
   StorageSyncType,
 } from '@spartacus/core';
+import { CHANGE_REQUEST_FEATURE } from './change-request-state';
 import { effects } from './effects/index';
 import { metaReducers, reducerProvider, reducerToken } from './reducers/index';
-import { CHANGE_REQUEST_FEATURE } from './change-request-state';
 
 export function userRequestConfigFactory(): StateConfig {
   const config: StateConfig = {
@@ -19,6 +19,7 @@ export function userRequestConfigFactory(): StateConfig {
       storageSync: {
         keys: {
           [`${CHANGE_REQUEST_FEATURE}.changeRequest.value.content.requestId`]: StorageSyncType.LOCAL_STORAGE,
+          [`${CHANGE_REQUEST_FEATURE}.changeRequest.value.content.requestStatus`]: StorageSyncType.LOCAL_STORAGE,
         },
       },
     },

@@ -2,11 +2,12 @@ import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { I18nTestingModule } from '@spartacus/core';
-import { CssClass, DynamicFormsConfig } from '../../core/config/form-config';
+import { I18nTestingModule, LanguageService } from '@spartacus/core';
+import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { DatePickerComponent } from './datepicker.component';
+import { of } from 'rxjs';
 
 @Component({
   // tslint:disable
@@ -18,14 +19,19 @@ class MockErrorNoticeComponent {
   @Input() parentConfig;
 }
 
-const mockCssClass: CssClass = {};
-
+class MockLanguageService {
+  getActive() {
+    return of('en');
+  }
+}
 class MockOccFormService {}
 
 const mockField: FieldConfig = {
   type: 'datepicker',
   name: 'testDatePicker',
-  label: 'What time did it happen?',
+  label: {
+    en: 'TestLabel',
+  },
 };
 
 const mockFormGroup = new FormGroup({
@@ -33,14 +39,7 @@ const mockFormGroup = new FormGroup({
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
-  dynamicForms: {
-    cssClass: mockCssClass,
-    components: {
-      datepicker: {
-        component: DatePickerComponent,
-      },
-    },
-  },
+  dynamicForms: {},
 };
 
 describe('DatePickerComponent', () => {
@@ -54,6 +53,7 @@ describe('DatePickerComponent', () => {
       imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
         { provide: OccMockFormService, useClass: MockOccFormService },
+        { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,

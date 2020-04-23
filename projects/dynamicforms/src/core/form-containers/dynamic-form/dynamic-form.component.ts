@@ -82,8 +82,8 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   createFormDefinition() {
     if (this.config) {
       this.form = this.formService.createForm(this.config);
-      this.config.formGroups.map(formGroup => {
-        formGroup.fieldConfigs.map(inputField => {
+      this.config.formGroups.forEach(formGroup => {
+        formGroup.fieldConfigs.forEach(inputField => {
           this.allInputs.push(inputField);
         });
       });
@@ -96,10 +96,12 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         this.form.get(groupCode).setValue(formData[groupCode]);
       } else {
         for (const controlName of Object.keys(formData[groupCode])) {
-          this.form
-            .get(groupCode)
-            .get(controlName)
-            .setValue(formData[groupCode][controlName]);
+          const formGroup = this.form.get(groupCode);
+          if (formGroup && formGroup.get(controlName)) {
+            formGroup
+              .get(controlName)
+              .setValue(formData[groupCode][controlName]);
+          }
         }
       }
     }

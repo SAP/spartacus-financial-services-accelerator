@@ -2,6 +2,7 @@ import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import {
   AuthGuard,
@@ -12,22 +13,22 @@ import {
 } from '@spartacus/core';
 import {
   CmsPageGuard,
-  PageLayoutComponent,
   MediaModule,
+  PageLayoutComponent,
 } from '@spartacus/storefront';
 import { ProgressBarModule } from '../progress-bar/progress-bar.module';
+import { ChangeRequestSubmissionGuard } from './../../core/change-request/guards/change-request-submission.guard';
 import { AbstractChangeProcessStepComponent } from './abstract-change-process-step/abstract-change-process-step.component';
 import { ChangeCarDetailsFormComponent } from './change-car-details-form/change-car-details-form.component';
 import { ChangeCoverageComponent } from './change-coverage/change-coverage.component';
 import { ChangeProcessConfirmationComponent } from './change-process-confirmation/change-process-confirmation.component';
 import { ChangeProcessProgressBarComponent } from './change-process-progress-bar/change-process-progress-bar.component';
 import { ChangeSimulationComponent } from './change-simulation/change-simulation.component';
-import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 const routes: Routes = [
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard],
+    canActivate: [AuthGuard, CmsPageGuard, ChangeRequestSubmissionGuard],
     data: {
       cxRoute: 'changeCarDetailsPage',
       pageLabel: 'changeCarDetailsPage',
@@ -36,7 +37,7 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard],
+    canActivate: [AuthGuard, CmsPageGuard, ChangeRequestSubmissionGuard],
     data: {
       cxRoute: 'changeCoveragePage',
       pageLabel: 'changeCoveragePage',
@@ -45,7 +46,7 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard],
+    canActivate: [AuthGuard, CmsPageGuard, ChangeRequestSubmissionGuard],
     data: {
       cxRoute: 'changeSimulationPage',
       pageLabel: 'changeSimulationPage',

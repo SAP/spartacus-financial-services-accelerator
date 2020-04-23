@@ -22,7 +22,7 @@ export class OccClaimAdapter implements ClaimAdapter {
   }
 
   getClaims(userId: string): Observable<any> {
-    const url = this.getClaimsEndpoint(userId);
+    const url = this.occEndpointService.getUrl('claims', { userId });
     const params = new HttpParams({ fromString: FULL_PARAMS });
     return this.http
       .get(url, { params: params })
@@ -30,18 +30,17 @@ export class OccClaimAdapter implements ClaimAdapter {
   }
 
   getClaim(userId: string, claimId: string) {
-    const url = this.getClaimsEndpoint(userId) + '/' + claimId;
+    const url = this.occEndpointService.getUrl('claim', { userId, claimId });
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });
-
     return this.http
       .get(url, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   deleteClaim(userId: string, claimId: string) {
-    const url = this.getClaimsEndpoint(userId) + '/' + claimId;
+    const url = this.occEndpointService.getUrl('claim', { userId, claimId });
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });
@@ -56,19 +55,17 @@ export class OccClaimAdapter implements ClaimAdapter {
     policyId: string,
     contractId: string
   ): Observable<any> {
-    const url =
-      this.getClaimsEndpoint(userId) +
-      '/create?contractId=' +
-      contractId +
-      '&policyId=' +
-      policyId;
+    const url = this.occEndpointService.getUrl('createClaim', { userId });
+    const params: HttpParams = new HttpParams()
+      .set('contractId', contractId)
+      .set('policyId', policyId);
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });
 
     return this.http
-      .post(url, { headers })
+      .post(url, params, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
@@ -77,7 +74,7 @@ export class OccClaimAdapter implements ClaimAdapter {
     claimId: string,
     claimData: any
   ): Observable<any> {
-    const url = this.getClaimsEndpoint(userId) + '/' + claimId;
+    const url = this.occEndpointService.getUrl('claim', { userId, claimId });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
@@ -102,7 +99,7 @@ export class OccClaimAdapter implements ClaimAdapter {
       claimBody = {
         dateOfLoss: claim.whenHappened,
         timeOfLoss: claim.whatTime,
-        causeOfLoss: claim.howAccidentOccured,
+        causeOfLoss: claim.howAccidentOccurred,
         incidentType: { incidentCode: claim.whatHappened },
         locationOfLoss:
           location && location.countryCode !== undefined ? location : {},
