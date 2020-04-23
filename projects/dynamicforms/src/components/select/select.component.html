@@ -3,22 +3,25 @@
   [formGroup]="group"
   [hidden]="group.controls[config.name].disabled"
 >
-  <div [ngClass]="cssClass.inputWrapper">
-    <label [ngClass]="cssClass.label">
+  <div class="form-group">
+    <label class="col-form-label">
       <ng-container *ngIf="!config.required">
         {{ 'forms.optional' | cxTranslate }}
       </ng-container>
-      {{ config.label }}
+      {{ label }}
     </label>
     <select
-      [ngClass]="cssClass.input"
+      class="form-control"
       [attr.name]="config.name"
       formControlName="{{ config.name }}"
     >
-      <option value="pleaseSelect" [selected]="'pleaseSelect'" disabled>{{
+      <option [defaultSelected]="true" disabled value="null">{{
         'fscommon.pleaseSelect' | cxTranslate
       }}</option>
-      <option *ngFor="let option of config.options" value="{{ option.name }}">
+      <option
+        *ngFor="let option of options$ | async as options"
+        value="{{ option.name }}"
+      >
         {{ option.label }}
       </option>
     </select>

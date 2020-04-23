@@ -3,15 +3,15 @@
   class="dynamic-field"
   [formGroup]="group"
 >
-  <div [ngClass]="cssClass.inputWrapper">
-    <label [ngClass]="cssClass.label">
+  <div class="form-group">
+    <label class="col-form-label">
       <ng-container *ngIf="!config.required">
         {{ 'forms.optional' | cxTranslate }}
       </ng-container>
-      {{ config.label }}
+      {{ label }}
     </label>
     <input
-      [ngClass]="cssClass.input"
+      class="form-control"
       type="text"
       [attr.placeholder]="config.placeholder"
       [formControlName]="config.name"

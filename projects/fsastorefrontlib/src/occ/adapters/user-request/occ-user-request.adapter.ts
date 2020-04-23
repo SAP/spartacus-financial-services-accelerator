@@ -14,18 +14,13 @@ export class OccUserRequestAdapter implements UserRequestAdapter {
     protected occEndpointService: OccEndpointsService
   ) {}
 
-  protected getUserRequestEndpoint(userId: string, requestId: string) {
-    const userRequestEndpoint =
-      '/users/' + userId + '/fsUserRequests/' + requestId;
-    return this.occEndpointService.getBaseEndpoint() + userRequestEndpoint;
-  }
-
   getUserRequest(userId: string, requestId: string): Observable<any> {
-    const url = this.getUserRequestEndpoint(userId, requestId);
-    const params = new HttpParams();
-
+    const url = this.occEndpointService.getUrl('userRequest', {
+      userId,
+      requestId,
+    });
     return this.http
-      .get(url, { params: params })
+      .get(url)
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
@@ -34,14 +29,20 @@ export class OccUserRequestAdapter implements UserRequestAdapter {
     requestId: string,
     stepData: FSStepData
   ): Observable<any> {
-    const url = this.getUserRequestEndpoint(userId, requestId);
+    const url = this.occEndpointService.getUrl('userRequest', {
+      userId,
+      requestId,
+    });
     return this.http
       .patch(url, stepData, {})
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   submitUserRequest(userId: string, requestId: string): Observable<any> {
-    const url = this.getUserRequestEndpoint(userId, requestId) + '/action';
+    const url = this.occEndpointService.getUrl('submitUserRequest', {
+      userId,
+      requestId,
+    });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });

@@ -1,7 +1,7 @@
 import * as shared from '../shared-checkout';
 
 export function populateFirstStep() {
-  cy.get('.formTitle').contains('Coverage Information');
+  cy.get('.form-title').contains('Coverage Information');
   cy.get('[name=lifeWhoCovered]')
     .eq(0)
     .click();

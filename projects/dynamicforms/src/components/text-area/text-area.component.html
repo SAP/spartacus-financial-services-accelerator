@@ -3,15 +3,15 @@
   [hidden]="group.controls[config.name].disabled"
   [formGroup]="group"
 >
-  <div [ngClass]="cssClass.inputWrapper">
-    <label [ngClass]="cssClass.label">
+  <div class="form-group">
+    <label class="col-form-label">
       <ng-container *ngIf="!config.required">
         {{ 'forms.optional' | cxTranslate }}
       </ng-container>
-      {{ config.label }}
+      {{ label }}
     </label>
     <textarea
-      [ngClass]="cssClass.input"
+      class="form-control"
       [attr.placeholder]="config.placeholder"
       [formControlName]="config.name"
       rows="10"
