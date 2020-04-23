@@ -11,6 +11,7 @@ import { FormAdapter } from '../connectors/form.adapter';
 import { FormBuilderService } from '../services/builder/form-builder.service';
 import { FormDataService } from '../services/data/form-data.service';
 import { FormValidationService } from '../services/form-validation/form-validation.service';
+import { FormService } from '../services/form/form.service';
 import { FieldDependencyResolverService } from './../services/form-dependencies/field-dependency-resolver.service';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { FormComponent } from './form/form.component';
@@ -27,6 +28,7 @@ import { FormComponent } from './form/form.component';
   exports: [FormComponent, DynamicFormComponent, ComponentsModule],
   entryComponents: [FormComponent, DynamicFormComponent],
   providers: [
+    FormService,
     FormBuilderService,
     FormValidationService,
     FieldDependencyResolverService,

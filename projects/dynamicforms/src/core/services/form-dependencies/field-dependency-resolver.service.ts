@@ -5,6 +5,7 @@ import {
   FormGroup,
   ValidatorFn,
 } from '@angular/forms';
+import { FormService } from '../form/form.service';
 import { ControlDependency } from './../../models/form-config.interface';
 import { FormValidationService } from './../form-validation/form-validation.service';
 
@@ -12,6 +13,7 @@ import { FormValidationService } from './../form-validation/form-validation.serv
 export class FieldDependencyResolverService {
   constructor(
     protected formValidationService: FormValidationService,
+    protected formService: FormService,
     protected fb: FormBuilder
   ) {}
 
@@ -28,7 +30,7 @@ export class FieldDependencyResolverService {
     formGroup: FormGroup
   ) {
     dependencyConditions.forEach(condition => {
-      const masterFormControl = this.getFormControlForCode(
+      const masterFormControl = this.formService.getFormControlForCode(
         condition.controlName,
         formGroup
       );
@@ -37,12 +39,12 @@ export class FieldDependencyResolverService {
           dependentControl.disable();
         }
         masterFormControl.valueChanges.subscribe(fieldValue => {
-          const dependancyValidations = this.geValidationsForCondition(
+          const dependencyValidations = this.geValidationsForCondition(
             condition
           );
           const dependancyControl = this.fb.control(
             { disabled: false, value: fieldValue },
-            dependancyValidations
+            dependencyValidations
           );
           dependancyControl.valid
             ? dependentControl.enable()
@@ -50,35 +52,6 @@ export class FieldDependencyResolverService {
         });
       }
     });
-  }
-
-  /**
-   * Method used to recursively find master form control by its code in specified form group
-   *
-   * @param formControlCode The form control code
-   * @param formGroup The form group
-   */
-  getFormControlForCode(
-    formControlCode: string,
-    formGroup: any
-  ): AbstractControl {
-    let abstractFormControl;
-    for (const key of Object.keys(formGroup.controls)) {
-      const nestedFormGroup = formGroup.get(key);
-      if (key === formControlCode) {
-        abstractFormControl = formGroup.get(key);
-        break;
-      } else if (nestedFormGroup instanceof FormGroup) {
-        abstractFormControl = this.getFormControlForCode(
-          formControlCode,
-          nestedFormGroup
-        );
-        if (abstractFormControl !== undefined) {
-          break;
-        }
-      }
-    }
-    return abstractFormControl;
   }
 
   geValidationsForCondition(dependencyFn: ControlDependency): ValidatorFn[] {

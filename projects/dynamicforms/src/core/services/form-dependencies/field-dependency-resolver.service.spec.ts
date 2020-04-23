@@ -1,7 +1,6 @@
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import {
-  FormBuilder,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
@@ -13,6 +12,7 @@ import {
   ControlDependency,
   FieldConfig,
 } from '../../models/form-config.interface';
+import { FormService } from '../form/form.service';
 import { defaultFormConfig } from './../../config/default-form-config';
 import { FormValidationService } from './../form-validation/form-validation.service';
 import { FieldDependencyResolverService } from './field-dependency-resolver.service';
@@ -58,9 +58,17 @@ class MockFormValidationService {
   }
 }
 
+class MockFormService {
+  getFormControlForCode() {
+    return mockFormGroup.controls['testField2'];
+  }
+}
+
 describe('FieldDependencyResolverService', () => {
   let service: FieldDependencyResolverService;
   let mockFormValidationService: FormValidationService;
+  let mockFormService: FormService;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
@@ -71,15 +79,17 @@ describe('FieldDependencyResolverService', () => {
           provide: FormValidationService,
           useClass: MockFormValidationService,
         },
+        {
+          provide: FormService,
+          useClass: MockFormService,
+        },
       ],
     });
     mockFormValidationService = TestBed.get(FormValidationService as Type<
       FormValidationService
     >);
-    service = new FieldDependencyResolverService(
-      mockFormValidationService as FormValidationService,
-      new FormBuilder()
-    );
+    mockFormService = TestBed.get(FormService as Type<FormService>);
+    service = TestBed.get(FieldDependencyResolverService);
   });
 
   it('should be created', () => {
