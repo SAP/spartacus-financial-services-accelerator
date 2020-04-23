@@ -27,6 +27,9 @@
   @include media-breakpoint-down(sm) {
     text-align: center;
   }
+  .additional-info {
+    font-weight: var(--cx-font-weight-normal);
+  }
 }
 .overflow-box {
   height: 220px;
