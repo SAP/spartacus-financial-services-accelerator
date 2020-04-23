@@ -1,7 +1,7 @@
 <div
   class="dynamic-field"
   [formGroup]="group"
-  [hidden]="group.controls[config.name].disabled"
+  [hidden]="(group?.controls)[config.name]?.disabled"
 >
   <div [ngClass]="cssClass.inputWrapper">
     <label [ngClass]="cssClass.label">

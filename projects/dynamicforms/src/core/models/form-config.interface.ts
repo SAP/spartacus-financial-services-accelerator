@@ -7,7 +7,9 @@ export interface FormDefinition {
 export interface DynamicFormGroup {
   groupCode?: string;
   fieldConfigs: FieldConfig[];
+  dependsOn?: ControlDependency[];
 }
+
 export interface FieldConfig {
   name?: string;
   required?: boolean;
@@ -24,6 +26,12 @@ export interface FieldConfig {
   hidden?: boolean;
   error?: LocalizedString;
   validations?: ValidatorFunction[];
+  dependsOn?: ControlDependency[];
+}
+
+export interface ControlDependency {
+  controlName?: string;
+  conditions?: ValidatorFunction[];
 }
 export interface LocalizedString {
   default?: string;

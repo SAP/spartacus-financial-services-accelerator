@@ -111,6 +111,13 @@ export class DefaultFormValidators extends Validators {
     return null;
   }
 
+  static checkValue(allowedValues: string[]) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const valid = allowedValues.indexOf(control.value) !== -1;
+      return valid ? null : { valueConflict: true };
+    };
+  }
+
   static compareDates(comparisonField: string, operator: string) {
     return (control: AbstractControl): ValidationErrors | null => {
       if (control.parent) {
