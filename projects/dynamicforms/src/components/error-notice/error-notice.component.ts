@@ -1,10 +1,4 @@
-import {
-  Component,
-  Input,
-  HostBinding,
-  OnInit,
-  OnDestroy,
-} from '@angular/core';
+import { Component, Input, HostBinding, OnInit } from '@angular/core';
 import { AbstractFormComponent } from '../abstract-form.component';
 import { map } from 'rxjs/operators';
 
