@@ -70,8 +70,8 @@ describe('AbstractFormComponent', () => {
     component.config.cssClass = mockCssClass;
     mockField.label.default = defaultLabel;
     component.ngOnInit();
-    expect(component.hostComponentClass).toEqual('testClass');
-    expect(component.label).toEqual('Test string');
+    expect(component.hostComponentClass).toEqual(mockCssClass);
+    expect(component.label).toEqual(defaultLabel);
   });
 
   it('should set english label', () => {
@@ -79,7 +79,7 @@ describe('AbstractFormComponent', () => {
     component.config.cssClass = mockCssClass;
     mockField.label.default = enLabel;
     component.ngOnInit();
-    expect(component.hostComponentClass).toEqual('testClass');
-    expect(component.label).toEqual('En test string');
+    expect(component.hostComponentClass).toEqual(mockCssClass);
+    expect(component.label).toEqual(enLabel);
   });
 });
