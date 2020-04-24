@@ -13,7 +13,7 @@ class MockLanguageService {
   }
 }
 
-const fieldType = 'inut';
+const fieldType = 'input';
 const defaultErrorMessage = 'Test string';
 const enErrorMessage = 'En test string';
 
