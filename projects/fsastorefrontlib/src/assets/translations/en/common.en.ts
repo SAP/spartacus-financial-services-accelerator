@@ -60,6 +60,7 @@ export const fscommon = {
     noMessagesForGroup: 'You have no messages for chosen group',
     modifyPlan: 'Modify Plan',
     thankYou: 'Thank you!',
+    coveredWith: 'Covered with',
     yearPerformanse: 'Year Performance',
     yearsPerformanse: 'Years Performance',
     riskAndReturningRate: 'Risk & Returning Rating',
