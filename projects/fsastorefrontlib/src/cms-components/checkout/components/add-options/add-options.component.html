@@ -108,12 +108,14 @@
                   ?.features
               "
             >
-              <div class="row mb-2">
-                <div class="col-8 text-left normal-weight">
+              <div class="row no-gutters mb-2">
+                <div class="col-7 text-left normal-weight">
                   {{ feature.name }}
                 </div>
-                <div class="col-4 text-right normal-weight">
-                  {{ feature.featureValues[0]?.value | currency }}
+                <div class="col-5 text-right normal-weight">
+                  {{
+                    feature.featureValues[0]?.value | currency: currentCurrency
+                  }}
                 </div>
               </div>
             </ng-container>

@@ -7,14 +7,13 @@ import {
   Output,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { OrderEntry, RoutingService } from '@spartacus/core';
+import { OrderEntry, RoutingService, CurrencyService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/cart/facade';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
 import { FSProduct } from '../../../../occ/occ-models';
-
 @Component({
   selector: 'cx-fs-add-options',
   templateUrl: './add-options.component.html',
@@ -26,18 +25,31 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     protected routingService: RoutingService,
     protected checkoutConfigService: FSCheckoutConfigService,
     protected categoryService: CategoryService,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    protected currencyService: CurrencyService
   ) {}
 
   entries$: Observable<OrderEntry[]>;
   checkoutStepUrlNext: string;
   cartLoaded$: Observable<boolean>;
   subscription = new Subscription();
+  currentCurrency: string;
 
   @Output()
   nextStep = new EventEmitter<any>();
 
   ngOnInit() {
+    this.subscription.add(
+      this.currencyService
+        .getActive()
+        .pipe(
+          map(currentCurrency => {
+            this.currentCurrency = currentCurrency;
+          })
+        )
+        .subscribe()
+    );
+
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
       this.activatedRoute
     );
