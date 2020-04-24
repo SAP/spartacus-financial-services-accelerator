@@ -73,7 +73,6 @@ describe('AddOptionsComponent', () => {
   let routingService: RoutingService;
   let checkoutConfigService: FSCheckoutConfigService;
   let categoryService: CategoryService;
-  let currencyService: CurrencyService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
