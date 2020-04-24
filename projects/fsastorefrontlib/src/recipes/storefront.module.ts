@@ -17,6 +17,7 @@ import { routingConfig } from '../cms-structure/routing/default-routing-config';
 import { OccModule } from '../occ/occ.module';
 import { occProductConfig } from '../occ/services/default-occ-product-config';
 import { layoutConfig } from './config/default-layout-config';
+import { occUserConfig } from '../occ/services/default-occ-user-config';
 
 @NgModule({
   imports: [
@@ -56,6 +57,7 @@ import { layoutConfig } from './config/default-layout-config';
     ConfigModule.withConfig(routingConfig),
     ConfigModule.withConfig(checkoutConfig),
     ConfigModule.withConfig(occProductConfig),
+    ConfigModule.withConfig(occUserConfig),
     ConfigModule.withConfig({
       icon: {
         symbols: {
