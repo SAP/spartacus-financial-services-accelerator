@@ -1,31 +1,35 @@
+import { DebugElement, Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DebugElement } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
-import { ErrorNoticeComponent } from './error-notice.component';
 import { of } from 'rxjs';
+import { CssClass, DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models';
+import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
+import { ErrorNoticeComponent } from './error-notice.component';
 
 const mockCssClass: CssClass = {
   validatorMessageWrapper: 'testErrorClass',
 };
 
-class MockOccFormService {}
+class MockOccFormService { }
 
 class MockLanguageService {
   getActive() {
-    return of('en');
+    return of();
   }
 }
+
 const enErrorMessage = 'En test string';
 const defaultErrorMessage = 'Test string';
 
 const mockParentConfig: FieldConfig = {
   type: 'error',
-  error: {},
+  error: {
+    default: defaultErrorMessage,
+    en: enErrorMessage
+  },
 };
 
 const mockFormGroup = new FormGroup({
@@ -43,10 +47,10 @@ describe('ErrorNoticeComponent', () => {
   let component: ErrorNoticeComponent;
   let fixture: ComponentFixture<ErrorNoticeComponent>;
   let el: DebugElement;
-  let mockLanguageService: MockLanguageService;
+  let mockLanguageService: LanguageService;
+  let occMockFormService: OccMockFormService;
 
   beforeEach(async(() => {
-    mockLanguageService = new MockLanguageService();
 
     TestBed.configureTestingModule({
       declarations: [ErrorNoticeComponent],
@@ -55,7 +59,7 @@ describe('ErrorNoticeComponent', () => {
         { provide: OccMockFormService, useClass: MockOccFormService },
         {
           provide: LanguageService,
-          useValue: mockLanguageService,
+          useClass: MockLanguageService,
         },
         {
           provide: DynamicFormsConfig,
@@ -63,12 +67,15 @@ describe('ErrorNoticeComponent', () => {
         },
       ],
     }).compileComponents();
+    mockLanguageService = TestBed.get(LanguageService as Type<LanguageService>);
+    occMockFormService = TestBed.get(OccMockFormService as Type<OccMockFormService>);
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ErrorNoticeComponent);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
+    component.parentConfig = mockParentConfig;
     el = fixture.debugElement;
     fixture.detectChanges();
   });
@@ -83,18 +90,16 @@ describe('ErrorNoticeComponent', () => {
   });
 
   it('should set default errorMessage', () => {
-    component.parentConfig = mockParentConfig;
-    mockParentConfig.error.default = defaultErrorMessage;
+    spyOn(mockLanguageService, 'getActive').and.returnValue(of('fr'));
     component.ngOnInit();
     component.ngOnDestroy();
     expect(component.errorMessage).toEqual(defaultErrorMessage);
   });
 
   it('should set english error message', () => {
-    component.parentConfig = mockParentConfig;
-    mockParentConfig.error.en = enErrorMessage;
+    spyOn(mockLanguageService, 'getActive').and.returnValue(of('en'));
     component.ngOnInit();
     component.ngOnDestroy();
-    expect(component.errorMessage).toEqual('En test string');
+    expect(component.errorMessage).toEqual(enErrorMessage);
   });
 });
