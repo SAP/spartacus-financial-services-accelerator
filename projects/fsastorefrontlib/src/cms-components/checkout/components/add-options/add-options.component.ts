@@ -7,11 +7,7 @@ import {
   Output,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import {
-  OrderEntry,
-  RoutingService,
-  CurrencyService,
-} from '@spartacus/core';
+import { OrderEntry, RoutingService, CurrencyService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/cart/facade';
