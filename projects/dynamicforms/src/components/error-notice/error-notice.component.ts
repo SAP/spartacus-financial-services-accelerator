@@ -1,21 +1,22 @@
-import { Component, Input, HostBinding, OnInit } from '@angular/core';
-import { AbstractFormComponent } from '../abstract-form.component';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { map } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
+import { LanguageService } from '@spartacus/core';
 
 @Component({
   selector: 'cx-error-notice',
   templateUrl: './error-notice.component.html',
 })
-export class ErrorNoticeComponent extends AbstractFormComponent
-  implements OnInit {
+export class ErrorNoticeComponent implements OnInit, OnDestroy {
+  constructor(private languageService: LanguageService) {}
+
   @Input() warn: any;
   @Input() parentConfig: any;
-  @HostBinding('class') class = '';
   errorMessage: string;
 
-  ngOnInit() {
-    super.ngOnInit();
+  private subscription = new Subscription();
 
+  ngOnInit() {
     this.subscription.add(
       this.languageService
         .getActive()

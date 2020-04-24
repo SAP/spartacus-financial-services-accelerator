@@ -3,10 +3,12 @@ import { ValidatorFn } from '@angular/forms';
 export interface FormDefinition {
   formGroups: DynamicFormGroup[];
   formId: string;
+  cssClass?: string;
 }
 export interface DynamicFormGroup {
   groupCode?: string;
   fieldConfigs: FieldConfig[];
+  cssClass?: string;
   dependsOn?: ControlDependency[];
 }
 
@@ -17,6 +19,7 @@ export interface FieldConfig {
   group?: string;
   label?: LocalizedString;
   options?: FieldOption[];
+  cssClass?: string;
   depends?: string[];
   apiUrl?: string;
   placeholder?: string;
@@ -41,11 +44,9 @@ export interface ValidatorFunction {
   name: string;
   arguments?: ValidatorArgument[];
 }
-
 export interface ValidatorArgument {
   value: string;
 }
-
 export interface FieldOption {
   name: string;
   label: string;

@@ -14,14 +14,17 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
     protected formConfig: DynamicFormsConfig,
     protected languageService: LanguageService
   ) {}
+
+  @HostBinding('class') hostComponentClass = 'col-12';
   label: string;
-  cssClass = this.formConfig.dynamicForms.cssClass;
-  @HostBinding('class') class = this.cssClass.controlElement;
   config: FieldConfig;
   group: FormGroup;
   subscription = new Subscription();
 
   ngOnInit() {
+    if (this.config && this.config.cssClass) {
+      this.hostComponentClass = `${this.hostComponentClass} ${this.config.cssClass}`;
+    }
     this.subscription.add(
       this.languageService
         .getActive()

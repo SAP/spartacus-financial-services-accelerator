@@ -14,7 +14,7 @@ import { CMSFormSubmitComponent } from '../../../occ/occ-models';
 
 @Component({
   selector: 'cx-fs-cms-category-form-submit-component',
-  templateUrl: './cms-category-form-submit-component.html',
+  templateUrl: './cms-category-form-submit.component.html',
 })
 export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
   constructor(

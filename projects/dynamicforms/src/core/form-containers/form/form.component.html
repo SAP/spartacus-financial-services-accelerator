@@ -1,15 +1,14 @@
-<h3 class="formTitle">
+<h3 class="form-title">
   {{ 'forms.titles.' + formId | cxTranslate }}
 </h3>
 <ng-container *ngIf="formConfig !== undefined">
-  <div class="form">
-    <cx-dynamic-form
-      #form="cx-dynamicForm"
-      [config]="formConfig"
-      (submit)="submit($event)"
-      [formData]="formData"
-    >
-    </cx-dynamic-form>
-    {{ form.valid }}
-  </div>
+  <cx-dynamic-form
+    class="dynamic-form"
+    #form="cx-dynamicForm"
+    [config]="formConfig"
+    (submit)="submit($event)"
+    [formData]="formData"
+  >
+  </cx-dynamic-form>
+  {{ form.valid }}
 </ng-container>

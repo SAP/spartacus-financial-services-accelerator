@@ -1,16 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { OccMockFormService } from '../occ/services/occ-mock-form.service';
-import { DynamicFormsConfig, CssClass } from '../core/config/form-config';
+import { DynamicFormsConfig } from '../core/config/form-config';
 import { FieldConfig } from '../core/models/form-config.interface';
 import { LanguageService } from '@spartacus/core';
 import { of } from 'rxjs';
 import { AbstractFormComponent } from '.';
 import { Type } from '@angular/core';
-
-const mockCssClass: CssClass = {
-  formTitle: 'testTitle',
-};
 
 class MockOccFormService {}
 
@@ -22,6 +18,7 @@ class MockLanguageService {
 
 const enLabel = 'En test string';
 const defaultLabel = 'Test string';
+const mockCssClass = 'testClass';
 
 const mockField: FieldConfig = {
   type: 'abstract',
@@ -34,9 +31,7 @@ const mockFormGroup = new FormGroup({
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
-  dynamicForms: {
-    cssClass: mockCssClass,
-  },
+  dynamicForms: {},
 };
 
 describe('AbstractFormComponent', () => {
@@ -72,17 +67,19 @@ describe('AbstractFormComponent', () => {
 
   it('should set default label', () => {
     component.config = mockField;
+    component.config.cssClass = mockCssClass;
     mockField.label.default = defaultLabel;
-    component.config = mockField;
     component.ngOnInit();
+    expect(component.hostComponentClass).toEqual('col-12 testClass');
     expect(component.label).toEqual(defaultLabel);
   });
 
   it('should set english label', () => {
     component.config = mockField;
+    component.config.cssClass = mockCssClass;
     mockField.label.default = enLabel;
-    component.config = mockField;
     component.ngOnInit();
+    expect(component.hostComponentClass).toEqual('col-12 testClass');
     expect(component.label).toEqual(enLabel);
   });
 });

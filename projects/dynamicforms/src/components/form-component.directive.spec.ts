@@ -32,9 +32,6 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
         component: MockedButtonComponent,
       },
     },
-    cssClass: {
-      input: 'testInput',
-    },
   },
 };
 

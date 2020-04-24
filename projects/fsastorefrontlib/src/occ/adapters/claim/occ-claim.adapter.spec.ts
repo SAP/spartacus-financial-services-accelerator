@@ -5,44 +5,45 @@ import {
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccClaimAdapter } from './occ-claim.adapter';
-import { OccConfig } from '@spartacus/core';
+import { OccEndpointsService } from '@spartacus/core';
 
 const userId = '123';
-const claimNumber = 'CL0000012';
+const claimId = 'CL0000012';
 
 const policyNumber = 'PL0000012';
 const contractNumber = 'CO0000012';
 
-const usersEndpoint = '/users';
-const claimsEndpoint = '/claims';
+const claimEndpoint = 'claim';
+const claimsEndpoint = 'claims';
+const createClaimEndpoint = 'createClaim';
 
-const MockOccModuleConfig: OccConfig = {
-  context: {
-    baseSite: [''],
-  },
-  backend: {
-    occ: {
-      baseUrl: '',
-      prefix: '',
-    },
-  },
-};
+class MockOccEndpointsService {
+  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+    return this.getEndpoint(endpoint);
+  }
 
-describe('OccClaimsService', () => {
+  getEndpoint(url: string) {
+    return url;
+  }
+}
+
+describe('OccClaimAdapter', () => {
   let adapter: OccClaimAdapter;
   let httpMock: HttpTestingController;
-
+  let occEndpointService: OccEndpointsService;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
         OccClaimAdapter,
-        { provide: OccConfig, useValue: MockOccModuleConfig },
+        { provide: OccEndpointsService, useClass: MockOccEndpointsService },
       ],
     });
 
     adapter = TestBed.get(OccClaimAdapter);
     httpMock = TestBed.get(HttpTestingController);
+    occEndpointService = TestBed.get(OccEndpointsService);
+    spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -53,37 +54,37 @@ describe('OccClaimsService', () => {
     it('should fetch user Claims', async(() => {
       adapter.getClaims(userId).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url === usersEndpoint + `/${userId}` + claimsEndpoint &&
-          req.method === 'GET'
-        );
+        return req.url === claimsEndpoint && req.method === 'GET';
       }, `GET method and url`);
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(claimsEndpoint, {
+        userId,
+      });
     }));
   });
 
   describe('getClaim', () => {
     it('get specified claim by id', async(() => {
-      adapter.getClaim(userId, claimNumber).subscribe();
+      adapter.getClaim(userId, claimId).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url ===
-            usersEndpoint + `/${userId}` + claimsEndpoint + `/${claimNumber}` &&
-          req.method === 'GET'
-        );
+        return req.url === claimEndpoint && req.method === 'GET';
       }, `GET method and url`);
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(claimEndpoint, {
+        userId,
+        claimId,
+      });
     }));
   });
 
   describe('deleteClaim', () => {
     it('delete specified claim by id', async(() => {
-      adapter.deleteClaim(userId, claimNumber).subscribe();
+      adapter.deleteClaim(userId, claimId).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url ===
-            usersEndpoint + `/${userId}` + claimsEndpoint + `/${claimNumber}` &&
-          req.method === 'DELETE'
-        );
+        return req.url === claimEndpoint && req.method === 'DELETE';
       }, `DELETE method and url`);
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(claimEndpoint, {
+        userId,
+        claimId,
+      });
     }));
   });
 
@@ -91,16 +92,14 @@ describe('OccClaimsService', () => {
     it('create claim for specified policyId and contractId', async(() => {
       adapter.createClaim(userId, policyNumber, contractNumber).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url ===
-            usersEndpoint +
-              `/${userId}` +
-              claimsEndpoint +
-              `/create?contractId=` +
-              `${contractNumber}&policyId=` +
-              `${policyNumber}` && req.method === 'POST'
-        );
+        return req.url === createClaimEndpoint && req.method === 'POST';
       }, `POST method and url`);
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        createClaimEndpoint,
+        {
+          userId,
+        }
+      );
     }));
   });
 });
