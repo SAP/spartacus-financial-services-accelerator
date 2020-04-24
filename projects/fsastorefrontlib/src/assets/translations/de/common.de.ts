@@ -57,6 +57,7 @@ export const fscommon = {
       'Sie haben zur Zeit keine Nachrichten für die ausgewählte Gruppe',
     modifyPlan: 'Plan ändern',
     thankYou: 'Vielen Dank!',
+    coveredWith: '[DE] Covered with',
     yearPerformanse: 'Jahresperformance',
     yearsPerformanse: 'Jahresperformance',
     riskAndReturningRate: 'Risiko & Rendite Rating',
