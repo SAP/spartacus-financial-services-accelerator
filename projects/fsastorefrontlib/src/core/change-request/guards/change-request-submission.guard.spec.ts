@@ -53,11 +53,12 @@ describe(`ChangeRequestSubmissionGuard`, () => {
     service = TestBed.get(ChangeRequestService as Type<ChangeRequestService>);
     routing = TestBed.get(RoutingService as Type<RoutingService>);
 
-    spyOn(service, 'getChangeRequest').and.returnValue(of(mockChangeRequest));
     spyOn(routing, 'go').and.stub();
   });
 
   it(`should redirect to the homepage when change request is submitted`, () => {
+    mockChangeRequest.requestStatus = ChangeRequestStatus.SUBMITTED;
+    spyOn(service, 'getChangeRequest').and.returnValue(of(mockChangeRequest));
     let result;
     guard
       .canActivate()
@@ -69,6 +70,7 @@ describe(`ChangeRequestSubmissionGuard`, () => {
 
   it(`should not redirect to the homepage when change request is not submitted`, () => {
     mockChangeRequest.requestStatus = ChangeRequestStatus.REFERRED;
+    spyOn(service, 'getChangeRequest').and.returnValue(of(mockChangeRequest));
     let result;
     guard
       .canActivate()

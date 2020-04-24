@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
     FSStorefrontModule.withConfig({
       backend: {
         occ: {
+          prefix: '/occ/v2/',
           baseUrl: environment.occBaseUrl
         }
       },
