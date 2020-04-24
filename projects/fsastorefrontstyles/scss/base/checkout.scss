@@ -27,6 +27,18 @@
   @include media-breakpoint-down(sm) {
     text-align: center;
   }
+  .info-icon {
+    &:before {
+      background-color: var(--cx-color-text);
+      border-radius: 50%;
+      font-size: 35px;
+      color: var(--cx-color-1);
+      width: 56px;
+      height: 56px;
+      display: block;
+      text-align: center;
+    }
+  }
 }
 .overflow-box {
   height: 220px;
