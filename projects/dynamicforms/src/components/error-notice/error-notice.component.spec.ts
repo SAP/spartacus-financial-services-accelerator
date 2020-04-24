@@ -1,15 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { DynamicFormsConfig } from '../../core/config/form-config';
 import { ErrorNoticeComponent } from './error-notice.component';
 import { of } from 'rxjs';
 import { FieldConfig } from '../../core/models';
-
-class MockOccFormService {}
 
 class MockLanguageService {
   getActive() {
@@ -35,14 +31,6 @@ const localizedFieldConfig: FieldConfig = {
   },
 };
 
-const mockFormGroup = new FormGroup({
-  testGroup: new FormControl(),
-});
-
-const mockDynamicFormsConfig: DynamicFormsConfig = {
-  dynamicForms: {},
-};
-
 describe('ErrorNoticeComponent', () => {
   let component: ErrorNoticeComponent;
   let fixture: ComponentFixture<ErrorNoticeComponent>;
@@ -56,14 +44,9 @@ describe('ErrorNoticeComponent', () => {
       declarations: [ErrorNoticeComponent],
       imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
-        { provide: OccMockFormService, useClass: MockOccFormService },
         {
           provide: LanguageService,
           useValue: mockLanguageService,
-        },
-        {
-          provide: DynamicFormsConfig,
-          useValue: mockDynamicFormsConfig,
         },
       ],
     }).compileComponents();
@@ -72,7 +55,6 @@ describe('ErrorNoticeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ErrorNoticeComponent);
     component = fixture.componentInstance;
-    component.group = mockFormGroup;
     el = fixture.debugElement;
     fixture.detectChanges();
   });
