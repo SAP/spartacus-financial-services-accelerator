@@ -16,14 +16,22 @@ class MockLanguageService {
     return of('en');
   }
 }
+
+const fieldType = 'inut';
 const defaultErrorMessage = 'Test string';
 const enErrorMessage = 'En test string';
 
-const mockParentConfig: FieldConfig = {
-  type: 'error',
+const defaultFieldConfig: FieldConfig = {
+  type: fieldType,
   error: {
-    default: 'Test string',
-    en: 'En test string',
+    default: defaultErrorMessage,
+  },
+};
+
+const localizedFieldConfig: FieldConfig = {
+  type: fieldType,
+  error: {
+    en: enErrorMessage,
   },
 };
 
@@ -74,14 +82,14 @@ describe('ErrorNoticeComponent', () => {
   });
 
   it('should set default errorMessage', () => {
-    component.parentConfig = mockParentConfig;
-    component.errorMessage = mockParentConfig.error.default;
+    component.parentConfig = defaultFieldConfig;
+    component.ngOnInit();
     expect(component.errorMessage).toEqual(defaultErrorMessage);
   });
 
   it('should set english error message', () => {
-    component.parentConfig = mockParentConfig;
-    component.errorMessage = mockParentConfig.error.en;
+    component.parentConfig = localizedFieldConfig;
+    component.ngOnInit();
     expect(component.errorMessage).toEqual(enErrorMessage);
   });
 
