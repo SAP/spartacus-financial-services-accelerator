@@ -4,14 +4,10 @@ import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { DynamicFormsConfig, CssClass } from '../../core/config/form-config';
+import { DynamicFormsConfig } from '../../core/config/form-config';
 import { ErrorNoticeComponent } from './error-notice.component';
 import { of } from 'rxjs';
 import { FieldConfig } from '../../core/models';
-
-const mockCssClass: CssClass = {
-  validatorMessageWrapper: 'testErrorClass',
-};
 
 class MockOccFormService {}
 
@@ -20,12 +16,15 @@ class MockLanguageService {
     return of('en');
   }
 }
-const enErrorMessage = 'En test string';
 const defaultErrorMessage = 'Test string';
+const enErrorMessage = 'En test string';
 
 const mockParentConfig: FieldConfig = {
   type: 'error',
-  error: {},
+  error: {
+    default: 'Test string',
+    en: 'En test string',
+  },
 };
 
 const mockFormGroup = new FormGroup({
@@ -33,10 +32,7 @@ const mockFormGroup = new FormGroup({
 });
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
-  dynamicForms: {
-    cssClass: mockCssClass,
-    components: {},
-  },
+  dynamicForms: {},
 };
 
 describe('ErrorNoticeComponent', () => {
@@ -77,24 +73,20 @@ describe('ErrorNoticeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should render textarea component', () => {
-    const errorComponent = el.query(By.css('.testErrorClass')).nativeElement;
-    expect(errorComponent).toBeTruthy();
-  });
-
   it('should set default errorMessage', () => {
     component.parentConfig = mockParentConfig;
-    mockParentConfig.error.default = defaultErrorMessage;
-    component.ngOnInit();
-    component.ngOnDestroy();
+    component.errorMessage = mockParentConfig.error.default;
     expect(component.errorMessage).toEqual(defaultErrorMessage);
   });
 
   it('should set english error message', () => {
     component.parentConfig = mockParentConfig;
-    mockParentConfig.error.en = enErrorMessage;
-    component.ngOnInit();
-    component.ngOnDestroy();
-    expect(component.errorMessage).toEqual('En test string');
+    component.errorMessage = mockParentConfig.error.en;
+    expect(component.errorMessage).toEqual(enErrorMessage);
+  });
+
+  it('should render error component', () => {
+    const errorComponent = el.query(By.css('.px-4')).nativeElement;
+    expect(errorComponent).toBeTruthy();
   });
 });

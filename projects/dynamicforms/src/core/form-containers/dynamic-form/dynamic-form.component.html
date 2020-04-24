@@ -1,6 +1,6 @@
 <ng-container *ngIf="form">
   <form
-    [ngClass]="formConfig.dynamicForms.cssClass.form"
+    [ngClass]="config.cssClass"
     [formGroup]="form"
     (submit)="handleSubmit($event)"
   >

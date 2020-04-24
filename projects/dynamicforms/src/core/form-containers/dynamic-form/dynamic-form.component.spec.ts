@@ -26,7 +26,6 @@ export class MockDynamicFieldDirective {
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {
-    cssClass: {},
     components: {},
   },
 };

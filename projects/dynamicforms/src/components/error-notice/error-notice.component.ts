@@ -31,10 +31,4 @@ export class ErrorNoticeComponent extends AbstractFormComponent
         .subscribe()
     );
   }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
 }
