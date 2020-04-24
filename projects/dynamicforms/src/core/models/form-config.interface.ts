@@ -20,6 +20,7 @@ export interface FieldConfig {
   label?: LocalizedString;
   options?: FieldOption[];
   cssClass?: string;
+  gridClass?: string;
   depends?: string[];
   apiUrl?: string;
   placeholder?: string;
