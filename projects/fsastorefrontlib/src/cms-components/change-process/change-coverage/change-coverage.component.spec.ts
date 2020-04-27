@@ -217,10 +217,25 @@ describe('ChangeCoverageComponent', () => {
     expect(component.potentialCoverages[0].coverageIsIncluded).toEqual(false);
   });
 
-  it('should execute simulation', () => {
+  it('should not execute simulation if nothing is changed', () => {
     spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
       of(mockChangeRequest)
     );
+
+    component.ngOnInit();
+    component.simulateChanges(mockChangeRequest);
+    expect(
+      mockChangeRequestService.simulateChangeRequest
+    ).not.toHaveBeenCalled();
+  });
+
+  it('should execute simulation if policy has been changed', () => {
+    spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
+      of(mockChangeRequest)
+    );
+
+    component.potentialCoverages =
+      mockChangeRequest.insurancePolicy.optionalProducts;
 
     component.ngOnInit();
     component.simulateChanges(mockChangeRequest);

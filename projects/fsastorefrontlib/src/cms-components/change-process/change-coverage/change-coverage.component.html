@@ -48,6 +48,7 @@
     </div>
     <div class="col-12 col-md-5 offset-0 offset-md-2 pb-2">
       <button
+        [disabled]="!isPolicyChanged()"
         class="primary-button btn-block"
         (click)="simulateChanges(changeRequest)"
       >

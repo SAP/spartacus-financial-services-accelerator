@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
@@ -72,23 +71,31 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
   }
 
   simulateChanges(changeRequestData) {
-    const optionalProducts = [];
-    this.potentialCoverages.forEach(coverage => {
-      if (coverage.coverageIsIncluded) {
-        optionalProducts.push({
-          coverageIsIncluded: coverage.coverageIsIncluded,
-          coverageProduct: {
-            code: coverage.coverageProduct.code,
-          },
-        });
-      }
-    });
-    this.simulateChangeRequest({
-      requestId: changeRequestData.requestId,
-      insurancePolicy: {
-        optionalProducts: optionalProducts,
-      },
-      configurationSteps: changeRequestData.configurationSteps,
+    if (this.isPolicyChanged()) {
+      const optionalProducts = [];
+      this.potentialCoverages.forEach(coverage => {
+        if (coverage.coverageIsIncluded) {
+          optionalProducts.push({
+            coverageIsIncluded: coverage.coverageIsIncluded,
+            coverageProduct: {
+              code: coverage.coverageProduct.code,
+            },
+          });
+        }
+      });
+      this.simulateChangeRequest({
+        requestId: changeRequestData.requestId,
+        insurancePolicy: {
+          optionalProducts: optionalProducts,
+        },
+        configurationSteps: changeRequestData.configurationSteps,
+      });
+    }
+  }
+
+  isPolicyChanged() {
+    return this.potentialCoverages.find(coverage => {
+      return coverage.coverageIsIncluded;
     });
   }
 }
