@@ -16,14 +16,16 @@
           {{ pagination.totalCount }}
         </div>
       </ng-container>
-      <div class="col-12 mb-5 d-lg-none">
-        <button
-          class="action-button btn-block"
-          (click)="setActiveAgentIndex(-1)"
-        >
-          {{ 'common.back' | cxTranslate }}
-        </button>
-      </div>
+      <ng-container *ngIf="selectedIndex > -1">
+        <div class="col-12 mb-5 d-lg-none">
+          <button
+            class="action-button btn-block"
+            (click)="setActiveAgentIndex(-1)"
+          >
+            {{ 'common.back' | cxTranslate }}
+          </button>
+        </div>
+      </ng-container>
       <div class="col-lg-6 col-12 mb-5">
         <div class="agent-list">
           <ng-container *ngFor="let agent of results.agents; let i = index">
