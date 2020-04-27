@@ -184,7 +184,7 @@ describe('ChangeCoverageComponent', () => {
     expect(mockUserRequestNavigationService.continue).toHaveBeenCalled();
   });
 
-  it('should add coverage', () => {
+  it('should add coverage and execute simulation', () => {
     component.potentialCoverages =
       mockChangeRequest.insurancePolicy.optionalProducts;
     const coverage = {
@@ -197,7 +197,9 @@ describe('ChangeCoverageComponent', () => {
       of(mockChangeRequest)
     );
     component.addCoverage(coverage);
+    component.simulateChanges(mockChangeRequest);
     expect(component.potentialCoverages[0].coverageIsIncluded).toEqual(true);
+    expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalled();
   });
 
   it('should remove coverage', () => {
@@ -217,13 +219,15 @@ describe('ChangeCoverageComponent', () => {
     expect(component.potentialCoverages[0].coverageIsIncluded).toEqual(false);
   });
 
-  it('should execute simulation', () => {
+  it('should not execute simulation if nothing is changed', () => {
     spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
       of(mockChangeRequest)
     );
 
     component.ngOnInit();
     component.simulateChanges(mockChangeRequest);
-    expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalled();
+    expect(
+      mockChangeRequestService.simulateChangeRequest
+    ).not.toHaveBeenCalled();
   });
 });
