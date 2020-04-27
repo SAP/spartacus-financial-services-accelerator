@@ -5,7 +5,6 @@ header {
   color: var(--cx-color-text);
   background-color: var(--cx-color-1);
   position: relative;
-  z-index: 1;
   @include box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 0.3);
   @include media-breakpoint-down(md) {
     background-color: var(--cx-color-text);
