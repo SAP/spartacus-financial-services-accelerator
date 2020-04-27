@@ -13,6 +13,11 @@
           text-decoration: underline;
         }
       }
+      @include media-breakpoint-down(md) {
+        &:not(.active) {
+          display: none;
+        }
+      }
       .agent-name {
         cursor: pointer;
         &:hover {
@@ -38,5 +43,11 @@
   }
   cx-pagination {
     display: inline-flex;
+  }
+  .cx-store-map {
+    @include media-breakpoint-down(md) {
+      height: 30rem;
+      width: 100%;
+    }
   }
 }
