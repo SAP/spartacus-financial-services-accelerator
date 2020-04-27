@@ -90,6 +90,38 @@
           </div>
         </div>
       </ng-container>
+      <ng-container *ngIf="entries[0].product?.classifications">
+        <div class="row mx-3 py-3 no-gutters">
+          <div class="col-12 col-md-2 align-self-center">
+            <div class="info-icon p-3 d-inline-flex"></div>
+          </div>
+          <div class="col-12 col-md-5 align-self-center">
+            <h6>
+              {{ 'fscommon.coveredWith' | cxTranslate }}
+              {{ entries[0].product?.cartDisplayName }}
+            </h6>
+          </div>
+          <div class="col-12 col-md-5 align-self-center text-center">
+            <ng-container
+              *ngFor="
+                let feature of (entries[0].product?.classifications)[0]
+                  ?.features
+              "
+            >
+              <div class="row no-gutters mb-2">
+                <div class="col-7 text-left normal-weight">
+                  {{ feature.name }}
+                </div>
+                <div class="col-5 text-right normal-weight">
+                  {{
+                    feature.featureValues[0]?.value | currency: currentCurrency
+                  }}
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </ng-container>
     </ng-container>
   </ng-container>
 </div>

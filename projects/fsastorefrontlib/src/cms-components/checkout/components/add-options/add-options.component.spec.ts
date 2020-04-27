@@ -2,7 +2,12 @@ import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { I18nTestingModule, OrderEntry, RoutingService } from '@spartacus/core';
+import {
+  I18nTestingModule,
+  OrderEntry,
+  RoutingService,
+  CurrencyService,
+} from '@spartacus/core';
 import { MediaModule, SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
@@ -36,6 +41,12 @@ class MockCartService {
 
   getEntries(): Observable<OrderEntry[]> {
     return of(mockEntries);
+  }
+}
+
+class MockCurrencyService {
+  getActive() {
+    return of('EUR');
   }
 }
 
@@ -76,6 +87,10 @@ describe('AddOptionsComponent', () => {
         {
           provide: FSCartService,
           useClass: MockCartService,
+        },
+        {
+          provide: CurrencyService,
+          useClass: MockCurrencyService,
         },
         {
           provide: RoutingService,
@@ -186,5 +201,10 @@ describe('AddOptionsComponent', () => {
     component.ngOnInit();
     component.navigateNext();
     expect(routingService.go).not.toHaveBeenCalled();
+  });
+
+  it('should set currentCurrency variable to EUR', () => {
+    component.ngOnInit();
+    expect(component.currentCurrency).toEqual('EUR');
   });
 });
