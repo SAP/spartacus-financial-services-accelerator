@@ -94,8 +94,8 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
   }
 
   isPolicyChanged() {
-    return this.potentialCoverages.find(coverage => {
-      return coverage.coverageIsIncluded;
-    });
+    return this.potentialCoverages.find(
+      coverage => coverage.coverageIsIncluded
+    );
   }
 }
