@@ -1,5 +1,5 @@
 <div
-  [hidden]="group.controls[config.name].disabled"
+  [hidden]="group.controls[config.name].disabled || config.hidden"
   class="dynamic-field"
   [formGroup]="group"
 >
