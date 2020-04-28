@@ -1,15 +1,23 @@
-<ng-container *ngIf="form">
+<ng-container *ngIf="form && config">
   <form
     [ngClass]="config.cssClass"
     [formGroup]="form"
     (submit)="handleSubmit($event)"
   >
-    <ng-container
-      *ngFor="let field of allInputs"
-      cxFormComponent
-      [config]="field"
-      [group]="field.group"
-    >
+    <ng-container *ngFor="let formGroup of config.formGroups">
+      <div
+        class="row"
+        [ngClass]="formGroup.cssClass"
+        [hidden]="form.controls[formGroup.groupCode].disabled"
+      >
+        <ng-container
+          *ngFor="let field of formGroup.fieldConfigs"
+          cxFormComponent
+          [config]="field"
+          [group]="field.group"
+        >
+        </ng-container>
+      </div>
     </ng-container>
   </form>
 </ng-container>
