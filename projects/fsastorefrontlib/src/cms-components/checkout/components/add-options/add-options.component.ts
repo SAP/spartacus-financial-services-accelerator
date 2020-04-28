@@ -79,8 +79,12 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
         .getActiveCategory()
         .pipe(
           map(categoryCode => {
+            let route = 'category';
+            if (categoryCode.includes('banking')) {
+              route = 'configureProduct';
+            }
             this.routingService.go({
-              cxRoute: 'category',
+              cxRoute: route,
               params: { code: categoryCode },
             });
           })

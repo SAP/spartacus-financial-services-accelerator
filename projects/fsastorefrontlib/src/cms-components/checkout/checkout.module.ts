@@ -212,8 +212,7 @@ const routes: Routes = [
           component: PersonalDetailsNavigationComponent,
         },
         ConfigureProductFormNavigationFlex: {
-          // TODO: change to ConfigureProductNavigationComponent once it is completed
-          component: ChooseCoverNavigationComponent,
+          component: ConfigureProductNavigationComponent,
         },
       },
     }),

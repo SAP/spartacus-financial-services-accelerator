@@ -2,11 +2,11 @@ import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSProductService } from './../../../../core/product-pricing/facade/product.service';
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { PricingData } from 'fsastorefrontlib/core/models/pricing.interface';
 
 @Component({
@@ -14,21 +14,20 @@ import { PricingData } from 'fsastorefrontlib/core/models/pricing.interface';
   templateUrl: './configure-product-navigation.component.html',
   styleUrls: ['./configure-product-navigation.component.css'],
 })
-export class ConfigureProductNavigationComponent implements OnInit {
+export class ConfigureProductNavigationComponent implements OnInit, OnDestroy {
   constructor(
     protected formService: FormDataService,
     protected activatedRoute: ActivatedRoute,
     protected routingService: RoutingService,
     protected pricingService: PricingService,
     protected productService: FSProductService,
-    protected cartService: FSCartService,
-  ) { }
+    protected cartService: FSCartService
+  ) {}
 
   subscription = new Subscription();
 
   categoryCode: string;
   pricingData: PricingData;
-
 
   ngOnInit() {
     this.subscription.add(
@@ -60,19 +59,34 @@ export class ConfigureProductNavigationComponent implements OnInit {
               this.pricingData = this.pricingService.buildPricingData(
                 JSON.parse(data.content)
               );
+              let productCode;
+              let bundleId;
+
+              if (this.categoryCode === 'banking_fixed_term_deposit') {
+                productCode = 'FTD_FIXED_TERM_DEPOSIT';
+                bundleId = 'FIXED_TERM_DEPOSIT_PRODUCT';
+              }
+
+              if (this.categoryCode === 'banking_loans') {
+                productCode = 'LO_PERSONAL_LOAN';
+                bundleId = 'LOAN_PRODUCT';
+              }
 
               this.cartService.createCartForProduct(
-                'LO_PERSONAL_LOAN',
-                'LOAN_PRODUCT',
+                productCode,
+                bundleId,
                 1,
                 this.pricingData
               );
+
+              this.routingService.go({
+                cxRoute: 'addOptions',
+              });
             }
-          })).subscribe()
+          })
+        )
+        .subscribe()
     );
-    this.routingService.go({
-      cxRoute: 'addOptions'
-    });
   }
 
   ngOnDestroy() {

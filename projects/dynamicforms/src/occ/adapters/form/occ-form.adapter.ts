@@ -33,7 +33,7 @@ export class OccFormAdapter implements FormAdapter {
     }
     return this.http
       .post<YFormData>(url, formData.content, { params: params })
-      .pipe(catchError((error: any) => throwError(error.json())));
+      .pipe(catchError((error: any) => throwError(error)));
   }
 
   updateFormData(formData: YFormData): Observable<YFormData> {

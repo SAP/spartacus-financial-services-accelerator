@@ -107,6 +107,20 @@ export const fscommon = {
       banking_loans: '[DE] Loan',
       banking_fixed_term_deposit: '[DE] Fixed Term Deposit',
     },
+    useConfigurator:
+      '[DE] Interested in how great our offer is? Use the configurator, adjust it to your needs and find out!',
+    configurator: {
+      numberOfApplicants: '[DE] Number of Applicants',
+      'loan-amount': '[DE] Loan Amount',
+      loanStartDate: '[DE] Loan Start Date',
+      'loan-term': '[DE] Loan Term',
+      'repayment-frequency': '[DE] Repayment Frequency',
+      loanPurpose: '[DE] Loan Purpose',
+      'term-amount': '[DE] Term Amount',
+      'deposit-term': '[DE] Deposit Term',
+      'maturity-option': '[DE] Maturity Option',
+      startDate: '[DE] Start Date',
+    },
     pleaseSelect: 'Wählen Sie:',
     userIdentification: {
       title: 'User Identifizierung',

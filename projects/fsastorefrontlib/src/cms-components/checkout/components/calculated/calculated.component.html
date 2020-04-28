@@ -1,4 +1,63 @@
-blaaaaaa
-<ng-template *ngIf="product$ | async as product">
-    {{product | json}}
+<ng-container *ngIf="calculatedProductData$ | async as productData">
+  <ng-container *ngIf="productData.price; else useConfigurator">
+    <div class="short-overview">
+      <h2 class="section-header-heading mb-0">
+        {{ productData.cartDisplayName }}
+      </h2>
+      <div class="short-overview-content">
+        <ng-container *ngIf="pricingData | async as pd">
+          <div
+            *ngFor="let attr of pd.priceAttributeGroups[0]?.priceAttributes"
+            class="short-overview-item row"
+          >
+            <div class="short-overview-title col-7">
+              {{ 'fscommon.configurator.' + attr.key | cxTranslate }}:
+            </div>
+            <div class="short-overview-value col-5">
+              {{ attr.value }}
+            </div>
+          </div>
+        </ng-container>
+        <div
+          *ngFor="let chargeEntry of productData.price?.oneTimeChargeEntries"
+          class="short-overview-item row"
+        >
+          <div class="short-overview-title col-7">{{ chargeEntry.name }}:</div>
+          <ng-container *ngIf="chargeEntry.chargeInformation">
+            <div class="short-overview-value col-5">
+              {{ chargeEntry.chargeInformation }}
+            </div>
+          </ng-container>
+          <ng-container *ngIf="!chargeEntry.chargeInformation">
+            <div class="short-overview-value col-5">
+              {{ chargeEntry.price.formattedValue }}
+            </div>
+          </ng-container>
+        </div>
+        <div class="highlighted border-top border-color-3 row">
+          <div class="short-overview-title col-6">
+            {{ 'fscommon.totalPrice' | cxTranslate }}:
+          </div>
+          <div class="short-overview-value col-6">
+            {{
+              (productData.price?.oneTimeChargeEntries)[0]?.price
+                ?.formattedValue
+            }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+</ng-container>
+
+<ng-template #useConfigurator>
+  <div class="short-overview">
+    <h2 class="section-header-heading mb-0">
+      {{ 'fscommon.category.' + categoryCode | cxTranslate }} Application
+    </h2>
+    <p>
+      {{ 'fscommon.useConfigurator' | cxTranslate }}
+    </p>
+    <div class="highlighted border-top border-color-3 row"></div>
+  </div>
 </ng-template>

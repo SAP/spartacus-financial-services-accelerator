@@ -1,4 +1,10 @@
-import { Component, Input, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  Input,
+  ChangeDetectionStrategy,
+  OnInit,
+  OnDestroy,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CmsConfig, RoutingService } from '@spartacus/core';
 import { FSCartService } from '../../../core/cart/facade';
@@ -68,7 +74,7 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
                   this.productPrice = oneTimeChargeEntry.price.formattedValue;
                 }
               });
-              if(this.billingTimes) {
+              if (this.billingTimes) {
                 this.panelItemEntries = this.billingTimes.map(billingTime => {
                   return product.price.oneTimeChargeEntries.find(
                     entry => entry.billingTime.code === billingTime.code

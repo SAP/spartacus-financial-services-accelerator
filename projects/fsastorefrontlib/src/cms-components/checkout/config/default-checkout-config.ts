@@ -38,12 +38,7 @@ export const checkoutConfig: FSCheckoutConfig = {
         name: 'fscommon.whatsIncluded',
         routeName: 'category',
         type: [],
-        restrictedCategories: [
-          // TODO: Add restrictions to both categories once configure product navigation 
-          // is implemented
-          // 'banking_loans',
-          // 'banking_fixed_term_deposit',
-        ],
+        restrictedCategories: ['banking_loans', 'banking_fixed_term_deposit'],
       },
       {
         id: 'addOptionsStep',

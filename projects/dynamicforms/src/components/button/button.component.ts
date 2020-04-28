@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AbstractFormComponent } from '../abstract-form.component';
 import { ActivatedRoute } from '@angular/router';
 import { RoutingService, LanguageService } from '@spartacus/core';
@@ -13,8 +13,8 @@ import { YFormData } from '../../core/models/form-occ.models';
   selector: 'cx-button',
   templateUrl: './button.component.html',
 })
-export class ButtonComponent extends AbstractFormComponent implements OnInit {
-
+export class ButtonComponent extends AbstractFormComponent
+  implements OnInit, OnDestroy {
   constructor(
     protected formDataService: FormDataService,
     protected activatedRoute: ActivatedRoute,
@@ -23,7 +23,7 @@ export class ButtonComponent extends AbstractFormComponent implements OnInit {
     public formConfig: DynamicFormsConfig,
     protected languageService: LanguageService
   ) {
-    super(formService, formConfig, languageService)
+    super(formService, formConfig, languageService);
   }
 
   subscription = new Subscription();
@@ -51,8 +51,11 @@ export class ButtonComponent extends AbstractFormComponent implements OnInit {
       formData.id = formDataId;
     }
     this.formDataService.submit(formData);
-    // this.subscription.add(
-    //   this.formDataService
-    //     .getSubmittedForm().subscribe());
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
