@@ -15,7 +15,7 @@
       [attr.name]="config.name"
       formControlName="{{ config.name }}"
     >
-      <option [defaultSelected]="true" disabled value="null">{{
+      <option [selected]="true" disabled value="null">{{
         'fscommon.pleaseSelect' | cxTranslate
       }}</option>
       <option
