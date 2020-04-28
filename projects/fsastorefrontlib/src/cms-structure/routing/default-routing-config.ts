@@ -5,6 +5,10 @@ export const storefrontRoutesConfig: RoutesConfig = {
     paths: ['checkout/generalInformation/:formCode'],
     paramsMapping: { formCode: 'code' },
   },
+  configureProduct: {
+    paths: ['checkout/configureProduct/:formCode'],
+    paramsMapping: { formCode: 'code' },
+  },
   category: { paths: ['checkout/c/:categoryCode'] },
   addOptions: { paths: ['checkout/add-options'] },
   checkoutPersonalDetails: {

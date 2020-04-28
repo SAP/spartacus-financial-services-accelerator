@@ -7,10 +7,10 @@
     <button
       class="btn btn-primary"
       [disabled]="config.disabled"
-      type="submit"
       [attr.name]="config.name"
+      (click)="onSubmit()"
     >
-      {{ label }}
+      {{ config.label }}
     </button>
   </div>
 </div>

@@ -44,6 +44,8 @@ export const forms = {
       event_personal_details: 'Personal Details',
       travel_personal_details: 'Personal Details',
       auto_change_car_details_form: 'Auto Information',
+      loan_details_form: 'Loan Information',
+      fixed_term_deposit_details_form: 'Fixed Term Deposit Information',
     },
     definitionLoadError: 'Error occurred. Form could not be loaded.',
   },

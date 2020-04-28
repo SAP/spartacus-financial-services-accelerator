@@ -1,21 +1,23 @@
-import { DebugElement, Pipe, PipeTransform, Type } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ActivatedRoute } from '@angular/router';
-import { RouterTestingModule } from '@angular/router/testing';
+import { Pipe, PipeTransform, DebugElement, Type } from '@angular/core';
+import { FSProduct } from 'fsastorefrontlib/occ';
 import {
   CmsConfig,
-  I18nTestingModule,
   Product,
   RoutingService,
+  I18nTestingModule,
 } from '@spartacus/core';
-import { MediaModule, SpinnerModule } from '@spartacus/storefront';
-import { of } from 'rxjs';
-import { Observable } from 'rxjs/internal/Observable';
-import { FSCartService } from './../../../core/cart/facade/cart.service';
-import { FSCheckoutConfigService } from './../../../core/checkout/services/checkout-config.service';
-import { FSProductService } from './../../../core/product-pricing/facade/product.service';
-import { FSProduct } from './../../../occ/occ-models/occ.models';
-import { ComparisonTablePanelItemComponent } from './comparison-table-panel-item.component';
+import { Observable, of } from 'rxjs';
+import { ComparisonTablePanelItemComponent } from 'fsastorefrontlib/public_api';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  FSCartService,
+  FSCheckoutConfigService,
+  FSProductService,
+} from 'fsastorefrontlib/core';
+import { async } from 'rxjs/internal/scheduler/async';
+import { SpinnerModule, MediaModule } from '@spartacus/storefront';
+import { RouterTestingModule } from '@angular/router/testing';
+import { ActivatedRoute } from '@angular/router';
 
 @Pipe({
   name: 'cxUrl',

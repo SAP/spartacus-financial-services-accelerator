@@ -5,12 +5,30 @@ export const checkoutConfig: FSCheckoutConfig = {
   checkout: {
     steps: [
       {
+        id: 'configureProductStep',
+        name: 'fscommon.configureProduct',
+        routeName: 'configureProduct',
+        type: [],
+        restrictedCategories: [
+          'banking_current_account',
+          'banking_credit_card',
+          'insurances_life',
+          'insurances_auto',
+          'insurances_travel',
+          'insurances_homeowners',
+          'insurances_renters',
+          'insurances_event',
+        ],
+      },
+      {
         id: 'chooseCoverStep',
         name: 'fscommon.chooseCover',
         routeName: 'generalInformation',
         type: [],
         restrictedCategories: [
           'banking_current_account',
+          'banking_loans',
+          'banking_fixed_term_deposit',
           'banking_credit_card',
           'insurances_event',
         ],
@@ -20,7 +38,12 @@ export const checkoutConfig: FSCheckoutConfig = {
         name: 'fscommon.whatsIncluded',
         routeName: 'category',
         type: [],
-        restrictedCategories: [],
+        restrictedCategories: [
+          // TODO: Add restrictions to both categories once configure product navigation 
+          // is implemented
+          // 'banking_loans',
+          // 'banking_fixed_term_deposit',
+        ],
       },
       {
         id: 'addOptionsStep',
@@ -38,6 +61,8 @@ export const checkoutConfig: FSCheckoutConfig = {
           'insurances_auto',
           'banking_credit_card',
           'banking_current_account',
+          'banking_loans',
+          'banking_fixed_term_deposit',
         ],
       },
       {
@@ -85,6 +110,8 @@ export const checkoutConfig: FSCheckoutConfig = {
         restrictedCategories: [
           'banking_credit_card',
           'banking_current_account',
+          'banking_loans',
+          'banking_fixed_term_deposit',
         ],
       },
       {
@@ -95,6 +122,8 @@ export const checkoutConfig: FSCheckoutConfig = {
         restrictedCategories: [
           'banking_credit_card',
           'banking_current_account',
+          'banking_loans',
+          'banking_fixed_term_deposit',
         ],
       },
     ],

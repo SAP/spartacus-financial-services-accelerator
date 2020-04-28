@@ -1,14 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CmsConfig, RoutingService } from '@spartacus/core';
-import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { FSCartService } from '../../../core/cart/facade';
 import { FSCheckoutConfigService } from '../../../core/checkout/services/checkout-config.service';
 import { FSProductService } from '../../../core/product-pricing/facade/product.service';
@@ -17,6 +9,8 @@ import {
   OneTimeChargeEntry,
   PricingData,
 } from '../../../occ/occ-models';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-fs-comparison-table-panel-item',
@@ -74,11 +68,13 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
                   this.productPrice = oneTimeChargeEntry.price.formattedValue;
                 }
               });
-              this.panelItemEntries = this.billingTimes.map(billingTime => {
-                return product.price.oneTimeChargeEntries.find(
-                  entry => entry.billingTime.code === billingTime.code
-                );
-              });
+              if(this.billingTimes) {
+                this.panelItemEntries = this.billingTimes.map(billingTime => {
+                  return product.price.oneTimeChargeEntries.find(
+                    entry => entry.billingTime.code === billingTime.code
+                  );
+                });
+              }
             }
           })
         )

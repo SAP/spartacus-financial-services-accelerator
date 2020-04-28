@@ -54,6 +54,8 @@ import { QuoteReviewComponent } from './components/quote-review/quote-review.com
 import { UserIdentificationModule } from './components/user-identification/user-identification.module';
 import { CategoryStepGuard } from './guards/category-step-guard';
 import { CheckoutStepGuard } from './guards/checkout-step-guard';
+import { CalculatedComponent } from './components/calculated/calculated.component';
+import { ConfigureProductNavigationComponent } from './components/configure-product-navigation/configure-product-navigation.component';
 
 const routes: Routes = [
   {
@@ -62,6 +64,15 @@ const routes: Routes = [
     data: {
       cxRoute: 'generalInformation',
       pageLabel: 'generalInformationForm',
+    },
+    component: PageLayoutComponent,
+  },
+  {
+    path: null,
+    canActivate: [CmsPageGuard, CategoryStepGuard],
+    data: {
+      cxRoute: 'configureProduct',
+      pageLabel: 'configureProductForm',
     },
     component: PageLayoutComponent,
   },
@@ -173,6 +184,9 @@ const routes: Routes = [
         MiniCartFlex: {
           component: MiniCartComponent,
         },
+        CalculatedFlex: {
+          component: CalculatedComponent,
+        },
         QuoteReviewFlex: {
           component: QuoteReviewComponent,
         },
@@ -197,6 +211,10 @@ const routes: Routes = [
         PersonalDetailsFormNavigationFlex: {
           component: PersonalDetailsNavigationComponent,
         },
+        ConfigureProductFormNavigationFlex: {
+          // TODO: change to ConfigureProductNavigationComponent once it is completed
+          component: ChooseCoverNavigationComponent,
+        },
       },
     }),
   ],
@@ -208,6 +226,8 @@ const routes: Routes = [
     PersonalDetailsNavigationComponent,
     OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
+    CalculatedComponent,
+    ConfigureProductNavigationComponent,
   ],
   exports: [
     I18nModule,
@@ -219,6 +239,8 @@ const routes: Routes = [
     BindQuoteDialogComponent,
     FinalReviewComponent,
     OrderConfirmationComponent,
+    CalculatedComponent,
+    ConfigureProductNavigationComponent,
   ],
   entryComponents: [
     AddOptionsComponent,
@@ -230,6 +252,8 @@ const routes: Routes = [
     OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
     MiniCartComponent,
+    CalculatedComponent,
+    ConfigureProductNavigationComponent,
   ],
   providers: [
     FSCartService,

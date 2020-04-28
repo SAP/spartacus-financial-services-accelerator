@@ -23,9 +23,9 @@ export const forms = {
       claimInfo: '[DE] Claim Information',
     },
     contactType: {
-      title: '[DE]Contact type',
-      email: '[DE]Email',
-      call: '[DE]Call',
+      title: '[DE] Contact type',
+      email: '[DE] Email',
+      call: '[DE] Call',
     },
     subject: '[DE] Subject',
     optional: '(Optional)',
@@ -41,6 +41,8 @@ export const forms = {
       insurance_personal_details: 'Persönliche Angaben',
       event_personal_details: 'Persönliche Angaben',
       travel_personal_details: 'Persönliche Angaben',
+      loan_details_form: '[DE] Loan Information',
+      fixed_term_deposit_details_form: '[DE] Fixed Term Deposit Information',
     },
   },
 };
