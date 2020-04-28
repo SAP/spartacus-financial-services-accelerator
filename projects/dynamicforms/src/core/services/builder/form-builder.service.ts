@@ -32,14 +32,14 @@ export class FormBuilderService {
             form
           );
         }
-        if (formGroup.dependsOn) {
-          this.fieldDependencyResolverService.resolveFormControlDependencies(
-            formGroup.dependsOn,
-            fieldControl,
-            form
-          );
-        }
       });
+      if (formGroup.dependsOn) {
+        this.fieldDependencyResolverService.resolveFormControlDependencies(
+          formGroup.dependsOn,
+          controlGroup,
+          form
+        );
+      }
     });
     return form;
   }

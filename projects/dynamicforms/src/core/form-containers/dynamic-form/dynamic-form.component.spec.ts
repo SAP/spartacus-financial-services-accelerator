@@ -1,16 +1,16 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DynamicFormComponent } from './dynamic-form.component';
 import { Directive, Input } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { BehaviorSubject, of } from 'rxjs';
+import { DynamicFormsConfig } from '../../config';
+import { YFormData } from '../../models';
 import {
   FieldConfig,
   FormDefinition,
 } from '../../models/form-config.interface';
-import { FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
-import { BehaviorSubject, of } from 'rxjs';
 import { FormDataService } from '../../services/data/form-data.service';
-import { YFormData } from '../../models';
-import { DynamicFormsConfig } from '../../config';
+import { DynamicFormComponent } from './dynamic-form.component';
 
 @Directive({
   // tslint:disable
@@ -114,7 +114,7 @@ describe('DynamicFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should not create for if config is not defined', () => {
+  it('should not create form if config is not defined', () => {
     spyOn(mockFormBuilderService, 'createForm').and.callThrough();
     component.config = undefined;
     component.ngOnInit();
