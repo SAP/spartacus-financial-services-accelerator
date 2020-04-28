@@ -1,4 +1,10 @@
-import { Component, HostBinding, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  OnInit,
+  OnDestroy,
+  Injector,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from '../core/models/form-config.interface';
 import { DynamicFormsConfig } from '../core/config/form-config';
@@ -6,13 +12,15 @@ import { OccMockFormService } from '../occ/services/occ-mock-form.service';
 import { LanguageService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { PrefilResolver } from '../core/resolver/prefil-resolver.interface';
 
 @Component({ template: '' })
 export class AbstractFormComponent implements OnInit, OnDestroy {
   constructor(
     protected formService: OccMockFormService,
     protected formConfig: DynamicFormsConfig,
-    protected languageService: LanguageService
+    protected languageService: LanguageService,
+    private injector: Injector
   ) {}
 
   @HostBinding('class') hostComponentClass: string;
@@ -27,6 +35,25 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
     if (this.config && this.config.cssClass) {
       this.hostComponentClass = `${this.hostComponentClass} ${this.config.cssClass}`;
     }
+
+    if (this.config.prefilValue) {
+      const prefilResolver = this.injector.get<PrefilResolver>(
+        this.formConfig.dynamicForms.prefil[
+          this.config.prefilValue.targetObject
+        ].prefilResolver
+      );
+      if (prefilResolver) {
+        prefilResolver
+          .getFieldValue(this.config.prefilValue.targetValue)
+          .subscribe(value => {
+            if (value) {
+              this.group.get(this.config.name).setValue(value);
+            }
+          })
+          .unsubscribe();
+      }
+    }
+
     this.subscription.add(
       this.languageService
         .getActive()

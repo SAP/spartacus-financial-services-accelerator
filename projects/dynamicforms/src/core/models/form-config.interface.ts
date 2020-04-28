@@ -25,12 +25,17 @@ export interface FieldConfig {
   apiUrl?: string;
   placeholder?: string;
   type: string;
-  validation?: ValidatorFn[]; // TO-DO Remove validation attribute once all definitions are moved to back-end
   value?: any;
   hidden?: boolean;
+  prefilValue?: PrefilValue;
   error?: LocalizedString;
   validations?: ValidatorFunction[];
   dependsOn?: ControlDependency[];
+}
+
+export interface PrefilValue {
+  targetObject: string;
+  targetValue: string;
 }
 
 export interface ControlDependency {

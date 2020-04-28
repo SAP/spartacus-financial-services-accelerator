@@ -8,6 +8,8 @@ import { TimeComponent } from '../../components/time/time.component';
 import { TitleComponent } from '../../components/title/title.component';
 import { DefaultFormValidators } from './../../util/validators/default-form-validators';
 import { DynamicFormsConfig } from './form-config';
+import { UserPrefilResolver } from '../resolver/user-prefil-resolver';
+import { CartPrefilResolver } from '../resolver/cart-prefil-resolver';
 
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
@@ -73,6 +75,14 @@ export const defaultFormConfig: DynamicFormsConfig = {
       },
       postalCode: {
         validator: DefaultFormValidators.postalCode,
+      },
+    },
+    prefil: {
+      user: {
+        prefilResolver: UserPrefilResolver,
+      },
+      cart: {
+        prefilResolver: CartPrefilResolver,
       },
     },
   },
