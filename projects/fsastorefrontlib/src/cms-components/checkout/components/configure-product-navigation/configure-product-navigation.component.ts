@@ -1,3 +1,4 @@
+import { PricingData } from './../../../../occ/occ-models/form-pricing.interface';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSProductService } from './../../../../core/product-pricing/facade/product.service';
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
@@ -7,7 +8,6 @@ import { ActivatedRoute } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PricingData } from 'fsastorefrontlib/core/models/pricing.interface';
 
 @Component({
   selector: 'cx-fs-configure-product-navigation',
