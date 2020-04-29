@@ -6,6 +6,7 @@ import { defaultFormConfig } from './core/config/default-form-config';
 import { DynamicFormsConfig } from './core/config/form-config';
 import { ComponentsModule } from './components/components.module';
 import { FormDefinitionStoreModule } from './core/store/form-definition-store.module';
+import { YFormCMSModule } from './cms-components/yform-cms/yform-cms.module';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { FormDefinitionStoreModule } from './core/store/form-definition-store.mo
     I18nModule,
     FormContainerModule,
     FormDefinitionStoreModule,
+    YFormCMSModule,
     ConfigModule.withConfig(defaultFormConfig),
     ComponentsModule,
   ],

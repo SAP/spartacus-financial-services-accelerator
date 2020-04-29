@@ -4,6 +4,7 @@ import {
   CmsBannerComponentMedia,
   CmsComponent,
 } from '@spartacus/core';
+import { YFormCmsComponent } from 'projects/dynamicforms/src/cms-components/cms-component.models';
 
 export interface CmsProductFeatureComponent extends CmsComponent {
   title?: string;
@@ -60,11 +61,8 @@ export interface CMSCustomComponentsContainer extends CmsComponent {
   styleCss?: string;
 }
 
-export interface CMSFormSubmitComponent extends CmsComponent {
-  uid?: string;
+export interface CMSFormSubmitComponent extends YFormCmsComponent {
   category: Category;
-  formId: string;
-  applicationId: string;
 }
 
 export interface CmsAgentRootComponent extends CmsComponent {
