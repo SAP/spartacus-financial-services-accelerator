@@ -91,8 +91,9 @@ export class QuoteService {
       const dataId = insuranceQuote.quoteDetails.entry
         .filter(details => details.key === 'formId')
         .map(mapEntry => mapEntry.value)[0];
+      this.formDataService.loadFormData(dataId);
       this.formDataService
-        .getFormData(dataId)
+        .getFormData()
         .pipe(
           map(formData => {
             if (formData.formDefinition) {

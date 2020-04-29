@@ -1,18 +1,22 @@
-import { LoaderState } from '@spartacus/core';
-
-export const FORM_DEFINITION_FEATURE = 'formDefinition';
+export const FORM_FEATURE = 'form';
 
 export const FORM_DEFINITION_DATA = '[Form Definition] Form Definition Data';
 
-export interface StateWithFormDefinition {
-  [FORM_DEFINITION_FEATURE]: FormDefinitionsState;
+export interface StateWithForm {
+  [FORM_FEATURE]: FormsState;
 }
 
-export interface FormDefinitionsState {
-  formDefinition: LoaderState<FormDefinitionState>;
+export interface FormsState {
+  formDefinition: FormDefinitionState;
+  formData: FormDataState;
 }
 
 export interface FormDefinitionState {
+  loaded: boolean;
+  content: {};
+}
+
+export interface FormDataState {
   loaded: boolean;
   content: {};
 }

@@ -7,7 +7,7 @@ import {
 import { FormDataService } from '@fsa/dynamicforms';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { BillingTimeConnector } from '../../../core/product-pricing/connectors/billing-time.connector';
 import { PricingService } from '../../../core/product-pricing/facade/pricing.service';
 import {
@@ -54,7 +54,8 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
         .getCurrentFormData()
         .pipe(
           map(currentForm => currentForm.id),
-          switchMap(formDataId => this.formDataService.getFormData(formDataId))
+          tap(formDataId => this.formDataService.loadFormData(formDataId)),
+          switchMap(_ => this.formDataService.getFormData())
         )
         .subscribe(formData => {
           if (formData.content) {

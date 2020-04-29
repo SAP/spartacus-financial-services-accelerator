@@ -18,8 +18,7 @@ export class OccFormAdapter implements FormAdapter {
     protected occEndpointService: OccEndpointsService
   ) {}
 
-  createFormData(formData: YFormData): Observable<YFormData> {
-    const url = this.getYFormsEndpoint() + '/formData';
+  saveFormData(formData: YFormData): Observable<YFormData> {
     let params = new HttpParams({
       fromString:
         FULL_PARAMS +
@@ -30,27 +29,18 @@ export class OccFormAdapter implements FormAdapter {
     });
     if (formData.refId) {
       params = params.append('refId', formData.refId);
+    }
+
+    const url = this.getYFormsEndpoint() + '/formData';
+
+    if (formData.id) {
+      const updateUrl = url + '/' + formData.id;
+      return this.http
+        .put<YFormData>(updateUrl, formData.content, { params: params })
+        .pipe(catchError((error: any) => throwError(error.json())));
     }
     return this.http
       .post<YFormData>(url, formData.content, { params: params })
-      .pipe(catchError((error: any) => throwError(error.json())));
-  }
-
-  updateFormData(formData: YFormData): Observable<YFormData> {
-    const url = this.getYFormsEndpoint() + '/formData/' + formData.id;
-    let params = new HttpParams({
-      fromString:
-        FULL_PARAMS +
-        '&definitionId=' +
-        formData.formDefinition.formId +
-        '&applicationId=' +
-        formData.formDefinition.applicationId,
-    });
-    if (formData.refId) {
-      params = params.append('refId', formData.refId);
-    }
-    return this.http
-      .put<YFormData>(url, formData.content, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
