@@ -1,5 +1,7 @@
+import { FSProductService } from './../../../core/product-pricing/facade/product.service';
+import { FSCheckoutConfigService } from './../../../core/checkout/services/checkout-config.service';
+import { FSCartService } from './../../../core/cart/facade/cart.service';
 import { Pipe, PipeTransform, DebugElement, Type } from '@angular/core';
-import { FSProduct } from 'fsastorefrontlib/occ';
 import {
   CmsConfig,
   Product,
@@ -7,17 +9,13 @@ import {
   I18nTestingModule,
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { ComparisonTablePanelItemComponent } from 'fsastorefrontlib/public_api';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import {
-  FSCartService,
-  FSCheckoutConfigService,
-  FSProductService,
-} from 'fsastorefrontlib/core';
-import { async } from 'rxjs/internal/scheduler/async';
+
 import { SpinnerModule, MediaModule } from '@spartacus/storefront';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ActivatedRoute } from '@angular/router';
+import { FSProduct } from '../../../../src/occ/occ-models/occ.models';
+import { ComparisonTablePanelItemComponent } from './comparison-table-panel-item.component';
 
 @Pipe({
   name: 'cxUrl',
@@ -59,7 +57,7 @@ const product: FSProduct = {
   },
 };
 class MockCartService {
-  createCartForProduct(): void {}
+  createCartForProduct() {}
 }
 
 const mockCmsConfig: CmsConfig = {
@@ -109,7 +107,7 @@ describe('ComparisonTablePanelItemComponent', () => {
 
   let el: DebugElement;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         I18nTestingModule,
@@ -153,7 +151,7 @@ describe('ComparisonTablePanelItemComponent', () => {
     mockProductService = TestBed.get(FSProductService as Type<
       FSProductService
     >);
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ComparisonTablePanelItemComponent);
