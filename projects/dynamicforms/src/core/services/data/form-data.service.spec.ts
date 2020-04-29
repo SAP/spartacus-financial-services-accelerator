@@ -7,7 +7,7 @@ import { FormAdapter } from '../../connectors/form.adapter';
 import * as fromAction from '../../store/actions';
 import { reducerProvider, reducerToken } from '../../store/reducers';
 import { YFormData, YFormDefinition } from './../../models/form-occ.models';
-import { StateWithForm } from './../../store/form-definition-state';
+import { StateWithForm } from './../../store/state';
 import { FormDataService } from './form-data.service';
 
 const mockData: Observable<YFormData> = of({

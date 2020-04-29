@@ -1,5 +1,5 @@
 import * as fromAction from '../actions/';
-import { FormDataState } from '../form-definition-state';
+import { FormDataState } from '../state';
 
 export const initialState: FormDataState = {
   loaded: false,

@@ -1,9 +1,5 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
-import {
-  FormDataState,
-  FormsState,
-  StateWithForm,
-} from '../form-definition-state';
+import { FormDataState, FormsState, StateWithForm } from '../state';
 import { getFormState } from './feature.selector';
 
 const formDataContent = (state: FormDataState) => state.content;

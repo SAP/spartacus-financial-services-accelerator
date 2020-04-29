@@ -1,7 +1,7 @@
 import { InjectionToken, Provider } from '@angular/core';
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { AuthActions } from '@spartacus/core';
-import { FormsState } from '../form-definition-state';
+import { FormsState } from '../state';
 import * as fromFormData from './form-data.reducer';
 import * as fromFormDefinition from './form-definition.reducer';
 

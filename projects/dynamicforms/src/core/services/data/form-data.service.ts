@@ -5,8 +5,8 @@ import { filter, switchMap, take } from 'rxjs/operators';
 import { FormConnector } from '../../connectors/form-connector';
 import { FormStorageObject, YFormData, YFormDefinition } from '../../models';
 import * as fromAction from '../../store/actions';
-import { StateWithForm } from '../../store/form-definition-state';
 import * as fromSelector from '../../store/selectors';
+import { StateWithForm } from '../../store/state';
 
 @Injectable()
 export class FormDataService {
