@@ -1,0 +1,46 @@
+%cx-form-component {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  @include box-shadow(0px, 2px, 20px, 1px, $color-grey, 1);
+  .form-title {
+    border-top: 3px solid var(--cx-color-primary);
+    background-color: var(--cx-color-4);
+    font-size: var(--cx-h5-font-size);
+    padding: 1rem;
+    margin-bottom: 0;
+    text-align: center;
+  }
+  cx-dynamic-form {
+    form {
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+    label {
+      font-weight: var(--cx-font-weight-semi);
+      text-transform: uppercase;
+    }
+    cx-title {
+      margin-bottom: 1rem;
+      h4 {
+        font-size: var(--cx-h6-font-size);
+        color: var(--cx-color-primary);
+        font-weight: var(--cx-font-weight-semi);
+      }
+    }
+    cx-radio,
+    cx-checkbox {
+      .form-check label {
+        display: inline-flex;
+        cursor: pointer;
+        font-size: var(--cx-title-font-size);
+        text-transform: none;
+      }
+    }
+    cx-separator {
+      margin: 1rem 0;
+    }
+  }
+}
