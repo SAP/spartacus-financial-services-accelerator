@@ -1,6 +1,22 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SeparatorComponent } from './separator.component';
+import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
+import { DynamicFormsConfig } from '../../core/config/form-config';
+import { of } from 'rxjs';
+import { LanguageService } from '@spartacus/core';
+
+class MockOccFormService {}
+
+const mockDynamicFormsConfig: DynamicFormsConfig = {
+  dynamicForms: {},
+};
+
+class MockLanguageService {
+  getActive() {
+    return of('en');
+  }
+}
 
 describe('SeparatorComponent', () => {
   let component: SeparatorComponent;
@@ -9,6 +25,14 @@ describe('SeparatorComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [SeparatorComponent],
+      providers: [
+        { provide: OccMockFormService, useClass: MockOccFormService },
+        { provide: LanguageService, useClass: MockLanguageService },
+        {
+          provide: DynamicFormsConfig,
+          useValue: mockDynamicFormsConfig,
+        },
+      ],
     }).compileComponents();
   }));
 
