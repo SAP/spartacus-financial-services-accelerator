@@ -12,7 +12,6 @@ import { PricingData } from 'fsastorefrontlib/core/models/pricing.interface';
 @Component({
   selector: 'cx-fs-configure-product-navigation',
   templateUrl: './configure-product-navigation.component.html',
-  styleUrls: ['./configure-product-navigation.component.css'],
 })
 export class ConfigureProductNavigationComponent implements OnInit, OnDestroy {
   constructor(

@@ -10,7 +10,6 @@ import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'cx-fs-calculated',
   templateUrl: './calculated.component.html',
-  styleUrls: ['./calculated.component.css'],
 })
 export class CalculatedComponent implements OnInit, OnDestroy {
   constructor(
