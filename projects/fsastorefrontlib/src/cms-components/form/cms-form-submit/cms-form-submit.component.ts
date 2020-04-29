@@ -1,18 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormDataService } from '@fsa/dynamicforms';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import { Observable, Subscription } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { CMSFormSubmitComponent } from '../../../occ/occ-models';
-import { YFormCMSComponent } from 'projects/dynamicforms/src/cms-components/yform-cms/yform-cms.component';
+import { FormDataService, YFormCMSComponent } from '@fsa/dynamicforms';
 
 @Component({
-  selector: 'cx-fs-cms-category-form-submit-component',
-  templateUrl: './cms-category-form-submit.component.html',
+  selector: 'cx-fs-cms-form-submit',
+  templateUrl: './cms-form-submit.component.html',
 })
-export class CmsCategoryFormSubmitComponent extends YFormCMSComponent
+export class CmsFormSubmitComponent extends YFormCMSComponent
   implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CMSFormSubmitComponent>,
@@ -25,10 +23,9 @@ export class CmsCategoryFormSubmitComponent extends YFormCMSComponent
 
   routeParamId = 'formCode';
   pageContext: PageContext;
-  private sub = new Subscription();
 
   ngOnInit() {
-    this.sub.add(
+    this.subscription.add(
       this.activatedRoute.params
         .pipe(
           map(routeParam => {
@@ -45,11 +42,5 @@ export class CmsCategoryFormSubmitComponent extends YFormCMSComponent
         .subscribe()
     );
     this.loadFormInformation();
-  }
-
-  ngOnDestroy(): void {
-    if (this.sub) {
-      this.sub.unsubscribe();
-    }
   }
 }

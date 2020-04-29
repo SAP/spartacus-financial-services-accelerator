@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfigModule, CmsConfig, I18nModule } from '@spartacus/core';
-import { CmsCategoryFormSubmitComponent } from './cms-category-form-submit.component';
+import { CmsFormSubmitComponent } from './cms-form-submit.component';
 import { DynamicFormModule } from '@fsa/dynamicforms';
 import { SpinnerModule, PageComponentModule } from '@spartacus/storefront';
-import { YFormCMSModule } from 'projects/dynamicforms/src/cms-components/yform-cms/yform-cms.module';
 
 @NgModule({
   imports: [
@@ -13,17 +12,16 @@ import { YFormCMSModule } from 'projects/dynamicforms/src/cms-components/yform-c
     DynamicFormModule,
     SpinnerModule,
     PageComponentModule,
-    YFormCMSModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         CMSFormSubmitComponent: {
-          component: CmsCategoryFormSubmitComponent,
+          component: CmsFormSubmitComponent,
         },
       },
     }),
   ],
-  declarations: [CmsCategoryFormSubmitComponent],
-  exports: [CmsCategoryFormSubmitComponent],
-  entryComponents: [CmsCategoryFormSubmitComponent],
+  declarations: [CmsFormSubmitComponent],
+  exports: [CmsFormSubmitComponent],
+  entryComponents: [CmsFormSubmitComponent],
 })
-export class CategoryFormsModule {}
+export class CmsFormSubmitModule {}

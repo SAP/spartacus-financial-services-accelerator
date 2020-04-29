@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { YFormCmsComponent } from '../cms-component.models';
 import { FormDataService } from './../../core/services/data/form-data.service';
@@ -11,7 +11,7 @@ import { FormDefinition } from './../../core/models/form-config.interface';
   selector: 'cx-yform-cms',
   templateUrl: './yform-cms.component.html',
 })
-export class YFormCMSComponent implements OnInit {
+export class YFormCMSComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<YFormCmsComponent>,
     protected formDataService: FormDataService
@@ -26,7 +26,7 @@ export class YFormCMSComponent implements OnInit {
   > = this.formDataService.getFormDefinition();
   formData$: Observable<YFormData>;
 
-  private subscription = new Subscription();
+  subscription = new Subscription();
 
   ngOnInit() {
     this.component$ = this.componentData.data$;
@@ -57,6 +57,12 @@ export class YFormCMSComponent implements OnInit {
   getFormConfig(formDefinition) {
     if (formDefinition.content) {
       return <FormDefinition>JSON.parse(formDefinition.content);
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
   }
 }
