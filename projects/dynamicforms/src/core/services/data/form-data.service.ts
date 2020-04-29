@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, switchMap, take } from 'rxjs/operators';
-import { FormConnector } from '../../connectors/form-connector';
 import { FormStorageObject, YFormData, YFormDefinition } from '../../models';
 import * as fromAction from '../../store/actions';
 import * as fromSelector from '../../store/selectors';
@@ -13,10 +12,7 @@ export class FormDataService {
   private formsLocalStorageKey = 'dynamicFormsData';
   submittedForm = new BehaviorSubject<YFormData>(null);
 
-  constructor(
-    protected formConnector: FormConnector,
-    protected store: Store<StateWithForm>
-  ) {}
+  constructor(protected store: Store<StateWithForm>) {}
 
   // ***SHOULD BE REMOVED WITH FSA-4419***
   currentForm$: BehaviorSubject<YFormData> = new BehaviorSubject({});
@@ -135,7 +131,6 @@ export class FormDataService {
       filter(loaded => loaded),
       take(1),
       switchMap(_ => {
-        console.log('method');
         return this.store.select(fromSelector.getFormDefinition);
       })
     );

@@ -39,10 +39,7 @@ describe('Form Definition Effects', () => {
       imports: [
         HttpClientTestingModule,
         StoreModule.forRoot({}),
-        StoreModule.forFeature(
-          'formDefinition',
-          fromUserReducers.getReducers()
-        ),
+        StoreModule.forFeature('form', fromUserReducers.getReducers()),
       ],
       providers: [
         {

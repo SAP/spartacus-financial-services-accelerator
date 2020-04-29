@@ -19,6 +19,7 @@ export class OccFormAdapter implements FormAdapter {
   ) {}
 
   saveFormData(formData: YFormData): Observable<YFormData> {
+    const url = this.getYFormsEndpoint() + '/formData';
     let params = new HttpParams({
       fromString:
         FULL_PARAMS +
@@ -31,14 +32,13 @@ export class OccFormAdapter implements FormAdapter {
       params = params.append('refId', formData.refId);
     }
 
-    const url = this.getYFormsEndpoint() + '/formData';
-
     if (formData.id) {
       const updateUrl = url + '/' + formData.id;
       return this.http
         .put<YFormData>(updateUrl, formData.content, { params: params })
         .pipe(catchError((error: any) => throwError(error.json())));
     }
+
     return this.http
       .post<YFormData>(url, formData.content, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));

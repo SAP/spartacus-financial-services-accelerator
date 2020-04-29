@@ -22,6 +22,7 @@ const MockOccModuleConfig: OccConfig = {
 
 const formData: YFormData = {
   id: 'formDataId',
+  refId: 'refId',
   formDefinition: {
     formId: 'fromId',
     applicationId: 'applicationId',
@@ -54,7 +55,7 @@ describe('OccFormAdapter', () => {
   });
 
   describe('persistFormData', () => {
-    it('updateFormData', async(() => {
+    it('should update existing form data', async(() => {
       occFormAdapter.saveFormData(formData).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
@@ -70,26 +71,25 @@ describe('OccFormAdapter', () => {
         );
       }, `PUT method and url`);
     }));
+
+    it('should create new form data', async(() => {
+      occFormAdapter.saveFormData(formDataNew).subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url === '/forms/formData' &&
+          req.params.append('fields', 'FULL') &&
+          req.params.append('definitionId', formData.formDefinition.formId) &&
+          req.params.append(
+            'applicationId',
+            formData.formDefinition.applicationId
+          ) &&
+          req.params.append('formDataId', '') &&
+          req.method === 'POST'
+        );
+      }, `POST method and url`);
+    }));
   });
 
-  describe('persistFormData', () => {
-    // it('createFormData', async(() => {
-    //   occFormAdapter.saveFormData(formDataNew).subscribe();
-    //   httpMock.expectOne((req: HttpRequest<any>) => {
-    //     return (
-    //       req.url === '/forms/formData' &&
-    //       req.params.append('fields', 'FULL') &&
-    //       req.params.append('definitionId', formData.formDefinition.formId) &&
-    //       req.params.append(
-    //         'applicationId',
-    //         formData.formDefinition.applicationId
-    //       ) &&
-    //       req.params.append('formDataId', '') &&
-    //       req.method === 'POST'
-    //     );
-    //   }, `POST method and url`);
-    // }));
-  });
   describe('loadFormData', () => {
     it('loadFormData', async(() => {
       occFormAdapter.getFormData(formData.id).subscribe();
