@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { YFormCmsComponent } from '../cms-component.models';
 import { FormDataService } from './../../core/services/data/form-data.service';
@@ -17,13 +17,8 @@ export class YFormCMSComponent implements OnInit, OnDestroy {
     protected formDataService: FormDataService
   ) {}
 
-  @Input()
-  categoryCode;
-
   component$: Observable<YFormCmsComponent>;
-  formDefinition$: Observable<
-    YFormDefinition
-  > = this.formDataService.getFormDefinition();
+  formDefinition$: Observable<YFormDefinition>;
   formData$: Observable<YFormData>;
 
   subscription = new Subscription();
@@ -34,6 +29,7 @@ export class YFormCMSComponent implements OnInit, OnDestroy {
   }
 
   loadFormInformation() {
+    this.formDefinition$ = this.formDataService.getFormDefinition();
     this.subscription.add(
       this.component$
         .pipe(
@@ -58,6 +54,7 @@ export class YFormCMSComponent implements OnInit, OnDestroy {
     if (formDefinition.content) {
       return <FormDefinition>JSON.parse(formDefinition.content);
     }
+    return null;
   }
 
   ngOnDestroy() {
