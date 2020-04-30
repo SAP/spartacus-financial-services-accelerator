@@ -5,17 +5,17 @@
 >
   <div class="form-group">
     <label class="col-form-label">
+      {{ label }}
       <ng-container *ngIf="!config.required">
         {{ 'forms.optional' | cxTranslate }}
       </ng-container>
-      {{ label }}
     </label>
     <select
       class="form-control"
       [attr.name]="config.name"
       formControlName="{{ config.name }}"
     >
-      <option [defaultSelected]="true" disabled value="null">{{
+      <option [selected]="true" disabled value="null">{{
         'fscommon.pleaseSelect' | cxTranslate
       }}</option>
       <option

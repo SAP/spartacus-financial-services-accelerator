@@ -44,10 +44,4 @@ export class SelectComponent extends AbstractFormComponent
       );
     }
   }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
 }
