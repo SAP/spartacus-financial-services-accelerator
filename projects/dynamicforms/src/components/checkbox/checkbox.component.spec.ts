@@ -87,7 +87,7 @@ describe('CheckboxComponent', () => {
     expect(component.config.type).toEqual('checkbox');
   });
 
-  it('should checkbox radio component', () => {
+  it('should checkbox component', () => {
     const CheckboxComponent = el.query(By.css('input[type="checkbox"]'))
       .nativeElement;
     expect(CheckboxComponent).toBeTruthy();
