@@ -54,8 +54,8 @@ import { QuoteReviewComponent } from './components/quote-review/quote-review.com
 import { UserIdentificationModule } from './components/user-identification/user-identification.module';
 import { CategoryStepGuard } from './guards/category-step-guard';
 import { CheckoutStepGuard } from './guards/checkout-step-guard';
-import { CalculatedComponent } from './components/calculated/calculated.component';
 import { ConfigureProductNavigationComponent } from './components/configure-product-navigation/configure-product-navigation.component';
+import { ConfigureProductCalculationComponent } from './components/configure-product-calculation/configure-product-calculation.component';
 
 const routes: Routes = [
   {
@@ -184,8 +184,8 @@ const routes: Routes = [
         MiniCartFlex: {
           component: MiniCartComponent,
         },
-        CalculatedFlex: {
-          component: CalculatedComponent,
+        ConfigureProductCalculationFlex: {
+          component: ConfigureProductCalculationComponent,
         },
         QuoteReviewFlex: {
           component: QuoteReviewComponent,
@@ -225,8 +225,8 @@ const routes: Routes = [
     PersonalDetailsNavigationComponent,
     OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
-    CalculatedComponent,
     ConfigureProductNavigationComponent,
+    ConfigureProductCalculationComponent,
   ],
   exports: [
     I18nModule,
@@ -238,7 +238,6 @@ const routes: Routes = [
     BindQuoteDialogComponent,
     FinalReviewComponent,
     OrderConfirmationComponent,
-    CalculatedComponent,
     ConfigureProductNavigationComponent,
   ],
   entryComponents: [
@@ -251,8 +250,8 @@ const routes: Routes = [
     OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
     MiniCartComponent,
-    CalculatedComponent,
     ConfigureProductNavigationComponent,
+    ConfigureProductCalculationComponent,
   ],
   providers: [
     FSCartService,

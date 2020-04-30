@@ -22,6 +22,7 @@ export interface FSProduct extends Product {
   price?: FSPrice;
   cartDispalyName?: string;
   defaultCategory?: Category;
+  configurable?: boolean;
 }
 
 export interface OrgUnit {
@@ -89,6 +90,7 @@ export enum StepStatus {
 
 export interface FSOrderEntry extends OrderEntry {
   formData?: any[];
+  product?: FSProduct;
 }
 
 export interface FSPrice extends Price {

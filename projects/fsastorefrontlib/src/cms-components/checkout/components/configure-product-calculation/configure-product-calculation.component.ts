@@ -1,17 +1,17 @@
-import { FSProduct } from './../../../../../../../dist/fsastorefrontlib/occ/occ-models/occ.models.d';
 import { FSProductService } from './../../../../core/product-pricing/facade/product.service';
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import { Subscription, of, BehaviorSubject } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { FormDataService } from '../../../../../../dynamicforms/src/core/services';
 import { map, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { FSProduct } from '../../../../../src/occ/occ-models';
+import { FormDataService } from '@fsa/dynamicforms';
 
 @Component({
-  selector: 'cx-fs-calculated',
-  templateUrl: './calculated.component.html',
+  selector: 'cx-fs-configure-product-calculation',
+  templateUrl: './configure-product-calculation.component.html',
 })
-export class CalculatedComponent implements OnInit, OnDestroy {
+export class ConfigureProductCalculationComponent implements OnInit, OnDestroy {
   constructor(
     protected formDataService: FormDataService,
     protected pricingService: PricingService,
@@ -46,6 +46,7 @@ export class CalculatedComponent implements OnInit, OnDestroy {
             switchMap(data => {
               if (data && data.content) {
                 let productCode;
+
                 if (this.categoryCode === 'banking_fixed_term_deposit') {
                   productCode = 'FTD_FIXED_TERM_DEPOSIT';
                 }

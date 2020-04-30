@@ -17,5 +17,4 @@ describe('ConfigureProductNavigationComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
 });

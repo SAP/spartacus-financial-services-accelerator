@@ -9,11 +9,12 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { OrderEntry, RoutingService, CurrencyService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/cart/facade';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
-import { FSProduct } from '../../../../occ/occ-models';
+import { FSProduct, FSOrderEntry } from '../../../../occ/occ-models';
+
 @Component({
   selector: 'cx-fs-add-options',
   templateUrl: './add-options.component.html',
@@ -78,15 +79,19 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
       this.categoryService
         .getActiveCategory()
         .pipe(
-          map(categoryCode => {
+          switchMap(categoryCode => {
             let route = 'category';
-            if (categoryCode.includes('banking')) {
-              route = 'configureProduct';
-            }
-            this.routingService.go({
-              cxRoute: route,
-              params: { code: categoryCode },
-            });
+            return this.entries$.pipe(
+              map(entries => {
+                if ((<FSOrderEntry>entries[0]).product.configurable) {
+                  route = 'configureProduct';
+                }
+                this.routingService.go({
+                  cxRoute: route,
+                  params: { code: categoryCode },
+                });
+              })
+            );
           })
         )
         .subscribe()
