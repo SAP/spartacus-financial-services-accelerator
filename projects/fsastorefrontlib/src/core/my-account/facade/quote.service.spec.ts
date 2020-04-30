@@ -53,8 +53,8 @@ class MockFormDataService {
   getFormData() {
     return of(this.formData);
   }
-
   setFormDataToLocalStorage() {}
+  loadFormData(): void {}
 }
 
 const mockCart = {

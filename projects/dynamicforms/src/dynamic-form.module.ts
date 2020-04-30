@@ -1,20 +1,20 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Config, ConfigModule, I18nModule } from '@spartacus/core';
-import { FormContainerModule } from './core/form-containers/form-container.module';
+import { ComponentsModule } from './components/components.module';
 import { defaultFormConfig } from './core/config/default-form-config';
 import { DynamicFormsConfig } from './core/config/form-config';
-import { ComponentsModule } from './components/components.module';
-import { FormDefinitionStoreModule } from './core/store/form-definition-store.module';
 import { YFormCMSModule } from './cms-components/yform-cms/yform-cms.module';
+import { FormContainerModule } from './core/form-containers/form-container.module';
+import { FormStoreModule } from './core/store/form-store.module';
 
 @NgModule({
   imports: [
     CommonModule,
     I18nModule,
     FormContainerModule,
-    FormDefinitionStoreModule,
     YFormCMSModule,
+    FormStoreModule,
     ConfigModule.withConfig(defaultFormConfig),
     ComponentsModule,
   ],
