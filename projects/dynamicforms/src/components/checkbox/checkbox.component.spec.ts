@@ -82,14 +82,10 @@ describe('CheckboxComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('should check components type', () => {
-    expect(component.config).toBe(mockField);
-    expect(component.config.type).toEqual('checkbox');
-  });
 
   it('should checkbox component', () => {
-    const CheckboxComponent = el.query(By.css('input[type="checkbox"]'))
+    const checkboxComponent = el.query(By.css('input[type="checkbox"]'))
       .nativeElement;
-    expect(CheckboxComponent).toBeTruthy();
+    expect(checkboxComponent).toBeTruthy();
   });
 });
