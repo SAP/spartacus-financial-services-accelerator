@@ -13,9 +13,7 @@
   }
   cx-dynamic-form {
     form {
-      max-width: 860px;
-      width: 100%;
-      margin: 0 auto;
+      @extend .content860;
       padding: 2rem 0;
     }
     label {
