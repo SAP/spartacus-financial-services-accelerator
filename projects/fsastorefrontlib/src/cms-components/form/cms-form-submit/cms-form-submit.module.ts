@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ConfigModule, CmsConfig, I18nModule } from '@spartacus/core';
-import { CmsFormSubmitComponent } from './cms-form-submit.component';
+import { CMSFormSubmitComponent } from './cms-form-submit.component';
 import { DynamicFormModule } from '@fsa/dynamicforms';
 import { SpinnerModule, PageComponentModule } from '@spartacus/storefront';
 
@@ -15,13 +15,13 @@ import { SpinnerModule, PageComponentModule } from '@spartacus/storefront';
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         CMSFormSubmitComponent: {
-          component: CmsFormSubmitComponent,
+          component: CMSFormSubmitComponent,
         },
       },
     }),
   ],
-  declarations: [CmsFormSubmitComponent],
-  exports: [CmsFormSubmitComponent],
-  entryComponents: [CmsFormSubmitComponent],
+  declarations: [CMSFormSubmitComponent],
+  exports: [CMSFormSubmitComponent],
+  entryComponents: [CMSFormSubmitComponent],
 })
 export class CmsFormSubmitModule {}

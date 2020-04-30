@@ -61,7 +61,7 @@ export interface CMSCustomComponentsContainer extends CmsComponent {
   styleCss?: string;
 }
 
-export interface CMSFormSubmitComponent extends YFormCmsComponent {
+export interface CmsFormSubmitComponent extends YFormCmsComponent {
   category: Category;
 }
 

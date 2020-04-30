@@ -3,9 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CmsComponent, CmsComponentConnector } from '@spartacus/core';
 import { of } from 'rxjs';
-import { CmsFormSubmitComponent } from './cms-form-submit.component';
+import { CMSFormSubmitComponent } from './cms-form-submit.component';
 import { CmsComponentData } from '@spartacus/storefront';
-import { CMSFormSubmitComponent } from './../../../occ/occ-models/cms-component.models';
+import { CmsFormSubmitComponent } from './../../../occ/occ-models/cms-component.models';
 import { FormDataService } from '@fsa/dynamicforms';
 import { LoadFormDefinition } from 'projects/dynamicforms/src/core/store';
 
@@ -34,7 +34,7 @@ class MockFormComponent {
 })
 class MockSpinnerComponent {}
 
-const componentData: CMSFormSubmitComponent = {
+const componentData: CmsFormSubmitComponent = {
   uid: 'TestCMSFormSubmitComponent',
   typeCode: 'CMSFormSubmitComponent',
   formId: 'formId',
@@ -71,9 +71,9 @@ const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
   uid: 'test',
 };
 
-describe('CmsFormSubmitComponent', () => {
-  let formSubmitComponent: CmsFormSubmitComponent;
-  let fixture: ComponentFixture<CmsFormSubmitComponent>;
+describe('CMSFormSubmitComponent', () => {
+  let formSubmitComponent: CMSFormSubmitComponent;
+  let fixture: ComponentFixture<CMSFormSubmitComponent>;
   let el: DebugElement;
   let mockCmsComponentConnector: MockCmsComponentConnector;
   let mockFormDataService: MockFormDataService;
@@ -82,7 +82,7 @@ describe('CmsFormSubmitComponent', () => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule],
       declarations: [
-        CmsFormSubmitComponent,
+        CMSFormSubmitComponent,
         MockFormComponent,
         MockSpinnerComponent,
       ],
@@ -108,7 +108,7 @@ describe('CmsFormSubmitComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CmsFormSubmitComponent);
+    fixture = TestBed.createComponent(CMSFormSubmitComponent);
     formSubmitComponent = fixture.componentInstance;
     el = fixture.debugElement;
   });

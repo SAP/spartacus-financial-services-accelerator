@@ -3,17 +3,17 @@ import { ActivatedRoute } from '@angular/router';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { map } from 'rxjs/operators';
-import { CMSFormSubmitComponent } from '../../../occ/occ-models';
+import { CmsFormSubmitComponent } from '../../../occ/occ-models';
 import { FormDataService, YFormCMSComponent } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'cx-fs-cms-form-submit',
   templateUrl: './cms-form-submit.component.html',
 })
-export class CmsFormSubmitComponent extends YFormCMSComponent
+export class CMSFormSubmitComponent extends YFormCMSComponent
   implements OnInit, OnDestroy {
   constructor(
-    protected componentData: CmsComponentData<CMSFormSubmitComponent>,
+    protected componentData: CmsComponentData<CmsFormSubmitComponent>,
     protected activatedRoute: ActivatedRoute,
     protected cmsComponentConnector: CmsComponentConnector,
     protected formDataService: FormDataService
