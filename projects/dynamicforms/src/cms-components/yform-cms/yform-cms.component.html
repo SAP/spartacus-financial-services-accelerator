@@ -1,9 +1,9 @@
 <ng-container *ngIf="component$ | async as component; else loading">
   <ng-container *ngIf="formDefinition$ | async as formDefinition; else loading">
-    <ng-container *ngIf="getFormConfig(formDefinition) as config">
+    <ng-container *ngIf="formConfig">
       <cx-form-component
         [formId]="component.formId"
-        [formConfig]="config"
+        [formConfig]="formConfig"
         [applicationId]="component.applicationId"
         [formData]="formData$"
       ></cx-form-component>

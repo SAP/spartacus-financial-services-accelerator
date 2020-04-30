@@ -43,7 +43,7 @@ const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
   uid: 'test',
 };
 
-const formDefinition = {
+let formDefinition = {
   formId: 'formDefinition1',
   content: '{ "formGroup": "testGroup" }',
 };
@@ -116,9 +116,14 @@ describe('YFormCMSComponent', () => {
   });
 
   it('should not parse form definition without content', () => {
-    const emptyFormDefinition = {
+    spyOn(JSON, 'parse').and.callThrough();
+    formDefinition = {
       formId: 'emptyDefinitionId',
+      content: undefined,
     };
-    expect(component.getFormConfig(emptyFormDefinition)).toEqual(null);
+    spyOn(mockFormDataService, 'getFormDefinition').and.returnValue(
+      of(formDefinition)
+    );
+    expect(JSON.parse).not.toHaveBeenCalled();
   });
 });

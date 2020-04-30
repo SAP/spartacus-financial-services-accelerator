@@ -20,16 +20,25 @@ export class YFormCMSComponent implements OnInit, OnDestroy {
   component$: Observable<YFormCmsComponent>;
   formDefinition$: Observable<YFormDefinition>;
   formData$: Observable<YFormData>;
+  formConfig: FormDefinition;
 
   subscription = new Subscription();
 
   ngOnInit() {
     this.component$ = this.componentData.data$;
-    this.loadFormInformation();
+    this.loadForm();
   }
 
-  loadFormInformation() {
-    this.formDefinition$ = this.formDataService.getFormDefinition();
+  loadForm() {
+    this.formDefinition$ = this.formDataService.getFormDefinition().pipe(
+      map(definition => {
+        if (definition.content) {
+          this.formConfig = <FormDefinition>JSON.parse(definition.content);
+        }
+        return definition;
+      })
+    );
+
     this.subscription.add(
       this.component$
         .pipe(
@@ -48,13 +57,6 @@ export class YFormCMSComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-  }
-
-  getFormConfig(formDefinition) {
-    if (formDefinition.content) {
-      return <FormDefinition>JSON.parse(formDefinition.content);
-    }
-    return null;
   }
 
   ngOnDestroy() {

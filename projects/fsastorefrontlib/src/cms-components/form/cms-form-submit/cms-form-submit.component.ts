@@ -41,6 +41,6 @@ export class CMSFormSubmitComponent extends YFormCMSComponent
         )
         .subscribe()
     );
-    this.loadFormInformation();
+    this.loadForm();
   }
 }
