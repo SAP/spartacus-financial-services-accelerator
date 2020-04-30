@@ -13,7 +13,7 @@ import { FormDataService } from './../../core/services/data/form-data.service';
 })
 class MockFormComponent {
   @Input()
-  categoryCode;
+  formCategoryCode;
   @Input()
   formId;
   @Input()
