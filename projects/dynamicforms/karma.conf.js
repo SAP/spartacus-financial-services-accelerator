@@ -17,7 +17,13 @@ module.exports = function(config) {
     },
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, '../../coverage/dynamicforms'),
-      reports: ['html', 'lcovonly'],
+      reports: ['lcov', 'cobertura', 'text-summary'],
+      thresholds: {
+        statements: 80,
+        lines: 80,
+        branches: 60,
+        functions: 80,
+      },
       fixWebpackSourcePaths: true,
     },
     reporters: ['progress', 'kjhtml'],

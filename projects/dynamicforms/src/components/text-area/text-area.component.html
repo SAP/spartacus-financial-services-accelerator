@@ -5,10 +5,10 @@
 >
   <div class="form-group">
     <label class="col-form-label">
+      {{ label }}
       <ng-container *ngIf="!config.required">
         {{ 'forms.optional' | cxTranslate }}
       </ng-container>
-      {{ label }}
     </label>
     <textarea
       class="form-control"
