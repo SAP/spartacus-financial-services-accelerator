@@ -65,6 +65,8 @@ class MockFormDataService {
     return formData;
   }
 
+  loadFormData() {}
+
   getFormDataIdFromLocalStorage() {
     return formDataId;
   }

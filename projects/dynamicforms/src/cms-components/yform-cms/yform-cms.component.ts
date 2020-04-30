@@ -51,7 +51,8 @@ export class YFormCMSComponent implements OnInit, OnDestroy {
               component.formId
             );
             if (formDataId) {
-              this.formData$ = this.formDataService.getFormData(formDataId);
+              this.formDataService.loadFormData(formDataId);
+              this.formData$ = this.formDataService.getFormData();
             }
           })
         )
