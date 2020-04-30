@@ -3,8 +3,8 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { GlobalMessageService, GlobalMessageType } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
-import * as fromActions from '../actions';
 import { FormConnector } from '../../connectors/form-connector';
+import * as fromActions from '../actions';
 
 @Injectable()
 export class FormDefinitionEffects {

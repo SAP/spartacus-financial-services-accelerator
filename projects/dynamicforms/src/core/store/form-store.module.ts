@@ -6,18 +6,18 @@ import { StoreModule } from '@ngrx/store';
 import { StateModule } from '@spartacus/core';
 import { effects } from './effects/index';
 import { metaReducers, reducerProvider, reducerToken } from './reducers/index';
-import { FORM_DEFINITION_FEATURE } from './form-definition-state';
+import { FORM_FEATURE } from './state';
 
 @NgModule({
   imports: [
     CommonModule,
     HttpClientModule,
     StateModule,
-    StoreModule.forFeature(FORM_DEFINITION_FEATURE, reducerToken, {
+    StoreModule.forFeature(FORM_FEATURE, reducerToken, {
       metaReducers,
     }),
     EffectsModule.forFeature(effects),
   ],
   providers: [reducerProvider],
 })
-export class FormDefinitionStoreModule {}
+export class FormStoreModule {}

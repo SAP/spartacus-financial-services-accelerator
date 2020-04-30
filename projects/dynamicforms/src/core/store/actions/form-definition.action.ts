@@ -1,5 +1,4 @@
-import { StateLoaderActions } from '@spartacus/core';
-import { FORM_DEFINITION_DATA } from '../form-definition-state';
+import { Action } from '@ngrx/store';
 
 export const LOAD_FORM_DEFINITION = '[Form Definition] Load Form Definition';
 export const LOAD_FORM_DEFINITION_FAIL =
@@ -7,25 +6,19 @@ export const LOAD_FORM_DEFINITION_FAIL =
 export const LOAD_FORM_DEFINITION_SUCCESS =
   '[Form Definition] Load Form Definition Success';
 
-export class LoadFormDefinition extends StateLoaderActions.LoaderLoadAction {
+export class LoadFormDefinition implements Action {
   readonly type = LOAD_FORM_DEFINITION;
-  constructor(public payload: any) {
-    super(FORM_DEFINITION_DATA);
-  }
+  constructor(public payload: any) {}
 }
 
-export class LoadFormDefinitionFail extends StateLoaderActions.LoaderFailAction {
+export class LoadFormDefinitionFail implements Action {
   readonly type = LOAD_FORM_DEFINITION_FAIL;
-  constructor(public payload: any) {
-    super(FORM_DEFINITION_DATA, payload);
-  }
+  constructor(public payload: any) {}
 }
 
-export class LoadFormDefinitionSuccess extends StateLoaderActions.LoaderSuccessAction {
+export class LoadFormDefinitionSuccess implements Action {
   readonly type = LOAD_FORM_DEFINITION_SUCCESS;
-  constructor(public payload: any) {
-    super(FORM_DEFINITION_DATA);
-  }
+  constructor(public payload: any) {}
 }
 
 export type FormDefinitionAction =

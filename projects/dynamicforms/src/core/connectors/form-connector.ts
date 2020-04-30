@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { FormAdapter } from './form.adapter';
 import { YFormData, YFormDefinition } from '../models';
+import { FormAdapter } from './form.adapter';
 
 @Injectable({
   providedIn: 'root',
@@ -20,11 +20,7 @@ export class FormConnector {
     return this.formAdapter.getFormData(formDataId);
   }
 
-  createFormData(formData: YFormData): Observable<YFormData> {
-    return this.formAdapter.createFormData(formData);
-  }
-
-  updateFormData(formData: YFormData): Observable<YFormData> {
-    return this.formAdapter.updateFormData(formData);
+  saveFormData(formData: YFormData): Observable<YFormData> {
+    return this.formAdapter.saveFormData(formData);
   }
 }
