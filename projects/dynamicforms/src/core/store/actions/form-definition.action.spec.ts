@@ -1,6 +1,4 @@
 import * as fromAction from './form-definition.action';
-import { StateLoaderActions } from '@spartacus/core';
-import { FORM_DEFINITION_DATA } from '../form-definition-state';
 
 describe('Form Definition Actions', () => {
   describe('LoadFormDefinition Action', () => {
@@ -13,7 +11,6 @@ describe('Form Definition Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.LOAD_FORM_DEFINITION,
         payload: formDefinition,
-        meta: StateLoaderActions.loadMeta(FORM_DEFINITION_DATA),
       });
     });
   });
@@ -28,7 +25,6 @@ describe('Form Definition Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.LOAD_FORM_DEFINITION_SUCCESS,
         payload: formDefinition,
-        meta: StateLoaderActions.successMeta(FORM_DEFINITION_DATA),
       });
     });
   });
@@ -40,7 +36,6 @@ describe('Form Definition Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.LOAD_FORM_DEFINITION_FAIL,
         payload: error,
-        meta: StateLoaderActions.failMeta(FORM_DEFINITION_DATA, error),
       });
     });
   });

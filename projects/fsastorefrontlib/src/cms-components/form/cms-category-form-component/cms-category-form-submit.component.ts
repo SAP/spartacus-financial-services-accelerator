@@ -79,7 +79,8 @@ export class CmsCategoryFormSubmitComponent implements OnInit, OnDestroy {
               componentData.formId
             );
             if (formDataId) {
-              this.formData$ = this.formDataService.getFormData(formDataId);
+              this.formDataService.loadFormData(formDataId);
+              this.formData$ = this.formDataService.getFormData();
             }
           })
         )

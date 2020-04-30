@@ -1,13 +1,12 @@
-import { async, TestBed } from '@angular/core/testing';
-
-import { OccFormAdapter } from './occ-form.adapter';
-import { OccConfig } from '@spartacus/core';
+import { HttpRequest } from '@angular/common/http';
 import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { HttpRequest } from '@angular/common/http';
+import { async, TestBed } from '@angular/core/testing';
+import { OccConfig } from '@spartacus/core';
 import { YFormData } from '../../../core/models/form-occ.models';
+import { OccFormAdapter } from './occ-form.adapter';
 
 const MockOccModuleConfig: OccConfig = {
   context: {
@@ -23,6 +22,7 @@ const MockOccModuleConfig: OccConfig = {
 
 const formData: YFormData = {
   id: 'formDataId',
+  refId: 'refId',
   formDefinition: {
     formId: 'fromId',
     applicationId: 'applicationId',
@@ -55,8 +55,8 @@ describe('OccFormAdapter', () => {
   });
 
   describe('persistFormData', () => {
-    it('updateFormData', async(() => {
-      occFormAdapter.updateFormData(formData).subscribe();
+    it('should update existing form data', async(() => {
+      occFormAdapter.saveFormData(formData).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url === '/forms/formData/' + formData.id &&
@@ -71,11 +71,9 @@ describe('OccFormAdapter', () => {
         );
       }, `PUT method and url`);
     }));
-  });
 
-  describe('persistFormData', () => {
-    it('createFormData', async(() => {
-      occFormAdapter.createFormData(formDataNew).subscribe();
+    it('should create new form data', async(() => {
+      occFormAdapter.saveFormData(formDataNew).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (
           req.url === '/forms/formData' &&
@@ -91,6 +89,7 @@ describe('OccFormAdapter', () => {
       }, `POST method and url`);
     }));
   });
+
   describe('loadFormData', () => {
     it('loadFormData', async(() => {
       occFormAdapter.getFormData(formData.id).subscribe();

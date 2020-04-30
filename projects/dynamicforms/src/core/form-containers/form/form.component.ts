@@ -1,17 +1,16 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   Input,
-  ViewChild,
   OnDestroy,
-  ChangeDetectionStrategy,
+  ViewChild,
 } from '@angular/core';
-import { RoutingService } from '@spartacus/core';
-
-import { FormDefinition } from '../../models/form-config.interface';
-import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
-import { FormDataService } from '../../services/data/form-data.service';
-import { Subscription, Observable } from 'rxjs';
 import { YFormData } from '@fsa/dynamicforms';
+import { RoutingService } from '@spartacus/core';
+import { Observable, Subscription } from 'rxjs';
+import { FormDefinition } from '../../models/form-config.interface';
+import { FormDataService } from '../../services/data/form-data.service';
+import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
 
 @Component({
   selector: 'cx-form-component',
@@ -40,33 +39,33 @@ export class FormComponent implements OnDestroy {
 
   submit(formData: YFormData) {
     if (this.form && this.form.valid) {
+      this.formDataService.saveFormData({
+        formDefinition: {
+          formId: this.formId,
+          applicationId: this.applicationId,
+        },
+        content: formData.content,
+        refId: formData.refId,
+        id: formData.id,
+      });
+
       this.subscription.add(
-        this.formDataService
-          .saveFormData({
+        this.formDataService.getFormData().subscribe(response => {
+          const savedForm = {
+            id: response.id,
             formDefinition: {
-              formId: this.formId,
-              applicationId: this.applicationId,
+              formId: response.formDefinition.formId,
             },
-            content: formData.content,
-            refId: formData.refId,
-            id: formData.id,
-          })
-          .subscribe(response => {
-            const savedForm = {
-              id: response.id,
-              formDefinition: {
-                formId: response.formDefinition.formId,
-              },
-              content: response.content,
-              categoryCode: this.formCategoryCode,
-            };
-            this.formDataService.currentForm$.next(savedForm);
-            this.formDataService.setFormDataToLocalStorage(savedForm);
-            this.formDataService.setSubmittedForm(response);
-          })
+            content: response.content,
+            categoryCode: this.formCategoryCode,
+          };
+          this.formDataService.setFormDataToLocalStorage(savedForm);
+          this.formDataService.setSubmittedForm(response);
+        })
       );
     }
   }
+
   ngOnDestroy() {
     this.formDataService.setSubmittedForm({});
     if (this.subscription) {
