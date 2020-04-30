@@ -84,9 +84,6 @@ class MockBillingTimeConnector {
 }
 
 class MockFormDataService {
-  getCurrentFormData(): Observable<YFormData> {
-    return of();
-  }
   getFormData(): Observable<YFormData> {
     return of();
   }
@@ -154,13 +151,9 @@ describe('ComparisonTablePanelComponent', () => {
   it('should create comparison panel with pricing data and billing times', () => {
     spyOn(mockPricingService, 'buildPricingData').and.stub();
     spyOn(mockFormDataService, 'getFormData').and.returnValue(of(formData));
-    spyOn(mockFormDataService, 'getCurrentFormData').and.returnValue(
-      of(formData)
-    );
     comparisonTablePanelComponent.ngOnInit();
 
     expect(mockPricingService.buildPricingData).toHaveBeenCalled();
-    expect(mockFormDataService.getCurrentFormData).toHaveBeenCalled();
   });
 
   it('should not build pricing data', () => {
@@ -170,9 +163,6 @@ describe('ComparisonTablePanelComponent', () => {
     };
     spyOn(mockPricingService, 'buildPricingData').and.stub();
     spyOn(mockFormDataService, 'getFormData').and.returnValue(
-      of(currentFormData)
-    );
-    spyOn(mockFormDataService, 'getCurrentFormData').and.returnValue(
       of(currentFormData)
     );
     comparisonTablePanelComponent.ngOnInit();

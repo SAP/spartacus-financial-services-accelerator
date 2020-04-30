@@ -14,15 +14,6 @@ export class FormDataService {
 
   constructor(protected store: Store<StateWithForm>) {}
 
-  // ***SHOULD BE REMOVED WITH FSA-4419***
-  currentForm$: BehaviorSubject<YFormData> = new BehaviorSubject({});
-
-  getCurrentFormData(): Observable<YFormData> {
-    return this.currentForm$.asObservable();
-  }
-
-  // ***SHOULD BE REMOVED WITH FSA-4419***
-
   submit(form: YFormData) {
     this.submittedForm.next(form);
   }
