@@ -76,7 +76,7 @@ describe('ErrorNoticeComponent', () => {
   });
 
   it('should render error component', () => {
-    const errorComponent = el.query(By.css('.px-4')).nativeElement;
+    const errorComponent = el.query(By.css('.px-2')).nativeElement;
     expect(errorComponent).toBeTruthy();
   });
 });

@@ -13,6 +13,8 @@ import { SelectComponent } from './select/select.component';
 import { TextAreaComponent } from './text-area/text-area.component';
 import { TimeComponent } from './time/time.component';
 import { TitleComponent } from './title/title.component';
+import { SeparatorComponent } from './separator/separator.component';
+import { CheckboxComponent } from './checkbox/checkbox.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, I18nModule],
@@ -28,6 +30,8 @@ import { TitleComponent } from './title/title.component';
     TextAreaComponent,
     TimeComponent,
     TitleComponent,
+    SeparatorComponent,
+    CheckboxComponent,
   ],
   entryComponents: [
     AbstractFormComponent,
@@ -39,6 +43,8 @@ import { TitleComponent } from './title/title.component';
     TextAreaComponent,
     TimeComponent,
     TitleComponent,
+    SeparatorComponent,
+    CheckboxComponent,
   ],
   exports: [
     FormComponentDirective,
@@ -52,6 +58,8 @@ import { TitleComponent } from './title/title.component';
     TextAreaComponent,
     TimeComponent,
     TitleComponent,
+    SeparatorComponent,
+    CheckboxComponent,
   ],
 })
 export class ComponentsModule {}

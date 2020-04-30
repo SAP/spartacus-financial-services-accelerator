@@ -1,23 +1,21 @@
-<div class="row">
-  <div class="px-4">
-    <ng-container
-      *ngIf="(warn?.touched && warn?.errors?.required) || warn?.errors?.pattern"
-    >
-      <div class="text-danger mb-2">
-        {{ 'forms.enterValidValue' | cxTranslate }}
-      </div>
-    </ng-container>
-    <ng-container
-      *ngIf="
-        warn?.invalid &&
-        warn?.touched &&
-        !warn?.errors?.required &&
-        parentConfig?.error
-      "
-    >
-      <div class="text-danger mb-2">
-        {{ errorMessage }}
-      </div>
-    </ng-container>
-  </div>
+<div class="px-2">
+  <ng-container
+    *ngIf="(warn?.touched && warn?.errors?.required) || warn?.errors?.pattern"
+  >
+    <div class="text-danger mb-2">
+      {{ 'forms.enterValidValue' | cxTranslate }}
+    </div>
+  </ng-container>
+  <ng-container
+    *ngIf="
+      warn?.invalid &&
+      warn?.touched &&
+      !warn?.errors?.required &&
+      parentConfig?.error
+    "
+  >
+    <div class="text-danger mb-2">
+      {{ errorMessage }}
+    </div>
+  </ng-container>
 </div>
