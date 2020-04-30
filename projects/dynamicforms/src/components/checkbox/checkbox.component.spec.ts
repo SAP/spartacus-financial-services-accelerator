@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CheckboxComponent } from './checkbox.component';
 import { Input, Component, DebugElement } from '@angular/core';
 import { FieldConfig } from '../../core/models/form-config.interface';
