@@ -79,11 +79,7 @@ describe('FormCMSComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [
-        FormCMSComponent,
-        MockFormComponent,
-        MockSpinnerComponent,
-      ],
+      declarations: [FormCMSComponent, MockFormComponent, MockSpinnerComponent],
       providers: [
         {
           provide: CmsComponentData,
