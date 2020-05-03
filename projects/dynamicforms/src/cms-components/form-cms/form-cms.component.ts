@@ -1,17 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { YFormCmsComponent } from '../cms-component.models';
-import { FormDataService } from './../../core/services/data/form-data.service';
+import { FormDataService } from '../../core/services/data/form-data.service';
 import { CmsComponentData } from '@spartacus/storefront';
 import { YFormDefinition, YFormData } from '../../core/models/form-occ.models';
 import { map } from 'rxjs/operators';
-import { FormDefinition } from './../../core/models/form-config.interface';
+import { FormDefinition } from '../../core/models/form-config.interface';
 
 @Component({
-  selector: 'cx-yform-cms',
-  templateUrl: './yform-cms.component.html',
+  selector: 'cx-form-cms',
+  templateUrl: './form-cms.component.html',
 })
-export class YFormCMSComponent implements OnInit, OnDestroy {
+export class FormCMSComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<YFormCmsComponent>,
     protected formDataService: FormDataService

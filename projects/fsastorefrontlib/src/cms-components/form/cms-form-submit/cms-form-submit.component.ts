@@ -4,13 +4,13 @@ import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { map } from 'rxjs/operators';
 import { CmsFormSubmitComponent } from '../../../occ/occ-models';
-import { FormDataService, YFormCMSComponent } from '@fsa/dynamicforms';
+import { FormDataService, FormCMSComponent } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'cx-fs-cms-form-submit',
   templateUrl: './cms-form-submit.component.html',
 })
-export class CMSFormSubmitComponent extends YFormCMSComponent
+export class CMSFormSubmitComponent extends FormCMSComponent
   implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<CmsFormSubmitComponent>,

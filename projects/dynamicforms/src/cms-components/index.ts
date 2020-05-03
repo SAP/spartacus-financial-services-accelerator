@@ -1,3 +1,3 @@
-export * from './yform-cms/yform-cms.module';
-export * from './yform-cms/yform-cms.component';
+export * from './form-cms/form-cms.module';
+export * from './form-cms/form-cms.component';
 export * from './cms-component.models';

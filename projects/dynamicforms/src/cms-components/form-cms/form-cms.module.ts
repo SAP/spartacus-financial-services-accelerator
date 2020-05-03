@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { YFormCMSComponent } from './yform-cms.component';
+import { FormCMSComponent } from './form-cms.component';
 import { ConfigModule, CmsConfig } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
-import { FormContainerModule } from './../../core/form-containers/form-container.module';
+import { FormContainerModule } from '../../core/form-containers/form-container.module';
 
 @NgModule({
-  declarations: [YFormCMSComponent],
+  declarations: [FormCMSComponent],
   imports: [
     CommonModule,
     SpinnerModule,
@@ -14,12 +14,12 @@ import { FormContainerModule } from './../../core/form-containers/form-container
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         YFormCMSComponent: {
-          component: YFormCMSComponent,
+          component: FormCMSComponent,
         },
       },
     }),
   ],
-  entryComponents: [YFormCMSComponent],
-  exports: [YFormCMSComponent],
+  entryComponents: [FormCMSComponent],
+  exports: [FormCMSComponent],
 })
-export class YFormCMSModule {}
+export class FormCMSModule {}

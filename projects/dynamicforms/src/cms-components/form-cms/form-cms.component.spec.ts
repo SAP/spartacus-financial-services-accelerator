@@ -1,11 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { YFormCMSComponent } from './yform-cms.component';
+import { FormCMSComponent } from './form-cms.component';
 import { Component, Input, Type } from '@angular/core';
 import { YFormCmsComponent } from '../cms-component.models';
 import { of } from 'rxjs';
 import { CmsComponentData } from '@spartacus/storefront';
 import { CmsComponent } from '@spartacus/core';
-import { FormDataService } from './../../core/services/data/form-data.service';
+import { FormDataService } from '../../core/services/data/form-data.service';
 
 @Component({
   selector: 'cx-form-component',
@@ -72,15 +72,15 @@ class MockFormDataService {
   }
 }
 
-describe('YFormCMSComponent', () => {
-  let component: YFormCMSComponent;
-  let fixture: ComponentFixture<YFormCMSComponent>;
+describe('FormCMSComponent', () => {
+  let component: FormCMSComponent;
+  let fixture: ComponentFixture<FormCMSComponent>;
   let mockFormDataService: FormDataService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        YFormCMSComponent,
+        FormCMSComponent,
         MockFormComponent,
         MockSpinnerComponent,
       ],
@@ -99,7 +99,7 @@ describe('YFormCMSComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(YFormCMSComponent);
+    fixture = TestBed.createComponent(FormCMSComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
