@@ -1,5 +1,6 @@
 <ng-container *ngIf="form && config">
   <form
+    *ngIf="submitted$ | async; submitted"
     [ngClass]="config.cssClass"
     [formGroup]="form"
     (submit)="handleSubmit($event)"

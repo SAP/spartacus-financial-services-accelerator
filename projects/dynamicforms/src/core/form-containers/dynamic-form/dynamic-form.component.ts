@@ -7,9 +7,9 @@ import {
   OnInit,
   Output,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { YFormData } from '@fsa/dynamicforms';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../config/form-config';
 import { GeneralHelpers } from '../../helpers/helpers';
@@ -33,6 +33,9 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   subscription = new Subscription();
+
+  submittedSub = new BehaviorSubject<boolean>(true);
+  submitted$: Observable<boolean> = this.submittedSub.asObservable();
 
   get changes() {
     return this.form.valueChanges;
@@ -99,13 +102,17 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         .getSubmittedForm()
         .pipe(
           map(form => {
-            if (
+            if (form && form.content === undefined && !this.value) {
+              this.markInvalidControls(this.form);
+              this.submittedSub.next(true);
+            } else if (
               form &&
               form.content === undefined &&
               this.form &&
               this.value !== undefined &&
               this.valid
             ) {
+              this.submittedSub.next(false);
               this.submit.emit({
                 id: form.id,
                 refId: form.refId,
@@ -117,6 +124,21 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         .subscribe()
     );
   }
+
+  markInvalidControls(formGroup) {
+    for (const key of Object.keys(formGroup.controls)) {
+      const formControl = formGroup.get(key);
+      if (formControl instanceof FormGroup) {
+        this.markInvalidControls(formControl);
+      } else {
+        const control = <FormControl>formControl;
+        if (!control.valid) {
+          control.markAsTouched({ onlySelf: true });
+        }
+      }
+    }
+  }
+
   handleSubmit(event: Event) {
     event.preventDefault();
     event.stopPropagation();
