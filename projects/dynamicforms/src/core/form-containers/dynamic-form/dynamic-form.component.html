@@ -14,7 +14,7 @@
           *ngFor="let field of formGroup.fieldConfigs"
           cxFormComponent
           [config]="field"
-          [group]="field.group"
+          [group]="form.controls[formGroup.groupCode]"
         >
         </ng-container>
       </div>

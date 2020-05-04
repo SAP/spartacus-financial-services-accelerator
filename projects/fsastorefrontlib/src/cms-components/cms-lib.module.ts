@@ -10,13 +10,13 @@ import { ChangeProcessModule } from './change-process/change-process.module';
 import { ComparisonTableModule } from './comparison-table/comparison-table.module';
 import { CustomContainerModule } from './container/cms-custom-container.module';
 import { FnolModule } from './fnol/fnol.module';
-import { CategoryFormsModule } from './form/cms-category-form-component/cms-category-forms.module';
 import { MyAccountModule } from './my-account/myaccount.module';
 import { ProductAssignmentModule } from './product-assignment/product-assignment.module';
 import { ProductModule } from './product/product.module';
 import { ProgressBarModule } from './progress-bar/progress-bar.module';
 import { FSRegisterModule } from './user/register/register.module';
 import { NotFoundModule } from './not-found/not-found.module';
+import { CmsFormSubmitModule } from './form/cms-form-submit/cms-form-submit.module';
 
 @NgModule({
   imports: [
@@ -24,7 +24,7 @@ import { NotFoundModule } from './not-found/not-found.module';
     BannerModule,
     ProductModule,
     ComparisonTableModule,
-    CategoryFormsModule,
+    CmsFormSubmitModule,
     CustomContainerModule,
     MyAccountModule,
     FSRegisterModule,
@@ -41,7 +41,7 @@ import { NotFoundModule } from './not-found/not-found.module';
     BannerModule,
     ProductModule,
     ComparisonTableModule,
-    CategoryFormsModule,
+    CmsFormSubmitModule,
     CustomContainerModule,
     MyAccountModule,
     FSRegisterModule,
