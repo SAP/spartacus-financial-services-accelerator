@@ -5,20 +5,20 @@ export const checkoutConfig: FSCheckoutConfig = {
   checkout: {
     steps: [
       {
-        id: 'configureProductStep',
+        id: 'productDetails',
         name: 'fscommon.configureProduct',
-        routeName: 'configureProduct',
+        routeName: 'product',
         type: [],
-        restrictedCategories: [
-          'banking_current_account',
-          'banking_credit_card',
-          'insurances_life',
-          'insurances_auto',
-          'insurances_travel',
-          'insurances_homeowners',
-          'insurances_renters',
-          'insurances_event',
-        ],
+        // restrictedCategories: [
+        //   'banking_current_account',
+        //   'banking_credit_card',
+        //   'insurances_life',
+        //   'insurances_auto',
+        //   'insurances_travel',
+        //   'insurances_homeowners',
+        //   'insurances_renters',
+        //   'insurances_event',
+        // ],
       },
       {
         id: 'chooseCoverStep',

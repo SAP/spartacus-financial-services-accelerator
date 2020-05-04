@@ -56,6 +56,7 @@ import { CategoryStepGuard } from './guards/category-step-guard';
 import { CheckoutStepGuard } from './guards/checkout-step-guard';
 import { CalculatedComponent } from './components/calculated/calculated.component';
 import { ConfigureProductNavigationComponent } from './components/configure-product-navigation/configure-product-navigation.component';
+import { ProductConfigurationFormComponent } from './components/calculated/product-configuration-form.component';
 
 const routes: Routes = [
   {
@@ -187,6 +188,9 @@ const routes: Routes = [
         CalculatedFlex: {
           component: CalculatedComponent,
         },
+        ProductConfigurationFormFlex: {
+          component: ProductConfigurationFormComponent,
+        },
         QuoteReviewFlex: {
           component: QuoteReviewComponent,
         },
@@ -226,6 +230,7 @@ const routes: Routes = [
     OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
     CalculatedComponent,
+    ProductConfigurationFormComponent,
     ConfigureProductNavigationComponent,
   ],
   exports: [
@@ -239,6 +244,7 @@ const routes: Routes = [
     FinalReviewComponent,
     OrderConfirmationComponent,
     CalculatedComponent,
+    ProductConfigurationFormComponent,
     ConfigureProductNavigationComponent,
   ],
   entryComponents: [
@@ -252,6 +258,7 @@ const routes: Routes = [
     OrderConfirmationMessageComponent,
     MiniCartComponent,
     CalculatedComponent,
+    ProductConfigurationFormComponent,
     ConfigureProductNavigationComponent,
   ],
   providers: [

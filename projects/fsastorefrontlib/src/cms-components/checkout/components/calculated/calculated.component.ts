@@ -6,6 +6,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormDataService } from '../../../../../../dynamicforms/src/core/services';
 import { map, switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { CurrentProductService } from '@spartacus/storefront';
 
 @Component({
   selector: 'cx-fs-calculated',
@@ -16,7 +17,8 @@ export class CalculatedComponent implements OnInit, OnDestroy {
     protected formDataService: FormDataService,
     protected pricingService: PricingService,
     protected productService: FSProductService,
-    protected activatedRoute: ActivatedRoute
+    protected activatedRoute: ActivatedRoute,
+    protected currentProductService: CurrentProductService
   ) {}
 
   calculatedProductData = new BehaviorSubject<FSProduct>({});
@@ -28,7 +30,12 @@ export class CalculatedComponent implements OnInit, OnDestroy {
   public subscription = new Subscription();
   categoryCode;
 
+  product$: any;
+
   ngOnInit() {
+
+    this.product$ = this.currentProductService.getProduct();
+
     this.subscription
       .add(
         this.activatedRoute.params

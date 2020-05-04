@@ -1,0 +1,5 @@
+<ng-container *ngIf="product$ | async as product">
+  <ng-container *ngFor="let category of product.categories">
+    {{category | json}} <br/>
+  </ng-container>
+</ng-container>
