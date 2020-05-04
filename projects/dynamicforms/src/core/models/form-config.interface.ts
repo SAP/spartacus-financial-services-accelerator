@@ -1,5 +1,3 @@
-import { ValidatorFn } from '@angular/forms';
-
 export interface FormDefinition {
   formGroups: DynamicFormGroup[];
   formId: string;
@@ -16,7 +14,6 @@ export interface FieldConfig {
   name?: string;
   required?: boolean;
   disabled?: boolean;
-  group?: string;
   label?: LocalizedString;
   options?: FieldOption[];
   cssClass?: string;
@@ -25,7 +22,6 @@ export interface FieldConfig {
   apiUrl?: string;
   placeholder?: string;
   type: string;
-  validation?: ValidatorFn[]; // TO-DO Remove validation attribute once all definitions are moved to back-end
   value?: any;
   hidden?: boolean;
   error?: LocalizedString;

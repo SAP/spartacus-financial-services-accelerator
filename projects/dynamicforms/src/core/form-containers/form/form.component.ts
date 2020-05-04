@@ -26,6 +26,7 @@ export class FormComponent implements OnDestroy {
 
   @ViewChild(DynamicFormComponent, { static: false })
   form: DynamicFormComponent;
+
   @Input()
   formCategoryCode: string;
   @Input()
