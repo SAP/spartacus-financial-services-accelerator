@@ -8,6 +8,8 @@ import { TimeComponent } from '../../components/time/time.component';
 import { TitleComponent } from '../../components/title/title.component';
 import { DefaultFormValidators } from './../../util/validators/default-form-validators';
 import { DynamicFormsConfig } from './form-config';
+import { SeparatorComponent } from '../../components/separator/separator.component';
+import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
 
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
@@ -35,6 +37,12 @@ export const defaultFormConfig: DynamicFormsConfig = {
       },
       time: {
         component: TimeComponent,
+      },
+      checkbox: {
+        component: CheckboxComponent,
+      },
+      separator: {
+        component: SeparatorComponent,
       },
     },
     validators: {

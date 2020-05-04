@@ -13,7 +13,7 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   searchQuery: string;
   pagination: any;
   selectedAgent$: Observable<any>;
-  selectedIndex: number = null;
+  selectedIndex = 0;
 
   constructor(
     protected agentSearchService: AgentSearchService,

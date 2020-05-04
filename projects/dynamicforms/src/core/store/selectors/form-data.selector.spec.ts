@@ -1,12 +1,19 @@
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { select, Store, StoreModule } from '@ngrx/store';
-import * as fromActions from '../actions/form-definition.action';
+import * as fromActions from '../actions/form-data.action';
 import * as fromReducers from '../reducers/index';
 import { StateWithForm } from '../state';
-import * as fromSelectors from './form-definition.selector';
+import { YFormData } from './../../models/form-occ.models';
+import * as fromSelectors from './form-data.selector';
 
-describe('Form Definition Selectors', () => {
+const mockFormData: YFormData = {
+  id: 'test-formData',
+  type: 'DATA',
+  content: '{"testContent": "content"}',
+};
+
+describe('Form Data Selectors', () => {
   let store: Store<StateWithForm>;
 
   beforeEach(() => {
@@ -21,21 +28,17 @@ describe('Form Definition Selectors', () => {
     spyOn(store, 'dispatch').and.callThrough();
   });
 
-  describe('getFormDefinition', () => {
-    it('should return loaded form definition', () => {
-      const formDefinition = {
-        formId: 'formId',
-      };
-
+  describe('getFormData', () => {
+    it('should return loaded form data', () => {
       let result;
       store
-        .pipe(select(fromSelectors.getFormDefinition))
+        .pipe(select(fromSelectors.getFormData))
         .subscribe(value => (result = value));
       expect(result).toEqual({});
 
-      store.dispatch(new fromActions.LoadFormDefinitionSuccess(formDefinition));
+      store.dispatch(new fromActions.LoadFormDataSuccess(mockFormData));
 
-      expect(result).toEqual(formDefinition);
+      expect(result).toEqual(mockFormData);
     });
   });
 });
