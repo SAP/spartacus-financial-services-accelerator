@@ -19,6 +19,6 @@ import { FormStoreModule } from './core/store/form-store.module';
     ComponentsModule,
   ],
   exports: [FormContainerModule],
-  providers: [{ provide: DynamicFormsConfig, useExisting: Config }],
+  providers: [{ provide: DynamicFormsConfig, useExisting: Config }]
 })
 export class DynamicFormModule {}

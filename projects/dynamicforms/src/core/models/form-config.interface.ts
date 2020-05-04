@@ -46,6 +46,6 @@ export interface ValidatorArgument {
 }
 export interface FieldOption {
   name: string;
-  label: string;
+  label: LocalizedString;
   icon?: string;
 }
