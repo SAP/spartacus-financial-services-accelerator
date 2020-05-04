@@ -25,7 +25,7 @@ export const defaultFormConfig: DynamicFormsConfig = {
         component: SelectComponent,
       },
       dynamicSelect: {
-        component: DynamicSelectComponent
+        component: DynamicSelectComponent,
       },
       title: {
         component: TitleComponent,

@@ -5,9 +5,8 @@ import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-dynamic-select',
-  templateUrl: './dynamic-select.component.html'
+  templateUrl: './dynamic-select.component.html',
 })
-
 export class DynamicSelectComponent extends AbstractFormComponent
   implements OnInit, OnDestroy {
   optionsSubject = new BehaviorSubject<any>([]);

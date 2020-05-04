@@ -3,7 +3,6 @@
   [formGroup]="group"
   [hidden]="group.controls[config.name].disabled"
 >
-
   <label class="col-form-label">
     {{ label }}
     <ng-container *ngIf="!config.required">
@@ -21,8 +20,8 @@
         [formControlName]="config.name"
       />
       <label class="pl-3 pt-1" [attr.for]="config.name + option.name">
-        <ng-container *ngIf="activeLang$ | async as activeLang;">
-           {{ getLocalizedOption( option.label, activeLang) }}
+        <ng-container *ngIf="activeLang$ | async as activeLang">
+          {{ getLocalizedOption(option.label, activeLang) }}
         </ng-container>
       </label>
     </div>

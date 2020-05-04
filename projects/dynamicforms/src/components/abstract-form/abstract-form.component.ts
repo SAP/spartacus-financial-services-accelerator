@@ -1,6 +1,10 @@
 import { Component, HostBinding, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FieldConfig, FieldOption, LocalizedString } from '../../core/models/form-config.interface';
+import {
+  FieldConfig,
+  FieldOption,
+  LocalizedString,
+} from '../../core/models/form-config.interface';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { LanguageService } from '@spartacus/core';
@@ -34,7 +38,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
         .getActive()
         .pipe(
           map(lang => {
-            this.activeLang$  = of(lang);
+            this.activeLang$ = of(lang);
             if (this.config && this.config.label) {
               this.label = this.config.label[lang]
                 ? this.config.label[lang]

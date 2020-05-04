@@ -1,4 +1,4 @@
-import { Component,} from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractOptionsComponent } from '../abstract-options/abstract-options.component';
 
 @Component({

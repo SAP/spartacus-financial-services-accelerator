@@ -21,9 +21,11 @@
         [(ngModel)]="option.value"
         (change)="checkCheckBoxvalue(option)"
       />
-      <label class="pl-3 pt-1" [attr.for]="config.name + option.name"><ng-container *ngIf="activeLang$ | async as activeLang;">
-           {{ getLocalizedOption( option.label, activeLang) }}
-        </ng-container></label>
+      <label class="pl-3 pt-1" [attr.for]="config.name + option.name"
+        ><ng-container *ngIf="activeLang$ | async as activeLang">
+          {{ getLocalizedOption(option.label, activeLang) }}
+        </ng-container></label
+      >
     </div>
   </div>
   <cx-error-notice
