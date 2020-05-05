@@ -14,10 +14,7 @@ export class DynamicSelectComponent extends AbstractFormComponent
 
   ngOnInit() {
     super.ngOnInit();
-    this.optionsSubject.next(this.config.options);
-    if (this.config.apiUrl) {
-      this.setFormControlValuesFromAPI();
-    }
+    this.setFormControlValuesFromAPI();
   }
 
   setFormControlValuesFromAPI() {

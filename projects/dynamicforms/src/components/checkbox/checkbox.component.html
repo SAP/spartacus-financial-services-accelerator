@@ -14,12 +14,10 @@
       <input
         class="form-check-input"
         type="checkbox"
-        [attr.name]="config.name"
+        [attr.name]="option.name"
         [attr.id]="config.name + option.name"
         value="{{ option.name }}"
         [formControlName]="config.name"
-        [(ngModel)]="option.value"
-        (change)="checkCheckBoxvalue(option)"
       />
       <label class="pl-3 pt-1" [attr.for]="config.name + option.name"
         ><ng-container *ngIf="activeLang$ | async as activeLang">
