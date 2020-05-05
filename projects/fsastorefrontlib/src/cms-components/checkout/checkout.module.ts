@@ -57,6 +57,7 @@ import { CheckoutStepGuard } from './guards/checkout-step-guard';
 import { CalculatedComponent } from './components/calculated/calculated.component';
 import { ConfigureProductNavigationComponent } from './components/configure-product-navigation/configure-product-navigation.component';
 import { ProductConfigurationFormComponent } from './components/calculated/product-configuration-form.component';
+import { DynamicFormModule } from '@fsa/dynamicforms';
 
 const routes: Routes = [
   {
@@ -172,6 +173,7 @@ const routes: Routes = [
     PaymentMethodModule,
     PaymentFormModule,
     CardModule,
+    DynamicFormModule,
     FSCheckoutProgressModule,
     RouterModule.forChild(routes),
     StoreModule.forFeature(CHECKOUT_FEATURE, reducerToken),

@@ -31,53 +31,43 @@ export class CalculatedComponent implements OnInit, OnDestroy {
   categoryCode;
 
   product$: any;
+  productId;
 
   ngOnInit() {
+    this.product$ = this.currentProductService.getProduct().pipe(
+      map(product => {
+        if (product) {
+          this.productId = product.code;
+        }
+        return product;
+      })
+    );
 
-    this.product$ = this.currentProductService.getProduct();
+    this.subscription.add(
+      this.formDataService
+        .getSubmittedForm()
+        .pipe(
+          switchMap(data => {
+            if (data && data.content) {
+              const pricingData = this.pricingService.buildPricingData(
+                JSON.parse(data.content)
+              );
 
-    this.subscription
-      .add(
-        this.activatedRoute.params
-          .pipe(
-            map(params => {
-              this.categoryCode = params['formCode'];
-            })
-          )
-          .subscribe()
-      )
-      .add(
-        this.formDataService
-          .getSubmittedForm()
-          .pipe(
-            switchMap(data => {
-              if (data && data.content) {
-                let productCode;
-                if (this.categoryCode === 'banking_fixed_term_deposit') {
-                  productCode = 'FTD_FIXED_TERM_DEPOSIT';
-                }
-                if (this.categoryCode === 'banking_loans') {
-                  productCode = 'LO_PERSONAL_LOAN';
-                }
-                const pricingData = this.pricingService.buildPricingData(
-                  JSON.parse(data.content)
+              this.pricingData.next(pricingData);
+
+              return this.productService
+                .getCalculatedProductData(this.productId, pricingData)
+                .pipe(
+                  map(calculatedData =>
+                    this.calculatedProductData.next(calculatedData)
+                  )
                 );
-
-                this.pricingData.next(pricingData);
-
-                return this.productService
-                  .getCalculatedProductData(productCode, pricingData)
-                  .pipe(
-                    map(calculatedData =>
-                      this.calculatedProductData.next(calculatedData)
-                    )
-                  );
-              }
-              return of(null);
-            })
-          )
-          .subscribe()
-      );
+            }
+            return of(null);
+          })
+        )
+        .subscribe()
+    );
   }
 
   ngOnDestroy() {

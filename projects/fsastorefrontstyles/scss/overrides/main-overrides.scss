@@ -49,3 +49,7 @@ cx-fs-cms-custom-container {
   padding: 0;
   box-shadow: none;
 }
+
+.MultiStepCheckoutSummaryPageTemplate cx-page-slot.BodyContent {
+  flex: 0 55% !important;
+}

@@ -1,10 +1,9 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FormComponent } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'cx-fs-choose-cover-navigation',
@@ -17,15 +16,11 @@ export class ChooseCoverNavigationComponent implements OnInit, OnDestroy {
     protected routingService: RoutingService
   ) {}
 
-  @ViewChild(FormComponent,  { static: false })
-  private formComponent: FormComponent;
-
   subscription = new Subscription();
 
   categoryCode: string;
 
   ngOnInit() {
-    console.log(this.formComponent);
     this.subscription.add(
       this.activatedRoute.params
         .pipe(
@@ -38,7 +33,6 @@ export class ChooseCoverNavigationComponent implements OnInit, OnDestroy {
   }
 
   navigateNext() {
-    this.formComponent.submit(null);
     const formDataId = this.formService.getFormDataIdByCategory(
       this.categoryCode
     );

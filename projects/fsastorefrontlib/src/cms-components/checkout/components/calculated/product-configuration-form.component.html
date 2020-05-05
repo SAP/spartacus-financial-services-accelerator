@@ -1,5 +1,10 @@
 <ng-container *ngIf="product$ | async as product">
-  <ng-container *ngFor="let category of product.categories">
-    {{category | json}} <br/>
+  <ng-container *ngIf="formDefinition$ | async as formDefinition; else loading">
+    <cx-form-component
+      *ngIf="formConfig"
+      [formId]="formDefintionId"
+      [formConfig]="formConfig"
+      [applicationId]="applicationId"
+    ></cx-form-component>
   </ng-container>
 </ng-container>

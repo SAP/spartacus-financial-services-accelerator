@@ -1,6 +1,5 @@
 import { PricingData } from './../../../../occ/occ-models/form-pricing.interface';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
-import { FSProductService } from './../../../../core/product-pricing/facade/product.service';
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -8,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { CurrentProductService } from '@spartacus/storefront';
 
 @Component({
   selector: 'cx-fs-configure-product-navigation',
@@ -19,14 +19,18 @@ export class ConfigureProductNavigationComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected routingService: RoutingService,
     protected pricingService: PricingService,
-    protected productService: FSProductService,
-    protected cartService: FSCartService
+    protected cartService: FSCartService,
+    protected currentProductService: CurrentProductService
   ) {}
 
   subscription = new Subscription();
 
   categoryCode: string;
   pricingData: PricingData;
+
+  productCode;
+  bundleTemplate;
+  product$;
 
   ngOnInit() {
     this.subscription.add(
@@ -37,6 +41,19 @@ export class ConfigureProductNavigationComponent implements OnInit, OnDestroy {
           })
         )
         .subscribe()
+    );
+
+    this.product$ = this.currentProductService.getProduct().pipe(
+      map(product => {
+        if (product && product.code) {
+          this.productCode = product.code;
+          const fsProduct = <any>product;
+          if (fsProduct.bundleTemplates[0]) {
+            this.bundleTemplate = fsProduct.bundleTemplates[0].id;
+          }
+        }
+        return product;
+      })
     );
   }
 
@@ -58,22 +75,9 @@ export class ConfigureProductNavigationComponent implements OnInit, OnDestroy {
               this.pricingData = this.pricingService.buildPricingData(
                 JSON.parse(data.content)
               );
-              let productCode;
-              let bundleId;
-
-              if (this.categoryCode === 'banking_fixed_term_deposit') {
-                productCode = 'FTD_FIXED_TERM_DEPOSIT';
-                bundleId = 'FIXED_TERM_DEPOSIT_PRODUCT';
-              }
-
-              if (this.categoryCode === 'banking_loans') {
-                productCode = 'LO_PERSONAL_LOAN';
-                bundleId = 'LOAN_PRODUCT';
-              }
-
               this.cartService.createCartForProduct(
-                productCode,
-                bundleId,
+                this.productCode,
+                this.bundleTemplate,
                 1,
                 this.pricingData
               );

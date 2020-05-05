@@ -1,3 +1,5 @@
-<button class="primary-button btn-block" (click)="navigateNext()">
-  {{ 'common.continue' | cxTranslate }}
-</button>
+<ng-container *ngIf="product$ | async">
+  <button class="primary-button btn-block" (click)="navigateNext()">
+    {{ 'common.continue' | cxTranslate }}
+  </button>
+</ng-container>

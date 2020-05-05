@@ -17,5 +17,4 @@ describe('CalculatedComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
-
 });
