@@ -57,7 +57,7 @@ describe('AbstractOptionsComponent', () => {
       mockLocalizationObj,
       'en'
     );
-    expect(localizedOption).toEqual('Test en');
+    expect(localizedOption).toEqual(mockLocalizationObj.en);
   });
 
   it('should check localizedoption when laguage is set to de', () => {
@@ -65,6 +65,6 @@ describe('AbstractOptionsComponent', () => {
       mockLocalizationObj,
       'de'
     );
-    expect(localizedOption).toEqual('Test de');
+    expect(localizedOption).toEqual(mockLocalizationObj.de);
   });
 });

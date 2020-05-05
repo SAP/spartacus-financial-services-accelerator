@@ -1,14 +1,14 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { Input, Component, DebugElement, Type } from '@angular/core';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
 import { DynamicSelectComponent } from './dynamic-select.component';
-import { Input, Component, DebugElement, Type } from '@angular/core';
-import { FieldConfig } from 'dynamicforms/src/core';
-import { of } from 'rxjs';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FieldConfig } from '../../core/models/form-config.interface';
 import { DynamicFormsConfig } from '../../core';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
-import { By } from '@angular/platform-browser';
 
 @Component({
   // tslint:disable
