@@ -82,7 +82,7 @@ export function checkAccordions(category) {
 }
 
 export function placeOrderOnFinalReview() {
-    const confirmationPage = waitForPage(
+  const confirmationPage = waitForPage(
     'orderConfirmationPage',
     'confirmationPage'
   );
@@ -90,7 +90,7 @@ export function placeOrderOnFinalReview() {
     cy.get('.form-check-input').click();
     cy.get('.primary-button').click();
   });
-    cy.wait(`@${confirmationPage}`)
+  cy.wait(`@${confirmationPage}`)
     .its('status')
     .should('eq', 200);
 }
