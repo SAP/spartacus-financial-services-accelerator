@@ -93,6 +93,7 @@ export interface FSOrderEntry extends OrderEntry {
 
 export interface FSPrice extends Price {
   oneTimeChargeEntries?: OneTimeChargeEntry[];
+  recurringChargeEntries?: RecurringChargeEntry[];
 }
 
 export interface OneTimeChargeEntry {
@@ -101,6 +102,10 @@ export interface OneTimeChargeEntry {
   price?: Price;
   billingTime?: BillingTime;
   chargeInformation?: string;
+}
+
+export interface RecurringChargeEntry {
+  price?: Price;
 }
 
 export interface BillingTime {
