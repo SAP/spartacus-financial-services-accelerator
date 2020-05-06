@@ -5,8 +5,8 @@ import { of } from 'rxjs';
 import { Type } from '@angular/core';
 import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { DynamicFormsConfig } from '../../core/config/form-config';
-import { FieldConfig } from '../../core';
 import { AbstractFormComponent } from './abstract-form.component';
+import { FieldConfig } from '../../core/models/form-config.interface';
 
 class MockOccFormService {}
 

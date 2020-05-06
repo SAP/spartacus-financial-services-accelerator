@@ -117,6 +117,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         .subscribe()
     );
   }
+
   handleSubmit(event: Event) {
     event.preventDefault();
     event.stopPropagation();

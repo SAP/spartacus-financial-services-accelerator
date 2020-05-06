@@ -1,16 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-dynamic-select',
   templateUrl: './dynamic-select.component.html',
 })
-export class DynamicSelectComponent extends AbstractFormComponent
-  implements OnInit, OnDestroy {
-  optionsSubject = new BehaviorSubject<any>([]);
-  options$: Observable<any> = this.optionsSubject.asObservable();
+export class DynamicSelectComponent extends AbstractFormComponent {
+  options$: Observable<any>;
 
   ngOnInit() {
     super.ngOnInit();
@@ -32,7 +30,8 @@ export class DynamicSelectComponent extends AbstractFormComponent
                     label: item.value,
                   });
                 });
-                this.optionsSubject.next(options);
+                this.options$ = of(options);
+                this.changeDetectorRef.detectChanges();
                 this.group.get(this.config.name).setValue(null);
               }
             })
