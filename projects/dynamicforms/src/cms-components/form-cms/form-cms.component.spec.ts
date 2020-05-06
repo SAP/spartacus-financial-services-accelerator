@@ -1,11 +1,12 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormCMSComponent } from './form-cms.component';
 import { Component, Input, Type } from '@angular/core';
-import { YFormCmsComponent } from '../cms-component.models';
-import { of } from 'rxjs';
-import { CmsComponentData } from '@spartacus/storefront';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CmsComponent } from '@spartacus/core';
+import { CmsComponentData } from '@spartacus/storefront';
+import { of } from 'rxjs';
 import { FormDataService } from '../../core/services/data/form-data.service';
+import { YFormCmsComponent } from '../cms-component.models';
+import { FormDataStorageService } from './../../core/services/storage/form-data-storage.service';
+import { FormCMSComponent } from './form-cms.component';
 
 @Component({
   selector: 'cx-form-component',
@@ -60,14 +61,14 @@ class MockFormDataService {
     return of(formDefinition);
   }
   loadFormDefinition() {}
-
   getFormData() {
     return formData;
   }
-
   loadFormData() {}
+}
 
-  getFormDataIdFromLocalStorage() {
+class MockFormDataStorageService {
+  getFormDataIdByDefinitionCode() {
     return formDataId;
   }
 }
@@ -76,6 +77,7 @@ describe('FormCMSComponent', () => {
   let component: FormCMSComponent;
   let fixture: ComponentFixture<FormCMSComponent>;
   let mockFormDataService: FormDataService;
+  let mockFormDataStorageService: FormDataStorageService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -89,9 +91,16 @@ describe('FormCMSComponent', () => {
           provide: FormDataService,
           useClass: MockFormDataService,
         },
+        {
+          provide: FormDataStorageService,
+          useClass: MockFormDataStorageService,
+        },
       ],
     }).compileComponents();
     mockFormDataService = TestBed.get(FormDataService as Type<FormDataService>);
+    mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
+      FormDataStorageService
+    >);
   }));
 
   beforeEach(() => {
@@ -105,9 +114,10 @@ describe('FormCMSComponent', () => {
   });
 
   it('should load form without existing data', () => {
-    spyOn(mockFormDataService, 'getFormDataIdFromLocalStorage').and.returnValue(
-      null
-    );
+    spyOn(
+      mockFormDataStorageService,
+      'getFormDataIdByDefinitionCode'
+    ).and.returnValue(null);
     spyOn(mockFormDataService, 'getFormData').and.callThrough();
     component.ngOnInit();
     expect(mockFormDataService.getFormData).not.toHaveBeenCalled();

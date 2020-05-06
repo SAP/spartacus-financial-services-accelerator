@@ -6,6 +6,7 @@ import { map, take } from 'rxjs/operators';
 import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
 import { FSCartService } from '../../cart/facade/cart.service';
 import { StateWithMyAccount } from '../store/my-account-state';
+import { FormDataStorageService } from './../../../../../dynamicforms/src/core/services/storage/form-data-storage.service';
 import * as fromQuoteStore from './../store';
 import * as fromAction from './../store/actions';
 
@@ -15,7 +16,8 @@ export class QuoteService {
     protected store: Store<StateWithMyAccount>,
     protected cartService: FSCartService,
     protected authService: AuthService,
-    protected formDataService: FormDataService
+    protected formDataService: FormDataService,
+    protected formDataStorageService: FormDataStorageService
   ) {}
 
   loadQuotes() {
@@ -73,7 +75,7 @@ export class QuoteService {
 
   protected loadPersonalDetailsForm(entry: FSOrderEntry) {
     if (entry.formData && entry.formData.length > 0) {
-      this.formDataService.setFormDataToLocalStorage({
+      this.formDataStorageService.setFormDataToLocalStorage({
         id: entry.formData[0].id,
         formDefinition: {
           formId: entry.formData[0].formDefinition.formId,
@@ -97,7 +99,7 @@ export class QuoteService {
         .pipe(
           map(formData => {
             if (formData.formDefinition) {
-              this.formDataService.setFormDataToLocalStorage({
+              this.formDataStorageService.setFormDataToLocalStorage({
                 id: dataId,
                 formDefinition: {
                   formId: formData.formDefinition.formId,

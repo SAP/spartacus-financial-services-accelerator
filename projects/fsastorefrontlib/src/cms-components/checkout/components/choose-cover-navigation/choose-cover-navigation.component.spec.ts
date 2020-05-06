@@ -1,8 +1,10 @@
+import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService } from '@fsa/dynamicforms';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { of } from 'rxjs';
+import { FormDataStorageService } from './../../../../../../dynamicforms/src/core/services/storage/form-data-storage.service';
 import { ChooseCoverNavigationComponent } from './choose-cover-navigation.component';
 import createSpy = jasmine.createSpy;
 
@@ -14,9 +16,14 @@ class MockRoutingService {
   go = createSpy();
 }
 
+class MockFormDataStorageService {
+  setFormDataToLocalStorage() {}
+}
+
 describe('ChooseCoverNavigationComponent', () => {
   let component: ChooseCoverNavigationComponent;
   let fixture: ComponentFixture<ChooseCoverNavigationComponent>;
+  let mockFormDataStorageService: FormDataStorageService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -35,8 +42,15 @@ describe('ChooseCoverNavigationComponent', () => {
           provide: ActivatedRoute,
           useClass: MockActivatedRoute,
         },
+        {
+          provide: FormDataStorageService,
+          useClass: MockFormDataStorageService,
+        },
       ],
     }).compileComponents();
+    mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
+      FormDataStorageService
+    >);
   }));
 
   beforeEach(() => {
