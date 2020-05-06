@@ -9,7 +9,7 @@ export class OccMockFormService {
   constructor(
     protected httpClient: HttpClient,
     protected occEndpointService: OccEndpointsService
-  ) {}
+  ) { }
 
   valueListsCache = new Map();
 
@@ -17,6 +17,21 @@ export class OccMockFormService {
 
   public getValuesFromAPI(fieldUrl: string): Observable<any> {
     const url = this.getFullAPIUrl(fieldUrl);
+
+    const cacheValues = this.valueListsCache.get(url);
+    if (cacheValues) {
+      return of(cacheValues);
+    }
+    return this.httpClient.get<any>(url).pipe(
+      map(values => {
+        this.valueListsCache.set(url, values);
+        return values;
+      })
+    );
+  }
+
+  public getValuesFromAPIForValue(fieldUrl: string, value: string): Observable<any> {
+    const url = this.getFullAPIUrl(fieldUrl) + '?parentListItemCode=' + value;
 
     const cacheValues = this.valueListsCache.get(url);
     if (cacheValues) {

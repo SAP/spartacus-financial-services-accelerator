@@ -1,8 +1,4 @@
-<div
-  class="dynamic-field"
-  [formGroup]="group"
-  [hidden]="group.controls[config.name].disabled"
->
+<div class="dynamic-field" [formGroup]="group" [hidden]="group.controls[config.name].disabled">
   <div class="form-group">
     <label class="col-form-label">
       {{ label }}
@@ -10,23 +6,15 @@
         {{ 'forms.optional' | cxTranslate }}
       </ng-container>
     </label>
-    <select
-      class="form-control"
-      [attr.name]="config.name"
-      formControlName="{{ config.name }}"
-    >
+    <select class="form-control" [attr.name]="config.name" formControlName="{{ config.name }}" >
       <option [selected]="true" disabled value="null">{{
         'fscommon.pleaseSelect' | cxTranslate
       }}</option>
-      <option *ngFor="let option of config.options" value="{{ option.name }}">
-        <ng-container *ngIf="activeLang$ | async as activeLang">
-          {{ getLocalizedOption(option.label, activeLang) }}
-        </ng-container>
+      <option *ngFor="let option of options$ | async as options" value="{{ option.name }}"
+        >
+        {{ option.label }}
       </option>
     </select>
   </div>
-  <cx-error-notice
-    [warn]="group.controls[config.name]"
-    [parentConfig]="config"
-  ></cx-error-notice>
+  <cx-error-notice [warn]="group.controls[config.name]" [parentConfig]="config"></cx-error-notice>
 </div>
