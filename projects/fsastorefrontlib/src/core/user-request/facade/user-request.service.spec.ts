@@ -1,5 +1,6 @@
 import { Type } from '@angular/core';
 import { inject, TestBed } from '@angular/core/testing';
+import { FormDataStorageService } from '@fsa/dynamicforms';
 import { Store, StoreModule } from '@ngrx/store';
 import { AuthService, OCC_USER_ID_CURRENT, UserToken } from '@spartacus/core';
 import { Observable, of, ReplaySubject } from 'rxjs';
@@ -7,7 +8,6 @@ import { FSUserRequest } from '../../../occ/occ-models/occ.models';
 import * as fromAction from '../store/actions';
 import { reducerProvider, reducerToken } from '../store/reducers/index';
 import { FSUserRequestState } from '../store/user-request-state';
-import { FormDataStorageService } from './../../../../../dynamicforms/src/core/services/storage/form-data-storage.service';
 import { UserRequestService } from './user-request.service';
 
 const userId = OCC_USER_ID_CURRENT;

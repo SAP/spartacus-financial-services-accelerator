@@ -1,10 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormDataService, YFormData } from '@fsa/dynamicforms';
+import {
+  FormDataService,
+  FormDataStorageService,
+  YFormData,
+} from '@fsa/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FormDataStorageService } from './../../../../../../dynamicforms/src/core/services/storage/form-data-storage.service';
 
 @Component({
   selector: 'cx-fs-choose-cover-navigation',

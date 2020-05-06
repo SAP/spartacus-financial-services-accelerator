@@ -1,10 +1,9 @@
 import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { FormDataService } from '@fsa/dynamicforms';
+import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { of } from 'rxjs';
-import { FormDataStorageService } from './../../../../../../dynamicforms/src/core/services/storage/form-data-storage.service';
 import { ChooseCoverNavigationComponent } from './choose-cover-navigation.component';
 import createSpy = jasmine.createSpy;
 

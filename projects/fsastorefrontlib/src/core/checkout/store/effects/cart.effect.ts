@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormDataStorageService } from '@fsa/dynamicforms';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { CartActions, OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
@@ -7,7 +8,6 @@ import { catchError, concatMap, map } from 'rxjs/operators';
 import { CartConnector } from '../../../cart/connectors/cart.connector';
 import * as fromQuoteActions from '../../../my-account/store/actions/quote.action';
 import * as fromActions from '../actions/cart.action';
-import { FormDataStorageService } from './../../../../../../dynamicforms/src/core/services/storage/form-data-storage.service';
 
 @Injectable()
 export class CartEffects {

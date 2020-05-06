@@ -41,19 +41,19 @@ describe('FormDataStorageService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should get form data by by definition code', () => {
+  it('should get form storage object by definition code', () => {
     const formDataId = service.getFormDataIdByDefinitionCode(
       'formDefinitionId'
     );
     expect(formDataId).toEqual('formDataId');
   });
 
-  it('should get form data by category code', () => {
+  it('should get form storage object by category code', () => {
     const formDataId = service.getFormDataIdByCategory('categoryCode');
     expect(formDataId).toEqual('formDataId');
   });
 
-  it('should not find form storage objects when dynamic forms local storage is empty', () => {
+  it('should not find form storage objects when dynamic forms storage is empty', () => {
     service.formLocalStorageData = null;
     const formDataId1 = service.getFormDataIdByCategory('testCategory');
     const formDataId2 = service.getFormDataIdByDefinitionCode(
@@ -64,7 +64,7 @@ describe('FormDataStorageService', () => {
     expect(formDataId2).not.toBeTruthy();
   });
 
-  it('should create new form storage instance in dynamic forms local storage', () => {
+  it('should create new form storage instance in dynamic forms storage', () => {
     service.setFormDataToLocalStorage(mockFormData);
 
     expect(service.formLocalStorageData.length).toEqual(2);
@@ -75,7 +75,7 @@ describe('FormDataStorageService', () => {
     });
   });
 
-  it('should override existing storage instance in dynamic forms local storage', () => {
+  it('should override existing storage instance in dynamic forms storage', () => {
     const existingFormData: YFormData = {
       id: 'formDataId',
       refId: 'refId',
@@ -95,7 +95,7 @@ describe('FormDataStorageService', () => {
     });
   });
 
-  it('should initially create dynamic forms local storage key', () => {
+  it('should initially create dynamic forms storage key', () => {
     service.formLocalStorageData = null;
     service.setFormDataToLocalStorage(mockFormData);
 

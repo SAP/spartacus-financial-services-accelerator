@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { FormDataService } from '@fsa/dynamicforms';
+import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { select, Store } from '@ngrx/store';
 import { AuthService, OrderEntry } from '@spartacus/core';
 import { map, take } from 'rxjs/operators';
 import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
 import { FSCartService } from '../../cart/facade/cart.service';
 import { StateWithMyAccount } from '../store/my-account-state';
-import { FormDataStorageService } from './../../../../../dynamicforms/src/core/services/storage/form-data-storage.service';
 import * as fromQuoteStore from './../store';
 import * as fromAction from './../store/actions';
 

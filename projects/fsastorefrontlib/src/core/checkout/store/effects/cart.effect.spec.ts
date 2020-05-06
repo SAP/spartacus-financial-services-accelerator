@@ -1,6 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { FormDataStorageService } from '@fsa/dynamicforms';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import {
@@ -13,7 +14,6 @@ import { Observable, of } from 'rxjs';
 import { CartConnector } from '../../../cart';
 import * as fromQuoteActions from '../../../my-account/store/actions/quote.action';
 import * as fromActions from '../actions';
-import { FormDataStorageService } from './../../../../../../dynamicforms/src/core/services/storage/form-data-storage.service';
 import * as fromEffects from './cart.effect';
 
 const cartId = 'cartId';
