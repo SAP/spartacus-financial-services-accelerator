@@ -16,11 +16,14 @@
         type="checkbox"
         [attr.name]="option.name"
         [attr.id]="config.name + option.name"
+        value="{{ option.name }}"
         [formControlName]="config.name"
       />
-      <label class="pl-3 pt-1" [attr.for]="config.name + option.name">{{
-        option.label
-      }}</label>
+      <label class="pl-3 pt-1" [attr.for]="config.name + option.name"
+        ><ng-container *ngIf="activeLang$ | async as activeLang">
+          {{ getLocalizedOption(option.label, activeLang) }}
+        </ng-container></label
+      >
     </div>
   </div>
   <cx-error-notice
