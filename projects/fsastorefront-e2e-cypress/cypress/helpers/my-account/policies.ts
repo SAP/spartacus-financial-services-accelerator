@@ -49,3 +49,18 @@ export function getPayloadForPolicyUpdate(policyId) {
     },
   };
 }
+
+export function checkAutoPolicy() {
+  cy.get('.info-card')
+    .should('have.length', 1)
+    .within(() => {
+      cy.get('.info-card-data .title')
+        .eq(2)
+        .contains('€10.95 / Monthly');
+      cy.get('.primary-button').contains(' Make a Claim');
+    });
+}
+
+export function clickOnDetails() {
+  cy.get('.secondary-button').click();
+}
