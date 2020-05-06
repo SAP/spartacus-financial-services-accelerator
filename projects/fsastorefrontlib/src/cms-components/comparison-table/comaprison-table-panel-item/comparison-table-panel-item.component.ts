@@ -77,11 +77,12 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
               ) {
                 product.price.oneTimeChargeEntries.forEach(
                   oneTimeChargeEntry => {
-                    if (oneTimeChargeEntry.billingTime.code === 'paynow') {
-                      if (oneTimeChargeEntry.price.value > 0) {
-                        this.productPrice =
-                          oneTimeChargeEntry.price.formattedValue;
-                      }
+                    if (
+                      oneTimeChargeEntry.billingTime.code === 'paynow' &&
+                      oneTimeChargeEntry.price.value > 0
+                    ) {
+                      this.productPrice =
+                        oneTimeChargeEntry.price.formattedValue;
                     }
                   }
                 );
