@@ -4,66 +4,83 @@
 <ng-container *ngIf="quotes$ | async as quotes">
   <ng-container *ngIf="quotesLoaded$ | async; else loading">
     <div class="row" *ngIf="quotes.length > 0; else noQuotes">
-      <div *ngFor="let quote of quotes" class="col-md-4">
-        <div class="info-card border border-color-3 border-bottom-0">
-          <div class="info-card-title border-bottom-3 border-color-primary">
-            <span class="image-wrapper">
-              <img
-                class="image-item"
-                [src]="getBaseUrl() + quote.defaultCategory.image?.url"
-                alt=""
-              />
-            </span>
-            <h3 class="info-card-caption color-primary">
-              {{ quote.defaultCategory?.name }}
-            </h3>
-          </div>
-          <div class="info-card-details-wrapper">
-            <div class="info-card-data">
-              <span class="title">{{ quote.planName }}</span>
-              <span class="value">{{ quote.quoteId }}</span>
-            </div>
-            <div class="info-card-data">
-              <span class="title">{{
-                'quote.quoteStatus.title' | cxTranslate
-              }}</span>
-              <ng-container *ngIf="!quote.isExpired; else expired">
-                <span *ngIf="quote.state.code === 'BIND'" class="value">
-                  {{ 'quote.quoteStatus.ready' | cxTranslate }}
-                </span>
-                <span *ngIf="quote.state.code === 'UNBIND'" class="value">
-                  {{ 'quote.quoteStatus.unfinished' | cxTranslate }}
-                </span>
-              </ng-container>
-            </div>
-            <div class="info-card-data">
-              <span class="title">{{
-                'fscommon.expiryDate' | cxTranslate
-              }}</span>
-              <span *ngIf="quote.expiryDate" class="value">{{
-                quote.expiryDate | cxDate: 'dd MMM yyyy'
-              }}</span>
-              <span *ngIf="!quote.expiryDate" class="value">{{
-                'fscommon.expiryNotConfirmed' | cxTranslate
-              }}</span>
-            </div>
-            <div class="info-card-data">
-              <span class="title">{{ 'fscommon.price' | cxTranslate }}</span>
-              <span class="value"
-                >{{ quote.quotePrice }} / {{ quote.paymentFrequency }}</span
-              >
-            </div>
-          </div>
-          <div
-            class="info-card-button-wrapper border-top border-bottom border-color-primary"
-          >
-            <button
-              class="primary-button col-6 my-5"
-              [disabled]="quote.isExpired"
-              (click)="retrieveQuote(quote)"
+      <div *ngFor="let quote of quotes" class="col-12 col-md-6">
+        <div class="info-card">
+          <h6 class="title background-color-4 text-dark">
+            {{ quote.defaultCategory?.name }}
+            <ng-container
+              *ngIf="
+                (quote.defaultCategory?.code.split('_') | slice: 0:1) ==
+                  'banking';
+                else insurance
+              "
+              >{{
+                'fscommon.application.application' | cxTranslate
+              }}</ng-container
             >
-              {{ 'fscommon.retrieve' | cxTranslate }}
-            </button>
+          </h6>
+          <div class="info-card-wrapper">
+            <div class="info-card-content">
+              <div class="info-card-details">
+                <div class="info-card-data">
+                  <span class="label">{{ quote.planName }}</span
+                  >:
+                  <span class="value">{{ quote.quoteId }}</span>
+                </div>
+                <div class="info-card-data">
+                  <span class="label">{{
+                    'quote.quoteStatus.title' | cxTranslate
+                  }}</span
+                  >:
+                  <ng-container *ngIf="!quote.isExpired; else expired">
+                    <span *ngIf="quote.state.code === 'BIND'" class="value">
+                      {{ 'quote.quoteStatus.ready' | cxTranslate }}
+                    </span>
+                    <span *ngIf="quote.state.code === 'UNBIND'" class="value">
+                      {{ 'quote.quoteStatus.unfinished' | cxTranslate }}
+                    </span>
+                  </ng-container>
+                </div>
+                <div class="info-card-data">
+                  <span class="label">{{
+                    'fscommon.expiryDate' | cxTranslate
+                  }}</span
+                  >:
+                  <span *ngIf="quote.expiryDate" class="value">{{
+                    quote.expiryDate | cxDate: 'dd MMM yyyy'
+                  }}</span>
+                  <span *ngIf="!quote.expiryDate" class="value">{{
+                    'fscommon.expiryNotConfirmed' | cxTranslate
+                  }}</span>
+                </div>
+                <div class="info-card-data">
+                  <span class="label">{{ 'fscommon.price' | cxTranslate }}</span
+                  >:
+                  <span class="value"
+                    >{{ quote.quotePrice }}
+                    <ng-container *ngIf="quote.paymentFrequency">
+                      / {{ quote.paymentFrequency }}</ng-container
+                    ></span
+                  >
+                </div>
+              </div>
+              <div class="info-card-image">
+                <span class="image-wrapper">
+                  <img
+                    class="image-item"
+                    [src]="getBaseUrl() + quote.defaultCategory.image?.url"
+                    alt=""
+                  />
+                </span>
+              </div>
+            </div>
+            <ng-container *ngIf="!quote.isExpired">
+              <div class="info-card-links">
+                <a class="link" (click)="retrieveQuote(quote)">
+                  {{ 'fscommon.retrieve' | cxTranslate }}
+                </a>
+              </div>
+            </ng-container>
           </div>
         </div>
       </div>
@@ -72,6 +89,9 @@
 </ng-container>
 <ng-template #noQuotes>
   <h3>{{ 'quote.youHaveNoQuotes' | cxTranslate }}!</h3>
+</ng-template>
+<ng-template #insurance>
+  {{ 'quote.quote' | cxTranslate }}
 </ng-template>
 <ng-template #expired>
   <span class="value">

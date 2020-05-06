@@ -80,6 +80,7 @@ export const fscommon = {
     submit: '[DE] Submit',
     totalResults: '[DE] Total results',
     application: {
+      application: '[DE] Application',
       applicationRequestSubmitted:
         'Ihr Antrag wurde erfolgreich in unserem System gespeichert. Eine E-Mail mit weiteren Informationen wurde an Ihre E-Mail Adresse gesendet.',
       applicationNumber: 'Antragsnummer ist',
