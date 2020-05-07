@@ -8,16 +8,6 @@
         <div class="info-card">
           <h6 class="title background-color-4 text-dark">
             {{ quote.defaultCategory?.name }}
-            <ng-container
-              *ngIf="
-                (quote.defaultCategory?.code.split('_') | slice: 0:1) ==
-                  'banking';
-                else insurance
-              "
-              >{{
-                'fscommon.application.application' | cxTranslate
-              }}</ng-container
-            >
           </h6>
           <div class="info-card-wrapper">
             <div class="info-card-content">

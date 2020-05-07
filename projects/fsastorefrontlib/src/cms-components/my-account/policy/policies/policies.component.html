@@ -31,46 +31,68 @@
                   >:
                   <span class="value">{{ policy.contractNumber }}</span>
                 </div>
-                <div
+                <ng-container
                   *ngIf="
                     policy.insuredObjectList?.insuredObjects &&
                     policy.insuredObjectList?.insuredObjects.length > 0 &&
                     (policy.insuredObjectList?.insuredObjects)[0]
                       ?.insuredObjectItems
                   "
-                  class="info-card-data"
                 >
-                  <span
+                  <ng-container
                     *ngIf="
-                      policy.insuredObjectList?.insuredObjects &&
-                      policy.insuredObjectList?.insuredObjects.length > 0 &&
                       (policy.insuredObjectList?.insuredObjects)[0]
                         ?.insuredObjectItems.length > 0
                     "
-                    class="label"
-                    >{{
-                      ((policy.insuredObjectList?.insuredObjects)[0]
-                        ?.insuredObjectItems)[0]?.value
-                    }}</span
-                  >:
-                  <span
+                  >
+                    <div class="info-card-data">
+                      <span class="label">{{
+                        ((policy.insuredObjectList?.insuredObjects)[0]
+                          ?.insuredObjectItems)[0]?.label
+                      }}</span
+                      >:
+                      <span class="value">{{
+                        ((policy.insuredObjectList?.insuredObjects)[0]
+                          ?.insuredObjectItems)[0]?.value
+                      }}</span>
+                    </div>
+                  </ng-container>
+                  <ng-container
                     *ngIf="
-                      policy.insuredObjectList?.insuredObjects &&
-                      policy.insuredObjectList?.insuredObjects.length > 0 &&
                       (policy.insuredObjectList?.insuredObjects)[0]
                         ?.insuredObjectItems.length > 1
                     "
-                    class="value"
-                    >{{
-                      ((policy.insuredObjectList?.insuredObjects)[0]
-                        ?.insuredObjectItems)[1]?.value
-                    }}</span
+                  >
+                    <div class="info-card-data">
+                      <span class="label">{{
+                        ((policy.insuredObjectList?.insuredObjects)[0]
+                          ?.insuredObjectItems)[1]?.label
+                      }}</span
+                      >:
+                      <span class="value">{{
+                        ((policy.insuredObjectList?.insuredObjects)[0]
+                          ?.insuredObjectItems)[1]?.value
+                      }}</span>
+                    </div>
+                  </ng-container>
+                </ng-container>
+                <div class="info-card-data">
+                  <span class="label">{{
+                    'fscommon.premium' | cxTranslate
+                  }}</span
+                  >:
+                  <span class="value"
+                    >{{ policy.policyPremium?.formattedValue }}
+                    <ng-container *ngIf="policy.paymentFrequency">
+                      /
+                      {{ policy.paymentFrequency }}
+                    </ng-container></span
                   >
                 </div>
                 <div class="info-card-data">
-                  <span class="label"
-                    >{{ policy.policyPremium?.formattedValue }} /
-                    {{ policy.paymentFrequency }}</span
+                  <span class="label">{{
+                    'fscommon.paymentMethod' | cxTranslate
+                  }}</span
                   >:
                   <span class="value">{{
                     (policy.paymentMethod !== undefined
@@ -79,7 +101,11 @@
                   }}</span>
                 </div>
                 <div class="info-card-data">
-                  <span class="label"
+                  <span class="label">{{
+                    'fscommon.duration' | cxTranslate
+                  }}</span
+                  >:
+                  <span class="value"
                     >{{ policy.startDate | cxDate: 'dd MMM yyyy' }} -
                     {{ policy.endDate | cxDate: 'dd MMM yyyy' }}</span
                   >
