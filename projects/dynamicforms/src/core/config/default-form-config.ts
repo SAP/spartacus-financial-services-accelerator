@@ -10,6 +10,7 @@ import { DefaultFormValidators } from './../../util/validators/default-form-vali
 import { DynamicFormsConfig } from './form-config';
 import { SeparatorComponent } from '../../components/separator/separator.component';
 import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
+import { DynamicSelectComponent } from '../../components/dynamic-select/dynamic-select.component';
 
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
@@ -22,6 +23,9 @@ export const defaultFormConfig: DynamicFormsConfig = {
       },
       select: {
         component: SelectComponent,
+      },
+      dynamicSelect: {
+        component: DynamicSelectComponent,
       },
       title: {
         component: TitleComponent,

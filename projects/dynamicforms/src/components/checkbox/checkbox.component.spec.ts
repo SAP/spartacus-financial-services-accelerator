@@ -32,7 +32,9 @@ const mockField: FieldConfig = {
   name: 'testcheckbox',
   options: [
     {
-      label: 'testOptionLabel',
+      label: {
+        en: 'testOptionLabel',
+      },
       name: 'testOptionName',
     },
   ],

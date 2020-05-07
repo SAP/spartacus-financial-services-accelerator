@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractFormComponent } from '../abstract-form.component';
+import { AbstractOptionsComponent } from '../abstract-options/abstract-options.component';
 
 @Component({
   selector: 'cx-checkbox',
   templateUrl: './checkbox.component.html',
 })
-export class CheckboxComponent extends AbstractFormComponent {}
+export class CheckboxComponent extends AbstractOptionsComponent {}

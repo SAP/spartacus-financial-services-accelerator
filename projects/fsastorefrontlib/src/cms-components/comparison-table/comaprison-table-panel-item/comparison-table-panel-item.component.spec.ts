@@ -24,9 +24,11 @@ class MockUrlPipe implements PipeTransform {
   transform() {}
 }
 
+const paynow = 'paynow';
+
 const billingTimes = [
   {
-    code: 'paynow',
+    code: paynow,
     name: 'Paynow',
     helpContent: 'Test help content',
     orderNumber: 1,
@@ -39,23 +41,46 @@ const billingTimes = [
   },
 ];
 
+const productCode = 'TEST_PRODUCT';
+const productName = 'Test Prduct';
+const currencyIso = 'EUR';
+const productPrice = '€25.00';
+const recurringPrice = '€10.00';
+
 const product: FSProduct = {
-  code: 'TEST_PRODUCT',
-  name: 'Test Product',
+  code: productCode,
+  name: productName,
   price: {
-    currencyIso: 'EUR',
+    currencyIso: currencyIso,
     oneTimeChargeEntries: [
       {
         billingTime: {
-          code: 'paynow',
+          code: paynow,
         },
         price: {
-          formattedValue: '€25.00',
+          value: 25.0,
+          formattedValue: productPrice,
         },
       },
     ],
   },
 };
+
+const recurringProduct: FSProduct = {
+  code: productCode,
+  name: productName,
+  price: {
+    recurringChargeEntries: [
+      {
+        price: {
+          currencyIso: currencyIso,
+          formattedValue: recurringPrice,
+        },
+      },
+    ],
+  },
+};
+
 class MockCartService {
   createCartForProduct(): void {}
 }
@@ -165,7 +190,7 @@ describe('ComparisonTablePanelItemComponent', () => {
     expect(comparisonTablePanelItemComponent).toBeTruthy();
   });
 
-  it('should create comparison panel item with product data', () => {
+  it('should create comparison panel item with with one time chaarge entry', () => {
     spyOn(mockProductService, 'getCalculatedProductData').and.returnValue(
       of(product)
     );
@@ -175,6 +200,20 @@ describe('ComparisonTablePanelItemComponent', () => {
         expect(productData).toEqual(product);
       })
       .unsubscribe();
+  });
+
+  it('should create comparison panel item with recurring entry', () => {
+    spyOn(mockProductService, 'getCalculatedProductData').and.returnValue(
+      of(recurringProduct)
+    );
+    comparisonTablePanelItemComponent.ngOnInit();
+    let result;
+    comparisonTablePanelItemComponent.product$
+      .subscribe(_ => {
+        result = comparisonTablePanelItemComponent.productPrice;
+      })
+      .unsubscribe();
+    expect(result).toEqual(recurringPrice);
   });
 
   it('should not define price when product of comparison table panel item is not initialized', () => {
@@ -187,14 +226,14 @@ describe('ComparisonTablePanelItemComponent', () => {
 
   it('should not define price when billing times are invalid', () => {
     const invalidProduct: FSProduct = {
-      code: 'TEST_PRODUCT',
-      name: 'Test Product',
+      code: productCode,
+      name: productName,
       price: {
-        currencyIso: 'EUR',
+        currencyIso: currencyIso,
         oneTimeChargeEntries: [
           {
             billingTime: {
-              code: 'invalid_billingTime_code',
+              code: 'invalid_billing_time_code',
             },
             price: {
               formattedValue: '€0.00',
@@ -206,8 +245,14 @@ describe('ComparisonTablePanelItemComponent', () => {
     spyOn(mockProductService, 'getCalculatedProductData').and.returnValue(
       of(invalidProduct)
     );
+    let result;
     comparisonTablePanelItemComponent.ngOnInit();
-    expect(comparisonTablePanelItemComponent.productPrice).not.toBeTruthy();
+    comparisonTablePanelItemComponent.product$
+      .subscribe(_ => {
+        result = comparisonTablePanelItemComponent.productPrice;
+      })
+      .unsubscribe();
+    expect(result).not.toBeTruthy();
   });
 
   it('should create and start bundle for product', () => {

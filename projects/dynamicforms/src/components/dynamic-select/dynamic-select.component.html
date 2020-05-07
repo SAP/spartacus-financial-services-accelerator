@@ -18,10 +18,11 @@
       <option [selected]="true" disabled value="null">{{
         'fscommon.pleaseSelect' | cxTranslate
       }}</option>
-      <option *ngFor="let option of config.options" value="{{ option.name }}">
-        <ng-container *ngIf="activeLang$ | async as activeLang">
-          {{ getLocalizedOption(option.label, activeLang) }}
-        </ng-container>
+      <option
+        *ngFor="let option of options$ | async as options"
+        value="{{ option.name }}"
+      >
+        {{ option.label }}
       </option>
     </select>
   </div>

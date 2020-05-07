@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from '../core/models/form-config.interface';
-import { AbstractFormComponent } from './abstract-form.component';
+import { AbstractFormComponent } from './abstract-form/abstract-form.component';
 import { DynamicFormsConfig } from '../core/config/form-config';
 
 @Directive({
