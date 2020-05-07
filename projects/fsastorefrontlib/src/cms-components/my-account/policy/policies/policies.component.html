@@ -4,111 +4,126 @@
 <ng-container *ngIf="policies$ | async as policies">
   <ng-container *ngIf="policiesLoaded$ | async; else loading">
     <div class="row" *ngIf="(policies | json) != '{}'; else noPolicies">
-      <div *ngFor="let policy of policies.insurancePolicies" class="col-md-4">
-        <div class="info-card border border-bottom-0 border-color-3">
-          <div class="info-card-title border-bottom-3 border-color-secondary">
-            <span class="image-wrapper">
-              <img
-                class="image-item"
-                [src]="
-                  getBaseUrl() +
-                  policy.mainProduct.coverageProduct.images[0].url
-                "
-                alt=""
-              />
-            </span>
-            <h4 class="info-card-caption color-secondary">
-              {{ policy.categoryData?.name }}
-            </h4>
-            <div class="info-card-caption color-secondary">
-              {{ policy.contractNumber }}
+      <div
+        *ngFor="let policy of policies.insurancePolicies"
+        class="col-12 col-md-6"
+      >
+        <div class="info-card">
+          <h6 class="title background-color-primary text-white">
+            {{ policy.categoryData?.name }}
+          </h6>
+          <div class="info-card-wrapper">
+            <div class="info-card-content">
+              <div class="info-card-details">
+                <div class="info-card-data">
+                  <span class="label">{{
+                    'fscommon.product' | cxTranslate
+                  }}</span
+                  >:
+                  <span class="value">{{
+                    policy.mainProduct?.coverageProduct?.name
+                  }}</span>
+                </div>
+                <div class="info-card-data">
+                  <span class="label">{{
+                    'policy.policyId' | cxTranslate
+                  }}</span
+                  >:
+                  <span class="value">{{ policy.contractNumber }}</span>
+                </div>
+                <div
+                  *ngIf="
+                    policy.insuredObjectList?.insuredObjects &&
+                    policy.insuredObjectList?.insuredObjects.length > 0 &&
+                    (policy.insuredObjectList?.insuredObjects)[0]
+                      ?.insuredObjectItems
+                  "
+                  class="info-card-data"
+                >
+                  <span
+                    *ngIf="
+                      policy.insuredObjectList?.insuredObjects &&
+                      policy.insuredObjectList?.insuredObjects.length > 0 &&
+                      (policy.insuredObjectList?.insuredObjects)[0]
+                        ?.insuredObjectItems.length > 0
+                    "
+                    class="label"
+                    >{{
+                      ((policy.insuredObjectList?.insuredObjects)[0]
+                        ?.insuredObjectItems)[0]?.value
+                    }}</span
+                  >:
+                  <span
+                    *ngIf="
+                      policy.insuredObjectList?.insuredObjects &&
+                      policy.insuredObjectList?.insuredObjects.length > 0 &&
+                      (policy.insuredObjectList?.insuredObjects)[0]
+                        ?.insuredObjectItems.length > 1
+                    "
+                    class="value"
+                    >{{
+                      ((policy.insuredObjectList?.insuredObjects)[0]
+                        ?.insuredObjectItems)[1]?.value
+                    }}</span
+                  >
+                </div>
+                <div class="info-card-data">
+                  <span class="label"
+                    >{{ policy.policyPremium?.formattedValue }} /
+                    {{ policy.paymentFrequency }}</span
+                  >:
+                  <span class="value">{{
+                    (policy.paymentMethod !== undefined
+                      ? policy.paymentMethod?.paymentOption
+                      : 'n/a') | uppercase
+                  }}</span>
+                </div>
+                <div class="info-card-data">
+                  <span class="label"
+                    >{{ policy.startDate | cxDate: 'dd MMM yyyy' }} -
+                    {{ policy.endDate | cxDate: 'dd MMM yyyy' }}</span
+                  >
+                </div>
+              </div>
+              <div class="info-card-image">
+                <span class="image-wrapper">
+                  <img
+                    class="image-item"
+                    [src]="
+                      getBaseUrl() +
+                      policy.mainProduct.coverageProduct.images[0].url
+                    "
+                    alt=""
+                  />
+                </span>
+              </div>
             </div>
-          </div>
-          <div class="info-card-details-wrapper">
-            <div class="info-card-data">
-              <span class="title">{{ 'fscommon.product' | cxTranslate }}</span>
-              <span class="value">{{
-                policy.mainProduct?.coverageProduct?.name
-              }}</span>
-            </div>
-            <div
-              *ngIf="
-                policy.insuredObjectList?.insuredObjects &&
-                policy.insuredObjectList?.insuredObjects.length > 0 &&
-                (policy.insuredObjectList?.insuredObjects)[0]
-                  ?.insuredObjectItems
-              "
-              class="info-card-data"
-            >
-              <span
-                *ngIf="
-                  policy.insuredObjectList?.insuredObjects &&
-                  policy.insuredObjectList?.insuredObjects.length > 0 &&
-                  (policy.insuredObjectList?.insuredObjects)[0]
-                    ?.insuredObjectItems.length > 0
-                "
-                class="title"
-                >{{
-                  ((policy.insuredObjectList?.insuredObjects)[0]
-                    ?.insuredObjectItems)[0]?.value
-                }}</span
-              >
-              <span
-                *ngIf="
-                  policy.insuredObjectList?.insuredObjects &&
-                  policy.insuredObjectList?.insuredObjects.length > 0 &&
-                  (policy.insuredObjectList?.insuredObjects)[0]
-                    ?.insuredObjectItems.length > 1
-                "
-                class="value"
-                >{{
-                  ((policy.insuredObjectList?.insuredObjects)[0]
-                    ?.insuredObjectItems)[1]?.value
-                }}</span
-              >
-            </div>
-            <div class="info-card-data">
-              <span class="title"
-                >{{ policy.policyPremium?.formattedValue }} /
-                {{ policy.paymentFrequency }}</span
-              >
-              <span class="value">{{
-                (policy.paymentMethod !== undefined
-                  ? policy.paymentMethod?.paymentOption
-                  : 'n/a') | uppercase
-              }}</span>
-            </div>
-            <div class="info-card-data">
-              <span class="title"
-                >{{ policy.startDate | cxDate: 'dd MMM yyyy' }} -
-                {{ policy.endDate | cxDate: 'dd MMM yyyy' }}</span
-              >
-            </div>
-          </div>
-          <div
-            class="info-card-button-wrapper border-top border-bottom border-color-secondary"
-          >
-            <div class="info-card-button">
-              <button
-                class="secondary-button btn-block"
+            <div class="info-card-links">
+              <a
+                class="link"
                 routerLink="/my-account/my-policies/{{ policy.policyNumber }}/{{
                   policy.contractNumber
                 }}"
                 routerLinkActive="active"
               >
                 {{ 'fscommon.details' | cxTranslate }}
-              </button>
-              <button
-                class="primary-button btn-block"
-                [disabled]="
+              </a>
+              <ng-container
+                *ngIf="
                   !isPolicyCategoryAllowed(
                     policy.categoryData?.allowedFSRequestTypes
                   )
                 "
-                (click)="startClaim(policy.policyNumber, policy.contractNumber)"
               >
-                {{ 'claim.makeClaim' | cxTranslate }}
-              </button>
+                <a
+                  class="link"
+                  (click)="
+                    startClaim(policy.policyNumber, policy.contractNumber)
+                  "
+                >
+                  {{ 'claim.makeClaim' | cxTranslate }}
+                </a>
+              </ng-container>
             </div>
           </div>
         </div>
