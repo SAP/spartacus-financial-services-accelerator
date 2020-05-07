@@ -1,6 +1,6 @@
 import { Type } from '@angular/core';
 import { inject, TestBed } from '@angular/core/testing';
-import { FormDataService } from '@fsa/dynamicforms';
+import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { Store, StoreModule } from '@ngrx/store';
 import { AuthService, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
@@ -53,8 +53,11 @@ class MockFormDataService {
   getFormData() {
     return of(this.formData);
   }
-  setFormDataToLocalStorage() {}
   loadFormData(): void {}
+}
+
+class MockFormDataStorageService {
+  setFormDataToLocalStorage() {}
 }
 
 const mockCart = {
@@ -100,6 +103,7 @@ describe('QuoteServiceTest', () => {
   let cartService: MockCartService;
   let formDataService: MockFormDataService;
   let authService: MockAuthService;
+  let mockFormDataStorageService: FormDataStorageService;
 
   beforeEach(() => {
     authService = new MockAuthService();
@@ -117,12 +121,19 @@ describe('QuoteServiceTest', () => {
         { provide: FSCartService, useValue: cartService },
         { provide: FormDataService, useValue: formDataService },
         { provide: AuthService, useValue: authService },
+        {
+          provide: FormDataStorageService,
+          useClass: MockFormDataStorageService,
+        },
       ],
     });
 
     service = TestBed.get(QuoteService as Type<QuoteService>);
     cartService = TestBed.get(FSCartService as Type<FSCartService>);
     store = TestBed.get(Store as Type<Store<StateWithMyAccount>>);
+    mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
+      FormDataStorageService
+    >);
 
     spyOn(store, 'dispatch').and.callThrough();
   });

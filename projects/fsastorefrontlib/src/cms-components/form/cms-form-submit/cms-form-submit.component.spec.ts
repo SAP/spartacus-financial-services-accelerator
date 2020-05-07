@@ -1,13 +1,12 @@
-import { DebugElement, Component, Input, Type } from '@angular/core';
+import { Component, DebugElement, Input, Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { CmsComponent, CmsComponentConnector } from '@spartacus/core';
-import { of } from 'rxjs';
-import { CMSFormSubmitComponent } from './cms-form-submit.component';
 import { CmsComponentData } from '@spartacus/storefront';
+import { of } from 'rxjs';
 import { CmsFormSubmitComponent } from './../../../occ/occ-models/cms-component.models';
-import { FormDataService } from '@fsa/dynamicforms';
-import { LoadFormDefinition } from 'projects/dynamicforms/src/core/store';
+import { CMSFormSubmitComponent } from './cms-form-submit.component';
 
 @Component({
   // tslint:disable-next-line: component-selector
@@ -58,14 +57,15 @@ class MockFormDataService {
   getFormDefinition() {
     return of(formDefinition);
   }
-
   loadFormDefinition() {}
-
-  getFormDataIdFromLocalStorage() {
-    return null;
-  }
 }
 
+class MockFormDataStorageService {
+  getFormDataId() {
+    return null;
+  }
+  getFormDataIdByDefinitionCode() {}
+}
 const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
   data$: of(componentData),
   uid: 'test',
@@ -77,6 +77,7 @@ describe('CMSFormSubmitComponent', () => {
   let el: DebugElement;
   let mockCmsComponentConnector: MockCmsComponentConnector;
   let mockFormDataService: MockFormDataService;
+  let mockFormDataStorageService: FormDataStorageService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -99,12 +100,19 @@ describe('CMSFormSubmitComponent', () => {
           provide: FormDataService,
           useClass: MockFormDataService,
         },
+        {
+          provide: FormDataStorageService,
+          useClass: MockFormDataStorageService,
+        },
       ],
     }).compileComponents();
     mockCmsComponentConnector = TestBed.get(CmsComponentConnector as Type<
       CmsComponentConnector
     >);
     mockFormDataService = TestBed.get(FormDataService as Type<FormDataService>);
+    mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
+      FormDataStorageService
+    >);
   }));
 
   beforeEach(() => {

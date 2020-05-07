@@ -1,6 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormDataService, YFormData } from '@fsa/dynamicforms';
+import {
+  FormDataService,
+  FormDataStorageService,
+  YFormData,
+} from '@fsa/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,7 +17,8 @@ export class ChooseCoverNavigationComponent implements OnInit, OnDestroy {
   constructor(
     protected formService: FormDataService,
     protected activatedRoute: ActivatedRoute,
-    protected routingService: RoutingService
+    protected routingService: RoutingService,
+    protected formDataStorageService: FormDataStorageService
   ) {}
 
   subscription = new Subscription();
@@ -33,7 +38,7 @@ export class ChooseCoverNavigationComponent implements OnInit, OnDestroy {
   }
 
   navigateNext() {
-    const formDataId = this.formService.getFormDataIdByCategory(
+    const formDataId = this.formDataStorageService.getFormDataIdByCategory(
       this.categoryCode
     );
     const formData: YFormData = {};

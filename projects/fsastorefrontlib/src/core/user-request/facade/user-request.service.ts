@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { filter } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { FormDataStorageService } from '@fsa/dynamicforms';
 import { ActionsSubject, Store } from '@ngrx/store';
-import { FSUserRequest } from '../../../occ/occ-models';
-import { FormDataService } from '@fsa/dynamicforms';
 import { AuthService } from '@spartacus/core';
+import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { FSUserRequest } from '../../../occ/occ-models';
 import { FSUserRequestState } from '../store/user-request-state';
 
 @Injectable()
@@ -12,8 +12,8 @@ export class UserRequestService {
   constructor(
     protected actions$: ActionsSubject,
     protected store: Store<FSUserRequestState>,
-    protected formDataService: FormDataService,
-    protected authService: AuthService
+    protected authService: AuthService,
+    protected formDataStorageService: FormDataStorageService
   ) {}
 
   getAction(actionName): Observable<any> {
@@ -23,7 +23,7 @@ export class UserRequestService {
   loadUserRequestFormData(userRequest: FSUserRequest) {
     userRequest.configurationSteps.forEach(stepData => {
       if (stepData.yformConfigurator) {
-        this.formDataService.setFormDataToLocalStorage(
+        this.formDataStorageService.setFormDataToLocalStorage(
           stepData.yformConfigurator
         );
       }
