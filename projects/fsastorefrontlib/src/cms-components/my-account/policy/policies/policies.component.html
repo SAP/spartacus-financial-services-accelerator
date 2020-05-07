@@ -6,7 +6,7 @@
     <div class="row" *ngIf="(policies | json) != '{}'; else noPolicies">
       <div
         *ngFor="let policy of policies.insurancePolicies"
-        class="col-12 col-md-6"
+        class="col-12 col-md-6 d-flex"
       >
         <div class="info-card">
           <h6 class="title background-color-primary text-white">

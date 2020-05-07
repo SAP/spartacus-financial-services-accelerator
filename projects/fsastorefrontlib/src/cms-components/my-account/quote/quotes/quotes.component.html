@@ -4,7 +4,7 @@
 <ng-container *ngIf="quotes$ | async as quotes">
   <ng-container *ngIf="quotesLoaded$ | async; else loading">
     <div class="row" *ngIf="quotes.length > 0; else noQuotes">
-      <div *ngFor="let quote of quotes" class="col-12 col-md-6">
+      <div *ngFor="let quote of quotes" class="col-12 col-md-6 d-flex">
         <div class="info-card">
           <h6 class="title background-color-4 text-dark">
             {{ quote.defaultCategory?.name }}
