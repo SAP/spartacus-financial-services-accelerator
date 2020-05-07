@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormDataService } from '@fsa/dynamicforms';
+import { FormDataStorageService } from '@fsa/dynamicforms';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { CartActions, OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
@@ -71,7 +71,7 @@ export class CartEffects {
               cart.entry.product &&
               cart.entry.product.defaultCategory
             ) {
-              const formDataId = this.formDataService.getFormDataIdByCategory(
+              const formDataId = this.formDataStorageService.getFormDataIdByCategory(
                 cart.entry.product.defaultCategory.code
               );
               if (formDataId) {
@@ -143,6 +143,6 @@ export class CartEffects {
   constructor(
     private actions$: Actions,
     private cartConnector: CartConnector,
-    private formDataService: FormDataService
+    private formDataStorageService: FormDataStorageService
   ) {}
 }

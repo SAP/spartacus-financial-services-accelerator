@@ -1,29 +1,21 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { Store, StoreModule } from '@ngrx/store';
-import { OCC_USER_ID_CURRENT, UserToken, AuthService } from '@spartacus/core';
 import { Type } from '@angular/core';
-import { FormDataService } from '@fsa/dynamicforms';
-import * as fromAction from '../store/actions';
-import { of, Observable, ReplaySubject } from 'rxjs';
-import { UserRequestService } from './user-request.service';
-import { reducerProvider, reducerToken } from '../store/reducers/index';
+import { inject, TestBed } from '@angular/core/testing';
+import { FormDataStorageService } from '@fsa/dynamicforms';
+import { Store, StoreModule } from '@ngrx/store';
+import { AuthService, OCC_USER_ID_CURRENT, UserToken } from '@spartacus/core';
+import { Observable, of, ReplaySubject } from 'rxjs';
 import { FSUserRequest } from '../../../occ/occ-models/occ.models';
+import * as fromAction from '../store/actions';
+import { reducerProvider, reducerToken } from '../store/reducers/index';
 import { FSUserRequestState } from '../store/user-request-state';
+import { UserRequestService } from './user-request.service';
 
 const userId = OCC_USER_ID_CURRENT;
 const formId = 'formId';
 const requestId = '001';
 
-class MockFormDataService {
-  formData;
-
-  getFormData() {
-    return of(this.formData);
-  }
-
-  setFormDataToLocalStorage() {
-    this.formData = formId;
-  }
+class MockFormDataStorageService {
+  setFormDataToLocalStorage() {}
 }
 
 const userToken$ = new ReplaySubject<UserToken>();
@@ -40,11 +32,10 @@ class MockAuthService {
 describe('UserRequestServiceTest', () => {
   let service: UserRequestService;
   let store: Store<FSUserRequestState>;
-  let formDataService: MockFormDataService;
   let authService: MockAuthService;
+  let mockFormDataStorageService: FormDataStorageService;
 
   beforeEach(() => {
-    formDataService = new MockFormDataService();
     authService = new MockAuthService();
 
     TestBed.configureTestingModule({
@@ -55,13 +46,21 @@ describe('UserRequestServiceTest', () => {
       providers: [
         UserRequestService,
         reducerProvider,
-        { provide: FormDataService, useValue: formDataService },
         { provide: AuthService, useValue: authService },
+        {
+          provide: FormDataStorageService,
+          useClass: MockFormDataStorageService,
+        },
       ],
     });
     service = TestBed.get(UserRequestService as Type<UserRequestService>);
     store = TestBed.get(Store as Type<Store<FSUserRequestState>>);
+    mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
+      FormDataStorageService
+    >);
+
     spyOn(store, 'dispatch').and.callThrough();
+    spyOn(mockFormDataStorageService, 'setFormDataToLocalStorage').and.stub();
   });
 
   it('should inject User request service', inject(
@@ -76,24 +75,19 @@ describe('UserRequestServiceTest', () => {
       configurationSteps: [{ yformConfigurator: { id: 'id' } }],
     };
     service.loadUserRequestFormData(userRequest);
-    let formDataValue = null;
-    formDataService.getFormData().subscribe(formData => {
-      formDataValue = formData;
-    });
-    expect(formDataValue).not.toBeNull();
-    expect(formDataValue).toBe(formId);
+    expect(
+      mockFormDataStorageService.setFormDataToLocalStorage
+    ).toHaveBeenCalled();
   });
 
   it('should not set from data after loading user request', () => {
     const userRequest: FSUserRequest = {
       configurationSteps: [{}],
     };
-    let formDataValue = null;
-    formDataService.getFormData().subscribe(formData => {
-      formDataValue = formData;
-    });
     service.loadUserRequestFormData(userRequest);
-    expect(formDataValue).toBe(undefined);
+    expect(
+      mockFormDataStorageService.setFormDataToLocalStorage
+    ).not.toHaveBeenCalled();
   });
 
   it('should be able to get actions', () => {

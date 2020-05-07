@@ -1,13 +1,14 @@
-import { Component, DebugElement, Input, Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { By } from '@angular/platform-browser';
-import { I18nTestingModule, LanguageService } from '@spartacus/core';
-import { DynamicFormsConfig } from '../../core/config/form-config';
-import { FieldConfig } from '../../core/models/form-config.interface';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
-import { SelectComponent } from './select.component';
 import { of } from 'rxjs';
+import { Input, Component, DebugElement, Type } from '@angular/core';
+import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
+
+import { DynamicSelectComponent } from './dynamic-select.component';
+import { FieldConfig } from '../../core/models/form-config.interface';
+import { DynamicFormsConfig } from '../../core';
+import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
+import { I18nTestingModule, LanguageService } from '@spartacus/core';
 
 @Component({
   // tslint:disable
@@ -24,6 +25,26 @@ class MockLanguageService {
     return of('en');
   }
 }
+
+const apiValues = {
+  values: [
+    {
+      name: 'TestName',
+      label: 'TestLabel',
+    },
+    {
+      name: 'TestName2',
+      label: 'TestLabel2',
+    },
+  ],
+};
+
+class MockOccFormService {
+  getValuesFromAPI() {
+    return of(apiValues);
+  }
+}
+
 const mockField: FieldConfig = {
   type: 'select',
   name: 'testSelect',
@@ -35,8 +56,6 @@ const mockField: FieldConfig = {
   apiUrl: 'testUrl',
 };
 
-class MockOccFormService {}
-
 const mockFormGroup = new FormGroup({
   dependentTestField: new FormControl(),
   testSelect: new FormControl(),
@@ -47,14 +66,14 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 };
 
 describe('SelectComponent', () => {
-  let component: SelectComponent;
-  let fixture: ComponentFixture<SelectComponent>;
+  let component: DynamicSelectComponent;
+  let fixture: ComponentFixture<DynamicSelectComponent>;
   let mockOccFormService: OccMockFormService;
   let el: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SelectComponent, MockErrorNoticeComponent],
+      declarations: [DynamicSelectComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
         { provide: OccMockFormService, useClass: MockOccFormService },
@@ -68,7 +87,7 @@ describe('SelectComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SelectComponent);
+    fixture = TestBed.createComponent(DynamicSelectComponent);
     mockOccFormService = TestBed.get(OccMockFormService as Type<
       OccMockFormService
     >);
@@ -81,6 +100,13 @@ describe('SelectComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should not call external API', () => {
+    spyOn(mockOccFormService, 'getValuesFromAPI').and.stub();
+    mockField.apiUrl = undefined;
+    fixture.detectChanges();
+    expect(mockOccFormService.getValuesFromAPI).not.toHaveBeenCalled();
   });
 
   it('should render select component', () => {

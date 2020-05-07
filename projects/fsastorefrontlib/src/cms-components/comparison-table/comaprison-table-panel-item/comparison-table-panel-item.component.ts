@@ -63,22 +63,35 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
       this.product$
         .pipe(
           map(product => {
-            if (
-              product &&
-              product.price &&
-              product.price.oneTimeChargeEntries &&
-              product.price.oneTimeChargeEntries.length > 0
-            ) {
-              product.price.oneTimeChargeEntries.forEach(oneTimeChargeEntry => {
-                if (oneTimeChargeEntry.billingTime.code === 'paynow') {
-                  this.productPrice = oneTimeChargeEntry.price.formattedValue;
-                }
-              });
-              this.panelItemEntries = this.billingTimes.map(billingTime => {
-                return product.price.oneTimeChargeEntries.find(
-                  entry => entry.billingTime.code === billingTime.code
+            if (product && product.price) {
+              if (
+                product.price.recurringChargeEntries &&
+                product.price.recurringChargeEntries.length > 0
+              ) {
+                this.productPrice =
+                  product.price.recurringChargeEntries[0].price.formattedValue;
+              }
+              if (
+                product.price.oneTimeChargeEntries &&
+                product.price.oneTimeChargeEntries.length > 0
+              ) {
+                product.price.oneTimeChargeEntries.forEach(
+                  oneTimeChargeEntry => {
+                    if (
+                      oneTimeChargeEntry.billingTime.code === 'paynow' &&
+                      oneTimeChargeEntry.price.value > 0
+                    ) {
+                      this.productPrice =
+                        oneTimeChargeEntry.price.formattedValue;
+                    }
+                  }
                 );
-              });
+                this.panelItemEntries = this.billingTimes.map(billingTime => {
+                  return product.price.oneTimeChargeEntries.find(
+                    entry => entry.billingTime.code === billingTime.code
+                  );
+                });
+              }
             }
           })
         )

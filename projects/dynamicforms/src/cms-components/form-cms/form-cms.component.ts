@@ -1,11 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-import { YFormCmsComponent } from '../cms-component.models';
-import { FormDataService } from '../../core/services/data/form-data.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
-import { YFormDefinition, YFormData } from '../../core/models/form-occ.models';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FormDefinition } from '../../core/models/form-config.interface';
+import { YFormData, YFormDefinition } from '../../core/models/form-occ.models';
+import { FormDataService } from '../../core/services/data/form-data.service';
+import { YFormCmsComponent } from '../cms-component.models';
+import { FormDataStorageService } from './../../core/services/storage/form-data-storage.service';
 
 @Component({
   selector: 'cx-form-cms',
@@ -14,7 +15,8 @@ import { FormDefinition } from '../../core/models/form-config.interface';
 export class FormCMSComponent implements OnInit, OnDestroy {
   constructor(
     protected componentData: CmsComponentData<YFormCmsComponent>,
-    protected formDataService: FormDataService
+    protected formDataService: FormDataService,
+    protected formDataStorageService: FormDataStorageService
   ) {}
 
   component$: Observable<YFormCmsComponent>;
@@ -47,7 +49,7 @@ export class FormCMSComponent implements OnInit, OnDestroy {
               component.applicationId,
               component.formId
             );
-            const formDataId = this.formDataService.getFormDataIdFromLocalStorage(
+            const formDataId = this.formDataStorageService.getFormDataIdByDefinitionCode(
               component.formId
             );
             if (formDataId) {
