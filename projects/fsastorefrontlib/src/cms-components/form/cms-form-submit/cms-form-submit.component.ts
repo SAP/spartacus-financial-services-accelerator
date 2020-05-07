@@ -1,10 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import {
+  FormCMSComponent,
+  FormDataService,
+  FormDataStorageService,
+} from '@fsa/dynamicforms';
 import { CmsComponentConnector, PageContext, PageType } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { map } from 'rxjs/operators';
 import { CmsFormSubmitComponent } from '../../../occ/occ-models';
-import { FormDataService, FormCMSComponent } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'cx-fs-cms-form-submit',
@@ -16,9 +20,10 @@ export class CMSFormSubmitComponent extends FormCMSComponent
     protected componentData: CmsComponentData<CmsFormSubmitComponent>,
     protected activatedRoute: ActivatedRoute,
     protected cmsComponentConnector: CmsComponentConnector,
-    protected formDataService: FormDataService
+    protected formDataService: FormDataService,
+    protected formDataStorageService: FormDataStorageService
   ) {
-    super(componentData, formDataService);
+    super(componentData, formDataService, formDataStorageService);
   }
 
   routeParamId = 'formCode';

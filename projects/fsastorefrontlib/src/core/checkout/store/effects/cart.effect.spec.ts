@@ -1,7 +1,7 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { FormDataService } from '@fsa/dynamicforms';
+import { FormDataStorageService } from '@fsa/dynamicforms';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import {
@@ -59,31 +59,36 @@ class MockCartConnector {
   }
 }
 
-class MockFormDataService {
+class MockFormDataStorageService {
   getFormDataIdByCategory() {
     return formDataId;
   }
 }
 
-describe('Checkout Effects', () => {
+describe('Cart Effects', () => {
   let actions$: Observable<fromActions.CartAction>;
   let effects: fromEffects.CartEffects;
   let mockCartConnector: MockCartConnector;
-  let mockFormDataService: MockFormDataService;
+  let mockFormDataStorageService: FormDataStorageService;
 
   beforeEach(() => {
     mockCartConnector = new MockCartConnector();
-    mockFormDataService = new MockFormDataService();
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, StoreModule.forRoot({})],
       providers: [
         { provide: CartConnector, useValue: mockCartConnector },
-        { provide: FormDataService, useValue: mockFormDataService },
+        {
+          provide: FormDataStorageService,
+          useClass: MockFormDataStorageService,
+        },
 
         fromEffects.CartEffects,
         provideMockActions(() => actions$),
       ],
     });
+    mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
+      FormDataStorageService
+    >);
     effects = TestBed.get(fromEffects.CartEffects as Type<
       fromEffects.CartEffects
     >);

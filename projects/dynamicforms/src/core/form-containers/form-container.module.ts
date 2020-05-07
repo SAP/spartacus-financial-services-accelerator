@@ -13,6 +13,7 @@ import { FormDataService } from '../services/data/form-data.service';
 import { FormValidationService } from '../services/form-validation/form-validation.service';
 import { FormService } from '../services/form/form.service';
 import { FieldDependencyResolverService } from './../services/form-dependencies/field-dependency-resolver.service';
+import { FormDataStorageService } from './../services/storage/form-data-storage.service';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { FormComponent } from './form/form.component';
 
@@ -32,6 +33,7 @@ import { FormComponent } from './form/form.component';
     FormBuilderService,
     FormValidationService,
     FieldDependencyResolverService,
+    FormDataStorageService,
     OccMockFormService,
     FormConnector,
     FormDataService,

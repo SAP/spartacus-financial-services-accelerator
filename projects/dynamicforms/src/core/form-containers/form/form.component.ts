@@ -11,6 +11,7 @@ import { Observable, Subscription } from 'rxjs';
 import { FormDefinition } from '../../models/form-config.interface';
 import { FormDataService } from '../../services/data/form-data.service';
 import { DynamicFormComponent } from '../dynamic-form/dynamic-form.component';
+import { FormDataStorageService } from './../../services/storage/form-data-storage.service';
 
 @Component({
   selector: 'cx-form-component',
@@ -21,7 +22,8 @@ export class FormComponent implements OnDestroy {
   private subscription = new Subscription();
   constructor(
     protected routingService: RoutingService,
-    protected formDataService: FormDataService
+    protected formDataService: FormDataService,
+    protected formDataStorageService: FormDataStorageService
   ) {}
 
   @ViewChild(DynamicFormComponent, { static: false })
@@ -60,7 +62,7 @@ export class FormComponent implements OnDestroy {
             content: response.content,
             categoryCode: this.formCategoryCode,
           };
-          this.formDataService.setFormDataToLocalStorage(savedForm);
+          this.formDataStorageService.setFormDataToLocalStorage(savedForm);
           this.formDataService.setSubmittedForm(response);
         })
       );
