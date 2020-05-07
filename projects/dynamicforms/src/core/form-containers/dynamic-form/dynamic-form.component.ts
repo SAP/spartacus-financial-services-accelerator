@@ -103,8 +103,10 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         .pipe(
           map(form => {
             console.log(form);
+            // console.log(form.content)
             console.log(!this.value);
             if (form && form.content === undefined && !this.value) {
+              console.log('prvi');
               this.markInvalidControls(this.form);
               this.submittedSub.next(true);
             } else if (
@@ -114,6 +116,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
               this.value !== undefined &&
               this.valid
             ) {
+              console.log('drugi');
               this.submittedSub.next(false);
               this.submit.emit({
                 id: form.id,
@@ -142,7 +145,6 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   }
 
   handleSubmit(event: Event) {
-    console.log(event);
     event.preventDefault();
     event.stopPropagation();
     this.submit.emit(this.value);

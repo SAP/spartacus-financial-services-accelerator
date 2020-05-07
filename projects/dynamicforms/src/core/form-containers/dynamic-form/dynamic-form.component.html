@@ -1,9 +1,9 @@
 <ng-container *ngIf="form && config">
   <form
-    *ngIf="submitted$ | async; submitted"
+    *ngIf="submitted$ | async"
     [ngClass]="config.cssClass"
     [formGroup]="form"
-    (onSubmit)="handleSubmit($event)"
+    (submit)="handleSubmit($event)"
   >
     <ng-container *ngFor="let formGroup of config.formGroups">
       <div
@@ -20,6 +20,5 @@
         </ng-container>
       </div>
     </ng-container>
-    <button type="submit">Klikni meu</button>
   </form>
 </ng-container>
