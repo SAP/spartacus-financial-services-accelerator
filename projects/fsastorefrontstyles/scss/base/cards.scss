@@ -2,7 +2,15 @@
   margin-bottom: 2rem;
   border: 1px solid var(--cx-color-3);
   flex: 0 1 100%;
+  .title,
+  .info-card-content,
+  .info-card-links,
+  .info-card-image {
+    display: flex;
+  }
   .title {
+    align-items: center;
+    justify-content: space-between;
     text-transform: uppercase;
     margin: 0;
     padding: 0.5rem 1rem;
@@ -13,11 +21,6 @@
   .info-card-content,
   .info-card-links {
     padding: 0.5rem 0;
-  }
-  .info-card-content,
-  .info-card-links,
-  .info-card-image {
-    display: flex;
   }
   .info-card-details {
     flex: 0 1 70%;
@@ -43,6 +46,12 @@
   }
   .info-card-links {
     justify-content: flex-end;
+  }
+  .fs-icon {
+    cursor: pointer;
+    &:hover {
+      color: var(--cx-color-primary);
+    }
   }
   .link:not([href]) {
     color: var(--cx-color-primary);

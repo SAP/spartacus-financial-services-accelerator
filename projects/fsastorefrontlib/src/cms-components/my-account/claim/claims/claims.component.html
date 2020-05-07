@@ -4,111 +4,122 @@
 <ng-container *ngIf="claims$ | async as claims">
   <ng-container *ngIf="claimsLoaded$ | async; else loading">
     <div class="row" *ngIf="claims?.claims?.length > 0; else noClaims">
-      <div
-        *ngFor="let claim of claims.claims"
-        class="col-xs-12 col-sm-6 col-md-4"
-      >
-        <div class="info-card border border-color-3 border-bottom-0">
-          <div
-            class="account-cards-actions"
-            *ngIf="
-              claim.claimStatus === 'OPEN' || claim.claimStatus === 'ERROR'
-            "
-          >
-            <a
-              class="action-links action-links-secondary-button"
-              (click)="deleteClaim(claim.claimNumber)"
-              >x</a
-            >
-          </div>
-          <div class="info-card-title border-bottom-3 border-color-secondary">
-            <span class="image-wrapper">
-              <img
-                *ngIf="claim.incidentType != undefined; else noIncidentType"
-                class="image-item"
-                [src]="getBaseUrl() + claim.incidentType?.icon.url"
-                alt="{{ claim.incidentType?.icon.alt }}"
-              />
-            </span>
-            <h3 class="info-card-caption color-secondary">
-              <span *ngIf="claim.incidentType != undefined; else na">
-                {{ claim.incidentType?.incidentName }}
-              </span>
-            </h3>
-            <h4 class="info-card-caption color-secondary">
-              {{ claim.claimNumber }}
-            </h4>
-          </div>
-          <div class="info-card-details-wrapper">
-            <div class="info-card-data">
-              <span class="title">{{
-                claim.insurancePolicy?.categoryData?.name
-              }}</span>
-              <span class="value">{{
-                claim.insurancePolicy?.policyNumber
-              }}</span>
-            </div>
-            <div class="info-card-data">
-              <span class="title">{{ 'claim.dateOfLoss' | cxTranslate }}</span>
-              <span
-                class="value"
-                *ngIf="claim.dateOfLoss != undefined; else na"
-                >{{
-                  claim.dateOfLoss | parseDate | cxDate: 'dd MMM yyyy'
-                }}</span
+      <div *ngFor="let claim of claims.claims" class="col-12 col-md-6 d-flex">
+        <div class="info-card">
+          <ng-container *ngIf="claim.incidentType != undefined; else na">
+            <h6 class="title background-color-4">
+              {{ claim.insurancePolicy?.categoryData?.name }}
+              {{ 'claim.claim' | cxTranslate }}
+              <ng-container
+                *ngIf="
+                  claim.claimStatus === 'OPEN' || claim.claimStatus === 'ERROR'
+                "
               >
-            </div>
-            <div class="info-card-data">
-              <span class="title">{{ 'fscommon.status' | cxTranslate }}</span>
-              <span
-                class="value"
-                *ngIf="claim.claimStatus != undefined; else na"
-                >{{ claim.claimStatus }}</span
-              >
-            </div>
-            <div class="info-card-data">
-              <span class="title">{{
-                'claim.claimHandler' | cxTranslate
-              }}</span>
-              <span class="value">
-                <span
-                  class="value"
-                  *ngIf="claim.claimHandler?.displayName != undefined; else na"
-                  >{{ claim.claimHandler.displayName }}</span
-                >
-                <br />
-                <span
-                  class="value"
-                  *ngIf="claim.claimHandler?.email != undefined; else na"
-                  >{{ claim.claimHandler.email }}</span
-                >
-              </span>
-            </div>
-          </div>
-          <div
-            class="info-card-button-wrapper border-top border-bottom border-color-secondary"
-          >
-            <div
-              class="info-card-button"
-              *ngIf="
-                claim.claimStatus == 'OPEN' || claim.claimStatus == 'REJECTED';
-                else details
-              "
-            >
-              <button
-                class="secondary-button"
-                (click)="resumeClaim(claim.claimNumber)"
-              >
-                {{ 'fscommon.resume' | cxTranslate }}
-              </button>
-            </div>
-            <ng-template #details>
-              <div class="info-card-button">
-                <button class="secondary-button btn-block">
-                  {{ 'fscommon.details' | cxTranslate }}
-                </button>
+                <a
+                  class="fs-icon icon-remove"
+                  (click)="deleteClaim(claim.claimNumber)"
+                ></a>
+              </ng-container>
+            </h6>
+          </ng-container>
+          <div class="info-card-wrapper">
+            <div class="info-card-content">
+              <div class="info-card-details">
+                <div class="info-card-data">
+                  <span class="label">{{
+                    'fscommon.product' | cxTranslate
+                  }}</span
+                  >:
+                  <span class="value">{{
+                    claim.incidentType?.incidentName
+                  }}</span>
+                </div>
+                <div class="info-card-data">
+                  <span class="label">{{ 'claim.claimId' | cxTranslate }}</span
+                  >:
+                  <span class="value">{{ claim.claimNumber }}</span>
+                </div>
+                <div class="info-card-data">
+                  <span class="label">{{
+                    'policy.policyId' | cxTranslate
+                  }}</span
+                  >:
+                  <span class="value">{{
+                    claim.insurancePolicy?.policyNumber
+                  }}</span>
+                </div>
+                <div class="info-card-data">
+                  <span class="label">{{
+                    'claim.dateOfLoss' | cxTranslate
+                  }}</span
+                  >:
+                  <span class="value">
+                    <ng-container
+                      *ngIf="claim.dateOfLoss != undefined; else na"
+                    >
+                      {{ claim.dateOfLoss | parseDate | cxDate: 'dd MMM yyyy' }}
+                    </ng-container></span
+                  >
+                </div>
+                <div class="info-card-data">
+                  <span class="label">{{
+                    'claim.claimHandler' | cxTranslate
+                  }}</span
+                  >:
+                  <span class="value"
+                    ><ng-container
+                      *ngIf="
+                        claim.claimHandler?.displayName != undefined;
+                        else na
+                      "
+                    >
+                      {{ claim.claimHandler.displayName }}</ng-container
+                    >,
+                    <ng-container
+                      *ngIf="claim.claimHandler?.email != undefined; else na"
+                      >{{ claim.claimHandler.email }}</ng-container
+                    >
+                  </span>
+                </div>
+                <div class="info-card-data">
+                  <span class="label">{{
+                    'fscommon.status' | cxTranslate
+                  }}</span
+                  >:
+                  <ng-container *ngIf="claim.claimStatus != undefined; else na">
+                    <span class="value">{{ claim.claimStatus }}</span>
+                  </ng-container>
+                </div>
               </div>
-            </ng-template>
+              <div class="info-card-image">
+                <span class="image-wrapper">
+                  <img
+                    *ngIf="claim.incidentType != undefined; else noIncidentType"
+                    class="image-item"
+                    [src]="getBaseUrl() + claim.incidentType?.icon.url"
+                    alt="{{ claim.incidentType?.icon.alt }}"
+                  />
+                </span>
+              </div>
+            </div>
+            <div class="info-card-links">
+              <ng-container
+                *ngIf="
+                  claim.claimStatus == 'OPEN' ||
+                    claim.claimStatus == 'REJECTED';
+                  else details
+                "
+              >
+                <a class="link" (click)="resumeClaim(claim.claimNumber)">{{
+                  'fscommon.resume' | cxTranslate
+                }}</a>
+              </ng-container>
+              <ng-template #details>
+                <a class="link">
+                  {{ 'fscommon.details' | cxTranslate }}
+                </a>
+              </ng-template>
+            </div>
           </div>
         </div>
       </div>
