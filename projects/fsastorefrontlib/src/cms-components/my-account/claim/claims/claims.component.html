@@ -74,7 +74,15 @@
                       "
                     >
                       {{ claim.claimHandler.displayName }}</ng-container
-                    >,
+                    >
+                  </span>
+                </div>
+                <div class="info-card-data">
+                  <span class="label">{{
+                    'fscommon.emailAddress' | cxTranslate
+                  }}</span
+                  >:
+                  <span class="value">
                     <ng-container
                       *ngIf="claim.claimHandler?.email != undefined; else na"
                       >{{ claim.claimHandler.email }}</ng-container
