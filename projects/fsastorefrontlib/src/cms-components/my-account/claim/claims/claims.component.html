@@ -6,8 +6,8 @@
     <div class="row" *ngIf="claims?.claims?.length > 0; else noClaims">
       <div *ngFor="let claim of claims.claims" class="col-12 col-md-6 d-flex">
         <div class="info-card">
-          <ng-container *ngIf="claim.incidentType != undefined; else na">
-            <h6 class="title background-color-4">
+          <h6 class="title background-color-4">
+            <ng-container *ngIf="claim.incidentType != undefined; else na">
               {{ claim.insurancePolicy?.categoryData?.name }}
               {{ 'claim.claim' | cxTranslate }}
               <ng-container
@@ -20,8 +20,8 @@
                   (click)="deleteClaim(claim.claimNumber)"
                 ></a>
               </ng-container>
-            </h6>
-          </ng-container>
+            </ng-container>
+          </h6>
           <div class="info-card-wrapper">
             <div class="info-card-content">
               <div class="info-card-details">

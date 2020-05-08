@@ -19,14 +19,19 @@ export function checkMyPoliciesPage() {
 }
 
 export function updatePolicyEffectiveAndStartDate() {
-  cy.get('div.info-card-caption').then($element => {
-    const policyId = $element.text().trim();
-    const payload = this.getPayloadForPolicyUpdate(policyId);
-    cy.request(payload);
-    cy.get('.primary-button')
-      .contains(' Make a Claim')
-      .click();
-  });
+  cy.get('.info-card-data')
+    .eq(1)
+    .within(() => {
+      cy.get('.value').then($element => {
+        const policyId = $element.text().trim();
+        const payload = this.getPayloadForPolicyUpdate(policyId);
+        cy.request(payload);
+        cy.get('.info-card-links .link')
+          .eq(1)
+          .contains(' Make a Claim')
+          .click();
+      });
+    });
 }
 
 export function getPayloadForPolicyUpdate(policyId) {
@@ -54,13 +59,14 @@ export function checkAutoPolicy() {
   cy.get('.info-card')
     .should('have.length', 1)
     .within(() => {
-      cy.get('.info-card-data .title')
-        .eq(2)
-        .contains('€10.95 / Monthly');
-      cy.get('.primary-button').contains(' Make a Claim');
+      cy.get('.info-card-data')
+        .eq(4)
+        .within(() => {
+          cy.get('.label').contains('Premium');
+          cy.get('.value').contains('€10.95 ');
+        });
+      cy.get('.info-card-links .link')
+        .contains(' Details ')
+        .click();
     });
-}
-
-export function clickOnDetails() {
-  cy.get('.secondary-button').click();
 }
