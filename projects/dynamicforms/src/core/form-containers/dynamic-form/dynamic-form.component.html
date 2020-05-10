@@ -1,9 +1,8 @@
 <ng-container *ngIf="form && config">
   <form
-    *ngIf="submitted$ | async"
+    *ngIf="submitted$ | async; submitted"
     [ngClass]="config.cssClass"
     [formGroup]="form"
-    (submit)="handleSubmit($event)"
   >
     <ng-container *ngFor="let formGroup of config.formGroups">
       <div
