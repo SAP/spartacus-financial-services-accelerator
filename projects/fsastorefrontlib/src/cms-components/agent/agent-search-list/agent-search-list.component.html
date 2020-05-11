@@ -1,4 +1,4 @@
-<ng-container *ngIf="searchResults | async as results">
+<ng-container *ngIf="searchResults$ | async as results">
   <div class="mt-5">
     <div class="row">
       <ng-container *ngIf="results.pagination as pagination">
