@@ -65,7 +65,7 @@ context('Travel Insurance Checkout', () => {
 
     it('Check my policies page', () => {
       checkMyPoliciesPage();
-      cy.get('.info-card-caption').contains('Travel Insurance');
+      cy.get('.title').contains('Travel Insurance');
     });
   });
 });

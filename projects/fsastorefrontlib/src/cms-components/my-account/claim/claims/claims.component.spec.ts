@@ -25,6 +25,13 @@ const mockedClaims = {
     {
       claimNumber: claimNumber,
       claimStatus: 'OPEN',
+      incidentType: {
+        icon: {
+          url: 'testURL',
+          alt: 'testALT',
+        },
+        incidentName: 'Theft',
+      },
     },
   ],
 };
@@ -149,12 +156,12 @@ describe('ClaimsComponent', () => {
 
   it('should render claim object', () => {
     fixture.detectChanges();
-    expect(el.query(By.css('.info-card'))).toBeTruthy();
+    expect(el.query(By.css('.info-card-details'))).toBeTruthy();
   });
 
   it('should render delete icon', () => {
     fixture.detectChanges();
-    expect(el.query(By.css('.action-links'))).toBeTruthy();
+    expect(el.query(By.css('.fs-icon'))).toBeTruthy();
   });
 
   it('should reload when flag is set to true', () => {

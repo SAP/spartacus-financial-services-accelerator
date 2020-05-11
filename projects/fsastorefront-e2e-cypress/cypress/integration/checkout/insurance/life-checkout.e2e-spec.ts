@@ -86,7 +86,7 @@ context('Life Insurance Checkout', () => {
 
     it('Check my policies page', () => {
       checkMyPoliciesPage();
-      cy.get('.info-card-caption').contains('Life Insurance');
+      cy.get('.title').contains('Life Insurance');
     });
   });
 });
