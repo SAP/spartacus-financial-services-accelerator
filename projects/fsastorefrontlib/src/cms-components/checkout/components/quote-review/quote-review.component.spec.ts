@@ -3,14 +3,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import { ModalService, SpinnerModule } from '@spartacus/storefront';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { AccordionModule } from './../../../../shared/accordion/accordion.module';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 import { QuoteReviewComponent } from './quote-review.component';
+import { CategoryService } from './../../../../core/checkout/services/category/category.service';
+
 
 const formDataContent = '{"content":"formContent"}';
+const categoryCode = 'insurances_auto';
 
 class MockActivatedRoute {
   params = of();
@@ -30,14 +33,20 @@ class FSCartServiceStub {
   getActive() {}
   getLoaded() {}
 }
-
+class MockCategoryService {
+  getActiveCategory(): Observable<string> {
+    return of(categoryCode);
+  }
+}
 class MockRoutingService {
   go() {}
 }
 
 class FSCheckoutConfigServiceStub {
   getNextCheckoutStepUrl() {}
-  getPreviousCheckoutStepUrl() {}
+  getPreviousCheckoutStepUrl() {
+    return 'url/:formCode';
+  }
 }
 
 const modalInstance: any = {
@@ -54,6 +63,7 @@ describe('Quote Review Component', () => {
   let component: QuoteReviewComponent;
   let fixture: ComponentFixture<QuoteReviewComponent>;
   let routingService: RoutingService;
+  let categoryService: CategoryService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -84,6 +94,10 @@ describe('Quote Review Component', () => {
           provide: ModalService,
           useValue: modalService,
         },
+        {
+          provide: CategoryService,
+          useClass: MockCategoryService,
+        },
       ],
     }).compileComponents();
   }));
@@ -93,11 +107,15 @@ describe('Quote Review Component', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    categoryService = TestBed.get(CategoryService as Type<CategoryService>);
     spyOn(routingService, 'go').and.stub();
+    spyOn(categoryService, 'getActiveCategory').and.callThrough();
+    component.ngOnInit();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+    expect(component.categoryCode).toEqual(categoryCode);
   });
 
   it('should continue to next step when quote is in state BIND', () => {
@@ -137,7 +155,7 @@ describe('Quote Review Component', () => {
 
   it('should go back to previous step', () => {
     component.back();
-    expect(routingService.go).toHaveBeenCalled();
+    expect(routingService.go).toHaveBeenCalledWith(`url/${categoryCode}`);
   });
 
   it('should not get form content 1', () => {

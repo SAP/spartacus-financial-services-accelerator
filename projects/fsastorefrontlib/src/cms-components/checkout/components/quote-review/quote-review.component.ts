@@ -4,7 +4,10 @@ import { Cart, OccConfig, RoutingService } from '@spartacus/core';
 import { ModalRef, ModalService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FSCheckoutConfigService } from '../../../../core/checkout/services';
+import {
+  CategoryService,
+  FSCheckoutConfigService,
+} from '../../../../core/checkout/services';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
   BindingStateType,
@@ -25,6 +28,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   modalRef: ModalRef;
   cartCode: string;
+  categoryCode: string;
 
   constructor(
     protected cartService: FSCartService,
@@ -32,10 +36,21 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected routingService: RoutingService,
     protected checkoutConfigService: FSCheckoutConfigService,
     protected activatedRoute: ActivatedRoute,
-    protected modalService: ModalService
+    protected modalService: ModalService,
+    protected categoryService: CategoryService
   ) {}
 
   ngOnInit() {
+    this.subscription.add(
+      this.categoryService
+        .getActiveCategory()
+        .pipe(
+          map(category => {
+            this.categoryCode = category;
+          })
+        )
+        .subscribe()
+    );
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
       this.activatedRoute
     );
@@ -51,7 +66,9 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   back() {
-    this.routingService.go(this.checkoutStepUrlBack);
+    this.routingService.go(
+      this.checkoutStepUrlBack.replace(':formCode', this.categoryCode)
+    );
   }
 
   continue() {
