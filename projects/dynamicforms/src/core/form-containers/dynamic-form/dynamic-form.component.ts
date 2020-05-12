@@ -6,10 +6,11 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { YFormData } from '@fsa/dynamicforms';
-import { Observable, Subscription, BehaviorSubject } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../config/form-config';
 import { GeneralHelpers } from '../../helpers/helpers';
@@ -34,9 +35,6 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   form: FormGroup;
   subscription = new Subscription();
 
-  submittedSub = new BehaviorSubject<boolean>(true);
-  submitted$: Observable<boolean> = this.submittedSub.asObservable();
-
   get changes() {
     return this.form.valueChanges;
   }
@@ -48,6 +46,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   }
 
   constructor(
+    protected changeDetectorRef: ChangeDetectorRef,
     protected formService: FormBuilderService,
     protected formDataService: FormDataService,
     public formConfig: DynamicFormsConfig
@@ -103,8 +102,8 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         .pipe(
           map(form => {
             if (form && !this.valid) {
-              this.submittedSub.next(true);
               this.markInvalidControls(this.form);
+              this.changeDetectorRef.detectChanges();
             } else if (
               form &&
               form.content === undefined &&
@@ -112,7 +111,6 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
               this.value !== undefined &&
               this.valid
             ) {
-              this.submittedSub.next(false);
               this.submit.emit({
                 id: form.id,
                 refId: form.refId,
