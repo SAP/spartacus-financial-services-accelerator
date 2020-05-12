@@ -47,7 +47,7 @@ describe('CmsCustomContainerComponent', () => {
   const MockCmsComponentData: CmsComponentData<CMSCustomComponentsContainer> = {
     uid: 'ClaimStartPageContainer',
     data$: of({
-      styleCss: 'Test Class',
+      styleClasses: 'Test Class',
       simpleCMSComponents:
         'ClaimActivePoliciesFlexComponent claim_contact_agent_paragraph claim_description_paragraph claim_legal_notice_paragraph',
     }),
