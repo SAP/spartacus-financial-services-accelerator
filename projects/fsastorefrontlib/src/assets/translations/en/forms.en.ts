@@ -45,6 +45,7 @@ export const forms = {
       travel_personal_details: 'Personal Details',
       auto_change_car_details_form: 'Auto Information',
       banking_loan_creditCart_personalDetails: 'Personal Details',
+      ftd_currentAcc_personal_details: 'Personal Details',
     },
     definitionLoadError: 'Error occurred. Form could not be loaded.',
   },

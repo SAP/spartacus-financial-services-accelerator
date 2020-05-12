@@ -34,7 +34,7 @@ export const checkoutConfig: FSCheckoutConfig = {
         name: 'fscommon.personalDetails',
         routeName: 'checkoutPersonalDetails',
         type: [],
-        restrictedCategories: ['insurances_auto', 'banking_current_account'],
+        restrictedCategories: ['insurances_auto'],
       },
       {
         id: 'quoteReviewStep',
