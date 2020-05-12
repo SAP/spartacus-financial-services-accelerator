@@ -2,8 +2,9 @@ export const claim = {
   claim: {
     claim: 'Claim',
     claims: 'Claims',
-    claimId: 'Claim ID',
+    claimNo: 'Claim No',
     makeClaim: 'Make a Claim',
+    incidentType: 'Incident Type',
     truthConfirmation: 'I confirm that I will provide all data truthfully',
     dateOfLoss: 'Date of Loss',
     claimHandler: 'Claim Handler',

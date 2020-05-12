@@ -3,6 +3,7 @@ export const policy = {
     policies: 'Policen',
     policy: 'Police',
     policyId: 'Policen ID',
+    policyNo: '[DE] Policy No',
     myPolicy: 'Meine Policen',
     policyNumberIs: 'Versicherungsnummer',
     policyHolder: 'Versicherungshalter',

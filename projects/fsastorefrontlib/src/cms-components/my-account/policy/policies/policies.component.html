@@ -26,7 +26,7 @@
                 </div>
                 <div class="info-card-data">
                   <span class="label">{{
-                    'policy.policyId' | cxTranslate
+                    'policy.policyNo' | cxTranslate
                   }}</span
                   >:
                   <span class="value">{{ policy.contractNumber }}</span>
@@ -91,17 +91,6 @@
                 </div>
                 <div class="info-card-data">
                   <span class="label">{{
-                    'fscommon.paymentMethod' | cxTranslate
-                  }}</span
-                  >:
-                  <span class="value">{{
-                    (policy.paymentMethod !== undefined
-                      ? policy.paymentMethod?.paymentOption
-                      : 'n/a') | uppercase
-                  }}</span>
-                </div>
-                <div class="info-card-data">
-                  <span class="label">{{
                     'fscommon.duration' | cxTranslate
                   }}</span
                   >:
@@ -136,7 +125,7 @@
               </a>
               <ng-container
                 *ngIf="
-                  !isPolicyCategoryAllowed(
+                  isPolicyCategoryAllowed(
                     policy.categoryData?.allowedFSRequestTypes
                   )
                 "
