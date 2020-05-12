@@ -102,7 +102,6 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         .getSubmittedForm()
         .pipe(
           map(form => {
-            console.log(this.form);
             if (form && !this.valid) {
               this.submittedSub.next(true);
               this.markInvalidControls(this.form);

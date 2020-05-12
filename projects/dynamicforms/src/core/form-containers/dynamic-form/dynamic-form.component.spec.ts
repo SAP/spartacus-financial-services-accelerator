@@ -1,6 +1,11 @@
 import { Directive, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { BehaviorSubject, of } from 'rxjs';
 import { DynamicFormsConfig } from '../../config';
 import { YFormData } from '../../models';
@@ -31,9 +36,12 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 };
 
 const mockFormGroup = new FormGroup({
-  testGroupCode: new FormControl('testValue'),
+  testGroupCode: new FormControl('', Validators.required),
 });
 
+const mocFormGroupNested = new FormGroup({
+  testGroupNested: new FormControl('', Validators.required),
+});
 export class MockFormBuilderService {
   createForm() {
     return mockFormGroup;
@@ -121,13 +129,21 @@ describe('DynamicFormComponent', () => {
     expect(mockFormBuilderService.createForm).not.toHaveBeenCalled();
   });
 
-  it('should create and handle submit', () => {
-    spyOn(component.submit, 'emit').and.callThrough();
-    component.handleSubmit(new Event('testEvent'));
-    expect(component.submit.emit).toHaveBeenCalled();
+  it('should change control touched property to true', () => {
+    component.formData = undefined;
+    component.ngOnInit();
+    expect(component.form.controls.testGroupCode.touched).toEqual(true);
+  });
+
+  it('should change control touched property to true when form has nested formGroup', () => {
+    mockFormGroup.addControl('testNestedControl', mocFormGroupNested);
+    component.formData = undefined;
+    component.ngOnInit();
+    expect(component.form.controls.testGroupCode.touched).toEqual(true);
   });
 
   it('should submit in case form content is not defined', () => {
+    component.form.controls.testGroupCode.setValue('test string');
     spyOn(component.submit, 'emit').and.callThrough();
     formData.content = undefined;
     component.ngOnInit();
