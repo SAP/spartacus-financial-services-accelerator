@@ -139,7 +139,6 @@ describe('DynamicFormComponent', () => {
     mockFormGroup.addControl('testNestedControl', mocFormGroupNested);
     component.formData = undefined;
     component.ngOnInit();
-    console.log(component.form.controls.testNestedControl.touched);
     expect(component.form.controls.testGroupCode.touched).toEqual(true);
   });
 
