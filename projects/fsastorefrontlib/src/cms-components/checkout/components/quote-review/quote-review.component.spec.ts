@@ -11,7 +11,6 @@ import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dial
 import { QuoteReviewComponent } from './quote-review.component';
 import { CategoryService } from './../../../../core/checkout/services/category/category.service';
 
-
 const formDataContent = '{"content":"formContent"}';
 const categoryCode = 'insurances_auto';
 
