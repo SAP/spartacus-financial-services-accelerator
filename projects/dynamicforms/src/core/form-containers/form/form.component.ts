@@ -34,7 +34,7 @@ export class FormComponent implements OnDestroy {
   @Input()
   formId: string;
   @Input()
-  formConfig: FormDefinition; // Should be changed to observable once configs are provided vie BE
+  formConfig: FormDefinition;
   @Input()
   applicationId: string;
   @Input()

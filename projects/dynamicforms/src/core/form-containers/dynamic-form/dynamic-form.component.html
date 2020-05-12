@@ -8,13 +8,18 @@
       <div
         class="row"
         [ngClass]="formGroup.cssClass"
-        [hidden]="form.controls[formGroup.groupCode].disabled"
+        [hidden]="
+          (formGroup.groupCode ? form.controls[formGroup.groupCode] : form)
+            .disabled
+        "
       >
         <ng-container
           *ngFor="let field of formGroup.fieldConfigs"
           cxFormComponent
           [config]="field"
-          [group]="form.controls[formGroup.groupCode]"
+          [group]="
+            formGroup.groupCode ? form.controls[formGroup.groupCode] : form
+          "
         >
         </ng-container>
       </div>

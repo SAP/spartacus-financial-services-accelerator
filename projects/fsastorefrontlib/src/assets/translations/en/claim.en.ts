@@ -1,6 +1,8 @@
 export const claim = {
   claim: {
+    claim: 'Claim',
     claims: 'Claims',
+    claimId: 'Claim ID',
     makeClaim: 'Make a Claim',
     truthConfirmation: 'I confirm that I will provide all data truthfully',
     dateOfLoss: 'Date of Loss',

@@ -41,6 +41,7 @@ export const forms = {
       insurance_personal_details: 'Persönliche Angaben',
       event_personal_details: 'Persönliche Angaben',
       travel_personal_details: 'Persönliche Angaben',
+      ftd_currentAcc_personal_details: 'Persönliche Angaben',
     },
   },
 };

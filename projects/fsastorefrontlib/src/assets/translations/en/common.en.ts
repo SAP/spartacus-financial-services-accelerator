@@ -83,6 +83,7 @@ export const fscommon = {
     submit: 'Submit',
     totalResults: 'Total results',
     application: {
+      application: 'Application',
       applicationRequestSubmitted:
         'Your application has been successfully saved in our system. An e-mail has been sent to your e-mail address.',
       applicationNumber: 'Application number is',

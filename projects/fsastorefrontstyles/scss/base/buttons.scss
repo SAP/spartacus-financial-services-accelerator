@@ -33,6 +33,7 @@ button,
   background-color: var(--cx-color-primary);
   &:hover,
   &:active,
+  &:focus,
   &:not(:disabled):not(.disabled):active,
   &:not(:disabled):not(.disabled).active {
     color: var(--cx-color-1);
@@ -52,6 +53,7 @@ button,
   border-color: var(--cx-color-4);
   &:hover,
   &:active,
+  &:focus,
   &:not(:disabled):not(.disabled):active,
   &:not(:disabled):not(.disabled).active {
     color: var(--cx-color-1);
@@ -71,6 +73,7 @@ button,
   border: 3px solid var(--cx-color-secondary);
   &:hover,
   &:active,
+  &:focus,
   &:not(:disabled):not(.disabled):active,
   &:not(:disabled):not(.disabled).active {
     color: var(--cx-color-primary);
