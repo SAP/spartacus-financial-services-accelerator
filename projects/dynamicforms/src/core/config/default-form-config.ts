@@ -56,6 +56,9 @@ export const defaultFormConfig: DynamicFormsConfig = {
       dateOfBirth: {
         validator: DefaultFormValidators.dateOfBirthValidator,
       },
+      dateOfBirthRetirement: {
+        validator: DefaultFormValidators.dateOfBirthRetirementValidator,
+      },
       maxValue: {
         validator: DefaultFormValidators.max,
       },

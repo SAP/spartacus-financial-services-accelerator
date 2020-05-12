@@ -1,3 +1,4 @@
+import { filter } from 'rxjs/operators';
 import { AbstractControl, ValidationErrors, Validators } from '@angular/forms';
 
 // @dynamic
@@ -34,6 +35,26 @@ export class DefaultFormValidators extends Validators {
         today.getDate()
       );
       return userAge < age ? null : { InvalidDate: true };
+    };
+  }
+
+  static dateOfBirthRetirementValidator(controlName: string) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const userAge = new Date(control.value as string);
+      const today = new Date();
+      if (
+        control.parent &&
+        control.parent.controls &&
+        control.parent.controls[controlName]
+      ) {
+        const retirementAge = control.parent.controls[controlName].value;
+        const age = new Date(
+          today.getFullYear() - retirementAge,
+          today.getMonth(),
+          today.getDate()
+        );
+        return userAge > age ? null : { InvalidDate: true };
+      }
     };
   }
 
