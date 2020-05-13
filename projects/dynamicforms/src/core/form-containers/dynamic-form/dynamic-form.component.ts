@@ -6,8 +6,9 @@ import {
   OnDestroy,
   OnInit,
   Output,
+  ChangeDetectorRef,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { YFormData } from '@fsa/dynamicforms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -45,6 +46,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   }
 
   constructor(
+    protected changeDetectorRef: ChangeDetectorRef,
     protected formService: FormBuilderService,
     protected formDataService: FormDataService,
     public formConfig: DynamicFormsConfig
@@ -99,7 +101,10 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         .getSubmittedForm()
         .pipe(
           map(form => {
-            if (
+            if (form && !this.valid) {
+              this.markInvalidControls(this.form);
+              this.changeDetectorRef.detectChanges();
+            } else if (
               form &&
               form.content === undefined &&
               this.form &&
@@ -118,9 +123,17 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     );
   }
 
-  handleSubmit(event: Event) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.submit.emit(this.value);
+  markInvalidControls(formGroup: FormGroup) {
+    for (const key of Object.keys(formGroup.controls)) {
+      const formControl = formGroup.get(key);
+      if (formControl instanceof FormGroup) {
+        this.markInvalidControls(formControl);
+      } else {
+        const control = <FormControl>formControl;
+        if (!control.valid) {
+          control.markAsTouched({ onlySelf: true });
+        }
+      }
+    }
   }
 }

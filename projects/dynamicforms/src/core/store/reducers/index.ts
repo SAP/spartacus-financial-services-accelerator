@@ -2,6 +2,7 @@ import { InjectionToken, Provider } from '@angular/core';
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { AuthActions } from '@spartacus/core';
 import { FormsState } from '../state';
+import { DYNAMIC_FORMS_LOCAL_STORAGE_KEY } from './../../services/storage/form-data-storage.service';
 import * as fromFormData from './form-data.reducer';
 import * as fromFormDefinition from './form-definition.reducer';
 
@@ -26,7 +27,7 @@ export function clearFormDefinitionState(
   return function(state, action) {
     if (action.type === AuthActions.LOGOUT) {
       state = undefined;
-      localStorage.removeItem('dynamicFormsData');
+      localStorage.removeItem(DYNAMIC_FORMS_LOCAL_STORAGE_KEY);
     }
     return reducer(state, action);
   };

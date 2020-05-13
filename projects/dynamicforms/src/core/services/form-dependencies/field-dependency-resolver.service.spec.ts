@@ -38,13 +38,13 @@ const dependencyConditions: ControlDependency[] = [
 
 const testField1: FieldConfig = {
   name: 'testField1',
-  type: fieldType,
+  fieldType: fieldType,
   dependsOn: dependencyConditions,
 };
 
 const testField2: FieldConfig = {
   name: 'testField2',
-  type: fieldType,
+  fieldType: fieldType,
 };
 
 const mockFormGroup = new FormGroup({

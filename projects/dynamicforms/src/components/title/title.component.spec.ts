@@ -18,7 +18,7 @@ class MockLanguageService {
 }
 
 const mockField: FieldConfig = {
-  type: 'title',
+  fieldType: 'title',
   name: 'testTitle',
   label: {
     en: 'Test Title',
@@ -68,7 +68,7 @@ describe('TitleComponent', () => {
 
   it('should check components type', () => {
     expect(component.config).toBe(mockField);
-    expect(component.config.type).toEqual('title');
+    expect(component.config.fieldType).toEqual('title');
   });
 
   it('should render title component', () => {

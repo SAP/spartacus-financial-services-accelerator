@@ -49,7 +49,9 @@ export class FormComponent implements OnDestroy {
         },
         content: formData.content,
         refId: formData.refId,
-        id: formData.id,
+        id: this.formDataStorageService.getFormDataIdByDefinitionCode(
+          this.formId
+        ),
       });
 
       this.subscription.add(
@@ -70,7 +72,7 @@ export class FormComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.formDataService.setSubmittedForm({});
+    this.formDataService.setSubmittedForm(null);
     if (this.subscription) {
       this.subscription.unsubscribe();
     }

@@ -28,7 +28,7 @@ class MockLanguageService {
 }
 
 const mockField: FieldConfig = {
-  type: 'textarea',
+  fieldType: 'textarea',
   name: 'testTextArea',
   label: {
     en: 'What time did it happen?',
@@ -78,7 +78,7 @@ describe('TextAreaComponent', () => {
 
   it('should check components type', () => {
     expect(component.config).toBe(mockField);
-    expect(component.config.type).toEqual('textarea');
+    expect(component.config.fieldType).toEqual('textarea');
   });
 
   it('should render textarea component', () => {

@@ -21,7 +21,7 @@ export class FormComponentDirective implements OnInit {
   @Input()
   group: FormGroup;
   component: ComponentRef<AbstractFormComponent>;
-  components: { [type: string]: Type<AbstractFormComponent> } = {};
+  components: { [fieldType: string]: Type<AbstractFormComponent> } = {};
 
   constructor(
     protected resolver: ComponentFactoryResolver,
@@ -35,16 +35,17 @@ export class FormComponentDirective implements OnInit {
     )) {
       this.components[name] = obj.component;
     }
-    if (!this.components[this.config.type]) {
+    if (!this.components[this.config.fieldType]) {
       const supportedTypes = Object.keys(this.components).join(', ');
+      console.log(supportedTypes);
       throw new Error(
-        `Trying to use an unsupported type (${this.config.type}).
+        `Trying to use an unsupported type (${this.config.fieldType}).
         Supported types: ${supportedTypes}`
       );
     }
     const component = this.resolver.resolveComponentFactory<
       AbstractFormComponent
-    >(this.components[this.config.type]);
+    >(this.components[this.config.fieldType]);
     this.component = this.container.createComponent(component);
     this.component.instance.config = this.config;
     this.component.instance.group = this.group;

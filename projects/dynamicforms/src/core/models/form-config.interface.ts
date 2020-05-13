@@ -21,7 +21,7 @@ export interface FieldConfig {
   depends?: string[];
   apiUrl?: string;
   placeholder?: string;
-  type: string;
+  fieldType: string;
   value?: any;
   selected?: boolean;
   hidden?: boolean;
