@@ -123,7 +123,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     );
   }
 
-  markInvalidControls(formGroup) {
+  markInvalidControls(formGroup: FormGroup) {
     for (const key of Object.keys(formGroup.controls)) {
       const formControl = formGroup.get(key);
       if (formControl instanceof FormGroup) {
