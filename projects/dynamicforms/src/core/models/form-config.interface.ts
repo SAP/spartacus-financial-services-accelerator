@@ -23,6 +23,7 @@ export interface FieldConfig {
   placeholder?: string;
   type: string;
   value?: any;
+  selected?: boolean;
   hidden?: boolean;
   error?: LocalizedString;
   validations?: ValidatorFunction[];
