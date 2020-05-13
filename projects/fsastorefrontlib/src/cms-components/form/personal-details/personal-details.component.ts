@@ -17,6 +17,7 @@ export class PersonalDetailsComponent implements OnInit {
 
   formDefinition$: Observable<any>;
   formConfig;
+  configuratorType = 'PERSONAL_DETAILS_FORM';
 
   ngOnInit() {
     this.formDefinition$ = this.formSevice.getFormDefinition().pipe(
@@ -36,13 +37,18 @@ export class PersonalDetailsComponent implements OnInit {
             const mainProduct = <FSProduct>(
               cart.deliveryOrderGroups[0].entries[0].product
             );
+
             mainProduct.categories.forEach(category => {
               const productCategory = <FSCategory>category;
-              if (productCategory.yformDefinitions) {
-                const formDefiniton = productCategory.yformDefinitions[0];
+              if (
+                productCategory.yformConfiguratorSettings &&
+                productCategory.yformConfiguratorSettings.configuratorType ===
+                  this.configuratorType
+              ) {
                 this.formSevice.loadFormDefinition(
-                  formDefiniton.applicationId,
-                  formDefiniton.formId
+                  productCategory.yformConfiguratorSettings.configurationApplicationId,
+                  productCategory.yformConfiguratorSettings
+                    .configurationFormId
                 );
               }
             });

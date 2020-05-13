@@ -36,7 +36,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected routingService: RoutingService,
     protected checkoutConfigService: FSCheckoutConfigService,
     protected activatedRoute: ActivatedRoute,
-    protected modalService: ModalService,
+    protected modalService: ModalService
   ) {}
 
   ngOnInit() {
@@ -55,9 +55,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   back() {
-    this.routingService.go(
-      this.checkoutStepUrlBack
-    );
+    this.routingService.go(this.checkoutStepUrlBack);
   }
 
   continue() {

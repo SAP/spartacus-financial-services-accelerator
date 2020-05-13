@@ -25,7 +25,7 @@ export interface FSProduct extends Product {
 }
 
 export interface FSCategory extends Category {
-  yformDefinitions?: YFormDefinition[];
+  yformConfiguratorSettings?: any;
 }
 
 export interface OrgUnit {
