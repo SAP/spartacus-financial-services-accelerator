@@ -99,7 +99,6 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
             if (mainProduct && mainProduct.defaultCategory) {
               this.routingService.go({
                 cxRoute: 'checkoutPersonalDetails',
-                params: { formCode: mainProduct.defaultCategory.code },
               });
             }
           })

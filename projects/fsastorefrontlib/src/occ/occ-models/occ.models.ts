@@ -1,4 +1,4 @@
-import { YFormData } from '@fsa/dynamicforms';
+import { YFormData, YFormDefinition } from '@fsa/dynamicforms';
 import {
   Cart,
   Category,
@@ -21,7 +21,11 @@ export interface ContactAgentData {
 export interface FSProduct extends Product {
   price?: FSPrice;
   cartDispalyName?: string;
-  defaultCategory?: Category;
+  defaultCategory?: FSCategory;
+}
+
+export interface FSCategory extends Category {
+  yformDefinitions?: YFormDefinition[];
 }
 
 export interface OrgUnit {

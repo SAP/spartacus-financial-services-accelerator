@@ -8,7 +8,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   category: { paths: ['checkout/c/:categoryCode'] },
   addOptions: { paths: ['checkout/add-options'] },
   checkoutPersonalDetails: {
-    paths: ['checkout/personal-details/:formCode'],
+    paths: ['checkout/personal-details'],
   },
   quoteReview: { paths: ['checkout/quote-review'] },
   checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
