@@ -18,14 +18,14 @@ const defaultErrorMessage = 'Test string';
 const enErrorMessage = 'En test string';
 
 const defaultFieldConfig: FieldConfig = {
-  type: fieldType,
+  fieldType: fieldType,
   error: {
     default: defaultErrorMessage,
   },
 };
 
 const localizedFieldConfig: FieldConfig = {
-  type: fieldType,
+  fieldType: fieldType,
   error: {
     en: enErrorMessage,
   },

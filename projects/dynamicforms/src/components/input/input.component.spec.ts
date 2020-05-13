@@ -26,7 +26,7 @@ class MockLanguageService {
   }
 }
 const mockField: FieldConfig = {
-  type: 'input',
+  fieldType: 'input',
   name: 'testInput',
   label: {
     en: 'Test Input Label',
@@ -75,7 +75,7 @@ describe('InputComponent', () => {
   });
   it('should check components type', () => {
     expect(component.config).toBe(mockField);
-    expect(component.config.type).toEqual('input');
+    expect(component.config.fieldType).toEqual('input');
   });
 
   it('should render input component', () => {

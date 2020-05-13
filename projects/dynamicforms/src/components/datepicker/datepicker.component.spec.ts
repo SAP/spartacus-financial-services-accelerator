@@ -27,7 +27,7 @@ class MockLanguageService {
 class MockOccFormService {}
 
 const mockField: FieldConfig = {
-  type: 'datepicker',
+  fieldType: 'datepicker',
   name: 'testDatePicker',
   label: {
     en: 'TestLabel',
@@ -77,7 +77,7 @@ describe('DatePickerComponent', () => {
 
   it('should check components type', () => {
     expect(component.config).toBe(mockField);
-    expect(component.config.type).toEqual('datepicker');
+    expect(component.config.fieldType).toEqual('datepicker');
   });
 
   it('should render datepicker component', () => {

@@ -11,7 +11,7 @@ const notExist = 'notExist';
 
 const field: FieldConfig = {
   name: fieldName,
-  type: fieldType,
+  fieldType: fieldType,
   validations: [
     {
       name: minValue,
@@ -50,7 +50,7 @@ describe('FormValidationService', () => {
     expect(
       service.getValidatorsForField({
         name: fieldName,
-        type: fieldType,
+        fieldType: fieldType,
       }).length
     ).toEqual(0);
   });
@@ -59,7 +59,7 @@ describe('FormValidationService', () => {
     expect(
       service.getValidatorsForField({
         name: fieldName,
-        type: fieldType,
+        fieldType: fieldType,
         validations: [
           {
             name: minValue,
@@ -73,7 +73,7 @@ describe('FormValidationService', () => {
     expect(
       service.getValidatorsForField({
         name: fieldName,
-        type: fieldType,
+        fieldType: fieldType,
         validations: [
           {
             name: notExist,
@@ -86,7 +86,7 @@ describe('FormValidationService', () => {
   it('should add required validator', () => {
     const testFieldConfig: FieldConfig = {
       name: fieldName,
-      type: fieldType,
+      fieldType: fieldType,
       required: true,
       validations: [
         {
