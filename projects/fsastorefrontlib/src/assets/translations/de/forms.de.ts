@@ -43,7 +43,7 @@ export const forms = {
       event_personal_details: 'Persönliche Angaben',
       travel_personal_details: 'Persönliche Angaben',
       savings_personal_details: 'Persönliche Angaben',
-      banking_loan_creditCart_personalDetails: 'Persönliche Angaben',
+      loan_creditCart_personalDetails: 'Persönliche Angaben',
       ftd_currentAcc_personal_details: 'Persönliche Angaben',
     },
   },
