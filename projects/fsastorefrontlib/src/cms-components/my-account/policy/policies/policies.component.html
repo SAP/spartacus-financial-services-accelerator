@@ -42,24 +42,6 @@
                   <ng-container
                     *ngIf="
                       (policy.insuredObjectList?.insuredObjects)[0]
-                        ?.insuredObjectItems.length > 0
-                    "
-                  >
-                    <div class="info-card-data">
-                      <span class="label">{{
-                        ((policy.insuredObjectList?.insuredObjects)[0]
-                          ?.insuredObjectItems)[0]?.label
-                      }}</span
-                      >:
-                      <span class="value">{{
-                        ((policy.insuredObjectList?.insuredObjects)[0]
-                          ?.insuredObjectItems)[0]?.value
-                      }}</span>
-                    </div>
-                  </ng-container>
-                  <ng-container
-                    *ngIf="
-                      (policy.insuredObjectList?.insuredObjects)[0]
                         ?.insuredObjectItems.length > 1
                     "
                   >
