@@ -72,7 +72,7 @@ export class FormComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.formDataService.setSubmittedForm({});
+    this.formDataService.setSubmittedForm(null);
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
