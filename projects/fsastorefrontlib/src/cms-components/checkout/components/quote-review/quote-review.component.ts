@@ -37,20 +37,9 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected checkoutConfigService: FSCheckoutConfigService,
     protected activatedRoute: ActivatedRoute,
     protected modalService: ModalService,
-    protected categoryService: CategoryService
   ) {}
 
   ngOnInit() {
-    this.subscription.add(
-      this.categoryService
-        .getActiveCategory()
-        .pipe(
-          map(category => {
-            this.categoryCode = category;
-          })
-        )
-        .subscribe()
-    );
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
       this.activatedRoute
     );
@@ -66,9 +55,8 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   back() {
-    // TO DO - refactor after we change logic for multiple containers and categories
     this.routingService.go(
-      this.checkoutStepUrlBack.replace(':formCode', this.categoryCode)
+      this.checkoutStepUrlBack
     );
   }
 
