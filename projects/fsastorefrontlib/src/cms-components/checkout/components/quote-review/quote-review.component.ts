@@ -66,6 +66,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   back() {
+    // TO DO - refactor after we change logic for multiple containers and categories
     this.routingService.go(
       this.checkoutStepUrlBack.replace(':formCode', this.categoryCode)
     );
