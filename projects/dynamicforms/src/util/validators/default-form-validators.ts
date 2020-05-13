@@ -37,7 +37,7 @@ export class DefaultFormValidators extends Validators {
     };
   }
 
-  static dateOfBirthRetirementValidator(controlName: string) {
+  static youngerThanValidator(controlName: string) {
     return (control: AbstractControl): ValidationErrors | null => {
       const userAge = new Date(control.value as string);
       const today = new Date();
