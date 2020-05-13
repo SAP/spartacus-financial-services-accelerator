@@ -46,7 +46,7 @@ class MockOccFormService {
 }
 
 const mockField: FieldConfig = {
-  type: 'select',
+  fieldType: 'select',
   name: 'testSelect',
   label: {
     en: 'TestLabel',
