@@ -21,7 +21,7 @@ const defaultLabel = 'Test string';
 const mockCssClass = 'testClass';
 
 const mockField: FieldConfig = {
-  type: 'abstract',
+  fieldType: 'abstract',
   name: 'testTitle',
   label: {},
 };

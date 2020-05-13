@@ -28,7 +28,7 @@ class MockLanguageService {
 class MockOccFormService {}
 
 const mockField: FieldConfig = {
-  type: 'checkbox',
+  fieldType: 'checkbox',
   name: 'testcheckbox',
   options: [
     {
