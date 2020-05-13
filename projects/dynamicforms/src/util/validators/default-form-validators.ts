@@ -37,6 +37,26 @@ export class DefaultFormValidators extends Validators {
     };
   }
 
+  static youngerThanValidator(controlName: string) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const userAge = new Date(control.value as string);
+      const today = new Date();
+      if (
+        control.parent &&
+        control.parent.controls &&
+        control.parent.controls[controlName]
+      ) {
+        const retirementAge = control.parent.controls[controlName].value;
+        const age = new Date(
+          today.getFullYear() - retirementAge,
+          today.getMonth(),
+          today.getDate()
+        );
+        return userAge > age ? null : { InvalidDate: true };
+      }
+    };
+  }
+
   static compareToCurrentDate(operator) {
     return (control: AbstractControl): ValidationErrors | null => {
       const inputVal = new Date(control.value as string);
