@@ -27,7 +27,7 @@ class MockLanguageService {
 }
 
 const mockField: FieldConfig = {
-  type: 'time',
+  fieldType: 'time',
   name: 'testTime',
   label: {
     en: 'What time did it happen?',
@@ -78,7 +78,7 @@ describe('TimeComponent', () => {
 
   it('should check components type', () => {
     expect(component.config).toBe(mockField);
-    expect(component.config.type).toEqual('time');
+    expect(component.config.fieldType).toEqual('time');
   });
 
   it('should render time component', () => {
