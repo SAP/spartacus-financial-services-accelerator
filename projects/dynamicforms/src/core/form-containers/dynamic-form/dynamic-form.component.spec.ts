@@ -140,6 +140,7 @@ describe('DynamicFormComponent', () => {
     component.formData = undefined;
     component.ngOnInit();
     expect(component.form.controls.testGroupCode.touched).toEqual(true);
+    mockFormGroup.removeControl('testNestedControl');
   });
 
   it('should submit in case form content is not defined', () => {
