@@ -35,9 +35,7 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
   },
 };
 
-const mockFormGroup = new FormGroup({
-  testGroupCode: new FormControl('', Validators.required),
-});
+let mockFormGroup;
 
 const mocFormGroupNested = new FormGroup({
   testGroupNested: new FormControl('', Validators.required),
@@ -113,6 +111,9 @@ describe('DynamicFormComponent', () => {
     component = fixture.componentInstance;
     component.config = config;
     component.formData = of(formData);
+    mockFormGroup = new FormGroup({
+      testGroupCode: new FormControl('', Validators.required),
+    });
     fixture.detectChanges();
   }));
 
@@ -140,7 +141,6 @@ describe('DynamicFormComponent', () => {
     component.formData = undefined;
     component.ngOnInit();
     expect(component.form.controls.testGroupCode.touched).toEqual(true);
-    mockFormGroup.removeControl('testNestedControl');
   });
 
   it('should submit in case form content is not defined', () => {
