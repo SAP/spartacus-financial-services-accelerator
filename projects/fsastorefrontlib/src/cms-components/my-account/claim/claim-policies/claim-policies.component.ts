@@ -69,8 +69,8 @@ export class ClaimPoliciesComponent implements OnInit, OnDestroy {
   cardContent(idx, cardObject): Observable<Card> {
     return combineLatest([
       this.translation.translate('policy.policy'),
-      this.translation.translate('claim.vehicleMake'),
-      this.translation.translate('claim.vehicleModel'),
+      this.translation.translate('fscommon.vehicleMake'),
+      this.translation.translate('fscommon.vehicleModel'),
       this.translation.translate('fscommon.select'),
       this.translation.translate('paymentCard.selected'),
     ]).pipe(

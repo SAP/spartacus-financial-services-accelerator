@@ -47,8 +47,9 @@
                   >
                     <div class="info-card-data">
                       <span class="label">{{
-                        ((policy.insuredObjectList?.insuredObjects)[0]
-                          ?.insuredObjectItems)[1]?.label
+                        'fscommon.' +
+                          ((policy.insuredObjectList?.insuredObjects)[0]
+                            ?.insuredObjectItems)[1]?.label | cxTranslate
                       }}</span
                       >:
                       <span class="value">{{
@@ -86,10 +87,7 @@
                 <span class="image-wrapper">
                   <img
                     class="image-item"
-                    [src]="
-                      getBaseUrl() +
-                      policy.mainProduct.coverageProduct.images[0].url
-                    "
+                    [src]="getBaseUrl() + policy.categoryData?.image?.url"
                     alt=""
                   />
                 </span>

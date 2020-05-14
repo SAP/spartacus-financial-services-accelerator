@@ -12,8 +12,6 @@ export const claim = {
     deleteStartedClaimProcess: 'Delete started claim process',
     followingClaimProcessWillBeDeleted:
       'The following claim process will be deleted',
-    vehicleMake: 'Vehicle Make',
-    vehicleModel: 'Vehicle Model',
     confirmation: {
       processingNumber: 'Your processing number is',
       submissionNotice:

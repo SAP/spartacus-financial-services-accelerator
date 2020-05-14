@@ -13,7 +13,5 @@ export const claim = {
     deleteStartedClaimProcess: 'Gestarteten Schadensfall löschen',
     followingClaimProcessWillBeDeleted:
       'Der folgende Schadensfall wird gelöscht.',
-    vehicleMake: 'Fahrzeughersteller',
-    vehicleModel: 'Fahrzeugmodell',
   },
 };

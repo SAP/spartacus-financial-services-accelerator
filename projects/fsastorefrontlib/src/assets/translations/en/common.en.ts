@@ -39,6 +39,7 @@ export const fscommon = {
     orderConfirmation: 'Order confirmation',
     startDate: 'Start Date',
     phoneNumber: 'Phone Number',
+    address: 'Address',
     emailAddress: 'Email Address',
     adressLine: 'Address Line',
     notAvailableFull: 'Not available',
@@ -82,6 +83,13 @@ export const fscommon = {
     summary: 'Summary',
     submit: 'Submit',
     totalResults: 'Total results',
+    vehicleMake: 'Vehicle Make',
+    vehicleModel: 'Vehicle Model',
+    propertyType: 'Property type',
+    tripDestination: 'Trip destination',
+    ['property-address-line-1']: 'Property address',
+    lifeMainDob: 'Date of Birth',
+    contribution: 'Contribution',
     application: {
       application: 'Application',
       applicationRequestSubmitted:
