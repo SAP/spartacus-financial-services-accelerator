@@ -1,35 +1,34 @@
-<div
-  class="dynamic-field"
-  [formGroup]="group"
-  [hidden]="
-    (group.controls[config.name] && group.controls[config.name].disabled) ||
-    config.hidden
-  "
->
-  <div class="form-group">
-    <label class="col-form-label">
-      {{ label }}
-      <ng-container *ngIf="!config.required">
-        {{ 'forms.optional' | cxTranslate }}
-      </ng-container>
-    </label>
-    <select
-      class="form-control"
-      [attr.name]="config.name"
-      formControlName="{{ config.name }}"
-    >
-      <option [selected]="true" disabled value="null">{{
-        'fscommon.pleaseSelect' | cxTranslate
-      }}</option>
-      <option *ngFor="let option of config.options" value="{{ option.name }}">
-        <ng-container *ngIf="activeLang$ | async as activeLang">
-          {{ getLocalizedOption(option.label, activeLang) }}
+<ng-container *ngIf="group">
+  <div
+    class="dynamic-field"
+    [formGroup]="group"
+    [hidden]="group.controls[config.name]?.disabled || config.hidden"
+  >
+    <div class="form-group">
+      <label class="col-form-label">
+        {{ label }}
+        <ng-container *ngIf="!config.required">
+          {{ 'forms.optional' | cxTranslate }}
         </ng-container>
-      </option>
-    </select>
+      </label>
+      <select
+        class="form-control"
+        [attr.name]="config.name"
+        formControlName="{{ config.name }}"
+      >
+        <option [selected]="true" disabled value="null">{{
+          'fscommon.pleaseSelect' | cxTranslate
+        }}</option>
+        <option *ngFor="let option of config.options" value="{{ option.name }}">
+          <ng-container *ngIf="activeLang$ | async as activeLang">
+            {{ getLocalizedOption(option.label, activeLang) }}
+          </ng-container>
+        </option>
+      </select>
+    </div>
+    <cx-error-notice
+      [warn]="group.controls[config.name]"
+      [parentConfig]="config"
+    ></cx-error-notice>
   </div>
-  <cx-error-notice
-    [warn]="group.controls[config.name]"
-    [parentConfig]="config"
-  ></cx-error-notice>
-</div>
+</ng-container>

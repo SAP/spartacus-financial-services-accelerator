@@ -1,24 +1,26 @@
-<div
-  class="dynamic-field"
-  [formGroup]="group"
-  [hidden]="(group?.controls)[config.name]?.disabled || config.hidden"
->
-  <div class="form-group">
-    <label class="col-form-label">
-      <ng-container *ngIf="!config.required">
-        {{ 'forms.optional' | cxTranslate }}
-      </ng-container>
-      {{ label }}
-    </label>
-    <input
-      class="form-control"
-      type="date"
-      [formControlName]="config.name"
-      [attr.name]="config.name"
-    />
+<ng-container *ngIf="group">
+  <div
+    class="dynamic-field"
+    [formGroup]="group"
+    [hidden]="group.controls[config.name]?.disabled || config.hidden"
+  >
+    <div class="form-group">
+      <label class="col-form-label">
+        <ng-container *ngIf="!config.required">
+          {{ 'forms.optional' | cxTranslate }}
+        </ng-container>
+        {{ label }}
+      </label>
+      <input
+        class="form-control"
+        type="date"
+        [formControlName]="config.name"
+        [attr.name]="config.name"
+      />
+    </div>
+    <cx-error-notice
+      [warn]="group.controls[config.name]"
+      [parentConfig]="config"
+    ></cx-error-notice>
   </div>
-  <cx-error-notice
-    [warn]="group.controls[config.name]"
-    [parentConfig]="config"
-  ></cx-error-notice>
-</div>
+</ng-container>
