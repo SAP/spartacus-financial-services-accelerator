@@ -4,6 +4,17 @@ import { LocalizedString } from '../../core/models/form-config.interface';
 
 @Component({ template: '' })
 export class AbstractOptionsComponent extends AbstractFormComponent {
+  ngOnInit() {
+    super.ngOnInit();
+    if (this.config.options) {
+      const selectedOption = this.config.options.find(
+        option => option.selected
+      );
+      if (selectedOption) {
+        this.group.get(this.config.name).setValue(selectedOption.name);
+      }
+    }
+  }
   getLocalizedOption(localizationObj: LocalizedString, activelanguage: string) {
     return localizationObj[activelanguage]
       ? localizationObj[activelanguage]

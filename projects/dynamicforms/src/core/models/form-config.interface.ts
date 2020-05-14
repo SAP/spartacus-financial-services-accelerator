@@ -23,7 +23,6 @@ export interface FieldConfig {
   placeholder?: string;
   fieldType: string;
   value?: any;
-  selected?: boolean;
   hidden?: boolean;
   error?: LocalizedString;
   validations?: ValidatorFunction[];
@@ -48,5 +47,6 @@ export interface ValidatorArgument {
 export interface FieldOption {
   name: string;
   label: LocalizedString;
+  selected?: boolean;
   icon?: string;
 }
