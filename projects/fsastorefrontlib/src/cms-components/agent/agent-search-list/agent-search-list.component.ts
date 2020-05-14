@@ -9,11 +9,10 @@ import { AgentSearchService } from '../../../core/agent/facade/agent-search.serv
 })
 export class AgentSearchListComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
-  searchResults: Observable<any>;
+  searchResults$: Observable<any>;
   searchQuery: string;
-  pagination: any;
   selectedAgent$: Observable<any>;
-  selectedIndex: number = null;
+  selectedIndex = 0;
 
   constructor(
     protected agentSearchService: AgentSearchService,
@@ -25,7 +24,7 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
       this.route.queryParams.subscribe(params => this.initialize(params))
     );
 
-    this.searchResults = this.agentSearchService.getResults();
+    this.searchResults$ = this.agentSearchService.getResults();
   }
 
   private initialize(queryParams: Params) {

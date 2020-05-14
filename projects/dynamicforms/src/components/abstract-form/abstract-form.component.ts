@@ -1,8 +1,14 @@
-import { Component, HostBinding, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+  OnInit,
+  OnDestroy,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FieldConfig } from '../core/models/form-config.interface';
-import { DynamicFormsConfig } from '../core/config/form-config';
-import { OccMockFormService } from '../occ/services/occ-mock-form.service';
+import { FieldConfig } from '../../core/models/form-config.interface';
+import { DynamicFormsConfig } from '../../core/config/form-config';
+import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { LanguageService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -12,7 +18,8 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
   constructor(
     protected formService: OccMockFormService,
     protected formConfig: DynamicFormsConfig,
-    protected languageService: LanguageService
+    protected languageService: LanguageService,
+    protected changeDetectorRef: ChangeDetectorRef
   ) {}
 
   @HostBinding('class') hostComponentClass: string;
@@ -20,6 +27,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
   config: FieldConfig;
   group: FormGroup;
   subscription = new Subscription();
+  activeLang$ = this.languageService.getActive();
 
   ngOnInit() {
     this.hostComponentClass =
@@ -42,7 +50,6 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
         .subscribe()
     );
   }
-
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();

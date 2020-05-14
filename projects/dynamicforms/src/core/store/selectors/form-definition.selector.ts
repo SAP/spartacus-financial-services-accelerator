@@ -1,45 +1,30 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
-import * as fromFeature from './feature.selector';
-import {
-  FormDefinitionsState,
-  FormDefinitionState,
-  StateWithFormDefinition,
-} from '../form-definition-state';
-import { LoaderState, StateLoaderSelectors } from '@spartacus/core';
+import { FormDefinitionState, FormsState, StateWithForm } from '../state';
+import { getFormState } from './feature.selector';
+
+const formDefinitionContent = (state: FormDefinitionState) => state.content;
+const formDefinitionLoaded = (state: FormDefinitionState) => state.loaded;
 
 export const getFormDefinitionState: MemoizedSelector<
-  StateWithFormDefinition,
-  LoaderState<FormDefinitionState>
+  StateWithForm,
+  FormDefinitionState
 > = createSelector(
-  fromFeature.getFormDefinitionState,
-  (formDefinitionsState: FormDefinitionsState) =>
-    formDefinitionsState.formDefinition
+  getFormState,
+  (state: FormsState) => state.formDefinition
 );
 
 export const getFormDefinition: MemoizedSelector<
-  StateWithFormDefinition,
+  StateWithForm,
   any
 > = createSelector(
   getFormDefinitionState,
-  (state: LoaderState<FormDefinitionState>) => {
-    return StateLoaderSelectors.loaderValueSelector(state).content;
-  }
+  formDefinitionContent
 );
 
-export const getLoaded: MemoizedSelector<
-  StateWithFormDefinition,
+export const getFormDefinitionLoaded: MemoizedSelector<
+  StateWithForm,
   any
 > = createSelector(
   getFormDefinitionState,
-  (state: LoaderState<FormDefinitionState>) =>
-    StateLoaderSelectors.loaderValueSelector(state).loaded
-);
-
-export const getFormDefinitionErrorFactory: MemoizedSelector<
-  StateWithFormDefinition,
-  boolean
-> = createSelector(
-  getFormDefinitionState,
-  (loaderState: LoaderState<FormDefinitionState>) =>
-    StateLoaderSelectors.loaderErrorSelector(loaderState)
+  formDefinitionLoaded
 );

@@ -1,25 +1,22 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
   OnDestroy,
   OnInit,
   Output,
-  ChangeDetectionStrategy,
+  ChangeDetectorRef,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { YFormData } from '@fsa/dynamicforms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { DynamicFormsConfig } from '../../config/form-config';
 import { GeneralHelpers } from '../../helpers/helpers';
-
-import {
-  FieldConfig,
-  FormDefinition,
-} from '../../models/form-config.interface';
+import { FormDefinition } from '../../models/form-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 import { FormDataService } from '../../services/data/form-data.service';
-import { DynamicFormsConfig } from '../../config/form-config';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -37,7 +34,6 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
   form: FormGroup;
   subscription = new Subscription();
-  allInputs: Array<FieldConfig> = [];
 
   get changes() {
     return this.form.valueChanges;
@@ -50,13 +46,16 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   }
 
   constructor(
+    protected changeDetectorRef: ChangeDetectorRef,
     protected formService: FormBuilderService,
     protected formDataService: FormDataService,
     public formConfig: DynamicFormsConfig
   ) {}
 
   ngOnInit() {
-    this.createFormDefinition();
+    if (this.config) {
+      this.form = this.formService.createForm(this.config);
+    }
     this.addSubmitEvent();
     if (this.formData) {
       this.subscription.add(
@@ -76,17 +75,6 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
-    }
-  }
-
-  createFormDefinition() {
-    if (this.config) {
-      this.form = this.formService.createForm(this.config);
-      this.config.formGroups.forEach(formGroup => {
-        formGroup.fieldConfigs.forEach(inputField => {
-          this.allInputs.push(inputField);
-        });
-      });
     }
   }
 
@@ -113,7 +101,10 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         .getSubmittedForm()
         .pipe(
           map(form => {
-            if (
+            if (form && !this.valid) {
+              this.markInvalidControls(this.form);
+              this.changeDetectorRef.detectChanges();
+            } else if (
               form &&
               form.content === undefined &&
               this.form &&
@@ -131,9 +122,18 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         .subscribe()
     );
   }
-  handleSubmit(event: Event) {
-    event.preventDefault();
-    event.stopPropagation();
-    this.submit.emit(this.value);
+
+  markInvalidControls(formGroup: FormGroup) {
+    for (const key of Object.keys(formGroup.controls)) {
+      const formControl = formGroup.get(key);
+      if (formControl instanceof FormGroup) {
+        this.markInvalidControls(formControl);
+      } else {
+        const control = <FormControl>formControl;
+        if (!control.valid) {
+          control.markAsTouched({ onlySelf: true });
+        }
+      }
+    }
   }
 }

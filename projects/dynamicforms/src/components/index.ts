@@ -1,5 +1,6 @@
 export * from './components.module';
-export * from './abstract-form.component';
+export * from './abstract-form/abstract-form.component';
+export * from './abstract-options/abstract-options.component';
 export * from './input/input.component';
 export * from './button/button.component';
 export * from './datepicker/datepicker.component';
@@ -9,3 +10,5 @@ export * from './select/select.component';
 export * from './text-area/text-area.component';
 export * from './title/title.component';
 export * from './time/time.component';
+export * from './separator/separator.component';
+export * from './checkbox/checkbox.component';

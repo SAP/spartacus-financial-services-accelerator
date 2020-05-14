@@ -8,6 +8,9 @@ import { TimeComponent } from '../../components/time/time.component';
 import { TitleComponent } from '../../components/title/title.component';
 import { DefaultFormValidators } from './../../util/validators/default-form-validators';
 import { DynamicFormsConfig } from './form-config';
+import { SeparatorComponent } from '../../components/separator/separator.component';
+import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
+import { DynamicSelectComponent } from '../../components/dynamic-select/dynamic-select.component';
 
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
@@ -20,6 +23,9 @@ export const defaultFormConfig: DynamicFormsConfig = {
       },
       select: {
         component: SelectComponent,
+      },
+      dynamicSelect: {
+        component: DynamicSelectComponent,
       },
       title: {
         component: TitleComponent,
@@ -36,6 +42,12 @@ export const defaultFormConfig: DynamicFormsConfig = {
       time: {
         component: TimeComponent,
       },
+      checkbox: {
+        component: CheckboxComponent,
+      },
+      separator: {
+        component: SeparatorComponent,
+      },
     },
     validators: {
       compareToCurrentDate: {
@@ -43,6 +55,9 @@ export const defaultFormConfig: DynamicFormsConfig = {
       },
       dateOfBirth: {
         validator: DefaultFormValidators.dateOfBirthValidator,
+      },
+      youngerThan: {
+        validator: DefaultFormValidators.youngerThanValidator,
       },
       maxValue: {
         validator: DefaultFormValidators.max,

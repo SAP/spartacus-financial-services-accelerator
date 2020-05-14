@@ -32,24 +32,23 @@ export class FormBuilderService {
             form
           );
         }
-        if (formGroup.dependsOn) {
-          this.fieldDependencyResolverService.resolveFormControlDependencies(
-            formGroup.dependsOn,
-            fieldControl,
-            form
-          );
-        }
       });
+      if (formGroup.dependsOn) {
+        this.fieldDependencyResolverService.resolveFormControlDependencies(
+          formGroup.dependsOn,
+          controlGroup,
+          form
+        );
+      }
     });
     return form;
   }
 
   createControl(fieldConfig: FieldConfig) {
-    const { disabled, validation, value } = fieldConfig;
-    // TODO: Replace attribute 'validation' with 'validations' in form sample configuration
-    const validations = validation
-      ? validation
-      : this.formValidationService.getValidatorsForField(fieldConfig);
+    const { disabled, value } = fieldConfig;
+    const validations = this.formValidationService.getValidatorsForField(
+      fieldConfig
+    );
     return this.fb.control({ disabled, value }, validations);
   }
 }

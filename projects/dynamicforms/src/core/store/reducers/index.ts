@@ -1,39 +1,33 @@
 import { InjectionToken, Provider } from '@angular/core';
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
-import { AuthActions, loaderReducer } from '@spartacus/core';
-import * as fromReducer from './form-definition.reducer';
+import { AuthActions } from '@spartacus/core';
+import { FormsState } from '../state';
+import { DYNAMIC_FORMS_LOCAL_STORAGE_KEY } from './../../services/storage/form-data-storage.service';
+import * as fromFormData from './form-data.reducer';
+import * as fromFormDefinition from './form-definition.reducer';
 
-import {
-  FORM_DEFINITION_DATA,
-  FormDefinitionsState,
-  FormDefinitionState,
-} from '../form-definition-state';
-
-export function getReducers(): ActionReducerMap<FormDefinitionsState> {
+export function getReducers(): ActionReducerMap<FormsState> {
   return {
-    formDefinition: loaderReducer<FormDefinitionState>(
-      FORM_DEFINITION_DATA,
-      fromReducer.reducer
-    ),
+    formDefinition: fromFormDefinition.reducer,
+    formData: fromFormData.reducer,
   };
 }
 
 export const reducerToken: InjectionToken<
-  ActionReducerMap<FormDefinitionsState>
-> = new InjectionToken<ActionReducerMap<FormDefinitionsState>>(
-  'FormDefinitionReducers'
-);
+  ActionReducerMap<FormsState>
+> = new InjectionToken<ActionReducerMap<FormsState>>('FormReducers');
 export const reducerProvider: Provider = {
   provide: reducerToken,
   useFactory: getReducers,
 };
+
 export function clearFormDefinitionState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return function(state, action) {
     if (action.type === AuthActions.LOGOUT) {
       state = undefined;
-      localStorage.removeItem('dynamicFormsData');
+      localStorage.removeItem(DYNAMIC_FORMS_LOCAL_STORAGE_KEY);
     }
     return reducer(state, action);
   };

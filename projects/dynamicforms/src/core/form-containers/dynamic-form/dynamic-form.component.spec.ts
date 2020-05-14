@@ -1,16 +1,21 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { DynamicFormComponent } from './dynamic-form.component';
 import { Directive, Input } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { BehaviorSubject, of } from 'rxjs';
+import { DynamicFormsConfig } from '../../config';
+import { YFormData } from '../../models';
 import {
   FieldConfig,
   FormDefinition,
 } from '../../models/form-config.interface';
-import { FormGroup, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
-import { BehaviorSubject, of } from 'rxjs';
 import { FormDataService } from '../../services/data/form-data.service';
-import { YFormData } from '../../models';
-import { DynamicFormsConfig } from '../../config';
+import { DynamicFormComponent } from './dynamic-form.component';
 
 @Directive({
   // tslint:disable
@@ -31,9 +36,12 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 };
 
 const mockFormGroup = new FormGroup({
-  testGroupCode: new FormControl('testValue'),
+  testGroupCode: new FormControl('', Validators.required),
 });
 
+const mocFormGroupNested = new FormGroup({
+  testGroupNested: new FormControl('', Validators.required),
+});
 export class MockFormBuilderService {
   createForm() {
     return mockFormGroup;
@@ -48,7 +56,7 @@ const formData: YFormData = {
 };
 
 const mockField: FieldConfig = {
-  type: 'datepicker',
+  fieldType: 'datepicker',
   name: 'testDatePicker',
   label: {
     en: 'What time did it happen?',
@@ -114,20 +122,28 @@ describe('DynamicFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should not create for if config is not defined', () => {
+  it('should not create form if config is not defined', () => {
     spyOn(mockFormBuilderService, 'createForm').and.callThrough();
     component.config = undefined;
     component.ngOnInit();
     expect(mockFormBuilderService.createForm).not.toHaveBeenCalled();
   });
 
-  it('should create and handle submit', () => {
-    spyOn(component.submit, 'emit').and.callThrough();
-    component.handleSubmit(new Event('testEvent'));
-    expect(component.submit.emit).toHaveBeenCalled();
+  it('should change control touched property to true', () => {
+    component.formData = undefined;
+    component.ngOnInit();
+    expect(component.form.controls.testGroupCode.touched).toEqual(true);
+  });
+
+  it('should change control touched property to true when form has nested formGroup', () => {
+    mockFormGroup.addControl('testNestedControl', mocFormGroupNested);
+    component.formData = undefined;
+    component.ngOnInit();
+    expect(component.form.controls.testGroupCode.touched).toEqual(true);
   });
 
   it('should submit in case form content is not defined', () => {
+    component.form.controls.testGroupCode.setValue('test string');
     spyOn(component.submit, 'emit').and.callThrough();
     formData.content = undefined;
     component.ngOnInit();

@@ -25,6 +25,14 @@ export const finalReviewAccordionTravel = [
   'Personal Details',
 ];
 
+export const policyDetailsAccordions = [
+  ' Policy Summary ',
+  ' Who or What Is Insured ',
+  " What's Included ",
+  ' Optional Extras ',
+  ' What Does It Cost Me? ',
+];
+
 export const Accordions = {
   accordions: [
     {
@@ -54,6 +62,10 @@ export const Accordions = {
     {
       category: 'travelFinalReview',
       accordionItems: this.finalReviewAccordionTravel,
+    },
+    {
+      category: 'policyDetails',
+      accordionItems: this.policyDetailsAccordions,
     },
   ],
 };

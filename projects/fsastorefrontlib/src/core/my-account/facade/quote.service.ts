@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormDataService } from '@fsa/dynamicforms';
+import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { select, Store } from '@ngrx/store';
 import { AuthService, OrderEntry } from '@spartacus/core';
 import { map, take } from 'rxjs/operators';
@@ -15,7 +15,8 @@ export class QuoteService {
     protected store: Store<StateWithMyAccount>,
     protected cartService: FSCartService,
     protected authService: AuthService,
-    protected formDataService: FormDataService
+    protected formDataService: FormDataService,
+    protected formDataStorageService: FormDataStorageService
   ) {}
 
   loadQuotes() {
@@ -73,7 +74,7 @@ export class QuoteService {
 
   protected loadPersonalDetailsForm(entry: FSOrderEntry) {
     if (entry.formData && entry.formData.length > 0) {
-      this.formDataService.setFormDataToLocalStorage({
+      this.formDataStorageService.setFormDataToLocalStorage({
         id: entry.formData[0].id,
         formDefinition: {
           formId: entry.formData[0].formDefinition.formId,
@@ -91,12 +92,13 @@ export class QuoteService {
       const dataId = insuranceQuote.quoteDetails.entry
         .filter(details => details.key === 'formId')
         .map(mapEntry => mapEntry.value)[0];
+      this.formDataService.loadFormData(dataId);
       this.formDataService
-        .getFormData(dataId)
+        .getFormData()
         .pipe(
           map(formData => {
             if (formData.formDefinition) {
-              this.formDataService.setFormDataToLocalStorage({
+              this.formDataStorageService.setFormDataToLocalStorage({
                 id: dataId,
                 formDefinition: {
                   formId: formData.formDefinition.formId,

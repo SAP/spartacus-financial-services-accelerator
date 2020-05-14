@@ -21,8 +21,10 @@
                   ' is-disabled': i > activeStepIndex
                 }"
                 [routerLink]="
-                  { cxRoute: step.routeName, params: { code: activeCategory } }
-                    | cxUrl
+                  {
+                    cxRoute: step.routeName,
+                    params: { formCode: activeCategory }
+                  } | cxUrl
                 "
               >
                 <div

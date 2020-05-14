@@ -1,82 +1,61 @@
 .info-card {
-  border-radius: 15px 15px 0 0;
-  text-align: center;
-  margin: 20px auto 20px;
-  position: relative;
-  display: block;
-  .color-primary,
-  &.color-primary {
+  margin-bottom: 2rem;
+  border: 1px solid var(--cx-color-3);
+  flex: 0 1 100%;
+  .title,
+  .info-card-content,
+  .info-card-links,
+  .info-card-image {
+    display: flex;
+  }
+  .title {
+    align-items: center;
+    justify-content: space-between;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 0.5rem 1rem;
+  }
+  .info-card-wrapper {
+    padding: 1.5rem 1rem;
+  }
+  .info-card-content,
+  .info-card-links {
+    padding: 0.5rem 0;
+  }
+  .info-card-details {
+    flex: 0 1 70%;
+    margin-right: 0.25rem;
+  }
+  .info-card-image {
+    flex: 0 1 30%;
+    justify-content: flex-end;
+    .image-wrapper {
+      border: 2px solid var(--cx-color-3);
+      border-radius: unset;
+      padding: 0.25rem;
+      width: 80px;
+      height: 60px;
+    }
+  }
+  .label {
+    text-transform: capitalize;
+    font-weight: var(--cx-font-weight-semi);
+  }
+  .value {
     color: var(--cx-color-primary);
   }
-  .color-secondary,
-  &.color-secondary {
-    color: var(--cx-color-secondary);
+  .info-card-links {
+    justify-content: flex-end;
   }
-}
-.info-card-title {
-  background-color: var(--cx-color-5);
-  border-radius: 15px 15px 0 0;
-  border-bottom: 4px solid;
-  padding: 20px 0;
-  & > * {
-    margin-top: 15px;
-  }
-  .gradient-background {
-    @include linear-gradient-background(
-      var(--cx-color-primary),
-      var(--cx-color-9),
-      50%,
-      100%
-    );
-  }
-  .image-wrapper {
-    background-color: transparent;
-    width: 70px;
-    height: auto;
-    padding: 0;
-  }
-}
-.info-card-caption {
-  font-weight: bold;
-}
-.info-card-details-wrapper {
-  .info-card-data {
-    padding: 20px 0;
-    &:nth-of-type(even) {
-      background-color: var(--cx-color-5);
-    }
-    .title {
-      display: block;
-      font-weight: var(--cx-font-weight-semi);
+  .fs-icon {
+    cursor: pointer;
+    &:hover {
+      color: var(--cx-color-primary);
     }
   }
-  &--grey {
-    background-color: var(--cx-color-4);
-    .info-card-data {
-      &:nth-of-type(even) {
-        background-color: var(--cx-color-4);
-      }
-    }
-  }
-}
-.info-card-button-wrapper {
-  border-top: 1px solid;
-}
-.info-card-button {
-  margin: 0 auto;
-  padding: 40px;
-  max-width: 260px;
-  [disabled] {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
-}
-.account-cards-actions {
-  position: absolute;
-  cursor: pointer;
-  top: 14px;
-  right: 14px;
-  .action-links {
+  .link:not([href]) {
     color: var(--cx-color-primary);
+    text-decoration: underline;
+    padding-left: 3rem;
   }
 }

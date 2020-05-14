@@ -82,3 +82,48 @@ export function selectAutoBronze() {
       cy.get('.primary-button').click();
     });
 }
+
+export function selectAutoSilver() {
+  cy.get('cx-fs-comparison-table-panel-item')
+    .eq(1)
+    .within(() => {
+      cy.get('.table-header-title').should('have.text', 'Auto Silver');
+      cy.get('.table-header-value').should('have.text', '€10.95');
+      cy.get('.primary-button').click();
+    });
+}
+
+export function checkAutoSilverMiniCart() {
+  const miniCartContent: addOptionsPage.MiniCart = {
+    price: ' €10.95 ',
+    products: [
+      {
+        title: ' Third Party Liability: ',
+        value: ' €9.95 ',
+      },
+      {
+        title: ' Collision Coverage: ',
+        value: ' €1.00 ',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
+}
+
+export function populateAdditionalDriverInfo() {
+  cy.get('[name=dateOfBirth]')
+    .eq('1')
+    .type('1982-08-24');
+  cy.get('[name="driverGender"]')
+    .eq('1')
+    .select('Male');
+  cy.get('[name="driverMaritalStatus"]')
+    .eq('1')
+    .select('Widowed');
+  cy.get('[name="driverCategory"]')
+    .eq('1')
+    .select('Occasional');
+  cy.get('[name="driverLicenceDate"]')
+    .eq('1')
+    .type('2015-01-01');
+}
