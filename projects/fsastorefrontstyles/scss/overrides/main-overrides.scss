@@ -44,8 +44,9 @@ cx-fs-cms-custom-container {
     padding: 2rem;
   }
 }
-// temporary solution, untill forms are wrapped in different container component
-.CheckoutPageTemplate .BottomContent cx-fs-cms-custom-container {
+// Temporary solution, untill forms are wrapped in different container component
+.CheckoutPageTemplate .BottomContent cx-fs-cms-custom-container,
+.MultiStepCheckoutSummaryPageTemplate .BodyContent cx-fs-cms-custom-container {
   padding: 0;
   box-shadow: none;
 }

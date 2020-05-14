@@ -49,7 +49,9 @@ export class FormComponent implements OnDestroy {
         },
         content: formData.content,
         refId: formData.refId,
-        id: formData.id,
+        id: this.formDataStorageService.getFormDataIdByDefinitionCode(
+          this.formId
+        ),
       });
 
       this.subscription.add(

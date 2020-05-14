@@ -28,7 +28,7 @@ class MockLanguageService {
 class MockOccFormService {}
 
 const mockField: FieldConfig = {
-  type: 'radio',
+  fieldType: 'radio',
   name: 'testRadio',
   options: [
     {
@@ -85,7 +85,7 @@ describe('RadioComponent', () => {
   });
   it('should check components type', () => {
     expect(component.config).toBe(mockField);
-    expect(component.config.type).toEqual('radio');
+    expect(component.config.fieldType).toEqual('radio');
   });
 
   it('should render radio component', () => {

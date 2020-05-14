@@ -15,7 +15,7 @@ import { FieldConfig } from './../core/models/form-config.interface';
 class TestDynamicFormComponent {
   field: FieldConfig = {
     name: 'test',
-    type: 'button',
+    fieldType: 'button',
   };
   component: any;
 }
@@ -66,7 +66,7 @@ describe('FormCmponentDirective', () => {
   it('should not render component', () => {
     testDynamicFormComponent.field = {
       name: 'test',
-      type: 'unknown',
+      fieldType: 'unknown',
     };
     expect(() => fixture.detectChanges()).toThrowError();
   });
