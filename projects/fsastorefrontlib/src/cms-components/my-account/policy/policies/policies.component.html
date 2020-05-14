@@ -86,9 +86,10 @@
               <div class="info-card-image">
                 <span class="image-wrapper">
                   <img
-                    class="image-item"
-                    [src]="getBaseUrl() + policy.categoryData?.image?.url"
-                    alt=""
+                    [src]="
+                      getBaseUrl() +
+                      (policy.mainProduct?.coverageProduct?.images)[0]?.url
+                    "
                   />
                 </span>
               </div>
