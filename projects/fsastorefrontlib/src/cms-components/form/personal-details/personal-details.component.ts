@@ -1,23 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActiveCartService } from '@spartacus/core';
 import { map } from 'rxjs/operators';
 import { FSProduct, FSCategory } from './../../../occ/occ-models/occ.models';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { FormDataService, FormDefinition } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'cx-fs-personal-details',
   templateUrl: './personal-details.component.html',
 })
-export class PersonalDetailsComponent implements OnInit {
+export class PersonalDetailsComponent implements OnInit, OnDestroy {
   constructor(
     protected cartService: ActiveCartService,
     protected formSevice: FormDataService
   ) {}
 
-  formDefinition$: Observable<any>;
+  formDefinition$: Observable<any> = null;
   formConfig;
   configuratorType = 'PERSONAL_DETAILS_FORM';
+
+  subscription = new Subscription();
 
   ngOnInit() {
     this.formDefinition$ = this.formSevice.getFormDefinition().pipe(
@@ -29,7 +31,8 @@ export class PersonalDetailsComponent implements OnInit {
       })
     );
 
-    this.cartService
+    this.subscription.add(
+      this.cartService
       .getActive()
       .pipe(
         map(cart => {
@@ -37,7 +40,6 @@ export class PersonalDetailsComponent implements OnInit {
             const mainProduct = <FSProduct>(
               cart.deliveryOrderGroups[0].entries[0].product
             );
-
             mainProduct.categories.forEach(category => {
               const productCategory = <FSCategory>category;
               if (
@@ -55,6 +57,14 @@ export class PersonalDetailsComponent implements OnInit {
           }
         })
       )
-      .subscribe();
+      .subscribe()
+    );
+  }
+
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
