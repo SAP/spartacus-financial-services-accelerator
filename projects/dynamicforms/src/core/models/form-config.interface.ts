@@ -18,7 +18,7 @@ export interface FieldConfig {
   options?: FieldOption[];
   cssClass?: string;
   gridClass?: string;
-  depends?: string[];
+  apiParam?: string;
   apiUrl?: string;
   placeholder?: string;
   fieldType: string;

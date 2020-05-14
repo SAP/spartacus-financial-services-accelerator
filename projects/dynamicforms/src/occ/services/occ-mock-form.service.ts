@@ -30,6 +30,24 @@ export class OccMockFormService {
     );
   }
 
+  public getValuesFromAPIForValue(
+    fieldUrl: string,
+    value: string
+  ): Observable<any> {
+    const url = this.getFullAPIUrl(fieldUrl) + '?parentListItemCode=' + value;
+
+    const cacheValues = this.valueListsCache.get(url);
+    if (cacheValues) {
+      return of(cacheValues);
+    }
+    return this.httpClient.get<any>(url).pipe(
+      map(values => {
+        this.valueListsCache.set(url, values);
+        return values;
+      })
+    );
+  }
+
   getFullAPIUrl(fieldUrl) {
     if (fieldUrl.match(this.httpRegex)) {
       return fieldUrl;
