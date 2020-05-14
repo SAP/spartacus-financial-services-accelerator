@@ -12,15 +12,15 @@ context('Homepage', () => {
   });
 
   it('should have enriched banner', () => {
-    cy.get('cx-fs-enriched-responsive-banner');
+    cy.get('cx-fs-enriched-responsive-banner').should('be.visible');
   });
 
   it('should contain category carousel component', () => {
-    cy.get('cx-fs-category-carousel');
+    cy.get('cx-fs-category-carousel').should('be.visible');
   });
 
   it('should contain our services banner', () => {
-    cy.get('.Section3 cx-banner');
+    cy.get('.Section3 cx-banner').should('be.visible');
   });
 
   it('should have assistance and support paragraph', () => {
