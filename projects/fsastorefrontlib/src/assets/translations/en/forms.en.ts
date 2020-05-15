@@ -34,6 +34,7 @@ export const forms = {
     send: 'Send',
     titles: {
       homeowners_details_form: 'Homeowners Information',
+      renters_details_form: 'Renters Information',
       trip_details_form: 'Trip Information',
       auto_details_form: 'Auto Information',
       life_details_form: 'Coverage Information',
