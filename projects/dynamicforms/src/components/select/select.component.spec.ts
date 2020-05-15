@@ -31,7 +31,7 @@ const mockField: FieldConfig = {
     en: 'TestLabel',
   },
   options: [],
-  depends: ['dependentTestField'],
+  apiParam: 'dependentTestField',
   apiUrl: 'testUrl',
 };
 
