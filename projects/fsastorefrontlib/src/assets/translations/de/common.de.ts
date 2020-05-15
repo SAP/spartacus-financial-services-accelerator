@@ -113,6 +113,8 @@ export const fscommon = {
       insurances_savings: 'Spar',
       banking_credit_card: 'Kreditkarte',
       banking_current_account: 'Girokonto',
+      banking_loans: 'Kredit',
+      banking_fixed_term_deposit: 'Festgeld',
     },
     pleaseSelect: 'Wählen Sie:',
     userIdentification: {
