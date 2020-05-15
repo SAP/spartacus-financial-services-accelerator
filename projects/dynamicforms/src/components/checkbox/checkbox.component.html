@@ -11,6 +11,7 @@
       </ng-container>
     </label>
     <div class="form-check">
+      {{ config.name }}
       <div *ngFor="let option of config.options">
         <input
           class="form-check-input"
@@ -19,6 +20,7 @@
           [attr.id]="config.name + option.name"
           value="{{ option.name }}"
           [formControlName]="config.name"
+          (change)="checkCheckbox(group.controls[config.name], option.name)"
         />
         <label class="pl-3 pt-1" [attr.for]="config.name + option.name"
           ><ng-container *ngIf="activeLang$ | async as activeLang">
