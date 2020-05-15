@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AbstractOptionsComponent } from './abstract-options.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
+import { OccFormService } from '../../occ/services/occ-form.service';
 import { LanguageService } from '@spartacus/core';
 import { DynamicFormsConfig } from '../../core';
 import { of } from 'rxjs';
@@ -32,7 +32,7 @@ describe('AbstractOptionsComponent', () => {
       declarations: [AbstractOptionsComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide: OccMockFormService, useClass: MockOccFormService },
+        { provide: OccFormService, useClass: MockOccFormService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,

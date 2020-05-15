@@ -2,7 +2,7 @@ import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
+import { OccFormService } from '../../occ/services/occ-form.service';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { TitleComponent } from './title.component';
@@ -43,7 +43,7 @@ describe('TitleComponent', () => {
       declarations: [TitleComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide: OccMockFormService, useClass: MockOccFormService },
+        { provide: OccFormService, useClass: MockOccFormService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,

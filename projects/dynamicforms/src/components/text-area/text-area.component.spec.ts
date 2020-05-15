@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
+import { OccFormService } from '../../occ/services/occ-form.service';
 import { TextAreaComponent } from './text-area.component';
 import { of } from 'rxjs';
 
@@ -53,7 +53,7 @@ describe('TextAreaComponent', () => {
       declarations: [TextAreaComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
-        { provide: OccMockFormService, useClass: MockOccFormService },
+        { provide: OccFormService, useClass: MockOccFormService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,

@@ -3,7 +3,7 @@ import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { LanguageService } from '@spartacus/core';
 import { of } from 'rxjs';
 import { Type } from '@angular/core';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
+import { OccFormService } from '../../occ/services/occ-form.service';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { AbstractFormComponent } from './abstract-form.component';
 import { FieldConfig } from '../../core/models/form-config.interface';
@@ -43,7 +43,7 @@ describe('AbstractFormComponent', () => {
       declarations: [AbstractFormComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide: OccMockFormService, useClass: MockOccFormService },
+        { provide: OccFormService, useClass: MockOccFormService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,

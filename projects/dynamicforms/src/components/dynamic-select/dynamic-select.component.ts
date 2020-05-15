@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { LanguageService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../core/config/form-config';
+import { OccFormService } from '../../occ/services/occ-form.service';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 import { FormService } from './../../core/services/form/form.service';
-import { OccMockFormService } from './../../occ/services/occ-mock-form.service';
 
 @Component({
   selector: 'cx-dynamic-select',
@@ -15,7 +15,7 @@ export class DynamicSelectComponent extends AbstractFormComponent {
   options$: Observable<any>;
 
   constructor(
-    protected occFormService: OccMockFormService,
+    protected occFormService: OccFormService,
     protected formConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
     protected changeDetectorRef: ChangeDetectorRef,
@@ -26,36 +26,40 @@ export class DynamicSelectComponent extends AbstractFormComponent {
 
   ngOnInit() {
     super.ngOnInit();
-    if (this.config.apiUrl) {
+    if (this.config.apiValue) {
       this.setFormControlValuesFromAPI();
     }
   }
 
   setFormControlValuesFromAPI() {
-    if (!this.config.apiParam) {
+    if (!this.config.apiValue.param) {
       this.subscription.add(
         this.occFormService
-          .getValuesFromAPI(this.config.apiUrl)
+          .getValuesFromAPI(this.config.apiValue.url)
           .pipe(map(result => this.assignResultToOptions(result)))
           .subscribe()
       );
     } else {
       const masterFormControl = this.formService.getFormControlForCode(
-        this.config.apiParam,
+        this.config.apiValue.param,
         this.group
       );
-      masterFormControl.valueChanges.subscribe(value => {
-        if (value) {
-          this.subscription.add(
-            this.occFormService
-              .getValuesFromAPIForValue(this.config.apiUrl, value)
-              .pipe(map(result => this.assignResultToOptions(result)))
-              .subscribe()
-          );
-        } else {
-          this.assignOptions([]);
-        }
-      });
+      this.subscription.add(
+        masterFormControl.valueChanges
+          .pipe(
+            switchMap(value => {
+              if (value) {
+                return this.occFormService
+                  .getValuesFromAPI(this.config.apiValue.url, value)
+                  .pipe(map(result => this.assignResultToOptions(result)));
+              } else {
+                this.assignOptions([]);
+                return of(null);
+              }
+            })
+          )
+          .subscribe()
+      );
     }
   }
 
