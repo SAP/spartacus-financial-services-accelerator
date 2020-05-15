@@ -15,7 +15,7 @@ context('Find An Agent', () => {
     findAnAgent.searchSavingAgents();
   });
 
-  it('Should contact Burton Franco', () => {
+  it('Should contact Aladdin Gentry', () => {
     findAnAgent.contactAgentByName('Aladdin Gentry');
     findAnAgent.checkContactAgentPage();
     findAnAgent.populateContactAgentForm();
