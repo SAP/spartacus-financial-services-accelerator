@@ -16,17 +16,13 @@ export class OccBillingTimeAdapter implements BillingTimeAdapter {
   ) {}
 
   getBillingTimes(productCodes: string[]): Observable<any> {
-    const url = this.getBillingTimesEndPoint();
-    const params = new HttpParams({
-      fromString: 'productCodes=' + productCodes + FULL_PARAMS,
-    });
+    const url = this.occEndpointService.getUrl('billingTime');
+    const params: HttpParams = new HttpParams()
+      .set('productCodes', productCodes + '')
+      .set('fields', 'FULL');
+
     return this.http
       .get(url, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
-  }
-
-  protected getBillingTimesEndPoint() {
-    const billingTimeEndpoint = '/billing-times';
-    return this.occEndpointService.getBaseEndpoint() + billingTimeEndpoint;
   }
 }

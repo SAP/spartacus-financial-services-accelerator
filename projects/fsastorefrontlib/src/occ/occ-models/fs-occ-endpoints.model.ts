@@ -2,6 +2,21 @@ import { OccEndpoints } from '@spartacus/core';
 
 export interface FSOccEndpoints extends OccEndpoints {
   /**
+   * Get agents
+   *
+   */
+  agents?: string;
+  /**
+   * Get agent by agentID
+   *
+   */
+  agent?: string;
+  /**
+   * Get list of billing times for product
+   *
+   */
+  billingTime?: string;
+  /**
    * Get a change request with a given identifier
    *
    */

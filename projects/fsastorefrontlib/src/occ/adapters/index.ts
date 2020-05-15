@@ -1,4 +1,5 @@
-export * from './agent/occ-agent.adapter';
+export * from './agent/index';
+export * from './billing-time/index';
 export * from './billing-time/occ-billing-time.adapter';
 export * from './cart/occ-cart.adapter';
 export * from './checkout/occ-checkout.adapter';

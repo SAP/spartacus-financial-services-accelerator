@@ -23,9 +23,13 @@ import { PolicyOccModule } from './adapters/policy/policy-occ.module';
 import { QuoteOccModule } from './adapters/quote/quote-occ.module';
 import { UserRequestOccModule } from './adapters/user-request/user-request-occ.module';
 import { Config, OccConfig } from '@spartacus/core';
+import { AgentOccModule } from './adapters/agent/agent-occ.module';
+import { BillingTimeOccModule } from './adapters/billing-time/billing-time-occ.module';
 
 @NgModule({
   imports: [
+    AgentOccModule,
+    BillingTimeOccModule,
     CommonModule,
     HttpClientModule,
     ChangeRequestOccModule,
