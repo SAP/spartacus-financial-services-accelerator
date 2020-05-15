@@ -16,7 +16,7 @@ import { map } from 'rxjs/operators';
 @Component({ template: '' })
 export class AbstractFormComponent implements OnInit, OnDestroy {
   constructor(
-    protected formService: OccMockFormService,
+    protected occFormService: OccMockFormService,
     protected formConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
     protected changeDetectorRef: ChangeDetectorRef

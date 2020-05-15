@@ -15,13 +15,13 @@ export class DynamicSelectComponent extends AbstractFormComponent {
   options$: Observable<any>;
 
   constructor(
-    protected formService: OccMockFormService,
+    protected occFormService: OccMockFormService,
     protected formConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
     protected changeDetectorRef: ChangeDetectorRef,
-    protected formsService: FormService
+    protected formService: FormService
   ) {
-    super(formService, formConfig, languageService, changeDetectorRef);
+    super(occFormService, formConfig, languageService, changeDetectorRef);
   }
 
   ngOnInit() {
@@ -34,20 +34,20 @@ export class DynamicSelectComponent extends AbstractFormComponent {
   setFormControlValuesFromAPI() {
     if (!this.config.apiParam) {
       this.subscription.add(
-        this.formService
+        this.occFormService
           .getValuesFromAPI(this.config.apiUrl)
           .pipe(map(result => this.assignResultToOptions(result)))
           .subscribe()
       );
     } else {
-      const masterFormControl = this.formsService.getFormControlForCode(
+      const masterFormControl = this.formService.getFormControlForCode(
         this.config.apiParam,
         this.group
       );
       masterFormControl.valueChanges.subscribe(value => {
         if (value) {
           this.subscription.add(
-            this.formService
+            this.occFormService
               .getValuesFromAPIForValue(this.config.apiUrl, value)
               .pipe(map(result => this.assignResultToOptions(result)))
               .subscribe()
