@@ -80,13 +80,13 @@ export const fscommon = {
     summary: 'Zusammenfassung',
     submit: '[DE] Submit',
     totalResults: '[DE] Total results',
-    vehicleMake: '[DE] Vehicle Make',
-    vehicleModel: '[DE] Vehicle Model',
-    propertyType: '[DE] Property type',
+    vehicleMake: 'Fahrzeugmarke',
+    vehicleModel: 'Fahrzeugmodell',
+    propertyType: 'Objekttyp',
     tripDestination: '[DE] Trip destination',
-    ['property-address-line-1']: '[DE] Property address',
+    ['property-address-line-1']: 'Objektadresse',
     lifeMainDob: '[DE] Date of Birth',
-    contribution: '[DE] Contribution',
+    contribution: 'Jährliche Beitragserhöhung',
     application: {
       application: '[DE] Application',
       applicationRequestSubmitted:
