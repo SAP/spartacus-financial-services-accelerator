@@ -27,7 +27,20 @@ export interface FSOccEndpoints extends OccEndpoints {
    */
   startBundle?: string;
   /**
-   * Start bundle
+   * Get all site messages by message group
+   *
+   */
+  SiteMessages?: string;
+  /**
+   * Get a site message by message code
+   */
+  SiteMessage?: string;
+  /**
+   * Updates the read date of provided site messages
+   */
+  UpdateMessages?: string;
+  /**
+   * Get a change request with a given identifier
    *
    */
   changeRequest?: string;

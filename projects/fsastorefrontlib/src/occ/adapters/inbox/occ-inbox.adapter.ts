@@ -16,51 +16,33 @@ export class OccInboxAdapter implements InboxAdapter {
     protected occEndpointService: OccEndpointsService
   ) {}
 
-  protected getSiteMessagesEndpoint(
-    userId: string,
-    messageGroup: string,
-    searchConfig?: FSSearchConfig
-  ) {
-    let siteMessagesEndpoint =
-      '/users/' + userId + '/notifications/fssitemessages?fields=FULL';
-    if (searchConfig.sortCode && searchConfig.sortOrder) {
-      siteMessagesEndpoint +=
-        '&page=0&sortCode=' +
-        searchConfig.sortCode +
-        '&sortOrder=' +
-        searchConfig.sortOrder;
-    }
-
-    if (searchConfig.currentPage) {
-      siteMessagesEndpoint += '&currentPage=' + searchConfig.currentPage;
-    }
-
-    if (messageGroup !== '') {
-      siteMessagesEndpoint += '&messagegroup=' + messageGroup;
-    }
-    return this.occEndpointService.getBaseEndpoint() + siteMessagesEndpoint;
-  }
-
-  protected getReadUnreadEndpoint(userId: string) {
-    const readUnreadEndpoint =
-      '/users/' + userId + '/notifications/fssitemessages/read-unread';
-    return this.occEndpointService.getBaseEndpoint() + readUnreadEndpoint;
-  }
-
   getSiteMessagesForUserAndGroup(
     userId: string,
     messageGroup: string,
     searchConfig: FSSearchConfig
   ): Observable<any> {
-    const url = this.getSiteMessagesEndpoint(
+    const url = this.occEndpointService.getUrl('SiteMessages', {
       userId,
-      messageGroup,
-      searchConfig
-    );
-    const params = new HttpParams();
+    });
+    console.log(url);
+    let params: HttpParams = new HttpParams();
+    if (searchConfig.sortCode && searchConfig.sortOrder) {
+      params = params
+        .set('page', '0')
+        .set('sortCode', searchConfig.sortCode)
+        .set('sortOrder', searchConfig.sortOrder);
+    }
+
+    if (searchConfig.currentPage) {
+      params = params.set('currentPage', 'searchConfig.currentPage');
+    }
+
+    if (messageGroup !== '') {
+      params = params.set('messagegroup', messageGroup);
+    }
     return this.http
       .get(url, { params: params })
-      .pipe(catchError((error: any) => throwError(error.json())));
+      .pipe(catchError((error: any) => throwError(error.json)));
   }
 
   setMessagesState(
@@ -68,11 +50,13 @@ export class OccInboxAdapter implements InboxAdapter {
     messagesUidList: Array<string>,
     read: boolean
   ): Observable<any> {
-    const url = this.getReadUnreadEndpoint(userId);
-    const params = new HttpParams({
-      fromString:
-        'messageCodes=' + messagesUidList + '&readStatus=' + read + FULL_PARAMS,
+    const url = this.occEndpointService.getUrl('UpdateMessages', {
+      userId,
     });
+    const params: HttpParams = new HttpParams()
+      .set('messageCodes', messagesUidList + '')
+      .set('readStatus', read + '')
+      .set('fields', 'FULL');
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });
