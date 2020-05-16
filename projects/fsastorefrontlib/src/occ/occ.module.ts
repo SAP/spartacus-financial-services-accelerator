@@ -22,14 +22,17 @@ import { ClaimOccModule } from './adapters/claim/claim-occ.module';
 import { PolicyOccModule } from './adapters/policy/policy-occ.module';
 import { QuoteOccModule } from './adapters/quote/quote-occ.module';
 import { UserRequestOccModule } from './adapters/user-request/user-request-occ.module';
-import { Config, OccConfig } from '@spartacus/core';
+import { Config, OccConfig, CartOccModule } from '@spartacus/core';
 import { AgentOccModule } from './adapters/agent/agent-occ.module';
 import { BillingTimeOccModule } from './adapters/billing-time/billing-time-occ.module';
+import { FsCartOccModule } from './adapters/cart/cart-occ.module';
 
 @NgModule({
   imports: [
     AgentOccModule,
     BillingTimeOccModule,
+    CartOccModule,
+    FsCartOccModule,
     CommonModule,
     HttpClientModule,
     ChangeRequestOccModule,

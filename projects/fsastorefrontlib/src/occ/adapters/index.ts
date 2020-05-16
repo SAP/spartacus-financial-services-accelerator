@@ -1,5 +1,6 @@
 export * from './agent/index';
 export * from './billing-time/index';
+export * from './cart/index';
 export * from './billing-time/occ-billing-time.adapter';
 export * from './cart/occ-cart.adapter';
 export * from './checkout/occ-checkout.adapter';

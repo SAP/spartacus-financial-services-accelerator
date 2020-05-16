@@ -17,7 +17,17 @@ export interface FSOccEndpoints extends OccEndpoints {
    */
   billingTime?: string;
   /**
-   * Get a change request with a given identifier
+   * Add to Cart
+   *
+   */
+  addToCart?: string;
+  /**
+   * Start bundle
+   *
+   */
+  startBundle?: string;
+  /**
+   * Start bundle
    *
    */
   changeRequest?: string;
