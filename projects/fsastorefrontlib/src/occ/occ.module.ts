@@ -26,14 +26,16 @@ import { Config, OccConfig, CartOccModule } from '@spartacus/core';
 import { AgentOccModule } from './adapters/agent/agent-occ.module';
 import { BillingTimeOccModule } from './adapters/billing-time/billing-time-occ.module';
 import { FsCartOccModule } from './adapters/cart/cart-occ.module';
-import { inboxOccModule } from './adapters/inbox/inbox-occ.module';
+import { InboxOccModule } from './adapters/inbox/inbox-occ.module';
+import { CheckoutOccModule } from './adapters/checkout';
 
 @NgModule({
   imports: [
     AgentOccModule,
     BillingTimeOccModule,
     CartOccModule,
-    inboxOccModule,
+    CheckoutOccModule,
+    InboxOccModule,
     FsCartOccModule,
     CommonModule,
     HttpClientModule,

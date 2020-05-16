@@ -40,6 +40,10 @@ export interface FSOccEndpoints extends OccEndpoints {
    */
   UpdateMessages?: string;
   /**
+   * Set user identification type
+   */
+  UserIdentification?: string;
+  /**
    * Get a change request with a given identifier
    *
    */

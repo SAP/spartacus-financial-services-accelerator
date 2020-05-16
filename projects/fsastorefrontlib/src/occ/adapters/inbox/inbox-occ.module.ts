@@ -16,4 +16,4 @@ import { OccInboxAdapter } from '../inbox/occ-inbox.adapter';
     provideConfig(defaultOccInboxConfig),
   ],
 })
-export class inboxOccModule {}
+export class InboxOccModule {}
