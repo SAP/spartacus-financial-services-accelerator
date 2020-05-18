@@ -108,6 +108,8 @@ export const fscommon = {
       insurances_savings: 'Savings',
       banking_credit_card: 'Credit Card',
       banking_current_account: 'Current Account',
+      banking_loans: 'Loan',
+      banking_fixed_term_deposit: 'Fixed Term Deposit',
     },
     pleaseSelect: 'Please select:',
     userIdentification: {

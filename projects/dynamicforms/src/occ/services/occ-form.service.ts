@@ -15,9 +15,12 @@ export class OccFormService {
 
   httpRegex = /(http(s?)):\/\//;
 
-  public getValuesFromAPI(fieldUrl: string, value?: string): Observable<any> {
-    const url = value
-      ? this.getFullAPIUrl(fieldUrl) + '?parentListItemCode=' + value
+  public getValuesFromAPI(
+    fieldUrl: string,
+    parentItemCode?: string
+  ): Observable<any> {
+    const url = parentItemCode
+      ? this.getFullAPIUrl(fieldUrl) + '?parentListItemCode=' + parentItemCode
       : this.getFullAPIUrl(fieldUrl);
 
     const cacheValues = this.valueListsCache.get(url);
