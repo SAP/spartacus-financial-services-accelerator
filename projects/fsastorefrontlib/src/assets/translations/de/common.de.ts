@@ -84,7 +84,7 @@ export const fscommon = {
     vehicleModel: 'Fahrzeugmodell',
     propertyType: 'Objekttyp',
     tripDestination: '[DE] Trip destination',
-    ['property-address-line-1']: 'Objektadresse',
+    'property-address-line-1': 'Objektadresse',
     lifeMainDob: '[DE] Date of Birth',
     contribution: 'Jährliche Beitragserhöhung',
     application: {
