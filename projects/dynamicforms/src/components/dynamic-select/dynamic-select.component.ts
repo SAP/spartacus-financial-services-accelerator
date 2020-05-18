@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
+import { FormDataService } from '../../core/services/data/form-data.service';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 import { FormService } from './../../core/services/form/form.service';
 
@@ -15,13 +16,20 @@ export class DynamicSelectComponent extends AbstractFormComponent {
   options$: Observable<any>;
 
   constructor(
+    protected formDataService: FormDataService,
     protected occValueListService: OccValueListService,
     protected formConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
     protected changeDetectorRef: ChangeDetectorRef,
     protected formService: FormService
   ) {
-    super(occValueListService, formConfig, languageService, changeDetectorRef);
+    super(
+      formDataService,
+      occValueListService,
+      formConfig,
+      languageService,
+      changeDetectorRef
+    );
   }
 
   ngOnInit() {
