@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
+import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { InputComponent } from './input.component';
 import { of } from 'rxjs';
 
@@ -19,7 +19,7 @@ class MockErrorNoticeComponent {
   @Input() parentConfig;
 }
 
-class MockOccFormService {}
+class MockOccValueListService {}
 class MockLanguageService {
   getActive() {
     return of('en');
@@ -51,7 +51,7 @@ describe('InputComponent', () => {
       declarations: [InputComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
-        { provide: OccMockFormService, useClass: MockOccFormService },
+        { provide: OccValueListService, useClass: MockOccValueListService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,

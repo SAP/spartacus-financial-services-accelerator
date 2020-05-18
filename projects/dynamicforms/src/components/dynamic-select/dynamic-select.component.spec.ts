@@ -1,14 +1,19 @@
+import { Component, DebugElement, Input, Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
-import { Input, Component, DebugElement, Type } from '@angular/core';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { By } from '@angular/platform-browser';
-
-import { DynamicSelectComponent } from './dynamic-select.component';
-import { FieldConfig } from '../../core/models/form-config.interface';
-import { DynamicFormsConfig } from '../../core';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
+import { of } from 'rxjs';
+import { DynamicFormsConfig } from '../../core';
+import { FieldConfig } from '../../core/models/form-config.interface';
+import { OccValueListService } from '../../occ/services/occ-value-list.service';
+import { FormService } from './../../core/services/form/form.service';
+import { DynamicSelectComponent } from './dynamic-select.component';
 
 @Component({
   // tslint:disable
@@ -39,22 +44,23 @@ const apiValues = {
   ],
 };
 
-class MockOccFormService {
+class MockOccValueListService {
   getValuesFromAPI() {
     return of(apiValues);
   }
 }
 
-const mockField: FieldConfig = {
-  fieldType: 'select',
-  name: 'testSelect',
-  label: {
-    en: 'TestLabel',
-  },
-  options: [],
-  depends: ['dependentTestField'],
-  apiUrl: 'testUrl',
-};
+let formControl = new FormControl('formValue');
+
+class MockFormService {
+  getFormControlForCode(): AbstractControl {
+    return formControl;
+  }
+}
+
+const testUrl = 'testUrl';
+
+let mockField: FieldConfig;
 
 const mockFormGroup = new FormGroup({
   dependentTestField: new FormControl(),
@@ -65,10 +71,11 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {},
 };
 
-describe('SelectComponent', () => {
+describe('DynamicSelectComponent', () => {
   let component: DynamicSelectComponent;
   let fixture: ComponentFixture<DynamicSelectComponent>;
-  let mockOccFormService: OccMockFormService;
+  let occValueListService: OccValueListService;
+  let formService: FormService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -76,26 +83,41 @@ describe('SelectComponent', () => {
       declarations: [DynamicSelectComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
-        { provide: OccMockFormService, useClass: MockOccFormService },
+        { provide: OccValueListService, useClass: MockOccValueListService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
         },
+        { provide: FormService, useClass: MockFormService },
       ],
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DynamicSelectComponent);
-    mockOccFormService = TestBed.get(OccMockFormService as Type<
-      OccMockFormService
+    occValueListService = TestBed.get(OccValueListService as Type<
+      OccValueListService
     >);
+    formService = TestBed.get(FormService as Type<FormService>);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
+    mockField = {
+      fieldType: 'select',
+      name: 'testSelect',
+      label: {
+        en: 'TestLabel',
+      },
+      options: [],
+      apiValue: {
+        url: testUrl,
+        param: 'dependentTestField',
+      },
+    };
     component.config = mockField;
     el = fixture.debugElement;
     fixture.detectChanges();
+    spyOn(occValueListService, 'getValuesFromAPI').and.callThrough();
   });
 
   it('should create', () => {
@@ -103,10 +125,25 @@ describe('SelectComponent', () => {
   });
 
   it('should not call external API', () => {
-    spyOn(mockOccFormService, 'getValuesFromAPI').and.stub();
-    mockField.apiUrl = undefined;
+    mockField.apiValue = undefined;
+    component.ngOnInit();
     fixture.detectChanges();
-    expect(mockOccFormService.getValuesFromAPI).not.toHaveBeenCalled();
+    expect(occValueListService.getValuesFromAPI).not.toHaveBeenCalled();
+  });
+
+  it('should call external API with parameter when value changes', () => {
+    spyOn(component, 'assignResultToOptions').and.callThrough();
+    formControl.setValue('testValue2');
+    fixture.detectChanges();
+    expect(component.assignResultToOptions).toHaveBeenCalled();
+  });
+
+  it('should call external API without parameter', () => {
+    spyOn(component, 'assignResultToOptions').and.callThrough();
+    mockField.apiValue.param = undefined;
+    component.ngOnInit();
+    fixture.detectChanges();
+    expect(component.assignResultToOptions).toHaveBeenCalled();
   });
 
   it('should render select component', () => {

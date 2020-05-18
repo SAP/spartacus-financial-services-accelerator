@@ -2,8 +2,9 @@ export const claim = {
   claim: {
     claim: 'Claim',
     claims: 'Claims',
-    claimId: 'Claim ID',
+    claimNo: 'Claim No',
     makeClaim: 'Make a Claim',
+    incidentType: 'Incident Type',
     truthConfirmation: 'I confirm that I will provide all data truthfully',
     dateOfLoss: 'Date of Loss',
     claimHandler: 'Claim Handler',
@@ -11,8 +12,6 @@ export const claim = {
     deleteStartedClaimProcess: 'Delete started claim process',
     followingClaimProcessWillBeDeleted:
       'The following claim process will be deleted',
-    vehicleMake: 'Vehicle Make',
-    vehicleModel: 'Vehicle Model',
     confirmation: {
       processingNumber: 'Your processing number is',
       submissionNotice:

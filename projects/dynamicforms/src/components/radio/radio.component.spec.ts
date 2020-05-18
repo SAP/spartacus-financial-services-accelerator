@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
+import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { RadioComponent } from './radio.component';
 import { of } from 'rxjs';
 
@@ -25,7 +25,7 @@ class MockLanguageService {
   }
 }
 
-class MockOccFormService {}
+class MockOccValueListService {}
 
 const mockField: FieldConfig = {
   fieldType: 'radio',
@@ -61,7 +61,7 @@ describe('RadioComponent', () => {
       declarations: [RadioComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
-        { provide: OccMockFormService, useClass: MockOccFormService },
+        { provide: OccValueListService, useClass: MockOccValueListService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,
