@@ -18,11 +18,12 @@ export class OccCsTicketAdapter implements CsTicketAdapter {
     userId: string,
     ticketData: ContactAgentData
   ) {
-    const url = this.getCreateCsTicketEndpoint(userId);
-
+    const url = this.occEndpointService.getUrl('createCsTicket', {
+      userId,
+    });
     let params = new HttpParams({});
     if (agentId) {
-      params = params.append('agentId', agentId);
+      params = params.set('agentId', agentId);
     }
     const ticketBody =
       ticketData !== undefined ? this.createCsTicketBody(ticketData, {}) : {};
@@ -40,10 +41,5 @@ export class OccCsTicketAdapter implements CsTicketAdapter {
       supportedResponseType: ticketData.contactType,
     };
     return ticketBody;
-  }
-
-  protected getCreateCsTicketEndpoint(userId: string) {
-    const createTicketEndpoint = '/users/' + userId + '/csTickets';
-    return this.occEndpointService.getBaseEndpoint() + createTicketEndpoint;
   }
 }

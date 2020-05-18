@@ -30,6 +30,7 @@ import { InboxOccModule } from './adapters/inbox/inbox-occ.module';
 import { CheckoutOccModule } from './adapters/checkout/checkout-occ.module';
 import { ProductPricingOccModule } from './adapters/pricing/occ-product-pricing.module';
 import { ProductAssignmentOccModule } from './adapters/product-assignment/product-assignment.module';
+import { CsTicketOccModule } from './adapters/cs-ticket/cs-ticket-occ.module';
 
 @NgModule({
   imports: [
@@ -48,12 +49,9 @@ import { ProductAssignmentOccModule } from './adapters/product-assignment/produc
     PolicyOccModule,
     QuoteOccModule,
     UserRequestOccModule,
+    CsTicketOccModule
   ],
   providers: [
-    {
-      provide: CsTicketAdapter,
-      useClass: OccCsTicketAdapter,
-    },
     { provide: OccConfig, useExisting: Config },
   ],
 })

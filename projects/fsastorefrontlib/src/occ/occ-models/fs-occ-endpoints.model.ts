@@ -87,6 +87,12 @@ export interface FSOccEndpoints extends OccEndpoints {
    *
    */
   cancelChangeRequest?: string;
+   /**
+   * 
+  Create a customer support ticket
+   *
+   */
+  createCsTicket?: string;
   /**
    * Get policies
    *
