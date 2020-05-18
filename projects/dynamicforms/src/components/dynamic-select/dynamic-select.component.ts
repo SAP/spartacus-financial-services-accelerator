@@ -3,7 +3,7 @@ import { LanguageService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../core/config/form-config';
-import { OccFormService } from '../../occ/services/occ-form.service';
+import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 import { FormService } from './../../core/services/form/form.service';
 
@@ -15,13 +15,13 @@ export class DynamicSelectComponent extends AbstractFormComponent {
   options$: Observable<any>;
 
   constructor(
-    protected occFormService: OccFormService,
+    protected occValueListService: OccValueListService,
     protected formConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
     protected changeDetectorRef: ChangeDetectorRef,
     protected formService: FormService
   ) {
-    super(occFormService, formConfig, languageService, changeDetectorRef);
+    super(occValueListService, formConfig, languageService, changeDetectorRef);
   }
 
   ngOnInit() {
@@ -34,7 +34,7 @@ export class DynamicSelectComponent extends AbstractFormComponent {
   setFormControlValuesFromAPI() {
     if (!this.config.apiValue.param) {
       this.subscription.add(
-        this.occFormService
+        this.occValueListService
           .getValuesFromAPI(this.config.apiValue.url)
           .pipe(map(result => this.assignResultToOptions(result)))
           .subscribe()
@@ -49,7 +49,7 @@ export class DynamicSelectComponent extends AbstractFormComponent {
           .pipe(
             switchMap(value => {
               if (value) {
-                return this.occFormService
+                return this.occValueListService
                   .getValuesFromAPI(this.config.apiValue.url, value)
                   .pipe(map(result => this.assignResultToOptions(result)));
               } else {

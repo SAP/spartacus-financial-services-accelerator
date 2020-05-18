@@ -2,13 +2,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FormControl, FormGroup } from '@angular/forms';
 import { SeparatorComponent } from './separator.component';
-import { OccFormService } from '../../occ/services/occ-form.service';
+import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { of } from 'rxjs';
 import { LanguageService } from '@spartacus/core';
 
-class MockOccFormService {}
+class MockOccValueListService {}
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {},
@@ -45,7 +45,7 @@ describe('SeparatorComponent', () => {
     TestBed.configureTestingModule({
       declarations: [SeparatorComponent],
       providers: [
-        { provide: OccFormService, useClass: MockOccFormService },
+        { provide: OccValueListService, useClass: MockOccValueListService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,

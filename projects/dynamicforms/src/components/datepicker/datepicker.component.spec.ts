@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
-import { OccFormService } from '../../occ/services/occ-form.service';
+import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { DatePickerComponent } from './datepicker.component';
 import { of } from 'rxjs';
 
@@ -24,7 +24,7 @@ class MockLanguageService {
     return of('en');
   }
 }
-class MockOccFormService {}
+class MockOccValueListService {}
 
 const mockField: FieldConfig = {
   fieldType: 'datepicker',
@@ -52,7 +52,7 @@ describe('DatePickerComponent', () => {
       declarations: [DatePickerComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
-        { provide: OccFormService, useClass: MockOccFormService },
+        { provide: OccValueListService, useClass: MockOccValueListService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,

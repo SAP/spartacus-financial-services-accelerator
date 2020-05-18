@@ -2,14 +2,14 @@ import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { OccFormService } from '../../occ/services/occ-form.service';
+import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { ButtonComponent } from './button.component';
 import { LanguageService } from '@spartacus/core';
 import { of } from 'rxjs';
 
-class MockOccFormService {}
+class MockOccValueListService {}
 
 class MockLanguageService {
   getActive() {
@@ -43,7 +43,7 @@ describe('ButtonComponent', () => {
       declarations: [ButtonComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide: OccFormService, useClass: MockOccFormService },
+        { provide: OccValueListService, useClass: MockOccValueListService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,
