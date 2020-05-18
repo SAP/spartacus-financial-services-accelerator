@@ -27,7 +27,8 @@ import { AgentOccModule } from './adapters/agent/agent-occ.module';
 import { BillingTimeOccModule } from './adapters/billing-time/billing-time-occ.module';
 import { FsCartOccModule } from './adapters/cart/cart-occ.module';
 import { InboxOccModule } from './adapters/inbox/inbox-occ.module';
-import { CheckoutOccModule } from './adapters/checkout';
+import { CheckoutOccModule } from './adapters/checkout/checkout-occ.module';
+import { ProductPricingOccModule } from './adapters/pricing/occ-product-pricing.module';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { CheckoutOccModule } from './adapters/checkout';
     BillingTimeOccModule,
     CartOccModule,
     CheckoutOccModule,
+    ProductPricingOccModule,
     InboxOccModule,
     FsCartOccModule,
     CommonModule,
@@ -46,34 +48,6 @@ import { CheckoutOccModule } from './adapters/checkout';
     UserRequestOccModule,
   ],
   providers: [
-    {
-      provide: AgentAdapter,
-      useClass: OccAgentAdapter,
-    },
-    {
-      provide: InboxAdapter,
-      useClass: OccInboxAdapter,
-    },
-    {
-      provide: CartAdapter,
-      useClass: OccCartAdapter,
-    },
-    {
-      provide: BillingTimeAdapter,
-      useClass: OccBillingTimeAdapter,
-    },
-    {
-      provide: CheckoutAdapter,
-      useClass: OccCheckoutAdapter,
-    },
-    {
-      provide: AgentAdapter,
-      useClass: OccAgentAdapter,
-    },
-    {
-      provide: ProductPricingAdapter,
-      useClass: OccProductPricingAdapter,
-    },
     {
       provide: CsTicketAdapter,
       useClass: OccCsTicketAdapter,

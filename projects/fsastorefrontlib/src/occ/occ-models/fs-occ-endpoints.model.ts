@@ -40,6 +40,10 @@ export interface FSOccEndpoints extends OccEndpoints {
    */
   UpdateMessages?: string;
   /**
+   * Calculates price for a single product according to product code and product price attributes.
+   */
+  CalculatePriceForProduct?: string;
+  /**
    * Set user identification type
    */
   UserIdentification?: string;
