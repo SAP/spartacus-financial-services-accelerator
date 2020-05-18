@@ -5,9 +5,11 @@
   }
   .card-header {
     color: var(--cx-color-1);
+    font-size: var(--cx-h6-font-size);
+    font-weight: var(--cx-font-weight-semi);
     background: var(--cx-color-primary);
-    font-size: var(--cx-text-font-size);
     text-transform: uppercase;
+    padding: 0.5rem 1rem;
   }
   .cx-card-title {
     color: var(--cx-color-primary);

@@ -39,6 +39,7 @@ export const fscommon = {
     orderConfirmation: 'Order confirmation',
     startDate: 'Start Date',
     phoneNumber: 'Phone Number',
+    address: 'Address',
     emailAddress: 'Email Address',
     adressLine: 'Address Line',
     notAvailableFull: 'Not available',
@@ -82,6 +83,13 @@ export const fscommon = {
     summary: 'Summary',
     submit: 'Submit',
     totalResults: 'Total results',
+    vehicleMake: 'Vehicle Make',
+    vehicleModel: 'Vehicle Model',
+    propertyType: 'Property type',
+    tripDestination: 'Trip destination',
+    'property-address-line-1': 'Property address',
+    lifeMainDob: 'Date of Birth',
+    contribution: 'Contribution',
     application: {
       application: 'Application',
       applicationRequestSubmitted:
@@ -108,6 +116,8 @@ export const fscommon = {
       insurances_savings: 'Savings',
       banking_credit_card: 'Credit Card',
       banking_current_account: 'Current Account',
+      banking_loans: 'Loan',
+      banking_fixed_term_deposit: 'Fixed Term Deposit',
     },
     pleaseSelect: 'Please select:',
     userIdentification: {

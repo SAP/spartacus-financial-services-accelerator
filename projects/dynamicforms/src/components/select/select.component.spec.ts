@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
+import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { SelectComponent } from './select.component';
 import { of } from 'rxjs';
 
@@ -31,11 +31,9 @@ const mockField: FieldConfig = {
     en: 'TestLabel',
   },
   options: [],
-  depends: ['dependentTestField'],
-  apiUrl: 'testUrl',
 };
 
-class MockOccFormService {}
+class MockOccValueListService {}
 
 const mockFormGroup = new FormGroup({
   dependentTestField: new FormControl(),
@@ -49,7 +47,7 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 describe('SelectComponent', () => {
   let component: SelectComponent;
   let fixture: ComponentFixture<SelectComponent>;
-  let mockOccFormService: OccMockFormService;
+  let occValueListService: OccValueListService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -57,7 +55,7 @@ describe('SelectComponent', () => {
       declarations: [SelectComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
-        { provide: OccMockFormService, useClass: MockOccFormService },
+        { provide: OccValueListService, useClass: MockOccValueListService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,
@@ -69,8 +67,8 @@ describe('SelectComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SelectComponent);
-    mockOccFormService = TestBed.get(OccMockFormService as Type<
-      OccMockFormService
+    occValueListService = TestBed.get(OccValueListService as Type<
+      OccValueListService
     >);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
