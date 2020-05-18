@@ -18,8 +18,7 @@ export interface FieldConfig {
   options?: FieldOption[];
   cssClass?: string;
   gridClass?: string;
-  depends?: string[];
-  apiUrl?: string;
+  apiValue?: ApiConfig;
   placeholder?: string;
   fieldType: string;
   value?: any;
@@ -27,6 +26,11 @@ export interface FieldConfig {
   error?: LocalizedString;
   validations?: ValidatorFunction[];
   dependsOn?: ControlDependency[];
+}
+
+export interface ApiConfig {
+  url: string;
+  param?: string;
 }
 
 export interface ControlDependency {
