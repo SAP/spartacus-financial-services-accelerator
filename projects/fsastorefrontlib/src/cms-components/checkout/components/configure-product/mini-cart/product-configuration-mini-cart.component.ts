@@ -1,70 +1,71 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormDataService } from '@fsa/dynamicforms';
 import { Product } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
-import { BehaviorSubject, of, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { PricingService } from './../../../../../core/product-pricing/facade/pricing.service';
 import { FSProductService } from './../../../../../core/product-pricing/facade/product.service';
+import { PricingData } from './../../../../../occ/occ-models/form-pricing.interface';
 import { FSProduct } from './../../../../../occ/occ-models/occ.models';
 
-
 @Component({
-    selector: 'cx-fs-product-configuration-mini-cart',
-    templateUrl: './product-configuration-mini-cart.component.html',
+  selector: 'cx-fs-product-configuration-mini-cart',
+  templateUrl: './product-configuration-mini-cart.component.html',
 })
-export class ProductConfigurationMiniCartComponent implements OnInit, OnDestroy {
-    constructor(
-        protected pricingService: PricingService,
-        protected productService: FSProductService,
-        protected currentProductService: CurrentProductService
-    ) { }
+export class ProductConfigurationMiniCartComponent
+  implements OnInit, OnDestroy {
+  constructor(
+    protected pricingService: PricingService,
+    protected productService: FSProductService,
+    protected currentProductService: CurrentProductService,
+    protected formDataService: FormDataService
+  ) {}
 
-    subscription = new Subscription();
+  subscription = new Subscription();
+  product$: Observable<Product> = this.currentProductService.getProduct();
+  productId: string;
+  categoryName: string;
+  pricingData: PricingData;
 
-    calculatedProductData = new BehaviorSubject<FSProduct>({});
-    calculatedProductData$ = this.calculatedProductData.asObservable();
-    pricingData = new BehaviorSubject<any>({});
-    pricingData$ = this.pricingData.asObservable();
-
-
-    product$: Observable<Product>;
-    productId: string;
-
-    ngOnInit() {
-        this.product$ = this.currentProductService.getProduct().pipe(
+  ngOnInit() {
+    this.subscription
+      .add(
+        this.product$
+          .pipe(
             map(product => {
-                if (product) {
-                    this.productId = product.code;
-                }
-                return product;
+              if (product) {
+                this.productId = product.code;
+                this.categoryName = (<FSProduct>product).defaultCategory.name;
+              }
             })
-        );
+          )
+          .subscribe()
+      )
+      .add(
+        this.formDataService
+          .getSubmittedForm()
+          .pipe(
+            map(yFormData => {
+              if (yFormData && yFormData.content) {
+                this.pricingData = this.pricingService.buildPricingData(
+                  JSON.parse(yFormData.content)
+                );
+                this.product$ = this.productService.getCalculatedProductData(
+                  this.productId,
+                  this.pricingData
+                );
+              }
+            })
+          )
+          .subscribe()
+      );
+  }
 
-        this.subscription.add(
-            this.pricingService
-                .getPricingData()
-                .pipe(
-                    switchMap(pricingData => {
-                        if (this.productId && pricingData) {
-                            return this.productService
-                                .getCalculatedProductData(this.productId, pricingData)
-                                .pipe(
-                                    map(calculatedData =>
-                                        this.calculatedProductData.next(calculatedData)
-                                    )
-                                );
-                        }
-                        return of(null);
-                    })
-                )
-                .subscribe()
-        );
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
     }
-
-    ngOnDestroy() {
-        if (this.subscription) {
-            this.subscription.unsubscribe();
-        }
-    }
+  }
 }

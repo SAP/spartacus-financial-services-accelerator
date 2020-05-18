@@ -6,27 +6,23 @@ import { ConfigModule, I18nModule } from '@spartacus/core';
 import { CalculationButtonComponent } from './calculation-button.component';
 
 @NgModule({
-    imports: [CommonModule, ReactiveFormsModule, I18nModule, DynamicFormModule,
-        ConfigModule.withConfig(<
-            DynamicFormsConfig
-            >{
-                dynamicForms: {
-                    components: {
-                        calculateButton: {
-                            component: CalculationButtonComponent,
-                        },
-                    },
-                }
-            })
-    ],
-    declarations: [
-        CalculationButtonComponent
-    ],
-    entryComponents: [
-        CalculationButtonComponent
-    ],
-    exports: [
-        CalculationButtonComponent
-    ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    I18nModule,
+    DynamicFormModule,
+    ConfigModule.withConfig(<DynamicFormsConfig>{
+      dynamicForms: {
+        components: {
+          calculateButton: {
+            component: CalculationButtonComponent,
+          },
+        },
+      },
+    }),
+  ],
+  declarations: [CalculationButtonComponent],
+  entryComponents: [CalculationButtonComponent],
+  exports: [CalculationButtonComponent],
 })
-export class FormComponentsModule { }
+export class FormComponentsModule {}

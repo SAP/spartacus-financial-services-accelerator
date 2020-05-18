@@ -1,9 +1,10 @@
 import { TranslationResources } from '@spartacus/core';
 import { b2b } from './en/b2b.en';
+import { changeRequest } from './en/changeRequest.en';
 import { claim } from './en/claim.en';
 import { fscommon } from './en/common.en';
+import { configureProduct } from './en/configureProduct.en';
 import { forms } from './en/forms.en';
-import { changeRequest } from './en/changeRequest.en';
 import { policy } from './en/policy.en';
 import { premiumCalendar } from './en/premiumCalendar.en';
 import { quote } from './en/quote.en';
@@ -20,6 +21,7 @@ export const fstranslations: TranslationResources = {
   premiumCalendar,
   userRequest,
   changeRequest,
+  configureProduct,
 };
 
 export const fsOverrides: TranslationResources = {

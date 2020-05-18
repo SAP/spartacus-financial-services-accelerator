@@ -1,11 +1,19 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormDataService, FormDefinition, YFormDefinition } from '@fsa/dynamicforms';
+import {
+  FormDataService,
+  FormDataStorageService,
+  FormDefinition,
+  YFormData,
+  YFormDefinition,
+} from '@fsa/dynamicforms';
 import { CurrentProductService } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
-import { YFormData } from './../../../../../../../dynamicforms/src/core/models/form-occ.models';
-import { FormDataStorageService } from './../../../../../../../dynamicforms/src/core/services/storage/form-data-storage.service';
-import { ConfiguratorType, FSCategory, FSProduct } from './../../../../../occ/occ-models/occ.models';
+import { filter, map, take } from 'rxjs/operators';
+import {
+  ConfiguratorType,
+  FSCategory,
+  FSProduct,
+} from './../../../../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-product-configuration-form',
@@ -16,10 +24,12 @@ export class ProductConfigurationFormComponent implements OnInit, OnDestroy {
     protected currentProductService: CurrentProductService,
     protected formDataService: FormDataService,
     protected formDataStorageService: FormDataStorageService
-  ) { }
+  ) {}
 
   subscription = new Subscription();
-  formDefinition$: Observable<YFormDefinition>;
+  formDefinition$: Observable<
+    YFormDefinition
+  > = this.formDataService.getFormDefinition();
   formData$: Observable<YFormData>;
   formConfig: YFormDefinition;
   applicationId: string;
@@ -41,6 +51,7 @@ export class ProductConfigurationFormComponent implements OnInit, OnDestroy {
         .getProduct()
         .pipe(
           filter(Boolean),
+          take(1),
           map(product => {
             const fsProduct = <FSProduct>product;
             if (fsProduct && fsProduct.categories) {
@@ -52,14 +63,13 @@ export class ProductConfigurationFormComponent implements OnInit, OnDestroy {
                       if (
                         configuratorSettings.configuratorType &&
                         configuratorSettings.configuratorType ===
-                        ConfiguratorType.PRODUCT_CONFIGURE_FORM
+                          ConfiguratorType.PRODUCT_CONFIGURE_FORM
                       ) {
                         this.formCategory = fsProduct.defaultCategory.code;
                         this.applicationId =
                           configuratorSettings.configurationApplicationId;
                         this.formDefintionId =
                           configuratorSettings.configurationFormId;
-
                         this.formDataService.loadFormDefinition(
                           this.applicationId,
                           this.formDefintionId

@@ -28,7 +28,7 @@ export interface YFormConfiguratorSettings {
   configurationFormId?: string;
   configuratorType?: string;
   configurationApplicationId?: string;
-  configurationCategory: Category;
+  configurationCategory?: Category;
 }
 
 export interface FSCategory extends Category {
