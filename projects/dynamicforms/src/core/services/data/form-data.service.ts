@@ -10,6 +10,11 @@ import { StateWithForm } from '../../store/state';
 @Injectable()
 export class FormDataService {
   submittedForm = new BehaviorSubject<YFormData>(null);
+  selectedCheckBoxesSource = new BehaviorSubject<any>(null);
+  selectedCheckBoxes = this.selectedCheckBoxesSource.asObservable();
+
+  selectedOptions: string[] = [];
+  // selectedCheckboxName: string[] = [];
 
   constructor(protected store: Store<StateWithForm>) {}
 

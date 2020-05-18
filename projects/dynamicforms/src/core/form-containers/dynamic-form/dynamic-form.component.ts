@@ -55,6 +55,9 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.config) {
       this.form = this.formService.createForm(this.config);
+      this.formDataService.selectedCheckBoxes.subscribe(data =>
+        console.log(data)
+      );
     }
     this.addSubmitEvent();
     if (this.formData) {
