@@ -1,16 +1,5 @@
 import * as shared from '../shared-checkout';
 
-export function openCategoryPage() {
-  cy.selectOptionFromDropdown({
-    menuOption: 'Banking',
-    dropdownItem: 'Current Account',
-  });
-  cy.get('cx-fs-enriched-responsive-banner')
-    .should('be.visible')
-    .findByText('Request a product')
-    .click({ force: true });
-}
-
 export function checkCurrentAccountComparisonTable() {
   const comparisonTableContent: addOptionsPage.ComparisonTable = {
     mainProducts: [
@@ -80,4 +69,29 @@ export function checkMiniCartCurrentAccount() {
     ],
   };
   shared.checkMiniCart(miniCartContent);
+}
+
+export function populatePersonalDetails() {
+  cy.get('[name="title"]').select('miss');
+  cy.get('[name="firstName"]').type('Ben');
+  cy.get('[name="lastName"]').type('Moore');
+  cy.get('[name="dateOfBirth"]').type('1987-01-01');
+  cy.get('[name="maritalStatus"]').select('married');
+  cy.get('[name="numberOfFinancialDependants"]').select('4');
+  cy.get('[name="isResidentOfBanksCountry"]')
+    .eq(0)
+    .click();
+  cy.get('[name="isUsCitizen"]')
+    .eq(1)
+    .click();
+  cy.get('[name="residentialStatus"]').select('living-with-parent-relative');
+  cy.get('[name="residentialAddress"]').type('Omladinskih Brigada');
+  cy.get('[name="movingInDateToResidentialAddress"]').type('2002-01-01');
+  cy.get('[name="isPostalSameAsResidential"]')
+    .eq(0)
+    .click();
+  cy.get('[name="employmentStatus"]').select('unemployed');
+  cy.get('[name="employmentStartDate"]').type('2005-01-01');
+  cy.get('[name="incomeFrequency"]').select('monthly');
+  cy.get('[name="netIncomeAmount"]').type('7800');
 }

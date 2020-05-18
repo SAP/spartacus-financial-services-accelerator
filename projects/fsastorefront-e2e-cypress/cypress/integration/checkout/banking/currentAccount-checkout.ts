@@ -1,56 +1,55 @@
 import * as currentAccount from '../../../helpers/checkout/banking/currentAccount';
-import * as legalInformationPage from '../../../helpers/checkout/banking/legalInformationPage';
-import * as userIdentificationPage from '../../../helpers/checkout/banking/userIdentificationPage';
-import * as comparisonPage from '../../../helpers/comparisonTable';
 import * as productCategory from '../../../helpers/productCategoryPage';
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
+import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
+import * as userIdentification from '../../../helpers/checkout/banking/userIdentificationPage';
 
 context('Current Account Checkout', () => {
   before(() => {
     cy.visit('/');
   });
 
-  it('Should open current account category page from footer', () => {
-    cy.get(
-      'cx-footer-navigation > cx-navigation-ui > :nth-child(2) > .wrapper > .childs > :nth-child(1) > cx-generic-link > a'
-    ).click({ force: true });
-  });
-
-  it('Should start checkout for current account', () => {
+  it('Start checkout for Current Account ', () => {
+    cy.get('cx-footer-navigation').within(() => {
+      cy.get('a')
+        .contains('Current Account')
+        .click({ force: true });
+    });
     productCategory.startCheckoutForBanking();
   });
 
   it('Should check comparison page', () => {
-    cy.get('.heading-headline').contains('Your Current Account Insurance');
-    comparisonPage.checkBankingComparisonPage();
+    banking.checkBankingComparisonPage('Your Current Account Insurance');
+    banking.checkBankingProgressBar();
   });
 
   it('Should check prices in comparison table and select Family Account', () => {
-    currentAccount.checkCurrentAccountComparisonTable();
+    //currentAccount.checkCurrentAccountComparisonTable();
     currentAccount.selectFamilyAccount();
   });
 
   it('Should check optional products for Current Account', () => {
-    cy.wait(3000);
-    cy.get('.progress-node').should('have.length', 5);
+    cy.get('.progress-node').should('have.length', 6);
     currentAccount.checkOptionalProductsAddTransactionChest();
   });
 
   it('Should register user in checkout', () => {
     register.populateRegistrationForm(registrationUser);
-    cy.wait(3000);
     register.loginInUser(registrationUser.email, registrationUser.password);
-    cy.wait(1500);
   });
 
-  it('Should check Mini Cart', () => {
+  it('Should complete personal details step', () => {
+    //cy.get('h2').contains(' Your Current Account Insurance ');
+    banking.checkPersonalDetailsPage();
+    currentAccount.populatePersonalDetails();
     currentAccount.checkMiniCartCurrentAccount();
+    checkout.clickContinueButton();
   });
 
   it('Should check Quote Review page', () => {
-    cy.get('.progress-inner-wrapper').should('have.length', 5);
+    banking.checkBankingProgressBar();
     checkout.checkAccordions('currentAccount');
   });
 
@@ -59,24 +58,15 @@ context('Current Account Checkout', () => {
   });
 
   it('Should check Legal Information page', () => {
-    cy.get('.heading-headline').contains('Your Current Account Insurance');
-    legalInformationPage.checkLegalInformationPage();
-  });
-
-  it('Should click Next in checkout', () => {
+    banking.checkLegalInformationPage('Your Current Account Insurance');
     checkout.clickContinueButton();
   });
 
-  it('Should check User Identification page', () => {
-    cy.get('.heading-headline').contains('Your Current Account Insurance');
-    userIdentificationPage.checkUserIdentificationPage();
-  });
-
-  it('Should select Video for user identification', () => {
-    userIdentificationPage.selectVideoIdentification();
-  });
-
-  it('Should click Next in checkout', () => {
+  it('Should select User Identification page', () => {
+    userIdentification.checkUserIdentificationPage(
+      'Your Current Account Insurance'
+    );
+    userIdentification.selectUserIdentification(' Video Identification ');
     checkout.clickContinueButton();
   });
 
