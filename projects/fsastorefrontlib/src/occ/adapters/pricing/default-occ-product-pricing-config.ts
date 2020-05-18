@@ -4,7 +4,7 @@ export const defaultOccProductPricingConfig: FSOccConfig = {
   backend: {
     occ: {
       endpoints: {
-        CalculatePriceForProduct: 'fsproducts/${productCode}/calculation',
+        calculatePriceForProduct: 'fsproducts/${productCode}/calculation',
       },
     },
   },

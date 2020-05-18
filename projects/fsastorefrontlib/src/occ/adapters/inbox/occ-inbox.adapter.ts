@@ -24,7 +24,6 @@ export class OccInboxAdapter implements InboxAdapter {
     const url = this.occEndpointService.getUrl('SiteMessages', {
       userId,
     });
-    console.log(url);
     let params: HttpParams = new HttpParams();
     if (searchConfig.sortCode && searchConfig.sortOrder) {
       params = params

@@ -52,7 +52,6 @@ export class OccCartAdapter implements CartAdapter {
       userId,
       cartId,
     });
-    console.log(url);
     const params: HttpParams = new HttpParams()
       .set('bundleTemplateId', bundleTemplateId)
       .set('productCode', productCode)

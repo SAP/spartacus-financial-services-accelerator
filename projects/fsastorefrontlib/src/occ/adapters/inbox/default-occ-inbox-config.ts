@@ -4,8 +4,8 @@ export const defaultOccInboxConfig: FSOccConfig = {
   backend: {
     occ: {
       endpoints: {
-        SiteMessages: 'users/${userId}/notifications/fssitemessages',
-        UpdateMessages:
+        siteMessages: 'users/${userId}/notifications/fssitemessages',
+        updateMessages:
           'users/${userId}/notifications/fssitemessages/read-unread',
       },
     },

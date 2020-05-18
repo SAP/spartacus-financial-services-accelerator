@@ -49,10 +49,8 @@ import { CsTicketOccModule } from './adapters/cs-ticket/cs-ticket-occ.module';
     PolicyOccModule,
     QuoteOccModule,
     UserRequestOccModule,
-    CsTicketOccModule
+    CsTicketOccModule,
   ],
-  providers: [
-    { provide: OccConfig, useExisting: Config },
-  ],
+  providers: [{ provide: OccConfig, useExisting: Config }],
 })
 export class OccModule {}

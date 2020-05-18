@@ -4,43 +4,41 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OccConfig } from '@spartacus/core';
+import { OccConfig, OccEndpointsService } from '@spartacus/core';
 import { OccCheckoutAdapter } from './occ-checkout.adapter';
 
 const userId = 'userId';
 const cartId = 'cartId';
 const identificationType = 'video_identification';
 
-const usersEndpoint = '/users';
-const cartsEndpoint = '/carts';
-
-const MockOccModuleConfig: OccConfig = {
-  context: {
-    baseSite: [''],
-  },
-  backend: {
-    occ: {
-      baseUrl: '',
-      prefix: '',
-    },
-  },
-};
+const usersEndpoint = 'UserIdentification';
+class MockOccEndpointsService {
+  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+    return this.getEndpoint(endpoint);
+  }
+  getEndpoint(url: string) {
+    return url;
+  }
+}
 
 describe('OccCheckoutAdapter', () => {
   let service: OccCheckoutAdapter;
   let httpMock: HttpTestingController;
+  let occEndpointService: OccEndpointsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
         OccCheckoutAdapter,
-        { provide: OccConfig, useValue: MockOccModuleConfig },
+        { provide: OccEndpointsService, useClass: MockOccEndpointsService },
       ],
     });
 
     service = TestBed.get(OccCheckoutAdapter);
     httpMock = TestBed.get(HttpTestingController);
+    occEndpointService = TestBed.get(OccEndpointsService);
+    spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -53,17 +51,12 @@ describe('OccCheckoutAdapter', () => {
         .setIdentificationType(identificationType, cartId, userId)
         .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url ===
-            usersEndpoint +
-              `/${userId}` +
-              cartsEndpoint +
-              `/${cartId}` +
-              '/userIdentification' &&
-          req.params.append('identificationType', identificationType) &&
-          req.method === 'PATCH'
-        );
+        return req.url === usersEndpoint && req.method === 'PATCH';
       }, `PATCH method and url`);
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(usersEndpoint, {
+        userId,
+        cartId,
+      });
     }));
   });
 });

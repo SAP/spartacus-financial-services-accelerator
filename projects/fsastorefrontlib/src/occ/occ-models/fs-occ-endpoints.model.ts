@@ -30,23 +30,23 @@ export interface FSOccEndpoints extends OccEndpoints {
    * Get all site messages by message group
    *
    */
-  SiteMessages?: string;
+  siteMessages?: string;
   /**
    * Get a site message by message code
    */
-  SiteMessage?: string;
+  siteMessage?: string;
   /**
    * Updates the read date of provided site messages
    */
-  UpdateMessages?: string;
+  updateMessages?: string;
   /**
    * Calculates price for a single product according to product code and product price attributes.
    */
-  CalculatePriceForProduct?: string;
+  calculatePriceForProduct?: string;
   /**
    * Set user identification type
    */
-  UserIdentification?: string;
+  userIdentification?: string;
   /**
    * Get list of products which are assigned for B2B unit from organization manager.
    *
@@ -87,7 +87,7 @@ export interface FSOccEndpoints extends OccEndpoints {
    *
    */
   cancelChangeRequest?: string;
-   /**
+  /**
    * 
   Create a customer support ticket
    *

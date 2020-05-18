@@ -5,7 +5,7 @@ export const defaultOccAgentConfig: FSOccConfig = {
     occ: {
       endpoints: {
         agents: '/agents',
-        agent: '/agents/${userId}',
+        agent: '/agents/${id}',
       },
     },
   },

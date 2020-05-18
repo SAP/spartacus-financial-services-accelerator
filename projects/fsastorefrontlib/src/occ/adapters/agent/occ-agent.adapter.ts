@@ -17,7 +17,6 @@ export class OccAgentAdapter implements AgentAdapter {
     const httpParams: HttpParams = new HttpParams()
       .set('categoryCode', category)
       .set('fields', 'DEFAULT');
-
     return this.http
       .get(url, { params: httpParams })
       .pipe(catchError((error: any) => throwError(error)));
