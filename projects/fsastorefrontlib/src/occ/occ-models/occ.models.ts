@@ -24,6 +24,17 @@ export interface FSProduct extends Product {
   defaultCategory?: Category;
 }
 
+export interface YFormConfiguratorSettings {
+  configurationFormId?: string;
+  configuratorType?: string;
+  configurationApplicationId?: string;
+  configurationCategory: Category;
+}
+
+export interface FSCategory extends Category {
+  yformConfiguratorSettings?: YFormConfiguratorSettings[];
+}
+
 export interface OrgUnit {
   uid: string;
   name?: string;
@@ -62,6 +73,11 @@ export interface QuoteStatus {
 export enum BindingStateType {
   BIND = 'BIND',
   UNBIND = 'UNBIND',
+}
+
+export enum ConfiguratorType {
+  PRODUCT_CONFIGURE_FORM = 'PRODUCT_CONFIGURE_FORM',
+  PERSONAL_DETAILS_FORM = 'PERSONAL_DETAILS_FORM',
 }
 
 export enum RequestType {

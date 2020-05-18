@@ -1,0 +1,9 @@
+<ng-container *ngIf="group">
+    <div class="dynamic-field" [hidden]="group.controls[config.name].disabled">
+        <div class="row justify-content-end">
+            <button class="btn btn-primary" [disabled]="config.disabled" [attr.name]="config.name" (click)="onSubmit()">
+                {{ label }}
+            </button>
+        </div>
+    </div>
+</ng-container>

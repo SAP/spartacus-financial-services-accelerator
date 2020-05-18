@@ -1,15 +1,10 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import {
-  Product,
-  ProductSelectors,
-  StateWithProduct,
-  ProductService,
-} from '@spartacus/core';
+import { Product, ProductSelectors, ProductService, StateWithProduct } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as fromActions from '../../checkout/store/actions/index';
-import { PricingData } from '../../../occ/occ-models/form-pricing.interface';
+import { PricingData } from './../../../../../../dist/fsastorefrontlib/occ/occ-models/form-pricing.interface.d';
 
 @Injectable()
 export class FSProductService extends ProductService {

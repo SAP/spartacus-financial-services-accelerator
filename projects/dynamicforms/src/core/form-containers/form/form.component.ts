@@ -1,10 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnDestroy,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, ViewChild } from '@angular/core';
 import { YFormData } from '@fsa/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
@@ -24,7 +18,7 @@ export class FormComponent implements OnDestroy {
     protected routingService: RoutingService,
     protected formDataService: FormDataService,
     protected formDataStorageService: FormDataStorageService
-  ) {}
+  ) { }
 
   @ViewChild(DynamicFormComponent, { static: false })
   form: DynamicFormComponent;
@@ -41,7 +35,7 @@ export class FormComponent implements OnDestroy {
   formData: Observable<YFormData>;
 
   submit(formData: YFormData) {
-    if (this.form && this.form.valid) {
+    if (this.form && this.form.valid && formData.content) {
       this.formDataService.saveFormData({
         formDefinition: {
           formId: this.formId,

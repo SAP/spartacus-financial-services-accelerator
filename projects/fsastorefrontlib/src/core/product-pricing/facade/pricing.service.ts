@@ -1,11 +1,21 @@
 import { Injectable } from '@angular/core';
-import {
-  PricingData,
-  PriceAttributeGroup,
-} from '../../../occ/occ-models/form-pricing.interface';
+import { BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
+import { PriceAttributeGroup, PricingData } from '../../../occ/occ-models/form-pricing.interface';
 
 @Injectable()
 export class PricingService {
+
+  pricingData = new BehaviorSubject<PricingData>({});
+
+  setPricingData(pricingData: PricingData) {
+    this.pricingData.next(pricingData);
+  }
+
+  getPricingData(): Observable<PricingData> {
+    return this.pricingData.asObservable();
+  }
+
   buildPricingData(formData: { [name: string]: Object }): PricingData {
     const pricingAttributesData: PricingData = {
       priceAttributeGroups: [],

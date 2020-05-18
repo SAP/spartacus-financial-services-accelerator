@@ -65,6 +65,7 @@ export const fscommon = {
     yearsPerformanse: 'Years Performance',
     riskAndReturningRate: 'Risk & Returning Rating',
     chooseCover: 'Choose a Cover',
+    configureProduct: 'Configure a Product',
     whatsIncluded: 'What\'s Included', // prettier-ignore
     addedByYou: 'Added by you',
     investementDetails: 'Investments Details',
@@ -108,6 +109,8 @@ export const fscommon = {
       insurances_savings: 'Savings',
       banking_credit_card: 'Credit Card',
       banking_current_account: 'Current Account',
+      banking_fixed_term_deposit: 'Fixed Term Deposit',
+      banking_loans: 'Loan',
     },
     pleaseSelect: 'Please select:',
     userIdentification: {

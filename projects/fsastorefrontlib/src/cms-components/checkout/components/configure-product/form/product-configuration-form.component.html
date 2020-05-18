@@ -1,0 +1,4 @@
+<ng-container *ngIf="formDefinition$ | async as formDefinition; else loading">
+  <cx-form-component *ngIf="formConfig" [formId]="formDefintionId" [formConfig]="formConfig"
+    [applicationId]="applicationId" [formCategoryCode]="formCategory" [formData]="formData$"></cx-form-component>
+</ng-container>

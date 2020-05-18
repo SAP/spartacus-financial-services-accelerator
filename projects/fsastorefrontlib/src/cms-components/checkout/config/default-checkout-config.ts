@@ -5,6 +5,21 @@ export const checkoutConfig: FSCheckoutConfig = {
   checkout: {
     steps: [
       {
+        id: 'configureProductStep',
+        name: 'fscommon.configureProduct',
+        routeName: 'configureProduct',
+        type: [],
+        restrictedCategories: [
+          'banking_current_account',
+          'banking_credit_card',
+          'insurances_life',
+          'insurances_auto',
+          'insurances_travel',
+          'insurances_homeowners',
+          'insurances_renters',
+        ],
+      },
+      {
         id: 'chooseCoverStep',
         name: 'fscommon.chooseCover',
         routeName: 'generalInformation',
@@ -12,6 +27,8 @@ export const checkoutConfig: FSCheckoutConfig = {
         restrictedCategories: [
           'banking_current_account',
           'banking_credit_card',
+          'banking_loans',
+          'banking_fixed_term_deposit',
           'insurances_event',
         ],
       },
@@ -20,7 +37,7 @@ export const checkoutConfig: FSCheckoutConfig = {
         name: 'fscommon.whatsIncluded',
         routeName: 'category',
         type: [],
-        restrictedCategories: [],
+        restrictedCategories: ['banking_loans', 'banking_fixed_term_deposit'],
       },
       {
         id: 'addOptionsStep',
@@ -81,6 +98,8 @@ export const checkoutConfig: FSCheckoutConfig = {
         restrictedCategories: [
           'banking_credit_card',
           'banking_current_account',
+          'banking_loans',
+          'banking_fixed_term_deposit',
         ],
       },
       {
@@ -91,6 +110,8 @@ export const checkoutConfig: FSCheckoutConfig = {
         restrictedCategories: [
           'banking_credit_card',
           'banking_current_account',
+          'banking_loans',
+          'banking_fixed_term_deposit',
         ],
       },
     ],

@@ -1,40 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { DynamicFormModule } from '@fsa/dynamicforms';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import {
-  AuthGuard,
-  CmsConfig,
-  ConfigModule,
-  I18nModule,
-  RoutesConfig,
-  RoutingConfig,
-} from '@spartacus/core';
-import {
-  CardModule,
-  CartNotEmptyGuard,
-  CmsPageGuard,
-  MediaModule,
-  PageComponentModule,
-  PageLayoutComponent,
-  PaymentDetailsSetGuard,
-  PaymentFormModule,
-  PaymentMethodComponent,
-  PaymentMethodModule,
-  SpinnerModule,
-} from '@spartacus/storefront';
+import { AuthGuard, CmsConfig, ConfigModule, I18nModule, RoutesConfig, RoutingConfig } from '@spartacus/core';
+import { CardModule, CartNotEmptyGuard, CmsPageGuard, MediaModule, PageComponentModule, PageLayoutComponent, PaymentDetailsSetGuard, PaymentFormModule, PaymentMethodComponent, PaymentMethodModule, SpinnerModule } from '@spartacus/storefront';
 import { CartConnector } from '../../core/cart/connectors/cart.connector';
 import { FSCartService } from '../../core/cart/facade/cart.service';
 import { CheckoutConnector } from '../../core/checkout/connectors/checkout.connector';
 import { CategoryService } from '../../core/checkout/services/category/category.service';
 import { CHECKOUT_FEATURE } from '../../core/checkout/store';
 import { effects } from '../../core/checkout/store/effects/index';
-import {
-  reducerProvider,
-  reducerToken,
-} from '../../core/checkout/store/reducers/index';
+import { reducerProvider, reducerToken } from '../../core/checkout/store/reducers/index';
 import { QuoteConnector } from '../../core/my-account/connectors/quote.connector';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { AddOptionsComponent } from './components/add-options/add-options.component';
@@ -43,7 +22,10 @@ import { BindQuoteDialogComponent } from './components/bind-quote-dialog/bind-qu
 import { FSCheckoutProgressComponent } from './components/checkout-progress/checkout-progress.component';
 import { FSCheckoutProgressModule } from './components/checkout-progress/checkout-progress.module';
 import { ChooseCoverNavigationComponent } from './components/choose-cover-navigation/choose-cover-navigation.component';
+import { ProductConfigurationFormComponent } from './components/configure-product/form/product-configuration-form.component';
+import { ProductConfigurationMiniCartComponent } from './components/configure-product/mini-cart/product-configuration-mini-cart.component';
 import { FinalReviewComponent } from './components/final-review/final-review.component';
+import { FormComponentsModule } from './components/form-components/form-component.module';
 import { LegalModule } from './components/legal/legal.module';
 import { MiniCartComponent } from './components/mini-cart/mini-cart.component';
 import { MiniCartModule } from './components/mini-cart/mini-cart.module';
@@ -62,6 +44,15 @@ const routes: Routes = [
     data: {
       cxRoute: 'generalInformation',
       pageLabel: 'generalInformationForm',
+    },
+    component: PageLayoutComponent,
+  },
+  {
+    path: null,
+    canActivate: [CmsPageGuard, CategoryStepGuard],
+    data: {
+      cxRoute: 'configureProduct',
+      pageLabel: 'productDetails',
     },
     component: PageLayoutComponent,
   },
@@ -150,6 +141,8 @@ const routes: Routes = [
     AddOptionsModule,
     MiniCartModule,
     NgbTooltipModule,
+    FormComponentsModule,
+    DynamicFormModule,
     CommonModule,
     PageComponentModule,
     MediaModule,
@@ -164,41 +157,49 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     StoreModule.forFeature(CHECKOUT_FEATURE, reducerToken),
     EffectsModule.forFeature(effects),
-    ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
-      cmsComponents: {
-        AddOptionsFlex: {
-          // mapping hybris component (defined in impex) - This is acctualy flexType defined in impex for that component
-          component: AddOptionsComponent, // to SPA component
+    ConfigModule.withConfig(<
+      CmsConfig | RoutesConfig | RoutingConfig
+      >{
+        cmsComponents: {
+          AddOptionsFlex: {
+            // mapping hybris component (defined in impex) - This is acctualy flexType defined in impex for that component
+            component: AddOptionsComponent, // to SPA component
+          },
+          MiniCartFlex: {
+            component: MiniCartComponent,
+          },
+          QuoteReviewFlex: {
+            component: QuoteReviewComponent,
+          },
+          ProductConfigurationMiniCartFlex: {
+            component: ProductConfigurationMiniCartComponent,
+          },
+          PaymentDetailsFlex: {
+            component: PaymentMethodComponent,
+          },
+          ProductConfigurationFormFlex: {
+            component: ProductConfigurationFormComponent,
+          },
+          FinalReviewFlex: {
+            component: FinalReviewComponent,
+          },
+          OrderConfirmationFlex: {
+            component: OrderConfirmationComponent,
+          },
+          OrderConfirmationMessageFlex: {
+            component: OrderConfirmationMessageComponent,
+          },
+          DynamicProgressBarStepsComponent: {
+            component: FSCheckoutProgressComponent,
+          },
+          ChooseCoverFormNavigationFlex: {
+            component: ChooseCoverNavigationComponent,
+          },
+          PersonalDetailsFormNavigationFlex: {
+            component: PersonalDetailsNavigationComponent,
+          },
         },
-        MiniCartFlex: {
-          component: MiniCartComponent,
-        },
-        QuoteReviewFlex: {
-          component: QuoteReviewComponent,
-        },
-        PaymentDetailsFlex: {
-          component: PaymentMethodComponent,
-        },
-        FinalReviewFlex: {
-          component: FinalReviewComponent,
-        },
-        OrderConfirmationFlex: {
-          component: OrderConfirmationComponent,
-        },
-        OrderConfirmationMessageFlex: {
-          component: OrderConfirmationMessageComponent,
-        },
-        DynamicProgressBarStepsComponent: {
-          component: FSCheckoutProgressComponent,
-        },
-        ChooseCoverFormNavigationFlex: {
-          component: ChooseCoverNavigationComponent,
-        },
-        PersonalDetailsFormNavigationFlex: {
-          component: PersonalDetailsNavigationComponent,
-        },
-      },
-    }),
+      }),
   ],
   declarations: [
     QuoteReviewComponent,
@@ -208,6 +209,8 @@ const routes: Routes = [
     PersonalDetailsNavigationComponent,
     OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
+    ProductConfigurationFormComponent,
+    ProductConfigurationMiniCartComponent,
   ],
   exports: [
     I18nModule,
@@ -215,10 +218,13 @@ const routes: Routes = [
     UserIdentificationModule,
     PaymentMethodModule,
     PaymentFormModule,
+    FormComponentsModule,
     QuoteReviewComponent,
     BindQuoteDialogComponent,
     FinalReviewComponent,
     OrderConfirmationComponent,
+    ProductConfigurationFormComponent,
+    ProductConfigurationMiniCartComponent
   ],
   entryComponents: [
     AddOptionsComponent,
@@ -226,10 +232,12 @@ const routes: Routes = [
     BindQuoteDialogComponent,
     FinalReviewComponent,
     ChooseCoverNavigationComponent,
+    ProductConfigurationFormComponent,
     PersonalDetailsNavigationComponent,
     OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
     MiniCartComponent,
+    ProductConfigurationMiniCartComponent
   ],
   providers: [
     FSCartService,
@@ -240,4 +248,4 @@ const routes: Routes = [
     reducerProvider,
   ],
 })
-export class CheckoutModule {}
+export class CheckoutModule { }
