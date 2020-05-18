@@ -29,6 +29,7 @@ import { FsCartOccModule } from './adapters/cart/cart-occ.module';
 import { InboxOccModule } from './adapters/inbox/inbox-occ.module';
 import { CheckoutOccModule } from './adapters/checkout/checkout-occ.module';
 import { ProductPricingOccModule } from './adapters/pricing/occ-product-pricing.module';
+import { ProductAssignmentOccModule } from './adapters/product-assignment/product-assignment.module';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { ProductPricingOccModule } from './adapters/pricing/occ-product-pricing.
     ProductPricingOccModule,
     InboxOccModule,
     FsCartOccModule,
+    ProductAssignmentOccModule,
     CommonModule,
     HttpClientModule,
     ChangeRequestOccModule,
@@ -51,10 +53,6 @@ import { ProductPricingOccModule } from './adapters/pricing/occ-product-pricing.
     {
       provide: CsTicketAdapter,
       useClass: OccCsTicketAdapter,
-    },
-    {
-      provide: ProductAssignmentAdapter,
-      useClass: OccProductAssignmentAdapter,
     },
     { provide: OccConfig, useExisting: Config },
   ],

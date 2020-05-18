@@ -21,19 +21,22 @@ export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
     currentPage?: number,
     sort?: string
   ): Observable<any> {
-    const url = this.getProductAssignmentsEndpoint(userId, orgUnitId);
-    const params = {};
+    const url = this.occEndpointService.getUrl('loadProductAssignments', {
+      userId,
+      orgUnitId,
+    });
+    let params: HttpParams = new HttpParams();
     if (active !== undefined) {
-      params['active'] = active.toString();
+      params = params.set('active', active.toString());
     }
     if (pageSize) {
-      params['pageSize'] = pageSize.toString();
+      params = params.set('pageSize', pageSize.toString());
     }
     if (currentPage) {
-      params['currentPage'] = currentPage.toString();
+      params = params.set('currentPage', currentPage.toString());
     }
     if (sort) {
-      params['sortCode'] = sort.toString();
+      params = params.set('sortCode', sort.toString());
     }
     return this.http
       .get(url, { params: params })
@@ -45,7 +48,10 @@ export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
     orgUnitId: string,
     productCode: string
   ) {
-    const url = this.getProductAssignmentsEndpoint(userId, orgUnitId);
+    const url = this.occEndpointService.getUrl('createProductAssignments', {
+      userId,
+      orgUnitId,
+    });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
@@ -58,28 +64,32 @@ export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
   removeProductAssignment(
     userId: string,
     orgUnitId: string,
-    productCode: string
+    fsProductAssignmentCode: string
   ) {
-    const url = this.getProductAssignmentsEndpoint(userId, orgUnitId);
+    const url = this.occEndpointService.getUrl('removeProductAssignments', {
+      userId,
+      orgUnitId,
+      fsProductAssignmentCode,
+    });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
     return this.http
-      .delete<any>(`${url}/${productCode}`, { headers })
+      .delete<any>(url, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
   changeActiveStatus(
     userId: string,
     orgUnitId: string,
-    productAssignmentCode: string,
+    fsProductAssignmentCode: string,
     active: boolean
   ) {
-    const url = this.getUpdateProductAssignmentEndpoint(
+    const url = this.occEndpointService.getUrl('updateProductAssignments', {
       userId,
       orgUnitId,
-      productAssignmentCode
-    );
+      fsProductAssignmentCode,
+    });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
@@ -89,31 +99,5 @@ export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
     return this.http
       .patch<any>(url, productAssignmentBody, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
-  }
-
-  protected getProductAssignmentsEndpoint(userId: string, orgUnitId: string) {
-    const productAssignmentsEndpoint =
-      '/users/' + userId + '/orgUnits/' + orgUnitId + '/fsProductAssignments';
-    return (
-      this.occEndpointService.getBaseEndpoint() + productAssignmentsEndpoint
-    );
-  }
-
-  protected getUpdateProductAssignmentEndpoint(
-    userId: string,
-    orgUnitId,
-    productAssignmentCode: string
-  ) {
-    const updateProductAssignmentEndpoint =
-      '/users/' +
-      userId +
-      '/orgUnits/' +
-      orgUnitId +
-      '/fsProductAssignments/' +
-      productAssignmentCode;
-    return (
-      this.occEndpointService.getBaseEndpoint() +
-      updateProductAssignmentEndpoint
-    );
   }
 }

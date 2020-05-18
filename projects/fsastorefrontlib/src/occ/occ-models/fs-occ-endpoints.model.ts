@@ -48,6 +48,26 @@ export interface FSOccEndpoints extends OccEndpoints {
    */
   UserIdentification?: string;
   /**
+   * Get list of products which are assigned for B2B unit from organization manager.
+   *
+   */
+  loadProductAssignments?: string;
+  /**
+   * Creates product assignment for B2B unit.
+   *
+   */
+  createProductAssignments?: string;
+  /**
+   * Removes product assignment for specific orgUnit.
+   *
+   */
+  removeProductAssignments?: string;
+  /**
+   * Updates product assignment for specified orgUnit.
+   *
+   */
+  updateProductAssignments?: string;
+  /**
    * Get a change request with a given identifier
    *
    */
