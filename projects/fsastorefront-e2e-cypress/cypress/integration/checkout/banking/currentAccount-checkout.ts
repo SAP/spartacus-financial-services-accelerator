@@ -26,7 +26,7 @@ context('Current Account Checkout', () => {
   });
 
   it('Should check prices in comparison table and select Family Account', () => {
-    //currentAccount.checkCurrentAccountComparisonTable();
+    currentAccount.checkCurrentAccountComparisonTable();
     currentAccount.selectFamilyAccount();
   });
 
