@@ -8,14 +8,9 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import {
-  OccConfig,
-  OCC_USER_ID_CURRENT,
-  OccEndpointsService,
-} from '@spartacus/core';
+import { OCC_USER_ID_CURRENT, OccEndpointsService } from '@spartacus/core';
 import { OccCsTicketAdapter } from './occ-cs-ticket.adapter';
 
-const userId = OCC_USER_ID_CURRENT;
 const agentId = 'testAgent';
 const ticketData = {
   interest: 'INCIDENT',

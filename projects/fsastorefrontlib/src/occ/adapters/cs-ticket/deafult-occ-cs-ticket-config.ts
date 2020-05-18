@@ -4,7 +4,7 @@ export const defaultCsTicketConfig: FSOccConfig = {
   backend: {
     occ: {
       endpoints: {
-        createCsTicket: 'users/{userId}/csTickets',
+        createCsTicket: 'users/${userId}/csTickets',
       },
     },
   },

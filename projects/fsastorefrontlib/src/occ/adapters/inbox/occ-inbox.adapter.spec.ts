@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccInboxAdapter } from './occ-inbox.adapter';
-import { OccConfig, OccEndpointsService } from '@spartacus/core';
+import { OccEndpointsService } from '@spartacus/core';
 
 const userId = '123';
 const messageGroup = 'autoGroup';

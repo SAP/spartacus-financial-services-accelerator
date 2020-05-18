@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
-import { OccConfig, OccEndpointsService } from '@spartacus/core';
+import { OccEndpointsService } from '@spartacus/core';
 import { OccProductAssignmentAdapter } from './occ-product-assignment.adapter';
 
 const fsProductAssignmentCode = 'TestCode';
