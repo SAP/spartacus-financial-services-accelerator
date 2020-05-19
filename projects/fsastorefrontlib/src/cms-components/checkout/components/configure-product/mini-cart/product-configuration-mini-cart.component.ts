@@ -5,10 +5,11 @@ import { CurrentProductService } from '@spartacus/storefront';
 import { Subscription } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
-import { PricingService } from './../../../../../core/product-pricing/facade/pricing.service';
-import { FSProductService } from './../../../../../core/product-pricing/facade/product.service';
-import { PricingData } from './../../../../../occ/occ-models/form-pricing.interface';
-import { FSProduct } from './../../../../../occ/occ-models/occ.models';
+import {
+  FSProductService,
+  PricingService,
+} from '../../../../../core/product-pricing/facade';
+import { FSProduct, PricingData } from '../../../../../occ/occ-models';
 
 @Component({
   selector: 'cx-fs-product-configuration-mini-cart',
@@ -47,10 +48,10 @@ export class ProductConfigurationMiniCartComponent
         this.formDataService
           .getSubmittedForm()
           .pipe(
-            map(yFormData => {
-              if (yFormData && yFormData.content) {
+            map(formData => {
+              if (formData && formData.content) {
                 this.pricingData = this.pricingService.buildPricingData(
-                  JSON.parse(yFormData.content)
+                  JSON.parse(formData.content)
                 );
                 this.product$ = this.productService.getCalculatedProductData(
                   this.productId,

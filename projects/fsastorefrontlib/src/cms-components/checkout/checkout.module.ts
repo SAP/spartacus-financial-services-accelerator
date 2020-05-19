@@ -46,6 +46,7 @@ import { FSCheckoutProgressModule } from './components/checkout-progress/checkou
 import { ChooseCoverNavigationComponent } from './components/choose-cover-navigation/choose-cover-navigation.component';
 import { ProductConfigurationFormComponent } from './components/configure-product/form/product-configuration-form.component';
 import { ProductConfigurationMiniCartComponent } from './components/configure-product/mini-cart/product-configuration-mini-cart.component';
+import { ProductConfigurationNavigationComponent } from './components/configure-product/navigation/product-configuration-navigation.component';
 import { FinalReviewComponent } from './components/final-review/final-review.component';
 import { FormComponentsModule } from './components/form-components/form-component.module';
 import { LegalModule } from './components/legal/legal.module';
@@ -194,6 +195,9 @@ const routes: Routes = [
         ProductConfigurationMiniCartFlex: {
           component: ProductConfigurationMiniCartComponent,
         },
+        ProductConfigurationFormNavigationFlex: {
+          component: ProductConfigurationNavigationComponent,
+        },
         PaymentDetailsFlex: {
           component: PaymentMethodComponent,
         },
@@ -231,6 +235,7 @@ const routes: Routes = [
     OrderConfirmationMessageComponent,
     ProductConfigurationFormComponent,
     ProductConfigurationMiniCartComponent,
+    ProductConfigurationNavigationComponent,
   ],
   exports: [
     I18nModule,
@@ -245,6 +250,7 @@ const routes: Routes = [
     OrderConfirmationComponent,
     ProductConfigurationFormComponent,
     ProductConfigurationMiniCartComponent,
+    ProductConfigurationNavigationComponent,
   ],
   entryComponents: [
     AddOptionsComponent,
@@ -258,6 +264,7 @@ const routes: Routes = [
     OrderConfirmationMessageComponent,
     MiniCartComponent,
     ProductConfigurationMiniCartComponent,
+    ProductConfigurationNavigationComponent,
   ],
   providers: [
     FSCartService,

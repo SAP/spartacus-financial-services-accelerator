@@ -18,10 +18,18 @@ export interface ContactAgentData {
   message?: string;
 }
 
+export interface BundleTemplate {
+  id: string;
+  name?: string;
+  childBundleTemplates?: BundleTemplate[];
+}
+
 export interface FSProduct extends Product {
   price?: FSPrice;
   cartDispalyName?: string;
   defaultCategory?: Category;
+  bundleTemplates?: BundleTemplate;
+  configurable?: boolean;
 }
 
 export interface YFormConfiguratorSettings {
@@ -105,6 +113,7 @@ export enum StepStatus {
 
 export interface FSOrderEntry extends OrderEntry {
   formData?: any[];
+  product?: FSProduct;
 }
 
 export interface FSPrice extends Price {

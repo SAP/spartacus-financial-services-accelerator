@@ -4,7 +4,7 @@
     {{ 'fscommon.application.title' | cxTranslate }}
   </h2>
   <ng-container *ngIf="product$ | async as product">
-    <ng-container *ngIf="pricingData; else emptyPriceData">
+    <ng-container *ngIf="pricingData; else emptyConfigurationMiniCart">
       <div class="short-overview-content">
         <div
           *ngFor="
@@ -53,7 +53,7 @@
   </ng-container>
 </div>
 
-<ng-template #emptyPriceData>
+<ng-template #emptyConfigurationMiniCart>
   <p>
     {{ 'configureProduct.emptyConfigurationDetails' | cxTranslate }}
   </p>

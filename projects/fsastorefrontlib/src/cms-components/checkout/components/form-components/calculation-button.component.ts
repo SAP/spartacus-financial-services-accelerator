@@ -11,7 +11,6 @@ import { CurrentProductService } from '@spartacus/storefront';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { OccMockFormService } from './../../../../../../dynamicforms/src/occ/services/occ-mock-form.service';
-import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import { PricingData } from './../../../../occ/occ-models/form-pricing.interface';
 import { FSProduct } from './../../../../occ/occ-models/occ.models';
 
@@ -27,8 +26,7 @@ export class CalculationButtonComponent extends AbstractFormComponent {
     protected occcMockFormService: OccMockFormService,
     protected formConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
-    protected changeDetectorRef: ChangeDetectorRef,
-    protected pricingService: PricingService
+    protected changeDetectorRef: ChangeDetectorRef
   ) {
     super(occcMockFormService, formConfig, languageService, changeDetectorRef);
   }

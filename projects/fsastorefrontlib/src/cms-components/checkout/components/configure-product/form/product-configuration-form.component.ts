@@ -13,7 +13,7 @@ import {
   ConfiguratorType,
   FSCategory,
   FSProduct,
-} from './../../../../../occ/occ-models/occ.models';
+} from '../../../../../occ/occ-models';
 
 @Component({
   selector: 'cx-fs-product-configuration-form',
