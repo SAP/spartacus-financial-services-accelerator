@@ -17,7 +17,7 @@ export class OccCheckoutAdapter implements CheckoutAdapter {
     cartId: string,
     userId: string
   ) {
-    const url = this.occEndpointService.getUrl('UserIdentification', {
+    const url = this.occEndpointService.getUrl('userIdentification', {
       userId,
       cartId,
     });

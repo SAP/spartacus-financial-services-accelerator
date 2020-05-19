@@ -21,7 +21,7 @@ export class OccInboxAdapter implements InboxAdapter {
     messageGroup: string,
     searchConfig: FSSearchConfig
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('SiteMessages', {
+    const url = this.occEndpointService.getUrl('siteMessages', {
       userId,
     });
     let params: HttpParams = new HttpParams();
@@ -49,7 +49,7 @@ export class OccInboxAdapter implements InboxAdapter {
     messagesUidList: Array<string>,
     read: boolean
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('UpdateMessages', {
+    const url = this.occEndpointService.getUrl('updateMessages', {
       userId,
     });
     const params: HttpParams = new HttpParams()

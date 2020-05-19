@@ -18,7 +18,6 @@ export class OccProductPricingAdapter implements ProductPricingAdapter {
     productCode: string,
     pricingData: PricingData
   ): Observable<Product> {
-    console.log('BABAAAAAAA');
     const url = this.occEndpointService.getUrl('calculatePriceForProduct', {
       productCode,
     });

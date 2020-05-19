@@ -9,7 +9,7 @@ import { OccEndpointsService } from '@spartacus/core';
 
 const userId = '123';
 const messageGroup = 'autoGroup';
-const messagesEndPoint = 'SiteMessages';
+const messagesEndPoint = 'siteMessages';
 
 class MockOccEndpointsService {
   getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {

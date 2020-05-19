@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { provideConfig } from '@spartacus/core';
 import { CheckoutAdapter } from '../../../core/checkout/connectors/checkout.adapter';
 import { OccCheckoutAdapter } from '../checkout/occ-checkout.adapter';
-import { defaultOccInboxConfig } from '../inbox/default-occ-inbox-config';
+import { defaultOccCheckoutConfig } from './default-occ-checkout-config';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
@@ -13,7 +13,7 @@ import { defaultOccInboxConfig } from '../inbox/default-occ-inbox-config';
       provide: CheckoutAdapter,
       useClass: OccCheckoutAdapter,
     },
-    provideConfig(defaultOccInboxConfig),
+    provideConfig(defaultOccCheckoutConfig),
   ],
 })
 export class CheckoutOccModule {}

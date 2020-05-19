@@ -11,7 +11,7 @@ const userId = 'userId';
 const cartId = 'cartId';
 const identificationType = 'video_identification';
 
-const usersEndpoint = 'UserIdentification';
+const usersEndpoint = 'userIdentification';
 class MockOccEndpointsService {
   getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
