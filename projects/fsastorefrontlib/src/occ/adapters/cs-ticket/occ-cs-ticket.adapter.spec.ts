@@ -8,44 +8,44 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OccConfig, OCC_USER_ID_CURRENT } from '@spartacus/core';
+import { OCC_USER_ID_CURRENT, OccEndpointsService } from '@spartacus/core';
 import { OccCsTicketAdapter } from './occ-cs-ticket.adapter';
 
-const MockOccModuleConfig: OccConfig = {
-  context: {
-    baseSite: [''],
-  },
-  backend: {
-    occ: {
-      baseUrl: '',
-      prefix: '',
-    },
-  },
-};
-const userId = OCC_USER_ID_CURRENT;
 const agentId = 'testAgent';
 const ticketData = {
   interest: 'INCIDENT',
   contactType: 'EMAIL',
   subject: 'Ticket subject',
 };
+const csTicketEndpoint = 'createCsTicket';
+class MockOccEndpointsService {
+  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+    return this.getEndpoint(endpoint);
+  }
+  getEndpoint(url: string) {
+    return url;
+  }
+}
 describe('OccCsTicketAdapter', () => {
   let httpClientSpy: { get: jasmine.Spy };
   let adapter: OccCsTicketAdapter;
   let httpMock: HttpTestingController;
+  let occEndpointService: OccEndpointsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
         OccCsTicketAdapter,
-        { provide: OccConfig, useValue: MockOccModuleConfig },
+        { provide: OccEndpointsService, useClass: MockOccEndpointsService },
       ],
     });
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
 
     adapter = TestBed.get(OccCsTicketAdapter);
     httpMock = TestBed.get(HttpTestingController);
+    occEndpointService = TestBed.get(OccEndpointsService);
+    spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 
   describe('createCsTicketForAgent', () => {
@@ -54,11 +54,8 @@ describe('OccCsTicketAdapter', () => {
         .createCsTicketForAgent(undefined, OCC_USER_ID_CURRENT, ticketData)
         .subscribe();
       const mockReq = httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url === '/users' + `/${userId}` + '/csTickets' &&
-          req.method === 'POST'
-        );
-      });
+        return req.url === csTicketEndpoint && req.method === 'POST';
+      }, `POST method and url`);
       expect(mockReq.cancelled).toBeFalsy();
       expect(mockReq.request.responseType).toEqual('json');
     }));
@@ -68,11 +65,8 @@ describe('OccCsTicketAdapter', () => {
         .createCsTicketForAgent(agentId, OCC_USER_ID_CURRENT, ticketData)
         .subscribe();
       const mockReq = httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url === '/users' + `/${userId}` + '/csTickets' &&
-          req.method === 'POST'
-        );
-      });
+        return req.url === csTicketEndpoint && req.method === 'POST';
+      }, `POST method and url`);
       expect(mockReq.cancelled).toBeFalsy();
       expect(mockReq.request.responseType).toEqual('json');
     }));
@@ -90,10 +84,7 @@ describe('OccCsTicketAdapter', () => {
         .subscribe(res => (response = res), err => (errResponse = err));
       httpMock
         .expectOne((req: HttpRequest<any>) => {
-          return (
-            req.url === '/users' + `/${userId}` + '/csTickets' &&
-            req.method === 'POST'
-          );
+          return req.url === csTicketEndpoint && req.method === 'POST';
         })
         .flush(errorResponse);
       expect(errorResponse.status).toEqual(400);

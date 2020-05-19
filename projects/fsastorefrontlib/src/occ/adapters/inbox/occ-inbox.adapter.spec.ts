@@ -5,41 +5,39 @@ import {
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccInboxAdapter } from './occ-inbox.adapter';
-import { OccConfig } from '@spartacus/core';
+import { OccEndpointsService } from '@spartacus/core';
 
 const userId = '123';
 const messageGroup = 'autoGroup';
+const messagesEndPoint = 'siteMessages';
 
-const usersEndpoint = '/users';
-const messagesEndPoint = '/notifications/fssitemessages';
-
-const MockOccModuleConfig: OccConfig = {
-  context: {
-    baseSite: [''],
-  },
-  backend: {
-    occ: {
-      baseUrl: '',
-      prefix: '',
-    },
-  },
-};
+class MockOccEndpointsService {
+  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+    return this.getEndpoint(endpoint);
+  }
+  getEndpoint(url: string) {
+    return url;
+  }
+}
 
 describe('OccInboxAdapter', () => {
   let adapter: OccInboxAdapter;
   let httpMock: HttpTestingController;
+  let occEndpointService: OccEndpointsService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
         OccInboxAdapter,
-        { provide: OccConfig, useValue: MockOccModuleConfig },
+        { provide: OccEndpointsService, useClass: MockOccEndpointsService },
       ],
     });
 
     adapter = TestBed.get(OccInboxAdapter);
     httpMock = TestBed.get(HttpTestingController);
+    occEndpointService = TestBed.get(OccEndpointsService);
+    spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -52,15 +50,11 @@ describe('OccInboxAdapter', () => {
         .getSiteMessagesForUserAndGroup(userId, messageGroup, {})
         .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url ===
-            usersEndpoint +
-              `/${userId}` +
-              messagesEndPoint +
-              `?fields=FULL&messagegroup=${messageGroup}` &&
-          req.method === 'GET'
-        );
+        return req.url === messagesEndPoint && req.method === 'GET';
       }, `GET method and url`);
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(messagesEndPoint, {
+        userId,
+      });
     }));
   });
 });

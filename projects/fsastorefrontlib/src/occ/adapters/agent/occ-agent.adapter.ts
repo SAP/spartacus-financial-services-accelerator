@@ -13,13 +13,13 @@ export class OccAgentAdapter implements AgentAdapter {
   ) {}
 
   getAgentsByCategory(category: string): Observable<any> {
-    const url = this.getAgentsEndpoint();
-    const categoryParam = 'categoryCode=' + category + '&fields=DEFAULT';
-    const params = new HttpParams({ fromString: categoryParam });
-
+    const url = this.occEndpointService.getUrl('agents');
+    const httpParams: HttpParams = new HttpParams()
+      .set('categoryCode', category)
+      .set('fields', 'DEFAULT');
     return this.http
-      .get(url, { params: params })
-      .pipe(catchError((error: any) => throwError(error.json())));
+      .get(url, { params: httpParams })
+      .pipe(catchError((error: any) => throwError(error)));
   }
 
   getAgentsByQuery(
@@ -27,9 +27,10 @@ export class OccAgentAdapter implements AgentAdapter {
     pageNumber: number,
     longitudeLatitude?: GeoPoint
   ): Observable<any> {
-    const url = this.getAgentsEndpoint();
-    const query = '&page=' + pageNumber.toString() + '&fields=DEFAULT';
-    let params = new HttpParams({ fromString: query });
+    const url = this.occEndpointService.getUrl('agents');
+    let params: HttpParams = new HttpParams()
+      .set('page', pageNumber.toString())
+      .set('fields', 'DEFAULT');
 
     if (longitudeLatitude) {
       params = params
@@ -40,20 +41,18 @@ export class OccAgentAdapter implements AgentAdapter {
     if (searchQuery) {
       params = params.set('queryParam', searchQuery);
     }
-
     return this.http
       .get<any>(url, { params: params })
-      .pipe(catchError((error: any) => throwError(error.json())));
+      .pipe(catchError((error: any) => throwError(error)));
   }
 
   getAgentByID(id: string) {
-    const url = this.getAgentsEndpoint() + '/' + id + '?fields=DEFAULT';
+    const url = this.occEndpointService.getUrl('agent', {
+      id,
+    });
+    const params: HttpParams = new HttpParams().set('fields', 'DEFAULT');
     return this.http
-      .get(url)
-      .pipe(catchError((error: any) => throwError(error.json())));
-  }
-
-  protected getAgentsEndpoint() {
-    return this.occEndpointService.getBaseEndpoint() + '/agents';
+      .get(url, { params: params })
+      .pipe(catchError((error: any) => throwError(error)));
   }
 }

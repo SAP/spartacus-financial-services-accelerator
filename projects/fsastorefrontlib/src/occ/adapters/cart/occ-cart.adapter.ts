@@ -7,8 +7,6 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 import { CartAdapter } from '../../../core/cart/connectors/cart.adapter';
 import { PricingData } from '../../occ-models/form-pricing.interface';
 
-const FULL_PARAMS = '&fields=FULL';
-
 @Injectable()
 export class OccCartAdapter implements CartAdapter {
   constructor(
@@ -24,17 +22,15 @@ export class OccCartAdapter implements CartAdapter {
     entryNumber: string
   ): Observable<CartModification> {
     const toAdd = JSON.stringify({});
-    const url = this.getAddOptionalProductToCartEndpoint(userId, cartId);
-    const params = new HttpParams({
-      fromString:
-        'productCode=' +
-        productCode +
-        '&quantity=' +
-        quantity +
-        FULL_PARAMS +
-        '&entryNumber=' +
-        entryNumber,
+    const url = this.occEndpointService.getUrl('addToCart', {
+      userId,
+      cartId,
     });
+    const params: HttpParams = new HttpParams()
+      .set('productCode', productCode)
+      .set('quantity', quantity.toString())
+      .set('entryNumber', entryNumber)
+      .set('fields', 'FULL');
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });
@@ -51,17 +47,15 @@ export class OccCartAdapter implements CartAdapter {
     quantity: number,
     pricingData: PricingData
   ): Observable<CartModification> {
-    const url = this.getStartBundleForProductOfSpecifiedCart(userId, cartId);
-    const params = new HttpParams({
-      fromString:
-        'bundleTemplateId=' +
-        bundleTemplateId +
-        '&productCode=' +
-        productCode +
-        '&quantity=' +
-        quantity +
-        FULL_PARAMS,
+    const url = this.occEndpointService.getUrl('startBundle', {
+      userId,
+      cartId,
     });
+    const params: HttpParams = new HttpParams()
+      .set('bundleTemplateId', bundleTemplateId)
+      .set('productCode', productCode)
+      .set('quantity', quantity.toString())
+      .set('fields', 'FULL');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
@@ -71,29 +65,5 @@ export class OccCartAdapter implements CartAdapter {
     return this.http
       .post<any>(url, pricingAttributesBody, { headers, params })
       .pipe(catchError((error: any) => throwError(error.json())));
-  }
-
-  protected getAddOptionalProductToCartEndpoint(
-    userId: string,
-    cartId: string
-  ) {
-    const addOptionalProductToCartEndpoint =
-      '/users/' + userId + '/carts/' + cartId + '/fs-add-to-cart';
-    return (
-      this.occEndpointService.getBaseEndpoint() +
-      addOptionalProductToCartEndpoint
-    );
-  }
-
-  protected getStartBundleForProductOfSpecifiedCart(
-    userId: string,
-    cartId: string
-  ) {
-    const startBundleForProductOfCartEndpoint =
-      '/users/' + userId + '/carts/' + cartId + '/fs-start-bundle';
-    return (
-      this.occEndpointService.getBaseEndpoint() +
-      startBundleForProductOfCartEndpoint
-    );
   }
 }

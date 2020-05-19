@@ -5,37 +5,37 @@ import {
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccBillingTimeAdapter } from './occ-billing-time.adapter';
-import { OccConfig } from '@spartacus/core';
+import { OccEndpointsService } from '@spartacus/core';
 
 const productCodes: string[] = ['product1', 'product2'];
+const billingtimeEndpoint = 'billingTime';
 
-const MockOccModuleConfig: OccConfig = {
-  context: {
-    baseSite: [''],
-  },
-  backend: {
-    occ: {
-      baseUrl: '',
-      prefix: '',
-    },
-  },
-};
+class MockOccEndpointsService {
+  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+    return this.getEndpoint(endpoint);
+  }
+  getEndpoint(url: string) {
+    return url;
+  }
+}
 
 describe('OccBillingTimeAdapter', () => {
   let adapter: OccBillingTimeAdapter;
   let httpMock: HttpTestingController;
-
+  let occEndpointService: OccEndpointsService;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
         OccBillingTimeAdapter,
-        { provide: OccConfig, useValue: MockOccModuleConfig },
+        { provide: OccEndpointsService, useClass: MockOccEndpointsService },
       ],
     });
 
     adapter = TestBed.get(OccBillingTimeAdapter);
     httpMock = TestBed.get(HttpTestingController);
+    occEndpointService = TestBed.get(OccEndpointsService);
+    spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -46,12 +46,11 @@ describe('OccBillingTimeAdapter', () => {
     it('get billing times', async(() => {
       adapter.getBillingTimes(productCodes).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url === '/billing-times' &&
-          req.params.append('productCodes', productCodes.toString()) &&
-          req.method === 'GET'
-        );
+        return req.url === billingtimeEndpoint && req.method === 'GET';
       }, `GET method and url`);
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        billingtimeEndpoint
+      );
     }));
   });
 });
