@@ -192,6 +192,9 @@ const routes: Routes = [
         QuoteReviewFlex: {
           component: QuoteReviewComponent,
         },
+        ProductConfigurationFormFlex: {
+          component: ProductConfigurationFormComponent,
+        },
         ProductConfigurationMiniCartFlex: {
           component: ProductConfigurationMiniCartComponent,
         },
@@ -200,9 +203,6 @@ const routes: Routes = [
         },
         PaymentDetailsFlex: {
           component: PaymentMethodComponent,
-        },
-        ProductConfigurationFormFlex: {
-          component: ProductConfigurationFormComponent,
         },
         FinalReviewFlex: {
           component: FinalReviewComponent,
@@ -258,11 +258,11 @@ const routes: Routes = [
     BindQuoteDialogComponent,
     FinalReviewComponent,
     ChooseCoverNavigationComponent,
-    ProductConfigurationFormComponent,
     PersonalDetailsNavigationComponent,
     OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
     MiniCartComponent,
+    ProductConfigurationFormComponent,
     ProductConfigurationMiniCartComponent,
     ProductConfigurationNavigationComponent,
   ],
