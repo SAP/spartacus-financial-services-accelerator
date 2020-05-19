@@ -4,7 +4,7 @@ export const defaultOccProductAssignmentConfig: FSOccConfig = {
   backend: {
     occ: {
       endpoints: {
-        loadProductAssignments:
+        productAssignments:
           '/users/${userId}/orgUnits/${orgUnitId}/fsProductAssignments',
         createProductAssignments:
           '/users/${userId}/orgUnits/${orgUnitId}/fsProductAssignments',

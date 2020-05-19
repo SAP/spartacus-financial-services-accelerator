@@ -11,7 +11,8 @@ const userId = 'userId';
 const cartId = 'cartId';
 const identificationType = 'video_identification';
 
-const usersEndpoint = 'userIdentification';
+const userIdentificationEndpoint = 'userIdentification';
+
 class MockOccEndpointsService {
   getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
     return this.getEndpoint(endpoint);
@@ -51,12 +52,15 @@ describe('OccCheckoutAdapter', () => {
         .setIdentificationType(identificationType, cartId, userId)
         .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === usersEndpoint && req.method === 'PATCH';
+        return req.url === userIdentificationEndpoint && req.method === 'PATCH';
       }, `PATCH method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(usersEndpoint, {
-        userId,
-        cartId,
-      });
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        userIdentificationEndpoint,
+        {
+          userId,
+          cartId,
+        }
+      );
     }));
   });
 });

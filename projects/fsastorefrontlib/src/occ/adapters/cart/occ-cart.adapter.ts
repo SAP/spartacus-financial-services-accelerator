@@ -31,7 +31,8 @@ export class OccCartAdapter implements CartAdapter {
     const params: HttpParams = new HttpParams()
       .set('productCode', productCode)
       .set('quantity', quantity.toString())
-      .set('entryNumber', entryNumber);
+      .set('entryNumber', entryNumber)
+      .set('fields', 'FULL');
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });
@@ -55,7 +56,7 @@ export class OccCartAdapter implements CartAdapter {
     const params: HttpParams = new HttpParams()
       .set('bundleTemplateId', bundleTemplateId)
       .set('productCode', productCode)
-      .set('quantity', quantity)
+      .set('quantity', quantity.toString())
       .set('fields', 'FULL');
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

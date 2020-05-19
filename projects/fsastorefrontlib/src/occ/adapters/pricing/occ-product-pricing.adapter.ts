@@ -21,7 +21,7 @@ export class OccProductPricingAdapter implements ProductPricingAdapter {
     const url = this.occEndpointService.getUrl('calculatePriceForProduct', {
       productCode,
     });
-    const params: HttpParams = new HttpParams().set('fields', 'FULL');
+    const params: HttpParams = new HttpParams().set('fields', 'DEFAULT');
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',

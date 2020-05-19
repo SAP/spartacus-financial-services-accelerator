@@ -51,7 +51,7 @@ export interface FSOccEndpoints extends OccEndpoints {
    * Get list of products which are assigned for B2B unit from organization manager.
    *
    */
-  loadProductAssignments?: string;
+  productAssignments?: string;
   /**
    * Creates product assignment for B2B unit.
    *

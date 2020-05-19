@@ -30,7 +30,7 @@ class MockOccEndpointsService {
   }
 }
 
-const loadProductAssignmentsEndpoint = 'loadProductAssignments';
+const loadProductAssignmentsEndpoint = 'productAssignments';
 const createProductAssignmentsEndpoint = 'createProductAssignments';
 const removeProductAssignmentsEndpoint = 'removeProductAssignments';
 const updateProductAssignmentsEndpoint = 'updateProductAssignments';

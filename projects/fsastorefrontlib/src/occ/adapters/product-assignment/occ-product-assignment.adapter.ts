@@ -21,7 +21,7 @@ export class OccProductAssignmentAdapter implements ProductAssignmentAdapter {
     currentPage?: number,
     sort?: string
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('loadProductAssignments', {
+    const url = this.occEndpointService.getUrl('productAssignments', {
       userId,
       orgUnitId,
     });
