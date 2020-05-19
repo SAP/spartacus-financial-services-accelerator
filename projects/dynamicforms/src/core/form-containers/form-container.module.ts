@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { I18nModule } from '@spartacus/core';
 import { ComponentsModule } from '../../components/components.module';
 import { OccFormAdapter } from '../../occ/adapters/form/occ-form.adapter';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
+import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { FormConnector } from '../connectors/form-connector';
 import { FormAdapter } from '../connectors/form.adapter';
 import { FormBuilderService } from '../services/builder/form-builder.service';
@@ -34,7 +34,7 @@ import { FormComponent } from './form/form.component';
     FormValidationService,
     FieldDependencyResolverService,
     FormDataStorageService,
-    OccMockFormService,
+    OccValueListService,
     FormConnector,
     FormDataService,
     {

@@ -5,7 +5,7 @@ import { FieldConfig } from '../../core/models/form-config.interface';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { DynamicFormsConfig } from '../../core';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
+import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
 
@@ -25,7 +25,7 @@ class MockLanguageService {
   }
 }
 
-class MockOccFormService {}
+class MockOccValueListService {}
 
 const mockField: FieldConfig = {
   fieldType: 'checkbox',
@@ -61,7 +61,7 @@ describe('CheckboxComponent', () => {
       declarations: [CheckboxComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
-        { provide: OccMockFormService, useClass: MockOccFormService },
+        { provide: OccValueListService, useClass: MockOccValueListService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,
