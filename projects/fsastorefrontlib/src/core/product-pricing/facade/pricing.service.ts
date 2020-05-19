@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Observable } from 'rxjs/internal/Observable';
 import {
   PriceAttributeGroup,
   PricingData,
@@ -8,16 +6,6 @@ import {
 
 @Injectable()
 export class PricingService {
-  pricingData = new BehaviorSubject<PricingData>({});
-
-  setPricingData(pricingData: PricingData) {
-    this.pricingData.next(pricingData);
-  }
-
-  getPricingData(): Observable<PricingData> {
-    return this.pricingData.asObservable();
-  }
-
   buildPricingData(formData: { [name: string]: Object }): PricingData {
     const pricingAttributesData: PricingData = {
       priceAttributeGroups: [],
