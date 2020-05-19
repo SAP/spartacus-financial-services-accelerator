@@ -52,8 +52,5 @@ export function checkPersonalDetailsPage() {
   cy.get('.progress-node').should('have.length', 6);
   cy.get('cx-fs-cms-custom-container').should('be.visible');
   cy.get('cx-fs-mini-cart').should('be.visible');
-  cy.get('.primary-button')
-    .should('contain', 'Continue')
-    .and('be.visible');
   cy.get('cx-footer-navigation').should('be.visible');
 }

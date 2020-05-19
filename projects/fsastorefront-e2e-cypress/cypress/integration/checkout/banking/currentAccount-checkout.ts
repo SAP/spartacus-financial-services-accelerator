@@ -41,7 +41,7 @@ context('Current Account Checkout', () => {
   });
 
   it('Should complete personal details step', () => {
-    //cy.get('h2').contains(' Your Current Account Insurance ');
+    cy.get('h2').contains(' Your Current Account Insurance ');
     banking.checkPersonalDetailsPage();
     currentAccount.populatePersonalDetails();
     currentAccount.checkMiniCartCurrentAccount();
