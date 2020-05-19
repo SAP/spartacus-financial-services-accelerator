@@ -72,7 +72,7 @@ export function checkMiniCartCurrentAccount() {
 }
 
 export function populatePersonalDetails() {
-  cy.get('[name="title"]').select('miss');
+  cy.get('[name="title"]').select('mr');
   cy.get('[name="firstName"]').type('Ben');
   cy.get('[name="lastName"]').type('Moore');
   cy.get('[name="dateOfBirth"]').type('1987-01-01');
