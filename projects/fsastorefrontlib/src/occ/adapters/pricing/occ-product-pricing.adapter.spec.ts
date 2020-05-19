@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpRequest } from '@angular/common/http';
 import {
   HttpClientTestingModule,
   HttpTestingController,
@@ -13,7 +13,7 @@ import {
 import { OccProductPricingAdapter } from './occ-product-pricing.adapter';
 
 const productCode = 'testCode';
-const pricingEndpoint = 'CalculatePriceForProduct';
+const pricingEndpoint = 'calculatePriceForProduct';
 
 const costOfTrip: PricingAttribute = {
   key: 'costOfTrip',
@@ -66,9 +66,9 @@ describe('OccProductPricingAdapter', () => {
   describe('getCalculatedProductData', () => {
     it('should return product data with price included in response', async(() => {
       adapter.getCalculatedProductData(productCode, pricingData).subscribe();
-      httpMock.expectOne(req => {
+      httpMock.expectOne((req: HttpRequest<any>) => {
         return req.url === pricingEndpoint && req.method === 'POST';
-      }, `GET method and url`);
+      }, `POST method and url`);
       expect(occEndpointService.getUrl).toHaveBeenCalledWith(pricingEndpoint, {
         productCode,
       });
