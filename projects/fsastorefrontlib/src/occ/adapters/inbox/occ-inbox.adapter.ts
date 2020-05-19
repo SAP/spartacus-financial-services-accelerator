@@ -53,8 +53,8 @@ export class OccInboxAdapter implements InboxAdapter {
       userId,
     });
     const params: HttpParams = new HttpParams()
-      .set('messageCodes', messagesUidList + '')
-      .set('readStatus', read + '')
+      .set('messageCodes', messagesUidList.toString())
+      .set('readStatus', read.toString())
       .set('fields', 'FULL');
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',

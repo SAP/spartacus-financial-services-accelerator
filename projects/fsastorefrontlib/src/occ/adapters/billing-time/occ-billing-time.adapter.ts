@@ -18,7 +18,7 @@ export class OccBillingTimeAdapter implements BillingTimeAdapter {
   getBillingTimes(productCodes: string[]): Observable<any> {
     const url = this.occEndpointService.getUrl('billingTime');
     const params: HttpParams = new HttpParams()
-      .set('productCodes', productCodes + '')
+      .set('productCodes', productCodes.toString())
       .set('fields', 'FULL');
 
     return this.http

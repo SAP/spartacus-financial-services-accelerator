@@ -1,7 +1,6 @@
 export * from './agent/index';
 export * from './billing-time/index';
 export * from './cart/index';
-export * from './billing-time/index';
 export * from './cart/index';
 export * from './checkout/index';
 export * from './cs-ticket/index';
