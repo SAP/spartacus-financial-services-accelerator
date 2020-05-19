@@ -7,8 +7,6 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 import { CartAdapter } from '../../../core/cart/connectors/cart.adapter';
 import { PricingData } from '../../occ-models/form-pricing.interface';
 
-const FULL_PARAMS = '&fields=FULL';
-
 @Injectable()
 export class OccCartAdapter implements CartAdapter {
   constructor(

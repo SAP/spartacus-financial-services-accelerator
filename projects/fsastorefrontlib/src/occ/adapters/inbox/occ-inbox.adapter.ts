@@ -7,8 +7,6 @@ import { OccEndpointsService } from '@spartacus/core';
 import { FSSearchConfig } from '../../../core/my-account/services/inbox-data.service';
 import { InboxAdapter } from '../../../core/my-account/connectors/inbox.adapter';
 
-const FULL_PARAMS = '&fields=FULL';
-
 @Injectable()
 export class OccInboxAdapter implements InboxAdapter {
   constructor(

@@ -6,8 +6,6 @@ import { catchError } from 'rxjs/internal/operators/catchError';
 import { OccEndpointsService } from '@spartacus/core';
 import { BillingTimeAdapter } from '../../../core/product-pricing/connectors/billing-time.adapter';
 
-const FULL_PARAMS = '&fields=FULL';
-
 @Injectable()
 export class OccBillingTimeAdapter implements BillingTimeAdapter {
   constructor(
