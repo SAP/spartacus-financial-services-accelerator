@@ -27,11 +27,11 @@ export class CheckboxComponent extends AbstractOptionsComponent {
       this.selectedOptions.push(selectedOption[0].name);
       const selectedControlName = `added_${this.selectedControlName}`;
       if (this.group.get(selectedControlName)) {
-        this.group.get(selectedControlName).patchValue([this.selectedOptions]);
+        this.group.get(selectedControlName).patchValue(this.selectedOptions);
       } else {
         this.group.addControl(
           selectedControlName,
-          this.fb.array([this.selectedOptions])
+          this.fb.control(this.selectedOptions)
         );
       }
     } else {
