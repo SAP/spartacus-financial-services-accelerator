@@ -171,6 +171,7 @@ describe('AddOptionsComponent', () => {
   });
 
   it('should go back', () => {
+    component.ngOnInit();
     component.back();
     expect(routingService.go).toHaveBeenCalled();
   });
