@@ -8,7 +8,7 @@ import {
   Output,
   ChangeDetectorRef,
 } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
 import { YFormData } from '@fsa/dynamicforms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -46,6 +46,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   }
 
   constructor(
+    protected fb: FormBuilder,
     protected changeDetectorRef: ChangeDetectorRef,
     protected formService: FormBuilderService,
     protected formDataService: FormDataService,
@@ -55,10 +56,19 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.config) {
       this.form = this.formService.createForm(this.config);
-      this.formDataService.selectedCheckBoxes.subscribe(data =>
-        console.log(data)
-      );
+      this.formDataService.selectedCheckBoxControls.subscribe(ctrl => {
+        if (ctrl) {
+          ctrl.forEach((val, i) => {
+            this.form.addControl(ctrl[i], this.fb.array([]));
+          });
+        }
+        console.log(this.form.value);
+        // this.formDataService.selectedCheckBoxes.subscribe(data => {
+        //   console.log(data);
+        // });
+      });
     }
+
     this.addSubmitEvent();
     if (this.formData) {
       this.subscription.add(
@@ -80,6 +90,14 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
       this.subscription.unsubscribe();
     }
   }
+
+  // createSubmittableCheckboxes() {
+  //   this.formDataService.selectedCheckBoxes.subscribe(data => {
+  //     return this.fb.array(data);
+  //   });
+  // }
+
+  appendSelectedItems() {}
 
   mapDataToFormControls(formData) {
     for (const groupCode of Object.keys(formData)) {
