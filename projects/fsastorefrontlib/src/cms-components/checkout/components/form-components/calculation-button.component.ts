@@ -4,7 +4,7 @@ import {
   DynamicFormsConfig,
   FormDataService,
   FormDataStorageService,
-  OccMockFormService,
+  OccValueListService,
   YFormData,
 } from '@fsa/dynamicforms';
 import { LanguageService } from '@spartacus/core';
@@ -23,7 +23,7 @@ export class CalculationButtonComponent extends AbstractFormComponent {
     protected currentProductService: CurrentProductService,
     protected formDataStorageService: FormDataStorageService,
     protected formDataService: FormDataService,
-    protected occcMockFormService: OccMockFormService,
+    protected occcMockFormService: OccValueListService,
     protected formConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
     protected changeDetectorRef: ChangeDetectorRef

@@ -7,7 +7,7 @@ import {
   FieldConfig,
   FormDataService,
   FormDataStorageService,
-  OccMockFormService,
+  OccValueListService,
 } from '@fsa/dynamicforms';
 import { LanguageService, Product } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
@@ -31,7 +31,7 @@ const mockField: FieldConfig = {
   },
 };
 
-class MockOccFormService {}
+class MockOccValueListService {}
 
 class MockLanguageService {
   getActive() {
@@ -76,7 +76,7 @@ describe('CalculationButtonComponent', () => {
       declarations: [CalculationButtonComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide: OccMockFormService, useClass: MockOccFormService },
+        { provide: OccValueListService, useClass: MockOccValueListService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,
