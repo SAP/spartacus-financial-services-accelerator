@@ -171,6 +171,11 @@ describe('AddOptionsComponent', () => {
   });
 
   it('should go back', () => {
+    mockEntries = [
+      {
+        product: product,
+      },
+    ];
     component.ngOnInit();
     component.back();
     expect(routingService.go).toHaveBeenCalled();
