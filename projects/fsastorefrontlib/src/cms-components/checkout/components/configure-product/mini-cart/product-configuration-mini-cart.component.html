@@ -4,8 +4,8 @@
     {{ 'fscommon.application.title' | cxTranslate }}
   </h2>
   <ng-container *ngIf="product$ | async as product">
-    <ng-container *ngIf="pricingData; else emptyConfigurationMiniCart">
-      <div class="short-overview-content">
+    <div class="short-overview-content">
+      <ng-container *ngIf="pricingData; else emptyConfigurationMiniCart">
         <div
           *ngFor="
             let priceAttribute of pricingData.priceAttributeGroups[0]
@@ -48,8 +48,8 @@
             }}
           </div>
         </div>
-      </div>
-    </ng-container>
+      </ng-container>
+    </div>
   </ng-container>
 </div>
 
