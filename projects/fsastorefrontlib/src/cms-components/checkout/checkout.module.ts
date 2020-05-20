@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DynamicFormModule } from '@fsa/dynamicforms';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -44,11 +43,8 @@ import { BindQuoteDialogComponent } from './components/bind-quote-dialog/bind-qu
 import { FSCheckoutProgressComponent } from './components/checkout-progress/checkout-progress.component';
 import { FSCheckoutProgressModule } from './components/checkout-progress/checkout-progress.module';
 import { ChooseCoverNavigationComponent } from './components/choose-cover-navigation/choose-cover-navigation.component';
-import { ProductConfigurationFormComponent } from './components/configure-product/form/product-configuration-form.component';
-import { ProductConfigurationMiniCartComponent } from './components/configure-product/mini-cart/product-configuration-mini-cart.component';
-import { ProductConfigurationNavigationComponent } from './components/configure-product/navigation/product-configuration-navigation.component';
+import { ProductConfigurationModule } from './components/configure-product/product-configuration.module';
 import { FinalReviewComponent } from './components/final-review/final-review.component';
-import { FormComponentsModule } from './components/form-components/form-component.module';
 import { LegalModule } from './components/legal/legal.module';
 import { MiniCartComponent } from './components/mini-cart/mini-cart.component';
 import { MiniCartModule } from './components/mini-cart/mini-cart.module';
@@ -67,15 +63,6 @@ const routes: Routes = [
     data: {
       cxRoute: 'generalInformation',
       pageLabel: 'generalInformationForm',
-    },
-    component: PageLayoutComponent,
-  },
-  {
-    path: null,
-    canActivate: [CmsPageGuard, CategoryStepGuard],
-    data: {
-      cxRoute: 'configureProduct',
-      pageLabel: 'productDetails',
     },
     component: PageLayoutComponent,
   },
@@ -164,8 +151,7 @@ const routes: Routes = [
     AddOptionsModule,
     MiniCartModule,
     NgbTooltipModule,
-    FormComponentsModule,
-    DynamicFormModule,
+    ProductConfigurationModule,
     CommonModule,
     PageComponentModule,
     MediaModule,
@@ -191,15 +177,6 @@ const routes: Routes = [
         },
         QuoteReviewFlex: {
           component: QuoteReviewComponent,
-        },
-        ProductConfigurationFormFlex: {
-          component: ProductConfigurationFormComponent,
-        },
-        ProductConfigurationMiniCartFlex: {
-          component: ProductConfigurationMiniCartComponent,
-        },
-        ProductConfigurationFormNavigationFlex: {
-          component: ProductConfigurationNavigationComponent,
         },
         PaymentDetailsFlex: {
           component: PaymentMethodComponent,
@@ -233,9 +210,6 @@ const routes: Routes = [
     PersonalDetailsNavigationComponent,
     OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
-    ProductConfigurationFormComponent,
-    ProductConfigurationMiniCartComponent,
-    ProductConfigurationNavigationComponent,
   ],
   exports: [
     I18nModule,
@@ -243,14 +217,10 @@ const routes: Routes = [
     UserIdentificationModule,
     PaymentMethodModule,
     PaymentFormModule,
-    FormComponentsModule,
     QuoteReviewComponent,
     BindQuoteDialogComponent,
     FinalReviewComponent,
     OrderConfirmationComponent,
-    ProductConfigurationFormComponent,
-    ProductConfigurationMiniCartComponent,
-    ProductConfigurationNavigationComponent,
   ],
   entryComponents: [
     AddOptionsComponent,
@@ -262,9 +232,6 @@ const routes: Routes = [
     OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
     MiniCartComponent,
-    ProductConfigurationFormComponent,
-    ProductConfigurationMiniCartComponent,
-    ProductConfigurationNavigationComponent,
   ],
   providers: [
     FSCartService,
