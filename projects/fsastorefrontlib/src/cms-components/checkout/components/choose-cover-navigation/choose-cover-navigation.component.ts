@@ -52,10 +52,10 @@ export class ChooseCoverNavigationComponent implements OnInit, OnDestroy {
         .pipe(
           map(data => {
             if (data && data.content) {
-              // this.routingService.go({
-              //   cxRoute: 'category',
-              //   params: { code: this.categoryCode },
-              // });
+              this.routingService.go({
+                cxRoute: 'category',
+                params: { code: this.categoryCode },
+              });
             }
           })
         )

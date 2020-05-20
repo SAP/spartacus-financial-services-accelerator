@@ -6,6 +6,9 @@ import { AbstractOptionsComponent } from '../abstract-options/abstract-options.c
   templateUrl: './checkbox.component.html',
 })
 export class CheckboxComponent extends AbstractOptionsComponent {
+  selectedControlName: string;
+  selectedOptions: string[] = [];
+
   ngOnInit() {
     super.ngOnInit();
     // this.formDataService.selectedCheckboxName.push(this.config.name);
@@ -16,24 +19,33 @@ export class CheckboxComponent extends AbstractOptionsComponent {
     );
     if (
       control.value === true &&
-      !this.formDataService.selectedOptions.includes(selectedOption[0].name)
+      !this.selectedOptions.includes(selectedOption[0].name)
     ) {
-      if (
-        !this.formDataService.selectedControlName.includes(this.config.name)
-      ) {
-        this.formDataService.selectedControlName.push(this.config.name);
+      if (this.selectedControlName !== this.config.name) {
+        this.selectedControlName = this.config.name;
       }
-      this.formDataService.selectedOptions.push(selectedOption[0].name);
+      this.selectedOptions.push(selectedOption[0].name);
+      const selectedControlName = `added_${this.selectedControlName}`;
+      if (this.group.get(selectedControlName)) {
+        this.group.get(selectedControlName).patchValue([this.selectedOptions]);
+      } else {
+        this.group.addControl(
+          selectedControlName,
+          this.fb.array([this.selectedOptions])
+        );
+      }
     } else {
-      this.formDataService.selectedOptions = this.formDataService.selectedOptions.filter(
+      this.selectedOptions = this.selectedOptions.filter(
         ctrl => ctrl !== selectedOption[0].name
       );
     }
-    this.formDataService.selectedCheckBoxControlsSource.next(
-      this.formDataService.selectedControlName
-    );
-    this.formDataService.selectedCheckBoxesSource.next(
-      this.formDataService.selectedOptions
-    );
+    console.log(this.group.value);
+    // console.log(this.selectedControlName, this.selectedOptions);
+    // this.formDataService.selectedCheckBoxControlsSource.next(
+    //   this.formDataService.selectedControlName
+    // );
+    // this.formDataService.selectedCheckBoxesSource.next(
+    //   this.formDataService.selectedOptions
+    // );
   }
 }
