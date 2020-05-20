@@ -33,6 +33,16 @@ export const policyDetailsAccordions = [
   ' What Does It Cost Me? ',
 ];
 
+export const agentListViewAccordions = [
+  ' Homeowners Insurance ',
+  ' Renters Insurance ',
+  ' Auto Insurance ',
+  ' Life Insurance ',
+  ' Travel Insurance ',
+  ' Event Insurance ',
+  ' Savings Insurance ',
+];
+
 export const Accordions = {
   accordions: [
     {
@@ -66,6 +76,10 @@ export const Accordions = {
     {
       category: 'policyDetails',
       accordionItems: this.policyDetailsAccordions,
+    },
+    {
+      category: 'agentListView',
+      accordionItems: this.agentListViewAccordions,
     },
   ],
 };

@@ -26,7 +26,7 @@
                 </div>
                 <div class="info-card-data">
                   <span class="label">{{
-                    'policy.policyId' | cxTranslate
+                    'policy.policyNo' | cxTranslate
                   }}</span
                   >:
                   <span class="value">{{ policy.contractNumber }}</span>
@@ -42,31 +42,14 @@
                   <ng-container
                     *ngIf="
                       (policy.insuredObjectList?.insuredObjects)[0]
-                        ?.insuredObjectItems.length > 0
-                    "
-                  >
-                    <div class="info-card-data">
-                      <span class="label">{{
-                        ((policy.insuredObjectList?.insuredObjects)[0]
-                          ?.insuredObjectItems)[0]?.label
-                      }}</span
-                      >:
-                      <span class="value">{{
-                        ((policy.insuredObjectList?.insuredObjects)[0]
-                          ?.insuredObjectItems)[0]?.value
-                      }}</span>
-                    </div>
-                  </ng-container>
-                  <ng-container
-                    *ngIf="
-                      (policy.insuredObjectList?.insuredObjects)[0]
                         ?.insuredObjectItems.length > 1
                     "
                   >
                     <div class="info-card-data">
                       <span class="label">{{
-                        ((policy.insuredObjectList?.insuredObjects)[0]
-                          ?.insuredObjectItems)[1]?.label
+                        'fscommon.' +
+                          ((policy.insuredObjectList?.insuredObjects)[0]
+                            ?.insuredObjectItems)[1]?.label | cxTranslate
                       }}</span
                       >:
                       <span class="value">{{
@@ -91,17 +74,6 @@
                 </div>
                 <div class="info-card-data">
                   <span class="label">{{
-                    'fscommon.paymentMethod' | cxTranslate
-                  }}</span
-                  >:
-                  <span class="value">{{
-                    (policy.paymentMethod !== undefined
-                      ? policy.paymentMethod?.paymentOption
-                      : 'n/a') | uppercase
-                  }}</span>
-                </div>
-                <div class="info-card-data">
-                  <span class="label">{{
                     'fscommon.duration' | cxTranslate
                   }}</span
                   >:
@@ -117,9 +89,8 @@
                     class="image-item"
                     [src]="
                       getBaseUrl() +
-                      policy.mainProduct.coverageProduct.images[0].url
+                      (policy.mainProduct?.coverageProduct?.images)[0]?.url
                     "
-                    alt=""
                   />
                 </span>
               </div>
@@ -136,7 +107,7 @@
               </a>
               <ng-container
                 *ngIf="
-                  !isPolicyCategoryAllowed(
+                  isPolicyCategoryAllowed(
                     policy.categoryData?.allowedFSRequestTypes
                   )
                 "

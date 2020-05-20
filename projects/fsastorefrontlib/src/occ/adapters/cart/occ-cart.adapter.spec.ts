@@ -4,7 +4,7 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OccConfig } from '@spartacus/core';
+import { OccEndpointsService } from '@spartacus/core';
 import { PricingData } from '../../occ-models';
 import { OccCartAdapter } from './occ-cart.adapter';
 
@@ -13,41 +13,36 @@ const cartId = 'cartId';
 const productCode = 'product123';
 const quantity = 1;
 const entryNumber = '1';
-
-const usersEndpoint = '/users';
-const cartsEndpoint = '/carts';
-
 const bundleTemplateId = 'bundleTemplate';
-
 const pricingData: PricingData = {};
-
-const MockOccModuleConfig: OccConfig = {
-  context: {
-    baseSite: [''],
-  },
-  backend: {
-    occ: {
-      baseUrl: '',
-      prefix: '',
-    },
-  },
-};
+const addToCartEndpoint = 'addToCart';
+const startBundleEndpoint = 'startBundle';
+class MockOccEndpointsService {
+  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+    return this.getEndpoint(endpoint);
+  }
+  getEndpoint(url: string) {
+    return url;
+  }
+}
 
 describe('OccCartAdapter', () => {
   let adapter: OccCartAdapter;
   let httpMock: HttpTestingController;
-
+  let occEndpointService: OccEndpointsService;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
         OccCartAdapter,
-        { provide: OccConfig, useValue: MockOccModuleConfig },
+        { provide: OccEndpointsService, useClass: MockOccEndpointsService },
       ],
     });
 
     adapter = TestBed.get(OccCartAdapter);
     httpMock = TestBed.get(HttpTestingController);
+    occEndpointService = TestBed.get(OccEndpointsService);
+    spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 
   afterEach(() => {
@@ -60,19 +55,15 @@ describe('OccCartAdapter', () => {
         .addToCart(userId, cartId, productCode, quantity, entryNumber)
         .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url ===
-            usersEndpoint +
-              `/${userId}` +
-              cartsEndpoint +
-              `/${cartId}` +
-              '/fs-add-to-cart' &&
-          req.params.append('productCode', productCode) &&
-          req.params.append('quantity', quantity.toString()) &&
-          req.params.append('entryNumber', entryNumber) &&
-          req.method === 'POST'
-        );
+        return req.url === addToCartEndpoint && req.method === 'POST';
       }, `POST method and url`);
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        addToCartEndpoint,
+        {
+          userId,
+          cartId,
+        }
+      );
     }));
   });
 
@@ -89,19 +80,15 @@ describe('OccCartAdapter', () => {
         )
         .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url ===
-            usersEndpoint +
-              `/${userId}` +
-              cartsEndpoint +
-              `/${cartId}` +
-              '/fs-start-bundle' &&
-          req.params.append('bundleTemplateId', bundleTemplateId) &&
-          req.params.append('productCode', productCode) &&
-          req.params.append('quantity', quantity.toString()) &&
-          req.method === 'POST'
-        );
+        return req.url === startBundleEndpoint && req.method === 'POST';
       }, `POST method and url`);
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        startBundleEndpoint,
+        {
+          userId,
+          cartId,
+        }
+      );
     }));
   });
 });
