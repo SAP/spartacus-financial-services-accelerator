@@ -35,7 +35,7 @@
               {{ entry.product.cartDisplayName }}:
             </div>
             <div class="short-overview-value col-5">
-              {{ entry.totalPrice.formattedValue }}
+              {{ entry.totalPrice.value | currency:entry.totalPrice.currencyIso}}
             </div>
           </div>
         </ng-container>
@@ -44,7 +44,7 @@
             {{ 'fscommon.totalPrice' | cxTranslate }}:
           </div>
           <div class="short-overview-value col-6">
-            {{ cart.totalPrice?.formattedValue }}
+            {{ cart.totalPrice?.value | currency:cart.totalPrice.currencyIso }}
           </div>
         </div>
       </div>

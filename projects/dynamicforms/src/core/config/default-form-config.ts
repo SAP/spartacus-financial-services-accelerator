@@ -11,6 +11,7 @@ import { DynamicFormsConfig } from './form-config';
 import { SeparatorComponent } from '../../components/separator/separator.component';
 import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
 import { DynamicSelectComponent } from '../../components/dynamic-select/dynamic-select.component';
+import { CurrencyComponent } from '../../components/currency/currency.component';
 
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
@@ -20,6 +21,9 @@ export const defaultFormConfig: DynamicFormsConfig = {
       },
       input: {
         component: InputComponent,
+      },
+      currency: {
+        component: CurrencyComponent,
       },
       select: {
         component: SelectComponent,

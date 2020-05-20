@@ -1,12 +1,6 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnDestroy,
-  ViewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { YFormData } from '@fsa/dynamicforms';
-import { RoutingService } from '@spartacus/core';
+import { CurrencyService, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { FormDefinition } from '../../models/form-config.interface';
 import { FormDataService } from '../../services/data/form-data.service';
@@ -18,12 +12,13 @@ import { FormDataStorageService } from './../../services/storage/form-data-stora
   templateUrl: './form.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FormComponent implements OnDestroy {
+export class FormComponent implements OnDestroy, OnInit {
   private subscription = new Subscription();
   constructor(
     protected routingService: RoutingService,
     protected formDataService: FormDataService,
-    protected formDataStorageService: FormDataStorageService
+    protected formDataStorageService: FormDataStorageService,
+    protected currencyService: CurrencyService
   ) {}
 
   @ViewChild(DynamicFormComponent, { static: false })
@@ -39,10 +34,16 @@ export class FormComponent implements OnDestroy {
   applicationId: string;
   @Input()
   formData: Observable<YFormData>;
+  currencyIso: string;
+
+  ngOnInit(): void {
+    this.currencyService.getActive().subscribe(curr => this.currencyIso = curr);
+  }
 
   submit(formData: YFormData) {
     if (this.form && this.form.valid) {
       this.formDataService.saveFormData({
+        currency: this.currencyIso,
         formDefinition: {
           formId: this.formId,
           applicationId: this.applicationId,

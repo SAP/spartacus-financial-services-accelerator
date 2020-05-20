@@ -124,6 +124,7 @@
                       <div class="col-12 item-label">
                         {{ item.product?.name }}
                       </div>
+                      {{ item.product?.price.oneTimeChargeEntries[0]?.price?.value | currency: cart.totalPrice?.currencyIso}}
                     </li>
                   </ng-container>
                 </ul>

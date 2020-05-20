@@ -17,6 +17,7 @@ import { SeparatorComponent } from './separator/separator.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { AbstractOptionsComponent } from './abstract-options/abstract-options.component';
 import { DynamicSelectComponent } from './dynamic-select/dynamic-select.component';
+import { CurrencyComponent } from './currency/currency.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, I18nModule],
@@ -28,6 +29,7 @@ import { DynamicSelectComponent } from './dynamic-select/dynamic-select.componen
     DatePickerComponent,
     ErrorNoticeComponent,
     InputComponent,
+    CurrencyComponent,
     RadioComponent,
     SelectComponent,
     TextAreaComponent,
@@ -43,6 +45,7 @@ import { DynamicSelectComponent } from './dynamic-select/dynamic-select.componen
     ButtonComponent,
     DatePickerComponent,
     InputComponent,
+    CurrencyComponent,
     RadioComponent,
     SelectComponent,
     TextAreaComponent,
@@ -60,6 +63,7 @@ import { DynamicSelectComponent } from './dynamic-select/dynamic-select.componen
     DatePickerComponent,
     ErrorNoticeComponent,
     InputComponent,
+    CurrencyComponent,
     RadioComponent,
     SelectComponent,
     TextAreaComponent,

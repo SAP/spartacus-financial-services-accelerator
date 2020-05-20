@@ -4,10 +4,7 @@ import { OccEndpointsService } from '@spartacus/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FormAdapter } from '../../../core/connectors/form.adapter';
-import {
-  YFormData,
-  YFormDefinition,
-} from '../../../core/models/form-occ.models';
+import { YFormData, YFormDefinition } from '../../../core/models/form-occ.models';
 
 const FULL_PARAMS = 'fields=FULL';
 
@@ -26,7 +23,9 @@ export class OccFormAdapter implements FormAdapter {
         '&definitionId=' +
         formData.formDefinition.formId +
         '&applicationId=' +
-        formData.formDefinition.applicationId,
+        formData.formDefinition.applicationId +
+        '&currency=' +
+        formData.currency,
     });
     if (formData.refId) {
       params = params.append('refId', formData.refId);

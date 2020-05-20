@@ -3,6 +3,7 @@ export interface YFormData {
   content?: string;
   type?: string;
   formDefinition?: YFormDefinition;
+  currency?: string;
   categoryCode?: string;
   refId?: string;
 }

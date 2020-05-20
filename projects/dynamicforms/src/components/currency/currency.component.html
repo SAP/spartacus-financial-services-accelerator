@@ -1,0 +1,35 @@
+<ng-container *ngIf="group">
+  <div
+    class="dynamic-field"
+    [formGroup]="group"
+    [hidden]="group.controls[config.name]?.disabled || config.hidden"
+  >
+    <div class="form-group">
+      <label class="col-form-label">
+        {{ label }}
+        <ng-container *ngIf="!config.required">
+          {{ 'forms.optional' | cxTranslate }}
+        </ng-container>
+      </label>
+      <div class="row form-group">
+        <div class="col-xs-6">
+          <input
+            class="form-control col-xs-6"
+            type="text"
+            [attr.placeholder]="config.placeholder"
+            [formControlName]="config.name"
+            [attr.name]="config.name"
+          />
+        </div>
+        <!--  {{ ( 0 | currency : currentCurrency : 'symbol-narrow' ) | slice:0:1 }}-->
+        <div class="col-xs-6">
+          {{this.currencySymbol}}
+        </div>
+      </div>
+    </div>
+    <cx-error-notice
+      [warn]="group.controls[config.name]"
+      [parentConfig]="config"
+    ></cx-error-notice>
+  </div>
+</ng-container>
