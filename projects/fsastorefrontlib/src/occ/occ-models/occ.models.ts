@@ -28,7 +28,7 @@ export interface FSProduct extends Product {
   price?: FSPrice;
   cartDispalyName?: string;
   defaultCategory?: Category;
-  bundleTemplates?: BundleTemplate;
+  bundleTemplates?: BundleTemplate[];
   configurable?: boolean;
 }
 
@@ -85,7 +85,6 @@ export enum BindingStateType {
 
 export enum ConfiguratorType {
   PRODUCT_CONFIGURE_FORM = 'PRODUCT_CONFIGURE_FORM',
-  PERSONAL_DETAILS_FORM = 'PERSONAL_DETAILS_FORM',
 }
 
 export enum RequestType {

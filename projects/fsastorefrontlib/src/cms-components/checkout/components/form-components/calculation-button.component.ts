@@ -10,9 +10,9 @@ import { LanguageService } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import { FSProduct } from './../../../../../../../dist/fsastorefrontlib/occ/occ-models/occ.models.d';
 import { OccMockFormService } from './../../../../../../dynamicforms/src/occ/services/occ-mock-form.service';
 import { PricingData } from './../../../../occ/occ-models/form-pricing.interface';
-import { FSProduct } from './../../../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-button',
@@ -44,10 +44,9 @@ export class CalculationButtonComponent extends AbstractFormComponent {
         .pipe(
           filter(Boolean),
           map(currentProduct => {
-            if (currentProduct) {
-              this.categoryCode = (<FSProduct>(
-                currentProduct
-              )).defaultCategory.code;
+            const product = <FSProduct>currentProduct;
+            if (product && product.defaultCategory) {
+              this.categoryCode = product.defaultCategory.code;
             }
           })
         )

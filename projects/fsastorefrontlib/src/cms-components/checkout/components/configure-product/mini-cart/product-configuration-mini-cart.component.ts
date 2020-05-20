@@ -36,7 +36,7 @@ export class ProductConfigurationMiniCartComponent
         this.product$
           .pipe(
             map(product => {
-              if (product) {
+              if (product && (<FSProduct>product).defaultCategory) {
                 this.productId = product.code;
                 this.categoryName = (<FSProduct>product).defaultCategory.name;
               }

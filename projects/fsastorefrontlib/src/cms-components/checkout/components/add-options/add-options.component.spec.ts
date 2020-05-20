@@ -3,10 +3,10 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import {
+  CurrencyService,
   I18nTestingModule,
   OrderEntry,
   RoutingService,
-  CurrencyService,
 } from '@spartacus/core';
 import { MediaModule, SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
@@ -20,6 +20,7 @@ const product: FSProduct = {
   defaultCategory: {
     code: 'insurances_auto',
   },
+  configurable: false,
 };
 
 let mockEntries: OrderEntry[] = [
