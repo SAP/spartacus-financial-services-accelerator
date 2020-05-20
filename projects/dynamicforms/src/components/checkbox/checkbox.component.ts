@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractOptionsComponent } from '../abstract-options/abstract-options.component';
+import { FormArray } from '@angular/forms';
 
 @Component({
   selector: 'cx-checkbox',
@@ -10,6 +11,7 @@ export class CheckboxComponent extends AbstractOptionsComponent {
   selectedOptions: string;
 
   checkCheckbox(optionName) {
+    let selectedControlName;
     const selectedOption = this.config.options.filter(
       option => option.name === optionName
     );
@@ -18,20 +20,30 @@ export class CheckboxComponent extends AbstractOptionsComponent {
       this.selectedOptions !== selectedOption[0].name
     ) {
       this.selectedOptions = selectedOption[0].name;
-      if (this.group.get(this.selectedOptions)) {
-        this.group.get(this.selectedOptions).setValue(false);
+      selectedControlName = `added_${this.config.name}`;
+      if (this.group.get(selectedControlName)) {
+        this.addedControls(selectedControlName).push(
+          this.fb.control(this.selectedOptions)
+        );
       } else {
         this.group.addControl(
-          this.selectedOptions,
-          this.fb.control(this.selectedOptions, this.fb.control(''))
+          selectedControlName,
+          this.fb.array([this.selectedOptions])
         );
-        this.group.get(this.selectedOptions).setValue(true);
       }
     } else {
-      if (this.group.get(this.selectedOptions)) {
-        this.group.get(this.selectedOptions).setValue(false);
+      if (this.group.get(`added_${this.config.name}`)) {
+        this.addedControls(`added_${this.config.name}`).removeAt(
+          this.group
+            .get(`added_${this.config.name}`)
+            .value.findIndex(elem => elem === this.selectedOptions)
+        );
+        this.selectedOptions = null;
       }
     }
     console.log(this.group.value);
+  }
+  addedControls(addedControl): FormArray {
+    return this.group.get(addedControl) as FormArray;
   }
 }
