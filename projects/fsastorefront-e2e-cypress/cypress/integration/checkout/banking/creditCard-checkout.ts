@@ -1,15 +1,14 @@
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
 import * as productCategory from '../../../helpers/productCategoryPage';
-import * as comparisonPage from '../../../helpers/comparisonTable';
 import * as creditCard from '../../../helpers/checkout/banking/creditCard';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import * as legalInformationPage from '../../../helpers/checkout/banking/legalInformationPage';
-import * as userIdentificationPage from '../../../helpers/checkout/banking/userIdentificationPage';
+import * as userIdentification from '../../../helpers/checkout/banking/userIdentificationPage';
 import {
   checkInboxComponets,
   checkPendingMessage,
 } from '../../../helpers/my-account/inbox';
+import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
 
 context('Credit Card Checkout', () => {
   before(() => {
@@ -31,8 +30,8 @@ context('Credit Card Checkout', () => {
   });
 
   it('Should check comparison page', () => {
-    cy.get('.heading-headline').contains('Your Credit Card Insurance');
-    comparisonPage.checkBankingComparisonPage();
+    banking.checkBankingComparisonPage('Your Credit Card Insurance');
+    banking.checkBankingProgressBar();
   });
 
   it('Should check prices in comparison table and select Premium Card', () => {
@@ -41,7 +40,7 @@ context('Credit Card Checkout', () => {
   });
 
   it('Should check optional products for Credit Card', () => {
-    cy.get('.progress-node').should('have.length', 5);
+    cy.get('.progress-node').should('have.length', 6);
     creditCard.checkOptionalProducts();
   });
 
@@ -50,8 +49,15 @@ context('Credit Card Checkout', () => {
     checkout.clickContinueButton();
   });
 
+  it('Should populate Personal Details page', () => {
+    cy.get('h2').contains('Your Credit Card Insurance');
+    banking.checkPersonalDetailsPage();
+    creditCard.populatePersonalDetails();
+    checkout.clickContinueButton();
+  });
+
   it('Should check Quote Review page', () => {
-    cy.get('.progress-inner-wrapper').should('have.length', 5);
+    banking.checkBankingProgressBar();
     checkout.checkAccordions('creditCard');
   });
 
@@ -60,21 +66,15 @@ context('Credit Card Checkout', () => {
   });
 
   it('Should check Legal Information page', () => {
-    cy.get('.heading-headline').contains('Your Credit Card Insurance');
-    legalInformationPage.checkLegalInformationPage();
-  });
-
-  it('Should click Next in checkout', () => {
+    banking.checkLegalInformationPage('Your Credit Card Insurance');
     checkout.clickContinueButton();
   });
 
-  it('Should check User Identification page', () => {
-    cy.get('.heading-headline').contains('Your Credit Card Insurance');
-    userIdentificationPage.checkUserIdentificationPage();
-  });
-
-  it('Should select At the Nearest Branch for user identification', () => {
-    userIdentificationPage.selectAtTheNearestBranch();
+  it('Should complete User Identification page', () => {
+    userIdentification.checkUserIdentificationPage(
+      'Your Credit Card Insurance'
+    );
+    userIdentification.selectUserIdentification('At the Nearest Branch');
     checkout.clickContinueButton();
   });
 

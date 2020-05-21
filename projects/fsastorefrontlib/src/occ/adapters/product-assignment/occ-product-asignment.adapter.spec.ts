@@ -1,21 +1,16 @@
-import { HttpClientModule } from '@angular/common/http';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientModule, HttpRequest } from '@angular/common/http';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { Type } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
-import { OccConfig } from '@spartacus/core';
+import { OccEndpointsService } from '@spartacus/core';
 import { OccProductAssignmentAdapter } from './occ-product-assignment.adapter';
 
-const MockOccModuleConfig: OccConfig = {
-  context: {
-    baseSite: [''],
-  },
-  backend: {
-    occ: {
-      baseUrl: '',
-      prefix: '',
-    },
-  },
-};
+const fsProductAssignmentCode = 'TestCode';
+let userId;
+let orgUnitId;
 
 const payload = {
   userId: 'TestID',
@@ -26,23 +21,47 @@ const payload = {
   currentPage: 1,
   sort: 'asc',
 };
+class MockOccEndpointsService {
+  getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
+    return this.getEndpoint(endpoint);
+  }
+  getEndpoint(url: string) {
+    return url;
+  }
+}
+
+const loadProductAssignmentsEndpoint = 'productAssignments';
+const createProductAssignmentsEndpoint = 'createProductAssignments';
+const removeProductAssignmentsEndpoint = 'removeProductAssignments';
+const updateProductAssignmentsEndpoint = 'updateProductAssignments';
 
 describe('OccProductAssignmentAdapter', () => {
   let productAssignmentAdapter: OccProductAssignmentAdapter;
-
+  let httpMock: HttpTestingController;
+  let occEndpointService: OccEndpointsService;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientModule, HttpClientTestingModule],
       providers: [
         OccProductAssignmentAdapter,
-        { provide: OccConfig, useValue: MockOccModuleConfig },
+        { provide: OccEndpointsService, useClass: MockOccEndpointsService },
       ],
     });
     productAssignmentAdapter = TestBed.get(OccProductAssignmentAdapter as Type<
       OccProductAssignmentAdapter
     >);
+    userId = 'TestID';
+    orgUnitId = 'AcmeCorp';
     productAssignmentAdapter = TestBed.get(OccProductAssignmentAdapter);
+    httpMock = TestBed.get(HttpTestingController);
+    occEndpointService = TestBed.get(OccEndpointsService);
+    spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
+
+  afterEach(() => {
+    httpMock.verify();
+  });
+
   describe('Load Product Assignments For Unit', () => {
     it('should load ', async(() => {
       productAssignmentAdapter
@@ -54,9 +73,22 @@ describe('OccProductAssignmentAdapter', () => {
           payload.currentPage,
           payload.sort
         )
-        .subscribe(res => {});
+        .subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url === loadProductAssignmentsEndpoint && req.method === 'GET'
+        );
+      }, `GET method and url`);
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        loadProductAssignmentsEndpoint,
+        {
+          userId,
+          orgUnitId,
+        }
+      );
     }));
   });
+
   describe('Create Product Assignment', () => {
     it('should create product assignments', async(() => {
       productAssignmentAdapter
@@ -65,7 +97,19 @@ describe('OccProductAssignmentAdapter', () => {
           payload.orgUnitId,
           payload.productCode
         )
-        .subscribe(res => {});
+        .subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url === createProductAssignmentsEndpoint && req.method === 'POST'
+        );
+      }, `GET method and url`);
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        createProductAssignmentsEndpoint,
+        {
+          userId,
+          orgUnitId,
+        }
+      );
     }));
   });
   describe('Remove Product Assignment', () => {
@@ -76,7 +120,21 @@ describe('OccProductAssignmentAdapter', () => {
           payload.orgUnitId,
           payload.productCode
         )
-        .subscribe(res => {});
+        .subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url === removeProductAssignmentsEndpoint &&
+          req.method === 'DELETE'
+        );
+      }, `GET method and url`);
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        removeProductAssignmentsEndpoint,
+        {
+          userId,
+          orgUnitId,
+          fsProductAssignmentCode,
+        }
+      );
     }));
   });
   describe('Change Active Status', () => {
@@ -88,11 +146,27 @@ describe('OccProductAssignmentAdapter', () => {
           payload.productCode,
           payload.active
         )
-        .subscribe(res => {});
+        .subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url === updateProductAssignmentsEndpoint && req.method === 'PATCH'
+        );
+      }, `GET method and url`);
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        updateProductAssignmentsEndpoint,
+        {
+          userId,
+          orgUnitId,
+          fsProductAssignmentCode,
+        }
+      );
     }));
   });
+
   describe('Fails to Load Product Assignments For Unit', () => {
     it('should not load payload', async(() => {
+      userId = undefined;
+      orgUnitId = undefined;
       productAssignmentAdapter
         .loadProductAssignmentsForUnit(
           undefined,
@@ -101,7 +175,19 @@ describe('OccProductAssignmentAdapter', () => {
           undefined,
           undefined
         )
-        .subscribe(res => {});
+        .subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url === loadProductAssignmentsEndpoint && req.method === 'GET'
+        );
+      }, `GET method and url`);
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        loadProductAssignmentsEndpoint,
+        {
+          userId,
+          orgUnitId,
+        }
+      );
     }));
   });
 });

@@ -1,5 +1,6 @@
-export function checkUserIdentificationPage() {
-  cy.get('.progress-inner-wrapper').should('have.length', 5);
+export function checkUserIdentificationPage(product) {
+  cy.get('.heading-headline').contains(product);
+  cy.get('.progress-inner-wrapper').should('have.length', 6);
   cy.get('.section-header-heading').should('have.text', 'User Identification');
   cy.get('cx-fs-select-identification > .d-flex')
     .should('be.visible')
@@ -16,24 +17,12 @@ export function checkUserIdentificationPage() {
     });
 }
 
-export function selectAtTheNearestBranch() {
+export function selectUserIdentification(identification) {
   cy.get('cx-fs-select-identification > .d-flex')
     .should('be.visible')
     .within(() => {
       cy.get('.position-relative')
-        .eq(0)
-        .contains('At the Nearest Branch')
-        .click();
-    });
-}
-
-export function selectVideoIdentification() {
-  cy.get('cx-fs-select-identification > .d-flex')
-    .should('be.visible')
-    .within(() => {
-      cy.get('.position-relative')
-        .eq(2)
-        .contains('Video Identification')
+        .contains(identification)
         .click();
     });
 }
