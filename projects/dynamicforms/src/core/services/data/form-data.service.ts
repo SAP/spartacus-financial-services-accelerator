@@ -11,14 +11,6 @@ import { StateWithForm } from '../../store/state';
 export class FormDataService {
   submittedForm = new BehaviorSubject<YFormData>(null);
 
-  selectedCheckBoxControlsSource = new BehaviorSubject<any>(null);
-  selectedCheckBoxControls = this.selectedCheckBoxControlsSource.asObservable();
-  selectedCheckBoxesSource = new BehaviorSubject<any>(null);
-  selectedCheckBoxes = this.selectedCheckBoxesSource.asObservable();
-
-  selectedOptions: string[] = [];
-  selectedControlName: string[] = [];
-
   constructor(protected store: Store<StateWithForm>) {}
 
   submit(form: YFormData) {

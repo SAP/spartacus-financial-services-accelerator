@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { LanguageService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -7,7 +8,6 @@ import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { FormDataService } from '../../core/services/data/form-data.service';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 import { FormService } from './../../core/services/form/form.service';
-import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'cx-dynamic-select',

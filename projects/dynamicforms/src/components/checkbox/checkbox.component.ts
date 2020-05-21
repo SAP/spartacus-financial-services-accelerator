@@ -10,36 +10,15 @@ export class CheckboxComponent extends AbstractOptionsComponent {
   selectedControlName: string;
   selectedOptions: string;
 
-  checkCheckbox(optionName) {
-    let selectedControlName;
-    const selectedOption = this.config.options.filter(
-      option => option.name === optionName
-    );
-    if (
-      this.group.controls[this.config.name].value === true &&
-      this.selectedOptions !== selectedOption[0].name
-    ) {
-      this.selectedOptions = selectedOption[0].name;
-      selectedControlName = `added_${this.config.name}`;
-      if (this.group.get(selectedControlName)) {
-        this.addedControls(selectedControlName).push(
-          this.fb.control(this.selectedOptions)
-        );
-      } else {
-        this.group.addControl(
-          selectedControlName,
-          this.fb.array([this.selectedOptions])
-        );
-      }
+  checkCheckbox(event, optionName) {
+    if (event.target.checked) {
+      this.addedControls(this.config.name).push(this.fb.control(optionName));
     } else {
-      if (this.group.get(`added_${this.config.name}`)) {
-        this.addedControls(`added_${this.config.name}`).removeAt(
-          this.group
-            .get(`added_${this.config.name}`)
-            .value.findIndex(elem => elem === this.selectedOptions)
-        );
-        this.selectedOptions = null;
-      }
+      this.addedControls(this.config.name).removeAt(
+        this.group
+          .get(this.config.name)
+          .value.findIndex(elem => elem === this.selectedOptions)
+      );
     }
     console.log(this.group.value);
   }

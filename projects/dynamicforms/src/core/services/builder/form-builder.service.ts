@@ -45,10 +45,14 @@ export class FormBuilderService {
   }
 
   createControl(fieldConfig: FieldConfig) {
-    const { disabled, value } = fieldConfig;
+    const { disabled, value, fieldType } = fieldConfig;
     const validations = this.formValidationService.getValidatorsForField(
       fieldConfig
     );
-    return this.fb.control({ disabled, value }, validations);
+    if (fieldType !== 'checkbox') {
+      return this.fb.control({ disabled, value }, validations);
+    } else {
+      return this.fb.array([], validations);
+    }
   }
 }
