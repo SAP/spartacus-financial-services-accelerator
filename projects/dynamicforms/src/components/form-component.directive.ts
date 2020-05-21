@@ -35,6 +35,7 @@ export class FormComponentDirective implements OnInit {
     )) {
       this.components[name] = obj.component;
     }
+    console.log(this.components[this.config.fieldType]);
     if (!this.components[this.config.fieldType]) {
       const supportedTypes = Object.keys(this.components).join(', ');
       console.log(supportedTypes);
