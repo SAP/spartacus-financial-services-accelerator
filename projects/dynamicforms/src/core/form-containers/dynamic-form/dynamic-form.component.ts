@@ -8,7 +8,7 @@ import {
   Output,
   ChangeDetectorRef,
 } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, FormArray } from '@angular/forms';
 import { YFormData } from '@fsa/dynamicforms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -46,6 +46,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   }
 
   constructor(
+    protected fb: FormBuilder,
     protected changeDetectorRef: ChangeDetectorRef,
     protected formService: FormBuilderService,
     protected formDataService: FormDataService,
@@ -79,8 +80,6 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  appendSelectedItems() {}
-
   mapDataToFormControls(formData) {
     for (const groupCode of Object.keys(formData)) {
       if (GeneralHelpers.getObjectDepth(formData) === 1) {
@@ -88,10 +87,20 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
       } else {
         for (const controlName of Object.keys(formData[groupCode])) {
           const formGroup = this.form.get(groupCode);
-          if (formGroup && formGroup.get(controlName)) {
+          if (
+            formGroup &&
+            formGroup.get(controlName) &&
+            !formGroup.get(controlName).value // if it doesn't have a value it's a form control, else it' formArray
+          ) {
             formGroup
               .get(controlName)
               .setValue(formData[groupCode][controlName]);
+          } else {
+            const controlArray = formGroup.get(controlName) as FormArray;
+            const controlValues: [] = formData[groupCode][controlName];
+            controlValues.forEach(element => {
+              controlArray.push(this.fb.control(element));
+            });
           }
         }
       }

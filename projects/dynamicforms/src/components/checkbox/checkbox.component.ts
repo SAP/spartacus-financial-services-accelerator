@@ -10,8 +10,14 @@ export class CheckboxComponent extends AbstractOptionsComponent {
   selectedControlName: string;
   selectedOptions: string;
 
+  // ngOnInit() {
+  //   super.ngOnInit();
+  //   console.log(this.group.value);
+  // }
+
   checkCheckbox(event, optionName) {
-    if (event.target.checked) {
+    const checkBoxArray = this.addedControls(this.config.name);
+    if (event.target.checked && !checkBoxArray.value.includes(optionName)) {
       this.addedControls(this.config.name).push(this.fb.control(optionName));
     } else {
       this.addedControls(this.config.name).removeAt(
