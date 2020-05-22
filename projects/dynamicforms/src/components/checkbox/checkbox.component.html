@@ -21,7 +21,7 @@
           [attr.name]="config.name"
           [attr.id]="config.name + option.name"
           [formControlName]="[i]"
-          (change)="checkCheckbox($event, option.name, i)"
+          (change)="checkCheckbox($event, option.name)"
         />
         <label class="pl-3 pt-1" [attr.for]="config.name + option.name"
           ><ng-container *ngIf="activeLang$ | async as activeLang">
