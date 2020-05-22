@@ -63,6 +63,7 @@ export const fscommon = {
     yearsPerformanse: 'Jahresperformance',
     riskAndReturningRate: 'Risiko & Rendite Rating',
     chooseCover: 'Wählen Sie ihren Versicherungsschutz',
+    configureProduct: 'Produkt konfigurieren',
     whatsIncluded: 'Was\ist beinhaltet', // prettier-ignore
     addedByYou: 'Hinzugefügt',
     investementDetails: 'Investment Informationen',
@@ -88,7 +89,7 @@ export const fscommon = {
     lifeMainDob: '[DE] Date of Birth',
     contribution: 'Jährliche Beitragserhöhung',
     application: {
-      application: '[DE] Application',
+      title: 'Antrag',
       applicationRequestSubmitted:
         'Ihr Antrag wurde erfolgreich in unserem System gespeichert. Eine E-Mail mit weiteren Informationen wurde an Ihre E-Mail Adresse gesendet.',
       applicationNumber: 'Antragsnummer ist',

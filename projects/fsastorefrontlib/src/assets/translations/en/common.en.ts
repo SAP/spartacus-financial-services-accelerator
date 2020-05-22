@@ -66,6 +66,7 @@ export const fscommon = {
     yearsPerformanse: 'Years Performance',
     riskAndReturningRate: 'Risk & Returning Rating',
     chooseCover: 'Choose a Cover',
+    configureProduct: 'Configure a Product',
     whatsIncluded: 'What\'s Included', // prettier-ignore
     addedByYou: 'Added by you',
     investementDetails: 'Investments Details',
@@ -91,7 +92,7 @@ export const fscommon = {
     lifeMainDob: 'Date of Birth',
     contribution: 'Contribution',
     application: {
-      application: 'Application',
+      title: 'Application',
       applicationRequestSubmitted:
         'Your application has been successfully saved in our system. An e-mail has been sent to your e-mail address.',
       applicationNumber: 'Application number is',
