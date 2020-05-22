@@ -8,9 +8,9 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { DynamicFormsConfig } from '../core/config/form-config';
 import { FieldConfig } from '../core/models/form-config.interface';
 import { AbstractFormComponent } from './abstract-form/abstract-form.component';
-import { DynamicFormsConfig } from '../core/config/form-config';
 
 @Directive({
   selector: '[cxFormComponent]',
@@ -38,7 +38,6 @@ export class FormComponentDirective implements OnInit {
     console.log(this.components[this.config.fieldType]);
     if (!this.components[this.config.fieldType]) {
       const supportedTypes = Object.keys(this.components).join(', ');
-      console.log(supportedTypes);
       throw new Error(
         `Trying to use an unsupported type (${this.config.fieldType}).
         Supported types: ${supportedTypes}`

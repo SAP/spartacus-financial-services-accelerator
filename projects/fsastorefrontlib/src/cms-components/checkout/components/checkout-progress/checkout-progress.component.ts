@@ -9,9 +9,10 @@ import { RoutingConfigService, RoutingService } from '@spartacus/core';
 import {
   CheckoutConfig,
   CheckoutProgressComponent,
+  CurrentProductService,
 } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSProduct } from './../../../../occ/occ-models/occ.models';
@@ -30,7 +31,8 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
     protected routingConfigService: RoutingConfigService,
     protected activatedRoute: ActivatedRoute,
     protected categoryService: CategoryService,
-    protected cartService: FSCartService
+    protected cartService: FSCartService,
+    protected productService: CurrentProductService
   ) {
     super(config, routingService, routingConfigService);
   }
@@ -51,10 +53,26 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
           map(params => {
             const categoryCode = 'categoryCode';
             const formCode = 'formCode';
+            const productCode = 'productCode';
             if (params[categoryCode]) {
               this.categoryService.setActiveCategory(params[categoryCode]);
             } else if (params[formCode]) {
               this.categoryService.setActiveCategory(params[formCode]);
+            } else if (params[productCode]) {
+              this.subscription.add(
+                this.productService
+                  .getProduct()
+                  .pipe(
+                    filter(Boolean),
+                    map(currentProduct => {
+                      const fsProduct = <FSProduct>currentProduct;
+                      this.categoryService.setActiveCategory(
+                        fsProduct.defaultCategory.code
+                      );
+                    })
+                  )
+                  .subscribe()
+              );
             } else {
               this.subscription.add(
                 this.cartService.getActive().subscribe(cart => {

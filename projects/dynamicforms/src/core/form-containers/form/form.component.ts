@@ -41,7 +41,7 @@ export class FormComponent implements OnDestroy {
   formData: Observable<YFormData>;
 
   submit(formData: YFormData) {
-    if (this.form && this.form.valid) {
+    if (this.form && this.form.valid && formData.content) {
       this.formDataService.saveFormData({
         formDefinition: {
           formId: this.formId,

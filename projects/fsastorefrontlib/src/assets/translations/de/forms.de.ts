@@ -45,6 +45,8 @@ export const forms = {
       savings_personal_details: 'Persönliche Angaben',
       loan_creditCart_personalDetails: 'Persönliche Angaben',
       ftd_currentAcc_personal_details: 'Persönliche Angaben',
+      fixed_term_deposit_details_form: 'Produkt konfigurieren',
+      loan_details_form: 'Produkt konfigurieren',
     },
   },
 };
