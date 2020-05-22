@@ -9,15 +9,28 @@ import { FormArray } from '@angular/forms';
 export class CheckboxComponent extends AbstractOptionsComponent {
   selectedControlName: string;
   selectedOptions: string;
+  checkBoxArray: FormArray;
 
-  // ngOnInit() {
-  //   super.ngOnInit();
-  //   console.log(this.group.value);
-  // }
+  ngOnInit() {
+    super.ngOnInit();
+    this.checkBoxArray = this.addedControls(this.config.name);
+    this.config.options.forEach(() => {
+      this.addedControls(this.config.name).push(this.fb.control(''));
+    });
+    console.log(this.group.value);
+  }
 
-  checkCheckbox(event, optionName) {
-    const checkBoxArray = this.addedControls(this.config.name);
-    if (event.target.checked && !checkBoxArray.value.includes(optionName)) {
+  checkCheckbox(event, optionName, i) {
+    if (
+      event.target.checked &&
+      !this.checkBoxArray.value.includes(optionName)
+    ) {
+      if (this.checkBoxArray.value.includes('')) {
+        this.addedControls(this.config.name).controls.splice(
+          0,
+          this.addedControls(this.config.name).controls.length
+        );
+      }
       this.addedControls(this.config.name).push(this.fb.control(optionName));
     } else {
       this.addedControls(this.config.name).removeAt(
