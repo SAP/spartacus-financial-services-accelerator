@@ -33,7 +33,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
   activeLang$ = this.languageService.getActive();
 
   ngOnInit() {
-    console.log(this.group);
+    // console.log(this.group);
     this.hostComponentClass =
       this.config && this.config.gridClass ? this.config.gridClass : 'col-12';
     if (this.config && this.config.cssClass) {
@@ -53,9 +53,9 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-  
+
     if (this.config.prefillValue) {
-      console.log('babaaa');
+      // console.log('babaaa');
       const prefilResolver = this.injector.get<PrefilResolver>(
         this.formConfig.dynamicForms.prefil[
           this.config.prefillValue.targetObject
@@ -71,8 +71,8 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
           })
           .unsubscribe();
       }
+    }
   }
-}
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Injector } from '@angular/core';
 import {
   AbstractFormComponent,
   DynamicFormsConfig,
@@ -11,8 +11,8 @@ import { LanguageService } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
 import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { PricingData } from './../../../../occ/occ-models/form-pricing.interface';
-import { FSProduct } from './../../../../occ/occ-models/occ.models';
+import { FSProduct } from '../../../occ/occ-models/occ.models';
+import { PricingData } from '../../../occ/occ-models/form-pricing.interface';
 
 @Component({
   selector: 'cx-fs-button',
@@ -26,9 +26,16 @@ export class CalculationButtonComponent extends AbstractFormComponent {
     protected occcMockFormService: OccValueListService,
     protected formConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
-    protected changeDetectorRef: ChangeDetectorRef
+    protected changeDetectorRef: ChangeDetectorRef,
+    protected injector: Injector
   ) {
-    super(occcMockFormService, formConfig, languageService, changeDetectorRef);
+    super(
+      occcMockFormService,
+      formConfig,
+      languageService,
+      changeDetectorRef,
+      injector
+    );
   }
 
   subscription = new Subscription();

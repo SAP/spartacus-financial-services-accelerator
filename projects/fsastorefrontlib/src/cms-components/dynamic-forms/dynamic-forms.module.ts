@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DynamicFormModule, DynamicFormsConfig } from '@fsa/dynamicforms';
 import { ConfigModule, I18nModule } from '@spartacus/core';
-import { CalculationButtonComponent } from './calculation-button.component';
+import { CalculationButtonComponent } from './form-components/calculation-button.component';
+import { CartPrefilResolver } from './resolver/cart-prefil-resolver';
 
 @NgModule({
   imports: [
@@ -18,6 +19,11 @@ import { CalculationButtonComponent } from './calculation-button.component';
             component: CalculationButtonComponent,
           },
         },
+        prefil: {
+          cart: {
+            prefilResolver: CartPrefilResolver,
+          },
+        },
       },
     }),
   ],
@@ -25,4 +31,4 @@ import { CalculationButtonComponent } from './calculation-button.component';
   entryComponents: [CalculationButtonComponent],
   exports: [CalculationButtonComponent],
 })
-export class FormComponentsModule {}
+export class FSDynamicformsModule {}

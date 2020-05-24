@@ -12,7 +12,6 @@ import { SeparatorComponent } from '../../components/separator/separator.compone
 import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
 import { DynamicSelectComponent } from '../../components/dynamic-select/dynamic-select.component';
 import { UserPrefilResolver } from '../resolver/user-prefil-resolver';
-import { CartPrefilResolver } from '../resolver/cart-prefil-resolver';
 
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
@@ -95,9 +94,6 @@ export const defaultFormConfig: DynamicFormsConfig = {
     prefil: {
       user: {
         prefilResolver: UserPrefilResolver,
-      },
-      cart: {
-        prefilResolver: CartPrefilResolver,
       },
     },
   },

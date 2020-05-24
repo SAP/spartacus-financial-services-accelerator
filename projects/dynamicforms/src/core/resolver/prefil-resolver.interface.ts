@@ -1,3 +1,3 @@
 export interface PrefilResolver {
-    getFieldValue(fieldPath: string);
-  }
+  getFieldValue(fieldPath: string);
+}

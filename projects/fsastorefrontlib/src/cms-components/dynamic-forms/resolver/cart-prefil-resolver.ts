@@ -1,7 +1,7 @@
 import { ActiveCartService } from '@spartacus/core';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { PrefilResolver } from './prefil-resolver.interface';
+import { PrefilResolver } from '@fsa/dynamicforms';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +15,7 @@ export class CartPrefilResolver implements PrefilResolver {
     let currentValue;
     return this.cartService.getActive().pipe(
       map(cart => {
+        console.log(cart);
         const preparedCart = this.serializeQuoteDetails(cart);
         currentValue = preparedCart;
         attributes.forEach(attribute => {
