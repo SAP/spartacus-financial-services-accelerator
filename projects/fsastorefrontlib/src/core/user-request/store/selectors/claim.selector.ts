@@ -19,8 +19,3 @@ export const getClaimContent: MemoizedSelector<
   getClaimState,
   fromUserRequest.getClaimContent
 );
-
-export const getLoaded: MemoizedSelector<StateWithClaim, any> = createSelector(
-  getClaimState,
-  (state: ClaimState) => state.loaded
-);

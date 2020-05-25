@@ -27,12 +27,6 @@ export class UserRequestService {
   }
 
   getClaim(): Observable<any> {
-    return this.store.select(fromSelector.getLoaded).pipe(
-      filter(loaded => loaded),
-      take(1),
-      switchMap(_ => {
-        return this.store.select(fromSelector.getClaimContent);
-      })
-    );
+    return this.store.select(fromSelector.getClaimContent);
   }
 }

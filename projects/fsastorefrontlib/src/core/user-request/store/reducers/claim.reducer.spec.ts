@@ -20,7 +20,6 @@ describe('Claim Reducer', () => {
       const action = new fromAction.SubmitUserRequestSuccess(mockedUserRequest);
       const state = fromReducer.reducer(initialState, action);
       expect(state.content).toEqual(mockedUserRequest);
-      expect(state.loaded).toEqual(true);
     });
   });
   describe('UPDATE_USER_REQUEST', () => {
@@ -28,7 +27,6 @@ describe('Claim Reducer', () => {
       const action = new fromAction.UpdateUserRequestSuccess(mockedUserRequest);
       const state = fromReducer.reducer(initialState, action);
       expect(state.content).toEqual(mockedUserRequest);
-      expect(state.loaded).toEqual(true);
     });
   });
 });
