@@ -7,13 +7,13 @@ import { Observable, of, ReplaySubject } from 'rxjs';
 import { FSUserRequest } from '../../../occ/occ-models/occ.models';
 import * as fromAction from '../store/actions';
 import { reducerProvider, reducerToken } from '../store/reducers/index';
-import { FSUserRequestState } from '../store/user-request-state';
+import { FSClaimState } from '../store/claim-state';
 import { UserRequestService } from './user-request.service';
 
-const userId = OCC_USER_ID_CURRENT;
-const formId = 'formId';
 const requestId = '001';
-
+const mockClaim = {
+  requestId: requestId,
+};
 class MockFormDataStorageService {
   setFormDataToLocalStorage() {}
 }
@@ -31,7 +31,7 @@ class MockAuthService {
 
 describe('UserRequestServiceTest', () => {
   let service: UserRequestService;
-  let store: Store<FSUserRequestState>;
+  let store: Store<FSClaimState>;
   let authService: MockAuthService;
   let mockFormDataStorageService: FormDataStorageService;
 
@@ -41,7 +41,7 @@ describe('UserRequestServiceTest', () => {
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
-        StoreModule.forFeature('userRequest', reducerToken),
+        StoreModule.forFeature('claim', reducerToken),
       ],
       providers: [
         UserRequestService,
@@ -54,7 +54,7 @@ describe('UserRequestServiceTest', () => {
       ],
     });
     service = TestBed.get(UserRequestService as Type<UserRequestService>);
-    store = TestBed.get(Store as Type<Store<FSUserRequestState>>);
+    store = TestBed.get(Store as Type<Store<FSClaimState>>);
     mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
       FormDataStorageService
     >);
@@ -90,16 +90,15 @@ describe('UserRequestServiceTest', () => {
     ).not.toHaveBeenCalled();
   });
 
-  it('should be able to get actions', () => {
-    let result = null;
-    const actionName = fromAction.UPDATE_USER_REQUEST;
-    service.getAction(actionName).subscribe(action => (result = action));
-    store.dispatch(
-      new fromAction.UpdateUserRequest({
-        userId: userId,
-        requestId: requestId,
+  it('should be able to get claim', () => {
+    store.dispatch(new fromAction.UpdateUserRequestSuccess(mockClaim));
+    let response;
+    service
+      .getClaim()
+      .subscribe(claim => {
+        response = claim;
       })
-    );
-    expect(result.type).toBe(actionName);
+      .unsubscribe();
+    expect(response).toEqual(mockClaim);
   });
 });

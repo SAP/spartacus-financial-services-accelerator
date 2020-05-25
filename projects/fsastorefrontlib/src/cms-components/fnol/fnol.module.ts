@@ -62,7 +62,7 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard],
+    canActivate: [AuthGuard, CmsPageGuard, ClaimConfirmationGuard],
     data: {
       cxRoute: 'fnolSummaryPage',
       pageLabel: 'fnolSummaryPage',
@@ -71,9 +71,9 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [ClaimConfirmationGuard, AuthGuard, CmsPageGuard],
+    canActivate: [AuthGuard, CmsPageGuard],
     data: {
-      cxRoute: 'fnolConfirmation',
+      cxRoute: 'fnolConfirmationPage',
       pageLabel: 'fnolConfirmationPage',
     },
     component: PageLayoutComponent,

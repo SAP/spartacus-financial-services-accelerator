@@ -1,33 +1,39 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
-import { RoutingService } from '@spartacus/core';
-import { Observable, of } from 'rxjs';
+import { CanActivate, UrlTree } from '@angular/router';
+import {
+  GlobalMessageService,
+  GlobalMessageType,
+  RoutingService,
+} from '@spartacus/core';
+import { Observable } from 'rxjs';
 import { ClaimStatus } from './../../../occ/occ-models/occ.models';
-import { ClaimDataService } from '../../my-account/services/claim-data.service';
-
-export const allowableStatuses = [
-  ClaimStatus.APPROVED,
-  ClaimStatus.SUBMITTED,
-  ClaimStatus.PROCESSING,
-];
+import { map } from 'rxjs/operators';
+import { UserRequestService } from '../facade';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClaimConfirmationGuard implements CanActivate {
-  claimStatus: ClaimStatus;
-
   constructor(
-    protected claimDataService: ClaimDataService,
-    protected routingService: RoutingService
+    protected userRequestService: UserRequestService,
+    protected routingService: RoutingService,
+    protected globalMessageService: GlobalMessageService
   ) {}
 
-  canActivate(): Observable<boolean> {
-    this.claimStatus = this.claimDataService.claimData.claimStatus;
-    if (allowableStatuses.indexOf(this.claimStatus) === -1) {
-      this.routingService.go({ cxRoute: 'home' });
-      return of(false);
-    }
-    return of(true);
+  canActivate(): Observable<boolean | UrlTree> {
+    return this.userRequestService.getClaim().pipe(
+      map(claim => {
+        if (claim.requestStatus === ClaimStatus.SUBMITTED) {
+          this.globalMessageService.add(
+            { key: 'claim.alreadySubmitted' },
+            GlobalMessageType.MSG_TYPE_INFO
+          );
+          this.routingService.go({ cxRoute: 'home' });
+          return false;
+        } else {
+          return true;
+        }
+      })
+    );
   }
 }

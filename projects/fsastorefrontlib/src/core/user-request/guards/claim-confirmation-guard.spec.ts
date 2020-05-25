@@ -1,67 +1,85 @@
-import { ClaimDataService } from '../../my-account/services/claim-data.service';
-import { ClaimConfirmationGuard } from './claim-confirmation-guard';
 import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { NavigationExtras } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { UrlCommands, RoutingService } from '@spartacus/core';
-const claim1 = {
-  claimNumber: 'testClaim001',
-  claimStatus: 'OPEN',
-  requestId: 'testRequest001',
+import { GlobalMessageService, RoutingService } from '@spartacus/core';
+import { Observable, of } from 'rxjs';
+import {
+  ClaimConfirmationGuard,
+  UserRequestService,
+} from './../../../core/user-request';
+import { ClaimStatus } from './../../../occ/occ-models';
+
+const mockUserRequest = {
+  requestId: 'requestId',
+  requestStatus: ClaimStatus.SUBMITTED,
 };
-const claim2 = {
-  claimNumber: 'testClaim002',
-  claimStatus: 'APPROVED',
-  requestId: 'testRequest002',
-};
-class MockClaimDataService {
-  claimData = claim1;
+
+class MockRoutingService {
+  go() {}
 }
-class RoutingServiceStub {
-  go(_path: any[] | UrlCommands, _query?: object, _extras?: NavigationExtras) {}
+
+class MockUserRequestService {
+  getClaim(): Observable<any> {
+    return of({});
+  }
 }
-describe('ClaimConfirmationGuard', () => {
+
+class MockGlobalMessageService {
+  add() {}
+}
+
+describe(`ClaimConfirmationGuard`, () => {
   let guard: ClaimConfirmationGuard;
+  let service: UserRequestService;
   let routing: RoutingService;
-  let mockClaimDataService: MockClaimDataService;
+
   beforeEach(() => {
-    mockClaimDataService = new MockClaimDataService();
     TestBed.configureTestingModule({
       providers: [
-        { provide: RoutingService, useClass: RoutingServiceStub },
-        { provide: ClaimDataService, useValue: mockClaimDataService },
+        {
+          provide: RoutingService,
+          useClass: MockRoutingService,
+        },
+        {
+          provide: UserRequestService,
+          useClass: MockUserRequestService,
+        },
+        {
+          provide: GlobalMessageService,
+          useClass: MockGlobalMessageService,
+        },
       ],
       imports: [RouterTestingModule],
     });
+
     guard = TestBed.get(ClaimConfirmationGuard as Type<ClaimConfirmationGuard>);
+    service = TestBed.get(UserRequestService as Type<UserRequestService>);
     routing = TestBed.get(RoutingService as Type<RoutingService>);
+
+    spyOn(routing, 'go').and.stub();
   });
-  it('should not match allowable status', () => {
-    let result: boolean;
+
+  it(`should redirect to the homepage when user request is submitted`, () => {
+    mockUserRequest.requestStatus = ClaimStatus.SUBMITTED;
+    spyOn(service, 'getClaim').and.returnValue(of(mockUserRequest));
+    let result;
     guard
       .canActivate()
-      .subscribe(value => (result = value))
+      .subscribe(isActive => (result = isActive))
       .unsubscribe();
-    expect(result).toEqual(false);
-  });
-  it('should redirect to homepage', () => {
-    spyOn(routing, 'go');
-    guard
-      .canActivate()
-      .subscribe()
-      .unsubscribe();
+    expect(result).toBe(false);
     expect(routing.go).toHaveBeenCalledWith({ cxRoute: 'home' });
   });
-  it('should match allowable status', () => {
-    mockClaimDataService.claimData = claim2;
-    let result: boolean;
+
+  it(`should not redirect to the homepage when user request is not submitted`, () => {
+    mockUserRequest.requestStatus = ClaimStatus.OPEN;
+    spyOn(service, 'getClaim').and.returnValue(of(mockUserRequest));
+    let result;
     guard
       .canActivate()
-      .subscribe(value => {
-        result = value;
-      })
+      .subscribe(isActive => (result = isActive))
       .unsubscribe();
-    expect(result).toEqual(true);
+    expect(result).toBe(true);
+    expect(routing.go).not.toHaveBeenCalled();
   });
 });

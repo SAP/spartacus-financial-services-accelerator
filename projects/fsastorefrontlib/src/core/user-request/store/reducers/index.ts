@@ -6,44 +6,44 @@ import {
   MetaReducer,
   ActionReducer,
 } from '@ngrx/store';
-import * as fromUserRequestReducer from './user-request.reducer';
-import {
-  FSUserRequestState,
-  StateWithUserRequest,
-} from '../user-request-state';
+import * as fromUserRequestReducer from './claim.reducer';
+import { FSClaimState, StateWithClaim } from '../claim-state';
 import { AuthActions } from '@spartacus/core';
+import * as fromClaimAction from '../../../my-account/store/actions';
+import * as fromUSerRequestAction from '../../../user-request/store/actions';
 
-export function getReducers(): ActionReducerMap<FSUserRequestState> {
+export function getReducers(): ActionReducerMap<FSClaimState> {
   return {
-    userRequest: fromUserRequestReducer.reducer,
+    claim: fromUserRequestReducer.reducer,
   };
 }
 
 export const reducerToken: InjectionToken<
-  ActionReducerMap<FSUserRequestState>
-> = new InjectionToken<ActionReducerMap<FSUserRequestState>>(
-  'FSUserRequestReducers'
-);
+  ActionReducerMap<FSClaimState>
+> = new InjectionToken<ActionReducerMap<FSClaimState>>('FSUserRequestReducers');
 
 export const reducerProvider: Provider = {
   provide: reducerToken,
   useFactory: getReducers,
 };
 
-export const getUserRequestState: MemoizedSelector<
-  StateWithUserRequest,
-  FSUserRequestState
-> = createFeatureSelector<FSUserRequestState>('userRequest');
+export const getClaimState: MemoizedSelector<
+  StateWithClaim,
+  FSClaimState
+> = createFeatureSelector<FSClaimState>('claim');
 
-export function clearUserRequestState(
+export function clearClaimState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return function(state, action) {
-    if (action.type === AuthActions.LOGOUT) {
+    if (
+      action.type === AuthActions.LOGOUT ||
+      action.type === fromClaimAction.CREATE_CLAIM
+    ) {
       state = undefined;
     }
     return reducer(state, action);
   };
 }
 
-export const metaReducers: MetaReducer<any>[] = [clearUserRequestState];
+export const metaReducers: MetaReducer<any>[] = [clearClaimState];

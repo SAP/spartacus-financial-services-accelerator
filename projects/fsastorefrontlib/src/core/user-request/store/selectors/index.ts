@@ -1,2 +1,2 @@
-import * as UserRequestSelector from './user-request.selector';
+import * as UserRequestSelector from './claim.selector';
 export { UserRequestSelector };
