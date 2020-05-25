@@ -16,20 +16,19 @@ context('Life Insurance Checkout', () => {
 
   describe('Life Checkout', () => {
     it('Should open life category page', () => {
+      //TODO: Can we do this better
       cy.selectOptionFromDropdown({
         menuOption: 'Insurance',
         dropdownItem: 'Life',
         nextPageUrlPart: 'Insurance',
       });
-
       cy.get('.enriched-banner-styled-text')
-        .eq(0)
         .contains(' Get a Quote')
         .click();
     });
 
     it('Should check progress bar', () => {
-      checkout.checkProgressBarInsurance();
+      checkout.checkProgressBarInsurance('Your Life Insurance');
     });
 
     it('Should populate first checkout step', () => {
@@ -48,45 +47,80 @@ context('Life Insurance Checkout', () => {
       clickContinueButton();
     });
 
-    it('Should check login page and register a new user', () => {
-      register.populateRegistrationForm(registrationUser);
-      register.loginInUser(registrationUser.email, registrationUser.password);
-    });
-
-    it('Add payment method for user', () => {
+   it('Should check login page and register a new user', () => {
+      register.registerUser(registrationUser);
+      register.login(registrationUser.email, registrationUser.password);
       addPaymentMethod(registrationUser.email);
+     cy.get('.SiteLogo').should('be.visible').click();
+     cy.selectOptionFromDropdown({
+       menuOption: 'Insurance',
+       dropdownItem: 'Life',
+       nextPageUrlPart: 'Insurance',
+     });
+     cy.get('.enriched-banner-styled-text')
+       .contains(' Get a Quote')
+       .click();
+    cy.get('[name=lifeWhoCovered]')
+      .eq(1)
+      .click();
+    cy.wait(1000);
+    life.populateSecondPerson();
+    clickContinueButton();
+
+    life.checkLifeComparisonTableSecondPerson();
+    life.selectBasicLifeProduct();
+    life.checkOptionalProductsAddRenewalOption();
+    life.checkLifeBasicMiniCartSecondPerson();
+    clickContinueButton();
+    checkout.populatePersonalDetailsPage();
+    checkout.checkProgressBarInsurance('Your Life Insurance');
+    clickContinueButton();
+    checkout.checkProgressBarInsurance();
+    life.checkLifeBasicMiniCartSecondPerson();
+    checkout.checkAccordions('lifeQuoteReview');
+    clickContinueButton();
+    checkout.ConfirmBindQuote();
+    selectPaymentMethod();
+    checkout.placeOrderOnFinalReview();
+    checkout.checkAccordions('lifeFinalReview');
+    checkout.checkOrderConfirmation();
+    checkMyPoliciesPage();
+    cy.get('.title').contains('Life Insurance');
+  });
+  });
+
+ /*   it('Should start checkout from start with second person', () => {
+
     });
 
-    it('Should populate personal details page and continue', () => {
-      checkout.populatePersonalDetailsPage();
-      checkout.checkProgressBarInsurance();
-      clickContinueButton();
-    });
+    it('Should populate data for second person', () => {
+      //TODO;
 
+
+    });*/
+
+    /*it('Should populate personal details page and continue', () => {
+
+      });*/
+/*
     it('Should check quote review page', () => {
-      checkout.checkProgressBarInsurance();
-      life.checkLifeBasicMiniCart();
-      checkout.checkAccordions('lifeQuoteReview');
-      clickContinueButton();
-      checkout.ConfirmBindQuote();
-    });
+
+        });
 
     it('Select default payment details', () => {
-      selectPaymentMethod();
     });
 
     it('Place order on final review page', () => {
-      checkout.placeOrderOnFinalReview();
     });
 
     it('Check order confirmation', () => {
-      checkout.checkAccordions('lifeFinalReview');
-      checkout.checkOrderConfirmation();
-    });
+
+      });
 
     it('Check my policies page', () => {
       checkMyPoliciesPage();
       cy.get('.title').contains('Life Insurance');
-    });
-  });
+      register.validatePhoneNumber(registrationUser.phoneNumber);
+      });
+  });*/
 });

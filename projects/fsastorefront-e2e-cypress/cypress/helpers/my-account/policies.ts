@@ -1,8 +1,8 @@
-export const POLICIES_PAGE = '/my-account/my-policies/';
+/*export const POLICIES_PAGE = '/my-account/my-policies/';
 
 export function accessPoliciesPage() {
   cy.visit(POLICIES_PAGE);
-}
+}*/
 
 export function checkPoliciesTitle() {
   cy.get('.heading-headline').should('contain', 'Policies');
@@ -60,13 +60,17 @@ export function checkAutoPolicy() {
     .should('have.length', 1)
     .within(() => {
       cy.get('.info-card-data')
-        .eq(4)
         .within(() => {
           cy.get('.label').contains('Premium');
           cy.get('.value').contains('€10.95 ');
         });
-      cy.get('.info-card-links .link')
+      cy.get('a')
         .contains(' Details ')
-        .click();
+        //TODO: When cypress fix issue detached from the DOM remove force true
+        .click({ force: true });
+
+      /*      cy.get('.info-card-links .link')
+              .contains(' Details ')
+              .click();*/
     });
 }

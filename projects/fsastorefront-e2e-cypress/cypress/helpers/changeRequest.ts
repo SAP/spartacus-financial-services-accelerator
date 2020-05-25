@@ -9,7 +9,7 @@ export function startChangeMileage() {
     .click();
   cy.get('p.link.mb-0')
     .contains('Edit')
-    .click();
+    .click({ force: true });
 }
 
 export function checkChangeMileageSteps() {

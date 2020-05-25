@@ -12,11 +12,6 @@ export function populateFirstStep() {
   cy.get('[name=lifeMainSmoke]')
     .eq(1)
     .click();
-  cy.get('[name="lifeSecondDob"]').type('1981-09-25');
-  cy.get('[name=lifeSecondSmoke]')
-    .eq(0)
-    .click();
-  cy.get('[name="lifeRelationship"]').select('Civil Partner');
 }
 
 export function selectBasicLifeProduct() {
@@ -81,4 +76,45 @@ export function checkLifeComparisonTable() {
     ],
   };
   shared.checkComparisonTable(comparisonTableContent);
+}
+
+export function populateSecondPerson() {
+  cy.get('[name="lifeSecondDob"]').type('1981-09-25');
+  cy.get('[name=lifeSecondSmoke]')
+    .eq(0)
+    .click();
+  cy.get('[name="lifeRelationship"]').select('Civil Partner');
+}
+
+export function checkLifeComparisonTableSecondPerson() {
+  const comparisonTableContent: addOptionsPage.ComparisonTable = {
+    mainProducts: [
+      {
+        name: 'Basic Life Insurance',
+        price: '€22.15',
+      },
+      {
+        name: 'Premium Life Insurance',
+        price: '€27.69',
+      },
+    ],
+  };
+  shared.checkComparisonTable(comparisonTableContent);
+}
+
+export function checkLifeBasicMiniCartSecondPerson() {
+  const miniCartContent: addOptionsPage.MiniCart = {
+    price: ' €28.10 ',
+    products: [
+      {
+        title: ' Basic Life Insurance: ',
+        value: ' €22.15 ',
+      },
+      {
+        title: ' Renewal Option: ',
+        value: ' €5.95 ',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
 }

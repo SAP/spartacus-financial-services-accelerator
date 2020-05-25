@@ -1,9 +1,31 @@
 import { Accordions } from './accordions';
 import { waitForPage } from '../generalHelpers';
 
-export function checkProgressBarInsurance() {
+export function checkProgressBarInsurance(mainProduct) {
+  cy.get('.heading-headline').contains(mainProduct);
   cy.get('.progress-node').should('have.length', 7);
-  cy.get('.heading-headline').should('have.text', ' Your Life Insurance ');
+  cy.get('p.label')
+    .should('have.length', 7)
+    .eq(0)
+    .contains('Choose a Cover');
+  cy.get('p.label')
+    .eq(1)
+    .contains("What's Included");
+  cy.get('p.label')
+    .eq(2)
+    .contains('Add Options');
+  cy.get('p.label')
+    .eq(3)
+    .contains('Personal Details');
+  cy.get('p.label')
+    .eq(4)
+    .contains('Quote Review');
+  cy.get('p.label')
+    .eq(5)
+    .contains('Payment Details');
+  cy.get('p.label')
+    .eq(6)
+    .contains('Final Review');
 }
 
 export function populatePersonalDetailsPage() {
