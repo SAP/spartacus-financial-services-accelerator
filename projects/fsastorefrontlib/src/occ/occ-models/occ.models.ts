@@ -18,10 +18,29 @@ export interface ContactAgentData {
   message?: string;
 }
 
+export interface BundleTemplate {
+  id: string;
+  name?: string;
+  childBundleTemplates?: BundleTemplate[];
+}
+
 export interface FSProduct extends Product {
   price?: FSPrice;
   cartDispalyName?: string;
   defaultCategory?: Category;
+  bundleTemplates?: BundleTemplate[];
+  configurable?: boolean;
+}
+
+export interface YFormConfiguratorSettings {
+  configurationFormId?: string;
+  configuratorType?: string;
+  configurationApplicationId?: string;
+  configurationCategory?: Category;
+}
+
+export interface FSCategory extends Category {
+  yformConfiguratorSettings?: YFormConfiguratorSettings[];
 }
 
 export interface OrgUnit {
@@ -64,6 +83,10 @@ export enum BindingStateType {
   UNBIND = 'UNBIND',
 }
 
+export enum ConfiguratorType {
+  PRODUCT_CONFIGURE_FORM = 'PRODUCT_CONFIGURE_FORM',
+}
+
 export enum RequestType {
   INSURED_OBJECT_CHANGE = 'FSINSUREDOBJECT_CHANGE',
   COVERAGE_CHANGE = 'FSCOVERAGE_CHANGE',
@@ -89,6 +112,7 @@ export enum StepStatus {
 
 export interface FSOrderEntry extends OrderEntry {
   formData?: any[];
+  product?: FSProduct;
 }
 
 export interface FSPrice extends Price {

@@ -62,7 +62,7 @@ describe('FSCheckoutConfigService', () => {
     spyOn<any>(service, 'getUrlFromStepRoute').and.callFake(route => {
       return mockRoutingConfig[route].paths[0];
     });
-    expect(service.getCurrentStepIndex(activatedRoute)).toBe(2);
+    expect(service.getCurrentStepIndex(activatedRoute)).toBe(3);
   });
 
   it('should return current step index if step exists', () => {
