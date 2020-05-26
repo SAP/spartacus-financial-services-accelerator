@@ -13,13 +13,13 @@ import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { LanguageService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PrefilResolver } from '../../core/resolver/prefil-resolver.interface';
+import { PrefillResolver } from '../../core/resolver/prefill-resolver.interface';
 
 @Component({ template: '' })
 export class AbstractFormComponent implements OnInit, OnDestroy {
   constructor(
     protected occValueListService: OccValueListService,
-    protected formConfig: DynamicFormsConfig,
+    protected AppConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
     protected changeDetectorRef: ChangeDetectorRef,
     protected injector: Injector
@@ -33,7 +33,6 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
   activeLang$ = this.languageService.getActive();
 
   ngOnInit() {
-    // console.log(this.group);
     this.hostComponentClass =
       this.config && this.config.gridClass ? this.config.gridClass : 'col-12';
     if (this.config && this.config.cssClass) {
@@ -53,25 +52,26 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-
-    if (this.config.prefillValue) {
-      // console.log('babaaa');
-      const prefilResolver = this.injector.get<PrefilResolver>(
-        this.formConfig.dynamicForms.prefil[
-          this.config.prefillValue.targetObject
-        ].prefilResolver
-      );
-      if (prefilResolver) {
-        prefilResolver
-          .getFieldValue(this.config.prefillValue.targetValue)
-          .subscribe(value => {
-            if (value) {
-              this.group.get(this.config.name).setValue(value);
-            }
-          })
-          .unsubscribe();
-      }
-    }
+          console.log(this.config);
+    // if (this.config.prefillValue) {
+    //   // console.log(this.AppConfig);
+    //   // console.log(this.config);
+    //   // const prefillResolver = this.injector.get<PrefillResolver>(
+    //   //   this.AppConfig.dynamicForms.prefill[
+    //   //     this.config.prefillValue.targetObject
+    //   //   ].prefillResolver
+    //   // );
+    //   // if (prefillResolver) {
+    //   //   prefillResolver
+    //   //     .getFieldValue(this.config.prefillValue.targetValue)
+    //   //     .subscribe(value => {
+    //   //       if (value) {
+    //   //         this.group.get(this.config.name).setValue(value);
+    //   //       }
+    //   //     })
+    //   //     .unsubscribe();
+    //   // }
+    // }
   }
   ngOnDestroy() {
     if (this.subscription) {

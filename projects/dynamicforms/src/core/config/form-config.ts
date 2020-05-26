@@ -14,7 +14,7 @@ export abstract class ValidatorConfig {
   [_: string]: ValidatorMapping;
 }
 export interface PrefillMapping {
-  prefilResolver: any;
+  prefillResolver: any;
 }
 
 export abstract class PrefillConfig {
@@ -25,6 +25,6 @@ export abstract class DynamicFormsConfig {
   dynamicForms: {
     components?: FormComponentConfig;
     validators?: ValidatorConfig;
-    prefil?: PrefillConfig;
+    prefill?: PrefillConfig;
   };
 }

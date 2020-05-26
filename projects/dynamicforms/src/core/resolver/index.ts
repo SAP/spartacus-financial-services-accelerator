@@ -1,2 +1,2 @@
-export * from './prefil-resolver.interface';
-export * from './user-prefil-resolver';
+export * from './prefill-resolver.interface';
+export * from './user-prefill-resolver';

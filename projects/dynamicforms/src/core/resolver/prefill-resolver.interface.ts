@@ -1,3 +1,3 @@
-export interface PrefilResolver {
+export interface PrefillResolver {
   getFieldValue(fieldPath: string);
 }

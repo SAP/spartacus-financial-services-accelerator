@@ -1,22 +1,20 @@
 import { UserService } from '@spartacus/core';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { PrefilResolver } from './prefil-resolver.interface';
+import { PrefillResolver } from './prefill-resolver.interface';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserPrefilResolver implements PrefilResolver {
+export class UserPrefillResolver implements PrefillResolver {
   constructor(protected userService: UserService) {}
 
   // maybe this can also accept control and set value directly in here...
   getFieldValue(fieldPath: string) {
-    console.log(fieldPath);
     const attributes = fieldPath.split('.');
     let currentValue;
     return this.userService.get().pipe(
       map(user => {
-        console.log(user);
         currentValue = user;
         attributes.forEach(attribute => {
           currentValue = currentValue[attribute];

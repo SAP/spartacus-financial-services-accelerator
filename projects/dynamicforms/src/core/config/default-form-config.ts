@@ -11,7 +11,7 @@ import { DynamicFormsConfig } from './form-config';
 import { SeparatorComponent } from '../../components/separator/separator.component';
 import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
 import { DynamicSelectComponent } from '../../components/dynamic-select/dynamic-select.component';
-import { UserPrefilResolver } from '../resolver/user-prefil-resolver';
+import { UserPrefillResolver } from '../resolver/user-prefill-resolver';
 
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
@@ -91,9 +91,9 @@ export const defaultFormConfig: DynamicFormsConfig = {
         validator: DefaultFormValidators.postalCode,
       },
     },
-    prefil: {
+    prefill: {
       user: {
-        prefilResolver: UserPrefilResolver,
+        prefillResolver: UserPrefillResolver,
       },
     },
   },

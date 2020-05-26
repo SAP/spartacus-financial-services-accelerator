@@ -1,13 +1,15 @@
 import { ActiveCartService } from '@spartacus/core';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { PrefilResolver } from '@fsa/dynamicforms';
+import { PrefillResolver } from '@fsa/dynamicforms';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CartPrefilResolver implements PrefilResolver {
-  constructor(protected cartService: ActiveCartService) {}
+export class CartPrefillResolver implements PrefillResolver {
+  constructor(protected cartService: ActiveCartService) {
+    
+  }
 
   // maybe this can also accept control and set value directly in here...
   getFieldValue(fieldPath: string) {
@@ -15,7 +17,7 @@ export class CartPrefilResolver implements PrefilResolver {
     let currentValue;
     return this.cartService.getActive().pipe(
       map(cart => {
-        // console.log(cart);
+        console.log(cart);
         const preparedCart = this.serializeQuoteDetails(cart);
         currentValue = preparedCart;
         attributes.forEach(attribute => {

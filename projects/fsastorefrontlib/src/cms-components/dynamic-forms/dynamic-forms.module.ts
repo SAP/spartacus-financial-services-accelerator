@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DynamicFormModule, DynamicFormsConfig } from '@fsa/dynamicforms';
 import { ConfigModule, I18nModule } from '@spartacus/core';
 import { CalculationButtonComponent } from './form-components/calculation-button.component';
-import { CartPrefilResolver } from './resolver/cart-prefil-resolver';
+import { CartPrefillResolver } from './resolver/cart-prefill-resolver';
 
 @NgModule({
   imports: [
@@ -19,9 +19,9 @@ import { CartPrefilResolver } from './resolver/cart-prefil-resolver';
             component: CalculationButtonComponent,
           },
         },
-        prefil: {
+        prefill: {
           cart: {
-            prefilResolver: CartPrefilResolver,
+            prefillResolver: CartPrefillResolver,
           },
         },
       },
