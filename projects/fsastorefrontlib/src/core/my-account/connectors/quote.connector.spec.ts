@@ -46,7 +46,7 @@ describe('QuoteConnector', () => {
     expect(quoteAdapter.updateQuote).toHaveBeenCalledWith(user, cartId, {});
   });
   it('should call adapter for bindQuote', () => {
-    quoteConnector.invokeQuoteAction(user, cartId, action);
+    quoteConnector.invokeQuoteAction(user, cartId, QuoteActionType.BIND);
     expect(quoteAdapter.invokeQuoteAction).toHaveBeenCalledWith(
       user,
       cartId,

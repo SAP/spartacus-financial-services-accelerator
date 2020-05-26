@@ -199,7 +199,7 @@ describe('QuoteServiceTest', () => {
       new fromAction.QuoteProcessAction({
         userId: userId,
         cartId: cartId,
-        action: QuoteActionType.UNDERWRITING,
+        action: QuoteActionType.BIND,
       })
     );
   });
