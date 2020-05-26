@@ -13,6 +13,7 @@ import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { PricingData } from './../../../../occ/occ-models/form-pricing.interface';
 import { FSProduct } from './../../../../occ/occ-models/occ.models';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'cx-fs-button',
@@ -20,6 +21,7 @@ import { FSProduct } from './../../../../occ/occ-models/occ.models';
 })
 export class CalculationButtonComponent extends AbstractFormComponent {
   constructor(
+    protected fb: FormBuilder,
     protected currentProductService: CurrentProductService,
     protected formDataStorageService: FormDataStorageService,
     protected formDataService: FormDataService,
@@ -28,7 +30,14 @@ export class CalculationButtonComponent extends AbstractFormComponent {
     protected languageService: LanguageService,
     protected changeDetectorRef: ChangeDetectorRef
   ) {
-    super(occcMockFormService, formConfig, languageService, changeDetectorRef);
+    super(
+      fb,
+      formDataService,
+      occcMockFormService,
+      formConfig,
+      languageService,
+      changeDetectorRef
+    );
   }
 
   subscription = new Subscription();
