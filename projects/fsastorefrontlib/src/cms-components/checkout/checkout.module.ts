@@ -43,6 +43,7 @@ import { BindQuoteDialogComponent } from './components/bind-quote-dialog/bind-qu
 import { FSCheckoutProgressComponent } from './components/checkout-progress/checkout-progress.component';
 import { FSCheckoutProgressModule } from './components/checkout-progress/checkout-progress.module';
 import { ChooseCoverNavigationComponent } from './components/choose-cover-navigation/choose-cover-navigation.component';
+import { ProductConfigurationModule } from './components/configure-product/product-configuration.module';
 import { FinalReviewComponent } from './components/final-review/final-review.component';
 import { LegalModule } from './components/legal/legal.module';
 import { MiniCartComponent } from './components/mini-cart/mini-cart.component';
@@ -150,6 +151,7 @@ const routes: Routes = [
     AddOptionsModule,
     MiniCartModule,
     NgbTooltipModule,
+    ProductConfigurationModule,
     CommonModule,
     PageComponentModule,
     MediaModule,

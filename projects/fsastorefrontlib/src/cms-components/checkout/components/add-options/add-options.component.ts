@@ -7,9 +7,9 @@ import {
   Output,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { OrderEntry, RoutingService, CurrencyService } from '@spartacus/core';
+import { CurrencyService, OrderEntry, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/cart/facade';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
@@ -78,11 +78,22 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
       this.categoryService
         .getActiveCategory()
         .pipe(
-          map(categoryCode => {
-            this.routingService.go({
-              cxRoute: 'category',
-              params: { code: categoryCode },
-            });
+          switchMap(categoryCode => {
+            let route = 'category';
+            let routingParam = categoryCode;
+            return this.entries$.pipe(
+              map(entries => {
+                const product = <FSProduct>entries[0].product;
+                if (product.configurable) {
+                  route = 'configureProduct';
+                  routingParam = product.code;
+                }
+                this.routingService.go({
+                  cxRoute: route,
+                  params: { code: routingParam },
+                });
+              })
+            );
           })
         )
         .subscribe()
