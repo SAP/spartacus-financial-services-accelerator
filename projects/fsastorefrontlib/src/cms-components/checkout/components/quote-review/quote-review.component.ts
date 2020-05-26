@@ -20,7 +20,7 @@ import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dial
 export class QuoteReviewComponent implements OnInit, OnDestroy {
   cart$: Observable<Cart>;
   showContent$: Observable<boolean> = of(true);
-  cartLoaded$: Observable<boolean>;
+  cartLoading$: Observable<boolean>;
   checkoutStepUrlNext: string;
   checkoutStepUrlBack: string;
   subscription = new Subscription();
@@ -45,7 +45,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
       this.activatedRoute
     );
     this.cart$ = this.cartService.getActive();
-    this.cartLoaded$ = this.cartService.getLoading();
+    this.cartLoading$ = this.cartService.getLoading();
   }
 
   getBaseUrl() {
