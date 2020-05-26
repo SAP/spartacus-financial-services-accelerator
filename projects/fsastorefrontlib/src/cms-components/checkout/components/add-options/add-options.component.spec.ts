@@ -30,7 +30,7 @@ let mockEntries: OrderEntry[] = [
 ];
 
 class MockCartService {
-  getLoaded() {}
+  getLoading() {}
 
   removeEntry(item: any) {}
 
@@ -123,7 +123,7 @@ describe('AddOptionsComponent', () => {
     fixture.detectChanges();
 
     cartService = TestBed.get(FSCartService as Type<FSCartService>);
-    spyOn(cartService, 'getLoaded').and.callThrough();
+    spyOn(cartService, 'getLoading').and.callThrough();
     spyOn(cartService, 'removeEntry').and.callThrough();
     spyOn(cartService, 'addOptionalProduct').and.callThrough();
     spyOn(cartService, 'getEntries').and.callThrough();
