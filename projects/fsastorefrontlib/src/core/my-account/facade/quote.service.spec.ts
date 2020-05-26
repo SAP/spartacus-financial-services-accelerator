@@ -9,6 +9,7 @@ import { StateWithMyAccount } from '../store/my-account-state';
 import * as fromAction from './../store/actions';
 import { reducerProvider, reducerToken } from './../store/reducers/index';
 import { QuoteService } from './quote.service';
+import { QuoteActionType } from './../../../occ/occ-models/occ.models';
 
 const userId = OCC_USER_ID_CURRENT;
 const cartId = '0000001';
@@ -195,7 +196,22 @@ describe('QuoteServiceTest', () => {
   it('should be able to bind quote', () => {
     service.bindQuote(cartId);
     expect(store.dispatch).toHaveBeenCalledWith(
-      new fromAction.BindQuote({ userId: userId, cartId: cartId })
+      new fromAction.QuoteProcessAction({
+        userId: userId,
+        cartId: cartId,
+        action: QuoteActionType.UNDERWRITING,
+      })
+    );
+  });
+
+  it('should be able to underwrite quote', () => {
+    service.underwriteQuote(cartId);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.QuoteProcessAction({
+        userId: userId,
+        cartId: cartId,
+        action: QuoteActionType.UNDERWRITING,
+      })
     );
   });
 

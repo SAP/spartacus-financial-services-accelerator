@@ -118,10 +118,10 @@ export interface FSOccEndpoints extends OccEndpoints {
    */
   updateQuote?: string;
   /**
-   * Binds a quote
+   * Invokes quote action
    *
    */
-  bindQuote?: string;
+  quoteAction?: string;
   /**
    * Get claims
    *

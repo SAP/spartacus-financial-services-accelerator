@@ -44,22 +44,24 @@ export class QuoteEffects {
 
   @Effect()
   bindQuote$: Observable<any> = this.actions$.pipe(
-    ofType(fromActions.BIND_QUOTE),
-    map((action: fromActions.BindQuote) => action.payload),
+    ofType(fromActions.QUOTE_PROCESS_ACTION),
+    map((action: fromActions.QuoteProcessAction) => action.payload),
     mergeMap(payload => {
-      return this.adapter.bindQuote(payload.userId, payload.cartId).pipe(
-        mergeMap(() => {
-          return [
-            new CartActions.LoadCart({
-              userId: payload.userId,
-              cartId: payload.cartId,
-            }),
-          ];
-        }),
-        catchError(error =>
-          of(new fromActions.UpdateQuoteFail(JSON.stringify(error)))
-        )
-      );
+      return this.adapter
+        .invokeQuoteAction(payload.userId, payload.cartId, payload.action)
+        .pipe(
+          mergeMap(() => {
+            return [
+              new CartActions.LoadCart({
+                userId: payload.userId,
+                cartId: payload.cartId,
+              }),
+            ];
+          }),
+          catchError(error =>
+            of(new fromActions.UpdateQuoteFail(JSON.stringify(error)))
+          )
+        );
     })
   );
 
