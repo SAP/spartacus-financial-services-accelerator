@@ -1,7 +1,7 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
 import { ClaimState, FSClaimState, StateWithClaim } from '../claim-state';
 import * as fromFeature from '../reducers';
-import * as fromUserRequest from '../reducers/claim.reducer';
+import * as fromClaim from '../reducers/claim.reducer';
 import { FSUserRequest } from '../../../../occ/occ-models';
 
 export const getClaimState: MemoizedSelector<
@@ -17,5 +17,5 @@ export const getClaimContent: MemoizedSelector<
   FSUserRequest
 > = createSelector(
   getClaimState,
-  fromUserRequest.getClaimContent
+  fromClaim.getClaimContent
 );

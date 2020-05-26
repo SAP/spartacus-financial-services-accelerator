@@ -44,7 +44,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   fnolIncidentReportPage: { paths: ['fnolIncidentReportPage'] },
   fnolGeneralInfoPage: { paths: ['fnolGeneralInfoPage'] },
   fnolSummaryPage: { paths: ['fnolSummaryPage'] },
-  fnolConfirmation: { paths: ['fnolConfirmation'] },
+  fnolConfirmation: { paths: ['fnolConfirmationPage'] },
   changeCarDetailsPage: { paths: ['changeCarDetailsPage'] },
   changeCoveragePage: { paths: ['changeCoveragePage'] },
   changeSimulationPage: { paths: ['changeSimulationPage'] },

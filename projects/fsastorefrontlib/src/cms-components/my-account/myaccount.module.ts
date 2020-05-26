@@ -9,7 +9,7 @@ import {
   I18nModule,
 } from '@spartacus/core';
 import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
-import { UserRequestStoreModule } from '../../core/user-request/store/user-request-store.module';
+import { ClaimStoreModule } from '../../core/claim/store/claim-store.module';
 import { ClaimModule } from './claim/claim.module';
 import { InboxModule } from './inbox/inbox.module';
 import { PolicyModule } from './policy/policy.module';
@@ -103,7 +103,7 @@ const routes: Routes = [
     QuoteModule,
     ClaimModule,
     PremiumCalendarModule,
-    UserRequestStoreModule,
+    ClaimStoreModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         UpdateProfileComponent: {

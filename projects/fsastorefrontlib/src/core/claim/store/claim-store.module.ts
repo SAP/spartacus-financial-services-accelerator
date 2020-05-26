@@ -3,8 +3,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { effects } from './effects/index';
-import { reducerProvider, reducerToken, metaReducers } from './reducers/index';
+import { effects } from './effects';
+import { reducerProvider, reducerToken, metaReducers } from './reducers';
 import { StateModule } from '@spartacus/core';
 import { CLAIM_FEATURE } from './claim-state';
 
@@ -20,4 +20,4 @@ import { CLAIM_FEATURE } from './claim-state';
   ],
   providers: [reducerProvider],
 })
-export class UserRequestStoreModule {}
+export class ClaimStoreModule {}

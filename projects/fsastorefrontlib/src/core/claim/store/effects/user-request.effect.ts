@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
 import * as fromActions from '../actions';
-import { UserRequestConnector } from '../../connectors/user-request.connector';
+import { UserRequestConnector } from '../../../user-request/connectors/user-request.connector';
 import { StepStatus } from '../../../../occ/occ-models';
 
 @Injectable()

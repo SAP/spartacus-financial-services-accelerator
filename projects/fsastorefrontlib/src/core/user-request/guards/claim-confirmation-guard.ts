@@ -30,9 +30,8 @@ export class ClaimConfirmationGuard implements CanActivate {
           );
           this.routingService.go({ cxRoute: 'home' });
           return false;
-        } else {
-          return true;
         }
+        return true;
       })
     );
   }

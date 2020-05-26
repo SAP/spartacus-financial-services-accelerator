@@ -5,9 +5,12 @@ import { Store, StoreModule } from '@ngrx/store';
 import { AuthService, OCC_USER_ID_CURRENT, UserToken } from '@spartacus/core';
 import { Observable, of, ReplaySubject } from 'rxjs';
 import { FSUserRequest } from '../../../occ/occ-models/occ.models';
-import * as fromAction from '../store/actions';
-import { reducerProvider, reducerToken } from '../store/reducers/index';
-import { FSClaimState } from '../store/claim-state';
+import * as fromAction from '../../claim/store/actions';
+import {
+  reducerProvider,
+  reducerToken,
+} from '../../claim/store/reducers/index';
+import { FSClaimState } from '../../claim/store/claim-state';
 import { UserRequestService } from './user-request.service';
 
 const requestId = '001';

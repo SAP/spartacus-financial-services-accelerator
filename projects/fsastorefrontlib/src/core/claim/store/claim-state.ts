@@ -1,4 +1,4 @@
-import { Claim, FSUserRequest } from '../../../occ/occ-models';
+import { Claim } from '../../../occ/occ-models';
 
 export const CLAIM_FEATURE = 'claim';
 
@@ -11,6 +11,6 @@ export interface FSClaimState {
 }
 
 export interface ClaimState {
-  content: FSUserRequest;
+  content: Claim;
   loaded: boolean;
 }

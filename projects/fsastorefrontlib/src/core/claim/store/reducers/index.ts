@@ -10,7 +10,6 @@ import * as fromUserRequestReducer from './claim.reducer';
 import { FSClaimState, StateWithClaim } from '../claim-state';
 import { AuthActions } from '@spartacus/core';
 import * as fromClaimAction from '../../../my-account/store/actions';
-import * as fromUSerRequestAction from '../../../user-request/store/actions';
 
 export function getReducers(): ActionReducerMap<FSClaimState> {
   return {
@@ -20,7 +19,7 @@ export function getReducers(): ActionReducerMap<FSClaimState> {
 
 export const reducerToken: InjectionToken<
   ActionReducerMap<FSClaimState>
-> = new InjectionToken<ActionReducerMap<FSClaimState>>('FSUserRequestReducers');
+> = new InjectionToken<ActionReducerMap<FSClaimState>>('FSClaimReducers');
 
 export const reducerProvider: Provider = {
   provide: reducerToken,
