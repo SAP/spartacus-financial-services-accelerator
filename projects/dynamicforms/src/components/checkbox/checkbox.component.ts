@@ -10,6 +10,7 @@ export class CheckboxComponent extends AbstractOptionsComponent {
   selectedControlName: string;
   selectedOptions: string;
   checkBoxArray: FormArray;
+  selectedItems: any[] = [];
 
   ngOnInit() {
     super.ngOnInit();
@@ -31,7 +32,11 @@ export class CheckboxComponent extends AbstractOptionsComponent {
     ) {
       this.checkBoxArray.insert(index, this.fb.control(optionName));
     } else {
-      this.checkBoxArray.removeAt(index);
+      if (this.checkBoxArray.length > 1) {
+        this.checkBoxArray.removeAt(index);
+      } else {
+        this.checkBoxArray.clear();
+      }
     }
   }
   addedControls(addedControl): FormArray {
