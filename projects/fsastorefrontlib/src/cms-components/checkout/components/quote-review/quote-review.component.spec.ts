@@ -30,7 +30,7 @@ const MockOccModuleConfig: OccConfig = {
 
 class FSCartServiceStub {
   getActive() {}
-  getLoaded() {}
+  getLoading() {}
 }
 class MockCategoryService {
   getActiveCategory(): Observable<string> {
