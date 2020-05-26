@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
+import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable()
-export class OccMockFormService {
+export class OccValueListService {
   constructor(
     protected httpClient: HttpClient,
     protected occEndpointService: OccEndpointsService
@@ -15,8 +15,13 @@ export class OccMockFormService {
 
   httpRegex = /(http(s?)):\/\//;
 
-  public getValuesFromAPI(fieldUrl: string): Observable<any> {
-    const url = this.getFullAPIUrl(fieldUrl);
+  public getValuesFromAPI(
+    fieldUrl: string,
+    parentItemCode?: string
+  ): Observable<any> {
+    const url = parentItemCode
+      ? this.getFullAPIUrl(fieldUrl) + '?parentListItemCode=' + parentItemCode
+      : this.getFullAPIUrl(fieldUrl);
 
     const cacheValues = this.valueListsCache.get(url);
     if (cacheValues) {

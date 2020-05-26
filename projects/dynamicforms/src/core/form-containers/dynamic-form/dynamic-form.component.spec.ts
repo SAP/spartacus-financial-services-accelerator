@@ -35,9 +35,7 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
   },
 };
 
-const mockFormGroup = new FormGroup({
-  testGroupCode: new FormControl('', Validators.required),
-});
+let mockFormGroup;
 
 const mocFormGroupNested = new FormGroup({
   testGroupNested: new FormControl('', Validators.required),
@@ -113,6 +111,9 @@ describe('DynamicFormComponent', () => {
     component = fixture.componentInstance;
     component.config = config;
     component.formData = of(formData);
+    mockFormGroup = new FormGroup({
+      testGroupCode: new FormControl('', Validators.required),
+    });
     fixture.detectChanges();
   }));
 

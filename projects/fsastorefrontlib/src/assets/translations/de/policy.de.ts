@@ -3,6 +3,7 @@ export const policy = {
     policies: 'Policen',
     policy: 'Police',
     policyId: 'Policen ID',
+    policyNo: '[DE] Policy No',
     myPolicy: 'Meine Policen',
     policyNumberIs: 'Versicherungsnummer',
     policyHolder: 'Versicherungshalter',
@@ -10,7 +11,7 @@ export const policy = {
     viewYourPolicies: 'Ihre aktuellen Policen ansehen',
     youHaveNoPolicies: 'Sie haben zur Zeit keine Versicherung bei uns!',
     policySummary: 'Policenübersicht',
-    thankYouForOrder: '[DE] Thank you for your order!',
+    thankYouForOrder: '[DE] Thank you!',
     yourPolicyHasBeenSubmited: 'Ihr Antrag wurde bereits übermittelt',
     finishQuoteToGetPolicy:
       'Sie müssen Ihren Antrag abschließen, um eine Police zu erhalten.',

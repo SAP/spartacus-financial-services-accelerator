@@ -8,7 +8,7 @@ import {
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { DynamicFormsConfig } from '../../core/config/form-config';
-import { OccMockFormService } from '../../occ/services/occ-mock-form.service';
+import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { LanguageService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -16,7 +16,7 @@ import { map } from 'rxjs/operators';
 @Component({ template: '' })
 export class AbstractFormComponent implements OnInit, OnDestroy {
   constructor(
-    protected formService: OccMockFormService,
+    protected occValueListService: OccValueListService,
     protected formConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
     protected changeDetectorRef: ChangeDetectorRef

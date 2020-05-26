@@ -4,16 +4,18 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   I18nTestingModule,
+  Product,
   RoutesConfig,
   RoutingConfigService,
   RoutingService,
 } from '@spartacus/core';
-import { CheckoutConfig } from '@spartacus/storefront';
+import { CheckoutConfig, CurrentProductService } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { storefrontRoutesConfig } from '../../../../cms-structure/routing/default-routing-config';
 import { FSCartService } from '../../../../core/cart/facade/cart.service';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { checkoutConfig } from '../../config/default-checkout-config';
+import { FSProduct } from './../../../../occ/occ-models/occ.models';
 import { FSCheckoutProgressComponent } from './checkout-progress.component';
 
 const mockCheckoutConfig: CheckoutConfig = checkoutConfig;
@@ -36,6 +38,13 @@ let mockCart = {
       ],
     },
   ],
+};
+
+const mockProduct: FSProduct = {
+  code: 'testProduct',
+  defaultCategory: {
+    code: 'testCategory',
+  },
 };
 
 @Pipe({
@@ -86,6 +95,12 @@ class MockCartService {
   }
 }
 
+class MockCurrentProductService {
+  getProduct(): Observable<Product> {
+    return of(mockProduct);
+  }
+}
+
 describe('FSCheckoutProgressComponent', () => {
   let component: FSCheckoutProgressComponent;
   let fixture: ComponentFixture<FSCheckoutProgressComponent>;
@@ -94,6 +109,7 @@ describe('FSCheckoutProgressComponent', () => {
   let routingConfigService: RoutingConfigService;
   let categoryService: CategoryService;
   let cartService: FSCartService;
+  let currentProductService: CurrentProductService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -124,6 +140,10 @@ describe('FSCheckoutProgressComponent', () => {
           provide: FSCartService,
           useClass: MockCartService,
         },
+        {
+          provide: CurrentProductService,
+          useClass: MockCurrentProductService,
+        },
       ],
     }).compileComponents();
   }));
@@ -147,6 +167,10 @@ describe('FSCheckoutProgressComponent', () => {
     spyOn(routingConfigService, 'getRouteConfig').and.callThrough();
 
     cartService = TestBed.get(FSCartService as Type<FSCartService>);
+    currentProductService = TestBed.get(CurrentProductService as Type<
+      CurrentProductService
+    >);
+
     spyOn(cartService, 'getActive').and.callThrough();
   });
 
@@ -235,5 +259,17 @@ describe('FSCheckoutProgressComponent', () => {
       ],
     };
     component.ngOnInit();
+  });
+
+  it('should set category from product code param', () => {
+    mockParams = {
+      productCode: 'testProduct',
+    };
+    component.ngOnInit();
+    component.activeCategory$
+      .subscribe(activeCategory => {
+        expect(activeCategory).toBe(mockProduct.defaultCategory.code);
+      })
+      .unsubscribe();
   });
 });

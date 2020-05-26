@@ -17,24 +17,20 @@ export class OccCheckoutAdapter implements CheckoutAdapter {
     cartId: string,
     userId: string
   ) {
-    const url = this.getUserIdentificationEndpoint(userId, cartId);
+    const url = this.occEndpointService.getUrl('userIdentification', {
+      userId,
+      cartId,
+    });
     const params: HttpParams = new HttpParams().set(
       'identificationType',
       identificationType
     );
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded',
     });
     return this.http
       .patch<any>(url, null, { headers, params })
       .pipe(catchError((error: any) => throwError(error.json())));
-  }
-
-  protected getUserIdentificationEndpoint(userId: string, cartId: string) {
-    const userIdentificationEndpoint =
-      '/users/' + userId + '/carts/' + cartId + '/userIdentification';
-    return (
-      this.occEndpointService.getBaseEndpoint() + userIdentificationEndpoint
-    );
   }
 }
