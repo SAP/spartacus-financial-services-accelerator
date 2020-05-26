@@ -20,24 +20,18 @@ import { FSUserSignUp } from '../../../occ/occ-models';
 })
 export class FSRegisterComponent extends RegisterComponent {
   constructor(
-    protected auth: AuthService,
-    protected authRedirectService: AuthRedirectService,
     protected userService: UserService,
     protected globalMessageService: GlobalMessageService,
     protected fb: FormBuilder,
-    protected router?: RoutingService,
-    protected featureConfig?: FeatureConfigService,
-    protected anonymousConsentsService?: AnonymousConsentsService,
-    protected anonymousConsentsConfig?: AnonymousConsentsConfig
+    protected router: RoutingService,
+    protected anonymousConsentsService: AnonymousConsentsService,
+    protected anonymousConsentsConfig: AnonymousConsentsConfig
   ) {
     super(
-      auth,
-      authRedirectService,
       userService,
       globalMessageService,
       fb,
       router,
-      featureConfig,
       anonymousConsentsService,
       anonymousConsentsConfig
     );

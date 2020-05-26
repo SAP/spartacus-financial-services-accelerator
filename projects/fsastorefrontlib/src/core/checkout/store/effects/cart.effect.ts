@@ -122,7 +122,7 @@ export class CartEffects {
             ];
           }),
           catchError(error =>
-            from([new CartActions.CartAddEntryFail(JSON.stringify(error))])
+            from([new CartActions.CartAddEntryFail(error)])
           )
         );
     })

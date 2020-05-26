@@ -5,11 +5,11 @@ import {
   ChangeRequestState,
   StateWithChangeRequest,
 } from '../change-request-state';
-import { LoaderState, StateLoaderSelectors } from '@spartacus/core';
+import { StateUtils } from '@spartacus/core';
 
 export const getChangeRequestState: MemoizedSelector<
   StateWithChangeRequest,
-  LoaderState<ChangeRequestState>
+  StateUtils.LoaderState <ChangeRequestState>
 > = createSelector(
   fromFeature.getChangeRequestState,
   (changeRequestsState: ChangeRequestsState) =>
@@ -21,8 +21,8 @@ export const getChangeRequest: MemoizedSelector<
   any
 > = createSelector(
   getChangeRequestState,
-  (state: LoaderState<ChangeRequestState>) => {
-    return StateLoaderSelectors.loaderValueSelector(state).content;
+  (state: StateUtils.LoaderState<ChangeRequestState>) => {
+    return StateUtils.loaderValueSelector(state).content;
   }
 );
 
@@ -31,8 +31,8 @@ export const getLoaded: MemoizedSelector<
   any
 > = createSelector(
   getChangeRequestState,
-  (state: LoaderState<ChangeRequestState>) =>
-    StateLoaderSelectors.loaderValueSelector(state).loaded
+  (state: StateUtils.LoaderState<ChangeRequestState>) =>
+  StateUtils.loaderValueSelector(state).loaded
 );
 
 export const getChangeRequestErrorFactory: MemoizedSelector<
@@ -40,6 +40,6 @@ export const getChangeRequestErrorFactory: MemoizedSelector<
   boolean
 > = createSelector(
   getChangeRequestState,
-  (loaderState: LoaderState<ChangeRequestState>) =>
-    StateLoaderSelectors.loaderErrorSelector(loaderState)
+  (loaderState: StateUtils.LoaderState<ChangeRequestState>) =>
+  StateUtils.loaderErrorSelector(loaderState)
 );

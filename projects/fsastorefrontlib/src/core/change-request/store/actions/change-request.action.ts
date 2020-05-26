@@ -1,4 +1,4 @@
-import { StateLoaderActions } from '@spartacus/core';
+import { StateUtils } from '@spartacus/core';
 import { CHANGE_REQUEST_DATA } from '../change-request-state';
 
 export const LOAD_CHANGE_REQUEST = '[Change Request] Load Change Request';
@@ -38,126 +38,126 @@ export const UPDATE_CHANGE_REQUEST_FAIL =
 export const UPDATE_CHANGE_REQUEST_SUCCESS =
   '[Change Request] Update Change Request Success';
 
-export class CreateChangeRequest extends StateLoaderActions.LoaderLoadAction {
+export class CreateChangeRequest extends StateUtils.LoaderLoadAction {
   readonly type = CREATE_CHANGE_REQUEST;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA);
   }
 }
 
-export class CreateChangeRequestFail extends StateLoaderActions.LoaderFailAction {
+export class CreateChangeRequestFail extends StateUtils.LoaderFailAction {
   readonly type = CREATE_CHANGE_REQUEST_FAIL;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA, payload);
   }
 }
 
-export class CreateChangeRequestSuccess extends StateLoaderActions.LoaderSuccessAction {
+export class CreateChangeRequestSuccess extends StateUtils.LoaderSuccessAction {
   readonly type = CREATE_CHANGE_REQUEST_SUCCESS;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA);
   }
 }
 
-export class LoadChangeRequest extends StateLoaderActions.LoaderLoadAction {
+export class LoadChangeRequest extends StateUtils.LoaderLoadAction {
   readonly type = LOAD_CHANGE_REQUEST;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA);
   }
 }
 
-export class LoadChangeRequestFail extends StateLoaderActions.LoaderFailAction {
+export class LoadChangeRequestFail extends StateUtils.LoaderFailAction {
   readonly type = LOAD_CHANGE_REQUEST_FAIL;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA, payload);
   }
 }
 
-export class LoadChangeRequestSuccess extends StateLoaderActions.LoaderSuccessAction {
+export class LoadChangeRequestSuccess extends StateUtils.LoaderSuccessAction {
   readonly type = LOAD_CHANGE_REQUEST_SUCCESS;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA);
   }
 }
 
-export class SimulateChangeRequest extends StateLoaderActions.LoaderLoadAction {
+export class SimulateChangeRequest extends StateUtils.LoaderLoadAction {
   readonly type = SIMULATE_CHANGE_REQUEST;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA);
   }
 }
 
-export class SimulateChangeRequestFail extends StateLoaderActions.LoaderFailAction {
+export class SimulateChangeRequestFail extends StateUtils.LoaderFailAction {
   readonly type = SIMULATE_CHANGE_REQUEST_FAIL;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA, payload);
   }
 }
 
-export class SimulateChangeRequestSuccess extends StateLoaderActions.LoaderSuccessAction {
+export class SimulateChangeRequestSuccess extends StateUtils.LoaderSuccessAction {
   readonly type = SIMULATE_CHANGE_REQUEST_SUCCESS;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA);
   }
 }
 
-export class CancelChangeRequest extends StateLoaderActions.LoaderLoadAction {
+export class CancelChangeRequest extends StateUtils.LoaderLoadAction {
   readonly type = CANCEL_CHANGE_REQUEST;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA);
   }
 }
 
-export class CancelChangeRequestSuccess extends StateLoaderActions.LoaderSuccessAction {
+export class CancelChangeRequestSuccess extends StateUtils.LoaderSuccessAction {
   readonly type = CANCEL_CHANGE_REQUEST_SUCCESS;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA);
   }
 }
 
-export class CancelChangeRequestFail extends StateLoaderActions.LoaderFailAction {
+export class CancelChangeRequestFail extends StateUtils.LoaderFailAction {
   readonly type = CANCEL_CHANGE_REQUEST_FAIL;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA, payload);
   }
 }
 
-export class UpdateChangeRequest extends StateLoaderActions.LoaderLoadAction {
+export class UpdateChangeRequest extends StateUtils.LoaderLoadAction {
   readonly type = UPDATE_CHANGE_REQUEST;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA);
   }
 }
 
-export class UpdateChangeRequestFail extends StateLoaderActions.LoaderFailAction {
+export class UpdateChangeRequestFail extends StateUtils.LoaderFailAction {
   readonly type = UPDATE_CHANGE_REQUEST_FAIL;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA, payload);
   }
 }
 
-export class UpdateChangeRequestSuccess extends StateLoaderActions.LoaderSuccessAction {
+export class UpdateChangeRequestSuccess extends StateUtils.LoaderSuccessAction {
   readonly type = UPDATE_CHANGE_REQUEST_SUCCESS;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA);
   }
 }
 
-export class SubmitChangeRequest extends StateLoaderActions.LoaderLoadAction {
+export class SubmitChangeRequest extends StateUtils.LoaderLoadAction {
   readonly type = SUBMIT_CHANGE_REQUEST;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA);
   }
 }
 
-export class SubmitChangeRequestFail extends StateLoaderActions.LoaderFailAction {
+export class SubmitChangeRequestFail extends StateUtils.LoaderFailAction {
   readonly type = SUBMIT_CHANGE_REQUEST_FAIL;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA, payload);
   }
 }
 
-export class SubmitChangeRequestSuccess extends StateLoaderActions.LoaderSuccessAction {
+export class SubmitChangeRequestSuccess extends StateUtils.LoaderSuccessAction {
   readonly type = SUBMIT_CHANGE_REQUEST_SUCCESS;
   constructor(public payload: any) {
     super(CHANGE_REQUEST_DATA);

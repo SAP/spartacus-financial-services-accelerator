@@ -1,7 +1,7 @@
 import {
-  LoaderState,
   CheckoutStepsState,
   CheckoutState,
+  StateUtils,
 } from '@spartacus/core';
 
 export const CHECKOUT_FEATURE = 'checkout';
@@ -16,5 +16,5 @@ export interface FSCheckoutStepsState extends CheckoutStepsState {
 }
 
 export interface FSCheckoutState extends CheckoutState {
-  steps: LoaderState<FSCheckoutStepsState>;
+  steps: StateUtils.LoaderState <FSCheckoutStepsState>;
 }

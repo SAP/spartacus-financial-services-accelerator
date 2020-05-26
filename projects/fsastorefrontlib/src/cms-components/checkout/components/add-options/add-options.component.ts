@@ -53,7 +53,7 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
       this.activatedRoute
     );
-    this.cartLoaded$ = this.cartService.getLoaded();
+    this.cartLoaded$ = this.cartService.getLoading();
     this.entries$ = this.cartService
       .getEntries()
       .pipe(filter(entries => entries.length > 0));

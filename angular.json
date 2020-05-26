@@ -220,5 +220,8 @@
       }
     }
   },
-  "defaultProject": "fsastorefrontapp"
+  "defaultProject": "fsastorefrontapp",
+  "cli": {
+    "analytics": false
+  }
 }
