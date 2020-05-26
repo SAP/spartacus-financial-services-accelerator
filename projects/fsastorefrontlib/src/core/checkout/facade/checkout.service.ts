@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import {
-  CartDataService,
   CheckoutDeliveryService,
   CheckoutService,
+  ActiveCartService,
+  AuthService,
 } from '@spartacus/core';
 import { CheckoutSelectors, FSStateWithCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
@@ -12,10 +13,11 @@ import * as fromFSAction from '../store/actions/index';
 export class FSCheckoutService extends CheckoutService {
   constructor(
     protected fsStore: Store<FSStateWithCheckout>,
-    protected cartData: CartDataService,
+    protected activeCartService: ActiveCartService,
+    protected authService: AuthService,
     protected checkoutDeliveryService: CheckoutDeliveryService
   ) {
-    super(fsStore, cartData);
+    super(fsStore, authService, activeCartService);
   }
 
   orderPlaced: boolean;
@@ -25,8 +27,8 @@ export class FSCheckoutService extends CheckoutService {
     this.fsStore.dispatch(
       new fromFSAction.SetIdentificationType({
         identificationType: identificationType,
-        cartId: this.cartData.cartId,
-        userId: this.cartData.userId,
+        cartId: this.activeCartService.getActiveCartId,
+        userId: this.authService.getOccUserId,
       })
     );
     return this.fsStore.pipe(select(CheckoutSelectors.getIdentificationType));

@@ -29,10 +29,6 @@ import { AppComponent } from './app.component';
         client_id: 'financial_customer',
         client_secret: 'secret'
       },
-      features: {
-        level: '1.3',
-        anonymousConsents: true,
-      }
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
