@@ -47,6 +47,8 @@ export const forms = {
       ftd_currentAcc_personal_details: 'Persönliche Angaben',
       fixed_term_deposit_details_form: 'Produkt konfigurieren',
       loan_details_form: 'Produkt konfigurieren',
+      credit_card_details_form: 'Produkt konfigurieren',
+      current_account_details_form: 'Produkt konfigurieren',
     },
   },
 };

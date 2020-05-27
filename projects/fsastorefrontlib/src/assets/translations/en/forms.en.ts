@@ -51,6 +51,8 @@ export const forms = {
       ftd_currentAcc_personal_details: 'Personal Details',
       fixed_term_deposit_details_form: 'Configure a Product',
       loan_details_form: 'Configure a Product',
+      credit_card_details_form: 'Configure a Product',
+      current_account_details_form: 'Configure a Product',
     },
     definitionLoadError: 'Error occurred. Form could not be loaded.',
   },
