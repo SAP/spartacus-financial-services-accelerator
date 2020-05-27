@@ -5,27 +5,23 @@ import { StoreModule } from '@ngrx/store';
 import { UserPrefillResolver } from './user-prefill-resolver';
 
 const mockUserServiceResponse = {
-    firstName: "Donna",
-    lastName: "Moore"
-}
+  firstName: 'Donna',
+  lastName: 'Moore',
+};
 const fieldPath: string = 'firstName';
 describe('UserResolver', () => {
-    let service: UserPrefillResolver;
-    let MockUserService = {
-        get() {
-            return of(mockUserServiceResponse)
-        }
-    }
+  let service: UserPrefillResolver;
+  let MockUserService = {
+    get() {
+      return of(mockUserServiceResponse);
+    },
+  };
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [I18nTestingModule,
-        StoreModule.forRoot({}),],
-      providers: [
-        { provide: UserService, useClass: MockUserService },
-      ],
+      imports: [I18nTestingModule, StoreModule.forRoot({})],
+      providers: [{ provide: UserService, useClass: MockUserService }],
     });
-
   });
 
   // it('should inject service', () => {
@@ -35,8 +31,7 @@ describe('UserResolver', () => {
   //   it('should resolve user first name', () => {
   //       let result;
   //       service.getFieldValue(fieldPath).subscribe( res => ( result = res));
-        
+
   //       expect( result.toEqual('Donna'));
   //   });
-  
 });

@@ -7,11 +7,8 @@ import { PrefillResolver } from '@fsa/dynamicforms';
   providedIn: 'root',
 })
 export class CartPrefillResolver implements PrefillResolver {
-  constructor(protected cartService: ActiveCartService) {
-    
-  }
+  constructor(protected cartService: ActiveCartService) {}
 
-  // maybe this can also accept control and set value directly in here...
   getFieldValue(fieldPath: string) {
     const attributes = fieldPath.split('.');
     let currentValue;

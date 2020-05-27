@@ -9,7 +9,6 @@ import { PrefillResolver } from './prefill-resolver.interface';
 export class UserPrefillResolver implements PrefillResolver {
   constructor(protected userService: UserService) {}
 
-  // maybe this can also accept control and set value directly in here...
   getFieldValue(fieldPath: string) {
     const attributes = fieldPath.split('.');
     let currentValue;

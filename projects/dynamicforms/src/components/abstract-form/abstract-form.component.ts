@@ -52,26 +52,23 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-          console.log(this.config);
-    // if (this.config.prefillValue) {
-    //   // console.log(this.AppConfig);
-    //   // console.log(this.config);
-    //   // const prefillResolver = this.injector.get<PrefillResolver>(
-    //   //   this.AppConfig.dynamicForms.prefill[
-    //   //     this.config.prefillValue.targetObject
-    //   //   ].prefillResolver
-    //   // );
-    //   // if (prefillResolver) {
-    //   //   prefillResolver
-    //   //     .getFieldValue(this.config.prefillValue.targetValue)
-    //   //     .subscribe(value => {
-    //   //       if (value) {
-    //   //         this.group.get(this.config.name).setValue(value);
-    //   //       }
-    //   //     })
-    //   //     .unsubscribe();
-    //   // }
-    // }
+    if (this.config.prefillValue) {
+      const prefillResolver = this.injector.get<PrefillResolver>(
+        this.AppConfig.dynamicForms.prefill[
+          this.config.prefillValue.targetObject
+        ].prefillResolver
+      );
+      if (prefillResolver) {
+        prefillResolver
+          .getFieldValue(this.config.prefillValue.targetValue)
+          .subscribe(value => {
+            if (value) {
+              this.group.get(this.config.name).setValue(value);
+            }
+          })
+          .unsubscribe();
+      }
+    }
   }
   ngOnDestroy() {
     if (this.subscription) {

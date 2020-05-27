@@ -11,14 +11,14 @@ import { FieldConfig } from '../../core/models/form-config.interface';
 class MockOccFormService {}
 
 const mockUserServiceResponse = {
-  firstName: "Donna",
-  lastName: "Moore"
-}
+  firstName: 'Donna',
+  lastName: 'Moore',
+};
 let MockUserService = {
   get() {
-      return of(mockUserServiceResponse)
-  }
-}
+    return of(mockUserServiceResponse);
+  },
+};
 
 class MockLanguageService {
   getActive() {
@@ -40,9 +40,9 @@ const mockField: FieldConfig = {
   label: {},
   prefillValue: {
     targetObject: 'user',
-    targetValue: 'titleCode'
+    targetValue: 'titleCode',
   },
-}
+};
 
 class MockInjector {
   get<PrefilResolver>() {
@@ -56,21 +56,19 @@ class MockDynamicFormsConfig {
   dynamicForms: {
     prefill: {
       user: {
-        prefillResolver: 
-          mockPrefillResolver
-      }
-    }
-  }
+        prefillResolver: mockPrefillResolver;
+      };
+    };
+  };
 }
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {
     prefill: {
       user: {
-        prefillResolver:
-        MockUserService
-      }
-    }
+        prefillResolver: MockUserService,
+      },
+    },
   },
 };
 
@@ -82,7 +80,7 @@ describe('AbstractFormComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AbstractFormComponent],
-      imports: [ReactiveFormsModule, ],
+      imports: [ReactiveFormsModule],
       providers: [
         { provide: OccValueListService, useClass: MockOccFormService },
         { provide: LanguageService, useClass: MockLanguageService },
