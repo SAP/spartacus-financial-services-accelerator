@@ -23,12 +23,12 @@ export class CheckboxComponent extends AbstractOptionsComponent {
     this.checkBoxArray.valueChanges.subscribe(data => console.log(data));
   }
 
-  checkCheckbox(e, optionName) {
+  checkCheckbox(e, optionName, index) {
     if (this.checkBoxArray.value.includes('')) {
       this.checkBoxArray.clear();
     }
     if (e.target.checked) {
-      this.checkBoxArray.push(this.fb.control(optionName));
+      this.checkBoxArray.insert(index, this.fb.control(optionName));
     } else {
       for (let i = 0; i < this.checkBoxArray.value.length; ) {
         this.checkBoxArray.controls.forEach(item => {

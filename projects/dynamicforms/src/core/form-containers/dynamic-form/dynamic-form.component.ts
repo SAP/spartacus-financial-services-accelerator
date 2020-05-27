@@ -98,9 +98,12 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
           } else {
             const controlArray = formGroup.get(controlName) as FormArray;
             const controlValues: [] = formData[groupCode][controlName];
-            controlValues.forEach(element => {
-              controlArray.push(this.fb.control(element));
-            });
+            if (controlArray.value.includes('')) {
+              controlArray.clear();
+              controlValues.forEach(element => {
+                controlArray.push(this.fb.control(element));
+              });
+            }
           }
         }
       }
