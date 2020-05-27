@@ -20,25 +20,28 @@ export class CheckboxComponent extends AbstractOptionsComponent {
         this.checkBoxArray.push(this.fb.control(''));
       });
     }
+    this.checkBoxArray.valueChanges.subscribe(data => console.log(data));
   }
 
-  checkCheckbox(event, optionName, index) {
+  checkCheckbox(e, optionName) {
     if (this.checkBoxArray.value.includes('')) {
-      this.checkBoxArray.controls = [];
+      this.checkBoxArray.clear();
     }
-    if (
-      event.target.checked &&
-      !this.checkBoxArray.value.includes(optionName)
-    ) {
-      this.checkBoxArray.insert(index, this.fb.control(optionName));
+    if (e.target.checked) {
+      this.checkBoxArray.push(this.fb.control(optionName));
     } else {
-      if (this.checkBoxArray.length > 1) {
-        this.checkBoxArray.removeAt(index);
-      } else {
-        this.checkBoxArray.clear();
+      for (let i = 0; i < this.checkBoxArray.value.length; ) {
+        this.checkBoxArray.controls.forEach(item => {
+          if (item.value === optionName) {
+            this.checkBoxArray.removeAt(i);
+            return;
+          }
+          i++;
+        });
       }
     }
   }
+
   addedControls(addedControl): FormArray {
     return this.group.get(addedControl) as FormArray;
   }
