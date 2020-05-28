@@ -1,16 +1,14 @@
 import { Component } from '@angular/core';
 import { AbstractOptionsComponent } from '../abstract-options/abstract-options.component';
 import { FormArray } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'cx-checkbox',
   templateUrl: './checkbox.component.html',
 })
 export class CheckboxComponent extends AbstractOptionsComponent {
-  selectedControlName: string;
-  selectedOptions: string;
   checkBoxArray: FormArray;
-  selectedItems: any[] = [];
 
   ngOnInit() {
     super.ngOnInit();
@@ -20,7 +18,6 @@ export class CheckboxComponent extends AbstractOptionsComponent {
         this.checkBoxArray.push(this.fb.control(''));
       });
     }
-    this.checkBoxArray.valueChanges.subscribe(data => console.log(data));
   }
 
   checkCheckbox(e, optionName, index) {
