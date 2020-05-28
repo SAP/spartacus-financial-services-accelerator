@@ -90,7 +90,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
           if (
             formGroup &&
             formGroup.get(controlName) &&
-            !formGroup.get(controlName).value // if it doesn't have a value it's a form control, else it' formArray
+            !formGroup.get(controlName).value // if it doesn't have a value it's a form control, else it's a formArray
           ) {
             formGroup
               .get(controlName)

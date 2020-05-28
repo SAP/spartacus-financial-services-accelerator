@@ -33,7 +33,7 @@ export class CheckboxComponent extends AbstractOptionsComponent {
     // if array hasn't been cleared the validation won't fire, because array would still hold something like this [true, "", "", ""]
     if (e.target.checked) {
       if (this.checkBoxArray.value.includes('')) {
-        this.checkBoxArray.removeAt(index);
+        this.checkBoxArray.clear();
       }
       this.checkBoxArray.insert(index, this.fb.control(optionName));
     } else {
