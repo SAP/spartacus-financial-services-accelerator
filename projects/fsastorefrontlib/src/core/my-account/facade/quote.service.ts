@@ -3,7 +3,12 @@ import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { select, Store } from '@ngrx/store';
 import { AuthService, OrderEntry } from '@spartacus/core';
 import { map, take } from 'rxjs/operators';
-import { FSCart, FSOrderEntry, FSProduct } from '../../../occ/occ-models';
+import {
+  FSCart,
+  FSOrderEntry,
+  FSProduct,
+  QuoteActionType,
+} from '../../../occ/occ-models';
 import { FSCartService } from '../../cart/facade/cart.service';
 import { StateWithMyAccount } from '../store/my-account-state';
 import * as fromQuoteStore from './../store';
@@ -118,9 +123,26 @@ export class QuoteService {
       .pipe(take(1))
       .subscribe(occUserId =>
         this.store.dispatch(
-          new fromAction.BindQuote({
+          new fromAction.QuoteProcessAction({
             userId: occUserId,
             cartId: cartId,
+            action: QuoteActionType.BIND,
+          })
+        )
+      )
+      .unsubscribe();
+  }
+
+  underwriteQuote(cartId: string) {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.QuoteProcessAction({
+            userId: occUserId,
+            cartId: cartId,
+            action: QuoteActionType.UNDERWRITING,
           })
         )
       )

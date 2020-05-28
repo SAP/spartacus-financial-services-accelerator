@@ -6,6 +6,7 @@ import {
 import { async, TestBed } from '@angular/core/testing';
 import { OccQuoteAdapter } from './occ-quote.adapter';
 import { OccEndpointsService } from '@spartacus/core';
+import { QuoteActionType } from '../../occ-models';
 
 const userId = '123';
 const cartId = '123';
@@ -13,7 +14,7 @@ const quoteContent = {};
 
 const quotesEndpoint = 'quotes';
 const updateQuoteEndpoint = 'updateQuote';
-const bindQuoteEndpoint = 'bindQuote';
+const quoteActionEndpoint = 'quoteAction';
 
 class MockOccEndpointsService {
   getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
@@ -77,12 +78,14 @@ describe('OccQuoteAdapter', () => {
 
   describe('bind quote', () => {
     it('should bind user Quote', async(() => {
-      adapter.bindQuote(userId, cartId).subscribe();
+      adapter
+        .invokeQuoteAction(userId, cartId, QuoteActionType.BIND)
+        .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === bindQuoteEndpoint && req.method === 'POST';
+        return req.url === quoteActionEndpoint && req.method === 'POST';
       }, `POST method and url`);
       expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        bindQuoteEndpoint,
+        quoteActionEndpoint,
         {
           userId,
           cartId,

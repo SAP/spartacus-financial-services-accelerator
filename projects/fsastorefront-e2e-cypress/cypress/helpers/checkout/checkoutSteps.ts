@@ -54,7 +54,7 @@ export function checkOrderConfirmationBanking() {
   cy.get('cx-fs-order-confirmation-message').within(() => {
     cy.get('h5')
       .eq(0)
-      .should('have.text', ' Thank you for your order! ');
+      .should('have.text', ' Thank you! ');
   });
 }
 
@@ -99,7 +99,6 @@ export function checkOrderConfirmation() {
 }
 
 export function checkInsuranceComparisonPage(mainProduct, numberOfProducts) {
-  //TODO: add to all insurance tests
   cy.get('.heading-headline').contains(mainProduct);
   cy.get('.progress-inner-wrapper').should('have.length', 7);
   cy.get('cx-fs-comparison-table-panel').should('be.visible');
@@ -113,7 +112,6 @@ export function checkInsuranceComparisonPage(mainProduct, numberOfProducts) {
 }
 
 export function checkPersonalDetailsPageInsurance() {
-  //TODO: add to all insurance tests
   cy.get('.progress-node').should('have.length', 7);
   cy.get('cx-fs-cms-custom-container').should('be.visible');
   cy.get('cx-fs-mini-cart').should('be.visible');

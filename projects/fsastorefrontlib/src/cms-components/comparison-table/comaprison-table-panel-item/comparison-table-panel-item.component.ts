@@ -77,10 +77,7 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
               ) {
                 product.price.oneTimeChargeEntries.forEach(
                   oneTimeChargeEntry => {
-                    if (
-                      oneTimeChargeEntry.billingTime.code === 'paynow' &&
-                      oneTimeChargeEntry.price.value > 0
-                    ) {
+                    if (oneTimeChargeEntry.billingTime.code === 'paynow') {
                       this.productPrice =
                         oneTimeChargeEntry.price.formattedValue;
                     }
@@ -109,7 +106,25 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
       1,
       this.pricingData
     );
-    this.routingService.go(this.checkoutStepUrlNext);
+
+    this.subscription.add(
+      this.product$
+        .pipe(
+          map(product => {
+            let route = 'addOptions';
+            let routingParam;
+            if (product.configurable === true) {
+              route = 'configureProduct';
+              routingParam = product.code;
+            }
+            this.routingService.go({
+              cxRoute: route,
+              params: { code: routingParam },
+            });
+          })
+        )
+        .subscribe()
+    );
   }
 
   getBaseUrl() {
