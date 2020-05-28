@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AbstractOptionsComponent } from '../abstract-options/abstract-options.component';
 import { FormArray } from '@angular/forms';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'cx-checkbox',
