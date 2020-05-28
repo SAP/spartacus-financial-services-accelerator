@@ -4,6 +4,7 @@ import { Type } from '@angular/core';
 import { QuoteConnector } from './quote.connector';
 import { QuoteAdapter } from './quote.adapter';
 import createSpy = jasmine.createSpy;
+import { QuoteActionType } from './../../../occ/occ-models/occ.models';
 
 class MockQuoteAdapter implements QuoteAdapter {
   getQuotes = createSpy('QuoteAdapter.getQuotes').and.callFake(userId =>
@@ -12,9 +13,9 @@ class MockQuoteAdapter implements QuoteAdapter {
   updateQuote = createSpy('QuoteAdapter.updateQuote').and.callFake(
     (userId, cart, quote) => of('updateQuote' + userId + cart + quote)
   );
-  bindQuote = createSpy('QuoteAdapter.bindQuote').and.callFake(
+  invokeQuoteAction = createSpy('QuoteAdapter.invokeQuoteAction').and.callFake(
     (userId, policyId, contractId) =>
-      of('bindQuote' + userId + policyId + contractId)
+      of('invokeQuoteAction' + userId + policyId + contractId)
   );
 }
 const user = 'user';
@@ -45,7 +46,11 @@ describe('QuoteConnector', () => {
     expect(quoteAdapter.updateQuote).toHaveBeenCalledWith(user, cartId, {});
   });
   it('should call adapter for bindQuote', () => {
-    quoteConnector.bindQuote(user, cartId);
-    expect(quoteAdapter.bindQuote).toHaveBeenCalledWith(user, cartId);
+    quoteConnector.invokeQuoteAction(user, cartId, QuoteActionType.BIND);
+    expect(quoteAdapter.invokeQuoteAction).toHaveBeenCalledWith(
+      user,
+      cartId,
+      QuoteActionType.BIND
+    );
   });
 });

@@ -8,7 +8,7 @@ export const UPDATE_QUOTE = '[Quote] Update Quote';
 export const UPDATE_QUOTE_SUCCESS = '[Quote] Update Quote Success';
 export const UPDATE_QUOTE_FAIL = '[Quote] Update Quote Fail';
 
-export const BIND_QUOTE = '[Quote] Bind Quote';
+export const QUOTE_PROCESS_ACTION = '[Quote] Quote Process Action';
 
 export class LoadQuotes implements Action {
   readonly type = LOAD_QUOTES;
@@ -40,8 +40,8 @@ export class UpdateQuoteFail implements Action {
   constructor(public payload: any) {}
 }
 
-export class BindQuote implements Action {
-  readonly type = BIND_QUOTE;
+export class QuoteProcessAction implements Action {
+  readonly type = QUOTE_PROCESS_ACTION;
   constructor(public payload: any) {}
 }
 
@@ -51,4 +51,4 @@ export type QuoteAction =
   | LoadQuotesFail
   | UpdateQuote
   | UpdateQuoteSuccess
-  | BindQuote;
+  | QuoteProcessAction;
