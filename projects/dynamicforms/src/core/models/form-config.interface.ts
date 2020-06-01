@@ -26,6 +26,7 @@ export interface FieldConfig {
   error?: LocalizedString;
   validations?: ValidatorFunction[];
   dependsOn?: ControlDependency[];
+  prefillValue?: PrefillValue;
 }
 
 export interface ApiConfig {
@@ -33,6 +34,10 @@ export interface ApiConfig {
   param?: string;
 }
 
+export interface PrefillValue {
+  targetObject: string;
+  targetValue: string;
+}
 export interface ControlDependency {
   controlName?: string;
   conditions?: ValidatorFunction[];

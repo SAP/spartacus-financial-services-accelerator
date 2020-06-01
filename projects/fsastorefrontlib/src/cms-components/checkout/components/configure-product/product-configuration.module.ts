@@ -16,10 +16,10 @@ import {
   SpinnerModule,
 } from '@spartacus/storefront';
 import { CategoryStepGuard } from '../../guards';
-import { FormComponentsModule } from './../form-components/form-component.module';
 import { ProductConfigurationFormComponent } from './form/product-configuration-form.component';
 import { ProductConfigurationMiniCartComponent } from './mini-cart/product-configuration-mini-cart.component';
 import { ProductConfigurationNavigationComponent } from './navigation/product-configuration-navigation.component';
+import { FSDynamicformsModule } from '../../../dynamic-forms/dynamic-forms.module';
 
 const routes: Routes = [
   {
@@ -36,7 +36,7 @@ const routes: Routes = [
 @NgModule({
   imports: [
     I18nModule,
-    FormComponentsModule,
+    FSDynamicformsModule,
     DynamicFormModule,
     CommonModule,
     PageComponentModule,
