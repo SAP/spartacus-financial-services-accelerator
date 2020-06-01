@@ -3,13 +3,11 @@ import {
   HostBinding,
   OnInit,
   OnDestroy,
-  ChangeDetectorRef,
   Injector,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { DynamicFormsConfig } from '../../core/config/form-config';
-import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { LanguageService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -51,12 +49,13 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
         .subscribe()
     );
     if (this.config.prefillValue) {
-      const prefillResolver = this.injector.get<PrefillResolver>(
-        this.appConfig.dynamicForms.prefill[
-          this.config.prefillValue.targetObject
-        ].prefillResolver
-      );
-      if (prefillResolver) {
+      const targetObject = this.appConfig.dynamicForms.prefill[
+        this.config.prefillValue.targetObject
+      ];
+      if (targetObject && targetObject.prefillResolver) {
+        const prefillResolver = this.injector.get<PrefillResolver>(
+          targetObject.prefillResolver
+        );
         prefillResolver
           .getFieldValue(this.config.prefillValue.targetValue)
           .subscribe(value => {
