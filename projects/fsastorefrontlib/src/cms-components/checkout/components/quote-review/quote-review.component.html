@@ -32,7 +32,10 @@
           </h2>
           <div #ref>
             <ng-container
-              *ngIf="(cart?.insuranceQuote?.quoteDetails | json) !== '{}'"
+              *ngIf="
+                cart?.insuranceQuote?.quoteType !== 'EVENT' &&
+                (cart?.entries)[0]?.product?.defaultCategory as defaultCategory
+              "
             >
               <cx-fs-accordion-item
                 [opened]="true"
@@ -42,19 +45,17 @@
                   <div class="row justify-content-center">
                     <ul class="col-12 accordion-list">
                       <ng-container
-                        *ngFor="
-                          let item of cart?.insuranceQuote?.quoteDetails?.entry
+                        [ngTemplateOutlet]="
+                          cart?.insuranceQuote?.quoteDetails &&
+                          !(cart?.entries)[0]?.product?.configurable
+                            ? quoteDetails
+                            : configurationValues
                         "
-                      >
-                        <li class="accordion-list-item row">
-                          <div class="col-6 item-label">
-                            {{ item.key }}
-                          </div>
-                          <div class="col-6 value notice">
-                            {{ item.value }}
-                          </div>
-                        </li>
-                      </ng-container>
+                        [ngTemplateOutletContext]="{
+                          cart: cart,
+                          defaultCategory: defaultCategory
+                        }"
+                      ></ng-container>
                     </ul>
                     <div class="col-12 col-md-6">
                       <button class="action-button btn-block">
@@ -199,22 +200,30 @@
                   *ngIf="((cart?.deliveryOrderGroups)[0]?.entries)[0]?.formData"
                   class="col-12 accordion-list"
                 >
-                  <li
+                  <ng-container
                     *ngFor="
                       let formEntry of getFormContent(cart)?.personalDetails
                         | keyvalue
                     "
-                    class="accordion-list-item row"
                   >
-                    <div class="col-6 item-label">
-                      {{
-                        'forms.personalDetails.' + formEntry.key | cxTranslate
-                      }}
-                    </div>
-                    <div class="col-6 value notice">
-                      {{ formEntry.value }}
-                    </div>
-                  </li>
+                    <ng-container
+                      *ngIf="
+                        isTranslationDefined('personalDetails', formEntry.key)
+                      "
+                    >
+                      <li class="accordion-list-item row">
+                        <div class="col-6 item-label">
+                          {{
+                            'quoteReview.personalDetails.' + formEntry.key
+                              | cxTranslate
+                          }}
+                        </div>
+                        <div class="col-6 value notice">
+                          {{ formEntry.value }}
+                        </div>
+                      </li>
+                    </ng-container>
+                  </ng-container>
                 </ul>
                 <div class="col-12 col-md-6">
                   <button class="action-button btn-block">
@@ -251,4 +260,51 @@
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
+</ng-template>
+<ng-template
+  #quoteDetails
+  let-cart="cart"
+  let-defaultCategory="defaultCategory"
+>
+  <ng-container *ngFor="let item of cart?.insuranceQuote?.quoteDetails?.entry">
+    <ng-container *ngIf="isTranslationDefined(defaultCategory.code, item.key)">
+      <li class="accordion-list-item row">
+        <div class="col-6 item-label">
+          {{
+            'quoteReview.' + defaultCategory.code + '.' + item.key
+              | cxTranslate
+          }}:
+        </div>
+        <div class="col-6 value notice">
+          {{ item.value }}
+        </div>
+      </li>
+    </ng-container>
+  </ng-container>
+</ng-template>
+<ng-template
+  #configurationValues
+  let-cart="cart"
+  let-defaultCategory="defaultCategory"
+>
+  <ng-container
+    *ngFor="
+      let item of ((cart?.entries)[0]?.configurationInfos)[0]
+        ?.configurationValues.entry
+    "
+  >
+    <ng-container *ngIf="isTranslationDefined(defaultCategory.code, item.key)">
+      <li class="accordion-list-item row">
+        <div class="col-6 item-label">
+          {{
+            'quoteReview.' + defaultCategory.code + '.' + item.key
+              | cxTranslate
+          }}:
+        </div>
+        <div class="col-6 value notice">
+          {{ item.value }}
+        </div>
+      </li>
+    </ng-container>
+  </ng-container>
 </ng-template>

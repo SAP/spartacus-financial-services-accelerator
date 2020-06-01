@@ -1,6 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Cart, OccConfig, RoutingService } from '@spartacus/core';
+import {
+  Cart,
+  OccConfig,
+  RoutingService,
+  TranslationService,
+} from '@spartacus/core';
 import { ModalRef, ModalService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -37,7 +42,8 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected checkoutConfigService: FSCheckoutConfigService,
     protected activatedRoute: ActivatedRoute,
     protected modalService: ModalService,
-    protected categoryService: CategoryService
+    protected categoryService: CategoryService,
+    protected translationService: TranslationService
   ) {}
 
   ngOnInit() {
@@ -125,5 +131,22 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  isTranslationDefined(
+    translationGroup: String,
+    translationKey: String
+  ): boolean {
+    let result = false;
+    this.translationService
+      .translate('quoteReview.' + translationGroup + '.' + translationKey)
+      .subscribe(translation => {
+        console.log(translation);
+        if (!translation.includes('quoteReview.' + translationGroup)) {
+          result = true;
+        }
+      })
+      .unsubscribe();
+    return result;
   }
 }

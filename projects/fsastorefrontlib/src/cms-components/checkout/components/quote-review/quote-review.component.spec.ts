@@ -1,15 +1,20 @@
 import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
+import {
+  I18nTestingModule,
+  OccConfig,
+  RoutingService,
+  TranslationService,
+} from '@spartacus/core';
 import { ModalService, SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
+import { CategoryService } from './../../../../core/checkout/services/category/category.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { AccordionModule } from './../../../../shared/accordion/accordion.module';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 import { QuoteReviewComponent } from './quote-review.component';
-import { CategoryService } from './../../../../core/checkout/services/category/category.service';
 
 const formDataContent = '{"content":"formContent"}';
 const categoryCode = 'insurances_auto';
@@ -48,6 +53,12 @@ class FSCheckoutConfigServiceStub {
   }
 }
 
+class MockTranslationService {
+  translate() {
+    return of();
+  }
+}
+
 const modalInstance: any = {
   componentInstance: {
     cartCode: '',
@@ -62,6 +73,7 @@ describe('Quote Review Component', () => {
   let component: QuoteReviewComponent;
   let fixture: ComponentFixture<QuoteReviewComponent>;
   let routingService: RoutingService;
+  let translationService: TranslationService;
   let categoryService: CategoryService;
 
   beforeEach(async(() => {
@@ -97,6 +109,10 @@ describe('Quote Review Component', () => {
           provide: CategoryService,
           useClass: MockCategoryService,
         },
+        {
+          provide: TranslationService,
+          useClass: MockTranslationService,
+        },
       ],
     }).compileComponents();
   }));
@@ -107,6 +123,9 @@ describe('Quote Review Component', () => {
     fixture.detectChanges();
     routingService = TestBed.get(RoutingService as Type<RoutingService>);
     categoryService = TestBed.get(CategoryService as Type<CategoryService>);
+    translationService = TestBed.get(TranslationService as Type<
+      TranslationService
+    >);
     spyOn(routingService, 'go').and.stub();
     spyOn(categoryService, 'getActiveCategory').and.callThrough();
     component.ngOnInit();
@@ -201,5 +220,22 @@ describe('Quote Review Component', () => {
   it('should get base url', () => {
     const baseUrl = component.getBaseUrl();
     expect(baseUrl).toEqual('');
+  });
+
+  it('should find translation for key', () => {
+    spyOn(translationService, 'translate').and.returnValue(of('Vehicle Vake'));
+    const isTranslationDefined = component.isTranslationDefined(
+      'insurances_auto',
+      'vehicleMake'
+    );
+    expect(isTranslationDefined).toEqual(true);
+  });
+
+  it('should not find translation for key', () => {
+    const isTranslationDefined = component.isTranslationDefined(
+      'insurances_auto',
+      'notExistringKey'
+    );
+    expect(isTranslationDefined).toEqual(false);
   });
 });
