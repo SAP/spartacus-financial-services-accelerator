@@ -5,7 +5,7 @@ import { Store, StoreModule } from '@ngrx/store';
 import { AuthService, OCC_USER_ID_CURRENT, UserToken } from '@spartacus/core';
 import { Observable, of, ReplaySubject } from 'rxjs';
 import { FSUserRequest } from '../../../occ/occ-models/occ.models';
-import * as fromAction from '../../claim/store/actions';
+import * as fromAction from '../actions';
 import {
   reducerProvider,
   reducerToken,

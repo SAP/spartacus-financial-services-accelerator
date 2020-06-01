@@ -6,9 +6,9 @@ import {
   RoutingService,
 } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { ClaimStatus } from './../../../occ/occ-models/occ.models';
+import { ClaimStatus } from '../../../occ/occ-models/occ.models';
 import { map } from 'rxjs/operators';
-import { UserRequestService } from '../facade';
+import { UserRequestService } from '../../user-request/facade';
 
 @Injectable({
   providedIn: 'root',

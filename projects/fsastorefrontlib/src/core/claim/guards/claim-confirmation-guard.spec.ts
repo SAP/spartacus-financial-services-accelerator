@@ -3,11 +3,9 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { GlobalMessageService, RoutingService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import {
-  ClaimConfirmationGuard,
-  UserRequestService,
-} from './../../../core/user-request';
-import { ClaimStatus } from './../../../occ/occ-models';
+import { UserRequestService } from '../../user-request';
+import { ClaimStatus } from '../../../occ/occ-models';
+import { ClaimConfirmationGuard } from './claim-confirmation-guard';
 
 const mockUserRequest = {
   requestId: 'requestId',

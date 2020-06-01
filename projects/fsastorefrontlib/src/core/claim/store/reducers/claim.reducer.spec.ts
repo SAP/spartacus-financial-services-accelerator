@@ -1,5 +1,5 @@
 import * as fromReducer from './claim.reducer';
-import * as fromAction from '../actions';
+import * as fromAction from '../../../user-request/actions';
 
 const { initialState } = fromReducer;
 const requestId = 'testUserRequest';
@@ -15,14 +15,14 @@ describe('Claim Reducer', () => {
     });
   });
 
-  describe('SUBMIT_USER_REQUEST', () => {
+  describe('Submit user request for claim', () => {
     it('should submit user request', () => {
       const action = new fromAction.SubmitUserRequestSuccess(mockedUserRequest);
       const state = fromReducer.reducer(initialState, action);
       expect(state.content).toEqual(mockedUserRequest);
     });
   });
-  describe('UPDATE_USER_REQUEST', () => {
+  describe('Update user request for claim', () => {
     it('should update user request', () => {
       const action = new fromAction.UpdateUserRequestSuccess(mockedUserRequest);
       const state = fromReducer.reducer(initialState, action);

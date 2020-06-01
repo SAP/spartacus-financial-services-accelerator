@@ -1,4 +1,4 @@
-import * as fromAction from '../actions';
+import * as fromAction from '../../../user-request/actions';
 import { ClaimState } from '../claim-state';
 
 export const initialState: ClaimState = {

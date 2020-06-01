@@ -6,14 +6,14 @@ import {
   MetaReducer,
   ActionReducer,
 } from '@ngrx/store';
-import * as fromUserRequestReducer from './claim.reducer';
+import * as fromClaimReducer from './claim.reducer';
 import { FSClaimState, StateWithClaim } from '../claim-state';
 import { AuthActions } from '@spartacus/core';
 import * as fromClaimAction from '../../../my-account/store/actions';
 
 export function getReducers(): ActionReducerMap<FSClaimState> {
   return {
-    claim: fromUserRequestReducer.reducer,
+    claim: fromClaimReducer.reducer,
   };
 }
 

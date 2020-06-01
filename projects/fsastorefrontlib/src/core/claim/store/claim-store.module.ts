@@ -3,10 +3,27 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { effects } from './effects';
-import { reducerProvider, reducerToken, metaReducers } from './reducers';
-import { StateModule } from '@spartacus/core';
+import { effects } from '../../user-request/effects/index';
+import { reducerProvider, reducerToken, metaReducers } from './reducers/index';
+import {
+  ConfigModule,
+  StateConfig,
+  StateModule,
+  StorageSyncType,
+} from '@spartacus/core';
 import { CLAIM_FEATURE } from './claim-state';
+export function userRequestConfigFactory(): StateConfig {
+  const config: StateConfig = {
+    state: {
+      storageSync: {
+        keys: {
+          [`${CLAIM_FEATURE}.claim.content.requestStatus`]: StorageSyncType.LOCAL_STORAGE,
+        },
+      },
+    },
+  };
+  return config;
+}
 
 @NgModule({
   imports: [
@@ -17,6 +34,7 @@ import { CLAIM_FEATURE } from './claim-state';
       metaReducers,
     }),
     EffectsModule.forFeature(effects),
+    ConfigModule.withConfigFactory(userRequestConfigFactory),
   ],
   providers: [reducerProvider],
 })

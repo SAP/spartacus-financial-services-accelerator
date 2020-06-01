@@ -7,3 +7,4 @@ export * from './user-request/index';
 export * from './cs-ticket/index';
 export * from './change-request/index';
 export * from './product-assignment/index';
+export * from './claim/index';

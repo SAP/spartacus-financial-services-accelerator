@@ -9,7 +9,7 @@ import { Observable, of, throwError } from 'rxjs';
 import * as fromActions from '../actions';
 import * as fromEffects from './claim.effect';
 import * as fromReducer from './../../store/reducers/index';
-import * as fromUserRequestActions from '../../../claim/store/actions';
+import * as fromUserRequestActions from '../../../user-request/actions';
 import { ClaimDataService } from '../../services/claim-data.service';
 import { ClaimConnector } from '../../connectors/claim.connector';
 

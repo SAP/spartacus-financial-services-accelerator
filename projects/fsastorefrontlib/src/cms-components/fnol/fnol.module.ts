@@ -22,8 +22,8 @@ import {
 import { MyAccountStoreModule } from '../../core/my-account/store/my-account-store.module';
 import { UserRequestNavigationService } from '../../core/user-request/facade/user-request-navigation.service';
 import { UserRequestService } from '../../core/user-request/facade/user-request.service';
-import { ClaimConfirmationGuard } from '../../core/user-request/guards/claim-confirmation-guard';
-import { effects } from '../../core/claim/store/effects/index';
+import { ClaimConfirmationGuard } from '../../core/claim/guards/claim-confirmation-guard';
+import { effects } from '../../core/user-request/effects/index';
 import { reducerProvider } from '../../core/claim/store/reducers/index';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { ProgressBarModule } from '../progress-bar/progress-bar.module';
@@ -35,7 +35,7 @@ import { FNOLSummaryComponent } from './fnol-summary/fnol-summary.component';
 const routes: Routes = [
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard],
+    canActivate: [AuthGuard, CmsPageGuard, ClaimConfirmationGuard],
     data: {
       cxRoute: 'fnolIncidentPage',
       pageLabel: 'fnolIncidentPage',
@@ -44,7 +44,7 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard],
+    canActivate: [AuthGuard, CmsPageGuard, ClaimConfirmationGuard],
     data: {
       cxRoute: 'fnolIncidentReportPage',
       pageLabel: 'fnolIncidentReportPage',
@@ -53,7 +53,7 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard],
+    canActivate: [AuthGuard, CmsPageGuard, ClaimConfirmationGuard],
     data: {
       cxRoute: 'fnolGeneralInfoPage',
       pageLabel: 'fnolGeneralInfoPage',
