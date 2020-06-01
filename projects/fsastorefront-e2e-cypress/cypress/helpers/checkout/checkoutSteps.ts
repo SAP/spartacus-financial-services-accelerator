@@ -1,5 +1,4 @@
 import { Accordions } from './accordions';
-import { waitForPage } from '../generalHelpers';
 
 export function populatePersonalDetailsPage() {
   cy.get('cx-dynamic-form').within(() => {
@@ -219,6 +218,7 @@ export function populatePropertyAddress() {
 }
 
 export function startInsuranceCheckout(mainProduct) {
+  cy.wait(500);
   cy.selectOptionFromDropdown({
     menuOption: 'Insurance',
     dropdownItem: mainProduct,

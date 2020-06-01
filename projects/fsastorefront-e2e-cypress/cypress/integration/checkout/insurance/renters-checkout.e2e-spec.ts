@@ -13,6 +13,14 @@ context('Renters Checkout', () => {
     cy.visit('/');
   });
 
+  it('Should be able to register user without phone number', () => {
+    register.registerUser(registrationUserWithoutPhone);
+    register.loginInUser(
+      registrationUserWithoutPhone.email,
+      registrationUserWithoutPhone.password
+    );
+  });
+
   it('Should open renters category page', () => {
     checkout.startInsuranceCheckout('Renters');
   });
@@ -38,14 +46,6 @@ context('Renters Checkout', () => {
     checkout.removeOptionalProduct('Bicycles Cover');
     renters.checkMiniCartRentersRemovedProduct();
     checkout.clickContinueButton();
-  });
-
-  it('Should be able to register user without phone number', () => {
-    register.populateRegistrationForm(registrationUserWithoutPhone);
-    register.loginInUser(
-      registrationUserWithoutPhone.email,
-      registrationUserWithoutPhone.password
-    );
   });
 
   it('Should populate personal details page', () => {
