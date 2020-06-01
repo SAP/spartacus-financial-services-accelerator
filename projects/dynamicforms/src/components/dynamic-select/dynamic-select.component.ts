@@ -22,13 +22,7 @@ export class DynamicSelectComponent extends AbstractFormComponent {
     protected formService: FormService,
     protected injector: Injector
   ) {
-    super(
-      occValueListService,
-      formConfig,
-      languageService,
-      changeDetectorRef,
-      injector
-    );
+    super(formConfig, languageService, injector);
   }
 
   ngOnInit() {

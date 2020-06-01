@@ -1,38 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { LanguageService } from '@spartacus/core';
-import { of } from 'rxjs';
-import { Type, Injector } from '@angular/core';
-import { OccValueListService } from '../../occ/services/occ-value-list.service';
+import { of, Observable } from 'rxjs';
+import { Type } from '@angular/core';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { AbstractFormComponent } from './abstract-form.component';
 import { FieldConfig } from '../../core/models/form-config.interface';
-
-class MockOccFormService {}
-
-const mockUserServiceResponse = {
-  firstName: 'Donna',
-  lastName: 'Moore',
-};
-let MockUserService = {
-  get() {
-    return of(mockUserServiceResponse);
-  },
-};
+import { UserPrefillResolver } from '../../core';
 
 class MockLanguageService {
   getActive() {
     return of('en');
   }
 }
-class mockPrefillResolver {
-  getFieldValue() {
-    return of('Donna');
-  }
-}
+
 const enLabel = 'En test string';
 const defaultLabel = 'Test string';
 const mockCssClass = 'testClass';
+
+const targetValue = 'titleCode';
 
 const mockField: FieldConfig = {
   fieldType: 'abstract',
@@ -40,52 +26,45 @@ const mockField: FieldConfig = {
   label: {},
   prefillValue: {
     targetObject: 'user',
-    targetValue: 'titleCode',
+    targetValue: targetValue,
   },
 };
 
-class MockInjector {
-  get<PrefilResolver>() {
-    return mockPrefillResolver;
+const titleCode: Observable<any> = of('mr');
+
+class MockUserPrefillResolver {
+  getFieldValue() {
+    return titleCode;
   }
-}
-const mockFormGroup = new FormGroup({
-  testTitle: new FormControl(),
-});
-class MockDynamicFormsConfig {
-  dynamicForms: {
-    prefill: {
-      user: {
-        prefillResolver: mockPrefillResolver;
-      };
-    };
-  };
 }
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {
     prefill: {
       user: {
-        prefillResolver: MockUserService,
+        prefillResolver: UserPrefillResolver,
       },
     },
   },
 };
 
+const mockFormGroup = new FormGroup({
+  testTitle: new FormControl(),
+});
+
 describe('AbstractFormComponent', () => {
   let component: AbstractFormComponent;
   let fixture: ComponentFixture<AbstractFormComponent>;
   let mockLanguageService: LanguageService;
-  let injector: Injector;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AbstractFormComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide: OccValueListService, useClass: MockOccFormService },
         { provide: LanguageService, useClass: MockLanguageService },
-        { provide: Injector, useClass: MockInjector },
-        { provide: DynamicFormsConfig, useValue: MockDynamicFormsConfig },
+        { provide: DynamicFormsConfig, useValue: mockDynamicFormsConfig },
+        { provide: UserPrefillResolver, useClass: MockUserPrefillResolver },
       ],
     }).compileComponents();
     mockLanguageService = TestBed.get(LanguageService as Type<LanguageService>);
@@ -95,6 +74,7 @@ describe('AbstractFormComponent', () => {
     fixture = TestBed.createComponent(AbstractFormComponent);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
+    component.config = mockField;
     fixture.detectChanges();
   });
 
@@ -102,21 +82,26 @@ describe('AbstractFormComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should set default label', () => {
+  it('should create component without prefill resolver', () => {
+    mockField.prefillValue.targetObject = 'undefined';
     component.config = mockField;
-    component.config.cssClass = mockCssClass;
+    component.ngOnInit();
+    expect(component).toBeTruthy();
+  });
+
+  it('should set default label and css class', () => {
     mockField.label.default = defaultLabel;
+    mockField.cssClass = mockCssClass;
+    component.config = mockField;
     component.ngOnInit();
     expect(component.hostComponentClass).toEqual('col-12 testClass');
     expect(component.label).toEqual(defaultLabel);
   });
 
   it('should set english label', () => {
-    component.config = mockField;
-    component.config.cssClass = mockCssClass;
     mockField.label.default = enLabel;
+    component.config = mockField;
     component.ngOnInit();
-    expect(component.hostComponentClass).toEqual('col-12 testClass');
     expect(component.label).toEqual(enLabel);
   });
 });
