@@ -22,7 +22,7 @@ class MockUserService {
 const mockFieldPath = 'firstName';
 
 describe('UserPrefilResolver', () => {
-  let userprefilResolver: UserPrefillResolver;
+  let userPrefilResolver: UserPrefillResolver;
   let userService: MockUserService;
 
   beforeEach(() => {
@@ -31,19 +31,19 @@ describe('UserPrefilResolver', () => {
       providers: [{ provide: UserService, useClass: MockUserService }],
     });
 
-    userprefilResolver = TestBed.get(UserPrefillResolver as Type<
+    userPrefilResolver = TestBed.get(UserPrefillResolver as Type<
       UserPrefillResolver
     >);
     userService = TestBed.get(UserService as Type<UserService>);
   });
 
   it('should inject user resolver', () => {
-    expect(userprefilResolver).toBeTruthy();
+    expect(userPrefilResolver).toBeTruthy();
   });
 
   it('should resolve user first name', () => {
     let result;
-    userprefilResolver
+    userPrefilResolver
       .getFieldValue(mockFieldPath)
       .subscribe(value => {
         result = value;
