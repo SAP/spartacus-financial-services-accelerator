@@ -110,6 +110,11 @@ export enum StepStatus {
   CANCELED = 'CANCELED',
 }
 
+export enum QuoteActionType {
+  BIND = 'BIND',
+  UNDERWRITING = 'UNDERWRITING',
+}
+
 export interface FSOrderEntry extends OrderEntry {
   formData?: any[];
   product?: FSProduct;

@@ -89,7 +89,7 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
                   routingParam = product.code;
                 }
                 this.routingService.go({
-                  cxRoute: 'configureProduct',
+                  cxRoute: route,
                   params: { code: routingParam },
                 });
               })

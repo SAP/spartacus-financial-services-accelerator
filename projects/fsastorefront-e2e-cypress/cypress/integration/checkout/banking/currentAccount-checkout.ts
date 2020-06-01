@@ -21,7 +21,7 @@ context('Current Account Checkout', () => {
   });
 
   it('Should check comparison page', () => {
-    banking.checkBankingComparisonPage('Your Current Account Insurance');
+    banking.checkBankingComparisonPage('Your Current Account Application');
     banking.checkBankingProgressBar();
   });
 
@@ -41,7 +41,7 @@ context('Current Account Checkout', () => {
   });
 
   it('Should complete personal details step', () => {
-    cy.get('h2').contains(' Your Current Account Insurance ');
+    cy.get('h2').contains(' Your Current Account Application ');
     banking.checkPersonalDetailsPage();
     currentAccount.populatePersonalDetails();
     currentAccount.checkMiniCartCurrentAccount();
@@ -58,13 +58,13 @@ context('Current Account Checkout', () => {
   });
 
   it('Should check Legal Information page', () => {
-    banking.checkLegalInformationPage('Your Current Account Insurance');
+    banking.checkLegalInformationPage('Your Current Account Application');
     checkout.clickContinueButton();
   });
 
   it('Should select User Identification page', () => {
     userIdentification.checkUserIdentificationPage(
-      'Your Current Account Insurance'
+      'Your Current Account Application'
     );
     userIdentification.selectUserIdentification(' Video Identification ');
     checkout.clickContinueButton();
