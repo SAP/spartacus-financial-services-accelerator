@@ -12,7 +12,8 @@ import {
   StorageSyncType,
 } from '@spartacus/core';
 import { CLAIM_FEATURE } from './claim-state';
-export function userRequestConfigFactory(): StateConfig {
+
+export function claimConfigFactory(): StateConfig {
   const config: StateConfig = {
     state: {
       storageSync: {
@@ -34,7 +35,7 @@ export function userRequestConfigFactory(): StateConfig {
       metaReducers,
     }),
     EffectsModule.forFeature(effects),
-    ConfigModule.withConfigFactory(userRequestConfigFactory),
+    ConfigModule.withConfigFactory(claimConfigFactory),
   ],
   providers: [reducerProvider],
 })
