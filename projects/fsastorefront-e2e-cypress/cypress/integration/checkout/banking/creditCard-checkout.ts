@@ -30,7 +30,7 @@ context('Credit Card Checkout', () => {
   });
 
   it('Should check comparison page', () => {
-    banking.checkBankingComparisonPage('Your Credit Card Insurance');
+    banking.checkBankingComparisonPage('Your Credit Card Application');
     banking.checkBankingProgressBar();
   });
 
@@ -50,7 +50,7 @@ context('Credit Card Checkout', () => {
   });
 
   it('Should populate Personal Details page', () => {
-    cy.get('h2').contains('Your Credit Card Insurance');
+    cy.get('h2').contains('Your Credit Card Application');
     banking.checkPersonalDetailsPage();
     creditCard.populatePersonalDetails();
     checkout.clickContinueButton();
@@ -66,13 +66,13 @@ context('Credit Card Checkout', () => {
   });
 
   it('Should check Legal Information page', () => {
-    banking.checkLegalInformationPage('Your Credit Card Insurance');
+    banking.checkLegalInformationPage('Your Credit Card Application');
     checkout.clickContinueButton();
   });
 
   it('Should complete User Identification page', () => {
     userIdentification.checkUserIdentificationPage(
-      'Your Credit Card Insurance'
+      'Your Credit Card Application'
     );
     userIdentification.selectUserIdentification('At the Nearest Branch');
     checkout.clickContinueButton();

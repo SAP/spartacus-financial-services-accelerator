@@ -81,7 +81,7 @@ export function checkOrderConfirmationBanking() {
   cy.get('cx-fs-order-confirmation-message').within(() => {
     cy.get('h5')
       .eq(0)
-      .should('have.text', ' Thank you for your order! ');
+      .should('have.text', ' Thank you! ');
   });
 }
 
@@ -121,6 +121,6 @@ export function checkOrderConfirmation() {
   cy.get('cx-fs-order-confirmation-message').within(() => {
     cy.get('h5')
       .eq(0)
-      .should('have.text', ' Thank you for your order! ');
+      .should('have.text', ' Thank you! ');
   });
 }

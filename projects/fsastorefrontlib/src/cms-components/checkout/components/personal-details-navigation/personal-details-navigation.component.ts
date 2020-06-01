@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { FSOrderEntry } from '../../../../occ/occ-models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
+import { QuoteService } from './../../../../core/my-account/facade/quote.service';
 
 @Component({
   selector: 'cx-fs-personal-details-navigation',
@@ -18,7 +19,8 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     protected formService: FormDataService,
     protected activatedRoute: ActivatedRoute,
     protected routingService: RoutingService,
-    protected checkoutConfigService: FSCheckoutConfigService
+    protected checkoutConfigService: FSCheckoutConfigService,
+    protected quoteService: QuoteService
   ) {}
 
   subscription = new Subscription();
@@ -56,6 +58,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
                   yFormData.id = entry.formData[0].id;
                 }
 
+                this.quoteService.underwriteQuote(cart.code);
                 this.formService.submit(yFormData);
               }
             })
