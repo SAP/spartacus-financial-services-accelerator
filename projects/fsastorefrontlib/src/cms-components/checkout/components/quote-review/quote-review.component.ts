@@ -141,7 +141,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     this.translationService
       .translate('quoteReview.' + translationGroup + '.' + translationKey)
       .subscribe(translation => {
-        console.log(translation);
         if (!translation.includes('quoteReview.' + translationGroup)) {
           result = true;
         }
