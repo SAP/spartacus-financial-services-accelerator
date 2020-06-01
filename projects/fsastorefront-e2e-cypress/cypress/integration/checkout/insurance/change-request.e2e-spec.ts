@@ -12,7 +12,7 @@ import * as changeRequest from '../../../helpers/changeRequest';
 
 context('Change Request for new user', () => {
   before(() => {
-    cy.visit('/login');
+    cy.visit('/');
   });
 
   it('Should register a new user', () => {

@@ -100,43 +100,7 @@ context('Life Insurance Checkout', () => {
      });
 
 
-
-
   });
   });
 
- /*   it('Should start checkout from start with second person', () => {
-
-    });
-
-    it('Should populate data for second person', () => {
-      //TODO;
-
-
-    });*/
-
-    /*it('Should populate personal details page and continue', () => {
-
-      });*/
-/*
-    it('Should check quote review page', () => {
-
-        });
-
-    it('Select default payment details', () => {
-    });
-
-    it('Place order on final review page', () => {
-    });
-
-    it('Check order confirmation', () => {
-
-      });
-
-    it('Check my policies page', () => {
-      checkMyPoliciesPage();
-      cy.get('.title').contains('Life Insurance');
-      register.validatePhoneNumber(registrationUser.phoneNumber);
-      });
-  });*/
 });
