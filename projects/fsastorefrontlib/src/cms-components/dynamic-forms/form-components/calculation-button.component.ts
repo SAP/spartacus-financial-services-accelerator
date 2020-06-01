@@ -30,10 +30,8 @@ export class CalculationButtonComponent extends AbstractFormComponent {
     protected injector: Injector
   ) {
     super(
-      occcMockFormService,
       formConfig,
       languageService,
-      changeDetectorRef,
       injector
     );
   }

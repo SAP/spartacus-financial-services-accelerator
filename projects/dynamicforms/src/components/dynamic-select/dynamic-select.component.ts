@@ -23,10 +23,8 @@ export class DynamicSelectComponent extends AbstractFormComponent {
     protected injector: Injector
   ) {
     super(
-      occValueListService,
       formConfig,
       languageService,
-      changeDetectorRef,
       injector
     );
   }

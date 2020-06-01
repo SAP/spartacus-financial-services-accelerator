@@ -18,10 +18,8 @@ import { PrefillResolver } from '../../core/resolver/prefill-resolver.interface'
 @Component({ template: '' })
 export class AbstractFormComponent implements OnInit, OnDestroy {
   constructor(
-    protected occValueListService: OccValueListService,
-    protected AppConfig: DynamicFormsConfig,
+    protected appConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
-    protected changeDetectorRef: ChangeDetectorRef,
     protected injector: Injector
   ) {}
 
@@ -54,7 +52,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
     );
     if (this.config.prefillValue) {
       const prefillResolver = this.injector.get<PrefillResolver>(
-        this.AppConfig.dynamicForms.prefill[
+        this.appConfig.dynamicForms.prefill[
           this.config.prefillValue.targetObject
         ].prefillResolver
       );
