@@ -75,17 +75,33 @@ context('Life Insurance Checkout', () => {
     checkout.populatePersonalDetailsPage();
     checkout.checkProgressBarInsurance('Your Life Insurance');
     clickContinueButton();
-    checkout.checkProgressBarInsurance();
+    //checkout.checkProgressBarInsurance();
     life.checkLifeBasicMiniCartSecondPerson();
     checkout.checkAccordions('lifeQuoteReview');
-    clickContinueButton();
-    checkout.ConfirmBindQuote();
+     cy.get('.primary-button').should('not.be.visible');
+/*    checkout.ConfirmBindQuote();
     selectPaymentMethod();
     checkout.placeOrderOnFinalReview();
     checkout.checkAccordions('lifeFinalReview');
-    checkout.checkOrderConfirmation();
-    checkMyPoliciesPage();
-    cy.get('.title').contains('Life Insurance');
+    checkout.checkOrderConfirmation();*/
+     cy.selectOptionFromDropdown({
+       menuOption: 'My Account',
+       dropdownItem: 'Quotes & Applications',
+     });
+     cy.get('cx-fs-quotes').within(() => {
+       cy.get('.info-card').should('have.length', 1);
+       cy.get('h6').should('have.text', ' Life Insurance ');
+       cy.get('.label').contains('Basic Life Insurance');
+       cy.get('.label').contains('Quote status');
+       cy.get('.value').contains('Unfinished');
+       cy.get('.value').contains('€28.10');
+
+
+     });
+
+
+
+
   });
   });
 
