@@ -212,9 +212,8 @@
                       <li class="accordion-list-item row">
                         <div class="col-6 item-label">
                           {{
-                            'quoteReview.personalDetails.' + formEntry.key
-                              | cxTranslate
-                          }}
+                            getTranslation('personalDetails', formEntry.key)
+                          }}:
                         </div>
                         <div class="col-6 value notice">
                           {{ formEntry.value }}
@@ -268,10 +267,7 @@
     <ng-container *ngIf="getTranslation(defaultCategory.code, item.key)">
       <li class="accordion-list-item row">
         <div class="col-6 item-label">
-          {{
-            'quoteReview.' + defaultCategory.code + '.' + item.key
-              | cxTranslate
-          }}:
+          {{ getTranslation(defaultCategory.code, item.key) }}:
         </div>
         <div class="col-6 value notice">
           {{ item.value }}
@@ -294,10 +290,7 @@
     <ng-container *ngIf="getTranslation(defaultCategory.code, item.key)">
       <li class="accordion-list-item row">
         <div class="col-6 item-label">
-          {{
-            'quoteReview.' + defaultCategory.code + '.' + item.key
-              | cxTranslate
-          }}:
+          {{ getTranslation(defaultCategory.code, item.key) }}:
         </div>
         <div class="col-6 value notice">
           {{ item.value }}
