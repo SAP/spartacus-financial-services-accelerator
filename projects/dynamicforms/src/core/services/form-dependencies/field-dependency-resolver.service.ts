@@ -37,8 +37,8 @@ export class FieldDependencyResolverService {
       );
       if (masterFormControl) {
         if (!masterFormControl.value) {
-          controlConfig.hidden = true;
-          dependentControl.disable();
+          this.changeControlVisibility(controlConfig, false);
+          this.changeControlEnabled(dependentControl, controlConfig, false);
         }
         masterFormControl.valueChanges.subscribe(fieldValue => {
           const dependencyValidations = this.geValidationsForCondition(
@@ -49,15 +49,38 @@ export class FieldDependencyResolverService {
             dependencyValidations
           );
           if (dependancyControl.valid) {
-            controlConfig.hidden = false;
-            dependentControl.enable();
+            this.changeControlVisibility(controlConfig, true);
+            this.changeControlEnabled(dependentControl, controlConfig, true);
           } else {
-            controlConfig.hidden = true;
-            dependentControl.disable();
+            this.changeControlVisibility(controlConfig, false);
+            this.changeControlEnabled(dependentControl, controlConfig, false);
           }
         });
       }
     });
+  }
+
+  changeControlVisibility(controlConfig, visibility) {
+    if (visibility) {
+      controlConfig.hidden = false;
+    } else {
+      controlConfig.hidden = true;
+    }
+  }
+
+  changeControlEnabled(dependentControl, controlConfig, enabled) {
+    if (enabled) {
+      if (dependentControl.controls && controlConfig.fieldConfigs) {
+        controlConfig.fieldConfigs.forEach(childConfig => {
+          childConfig.disabled ? dependentControl.controls[childConfig.name].disable()
+          : dependentControl.controls[childConfig.name].enable();
+        });
+      } else {
+        dependentControl.enable();
+      }
+    } else {
+      dependentControl.disable();
+    }
   }
 
   geValidationsForCondition(dependencyFn: ControlDependency): ValidatorFn[] {
