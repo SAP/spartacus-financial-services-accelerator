@@ -8,7 +8,6 @@ import {
 import { FormService } from '../form/form.service';
 import { ControlDependency } from './../../models/form-config.interface';
 import { FormValidationService } from './../form-validation/form-validation.service';
-import { FieldConfig } from 'dynamicforms/src/core';
 
 @Injectable()
 export class FieldDependencyResolverService {
@@ -37,7 +36,7 @@ export class FieldDependencyResolverService {
       );
       if (masterFormControl) {
         if (!masterFormControl.value) {
-          this.changeControlVisibility(controlConfig, false);
+          controlConfig.hidden = true;
           this.changeControlEnabled(dependentControl, controlConfig, false);
         }
         masterFormControl.valueChanges.subscribe(fieldValue => {
@@ -49,10 +48,10 @@ export class FieldDependencyResolverService {
             dependencyValidations
           );
           if (dependancyControl.valid) {
-            this.changeControlVisibility(controlConfig, true);
+            controlConfig.hidden = false;
             this.changeControlEnabled(dependentControl, controlConfig, true);
           } else {
-            this.changeControlVisibility(controlConfig, false);
+            controlConfig.hidden = true;
             this.changeControlEnabled(dependentControl, controlConfig, false);
           }
         });
@@ -60,20 +59,22 @@ export class FieldDependencyResolverService {
     });
   }
 
-  changeControlVisibility(controlConfig, visibility) {
-    if (visibility) {
-      controlConfig.hidden = false;
-    } else {
-      controlConfig.hidden = true;
-    }
-  }
-
+  /**
+   * Method used to enable/disable control based on input parameter and form configuration value.
+   * In case control is from group, check is done for nested controls to see if any of them has configuration set to disabled.
+   * If any field config has disabled property set to true, dynamic condition cannot change that.
+   *
+   * @param dependentControl The dependent field control for which dependencies are resolved
+   * @param controlConfig The dependent field config for which dependencies are resolved (control or group)
+   * @param enabled The enabled flag which indicates if parent control conditions are met.
+   */
   changeControlEnabled(dependentControl, controlConfig, enabled) {
     if (enabled) {
       if (dependentControl.controls && controlConfig.fieldConfigs) {
         controlConfig.fieldConfigs.forEach(childConfig => {
-          childConfig.disabled ? dependentControl.controls[childConfig.name].disable()
-          : dependentControl.controls[childConfig.name].enable();
+          childConfig.disabled
+            ? dependentControl.controls[childConfig.name].disable()
+            : dependentControl.controls[childConfig.name].enable();
         });
       } else {
         dependentControl.enable();
