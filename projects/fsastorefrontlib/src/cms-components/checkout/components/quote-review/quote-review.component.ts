@@ -129,22 +129,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     }
   }
 
-  isTranslationDefined(
-    translationGroup: String,
-    translationKey: String
-  ): boolean {
-    let result = false;
-    this.translationService
-      .translate('quoteReview.' + translationGroup + '.' + translationKey)
-      .subscribe(translation => {
-        if (!translation.includes('quoteReview.' + translationGroup)) {
-          result = true;
-        }
-      })
-      .unsubscribe();
-    return result;
-  }
-
   getTranslation(translationGroup: String, translationKey: String): String {
     return this.translationService.getTranslationKey(
       ['quoteReview', translationGroup],
