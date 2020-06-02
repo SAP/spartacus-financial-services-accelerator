@@ -43,6 +43,20 @@ export const agentListViewAccordions = [
   ' Savings Insurance ',
 ];
 
+export const finalReviewAccordionHomeowners = [
+  'Homeowners Insurance Information',
+  "What's Included",
+  'Added by you',
+  'Personal Details',
+];
+
+export const finalReviewAccordionRenters = [
+  'Renters Insurance Information',
+  "What's Included",
+  'Added by you',
+  'Personal Details',
+];
+
 export const Accordions = {
   accordions: [
     {
@@ -80,6 +94,18 @@ export const Accordions = {
     {
       category: 'agentListView',
       accordionItems: this.agentListViewAccordions,
+    },
+    {
+      category: 'propertyQuoteReview',
+      accordionItems: this.quoteReviewAccordionGroup2,
+    },
+    {
+      category: 'homeownersFinalReview',
+      accordionItems: this.finalReviewAccordionHomeowners,
+    },
+    {
+      category: 'rentersFinalReview',
+      accordionItems: this.finalReviewAccordionRenters,
     },
   ],
 };

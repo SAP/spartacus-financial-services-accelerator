@@ -230,7 +230,12 @@
                 {{ 'common.back' | cxTranslate }}
               </button>
             </div>
-            <div class="col-md-6 col-sm-6 col-xs-12">
+            <div
+              *ngIf="
+                cart.insuranceQuote?.quoteWorkflowStatus?.code === 'APPROVED'
+              "
+              class="col-md-6 col-sm-6 col-xs-12"
+            >
               <button class="primary-button btn-block" (click)="continue()">
                 {{ 'common.continue' | cxTranslate }}
               </button>

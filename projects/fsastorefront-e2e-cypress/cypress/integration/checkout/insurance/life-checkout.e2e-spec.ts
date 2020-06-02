@@ -29,7 +29,7 @@ context('Life Insurance Checkout', () => {
     });
 
     it('Should check progress bar', () => {
-      checkout.checkProgressBarInsurance();
+      checkout.checkProgressBarInsurance('Your Life Insurance');
     });
 
     it('Should populate first checkout step', () => {
@@ -59,12 +59,12 @@ context('Life Insurance Checkout', () => {
 
     it('Should populate personal details page and continue', () => {
       checkout.populatePersonalDetailsPage();
-      checkout.checkProgressBarInsurance();
+      checkout.checkProgressBarInsurance('Your life Insurance');
       clickContinueButton();
     });
 
     it('Should check quote review page', () => {
-      checkout.checkProgressBarInsurance();
+      checkout.checkProgressBarInsurance('Your life Insurance');
       life.checkLifeBasicMiniCart();
       checkout.checkAccordions('lifeQuoteReview');
       clickContinueButton();

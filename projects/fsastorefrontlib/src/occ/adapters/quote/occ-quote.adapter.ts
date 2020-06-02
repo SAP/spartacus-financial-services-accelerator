@@ -40,14 +40,21 @@ export class OccQuoteAdapter implements QuoteAdapter {
       .pipe(catchError((error: any) => throwError(error.json)));
   }
 
-  bindQuote(userId: string, cartId: string): Observable<any> {
-    const url = this.occEndpointService.getUrl('bindQuote', { userId, cartId });
+  invokeQuoteAction(
+    userId: string,
+    cartId: string,
+    quoteAction: string
+  ): Observable<any> {
+    const url = this.occEndpointService.getUrl('quoteAction', {
+      userId,
+      cartId,
+    });
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
 
     const bindQuoteAction = {
-      actionName: 'BIND',
+      actionName: quoteAction,
     };
 
     return this.http
