@@ -50,7 +50,7 @@ class FSCheckoutConfigServiceStub {
 }
 
 class MockFSTranslationService {
-  getTranslationKey() {}
+  getTranslationValue() {}
 }
 
 const modalInstance: any = {
@@ -217,7 +217,7 @@ describe('Quote Review Component', () => {
   });
 
   it('should find translation for key', () => {
-    spyOn(translationService, 'getTranslationKey').and.returnValue(
+    spyOn(translationService, 'getTranslationValue').and.returnValue(
       'test value'
     );
     const translationValue = component.getTranslation(

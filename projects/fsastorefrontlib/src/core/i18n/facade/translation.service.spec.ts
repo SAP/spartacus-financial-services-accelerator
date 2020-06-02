@@ -30,12 +30,12 @@ describe('FSTranslationService', () => {
 
   it('should get translation value', () => {
     spyOn(service, 'translate').and.returnValue(of('test value'));
-    const result = service.getTranslationKey(['testChunk'], testKey);
+    const result = service.getTranslationValue(['testChunk'], testKey);
     expect(result).toBe('test value');
   });
 
   it('should not get translation value', () => {
-    const result = service.getTranslationKey(['testChunk'], testKey);
+    const result = service.getTranslationValue(['testChunk'], testKey);
     expect(result).toBe(undefined);
   });
 });

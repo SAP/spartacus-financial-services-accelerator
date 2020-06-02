@@ -130,7 +130,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   getTranslation(translationGroup: String, translationKey: String): String {
-    return this.translationService.getTranslationKey(
+    return this.translationService.getTranslationValue(
       ['quoteReview', translationGroup],
       translationKey
     );

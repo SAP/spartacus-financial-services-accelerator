@@ -11,7 +11,10 @@ export class FSTranslationService extends I18nextTranslationService {
    * @param translationChunks identifiers of defined translation constants
    * @param translationKey translation key
    */
-  getTranslationKey(translationChunks: Array<String>, translationKey: String) {
+  getTranslationValue(
+    translationChunks: Array<String>,
+    translationKey: String
+  ) {
     let result: String;
     const translationCodes = translationChunks.join(this.SEPARATOR);
     this.translate(translationCodes + this.SEPARATOR + translationKey)
