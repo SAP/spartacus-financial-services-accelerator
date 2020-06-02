@@ -59,18 +59,20 @@ export function checkAutoPolicy() {
   cy.get('.info-card')
     .should('have.length', 1)
     .within(() => {
-      cy.get('.info-card-data')
-        .within(() => {
-          cy.get('.label').contains('Premium');
-          cy.get('.value').contains('€10.95 ');
-        });
+      cy.get('.info-card-data').within(() => {
+        cy.get('.label').contains('Premium');
+        cy.get('.value').contains('€10.95 ');
+      });
       cy.get('a')
         .contains(' Details ')
         //TODO: When cypress fix issue detached from the DOM remove force true
         .click({ force: true });
-
-      /*      cy.get('.info-card-links .link')
-              .contains(' Details ')
-              .click();*/
     });
+}
+
+export function checkMyQuotesPage() {
+  cy.selectOptionFromDropdown({
+    menuOption: 'My Account',
+    dropdownItem: 'Quotes & Applications',
+  });
 }

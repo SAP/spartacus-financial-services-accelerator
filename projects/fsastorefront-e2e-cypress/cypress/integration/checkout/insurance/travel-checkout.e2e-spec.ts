@@ -38,7 +38,6 @@ context('Travel Insurance Checkout', () => {
 
     it('Populate personal details and add payment method', () => {
       checkout.populatePersonalDetailsPage();
-      cy.get('[name="age"]').type('30');
       clickContinueButton();
       fnol.waitForQuoteReviewPage();
       clickContinueButton();

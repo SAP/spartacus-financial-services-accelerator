@@ -34,13 +34,13 @@ export const policyDetailsAccordions = [
 ];
 
 export const agentListViewAccordions = [
-  ' Homeowners Insurance ',
-  ' Renters Insurance ',
-  ' Auto Insurance ',
-  ' Life Insurance ',
-  ' Travel Insurance ',
-  ' Event Insurance ',
-  ' Savings Insurance ',
+  ' Homeowners ',
+  ' Renters ',
+  ' Auto ',
+  ' Life ',
+  ' Travel ',
+  ' Event ',
+  ' Savings ',
 ];
 
 export const finalReviewAccordionHomeowners = [

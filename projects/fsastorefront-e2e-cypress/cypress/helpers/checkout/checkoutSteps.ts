@@ -30,11 +30,7 @@ export function checkProgressBarInsurance(mainProduct) {
 
 export function populatePersonalDetailsPage() {
   cy.get('cx-dynamic-form').within(() => {
-    cy.get('[name=title]').select('Mr.');
-    cy.get('[name="firstName"]').type('Ben');
-    cy.get('[name="lastName"]').type('Moore');
     cy.get('[name="phoneNumber"]').type('111111');
-    cy.get('[name="email"]').type('ben@moore.com');
     cy.get('[name="address1"]').type('Omladinskih Brigada');
     cy.get('[name="city"]').type('Belgrade');
     cy.get('[name="postcode"]').type('111111');
@@ -162,33 +158,6 @@ export function removeOptionalProduct(productName) {
         .contains('Add')
         .should('be.visible');
     });
-}
-
-export function checkProgressBarInsurance(mainProduct) {
-  cy.get('.progress-node').should('have.length', 7);
-  cy.get('.heading-headline').contains(mainProduct);
-  cy.get('p.label')
-    .should('have.length', 7)
-    .eq(0)
-    .contains('Choose a Cover');
-  cy.get('p.label')
-    .eq(1)
-    .contains("What's Included");
-  cy.get('p.label')
-    .eq(2)
-    .contains('Add Options');
-  cy.get('p.label')
-    .eq(3)
-    .contains('Personal Details');
-  cy.get('p.label')
-    .eq(4)
-    .contains('Quote Review');
-  cy.get('p.label')
-    .eq(5)
-    .contains('Payment Details');
-  cy.get('p.label')
-    .eq(6)
-    .contains('Final Review');
 }
 
 export function checkMyAccountEmptyPages(myAccountPage, emptyPageMessage) {

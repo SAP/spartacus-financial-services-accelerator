@@ -118,3 +118,14 @@ export function checkLifeBasicMiniCartSecondPerson() {
   };
   shared.checkMiniCart(miniCartContent);
 }
+
+export function checkLifeQuote() {
+  cy.get('cx-fs-quotes').within(() => {
+    cy.get('.info-card').should('have.length', 1);
+    cy.get('h6').should('have.text', ' Life Insurance ');
+    cy.get('.label').contains('Basic Life Insurance');
+    cy.get('.label').contains('Quote status');
+    cy.get('.value').contains('Unfinished');
+    cy.get('.value').contains('€28.10');
+  });
+}
