@@ -26,7 +26,7 @@ export class FieldDependencyResolverService {
    * @param formGroup The form group which tracks value and validity of master form controls
    */
   resolveFormControlDependencies(
-    controlConfig: FieldConfig,
+    controlConfig: any,
     dependentControl: AbstractControl,
     formGroup: FormGroup
   ) {
