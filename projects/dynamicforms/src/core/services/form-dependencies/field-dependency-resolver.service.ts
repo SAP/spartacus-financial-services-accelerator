@@ -8,6 +8,7 @@ import {
 import { FormService } from '../form/form.service';
 import { ControlDependency } from './../../models/form-config.interface';
 import { FormValidationService } from './../form-validation/form-validation.service';
+import { FieldConfig } from 'dynamicforms/src/core';
 
 @Injectable()
 export class FieldDependencyResolverService {
@@ -20,22 +21,23 @@ export class FieldDependencyResolverService {
   /**
    * Method used to enable/disable dependent control based on conditions defined at master control
    *
-   * @param dependencyConditions The conditions of master control that need to be fullfilled
+   * @param controlConfig The dependent field config for which dependencies are resolved
    * @param dependentControl The dependent field control for which dependencies are resolved
    * @param formGroup The form group which tracks value and validity of master form controls
    */
   resolveFormControlDependencies(
-    dependencyConditions: ControlDependency[],
+    controlConfig: FieldConfig,
     dependentControl: AbstractControl,
     formGroup: FormGroup
   ) {
-    dependencyConditions.forEach(condition => {
+    controlConfig.dependsOn.forEach(condition => {
       const masterFormControl = this.formService.getFormControlForCode(
         condition.controlName,
         formGroup
       );
       if (masterFormControl) {
         if (!masterFormControl.value) {
+          controlConfig.hidden = true;
           dependentControl.disable();
         }
         masterFormControl.valueChanges.subscribe(fieldValue => {
@@ -46,9 +48,13 @@ export class FieldDependencyResolverService {
             { disabled: false, value: fieldValue },
             dependencyValidations
           );
-          dependancyControl.valid
-            ? dependentControl.enable()
-            : dependentControl.disable();
+          if (dependancyControl.valid) {
+            controlConfig.hidden = false;
+            dependentControl.enable();
+          } else {
+            controlConfig.hidden = true;
+            dependentControl.disable();
+          }
         });
       }
     });

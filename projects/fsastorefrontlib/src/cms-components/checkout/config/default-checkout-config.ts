@@ -50,7 +50,7 @@ export const checkoutConfig: FSCheckoutConfig = {
         id: 'personalDetailsStep',
         name: 'fscommon.personalDetails',
         routeName: 'checkoutPersonalDetails',
-        type: []
+        type: [],
       },
       {
         id: 'quoteReviewStep',
