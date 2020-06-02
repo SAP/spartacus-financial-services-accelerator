@@ -207,9 +207,7 @@
                     "
                   >
                     <ng-container
-                      *ngIf="
-                        isTranslationDefined('personalDetails', formEntry.key)
-                      "
+                      *ngIf="getTranslation('personalDetails', formEntry.key)"
                     >
                       <li class="accordion-list-item row">
                         <div class="col-6 item-label">
@@ -267,7 +265,7 @@
   let-defaultCategory="defaultCategory"
 >
   <ng-container *ngFor="let item of cart?.insuranceQuote?.quoteDetails?.entry">
-    <ng-container *ngIf="isTranslationDefined(defaultCategory.code, item.key)">
+    <ng-container *ngIf="getTranslation(defaultCategory.code, item.key)">
       <li class="accordion-list-item row">
         <div class="col-6 item-label">
           {{
@@ -293,7 +291,7 @@
         ?.configurationValues.entry
     "
   >
-    <ng-container *ngIf="isTranslationDefined(defaultCategory.code, item.key)">
+    <ng-container *ngIf="getTranslation(defaultCategory.code, item.key)">
       <li class="accordion-list-item row">
         <div class="col-6 item-label">
           {{
