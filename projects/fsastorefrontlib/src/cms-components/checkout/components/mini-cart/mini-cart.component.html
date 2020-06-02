@@ -29,18 +29,28 @@
             (cart?.entries)[0]?.product?.defaultCategory as defaultCategory
           "
         >
-          <ng-container
-            [ngTemplateOutlet]="
-              cart?.insuranceQuote?.quoteDetails &&
-              !(cart?.entries)[0]?.product?.configurable
-                ? quoteDetails
-                : configurationValues
-            "
-            [ngTemplateOutletContext]="{
-              cart: cart,
-              defaultCategory: defaultCategory
-            }"
-          ></ng-container>
+          <li class="short-overview-item row">
+            <ng-container *ngIf="cart?.insuranceQuote?.startDate">
+              <div class="short-overview-title col-7">
+                {{ 'fscommon.startDate' | cxTranslate }}:
+              </div>
+              <div class="short-overview-value col-5">
+                {{ cart?.insuranceQuote?.startDate | cxDate: 'dd MMM yyyy' }}
+              </div>
+            </ng-container>
+            <ng-container
+              [ngTemplateOutlet]="
+                cart?.insuranceQuote?.quoteDetails &&
+                !(cart?.entries)[0]?.product?.configurable
+                  ? quoteDetails
+                  : configurationValues
+              "
+              [ngTemplateOutletContext]="{
+                cart: cart,
+                defaultCategory: defaultCategory
+              }"
+            ></ng-container>
+          </li>
         </ng-container>
         <ng-container
           *ngFor="let entry of cart.deliveryOrderGroups[0]?.entries"
@@ -73,14 +83,12 @@
 >
   <ng-container *ngFor="let item of cart?.insuranceQuote?.quoteDetails?.entry">
     <ng-container *ngIf="getTranslation(defaultCategory.code, item.key)">
-      <li class="short-overview-item row">
-        <div class="short-overview-title col-7">
-          {{ getTranslation(defaultCategory.code, item.key) }}:
-        </div>
-        <div class="short-overview-value col-5">
-          {{ item.value }}
-        </div>
-      </li>
+      <div class="short-overview-title col-7">
+        {{ getTranslation(defaultCategory.code, item.key) }}:
+      </div>
+      <div class="short-overview-value col-5">
+        {{ item.value }}
+      </div>
     </ng-container>
   </ng-container>
 </ng-template>
@@ -96,14 +104,12 @@
     "
   >
     <ng-container *ngIf="getTranslation(defaultCategory.code, item.key)">
-      <li class="short-overview-item row">
-        <div class="short-overview-title col-7">
-          {{ getTranslation(defaultCategory.code, item.key) }}:
-        </div>
-        <div class="short-overview-value col-5">
-          {{ item.value }}
-        </div>
-      </li>
+      <div class="short-overview-title col-7">
+        {{ getTranslation(defaultCategory.code, item.key) }}:
+      </div>
+      <div class="short-overview-value col-5">
+        {{ item.value }}
+      </div>
     </ng-container>
   </ng-container>
 </ng-template>

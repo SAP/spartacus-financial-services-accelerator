@@ -1,24 +1,20 @@
 export const common = {
   miniCart: {
     insurances_travel: {
-      tripStartDate: 'Startdatum',
       tripEndDate: 'Enddatum',
       Travellers: 'Anzahl der Reisenden',
       tripDetailsTravellerAges: 'Alter der Reisenden',
     },
     insurances_savings: {
-      startDate: 'Startdatum',
       annualContributionIncrease: 'Jährliche Beitragserhöhung',
       retirementAge: 'Renteneintrittsalter',
     },
     insurances_life: {
-      lifeCoverageStartDate: 'Startdatum',
       lifeWhoCovered: 'Versichert',
       lifeCoverageRequire: 'Deckungssumme',
       lifeCoverageLast: 'Länge der Abdeckung',
     },
     insurances_auto: {
-      coverageStartDate: 'Startdatum',
       vehicleMake: 'Fahrzeugmarke',
       vehicleModel: 'Fahrzeugmodell',
       vehicleType: 'Fahrzeugtyp',
