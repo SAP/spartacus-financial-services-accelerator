@@ -13,10 +13,18 @@ export interface ValidatorMapping {
 export abstract class ValidatorConfig {
   [_: string]: ValidatorMapping;
 }
+export interface PrefillMapping {
+  prefillResolver: any;
+}
+
+export abstract class PrefillConfig {
+  [_: string]: PrefillMapping;
+}
 
 export abstract class DynamicFormsConfig {
   dynamicForms: {
     components?: FormComponentConfig;
     validators?: ValidatorConfig;
+    prefill?: PrefillConfig;
   };
 }

@@ -22,10 +22,15 @@ export abstract class QuoteAdapter {
   ): Observable<any>;
 
   /**
-   * Abstract method used to bind quote for specified user and cart
+   * Abstract method used to invoke specified quote action for user and cart
    *
    * @param userId the user id
    * @param cartId the cart id
+   * @param quoteAction the quote action
    */
-  abstract bindQuote(userId: string, cartId: string): Observable<any>;
+  abstract invokeQuoteAction(
+    userId: string,
+    cartId: string,
+    quoteAction: string
+  ): Observable<any>;
 }
