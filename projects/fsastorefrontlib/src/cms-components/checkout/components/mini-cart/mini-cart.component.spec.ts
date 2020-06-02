@@ -3,9 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Cart, I18nTestingModule } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { FSProduct } from './../../../../../../../dist/fsastorefrontlib/occ/occ-models/occ.models.d';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
+import { FSProduct } from './../../../../occ/occ-models/occ.models';
 import { MiniCartComponent } from './mini-cart.component';
 
 const mockProduct: FSProduct = {
