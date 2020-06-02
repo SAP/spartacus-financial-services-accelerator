@@ -12,7 +12,8 @@ cx-page-layout {
 .MultiStepCheckoutSummaryPageTemplate,
 .FSCategoryPageTemplate,
 .CheckoutPageTemplate,
-.GeneralPageTemplate {
+.GeneralPageTemplate,
+.SearchResultsListPageTemplate {
   padding: 0;
   & > cx-page-slot {
     max-width: 1140px;

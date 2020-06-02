@@ -1,36 +1,112 @@
 <div class="cx-page" *ngIf="model$ | async as model">
-  <ng-container *ngFor="let product of model.products">
-    <p>Product name: {{ product.name }}</p>
-    <p>
-      <cx-media
-        [container]="product.images?.PRIMARY"
-        format="40Wx40H_quote_responsive"
-      ></cx-media>
-    </p>
-    <p [innerHTML]="product.summary"></p>
-    <button
-      *ngIf="product.defaultCategory && product.defaultCategory.parentCategory"
-      class="primary-button btn-block"
-      [routerLink]="
-        {
-          cxRoute: 'category',
-          params: { code: product.defaultCategory.parentCategory.code }
-        } | cxUrl
-      "
-    >
-      {{ 'fscommon.moreInfo' | cxTranslate }}
-    </button>
-    <button
-      *ngIf="product.defaultCategory"
-      class="secondary-button btn-block"
-      [routerLink]="
-        {
-          cxRoute: 'generalInformation',
-          params: { code: product.defaultCategory.code }
-        } | cxUrl
-      "
-    >
-      {{ 'quote.getQuote' | cxTranslate }}
-    </button>
-  </ng-container>
+  <div class="row my-5">
+    <div class="col-12 col-md-6">
+      <div class="cx-pagination" aria-label="product search pagination">
+        <cx-pagination
+          class="text-center"
+          [pagination]="model.pagination"
+          queryParam="currentPage"
+        ></cx-pagination>
+      </div>
+    </div>
+    <div class="col-12 col-md-4 offset-md-2">
+      <div class="form-group cx-sort-dropdown">
+        <cx-sorting
+          [sortOptions]="model.sorts"
+          (sortListEvent)="sortList($event)"
+          [selectedOption]="model.pagination.sort"
+          placeholder="{{ 'productList.sortByRelevance' | cxTranslate }}"
+        ></cx-sorting>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <ng-container *ngFor="let product of model.products">
+      <div class="col-12 col-md-6 d-flex">
+        <div class="info-card box-shadow">
+          <h6 class="title background-color-primary text-white">
+            {{ product.name }}
+          </h6>
+          <div class="info-card-wrapper">
+            <div class="info-card-content">
+              <div class="info-card-details">
+                <ul
+                  class="item-details label"
+                  [innerHTML]="product.summary"
+                ></ul>
+              </div>
+              <div class="info-card-image">
+                <span class="image-wrapper">
+                  <cx-media
+                    [container]="product.images?.PRIMARY"
+                    format="40Wx40H_quote_responsive"
+                    class="image-item"
+                  ></cx-media>
+                </span>
+              </div>
+            </div>
+            <div class="mb-3 mt-2 border-top border-color-3"></div>
+            <div class="row">
+              <div class="col-12 col-sm-5 mt-2">
+                <button
+                  *ngIf="
+                    product.defaultCategory &&
+                    product.defaultCategory.parentCategory
+                  "
+                  class="btn-action btn-block"
+                  [routerLink]="
+                    {
+                      cxRoute: 'category',
+                      params: {
+                        code: product.defaultCategory.parentCategory.code
+                      }
+                    } | cxUrl
+                  "
+                >
+                  {{ 'fscommon.moreInfo' | cxTranslate }}
+                </button>
+              </div>
+              <div class="col-12 offset-sm-2 col-sm-5">
+                <button
+                  *ngIf="product.defaultCategory"
+                  class="btn-block primary-button mt-2"
+                  [routerLink]="
+                    {
+                      cxRoute: 'generalInformation',
+                      params: { code: product.defaultCategory.code }
+                    } | cxUrl
+                  "
+                >
+                  {{ 'quote.getQuote' | cxTranslate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+  <div class="row my-5">
+    <div class="col-12 col-md-6">
+      <div class="cx-pagination" aria-label="product search pagination">
+        <cx-pagination
+          class="text-center"
+          [pagination]="model.pagination"
+          queryParam="currentPage"
+          (viewPageEvent)="pageChange($event)"
+        ></cx-pagination>
+      </div>
+    </div>
+    <div class="col-12 col-md-4 offset-md-2">
+      <div class="form-group cx-sort-dropdown">
+        <cx-sorting
+          [sortOptions]="model.sorts"
+          (sortListEvent)="sortList($event)"
+          [selectedOption]="model.pagination.sort"
+          placeholder="{{ 'productList.sortByRelevance' | cxTranslate }}"
+        ></cx-sorting>
+      </div>
+    </div>
+  </div>
 </div>
