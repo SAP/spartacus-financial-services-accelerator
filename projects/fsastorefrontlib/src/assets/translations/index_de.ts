@@ -8,6 +8,7 @@ import { forms } from './de/forms.de';
 import { policy } from './de/policy.de';
 import { premiumCalendar } from './de/premiumCalendar.de';
 import { quote } from './de/quote.de';
+import { quoteReview } from './de/quoteReview.de';
 import { userRequest } from './de/userRequest.de';
 
 export const fstranslationsDe: TranslationResources = {
@@ -21,4 +22,5 @@ export const fstranslationsDe: TranslationResources = {
   userRequest,
   changeRequest,
   configureProduct,
+  quoteReview,
 };
