@@ -9,7 +9,7 @@ import {
 } from '@spartacus/core';
 import { FSProductListComponent } from './product-list/product-list.component';
 import { RouterModule } from '@angular/router';
-import { MediaModule } from '@spartacus/storefront';
+import { MediaModule, ListNavigationModule } from '@spartacus/storefront';
 
 @NgModule({
   imports: [
@@ -18,6 +18,7 @@ import { MediaModule } from '@spartacus/storefront';
     UrlModule,
     RouterModule,
     MediaModule,
+    ListNavigationModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         FinancialServicesProductFeatureComponent: {
