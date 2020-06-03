@@ -12,8 +12,8 @@ import {
 })
 export class FSProductListComponent extends ProductListComponent {
   constructor(
-    private fsPageLayoutService: PageLayoutService,
-    private fsProductListComponentService: ProductListComponentService,
+    protected fsPageLayoutService: PageLayoutService,
+    protected fsProductListComponentService: ProductListComponentService,
     public fsScrollConfig?: ViewConfig
   ) {
     super(fsPageLayoutService, fsProductListComponentService, fsScrollConfig);
