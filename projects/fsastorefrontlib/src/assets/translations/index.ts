@@ -8,6 +8,7 @@ import { forms } from './en/forms.en';
 import { policy } from './en/policy.en';
 import { premiumCalendar } from './en/premiumCalendar.en';
 import { quote } from './en/quote.en';
+import { quoteReview } from './en/quoteReview.en';
 import { userRequest } from './en/userRequest.en';
 import { payment } from './overrides/en/payment';
 
@@ -22,6 +23,7 @@ export const fstranslations: TranslationResources = {
   userRequest,
   changeRequest,
   configureProduct,
+  quoteReview,
 };
 
 export const fsOverrides: TranslationResources = {
