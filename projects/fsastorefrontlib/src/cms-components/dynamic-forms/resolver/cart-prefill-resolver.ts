@@ -1,15 +1,15 @@
-import { ActiveCartService } from '@spartacus/core';
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { PrefillResolver } from '@fsa/dynamicforms';
 import { DatePipe } from '@angular/common';
+import { FSCartService } from './../../../core/cart/facade/cart.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartPrefillResolver implements PrefillResolver {
   constructor(
-    protected cartService: ActiveCartService,
+    protected cartService: FSCartService,
     protected datePipe: DatePipe
   ) {}
 
@@ -18,21 +18,27 @@ export class CartPrefillResolver implements PrefillResolver {
     let currentValue;
     return this.cartService.getActive().pipe(
       map(cart => {
-        const serializedCart = Object.assign({}, cart);
-        currentValue = this.serializeQuoteDetails(serializedCart);
-        attributes.forEach(attribute => {
-          if (this.isArrayAttribute(attribute)) {
-            const attributeName = attribute.split('[')[0];
-            const arrayPosition = attribute.split('[')[1].slice(0, 1);
-            currentValue = currentValue[attributeName][arrayPosition];
-          } else {
-            currentValue = currentValue[attribute];
+        console.log(cart);
+        currentValue = this.serializeQuoteDetails(cart);
+        for (const attribute of attributes) {
+          currentValue = this.getValueForAttibute(attribute, currentValue);
+          if (!currentValue) {
+            break;
           }
-        });
+        }
         currentValue = this.convertIfDate(currentValue);
         return currentValue;
       })
     );
+  }
+
+  getValueForAttibute(attribute: string, objectValue) {
+    if (attribute.indexOf('[') !== -1) {
+      const attributeName = attribute.split('[')[0];
+      const arrayPosition = attribute.split('[')[1].slice(0, 1);
+      return objectValue[attributeName][arrayPosition];
+    }
+    return objectValue[attribute];
   }
 
   convertIfDate(value) {
@@ -41,13 +47,6 @@ export class CartPrefillResolver implements PrefillResolver {
       return this.datePipe.transform(value, 'yyyy-MM-dd');
     }
     return value;
-  }
-
-  isArrayAttribute(attribute: string) {
-    if (attribute.indexOf('[') !== -1) {
-      return true;
-    }
-    return false;
   }
 
   serializeQuoteDetails(cart): any {
@@ -63,6 +62,7 @@ export class CartPrefillResolver implements PrefillResolver {
         }
       }
       if (
+        cart.insuranceQuote &&
         cart.insuranceQuote.insuredObjectList &&
         cart.insuranceQuote.insuredObjectList.insuredObjects
       ) {
@@ -80,12 +80,12 @@ export class CartPrefillResolver implements PrefillResolver {
 
   serializeInsuredObject(insuredObject) {
     if (
+      insuredObject &&
       insuredObject.insuredObjectItems &&
       insuredObject.insuredObjectItems.length > 0
     ) {
-      const serializedItems = {};
       insuredObject.insuredObjectItems.forEach(item => {
-        serializedItems[item.label] = item.value;
+        insuredObject[item.label] = item.value;
       });
       if (insuredObject.childInsuredObjectList) {
         insuredObject.childInsuredObjectList.insuredObjects.forEach(
@@ -94,7 +94,6 @@ export class CartPrefillResolver implements PrefillResolver {
           }
         );
       }
-      insuredObject.insuredObjectItems = serializedItems;
     }
     return insuredObject;
   }
