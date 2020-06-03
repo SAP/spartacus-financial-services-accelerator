@@ -1,9 +1,11 @@
 import { TestBed } from '@angular/core/testing';
-import { I18nTestingModule, ActiveCartService } from '@spartacus/core';
+import { I18nTestingModule } from '@spartacus/core';
 import { of } from 'rxjs';
 import { StoreModule } from '@ngrx/store';
 import { CartPrefillResolver } from './cart-prefill-resolver';
 import { Type } from '@angular/core';
+import { FSCartService } from 'projects/fsastorefrontlib/src/core';
+import { DatePipe } from '@angular/common';
 
 const cartCode = '0000001';
 const entryNumber = '1';
@@ -33,6 +35,12 @@ class MockCartService {
   }
 }
 
+class MockDatePipe {
+  getActive() {
+    return of(mockCart);
+  }
+}
+
 const mockFieldPath = 'code';
 const mockQuoteDetailsPath = 'insuranceQuote.quoteDetails.numberOfTravellers';
 const mockArrayPath = 'entries[0].entryNumber';
@@ -44,13 +52,19 @@ describe('UserPrefilResolver', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [I18nTestingModule, StoreModule.forRoot({})],
-      providers: [{ provide: ActiveCartService, useClass: MockCartService }],
+      providers: [
+        { provide: FSCartService, useClass: MockCartService },
+        {
+          provide: DatePipe,
+          useClass: MockDatePipe,
+        },
+      ],
     });
 
     cartPrefilResolver = TestBed.get(CartPrefillResolver as Type<
       CartPrefillResolver
     >);
-    cartService = TestBed.get(ActiveCartService as Type<ActiveCartService>);
+    cartService = TestBed.get(FSCartService as Type<FSCartService>);
   });
 
   it('should inject cart resolver', () => {

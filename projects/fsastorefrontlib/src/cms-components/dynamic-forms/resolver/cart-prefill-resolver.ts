@@ -18,7 +18,6 @@ export class CartPrefillResolver implements PrefillResolver {
     let currentValue;
     return this.cartService.getActive().pipe(
       map(cart => {
-        console.log(cart);
         currentValue = this.serializeQuoteDetails(cart);
         for (const attribute of attributes) {
           currentValue = this.getValueForAttibute(attribute, currentValue);

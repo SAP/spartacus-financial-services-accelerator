@@ -59,7 +59,7 @@ const testField2: FieldConfig = {
         },
       ],
     },
-  ]
+  ],
 };
 
 const testField3: FieldConfig = {
@@ -70,7 +70,7 @@ const testField3: FieldConfig = {
 const mockFormGroup = new FormGroup({
   testField1: new FormControl(''),
   testField2: new FormControl(''),
-  testField3: new FormControl('')
+  testField3: new FormControl(''),
 });
 
 class MockFormValidationService {
