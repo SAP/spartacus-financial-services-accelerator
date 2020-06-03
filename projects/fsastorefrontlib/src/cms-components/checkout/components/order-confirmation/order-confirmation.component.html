@@ -35,7 +35,11 @@
               </h2>
               <div #ref>
                 <ng-container
-                  *ngIf="(order?.insuranceQuote?.quoteDetails | json) !== '{}'"
+                  *ngIf="
+                    order?.insuranceQuote?.quoteType !== 'EVENT' &&
+                    (order?.entries)[0]?.product
+                      ?.defaultCategory as defaultCategory
+                  "
                 >
                   <cx-fs-accordion-item
                     [opened]="true"
@@ -48,26 +52,23 @@
                     <div class="container">
                       <div class="row justify-content-center">
                         <ul class="col-12 accordion-list">
-                          <!-- To be uncommented once we have data from yForms -->
-                          <!-- <ng-container *ngFor="let item of order?.insuranceQuote?.quoteDetails?.entry">
-                                  <li class="accordion-list-item row">
-                                      <div class="col-6">
-                                          {{ item.key }}
-                                      </div>
-                                      <div class="col-6 value notice">
-                                          {{ item.value }}
-                                      </div>
-                                  </li>
-                              </ng-container> -->
                           <li class="accordion-list-item row">
-                            <div class="col-6 item-label">
-                              {{ 'quote.quoteStatus.title' | cxTranslate }}
-                            </div>
-                            <div class="col-6 value notice">
-                              {{
-                                order.insuranceQuote?.quoteWorkflowStatus?.code
-                              }}
-                            </div>
+                            <ng-container
+                              [ngTemplateOutlet]="
+                                order?.insuranceQuote?.quoteDetails &&
+                                !(order?.entries)[0]?.product?.configurable
+                                  ? quoteDetails
+                                  : configurationValues
+                              "
+                              [ngTemplateOutletContext]="{
+                                valueList: !(order?.entries)[0]?.product
+                                  ?.configurable
+                                  ? order?.insuranceQuote?.quoteDetails?.entry
+                                  : ((order?.entries)[0]?.configurationInfos)[0]
+                                      ?.configurationValues.entry,
+                                defaultCategory: defaultCategory
+                              }"
+                            ></ng-container>
                           </li>
                         </ul>
                       </div>
@@ -128,6 +129,7 @@
                       <ng-container
                         *ngFor="
                           let item of order.deliveryOrderGroups[0]?.entries
+                            | slice: 1
                         "
                       >
                         <li class="accordion-list-item row">
@@ -203,63 +205,37 @@
               >
                 <div class="container">
                   <div class="row justify-content-center">
-                    <ul class="col-12 accordion-list">
-                      <li class="accordion-list-item row">
-                        <div class="col-6 item-label">
-                          {{ 'policy.policyHolder' | cxTranslate }}
-                        </div>
-                        <div class="col-6 value notice">
-                          Mrs. Test Tester
-                        </div>
-                      </li>
-                      <li class="accordion-list-item row">
-                        <div class="col-6 item-label">
-                          Phone Number
-                        </div>
-                        <div class="col-6 value notice">
-                          323535
-                        </div>
-                      </li>
-                      <li class="accordion-list-item row">
-                        <div class="col-6 item-label">
-                          Email Address
-                        </div>
-                        <div class="col-6 value notice">
-                          donna@moore.com
-                        </div>
-                      </li>
-                      <li class="accordion-list-item row">
-                        <div class="col-6 item-label">
-                          Address Line 1
-                        </div>
-                        <div class="col-6 value notice">
-                          Mocked Address
-                        </div>
-                      </li>
-                      <li class="accordion-list-item row">
-                        <div class="col-6 item-label">
-                          City
-                        </div>
-                        <div class="col-6 value notice">
-                          Belgrade
-                        </div>
-                      </li>
-                      <li class="accordion-list-item row">
-                        <div class="col-6 item-label">
-                          Postcode
-                        </div>
-                        <div class="col-6 value notice">
-                          11090
-                        </div>
-                      </li>
-                      <li class="accordion-list-item row">
-                        <div class="col-6 item-label">
-                          Country
-                        </div>
-                        <div class="col-6 value notice">
-                          Serbia
-                        </div>
-                      </li>
+                    <ul
+                      *ngIf="(order?.entries)[0]?.formData"
+                      class="col-12 accordion-list"
+                    >
+                      <ng-container
+                        *ngFor="
+                          let formEntry of getFormContent(order)
+                            ?.personalDetails | keyvalue
+                        "
+                      >
+                        <ng-container
+                          *ngIf="
+                            getTranslation('personalDetails', formEntry.key) !==
+                            ''
+                          "
+                        >
+                          <li class="accordion-list-item row">
+                            <div class="col-6 item-label">
+                              {{
+                                getTranslation(
+                                  'personalDetails',
+                                  formEntry.key
+                                )
+                              }}:
+                            </div>
+                            <div class="col-6 value notice">
+                              {{ formEntry.value }}
+                            </div>
+                          </li>
+                        </ng-container>
+                      </ng-container>
                     </ul>
                   </div>
                 </div>
@@ -349,4 +325,36 @@
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
+</ng-template>
+<ng-template
+  #quoteDetails
+  let-valueList="valueList"
+  let-defaultCategory="defaultCategory"
+>
+  <ng-container *ngFor="let item of valueList">
+    <ng-container *ngIf="getTranslation(defaultCategory.code, item.key) !== ''">
+      <div class="col-6 item-label">
+        {{ getTranslation(defaultCategory.code, item.key) }}:
+      </div>
+      <div class="col-6 value notice">
+        {{ item.value }}
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-template>
+<ng-template
+  #configurationValues
+  let-valueList="valueList"
+  let-defaultCategory="defaultCategory"
+>
+  <ng-container *ngFor="let item of valueList">
+    <ng-container *ngIf="getTranslation(defaultCategory.code, item.key) !== ''">
+      <div class="col-6 item-label">
+        {{ getTranslation(defaultCategory.code, item.key) }}:
+      </div>
+      <div class="col-6 value notice">
+        {{ item.value }}
+      </div>
+    </ng-container>
+  </ng-container>
 </ng-template>

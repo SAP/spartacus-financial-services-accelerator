@@ -1,4 +1,5 @@
 import { TranslationResources } from '@spartacus/core';
+import { orderConfirmation } from './/en/orderConfirmation.en';
 import { b2b } from './en/b2b.en';
 import { changeRequest } from './en/changeRequest.en';
 import { claim } from './en/claim.en';
@@ -25,6 +26,7 @@ export const fstranslations: TranslationResources = {
   changeRequest,
   configureProduct,
   quoteReview,
+  orderConfirmation,
 };
 
 export const fsOverrides: TranslationResources = {
