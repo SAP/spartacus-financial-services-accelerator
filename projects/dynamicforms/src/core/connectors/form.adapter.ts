@@ -8,9 +8,20 @@ export abstract class FormAdapter {
    * @param applicationId The identifier of application
    * @param formDefinitionId The identifier of form definition
    */
-  abstract getFormDefinition(
+  abstract getFormDefinitionById(
     applicationId: string,
     formDefinitionId: string
+  ): Observable<YFormDefinition>;
+
+  /**
+   * Abstract method used to get form definition by category and form definition type
+   *
+   * @param categoryCode The category code
+   * @param formDefinitionType The type of form definition
+   */
+  abstract getFormDefinitionByCategory(
+    categoryCode: string,
+    formDefinitionType: string
   ): Observable<YFormDefinition>;
 
   /**

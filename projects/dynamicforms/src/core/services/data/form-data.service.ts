@@ -33,11 +33,23 @@ export class FormDataService {
     );
   }
 
-  loadFormDefinition(applicationId: string, formDefinitionId: string) {
+  loadFormDefinitionById(applicationId: string, formDefinitionId: string) {
     this.store.dispatch(
       new fromAction.LoadFormDefinition({
         applicationId: applicationId,
         formDefinitionId: formDefinitionId,
+      })
+    );
+  }
+
+  loadFormDefinitionByCategory(
+    categoryCode: string,
+    yFormDefinitionType: string
+  ) {
+    this.store.dispatch(
+      new fromAction.LoadFormDefinition({
+        categoryCode: categoryCode,
+        yFormDefinitionType: yFormDefinitionType,
       })
     );
   }

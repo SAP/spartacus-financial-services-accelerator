@@ -10,6 +10,8 @@ import { FormDataService } from './form-data.service';
 
 const applicationId = 'applicationId';
 const formDefinitionId = 'formDefinitionId';
+const category = 'category';
+const yFormDefinitionType = 'PERSONAL_DETAILS';
 
 const mockDefinition: YFormDefinition = {
   formId: formDefinitionId,
@@ -73,8 +75,8 @@ describe('FormDataService', () => {
     expect(response).toEqual(mockDefinition);
   });
 
-  it('should load form definition', () => {
-    service.loadFormDefinition(applicationId, formDefinitionId);
+  it('should load form definition by id', () => {
+    service.loadFormDefinitionById(applicationId, formDefinitionId);
 
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.LoadFormDefinition({
@@ -83,7 +85,16 @@ describe('FormDataService', () => {
       })
     );
   });
+  it('should load form definition by category', () => {
+    service.loadFormDefinitionByCategory(category, yFormDefinitionType);
 
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.LoadFormDefinition({
+        categoryCode: category,
+        yFormDefinitionType: yFormDefinitionType,
+      })
+    );
+  });
   it('should load form data', () => {
     service.loadFormData('formDataId');
 

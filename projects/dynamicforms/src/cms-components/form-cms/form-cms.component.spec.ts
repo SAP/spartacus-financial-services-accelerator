@@ -60,7 +60,7 @@ class MockFormDataService {
   getFormDefinition() {
     return of(formDefinition);
   }
-  loadFormDefinition() {}
+  loadFormDefinitionById() {}
   getFormData() {
     return formData;
   }

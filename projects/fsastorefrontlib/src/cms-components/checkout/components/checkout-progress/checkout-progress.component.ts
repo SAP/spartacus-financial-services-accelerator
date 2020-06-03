@@ -52,12 +52,9 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
         .pipe(
           map(params => {
             const categoryCode = 'categoryCode';
-            const formCode = 'formCode';
             const productCode = 'productCode';
             if (params[categoryCode]) {
               this.categoryService.setActiveCategory(params[categoryCode]);
-            } else if (params[formCode]) {
-              this.categoryService.setActiveCategory(params[formCode]);
             } else if (params[productCode]) {
               this.subscription.add(
                 this.productService

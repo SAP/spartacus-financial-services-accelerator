@@ -9,13 +9,24 @@ import { FormAdapter } from './form.adapter';
 export class FormConnector {
   constructor(protected formAdapter: FormAdapter) {}
 
-  getFormDefinition(
+  getFormDefinitionById(
     applicationId,
     formDefinitionId
   ): Observable<YFormDefinition> {
-    return this.formAdapter.getFormDefinition(applicationId, formDefinitionId);
+    return this.formAdapter.getFormDefinitionById(
+      applicationId,
+      formDefinitionId
+    );
   }
-
+  getFormDefinitionByCategory(
+    categoryCode,
+    formDefinitionType
+  ): Observable<YFormDefinition> {
+    return this.formAdapter.getFormDefinitionByCategory(
+      categoryCode,
+      formDefinitionType
+    );
+  }
   getFormData(formDataId: string): Observable<YFormData> {
     return this.formAdapter.getFormData(formDataId);
   }

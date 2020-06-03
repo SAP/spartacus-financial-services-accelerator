@@ -81,7 +81,7 @@ export class MockFormDataService {
   getFormDefinition() {
     return of(formDefinition);
   }
-  loadFormDefinition() {}
+  loadFormDefinitionById() {}
   getFormData() {
     return of(formData);
   }
@@ -151,7 +151,7 @@ describe('ProductConfigurationFormComponent', () => {
     ).and.returnValue(formDataId);
     component.ngOnInit();
     expect(component.formCategory).toEqual(mockProduct.defaultCategory.code);
-    expect(component.formDefintionId).toEqual(
+    expect(component.formDefinitionId).toEqual(
       configurationCategory.yformConfiguratorSettings[0].configurationFormId
     );
     component.formData$
@@ -184,6 +184,6 @@ describe('ProductConfigurationFormComponent', () => {
     spyOn(currentProductService, 'getProduct').and.returnValue(of(product));
     component.ngOnInit();
     expect(component.formCategory).not.toBeTruthy();
-    expect(component.formDefintionId).not.toBeTruthy();
+    expect(component.formDefinitionId).not.toBeTruthy();
   });
 });

@@ -9,7 +9,7 @@ import {
   YFormDefinition,
 } from '../../../core/models/form-occ.models';
 
-const FULL_PARAMS = 'fields=FULL';
+const FULL_PARAMS = 'FULL';
 
 @Injectable()
 export class OccFormAdapter implements FormAdapter {
@@ -19,21 +19,20 @@ export class OccFormAdapter implements FormAdapter {
   ) {}
 
   saveFormData(formData: YFormData): Observable<YFormData> {
-    const url = this.getYFormsEndpoint() + '/formData';
-    let params = new HttpParams({
-      fromString:
-        FULL_PARAMS +
-        '&definitionId=' +
-        formData.formDefinition.formId +
-        '&applicationId=' +
-        formData.formDefinition.applicationId,
-    });
+    const url = this.occEndpointService.getUrl('createFormData');
+    let params: HttpParams = new HttpParams()
+      .set('definitionId', formData.formDefinition.formId)
+      .set('applicationId', formData.formDefinition.applicationId)
+      .set('fields', FULL_PARAMS);
     if (formData.refId) {
-      params = params.append('refId', formData.refId);
+      params = params.set('refId', formData.refId);
     }
 
     if (formData.id) {
-      const updateUrl = url + '/' + formData.id;
+      const formDataId = formData.id;
+      const updateUrl = this.occEndpointService.getUrl('formData', {
+        formDataId,
+      });
       return this.http
         .put<YFormData>(updateUrl, formData.content, { params: params })
         .pipe(catchError((error: any) => throwError(error.json())));
@@ -45,27 +44,36 @@ export class OccFormAdapter implements FormAdapter {
   }
 
   getFormData(formDataId: string): Observable<YFormData> {
-    const url = this.getYFormsEndpoint() + '/formData/' + formDataId;
+    const url = this.occEndpointService.getUrl('formData', { formDataId });
     return this.http
       .get<YFormData>(url)
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  getFormDefinition(
-    applicationId: string,
-    formDefinitionId: string
+  getFormDefinitionByCategory(
+    categoryCode: string,
+    formDefinitionType: string
   ): Observable<any> {
-    const url = this.getYFormsEndpoint() + '/definitions/' + formDefinitionId;
-    const params = new HttpParams({
-      fromString: FULL_PARAMS + '&applicationId=' + applicationId,
-    });
+    const url = this.occEndpointService.getUrl('definitionForCategory');
+    const params: HttpParams = new HttpParams()
+      .set('categoryCode', categoryCode)
+      .set('yFormDefinitionType', formDefinitionType)
+      .set('fields', FULL_PARAMS);
     return this.http
       .get<YFormDefinition>(url, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  protected getYFormsEndpoint() {
-    const formsEndpoint = '/forms';
-    return this.occEndpointService.getBaseEndpoint() + formsEndpoint;
+  getFormDefinitionById(
+    applicationId: string,
+    formDefinitionId: string
+  ): Observable<any> {
+    const url = this.occEndpointService.getUrl('definition', {
+      formDefinitionId,
+    });
+    const params: HttpParams = new HttpParams()
+      .set('applicationId', applicationId)
+      .set('fields', FULL_PARAMS);
+    return this.http.get<YFormDefinition>(url, { params: params });
   }
 }

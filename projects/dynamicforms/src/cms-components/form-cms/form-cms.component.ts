@@ -37,6 +37,15 @@ export class FormCMSComponent implements OnInit, OnDestroy {
         if (definition.content) {
           this.formConfig = <FormDefinition>JSON.parse(definition.content);
         }
+        const formDataId = this.formDataStorageService.getFormDataIdByDefinitionCode(
+          definition.formId
+        );
+        console.log(definition.formId);
+        console.log(formDataId);
+        if (formDataId) {
+          this.formDataService.loadFormData(formDataId);
+          this.formData$ = this.formDataService.getFormData();
+        }
         return definition;
       })
     );
@@ -45,20 +54,17 @@ export class FormCMSComponent implements OnInit, OnDestroy {
       this.component$
         .pipe(
           map(component => {
-            this.formDataService.loadFormDefinition(
-              component.applicationId,
-              component.formId
-            );
-            const formDataId = this.formDataStorageService.getFormDataIdByDefinitionCode(
-              component.formId
-            );
-            if (formDataId) {
-              this.formDataService.loadFormData(formDataId);
-              this.formData$ = this.formDataService.getFormData();
-            }
+            this.loadFormDefinition(component);
           })
         )
         .subscribe()
+    );
+  }
+
+  loadFormDefinition(component: any) {
+    this.formDataService.loadFormDefinitionById(
+      component.applicationId,
+      component.formId
     );
   }
 

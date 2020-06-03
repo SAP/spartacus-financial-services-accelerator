@@ -12,19 +12,25 @@ import * as fromUserReducers from './../../store/reducers/index';
 import * as fromEffects from './form-definition.effect';
 
 const formId = 'formId';
+const category = 'category';
 
 const formDefinition = {
-  formId: formId,
+  formDefinitionId: formId,
 };
 
 class MockFormConnector {
-  getFormDefinition() {
+  getFormDefinitionById() {
+    return of(formDefinition);
+  }
+
+  getFormDefinitionByCategory() {
     return of(formDefinition);
   }
 }
 
 class GlobalMessageServiceMock {
   remove(): void {}
+
   add(_message: GlobalMessage): void {}
 }
 
@@ -60,9 +66,9 @@ describe('Form Definition Effects', () => {
   });
 
   describe('loadFormDefinition$', () => {
-    it('should load form definition', () => {
+    it('should load form definition by id', () => {
       const action = new fromActions.LoadFormDefinition({
-        formId: formId,
+        formDefinitionId: formId,
       });
       const completion = new fromActions.LoadFormDefinitionSuccess(
         formDefinition
@@ -72,13 +78,38 @@ describe('Form Definition Effects', () => {
       expect(effects.loadFormDefinition$).toBeObservable(expected);
     });
   });
-
-  it('should fail to load form definition', () => {
-    spyOn(mockFormConnector, 'getFormDefinition').and.returnValue(
+  it('should load form definition by category', () => {
+    const action = new fromActions.LoadFormDefinition({
+      categoryCode: category,
+    });
+    const completion = new fromActions.LoadFormDefinitionSuccess(
+      formDefinition
+    );
+    actions$ = hot('-a', { a: action });
+    const expected = cold('-b', { b: completion });
+    expect(effects.loadFormDefinition$).toBeObservable(expected);
+  });
+  it('should fail load form definition by category', () => {
+    spyOn(mockFormConnector, 'getFormDefinitionByCategory').and.returnValue(
       throwError('Error')
     );
     const action = new fromActions.LoadFormDefinition({
-      formId: formId,
+      categoryCode: category,
+    });
+    const completion = new fromActions.LoadFormDefinitionFail(
+      JSON.stringify('Error')
+    );
+    actions$ = hot('-a', { a: action });
+    const expected = cold('-b', { b: completion });
+    expect(effects.loadFormDefinition$).toBeObservable(expected);
+  });
+
+  it('should fail to load form definition', () => {
+    spyOn(mockFormConnector, 'getFormDefinitionById').and.returnValue(
+      throwError('Error')
+    );
+    const action = new fromActions.LoadFormDefinition({
+      formDefinitionId: formId,
     });
     const completion = new fromActions.LoadFormDefinitionFail(
       JSON.stringify('Error')
