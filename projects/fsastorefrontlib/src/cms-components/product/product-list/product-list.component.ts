@@ -1,8 +1,24 @@
 import { Component } from '@angular/core';
-import { ProductListComponent } from '@spartacus/storefront';
+import {
+  ProductListComponent,
+  PageLayoutService,
+  ProductListComponentService,
+  ViewConfig,
+} from '@spartacus/storefront';
 
 @Component({
   selector: 'cx-fs-product-list',
   templateUrl: './product-list.component.html',
 })
-export class FSProductListComponent extends ProductListComponent {}
+export class FSProductListComponent extends ProductListComponent {
+  constructor(
+    private fsPageLayoutService: PageLayoutService,
+    private fsProductListComponentService: ProductListComponentService,
+    public fsScrollConfig?: ViewConfig
+  ) {
+    super(fsPageLayoutService, fsProductListComponentService, fsScrollConfig);
+  }
+  viewPage(pageNumber: number) {
+    this.fsProductListComponentService.viewPage(pageNumber);
+  }
+}
