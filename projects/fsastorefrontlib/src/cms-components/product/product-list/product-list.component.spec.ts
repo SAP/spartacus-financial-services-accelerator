@@ -59,7 +59,6 @@ export class MockViewConfig {
 describe('ProductListComponent', () => {
   let component: FSProductListComponent;
   let fixture: ComponentFixture<FSProductListComponent>;
-  let componentService: ProductListComponentService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -85,9 +84,6 @@ describe('ProductListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FSProductListComponent);
     component = fixture.componentInstance;
-    componentService = TestBed.get(ProductListComponentService as Type<
-      ProductListComponentService
-    >);
   });
 
   it('should create', () => {
