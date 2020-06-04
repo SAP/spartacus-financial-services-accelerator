@@ -15,7 +15,7 @@ export class FSTranslationService extends I18nextTranslationService {
     translationChunks: Array<String>,
     translationKey: String
   ) {
-    let result: String;
+    let result: String = '';
     const translationCodes = translationChunks.join(this.SEPARATOR);
     this.translate(translationCodes + this.SEPARATOR + translationKey)
       .subscribe(translation => {
