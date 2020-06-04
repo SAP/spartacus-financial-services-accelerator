@@ -1,9 +1,5 @@
 <ng-container *ngIf="group">
-  <div
-    class="dynamic-field"
-    [formGroup]="group"
-    [hidden]="group.controls[config.name]?.disabled || config.hidden"
-  >
+  <div class="dynamic-field" [formGroup]="group" [hidden]="config.hidden">
     <label class="col-form-label">
       {{ label }}
       <ng-container *ngIf="!config.required">

@@ -22,6 +22,7 @@ context('Travel Insurance Checkout', () => {
       travelCheckout.openCategoryPage();
     });
     it('Should populate insurance information form', () => {
+      checkout.checkProgressBarInsurance('Your Travel Insurance');
       travelCheckout.populateInsuranceInfoForm();
     });
 
@@ -37,7 +38,6 @@ context('Travel Insurance Checkout', () => {
 
     it('Populate personal details and add payment method', () => {
       checkout.populatePersonalDetailsPage();
-      cy.get('[name="age"]').type('30');
       clickContinueButton();
       fnol.waitForQuoteReviewPage();
       clickContinueButton();

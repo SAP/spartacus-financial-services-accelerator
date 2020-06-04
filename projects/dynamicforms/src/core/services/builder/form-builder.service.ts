@@ -27,7 +27,7 @@ export class FormBuilderService {
         controlGroup.addControl(fieldConfig.name, fieldControl);
         if (fieldConfig.dependsOn) {
           this.fieldDependencyResolverService.resolveFormControlDependencies(
-            fieldConfig.dependsOn,
+            fieldConfig,
             fieldControl,
             form
           );
@@ -35,7 +35,7 @@ export class FormBuilderService {
       });
       if (formGroup.dependsOn) {
         this.fieldDependencyResolverService.resolveFormControlDependencies(
-          formGroup.dependsOn,
+          formGroup,
           controlGroup,
           form
         );
