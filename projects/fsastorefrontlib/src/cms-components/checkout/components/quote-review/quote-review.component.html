@@ -45,20 +45,19 @@
                   <div class="row justify-content-center">
                     <ul class="col-12 accordion-list">
                       <ng-container
-                        [ngTemplateOutlet]="
-                          cart?.insuranceQuote?.quoteDetails &&
-                          !(cart?.entries)[0]?.product?.configurable
-                            ? quoteDetails
-                            : configurationValues
+                        *ngTemplateOutlet="
+                          cartDetails;
+                          context: {
+                            valueList: !(cart?.entries)[0]?.product
+                              ?.configurable
+                              ? cart?.insuranceQuote?.quoteDetails?.entry
+                              : ((cart?.entries)[0]?.configurationInfos)[0]
+                                  ?.configurationValues.entry,
+                            defaultCategory: defaultCategory
+                          }
                         "
-                        [ngTemplateOutletContext]="{
-                          valueList: !(cart?.entries)[0]?.product?.configurable
-                            ? cart?.insuranceQuote?.quoteDetails?.entry
-                            : ((cart?.entries)[0]?.configurationInfos)[0]
-                                ?.configurationValues.entry,
-                          defaultCategory: defaultCategory
-                        }"
-                      ></ng-container>
+                      >
+                      </ng-container>
                     </ul>
                     <div class="col-12 col-md-6">
                       <button class="action-button btn-block">
@@ -267,25 +266,7 @@
   <cx-spinner></cx-spinner>
 </ng-template>
 <ng-template
-  #quoteDetails
-  let-valueList="valueList"
-  let-defaultCategory="defaultCategory"
->
-  <ng-container *ngFor="let item of valueList">
-    <ng-container *ngIf="getTranslation(defaultCategory.code, item.key) !== ''">
-      <li class="accordion-list-item row">
-        <div class="col-6 item-label">
-          {{ getTranslation(defaultCategory.code, item.key) }}:
-        </div>
-        <div class="col-6 value notice">
-          {{ item.value }}
-        </div>
-      </li>
-    </ng-container>
-  </ng-container>
-</ng-template>
-<ng-template
-  #configurationValues
+  #cartDetails
   let-valueList="valueList"
   let-defaultCategory="defaultCategory"
 >

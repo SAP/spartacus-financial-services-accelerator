@@ -39,20 +39,18 @@
               </div>
             </ng-container>
             <ng-container
-              [ngTemplateOutlet]="
-                cart?.insuranceQuote?.quoteDetails &&
-                !(cart?.entries)[0]?.product?.configurable
-                  ? quoteDetails
-                  : configurationValues
+              *ngTemplateOutlet="
+                cartDetails;
+                context: {
+                  valueList: !(cart?.entries)[0]?.product?.configurable
+                    ? cart?.insuranceQuote?.quoteDetails?.entry
+                    : ((cart?.entries)[0]?.configurationInfos)[0]
+                        ?.configurationValues.entry,
+                  defaultCategory: defaultCategory
+                }
               "
-              [ngTemplateOutletContext]="{
-                valueList: !(cart?.entries)[0]?.product?.configurable
-                  ? cart?.insuranceQuote?.quoteDetails?.entry
-                  : ((cart?.entries)[0]?.configurationInfos)[0]
-                      ?.configurationValues.entry,
-                defaultCategory: defaultCategory
-              }"
-            ></ng-container>
+            >
+            </ng-container>
           </li>
         </ng-container>
         <ng-container
@@ -80,23 +78,7 @@
   </ng-container>
 </ng-container>
 <ng-template
-  #quoteDetails
-  let-valueList="valueList"
-  let-defaultCategory="defaultCategory"
->
-  <ng-container *ngFor="let item of valueList">
-    <ng-container *ngIf="getTranslation(defaultCategory.code, item.key) !== ''">
-      <div class="short-overview-title col-7">
-        {{ getTranslation(defaultCategory.code, item.key) }}:
-      </div>
-      <div class="short-overview-value col-5">
-        {{ item.value }}
-      </div>
-    </ng-container>
-  </ng-container>
-</ng-template>
-<ng-template
-  #configurationValues
+  #cartDetails
   let-valueList="valueList"
   let-defaultCategory="defaultCategory"
 >
