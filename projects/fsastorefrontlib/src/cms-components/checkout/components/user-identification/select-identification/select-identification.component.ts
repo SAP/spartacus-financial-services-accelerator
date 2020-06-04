@@ -25,11 +25,11 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
   identificationTypes: Array<any> = [
     {
       name: 'nearest_branch',
-      icon: 'icon-legal-id',
+      icon: 'icon-bank-branch',
     },
     {
       name: 'legal_identification',
-      icon: 'icon-bank-branch',
+      icon: 'icon-legal-id',
     },
     {
       name: 'video_identification',
