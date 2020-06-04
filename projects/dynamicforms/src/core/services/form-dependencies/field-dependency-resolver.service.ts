@@ -6,7 +6,10 @@ import {
   ValidatorFn,
 } from '@angular/forms';
 import { FormService } from '../form/form.service';
-import { ControlDependency } from './../../models/form-config.interface';
+import {
+  ControlDependency,
+  DynamicFormGroup,
+} from './../../models/form-config.interface';
 import { FormValidationService } from './../form-validation/form-validation.service';
 
 @Injectable()
@@ -70,7 +73,7 @@ export class FieldDependencyResolverService {
    */
   changeControlEnabled(
     dependentControl: any,
-    controlConfig: any,
+    controlConfig: DynamicFormGroup,
     enabled: boolean
   ) {
     if (enabled) {
