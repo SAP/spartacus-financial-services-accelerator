@@ -26,24 +26,60 @@ const mockCart = {
         },
       ],
     },
+    insuredObjectList: {
+      insuredObjects: [
+        {
+          insuredObjectItems: [
+            {
+              key: 'itemKey',
+              value: 'itemValue',
+            },
+          ],
+          childInsuredObjectList: {
+            insuredObjects: [
+              {
+                insuredObjectItems: [
+                  {
+                    key: 'childItemKey',
+                    value: 'childItemValue',
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      ],
+    },
   },
 };
 
+const cartWithDate = {
+  date: '02-02-1992',
+};
+
+const expectedDate = '1992-02-02';
+
+const cartWithoutQuote = {
+  code: cartCode,
+};
+
 class MockCartService {
-  getActive() {
+  getActive(): any {
     return of(mockCart);
   }
 }
 
 class MockDatePipe {
-  getActive() {
-    return of(mockCart);
+  transform() {
+    return expectedDate;
   }
 }
 
-const mockFieldPath = 'code';
+const codePath = 'code';
+const datePath = 'date';
 const mockQuoteDetailsPath = 'insuranceQuote.quoteDetails.numberOfTravellers';
 const mockArrayPath = 'entries[0].entryNumber';
+const brokenFieldPath = 'brokenAttribute';
 
 describe('UserPrefilResolver', () => {
   let cartPrefilResolver: CartPrefillResolver;
@@ -72,14 +108,38 @@ describe('UserPrefilResolver', () => {
   });
 
   it('should resolve cart code', () => {
+    spyOn(cartService, 'getActive').and.returnValue(of(cartWithoutQuote));
     let result;
     cartPrefilResolver
-      .getFieldValue(mockFieldPath)
+      .getFieldValue(codePath)
       .subscribe(value => {
         result = value;
       })
       .unsubscribe();
     expect(result).toEqual(cartCode);
+  });
+
+  it('should convert date attribute', () => {
+    spyOn(cartService, 'getActive').and.returnValue(of(cartWithDate));
+    let result;
+    cartPrefilResolver
+      .getFieldValue(datePath)
+      .subscribe(value => {
+        result = value;
+      })
+      .unsubscribe();
+    expect(result).toEqual(expectedDate);
+  });
+
+  it('should break if path does not exist', () => {
+    let result;
+    cartPrefilResolver
+      .getFieldValue(brokenFieldPath)
+      .subscribe(value => {
+        result = value;
+      })
+      .unsubscribe();
+    expect(result).toEqual(undefined);
   });
 
   it('should resolve nested quote details path', () => {
