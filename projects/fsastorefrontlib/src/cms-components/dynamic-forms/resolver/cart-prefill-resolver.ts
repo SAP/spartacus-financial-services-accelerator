@@ -49,26 +49,28 @@ export class CartPrefillResolver implements PrefillResolver {
   }
 
   serializeQuoteDetails(cart): any {
-    if (cart && cart.insuranceQuote && cart.insuranceQuote.quoteDetails) {
-      const quoteDetails = cart.insuranceQuote.quoteDetails;
-      if (quoteDetails.entry) {
+    if (cart && cart.insuranceQuote && cart.insuranceQuote) {
+      const insuranceQuote = cart.insuranceQuote;
+      if (insuranceQuote.quoteDetails && insuranceQuote.quoteDetails.entry) {
         const serilizedQuoteDetails = {};
-        quoteDetails.entry.forEach(entry => {
+        insuranceQuote.quoteDetails.entry.forEach(entry => {
           serilizedQuoteDetails[entry.key] = entry.value;
         });
         cart.insuranceQuote.quoteDetails = serilizedQuoteDetails;
       }
       if (
-        cart.insuranceQuote.insuredObjectList &&
-        cart.insuranceQuote.insuredObjectList.insuredObjects
+        insuranceQuote.insuredObjectList &&
+        insuranceQuote.insuredObjectList.insuredObjects
       ) {
-        const inusredObjects = [];
-        cart.insuranceQuote.insuredObjectList.insuredObjects.forEach(
+        const serializedInusredObjects = [];
+        insuranceQuote.insuredObjectList.insuredObjects.forEach(
           insuredObject => {
-            inusredObjects.push(this.serializeInsuredObject(insuredObject));
+            serializedInusredObjects.push(
+              this.serializeInsuredObject(insuredObject)
+            );
           }
         );
-        cart.insuranceQuote.insuredObjectList.insuredObjects = inusredObjects;
+        cart.insuranceQuote.insuredObjectList.insuredObjects = serializedInusredObjects;
       }
     }
     return cart;
