@@ -10,6 +10,7 @@ import { FormConnector } from '../../connectors/form-connector';
 import * as fromActions from '../actions';
 import * as fromUserReducers from './../../store/reducers/index';
 import * as fromEffects from './form-definition.effect';
+import { FormDefinitionType } from '@fsa/storefront';
 
 const formId = 'formId';
 const category = 'category';
@@ -17,14 +18,16 @@ const category = 'category';
 const formDefinition = {
   formDefinitionId: formId,
 };
-
+const definitions = {
+  formDefinitions: [formDefinition],
+};
 class MockFormConnector {
-  getFormDefinitionById() {
+  getFormDefinition() {
     return of(formDefinition);
   }
 
-  getFormDefinitionByCategory() {
-    return of(formDefinition);
+  getFormDefinitions() {
+    return of(definitions);
   }
 }
 
@@ -81,6 +84,7 @@ describe('Form Definition Effects', () => {
   it('should load form definition by category', () => {
     const action = new fromActions.LoadFormDefinition({
       categoryCode: category,
+      formDefinitionType: FormDefinitionType.PERSONAL_DETAILS,
     });
     const completion = new fromActions.LoadFormDefinitionSuccess(
       formDefinition
@@ -90,7 +94,7 @@ describe('Form Definition Effects', () => {
     expect(effects.loadFormDefinition$).toBeObservable(expected);
   });
   it('should fail load form definition by category', () => {
-    spyOn(mockFormConnector, 'getFormDefinitionByCategory').and.returnValue(
+    spyOn(mockFormConnector, 'getFormDefinitions').and.returnValue(
       throwError('Error')
     );
     const action = new fromActions.LoadFormDefinition({
@@ -105,7 +109,7 @@ describe('Form Definition Effects', () => {
   });
 
   it('should fail to load form definition', () => {
-    spyOn(mockFormConnector, 'getFormDefinitionById').and.returnValue(
+    spyOn(mockFormConnector, 'getFormDefinition').and.returnValue(
       throwError('Error')
     );
     const action = new fromActions.LoadFormDefinition({

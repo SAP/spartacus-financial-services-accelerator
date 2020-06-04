@@ -57,7 +57,7 @@ class MockFormDataService {
   getFormDefinition() {
     return of(formDefinition);
   }
-  loadFormDefinitionById() {}
+  loadFormDefinition() {}
 }
 
 class MockFormDataStorageService {
@@ -127,9 +127,9 @@ describe('CMSFormSubmitComponent', () => {
 
   it('should load component data', () => {
     spyOn(mockCmsComponentConnector, 'get').and.callThrough();
-    spyOn(mockFormDataService, 'loadFormDefinitionById').and.callThrough();
+    spyOn(mockFormDataService, 'loadFormDefinition').and.callThrough();
     formSubmitComponent.ngOnInit();
-    expect(mockFormDataService.loadFormDefinitionById).toHaveBeenCalled();
+    expect(mockFormDataService.loadFormDefinition).toHaveBeenCalled();
     expect(mockCmsComponentConnector.get).toHaveBeenCalled();
   });
 });

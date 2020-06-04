@@ -40,8 +40,6 @@ export class FormCMSComponent implements OnInit, OnDestroy {
         const formDataId = this.formDataStorageService.getFormDataIdByDefinitionCode(
           definition.formId
         );
-        console.log(definition.formId);
-        console.log(formDataId);
         if (formDataId) {
           this.formDataService.loadFormData(formDataId);
           this.formData$ = this.formDataService.getFormData();
@@ -62,7 +60,7 @@ export class FormCMSComponent implements OnInit, OnDestroy {
   }
 
   loadFormDefinition(component: any) {
-    this.formDataService.loadFormDefinitionById(
+    this.formDataService.loadFormDefinition(
       component.applicationId,
       component.formId
     );

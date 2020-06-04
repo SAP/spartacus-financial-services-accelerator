@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { CmsComponentData, SpinnerModule } from '@spartacus/storefront';
 import { CmsComponent, I18nTestingModule } from '@spartacus/core';
 import { GeneralInformationComponent } from './general-information.component';
+import { FormDefinitionType } from '../../../occ/occ-models';
 
 const formDefinition = {
   formId: 'formId',
@@ -19,7 +20,7 @@ class MockFormDataService {
   getFormDefinition() {
     return of(formDefinition);
   }
-  loadFormDefinitionByCategory(category, type) {
+  loadFormDefinitions(category, type) {
     return of(formDefinition);
   }
 }
@@ -101,15 +102,13 @@ describe('GeneralInformationComponent', () => {
   });
 
   it('should load form definition data', () => {
-    spyOn(
-      mockFormDataService,
-      'loadFormDefinitionByCategory'
-    ).and.callThrough();
+    spyOn(mockFormDataService, 'loadFormDefinitions').and.callThrough();
     spyOn(mockFormDataService, 'getFormDefinition').and.callThrough();
     component.ngOnInit();
-    expect(
-      mockFormDataService.loadFormDefinitionByCategory
-    ).toHaveBeenCalledWith(mockParams.formCode, component.configuratorType);
+    expect(mockFormDataService.loadFormDefinitions).toHaveBeenCalledWith(
+      mockParams.formCode,
+      FormDefinitionType.PRODUCT_CONFIGURE
+    );
     expect(mockFormDataService.getFormDefinition).toHaveBeenCalled();
     let result;
     component.formDefinition$.subscribe(value => (result = value));

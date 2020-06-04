@@ -7,15 +7,13 @@ import { FormAdapter } from './form.adapter';
 import createSpy = jasmine.createSpy;
 
 class MockFormAdapter implements FormAdapter {
-  getFormDefinitionByCategory = createSpy(
-    'FormAdapter.getFormDefinitionByCategory'
-  ).and.callFake((categoryCode, formDefType) =>
-    of('getFormDefinitionByCategory' + categoryCode + formDefType)
+  getFormDefinitions = createSpy('FormAdapter.getFormDefinitions').and.callFake(
+    (categoryCode, formDefType) =>
+      of('getFormDefinitions' + categoryCode + formDefType)
   );
-  getFormDefinitionById = createSpy(
-    'FormAdapter.getFormDefinitionById'
-  ).and.callFake((applicationID, formDataID) =>
-    of('getFormDefinitionById' + applicationID + formDataID)
+  getFormDefinition = createSpy('FormAdapter.getFormDefinition').and.callFake(
+    (applicationID, formDataID) =>
+      of('getFormDefinition' + applicationID + formDataID)
   );
   getFormData = createSpy('FormAdapter.getFormData').and.callFake(formDataID =>
     of('getFormData' + formDataID)
@@ -52,16 +50,16 @@ describe('FormConnector', () => {
   });
 
   it('should call adapter for getFormDefinitionById', () => {
-    formConnector.getFormDefinitionById(applicationId, formDefinitionId);
-    expect(formAdapter.getFormDefinitionById).toHaveBeenCalledWith(
+    formConnector.getFormDefinition(applicationId, formDefinitionId);
+    expect(formAdapter.getFormDefinition).toHaveBeenCalledWith(
       applicationId,
       formDefinitionId
     );
   });
 
   it('should call adapter for getFormDefinitionByCategory', () => {
-    formConnector.getFormDefinitionByCategory(category, formDefinitionType);
-    expect(formAdapter.getFormDefinitionByCategory).toHaveBeenCalledWith(
+    formConnector.getFormDefinitions(category, formDefinitionType);
+    expect(formAdapter.getFormDefinitions).toHaveBeenCalledWith(
       category,
       formDefinitionType
     );

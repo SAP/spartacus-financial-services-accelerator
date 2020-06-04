@@ -8,7 +8,10 @@ import {
   YFormCmsComponent,
 } from '@fsa/dynamicforms';
 import { CmsComponentData } from '@spartacus/storefront';
-import { FSProduct } from './../../../occ/occ-models/occ.models';
+import {
+  FSProduct,
+  FormDefinitionType,
+} from './../../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-personal-details',
@@ -24,8 +27,6 @@ export class PersonalDetailsComponent extends FormCMSComponent {
     super(componentData, formDataService, formDataStorageService);
   }
 
-  configuratorType = 'PERSONAL_DETAILS';
-
   loadFormDefinition() {
     this.subscription.add(
       this.cartService
@@ -35,9 +36,9 @@ export class PersonalDetailsComponent extends FormCMSComponent {
           map(cart => {
             const mainProduct = <FSProduct>cart.entries[0].product;
             if (mainProduct && mainProduct.defaultCategory) {
-              this.formDataService.loadFormDefinitionByCategory(
+              this.formDataService.loadFormDefinitions(
                 mainProduct.defaultCategory.code,
-                this.configuratorType
+                FormDefinitionType.PERSONAL_DETAILS
               );
             }
           })

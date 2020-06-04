@@ -7,6 +7,7 @@ import { FormAdapter } from '../../../core/connectors/form.adapter';
 import {
   YFormData,
   YFormDefinition,
+  YFormDefinitionList,
 } from '../../../core/models/form-occ.models';
 
 const FULL_PARAMS = 'FULL';
@@ -50,7 +51,7 @@ export class OccFormAdapter implements FormAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  getFormDefinitionByCategory(
+  getFormDefinitions(
     categoryCode: string,
     formDefinitionType: string
   ): Observable<any> {
@@ -60,11 +61,11 @@ export class OccFormAdapter implements FormAdapter {
       .set('yFormDefinitionType', formDefinitionType)
       .set('fields', FULL_PARAMS);
     return this.http
-      .get<YFormDefinition>(url, { params: params })
+      .get<YFormDefinitionList>(url, { params: params })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  getFormDefinitionById(
+  getFormDefinition(
     applicationId: string,
     formDefinitionId: string
   ): Observable<any> {

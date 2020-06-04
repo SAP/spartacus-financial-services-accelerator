@@ -9,6 +9,7 @@ import {
 import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { of } from 'rxjs';
 import { PersonalDetailsComponent } from './personal-details.component';
+import { FormDefinitionType } from '../../../occ/occ-models';
 
 const formDefinition = {
   formId: 'formId',
@@ -22,7 +23,7 @@ class MockFormDataService {
   getFormDefinition() {
     return of(formDefinition);
   }
-  loadFormDefinitionByCategory(category, type) {
+  loadFormDefinitions(category, type) {
     return of(formDefinition);
   }
 }
@@ -125,16 +126,14 @@ describe('PersonalDetailsComponent', () => {
   });
 
   it('should load form definition data', () => {
-    spyOn(
-      mockFormDataService,
-      'loadFormDefinitionByCategory'
-    ).and.callThrough();
+    spyOn(mockFormDataService, 'loadFormDefinitions').and.callThrough();
     spyOn(mockFormDataService, 'getFormDefinition').and.callThrough();
     spyOn(mockActiveCartService, 'getActive').and.returnValue(of(mockCart));
     component.ngOnInit();
-    expect(
-      mockFormDataService.loadFormDefinitionByCategory
-    ).toHaveBeenCalledWith('category', component.configuratorType);
+    expect(mockFormDataService.loadFormDefinitions).toHaveBeenCalledWith(
+      'category',
+      FormDefinitionType.PERSONAL_DETAILS
+    );
     expect(mockFormDataService.getFormDefinition).toHaveBeenCalled();
     let result;
     component.formDefinition$.subscribe(value => (result = value));
@@ -152,16 +151,11 @@ describe('PersonalDetailsComponent', () => {
   });
 
   it('should not load form definition data without category', () => {
-    spyOn(
-      mockFormDataService,
-      'loadFormDefinitionByCategory'
-    ).and.callThrough();
+    spyOn(mockFormDataService, 'loadFormDefinitions').and.callThrough();
     spyOn(mockActiveCartService, 'getActive').and.returnValue(
       of(mockCartWithoutCategory)
     );
     component.ngOnInit();
-    expect(
-      mockFormDataService.loadFormDefinitionByCategory
-    ).not.toHaveBeenCalled();
+    expect(mockFormDataService.loadFormDefinitions).not.toHaveBeenCalled();
   });
 });

@@ -15,10 +15,7 @@ export class FormDefinitionEffects {
     mergeMap(payload => {
       if (payload.formDefinitionId) {
         return this.formConnector
-          .getFormDefinitionById(
-            payload.applicationId,
-            payload.formDefinitionId
-          )
+          .getFormDefinition(payload.applicationId, payload.formDefinitionId)
           .pipe(
             map((formDefinition: any) => {
               return new fromActions.LoadFormDefinitionSuccess(formDefinition);
@@ -32,13 +29,12 @@ export class FormDefinitionEffects {
           );
       }
       return this.formConnector
-        .getFormDefinitionByCategory(
-          payload.categoryCode,
-          payload.yFormDefinitionType
-        )
+        .getFormDefinitions(payload.categoryCode, payload.formDefinitionType)
         .pipe(
-          map((formDefinition: any) => {
-            return new fromActions.LoadFormDefinitionSuccess(formDefinition);
+          map((definitions: any) => {
+            return new fromActions.LoadFormDefinitionSuccess(
+              definitions.formDefinitions[0]
+            );
           }),
           catchError(error => {
             this.showGlobalMessage('forms.definitionLoadError');

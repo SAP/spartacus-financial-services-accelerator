@@ -98,7 +98,7 @@ describe('OccFormAdapter', () => {
   describe('loadFormDefinitionById', () => {
     it('loadFormDefinition', async(() => {
       occFormAdapter
-        .getFormDefinitionById(
+        .getFormDefinition(
           formData.formDefinition.applicationId,
           formData.formDefinition.formId
         )
@@ -119,7 +119,7 @@ describe('OccFormAdapter', () => {
   describe('loadFormDefinitionByCategory', () => {
     it('loadFormDefinition by category', async(() => {
       occFormAdapter
-        .getFormDefinitionByCategory('category', 'formDefinitionType')
+        .getFormDefinitions('category', 'formDefinitionType')
         .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return (

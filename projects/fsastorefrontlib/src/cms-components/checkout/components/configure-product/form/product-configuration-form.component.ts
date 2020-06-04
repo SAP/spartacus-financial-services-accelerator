@@ -70,7 +70,7 @@ export class ProductConfigurationFormComponent implements OnInit, OnDestroy {
                           configuratorSettings.configurationApplicationId;
                         this.formDefinitionId =
                           configuratorSettings.configurationFormId;
-                        this.formDataService.loadFormDefinitionById(
+                        this.formDataService.loadFormDefinition(
                           this.applicationId,
                           this.formDefinitionId
                         );

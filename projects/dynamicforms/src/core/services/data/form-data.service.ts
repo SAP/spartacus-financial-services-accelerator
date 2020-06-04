@@ -33,7 +33,7 @@ export class FormDataService {
     );
   }
 
-  loadFormDefinitionById(applicationId: string, formDefinitionId: string) {
+  loadFormDefinition(applicationId: string, formDefinitionId: string) {
     this.store.dispatch(
       new fromAction.LoadFormDefinition({
         applicationId: applicationId,
@@ -42,14 +42,11 @@ export class FormDataService {
     );
   }
 
-  loadFormDefinitionByCategory(
-    categoryCode: string,
-    yFormDefinitionType: string
-  ) {
+  loadFormDefinitions(categoryCode: string, formDefinitionType: string) {
     this.store.dispatch(
       new fromAction.LoadFormDefinition({
         categoryCode: categoryCode,
-        yFormDefinitionType: yFormDefinitionType,
+        formDefinitionType: formDefinitionType,
       })
     );
   }

@@ -7,11 +7,11 @@ import { reducerProvider, reducerToken } from '../../store/reducers';
 import { YFormData, YFormDefinition } from './../../models/form-occ.models';
 import { StateWithForm } from './../../store/state';
 import { FormDataService } from './form-data.service';
+import { FormDefinitionType } from '@fsa/storefront';
 
 const applicationId = 'applicationId';
 const formDefinitionId = 'formDefinitionId';
 const category = 'category';
-const yFormDefinitionType = 'PERSONAL_DETAILS';
 
 const mockDefinition: YFormDefinition = {
   formId: formDefinitionId,
@@ -76,7 +76,7 @@ describe('FormDataService', () => {
   });
 
   it('should load form definition by id', () => {
-    service.loadFormDefinitionById(applicationId, formDefinitionId);
+    service.loadFormDefinition(applicationId, formDefinitionId);
 
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.LoadFormDefinition({
@@ -86,12 +86,12 @@ describe('FormDataService', () => {
     );
   });
   it('should load form definition by category', () => {
-    service.loadFormDefinitionByCategory(category, yFormDefinitionType);
+    service.loadFormDefinitions(category, FormDefinitionType.PERSONAL_DETAILS);
 
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.LoadFormDefinition({
         categoryCode: category,
-        yFormDefinitionType: yFormDefinitionType,
+        formDefinitionType: FormDefinitionType.PERSONAL_DETAILS,
       })
     );
   });
