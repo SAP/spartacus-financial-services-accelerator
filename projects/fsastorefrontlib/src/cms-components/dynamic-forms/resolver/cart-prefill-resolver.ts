@@ -50,18 +50,15 @@ export class CartPrefillResolver implements PrefillResolver {
 
   serializeQuoteDetails(cart): any {
     if (cart && cart.insuranceQuote && cart.insuranceQuote.quoteDetails) {
-      if (cart.insuranceQuote.quoteDetails) {
-        const quoteDetails = cart.insuranceQuote.quoteDetails;
-        if (quoteDetails && quoteDetails.entry) {
-          const serilizedQuoteDetails = {};
-          cart.insuranceQuote.quoteDetails.entry.forEach(entry => {
-            serilizedQuoteDetails[entry.key] = entry.value;
-          });
-          cart.insuranceQuote.quoteDetails = serilizedQuoteDetails;
-        }
+      const quoteDetails = cart.insuranceQuote.quoteDetails;
+      if (quoteDetails.entry) {
+        const serilizedQuoteDetails = {};
+        quoteDetails.entry.forEach(entry => {
+          serilizedQuoteDetails[entry.key] = entry.value;
+        });
+        cart.insuranceQuote.quoteDetails = serilizedQuoteDetails;
       }
       if (
-        cart.insuranceQuote &&
         cart.insuranceQuote.insuredObjectList &&
         cart.insuranceQuote.insuredObjectList.insuredObjects
       ) {
@@ -78,11 +75,7 @@ export class CartPrefillResolver implements PrefillResolver {
   }
 
   serializeInsuredObject(insuredObject) {
-    if (
-      insuredObject &&
-      insuredObject.insuredObjectItems &&
-      insuredObject.insuredObjectItems.length > 0
-    ) {
+    if (insuredObject.insuredObjectItems) {
       insuredObject.insuredObjectItems.forEach(item => {
         insuredObject[item.label] = item.value;
       });
