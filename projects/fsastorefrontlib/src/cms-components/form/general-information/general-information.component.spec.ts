@@ -47,22 +47,15 @@ class MockFormComponent {
   formData;
 }
 const componentData = {
-  uid: 'TestCMSFormSubmitComponent',
-  typeCode: 'PersonalDetailsComponent',
-  formId: 'formId',
+  uid: 'TestGeneralInformationComponent',
+  typeCode: 'GeneralInformationComponent',
   applicationId: 'applicationId',
-  category: {
-    code: 'testCategory',
-  },
 };
 const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
   data$: of(componentData),
   uid: 'test',
 };
 class MockFormDataStorageService {
-  getFormDataId() {
-    return null;
-  }
   getFormDataIdByDefinitionCode() {}
 }
 describe('GeneralInformationComponent', () => {
@@ -106,7 +99,8 @@ describe('GeneralInformationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('should load component data', () => {
+
+  it('should load form definition data', () => {
     spyOn(
       mockFormDataService,
       'loadFormDefinitionByCategory'
@@ -115,14 +109,14 @@ describe('GeneralInformationComponent', () => {
     component.ngOnInit();
     expect(
       mockFormDataService.loadFormDefinitionByCategory
-    ).toHaveBeenCalledWith(mockParams.formCode, 'PRODUCT_CONFIGURE');
+    ).toHaveBeenCalledWith(mockParams.formCode, component.configuratorType);
     expect(mockFormDataService.getFormDefinition).toHaveBeenCalled();
     let result;
     component.formDefinition$.subscribe(value => (result = value));
     expect(result).toEqual(formDefinition);
   });
 
-  it('should not load component data', () => {
+  it('should not load form definition data', () => {
     spyOn(mockFormDataService, 'getFormDefinition').and.returnValue(
       of(formDefinitionUndefined)
     );
@@ -130,7 +124,5 @@ describe('GeneralInformationComponent', () => {
     let result;
     component.formDefinition$.subscribe(value => (result = value));
     expect(result).toEqual(formDefinitionUndefined);
-    component.subscription = undefined;
-    component.ngOnDestroy();
   });
 });

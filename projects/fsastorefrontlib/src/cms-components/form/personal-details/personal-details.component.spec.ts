@@ -67,22 +67,15 @@ class MockActiveCartService {
   }
 }
 const componentData = {
-  uid: 'TestCMSFormSubmitComponent',
+  uid: 'TestPersonalDetailsComponent',
   typeCode: 'PersonalDetailsComponent',
-  formId: 'formId',
   applicationId: 'applicationId',
-  category: {
-    code: 'testCategory',
-  },
 };
 const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
   data$: of(componentData),
   uid: 'test',
 };
 class MockFormDataStorageService {
-  getFormDataId() {
-    return null;
-  }
   getFormDataIdByDefinitionCode() {}
 }
 describe('PersonalDetailsComponent', () => {
@@ -90,6 +83,7 @@ describe('PersonalDetailsComponent', () => {
   let fixture: ComponentFixture<PersonalDetailsComponent>;
   let mockFormDataService: MockFormDataService;
   let mockActiveCartService: MockActiveCartService;
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [SpinnerModule, I18nTestingModule],
@@ -129,7 +123,8 @@ describe('PersonalDetailsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('should load component data', () => {
+
+  it('should load form definition data', () => {
     spyOn(
       mockFormDataService,
       'loadFormDefinitionByCategory'
@@ -139,14 +134,14 @@ describe('PersonalDetailsComponent', () => {
     component.ngOnInit();
     expect(
       mockFormDataService.loadFormDefinitionByCategory
-    ).toHaveBeenCalledWith('category', 'PERSONAL_DETAILS');
+    ).toHaveBeenCalledWith('category', component.configuratorType);
     expect(mockFormDataService.getFormDefinition).toHaveBeenCalled();
     let result;
     component.formDefinition$.subscribe(value => (result = value));
     expect(result).toEqual(formDefinition);
   });
 
-  it('should not load component data', () => {
+  it('should not load form definition data', () => {
     spyOn(mockFormDataService, 'getFormDefinition').and.returnValue(
       of(formDefinitionUndefined)
     );
@@ -154,10 +149,9 @@ describe('PersonalDetailsComponent', () => {
     let result;
     component.formDefinition$.subscribe(value => (result = value));
     expect(result).toEqual(formDefinitionUndefined);
-    component.subscription = undefined;
-    component.ngOnDestroy();
   });
-  it('should not load component data without category', () => {
+
+  it('should not load form definition data without category', () => {
     spyOn(
       mockFormDataService,
       'loadFormDefinitionByCategory'
