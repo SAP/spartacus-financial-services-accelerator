@@ -1,0 +1,8 @@
+.SearchResultsListPageTemplate .SearchResultsListSlot {
+  max-width: 100%;
+  cx-pagination .pagination {
+    @include media-breakpoint-down(sm) {
+      justify-content: center;
+    }
+  }
+}

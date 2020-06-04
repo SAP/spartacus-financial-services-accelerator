@@ -30,8 +30,8 @@ export class OccInboxAdapter implements InboxAdapter {
         .set('sortOrder', searchConfig.sortOrder);
     }
 
-    if (searchConfig.currentPage) {
-      params = params.set('currentPage', 'searchConfig.currentPage');
+    if (searchConfig.currentPage === 0 || searchConfig.currentPage) {
+      params = params.set('currentPage', searchConfig.currentPage.toString());
     }
 
     if (messageGroup !== '') {
