@@ -1,4 +1,5 @@
 import * as shared from '../shared-checkout';
+import * as sharedCheckout from  '../shared-checkout.interface';
 
 export function populateFirstStep() {
   cy.get('.form-title').contains('Coverage Information');
@@ -24,7 +25,7 @@ export function selectBasicLifeProduct() {
 }
 
 export function checkOptionalProductsAddRenewalOption() {
-  const addOptionsContent: addOptionsPage.AddOptions = {
+  const addOptionsContent: sharedCheckout.AddOptions = {
     title: 'Your Life Insurance',
     items: [
       {
@@ -46,7 +47,7 @@ export function checkOptionalProductsAddRenewalOption() {
 }
 
 export function checkLifeBasicMiniCart() {
-  const miniCartContent: addOptionsPage.MiniCart = {
+  const miniCartContent: sharedCheckout.MiniCart = {
     price: ' €9.75 ',
     products: [
       {
@@ -63,7 +64,7 @@ export function checkLifeBasicMiniCart() {
 }
 
 export function checkLifeComparisonTable() {
-  const comparisonTableContent: addOptionsPage.ComparisonTable = {
+  const comparisonTableContent: sharedCheckout.ComparisonTable = {
     mainProducts: [
       {
         name: 'Basic Life Insurance',
@@ -87,7 +88,7 @@ export function populateSecondPerson() {
 }
 
 export function checkLifeComparisonTableSecondPerson() {
-  const comparisonTableContent: addOptionsPage.ComparisonTable = {
+  const comparisonTableContent: sharedCheckout.ComparisonTable = {
     mainProducts: [
       {
         name: 'Basic Life Insurance',
@@ -103,7 +104,7 @@ export function checkLifeComparisonTableSecondPerson() {
 }
 
 export function checkLifeBasicMiniCartSecondPerson() {
-  const miniCartContent: addOptionsPage.MiniCart = {
+  const miniCartContent: sharedCheckout.MiniCart = {
     price: ' €28.10 ',
     products: [
       {

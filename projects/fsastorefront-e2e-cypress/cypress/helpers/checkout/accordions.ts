@@ -1,26 +1,26 @@
 export const quoteReviewAccordionGroup1 = [
-  "What's Included",
+  'What\'s Included',
   'Added by you',
   'Personal Details',
 ];
 
 export const quoteReviewAccordionGroup2 = [
   'General Details',
-  "What's Included",
+  'What\'s Included',
   'Added by you',
   'Personal Details',
 ];
 
 export const finalReviewAccordionLife = [
   'Life Insurance Information',
-  "What's Included",
+  'What\'s Included',
   'Added by you',
   'Personal Details',
 ];
 
 export const finalReviewAccordionTravel = [
   'Travel Insurance Information',
-  "What's Included",
+  'What\'s Included',
   'Added by you',
   'Personal Details',
 ];
@@ -28,7 +28,7 @@ export const finalReviewAccordionTravel = [
 export const policyDetailsAccordions = [
   ' Policy Summary ',
   ' Who or What Is Insured ',
-  " What's Included ",
+  'What\'s Included',
   ' Optional Extras ',
   ' What Does It Cost Me? ',
 ];
@@ -45,14 +45,14 @@ export const agentListViewAccordions = [
 
 export const finalReviewAccordionHomeowners = [
   'Homeowners Insurance Information',
-  "What's Included",
+  'What\'s Included',
   'Added by you',
   'Personal Details',
 ];
 
 export const finalReviewAccordionRenters = [
   'Renters Insurance Information',
-  "What's Included",
+  'What\'s Included',
   'Added by you',
   'Personal Details',
 ];
