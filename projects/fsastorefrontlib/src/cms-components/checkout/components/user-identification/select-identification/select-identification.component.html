@@ -1,22 +1,23 @@
-<div class="d-flex p-5">
+<div class="row py-5">
   <ng-container *ngFor="let identificationType of identificationTypes">
-    <div class="position-relative flex-grow-1 text-center pointer">
-      <div class="center-icon-wrapper position-absolute">
-        <div
-          class="center-icon fs-icon {{
-            this.identificationType.icon
-          }} image-wrapper p-3"
-        ></div>
-      </div>
+    <div class="col-12 col-md-4 text-center mb-3">
       <div
-        class="p-5 mx-2 border box-shadow"
+        class="p-5 border pointer box-shadow"
         (click)="setSelectedType(identificationType)"
         [ngClass]="{
           'selected border border-color-primary':
             identificationType.name === this.selected
         }"
       >
-        <p class="py-2 mb-">
+        <div
+          class="mb-4 fs-icon"
+          [ngClass]="
+            identificationType.name === this.selected
+              ? 'icon-ok'
+              : this.identificationType.icon
+          "
+        ></div>
+        <p class="my-2 semi-bold">
           {{
             'fscommon.userIdentification.' + this.identificationType.name
               | cxTranslate
@@ -26,6 +27,7 @@
     </div>
   </ng-container>
 </div>
+<div class="border-top border-color-3 my-3"></div>
 <div class="row mt-5">
   <div class="col-6">
     <button class="action-button btn-block" type="button" (click)="back()">
