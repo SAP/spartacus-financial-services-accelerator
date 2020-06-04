@@ -16,8 +16,8 @@ export class FormConnector {
     return this.formAdapter.getFormDefinition(applicationId, formDefinitionId);
   }
   getFormDefinitions(
-    categoryCode,
-    formDefinitionType
+    categoryCode: string,
+    formDefinitionType: string
   ): Observable<YFormDefinition> {
     return this.formAdapter.getFormDefinitions(
       categoryCode,
