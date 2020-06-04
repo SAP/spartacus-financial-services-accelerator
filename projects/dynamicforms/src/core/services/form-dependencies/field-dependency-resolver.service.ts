@@ -68,7 +68,11 @@ export class FieldDependencyResolverService {
    * @param controlConfig The dependent field config for which dependencies are resolved (control or group)
    * @param enabled The enabled flag which indicates if parent control conditions are met.
    */
-  changeControlEnabled(dependentControl, controlConfig, enabled) {
+  changeControlEnabled(
+    dependentControl: any,
+    controlConfig: any,
+    enabled: boolean
+  ) {
     if (enabled) {
       if (dependentControl.controls && controlConfig.fieldConfigs) {
         controlConfig.fieldConfigs.forEach(childConfig => {
