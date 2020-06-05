@@ -13,7 +13,7 @@ export class CheckboxComponent extends AbstractOptionsComponent {
 
   ngOnInit() {
     super.ngOnInit();
-    this.checkBoxArray = this.addedControls(this.config.name);
+    this.checkBoxArray = this.createFormArray(this.config.name);
     this.checkedItems$ = this.checkBoxArray.valueChanges;
     this.initializeCheckboxes();
     this.checkedItems$.subscribe(data => console.log(data));
@@ -25,10 +25,10 @@ export class CheckboxComponent extends AbstractOptionsComponent {
       this.populateCheckboxes(index, optionName);
     } else {
       this.populateCheckboxes(index, false);
-      const isEmpty = this.checkBoxArray.value.every(
+      const arrayIsEmpty = this.checkBoxArray.value.every(
         element => element === false
       );
-      if (isEmpty) {
+      if (arrayIsEmpty) {
         this.checkBoxArray.clear();
       }
     }
@@ -47,7 +47,7 @@ export class CheckboxComponent extends AbstractOptionsComponent {
     this.checkBoxArray.insert(index, this.fb.control(optionName));
   }
 
-  addedControls(addedControl): FormArray {
-    return this.group.get(addedControl) as FormArray;
+  createFormArray(formArrayName): FormArray {
+    return this.group.get(formArrayName) as FormArray;
   }
 }
