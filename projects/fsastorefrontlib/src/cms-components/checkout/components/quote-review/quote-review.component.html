@@ -213,15 +213,14 @@
                   >
                     <ng-container
                       *ngIf="
-                        getTranslation('personalDetails', formEntry.key) !== ''
+                        getTranslation(
+                          'personalDetails',
+                          formEntry.key
+                        ) as label
                       "
                     >
                       <li class="accordion-list-item row">
-                        <div class="col-6 item-label">
-                          {{
-                            getTranslation('personalDetails', formEntry.key)
-                          }}:
-                        </div>
+                        <div class="col-6 item-label">{{ label }}:</div>
                         <div class="col-6 value notice">
                           {{ formEntry.value }}
                         </div>
