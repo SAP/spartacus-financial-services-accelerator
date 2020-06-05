@@ -19,7 +19,7 @@ export class FSTranslationService extends I18nextTranslationService {
     const translationCodes = translationChunks.join(this.SEPARATOR);
     this.translate(translationCodes + this.SEPARATOR + translationKey)
       .subscribe(translation => {
-        if (!translation.includes(translationCodes)) {
+        if (translation !== ' ' && !translation.includes(translationCodes)) {
           result = translation;
         }
       })
