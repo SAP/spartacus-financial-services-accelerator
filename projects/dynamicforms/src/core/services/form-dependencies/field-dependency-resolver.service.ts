@@ -6,7 +6,10 @@ import {
   ValidatorFn,
 } from '@angular/forms';
 import { FormService } from '../form/form.service';
-import { ControlDependency } from './../../models/form-config.interface';
+import {
+  ControlDependency,
+  DynamicFormGroup,
+} from './../../models/form-config.interface';
 import { FormValidationService } from './../form-validation/form-validation.service';
 
 @Injectable()
@@ -20,23 +23,24 @@ export class FieldDependencyResolverService {
   /**
    * Method used to enable/disable dependent control based on conditions defined at master control
    *
-   * @param dependencyConditions The conditions of master control that need to be fullfilled
+   * @param controlConfig The dependent field config for which dependencies are resolved
    * @param dependentControl The dependent field control for which dependencies are resolved
    * @param formGroup The form group which tracks value and validity of master form controls
    */
   resolveFormControlDependencies(
-    dependencyConditions: ControlDependency[],
+    controlConfig: any,
     dependentControl: AbstractControl,
     formGroup: FormGroup
   ) {
-    dependencyConditions.forEach(condition => {
+    controlConfig.dependsOn.forEach(condition => {
       const masterFormControl = this.formService.getFormControlForCode(
         condition.controlName,
         formGroup
       );
       if (masterFormControl) {
         if (!masterFormControl.value) {
-          dependentControl.disable();
+          controlConfig.hidden = true;
+          this.changeControlEnabled(dependentControl, controlConfig, false);
         }
         masterFormControl.valueChanges.subscribe(fieldValue => {
           const dependencyValidations = this.geValidationsForCondition(
@@ -46,12 +50,45 @@ export class FieldDependencyResolverService {
             { disabled: false, value: fieldValue },
             dependencyValidations
           );
-          dependancyControl.valid
-            ? dependentControl.enable()
-            : dependentControl.disable();
+          if (dependancyControl.valid) {
+            controlConfig.hidden = false;
+            this.changeControlEnabled(dependentControl, controlConfig, true);
+          } else {
+            controlConfig.hidden = true;
+            this.changeControlEnabled(dependentControl, controlConfig, false);
+          }
         });
       }
     });
+  }
+
+  /**
+   * Method used to enable/disable control based on input parameter and form configuration value.
+   * In case control is from group, check is done for nested controls to see if any of them has configuration set to disabled.
+   * If any field config has disabled property set to true, dynamic condition cannot change that.
+   *
+   * @param dependentControl The dependent field control for which dependencies are resolved
+   * @param controlConfig The dependent field config for which dependencies are resolved (control or group)
+   * @param enabled The enabled flag which indicates if parent control conditions are met.
+   */
+  changeControlEnabled(
+    dependentControl: any,
+    controlConfig: DynamicFormGroup,
+    enabled: boolean
+  ) {
+    if (enabled) {
+      if (dependentControl.controls && controlConfig.fieldConfigs) {
+        controlConfig.fieldConfigs.forEach(childConfig => {
+          childConfig.disabled
+            ? dependentControl.controls[childConfig.name].disable()
+            : dependentControl.controls[childConfig.name].enable();
+        });
+      } else {
+        dependentControl.enable();
+      }
+    } else {
+      dependentControl.disable();
+    }
   }
 
   geValidationsForCondition(dependencyFn: ControlDependency): ValidatorFn[] {

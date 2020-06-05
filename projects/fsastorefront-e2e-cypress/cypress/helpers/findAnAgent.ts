@@ -51,7 +51,7 @@ export function searchSavingAgents() {
     .within(() => {
       cy.get('.cx-product-image-container').should('be.visible');
       cy.get('.agent-name').contains(' Burton Franco ');
-      cy.get('.mb-3').contains(' Savings Insurance ');
+      cy.get('.mb-3').contains(' Savings ');
       cy.get('.action-button').contains(' Contact ');
     });
 }
@@ -139,7 +139,7 @@ export function contactAgentByName(agentName) {
 
 export function locateSavingsAgent() {
   cy.get('.accordion-heading')
-    .contains(' Savings Insurance ')
+    .contains(' Savings ')
     .click()
     .parent()
     .within(() => {

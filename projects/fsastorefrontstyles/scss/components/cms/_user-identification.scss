@@ -1,0 +1,12 @@
+%cx-fs-select-identification {
+  .fs-icon:before {
+    @include transition;
+    font-size: 38px;
+    border: 1px solid transparent;
+    padding: 10px;
+    border-radius: 50%;
+  }
+  .icon-ok:before {
+    border-color: var(--cx-color-primary);
+  }
+}

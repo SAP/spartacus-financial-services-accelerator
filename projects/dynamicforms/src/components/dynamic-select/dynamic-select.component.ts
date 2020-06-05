@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Injector } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { LanguageService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
@@ -21,17 +21,20 @@ export class DynamicSelectComponent extends AbstractFormComponent {
     protected formDataService: FormDataService,
     protected occValueListService: OccValueListService,
     protected formConfig: DynamicFormsConfig,
+    protected appConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
     protected changeDetectorRef: ChangeDetectorRef,
-    protected formService: FormService
+    protected formService: FormService,
+    protected injector: Injector
   ) {
     super(
       fb,
       formDataService,
       occValueListService,
       formConfig,
+      appConfig,
       languageService,
-      changeDetectorRef
+      injector
     );
   }
 

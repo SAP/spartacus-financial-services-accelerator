@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FSProductListComponent } from './product-list.component';
-import { Component, Input, PipeTransform, Pipe } from '@angular/core';
+import { Component, Input, PipeTransform, Pipe, Type } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { I18nTestingModule } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
@@ -9,6 +9,7 @@ import {
   PageLayoutService,
   ProductListComponentService,
   ViewConfig,
+  ListNavigationModule,
 } from '@spartacus/storefront';
 import createSpy = jasmine.createSpy;
 
@@ -61,7 +62,7 @@ describe('ProductListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, I18nTestingModule],
+      imports: [RouterTestingModule, I18nTestingModule, ListNavigationModule],
       declarations: [FSProductListComponent, MockMediaComponent, MockUrlPipe],
       providers: [
         {
@@ -83,7 +84,6 @@ describe('ProductListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(FSProductListComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {

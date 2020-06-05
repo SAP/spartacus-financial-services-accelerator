@@ -59,7 +59,7 @@ class MockQuoteConnector {
   updateQuote() {
     return of(quoteDetails);
   }
-  bindQuote() {
+  invokeQuoteAction() {
     return of(insuranceQuote1);
   }
 }
@@ -144,7 +144,7 @@ describe('Quote Effects', () => {
 
   describe('bindQuote$', () => {
     it('should bind quote', () => {
-      const action = new fromActions.BindQuote({
+      const action = new fromActions.QuoteProcessAction({
         userId: OCC_USER_ID_CURRENT,
         cartId: 'test001',
       });
@@ -159,10 +159,10 @@ describe('Quote Effects', () => {
     });
 
     it('should fail to bind quote', () => {
-      spyOn(mockQuoteConnector, 'bindQuote').and.returnValue(
+      spyOn(mockQuoteConnector, 'invokeQuoteAction').and.returnValue(
         throwError('Error')
       );
-      const action = new fromActions.BindQuote({
+      const action = new fromActions.QuoteProcessAction({
         userId: OCC_USER_ID_CURRENT,
         cartId: 'test001',
       });

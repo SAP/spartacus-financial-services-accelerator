@@ -5,10 +5,13 @@ import { claim } from './en/claim.en';
 import { fscommon } from './en/common.en';
 import { configureProduct } from './en/configureProduct.en';
 import { forms } from './en/forms.en';
+import { orderConfirmation } from './en/orderConfirmation.en';
 import { policy } from './en/policy.en';
 import { premiumCalendar } from './en/premiumCalendar.en';
 import { quote } from './en/quote.en';
+import { quoteReview } from './en/quoteReview.en';
 import { userRequest } from './en/userRequest.en';
+import { common } from './overrides/en/miniCart';
 import { payment } from './overrides/en/payment';
 
 export const fstranslations: TranslationResources = {
@@ -22,8 +25,11 @@ export const fstranslations: TranslationResources = {
   userRequest,
   changeRequest,
   configureProduct,
+  quoteReview,
+  orderConfirmation,
 };
 
 export const fsOverrides: TranslationResources = {
   payment,
+  common,
 };

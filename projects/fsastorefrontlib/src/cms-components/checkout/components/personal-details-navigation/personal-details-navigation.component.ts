@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { FSOrderEntry } from '../../../../occ/occ-models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
+import { QuoteService } from './../../../../core/my-account/facade/quote.service';
 
 @Component({
   selector: 'cx-fs-personal-details-navigation',
@@ -18,7 +19,8 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     protected formService: FormDataService,
     protected activatedRoute: ActivatedRoute,
     protected routingService: RoutingService,
-    protected checkoutConfigService: FSCheckoutConfigService
+    protected checkoutConfigService: FSCheckoutConfigService,
+    protected quoteService: QuoteService
   ) {}
 
   subscription = new Subscription();
@@ -40,22 +42,18 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
               if (
                 cart &&
                 cart.code &&
-                cart.deliveryOrderGroups &&
-                cart.deliveryOrderGroups.length > 0 &&
-                cart.deliveryOrderGroups[0].entries.length > 0
+                cart.entries &&
+                cart.entries.length > 0
               ) {
-                const entry: FSOrderEntry =
-                  cart.deliveryOrderGroups[0].entries[0];
+                const entry: FSOrderEntry = cart.entries[0];
                 const yFormData: YFormData = {
-                  refId:
-                    cart.code +
-                    '_' +
-                    cart.deliveryOrderGroups[0].entries[0].entryNumber,
+                  refId: cart.code + '_' + cart.entries[0].entryNumber,
                 };
                 if (entry.formData && entry.formData.length > 0) {
                   yFormData.id = entry.formData[0].id;
                 }
 
+                this.quoteService.underwriteQuote(cart.code);
                 this.formService.submit(yFormData);
               }
             })

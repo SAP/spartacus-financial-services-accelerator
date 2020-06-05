@@ -28,19 +28,33 @@ export const finalReviewAccordionTravel = [
 export const policyDetailsAccordions = [
   ' Policy Summary ',
   ' Who or What Is Insured ',
-  " What's Included ",
+  "What's Included",
   ' Optional Extras ',
   ' What Does It Cost Me? ',
 ];
 
 export const agentListViewAccordions = [
-  ' Homeowners Insurance ',
-  ' Renters Insurance ',
-  ' Auto Insurance ',
-  ' Life Insurance ',
-  ' Travel Insurance ',
-  ' Event Insurance ',
-  ' Savings Insurance ',
+  ' Homeowners ',
+  ' Renters ',
+  ' Auto ',
+  ' Life ',
+  ' Travel ',
+  ' Event ',
+  ' Savings ',
+];
+
+export const finalReviewAccordionHomeowners = [
+  'Homeowners Insurance Information',
+  "What's Included",
+  'Added by you',
+  'Personal Details',
+];
+
+export const finalReviewAccordionRenters = [
+  'Renters Insurance Information',
+  "What's Included",
+  'Added by you',
+  'Personal Details',
 ];
 
 export const Accordions = {
@@ -80,6 +94,18 @@ export const Accordions = {
     {
       category: 'agentListView',
       accordionItems: this.agentListViewAccordions,
+    },
+    {
+      category: 'propertyQuoteReview',
+      accordionItems: this.quoteReviewAccordionGroup2,
+    },
+    {
+      category: 'homeownersFinalReview',
+      accordionItems: this.finalReviewAccordionHomeowners,
+    },
+    {
+      category: 'rentersFinalReview',
+      accordionItems: this.finalReviewAccordionRenters,
     },
   ],
 };

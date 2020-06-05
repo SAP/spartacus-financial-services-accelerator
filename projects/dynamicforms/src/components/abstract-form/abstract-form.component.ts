@@ -3,7 +3,7 @@ import {
   HostBinding,
   OnInit,
   OnDestroy,
-  ChangeDetectorRef,
+  Injector,
 } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -13,6 +13,7 @@ import { FormDataService } from '../../core/services/data/form-data.service';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
+import { PrefillResolver } from '../../core/resolver/prefill-resolver.interface';
 
 @Component({ template: '' })
 export class AbstractFormComponent implements OnInit, OnDestroy {
@@ -21,8 +22,9 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
     protected formDataService: FormDataService,
     protected occValueListService: OccValueListService,
     protected formConfig: DynamicFormsConfig,
+    protected appConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
-    protected changeDetectorRef: ChangeDetectorRef
+    protected injector: Injector
   ) {}
 
   @HostBinding('class') hostComponentClass: string;
@@ -52,6 +54,24 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+    if (this.config.prefillValue) {
+      const targetObject = this.appConfig.dynamicForms.prefill[
+        this.config.prefillValue.targetObject
+      ];
+      if (targetObject && targetObject.prefillResolver) {
+        const prefillResolver = this.injector.get<PrefillResolver>(
+          targetObject.prefillResolver
+        );
+        prefillResolver
+          .getFieldValue(this.config.prefillValue.targetValue)
+          .subscribe(value => {
+            if (value) {
+              this.group.get(this.config.name).setValue(value);
+            }
+          })
+          .unsubscribe();
+      }
+    }
   }
   ngOnDestroy() {
     if (this.subscription) {
