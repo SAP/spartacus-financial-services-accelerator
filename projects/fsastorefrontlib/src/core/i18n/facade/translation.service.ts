@@ -12,10 +12,10 @@ export class FSTranslationService extends I18nextTranslationService {
    * @param translationKey translation key
    */
   getTranslationValue(
-    translationChunks: Array<String>,
-    translationKey: String
+    translationChunks: Array<string>,
+    translationKey: string
   ) {
-    let result: String = '';
+    let result;
     const translationCodes = translationChunks.join(this.SEPARATOR);
     this.translate(translationCodes + this.SEPARATOR + translationKey)
       .subscribe(translation => {
