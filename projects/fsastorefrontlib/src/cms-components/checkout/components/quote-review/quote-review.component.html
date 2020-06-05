@@ -271,11 +271,11 @@
   let-defaultCategory="defaultCategory"
 >
   <ng-container *ngFor="let item of valueList">
-    <ng-container *ngIf="getTranslation(defaultCategory.code, item.key) !== ''">
+    <ng-container
+      *ngIf="getTranslation(defaultCategory.code, item.key) as label"
+    >
       <li class="accordion-list-item row">
-        <div class="col-6 item-label">
-          {{ getTranslation(defaultCategory.code, item.key) }}:
-        </div>
+        <div class="col-6 item-label">{{ label }}:</div>
         <div class="col-6 value notice">
           {{ item.value }}
         </div>
