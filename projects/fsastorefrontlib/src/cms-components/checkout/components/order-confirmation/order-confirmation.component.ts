@@ -7,6 +7,7 @@ import {
 import { OccConfig, Order } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
+import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
 
 @Component({
   selector: 'cx-fs-order-confirmation',
@@ -19,7 +20,8 @@ export class OrderConfirmationComponent implements OnInit, OnDestroy {
 
   constructor(
     protected checkoutService: FSCheckoutService,
-    protected config: OccConfig
+    protected config: OccConfig,
+    protected translationService: FSTranslationService
   ) {}
 
   ngOnInit() {
@@ -31,5 +33,23 @@ export class OrderConfirmationComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.checkoutService.orderPlaced = false;
     this.checkoutService.clearCheckoutData();
+  }
+
+  getFormContent(order: any): any {
+    if (
+      order &&
+      order.entries &&
+      order.entries.length > 0 &&
+      order.entries[0].formData
+    ) {
+      return JSON.parse(order.entries[0].formData[0].content);
+    }
+  }
+
+  getTranslation(translationGroup: String, translationKey: String): String {
+    return this.translationService.getTranslationValue(
+      ['orderConfirmation', translationGroup],
+      translationKey
+    );
   }
 }

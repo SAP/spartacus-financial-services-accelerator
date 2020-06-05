@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'fs-font';
-  src: url('assets/fonts/fs-font.eot?hy76sb');
-  src: url('assets/fonts/fs-font.eot?hy76sb#iefix') format('embedded-opentype'),
-    url('assets/fonts/fs-font.ttf?hy76sb') format('truetype'),
-    url('assets/fonts/fs-font.woff?hy76sb') format('woff'),
-    url('assets/fonts/fs-font.svg?hy76sb#fs-font') format('svg');
+  src: url('assets/fonts/fs-font.eot?k1dky6');
+  src: url('assets/fonts/fs-font.eot?k1dky6#iefix') format('embedded-opentype'),
+    url('assets/fonts/fs-font.ttf?k1dky6') format('truetype'),
+    url('assets/fonts/fs-font.woff?k1dky6') format('woff'),
+    url('assets/fonts/fs-font.svg?k1dky6#fs-font') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -101,4 +101,13 @@
 }
 .icon-external-link:before {
   content: '\e92f';
+}
+.icon-checklist:before {
+  content: '\e908';
+}
+.icon-bank:before {
+  content: '\e909';
+}
+.icon-video-chat:before {
+  content: '\e90a';
 }

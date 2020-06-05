@@ -4,10 +4,7 @@
       <div
         class="row"
         [ngClass]="formGroup.cssClass"
-        [hidden]="
-          (formGroup.groupCode ? form.controls[formGroup.groupCode] : form)
-            .disabled
-        "
+        [hidden]="formGroup.hidden"
       >
         <ng-container
           *ngFor="let field of formGroup.fieldConfigs"
