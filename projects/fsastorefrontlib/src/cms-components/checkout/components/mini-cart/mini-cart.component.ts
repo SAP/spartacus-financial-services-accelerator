@@ -19,7 +19,7 @@ export class MiniCartComponent {
     this.cart$ = this.cartService.getActive();
   }
 
-  getTranslation(translationGroup: String, translationKey: String): String {
+  getTranslation(translationGroup: string, translationKey: string): string {
     return this.translationService.getTranslationValue(
       ['miniCart', translationGroup],
       translationKey
