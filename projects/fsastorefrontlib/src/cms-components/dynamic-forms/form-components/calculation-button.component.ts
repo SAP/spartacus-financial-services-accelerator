@@ -1,10 +1,9 @@
-import { ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import {
   AbstractFormComponent,
   DynamicFormsConfig,
   FormDataService,
   FormDataStorageService,
-  OccValueListService,
   YFormData,
 } from '@fsa/dynamicforms';
 import { LanguageService } from '@spartacus/core';
@@ -24,10 +23,8 @@ export class CalculationButtonComponent extends AbstractFormComponent
     protected currentProductService: CurrentProductService,
     protected formDataStorageService: FormDataStorageService,
     protected formDataService: FormDataService,
-    protected occcMockFormService: OccValueListService,
     protected formConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
-    protected changeDetectorRef: ChangeDetectorRef,
     protected injector: Injector
   ) {
     super(formConfig, languageService, injector);

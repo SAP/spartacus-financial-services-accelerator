@@ -8,7 +8,6 @@ export interface StateWithForm {
 
 export interface FormsState {
   formDefinition: FormDefinitionState;
-  // formDefinitions: FormDefinitionState[];
   formData: FormDataState;
 }
 
