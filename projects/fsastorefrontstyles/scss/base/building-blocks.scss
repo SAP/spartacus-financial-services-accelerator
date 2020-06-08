@@ -212,6 +212,11 @@
     font-size: $h6-font-size;
   }
 }
+.overflow-box {
+  height: 220px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
 .fs-tab {
   color: var(--cx-color-text);
   margin-right: 3px;
