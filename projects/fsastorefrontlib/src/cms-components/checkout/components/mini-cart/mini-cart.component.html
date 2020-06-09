@@ -83,10 +83,10 @@
   let-defaultCategory="defaultCategory"
 >
   <ng-container *ngFor="let item of valueList">
-    <ng-container *ngIf="getTranslation(defaultCategory.code, item.key) !== ''">
-      <div class="short-overview-title col-7">
-        {{ getTranslation(defaultCategory.code, item.key) }}:
-      </div>
+    <ng-container
+      *ngIf="getTranslation(defaultCategory.code, item.key) as label"
+    >
+      <div class="short-overview-title col-7">{{ label }}:</div>
       <div class="short-overview-value col-5">
         {{ item.value }}
       </div>
