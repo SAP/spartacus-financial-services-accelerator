@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import { AllowedFSRequestType } from './../../../../occ/occ-models';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'cx-fs-policy-details',
@@ -21,7 +22,8 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     protected routingService: RoutingService,
     protected policyService: PolicyService,
     protected config: OccConfig,
-    protected changeRequestService: ChangeRequestService
+    protected changeRequestService: ChangeRequestService,
+    protected httpClient: HttpClient
   ) {}
 
   policy$;
@@ -84,6 +86,13 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+  }
+
+  getDocument(documentId) {
+    const url = 'https://financialservices.local:9002/occ/v2/financial/users/current/documents/' + documentId;
+    this.httpClient.get(url).pipe(map(test => {
+      console.log(test);
+    })).subscribe();
   }
 
   ngOnDestroy() {
