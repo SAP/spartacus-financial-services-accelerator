@@ -7,10 +7,10 @@ export interface FormOccEndpoints extends OccEndpoints {
    */
   definition?: string;
   /**
-   * Get form definition for category
+   * Get form definitions
    *
    */
-  definitionForCategory?: string;
+  definitions?: string;
   /**
    * Get form data
    *

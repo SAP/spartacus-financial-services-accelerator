@@ -55,7 +55,7 @@ export class OccFormAdapter implements FormAdapter {
     categoryCode: string,
     formDefinitionType: string
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('definitionForCategory');
+    const url = this.occEndpointService.getUrl('definitions');
     const params: HttpParams = new HttpParams()
       .set('categoryCode', categoryCode)
       .set('yFormDefinitionType', formDefinitionType)

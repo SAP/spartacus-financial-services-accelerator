@@ -4,7 +4,7 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OccConfig, OccEndpointsService } from '@spartacus/core';
+import { OccEndpointsService } from '@spartacus/core';
 import { YFormData } from '../../../core/models/form-occ.models';
 import { OccFormAdapter } from './occ-form.adapter';
 
@@ -36,7 +36,7 @@ class MockOccEndpointsService {
 }
 
 const formDefinitionEndpoint = 'definition';
-const formDefinitionForCategoryEndpoint = 'definitionForCategory';
+const formDefinitionsEndpoint = 'definitions';
 const formDataEndpoint = 'formData';
 const createFormDataEndpoint = 'createFormData';
 describe('OccFormAdapter', () => {
@@ -122,12 +122,10 @@ describe('OccFormAdapter', () => {
         .getFormDefinitions('category', 'formDefinitionType')
         .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url === formDefinitionForCategoryEndpoint && req.method === 'GET'
-        );
+        return req.url === formDefinitionsEndpoint && req.method === 'GET';
       }, `GET method and url`);
       expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        formDefinitionForCategoryEndpoint
+        formDefinitionsEndpoint
       );
     }));
   });
