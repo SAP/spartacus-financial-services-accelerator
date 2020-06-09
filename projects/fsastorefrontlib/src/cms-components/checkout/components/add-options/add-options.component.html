@@ -1,6 +1,8 @@
 <div class="box-shadow">
-  <div class="section-header-heading text-center">
-    {{ 'fscommon.addOptions' | cxTranslate }}
+  <div class="row no-gutters">
+    <h2 class="col-12 section-header-heading text-center">
+      {{ 'fscommon.addOptions' | cxTranslate }}
+    </h2>
   </div>
   <ng-container *ngIf="cartLoaded$ | async; else loading">
     <ng-container *ngIf="entries$ | async as entries">
