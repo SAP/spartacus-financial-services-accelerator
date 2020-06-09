@@ -15,22 +15,14 @@
         [formArrayName]="config.name"
         *ngFor="let option of config.options; let i = index"
       >
-        <ng-container *ngIf="selectedItems as checkedItems">
-          <ng-container
-            *ngFor="let selectedItem of checkedItems; let j = index"
-          >
-            <ng-container *ngIf="i === j">
-              <input
-                class="form-check-input"
-                type="checkbox"
-                [attr.name]="config.name"
-                [attr.id]="option.name"
-                [formControlName]="[i]"
-                (change)="checkCheckbox($event, option.name, i)"
-              />
-            </ng-container>
-          </ng-container>
-        </ng-container>
+        <input
+          class="form-check-input"
+          type="checkbox"
+          [attr.name]="option.name"
+          [attr.id]="option.name"
+          [formControlName]="[i]"
+          (change)="checkCheckbox($event, option.name, i)"
+        />
         <label class="pl-3 pt-1" [attr.for]="option.name"
           ><ng-container *ngIf="activeLang$ | async as activeLang">
             {{ getLocalizedOption(option.label, activeLang) }}
