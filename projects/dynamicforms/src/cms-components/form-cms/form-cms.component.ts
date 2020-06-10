@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { FormDefinition } from '../../core/models/form-config.interface';
 import { YFormData, YFormDefinition } from '../../core/models/form-occ.models';
 import { FormDataService } from '../../core/services/data/form-data.service';
@@ -51,6 +51,7 @@ export class FormCMSComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.component$
         .pipe(
+          take(1),
           map(component => {
             this.loadFormDefinition(component);
           })
