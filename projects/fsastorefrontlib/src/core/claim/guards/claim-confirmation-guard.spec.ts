@@ -17,7 +17,7 @@ class MockRoutingService {
 }
 
 class MockUserRequestService {
-  getClaim(): Observable<any> {
+  getUserRequest(): Observable<any> {
     return of({});
   }
 }
@@ -59,7 +59,7 @@ describe(`ClaimConfirmationGuard`, () => {
 
   it(`should redirect to the homepage when user request is submitted`, () => {
     mockUserRequest.requestStatus = ClaimStatus.SUBMITTED;
-    spyOn(service, 'getClaim').and.returnValue(of(mockUserRequest));
+    spyOn(service, 'getUserRequest').and.returnValue(of(mockUserRequest));
     let result;
     guard
       .canActivate()
@@ -71,7 +71,7 @@ describe(`ClaimConfirmationGuard`, () => {
 
   it(`should not redirect to the homepage when user request is not submitted`, () => {
     mockUserRequest.requestStatus = ClaimStatus.OPEN;
-    spyOn(service, 'getClaim').and.returnValue(of(mockUserRequest));
+    spyOn(service, 'getUserRequest').and.returnValue(of(mockUserRequest));
     let result;
     guard
       .canActivate()

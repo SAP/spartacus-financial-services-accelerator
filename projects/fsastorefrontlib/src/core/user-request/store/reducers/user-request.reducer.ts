@@ -1,7 +1,7 @@
-import * as fromAction from '../../../user-request/actions';
-import { ClaimState } from '../claim-state';
+import * as fromAction from '../actions';
+import { UserRequestState } from '../user-request-state';
 
-export const initialState: ClaimState = {
+export const initialState: UserRequestState = {
   content: {},
   loaded: false,
 };
@@ -9,7 +9,7 @@ export const initialState: ClaimState = {
 export function reducer(
   state = initialState,
   action: fromAction.UserRequestActions
-): ClaimState {
+): UserRequestState {
   switch (action.type) {
     case fromAction.UPDATE_USER_REQUEST:
     case fromAction.SUBMIT_USER_REQUEST: {
@@ -31,4 +31,4 @@ export function reducer(
   return state;
 }
 
-export const getClaimContent = (state: ClaimState) => state.content;
+export const getUserRequestContent = (state: UserRequestState) => state.content;

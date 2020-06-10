@@ -6,32 +6,37 @@ import {
   MetaReducer,
   ActionReducer,
 } from '@ngrx/store';
-import * as fromClaimReducer from './claim.reducer';
-import { FSClaimState, StateWithClaim } from '../claim-state';
+import * as fromUserRequestReducer from './user-request.reducer';
+import {
+  FSUserRequestState,
+  StateWithUserRequest,
+} from '../user-request-state';
 import { AuthActions } from '@spartacus/core';
 import * as fromClaimAction from '../../../my-account/store/actions';
 
-export function getReducers(): ActionReducerMap<FSClaimState> {
+export function getReducers(): ActionReducerMap<FSUserRequestState> {
   return {
-    claim: fromClaimReducer.reducer,
+    userRequest: fromUserRequestReducer.reducer,
   };
 }
 
 export const reducerToken: InjectionToken<
-  ActionReducerMap<FSClaimState>
-> = new InjectionToken<ActionReducerMap<FSClaimState>>('FSClaimReducers');
+  ActionReducerMap<FSUserRequestState>
+> = new InjectionToken<ActionReducerMap<FSUserRequestState>>(
+  'FSUserRequestReducers'
+);
 
 export const reducerProvider: Provider = {
   provide: reducerToken,
   useFactory: getReducers,
 };
 
-export const getClaimState: MemoizedSelector<
-  StateWithClaim,
-  FSClaimState
-> = createFeatureSelector<FSClaimState>('claim');
+export const getUserRequestState: MemoizedSelector<
+  StateWithUserRequest,
+  FSUserRequestState
+> = createFeatureSelector<FSUserRequestState>('userRequest');
 
-export function clearClaimState(
+export function clearUserRequestState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return function(state, action) {
@@ -45,4 +50,4 @@ export function clearClaimState(
   };
 }
 
-export const metaReducers: MetaReducer<any>[] = [clearClaimState];
+export const metaReducers: MetaReducer<any>[] = [clearUserRequestState];

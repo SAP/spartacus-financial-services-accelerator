@@ -5,16 +5,13 @@ import { Store, StoreModule } from '@ngrx/store';
 import { AuthService, OCC_USER_ID_CURRENT, UserToken } from '@spartacus/core';
 import { Observable, of, ReplaySubject } from 'rxjs';
 import { FSUserRequest } from '../../../occ/occ-models/occ.models';
-import * as fromAction from '../actions';
-import {
-  reducerProvider,
-  reducerToken,
-} from '../../claim/store/reducers/index';
-import { FSClaimState } from '../../claim/store/claim-state';
+import * as fromAction from '../store/actions';
+import { reducerProvider, reducerToken } from '../store/reducers/index';
+import { FSUserRequestState } from '../store/user-request-state';
 import { UserRequestService } from './user-request.service';
 
 const requestId = '001';
-const mockClaim = {
+const mockUserRequest = {
   requestId: requestId,
 };
 class MockFormDataStorageService {
@@ -34,7 +31,7 @@ class MockAuthService {
 
 describe('UserRequestServiceTest', () => {
   let service: UserRequestService;
-  let store: Store<FSClaimState>;
+  let store: Store<FSUserRequestState>;
   let authService: MockAuthService;
   let mockFormDataStorageService: FormDataStorageService;
 
@@ -44,7 +41,7 @@ describe('UserRequestServiceTest', () => {
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
-        StoreModule.forFeature('claim', reducerToken),
+        StoreModule.forFeature('userRequest', reducerToken),
       ],
       providers: [
         UserRequestService,
@@ -57,7 +54,7 @@ describe('UserRequestServiceTest', () => {
       ],
     });
     service = TestBed.get(UserRequestService as Type<UserRequestService>);
-    store = TestBed.get(Store as Type<Store<FSClaimState>>);
+    store = TestBed.get(Store as Type<Store<FSUserRequestState>>);
     mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
       FormDataStorageService
     >);
@@ -93,15 +90,15 @@ describe('UserRequestServiceTest', () => {
     ).not.toHaveBeenCalled();
   });
 
-  it('should be able to get claim', () => {
-    store.dispatch(new fromAction.UpdateUserRequestSuccess(mockClaim));
+  it('should be able to get user request', () => {
+    store.dispatch(new fromAction.UpdateUserRequestSuccess(mockUserRequest));
     let response;
     service
-      .getClaim()
-      .subscribe(claim => {
-        response = claim;
+      .getUserRequest()
+      .subscribe(userRequest => {
+        response = userRequest;
       })
       .unsubscribe();
-    expect(response).toEqual(mockClaim);
+    expect(response).toEqual(mockUserRequest);
   });
 });

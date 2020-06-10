@@ -1,12 +1,12 @@
-import * as fromReducer from './claim.reducer';
-import * as fromAction from '../../../user-request/actions';
+import * as fromReducer from './user-request.reducer';
+import * as fromAction from '../actions';
 
 const { initialState } = fromReducer;
 const requestId = 'testUserRequest';
 const mockedUserRequest = {
   requestId: requestId,
 };
-describe('Claim Reducer', () => {
+describe('User Request Reducer', () => {
   describe('undefined action', () => {
     it('should return the default state', () => {
       const action = {} as fromAction.UserRequestActions;
