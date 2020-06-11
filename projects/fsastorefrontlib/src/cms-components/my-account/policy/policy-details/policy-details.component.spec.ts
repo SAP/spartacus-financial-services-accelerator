@@ -10,10 +10,15 @@ import {
   AllowedFSRequestType,
   RequestType,
 } from './../../../../occ/occ-models';
+import { DocumentService } from './../../../../core/document/facade/document.service';
 
 class MockPolicyService {
   loadPolicyDetails() {}
   getPolicyDetails() {}
+}
+
+class MockDocumentService {
+  getDocumentById = jasmine.createSpy();
 }
 
 class MockRoutingService {
@@ -76,13 +81,15 @@ const mockOccModuleConfig: OccConfig = {
 
 const policyId = 'policyId';
 const contractId = 'contractId';
+const documentId = 'documentId';
 
 describe('PolicyDetailsComponent', () => {
   let component: PolicyDetailsComponent;
   let fixture: ComponentFixture<PolicyDetailsComponent>;
   let changeRequestService: MockChangeRequestService;
   let routingService: MockRoutingService;
-  let policyService: PolicyService;
+  let policyService: MockPolicyService;
+  let documentService: MockDocumentService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -92,6 +99,7 @@ describe('PolicyDetailsComponent', () => {
         { provide: PolicyService, useClass: MockPolicyService },
         { provide: OccConfig, useValue: mockOccModuleConfig },
         { provide: ChangeRequestService, useClass: MockChangeRequestService },
+        { provide: DocumentService, useClass: MockDocumentService },
       ],
       declarations: [PolicyDetailsComponent],
     }).compileComponents();
@@ -101,6 +109,7 @@ describe('PolicyDetailsComponent', () => {
     >);
     routingService = TestBed.get(RoutingService as Type<RoutingService>);
     policyService = TestBed.get(PolicyService as Type<PolicyService>);
+    documentService = TestBed.get(DocumentService as Type<DocumentService>);
   }));
 
   beforeEach(() => {
@@ -174,5 +183,10 @@ describe('PolicyDetailsComponent', () => {
 
   it('should check if request type is not allowed when allowed request types are not defined', () => {
     expect(component.isChangeAllowed(null, 'NOT_EXISTING_TYPE')).toEqual(false);
+  });
+
+  it('should test get document', () => {
+    component.getDocument(documentId);
+    expect(documentService.getDocumentById).toHaveBeenCalledWith(documentId);
   });
 });
