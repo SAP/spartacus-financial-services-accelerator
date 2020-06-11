@@ -65,7 +65,6 @@ export class DefaultFormValidators extends Validators {
       today.setHours(0, 0, 0, 0);
       switch (operator) {
         case 'shouldBeEqual':
-          console.log(today);
           return inputVal.getTime() === today.getTime()
             ? null
             : { InvalidDate: true };
