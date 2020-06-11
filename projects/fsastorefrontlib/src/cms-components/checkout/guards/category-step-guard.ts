@@ -6,7 +6,7 @@ import {
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCheckoutConfigService } from '../../../core/checkout/services';
-import { FSCheckoutStep } from '../components/checkout-progress/checkout-step.component';
+import { FSCheckoutStep } from '../../../occ';
 
 @Injectable({
   providedIn: 'root',
