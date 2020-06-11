@@ -42,20 +42,20 @@ context('Renters Checkout', () => {
 
   it('Should check add options page', () => {
     renters.checkOptionalProducts();
-    renters.checkMiniCartRenters();
+    //renters.checkMiniCartRenters();
     checkout.removeOptionalProduct('Bicycles Cover');
-    renters.checkMiniCartRentersRemovedProduct();
+    //renters.checkMiniCartRentersRemovedProduct();
     checkout.clickContinueButton();
   });
 
   it('Should populate personal details page', () => {
-    checkout.checkPersonalDetailsPageInsurance();
+    checkout.checkPersonalDetailsPage();
     checkout.populatePersonalDetailsPage();
   });
 
   it('Should check quote review page', () => {
     checkout.checkProgressBarInsurance('Renters');
-    renters.checkMiniCartRentersRemovedProduct();
+    //renters.checkMiniCartRentersRemovedProduct();
     checkout.clickContinueButton();
     checkout.checkAccordions('propertyQuoteReview');
     addPaymentMethod(registrationUserWithoutPhone.email);
@@ -78,6 +78,7 @@ context('Renters Checkout', () => {
 
   it('Check my policies page', () => {
     checkMyPoliciesPage();
+    renters.checkRentersPolicy();
     renters.checkRentersPolicy();
   });
 

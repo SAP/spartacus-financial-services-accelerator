@@ -49,19 +49,19 @@ context('Homeowners Checkout', () => {
 
   it('Should check add options page', () => {
     homeowners.checkOptionalProducts();
-    homeowners.checkMiniCartHomeowners();
+    //homeowners.checkMiniCartHomeowners();
     checkout.clickContinueButton();
   });
 
   it('Should populate personal details page', () => {
-    checkout.checkPersonalDetailsPageInsurance();
+    checkout.checkPersonalDetailsPage();
     checkout.populatePersonalDetailsPage();
     checkout.clickContinueButton();
   });
 
   it('Should check quote review page', () => {
     checkout.checkProgressBarInsurance('Homeowners');
-    homeowners.checkMiniCartHomeowners();
+    //homeowners.checkMiniCartHomeowners();
     checkout.checkAccordions('propertyQuoteReview');
     addPaymentMethod(registrationUserWithoutPhone.email);
     checkout.clickContinueButton();
