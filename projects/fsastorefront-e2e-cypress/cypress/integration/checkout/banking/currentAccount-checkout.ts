@@ -1,6 +1,6 @@
 import * as productCategory from '../../../helpers/productCategoryPage';
 import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
-import * as checkout from "../../../helpers/checkout/checkoutSteps";
+import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as currentAccount from '../../../helpers/checkout/banking/currentAccount';
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
@@ -34,7 +34,6 @@ context('Current Account Checkout', () => {
     currentAccount.populateConfigureStep();
     checkout.clickContinueButton();
   });
-
 
   it('Should check optional products for Current Account', () => {
     checkout.checkCheckoutStep(' Your Current Account Application ', '7');
@@ -86,4 +85,3 @@ context('Current Account Checkout', () => {
     checkout.checkMyAccountEmptyPages('Policies', 'You have no Policies!');
   });
 });
-
