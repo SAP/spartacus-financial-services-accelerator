@@ -89,13 +89,40 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
   }
 
   back() {
-    // this.routingService.go({
-    //   cxRoute: this.checkoutStepUrlPrevious,
-    //   params: { categoryCode: this.activeCategory },
-    // });
-    this.routingService.go(
-      this.checkoutStepUrlPrevious.replace(':categoryCode', this.activeCategory)
-    );
+    this.routingService.go({
+      cxRoute: this.checkoutStepUrlPrevious,
+      params: { categoryCode: this.activeCategory },
+    });
+    // this.routingService.go(
+    //   this.checkoutStepUrlPrevious.replace(':categoryCode', this.activeCategory)
+    // );
+    // this.routingService.go(this.checkoutStepUrlPrevious);
+
+    // configureProduct/:productCode
+    // this.subscription.add(
+    //   this.categoryService
+    //     .getActiveCategory()
+    //     .pipe(
+    //       switchMap(categoryCode => {
+    //         let route = 'category';
+    //         let routingParam = categoryCode;
+    //         return this.entries$.pipe(
+    //           map(entries => {
+    //             const product = <FSProduct>entries[0].product;
+    //             if (product.configurable) {
+    //               route = 'configureProduct';
+    //               routingParam = product.code;
+    //             }
+    //             this.routingService.go({
+    //               cxRoute: route,
+    //               params: { code: routingParam },
+    //             });
+    //           })
+    //         );
+    //       })
+    //     )
+    //     .subscribe()
+    // );
   }
 
   navigateNext() {
