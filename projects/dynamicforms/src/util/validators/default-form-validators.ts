@@ -82,7 +82,6 @@ export class DefaultFormValidators extends Validators {
             ? null
             : { InvalidDate: true };
         case 'shouldBeLessOrEqual':
-          console.log(today);
           return inputVal.getTime() <= today.getTime()
             ? null
             : { InvalidDate: true };
