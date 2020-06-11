@@ -60,14 +60,30 @@ export class DefaultFormValidators extends Validators {
   static compareToCurrentDate(operator) {
     return (control: AbstractControl): ValidationErrors | null => {
       const inputVal = new Date(control.value as string);
+      inputVal.setHours(0, 0, 0, 0);
       const today = new Date();
+      today.setHours(0, 0, 0, 0);
       switch (operator) {
+        case 'shouldBeEqual':
+          console.log(today);
+          return inputVal.getTime() === today.getTime()
+            ? null
+            : { InvalidDate: true };
         case 'shouldBeGreater':
           return inputVal.getTime() > today.getTime()
             ? null
             : { InvalidDate: true };
         case 'shouldBeLess':
           return inputVal.getTime() < today.getTime()
+            ? null
+            : { InvalidDate: true };
+        case 'shouldBeGreaterOrEqual':
+          return inputVal.getTime() >= today.getTime()
+            ? null
+            : { InvalidDate: true };
+        case 'shouldBeLessOrEqual':
+          console.log(today);
+          return inputVal.getTime() <= today.getTime()
             ? null
             : { InvalidDate: true };
       }
