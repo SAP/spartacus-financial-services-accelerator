@@ -49,9 +49,9 @@ describe('Form Data Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.FormDataEffects as Type<
-      fromEffects.FormDataEffects
-    >);
+    effects = TestBed.get(
+      fromEffects.FormDataEffects as Type<fromEffects.FormDataEffects>
+    );
   });
 
   describe('loadFormData$', () => {

@@ -85,9 +85,9 @@ describe('User Request Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.UserRequestEffects as Type<
-      fromEffects.UserRequestEffects
-    >);
+    effects = TestBed.get(
+      fromEffects.UserRequestEffects as Type<fromEffects.UserRequestEffects>
+    );
   });
 
   describe('submitUserRequest$', () => {

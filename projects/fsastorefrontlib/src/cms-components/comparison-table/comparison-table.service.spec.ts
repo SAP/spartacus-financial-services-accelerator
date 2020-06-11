@@ -31,9 +31,9 @@ describe('ComparisonTableService', () => {
         { provide: CmsService, useClass: MockCmsService },
       ],
     });
-    service = TestBed.get(ComparisonTableService as Type<
-      ComparisonTableService
-    >);
+    service = TestBed.get(
+      ComparisonTableService as Type<ComparisonTableService>
+    );
   });
 
   it('should inject CmsService', inject(

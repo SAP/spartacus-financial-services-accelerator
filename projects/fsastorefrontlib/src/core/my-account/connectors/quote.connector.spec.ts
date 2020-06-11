@@ -9,12 +9,15 @@ class MockQuoteAdapter implements QuoteAdapter {
   getQuotes = createSpy('QuoteAdapter.getQuotes').and.callFake(userId =>
     of('getQuotes' + userId)
   );
-  updateQuote = createSpy('QuoteAdapter.updateQuote').and.callFake(
-    (userId, cart, quote) => of('updateQuote' + userId + cart + quote)
+  updateQuote = createSpy(
+    'QuoteAdapter.updateQuote'
+  ).and.callFake((userId, cart, quote) =>
+    of('updateQuote' + userId + cart + quote)
   );
-  bindQuote = createSpy('QuoteAdapter.bindQuote').and.callFake(
-    (userId, policyId, contractId) =>
-      of('bindQuote' + userId + policyId + contractId)
+  bindQuote = createSpy(
+    'QuoteAdapter.bindQuote'
+  ).and.callFake((userId, policyId, contractId) =>
+    of('bindQuote' + userId + policyId + contractId)
   );
 }
 const user = 'user';

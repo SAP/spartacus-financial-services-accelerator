@@ -83,9 +83,9 @@ describe('Quote Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.QuoteEffects as Type<
-      fromEffects.QuoteEffects
-    >);
+    effects = TestBed.get(
+      fromEffects.QuoteEffects as Type<fromEffects.QuoteEffects>
+    );
   });
 
   describe('loadQuotes$', () => {

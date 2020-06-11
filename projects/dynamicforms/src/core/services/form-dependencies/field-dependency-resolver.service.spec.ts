@@ -85,9 +85,9 @@ describe('FieldDependencyResolverService', () => {
         },
       ],
     });
-    mockFormValidationService = TestBed.get(FormValidationService as Type<
-      FormValidationService
-    >);
+    mockFormValidationService = TestBed.get(
+      FormValidationService as Type<FormValidationService>
+    );
     mockFormService = TestBed.get(FormService as Type<FormService>);
     service = TestBed.get(FieldDependencyResolverService);
   });

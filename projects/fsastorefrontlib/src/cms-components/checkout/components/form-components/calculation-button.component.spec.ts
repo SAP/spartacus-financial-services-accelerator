@@ -96,12 +96,12 @@ describe('CalculationButtonComponent', () => {
         },
       ],
     }).compileComponents();
-    currentProductService = TestBed.get(CurrentProductService as Type<
-      CurrentProductService
-    >);
-    formDataStorageService = TestBed.get(FormDataStorageService as Type<
-      FormDataStorageService
-    >);
+    currentProductService = TestBed.get(
+      CurrentProductService as Type<CurrentProductService>
+    );
+    formDataStorageService = TestBed.get(
+      FormDataStorageService as Type<FormDataStorageService>
+    );
     formDataService = TestBed.get(FormDataService as Type<FormDataService>);
   }));
 

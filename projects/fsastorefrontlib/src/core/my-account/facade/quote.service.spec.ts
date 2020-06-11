@@ -131,9 +131,9 @@ describe('QuoteServiceTest', () => {
     service = TestBed.get(QuoteService as Type<QuoteService>);
     cartService = TestBed.get(FSCartService as Type<FSCartService>);
     store = TestBed.get(Store as Type<Store<StateWithMyAccount>>);
-    mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
-      FormDataStorageService
-    >);
+    mockFormDataStorageService = TestBed.get(
+      FormDataStorageService as Type<FormDataStorageService>
+    );
 
     spyOn(store, 'dispatch').and.callThrough();
   });

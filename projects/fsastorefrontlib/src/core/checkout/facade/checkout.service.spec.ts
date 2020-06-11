@@ -2,9 +2,10 @@ import { Type } from '@angular/core';
 import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import * as fromReducer from '@spartacus/core';
+import { provideMockStore } from '@ngrx/store/testing';
+
 import {
   Cart,
-  CartDataService,
   CheckoutDeliveryService,
   CHECKOUT_FEATURE,
 } from '@spartacus/core';
@@ -36,27 +37,25 @@ describe('FSCheckoutServiceTest', () => {
   let checkoutDeliveryService: CheckoutDeliveryService;
 
   beforeEach(() => {
+    const initialState = {
+      checkout: {},
+    };
+
     TestBed.configureTestingModule({
-      imports: [
-        StoreModule.forRoot({}),
-        StoreModule.forFeature(CHECKOUT_FEATURE, fromReducer.getReducers()),
-      ],
+      imports: [StoreModule.forRoot({})],
       providers: [
         FSCheckoutService,
-        {
-          provide: CartDataService,
-          useClass: CartDataServiceStub,
-        },
         {
           provide: CheckoutDeliveryService,
           useClass: CheckoutDeliveryServiceStub,
         },
+        provideMockStore({ initialState }),
       ],
     });
     service = TestBed.get(FSCheckoutService as Type<FSCheckoutService>);
-    checkoutDeliveryService = TestBed.get(CheckoutDeliveryService as Type<
-      CheckoutDeliveryService
-    >);
+    checkoutDeliveryService = TestBed.get(
+      CheckoutDeliveryService as Type<CheckoutDeliveryService>
+    );
     store = TestBed.get(Store as Type<Store<FSStateWithCheckout>>);
 
     spyOn(checkoutDeliveryService, 'setDeliveryMode').and.callThrough();

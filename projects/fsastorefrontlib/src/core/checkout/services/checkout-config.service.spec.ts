@@ -41,13 +41,14 @@ describe('FSCheckoutConfigService', () => {
       ],
     });
     activatedRoute = TestBed.get(ActivatedRoute as Type<ActivatedRoute>);
-    routingConfigService = TestBed.get(RoutingConfigService as Type<
-      RoutingConfigService
-    >);
+    routingConfigService = TestBed.get(
+      RoutingConfigService as Type<RoutingConfigService>
+    );
 
     service = new FSCheckoutConfigService(
       mockCheckoutConfig,
-      routingConfigService
+      routingConfigService,
+      activatedRoute
     );
   });
 

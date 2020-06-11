@@ -76,14 +76,14 @@ describe('FinalReviewComponent', () => {
     spyOn(checkoutService, 'mockDeliveryMode').and.callThrough();
     spyOn(checkoutService, 'placeOrder').and.callThrough();
 
-    checkoutConfigService = TestBed.get(FSCheckoutConfigService as Type<
-      FSCheckoutConfigService
-    >);
+    checkoutConfigService = TestBed.get(
+      FSCheckoutConfigService as Type<FSCheckoutConfigService>
+    );
     spyOn(checkoutConfigService, 'getNextCheckoutStepUrl').and.callThrough();
 
-    checkoutPaymentService = TestBed.get(CheckoutPaymentService as Type<
-      CheckoutPaymentService
-    >);
+    checkoutPaymentService = TestBed.get(
+      CheckoutPaymentService as Type<CheckoutPaymentService>
+    );
     spyOn(checkoutPaymentService, 'getPaymentDetails').and.callThrough();
 
     routingService = TestBed.get(RoutingService as Type<RoutingService>);

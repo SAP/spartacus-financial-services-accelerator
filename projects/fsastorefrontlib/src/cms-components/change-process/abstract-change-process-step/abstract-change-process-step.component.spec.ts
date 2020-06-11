@@ -111,16 +111,16 @@ describe('ChangeProcessStepComponent', () => {
       declarations: [AbstractChangeProcessStepComponent],
     }).compileComponents();
 
-    mockChangeRequestService = TestBed.get(ChangeRequestService as Type<
-      ChangeRequestService
-    >);
+    mockChangeRequestService = TestBed.get(
+      ChangeRequestService as Type<ChangeRequestService>
+    );
     mockUserRequestNavigationService = TestBed.get(
       UserRequestNavigationService as Type<UserRequestNavigationService>
     );
     mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
-    globalMessageService = TestBed.get(GlobalMessageService as Type<
-      GlobalMessageService
-    >);
+    globalMessageService = TestBed.get(
+      GlobalMessageService as Type<GlobalMessageService>
+    );
   }));
 
   beforeEach(() => {

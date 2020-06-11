@@ -170,12 +170,12 @@ describe('ComparisonTablePanelItemComponent', () => {
     }).compileComponents();
     mockCartService = TestBed.get(FSCartService as Type<FSCartService>);
     mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
-    mockCheckoutConfigService = TestBed.get(FSCheckoutConfigService as Type<
-      FSCheckoutConfigService
-    >);
-    mockProductService = TestBed.get(FSProductService as Type<
-      FSProductService
-    >);
+    mockCheckoutConfigService = TestBed.get(
+      FSCheckoutConfigService as Type<FSCheckoutConfigService>
+    );
+    mockProductService = TestBed.get(
+      FSProductService as Type<FSProductService>
+    );
   }));
 
   beforeEach(() => {

@@ -6,32 +6,17 @@ export function checkBankingComparisonPage(mainProduct) {
   cy.get('.primary-button')
     .should('contain', 'Select')
     .should('have.length', 3);
-  cy.get('a.link')
-    .should('contain', 'More Info')
-    .should('have.length', 3);
+  cy.get('a.link').should('contain', 'More Info').should('have.length', 3);
 }
 
 export function checkBankingProgressBar() {
   cy.get('.progress-inner-wrapper').should('have.length', 6);
-  cy.get('p.label')
-    .should('have.length', 6)
-    .eq(0)
-    .contains("What's Included");
-  cy.get('p.label')
-    .eq(1)
-    .contains('Add Options');
-  cy.get('p.label')
-    .eq(2)
-    .contains('Personal Details');
-  cy.get('p.label')
-    .eq(3)
-    .contains('Quote Review');
-  cy.get('p.label')
-    .eq(4)
-    .contains('Legal Information');
-  cy.get('p.label')
-    .eq(5)
-    .contains('User Identification');
+  cy.get('p.label').should('have.length', 6).eq(0).contains("What's Included");
+  cy.get('p.label').eq(1).contains('Add Options');
+  cy.get('p.label').eq(2).contains('Personal Details');
+  cy.get('p.label').eq(3).contains('Quote Review');
+  cy.get('p.label').eq(4).contains('Legal Information');
+  cy.get('p.label').eq(5).contains('User Identification');
 }
 
 export function checkLegalInformationPage(mainProduct) {

@@ -22,9 +22,7 @@ import { FSUpdateProfileComponent } from './update-profile.component';
 
 @Component({
   selector: 'cx-fs-update-profile-form',
-  template: `
-    <div>update profile form</div>
-  `,
+  template: ` <div>update profile form</div> `,
 })
 class MockUpdateProfileFormComponent {
   @Input()
@@ -39,9 +37,7 @@ class MockUpdateProfileFormComponent {
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'cx-spinner',
-  template: `
-    <div>spinner</div>
-  `,
+  template: ` <div>spinner</div> `,
 })
 class MockCxSpinnerComponent {}
 

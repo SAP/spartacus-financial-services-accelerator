@@ -93,9 +93,9 @@ describe('AgentSearchListComponent', () => {
     fixture = TestBed.createComponent(AgentSearchListComponent);
     component = fixture.componentInstance;
     activatedRoute = TestBed.get(ActivatedRoute as Type<ActivatedRoute>);
-    mockSearchService = TestBed.get(AgentSearchService as Type<
-      AgentSearchService
-    >);
+    mockSearchService = TestBed.get(
+      AgentSearchService as Type<AgentSearchService>
+    );
 
     fixture.detectChanges();
   });

@@ -55,9 +55,9 @@ describe('UserRequestServiceTest', () => {
     });
     service = TestBed.get(UserRequestService as Type<UserRequestService>);
     store = TestBed.get(Store as Type<Store<FSUserRequestState>>);
-    mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
-      FormDataStorageService
-    >);
+    mockFormDataStorageService = TestBed.get(
+      FormDataStorageService as Type<FormDataStorageService>
+    );
 
     spyOn(store, 'dispatch').and.callThrough();
     spyOn(mockFormDataStorageService, 'setFormDataToLocalStorage').and.stub();

@@ -161,15 +161,15 @@ describe('FSCheckoutProgressComponent', () => {
     spyOn(categoryService, 'setActiveCategory').and.callThrough();
     spyOn(categoryService, 'getActiveCategory').and.callThrough();
 
-    routingConfigService = TestBed.get(RoutingConfigService as Type<
-      RoutingConfigService
-    >);
+    routingConfigService = TestBed.get(
+      RoutingConfigService as Type<RoutingConfigService>
+    );
     spyOn(routingConfigService, 'getRouteConfig').and.callThrough();
 
     cartService = TestBed.get(FSCartService as Type<FSCartService>);
-    currentProductService = TestBed.get(CurrentProductService as Type<
-      CurrentProductService
-    >);
+    currentProductService = TestBed.get(
+      CurrentProductService as Type<CurrentProductService>
+    );
 
     spyOn(cartService, 'getActive').and.callThrough();
   });

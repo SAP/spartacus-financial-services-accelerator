@@ -13,9 +13,7 @@ context('Current Account Checkout', () => {
 
   it('Start checkout for Current Account ', () => {
     cy.get('cx-footer-navigation').within(() => {
-      cy.get('a')
-        .contains('Current Account')
-        .click({ force: true });
+      cy.get('a').contains('Current Account').click({ force: true });
     });
     productCategory.startCheckoutForBanking();
   });

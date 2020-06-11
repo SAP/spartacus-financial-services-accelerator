@@ -25,9 +25,9 @@ describe('CheckoutConnector', () => {
       providers: [{ provide: CheckoutAdapter, useClass: MockCheckoutAdapter }],
     });
 
-    checkoutConnector = TestBed.get(CheckoutConnector as Type<
-      CheckoutConnector
-    >);
+    checkoutConnector = TestBed.get(
+      CheckoutConnector as Type<CheckoutConnector>
+    );
     checkoutAdapter = TestBed.get(CheckoutAdapter as Type<CheckoutAdapter>);
   });
 

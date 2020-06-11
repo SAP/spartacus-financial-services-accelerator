@@ -65,8 +65,6 @@ export function checkAutoPolicy() {
           cy.get('.label').contains('Premium');
           cy.get('.value').contains('€10.95 ');
         });
-      cy.get('.info-card-links .link')
-        .contains(' Details ')
-        .click();
+      cy.get('.info-card-links .link').contains(' Details ').click();
     });
 }

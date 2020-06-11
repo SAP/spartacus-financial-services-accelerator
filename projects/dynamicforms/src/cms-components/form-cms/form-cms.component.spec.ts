@@ -98,9 +98,9 @@ describe('FormCMSComponent', () => {
       ],
     }).compileComponents();
     mockFormDataService = TestBed.get(FormDataService as Type<FormDataService>);
-    mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
-      FormDataStorageService
-    >);
+    mockFormDataStorageService = TestBed.get(
+      FormDataStorageService as Type<FormDataStorageService>
+    );
   }));
 
   beforeEach(() => {

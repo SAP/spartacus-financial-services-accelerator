@@ -56,12 +56,12 @@ describe('CategoryStepGuard', () => {
     }).compileComponents();
 
     guard = TestBed.get(CategoryStepGuard as Type<CategoryStepGuard>);
-    routingConfigService = TestBed.get(RoutingConfigService as Type<
-      RoutingConfigService
-    >);
-    checkoutConfigService = TestBed.get(FSCheckoutConfigService as Type<
-      FSCheckoutConfigService
-    >);
+    routingConfigService = TestBed.get(
+      RoutingConfigService as Type<RoutingConfigService>
+    );
+    checkoutConfigService = TestBed.get(
+      FSCheckoutConfigService as Type<FSCheckoutConfigService>
+    );
   });
 
   it('should not return true in case there is not category in route', () => {

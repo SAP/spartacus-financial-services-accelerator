@@ -27,9 +27,7 @@ export function ConfirmBindQuote() {
 }
 
 export function bindQuotePopup() {
-  cy.get('.primary-button')
-    .should('contain', 'Continue')
-    .click();
+  cy.get('.primary-button').should('contain', 'Continue').click();
   cy.wait(500);
   cy.get('cx-fs-bind-quote-dialog').within(() => {
     cy.get('.primary-button').click();
@@ -38,9 +36,7 @@ export function bindQuotePopup() {
 }
 
 export function clickContinueButton() {
-  cy.get('.primary-button')
-    .should('contain', 'Continue')
-    .click();
+  cy.get('.primary-button').should('contain', 'Continue').click();
 }
 
 export function checkBackAndContinueButtons() {
@@ -49,17 +45,13 @@ export function checkBackAndContinueButtons() {
 }
 
 export function clickResumeButton() {
-  cy.get('.secondary-button')
-    .contains('Resume')
-    .click();
+  cy.get('.secondary-button').contains('Resume').click();
   cy.wait(1000);
 }
 
 export function checkOrderConfirmationBanking() {
   cy.get('cx-fs-order-confirmation-message').within(() => {
-    cy.get('h5')
-      .eq(0)
-      .should('have.text', ' Thank you for your order! ');
+    cy.get('h5').eq(0).should('have.text', ' Thank you for your order! ');
   });
 }
 
@@ -90,15 +82,11 @@ export function placeOrderOnFinalReview() {
     cy.get('.form-check-input').click();
     cy.get('.primary-button').click();
   });
-  cy.wait(`@${confirmationPage}`)
-    .its('status')
-    .should('eq', 200);
+  cy.wait(`@${confirmationPage}`).its('status').should('eq', 200);
 }
 
 export function checkOrderConfirmation() {
   cy.get('cx-fs-order-confirmation-message').within(() => {
-    cy.get('h5')
-      .eq(0)
-      .should('have.text', ' Thank you for your order! ');
+    cy.get('h5').eq(0).should('have.text', ' Thank you for your order! ');
   });
 }

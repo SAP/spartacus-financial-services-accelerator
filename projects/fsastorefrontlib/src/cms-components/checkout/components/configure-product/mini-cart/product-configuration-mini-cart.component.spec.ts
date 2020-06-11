@@ -97,9 +97,9 @@ describe('ProductConfigurationMiniCartComponent', () => {
         },
       ],
     }).compileComponents();
-    currentProductService = TestBed.get(CurrentProductService as Type<
-      CurrentProductService
-    >);
+    currentProductService = TestBed.get(
+      CurrentProductService as Type<CurrentProductService>
+    );
     formDataService = TestBed.get(FormDataService as Type<FormDataService>);
     pricingService = TestBed.get(PricingService as Type<PricingService>);
     fsProductService = TestBed.get(FSProductService as Type<FSProductService>);

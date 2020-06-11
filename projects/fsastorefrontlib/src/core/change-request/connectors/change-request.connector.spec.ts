@@ -47,12 +47,12 @@ describe('ChangeRequestConnector', () => {
       ],
     });
 
-    changeRequestConnector = TestBed.get(ChangeRequestConnector as Type<
-      ChangeRequestConnector
-    >);
-    changeRequestAdapter = TestBed.get(ChangeRequestAdapter as Type<
-      ChangeRequestAdapter
-    >);
+    changeRequestConnector = TestBed.get(
+      ChangeRequestConnector as Type<ChangeRequestConnector>
+    );
+    changeRequestAdapter = TestBed.get(
+      ChangeRequestAdapter as Type<ChangeRequestAdapter>
+    );
   });
 
   it('should be created', () => {

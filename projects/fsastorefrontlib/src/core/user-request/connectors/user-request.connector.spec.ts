@@ -6,9 +6,9 @@ import { UserRequestAdapter } from './user-request.adapter';
 import { UserRequestConnector } from './user-request.connector';
 
 class MockUserRequestAdapter implements UserRequestAdapter {
-  getUserRequest = createSpy('UserRequestAdapter.getUserRequest').and.callFake(
-    (userId, request) => of('getUserRequest' + userId + request)
-  );
+  getUserRequest = createSpy(
+    'UserRequestAdapter.getUserRequest'
+  ).and.callFake((userId, request) => of('getUserRequest' + userId + request));
   updateUserRequest = createSpy(
     'UserRequestAdapter.updateUserRequest'
   ).and.callFake((userId, request, stepData) =>
@@ -34,12 +34,12 @@ describe('UserRequestConnector', () => {
       ],
     });
 
-    userRequestConnector = TestBed.get(UserRequestConnector as Type<
-      UserRequestConnector
-    >);
-    userRequestAdapter = TestBed.get(UserRequestAdapter as Type<
-      UserRequestAdapter
-    >);
+    userRequestConnector = TestBed.get(
+      UserRequestConnector as Type<UserRequestConnector>
+    );
+    userRequestAdapter = TestBed.get(
+      UserRequestAdapter as Type<UserRequestAdapter>
+    );
   });
 
   it('should be created', () => {

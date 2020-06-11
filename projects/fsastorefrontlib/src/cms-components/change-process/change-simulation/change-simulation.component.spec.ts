@@ -115,16 +115,16 @@ describe('ChangeSimulationComponent', () => {
       UserRequestNavigationService as Type<UserRequestNavigationService>
     );
     mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
-    globalMessageService = TestBed.get(GlobalMessageService as Type<
-      GlobalMessageService
-    >);
-    mockChangeRequestService = TestBed.get(ChangeRequestService as Type<
-      ChangeRequestService
-    >);
+    globalMessageService = TestBed.get(
+      GlobalMessageService as Type<GlobalMessageService>
+    );
+    mockChangeRequestService = TestBed.get(
+      ChangeRequestService as Type<ChangeRequestService>
+    );
 
-    changePolicyService = TestBed.get(ChangePolicyService as Type<
-      ChangePolicyService
-    >);
+    changePolicyService = TestBed.get(
+      ChangePolicyService as Type<ChangePolicyService>
+    );
     spyOn(changePolicyService, 'getChangedPolicyObjects').and.callThrough();
   }));
 

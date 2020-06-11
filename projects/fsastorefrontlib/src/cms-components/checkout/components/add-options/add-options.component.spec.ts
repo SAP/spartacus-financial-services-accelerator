@@ -131,9 +131,9 @@ describe('AddOptionsComponent', () => {
     routingService = TestBed.get(RoutingService as Type<RoutingService>);
     spyOn(routingService, 'go').and.callThrough();
 
-    checkoutConfigService = TestBed.get(FSCheckoutConfigService as Type<
-      FSCheckoutConfigService
-    >);
+    checkoutConfigService = TestBed.get(
+      FSCheckoutConfigService as Type<FSCheckoutConfigService>
+    );
     spyOn(checkoutConfigService, 'getNextCheckoutStepUrl').and.callThrough();
 
     categoryService = TestBed.get(CategoryService as Type<CategoryService>);

@@ -30,9 +30,9 @@ describe('CsTicketConnector', () => {
       providers: [{ provide: CsTicketAdapter, useClass: MockCsTicketAdapter }],
     });
 
-    csTicketConnector = TestBed.get(CsTicketConnector as Type<
-      CsTicketConnector
-    >);
+    csTicketConnector = TestBed.get(
+      CsTicketConnector as Type<CsTicketConnector>
+    );
     csTicketAdapter = TestBed.get(CsTicketAdapter as Type<CsTicketAdapter>);
   });
 

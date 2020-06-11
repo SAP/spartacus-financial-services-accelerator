@@ -47,10 +47,7 @@ describe('ClaimConfirmationGuard', () => {
   });
   it('should redirect to homepage', () => {
     spyOn(routing, 'go');
-    guard
-      .canActivate()
-      .subscribe()
-      .unsubscribe();
+    guard.canActivate().subscribe().unsubscribe();
     expect(routing.go).toHaveBeenCalledWith({ cxRoute: 'home' });
   });
   it('should match allowable status', () => {

@@ -67,9 +67,9 @@ describe('SelectComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SelectComponent);
-    occValueListService = TestBed.get(OccValueListService as Type<
-      OccValueListService
-    >);
+    occValueListService = TestBed.get(
+      OccValueListService as Type<OccValueListService>
+    );
     component = fixture.componentInstance;
     component.group = mockFormGroup;
     component.config = mockField;

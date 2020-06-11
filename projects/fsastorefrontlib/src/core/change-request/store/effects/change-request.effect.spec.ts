@@ -102,12 +102,12 @@ describe('Change Request Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.ChangeRequestEffects as Type<
-      fromEffects.ChangeRequestEffects
-    >);
-    globalMessageService = TestBed.get(GlobalMessageService as Type<
-      GlobalMessageService
-    >);
+    effects = TestBed.get(
+      fromEffects.ChangeRequestEffects as Type<fromEffects.ChangeRequestEffects>
+    );
+    globalMessageService = TestBed.get(
+      GlobalMessageService as Type<GlobalMessageService>
+    );
   });
 
   describe('createChangeRequest$', () => {

@@ -43,9 +43,9 @@ describe('Product Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.ProductEffect as Type<
-      fromEffects.ProductEffect
-    >);
+    effects = TestBed.get(
+      fromEffects.ProductEffect as Type<fromEffects.ProductEffect>
+    );
   });
 
   describe('getCalculatedProductData$', () => {

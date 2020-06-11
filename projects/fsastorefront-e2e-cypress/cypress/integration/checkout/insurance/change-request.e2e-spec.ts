@@ -60,9 +60,7 @@ context('Change Request for new user', () => {
     //check change preview - second step
     changeRequest.checkChangeMileageSteps();
     changeRequest.checkChangedPolicyPremium();
-    cy.get('.primary-button')
-      .should('contain', 'Submit')
-      .click();
+    cy.get('.primary-button').should('contain', 'Submit').click();
     changeRequest.checkChangeRequestConfirmation();
   });
 
@@ -75,17 +73,13 @@ context('Change Request for new user', () => {
     changeRequest.checkChangeCoverageSteps();
     changeRequest.checkOptionalExtras();
     //check continue button is disabled if coverage is not added
-    cy.get('.primary-button')
-      .contains('Continue')
-      .should('be.disabled');
+    cy.get('.primary-button').contains('Continue').should('be.disabled');
     changeRequest.addRoadsideAssistance();
     checkout.clickContinueButton();
     //check change preview - second step
     changeRequest.checkChangeCoverageSteps();
     changeRequest.checkChangedPolicyPremium();
-    cy.get('.primary-button')
-      .should('contain', 'Submit')
-      .click();
+    cy.get('.primary-button').should('contain', 'Submit').click();
     changeRequest.checkChangeRequestConfirmation();
   });
 
@@ -100,9 +94,7 @@ context('Change Request for new user', () => {
     //check change preview - second step
     changeRequest.checkChangeMileageSteps();
     changeRequest.checkChangedPolicyPremium();
-    cy.get('.action-button')
-      .should('contain', 'Cancel')
-      .click();
+    cy.get('.action-button').should('contain', 'Cancel').click();
     //check user is redirected to policy details page
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
     checkout.checkAccordions('policyDetails');

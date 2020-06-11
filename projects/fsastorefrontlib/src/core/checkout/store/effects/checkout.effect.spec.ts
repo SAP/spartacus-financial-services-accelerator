@@ -38,9 +38,9 @@ describe('Checkout Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.CheckoutEffects as Type<
-      fromEffects.CheckoutEffects
-    >);
+    effects = TestBed.get(
+      fromEffects.CheckoutEffects as Type<fromEffects.CheckoutEffects>
+    );
   });
 
   describe('setIdentificationType$', () => {

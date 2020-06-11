@@ -101,12 +101,12 @@ describe('Claim Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.ClaimEffects as Type<
-      fromEffects.ClaimEffects
-    >);
-    globalMessageService = TestBed.get(GlobalMessageService as Type<
-      GlobalMessageService
-    >);
+    effects = TestBed.get(
+      fromEffects.ClaimEffects as Type<fromEffects.ClaimEffects>
+    );
+    globalMessageService = TestBed.get(
+      GlobalMessageService as Type<GlobalMessageService>
+    );
   });
 
   describe('loadClaims$', () => {

@@ -123,13 +123,13 @@ describe('ProductConfigurationNavigationComponent', () => {
         },
       ],
     }).compileComponents();
-    currentProductService = TestBed.get(CurrentProductService as Type<
-      CurrentProductService
-    >);
+    currentProductService = TestBed.get(
+      CurrentProductService as Type<CurrentProductService>
+    );
     formDataService = TestBed.get(FormDataService as Type<FormDataService>);
-    formDataStorageService = TestBed.get(FormDataStorageService as Type<
-      FormDataStorageService
-    >);
+    formDataStorageService = TestBed.get(
+      FormDataStorageService as Type<FormDataStorageService>
+    );
     pricingService = TestBed.get(PricingService as Type<PricingService>);
     cartService = TestBed.get(FSCartService as Type<FSCartService>);
   }));

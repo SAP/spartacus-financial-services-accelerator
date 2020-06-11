@@ -69,9 +69,9 @@ describe('Policy Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.PolicyEffects as Type<
-      fromEffects.PolicyEffects
-    >);
+    effects = TestBed.get(
+      fromEffects.PolicyEffects as Type<fromEffects.PolicyEffects>
+    );
   });
 
   describe('loadPolicies$', () => {

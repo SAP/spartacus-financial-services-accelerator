@@ -89,12 +89,12 @@ describe('CheckoutStepGuard', () => {
     }).compileComponents();
 
     guard = TestBed.get(CheckoutStepGuard as Type<CheckoutStepGuard>);
-    routingConfigService = TestBed.get(RoutingConfigService as Type<
-      RoutingConfigService
-    >);
-    checkoutConfigService = TestBed.get(FSCheckoutConfigService as Type<
-      FSCheckoutConfigService
-    >);
+    routingConfigService = TestBed.get(
+      RoutingConfigService as Type<RoutingConfigService>
+    );
+    checkoutConfigService = TestBed.get(
+      FSCheckoutConfigService as Type<FSCheckoutConfigService>
+    );
     cartService = TestBed.get(FSCartService as Type<FSCartService>);
   });
 

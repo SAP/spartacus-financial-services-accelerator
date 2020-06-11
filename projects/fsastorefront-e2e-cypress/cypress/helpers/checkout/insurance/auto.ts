@@ -36,21 +36,11 @@ export function populateAutoInformation() {
 }
 
 export function populateMainDriverInfo() {
-  cy.get('[name=dateOfBirth]')
-    .eq('0')
-    .type('1982-01-01');
-  cy.get('[name="driverGender"]')
-    .eq('0')
-    .select('Female');
-  cy.get('[name="driverMaritalStatus"]')
-    .eq('0')
-    .select('Single');
-  cy.get('[name="driverCategory"]')
-    .eq('0')
-    .select('Main');
-  cy.get('[name="driverLicenceDate"]')
-    .eq('0')
-    .type('2018-01-01');
+  cy.get('[name=dateOfBirth]').eq('0').type('1982-01-01');
+  cy.get('[name="driverGender"]').eq('0').select('Female');
+  cy.get('[name="driverMaritalStatus"]').eq('0').select('Single');
+  cy.get('[name="driverCategory"]').eq('0').select('Main');
+  cy.get('[name="driverLicenceDate"]').eq('0').type('2018-01-01');
 }
 
 export function checkAutoComparisonTable() {
@@ -111,19 +101,9 @@ export function checkAutoSilverMiniCart() {
 }
 
 export function populateAdditionalDriverInfo() {
-  cy.get('[name=dateOfBirth]')
-    .eq('1')
-    .type('1982-08-24');
-  cy.get('[name="driverGender"]')
-    .eq('1')
-    .select('Male');
-  cy.get('[name="driverMaritalStatus"]')
-    .eq('1')
-    .select('Widowed');
-  cy.get('[name="driverCategory"]')
-    .eq('1')
-    .select('Occasional');
-  cy.get('[name="driverLicenceDate"]')
-    .eq('1')
-    .type('2015-01-01');
+  cy.get('[name=dateOfBirth]').eq('1').type('1982-08-24');
+  cy.get('[name="driverGender"]').eq('1').select('Male');
+  cy.get('[name="driverMaritalStatus"]').eq('1').select('Widowed');
+  cy.get('[name="driverCategory"]').eq('1').select('Occasional');
+  cy.get('[name="driverLicenceDate"]').eq('1').type('2015-01-01');
 }

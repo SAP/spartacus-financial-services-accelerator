@@ -64,9 +64,9 @@ describe('Claim Policies Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.ClaimPoliciesEffects as Type<
-      fromEffects.ClaimPoliciesEffects
-    >);
+    effects = TestBed.get(
+      fromEffects.ClaimPoliciesEffects as Type<fromEffects.ClaimPoliciesEffects>
+    );
   });
 
   describe('loadClaimPolicies$', () => {

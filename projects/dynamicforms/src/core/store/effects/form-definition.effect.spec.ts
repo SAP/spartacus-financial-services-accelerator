@@ -54,9 +54,11 @@ describe('Form Definition Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.FormDefinitionEffects as Type<
-      fromEffects.FormDefinitionEffects
-    >);
+    effects = TestBed.get(
+      fromEffects.FormDefinitionEffects as Type<
+        fromEffects.FormDefinitionEffects
+      >
+    );
   });
 
   describe('loadFormDefinition$', () => {

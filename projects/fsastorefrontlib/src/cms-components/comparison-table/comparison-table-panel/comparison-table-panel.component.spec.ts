@@ -130,9 +130,9 @@ describe('ComparisonTablePanelComponent', () => {
         ComparisonTablePanelItemComponent,
       ],
     }).compileComponents();
-    mockBillingTimeConnector = TestBed.get(BillingTimeConnector as Type<
-      BillingTimeConnector
-    >);
+    mockBillingTimeConnector = TestBed.get(
+      BillingTimeConnector as Type<BillingTimeConnector>
+    );
     mockFormDataService = TestBed.get(FormDataService as Type<FormDataService>);
     mockPricingService = TestBed.get(PricingService as Type<PricingService>);
   }));

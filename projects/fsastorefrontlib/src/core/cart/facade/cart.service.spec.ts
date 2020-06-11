@@ -2,7 +2,6 @@ import { Type } from '@angular/core';
 import { inject, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { Store, StoreModule } from '@ngrx/store';
-import * as fromReducer from '@spartacus/core';
 import {
   AuthService,
   Cart,
@@ -10,7 +9,7 @@ import {
   OCC_CART_ID_CURRENT,
   OCC_USER_ID_ANONYMOUS,
   OCC_USER_ID_CURRENT,
-  ProcessesLoaderState,
+  StateUtils,
   StateWithMultiCart,
   UserToken,
 } from '@spartacus/core';
@@ -18,6 +17,7 @@ import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
 import * as fromAction from '../../checkout/store/actions/index';
 import { reducerProvider } from './../../product-assignment/store/reducers/index';
 import { FSCartService } from './cart.service';
+import { provideMockStore } from '@ngrx/store/testing';
 
 const productCode = 'PRODUCT_CODE';
 const bundleTemplateId = 'BUNDLE_ID';
@@ -55,15 +55,14 @@ describe('FSCartServiceTest', () => {
 
   beforeEach(() => {
     authService = new MockAuthService();
+    const initialState = {
+      cart: {
+        cartId: 'current',
+      },
+    };
 
     TestBed.configureTestingModule({
-      imports: [
-        StoreModule.forRoot({}),
-        StoreModule.forFeature(
-          'multi-cart',
-          fromReducer.getMultiCartReducers()
-        ),
-      ],
+      imports: [StoreModule.forRoot({})],
       providers: [
         FSCartService,
         reducerProvider,
@@ -79,6 +78,7 @@ describe('FSCartServiceTest', () => {
           provide: MultiCartService,
           useClass: MultiCartServiceStub,
         },
+        provideMockStore({ initialState }),
       ],
     });
     service = TestBed.get(FSCartService as Type<FSCartService>);
@@ -97,7 +97,9 @@ describe('FSCartServiceTest', () => {
   ));
 
   it('should be able to create cart and start bundle', () => {
-    const cart$ = new BehaviorSubject<ProcessesLoaderState<Cart>>({});
+    const cart$ = new BehaviorSubject<StateUtils.ProcessesLoaderState<Cart>>(
+      {}
+    );
 
     spyOn(multiCartService, 'createCart').and.callFake(() => {
       cart$.next({
@@ -131,7 +133,9 @@ describe('FSCartServiceTest', () => {
   });
 
   it('should not be able to start bundle for created cart', () => {
-    const cart$ = new BehaviorSubject<ProcessesLoaderState<Cart>>({});
+    const cart$ = new BehaviorSubject<StateUtils.ProcessesLoaderState<Cart>>(
+      {}
+    );
 
     spyOn(multiCartService, 'createCart').and.callFake(() => {
       cart$.next({

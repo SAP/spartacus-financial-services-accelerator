@@ -2,7 +2,12 @@ import { inject, TestBed } from '@angular/core/testing';
 import * as ngrxStore from '@ngrx/store';
 import { Store, StoreModule } from '@ngrx/store';
 import * as fromStoreReducers from '@spartacus/core';
-import { Product, PRODUCT_FEATURE, StateWithProduct } from '@spartacus/core';
+import {
+  Product,
+  PRODUCT_FEATURE,
+  StateWithProduct,
+  ProductLoadingService,
+} from '@spartacus/core';
 import { of } from 'rxjs';
 import {
   PriceAttributeGroup,
@@ -32,19 +37,31 @@ describe('FSProductService', () => {
     priceAttributeGroups: [priceGroup],
   };
 
+  class MockProductLoadingService {
+    get() {
+      return of(mockProduct);
+    }
+  }
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
-        StoreModule.forFeature(
-          PRODUCT_FEATURE,
-          fromStoreReducers.getReducers()
-        ),
+        // StoreModule.forFeature(
+        //   PRODUCT_FEATURE,
+        //   fromStoreReducers.getReducers()
+        // ),
       ],
-      providers: [FSProductService],
+      providers: [
+        FSProductService,
+        {
+          provide: ProductLoadingService,
+          useClass: MockProductLoadingService,
+        },
+      ],
     });
-    service = TestBed.get(FSProductService);
-    store = TestBed.get(Store);
+    service = TestBed.inject(FSProductService);
+    store = TestBed.inject(Store);
     spyOn(store, 'dispatch').and.stub();
   });
 

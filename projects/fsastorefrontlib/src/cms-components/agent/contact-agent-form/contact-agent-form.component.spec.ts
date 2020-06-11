@@ -120,12 +120,12 @@ describe('ContactAgentFormComponent', () => {
     component = fixture.componentInstance;
     globalMessageService = TestBed.get(GlobalMessageService);
     mockedUserService = TestBed.get(UserService as Type<UserService>);
-    mockSearchService = TestBed.get(AgentSearchService as Type<
-      AgentSearchService
-    >);
-    mockedCsTicketService = TestBed.get(CsTicketService as Type<
-      CsTicketService
-    >);
+    mockSearchService = TestBed.get(
+      AgentSearchService as Type<AgentSearchService>
+    );
+    mockedCsTicketService = TestBed.get(
+      CsTicketService as Type<CsTicketService>
+    );
     mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
   });
 

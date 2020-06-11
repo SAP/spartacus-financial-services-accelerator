@@ -24,12 +24,12 @@ describe('BillingTimeConnector', () => {
       ],
     });
 
-    billingTimeConnector = TestBed.get(BillingTimeConnector as Type<
-      BillingTimeConnector
-    >);
-    billingTimeAdapter = TestBed.get(BillingTimeAdapter as Type<
-      BillingTimeAdapter
-    >);
+    billingTimeConnector = TestBed.get(
+      BillingTimeConnector as Type<BillingTimeConnector>
+    );
+    billingTimeAdapter = TestBed.get(
+      BillingTimeAdapter as Type<BillingTimeAdapter>
+    );
   });
 
   it('should be created', () => {

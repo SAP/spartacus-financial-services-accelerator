@@ -26,12 +26,12 @@ describe('ProductPricingConnector', () => {
       ],
     });
 
-    productPricingConnector = TestBed.get(ProductPricingConnector as Type<
-      ProductPricingConnector
-    >);
-    productPricingAdapter = TestBed.get(ProductPricingAdapter as Type<
-      ProductPricingAdapter
-    >);
+    productPricingConnector = TestBed.get(
+      ProductPricingConnector as Type<ProductPricingConnector>
+    );
+    productPricingAdapter = TestBed.get(
+      ProductPricingAdapter as Type<ProductPricingAdapter>
+    );
   });
 
   it('should be created', () => {

@@ -71,9 +71,7 @@ class MockUserRequestService {
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'cx-spinner',
-  template: `
-    <div>spinner</div>
-  `,
+  template: ` <div>spinner</div> `,
 })
 class MockCxSpinnerComponent {}
 

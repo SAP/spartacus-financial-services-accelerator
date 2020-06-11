@@ -106,13 +106,13 @@ describe('CMSFormSubmitComponent', () => {
         },
       ],
     }).compileComponents();
-    mockCmsComponentConnector = TestBed.get(CmsComponentConnector as Type<
-      CmsComponentConnector
-    >);
+    mockCmsComponentConnector = TestBed.get(
+      CmsComponentConnector as Type<CmsComponentConnector>
+    );
     mockFormDataService = TestBed.get(FormDataService as Type<FormDataService>);
-    mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
-      FormDataStorageService
-    >);
+    mockFormDataStorageService = TestBed.get(
+      FormDataStorageService as Type<FormDataStorageService>
+    );
   }));
 
   beforeEach(() => {

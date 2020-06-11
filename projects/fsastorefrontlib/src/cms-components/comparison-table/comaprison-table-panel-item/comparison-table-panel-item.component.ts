@@ -17,6 +17,7 @@ import {
   OneTimeChargeEntry,
   PricingData,
 } from '../../../occ/occ-models';
+import { CheckoutConfigService } from '@spartacus/storefront';
 
 @Component({
   selector: 'cx-fs-comparison-table-panel-item',

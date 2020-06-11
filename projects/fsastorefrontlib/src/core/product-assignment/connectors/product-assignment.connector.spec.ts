@@ -56,12 +56,12 @@ describe('ProductAssignmentConnector', () => {
       ],
     });
 
-    productAssignmentConnector = TestBed.get(ProductAssignmentConnector as Type<
-      ProductAssignmentConnector
-    >);
-    productAssignmentAdapter = TestBed.get(ProductAssignmentAdapter as Type<
-      ProductAssignmentAdapter
-    >);
+    productAssignmentConnector = TestBed.get(
+      ProductAssignmentConnector as Type<ProductAssignmentConnector>
+    );
+    productAssignmentAdapter = TestBed.get(
+      ProductAssignmentAdapter as Type<ProductAssignmentAdapter>
+    );
   });
 
   it('should be created', () => {

@@ -19,9 +19,9 @@ export function getReducers(): ActionReducerMap<FSUserRequestState> {
   };
 }
 
-export const reducerToken: InjectionToken<
-  ActionReducerMap<FSUserRequestState>
-> = new InjectionToken<ActionReducerMap<FSUserRequestState>>(
+export const reducerToken: InjectionToken<ActionReducerMap<
+  FSUserRequestState
+>> = new InjectionToken<ActionReducerMap<FSUserRequestState>>(
   'FSUserRequestReducers'
 );
 
@@ -38,7 +38,7 @@ export const getUserRequestState: MemoizedSelector<
 export function clearUserRequestState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
-  return function(state, action) {
+  return function (state, action) {
     if (action.type === AuthActions.LOGOUT) {
       state = undefined;
     }

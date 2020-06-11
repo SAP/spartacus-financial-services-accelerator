@@ -5,6 +5,7 @@ import { By } from '@angular/platform-browser';
 import { I18nTestingModule } from '@spartacus/core';
 import { FSUser } from '../../../../occ/occ-models';
 import { FSUpdateProfileFormComponent } from './update-profile-form.component';
+import { FormErrorsModule } from '@spartacus/storefront';
 
 const mockUser: FSUser = {
   titleCode: 'dr',
@@ -22,7 +23,7 @@ describe('FSUpdateProfileFormComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, I18nTestingModule],
+      imports: [ReactiveFormsModule, I18nTestingModule, FormErrorsModule],
       declarations: [FSUpdateProfileFormComponent],
     }).compileComponents();
   }));

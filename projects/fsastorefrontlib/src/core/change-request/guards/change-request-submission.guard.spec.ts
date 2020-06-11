@@ -47,9 +47,9 @@ describe(`ChangeRequestSubmissionGuard`, () => {
       imports: [RouterTestingModule],
     });
 
-    guard = TestBed.get(ChangeRequestSubmissionGuard as Type<
-      ChangeRequestSubmissionGuard
-    >);
+    guard = TestBed.get(
+      ChangeRequestSubmissionGuard as Type<ChangeRequestSubmissionGuard>
+    );
     service = TestBed.get(ChangeRequestService as Type<ChangeRequestService>);
     routing = TestBed.get(RoutingService as Type<RoutingService>);
 

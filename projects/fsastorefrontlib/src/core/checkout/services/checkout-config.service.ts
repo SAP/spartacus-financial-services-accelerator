@@ -12,7 +12,8 @@ import { CheckoutConfig, CheckoutConfigService } from '@spartacus/storefront';
 export class FSCheckoutConfigService extends CheckoutConfigService {
   constructor(
     protected fsCheckoutConfig: CheckoutConfig,
-    protected fsRoutingConfigService: RoutingConfigService
+    protected fsRoutingConfigService: RoutingConfigService,
+    protected activatedRoute: ActivatedRoute
   ) {
     super(fsCheckoutConfig, fsRoutingConfigService);
   }
@@ -27,13 +28,15 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
     let stepIndex: number;
     let index = 0;
     for (const step of this.steps) {
-      if (currentStepUrl === `/${this.getUrlFromStepRoute(step.routeName)}`) {
+      if (
+        currentStepUrl &&
+        currentStepUrl.includes(this.getUrlFromStepRoute(step.routeName))
+      ) {
         stepIndex = index;
       } else {
         index++;
       }
     }
-
     return stepIndex >= 0 ? stepIndex : null;
   }
 
@@ -41,14 +44,24 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   private getUrlFromActivatedRoute(
     activatedRoute: ActivatedRoute | CmsActivatedRouteSnapshot
   ) {
-    return activatedRoute &&
-      activatedRoute.routeConfig &&
-      activatedRoute.routeConfig.path
-      ? `/${activatedRoute.routeConfig.path}`
-      : null;
+    if (activatedRoute) {
+      const routeSnapshot = (<ActivatedRoute>activatedRoute).snapshot;
+      const cmsRouteSnapshot = <CmsActivatedRouteSnapshot>activatedRoute;
+      if (routeSnapshot) {
+        return routeSnapshot.url ? `/${routeSnapshot.url.join('/')}` : null;
+      }
+      if (cmsRouteSnapshot) {
+        return cmsRouteSnapshot.url
+          ? `${cmsRouteSnapshot.url.join('/')}`
+          : null;
+      }
+    }
+    return null;
   }
 
   private getUrlFromStepRoute(stepRoute: string) {
-    return this.fsRoutingConfigService.getRouteConfig(stepRoute).paths[0];
+    return this.fsRoutingConfigService
+      .getRouteConfig(stepRoute)
+      .paths[0].split(':')[0];
   }
 }

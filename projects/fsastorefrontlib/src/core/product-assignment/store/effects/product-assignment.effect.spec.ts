@@ -95,9 +95,11 @@ describe('Product Assignment Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.ProductAssignmentEffects as Type<
-      fromEffects.ProductAssignmentEffects
-    >);
+    effects = TestBed.get(
+      fromEffects.ProductAssignmentEffects as Type<
+        fromEffects.ProductAssignmentEffects
+      >
+    );
   });
 
   describe('loadProductAssignments$', () => {

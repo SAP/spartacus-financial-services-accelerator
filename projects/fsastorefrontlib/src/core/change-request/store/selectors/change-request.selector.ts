@@ -9,7 +9,7 @@ import { StateUtils } from '@spartacus/core';
 
 export const getChangeRequestState: MemoizedSelector<
   StateWithChangeRequest,
-  StateUtils.LoaderState <ChangeRequestState>
+  StateUtils.LoaderState<ChangeRequestState>
 > = createSelector(
   fromFeature.getChangeRequestState,
   (changeRequestsState: ChangeRequestsState) =>
@@ -32,7 +32,7 @@ export const getLoaded: MemoizedSelector<
 > = createSelector(
   getChangeRequestState,
   (state: StateUtils.LoaderState<ChangeRequestState>) =>
-  StateUtils.loaderValueSelector(state).loaded
+    StateUtils.loaderValueSelector(state).loaded
 );
 
 export const getChangeRequestErrorFactory: MemoizedSelector<
@@ -41,5 +41,5 @@ export const getChangeRequestErrorFactory: MemoizedSelector<
 > = createSelector(
   getChangeRequestState,
   (loaderState: StateUtils.LoaderState<ChangeRequestState>) =>
-  StateUtils.loaderErrorSelector(loaderState)
+    StateUtils.loaderErrorSelector(loaderState)
 );

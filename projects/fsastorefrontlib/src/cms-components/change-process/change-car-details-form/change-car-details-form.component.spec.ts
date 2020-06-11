@@ -113,12 +113,12 @@ describe('ChangeCarDetailsFormComponent', () => {
     }).compileComponents();
 
     mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
-    mockChangeRequestService = TestBed.get(ChangeRequestService as Type<
-      ChangeRequestService
-    >);
-    globalMessageService = TestBed.get(GlobalMessageService as Type<
-      GlobalMessageService
-    >);
+    mockChangeRequestService = TestBed.get(
+      ChangeRequestService as Type<ChangeRequestService>
+    );
+    globalMessageService = TestBed.get(
+      GlobalMessageService as Type<GlobalMessageService>
+    );
     mockUserRequestNavigationService = TestBed.get(
       UserRequestNavigationService as Type<UserRequestNavigationService>
     );

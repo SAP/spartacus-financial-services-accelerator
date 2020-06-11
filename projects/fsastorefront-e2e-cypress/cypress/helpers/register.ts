@@ -9,9 +9,7 @@ export interface RegisterUser {
 }
 
 export function populateRegistrationForm(user: RegisterUser) {
-  cy.get('.register')
-    .findByText('Register')
-    .click({ force: true });
+  cy.get('.register').findByText('Register').click({ force: true });
   cy.get('cx-fs-register form').within(() => {
     cy.get('[formcontrolname="titleCode"]').select(user.titleCode);
     cy.get('[formcontrolname="firstName"]').type(user.firstName);
@@ -44,12 +42,8 @@ export function validatePhoneNumber(expectedValue: string) {
 export function login(username: string, password: string) {
   cy.get('cx-login-form form').should('be.visible');
   cy.get('cx-login-form form').within(() => {
-    cy.get('[formcontrolname="userId"]')
-      .clear()
-      .type(username);
-    cy.get('[formcontrolname="password"]')
-      .clear()
-      .type(password);
+    cy.get('[formcontrolname="userId"]').clear().type(username);
+    cy.get('[formcontrolname="password"]').clear().type(password);
     cy.get('button[type=submit]').click();
   });
 }
@@ -60,11 +54,7 @@ export function logout() {
 
 export function loginInUser(username: string, password: string) {
   //will be deleted once register user is working correctly
-  cy.get('[formcontrolname="userId"]')
-    .clear()
-    .type(username);
-  cy.get('[formcontrolname="password"]')
-    .clear()
-    .type(password);
+  cy.get('[formcontrolname="userId"]').clear().type(username);
+  cy.get('[formcontrolname="password"]').clear().type(password);
   cy.get('button[type=submit]').click();
 }

@@ -47,9 +47,9 @@ describe('ChooseCoverNavigationComponent', () => {
         },
       ],
     }).compileComponents();
-    mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
-      FormDataStorageService
-    >);
+    mockFormDataStorageService = TestBed.get(
+      FormDataStorageService as Type<FormDataStorageService>
+    );
   }));
 
   beforeEach(() => {

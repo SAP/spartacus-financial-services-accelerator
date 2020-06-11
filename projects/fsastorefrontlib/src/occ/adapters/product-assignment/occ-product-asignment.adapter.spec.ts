@@ -47,9 +47,9 @@ describe('OccProductAssignmentAdapter', () => {
         { provide: OccEndpointsService, useClass: MockOccEndpointsService },
       ],
     });
-    productAssignmentAdapter = TestBed.get(OccProductAssignmentAdapter as Type<
-      OccProductAssignmentAdapter
-    >);
+    productAssignmentAdapter = TestBed.get(
+      OccProductAssignmentAdapter as Type<OccProductAssignmentAdapter>
+    );
     userId = 'TestID';
     orgUnitId = 'AcmeCorp';
     productAssignmentAdapter = TestBed.get(OccProductAssignmentAdapter);

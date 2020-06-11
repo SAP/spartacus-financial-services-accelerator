@@ -36,7 +36,7 @@ export class CategoryStepGuard implements CanActivate {
       nextStep.routeName
     ).paths[0];
 
-    if (currentStep.restrictedCategories) {
+    if (currentStep && currentStep.restrictedCategories) {
       currentStep.restrictedCategories.forEach(restrictedCategory => {
         if (route.url.find(url => url.path === restrictedCategory)) {
           currentCategory = restrictedCategory;

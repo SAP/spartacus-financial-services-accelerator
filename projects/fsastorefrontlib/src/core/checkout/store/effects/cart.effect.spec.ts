@@ -41,12 +41,21 @@ const insuranceQuote = {
 const cart = {
   cartCode: cartId,
   entry: {
-    product: {
-      defaultCategory: {
-        code: categoryCode,
-      },
-    },
+    // product: {
+    //   defaultCategory: {
+    //     code: categoryCode,
+    //   },
+    // },
   },
+};
+
+const mockCartModification = {
+  deliveryModeChanged: true,
+  entry: cart.entry,
+  quantity: 1,
+  quantityAdded: 1,
+  statusCode: 'statusCode',
+  statusMessage: 'statusMessage',
 };
 
 class MockCartConnector {
@@ -86,12 +95,12 @@ describe('Cart Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
-      FormDataStorageService
-    >);
-    effects = TestBed.get(fromEffects.CartEffects as Type<
-      fromEffects.CartEffects
-    >);
+    mockFormDataStorageService = TestBed.get(
+      FormDataStorageService as Type<FormDataStorageService>
+    );
+    effects = TestBed.get(
+      fromEffects.CartEffects as Type<fromEffects.CartEffects>
+    );
   });
 
   describe('addOptionalProduct$', () => {
@@ -105,9 +114,10 @@ describe('Cart Effects', () => {
       });
 
       const completion = new CartActions.CartAddEntrySuccess({
-        ...cart.entry,
-        userId: OCC_USER_ID_CURRENT,
+        userId: OCC_USER_ID_ANONYMOUS,
         cartId: cartId,
+        productCode,
+        ...mockCartModification,
       });
 
       actions$ = hot('-a', { a: action });
@@ -143,9 +153,10 @@ describe('Cart Effects', () => {
       });
 
       const addEntrycompletion = new CartActions.CartAddEntrySuccess({
-        ...cart.entry,
         userId: OCC_USER_ID_ANONYMOUS,
         cartId: cartId,
+        productCode,
+        ...mockCartModification,
       });
 
       actions$ = hot('-a', { a: action });
@@ -178,9 +189,10 @@ describe('Cart Effects', () => {
       });
 
       const addEntrycompletion = new CartActions.CartAddEntrySuccess({
-        ...cart.entry,
         userId: OCC_USER_ID_ANONYMOUS,
         cartId: cartId,
+        productCode,
+        ...mockCartModification,
       });
 
       actions$ = hot('-a', { a: action });
@@ -211,9 +223,10 @@ describe('Cart Effects', () => {
       });
 
       const addEntrycompletion = new CartActions.CartAddEntrySuccess({
-        ...cart.entry,
         userId: OCC_USER_ID_CURRENT,
         cartId: cartId,
+        productCode,
+        ...mockCartModification,
       });
 
       actions$ = hot('-a', { a: action });

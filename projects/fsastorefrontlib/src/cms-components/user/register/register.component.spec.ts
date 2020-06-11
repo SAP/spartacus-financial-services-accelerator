@@ -33,6 +33,7 @@ class MockUserService {
   getRegisterUserResultSuccess(): Observable<boolean> {
     return registerUserIsSuccess.asObservable();
   }
+  getRegisterUserResultLoading() {}
 }
 class MockGlobalMessageService {
   remove() {}
