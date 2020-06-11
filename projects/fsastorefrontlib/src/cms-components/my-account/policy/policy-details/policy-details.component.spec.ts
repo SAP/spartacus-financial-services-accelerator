@@ -17,10 +17,6 @@ class MockPolicyService {
   getPolicyDetails() {}
 }
 
-class MockDocumentService {
-  getDocumentById = jasmine.createSpy();
-}
-
 class MockRoutingService {
   go = jasmine.createSpy();
 
@@ -82,6 +78,16 @@ const mockOccModuleConfig: OccConfig = {
 const policyId = 'policyId';
 const contractId = 'contractId';
 const documentId = 'documentId';
+
+const document = {
+  id: documentId,
+};
+
+class MockDocumentService {
+  getDocumentById(id) {
+    return of(document);
+  }
+}
 
 describe('PolicyDetailsComponent', () => {
   let component: PolicyDetailsComponent;
@@ -186,6 +192,7 @@ describe('PolicyDetailsComponent', () => {
   });
 
   it('should test get document', () => {
+    spyOn(documentService, 'getDocumentById').and.callThrough();
     component.getDocument(documentId);
     expect(documentService.getDocumentById).toHaveBeenCalledWith(documentId);
   });

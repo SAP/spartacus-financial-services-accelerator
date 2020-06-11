@@ -89,7 +89,9 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
   }
 
   getDocument(documentId) {
-    this.documentService.getDocumentById(documentId).subscribe();
+    this.subscription.add(
+      this.documentService.getDocumentById(documentId).subscribe()
+    );
   }
 
   ngOnDestroy() {
