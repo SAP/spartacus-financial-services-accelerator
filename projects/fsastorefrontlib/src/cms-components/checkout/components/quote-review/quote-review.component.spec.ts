@@ -68,7 +68,6 @@ describe('Quote Review Component', () => {
   let fixture: ComponentFixture<QuoteReviewComponent>;
   let routingService: RoutingService;
   let translationService: FSTranslationService;
-  let categoryService: CategoryService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -100,10 +99,6 @@ describe('Quote Review Component', () => {
           useValue: modalService,
         },
         {
-          provide: CategoryService,
-          useClass: MockCategoryService,
-        },
-        {
           provide: FSTranslationService,
           useClass: MockFSTranslationService,
         },
@@ -116,18 +111,15 @@ describe('Quote Review Component', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     routingService = TestBed.get(RoutingService as Type<RoutingService>);
-    categoryService = TestBed.get(CategoryService as Type<CategoryService>);
     translationService = TestBed.get(FSTranslationService as Type<
       FSTranslationService
     >);
     spyOn(routingService, 'go').and.stub();
-    spyOn(categoryService, 'getActiveCategory').and.callThrough();
     component.ngOnInit();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-    expect(component.categoryCode).toEqual(categoryCode);
   });
 
   it('should continue to next step when quote is in state BIND', () => {
@@ -167,7 +159,7 @@ describe('Quote Review Component', () => {
 
   it('should go back to previous step', () => {
     component.back();
-    expect(routingService.go).toHaveBeenCalledWith(`url/${categoryCode}`);
+    expect(routingService.go).toHaveBeenCalled();
   });
 
   it('should not get form content 1', () => {
