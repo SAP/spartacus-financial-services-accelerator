@@ -9,7 +9,10 @@ export const storefrontRoutesConfig: RoutesConfig = {
     paths: ['checkout/configureProduct/:productCode'],
     paramsMapping: { productCode: 'code' },
   },
-  category: { paths: ['checkout/c/:categoryCode'] },
+  category: {
+    paths: ['checkout/c/:categoryCode'],
+    paramsMapping: { categoryCode: 'code' },
+  },
   addOptions: { paths: ['checkout/add-options'] },
   checkoutPersonalDetails: {
     paths: ['checkout/personal-details/:formCode'],

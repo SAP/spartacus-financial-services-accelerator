@@ -15,8 +15,10 @@ import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
-import { FSProduct } from './../../../../occ/occ-models/occ.models';
-import { FSCheckoutStep } from './checkout-step.component';
+import {
+  FSProduct,
+  FSCheckoutStep,
+} from './../../../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-checkout-progress',

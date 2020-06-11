@@ -9,6 +9,7 @@ import {
   User,
   UserSignUp,
 } from '@spartacus/core';
+import { CheckoutStep } from '@spartacus/storefront';
 
 export interface ContactAgentData {
   email?: string;
@@ -208,4 +209,8 @@ export interface ChangedPolicyData {
   label?: string;
   oldValue?: string;
   newValue?: string;
+}
+
+export interface FSCheckoutStep extends CheckoutStep {
+  restrictedCategories?: string[];
 }

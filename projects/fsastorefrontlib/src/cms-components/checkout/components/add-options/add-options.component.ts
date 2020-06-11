@@ -30,10 +30,12 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
   ) {}
 
   entries$: Observable<OrderEntry[]>;
+  checkoutStepUrlPrevious: string;
   checkoutStepUrlNext: string;
   cartLoaded$: Observable<boolean>;
   subscription = new Subscription();
   currentCurrency: string;
+  activeCategory: string;
 
   @Output()
   nextStep = new EventEmitter<any>();
@@ -50,9 +52,22 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
         .subscribe()
     );
 
-    this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-      this.activatedRoute
+    this.subscription.add(
+      this.categoryService.getActiveCategory().subscribe(data => {
+        if (data) {
+          this.activeCategory = data;
+          this.checkoutConfigService.filterSteps(data, this.activatedRoute);
+          this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
+            this.activatedRoute
+          );
+
+          this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(
+            this.activatedRoute
+          );
+        }
+      })
     );
+
     this.cartLoaded$ = this.cartService.getLoaded();
     this.entries$ = this.cartService
       .getEntries()
@@ -74,29 +89,12 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
   }
 
   back() {
-    this.subscription.add(
-      this.categoryService
-        .getActiveCategory()
-        .pipe(
-          switchMap(categoryCode => {
-            let route = 'category';
-            let routingParam = categoryCode;
-            return this.entries$.pipe(
-              map(entries => {
-                const product = <FSProduct>entries[0].product;
-                if (product.configurable) {
-                  route = 'configureProduct';
-                  routingParam = product.code;
-                }
-                this.routingService.go({
-                  cxRoute: route,
-                  params: { code: routingParam },
-                });
-              })
-            );
-          })
-        )
-        .subscribe()
+    // this.routingService.go({
+    //   cxRoute: this.checkoutStepUrlPrevious,
+    //   params: { categoryCode: this.activeCategory },
+    // });
+    this.routingService.go(
+      this.checkoutStepUrlPrevious.replace(':categoryCode', this.activeCategory)
     );
   }
 
