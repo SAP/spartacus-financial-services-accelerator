@@ -79,7 +79,6 @@ context('Renters Checkout', () => {
   it('Check my policies page', () => {
     checkMyPoliciesPage();
     renters.checkRentersPolicy();
-    renters.checkRentersPolicy();
   });
 
   it('Should validate phone number', () => {
