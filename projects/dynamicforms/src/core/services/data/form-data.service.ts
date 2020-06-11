@@ -42,6 +42,15 @@ export class FormDataService {
     );
   }
 
+  loadFormDefinitions(categoryCode: string, formDefinitionType: string) {
+    this.store.dispatch(
+      new fromAction.LoadFormDefinition({
+        categoryCode: categoryCode,
+        formDefinitionType: formDefinitionType,
+      })
+    );
+  }
+
   loadFormData(formDataId: string) {
     this.store.dispatch(
       new fromAction.LoadFormData({

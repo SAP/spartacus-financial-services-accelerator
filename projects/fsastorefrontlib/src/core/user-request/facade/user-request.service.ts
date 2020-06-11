@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
+import { FormDataStorageService } from '@fsa/dynamicforms';
 import { Observable } from 'rxjs';
 import { FSUserRequest } from '../../../occ/occ-models';
-import { FSClaimState } from '../../claim/store/claim-state';
-import * as fromSelector from '../../claim/store/selectors/claim.selector';
-import { FormDataStorageService } from '@fsa/dynamicforms';
+import { FSUserRequestState } from '../store/user-request-state';
+import * as fromSelector from '../store/selectors/user-request.selector';
 
 @Injectable()
 export class UserRequestService {
   constructor(
-    protected store: Store<FSClaimState>,
+    protected store: Store<FSUserRequestState>,
     protected authService: AuthService,
     protected formDataStorageService: FormDataStorageService
   ) {}
@@ -25,7 +25,7 @@ export class UserRequestService {
     });
   }
 
-  getClaim(): Observable<any> {
-    return this.store.select(fromSelector.getClaimContent);
+  getUserRequest(): Observable<any> {
+    return this.store.select(fromSelector.getUserRequestContent);
   }
 }

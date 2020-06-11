@@ -21,7 +21,7 @@ export class ClaimConfirmationGuard implements CanActivate {
   ) {}
 
   canActivate(): Observable<boolean | UrlTree> {
-    return this.userRequestService.getClaim().pipe(
+    return this.userRequestService.getUserRequest().pipe(
       map(claim => {
         if (claim.requestStatus === ClaimStatus.SUBMITTED) {
           this.globalMessageService.add(

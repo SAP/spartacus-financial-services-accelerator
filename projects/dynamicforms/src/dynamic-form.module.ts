@@ -7,6 +7,7 @@ import { DynamicFormsConfig } from './core/config/form-config';
 import { FormCMSModule } from './cms-components/form-cms/form-cms.module';
 import { FormContainerModule } from './core/form-containers/form-container.module';
 import { FormStoreModule } from './core/store/form-store.module';
+import { FormOccModule } from './occ/adapters/form/form-occ.module';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { FormStoreModule } from './core/store/form-store.module';
     FormContainerModule,
     FormCMSModule,
     FormStoreModule,
+    FormOccModule,
     ConfigModule.withConfig(defaultFormConfig),
     ComponentsModule,
   ],

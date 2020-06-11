@@ -4,7 +4,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { map, catchError, mergeMap, switchMap } from 'rxjs/operators';
 import { ClaimDataService } from '../../services/claim-data.service';
 import { Claim } from '../../../../occ/occ-models';
-import * as fromUserRequestActions from '../../../user-request/actions';
+import * as fromUserRequestActions from '../../../user-request/store/actions';
 import * as fromActions from '../actions';
 import { ClaimConnector } from '../../connectors/claim.connector';
 import { GlobalMessageService, GlobalMessageType } from '@spartacus/core';

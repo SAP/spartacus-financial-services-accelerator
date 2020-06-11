@@ -60,7 +60,7 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
   next(currentStep: number, claimData: any): void {
     this.subscription.add(
       this.userRequestService
-        .getClaim()
+        .getUserRequest()
         .pipe(
           filter(payload => payload !== undefined),
           map(request => {

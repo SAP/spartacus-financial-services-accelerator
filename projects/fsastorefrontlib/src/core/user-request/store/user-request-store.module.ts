@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { effects } from '../../user-request/effects/index';
+import { userRequestEffects } from './effects/index';
 import { reducerProvider, reducerToken, metaReducers } from './reducers/index';
 import {
   ConfigModule,
@@ -11,14 +11,14 @@ import {
   StateModule,
   StorageSyncType,
 } from '@spartacus/core';
-import { CLAIM_FEATURE } from './claim-state';
+import { USER_REQUEST_FEATURE } from './user-request-state';
 
-export function claimConfigFactory(): StateConfig {
+export function userRequestConfigFactory(): StateConfig {
   const config: StateConfig = {
     state: {
       storageSync: {
         keys: {
-          [`${CLAIM_FEATURE}.claim.content.requestStatus`]: StorageSyncType.LOCAL_STORAGE,
+          [`${USER_REQUEST_FEATURE}.userRequest.content.requestStatus`]: StorageSyncType.LOCAL_STORAGE,
         },
       },
     },
@@ -31,12 +31,12 @@ export function claimConfigFactory(): StateConfig {
     CommonModule,
     HttpClientModule,
     StateModule,
-    StoreModule.forFeature(CLAIM_FEATURE, reducerToken, {
+    StoreModule.forFeature(USER_REQUEST_FEATURE, reducerToken, {
       metaReducers,
     }),
-    EffectsModule.forFeature(effects),
-    ConfigModule.withConfigFactory(claimConfigFactory),
+    EffectsModule.forFeature(userRequestEffects),
+    ConfigModule.withConfigFactory(userRequestConfigFactory),
   ],
   providers: [reducerProvider],
 })
-export class ClaimStoreModule {}
+export class UserRequestStoreModule {}

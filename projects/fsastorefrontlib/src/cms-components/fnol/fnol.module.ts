@@ -23,8 +23,8 @@ import { MyAccountStoreModule } from '../../core/my-account/store/my-account-sto
 import { UserRequestNavigationService } from '../../core/user-request/facade/user-request-navigation.service';
 import { UserRequestService } from '../../core/user-request/facade/user-request.service';
 import { ClaimConfirmationGuard } from '../../core/claim/guards/claim-confirmation-guard';
-import { effects } from '../../core/user-request/effects/index';
-import { reducerProvider } from '../../core/claim/store/reducers/index';
+import { userRequestEffects } from '../../core/user-request/store/effects/index';
+import { reducerProvider } from '../../core/user-request/store/reducers/index';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { ProgressBarModule } from '../progress-bar/progress-bar.module';
 import { FNOLConfirmationComponent } from './fnol-confirmation/fnol-confirmation.component';
@@ -93,7 +93,7 @@ const routes: Routes = [
     SpinnerModule,
     AccordionModule,
     ProgressBarModule,
-    EffectsModule.forFeature(effects),
+    EffectsModule.forFeature(userRequestEffects),
     RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {

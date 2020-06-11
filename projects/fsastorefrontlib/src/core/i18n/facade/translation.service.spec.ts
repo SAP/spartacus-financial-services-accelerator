@@ -36,6 +36,6 @@ describe('FSTranslationService', () => {
 
   it('should not get translation value', () => {
     const result = service.getTranslationValue(['testChunk'], testKey);
-    expect(result).toBe('');
+    expect(result).toBe(undefined);
   });
 });
