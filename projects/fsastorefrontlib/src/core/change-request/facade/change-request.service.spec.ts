@@ -4,7 +4,6 @@ import { Store, StoreModule } from '@ngrx/store';
 import { AuthService, OCC_USER_ID_CURRENT, UserToken } from '@spartacus/core';
 import { Observable, of, ReplaySubject } from 'rxjs';
 import * as fromAction from '../store/actions';
-import * as fromUserRequestAction from './../../../core/user-request/store/actions';
 import { reducerProvider, reducerToken } from '../store/reducers';
 import { ChangeRequestService } from './change-request.service';
 import { StateWithChangeRequest } from '../store/change-request-state';
