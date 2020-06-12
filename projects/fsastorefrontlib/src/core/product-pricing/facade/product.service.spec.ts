@@ -2,6 +2,7 @@ import { inject, TestBed } from '@angular/core/testing';
 import * as ngrxStore from '@ngrx/store';
 import { Store, StoreModule } from '@ngrx/store';
 import * as fromStoreReducers from '@spartacus/core';
+import { provideMockStore } from '@ngrx/store/testing';
 import {
   Product,
   PRODUCT_FEATURE,
@@ -44,20 +45,17 @@ describe('FSProductService', () => {
   }
 
   beforeEach(() => {
+    const initialState = {
+      product: {},
+    };
     TestBed.configureTestingModule({
-      imports: [
-        StoreModule.forRoot({}),
-        // StoreModule.forFeature(
-        //   PRODUCT_FEATURE,
-        //   fromStoreReducers.getReducers()
-        // ),
-      ],
       providers: [
         FSProductService,
         {
           provide: ProductLoadingService,
           useClass: MockProductLoadingService,
         },
+        provideMockStore({ initialState }),
       ],
     });
     service = TestBed.inject(FSProductService);
