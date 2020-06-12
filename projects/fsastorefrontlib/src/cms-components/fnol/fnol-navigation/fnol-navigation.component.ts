@@ -3,13 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { Observable, of, Subscription } from 'rxjs';
-import { filter, map, switchMap, take, tap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { ClaimService } from '../../../core/my-account/facade/claim.service';
 import {
   UserRequestNavigationService,
   UserRequestService,
 } from '../../../core/user-request/facade';
-import * as fromAction from '../../../core/user-request/store/actions';
 import { Claim, FSStepData, StepStatus } from '../../../occ/occ-models';
 import { ClaimStatus } from '../../../occ/occ-models/occ.models';
 
@@ -56,41 +55,31 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-
-    this.subscription.add(
-      this.userRequestService
-        .getAction(fromAction.SUBMIT_USER_REQUEST_SUCCESS)
-        .pipe(
-          take(1),
-          filter(
-            ({ payload }) =>
-              payload &&
-              payload.requestStatus === ClaimStatus.SUBMITTED &&
-              payload.fsStepGroupDefinition
-          ),
-          tap(({ payload }) => {
-            this.router.go(payload.fsStepGroupDefinition.confirmationUrl);
-          })
-        )
-        .subscribe()
-    );
   }
 
   next(currentStep: number, claimData: any): void {
     this.subscription.add(
       this.userRequestService
-        .getAction(fromAction.UPDATE_USER_REQUEST_SUCCESS)
+        .getUserRequest()
         .pipe(
-          filter(
-            ({ payload }) =>
-              payload.configurationSteps &&
-              currentStep < payload.configurationSteps.length - 1
-          ),
-          tap(() => {
-            this.userRequestNavigationService.continue(
-              this.configurationSteps,
-              currentStep
-            );
+          filter(payload => payload !== undefined),
+          map(request => {
+            if (
+              request.configurationSteps &&
+              request.configurationSteps[currentStep].status ===
+                StepStatus.COMPLETED
+            ) {
+              this.userRequestNavigationService.continue(
+                this.configurationSteps,
+                currentStep
+              );
+            }
+            if (
+              request.requestStatus === ClaimStatus.SUBMITTED &&
+              request.fsStepGroupDefinition
+            ) {
+              this.router.go(request.fsStepGroupDefinition.confirmationUrl);
+            }
           })
         )
         .subscribe()

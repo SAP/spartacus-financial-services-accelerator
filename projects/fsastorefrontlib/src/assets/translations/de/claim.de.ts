@@ -13,5 +13,6 @@ export const claim = {
     deleteStartedClaimProcess: 'Gestarteten Schadensfall löschen',
     followingClaimProcessWillBeDeleted:
       'Der folgende Schadensfall wird gelöscht.',
+    alreadySubmitted: '[DE] Your Claim is already submitted.',
   },
 };

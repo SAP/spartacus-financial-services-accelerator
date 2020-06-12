@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 import { LocalizedString } from '../../core/models/form-config.interface';
 
 @Component({ template: '' })
-export class AbstractOptionsComponent extends AbstractFormComponent {
+export class AbstractOptionsComponent extends AbstractFormComponent
+  implements OnInit {
   ngOnInit() {
     super.ngOnInit();
     if (this.config.options) {
