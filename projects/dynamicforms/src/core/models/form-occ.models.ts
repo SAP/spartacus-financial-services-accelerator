@@ -13,3 +13,7 @@ export interface YFormDefinition {
   content?: string;
   applicationId?: string;
 }
+
+export interface YFormDefinitionList {
+  formDefinitions: YFormDefinition[];
+}

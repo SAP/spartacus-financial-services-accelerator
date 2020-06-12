@@ -14,6 +14,17 @@ export abstract class FormAdapter {
   ): Observable<YFormDefinition>;
 
   /**
+   * Abstract method used to get list of form definitions by category and form definition type
+   *
+   * @param categoryCode The category code
+   * @param formDefinitionType The type of form definition
+   */
+  abstract getFormDefinitions(
+    categoryCode: string,
+    formDefinitionType: string
+  ): Observable<YFormDefinition>;
+
+  /**
    * Abstract method used to save (create new or update) form data
    *
    * @param formData The form data object

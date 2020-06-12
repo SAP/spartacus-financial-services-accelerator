@@ -1,10 +1,9 @@
-import { ChangeDetectorRef, Component, Injector } from '@angular/core';
+import { Component, Injector, OnInit } from '@angular/core';
 import {
   AbstractFormComponent,
   DynamicFormsConfig,
   FormDataService,
   FormDataStorageService,
-  OccValueListService,
   YFormData,
 } from '@fsa/dynamicforms';
 import { LanguageService } from '@spartacus/core';
@@ -18,15 +17,14 @@ import { PricingData } from '../../../occ/occ-models/form-pricing.interface';
   selector: 'cx-fs-button',
   templateUrl: './calculation-button.component.html',
 })
-export class CalculationButtonComponent extends AbstractFormComponent {
+export class CalculationButtonComponent extends AbstractFormComponent
+  implements OnInit {
   constructor(
     protected currentProductService: CurrentProductService,
     protected formDataStorageService: FormDataStorageService,
     protected formDataService: FormDataService,
-    protected occcMockFormService: OccValueListService,
     protected formConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
-    protected changeDetectorRef: ChangeDetectorRef,
     protected injector: Injector
   ) {
     super(formConfig, languageService, injector);

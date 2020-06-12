@@ -48,7 +48,7 @@ export const forms = {
       savings_personal_details: 'Personal Details',
       auto_personal_details: 'Personal Details',
       auto_change_car_details_form: 'Auto Information',
-      loan_creditCart_personalDetails: 'Personal Details',
+      loan_creditCard_personalDetails: 'Personal Details',
       ftd_currentAcc_personal_details: 'Personal Details',
       fixed_term_deposit_details_form: 'Configure a Product',
       loan_details_form: 'Configure a Product',
