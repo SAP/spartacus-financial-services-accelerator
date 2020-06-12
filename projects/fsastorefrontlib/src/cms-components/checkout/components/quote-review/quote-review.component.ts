@@ -13,6 +13,7 @@ import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
   BindingStateType,
   FSCart,
+  ActiveCategoryStep,
 } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 
@@ -30,6 +31,8 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   modalRef: ModalRef;
   cartCode: string;
   categoryCode: string;
+  previousCheckoutStep$: Observable<ActiveCategoryStep>;
+  nextCheckoutStep$: Observable<ActiveCategoryStep>;
 
   constructor(
     protected cartService: FSCartService,
@@ -53,18 +56,35 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-    this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-      this.activatedRoute
-    );
-    this.checkoutStepUrlBack = this.checkoutConfigService.getPreviousCheckoutStepUrl(
-      this.activatedRoute
-    );
+    // this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
+    //   this.activatedRoute
+    // );
+    // this.checkoutStepUrlBack = this.checkoutConfigService.getPreviousCheckoutStepUrl(
+    //   this.activatedRoute
+    // );
+
+    this.checkoutConfigService.filterSteps(this.activatedRoute);
+    this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
+    this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
+    this.previousCheckoutStep$.subscribe(data => {
+      if (data) {
+        console.log(data);
+      }
+    });
+
     this.cart$ = this.cartService.getActive();
     this.cartLoaded$ = this.cartService.getLoaded();
   }
 
   getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
+  }
+
+  navigateBack(previousStep) {
+    this.routingService.go({
+      cxRoute: previousStep.step,
+      params: { code: previousStep.activeCategory },
+    });
   }
 
   back() {

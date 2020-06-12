@@ -13,7 +13,8 @@ import { filter, map, switchMap } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/cart/facade';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
-import { FSProduct } from '../../../../occ/occ-models';
+import { FSProduct, ActiveCategoryStep } from '../../../../occ/occ-models';
+
 @Component({
   selector: 'cx-fs-add-options',
   templateUrl: './add-options.component.html',
@@ -40,6 +41,9 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
   @Output()
   nextStep = new EventEmitter<any>();
 
+  previousCheckoutStep$: Observable<ActiveCategoryStep>;
+  nextCheckoutStep$: Observable<ActiveCategoryStep>;
+
   ngOnInit() {
     this.subscription.add(
       this.currencyService
@@ -52,26 +56,22 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
         .subscribe()
     );
 
-    this.subscription.add(
-      this.categoryService.getActiveCategory().subscribe(data => {
-        if (data) {
-          this.activeCategory = data;
-          this.checkoutConfigService.filterSteps(data, this.activatedRoute);
-          this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-            this.activatedRoute
-          );
-
-          this.checkoutStepUrlPrevious = this.checkoutConfigService.getPreviousCheckoutStepUrl(
-            this.activatedRoute
-          );
-        }
-      })
-    );
+    this.checkoutConfigService.filterSteps(this.activatedRoute);
+    this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
+    this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
 
     this.cartLoaded$ = this.cartService.getLoaded();
     this.entries$ = this.cartService
       .getEntries()
       .pipe(filter(entries => entries.length > 0));
+
+    // let mainProduct: FSProduct;
+    // this.entries$.subscribe(entries => {
+    //   mainProduct = <FSProduct>entries[0].product;
+    //   if (mainProduct && mainProduct.defaultCategory) {
+    //     console.log(mainProduct.defaultCategory.code);
+    //   }
+    // });
   }
 
   addProductToCart(orderEntryCode: string, entryNumber: string) {
@@ -88,61 +88,38 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     this.cartService.removeEntry(item);
   }
 
-  back() {
+  navigateBack(previousStep) {
     this.routingService.go({
-      cxRoute: this.checkoutStepUrlPrevious,
-      params: { categoryCode: this.activeCategory },
+      cxRoute: previousStep.step,
+      params: { code: previousStep.activeCategory },
     });
-    // this.routingService.go(
-    //   this.checkoutStepUrlPrevious.replace(':categoryCode', this.activeCategory)
-    // );
-    // this.routingService.go(this.checkoutStepUrlPrevious);
-
-    // configureProduct/:productCode
-    // this.subscription.add(
-    //   this.categoryService
-    //     .getActiveCategory()
-    //     .pipe(
-    //       switchMap(categoryCode => {
-    //         let route = 'category';
-    //         let routingParam = categoryCode;
-    //         return this.entries$.pipe(
-    //           map(entries => {
-    //             const product = <FSProduct>entries[0].product;
-    //             if (product.configurable) {
-    //               route = 'configureProduct';
-    //               routingParam = product.code;
-    //             }
-    //             this.routingService.go({
-    //               cxRoute: route,
-    //               params: { code: routingParam },
-    //             });
-    //           })
-    //         );
-    //       })
-    //     )
-    //     .subscribe()
-    // );
   }
 
-  navigateNext() {
-    let mainProduct: FSProduct;
-    this.subscription.add(
-      this.entries$
-        .pipe(
-          map(entries => {
-            mainProduct = <FSProduct>entries[0].product;
-            if (mainProduct && mainProduct.defaultCategory) {
-              this.routingService.go({
-                cxRoute: 'checkoutPersonalDetails',
-                params: { formCode: mainProduct.defaultCategory.code },
-              });
-            }
-          })
-        )
-        .subscribe()
-    );
+  navigateNext(nextStep) {
+    this.routingService.go({
+      cxRoute: nextStep.step,
+      params: { code: nextStep.activeCategory },
+    });
   }
+
+  // navigateNext() {
+  //   let mainProduct: FSProduct;
+  //   this.subscription.add(
+  //     this.entries$
+  //       .pipe(
+  //         map(entries => {
+  //           mainProduct = <FSProduct>entries[0].product;
+  //           if (mainProduct && mainProduct.defaultCategory) {
+  //             this.routingService.go({
+  //               cxRoute: 'checkoutPersonalDetails',
+  //               params: { formCode: mainProduct.defaultCategory.code },
+  //             });
+  //           }
+  //         })
+  //       )
+  //       .subscribe()
+  //   );
+  // }
 
   ngOnDestroy() {
     if (this.subscription) {
