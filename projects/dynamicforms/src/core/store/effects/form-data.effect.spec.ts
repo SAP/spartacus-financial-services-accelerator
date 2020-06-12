@@ -35,7 +35,6 @@ class MockFromDataStorageService {
 
 describe('Form Data Effects', () => {
   let actions$: Observable<fromActions.FormDataAction>;
-  let authActions$: Observable<AuthActions.Logout>;
   let effects: fromEffects.FormDataEffects;
   let mockFormConnector: MockFormConnector;
   let mockFromDataStorageService: MockFromDataStorageService;
@@ -120,13 +119,15 @@ describe('Form Data Effects', () => {
       expect(effects.saveFormData$).toBeObservable(expected);
     });
 
-    it('should call clearFormDataLocalStorage', () => {
+    it('should call clearFormDataLocalStorage', async () => {
+      const spy = spyOn(
+        mockFromDataStorageService,
+        'clearFormDataLocalStorage'
+      );
       const action = new AuthActions.Logout();
       actions$ = hot('-a', { a: action });
       effects.clearFormData$.subscribe(() => {
-        expect(
-          mockFromDataStorageService.clearFormDataLocalStorage
-        ).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalled();
       });
     });
   });
