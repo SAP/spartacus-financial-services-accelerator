@@ -29,7 +29,6 @@ describe('FormDataStorageService', () => {
     TestBed.configureTestingModule({
       providers: [FormDataStorageService],
     });
-
     localStorage.setItem(
       DYNAMIC_FORMS_LOCAL_STORAGE_KEY,
       JSON.stringify([mockFormDataStorageObject])
@@ -93,6 +92,11 @@ describe('FormDataStorageService', () => {
       formDefinitionId: existingFormData.formDefinition.formId,
       categoryCode: existingFormData.categoryCode,
     });
+  });
+
+  it('should clear formLocalStorageData', () => {
+    service.clearFormDataLocalStorage();
+    expect(service.formLocalStorageData).toEqual(null);
   });
 
   it('should initially create dynamic forms storage key', () => {
