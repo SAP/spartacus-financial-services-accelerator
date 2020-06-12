@@ -63,7 +63,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
 
   navigateNext(nextStep, activeCart) {
     this.cartCode = activeCart.code;
-    console.log(this.cartCode);
     const bindingState = (<FSCart>activeCart).insuranceQuote.state.code;
     if (bindingState === BindingStateType.UNBIND) {
       this.openModal(nextStep);
