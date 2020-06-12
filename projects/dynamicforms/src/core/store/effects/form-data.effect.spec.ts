@@ -10,6 +10,8 @@ import * as fromActions from '../actions';
 import { YFormData } from './../../models/form-occ.models';
 import * as fromUserReducers from './../../store/reducers/index';
 import * as fromEffects from './form-data.effect';
+import { FormDataStorageService } from '../../services/storage/form-data-storage.service';
+import { AuthActions } from '@spartacus/core';
 
 const formData: YFormData = {
   id: 'test-formData',
@@ -27,13 +29,20 @@ class MockFormConnector {
   }
 }
 
+class MockFromDataStorageService {
+  clearFormDataLocalStorage() {}
+}
+
 describe('Form Data Effects', () => {
   let actions$: Observable<fromActions.FormDataAction>;
+  let authActions$: Observable<AuthActions.Logout>;
   let effects: fromEffects.FormDataEffects;
   let mockFormConnector: MockFormConnector;
+  let mockFromDataStorageService: MockFromDataStorageService;
 
   beforeEach(() => {
     mockFormConnector = new MockFormConnector();
+    mockFromDataStorageService = new MockFromDataStorageService();
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
@@ -44,6 +53,10 @@ describe('Form Data Effects', () => {
         {
           provide: FormConnector,
           useValue: mockFormConnector,
+        },
+        {
+          provide: FormDataStorageService,
+          useValue: mockFromDataStorageService,
         },
         fromEffects.FormDataEffects,
         provideMockActions(() => actions$),
@@ -105,6 +118,16 @@ describe('Form Data Effects', () => {
       actions$ = hot('-a', { a: action });
       const expected = cold('-b', { b: completion });
       expect(effects.saveFormData$).toBeObservable(expected);
+    });
+
+    it('should call clearFormDataLocalStorage', () => {
+      const action = new AuthActions.Logout();
+      actions$ = hot('-a', { a: action });
+      effects.clearFormData$.subscribe(() => {
+        expect(
+          mockFromDataStorageService.clearFormDataLocalStorage
+        ).toHaveBeenCalled();
+      });
     });
   });
 });
