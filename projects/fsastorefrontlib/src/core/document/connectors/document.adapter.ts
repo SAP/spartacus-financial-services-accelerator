@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 
 export abstract class DocumentAdapter {
   /**
-   * Abstract method used to get change request
+   * Abstract method used to fetch document by Id.
    *
    * @param userId The user id
    * @param documentId The document id

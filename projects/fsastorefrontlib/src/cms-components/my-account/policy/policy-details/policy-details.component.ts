@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import { AllowedFSRequestType } from './../../../../occ/occ-models';
-import { DocumentService } from 'projects/fsastorefrontlib/src/core/document/facade/document.service';
+import { DocumentService } from './../../../../core/document/facade/document.service';
 
 @Component({
   selector: 'cx-fs-policy-details',
