@@ -56,21 +56,10 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
-    // this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-    //   this.activatedRoute
-    // );
-    // this.checkoutStepUrlBack = this.checkoutConfigService.getPreviousCheckoutStepUrl(
-    //   this.activatedRoute
-    // );
 
     this.checkoutConfigService.filterSteps(this.activatedRoute);
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
-    this.previousCheckoutStep$.subscribe(data => {
-      if (data) {
-        console.log(data);
-      }
-    });
 
     this.cart$ = this.cartService.getActive();
     this.cartLoaded$ = this.cartService.getLoaded();
@@ -87,28 +76,21 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     });
   }
 
-  back() {
-    // TO DO - refactor after we change logic for multiple containers and categories
-    this.routingService.go(
-      this.checkoutStepUrlBack.replace(':formCode', this.categoryCode)
-    );
+  navigateNext(nextStep, activeCart) {
+    this.cartCode = activeCart.code;
+    console.log(this.cartCode);
+    const bindingState = (<FSCart>activeCart).insuranceQuote.state.code;
+    if (bindingState === BindingStateType.UNBIND) {
+      this.openModal(nextStep);
+    } else {
+      this.routingService.go({
+        cxRoute: nextStep.step,
+        params: { code: nextStep.activeCategory },
+      });
+    }
   }
 
-  continue() {
-    this.cart$
-      .subscribe(activeCart => {
-        this.cartCode = activeCart.code;
-        const bindingState = (<FSCart>activeCart).insuranceQuote.state.code;
-        if (bindingState === BindingStateType.UNBIND) {
-          this.openModal();
-        } else {
-          this.routingService.go(this.checkoutStepUrlNext);
-        }
-      })
-      .unsubscribe();
-  }
-
-  private openModal() {
+  private openModal(nextStep) {
     let modalInstance: any;
     this.modalRef = this.modalService.open(BindQuoteDialogComponent, {
       centered: true,
@@ -116,7 +98,10 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     });
     modalInstance = this.modalRef.componentInstance;
     modalInstance.cartCode = this.cartCode;
-    modalInstance.nextStepUrl = this.checkoutStepUrlNext;
+    modalInstance.nextStepUrl = {
+      cxRoute: nextStep.step,
+      params: { code: nextStep.activeCategory },
+    };
     this.subscription.add(
       this.modalRef.componentInstance.quoteBinding$
         .pipe(

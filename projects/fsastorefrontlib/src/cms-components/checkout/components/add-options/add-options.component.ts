@@ -9,11 +9,11 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { CurrencyService, OrderEntry, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/cart/facade';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
-import { FSProduct, ActiveCategoryStep } from '../../../../occ/occ-models';
+import { ActiveCategoryStep } from '../../../../occ/occ-models';
 
 @Component({
   selector: 'cx-fs-add-options',
@@ -64,14 +64,6 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     this.entries$ = this.cartService
       .getEntries()
       .pipe(filter(entries => entries.length > 0));
-
-    // let mainProduct: FSProduct;
-    // this.entries$.subscribe(entries => {
-    //   mainProduct = <FSProduct>entries[0].product;
-    //   if (mainProduct && mainProduct.defaultCategory) {
-    //     console.log(mainProduct.defaultCategory.code);
-    //   }
-    // });
   }
 
   addProductToCart(orderEntryCode: string, entryNumber: string) {
@@ -101,25 +93,6 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
       params: { code: nextStep.activeCategory },
     });
   }
-
-  // navigateNext() {
-  //   let mainProduct: FSProduct;
-  //   this.subscription.add(
-  //     this.entries$
-  //       .pipe(
-  //         map(entries => {
-  //           mainProduct = <FSProduct>entries[0].product;
-  //           if (mainProduct && mainProduct.defaultCategory) {
-  //             this.routingService.go({
-  //               cxRoute: 'checkoutPersonalDetails',
-  //               params: { formCode: mainProduct.defaultCategory.code },
-  //             });
-  //           }
-  //         })
-  //       )
-  //       .subscribe()
-  //   );
-  // }
 
   ngOnDestroy() {
     if (this.subscription) {

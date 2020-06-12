@@ -26,8 +26,6 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   nextCheckoutStepSource = new BehaviorSubject<ActiveCategoryStep>(null);
   nextStep = this.nextCheckoutStepSource.asObservable();
 
-  // restricted iz default-checkout-config-a
-
   setPreviousStep(activeCategory: string, step: string) {
     this.previousCheckoutStepSource.next({ activeCategory, step });
   }
@@ -74,8 +72,6 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
           this.getCurrentStepIndex(activatedRoute) + 1;
         const nextCheckoutStep: string = this.steps[nextStepNumber].routeName;
         this.setNextStep(data, nextCheckoutStep);
-        // console.log('previous', previousCheckoutStep);
-        // console.log('next', nextCheckoutStep);
       }
     });
   }

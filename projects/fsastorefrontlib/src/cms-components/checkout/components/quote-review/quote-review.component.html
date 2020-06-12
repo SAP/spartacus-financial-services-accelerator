@@ -257,9 +257,20 @@
               "
               class="col-md-6 col-sm-6 col-xs-12"
             >
-              <button class="primary-button btn-block" (click)="continue()">
+              <ng-container
+                *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
+                ><button
+                  class="primary-button btn-block"
+                  type="button"
+                  data-checkout-url=""
+                  (click)="navigateNext(nextCheckoutStep, cart)"
+                >
+                  {{ 'common.continue' | cxTranslate }}
+                </button></ng-container
+              >
+              <!-- <button class="primary-button btn-block" (click)="continue()">
                 {{ 'common.continue' | cxTranslate }}
-              </button>
+              </button> -->
             </div>
           </div>
         </div>
