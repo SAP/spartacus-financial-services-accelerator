@@ -86,7 +86,10 @@ export enum BindingStateType {
 export enum ConfiguratorType {
   PRODUCT_CONFIGURE_FORM = 'PRODUCT_CONFIGURE_FORM',
 }
-
+export enum FormDefinitionType {
+  PRODUCT_CONFIGURE = 'PRODUCT_CONFIGURE',
+  PERSONAL_DETAILS = 'PERSONAL_DETAILS',
+}
 export enum RequestType {
   INSURED_OBJECT_CHANGE = 'FSINSUREDOBJECT_CHANGE',
   COVERAGE_CHANGE = 'FSCOVERAGE_CHANGE',
@@ -108,6 +111,11 @@ export enum ChangeRequestStatus {
 export enum StepStatus {
   COMPLETED = 'COMPLETED',
   CANCELED = 'CANCELED',
+}
+
+export enum QuoteActionType {
+  BIND = 'BIND',
+  UNDERWRITING = 'UNDERWRITING',
 }
 
 export interface FSOrderEntry extends OrderEntry {

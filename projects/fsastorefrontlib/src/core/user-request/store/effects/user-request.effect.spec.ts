@@ -8,7 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
 import * as fromActions from '../actions';
-import * as fromReducer from './../../store/reducers/index';
+import * as fromReducer from '../reducers/index';
 import * as fromEffects from './user-request.effect';
 import { UserRequestConnector } from '../../connectors/user-request.connector';
 

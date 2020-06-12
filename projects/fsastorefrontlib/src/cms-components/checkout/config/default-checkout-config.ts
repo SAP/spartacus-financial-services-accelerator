@@ -5,23 +5,6 @@ export const checkoutConfig: FSCheckoutConfig = {
   checkout: {
     steps: [
       {
-        id: 'configureProductStep',
-        name: 'fscommon.configureProduct',
-        routeName: 'configureProduct',
-        type: [],
-        restrictedCategories: [
-          'banking_current_account',
-          'banking_credit_card',
-          'insurances_life',
-          'insurances_travel',
-          'insurances_auto',
-          'insurances_property_homeowners',
-          'insurances_property_renters',
-          'insurances_event',
-          'insurances_savings',
-        ],
-      },
-      {
         id: 'chooseCoverStep',
         name: 'fscommon.chooseCover',
         routeName: 'generalInformation',
@@ -42,6 +25,21 @@ export const checkoutConfig: FSCheckoutConfig = {
         restrictedCategories: ['banking_loans', 'banking_fixed_term_deposit'],
       },
       {
+        id: 'configureProductStep',
+        name: 'fscommon.configureProduct',
+        routeName: 'configureProduct',
+        type: [],
+        restrictedCategories: [
+          'insurances_life',
+          'insurances_travel',
+          'insurances_auto',
+          'insurances_property_homeowners',
+          'insurances_property_renters',
+          'insurances_event',
+          'insurances_savings',
+        ],
+      },
+      {
         id: 'addOptionsStep',
         name: 'fscommon.addOptions',
         routeName: 'addOptions',
@@ -53,7 +51,6 @@ export const checkoutConfig: FSCheckoutConfig = {
         name: 'fscommon.personalDetails',
         routeName: 'checkoutPersonalDetails',
         type: [],
-        restrictedCategories: ['insurances_auto'],
       },
       {
         id: 'quoteReviewStep',

@@ -33,7 +33,7 @@ export class ProductConfigurationFormComponent implements OnInit, OnDestroy {
   formData$: Observable<YFormData>;
   formConfig: YFormDefinition;
   applicationId: string;
-  formDefintionId: string;
+  formDefinitionId: string;
   formCategory: string;
 
   ngOnInit() {
@@ -68,15 +68,15 @@ export class ProductConfigurationFormComponent implements OnInit, OnDestroy {
                         this.formCategory = fsProduct.defaultCategory.code;
                         this.applicationId =
                           configuratorSettings.configurationApplicationId;
-                        this.formDefintionId =
+                        this.formDefinitionId =
                           configuratorSettings.configurationFormId;
                         this.formDataService.loadFormDefinition(
                           this.applicationId,
-                          this.formDefintionId
+                          this.formDefinitionId
                         );
 
                         const formDataId = this.formDataStorageService.getFormDataIdByDefinitionCode(
-                          this.formDefintionId
+                          this.formDefinitionId
                         );
                         if (formDataId) {
                           this.formDataService.loadFormData(formDataId);

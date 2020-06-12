@@ -12,7 +12,7 @@ import * as changeRequest from '../../../helpers/changeRequest';
 
 context('Change Request for new user', () => {
   before(() => {
-    cy.visit('/login');
+    cy.visit('/');
   });
 
   it('Should register a new user', () => {
@@ -46,7 +46,6 @@ context('Change Request for new user', () => {
   it('Should check my policies and policy details page', () => {
     myPolicies.checkMyPoliciesPage();
     myPolicies.checkAutoPolicy();
-    myPolicies.clickOnDetails();
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
     checkout.checkAccordions('policyDetails');
   });
@@ -67,7 +66,6 @@ context('Change Request for new user', () => {
   it('Should complete change coverage checkout', () => {
     myPolicies.checkMyPoliciesPage();
     myPolicies.checkAutoPolicy();
-    myPolicies.clickOnDetails();
     changeRequest.startChangeCoverage();
     //check change coverage - first step
     changeRequest.checkChangeCoverageSteps();
@@ -85,7 +83,7 @@ context('Change Request for new user', () => {
 
   it('Should cancel change policy request', () => {
     myPolicies.checkMyPoliciesPage();
-    myPolicies.clickOnDetails();
+    myPolicies.checkAutoPolicy();
     changeRequest.startChangeMileage();
     //check change car details - first step
     changeRequest.checkChangeMileageSteps();
@@ -99,6 +97,5 @@ context('Change Request for new user', () => {
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
     checkout.checkAccordions('policyDetails');
   });
-
-  //check inbox messages
+  //TODO:Check inbox messages
 });

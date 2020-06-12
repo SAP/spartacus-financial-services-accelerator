@@ -6,7 +6,7 @@ export const defaultOccQuoteConfig: FSOccConfig = {
       endpoints: {
         quotes: 'users/${userId}/insurance-quotes',
         updateQuote: 'users/${userId}/carts/${cartId}/insurance-quotes',
-        bindQuote: 'users/${userId}/carts/${cartId}/insurance-quotes/action',
+        quoteAction: 'users/${userId}/carts/${cartId}/insurance-quotes/action',
       },
     },
   },

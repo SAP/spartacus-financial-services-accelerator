@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule, OccConfig } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
 import { FSCheckoutService } from './../../../../core/checkout/facade/checkout.service';
+import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
 import { AccordionModule } from './../../../../shared/accordion/accordion.module';
 import { OrderConfirmationComponent } from './order-confirmation.component';
 
@@ -22,10 +23,15 @@ const MockOccModuleConfig: OccConfig = {
   },
 };
 
+class MockFSTranslationService {
+  getTranslationValue() {}
+}
+
 describe('OrderConfirmationComponent', () => {
   let component: OrderConfirmationComponent;
   let fixture: ComponentFixture<OrderConfirmationComponent>;
   let checkoutService: FSCheckoutService;
+  let translationService: FSTranslationService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -40,12 +46,19 @@ describe('OrderConfirmationComponent', () => {
           provide: OccConfig,
           useValue: MockOccModuleConfig,
         },
+        {
+          provide: FSTranslationService,
+          useClass: MockFSTranslationService,
+        },
       ],
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(OrderConfirmationComponent);
+    translationService = TestBed.get(
+      FSTranslationService as Type<FSTranslationService>
+    );
     component = fixture.componentInstance;
     fixture.detectChanges();
     checkoutService = TestBed.get(FSCheckoutService as Type<FSCheckoutService>);

@@ -1,3 +1,4 @@
+import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService } from '@fsa/dynamicforms';
@@ -5,11 +6,26 @@ import { Cart, I18nTestingModule, RoutingService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
+import { QuoteService } from './../../../../core/my-account/facade/quote.service';
 import { PersonalDetailsNavigationComponent } from './personal-details-navigation.component';
 import createSpy = jasmine.createSpy;
 
-const mockCart: Cart = {
+const mockCart = {
   code: '1234',
+  entries: [
+    {
+      entryNumber: 1,
+      formData: [
+        {
+          id: 'formData1',
+        },
+      ],
+    },
+  ],
+};
+
+const formData = {
+  content: 'content',
 };
 
 class MockActivatedRoute {
@@ -17,6 +33,10 @@ class MockActivatedRoute {
 }
 class MockRoutingService {
   go = createSpy();
+}
+
+class MockQuoteService {
+  underwriteQuote = createSpy();
 }
 
 class MockCheckoutConfigService {
@@ -31,9 +51,18 @@ class MockCartService {
   }
 }
 
+class MockFormService {
+  submit = createSpy();
+
+  getSubmittedForm() {
+    return of(formData);
+  }
+}
+
 describe('PersonalDetailsNavigationComponent', () => {
   let component: PersonalDetailsNavigationComponent;
   let fixture: ComponentFixture<PersonalDetailsNavigationComponent>;
+  let quoteService: MockQuoteService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -46,7 +75,7 @@ describe('PersonalDetailsNavigationComponent', () => {
         },
         {
           provide: FormDataService,
-          useValue: FormDataService,
+          useClass: MockFormService,
         },
         {
           provide: RoutingService,
@@ -60,8 +89,14 @@ describe('PersonalDetailsNavigationComponent', () => {
           provide: ActivatedRoute,
           useClass: MockActivatedRoute,
         },
+        {
+          provide: QuoteService,
+          useClass: MockQuoteService,
+        },
       ],
     }).compileComponents();
+
+    quoteService = TestBed.get(QuoteService as Type<QuoteService>);
   }));
 
   beforeEach(() => {
@@ -72,5 +107,10 @@ describe('PersonalDetailsNavigationComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should navigate next', () => {
+    component.navigateNext();
+    expect(quoteService.underwriteQuote).toHaveBeenCalledWith(mockCart.code);
   });
 });

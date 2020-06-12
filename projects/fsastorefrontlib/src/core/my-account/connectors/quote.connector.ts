@@ -20,7 +20,11 @@ export class QuoteConnector {
     return this.adapter.updateQuote(userId, cartId, quoteContent);
   }
 
-  bindQuote(userId: string, cartId: string): Observable<any> {
-    return this.adapter.bindQuote(userId, cartId);
+  invokeQuoteAction(
+    userId: string,
+    cartId: string,
+    action: string
+  ): Observable<any> {
+    return this.adapter.invokeQuoteAction(userId, cartId, action);
   }
 }

@@ -7,7 +7,7 @@ export function startChangeMileage() {
     .parentsUntil()
     .contains(' Who or What Is Insured ')
     .click();
-  cy.get('p.link.mb-0').contains('Edit').click();
+  cy.get('p.link.mb-0').contains('Edit').click({ force: true });
 }
 
 export function checkChangeMileageSteps() {

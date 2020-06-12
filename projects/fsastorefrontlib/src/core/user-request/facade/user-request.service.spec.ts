@@ -10,10 +10,10 @@ import { reducerProvider, reducerToken } from '../store/reducers/index';
 import { FSUserRequestState } from '../store/user-request-state';
 import { UserRequestService } from './user-request.service';
 
-const userId = OCC_USER_ID_CURRENT;
-const formId = 'formId';
 const requestId = '001';
-
+const mockUserRequest = {
+  requestId: requestId,
+};
 class MockFormDataStorageService {
   setFormDataToLocalStorage() {}
 }
@@ -90,16 +90,15 @@ describe('UserRequestServiceTest', () => {
     ).not.toHaveBeenCalled();
   });
 
-  it('should be able to get actions', () => {
-    let result = null;
-    const actionName = fromAction.UPDATE_USER_REQUEST;
-    service.getAction(actionName).subscribe(action => (result = action));
-    store.dispatch(
-      new fromAction.UpdateUserRequest({
-        userId: userId,
-        requestId: requestId,
+  it('should be able to get user request', () => {
+    store.dispatch(new fromAction.UpdateUserRequestSuccess(mockUserRequest));
+    let response;
+    service
+      .getUserRequest()
+      .subscribe(userRequest => {
+        response = userRequest;
       })
-    );
-    expect(result.type).toBe(actionName);
+      .unsubscribe();
+    expect(response).toEqual(mockUserRequest);
   });
 });

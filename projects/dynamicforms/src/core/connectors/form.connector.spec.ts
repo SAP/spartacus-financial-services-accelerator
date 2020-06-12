@@ -7,6 +7,11 @@ import { FormAdapter } from './form.adapter';
 import createSpy = jasmine.createSpy;
 
 class MockFormAdapter implements FormAdapter {
+  getFormDefinitions = createSpy(
+    'FormAdapter.getFormDefinitions'
+  ).and.callFake((categoryCode, formDefType) =>
+    of('getFormDefinitions' + categoryCode + formDefType)
+  );
   getFormDefinition = createSpy(
     'FormAdapter.getFormDefinition'
   ).and.callFake((applicationID, formDataID) =>
@@ -22,6 +27,8 @@ class MockFormAdapter implements FormAdapter {
 const formDefinitionId = 'formDef';
 const formDataId = 'formData';
 const applicationId = 'app';
+const category = 'category';
+const formDefinitionType = 'PERSONAL_DETAILS';
 const mockFormData: YFormData = {
   id: 'test-formData',
   type: 'DATA',
@@ -44,11 +51,19 @@ describe('FormConnector', () => {
     expect(formConnector).toBeTruthy();
   });
 
-  it('should call adapter for getFormDefinition', () => {
+  it('should call adapter for getFormDefinitionById', () => {
     formConnector.getFormDefinition(applicationId, formDefinitionId);
     expect(formAdapter.getFormDefinition).toHaveBeenCalledWith(
       applicationId,
       formDefinitionId
+    );
+  });
+
+  it('should call adapter for getFormDefinitionByCategory', () => {
+    formConnector.getFormDefinitions(category, formDefinitionType);
+    expect(formAdapter.getFormDefinitions).toHaveBeenCalledWith(
+      category,
+      formDefinitionType
     );
   });
 

@@ -1,9 +1,3 @@
-export const POLICIES_PAGE = '/my-account/my-policies/';
-
-export function accessPoliciesPage() {
-  cy.visit(POLICIES_PAGE);
-}
-
 export function checkPoliciesTitle() {
   cy.get('.heading-headline').should('contain', 'Policies');
 }
@@ -59,12 +53,20 @@ export function checkAutoPolicy() {
   cy.get('.info-card')
     .should('have.length', 1)
     .within(() => {
-      cy.get('.info-card-data')
-        .eq(4)
-        .within(() => {
-          cy.get('.label').contains('Premium');
-          cy.get('.value').contains('€10.95 ');
-        });
-      cy.get('.info-card-links .link').contains(' Details ').click();
+      cy.get('.info-card-data').within(() => {
+        cy.get('.label').contains('Premium');
+        cy.get('.value').contains('€10.95 ');
+      });
+      cy.get('a')
+        .contains(' Details ')
+        //TODO: When cypress fix issue detached from the DOM remove force true
+        .click({ force: true });
     });
+}
+
+export function checkMyQuotesPage() {
+  cy.selectOptionFromDropdown({
+    menuOption: 'My Account',
+    dropdownItem: 'Quotes & Applications',
+  });
 }

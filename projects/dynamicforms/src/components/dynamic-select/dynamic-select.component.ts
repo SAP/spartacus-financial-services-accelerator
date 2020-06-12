@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
 import { LanguageService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -11,7 +11,8 @@ import { FormService } from './../../core/services/form/form.service';
   selector: 'cx-dynamic-select',
   templateUrl: './dynamic-select.component.html',
 })
-export class DynamicSelectComponent extends AbstractFormComponent {
+export class DynamicSelectComponent extends AbstractFormComponent
+  implements OnInit {
   options$: Observable<any>;
 
   constructor(
@@ -19,9 +20,10 @@ export class DynamicSelectComponent extends AbstractFormComponent {
     protected formConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
     protected changeDetectorRef: ChangeDetectorRef,
-    protected formService: FormService
+    protected formService: FormService,
+    protected injector: Injector
   ) {
-    super(occValueListService, formConfig, languageService, changeDetectorRef);
+    super(formConfig, languageService, injector);
   }
 
   ngOnInit() {

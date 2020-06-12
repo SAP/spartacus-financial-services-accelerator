@@ -9,15 +9,18 @@ import {
   StorefrontConfig,
 } from '@spartacus/storefront';
 import { fsOverrides, fstranslations } from '../assets/translations/index';
-import { fstranslationsDe } from '../assets/translations/index_de';
+import {
+  fsOverridesDe,
+  fstranslationsDe,
+} from '../assets/translations/index_de';
 import { CheckoutModule } from '../cms-components/checkout/checkout.module';
 import { checkoutConfig } from '../cms-components/checkout/config/default-checkout-config';
 import { CmsLibModule } from '../cms-components/cms-lib.module';
 import { routingConfig } from '../cms-structure/routing/default-routing-config';
 import { OccModule } from '../occ/occ.module';
 import { occProductConfig } from '../occ/services/default-occ-product-config';
-import { layoutConfig } from './config/default-layout-config';
 import { occUserConfig } from '../occ/services/default-occ-user-config';
+import { layoutConfig } from './config/default-layout-config';
 
 @NgModule({
   imports: [
@@ -40,6 +43,7 @@ import { occUserConfig } from '../occ/services/default-occ-user-config';
       i18n: {
         resources: {
           en: fsOverrides,
+          de: fsOverridesDe,
         },
       },
     }),

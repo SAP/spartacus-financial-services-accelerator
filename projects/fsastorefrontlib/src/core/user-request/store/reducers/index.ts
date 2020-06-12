@@ -12,6 +12,7 @@ import {
   StateWithUserRequest,
 } from '../user-request-state';
 import { AuthActions } from '@spartacus/core';
+import * as fromClaimAction from '../../../my-account/store/actions';
 
 export function getReducers(): ActionReducerMap<FSUserRequestState> {
   return {
@@ -39,7 +40,10 @@ export function clearUserRequestState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
   return function (state, action) {
-    if (action.type === AuthActions.LOGOUT) {
+    if (
+      action.type === AuthActions.LOGOUT ||
+      action.type === fromClaimAction.CREATE_CLAIM
+    ) {
       state = undefined;
     }
     return reducer(state, action);

@@ -45,11 +45,32 @@ const testField1: FieldConfig = {
 const testField2: FieldConfig = {
   name: 'testField2',
   fieldType: fieldType,
+  dependsOn: [
+    {
+      controlName: 'testField3',
+      conditions: [
+        {
+          name: minValue,
+          arguments: [
+            {
+              value: '7',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+const testField3: FieldConfig = {
+  name: 'testField3',
+  fieldType: fieldType,
 };
 
 const mockFormGroup = new FormGroup({
-  testField1: new FormControl('6'),
-  testField2: new FormControl('8'),
+  testField1: new FormControl(''),
+  testField2: new FormControl(''),
+  testField3: new FormControl(''),
 });
 
 class MockFormValidationService {
@@ -103,7 +124,7 @@ describe('FieldDependencyResolverService', () => {
     const dependentFormControl = mockFormGroup.controls['testField1'];
 
     service.resolveFormControlDependencies(
-      dependencyConditions,
+      testField1,
       dependentFormControl,
       mockFormGroup
     );
