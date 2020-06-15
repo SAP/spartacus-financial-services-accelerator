@@ -45,7 +45,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
       this.activatedRoute
     );
     this.cart$ = this.cartService.getActive();
-    this.cartLoaded$ = this.cartService.getLoaded();
+    this.cartLoaded$ = this.cartService.isStable();
   }
 
   getBaseUrl() {

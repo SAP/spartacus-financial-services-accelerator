@@ -28,13 +28,10 @@
             'updateProfileForm.firstName.placeholder' | cxTranslate
           }}"
           formControlName="firstName"
-          [class.is-invalid]="isNotValid('firstName')"
         />
-        <div class="invalid-feedback" *ngIf="isNotValid('firstName')">
-          <span>{{
-            'updateProfileForm.firstNameIsRequired' | cxTranslate
-          }}</span>
-        </div>
+        <cx-form-errors
+          [control]="updateProfileForm.get('firstName')"
+        ></cx-form-errors>
       </label>
     </div>
   </div>
@@ -52,13 +49,10 @@
             'updateProfileForm.lastName.placeholder' | cxTranslate
           }}"
           formControlName="lastName"
-          [class.is-invalid]="isNotValid('lastName')"
         />
-        <div class="invalid-feedback" *ngIf="isNotValid('lastName')">
-          <span>{{
-            'updateProfileForm.lastNameIsRequired' | cxTranslate
-          }}</span>
-        </div>
+        <cx-form-errors
+          [control]="updateProfileForm.get('lastName')"
+        ></cx-form-errors>
       </label>
     </div>
   </div>
@@ -74,11 +68,10 @@
           class="form-control"
           name="dateOfBirth"
           formControlName="dateOfBirth"
-          [class.is-invalid]="isNotValid('dateOfBirth')"
         />
-        <div class="invalid-feedback" *ngIf="isNotValid('dateOfBirth')">
-          <span>{{ 'forms.dateOfBirthMinimumAge' | cxTranslate }}</span>
-        </div>
+        <cx-form-errors
+          [control]="updateProfileForm.get('dateOfBirth')"
+        ></cx-form-errors>
       </label>
     </div>
   </div>
@@ -94,14 +87,10 @@
           class="form-control"
           name="contactInfos"
           formControlName="phoneNumber"
-          [class.is-invalid]="isNotValid('contactInfos.phoneNumber')"
         />
-        <div
-          class="invalid-feedback"
-          *ngIf="isNotValid('contactInfos.phoneNumber')"
-        >
-          <span>{{ 'forms.phoneNumber.lengthValidation' | cxTranslate }}</span>
-        </div>
+        <cx-form-errors
+          [control]="updateProfileForm.get('dateOfBirth')"
+        ></cx-form-errors>
       </label>
     </div>
   </div>

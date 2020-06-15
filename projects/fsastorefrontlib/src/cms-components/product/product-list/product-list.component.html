@@ -90,7 +90,8 @@
           <cx-pagination
             class="text-center"
             [pagination]="model.pagination"
-            (viewPageEvent)="viewPage($event)"
+            queryParam="currentPage"
+            [defaultPage]="0"
           ></cx-pagination>
         </div>
       </div>
