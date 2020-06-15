@@ -37,6 +37,7 @@ import {
 } from '../../core/checkout/store/reducers/index';
 import { QuoteConnector } from '../../core/my-account/connectors/quote.connector';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
+import { FSTranslationService } from './../../core/i18n/facade/translation.service';
 import { AddOptionsComponent } from './components/add-options/add-options.component';
 import { AddOptionsModule } from './components/add-options/add-options.module';
 import { BindQuoteDialogComponent } from './components/bind-quote-dialog/bind-quote-dialog.component';
@@ -235,6 +236,7 @@ const routes: Routes = [
   ],
   providers: [
     FSCartService,
+    FSTranslationService,
     CheckoutConnector,
     CartConnector,
     QuoteConnector,

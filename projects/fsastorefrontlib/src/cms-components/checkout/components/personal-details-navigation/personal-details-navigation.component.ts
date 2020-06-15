@@ -42,17 +42,12 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
               if (
                 cart &&
                 cart.code &&
-                cart.deliveryOrderGroups &&
-                cart.deliveryOrderGroups.length > 0 &&
-                cart.deliveryOrderGroups[0].entries.length > 0
+                cart.entries &&
+                cart.entries.length > 0
               ) {
-                const entry: FSOrderEntry =
-                  cart.deliveryOrderGroups[0].entries[0];
+                const entry: FSOrderEntry = cart.entries[0];
                 const yFormData: YFormData = {
-                  refId:
-                    cart.code +
-                    '_' +
-                    cart.deliveryOrderGroups[0].entries[0].entryNumber,
+                  refId: cart.code + '_' + cart.entries[0].entryNumber,
                 };
                 if (entry.formData && entry.formData.length > 0) {
                   yFormData.id = entry.formData[0].id;

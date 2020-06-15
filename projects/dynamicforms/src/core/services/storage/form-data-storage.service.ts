@@ -9,6 +9,10 @@ export class FormDataStorageService {
     localStorage.getItem(DYNAMIC_FORMS_LOCAL_STORAGE_KEY)
   );
 
+  clearFormDataLocalStorage() {
+    this.formLocalStorageData = null;
+  }
+
   setFormDataToLocalStorage(formData: YFormData) {
     if (!this.formLocalStorageData || this.formLocalStorageData.length === 0) {
       this.formLocalStorageData = [this.createDataForLocalStorage(formData)];

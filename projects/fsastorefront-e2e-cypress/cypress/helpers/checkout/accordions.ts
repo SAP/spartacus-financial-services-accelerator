@@ -28,19 +28,19 @@ export const finalReviewAccordionTravel = [
 export const policyDetailsAccordions = [
   ' Policy Summary ',
   ' Who or What Is Insured ',
-  " What's Included ",
+  "What's Included",
   ' Optional Extras ',
   ' What Does It Cost Me? ',
 ];
 
 export const agentListViewAccordions = [
-  ' Homeowners Insurance ',
-  ' Renters Insurance ',
-  ' Auto Insurance ',
-  ' Life Insurance ',
-  ' Travel Insurance ',
-  ' Event Insurance ',
-  ' Savings Insurance ',
+  ' Homeowners ',
+  ' Renters ',
+  ' Auto ',
+  ' Life ',
+  ' Travel ',
+  ' Event ',
+  ' Savings ',
 ];
 
 export const finalReviewAccordionHomeowners = [

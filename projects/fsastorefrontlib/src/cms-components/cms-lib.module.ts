@@ -17,6 +17,8 @@ import { ProgressBarModule } from './progress-bar/progress-bar.module';
 import { FSRegisterModule } from './user/register/register.module';
 import { NotFoundModule } from './not-found/not-found.module';
 import { CmsFormSubmitModule } from './form/cms-form-submit/cms-form-submit.module';
+import { PersonalDetailsModule } from './form/personal-details/personal-details.module';
+import { GeneralInformationModule } from './form/general-information/general-information.module';
 
 @NgModule({
   imports: [
@@ -35,6 +37,8 @@ import { CmsFormSubmitModule } from './form/cms-form-submit/cms-form-submit.modu
     CategoryFeatureCarouselModule,
     ProductAssignmentModule,
     NotFoundModule,
+    PersonalDetailsModule,
+    GeneralInformationModule,
   ],
   exports: [
     AgentModule,
@@ -52,6 +56,8 @@ import { CmsFormSubmitModule } from './form/cms-form-submit/cms-form-submit.modu
     ProductAssignmentModule,
     ProgressBarModule,
     NotFoundModule,
+    PersonalDetailsModule,
+    GeneralInformationModule,
   ],
   providers: [reducerProvider],
 })

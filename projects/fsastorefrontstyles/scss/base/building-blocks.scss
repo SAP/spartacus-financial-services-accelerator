@@ -115,19 +115,6 @@
     height: 60px;
   }
 }
-.center-icon-wrapper {
-  left: 0;
-  right: 0;
-  top: -32px;
-  .center-icon {
-    font-size: var(--cx-h1-font-size);
-    color: var(--cx-color-7);
-    font-weight: var(--cx-font-weight-bold);
-    background-color: var(--cx-color-1);
-    display: inline-block;
-    border-radius: 50%;
-  }
-}
 .info-icon {
   &:before {
     content: 'i';
@@ -212,6 +199,11 @@
     font-size: $h6-font-size;
   }
 }
+.overflow-box {
+  height: 220px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
 .fs-tab {
   color: var(--cx-color-text);
   margin-right: 3px;
@@ -235,5 +227,17 @@
   @include media-breakpoint-down(xs) {
     border-radius: 0;
     margin-right: 0;
+  }
+}
+.info-icon {
+  &:before {
+    background-color: var(--cx-color-text);
+    border-radius: 50%;
+    font-size: 35px;
+    color: var(--cx-color-1);
+    width: 56px;
+    height: 56px;
+    display: block;
+    text-align: center;
   }
 }

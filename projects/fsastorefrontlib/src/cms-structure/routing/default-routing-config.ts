@@ -12,7 +12,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   category: { paths: ['checkout/c/:categoryCode'] },
   addOptions: { paths: ['checkout/add-options'] },
   checkoutPersonalDetails: {
-    paths: ['checkout/personal-details/:formCode'],
+    paths: ['checkout/personal-details'],
   },
   quoteReview: { paths: ['checkout/quote-review'] },
   checkoutPaymentDetails: { paths: ['checkout/payment-details'] },
@@ -44,7 +44,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   fnolIncidentReportPage: { paths: ['fnolIncidentReportPage'] },
   fnolGeneralInfoPage: { paths: ['fnolGeneralInfoPage'] },
   fnolSummaryPage: { paths: ['fnolSummaryPage'] },
-  fnolConfirmation: { paths: ['fnolConfirmation'] },
+  fnolConfirmation: { paths: ['fnolConfirmationPage'] },
   changeCarDetailsPage: { paths: ['changeCarDetailsPage'] },
   changeCoveragePage: { paths: ['changeCoveragePage'] },
   changeSimulationPage: { paths: ['changeSimulationPage'] },

@@ -4,10 +4,8 @@ import { Cart, OccConfig, RoutingService } from '@spartacus/core';
 import { ModalRef, ModalService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import {
-  CategoryService,
-  FSCheckoutConfigService,
-} from '../../../../core/checkout/services';
+import { FSCheckoutConfigService } from '../../../../core/checkout/services';
+import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
   BindingStateType,
@@ -28,7 +26,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   modalRef: ModalRef;
   cartCode: string;
-  categoryCode: string;
 
   constructor(
     protected cartService: FSCartService,
@@ -37,20 +34,10 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected checkoutConfigService: FSCheckoutConfigService,
     protected activatedRoute: ActivatedRoute,
     protected modalService: ModalService,
-    protected categoryService: CategoryService
+    protected translationService: FSTranslationService
   ) {}
 
   ngOnInit() {
-    this.subscription.add(
-      this.categoryService
-        .getActiveCategory()
-        .pipe(
-          map(category => {
-            this.categoryCode = category;
-          })
-        )
-        .subscribe()
-    );
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
       this.activatedRoute
     );
@@ -66,10 +53,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   back() {
-    // TO DO - refactor after we change logic for multiple containers and categories
-    this.routingService.go(
-      this.checkoutStepUrlBack.replace(':formCode', this.categoryCode)
-    );
+    this.routingService.go(this.checkoutStepUrlBack);
   }
 
   continue() {
@@ -125,5 +109,12 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  getTranslation(translationGroup: string, translationKey: string): string {
+    return this.translationService.getTranslationValue(
+      ['quoteReview', translationGroup],
+      translationKey
+    );
   }
 }
