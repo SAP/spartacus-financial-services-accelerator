@@ -136,7 +136,7 @@ export function checkInsuranceComparisonPage(mainProduct, numberOfProducts) {
 
 export function checkPersonalDetailsPageInsurance() {
   cy.get('.progress-node').should('have.length', 7);
-  cy.get('cx-fs-cms-custom-container').should('be.visible');
+  //cy.get('cx-fs-cms-custom-container').should('be.visible');
   cy.get('cx-fs-mini-cart').should('be.visible');
   cy.get('cx-footer-navigation').should('be.visible');
 }
@@ -225,4 +225,11 @@ export function startInsuranceCheckout(mainProduct) {
     .eq(0)
     .contains(' Get a Quote')
     .click();
+}
+
+export function waitForPersonalDetailsPage() {
+  const personalDetails = waitForPage('personal-details', 'personalDetails');
+  cy.wait(`@${personalDetails}`)
+    .its('status')
+    .should('eq', 200);
 }
