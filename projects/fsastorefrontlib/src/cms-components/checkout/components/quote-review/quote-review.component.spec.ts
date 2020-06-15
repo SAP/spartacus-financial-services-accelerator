@@ -110,8 +110,8 @@ describe('Quote Review Component', () => {
     fixture = TestBed.createComponent(QuoteReviewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
-    translationService = TestBed.get(
+    routingService = TestBed.inject(RoutingService as Type<RoutingService>);
+    translationService = TestBed.inject(
       FSTranslationService as Type<FSTranslationService>
     );
     spyOn(routingService, 'go').and.stub();

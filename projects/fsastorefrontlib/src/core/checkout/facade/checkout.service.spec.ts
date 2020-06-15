@@ -44,11 +44,11 @@ describe('FSCheckoutServiceTest', () => {
         provideMockStore({ initialState }),
       ],
     });
-    service = TestBed.get(FSCheckoutService as Type<FSCheckoutService>);
-    checkoutDeliveryService = TestBed.get(
+    service = TestBed.inject(FSCheckoutService as Type<FSCheckoutService>);
+    checkoutDeliveryService = TestBed.inject(
       CheckoutDeliveryService as Type<CheckoutDeliveryService>
     );
-    store = TestBed.get(Store as Type<Store<FSStateWithCheckout>>);
+    store = TestBed.inject(Store as Type<Store<FSStateWithCheckout>>);
 
     spyOn(checkoutDeliveryService, 'setDeliveryMode').and.callThrough();
     spyOn(store, 'dispatch').and.callThrough();

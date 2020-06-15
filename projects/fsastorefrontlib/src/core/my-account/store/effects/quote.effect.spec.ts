@@ -83,7 +83,7 @@ describe('Quote Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(
+    effects = TestBed.inject(
       fromEffects.QuoteEffects as Type<fromEffects.QuoteEffects>
     );
   });

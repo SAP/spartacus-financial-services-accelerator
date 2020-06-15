@@ -25,10 +25,10 @@ describe('CheckoutConnector', () => {
       providers: [{ provide: CheckoutAdapter, useClass: MockCheckoutAdapter }],
     });
 
-    checkoutConnector = TestBed.get(
+    checkoutConnector = TestBed.inject(
       CheckoutConnector as Type<CheckoutConnector>
     );
-    checkoutAdapter = TestBed.get(CheckoutAdapter as Type<CheckoutAdapter>);
+    checkoutAdapter = TestBed.inject(CheckoutAdapter as Type<CheckoutAdapter>);
   });
 
   it('should be created', () => {

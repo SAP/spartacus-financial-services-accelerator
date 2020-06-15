@@ -38,7 +38,7 @@ describe('Checkout Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(
+    effects = TestBed.inject(
       fromEffects.CheckoutEffects as Type<fromEffects.CheckoutEffects>
     );
   });

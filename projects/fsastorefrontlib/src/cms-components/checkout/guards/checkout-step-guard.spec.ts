@@ -88,14 +88,14 @@ describe('CheckoutStepGuard', () => {
       imports: [RouterTestingModule],
     }).compileComponents();
 
-    guard = TestBed.get(CheckoutStepGuard as Type<CheckoutStepGuard>);
-    routingConfigService = TestBed.get(
+    guard = TestBed.inject(CheckoutStepGuard as Type<CheckoutStepGuard>);
+    routingConfigService = TestBed.inject(
       RoutingConfigService as Type<RoutingConfigService>
     );
-    checkoutConfigService = TestBed.get(
+    checkoutConfigService = TestBed.inject(
       FSCheckoutConfigService as Type<FSCheckoutConfigService>
     );
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
+    cartService = TestBed.inject(FSCartService as Type<FSCartService>);
   });
 
   it('should not return true in case there is not category in route', () => {

@@ -8,7 +8,7 @@ describe('OccQuoteNormalizer', () => {
     TestBed.configureTestingModule({
       providers: [OccQuoteNormalizer],
     });
-    occQuoteNormalizer = TestBed.get(OccQuoteNormalizer);
+    occQuoteNormalizer = TestBed.inject(OccQuoteNormalizer);
   });
 
   it('should be created', () => {

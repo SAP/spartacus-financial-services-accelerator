@@ -69,7 +69,7 @@ describe('Policy Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(
+    effects = TestBed.inject(
       fromEffects.PolicyEffects as Type<fromEffects.PolicyEffects>
     );
   });

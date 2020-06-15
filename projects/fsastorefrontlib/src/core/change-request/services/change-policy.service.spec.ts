@@ -10,7 +10,7 @@ describe('ChangePolicyService', () => {
       providers: [ChangePolicyService],
     });
 
-    service = TestBed.get(ChangePolicyService);
+    service = TestBed.inject(ChangePolicyService);
   });
 
   it('should be created', () => {

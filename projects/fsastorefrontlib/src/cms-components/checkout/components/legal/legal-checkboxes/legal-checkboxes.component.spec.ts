@@ -50,7 +50,7 @@ describe('LegalCheckboxesComponent', () => {
     fixture = TestBed.createComponent(LegalCheckboxesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    routingService = TestBed.inject(RoutingService as Type<RoutingService>);
     spyOn(routingService, 'go').and.stub();
   });
 

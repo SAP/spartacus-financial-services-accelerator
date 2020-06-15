@@ -60,7 +60,7 @@ describe('DeleteClaimDialogComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DeleteClaimDialogComponent);
     component = fixture.componentInstance;
-    claimService = TestBed.get(ClaimService as Type<ClaimService>);
+    claimService = TestBed.inject(ClaimService as Type<ClaimService>);
     fixture.detectChanges();
   });
 

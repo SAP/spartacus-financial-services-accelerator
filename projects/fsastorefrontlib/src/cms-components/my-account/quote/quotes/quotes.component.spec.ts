@@ -63,8 +63,8 @@ describe('QuotesComponent', () => {
     fixture = TestBed.createComponent(QuotesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    quoteService = TestBed.get(QuoteService as Type<QuoteService>);
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    quoteService = TestBed.inject(QuoteService as Type<QuoteService>);
+    routingService = TestBed.inject(RoutingService as Type<RoutingService>);
   });
 
   it('should create', () => {

@@ -61,7 +61,7 @@ describe('Form Data Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(
+    effects = TestBed.inject(
       fromEffects.FormDataEffects as Type<fromEffects.FormDataEffects>
     );
   });

@@ -51,8 +51,8 @@ describe('InboxServiceTest', () => {
       ],
     });
 
-    service = TestBed.get(InboxService as Type<InboxService>);
-    inboxData = TestBed.get(InboxDataService as Type<InboxDataService>);
+    service = TestBed.inject(InboxService as Type<InboxService>);
+    inboxData = TestBed.inject(InboxDataService as Type<InboxDataService>);
   });
 
   it('should InboxService is injected', inject(

@@ -85,7 +85,7 @@ describe('User Request Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(
+    effects = TestBed.inject(
       fromEffects.UserRequestEffects as Type<fromEffects.UserRequestEffects>
     );
   });

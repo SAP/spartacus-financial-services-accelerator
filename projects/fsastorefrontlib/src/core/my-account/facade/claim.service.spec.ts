@@ -63,9 +63,9 @@ describe('ClaimServiceTest', () => {
       ],
     });
 
-    service = TestBed.get(ClaimService as Type<ClaimService>);
-    claimData = TestBed.get(ClaimDataService as Type<ClaimDataService>);
-    store = TestBed.get(Store as Type<Store<StateWithMyAccount>>);
+    service = TestBed.inject(ClaimService as Type<ClaimService>);
+    claimData = TestBed.inject(ClaimDataService as Type<ClaimDataService>);
+    store = TestBed.inject(Store as Type<Store<StateWithMyAccount>>);
 
     spyOn(store, 'dispatch').and.callThrough();
   });

@@ -47,14 +47,14 @@ describe('OccProductAssignmentAdapter', () => {
         { provide: OccEndpointsService, useClass: MockOccEndpointsService },
       ],
     });
-    productAssignmentAdapter = TestBed.get(
+    productAssignmentAdapter = TestBed.inject(
       OccProductAssignmentAdapter as Type<OccProductAssignmentAdapter>
     );
     userId = 'TestID';
     orgUnitId = 'AcmeCorp';
-    productAssignmentAdapter = TestBed.get(OccProductAssignmentAdapter);
-    httpMock = TestBed.get(HttpTestingController);
-    occEndpointService = TestBed.get(OccEndpointsService);
+    productAssignmentAdapter = TestBed.inject(OccProductAssignmentAdapter);
+    httpMock = TestBed.inject(HttpTestingController);
+    occEndpointService = TestBed.inject(OccEndpointsService);
     spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 

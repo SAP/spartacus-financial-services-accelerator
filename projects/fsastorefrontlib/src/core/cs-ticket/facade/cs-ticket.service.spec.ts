@@ -38,7 +38,7 @@ describe('CsTicketService', () => {
         },
       ],
     });
-    service = TestBed.get(CsTicketService as Type<CsTicketService>);
+    service = TestBed.inject(CsTicketService as Type<CsTicketService>);
   }));
 
   it('should be created', () => {

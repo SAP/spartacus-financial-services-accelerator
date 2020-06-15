@@ -96,11 +96,11 @@ describe('PolicyDetailsComponent', () => {
       declarations: [PolicyDetailsComponent],
     }).compileComponents();
 
-    changeRequestService = TestBed.get(
+    changeRequestService = TestBed.inject(
       ChangeRequestService as Type<ChangeRequestService>
     );
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
-    policyService = TestBed.get(PolicyService as Type<PolicyService>);
+    routingService = TestBed.inject(RoutingService as Type<RoutingService>);
+    policyService = TestBed.inject(PolicyService as Type<PolicyService>);
   }));
 
   beforeEach(() => {

@@ -43,8 +43,8 @@ describe('FormConnector', () => {
     TestBed.configureTestingModule({
       providers: [{ provide: FormAdapter, useClass: MockFormAdapter }],
     });
-    formConnector = TestBed.get(FormConnector as Type<FormConnector>);
-    formAdapter = TestBed.get(FormAdapter as Type<FormAdapter>);
+    formConnector = TestBed.inject(FormConnector as Type<FormConnector>);
+    formAdapter = TestBed.inject(FormAdapter as Type<FormAdapter>);
   });
 
   it('should be created', () => {

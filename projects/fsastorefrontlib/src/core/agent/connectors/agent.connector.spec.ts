@@ -56,8 +56,8 @@ describe('AgentConnector', () => {
       providers: [{ provide: AgentAdapter, useClass: MockAgentAdapter }],
     });
 
-    agentConnector = TestBed.get(AgentConnector as Type<AgentConnector>);
-    agentAdapter = TestBed.get(AgentAdapter as Type<AgentAdapter>);
+    agentConnector = TestBed.inject(AgentConnector as Type<AgentConnector>);
+    agentAdapter = TestBed.inject(AgentAdapter as Type<AgentAdapter>);
   });
 
   it('should be created', () => {

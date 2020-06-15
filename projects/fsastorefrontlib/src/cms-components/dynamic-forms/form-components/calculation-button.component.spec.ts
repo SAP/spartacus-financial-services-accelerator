@@ -94,13 +94,13 @@ describe('CalculationButtonComponent', () => {
         },
       ],
     }).compileComponents();
-    currentProductService = TestBed.get(
+    currentProductService = TestBed.inject(
       CurrentProductService as Type<CurrentProductService>
     );
-    formDataStorageService = TestBed.get(
+    formDataStorageService = TestBed.inject(
       FormDataStorageService as Type<FormDataStorageService>
     );
-    formDataService = TestBed.get(FormDataService as Type<FormDataService>);
+    formDataService = TestBed.inject(FormDataService as Type<FormDataService>);
   }));
 
   beforeEach(() => {

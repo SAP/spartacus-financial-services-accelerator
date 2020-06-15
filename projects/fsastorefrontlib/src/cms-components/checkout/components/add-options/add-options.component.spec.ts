@@ -122,21 +122,21 @@ describe('AddOptionsComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
+    cartService = TestBed.inject(FSCartService as Type<FSCartService>);
     spyOn(cartService, 'getLoading').and.callThrough();
     spyOn(cartService, 'removeEntry').and.callThrough();
     spyOn(cartService, 'addOptionalProduct').and.callThrough();
     spyOn(cartService, 'getEntries').and.callThrough();
 
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    routingService = TestBed.inject(RoutingService as Type<RoutingService>);
     spyOn(routingService, 'go').and.callThrough();
 
-    checkoutConfigService = TestBed.get(
+    checkoutConfigService = TestBed.inject(
       FSCheckoutConfigService as Type<FSCheckoutConfigService>
     );
     spyOn(checkoutConfigService, 'getNextCheckoutStepUrl').and.callThrough();
 
-    categoryService = TestBed.get(CategoryService as Type<CategoryService>);
+    categoryService = TestBed.inject(CategoryService as Type<CategoryService>);
     spyOn(categoryService, 'getActiveCategory').and.callThrough();
 
     component.ngOnInit();

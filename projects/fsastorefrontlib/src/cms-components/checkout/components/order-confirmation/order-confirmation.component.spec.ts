@@ -56,12 +56,14 @@ describe('OrderConfirmationComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(OrderConfirmationComponent);
-    translationService = TestBed.get(
+    translationService = TestBed.inject(
       FSTranslationService as Type<FSTranslationService>
     );
     component = fixture.componentInstance;
     fixture.detectChanges();
-    checkoutService = TestBed.get(FSCheckoutService as Type<FSCheckoutService>);
+    checkoutService = TestBed.inject(
+      FSCheckoutService as Type<FSCheckoutService>
+    );
     spyOn(checkoutService, 'getOrderDetails').and.stub();
     spyOn(checkoutService, 'clearCheckoutData').and.stub();
   });

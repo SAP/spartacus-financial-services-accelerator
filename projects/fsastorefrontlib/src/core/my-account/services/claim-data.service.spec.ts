@@ -48,8 +48,8 @@ describe('ClaimDataService', () => {
         },
       ],
     });
-    service = TestBed.get(ClaimDataService as Type<ClaimDataService>);
-    store = TestBed.get(Store as Type<Store<StateWithMyAccount>>);
+    service = TestBed.inject(ClaimDataService as Type<ClaimDataService>);
+    store = TestBed.inject(Store as Type<Store<StateWithMyAccount>>);
   });
 
   describe('userId', () => {

@@ -33,8 +33,8 @@ describe('QuoteConnector', () => {
       providers: [{ provide: QuoteAdapter, useClass: MockQuoteAdapter }],
     });
 
-    quoteConnector = TestBed.get(QuoteConnector as Type<QuoteConnector>);
-    quoteAdapter = TestBed.get(QuoteAdapter as Type<QuoteAdapter>);
+    quoteConnector = TestBed.inject(QuoteConnector as Type<QuoteConnector>);
+    quoteAdapter = TestBed.inject(QuoteAdapter as Type<QuoteAdapter>);
   });
 
   it('should be created', () => {

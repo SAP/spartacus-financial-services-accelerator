@@ -56,10 +56,10 @@ describe('ProductAssignmentConnector', () => {
       ],
     });
 
-    productAssignmentConnector = TestBed.get(
+    productAssignmentConnector = TestBed.inject(
       ProductAssignmentConnector as Type<ProductAssignmentConnector>
     );
-    productAssignmentAdapter = TestBed.get(
+    productAssignmentAdapter = TestBed.inject(
       ProductAssignmentAdapter as Type<ProductAssignmentAdapter>
     );
   });

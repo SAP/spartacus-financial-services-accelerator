@@ -67,7 +67,9 @@ describe('AbstractFormComponent', () => {
         { provide: UserPrefillResolver, useClass: MockUserPrefillResolver },
       ],
     }).compileComponents();
-    mockLanguageService = TestBed.get(LanguageService as Type<LanguageService>);
+    mockLanguageService = TestBed.inject(
+      LanguageService as Type<LanguageService>
+    );
   }));
 
   beforeEach(() => {

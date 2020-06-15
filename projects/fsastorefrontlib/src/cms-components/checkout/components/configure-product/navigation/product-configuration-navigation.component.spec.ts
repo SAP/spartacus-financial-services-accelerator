@@ -123,15 +123,15 @@ describe('ProductConfigurationNavigationComponent', () => {
         },
       ],
     }).compileComponents();
-    currentProductService = TestBed.get(
+    currentProductService = TestBed.inject(
       CurrentProductService as Type<CurrentProductService>
     );
-    formDataService = TestBed.get(FormDataService as Type<FormDataService>);
-    formDataStorageService = TestBed.get(
+    formDataService = TestBed.inject(FormDataService as Type<FormDataService>);
+    formDataStorageService = TestBed.inject(
       FormDataStorageService as Type<FormDataStorageService>
     );
-    pricingService = TestBed.get(PricingService as Type<PricingService>);
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
+    pricingService = TestBed.inject(PricingService as Type<PricingService>);
+    cartService = TestBed.inject(FSCartService as Type<FSCartService>);
   }));
 
   beforeEach(() => {

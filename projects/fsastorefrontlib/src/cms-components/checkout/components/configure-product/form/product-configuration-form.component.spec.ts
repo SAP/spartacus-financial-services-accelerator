@@ -123,11 +123,11 @@ describe('ProductConfigurationFormComponent', () => {
         },
       ],
     }).compileComponents();
-    currentProductService = TestBed.get(
+    currentProductService = TestBed.inject(
       CurrentProductService as Type<CurrentProductService>
     );
-    formDataService = TestBed.get(FormDataService as Type<FormDataService>);
-    formDataStorageService = TestBed.get(
+    formDataService = TestBed.inject(FormDataService as Type<FormDataService>);
+    formDataStorageService = TestBed.inject(
       FormDataStorageService as Type<FormDataStorageService>
     );
   }));

@@ -137,8 +137,8 @@ describe('ClaimsComponent', () => {
       ],
     }).compileComponents();
 
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
-    claimService = TestBed.get(ClaimService as Type<ClaimService>);
+    routingService = TestBed.inject(RoutingService as Type<RoutingService>);
+    claimService = TestBed.inject(ClaimService as Type<ClaimService>);
   }));
 
   beforeEach(() => {

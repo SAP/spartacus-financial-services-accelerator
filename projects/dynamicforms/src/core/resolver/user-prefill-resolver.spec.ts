@@ -23,7 +23,7 @@ const mockFieldPath = 'firstName';
 
 describe('UserPrefilResolver', () => {
   let userPrefilResolver: UserPrefillResolver;
-  let userService: MockUserService;
+  let userService: UserService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -31,10 +31,10 @@ describe('UserPrefilResolver', () => {
       providers: [{ provide: UserService, useClass: MockUserService }],
     });
 
-    userPrefilResolver = TestBed.get(
+    userPrefilResolver = TestBed.inject(
       UserPrefillResolver as Type<UserPrefillResolver>
     );
-    userService = TestBed.get(UserService as Type<UserService>);
+    userService = TestBed.inject(UserService as Type<UserService>);
   });
 
   it('should inject user resolver', () => {

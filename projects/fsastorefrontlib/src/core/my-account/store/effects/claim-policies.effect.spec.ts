@@ -64,7 +64,7 @@ describe('Claim Policies Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(
+    effects = TestBed.inject(
       fromEffects.ClaimPoliciesEffects as Type<fromEffects.ClaimPoliciesEffects>
     );
   });

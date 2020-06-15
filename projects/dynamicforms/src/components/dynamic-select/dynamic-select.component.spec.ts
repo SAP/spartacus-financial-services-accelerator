@@ -96,10 +96,10 @@ describe('DynamicSelectComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DynamicSelectComponent);
-    occValueListService = TestBed.get(
+    occValueListService = TestBed.inject(
       OccValueListService as Type<OccValueListService>
     );
-    formService = TestBed.get(FormService as Type<FormService>);
+    formService = TestBed.inject(FormService as Type<FormService>);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
     mockField = {

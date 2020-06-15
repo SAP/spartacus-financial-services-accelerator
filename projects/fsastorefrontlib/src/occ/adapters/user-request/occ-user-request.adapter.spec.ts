@@ -43,9 +43,9 @@ describe('OccUserRequestAdapter', () => {
       ],
     });
 
-    adapter = TestBed.get(OccUserRequestAdapter);
-    httpMock = TestBed.get(HttpTestingController);
-    occEndpointService = TestBed.get(OccEndpointsService);
+    adapter = TestBed.inject(OccUserRequestAdapter);
+    httpMock = TestBed.inject(HttpTestingController);
+    occEndpointService = TestBed.inject(OccEndpointsService);
     spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 

@@ -87,10 +87,10 @@ describe('ActiveProductAssignmentsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ActiveProductAssignmentsComponent);
     component = fixture.componentInstance;
-    mockedProductAssignmentService = TestBed.get(
+    mockedProductAssignmentService = TestBed.inject(
       ProductAssignmentService as Type<ProductAssignmentService>
     );
-    mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
+    mockRoutingService = TestBed.inject(RoutingService as Type<RoutingService>);
     fixture.detectChanges();
   });
 

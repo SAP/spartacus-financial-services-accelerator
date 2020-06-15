@@ -97,10 +97,10 @@ describe('UserPrefilResolver', () => {
       ],
     });
 
-    cartPrefilResolver = TestBed.get(
+    cartPrefilResolver = TestBed.inject(
       CartPrefillResolver as Type<CartPrefillResolver>
     );
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
+    cartService = TestBed.inject(FSCartService as Type<FSCartService>);
   });
 
   it('should inject cart resolver', () => {

@@ -109,8 +109,10 @@ describe('PersonalDetailsComponent', () => {
       ],
     }).compileComponents();
 
-    mockFormDataService = TestBed.get(FormDataService as Type<FormDataService>);
-    mockActiveCartService = TestBed.get(
+    mockFormDataService = TestBed.inject(
+      FormDataService as Type<FormDataService>
+    );
+    mockActiveCartService = TestBed.inject(
       ActiveCartService as Type<ActiveCartService>
     );
   }));

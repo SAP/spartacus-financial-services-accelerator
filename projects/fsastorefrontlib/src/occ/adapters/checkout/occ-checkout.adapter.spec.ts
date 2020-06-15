@@ -36,9 +36,9 @@ describe('OccCheckoutAdapter', () => {
       ],
     });
 
-    service = TestBed.get(OccCheckoutAdapter);
-    httpMock = TestBed.get(HttpTestingController);
-    occEndpointService = TestBed.get(OccEndpointsService);
+    service = TestBed.inject(OccCheckoutAdapter);
+    httpMock = TestBed.inject(HttpTestingController);
+    occEndpointService = TestBed.inject(OccEndpointsService);
     spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 

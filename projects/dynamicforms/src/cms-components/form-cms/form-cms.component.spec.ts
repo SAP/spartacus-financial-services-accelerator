@@ -97,8 +97,10 @@ describe('FormCMSComponent', () => {
         },
       ],
     }).compileComponents();
-    mockFormDataService = TestBed.get(FormDataService as Type<FormDataService>);
-    mockFormDataStorageService = TestBed.get(
+    mockFormDataService = TestBed.inject(
+      FormDataService as Type<FormDataService>
+    );
+    mockFormDataStorageService = TestBed.inject(
       FormDataStorageService as Type<FormDataStorageService>
     );
   }));

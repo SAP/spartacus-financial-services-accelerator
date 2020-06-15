@@ -44,8 +44,8 @@ describe('PolicyServiceTest', () => {
       ],
     });
 
-    service = TestBed.get(PolicyService as Type<PolicyService>);
-    store = TestBed.get(Store as Type<Store<StateWithMyAccount>>);
+    service = TestBed.inject(PolicyService as Type<PolicyService>);
+    store = TestBed.inject(Store as Type<Store<StateWithMyAccount>>);
 
     spyOn(store, 'dispatch').and.callThrough();
   });

@@ -26,10 +26,10 @@ describe('ProductPricingConnector', () => {
       ],
     });
 
-    productPricingConnector = TestBed.get(
+    productPricingConnector = TestBed.inject(
       ProductPricingConnector as Type<ProductPricingConnector>
     );
-    productPricingAdapter = TestBed.get(
+    productPricingAdapter = TestBed.inject(
       ProductPricingAdapter as Type<ProductPricingAdapter>
     );
   });

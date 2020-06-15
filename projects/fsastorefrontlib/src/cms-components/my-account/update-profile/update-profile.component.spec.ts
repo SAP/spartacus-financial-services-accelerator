@@ -114,9 +114,9 @@ describe('UpdateProfileComponent', () => {
     component = fixture.componentInstance;
     el = fixture.debugElement;
 
-    userService = TestBed.get(UserService);
-    routingService = TestBed.get(RoutingService);
-    globalMessageService = TestBed.get(GlobalMessageService);
+    userService = TestBed.inject(UserService);
+    routingService = TestBed.inject(RoutingService);
+    globalMessageService = TestBed.inject(GlobalMessageService);
 
     fixture.detectChanges();
   });

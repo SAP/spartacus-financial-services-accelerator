@@ -106,11 +106,11 @@ describe('FieldDependencyResolverService', () => {
         },
       ],
     });
-    mockFormValidationService = TestBed.get(
+    mockFormValidationService = TestBed.inject(
       FormValidationService as Type<FormValidationService>
     );
-    mockFormService = TestBed.get(FormService as Type<FormService>);
-    service = TestBed.get(FieldDependencyResolverService);
+    mockFormService = TestBed.inject(FormService as Type<FormService>);
+    service = TestBed.inject(FieldDependencyResolverService);
   });
 
   it('should be created', () => {

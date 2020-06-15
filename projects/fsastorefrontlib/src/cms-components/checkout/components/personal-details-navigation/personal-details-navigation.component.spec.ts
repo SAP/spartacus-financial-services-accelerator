@@ -96,7 +96,7 @@ describe('PersonalDetailsNavigationComponent', () => {
       ],
     }).compileComponents();
 
-    quoteService = TestBed.get(QuoteService as Type<QuoteService>);
+    quoteService = TestBed.inject(QuoteService as Type<QuoteService>);
   }));
 
   beforeEach(() => {

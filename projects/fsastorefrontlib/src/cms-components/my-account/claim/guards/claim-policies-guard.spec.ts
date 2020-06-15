@@ -59,10 +59,10 @@ describe('ClaimPoliciesGuard', () => {
       ],
     }).compileComponents();
 
-    guard = TestBed.get(ClaimPoliciesGuard as Type<ClaimPoliciesGuard>);
-    routing = TestBed.get(RoutingService as Type<RoutingService>);
-    policyService = TestBed.get(PolicyService as Type<PolicyService>);
-    claimService = TestBed.get(ClaimService as Type<ClaimService>);
+    guard = TestBed.inject(ClaimPoliciesGuard as Type<ClaimPoliciesGuard>);
+    routing = TestBed.inject(RoutingService as Type<RoutingService>);
+    policyService = TestBed.inject(PolicyService as Type<PolicyService>);
+    claimService = TestBed.inject(ClaimService as Type<ClaimService>);
   });
 
   it('should redirect to no claims page in case there are no policies', () => {

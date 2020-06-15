@@ -43,7 +43,7 @@ describe('Product Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(
+    effects = TestBed.inject(
       fromEffects.ProductEffect as Type<fromEffects.ProductEffect>
     );
   });

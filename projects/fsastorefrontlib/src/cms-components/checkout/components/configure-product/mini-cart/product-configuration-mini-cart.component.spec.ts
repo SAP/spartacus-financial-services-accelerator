@@ -97,12 +97,14 @@ describe('ProductConfigurationMiniCartComponent', () => {
         },
       ],
     }).compileComponents();
-    currentProductService = TestBed.get(
+    currentProductService = TestBed.inject(
       CurrentProductService as Type<CurrentProductService>
     );
-    formDataService = TestBed.get(FormDataService as Type<FormDataService>);
-    pricingService = TestBed.get(PricingService as Type<PricingService>);
-    fsProductService = TestBed.get(FSProductService as Type<FSProductService>);
+    formDataService = TestBed.inject(FormDataService as Type<FormDataService>);
+    pricingService = TestBed.inject(PricingService as Type<PricingService>);
+    fsProductService = TestBed.inject(
+      FSProductService as Type<FSProductService>
+    );
   }));
 
   beforeEach(() => {

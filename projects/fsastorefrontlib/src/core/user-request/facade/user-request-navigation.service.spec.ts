@@ -52,7 +52,7 @@ describe('UserRequestNavigationServiceTest', () => {
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
       ],
     });
-    service = TestBed.get(
+    service = TestBed.inject(
       UserRequestNavigationService as Type<UserRequestNavigationService>
     );
   });

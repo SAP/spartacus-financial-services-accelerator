@@ -85,7 +85,7 @@ describe('ProductAssignmentsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductAssignmentsComponent);
     component = fixture.componentInstance;
-    mockedProductAssignmentService = TestBed.get(
+    mockedProductAssignmentService = TestBed.inject(
       ProductAssignmentService as Type<ProductAssignmentService>
     );
     fixture.detectChanges();

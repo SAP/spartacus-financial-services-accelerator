@@ -101,14 +101,13 @@ class MockCartService {
 describe('QuoteServiceTest', () => {
   let service: QuoteService;
   let store: Store<StateWithMyAccount>;
-  let cartService: MockCartService;
+  let cartService: FSCartService;
   let formDataService: MockFormDataService;
   let authService: MockAuthService;
   let mockFormDataStorageService: FormDataStorageService;
 
   beforeEach(() => {
     authService = new MockAuthService();
-    cartService = new MockCartService();
     formDataService = new MockFormDataService();
 
     TestBed.configureTestingModule({
@@ -129,10 +128,10 @@ describe('QuoteServiceTest', () => {
       ],
     });
 
-    service = TestBed.get(QuoteService as Type<QuoteService>);
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
-    store = TestBed.get(Store as Type<Store<StateWithMyAccount>>);
-    mockFormDataStorageService = TestBed.get(
+    service = TestBed.inject(QuoteService as Type<QuoteService>);
+    cartService = TestBed.inject(FSCartService as Type<FSCartService>);
+    store = TestBed.inject(Store as Type<Store<StateWithMyAccount>>);
+    mockFormDataStorageService = TestBed.inject(
       FormDataStorageService as Type<FormDataStorageService>
     );
 

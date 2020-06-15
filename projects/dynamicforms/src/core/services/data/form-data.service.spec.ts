@@ -42,8 +42,8 @@ describe('FormDataService', () => {
       providers: [FormDataService, reducerProvider],
     });
 
-    service = TestBed.get(FormDataService);
-    store = TestBed.get(Store as Type<Store<StateWithForm>>);
+    service = TestBed.inject(FormDataService);
+    store = TestBed.inject(Store as Type<Store<StateWithForm>>);
     spyOn(store, 'dispatch').and.callThrough();
   });
 

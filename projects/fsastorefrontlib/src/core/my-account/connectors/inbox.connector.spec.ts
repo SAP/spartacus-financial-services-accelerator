@@ -29,8 +29,8 @@ describe('InboxConnector', () => {
       providers: [{ provide: InboxAdapter, useClass: MockInboxAdapter }],
     });
 
-    inboxConnector = TestBed.get(InboxConnector as Type<InboxConnector>);
-    inboxAdapter = TestBed.get(InboxAdapter as Type<InboxAdapter>);
+    inboxConnector = TestBed.inject(InboxConnector as Type<InboxConnector>);
+    inboxAdapter = TestBed.inject(InboxAdapter as Type<InboxAdapter>);
   });
 
   it('should be created', () => {

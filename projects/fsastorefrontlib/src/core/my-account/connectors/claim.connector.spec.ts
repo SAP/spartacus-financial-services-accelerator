@@ -42,8 +42,8 @@ describe('ClaimConnector', () => {
       providers: [{ provide: ClaimAdapter, useClass: MockClaimAdapter }],
     });
 
-    claimConnector = TestBed.get(ClaimConnector as Type<ClaimConnector>);
-    claimAdapter = TestBed.get(ClaimAdapter as Type<ClaimAdapter>);
+    claimConnector = TestBed.inject(ClaimConnector as Type<ClaimConnector>);
+    claimAdapter = TestBed.inject(ClaimAdapter as Type<ClaimAdapter>);
   });
 
   it('should be created', () => {

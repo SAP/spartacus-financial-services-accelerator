@@ -47,11 +47,13 @@ describe(`ChangeRequestSubmissionGuard`, () => {
       imports: [RouterTestingModule],
     });
 
-    guard = TestBed.get(
+    guard = TestBed.inject(
       ChangeRequestSubmissionGuard as Type<ChangeRequestSubmissionGuard>
     );
-    service = TestBed.get(ChangeRequestService as Type<ChangeRequestService>);
-    routing = TestBed.get(RoutingService as Type<RoutingService>);
+    service = TestBed.inject(
+      ChangeRequestService as Type<ChangeRequestService>
+    );
+    routing = TestBed.inject(RoutingService as Type<RoutingService>);
 
     spyOn(routing, 'go').and.stub();
   });

@@ -153,21 +153,21 @@ describe('FSCheckoutProgressComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    routingService = TestBed.inject(RoutingService as Type<RoutingService>);
     spyOn(routingService, 'go').and.callThrough();
     spyOn(routingService, 'getRouterState').and.callThrough();
 
-    categoryService = TestBed.get(CategoryService as Type<CategoryService>);
+    categoryService = TestBed.inject(CategoryService as Type<CategoryService>);
     spyOn(categoryService, 'setActiveCategory').and.callThrough();
     spyOn(categoryService, 'getActiveCategory').and.callThrough();
 
-    routingConfigService = TestBed.get(
+    routingConfigService = TestBed.inject(
       RoutingConfigService as Type<RoutingConfigService>
     );
     spyOn(routingConfigService, 'getRouteConfig').and.callThrough();
 
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
-    currentProductService = TestBed.get(
+    cartService = TestBed.inject(FSCartService as Type<FSCartService>);
+    currentProductService = TestBed.inject(
       CurrentProductService as Type<CurrentProductService>
     );
 

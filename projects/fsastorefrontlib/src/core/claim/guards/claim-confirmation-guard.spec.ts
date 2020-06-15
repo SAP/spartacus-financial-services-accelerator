@@ -50,9 +50,11 @@ describe(`ClaimConfirmationGuard`, () => {
       imports: [RouterTestingModule],
     });
 
-    guard = TestBed.get(ClaimConfirmationGuard as Type<ClaimConfirmationGuard>);
-    service = TestBed.get(UserRequestService as Type<UserRequestService>);
-    routing = TestBed.get(RoutingService as Type<RoutingService>);
+    guard = TestBed.inject(
+      ClaimConfirmationGuard as Type<ClaimConfirmationGuard>
+    );
+    service = TestBed.inject(UserRequestService as Type<UserRequestService>);
+    routing = TestBed.inject(RoutingService as Type<RoutingService>);
 
     spyOn(routing, 'go').and.stub();
   });

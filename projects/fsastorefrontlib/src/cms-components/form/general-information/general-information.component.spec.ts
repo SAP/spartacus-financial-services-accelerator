@@ -88,7 +88,9 @@ describe('GeneralInformationComponent', () => {
       ],
     }).compileComponents();
 
-    mockFormDataService = TestBed.get(FormDataService as Type<FormDataService>);
+    mockFormDataService = TestBed.inject(
+      FormDataService as Type<FormDataService>
+    );
   }));
 
   beforeEach(() => {

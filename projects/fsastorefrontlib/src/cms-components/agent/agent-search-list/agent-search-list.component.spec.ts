@@ -92,8 +92,8 @@ describe('AgentSearchListComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AgentSearchListComponent);
     component = fixture.componentInstance;
-    activatedRoute = TestBed.get(ActivatedRoute as Type<ActivatedRoute>);
-    mockSearchService = TestBed.get(
+    activatedRoute = TestBed.inject(ActivatedRoute as Type<ActivatedRoute>);
+    mockSearchService = TestBed.inject(
       AgentSearchService as Type<AgentSearchService>
     );
 

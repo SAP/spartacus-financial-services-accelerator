@@ -62,8 +62,10 @@ describe('ChangeRequestServiceTest', () => {
         { provide: AuthService, useValue: authService },
       ],
     });
-    service = TestBed.get(ChangeRequestService as Type<ChangeRequestService>);
-    store = TestBed.get(Store as Type<Store<StateWithChangeRequest>>);
+    service = TestBed.inject(
+      ChangeRequestService as Type<ChangeRequestService>
+    );
+    store = TestBed.inject(Store as Type<Store<StateWithChangeRequest>>);
 
     spyOn(store, 'dispatch').and.callThrough();
   });

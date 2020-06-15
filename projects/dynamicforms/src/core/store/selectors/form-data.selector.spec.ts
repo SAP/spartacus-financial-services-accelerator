@@ -24,7 +24,7 @@ describe('Form Data Selectors', () => {
       ],
     });
 
-    store = TestBed.get(Store as Type<Store<StateWithForm>>);
+    store = TestBed.inject(Store as Type<Store<StateWithForm>>);
     spyOn(store, 'dispatch').and.callThrough();
   });
 

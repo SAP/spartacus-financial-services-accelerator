@@ -42,9 +42,9 @@ describe('OccCsTicketAdapter', () => {
     });
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
 
-    adapter = TestBed.get(OccCsTicketAdapter);
-    httpMock = TestBed.get(HttpTestingController);
-    occEndpointService = TestBed.get(OccEndpointsService);
+    adapter = TestBed.inject(OccCsTicketAdapter);
+    httpMock = TestBed.inject(HttpTestingController);
+    occEndpointService = TestBed.inject(OccEndpointsService);
     spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 

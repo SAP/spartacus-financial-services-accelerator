@@ -55,11 +55,11 @@ describe('CategoryStepGuard', () => {
       ],
     }).compileComponents();
 
-    guard = TestBed.get(CategoryStepGuard as Type<CategoryStepGuard>);
-    routingConfigService = TestBed.get(
+    guard = TestBed.inject(CategoryStepGuard as Type<CategoryStepGuard>);
+    routingConfigService = TestBed.inject(
       RoutingConfigService as Type<RoutingConfigService>
     );
-    checkoutConfigService = TestBed.get(
+    checkoutConfigService = TestBed.inject(
       FSCheckoutConfigService as Type<FSCheckoutConfigService>
     );
   });

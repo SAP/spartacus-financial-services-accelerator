@@ -72,21 +72,23 @@ describe('FinalReviewComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    checkoutService = TestBed.get(FSCheckoutService as Type<FSCheckoutService>);
+    checkoutService = TestBed.inject(
+      FSCheckoutService as Type<FSCheckoutService>
+    );
     spyOn(checkoutService, 'mockDeliveryMode').and.callThrough();
     spyOn(checkoutService, 'placeOrder').and.callThrough();
 
-    checkoutConfigService = TestBed.get(
+    checkoutConfigService = TestBed.inject(
       FSCheckoutConfigService as Type<FSCheckoutConfigService>
     );
     spyOn(checkoutConfigService, 'getNextCheckoutStepUrl').and.callThrough();
 
-    checkoutPaymentService = TestBed.get(
+    checkoutPaymentService = TestBed.inject(
       CheckoutPaymentService as Type<CheckoutPaymentService>
     );
     spyOn(checkoutPaymentService, 'getPaymentDetails').and.callThrough();
 
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    routingService = TestBed.inject(RoutingService as Type<RoutingService>);
     spyOn(routingService, 'go').and.callThrough();
 
     spyOn(component.goToQuoteReview, 'emit').and.stub();

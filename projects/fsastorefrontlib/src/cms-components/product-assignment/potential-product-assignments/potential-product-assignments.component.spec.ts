@@ -91,21 +91,21 @@ describe('PotentialProductAssignmentsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PotentialProductAssignmentsComponent);
     component = fixture.componentInstance;
-    mockedProductAssignmentService = TestBed.get(
+    mockedProductAssignmentService = TestBed.inject(
       ProductAssignmentService as Type<ProductAssignmentService>
     );
     spyOn(
       mockedProductAssignmentService,
       'createProductAssignment'
     ).and.callThrough();
-    mockedProductAssignmentService = TestBed.get(
+    mockedProductAssignmentService = TestBed.inject(
       ProductAssignmentService as Type<ProductAssignmentService>
     );
     spyOn(
       mockedProductAssignmentService,
       'removeProductAssignment'
     ).and.callThrough();
-    mockedProductAssignmentService = TestBed.get(
+    mockedProductAssignmentService = TestBed.inject(
       ProductAssignmentService as Type<ProductAssignmentService>
     );
     fixture.detectChanges();

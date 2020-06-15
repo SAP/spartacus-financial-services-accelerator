@@ -37,8 +37,8 @@ describe('PolicyConnector', () => {
       providers: [{ provide: PolicyAdapter, useClass: MockPolicyAdapter }],
     });
 
-    policyConnector = TestBed.get(PolicyConnector as Type<PolicyConnector>);
-    policyAdapter = TestBed.get(PolicyAdapter as Type<PolicyAdapter>);
+    policyConnector = TestBed.inject(PolicyConnector as Type<PolicyConnector>);
+    policyAdapter = TestBed.inject(PolicyAdapter as Type<PolicyAdapter>);
   });
 
   it('should be created', () => {

@@ -95,9 +95,9 @@ describe('PoliciesComponent', () => {
     fixture = TestBed.createComponent(PoliciesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    policyService = TestBed.get(PolicyService as Type<PolicyService>);
-    claimService = TestBed.get(ClaimService as Type<ClaimService>);
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    policyService = TestBed.inject(PolicyService as Type<PolicyService>);
+    claimService = TestBed.inject(ClaimService as Type<ClaimService>);
+    routingService = TestBed.inject(RoutingService as Type<RoutingService>);
   });
   it('should create', () => {
     expect(component).toBeTruthy();

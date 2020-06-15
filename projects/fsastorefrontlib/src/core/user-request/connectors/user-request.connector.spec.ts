@@ -34,10 +34,10 @@ describe('UserRequestConnector', () => {
       ],
     });
 
-    userRequestConnector = TestBed.get(
+    userRequestConnector = TestBed.inject(
       UserRequestConnector as Type<UserRequestConnector>
     );
-    userRequestAdapter = TestBed.get(
+    userRequestAdapter = TestBed.inject(
       UserRequestAdapter as Type<UserRequestAdapter>
     );
   });

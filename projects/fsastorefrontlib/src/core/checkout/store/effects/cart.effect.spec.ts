@@ -4,7 +4,11 @@ import { TestBed } from '@angular/core/testing';
 import { FormDataStorageService } from '@fsa/dynamicforms';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
-import { CartActions } from '@spartacus/core';
+import {
+  CartActions,
+  OCC_USER_ID_CURRENT,
+  OCC_USER_ID_ANONYMOUS,
+} from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of } from 'rxjs';
 import { CartConnector } from '../../../cart';
@@ -19,7 +23,7 @@ const bundleTemplateId = 'bundleTemplate1';
 const pricingData = {};
 
 const categoryCode = 'category1';
-let formDataId = 'formDataId';
+const formDataId = 'formDataId';
 const formId = 'formId';
 
 const insuranceQuote = {
@@ -90,36 +94,36 @@ describe('Cart Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    mockFormDataStorageService = TestBed.get(
+    mockFormDataStorageService = TestBed.inject(
       FormDataStorageService as Type<FormDataStorageService>
     );
-    effects = TestBed.get(
+    effects = TestBed.inject(
       fromEffects.CartEffects as Type<fromEffects.CartEffects>
     );
   });
 
-  // describe('addOptionalProduct$', () => {
-  //   it('should add optional product to the cart with form data', () => {
-  //     const action = new fromActions.AddOptionalProduct({
-  //       userId: OCC_USER_ID_CURRENT,
-  //       cartId: cartId,
-  //       productCode: productCode,
-  //       quantity: quantity,
-  //       entryNumber: entryNumber,
-  //     });
+  describe('addOptionalProduct$', () => {
+    it('should add optional product to the cart with form data', () => {
+      const action = new fromActions.AddOptionalProduct({
+        userId: OCC_USER_ID_CURRENT,
+        cartId: cartId,
+        productCode: productCode,
+        quantity: quantity,
+        entryNumber: entryNumber,
+      });
 
-  //     const completion = new CartActions.CartAddEntrySuccess({
-  //       userId: OCC_USER_ID_ANONYMOUS,
-  //       cartId: cartId,
-  //       productCode,
-  //       ...mockCartModification,
-  //     });
+      const completion = new CartActions.CartAddEntrySuccess({
+        userId: OCC_USER_ID_ANONYMOUS,
+        cartId: cartId,
+        productCode,
+        ...mockCartModification,
+      });
 
-  //     actions$ = hot('-a', { a: action });
-  //     const expected = cold('-b', { b: completion });
-  //     expect(effects.addOptionalProduct$).toBeObservable(expected);
-  //   });
-  // });
+      actions$ = hot('-a', { a: action });
+      const expected = cold('-b', { b: completion });
+      expect(effects.addOptionalProduct$).toBeObservable(expected);
+    });
+  });
 
   describe('startBundle$', () => {
     //   it('should be able to start bundle with form data', () => {
@@ -132,7 +136,6 @@ describe('Cart Effects', () => {
     //       quantity: quantity,
     //       pricingData: pricingData,
     //     });
-
     //     const loadCartCompletion = new CartActions.LoadCart({
     //       userId: OCC_USER_ID_ANONYMOUS,
     //       cartId: cartId,
@@ -140,20 +143,17 @@ describe('Cart Effects', () => {
     //         active: true,
     //       },
     //     });
-
     //     const updateQuoteCompletion = new fromQuoteActions.UpdateQuote({
     //       userId: OCC_USER_ID_ANONYMOUS,
     //       cartId: cartId,
     //       quoteContent: insuranceQuote,
     //     });
-
     //     const addEntrycompletion = new CartActions.CartAddEntrySuccess({
     //       userId: OCC_USER_ID_ANONYMOUS,
     //       cartId: cartId,
     //       productCode,
     //       ...mockCartModification,
     //     });
-
     //     actions$ = hot('-a', { a: action });
     //     const expected = cold('-(bcd)', {
     //       b: loadCartCompletion,
@@ -162,10 +162,8 @@ describe('Cart Effects', () => {
     //     });
     //     expect(effects.startBundle$).toBeObservable(expected);
     //   });
-
     // it('should be able to start bundle without form data', () => {
     //   formDataId = undefined;
-
     //   const action = new fromActions.StartBundle({
     //     userId: OCC_USER_ID_ANONYMOUS,
     //     cartId: cartId,
@@ -174,7 +172,6 @@ describe('Cart Effects', () => {
     //     quantity: quantity,
     //     pricingData: pricingData,
     //   });
-
     //   const loadCartCompletion = new CartActions.LoadCart({
     //     userId: OCC_USER_ID_ANONYMOUS,
     //     cartId: cartId,
@@ -182,14 +179,12 @@ describe('Cart Effects', () => {
     //       active: true,
     //     },
     //   });
-
     //   const addEntrycompletion = new CartActions.CartAddEntrySuccess({
     //     userId: OCC_USER_ID_ANONYMOUS,
     //     cartId: cartId,
     //     productCode,
     //     ...mockCartModification,
     //   });
-
     //   actions$ = hot('-a', { a: action });
     //   const expected = cold('-(bc)', {
     //     b: loadCartCompletion,
@@ -197,7 +192,6 @@ describe('Cart Effects', () => {
     //   });
     //   expect(effects.startBundle$).toBeObservable(expected);
     // });
-
     // it('should be able to start bundle for current user without form data', () => {
     //   formDataId = undefined;
     //   const action = new fromActions.StartBundle({
@@ -216,14 +210,12 @@ describe('Cart Effects', () => {
     //       active: true,
     //     },
     //   });
-
     //   const addEntrycompletion = new CartActions.CartAddEntrySuccess({
     //     userId: OCC_USER_ID_CURRENT,
     //     cartId: cartId,
     //     productCode,
     //     ...mockCartModification,
     //   });
-
     //   actions$ = hot('-a', { a: action });
     //   const expected = cold('-(bc)', {
     //     b: loadCartCompletion,
@@ -231,18 +223,16 @@ describe('Cart Effects', () => {
     //   });
     //   expect(effects.startBundle$).toBeObservable(expected);
     // });
-
-    it('should be able to process cart increment', () => {
-      const action = new fromActions.AddOptionalProduct({
-        cartId: cartId,
-      });
-      const completion = new CartActions.CartProcessesIncrement(cartId);
-
-      actions$ = hot('-a', { a: action });
-      const expected = cold('-(b)', {
-        b: completion,
-      });
-      expect(effects.processesIncrement$).toBeObservable(expected);
-    });
+    // it('should be able to process cart increment', () => {
+    //   const action = new fromActions.AddOptionalProduct({
+    //     cartId: cartId,
+    //   });
+    //   const completion = new CartActions.CartProcessesIncrement(cartId);
+    //   actions$ = hot('-a', { a: action });
+    //   const expected = cold('-(b)', {
+    //     b: completion,
+    //   });
+    //   expect(effects.processesIncrement$).toBeObservable(expected);
+    // });
   });
 });

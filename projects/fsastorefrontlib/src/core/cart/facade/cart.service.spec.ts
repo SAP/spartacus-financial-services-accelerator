@@ -81,9 +81,11 @@ describe('FSCartServiceTest', () => {
         provideMockStore({ initialState }),
       ],
     });
-    service = TestBed.get(FSCartService as Type<FSCartService>);
-    store = TestBed.get(Store as Type<Store<StateWithMultiCart>>);
-    multiCartService = TestBed.get(MultiCartService as Type<MultiCartService>);
+    service = TestBed.inject(FSCartService as Type<FSCartService>);
+    store = TestBed.inject(Store as Type<Store<StateWithMultiCart>>);
+    multiCartService = TestBed.inject(
+      MultiCartService as Type<MultiCartService>
+    );
 
     spyOn(multiCartService, 'loadCart').and.callThrough();
     spyOn(store, 'dispatch').and.callThrough();

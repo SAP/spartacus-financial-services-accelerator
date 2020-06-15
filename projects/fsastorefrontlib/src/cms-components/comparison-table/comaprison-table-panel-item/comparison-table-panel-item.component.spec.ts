@@ -168,12 +168,12 @@ describe('ComparisonTablePanelItemComponent', () => {
       ],
       declarations: [ComparisonTablePanelItemComponent, MockUrlPipe],
     }).compileComponents();
-    mockCartService = TestBed.get(FSCartService as Type<FSCartService>);
-    mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
-    mockCheckoutConfigService = TestBed.get(
+    mockCartService = TestBed.inject(FSCartService as Type<FSCartService>);
+    mockRoutingService = TestBed.inject(RoutingService as Type<RoutingService>);
+    mockCheckoutConfigService = TestBed.inject(
       FSCheckoutConfigService as Type<FSCheckoutConfigService>
     );
-    mockProductService = TestBed.get(
+    mockProductService = TestBed.inject(
       FSProductService as Type<FSProductService>
     );
   }));

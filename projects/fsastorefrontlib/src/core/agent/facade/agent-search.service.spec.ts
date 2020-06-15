@@ -87,8 +87,8 @@ describe('AgentSearchService', () => {
         },
       ],
     });
-    service = TestBed.get(AgentSearchService as Type<AgentSearchService>);
-    winRef = TestBed.get(WindowRef as Type<WindowRef>);
+    service = TestBed.inject(AgentSearchService as Type<AgentSearchService>);
+    winRef = TestBed.inject(WindowRef as Type<WindowRef>);
     service.agents = mockAgentsBS;
   }));
 

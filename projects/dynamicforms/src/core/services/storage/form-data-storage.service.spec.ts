@@ -33,7 +33,7 @@ describe('FormDataStorageService', () => {
       DYNAMIC_FORMS_LOCAL_STORAGE_KEY,
       JSON.stringify([mockFormDataStorageObject])
     );
-    service = TestBed.get(FormDataStorageService);
+    service = TestBed.inject(FormDataStorageService);
   });
 
   it('should be created', () => {

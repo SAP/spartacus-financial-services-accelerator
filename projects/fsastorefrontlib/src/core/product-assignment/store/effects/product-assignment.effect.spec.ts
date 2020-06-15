@@ -95,7 +95,7 @@ describe('Product Assignment Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(
+    effects = TestBed.inject(
       fromEffects.ProductAssignmentEffects as Type<
         fromEffects.ProductAssignmentEffects
       >

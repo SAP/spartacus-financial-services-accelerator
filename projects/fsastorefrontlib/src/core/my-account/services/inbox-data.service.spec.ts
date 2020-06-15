@@ -43,8 +43,8 @@ describe('InboxDataService', () => {
         },
       ],
     });
-    service = TestBed.get(InboxDataService as Type<InboxDataService>);
-    store = TestBed.get(Store as Type<Store<StateWithMyAccount>>);
+    service = TestBed.inject(InboxDataService as Type<InboxDataService>);
+    store = TestBed.inject(Store as Type<Store<StateWithMyAccount>>);
   });
 
   describe('userId', () => {

@@ -53,9 +53,9 @@ describe('UserRequestServiceTest', () => {
         },
       ],
     });
-    service = TestBed.get(UserRequestService as Type<UserRequestService>);
-    store = TestBed.get(Store as Type<Store<FSUserRequestState>>);
-    mockFormDataStorageService = TestBed.get(
+    service = TestBed.inject(UserRequestService as Type<UserRequestService>);
+    store = TestBed.inject(Store as Type<Store<FSUserRequestState>>);
+    mockFormDataStorageService = TestBed.inject(
       FormDataStorageService as Type<FormDataStorageService>
     );
 

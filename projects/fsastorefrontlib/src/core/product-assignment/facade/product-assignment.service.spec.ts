@@ -87,10 +87,10 @@ describe('ProductAssignmentServiceTest', () => {
       ],
     });
 
-    service = TestBed.get(
+    service = TestBed.inject(
       ProductAssignmentService as Type<ProductAssignmentService>
     );
-    store = TestBed.get(Store as Type<Store<StateWithProductAssignment>>);
+    store = TestBed.inject(Store as Type<Store<StateWithProductAssignment>>);
     service.user = OCC_CART_ID_CURRENT;
     spyOn(store, 'dispatch').and.callThrough();
   });

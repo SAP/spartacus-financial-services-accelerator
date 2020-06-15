@@ -67,7 +67,7 @@ describe('SelectComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SelectComponent);
-    occValueListService = TestBed.get(
+    occValueListService = TestBed.inject(
       OccValueListService as Type<OccValueListService>
     );
     component = fixture.componentInstance;

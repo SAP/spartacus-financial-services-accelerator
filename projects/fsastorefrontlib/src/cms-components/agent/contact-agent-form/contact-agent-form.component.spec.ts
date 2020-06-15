@@ -118,15 +118,15 @@ describe('ContactAgentFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ContactAgentFormComponent);
     component = fixture.componentInstance;
-    globalMessageService = TestBed.get(GlobalMessageService);
-    mockedUserService = TestBed.get(UserService as Type<UserService>);
-    mockSearchService = TestBed.get(
+    globalMessageService = TestBed.inject(GlobalMessageService);
+    mockedUserService = TestBed.inject(UserService as Type<UserService>);
+    mockSearchService = TestBed.inject(
       AgentSearchService as Type<AgentSearchService>
     );
-    mockedCsTicketService = TestBed.get(
+    mockedCsTicketService = TestBed.inject(
       CsTicketService as Type<CsTicketService>
     );
-    mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
+    mockRoutingService = TestBed.inject(RoutingService as Type<RoutingService>);
   });
 
   it('should create', () => {

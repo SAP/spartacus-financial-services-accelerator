@@ -11,7 +11,7 @@ describe('ParseDatePipe', () => {
     TestBed.configureTestingModule({
       providers: [ParseDatePipe],
     });
-    pipe = TestBed.get(ParseDatePipe);
+    pipe = TestBed.inject(ParseDatePipe);
   });
 
   describe('transform', () => {

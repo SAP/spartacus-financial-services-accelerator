@@ -67,10 +67,10 @@ describe('MiniCartComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MiniCartComponent);
-    translationService = TestBed.get(
+    translationService = TestBed.inject(
       FSTranslationService as Type<FSTranslationService>
     );
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
+    cartService = TestBed.inject(FSCartService as Type<FSCartService>);
     miniCartComponent = fixture.componentInstance;
   });
 

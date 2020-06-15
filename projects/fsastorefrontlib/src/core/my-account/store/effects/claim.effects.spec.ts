@@ -79,7 +79,7 @@ describe('Claim Effects', () => {
   let effects: fromEffects.ClaimEffects;
   let mockClaimConnector: MockClaimConnector;
   let mockClaimDataService: MockClaimDataService;
-  let globalMessageService: MockGlobalMessageService;
+  let globalMessageService: GlobalMessageService;
 
   beforeEach(() => {
     mockClaimConnector = new MockClaimConnector();
@@ -101,10 +101,10 @@ describe('Claim Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(
+    effects = TestBed.inject(
       fromEffects.ClaimEffects as Type<fromEffects.ClaimEffects>
     );
-    globalMessageService = TestBed.get(
+    globalMessageService = TestBed.inject(
       GlobalMessageService as Type<GlobalMessageService>
     );
   });

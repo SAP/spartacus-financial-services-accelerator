@@ -112,14 +112,14 @@ describe('ChangeCarDetailsFormComponent', () => {
       declarations: [ChangeCarDetailsFormComponent],
     }).compileComponents();
 
-    mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
-    mockChangeRequestService = TestBed.get(
+    mockRoutingService = TestBed.inject(RoutingService as Type<RoutingService>);
+    mockChangeRequestService = TestBed.inject(
       ChangeRequestService as Type<ChangeRequestService>
     );
-    globalMessageService = TestBed.get(
+    globalMessageService = TestBed.inject(
       GlobalMessageService as Type<GlobalMessageService>
     );
-    mockUserRequestNavigationService = TestBed.get(
+    mockUserRequestNavigationService = TestBed.inject(
       UserRequestNavigationService as Type<UserRequestNavigationService>
     );
   }));

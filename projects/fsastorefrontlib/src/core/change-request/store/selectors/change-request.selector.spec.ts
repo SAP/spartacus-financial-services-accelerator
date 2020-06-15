@@ -17,7 +17,7 @@ describe('Change Request Selectors', () => {
       ],
     });
 
-    store = TestBed.get(Store as Type<Store<StateWithChangeRequest>>);
+    store = TestBed.inject(Store as Type<Store<StateWithChangeRequest>>);
     spyOn(store, 'dispatch').and.callThrough();
   });
 

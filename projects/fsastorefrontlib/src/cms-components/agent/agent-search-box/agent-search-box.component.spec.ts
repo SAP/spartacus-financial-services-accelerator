@@ -41,7 +41,7 @@ describe('AgentSearchBoxComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AgentSearchBoxComponent);
     component = fixture.componentInstance;
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    routingService = TestBed.inject(RoutingService as Type<RoutingService>);
 
     fixture.detectChanges();
   });

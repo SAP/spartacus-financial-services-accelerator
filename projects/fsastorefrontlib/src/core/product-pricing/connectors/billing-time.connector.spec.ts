@@ -24,10 +24,10 @@ describe('BillingTimeConnector', () => {
       ],
     });
 
-    billingTimeConnector = TestBed.get(
+    billingTimeConnector = TestBed.inject(
       BillingTimeConnector as Type<BillingTimeConnector>
     );
-    billingTimeAdapter = TestBed.get(
+    billingTimeAdapter = TestBed.inject(
       BillingTimeAdapter as Type<BillingTimeAdapter>
     );
   });

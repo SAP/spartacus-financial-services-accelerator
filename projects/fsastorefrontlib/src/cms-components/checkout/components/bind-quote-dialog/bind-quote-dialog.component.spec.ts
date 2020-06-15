@@ -73,9 +73,9 @@ describe('BindQuoteDialogComponent', () => {
     fixture = TestBed.createComponent(BindQuoteDialogComponent);
     component = fixture.componentInstance;
     el = fixture.debugElement;
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
-    quoteService = TestBed.get(QuoteService as Type<QuoteService>);
-    modalService = TestBed.get(ModalService as Type<ModalService>);
+    cartService = TestBed.inject(FSCartService as Type<FSCartService>);
+    quoteService = TestBed.inject(QuoteService as Type<QuoteService>);
+    modalService = TestBed.inject(ModalService as Type<ModalService>);
 
     spyOn(cartService, 'getActive').and.callThrough();
     spyOn(quoteService, 'bindQuote').and.callThrough();

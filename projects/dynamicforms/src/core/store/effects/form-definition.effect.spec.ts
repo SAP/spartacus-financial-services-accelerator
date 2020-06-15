@@ -63,7 +63,7 @@ describe('Form Definition Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(
+    effects = TestBed.inject(
       fromEffects.FormDefinitionEffects as Type<
         fromEffects.FormDefinitionEffects
       >

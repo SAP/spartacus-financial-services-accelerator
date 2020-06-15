@@ -47,10 +47,10 @@ describe('ChangeRequestConnector', () => {
       ],
     });
 
-    changeRequestConnector = TestBed.get(
+    changeRequestConnector = TestBed.inject(
       ChangeRequestConnector as Type<ChangeRequestConnector>
     );
-    changeRequestAdapter = TestBed.get(
+    changeRequestAdapter = TestBed.inject(
       ChangeRequestAdapter as Type<ChangeRequestAdapter>
     );
   });

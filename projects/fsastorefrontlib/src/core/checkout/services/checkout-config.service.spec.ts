@@ -40,8 +40,8 @@ describe('FSCheckoutConfigService', () => {
         { provide: RoutingConfigService, useClass: MockRoutingConfigService },
       ],
     });
-    activatedRoute = TestBed.get(ActivatedRoute as Type<ActivatedRoute>);
-    routingConfigService = TestBed.get(
+    activatedRoute = TestBed.inject(ActivatedRoute as Type<ActivatedRoute>);
+    routingConfigService = TestBed.inject(
       RoutingConfigService as Type<RoutingConfigService>
     );
 

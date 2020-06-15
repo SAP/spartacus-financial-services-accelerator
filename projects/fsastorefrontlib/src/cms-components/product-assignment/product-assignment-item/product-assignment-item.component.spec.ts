@@ -54,7 +54,7 @@ describe('ProductAssignmentItemComponent', () => {
       mockedProductAssignmentService,
       'changeActiveStatus'
     ).and.callThrough();
-    mockedProductAssignmentService = TestBed.get(
+    mockedProductAssignmentService = TestBed.inject(
       ProductAssignmentService as Type<ProductAssignmentService>
     );
     fixture.detectChanges();

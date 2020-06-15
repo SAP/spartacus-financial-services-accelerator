@@ -43,8 +43,8 @@ describe('CartConnector', () => {
       providers: [{ provide: CartAdapter, useClass: MockCartAdapter }],
     });
 
-    cartConnector = TestBed.get(CartConnector as Type<CartConnector>);
-    cartAdapter = TestBed.get(CartAdapter as Type<CartAdapter>);
+    cartConnector = TestBed.inject(CartConnector as Type<CartConnector>);
+    cartAdapter = TestBed.inject(CartAdapter as Type<CartAdapter>);
   });
 
   it('should be created', () => {
