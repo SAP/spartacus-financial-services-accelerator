@@ -12,7 +12,7 @@ export function checkAddOptionsPageContent(addOptions: AddOptions) {
           .within(() => {
             cy.get('h6').should('have.text', item.name);
             if (!item.available) {
-              cy.get('span').should('contain', 'Not available');
+              cy.get('.col-md-3').should('contain', ' Not available ');
             }
             if (item.shouldAdd) {
               cy.get('.secondary-button').click();
