@@ -18,11 +18,10 @@ import {
 
 context('FNOL for sample data user', () => {
   before(() => {
-    cy.visit('/login');
+    cy.visit('/');
   });
 
   it('Should check anonymous user cannot access claims', () => {
-    cy.visit('/');
     cy.get('.Section4 cx-banner')
       .eq(1)
       .click();
@@ -53,6 +52,15 @@ context('FNOL for sample data user', () => {
     clickContinueButton();
   });
 
+  it('Should populate personal details page', () => {
+    checkout.waitForPersonalDetailsPage();
+    checkout.checkPersonalDetailsPageInsurance();
+    auto.populatePersonalDetails();
+    auto.populateVehicleDetails();
+    auto.populateMainDriverData();
+    checkout.clickContinueButton();
+  });
+
   it('Should add new payment and bind quote', () => {
     fnol.waitForQuoteReviewPage();
     addPaymentMethod(registrationUser.email);
@@ -74,7 +82,7 @@ context('FNOL for sample data user', () => {
 
   it('Should update policy details', () => {
     checkMyPoliciesPage();
-    updatePolicyEffectiveAndStartDate();
+    //updatePolicyEffectiveAndStartDate();
   });
 
   it('Should check and populate Incident Information page', () => {

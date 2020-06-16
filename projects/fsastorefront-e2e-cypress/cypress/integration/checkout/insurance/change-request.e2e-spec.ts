@@ -38,7 +38,6 @@ context('Change Request for new user', () => {
     checkout.clickContinueButton();
   });
 
-
   it('Should populate personal details page', () => {
     checkout.waitForPersonalDetailsPage();
     checkout.checkPersonalDetailsPageInsurance();

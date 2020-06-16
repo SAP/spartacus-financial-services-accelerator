@@ -152,7 +152,4 @@ export function populateAdditionalData() {
   cy.get('[name=additionalDriver1FirstName]').type('Phin');
   cy.get('[name=additionalDriver1LastName]').type('Jones');
   cy.get('[name=additionalDriver1LicenceNumber]').type('BG-234-yy');
-  cy.get('[name=additionalDriver1FirstName]').type('Phin');
-
-
 }
