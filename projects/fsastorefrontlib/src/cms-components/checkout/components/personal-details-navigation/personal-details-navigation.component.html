@@ -1,3 +1,24 @@
-<button class="primary-button btn-block" (click)="navigateNext()">
-  {{ 'common.continue' | cxTranslate }}
-</button>
+<div class="row mt-2">
+  <div class="col-md-6 col-sm-6 col-xs-12 mb-3 mb-md-0">
+    <ng-container *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
+      ><button
+        class="action-button btn-block"
+        (click)="navigateBack(previousCheckoutStep)"
+      >
+        {{ 'common.back' | cxTranslate }}
+      </button></ng-container
+    >
+  </div>
+  <div class="col-md-6 col-sm-6 col-xs-12">
+    <ng-container *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
+      ><button
+        class="primary-button btn-block"
+        type="button"
+        data-checkout-url=""
+        (click)="navigateNext(nextCheckoutStep)"
+      >
+        {{ 'common.continue' | cxTranslate }}
+      </button></ng-container
+    >
+  </div>
+</div>

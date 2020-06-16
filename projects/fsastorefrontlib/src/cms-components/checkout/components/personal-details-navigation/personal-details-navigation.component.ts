@@ -2,12 +2,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Cart, RoutingService } from '@spartacus/core';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FSOrderEntry } from '../../../../occ/occ-models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
+import { ActiveCategoryStep } from '../../../../occ/occ-models';
 
 @Component({
   selector: 'cx-fs-personal-details-navigation',
@@ -25,14 +26,16 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription();
   checkoutStepUrlNext: string;
+  previousCheckoutStep$: Observable<ActiveCategoryStep>;
+  nextCheckoutStep$: Observable<ActiveCategoryStep>;
 
   ngOnInit() {
-    this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-      this.activatedRoute
-    );
+    this.checkoutConfigService.filterSteps(this.activatedRoute);
+    this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
+    this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
   }
 
-  navigateNext() {
+  navigateNext(nextStep) {
     this.subscription
       .add(
         this.cartService
@@ -66,12 +69,22 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
           .pipe(
             map(formData => {
               if (formData && formData.content) {
-                this.routingService.go(this.checkoutStepUrlNext);
+                this.routingService.go({
+                  cxRoute: nextStep.step,
+                  params: { code: nextStep.activeCategory },
+                });
               }
             })
           )
           .subscribe()
       );
+  }
+
+  navigateBack(previousStep) {
+    this.routingService.go({
+      cxRoute: previousStep.step,
+      params: { code: previousStep.activeCategory },
+    });
   }
 
   ngOnDestroy() {

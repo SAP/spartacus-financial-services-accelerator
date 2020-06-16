@@ -21,19 +21,28 @@
   </label>
   <div class="row mt-5">
     <div class="col-6">
-      <button class="action-button btn-block" type="button" (click)="back()">
-        {{ 'common.back' | cxTranslate }}
-      </button>
+      <ng-container
+        *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
+        ><button
+          class="action-button btn-block"
+          (click)="navigateBack(previousCheckoutStep)"
+        >
+          {{ 'common.back' | cxTranslate }}
+        </button></ng-container
+      >
     </div>
     <div class="col-6">
-      <button
-        class="primary-button btn-block"
-        type="button"
-        [disabled]="!form.valid || !form.dirty"
-        (click)="continue()"
+      <ng-container *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
+        ><button
+          [disabled]="!form.valid || !form.dirty"
+          class="primary-button btn-block"
+          type="button"
+          data-checkout-url=""
+          (click)="navigateNext(nextCheckoutStep)"
+        >
+          {{ 'common.continue' | cxTranslate }}
+        </button></ng-container
       >
-        {{ 'common.continue' | cxTranslate }}
-      </button>
     </div>
   </div>
 </form>

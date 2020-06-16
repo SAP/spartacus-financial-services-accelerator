@@ -4,7 +4,11 @@ import {
   CmsActivatedRouteSnapshot,
   RoutingConfigService,
 } from '@spartacus/core';
-import { CheckoutConfig, CheckoutConfigService } from '@spartacus/storefront';
+import {
+  CheckoutConfig,
+  CheckoutConfigService,
+  CheckoutStepType,
+} from '@spartacus/storefront';
 import { CategoryService } from './category/category.service';
 import { BehaviorSubject } from 'rxjs';
 import { FSCheckoutStep, ActiveCategoryStep } from '../../../occ';
@@ -21,6 +25,7 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
     super(fsCheckoutConfig, fsRoutingConfigService);
   }
 
+  steps: FSCheckoutStep[] = this.fsCheckoutConfig.checkout.steps;
   previousCheckoutStepSource = new BehaviorSubject<ActiveCategoryStep>(null);
   previousStep = this.previousCheckoutStepSource.asObservable();
   nextCheckoutStepSource = new BehaviorSubject<ActiveCategoryStep>(null);
@@ -31,6 +36,42 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   }
   setNextStep(activeCategory: string, step: string) {
     this.nextCheckoutStepSource.next({ activeCategory, step });
+  }
+
+  getCheckoutStep(currentStepType: CheckoutStepType): FSCheckoutStep {
+    return this.steps[this.getFSCheckoutStepIndex('type', currentStepType)];
+  }
+
+  getFirstCheckoutStepRoute(): string {
+    return this.steps[0].routeName;
+  }
+
+  getNextCheckoutStepUrl(activatedRoute: ActivatedRoute): string {
+    const stepIndex = this.getCurrentStepIndex(activatedRoute);
+
+    return stepIndex >= 0 && this.steps[stepIndex + 1]
+      ? this.getFSStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
+      : null;
+  }
+
+  getPreviousCheckoutStepUrl(activatedRoute: ActivatedRoute): string {
+    const stepIndex = this.getCurrentStepIndex(activatedRoute);
+
+    return stepIndex >= 0 && this.steps[stepIndex - 1]
+      ? this.getFSStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
+      : null;
+  }
+
+  getFSStepUrlFromStepRoute(stepRoute: string): string {
+    return this.fsRoutingConfigService.getRouteConfig(stepRoute).paths[0];
+  }
+
+  getFSCheckoutStepIndex(key: string, value: any): number | null {
+    return key && value
+      ? this.steps.findIndex((step: FSCheckoutStep) =>
+          step[key].includes(value)
+        )
+      : null;
   }
 
   getCurrentStepIndex(
@@ -67,7 +108,6 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
         const previousCheckoutStep: string = this.steps[previousStepNumber]
           .routeName;
         this.setPreviousStep(data, previousCheckoutStep);
-
         const nextStepNumber: number =
           this.getCurrentStepIndex(activatedRoute) + 1;
         const nextCheckoutStep: string = this.steps[nextStepNumber].routeName;
