@@ -2,7 +2,7 @@ import * as shared from '../shared-checkout';
 
 export function checkOptionalProducts() {
   const addOptionsContent: addOptionsPage.AddOptions = {
-    title: 'Your Credit Card Insurance',
+    title: 'Your Credit Card Application',
     items: [
       {
         name: 'Credit Card Protection',
@@ -64,9 +64,6 @@ export function selectPremiumCard() {
 }
 
 export function populatePersonalDetails() {
-  cy.get('[name="title"]').select('mr');
-  cy.get('[name="firstName"]').type('Ben');
-  cy.get('[name="lastName"]').type('Moore');
   cy.get('[name="dob"]').type('1987-01-01');
   cy.get('[name="maritalStatus"]').select('married');
   cy.get('[name="numberOfFinancialDependents"]').select('4');
@@ -108,4 +105,11 @@ export function populatePersonalDetails() {
     .eq(1)
     .click();
   cy.get('[name="totalMonthlyExpenses"]').type('5050');
+}
+
+export function populateConfigureStep() {
+  cy.get('[name=debit-card-design]').select('black');
+  cy.get('[name=minimum-card-limit]').select('no');
+  cy.get('[name=minimum-card-amount]').type('45000');
+  cy.get('[name=number-of-applicants]').select('2');
 }
