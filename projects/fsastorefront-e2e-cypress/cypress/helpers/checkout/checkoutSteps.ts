@@ -136,7 +136,7 @@ export function checkInsuranceComparisonPage(mainProduct, numberOfProducts) {
 
 export function checkPersonalDetailsPageInsurance() {
   cy.get('.progress-node').should('have.length', 7);
-  //cy.get('cx-fs-cms-custom-container').should('be.visible');
+  cy.get('cx-fs-cms-custom-container').should('be.visible');
   cy.get('cx-fs-mini-cart').should('be.visible');
   cy.get('cx-footer-navigation').should('be.visible');
 }
@@ -227,9 +227,31 @@ export function startInsuranceCheckout(mainProduct) {
     .click();
 }
 
+<<<<<<< HEAD
 export function waitForPersonalDetailsPage() {
   const personalDetails = waitForPage('personal-details', 'personalDetails');
   cy.wait(`@${personalDetails}`)
     .its('status')
     .should('eq', 200);
+}
+
+export function waitForHomepage() {
+  const homepage = waitForPage('homepage', 'homepage');
+  cy.wait(`@${homepage}`)
+    .its('status')
+    .should('eq', 200);
+}
+
+export function checkCheckoutStep(mainProduct, numberOfCheckoutSteps) {
+  cy.get('h2').contains(mainProduct);
+  cy.get('.progress-inner-wrapper').should(
+    'have.length',
+    numberOfCheckoutSteps
+  );
+}
+
+export function checkPersonalDetailsPage() {
+  cy.get('cx-fs-personal-details').should('be.visible');
+  cy.get('cx-fs-mini-cart').should('be.visible');
+  cy.get('cx-footer-navigation').should('be.visible');
 }
