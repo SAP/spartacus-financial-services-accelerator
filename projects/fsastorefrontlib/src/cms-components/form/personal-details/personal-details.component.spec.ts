@@ -82,7 +82,7 @@ class MockFormDataStorageService {
 describe('PersonalDetailsComponent', () => {
   let component: PersonalDetailsComponent;
   let fixture: ComponentFixture<PersonalDetailsComponent>;
-  let mockFormDataService: MockFormDataService;
+  let formDataService: FormDataService;
   let mockActiveCartService: MockActiveCartService;
 
   beforeEach(async(() => {
@@ -109,9 +109,7 @@ describe('PersonalDetailsComponent', () => {
       ],
     }).compileComponents();
 
-    mockFormDataService = TestBed.inject(
-      FormDataService as Type<FormDataService>
-    );
+    formDataService = TestBed.inject(FormDataService);
     mockActiveCartService = TestBed.inject(
       ActiveCartService as Type<ActiveCartService>
     );
@@ -128,22 +126,22 @@ describe('PersonalDetailsComponent', () => {
   });
 
   it('should load form definition data', () => {
-    spyOn(mockFormDataService, 'loadFormDefinitions').and.callThrough();
-    spyOn(mockFormDataService, 'getFormDefinition').and.callThrough();
+    spyOn(formDataService, 'loadFormDefinitions').and.callThrough();
+    spyOn(formDataService, 'getFormDefinition').and.callThrough();
     spyOn(mockActiveCartService, 'getActive').and.returnValue(of(mockCart));
     component.ngOnInit();
-    expect(mockFormDataService.loadFormDefinitions).toHaveBeenCalledWith(
+    expect(formDataService.loadFormDefinitions).toHaveBeenCalledWith(
       'category',
       FormDefinitionType.PERSONAL_DETAILS
     );
-    expect(mockFormDataService.getFormDefinition).toHaveBeenCalled();
+    expect(formDataService.getFormDefinition).toHaveBeenCalled();
     let result;
     component.formDefinition$.subscribe(value => (result = value));
     expect(result).toEqual(formDefinition);
   });
 
   it('should not load form definition data', () => {
-    spyOn(mockFormDataService, 'getFormDefinition').and.returnValue(
+    spyOn(formDataService, 'getFormDefinition').and.returnValue(
       of(formDefinitionUndefined)
     );
     component.ngOnInit();
@@ -153,11 +151,11 @@ describe('PersonalDetailsComponent', () => {
   });
 
   it('should not load form definition data without category', () => {
-    spyOn(mockFormDataService, 'loadFormDefinitions').and.callThrough();
+    spyOn(formDataService, 'loadFormDefinitions').and.callThrough();
     spyOn(mockActiveCartService, 'getActive').and.returnValue(
       of(mockCartWithoutCategory)
     );
     component.ngOnInit();
-    expect(mockFormDataService.loadFormDefinitions).not.toHaveBeenCalled();
+    expect(formDataService.loadFormDefinitions).not.toHaveBeenCalled();
   });
 });

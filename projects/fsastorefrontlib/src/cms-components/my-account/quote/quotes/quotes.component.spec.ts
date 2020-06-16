@@ -1,11 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Type } from '@angular/core';
-import { QuotesComponent } from './quotes.component';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
 import { InsuranceQuote } from './../../../../occ/occ-models/occ.models';
+import { QuotesComponent } from './quotes.component';
 import createSpy = jasmine.createSpy;
 
 class MockRoutingService {
@@ -35,8 +34,8 @@ const MockOccConfig: OccConfig = {
 describe('QuotesComponent', () => {
   let component: QuotesComponent;
   let fixture: ComponentFixture<QuotesComponent>;
-  let quoteService: MockQuoteService;
-  let routingService: MockRoutingService;
+  let quoteService: QuoteService;
+  let routingService: RoutingService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -63,8 +62,8 @@ describe('QuotesComponent', () => {
     fixture = TestBed.createComponent(QuotesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    quoteService = TestBed.inject(QuoteService as Type<QuoteService>);
-    routingService = TestBed.inject(RoutingService as Type<RoutingService>);
+    quoteService = TestBed.inject(QuoteService);
+    routingService = TestBed.inject(RoutingService);
   });
 
   it('should create', () => {

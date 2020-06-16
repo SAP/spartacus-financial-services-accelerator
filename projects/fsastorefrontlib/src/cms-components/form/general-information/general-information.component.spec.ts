@@ -1,12 +1,12 @@
+import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
-import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
-import { Component, Input, Type } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CmsComponentData, SpinnerModule } from '@spartacus/storefront';
+import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { CmsComponent, I18nTestingModule } from '@spartacus/core';
-import { GeneralInformationComponent } from './general-information.component';
+import { CmsComponentData, SpinnerModule } from '@spartacus/storefront';
+import { of } from 'rxjs';
 import { FormDefinitionType } from '../../../occ/occ-models';
+import { GeneralInformationComponent } from './general-information.component';
 
 const formDefinition = {
   formId: 'formId',
@@ -62,7 +62,7 @@ class MockFormDataStorageService {
 describe('GeneralInformationComponent', () => {
   let component: GeneralInformationComponent;
   let fixture: ComponentFixture<GeneralInformationComponent>;
-  let mockFormDataService: MockFormDataService;
+  let formDataService: FormDataService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -88,9 +88,7 @@ describe('GeneralInformationComponent', () => {
       ],
     }).compileComponents();
 
-    mockFormDataService = TestBed.inject(
-      FormDataService as Type<FormDataService>
-    );
+    formDataService = TestBed.inject(FormDataService);
   }));
 
   beforeEach(() => {
@@ -104,21 +102,21 @@ describe('GeneralInformationComponent', () => {
   });
 
   it('should load form definition data', () => {
-    spyOn(mockFormDataService, 'loadFormDefinitions').and.callThrough();
-    spyOn(mockFormDataService, 'getFormDefinition').and.callThrough();
+    spyOn(formDataService, 'loadFormDefinitions').and.callThrough();
+    spyOn(formDataService, 'getFormDefinition').and.callThrough();
     component.ngOnInit();
-    expect(mockFormDataService.loadFormDefinitions).toHaveBeenCalledWith(
+    expect(formDataService.loadFormDefinitions).toHaveBeenCalledWith(
       mockParams.formCode,
       FormDefinitionType.PRODUCT_CONFIGURE
     );
-    expect(mockFormDataService.getFormDefinition).toHaveBeenCalled();
+    expect(formDataService.getFormDefinition).toHaveBeenCalled();
     let result;
     component.formDefinition$.subscribe(value => (result = value));
     expect(result).toEqual(formDefinition);
   });
 
   it('should not load form definition data', () => {
-    spyOn(mockFormDataService, 'getFormDefinition').and.returnValue(
+    spyOn(formDataService, 'getFormDefinition').and.returnValue(
       of(formDefinitionUndefined)
     );
     component.ngOnInit();

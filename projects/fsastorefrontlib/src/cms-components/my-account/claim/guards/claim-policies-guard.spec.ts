@@ -1,11 +1,10 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RoutingService } from '@spartacus/core';
-import { PolicyService } from './../../../../core/my-account/facade/policy.service';
-import { ClaimPoliciesGuard } from './claim-policies-guard';
 import { of } from 'rxjs';
 import { ClaimService } from './../../../../core/my-account/facade/claim.service';
+import { PolicyService } from './../../../../core/my-account/facade/policy.service';
+import { ClaimPoliciesGuard } from './claim-policies-guard';
 import createSpy = jasmine.createSpy;
 
 class MockPolicyService {
@@ -40,8 +39,8 @@ class MockClaimService {
 describe('ClaimPoliciesGuard', () => {
   let guard: ClaimPoliciesGuard;
   let routing: RoutingService;
-  let policyService: MockPolicyService;
-  let claimService: MockClaimService;
+  let policyService: PolicyService;
+  let claimService: ClaimService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -59,10 +58,10 @@ describe('ClaimPoliciesGuard', () => {
       ],
     }).compileComponents();
 
-    guard = TestBed.inject(ClaimPoliciesGuard as Type<ClaimPoliciesGuard>);
-    routing = TestBed.inject(RoutingService as Type<RoutingService>);
-    policyService = TestBed.inject(PolicyService as Type<PolicyService>);
-    claimService = TestBed.inject(ClaimService as Type<ClaimService>);
+    guard = TestBed.inject(ClaimPoliciesGuard);
+    routing = TestBed.inject(RoutingService);
+    policyService = TestBed.inject(PolicyService);
+    claimService = TestBed.inject(ClaimService);
   });
 
   it('should redirect to no claims page in case there are no policies', () => {

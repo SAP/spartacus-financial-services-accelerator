@@ -1,16 +1,15 @@
-import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {
+  AuthService,
   I18nTestingModule,
   OCC_USER_ID_CURRENT,
-  AuthService,
 } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
-import { DeleteClaimDialogComponent } from './delete-claim-dialog.component';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ClaimService } from '../../../../core/my-account/facade/claim.service';
-import { ReactiveFormsModule } from '@angular/forms';
 import { Observable, of } from 'rxjs';
+import { ClaimService } from '../../../../core/my-account/facade/claim.service';
+import { DeleteClaimDialogComponent } from './delete-claim-dialog.component';
 
 class MockModalService {
   dismissActiveModal(): void {}
@@ -29,12 +28,11 @@ class MockClaimService {
 describe('DeleteClaimDialogComponent', () => {
   let component: DeleteClaimDialogComponent;
   let fixture: ComponentFixture<DeleteClaimDialogComponent>;
-  let claimService: MockClaimService;
+  let claimService: ClaimService;
   let authService: MockAuthService;
 
   beforeEach(async(() => {
     authService = new MockAuthService();
-    claimService = new MockClaimService();
 
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, I18nTestingModule],
@@ -60,7 +58,7 @@ describe('DeleteClaimDialogComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DeleteClaimDialogComponent);
     component = fixture.componentInstance;
-    claimService = TestBed.inject(ClaimService as Type<ClaimService>);
+    claimService = TestBed.inject(ClaimService);
     fixture.detectChanges();
   });
 

@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform, Type } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -73,23 +73,20 @@ class MockGlobalMessageService {
 describe('ContactAgentFormComponent', () => {
   let component: ContactAgentFormComponent;
   let fixture: ComponentFixture<ContactAgentFormComponent>;
-  let mockedUserService: MockedUserService;
-  let mockedCsTicketService: MockCsTicketService;
+  let userService: UserService;
+  let csTicketService: CsTicketService;
   let mockSearchService: AgentSearchService;
   let globalMessageService: GlobalMessageService;
-  let mockRoutingService: MockRoutingService;
+  let routingService: RoutingService;
 
   beforeEach(async(() => {
-    mockedUserService = new MockedUserService();
-    mockedCsTicketService = new MockCsTicketService();
-    mockRoutingService = new MockRoutingService();
     TestBed.configureTestingModule({
       declarations: [ContactAgentFormComponent, MockUrlPipe],
       imports: [I18nTestingModule, RouterTestingModule, ReactiveFormsModule],
       providers: [
         {
           provide: UserService,
-          useValue: mockedUserService,
+          useClass: MockedUserService,
         },
         {
           provide: AgentSearchService,
@@ -109,7 +106,7 @@ describe('ContactAgentFormComponent', () => {
         },
         {
           provide: CsTicketService,
-          useValue: mockedCsTicketService,
+          useClass: MockCsTicketService,
         },
       ],
     }).compileComponents();
@@ -119,14 +116,10 @@ describe('ContactAgentFormComponent', () => {
     fixture = TestBed.createComponent(ContactAgentFormComponent);
     component = fixture.componentInstance;
     globalMessageService = TestBed.inject(GlobalMessageService);
-    mockedUserService = TestBed.inject(UserService as Type<UserService>);
-    mockSearchService = TestBed.inject(
-      AgentSearchService as Type<AgentSearchService>
-    );
-    mockedCsTicketService = TestBed.inject(
-      CsTicketService as Type<CsTicketService>
-    );
-    mockRoutingService = TestBed.inject(RoutingService as Type<RoutingService>);
+    userService = TestBed.inject(UserService);
+    mockSearchService = TestBed.inject(AgentSearchService);
+    csTicketService = TestBed.inject(CsTicketService);
+    routingService = TestBed.inject(RoutingService);
   });
 
   it('should create', () => {
@@ -134,15 +127,15 @@ describe('ContactAgentFormComponent', () => {
   });
 
   it('should get the user details', () => {
-    spyOn(mockedUserService, 'get').and.returnValue(of(mockedUserDetails));
+    spyOn(userService, 'get').and.returnValue(of(mockedUserDetails));
     fixture.detectChanges();
-    expect(mockedUserService.get).toHaveBeenCalled();
+    expect(userService.get).toHaveBeenCalled();
   });
 
   it('should NOT get the user details', () => {
-    spyOn(mockedUserService, 'get').and.returnValue(of(undefined));
+    spyOn(userService, 'get').and.returnValue(of(undefined));
     fixture.detectChanges();
-    expect(mockedUserService.get).toHaveBeenCalled();
+    expect(userService.get).toHaveBeenCalled();
   });
 
   it('should NOT find agent', () => {
@@ -177,11 +170,11 @@ describe('ContactAgentFormComponent', () => {
   });
 
   it('should submit form', () => {
-    spyOn(mockedCsTicketService, 'createCsTicketForAgent').and.returnValue(
+    spyOn(csTicketService, 'createCsTicketForAgent').and.returnValue(
       of(ticketData)
     );
     component.ngOnInit();
     component.submit();
-    expect(mockRoutingService.go).toHaveBeenCalled();
+    expect(routingService.go).toHaveBeenCalled();
   });
 });

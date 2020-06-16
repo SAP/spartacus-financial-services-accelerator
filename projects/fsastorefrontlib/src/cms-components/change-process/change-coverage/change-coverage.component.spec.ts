@@ -1,8 +1,8 @@
-import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
-import { Type, Input, Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   GlobalMessageService,
   I18nTestingModule,
@@ -10,9 +10,9 @@ import {
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
+import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
 import { UserRequestNavigationService } from './../../../core/user-request/facade/user-request-navigation.service';
 import { ChangeCoverageComponent } from './change-coverage.component';
-import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import createSpy = jasmine.createSpy;
 
 @Component({
@@ -112,9 +112,9 @@ class MockChangePolicyService {}
 describe('ChangeCoverageComponent', () => {
   let component: ChangeCoverageComponent;
   let fixture: ComponentFixture<ChangeCoverageComponent>;
-  let mockUserRequestNavigationService: MockUserRequestNavigationService;
-  let mockChangeRequestService: MockChangeRequestService;
-  let mockRoutingService: MockRoutingService;
+  let userRequestNavigationService: UserRequestNavigationService;
+  let changeRequestService: ChangeRequestService;
+  let routingService: RoutingService;
   let globalMessageService: GlobalMessageService;
 
   beforeEach(async(() => {
@@ -150,16 +150,10 @@ describe('ChangeCoverageComponent', () => {
       declarations: [ChangeCoverageComponent, MockMediaComponent],
     }).compileComponents();
 
-    mockUserRequestNavigationService = TestBed.inject(
-      UserRequestNavigationService as Type<UserRequestNavigationService>
-    );
-    mockRoutingService = TestBed.inject(RoutingService as Type<RoutingService>);
-    globalMessageService = TestBed.inject(
-      GlobalMessageService as Type<GlobalMessageService>
-    );
-    mockChangeRequestService = TestBed.inject(
-      ChangeRequestService as Type<ChangeRequestService>
-    );
+    userRequestNavigationService = TestBed.inject(UserRequestNavigationService);
+    routingService = TestBed.inject(RoutingService);
+    globalMessageService = TestBed.inject(GlobalMessageService);
+    changeRequestService = TestBed.inject(ChangeRequestService);
   }));
 
   beforeEach(() => {
@@ -177,11 +171,11 @@ describe('ChangeCoverageComponent', () => {
     simulatedRequest.changedPolicy = {
       policyNumber: policyId,
     };
-    spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
+    spyOn(changeRequestService, 'getChangeRequest').and.returnValue(
       of(simulatedRequest)
     );
     component.ngOnInit();
-    expect(mockUserRequestNavigationService.continue).toHaveBeenCalled();
+    expect(userRequestNavigationService.continue).toHaveBeenCalled();
   });
 
   it('should add coverage and execute simulation', () => {
@@ -193,13 +187,13 @@ describe('ChangeCoverageComponent', () => {
       },
     };
 
-    spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
+    spyOn(changeRequestService, 'getChangeRequest').and.returnValue(
       of(mockChangeRequest)
     );
     component.addCoverage(coverage);
     component.simulateChanges(mockChangeRequest);
     expect(component.potentialCoverages[0].coverageIsIncluded).toEqual(true);
-    expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalled();
+    expect(changeRequestService.simulateChangeRequest).toHaveBeenCalled();
   });
 
   it('should remove coverage', () => {
@@ -211,7 +205,7 @@ describe('ChangeCoverageComponent', () => {
       },
     };
 
-    spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
+    spyOn(changeRequestService, 'getChangeRequest').and.returnValue(
       of(mockChangeRequest)
     );
 
@@ -220,14 +214,12 @@ describe('ChangeCoverageComponent', () => {
   });
 
   it('should not execute simulation if nothing is changed', () => {
-    spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
+    spyOn(changeRequestService, 'getChangeRequest').and.returnValue(
       of(mockChangeRequest)
     );
 
     component.ngOnInit();
     component.simulateChanges(mockChangeRequest);
-    expect(
-      mockChangeRequestService.simulateChangeRequest
-    ).not.toHaveBeenCalled();
+    expect(changeRequestService.simulateChangeRequest).not.toHaveBeenCalled();
   });
 });

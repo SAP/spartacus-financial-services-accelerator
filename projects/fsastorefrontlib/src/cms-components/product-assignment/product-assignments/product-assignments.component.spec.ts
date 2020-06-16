@@ -59,10 +59,9 @@ class MockedProductAssignmentService {
 describe('ProductAssignmentsComponent', () => {
   let component: ProductAssignmentsComponent;
   let fixture: ComponentFixture<ProductAssignmentsComponent>;
-  let mockedProductAssignmentService: MockedProductAssignmentService;
+  let productAssignmentService: ProductAssignmentService;
 
   beforeEach(async(() => {
-    mockedProductAssignmentService = new MockedProductAssignmentService();
     TestBed.configureTestingModule({
       declarations: [
         ProductAssignmentsComponent,
@@ -76,7 +75,7 @@ describe('ProductAssignmentsComponent', () => {
         },
         {
           provide: ProductAssignmentService,
-          useValue: mockedProductAssignmentService,
+          useClass: MockedProductAssignmentService,
         },
       ],
     }).compileComponents();
@@ -85,9 +84,7 @@ describe('ProductAssignmentsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductAssignmentsComponent);
     component = fixture.componentInstance;
-    mockedProductAssignmentService = TestBed.inject(
-      ProductAssignmentService as Type<ProductAssignmentService>
-    );
+    productAssignmentService = TestBed.inject(ProductAssignmentService);
     fixture.detectChanges();
   });
 

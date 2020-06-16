@@ -74,9 +74,9 @@ describe('ChangeCarDetailsFormComponent', () => {
   let controls;
   let component: ChangeCarDetailsFormComponent;
   let fixture: ComponentFixture<ChangeCarDetailsFormComponent>;
-  let mockChangeRequestService: MockChangeRequestService;
-  let mockUserRequestNavigationService: MockUserRequestNavigationService;
-  let mockRoutingService: MockRoutingService;
+  let changeRequestService: ChangeRequestService;
+  let userRequestNavigationService: UserRequestNavigationService;
+  let routingService: RoutingService;
   let globalMessageService: GlobalMessageService;
 
   beforeEach(async(() => {
@@ -112,16 +112,10 @@ describe('ChangeCarDetailsFormComponent', () => {
       declarations: [ChangeCarDetailsFormComponent],
     }).compileComponents();
 
-    mockRoutingService = TestBed.inject(RoutingService as Type<RoutingService>);
-    mockChangeRequestService = TestBed.inject(
-      ChangeRequestService as Type<ChangeRequestService>
-    );
-    globalMessageService = TestBed.inject(
-      GlobalMessageService as Type<GlobalMessageService>
-    );
-    mockUserRequestNavigationService = TestBed.inject(
-      UserRequestNavigationService as Type<UserRequestNavigationService>
-    );
+    routingService = TestBed.inject(RoutingService);
+    changeRequestService = TestBed.inject(ChangeRequestService);
+    globalMessageService = TestBed.inject(GlobalMessageService);
+    userRequestNavigationService = TestBed.inject(UserRequestNavigationService);
   }));
 
   beforeEach(() => {
@@ -161,7 +155,7 @@ describe('ChangeCarDetailsFormComponent', () => {
       },
     };
     component.simulateChanges(changedRequestData);
-    expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalled();
+    expect(changeRequestService.simulateChangeRequest).toHaveBeenCalled();
   });
 
   it('should not execute simulation if form is not populated', () => {
@@ -171,9 +165,7 @@ describe('ChangeCarDetailsFormComponent', () => {
       requestId: requestId,
     };
     component.simulateChanges(changedRequestData);
-    expect(
-      mockChangeRequestService.simulateChangeRequest
-    ).not.toHaveBeenCalled();
+    expect(changeRequestService.simulateChangeRequest).not.toHaveBeenCalled();
   });
 
   it('form invalid when not all required fields filled', () => {

@@ -1,22 +1,16 @@
+import { Component, DebugElement, Pipe, PipeTransform } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
-import { ClaimsComponent } from './claims.component';
-import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { FormsModule } from '@angular/forms';
-import { StoreModule } from '@ngrx/store';
-import createSpy = jasmine.createSpy;
-import {
-  Component,
-  Pipe,
-  PipeTransform,
-  DebugElement,
-  Type,
-} from '@angular/core';
-import { UserRequestService } from '../../../../core/user-request/facade/user-request.service';
-import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
+import { StoreModule } from '@ngrx/store';
+import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
+import { of } from 'rxjs';
+import { ClaimService } from '../../../../core/my-account/facade/claim.service';
+import { UserRequestService } from '../../../../core/user-request/facade/user-request.service';
 import { DeleteClaimDialogComponent } from './../delete-claim-dialog/delete-claim-dialog.component';
+import { ClaimsComponent } from './claims.component';
+import createSpy = jasmine.createSpy;
 
 const claimNumber = '000001';
 
@@ -111,9 +105,9 @@ const modalService = jasmine.createSpyObj('ModalService', ['open']);
 describe('ClaimsComponent', () => {
   let component: ClaimsComponent;
   let fixture: ComponentFixture<ClaimsComponent>;
-  let claimService: MockClaimService;
+  let claimService: ClaimService;
   let mockUserRequestService: MockUserRequestService;
-  let routingService: MockRoutingService;
+  let routingService: RoutingService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -137,8 +131,8 @@ describe('ClaimsComponent', () => {
       ],
     }).compileComponents();
 
-    routingService = TestBed.inject(RoutingService as Type<RoutingService>);
-    claimService = TestBed.inject(ClaimService as Type<ClaimService>);
+    routingService = TestBed.inject(RoutingService);
+    claimService = TestBed.inject(ClaimService);
   }));
 
   beforeEach(() => {

@@ -55,12 +55,10 @@ class MockedProductAssignmentService {
 describe('ActiveProductAssignmentsComponent', () => {
   let component: ActiveProductAssignmentsComponent;
   let fixture: ComponentFixture<ActiveProductAssignmentsComponent>;
-  let mockedProductAssignmentService: MockedProductAssignmentService;
-  let mockRoutingService: MockRoutingService;
+  let productAssignmentService: ProductAssignmentService;
+  let routingService: RoutingService;
 
   beforeEach(async(() => {
-    mockedProductAssignmentService = new MockedProductAssignmentService();
-    mockRoutingService = new MockRoutingService();
     TestBed.configureTestingModule({
       declarations: [
         ActiveProductAssignmentsComponent,
@@ -74,7 +72,7 @@ describe('ActiveProductAssignmentsComponent', () => {
         },
         {
           provide: ProductAssignmentService,
-          useValue: mockedProductAssignmentService,
+          useClass: MockedProductAssignmentService,
         },
         {
           provide: RoutingService,
@@ -87,10 +85,8 @@ describe('ActiveProductAssignmentsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ActiveProductAssignmentsComponent);
     component = fixture.componentInstance;
-    mockedProductAssignmentService = TestBed.inject(
-      ProductAssignmentService as Type<ProductAssignmentService>
-    );
-    mockRoutingService = TestBed.inject(RoutingService as Type<RoutingService>);
+    productAssignmentService = TestBed.inject(ProductAssignmentService);
+    routingService = TestBed.inject(RoutingService);
     fixture.detectChanges();
   });
 

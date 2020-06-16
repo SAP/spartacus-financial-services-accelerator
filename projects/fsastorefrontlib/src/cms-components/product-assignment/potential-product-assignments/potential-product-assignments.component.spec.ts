@@ -62,11 +62,10 @@ class MockedUserService {
 describe('PotentialProductAssignmentsComponent', () => {
   let component: PotentialProductAssignmentsComponent;
   let fixture: ComponentFixture<PotentialProductAssignmentsComponent>;
-  let mockedProductAssignmentService: MockedProductAssignmentService;
+  let productAssignmentService: ProductAssignmentService;
   let mockedUserService: MockedUserService;
 
   beforeEach(async(() => {
-    mockedProductAssignmentService = new MockedProductAssignmentService();
     mockedUserService = new MockedUserService();
     TestBed.configureTestingModule({
       declarations: [PotentialProductAssignmentsComponent],
@@ -78,7 +77,7 @@ describe('PotentialProductAssignmentsComponent', () => {
         },
         {
           provide: ProductAssignmentService,
-          useValue: mockedProductAssignmentService,
+          useClass: MockedProductAssignmentService,
         },
         {
           provide: UserService,
@@ -91,23 +90,15 @@ describe('PotentialProductAssignmentsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PotentialProductAssignmentsComponent);
     component = fixture.componentInstance;
-    mockedProductAssignmentService = TestBed.inject(
-      ProductAssignmentService as Type<ProductAssignmentService>
-    );
     spyOn(
-      mockedProductAssignmentService,
+      productAssignmentService,
       'createProductAssignment'
     ).and.callThrough();
-    mockedProductAssignmentService = TestBed.inject(
-      ProductAssignmentService as Type<ProductAssignmentService>
-    );
     spyOn(
-      mockedProductAssignmentService,
+      productAssignmentService,
       'removeProductAssignment'
     ).and.callThrough();
-    mockedProductAssignmentService = TestBed.inject(
-      ProductAssignmentService as Type<ProductAssignmentService>
-    );
+    productAssignmentService = TestBed.inject(ProductAssignmentService);
     fixture.detectChanges();
   });
 
@@ -131,16 +122,12 @@ describe('PotentialProductAssignmentsComponent', () => {
 
   it('should assign product', () => {
     component.onAssign('0123456');
-    expect(
-      mockedProductAssignmentService.createProductAssignment
-    ).toHaveBeenCalled();
+    expect(productAssignmentService.createProductAssignment).toHaveBeenCalled();
   });
 
   it('should deassign product', () => {
     component.onDeassign('SOME_PRODUCT_CODE');
-    expect(
-      mockedProductAssignmentService.removeProductAssignment
-    ).toHaveBeenCalled();
+    expect(productAssignmentService.removeProductAssignment).toHaveBeenCalled();
   });
 
   it('should unsubscribe from any subscriptions when destroyed', () => {

@@ -1,4 +1,4 @@
-import { Component, DebugElement, Input, Type } from '@angular/core';
+import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
@@ -75,8 +75,8 @@ describe('CMSFormSubmitComponent', () => {
   let formSubmitComponent: CMSFormSubmitComponent;
   let fixture: ComponentFixture<CMSFormSubmitComponent>;
   let el: DebugElement;
-  let mockCmsComponentConnector: MockCmsComponentConnector;
-  let mockFormDataService: MockFormDataService;
+  let cmsComponentConnector: CmsComponentConnector;
+  let formDataService: FormDataService;
   let mockFormDataStorageService: FormDataStorageService;
 
   beforeEach(async(() => {
@@ -106,15 +106,9 @@ describe('CMSFormSubmitComponent', () => {
         },
       ],
     }).compileComponents();
-    mockCmsComponentConnector = TestBed.inject(
-      CmsComponentConnector as Type<CmsComponentConnector>
-    );
-    mockFormDataService = TestBed.inject(
-      FormDataService as Type<FormDataService>
-    );
-    mockFormDataStorageService = TestBed.inject(
-      FormDataStorageService as Type<FormDataStorageService>
-    );
+    cmsComponentConnector = TestBed.inject(CmsComponentConnector);
+    formDataService = TestBed.inject(FormDataService);
+    mockFormDataStorageService = TestBed.inject(FormDataStorageService);
   }));
 
   beforeEach(() => {
@@ -128,10 +122,10 @@ describe('CMSFormSubmitComponent', () => {
   });
 
   it('should load component data', () => {
-    spyOn(mockCmsComponentConnector, 'get').and.callThrough();
-    spyOn(mockFormDataService, 'loadFormDefinition').and.callThrough();
+    spyOn(cmsComponentConnector, 'get').and.callThrough();
+    spyOn(formDataService, 'loadFormDefinition').and.callThrough();
     formSubmitComponent.ngOnInit();
-    expect(mockFormDataService.loadFormDefinition).toHaveBeenCalled();
-    expect(mockCmsComponentConnector.get).toHaveBeenCalled();
+    expect(formDataService.loadFormDefinition).toHaveBeenCalled();
+    expect(cmsComponentConnector.get).toHaveBeenCalled();
   });
 });

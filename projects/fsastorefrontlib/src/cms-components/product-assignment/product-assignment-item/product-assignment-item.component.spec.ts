@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform, Type } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule } from '@spartacus/core';
 import { ProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
@@ -29,17 +29,16 @@ const mockedProductAssignment = {
 describe('ProductAssignmentItemComponent', () => {
   let component: ProductAssignmentItemComponent;
   let fixture: ComponentFixture<ProductAssignmentItemComponent>;
-  let mockedProductAssignmentService: MockedProductAssignmentService;
+  let productAssignmentService: ProductAssignmentService;
 
   beforeEach(async(() => {
-    mockedProductAssignmentService = new MockedProductAssignmentService();
     TestBed.configureTestingModule({
       declarations: [ProductAssignmentItemComponent, MockTranslatePipe],
       imports: [I18nTestingModule],
       providers: [
         {
           provide: ProductAssignmentService,
-          useValue: mockedProductAssignmentService,
+          useClass: MockedProductAssignmentService,
         },
       ],
     }).compileComponents();
@@ -50,13 +49,8 @@ describe('ProductAssignmentItemComponent', () => {
     component = fixture.componentInstance;
     component.orgUnitId = 'SAP';
     component.productAssignment = mockedProductAssignment;
-    spyOn(
-      mockedProductAssignmentService,
-      'changeActiveStatus'
-    ).and.callThrough();
-    mockedProductAssignmentService = TestBed.inject(
-      ProductAssignmentService as Type<ProductAssignmentService>
-    );
+    spyOn(productAssignmentService, 'changeActiveStatus').and.callThrough();
+    productAssignmentService = TestBed.inject(ProductAssignmentService);
     fixture.detectChanges();
   });
 
@@ -66,8 +60,6 @@ describe('ProductAssignmentItemComponent', () => {
 
   it('should change active status', () => {
     component.changeActiveStatus('PA-test');
-    expect(
-      mockedProductAssignmentService.changeActiveStatus
-    ).toHaveBeenCalled();
+    expect(productAssignmentService.changeActiveStatus).toHaveBeenCalled();
   });
 });

@@ -1,5 +1,3 @@
-import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
-import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -10,6 +8,7 @@ import {
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
+import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
 import { UserRequestNavigationService } from './../../../core/user-request/facade/user-request-navigation.service';
 import { ChangeSimulationComponent } from './change-simulation.component';
 import createSpy = jasmine.createSpy;
@@ -73,9 +72,9 @@ class GlobalMessageServiceMock {}
 describe('ChangeSimulationComponent', () => {
   let component: ChangeSimulationComponent;
   let fixture: ComponentFixture<ChangeSimulationComponent>;
-  let mockUserRequestNavigationService: MockUserRequestNavigationService;
-  let mockChangeRequestService: MockChangeRequestService;
-  let mockRoutingService: MockRoutingService;
+  let userRequestNavigationService: UserRequestNavigationService;
+  let changeRequestService: ChangeRequestService;
+  let routingService: RoutingService;
   let globalMessageService: GlobalMessageService;
   let changePolicyService: ChangePolicyService;
 
@@ -111,20 +110,12 @@ describe('ChangeSimulationComponent', () => {
       ],
       declarations: [ChangeSimulationComponent],
     }).compileComponents();
-    mockUserRequestNavigationService = TestBed.inject(
-      UserRequestNavigationService as Type<UserRequestNavigationService>
-    );
-    mockRoutingService = TestBed.inject(RoutingService as Type<RoutingService>);
-    globalMessageService = TestBed.inject(
-      GlobalMessageService as Type<GlobalMessageService>
-    );
-    mockChangeRequestService = TestBed.inject(
-      ChangeRequestService as Type<ChangeRequestService>
-    );
+    userRequestNavigationService = TestBed.inject(UserRequestNavigationService);
+    routingService = TestBed.inject(RoutingService);
+    globalMessageService = TestBed.inject(GlobalMessageService);
+    changeRequestService = TestBed.inject(ChangeRequestService);
 
-    changePolicyService = TestBed.inject(
-      ChangePolicyService as Type<ChangePolicyService>
-    );
+    changePolicyService = TestBed.inject(ChangePolicyService);
     spyOn(changePolicyService, 'getChangedPolicyObjects').and.callThrough();
   }));
 
@@ -140,7 +131,7 @@ describe('ChangeSimulationComponent', () => {
 
   it('should call update change request', () => {
     component.simulateChangeRequest(changeRequest);
-    expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalledWith(
+    expect(changeRequestService.simulateChangeRequest).toHaveBeenCalledWith(
       changeRequest,
       -1
     );

@@ -1,18 +1,17 @@
-import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AbstractChangeProcessStepComponent } from './abstract-change-process-step.component';
-import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
-import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
-import { Type } from '@angular/core';
-import createSpy = jasmine.createSpy;
 import {
   GlobalMessage,
   GlobalMessageService,
   RoutingService,
 } from '@spartacus/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { of } from 'rxjs';
+import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
+import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
+import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
+import { AbstractChangeProcessStepComponent } from './abstract-change-process-step.component';
+import createSpy = jasmine.createSpy;
 
 const configurationSteps = [
   {
@@ -70,10 +69,10 @@ class ChangePolicyServiceMock {}
 describe('ChangeProcessStepComponent', () => {
   let component: AbstractChangeProcessStepComponent;
   let fixture: ComponentFixture<AbstractChangeProcessStepComponent>;
-  let mockRoutingService: MockRoutingService;
+  let routingService: RoutingService;
   let globalMessageService: GlobalMessageService;
-  let mockUserRequestNavigationService: MockUserRequestNavigationService;
-  let mockChangeRequestService: MockChangeRequestService;
+  let userRequestNavigationService: UserRequestNavigationService;
+  let changeRequestService: ChangeRequestService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -111,16 +110,10 @@ describe('ChangeProcessStepComponent', () => {
       declarations: [AbstractChangeProcessStepComponent],
     }).compileComponents();
 
-    mockChangeRequestService = TestBed.inject(
-      ChangeRequestService as Type<ChangeRequestService>
-    );
-    mockUserRequestNavigationService = TestBed.inject(
-      UserRequestNavigationService as Type<UserRequestNavigationService>
-    );
-    mockRoutingService = TestBed.inject(RoutingService as Type<RoutingService>);
-    globalMessageService = TestBed.inject(
-      GlobalMessageService as Type<GlobalMessageService>
-    );
+    changeRequestService = TestBed.inject(ChangeRequestService);
+    userRequestNavigationService = TestBed.inject(UserRequestNavigationService);
+    routingService = TestBed.inject(RoutingService);
+    globalMessageService = TestBed.inject(GlobalMessageService);
   }));
 
   beforeEach(() => {
@@ -134,7 +127,7 @@ describe('ChangeProcessStepComponent', () => {
   });
 
   it('should continue if request is already simulated', () => {
-    spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
+    spyOn(changeRequestService, 'getChangeRequest').and.returnValue(
       of({
         requestId: requestId,
         changedPolicy: {
@@ -143,11 +136,11 @@ describe('ChangeProcessStepComponent', () => {
       })
     );
     component.ngOnInit();
-    expect(mockUserRequestNavigationService.continue).toHaveBeenCalled();
+    expect(userRequestNavigationService.continue).toHaveBeenCalled();
   });
 
   it('should go to policy details in case request is cancelled', () => {
-    spyOn(mockChangeRequestService, 'getChangeRequest').and.returnValue(
+    spyOn(changeRequestService, 'getChangeRequest').and.returnValue(
       of({
         requestId: requestId,
         requestStatus: 'CANCELED',
@@ -158,7 +151,7 @@ describe('ChangeProcessStepComponent', () => {
       })
     );
     component.ngOnInit();
-    expect(mockRoutingService.go).toHaveBeenCalledWith({
+    expect(routingService.go).toHaveBeenCalledWith({
       cxRoute: 'policyDetails',
       params: { policyId: policyId, contractId: contractId },
     });
@@ -166,7 +159,7 @@ describe('ChangeProcessStepComponent', () => {
 
   it('should call simulate change request', () => {
     component.simulateChangeRequest(changeRequest);
-    expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalledWith(
+    expect(changeRequestService.simulateChangeRequest).toHaveBeenCalledWith(
       changeRequest,
       -1
     );
@@ -174,14 +167,14 @@ describe('ChangeProcessStepComponent', () => {
 
   it('should call cancel change request', () => {
     component.cancelChangeRequest(requestId);
-    expect(mockChangeRequestService.cancelChangeRequest).toHaveBeenCalledWith(
+    expect(changeRequestService.cancelChangeRequest).toHaveBeenCalledWith(
       requestId
     );
   });
 
   it('should call simulate change request', () => {
     component.simulateChangeRequest(changeRequest);
-    expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalledWith(
+    expect(changeRequestService.simulateChangeRequest).toHaveBeenCalledWith(
       changeRequest,
       -1
     );

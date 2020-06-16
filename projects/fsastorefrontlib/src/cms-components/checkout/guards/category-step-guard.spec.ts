@@ -40,8 +40,8 @@ class MockCheckoutConfigService {
 
 describe('CategoryStepGuard', () => {
   let guard: CategoryStepGuard;
-  let routingConfigService: MockRoutingConfigService;
-  let checkoutConfigService: MockCheckoutConfigService;
+  let routingConfigService: RoutingConfigService;
+  let checkoutConfigService: FSCheckoutConfigService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -56,12 +56,8 @@ describe('CategoryStepGuard', () => {
     }).compileComponents();
 
     guard = TestBed.inject(CategoryStepGuard as Type<CategoryStepGuard>);
-    routingConfigService = TestBed.inject(
-      RoutingConfigService as Type<RoutingConfigService>
-    );
-    checkoutConfigService = TestBed.inject(
-      FSCheckoutConfigService as Type<FSCheckoutConfigService>
-    );
+    routingConfigService = TestBed.inject(RoutingConfigService);
+    checkoutConfigService = TestBed.inject(FSCheckoutConfigService);
   });
 
   it('should not return true in case there is not category in route', () => {

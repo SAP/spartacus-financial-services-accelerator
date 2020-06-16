@@ -1,21 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import {
   Cart,
   I18nTestingModule,
   OccConfig,
   RoutingService,
 } from '@spartacus/core';
-import { RouterTestingModule } from '@angular/router/testing';
 import { SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
-import { PoliciesComponent } from './policies.component';
 import { PolicyService } from '../../../../core/my-account/facade';
 import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import {
   AllowedFSRequestType,
   RequestType,
 } from './../../../../occ/occ-models/occ.models';
-import { Type } from '@angular/core';
+import { PoliciesComponent } from './policies.component';
 import createSpy = jasmine.createSpy;
 
 class MockRoutingService {
@@ -62,9 +61,9 @@ const contractNumber = '01';
 describe('PoliciesComponent', () => {
   let component: PoliciesComponent;
   let fixture: ComponentFixture<PoliciesComponent>;
-  let policyService: MockPolicyService;
-  let claimService: MockClaimService;
-  let routingService: MockRoutingService;
+  let policyService: PolicyService;
+  let claimService: ClaimService;
+  let routingService: RoutingService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -95,9 +94,9 @@ describe('PoliciesComponent', () => {
     fixture = TestBed.createComponent(PoliciesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    policyService = TestBed.inject(PolicyService as Type<PolicyService>);
-    claimService = TestBed.inject(ClaimService as Type<ClaimService>);
-    routingService = TestBed.inject(RoutingService as Type<RoutingService>);
+    policyService = TestBed.inject(PolicyService);
+    claimService = TestBed.inject(ClaimService);
+    routingService = TestBed.inject(RoutingService);
   });
   it('should create', () => {
     expect(component).toBeTruthy();
