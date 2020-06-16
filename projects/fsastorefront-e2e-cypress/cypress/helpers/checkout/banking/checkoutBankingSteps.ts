@@ -1,6 +1,4 @@
-export function checkBankingComparisonPage(mainProduct) {
-  cy.get('.heading-headline').contains(mainProduct);
-  cy.get('.progress-inner-wrapper').should('have.length', 6);
+export function checkBankingComparisonPage() {
   cy.get('cx-fs-comparison-table-panel').should('be.visible');
   cy.get('.fixed-column').should('have.length', 1);
   cy.get('.primary-button')
@@ -12,31 +10,32 @@ export function checkBankingComparisonPage(mainProduct) {
 }
 
 export function checkBankingProgressBar() {
-  cy.get('.progress-inner-wrapper').should('have.length', 6);
+  cy.get('.progress-inner-wrapper').should('have.length', 7);
   cy.get('p.label')
-    .should('have.length', 6)
+    .should('have.length', 7)
     .eq(0)
     .contains("What's Included");
   cy.get('p.label')
     .eq(1)
-    .contains('Add Options');
+    .contains('Configure a Product');
   cy.get('p.label')
     .eq(2)
-    .contains('Personal Details');
+    .contains('Add Options');
   cy.get('p.label')
     .eq(3)
-    .contains('Quote Review');
+    .contains('Personal Details');
   cy.get('p.label')
     .eq(4)
-    .contains('Legal Information');
+    .contains('Quote Review');
   cy.get('p.label')
     .eq(5)
+    .contains('Legal Information');
+  cy.get('p.label')
+    .eq(6)
     .contains('User Identification');
 }
 
-export function checkLegalInformationPage(mainProduct) {
-  cy.get('.heading-headline').contains(mainProduct);
-  cy.get('.progress-inner-wrapper').should('have.length', 6);
+export function checkLegalInformationPage() {
   cy.get('.section-header-heading').should('have.text', 'Legal information');
   cy.get('cx-fs-legal-documents > .border-color-3')
     .should('be.visible')
@@ -48,9 +47,8 @@ export function checkLegalInformationPage(mainProduct) {
   });
 }
 
-export function checkPersonalDetailsPage() {
-  cy.get('.progress-node').should('have.length', 6);
-  cy.get('cx-fs-cms-custom-container').should('be.visible');
-  cy.get('cx-fs-mini-cart').should('be.visible');
-  cy.get('cx-footer-navigation').should('be.visible');
+export function checkConfigureStep() {
+  cy.get('cx-fs-product-configuration-form').should('be.visible');
+  cy.get('cx-fs-product-configuration-mini-cart').should('be.visible');
+  cy.get('h3').contains('Configure a Product');
 }

@@ -1,9 +1,9 @@
-import * as currentAccount from '../../../helpers/checkout/banking/currentAccount';
 import * as productCategory from '../../../helpers/productCategoryPage';
-import * as register from '../../../helpers/register';
-import { registrationUser } from '../../../sample-data/users';
 import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
+import * as currentAccount from '../../../helpers/checkout/banking/currentAccount';
+import * as register from '../../../helpers/register';
+import { registrationUser } from '../../../sample-data/users';
 import * as userIdentification from '../../../helpers/checkout/banking/userIdentificationPage';
 
 context('Current Account Checkout', () => {
@@ -12,27 +12,34 @@ context('Current Account Checkout', () => {
   });
 
   it('Start checkout for Current Account ', () => {
-    cy.get('cx-footer-navigation').within(() => {
-      cy.get('a')
-        .contains('Current Account')
-        .click({ force: true });
+    checkout.waitForHomepage();
+    cy.selectOptionFromDropdown({
+      menuOption: 'Banking',
+      dropdownItem: 'Current Account',
     });
     productCategory.startCheckoutForBanking();
   });
 
   it('Should check comparison page', () => {
-    banking.checkBankingComparisonPage('Your Current Account Application');
+    checkout.checkCheckoutStep(' Your Current Account Application ', '7');
     banking.checkBankingProgressBar();
-  });
-
-  it('Should check prices in comparison table and select Family Account', () => {
+    banking.checkBankingComparisonPage();
     currentAccount.checkCurrentAccountComparisonTable();
     currentAccount.selectFamilyAccount();
   });
 
+  it('Should configure a Current Account', () => {
+    checkout.checkCheckoutStep(' Your Current Account Application ', '7');
+    banking.checkConfigureStep();
+    currentAccount.populateConfigureStep();
+    checkout.clickContinueButton();
+  });
+
   it('Should check optional products for Current Account', () => {
-    cy.get('.progress-node').should('have.length', 6);
+    checkout.checkCheckoutStep(' Your Current Account Application ', '7');
     currentAccount.checkOptionalProductsAddTransactionChest();
+    //creditCard.checkMiniCartCreditCard();
+    checkout.clickContinueButton();
   });
 
   it('Should register user in checkout', () => {
@@ -41,10 +48,10 @@ context('Current Account Checkout', () => {
   });
 
   it('Should complete personal details step', () => {
-    cy.get('h2').contains(' Your Current Account Application ');
-    banking.checkPersonalDetailsPage();
+    checkout.checkCheckoutStep(' Your Current Account Application ', '7');
+    checkout.checkPersonalDetailsPage();
     currentAccount.populatePersonalDetails();
-    currentAccount.checkMiniCartCurrentAccount();
+    //currentAccount.checkMiniCartCurrentAccount();
     checkout.clickContinueButton();
   });
 
@@ -63,9 +70,8 @@ context('Current Account Checkout', () => {
   });
 
   it('Should select User Identification page', () => {
-    userIdentification.checkUserIdentificationPage(
-      'Your Current Account Application'
-    );
+    checkout.checkCheckoutStep(' Your Current Account Application ', '7');
+    userIdentification.checkUserIdentificationPage();
     userIdentification.selectUserIdentification(' Video Identification ');
     checkout.clickContinueButton();
   });
@@ -73,5 +79,9 @@ context('Current Account Checkout', () => {
   it('Should check order confirmation', () => {
     checkout.checkOrderConfirmationBanking();
     checkout.checkAccordions('currentAccount');
+  });
+
+  it('Should empty my account policies page', () => {
+    checkout.checkMyAccountEmptyPages('Policies', 'You have no Policies!');
   });
 });

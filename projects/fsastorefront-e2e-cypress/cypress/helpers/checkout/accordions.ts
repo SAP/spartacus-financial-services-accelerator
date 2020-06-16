@@ -28,7 +28,7 @@ export const finalReviewAccordionTravel = [
 export const policyDetailsAccordions = [
   ' Policy Summary ',
   ' Who or What Is Insured ',
-  "What's Included",
+  " What's Included ",
   ' Optional Extras ',
   ' What Does It Cost Me? ',
 ];
@@ -57,6 +57,13 @@ export const finalReviewAccordionRenters = [
   'Personal Details',
 ];
 
+export const confirmationAccordionCreditCard = [
+  'Credit Card Information',
+  "What's Included",
+  'Added by you',
+  'Personal Details',
+];
+
 export const Accordions = {
   accordions: [
     {
@@ -77,7 +84,11 @@ export const Accordions = {
     },
     {
       category: 'creditCard',
-      accordionItems: this.quoteReviewAccordionGroup1,
+      accordionItems: this.quoteReviewAccordionGroup2,
+    },
+    {
+      category: 'creditCardConfirmation',
+      accordionItems: this.confirmationAccordionCreditCard,
     },
     {
       category: 'lifeFinalReview',
