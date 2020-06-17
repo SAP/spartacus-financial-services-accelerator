@@ -7,7 +7,6 @@ import {
   FieldConfig,
   FormDataService,
   FormDataStorageService,
-  OccValueListService,
 } from '@fsa/dynamicforms';
 import { LanguageService, Product } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
@@ -76,7 +75,6 @@ describe('CalculationButtonComponent', () => {
       declarations: [CalculationButtonComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide: OccValueListService, useClass: MockOccValueListService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,

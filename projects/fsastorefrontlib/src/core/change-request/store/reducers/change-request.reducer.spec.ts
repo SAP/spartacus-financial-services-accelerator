@@ -28,7 +28,7 @@ describe('Change Request Reducer', () => {
     });
   });
 
-  describe('CREATE_CHANGE_REQUEST_SUCESS', () => {
+  describe('CREATE_CHANGE_REQUEST_SUCCESS', () => {
     it('should create change request', () => {
       const action = new fromAction.CreateChangeRequestSuccess(
         mockedChangeRequest
@@ -39,7 +39,7 @@ describe('Change Request Reducer', () => {
     });
   });
 
-  describe('SIMULATE_CHANGE_REQUEST_SUCESS', () => {
+  describe('SIMULATE_CHANGE_REQUEST_SUCCESS', () => {
     it('should simulate change request', () => {
       const action = new fromAction.SimulateChangeRequestSuccess(
         mockedChangeRequest

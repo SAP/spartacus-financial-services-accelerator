@@ -11,12 +11,20 @@ export function reducer(
   action: fromAction.UserRequestActions
 ): UserRequestState {
   switch (action.type) {
+    case fromAction.UPDATE_USER_REQUEST:
+    case fromAction.SUBMIT_USER_REQUEST: {
+      return {
+        ...state,
+        loaded: false,
+      };
+    }
+    case fromAction.UPDATE_USER_REQUEST_SUCCESS:
     case fromAction.SUBMIT_USER_REQUEST_SUCCESS: {
       const content = { ...action.payload };
       return {
         ...state,
         content,
-        loaded: false,
+        loaded: true,
       };
     }
   }

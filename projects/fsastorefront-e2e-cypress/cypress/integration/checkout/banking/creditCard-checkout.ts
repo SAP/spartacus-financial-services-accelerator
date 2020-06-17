@@ -1,14 +1,12 @@
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
 import * as productCategory from '../../../helpers/productCategoryPage';
-import * as creditCard from '../../../helpers/checkout/banking/creditCard';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import * as userIdentification from '../../../helpers/checkout/banking/userIdentificationPage';
-import {
-  checkInboxComponets,
-  checkPendingMessage,
-} from '../../../helpers/my-account/inbox';
+import { checkPersonalDetailsPage } from '../../../helpers/checkout/checkoutSteps';
+import { checkInboxComponets } from '../../../helpers/my-account/inbox';
 import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
+import * as creditCard from '../../../helpers/checkout/banking/creditCard';
+import * as userIdentification from '../../../helpers/checkout/banking/userIdentificationPage';
 
 context('Credit Card Checkout', () => {
   before(() => {
@@ -18,20 +16,18 @@ context('Credit Card Checkout', () => {
   it('Should register a new user and start Credit Card checkout', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
-    cy.wait(500);
+    checkout.waitForHomepage();
     cy.selectOptionFromDropdown({
       menuOption: 'Banking',
       dropdownItem: 'Credit Card',
     });
-  });
-
-  it('Should start checkout for Credit Card', () => {
     productCategory.startCheckoutForBanking();
   });
 
   it('Should check comparison page', () => {
-    banking.checkBankingComparisonPage('Your Credit Card Application');
+    checkout.checkCheckoutStep('Your Credit Card Application', '7');
     banking.checkBankingProgressBar();
+    banking.checkBankingComparisonPage();
   });
 
   it('Should check prices in comparison table and select Premium Card', () => {
@@ -39,19 +35,23 @@ context('Credit Card Checkout', () => {
     creditCard.selectPremiumCard();
   });
 
-  it('Should check optional products for Credit Card', () => {
-    cy.get('.progress-node').should('have.length', 6);
-    creditCard.checkOptionalProducts();
+  it('Should configure a Credit Card', () => {
+    checkout.checkCheckoutStep('Your Credit Card Application', '7');
+    banking.checkConfigureStep();
+    creditCard.populateConfigureStep();
+    checkout.clickContinueButton();
   });
 
-  it('Should check Mini Cart and continue in checkout', () => {
-    creditCard.checkMiniCartCreditCard();
+  it('Should check optional products for Credit Card', () => {
+    checkout.checkCheckoutStep('Your Credit Card Application', '7');
+    creditCard.checkOptionalProducts();
+    //creditCard.checkMiniCartCreditCard();
     checkout.clickContinueButton();
   });
 
   it('Should populate Personal Details page', () => {
-    cy.get('h2').contains('Your Credit Card Application');
-    banking.checkPersonalDetailsPage();
+    checkout.checkCheckoutStep('Your Credit Card Application', '7');
+    checkPersonalDetailsPage();
     creditCard.populatePersonalDetails();
     checkout.clickContinueButton();
   });
@@ -66,21 +66,21 @@ context('Credit Card Checkout', () => {
   });
 
   it('Should check Legal Information page', () => {
-    banking.checkLegalInformationPage('Your Credit Card Application');
+    checkout.checkCheckoutStep('Your Credit Card Application', '7');
+    banking.checkLegalInformationPage();
     checkout.clickContinueButton();
   });
 
   it('Should complete User Identification page', () => {
-    userIdentification.checkUserIdentificationPage(
-      'Your Credit Card Application'
-    );
+    checkout.checkCheckoutStep('Your Credit Card Application', '7');
+    userIdentification.checkUserIdentificationPage();
     userIdentification.selectUserIdentification('At the Nearest Branch');
     checkout.clickContinueButton();
   });
 
   it('Should check order confirmation', () => {
     checkout.checkOrderConfirmationBanking();
-    checkout.checkAccordions('creditCard');
+    checkout.checkAccordions('creditCardConfirmation');
   });
 
   it('Should check Pending message is received', () => {

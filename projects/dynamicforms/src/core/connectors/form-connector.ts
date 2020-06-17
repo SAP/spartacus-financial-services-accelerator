@@ -15,7 +15,15 @@ export class FormConnector {
   ): Observable<YFormDefinition> {
     return this.formAdapter.getFormDefinition(applicationId, formDefinitionId);
   }
-
+  getFormDefinitions(
+    categoryCode: string,
+    formDefinitionType: string
+  ): Observable<YFormDefinition> {
+    return this.formAdapter.getFormDefinitions(
+      categoryCode,
+      formDefinitionType
+    );
+  }
   getFormData(formDataId: string): Observable<YFormData> {
     return this.formAdapter.getFormData(formDataId);
   }

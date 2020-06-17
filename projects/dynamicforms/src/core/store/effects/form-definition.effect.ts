@@ -13,11 +13,28 @@ export class FormDefinitionEffects {
     ofType(fromActions.LOAD_FORM_DEFINITION),
     map((action: fromActions.LoadFormDefinition) => action.payload),
     mergeMap(payload => {
+      if (payload.formDefinitionId) {
+        return this.formConnector
+          .getFormDefinition(payload.applicationId, payload.formDefinitionId)
+          .pipe(
+            map((formDefinition: any) => {
+              return new fromActions.LoadFormDefinitionSuccess(formDefinition);
+            }),
+            catchError(error => {
+              this.showGlobalMessage('forms.definitionLoadError');
+              return of(
+                new fromActions.LoadFormDefinitionFail(JSON.stringify(error))
+              );
+            })
+          );
+      }
       return this.formConnector
-        .getFormDefinition(payload.applicationId, payload.formDefinitionId)
+        .getFormDefinitions(payload.categoryCode, payload.formDefinitionType)
         .pipe(
-          map((formDefinition: any) => {
-            return new fromActions.LoadFormDefinitionSuccess(formDefinition);
+          map((definitions: any) => {
+            return new fromActions.LoadFormDefinitionSuccess(
+              definitions.formDefinitions[0]
+            );
           }),
           catchError(error => {
             this.showGlobalMessage('forms.definitionLoadError');
