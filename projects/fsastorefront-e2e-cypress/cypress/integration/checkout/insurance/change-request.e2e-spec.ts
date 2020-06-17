@@ -52,7 +52,7 @@ context('Change Request for new user', () => {
     fnol.waitForQuoteReviewPage();
     checkout.clickContinueButton();
     //check accordions
-    checkout.checkAccordions('lifeQuoteReview');
+    checkout.checkAccordions('generalQuoteAccordions');
     checkout.ConfirmBindQuote();
     selectPaymentMethod();
     checkout.placeOrderOnFinalReview();
