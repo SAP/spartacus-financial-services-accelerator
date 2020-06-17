@@ -105,13 +105,20 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
         });
         const previousStepNumber: number =
           this.getCurrentStepIndex(activatedRoute) - 1;
-        const previousCheckoutStep: string = this.steps[previousStepNumber]
-          .routeName;
-        this.setPreviousStep(data, previousCheckoutStep);
         const nextStepNumber: number =
           this.getCurrentStepIndex(activatedRoute) + 1;
-        const nextCheckoutStep: string = this.steps[nextStepNumber].routeName;
-        this.setNextStep(data, nextCheckoutStep);
+        if (
+          this.steps[nextStepNumber] &&
+          this.steps[nextStepNumber].routeName &&
+          this.steps[previousStepNumber] &&
+          this.steps[previousStepNumber].routeName
+        ) {
+          const previousCheckoutStep: string = this.steps[previousStepNumber]
+            .routeName;
+          this.setPreviousStep(data, previousCheckoutStep);
+          const nextCheckoutStep: string = this.steps[nextStepNumber].routeName;
+          this.setNextStep(data, nextCheckoutStep);
+        }
       }
     });
   }

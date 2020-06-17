@@ -24,7 +24,6 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
   selected: string;
   previousCheckoutStep$: Observable<ActiveCategoryStep>;
-  nextCheckoutStep$: Observable<ActiveCategoryStep>;
 
   identificationTypes: Array<any> = [
     {
@@ -44,7 +43,6 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.checkoutConfigService.filterSteps(this.activatedRoute);
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
-    this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
     this.checkoutService.mockDeliveryMode();
   }
 
