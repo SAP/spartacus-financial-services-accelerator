@@ -13,11 +13,7 @@ context('Current Account Checkout', () => {
 
   it('Start checkout for Current Account ', () => {
     checkout.waitForHomepage();
-    cy.selectOptionFromDropdown({
-      menuOption: 'Banking',
-      dropdownItem: 'Current Account',
-    });
-    productCategory.startCheckoutForBanking();
+    banking.startBankingCheckout('Current Account');
   });
 
   it('Should check comparison page', () => {

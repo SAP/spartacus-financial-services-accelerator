@@ -208,7 +208,6 @@ export function populatePropertyAddress() {
 }
 
 export function startInsuranceCheckout(mainProduct) {
-  cy.wait(500);
   cy.selectOptionFromDropdown({
     menuOption: 'Insurance',
     dropdownItem: mainProduct,

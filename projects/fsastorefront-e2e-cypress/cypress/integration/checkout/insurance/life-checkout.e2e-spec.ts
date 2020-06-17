@@ -10,6 +10,7 @@ context('Life Insurance Checkout', () => {
   });
 
   it('Should open life category page', () => {
+    checkout.waitForHomepage();
     checkout.startInsuranceCheckout('Life');
   });
 

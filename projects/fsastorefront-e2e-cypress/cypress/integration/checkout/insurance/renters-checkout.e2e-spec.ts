@@ -7,6 +7,7 @@ import {
   selectPaymentMethod,
 } from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
+import {waitForHomepage} from "../../../helpers/checkout/checkoutSteps";
 
 context('Renters Checkout', () => {
   before(() => {
@@ -22,6 +23,7 @@ context('Renters Checkout', () => {
   });
 
   it('Should open renters category page', () => {
+    checkout.waitForHomepage();
     checkout.startInsuranceCheckout('Renters');
   });
 
