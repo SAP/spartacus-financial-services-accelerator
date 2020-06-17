@@ -62,7 +62,7 @@ context('Homeowners Checkout', () => {
   it('Should check quote review page', () => {
     checkout.checkProgressBarInsurance('Homeowners');
     //homeowners.checkMiniCartHomeowners();
-    checkout.checkAccordions('propertyQuoteReview');
+    checkout.checkAccordions('generalQuoteAccordions');
     addPaymentMethod(registrationUserWithoutPhone.email);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();

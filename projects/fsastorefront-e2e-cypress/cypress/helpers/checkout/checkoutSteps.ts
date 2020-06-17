@@ -134,13 +134,6 @@ export function checkInsuranceComparisonPage(mainProduct, numberOfProducts) {
     .should('have.length', numberOfProducts);
 }
 
-export function checkPersonalDetailsPageInsurance() {
-  cy.get('.progress-node').should('have.length', 7);
-  cy.get('cx-fs-cms-custom-container').should('be.visible');
-  cy.get('cx-fs-mini-cart').should('be.visible');
-  cy.get('cx-footer-navigation').should('be.visible');
-}
-
 export function removeOptionalProduct(productName) {
   cy.get('h6')
     .contains(productName)
@@ -227,7 +220,6 @@ export function startInsuranceCheckout(mainProduct) {
     .click();
 }
 
-<<<<<<< HEAD
 export function waitForPersonalDetailsPage() {
   const personalDetails = waitForPage('personal-details', 'personalDetails');
   cy.wait(`@${personalDetails}`)

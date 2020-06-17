@@ -54,7 +54,7 @@ context('FNOL for sample data user', () => {
 
   it('Should populate personal details page', () => {
     checkout.waitForPersonalDetailsPage();
-    checkout.checkPersonalDetailsPageInsurance();
+    checkout.checkPersonalDetailsPage();
     auto.populatePersonalDetails();
     auto.populateVehicleDetails();
     auto.populateMainDriverData();
@@ -82,7 +82,7 @@ context('FNOL for sample data user', () => {
 
   it('Should update policy details', () => {
     checkMyPoliciesPage();
-    //updatePolicyEffectiveAndStartDate();
+    updatePolicyEffectiveAndStartDate();
   });
 
   it('Should check and populate Incident Information page', () => {

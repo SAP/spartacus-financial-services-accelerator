@@ -36,11 +36,11 @@ context('Change Request for new user', () => {
     addPaymentMethod(registrationUser.email);
     //auto.checkAutoSilverMiniCart();
     checkout.clickContinueButton();
+    checkout.waitForPersonalDetailsPage();
   });
 
   it('Should populate personal details page', () => {
-    checkout.waitForPersonalDetailsPage();
-    checkout.checkPersonalDetailsPageInsurance();
+    checkout.checkPersonalDetailsPage();
     auto.populatePersonalDetails();
     auto.populateVehicleDetails();
     auto.populateMainDriverData();
@@ -79,6 +79,7 @@ context('Change Request for new user', () => {
       .should('contain', 'Submit')
       .click();
     changeRequest.checkChangeRequestConfirmation();
+    cy.get('.SiteLogo').click();
   });
 
   it('Should complete change coverage checkout', () => {
@@ -101,6 +102,7 @@ context('Change Request for new user', () => {
       .should('contain', 'Submit')
       .click();
     changeRequest.checkChangeRequestConfirmation();
+    cy.get('.SiteLogo').click();
   });
 
   it('Should cancel change policy request', () => {
@@ -123,5 +125,4 @@ context('Change Request for new user', () => {
   });
 
   //TODO:Check inbox messages
-
 });
