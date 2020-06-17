@@ -1,4 +1,5 @@
 import * as shared from '../shared-checkout';
+
 const todaysDate = Cypress.moment().format('YYYY-MM-DD');
 
 export function openCategoryPage() {
