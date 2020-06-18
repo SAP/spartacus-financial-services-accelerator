@@ -7,7 +7,10 @@ export interface DynamicFormGroup {
   groupCode?: string;
   fieldConfigs: FieldConfig[];
   cssClass?: string;
-  dependsOn?: ControlDependency[];
+}
+export interface DependsOn {
+  hide?: boolean;
+  dependeciesArray?: ControlDependency[];
 }
 
 export interface FieldConfig {
@@ -25,7 +28,7 @@ export interface FieldConfig {
   hidden?: boolean;
   error?: LocalizedString;
   validations?: ValidatorFunction[];
-  dependsOn?: ControlDependency[];
+  dependsOn?: DependsOn[];
   prefillValue?: PrefillValue;
 }
 
@@ -35,6 +38,7 @@ export interface ApiConfig {
 }
 
 export interface PrefillValue {
+  condition?: string;
   targetObject: string;
   targetValue: string;
 }

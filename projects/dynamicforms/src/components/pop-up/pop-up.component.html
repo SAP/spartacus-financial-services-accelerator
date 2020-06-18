@@ -1,0 +1,8 @@
+<ng-container
+  *ngIf="
+    this.group.controls[this.config.name]?.invalid && this.config?.error
+      ? openModal()
+      : ''
+  "
+>
+</ng-container>

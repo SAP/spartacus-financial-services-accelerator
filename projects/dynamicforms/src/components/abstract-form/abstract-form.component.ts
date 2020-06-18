@@ -52,19 +52,50 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
       const targetObject = this.appConfig.dynamicForms.prefill[
         this.config.prefillValue.targetObject
       ];
-      if (targetObject && targetObject.prefillResolver) {
-        const prefillResolver = this.injector.get<PrefillResolver>(
-          targetObject.prefillResolver
-        );
-        prefillResolver
-          .getFieldValue(this.config.prefillValue.targetValue)
-          .subscribe(value => {
-            if (value) {
-              this.group.get(this.config.name).setValue(value);
-            }
-          })
-          .unsubscribe();
+      let conditionControlValue;
+      if (this.config.prefillValue.condition) {
+        conditionControlValue = this.group.get(
+          this.config.prefillValue.condition
+        ).value;
       }
+      if (!this.config.prefillValue.condition) {
+        this.prefill(targetObject);
+      } else {
+        if (conditionControlValue == 'true') {
+          if (targetObject && targetObject.prefillResolver) {
+            const prefillResolver = this.injector.get<PrefillResolver>(
+              targetObject.prefillResolver
+            );
+            console.log(this.config.prefillValue.targetValue);
+            prefillResolver
+              .getFieldValue(this.config.prefillValue.targetValue)
+              .subscribe(value => {
+                console.log(value);
+                if (value) {
+                  console.log(this.config.prefillValue.targetValue);
+                  this.group.get(this.config.name).setValue(value);
+                }
+              })
+              .unsubscribe();
+          }
+        }
+      }
+    }
+  }
+  prefill(targetObject) {
+    if (targetObject && targetObject.prefillResolver) {
+      const prefillResolver = this.injector.get<PrefillResolver>(
+        targetObject.prefillResolver
+      );
+      prefillResolver
+        .getFieldValue(this.config.prefillValue.targetValue)
+        .subscribe(value => {
+          if (value) {
+            console.log(this.config.prefillValue.targetValue);
+            this.group.get(this.config.name).setValue(value);
+          }
+        })
+        .unsubscribe();
     }
   }
   ngOnDestroy() {

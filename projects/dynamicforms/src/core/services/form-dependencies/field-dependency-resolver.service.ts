@@ -32,14 +32,19 @@ export class FieldDependencyResolverService {
     dependentControl: AbstractControl,
     formGroup: FormGroup
   ) {
-    controlConfig.dependsOn.forEach(condition => {
+    controlConfig.dependsOn.dependeciesArray.forEach(condition => {
       const masterFormControl = this.formService.getFormControlForCode(
         condition.controlName,
         formGroup
       );
       if (masterFormControl) {
         if (!masterFormControl.value) {
-          controlConfig.hidden = true;
+          if (
+            controlConfig.dependsOn.hide == true ||
+            controlConfig.dependsOn.hide == undefined
+          ) {
+            controlConfig.hidden = true;
+          }
           this.changeControlEnabled(dependentControl, controlConfig, false);
         }
         masterFormControl.valueChanges.subscribe(fieldValue => {
@@ -51,10 +56,20 @@ export class FieldDependencyResolverService {
             dependencyValidations
           );
           if (dependancyControl.valid) {
-            controlConfig.hidden = false;
+            if (
+              controlConfig.dependsOn.hide == true ||
+              controlConfig.dependsOn.hide == undefined
+            ) {
+              controlConfig.hidden = false;
+            }
             this.changeControlEnabled(dependentControl, controlConfig, true);
           } else {
-            controlConfig.hidden = true;
+            if (
+              controlConfig.dependsOn.hide == true ||
+              controlConfig.dependsOn.hide == undefined
+            ) {
+              controlConfig.hidden = true;
+            }
             this.changeControlEnabled(dependentControl, controlConfig, false);
           }
         });

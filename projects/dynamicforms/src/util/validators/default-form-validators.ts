@@ -174,4 +174,28 @@ export class DefaultFormValidators extends Validators {
       }
     };
   }
+
+  static equalDatesWithCondition(
+    firstDate: string,
+    secondDate: string,
+    condition: string
+  ) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (control.parent) {
+        const firstDateValue = control.parent.controls[firstDate].value;
+        const secondDateValue = control.parent.controls[secondDate].value;
+        const conditionfiledValue = control.parent.controls[condition].value;
+        // console.log(control.parent.controls[secondDate]);
+        // console.log(conditionfiledValue);
+        // console.log(firstDateValue);
+        // console.log(secondDateValue);
+        if (conditionfiledValue == 'true') {
+          return firstDateValue == secondDateValue
+            ? null
+            : { valueConflict: true };
+        }
+        return null;
+      }
+    };
+  }
 }
