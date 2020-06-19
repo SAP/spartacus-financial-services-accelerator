@@ -16,7 +16,7 @@ context('Current Account Checkout', () => {
   });
 
   it('Should check comparison page', () => {
-    checkout.checkCheckoutStep(' Your Current Account Application ');
+    checkout.checkCheckoutStep(' Your Current Account Application ', '7');
     banking.checkBankingProgressBar();
     banking.checkBankingComparisonPage();
     currentAccount.checkCurrentAccountComparisonTable();
@@ -24,14 +24,14 @@ context('Current Account Checkout', () => {
   });
 
   it('Should configure a Current Account', () => {
-    checkout.checkCheckoutStep(' Your Current Account Application ');
+    checkout.checkCheckoutStep(' Your Current Account Application ', '7');
     banking.checkConfigureStep();
     currentAccount.populateConfigureStep();
     checkout.clickContinueButton();
   });
 
   it('Should check optional products for Current Account', () => {
-    checkout.checkCheckoutStep(' Your Current Account Application ');
+    checkout.checkCheckoutStep(' Your Current Account Application ', '7');
     currentAccount.checkOptionalProductsAddTransactionChest();
     //creditCard.checkMiniCartCreditCard();
     checkout.clickContinueButton();
@@ -43,7 +43,7 @@ context('Current Account Checkout', () => {
   });
 
   it('Should complete personal details step', () => {
-    checkout.checkCheckoutStep(' Your Current Account Application ');
+    checkout.checkCheckoutStep(' Your Current Account Application ', '7');
     checkout.checkPersonalDetailsPage();
     currentAccount.populatePersonalDetails();
     //currentAccount.checkMiniCartCurrentAccount();
@@ -65,7 +65,7 @@ context('Current Account Checkout', () => {
   });
 
   it('Should select User Identification page', () => {
-    checkout.checkCheckoutStep(' Your Current Account Application ');
+    checkout.checkCheckoutStep(' Your Current Account Application ', '7');
     userIdentification.checkUserIdentificationPage();
     userIdentification.selectUserIdentification(' Video Identification ');
     checkout.clickContinueButton();

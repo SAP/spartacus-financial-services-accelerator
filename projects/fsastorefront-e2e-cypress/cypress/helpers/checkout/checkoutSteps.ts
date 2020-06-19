@@ -222,9 +222,9 @@ export function waitForHomepage() {
     .should('eq', 200);
 }
 
-export function checkCheckoutStep(mainProduct) {
+export function checkCheckoutStep(mainProduct, numberOfSteps) {
   cy.get('h2').contains(mainProduct);
-  cy.get('.progress-inner-wrapper').should('have.length', '7');
+  cy.get('.progress-inner-wrapper').should('have.length', numberOfSteps);
 }
 
 export function checkPersonalDetailsPage() {

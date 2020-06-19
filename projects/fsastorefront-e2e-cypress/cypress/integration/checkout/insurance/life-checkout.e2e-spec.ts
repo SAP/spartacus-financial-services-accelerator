@@ -15,7 +15,7 @@ context('Life Insurance Checkout', () => {
   });
 
   it('Should check progress bar', () => {
-    checkout.checkCheckoutStep('Your Life Insurance');
+    checkout.checkCheckoutStep('Your Life Insurance', '7');
     checkout.checkProgressBarInsurance();
   });
 
@@ -63,7 +63,7 @@ context('Life Insurance Checkout', () => {
   });
 
   it('Should check quote review step', () => {
-    checkout.checkCheckoutStep('Your Life Insurance');
+    checkout.checkCheckoutStep('Your Life Insurance', '7');
     checkout.checkProgressBarInsurance();
     //life.checkLifeBasicMiniCartSecondPerson();
     checkout.checkAccordions('lifeQuoteReview');

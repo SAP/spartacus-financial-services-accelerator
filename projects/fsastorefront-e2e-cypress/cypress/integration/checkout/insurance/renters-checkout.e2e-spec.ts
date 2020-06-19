@@ -27,7 +27,7 @@ context('Renters Checkout', () => {
   });
 
   it('Should populate first page in checkout', () => {
-    checkout.checkCheckoutStep('Your Renters Insurance');
+    checkout.checkCheckoutStep('Your Renters Insurance', '7');
     checkout.checkProgressBarInsurance();
     checkout.checkFirstCheckoutStep('Renters');
     checkout.populatePropertyDetails();
@@ -37,7 +37,7 @@ context('Renters Checkout', () => {
   });
 
   it('Should check comparison table', () => {
-    checkout.checkCheckoutStep('Your Renters Insurance');
+    checkout.checkCheckoutStep('Your Renters Insurance', '7');
     checkout.checkInsuranceComparisonPage('2');
     renters.checkRentersComparisonTable();
     renters.selectRentersMonthly();
@@ -57,7 +57,7 @@ context('Renters Checkout', () => {
   });
 
   it('Should check quote review page', () => {
-    checkout.checkCheckoutStep('Your Renters Insurance');
+    checkout.checkCheckoutStep('Your Renters Insurance', '7');
     checkout.checkProgressBarInsurance();
     //renters.checkMiniCartRentersRemovedProduct();
     checkout.clickContinueButton();
@@ -85,7 +85,7 @@ context('Renters Checkout', () => {
     renters.checkRentersPolicy();
   });
 
-  it('Should validate phone number', () => {
+  it('Should validate phone number and check empty my account pages', () => {
     register.validatePhoneNumber('');
     checkout.checkMyAccountEmptyPages('Claims', 'You have no Claims!');
     checkout.checkMyAccountEmptyPages(
