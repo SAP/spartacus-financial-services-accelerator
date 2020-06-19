@@ -1,9 +1,7 @@
 import { Accordions } from './accordions';
 import { waitForPage } from '../generalHelpers';
 
-export function checkProgressBarInsurance(mainProduct) {
-  cy.get('.heading-headline').contains(mainProduct);
-  cy.get('.progress-node').should('have.length', 7);
+export function checkProgressBarInsurance() {
   cy.get('p.label')
     .should('have.length', 7)
     .eq(0)
@@ -121,9 +119,7 @@ export function checkOrderConfirmation() {
   });
 }
 
-export function checkInsuranceComparisonPage(mainProduct, numberOfProducts) {
-  cy.get('.heading-headline').contains(mainProduct);
-  cy.get('.progress-inner-wrapper').should('have.length', 7);
+export function checkInsuranceComparisonPage(numberOfProducts) {
   cy.get('cx-fs-comparison-table-panel').should('be.visible');
   cy.get('.fixed-column').should('have.length', 1);
   cy.get('.primary-button')
@@ -226,12 +222,9 @@ export function waitForHomepage() {
     .should('eq', 200);
 }
 
-export function checkCheckoutStep(mainProduct, numberOfCheckoutSteps) {
+export function checkCheckoutStep(mainProduct) {
   cy.get('h2').contains(mainProduct);
-  cy.get('.progress-inner-wrapper').should(
-    'have.length',
-    numberOfCheckoutSteps
-  );
+  cy.get('.progress-inner-wrapper').should('have.length', '7');
 }
 
 export function checkPersonalDetailsPage() {

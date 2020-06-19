@@ -78,7 +78,6 @@ export function populateHomeownersSpecific() {
 
 export function populateBuildingCover() {
   cy.get('[name=numberOfYearsHoldingInsurance]').type('12');
-
   cy.get('h4').contains('Your Building Cover');
   cy.get('[name=alreadyHeldInsurance]').select('3');
   cy.get('[name="accidentalDamageCoverBuilding"]')

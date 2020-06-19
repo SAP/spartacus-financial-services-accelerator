@@ -30,7 +30,8 @@ context('Homeowners Checkout', () => {
   });
 
   it('Should populate first page in checkout', () => {
-    checkout.checkProgressBarInsurance('Your Homeowners Insurance');
+    checkout.checkCheckoutStep('Your Homeowners Insurance');
+    checkout.checkProgressBarInsurance();
     //check page content - first step
     checkout.checkFirstCheckoutStep('Homeowners');
     homeowners.populateHomeownersSpecific();
@@ -42,7 +43,8 @@ context('Homeowners Checkout', () => {
   });
 
   it('Should check comparison table', () => {
-    checkout.checkInsuranceComparisonPage('Your Homeowners Insurance', '2');
+    checkout.checkCheckoutStep('Your Homeowners Insurance');
+    checkout.checkInsuranceComparisonPage('2');
     homeowners.checkHomeownersComparisonTable();
     homeowners.selectHomeownersAnnually();
   });
@@ -60,7 +62,8 @@ context('Homeowners Checkout', () => {
   });
 
   it('Should check quote review page', () => {
-    checkout.checkProgressBarInsurance('Homeowners');
+    checkout.checkCheckoutStep('Your Homeowners Insurance');
+    checkout.checkProgressBarInsurance();
     //homeowners.checkMiniCartHomeowners();
     checkout.checkAccordions('propertyQuoteReview');
     addPaymentMethod(registrationUserWithoutPhone.email);

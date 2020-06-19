@@ -7,7 +7,6 @@ import {
   selectPaymentMethod,
 } from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
-import {waitForHomepage} from "../../../helpers/checkout/checkoutSteps";
 
 context('Renters Checkout', () => {
   before(() => {
@@ -28,7 +27,8 @@ context('Renters Checkout', () => {
   });
 
   it('Should populate first page in checkout', () => {
-    checkout.checkProgressBarInsurance('Your Renters Insurance');
+    checkout.checkCheckoutStep('Your Renters Insurance');
+    checkout.checkProgressBarInsurance();
     checkout.checkFirstCheckoutStep('Renters');
     checkout.populatePropertyDetails();
     checkout.populateContentsCover();
@@ -37,7 +37,8 @@ context('Renters Checkout', () => {
   });
 
   it('Should check comparison table', () => {
-    checkout.checkInsuranceComparisonPage('Your Renters Insurance', '2');
+    checkout.checkCheckoutStep('Your Renters Insurance');
+    checkout.checkInsuranceComparisonPage('2');
     renters.checkRentersComparisonTable();
     renters.selectRentersMonthly();
   });
@@ -56,7 +57,8 @@ context('Renters Checkout', () => {
   });
 
   it('Should check quote review page', () => {
-    checkout.checkProgressBarInsurance('Renters');
+    checkout.checkCheckoutStep('Your Renters Insurance');
+    checkout.checkProgressBarInsurance();
     //renters.checkMiniCartRentersRemovedProduct();
     checkout.clickContinueButton();
     checkout.checkAccordions('propertyQuoteReview');

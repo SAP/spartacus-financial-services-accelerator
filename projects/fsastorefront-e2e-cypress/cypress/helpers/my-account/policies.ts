@@ -1,3 +1,5 @@
+import { waitForPage } from '../generalHelpers';
+
 export function checkPoliciesTitle() {
   cy.get('.heading-headline').should('contain', 'Policies');
 }
@@ -68,5 +70,13 @@ export function checkMyQuotesPage() {
   cy.selectOptionFromDropdown({
     menuOption: 'My Account',
     dropdownItem: 'Quotes & Applications',
+  });
+}
+
+export function clickOnPolicyDetails() {
+  cy.get('.info-card').within(() => {
+    cy.get('a')
+      .contains(' Details ')
+      .click({ force: true });
   });
 }

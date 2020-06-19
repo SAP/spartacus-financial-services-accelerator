@@ -21,7 +21,7 @@ context('Credit Card Checkout', () => {
   });
 
   it('Should check comparison page', () => {
-    checkout.checkCheckoutStep('Your Credit Card Application', '7');
+    checkout.checkCheckoutStep('Your Credit Card Application');
     banking.checkBankingProgressBar();
     banking.checkBankingComparisonPage();
   });
@@ -32,21 +32,21 @@ context('Credit Card Checkout', () => {
   });
 
   it('Should configure a Credit Card', () => {
-    checkout.checkCheckoutStep('Your Credit Card Application', '7');
+    checkout.checkCheckoutStep('Your Credit Card Application');
     banking.checkConfigureStep();
     creditCard.populateConfigureStep();
     checkout.clickContinueButton();
   });
 
   it('Should check optional products for Credit Card', () => {
-    checkout.checkCheckoutStep('Your Credit Card Application', '7');
+    checkout.checkCheckoutStep('Your Credit Card Application');
     creditCard.checkOptionalProducts();
     //creditCard.checkMiniCartCreditCard();
     checkout.clickContinueButton();
   });
 
   it('Should populate Personal Details page', () => {
-    checkout.checkCheckoutStep('Your Credit Card Application', '7');
+    checkout.checkCheckoutStep('Your Credit Card Application');
     checkPersonalDetailsPage();
     creditCard.populatePersonalDetails();
     checkout.clickContinueButton();
@@ -62,13 +62,13 @@ context('Credit Card Checkout', () => {
   });
 
   it('Should check Legal Information page', () => {
-    checkout.checkCheckoutStep('Your Credit Card Application', '7');
+    checkout.checkCheckoutStep('Your Credit Card Application');
     banking.checkLegalInformationPage();
     checkout.clickContinueButton();
   });
 
   it('Should complete User Identification page', () => {
-    checkout.checkCheckoutStep('Your Credit Card Application', '7');
+    checkout.checkCheckoutStep('Your Credit Card Application');
     userIdentification.checkUserIdentificationPage();
     userIdentification.selectUserIdentification('At the Nearest Branch');
     checkout.clickContinueButton();

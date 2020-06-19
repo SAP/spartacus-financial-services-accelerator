@@ -15,7 +15,8 @@ context('Life Insurance Checkout', () => {
   });
 
   it('Should check progress bar', () => {
-    checkout.checkProgressBarInsurance('Your Life Insurance');
+    checkout.checkCheckoutStep('Your Life Insurance');
+    checkout.checkProgressBarInsurance();
   });
 
   it('Should complete life checkout', () => {
@@ -62,7 +63,8 @@ context('Life Insurance Checkout', () => {
   });
 
   it('Should check quote review step', () => {
-    checkout.checkProgressBarInsurance('Your Life Insurance');
+    checkout.checkCheckoutStep('Your Life Insurance');
+    checkout.checkProgressBarInsurance();
     //life.checkLifeBasicMiniCartSecondPerson();
     checkout.checkAccordions('lifeQuoteReview');
     cy.get('.primary-button').should('not.be.visible');

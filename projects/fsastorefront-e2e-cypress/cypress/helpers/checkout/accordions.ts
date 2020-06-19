@@ -64,6 +64,31 @@ export const confirmationAccordionCreditCard = [
   'Personal Details',
 ];
 
+export const quoteReviewAccordionSavings = [
+  'General Details',
+  "What's Included",
+  'Added by you',
+  'Investments Details',
+  'Personal Details',
+];
+
+export const finalReviewAccordionSavings = [
+  'Savings Insurance Information',
+  "What's Included",
+  'Added by you',
+  'Investments Details',
+  'Personal Details',
+];
+
+export const policyDetailsSavings = [
+  'Policy Summary',
+  'Who or What Is Insured',
+  "What's Included",
+  'Optional Extras',
+  'Investment Details',
+  'What Does It Cost Me',
+];
+
 export const Accordions = {
   accordions: [
     {
@@ -117,6 +142,18 @@ export const Accordions = {
     {
       category: 'rentersFinalReview',
       accordionItems: this.finalReviewAccordionRenters,
+    },
+    {
+      category: 'savingsQuoteReview',
+      accordionItems: this.quoteReviewAccordionSavings,
+    },
+    {
+      category: 'savingsFinalReview',
+      accordionItems: this.finalReviewAccordionSavings,
+    },
+    {
+      category: 'savingsPolicyDetails',
+      accordionItems: this.policyDetailsSavings,
     },
   ],
 };

@@ -22,7 +22,8 @@ context('Travel Insurance Checkout', () => {
       travelCheckout.openCategoryPage();
     });
     it('Should populate insurance information form', () => {
-      checkout.checkProgressBarInsurance('Your Travel Insurance');
+      checkout.checkCheckoutStep('Your Travel Insurance');
+      checkout.checkProgressBarInsurance();
       travelCheckout.populateInsuranceInfoForm();
     });
 
