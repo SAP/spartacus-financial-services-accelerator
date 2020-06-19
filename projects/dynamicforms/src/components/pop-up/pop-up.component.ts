@@ -25,7 +25,7 @@ export class PopUpComponent extends AbstractFormComponent implements OnInit {
   }
   modalInstance: any;
 
-  private openModal() {
+  openModal() {
     this.modalInstance = this.modalService.open(PopupContentComponent, {
       centered: true,
       size: 'lg',
@@ -34,12 +34,5 @@ export class PopUpComponent extends AbstractFormComponent implements OnInit {
   }
   ngOnInit() {
     super.ngOnInit();
-    if (
-      this.group.controls[this.config.name].invalid &&
-      this.group.controls[this.config.name].touched &&
-      this.config.error
-    ) {
-      this.openModal();
-    }
   }
 }

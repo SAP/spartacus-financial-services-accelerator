@@ -25,7 +25,7 @@ export class CartPrefillResolver implements PrefillResolver {
             break;
           }
         }
-        currentValue = this.convertIfDate(currentValue);
+        // currentValue = this.convertIfDate(currentValue);
         return currentValue;
       })
     );

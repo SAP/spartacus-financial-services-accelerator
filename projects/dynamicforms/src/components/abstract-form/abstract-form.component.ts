@@ -66,13 +66,10 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
             const prefillResolver = this.injector.get<PrefillResolver>(
               targetObject.prefillResolver
             );
-            console.log(this.config.prefillValue.targetValue);
             prefillResolver
               .getFieldValue(this.config.prefillValue.targetValue)
               .subscribe(value => {
-                console.log(value);
                 if (value) {
-                  console.log(this.config.prefillValue.targetValue);
                   this.group.get(this.config.name).setValue(value);
                 }
               })
@@ -91,7 +88,6 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
         .getFieldValue(this.config.prefillValue.targetValue)
         .subscribe(value => {
           if (value) {
-            console.log(this.config.prefillValue.targetValue);
             this.group.get(this.config.name).setValue(value);
           }
         })

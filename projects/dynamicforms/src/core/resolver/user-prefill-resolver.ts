@@ -14,7 +14,6 @@ export class UserPrefillResolver implements PrefillResolver {
     let currentValue;
     return this.userService.get().pipe(
       map(user => {
-        console.log(user);
         currentValue = user;
         attributes.forEach(attribute => {
           currentValue = currentValue[attribute];

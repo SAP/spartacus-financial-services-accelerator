@@ -185,14 +185,10 @@ export class DefaultFormValidators extends Validators {
         const firstDateValue = control.parent.controls[firstDate].value;
         const secondDateValue = control.parent.controls[secondDate].value;
         const conditionfiledValue = control.parent.controls[condition].value;
-        // console.log(control.parent.controls[secondDate]);
-        // console.log(conditionfiledValue);
-        // console.log(firstDateValue);
-        // console.log(secondDateValue);
         if (conditionfiledValue == 'true') {
           return firstDateValue == secondDateValue
             ? null
-            : { valueConflict: true };
+            : { InvalidDate: true };
         }
         return null;
       }
