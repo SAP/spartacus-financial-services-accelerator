@@ -325,7 +325,7 @@
       [title]="'fscommon.documents' | cxTranslate"
     >
       <ul class="accordion-list container-fluid documents">
-        <li class="accordion-list-item row">
+        <li class="accordion-list-item row ">
           <div class="col-6">
             {{ 'policy.documentName' | cxTranslate }}
           </div>
@@ -337,9 +337,9 @@
           <li class="accordion-list-item row">
             <div class="col-6">
               <a
+                href="javascript:void(0)"
                 class="document-link"
-                (click)="getDocument(document.code)"
-                target="_blank"
+                (click)="getDocument(document.code, document.altText)"
                 >{{ document.altText }}</a
               >
             </div>

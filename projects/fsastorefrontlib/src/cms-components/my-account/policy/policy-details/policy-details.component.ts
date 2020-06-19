@@ -11,6 +11,8 @@ import { PolicyService } from '../../../../core/my-account/facade/policy.service
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import { AllowedFSRequestType } from './../../../../occ/occ-models';
 import { DocumentService } from './../../../../core/document/facade/document.service';
+import { saveAs } from 'file-saver';
+import { base64StringToBlob } from 'blob-util';
 
 @Component({
   selector: 'cx-fs-policy-details',
@@ -88,9 +90,17 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
-  getDocument(documentId) {
+  getDocument(documentId, documentName) {
     this.subscription.add(
-      this.documentService.getDocumentById(documentId).subscribe()
+      this.documentService
+        .getDocumentById(documentId)
+        .pipe(
+          map(document => {
+            const blobFile = base64StringToBlob(document, 'application/pdf');
+            saveAs(blobFile, documentName + '.pdf');
+          })
+        )
+        .subscribe()
     );
   }
 
