@@ -7,7 +7,7 @@ import {
   selectPaymentMethod,
 } from '../../../helpers/checkout/insurance/payment';
 import * as policies from '../../../helpers/my-account/policies';
-import * as premiumCalendar from '../../../helpers/my-account/premium-calendar';
+import * as premiumCalendar from '../../../helpers/my-account/myAccountPages';
 
 context('Savings Insurance Checkout', () => {
   before(() => {

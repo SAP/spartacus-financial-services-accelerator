@@ -98,3 +98,8 @@ export function checkEventPolicy() {
   cy.get('.label').contains('Premium');
   cy.get('.value').contains('€47.99');
 }
+
+export function checkCheckoutPage() {
+  cy.get('h2').contains('Your Event Insurance');
+  cy.get('.progress-inner-wrapper').should('have.length', '6');
+}

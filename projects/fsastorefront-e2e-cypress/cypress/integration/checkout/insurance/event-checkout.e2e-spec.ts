@@ -1,10 +1,6 @@
 import * as register from '../../../helpers/register';
-import {
-  registrationUser,
-  registrationUserWithoutPhone,
-} from '../../../sample-data/users';
+import { registrationUser } from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import * as renters from '../../../helpers/checkout/insurance/renters-checkout';
 import * as event from '../../../helpers/checkout/insurance/event-checkout';
 import { clickContinueButton } from '../../../helpers/checkout/checkoutSteps';
 import {
@@ -12,6 +8,7 @@ import {
   selectPaymentMethod,
 } from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
+import * as myAccount from '../../../helpers/my-account/myAccountPages';
 
 context('Event Checkout', () => {
   before(() => {
@@ -29,8 +26,7 @@ context('Event Checkout', () => {
   });
 
   it('Should check comparison table', () => {
-    cy.get('h2').contains('Your Event Insurance');
-    cy.get('.progress-inner-wrapper').should('have.length', '6');
+    event.checkCheckoutPage();
     event.checkProgressBarEvent();
     checkout.checkInsuranceComparisonPage('4');
     event.checkEventComparisonTable();
@@ -38,8 +34,7 @@ context('Event Checkout', () => {
   });
 
   it('Should check add options page', () => {
-    cy.get('h2').contains('Your Event Insurance');
-    cy.get('.progress-inner-wrapper').should('have.length', '6');
+    event.checkCheckoutPage();
     event.checkOptionalProducts();
     //event.checkMiniCartEvent();
     checkout.removeOptionalProduct('Excess Waiver');
@@ -48,20 +43,17 @@ context('Event Checkout', () => {
   });
 
   it('Should populate personal details page', () => {
-    cy.get('h2').contains('Your Event Insurance');
-    cy.get('.progress-inner-wrapper').should('have.length', '6');
+    event.checkCheckoutPage();
     checkout.checkPersonalDetailsPage();
     event.populatePersonalDetails();
     clickContinueButton();
   });
   it('Should check quote review page', () => {
-    cy.get('h2').contains('Your Event Insurance');
-    cy.get('.progress-inner-wrapper').should('have.length', '6');
+    event.checkCheckoutPage();
     event.checkProgressBarEvent();
     //renters.checkMiniCartRentersRemovedProduct();
     checkout.clickContinueButton();
-    //TODO: should be general accordion
-    checkout.checkAccordions('currentAccount');
+    checkout.checkAccordions('threeAccordions');
     addPaymentMethod(registrationUser.email);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
@@ -76,12 +68,22 @@ context('Event Checkout', () => {
   });
 
   it('Check order confirmation', () => {
-    checkout.checkAccordions('currentAccount');
+    checkout.checkAccordions('threeAccordions');
     checkout.checkOrderConfirmation();
   });
 
   it('Check my policies page', () => {
     checkMyPoliciesPage();
     event.checkEventPolicy();
+  });
+
+  it('Close account for user', () => {
+    cy.selectOptionFromDropdown({
+      menuOption: 'My Account',
+      dropdownItem: 'Close Account',
+    });
+    cy.wait(500);
+    myAccount.checkCloseAccountPage();
+    myAccount.closeAccount();
   });
 });

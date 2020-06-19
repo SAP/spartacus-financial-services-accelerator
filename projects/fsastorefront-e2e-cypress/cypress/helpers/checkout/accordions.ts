@@ -96,16 +96,12 @@ export const Accordions = {
       accordionItems: this.quoteReviewAccordionGroup2,
     },
     {
-      category: 'auto',
+      category: 'threeAccordions',
       accordionItems: this.quoteReviewAccordionGroup1,
     },
     {
       category: 'travelQuoteReview',
       accordionItems: this.quoteReviewAccordionGroup2,
-    },
-    {
-      category: 'currentAccount',
-      accordionItems: this.quoteReviewAccordionGroup1,
     },
     {
       category: 'creditCard',

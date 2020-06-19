@@ -1,5 +1,3 @@
-import { waitForPage } from '../generalHelpers';
-
 export function checkPoliciesTitle() {
   cy.get('.heading-headline').should('contain', 'Policies');
 }
