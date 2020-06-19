@@ -1,3 +1,5 @@
+import {waitForPage} from "../../generalHelpers";
+
 export function checkBankingComparisonPage() {
   cy.get('cx-fs-comparison-table-panel').should('be.visible');
   cy.get('.fixed-column').should('have.length', 1);
@@ -51,4 +53,26 @@ export function checkConfigureStep() {
   cy.get('cx-fs-product-configuration-form').should('be.visible');
   cy.get('cx-fs-product-configuration-mini-cart').should('be.visible');
   cy.get('h3').contains('Configure a Product');
+}
+
+export function checkProgressBarLoan() {
+  cy.get('p.label')
+    .should('have.length', 6)
+    .eq(0)
+    .contains('Configure a Product');
+  cy.get('p.label')
+    .eq(1)
+    .contains('Add Options');
+  cy.get('p.label')
+    .eq(2)
+    .contains('Personal Details');
+  cy.get('p.label')
+    .eq(3)
+    .contains('Quote Review');
+  cy.get('p.label')
+    .eq(4)
+    .contains('Legal Information');
+  cy.get('p.label')
+    .eq(5)
+    .contains('User Identification');
 }
