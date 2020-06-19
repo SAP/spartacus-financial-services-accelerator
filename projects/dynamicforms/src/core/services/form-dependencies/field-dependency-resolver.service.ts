@@ -37,12 +37,14 @@ export class FieldDependencyResolverService {
         condition.controlName,
         formGroup
       );
+      let hideDependentFiled: boolean = true;
+      controlConfig.dependsOn.hide == false
+        ? (hideDependentFiled = false)
+        : (hideDependentFiled = true);
+
       if (masterFormControl) {
         if (!masterFormControl.value) {
-          if (
-            controlConfig.dependsOn.hide == true ||
-            controlConfig.dependsOn.hide == undefined
-          ) {
+          if (hideDependentFiled) {
             controlConfig.hidden = true;
           }
           this.changeControlEnabled(dependentControl, controlConfig, false);
@@ -56,18 +58,12 @@ export class FieldDependencyResolverService {
             dependencyValidations
           );
           if (dependancyControl.valid) {
-            if (
-              controlConfig.dependsOn.hide == true ||
-              controlConfig.dependsOn.hide == undefined
-            ) {
+            if (hideDependentFiled) {
               controlConfig.hidden = false;
             }
             this.changeControlEnabled(dependentControl, controlConfig, true);
           } else {
-            if (
-              controlConfig.dependsOn.hide == true ||
-              controlConfig.dependsOn.hide == undefined
-            ) {
+            if (hideDependentFiled) {
               controlConfig.hidden = true;
             }
             this.changeControlEnabled(dependentControl, controlConfig, false);

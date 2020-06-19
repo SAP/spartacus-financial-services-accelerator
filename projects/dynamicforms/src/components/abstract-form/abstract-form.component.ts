@@ -62,19 +62,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
         this.prefill(targetObject);
       } else {
         if (conditionControlValue == 'true') {
-          if (targetObject && targetObject.prefillResolver) {
-            const prefillResolver = this.injector.get<PrefillResolver>(
-              targetObject.prefillResolver
-            );
-            prefillResolver
-              .getFieldValue(this.config.prefillValue.targetValue)
-              .subscribe(value => {
-                if (value) {
-                  this.group.get(this.config.name).setValue(value);
-                }
-              })
-              .unsubscribe();
-          }
+          this.prefill(targetObject);
         }
       }
     }
