@@ -9,7 +9,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { CurrencyService, OrderEntry, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/cart/facade';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
@@ -56,14 +56,26 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
         .subscribe()
     );
 
-    this.checkoutConfigService.filterSteps(this.activatedRoute);
-    this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
-    this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
+    this.subscription.add(
+      this.cartService
+        .getEntries()
+        .pipe(
+          tap(() => {
+            this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
+            this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
+            this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
+          })
+        )
+        .subscribe()
+    );
 
     this.cartLoaded$ = this.cartService.getLoaded();
-    this.entries$ = this.cartService
-      .getEntries()
-      .pipe(filter(entries => entries.length > 0));
+    this.entries$ = this.cartService.getEntries().pipe(
+      filter(entries => entries && entries.length > 0),
+      tap(() => {
+        this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
+      })
+    );
   }
 
   addProductToCart(orderEntryCode: string, entryNumber: string) {

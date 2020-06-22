@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Cart, OccConfig, RoutingService } from '@spartacus/core';
 import { ModalRef, ModalService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
@@ -42,12 +42,20 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.checkoutConfigService.filterSteps(this.activatedRoute);
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
-
     this.cart$ = this.cartService.getActive();
     this.cartLoaded$ = this.cartService.getLoaded();
+    this.subscription.add(
+      this.cartService
+        .getLoaded()
+        .pipe(
+          tap(() => {
+            this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
+          })
+        )
+        .subscribe()
+    );
   }
 
   getBaseUrl() {

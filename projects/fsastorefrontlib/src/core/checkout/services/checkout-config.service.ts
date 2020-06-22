@@ -8,10 +8,17 @@ import {
   CheckoutConfig,
   CheckoutConfigService,
   CheckoutStepType,
+  CurrentProductService,
 } from '@spartacus/storefront';
-import { CategoryService } from './category/category.service';
 import { BehaviorSubject } from 'rxjs';
-import { FSCheckoutStep, ActiveCategoryStep } from '../../../occ';
+import {
+  FSCheckoutStep,
+  ActiveCategoryStep,
+  FSCart,
+  FSProduct,
+} from '../../../occ';
+import { FSCartService } from '../../cart';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +27,8 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   constructor(
     protected fsCheckoutConfig: CheckoutConfig,
     protected fsRoutingConfigService: RoutingConfigService,
-    protected categoryService: CategoryService
+    protected cartService: FSCartService,
+    protected currentProductService: CurrentProductService
   ) {
     super(fsCheckoutConfig, fsRoutingConfigService);
   }
@@ -31,47 +39,13 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   nextCheckoutStepSource = new BehaviorSubject<ActiveCategoryStep>(null);
   nextStep = this.nextCheckoutStepSource.asObservable();
 
+  activeParamType: string;
+
   setPreviousStep(activeCategory: string, step: string) {
     this.previousCheckoutStepSource.next({ activeCategory, step });
   }
   setNextStep(activeCategory: string, step: string) {
     this.nextCheckoutStepSource.next({ activeCategory, step });
-  }
-
-  getCheckoutStep(currentStepType: CheckoutStepType): FSCheckoutStep {
-    return this.steps[this.getFSCheckoutStepIndex('type', currentStepType)];
-  }
-
-  getFirstCheckoutStepRoute(): string {
-    return this.steps[0].routeName;
-  }
-
-  getNextCheckoutStepUrl(activatedRoute: ActivatedRoute): string {
-    const stepIndex = this.getCurrentStepIndex(activatedRoute);
-
-    return stepIndex >= 0 && this.steps[stepIndex + 1]
-      ? this.getFSStepUrlFromStepRoute(this.steps[stepIndex + 1].routeName)
-      : null;
-  }
-
-  getPreviousCheckoutStepUrl(activatedRoute: ActivatedRoute): string {
-    const stepIndex = this.getCurrentStepIndex(activatedRoute);
-
-    return stepIndex >= 0 && this.steps[stepIndex - 1]
-      ? this.getFSStepUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
-      : null;
-  }
-
-  getFSStepUrlFromStepRoute(stepRoute: string): string {
-    return this.fsRoutingConfigService.getRouteConfig(stepRoute).paths[0];
-  }
-
-  getFSCheckoutStepIndex(key: string, value: any): number | null {
-    return key && value
-      ? this.steps.findIndex((step: FSCheckoutStep) =>
-          step[key].includes(value)
-        )
-      : null;
   }
 
   getCurrentStepIndex(
@@ -94,33 +68,46 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
     return stepIndex >= 0 ? stepIndex : null;
   }
 
-  filterSteps(activatedRoute) {
-    this.categoryService.getActiveCategory().subscribe(data => {
-      if (data) {
-        this.steps = this.steps.filter(step => {
-          return (
-            !(<FSCheckoutStep>step).restrictedCategories ||
-            (<FSCheckoutStep>step).restrictedCategories.indexOf(data) === -1
-          );
-        });
-        const previousStepNumber: number =
-          this.getCurrentStepIndex(activatedRoute) - 1;
-        const nextStepNumber: number =
-          this.getCurrentStepIndex(activatedRoute) + 1;
+  setBackNextSteps(activatedRoute: ActivatedRoute) {
+    const previousUrl = this.getPreviousCheckoutStepUrl(activatedRoute);
+    const paramType = previousUrl.substring(previousUrl.lastIndexOf(':') + 1);
+    this.cartService
+      .getActive()
+      .subscribe((cart: FSCart) => {
         if (
-          this.steps[nextStepNumber] &&
-          this.steps[nextStepNumber].routeName &&
-          this.steps[previousStepNumber] &&
-          this.steps[previousStepNumber].routeName
+          <FSProduct>cart &&
+          <FSProduct>cart.entries &&
+          <FSProduct>cart.entries[0] &&
+          <FSProduct>cart.entries[0].product
         ) {
-          const previousCheckoutStep: string = this.steps[previousStepNumber]
-            .routeName;
-          this.setPreviousStep(data, previousCheckoutStep);
-          const nextCheckoutStep: string = this.steps[nextStepNumber].routeName;
-          this.setNextStep(data, nextCheckoutStep);
+          if (paramType === 'productCode') {
+            this.activeParamType = cart.entries[0].product.code;
+            console.log('productCode', this.activeParamType);
+          } else if (paramType === 'categoryCode' || paramType === 'formCode') {
+            this.activeParamType = (<FSProduct>(
+              cart.entries[0].product
+            )).defaultCategory.code;
+            console.log('category', this.activeParamType);
+          }
+          const previousStepNumber: number =
+            this.getCurrentStepIndex(activatedRoute) - 1;
+          const nextStepNumber: number =
+            this.getCurrentStepIndex(activatedRoute) + 1;
+          this.setPreviousStep(
+            this.activeParamType,
+            this.steps[previousStepNumber].routeName
+          );
+          this.setNextStep(
+            this.activeParamType,
+            this.steps[nextStepNumber].routeName
+          );
+          if (this.steps.length > 0) {
+            console.log(this.steps[previousStepNumber].routeName);
+            console.log(this.steps[nextStepNumber].routeName);
+          }
         }
-      }
-    });
+      })
+      .unsubscribe();
   }
 
   // Class is implemented in order to fix this behavior from spartacus. Once real fix is implemented class can be removed.

@@ -5,7 +5,8 @@ import { Subscription, Observable } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
 import { FSCheckoutService } from '../../../../../core/checkout/facade/checkout.service';
 import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
-import { ActiveCategoryStep } from 'projects/fsastorefrontlib/src/occ';
+import { ActiveCategoryStep } from '../../../../../occ/occ-models';
+import { FSCartService } from '../../../../../core/cart/facade';
 
 @Component({
   selector: 'cx-fs-select-identification',
@@ -18,7 +19,8 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
     protected routingService: RoutingService,
     protected activatedRoute: ActivatedRoute,
     protected checkoutConfigService: FSCheckoutConfigService,
-    protected checkoutService: FSCheckoutService
+    protected checkoutService: FSCheckoutService,
+    protected cartService: FSCartService
   ) {}
 
   private subscription = new Subscription();
@@ -41,8 +43,17 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
   ];
 
   ngOnInit() {
-    this.checkoutConfigService.filterSteps(this.activatedRoute);
-    this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
+    this.subscription.add(
+      this.cartService
+        .getEntries()
+        .pipe(
+          tap(() => {
+            this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
+            this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
+          })
+        )
+        .subscribe()
+    );
     this.checkoutService.mockDeliveryMode();
   }
 

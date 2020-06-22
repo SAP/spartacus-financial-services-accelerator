@@ -19,6 +19,7 @@ import {
   FSProduct,
   FSCheckoutStep,
 } from './../../../../occ/occ-models/occ.models';
+import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
 
 @Component({
   selector: 'cx-fs-checkout-progress',
@@ -34,13 +35,14 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
     protected activatedRoute: ActivatedRoute,
     protected categoryService: CategoryService,
     protected cartService: FSCartService,
-    protected productService: CurrentProductService
+    protected productService: CurrentProductService,
+    protected checkoutConfigService: FSCheckoutConfigService
   ) {
     super(config, routingService, routingConfigService);
   }
   private subscription = new Subscription();
   activeCategory$: Observable<string>;
-  activeCategorySteps = [];
+  // activeCategorySteps = [];
 
   ngOnInit() {
     super.ngOnInit();
@@ -104,7 +106,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
 
   setActiveStepIndex() {
     this.activeStepUrl = this.activatedRoute.routeConfig.path;
-    this.activeCategorySteps.forEach((step, index) => {
+    this.checkoutConfigService.steps.forEach((step, index) => {
       const routeUrl = this.routingConfigService.getRouteConfig(step.routeName)
         .paths[0];
       if (routeUrl === this.activeStepUrl) {
@@ -115,17 +117,22 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
 
   filterSteps() {
     this.subscription.add(
-      this.activeCategory$.subscribe(activeCategory => {
-        this.activeCategorySteps = this.steps.filter(step => {
-          return (
-            !(<FSCheckoutStep>step).restrictedCategories ||
-            (<FSCheckoutStep>step).restrictedCategories.indexOf(
-              activeCategory
-            ) === -1
-          );
-        });
-        this.setActiveStepIndex();
-      })
+      this.activeCategory$
+        .pipe(
+          filter(activeCategory => activeCategory !== ''),
+          map(activeCategory => {
+            this.checkoutConfigService.steps = this.steps.filter(step => {
+              return (
+                !(<FSCheckoutStep>step).restrictedCategories ||
+                (<FSCheckoutStep>step).restrictedCategories.indexOf(
+                  activeCategory
+                ) === -1
+              );
+            });
+            this.setActiveStepIndex();
+          })
+        )
+        .subscribe()
     );
   }
 
