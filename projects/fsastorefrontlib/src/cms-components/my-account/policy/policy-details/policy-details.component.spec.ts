@@ -1,7 +1,7 @@
 import { PolicyDetailsComponent } from './policy-details.component';
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { RoutingService, OccConfig, I18nTestingModule } from '@spartacus/core';
-import { of, Observable } from 'rxjs';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
+import { Observable, of } from 'rxjs';
 import { AccordionModule } from '../../../../shared/accordion/accordion.module';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
@@ -11,6 +11,7 @@ import {
   RequestType,
 } from './../../../../occ/occ-models';
 import { DocumentService } from './../../../../core/document/facade/document.service';
+import * as FileSaver from 'file-saver';
 
 class MockPolicyService {
   loadPolicyDetails() {}
@@ -74,7 +75,9 @@ const mockOccModuleConfig: OccConfig = {
     },
   },
 };
-
+const mockEvent = {
+  preventDefault() {},
+};
 const policyId = 'policyId';
 const contractId = 'contractId';
 const documentId = 'documentId';
@@ -120,6 +123,7 @@ describe('PolicyDetailsComponent', () => {
   }));
 
   beforeEach(() => {
+    spyOn(FileSaver, 'saveAs').and.stub();
     fixture = TestBed.createComponent(PolicyDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -194,7 +198,7 @@ describe('PolicyDetailsComponent', () => {
 
   it('should test get document', () => {
     spyOn(documentService, 'getDocumentById').and.callThrough();
-    component.getDocument(documentId, documentName);
+    component.getDocument(documentId, documentName, mockEvent);
     expect(documentService.getDocumentById).toHaveBeenCalledWith(documentId);
   });
 });

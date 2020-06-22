@@ -18,9 +18,9 @@ export class OccDocumentAdapter implements DocumentAdapter {
       userId,
       documentId,
     });
-    return this.http
-      .get<string>(url)
-      .pipe(map(document => base64StringToBlob(document, 'application/pdf')),
-        catchError((error: any) => throwError(error.json())));
+    return this.http.get<string>(url).pipe(
+      map(document => base64StringToBlob(document, 'application/pdf')),
+      catchError((error: any) => throwError(error.json()))
+    );
   }
 }

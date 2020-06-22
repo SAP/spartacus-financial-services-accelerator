@@ -89,7 +89,8 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
-  getDocument(documentId, documentName) {
+  getDocument(documentId, documentName, event) {
+    event.preventDefault();
     this.subscription.add(
       this.documentService
         .getDocumentById(documentId)

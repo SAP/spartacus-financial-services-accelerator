@@ -337,9 +337,9 @@
           <li class="accordion-list-item row">
             <div class="col-6">
               <a
-                href="javascript:void(0)"
+                href="#"
                 class="document-link"
-                (click)="getDocument(document.code, document.altText)"
+                (click)="getDocument(document.code, document.altText, $event)"
                 >{{ document.altText }}</a
               >
             </div>
