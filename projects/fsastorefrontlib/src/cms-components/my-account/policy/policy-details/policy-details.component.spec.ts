@@ -78,6 +78,7 @@ const mockOccModuleConfig: OccConfig = {
 const policyId = 'policyId';
 const contractId = 'contractId';
 const documentId = 'documentId';
+const documentName = 'document';
 
 const document = {
   id: documentId,
@@ -193,7 +194,7 @@ describe('PolicyDetailsComponent', () => {
 
   it('should test get document', () => {
     spyOn(documentService, 'getDocumentById').and.callThrough();
-    component.getDocument(documentId);
+    component.getDocument(documentId, documentName);
     expect(documentService.getDocumentById).toHaveBeenCalledWith(documentId);
   });
 });
