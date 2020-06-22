@@ -30,46 +30,30 @@ export function checkOptionalProducts() {
   shared.checkAddOptionsPageContent(addOptionsContent);
 }
 
-export function populatePersonalDetails() {
-  cy.get('[name="dob"]').type('1987-01-01');
-  cy.get('[name="maritalStatus"]').select('married');
-  cy.get('[name="numberOfFinancialDependents"]').select('4');
-  cy.get('[name="permanentResident"]')
-    .eq(0)
-    .click();
-  cy.get('[name="usCitizen"]')
-    .eq(1)
-    .click();
-  cy.get('[name="residentialStatus"]').select('4');
-  cy.get('[name="residentialAddress"]').type('Omladinskih Brigada');
-  cy.get('[name="movedToAddressDate"]').type('2002-01-01');
-  cy.get('[name="isPostalAddressSame"]')
-    .eq(0)
-    .click();
-  cy.get('[name="employmentStatus"]').select('fullTime');
-  cy.get('[name="employerName"]').type('Ben Moore DOO');
-  cy.get('[name="jobTitle"]').type('CEO');
-  cy.get('[name="employmentStartDate"]').type('2005-01-01');
-  cy.get('[name="incomeFrequency"]').select('monthly');
-  cy.get('[name="netIncomeAmount"]').type('7800');
-  cy.get('[name="anyOtherIncome"]')
-    .eq(0)
-    .click();
-  cy.get('[name="workingOvertime"]').click();
-  cy.get('[name="meetingFinancialCommitments"]')
-    .eq(0)
-    .click();
-  cy.get('[name="meetingFinancialCommitmentsDescription"]').type(
-    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. '
-  );
-  cy.get('[name="anyFinancialObstacles"]')
-    .eq(1)
-    .click();
-  cy.get('[name="anyPossessions"]')
-    .eq(1)
-    .click();
-  cy.get('[name="anyDebts"]')
-    .eq(1)
-    .click();
-  cy.get('[name="totalMonthlyExpenses"]').type('5050');
+export function checkLegalInformationLoan() {
+  cy.get('.section-header-heading').should('have.text', 'Legal information');
+  cy.get('cx-fs-legal-documents > .border-color-3')
+    .should('be.visible')
+    .within(() => {
+      cy.get('li.pb-1').should('have.length', 5);
+    });
+  cy.get('cx-fs-legal-checkboxes').within(() => {
+    cy.get('input[type="checkbox"]').click({ multiple: true, force: true });
+  });
+}
+
+export function configureLoan() {
+  cy.get('[name=numberOfApplicants]').select('2');
+  cy.get('[name=loan-amount]').type('18001');
+  cy.get('[name=loanStartDate]').type('2021-12-12');
+  cy.get('[name=loan-term]').select('6-year');
+  cy.get('[name=repayment-frequency]').select('biweekly');
+  cy.get('[name=loanPurpose]').select('purchasing-a-car');
+}
+
+export function checkMiniCart() {
+  cy.get('.short-overview-content').should('be.visible')
+    .within( ()=> {
+      cy.get('.short-overview-value').contains(' €172.64 ');
+    });
 }

@@ -63,6 +63,12 @@ export const confirmationAccordionCreditCard = [
   'Added by you',
   'Personal Details',
 ];
+export const confirmationAccordionLoan = [
+  'Loan Information',
+  "What's Included",
+  'Added by you',
+  'Personal Details',
+];
 
 export const Accordions = {
   accordions: [
@@ -117,6 +123,10 @@ export const Accordions = {
     {
       category: 'rentersFinalReview',
       accordionItems: this.finalReviewAccordionRenters,
+    },
+    {
+      category: 'LoanConfirmation',
+      accordionItems: this.confirmationAccordionLoan,
     },
   ],
 };

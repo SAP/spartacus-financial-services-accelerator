@@ -77,7 +77,7 @@ context('Current Account Checkout', () => {
   });
 
   it('Should check order confirmation', () => {
-    checkout.checkOrderConfirmationBanking();
+    checkout.checkOrderConfirmation();
     checkout.checkAccordions('currentAccount');
   });
 

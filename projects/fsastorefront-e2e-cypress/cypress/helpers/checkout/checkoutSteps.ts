@@ -73,14 +73,6 @@ export function clickResumeButton() {
   cy.wait(1000);
 }
 
-export function checkOrderConfirmationBanking() {
-  cy.get('cx-fs-order-confirmation-message').within(() => {
-    cy.get('h5')
-      .eq(0)
-      .should('have.text', ' Thank you! ');
-  });
-}
-
 export function checkAccordions(category) {
   const accordion_item = 'cx-fs-accordion-item';
   const accordion = Accordions.accordions.find(
@@ -119,6 +111,8 @@ export function checkOrderConfirmation() {
       .eq(0)
       .should('have.text', ' Thank you! ');
   });
+  cy.get('cx-fs-order-confirmation').should('be.visible');
+  cy.get('.short-overview').should('be.visible');
 }
 
 export function checkInsuranceComparisonPage(mainProduct, numberOfProducts) {
@@ -223,6 +217,20 @@ export function startInsuranceCheckout(mainProduct) {
 export function waitForHomepage() {
   const homepage = waitForPage('homepage', 'homepage');
   cy.wait(`@${homepage}`)
+    .its('status')
+    .should('eq', 200);
+}
+
+export function waitForAddOptions() {
+  const addOptions = waitForPage('add-options', 'addOptions');
+  cy.wait(`@${addOptions}`)
+    .its('status')
+    .should('eq', 200);
+}
+
+export function waitForConfirmation() {
+  const confirmation = waitForPage( 'orderConfirmationPage', 'confirmation');
+  cy.wait(`@${confirmation}`)
     .its('status')
     .should('eq', 200);
 }

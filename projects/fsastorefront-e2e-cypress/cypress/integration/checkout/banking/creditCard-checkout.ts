@@ -1,10 +1,11 @@
 import * as register from '../../../helpers/register';
-import { registrationUser } from '../../../sample-data/users';
+import {registrationUser} from '../../../sample-data/users';
 import * as productCategory from '../../../helpers/productCategoryPage';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import { checkPersonalDetailsPage } from '../../../helpers/checkout/checkoutSteps';
-import { checkInboxComponets } from '../../../helpers/my-account/inbox';
+import {checkPersonalDetailsPage} from '../../../helpers/checkout/checkoutSteps';
+import {checkInboxComponets} from '../../../helpers/my-account/inbox';
 import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
+import {populatePersonalDetails} from '../../../helpers/checkout/banking/checkoutBankingSteps';
 import * as creditCard from '../../../helpers/checkout/banking/creditCard';
 import * as userIdentification from '../../../helpers/checkout/banking/userIdentificationPage';
 
@@ -52,7 +53,7 @@ context('Credit Card Checkout', () => {
   it('Should populate Personal Details page', () => {
     checkout.checkCheckoutStep('Your Credit Card Application', '7');
     checkPersonalDetailsPage();
-    creditCard.populatePersonalDetails();
+    populatePersonalDetails();
     checkout.clickContinueButton();
   });
 
@@ -79,7 +80,7 @@ context('Credit Card Checkout', () => {
   });
 
   it('Should check order confirmation', () => {
-    checkout.checkOrderConfirmationBanking();
+    checkout.checkOrderConfirmation();
     checkout.checkAccordions('creditCardConfirmation');
   });
 
