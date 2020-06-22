@@ -321,7 +321,7 @@
       </ul>
     </cx-fs-accordion-item>
     <cx-fs-accordion-item
-      *ngIf="policy.documents"
+      *ngIf="policy.documents && policy.documents.length > 0"
       [title]="'fscommon.documents' | cxTranslate"
     >
       <ul class="accordion-list container-fluid documents">
