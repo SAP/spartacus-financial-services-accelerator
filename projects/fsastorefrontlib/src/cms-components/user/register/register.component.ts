@@ -4,12 +4,12 @@ import { DefaultFormValidators } from '@fsa/dynamicforms';
 import {
   AnonymousConsentsConfig,
   AnonymousConsentsService,
-  AuthRedirectService,
-  AuthService,
-  FeatureConfigService,
+
+
+
   GlobalMessageService,
   RoutingService,
-  UserService,
+  UserService
 } from '@spartacus/core';
 import { RegisterComponent } from '@spartacus/storefront';
 import { FSUserSignUp } from '../../../occ/occ-models';
@@ -89,5 +89,19 @@ export class FSRegisterComponent extends RegisterComponent {
       titleCode,
       phoneNumber,
     };
+  }
+
+  submitForm(): void {
+    if (this.userRegistrationForm.valid) {
+      this.registerUser();
+    } else {
+      this.userRegistrationForm.markAllAsTouched();
+    }
+  }
+
+  registerUser(): void {
+    this.userService.register(
+      this.collectDataFromRegisterForm(this.userRegistrationForm.value)
+    );
   }
 }

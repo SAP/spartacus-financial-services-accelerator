@@ -8,14 +8,9 @@
   <ng-template #updateForm>
     <div class="container">
       <div class="row justify-content-center">
-        <cx-fs-update-profile-form
-          *ngIf="(user$ | async)?.uid"
-          class="col-md-12 col-lg-6"
-          [user]="user$ | async"
-          [titles]="titles$ | async"
-          (cancelled)="onCancel()"
-          (submited)="onSubmit($event)"
-        ></cx-fs-update-profile-form>
+        <cx-fs-update-profile-form *ngIf="(user$ | async)?.uid" class="col-md-12 col-lg-6" [user]="user$ | async"
+          [titles]="titles$ | async" (cancelled)="onCancel()" (submitted)="onSubmit($event)">
+        </cx-fs-update-profile-form>
       </div>
     </div>
   </ng-template>

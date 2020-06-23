@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { FormDataService } from '@fsa/dynamicforms';
 import { Product } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
@@ -7,13 +7,14 @@ import { Observable } from 'rxjs/internal/Observable';
 import { map } from 'rxjs/operators';
 import {
   FSProductService,
-  PricingService,
+  PricingService
 } from '../../../../../core/product-pricing/facade';
 import { FSProduct, PricingData } from '../../../../../occ/occ-models';
 
 @Component({
   selector: 'cx-fs-product-configuration-mini-cart',
   templateUrl: './product-configuration-mini-cart.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductConfigurationMiniCartComponent
   implements OnInit, OnDestroy {
@@ -21,8 +22,9 @@ export class ProductConfigurationMiniCartComponent
     protected pricingService: PricingService,
     protected productService: FSProductService,
     protected currentProductService: CurrentProductService,
-    protected formDataService: FormDataService
-  ) {}
+    protected formDataService: FormDataService,
+    protected changeDetectorRef: ChangeDetectorRef
+  ) { }
 
   subscription = new Subscription();
   product$: Observable<Product> = this.currentProductService.getProduct();
@@ -57,6 +59,7 @@ export class ProductConfigurationMiniCartComponent
                   this.productId,
                   this.pricingData
                 );
+                this.changeDetectorRef.detectChanges();
               }
             })
           )

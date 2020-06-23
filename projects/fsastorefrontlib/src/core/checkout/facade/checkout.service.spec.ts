@@ -53,12 +53,11 @@ describe('FSCheckoutServiceTest', () => {
         },
       ],
     });
-    service = TestBed.get(FSCheckoutService as Type<FSCheckoutService>);
-    checkoutDeliveryService = TestBed.get(CheckoutDeliveryService as Type<
-      CheckoutDeliveryService
-    >);
-    store = TestBed.get(Store as Type<Store<FSStateWithCheckout>>);
-
+    service = TestBed.inject(FSCheckoutService);
+    checkoutDeliveryService = TestBed.inject(CheckoutDeliveryService);
+    store = TestBed.inject(Store);
+    authService = TestBed.inject(AuthService);
+    cartService = TestBed.inject(ActiveCartService);
     spyOn(checkoutDeliveryService, 'setDeliveryMode').and.callThrough();
     spyOn(store, 'dispatch').and.callThrough();
   });

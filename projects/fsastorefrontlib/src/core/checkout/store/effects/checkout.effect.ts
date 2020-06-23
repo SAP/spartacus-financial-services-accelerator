@@ -32,5 +32,5 @@ export class CheckoutEffects {
   constructor(
     private actions$: Actions,
     private checkoutConnector: CheckoutConnector
-  ) {}
+  ) { }
 }

@@ -9,7 +9,7 @@ import { FSTranslationService } from '../../../../core/i18n/facade/translation.s
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
   BindingStateType,
-  FSCart,
+  FSCart
 } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 
@@ -20,7 +20,7 @@ import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dial
 export class QuoteReviewComponent implements OnInit, OnDestroy {
   cart$: Observable<Cart>;
   showContent$: Observable<boolean> = of(true);
-  cartLoading$: Observable<boolean>;
+  isCartStable$: Observable<boolean>;
   checkoutStepUrlNext: string;
   checkoutStepUrlBack: string;
   subscription = new Subscription();
@@ -35,7 +35,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected modalService: ModalService,
     protected translationService: FSTranslationService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
@@ -45,7 +45,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
       this.activatedRoute
     );
     this.cart$ = this.cartService.getActive();
-    this.cartLoading$ = this.cartService.getLoading();
+    this.isCartStable$ = this.cartService.isStable();
   }
 
   getBaseUrl() {
