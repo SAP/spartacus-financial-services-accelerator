@@ -4,7 +4,7 @@ import {
   EventEmitter,
   OnDestroy,
   OnInit,
-  Output,
+  Output
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CurrencyService, OrderEntry, RoutingService } from '@spartacus/core';
@@ -27,7 +27,7 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     protected categoryService: CategoryService,
     protected activatedRoute: ActivatedRoute,
     protected currencyService: CurrencyService
-  ) {}
+  ) { }
 
   entries$: Observable<OrderEntry[]>;
   checkoutStepUrlNext: string;
