@@ -220,6 +220,13 @@ export function startInsuranceCheckout(mainProduct) {
     .click();
 }
 
+export function waitForPersonalDetailsPage() {
+  const personalDetails = waitForPage('personal-details', 'personalDetails');
+  cy.wait(`@${personalDetails}`)
+    .its('status')
+    .should('eq', 200);
+}
+
 export function waitForHomepage() {
   const homepage = waitForPage('homepage', 'homepage');
   cy.wait(`@${homepage}`)
