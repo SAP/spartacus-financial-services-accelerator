@@ -7,17 +7,30 @@
   <ng-container *ngIf="isCartStable$ | async; else loading">
     <ng-container *ngIf="entries$ | async as entries">
       <ng-container *ngFor="let orderEntryData of entries | slice: 1">
-        <div class="row mx-3 py-3 no-gutters position-relative " *ngIf="orderEntryData.product">
+        <div
+          class="row mx-3 py-3 no-gutters position-relative "
+          *ngIf="orderEntryData.product"
+        >
           <div class="tooltip-wrapper">
-            <div class="fs-tooltip" [ngbTooltip]="tooltipContent" triggers="click:blur" placement="left">
+            <div
+              class="fs-tooltip"
+              [ngbTooltip]="tooltipContent"
+              triggers="click:blur"
+              placement="left"
+            >
               i
             </div>
           </div>
           <ng-template #tooltipContent>
             <span>{{ orderEntryData.product?.description }}</span>
-            <ng-container *ngIf="orderEntryData.product.classifications as classifications">
+            <ng-container
+              *ngIf="orderEntryData.product.classifications as classifications"
+            >
               <hr />
-              <div class="row no-gutters mb-2" *ngFor="let feature of classifications[0].features">
+              <div
+                class="row no-gutters mb-2"
+                *ngFor="let feature of classifications[0].features"
+              >
                 <span class="short-overview-title col-6 text-left">{{
                   feature.name
                 }}</span>
@@ -28,34 +41,50 @@
             </ng-container>
           </ng-template>
           <div class="col-12 col-md-2 align-self-center">
-            <cx-media class="cx-product-image-container" [container]="orderEntryData.product?.images?.PRIMARY"
-              format="96Wx96H"></cx-media>
+            <cx-media
+              class="cx-product-image-container"
+              [container]="orderEntryData.product?.images?.PRIMARY"
+              format="96Wx96H"
+            ></cx-media>
           </div>
           <div class="col-12 col-md-7 align-self-center">
             <h6>{{ orderEntryData.product.name }}</h6>
           </div>
           <div class="col-12 col-md-3 align-self-center text-center">
-            <ng-container *ngIf="!orderEntryData.removeable && !orderEntryData.addable">
-              <ng-container *ngIf="orderEntryData.product?.bundleTemplates?.length == 3">
+            <ng-container
+              *ngIf="!orderEntryData.removeable && !orderEntryData.addable"
+            >
+              <ng-container
+                *ngIf="orderEntryData.product?.bundleTemplates?.length == 3"
+              >
                 {{ 'fscommon.included' | cxTranslate }}
               </ng-container>
-              <ng-container *ngIf="orderEntryData.product?.bundleTemplates?.length !== 3">
+              <ng-container
+                *ngIf="orderEntryData.product?.bundleTemplates?.length !== 3"
+              >
                 {{ 'fscommon.notAvailableFull' | cxTranslate }}
               </ng-container>
             </ng-container>
-            <ng-container *ngIf="!orderEntryData.removeable && orderEntryData.addable">
-              <button (click)="
+            <ng-container
+              *ngIf="!orderEntryData.removeable && orderEntryData.addable"
+            >
+              <button
+                (click)="
                   addProductToCart(
                     orderEntryData.product?.code,
                     orderEntryData.entryNumber
                   )
-                " class="secondary-button btn-block text-capitalize">
+                "
+                class="secondary-button btn-block text-capitalize"
+              >
                 {{ 'fscommon.add' | cxTranslate }}
               </button>
             </ng-container>
             <ng-container *ngIf="orderEntryData.removeable">
-              <button (click)="removeProductFromCart(orderEntryData)"
-                class="secondary-button btn-block text-capitalize">
+              <button
+                (click)="removeProductFromCart(orderEntryData)"
+                class="secondary-button btn-block text-capitalize"
+              >
                 {{ 'common.remove' | cxTranslate }}
               </button>
             </ng-container>
@@ -74,10 +103,12 @@
             </h6>
           </div>
           <div class="col-12 col-md-5 align-self-center text-center">
-            <ng-container *ngFor="
+            <ng-container
+              *ngFor="
                 let feature of (entries[0].product?.classifications)[0]
                   ?.features
-              ">
+              "
+            >
               <div class="row no-gutters mb-2">
                 <div class="col-7 text-left normal-weight">
                   {{ feature.name }}
@@ -104,7 +135,12 @@
       </button>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12">
-      <button class="primary-button btn-block" type="button" data-checkout-url="" (click)="navigateNext()">
+      <button
+        class="primary-button btn-block"
+        type="button"
+        data-checkout-url=""
+        (click)="navigateNext()"
+      >
         {{ 'common.continue' | cxTranslate }}
       </button>
     </div>

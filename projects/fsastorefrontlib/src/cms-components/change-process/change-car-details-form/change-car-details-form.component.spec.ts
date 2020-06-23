@@ -5,7 +5,7 @@ import {
   GlobalMessage,
   GlobalMessageService,
   I18nTestingModule,
-  RoutingService
+  RoutingService,
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
@@ -38,7 +38,7 @@ class MockChangeRequestService {
   }
 }
 
-class MockChangePolicyService { }
+class MockChangePolicyService {}
 
 const configurationSteps = [
   {
@@ -51,7 +51,7 @@ class MockRoutingService {
 }
 
 class GlobalMessageServiceMock {
-  add(_message: GlobalMessage): void { }
+  add(_message: GlobalMessage): void {}
 }
 
 class MockUserRequestNavigationService {
@@ -61,7 +61,7 @@ class MockUserRequestNavigationService {
     return configurationSteps;
   }
 
-  getActiveStep() { }
+  getActiveStep() {}
 }
 
 const mockChangeCarDetailsForm: any = {

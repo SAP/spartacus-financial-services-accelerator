@@ -50,7 +50,7 @@ class ActivatedRouteMock {
 }
 
 class MockedProductAssignmentService {
-  loadProductAssignmentsForUnit(): void { }
+  loadProductAssignmentsForUnit(): void {}
   getProductAssignments(): Observable<any> {
     return of(mockProductAssignments);
   }
@@ -84,9 +84,7 @@ describe('ProductAssignmentsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductAssignmentsComponent);
     component = fixture.componentInstance;
-    mockedProductAssignmentService = TestBed.inject(
-      ProductAssignmentService
-    );
+    mockedProductAssignmentService = TestBed.inject(ProductAssignmentService);
     fixture.detectChanges();
   });
 

@@ -4,7 +4,7 @@ import {
   AbstractControl,
   FormControl,
   FormGroup,
-  ReactiveFormsModule
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';

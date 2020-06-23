@@ -14,9 +14,10 @@ import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
 
 @Injectable()
 export class FSProductService extends ProductService {
-  constructor(protected store: Store<StateWithProduct>,
+  constructor(
+    protected store: Store<StateWithProduct>,
     protected productLoading: ProductLoadingService
-    ) {
+  ) {
     super(store, productLoading);
   }
 

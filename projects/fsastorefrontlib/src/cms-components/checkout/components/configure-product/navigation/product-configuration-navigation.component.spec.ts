@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   FormDataService,
   FormDataStorageService,
-  YFormData
+  YFormData,
 } from '@fsa/dynamicforms';
 import { I18nTestingModule, Product, RoutingService } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
@@ -63,7 +63,7 @@ export class MockFormDataService {
   getSubmittedForm() {
     return of();
   }
-  submit() { }
+  submit() {}
 }
 
 class MockPricingService {
@@ -79,7 +79,7 @@ class MockFormDataStorageService {
 }
 
 class MockCartService {
-  createCartForProduct(): void { }
+  createCartForProduct(): void {}
 }
 
 describe('ProductConfigurationNavigationComponent', () => {

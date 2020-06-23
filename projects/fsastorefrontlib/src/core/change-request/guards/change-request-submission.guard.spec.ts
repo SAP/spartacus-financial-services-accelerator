@@ -17,7 +17,7 @@ const mockChangeRequest = {
 };
 
 class MockRoutingService {
-  go() { }
+  go() {}
 }
 
 class MockChangeRequestService {

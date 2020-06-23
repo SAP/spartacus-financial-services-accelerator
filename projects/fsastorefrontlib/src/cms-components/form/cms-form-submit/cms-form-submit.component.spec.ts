@@ -31,7 +31,7 @@ class MockFormComponent {
   selector: 'cx-spinner',
   template: '',
 })
-class MockSpinnerComponent { }
+class MockSpinnerComponent {}
 
 const componentData: CmsFormSubmitComponent = {
   uid: 'TestCMSFormSubmitComponent',
@@ -57,14 +57,14 @@ class MockFormDataService {
   getFormDefinition() {
     return of(formDefinition);
   }
-  loadFormDefinition() { }
+  loadFormDefinition() {}
 }
 
 class MockFormDataStorageService {
   getFormDataId() {
     return null;
   }
-  getFormDataIdByDefinitionCode() { }
+  getFormDataIdByDefinitionCode() {}
 }
 const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
   data$: of(componentData),

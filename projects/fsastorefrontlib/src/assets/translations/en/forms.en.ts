@@ -56,7 +56,7 @@ export const forms = {
       current_account_details_form: 'Configure a Product',
     },
     auto: {
-      vehicleAnnualMileage: 'Vehicle Annual Mileage'
+      vehicleAnnualMileage: 'Vehicle Annual Mileage',
     },
     definitionLoadError: 'Error occurred. Form could not be loaded.',
   },

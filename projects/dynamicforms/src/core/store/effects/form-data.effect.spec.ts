@@ -29,7 +29,7 @@ class MockFormConnector {
 }
 
 class MockFromDataStorageService {
-  clearFormDataLocalStorage() { }
+  clearFormDataLocalStorage() {}
 }
 
 describe('Form Data Effects', () => {

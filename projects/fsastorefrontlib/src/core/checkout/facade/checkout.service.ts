@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import {
   ActiveCartService,
-  AuthService, CheckoutDeliveryService,
-  CheckoutService
+  AuthService,
+  CheckoutDeliveryService,
+  CheckoutService,
 } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
 import { CheckoutSelectors, FSStateWithCheckout } from '../store';

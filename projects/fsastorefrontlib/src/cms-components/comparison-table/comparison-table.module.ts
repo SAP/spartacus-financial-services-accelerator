@@ -9,7 +9,7 @@ import {
   I18nModule,
   RoutesConfig,
   RoutingConfig,
-  UrlModule
+  UrlModule,
 } from '@spartacus/core';
 import { PageComponentModule, SpinnerModule } from '@spartacus/storefront';
 import { FSCartService } from '../../core/cart/facade';
@@ -65,4 +65,4 @@ import { ComparisonTableService } from './comparison-table.service';
     PricingService,
   ],
 })
-export class ComparisonTableModule { }
+export class ComparisonTableModule {}

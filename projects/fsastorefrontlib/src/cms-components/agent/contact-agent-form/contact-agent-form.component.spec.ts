@@ -7,7 +7,7 @@ import {
   GlobalMessageService,
   I18nTestingModule,
   RoutingService,
-  UserService
+  UserService,
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
@@ -49,7 +49,7 @@ class ActivatedRouteMock {
   name: 'cxUrl',
 })
 class MockUrlPipe implements PipeTransform {
-  transform() { }
+  transform() {}
 }
 class MockedUserService {
   get() {
@@ -67,7 +67,7 @@ class MockRoutingService {
 }
 
 class MockGlobalMessageService {
-  add(): void { }
+  add(): void {}
 }
 
 describe('ContactAgentFormComponent', () => {

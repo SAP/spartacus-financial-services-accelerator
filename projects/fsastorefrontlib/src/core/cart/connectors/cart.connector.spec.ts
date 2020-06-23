@@ -13,12 +13,12 @@ class MockCartAdapter implements CartAdapter {
     (userId, cartId, productCode, bundleTemplateId, quantity, pricingData) =>
       of(
         'addToCart' +
-        userId +
-        cartId +
-        productCode +
-        bundleTemplateId +
-        quantity +
-        pricingData
+          userId +
+          cartId +
+          productCode +
+          bundleTemplateId +
+          quantity +
+          pricingData
       )
   );
 }

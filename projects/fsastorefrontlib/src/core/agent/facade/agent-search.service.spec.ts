@@ -67,7 +67,7 @@ describe('AgentSearchService', () => {
             callback({ coords: longitudeLatitude });
             return geolocationWatchId;
           },
-          clearWatch: () => { },
+          clearWatch: () => {},
         },
       },
     },

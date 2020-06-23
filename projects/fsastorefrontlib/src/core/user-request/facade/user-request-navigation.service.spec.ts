@@ -9,7 +9,7 @@ import createSpy = jasmine.createSpy;
 const page2 = 'page2';
 const step2 = 'step2';
 const nonExistingPage = 'page23';
-class MockActivatedRoute { }
+class MockActivatedRoute {}
 
 class MockRoutingService {
   go = createSpy();

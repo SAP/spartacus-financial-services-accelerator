@@ -59,7 +59,7 @@ class MockOccUserRequestAdapter {
   }
 }
 
-class MockActions { }
+class MockActions {}
 
 describe('User Request Effects', () => {
   let actions$: Observable<fromActions.UserRequestActions>;

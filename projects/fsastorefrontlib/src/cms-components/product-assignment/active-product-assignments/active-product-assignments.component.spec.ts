@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { } from '@angular/router/testing';
+import {} from '@angular/router/testing';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { ProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
@@ -46,7 +46,7 @@ class ActivatedRouteMock {
 }
 
 class MockedProductAssignmentService {
-  loadProductAssignmentsForUnit(): void { }
+  loadProductAssignmentsForUnit(): void {}
   getProductAssignments(): Observable<any> {
     return of(activeProductAssignments);
   }
@@ -85,9 +85,7 @@ describe('ActiveProductAssignmentsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ActiveProductAssignmentsComponent);
     component = fixture.componentInstance;
-    mockedProductAssignmentService = TestBed.inject(
-      ProductAssignmentService
-    );
+    mockedProductAssignmentService = TestBed.inject(ProductAssignmentService);
     mockRoutingService = TestBed.inject(RoutingService);
     fixture.detectChanges();
   });

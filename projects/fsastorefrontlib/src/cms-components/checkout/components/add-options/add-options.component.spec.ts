@@ -5,7 +5,7 @@ import {
   CurrencyService,
   I18nTestingModule,
   OrderEntry,
-  RoutingService
+  RoutingService,
 } from '@spartacus/core';
 import { MediaModule, SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
@@ -29,15 +29,15 @@ let mockEntries: OrderEntry[] = [
 ];
 
 class MockCartService {
-  isStable() { }
+  isStable() {}
 
-  removeEntry(item: any) { }
+  removeEntry(item: any) {}
 
   addOptionalProduct(
     orderEntryCode: string,
     qty: number,
     entryNumber: string
-  ) { }
+  ) {}
 
   getEntries(): Observable<OrderEntry[]> {
     return of(mockEntries);
@@ -51,7 +51,7 @@ class MockCurrencyService {
 }
 
 class MockRoutingService {
-  go() { }
+  go() {}
 }
 
 class MockCheckoutConfigService {

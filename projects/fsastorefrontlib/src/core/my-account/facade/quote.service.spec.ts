@@ -53,11 +53,11 @@ class MockFormDataService {
   getFormData() {
     return of(this.formData);
   }
-  loadFormData(): void { }
+  loadFormData(): void {}
 }
 
 class MockFormDataStorageService {
-  setFormDataToLocalStorage() { }
+  setFormDataToLocalStorage() {}
 }
 
 const mockCart = {
@@ -94,7 +94,7 @@ class MockCartService {
   getActive() {
     return of(this.cart);
   }
-  loadCart() { }
+  loadCart() {}
 }
 
 describe('QuoteServiceTest', () => {

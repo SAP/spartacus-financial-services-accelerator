@@ -15,7 +15,7 @@ import {
   RoutingService,
   Title,
   UserService,
-  UserToken
+  UserToken,
 } from '@spartacus/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { FSRegisterComponent } from './register.component';
@@ -29,11 +29,11 @@ const registerUserIsLoading: BehaviorSubject<boolean> = new BehaviorSubject(
 );
 
 class MockUserService {
-  loadTitles(): void { }
+  loadTitles(): void {}
   getTitles(): Observable<Title[]> {
     return of([]);
   }
-  resetRegisterUserProcessState(): void { }
+  resetRegisterUserProcessState(): void {}
   getRegisterUserResultLoading(): Observable<boolean> {
     return registerUserIsLoading.asObservable();
   }
@@ -42,7 +42,7 @@ class MockUserService {
   }
 }
 class MockGlobalMessageService {
-  remove() { }
+  remove() {}
   get() {
     return of();
   }
@@ -73,8 +73,8 @@ class MockAnonymousConsentsService {
   getTemplate(_templateCode: string): Observable<ConsentTemplate> {
     return of();
   }
-  withdrawConsent(_templateCode: string): void { }
-  giveConsent(_templateCode: string): void { }
+  withdrawConsent(_templateCode: string): void {}
+  giveConsent(_templateCode: string): void {}
   isConsentGiven(_consent: AnonymousConsent): boolean {
     return true;
   }
@@ -83,7 +83,7 @@ class MockAnonymousConsentsService {
   name: 'cxUrl',
 })
 class MockUrlPipe implements PipeTransform {
-  transform() { }
+  transform() {}
 }
 const mockAnonymousConsentsConfig: AnonymousConsentsConfig = {
   anonymousConsents: {

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import {
   CheckoutPaymentService,
   I18nTestingModule,
-  RoutingService
+  RoutingService,
 } from '@spartacus/core';
 import { CheckoutConfigService } from '@spartacus/storefront';
 import { FSCheckoutService } from './../../../../core/checkout/facade/checkout.service';
@@ -11,23 +11,23 @@ import { FSCheckoutConfigService } from './../../../../core/checkout/services/ch
 import { FinalReviewComponent } from './final-review.component';
 
 class MockCheckoutService {
-  mockDeliveryMode() { }
-  placeOrder() { }
+  mockDeliveryMode() {}
+  placeOrder() {}
 }
 
 class MockCheckoutPaymentService {
-  getPaymentDetails() { }
+  getPaymentDetails() {}
 }
 
 class MockRoutingService {
-  go() { }
+  go() {}
 }
 
 class MockCheckoutConfigService {
-  getNextCheckoutStepUrl() { }
+  getNextCheckoutStepUrl() {}
 }
 
-class MockActivatedRoute { }
+class MockActivatedRoute {}
 
 describe('FinalReviewComponent', () => {
   let component: FinalReviewComponent;

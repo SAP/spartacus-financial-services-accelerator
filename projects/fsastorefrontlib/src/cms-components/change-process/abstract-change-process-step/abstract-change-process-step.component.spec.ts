@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import {
   GlobalMessage,
   GlobalMessageService,
-  RoutingService
+  RoutingService,
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
@@ -33,7 +33,7 @@ class MockUserRequestNavigationService {
   getConfigurationSteps() {
     return configurationSteps;
   }
-  getActiveStep() { }
+  getActiveStep() {}
 }
 
 class MockChangeRequestService {
@@ -61,10 +61,10 @@ class MockRoutingService {
 }
 
 class GlobalMessageServiceMock {
-  add(_message: GlobalMessage): void { }
+  add(_message: GlobalMessage): void {}
 }
 
-class ChangePolicyServiceMock { }
+class ChangePolicyServiceMock {}
 
 describe('ChangeProcessStepComponent', () => {
   let component: AbstractChangeProcessStepComponent;
@@ -112,7 +112,8 @@ describe('ChangeProcessStepComponent', () => {
 
     mockChangeRequestService = TestBed.inject(ChangeRequestService);
     mockUserRequestNavigationService = TestBed.inject(
-      UserRequestNavigationService);
+      UserRequestNavigationService
+    );
     mockRoutingService = TestBed.inject(RoutingService);
     globalMessageService = TestBed.inject(GlobalMessageService);
   }));

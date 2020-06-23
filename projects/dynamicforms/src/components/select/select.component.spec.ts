@@ -33,7 +33,7 @@ const mockField: FieldConfig = {
   options: [],
 };
 
-class MockOccValueListService { }
+class MockOccValueListService {}
 
 const mockFormGroup = new FormGroup({
   dependentTestField: new FormControl(),

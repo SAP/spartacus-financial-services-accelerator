@@ -87,7 +87,7 @@ class MockFormDataService {
   getFormData(): Observable<YFormData> {
     return of();
   }
-  loadFormData(): void { }
+  loadFormData(): void {}
 }
 
 class MockPricingService {

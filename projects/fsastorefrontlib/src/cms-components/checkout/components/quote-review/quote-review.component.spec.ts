@@ -28,8 +28,8 @@ const MockOccModuleConfig: OccConfig = {
 };
 
 class FSCartServiceStub {
-  getActive() { }
-  isStable() { }
+  getActive() {}
+  isStable() {}
 }
 class MockCategoryService {
   getActiveCategory(): Observable<string> {
@@ -37,18 +37,18 @@ class MockCategoryService {
   }
 }
 class MockRoutingService {
-  go() { }
+  go() {}
 }
 
 class FSCheckoutConfigServiceStub {
-  getNextCheckoutStepUrl() { }
+  getNextCheckoutStepUrl() {}
   getPreviousCheckoutStepUrl() {
     return 'url/:formCode';
   }
 }
 
 class MockFSTranslationService {
-  getTranslationValue() { }
+  getTranslationValue() {}
 }
 
 const modalInstance: any = {

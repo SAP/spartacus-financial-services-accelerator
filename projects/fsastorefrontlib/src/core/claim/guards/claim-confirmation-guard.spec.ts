@@ -12,7 +12,7 @@ const mockUserRequest = {
 };
 
 class MockRoutingService {
-  go() { }
+  go() {}
 }
 
 class MockUserRequestService {
@@ -22,7 +22,7 @@ class MockUserRequestService {
 }
 
 class MockGlobalMessageService {
-  add() { }
+  add() {}
 }
 
 describe(`ClaimConfirmationGuard`, () => {

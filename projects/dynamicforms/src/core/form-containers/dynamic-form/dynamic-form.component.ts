@@ -1,17 +1,12 @@
 import {
   ChangeDetectionStrategy,
-
-
-
-
-
-
-  ChangeDetectorRef, Component,
+  ChangeDetectorRef,
+  Component,
   EventEmitter,
   Input,
   OnDestroy,
   OnInit,
-  Output
+  Output,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { YFormData } from '@fsa/dynamicforms';
@@ -55,7 +50,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     protected formService: FormBuilderService,
     protected formDataService: FormDataService,
     public formConfig: DynamicFormsConfig
-  ) { }
+  ) {}
 
   ngOnInit() {
     if (this.config) {
@@ -85,7 +80,10 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
   mapDataToFormControls(formData) {
     for (const groupCode of Object.keys(formData)) {
-      if (this.form.get(groupCode) && GeneralHelpers.getObjectDepth(formData) === 1) {
+      if (
+        this.form.get(groupCode) &&
+        GeneralHelpers.getObjectDepth(formData) === 1
+      ) {
         this.form.get(groupCode).setValue(formData[groupCode]);
       } else {
         for (const controlName of Object.keys(formData[groupCode])) {

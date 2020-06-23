@@ -31,9 +31,9 @@ class MockFormConnector {
 }
 
 class GlobalMessageServiceMock {
-  remove(): void { }
+  remove(): void {}
 
-  add(_message: GlobalMessage): void { }
+  add(_message: GlobalMessage): void {}
 }
 
 describe('Form Definition Effects', () => {

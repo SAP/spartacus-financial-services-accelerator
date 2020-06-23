@@ -6,18 +6,18 @@ import {
   AuthService,
   CmsService,
   I18nTestingModule,
-  UserToken
+  UserToken,
 } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { InboxService } from '../../../core/my-account/facade/inbox.service';
 import {
   InboxDataService,
-  InboxTab
+  InboxTab,
 } from '../../../core/my-account/services/inbox-data.service';
 import {
   CmsInboxComponent,
-  CmsInboxTabComponent
+  CmsInboxTabComponent,
 } from './../../../occ/occ-models/cms-component.models';
 import { InboxComponent } from './inbox.component';
 

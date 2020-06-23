@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
-import { GlobalMessageService, RoutingService, UserService } from '@spartacus/core';
+import {
+  GlobalMessageService,
+  RoutingService,
+  UserService,
+} from '@spartacus/core';
 import { UpdateProfileComponent } from '@spartacus/storefront';
 import { Observable } from 'rxjs';
 import { FSUser } from './../../../occ/occ-models/occ.models';

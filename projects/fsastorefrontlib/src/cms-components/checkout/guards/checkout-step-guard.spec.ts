@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   CmsActivatedRouteSnapshot,
-  RoutingConfigService
+  RoutingConfigService,
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { FSCartService } from './../../../core/cart/facade/cart.service';

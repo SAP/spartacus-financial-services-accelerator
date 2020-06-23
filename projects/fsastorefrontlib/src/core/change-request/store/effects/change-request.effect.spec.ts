@@ -4,7 +4,8 @@ import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import {
   GlobalMessage,
-  GlobalMessageService, OCC_USER_ID_CURRENT
+  GlobalMessageService,
+  OCC_USER_ID_CURRENT,
 } from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
@@ -60,8 +61,8 @@ class MockUserRequestConnector {
   }
 }
 class GlobalMessageServiceMock {
-  remove(): void { }
-  add(_message: GlobalMessage): void { }
+  remove(): void {}
+  add(_message: GlobalMessage): void {}
 }
 
 describe('Change Request Effects', () => {

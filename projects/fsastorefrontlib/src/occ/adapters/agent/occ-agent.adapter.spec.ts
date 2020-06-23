@@ -1,7 +1,7 @@
 import { HttpClientModule, HttpRequest } from '@angular/common/http';
 import {
   HttpClientTestingModule,
-  HttpTestingController
+  HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
@@ -69,7 +69,7 @@ describe('OccAgentAdapter', () => {
 
   describe('searchAgents', () => {
     it('search Agents By Query String', async(() => {
-      adapter.getAgentsByQuery(searchQuery, pageNumber).subscribe(res => { });
+      adapter.getAgentsByQuery(searchQuery, pageNumber).subscribe(res => {});
       httpMock.expectOne((req: HttpRequest<any>) => {
         return req.url === agentsEndpoint && req.method === 'GET';
       }, `GET method and url`);

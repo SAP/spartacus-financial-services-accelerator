@@ -11,12 +11,12 @@ class MockActivatedRoute {
 }
 
 class MockRoutingService {
-  go() { }
+  go() {}
 }
 
 class FSCheckoutConfigServiceStub {
-  getNextCheckoutStepUrl() { }
-  getPreviousCheckoutStepUrl() { }
+  getNextCheckoutStepUrl() {}
+  getPreviousCheckoutStepUrl() {}
 }
 
 describe('LegalCheckboxesComponent', () => {

@@ -1,26 +1,37 @@
 <ng-container *ngIf="agentList$ | async as agentList">
   <ng-container *ngIf="agentList && agentList.agents.length > 0">
     <div class="accordion">
-      <cx-fs-accordion-item [opened]="false" [title]="
-          ('fscommon.category.' + agentRootCategory | cxTranslate)
-        ">
+      <cx-fs-accordion-item
+        [opened]="false"
+        [title]="'fscommon.category.' + agentRootCategory | cxTranslate"
+      >
         <div class="container-fluid">
           <div class="row">
             <ng-container *ngFor="let agent of agentList.agents">
               <div class="col-12 col-md-6 col-lg-4">
                 <div class="agent-container px-3 py-5 m-5 text-center">
-                  <cx-media class="cx-product-image-container" [container]="agent.thumbnail" format="thumbnail">
+                  <cx-media
+                    class="cx-product-image-container"
+                    [container]="agent.thumbnail"
+                    format="thumbnail"
+                  >
                   </cx-media>
                   <p class="py-3">{{ agent.displayName }}</p>
                   <div class="row no-gutters">
-                    <a class="col-6 fs-icon icon-envelope text-right position-relative pr-2" [routerLink]="
+                    <a
+                      class="col-6 fs-icon icon-envelope text-right position-relative pr-2"
+                      [routerLink]="
                         {
                           cxRoute: 'contactAgent',
                           params: { agent: agent.email }
                         } | cxUrl
-                      "></a>
-                    <a class="col-6 fs-icon icon-map-marker text-left position-relative pl-2"
-                      [routerLink]="['/agent-locator']" [queryParams]="{ query: agent.email }"></a>
+                      "
+                    ></a>
+                    <a
+                      class="col-6 fs-icon icon-map-marker text-left position-relative pl-2"
+                      [routerLink]="['/agent-locator']"
+                      [queryParams]="{ query: agent.email }"
+                    ></a>
                   </div>
                 </div>
               </div>

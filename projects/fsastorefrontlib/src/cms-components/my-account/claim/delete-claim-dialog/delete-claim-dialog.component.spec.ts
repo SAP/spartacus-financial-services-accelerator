@@ -2,8 +2,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {
-  AuthService, I18nTestingModule,
-  OCC_USER_ID_CURRENT
+  AuthService,
+  I18nTestingModule,
+  OCC_USER_ID_CURRENT,
 } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
@@ -11,7 +12,7 @@ import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { DeleteClaimDialogComponent } from './delete-claim-dialog.component';
 
 class MockModalService {
-  dismissActiveModal(): void { }
+  dismissActiveModal(): void {}
 }
 
 class MockAuthService {
@@ -21,7 +22,7 @@ class MockAuthService {
 }
 
 class MockClaimService {
-  removeClaim() { }
+  removeClaim() {}
 }
 
 describe('DeleteClaimDialogComponent', () => {
@@ -47,7 +48,7 @@ describe('DeleteClaimDialogComponent', () => {
           provide: AuthService,
           useClass: MockAuthService,
         },
-        { provide: NgbActiveModal, useValue: { open: () => { } } },
+        { provide: NgbActiveModal, useValue: { open: () => {} } },
       ],
     }).compileComponents();
   }));

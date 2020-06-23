@@ -9,7 +9,7 @@ export const occProductConfig: OccConfig = {
         product: {
           details:
             'products/${productCode}?fields=DEFAULT,averageRating,stock(DEFAULT),description,availableForPickup,code,url,price(DEFAULT),numberOfReviews,manufacturer,categories(FULL),priceRange,multidimensional,configuratorType,configurable,tags,images(FULL)',
-        }
+        },
       },
     },
   },

@@ -29,7 +29,7 @@ class MockFormComponent {
   selector: 'cx-spinner',
   template: '',
 })
-class MockSpinnerComponent { }
+class MockSpinnerComponent {}
 
 const componentData: YFormCmsComponent = {
   uid: 'TestYFormCmsComponent',
@@ -60,11 +60,11 @@ class MockFormDataService {
   getFormDefinition() {
     return of(formDefinition);
   }
-  loadFormDefinition() { }
+  loadFormDefinition() {}
   getFormData() {
     return formData;
   }
-  loadFormData() { }
+  loadFormData() {}
 }
 
 class MockFormDataStorageService {

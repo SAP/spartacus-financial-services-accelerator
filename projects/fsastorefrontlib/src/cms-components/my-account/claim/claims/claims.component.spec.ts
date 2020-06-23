@@ -1,10 +1,4 @@
-import {
-  Component,
-
-
-  DebugElement, Pipe,
-  PipeTransform
-} from '@angular/core';
+import { Component, DebugElement, Pipe, PipeTransform } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -75,13 +69,13 @@ class MockUserRequestService {
     <div>spinner</div>
   `,
 })
-class MockCxSpinnerComponent { }
+class MockCxSpinnerComponent {}
 
 @Pipe({
   name: 'parseDate',
 })
 class MockParseDatePipe implements PipeTransform {
-  transform() { }
+  transform() {}
 }
 
 const testBaseUrl = 'testBaseUrl';

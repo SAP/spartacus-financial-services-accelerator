@@ -52,7 +52,7 @@ export const forms = {
       current_account_details_form: 'Produkt konfigurieren',
     },
     auto: {
-      vehicleAnnualMileage: 'Jahreskilometerleistung des Fahrzeugs'
+      vehicleAnnualMileage: 'Jahreskilometerleistung des Fahrzeugs',
     },
   },
 };

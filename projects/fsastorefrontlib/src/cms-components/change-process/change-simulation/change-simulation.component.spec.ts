@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import {
   GlobalMessageService,
   I18nTestingModule,
-  RoutingService
+  RoutingService,
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
@@ -53,21 +53,21 @@ class MockChangeRequestService {
 }
 
 class MockChangePolicyService {
-  getChangedPolicyObjects() { }
+  getChangedPolicyObjects() {}
 }
 
 class MockUserRequestNavigationService {
   getConfigurationSteps() {
     return configurationSteps;
   }
-  getActiveStep() { }
+  getActiveStep() {}
 }
 
 class MockRoutingService {
   go = createSpy();
 }
 
-class GlobalMessageServiceMock { }
+class GlobalMessageServiceMock {}
 
 describe('ChangeSimulationComponent', () => {
   let component: ChangeSimulationComponent;

@@ -8,8 +8,8 @@ import { OrderConfirmationComponent } from './order-confirmation.component';
 
 class FSCheckoutServiceStub {
   orderPlaced: boolean;
-  getOrderDetails() { }
-  clearCheckoutData() { }
+  getOrderDetails() {}
+  clearCheckoutData() {}
 }
 
 const MockOccModuleConfig: OccConfig = {
@@ -23,7 +23,7 @@ const MockOccModuleConfig: OccConfig = {
 };
 
 class MockFSTranslationService {
-  getTranslationValue() { }
+  getTranslationValue() {}
 }
 
 describe('OrderConfirmationComponent', () => {

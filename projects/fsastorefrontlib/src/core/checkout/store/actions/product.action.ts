@@ -1,6 +1,4 @@
-import {
-  PRODUCT_DETAIL_ENTITY, StateUtils,
-} from '@spartacus/core';
+import { PRODUCT_DETAIL_ENTITY, StateUtils } from '@spartacus/core';
 
 export const LOAD_CALCULATED_PRODUCT_DATA =
   '[Product] Load Calculated Product Data';

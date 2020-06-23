@@ -42,7 +42,7 @@ class MockCartService {
 }
 
 class MockFSTranslationService {
-  getTranslationValue() { }
+  getTranslationValue() {}
 }
 describe('MiniCartComponent', () => {
   let miniCartComponent: MiniCartComponent;

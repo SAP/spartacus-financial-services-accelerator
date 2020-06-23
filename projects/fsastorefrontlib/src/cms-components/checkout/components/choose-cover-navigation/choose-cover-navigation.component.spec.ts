@@ -15,7 +15,7 @@ class MockRoutingService {
 }
 
 class MockFormDataStorageService {
-  setFormDataToLocalStorage() { }
+  setFormDataToLocalStorage() {}
 }
 
 describe('ChooseCoverNavigationComponent', () => {

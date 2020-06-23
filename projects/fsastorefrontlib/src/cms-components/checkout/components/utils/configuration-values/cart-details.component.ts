@@ -7,7 +7,7 @@ import { FSTranslationService } from '../../../../../core/i18n/facade/translatio
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartDetailsComponent {
-  constructor(protected translationService: FSTranslationService) { }
+  constructor(protected translationService: FSTranslationService) {}
 
   @Input()
   referencedComponent: string;

@@ -1,7 +1,7 @@
 import { HttpRequest } from '@angular/common/http';
 import {
   HttpClientTestingModule,
-  HttpTestingController
+  HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';

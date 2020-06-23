@@ -54,7 +54,6 @@ describe('FSUpdateProfileFormComponent', () => {
       component.onSubmit();
       expect(component.submitted.emit).not.toHaveBeenCalled();
     });
-
   });
 
   describe('when the date of birth is invalid', () => {

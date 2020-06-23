@@ -9,7 +9,7 @@ import { FSTranslationService } from '../../../../core/i18n/facade/translation.s
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
   BindingStateType,
-  FSCart
+  FSCart,
 } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 
@@ -35,7 +35,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected modalService: ModalService,
     protected translationService: FSTranslationService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(

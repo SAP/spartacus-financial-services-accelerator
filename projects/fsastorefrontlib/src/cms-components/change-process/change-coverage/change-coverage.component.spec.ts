@@ -6,7 +6,7 @@ import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   GlobalMessageService,
   I18nTestingModule,
-  RoutingService
+  RoutingService,
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
@@ -98,16 +98,16 @@ class MockUserRequestNavigationService {
   getConfigurationSteps() {
     return configurationSteps;
   }
-  getActiveStep() { }
+  getActiveStep() {}
 }
 
 class MockRoutingService {
   go = createSpy();
 }
 
-class GlobalMessageServiceMock { }
+class GlobalMessageServiceMock {}
 
-class MockChangePolicyService { }
+class MockChangePolicyService {}
 
 describe('ChangeCoverageComponent', () => {
   let component: ChangeCoverageComponent;

@@ -66,7 +66,7 @@ describe('FSCheckoutConfigService', () => {
     const activeStepIndex = 5;
     spyOn<any>(service, 'getUrlFromActivatedRoute').and.returnValue(
       '/' +
-      mockRoutingConfig[mockCheckoutSteps[activeStepIndex].routeName].paths[0]
+        mockRoutingConfig[mockCheckoutSteps[activeStepIndex].routeName].paths[0]
     );
     spyOn<any>(service, 'getUrlFromStepRoute').and.callFake(route => {
       return mockRoutingConfig[route].paths[0];

@@ -57,7 +57,7 @@ const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
   uid: 'test',
 };
 class MockFormDataStorageService {
-  getFormDataIdByDefinitionCode() { }
+  getFormDataIdByDefinitionCode() {}
 }
 describe('GeneralInformationComponent', () => {
   let component: GeneralInformationComponent;

@@ -8,7 +8,7 @@ import { ClaimPoliciesGuard } from './claim-policies-guard';
 import createSpy = jasmine.createSpy;
 
 class MockPolicyService {
-  loadClaimPolicies() { }
+  loadClaimPolicies() {}
 }
 
 class MockRoutingService {

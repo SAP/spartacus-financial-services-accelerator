@@ -3,10 +3,9 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import {
   ActiveCartService,
-
-
-  Cart, CmsComponent,
-  I18nTestingModule
+  Cart,
+  CmsComponent,
+  I18nTestingModule,
 } from '@spartacus/core';
 import { CmsComponentData, SpinnerModule } from '@spartacus/storefront';
 import { of } from 'rxjs';
@@ -56,7 +55,7 @@ const mockCart: Cart = {
   code: 'cartCode',
   entries: [
     {
-      product: mockProduct
+      product: mockProduct,
     },
   ],
 };
@@ -83,7 +82,7 @@ const MockCmsComponentData = <CmsComponentData<CmsComponent>>{
   uid: 'test',
 };
 class MockFormDataStorageService {
-  getFormDataIdByDefinitionCode() { }
+  getFormDataIdByDefinitionCode() {}
 }
 describe('PersonalDetailsComponent', () => {
   let component: PersonalDetailsComponent;

@@ -1,12 +1,16 @@
 import { inject, TestBed } from '@angular/core/testing';
 import * as ngrxStore from '@ngrx/store';
 import { Store, StoreModule } from '@ngrx/store';
-import { Product, ProductLoadingService, StateWithProduct } from '@spartacus/core';
+import {
+  Product,
+  ProductLoadingService,
+  StateWithProduct,
+} from '@spartacus/core';
 import { of } from 'rxjs';
 import {
   PriceAttributeGroup,
   PricingAttribute,
-  PricingData
+  PricingData,
 } from './../../../occ/occ-models';
 import { FSProductService } from './product.service';
 
@@ -31,15 +35,13 @@ describe('FSProductService', () => {
     priceAttributeGroups: [priceGroup],
   };
 
-  class MockProductLoadingService {
-  }
+  class MockProductLoadingService {}
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [
-        StoreModule.forRoot({}),
-      ],
-      providers: [FSProductService,
+      imports: [StoreModule.forRoot({})],
+      providers: [
+        FSProductService,
         {
           provide: ProductLoadingService,
           useClass: MockProductLoadingService,

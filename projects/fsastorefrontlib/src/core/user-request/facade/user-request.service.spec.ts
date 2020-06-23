@@ -14,7 +14,7 @@ const mockUserRequest = {
   requestId: requestId,
 };
 class MockFormDataStorageService {
-  setFormDataToLocalStorage() { }
+  setFormDataToLocalStorage() {}
 }
 
 const userToken$ = new ReplaySubject<UserToken>();

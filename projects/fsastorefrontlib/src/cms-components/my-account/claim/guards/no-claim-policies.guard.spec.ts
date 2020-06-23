@@ -33,7 +33,7 @@ class MockClaimService {
 }
 
 class MockPolicyService {
-  loadClaimPolicies() { }
+  loadClaimPolicies() {}
 }
 
 describe('NoClaimPoliciesGuard', () => {

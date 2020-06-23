@@ -1,14 +1,14 @@
 import { HttpClientModule, HttpRequest } from '@angular/common/http';
 import {
   HttpClientTestingModule,
-  HttpTestingController
+  HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
 import {
   PriceAttributeGroup,
   PricingAttribute,
-  PricingData
+  PricingData,
 } from '../../../occ/occ-models';
 import { OccProductPricingAdapter } from './occ-product-pricing.adapter';
 

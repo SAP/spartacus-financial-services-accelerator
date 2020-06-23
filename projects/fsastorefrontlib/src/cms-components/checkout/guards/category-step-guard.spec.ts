@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   CmsActivatedRouteSnapshot,
-  RoutingConfigService
+  RoutingConfigService,
 } from '@spartacus/core';
 import { FSCheckoutConfigService } from './../../../core/checkout/services/checkout-config.service';
 import { CategoryStepGuard } from './category-step-guard';

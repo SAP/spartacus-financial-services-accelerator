@@ -10,12 +10,12 @@ class MockProductAssignmentAdapter implements ProductAssignmentAdapter {
     (userId, orgUnitId, active, pageSize, currentPage, sort) =>
       of(
         'loadProductAssignmentsForUnit' +
-        userId +
-        orgUnitId +
-        active +
-        pageSize +
-        currentPage +
-        sort
+          userId +
+          orgUnitId +
+          active +
+          pageSize +
+          currentPage +
+          sort
       )
   );
 
@@ -33,10 +33,10 @@ class MockProductAssignmentAdapter implements ProductAssignmentAdapter {
     (userId, orgUnitId, productAssignmentCode, active) =>
       of(
         'changeActiveStatus' +
-        userId +
-        orgUnitId +
-        productAssignmentCode +
-        active
+          userId +
+          orgUnitId +
+          productAssignmentCode +
+          active
       )
   );
 }

@@ -1,10 +1,12 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import {
-  ActiveCartService, AuthService, Cart,
+  ActiveCartService,
+  AuthService,
+  Cart,
   CheckoutDeliveryService,
   CHECKOUT_FEATURE,
-  OCC_USER_ID_CURRENT
+  OCC_USER_ID_CURRENT,
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
@@ -17,9 +19,8 @@ const identificationType = 'idType';
 const userId = 'userId';
 const cart: Cart = { code: 'cartId', guid: 'guid' };
 
-
 class CheckoutDeliveryServiceStub {
-  setDeliveryMode() { }
+  setDeliveryMode() {}
 }
 
 class MockAuthService {

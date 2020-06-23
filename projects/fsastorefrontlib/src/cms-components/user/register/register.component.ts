@@ -4,12 +4,9 @@ import { DefaultFormValidators } from '@fsa/dynamicforms';
 import {
   AnonymousConsentsConfig,
   AnonymousConsentsService,
-
-
-
   GlobalMessageService,
   RoutingService,
-  UserService
+  UserService,
 } from '@spartacus/core';
 import { RegisterComponent } from '@spartacus/storefront';
 import { FSUserSignUp } from '../../../occ/occ-models';

@@ -3,13 +3,13 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { of } from 'rxjs';
 import { DynamicFormsConfig } from '../../config/form-config';
 import {
   ControlDependency,
-  FieldConfig
+  FieldConfig,
 } from '../../models/form-config.interface';
 import { FormService } from '../form/form.service';
 import { defaultFormConfig } from './../../config/default-form-config';

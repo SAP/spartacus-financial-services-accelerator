@@ -3,7 +3,7 @@ import { Store, StoreModule } from '@ngrx/store';
 import {
   AuthService,
   OCC_CART_ID_CURRENT,
-  OCC_USER_ID_CURRENT
+  OCC_USER_ID_CURRENT,
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
@@ -67,13 +67,19 @@ describe('ProductAssignmentServiceTest', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        StoreModule.forRoot({}, {
-          runtimeChecks: {
-            strictStateImmutability: false,
-            strictActionImmutability: false,
-          },
-        }),
-        StoreModule.forFeature(PRODUCT_ASSIGNMENT_FEATURE, fromReducers.getReducers()),
+        StoreModule.forRoot(
+          {},
+          {
+            runtimeChecks: {
+              strictStateImmutability: false,
+              strictActionImmutability: false,
+            },
+          }
+        ),
+        StoreModule.forFeature(
+          PRODUCT_ASSIGNMENT_FEATURE,
+          fromReducers.getReducers()
+        ),
       ],
       providers: [
         {

@@ -7,13 +7,13 @@ import { AccordionModule } from '../../../../shared/accordion/accordion.module';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import {
   AllowedFSRequestType,
-  RequestType
+  RequestType,
 } from './../../../../occ/occ-models';
 import { PolicyDetailsComponent } from './policy-details.component';
 
 class MockPolicyService {
-  loadPolicyDetails() { }
-  getPolicyDetails() { }
+  loadPolicyDetails() {}
+  getPolicyDetails() {}
 }
 
 class MockRoutingService {
@@ -59,7 +59,7 @@ class MockChangeRequestService {
       ],
     });
   }
-  createChangeRequest(policy, contract, changeRequest) { }
+  createChangeRequest(policy, contract, changeRequest) {}
 }
 
 const mockOccModuleConfig: OccConfig = {

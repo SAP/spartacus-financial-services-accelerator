@@ -26,11 +26,11 @@ class MockCartService {
 }
 
 class MockQuoteService {
-  bindQuote(cartCode: string): void { }
+  bindQuote(cartCode: string): void {}
 }
 
 class MockModalService {
-  dismissActiveModal(): void { }
+  dismissActiveModal(): void {}
 }
 class MockRoutingService {
   go = createSpy();

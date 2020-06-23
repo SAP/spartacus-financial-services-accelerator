@@ -4,7 +4,7 @@ import {
   Cart,
   I18nTestingModule,
   OccConfig,
-  RoutingService
+  RoutingService,
 } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
@@ -12,7 +12,7 @@ import { PolicyService } from '../../../../core/my-account/facade';
 import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import {
   AllowedFSRequestType,
-  RequestType
+  RequestType,
 } from './../../../../occ/occ-models/occ.models';
 import { PoliciesComponent } from './policies.component';
 import createSpy = jasmine.createSpy;
@@ -24,7 +24,7 @@ class MockRoutingService {
 const claimNumber = '0000001';
 
 class MockClaimService {
-  createClaim() { }
+  createClaim() {}
 
   getCurrentClaim(): Observable<any> {
     return of({
