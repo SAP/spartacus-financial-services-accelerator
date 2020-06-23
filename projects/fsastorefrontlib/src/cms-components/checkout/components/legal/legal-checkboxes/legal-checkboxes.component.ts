@@ -53,4 +53,10 @@ export class LegalCheckboxesComponent implements OnInit {
       params: { code: nextStep.activeCategory },
     });
   }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 }

@@ -11,7 +11,6 @@ import { CurrencyService, OrderEntry, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/cart/facade';
-import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
 import { ActiveCategoryStep } from '../../../../occ/occ-models';
 
@@ -25,7 +24,6 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     protected cartService: FSCartService,
     protected routingService: RoutingService,
     protected checkoutConfigService: FSCheckoutConfigService,
-    protected categoryService: CategoryService,
     protected activatedRoute: ActivatedRoute,
     protected currencyService: CurrencyService
   ) {}
@@ -70,12 +68,9 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     );
 
     this.cartLoaded$ = this.cartService.getLoaded();
-    this.entries$ = this.cartService.getEntries().pipe(
-      filter(entries => entries && entries.length > 0),
-      tap(() => {
-        this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
-      })
-    );
+    this.entries$ = this.cartService
+      .getEntries()
+      .pipe(filter(entries => entries && entries.length > 0));
   }
 
   addProductToCart(orderEntryCode: string, entryNumber: string) {

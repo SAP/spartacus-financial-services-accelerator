@@ -7,7 +7,6 @@ import {
 import {
   CheckoutConfig,
   CheckoutConfigService,
-  CheckoutStepType,
   CurrentProductService,
 } from '@spartacus/storefront';
 import { BehaviorSubject } from 'rxjs';
@@ -18,7 +17,6 @@ import {
   FSProduct,
 } from '../../../occ';
 import { FSCartService } from '../../cart';
-import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -82,12 +80,10 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
         ) {
           if (paramType === 'productCode') {
             this.activeParamType = cart.entries[0].product.code;
-            console.log('productCode', this.activeParamType);
-          } else if (paramType === 'categoryCode' || paramType === 'formCode') {
+          } else {
             this.activeParamType = (<FSProduct>(
               cart.entries[0].product
             )).defaultCategory.code;
-            console.log('category', this.activeParamType);
           }
           const previousStepNumber: number =
             this.getCurrentStepIndex(activatedRoute) - 1;
@@ -97,13 +93,11 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
             this.activeParamType,
             this.steps[previousStepNumber].routeName
           );
-          this.setNextStep(
-            this.activeParamType,
-            this.steps[nextStepNumber].routeName
-          );
-          if (this.steps.length > 0) {
-            console.log(this.steps[previousStepNumber].routeName);
-            console.log(this.steps[nextStepNumber].routeName);
+          if (this.steps[nextStepNumber]) {
+            this.setNextStep(
+              this.activeParamType,
+              this.steps[nextStepNumber].routeName
+            );
           }
         }
       })
