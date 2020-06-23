@@ -50,7 +50,6 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
     const currentStepUrl: string = this.getUrlFromActivatedRoute(
       activatedRoute
     );
-
     let stepIndex: number;
     let index = 0;
     for (const step of this.steps) {
@@ -83,23 +82,23 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
             activeParamType = (<FSProduct>cart.entries[0].product)
               .defaultCategory.code;
           }
-          const previousStepNumber: number =
-            this.getCurrentStepIndex(activatedRoute) - 1;
-          const nextStepNumber: number =
-            this.getCurrentStepIndex(activatedRoute) + 1;
-          this.setPreviousStep(
-            activeParamType,
-            this.steps[previousStepNumber].routeName
-          );
-          if (this.steps[nextStepNumber]) {
-            this.setNextStep(
-              activeParamType,
-              this.steps[nextStepNumber].routeName
-            );
-          }
+          this.setSteps(activatedRoute, activeParamType);
         }
       })
       .unsubscribe();
+  }
+
+  setSteps(activatedRoute: ActivatedRoute, activeParamType: string) {
+    const previousStepNumber: number =
+      this.getCurrentStepIndex(activatedRoute) - 1;
+    const nextStepNumber: number = this.getCurrentStepIndex(activatedRoute) + 1;
+    this.setPreviousStep(
+      activeParamType,
+      this.steps[previousStepNumber].routeName
+    );
+    if (this.steps[nextStepNumber]) {
+      this.setNextStep(activeParamType, this.steps[nextStepNumber].routeName);
+    }
   }
 
   // Class is implemented in order to fix this behavior from spartacus. Once real fix is implemented class can be removed.

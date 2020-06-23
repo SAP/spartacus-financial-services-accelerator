@@ -56,9 +56,9 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
           .getEntries()
           .pipe(
             tap(() => {
+              this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
               this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
               this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
-              this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
             })
           )
           .subscribe()

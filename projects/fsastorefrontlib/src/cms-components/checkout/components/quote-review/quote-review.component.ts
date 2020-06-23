@@ -39,8 +39,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
-    this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
     this.cart$ = this.cartService.getActive();
     this.cartLoaded$ = this.cartService.getLoaded();
     this.subscription.add(
@@ -49,6 +47,8 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
         .pipe(
           tap(() => {
             this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
+            this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
+            this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
           })
         )
         .subscribe()
