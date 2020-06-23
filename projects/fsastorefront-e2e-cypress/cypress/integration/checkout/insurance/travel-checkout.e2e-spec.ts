@@ -46,7 +46,7 @@ context('Travel Insurance Checkout', () => {
     });
 
     it('Check mini cart on quote review page', () => {
-      checkout.checkAccordions('travelQuoteReview');
+      checkout.checkAccordions('generalQuoteAccordions');
       travelCheckout.checkTravelMiniCart();
     });
 

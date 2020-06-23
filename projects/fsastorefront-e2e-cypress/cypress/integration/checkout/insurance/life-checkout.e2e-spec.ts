@@ -63,7 +63,7 @@ context('Life Insurance Checkout', () => {
   it('Should check quote review step', () => {
     checkout.checkProgressBarInsurance('Your Life Insurance');
     //life.checkLifeBasicMiniCartSecondPerson();
-    checkout.checkAccordions('lifeQuoteReview');
+    checkout.checkAccordions('generalQuoteAccordions');
     cy.get('.primary-button').should('not.be.visible');
   });
 
