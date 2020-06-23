@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Cart, RoutingService } from '@spartacus/core';
 import { Subscription, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { FSOrderEntry } from '../../../../occ/occ-models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
@@ -25,14 +25,22 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
   ) {}
 
   subscription = new Subscription();
-  checkoutStepUrlNext: string;
   previousCheckoutStep$: Observable<ActiveCategoryStep>;
   nextCheckoutStep$: Observable<ActiveCategoryStep>;
 
   ngOnInit() {
-    this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
-    this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
-    this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
+    this.subscription.add(
+      this.cartService
+        .getEntries()
+        .pipe(
+          tap(() => {
+            this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
+            this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
+            this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
+          })
+        )
+        .subscribe()
+    );
   }
 
   navigateNext(nextStep) {

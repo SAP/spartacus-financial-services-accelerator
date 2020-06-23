@@ -12,9 +12,6 @@ import { tap } from 'rxjs/operators';
   templateUrl: './legal-checkboxes.component.html',
 })
 export class LegalCheckboxesComponent implements OnInit {
-  checkoutStepUrlNext: string;
-  checkoutStepUrlBack: string;
-
   constructor(
     protected routingService: RoutingService,
     protected activatedRoute: ActivatedRoute,

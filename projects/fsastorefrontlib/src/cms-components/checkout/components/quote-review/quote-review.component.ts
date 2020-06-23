@@ -22,12 +22,9 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   cart$: Observable<Cart>;
   showContent$: Observable<boolean> = of(true);
   cartLoaded$: Observable<boolean>;
-  checkoutStepUrlNext: string;
-  checkoutStepUrlBack: string;
   subscription = new Subscription();
   modalRef: ModalRef;
   cartCode: string;
-  categoryCode: string;
   previousCheckoutStep$: Observable<ActiveCategoryStep>;
   nextCheckoutStep$: Observable<ActiveCategoryStep>;
 

@@ -29,12 +29,9 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
   ) {}
 
   entries$: Observable<OrderEntry[]>;
-  checkoutStepUrlPrevious: string;
-  checkoutStepUrlNext: string;
   cartLoaded$: Observable<boolean>;
   subscription = new Subscription();
   currentCurrency: string;
-  activeCategory: string;
 
   @Output()
   nextStep = new EventEmitter<any>();
@@ -43,29 +40,29 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
   nextCheckoutStep$: Observable<ActiveCategoryStep>;
 
   ngOnInit() {
-    this.subscription.add(
-      this.currencyService
-        .getActive()
-        .pipe(
-          map(currentCurrency => {
-            this.currentCurrency = currentCurrency;
-          })
-        )
-        .subscribe()
-    );
-
-    this.subscription.add(
-      this.cartService
-        .getEntries()
-        .pipe(
-          tap(() => {
-            this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
-            this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
-            this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
-          })
-        )
-        .subscribe()
-    );
+    this.subscription
+      .add(
+        this.currencyService
+          .getActive()
+          .pipe(
+            map(currentCurrency => {
+              this.currentCurrency = currentCurrency;
+            })
+          )
+          .subscribe()
+      )
+      .add(
+        this.cartService
+          .getEntries()
+          .pipe(
+            tap(() => {
+              this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
+              this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
+              this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
+            })
+          )
+          .subscribe()
+      );
 
     this.cartLoaded$ = this.cartService.getLoaded();
     this.entries$ = this.cartService

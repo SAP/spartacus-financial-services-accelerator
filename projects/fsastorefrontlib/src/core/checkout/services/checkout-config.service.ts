@@ -37,8 +37,6 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   nextCheckoutStepSource = new BehaviorSubject<ActiveCategoryStep>(null);
   nextStep = this.nextCheckoutStepSource.asObservable();
 
-  activeParamType: string;
-
   setPreviousStep(activeCategory: string, step: string) {
     this.previousCheckoutStepSource.next({ activeCategory, step });
   }
@@ -67,6 +65,7 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   }
 
   setBackNextSteps(activatedRoute: ActivatedRoute) {
+    let activeParamType: string;
     const previousUrl = this.getPreviousCheckoutStepUrl(activatedRoute);
     const paramType = previousUrl.substring(previousUrl.lastIndexOf(':') + 1);
     this.cartService
@@ -79,23 +78,22 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
           <FSProduct>cart.entries[0].product
         ) {
           if (paramType === 'productCode') {
-            this.activeParamType = cart.entries[0].product.code;
+            activeParamType = cart.entries[0].product.code;
           } else {
-            this.activeParamType = (<FSProduct>(
-              cart.entries[0].product
-            )).defaultCategory.code;
+            activeParamType = (<FSProduct>cart.entries[0].product)
+              .defaultCategory.code;
           }
           const previousStepNumber: number =
             this.getCurrentStepIndex(activatedRoute) - 1;
           const nextStepNumber: number =
             this.getCurrentStepIndex(activatedRoute) + 1;
           this.setPreviousStep(
-            this.activeParamType,
+            activeParamType,
             this.steps[previousStepNumber].routeName
           );
           if (this.steps[nextStepNumber]) {
             this.setNextStep(
-              this.activeParamType,
+              activeParamType,
               this.steps[nextStepNumber].routeName
             );
           }

@@ -42,7 +42,6 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
   }
   private subscription = new Subscription();
   activeCategory$: Observable<string>;
-  // activeCategorySteps = [];
 
   ngOnInit() {
     super.ngOnInit();
