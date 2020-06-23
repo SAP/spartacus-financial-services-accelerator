@@ -1,7 +1,7 @@
 import { HttpClientModule, HttpRequest } from '@angular/common/http';
 import {
   HttpClientTestingModule,
-  HttpTestingController,
+  HttpTestingController
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
@@ -39,9 +39,9 @@ describe('OccCartAdapter', () => {
       ],
     });
 
-    adapter = TestBed.get(OccCartAdapter);
-    httpMock = TestBed.get(HttpTestingController);
-    occEndpointService = TestBed.get(OccEndpointsService);
+    adapter = TestBed.inject(OccCartAdapter);
+    httpMock = TestBed.inject(HttpTestingController);
+    occEndpointService = TestBed.inject(OccEndpointsService);
     spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 

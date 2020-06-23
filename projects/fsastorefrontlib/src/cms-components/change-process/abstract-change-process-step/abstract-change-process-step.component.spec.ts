@@ -1,18 +1,17 @@
-import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AbstractChangeProcessStepComponent } from './abstract-change-process-step.component';
-import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
-import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
-import { Type } from '@angular/core';
-import createSpy = jasmine.createSpy;
 import {
   GlobalMessage,
   GlobalMessageService,
-  RoutingService,
+  RoutingService
 } from '@spartacus/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { of } from 'rxjs';
+import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
+import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
+import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
+import { AbstractChangeProcessStepComponent } from './abstract-change-process-step.component';
+import createSpy = jasmine.createSpy;
 
 const configurationSteps = [
   {
@@ -34,7 +33,7 @@ class MockUserRequestNavigationService {
   getConfigurationSteps() {
     return configurationSteps;
   }
-  getActiveStep() {}
+  getActiveStep() { }
 }
 
 class MockChangeRequestService {
@@ -62,18 +61,18 @@ class MockRoutingService {
 }
 
 class GlobalMessageServiceMock {
-  add(_message: GlobalMessage): void {}
+  add(_message: GlobalMessage): void { }
 }
 
-class ChangePolicyServiceMock {}
+class ChangePolicyServiceMock { }
 
 describe('ChangeProcessStepComponent', () => {
   let component: AbstractChangeProcessStepComponent;
   let fixture: ComponentFixture<AbstractChangeProcessStepComponent>;
-  let mockRoutingService: MockRoutingService;
+  let mockRoutingService: RoutingService;
   let globalMessageService: GlobalMessageService;
-  let mockUserRequestNavigationService: MockUserRequestNavigationService;
-  let mockChangeRequestService: MockChangeRequestService;
+  let mockUserRequestNavigationService: UserRequestNavigationService;
+  let mockChangeRequestService: ChangeRequestService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -111,16 +110,11 @@ describe('ChangeProcessStepComponent', () => {
       declarations: [AbstractChangeProcessStepComponent],
     }).compileComponents();
 
-    mockChangeRequestService = TestBed.get(ChangeRequestService as Type<
-      ChangeRequestService
-    >);
-    mockUserRequestNavigationService = TestBed.get(
-      UserRequestNavigationService as Type<UserRequestNavigationService>
-    );
-    mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
-    globalMessageService = TestBed.get(GlobalMessageService as Type<
-      GlobalMessageService
-    >);
+    mockChangeRequestService = TestBed.inject(ChangeRequestService);
+    mockUserRequestNavigationService = TestBed.inject(
+      UserRequestNavigationService);
+    mockRoutingService = TestBed.inject(RoutingService);
+    globalMessageService = TestBed.inject(GlobalMessageService);
   }));
 
   beforeEach(() => {

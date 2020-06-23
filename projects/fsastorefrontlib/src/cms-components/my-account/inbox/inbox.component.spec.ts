@@ -1,23 +1,23 @@
 import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   AuthRedirectService,
   AuthService,
   CmsService,
   I18nTestingModule,
-  UserToken,
+  UserToken
 } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { InboxService } from '../../../core/my-account/facade/inbox.service';
 import {
   InboxDataService,
-  InboxTab,
+  InboxTab
 } from '../../../core/my-account/services/inbox-data.service';
 import {
   CmsInboxComponent,
-  CmsInboxTabComponent,
+  CmsInboxTabComponent
 } from './../../../occ/occ-models/cms-component.models';
 import { InboxComponent } from './inbox.component';
 
@@ -95,7 +95,7 @@ describe('InboxComponent', () => {
     mockInboxDataService = new MockInboxDataService();
 
     TestBed.configureTestingModule({
-      imports: [NgbTabsetModule, I18nTestingModule],
+      imports: [NgbNavModule, I18nTestingModule],
       declarations: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
       providers: [
         {

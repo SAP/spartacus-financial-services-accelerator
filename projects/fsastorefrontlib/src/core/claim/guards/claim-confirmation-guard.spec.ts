@@ -1,10 +1,9 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { GlobalMessageService, RoutingService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { UserRequestService } from '../../user-request';
 import { ClaimStatus } from '../../../occ/occ-models';
+import { UserRequestService } from '../../user-request';
 import { ClaimConfirmationGuard } from './claim-confirmation-guard';
 
 const mockUserRequest = {
@@ -13,7 +12,7 @@ const mockUserRequest = {
 };
 
 class MockRoutingService {
-  go() {}
+  go() { }
 }
 
 class MockUserRequestService {
@@ -23,7 +22,7 @@ class MockUserRequestService {
 }
 
 class MockGlobalMessageService {
-  add() {}
+  add() { }
 }
 
 describe(`ClaimConfirmationGuard`, () => {
@@ -50,9 +49,9 @@ describe(`ClaimConfirmationGuard`, () => {
       imports: [RouterTestingModule],
     });
 
-    guard = TestBed.get(ClaimConfirmationGuard as Type<ClaimConfirmationGuard>);
-    service = TestBed.get(UserRequestService as Type<UserRequestService>);
-    routing = TestBed.get(RoutingService as Type<RoutingService>);
+    guard = TestBed.inject(ClaimConfirmationGuard);
+    service = TestBed.inject(UserRequestService);
+    routing = TestBed.inject(RoutingService);
 
     spyOn(routing, 'go').and.stub();
   });

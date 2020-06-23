@@ -1,12 +1,11 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RoutingService } from '@spartacus/core';
+import { PolicyService } from 'projects/fsastorefrontlib/src/core';
 import { of } from 'rxjs';
 import { ClaimService } from './../../../../core/my-account/facade/claim.service';
-import createSpy = jasmine.createSpy;
 import { NoClaimPoliciesGuard } from './no-claim-policies.guard';
-import { PolicyService } from 'projects/fsastorefrontlib/src/core';
+import createSpy = jasmine.createSpy;
 
 class MockRoutingService {
   go = createSpy();
@@ -34,14 +33,14 @@ class MockClaimService {
 }
 
 class MockPolicyService {
-  loadClaimPolicies() {}
+  loadClaimPolicies() { }
 }
 
 describe('NoClaimPoliciesGuard', () => {
   let guard: NoClaimPoliciesGuard;
   let routing: RoutingService;
-  let claimService: MockClaimService;
-  let policyService: MockPolicyService;
+  let claimService: ClaimService;
+  let policyService: PolicyService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -59,10 +58,10 @@ describe('NoClaimPoliciesGuard', () => {
       ],
     }).compileComponents();
 
-    guard = TestBed.get(NoClaimPoliciesGuard as Type<NoClaimPoliciesGuard>);
-    routing = TestBed.get(RoutingService as Type<RoutingService>);
-    claimService = TestBed.get(ClaimService as Type<ClaimService>);
-    policyService = TestBed.get(PolicyService as Type<PolicyService>);
+    guard = TestBed.inject(NoClaimPoliciesGuard);
+    routing = TestBed.inject(RoutingService);
+    claimService = TestBed.inject(ClaimService);
+    policyService = TestBed.inject(PolicyService);
   });
 
   it('should redirect to claims page in case there are policies', () => {

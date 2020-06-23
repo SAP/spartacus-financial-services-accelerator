@@ -16,7 +16,7 @@ describe('PricingService', () => {
       providers: [PricingService],
     });
 
-    service = TestBed.get(PricingService);
+    service = TestBed.inject(PricingService);
   });
 
   describe('buildPricingData', () => {

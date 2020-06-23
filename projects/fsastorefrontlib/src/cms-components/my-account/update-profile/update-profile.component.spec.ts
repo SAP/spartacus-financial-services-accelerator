@@ -3,7 +3,7 @@ import {
   DebugElement,
   EventEmitter,
   Input,
-  Output,
+  Output
 } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NavigationExtras } from '@angular/router';
@@ -14,7 +14,7 @@ import {
   RoutingService,
   Title,
   UrlCommands,
-  UserService,
+  UserService
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSUser } from '../../../occ/occ-models';
@@ -34,7 +34,7 @@ class MockUpdateProfileFormComponent {
   titles: Title[];
 
   @Output()
-  submited = new EventEmitter<{ uid: string; userUpdates: FSUser }>();
+  submitted = new EventEmitter<{ uid: string; userUpdates: FSUser }>();
 }
 @Component({
   // tslint:disable-next-line:component-selector
@@ -43,7 +43,7 @@ class MockUpdateProfileFormComponent {
     <div>spinner</div>
   `,
 })
-class MockCxSpinnerComponent {}
+class MockCxSpinnerComponent { }
 
 class UserServiceMock {
   get(): Observable<FSUser> {
@@ -54,11 +54,11 @@ class UserServiceMock {
     return of();
   }
 
-  loadTitles(): void {}
+  loadTitles(): void { }
 
-  updatePersonalDetails(): void {}
+  updatePersonalDetails(): void { }
 
-  resetUpdatePersonalDetailsProcessingState(): void {}
+  resetUpdatePersonalDetailsProcessingState(): void { }
 
   getUpdatePersonalDetailsResultLoading(): Observable<boolean> {
     return of(true);
@@ -73,11 +73,11 @@ class RoutingServiceMock {
     _commands: any[] | UrlCommands,
     _query?: object,
     _extras?: NavigationExtras
-  ): void {}
+  ): void { }
 }
 
 class GlobalMessageServiceMock {
-  add(_message: GlobalMessage): void {}
+  add(_message: GlobalMessage): void { }
 }
 
 describe('UpdateProfileComponent', () => {
@@ -118,9 +118,9 @@ describe('UpdateProfileComponent', () => {
     component = fixture.componentInstance;
     el = fixture.debugElement;
 
-    userService = TestBed.get(UserService);
-    routingService = TestBed.get(RoutingService);
-    globalMessageService = TestBed.get(GlobalMessageService);
+    userService = TestBed.inject(UserService);
+    routingService = TestBed.inject(RoutingService);
+    globalMessageService = TestBed.inject(GlobalMessageService);
 
     fixture.detectChanges();
   });

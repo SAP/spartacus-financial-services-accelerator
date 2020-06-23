@@ -1,17 +1,16 @@
-import { Type } from '@angular/core';
 import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import {
   AuthService,
   OCC_CART_ID_CURRENT,
-  OCC_USER_ID_CURRENT,
+  OCC_USER_ID_CURRENT
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
-import { ProductAssignmentAdapter } from '../connectors/product-assignment.adapter';
 import * as fromAction from '../store/actions';
 import { StateWithProductAssignment } from '../store/product-assignments-state';
-import { reducerProvider, reducerToken } from '../store/reducers';
+import * as fromReducers from '../store/reducers/index';
+import { PRODUCT_ASSIGNMENT_FEATURE } from './../store/product-assignments-state';
 import { ProductAssignmentService } from './product-assignment.service';
 
 const mockProductAssignments = {
@@ -54,10 +53,6 @@ const currentPage = 1;
 const sortCode = 'name';
 const productAssignmentCode = 'testOne';
 const parentOrgUnit = 'TestParentOrg';
-const MockCustomerProfile = {
-  occUserId: 'TestOrg',
-  orgCustomerId: 'TestCustomerId',
-};
 
 class MockAuthService {
   getOccUserId(): Observable<string> {
@@ -67,30 +62,30 @@ class MockAuthService {
 describe('ProductAssignmentServiceTest', () => {
   let service: ProductAssignmentService;
   let store: Store<StateWithProductAssignment>;
-  let mockAuthService: MockAuthService;
+  let mockAuthService: AuthService;
 
   beforeEach(() => {
-    mockAuthService = new MockAuthService();
     TestBed.configureTestingModule({
       imports: [
-        StoreModule.forRoot({}),
-        StoreModule.forFeature('productAssignments', reducerToken),
+        StoreModule.forRoot({}, {
+          runtimeChecks: {
+            strictStateImmutability: false,
+            strictActionImmutability: false,
+          },
+        }),
+        StoreModule.forFeature(PRODUCT_ASSIGNMENT_FEATURE, fromReducers.getReducers()),
       ],
       providers: [
-        ProductAssignmentService,
-        reducerProvider,
-        ProductAssignmentAdapter,
         {
           provide: AuthService,
-          useValue: mockAuthService,
+          useClass: MockAuthService,
         },
       ],
     });
 
-    service = TestBed.get(ProductAssignmentService as Type<
-      ProductAssignmentService
-    >);
-    store = TestBed.get(Store as Type<Store<StateWithProductAssignment>>);
+    service = TestBed.inject(ProductAssignmentService);
+    store = TestBed.inject(Store);
+    mockAuthService = TestBed.inject(AuthService);
     service.user = OCC_CART_ID_CURRENT;
     spyOn(store, 'dispatch').and.callThrough();
   });
@@ -146,22 +141,6 @@ describe('ProductAssignmentServiceTest', () => {
     );
   });
 
-  it('should be able to load potential product assignments', () => {
-    store.dispatch(
-      new fromAction.LoadPotentialProductAssignmentsSuccess(
-        mockProductAssignments
-      )
-    );
-    let response;
-    service
-      .getPotentialProductAssignments()
-      .subscribe(potentialAssignments => {
-        response = potentialAssignments;
-      })
-      .unsubscribe();
-    expect(response).toEqual(mockProductAssignments.assignments);
-  });
-
   it('should be able to create product assignment', () => {
     service.createProductAssignment(mockedOrgUnitId, productAssignmentCode);
     expect(store.dispatch).toHaveBeenCalledWith(
@@ -190,6 +169,9 @@ describe('ProductAssignmentServiceTest', () => {
   });
 
   it('should be able to dispatch product assignment update action', () => {
+    store.dispatch(
+      new fromAction.LoadProductAssignmentsSuccess(mockProductAssignments)
+    );
     service.changeActiveStatus(mockedOrgUnitId, productAssignmentCode, false);
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.UpdateProductAssignment({

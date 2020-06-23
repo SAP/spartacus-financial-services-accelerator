@@ -1,11 +1,11 @@
 import {
   HttpClientModule,
   HttpErrorResponse,
-  HttpRequest,
+  HttpRequest
 } from '@angular/common/http';
 import {
   HttpClientTestingModule,
-  HttpTestingController,
+  HttpTestingController
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
@@ -47,9 +47,9 @@ describe('OccChangeRequestAdapter', () => {
       ],
     });
 
-    adapter = TestBed.get(OccChangeRequestAdapter);
-    httpMock = TestBed.get(HttpTestingController);
-    occEndpointService = TestBed.get(OccEndpointsService);
+    adapter = TestBed.inject(OccChangeRequestAdapter);
+    httpMock = TestBed.inject(HttpTestingController);
+    occEndpointService = TestBed.inject(OccEndpointsService);
     spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 

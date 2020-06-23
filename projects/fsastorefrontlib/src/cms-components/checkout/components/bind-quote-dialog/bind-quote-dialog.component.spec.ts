@@ -1,4 +1,4 @@
-import { DebugElement, Type } from '@angular/core';
+import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { Cart, I18nTestingModule, RoutingService } from '@spartacus/core';
@@ -26,11 +26,11 @@ class MockCartService {
 }
 
 class MockQuoteService {
-  bindQuote(cartCode: string): void {}
+  bindQuote(cartCode: string): void { }
 }
 
 class MockModalService {
-  dismissActiveModal(): void {}
+  dismissActiveModal(): void { }
 }
 class MockRoutingService {
   go = createSpy();
@@ -73,9 +73,9 @@ describe('BindQuoteDialogComponent', () => {
     fixture = TestBed.createComponent(BindQuoteDialogComponent);
     component = fixture.componentInstance;
     el = fixture.debugElement;
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
-    quoteService = TestBed.get(QuoteService as Type<QuoteService>);
-    modalService = TestBed.get(ModalService as Type<ModalService>);
+    cartService = TestBed.inject(FSCartService);
+    quoteService = TestBed.inject(QuoteService);
+    modalService = TestBed.inject(ModalService);
 
     spyOn(cartService, 'getActive').and.callThrough();
     spyOn(quoteService, 'bindQuote').and.callThrough();

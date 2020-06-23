@@ -1,6 +1,6 @@
+import { TestBed } from '@angular/core/testing';
 import { RequestType } from './../../../occ/occ-models/occ.models';
 import { ChangePolicyService } from './change-policy.service';
-import { TestBed } from '@angular/core/testing';
 
 describe('ChangePolicyService', () => {
   let service: ChangePolicyService;
@@ -10,7 +10,7 @@ describe('ChangePolicyService', () => {
       providers: [ChangePolicyService],
     });
 
-    service = TestBed.get(ChangePolicyService);
+    service = TestBed.inject(ChangePolicyService);
   });
 
   it('should be created', () => {

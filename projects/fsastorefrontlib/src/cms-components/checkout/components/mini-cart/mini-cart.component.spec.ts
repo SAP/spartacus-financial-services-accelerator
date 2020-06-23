@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Cart, I18nTestingModule } from '@spartacus/core';
@@ -43,7 +42,7 @@ class MockCartService {
 }
 
 class MockFSTranslationService {
-  getTranslationValue() {}
+  getTranslationValue() { }
 }
 describe('MiniCartComponent', () => {
   let miniCartComponent: MiniCartComponent;
@@ -67,10 +66,8 @@ describe('MiniCartComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MiniCartComponent);
-    translationService = TestBed.get(FSTranslationService as Type<
-      FSTranslationService
-    >);
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
+    translationService = TestBed.inject(FSTranslationService);
+    cartService = TestBed.inject(FSCartService);
     miniCartComponent = fixture.componentInstance;
   });
 

@@ -1,16 +1,15 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  Validators,
+  Validators
 } from '@angular/forms';
 import { of } from 'rxjs';
 import { DynamicFormsConfig } from '../../config/form-config';
 import {
   ControlDependency,
-  FieldConfig,
+  FieldConfig
 } from '../../models/form-config.interface';
 import { FormService } from '../form/form.service';
 import { defaultFormConfig } from './../../config/default-form-config';
@@ -106,11 +105,9 @@ describe('FieldDependencyResolverService', () => {
         },
       ],
     });
-    mockFormValidationService = TestBed.get(FormValidationService as Type<
-      FormValidationService
-    >);
-    mockFormService = TestBed.get(FormService as Type<FormService>);
-    service = TestBed.get(FieldDependencyResolverService);
+    mockFormValidationService = TestBed.inject(FormValidationService);
+    mockFormService = TestBed.inject(FormService);
+    service = TestBed.inject(FieldDependencyResolverService);
   });
 
   it('should be created', () => {

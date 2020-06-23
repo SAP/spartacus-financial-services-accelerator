@@ -1,16 +1,15 @@
-import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { provideMockActions } from '@ngrx/effects/testing';
 import { Actions } from '@ngrx/effects';
+import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
+import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
+import { UserRequestConnector } from '../../connectors/user-request.connector';
 import * as fromActions from '../actions';
 import * as fromReducer from '../reducers/index';
 import * as fromEffects from './user-request.effect';
-import { UserRequestConnector } from '../../connectors/user-request.connector';
 
 const userRequest = {
   requestStatus: 'OPEN',
@@ -60,7 +59,7 @@ class MockOccUserRequestAdapter {
   }
 }
 
-class MockActions {}
+class MockActions { }
 
 describe('User Request Effects', () => {
   let actions$: Observable<fromActions.UserRequestActions>;
@@ -85,9 +84,7 @@ describe('User Request Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.UserRequestEffects as Type<
-      fromEffects.UserRequestEffects
-    >);
+    effects = TestBed.inject(fromEffects.UserRequestEffects);
   });
 
   describe('submitUserRequest$', () => {

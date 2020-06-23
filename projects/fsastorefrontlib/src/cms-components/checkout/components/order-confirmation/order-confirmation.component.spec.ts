@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule, OccConfig } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
@@ -9,8 +8,8 @@ import { OrderConfirmationComponent } from './order-confirmation.component';
 
 class FSCheckoutServiceStub {
   orderPlaced: boolean;
-  getOrderDetails() {}
-  clearCheckoutData() {}
+  getOrderDetails() { }
+  clearCheckoutData() { }
 }
 
 const MockOccModuleConfig: OccConfig = {
@@ -24,7 +23,7 @@ const MockOccModuleConfig: OccConfig = {
 };
 
 class MockFSTranslationService {
-  getTranslationValue() {}
+  getTranslationValue() { }
 }
 
 describe('OrderConfirmationComponent', () => {
@@ -56,12 +55,10 @@ describe('OrderConfirmationComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(OrderConfirmationComponent);
-    translationService = TestBed.get(FSTranslationService as Type<
-      FSTranslationService
-    >);
+    translationService = TestBed.inject(FSTranslationService);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    checkoutService = TestBed.get(FSCheckoutService as Type<FSCheckoutService>);
+    checkoutService = TestBed.inject(FSCheckoutService);
     spyOn(checkoutService, 'getOrderDetails').and.stub();
     spyOn(checkoutService, 'clearCheckoutData').and.stub();
   });

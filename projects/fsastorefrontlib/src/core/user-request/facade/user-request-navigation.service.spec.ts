@@ -1,16 +1,15 @@
-import { FSUserRequest } from './../../../occ/occ-models/occ.models';
-import { TestBed, inject } from '@angular/core/testing';
-import { Type } from '@angular/core';
+import { inject, TestBed } from '@angular/core/testing';
+import { ActivatedRoute } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
 import { FSStepData } from '../../../occ/occ-models/occ.models';
+import { FSUserRequest } from './../../../occ/occ-models/occ.models';
 import { UserRequestNavigationService } from './user-request-navigation.service';
-import { ActivatedRoute } from '@angular/router';
 import createSpy = jasmine.createSpy;
 
 const page2 = 'page2';
 const step2 = 'step2';
 const nonExistingPage = 'page23';
-class MockActivatedRoute {}
+class MockActivatedRoute { }
 
 class MockRoutingService {
   go = createSpy();
@@ -52,9 +51,7 @@ describe('UserRequestNavigationServiceTest', () => {
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
       ],
     });
-    service = TestBed.get(UserRequestNavigationService as Type<
-      UserRequestNavigationService
-    >);
+    service = TestBed.inject(UserRequestNavigationService);
   });
 
   it('should inject User navigation request service', inject(

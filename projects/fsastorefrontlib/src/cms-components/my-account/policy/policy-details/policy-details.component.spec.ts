@@ -1,19 +1,19 @@
-import { PolicyDetailsComponent } from './policy-details.component';
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { RoutingService, OccConfig, I18nTestingModule } from '@spartacus/core';
-import { of, Observable } from 'rxjs';
-import { AccordionModule } from '../../../../shared/accordion/accordion.module';
-import { PolicyService } from '../../../../core/my-account/facade/policy.service';
-import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import { Type } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
+import { Observable, of } from 'rxjs';
+import { PolicyService } from '../../../../core/my-account/facade/policy.service';
+import { AccordionModule } from '../../../../shared/accordion/accordion.module';
+import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import {
   AllowedFSRequestType,
-  RequestType,
+  RequestType
 } from './../../../../occ/occ-models';
+import { PolicyDetailsComponent } from './policy-details.component';
 
 class MockPolicyService {
-  loadPolicyDetails() {}
-  getPolicyDetails() {}
+  loadPolicyDetails() { }
+  getPolicyDetails() { }
 }
 
 class MockRoutingService {
@@ -59,7 +59,7 @@ class MockChangeRequestService {
       ],
     });
   }
-  createChangeRequest(policy, contract, changeRequest) {}
+  createChangeRequest(policy, contract, changeRequest) { }
 }
 
 const mockOccModuleConfig: OccConfig = {

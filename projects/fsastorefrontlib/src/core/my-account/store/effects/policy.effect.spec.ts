@@ -1,15 +1,14 @@
-import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
+import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
-import * as fromActions from '../actions';
-import * as fromEffects from './policy.effect';
-import * as fromUserReducers from './../../store/reducers/index';
 import { PolicyConnector } from '../../connectors/policy.connector';
+import * as fromActions from '../actions';
+import * as fromUserReducers from './../../store/reducers/index';
+import * as fromEffects from './policy.effect';
 
 const insurancePolicy1: any = {
   policyNumber: 'test001',
@@ -69,9 +68,7 @@ describe('Policy Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.PolicyEffects as Type<
-      fromEffects.PolicyEffects
-    >);
+    effects = TestBed.inject(fromEffects.PolicyEffects);
   });
 
   describe('loadPolicies$', () => {

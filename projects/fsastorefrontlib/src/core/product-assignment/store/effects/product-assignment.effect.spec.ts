@@ -1,5 +1,4 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
@@ -95,9 +94,7 @@ describe('Product Assignment Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.ProductAssignmentEffects as Type<
-      fromEffects.ProductAssignmentEffects
-    >);
+    effects = TestBed.inject(fromEffects.ProductAssignmentEffects);
   });
 
   describe('loadProductAssignments$', () => {

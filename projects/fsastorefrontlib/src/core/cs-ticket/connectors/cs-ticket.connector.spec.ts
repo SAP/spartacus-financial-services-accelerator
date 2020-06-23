@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
@@ -30,10 +29,8 @@ describe('CsTicketConnector', () => {
       providers: [{ provide: CsTicketAdapter, useClass: MockCsTicketAdapter }],
     });
 
-    csTicketConnector = TestBed.get(CsTicketConnector as Type<
-      CsTicketConnector
-    >);
-    csTicketAdapter = TestBed.get(CsTicketAdapter as Type<CsTicketAdapter>);
+    csTicketConnector = TestBed.inject(CsTicketConnector);
+    csTicketAdapter = TestBed.inject(CsTicketAdapter);
   });
 
   it('should be created', () => {

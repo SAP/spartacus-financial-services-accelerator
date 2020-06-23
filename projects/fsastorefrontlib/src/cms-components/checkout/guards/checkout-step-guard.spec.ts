@@ -1,9 +1,8 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   CmsActivatedRouteSnapshot,
-  RoutingConfigService,
+  RoutingConfigService
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { FSCartService } from './../../../core/cart/facade/cart.service';
@@ -68,9 +67,9 @@ class MockCartService {
 
 describe('CheckoutStepGuard', () => {
   let guard: CheckoutStepGuard;
-  let routingConfigService: MockRoutingConfigService;
-  let checkoutConfigService: MockCheckoutConfigService;
-  let cartService: MockCartService;
+  let routingConfigService: RoutingConfigService;
+  let checkoutConfigService: FSCheckoutConfigService;
+  let cartService: FSCartService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -88,14 +87,10 @@ describe('CheckoutStepGuard', () => {
       imports: [RouterTestingModule],
     }).compileComponents();
 
-    guard = TestBed.get(CheckoutStepGuard as Type<CheckoutStepGuard>);
-    routingConfigService = TestBed.get(RoutingConfigService as Type<
-      RoutingConfigService
-    >);
-    checkoutConfigService = TestBed.get(FSCheckoutConfigService as Type<
-      FSCheckoutConfigService
-    >);
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
+    guard = TestBed.inject(CheckoutStepGuard);
+    routingConfigService = TestBed.inject(RoutingConfigService);
+    checkoutConfigService = TestBed.inject(FSCheckoutConfigService);
+    cartService = TestBed.inject(FSCartService);
   });
 
   it('should not return true in case there is not category in route', () => {

@@ -1,9 +1,8 @@
+import { async, TestBed } from '@angular/core/testing';
 import { GeoPoint, WindowRef } from '@spartacus/core';
-import { TestBed, async } from '@angular/core/testing';
-import { Type } from '@angular/core';
-import { of, BehaviorSubject } from 'rxjs';
-import { AgentSearchService } from './agent-search.service';
+import { BehaviorSubject, of } from 'rxjs';
 import { AgentConnector } from '../connectors/agent.connector';
+import { AgentSearchService } from './agent-search.service';
 
 const testAgent1 = {
   email: 'testAgent1@test.com',
@@ -68,7 +67,7 @@ describe('AgentSearchService', () => {
             callback({ coords: longitudeLatitude });
             return geolocationWatchId;
           },
-          clearWatch: () => {},
+          clearWatch: () => { },
         },
       },
     },
@@ -87,8 +86,8 @@ describe('AgentSearchService', () => {
         },
       ],
     });
-    service = TestBed.get(AgentSearchService as Type<AgentSearchService>);
-    winRef = TestBed.get(WindowRef as Type<WindowRef>);
+    service = TestBed.inject(AgentSearchService);
+    winRef = TestBed.inject(WindowRef);
     service.agents = mockAgentsBS;
   }));
 

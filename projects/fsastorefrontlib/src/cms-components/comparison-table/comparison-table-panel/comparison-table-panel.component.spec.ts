@@ -1,4 +1,4 @@
-import { Component, DebugElement, Input, Type } from '@angular/core';
+import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
@@ -87,7 +87,7 @@ class MockFormDataService {
   getFormData(): Observable<YFormData> {
     return of();
   }
-  loadFormData(): void {}
+  loadFormData(): void { }
 }
 
 class MockPricingService {
@@ -130,11 +130,9 @@ describe('ComparisonTablePanelComponent', () => {
         ComparisonTablePanelItemComponent,
       ],
     }).compileComponents();
-    mockBillingTimeConnector = TestBed.get(BillingTimeConnector as Type<
-      BillingTimeConnector
-    >);
-    mockFormDataService = TestBed.get(FormDataService as Type<FormDataService>);
-    mockPricingService = TestBed.get(PricingService as Type<PricingService>);
+    mockBillingTimeConnector = TestBed.inject(BillingTimeConnector);
+    mockFormDataService = TestBed.inject(FormDataService);
+    mockPricingService = TestBed.inject(PricingService);
   }));
 
   beforeEach(() => {

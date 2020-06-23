@@ -1,13 +1,13 @@
-import { Component, DebugElement, Input, Type } from '@angular/core';
+import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
+import { of } from 'rxjs';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { SelectComponent } from './select.component';
-import { of } from 'rxjs';
 
 @Component({
   // tslint:disable
@@ -33,7 +33,7 @@ const mockField: FieldConfig = {
   options: [],
 };
 
-class MockOccValueListService {}
+class MockOccValueListService { }
 
 const mockFormGroup = new FormGroup({
   dependentTestField: new FormControl(),
@@ -67,9 +67,7 @@ describe('SelectComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SelectComponent);
-    occValueListService = TestBed.get(OccValueListService as Type<
-      OccValueListService
-    >);
+    occValueListService = TestBed.inject(OccValueListService);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
     component.config = mockField;

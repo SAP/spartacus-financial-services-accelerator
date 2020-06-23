@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RoutingService } from '@spartacus/core';
@@ -18,7 +17,7 @@ const mockChangeRequest = {
 };
 
 class MockRoutingService {
-  go() {}
+  go() { }
 }
 
 class MockChangeRequestService {
@@ -47,11 +46,9 @@ describe(`ChangeRequestSubmissionGuard`, () => {
       imports: [RouterTestingModule],
     });
 
-    guard = TestBed.get(ChangeRequestSubmissionGuard as Type<
-      ChangeRequestSubmissionGuard
-    >);
-    service = TestBed.get(ChangeRequestService as Type<ChangeRequestService>);
-    routing = TestBed.get(RoutingService as Type<RoutingService>);
+    guard = TestBed.inject(ChangeRequestSubmissionGuard);
+    service = TestBed.inject(ChangeRequestService);
+    routing = TestBed.inject(RoutingService);
 
     spyOn(routing, 'go').and.stub();
   });

@@ -1,10 +1,9 @@
-import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import {
   CheckoutPaymentService,
   I18nTestingModule,
-  RoutingService,
+  RoutingService
 } from '@spartacus/core';
 import { CheckoutConfigService } from '@spartacus/storefront';
 import { FSCheckoutService } from './../../../../core/checkout/facade/checkout.service';
@@ -12,23 +11,23 @@ import { FSCheckoutConfigService } from './../../../../core/checkout/services/ch
 import { FinalReviewComponent } from './final-review.component';
 
 class MockCheckoutService {
-  mockDeliveryMode() {}
-  placeOrder() {}
+  mockDeliveryMode() { }
+  placeOrder() { }
 }
 
 class MockCheckoutPaymentService {
-  getPaymentDetails() {}
+  getPaymentDetails() { }
 }
 
 class MockRoutingService {
-  go() {}
+  go() { }
 }
 
 class MockCheckoutConfigService {
-  getNextCheckoutStepUrl() {}
+  getNextCheckoutStepUrl() { }
 }
 
-class MockActivatedRoute {}
+class MockActivatedRoute { }
 
 describe('FinalReviewComponent', () => {
   let component: FinalReviewComponent;
@@ -72,21 +71,17 @@ describe('FinalReviewComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    checkoutService = TestBed.get(FSCheckoutService as Type<FSCheckoutService>);
+    checkoutService = TestBed.inject(FSCheckoutService);
     spyOn(checkoutService, 'mockDeliveryMode').and.callThrough();
     spyOn(checkoutService, 'placeOrder').and.callThrough();
 
-    checkoutConfigService = TestBed.get(FSCheckoutConfigService as Type<
-      FSCheckoutConfigService
-    >);
+    checkoutConfigService = TestBed.inject(FSCheckoutConfigService);
     spyOn(checkoutConfigService, 'getNextCheckoutStepUrl').and.callThrough();
 
-    checkoutPaymentService = TestBed.get(CheckoutPaymentService as Type<
-      CheckoutPaymentService
-    >);
+    checkoutPaymentService = TestBed.inject(CheckoutPaymentService);
     spyOn(checkoutPaymentService, 'getPaymentDetails').and.callThrough();
 
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    routingService = TestBed.inject(RoutingService);
     spyOn(routingService, 'go').and.callThrough();
 
     spyOn(component.goToQuoteReview, 'emit').and.stub();

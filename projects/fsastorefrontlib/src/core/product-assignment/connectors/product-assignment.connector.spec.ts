@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { OCC_CART_ID_CURRENT } from '@spartacus/core';
 import { of } from 'rxjs';
@@ -11,12 +10,12 @@ class MockProductAssignmentAdapter implements ProductAssignmentAdapter {
     (userId, orgUnitId, active, pageSize, currentPage, sort) =>
       of(
         'loadProductAssignmentsForUnit' +
-          userId +
-          orgUnitId +
-          active +
-          pageSize +
-          currentPage +
-          sort
+        userId +
+        orgUnitId +
+        active +
+        pageSize +
+        currentPage +
+        sort
       )
   );
 
@@ -34,10 +33,10 @@ class MockProductAssignmentAdapter implements ProductAssignmentAdapter {
     (userId, orgUnitId, productAssignmentCode, active) =>
       of(
         'changeActiveStatus' +
-          userId +
-          orgUnitId +
-          productAssignmentCode +
-          active
+        userId +
+        orgUnitId +
+        productAssignmentCode +
+        active
       )
   );
 }
@@ -56,12 +55,8 @@ describe('ProductAssignmentConnector', () => {
       ],
     });
 
-    productAssignmentConnector = TestBed.get(ProductAssignmentConnector as Type<
-      ProductAssignmentConnector
-    >);
-    productAssignmentAdapter = TestBed.get(ProductAssignmentAdapter as Type<
-      ProductAssignmentAdapter
-    >);
+    productAssignmentConnector = TestBed.inject(ProductAssignmentConnector);
+    productAssignmentAdapter = TestBed.inject(ProductAssignmentAdapter);
   });
 
   it('should be created', () => {

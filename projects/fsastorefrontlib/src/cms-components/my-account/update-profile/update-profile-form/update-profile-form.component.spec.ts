@@ -41,8 +41,8 @@ describe('FSUpdateProfileFormComponent', () => {
   });
 
   describe('onSubmit', () => {
-    it('should NOT emit submited event if the form is not valid', () => {
-      spyOn(component.submited, 'emit').and.stub();
+    it('should NOT emit submitted event if the form is not valid', () => {
+      spyOn(component.submitted, 'emit').and.stub();
 
       const invalidUser: FSUser = {
         ...mockUser,
@@ -52,17 +52,9 @@ describe('FSUpdateProfileFormComponent', () => {
       component.ngOnInit();
 
       component.onSubmit();
-      expect(component.submited.emit).not.toHaveBeenCalled();
+      expect(component.submitted.emit).not.toHaveBeenCalled();
     });
 
-    it('should emit submited event', () => {
-      spyOn(component.submited, 'emit').and.stub();
-      component.user = mockUser;
-      component.ngOnInit();
-
-      component.onSubmit();
-      expect(component.submited.emit).toHaveBeenCalled();
-    });
   });
 
   describe('when the date of birth is invalid', () => {
@@ -71,7 +63,7 @@ describe('FSUpdateProfileFormComponent', () => {
       dateOfBirth: '11/5/',
     };
 
-    it('submitt button should be disabled', () => {
+    it('submit button should be disabled', () => {
       component.user = invalidUser;
       component.ngOnInit();
       const submitBtn = el.query(By.css('button[type="submit"]'));

@@ -1,17 +1,15 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import {
-  OCC_USER_ID_CURRENT,
   GlobalMessage,
-  GlobalMessageService,
+  GlobalMessageService, OCC_USER_ID_CURRENT
 } from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
-import { ChangeRequestConnector } from '../../connectors';
 import { UserRequestConnector } from '../../../user-request/connectors';
+import { ChangeRequestConnector } from '../../connectors';
 import * as fromActions from '../actions';
 import * as fromUserReducers from './../../store/reducers/index';
 import * as fromEffects from './change-request.effect';
@@ -62,8 +60,8 @@ class MockUserRequestConnector {
   }
 }
 class GlobalMessageServiceMock {
-  remove(): void {}
-  add(_message: GlobalMessage): void {}
+  remove(): void { }
+  add(_message: GlobalMessage): void { }
 }
 
 describe('Change Request Effects', () => {
@@ -102,12 +100,8 @@ describe('Change Request Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.ChangeRequestEffects as Type<
-      fromEffects.ChangeRequestEffects
-    >);
-    globalMessageService = TestBed.get(GlobalMessageService as Type<
-      GlobalMessageService
-    >);
+    effects = TestBed.inject(fromEffects.ChangeRequestEffects);
+    globalMessageService = TestBed.inject(GlobalMessageService);
   });
 
   describe('createChangeRequest$', () => {

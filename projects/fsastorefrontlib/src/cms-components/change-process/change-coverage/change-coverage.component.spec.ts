@@ -1,18 +1,18 @@
-import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
-import { Type, Input, Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   GlobalMessageService,
   I18nTestingModule,
-  RoutingService,
+  RoutingService
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
+import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
 import { UserRequestNavigationService } from './../../../core/user-request/facade/user-request-navigation.service';
 import { ChangeCoverageComponent } from './change-coverage.component';
-import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import createSpy = jasmine.createSpy;
 
 @Component({
@@ -98,23 +98,23 @@ class MockUserRequestNavigationService {
   getConfigurationSteps() {
     return configurationSteps;
   }
-  getActiveStep() {}
+  getActiveStep() { }
 }
 
 class MockRoutingService {
   go = createSpy();
 }
 
-class GlobalMessageServiceMock {}
+class GlobalMessageServiceMock { }
 
-class MockChangePolicyService {}
+class MockChangePolicyService { }
 
 describe('ChangeCoverageComponent', () => {
   let component: ChangeCoverageComponent;
   let fixture: ComponentFixture<ChangeCoverageComponent>;
-  let mockUserRequestNavigationService: MockUserRequestNavigationService;
-  let mockChangeRequestService: MockChangeRequestService;
-  let mockRoutingService: MockRoutingService;
+  let mockUserRequestNavigationService: UserRequestNavigationService;
+  let mockChangeRequestService: ChangeRequestService;
+  let mockRoutingService: RoutingService;
   let globalMessageService: GlobalMessageService;
 
   beforeEach(async(() => {
@@ -150,16 +150,12 @@ describe('ChangeCoverageComponent', () => {
       declarations: [ChangeCoverageComponent, MockMediaComponent],
     }).compileComponents();
 
-    mockUserRequestNavigationService = TestBed.get(
-      UserRequestNavigationService as Type<UserRequestNavigationService>
+    mockUserRequestNavigationService = TestBed.inject(
+      UserRequestNavigationService
     );
-    mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
-    globalMessageService = TestBed.get(GlobalMessageService as Type<
-      GlobalMessageService
-    >);
-    mockChangeRequestService = TestBed.get(ChangeRequestService as Type<
-      ChangeRequestService
-    >);
+    mockRoutingService = TestBed.inject(RoutingService);
+    globalMessageService = TestBed.inject(GlobalMessageService);
+    mockChangeRequestService = TestBed.inject(ChangeRequestService);
   }));
 
   beforeEach(() => {

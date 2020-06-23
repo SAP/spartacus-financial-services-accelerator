@@ -16,4 +16,4 @@ import { OccProductAssignmentAdapter } from '../product-assignment/occ-product-a
     provideConfig(defaultOccProductAssignmentConfig),
   ],
 })
-export class ProductAssignmentOccModule {}
+export class ProductAssignmentOccModule { }

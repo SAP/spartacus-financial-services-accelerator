@@ -1,9 +1,8 @@
 import { HttpClientModule, HttpRequest } from '@angular/common/http';
 import {
   HttpClientTestingModule,
-  HttpTestingController,
+  HttpTestingController
 } from '@angular/common/http/testing';
-import { Type } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
 import { OccProductAssignmentAdapter } from './occ-product-assignment.adapter';
@@ -47,14 +46,12 @@ describe('OccProductAssignmentAdapter', () => {
         { provide: OccEndpointsService, useClass: MockOccEndpointsService },
       ],
     });
-    productAssignmentAdapter = TestBed.get(OccProductAssignmentAdapter as Type<
-      OccProductAssignmentAdapter
-    >);
+    productAssignmentAdapter = TestBed.inject(OccProductAssignmentAdapter);
     userId = 'TestID';
     orgUnitId = 'AcmeCorp';
-    productAssignmentAdapter = TestBed.get(OccProductAssignmentAdapter);
-    httpMock = TestBed.get(HttpTestingController);
-    occEndpointService = TestBed.get(OccEndpointsService);
+    productAssignmentAdapter = TestBed.inject(OccProductAssignmentAdapter);
+    httpMock = TestBed.inject(HttpTestingController);
+    occEndpointService = TestBed.inject(OccEndpointsService);
     spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 

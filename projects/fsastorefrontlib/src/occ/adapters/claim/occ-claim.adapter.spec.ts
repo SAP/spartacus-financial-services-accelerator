@@ -1,11 +1,11 @@
 import { HttpClientModule, HttpRequest } from '@angular/common/http';
 import {
   HttpClientTestingModule,
-  HttpTestingController,
+  HttpTestingController
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OccClaimAdapter } from './occ-claim.adapter';
 import { OccEndpointsService } from '@spartacus/core';
+import { OccClaimAdapter } from './occ-claim.adapter';
 
 const userId = '123';
 const claimId = 'CL0000012';
@@ -40,9 +40,9 @@ describe('OccClaimAdapter', () => {
       ],
     });
 
-    adapter = TestBed.get(OccClaimAdapter);
-    httpMock = TestBed.get(HttpTestingController);
-    occEndpointService = TestBed.get(OccEndpointsService);
+    adapter = TestBed.inject(OccClaimAdapter);
+    httpMock = TestBed.inject(HttpTestingController);
+    occEndpointService = TestBed.inject(OccEndpointsService);
     spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 

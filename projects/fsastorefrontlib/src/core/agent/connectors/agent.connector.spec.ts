@@ -1,9 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { Observable, of } from 'rxjs';
 import { GeoPoint } from '@spartacus/core';
-import { AgentConnector } from './agent.connector';
+import { Observable, of } from 'rxjs';
 import { AgentAdapter } from './agent.adapter';
-import { Type } from '@angular/core';
+import { AgentConnector } from './agent.connector';
 
 class MockAgentAdapter implements AgentAdapter {
   getAgentsByCategory(category: string): Observable<any> {
@@ -56,8 +55,8 @@ describe('AgentConnector', () => {
       providers: [{ provide: AgentAdapter, useClass: MockAgentAdapter }],
     });
 
-    agentConnector = TestBed.get(AgentConnector as Type<AgentConnector>);
-    agentAdapter = TestBed.get(AgentAdapter as Type<AgentAdapter>);
+    agentConnector = TestBed.inject(AgentConnector);
+    agentAdapter = TestBed.inject(AgentAdapter);
   });
 
   it('should be created', () => {

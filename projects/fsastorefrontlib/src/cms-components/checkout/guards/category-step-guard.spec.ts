@@ -1,9 +1,8 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   CmsActivatedRouteSnapshot,
-  RoutingConfigService,
+  RoutingConfigService
 } from '@spartacus/core';
 import { FSCheckoutConfigService } from './../../../core/checkout/services/checkout-config.service';
 import { CategoryStepGuard } from './category-step-guard';
@@ -40,8 +39,8 @@ class MockCheckoutConfigService {
 
 describe('CategoryStepGuard', () => {
   let guard: CategoryStepGuard;
-  let routingConfigService: MockRoutingConfigService;
-  let checkoutConfigService: MockCheckoutConfigService;
+  let routingConfigService: RoutingConfigService;
+  let checkoutConfigService: FSCheckoutConfigService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -55,13 +54,9 @@ describe('CategoryStepGuard', () => {
       ],
     }).compileComponents();
 
-    guard = TestBed.get(CategoryStepGuard as Type<CategoryStepGuard>);
-    routingConfigService = TestBed.get(RoutingConfigService as Type<
-      RoutingConfigService
-    >);
-    checkoutConfigService = TestBed.get(FSCheckoutConfigService as Type<
-      FSCheckoutConfigService
-    >);
+    guard = TestBed.inject(CategoryStepGuard);
+    routingConfigService = TestBed.inject(RoutingConfigService);
+    checkoutConfigService = TestBed.inject(FSCheckoutConfigService);
   });
 
   it('should not return true in case there is not category in route', () => {

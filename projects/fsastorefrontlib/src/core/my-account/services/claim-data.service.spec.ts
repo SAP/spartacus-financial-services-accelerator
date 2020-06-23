@@ -1,14 +1,12 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
+import { AuthService, OCC_USER_ID_ANONYMOUS, UserToken } from '@spartacus/core';
 import { Observable, ReplaySubject } from 'rxjs';
-import * as fromReducers from '../store/reducers';
-import { UserToken, AuthService } from '@spartacus/core';
 import { Claim } from '../../../occ/occ-models';
-import { ClaimDataService } from './claim-data.service';
 import * as fromAction from '../store/actions';
-import { OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
 import { StateWithMyAccount } from '../store/my-account-state';
+import * as fromReducers from '../store/reducers';
+import { ClaimDataService } from './claim-data.service';
 
 const userToken$ = new ReplaySubject<UserToken | any>();
 
@@ -48,8 +46,8 @@ describe('ClaimDataService', () => {
         },
       ],
     });
-    service = TestBed.get(ClaimDataService as Type<ClaimDataService>);
-    store = TestBed.get(Store as Type<Store<StateWithMyAccount>>);
+    service = TestBed.inject(ClaimDataService);
+    store = TestBed.inject(Store);
   });
 
   describe('userId', () => {

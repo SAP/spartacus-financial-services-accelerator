@@ -1,14 +1,14 @@
 import {
   HttpClientModule,
   HttpErrorResponse,
-  HttpRequest,
+  HttpRequest
 } from '@angular/common/http';
 import {
   HttpClientTestingModule,
-  HttpTestingController,
+  HttpTestingController
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OCC_USER_ID_CURRENT, OccEndpointsService } from '@spartacus/core';
+import { OccEndpointsService, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { OccCsTicketAdapter } from './occ-cs-ticket.adapter';
 
 const agentId = 'testAgent';
@@ -42,9 +42,9 @@ describe('OccCsTicketAdapter', () => {
     });
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
 
-    adapter = TestBed.get(OccCsTicketAdapter);
-    httpMock = TestBed.get(HttpTestingController);
-    occEndpointService = TestBed.get(OccEndpointsService);
+    adapter = TestBed.inject(OccCsTicketAdapter);
+    httpMock = TestBed.inject(HttpTestingController);
+    occEndpointService = TestBed.inject(OccEndpointsService);
     spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 

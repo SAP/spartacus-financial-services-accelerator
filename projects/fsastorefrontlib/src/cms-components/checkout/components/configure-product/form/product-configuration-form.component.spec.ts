@@ -1,9 +1,9 @@
-import { Component, DebugElement, Input, Type } from '@angular/core';
+import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   FormDataService,
   FormDataStorageService,
-  YFormData,
+  YFormData
 } from '@fsa/dynamicforms';
 import { I18nTestingModule, Product } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs/internal/Observable';
 import {
   ConfiguratorType,
   FSCategory,
-  FSProduct,
+  FSProduct
 } from './../../../../../occ/occ-models/occ.models';
 import { ProductConfigurationFormComponent } from './product-configuration-form.component';
 
@@ -39,7 +39,7 @@ class MockFormComponent {
   selector: 'cx-spinner',
   template: '',
 })
-class MockSpinnerComponent {}
+class MockSpinnerComponent { }
 
 const formDataId = 'formDataId';
 const formData: YFormData = {
@@ -81,15 +81,15 @@ export class MockFormDataService {
   getFormDefinition() {
     return of(formDefinition);
   }
-  loadFormDefinition() {}
+  loadFormDefinition() { }
   getFormData() {
     return of(formData);
   }
-  loadFormData() {}
+  loadFormData() { }
 }
 
 class MockFormDataStorageService {
-  getFormDataIdByDefinitionCode() {}
+  getFormDataIdByDefinitionCode() { }
 }
 
 describe('ProductConfigurationFormComponent', () => {
@@ -123,13 +123,9 @@ describe('ProductConfigurationFormComponent', () => {
         },
       ],
     }).compileComponents();
-    currentProductService = TestBed.get(CurrentProductService as Type<
-      CurrentProductService
-    >);
-    formDataService = TestBed.get(FormDataService as Type<FormDataService>);
-    formDataStorageService = TestBed.get(FormDataStorageService as Type<
-      FormDataStorageService
-    >);
+    currentProductService = TestBed.inject(CurrentProductService);
+    formDataService = TestBed.inject(FormDataService);
+    formDataStorageService = TestBed.inject(FormDataStorageService);
   }));
 
   beforeEach(() => {

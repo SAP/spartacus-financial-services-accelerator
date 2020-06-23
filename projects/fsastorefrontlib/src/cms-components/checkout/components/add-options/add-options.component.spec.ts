@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
@@ -6,7 +5,7 @@ import {
   CurrencyService,
   I18nTestingModule,
   OrderEntry,
-  RoutingService,
+  RoutingService
 } from '@spartacus/core';
 import { MediaModule, SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
@@ -30,15 +29,15 @@ let mockEntries: OrderEntry[] = [
 ];
 
 class MockCartService {
-  getLoading() {}
+  isStable() { }
 
-  removeEntry(item: any) {}
+  removeEntry(item: any) { }
 
   addOptionalProduct(
     orderEntryCode: string,
     qty: number,
     entryNumber: string
-  ) {}
+  ) { }
 
   getEntries(): Observable<OrderEntry[]> {
     return of(mockEntries);
@@ -52,7 +51,7 @@ class MockCurrencyService {
 }
 
 class MockRoutingService {
-  go() {}
+  go() { }
 }
 
 class MockCheckoutConfigService {
@@ -122,21 +121,19 @@ describe('AddOptionsComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
-    spyOn(cartService, 'getLoading').and.callThrough();
+    cartService = TestBed.inject(FSCartService);
+    spyOn(cartService, 'isStable').and.callThrough();
     spyOn(cartService, 'removeEntry').and.callThrough();
     spyOn(cartService, 'addOptionalProduct').and.callThrough();
     spyOn(cartService, 'getEntries').and.callThrough();
 
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    routingService = TestBed.inject(RoutingService);
     spyOn(routingService, 'go').and.callThrough();
 
-    checkoutConfigService = TestBed.get(FSCheckoutConfigService as Type<
-      FSCheckoutConfigService
-    >);
+    checkoutConfigService = TestBed.inject(FSCheckoutConfigService);
     spyOn(checkoutConfigService, 'getNextCheckoutStepUrl').and.callThrough();
 
-    categoryService = TestBed.get(CategoryService as Type<CategoryService>);
+    categoryService = TestBed.inject(CategoryService);
     spyOn(categoryService, 'getActiveCategory').and.callThrough();
 
     component.ngOnInit();

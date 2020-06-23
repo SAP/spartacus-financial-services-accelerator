@@ -1,10 +1,10 @@
 import { HttpClientModule, HttpRequest } from '@angular/common/http';
 import {
   HttpClientTestingModule,
-  HttpTestingController,
+  HttpTestingController
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OccConfig, OccEndpointsService } from '@spartacus/core';
+import { OccEndpointsService } from '@spartacus/core';
 import { OccCheckoutAdapter } from './occ-checkout.adapter';
 
 const userId = 'userId';
@@ -36,9 +36,9 @@ describe('OccCheckoutAdapter', () => {
       ],
     });
 
-    service = TestBed.get(OccCheckoutAdapter);
-    httpMock = TestBed.get(HttpTestingController);
-    occEndpointService = TestBed.get(OccEndpointsService);
+    service = TestBed.inject(OccCheckoutAdapter);
+    httpMock = TestBed.inject(HttpTestingController);
+    occEndpointService = TestBed.inject(OccEndpointsService);
     spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 

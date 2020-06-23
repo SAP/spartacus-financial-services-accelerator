@@ -1,56 +1,60 @@
-import { Type } from '@angular/core';
 import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-import * as fromReducer from '@spartacus/core';
 import {
-  Cart,
-  CartDataService,
+  ActiveCartService, AuthService, Cart,
   CheckoutDeliveryService,
   CHECKOUT_FEATURE,
+  OCC_USER_ID_CURRENT
 } from '@spartacus/core';
+import { of } from 'rxjs';
+import { Observable } from 'rxjs/internal/Observable';
 import { FSStateWithCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
+import * as fromReducers from './../store/reducers/index';
 import { FSCheckoutService } from './checkout.service';
 
 const identificationType = 'idType';
 const userId = 'userId';
 const cart: Cart = { code: 'cartId', guid: 'guid' };
 
-class CartDataServiceStub {
-  get userId() {
-    return userId;
-  }
 
-  get cartId() {
-    return cart.code;
+class CheckoutDeliveryServiceStub {
+  setDeliveryMode() { }
+}
+
+class MockAuthService {
+  getOccUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
   }
 }
 
-class CheckoutDeliveryServiceStub {
-  setDeliveryMode() {}
+class MockActiveCartService {
+  getActiveCartId(): Observable<string> {
+    return of('cartId');
+  }
 }
 
 describe('FSCheckoutServiceTest', () => {
   let service: FSCheckoutService;
   let store: Store<FSStateWithCheckout>;
   let checkoutDeliveryService: CheckoutDeliveryService;
+  let authService: AuthService;
+  let cartService: ActiveCartService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
-        StoreModule.forFeature(CHECKOUT_FEATURE, fromReducer.getReducers()),
+        StoreModule.forFeature(CHECKOUT_FEATURE, fromReducers.getReducers()),
       ],
       providers: [
         FSCheckoutService,
         {
-          provide: CartDataService,
-          useClass: CartDataServiceStub,
-        },
-        {
           provide: CheckoutDeliveryService,
           useClass: CheckoutDeliveryServiceStub,
         },
+        { provide: AuthService, useClass: MockAuthService },
+        { provide: ActiveCartService, useClass: MockActiveCartService },
       ],
     });
     service = TestBed.inject(FSCheckoutService);
@@ -74,8 +78,8 @@ describe('FSCheckoutServiceTest', () => {
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromFSAction.SetIdentificationType({
         identificationType: identificationType,
-        cartId: cart.code,
-        userId: userId,
+        cartId: 'cartId',
+        userId: OCC_USER_ID_CURRENT,
       })
     );
   });

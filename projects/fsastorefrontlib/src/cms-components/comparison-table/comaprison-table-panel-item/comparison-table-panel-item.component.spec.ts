@@ -1,4 +1,4 @@
-import { DebugElement, Pipe, PipeTransform, Type } from '@angular/core';
+import { DebugElement, Pipe, PipeTransform } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -6,7 +6,7 @@ import {
   CmsConfig,
   I18nTestingModule,
   Product,
-  RoutingService,
+  RoutingService
 } from '@spartacus/core';
 import { MediaModule, SpinnerModule } from '@spartacus/storefront';
 import { of } from 'rxjs';
@@ -21,7 +21,7 @@ import { ComparisonTablePanelItemComponent } from './comparison-table-panel-item
   name: 'cxUrl',
 })
 class MockUrlPipe implements PipeTransform {
-  transform() {}
+  transform() { }
 }
 
 const paynow = 'paynow';
@@ -82,7 +82,7 @@ const recurringProduct: FSProduct = {
 };
 
 class MockCartService {
-  createCartForProduct(): void {}
+  createCartForProduct(): void { }
 }
 
 const mockCmsConfig: CmsConfig = {
@@ -99,7 +99,7 @@ const mockCmsConfig: CmsConfig = {
 };
 
 class MockRoutingService {
-  go() {}
+  go() { }
 }
 
 const nextStep = 'nextStep';
@@ -168,14 +168,10 @@ describe('ComparisonTablePanelItemComponent', () => {
       ],
       declarations: [ComparisonTablePanelItemComponent, MockUrlPipe],
     }).compileComponents();
-    mockCartService = TestBed.get(FSCartService as Type<FSCartService>);
-    mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
-    mockCheckoutConfigService = TestBed.get(FSCheckoutConfigService as Type<
-      FSCheckoutConfigService
-    >);
-    mockProductService = TestBed.get(FSProductService as Type<
-      FSProductService
-    >);
+    mockCartService = TestBed.inject(FSCartService);
+    mockRoutingService = TestBed.inject(RoutingService);
+    mockCheckoutConfigService = TestBed.inject(FSCheckoutConfigService);
+    mockProductService = TestBed.inject(FSProductService);
   }));
 
   beforeEach(() => {

@@ -1,5 +1,3 @@
-import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
-import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -7,10 +5,11 @@ import {
   GlobalMessage,
   GlobalMessageService,
   I18nTestingModule,
-  RoutingService,
+  RoutingService
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
+import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
 import { UserRequestNavigationService } from './../../../core/user-request/facade';
 import { ChangeCarDetailsFormComponent } from './change-car-details-form.component';
 import createSpy = jasmine.createSpy;
@@ -39,7 +38,7 @@ class MockChangeRequestService {
   }
 }
 
-class MockChangePolicyService {}
+class MockChangePolicyService { }
 
 const configurationSteps = [
   {
@@ -52,7 +51,7 @@ class MockRoutingService {
 }
 
 class GlobalMessageServiceMock {
-  add(_message: GlobalMessage): void {}
+  add(_message: GlobalMessage): void { }
 }
 
 class MockUserRequestNavigationService {
@@ -62,7 +61,7 @@ class MockUserRequestNavigationService {
     return configurationSteps;
   }
 
-  getActiveStep() {}
+  getActiveStep() { }
 }
 
 const mockChangeCarDetailsForm: any = {
@@ -74,9 +73,9 @@ describe('ChangeCarDetailsFormComponent', () => {
   let controls;
   let component: ChangeCarDetailsFormComponent;
   let fixture: ComponentFixture<ChangeCarDetailsFormComponent>;
-  let mockChangeRequestService: MockChangeRequestService;
-  let mockUserRequestNavigationService: MockUserRequestNavigationService;
-  let mockRoutingService: MockRoutingService;
+  let mockChangeRequestService: ChangeRequestService;
+  let mockUserRequestNavigationService: UserRequestNavigationService;
+  let mockRoutingService: RoutingService;
   let globalMessageService: GlobalMessageService;
 
   beforeEach(async(() => {
@@ -112,15 +111,11 @@ describe('ChangeCarDetailsFormComponent', () => {
       declarations: [ChangeCarDetailsFormComponent],
     }).compileComponents();
 
-    mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
-    mockChangeRequestService = TestBed.get(ChangeRequestService as Type<
-      ChangeRequestService
-    >);
-    globalMessageService = TestBed.get(GlobalMessageService as Type<
-      GlobalMessageService
-    >);
-    mockUserRequestNavigationService = TestBed.get(
-      UserRequestNavigationService as Type<UserRequestNavigationService>
+    mockRoutingService = TestBed.inject(RoutingService);
+    mockChangeRequestService = TestBed.inject(ChangeRequestService);
+    globalMessageService = TestBed.inject(GlobalMessageService);
+    mockUserRequestNavigationService = TestBed.inject(
+      UserRequestNavigationService
     );
   }));
 

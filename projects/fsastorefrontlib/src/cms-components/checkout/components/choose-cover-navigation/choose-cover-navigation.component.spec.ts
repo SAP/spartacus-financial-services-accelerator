@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
@@ -16,7 +15,7 @@ class MockRoutingService {
 }
 
 class MockFormDataStorageService {
-  setFormDataToLocalStorage() {}
+  setFormDataToLocalStorage() { }
 }
 
 describe('ChooseCoverNavigationComponent', () => {
@@ -47,9 +46,7 @@ describe('ChooseCoverNavigationComponent', () => {
         },
       ],
     }).compileComponents();
-    mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
-      FormDataStorageService
-    >);
+    mockFormDataStorageService = TestBed.inject(FormDataStorageService);
   }));
 
   beforeEach(() => {
