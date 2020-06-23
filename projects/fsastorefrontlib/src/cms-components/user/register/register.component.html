@@ -1,6 +1,6 @@
 <section>
   <div class="cx-section">
-    <form [formGroup]="userRegistrationForm">
+    <form (ngSubmit)="submitForm()" [formGroup]="userRegistrationForm">
       <div class="form-group">
         <label>
           <span class="label-content">{{
@@ -10,11 +10,7 @@
             <option selected value="" disabled>{{
               'register.selectTitle' | cxTranslate
             }}</option>
-            <option
-              *ngFor="let title of titles$ | async"
-              [value]="title.code"
-              >{{ title.name }}</option
-            >
+            <option *ngFor="let title of titles$ | async" [value]="title.code">{{ title.name }}</option>
           </select>
         </label>
       </div>
@@ -24,13 +20,8 @@
           <span class="label-content">{{
             'register.firstName.label' | cxTranslate
           }}</span>
-          <input
-            class="form-control"
-            type="text"
-            name="firstname"
-            placeholder="{{ 'register.firstName.placeholder' | cxTranslate }}"
-            formControlName="firstName"
-          />
+          <input class="form-control" type="text" name="firstname"
+            placeholder="{{ 'register.firstName.placeholder' | cxTranslate }}" formControlName="firstName" />
         </label>
       </div>
 
@@ -39,13 +30,8 @@
           <span class="label-content">{{
             'register.lastName.label' | cxTranslate
           }}</span>
-          <input
-            class="form-control"
-            type="text"
-            name="lastname"
-            placeholder="{{ 'register.lastName.placeholder' | cxTranslate }}"
-            formControlName="lastName"
-          />
+          <input class="form-control" type="text" name="lastname"
+            placeholder="{{ 'register.lastName.placeholder' | cxTranslate }}" formControlName="lastName" />
         </label>
       </div>
 
@@ -54,23 +40,14 @@
           <span class="label-content">{{
             'forms.dateOfBirth.label' | cxTranslate
           }}</span>
-          <input
-            class="form-control"
-            [class.is-invalid]="
+          <input class="form-control" [class.is-invalid]="
               userRegistrationForm.get('dateOfBirth').invalid &&
               userRegistrationForm.get('dateOfBirth').dirty
-            "
-            type="date"
-            name="dateOfBirth"
-            formControlName="dateOfBirth"
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="
+            " type="date" name="dateOfBirth" formControlName="dateOfBirth" />
+          <div class="invalid-feedback" *ngIf="
               userRegistrationForm.get('dateOfBirth').invalid &&
               userRegistrationForm.get('dateOfBirth').dirty
-            "
-          >
+            ">
             <span>{{ 'forms.dateOfBirthMinimumAge' | cxTranslate }}</span>
           </div>
         </label>
@@ -81,23 +58,14 @@
           <span class="label-content">{{
             'forms.phoneNumber.label' | cxTranslate
           }}</span>
-          <input
-            class="form-control"
-            [class.is-invalid]="
+          <input class="form-control" [class.is-invalid]="
               userRegistrationForm.get('phoneNumber').invalid &&
               userRegistrationForm.get('phoneNumber').dirty
-            "
-            type="text"
-            name="phoneNumber"
-            formControlName="phoneNumber"
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="
+            " type="text" name="phoneNumber" formControlName="phoneNumber" />
+          <div class="invalid-feedback" *ngIf="
               userRegistrationForm.get('phoneNumber').invalid &&
               userRegistrationForm.get('phoneNumber').dirty
-            "
-          >
+            ">
             <span>{{
               'forms.phoneNumber.lengthValidation' | cxTranslate
             }}</span>
@@ -110,26 +78,16 @@
           <span class="label-content">{{
             'register.emailAddress.label' | cxTranslate
           }}</span>
-          <input
-            class="form-control"
-            [class.is-invalid]="
+          <input class="form-control" [class.is-invalid]="
               userRegistrationForm.get('email').invalid &&
               userRegistrationForm.get('email').dirty
-            "
-            type="email"
-            name="email"
-            placeholder="{{
+            " type="email" name="email" placeholder="{{
               'register.emailAddress.placeholder' | cxTranslate
-            }}"
-            formControlName="email"
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="
+            }}" formControlName="email" />
+          <div class="invalid-feedback" *ngIf="
               userRegistrationForm.get('email').invalid &&
               userRegistrationForm.get('email').dirty
-            "
-          >
+            ">
             <span>{{ 'forms.enterValidEmail' | cxTranslate }}</span>
           </div>
         </label>
@@ -140,24 +98,15 @@
           <span class="label-content">{{
             'register.password.label' | cxTranslate
           }}</span>
-          <input
-            class="form-control"
-            [class.is-invalid]="
+          <input class="form-control" [class.is-invalid]="
               userRegistrationForm.get('password').invalid &&
               userRegistrationForm.get('password').dirty
-            "
-            type="password"
-            name="password"
-            placeholder="{{ 'register.password.placeholder' | cxTranslate }}"
-            formControlName="password"
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="
+            " type="password" name="password" placeholder="{{ 'register.password.placeholder' | cxTranslate }}"
+            formControlName="password" />
+          <div class="invalid-feedback" *ngIf="
               userRegistrationForm.get('password').invalid &&
               userRegistrationForm.get('password').dirty
-            "
-          >
+            ">
             <span>{{ 'register.passwordMinRequirements' | cxTranslate }}</span>
           </div>
         </label>
@@ -168,27 +117,17 @@
           <span class="label-content">{{
             'register.confirmPassword.label' | cxTranslate
           }}</span>
-          <input
-            class="form-control"
-            [class.is-invalid]="
+          <input class="form-control" [class.is-invalid]="
               userRegistrationForm.get('password').value !==
               userRegistrationForm.get('passwordconf').value
-            "
-            type="password"
-            name="confirmpassword"
-            placeholder="{{
+            " type="password" name="confirmpassword" placeholder="{{
               'register.confirmPassword.placeholder' | cxTranslate
-            }}"
-            formControlName="passwordconf"
-          />
-          <div
-            class="invalid-feedback"
-            *ngIf="
+            }}" formControlName="passwordconf" />
+          <div class="invalid-feedback" *ngIf="
               userRegistrationForm.get('password').value !==
                 userRegistrationForm.get('passwordconf').value &&
               userRegistrationForm.get('passwordconf').value
-            "
-          >
+            ">
             <span>{{ 'register.bothPasswordMustMatch' | cxTranslate }}</span>
           </div>
         </label>
@@ -196,72 +135,34 @@
 
       <div class="form-group">
         <div class="form-check">
-          <ng-container
-            *ngIf="isAnonymousConsentEnabled; else hardcodedNewsletter"
-          >
-            <label *ngIf="anonymousConsent$ | async as anonymousConsent">
-              <input
-                type="checkbox"
-                name="newsletter"
-                class="form-check-input"
-                formControlName="newsletter"
-                [checked]="isConsentGiven(anonymousConsent.consent)"
-              />
-              <span class="form-check-label">
-                {{ anonymousConsent.template }}
-              </span>
-            </label>
-          </ng-container>
-          <ng-template #hardcodedNewsletter
-            ><label>
-              <input
-                type="checkbox"
-                name="newsletter"
-                class="form-check-input"
-                formControlName="newsletter"
-              />
-              <span class="form-check-label">
-                {{ 'register.emailMarketing' | cxTranslate }}
-              </span>
-            </label>
-          </ng-template>
+          <label *ngIf="anonymousConsent$ | async as anonymousConsent">
+            <input type="checkbox" name="newsletter" class="form-check-input" formControlName="newsletter"
+              [checked]="isConsentGiven(anonymousConsent.consent)" />
+            <span class="form-check-label">
+              {{ anonymousConsent.template }}
+            </span>
+          </label>
         </div>
       </div>
 
       <div class="form-group">
         <div class="form-check">
           <label>
-            <input
-              type="checkbox"
-              name="termsandconditions"
-              formControlName="termsandconditions"
-            />
+            <input type="checkbox" name="termsandconditions" formControlName="termsandconditions" />
             <span class="form-check-label">
               {{ 'register.confirmThatRead' | cxTranslate }}
-              <a
-                class="link text-capitalize"
-                [routerLink]="{ cxRoute: 'termsAndConditions' } | cxUrl"
-                target="_blank"
-              >
+              <a class="link text-capitalize" [routerLink]="{ cxRoute: 'termsAndConditions' } | cxUrl" target="_blank">
                 {{ 'register.termsAndConditions' | cxTranslate }}
               </a>
             </span>
           </label>
         </div>
       </div>
-      <button
-        type="submit"
-        (click)="submit()"
-        [disabled]="userRegistrationForm.invalid"
-        class="btn btn-block btn-primary"
-      >
+      <button type="submit" [disabled]="userRegistrationForm.invalid" class="btn btn-block btn-primary">
         {{ 'register.register' | cxTranslate }}
       </button>
-      <a
-        class="cx-login-link btn-link"
-        [routerLink]="{ cxRoute: 'login' } | cxUrl"
-        >{{ 'register.signIn' | cxTranslate }}</a
-      >
+      <a class="cx-login-link btn-link"
+        [routerLink]="{ cxRoute: 'login' } | cxUrl">{{ 'register.signIn' | cxTranslate }}</a>
     </form>
   </div>
 </section>
