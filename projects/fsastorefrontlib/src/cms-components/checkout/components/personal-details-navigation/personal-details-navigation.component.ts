@@ -29,18 +29,8 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
   nextCheckoutStep$: Observable<ActiveCategoryStep>;
 
   ngOnInit() {
-    this.subscription.add(
-      this.cartService
-        .getEntries()
-        .pipe(
-          tap(() => {
-            this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
-            this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
-            this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
-          })
-        )
-        .subscribe()
-    );
+    this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
+    this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
   }
 
   navigateNext(nextStep) {

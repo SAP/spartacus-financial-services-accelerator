@@ -12,7 +12,7 @@ import {
   CurrentProductService,
 } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
@@ -47,6 +47,16 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
     super.ngOnInit();
     this.setActiveCategory();
     this.filterSteps();
+    this.subscription.add(
+      this.cartService
+        .getActive()
+        .pipe(
+          tap(() => {
+            this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
+          })
+        )
+        .subscribe()
+    );
   }
 
   setActiveCategory() {

@@ -23,18 +23,8 @@ export class LegalCheckboxesComponent implements OnInit {
   subscription = new Subscription();
 
   ngOnInit() {
-    this.subscription.add(
-      this.cartService
-        .getEntries()
-        .pipe(
-          tap(() => {
-            this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
-            this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
-            this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
-          })
-        )
-        .subscribe()
-    );
+    this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
+    this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
   }
 
   navigateBack(previousStep) {

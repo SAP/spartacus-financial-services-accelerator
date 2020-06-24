@@ -40,29 +40,19 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
   nextCheckoutStep$: Observable<ActiveCategoryStep>;
 
   ngOnInit() {
-    this.subscription
-      .add(
-        this.currencyService
-          .getActive()
-          .pipe(
-            map(currentCurrency => {
-              this.currentCurrency = currentCurrency;
-            })
-          )
-          .subscribe()
-      )
-      .add(
-        this.cartService
-          .getEntries()
-          .pipe(
-            tap(() => {
-              this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
-              this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
-              this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
-            })
-          )
-          .subscribe()
-      );
+    this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
+    this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
+
+    this.subscription.add(
+      this.currencyService
+        .getActive()
+        .pipe(
+          map(currentCurrency => {
+            this.currentCurrency = currentCurrency;
+          })
+        )
+        .subscribe()
+    );
 
     this.cartLoaded$ = this.cartService.getLoaded();
     this.entries$ = this.cartService

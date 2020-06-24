@@ -66,26 +66,28 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   setBackNextSteps(activatedRoute: ActivatedRoute) {
     let activeParamType: string;
     const previousUrl = this.getPreviousCheckoutStepUrl(activatedRoute);
-    const paramType = previousUrl.substring(previousUrl.lastIndexOf(':') + 1);
-    this.cartService
-      .getActive()
-      .subscribe((cart: FSCart) => {
-        if (
-          <FSProduct>cart &&
-          <FSProduct>cart.entries &&
-          <FSProduct>cart.entries[0] &&
-          <FSProduct>cart.entries[0].product
-        ) {
-          if (paramType === 'productCode') {
-            activeParamType = cart.entries[0].product.code;
-          } else {
-            activeParamType = (<FSProduct>cart.entries[0].product)
-              .defaultCategory.code;
+    if (previousUrl) {
+      const paramType = previousUrl.substring(previousUrl.lastIndexOf(':') + 1);
+      this.cartService
+        .getActive()
+        .subscribe((cart: FSCart) => {
+          if (
+            <FSProduct>cart &&
+            <FSProduct>cart.entries &&
+            <FSProduct>cart.entries[0] &&
+            <FSProduct>cart.entries[0].product
+          ) {
+            if (paramType === 'productCode') {
+              activeParamType = cart.entries[0].product.code;
+            } else {
+              activeParamType = (<FSProduct>cart.entries[0].product)
+                .defaultCategory.code;
+            }
+            this.setSteps(activatedRoute, activeParamType);
           }
-          this.setSteps(activatedRoute, activeParamType);
-        }
-      })
-      .unsubscribe();
+        })
+        .unsubscribe();
+    }
   }
 
   setSteps(activatedRoute: ActivatedRoute, activeParamType: string) {

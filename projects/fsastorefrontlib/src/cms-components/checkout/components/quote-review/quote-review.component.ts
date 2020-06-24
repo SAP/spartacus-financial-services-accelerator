@@ -41,18 +41,8 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
     this.cartLoaded$ = this.cartService.getLoaded();
-    this.subscription.add(
-      this.cartService
-        .getLoaded()
-        .pipe(
-          tap(() => {
-            this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
-            this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
-            this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
-          })
-        )
-        .subscribe()
-    );
+    this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
+    this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
   }
 
   getBaseUrl() {

@@ -43,17 +43,7 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
   ];
 
   ngOnInit() {
-    this.subscription.add(
-      this.cartService
-        .getEntries()
-        .pipe(
-          tap(() => {
-            this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
-            this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
-          })
-        )
-        .subscribe()
-    );
+    this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.checkoutService.mockDeliveryMode();
   }
 
