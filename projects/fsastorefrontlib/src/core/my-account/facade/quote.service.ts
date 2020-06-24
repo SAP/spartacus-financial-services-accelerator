@@ -61,10 +61,10 @@ export class QuoteService {
       .getActive()
       .subscribe((cart: FSCart) => {
         if (cart && cart.entries && cart.entries.length > 0) {
-          const orderEntry: OrderEntry = cart.deliveryOrderGroups[0].entries[0];
+          const orderEntry: OrderEntry = cart.entries[0];
           const product: FSProduct = orderEntry.product;
 
-          this.loadPersonalDetailsForm(cart.entries[0]);
+          this.loadPersonalDetailsForm(orderEntry);
           this.loadChooseCoverForm(
             cart.insuranceQuote,
             product.defaultCategory.code
