@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ActiveCategoryStep } from 'projects/fsastorefrontlib/src/occ';
 import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
 import { FSCartService } from '../../../../../core/cart/facade';
-import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-fs-legal-checkboxes',
@@ -20,7 +19,6 @@ export class LegalCheckboxesComponent implements OnInit {
   ) {}
   previousCheckoutStep$: Observable<ActiveCategoryStep>;
   nextCheckoutStep$: Observable<ActiveCategoryStep>;
-  subscription = new Subscription();
 
   ngOnInit() {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
@@ -39,11 +37,5 @@ export class LegalCheckboxesComponent implements OnInit {
       cxRoute: nextStep.step,
       params: { code: nextStep.activeCategory },
     });
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 }

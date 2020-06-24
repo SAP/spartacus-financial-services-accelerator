@@ -9,7 +9,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { CurrencyService, OrderEntry, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/cart/facade';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
 import { ActiveCategoryStep } from '../../../../occ/occ-models';

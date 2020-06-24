@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Cart, OccConfig, RoutingService } from '@spartacus/core';
 import { ModalRef, ModalService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
