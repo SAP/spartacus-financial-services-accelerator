@@ -1,5 +1,7 @@
 import * as shared from '../shared-checkout';
 
+const todaysDate = Cypress.moment().format('YYYY-MM-DD');
+
 export function openCategoryPage() {
   cy.selectOptionFromDropdown({
     menuOption: 'Insurance',
@@ -20,7 +22,7 @@ export function openCategoryPage() {
 
 export function populateAutoInformation() {
   cy.get('cx-dynamic-form').within(() => {
-    cy.get('[name=coverageStartDate]').type('2021-01-01');
+    cy.get('[name=coverageStartDate]').type(todaysDate);
     //current date + one year
     cy.get('[name="paymentFrequency"]').select('MONTHLY');
     cy.get('[name="vehicleMake"]').select('Audi');
@@ -126,4 +128,28 @@ export function populateAdditionalDriverInfo() {
   cy.get('[name="driverLicenceDate"]')
     .eq('1')
     .type('2015-01-01');
+}
+
+export function populatePersonalDetails() {
+  cy.get('[name=phoneNumber]').type('94865978');
+  cy.get('[name=street]').type('Omladisnkih Brigada');
+  cy.get('[name=streetNumber]').type('125g');
+  cy.get('[name=city]').type('Belgrade');
+  cy.get('[name=postcode]').type('11090');
+  cy.get('[name=country]').select('RS');
+}
+
+export function populateVehicleDetails() {
+  cy.get('[name=licencePlate]').type('94865978');
+  cy.get('[name=vinNumber]').type('12345');
+}
+
+export function populateMainDriverData() {
+  cy.get('[name=mainDriverLicenceNumber]').type('BG-234-xx');
+}
+
+export function populateAdditionalData() {
+  cy.get('[name=additionalDriver1FirstName]').type('Phin');
+  cy.get('[name=additionalDriver1LastName]').type('Jones');
+  cy.get('[name=additionalDriver1LicenceNumber]').type('BG-234-yy');
 }

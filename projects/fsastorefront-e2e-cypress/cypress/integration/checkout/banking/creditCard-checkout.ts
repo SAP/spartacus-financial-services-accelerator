@@ -54,7 +54,7 @@ context('Credit Card Checkout', () => {
 
   it('Should check Quote Review page', () => {
     banking.checkBankingProgressBar();
-    checkout.checkAccordions('creditCard');
+    checkout.checkAccordions('generalQuoteAccordions');
   });
 
   it('Should bind Quote', () => {

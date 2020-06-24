@@ -65,7 +65,7 @@ context('Homeowners Checkout', () => {
     checkout.checkCheckoutStep('Your Homeowners Insurance', '7');
     checkout.checkProgressBarInsurance();
     //homeowners.checkMiniCartHomeowners();
-    checkout.checkAccordions('propertyQuoteReview');
+    checkout.checkAccordions('generalQuoteAccordions');
     addPaymentMethod(registrationUserWithoutPhone.email);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();

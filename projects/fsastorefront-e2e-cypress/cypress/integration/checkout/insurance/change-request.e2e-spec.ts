@@ -29,14 +29,30 @@ context('Change Request for new user', () => {
     checkout.clickContinueButton();
   });
 
-  it('Should complete auto checkout', () => {
+  it('Should check comparison table and select main product', () => {
     auto.checkAutoComparisonTable();
     auto.selectAutoSilver();
     checkout.clickContinueButton();
-    fnol.waitForQuoteReviewPage();
     addPaymentMethod(registrationUser.email);
-    auto.checkAutoSilverMiniCart();
+    //auto.checkAutoSilverMiniCart();
     checkout.clickContinueButton();
+    checkout.waitForPersonalDetailsPage();
+  });
+
+  it('Should populate personal details page', () => {
+    checkout.checkPersonalDetailsPage();
+    auto.populatePersonalDetails();
+    auto.populateVehicleDetails();
+    auto.populateMainDriverData();
+    auto.populateAdditionalData();
+    checkout.clickContinueButton();
+  });
+
+  it('Should complete auto checkout', () => {
+    fnol.waitForQuoteReviewPage();
+    checkout.clickContinueButton();
+    //check accordions
+    checkout.checkAccordions('generalQuoteAccordions');
     checkout.ConfirmBindQuote();
     selectPaymentMethod();
     checkout.placeOrderOnFinalReview();
@@ -63,6 +79,7 @@ context('Change Request for new user', () => {
       .should('contain', 'Submit')
       .click();
     changeRequest.checkChangeRequestConfirmation();
+    cy.get('.SiteLogo').click();
   });
 
   it('Should complete change coverage checkout', () => {
@@ -85,6 +102,7 @@ context('Change Request for new user', () => {
       .should('contain', 'Submit')
       .click();
     changeRequest.checkChangeRequestConfirmation();
+    cy.get('.SiteLogo').click();
   });
 
   it('Should cancel change policy request', () => {
@@ -97,7 +115,7 @@ context('Change Request for new user', () => {
     checkout.clickContinueButton();
     //check change preview - second step
     changeRequest.checkChangeMileageSteps();
-    changeRequest.checkChangedPolicyPremium();
+    changeRequest.checkChangedPolicyNewPremium();
     cy.get('.action-button')
       .should('contain', 'Cancel')
       .click();
@@ -105,5 +123,6 @@ context('Change Request for new user', () => {
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
     checkout.checkAccordions('threeAccordions');
   });
+
   //TODO:Check inbox messages
 });
