@@ -74,14 +74,14 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     this.cartService.removeEntry(item);
   }
 
-  navigateBack(previousStep) {
+  navigateBack(previousStep: ActiveCategoryStep) {
     this.routingService.go({
       cxRoute: previousStep.step,
       params: { code: previousStep.activeCategory },
     });
   }
 
-  navigateNext(nextStep) {
+  navigateNext(nextStep: ActiveCategoryStep) {
     this.routingService.go({
       cxRoute: nextStep.step,
       params: { code: nextStep.activeCategory },

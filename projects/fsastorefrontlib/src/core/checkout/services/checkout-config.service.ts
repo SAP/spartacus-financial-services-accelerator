@@ -94,11 +94,11 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
     const previousStepNumber: number =
       this.getCurrentStepIndex(activatedRoute) - 1;
     const nextStepNumber: number = this.getCurrentStepIndex(activatedRoute) + 1;
-    this.setPreviousStep(
-      activeParamType,
-      this.steps[previousStepNumber].routeName
-    );
-    if (this.steps[nextStepNumber]) {
+    if (this.steps[previousStepNumber] && this.steps[nextStepNumber]) {
+      this.setPreviousStep(
+        activeParamType,
+        this.steps[previousStepNumber].routeName
+      );
       this.setNextStep(activeParamType, this.steps[nextStepNumber].routeName);
     }
   }
