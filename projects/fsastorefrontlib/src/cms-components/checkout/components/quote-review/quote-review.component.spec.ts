@@ -3,21 +3,25 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import { ModalService, SpinnerModule } from '@spartacus/storefront';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
-import { CategoryService } from './../../../../core/checkout/services/category/category.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
 import { AccordionModule } from './../../../../shared/accordion/accordion.module';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 import { QuoteReviewComponent } from './quote-review.component';
+import { ActiveCategoryStep } from '../../../../occ/occ-models';
 
 const formDataContent = '{"content":"formContent"}';
-const categoryCode = 'insurances_auto';
 
 class MockActivatedRoute {
   params = of();
 }
+
+const mockCategoryAndStep: ActiveCategoryStep = {
+  activeCategory: 'insurances_travel',
+  step: 'category',
+};
 
 const MockOccModuleConfig: OccConfig = {
   backend: {
@@ -33,11 +37,7 @@ class FSCartServiceStub {
   getActive() {}
   getLoaded() {}
 }
-class MockCategoryService {
-  getActiveCategory(): Observable<string> {
-    return of(categoryCode);
-  }
-}
+
 class MockRoutingService {
   go() {}
 }
@@ -131,7 +131,7 @@ describe('Quote Review Component', () => {
         },
       },
     });
-    component.continue();
+    component.navigateBack(mockCategoryAndStep);
     expect(routingService.go).toHaveBeenCalled();
   });
 
@@ -146,7 +146,7 @@ describe('Quote Review Component', () => {
       },
     });
 
-    component.continue();
+    component.navigateBack(mockCategoryAndStep);
     expect(routingService.go).not.toHaveBeenCalled();
     expect(modalService.open).toHaveBeenCalledWith(BindQuoteDialogComponent, {
       centered: true,
@@ -158,7 +158,7 @@ describe('Quote Review Component', () => {
   });
 
   it('should go back to previous step', () => {
-    component.back();
+    component.navigateBack(mockCategoryAndStep);
     expect(routingService.go).toHaveBeenCalled();
   });
 

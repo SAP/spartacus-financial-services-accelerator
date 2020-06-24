@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { ActiveCategoryStep } from 'projects/fsastorefrontlib/src/occ';
+import { ActiveCategoryStep } from '../../../../../occ/occ-models';
 import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
 import { FSCartService } from '../../../../../core/cart/facade';
 

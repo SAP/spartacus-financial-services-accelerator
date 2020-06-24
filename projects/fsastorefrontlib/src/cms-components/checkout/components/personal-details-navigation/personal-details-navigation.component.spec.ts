@@ -8,7 +8,14 @@ import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
 import { PersonalDetailsNavigationComponent } from './personal-details-navigation.component';
+import { ActiveCategoryStep } from '../../../../occ/occ-models';
+
 import createSpy = jasmine.createSpy;
+
+const mockCategoryAndStep: ActiveCategoryStep = {
+  activeCategory: 'insurances_travel',
+  step: 'category',
+};
 
 const mockCart = {
   code: '1234',
@@ -63,6 +70,7 @@ describe('PersonalDetailsNavigationComponent', () => {
   let component: PersonalDetailsNavigationComponent;
   let fixture: ComponentFixture<PersonalDetailsNavigationComponent>;
   let quoteService: MockQuoteService;
+  let routingService: RoutingService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -103,14 +111,21 @@ describe('PersonalDetailsNavigationComponent', () => {
     fixture = TestBed.createComponent(PersonalDetailsNavigationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    spyOn(routingService, 'go').and.callThrough();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should go back to previous step', () => {
+    component.navigateBack(mockCategoryAndStep);
+    expect(routingService.go).toHaveBeenCalled();
+  });
+
   it('should navigate next', () => {
-    component.navigateNext();
+    component.navigateNext(mockCategoryAndStep);
     expect(quoteService.underwriteQuote).toHaveBeenCalledWith(mockCart.code);
   });
 });

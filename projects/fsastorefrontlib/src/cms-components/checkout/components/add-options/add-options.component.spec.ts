@@ -13,7 +13,10 @@ import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { CategoryService } from './../../../../core/checkout/services/category/category.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
-import { FSProduct } from './../../../../occ/occ-models/occ.models';
+import {
+  FSProduct,
+  ActiveCategoryStep,
+} from './../../../../occ/occ-models/occ.models';
 import { AddOptionsComponent } from './add-options.component';
 
 const product: FSProduct = {
@@ -28,6 +31,11 @@ let mockEntries: OrderEntry[] = [
     product: product,
   },
 ];
+
+const mockCategoryAndStep: ActiveCategoryStep = {
+  activeCategory: 'insurances_travel',
+  step: 'category',
+};
 
 class MockCartService {
   getLoaded() {}
@@ -177,7 +185,7 @@ describe('AddOptionsComponent', () => {
       },
     ];
     component.ngOnInit();
-    component.back();
+    component.navigateBack(mockCategoryAndStep);
     expect(routingService.go).toHaveBeenCalled();
   });
 
@@ -188,14 +196,14 @@ describe('AddOptionsComponent', () => {
       },
     ];
     component.ngOnInit();
-    component.navigateNext();
+    component.navigateNext(mockCategoryAndStep);
     expect(routingService.go).toHaveBeenCalled();
   });
 
   it('should not navigate next because product is empty', () => {
     mockEntries = [{}];
     component.ngOnInit();
-    component.navigateNext();
+    component.navigateNext(mockCategoryAndStep);
     expect(routingService.go).not.toHaveBeenCalled();
   });
 
@@ -206,7 +214,7 @@ describe('AddOptionsComponent', () => {
       },
     ];
     component.ngOnInit();
-    component.navigateNext();
+    component.navigateNext(mockCategoryAndStep);
     expect(routingService.go).not.toHaveBeenCalled();
   });
 
