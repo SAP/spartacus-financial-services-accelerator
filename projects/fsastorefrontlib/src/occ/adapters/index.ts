@@ -11,3 +11,4 @@ export * from './claim/index';
 export * from './change-request/index';
 export * from './user-request/index';
 export * from './policy/index';
+export * from './document/index';
