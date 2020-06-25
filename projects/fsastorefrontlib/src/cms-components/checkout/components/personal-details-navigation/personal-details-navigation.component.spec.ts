@@ -112,7 +112,6 @@ describe('PersonalDetailsNavigationComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     routingService = TestBed.get(RoutingService as Type<RoutingService>);
-    spyOn(routingService, 'go').and.callThrough();
   });
 
   it('should create', () => {

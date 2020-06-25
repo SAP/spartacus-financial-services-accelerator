@@ -131,12 +131,12 @@ describe('Quote Review Component', () => {
         },
       },
     });
-    component.navigateBack(mockCategoryAndStep);
+    component.navigateNext(mockCategoryAndStep, component.cart$);
     expect(routingService.go).toHaveBeenCalled();
   });
 
   it('should not continue to the next step when quote is in state UNBIND', () => {
-    modalService.open.and.returnValue(modalInstance);
+    modalService.open(mockCategoryAndStep).and.returnValue(modalInstance);
     component.cart$ = of({
       code: 'cartCode',
       insuranceQuote: {
@@ -146,12 +146,15 @@ describe('Quote Review Component', () => {
       },
     });
 
-    component.navigateBack(mockCategoryAndStep);
+    component.navigateNext(mockCategoryAndStep, component.cart$);
     expect(routingService.go).not.toHaveBeenCalled();
-    expect(modalService.open).toHaveBeenCalledWith(BindQuoteDialogComponent, {
-      centered: true,
-      size: 'lg',
-    });
+    expect(modalService.open(mockCategoryAndStep)).toHaveBeenCalledWith(
+      BindQuoteDialogComponent,
+      {
+        centered: true,
+        size: 'lg',
+      }
+    );
     let result;
     component.showContent$.subscribe(showContent => (result = showContent));
     expect(result).toEqual(false);

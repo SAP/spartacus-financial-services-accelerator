@@ -4,7 +4,6 @@ import { RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { ActiveCategoryStep } from '../../../../../occ/occ-models';
 import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
-import { FSCartService } from '../../../../../core/cart/facade';
 
 @Component({
   selector: 'cx-fs-legal-checkboxes',
@@ -14,8 +13,7 @@ export class LegalCheckboxesComponent implements OnInit {
   constructor(
     protected routingService: RoutingService,
     protected activatedRoute: ActivatedRoute,
-    protected checkoutConfigService: FSCheckoutConfigService,
-    protected cartService: FSCartService
+    protected checkoutConfigService: FSCheckoutConfigService
   ) {}
   previousCheckoutStep$: Observable<ActiveCategoryStep>;
   nextCheckoutStep$: Observable<ActiveCategoryStep>;

@@ -33,19 +33,24 @@ const mockEntries: OrderEntry[] = [
   },
 ];
 
+const mockCart = {
+  deliveryOrderGroups: [
+    {
+      entries: [
+        {
+          product: {
+            defaultCategory: {
+              code: 'insurances_auto',
+            },
+          },
+        },
+      ],
+    },
+  ],
+};
 class MockCartService {
-  getLoaded() {}
-
-  removeEntry(item: any) {}
-
-  addOptionalProduct(
-    orderEntryCode: string,
-    qty: number,
-    entryNumber: string
-  ) {}
-
-  getEntries(): Observable<OrderEntry[]> {
-    return of(mockEntries);
+  getActive() {
+    return of(mockCart);
   }
 }
 
@@ -105,7 +110,7 @@ describe('FSCheckoutConfigService', () => {
       RoutingConfigService
     >);
     cartService = TestBed.get(FSCartService as Type<FSCartService>);
-    spyOn(cartService, 'getActive').and.callThrough();
+
     currentProductService = TestBed.get(CurrentProductService as Type<
       CurrentProductService
     >);
@@ -115,6 +120,9 @@ describe('FSCheckoutConfigService', () => {
       routingConfigService,
       cartService,
       currentProductService
+    );
+    spyOn(service, 'getPreviousCheckoutStepUrl').and.returnValue(
+      'checkout/c/insurances_auto'
     );
   });
 
@@ -134,7 +142,14 @@ describe('FSCheckoutConfigService', () => {
 
   it('should not remove product from cart', () => {
     service.setBackNextSteps(activatedRoute);
-    expect(cartService.getActive).toHaveBeenCalled();
+    service.previousStep
+      .subscribe(previousStep =>
+        expect(previousStep).toEqual({
+          activeCategory: 'insurances_auto',
+          step: 'checkout/c/insurances_auto',
+        })
+      )
+      .unsubscribe();
   });
 
   it('should return current step index if step exists', () => {
