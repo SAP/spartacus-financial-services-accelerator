@@ -10,7 +10,7 @@ import {
   ConfigModule,
   I18nModule,
   RoutesConfig,
-  RoutingConfig,
+  RoutingConfig
 } from '@spartacus/core';
 import {
   CardModule,
@@ -23,7 +23,7 @@ import {
   PaymentFormModule,
   PaymentMethodComponent,
   PaymentMethodModule,
-  SpinnerModule,
+  SpinnerModule
 } from '@spartacus/storefront';
 import { CartConnector } from '../../core/cart/connectors/cart.connector';
 import { FSCartService } from '../../core/cart/facade/cart.service';
@@ -33,7 +33,7 @@ import { CHECKOUT_FEATURE } from '../../core/checkout/store';
 import { effects } from '../../core/checkout/store/effects/index';
 import {
   reducerProvider,
-  reducerToken,
+  reducerToken
 } from '../../core/checkout/store/reducers/index';
 import { QuoteConnector } from '../../core/my-account/connectors/quote.connector';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
@@ -53,6 +53,7 @@ import { OrderConfirmationMessageComponent } from './components/order-confirmati
 import { OrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
 import { PersonalDetailsNavigationComponent } from './components/personal-details-navigation/personal-details-navigation.component';
 import { QuoteReviewComponent } from './components/quote-review/quote-review.component';
+import { ReferredQuoteDialogComponent } from './components/refffered-quote/referred-quote-dialog.component';
 import { UserIdentificationModule } from './components/user-identification/user-identification.module';
 import { CategoryStepGuard } from './guards/category-step-guard';
 import { CheckoutStepGuard } from './guards/checkout-step-guard';
@@ -206,6 +207,7 @@ const routes: Routes = [
   declarations: [
     QuoteReviewComponent,
     BindQuoteDialogComponent,
+    ReferredQuoteDialogComponent,
     FinalReviewComponent,
     ChooseCoverNavigationComponent,
     PersonalDetailsNavigationComponent,
@@ -220,6 +222,7 @@ const routes: Routes = [
     PaymentFormModule,
     QuoteReviewComponent,
     BindQuoteDialogComponent,
+    ReferredQuoteDialogComponent,
     FinalReviewComponent,
     OrderConfirmationComponent,
   ],
@@ -227,6 +230,7 @@ const routes: Routes = [
     AddOptionsComponent,
     QuoteReviewComponent,
     BindQuoteDialogComponent,
+    ReferredQuoteDialogComponent,
     FinalReviewComponent,
     ChooseCoverNavigationComponent,
     PersonalDetailsNavigationComponent,
@@ -244,4 +248,4 @@ const routes: Routes = [
     reducerProvider,
   ],
 })
-export class CheckoutModule {}
+export class CheckoutModule { }

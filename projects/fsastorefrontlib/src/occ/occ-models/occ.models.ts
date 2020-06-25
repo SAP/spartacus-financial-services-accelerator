@@ -7,7 +7,7 @@ import {
   Price,
   Product,
   User,
-  UserSignUp,
+  UserSignUp
 } from '@spartacus/core';
 
 export interface ContactAgentData {
@@ -61,6 +61,10 @@ export interface InsuranceQuoteList {
   insuranceQuotes: InsuranceQuote[];
 }
 
+export interface QuoteWorkflowStatus {
+  code?: string;
+}
+
 export interface InsuranceQuote {
   quoteId?: string;
   state?: QuoteBindingState;
@@ -68,6 +72,7 @@ export interface InsuranceQuote {
   quoteStatus?: QuoteStatus;
   quotePrice?: Occ.Price;
   paymentFrequency?: string;
+  quoteWorkflowStatus?: QuoteWorkflowStatus;
 }
 
 export interface QuoteBindingState {
@@ -81,6 +86,12 @@ export interface QuoteStatus {
 export enum BindingStateType {
   BIND = 'BIND',
   UNBIND = 'UNBIND',
+}
+
+export enum QuoteWorkflowStatusType {
+  APPROVED = 'APPROVED',
+  REFERRED = 'REFERRED',
+  PENDING = 'PENDING'
 }
 
 export enum ConfiguratorType {
