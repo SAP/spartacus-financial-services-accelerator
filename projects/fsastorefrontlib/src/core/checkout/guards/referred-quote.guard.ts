@@ -30,7 +30,6 @@ export class ReferredQuoteGuard implements CanActivate {
           const quoteWorkflowStatus = (<FSCart>cart).insuranceQuote
             .quoteWorkflowStatus;
           if (quoteWorkflowStatus.code === QuoteWorkflowStatusType.REFERRED) {
-            console.log('referred');
             this.globalMessageService.add(
               { key: 'quote.referredQuoteDescription' },
               GlobalMessageType.MSG_TYPE_INFO
