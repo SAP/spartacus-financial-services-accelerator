@@ -15,6 +15,7 @@ import { CheckoutOccModule } from './adapters/checkout/checkout-occ.module';
 import { ProductPricingOccModule } from './adapters/pricing/occ-product-pricing.module';
 import { ProductAssignmentOccModule } from './adapters/product-assignment/product-assignment.module';
 import { CsTicketOccModule } from './adapters/cs-ticket/cs-ticket-occ.module';
+import { DocumentOccModule } from './adapters';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { CsTicketOccModule } from './adapters/cs-ticket/cs-ticket-occ.module';
     QuoteOccModule,
     UserRequestOccModule,
     CsTicketOccModule,
+    DocumentOccModule,
   ],
   providers: [{ provide: OccConfig, useExisting: Config }],
 })

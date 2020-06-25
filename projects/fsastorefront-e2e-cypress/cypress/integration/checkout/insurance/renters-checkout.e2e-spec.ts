@@ -57,7 +57,7 @@ context('Renters Checkout', () => {
     checkout.checkProgressBarInsurance('Renters');
     //renters.checkMiniCartRentersRemovedProduct();
     checkout.clickContinueButton();
-    checkout.checkAccordions('propertyQuoteReview');
+    checkout.checkAccordions('generalQuoteAccordions');
     addPaymentMethod(registrationUserWithoutPhone.email);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();

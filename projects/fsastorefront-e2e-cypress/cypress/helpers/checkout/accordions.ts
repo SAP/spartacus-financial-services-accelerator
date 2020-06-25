@@ -67,7 +67,7 @@ export const confirmationAccordionCreditCard = [
 export const Accordions = {
   accordions: [
     {
-      category: 'lifeQuoteReview',
+      category: 'generalQuoteAccordions',
       accordionItems: this.quoteReviewAccordionGroup2,
     },
     {
@@ -75,17 +75,10 @@ export const Accordions = {
       accordionItems: this.quoteReviewAccordionGroup1,
     },
     {
-      category: 'travelQuoteReview',
-      accordionItems: this.quoteReviewAccordionGroup2,
-    },
-    {
       category: 'currentAccount',
       accordionItems: this.quoteReviewAccordionGroup1,
     },
-    {
-      category: 'creditCard',
-      accordionItems: this.quoteReviewAccordionGroup2,
-    },
+
     {
       category: 'creditCardConfirmation',
       accordionItems: this.confirmationAccordionCreditCard,
@@ -105,10 +98,6 @@ export const Accordions = {
     {
       category: 'agentListView',
       accordionItems: this.agentListViewAccordions,
-    },
-    {
-      category: 'propertyQuoteReview',
-      accordionItems: this.quoteReviewAccordionGroup2,
     },
     {
       category: 'homeownersFinalReview',
