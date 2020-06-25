@@ -66,7 +66,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
         const quoteWorkflowState = (<FSCart>activeCart).insuranceQuote
           .quoteWorkflowStatus.code;
         if (bindingState === BindingStateType.UNBIND) {
-          this.openQuoteBidningModal();
+          this.openQuoteBindingModal();
         } else if (
           bindingState === BindingStateType.BIND &&
           quoteWorkflowState === QuoteWorkflowStatusType.REFERRED
@@ -82,7 +82,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
       .unsubscribe();
   }
 
-  private openQuoteBidningModal() {
+  private openQuoteBindingModal() {
     let modalInstance: any;
     this.modalRef = this.modalService.open(BindQuoteDialogComponent, {
       centered: true,
