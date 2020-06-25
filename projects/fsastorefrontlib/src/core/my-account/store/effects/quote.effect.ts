@@ -65,5 +65,28 @@ export class QuoteEffects {
     })
   );
 
+  @Effect()
+  updateInsuredObjects$: Observable<any> = this.actions$.pipe(
+    ofType(fromActions.UPDATE_INSURANCE_OBJECTS),
+    map((action: fromActions.UpdateInsuranceObjects) => action.payload),
+    mergeMap(payload => {
+      return this.adapter
+        .updateInsuredObjects(payload.userId, payload.cartId, payload.productPriceAttributes)
+        .pipe(
+          mergeMap(() => {
+            return [
+              new CartActions.LoadCart({
+                userId: payload.userId,
+                cartId: payload.cartId,
+              }),
+            ];
+          }),
+          catchError(error =>
+            of(new fromActions.UpdateQuoteFail(JSON.stringify(error)))
+          )
+        );
+    })
+  );
+
   constructor(private actions$: Actions, private adapter: QuoteConnector) {}
 }

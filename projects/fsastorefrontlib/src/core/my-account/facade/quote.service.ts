@@ -148,4 +148,20 @@ export class QuoteService {
       )
       .unsubscribe();
   }
+
+  updateQuote(cartId: string, priceAttributes: any) {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.UpdateInsuranceObjects({
+            userId: occUserId,
+            cartId: cartId,
+            productPriceAttributes: priceAttributes
+          })
+        )
+      )
+      .unsubscribe();
+  }
 }

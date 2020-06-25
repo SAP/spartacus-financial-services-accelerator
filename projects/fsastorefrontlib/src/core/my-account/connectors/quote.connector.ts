@@ -27,4 +27,12 @@ export class QuoteConnector {
   ): Observable<any> {
     return this.adapter.invokeQuoteAction(userId, cartId, action);
   }
+
+  updateInsuredObjects(
+    userId: string,
+    cartId: string,
+    productPriceAttributes: any
+  ): Observable<any> {
+    return this.adapter.updateInsuredObjects(userId, cartId, productPriceAttributes);
+  }
 }

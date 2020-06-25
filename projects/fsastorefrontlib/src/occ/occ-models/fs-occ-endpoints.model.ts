@@ -123,6 +123,11 @@ export interface FSOccEndpoints extends OccEndpoints {
    */
   quoteAction?: string;
   /**
+   * Updates quote
+   *
+   */
+  quoteUpdate?: string;
+  /**
    * Get claims
    *
    */

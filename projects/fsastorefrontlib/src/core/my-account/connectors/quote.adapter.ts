@@ -33,4 +33,17 @@ export abstract class QuoteAdapter {
     cartId: string,
     quoteAction: string
   ): Observable<any>;
+
+  /**
+   * Abstract method used to invoke specified update of quote insured objects
+   *
+   * @param userId the user id
+   * @param cartId the cart id
+   * @param productPriceAttributes the price attributes
+   */
+  abstract updateInsuredObjects(
+    userId: string,
+    cartId: string,
+    productPriceAttributes: any
+  ): Observable<any>;
 }
