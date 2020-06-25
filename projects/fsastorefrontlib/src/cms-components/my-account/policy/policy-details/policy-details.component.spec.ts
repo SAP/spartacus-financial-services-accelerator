@@ -1,17 +1,16 @@
-import { PolicyDetailsComponent } from './policy-details.component';
+import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
+import * as FileSaver from 'file-saver';
 import { Observable, of } from 'rxjs';
-import { AccordionModule } from '../../../../shared/accordion/accordion.module';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
+import { AccordionModule } from '../../../../shared/accordion/accordion.module';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
-import { Type } from '@angular/core';
+import { DocumentService } from './../../../../core/document/facade/document.service';
 import {
   AllowedFSRequestType,
   RequestType,
 } from './../../../../occ/occ-models';
-import { DocumentService } from './../../../../core/document/facade/document.service';
-import * as FileSaver from 'file-saver';
 import { PolicyDetailsComponent } from './policy-details.component';
 
 class MockPolicyService {
