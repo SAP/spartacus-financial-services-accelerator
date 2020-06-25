@@ -39,7 +39,7 @@ export class PersonalDetailsComponent extends FormCMSComponent {
               <FSProduct>cart.entries[0].product
             ) {
               const mainProduct = <FSProduct>cart.entries[0].product;
-              if (mainProduct && mainProduct.defaultCategory) {
+              if (mainProduct.defaultCategory) {
                 this.formDataService.loadFormDefinitions(
                   mainProduct.defaultCategory.code,
                   FormDefinitionType.PERSONAL_DETAILS
