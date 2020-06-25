@@ -3,13 +3,11 @@ import {
   ElementRef,
   EventEmitter,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
-import { RoutingService } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
 import { Subscription } from 'rxjs';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
-import { FSCartService } from './../../../../core/cart/facade/cart.service';
 
 @Component({
   selector: 'cx-fs-bind-quote-dialog',
@@ -17,7 +15,6 @@ import { FSCartService } from './../../../../core/cart/facade/cart.service';
 })
 export class BindQuoteDialogComponent {
   cartCode: string;
-  nextStepUrl: string;
   subscription = new Subscription();
 
   @Output()
@@ -28,10 +25,8 @@ export class BindQuoteDialogComponent {
 
   constructor(
     protected modalService: ModalService,
-    protected quoteService: QuoteService,
-    protected routingService: RoutingService,
-    protected cartService: FSCartService
-  ) { }
+    protected quoteService: QuoteService
+  ) {}
 
   dismissModal(reason?: any): void {
     this.modalService.dismissActiveModal(reason);

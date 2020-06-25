@@ -9,8 +9,8 @@ import { FSTranslationService } from '../../../../core/i18n/facade/translation.s
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
   BindingStateType,
-
-  FSCart, QuoteWorkflowStatusType
+  FSCart,
+  QuoteWorkflowStatusType,
 } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 import { ReferredQuoteDialogComponent } from './../refffered-quote/referred-quote-dialog.component';
@@ -37,7 +37,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected modalService: ModalService,
     protected translationService: FSTranslationService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
@@ -63,18 +63,23 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
       .subscribe(activeCart => {
         this.cartCode = activeCart.code;
         const bindingState = (<FSCart>activeCart).insuranceQuote.state.code;
+        const quoteWorkflowState = (<FSCart>activeCart).insuranceQuote
+          .quoteWorkflowStatus.code;
         if (bindingState === BindingStateType.UNBIND) {
-          console.log((<FSCart>activeCart).insuranceQuote.state.code);
           this.openQuoteBidningModal();
-        } else if ((<FSCart>activeCart).insuranceQuote.quoteWorkflowStatus.code === QuoteWorkflowStatusType.REFERRED) {
-          console.log((<FSCart>activeCart).insuranceQuote.quoteWorkflowStatus.code);
+        } else if (
+          bindingState === BindingStateType.BIND &&
+          quoteWorkflowState === QuoteWorkflowStatusType.REFERRED
+        ) {
           this.openReferredQuoteModal();
-        } else {
+        } else if (
+          bindingState === BindingStateType.BIND &&
+          quoteWorkflowState !== QuoteWorkflowStatusType.REFERRED
+        ) {
           this.routingService.go(this.checkoutStepUrlNext);
         }
       })
-      .
-      unsubscribe();
+      .unsubscribe();
   }
 
   private openQuoteBidningModal() {
@@ -85,7 +90,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     });
     modalInstance = this.modalRef.componentInstance;
     modalInstance.cartCode = this.cartCode;
-    modalInstance.nextStepUrl = this.checkoutStepUrlNext;
     this.subscription.add(
       this.modalRef.componentInstance.quoteBinding$
         .pipe(

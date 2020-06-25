@@ -1,20 +1,31 @@
 <div class="popup-content-wrapper">
-    <button type="button" class="close" (click)="dismissModal('Cross click')"></button>
-    <h3>{{ 'fscommon.customerInfo' | cxTranslate }}</h3>
-    <p>{{ 'quote.referredQuoteDescription' | cxTranslate }}</p>
-    <div class="modal-actions">
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 mb-3 mb-md-0">
-                <button class="action-button btn-block" (click)="dismissModal('Cross click')">
-                    {{ 'common.cancel' | cxTranslate }}
-                </button>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-sm-push-6">
-                <button class="primary-button btn-block" routerLink="/find-agent" routerLinkActive="active"
-                    (click)="dismissModal('Cross click')">
-                    {{ 'fscommon.contactAgent' | cxTranslate }}
-                </button>
-            </div>
-        </div>
+  <button
+    type="button"
+    class="close"
+    (click)="dismissModal('Cross click')"
+  ></button>
+  <h3>{{ 'fscommon.customerInfo' | cxTranslate }}</h3>
+  <p>{{ 'quote.referredQuoteDescription' | cxTranslate }}</p>
+  <div class="modal-actions">
+    <div class="row">
+      <div class="col-xs-12 col-sm-6 mb-3 mb-md-0">
+        <button
+          class="action-button btn-block"
+          (click)="dismissModal('Cross click')"
+        >
+          {{ 'common.cancel' | cxTranslate }}
+        </button>
+      </div>
+      <div class="col-xs-12 col-sm-6 col-sm-push-6">
+        <button
+          class="primary-button btn-block"
+          routerLink="/find-agent"
+          routerLinkActive="active"
+          (click)="dismissModal('Cross click')"
+        >
+          {{ 'fscommon.contactAgent' | cxTranslate }}
+        </button>
+      </div>
     </div>
+  </div>
 </div>

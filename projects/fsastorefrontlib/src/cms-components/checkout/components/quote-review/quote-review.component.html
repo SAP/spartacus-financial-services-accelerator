@@ -5,15 +5,21 @@
         <div class="accordion">
           <h2 class="row no-gutters section-header-heading">
             <div class="col-12 col-md-2">
-              <span *ngIf="
+              <span
+                *ngIf="
                   (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.images
                     ?.length > 0
-                " class="image-wrapper">
-                <img class="image-item" [src]="
+                "
+                class="image-wrapper"
+              >
+                <img
+                  class="image-item"
+                  [src]="
                     getBaseUrl() +
                     ((cart.deliveryOrderGroups[0]?.entries)[0]?.product
                       ?.images)[1]?.url
-                  " />
+                  "
+                />
               </span>
             </div>
             <div class="col-12 col-md-8">
@@ -25,15 +31,21 @@
             </div>
           </h2>
           <div #ref>
-            <ng-container *ngIf="
+            <ng-container
+              *ngIf="
                 cart?.insuranceQuote?.quoteType !== 'EVENT' &&
                 (cart?.entries)[0]?.product?.defaultCategory as defaultCategory
-              ">
-              <cx-fs-accordion-item [opened]="true" [title]="'fscommon.generalDetails' | cxTranslate">
+              "
+            >
+              <cx-fs-accordion-item
+                [opened]="true"
+                [title]="'fscommon.generalDetails' | cxTranslate"
+              >
                 <div class="container">
                   <div class="row justify-content-center">
                     <ul class="col-12 accordion-list">
-                      <ng-container *ngTemplateOutlet="
+                      <ng-container
+                        *ngTemplateOutlet="
                           cartDetails;
                           context: {
                             valueList: !(cart?.entries)[0]?.product
@@ -43,7 +55,8 @@
                                   ?.configurationValues.entry,
                             defaultCategory: defaultCategory
                           }
-                        ">
+                        "
+                      >
                       </ng-container>
                     </ul>
                     <div class="col-12 col-md-6">
@@ -56,25 +69,31 @@
               </cx-fs-accordion-item>
             </ng-container>
           </div>
-          <cx-fs-accordion-item [opened]="ref.children.length > 0 ? false : true"
-            [title]="'fscommon.whatsIncluded' | cxTranslate">
+          <cx-fs-accordion-item
+            [opened]="ref.children.length > 0 ? false : true"
+            [title]="'fscommon.whatsIncluded' | cxTranslate"
+          >
             <div class="container">
               <div class="row justify-content-center">
                 <ul class="col-12 accordion-list">
-                  <ng-container *ngFor="
+                  <ng-container
+                    *ngFor="
                       let item of (cart.deliveryOrderGroups[0]?.entries)[0]
                         ?.product?.price?.oneTimeChargeEntries
-                    ">
+                    "
+                  >
                     <li class="accordion-list-item row">
                       <div class="col-6 item-label">
                         {{ item.billingTime?.name }}
                       </div>
                       <div class="col-6 value notice">
-                        <ng-container *ngIf="
+                        <ng-container
+                          *ngIf="
                             item.price.value > 0;
                             then formattedPrice;
                             else item.chargeInformation ? chargeInfo : iconOk
-                          ">
+                          "
+                        >
                         </ng-container>
                         <ng-template #formattedPrice>{{
                           item.price.formattedValue
@@ -82,7 +101,9 @@
                         <ng-template #chargeInfo>{{
                           item.chargeInformation
                         }}</ng-template>
-                        <ng-template #iconOk><span class="fs-icon icon-ok"></span></ng-template>
+                        <ng-template #iconOk
+                          ><span class="fs-icon icon-ok"></span
+                        ></ng-template>
                       </div>
                     </li>
                   </ng-container>
@@ -99,10 +120,12 @@
             <div class="container">
               <div class="row justify-content-center">
                 <ul class="col-12 accordion-list">
-                  <ng-container *ngFor="
+                  <ng-container
+                    *ngFor="
                       let item of cart.deliveryOrderGroups[0]?.entries
                         | slice: 1
-                    ">
+                    "
+                  >
                     <li class="accordion-list-item row">
                       <div class="col-12 item-label">
                         {{ item.product?.name }}
@@ -118,18 +141,26 @@
               </div>
             </div>
           </cx-fs-accordion-item>
-          <ng-container *ngIf="
+          <ng-container
+            *ngIf="
               cart.deliveryOrderGroups[0]?.entries.length > 0 &&
               (cart.deliveryOrderGroups[0]?.entries)[0]?.product?.investments
-            ">
-            <cx-fs-accordion-item [title]="'fscommon.investementDetails' | cxTranslate">
+            "
+          >
+            <cx-fs-accordion-item
+              [title]="'fscommon.investementDetails' | cxTranslate"
+            >
               <div class="container">
                 <div class="row justify-content-center">
                   <ul class="col-12 accordion-list">
-                    <ng-container *ngFor="let item of cart.deliveryOrderGroups[0]?.entries">
-                      <ng-container *ngFor="
+                    <ng-container
+                      *ngFor="let item of cart.deliveryOrderGroups[0]?.entries"
+                    >
+                      <ng-container
+                        *ngFor="
                           let investmentDetail of item.product?.investments
-                        ">
+                        "
+                      >
                         <li class="accordion-list-item row">
                           <div class="col-12">
                             {{ investmentDetail.investmentType?.fundName }}:
@@ -165,20 +196,29 @@
               </div>
             </cx-fs-accordion-item>
           </ng-container>
-          <cx-fs-accordion-item [title]="'fscommon.personalDetails' | cxTranslate">
+          <cx-fs-accordion-item
+            [title]="'fscommon.personalDetails' | cxTranslate"
+          >
             <div class="container">
               <div class="row justify-content-center">
-                <ul *ngIf="((cart?.deliveryOrderGroups)[0]?.entries)[0]?.formData" class="col-12 accordion-list">
-                  <ng-container *ngFor="
+                <ul
+                  *ngIf="((cart?.deliveryOrderGroups)[0]?.entries)[0]?.formData"
+                  class="col-12 accordion-list"
+                >
+                  <ng-container
+                    *ngFor="
                       let formEntry of getFormContent(cart)?.personalDetails
                         | keyvalue
-                    ">
-                    <ng-container *ngIf="
+                    "
+                  >
+                    <ng-container
+                      *ngIf="
                         getTranslation(
                           'personalDetails',
                           formEntry.key
                         ) as label
-                      ">
+                      "
+                    >
                       <li class="accordion-list-item row">
                         <div class="col-6 item-label">{{ label }}:</div>
                         <div class="col-6 value notice">
@@ -202,10 +242,13 @@
                 {{ 'common.back' | cxTranslate }}
               </button>
             </div>
-            <div *ngIf="
-                cart.insuranceQuote?.quoteWorkflowStatus?.code === 'APPROVED' || 
+            <div
+              *ngIf="
+                cart.insuranceQuote?.quoteWorkflowStatus?.code === 'APPROVED' ||
                 cart.insuranceQuote?.quoteWorkflowStatus?.code === 'REFERRED'
-              " class="col-md-6 col-sm-6 col-xs-12">
+              "
+              class="col-md-6 col-sm-6 col-xs-12"
+            >
               <button class="primary-button btn-block" (click)="continue()">
                 {{ 'common.continue' | cxTranslate }}
               </button>
@@ -222,9 +265,15 @@
 <ng-template #loading>
   <cx-spinner></cx-spinner>
 </ng-template>
-<ng-template #cartDetails let-valueList="valueList" let-defaultCategory="defaultCategory">
+<ng-template
+  #cartDetails
+  let-valueList="valueList"
+  let-defaultCategory="defaultCategory"
+>
   <ng-container *ngFor="let item of valueList">
-    <ng-container *ngIf="getTranslation(defaultCategory.code, item.key) as label">
+    <ng-container
+      *ngIf="getTranslation(defaultCategory.code, item.key) as label"
+    >
       <li class="accordion-list-item row">
         <div class="col-6 item-label">{{ label }}:</div>
         <div class="col-6 value notice">

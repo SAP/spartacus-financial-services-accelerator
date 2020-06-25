@@ -7,7 +7,7 @@ import {
   Price,
   Product,
   User,
-  UserSignUp
+  UserSignUp,
 } from '@spartacus/core';
 
 export interface ContactAgentData {
@@ -91,7 +91,7 @@ export enum BindingStateType {
 export enum QuoteWorkflowStatusType {
   APPROVED = 'APPROVED',
   REFERRED = 'REFERRED',
-  PENDING = 'PENDING'
+  PENDING = 'PENDING',
 }
 
 export enum ConfiguratorType {

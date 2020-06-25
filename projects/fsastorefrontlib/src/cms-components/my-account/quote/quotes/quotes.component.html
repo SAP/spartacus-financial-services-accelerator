@@ -13,13 +13,15 @@
             <div class="info-card-content">
               <div class="info-card-details">
                 <div class="info-card-data">
-                  <span class="label">{{ quote.planName }}</span>:
+                  <span class="label">{{ quote.planName }}</span
+                  >:
                   <span class="value">{{ quote.quoteId }}</span>
                 </div>
                 <div class="info-card-data">
                   <span class="label">{{
                     'quote.quoteStatus.title' | cxTranslate
-                  }}</span>:
+                  }}</span
+                  >:
                   <ng-container *ngIf="!quote.isExpired; else expired">
                     <span *ngIf="quote.state.code === 'BIND'" class="value">
                       {{ 'quote.quoteStatus.ready' | cxTranslate }}
@@ -32,7 +34,8 @@
                 <div class="info-card-data">
                   <span class="label">{{
                     'fscommon.expiryDate' | cxTranslate
-                  }}</span>:
+                  }}</span
+                  >:
                   <span *ngIf="quote.expiryDate" class="value">{{
                     quote.expiryDate | cxDate: 'dd MMM yyyy'
                   }}</span>
@@ -41,19 +44,32 @@
                   }}</span>
                 </div>
                 <div class="info-card-data">
-                  <span class="label">{{ 'fscommon.price' | cxTranslate }}</span>:
-                  <span class="value">{{ quote.quotePrice }}
+                  <span class="label">{{ 'fscommon.price' | cxTranslate }}</span
+                  >:
+                  <span class="value"
+                    >{{ quote.quotePrice }}
                     <ng-container *ngIf="quote.paymentFrequency">
-                      / {{ quote.paymentFrequency }}</ng-container></span>
+                      / {{ quote.paymentFrequency }}</ng-container
+                    ></span
+                  >
                 </div>
               </div>
               <div class="info-card-image">
                 <span class="image-wrapper">
-                  <img class="image-item" [src]="getBaseUrl() + quote.defaultCategory.image?.url" alt="" />
+                  <img
+                    class="image-item"
+                    [src]="getBaseUrl() + quote.defaultCategory.image?.url"
+                    alt=""
+                  />
                 </span>
               </div>
             </div>
-            <ng-container *ngIf="!quote.isExpired && quoteWorkflowStatus.code !== QuoteWorkflowStatusType.REFERRED">
+            <ng-container
+              *ngIf="
+                !quote.isExpired &&
+                quoteWorkflowStatus.code !== QuoteWorkflowStatusType.REFERRED
+              "
+            >
               <div class="info-card-links">
                 <a class="link" (click)="retrieveQuote(quote)">
                   {{ 'fscommon.retrieve' | cxTranslate }}

@@ -10,7 +10,7 @@ import {
   ConfigModule,
   I18nModule,
   RoutesConfig,
-  RoutingConfig
+  RoutingConfig,
 } from '@spartacus/core';
 import {
   CardModule,
@@ -23,7 +23,7 @@ import {
   PaymentFormModule,
   PaymentMethodComponent,
   PaymentMethodModule,
-  SpinnerModule
+  SpinnerModule,
 } from '@spartacus/storefront';
 import { CartConnector } from '../../core/cart/connectors/cart.connector';
 import { FSCartService } from '../../core/cart/facade/cart.service';
@@ -33,7 +33,7 @@ import { CHECKOUT_FEATURE } from '../../core/checkout/store';
 import { effects } from '../../core/checkout/store/effects/index';
 import {
   reducerProvider,
-  reducerToken
+  reducerToken,
 } from '../../core/checkout/store/reducers/index';
 import { QuoteConnector } from '../../core/my-account/connectors/quote.connector';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
@@ -248,4 +248,4 @@ const routes: Routes = [
     reducerProvider,
   ],
 })
-export class CheckoutModule { }
+export class CheckoutModule {}

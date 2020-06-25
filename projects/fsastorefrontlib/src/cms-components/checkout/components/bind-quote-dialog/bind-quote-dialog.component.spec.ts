@@ -1,11 +1,9 @@
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { Cart, I18nTestingModule, RoutingService } from '@spartacus/core';
+import { I18nTestingModule } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
-import { Observable, of } from 'rxjs';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
-import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCart } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './bind-quote-dialog.component';
 import createSpy = jasmine.createSpy;
@@ -19,11 +17,6 @@ const mockCart: FSCart = {
     },
   },
 };
-class MockCartService {
-  getActive(): Observable<Cart> {
-    return of(mockCart);
-  }
-}
 
 class MockQuoteService {
   bindQuote(cartCode: string): void {}
@@ -32,15 +25,11 @@ class MockQuoteService {
 class MockModalService {
   dismissActiveModal(): void {}
 }
-class MockRoutingService {
-  go = createSpy();
-}
 
 describe('BindQuoteDialogComponent', () => {
   let component: BindQuoteDialogComponent;
   let fixture: ComponentFixture<BindQuoteDialogComponent>;
   let el: DebugElement;
-  let cartService: FSCartService;
   let modalService: MockModalService;
   let quoteService: MockQuoteService;
 
@@ -54,16 +43,8 @@ describe('BindQuoteDialogComponent', () => {
           useClass: MockModalService,
         },
         {
-          provide: FSCartService,
-          useClass: MockCartService,
-        },
-        {
           provide: QuoteService,
           useClass: MockQuoteService,
-        },
-        {
-          provide: RoutingService,
-          useClass: MockRoutingService,
         },
       ],
     }).compileComponents();
@@ -73,11 +54,9 @@ describe('BindQuoteDialogComponent', () => {
     fixture = TestBed.createComponent(BindQuoteDialogComponent);
     component = fixture.componentInstance;
     el = fixture.debugElement;
-    cartService = TestBed.inject(FSCartService);
     quoteService = TestBed.inject(QuoteService);
     modalService = TestBed.inject(ModalService);
 
-    spyOn(cartService, 'getActive').and.callThrough();
     spyOn(quoteService, 'bindQuote').and.callThrough();
     spyOn(modalService, 'dismissActiveModal').and.callThrough();
   });
