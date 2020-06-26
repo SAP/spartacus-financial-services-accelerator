@@ -1,9 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { Type } from '@angular/core';
-import createSpy = jasmine.createSpy;
 import { ClaimAdapter } from './claim.adapter';
 import { ClaimConnector } from './claim.connector';
+import createSpy = jasmine.createSpy;
 
 class MockClaimAdapter extends ClaimAdapter {
   getClaims = createSpy('ClaimAdapter.getClaims').and.callFake(userId =>
@@ -40,8 +39,8 @@ describe('ClaimConnector', () => {
       providers: [{ provide: ClaimAdapter, useClass: MockClaimAdapter }],
     });
 
-    claimConnector = TestBed.get(ClaimConnector as Type<ClaimConnector>);
-    claimAdapter = TestBed.get(ClaimAdapter as Type<ClaimAdapter>);
+    claimConnector = TestBed.inject(ClaimConnector);
+    claimAdapter = TestBed.inject(ClaimAdapter);
   });
 
   it('should be created', () => {

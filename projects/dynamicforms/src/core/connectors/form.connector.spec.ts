@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { YFormData } from './../models/form-occ.models';
@@ -41,8 +40,8 @@ describe('FormConnector', () => {
     TestBed.configureTestingModule({
       providers: [{ provide: FormAdapter, useClass: MockFormAdapter }],
     });
-    formConnector = TestBed.get(FormConnector as Type<FormConnector>);
-    formAdapter = TestBed.get(FormAdapter as Type<FormAdapter>);
+    formConnector = TestBed.inject(FormConnector);
+    formAdapter = TestBed.inject(FormAdapter);
   });
 
   it('should be created', () => {

@@ -1,12 +1,11 @@
-import { Type } from '@angular/core';
 import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import { AuthService, OCC_USER_ID_CURRENT, UserToken } from '@spartacus/core';
 import { Observable, of, ReplaySubject } from 'rxjs';
 import * as fromAction from '../store/actions';
+import { StateWithChangeRequest } from '../store/change-request-state';
 import { reducerProvider, reducerToken } from '../store/reducers';
 import { ChangeRequestService } from './change-request.service';
-import { StateWithChangeRequest } from '../store/change-request-state';
 
 const userId = OCC_USER_ID_CURRENT;
 const policyId = 'PL00001';
@@ -62,8 +61,8 @@ describe('ChangeRequestServiceTest', () => {
         { provide: AuthService, useValue: authService },
       ],
     });
-    service = TestBed.get(ChangeRequestService as Type<ChangeRequestService>);
-    store = TestBed.get(Store as Type<Store<StateWithChangeRequest>>);
+    service = TestBed.inject(ChangeRequestService);
+    store = TestBed.inject(Store);
 
     spyOn(store, 'dispatch').and.callThrough();
   });

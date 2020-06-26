@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { Type } from '@angular/core';
 import { InboxAdapter } from './inbox.adapter';
 import { InboxConnector } from './inbox.connector';
 import createSpy = jasmine.createSpy;
@@ -28,8 +27,8 @@ describe('InboxConnector', () => {
       providers: [{ provide: InboxAdapter, useClass: MockInboxAdapter }],
     });
 
-    inboxConnector = TestBed.get(InboxConnector as Type<InboxConnector>);
-    inboxAdapter = TestBed.get(InboxAdapter as Type<InboxAdapter>);
+    inboxConnector = TestBed.inject(InboxConnector);
+    inboxAdapter = TestBed.inject(InboxAdapter);
   });
 
   it('should be created', () => {

@@ -1,12 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { LanguageService } from '@spartacus/core';
-import { of, Observable } from 'rxjs';
-import { Type } from '@angular/core';
-import { DynamicFormsConfig } from '../../core/config/form-config';
-import { AbstractFormComponent } from './abstract-form.component';
-import { FieldConfig } from '../../core/models/form-config.interface';
+import { Observable, of } from 'rxjs';
 import { UserPrefillResolver } from '../../core';
+import { DynamicFormsConfig } from '../../core/config/form-config';
+import { FieldConfig } from '../../core/models/form-config.interface';
+import { AbstractFormComponent } from './abstract-form.component';
 
 class MockLanguageService {
   getActive() {
@@ -67,7 +66,7 @@ describe('AbstractFormComponent', () => {
         { provide: UserPrefillResolver, useClass: MockUserPrefillResolver },
       ],
     }).compileComponents();
-    mockLanguageService = TestBed.get(LanguageService as Type<LanguageService>);
+    mockLanguageService = TestBed.inject(LanguageService);
   }));
 
   beforeEach(() => {

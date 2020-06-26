@@ -1,8 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { Type } from '@angular/core';
-import { ProductPricingConnector } from './product-pricing.connector';
 import { ProductPricingAdapter } from './product-pricing.adapter';
+import { ProductPricingConnector } from './product-pricing.connector';
 import createSpy = jasmine.createSpy;
 
 class MockProductPricingAdapter implements ProductPricingAdapter {
@@ -26,12 +25,8 @@ describe('ProductPricingConnector', () => {
       ],
     });
 
-    productPricingConnector = TestBed.get(ProductPricingConnector as Type<
-      ProductPricingConnector
-    >);
-    productPricingAdapter = TestBed.get(ProductPricingAdapter as Type<
-      ProductPricingAdapter
-    >);
+    productPricingConnector = TestBed.inject(ProductPricingConnector);
+    productPricingAdapter = TestBed.inject(ProductPricingAdapter);
   });
 
   it('should be created', () => {

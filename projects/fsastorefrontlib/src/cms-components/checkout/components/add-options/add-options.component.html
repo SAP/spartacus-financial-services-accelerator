@@ -4,7 +4,7 @@
       {{ 'fscommon.addOptions' | cxTranslate }}
     </h2>
   </div>
-  <ng-container *ngIf="cartLoaded$ | async; else loading">
+  <ng-container *ngIf="isCartStable$ | async; else loading">
     <ng-container *ngIf="entries$ | async as entries">
       <ng-container *ngFor="let orderEntryData of entries | slice: 1">
         <div

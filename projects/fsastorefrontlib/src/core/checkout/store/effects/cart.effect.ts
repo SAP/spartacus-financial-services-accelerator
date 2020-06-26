@@ -121,9 +121,7 @@ export class CartEffects {
               ...actions,
             ];
           }),
-          catchError(error =>
-            from([new CartActions.CartAddEntryFail(JSON.stringify(error))])
-          )
+          catchError(error => from([new CartActions.CartAddEntryFail(error)]))
         );
     })
   );

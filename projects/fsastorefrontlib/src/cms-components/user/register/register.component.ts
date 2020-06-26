@@ -4,9 +4,6 @@ import { DefaultFormValidators } from '@fsa/dynamicforms';
 import {
   AnonymousConsentsConfig,
   AnonymousConsentsService,
-  AuthRedirectService,
-  AuthService,
-  FeatureConfigService,
   GlobalMessageService,
   RoutingService,
   UserService,
@@ -20,24 +17,18 @@ import { FSUserSignUp } from '../../../occ/occ-models';
 })
 export class FSRegisterComponent extends RegisterComponent {
   constructor(
-    protected auth: AuthService,
-    protected authRedirectService: AuthRedirectService,
     protected userService: UserService,
     protected globalMessageService: GlobalMessageService,
     protected fb: FormBuilder,
-    protected router?: RoutingService,
-    protected featureConfig?: FeatureConfigService,
-    protected anonymousConsentsService?: AnonymousConsentsService,
-    protected anonymousConsentsConfig?: AnonymousConsentsConfig
+    protected router: RoutingService,
+    protected anonymousConsentsService: AnonymousConsentsService,
+    protected anonymousConsentsConfig: AnonymousConsentsConfig
   ) {
     super(
-      auth,
-      authRedirectService,
       userService,
       globalMessageService,
       fb,
       router,
-      featureConfig,
       anonymousConsentsService,
       anonymousConsentsConfig
     );
@@ -95,5 +86,19 @@ export class FSRegisterComponent extends RegisterComponent {
       titleCode,
       phoneNumber,
     };
+  }
+
+  submitForm(): void {
+    if (this.userRegistrationForm.valid) {
+      this.registerUser();
+    } else {
+      this.userRegistrationForm.markAllAsTouched();
+    }
+  }
+
+  registerUser(): void {
+    this.userService.register(
+      this.collectDataFromRegisterForm(this.userRegistrationForm.value)
+    );
   }
 }

@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { inject, TestBed } from '@angular/core/testing';
 import { FormDataStorageService } from '@fsa/dynamicforms';
 import { Store, StoreModule } from '@ngrx/store';
@@ -53,11 +52,9 @@ describe('UserRequestServiceTest', () => {
         },
       ],
     });
-    service = TestBed.get(UserRequestService as Type<UserRequestService>);
-    store = TestBed.get(Store as Type<Store<FSUserRequestState>>);
-    mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
-      FormDataStorageService
-    >);
+    service = TestBed.inject(UserRequestService);
+    store = TestBed.inject(Store);
+    mockFormDataStorageService = TestBed.inject(FormDataStorageService);
 
     spyOn(store, 'dispatch').and.callThrough();
     spyOn(mockFormDataStorageService, 'setFormDataToLocalStorage').and.stub();

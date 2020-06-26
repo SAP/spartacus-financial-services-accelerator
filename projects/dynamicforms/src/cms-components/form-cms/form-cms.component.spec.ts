@@ -1,4 +1,4 @@
-import { Component, Input, Type } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CmsComponent } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
@@ -97,10 +97,8 @@ describe('FormCMSComponent', () => {
         },
       ],
     }).compileComponents();
-    mockFormDataService = TestBed.get(FormDataService as Type<FormDataService>);
-    mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
-      FormDataStorageService
-    >);
+    mockFormDataService = TestBed.inject(FormDataService);
+    mockFormDataStorageService = TestBed.inject(FormDataStorageService);
   }));
 
   beforeEach(() => {

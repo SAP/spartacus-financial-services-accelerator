@@ -1,4 +1,4 @@
-import { Component, Input, Type } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import {} from '@angular/router/testing';
@@ -55,12 +55,10 @@ class MockedProductAssignmentService {
 describe('ActiveProductAssignmentsComponent', () => {
   let component: ActiveProductAssignmentsComponent;
   let fixture: ComponentFixture<ActiveProductAssignmentsComponent>;
-  let mockedProductAssignmentService: MockedProductAssignmentService;
-  let mockRoutingService: MockRoutingService;
+  let mockedProductAssignmentService: ProductAssignmentService;
+  let mockRoutingService: RoutingService;
 
   beforeEach(async(() => {
-    mockedProductAssignmentService = new MockedProductAssignmentService();
-    mockRoutingService = new MockRoutingService();
     TestBed.configureTestingModule({
       declarations: [
         ActiveProductAssignmentsComponent,
@@ -74,7 +72,7 @@ describe('ActiveProductAssignmentsComponent', () => {
         },
         {
           provide: ProductAssignmentService,
-          useValue: mockedProductAssignmentService,
+          useClass: MockedProductAssignmentService,
         },
         {
           provide: RoutingService,
@@ -87,10 +85,8 @@ describe('ActiveProductAssignmentsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ActiveProductAssignmentsComponent);
     component = fixture.componentInstance;
-    mockedProductAssignmentService = TestBed.get(
-      ProductAssignmentService as Type<ProductAssignmentService>
-    );
-    mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
+    mockedProductAssignmentService = TestBed.inject(ProductAssignmentService);
+    mockRoutingService = TestBed.inject(RoutingService);
     fixture.detectChanges();
   });
 

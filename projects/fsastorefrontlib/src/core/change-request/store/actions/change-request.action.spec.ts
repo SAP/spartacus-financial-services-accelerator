@@ -1,7 +1,6 @@
-import { OCC_CART_ID_CURRENT } from '@spartacus/core';
+import { OCC_CART_ID_CURRENT, StateUtils } from '@spartacus/core';
 import * as fromAction from './change-request.action';
 import { CHANGE_REQUEST_DATA } from '../change-request-state';
-import { StateLoaderActions } from '@spartacus/core';
 
 describe('Change Request Actions', () => {
   describe('CreateChangeRequest Action', () => {
@@ -18,7 +17,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.CREATE_CHANGE_REQUEST,
         payload: { policyId, contractId, userId },
-        meta: StateLoaderActions.loadMeta(CHANGE_REQUEST_DATA),
+        meta: StateUtils.loadMeta(CHANGE_REQUEST_DATA),
       });
     });
   });
@@ -30,7 +29,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.CREATE_CHANGE_REQUEST_FAIL,
         payload: error,
-        meta: StateLoaderActions.failMeta(CHANGE_REQUEST_DATA, error),
+        meta: StateUtils.failMeta(CHANGE_REQUEST_DATA, error),
       });
     });
   });
@@ -44,7 +43,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.CREATE_CHANGE_REQUEST_SUCCESS,
         payload: changeRequest,
-        meta: StateLoaderActions.successMeta(CHANGE_REQUEST_DATA),
+        meta: StateUtils.successMeta(CHANGE_REQUEST_DATA),
       });
     });
   });
@@ -63,7 +62,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.SIMULATE_CHANGE_REQUEST,
         payload: { userId, requestId, changeRequest },
-        meta: StateLoaderActions.loadMeta(CHANGE_REQUEST_DATA),
+        meta: StateUtils.loadMeta(CHANGE_REQUEST_DATA),
       });
     });
   });
@@ -82,7 +81,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.SIMULATE_CHANGE_REQUEST_SUCCESS,
         payload: changeRequest,
-        meta: StateLoaderActions.successMeta(CHANGE_REQUEST_DATA),
+        meta: StateUtils.successMeta(CHANGE_REQUEST_DATA),
       });
     });
   });
@@ -94,7 +93,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.SIMULATE_CHANGE_REQUEST_FAIL,
         payload: error,
-        meta: StateLoaderActions.failMeta(CHANGE_REQUEST_DATA, error),
+        meta: StateUtils.failMeta(CHANGE_REQUEST_DATA, error),
       });
     });
   });
@@ -109,7 +108,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.LOAD_CHANGE_REQUEST,
         payload: changeRequest,
-        meta: StateLoaderActions.loadMeta(CHANGE_REQUEST_DATA),
+        meta: StateUtils.loadMeta(CHANGE_REQUEST_DATA),
       });
     });
   });
@@ -128,7 +127,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.LOAD_CHANGE_REQUEST_SUCCESS,
         payload: changeRequest,
-        meta: StateLoaderActions.successMeta(CHANGE_REQUEST_DATA),
+        meta: StateUtils.successMeta(CHANGE_REQUEST_DATA),
       });
     });
   });
@@ -140,7 +139,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.LOAD_CHANGE_REQUEST_FAIL,
         payload: error,
-        meta: StateLoaderActions.failMeta(CHANGE_REQUEST_DATA, error),
+        meta: StateUtils.failMeta(CHANGE_REQUEST_DATA, error),
       });
     });
   });
@@ -155,7 +154,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.CANCEL_CHANGE_REQUEST,
         payload: changeRequest,
-        meta: StateLoaderActions.loadMeta(CHANGE_REQUEST_DATA),
+        meta: StateUtils.loadMeta(CHANGE_REQUEST_DATA),
       });
     });
   });
@@ -174,7 +173,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.CANCEL_CHANGE_REQUEST_SUCCESS,
         payload: changeRequest,
-        meta: StateLoaderActions.successMeta(CHANGE_REQUEST_DATA),
+        meta: StateUtils.successMeta(CHANGE_REQUEST_DATA),
       });
     });
   });
@@ -186,7 +185,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.CANCEL_CHANGE_REQUEST_FAIL,
         payload: error,
-        meta: StateLoaderActions.failMeta(CHANGE_REQUEST_DATA, error),
+        meta: StateUtils.failMeta(CHANGE_REQUEST_DATA, error),
       });
     });
   });
@@ -201,7 +200,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.UPDATE_CHANGE_REQUEST,
         payload: changeRequest,
-        meta: StateLoaderActions.loadMeta(CHANGE_REQUEST_DATA),
+        meta: StateUtils.loadMeta(CHANGE_REQUEST_DATA),
       });
     });
   });
@@ -220,7 +219,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.UPDATE_CHANGE_REQUEST_SUCCESS,
         payload: changeRequest,
-        meta: StateLoaderActions.successMeta(CHANGE_REQUEST_DATA),
+        meta: StateUtils.successMeta(CHANGE_REQUEST_DATA),
       });
     });
   });
@@ -232,7 +231,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.UPDATE_CHANGE_REQUEST_FAIL,
         payload: error,
-        meta: StateLoaderActions.failMeta(CHANGE_REQUEST_DATA, error),
+        meta: StateUtils.failMeta(CHANGE_REQUEST_DATA, error),
       });
     });
   });
@@ -247,7 +246,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.SUBMIT_CHANGE_REQUEST,
         payload: changeRequest,
-        meta: StateLoaderActions.loadMeta(CHANGE_REQUEST_DATA),
+        meta: StateUtils.loadMeta(CHANGE_REQUEST_DATA),
       });
     });
   });
@@ -266,7 +265,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.SUBMIT_CHANGE_REQUEST_SUCCESS,
         payload: changeRequest,
-        meta: StateLoaderActions.successMeta(CHANGE_REQUEST_DATA),
+        meta: StateUtils.successMeta(CHANGE_REQUEST_DATA),
       });
     });
   });
@@ -278,7 +277,7 @@ describe('Change Request Actions', () => {
       expect({ ...action }).toEqual({
         type: fromAction.SUBMIT_CHANGE_REQUEST_FAIL,
         payload: error,
-        meta: StateLoaderActions.failMeta(CHANGE_REQUEST_DATA, error),
+        meta: StateUtils.failMeta(CHANGE_REQUEST_DATA, error),
       });
     });
   });

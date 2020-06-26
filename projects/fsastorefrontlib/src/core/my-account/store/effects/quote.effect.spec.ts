@@ -1,15 +1,14 @@
-import { CartActions, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
+import { CartActions, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
-import * as fromActions from '../actions';
-import * as fromEffects from './quote.effect';
-import * as fromUserReducers from './../../store/reducers/index';
 import { QuoteConnector } from '../../connectors/quote.connector';
+import * as fromActions from '../actions';
+import * as fromUserReducers from './../../store/reducers/index';
+import * as fromEffects from './quote.effect';
 
 const insuranceQuote1: any = {
   cartCode: 'test001',
@@ -83,9 +82,7 @@ describe('Quote Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.QuoteEffects as Type<
-      fromEffects.QuoteEffects
-    >);
+    effects = TestBed.inject(fromEffects.QuoteEffects);
   });
 
   describe('loadQuotes$', () => {

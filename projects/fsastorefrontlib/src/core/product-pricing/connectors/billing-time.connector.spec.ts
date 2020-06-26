@@ -1,6 +1,5 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { Type } from '@angular/core';
 import { BillingTimeAdapter } from './billing-time.adapter';
 import { BillingTimeConnector } from './billing-time.connector';
 import createSpy = jasmine.createSpy;
@@ -24,12 +23,8 @@ describe('BillingTimeConnector', () => {
       ],
     });
 
-    billingTimeConnector = TestBed.get(BillingTimeConnector as Type<
-      BillingTimeConnector
-    >);
-    billingTimeAdapter = TestBed.get(BillingTimeAdapter as Type<
-      BillingTimeAdapter
-    >);
+    billingTimeConnector = TestBed.inject(BillingTimeConnector);
+    billingTimeAdapter = TestBed.inject(BillingTimeAdapter);
   });
 
   it('should be created', () => {
