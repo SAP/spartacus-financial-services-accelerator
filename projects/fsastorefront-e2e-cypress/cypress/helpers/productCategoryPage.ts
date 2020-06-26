@@ -34,9 +34,3 @@ export function checksSavingsCategoryPage() {
   cy.get('.item-details').should('have.length', 3);
   cy.go('back');
 }
-
-export function startCheckoutForBanking() {
-  cy.get('a.enriched-banner-styled-text')
-    .should('contain', ' Request a product')
-    .click();
-}

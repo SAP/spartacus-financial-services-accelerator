@@ -22,7 +22,8 @@ context('Travel Insurance Checkout', () => {
       travelCheckout.openCategoryPage();
     });
     it('Should populate insurance information form', () => {
-      checkout.checkProgressBarInsurance('Your Travel Insurance');
+      checkout.checkCheckoutStep('Your Travel Insurance', '7');
+      checkout.checkProgressBarInsurance();
       travelCheckout.populateInsuranceInfoForm();
     });
 
@@ -47,7 +48,7 @@ context('Travel Insurance Checkout', () => {
 
     it('Check mini cart on quote review page', () => {
       checkout.checkAccordions('generalQuoteAccordions');
-      travelCheckout.checkTravelMiniCart();
+      //travelCheckout.checkTravelMiniCart();
     });
 
     it('Select default payment details', () => {
