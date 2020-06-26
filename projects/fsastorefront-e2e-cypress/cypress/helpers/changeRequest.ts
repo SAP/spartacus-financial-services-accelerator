@@ -53,7 +53,7 @@ export function checkChangeRequestConfirmation() {
   cy.get('cx-fs-change-process-confirmation').should('be.visible');
   cy.get('h2').contains(' Change Request Confirmation ');
   cy.get('p').contains(
-    ' Your change has been sucesfully submitted. You can find processing email in the Inbox'
+    ' Your change has been successfully submitted. You can find processing email in the Inbox'
   );
 }
 
