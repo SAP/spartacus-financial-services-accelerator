@@ -71,7 +71,11 @@ export class QuoteEffects {
     map((action: fromActions.UpdateInsuranceObjects) => action.payload),
     mergeMap(payload => {
       return this.adapter
-        .updateInsuredObjects(payload.userId, payload.cartId, payload.productPriceAttributes)
+        .updateInsuredObjects(
+          payload.userId,
+          payload.cartId,
+          payload.productPriceAttributes
+        )
         .pipe(
           mergeMap(() => {
             return [

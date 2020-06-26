@@ -3,10 +3,15 @@ import { of } from 'rxjs';
 import { Type } from '@angular/core';
 import { QuoteConnector } from './quote.connector';
 import { QuoteAdapter } from './quote.adapter';
-import createSpy = jasmine.createSpy;
 import { QuoteActionType } from './../../../occ/occ-models/occ.models';
+import createSpy = jasmine.createSpy;
 
 class MockQuoteAdapter implements QuoteAdapter {
+  updateInsuredObjects = createSpy(
+    'QuoteAdapter.updateInsuredObjects'
+  ).and.callFake((userId, cartId, productPriceAttributes) =>
+    of('updateInsuredObjects' + userId + cartId + productPriceAttributes)
+  );
   getQuotes = createSpy('QuoteAdapter.getQuotes').and.callFake(userId =>
     of('getQuotes' + userId)
   );
@@ -51,6 +56,14 @@ describe('QuoteConnector', () => {
       user,
       cartId,
       QuoteActionType.BIND
+    );
+  });
+  it('should call adapter for update insured objects', () => {
+    quoteConnector.updateInsuredObjects(user, cartId, {});
+    expect(quoteAdapter.updateInsuredObjects).toHaveBeenCalledWith(
+      user,
+      cartId,
+      {}
     );
   });
 });

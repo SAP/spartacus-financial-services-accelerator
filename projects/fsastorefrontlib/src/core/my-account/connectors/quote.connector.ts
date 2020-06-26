@@ -33,6 +33,10 @@ export class QuoteConnector {
     cartId: string,
     productPriceAttributes: any
   ): Observable<any> {
-    return this.adapter.updateInsuredObjects(userId, cartId, productPriceAttributes);
+    return this.adapter.updateInsuredObjects(
+      userId,
+      cartId,
+      productPriceAttributes
+    );
   }
 }

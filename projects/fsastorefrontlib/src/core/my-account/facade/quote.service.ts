@@ -158,7 +158,7 @@ export class QuoteService {
           new fromAction.UpdateInsuranceObjects({
             userId: occUserId,
             cartId: cartId,
-            productPriceAttributes: priceAttributes
+            productPriceAttributes: priceAttributes,
           })
         )
       )

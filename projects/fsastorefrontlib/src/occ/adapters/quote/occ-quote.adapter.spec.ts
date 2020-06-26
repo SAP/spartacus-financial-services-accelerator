@@ -15,6 +15,7 @@ const quoteContent = {};
 const quotesEndpoint = 'quotes';
 const updateQuoteEndpoint = 'updateQuote';
 const quoteActionEndpoint = 'quoteAction';
+const quoteUpdateEndpoint = 'quoteUpdate';
 
 class MockOccEndpointsService {
   getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
@@ -86,6 +87,22 @@ describe('OccQuoteAdapter', () => {
       }, `POST method and url`);
       expect(occEndpointService.getUrl).toHaveBeenCalledWith(
         quoteActionEndpoint,
+        {
+          userId,
+          cartId,
+        }
+      );
+    }));
+  });
+
+  describe('update insured objects on quote', () => {
+    it('should update insured objects on quote', async(() => {
+      adapter.updateInsuredObjects(userId, cartId, {}).subscribe();
+      httpMock.expectOne((req: HttpRequest<any>) => {
+        return req.url === quoteUpdateEndpoint && req.method === 'POST';
+      }, `POST method and url`);
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        quoteUpdateEndpoint,
         {
           userId,
           cartId,

@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Cart, RoutingService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
-import { map, mergeMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { FSOrderEntry } from '../../../../occ/occ-models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
@@ -69,7 +69,12 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
           .pipe(
             map(formData => {
               if (formData && formData.content) {
-                this.quoteService.updateQuote(this.cartId, this.pricingService.buildPricingData(JSON.parse(formData.content)));
+                this.quoteService.updateQuote(
+                  this.cartId,
+                  this.pricingService.buildPricingData(
+                    JSON.parse(formData.content)
+                  )
+                );
                 this.routingService.go(this.checkoutStepUrlNext);
               }
             })
