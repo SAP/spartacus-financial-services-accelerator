@@ -8,7 +8,6 @@ import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError, pluck } from 'rxjs/operators';
 import { QuoteAdapter } from '../../../core/my-account/connectors/quote.adapter';
 import { Models } from '../../../model/quote.model';
-import { product } from '@spartacus/assets/translations/en/product';
 
 @Injectable()
 export class OccQuoteAdapter implements QuoteAdapter {
@@ -66,7 +65,7 @@ export class OccQuoteAdapter implements QuoteAdapter {
   updateInsuredObjects(
     userId: string,
     cartId: string,
-    productPriceAttributes: any
+    personalDetailsAttributes: any
   ): Observable<any> {
     const url = this.occEndpointService.getUrl('quoteUpdate', {
       userId,
@@ -77,7 +76,7 @@ export class OccQuoteAdapter implements QuoteAdapter {
     });
 
     return this.http
-      .post(url, productPriceAttributes, { headers })
+      .post(url, personalDetailsAttributes, { headers })
       .pipe(catchError((error: any) => throwError(error.json)));
   }
 }

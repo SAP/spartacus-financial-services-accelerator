@@ -58,7 +58,6 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
                 }
                 this.quoteService.underwriteQuote(cart.code);
                 this.formService.submit(yFormData);
-                
               }
             })
           )
@@ -70,9 +69,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
           .pipe(
             map(formData => {
               if (formData && formData.content) {
-                console.log(this.cartId);
                 this.quoteService.updateQuote(this.cartId, this.pricingService.buildPricingData(JSON.parse(formData.content)));
-
                 this.routingService.go(this.checkoutStepUrlNext);
               }
             })
