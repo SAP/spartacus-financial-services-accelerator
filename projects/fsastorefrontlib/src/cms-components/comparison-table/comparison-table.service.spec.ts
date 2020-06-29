@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { inject, TestBed } from '@angular/core/testing';
 import { CmsService } from '@spartacus/core';
 import { of } from 'rxjs';
@@ -31,9 +30,7 @@ describe('ComparisonTableService', () => {
         { provide: CmsService, useClass: MockCmsService },
       ],
     });
-    service = TestBed.get(ComparisonTableService as Type<
-      ComparisonTableService
-    >);
+    service = TestBed.inject(ComparisonTableService);
   });
 
   it('should inject CmsService', inject(

@@ -1,4 +1,4 @@
-import { DebugElement, Type } from '@angular/core';
+import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
@@ -94,13 +94,9 @@ describe('CalculationButtonComponent', () => {
         },
       ],
     }).compileComponents();
-    currentProductService = TestBed.get(CurrentProductService as Type<
-      CurrentProductService
-    >);
-    formDataStorageService = TestBed.get(FormDataStorageService as Type<
-      FormDataStorageService
-    >);
-    formDataService = TestBed.get(FormDataService as Type<FormDataService>);
+    currentProductService = TestBed.inject(CurrentProductService);
+    formDataStorageService = TestBed.inject(FormDataStorageService);
+    formDataService = TestBed.inject(FormDataService);
   }));
 
   beforeEach(() => {

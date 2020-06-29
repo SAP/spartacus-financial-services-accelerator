@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { OCC_CART_ID_CURRENT } from '@spartacus/core';
 import { of } from 'rxjs';
@@ -56,12 +55,8 @@ describe('ProductAssignmentConnector', () => {
       ],
     });
 
-    productAssignmentConnector = TestBed.get(ProductAssignmentConnector as Type<
-      ProductAssignmentConnector
-    >);
-    productAssignmentAdapter = TestBed.get(ProductAssignmentAdapter as Type<
-      ProductAssignmentAdapter
-    >);
+    productAssignmentConnector = TestBed.inject(ProductAssignmentConnector);
+    productAssignmentAdapter = TestBed.inject(ProductAssignmentAdapter);
   });
 
   it('should be created', () => {

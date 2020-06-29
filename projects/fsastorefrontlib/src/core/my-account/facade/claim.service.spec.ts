@@ -1,14 +1,12 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { ClaimService } from './claim.service';
-import * as fromReducer from '../store/reducers';
+import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
+import { AuthService, OCC_USER_ID_CURRENT, UserToken } from '@spartacus/core';
+import { Observable, of, ReplaySubject } from 'rxjs';
 import { ClaimDataService } from '../services/claim-data.service';
-import { Type } from '@angular/core';
 import * as fromAction from '../store/actions';
-import { reducerProvider, reducerToken } from '../store/reducers';
-import { of, Observable, ReplaySubject } from 'rxjs';
-import { OCC_USER_ID_CURRENT, AuthService, UserToken } from '@spartacus/core';
 import { StateWithMyAccount } from '../store/my-account-state';
+import { reducerProvider, reducerToken } from '../store/reducers';
+import { ClaimService } from './claim.service';
 
 const userId = OCC_USER_ID_CURRENT;
 const policyId = 'PL00001';
@@ -63,9 +61,9 @@ describe('ClaimServiceTest', () => {
       ],
     });
 
-    service = TestBed.get(ClaimService as Type<ClaimService>);
-    claimData = TestBed.get(ClaimDataService as Type<ClaimDataService>);
-    store = TestBed.get(Store as Type<Store<StateWithMyAccount>>);
+    service = TestBed.inject(ClaimService);
+    claimData = TestBed.inject(ClaimDataService);
+    store = TestBed.inject(Store);
 
     spyOn(store, 'dispatch').and.callThrough();
   });

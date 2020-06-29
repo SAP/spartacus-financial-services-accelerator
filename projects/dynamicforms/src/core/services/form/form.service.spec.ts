@@ -14,7 +14,7 @@ describe('FormService', () => {
       imports: [ReactiveFormsModule],
       providers: [FormService],
     });
-    service = TestBed.get(FormService);
+    service = TestBed.inject(FormService);
   });
 
   it('should be created', () => {

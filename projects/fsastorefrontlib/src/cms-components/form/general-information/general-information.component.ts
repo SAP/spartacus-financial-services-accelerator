@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import {
   FormCMSComponent,
   FormDataService,
   FormDataStorageService,
   YFormCmsComponent,
 } from '@fsa/dynamicforms';
-import { ActivatedRoute } from '@angular/router';
 import { CmsComponentData } from '@spartacus/storefront';
 import { map } from 'rxjs/operators';
 import { FormDefinitionType } from '../../../occ/occ-models';
@@ -24,13 +24,16 @@ export class GeneralInformationComponent extends FormCMSComponent {
     super(componentData, formDataService, formDataStorageService);
   }
 
+  formCategory: string;
+
   loadFormDefinition() {
     this.subscription.add(
       this.activatedRoute.params
         .pipe(
           map(params => {
+            this.formCategory = params['formCode'];
             this.formDataService.loadFormDefinitions(
-              params['formCode'],
+              this.formCategory,
               FormDefinitionType.PRODUCT_CONFIGURE
             );
           })

@@ -24,11 +24,18 @@ const isLevelBool: BehaviorSubject<boolean> = new BehaviorSubject(false);
 const registerUserIsSuccess: BehaviorSubject<boolean> = new BehaviorSubject(
   false
 );
+const registerUserIsLoading: BehaviorSubject<boolean> = new BehaviorSubject(
+  false
+);
 
 class MockUserService {
   loadTitles(): void {}
   getTitles(): Observable<Title[]> {
     return of([]);
+  }
+  resetRegisterUserProcessState(): void {}
+  getRegisterUserResultLoading(): Observable<boolean> {
+    return registerUserIsLoading.asObservable();
   }
   getRegisterUserResultSuccess(): Observable<boolean> {
     return registerUserIsSuccess.asObservable();

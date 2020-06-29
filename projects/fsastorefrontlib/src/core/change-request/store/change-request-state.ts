@@ -1,4 +1,4 @@
-import { LoaderState } from '@spartacus/core';
+import { StateUtils } from '@spartacus/core';
 
 export const CHANGE_REQUEST_FEATURE = 'changeRequests';
 
@@ -9,7 +9,7 @@ export interface StateWithChangeRequest {
 }
 
 export interface ChangeRequestsState {
-  changeRequest: LoaderState<ChangeRequestState>;
+  changeRequest: StateUtils.LoaderState<ChangeRequestState>;
 }
 
 export interface ChangeRequestState {

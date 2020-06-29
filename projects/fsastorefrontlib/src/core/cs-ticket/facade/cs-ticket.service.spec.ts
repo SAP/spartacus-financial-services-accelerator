@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { of } from 'rxjs';
@@ -38,7 +37,7 @@ describe('CsTicketService', () => {
         },
       ],
     });
-    service = TestBed.get(CsTicketService as Type<CsTicketService>);
+    service = TestBed.inject(CsTicketService);
   }));
 
   it('should be created', () => {

@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform, Type } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -73,23 +73,20 @@ class MockGlobalMessageService {
 describe('ContactAgentFormComponent', () => {
   let component: ContactAgentFormComponent;
   let fixture: ComponentFixture<ContactAgentFormComponent>;
-  let mockedUserService: MockedUserService;
-  let mockedCsTicketService: MockCsTicketService;
+  let mockedUserService: UserService;
+  let mockedCsTicketService: CsTicketService;
   let mockSearchService: AgentSearchService;
   let globalMessageService: GlobalMessageService;
-  let mockRoutingService: MockRoutingService;
+  let mockRoutingService: RoutingService;
 
   beforeEach(async(() => {
-    mockedUserService = new MockedUserService();
-    mockedCsTicketService = new MockCsTicketService();
-    mockRoutingService = new MockRoutingService();
     TestBed.configureTestingModule({
       declarations: [ContactAgentFormComponent, MockUrlPipe],
       imports: [I18nTestingModule, RouterTestingModule, ReactiveFormsModule],
       providers: [
         {
           provide: UserService,
-          useValue: mockedUserService,
+          useClass: MockedUserService,
         },
         {
           provide: AgentSearchService,
@@ -109,7 +106,7 @@ describe('ContactAgentFormComponent', () => {
         },
         {
           provide: CsTicketService,
-          useValue: mockedCsTicketService,
+          useClass: MockCsTicketService,
         },
       ],
     }).compileComponents();
@@ -118,15 +115,11 @@ describe('ContactAgentFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ContactAgentFormComponent);
     component = fixture.componentInstance;
-    globalMessageService = TestBed.get(GlobalMessageService);
-    mockedUserService = TestBed.get(UserService as Type<UserService>);
-    mockSearchService = TestBed.get(AgentSearchService as Type<
-      AgentSearchService
-    >);
-    mockedCsTicketService = TestBed.get(CsTicketService as Type<
-      CsTicketService
-    >);
-    mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
+    globalMessageService = TestBed.inject(GlobalMessageService);
+    mockedUserService = TestBed.inject(UserService);
+    mockSearchService = TestBed.inject(AgentSearchService);
+    mockedCsTicketService = TestBed.inject(CsTicketService);
+    mockRoutingService = TestBed.inject(RoutingService);
   });
 
   it('should create', () => {

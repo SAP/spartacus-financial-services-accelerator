@@ -1,12 +1,12 @@
+import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
-import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
-import { Component, Input, Type } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CmsComponentData, SpinnerModule } from '@spartacus/storefront';
+import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { CmsComponent, I18nTestingModule } from '@spartacus/core';
-import { GeneralInformationComponent } from './general-information.component';
+import { CmsComponentData, SpinnerModule } from '@spartacus/storefront';
+import { of } from 'rxjs';
 import { FormDefinitionType } from '../../../occ/occ-models';
+import { GeneralInformationComponent } from './general-information.component';
 
 const formDefinition = {
   formId: 'formId',
@@ -62,7 +62,7 @@ class MockFormDataStorageService {
 describe('GeneralInformationComponent', () => {
   let component: GeneralInformationComponent;
   let fixture: ComponentFixture<GeneralInformationComponent>;
-  let mockFormDataService: MockFormDataService;
+  let mockFormDataService: FormDataService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -88,7 +88,7 @@ describe('GeneralInformationComponent', () => {
       ],
     }).compileComponents();
 
-    mockFormDataService = TestBed.get(FormDataService as Type<FormDataService>);
+    mockFormDataService = TestBed.inject(FormDataService);
   }));
 
   beforeEach(() => {

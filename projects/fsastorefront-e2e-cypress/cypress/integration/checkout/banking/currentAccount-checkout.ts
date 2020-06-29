@@ -1,4 +1,3 @@
-import * as productCategory from '../../../helpers/productCategoryPage';
 import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as currentAccount from '../../../helpers/checkout/banking/currentAccount';
@@ -13,11 +12,7 @@ context('Current Account Checkout', () => {
 
   it('Start checkout for Current Account ', () => {
     checkout.waitForHomepage();
-    cy.selectOptionFromDropdown({
-      menuOption: 'Banking',
-      dropdownItem: 'Current Account',
-    });
-    productCategory.startCheckoutForBanking();
+    banking.startBankingCheckout('Current Account');
   });
 
   it('Should check comparison page', () => {
@@ -57,7 +52,7 @@ context('Current Account Checkout', () => {
 
   it('Should check Quote Review page', () => {
     banking.checkBankingProgressBar();
-    checkout.checkAccordions('currentAccount');
+    checkout.checkAccordions('threeAccordions');
   });
 
   it('Should bind Quote', () => {
@@ -78,7 +73,7 @@ context('Current Account Checkout', () => {
 
   it('Should check order confirmation', () => {
     checkout.checkOrderConfirmationBanking();
-    checkout.checkAccordions('currentAccount');
+    checkout.checkAccordions('threeAccordions');
   });
 
   it('Should empty my account policies page', () => {

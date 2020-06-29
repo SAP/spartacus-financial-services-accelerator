@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService } from '@fsa/dynamicforms';
@@ -69,7 +68,7 @@ class MockPricingService {
 describe('PersonalDetailsNavigationComponent', () => {
   let component: PersonalDetailsNavigationComponent;
   let fixture: ComponentFixture<PersonalDetailsNavigationComponent>;
-  let quoteService: MockQuoteService;
+  let quoteService: QuoteService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -107,7 +106,7 @@ describe('PersonalDetailsNavigationComponent', () => {
       ],
     }).compileComponents();
 
-    quoteService = TestBed.get(QuoteService as Type<QuoteService>);
+    quoteService = TestBed.inject(QuoteService);
   }));
 
   beforeEach(() => {

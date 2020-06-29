@@ -1,4 +1,4 @@
-import { Component, DebugElement, Input, Type } from '@angular/core';
+import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   AbstractControl,
@@ -96,10 +96,8 @@ describe('DynamicSelectComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DynamicSelectComponent);
-    occValueListService = TestBed.get(OccValueListService as Type<
-      OccValueListService
-    >);
-    formService = TestBed.get(FormService as Type<FormService>);
+    occValueListService = TestBed.inject(OccValueListService);
+    formService = TestBed.inject(FormService);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
     mockField = {

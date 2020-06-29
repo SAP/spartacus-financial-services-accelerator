@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { OCC_CART_ID_CURRENT } from '@spartacus/core';
 import { of } from 'rxjs';
@@ -47,12 +46,8 @@ describe('ChangeRequestConnector', () => {
       ],
     });
 
-    changeRequestConnector = TestBed.get(ChangeRequestConnector as Type<
-      ChangeRequestConnector
-    >);
-    changeRequestAdapter = TestBed.get(ChangeRequestAdapter as Type<
-      ChangeRequestAdapter
-    >);
+    changeRequestConnector = TestBed.inject(ChangeRequestConnector);
+    changeRequestAdapter = TestBed.inject(ChangeRequestAdapter);
   });
 
   it('should be created', () => {

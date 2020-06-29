@@ -35,9 +35,9 @@ describe('OccAgentAdapter', () => {
         { provide: OccEndpointsService, useClass: MockOccEndpointsService },
       ],
     });
-    adapter = TestBed.get(OccAgentAdapter);
-    httpMock = TestBed.get(HttpTestingController);
-    occEndpointService = TestBed.get(OccEndpointsService);
+    adapter = TestBed.inject(OccAgentAdapter);
+    httpMock = TestBed.inject(HttpTestingController);
+    occEndpointService = TestBed.inject(OccEndpointsService);
     spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 
