@@ -4,16 +4,12 @@ import {
   CmsActivatedRouteSnapshot,
   RoutingConfigService,
 } from '@spartacus/core';
-import {
-  CheckoutConfig,
-  CheckoutConfigService,
-  CurrentProductService,
-} from '@spartacus/storefront';
+import { CheckoutConfig, CheckoutConfigService } from '@spartacus/storefront';
 import { BehaviorSubject } from 'rxjs';
 import {
-  FSCheckoutStep,
   ActiveCategoryStep,
   FSCart,
+  FSCheckoutStep,
   FSProduct,
 } from '../../../occ';
 import { FSCartService } from '../../cart';
