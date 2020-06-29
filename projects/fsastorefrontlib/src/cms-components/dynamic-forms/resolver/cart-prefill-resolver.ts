@@ -11,7 +11,8 @@ export class CartPrefillResolver implements PrefillResolver {
   constructor(
     protected cartService: FSCartService,
     protected datePipe: DatePipe
-  ) {}
+  ) {
+  }
 
   getFieldValue(fieldPath: string) {
     const attributes = fieldPath.split('.');
@@ -25,7 +26,7 @@ export class CartPrefillResolver implements PrefillResolver {
             break;
           }
         }
-        // currentValue = this.convertIfDate(currentValue);
+         currentValue = this.convertIfDate(currentValue);
         return currentValue;
       })
     );
@@ -43,7 +44,7 @@ export class CartPrefillResolver implements PrefillResolver {
   convertIfDate(value) {
     const dateRegex = /^\d{1,2}\-\d{1,2}\-\d{4}$/;
     if (dateRegex.test(value)) {
-      return this.datePipe.transform(value, 'yyyy-MM-dd');
+      return this.datePipe.transform(value, 'yyyy-MM-dd', null, navigator.language);
     }
     return value;
   }
