@@ -8,8 +8,8 @@ import createSpy = jasmine.createSpy;
 class MockQuoteAdapter implements QuoteAdapter {
   updateInsuredObjects = createSpy(
     'QuoteAdapter.updateInsuredObjects'
-  ).and.callFake((userId, cartId, productPriceAttributes) =>
-    of('updateInsuredObjects' + userId + cartId + productPriceAttributes)
+  ).and.callFake((userId, cartIdentifier, productPriceAttributes) =>
+    of('updateInsuredObjects' + userId + cartIdentifier + productPriceAttributes)
   );
   getQuotes = createSpy('QuoteAdapter.getQuotes').and.callFake(userId =>
     of('getQuotes' + userId)
