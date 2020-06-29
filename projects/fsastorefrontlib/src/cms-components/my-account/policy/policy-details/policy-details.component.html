@@ -321,11 +321,11 @@
       </ul>
     </cx-fs-accordion-item>
     <cx-fs-accordion-item
-      *ngIf="policy.documents"
+      *ngIf="policy.documents && policy.documents.length > 0"
       [title]="'fscommon.documents' | cxTranslate"
     >
       <ul class="accordion-list container-fluid documents">
-        <li class="accordion-list-item row">
+        <li class="accordion-list-item row ">
           <div class="col-6">
             {{ 'policy.documentName' | cxTranslate }}
           </div>
@@ -337,9 +337,9 @@
           <li class="accordion-list-item row">
             <div class="col-6">
               <a
+                href="#"
                 class="document-link"
-                [href]="document.downloadUrl"
-                target="_blank"
+                (click)="getDocument(document.code, document.altText, $event)"
                 >{{ document.altText }}</a
               >
             </div>

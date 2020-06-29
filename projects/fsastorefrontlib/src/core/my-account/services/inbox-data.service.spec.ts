@@ -1,12 +1,10 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
+import { AuthService, OCC_USER_ID_ANONYMOUS, UserToken } from '@spartacus/core';
 import { Observable, ReplaySubject } from 'rxjs';
-import * as fromReducers from '../store/reducers';
-import { UserToken, AuthService } from '@spartacus/core';
-import { InboxDataService } from './inbox-data.service';
-import { OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
 import { StateWithMyAccount } from '../store/my-account-state';
+import * as fromReducers from '../store/reducers';
+import { InboxDataService } from './inbox-data.service';
 
 const userToken$ = new ReplaySubject<UserToken | any>();
 
@@ -43,8 +41,8 @@ describe('InboxDataService', () => {
         },
       ],
     });
-    service = TestBed.get(InboxDataService as Type<InboxDataService>);
-    store = TestBed.get(Store as Type<Store<StateWithMyAccount>>);
+    service = TestBed.inject(InboxDataService);
+    store = TestBed.inject(Store);
   });
 
   describe('userId', () => {

@@ -17,11 +17,7 @@ context('Credit Card Checkout', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
     checkout.waitForHomepage();
-    cy.selectOptionFromDropdown({
-      menuOption: 'Banking',
-      dropdownItem: 'Credit Card',
-    });
-    productCategory.startCheckoutForBanking();
+    banking.startBankingCheckout('Credit Card');
   });
 
   it('Should check comparison page', () => {
@@ -58,7 +54,7 @@ context('Credit Card Checkout', () => {
 
   it('Should check Quote Review page', () => {
     banking.checkBankingProgressBar();
-    checkout.checkAccordions('creditCard');
+    checkout.checkAccordions('generalQuoteAccordions');
   });
 
   it('Should bind Quote', () => {

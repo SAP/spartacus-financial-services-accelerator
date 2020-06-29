@@ -1,5 +1,5 @@
-import { OccQuoteNormalizer } from './occ-quote-normalizer';
 import { TestBed } from '@angular/core/testing';
+import { OccQuoteNormalizer } from './occ-quote-normalizer';
 
 describe('OccQuoteNormalizer', () => {
   let occQuoteNormalizer: OccQuoteNormalizer;
@@ -8,7 +8,7 @@ describe('OccQuoteNormalizer', () => {
     TestBed.configureTestingModule({
       providers: [OccQuoteNormalizer],
     });
-    occQuoteNormalizer = TestBed.get(OccQuoteNormalizer);
+    occQuoteNormalizer = TestBed.inject(OccQuoteNormalizer);
   });
 
   it('should be created', () => {

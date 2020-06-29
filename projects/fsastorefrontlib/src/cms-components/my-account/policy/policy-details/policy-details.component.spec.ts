@@ -1,15 +1,17 @@
-import { PolicyDetailsComponent } from './policy-details.component';
-import { ComponentFixture, TestBed, async } from '@angular/core/testing';
-import { RoutingService, OccConfig, I18nTestingModule } from '@spartacus/core';
-import { of, Observable } from 'rxjs';
-import { AccordionModule } from '../../../../shared/accordion/accordion.module';
-import { PolicyService } from '../../../../core/my-account/facade/policy.service';
-import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import { Type } from '@angular/core';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
+import * as FileSaver from 'file-saver';
+import { Observable, of } from 'rxjs';
+import { PolicyService } from '../../../../core/my-account/facade/policy.service';
+import { AccordionModule } from '../../../../shared/accordion/accordion.module';
+import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
+import { DocumentService } from './../../../../core/document/facade/document.service';
 import {
   AllowedFSRequestType,
   RequestType,
 } from './../../../../occ/occ-models';
+import { PolicyDetailsComponent } from './policy-details.component';
 
 class MockPolicyService {
   loadPolicyDetails() {}
@@ -73,9 +75,23 @@ const mockOccModuleConfig: OccConfig = {
     },
   },
 };
-
+const mockEvent = {
+  preventDefault() {},
+};
 const policyId = 'policyId';
 const contractId = 'contractId';
+const documentId = 'documentId';
+const documentName = 'document';
+
+const document = {
+  id: documentId,
+};
+
+class MockDocumentService {
+  getDocumentById(id) {
+    return of(document);
+  }
+}
 
 describe('PolicyDetailsComponent', () => {
   let component: PolicyDetailsComponent;
@@ -83,6 +99,7 @@ describe('PolicyDetailsComponent', () => {
   let changeRequestService: MockChangeRequestService;
   let routingService: MockRoutingService;
   let policyService: PolicyService;
+  let documentService: MockDocumentService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -92,6 +109,7 @@ describe('PolicyDetailsComponent', () => {
         { provide: PolicyService, useClass: MockPolicyService },
         { provide: OccConfig, useValue: mockOccModuleConfig },
         { provide: ChangeRequestService, useClass: MockChangeRequestService },
+        { provide: DocumentService, useClass: MockDocumentService },
       ],
       declarations: [PolicyDetailsComponent],
     }).compileComponents();
@@ -101,9 +119,11 @@ describe('PolicyDetailsComponent', () => {
     >);
     routingService = TestBed.get(RoutingService as Type<RoutingService>);
     policyService = TestBed.get(PolicyService as Type<PolicyService>);
+    documentService = TestBed.get(DocumentService as Type<DocumentService>);
   }));
 
   beforeEach(() => {
+    spyOn(FileSaver, 'saveAs').and.stub();
     fixture = TestBed.createComponent(PolicyDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -174,5 +194,11 @@ describe('PolicyDetailsComponent', () => {
 
   it('should check if request type is not allowed when allowed request types are not defined', () => {
     expect(component.isChangeAllowed(null, 'NOT_EXISTING_TYPE')).toEqual(false);
+  });
+
+  it('should test get document', () => {
+    spyOn(documentService, 'getDocumentById').and.callThrough();
+    component.getDocument(documentId, documentName, mockEvent);
+    expect(documentService.getDocumentById).toHaveBeenCalledWith(documentId);
   });
 });

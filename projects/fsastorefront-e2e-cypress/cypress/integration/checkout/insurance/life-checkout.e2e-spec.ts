@@ -10,11 +10,13 @@ context('Life Insurance Checkout', () => {
   });
 
   it('Should open life category page', () => {
+    checkout.waitForHomepage();
     checkout.startInsuranceCheckout('Life');
   });
 
   it('Should check progress bar', () => {
-    checkout.checkProgressBarInsurance('Your Life Insurance');
+    checkout.checkCheckoutStep('Your Life Insurance', '7');
+    checkout.checkProgressBarInsurance();
   });
 
   it('Should complete life checkout', () => {
@@ -61,9 +63,10 @@ context('Life Insurance Checkout', () => {
   });
 
   it('Should check quote review step', () => {
-    checkout.checkProgressBarInsurance('Your Life Insurance');
+    checkout.checkCheckoutStep('Your Life Insurance', '7');
+    checkout.checkProgressBarInsurance();
     //life.checkLifeBasicMiniCartSecondPerson();
-    checkout.checkAccordions('lifeQuoteReview');
+    checkout.checkAccordions('generalQuoteAccordions');
     cy.get('.primary-button').should('not.be.visible');
   });
 

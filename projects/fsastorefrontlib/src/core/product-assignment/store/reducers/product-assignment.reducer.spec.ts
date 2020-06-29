@@ -1,6 +1,6 @@
+import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 import * as fromAction from '../actions';
 import * as fromReducer from '../reducers/product-assignment.reducer';
-import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 
 const mockProductAssignments = {
   assignments: [
@@ -77,34 +77,6 @@ describe('Product Assignment Reducer', () => {
       );
       const state = fromReducer.reducer(initialState, action);
       expect(state.content).toEqual(mockProductAssignments);
-      expect(state.loaded).toEqual(true);
-    });
-  });
-
-  describe('LOAD_POTENTIAL_PRODUCT_ASSIGNMENTS_SUCCESS', () => {
-    it('should load potential product assignments', () => {
-      const action = new fromAction.LoadPotentialProductAssignmentsSuccess({
-        assignments: [
-          {
-            active: true,
-            code: 'testOne',
-            product: {
-              code: 'testProduct',
-            },
-          },
-          {
-            active: false,
-            code: 'testTwo',
-            product: {
-              code: 'testProduct',
-            },
-          },
-        ],
-      });
-      const state = fromReducer.reducer(initialState, action);
-      expect(state.content.potentialAssignments).toEqual(
-        mockProductAssignments.assignments
-      );
       expect(state.loaded).toEqual(true);
     });
   });

@@ -4,9 +4,9 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OccQuoteAdapter } from './occ-quote.adapter';
 import { OccEndpointsService } from '@spartacus/core';
 import { QuoteActionType } from '../../occ-models';
+import { OccQuoteAdapter } from './occ-quote.adapter';
 
 const userId = '123';
 const cartId = '123';
@@ -38,9 +38,9 @@ describe('OccQuoteAdapter', () => {
       ],
     });
 
-    adapter = TestBed.get(OccQuoteAdapter);
-    httpMock = TestBed.get(HttpTestingController);
-    occEndpointService = TestBed.get(OccEndpointsService);
+    adapter = TestBed.inject(OccQuoteAdapter);
+    httpMock = TestBed.inject(HttpTestingController);
+    occEndpointService = TestBed.inject(OccEndpointsService);
     spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 

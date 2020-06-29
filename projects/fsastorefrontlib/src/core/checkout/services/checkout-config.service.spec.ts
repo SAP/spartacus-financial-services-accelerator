@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RoutesConfig, RoutingConfigService } from '@spartacus/core';
@@ -40,10 +39,8 @@ describe('FSCheckoutConfigService', () => {
         { provide: RoutingConfigService, useClass: MockRoutingConfigService },
       ],
     });
-    activatedRoute = TestBed.get(ActivatedRoute as Type<ActivatedRoute>);
-    routingConfigService = TestBed.get(RoutingConfigService as Type<
-      RoutingConfigService
-    >);
+    activatedRoute = TestBed.inject(ActivatedRoute);
+    routingConfigService = TestBed.inject(RoutingConfigService);
 
     service = new FSCheckoutConfigService(
       mockCheckoutConfig,

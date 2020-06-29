@@ -1,4 +1,4 @@
-import { Component, Input, Type } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule } from '@spartacus/core';
@@ -59,10 +59,9 @@ class MockedProductAssignmentService {
 describe('ProductAssignmentsComponent', () => {
   let component: ProductAssignmentsComponent;
   let fixture: ComponentFixture<ProductAssignmentsComponent>;
-  let mockedProductAssignmentService: MockedProductAssignmentService;
+  let mockedProductAssignmentService: ProductAssignmentService;
 
   beforeEach(async(() => {
-    mockedProductAssignmentService = new MockedProductAssignmentService();
     TestBed.configureTestingModule({
       declarations: [
         ProductAssignmentsComponent,
@@ -76,7 +75,7 @@ describe('ProductAssignmentsComponent', () => {
         },
         {
           provide: ProductAssignmentService,
-          useValue: mockedProductAssignmentService,
+          useClass: MockedProductAssignmentService,
         },
       ],
     }).compileComponents();
@@ -85,9 +84,7 @@ describe('ProductAssignmentsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductAssignmentsComponent);
     component = fixture.componentInstance;
-    mockedProductAssignmentService = TestBed.get(
-      ProductAssignmentService as Type<ProductAssignmentService>
-    );
+    mockedProductAssignmentService = TestBed.inject(ProductAssignmentService);
     fixture.detectChanges();
   });
 

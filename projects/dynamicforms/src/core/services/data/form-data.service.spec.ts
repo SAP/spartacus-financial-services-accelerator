@@ -1,5 +1,5 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { FormDefinitionType } from '@fsa/storefront';
 import { Store, StoreModule } from '@ngrx/store';
 import { I18nTestingModule } from '@spartacus/core';
 import * as fromAction from '../../store/actions';
@@ -7,7 +7,6 @@ import { reducerProvider, reducerToken } from '../../store/reducers';
 import { YFormData, YFormDefinition } from './../../models/form-occ.models';
 import { StateWithForm } from './../../store/state';
 import { FormDataService } from './form-data.service';
-import { FormDefinitionType } from '@fsa/storefront';
 
 const applicationId = 'applicationId';
 const formDefinitionId = 'formDefinitionId';
@@ -42,8 +41,8 @@ describe('FormDataService', () => {
       providers: [FormDataService, reducerProvider],
     });
 
-    service = TestBed.get(FormDataService);
-    store = TestBed.get(Store as Type<Store<StateWithForm>>);
+    service = TestBed.inject(FormDataService);
+    store = TestBed.inject(Store);
     spyOn(store, 'dispatch').and.callThrough();
   });
 

@@ -10,6 +10,8 @@ import { map } from 'rxjs/operators';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import { AllowedFSRequestType } from './../../../../occ/occ-models';
+import { DocumentService } from './../../../../core/document/facade/document.service';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'cx-fs-policy-details',
@@ -21,7 +23,8 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     protected routingService: RoutingService,
     protected policyService: PolicyService,
     protected config: OccConfig,
-    protected changeRequestService: ChangeRequestService
+    protected changeRequestService: ChangeRequestService,
+    protected documentService: DocumentService
   ) {}
 
   policy$;
@@ -80,6 +83,20 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
                 cxRoute: changeRequest.configurationSteps[0].pageLabelOrId,
               });
             }
+          })
+        )
+        .subscribe()
+    );
+  }
+
+  getDocument(documentId, documentName, event) {
+    event.preventDefault();
+    this.subscription.add(
+      this.documentService
+        .getDocumentById(documentId)
+        .pipe(
+          map(document => {
+            saveAs(document, documentName + '.pdf');
           })
         )
         .subscribe()

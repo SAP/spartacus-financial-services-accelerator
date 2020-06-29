@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { CartAdapter } from './cart.adapter';
@@ -40,8 +39,8 @@ describe('CartConnector', () => {
       providers: [{ provide: CartAdapter, useClass: MockCartAdapter }],
     });
 
-    cartConnector = TestBed.get(CartConnector as Type<CartConnector>);
-    cartAdapter = TestBed.get(CartAdapter as Type<CartAdapter>);
+    cartConnector = TestBed.inject(CartConnector);
+    cartAdapter = TestBed.inject(CartAdapter);
   });
 
   it('should be created', () => {

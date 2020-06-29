@@ -14,8 +14,9 @@
           [user]="user$ | async"
           [titles]="titles$ | async"
           (cancelled)="onCancel()"
-          (submited)="onSubmit($event)"
-        ></cx-fs-update-profile-form>
+          (submitted)="onSubmit($event)"
+        >
+        </cx-fs-update-profile-form>
       </div>
     </div>
   </ng-template>

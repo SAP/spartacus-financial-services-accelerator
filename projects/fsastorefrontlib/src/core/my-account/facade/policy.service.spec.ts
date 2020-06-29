@@ -1,13 +1,11 @@
-import { TestBed, inject } from '@angular/core/testing';
-import * as fromReducer from '../store/reducers';
+import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-import { Type } from '@angular/core';
+import { AuthService, OCC_USER_ID_CURRENT } from '@spartacus/core';
+import { Observable, of } from 'rxjs';
+import * as fromAction from '../store/actions';
+import { StateWithMyAccount } from '../store/my-account-state';
 import { reducerProvider, reducerToken } from '../store/reducers/index';
 import { PolicyService } from './policy.service';
-import * as fromAction from '../store/actions';
-import { OCC_USER_ID_CURRENT, AuthService } from '@spartacus/core';
-import { Observable, of } from 'rxjs';
-import { StateWithMyAccount } from '../store/my-account-state';
 
 const userId = OCC_USER_ID_CURRENT;
 const policyId = 'PL00001';
@@ -44,8 +42,8 @@ describe('PolicyServiceTest', () => {
       ],
     });
 
-    service = TestBed.get(PolicyService as Type<PolicyService>);
-    store = TestBed.get(Store as Type<Store<StateWithMyAccount>>);
+    service = TestBed.inject(PolicyService);
+    store = TestBed.inject(Store);
 
     spyOn(store, 'dispatch').and.callThrough();
   });

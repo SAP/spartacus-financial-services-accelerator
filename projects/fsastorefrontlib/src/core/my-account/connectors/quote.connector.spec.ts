@@ -1,10 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { Type } from '@angular/core';
-import { QuoteConnector } from './quote.connector';
-import { QuoteAdapter } from './quote.adapter';
-import createSpy = jasmine.createSpy;
 import { QuoteActionType } from './../../../occ/occ-models/occ.models';
+import { QuoteAdapter } from './quote.adapter';
+import { QuoteConnector } from './quote.connector';
+import createSpy = jasmine.createSpy;
 
 class MockQuoteAdapter implements QuoteAdapter {
   getQuotes = createSpy('QuoteAdapter.getQuotes').and.callFake(userId =>
@@ -30,8 +29,8 @@ describe('QuoteConnector', () => {
       providers: [{ provide: QuoteAdapter, useClass: MockQuoteAdapter }],
     });
 
-    quoteConnector = TestBed.get(QuoteConnector as Type<QuoteConnector>);
-    quoteAdapter = TestBed.get(QuoteAdapter as Type<QuoteAdapter>);
+    quoteConnector = TestBed.inject(QuoteConnector);
+    quoteAdapter = TestBed.inject(QuoteAdapter);
   });
 
   it('should be created', () => {

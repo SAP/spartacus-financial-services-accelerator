@@ -4,7 +4,8 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { FormDataService } from '@fsa/dynamicforms';
+import { ActivatedRoute } from '@angular/router';
+import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { CmsComponentData } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -26,43 +27,62 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
   productList: string[];
   billingData: Observable<any>;
   pricingData: PricingData = {};
+  categoryCode: string;
 
   constructor(
     protected componentData: CmsComponentData<ComparisonPanelCMSComponent>,
     protected billingTimeConnector: BillingTimeConnector,
     protected formDataService: FormDataService,
-    protected pricingService: PricingService
+    protected pricingService: PricingService,
+    protected formDataStorageService: FormDataStorageService,
+    protected activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.comparisonPanel = this.componentData.data$;
-    this.subscription.add(
-      this.comparisonPanel
-        .pipe(
-          map(data => {
-            const productCodes = data.products.split(' ');
-            this.billingData = this.billingTimeConnector.getBillingTimes(
-              productCodes
-            );
-          })
-        )
-        .subscribe()
-    );
-
-    this.subscription.add(
-      this.formDataService
-        .getFormData()
-        .pipe(
-          map(formData => {
-            if (formData.content) {
-              this.pricingData = this.pricingService.buildPricingData(
-                JSON.parse(formData.content)
+    this.subscription
+      .add(
+        this.comparisonPanel
+          .pipe(
+            map(data => {
+              const productCodes = data.products.split(' ');
+              this.billingData = this.billingTimeConnector.getBillingTimes(
+                productCodes
               );
-            }
-          })
-        )
-        .subscribe()
+            })
+          )
+          .subscribe()
+      )
+      .add(
+        this.activatedRoute.params
+          .pipe(
+            map(params => {
+              this.categoryCode = params['categoryCode'];
+            })
+          )
+          .subscribe()
+      );
+
+    const formDataId = this.formDataStorageService.getFormDataIdByCategory(
+      this.categoryCode
     );
+    if (formDataId) {
+      this.formDataService.loadFormData(formDataId);
+      this.subscription.add(
+        this.formDataService
+          .getFormData()
+          .pipe(
+            map(formData => {
+              if (formData.content) {
+                this.pricingData = this.pricingService.buildPricingData(
+                  JSON.parse(formData.content)
+                );
+              }
+            })
+          )
+          .subscribe()
+      );
+    }
   }
 
   getProductList(): string[] {

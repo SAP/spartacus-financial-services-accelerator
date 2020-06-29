@@ -64,27 +64,44 @@ export const confirmationAccordionCreditCard = [
   'Personal Details',
 ];
 
+export const quoteReviewAccordionSavings = [
+  'General Details',
+  "What's Included",
+  'Added by you',
+  'Investments Details',
+  'Personal Details',
+];
+
+export const finalReviewAccordionSavings = [
+  'Savings Insurance Information',
+  "What's Included",
+  'Added by you',
+  'Investments Details',
+  'Personal Details',
+];
+
+export const policyDetailsSavings = [
+  'Policy Summary',
+  'Who or What Is Insured',
+  "What's Included",
+  'Optional Extras',
+  'Investment Details',
+  'What Does It Cost Me',
+];
+
 export const Accordions = {
   accordions: [
     {
-      category: 'lifeQuoteReview',
+      category: 'generalQuoteAccordions',
       accordionItems: this.quoteReviewAccordionGroup2,
     },
     {
-      category: 'auto',
+      category: 'threeAccordions',
       accordionItems: this.quoteReviewAccordionGroup1,
-    },
-    {
-      category: 'travelQuoteReview',
-      accordionItems: this.quoteReviewAccordionGroup2,
     },
     {
       category: 'currentAccount',
       accordionItems: this.quoteReviewAccordionGroup1,
-    },
-    {
-      category: 'creditCard',
-      accordionItems: this.quoteReviewAccordionGroup2,
     },
     {
       category: 'creditCardConfirmation',
@@ -107,16 +124,24 @@ export const Accordions = {
       accordionItems: this.agentListViewAccordions,
     },
     {
-      category: 'propertyQuoteReview',
-      accordionItems: this.quoteReviewAccordionGroup2,
-    },
-    {
       category: 'homeownersFinalReview',
       accordionItems: this.finalReviewAccordionHomeowners,
     },
     {
       category: 'rentersFinalReview',
       accordionItems: this.finalReviewAccordionRenters,
+    },
+    {
+      category: 'savingsQuoteReview',
+      accordionItems: this.quoteReviewAccordionSavings,
+    },
+    {
+      category: 'savingsFinalReview',
+      accordionItems: this.finalReviewAccordionSavings,
+    },
+    {
+      category: 'savingsPolicyDetails',
+      accordionItems: this.policyDetailsSavings,
     },
   ],
 };

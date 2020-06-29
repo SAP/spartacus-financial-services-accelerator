@@ -1,17 +1,16 @@
-import { OCC_USER_ID_CURRENT, GlobalMessageService } from '@spartacus/core';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
+import { GlobalMessageService, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
-import * as fromActions from '../actions';
-import * as fromEffects from './claim.effect';
-import * as fromReducer from './../../store/reducers/index';
 import * as fromUserRequestActions from '../../../user-request/store/actions';
-import { ClaimDataService } from '../../services/claim-data.service';
 import { ClaimConnector } from '../../connectors/claim.connector';
+import { ClaimDataService } from '../../services/claim-data.service';
+import * as fromActions from '../actions';
+import * as fromReducer from './../../store/reducers/index';
+import * as fromEffects from './claim.effect';
 
 const claimId1 = 'testClaim001';
 const claimId2 = 'testClaim002';
@@ -79,7 +78,7 @@ describe('Claim Effects', () => {
   let effects: fromEffects.ClaimEffects;
   let mockClaimConnector: MockClaimConnector;
   let mockClaimDataService: MockClaimDataService;
-  let globalMessageService: MockGlobalMessageService;
+  let globalMessageService: GlobalMessageService;
 
   beforeEach(() => {
     mockClaimConnector = new MockClaimConnector();
@@ -101,12 +100,8 @@ describe('Claim Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.ClaimEffects as Type<
-      fromEffects.ClaimEffects
-    >);
-    globalMessageService = TestBed.get(GlobalMessageService as Type<
-      GlobalMessageService
-    >);
+    effects = TestBed.inject(fromEffects.ClaimEffects);
+    globalMessageService = TestBed.inject(GlobalMessageService);
   });
 
   describe('loadClaims$', () => {
