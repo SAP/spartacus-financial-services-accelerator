@@ -79,7 +79,15 @@ describe('Product Assignment Effects', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
-        StoreModule.forRoot({}),
+        StoreModule.forRoot(
+          {},
+          {
+            runtimeChecks: {
+              strictStateImmutability: false,
+              strictActionImmutability: false,
+            },
+          }
+        ),
         StoreModule.forFeature(
           PRODUCT_ASSIGNMENT_FEATURE,
           fromUserReducers.getReducers()
