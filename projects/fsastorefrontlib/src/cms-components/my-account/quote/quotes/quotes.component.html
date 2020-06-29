@@ -66,8 +66,9 @@
             </div>
             <ng-container
               *ngIf="
-                !quote.isExpired &&
-                quoteWorkflowStatus.code !== QuoteWorkflowStatusType.REFERRED
+                !quote.isExpired ||
+                quote.quoteWorkflowStatus.code !==
+                  QuoteWorkflowStatusType.REFERRED
               "
             >
               <div class="info-card-links">
