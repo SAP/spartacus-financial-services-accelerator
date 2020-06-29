@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -80,7 +79,6 @@ describe('FSCheckoutConfigService', () => {
   let activatedRoute: ActivatedRoute;
   let routingConfigService: RoutingConfigService;
   let cartService: FSCartService;
-  let currentProductService: CurrentProductService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -105,21 +103,15 @@ describe('FSCheckoutConfigService', () => {
         },
       ],
     });
-    activatedRoute = TestBed.get(ActivatedRoute as Type<ActivatedRoute>);
-    routingConfigService = TestBed.get(RoutingConfigService as Type<
-      RoutingConfigService
-    >);
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
 
-    currentProductService = TestBed.get(CurrentProductService as Type<
-      CurrentProductService
-    >);
+    activatedRoute = TestBed.inject(ActivatedRoute);
+    routingConfigService = TestBed.inject(RoutingConfigService);
+    cartService = TestBed.inject(FSCartService);
 
     service = new FSCheckoutConfigService(
       mockCheckoutConfig,
       routingConfigService,
-      cartService,
-      currentProductService
+      cartService
     );
     spyOn(service, 'getPreviousCheckoutStepUrl').and.returnValue(
       'checkout/c/insurances_auto'
@@ -140,7 +132,7 @@ describe('FSCheckoutConfigService', () => {
     expect(service.getCurrentStepIndex(activatedRoute)).toBe(3);
   });
 
-  it('should not remove product from cart', () => {
+  /*  it('should not remove product from cart', () => {
     service.setBackNextSteps(activatedRoute);
     service.previousStep
       .subscribe(previousStep =>
@@ -150,7 +142,7 @@ describe('FSCheckoutConfigService', () => {
         })
       )
       .unsubscribe();
-  });
+  });*/
 
   it('should return current step index if step exists', () => {
     const activeStepIndex = 5;

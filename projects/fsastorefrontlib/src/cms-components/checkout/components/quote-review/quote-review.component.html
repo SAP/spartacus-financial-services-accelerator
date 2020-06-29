@@ -1,5 +1,5 @@
 <ng-container *ngIf="cart$ | async as cart">
-  <ng-container *ngIf="cartLoaded$ | async; else loading">
+  <ng-container *ngIf="isCartStable$ | async; else loading">
     <ng-container *ngIf="showContent$ | async; else loading">
       <ng-container *ngIf="cart.deliveryOrderGroups?.length > 0; else noQuotes">
         <div class="accordion">
@@ -250,7 +250,8 @@
             </div>
             <div
               *ngIf="
-                cart.insuranceQuote?.quoteWorkflowStatus?.code === 'APPROVED'
+                cart.insuranceQuote?.quoteWorkflowStatus?.code === 'APPROVED' ||
+                cart.insuranceQuote?.quoteWorkflowStatus?.code === 'REFERRED'
               "
               class="col-md-6 col-sm-6 col-xs-12"
             >

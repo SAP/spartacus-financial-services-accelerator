@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { inject, TestBed } from '@angular/core/testing';
 import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { Store, StoreModule } from '@ngrx/store';
@@ -6,10 +5,10 @@ import { AuthService, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from '../../cart/facade/cart.service';
 import { StateWithMyAccount } from '../store/my-account-state';
+import { QuoteActionType } from './../../../occ/occ-models/occ.models';
 import * as fromAction from './../store/actions';
 import { reducerProvider, reducerToken } from './../store/reducers/index';
 import { QuoteService } from './quote.service';
-import { QuoteActionType } from './../../../occ/occ-models/occ.models';
 
 const userId = OCC_USER_ID_CURRENT;
 const cartId = '0000001';
@@ -101,14 +100,13 @@ class MockCartService {
 describe('QuoteServiceTest', () => {
   let service: QuoteService;
   let store: Store<StateWithMyAccount>;
-  let cartService: MockCartService;
+  let cartService: FSCartService;
   let formDataService: MockFormDataService;
   let authService: MockAuthService;
   let mockFormDataStorageService: FormDataStorageService;
 
   beforeEach(() => {
     authService = new MockAuthService();
-    cartService = new MockCartService();
     formDataService = new MockFormDataService();
 
     TestBed.configureTestingModule({
@@ -119,7 +117,7 @@ describe('QuoteServiceTest', () => {
       providers: [
         QuoteService,
         reducerProvider,
-        { provide: FSCartService, useValue: cartService },
+        { provide: FSCartService, useClass: MockCartService },
         { provide: FormDataService, useValue: formDataService },
         { provide: AuthService, useValue: authService },
         {
@@ -129,12 +127,10 @@ describe('QuoteServiceTest', () => {
       ],
     });
 
-    service = TestBed.get(QuoteService as Type<QuoteService>);
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
-    store = TestBed.get(Store as Type<Store<StateWithMyAccount>>);
-    mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
-      FormDataStorageService
-    >);
+    service = TestBed.inject(QuoteService);
+    cartService = TestBed.inject(FSCartService);
+    store = TestBed.inject(Store);
+    mockFormDataStorageService = TestBed.inject(FormDataStorageService);
 
     spyOn(store, 'dispatch').and.callThrough();
   });
@@ -213,27 +209,5 @@ describe('QuoteServiceTest', () => {
         action: QuoteActionType.UNDERWRITING,
       })
     );
-  });
-
-  it('should be able to retrieve quote with full cart', () => {
-    const spy = spyOn(cartService, 'loadCart');
-    cartService.cart = mockCart;
-    formDataService.formData = mockFormData;
-    service.retrieveQuote({ cartCode: cartId });
-    expect(spy).toHaveBeenCalled();
-  });
-
-  it('should be able to retrieve quote with empty cart', () => {
-    const spy = spyOn(cartService, 'loadCart');
-    cartService.cart = cartWithoutEntries;
-    service.retrieveQuote({ cartCode: cartId });
-    expect(spy).toHaveBeenCalled();
-  });
-
-  it('should be able to retrieve quote with entries without forms', () => {
-    const spy = spyOn(cartService, 'loadCart');
-    cartService.cart = cartWithOneEntry;
-    service.retrieveQuote({ cartCode: cartId });
-    expect(spy).toHaveBeenCalled();
   });
 });

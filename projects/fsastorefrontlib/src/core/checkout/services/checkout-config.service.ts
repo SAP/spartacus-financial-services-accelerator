@@ -25,8 +25,7 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   constructor(
     protected fsCheckoutConfig: CheckoutConfig,
     protected fsRoutingConfigService: RoutingConfigService,
-    protected cartService: FSCartService,
-    protected currentProductService: CurrentProductService
+    protected cartService: FSCartService
   ) {
     super(fsCheckoutConfig, fsRoutingConfigService);
   }
@@ -66,7 +65,9 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   setBackNextSteps(activatedRoute: ActivatedRoute) {
     let activeParamType: string;
     const previousUrl = this.getPreviousCheckoutStepUrl(activatedRoute);
+    console.log('TEST::', activatedRoute);
     if (previousUrl) {
+      console.log('TEST previous URL::', previousUrl);
       const paramType = previousUrl.substring(previousUrl.lastIndexOf(':') + 1);
       this.cartService
         .getActive()

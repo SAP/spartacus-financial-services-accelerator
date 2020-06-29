@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { FormDefinitionType } from '@fsa/storefront';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
 import { GlobalMessage, GlobalMessageService } from '@spartacus/core';
@@ -10,7 +10,6 @@ import { FormConnector } from '../../connectors/form-connector';
 import * as fromActions from '../actions';
 import * as fromUserReducers from './../../store/reducers/index';
 import * as fromEffects from './form-definition.effect';
-import { FormDefinitionType } from '@fsa/storefront';
 
 const formId = 'formId';
 const category = 'category';
@@ -63,9 +62,7 @@ describe('Form Definition Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.FormDefinitionEffects as Type<
-      fromEffects.FormDefinitionEffects
-    >);
+    effects = TestBed.inject(fromEffects.FormDefinitionEffects);
   });
 
   describe('loadFormDefinition$', () => {

@@ -70,3 +70,11 @@ export function checkMyQuotesPage() {
     dropdownItem: 'Quotes & Applications',
   });
 }
+
+export function clickOnPolicyDetails() {
+  cy.get('.info-card').within(() => {
+    cy.get('a')
+      .contains(' Details ')
+      .click({ force: true });
+  });
+}

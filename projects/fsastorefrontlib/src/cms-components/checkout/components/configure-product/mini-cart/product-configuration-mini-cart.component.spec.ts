@@ -1,4 +1,4 @@
-import { DebugElement, Type } from '@angular/core';
+import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { I18nTestingModule, Product } from '@spartacus/core';
@@ -97,12 +97,10 @@ describe('ProductConfigurationMiniCartComponent', () => {
         },
       ],
     }).compileComponents();
-    currentProductService = TestBed.get(CurrentProductService as Type<
-      CurrentProductService
-    >);
-    formDataService = TestBed.get(FormDataService as Type<FormDataService>);
-    pricingService = TestBed.get(PricingService as Type<PricingService>);
-    fsProductService = TestBed.get(FSProductService as Type<FSProductService>);
+    currentProductService = TestBed.inject(CurrentProductService);
+    formDataService = TestBed.inject(FormDataService);
+    pricingService = TestBed.inject(PricingService);
+    fsProductService = TestBed.inject(FSProductService);
   }));
 
   beforeEach(() => {

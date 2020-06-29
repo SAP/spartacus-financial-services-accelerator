@@ -1,11 +1,10 @@
-import { TestBed } from '@angular/core/testing';
-import { I18nTestingModule } from '@spartacus/core';
-import { of } from 'rxjs';
-import { StoreModule } from '@ngrx/store';
-import { CartPrefillResolver } from './cart-prefill-resolver';
-import { Type } from '@angular/core';
-import { FSCartService } from 'projects/fsastorefrontlib/src/core';
 import { DatePipe } from '@angular/common';
+import { TestBed } from '@angular/core/testing';
+import { StoreModule } from '@ngrx/store';
+import { I18nTestingModule } from '@spartacus/core';
+import { FSCartService } from 'projects/fsastorefrontlib/src/core';
+import { of } from 'rxjs';
+import { CartPrefillResolver } from './cart-prefill-resolver';
 
 const cartCode = '0000001';
 const entryNumber = '1';
@@ -97,10 +96,8 @@ describe('UserPrefilResolver', () => {
       ],
     });
 
-    cartPrefilResolver = TestBed.get(CartPrefillResolver as Type<
-      CartPrefillResolver
-    >);
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
+    cartPrefilResolver = TestBed.inject(CartPrefillResolver);
+    cartService = TestBed.inject(FSCartService);
   });
 
   it('should inject cart resolver', () => {

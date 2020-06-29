@@ -63,7 +63,7 @@ context('Change Request for new user', () => {
     myPolicies.checkMyPoliciesPage();
     myPolicies.checkAutoPolicy();
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
-    checkout.checkAccordions('policyDetails');
+    checkout.checkAccordions('threeAccordions');
   });
 
   it('Should complete change mileage checkout', () => {
@@ -121,7 +121,7 @@ context('Change Request for new user', () => {
       .click();
     //check user is redirected to policy details page
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
-    checkout.checkAccordions('policyDetails');
+    checkout.checkAccordions('threeAccordions');
   });
 
   //TODO:Check inbox messages

@@ -8,6 +8,8 @@ export const quote = {
     getQuote: 'Get a Quote',
     moreInfo: 'More info',
     retrieveQuotes: 'Retrieve Quotes',
+    referredQuoteDescription:
+      'Your quote is referred. For more information, please contact the agent.',
     viewYourQuotes: 'View your quotes',
     youHaveNoQuotes: 'You have no Quotes and Applications',
     noActiveQuotes: 'You have no active quotes',

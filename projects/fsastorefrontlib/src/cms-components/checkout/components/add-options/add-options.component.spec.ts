@@ -1,4 +1,4 @@
-import { Type, DebugElement } from '@angular/core';
+import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
@@ -37,7 +37,7 @@ const mockCategoryAndStep: ActiveCategoryStep = {
 };
 
 class MockCartService {
-  getLoaded() {}
+  isStable() {}
 
   removeEntry(item: any) {}
 
@@ -120,17 +120,17 @@ describe('AddOptionsComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
+    cartService = TestBed.inject(FSCartService);
+    spyOn(cartService, 'isStable').and.callThrough();
+
     spyOn(cartService, 'removeEntry').and.callThrough();
     spyOn(cartService, 'addOptionalProduct').and.callThrough();
     spyOn(cartService, 'getEntries').and.callThrough();
 
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    routingService = TestBed.inject(RoutingService);
     spyOn(routingService, 'go').and.callThrough();
 
-    checkoutConfigService = TestBed.get(FSCheckoutConfigService as Type<
-      FSCheckoutConfigService
-    >);
+    checkoutConfigService = TestBed.inject(FSCheckoutConfigService);
     spyOn(checkoutConfigService, 'getNextCheckoutStepUrl').and.callThrough();
 
     component.ngOnInit();

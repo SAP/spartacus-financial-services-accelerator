@@ -34,7 +34,7 @@ class MockUpdateProfileFormComponent {
   titles: Title[];
 
   @Output()
-  submited = new EventEmitter<{ uid: string; userUpdates: FSUser }>();
+  submitted = new EventEmitter<{ uid: string; userUpdates: FSUser }>();
 }
 @Component({
   // tslint:disable-next-line:component-selector
@@ -118,9 +118,9 @@ describe('UpdateProfileComponent', () => {
     component = fixture.componentInstance;
     el = fixture.debugElement;
 
-    userService = TestBed.get(UserService);
-    routingService = TestBed.get(RoutingService);
-    globalMessageService = TestBed.get(GlobalMessageService);
+    userService = TestBed.inject(UserService);
+    routingService = TestBed.inject(RoutingService);
+    globalMessageService = TestBed.inject(GlobalMessageService);
 
     fixture.detectChanges();
   });

@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService } from '@fsa/dynamicforms';
@@ -69,8 +68,8 @@ class MockFormService {
 describe('PersonalDetailsNavigationComponent', () => {
   let component: PersonalDetailsNavigationComponent;
   let fixture: ComponentFixture<PersonalDetailsNavigationComponent>;
-  let quoteService: MockQuoteService;
   let routingService: RoutingService;
+  let quoteService: QuoteService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -104,14 +103,14 @@ describe('PersonalDetailsNavigationComponent', () => {
       ],
     }).compileComponents();
 
-    quoteService = TestBed.get(QuoteService as Type<QuoteService>);
+    quoteService = TestBed.inject(QuoteService);
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PersonalDetailsNavigationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    routingService = TestBed.inject(RoutingService);
   });
 
   it('should create', () => {

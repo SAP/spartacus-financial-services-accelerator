@@ -17,11 +17,7 @@ context('Credit Card Checkout', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
     checkout.waitForHomepage();
-    cy.selectOptionFromDropdown({
-      menuOption: 'Banking',
-      dropdownItem: 'Credit Card',
-    });
-    productCategory.startCheckoutForBanking();
+    banking.startBankingCheckout('Credit Card');
   });
 
   it('Should check comparison page', () => {

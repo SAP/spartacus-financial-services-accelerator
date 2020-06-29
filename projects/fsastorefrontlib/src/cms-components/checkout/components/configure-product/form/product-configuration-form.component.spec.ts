@@ -1,4 +1,4 @@
-import { Component, DebugElement, Input, Type } from '@angular/core';
+import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   FormDataService,
@@ -123,13 +123,9 @@ describe('ProductConfigurationFormComponent', () => {
         },
       ],
     }).compileComponents();
-    currentProductService = TestBed.get(CurrentProductService as Type<
-      CurrentProductService
-    >);
-    formDataService = TestBed.get(FormDataService as Type<FormDataService>);
-    formDataStorageService = TestBed.get(FormDataStorageService as Type<
-      FormDataStorageService
-    >);
+    currentProductService = TestBed.inject(CurrentProductService);
+    formDataService = TestBed.inject(FormDataService);
+    formDataStorageService = TestBed.inject(FormDataStorageService);
   }));
 
   beforeEach(() => {

@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -72,21 +71,17 @@ describe('FinalReviewComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    checkoutService = TestBed.get(FSCheckoutService as Type<FSCheckoutService>);
+    checkoutService = TestBed.inject(FSCheckoutService);
     spyOn(checkoutService, 'mockDeliveryMode').and.callThrough();
     spyOn(checkoutService, 'placeOrder').and.callThrough();
 
-    checkoutConfigService = TestBed.get(FSCheckoutConfigService as Type<
-      FSCheckoutConfigService
-    >);
+    checkoutConfigService = TestBed.inject(FSCheckoutConfigService);
     spyOn(checkoutConfigService, 'getNextCheckoutStepUrl').and.callThrough();
 
-    checkoutPaymentService = TestBed.get(CheckoutPaymentService as Type<
-      CheckoutPaymentService
-    >);
+    checkoutPaymentService = TestBed.inject(CheckoutPaymentService);
     spyOn(checkoutPaymentService, 'getPaymentDetails').and.callThrough();
 
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    routingService = TestBed.inject(RoutingService);
     spyOn(routingService, 'go').and.callThrough();
 
     spyOn(component.goToQuoteReview, 'emit').and.stub();

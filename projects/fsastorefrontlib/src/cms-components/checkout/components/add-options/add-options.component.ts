@@ -29,7 +29,8 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
   ) {}
 
   entries$: Observable<OrderEntry[]>;
-  cartLoaded$: Observable<boolean>;
+  checkoutStepUrlNext: string;
+  isCartStable$: Observable<boolean>;
   subscription = new Subscription();
   currentCurrency: string;
 
@@ -54,7 +55,11 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
         .subscribe()
     );
 
-    this.cartLoaded$ = this.cartService.getLoaded();
+    this.isCartStable$ = this.cartService.isStable();
+    this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
+      this.activatedRoute
+    );
+
     this.entries$ = this.cartService
       .getEntries()
       .pipe(filter(entries => entries && entries.length > 0));

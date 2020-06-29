@@ -52,3 +52,13 @@ export function checkConfigureStep() {
   cy.get('cx-fs-product-configuration-mini-cart').should('be.visible');
   cy.get('h3').contains('Configure a Product');
 }
+
+export function startBankingCheckout(mainProduct) {
+  cy.selectOptionFromDropdown({
+    menuOption: 'Banking',
+    dropdownItem: mainProduct,
+  });
+  cy.get('.enriched-banner-styled-text')
+    .should('contain', ' Request a product')
+    .click();
+}

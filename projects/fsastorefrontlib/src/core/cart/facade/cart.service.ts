@@ -9,7 +9,7 @@ import {
   MultiCartService,
   OCC_CART_ID_CURRENT,
   OCC_USER_ID_ANONYMOUS,
-  ProcessesLoaderState,
+  StateUtils,
   StateWithMultiCart,
 } from '@spartacus/core';
 import { filter, map } from 'rxjs/operators';
@@ -130,7 +130,7 @@ export class FSCartService extends ActiveCartService {
     }
   }
 
-  private isCartCreated(cartState: ProcessesLoaderState<Cart>) {
+  private isCartCreated(cartState: StateUtils.ProcessesLoaderState<Cart>) {
     return cartState && cartState.success && !cartState.loading;
   }
 }

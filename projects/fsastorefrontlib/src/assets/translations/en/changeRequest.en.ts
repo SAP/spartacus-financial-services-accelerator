@@ -10,7 +10,7 @@ export const changeRequest = {
     confirmation: {
       title: 'Change Request Confirmation',
       message:
-        'Your change has been sucesfully submitted. You can find processing email in the',
+        'Your change has been successfully submitted. You can find processing email in the',
       inbox: 'Inbox',
     },
     autoInformation: 'Auto Information',

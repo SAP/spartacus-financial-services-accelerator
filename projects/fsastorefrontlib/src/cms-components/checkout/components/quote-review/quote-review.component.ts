@@ -8,11 +8,13 @@ import { FSCheckoutConfigService } from '../../../../core/checkout/services';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
+  ActiveCategoryStep,
   BindingStateType,
   FSCart,
-  ActiveCategoryStep,
+  QuoteWorkflowStatusType,
 } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
+import { ReferredQuoteDialogComponent } from './../refffered-quote/referred-quote-dialog.component';
 
 @Component({
   selector: 'cx-fs-quote-review',
@@ -21,7 +23,7 @@ import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dial
 export class QuoteReviewComponent implements OnInit, OnDestroy {
   cart$: Observable<Cart>;
   showContent$: Observable<boolean> = of(true);
-  cartLoaded$: Observable<boolean>;
+  isCartStable$: Observable<boolean>;
   subscription = new Subscription();
   modalRef: ModalRef;
   cartCode: string;
@@ -40,7 +42,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.cart$ = this.cartService.getActive();
-    this.cartLoaded$ = this.cartService.getLoaded();
+    this.isCartStable$ = this.cartService.isStable();
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
   }
@@ -59,9 +61,19 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   navigateNext(nextStep, activeCart) {
     this.cartCode = activeCart.code;
     const bindingState = (<FSCart>activeCart).insuranceQuote.state.code;
+    const quoteWorkflowState = (<FSCart>activeCart).insuranceQuote
+      .quoteWorkflowStatus.code;
     if (bindingState === BindingStateType.UNBIND) {
-      this.openModal(nextStep);
-    } else {
+      this.openQuoteBindingModal(nextStep);
+    } else if (
+      bindingState === BindingStateType.BIND &&
+      quoteWorkflowState === QuoteWorkflowStatusType.REFERRED
+    ) {
+      this.openReferredQuoteModal(nextStep);
+    } else if (
+      bindingState === BindingStateType.BIND &&
+      quoteWorkflowState !== QuoteWorkflowStatusType.REFERRED
+    ) {
       this.routingService.go({
         cxRoute: nextStep.step,
         params: { code: nextStep.activeCategory },
@@ -69,7 +81,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     }
   }
 
-  private openModal(nextStep) {
+  private openQuoteBindingModal(nextStep) {
     let modalInstance: any;
     this.modalRef = this.modalService.open(BindQuoteDialogComponent, {
       centered: true,
@@ -86,6 +98,28 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
         .pipe(
           map(quoteBinding => {
             this.showContent$ = of(!quoteBinding);
+          })
+        )
+        .subscribe()
+    );
+  }
+
+  private openReferredQuoteModal(nextStep) {
+    let modalInstance: any;
+    this.modalRef = this.modalService.open(ReferredQuoteDialogComponent, {
+      centered: true,
+      size: 'lg',
+    });
+    modalInstance = this.modalRef.componentInstance;
+    modalInstance.nextStepUrl = {
+      cxRoute: nextStep.step,
+      params: { code: nextStep.activeCategory },
+    };
+    this.subscription.add(
+      this.modalRef.componentInstance.referredQuote$
+        .pipe(
+          map(referredQuote => {
+            this.showContent$ = of(!referredQuote);
           })
         )
         .subscribe()
