@@ -6,10 +6,12 @@ import { Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
+import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
   BindingStateType,
   FSCart,
+  QuoteWorkflowStatusType,
 } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 
@@ -61,16 +63,26 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
       .subscribe(activeCart => {
         this.cartCode = activeCart.code;
         const bindingState = (<FSCart>activeCart).insuranceQuote.state.code;
+        const quoteWorkflowState = (<FSCart>activeCart).insuranceQuote
+          .quoteWorkflowStatus.code;
         if (bindingState === BindingStateType.UNBIND) {
-          this.openModal();
-        } else {
+          this.openQuoteBindingModal();
+        } else if (
+          bindingState === BindingStateType.BIND &&
+          quoteWorkflowState === QuoteWorkflowStatusType.REFERRED
+        ) {
+          this.openReferredQuoteModal();
+        } else if (
+          bindingState === BindingStateType.BIND &&
+          quoteWorkflowState !== QuoteWorkflowStatusType.REFERRED
+        ) {
           this.routingService.go(this.checkoutStepUrlNext);
         }
       })
       .unsubscribe();
   }
 
-  private openModal() {
+  private openQuoteBindingModal() {
     let modalInstance: any;
     this.modalRef = this.modalService.open(BindQuoteDialogComponent, {
       centered: true,
@@ -78,12 +90,29 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     });
     modalInstance = this.modalRef.componentInstance;
     modalInstance.cartCode = this.cartCode;
-    modalInstance.nextStepUrl = this.checkoutStepUrlNext;
     this.subscription.add(
       this.modalRef.componentInstance.quoteBinding$
         .pipe(
           map(quoteBinding => {
             this.showContent$ = of(!quoteBinding);
+          })
+        )
+        .subscribe()
+    );
+  }
+
+  private openReferredQuoteModal() {
+    let modalInstance: any;
+    this.modalRef = this.modalService.open(ReferredQuoteDialogComponent, {
+      centered: true,
+      size: 'lg',
+    });
+    modalInstance = this.modalRef.componentInstance;
+    this.subscription.add(
+      this.modalRef.componentInstance.referredQuote$
+        .pipe(
+          map(referredQuote => {
+            this.showContent$ = of(!referredQuote);
           })
         )
         .subscribe()

@@ -28,6 +28,7 @@ import {
 import { CartConnector } from '../../core/cart/connectors/cart.connector';
 import { FSCartService } from '../../core/cart/facade/cart.service';
 import { CheckoutConnector } from '../../core/checkout/connectors/checkout.connector';
+import { ReferredQuoteGuard } from '../../core/checkout/guards/referred-quote.guard';
 import { CategoryService } from '../../core/checkout/services/category/category.service';
 import { CHECKOUT_FEATURE } from '../../core/checkout/store';
 import { effects } from '../../core/checkout/store/effects/index';
@@ -53,6 +54,7 @@ import { OrderConfirmationMessageComponent } from './components/order-confirmati
 import { OrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
 import { PersonalDetailsNavigationComponent } from './components/personal-details-navigation/personal-details-navigation.component';
 import { QuoteReviewComponent } from './components/quote-review/quote-review.component';
+import { ReferredQuoteDialogComponent } from './components/referred-quote/referred-quote-dialog.component';
 import { UserIdentificationModule } from './components/user-identification/user-identification.module';
 import { CategoryStepGuard } from './guards/category-step-guard';
 import { CheckoutStepGuard } from './guards/checkout-step-guard';
@@ -96,7 +98,12 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard, CheckoutStepGuard],
+    canActivate: [
+      AuthGuard,
+      CmsPageGuard,
+      CheckoutStepGuard,
+      ReferredQuoteGuard,
+    ],
     data: {
       cxRoute: 'checkoutPaymentDetails',
       pageLabel: 'checkout-payment-details',
@@ -110,6 +117,7 @@ const routes: Routes = [
       CmsPageGuard,
       CartNotEmptyGuard,
       PaymentDetailsSetGuard,
+      ReferredQuoteGuard,
     ],
     data: {
       cxRoute: 'finalReview',
@@ -206,6 +214,7 @@ const routes: Routes = [
   declarations: [
     QuoteReviewComponent,
     BindQuoteDialogComponent,
+    ReferredQuoteDialogComponent,
     FinalReviewComponent,
     ChooseCoverNavigationComponent,
     PersonalDetailsNavigationComponent,
@@ -220,6 +229,7 @@ const routes: Routes = [
     PaymentFormModule,
     QuoteReviewComponent,
     BindQuoteDialogComponent,
+    ReferredQuoteDialogComponent,
     FinalReviewComponent,
     OrderConfirmationComponent,
   ],
@@ -227,6 +237,7 @@ const routes: Routes = [
     AddOptionsComponent,
     QuoteReviewComponent,
     BindQuoteDialogComponent,
+    ReferredQuoteDialogComponent,
     FinalReviewComponent,
     ChooseCoverNavigationComponent,
     PersonalDetailsNavigationComponent,

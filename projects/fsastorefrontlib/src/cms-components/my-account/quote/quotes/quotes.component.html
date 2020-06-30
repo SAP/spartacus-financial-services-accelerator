@@ -64,7 +64,12 @@
                 </span>
               </div>
             </div>
-            <ng-container *ngIf="!quote.isExpired">
+            <ng-container
+              *ngIf="
+                !quote.isExpired &&
+                quote.quoteWorkflowStatus.code !== 'REFERRED'
+              "
+            >
               <div class="info-card-links">
                 <a class="link" (click)="retrieveQuote(quote)">
                   {{ 'fscommon.retrieve' | cxTranslate }}

@@ -8,6 +8,8 @@ export const quote = {
     getQuote: 'Angebot anfordern',
     moreInfo: 'Mehr Informationen',
     retrieveQuotes: 'Antrag fortsetzen',
+    referredQuoteDescription:
+      'Ihr Angebot wird weitergeleitet. Weitere Informationen erhalten Sie bei Ihrem Kundenbetreuer.',
     viewYourQuotes: 'Angebote ansehen',
     youHaveNoQuotes: 'Sie haben zur Zeit keine Angebote',
     noActiveQuotes: 'Sie haben zur Zeit keine aktiven Angebote',

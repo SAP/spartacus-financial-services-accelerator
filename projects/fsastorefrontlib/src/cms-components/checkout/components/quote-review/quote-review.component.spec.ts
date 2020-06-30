@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import { ModalService, SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
+import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
@@ -55,7 +56,8 @@ const modalInstance: any = {
   componentInstance: {
     cartCode: '',
     nextStepUrl: '',
-    quoteBinding$: of(true),
+    quoteBinding$: of(false),
+    referredQuote$: of(false),
   },
 };
 
@@ -125,6 +127,9 @@ describe('Quote Review Component', () => {
         state: {
           code: 'BIND',
         },
+        quoteWorkflowStatus: {
+          code: 'APPROVED',
+        },
       },
     });
     component.continue();
@@ -139,6 +144,9 @@ describe('Quote Review Component', () => {
         state: {
           code: 'UNBIND',
         },
+        quoteWorkflowStatus: {
+          code: 'APPROVED',
+        },
       },
     });
 
@@ -150,7 +158,35 @@ describe('Quote Review Component', () => {
     });
     let result;
     component.showContent$.subscribe(showContent => (result = showContent));
-    expect(result).toEqual(false);
+    expect(result).toEqual(true);
+  });
+
+  it('should open ReferredQuoteDialog popup', () => {
+    modalService.open.and.returnValue(modalInstance);
+    component.cart$ = of({
+      code: 'cartCode',
+      insuranceQuote: {
+        state: {
+          code: 'BIND',
+        },
+        quoteWorkflowStatus: {
+          code: 'REFERRED',
+        },
+      },
+    });
+
+    component.continue();
+    expect(routingService.go).not.toHaveBeenCalled();
+    expect(modalService.open).toHaveBeenCalledWith(
+      ReferredQuoteDialogComponent,
+      {
+        centered: true,
+        size: 'lg',
+      }
+    );
+    let result;
+    component.showContent$.subscribe(showContent => (result = showContent));
+    expect(result).toEqual(true);
   });
 
   it('should go back to previous step', () => {
