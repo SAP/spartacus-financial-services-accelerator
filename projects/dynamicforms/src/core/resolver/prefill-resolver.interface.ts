@@ -5,7 +5,8 @@ export interface PrefillResolver {
   /**
    * Method used to get state object property
    *
-   * @param fieldPath  Path to the property
+   * @param fieldPath  If field path if defined resolver should use that to populate value.
+   * Otherweise any return value of custom resolver will be populated
    */
-  getFieldValue(fieldPath: string);
+  getPrefillValue(fieldPath?: string);
 }

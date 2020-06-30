@@ -57,7 +57,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
           targetObject.prefillResolver
         );
         prefillResolver
-          .getFieldValue(this.config.prefillValue.targetValue)
+          .getPrefillValue(this.config.prefillValue.targetValue)
           .subscribe(value => {
             if (value) {
               this.group.get(this.config.name).setValue(value);

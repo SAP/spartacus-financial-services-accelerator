@@ -32,7 +32,7 @@ const mockField: FieldConfig = {
 const titleCode: Observable<any> = of('mr');
 
 class MockUserPrefillResolver {
-  getFieldValue() {
+  getPrefillValue() {
     return titleCode;
   }
 }
