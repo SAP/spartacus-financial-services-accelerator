@@ -3,12 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import { ModalService, SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
+import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
 import { AccordionModule } from './../../../../shared/accordion/accordion.module';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
-import { ReferredQuoteDialogComponent } from './../refffered-quote/referred-quote-dialog.component';
 import { QuoteReviewComponent } from './quote-review.component';
 
 const formDataContent = '{"content":"formContent"}';
