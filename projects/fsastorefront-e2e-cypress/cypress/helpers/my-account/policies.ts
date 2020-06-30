@@ -20,7 +20,7 @@ export function updatePolicyEffectiveAndStartDate() {
         const policyId = $element.text().trim();
         const payload = this.getPayloadForPolicyUpdate(policyId);
         cy.request(payload);
-        cy.get('.info-card-links .link')
+        cy.get('a')
           .eq(1)
           .contains(' Make a Claim')
           .click();

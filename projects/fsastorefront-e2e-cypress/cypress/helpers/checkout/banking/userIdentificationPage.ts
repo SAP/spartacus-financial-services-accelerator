@@ -21,6 +21,6 @@ export function selectUserIdentification(identification) {
     .within(() => {
       cy.get('p')
         .contains(identification)
-        .click();
+        .click({ force: true });
     });
 }
