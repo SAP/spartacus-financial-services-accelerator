@@ -2,8 +2,8 @@ import { DatePipe } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
 import { I18nTestingModule } from '@spartacus/core';
-import { FSCartService } from './../../../core/cart/facade/cart.service';
 import { of } from 'rxjs';
+import { FSCartService } from './../../../core/cart/facade/cart.service';
 import { CartPrefillResolver } from './cart-prefill-resolver';
 
 const cartCode = '0000001';
