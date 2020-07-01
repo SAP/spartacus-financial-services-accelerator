@@ -41,7 +41,7 @@ describe('UserPrefilResolver', () => {
   it('should resolve user first name', () => {
     let result;
     userPrefilResolver
-      .getFieldValue(mockFieldPath)
+      .getPrefillValue(mockFieldPath)
       .subscribe(value => {
         result = value;
       })

@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { I18nTestingModule } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
-import { FSCart } from './../../../../occ/occ-models/occ.models';
+import { FSCart } from '../../../../occ/occ-models/occ.models';
 import { ReferredQuoteDialogComponent } from './referred-quote-dialog.component';
 import createSpy = jasmine.createSpy;
 
