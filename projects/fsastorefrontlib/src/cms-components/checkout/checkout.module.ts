@@ -54,7 +54,7 @@ import { OrderConfirmationMessageComponent } from './components/order-confirmati
 import { OrderConfirmationComponent } from './components/order-confirmation/order-confirmation.component';
 import { PersonalDetailsNavigationComponent } from './components/personal-details-navigation/personal-details-navigation.component';
 import { QuoteReviewComponent } from './components/quote-review/quote-review.component';
-import { ReferredQuoteDialogComponent } from './components/refffered-quote/referred-quote-dialog.component';
+import { ReferredQuoteDialogComponent } from './components/referred-quote/referred-quote-dialog.component';
 import { UserIdentificationModule } from './components/user-identification/user-identification.module';
 import { CategoryStepGuard } from './guards/category-step-guard';
 import { CheckoutStepGuard } from './guards/checkout-step-guard';
