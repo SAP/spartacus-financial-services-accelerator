@@ -26,7 +26,7 @@ const product: FSProduct = {
   configurable: false,
 };
 
-let mockEntries: OrderEntry[] = [
+const mockEntries: OrderEntry[] = [
   {
     product: product,
   },
