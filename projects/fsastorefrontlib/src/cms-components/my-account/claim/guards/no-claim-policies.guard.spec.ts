@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { RoutingService } from '@spartacus/core';
-import { PolicyService } from 'projects/fsastorefrontlib/src/core';
+import { PolicyService } from './../../../../core/my-account/facade/policy.service';
 import { of } from 'rxjs';
 import { ClaimService } from './../../../../core/my-account/facade/claim.service';
 import { NoClaimPoliciesGuard } from './no-claim-policies.guard';
