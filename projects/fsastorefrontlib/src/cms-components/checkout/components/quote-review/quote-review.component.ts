@@ -51,14 +51,14 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     return this.config.backend.occ.baseUrl || '';
   }
 
-  navigateBack(previousStep) {
+  navigateBack(previousStep: ActiveCategoryStep) {
     this.routingService.go({
       cxRoute: previousStep.step,
       params: { code: previousStep.activeCategory },
     });
   }
 
-  navigateNext(nextStep, activeCart) {
+  navigateNext(nextStep: ActiveCategoryStep, activeCart: Cart) {
     this.cartCode = activeCart.code;
     const bindingState = (<FSCart>activeCart).insuranceQuote.state.code;
     const quoteWorkflowState = (<FSCart>activeCart).insuranceQuote

@@ -2,13 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Cart, RoutingService } from '@spartacus/core';
-import { Subscription, Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FSOrderEntry } from '../../../../occ/occ-models';
+import { ActiveCategoryStep, FSOrderEntry } from '../../../../occ/occ-models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
-import { ActiveCategoryStep } from '../../../../occ/occ-models';
 
 @Component({
   selector: 'cx-fs-personal-details-navigation',
@@ -33,7 +32,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
   }
 
-  navigateNext(nextStep) {
+  navigateNext(nextStep: ActiveCategoryStep) {
     this.subscription
       .add(
         this.cartService
@@ -78,7 +77,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
       );
   }
 
-  navigateBack(previousStep) {
+  navigateBack(previousStep: ActiveCategoryStep) {
     this.routingService.go({
       cxRoute: previousStep.step,
       params: { code: previousStep.activeCategory },

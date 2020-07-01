@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { ActiveCategoryStep } from '../../../../../occ/occ-models';
 import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
+import { ActiveCategoryStep } from '../../../../../occ/occ-models';
 
 @Component({
   selector: 'cx-fs-legal-checkboxes',
@@ -23,14 +23,14 @@ export class LegalCheckboxesComponent implements OnInit {
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
   }
 
-  navigateBack(previousStep) {
+  navigateBack(previousStep: ActiveCategoryStep) {
     this.routingService.go({
       cxRoute: previousStep.step,
       params: { code: previousStep.activeCategory },
     });
   }
 
-  navigateNext(nextStep) {
+  navigateNext(nextStep: ActiveCategoryStep) {
     this.routingService.go({
       cxRoute: nextStep.step,
       params: { code: nextStep.activeCategory },

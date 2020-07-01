@@ -1,19 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import {
-  RoutesConfig,
-  RoutingConfigService,
   OrderEntry,
   Product,
+  RoutesConfig,
+  RoutingConfigService,
 } from '@spartacus/core';
 import { CheckoutConfig, CurrentProductService } from '@spartacus/storefront';
+import { Observable, of } from 'rxjs';
+import { checkoutConfig } from '../../../cms-components/checkout/config/default-checkout-config';
+import { storefrontRoutesConfig } from '../../../cms-structure/routing/default-routing-config';
 import { FSCheckoutStep } from '../../../occ';
 import { FSCartService } from './../../../core/cart/facade/cart.service';
 import { FSProduct } from './../../../occ/occ-models/occ.models';
-import { checkoutConfig } from '../../../cms-components/checkout/config/default-checkout-config';
-import { storefrontRoutesConfig } from '../../../cms-structure/routing/default-routing-config';
 import { FSCheckoutConfigService } from './checkout-config.service';
-import { Observable, of } from 'rxjs';
 
 const mockCheckoutSteps: Array<FSCheckoutStep> = checkoutConfig.checkout.steps;
 
@@ -131,18 +131,6 @@ describe('FSCheckoutConfigService', () => {
     });
     expect(service.getCurrentStepIndex(activatedRoute)).toBe(3);
   });
-
-  /*  it('should not remove product from cart', () => {
-    service.setBackNextSteps(activatedRoute);
-    service.previousStep
-      .subscribe(previousStep =>
-        expect(previousStep).toEqual({
-          activeCategory: 'insurances_auto',
-          step: 'checkout/c/insurances_auto',
-        })
-      )
-      .unsubscribe();
-  });*/
 
   it('should return current step index if step exists', () => {
     const activeStepIndex = 5;

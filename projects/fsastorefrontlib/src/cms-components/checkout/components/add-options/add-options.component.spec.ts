@@ -1,5 +1,6 @@
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -13,8 +14,8 @@ import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import {
-  FSProduct,
   ActiveCategoryStep,
+  FSProduct,
 } from './../../../../occ/occ-models/occ.models';
 import { AddOptionsComponent } from './add-options.component';
 
@@ -37,15 +38,13 @@ const mockCategoryAndStep: ActiveCategoryStep = {
 };
 
 class MockCartService {
-  isStable() {}
+  isStable() {
+    return of(true);
+  }
 
-  removeEntry(item: any) {}
+  removeEntry() {}
 
-  addOptionalProduct(
-    orderEntryCode: string,
-    qty: number,
-    entryNumber: string
-  ) {}
+  addOptionalProduct() {}
 
   getEntries(): Observable<OrderEntry[]> {
     return of(mockEntries);
@@ -63,7 +62,6 @@ class MockRoutingService {
 }
 
 class MockCheckoutConfigService {
-  previousStep = of({ activeCategory: 'insurances_travel', step: 'category' });
   getNextCheckoutStepUrl(activeRoute: any) {
     return '/';
   }
@@ -166,25 +164,26 @@ describe('AddOptionsComponent', () => {
   });
 
   it('should go back', () => {
-    mockEntries = [
-      {
-        product: product,
-      },
-    ];
     component.ngOnInit();
     component.navigateBack(mockCategoryAndStep);
     expect(routingService.go).toHaveBeenCalled();
   });
 
   it('should navigate next', () => {
-    mockEntries = [
-      {
-        product: product,
-      },
-    ];
     component.ngOnInit();
     component.navigateNext(mockCategoryAndStep);
     expect(routingService.go).toHaveBeenCalled();
+  });
+
+  it('should not render navigation buttons if next and previous steps are not defined', () => {
+    checkoutConfigService.nextStep = undefined;
+    checkoutConfigService.previousStep = undefined;
+    component.ngOnInit();
+
+    const previousButton = el.query(By.css('.action-button'));
+    const nextButton = el.query(By.css('.primary-button'));
+    expect(previousButton).not.toBeTruthy();
+    expect(nextButton).not.toBeTruthy();
   });
 
   it('should set currentCurrency variable to EUR', () => {
