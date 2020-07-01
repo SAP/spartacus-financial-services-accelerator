@@ -152,6 +152,13 @@ export class DefaultFormValidators extends Validators {
     };
   }
 
+  static shouldContainValue(value) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const valid = control.value.indexOf(value) !== -1;
+      return valid ? null : { valueConflict: true };
+    };
+  }
+
   static compareDates(comparisonField: string, operator: string) {
     return (control: AbstractControl): ValidationErrors | null => {
       if (control.parent) {

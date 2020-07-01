@@ -13,7 +13,7 @@ export class CartPrefillResolver implements PrefillResolver {
     protected datePipe: DatePipe
   ) {}
 
-  getFieldValue(fieldPath: string) {
+  getPrefillValue(fieldPath: string) {
     const attributes = fieldPath.split('.');
     let currentValue;
     return this.cartService.getActive().pipe(

@@ -9,7 +9,7 @@ import { PrefillResolver } from './prefill-resolver.interface';
 export class UserPrefillResolver implements PrefillResolver {
   constructor(protected userService: UserService) {}
 
-  getFieldValue(fieldPath: string) {
+  getPrefillValue(fieldPath: string) {
     const attributes = fieldPath.split('.');
     let currentValue;
     return this.userService.get().pipe(
