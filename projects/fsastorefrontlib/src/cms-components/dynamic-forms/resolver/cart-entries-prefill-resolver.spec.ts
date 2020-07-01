@@ -1,26 +1,30 @@
 import { TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
-import { I18nTestingModule } from '@spartacus/core';
-import { FSCartService } from './../../../core/cart/facade/cart.service';
+import { Cart, I18nTestingModule } from '@spartacus/core';
 import { of } from 'rxjs';
+import { FSCartService } from './../../../core/cart/facade/cart.service';
 import { CartEntriesPrefillResolver } from './cart-entries-prefill-resolver';
 
 const cartCode = '0000001';
 const product1 = 'product1';
 const product2 = 'product2';
 
-const mockCart = {
+const mockCart: Cart = {
   code: cartCode,
-  entries: [
+  deliveryOrderGroups: [
     {
-      product: {
-        code: product1,
-      },
-    },
-    {
-      product: {
-        code: product2,
-      },
+      entries: [
+        {
+          product: {
+            code: product1,
+          },
+        },
+        {
+          product: {
+            code: product2,
+          },
+        },
+      ],
     },
   ],
 };
@@ -63,11 +67,15 @@ describe('CartEntriesPrefilResolver', () => {
   it('should check cart without product code', () => {
     spyOn(cartService, 'getActive').and.returnValue(
       of({
-        entries: [
+        deliveryOrderGroups: [
           {
-            product: {
-              name: 'Test Product',
-            },
+            entries: [
+              {
+                product: {
+                  name: 'Test Product',
+                },
+              },
+            ],
           },
         ],
       })
