@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { PrefillResolver } from '@fsa/dynamicforms';
 import { DatePipe } from '@angular/common';
 import { FSCartService } from './../../../core/cart/facade/cart.service';
+import * as moment from 'moment';
+import { FormsSharedService } from '../service/forms-shared.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +12,8 @@ import { FSCartService } from './../../../core/cart/facade/cart.service';
 export class CartPrefillResolver implements PrefillResolver {
   constructor(
     protected cartService: FSCartService,
-    protected datePipe: DatePipe
+    protected datePipe: DatePipe,
+    protected formsSharedService: FormsSharedService
   ) {}
 
   getFieldValue(fieldPath: string) {
@@ -25,7 +28,7 @@ export class CartPrefillResolver implements PrefillResolver {
             break;
           }
         }
-        currentValue = this.convertIfDate(currentValue);
+        currentValue = this.formsSharedService.convertIfDate(currentValue);
         return currentValue;
       })
     );
@@ -38,14 +41,6 @@ export class CartPrefillResolver implements PrefillResolver {
       return objectValue[attributeName][arrayPosition];
     }
     return objectValue[attribute];
-  }
-
-  convertIfDate(value) {
-    const dateRegex = /^\d{1,2}\-\d{1,2}\-\d{4}$/;
-    if (dateRegex.test(value)) {
-      return this.datePipe.transform(value, 'yyyy-MM-dd');
-    }
-    return value;
   }
 
   serializeQuoteDetails(cart): any {
