@@ -20,7 +20,7 @@ export function updatePolicyEffectiveAndStartDate() {
         const policyId = $element.text().trim();
         const payload = this.getPayloadForPolicyUpdate(policyId);
         cy.request(payload);
-        cy.get('a')
+        cy.get('.info-card-links .link')
           .eq(1)
           .contains(' Make a Claim')
           .click();
@@ -57,7 +57,7 @@ export function checkAutoPolicy() {
         cy.get('.label').contains('Premium');
         cy.get('.value').contains('€10.95 ');
       });
-      cy.get('a')
+      cy.get('.info-card-links .link')
         .contains(' Details ')
         //TODO: When cypress fix issue detached from the DOM remove force true
         .click({ force: true });
@@ -73,7 +73,7 @@ export function checkMyQuotesPage() {
 
 export function clickOnPolicyDetails() {
   cy.get('.info-card').within(() => {
-    cy.get('a')
+    cy.get('.info-card-links .link')
       .contains(' Details ')
       .click({ force: true });
   });
