@@ -25,7 +25,7 @@ const mockCart = {
 };
 
 const formData = {
-  content: 'content',
+  content: '{content}',
 };
 
 class MockActivatedRoute {
@@ -117,12 +117,10 @@ describe('PersonalDetailsNavigationComponent', () => {
   });
 
   it('should create', () => {
-    spyOn(JSON, 'parse').and.callThrough();
     expect(component).toBeTruthy();
   });
 
   it('should navigate next', () => {
-    spyOn(JSON, 'parse').and.callThrough();
     component.navigateNext();
     expect(quoteService.underwriteQuote).toHaveBeenCalledWith(mockCart.code);
   });
