@@ -155,10 +155,11 @@ export class QuoteService {
       .pipe(take(1))
       .subscribe(occUserId =>
         this.store.dispatch(
-          new fromAction.UpdateInsuranceObjects({
+          new fromAction.QuoteProcessAction({
             userId: occUserId,
             cartId: cartId,
-            productPriceAttributes: priceAttributes,
+            action: QuoteActionType.UPDATE,
+            body: priceAttributes,
           })
         )
       )

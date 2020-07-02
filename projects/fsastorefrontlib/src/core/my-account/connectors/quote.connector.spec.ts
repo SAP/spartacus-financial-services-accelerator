@@ -52,19 +52,23 @@ describe('QuoteConnector', () => {
     expect(quoteAdapter.updateQuote).toHaveBeenCalledWith(user, cartId, {});
   });
   it('should call adapter for bindQuote', () => {
-    quoteConnector.invokeQuoteAction(user, cartId, QuoteActionType.BIND);
+    quoteConnector.invokeQuoteAction(user, cartId, QuoteActionType.BIND, null);
     expect(quoteAdapter.invokeQuoteAction).toHaveBeenCalledWith(
       user,
       cartId,
-      QuoteActionType.BIND
+      QuoteActionType.BIND,
+      null
     );
   });
-  it('should call adapter for update insured objects', () => {
-    quoteConnector.updateInsuredObjects(user, cartId, {});
-    expect(quoteAdapter.updateInsuredObjects).toHaveBeenCalledWith(
+  it('should call adapter for update personal details', () => {
+    quoteConnector.invokeQuoteAction(user, cartId, QuoteActionType.UPDATE, {
+      attribute: '1',
+    });
+    expect(quoteAdapter.invokeQuoteAction).toHaveBeenCalledWith(
       user,
       cartId,
-      {}
+      QuoteActionType.UPDATE,
+      { attribute: '1' }
     );
   });
 });

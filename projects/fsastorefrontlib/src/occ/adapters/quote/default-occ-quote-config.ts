@@ -7,8 +7,6 @@ export const defaultOccQuoteConfig: FSOccConfig = {
         quotes: 'users/${userId}/insurance-quotes',
         updateQuote: 'users/${userId}/carts/${cartId}/insurance-quotes',
         quoteAction: 'users/${userId}/carts/${cartId}/insurance-quotes/action',
-        quoteUpdate:
-          'users/${userId}/carts/${cartId}/insurance-quotes/personalization',
       },
     },
   },

@@ -37,6 +37,7 @@ class MockRoutingService {
 
 class MockQuoteService {
   underwriteQuote = createSpy();
+  updateQuote = createSpy();
 }
 
 class MockCheckoutConfigService {
@@ -116,10 +117,12 @@ describe('PersonalDetailsNavigationComponent', () => {
   });
 
   it('should create', () => {
+    spyOn(JSON, 'parse').and.callThrough();
     expect(component).toBeTruthy();
   });
 
   it('should navigate next', () => {
+    spyOn(JSON, 'parse').and.callThrough();
     component.navigateNext();
     expect(quoteService.underwriteQuote).toHaveBeenCalledWith(mockCart.code);
   });

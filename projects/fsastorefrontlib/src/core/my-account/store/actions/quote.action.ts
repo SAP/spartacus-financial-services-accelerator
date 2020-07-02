@@ -9,7 +9,6 @@ export const UPDATE_QUOTE_SUCCESS = '[Quote] Update Quote Success';
 export const UPDATE_QUOTE_FAIL = '[Quote] Update Quote Fail';
 
 export const QUOTE_PROCESS_ACTION = '[Quote] Quote Process Action';
-export const UPDATE_INSURANCE_OBJECTS = '[Quote] Update Insurance Objects';
 
 export class LoadQuotes implements Action {
   readonly type = LOAD_QUOTES;
@@ -46,16 +45,10 @@ export class QuoteProcessAction implements Action {
   constructor(public payload: any) {}
 }
 
-export class UpdateInsuranceObjects implements Action {
-  readonly type = UPDATE_INSURANCE_OBJECTS;
-  constructor(public payload: any) {}
-}
-
 export type QuoteAction =
   | LoadQuotes
   | LoadQuotesSuccess
   | LoadQuotesFail
   | UpdateQuote
   | UpdateQuoteSuccess
-  | QuoteProcessAction
-  | UpdateInsuranceObjects;
+  | QuoteProcessAction;

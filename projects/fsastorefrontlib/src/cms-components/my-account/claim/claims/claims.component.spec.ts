@@ -174,6 +174,7 @@ describe('ClaimsComponent', () => {
   });
 
   it('should resume claim and redirect', () => {
+    spyOn(JSON, 'parse').and.callThrough();
     component.resumeClaim(claimNumber);
     expect(routingService.go).toHaveBeenCalled();
   });

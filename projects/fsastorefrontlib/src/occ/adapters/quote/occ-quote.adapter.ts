@@ -1,8 +1,8 @@
 import { QUOTE_NORMALIZER } from '../../../core/my-account/connectors/converters';
 import { InsuranceQuoteList } from './../../occ-models/occ.models';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OccEndpointsService, ConverterService } from '@spartacus/core';
+import { ConverterService, OccEndpointsService } from '@spartacus/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { throwError } from 'rxjs/internal/observable/throwError';
 import { catchError, pluck } from 'rxjs/operators';
@@ -43,7 +43,8 @@ export class OccQuoteAdapter implements QuoteAdapter {
   invokeQuoteAction(
     userId: string,
     cartId: string,
-    quoteAction: string
+    quoteAction: string,
+    body: any
   ): Observable<any> {
     const url = this.occEndpointService.getUrl('quoteAction', {
       userId,
@@ -52,31 +53,12 @@ export class OccQuoteAdapter implements QuoteAdapter {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });
-
     const bindQuoteAction = {
       actionName: quoteAction,
+      body: body,
     };
-
     return this.http
       .post(url, bindQuoteAction, { headers })
-      .pipe(catchError((error: any) => throwError(error.json)));
-  }
-
-  updateInsuredObjects(
-    userId: string,
-    cartId: string,
-    personalDetailsAttributes: any
-  ): Observable<any> {
-    const url = this.occEndpointService.getUrl('quoteUpdate', {
-      userId,
-      cartId,
-    });
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-
-    return this.http
-      .post(url, personalDetailsAttributes, { headers })
       .pipe(catchError((error: any) => throwError(error.json)));
   }
 }

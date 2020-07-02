@@ -23,20 +23,9 @@ export class QuoteConnector {
   invokeQuoteAction(
     userId: string,
     cartId: string,
-    action: string
+    action: string,
+    body: any
   ): Observable<any> {
-    return this.adapter.invokeQuoteAction(userId, cartId, action);
-  }
-
-  updateInsuredObjects(
-    userId: string,
-    cartId: string,
-    productPriceAttributes: any
-  ): Observable<any> {
-    return this.adapter.updateInsuredObjects(
-      userId,
-      cartId,
-      productPriceAttributes
-    );
+    return this.adapter.invokeQuoteAction(userId, cartId, action, body);
   }
 }
