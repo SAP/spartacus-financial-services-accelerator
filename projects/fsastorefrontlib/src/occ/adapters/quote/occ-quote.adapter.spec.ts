@@ -15,7 +15,6 @@ const quoteContent = {};
 const quotesEndpoint = 'quotes';
 const updateQuoteEndpoint = 'updateQuote';
 const quoteActionEndpoint = 'quoteAction';
-const quoteUpdateEndpoint = 'quoteUpdate';
 
 class MockOccEndpointsService {
   getUrl(endpoint: string, _urlParams?: object, _queryParams?: object) {
