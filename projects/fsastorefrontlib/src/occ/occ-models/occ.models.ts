@@ -74,7 +74,6 @@ export interface InsuranceQuote {
   quotePrice?: Occ.Price;
   paymentFrequency?: string;
   quoteWorkflowStatus?: QuoteWorkflowStatus;
-  quoteDetails?: Map<String, String>;
 }
 
 export interface QuoteBindingState {
