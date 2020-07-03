@@ -58,7 +58,7 @@ import { ReferredQuoteDialogComponent } from './components/referred-quote/referr
 import { UserIdentificationModule } from './components/user-identification/user-identification.module';
 import { CategoryStepGuard } from './guards/category-step-guard';
 import { CheckoutStepGuard } from './guards/checkout-step-guard';
-import { AutoPersonalDetailsGuard } from '../dynamic-forms/guards/auto-personal-details.guard';
+import { AutoPersonalDetailsGuard } from '../dynamic-forms/guards/auto-personal-details-guard';
 
 const routes: Routes = [
   {

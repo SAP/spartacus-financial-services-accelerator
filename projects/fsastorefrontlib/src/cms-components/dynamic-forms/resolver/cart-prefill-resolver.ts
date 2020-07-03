@@ -1,20 +1,14 @@
 import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { PrefillResolver } from '@fsa/dynamicforms';
-import { DatePipe } from '@angular/common';
 import { FSCartService } from './../../../core/cart/facade/cart.service';
-import * as moment from 'moment';
-import { FormsSharedService } from '../service/forms-shared.service';
+import { FormsUtils } from '../utils/forms-utils';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartPrefillResolver implements PrefillResolver {
-  constructor(
-    protected cartService: FSCartService,
-    protected datePipe: DatePipe,
-    protected formsSharedService: FormsSharedService
-  ) {}
+  constructor(protected cartService: FSCartService) {}
 
   getFieldValue(fieldPath: string) {
     const attributes = fieldPath.split('.');
@@ -28,7 +22,7 @@ export class CartPrefillResolver implements PrefillResolver {
             break;
           }
         }
-        currentValue = this.formsSharedService.convertIfDate(currentValue);
+        currentValue = FormsUtils.convertIfDate(currentValue);
         return currentValue;
       })
     );

@@ -73,6 +73,7 @@ export interface InsuranceQuote {
   quotePrice?: Occ.Price;
   paymentFrequency?: string;
   quoteWorkflowStatus?: QuoteWorkflowStatus;
+  quoteDetails?: Record<string, string>;
 }
 
 export interface QuoteBindingState {

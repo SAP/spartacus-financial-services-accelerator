@@ -6,7 +6,7 @@ import { ConfigModule, I18nModule } from '@spartacus/core';
 import { CalculationButtonComponent } from './form-components/calculation-button.component';
 import { CartPrefillResolver } from './resolver/cart-prefill-resolver';
 import { AutoPersonalDetailsPrefillResolver } from './resolver/auto-personal-details-prefill-resolver';
-import { FormsSharedService } from './service/forms-shared.service';
+import { FormsUtils } from './utils/forms-utils';
 @NgModule({
   imports: [
     CommonModule,
@@ -34,6 +34,6 @@ import { FormsSharedService } from './service/forms-shared.service';
   declarations: [CalculationButtonComponent],
   entryComponents: [CalculationButtonComponent],
   exports: [CalculationButtonComponent],
-  providers: [FormsSharedService],
+  providers: [FormsUtils],
 })
 export class FSDynamicformsModule {}

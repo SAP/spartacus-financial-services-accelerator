@@ -5,6 +5,7 @@ import { I18nTestingModule } from '@spartacus/core';
 import { of } from 'rxjs';
 import { FSCartService } from './../../../core/cart/facade/cart.service';
 import { CartPrefillResolver } from './cart-prefill-resolver';
+import { FormsUtils } from '../utils/forms-utils';
 
 const cartCode = '0000001';
 const entryNumber = '1';
@@ -52,8 +53,14 @@ const mockCart = {
   },
 };
 
+class MockFormsSharedService {
+  convertIfDate(date) {
+    return date;
+  }
+}
+
 const cartWithDate = {
-  date: '02-02-1992',
+  date: '1992-02-02',
 };
 
 const expectedDate = '1992-02-02';
@@ -68,12 +75,6 @@ class MockCartService {
   }
 }
 
-class MockDatePipe {
-  transform() {
-    return expectedDate;
-  }
-}
-
 const codePath = 'code';
 const datePath = 'date';
 const mockQuoteDetailsPath = 'insuranceQuote.quoteDetails.numberOfTravellers';
@@ -83,21 +84,20 @@ const brokenFieldPath = 'brokenAttribute';
 describe('UserPrefilResolver', () => {
   let cartPrefilResolver: CartPrefillResolver;
   let cartService: MockCartService;
+  let formsSharedService: FormsUtils;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [I18nTestingModule, StoreModule.forRoot({})],
       providers: [
         { provide: FSCartService, useClass: MockCartService },
-        {
-          provide: DatePipe,
-          useClass: MockDatePipe,
-        },
+        { provide: FormsUtils, useClass: MockFormsSharedService },
       ],
     });
 
     cartPrefilResolver = TestBed.inject(CartPrefillResolver);
     cartService = TestBed.inject(FSCartService);
+    formsSharedService = TestBed.inject(FormsUtils);
   });
 
   it('should inject cart resolver', () => {

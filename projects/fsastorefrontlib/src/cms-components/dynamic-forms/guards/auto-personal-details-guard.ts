@@ -9,7 +9,7 @@ import {
 import { map, filter } from 'rxjs/operators';
 import { Observable, combineLatest } from 'rxjs';
 import { FSCartService } from '../../../core/cart/facade/cart.service';
-import { FormsSharedService } from '../service/forms-shared.service';
+import { FormsUtils } from '../utils/forms-utils';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,6 @@ export class AutoPersonalDetailsGuard implements CanActivate {
     protected routingService: RoutingService,
     protected cartService: FSCartService,
     protected userService: UserService,
-    protected formsSharedService: FormsSharedService,
     protected globalMessageService: GlobalMessageService
   ) {}
 
@@ -27,7 +26,6 @@ export class AutoPersonalDetailsGuard implements CanActivate {
     let mainDriverDob;
     let userDob;
     let policyHolderSameAsMainDriver;
-
     return combineLatest([
       this.cartService.getActive(),
       this.userService.get(),
@@ -44,9 +42,8 @@ export class AutoPersonalDetailsGuard implements CanActivate {
         if (policyHolderSameAsMainDriver === 'true') {
           mainDriverDob = this.filterQuoteDetailsEntry(fsCart, 'dateOfBirth');
           userDob = fsUser.dateOfBirth;
-          mainDriverDob = this.formsSharedService.convertIfDate(mainDriverDob);
-          if (true) {
-            //change to mainDriverDob === userDob when figgure out hot to transform frckn dates
+          mainDriverDob = FormsUtils.convertIfDate(mainDriverDob);
+          if (mainDriverDob === userDob) {
             return true;
           } else {
             this.globalMessageService.add(
@@ -56,15 +53,17 @@ export class AutoPersonalDetailsGuard implements CanActivate {
             this.routingService.go({ cxRoute: 'home' });
             return false;
           }
+        } else {
+          return true;
         }
       })
     );
   }
 
-  filterQuoteDetailsEntry(cart: any, entry: string) {
+  protected filterQuoteDetailsEntry(cart: any, entryKey: string) {
     let entryValue;
     cart.insuranceQuote.quoteDetails.entry.forEach(item => {
-      if (item.key == entry) {
+      if (item.key === entryKey) {
         entryValue = item.value;
       }
     });

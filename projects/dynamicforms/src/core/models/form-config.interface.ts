@@ -7,7 +7,7 @@ export interface DynamicFormGroup {
   groupCode?: string;
   fieldConfigs: FieldConfig[];
   cssClass?: string;
-  dependsOn?: DependsOn[];
+  dependsOn?: DependsOn;
 }
 
 export interface FieldConfig {
@@ -25,7 +25,7 @@ export interface FieldConfig {
   hidden?: boolean;
   error?: LocalizedString;
   validations?: ValidatorFunction[];
-  dependsOn?: DependsOn[];
+  dependsOn?: DependsOn;
   prefillValue?: PrefillValue;
 }
 export interface DependsOn {
