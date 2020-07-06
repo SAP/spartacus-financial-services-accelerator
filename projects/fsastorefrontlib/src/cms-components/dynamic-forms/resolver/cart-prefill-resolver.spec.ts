@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
 import { I18nTestingModule } from '@spartacus/core';

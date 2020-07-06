@@ -23,7 +23,6 @@ export class AutoPersonalDetailsPrefillResolver implements PrefillResolver {
       this.userService.get(),
     ]).pipe(
       map(([cart, user]) => {
-        console.log(cart);
         const fsCart: FSCart = cart;
         const policyHolderSameAsMainDriver =
           fsCart.insuranceQuote.quoteDetails.policyHolderSameAsMainDriver;

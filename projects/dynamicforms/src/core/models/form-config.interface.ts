@@ -30,7 +30,7 @@ export interface FieldConfig {
 }
 export interface DependsOn {
   hide?: boolean;
-  dependeciesArray?: ControlDependency[];
+  controls?: ControlDependency[];
 }
 export interface ApiConfig {
   url: string;

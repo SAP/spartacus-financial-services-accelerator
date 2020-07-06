@@ -21,7 +21,7 @@ const testField1: FieldConfig = {
   fieldType: fieldType,
   dependsOn: {
     hide: true,
-    dependeciesArray: [
+    controls: [
       {
         controlName: 'testField2',
         conditions: [
@@ -44,7 +44,7 @@ const testField2: FieldConfig = {
   fieldType: fieldType,
   dependsOn: {
     hide: true,
-    dependeciesArray: [
+    controls: [
       {
         controlName: 'testField3',
         conditions: [

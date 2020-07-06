@@ -22,7 +22,10 @@ export class AutoPersonalDetailsGuard implements CanActivate {
     protected userService: UserService,
     protected globalMessageService: GlobalMessageService
   ) {}
-
+  private readonly policyHolderSameAsMainDriverPath =
+    'insuranceQuote.quoteDetails.policyHolderSameAsMainDriver';
+  private readonly mainDriverDobPath =
+    'insuranceQuote.insuredObjectList.insuredObjects[0].childInsuredObjectList.insuredObjects[0].dateOfBirth';
   canActivate(): Observable<boolean> {
     return combineLatest([
       this.cartService.getActive(),
@@ -31,14 +34,20 @@ export class AutoPersonalDetailsGuard implements CanActivate {
     ]).pipe(
       filter(([cart, user, loaded]) => loaded),
       map(([cart, user]) => {
-        const fsCart = <FSCart>cart;
-        const policyHolderSameAsMainDriver= fsCart.insuranceQuote.quoteDetails.policyHolderSameAsMainDriver;
+        let fsCart: FSCart = FormsUtils.serializeQuoteDetails(cart);
+        let policyHolderSameAsMainDriver = FormsUtils.getValueByPath(
+          this.policyHolderSameAsMainDriverPath,
+          fsCart
+        );
         if (policyHolderSameAsMainDriver === 'true') {
-          const mainDriverDob = fsCart.insuranceQuote.quoteDetails.dateOfBirth;
+          const mainDriverDob = FormsUtils.getValueByPath(
+            this.mainDriverDobPath,
+            fsCart
+          );
           const userDob = (<FSUser>user).dateOfBirth;
           if (FormsUtils.convertIfDate(mainDriverDob) === userDob) {
             return true;
-        } else {
+          } else {
             this.globalMessageService.add(
               { key: 'forms.policyHolderNotSameAsMainDriver' },
               GlobalMessageType.MSG_TYPE_INFO
@@ -46,7 +55,7 @@ export class AutoPersonalDetailsGuard implements CanActivate {
             this.routingService.go({ cxRoute: 'home' });
             return false;
           }
-        } 
+        }
         return true;
       })
     );

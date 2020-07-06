@@ -32,6 +32,6 @@ import { AutoPersonalDetailsPrefillResolver } from './resolver/auto-personal-det
   ],
   declarations: [CalculationButtonComponent],
   entryComponents: [CalculationButtonComponent],
-  exports: [CalculationButtonComponent]
+  exports: [CalculationButtonComponent],
 })
 export class FSDynamicformsModule {}

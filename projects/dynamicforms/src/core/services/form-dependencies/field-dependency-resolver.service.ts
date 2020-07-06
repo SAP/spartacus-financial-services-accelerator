@@ -32,7 +32,7 @@ export class FieldDependencyResolverService {
     dependentControl: AbstractControl,
     formGroup: FormGroup
   ) {
-    controlConfig.dependsOn.dependeciesArray.forEach(condition => {
+    controlConfig.dependsOn.controls.forEach(condition => {
       const masterFormControl = this.formService.getFormControlForCode(
         condition.controlName,
         formGroup
