@@ -79,7 +79,7 @@ describe('OccQuoteAdapter', () => {
   describe('bind quote', () => {
     it('should bind user Quote', async(() => {
       adapter
-        .invokeQuoteAction(userId, cartId, QuoteActionType.BIND)
+        .invokeQuoteAction(userId, cartId, QuoteActionType.BIND, null)
         .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return req.url === quoteActionEndpoint && req.method === 'POST';

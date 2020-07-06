@@ -48,7 +48,12 @@ export class QuoteEffects {
     map((action: fromActions.QuoteProcessAction) => action.payload),
     mergeMap(payload => {
       return this.adapter
-        .invokeQuoteAction(payload.userId, payload.cartId, payload.action)
+        .invokeQuoteAction(
+          payload.userId,
+          payload.cartId,
+          payload.action,
+          payload.body
+        )
         .pipe(
           mergeMap(() => {
             return [

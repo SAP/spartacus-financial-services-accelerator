@@ -128,6 +128,7 @@ export enum StepStatus {
 export enum QuoteActionType {
   BIND = 'BIND',
   UNDERWRITING = 'UNDERWRITING',
+  UPDATE = 'UPDATE',
 }
 
 export interface FSOrderEntry extends OrderEntry {
