@@ -39,7 +39,7 @@ export class FieldDependencyResolverService {
       );
       if (masterFormControl) {
         if (!masterFormControl.value) {
-          if (controlConfig.dependsOn.hide) {
+          if (controlConfig.dependsOn.hide === true) {
             controlConfig.hidden = true;
           }
           this.changeControlEnabled(dependentControl, controlConfig, false);
@@ -54,12 +54,12 @@ export class FieldDependencyResolverService {
           );
 
           if (dependancyControl.valid) {
-            if (controlConfig.dependsOn.hide) {
+            if (controlConfig.dependsOn.hide === true) {
               controlConfig.hidden = false;
             }
             this.changeControlEnabled(dependentControl, controlConfig, true);
           } else {
-            if (controlConfig.dependsOn.hide) {
+            if (controlConfig.dependsOn.hide === true) {
               controlConfig.hidden = true;
             }
             this.changeControlEnabled(dependentControl, controlConfig, false);

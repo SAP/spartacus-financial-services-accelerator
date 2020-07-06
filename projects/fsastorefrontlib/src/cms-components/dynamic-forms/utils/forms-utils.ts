@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as moment from 'moment';
 
 @Injectable()
 export class FormsUtils {
@@ -10,7 +9,6 @@ export class FormsUtils {
         .split('-')
         .reverse()
         .join('-');
-      return value;
     }
     return value;
   }

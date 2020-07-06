@@ -10,6 +10,7 @@ import { map, filter } from 'rxjs/operators';
 import { Observable, combineLatest } from 'rxjs';
 import { FSCartService } from '../../../core/cart/facade/cart.service';
 import { FormsUtils } from '../utils/forms-utils';
+import { FSCart, FSUser } from '../../../../src/occ/occ-models/occ.models';
 
 @Injectable({
   providedIn: 'root',
@@ -23,9 +24,6 @@ export class AutoPersonalDetailsGuard implements CanActivate {
   ) {}
 
   canActivate(): Observable<boolean> {
-    let mainDriverDob;
-    let userDob;
-    let policyHolderSameAsMainDriver;
     return combineLatest([
       this.cartService.getActive(),
       this.userService.get(),
@@ -33,19 +31,14 @@ export class AutoPersonalDetailsGuard implements CanActivate {
     ]).pipe(
       filter(([cart, user, loaded]) => loaded),
       map(([cart, user]) => {
-        const fsCart = <any>cart;
-        const fsUser = <any>user;
-        policyHolderSameAsMainDriver = this.filterQuoteDetailsEntry(
-          fsCart,
-          'policyHolderSameAsMainDriver'
-        );
+        const fsCart = <FSCart>cart;
+        const policyHolderSameAsMainDriver= fsCart.insuranceQuote.quoteDetails.policyHolderSameAsMainDriver;
         if (policyHolderSameAsMainDriver === 'true') {
-          mainDriverDob = this.filterQuoteDetailsEntry(fsCart, 'dateOfBirth');
-          userDob = fsUser.dateOfBirth;
-          mainDriverDob = FormsUtils.convertIfDate(mainDriverDob);
-          if (mainDriverDob === userDob) {
+          const mainDriverDob = fsCart.insuranceQuote.quoteDetails.dateOfBirth;
+          const userDob = (<FSUser>user).dateOfBirth;
+          if (FormsUtils.convertIfDate(mainDriverDob) === userDob) {
             return true;
-          } else {
+        } else {
             this.globalMessageService.add(
               { key: 'forms.policyHolderNotSameAsMainDriver' },
               GlobalMessageType.MSG_TYPE_INFO
@@ -53,20 +46,9 @@ export class AutoPersonalDetailsGuard implements CanActivate {
             this.routingService.go({ cxRoute: 'home' });
             return false;
           }
-        } else {
-          return true;
-        }
+        } 
+        return true;
       })
     );
-  }
-
-  protected filterQuoteDetailsEntry(cart: any, entryKey: string) {
-    let entryValue;
-    cart.insuranceQuote.quoteDetails.entry.forEach(item => {
-      if (item.key === entryKey) {
-        entryValue = item.value;
-      }
-    });
-    return entryValue;
   }
 }

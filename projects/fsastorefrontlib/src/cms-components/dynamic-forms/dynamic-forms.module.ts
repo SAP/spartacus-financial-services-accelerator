@@ -6,7 +6,6 @@ import { ConfigModule, I18nModule } from '@spartacus/core';
 import { CalculationButtonComponent } from './form-components/calculation-button.component';
 import { CartPrefillResolver } from './resolver/cart-prefill-resolver';
 import { AutoPersonalDetailsPrefillResolver } from './resolver/auto-personal-details-prefill-resolver';
-import { FormsUtils } from './utils/forms-utils';
 @NgModule({
   imports: [
     CommonModule,
@@ -33,7 +32,6 @@ import { FormsUtils } from './utils/forms-utils';
   ],
   declarations: [CalculationButtonComponent],
   entryComponents: [CalculationButtonComponent],
-  exports: [CalculationButtonComponent],
-  providers: [FormsUtils],
+  exports: [CalculationButtonComponent]
 })
 export class FSDynamicformsModule {}
