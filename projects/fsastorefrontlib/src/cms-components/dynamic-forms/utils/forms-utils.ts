@@ -35,7 +35,7 @@ export class FormsUtils {
   }
 
   static serializeQuoteDetails(cart): any {
-    let serializedFsCart: FSCart = cart;
+    const serializedFsCart: FSCart = cart;
     if (cart && cart.insuranceQuote && cart.insuranceQuote) {
       const insuranceQuote = cart.insuranceQuote;
       if (insuranceQuote.quoteDetails && insuranceQuote.quoteDetails.entry) {

@@ -8,7 +8,6 @@ import {
 import { AutoPersonalDetailsGuard } from './auto-personal-details-guard';
 import { FSUser } from '../../../occ/occ-models/occ.models';
 import { of } from 'rxjs';
-import { FormsUtils } from '../utils/forms-utils';
 import { FSCartService } from '../../../core/cart/facade/cart.service';
 import createSpy = jasmine.createSpy;
 
@@ -30,11 +29,6 @@ class MockUserService {
     return of(mockUser);
   }
 }
-class MockFormsSharedService {
-  convertIfDate(date) {
-    return date;
-  }
-}
 class MockGlobalMessageService {
   add(arg) {}
 }
@@ -44,7 +38,6 @@ describe('AutoPersonalDetailsGuard', () => {
   let routingService: RoutingService;
   let cartService: FSCartService;
   let userService: UserService;
-  let formsSharedService: FormsUtils;
   let globalMessageService: GlobalMessageService;
 
   beforeEach(() => {
@@ -54,7 +47,6 @@ describe('AutoPersonalDetailsGuard', () => {
         { provide: RoutingService, useClass: MockRoutingService },
         { provide: FSCartService, useClass: MockCartService },
         { provide: UserService, useClass: MockUserService },
-        { provide: FormsUtils, useClass: MockFormsSharedService },
         { provide: GlobalMessageService, useClass: MockGlobalMessageService },
       ],
     }).compileComponents();
@@ -63,7 +55,6 @@ describe('AutoPersonalDetailsGuard', () => {
     routingService = TestBed.inject(RoutingService);
     cartService = TestBed.inject(FSCartService);
     userService = TestBed.inject(UserService);
-    formsSharedService = TestBed.inject(FormsUtils);
     globalMessageService = TestBed.inject(GlobalMessageService);
     spyOn(cartService, 'isStable').and.returnValues(of(true));
     spyOn(userService, 'get').and.returnValues(of(mockUser));
@@ -73,12 +64,19 @@ describe('AutoPersonalDetailsGuard', () => {
     const mockCart: any = {
       insuranceQuote: {
         quoteDetails: {
-          entry: [
+          policyHolderSameAsMainDriver: 'true',
+        },
+        insuredObjectList: {
+          insuredObjects: [
             {
-              key: 'policyHolderSameAsMainDriver',
-              value: 'true',
+              childInsuredObjectList: {
+                insuredObjects: [
+                  {
+                    dateOfBirth: '29-01-1990',
+                  },
+                ],
+              },
             },
-            { key: 'dateOfBirth', value: '29-01-1990' },
           ],
         },
       },
@@ -99,12 +97,19 @@ describe('AutoPersonalDetailsGuard', () => {
     const mockCart: any = {
       insuranceQuote: {
         quoteDetails: {
-          entry: [
+          policyHolderSameAsMainDriver: 'false',
+        },
+        insuredObjectList: {
+          insuredObjects: [
             {
-              key: 'policyHolderSameAsMainDriver',
-              value: 'false',
+              childInsuredObjectList: {
+                insuredObjects: [
+                  {
+                    dateOfBirth: '29-01-1990',
+                  },
+                ],
+              },
             },
-            { key: 'dateOfBirth', value: '29-01-1990' },
           ],
         },
       },
@@ -125,12 +130,19 @@ describe('AutoPersonalDetailsGuard', () => {
     const mockCart: any = {
       insuranceQuote: {
         quoteDetails: {
-          entry: [
+          policyHolderSameAsMainDriver: 'true',
+        },
+        insuredObjectList: {
+          insuredObjects: [
             {
-              key: 'policyHolderSameAsMainDriver',
-              value: 'true',
+              childInsuredObjectList: {
+                insuredObjects: [
+                  {
+                    dateOfBirth: '1991-12-29',
+                  },
+                ],
+              },
             },
-            { key: 'dateOfBirth', value: '1991-12-29' },
           ],
         },
       },

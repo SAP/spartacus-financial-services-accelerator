@@ -34,8 +34,8 @@ export class AutoPersonalDetailsGuard implements CanActivate {
     ]).pipe(
       filter(([cart, user, loaded]) => loaded),
       map(([cart, user]) => {
-        let fsCart: FSCart = FormsUtils.serializeQuoteDetails(cart);
-        let policyHolderSameAsMainDriver = FormsUtils.getValueByPath(
+        const fsCart: FSCart = FormsUtils.serializeQuoteDetails(cart);
+        const policyHolderSameAsMainDriver = FormsUtils.getValueByPath(
           this.policyHolderSameAsMainDriverPath,
           fsCart
         );

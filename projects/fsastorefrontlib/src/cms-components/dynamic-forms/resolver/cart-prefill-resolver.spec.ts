@@ -52,12 +52,6 @@ const mockCart = {
   },
 };
 
-class MockFormsSharedService {
-  convertIfDate(date) {
-    return date;
-  }
-}
-
 const cartWithDate = {
   date: '1992-02-02',
 };
@@ -83,20 +77,15 @@ const brokenFieldPath = 'brokenAttribute';
 describe('UserPrefilResolver', () => {
   let cartPrefilResolver: CartPrefillResolver;
   let cartService: MockCartService;
-  let formsSharedService: FormsUtils;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [I18nTestingModule, StoreModule.forRoot({})],
-      providers: [
-        { provide: FSCartService, useClass: MockCartService },
-        { provide: FormsUtils, useClass: MockFormsSharedService },
-      ],
+      providers: [{ provide: FSCartService, useClass: MockCartService }],
     });
 
     cartPrefilResolver = TestBed.inject(CartPrefillResolver);
     cartService = TestBed.inject(FSCartService);
-    formsSharedService = TestBed.inject(FormsUtils);
   });
 
   it('should inject cart resolver', () => {
