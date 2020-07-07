@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { FormDataService } from '@fsa/dynamicforms';
+import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Cart, I18nTestingModule, RoutingService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
@@ -24,8 +24,11 @@ const mockCart = {
   ],
 };
 
-const formData = {
-  content: '{content}',
+const formData: YFormData = {
+  id: 'test-formData',
+  type: 'DATA',
+  content:
+    '{"testContent":{"tripDestination":"Europe","tripStartDate":"2022-02-02"}}',
 };
 
 class MockActivatedRoute {
