@@ -1,4 +1,4 @@
-import { map, combineAll } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { PrefillResolver } from '@fsa/dynamicforms';
 import { FSCartService } from './../../../core/cart/facade/cart.service';
