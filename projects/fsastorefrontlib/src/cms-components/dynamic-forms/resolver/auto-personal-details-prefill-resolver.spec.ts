@@ -77,7 +77,6 @@ describe('AutoPersonalDetailsPrefillResolver', () => {
     userPrefilResolver
       .getFieldValue('dateOfBirth')
       .subscribe(value => {
-        console.log(value);
         result = value;
       })
       .unsubscribe();
