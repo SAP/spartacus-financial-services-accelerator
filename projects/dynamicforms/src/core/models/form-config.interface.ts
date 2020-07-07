@@ -39,23 +39,28 @@ export interface ApiConfig {
 
 export interface PrefillValue {
   targetObject: string;
-  targetValue: string;
+  targetValue?: string;
 }
+
 export interface ControlDependency {
   controlName?: string;
   conditions?: ValidatorFunction[];
 }
+
 export interface LocalizedString {
   default?: string;
   [lang: string]: string;
 }
+
 export interface ValidatorFunction {
   name: string;
   arguments?: ValidatorArgument[];
 }
+
 export interface ValidatorArgument {
   value: string;
 }
+
 export interface FieldOption {
   name: string;
   label: LocalizedString;

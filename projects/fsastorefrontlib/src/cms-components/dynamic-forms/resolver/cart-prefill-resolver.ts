@@ -10,7 +10,7 @@ import { FormsUtils } from '../utils/forms-utils';
 export class CartPrefillResolver implements PrefillResolver {
   constructor(protected cartService: FSCartService) {}
 
-  getFieldValue(fieldPath: string) {
+  getPrefillValue(fieldPath: string) {
     return this.cartService.getActive().pipe(
       map(cart => {
         const serializedCart = FormsUtils.serializeQuoteDetails(cart);

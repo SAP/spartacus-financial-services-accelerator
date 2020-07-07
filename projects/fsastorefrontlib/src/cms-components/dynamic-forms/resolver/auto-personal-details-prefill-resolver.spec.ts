@@ -56,7 +56,7 @@ describe('AutoPersonalDetailsPrefillResolver', () => {
     };
     spyOn(cartService, 'getActive').and.returnValues(of(mockCart));
     userPrefilResolver
-      .getFieldValue('dateOfBirth')
+      .getPrefillValue('dateOfBirth')
       .subscribe(value => {
         result = value;
       })
@@ -75,7 +75,7 @@ describe('AutoPersonalDetailsPrefillResolver', () => {
     };
     spyOn(cartService, 'getActive').and.returnValues(of(mockCart));
     userPrefilResolver
-      .getFieldValue('dateOfBirth')
+      .getPrefillValue('dateOfBirth')
       .subscribe(value => {
         result = value;
       })

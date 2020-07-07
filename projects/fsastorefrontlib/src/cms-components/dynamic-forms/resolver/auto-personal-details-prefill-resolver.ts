@@ -16,7 +16,7 @@ export class AutoPersonalDetailsPrefillResolver implements PrefillResolver {
     protected userService: UserService
   ) {}
 
-  getFieldValue(fieldPath: string) {
+  getPrefillValue(fieldPath: string) {
     let currentValue;
     return combineLatest([
       this.cartService.getActive(),

@@ -30,6 +30,7 @@ export interface FSProduct extends Product {
   defaultCategory?: Category;
   bundleTemplates?: BundleTemplate[];
   configurable?: boolean;
+  dynamicAttributes?: Map<string, any>;
 }
 
 export interface YFormConfiguratorSettings {
@@ -132,6 +133,7 @@ export enum StepStatus {
 export enum QuoteActionType {
   BIND = 'BIND',
   UNDERWRITING = 'UNDERWRITING',
+  UPDATE = 'UPDATE',
 }
 
 export interface FSOrderEntry extends OrderEntry {

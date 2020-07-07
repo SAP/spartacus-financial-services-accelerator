@@ -7,6 +7,7 @@ import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
 import { PersonalDetailsNavigationComponent } from './personal-details-navigation.component';
+import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import createSpy = jasmine.createSpy;
 
 const mockCart = {
@@ -24,7 +25,7 @@ const mockCart = {
 };
 
 const formData = {
-  content: 'content',
+  content: '{content}',
 };
 
 class MockActivatedRoute {
@@ -36,6 +37,7 @@ class MockRoutingService {
 
 class MockQuoteService {
   underwriteQuote = createSpy();
+  updateQuote = createSpy();
 }
 
 class MockCheckoutConfigService {
@@ -55,6 +57,12 @@ class MockFormService {
 
   getSubmittedForm() {
     return of(formData);
+  }
+}
+
+class MockPricingService {
+  buildPricingData() {
+    return { attribute: 'test' };
   }
 }
 
@@ -91,6 +99,10 @@ describe('PersonalDetailsNavigationComponent', () => {
         {
           provide: QuoteService,
           useClass: MockQuoteService,
+        },
+        {
+          provide: PricingService,
+          useClass: MockPricingService,
         },
       ],
     }).compileComponents();

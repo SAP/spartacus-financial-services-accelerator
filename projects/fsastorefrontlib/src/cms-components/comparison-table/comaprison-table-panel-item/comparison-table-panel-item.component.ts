@@ -75,14 +75,25 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
                 product.price.oneTimeChargeEntries &&
                 product.price.oneTimeChargeEntries.length > 0
               ) {
-                product.price.oneTimeChargeEntries.forEach(
-                  oneTimeChargeEntry => {
-                    if (oneTimeChargeEntry.billingTime.code === 'paynow') {
-                      this.productPrice =
-                        oneTimeChargeEntry.price.formattedValue;
+                if (
+                  product.dynamicAttributes &&
+                  Object.keys(product.dynamicAttributes).length > 0
+                ) {
+                  product.dynamicAttributes.forEach(dynamicAttribute => {
+                    if (dynamicAttribute.key === 'monthlyAnnuity') {
+                      this.productPrice = dynamicAttribute.value.formattedValue;
                     }
-                  }
-                );
+                  });
+                } else {
+                  product.price.oneTimeChargeEntries.forEach(
+                    oneTimeChargeEntry => {
+                      if (oneTimeChargeEntry.billingTime.code === 'paynow') {
+                        this.productPrice =
+                          oneTimeChargeEntry.price.formattedValue;
+                      }
+                    }
+                  );
+                }
                 this.panelItemEntries = this.billingTimes.map(billingTime => {
                   return product.price.oneTimeChargeEntries.find(
                     entry => entry.billingTime.code === billingTime.code

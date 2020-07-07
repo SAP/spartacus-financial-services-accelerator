@@ -31,6 +31,7 @@ export abstract class QuoteAdapter {
   abstract invokeQuoteAction(
     userId: string,
     cartId: string,
-    quoteAction: string
+    quoteAction: string,
+    body: any
   ): Observable<any>;
 }

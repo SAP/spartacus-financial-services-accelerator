@@ -74,8 +74,8 @@ const mockQuoteDetailsPath = 'insuranceQuote.quoteDetails.numberOfTravellers';
 const mockArrayPath = 'entries[0].entryNumber';
 const brokenFieldPath = 'brokenAttribute';
 
-describe('UserPrefilResolver', () => {
-  let cartPrefilResolver: CartPrefillResolver;
+describe('CartPrefilResolver', () => {
+  let cartPrefillResolver: CartPrefillResolver;
   let cartService: MockCartService;
 
   beforeEach(() => {
@@ -84,19 +84,19 @@ describe('UserPrefilResolver', () => {
       providers: [{ provide: FSCartService, useClass: MockCartService }],
     });
 
-    cartPrefilResolver = TestBed.inject(CartPrefillResolver);
+    cartPrefillResolver = TestBed.inject(CartPrefillResolver);
     cartService = TestBed.inject(FSCartService);
   });
 
   it('should inject cart resolver', () => {
-    expect(cartPrefilResolver).toBeTruthy();
+    expect(cartPrefillResolver).toBeTruthy();
   });
 
   it('should resolve cart code', () => {
     spyOn(cartService, 'getActive').and.returnValue(of(cartWithoutQuote));
     let result;
-    cartPrefilResolver
-      .getFieldValue(codePath)
+    cartPrefillResolver
+      .getPrefillValue(codePath)
       .subscribe(value => {
         result = value;
       })
@@ -107,8 +107,8 @@ describe('UserPrefilResolver', () => {
   it('should convert date attribute', () => {
     spyOn(cartService, 'getActive').and.returnValue(of(cartWithDate));
     let result;
-    cartPrefilResolver
-      .getFieldValue(datePath)
+    cartPrefillResolver
+      .getPrefillValue(datePath)
       .subscribe(value => {
         result = value;
       })
@@ -118,8 +118,8 @@ describe('UserPrefilResolver', () => {
 
   it('should break if path does not exist', () => {
     let result;
-    cartPrefilResolver
-      .getFieldValue(brokenFieldPath)
+    cartPrefillResolver
+      .getPrefillValue(brokenFieldPath)
       .subscribe(value => {
         result = value;
       })
@@ -129,8 +129,8 @@ describe('UserPrefilResolver', () => {
 
   it('should resolve nested quote details path', () => {
     let result;
-    cartPrefilResolver
-      .getFieldValue(mockQuoteDetailsPath)
+    cartPrefillResolver
+      .getPrefillValue(mockQuoteDetailsPath)
       .subscribe(value => {
         result = value;
       })
@@ -140,8 +140,8 @@ describe('UserPrefilResolver', () => {
 
   it('should resolve array path for entries', () => {
     let result;
-    cartPrefilResolver
-      .getFieldValue(mockArrayPath)
+    cartPrefillResolver
+      .getPrefillValue(mockArrayPath)
       .subscribe(value => {
         result = value;
       })

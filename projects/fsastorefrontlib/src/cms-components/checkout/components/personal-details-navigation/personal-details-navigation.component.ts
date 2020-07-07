@@ -1,3 +1,4 @@
+import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
@@ -20,11 +21,13 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected routingService: RoutingService,
     protected checkoutConfigService: FSCheckoutConfigService,
-    protected quoteService: QuoteService
+    protected quoteService: QuoteService,
+    protected pricingService: PricingService
   ) {}
 
   subscription = new Subscription();
   checkoutStepUrlNext: string;
+  cartId: string;
 
   ngOnInit() {
     this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
@@ -45,6 +48,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
                 cart.entries &&
                 cart.entries.length > 0
               ) {
+                this.cartId = cart.code;
                 const entry: FSOrderEntry = cart.entries[0];
                 const yFormData: YFormData = {
                   refId: cart.code + '_' + cart.entries[0].entryNumber,
@@ -52,7 +56,6 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
                 if (entry.formData && entry.formData.length > 0) {
                   yFormData.id = entry.formData[0].id;
                 }
-
                 this.quoteService.underwriteQuote(cart.code);
                 this.formService.submit(yFormData);
               }
@@ -66,6 +69,12 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
           .pipe(
             map(formData => {
               if (formData && formData.content) {
+                this.quoteService.updateQuote(
+                  this.cartId,
+                  this.pricingService.buildPricingData(
+                    JSON.parse(formData.content)
+                  )
+                );
                 this.routingService.go(this.checkoutStepUrlNext);
               }
             })
