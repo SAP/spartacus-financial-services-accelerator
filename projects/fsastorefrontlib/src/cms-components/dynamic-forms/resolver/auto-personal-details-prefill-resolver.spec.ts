@@ -50,7 +50,7 @@ describe('AutoPersonalDetailsPrefillResolver', () => {
     const mockCart: any = {
       insuranceQuote: {
         quoteDetails: {
-          policyHolderSameAsMainDriver: 'true',
+          customerId: 'true',
         },
       },
     };
@@ -69,7 +69,7 @@ describe('AutoPersonalDetailsPrefillResolver', () => {
     const mockCart: any = {
       insuranceQuote: {
         quoteDetails: {
-          policyHolderSameAsMainDriver: 'false',
+          customerId: 'false',
         },
       },
     };

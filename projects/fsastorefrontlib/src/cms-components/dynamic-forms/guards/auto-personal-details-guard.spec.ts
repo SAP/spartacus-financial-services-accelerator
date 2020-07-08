@@ -64,7 +64,7 @@ describe('AutoPersonalDetailsGuard', () => {
     const mockCart: any = {
       insuranceQuote: {
         quoteDetails: {
-          policyHolderSameAsMainDriver: 'true',
+          customerId: 'true',
         },
         insuredObjectList: {
           insuredObjects: [
@@ -97,7 +97,7 @@ describe('AutoPersonalDetailsGuard', () => {
     const mockCart: any = {
       insuranceQuote: {
         quoteDetails: {
-          policyHolderSameAsMainDriver: 'false',
+          customerId: 'false',
         },
         insuredObjectList: {
           insuredObjects: [
@@ -130,7 +130,7 @@ describe('AutoPersonalDetailsGuard', () => {
     const mockCart: any = {
       insuranceQuote: {
         quoteDetails: {
-          policyHolderSameAsMainDriver: 'true',
+          customerId: 'true',
         },
         insuredObjectList: {
           insuredObjects: [
