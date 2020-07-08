@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import {
-  RoutingService,
-  UserService,
   GlobalMessageService,
   GlobalMessageType,
+  RoutingService,
+  UserService,
 } from '@spartacus/core';
-import { map, filter } from 'rxjs/operators';
-import { Observable, combineLatest } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { combineLatest, Observable } from 'rxjs';
 import { FSCartService } from '../../../core/cart/facade/cart.service';
 import { FormsUtils } from '../utils/forms-utils';
 import { FSCart, FSUser } from '../../../../src/occ/occ-models/occ.models';
@@ -23,7 +23,7 @@ export class AutoPersonalDetailsGuard implements CanActivate {
     protected globalMessageService: GlobalMessageService
   ) {}
   private readonly policyHolderSameAsMainDriverPath =
-    'insuranceQuote.quoteDetails.policyHolderSameAsMainDriver';
+    'insuranceQuote.quoteDetails.customerId';
   private readonly mainDriverDobPath =
     'insuranceQuote.insuredObjectList.insuredObjects[0].childInsuredObjectList.insuredObjects[0].dateOfBirth';
   canActivate(): Observable<boolean> {
@@ -39,7 +39,10 @@ export class AutoPersonalDetailsGuard implements CanActivate {
           this.policyHolderSameAsMainDriverPath,
           fsCart
         );
-        if (policyHolderSameAsMainDriver === 'true') {
+        if (
+          policyHolderSameAsMainDriver !== 'false' &&
+          policyHolderSameAsMainDriver !== undefined
+        ) {
           const mainDriverDob = FormsUtils.getValueByPath(
             this.mainDriverDobPath,
             fsCart

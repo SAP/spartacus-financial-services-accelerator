@@ -25,8 +25,11 @@ export class AutoPersonalDetailsPrefillResolver implements PrefillResolver {
       map(([cart, user]) => {
         const fsCart: FSCart = cart;
         const policyHolderSameAsMainDriver =
-          fsCart.insuranceQuote.quoteDetails.policyHolderSameAsMainDriver;
-        if (policyHolderSameAsMainDriver === 'true') {
+          fsCart.insuranceQuote.quoteDetails.customerId;
+        if (
+          policyHolderSameAsMainDriver !== 'false' &&
+          policyHolderSameAsMainDriver !== undefined
+        ) {
           currentValue = user;
           currentValue = currentValue[fieldPath];
           currentValue = FormsUtils.convertIfDate(currentValue);
