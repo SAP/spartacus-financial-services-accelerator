@@ -22,5 +22,14 @@ export const quote = {
       expired: 'Abgelaufen',
       expires: 'Läuft ab',
     },
+    quoteWorkflowStatus: {
+      title: '[DE] Quote wokrflow status',
+      REFERRED: '[DE] Referred',
+      APPROVED: '[DE] Approved',
+      REJECTED: '[DE] Rejected',
+      PENDING: '[DE] Pending',
+      ERROR: 'Error',
+      na: 'N/A',
+    },
   },
 };
