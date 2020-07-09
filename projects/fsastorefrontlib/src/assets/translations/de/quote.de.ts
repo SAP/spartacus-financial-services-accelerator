@@ -23,7 +23,7 @@ export const quote = {
       expires: 'Läuft ab',
     },
     quoteWorkflowStatus: {
-      title: '[DE] Quote wokrflow status',
+      title: 'Workflow-Status des Angebots',
       REFERRED: 'Weitergeleitet',
       APPROVED: 'Genehmigt',
       REJECTED: 'Abgelehnt',
