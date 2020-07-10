@@ -43,6 +43,7 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
   ) {}
 
   product$: Observable<FSProduct>;
+  isLoading = true;
   panelItemEntries: OneTimeChargeEntry[] = [];
   private subscription = new Subscription();
 
@@ -59,6 +60,18 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
       this.productCode,
       this.pricingData
     );
+
+    this.subscription.add(
+      this.productService
+        .isLoading(this.productCode)
+        .pipe(
+          map(isLoading => {
+            this.isLoading = isLoading;
+          })
+        )
+        .subscribe()
+    );
+
     this.subscription.add(
       this.product$
         .pipe(
