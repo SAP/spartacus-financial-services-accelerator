@@ -18,15 +18,8 @@ export const quote = {
     confirmInformation: 'Confirm Information',
     bindingConfirmation:
       'By clicking Continue I certify the information in this application is true and correct.',
-    quoteStatus: {
-      title: 'Quote status',
-      ready: 'Ready for Purchase',
-      unfinished: 'Unfinished',
-      expired: 'Expired',
-      expires: 'Expires',
-    },
     quoteWorkflowStatus: {
-      title: 'Quote wokrflow status',
+      title: 'Quote status',
       REFERRED: 'Referred',
       APPROVED: 'Approved',
       REJECTED: 'Rejected',

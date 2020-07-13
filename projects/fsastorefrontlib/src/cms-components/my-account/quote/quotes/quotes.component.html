@@ -17,20 +17,6 @@
                   >:
                   <span class="value">{{ quote.quoteId }}</span>
                 </div>
-                <div class="info-card-data">
-                  <span class="label">{{
-                    'quote.quoteStatus.title' | cxTranslate
-                  }}</span
-                  >:
-                  <ng-container *ngIf="!quote.isExpired; else expired">
-                    <span *ngIf="quote.state.code === 'BIND'" class="value">
-                      {{ 'quote.quoteStatus.ready' | cxTranslate }}
-                    </span>
-                    <span *ngIf="quote.state.code === 'UNBIND'" class="value">
-                      {{ 'quote.quoteStatus.unfinished' | cxTranslate }}
-                    </span>
-                  </ng-container>
-                </div>
                 <ng-container *ngIf="quote.quoteWorkflowStatus">
                   <div class="info-card-data">
                     <span class="label">{{
@@ -98,11 +84,6 @@
 </ng-container>
 <ng-template #noQuotes>
   <h3>{{ 'quote.youHaveNoQuotes' | cxTranslate }}!</h3>
-</ng-template>
-<ng-template #expired>
-  <span class="value">
-    {{ 'quote.quoteStatus.expired' | cxTranslate }}
-  </span>
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
