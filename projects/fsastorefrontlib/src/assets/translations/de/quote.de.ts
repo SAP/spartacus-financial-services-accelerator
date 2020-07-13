@@ -15,15 +15,8 @@ export const quote = {
     noActiveQuotes: 'Sie haben zur Zeit keine aktiven Angebote',
     getQuoteBySelecting:
       'Starten sie Ihr Angebot, indem Sie eine der obigen Versicherungsarten auswählen',
-    quoteStatus: {
-      title: 'Antragsstatus',
-      ready: 'Bereit zum Abschließen',
-      unfinished: 'Unvollständig',
-      expired: 'Abgelaufen',
-      expires: 'Läuft ab',
-    },
     quoteWorkflowStatus: {
-      title: 'Workflow-Status des Angebots',
+      title: 'Antragsstatus',
       REFERRED: 'Weitergeleitet',
       APPROVED: 'Genehmigt',
       REJECTED: 'Abgelehnt',
