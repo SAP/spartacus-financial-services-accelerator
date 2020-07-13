@@ -120,6 +120,10 @@ class MockFSProductService {
   getCalculatedProductData(): Observable<Product> {
     return of();
   }
+
+  isLoading(): Observable<boolean> {
+    return of(true);
+  }
 }
 
 describe('ComparisonTablePanelItemComponent', () => {

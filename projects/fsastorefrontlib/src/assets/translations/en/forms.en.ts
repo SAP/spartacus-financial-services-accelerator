@@ -59,5 +59,7 @@ export const forms = {
       vehicleAnnualMileage: 'Vehicle Annual Mileage',
     },
     definitionLoadError: 'Error occurred. Form could not be loaded.',
+    policyHolderNotSameAsMainDriver:
+      'Please return to the first step of checkout: “Choose a cover” and check your Date of birth. Policy holder and main driver should have the same Date of birth.',
   },
 };

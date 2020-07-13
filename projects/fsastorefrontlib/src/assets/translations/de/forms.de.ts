@@ -54,5 +54,7 @@ export const forms = {
     auto: {
       vehicleAnnualMileage: 'Jahreskilometerleistung des Fahrzeugs',
     },
+    policyHolderNotSameAsMainDriver:
+      '[DE] Please return to the first step of checkout: “Choose a cover” and check your Date of birth. Policy holder and main driver should have the same Date of birth.',
   },
 };

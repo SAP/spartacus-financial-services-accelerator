@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { FormDataService } from '@fsa/dynamicforms';
+import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Cart, I18nTestingModule, RoutingService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
@@ -9,6 +9,7 @@ import { QuoteService } from './../../../../core/my-account/facade/quote.service
 import { PersonalDetailsNavigationComponent } from './personal-details-navigation.component';
 import { ActiveCategoryStep } from '../../../../occ/occ-models';
 
+import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import createSpy = jasmine.createSpy;
 
 const mockCategoryAndStep: ActiveCategoryStep = {
@@ -30,8 +31,11 @@ const mockCart = {
   ],
 };
 
-const formData = {
-  content: 'content',
+const formData: YFormData = {
+  id: 'test-formData',
+  type: 'DATA',
+  content:
+    '{"testContent":{"tripDestination":"Europe","tripStartDate":"2022-02-02"}}',
 };
 
 class MockActivatedRoute {
@@ -43,6 +47,7 @@ class MockRoutingService {
 
 class MockQuoteService {
   underwriteQuote = createSpy();
+  updateQuote = createSpy();
 }
 
 class MockCheckoutConfigService {
@@ -62,6 +67,12 @@ class MockFormService {
 
   getSubmittedForm() {
     return of(formData);
+  }
+}
+
+class MockPricingService {
+  buildPricingData() {
+    return { attribute: 'test' };
   }
 }
 
@@ -99,6 +110,10 @@ describe('PersonalDetailsNavigationComponent', () => {
         {
           provide: QuoteService,
           useClass: MockQuoteService,
+        },
+        {
+          provide: PricingService,
+          useClass: MockPricingService,
         },
       ],
     }).compileComponents();

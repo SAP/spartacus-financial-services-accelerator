@@ -23,8 +23,9 @@ export class QuoteConnector {
   invokeQuoteAction(
     userId: string,
     cartId: string,
-    action: string
+    action: string,
+    body: any
   ): Observable<any> {
-    return this.adapter.invokeQuoteAction(userId, cartId, action);
+    return this.adapter.invokeQuoteAction(userId, cartId, action, body);
   }
 }

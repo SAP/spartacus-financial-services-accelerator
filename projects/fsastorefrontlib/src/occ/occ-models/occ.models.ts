@@ -31,6 +31,7 @@ export interface FSProduct extends Product {
   defaultCategory?: Category;
   bundleTemplates?: BundleTemplate[];
   configurable?: boolean;
+  dynamicAttributes?: Map<string, any>;
 }
 
 export interface YFormConfiguratorSettings {
@@ -74,8 +75,13 @@ export interface InsuranceQuote {
   quotePrice?: Occ.Price;
   paymentFrequency?: string;
   quoteWorkflowStatus?: QuoteWorkflowStatus;
+  quoteDetails?: Record<string, string>;
+  insuredObjectList?: InsuredObjectList;
 }
 
+export interface InsuredObjectList {
+  insuredObjects?: any[];
+}
 export interface QuoteBindingState {
   code?: string;
 }
@@ -128,6 +134,7 @@ export enum StepStatus {
 export enum QuoteActionType {
   BIND = 'BIND',
   UNDERWRITING = 'UNDERWRITING',
+  UPDATE = 'UPDATE',
 }
 
 export interface FSOrderEntry extends OrderEntry {

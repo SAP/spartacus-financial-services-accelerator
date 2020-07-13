@@ -22,5 +22,14 @@ export const quote = {
       expired: 'Abgelaufen',
       expires: 'Läuft ab',
     },
+    quoteWorkflowStatus: {
+      title: 'Workflow-Status des Angebots',
+      REFERRED: 'Weitergeleitet',
+      APPROVED: 'Genehmigt',
+      REJECTED: 'Abgelehnt',
+      PENDING: 'Ausstehend',
+      ERROR: 'Fehler',
+      na: 'N/A',
+    },
   },
 };

@@ -1,10 +1,10 @@
-import { DatePipe } from '@angular/common';
 import { TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
 import { I18nTestingModule } from '@spartacus/core';
 import { of } from 'rxjs';
 import { FSCartService } from './../../../core/cart/facade/cart.service';
 import { CartPrefillResolver } from './cart-prefill-resolver';
+import { FormsUtils } from '../utils/forms-utils';
 
 const cartCode = '0000001';
 const entryNumber = '1';
@@ -53,7 +53,7 @@ const mockCart = {
 };
 
 const cartWithDate = {
-  date: '02-02-1992',
+  date: '1992-02-02',
 };
 
 const expectedDate = '1992-02-02';
@@ -65,12 +65,6 @@ const cartWithoutQuote = {
 class MockCartService {
   getActive(): any {
     return of(mockCart);
-  }
-}
-
-class MockDatePipe {
-  transform() {
-    return expectedDate;
   }
 }
 
@@ -87,13 +81,7 @@ describe('CartPrefilResolver', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [I18nTestingModule, StoreModule.forRoot({})],
-      providers: [
-        { provide: FSCartService, useClass: MockCartService },
-        {
-          provide: DatePipe,
-          useClass: MockDatePipe,
-        },
-      ],
+      providers: [{ provide: FSCartService, useClass: MockCartService }],
     });
 
     cartPrefillResolver = TestBed.inject(CartPrefillResolver);

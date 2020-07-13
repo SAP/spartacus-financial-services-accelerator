@@ -145,4 +145,21 @@ export class QuoteService {
       )
       .unsubscribe();
   }
+
+  updateQuote(cartId: string, priceAttributes: any) {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.QuoteProcessAction({
+            userId: occUserId,
+            cartId: cartId,
+            action: QuoteActionType.UPDATE,
+            body: priceAttributes,
+          })
+        )
+      )
+      .unsubscribe();
+  }
 }
