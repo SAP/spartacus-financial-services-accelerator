@@ -34,10 +34,7 @@ export class PersonalDetailsComponent extends FormCMSComponent {
         .pipe(
           filter(cart => cart.entries !== undefined),
           map(cart => {
-            if (
-              <FSProduct>cart.entries[0] &&
-              <FSProduct>cart.entries[0].product
-            ) {
+            if (cart.entries[0] && cart.entries[0].product) {
               const mainProduct = <FSProduct>cart.entries[0].product;
               if (mainProduct.defaultCategory) {
                 this.formDataService.loadFormDefinitions(
