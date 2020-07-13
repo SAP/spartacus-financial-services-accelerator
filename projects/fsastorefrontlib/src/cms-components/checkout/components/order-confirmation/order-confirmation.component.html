@@ -256,7 +256,16 @@
                       }}
                       :
                     </div>
-                    <div class="short-overview-value col-5">
+                    <div
+                      *ngIf="order.insuranceQuote?.policyId"
+                      class="short-overview-value col-5"
+                    >
+                      {{ order.insuranceQuote.policyId }}
+                    </div>
+                    <div
+                      *ngIf="!order.insuranceQuote?.policyId"
+                      class="short-overview-value col-5"
+                    >
                       {{ order.code }}
                     </div>
                   </div>
