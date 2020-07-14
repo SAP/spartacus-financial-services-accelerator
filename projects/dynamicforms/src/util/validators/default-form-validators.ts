@@ -128,7 +128,7 @@ export class DefaultFormValidators extends Validators {
     return null;
   }
 
-  static postalCode(control: AbstractControl) {
+  static alphanumeric(control: AbstractControl) {
     const field: string = control.value;
     const postalCodeRegex = /^(?=.*[0-9])[A-Za-z0-9\s]+$/;
     if (field) {
