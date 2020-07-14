@@ -32,8 +32,6 @@ export class FSProductService extends ProductService {
       })
     );
 
-    this.reload(productCode);
-
     return this.store.pipe(
       select(ProductSelectors.getSelectedProductStateFactory(productCode)),
       map(productState => {
