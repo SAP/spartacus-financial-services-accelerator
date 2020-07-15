@@ -27,7 +27,7 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
   comparisonPanel: Observable<ComparisonPanelCMSComponent>;
   productList: string[];
   billingData: Observable<any>;
-  pricingData: Observable<PricingData> = of({});
+  pricingData: Observable<PricingData>;
   categoryCode: string;
 
   constructor(

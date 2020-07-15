@@ -1,4 +1,9 @@
-import { Component, DebugElement, Input } from '@angular/core';
+import {
+  Component,
+  DebugElement,
+  Input,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -17,6 +22,7 @@ import { PricingService } from './../../../core/product-pricing/facade/pricing.s
 import { ComparisonPanelCMSComponent } from './../../../occ/occ-models/cms-component.models';
 import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
 import { ComparisonTablePanelComponent } from './comparison-table-panel.component';
+import createSpy = jasmine.createSpy;
 
 @Component({
   // tslint:disable
@@ -64,23 +70,7 @@ const formData: YFormData = {
     '{"testContent":{"tripDestination":"Europe","tripStartDate":"2022-02-02"}}',
 };
 
-const pricingData: PricingData = {
-  priceAttributeGroups: [
-    {
-      name: 'test',
-      priceAttributes: [
-        {
-          key: 'tripDestination',
-          value: 'Europe',
-        },
-        {
-          key: 'tripStartDate',
-          value: '2022-02-02',
-        },
-      ],
-    },
-  ],
-};
+let pricingData: PricingData;
 
 class MockActivatedRoute {
   params = of();
@@ -163,7 +153,27 @@ describe('ComparisonTablePanelComponent', () => {
     fixture = TestBed.createComponent(ComparisonTablePanelComponent);
     comparisonTablePanelComponent = fixture.componentInstance;
 
+    pricingData = {
+      priceAttributeGroups: [
+        {
+          name: 'test',
+          priceAttributes: [
+            {
+              key: 'tripDestination',
+              value: 'Europe',
+            },
+            {
+              key: 'tripStartDate',
+              value: '2022-02-02',
+            },
+          ],
+        },
+      ],
+    };
+    comparisonTablePanelComponent.pricingData = of(pricingData);
+
     el = fixture.debugElement;
+    fixture.detectChanges();
   });
 
   it('should be created', () => {
