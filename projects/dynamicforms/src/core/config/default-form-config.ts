@@ -90,8 +90,8 @@ export const defaultFormConfig: DynamicFormsConfig = {
       email: {
         validator: DefaultFormValidators.email,
       },
-      postalCode: {
-        validator: DefaultFormValidators.postalCode,
+      alphanumeric: {
+        validator: DefaultFormValidators.alphanumeric,
       },
     },
     prefill: {
