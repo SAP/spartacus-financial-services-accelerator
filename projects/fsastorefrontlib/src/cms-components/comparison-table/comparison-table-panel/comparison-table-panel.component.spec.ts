@@ -1,10 +1,10 @@
+import { Component, DebugElement, Input } from '@angular/core';
 import {
-  Component,
-  DebugElement,
-  Input,
-  ChangeDetectorRef,
-} from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+  async,
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -181,11 +181,15 @@ describe('ComparisonTablePanelComponent', () => {
   });
 
   it('should create comparison panel with pricing data and billing times', () => {
-    spyOn(mockPricingService, 'buildPricingData').and.stub();
     spyOn(mockFormDataService, 'getFormData').and.returnValue(of(formData));
+    spyOn(mockPricingService, 'buildPricingData').and.returnValue(pricingData);
     comparisonTablePanelComponent.ngOnInit();
 
-    expect(mockPricingService.buildPricingData).toHaveBeenCalled();
+    let result;
+    comparisonTablePanelComponent.pricingData$.subscribe(
+      pricingData => (result = pricingData)
+    );
+    expect(result).toEqual(pricingData);
   });
 
   it('should not build pricing data', () => {
@@ -209,11 +213,10 @@ describe('ComparisonTablePanelComponent', () => {
     expect(billingTimeHelpContent).toBeTruthy();
   });
 
-  it('should render comparison table panel item', () => {
+  it('should not render comparison table panel item', () => {
     fixture.detectChanges();
-    const comparisonTablePanelItem = el.query(
-      By.css('cx-fs-comparison-table-panel-item')
-    ).nativeElement;
+    const comparisonTablePanelItem = el.query(By.css('cx-spinner'))
+      .nativeElement;
     expect(comparisonTablePanelItem).toBeTruthy();
   });
 });

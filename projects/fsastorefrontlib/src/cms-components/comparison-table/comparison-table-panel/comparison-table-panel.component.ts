@@ -1,6 +1,5 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
@@ -8,7 +7,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { CmsComponentData } from '@spartacus/storefront';
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BillingTimeConnector } from '../../../core/product-pricing/connectors/billing-time.connector';
 import { PricingService } from '../../../core/product-pricing/facade/pricing.service';
@@ -36,8 +35,7 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
     protected formDataService: FormDataService,
     protected pricingService: PricingService,
     protected formDataStorageService: FormDataStorageService,
-    protected activatedRoute: ActivatedRoute,
-    protected ref: ChangeDetectorRef
+    protected activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
@@ -70,22 +68,14 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
     );
     if (formDataId) {
       this.formDataService.loadFormData(formDataId);
-      this.subscription.add(
-        this.formDataService
-          .getFormData()
-          .pipe(
-            map(formData => {
-              if (formData.content) {
-                this.pricingData$ = of(
-                  this.pricingService.buildPricingData(
-                    JSON.parse(formData.content)
-                  )
-                );
-                this.ref.detectChanges();
-              }
-            })
-          )
-          .subscribe()
+      this.pricingData$ = this.formDataService.getFormData().pipe(
+        map(formData => {
+          if (formData.content) {
+            return this.pricingService.buildPricingData(
+              JSON.parse(formData.content)
+            );
+          }
+        })
       );
     }
   }
