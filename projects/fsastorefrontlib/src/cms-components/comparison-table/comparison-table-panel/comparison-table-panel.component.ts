@@ -24,10 +24,10 @@ import {
 })
 export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
-  comparisonPanel: Observable<ComparisonPanelCMSComponent>;
+  comparisonPanel$: Observable<ComparisonPanelCMSComponent>;
   productList: string[];
-  billingData: Observable<any>;
-  pricingData: Observable<PricingData>;
+  billingData$: Observable<any>;
+  pricingData$: Observable<PricingData>;
   categoryCode: string;
 
   constructor(
@@ -41,14 +41,14 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.comparisonPanel = this.componentData.data$;
+    this.comparisonPanel$ = this.componentData.data$;
     this.subscription
       .add(
-        this.comparisonPanel
+        this.comparisonPanel$
           .pipe(
             map(data => {
               const productCodes = data.products.split(' ');
-              this.billingData = this.billingTimeConnector.getBillingTimes(
+              this.billingData$ = this.billingTimeConnector.getBillingTimes(
                 productCodes
               );
             })
@@ -76,7 +76,7 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
           .pipe(
             map(formData => {
               if (formData.content) {
-                this.pricingData = of(
+                this.pricingData$ = of(
                   this.pricingService.buildPricingData(
                     JSON.parse(formData.content)
                   )

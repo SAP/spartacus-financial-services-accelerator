@@ -170,7 +170,7 @@ describe('ComparisonTablePanelComponent', () => {
         },
       ],
     };
-    comparisonTablePanelComponent.pricingData = of(pricingData);
+    comparisonTablePanelComponent.pricingData$ = of(pricingData);
 
     el = fixture.debugElement;
     fixture.detectChanges();
