@@ -23,10 +23,10 @@ import {
 })
 export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
-  comparisonPanel: Observable<ComparisonPanelCMSComponent>;
+  comparisonPanel$: Observable<ComparisonPanelCMSComponent>;
   productList: string[];
-  billingData: Observable<any>;
-  pricingData: PricingData = {};
+  billingData$: Observable<any>;
+  pricingData$: Observable<PricingData>;
   categoryCode: string;
 
   constructor(
@@ -39,14 +39,14 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.comparisonPanel = this.componentData.data$;
+    this.comparisonPanel$ = this.componentData.data$;
     this.subscription
       .add(
-        this.comparisonPanel
+        this.comparisonPanel$
           .pipe(
             map(data => {
               const productCodes = data.products.split(' ');
-              this.billingData = this.billingTimeConnector.getBillingTimes(
+              this.billingData$ = this.billingTimeConnector.getBillingTimes(
                 productCodes
               );
             })
@@ -68,19 +68,14 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
     );
     if (formDataId) {
       this.formDataService.loadFormData(formDataId);
-      this.subscription.add(
-        this.formDataService
-          .getFormData()
-          .pipe(
-            map(formData => {
-              if (formData.content) {
-                this.pricingData = this.pricingService.buildPricingData(
-                  JSON.parse(formData.content)
-                );
-              }
-            })
-          )
-          .subscribe()
+      this.pricingData$ = this.formDataService.getFormData().pipe(
+        map(formData => {
+          if (formData.content) {
+            return this.pricingService.buildPricingData(
+              JSON.parse(formData.content)
+            );
+          }
+        })
       );
     }
   }
