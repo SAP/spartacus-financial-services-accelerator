@@ -24,15 +24,12 @@
         <ng-container *ngIf="comparisonPanel$ | async as panel">
           <ng-container *ngFor="let productCode of getProductList()">
             <ng-container *ngIf="productCode">
-              <ng-container
+              <cx-fs-comparison-table-panel-item
                 *ngIf="pricingData$ | async as pricing; else loading"
-              >
-                <cx-fs-comparison-table-panel-item
-                  [productCode]="productCode"
-                  [billingTimes]="billingInfo.billingTimes"
-                  [pricingData]="pricing"
-                ></cx-fs-comparison-table-panel-item>
-              </ng-container>
+                [productCode]="productCode"
+                [billingTimes]="billingInfo.billingTimes"
+                [pricingData]="pricing"
+              ></cx-fs-comparison-table-panel-item>
             </ng-container>
           </ng-container>
         </ng-container>

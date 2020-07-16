@@ -7,7 +7,7 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { CmsComponentData } from '@spartacus/storefront';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BillingTimeConnector } from '../../../core/product-pricing/connectors/billing-time.connector';
 import { PricingService } from '../../../core/product-pricing/facade/pricing.service';
@@ -77,6 +77,8 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
           }
         })
       );
+    } else {
+      this.pricingData$ = of({});
     }
   }
 
