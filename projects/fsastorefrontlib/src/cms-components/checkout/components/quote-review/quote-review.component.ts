@@ -54,7 +54,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   navigateBack(previousStep: StepResult) {
     this.routingService.go({
       cxRoute: previousStep.step,
-      params: { code: previousStep.stepParameter },
     });
   }
 
@@ -76,7 +75,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     ) {
       this.routingService.go({
         cxRoute: nextStep.step,
-        params: { code: nextStep.stepParameter },
       });
     }
   }

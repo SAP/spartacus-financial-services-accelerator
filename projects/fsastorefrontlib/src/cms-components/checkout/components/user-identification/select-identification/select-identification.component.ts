@@ -53,7 +53,6 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
   navigateBack(previousStep) {
     this.routingService.go({
       cxRoute: previousStep.step,
-      params: { code: previousStep.stepParameter },
     });
   }
 
