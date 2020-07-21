@@ -53,7 +53,7 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
     return stepIndex >= 0 ? stepIndex : null;
   }
 
-  setBackNextSteps(activatedRoute: ActivatedRoute) {
+  triggerPreviousNextStepSet(activatedRoute: ActivatedRoute) {
     let activeParamType: string;
     const previousUrl = this.getPreviousCheckoutStepUrl(activatedRoute);
     if (previousUrl) {
@@ -73,21 +73,28 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
               activeParamType = (<FSProduct>cart.entries[0].product)
                 .defaultCategory.code;
             }
-            this.setSteps(activatedRoute, activeParamType);
+            this.triggerPreviousStepSet(activatedRoute, activeParamType);
+            this.triggerNextStepSet(activatedRoute, activeParamType);
           }
         })
         .unsubscribe();
     }
   }
 
-  setSteps(activatedRoute: ActivatedRoute, activeParamType: string) {
+  triggerPreviousStepSet(
+    activatedRoute: ActivatedRoute,
+    activeParamType: string
+  ) {
     const previousStepNumber: number =
       this.getCurrentStepIndex(activatedRoute) - 1;
-    const nextStepNumber: number = this.getCurrentStepIndex(activatedRoute) + 1;
     this.setPreviousStep(
       activeParamType,
       this.steps[previousStepNumber].routeName
     );
+  }
+
+  triggerNextStepSet(activatedRoute: ActivatedRoute, activeParamType: string) {
+    const nextStepNumber: number = this.getCurrentStepIndex(activatedRoute) + 1;
     if (this.steps[nextStepNumber]) {
       this.setNextStep(activeParamType, this.steps[nextStepNumber].routeName);
     }

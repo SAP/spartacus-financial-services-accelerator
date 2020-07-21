@@ -52,7 +52,9 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
         .getActive()
         .pipe(
           tap(() => {
-            this.checkoutConfigService.setBackNextSteps(this.activatedRoute);
+            this.checkoutConfigService.triggerPreviousNextStepSet(
+              this.activatedRoute
+            );
           })
         )
         .subscribe()
