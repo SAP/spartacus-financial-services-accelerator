@@ -32,7 +32,7 @@ export class PersonalDetailsComponent extends FormCMSComponent {
       this.cartService
         .getActive()
         .pipe(
-          filter(cart => cart.entries !== undefined),
+          filter(cart => cart.entries && cart.entries.length > 0),
           map(cart => {
             if (cart.entries[0] && cart.entries[0].product) {
               const mainProduct = <FSProduct>cart.entries[0].product;
