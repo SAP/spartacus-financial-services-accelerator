@@ -1,10 +1,8 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  EventEmitter,
   OnDestroy,
   OnInit,
-  Output,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CurrencyService, OrderEntry, RoutingService } from '@spartacus/core';
