@@ -235,7 +235,7 @@ export interface ChangedPolicyData {
 export interface FSCheckoutStep extends CheckoutStep {
   restrictedCategories?: string[];
 }
-export interface ActiveCategoryStep {
-  activeCategory: string;
+export interface StepResult {
+  stepParameter: string;
   step: string;
 }

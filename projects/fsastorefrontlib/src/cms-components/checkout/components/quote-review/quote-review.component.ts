@@ -9,7 +9,7 @@ import { FSTranslationService } from '../../../../core/i18n/facade/translation.s
 import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
-  ActiveCategoryStep,
+  StepResult,
   BindingStateType,
   FSCart,
   QuoteWorkflowStatusType,
@@ -27,8 +27,8 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   modalRef: ModalRef;
   cartCode: string;
-  previousCheckoutStep$: Observable<ActiveCategoryStep>;
-  nextCheckoutStep$: Observable<ActiveCategoryStep>;
+  previousCheckoutStep$: Observable<StepResult>;
+  nextCheckoutStep$: Observable<StepResult>;
 
   constructor(
     protected cartService: FSCartService,
@@ -51,14 +51,14 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     return this.config.backend.occ.baseUrl || '';
   }
 
-  navigateBack(previousStep: ActiveCategoryStep) {
+  navigateBack(previousStep: StepResult) {
     this.routingService.go({
       cxRoute: previousStep.step,
-      params: { code: previousStep.activeCategory },
+      params: { code: previousStep.stepParameter },
     });
   }
 
-  navigateNext(nextStep: ActiveCategoryStep, activeCart: Cart) {
+  navigateNext(nextStep: StepResult, activeCart: Cart) {
     this.cartCode = activeCart.code;
     const bindingState = (<FSCart>activeCart).insuranceQuote.state.code;
     const quoteWorkflowState = (<FSCart>activeCart).insuranceQuote
@@ -76,7 +76,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     ) {
       this.routingService.go({
         cxRoute: nextStep.step,
-        params: { code: nextStep.activeCategory },
+        params: { code: nextStep.stepParameter },
       });
     }
   }
@@ -91,7 +91,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     modalInstance.cartCode = this.cartCode;
     modalInstance.nextStepUrl = {
       cxRoute: nextStep.step,
-      params: { code: nextStep.activeCategory },
     };
     this.subscription.add(
       this.modalRef.componentInstance.quoteBinding$
@@ -113,7 +112,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     modalInstance = this.modalRef.componentInstance;
     modalInstance.nextStepUrl = {
       cxRoute: nextStep.step,
-      params: { code: nextStep.activeCategory },
     };
     this.subscription.add(
       this.modalRef.componentInstance.referredQuote$

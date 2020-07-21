@@ -6,12 +6,7 @@ import {
 } from '@spartacus/core';
 import { CheckoutConfig, CheckoutConfigService } from '@spartacus/storefront';
 import { BehaviorSubject } from 'rxjs';
-import {
-  ActiveCategoryStep,
-  FSCart,
-  FSCheckoutStep,
-  FSProduct,
-} from '../../../occ';
+import { StepResult, FSCart, FSCheckoutStep, FSProduct } from '../../../occ';
 import { FSCartService } from '../../cart';
 
 @Injectable({
@@ -27,16 +22,16 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   }
 
   steps: FSCheckoutStep[] = this.fsCheckoutConfig.checkout.steps;
-  previousCheckoutStepSource = new BehaviorSubject<ActiveCategoryStep>(null);
+  previousCheckoutStepSource = new BehaviorSubject<StepResult>(null);
   previousStep = this.previousCheckoutStepSource.asObservable();
-  nextCheckoutStepSource = new BehaviorSubject<ActiveCategoryStep>(null);
+  nextCheckoutStepSource = new BehaviorSubject<StepResult>(null);
   nextStep = this.nextCheckoutStepSource.asObservable();
 
-  setPreviousStep(activeCategory: string, step: string) {
-    this.previousCheckoutStepSource.next({ activeCategory, step });
+  setPreviousStep(stepParameter: string, step: string) {
+    this.previousCheckoutStepSource.next({ stepParameter, step });
   }
-  setNextStep(activeCategory: string, step: string) {
-    this.nextCheckoutStepSource.next({ activeCategory, step });
+  setNextStep(stepParameter: string, step: string) {
+    this.nextCheckoutStepSource.next({ stepParameter, step });
   }
 
   getCurrentStepIndex(
@@ -89,11 +84,11 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
     const previousStepNumber: number =
       this.getCurrentStepIndex(activatedRoute) - 1;
     const nextStepNumber: number = this.getCurrentStepIndex(activatedRoute) + 1;
-    if (this.steps[previousStepNumber] && this.steps[nextStepNumber]) {
-      this.setPreviousStep(
-        activeParamType,
-        this.steps[previousStepNumber].routeName
-      );
+    this.setPreviousStep(
+      activeParamType,
+      this.steps[previousStepNumber].routeName
+    );
+    if (this.steps[nextStepNumber]) {
       this.setNextStep(activeParamType, this.steps[nextStepNumber].routeName);
     }
   }

@@ -5,7 +5,7 @@ import { Subscription, Observable } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
 import { FSCheckoutService } from '../../../../../core/checkout/facade/checkout.service';
 import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
-import { ActiveCategoryStep } from '../../../../../occ/occ-models';
+import { StepResult } from '../../../../../occ/occ-models';
 import { FSCartService } from '../../../../../core/cart/facade';
 
 @Component({
@@ -25,7 +25,7 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
 
   private subscription = new Subscription();
   selected: string;
-  previousCheckoutStep$: Observable<ActiveCategoryStep>;
+  previousCheckoutStep$: Observable<StepResult>;
 
   identificationTypes: Array<any> = [
     {
@@ -44,7 +44,6 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
-    this.checkoutService.mockDeliveryMode();
   }
 
   setSelectedType(identificationType) {
@@ -54,7 +53,7 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
   navigateBack(previousStep) {
     this.routingService.go({
       cxRoute: previousStep.step,
-      params: { code: previousStep.activeCategory },
+      params: { code: previousStep.stepParameter },
     });
   }
 

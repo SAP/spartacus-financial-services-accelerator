@@ -12,7 +12,7 @@ import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/cart/facade';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
-import { ActiveCategoryStep } from '../../../../occ/occ-models';
+import { StepResult } from '../../../../occ/occ-models';
 
 @Component({
   selector: 'cx-fs-add-options',
@@ -37,8 +37,8 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
   @Output()
   nextStep = new EventEmitter<any>();
 
-  previousCheckoutStep$: Observable<ActiveCategoryStep>;
-  nextCheckoutStep$: Observable<ActiveCategoryStep>;
+  previousCheckoutStep$: Observable<StepResult>;
+  nextCheckoutStep$: Observable<StepResult>;
 
   ngOnInit() {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
@@ -79,17 +79,16 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     this.cartService.removeEntry(item);
   }
 
-  navigateBack(previousStep: ActiveCategoryStep) {
+  navigateBack(previousStep: StepResult) {
     this.routingService.go({
       cxRoute: previousStep.step,
-      params: { code: previousStep.activeCategory },
+      params: { code: previousStep.stepParameter },
     });
   }
 
-  navigateNext(nextStep: ActiveCategoryStep) {
+  navigateNext(nextStep: StepResult) {
     this.routingService.go({
       cxRoute: nextStep.step,
-      params: { code: nextStep.activeCategory },
     });
   }
 

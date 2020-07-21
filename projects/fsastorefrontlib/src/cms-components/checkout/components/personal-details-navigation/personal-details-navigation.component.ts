@@ -6,7 +6,7 @@ import { Cart, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-  ActiveCategoryStep,
+  StepResult,
   FSOrderEntry,
 } from '../../../../occ/occ-models/occ.models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
@@ -29,8 +29,8 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
   ) {}
 
   subscription = new Subscription();
-  previousCheckoutStep$: Observable<ActiveCategoryStep>;
-  nextCheckoutStep$: Observable<ActiveCategoryStep>;
+  previousCheckoutStep$: Observable<StepResult>;
+  nextCheckoutStep$: Observable<StepResult>;
   cartId: string;
 
   ngOnInit() {
@@ -38,7 +38,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
   }
 
-  navigateNext(nextStep: ActiveCategoryStep) {
+  navigateNext(nextStep: StepResult) {
     this.subscription
       .add(
         this.cartService
@@ -80,7 +80,6 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
                 );
                 this.routingService.go({
                   cxRoute: nextStep.step,
-                  params: { code: nextStep.activeCategory },
                 });
               }
             })
@@ -89,10 +88,9 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
       );
   }
 
-  navigateBack(previousStep: ActiveCategoryStep) {
+  navigateBack(previousStep: StepResult) {
     this.routingService.go({
       cxRoute: previousStep.step,
-      params: { code: previousStep.activeCategory },
     });
   }
 
