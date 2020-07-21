@@ -27,13 +27,8 @@ export class FinalReviewComponent implements OnInit {
     protected activatedRoute: ActivatedRoute
   ) {}
 
-  checkoutStepUrlNext: string;
-
   ngOnInit() {
     this.checkoutService.mockDeliveryMode();
-    this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-      this.activatedRoute
-    );
     this.paymentDetails$ = this.checkoutPaymentService.getPaymentDetails();
   }
 
