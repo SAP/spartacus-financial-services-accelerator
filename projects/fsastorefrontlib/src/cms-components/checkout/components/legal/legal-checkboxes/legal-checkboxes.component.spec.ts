@@ -5,7 +5,7 @@ import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { of } from 'rxjs';
 import { FSCheckoutConfigService } from './../../../../../core/checkout/services/checkout-config.service';
 import { LegalCheckboxesComponent } from './legal-checkboxes.component';
-import { ActiveCategoryStep } from '../../../../../occ/occ-models';
+import { StepResult } from '../../../../../occ/occ-models';
 
 class MockActivatedRoute {
   params = of();
@@ -20,8 +20,8 @@ class FSCheckoutConfigServiceStub {
   getPreviousCheckoutStepUrl() {}
 }
 
-const mockCategoryAndStep: ActiveCategoryStep = {
-  activeCategory: 'insurances_travel',
+const mockCategoryAndStep: StepResult = {
+  stepParameter: 'insurances_travel',
   step: 'category',
 };
 

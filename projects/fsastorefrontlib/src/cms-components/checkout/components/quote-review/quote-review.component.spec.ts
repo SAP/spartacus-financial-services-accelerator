@@ -10,7 +10,7 @@ import { FSTranslationService } from './../../../../core/i18n/facade/translation
 import { AccordionModule } from './../../../../shared/accordion/accordion.module';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 import { QuoteReviewComponent } from './quote-review.component';
-import { ActiveCategoryStep, FSCart } from '../../../../occ/occ-models';
+import { StepResult, FSCart } from '../../../../occ/occ-models';
 
 const formDataContent = '{"content":"formContent"}';
 
@@ -18,8 +18,8 @@ class MockActivatedRoute {
   params = of();
 }
 
-const mockCategoryAndStep: ActiveCategoryStep = {
-  activeCategory: 'insurances_travel',
+const mockCategoryAndStep: StepResult = {
+  stepParameter: 'insurances_travel',
   step: 'category',
 };
 
