@@ -151,7 +151,12 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard, CheckoutStepGuard],
+    canActivate: [
+      AuthGuard,
+      CmsPageGuard,
+      CheckoutStepGuard,
+      CartNotEmptyGuard,
+    ],
     data: {
       cxRoute: 'userIdentification',
       pageLabel: 'userIdentificationPage',
