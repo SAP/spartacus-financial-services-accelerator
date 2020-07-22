@@ -4,11 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Cart, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take, switchMap } from 'rxjs/operators';
 import {
   StepResult,
   FSOrderEntry,
 } from '../../../../occ/occ-models/occ.models';
+
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
@@ -39,53 +40,43 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
   }
 
   navigateNext(nextStep: StepResult) {
-    this.subscription
-      .add(
-        this.cartService
-          .getActive()
-          .pipe(
-            map((cart: Cart) => {
-              if (
-                cart &&
-                cart.code &&
-                cart.entries &&
-                cart.entries.length > 0
-              ) {
-                this.cartId = cart.code;
-                const entry: FSOrderEntry = cart.entries[0];
-                const yFormData: YFormData = {
-                  refId: cart.code + '_' + cart.entries[0].entryNumber,
-                };
-                if (entry.formData && entry.formData.length > 0) {
-                  yFormData.id = entry.formData[0].id;
+    this.subscription.add(
+      this.cartService
+        .getActive()
+        .pipe(
+          take(1),
+          switchMap((cart: Cart) => {
+            if (cart && cart.code && cart.entries && cart.entries.length > 0) {
+              this.cartId = cart.code;
+              const entry: FSOrderEntry = cart.entries[0];
+              const yFormData: YFormData = {
+                refId: cart.code + '_' + cart.entries[0].entryNumber,
+              };
+              if (entry.formData && entry.formData.length > 0) {
+                yFormData.id = entry.formData[0].id;
+              }
+              this.formService.submit(yFormData);
+            }
+            return this.formService.getSubmittedForm().pipe(
+              map(formData => {
+                if (formData && formData.content) {
+                  this.quoteService.underwriteQuote(cart.code);
+                  this.quoteService.updateQuote(
+                    this.cartId,
+                    this.pricingService.buildPricingData(
+                      JSON.parse(formData.content)
+                    )
+                  );
+                  this.routingService.go({
+                    cxRoute: nextStep.step,
+                  });
                 }
-                this.quoteService.underwriteQuote(cart.code);
-                this.formService.submit(yFormData);
-              }
-            })
-          )
-          .subscribe()
-      )
-      .add(
-        this.formService
-          .getSubmittedForm()
-          .pipe(
-            map(formData => {
-              if (formData && formData.content) {
-                this.quoteService.updateQuote(
-                  this.cartId,
-                  this.pricingService.buildPricingData(
-                    JSON.parse(formData.content)
-                  )
-                );
-                this.routingService.go({
-                  cxRoute: nextStep.step,
-                });
-              }
-            })
-          )
-          .subscribe()
-      );
+              })
+            );
+          })
+        )
+        .subscribe()
+    );
   }
 
   navigateBack(previousStep: StepResult) {

@@ -5,7 +5,7 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
-import { YFormData } from '@fsa/dynamicforms';
+import { YFormData } from './../../models/form-occ.models';
 import { RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { FormDefinition } from '../../models/form-config.interface';

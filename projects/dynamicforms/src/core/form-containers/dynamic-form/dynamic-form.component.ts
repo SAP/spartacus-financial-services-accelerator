@@ -9,7 +9,7 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { YFormData } from '@fsa/dynamicforms';
+import { YFormData } from './../../models/form-occ.models';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../config/form-config';
