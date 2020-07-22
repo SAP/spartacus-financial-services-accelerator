@@ -256,43 +256,40 @@
                       }}
                       :
                     </div>
-                    <div
-                      *ngIf="order.insuranceQuote?.policyId"
-                      class="short-overview-value col-5"
-                    >
-                      {{ order.insuranceQuote.policyId }}
-                    </div>
-                    <div
-                      *ngIf="!order.insuranceQuote?.policyId"
-                      class="short-overview-value col-5"
-                    >
-                      {{ order.code }}
-                    </div>
-                  </div>
-                  <div
-                    *ngIf="order.insuranceQuote?.paymentFrequency"
-                    class="short-overview-item row"
-                  >
-                    <div class="short-overview-title col-7">
-                      {{ 'fscommon.paymentFrequency' | cxTranslate }}:
-                    </div>
                     <div class="short-overview-value col-5">
-                      {{ order.insuranceQuote?.paymentFrequency }}
+                      <ng-container
+                        *ngIf="order.insuranceQuote?.policyId; else orderCode"
+                      >
+                        {{ order.insuranceQuote.policyId }}
+                      </ng-container>
+                      <ng-template #orderCode>
+                        {{ order.code }}
+                      </ng-template>
                     </div>
                   </div>
-                  <div
-                    *ngIf="order.insuranceQuote?.startDate"
-                    class="short-overview-item row"
+                  <ng-container *ngIf="order.insuranceQuote?.paymentFrequency">
+                    <div class="short-overview-item row">
+                      <div class="short-overview-title col-7">
+                        {{ 'fscommon.paymentFrequency' | cxTranslate }}:
+                      </div>
+                      <div class="short-overview-value col-5">
+                        {{ order.insuranceQuote?.paymentFrequency }}
+                      </div>
+                    </div></ng-container
                   >
-                    <div class="short-overview-title col-7">
-                      {{ 'fscommon.startDate' | cxTranslate }}:
-                    </div>
-                    <div class="short-overview-value col-5">
-                      {{
-                        order.insuranceQuote?.startDate | cxDate: 'dd MMM yyyy'
-                      }}
-                    </div>
-                  </div>
+                  <ng-container *ngIf="order.insuranceQuote?.startDate"
+                    ><div class="short-overview-item row">
+                      <div class="short-overview-title col-7">
+                        {{ 'fscommon.startDate' | cxTranslate }}:
+                      </div>
+                      <div class="short-overview-value col-5">
+                        {{
+                          order.insuranceQuote?.startDate
+                            | cxDate: 'dd MMM yyyy'
+                        }}
+                      </div>
+                    </div></ng-container
+                  >
                   <ng-container
                     *ngFor="let entry of order.deliveryOrderGroups[0]?.entries"
                   >
