@@ -293,17 +293,18 @@
                       }}
                     </div>
                   </div>
-                  <div class="short-overview-item row">
-                    <div class="short-overview-title col-7">
-                      {{
-                        (order.deliveryOrderGroups[0]?.entries)[0]?.product
-                          ?.name
-                      }}
+                  <ng-container
+                    *ngFor="let entry of order.deliveryOrderGroups[0]?.entries"
+                  >
+                    <div class="short-overview-item row">
+                      <div class="short-overview-title col-7">
+                        {{ entry.product.name }}:
+                      </div>
+                      <div class="short-overview-value col-5">
+                        {{ entry.totalPrice.formattedValue }}
+                      </div>
                     </div>
-                    <div class="short-overview-value col-5">
-                      {{ order.totalPrice?.formattedValue }}
-                    </div>
-                  </div>
+                  </ng-container>
                   <div class="highlighted border-top border-color-3 row">
                     <div class="short-overview-title col-6">
                       {{ 'fscommon.orderTotal' | cxTranslate }}:
