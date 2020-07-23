@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RoutingService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
-import { StepResult } from '../../../../../occ/occ-models';
+import { FSSteps } from '../../../../../occ/occ-models';
 
 @Component({
   selector: 'cx-fs-legal-checkboxes',
@@ -15,21 +15,21 @@ export class LegalCheckboxesComponent implements OnInit {
     protected activatedRoute: ActivatedRoute,
     protected checkoutConfigService: FSCheckoutConfigService
   ) {}
-  previousCheckoutStep$: Observable<StepResult>;
-  nextCheckoutStep$: Observable<StepResult>;
+  previousCheckoutStep$: Observable<FSSteps>;
+  nextCheckoutStep$: Observable<FSSteps>;
 
   ngOnInit() {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
   }
 
-  navigateBack(previousStep: StepResult) {
+  navigateBack(previousStep: FSSteps) {
     this.routingService.go({
       cxRoute: previousStep.step,
     });
   }
 
-  navigateNext(nextStep: StepResult) {
+  navigateNext(nextStep: FSSteps) {
     this.routingService.go({
       cxRoute: nextStep.step,
     });

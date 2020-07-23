@@ -13,7 +13,7 @@ import { MediaModule, SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
-import { StepResult, FSProduct } from './../../../../occ/occ-models/occ.models';
+import { FSSteps, FSProduct } from './../../../../occ/occ-models/occ.models';
 import { AddOptionsComponent } from './add-options.component';
 
 const product: FSProduct = {
@@ -29,7 +29,7 @@ const mockEntries: OrderEntry[] = [
   },
 ];
 
-const mockCategoryAndStep: StepResult = {
+const mockCategoryAndStep: FSSteps = {
   stepParameter: 'insurances_travel',
   step: 'category',
 };

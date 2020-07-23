@@ -5,7 +5,7 @@ import { Subscription, Observable } from 'rxjs';
 import { filter, take, tap } from 'rxjs/operators';
 import { FSCheckoutService } from '../../../../../core/checkout/facade/checkout.service';
 import { FSCheckoutConfigService } from '../../../../../core/checkout/services';
-import { StepResult } from '../../../../../occ/occ-models';
+import { FSSteps } from '../../../../../occ/occ-models';
 import { FSCartService } from '../../../../../core/cart/facade';
 
 @Component({
@@ -25,7 +25,7 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
 
   private subscription = new Subscription();
   selected: string;
-  previousCheckoutStep$: Observable<StepResult>;
+  previousCheckoutStep$: Observable<FSSteps>;
 
   identificationTypes: Array<any> = [
     {

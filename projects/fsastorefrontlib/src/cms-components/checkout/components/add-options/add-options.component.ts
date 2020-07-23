@@ -10,7 +10,7 @@ import { Observable, Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { FSCartService } from '../../../../core/cart/facade';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
-import { StepResult } from '../../../../occ/occ-models';
+import { FSSteps } from '../../../../occ/occ-models';
 
 @Component({
   selector: 'cx-fs-add-options',
@@ -31,8 +31,8 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   currentCurrency: string;
 
-  previousCheckoutStep$: Observable<StepResult>;
-  nextCheckoutStep$: Observable<StepResult>;
+  previousCheckoutStep$: Observable<FSSteps>;
+  nextCheckoutStep$: Observable<FSSteps>;
 
   ngOnInit() {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
@@ -70,14 +70,14 @@ export class AddOptionsComponent implements OnInit, OnDestroy {
     this.cartService.removeEntry(item);
   }
 
-  navigateBack(previousStep: StepResult) {
+  navigateBack(previousStep: FSSteps) {
     this.routingService.go({
       cxRoute: previousStep.step,
       params: { code: previousStep.stepParameter },
     });
   }
 
-  navigateNext(nextStep: StepResult) {
+  navigateNext(nextStep: FSSteps) {
     this.routingService.go({
       cxRoute: nextStep.step,
     });

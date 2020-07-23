@@ -9,7 +9,7 @@ import { FSTranslationService } from '../../../../core/i18n/facade/translation.s
 import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
-  StepResult,
+  FSSteps,
   BindingStateType,
   FSCart,
   QuoteWorkflowStatusType,
@@ -27,8 +27,8 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
   modalRef: ModalRef;
   cartCode: string;
-  previousCheckoutStep$: Observable<StepResult>;
-  nextCheckoutStep$: Observable<StepResult>;
+  previousCheckoutStep$: Observable<FSSteps>;
+  nextCheckoutStep$: Observable<FSSteps>;
 
   constructor(
     protected cartService: FSCartService,
@@ -51,13 +51,13 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     return this.config.backend.occ.baseUrl || '';
   }
 
-  navigateBack(previousStep: StepResult) {
+  navigateBack(previousStep: FSSteps) {
     this.routingService.go({
       cxRoute: previousStep.step,
     });
   }
 
-  navigateNext(nextStep: StepResult, activeCart: Cart) {
+  navigateNext(nextStep: FSSteps, activeCart: Cart) {
     this.cartCode = activeCart.code;
     const bindingState = (<FSCart>activeCart).insuranceQuote.state.code;
     const quoteWorkflowState = (<FSCart>activeCart).insuranceQuote

@@ -7,12 +7,12 @@ import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
 import { PersonalDetailsNavigationComponent } from './personal-details-navigation.component';
-import { StepResult } from '../../../../occ/occ-models';
+import { FSSteps } from '../../../../occ/occ-models';
 
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import createSpy = jasmine.createSpy;
 
-const mockCategoryAndStep: StepResult = {
+const mockCategoryAndStep: FSSteps = {
   stepParameter: 'insurances_travel',
   step: 'category',
 };

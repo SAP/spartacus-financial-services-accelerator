@@ -6,7 +6,7 @@ import {
 } from '@spartacus/core';
 import { CheckoutConfig, CheckoutConfigService } from '@spartacus/storefront';
 import { BehaviorSubject } from 'rxjs';
-import { StepResult, FSCart, FSCheckoutStep, FSProduct } from '../../../occ';
+import { FSSteps, FSCart, FSCheckoutStep, FSProduct } from '../../../occ';
 import { FSCartService } from '../../cart';
 
 @Injectable({
@@ -22,9 +22,9 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   }
 
   steps: FSCheckoutStep[] = this.fsCheckoutConfig.checkout.steps;
-  previousCheckoutStepSource = new BehaviorSubject<StepResult>(null);
+  previousCheckoutStepSource = new BehaviorSubject<FSSteps>(null);
   previousStep = this.previousCheckoutStepSource.asObservable();
-  nextCheckoutStepSource = new BehaviorSubject<StepResult>(null);
+  nextCheckoutStepSource = new BehaviorSubject<FSSteps>(null);
   nextStep = this.nextCheckoutStepSource.asObservable();
 
   setPreviousStep(stepParameter: string, step: string) {

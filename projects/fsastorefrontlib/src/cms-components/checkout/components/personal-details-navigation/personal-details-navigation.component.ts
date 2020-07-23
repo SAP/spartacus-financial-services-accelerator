@@ -5,10 +5,7 @@ import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Cart, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { map, take, switchMap } from 'rxjs/operators';
-import {
-  StepResult,
-  FSOrderEntry,
-} from '../../../../occ/occ-models/occ.models';
+import { FSSteps, FSOrderEntry } from '../../../../occ/occ-models/occ.models';
 
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
@@ -30,8 +27,8 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
   ) {}
 
   subscription = new Subscription();
-  previousCheckoutStep$: Observable<StepResult>;
-  nextCheckoutStep$: Observable<StepResult>;
+  previousCheckoutStep$: Observable<FSSteps>;
+  nextCheckoutStep$: Observable<FSSteps>;
   cartId: string;
 
   ngOnInit() {
@@ -39,7 +36,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
   }
 
-  navigateNext(nextStep: StepResult) {
+  navigateNext(nextStep: FSSteps) {
     this.subscription.add(
       this.cartService
         .getActive()
@@ -79,7 +76,7 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
     );
   }
 
-  navigateBack(previousStep: StepResult) {
+  navigateBack(previousStep: FSSteps) {
     this.routingService.go({
       cxRoute: previousStep.step,
     });
