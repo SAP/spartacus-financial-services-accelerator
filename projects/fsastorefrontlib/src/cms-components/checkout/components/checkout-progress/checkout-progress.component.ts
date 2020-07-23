@@ -36,7 +36,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
     protected categoryService: CategoryService,
     protected cartService: FSCartService,
     protected productService: CurrentProductService,
-    protected checkoutConfigService: FSCheckoutConfigService
+    public checkoutConfigService: FSCheckoutConfigService
   ) {
     super(config, routingService, routingConfigService);
   }
