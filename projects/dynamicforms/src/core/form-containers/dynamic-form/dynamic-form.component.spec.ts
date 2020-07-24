@@ -35,39 +35,25 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
   },
 };
 
-let mockFormGroup;
+let testForm;
 
 const mocFormGroupNested = new FormGroup({
   testGroupNested: new FormControl('', Validators.required),
 });
 export class MockFormBuilderService {
   createForm() {
-    return mockFormGroup;
+    return testForm;
   }
 }
 
 const formData: YFormData = {
   id: 'test-formData',
   type: 'DATA',
-  content:
-    '{"testContent":{"tripDestination":"Europe","tripStartDate":"2022-02-02"}}',
-};
-
-const mockField: FieldConfig = {
-  fieldType: 'datepicker',
-  name: 'testDatePicker',
-  label: {
-    en: 'What time did it happen?',
-  },
+  content: '{"testGroupName":{"tripDestination":"Europe"}}',
 };
 
 const config: FormDefinition = {
-  formGroups: [
-    {
-      groupCode: 'testGroupCode',
-      fieldConfigs: [mockField],
-    },
-  ],
+  formGroups: [],
   formId: 'testFormID',
 };
 
@@ -111,9 +97,10 @@ describe('DynamicFormComponent', () => {
     component = fixture.componentInstance;
     component.config = config;
     component.formData = of(formData);
-    mockFormGroup = new FormGroup({
-      testGroupCode: new FormControl('', Validators.required),
-    });
+    testForm = new FormGroup({});
+    let countryControl = new FormControl('', Validators.required);
+    let nestedGroup = new FormGroup({ tripDestination: countryControl });
+    testForm.addControl('testGroupName', nestedGroup);
     fixture.detectChanges();
   }));
 
@@ -130,24 +117,28 @@ describe('DynamicFormComponent', () => {
     expect(mockFormBuilderService.createForm).not.toHaveBeenCalled();
   });
 
-  it('should change control touched property to true', () => {
-    component.formData = undefined;
+  it('should change control touched property to true since one field is epmty', () => {
     component.ngOnInit();
-    expect(component.form.controls.testGroupCode.touched).toEqual(true);
+    expect(
+      component.form.controls.testGroupName.get('tripDestination').touched
+    ).toEqual(true);
   });
 
-  it('should change control touched property to true when form has nested formGroup', () => {
-    mockFormGroup.addControl('testNestedControl', mocFormGroupNested);
-    component.formData = undefined;
-    component.ngOnInit();
-    expect(component.form.controls.testGroupCode.touched).toEqual(true);
-  });
-
-  it('should submit in case form content is not defined', () => {
-    component.form.controls.testGroupCode.setValue('test string');
+  it('should submit in case form content is defined', () => {
+    component.form.controls.testGroupName
+      .get('tripDestination')
+      .setValue('test string');
     spyOn(component.submit, 'emit').and.callThrough();
     formData.content = undefined;
     component.ngOnInit();
     expect(component.submit.emit).toHaveBeenCalled();
+  });
+
+  it('should map data to controll when control value is undefined', () => {
+    component.ngOnInit();
+    let countryField = component.form.controls.testGroupName.get(
+      'tripDestination'
+    );
+    expect(countryField.value).toEqual('Europe');
   });
 });

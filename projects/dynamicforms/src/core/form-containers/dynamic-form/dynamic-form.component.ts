@@ -57,12 +57,14 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
       this.form = this.formService.createForm(this.config);
     }
     this.addSubmitEvent();
+    console.log(this.formData);
     if (this.formData) {
       this.subscription.add(
         this.formData
           .pipe(
             map(formData => {
               if (formData.content) {
+                console.log(formData.content);
                 this.mapDataToFormControls(JSON.parse(formData.content));
               }
             })
@@ -70,6 +72,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
           .subscribe()
       );
     }
+    console.log(this.form);
   }
 
   ngOnDestroy() {
@@ -80,6 +83,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
   mapDataToFormControls(formData) {
     for (const groupCode of Object.keys(formData)) {
+      console.log(GeneralHelpers.getObjectDepth(formData));
       if (
         this.form.get(groupCode) &&
         GeneralHelpers.getObjectDepth(formData) === 1
@@ -89,9 +93,10 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         for (const controlName of Object.keys(formData[groupCode])) {
           const formGroup = this.form.get(groupCode);
           if (formGroup && formGroup.get(controlName)) {
-            formGroup
-              .get(controlName)
-              .setValue(formData[groupCode][controlName]);
+            const formControl = formGroup.get(controlName);
+            if (formControl.value === undefined || formControl.value === '') {
+              formControl.setValue(formData[groupCode][controlName]);
+            }
           }
         }
       }
