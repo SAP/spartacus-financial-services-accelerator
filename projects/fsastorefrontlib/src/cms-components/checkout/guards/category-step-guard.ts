@@ -6,7 +6,7 @@ import {
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCheckoutConfigService } from '../../../core/checkout/services';
-import { FSCheckoutStep } from '../components/checkout-progress/checkout-step.component';
+import { FSCheckoutStep } from '../../../occ/occ-models/occ.models';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +36,7 @@ export class CategoryStepGuard implements CanActivate {
       nextStep.routeName
     ).paths[0];
 
-    if (currentStep.restrictedCategories) {
+    if (currentStep && currentStep.restrictedCategories) {
       currentStep.restrictedCategories.forEach(restrictedCategory => {
         if (route.url.find(url => url.path === restrictedCategory)) {
           currentCategory = restrictedCategory;

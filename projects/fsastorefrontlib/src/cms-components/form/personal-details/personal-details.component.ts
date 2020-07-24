@@ -34,12 +34,14 @@ export class PersonalDetailsComponent extends FormCMSComponent {
         .pipe(
           filter(cart => cart.entries && cart.entries.length > 0),
           map(cart => {
-            const mainProduct = <FSProduct>cart.entries[0].product;
-            if (mainProduct && mainProduct.defaultCategory) {
-              this.formDataService.loadFormDefinitions(
-                mainProduct.defaultCategory.code,
-                FormDefinitionType.PERSONAL_DETAILS
-              );
+            if (cart.entries[0] && cart.entries[0].product) {
+              const mainProduct = <FSProduct>cart.entries[0].product;
+              if (mainProduct.defaultCategory) {
+                this.formDataService.loadFormDefinitions(
+                  mainProduct.defaultCategory.code,
+                  FormDefinitionType.PERSONAL_DETAILS
+                );
+              }
             }
           })
         )

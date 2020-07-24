@@ -30,7 +30,6 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
   billingTimes: any;
   @Input()
   pricingData: PricingData;
-  checkoutStepUrlNext: string;
   productPrice: string;
 
   constructor(
@@ -48,10 +47,6 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
   private subscription = new Subscription();
 
   ngOnInit() {
-    this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-      this.activatedRoute
-    );
-
     this.getProductData();
   }
 

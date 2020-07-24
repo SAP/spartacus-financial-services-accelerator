@@ -10,13 +10,18 @@ import { FSTranslationService } from './../../../../core/i18n/facade/translation
 import { AccordionModule } from './../../../../shared/accordion/accordion.module';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 import { QuoteReviewComponent } from './quote-review.component';
+import { FSSteps, FSCart } from '../../../../occ/occ-models';
 
 const formDataContent = '{"content":"formContent"}';
-const categoryCode = 'insurances_auto';
 
 class MockActivatedRoute {
   params = of();
 }
+
+const mockCategoryAndStep: FSSteps = {
+  stepParameter: 'insurances_travel',
+  step: 'category',
+};
 
 const MockOccModuleConfig: OccConfig = {
   backend: {
@@ -32,11 +37,7 @@ class FSCartServiceStub {
   getActive() {}
   isStable() {}
 }
-class MockCategoryService {
-  getActiveCategory(): Observable<string> {
-    return of(categoryCode);
-  }
-}
+
 class MockRoutingService {
   go() {}
 }
@@ -60,7 +61,6 @@ const modalInstance: any = {
     referredQuote$: of(false),
   },
 };
-
 const modalService = jasmine.createSpyObj('ModalService', ['open']);
 
 describe('Quote Review Component', () => {
@@ -121,7 +121,7 @@ describe('Quote Review Component', () => {
   });
 
   it('should continue to next step when quote is in state BIND', () => {
-    component.cart$ = of({
+    const cart: FSCart = {
       code: 'cartCode',
       insuranceQuote: {
         state: {
@@ -131,14 +131,14 @@ describe('Quote Review Component', () => {
           code: 'APPROVED',
         },
       },
-    });
-    component.continue();
+    };
+    component.navigateNext(mockCategoryAndStep, cart);
     expect(routingService.go).toHaveBeenCalled();
   });
 
   it('should not continue to the next step when quote is in state UNBIND', () => {
     modalService.open.and.returnValue(modalInstance);
-    component.cart$ = of({
+    const cart: FSCart = {
       code: 'cartCode',
       insuranceQuote: {
         state: {
@@ -148,9 +148,9 @@ describe('Quote Review Component', () => {
           code: 'APPROVED',
         },
       },
-    });
+    };
 
-    component.continue();
+    component.navigateNext(mockCategoryAndStep, cart);
     expect(routingService.go).not.toHaveBeenCalled();
     expect(modalService.open).toHaveBeenCalledWith(BindQuoteDialogComponent, {
       centered: true,
@@ -163,7 +163,7 @@ describe('Quote Review Component', () => {
 
   it('should open ReferredQuoteDialog popup', () => {
     modalService.open.and.returnValue(modalInstance);
-    component.cart$ = of({
+    const cart: FSCart = {
       code: 'cartCode',
       insuranceQuote: {
         state: {
@@ -173,9 +173,9 @@ describe('Quote Review Component', () => {
           code: 'REFERRED',
         },
       },
-    });
+    };
 
-    component.continue();
+    component.navigateNext(mockCategoryAndStep, cart);
     expect(routingService.go).not.toHaveBeenCalled();
     expect(modalService.open).toHaveBeenCalledWith(
       ReferredQuoteDialogComponent,
@@ -190,7 +190,7 @@ describe('Quote Review Component', () => {
   });
 
   it('should go back to previous step', () => {
-    component.back();
+    component.navigateBack(mockCategoryAndStep);
     expect(routingService.go).toHaveBeenCalled();
   });
 

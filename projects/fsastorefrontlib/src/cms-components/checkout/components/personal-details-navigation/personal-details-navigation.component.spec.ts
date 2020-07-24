@@ -7,8 +7,15 @@ import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
 import { PersonalDetailsNavigationComponent } from './personal-details-navigation.component';
+import { FSSteps } from '../../../../occ/occ-models';
+
 import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import createSpy = jasmine.createSpy;
+
+const mockCategoryAndStep: FSSteps = {
+  stepParameter: 'insurances_travel',
+  step: 'category',
+};
 
 const mockCart = {
   code: '1234',
@@ -72,6 +79,7 @@ class MockPricingService {
 describe('PersonalDetailsNavigationComponent', () => {
   let component: PersonalDetailsNavigationComponent;
   let fixture: ComponentFixture<PersonalDetailsNavigationComponent>;
+  let routingService: RoutingService;
   let quoteService: QuoteService;
 
   beforeEach(async(() => {
@@ -117,14 +125,20 @@ describe('PersonalDetailsNavigationComponent', () => {
     fixture = TestBed.createComponent(PersonalDetailsNavigationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
+    routingService = TestBed.inject(RoutingService);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should go back to previous step', () => {
+    component.navigateBack(mockCategoryAndStep);
+    expect(routingService.go).toHaveBeenCalled();
+  });
+
   it('should navigate next', () => {
-    component.navigateNext();
+    component.navigateNext(mockCategoryAndStep);
     expect(quoteService.underwriteQuote).toHaveBeenCalledWith(mockCart.code);
   });
 });
