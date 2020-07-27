@@ -62,7 +62,9 @@
             {{ 'fscommon.paymentMethod' | cxTranslate }}
           </div>
           <div class="col-6 col-sm-5 value notice">
-            {{ policy.paymentMethod?.paymentOption }}
+            <ng-container *ngIf="policy.paymentMethod?.paymentOption; then na">
+              {{ policy.paymentMethod?.paymentOption }}
+            </ng-container>
           </div>
         </li>
         <li class="accordion-list-item row">
@@ -315,7 +317,9 @@
             {{ 'fscommon.paymentMethod' | cxTranslate }}
           </div>
           <div class="col-6 col-sm-5 value notice">
-            {{ policy.paymentMethod?.paymentOption }}
+            <ng-container *ngIf="policy.paymentMethod?.paymentOption; then na">
+              {{ policy.paymentMethod?.paymentOption }}
+            </ng-container>
           </div>
         </li>
       </ul>
@@ -370,3 +374,6 @@
     </cx-fs-accordion-item>
   </div>
 </ng-container>
+<ng-template #na>
+  {{ 'fscommon.notAvailable' | cxTranslate }}
+</ng-template>
