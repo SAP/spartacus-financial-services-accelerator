@@ -10,7 +10,7 @@ import { FieldConfig } from '../../core/models/form-config.interface';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { LanguageService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, filter } from 'rxjs/operators';
 import { PrefillResolver } from '../../core/resolver/prefill-resolver.interface';
 
 @Component({ template: '' })
@@ -74,17 +74,24 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
   interDependancyValueCheck() {
     if (this.group.get(this.config.name)) {
       this.subscription.add(
-        this.group.get(this.config.name).valueChanges.subscribe(_ => {
-          if (this.config.validations) {
-            this.config.validations.forEach(validation => {
-              if (validation.arguments && validation.arguments.length > 1) {
-                this.group
-                  .get(validation.arguments[0].value)
-                  .updateValueAndValidity({ onlySelf: true, emitEvent: false });
-              }
-            });
-          }
-        })
+        this.group
+          .get(this.config.name)
+          .valueChanges.pipe(
+            filter(_ => !!this.config.validations),
+            map(_ => {
+              this.config.validations.filter(validation =>
+                validation.arguments && validation.arguments.length > 1
+                  ? this.group
+                      .get(validation.arguments[0].value)
+                      .updateValueAndValidity({
+                        onlySelf: true,
+                        emitEvent: false,
+                      })
+                  : null
+              );
+            })
+          )
+          .subscribe()
       );
     }
   }
