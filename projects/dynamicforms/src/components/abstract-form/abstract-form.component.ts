@@ -10,7 +10,7 @@ import { FieldConfig } from '../../core/models/form-config.interface';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { LanguageService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { PrefillResolver } from '../../core/resolver/prefill-resolver.interface';
 
 @Component({ template: '' })
@@ -48,6 +48,9 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+
+    this.interDependancyValueCheck();
+
     if (this.config.prefillValue) {
       const targetObject = this.appConfig.dynamicForms.prefill[
         this.config.prefillValue.targetObject
@@ -67,6 +70,25 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  interDependancyValueCheck() {
+    if (this.group.get(this.config.name)) {
+      this.subscription.add(
+        this.group.get(this.config.name).valueChanges.subscribe(_ => {
+          if (this.config.validations) {
+            this.config.validations.forEach(validation => {
+              if (validation.arguments && validation.arguments.length > 1) {
+                this.group
+                  .get(validation.arguments[0].value)
+                  .updateValueAndValidity({ onlySelf: true, emitEvent: false });
+              }
+            });
+          }
+        })
+      );
+    }
+  }
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
