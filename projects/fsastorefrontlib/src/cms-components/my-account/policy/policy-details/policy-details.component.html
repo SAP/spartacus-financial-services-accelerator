@@ -62,7 +62,7 @@
             {{ 'fscommon.paymentMethod' | cxTranslate }}
           </div>
           <div class="col-6 col-sm-5 value notice">
-            <ng-container *ngIf="policy.paymentMethod?.paymentOption; then na">
+            <ng-container *ngIf="policy.paymentMethod?.paymentOption; else na">
               {{ policy.paymentMethod?.paymentOption }}
             </ng-container>
           </div>
@@ -317,7 +317,7 @@
             {{ 'fscommon.paymentMethod' | cxTranslate }}
           </div>
           <div class="col-6 col-sm-5 value notice">
-            <ng-container *ngIf="policy.paymentMethod?.paymentOption; then na">
+            <ng-container *ngIf="policy.paymentMethod?.paymentOption; else na">
               {{ policy.paymentMethod?.paymentOption }}
             </ng-container>
           </div>
