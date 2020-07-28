@@ -1,12 +1,18 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AbstractOptionsComponent } from './abstract-options.component';
-import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import {
+  ReactiveFormsModule,
+  FormGroup,
+  FormControl,
+  AbstractControl,
+} from '@angular/forms';
 import { LanguageService } from '@spartacus/core';
 import { DynamicFormsConfig } from '../../core';
 import { of } from 'rxjs';
 import { FieldConfig } from './../../core/models/form-config.interface';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
+import { FormService } from './../../core/services/form/form.service';
 
 class MockOccValueListService {}
 class MockLanguageService {
@@ -38,6 +44,14 @@ const mockField: FieldConfig = {
   ],
 };
 
+const formControl = new FormControl('formValue');
+
+class MockFormService {
+  getFormControlForCode(): AbstractControl {
+    return formControl;
+  }
+}
+
 const mockFormGroup = new FormGroup({
   testRadio: new FormControl(),
 });
@@ -54,6 +68,7 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 describe('AbstractOptionsComponent', () => {
   let component: AbstractOptionsComponent;
   let fixture: ComponentFixture<AbstractOptionsComponent>;
+  let formService: FormService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -66,6 +81,7 @@ describe('AbstractOptionsComponent', () => {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
         },
+        { provide: FormService, useClass: MockFormService },
       ],
     }).compileComponents();
   }));
@@ -73,6 +89,7 @@ describe('AbstractOptionsComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AbstractOptionsComponent);
     component = fixture.componentInstance;
+    formService = TestBed.inject(FormService);
     component.group = mockFormGroup;
     component.config = mockField;
     fixture.detectChanges();

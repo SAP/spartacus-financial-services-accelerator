@@ -1,13 +1,19 @@
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  ReactiveFormsModule,
+  AbstractControl,
+} from '@angular/forms';
+import { LanguageService } from '@spartacus/core';
+import { of } from 'rxjs';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
+import { FormService } from './../../core/services/form/form.service';
 import { TitleComponent } from './title.component';
-import { LanguageService } from '@spartacus/core';
-import { of } from 'rxjs';
 
 class MockOccValueListService {}
 
@@ -29,6 +35,14 @@ const mockFormGroup = new FormGroup({
   testTitle: new FormControl(),
 });
 
+const formControl = new FormControl('formValue');
+
+class MockFormService {
+  getFormControlForCode(): AbstractControl {
+    return formControl;
+  }
+}
+
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {},
 };
@@ -36,6 +50,7 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 describe('TitleComponent', () => {
   let component: TitleComponent;
   let fixture: ComponentFixture<TitleComponent>;
+  let formService: FormService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -49,6 +64,7 @@ describe('TitleComponent', () => {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
         },
+        { provide: FormService, useClass: MockFormService },
       ],
     }).compileComponents();
   }));
@@ -56,6 +72,7 @@ describe('TitleComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TitleComponent);
     component = fixture.componentInstance;
+    formService = TestBed.inject(FormService);
     component.group = mockFormGroup;
     component.config = mockField;
     el = fixture.debugElement;

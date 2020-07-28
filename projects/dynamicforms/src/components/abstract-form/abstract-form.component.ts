@@ -12,13 +12,15 @@ import { LanguageService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 import { PrefillResolver } from '../../core/resolver/prefill-resolver.interface';
+import { FormService } from '../../core/services/form/form.service';
 
 @Component({ template: '' })
 export class AbstractFormComponent implements OnInit, OnDestroy {
   constructor(
     protected appConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
-    protected injector: Injector
+    protected injector: Injector,
+    protected formService: FormService
   ) {}
 
   @HostBinding('class') hostComponentClass: string;
@@ -34,6 +36,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
     if (this.config && this.config.cssClass) {
       this.hostComponentClass = `${this.hostComponentClass} ${this.config.cssClass}`;
     }
+
     this.subscription.add(
       this.languageService
         .getActive()
@@ -71,24 +74,29 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  interDependancyValueCheck() {
-    if (this.group.get(this.config.name)) {
+  protected interDependancyValueCheck() {
+    const triggeredControl = this.formService.getFormControlForCode(
+      this.config.name,
+      this.group
+    );
+    if (triggeredControl) {
       this.subscription.add(
-        this.group
-          .get(this.config.name)
-          .valueChanges.pipe(
+        triggeredControl.valueChanges
+          .pipe(
             filter(_ => !!this.config.validations),
             map(_ => {
-              this.config.validations.filter(validation =>
-                validation.arguments && validation.arguments.length > 1
-                  ? this.group
-                      .get(validation.arguments[0].value)
-                      .updateValueAndValidity({
-                        onlySelf: true,
-                        emitEvent: false,
-                      })
-                  : null
-              );
+              this.config.validations.forEach(validation => {
+                if (validation.arguments && validation.arguments.length > 1) {
+                  const targetControl = this.formService.getFormControlForCode(
+                    validation.arguments[0].value,
+                    this.group
+                  );
+                  targetControl.updateValueAndValidity({
+                    onlySelf: true,
+                    emitEvent: false,
+                  });
+                }
+              });
             })
           )
           .subscribe()

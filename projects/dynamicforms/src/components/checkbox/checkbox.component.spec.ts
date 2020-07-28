@@ -1,13 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CheckboxComponent } from './checkbox.component';
-import { Input, Component, DebugElement } from '@angular/core';
-import { FieldConfig } from '../../core/models/form-config.interface';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
-import { DynamicFormsConfig } from '../../core';
-import { I18nTestingModule, LanguageService } from '@spartacus/core';
-import { OccValueListService } from '../../occ/services/occ-value-list.service';
-import { of } from 'rxjs';
 import { By } from '@angular/platform-browser';
+import { Input, Component, DebugElement } from '@angular/core';
+import {
+  FormGroup,
+  FormControl,
+  ReactiveFormsModule,
+  AbstractControl,
+} from '@angular/forms';
+import { of } from 'rxjs';
+import { I18nTestingModule, LanguageService } from '@spartacus/core';
+import { CheckboxComponent } from './checkbox.component';
+import { FieldConfig } from '../../core/models/form-config.interface';
+import { DynamicFormsConfig } from '../../core';
+import { OccValueListService } from '../../occ/services/occ-value-list.service';
+import { FormService } from './../../core/services/form/form.service';
 
 @Component({
   // tslint:disable
@@ -43,6 +49,14 @@ const mockField: FieldConfig = {
   },
 };
 
+const formControl = new FormControl('formValue');
+
+class MockFormService {
+  getFormControlForCode(): AbstractControl {
+    return formControl;
+  }
+}
+
 const mockFormGroup = new FormGroup({
   testcheckbox: new FormControl(),
 });
@@ -54,6 +68,7 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 describe('CheckboxComponent', () => {
   let component: CheckboxComponent;
   let fixture: ComponentFixture<CheckboxComponent>;
+  let formService: FormService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -67,6 +82,7 @@ describe('CheckboxComponent', () => {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
         },
+        { provide: FormService, useClass: MockFormService },
       ],
     }).compileComponents();
   }));
@@ -74,6 +90,7 @@ describe('CheckboxComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CheckboxComponent);
     component = fixture.componentInstance;
+    formService = TestBed.inject(FormService);
     component.group = mockFormGroup;
     component.config = mockField;
     el = fixture.debugElement;
