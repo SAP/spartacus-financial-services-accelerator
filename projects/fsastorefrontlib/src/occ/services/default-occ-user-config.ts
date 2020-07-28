@@ -1,11 +1,12 @@
-import { OccConfig } from '@spartacus/core';
+import { FSOccConfig } from '../config/fs-occ-config';
 
-export const occUserConfig: OccConfig = {
+export const occUserConfig: FSOccConfig = {
   backend: {
     occ: {
       endpoints: {
         user: 'fsusers/${userId}',
         userRegister: 'fsusers',
+        disableUser: 'users/${userId}',
       },
     },
   },

@@ -14,7 +14,7 @@ export class ChangeCarDetailsFormComponent
       { value: new Date().toISOString().substr(0, 10), disabled: true },
       Validators.required
     ),
-    vehicleAnnualMileage: ['', [Validators.required, Validators.max(100000)]],
+    vehicleAnnualMileage: ['', [Validators.required, Validators.max(200000)]],
   });
 
   ngOnInit() {
