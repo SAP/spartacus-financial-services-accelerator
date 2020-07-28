@@ -27,6 +27,12 @@ const mockField: FieldConfig = {
     targetObject: 'user',
     targetValue: targetValue,
   },
+  validations: [
+    {
+      name: 'testComparisonField',
+      arguments: [{ value: 'shouldBeGreater' }],
+    },
+  ],
 };
 
 const titleCode: Observable<any> = of('mr');
