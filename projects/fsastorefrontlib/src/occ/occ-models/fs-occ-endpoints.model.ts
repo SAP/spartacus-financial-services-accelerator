@@ -152,4 +152,9 @@ export interface FSOccEndpoints extends OccEndpoints {
    *
    */
   documents?: string;
+  /**
+   * Disable user
+   *
+   */
+  disableUser?: string;
 }
