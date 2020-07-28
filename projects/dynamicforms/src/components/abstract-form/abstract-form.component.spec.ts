@@ -49,11 +49,9 @@ class MockUserPrefillResolver {
   }
 }
 
-const formControl = new FormControl('formValue');
-
 class MockFormService {
   getFormControlForCode(): AbstractControl {
-    return formControl;
+    return mockFormGroup;
   }
 }
 
