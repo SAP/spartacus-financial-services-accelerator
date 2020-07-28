@@ -31,12 +31,21 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
   activeLang$ = this.languageService.getActive();
 
   ngOnInit() {
+    this.setHostComponentClass();
+    this.setActiveLanguageLabels();
+    this.controlPrefill();
+    this.interDependancyValueCheck();
+  }
+
+  protected setHostComponentClass() {
     this.hostComponentClass =
       this.config && this.config.gridClass ? this.config.gridClass : 'col-12';
     if (this.config && this.config.cssClass) {
       this.hostComponentClass = `${this.hostComponentClass} ${this.config.cssClass}`;
     }
+  }
 
+  protected setActiveLanguageLabels() {
     this.subscription.add(
       this.languageService
         .getActive()
@@ -51,9 +60,9 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+  }
 
-    this.interDependancyValueCheck();
-
+  protected controlPrefill() {
     if (this.config.prefillValue) {
       const targetObject = this.appConfig.dynamicForms.prefill[
         this.config.prefillValue.targetObject
@@ -62,14 +71,15 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
         const prefillResolver = this.injector.get<PrefillResolver>(
           targetObject.prefillResolver
         );
-        prefillResolver
-          .getPrefillValue(this.config.prefillValue.targetValue)
-          .subscribe(value => {
-            if (value) {
-              this.group.get(this.config.name).setValue(value);
-            }
-          })
-          .unsubscribe();
+        this.subscription.add(
+          prefillResolver
+            .getPrefillValue(this.config.prefillValue.targetValue)
+            .subscribe(value => {
+              if (value) {
+                this.group.get(this.config.name).setValue(value);
+              }
+            })
+        );
       }
     }
   }
