@@ -1,11 +1,17 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  AbstractControl,
+} from '@angular/forms';
 import { LanguageService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { UserPrefillResolver } from '../../core';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { AbstractFormComponent } from './abstract-form.component';
+import { FormService } from './../../core/services/form/form.service';
 
 class MockLanguageService {
   getActive() {
@@ -27,6 +33,12 @@ const mockField: FieldConfig = {
     targetObject: 'user',
     targetValue: targetValue,
   },
+  validations: [
+    {
+      name: 'testComparisonField',
+      arguments: [{ value: 'shouldBeGreater' }],
+    },
+  ],
 };
 
 const titleCode: Observable<any> = of('mr');
@@ -34,6 +46,16 @@ const titleCode: Observable<any> = of('mr');
 class MockUserPrefillResolver {
   getPrefillValue() {
     return titleCode;
+  }
+}
+
+const mockFormGroup = new FormGroup({
+  testTitle: new FormControl(),
+});
+
+class MockFormService {
+  getFormControlForCode(): AbstractControl {
+    return mockFormGroup;
   }
 }
 
@@ -47,14 +69,11 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
   },
 };
 
-const mockFormGroup = new FormGroup({
-  testTitle: new FormControl(),
-});
-
 describe('AbstractFormComponent', () => {
   let component: AbstractFormComponent;
   let fixture: ComponentFixture<AbstractFormComponent>;
   let mockLanguageService: LanguageService;
+  let formService: FormService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -64,6 +83,7 @@ describe('AbstractFormComponent', () => {
         { provide: LanguageService, useClass: MockLanguageService },
         { provide: DynamicFormsConfig, useValue: mockDynamicFormsConfig },
         { provide: UserPrefillResolver, useClass: MockUserPrefillResolver },
+        { provide: FormService, useClass: MockFormService },
       ],
     }).compileComponents();
     mockLanguageService = TestBed.inject(LanguageService);
@@ -72,6 +92,7 @@ describe('AbstractFormComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(AbstractFormComponent);
     component = fixture.componentInstance;
+    formService = TestBed.inject(FormService);
     component.group = mockFormGroup;
     component.config = mockField;
     fixture.detectChanges();

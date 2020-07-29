@@ -4,6 +4,7 @@ import {
   DynamicFormsConfig,
   FormDataService,
   FormDataStorageService,
+  FormService,
   YFormData,
 } from '@fsa/dynamicforms';
 import { LanguageService } from '@spartacus/core';
@@ -25,9 +26,10 @@ export class CalculationButtonComponent extends AbstractFormComponent
     protected formDataService: FormDataService,
     protected formConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
+    protected formService: FormService,
     protected injector: Injector
   ) {
-    super(formConfig, languageService, injector);
+    super(formConfig, languageService, injector, formService);
   }
 
   subscription = new Subscription();

@@ -1,13 +1,19 @@
 import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  AbstractControl,
+} from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
+import { of } from 'rxjs';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { RadioComponent } from './radio.component';
-import { of } from 'rxjs';
+import { FormService } from './../../core/services/form/form.service';
 
 @Component({
   // tslint:disable
@@ -43,6 +49,14 @@ const mockField: FieldConfig = {
   },
 };
 
+const formControl = new FormControl('formValue');
+
+class MockFormService {
+  getFormControlForCode(): AbstractControl {
+    return formControl;
+  }
+}
+
 const mockFormGroup = new FormGroup({
   testRadio: new FormControl(),
 });
@@ -55,6 +69,7 @@ describe('RadioComponent', () => {
   let component: RadioComponent;
   let fixture: ComponentFixture<RadioComponent>;
   let el: DebugElement;
+  let formService: FormService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -67,6 +82,7 @@ describe('RadioComponent', () => {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
         },
+        { provide: FormService, useClass: MockFormService },
       ],
     }).compileComponents();
   }));
@@ -74,6 +90,7 @@ describe('RadioComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(RadioComponent);
     component = fixture.componentInstance;
+    formService = TestBed.inject(FormService);
     component.group = mockFormGroup;
     component.config = mockField;
     el = fixture.debugElement;
