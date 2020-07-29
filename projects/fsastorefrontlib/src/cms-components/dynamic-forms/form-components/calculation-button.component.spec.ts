@@ -1,12 +1,18 @@
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  AbstractControl,
+} from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import {
   DynamicFormsConfig,
   FieldConfig,
   FormDataService,
   FormDataStorageService,
+  FormService,
 } from '@fsa/dynamicforms';
 import { LanguageService, Product } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
@@ -58,6 +64,12 @@ class MockCurrentProductService {
   }
 }
 
+class MockFormService {
+  getFormControlForCode(): AbstractControl {
+    return mockFormGroup;
+  }
+}
+
 class MockFormDataService {
   submit() {}
 }
@@ -69,6 +81,7 @@ describe('CalculationButtonComponent', () => {
   let currentProductService: CurrentProductService;
   let formDataStorageService: FormDataStorageService;
   let formDataService: FormDataService;
+  let formService: FormService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -92,6 +105,7 @@ describe('CalculationButtonComponent', () => {
           provide: FormDataService,
           useClass: MockFormDataService,
         },
+        { provide: FormService, useClass: MockFormService },
       ],
     }).compileComponents();
     currentProductService = TestBed.inject(CurrentProductService);
@@ -101,6 +115,7 @@ describe('CalculationButtonComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CalculationButtonComponent);
+    formService = TestBed.inject(FormService);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
     component.config = mockField;
