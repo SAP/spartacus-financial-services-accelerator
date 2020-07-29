@@ -6,9 +6,11 @@ import {
   Cart,
   CmsComponent,
   I18nTestingModule,
+  UserToken,
+  AuthService,
 } from '@spartacus/core';
 import { CmsComponentData, SpinnerModule } from '@spartacus/storefront';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { FormDefinitionType } from '../../../occ/occ-models';
 import { FSProduct } from './../../../occ/occ-models/occ.models';
 import { PersonalDetailsComponent } from './personal-details.component';
@@ -27,6 +29,11 @@ class MockFormDataService {
   }
   loadFormDefinitions(category, type) {
     return of(formDefinition);
+  }
+}
+class MockAuthService {
+  getUserToken(): Observable<UserToken> {
+    return of({ access_token: 'test' } as UserToken);
   }
 }
 @Component({
@@ -111,6 +118,11 @@ describe('PersonalDetailsComponent', () => {
           provide: FormDataStorageService,
           useClass: MockFormDataStorageService,
         },
+        {
+          provide: FormDataStorageService,
+          useClass: MockFormDataStorageService,
+        },
+        { provide: AuthService, useClass: MockAuthService },
       ],
     }).compileComponents();
 
