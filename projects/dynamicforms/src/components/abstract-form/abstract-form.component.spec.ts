@@ -49,6 +49,10 @@ class MockUserPrefillResolver {
   }
 }
 
+const mockFormGroup = new FormGroup({
+  testTitle: new FormControl(),
+});
+
 class MockFormService {
   getFormControlForCode(): AbstractControl {
     return mockFormGroup;
@@ -64,10 +68,6 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
     },
   },
 };
-
-const mockFormGroup = new FormGroup({
-  testTitle: new FormControl(),
-});
 
 describe('AbstractFormComponent', () => {
   let component: AbstractFormComponent;
