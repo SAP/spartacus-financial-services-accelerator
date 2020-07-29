@@ -1,13 +1,19 @@
 import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  AbstractControl,
+} from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
+import { of } from 'rxjs';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
+import { FormService } from './../../core/services/form/form.service';
 import { TimeComponent } from './time.component';
-import { of } from 'rxjs';
 
 @Component({
   // tslint:disable
@@ -34,6 +40,14 @@ const mockField: FieldConfig = {
   },
 };
 
+const formControl = new FormControl('formValue');
+
+class MockFormService {
+  getFormControlForCode(): AbstractControl {
+    return formControl;
+  }
+}
+
 const mockFormGroup = new FormGroup({
   testTime: new FormControl(),
 });
@@ -45,6 +59,7 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 describe('TimeComponent', () => {
   let component: TimeComponent;
   let fixture: ComponentFixture<TimeComponent>;
+  let formService: FormService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -58,6 +73,7 @@ describe('TimeComponent', () => {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
         },
+        { provide: FormService, useClass: MockFormService },
       ],
     }).compileComponents();
   }));
@@ -65,6 +81,7 @@ describe('TimeComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TimeComponent);
     component = fixture.componentInstance;
+    formService = TestBed.inject(FormService);
     component.group = mockFormGroup;
     component.config = mockField;
     el = fixture.debugElement;

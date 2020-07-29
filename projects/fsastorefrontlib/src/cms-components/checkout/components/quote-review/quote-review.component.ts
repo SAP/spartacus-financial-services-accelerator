@@ -9,6 +9,7 @@ import { FSTranslationService } from '../../../../core/i18n/facade/translation.s
 import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
+  FSSteps,
   BindingStateType,
   FSCart,
   QuoteWorkflowStatusType,
@@ -23,11 +24,11 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   cart$: Observable<Cart>;
   showContent$: Observable<boolean> = of(true);
   isCartStable$: Observable<boolean>;
-  checkoutStepUrlNext: string;
-  checkoutStepUrlBack: string;
   subscription = new Subscription();
   modalRef: ModalRef;
   cartCode: string;
+  previousCheckoutStep$: Observable<FSSteps>;
+  nextCheckoutStep$: Observable<FSSteps>;
 
   constructor(
     protected cartService: FSCartService,
@@ -40,49 +41,45 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-      this.activatedRoute
-    );
-    this.checkoutStepUrlBack = this.checkoutConfigService.getPreviousCheckoutStepUrl(
-      this.activatedRoute
-    );
     this.cart$ = this.cartService.getActive();
     this.isCartStable$ = this.cartService.isStable();
+    this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
+    this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
   }
 
   getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
 
-  back() {
-    this.routingService.go(this.checkoutStepUrlBack);
+  navigateBack(previousStep: FSSteps) {
+    this.routingService.go({
+      cxRoute: previousStep.step,
+    });
   }
 
-  continue() {
-    this.cart$
-      .subscribe(activeCart => {
-        this.cartCode = activeCart.code;
-        const bindingState = (<FSCart>activeCart).insuranceQuote.state.code;
-        const quoteWorkflowState = (<FSCart>activeCart).insuranceQuote
-          .quoteWorkflowStatus.code;
-        if (bindingState === BindingStateType.UNBIND) {
-          this.openQuoteBindingModal();
-        } else if (
-          bindingState === BindingStateType.BIND &&
-          quoteWorkflowState === QuoteWorkflowStatusType.REFERRED
-        ) {
-          this.openReferredQuoteModal();
-        } else if (
-          bindingState === BindingStateType.BIND &&
-          quoteWorkflowState !== QuoteWorkflowStatusType.REFERRED
-        ) {
-          this.routingService.go(this.checkoutStepUrlNext);
-        }
-      })
-      .unsubscribe();
+  navigateNext(nextStep: FSSteps, activeCart: Cart) {
+    this.cartCode = activeCart.code;
+    const bindingState = (<FSCart>activeCart).insuranceQuote.state.code;
+    const quoteWorkflowState = (<FSCart>activeCart).insuranceQuote
+      .quoteWorkflowStatus.code;
+    if (bindingState === BindingStateType.UNBIND) {
+      this.openQuoteBindingModal(nextStep);
+    } else if (
+      bindingState === BindingStateType.BIND &&
+      quoteWorkflowState === QuoteWorkflowStatusType.REFERRED
+    ) {
+      this.openReferredQuoteModal(nextStep);
+    } else if (
+      bindingState === BindingStateType.BIND &&
+      quoteWorkflowState !== QuoteWorkflowStatusType.REFERRED
+    ) {
+      this.routingService.go({
+        cxRoute: nextStep.step,
+      });
+    }
   }
 
-  private openQuoteBindingModal() {
+  private openQuoteBindingModal(nextStep) {
     let modalInstance: any;
     this.modalRef = this.modalService.open(BindQuoteDialogComponent, {
       centered: true,
@@ -90,6 +87,9 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     });
     modalInstance = this.modalRef.componentInstance;
     modalInstance.cartCode = this.cartCode;
+    modalInstance.nextStepUrl = {
+      cxRoute: nextStep.step,
+    };
     this.subscription.add(
       this.modalRef.componentInstance.quoteBinding$
         .pipe(
@@ -101,13 +101,16 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     );
   }
 
-  private openReferredQuoteModal() {
+  private openReferredQuoteModal(nextStep) {
     let modalInstance: any;
     this.modalRef = this.modalService.open(ReferredQuoteDialogComponent, {
       centered: true,
       size: 'lg',
     });
     modalInstance = this.modalRef.componentInstance;
+    modalInstance.nextStepUrl = {
+      cxRoute: nextStep.step,
+    };
     this.subscription.add(
       this.modalRef.componentInstance.referredQuote$
         .pipe(

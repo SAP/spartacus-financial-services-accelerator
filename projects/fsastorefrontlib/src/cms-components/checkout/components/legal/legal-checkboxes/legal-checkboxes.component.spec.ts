@@ -5,6 +5,7 @@ import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { of } from 'rxjs';
 import { FSCheckoutConfigService } from './../../../../../core/checkout/services/checkout-config.service';
 import { LegalCheckboxesComponent } from './legal-checkboxes.component';
+import { FSSteps } from '../../../../../occ/occ-models';
 
 class MockActivatedRoute {
   params = of();
@@ -18,6 +19,11 @@ class FSCheckoutConfigServiceStub {
   getNextCheckoutStepUrl() {}
   getPreviousCheckoutStepUrl() {}
 }
+
+const mockCategoryAndStep: FSSteps = {
+  stepParameter: 'insurances_travel',
+  step: 'category',
+};
 
 describe('LegalCheckboxesComponent', () => {
   let component: LegalCheckboxesComponent;
@@ -58,12 +64,12 @@ describe('LegalCheckboxesComponent', () => {
   });
 
   it('should continue to next step', () => {
-    component.continue();
+    component.navigateNext(mockCategoryAndStep);
     expect(routingService.go).toHaveBeenCalled();
   });
 
   it('should go back to previous step', () => {
-    component.back();
+    component.navigateBack(mockCategoryAndStep);
     expect(routingService.go).toHaveBeenCalled();
   });
 });

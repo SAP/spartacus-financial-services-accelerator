@@ -1,15 +1,57 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
-import { RoutesConfig, RoutingConfigService } from '@spartacus/core';
-import { CheckoutConfig } from '@spartacus/storefront';
-import { FSCheckoutStep } from '../../../cms-components/checkout/components/checkout-progress/checkout-step.component';
+import {
+  OrderEntry,
+  Product,
+  RoutesConfig,
+  RoutingConfigService,
+} from '@spartacus/core';
+import { CheckoutConfig, CurrentProductService } from '@spartacus/storefront';
+import { Observable, of } from 'rxjs';
 import { checkoutConfig } from '../../../cms-components/checkout/config/default-checkout-config';
 import { storefrontRoutesConfig } from '../../../cms-structure/routing/default-routing-config';
+import { FSCheckoutStep } from '../../../occ';
+import { FSCartService } from './../../../core/cart/facade/cart.service';
+import { FSProduct } from './../../../occ/occ-models/occ.models';
 import { FSCheckoutConfigService } from './checkout-config.service';
 
 const mockCheckoutSteps: Array<FSCheckoutStep> = checkoutConfig.checkout.steps;
 
 const mockCheckoutConfig: CheckoutConfig = checkoutConfig;
+
+const product: FSProduct = {
+  defaultCategory: {
+    code: 'insurances_auto',
+  },
+  configurable: false,
+};
+
+const mockEntries: OrderEntry[] = [
+  {
+    product: product,
+  },
+];
+
+const mockCart = {
+  deliveryOrderGroups: [
+    {
+      entries: [
+        {
+          product: {
+            defaultCategory: {
+              code: 'insurances_auto',
+            },
+          },
+        },
+      ],
+    },
+  ],
+};
+class MockCartService {
+  getActive() {
+    return of(mockCart);
+  }
+}
 
 const mockRoutingConfig: RoutesConfig = storefrontRoutesConfig;
 
@@ -19,10 +61,24 @@ class MockRoutingConfigService {
   }
 }
 
+const mockProduct: FSProduct = {
+  code: 'testProduct',
+  defaultCategory: {
+    code: 'testCategory',
+  },
+};
+
+class MockCurrentProductService {
+  getProduct(): Observable<Product> {
+    return of(mockProduct);
+  }
+}
+
 describe('FSCheckoutConfigService', () => {
   let service: FSCheckoutConfigService;
   let activatedRoute: ActivatedRoute;
   let routingConfigService: RoutingConfigService;
+  let cartService: FSCartService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -37,14 +93,28 @@ describe('FSCheckoutConfigService', () => {
           },
         },
         { provide: RoutingConfigService, useClass: MockRoutingConfigService },
+        {
+          provide: FSCartService,
+          useClass: MockCartService,
+        },
+        {
+          provide: CurrentProductService,
+          useClass: MockCurrentProductService,
+        },
       ],
     });
+
     activatedRoute = TestBed.inject(ActivatedRoute);
     routingConfigService = TestBed.inject(RoutingConfigService);
+    cartService = TestBed.inject(FSCartService);
 
     service = new FSCheckoutConfigService(
       mockCheckoutConfig,
-      routingConfigService
+      routingConfigService,
+      cartService
+    );
+    spyOn(service, 'getPreviousCheckoutStepUrl').and.returnValue(
+      'checkout/c/insurances_auto'
     );
   });
 

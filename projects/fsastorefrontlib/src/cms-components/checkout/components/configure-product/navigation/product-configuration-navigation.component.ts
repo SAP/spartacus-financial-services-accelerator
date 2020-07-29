@@ -31,7 +31,6 @@ export class ProductConfigurationNavigationComponent
   productCode: string;
   bundleCode: string;
   categoryCode: string;
-  checkoutStepUrlNext: string;
 
   ngOnInit() {
     this.subscription.add(

@@ -3,7 +3,6 @@ export * from './add-options/add-options.module';
 export * from './bind-quote-dialog/bind-quote-dialog.component';
 export * from './checkout-progress/checkout-progress.component';
 export * from './checkout-progress/checkout-progress.module';
-export * from './checkout-progress/checkout-step.component';
 export * from './choose-cover-navigation/choose-cover-navigation.component';
 export * from './final-review/final-review.component';
 export * from './legal/legal-checkboxes/legal-checkboxes.component';

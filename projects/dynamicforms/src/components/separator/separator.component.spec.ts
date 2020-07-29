@@ -1,12 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, AbstractControl } from '@angular/forms';
 import { SeparatorComponent } from './separator.component';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { of } from 'rxjs';
 import { LanguageService } from '@spartacus/core';
+import { FormService } from './../../core/services/form/form.service';
 
 class MockOccValueListService {}
 
@@ -37,9 +38,18 @@ class MockLanguageService {
   }
 }
 
+const formControl = new FormControl('formValue');
+
+class MockFormService {
+  getFormControlForCode(): AbstractControl {
+    return formControl;
+  }
+}
+
 describe('SeparatorComponent', () => {
   let component: SeparatorComponent;
   let fixture: ComponentFixture<SeparatorComponent>;
+  let formService: FormService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -51,12 +61,14 @@ describe('SeparatorComponent', () => {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
         },
+        { provide: FormService, useClass: MockFormService },
       ],
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SeparatorComponent);
+    formService = TestBed.inject(FormService);
     component = fixture.componentInstance;
     component.config = mockField;
     component.group = mockFormGroup;

@@ -1,6 +1,11 @@
 import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  AbstractControl,
+} from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { of } from 'rxjs';
@@ -8,6 +13,7 @@ import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { SelectComponent } from './select.component';
+import { FormService } from './../../core/services/form/form.service';
 
 @Component({
   // tslint:disable
@@ -33,6 +39,14 @@ const mockField: FieldConfig = {
   options: [],
 };
 
+const formControl = new FormControl('formValue');
+
+class MockFormService {
+  getFormControlForCode(): AbstractControl {
+    return formControl;
+  }
+}
+
 class MockOccValueListService {}
 
 const mockFormGroup = new FormGroup({
@@ -47,6 +61,7 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 describe('SelectComponent', () => {
   let component: SelectComponent;
   let fixture: ComponentFixture<SelectComponent>;
+  let formService: FormService;
   let occValueListService: OccValueListService;
   let el: DebugElement;
 
@@ -61,6 +76,7 @@ describe('SelectComponent', () => {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
         },
+        { provide: FormService, useClass: MockFormService },
       ],
     }).compileComponents();
   }));
@@ -68,6 +84,7 @@ describe('SelectComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SelectComponent);
     occValueListService = TestBed.inject(OccValueListService);
+    formService = TestBed.inject(FormService);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
     component.config = mockField;

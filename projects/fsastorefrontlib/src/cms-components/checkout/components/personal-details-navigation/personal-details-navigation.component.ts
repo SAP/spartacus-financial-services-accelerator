@@ -3,9 +3,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Cart, RoutingService } from '@spartacus/core';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map, take, switchMap } from 'rxjs/operators';
-import { FSOrderEntry } from '../../../../occ/occ-models';
+import { FSSteps, FSOrderEntry } from '../../../../occ/occ-models/occ.models';
+
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
@@ -26,16 +27,16 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
   ) {}
 
   subscription = new Subscription();
-  checkoutStepUrlNext: string;
+  previousCheckoutStep$: Observable<FSSteps>;
+  nextCheckoutStep$: Observable<FSSteps>;
   cartId: string;
 
   ngOnInit() {
-    this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-      this.activatedRoute
-    );
+    this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
+    this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
   }
 
-  navigateNext() {
+  navigateNext(nextStep: FSSteps) {
     this.subscription.add(
       this.cartService
         .getActive()
@@ -63,7 +64,9 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
                       JSON.parse(formData.content)
                     )
                   );
-                  this.routingService.go(this.checkoutStepUrlNext);
+                  this.routingService.go({
+                    cxRoute: nextStep.step,
+                  });
                 }
               })
             );
@@ -71,6 +74,12 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+  }
+
+  navigateBack(previousStep: FSSteps) {
+    this.routingService.go({
+      cxRoute: previousStep.step,
+    });
   }
 
   ngOnDestroy() {
