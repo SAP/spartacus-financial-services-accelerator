@@ -62,12 +62,7 @@ const mockField: FieldConfig = {
 };
 
 const config: FormDefinition = {
-  formGroups: [
-    {
-      groupCode: 'testGroupCode',
-      fieldConfigs: [mockField],
-    },
-  ],
+  formGroups: [],
   formId: 'testFormID',
 };
 
