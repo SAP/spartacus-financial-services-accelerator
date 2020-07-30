@@ -90,7 +90,7 @@ context('Renters Checkout', () => {
     checkout.checkMyAccountEmptyPages('Claims', 'You have no Claims!');
     checkout.checkMyAccountEmptyPages(
       'Quotes & Applications',
-      'You have no Quotes and Applications!'
+      'You have no Quotes or Applications!'
     );
   });
 });

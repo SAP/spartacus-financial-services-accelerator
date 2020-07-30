@@ -11,7 +11,7 @@ export const quote = {
     referredQuoteDescription:
       'Your quote is referred. For more information, please contact the agent.',
     viewYourQuotes: 'View your quotes',
-    youHaveNoQuotes: 'You have no Quotes and Applications',
+    youHaveNoQuotes: 'You have no Quotes or Applications',
     noActiveQuotes: 'You have no active quotes',
     getQuoteBySelecting: 'Get a Quote by selecting an insurance type above',
     expiryDate: 'Expiry date',
