@@ -37,7 +37,7 @@ export class DefaultFormValidators extends Validators {
     };
   }
 
-  static youngerThanValidator(controlName: string) {
+  static compareDOBtoAge(controlName: string, operator: string) {
     return (control: AbstractControl): ValidationErrors | null => {
       const userAge = new Date(control.value as string);
       const today = new Date();
@@ -46,13 +46,46 @@ export class DefaultFormValidators extends Validators {
         control.parent.controls &&
         control.parent.controls[controlName]
       ) {
-        const retirementAge = control.parent.controls[controlName].value;
+        const targetAge = control.parent.controls[controlName].value;
         const age = new Date(
-          today.getFullYear() - retirementAge,
+          today.getFullYear() - targetAge,
           today.getMonth(),
           today.getDate()
         );
-        return userAge > age ? null : { InvalidDate: true };
+        if (userAge && age) {
+          switch (operator) {
+            case 'shouldBeGreater':
+              return userAge > age ? null : { valueConflict: true };
+            case 'shouldBeLess':
+              return userAge < age ? null : { valueConflict: true };
+          }
+        }
+      }
+    };
+  }
+
+  static compareAgeToDOB(comparisonField: string, operator: string) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (control.parent) {
+        const compareToField = control.parent.controls[comparisonField].value;
+        const DOBtoYear = Number(
+          new Date(compareToField as string).getFullYear()
+        );
+        const currentYear = Number(new Date().getFullYear());
+        const currentAge = Number(control.value);
+        const calculatedAge = currentYear - DOBtoYear;
+        if (currentAge && calculatedAge) {
+          switch (operator) {
+            case 'shouldBeGreater':
+              return calculatedAge > currentAge
+                ? null
+                : { valueConflict: true };
+            case 'shouldBeLess':
+              return calculatedAge < currentAge
+                ? null
+                : { valueConflict: true };
+          }
+        }
       }
     };
   }
