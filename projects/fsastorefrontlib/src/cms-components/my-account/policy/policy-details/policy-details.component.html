@@ -113,7 +113,16 @@
                 <div class="col-6 col-sm-5 value notice">
                   {{ insuredObjectItem.value }}
                 </div>
-                <ng-container *ngIf="insuredObjectItem.changeable">
+                <ng-container
+                  *ngIf="
+                    insuredObjectItem.changeable &&
+                    isChangeAllowed(
+                      policy.categoryData?.allowedFSRequestTypes,
+                      'FSINSUREDOBJECT_CHANGE',
+                      policy.startDate
+                    )
+                  "
+                >
                   <div class="col-12 col-sm-2 value notice">
                     <p
                       (click)="
