@@ -83,7 +83,8 @@
         [icon]="
           isChangeAllowed(
             policy.categoryData.allowedFSRequestTypes,
-            'FSINSUREDOBJECT_CHANGE'
+            'FSINSUREDOBJECT_CHANGE',
+            policy.startDate
           )
             ? 'fs-icon icon-edit'
             : ''
@@ -215,7 +216,8 @@
       [icon]="
         isChangeAllowed(
           policy.categoryData?.allowedFSRequestTypes,
-          'FSCOVERAGE_CHANGE'
+          'FSCOVERAGE_CHANGE',
+          policy.startDate
         )
           ? 'fs-icon icon-edit'
           : ''
@@ -227,7 +229,8 @@
           *ngIf="
             isChangeAllowed(
               policy.categoryData?.allowedFSRequestTypes,
-              'FSCOVERAGE_CHANGE'
+              'FSCOVERAGE_CHANGE',
+              policy.startDate
             )
           "
         >

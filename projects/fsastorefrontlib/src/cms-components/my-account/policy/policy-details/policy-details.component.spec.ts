@@ -80,6 +80,7 @@ const mockEvent = {
 };
 const policyId = 'policyId';
 const contractId = 'contractId';
+const startDate = '2020-07-30T06:00:04+0000';
 const documentId = 'documentId';
 const documentName = 'document';
 
@@ -177,23 +178,30 @@ describe('PolicyDetailsComponent', () => {
     expect(routingService.go).not.toHaveBeenCalledWith();
   });
 
-  it('should checkk if request type is allowed', () => {
+  it('should check if request type is allowed', () => {
     expect(
       component.isChangeAllowed(
         mockAllowedFSRequestTypes,
-        RequestType.COVERAGE_CHANGE
+        RequestType.COVERAGE_CHANGE,
+        startDate
       )
     ).toEqual(true);
   });
 
   it('should check if request type is not allowed', () => {
     expect(
-      component.isChangeAllowed(mockAllowedFSRequestTypes, 'NOT_EXISTING_TYPE')
+      component.isChangeAllowed(
+        mockAllowedFSRequestTypes,
+        'NOT_EXISTING_TYPE',
+        startDate
+      )
     ).toEqual(false);
   });
 
   it('should check if request type is not allowed when allowed request types are not defined', () => {
-    expect(component.isChangeAllowed(null, 'NOT_EXISTING_TYPE')).toEqual(false);
+    expect(
+      component.isChangeAllowed(null, 'NOT_EXISTING_TYPE', startDate)
+    ).toEqual(false);
   });
 
   it('should test get document', () => {

@@ -5,13 +5,13 @@ import {
   OnInit,
 } from '@angular/core';
 import { OccConfig, RoutingService } from '@spartacus/core';
+import { saveAs } from 'file-saver';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
-import { AllowedFSRequestType } from './../../../../occ/occ-models';
 import { DocumentService } from './../../../../core/document/facade/document.service';
-import { saveAs } from 'file-saver';
+import { AllowedFSRequestType } from './../../../../occ/occ-models';
 
 @Component({
   selector: 'cx-fs-policy-details',
@@ -54,10 +54,12 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
 
   isChangeAllowed(
     allowedFSRequestTypes: AllowedFSRequestType[],
-    requestType: string
+    requestType: string,
+    startDate: string
   ): boolean {
-    if (allowedFSRequestTypes) {
+    if (startDate && allowedFSRequestTypes) {
       return (
+        new Date(startDate) <= new Date() &&
         allowedFSRequestTypes
           .filter(allowedRequestType => allowedRequestType.requestType)
           .map(allowedRequestType => allowedRequestType.requestType.code)
