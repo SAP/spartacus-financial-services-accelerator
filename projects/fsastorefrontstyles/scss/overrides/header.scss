@@ -73,7 +73,7 @@ header {
       nav {
         position: relative;
         .wrapper {
-          top: 36px;
+          top: 30px;
         }
       }
     }
@@ -147,7 +147,7 @@ header {
       cx-navigation-ui {
         h5 {
           margin-top: 0;
-          padding: 0;
+          padding: 0 0 10px 0;
           font-size: var(--cx-title-font-size);
           @include media-breakpoint-down(md) {
             padding: 1rem;
@@ -162,10 +162,11 @@ header {
     cx-login {
       a {
         color: var(--cx-color-text);
+        padding-bottom: 10px;
       }
       .cx-login-greet {
         color: var(--cx-color-primary);
-        margin-bottom: 10px;
+        padding: 10px 0 10px;
       }
     }
   }
