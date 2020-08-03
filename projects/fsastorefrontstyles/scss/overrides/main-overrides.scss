@@ -27,6 +27,14 @@ cx-page-layout {
   margin-bottom: 0;
 }
 
+header,
+main,
+footer {
+  &.mouse-focus {
+    outline: 0;
+  }
+}
+
 .close {
   width: inherit;
   margin: inherit;
