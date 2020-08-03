@@ -87,10 +87,16 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
                   product.dynamicAttributes &&
                   Object.keys(product.dynamicAttributes).length > 0
                 ) {
+                  let dynamicKeys = [];
                   product.dynamicAttributes.forEach(dynamicAttribute => {
                     if (dynamicAttribute.key === 'monthlyAnnuity') {
                       this.productPrice = dynamicAttribute.value.formattedValue;
                     }
+                    dynamicKeys.push(dynamicAttribute.key);
+                  });
+
+                  this.billingTimes = this.billingTimes.filter(billingTime => {
+                    return !dynamicKeys.includes(billingTime.code);
                   });
                 } else {
                   product.price.oneTimeChargeEntries.forEach(
