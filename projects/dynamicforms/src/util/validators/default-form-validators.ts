@@ -1,4 +1,9 @@
-import { AbstractControl, ValidationErrors, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  ValidationErrors,
+  Validators,
+  FormGroup,
+} from '@angular/forms';
 
 // @dynamic
 export class DefaultFormValidators extends Validators {
@@ -19,6 +24,29 @@ export class DefaultFormValidators extends Validators {
           return baseValue < comparisonValue ? null : { valueConflict: true };
       }
     }
+  }
+
+  static getFormControlForCode(
+    formControlCode: string,
+    formGroup: FormGroup
+  ): AbstractControl {
+    let abstractFormControl;
+    for (const key of Object.keys(formGroup.controls)) {
+      const nestedFormGroup = formGroup.get(key);
+      if (key === formControlCode) {
+        abstractFormControl = formGroup.get(key);
+        break;
+      } else if (nestedFormGroup instanceof FormGroup) {
+        abstractFormControl = this.getFormControlForCode(
+          formControlCode,
+          nestedFormGroup
+        );
+        if (abstractFormControl !== undefined) {
+          break;
+        }
+      }
+    }
+    return abstractFormControl;
   }
 
   static regexValidator(regex) {
@@ -52,16 +80,17 @@ export class DefaultFormValidators extends Validators {
     };
   }
 
-  static compareDOBtoAge(controlName: string, operator: string) {
+  static compareDOBtoAge(comparisonField: string, operator: string) {
     return (control: AbstractControl): ValidationErrors | null => {
       const userAge = new Date(control.value as string);
       const today = new Date();
-      if (
-        control.parent &&
-        control.parent.controls &&
-        control.parent.controls[controlName]
-      ) {
-        const targetAge = control.parent.controls[controlName].value;
+      if (control.parent) {
+        const formRoot = control.root as FormGroup;
+        const compareToField = DefaultFormValidators.getFormControlForCode(
+          comparisonField,
+          formRoot
+        );
+        const targetAge = compareToField.value;
         const age = new Date(
           today.getFullYear() - targetAge,
           today.getMonth(),
@@ -75,9 +104,14 @@ export class DefaultFormValidators extends Validators {
   static compareAgeToDOB(comparisonField: string, operator: string) {
     return (control: AbstractControl): ValidationErrors | null => {
       if (control.parent) {
-        const compareToField = control.parent.controls[comparisonField].value;
+        const formRoot = control.root as FormGroup;
+        const compareToField = DefaultFormValidators.getFormControlForCode(
+          comparisonField,
+          formRoot
+        );
+        const compareToFieldParsed = compareToField.value;
         const DOBtoYear = Number(
-          new Date(compareToField as string).getFullYear()
+          new Date(compareToFieldParsed as string).getFullYear()
         );
         const currentYear = Number(new Date().getFullYear());
         const currentAge = Number(control.value);
@@ -95,12 +129,15 @@ export class DefaultFormValidators extends Validators {
     return (control: AbstractControl): ValidationErrors | null => {
       if (control.parent) {
         const currentField = Number(control.value);
-        const compareToField = Number(
-          control.parent.controls[comparisonField].value
+        const formRoot = control.root as FormGroup;
+        const compareToField = DefaultFormValidators.getFormControlForCode(
+          comparisonField,
+          formRoot
         );
+        const compareToFieldParsed = Number(compareToField.value);
         return DefaultFormValidators.valueComparison(
           currentField,
-          compareToField,
+          compareToFieldParsed,
           operator
         );
       }
@@ -111,11 +148,14 @@ export class DefaultFormValidators extends Validators {
     return (control: AbstractControl): ValidationErrors | null => {
       if (control.parent) {
         const currentField = Date.parse(control.value);
-        const compareToField = Date.parse(
-          control.parent.controls[comparisonField].value
+        const formRoot = control.root as FormGroup;
+        const compareToField = DefaultFormValidators.getFormControlForCode(
+          comparisonField,
+          formRoot
         );
+        const compareToFieldParsed = Date.parse(compareToField.value);
         return DefaultFormValidators.valueComparison(
-          compareToField,
+          compareToFieldParsed,
           currentField,
           operator
         );
