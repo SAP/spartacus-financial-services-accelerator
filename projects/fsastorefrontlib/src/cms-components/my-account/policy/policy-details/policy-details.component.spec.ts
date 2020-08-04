@@ -115,9 +115,9 @@ describe('PolicyDetailsComponent', () => {
       declarations: [PolicyDetailsComponent],
     }).compileComponents();
 
-    changeRequestService = TestBed.get(ChangeRequestService as Type<
-      ChangeRequestService
-    >);
+    changeRequestService = TestBed.get(
+      ChangeRequestService as Type<ChangeRequestService>
+    );
     routingService = TestBed.get(RoutingService as Type<RoutingService>);
     policyService = TestBed.get(PolicyService as Type<PolicyService>);
     documentService = TestBed.get(DocumentService as Type<DocumentService>);

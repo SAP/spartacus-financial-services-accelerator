@@ -13,9 +13,9 @@ export function getReducers(): ActionReducerMap<FormsState> {
   };
 }
 
-export const reducerToken: InjectionToken<
-  ActionReducerMap<FormsState>
-> = new InjectionToken<ActionReducerMap<FormsState>>('FormReducers');
+export const reducerToken: InjectionToken<ActionReducerMap<
+  FormsState
+>> = new InjectionToken<ActionReducerMap<FormsState>>('FormReducers');
 export const reducerProvider: Provider = {
   provide: reducerToken,
   useFactory: getReducers,
@@ -24,7 +24,7 @@ export const reducerProvider: Provider = {
 export function clearFormDefinitionState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
-  return function(state, action) {
+  return function (state, action) {
     if (action.type === AuthActions.LOGOUT) {
       state = undefined;
       localStorage.removeItem(DYNAMIC_FORMS_LOCAL_STORAGE_KEY);

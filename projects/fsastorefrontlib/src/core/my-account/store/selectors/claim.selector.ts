@@ -19,31 +19,19 @@ export const getClaimsState: MemoizedSelector<
 export const getClaims: MemoizedSelector<
   StateWithMyAccount,
   any
-> = createSelector(
-  getClaimsState,
-  fromClaim.getClaims
-);
+> = createSelector(getClaimsState, fromClaim.getClaims);
 
 export const getClaimsRefresh: MemoizedSelector<
   StateWithMyAccount,
   boolean
-> = createSelector(
-  getClaimsState,
-  fromClaim.getRefresh
-);
+> = createSelector(getClaimsState, fromClaim.getRefresh);
 
 export const getClaimsLoaded: MemoizedSelector<
   StateWithMyAccount,
   boolean
-> = createSelector(
-  getClaimsState,
-  fromClaim.getLoaded
-);
+> = createSelector(getClaimsState, fromClaim.getLoaded);
 
 export const getClaimContent: MemoizedSelector<
   StateWithMyAccount,
   any
-> = createSelector(
-  getClaimsState,
-  fromClaim.getContent
-);
+> = createSelector(getClaimsState, fromClaim.getContent);

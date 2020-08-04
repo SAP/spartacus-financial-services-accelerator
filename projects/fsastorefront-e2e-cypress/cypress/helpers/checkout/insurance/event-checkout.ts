@@ -1,25 +1,12 @@
 import * as shared from '../shared-checkout';
 
 export function checkProgressBarEvent() {
-  cy.get('p.label')
-    .should('have.length', 6)
-    .eq(0)
-    .contains("What's Included");
-  cy.get('p.label')
-    .eq(1)
-    .contains('Add Options');
-  cy.get('p.label')
-    .eq(2)
-    .contains('Personal Details');
-  cy.get('p.label')
-    .eq(3)
-    .contains('Quote Review');
-  cy.get('p.label')
-    .eq(4)
-    .contains('Payment Details');
-  cy.get('p.label')
-    .eq(5)
-    .contains('Final Review');
+  cy.get('p.label').should('have.length', 6).eq(0).contains("What's Included");
+  cy.get('p.label').eq(1).contains('Add Options');
+  cy.get('p.label').eq(2).contains('Personal Details');
+  cy.get('p.label').eq(3).contains('Quote Review');
+  cy.get('p.label').eq(4).contains('Payment Details');
+  cy.get('p.label').eq(5).contains('Final Review');
 }
 
 export function checkEventComparisonTable() {

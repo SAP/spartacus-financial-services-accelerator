@@ -21,15 +21,11 @@ export const getCheckoutStepsState: MemoizedSelector<
 export const getCheckoutSteps: MemoizedSelector<
   FSStateWithCheckout,
   FSCheckoutStepsState
-> = createSelector(
-  getCheckoutStepsState,
-  state => StateUtils.loaderValueSelector(state)
+> = createSelector(getCheckoutStepsState, state =>
+  StateUtils.loaderValueSelector(state)
 );
 
 export const getIdentificationType: MemoizedSelector<
   FSStateWithCheckout,
   boolean
-> = createSelector(
-  getCheckoutSteps,
-  getIdentificationTypeSelector
-);
+> = createSelector(getCheckoutSteps, getIdentificationTypeSelector);

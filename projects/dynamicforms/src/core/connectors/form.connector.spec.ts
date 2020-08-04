@@ -6,13 +6,15 @@ import { FormAdapter } from './form.adapter';
 import createSpy = jasmine.createSpy;
 
 class MockFormAdapter implements FormAdapter {
-  getFormDefinitions = createSpy('FormAdapter.getFormDefinitions').and.callFake(
-    (categoryCode, formDefType) =>
-      of('getFormDefinitions' + categoryCode + formDefType)
+  getFormDefinitions = createSpy(
+    'FormAdapter.getFormDefinitions'
+  ).and.callFake((categoryCode, formDefType) =>
+    of('getFormDefinitions' + categoryCode + formDefType)
   );
-  getFormDefinition = createSpy('FormAdapter.getFormDefinition').and.callFake(
-    (applicationID, formDataID) =>
-      of('getFormDefinition' + applicationID + formDataID)
+  getFormDefinition = createSpy(
+    'FormAdapter.getFormDefinition'
+  ).and.callFake((applicationID, formDataID) =>
+    of('getFormDefinition' + applicationID + formDataID)
   );
   getFormData = createSpy('FormAdapter.getFormData').and.callFake(formDataID =>
     of('getFormData' + formDataID)
