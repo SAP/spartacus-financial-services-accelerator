@@ -35,14 +35,10 @@ context('Life Insurance Checkout', () => {
     //register new user in checkout
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
-    cy.get('.SiteLogo')
-      .should('be.visible')
-      .click();
+    cy.get('.SiteLogo').should('be.visible').click();
     checkout.startInsuranceCheckout('Life');
     cy.wait(500);
-    cy.get('[name=lifeWhoCovered]')
-      .eq(1)
-      .click();
+    cy.get('[name=lifeWhoCovered]').eq(1).click();
     life.populateSecondPerson();
     checkout.clickContinueButton();
     //check comparison table when second person is added

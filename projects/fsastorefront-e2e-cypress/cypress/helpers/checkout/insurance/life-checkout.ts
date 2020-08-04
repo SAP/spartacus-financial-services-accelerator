@@ -3,16 +3,12 @@ import * as sharedCheckout from '../shared-checkout.interface';
 
 export function populateFirstStep() {
   cy.get('.form-title').contains('Coverage Information');
-  cy.get('[name=lifeWhoCovered]')
-    .eq(0)
-    .click();
+  cy.get('[name=lifeWhoCovered]').eq(0).click();
   cy.get('[name="lifeCoverageRequire"]').type('30000');
   cy.get('[name="lifeCoverageLast"]').type('24');
   cy.get('[name="lifeCoverageStartDate"]').type('2022-09-25');
   cy.get('[name="lifeMainDob"]').type('1987-09-25');
-  cy.get('[name=lifeMainSmoke]')
-    .eq(1)
-    .click();
+  cy.get('[name=lifeMainSmoke]').eq(1).click();
 }
 
 export function selectBasicLifeProduct() {
@@ -81,9 +77,7 @@ export function checkLifeComparisonTable() {
 
 export function populateSecondPerson() {
   cy.get('[name="lifeSecondDob"]').type('1981-09-25');
-  cy.get('[name=lifeSecondSmoke]')
-    .eq(0)
-    .click();
+  cy.get('[name=lifeSecondSmoke]').eq(0).click();
   cy.get('[name="lifeRelationship"]').select('Civil Partner');
 }
 

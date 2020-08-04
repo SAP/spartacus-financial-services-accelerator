@@ -20,7 +20,4 @@ export const getUserRequestState: MemoizedSelector<
 export const getUserRequestContent: MemoizedSelector<
   StateWithUserRequest,
   FSUserRequest
-> = createSelector(
-  getUserRequestState,
-  fromUserRequest.getUserRequestContent
-);
+> = createSelector(getUserRequestState, fromUserRequest.getUserRequestContent);

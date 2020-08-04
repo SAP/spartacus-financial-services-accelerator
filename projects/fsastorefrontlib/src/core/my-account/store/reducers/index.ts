@@ -24,9 +24,9 @@ export function getReducers(): ActionReducerMap<MyAccountState> {
     claimPolicies: fromClaimPoliciesReducer.reducer,
   };
 }
-export const reducerToken: InjectionToken<
-  ActionReducerMap<MyAccountState>
-> = new InjectionToken<ActionReducerMap<MyAccountState>>('UserReducers');
+export const reducerToken: InjectionToken<ActionReducerMap<
+  MyAccountState
+>> = new InjectionToken<ActionReducerMap<MyAccountState>>('UserReducers');
 export const reducerProvider: Provider = {
   provide: reducerToken,
   useFactory: getReducers,
@@ -35,7 +35,7 @@ export const reducerProvider: Provider = {
 export function clearUserState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
-  return function(state, action) {
+  return function (state, action) {
     if (
       action.type === AuthActions.LOGOUT ||
       action.type === fromClaimAction.DELETE_CLAIM_SUCCESS

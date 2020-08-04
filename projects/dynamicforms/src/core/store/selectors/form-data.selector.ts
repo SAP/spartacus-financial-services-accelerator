@@ -8,10 +8,7 @@ const formDataLoaded = (state: FormDataState) => state.loaded;
 export const getFormDataState: MemoizedSelector<
   StateWithForm,
   FormDataState
-> = createSelector(
-  getFormState,
-  (state: FormsState) => state.formData
-);
+> = createSelector(getFormState, (state: FormsState) => state.formData);
 
 export const getFormData: MemoizedSelector<StateWithForm, any> = createSelector(
   getFormDataState,
@@ -21,7 +18,4 @@ export const getFormData: MemoizedSelector<StateWithForm, any> = createSelector(
 export const getFormDataLoaded: MemoizedSelector<
   StateWithForm,
   any
-> = createSelector(
-  getFormDataState,
-  formDataLoaded
-);
+> = createSelector(getFormDataState, formDataLoaded);

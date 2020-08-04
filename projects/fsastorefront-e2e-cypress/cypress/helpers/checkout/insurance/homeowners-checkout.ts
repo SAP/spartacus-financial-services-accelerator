@@ -69,9 +69,7 @@ export function checkMiniCartHomeowners() {
 }
 
 export function populateHomeownersSpecific() {
-  cy.get('[name=propertyDetailsCoverRequired]')
-    .eq(0)
-    .click();
+  cy.get('[name=propertyDetailsCoverRequired]').eq(0).click();
   cy.get('[name=propertyValue]').type('200000');
   cy.get('[name=propertyRebuildCost]').type('25000');
 }
@@ -80,9 +78,7 @@ export function populateBuildingCover() {
   cy.get('[name=numberOfYearsHoldingInsurance]').type('12');
   cy.get('h4').contains('Your Building Cover');
   cy.get('[name=alreadyHeldInsurance]').select('3');
-  cy.get('[name="accidentalDamageCoverBuilding"]')
-    .eq(0)
-    .click();
+  cy.get('[name="accidentalDamageCoverBuilding"]').eq(0).click();
 }
 
 export function checkHomeownersPolicy() {

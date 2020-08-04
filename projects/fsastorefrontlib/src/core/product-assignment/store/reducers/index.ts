@@ -9,9 +9,9 @@ export function getReducers(): ActionReducerMap<ProductAssignmentsState> {
     productAssignments: fromReducer.reducer,
   };
 }
-export const reducerToken: InjectionToken<
-  ActionReducerMap<ProductAssignmentsState>
-> = new InjectionToken<ActionReducerMap<ProductAssignmentsState>>(
+export const reducerToken: InjectionToken<ActionReducerMap<
+  ProductAssignmentsState
+>> = new InjectionToken<ActionReducerMap<ProductAssignmentsState>>(
   'ProductAssignmentsReducers'
 );
 export const reducerProvider: Provider = {
@@ -21,7 +21,7 @@ export const reducerProvider: Provider = {
 export function clearProductAssignmentState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
-  return function(state, action) {
+  return function (state, action) {
     if (action.type === AuthActions.LOGOUT) {
       state = undefined;
     }
