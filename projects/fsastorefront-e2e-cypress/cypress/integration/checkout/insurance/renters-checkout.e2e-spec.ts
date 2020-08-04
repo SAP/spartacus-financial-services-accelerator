@@ -7,7 +7,7 @@ import {
   selectPaymentMethod,
 } from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
-import { waitForcreateCart } from '../../../helpers/generalHelpers';
+import { waitForCreateCart } from '../../../helpers/generalHelpers';
 
 let cartId;
 context('Renters Checkout', () => {
@@ -42,7 +42,7 @@ context('Renters Checkout', () => {
     checkout.checkCheckoutStep('Your Renters Insurance', '7');
     checkout.checkInsuranceComparisonPage('2');
     renters.checkRentersComparisonTable();
-    const addToCart = waitForcreateCart('carts', 'addToCart');
+    const addToCart = waitForCreateCart('carts', 'addToCart');
     renters.selectRentersMonthly();
     cy.wait(`@${addToCart}`).then(response => {
       const body = <any>response.response.body;

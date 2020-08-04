@@ -9,7 +9,7 @@ import {
 } from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import * as changeRequest from '../../../helpers/changeRequest';
-import { waitForcreateCart } from '../../../helpers/generalHelpers';
+import { waitForCreateCart } from '../../../helpers/generalHelpers';
 
 context('Change Request for new user', () => {
   before(() => {
@@ -31,7 +31,7 @@ context('Change Request for new user', () => {
   });
 
   it('Should check comparison table and select main product', () => {
-    const addToCart = waitForcreateCart('carts', 'addToCart');
+    const addToCart = waitForCreateCart('carts', 'addToCart');
     auto.checkAutoComparisonTable();
     auto.selectAutoSilver();
     cy.wait(`@${addToCart}`).then(response => {

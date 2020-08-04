@@ -17,7 +17,7 @@ import {
 } from '../../../helpers/my-account/policies';
 import {
   waitForPage,
-  waitForcreateCart,
+  waitForCreateCart,
 } from '../../../helpers/generalHelpers';
 
 let cartId;
@@ -51,7 +51,7 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should continue in add options and quote review pages', () => {
-    const addToCart = waitForcreateCart('carts', 'addToCart');
+    const addToCart = waitForCreateCart('carts', 'addToCart');
     auto.checkAutoComparisonTable();
     auto.selectAutoBronze();
     cy.wait(`@${addToCart}`).then(response => {
