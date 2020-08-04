@@ -69,8 +69,10 @@ class MockRoutingService {
 }
 
 class MockActivatedRoute {
-  routeConfig = {
-    path: 'checkout/add-options',
+  snapshot = {
+    data: {
+      cxRoute: 'addOptions',
+    },
   };
   params = of(mockParams);
 }

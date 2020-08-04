@@ -14,12 +14,12 @@ import {
 import { Observable, Subscription } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
+import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
-  FSProduct,
   FSCheckoutStep,
+  FSProduct,
 } from './../../../../occ/occ-models/occ.models';
-import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
 
 @Component({
   selector: 'cx-fs-checkout-progress',
@@ -116,11 +116,10 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
   }
 
   setActiveStepIndex() {
-    this.activeStepUrl = this.activatedRoute.routeConfig.path;
+    const activeStepRoute = this.activatedRoute.snapshot.data.cxRoute;
     this.checkoutConfigService.steps.forEach((step, index) => {
-      const routeUrl = this.routingConfigService.getRouteConfig(step.routeName)
-        .paths[0];
-      if (routeUrl === this.activeStepUrl) {
+      const stepRoute = step.routeName;
+      if (stepRoute === activeStepRoute) {
         this.activeStepIndex = index;
       }
     });
