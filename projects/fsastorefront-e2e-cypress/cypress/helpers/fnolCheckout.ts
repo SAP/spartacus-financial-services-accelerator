@@ -1,8 +1,4 @@
-import {
-  waitForCMSComponent,
-  waitForPage,
-  waitForUserAssets,
-} from './generalHelpers';
+import { waitForCMSComponent, waitForPage } from './generalHelpers';
 
 export function getClaimIdFromLocalStorage() {
   const localData = JSON.parse(localStorage.getItem('spartacus-local-data'));

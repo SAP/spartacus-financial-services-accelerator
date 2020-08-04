@@ -9,7 +9,9 @@ import {
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 import { clickContinueButton } from '../../../helpers/checkout/checkoutSteps';
 import * as fnol from '../../../helpers/fnolCheckout';
+import { waitForcreateCart } from '../../../helpers/generalHelpers';
 
+let cartId;
 context('Travel Insurance Checkout', () => {
   before(() => {
     cy.visit('/');
@@ -29,7 +31,12 @@ context('Travel Insurance Checkout', () => {
 
     it('Add main product to the cart', () => {
       travelCheckout.checkTravelComparisonTable();
+      const addToCart = waitForcreateCart('carts', 'addToCart');
       travelCheckout.selectSingleBudgetPlan();
+      cy.wait(`@${addToCart}`).then(response => {
+        const body = <any>response.response.body;
+        cartId = body.code;
+      });
     });
 
     it('Add optional product to the cart', () => {
@@ -42,7 +49,7 @@ context('Travel Insurance Checkout', () => {
       clickContinueButton();
       fnol.waitForQuoteReviewPage();
       clickContinueButton();
-      addPaymentMethod(registrationUser.email);
+      addPaymentMethod(registrationUser.email, cartId);
       checkout.ConfirmBindQuote();
     });
 
