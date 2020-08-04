@@ -2,7 +2,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import { ModalService, SpinnerModule } from '@spartacus/storefront';
-import { Observable, of } from 'rxjs';
+import { of } from 'rxjs';
+import { FSCart, FSSteps } from '../../../../occ/occ-models';
 import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
@@ -10,7 +11,6 @@ import { FSTranslationService } from './../../../../core/i18n/facade/translation
 import { AccordionModule } from './../../../../shared/accordion/accordion.module';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 import { QuoteReviewComponent } from './quote-review.component';
-import { FSSteps, FSCart } from '../../../../occ/occ-models';
 
 const formDataContent = '{"content":"formContent"}';
 
@@ -195,7 +195,7 @@ describe('Quote Review Component', () => {
   });
 
   it('should not get form content 1', () => {
-    const content = component.getFormContent({});
+    const content = component.getFormContent(undefined);
     expect(content).toEqual(undefined);
   });
 
@@ -218,7 +218,7 @@ describe('Quote Review Component', () => {
     expect(content).toEqual(undefined);
   });
 
-  it('should not get form content 4', () => {
+  it('should not get form content 5', () => {
     const content = component.getFormContent({
       deliveryOrderGroups: [{ entries: [{ formData: [] }] }],
     });
