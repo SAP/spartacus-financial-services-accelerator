@@ -21,7 +21,6 @@ export function openCategoryPage() {
 export function populateInsuranceInfoForm() {
   cy.get('cx-dynamic-form').within(() => {
     cy.get('[name=tripDestination]').select('Europe');
-    cy.get('[name="NoOfDays"]').type('9');
     cy.get('[name="tripStartDate"]').type('2021-01-01');
     cy.get('[name="tripEndDate"]').type('2021-01-10');
     cy.get('[name="costOfTrip"]').type('3000');

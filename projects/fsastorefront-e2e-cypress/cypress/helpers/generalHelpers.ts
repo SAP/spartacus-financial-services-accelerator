@@ -23,10 +23,3 @@ export function waitForCMSComponent(component: string, alias: string): string {
   cy.route('GET', `/occ/v2/financial/cms/components/${component}*`).as(alias);
   return alias;
 }
-
-export function getCartId(alias: String) {
-  cy.wait(`@${alias}`).then(response => {
-    const body = <any>response.response.body;
-    return body.code;
-  });
-}

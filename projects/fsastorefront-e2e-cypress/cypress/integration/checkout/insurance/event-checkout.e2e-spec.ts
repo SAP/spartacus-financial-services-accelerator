@@ -36,7 +36,7 @@ context('Event Checkout', () => {
     event.selectTwoStarEvent();
     cy.wait(`@${addToCart}`).then(response => {
       const body = <any>response.response.body;
-      this.cartId = body.code;
+      cartId = body.code;
     });
   });
 
@@ -64,6 +64,7 @@ context('Event Checkout', () => {
     addPaymentMethod(registrationUser.email, cartId);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
+    checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {

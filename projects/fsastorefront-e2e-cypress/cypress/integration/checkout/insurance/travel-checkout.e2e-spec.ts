@@ -51,6 +51,7 @@ context('Travel Insurance Checkout', () => {
       clickContinueButton();
       addPaymentMethod(registrationUser.email, cartId);
       checkout.ConfirmBindQuote();
+      checkout.clickContinueButton();
     });
 
     it('Check mini cart on quote review page', () => {

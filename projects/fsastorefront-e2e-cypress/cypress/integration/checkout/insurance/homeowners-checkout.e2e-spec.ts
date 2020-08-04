@@ -76,6 +76,7 @@ context('Homeowners Checkout', () => {
     addPaymentMethod(registrationUserWithoutPhone.email, cartId);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
+    checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {
