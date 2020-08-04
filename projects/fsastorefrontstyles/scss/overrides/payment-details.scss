@@ -27,7 +27,7 @@ cx-payment-method {
     margin: 20px 0;
   }
   cx-payment-form {
-    & > div > .row:not(.cx-checkout-btns) {
+    & form > .row:not(.cx-checkout-btns) {
       @include box-shadow(0px, 8px, 20px, 1px, $color-grey, 1);
       margin: 0;
       padding: 2rem;
@@ -38,9 +38,15 @@ cx-payment-method {
     .cx-payment-form-billing-address {
       color: var(--cx-color-primary);
     }
-    .col-md-12.col-lg-9 {
+    .col-md-12.col-xl-10 {
       flex: 0 0 100%;
       max-width: 100%;
     }
+    @include media-breakpoint-down(md) {
+      background-color: var(--cx-color-1);
+    }
+  }
+  @include media-breakpoint-down(md) {
+    background-color: var(--cx-color-1);
   }
 }
