@@ -4,14 +4,14 @@ export const user = {
       dialog: {
         title: '[DE] Consent Management',
         legalDescription:
-          "[DE] We use cookies/browser's storage to personalize the content and improve user experience. We also might share the data about your site usage with our social media. For more, please review our privacy policy.",
+          '[DE] We use cookies/browser\'s storage to personalize the content and improve user experience. We also might share the data about your site usage with our social media. For more, please review our privacy policy.',
         selectAll: '[DE] Select all',
         clearAll: '[DE] Clear all',
       },
       banner: {
         title: '[DE] This website uses cookies',
         description:
-          "[DE] We use cookies/browser's storage to personalize the content and improve user experience.",
+          '[DE] We use cookies/browser\'s storage to personalize the content and improve user experience.',
         allowAll: '[DE] Allow All',
         viewDetails: '[DE] View Details',
       },
@@ -100,4 +100,3 @@ export const user = {
       emailsMustMatch: '[DE] Email does not match',
     },
   };
-  
