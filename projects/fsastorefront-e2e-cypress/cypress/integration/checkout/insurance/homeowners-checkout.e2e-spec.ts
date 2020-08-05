@@ -7,7 +7,9 @@ import {
   selectPaymentMethod,
 } from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
+import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
+let cartId;
 context('Homeowners Checkout', () => {
   before(() => {
     cy.visit('/login');
@@ -46,7 +48,11 @@ context('Homeowners Checkout', () => {
     checkout.checkCheckoutStep('Your Homeowners Insurance', '7');
     checkout.checkInsuranceComparisonPage('2');
     homeowners.checkHomeownersComparisonTable();
+    const addToCart = waitForCreateAsset('carts', 'addToCart');
     homeowners.selectHomeownersAnnually();
+    cy.wait(`@${addToCart}`).then(result => {
+      cartId = (<any>result.response.body).code;
+    });
   });
 
   it('Should check add options page', () => {
@@ -66,9 +72,10 @@ context('Homeowners Checkout', () => {
     checkout.checkProgressBarInsurance();
     //homeowners.checkMiniCartHomeowners();
     checkout.checkAccordions('generalQuoteAccordions');
-    addPaymentMethod(registrationUserWithoutPhone.email);
+    addPaymentMethod(registrationUserWithoutPhone.email, cartId);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
+    checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {

@@ -9,7 +9,9 @@ import {
 } from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 import * as myAccount from '../../../helpers/my-account/myAccountPages';
+import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
+let cartId;
 context('Event Checkout', () => {
   before(() => {
     cy.visit('/');
@@ -30,7 +32,11 @@ context('Event Checkout', () => {
     event.checkProgressBarEvent();
     checkout.checkInsuranceComparisonPage('4');
     event.checkEventComparisonTable();
+    const addToCart = waitForCreateAsset('carts', 'addToCart');
     event.selectTwoStarEvent();
+    cy.wait(`@${addToCart}`).then(result => {
+      cartId = (<any>result.response.body).code;
+    });
   });
 
   it('Should check add options page', () => {
@@ -54,9 +60,10 @@ context('Event Checkout', () => {
     //renters.checkMiniCartRentersRemovedProduct();
     checkout.clickContinueButton();
     checkout.checkAccordions('threeAccordions');
-    addPaymentMethod(registrationUser.email);
+    addPaymentMethod(registrationUser.email, cartId);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
+    checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {

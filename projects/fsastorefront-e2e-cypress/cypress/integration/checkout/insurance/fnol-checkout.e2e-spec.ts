@@ -15,7 +15,12 @@ import {
   checkMyPoliciesPage,
   updatePolicyEffectiveAndStartDate,
 } from '../../../helpers/my-account/policies';
+import {
+  waitForPage,
+  waitForCreateAsset,
+} from '../../../helpers/generalHelpers';
 
+let cartId;
 context('FNOL for sample data user', () => {
   before(() => {
     cy.visit('/');
@@ -44,24 +49,30 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should continue in add options and quote review pages', () => {
+    const addToCart = waitForCreateAsset('carts', 'addToCart');
     auto.checkAutoComparisonTable();
     auto.selectAutoBronze();
+    cy.wait(`@${addToCart}`).then(result => {
+      cartId = (<any>result.response.body).code;
+    });
     //add options page
+    const personalDetails = waitForPage('personal-details', 'personalDetails');
     clickContinueButton();
+    cy.wait(`@${personalDetails}`).its('status').should('eq', 200);
   });
 
   it('Should populate personal details page', () => {
-    checkout.waitForPersonalDetailsPage();
     checkout.checkPersonalDetailsPage();
     auto.populatePersonalDetails();
     auto.populateVehicleDetails();
     auto.populateMainDriverData();
+    const quoteReview = waitForPage('quote-review', 'quoteReview');
     checkout.clickContinueButton();
+    cy.wait(`@${quoteReview}`).its('status').should('eq', 200);
   });
 
   it('Should add new payment and bind quote', () => {
-    fnol.waitForQuoteReviewPage();
-    addPaymentMethod(registrationUser.email);
+    addPaymentMethod(registrationUser.email, cartId);
     clickContinueButton();
     checkout.ConfirmBindQuote();
   });

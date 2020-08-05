@@ -9,6 +9,7 @@ import {
 } from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import * as changeRequest from '../../../helpers/changeRequest';
+import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
 context('Change Request for new user', () => {
   before(() => {
@@ -30,10 +31,15 @@ context('Change Request for new user', () => {
   });
 
   it('Should check comparison table and select main product', () => {
+    const addToCart = waitForCreateAsset('carts', 'addToCart');
     auto.checkAutoComparisonTable();
     auto.selectAutoSilver();
-    checkout.clickContinueButton();
-    addPaymentMethod(registrationUser.email);
+    cy.wait(`@${addToCart}`).then(result => {
+      const body = <any>result.response.body;
+      const cartId = body.code;
+      checkout.clickContinueButton();
+      addPaymentMethod(registrationUser.email, cartId);
+    });
     //auto.checkAutoSilverMiniCart();
     checkout.clickContinueButton();
     checkout.waitForPersonalDetailsPage();
