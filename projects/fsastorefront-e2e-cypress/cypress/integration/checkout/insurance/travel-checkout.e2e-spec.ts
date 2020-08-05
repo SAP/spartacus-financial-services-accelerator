@@ -9,7 +9,7 @@ import {
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 import { clickContinueButton } from '../../../helpers/checkout/checkoutSteps';
 import * as fnol from '../../../helpers/fnolCheckout';
-import { waitForCreateCart } from '../../../helpers/generalHelpers';
+import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
 let cartId;
 context('Travel Insurance Checkout', () => {
@@ -31,10 +31,10 @@ context('Travel Insurance Checkout', () => {
 
     it('Add main product to the cart', () => {
       travelCheckout.checkTravelComparisonTable();
-      const addToCart = waitForCreateCart('carts', 'addToCart');
+      const addToCart = waitForCreateAsset('carts', 'addToCart');
       travelCheckout.selectSingleBudgetPlan();
-      cy.wait(`@${addToCart}`).then(response => {
-        const body = <any>response.response.body;
+      cy.wait(`@${addToCart}`).then(result => {
+        const body = <any>result.response.body;
         cartId = body.code;
       });
     });

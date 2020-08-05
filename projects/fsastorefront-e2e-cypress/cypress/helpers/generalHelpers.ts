@@ -12,7 +12,7 @@ export function waitForUserAssets(asset: string, alias: string): string {
   return alias;
 }
 
-export function waitForCreateCart(asset: string, alias: string): string {
+export function waitForCreateAsset(asset: string, alias: string): string {
   cy.server();
   cy.route('POST', `/occ/v2/financial/users/current/${asset}*`).as(alias);
   return alias;

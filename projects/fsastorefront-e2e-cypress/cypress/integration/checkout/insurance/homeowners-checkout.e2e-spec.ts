@@ -7,7 +7,7 @@ import {
   selectPaymentMethod,
 } from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
-import { waitForCreateCart } from '../../../helpers/generalHelpers';
+import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
 let cartId;
 context('Homeowners Checkout', () => {
@@ -48,10 +48,10 @@ context('Homeowners Checkout', () => {
     checkout.checkCheckoutStep('Your Homeowners Insurance', '7');
     checkout.checkInsuranceComparisonPage('2');
     homeowners.checkHomeownersComparisonTable();
-    const addToCart = waitForCreateCart('carts', 'addToCart');
+    const addToCart = waitForCreateAsset('carts', 'addToCart');
     homeowners.selectHomeownersAnnually();
-    cy.wait(`@${addToCart}`).then(response => {
-      const body = <any>response.response.body;
+    cy.wait(`@${addToCart}`).then(result => {
+      const body = <any>result.response.body;
       cartId = body.code;
     });
   });

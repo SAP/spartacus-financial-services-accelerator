@@ -9,7 +9,7 @@ import {
 } from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 import * as myAccount from '../../../helpers/my-account/myAccountPages';
-import { waitForCreateCart } from '../../../helpers/generalHelpers';
+import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
 let cartId;
 context('Event Checkout', () => {
@@ -32,10 +32,10 @@ context('Event Checkout', () => {
     event.checkProgressBarEvent();
     checkout.checkInsuranceComparisonPage('4');
     event.checkEventComparisonTable();
-    const addToCart = waitForCreateCart('carts', 'addToCart');
+    const addToCart = waitForCreateAsset('carts', 'addToCart');
     event.selectTwoStarEvent();
-    cy.wait(`@${addToCart}`).then(response => {
-      const body = <any>response.response.body;
+    cy.wait(`@${addToCart}`).then(result => {
+      const body = <any>result.response.body;
       cartId = body.code;
     });
   });
