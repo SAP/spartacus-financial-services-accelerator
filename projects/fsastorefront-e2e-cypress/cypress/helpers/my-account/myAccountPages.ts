@@ -50,8 +50,6 @@ export function closeAccount() {
     .within(() => {
       cy.get('.cx-confirmation').should('be.visible');
       cy.get('.btn-secondary').contains('Cancel');
-      cy.get('.btn-primary')
-        .contains('CLOSE MY ACCOUNT')
-        .click();
+      cy.get('.btn-primary').contains('CLOSE MY ACCOUNT').click();
     });
 }

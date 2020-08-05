@@ -27,9 +27,7 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should check anonymous user cannot access claims', () => {
-    cy.get('.Section4 cx-banner')
-      .eq(1)
-      .click();
+    cy.get('.Section4 cx-banner').eq(1).click();
     cy.get('.heading-headline').should('have.text', 'Login');
   });
 
@@ -61,9 +59,7 @@ context('FNOL for sample data user', () => {
     //add options page
     const personalDetails = waitForPage('personal-details', 'personalDetails');
     clickContinueButton();
-    cy.wait(`@${personalDetails}`)
-      .its('status')
-      .should('eq', 200);
+    cy.wait(`@${personalDetails}`).its('status').should('eq', 200);
   });
 
   it('Should populate personal details page', () => {
@@ -73,9 +69,7 @@ context('FNOL for sample data user', () => {
     auto.populateMainDriverData();
     const quoteReview = waitForPage('quote-review', 'quoteReview');
     checkout.clickContinueButton();
-    cy.wait(`@${quoteReview}`)
-      .its('status')
-      .should('eq', 200);
+    cy.wait(`@${quoteReview}`).its('status').should('eq', 200);
   });
 
   it('Should add new payment and bind quote', () => {

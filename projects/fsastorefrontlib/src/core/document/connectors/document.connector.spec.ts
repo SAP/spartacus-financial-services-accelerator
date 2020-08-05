@@ -7,8 +7,10 @@ import { DocumentAdapter } from './document.adapter';
 import { DocumentConnector } from './document.connector';
 
 class MockDocumentAdapter implements DocumentAdapter {
-  getDocument = createSpy('DocumentAdapter.getDocument').and.callFake(
-    (userId, documentId) => of('getDocument' + userId + documentId)
+  getDocument = createSpy(
+    'DocumentAdapter.getDocument'
+  ).and.callFake((userId, documentId) =>
+    of('getDocument' + userId + documentId)
   );
 }
 
@@ -24,9 +26,9 @@ describe('DocumentConnector', () => {
       providers: [{ provide: DocumentAdapter, useClass: MockDocumentAdapter }],
     });
 
-    documentConnector = TestBed.get(DocumentConnector as Type<
-      DocumentConnector
-    >);
+    documentConnector = TestBed.get(
+      DocumentConnector as Type<DocumentConnector>
+    );
     documentAdapter = TestBed.get(DocumentAdapter as Type<DocumentAdapter>);
   });
 

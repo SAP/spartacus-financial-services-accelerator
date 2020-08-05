@@ -27,9 +27,7 @@ export function populateInsuranceInfoForm() {
     cy.get('[name="Travellers"]').select('1');
     cy.get('[name="tripDetailsTravellerAges"]').type('20');
   });
-  cy.get('cx-fs-choose-cover-navigation')
-    .findByText('Continue')
-    .click();
+  cy.get('cx-fs-choose-cover-navigation').findByText('Continue').click();
 }
 
 export function checkTravelComparisonTable() {
@@ -96,9 +94,7 @@ export function checkOptionalProductsAndPick() {
 
   shared.checkAddOptionsPageContent(addOptionsContent);
 
-  cy.get('.primary-button')
-    .should('be.visible')
-    .click();
+  cy.get('.primary-button').should('be.visible').click();
 }
 
 export function checkTravelMiniCart() {

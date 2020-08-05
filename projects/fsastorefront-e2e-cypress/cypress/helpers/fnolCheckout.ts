@@ -24,18 +24,10 @@ export function checkFNOLCheckoutPage() {
 }
 
 export function checkFNOLSteps() {
-  cy.get('p.label')
-    .eq(0)
-    .should('have.text', ' Incident Information ');
-  cy.get('p.label')
-    .eq(1)
-    .should('have.text', ' Incident Report ');
-  cy.get('p.label')
-    .eq(2)
-    .should('have.text', ' General Information ');
-  cy.get('p.label')
-    .eq(3)
-    .should('have.text', ' Summary ');
+  cy.get('p.label').eq(0).should('have.text', ' Incident Information ');
+  cy.get('p.label').eq(1).should('have.text', ' Incident Report ');
+  cy.get('p.label').eq(2).should('have.text', ' General Information ');
+  cy.get('p.label').eq(3).should('have.text', ' Summary ');
 }
 
 export function populateIncidentInformationStep() {
@@ -47,22 +39,12 @@ export function populateIncidentInformationStep() {
           claimNumber = this.getClaimIdFromLocalStorage();
         }
       });
-    cy.get('[name=whenHappened]')
-      .clear()
-      .type('2018-01-01');
-    cy.get('[name=whatTime]')
-      .clear()
-      .type('12:12:12');
+    cy.get('[name=whenHappened]').clear().type('2018-01-01');
+    cy.get('[name=whatTime]').clear().type('12:12:12');
     cy.get('[name=country]').select('Serbia');
-    cy.get('[name=city]')
-      .clear()
-      .type('Belgräde');
-    cy.get('[name=postcode]')
-      .clear()
-      .type('11040');
-    cy.get('[name=address]')
-      .clear()
-      .type('Omladinskih Brigada 90g');
+    cy.get('[name=city]').clear().type('Belgräde');
+    cy.get('[name=postcode]').clear().type('11040');
+    cy.get('[name=address]').clear().type('Omladinskih Brigada 90g');
     cy.get('[name=description]')
       .clear()
       .type('my tesla S was stolen while I was in the shopping center');
@@ -83,15 +65,9 @@ export function populateIncidentReportStep() {
 }
 
 export function populateGeneralInformationStep() {
-  cy.get('[name=responsibleForAccident]')
-    .clear()
-    .type('me');
-  cy.get('[name=policeInformed]')
-    .eq(0)
-    .click();
-  cy.get('[name=witnesses]')
-    .eq(1)
-    .click();
+  cy.get('[name=responsibleForAccident]').clear().type('me');
+  cy.get('[name=policeInformed]').eq(0).click();
+  cy.get('[name=witnesses]').eq(1).click();
 }
 
 export function checkSummaryPage() {
@@ -114,9 +90,7 @@ export function checkIncidentInformationAccordion() {
 }
 
 export function checkIncidentReportAccordion() {
-  cy.get('.accordion-heading')
-    .eq(1)
-    .should('have.text', ' Incident Report ');
+  cy.get('.accordion-heading').eq(1).should('have.text', ' Incident Report ');
   cy.get('.accordion-item-wrapper')
     .eq(1)
     .within(() => {
@@ -159,12 +133,8 @@ export function checkOpenClaimContent() {
 
 export function startClaimFromHomepage() {
   const claimsPage = waitForPage('claimsPage', 'claimsPage');
-  cy.get('.Section4 cx-banner')
-    .eq(1)
-    .click();
-  cy.wait(`@${claimsPage}`)
-    .its('status')
-    .should('eq', 200);
+  cy.get('.Section4 cx-banner').eq(1).click();
+  cy.wait(`@${claimsPage}`).its('status').should('eq', 200);
 }
 
 export function checkFnolEntryPage() {
@@ -191,15 +161,11 @@ export function checkAndResumeSpecificClaim() {
     menuOption: 'My Account',
     dropdownItem: 'Claims',
   });
-  cy.wait(`@${claims}`)
-    .its('status')
-    .should('eq', 200);
+  cy.wait(`@${claims}`).its('status').should('eq', 200);
   cy.get('.info-card').within(() => {
     cy.get('h4.info-card-caption').contains(claimNumber);
     this.checkOpenClaimContent();
-    cy.get('.secondary-button')
-      .contains('Resume')
-      .click();
+    cy.get('.secondary-button').contains('Resume').click();
   });
 }
 
@@ -209,9 +175,7 @@ export function deleteClaimFromDialog() {
     menuOption: 'My Account',
     dropdownItem: 'Claims',
   });
-  cy.wait(`@${claims}`)
-    .its('status')
-    .should('eq', 200);
+  cy.wait(`@${claims}`).its('status').should('eq', 200);
   cy.contains('.info-card', claimNumber).within(() => {
     cy.get('.action-links-secondary-button').click();
   });
@@ -227,9 +191,7 @@ export function clickContinueAndGetNewClaimID() {
     'AutoClaimIncidentFormComponent',
     'incidentInfoForm'
   );
-  cy.get('.primary-button')
-    .should('contain', 'Continue')
-    .click();
+  cy.get('.primary-button').should('contain', 'Continue').click();
   cy.wait(`@${incidentInfoForm}`)
     .its('status')
     .should('eq', 200)
@@ -243,14 +205,10 @@ export function waitForIncidentReportStep() {
     'AutoClaimIncidentReportFormComponent',
     'incidentForm'
   );
-  cy.wait(`@${incidentForm}`)
-    .its('status')
-    .should('eq', 200);
+  cy.wait(`@${incidentForm}`).its('status').should('eq', 200);
 }
 
 export function waitForQuoteReviewPage() {
   const quoteReview = waitForPage('quote-review', 'quoteReview');
-  cy.wait(`@${quoteReview}`)
-    .its('status')
-    .should('eq', 200);
+  cy.wait(`@${quoteReview}`).its('status').should('eq', 200);
 }

@@ -18,9 +18,9 @@ export function getReducers(): ActionReducerMap<ChangeRequestsState> {
   };
 }
 
-export const reducerToken: InjectionToken<
-  ActionReducerMap<ChangeRequestsState>
-> = new InjectionToken<ActionReducerMap<ChangeRequestsState>>(
+export const reducerToken: InjectionToken<ActionReducerMap<
+  ChangeRequestsState
+>> = new InjectionToken<ActionReducerMap<ChangeRequestsState>>(
   'ChangeRequestReducers'
 );
 export const reducerProvider: Provider = {
@@ -30,7 +30,7 @@ export const reducerProvider: Provider = {
 export function clearChangeProcessState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
-  return function(state, action) {
+  return function (state, action) {
     if (action.type === AuthActions.LOGOUT) {
       state = undefined;
     }

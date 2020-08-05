@@ -81,7 +81,10 @@ describe('OccCsTicketAdapter', () => {
       });
       adapter
         .createCsTicketForAgent(agentId, OCC_USER_ID_CURRENT, undefined)
-        .subscribe(res => (response = res), err => (errResponse = err));
+        .subscribe(
+          res => (response = res),
+          err => (errResponse = err)
+        );
       httpMock
         .expectOne((req: HttpRequest<any>) => {
           return req.url === csTicketEndpoint && req.method === 'POST';

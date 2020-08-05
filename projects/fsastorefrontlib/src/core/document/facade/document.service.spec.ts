@@ -40,9 +40,9 @@ describe('DocumentServiceTest', () => {
       ],
     });
     service = TestBed.get(DocumentService as Type<DocumentService>);
-    documentConnector = TestBed.get(DocumentConnector as Type<
-      DocumentConnector
-    >);
+    documentConnector = TestBed.get(
+      DocumentConnector as Type<DocumentConnector>
+    );
   });
 
   it('should check if DocumentService is injected', inject(

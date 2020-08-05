@@ -6,6 +6,21 @@ export class DefaultFormValidators extends Validators {
   static phoneNumberRegex = /^(?:\d{6,20})?$/;
   static postalCodeRegex = /^(?=.*[0-9])[A-Za-z0-9\s]+$/;
 
+  static valueComparison(
+    baseValue: number | Date,
+    comparisonValue: number | Date,
+    operator: string
+  ) {
+    if (baseValue && comparisonValue) {
+      switch (operator) {
+        case 'shouldBeGreater':
+          return baseValue > comparisonValue ? null : { valueConflict: true };
+        case 'shouldBeLess':
+          return baseValue < comparisonValue ? null : { valueConflict: true };
+      }
+    }
+  }
+
   static regexValidator(regex) {
     return (control: AbstractControl): ValidationErrors | null => {
       const field = control.value as string;
@@ -37,7 +52,7 @@ export class DefaultFormValidators extends Validators {
     };
   }
 
-  static youngerThanValidator(controlName: string) {
+  static compareDOBtoAge(controlName: string, operator: string) {
     return (control: AbstractControl): ValidationErrors | null => {
       const userAge = new Date(control.value as string);
       const today = new Date();
@@ -46,13 +61,64 @@ export class DefaultFormValidators extends Validators {
         control.parent.controls &&
         control.parent.controls[controlName]
       ) {
-        const retirementAge = control.parent.controls[controlName].value;
+        const targetAge = control.parent.controls[controlName].value;
         const age = new Date(
-          today.getFullYear() - retirementAge,
+          today.getFullYear() - targetAge,
           today.getMonth(),
           today.getDate()
         );
-        return userAge > age ? null : { InvalidDate: true };
+        return DefaultFormValidators.valueComparison(userAge, age, operator);
+      }
+    };
+  }
+
+  static compareAgeToDOB(comparisonField: string, operator: string) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (control.parent) {
+        const compareToField = control.parent.controls[comparisonField].value;
+        const DOBtoYear = Number(
+          new Date(compareToField as string).getFullYear()
+        );
+        const currentYear = Number(new Date().getFullYear());
+        const currentAge = Number(control.value);
+        const calculatedAge = currentYear - DOBtoYear;
+        return DefaultFormValidators.valueComparison(
+          calculatedAge,
+          currentAge,
+          operator
+        );
+      }
+    };
+  }
+
+  static compareNumbers(comparisonField: string, operator: string) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (control.parent) {
+        const currentField = Number(control.value);
+        const compareToField = Number(
+          control.parent.controls[comparisonField].value
+        );
+        return DefaultFormValidators.valueComparison(
+          currentField,
+          compareToField,
+          operator
+        );
+      }
+    };
+  }
+
+  static compareDates(comparisonField: string, operator: string) {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (control.parent) {
+        const currentField = Date.parse(control.value);
+        const compareToField = Date.parse(
+          control.parent.controls[comparisonField].value
+        );
+        return DefaultFormValidators.valueComparison(
+          compareToField,
+          currentField,
+          operator
+        );
       }
     };
   }
@@ -84,29 +150,6 @@ export class DefaultFormValidators extends Validators {
           return inputVal.getTime() <= today.getTime()
             ? null
             : { InvalidDate: true };
-      }
-    };
-  }
-
-  static compareNumbers(comparisonField: string, operator: string) {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (control.parent) {
-        const currentField = Number(control.value);
-        const compareToField = Number(
-          control.parent.controls[comparisonField].value
-        );
-        if (currentField && compareToField) {
-          switch (operator) {
-            case 'shouldBeGreater':
-              return currentField > compareToField
-                ? null
-                : { valueConflict: true };
-            case 'shouldBeLess':
-              return compareToField > currentField
-                ? null
-                : { valueConflict: true };
-          }
-        }
       }
     };
   }
@@ -156,29 +199,6 @@ export class DefaultFormValidators extends Validators {
     return (control: AbstractControl): ValidationErrors | null => {
       const valid = control.value.indexOf(value) !== -1;
       return valid ? null : { valueConflict: true };
-    };
-  }
-
-  static compareDates(comparisonField: string, operator: string) {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (control.parent) {
-        const currentField = Date.parse(control.value);
-        const compareToField = Date.parse(
-          control.parent.controls[comparisonField].value
-        );
-        if (currentField && compareToField) {
-          switch (operator) {
-            case 'shouldBeGreater':
-              return compareToField > currentField
-                ? null
-                : { timeConflict: true };
-            case 'shouldBeLess':
-              return currentField > compareToField
-                ? null
-                : { timeConflict: true };
-          }
-        }
-      }
     };
   }
 }
