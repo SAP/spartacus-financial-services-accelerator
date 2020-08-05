@@ -12,6 +12,12 @@ export function waitForUserAssets(asset: string, alias: string): string {
   return alias;
 }
 
+export function waitForCreateAsset(asset: string, alias: string): string {
+  cy.server();
+  cy.route('POST', `/occ/v2/financial/users/current/${asset}*`).as(alias);
+  return alias;
+}
+
 export function waitForCMSComponent(component: string, alias: string): string {
   cy.server();
   cy.route('GET', `/occ/v2/financial/cms/components/${component}*`).as(alias);

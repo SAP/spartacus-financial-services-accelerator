@@ -8,7 +8,9 @@ import {
 } from '../../../helpers/checkout/insurance/payment';
 import * as policies from '../../../helpers/my-account/policies';
 import * as premiumCalendar from '../../../helpers/my-account/myAccountPages';
+import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
+let cartId;
 context('Savings Insurance Checkout', () => {
   before(() => {
     cy.visit('/');
@@ -39,7 +41,11 @@ context('Savings Insurance Checkout', () => {
     checkout.checkCheckoutStep('Your Savings Insurance', '7');
     savings.checkComparisonPage();
     savings.checkSavingsComparisonTable();
+    const addToCart = waitForCreateAsset('carts', 'addToCart');
     savings.selecBalancedDeal();
+    cy.wait(`@${addToCart}`).then(result => {
+      cartId = (<any>result.response.body).code;
+    });
   });
 
   it('Should check add options page', () => {
@@ -62,7 +68,7 @@ context('Savings Insurance Checkout', () => {
     checkout.checkProgressBarInsurance();
     //TODO: check mini cart
     checkout.checkAccordions('savingsQuoteReview');
-    addPaymentMethod(registrationUserWithoutPhone.email);
+    addPaymentMethod(registrationUserWithoutPhone.email, cartId);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
   });

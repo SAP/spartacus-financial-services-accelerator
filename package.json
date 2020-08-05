@@ -43,7 +43,7 @@
     "@nguniversal/express-engine": "^9.1.0",
     "@types/googlemaps": "^3.37.5",
     "blob-util": "^2.0.2",
-    "bootstrap": "^4.2.1",
+    "bootstrap": "4.5.0",
     "file-saver": "^2.0.2",
     "express": "^4.15.2",
     "hamburgers": "^1.1.3",
