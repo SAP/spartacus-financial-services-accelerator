@@ -53,8 +53,7 @@ context('FNOL for sample data user', () => {
     auto.checkAutoComparisonTable();
     auto.selectAutoBronze();
     cy.wait(`@${addToCart}`).then(result => {
-      const body = <any>result.response.body;
-      cartId = body.code;
+      cartId = (<any>result.response.body).code;
     });
     //add options page
     const personalDetails = waitForPage('personal-details', 'personalDetails');

@@ -51,8 +51,7 @@ context('Homeowners Checkout', () => {
     const addToCart = waitForCreateAsset('carts', 'addToCart');
     homeowners.selectHomeownersAnnually();
     cy.wait(`@${addToCart}`).then(result => {
-      const body = <any>result.response.body;
-      cartId = body.code;
+      cartId = (<any>result.response.body).code;
     });
   });
 
