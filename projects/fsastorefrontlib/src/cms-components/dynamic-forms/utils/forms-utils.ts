@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FSCart } from '../../../occ/occ-models/occ.models';
+import * as _ from 'lodash';
 
 @Injectable()
 export class FormsUtils {
@@ -35,9 +36,9 @@ export class FormsUtils {
   }
 
   static serializeQuoteDetails(cart): any {
-    const serializedFsCart: FSCart = cart;
+    const serializedFsCart: FSCart = _.cloneDeep(cart);
     if (cart && cart.insuranceQuote && cart.insuranceQuote) {
-      const insuranceQuote = cart.insuranceQuote;
+      const insuranceQuote = _.cloneDeep(cart.insuranceQuote);
       if (insuranceQuote.quoteDetails && insuranceQuote.quoteDetails.entry) {
         const serilizedQuoteDetails = {};
         insuranceQuote.quoteDetails.entry.forEach(entry => {
