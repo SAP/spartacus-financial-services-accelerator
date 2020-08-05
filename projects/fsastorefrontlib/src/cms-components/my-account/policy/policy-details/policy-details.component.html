@@ -163,7 +163,10 @@
                       "
                     >
                       <li
-                        *ngIf="childInsuredObjectItem.value !== 'false'"
+                        *ngIf="
+                          childInsuredObjectItem.label !== 'customerId' ||
+                          childInsuredObjectItem.value !== 'false'
+                        "
                         class="accordion-list-item row"
                       >
                         <div class="col-6 col-sm-5 item-label">
