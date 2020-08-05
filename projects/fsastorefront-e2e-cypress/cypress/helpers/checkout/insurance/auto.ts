@@ -38,6 +38,7 @@ export function populateAutoInformation() {
 }
 
 export function populateMainDriverInfo() {
+  cy.get('#customerIdfalse').check();
   cy.get('[name=dateOfBirth]').eq('0').type('1982-01-01');
   cy.get('[name="driverGender"]').eq('0').select('Female');
   cy.get('[name="driverMaritalStatus"]').eq('0').select('Single');
@@ -121,10 +122,13 @@ export function populatePersonalDetails() {
 
 export function populateVehicleDetails() {
   cy.get('[name=licencePlate]').type('94865978');
-  cy.get('[name=vinNumber]').type('12345');
+  cy.get('[name=vinNumber]').type('11111111111111111');
 }
 
 export function populateMainDriverData() {
+  cy.get('[name=mainDriverDateOfBirth]').type('1991-02-17');
+  cy.get('[name=mainDriverFirstName]').type('Johan');
+  cy.get('[name=mainDriverLastName]').type('Grozni');
   cy.get('[name=mainDriverLicenceNumber]').type('BG-234-xx');
 }
 

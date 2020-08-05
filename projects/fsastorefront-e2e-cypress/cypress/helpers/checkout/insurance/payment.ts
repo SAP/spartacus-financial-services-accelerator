@@ -6,21 +6,20 @@ export function selectPaymentMethod() {
   });
 }
 
-export function addPaymentMethod(userId: string) {
-  cy.get('.progress-node')
-    .first()
-    .then(test => {
-      const localData = JSON.parse(
-        localStorage.getItem('spartacus-local-data')
-      );
-      const cartId = localData.cart.active.value.content.code;
+export function addPaymentMethod(userId: string, cartId: string) {
+  cy.get('.short-overview-value')
+    .eq(0)
+    .then(() => {
       cy.request({
         method: 'POST',
         url: `${Cypress.env(
           'API_URL'
         )}/occ/v2/financial/users/${userId}/carts/${cartId}/paymentdetails`,
         headers: {
-          Authorization: `bearer ${localData.auth.userToken.token.access_token}`,
+          Authorization: `bearer ${
+            JSON.parse(localStorage.getItem('spartacus-local-data')).auth
+              .userToken.token.access_token
+          }`,
         },
         body: {
           accountHolderName: 'Test User',
