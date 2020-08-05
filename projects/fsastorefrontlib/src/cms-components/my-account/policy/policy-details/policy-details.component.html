@@ -157,35 +157,39 @@
                       childInsuredObject.insuredObjectItems.length > 0
                     "
                   >
-                    <li
+                    <ng-container
                       *ngFor="
                         let childInsuredObjectItem of childInsuredObject.insuredObjectItems
                       "
-                      class="accordion-list-item row"
                     >
-                      <div class="col-6 col-sm-5 item-label">
-                        {{ childInsuredObjectItem.label }}
-                      </div>
-                      <div class="col-6 col-sm-5 value notice">
-                        {{ childInsuredObjectItem.value }}
-                      </div>
-                      <ng-container *ngIf="childInsuredObjectItem.changeable">
-                        <div class="col-6 col-sm-5 value notice">
-                          <p
-                            (click)="
-                              changePolicyDetails(
-                                policy.policyNumber,
-                                policy.contractNumber,
-                                'FSINSUREDOBJECT_CHANGE'
-                              )
-                            "
-                            class="link"
-                          >
-                            {{ 'fscommon.edit' | cxTranslate }}
-                          </p>
+                      <li
+                        *ngIf="childInsuredObjectItem.value !== 'false'"
+                        class="accordion-list-item row"
+                      >
+                        <div class="col-6 col-sm-5 item-label">
+                          {{ childInsuredObjectItem.label }}
                         </div>
-                      </ng-container>
-                    </li>
+                        <div class="col-6 col-sm-5 value notice">
+                          {{ childInsuredObjectItem.value }}
+                        </div>
+                        <ng-container *ngIf="childInsuredObjectItem.changeable">
+                          <div class="col-6 col-sm-5 value notice">
+                            <p
+                              (click)="
+                                changePolicyDetails(
+                                  policy.policyNumber,
+                                  policy.contractNumber,
+                                  'FSINSUREDOBJECT_CHANGE'
+                                )
+                              "
+                              class="link"
+                            >
+                              {{ 'fscommon.edit' | cxTranslate }}
+                            </p>
+                          </div>
+                        </ng-container>
+                      </li>
+                    </ng-container>
                   </ng-container>
                 </ng-container>
               </ng-container>
