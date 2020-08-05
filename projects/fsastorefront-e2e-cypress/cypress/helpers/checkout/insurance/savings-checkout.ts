@@ -13,15 +13,15 @@ export function checkSavingsComparisonTable() {
     mainProducts: [
       {
         name: 'Safe and Steady',
-        price: '€779.00',
+        price: '€199.39',
       },
       {
         name: 'Balanced Deal',
-        price: '€779.00',
+        price: '€270.39',
       },
       {
         name: 'Flexi-Max',
-        price: '€779.00',
+        price: '€488.71',
       },
     ],
   };
@@ -44,6 +44,7 @@ export function checkOptionalProducts() {
       {
         name: 'Survivor Pension',
         available: true,
+        shouldAdd: true,
       },
       {
         name: 'Dependent Children Pension',
