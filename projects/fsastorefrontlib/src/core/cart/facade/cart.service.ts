@@ -5,6 +5,7 @@ import {
   AuthService,
   Cart,
   MultiCartService,
+  OCC_USER_ID_ANONYMOUS,
   StateUtils,
   StateWithMultiCart
 } from '@spartacus/core';
@@ -47,10 +48,10 @@ export class FSCartService extends ActiveCartService {
                 filter(cartState => this.isCartCreated(cartState)),
                 take(1),
                 map(cartState => {
-                  let newCartCode = cartState.value.code;
-                  if(userId === 'anonymous') {
-                      newCartCode = cartState.value.guid;
-                  }
+                  const newCartCode =
+                    userId === OCC_USER_ID_ANONYMOUS
+                      ? cartState.value.guid
+                      : cartState.value.code;
                   this.startBundleForCart(
                     userId,
                     newCartCode,
@@ -102,7 +103,6 @@ export class FSCartService extends ActiveCartService {
   }
 
   private isCartCreated(cartState: StateUtils.ProcessesLoaderState<Cart>) {
-    console.log(cartState);
     return cartState && cartState.success && !cartState.loading;
   }
 

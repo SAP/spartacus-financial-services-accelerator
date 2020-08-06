@@ -62,14 +62,13 @@ export class CartEffects {
         )
         .pipe(
           concatMap((cart: any) => {
-            console.log(cart);
             const actions: Action[] = [];
             const cartCode =
-              payload.userId === OCC_USER_ID_ANONYMOUS ? payload.cartId : cart.cartCode;
+              payload.userId === OCC_USER_ID_ANONYMOUS
+                ? payload.cartId
+                : cart.cartCode;
 
-            if (
-              cart?.entry?.product?.defaultCategory
-            ) {
+            if (cart?.entry?.product?.defaultCategory) {
               const formDataId = this.formDataStorageService.getFormDataIdByCategory(
                 cart.entry.product.defaultCategory.code
               );
@@ -141,5 +140,5 @@ export class CartEffects {
     private actions$: Actions,
     private cartConnector: CartConnector,
     private formDataStorageService: FormDataStorageService
-  ) { }
+  ) {}
 }
