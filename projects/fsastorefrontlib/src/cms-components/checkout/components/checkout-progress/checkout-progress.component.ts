@@ -153,7 +153,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
 
   isQuoteBound(): Observable<boolean> {
     return this.cartService.getActive().pipe(
-      filter(cart => cart !== undefined),
+      filter(cart => !!cart),
       map(cart => {
         return (
           (<FSCart>cart).insuranceQuote?.state?.code === BindingStateType.BIND
