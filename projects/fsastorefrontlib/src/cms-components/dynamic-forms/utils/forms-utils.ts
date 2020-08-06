@@ -55,6 +55,7 @@ export class FormsUtils {
       }
     }
     if (
+      cart.deliveryOrderGroups &&
       cart?.deliveryOrderGroups[0]?.entries[0]?.configurationInfos[0]
         ?.configurationValues?.entry
     ) {
@@ -64,7 +65,7 @@ export class FormsUtils {
           serilizedConfigurationValues[entry.key] = entry.value;
         }
       );
-      cart.deliveryOrderGroups[0].entries[0].configurationInfos[0].configurationValues = serilizedConfigurationValues;
+      serializedFsCart.deliveryOrderGroups[0].entries[0].configurationInfos[0].configurationValues = serilizedConfigurationValues;
     }
     return serializedFsCart;
   }
