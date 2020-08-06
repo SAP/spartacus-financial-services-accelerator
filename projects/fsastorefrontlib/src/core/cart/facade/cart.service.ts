@@ -6,7 +6,7 @@ import {
   Cart,
   MultiCartService,
   StateUtils,
-  StateWithMultiCart,
+  StateWithMultiCart
 } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
@@ -35,7 +35,7 @@ export class FSCartService extends ActiveCartService {
         map(([activeCartId, userId]) => {
           // if active cart doesn't exist, first it should be created and once the cart
           // is loaded and in success state, bundle should be started
-          if (!activeCartId || activeCartId === undefined) {
+          if (!activeCartId) {
             this.multiCartService
               .createCart({
                 userId: userId,
@@ -47,6 +47,7 @@ export class FSCartService extends ActiveCartService {
                 filter(cartState => this.isCartCreated(cartState)),
                 take(1),
                 map(cartState => {
+                  console.log(cartState);
                   const newCartCode = cartState.value.code;
                   this.startBundleForCart(
                     userId,
@@ -78,7 +79,7 @@ export class FSCartService extends ActiveCartService {
       .subscribe();
   }
 
-  startBundleForCart(
+  protected startBundleForCart(
     userId: string,
     cartCode: string,
     productCode: string,

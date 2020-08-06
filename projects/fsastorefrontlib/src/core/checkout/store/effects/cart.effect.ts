@@ -65,12 +65,10 @@ export class CartEffects {
             console.log(cart);
             const actions: Action[] = [];
             const cartCode =
-              payload.userId === 'anonymous' ? payload.cartId : cart.cartCode;
+              payload.userId === OCC_USER_ID_ANONYMOUS ? payload.cartId : cart.cartCode;
 
             if (
-              cart.entry &&
-              cart.entry.product &&
-              cart.entry.product.defaultCategory
+              cart?.entry?.product?.defaultCategory
             ) {
               const formDataId = this.formDataStorageService.getFormDataIdByCategory(
                 cart.entry.product.defaultCategory.code
@@ -143,5 +141,5 @@ export class CartEffects {
     private actions$: Actions,
     private cartConnector: CartConnector,
     private formDataStorageService: FormDataStorageService
-  ) {}
+  ) { }
 }
