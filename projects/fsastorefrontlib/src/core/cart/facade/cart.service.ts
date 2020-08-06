@@ -47,7 +47,10 @@ export class FSCartService extends ActiveCartService {
                 filter(cartState => this.isCartCreated(cartState)),
                 take(1),
                 map(cartState => {
-                  const newCartCode = cartState.value.code;
+                  let newCartCode = cartState.value.code;
+                  if(userId === 'anonymous') {
+                      newCartCode = cartState.value.guid;
+                  }
                   this.startBundleForCart(
                     userId,
                     newCartCode,
