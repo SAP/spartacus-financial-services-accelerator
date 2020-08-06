@@ -117,9 +117,6 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
 
   public isProductStep(stepRoute: string) {
     const route = this.getUrlFromStepRoute(stepRoute);
-    if (route.indexOf(':productCode') > 0) {
-      return true;
-    }
-    return false;
+    return !!route.includes(':productCode');
   }
 }

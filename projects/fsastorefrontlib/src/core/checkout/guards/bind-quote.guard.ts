@@ -22,18 +22,16 @@ export class BindQuoteGuard implements CanActivate {
 
   canActivate(): Observable<boolean | UrlTree> {
     return this.cartService.getActive().pipe(
-      filter(cart => cart.code !== undefined),
+      filter(cart => !!cart.code),
       map(cart => {
-        if ((<FSCart>cart).insuranceQuote) {
-          const bindingState = (<FSCart>cart).insuranceQuote.state.code;
-          if (bindingState === BindingStateType.BIND) {
-            this.globalMessageService.add(
-              { key: 'quote.boundQuoteDescription' },
-              GlobalMessageType.MSG_TYPE_INFO
-            );
-            this.routingService.go({ cxRoute: 'home' });
-            return false;
-          }
+        const bindingState = (<FSCart>cart).insuranceQuote?.state?.code;
+        if (bindingState === BindingStateType.BIND) {
+          this.globalMessageService.add(
+            { key: 'quote.boundQuoteDescription' },
+            GlobalMessageType.MSG_TYPE_INFO
+          );
+          this.routingService.go({ cxRoute: 'home' });
+          return false;
         }
         return true;
       })
