@@ -31,9 +31,9 @@ export class FormsUtils {
     return objectValue[attribute];
   }
 
-  static serializeQuoteDetails(cart): any {
+  static serializeCartEntries(cart): any {
     const serializedFsCart: FSCart = cart;
-    if (cart && cart.insuranceQuote && cart.insuranceQuote) {
+    if (cart?.insuranceQuote) {
       const insuranceQuote = cart.insuranceQuote;
       if (insuranceQuote.quoteDetails && insuranceQuote.quoteDetails.entry) {
         const serilizedQuoteDetails = {};
@@ -42,10 +42,7 @@ export class FormsUtils {
         });
         serializedFsCart.insuranceQuote.quoteDetails = serilizedQuoteDetails;
       }
-      if (
-        insuranceQuote.insuredObjectList &&
-        insuranceQuote.insuredObjectList.insuredObjects
-      ) {
+      if (insuranceQuote?.insuredObjectList?.insuredObjects) {
         const serializedInusredObjects = [];
         insuranceQuote.insuredObjectList.insuredObjects.forEach(
           insuredObject => {
@@ -56,6 +53,18 @@ export class FormsUtils {
         );
         serializedFsCart.insuranceQuote.insuredObjectList.insuredObjects = serializedInusredObjects;
       }
+    }
+    if (
+      cart?.deliveryOrderGroups[0]?.entries[0]?.configurationInfos[0]
+        ?.configurationValues?.entry
+    ) {
+      const serilizedConfigurationValues = {};
+      cart.deliveryOrderGroups[0].entries[0].configurationInfos[0].configurationValues.entry.forEach(
+        entry => {
+          serilizedConfigurationValues[entry.key] = entry.value;
+        }
+      );
+      cart.deliveryOrderGroups[0].entries[0].configurationInfos[0].configurationValues = serilizedConfigurationValues;
     }
     return serializedFsCart;
   }
