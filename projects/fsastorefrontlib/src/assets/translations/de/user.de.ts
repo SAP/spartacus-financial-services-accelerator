@@ -84,7 +84,7 @@ export const user = {
     selectTitle: '[DE] Select Title',
     passwordMinRequirements:
       '[DE] Password must be six characters minimum, with one uppercase letter, one number, one symbol',
-    bothPasswordMustMatch: '[DE] Both password must match',
+    bothPasswordMustMatch: '[DE] Both passwords must match',
     titleRequired: '[DE] Title is required.',
     postRegisterMessage: '[DE] Please log in with provided credentials.',
   },
