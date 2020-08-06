@@ -62,6 +62,7 @@ export class CartEffects {
         )
         .pipe(
           concatMap((cart: any) => {
+            console.log(cart);
             const actions: Action[] = [];
             const cartCode =
               payload.userId === 'anonymous' ? payload.cartId : cart.cartCode;
