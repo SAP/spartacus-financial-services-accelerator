@@ -65,25 +65,22 @@ describe(`BindQuoteGuard`, () => {
   });
 
   it(`should redirect to the homepage when quote bind state is BIND`, () => {
+    mockCart.insuranceQuote.state.code = BindingStateType.BIND;
     spyOn(cartService, 'getActive').and.returnValue(of(mockCart));
-    let result;
     guard
       .canActivate()
-      .subscribe(isActive => (result = isActive))
+      .subscribe(isActive => expect(isActive).toBe(false))
       .unsubscribe();
-    expect(result).toBe(false);
     expect(routing.go).toHaveBeenCalled();
   });
 
   it(`should not redirect to the homepage when quote bind state is UNBIND`, () => {
     mockCart.insuranceQuote.state.code = BindingStateType.UNBIND;
     spyOn(cartService, 'getActive').and.returnValue(of(mockCart));
-    let result;
     guard
       .canActivate()
-      .subscribe(isActive => (result = isActive))
+      .subscribe(isActive => expect(isActive).toBe(true))
       .unsubscribe();
-    expect(result).toBe(true);
     expect(routing.go).not.toHaveBeenCalled();
   });
 });

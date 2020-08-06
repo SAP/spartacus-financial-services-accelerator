@@ -20,7 +20,7 @@ export class BindQuoteGuard implements CanActivate {
     protected globalMessageService: GlobalMessageService
   ) {}
 
-  canActivate(): Observable<boolean | UrlTree> {
+  canActivate(): Observable<boolean> {
     return this.cartService.getActive().pipe(
       filter(cart => !!cart.code),
       map(cart => {
