@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Cart, RoutingConfigService, RoutingService } from '@spartacus/core';
+import { RoutingConfigService, RoutingService } from '@spartacus/core';
 import {
   CheckoutConfig,
   CheckoutProgressComponent,
@@ -151,15 +151,13 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
     );
   }
 
-  quoteIsBound(): Observable<boolean> {
+  isQuoteBound(): Observable<boolean> {
     return this.cartService.getActive().pipe(
       filter(cart => cart !== undefined),
       map(cart => {
-        const insuranceQuote = (<FSCart>cart).insuranceQuote;
-        if (insuranceQuote?.state?.code === BindingStateType.BIND) {
-          return true;
-        }
-        return false;
+        return (
+          (<FSCart>cart).insuranceQuote?.state?.code === BindingStateType.BIND
+        );
       })
     );
   }

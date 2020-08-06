@@ -304,7 +304,7 @@ describe('FSCheckoutProgressComponent', () => {
     };
     component.ngOnInit();
     let bound;
-    component.quoteIsBound().subscribe(result => (bound = result));
+    component.isQuoteBound().subscribe(result => (bound = result));
     expect(bound).toEqual(true);
   });
 
@@ -320,7 +320,7 @@ describe('FSCheckoutProgressComponent', () => {
     };
     component.ngOnInit();
     let bound;
-    component.quoteIsBound().subscribe(result => (bound = result));
+    component.isQuoteBound().subscribe(result => (bound = result));
     expect(bound).toEqual(false);
   });
   it('should return false when quote does not have state code', () => {
@@ -331,7 +331,7 @@ describe('FSCheckoutProgressComponent', () => {
     };
     component.ngOnInit();
     let bound;
-    component.quoteIsBound().subscribe(result => (bound = result));
+    component.isQuoteBound().subscribe(result => (bound = result));
     expect(bound).toEqual(false);
   });
 });
