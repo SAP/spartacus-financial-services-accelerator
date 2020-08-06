@@ -64,7 +64,7 @@ describe(`BindQuoteGuard`, () => {
     spyOn(routing, 'go').and.stub();
   });
 
-  it(`should redirect to the homepage when quote workflow status is BIND`, () => {
+  it(`should redirect to the homepage when quote bind state is BIND`, () => {
     spyOn(cartService, 'getActive').and.returnValue(of(mockCart));
     let result;
     guard
@@ -75,7 +75,7 @@ describe(`BindQuoteGuard`, () => {
     expect(routing.go).toHaveBeenCalled();
   });
 
-  it(`should not redirect to the homepage when quote workflow status is UNBIND`, () => {
+  it(`should not redirect to the homepage when quote bind state is UNBIND`, () => {
     mockCart.insuranceQuote.state.code = BindingStateType.UNBIND;
     spyOn(cartService, 'getActive').and.returnValue(of(mockCart));
     let result;
