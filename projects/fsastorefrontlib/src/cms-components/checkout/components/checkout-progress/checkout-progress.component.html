@@ -16,19 +16,24 @@
                 class="d-flex progress-node"
                 [ngClass]="{
                   ' is-active': i === activeStepIndex,
-                  ' is-disabled': i > activeStepIndex
+                  ' is-disabled':
+                    i > activeStepIndex ||
+                    (i < activeStepIndex && (quoteIsBound() | async) == true)
                 }"
                 [routerLink]="
                   {
                     cxRoute: step.routeName,
-                    params: { formCode: activeCategory }
+                    params:
+                      isProductStep(step) && (activeProduct$ | async)?.code
+                        ? { code: (activeProduct$ | async)?.code }
+                        : { code: activeCategory }
                   } | cxUrl
                 "
               >
                 <div
                   class="step"
                   [ngClass]="[
-                    activeStepIndex > i ? 'fs-icon visited' : 'step-number'
+                    activeStepIndex > i ? ' fs-icon visited' : 'step-number'
                   ]"
                   [attr.data-step]="i + 1"
                 ></div>

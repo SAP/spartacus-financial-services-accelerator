@@ -10,6 +10,7 @@ export const quote = {
     retrieveQuotes: 'Retrieve Quotes',
     referredQuoteDescription:
       'Your quote is referred. For more information, please contact the agent.',
+    boundQuoteDescription: 'Your quote is already bound.',
     viewYourQuotes: 'View your quotes',
     youHaveNoQuotes: 'You have no Quotes or Applications',
     noActiveQuotes: 'You have no active quotes',

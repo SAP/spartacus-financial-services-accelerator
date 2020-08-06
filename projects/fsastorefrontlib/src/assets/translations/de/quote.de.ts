@@ -10,6 +10,7 @@ export const quote = {
     retrieveQuotes: 'Antrag fortsetzen',
     referredQuoteDescription:
       'Ihr Angebot wird weitergeleitet. Weitere Informationen erhalten Sie bei Ihrem Kundenbetreuer.',
+    boundQuoteDescription: '[DE] Your quote is already bound.',
     viewYourQuotes: 'Angebote ansehen',
     youHaveNoQuotes: 'Sie haben zur Zeit keine Angebote',
     noActiveQuotes: 'Sie haben zur Zeit keine aktiven Angebote',
