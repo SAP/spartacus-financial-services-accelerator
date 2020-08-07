@@ -36,9 +36,7 @@ context('Retrieve Quote', () => {
     });
 
     it('Should retrieve a quote and check if the user is on the correct page', () => {
-      cy.get('a.link')
-        .contains('Retrieve')
-        .click();
+      cy.get('a.link').contains('Retrieve').click();
       cy.url().should('include', 'add-options');
       cy.get('.is-active').within(() => {
         cy.get('p').contains('Add Options');

@@ -114,4 +114,9 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
   private getUrlFromStepRoute(stepRoute: string) {
     return this.fsRoutingConfigService.getRouteConfig(stepRoute).paths[0];
   }
+
+  public isProductStep(stepRoute: string) {
+    const route = this.getUrlFromStepRoute(stepRoute);
+    return !!route.includes(':productCode');
+  }
 }

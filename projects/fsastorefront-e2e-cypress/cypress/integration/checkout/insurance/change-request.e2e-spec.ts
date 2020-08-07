@@ -9,6 +9,7 @@ import {
 } from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import * as changeRequest from '../../../helpers/changeRequest';
+import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
 context('Change Request for new user', () => {
   before(() => {
@@ -30,10 +31,15 @@ context('Change Request for new user', () => {
   });
 
   it('Should check comparison table and select main product', () => {
+    const addToCart = waitForCreateAsset('carts', 'addToCart');
     auto.checkAutoComparisonTable();
     auto.selectAutoSilver();
-    checkout.clickContinueButton();
-    addPaymentMethod(registrationUser.email);
+    cy.wait(`@${addToCart}`).then(result => {
+      const body = <any>result.response.body;
+      const cartId = body.code;
+      checkout.clickContinueButton();
+      addPaymentMethod(registrationUser.email, cartId);
+    });
     //auto.checkAutoSilverMiniCart();
     checkout.clickContinueButton();
     checkout.waitForPersonalDetailsPage();
@@ -75,9 +81,7 @@ context('Change Request for new user', () => {
     //check change preview - second step
     changeRequest.checkChangeMileageSteps();
     changeRequest.checkChangedPolicyPremium();
-    cy.get('.primary-button')
-      .should('contain', 'Submit')
-      .click();
+    cy.get('.primary-button').should('contain', 'Submit').click();
     changeRequest.checkChangeRequestConfirmation();
     cy.get('.SiteLogo').click();
   });
@@ -90,17 +94,13 @@ context('Change Request for new user', () => {
     changeRequest.checkChangeCoverageSteps();
     changeRequest.checkOptionalExtras();
     //check continue button is disabled if coverage is not added
-    cy.get('.primary-button')
-      .contains('Continue')
-      .should('be.disabled');
+    cy.get('.primary-button').contains('Continue').should('be.disabled');
     changeRequest.addRoadsideAssistance();
     checkout.clickContinueButton();
     //check change preview - second step
     changeRequest.checkChangeCoverageSteps();
     changeRequest.checkChangedPolicyPremium();
-    cy.get('.primary-button')
-      .should('contain', 'Submit')
-      .click();
+    cy.get('.primary-button').should('contain', 'Submit').click();
     changeRequest.checkChangeRequestConfirmation();
     cy.get('.SiteLogo').click();
   });
@@ -116,9 +116,7 @@ context('Change Request for new user', () => {
     //check change preview - second step
     changeRequest.checkChangeMileageSteps();
     changeRequest.checkChangedPolicyNewPremium();
-    cy.get('.action-button')
-      .should('contain', 'Cancel')
-      .click();
+    cy.get('.action-button').should('contain', 'Cancel').click();
     //check user is redirected to policy details page
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
     checkout.checkAccordions('threeAccordions');

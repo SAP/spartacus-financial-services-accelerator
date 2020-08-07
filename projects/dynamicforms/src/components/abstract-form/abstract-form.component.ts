@@ -87,7 +87,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
   protected interDependancyValueCheck() {
     const triggeredControl = this.formService.getFormControlForCode(
       this.config.name,
-      this.group
+      this.group.root
     );
     if (triggeredControl) {
       this.subscription.add(
@@ -99,7 +99,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
                 if (validation.arguments && validation.arguments.length > 1) {
                   const targetControl = this.formService.getFormControlForCode(
                     validation.arguments[0].value,
-                    this.group
+                    this.group.root
                   );
                   targetControl.updateValueAndValidity({
                     onlySelf: true,

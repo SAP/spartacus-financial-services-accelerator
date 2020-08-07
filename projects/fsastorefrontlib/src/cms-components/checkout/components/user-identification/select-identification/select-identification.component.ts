@@ -44,6 +44,7 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
+    this.checkoutService.mockDeliveryMode();
   }
 
   setSelectedType(identificationType) {

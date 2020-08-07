@@ -2,28 +2,13 @@ import { Accordions } from './accordions';
 import { waitForPage } from '../generalHelpers';
 
 export function checkProgressBarInsurance() {
-  cy.get('p.label')
-    .should('have.length', 7)
-    .eq(0)
-    .contains('Choose a Cover');
-  cy.get('p.label')
-    .eq(1)
-    .contains("What's Included");
-  cy.get('p.label')
-    .eq(2)
-    .contains('Add Options');
-  cy.get('p.label')
-    .eq(3)
-    .contains('Personal Details');
-  cy.get('p.label')
-    .eq(4)
-    .contains('Quote Review');
-  cy.get('p.label')
-    .eq(5)
-    .contains('Payment Details');
-  cy.get('p.label')
-    .eq(6)
-    .contains('Final Review');
+  cy.get('p.label').should('have.length', 7).eq(0).contains('Choose a Cover');
+  cy.get('p.label').eq(1).contains("What's Included");
+  cy.get('p.label').eq(2).contains('Add Options');
+  cy.get('p.label').eq(3).contains('Personal Details');
+  cy.get('p.label').eq(4).contains('Quote Review');
+  cy.get('p.label').eq(5).contains('Payment Details');
+  cy.get('p.label').eq(6).contains('Final Review');
 }
 
 export function populatePersonalDetailsPage() {
@@ -43,9 +28,7 @@ export function ConfirmBindQuote() {
 }
 
 export function bindQuotePopup() {
-  cy.get('.primary-button')
-    .should('contain', 'Continue')
-    .click();
+  cy.get('.primary-button').should('contain', 'Continue').click();
   cy.wait(500);
   cy.get('cx-fs-bind-quote-dialog').within(() => {
     cy.get('.primary-button').click();
@@ -54,9 +37,7 @@ export function bindQuotePopup() {
 }
 
 export function clickContinueButton() {
-  cy.get('.primary-button')
-    .should('contain', 'Continue')
-    .click();
+  cy.get('.primary-button').should('contain', 'Continue').click();
 }
 
 export function checkBackAndContinueButtons() {
@@ -65,17 +46,13 @@ export function checkBackAndContinueButtons() {
 }
 
 export function clickResumeButton() {
-  cy.get('.secondary-button')
-    .contains('Resume')
-    .click();
+  cy.get('.secondary-button').contains('Resume').click();
   cy.wait(1000);
 }
 
 export function checkOrderConfirmationBanking() {
   cy.get('cx-fs-order-confirmation-message').within(() => {
-    cy.get('h5')
-      .eq(0)
-      .should('have.text', ' Thank you! ');
+    cy.get('h5').eq(0).should('have.text', ' Thank you! ');
   });
 }
 
@@ -106,16 +83,12 @@ export function placeOrderOnFinalReview() {
     cy.get('.form-check-input').click();
     cy.get('.primary-button').click();
   });
-  cy.wait(`@${confirmationPage}`)
-    .its('status')
-    .should('eq', 200);
+  cy.wait(`@${confirmationPage}`).its('status').should('eq', 200);
 }
 
 export function checkOrderConfirmation() {
   cy.get('cx-fs-order-confirmation-message').within(() => {
-    cy.get('h5')
-      .eq(0)
-      .should('have.text', ' Thank you! ');
+    cy.get('h5').eq(0).should('have.text', ' Thank you! ');
   });
 }
 
@@ -135,17 +108,13 @@ export function removeOptionalProduct(productName) {
     .contains(productName)
     .parents('.row.mx-3.py-3')
     .within(() => {
-      cy.get('.secondary-button')
-        .contains('Remove')
-        .click();
+      cy.get('.secondary-button').contains('Remove').click();
     });
   cy.get('h6')
     .contains(productName)
     .parents('.row.mx-3.py-3')
     .within(() => {
-      cy.get('.secondary-button')
-        .contains('Add')
-        .should('be.visible');
+      cy.get('.secondary-button').contains('Add').should('be.visible');
     });
 }
 
@@ -172,13 +141,9 @@ export function populatePropertyDetails() {
   cy.get('[name=ccaBuiltYear]').type('1983');
   cy.get('[name=numberOfBedrooms]').type('5');
   cy.get('[name=numberOfBathrooms]').type('3');
-  cy.get('[name="smoking"]')
-    .eq(0)
-    .click();
+  cy.get('[name="smoking"]').eq(0).click();
   cy.get('[name=numberOfDaysUnoccupied]').type('43');
-  cy.get('[name="normallyOccupied"]')
-    .eq(1)
-    .click();
+  cy.get('[name="normallyOccupied"]').eq(1).click();
   cy.get('[name=wood]').click();
   cy.get('[name=brick]').click();
   cy.get('[name=MultiPointLockingSystem]').click();
@@ -186,13 +151,9 @@ export function populatePropertyDetails() {
 
 export function populateContentsCover() {
   cy.get('h4').contains('Your Contents Cover');
-  cy.get('[name="propertyIsStandard50000ContentCover"]')
-    .eq(1)
-    .click();
+  cy.get('[name="propertyIsStandard50000ContentCover"]').eq(1).click();
   cy.get('[name=propertyMultipleOf10000ContentCover]').type('15000');
-  cy.get('[name="accidentalDamageCoverContents"]')
-    .eq(0)
-    .click();
+  cy.get('[name="accidentalDamageCoverContents"]').eq(0).click();
 }
 
 export function populatePropertyAddress() {
@@ -209,24 +170,17 @@ export function startInsuranceCheckout(mainProduct) {
     dropdownItem: mainProduct,
     nextPageUrlPart: 'Insurance',
   });
-  cy.get('.enriched-banner-styled-text')
-    .eq(0)
-    .contains(' Get a Quote')
-    .click();
+  cy.get('.enriched-banner-styled-text').eq(0).contains(' Get a Quote').click();
 }
 
 export function waitForPersonalDetailsPage() {
   const personalDetails = waitForPage('personal-details', 'personalDetails');
-  cy.wait(`@${personalDetails}`)
-    .its('status')
-    .should('eq', 200);
+  cy.wait(`@${personalDetails}`).its('status').should('eq', 200);
 }
 
 export function waitForHomepage() {
   const homepage = waitForPage('homepage', 'homepage');
-  cy.wait(`@${homepage}`)
-    .its('status')
-    .should('eq', 200);
+  cy.wait(`@${homepage}`).its('status').should('eq', 200);
 }
 
 export function checkCheckoutStep(mainProduct, numberOfSteps) {

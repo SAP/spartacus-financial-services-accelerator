@@ -7,9 +7,7 @@ export function startChangeMileage() {
     .parentsUntil()
     .contains(' Who or What Is Insured ')
     .click();
-  cy.get('p.link.mb-0')
-    .contains('Edit')
-    .click({ force: true });
+  cy.get('p.link.mb-0').contains('Edit').click({ force: true });
 }
 
 export function checkChangeMileageSteps() {
@@ -18,12 +16,8 @@ export function checkChangeMileageSteps() {
   cy.get('.progress-inner-wrapper')
     .should('have.length', 2)
     .within(() => {
-      cy.get('p.label')
-        .eq(0)
-        .contains(' Change Car Details ');
-      cy.get('p.label')
-        .eq(1)
-        .contains(' Change Preview ');
+      cy.get('p.label').eq(0).contains(' Change Car Details ');
+      cy.get('p.label').eq(1).contains(' Change Preview ');
     });
 }
 
@@ -32,21 +26,15 @@ export function enterNewMileage() {
     .should('be.visible')
     .within(() => {
       cy.get('h3').contains('Auto Information');
-      cy.get('.label-content')
-        .eq(1)
-        .contains('Change mileage');
+      cy.get('.label-content').eq(1).contains('Change mileage');
       cy.get('[name="vehicleAnnualMileage"]').type(50000);
     });
 }
 
 export function checkChangedPolicyPremium() {
   cy.get('.offset-1').contains(currentDate);
-  cy.get('.col-4.semi-bold')
-    .eq(5)
-    .contains(' €10.95 / Monthly ');
-  cy.get('.col-3.semi-bold')
-    .eq(2)
-    .contains(' €100.00 / Monthly ');
+  cy.get('.col-4.semi-bold').eq(5).contains(' €10.95 / Monthly ');
+  cy.get('.col-3.semi-bold').eq(2).contains(' €100.00 / Monthly ');
 }
 
 export function checkChangeRequestConfirmation() {
@@ -64,9 +52,7 @@ export function startChangeCoverage() {
     .parentsUntil()
     .contains(' Optional Extras ')
     .click();
-  cy.get('.link.position-absolute')
-    .contains('Edit')
-    .click();
+  cy.get('.link.position-absolute').contains('Edit').click();
 }
 
 export function checkOptionalExtras() {
@@ -75,25 +61,15 @@ export function checkOptionalExtras() {
     .within(() => {
       cy.get('.section-header-heading').contains(' Optional Extras ');
       cy.get('.row.mx-3').should('have.length', 4);
-      cy.get('h6')
-        .eq(0)
-        .contains('Collision Coverage');
-      cy.get('h6')
-        .eq(1)
-        .contains('Uninsured Coverage');
-      cy.get('h6')
-        .eq(2)
-        .contains('Roadside Assistance');
-      cy.get('h6')
-        .eq(3)
-        .contains('Trailer Liability');
+      cy.get('h6').eq(0).contains('Collision Coverage');
+      cy.get('h6').eq(1).contains('Uninsured Coverage');
+      cy.get('h6').eq(2).contains('Roadside Assistance');
+      cy.get('h6').eq(3).contains('Trailer Liability');
     });
 }
 
 export function addRoadsideAssistance() {
-  cy.get('.secondary-button')
-    .should('have.length', 3)
-    .contains(' Add ');
+  cy.get('.secondary-button').should('have.length', 3).contains(' Add ');
   cy.get('.row.mx-3')
     .eq(2)
     .within(() => {
@@ -109,21 +85,13 @@ export function checkChangeCoverageSteps() {
   cy.get('.progress-inner-wrapper')
     .should('have.length', 2)
     .within(() => {
-      cy.get('p.label')
-        .eq(0)
-        .contains(' Change Coverage ');
-      cy.get('p.label')
-        .eq(1)
-        .contains(' Change Preview ');
+      cy.get('p.label').eq(0).contains(' Change Coverage ');
+      cy.get('p.label').eq(1).contains(' Change Preview ');
     });
 }
 
 export function checkChangedPolicyNewPremium() {
   cy.get('.offset-1').contains(currentDate);
-  cy.get('.col-4.semi-bold')
-    .eq(5)
-    .contains(' €100.00 / Monthly ');
-  cy.get('.col-3.semi-bold')
-    .eq(2)
-    .contains(' €100.00 / Monthly ');
+  cy.get('.col-4.semi-bold').eq(5).contains(' €100.00 / Monthly ');
+  cy.get('.col-3.semi-bold').eq(2).contains(' €100.00 / Monthly ');
 }

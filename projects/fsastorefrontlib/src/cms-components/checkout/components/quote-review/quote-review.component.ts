@@ -9,9 +9,9 @@ import { FSTranslationService } from '../../../../core/i18n/facade/translation.s
 import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
-  FSSteps,
   BindingStateType,
   FSCart,
+  FSSteps,
   QuoteWorkflowStatusType,
 } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
@@ -123,14 +123,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   getFormContent(cart: any): any {
-    if (
-      cart &&
-      cart.deliveryOrderGroups &&
-      cart.deliveryOrderGroups.length > 0 &&
-      cart.deliveryOrderGroups[0].entries.length > 0 &&
-      cart.deliveryOrderGroups[0].entries[0].formData &&
-      cart.deliveryOrderGroups[0].entries[0].formData.length > 0
-    ) {
+    if (cart?.deliveryOrderGroups[0]?.entries[0]?.formData?.length > 0) {
       return JSON.parse(
         cart.deliveryOrderGroups[0].entries[0].formData[0].content
       );
