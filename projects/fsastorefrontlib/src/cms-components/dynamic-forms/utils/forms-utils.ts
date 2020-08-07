@@ -55,17 +55,17 @@ export class FormsUtils {
       }
     }
     if (
-      cart.deliveryOrderGroups &&
-      cart?.deliveryOrderGroups[0]?.entries[0]?.configurationInfos[0]
-        ?.configurationValues?.entry
+      cart.entries &&
+      cart.entries[0]?.configurationInfos &&
+      cart.entries[0]?.configurationInfos[0]?.configurationValues?.entry
     ) {
       const serilizedConfigurationValues = {};
-      cart.deliveryOrderGroups[0].entries[0].configurationInfos[0].configurationValues.entry.forEach(
+      cart.entries[0].configurationInfos[0].configurationValues.entry.forEach(
         entry => {
           serilizedConfigurationValues[entry.key] = entry.value;
         }
       );
-      serializedFsCart.deliveryOrderGroups[0].entries[0].configurationInfos[0].configurationValues = serilizedConfigurationValues;
+      serializedFsCart.entries[0].configurationInfos[0].configurationValues = serilizedConfigurationValues;
     }
     return serializedFsCart;
   }

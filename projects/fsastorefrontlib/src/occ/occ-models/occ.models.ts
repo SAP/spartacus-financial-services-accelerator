@@ -7,8 +7,7 @@ import {
   Price,
   Product,
   User,
-  UserSignUp,
-  DeliveryOrderEntryGroup,
+  UserSignUp
 } from '@spartacus/core';
 import { CheckoutStep } from '@spartacus/storefront';
 
@@ -56,15 +55,12 @@ export interface B2BAdministrator {
   orgUnit: OrgUnit;
 }
 
-export interface FSDeliveryOrderEntryGroup extends DeliveryOrderEntryGroup {
-  entries?: FSOrderEntry[];
-}
 export interface FSOrderEntry extends OrderEntry {
   configurationInfos?: any[];
 }
 export interface FSCart extends Cart {
   insuranceQuote?: InsuranceQuote;
-  deliveryOrderGroups?: FSDeliveryOrderEntryGroup[];
+  entries?: FSOrderEntry[];
 }
 
 export interface InsuranceQuoteList {
