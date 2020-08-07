@@ -35,7 +35,7 @@ export class FormsUtils {
     const serializedFsCart: FSCart = cart;
     if (cart?.insuranceQuote) {
       const insuranceQuote = cart.insuranceQuote;
-      if (insuranceQuote.quoteDetails && insuranceQuote.quoteDetails.entry) {
+      if (insuranceQuote.quoteDetails && insuranceQuote.quoteDetails?.entry) {
         const serilizedQuoteDetails = {};
         insuranceQuote.quoteDetails.entry.forEach(entry => {
           serilizedQuoteDetails[entry.key] = entry.value;

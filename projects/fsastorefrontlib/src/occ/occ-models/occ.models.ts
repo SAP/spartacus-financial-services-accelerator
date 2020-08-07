@@ -7,7 +7,7 @@ import {
   Price,
   Product,
   User,
-  UserSignUp
+  UserSignUp,
 } from '@spartacus/core';
 import { CheckoutStep } from '@spartacus/storefront';
 
