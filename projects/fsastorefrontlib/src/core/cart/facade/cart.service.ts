@@ -7,7 +7,7 @@ import {
   MultiCartService,
   OCC_USER_ID_ANONYMOUS,
   StateUtils,
-  StateWithMultiCart
+  StateWithMultiCart,
 } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
@@ -48,10 +48,10 @@ export class FSCartService extends ActiveCartService {
                 filter(cartState => this.isCartCreated(cartState)),
                 take(1),
                 map(cartState => {
-                  const newCartCode =
-                    userId === OCC_USER_ID_ANONYMOUS
-                      ? cartState.value.guid
-                      : cartState.value.code;
+                  let newCartCode = cartState.value.code;
+                  if (userId === OCC_USER_ID_ANONYMOUS) {
+                    newCartCode = cartState.value.guid;
+                  }
                   this.startBundleForCart(
                     userId,
                     newCartCode,
