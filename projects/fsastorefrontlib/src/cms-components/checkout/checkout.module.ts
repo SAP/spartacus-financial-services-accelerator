@@ -59,6 +59,7 @@ import { UserIdentificationModule } from './components/user-identification/user-
 import { CategoryStepGuard } from './guards/category-step-guard';
 import { CheckoutStepGuard } from './guards/checkout-step-guard';
 import { AutoPersonalDetailsGuard } from '../dynamic-forms/guards/auto-personal-details-guard';
+import { BindQuoteGuard } from '../../core/checkout/guards/bind-quote.guard';
 
 const routes: Routes = [
   {
@@ -72,7 +73,7 @@ const routes: Routes = [
   },
   {
     path: null, // can be null only if pathS property is defined in ConfigModule
-    canActivate: [CmsPageGuard],
+    canActivate: [CmsPageGuard, BindQuoteGuard],
     data: {
       cxRoute: 'addOptions', // custom name for your route to be used in ConfigModule configuration
       pageLabel: 'add-options', // ContentPage that is inserted into ContentSlot/ContentSlotForPage in impex file
@@ -86,6 +87,7 @@ const routes: Routes = [
       CategoryStepGuard,
       AuthGuard,
       AutoPersonalDetailsGuard,
+      BindQuoteGuard,
     ],
     data: {
       cxRoute: 'checkoutPersonalDetails',
