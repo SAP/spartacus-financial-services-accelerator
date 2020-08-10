@@ -7,7 +7,7 @@ import {
   MultiCartService,
   OCC_USER_ID_ANONYMOUS,
   StateUtils,
-  StateWithMultiCart
+  StateWithMultiCart,
 } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
@@ -122,7 +122,6 @@ export class FSCartService extends ActiveCartService {
       })
       .unsubscribe();
   }
-
 
   // FSA-5257: RETRIEVE QUOTE
   loadCart(cartId: string): void {
