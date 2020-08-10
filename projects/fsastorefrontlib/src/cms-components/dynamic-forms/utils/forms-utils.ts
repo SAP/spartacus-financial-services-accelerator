@@ -32,7 +32,12 @@ export class FormsUtils {
   }
 
   static serializeCartEntries(cart): any {
-    const serializedFsCart: FSCart = cart;
+    let serializedFsCart: FSCart = cart;
+    serializedFsCart = this.serializeQuoteDetails(cart, serializedFsCart);
+    serializedFsCart = this.serializeConfigurationInfos(cart, serializedFsCart);
+    return serializedFsCart;
+  }
+  private static serializeQuoteDetails(cart, serializedFsCart) {
     if (cart?.insuranceQuote) {
       const insuranceQuote = cart.insuranceQuote;
       if (insuranceQuote.quoteDetails && insuranceQuote.quoteDetails?.entry) {
@@ -47,13 +52,17 @@ export class FormsUtils {
         insuranceQuote.insuredObjectList.insuredObjects.forEach(
           insuredObject => {
             serializedInusredObjects.push(
-              this.serializeInsuredObject(insuredObject)
+              FormsUtils.serializeInsuredObject(insuredObject)
             );
           }
         );
         serializedFsCart.insuranceQuote.insuredObjectList.insuredObjects = serializedInusredObjects;
       }
     }
+    return serializedFsCart;
+  }
+
+  private static serializeConfigurationInfos(cart, serializedFsCart) {
     if (
       cart.entries &&
       cart.entries[0]?.configurationInfos &&
