@@ -1,16 +1,16 @@
 import {
   Component,
   HostBinding,
-  OnInit,
-  OnDestroy,
-  Injector,
+
+
+  Injector, OnDestroy, OnInit
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FieldConfig } from '../../core/models/form-config.interface';
-import { DynamicFormsConfig } from '../../core/config/form-config';
 import { LanguageService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
+import { DynamicFormsConfig } from '../../core/config/form-config';
+import { FieldConfig } from '../../core/models/form-config.interface';
 import { PrefillResolver } from '../../core/resolver/prefill-resolver.interface';
 import { FormService } from '../../core/services/form/form.service';
 
@@ -21,7 +21,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
     protected languageService: LanguageService,
     protected injector: Injector,
     protected formService: FormService
-  ) {}
+  ) { }
 
   @HostBinding('class') hostComponentClass: string;
   label: string;
@@ -85,32 +85,34 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
   }
 
   protected interDependancyValueCheck() {
-    const triggeredControl = this.formService.getFormControlForCode(
-      this.config.name,
-      this.group.root
-    );
-    if (triggeredControl) {
-      this.subscription.add(
-        triggeredControl.valueChanges
-          .pipe(
-            filter(_ => !!this.config.validations),
-            map(_ => {
-              this.config.validations.forEach(validation => {
-                if (validation.arguments && validation.arguments.length > 1) {
-                  const targetControl = this.formService.getFormControlForCode(
-                    validation.arguments[0].value,
-                    this.group.root
-                  );
-                  targetControl.updateValueAndValidity({
-                    onlySelf: true,
-                    emitEvent: false,
-                  });
-                }
-              });
-            })
-          )
-          .subscribe()
+    if (this.config && this.group) {
+      const triggeredControl = this.formService.getFormControlForCode(
+        this.config.name,
+        this.group.root
       );
+      if (triggeredControl) {
+        this.subscription.add(
+          triggeredControl.valueChanges
+            .pipe(
+              filter(_ => !!this.config.validations),
+              map(_ => {
+                this.config.validations.forEach(validation => {
+                  if (validation.arguments && validation.arguments.length > 1) {
+                    const targetControl = this.formService.getFormControlForCode(
+                      validation.arguments[0].value,
+                      this.group.root
+                    );
+                    targetControl.updateValueAndValidity({
+                      onlySelf: true,
+                      emitEvent: false,
+                    });
+                  }
+                });
+              })
+            )
+            .subscribe()
+        );
+      }
     }
   }
 
