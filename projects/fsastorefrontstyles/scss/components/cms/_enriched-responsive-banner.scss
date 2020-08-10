@@ -1,5 +1,8 @@
 %cx-fs-enriched-responsive-banner {
   .enriched-banner {
     position: relative;
+    img {
+      width: 100%;
+    }
   }
 }
