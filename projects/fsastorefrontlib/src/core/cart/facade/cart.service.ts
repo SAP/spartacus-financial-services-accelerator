@@ -102,25 +102,25 @@ export class FSCartService extends ActiveCartService {
     );
   }
 
-  private isCartCreated(cartState: StateUtils.ProcessesLoaderState<Cart>) {
-    return cartState && cartState.success && !cartState.loading;
-  }
-
-  // FSA-5255: ADD OPTIONAL PRODUCT
   addOptionalProduct(
     productCode: string,
     quantity: number,
     entryNumber: string
   ): void {
-    // this.multiCartStore.dispatch(
-    //   new fromAction.AddOptionalProduct({
-    //     userId: this.fsUserId,
-    //     cartId: this.fsCartId,
-    //     productCode: productCode,
-    //     quantity: quantity,
-    //     entryNumber: entryNumber,
-    //   })
-    // );
+    combineLatest([this.getActiveCartId(), this.authService.getOccUserId()])
+      .pipe(take(1))
+      .subscribe(([activeCartId, userId]) => {
+        this.store.dispatch(
+          new fromAction.AddOptionalProduct({
+            userId: userId,
+            cartId: activeCartId,
+            productCode: productCode,
+            quantity: quantity,
+            entryNumber: entryNumber,
+          })
+        );
+      })
+      .unsubscribe();
   }
 
   // FSA-5257: RETRIEVE QUOTE
@@ -134,5 +134,9 @@ export class FSCartService extends ActiveCartService {
     //     },
     //   });
     // }
+  }
+
+  private isCartCreated(cartState: StateUtils.ProcessesLoaderState<Cart>) {
+    return cartState && cartState.success && !cartState.loading;
   }
 }
