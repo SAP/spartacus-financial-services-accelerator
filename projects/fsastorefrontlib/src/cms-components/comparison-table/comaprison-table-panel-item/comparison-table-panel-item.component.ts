@@ -125,11 +125,13 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
     productCode: string,
     bundleTemplateId: string
   ) {
-    this.cartService.createCartForProduct(
-      productCode,
-      bundleTemplateId,
-      1,
-      this.pricingData
+    this.subscription.add(
+      this.cartService.createCartForProduct(
+        productCode,
+        bundleTemplateId,
+        1,
+        this.pricingData
+      )
     );
 
     this.subscription.add(
