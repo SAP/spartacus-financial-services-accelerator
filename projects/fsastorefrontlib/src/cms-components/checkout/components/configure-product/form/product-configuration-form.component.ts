@@ -8,7 +8,7 @@ import {
 } from '@fsa/dynamicforms';
 import { CurrentProductService } from '@spartacus/storefront';
 import { Observable, Subscription } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { filter, map, take, tap } from 'rxjs/operators';
 import {
   ConfiguratorType,
   FSCategory,
@@ -37,21 +37,26 @@ export class ProductConfigurationFormComponent implements OnInit, OnDestroy {
   formCategory: string;
 
   ngOnInit() {
-    this.formDefinition$ = this.formDataService.getFormDefinition().pipe(
-      map(definition => {
-        if (definition.content) {
-          this.formConfig = <FormDefinition>JSON.parse(definition.content);
-        }
-        return definition;
-      })
-    );
-
     this.subscription.add(
       this.currentProductService
         .getProduct()
         .pipe(
           filter(Boolean),
           take(1),
+          tap(_ => {
+            this.formDefinition$ = this.formDataService
+              .getFormDefinition()
+              .pipe(
+                map(definition => {
+                  if (definition.content) {
+                    this.formConfig = <FormDefinition>(
+                      JSON.parse(definition.content)
+                    );
+                  }
+                  return definition;
+                })
+              );
+          }),
           map(product => {
             const fsProduct = <FSProduct>product;
             if (fsProduct && fsProduct.categories) {
@@ -74,7 +79,6 @@ export class ProductConfigurationFormComponent implements OnInit, OnDestroy {
                           this.applicationId,
                           this.formDefinitionId
                         );
-
                         const formDataId = this.formDataStorageService.getFormDataIdByDefinitionCode(
                           this.formDefinitionId
                         );
