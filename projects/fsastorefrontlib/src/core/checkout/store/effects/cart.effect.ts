@@ -8,7 +8,6 @@ import { catchError, concatMap, map } from 'rxjs/operators';
 import { CartConnector } from '../../../cart/connectors/cart.connector';
 import * as fromQuoteActions from '../../../my-account/store/actions/quote.action';
 import * as fromActions from '../actions/cart.action';
-
 @Injectable()
 export class CartEffects {
   @Effect()
@@ -64,13 +63,10 @@ export class CartEffects {
           concatMap((cart: any) => {
             const actions: Action[] = [];
             const cartCode =
-              payload.userId === 'anonymous' ? payload.cartId : cart.cartCode;
-
-            if (
-              cart.entry &&
-              cart.entry.product &&
-              cart.entry.product.defaultCategory
-            ) {
+              payload.userId === OCC_USER_ID_ANONYMOUS
+                ? payload.cartId
+                : cart.cartCode;
+            if (cart?.entry?.product?.defaultCategory) {
               const formDataId = this.formDataStorageService.getFormDataIdByCategory(
                 cart.entry.product.defaultCategory.code
               );
