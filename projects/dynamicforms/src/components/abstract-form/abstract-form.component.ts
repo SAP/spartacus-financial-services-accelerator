@@ -85,34 +85,32 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
   }
 
   protected interDependancyValueCheck() {
-    if (this.config && this.group) {
-      const triggeredControl = this.formService.getFormControlForCode(
-        this.config.name,
-        this.group.root
+    const triggeredControl = this.formService.getFormControlForCode(
+      this.config.name,
+      this.group.root
+    );
+    if (triggeredControl) {
+      this.subscription.add(
+        triggeredControl.valueChanges
+          .pipe(
+            filter(_ => !!this.config.validations),
+            map(_ => {
+              this.config.validations.forEach(validation => {
+                if (validation.arguments && validation.arguments.length > 1) {
+                  const targetControl = this.formService.getFormControlForCode(
+                    validation.arguments[0].value,
+                    this.group.root
+                  );
+                  targetControl.updateValueAndValidity({
+                    onlySelf: true,
+                    emitEvent: false,
+                  });
+                }
+              });
+            })
+          )
+          .subscribe()
       );
-      if (triggeredControl) {
-        this.subscription.add(
-          triggeredControl.valueChanges
-            .pipe(
-              filter(_ => !!this.config.validations),
-              map(_ => {
-                this.config.validations.forEach(validation => {
-                  if (validation.arguments && validation.arguments.length > 1) {
-                    const targetControl = this.formService.getFormControlForCode(
-                      validation.arguments[0].value,
-                      this.group.root
-                    );
-                    targetControl.updateValueAndValidity({
-                      onlySelf: true,
-                      emitEvent: false,
-                    });
-                  }
-                });
-              })
-            )
-            .subscribe()
-        );
-      }
     }
   }
 
