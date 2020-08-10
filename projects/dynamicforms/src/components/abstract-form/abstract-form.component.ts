@@ -1,9 +1,9 @@
 import {
   Component,
   HostBinding,
-
-
-  Injector, OnDestroy, OnInit
+  Injector,
+  OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { LanguageService } from '@spartacus/core';
@@ -21,7 +21,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
     protected languageService: LanguageService,
     protected injector: Injector,
     protected formService: FormService
-  ) { }
+  ) {}
 
   @HostBinding('class') hostComponentClass: string;
   label: string;
