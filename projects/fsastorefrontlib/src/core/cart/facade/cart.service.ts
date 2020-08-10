@@ -5,6 +5,7 @@ import {
   AuthService,
   Cart,
   MultiCartService,
+  OCC_CART_ID_CURRENT,
   OCC_USER_ID_ANONYMOUS,
   StateUtils,
   StateWithMultiCart,
@@ -123,17 +124,16 @@ export class FSCartService extends ActiveCartService {
       .unsubscribe();
   }
 
-  // FSA-5257: RETRIEVE QUOTE
-  loadCart(cartId: string): void {
-    // if (this.fsUserId !== OCC_USER_ID_ANONYMOUS) {
-    //   this.multiCartService.loadCart({
-    //     userId: this.fsUserId,
-    //     cartId: cartId ? cartId : OCC_CART_ID_CURRENT,
-    //     extraData: {
-    //       active: true,
-    //     },
-    //   });
-    // }
+  loadCart(cartId: string, userId: string): void {
+    if (userId !== OCC_USER_ID_ANONYMOUS) {
+      this.multiCartService.loadCart({
+        userId: userId,
+        cartId: cartId ? cartId : OCC_CART_ID_CURRENT,
+        extraData: {
+          active: true,
+        },
+      });
+    }
   }
 
   private isCartCreated(cartState: StateUtils.ProcessesLoaderState<Cart>) {

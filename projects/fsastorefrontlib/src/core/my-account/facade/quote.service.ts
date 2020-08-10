@@ -52,7 +52,7 @@ export class QuoteService {
       .pipe(take(1))
       .subscribe(occUserId => {
         if (occUserId) {
-          this.cartService.loadCart(quote.cartCode);
+          this.cartService.loadCart(quote.cartCode, occUserId);
         }
       })
       .unsubscribe();
