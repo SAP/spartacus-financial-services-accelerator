@@ -153,4 +153,13 @@ describe('FSCheckoutConfigService', () => {
     });
     expect(service.getCurrentStepIndex(activatedRoute)).toBe(null);
   });
+
+  it('should return true for product step', () => {
+    spyOn<any>(service, 'getUrlFromStepRoute').and.returnValue('/:productCode');
+    expect(service.isProductStep('productPage')).toBe(true);
+  });
+  it('should return false for non product step', () => {
+    spyOn<any>(service, 'getUrlFromStepRoute').and.returnValue('/route/:code');
+    expect(service.isProductStep('nonProductPage')).toBe(false);
+  });
 });

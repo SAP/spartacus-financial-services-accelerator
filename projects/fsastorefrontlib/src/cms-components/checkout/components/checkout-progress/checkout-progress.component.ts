@@ -11,12 +11,14 @@ import {
   CheckoutProgressComponent,
   CurrentProductService,
 } from '@spartacus/storefront';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, of, Subscription } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import {
+  BindingStateType,
+  FSCart,
   FSCheckoutStep,
   FSProduct,
 } from './../../../../occ/occ-models/occ.models';
@@ -42,6 +44,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
   }
   private subscription = new Subscription();
   activeCategory$: Observable<string>;
+  activeProduct$: Observable<FSProduct>;
 
   ngOnInit() {
     super.ngOnInit();
@@ -84,6 +87,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
                       this.categoryService.setActiveCategory(
                         fsProduct.defaultCategory.code
                       );
+                      this.activeProduct$ = of(fsProduct);
                     })
                   )
                   .subscribe()
@@ -103,6 +107,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
                       this.categoryService.setActiveCategory(
                         fsProduct.defaultCategory.code
                       );
+                      this.activeProduct$ = of(fsProduct);
                     }
                   }
                 })
@@ -144,6 +149,20 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
         )
         .subscribe()
     );
+  }
+
+  isQuoteBound(): Observable<boolean> {
+    return this.cartService.getActive().pipe(
+      filter(cart => !!cart),
+      map(
+        cart =>
+          (<FSCart>cart).insuranceQuote?.state?.code === BindingStateType.BIND
+      )
+    );
+  }
+
+  isProductStep(step: FSCheckoutStep): boolean {
+    return this.checkoutConfigService.isProductStep(step.routeName);
   }
 
   ngOnDestroy(): void {
