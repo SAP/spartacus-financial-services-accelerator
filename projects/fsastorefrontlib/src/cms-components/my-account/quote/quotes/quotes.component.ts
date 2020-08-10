@@ -41,16 +41,14 @@ export class QuotesComponent implements OnInit, OnDestroy {
           filter(cart => cart.code === quote.cartCode),
           take(1),
           tap(_ => {
-            if (quote && quote.state) {
-              if (quote.state.code === 'BIND') {
-                this.routingService.go({
-                  cxRoute: 'quoteReview',
-                });
-              } else {
-                this.routingService.go({
-                  cxRoute: 'addOptions',
-                });
-              }
+            if (quote?.state?.code === 'BIND') {
+              this.routingService.go({
+                cxRoute: 'quoteReview',
+              });
+            } else {
+              this.routingService.go({
+                cxRoute: 'addOptions',
+              });
             }
           })
         )
