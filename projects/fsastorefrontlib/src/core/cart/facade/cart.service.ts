@@ -35,8 +35,6 @@ export class FSCartService extends ActiveCartService {
       .pipe(
         take(1),
         map(([activeCartId, userId]) => {
-          /** if active cart doesn't exist, first it should be created and once the cart
-              is loaded and in success state, bundle should be started  */
           if (!activeCartId) {
             this.multiCartService
               .createCart({
@@ -64,10 +62,6 @@ export class FSCartService extends ActiveCartService {
                 })
               )
               .subscribe();
-            /** if active cart exists, its enough just to start bundle for activeCartCode
-                which will eventually clear bundle from the cart and maintain the same cart
-                for the new product or remove session and create new one (in case that bundle
-                is started once more for product from different category) */
           } else {
             this.startBundleForCart(
               userId,
