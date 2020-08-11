@@ -14,6 +14,13 @@ const mockCart = {
   entries: [
     {
       entryNumber: entryNumber,
+      configurationInfos: [
+        {
+          configurationValues: {
+            entry: [],
+          },
+        },
+      ],
     },
   ],
   insuranceQuote: {
@@ -54,12 +61,14 @@ const mockCart = {
 
 const cartWithDate = {
   date: '1992-02-02',
+  entries: [],
 };
 
 const expectedDate = '1992-02-02';
 
 const cartWithoutQuote = {
   code: cartCode,
+  entries: [],
 };
 
 class MockCartService {

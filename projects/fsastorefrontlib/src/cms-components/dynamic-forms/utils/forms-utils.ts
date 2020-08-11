@@ -64,9 +64,8 @@ export class FormsUtils {
 
   private static serializeConfigurationInfos(cart, serializedFsCart) {
     if (
-      cart.entries &&
-      cart.entries[0]?.configurationInfos &&
-      cart.entries[0]?.configurationInfos[0]?.configurationValues?.entry
+      cart?.entries[0]?.configurationInfos[0]?.configurationValues?.entry
+        ?.length > 0
     ) {
       const serilizedConfigurationValues = {};
       cart.entries[0].configurationInfos[0].configurationValues.entry.forEach(

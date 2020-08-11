@@ -62,6 +62,7 @@ describe('AutoPersonalDetailsGuard', () => {
 
   it('should redirect to homepage in case policyHolderSameAsMainDriver is set to true and DOBs are not the same', () => {
     const mockCart: any = {
+      entries: [],
       insuranceQuote: {
         quoteDetails: {
           customerId: 'true',
@@ -95,6 +96,7 @@ describe('AutoPersonalDetailsGuard', () => {
 
   it('should not redirect to homepage in case policyHolderSameAsMainDriver is set to false', () => {
     const mockCart: any = {
+      entries: [],
       insuranceQuote: {
         quoteDetails: {
           customerId: 'false',
@@ -128,6 +130,7 @@ describe('AutoPersonalDetailsGuard', () => {
 
   it('should not redirect to homepage in case policyHolderSameAsMainDriver is set to true and DOBs are same', () => {
     const mockCart: any = {
+      entries: [],
       insuranceQuote: {
         quoteDetails: {
           customerId: 'true',
