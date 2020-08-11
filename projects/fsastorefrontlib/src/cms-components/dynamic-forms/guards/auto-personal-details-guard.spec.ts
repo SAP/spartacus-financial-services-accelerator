@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
+  GlobalMessageService,
   RoutingService,
   UserService,
-  GlobalMessageService,
 } from '@spartacus/core';
-import { AutoPersonalDetailsGuard } from './auto-personal-details-guard';
-import { FSUser } from '../../../occ/occ-models/occ.models';
 import { of } from 'rxjs';
 import { FSCartService } from '../../../core/cart/facade/cart.service';
+import { FSUser } from '../../../occ/occ-models/occ.models';
+import { AutoPersonalDetailsGuard } from './auto-personal-details-guard';
 import createSpy = jasmine.createSpy;
 
 const mockUser: FSUser = {
@@ -97,7 +97,7 @@ describe('AutoPersonalDetailsGuard', () => {
     const mockCart: any = {
       insuranceQuote: {
         quoteDetails: {
-          customerId: 'false',
+          customerId: false,
         },
         insuredObjectList: {
           insuredObjects: [
