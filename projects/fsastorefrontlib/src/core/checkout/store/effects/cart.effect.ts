@@ -34,7 +34,6 @@ export class CartEffects {
           catchError(error =>
             from([
               new CartActions.CartAddEntryFail(error),
-              new CartActions.CartProcessesDecrement(payload.cartId),
               new CartActions.LoadCart({
                 cartId: payload.cartId,
                 userId: payload.userId,
@@ -94,9 +93,7 @@ export class CartEffects {
               cartCode !== payload.cartId &&
               OCC_USER_ID_ANONYMOUS !== payload.userId
             ) {
-              actions.push(
-                new CartActions.CartProcessesDecrement(payload.cartId)
-              );
+              actions.push(new fromActions.StartBundleFail(payload.cartId));
             } else {
               actions.push(
                 new CartActions.CartAddEntrySuccess({
@@ -120,18 +117,6 @@ export class CartEffects {
           catchError(error => from([new CartActions.CartAddEntryFail(error)]))
         );
     })
-  );
-
-  @Effect()
-  processesIncrement$: Observable<
-    CartActions.CartProcessesIncrement
-  > = this.actions$.pipe(
-    ofType(fromActions.ADD_OPTIONAL_PRODUCT, fromActions.START_BUNDLE),
-    map(
-      (action: fromActions.AddOptionalProduct | fromActions.StartBundle) =>
-        action.payload
-    ),
-    map(payload => new CartActions.CartProcessesIncrement(payload.cartId))
   );
 
   constructor(
