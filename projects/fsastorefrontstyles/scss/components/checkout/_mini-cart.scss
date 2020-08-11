@@ -1,6 +1,7 @@
 @import '../../theme/fs/variables';
 
 %cx-fs-mini-cart,
+%cx-fs-product-configuration-mini-cart,
 .short-overview-wrapper {
   // short-overview-wrapper is needed for order confirmation page, until better solution
   @include media-breakpoint-down(md) {
@@ -16,6 +17,7 @@
     }
     &-value {
       text-align: right;
+      align-self: flex-end;
     }
     .highlighted {
       font-size: var(--cx-h6-font-size);
