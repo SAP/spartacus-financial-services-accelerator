@@ -6,11 +6,11 @@ import {
   RoutingService,
   UserService,
 } from '@spartacus/core';
-import { filter, map } from 'rxjs/operators';
 import { combineLatest, Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
+import { FSCart, FSUser } from '../../../../src/occ/occ-models/occ.models';
 import { FSCartService } from '../../../core/cart/facade/cart.service';
 import { FormsUtils } from '../utils/forms-utils';
-import { FSCart, FSUser } from '../../../../src/occ/occ-models/occ.models';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +26,7 @@ export class AutoPersonalDetailsGuard implements CanActivate {
     'insuranceQuote.quoteDetails.customerId';
   private readonly mainDriverDobPath =
     'insuranceQuote.insuredObjectList.insuredObjects[0].childInsuredObjectList.insuredObjects[0].dateOfBirth';
+
   canActivate(): Observable<boolean> {
     return combineLatest([
       this.cartService.getActive(),
@@ -40,8 +41,8 @@ export class AutoPersonalDetailsGuard implements CanActivate {
           fsCart
         );
         if (
-          policyHolderSameAsMainDriver !== 'false' &&
-          policyHolderSameAsMainDriver !== undefined
+          !!policyHolderSameAsMainDriver &&
+          policyHolderSameAsMainDriver !== 'false'
         ) {
           const mainDriverDob = FormsUtils.getValueByPath(
             this.mainDriverDobPath,
