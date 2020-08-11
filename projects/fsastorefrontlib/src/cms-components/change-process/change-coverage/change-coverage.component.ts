@@ -40,7 +40,8 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
   populateCoverages(optionalProducts: any) {
     this.includedCoverages = [];
     this.potentialCoverages = [];
-    optionalProducts.map((coverage, index) => {
+    optionalProducts.map((product, index) => {
+      const coverage = {...product};
       coverage.index = index;
       if (coverage.coverageIsIncluded) {
         this.includedCoverages.push(coverage);
