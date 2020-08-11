@@ -89,12 +89,7 @@ export class CartEffects {
                 );
               }
             }
-            if (
-              cartCode !== payload.cartId &&
-              OCC_USER_ID_ANONYMOUS !== payload.userId
-            ) {
-              actions.push(new fromActions.StartBundleFail(payload.cartId));
-            } else {
+            if (cartCode === payload.cartId) {
               actions.push(
                 new CartActions.CartAddEntrySuccess({
                   ...cart.entry,

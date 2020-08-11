@@ -1,11 +1,11 @@
-import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { PrefillResolver } from '@fsa/dynamicforms';
-import { FSCartService } from './../../../core/cart/facade/cart.service';
 import { UserService } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
-import { FormsUtils } from '../utils/forms-utils';
+import { map } from 'rxjs/operators';
 import { FSCart } from '../../../../src/occ/occ-models/occ.models';
+import { FormsUtils } from '../utils/forms-utils';
+import { FSCartService } from './../../../core/cart/facade/cart.service';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +25,7 @@ export class AutoPersonalDetailsPrefillResolver implements PrefillResolver {
       map(([cart, user]) => {
         const fsCart: FSCart = cart;
         const policyHolderSameAsMainDriver =
-          fsCart.insuranceQuote.quoteDetails.customerId;
+          fsCart?.insuranceQuote?.quoteDetails?.customerId;
         if (
           policyHolderSameAsMainDriver !== 'false' &&
           policyHolderSameAsMainDriver !== undefined
