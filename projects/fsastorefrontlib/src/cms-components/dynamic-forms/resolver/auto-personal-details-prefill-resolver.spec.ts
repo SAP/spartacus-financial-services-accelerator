@@ -2,9 +2,9 @@ import { TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
 import { I18nTestingModule, UserService } from '@spartacus/core';
 import { of } from 'rxjs';
-import { AutoPersonalDetailsPrefillResolver } from './auto-personal-details-prefill-resolver';
-import { FSUser } from '../../../occ/occ-models/occ.models';
 import { FSCartService } from '../../../core/cart/facade/cart.service';
+import { FSUser } from '../../../occ/occ-models/occ.models';
+import { AutoPersonalDetailsPrefillResolver } from './auto-personal-details-prefill-resolver';
 
 const mockUser: FSUser = {
   dateOfBirth: '1991-12-29',

@@ -97,7 +97,7 @@ describe('AutoPersonalDetailsGuard', () => {
     const mockCart: any = {
       insuranceQuote: {
         quoteDetails: {
-          customerId: false,
+          customerId: 'false',
         },
         insuredObjectList: {
           insuredObjects: [

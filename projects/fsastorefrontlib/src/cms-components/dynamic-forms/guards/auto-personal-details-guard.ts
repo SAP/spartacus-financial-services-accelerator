@@ -40,7 +40,10 @@ export class AutoPersonalDetailsGuard implements CanActivate {
           this.policyHolderSameAsMainDriverPath,
           fsCart
         );
-        if (!!policyHolderSameAsMainDriver) {
+        if (
+          !!policyHolderSameAsMainDriver &&
+          policyHolderSameAsMainDriver !== 'false'
+        ) {
           const mainDriverDob = FormsUtils.getValueByPath(
             this.mainDriverDobPath,
             fsCart

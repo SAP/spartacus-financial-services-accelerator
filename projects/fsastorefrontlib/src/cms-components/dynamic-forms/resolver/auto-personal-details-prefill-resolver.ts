@@ -27,8 +27,8 @@ export class AutoPersonalDetailsPrefillResolver implements PrefillResolver {
         const policyHolderSameAsMainDriver =
           fsCart?.insuranceQuote?.quoteDetails?.customerId;
         if (
-          policyHolderSameAsMainDriver !== 'false' &&
-          policyHolderSameAsMainDriver !== undefined
+          !!policyHolderSameAsMainDriver &&
+          policyHolderSameAsMainDriver !== 'false'
         ) {
           currentValue = user;
           currentValue = currentValue[fieldPath];
