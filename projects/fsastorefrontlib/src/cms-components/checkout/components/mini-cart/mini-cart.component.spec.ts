@@ -40,6 +40,9 @@ class MockCartService {
   getActive(): Observable<Cart> {
     return of(mockCart);
   }
+  isStable(): Observable<boolean> {
+    return of(true);
+  }
 }
 
 class MockFSTranslationService {
