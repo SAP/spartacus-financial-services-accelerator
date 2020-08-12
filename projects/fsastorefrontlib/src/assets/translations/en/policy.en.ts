@@ -26,7 +26,7 @@ export const policy = {
         Travellers: 'Number of Travelers',
         tripStartDate: 'Start Date',
         tripDetailsTravellerAges: 'Age of Travelers',
-        traveller: 'Traveler\'s Name',
+        traveller: "Traveler's Name",
         costOfTrip: 'Cost of Trip',
         NoOfDays: 'Number of Days',
       },
