@@ -45,13 +45,13 @@ export const policy = {
         country: 'Ereignisland',
       },
       insurances_life: {
-        lifeWhoCovered: 'Versichert',
+        lifeWhoCovered: 'Abgedeckt',
         lifeCoverageRequire: 'Deckungssumme',
         lifeCoverageLast: 'Länge der Abdeckung',
         lifeCoverageStartDate: 'Startdatum',
-        lifeMainDob: 'Geburtsdatum',
-        lifeSecondDob: 'Geburtsdatum',
-        name: 'Vorname und Nachname',
+        lifeMainDob: 'Geburtsdatum der Hauptperson',
+        lifeSecondDob: 'Geburtsdatum der zweiten Person',
+        name: 'Versicherte Person',
       },
       insurances_auto: {
         vehicleMake: 'Fahrzeugmarke',
