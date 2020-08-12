@@ -13,7 +13,7 @@ export class CartPrefillResolver implements PrefillResolver {
   getPrefillValue(fieldPath: string) {
     return this.cartService.getActive().pipe(
       map(cart => {
-        const serializedCart = FormsUtils.serializeQuoteDetails(cart);
+        const serializedCart = FormsUtils.serializeCartEntries(cart);
         let value = FormsUtils.getValueByPath(fieldPath, serializedCart);
         value = FormsUtils.convertIfDate(value);
         return value;

@@ -31,31 +31,49 @@ export class FormsUtils {
     return objectValue[attribute];
   }
 
-  static serializeQuoteDetails(cart): any {
-    const serializedFsCart: FSCart = cart;
-    if (cart && cart.insuranceQuote && cart.insuranceQuote) {
+  static serializeCartEntries(cart): any {
+    let serializedFsCart: FSCart = cart;
+    serializedFsCart = this.serializeQuoteDetails(cart, serializedFsCart);
+    serializedFsCart = this.serializeConfigurationInfos(cart, serializedFsCart);
+    return serializedFsCart;
+  }
+  private static serializeQuoteDetails(cart, serializedFsCart) {
+    if (cart?.insuranceQuote) {
       const insuranceQuote = cart.insuranceQuote;
-      if (insuranceQuote.quoteDetails && insuranceQuote.quoteDetails.entry) {
+      if (insuranceQuote.quoteDetails && insuranceQuote.quoteDetails?.entry) {
         const serilizedQuoteDetails = {};
         insuranceQuote.quoteDetails.entry.forEach(entry => {
           serilizedQuoteDetails[entry.key] = entry.value;
         });
         serializedFsCart.insuranceQuote.quoteDetails = serilizedQuoteDetails;
       }
-      if (
-        insuranceQuote.insuredObjectList &&
-        insuranceQuote.insuredObjectList.insuredObjects
-      ) {
+      if (insuranceQuote?.insuredObjectList?.insuredObjects) {
         const serializedInusredObjects = [];
         insuranceQuote.insuredObjectList.insuredObjects.forEach(
           insuredObject => {
             serializedInusredObjects.push(
-              this.serializeInsuredObject(insuredObject)
+              FormsUtils.serializeInsuredObject(insuredObject)
             );
           }
         );
         serializedFsCart.insuranceQuote.insuredObjectList.insuredObjects = serializedInusredObjects;
       }
+    }
+    return serializedFsCart;
+  }
+
+  private static serializeConfigurationInfos(cart, serializedFsCart) {
+    if (
+      cart?.entries[0]?.configurationInfos[0]?.configurationValues?.entry
+        ?.length > 0
+    ) {
+      const serilizedConfigurationValues = {};
+      cart.entries[0].configurationInfos[0].configurationValues.entry.forEach(
+        entry => {
+          serilizedConfigurationValues[entry.key] = entry.value;
+        }
+      );
+      serializedFsCart.entries[0].configurationInfos[0].configurationValues = serilizedConfigurationValues;
     }
     return serializedFsCart;
   }
