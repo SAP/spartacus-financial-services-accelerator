@@ -1,4 +1,14 @@
 <div class="row mt-5 justify-content-end">
+  <ng-container *ngIf="previousCheckoutStep$ | async as previousCheckoutStep">
+    <div class="col-md-6 col-sm-6 col-xs-12 mb-3 mb-md-0">
+      <button
+        class="action-button btn-block"
+        (click)="navigateBack(previousCheckoutStep)"
+      >
+        {{ 'common.back' | cxTranslate }}
+      </button>
+    </div>
+  </ng-container>
   <div class="col-md-6 col-sm-6 col-xs-12">
     <button class="primary-button btn-block" (click)="navigateNext()">
       {{ 'common.continue' | cxTranslate }}

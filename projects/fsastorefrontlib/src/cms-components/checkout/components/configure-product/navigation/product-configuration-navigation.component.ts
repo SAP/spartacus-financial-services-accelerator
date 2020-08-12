@@ -6,11 +6,12 @@ import {
 } from '@fsa/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
-import { Subscription } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { FSCartService } from './../../../../../core/cart/facade/cart.service';
 import { PricingService } from './../../../../../core/product-pricing/facade/pricing.service';
-import { FSProduct } from './../../../../../occ/occ-models/occ.models';
+import { FSProduct, FSSteps } from './../../../../../occ/occ-models/occ.models';
+import { FSCheckoutConfigService } from '../../.././../../core/checkout/services/checkout-config.service';
 
 @Component({
   selector: 'cx-fs-product-configuration-navigation',
@@ -24,7 +25,8 @@ export class ProductConfigurationNavigationComponent
     protected pricingService: PricingService,
     protected currentProductService: CurrentProductService,
     protected cartService: FSCartService,
-    protected routingService: RoutingService
+    protected routingService: RoutingService,
+    protected checkoutConfigService: FSCheckoutConfigService
   ) {}
 
   subscription = new Subscription();
@@ -32,7 +34,12 @@ export class ProductConfigurationNavigationComponent
   bundleCode: string;
   categoryCode: string;
 
+  previousCheckoutStep$: Observable<FSSteps>;
+  nextCheckoutStep$: Observable<FSSteps>;
+
   ngOnInit() {
+    this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
+    this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
     this.subscription.add(
       this.currentProductService
         .getProduct()
@@ -49,6 +56,13 @@ export class ProductConfigurationNavigationComponent
         )
         .subscribe()
     );
+  }
+
+  navigateBack(previousStep: FSSteps) {
+    this.routingService.go({
+      cxRoute: previousStep.step,
+      params: { code: previousStep.stepParameter },
+    });
   }
 
   navigateNext() {
