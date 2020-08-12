@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
+import { DefaultFormValidators } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'cx-fs-change-car-details-form',
@@ -14,7 +15,14 @@ export class ChangeCarDetailsFormComponent
       { value: new Date().toISOString().substr(0, 10), disabled: true },
       Validators.required
     ),
-    vehicleAnnualMileage: ['', [Validators.required, Validators.max(200000)]],
+    vehicleAnnualMileage: [
+      '',
+      [
+        Validators.required,
+        Validators.max(200000),
+        DefaultFormValidators.number,
+      ],
+    ],
   });
 
   ngOnInit() {

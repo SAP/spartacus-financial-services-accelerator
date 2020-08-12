@@ -94,13 +94,15 @@
       <ng-container
         *ngFor="let changedPolicyObject of changedPolicyObjects; index as i"
       >
-        <div class="container-fluid p-3 border-bottom border-color-4">
+        <div class="container-fluid p-3 background-color-4">
           <div class="row p-1">
             <div class="col-6 text-uppercase semi-bold">
               {{ 'fscommon.no' | cxTranslate }}.:
             </div>
             <div class="col-6 text-right text-sm-left">{{ i + 1 }}.</div>
           </div>
+        </div>
+        <div class="container-fluid p-3 border-bottom border-color-4">
           <div class="row p-1">
             <div class="col-6 text-uppercase semi-bold">
               {{ 'changeRequest.description' | cxTranslate }}
