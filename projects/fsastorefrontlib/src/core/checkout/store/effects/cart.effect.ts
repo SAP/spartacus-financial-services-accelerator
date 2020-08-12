@@ -63,7 +63,7 @@ export class CartEffects {
             const actions: Action[] = [];
             const cartCode =
               payload.userId === OCC_USER_ID_ANONYMOUS
-                ? payload.cartId
+                ? cart.guid
                 : cart.cartCode;
             if (cart?.entry?.product?.defaultCategory) {
               const formDataId = this.formDataStorageService.getFormDataIdByCategory(
