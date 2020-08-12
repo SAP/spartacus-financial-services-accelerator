@@ -12,6 +12,7 @@ import { PolicyService } from '../../../../core/my-account/facade/policy.service
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import { DocumentService } from './../../../../core/document/facade/document.service';
 import { AllowedFSRequestType } from './../../../../occ/occ-models';
+import { FSTranslationService } from '../../../../core/i18n/facade';
 
 @Component({
   selector: 'cx-fs-policy-details',
@@ -24,7 +25,8 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     protected policyService: PolicyService,
     protected config: OccConfig,
     protected changeRequestService: ChangeRequestService,
-    protected documentService: DocumentService
+    protected documentService: DocumentService,
+    protected translationService: FSTranslationService
   ) {}
 
   policy$;
@@ -102,6 +104,13 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
           })
         )
         .subscribe()
+    );
+  }
+
+  getTranslation(translationGroup: string, translationKey: string): string {
+    return this.translationService.getTranslationValue(
+      ['policy.details', translationGroup],
+      translationKey
     );
   }
 
