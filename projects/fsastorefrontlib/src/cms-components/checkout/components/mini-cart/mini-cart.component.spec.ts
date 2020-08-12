@@ -1,4 +1,3 @@
-import { SpinnerModule } from '@spartacus/storefront';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Cart, I18nTestingModule } from '@spartacus/core';
@@ -56,7 +55,7 @@ describe('MiniCartComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [RouterTestingModule, I18nTestingModule, SpinnerModule],
+      imports: [RouterTestingModule, I18nTestingModule],
       declarations: [MiniCartComponent],
       providers: [
         { provide: FSCartService, useClass: MockCartService },

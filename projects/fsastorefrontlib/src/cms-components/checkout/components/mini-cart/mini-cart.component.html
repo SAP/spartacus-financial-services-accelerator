@@ -1,4 +1,4 @@
-<ng-container *ngIf="isCartStable$ | async; else loading">
+<ng-container *ngIf="isCartStable$ | async">
   <ng-container *ngIf="cart$ | async as cart">
     <ng-container *ngIf="cart.deliveryOrderGroups">
       <div class="short-overview">
@@ -94,7 +94,4 @@
       </div>
     </ng-container>
   </ng-container>
-</ng-template>
-<ng-template #loading>
-  <cx-spinner></cx-spinner>
 </ng-template>
