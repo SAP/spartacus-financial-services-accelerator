@@ -9,9 +9,14 @@
       </button>
     </div>
   </ng-container>
-  <div class="col-md-6 col-sm-6 col-xs-12">
-    <button class="primary-button btn-block" (click)="navigateNext()">
-      {{ 'common.continue' | cxTranslate }}
-    </button>
-  </div>
+  <ng-container *ngIf="nextCheckoutStep$ | async as nextCheckoutStep">
+    <div class="col-md-6 col-sm-6 col-xs-12">
+      <button
+        class="primary-button btn-block"
+        (click)="navigateNext(nextCheckoutStep)"
+      >
+        {{ 'common.continue' | cxTranslate }}
+      </button>
+    </div>
+  </ng-container>
 </div>

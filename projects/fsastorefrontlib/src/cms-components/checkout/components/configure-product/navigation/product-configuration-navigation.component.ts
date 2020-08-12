@@ -65,7 +65,7 @@ export class ProductConfigurationNavigationComponent
     });
   }
 
-  navigateNext() {
+  navigateNext(nextStep: FSSteps) {
     this.submitFormData();
     this.subscription.add(
       this.formDataService
@@ -83,7 +83,7 @@ export class ProductConfigurationNavigationComponent
                 pricingData
               );
               this.routingService.go({
-                cxRoute: 'addOptions',
+                cxRoute: nextStep.step,
               });
             }
           })
