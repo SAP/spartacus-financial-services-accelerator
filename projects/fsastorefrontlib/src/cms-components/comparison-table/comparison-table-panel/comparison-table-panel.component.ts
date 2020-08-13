@@ -82,13 +82,6 @@ export class ComparisonTablePanelComponent implements OnInit, OnDestroy {
     }
   }
 
-  getProductList(): string[] {
-    this.componentData.data$.subscribe(data => {
-      this.productList = data.products.split(' ');
-    });
-    return this.productList;
-  }
-
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();

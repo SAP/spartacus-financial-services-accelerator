@@ -101,44 +101,53 @@
             "
           >
             <ul class="accordion-list container-fluid">
-              <li
+              <ng-container
                 *ngFor="
                   let insuredObjectItem of insuredObject.insuredObjectItems
                 "
-                class="accordion-list-item row"
               >
-                <div class="col-6 col-sm-5 item-label">
-                  {{ insuredObjectItem.label }}
-                </div>
-                <div class="col-6 col-sm-5 value notice">
-                  {{ insuredObjectItem.value }}
-                </div>
-                <ng-container
+                <li
                   *ngIf="
-                    insuredObjectItem.changeable &&
-                    isChangeAllowed(
-                      policy.categoryData?.allowedFSRequestTypes,
-                      'FSINSUREDOBJECT_CHANGE',
-                      policy.startDate
-                    )
+                    getTranslation(
+                      policy.categoryData?.code,
+                      insuredObjectItem.label
+                    ) as insuredObjectItemLabel
                   "
+                  class="accordion-list-item row"
                 >
-                  <div class="col-12 col-sm-2 value notice">
-                    <p
-                      (click)="
-                        changePolicyDetails(
-                          policy.policyNumber,
-                          policy.contractNumber,
-                          'FSINSUREDOBJECT_CHANGE'
-                        )
-                      "
-                      class="link mb-0"
-                    >
-                      {{ 'fscommon.edit' | cxTranslate }}
-                    </p>
+                  <div class="col-6 col-sm-5 item-label">
+                    {{ insuredObjectItemLabel }}
                   </div>
-                </ng-container>
-              </li>
+                  <div class="col-6 col-sm-5 value notice">
+                    {{ insuredObjectItem.value }}
+                  </div>
+                  <ng-container
+                    *ngIf="
+                      insuredObjectItem.changeable &&
+                      isChangeAllowed(
+                        policy.categoryData?.allowedFSRequestTypes,
+                        'FSINSUREDOBJECT_CHANGE',
+                        policy.startDate
+                      )
+                    "
+                  >
+                    <div class="col-12 col-sm-2 value notice">
+                      <p
+                        (click)="
+                          changePolicyDetails(
+                            policy.policyNumber,
+                            policy.contractNumber,
+                            'FSINSUREDOBJECT_CHANGE'
+                          )
+                        "
+                        class="link mb-0"
+                      >
+                        {{ 'fscommon.edit' | cxTranslate }}
+                      </p>
+                    </div>
+                  </ng-container>
+                </li>
+              </ng-container>
               <ng-container
                 *ngIf="
                   insuredObject.childInsuredObjectList?.insuredObjects?.length >
@@ -164,13 +173,17 @@
                     >
                       <li
                         *ngIf="
-                          childInsuredObjectItem.label !== 'customerId' ||
-                          childInsuredObjectItem.value !== 'false'
+                          (childInsuredObjectItem.label !== 'customerId' ||
+                            childInsuredObjectItem.value !== 'false') &&
+                          getTranslation(
+                            policy.categoryData?.code,
+                            childInsuredObjectItem.label
+                          ) as childInsuredObjectItemLabel
                         "
                         class="accordion-list-item row"
                       >
                         <div class="col-6 col-sm-5 item-label">
-                          {{ childInsuredObjectItem.label }}
+                          {{ childInsuredObjectItemLabel }}
                         </div>
                         <div class="col-6 col-sm-5 value notice">
                           {{ childInsuredObjectItem.value }}

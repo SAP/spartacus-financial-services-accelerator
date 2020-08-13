@@ -22,7 +22,7 @@
     <div class="slide-column-wrapper">
       <div class="slide-column">
         <ng-container *ngIf="comparisonPanel$ | async as panel">
-          <ng-container *ngFor="let productCode of getProductList()">
+          <ng-container *ngFor="let productCode of panel.products.split(' ')">
             <ng-container *ngIf="productCode">
               <cx-fs-comparison-table-panel-item
                 *ngIf="pricingData$ | async as pricing; else loading"

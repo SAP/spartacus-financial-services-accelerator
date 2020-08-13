@@ -1,16 +1,16 @@
 import {
   Component,
   HostBinding,
-  OnInit,
-  OnDestroy,
   Injector,
+  OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FieldConfig } from '../../core/models/form-config.interface';
-import { DynamicFormsConfig } from '../../core/config/form-config';
 import { LanguageService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
-import { map, filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
+import { DynamicFormsConfig } from '../../core/config/form-config';
+import { FieldConfig } from '../../core/models/form-config.interface';
 import { PrefillResolver } from '../../core/resolver/prefill-resolver.interface';
 import { FormService } from '../../core/services/form/form.service';
 

@@ -1,7 +1,6 @@
 %cx-form-component {
   display: flex;
   flex-direction: column;
-  margin-bottom: 2rem;
   @include box-shadow(0px, 2px, 20px, 1px, $color-grey, 1);
   .form-title {
     border-top: 3px solid var(--cx-color-primary);

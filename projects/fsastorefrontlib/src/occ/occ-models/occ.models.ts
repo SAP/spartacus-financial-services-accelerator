@@ -55,8 +55,12 @@ export interface B2BAdministrator {
   orgUnit: OrgUnit;
 }
 
+export interface FSOrderEntry extends OrderEntry {
+  configurationInfos?: any[];
+}
 export interface FSCart extends Cart {
   insuranceQuote?: InsuranceQuote;
+  entries?: FSOrderEntry[];
 }
 
 export interface InsuranceQuoteList {

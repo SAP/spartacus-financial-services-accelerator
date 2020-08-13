@@ -24,10 +24,9 @@
             </div>
             <div class="col-12 col-md-8">
               {{
-                cart.deliveryOrderGroups[0].entries[0]?.product?.defaultCategory
-                  ?.name
+                'fscommon.category.' +
+                  cart.entries[0]?.product?.defaultCategory?.code | cxTranslate
               }}
-              {{ 'quote.quote' | cxTranslate }}
             </div>
           </h2>
           <div #ref>

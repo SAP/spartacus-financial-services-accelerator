@@ -1,14 +1,12 @@
 <ng-container *ngIf="group">
   <div class="dynamic-field" [formGroup]="group" [hidden]="config.hidden">
-    <div class="row justify-content-end">
-      <button
-        class="btn btn-primary"
-        [disabled]="config.disabled"
-        type="submit"
-        [attr.name]="config.name"
-      >
-        {{ label }}
-      </button>
-    </div>
+    <button
+      class="btn btn-primary"
+      [disabled]="config.disabled"
+      type="submit"
+      [attr.name]="config.name"
+    >
+      {{ label }}
+    </button>
   </div>
 </ng-container>

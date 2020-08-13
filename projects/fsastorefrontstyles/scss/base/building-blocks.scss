@@ -154,6 +154,7 @@
 }
 .styled-list {
   li {
+    display: flex;
     font-size: var(--cx-h5-font-size);
     a {
       font-size: var(--cx-text-font-size);

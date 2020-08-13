@@ -12,6 +12,7 @@ import {
   RequestType,
 } from './../../../../occ/occ-models';
 import { PolicyDetailsComponent } from './policy-details.component';
+import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
 
 class MockPolicyService {
   loadPolicyDetails() {}
@@ -94,6 +95,10 @@ class MockDocumentService {
   }
 }
 
+class MockFSTranslationService {
+  getTranslationValue() {}
+}
+
 describe('PolicyDetailsComponent', () => {
   let component: PolicyDetailsComponent;
   let fixture: ComponentFixture<PolicyDetailsComponent>;
@@ -111,6 +116,7 @@ describe('PolicyDetailsComponent', () => {
         { provide: OccConfig, useValue: mockOccModuleConfig },
         { provide: ChangeRequestService, useClass: MockChangeRequestService },
         { provide: DocumentService, useClass: MockDocumentService },
+        { provide: FSTranslationService, useClass: MockFSTranslationService },
       ],
       declarations: [PolicyDetailsComponent],
     }).compileComponents();
