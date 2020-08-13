@@ -1,82 +1,84 @@
-<ng-container *ngIf="cart$ | async as cart">
-  <ng-container *ngIf="cart.deliveryOrderGroups">
-    <div class="short-overview">
-      <h2 class="section-header-heading mb-0">
-        {{
-          'fscommon.category.' +
-            cart.entries[0]?.product?.defaultCategory?.code | cxTranslate
-        }}
-      </h2>
-      <div class="short-overview-content">
-        <div *ngIf="cart.insuranceQuote?.state?.code === 'BIND'">
-          <div class="short-overview-item row">
-            <div class="short-overview-title col-7">
-              {{ 'quote.quoteId' | cxTranslate }}:
-            </div>
-            <div class="short-overview-value col-5">
-              {{ cart.insuranceQuote.quoteId }}
-            </div>
-          </div>
-          <div class="short-overview-item row">
-            <div class="short-overview-title col-7">
-              {{ 'quote.expiryDate' | cxTranslate }}:
-            </div>
-            <div class="short-overview-value col-5">
-              {{ cart.insuranceQuote.expiryDate | date: 'dd MMM yyyy' }}
-            </div>
-          </div>
-        </div>
-        <ng-container
-          *ngIf="
-            (cart?.entries)[0]?.product?.defaultCategory as defaultCategory
-          "
-        >
-          <li class="short-overview-item row">
-            <ng-container *ngIf="cart?.insuranceQuote?.startDate">
+<ng-container *ngIf="isCartStable$ | async">
+  <ng-container *ngIf="cart$ | async as cart">
+    <ng-container *ngIf="cart.deliveryOrderGroups">
+      <div class="short-overview">
+        <h2 class="section-header-heading mb-0">
+          {{
+            'fscommon.category.' +
+              cart.entries[0]?.product?.defaultCategory?.code | cxTranslate
+          }}
+        </h2>
+        <div class="short-overview-content">
+          <ng-container *ngIf="cart.insuranceQuote?.state?.code === 'BIND'">
+            <div class="short-overview-item row">
               <div class="short-overview-title col-7">
-                {{ 'fscommon.startDate' | cxTranslate }}:
+                {{ 'quote.quoteId' | cxTranslate }}:
               </div>
               <div class="short-overview-value col-5">
-                {{ cart?.insuranceQuote?.startDate | cxDate: 'dd MMM yyyy' }}
+                {{ cart.insuranceQuote.quoteId }}
               </div>
-            </ng-container>
-            <ng-container
-              *ngTemplateOutlet="
-                cartDetails;
-                context: {
-                  valueList: !(cart?.entries)[0]?.product?.configurable
-                    ? cart?.insuranceQuote?.quoteDetails?.entry
-                    : ((cart?.entries)[0]?.configurationInfos)[0]
-                        ?.configurationValues?.entry,
-                  defaultCategory: defaultCategory
-                }
-              "
-            >
-            </ng-container>
-          </li>
-        </ng-container>
-        <ng-container
-          *ngFor="let entry of cart.deliveryOrderGroups[0]?.entries"
-        >
-          <div class="short-overview-item row">
-            <div class="short-overview-title col-7">
-              {{ entry.product.cartDisplayName }}:
             </div>
-            <div class="short-overview-value col-5">
-              {{ entry.totalPrice.formattedValue }}
+            <div class="short-overview-item row">
+              <div class="short-overview-title col-7">
+                {{ 'quote.expiryDate' | cxTranslate }}:
+              </div>
+              <div class="short-overview-value col-5">
+                {{ cart.insuranceQuote.expiryDate | date: 'dd MMM yyyy' }}
+              </div>
             </div>
-          </div>
-        </ng-container>
-        <div class="highlighted border-top border-color-3 row">
-          <div class="short-overview-title col-6">
-            {{ 'fscommon.totalPrice' | cxTranslate }}:
-          </div>
-          <div class="short-overview-value col-6">
-            {{ cart.totalPrice?.formattedValue }}
+          </ng-container>
+          <ng-container
+            *ngIf="
+              (cart?.entries)[0]?.product?.defaultCategory as defaultCategory
+            "
+          >
+            <div class="short-overview-item row">
+              <ng-container *ngIf="cart?.insuranceQuote?.startDate">
+                <div class="short-overview-title col-7">
+                  {{ 'fscommon.startDate' | cxTranslate }}:
+                </div>
+                <div class="short-overview-value col-5">
+                  {{ cart?.insuranceQuote?.startDate | cxDate: 'dd MMM yyyy' }}
+                </div>
+              </ng-container>
+              <ng-container
+                *ngTemplateOutlet="
+                  cartDetails;
+                  context: {
+                    valueList: !(cart?.entries)[0]?.product?.configurable
+                      ? cart?.insuranceQuote?.quoteDetails?.entry
+                      : ((cart?.entries)[0]?.configurationInfos)[0]
+                          ?.configurationValues?.entry,
+                    defaultCategory: defaultCategory
+                  }
+                "
+              >
+              </ng-container>
+            </div>
+          </ng-container>
+          <ng-container
+            *ngFor="let entry of cart.deliveryOrderGroups[0]?.entries"
+          >
+            <div class="short-overview-item row">
+              <div class="short-overview-title col-7">
+                {{ entry.product.cartDisplayName }}:
+              </div>
+              <div class="short-overview-value col-5">
+                {{ entry.totalPrice.formattedValue }}
+              </div>
+            </div>
+          </ng-container>
+          <div class="highlighted border-top border-color-3 row">
+            <div class="short-overview-title col-6">
+              {{ 'fscommon.totalPrice' | cxTranslate }}:
+            </div>
+            <div class="short-overview-value col-6">
+              {{ cart.totalPrice?.formattedValue }}
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ng-container>
   </ng-container>
 </ng-container>
 <ng-template
