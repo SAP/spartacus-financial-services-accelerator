@@ -21,6 +21,14 @@ header {
       display: none;
     }
   }
+  &.is-expanded {
+    @include media-breakpoint-down(md) {
+      // overrides Spartacus' mobile menu solid background color
+      &:after {
+        opacity: 0.9;
+      }
+    }
+  }
   cx-hamburger-menu {
     margin: 9px 0px;
     display: block;
