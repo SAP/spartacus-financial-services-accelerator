@@ -11,12 +11,14 @@ import { FSCartService } from './../../../../core/cart/facade/cart.service';
 })
 export class MiniCartComponent {
   cart$: Observable<Cart>;
+  isCartStable$: Observable<boolean>;
 
   constructor(
     protected cartService: FSCartService,
     protected translationService: FSTranslationService
   ) {
     this.cart$ = this.cartService.getActive();
+    this.isCartStable$ = this.cartService.isStable();
   }
 
   getTranslation(translationGroup: string, translationKey: string): string {
