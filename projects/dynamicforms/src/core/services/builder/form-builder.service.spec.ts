@@ -77,12 +77,9 @@ describe('FormDataService', () => {
     };
     const form = service.createForm(mockConfig);
     expect(form.controls).toEqual(jasmine.any(Object));
-    expect(form.controls.currentAccount.get('accountType').value).toEqual(
-      undefined
-    );
-    expect(form.controls.currentAccount.get('cardDesign').value).toEqual(
-      undefined
-    );
+    expect(form.controls.currentAccount.get('accountType')).not.toBe(null);
+    expect(form.controls.currentAccount.get('cardDesign')).not.toBe(null);
+    expect(form.controls.currentAccount.get('notExistingControl')).toBe(null);
   });
 
   it('should create a form without dependsOn property in configuration', () => {
@@ -113,12 +110,9 @@ describe('FormDataService', () => {
     };
     const form = service.createForm(mockConfig);
     expect(form.controls).toEqual(jasmine.any(Object));
-    expect(form.controls.currentAccount.get('accountType').value).toEqual(
-      undefined
-    );
-    expect(form.controls.currentAccount.get('cardDesign').value).toEqual(
-      undefined
-    );
+    expect(form.controls.currentAccount.get('accountType')).not.toBe(null);
+    expect(form.controls.currentAccount.get('cardDesign')).not.toBe(null);
+    expect(form.controls.currentAccount.get('notExistingControl')).toBe(null);
   });
 
   it('should create a form without grupCode defined', () => {
@@ -148,7 +142,7 @@ describe('FormDataService', () => {
     };
     const form = service.createForm(mockConfig);
     expect(form.controls).toEqual(jasmine.any(Object));
-    expect(form.controls.accountType.value).toEqual(undefined);
-    expect(form.controls.cardDesign.value).toEqual(undefined);
+    expect(form.controls.accountType).not.toBe(null);
+    expect(form.controls.cardDesign).not.toBe(null);
   });
 });
