@@ -3,11 +3,12 @@ import { CanActivate } from '@angular/router';
 import {
   GlobalMessageService,
   GlobalMessageType,
+  OCC_USER_ID_ANONYMOUS,
   RoutingService,
   UserService,
 } from '@spartacus/core';
 import { combineLatest, Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import { FSCart, FSUser } from '../../../../src/occ/occ-models/occ.models';
 import { FSCartService } from '../../../core/cart/facade/cart.service';
 import { FormsUtils } from '../utils/forms-utils';
@@ -33,7 +34,8 @@ export class AutoPersonalDetailsGuard implements CanActivate {
       this.userService.get(),
       this.cartService.isStable(),
     ]).pipe(
-      filter(([cart, user, loaded]) => loaded),
+      filter(([cart, user, loaded]) => this.isUserValid(user) && loaded),
+      take(1),
       map(([cart, user]) => {
         const fsCart: FSCart = FormsUtils.serializeCartEntries(cart);
         const policyHolderSameAsMainDriver = FormsUtils.getValueByPath(
@@ -62,6 +64,12 @@ export class AutoPersonalDetailsGuard implements CanActivate {
         }
         return true;
       })
+    );
+  }
+
+  private isUserValid(user): boolean {
+    return (
+      user && Object.keys(user).length !== 0 && user !== OCC_USER_ID_ANONYMOUS
     );
   }
 }
