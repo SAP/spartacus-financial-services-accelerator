@@ -117,31 +117,35 @@
               </div>
             </div>
           </cx-fs-accordion-item>
-          <cx-fs-accordion-item [title]="'fscommon.addedByYou' | cxTranslate">
-            <div class="container">
-              <div class="row justify-content-center">
-                <ul class="col-12 accordion-list">
-                  <ng-container
-                    *ngFor="
-                      let item of cart.deliveryOrderGroups[0]?.entries
-                        | slice: 1
-                    "
-                  >
-                    <li class="accordion-list-item row">
-                      <div class="col-12 item-label">
-                        {{ item.product?.name }}
-                      </div>
-                    </li>
-                  </ng-container>
-                </ul>
-                <div class="col-12 col-md-6">
-                  <button class="action-button btn-block">
-                    {{ 'fscommon.edit' | cxTranslate }}
-                  </button>
+          <ng-container
+            *ngIf="(cart.deliveryOrderGroups[0]?.entries | slice: 1).length > 0"
+          >
+            <cx-fs-accordion-item [title]="'fscommon.addedByYou' | cxTranslate">
+              <div class="container">
+                <div class="row justify-content-center">
+                  <ul class="col-12 accordion-list">
+                    <ng-container
+                      *ngFor="
+                        let item of cart.deliveryOrderGroups[0]?.entries
+                          | slice: 1
+                      "
+                    >
+                      <li class="accordion-list-item row">
+                        <div class="col-12 item-label">
+                          {{ item.product?.name }}
+                        </div>
+                      </li>
+                    </ng-container>
+                  </ul>
+                  <div class="col-12 col-md-6">
+                    <button class="action-button btn-block">
+                      {{ 'fscommon.edit' | cxTranslate }}
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          </cx-fs-accordion-item>
+            </cx-fs-accordion-item>
+          </ng-container>
           <ng-container
             *ngIf="
               cart.deliveryOrderGroups[0]?.entries.length > 0 &&
