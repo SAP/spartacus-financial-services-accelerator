@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as clone from 'clone';
 import { FSCart } from '../../../occ/occ-models/occ.models';
 
 @Injectable()
@@ -32,7 +33,7 @@ export class FormsUtils {
   }
 
   static serializeCartEntries(cart): any {
-    let serializedFsCart: FSCart = cart;
+    let serializedFsCart: FSCart = clone(cart);
     serializedFsCart = this.serializeQuoteDetails(cart, serializedFsCart);
     serializedFsCart = this.serializeConfigurationInfos(cart, serializedFsCart);
     return serializedFsCart;
