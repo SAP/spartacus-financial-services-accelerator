@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 import { I18nTestingModule } from '@spartacus/core';
 import { FSUser } from '../../../../occ/occ-models';
 import { FSUpdateProfileFormComponent } from './update-profile-form.component';
-import { DateConfig } from '../../../../../src/core/date-config/date-config';
+import { DateConfig } from '../../../../core/date-config/date-config';
 
 const MockDateConfig: DateConfig = {
   date: {

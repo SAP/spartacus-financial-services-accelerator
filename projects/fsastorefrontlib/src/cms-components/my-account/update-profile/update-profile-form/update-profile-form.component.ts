@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { DefaultFormValidators } from '@fsa/dynamicforms';
 import { UpdateProfileFormComponent } from '@spartacus/storefront';
 import { FSUser } from '../../../../occ/occ-models';
-import { DateConfig } from './../../../../../src/core/date-config/date-config';
+import { DateConfig } from './../../../../core/date-config/date-config';
 
 @Component({
   selector: 'cx-fs-update-profile-form',

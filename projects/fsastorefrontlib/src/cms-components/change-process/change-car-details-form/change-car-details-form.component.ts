@@ -12,8 +12,8 @@ import { DefaultFormValidators } from '@fsa/dynamicforms';
 
 import { GlobalMessageService, RoutingService } from '@spartacus/core';
 import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
-import { ChangePolicyService } from './../../../../src/core/change-request/services/change-policy.service';
-import { DateConfig } from './../../../../src/core/date-config/date-config';
+import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
+import { DateConfig } from './../../../core/date-config/date-config';
 
 @Component({
   selector: 'cx-fs-change-car-details-form',
