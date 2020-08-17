@@ -13,11 +13,18 @@ import { ChangePolicyService } from './../../../core/change-request/services/cha
 import { UserRequestNavigationService } from './../../../core/user-request/facade';
 import { ChangeCarDetailsFormComponent } from './change-car-details-form.component';
 import createSpy = jasmine.createSpy;
+import { DateConfig } from '../../../../src/core/date-config/date-config';
 
 const requestId = 'request1';
 
 const changeRequest = {
   requestId: requestId,
+};
+
+const MockDateConfig: DateConfig = {
+  date: {
+    format: 'yyyy-mm-dd',
+  },
 };
 
 class MockChangeRequestService {
@@ -106,6 +113,10 @@ describe('ChangeCarDetailsFormComponent', () => {
               path: 'testPath',
             },
           },
+        },
+        {
+          provide: DateConfig,
+          useValue: MockDateConfig,
         },
       ],
       declarations: [ChangeCarDetailsFormComponent],

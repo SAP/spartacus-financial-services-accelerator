@@ -1,7 +1,19 @@
+import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
+import { UserRequestNavigationService } from './../../../core/user-request/facade/user-request-navigation.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { DefaultFormValidators } from '@fsa/dynamicforms';
+
+import { GlobalMessageService, RoutingService } from '@spartacus/core';
+import { DateConfig } from '../../../../src/core/date-config/date-config';
+import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
+import { ChangePolicyService } from './../../../../src/core/change-request/services/change-policy.service';
 
 @Component({
   selector: 'cx-fs-change-car-details-form',
@@ -10,6 +22,26 @@ import { DefaultFormValidators } from '@fsa/dynamicforms';
 export class ChangeCarDetailsFormComponent
   extends AbstractChangeProcessStepComponent
   implements OnInit, OnDestroy {
+  constructor(
+    protected userRequestNavigationService: UserRequestNavigationService,
+    protected changeRequestService: ChangeRequestService,
+    protected activatedRoute: ActivatedRoute,
+    protected routingService: RoutingService,
+    protected globalMessageService: GlobalMessageService,
+    protected fb: FormBuilder,
+    protected changePolicyService: ChangePolicyService,
+    protected config: DateConfig
+  ) {
+    super(
+      userRequestNavigationService,
+      changeRequestService,
+      activatedRoute,
+      routingService,
+      globalMessageService,
+      fb,
+      changePolicyService
+    );
+  }
   changeCarDetailsForm: FormGroup = this.fb.group({
     effectiveDate: new FormControl(
       { value: new Date().toISOString().substr(0, 10), disabled: true },
@@ -64,5 +96,8 @@ export class ChangeCarDetailsFormComponent
         configurationSteps: changeRequest.configurationSteps,
       });
     }
+  }
+  getDateFormat() {
+    return this.config.date.format || '';
   }
 }

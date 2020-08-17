@@ -6,7 +6,6 @@ import {
   B2cStorefrontModule,
   defaultCmsContentConfig,
   PageComponentModule,
-  StorefrontConfig,
 } from '@spartacus/storefront';
 import { fsOverrides, fstranslations } from '../assets/translations/index';
 import {
@@ -20,6 +19,7 @@ import { routingConfig } from '../cms-structure/routing/default-routing-config';
 import { OccModule } from '../occ/occ.module';
 import { occProductConfig } from '../occ/services/default-occ-product-config';
 import { occUserConfig } from '../occ/services/default-occ-user-config';
+import { FSStorefrontConfig } from './../../storefront-config';
 import { layoutConfig } from './config/default-layout-config';
 
 @NgModule({
@@ -78,7 +78,7 @@ import { layoutConfig } from './config/default-layout-config';
   declarations: [],
 })
 export class FSStorefrontModule {
-  static withConfig(config?: StorefrontConfig): ModuleWithProviders {
+  static withConfig(config?: FSStorefrontConfig): ModuleWithProviders {
     return {
       ngModule: FSStorefrontModule,
       providers: [provideConfig(config)],

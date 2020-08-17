@@ -1,10 +1,17 @@
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { I18nTestingModule } from '@spartacus/core';
 import { FSUser } from '../../../../occ/occ-models';
 import { FSUpdateProfileFormComponent } from './update-profile-form.component';
+import { DateConfig } from '../../../../../src/core/date-config/date-config';
+
+const MockDateConfig: DateConfig = {
+  date: {
+    format: 'yyyy-mm-dd',
+  },
+};
 
 const mockUser: FSUser = {
   titleCode: 'dr',
@@ -24,6 +31,16 @@ describe('FSUpdateProfileFormComponent', () => {
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, I18nTestingModule],
       declarations: [FSUpdateProfileFormComponent],
+      providers: [
+        {
+          provide: FormBuilder,
+          useClass: FormBuilder,
+        },
+        {
+          provide: DateConfig,
+          useValue: MockDateConfig,
+        },
+      ],
     }).compileComponents();
   }));
 
