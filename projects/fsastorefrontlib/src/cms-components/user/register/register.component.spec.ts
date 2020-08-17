@@ -20,7 +20,7 @@ import {
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { FSRegisterComponent } from './register.component';
 import createSpy = jasmine.createSpy;
-import { DateConfig } from '../../../../src/core/date-config/date-config';
+import { DateConfig } from './../../../../src/core/date-config/date-config';
 const isLevelBool: BehaviorSubject<boolean> = new BehaviorSubject(false);
 const registerUserIsSuccess: BehaviorSubject<boolean> = new BehaviorSubject(
   false

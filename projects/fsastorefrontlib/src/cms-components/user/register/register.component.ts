@@ -10,7 +10,7 @@ import {
 } from '@spartacus/core';
 import { RegisterComponent } from '@spartacus/storefront';
 import { FSUserSignUp } from '../../../occ/occ-models';
-import { DateConfig } from '../../../../src/core/date-config/date-config';
+import { DateConfig } from './../../../../src/core/date-config/date-config';
 
 @Component({
   selector: 'cx-fs-register',

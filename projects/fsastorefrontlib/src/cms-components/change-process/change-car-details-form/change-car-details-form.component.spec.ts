@@ -10,10 +10,10 @@ import {
 import { of } from 'rxjs';
 import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
 import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
+import { DateConfig } from './../../../core/date-config/date-config';
 import { UserRequestNavigationService } from './../../../core/user-request/facade';
 import { ChangeCarDetailsFormComponent } from './change-car-details-form.component';
 import createSpy = jasmine.createSpy;
-import { DateConfig } from '../../../../src/core/date-config/date-config';
 
 const requestId = 'request1';
 

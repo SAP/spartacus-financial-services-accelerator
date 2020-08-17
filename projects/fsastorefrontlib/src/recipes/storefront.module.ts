@@ -19,8 +19,8 @@ import { routingConfig } from '../cms-structure/routing/default-routing-config';
 import { OccModule } from '../occ/occ.module';
 import { occProductConfig } from '../occ/services/default-occ-product-config';
 import { occUserConfig } from '../occ/services/default-occ-user-config';
-import { FSStorefrontConfig } from './../../storefront-config';
 import { layoutConfig } from './config/default-layout-config';
+import { FSStorefrontConfig } from './config';
 
 @NgModule({
   imports: [
