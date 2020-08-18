@@ -1,19 +1,20 @@
 import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  AbstractControl,
 } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { of } from 'rxjs';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
+import { of } from 'rxjs';
+import { FormDateConfig } from '../../core';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
-import { DatePickerComponent } from './datepicker.component';
 import { FormService } from './../../core/services/form/form.service';
+import { DatePickerComponent } from './datepicker.component';
 
 @Component({
   // tslint:disable
@@ -74,6 +75,10 @@ describe('DatePickerComponent', () => {
           useValue: mockDynamicFormsConfig,
         },
         { provide: FormService, useClass: MockFormService },
+        {
+          provide: FormDateConfig,
+          useValue: { date: { format: 'yyyy-mm-dd' } },
+        },
       ],
     }).compileComponents();
   }));

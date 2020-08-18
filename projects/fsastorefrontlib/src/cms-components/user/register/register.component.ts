@@ -10,6 +10,7 @@ import {
 } from '@spartacus/core';
 import { RegisterComponent } from '@spartacus/storefront';
 import { FSUserSignUp } from '../../../occ/occ-models';
+import { DateConfig } from './../../../core/date-config/date-config';
 
 @Component({
   selector: 'cx-fs-register',
@@ -22,7 +23,8 @@ export class FSRegisterComponent extends RegisterComponent {
     protected fb: FormBuilder,
     protected router: RoutingService,
     protected anonymousConsentsService: AnonymousConsentsService,
-    protected anonymousConsentsConfig: AnonymousConsentsConfig
+    protected anonymousConsentsConfig: AnonymousConsentsConfig,
+    protected config: DateConfig
   ) {
     super(
       userService,
@@ -100,5 +102,9 @@ export class FSRegisterComponent extends RegisterComponent {
     this.userService.register(
       this.collectDataFromRegisterForm(this.userRegistrationForm.value)
     );
+  }
+
+  getDateFormat() {
+    return this.config.date.format || '';
   }
 }
