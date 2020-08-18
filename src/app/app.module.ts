@@ -39,9 +39,6 @@ import { AppComponent } from './app.component';
       },
       features: {
         consignmentTracking: true,
-      },
-      date: {
-        format: 'yyyy-mm-dd'
       }
     }),
     StoreDevtoolsModule.instrument({

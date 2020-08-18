@@ -6,6 +6,7 @@ import {
   B2cStorefrontModule,
   defaultCmsContentConfig,
   PageComponentModule,
+  StorefrontConfig,
 } from '@spartacus/storefront';
 import { fsOverrides, fstranslations } from '../assets/translations/index';
 import {
@@ -20,7 +21,6 @@ import { OccModule } from '../occ/occ.module';
 import { occProductConfig } from '../occ/services/default-occ-product-config';
 import { occUserConfig } from '../occ/services/default-occ-user-config';
 import { layoutConfig } from './config/default-layout-config';
-import { FSStorefrontConfig } from './config';
 
 @NgModule({
   imports: [
@@ -73,12 +73,17 @@ import { FSStorefrontConfig } from './config';
         },
       },
     }),
+    ConfigModule.withConfig({
+      date: {
+        format: 'yyyy-mm-dd',
+      },
+    }),
   ],
   exports: [B2cStorefrontModule, CmsLibModule],
   declarations: [],
 })
 export class FSStorefrontModule {
-  static withConfig(config?: FSStorefrontConfig): ModuleWithProviders {
+  static withConfig(config?: StorefrontConfig): ModuleWithProviders {
     return {
       ngModule: FSStorefrontModule,
       providers: [provideConfig(config)],
