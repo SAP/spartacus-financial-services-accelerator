@@ -9,7 +9,7 @@ export const layoutConfig: LayoutConfig = {
   },
   layoutSlots: {
     header: {
-      md: {
+      lg: {
         slots: [
           'SiteContext',
           'SiteLogo',
@@ -18,9 +18,7 @@ export const layoutConfig: LayoutConfig = {
           'NavigationBar',
         ],
       },
-      xs: {
-        slots: ['PreHeader', 'SiteLogo', 'SearchBox'],
-      },
+      slots: ['PreHeader', 'SiteLogo', 'SearchBox'],
     },
     navigation: {
       xs: {
