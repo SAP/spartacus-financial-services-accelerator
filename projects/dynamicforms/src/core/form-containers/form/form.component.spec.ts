@@ -26,23 +26,24 @@ export class MockDynamicFormComponent {
   }
 }
 
+const categoryCode = 'testCategoryCode';
+const formId = 'testFormId';
+const applicationId = 'testApplicationId';
+
 const formData: YFormData = {
   id: 'test-formData',
   type: 'DATA',
   content:
     '{"testContent":{"tripDestination":"Europe","tripStartDate":"2022-02-02"}}',
   formDefinition: {
-    formId: 'testId',
+    formId: formId,
   },
 };
 
-const mockFormCategoryCode = 'testCategoryCode';
-const mockFormId = 'testFormID';
-const mockFormConfig: FormDefinition = {
+const formConfig: FormDefinition = {
   formGroups: [],
-  formId: 'testFormID',
+  formId: formId,
 };
-const mockApplicationId = 'testApplicationId';
 
 export class MockFormDataService {
   saveFormData(testObj) {}
@@ -54,7 +55,7 @@ export class MockFormDataService {
 
 export class MockFormDataStorageService {
   getFormDataIdByDefinitionCode(code) {
-    return 'testId';
+    return formId;
   }
   setFormDataToLocalStorage() {}
 }
@@ -63,11 +64,9 @@ describe('FormComponent', () => {
   let component: FormComponent;
   let fixture: ComponentFixture<FormComponent>;
   let mockFormDataService: MockFormDataService;
-  let mockFormDataStorageService: MockFormDataStorageService;
 
   beforeEach(async(() => {
     mockFormDataService = new MockFormDataService();
-    mockFormDataStorageService = new MockFormDataStorageService();
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, I18nTestingModule],
       declarations: [FormComponent, MockDynamicFormComponent],
@@ -80,10 +79,6 @@ describe('FormComponent', () => {
           provide: FormDataStorageService,
           useClass: MockFormDataStorageService,
         },
-        {
-          provide: DynamicFormComponent,
-          useValue: MockDynamicFormComponent,
-        },
       ],
     }).compileComponents();
   }));
@@ -91,10 +86,10 @@ describe('FormComponent', () => {
   beforeEach(async(() => {
     fixture = TestBed.createComponent(FormComponent);
     component = fixture.componentInstance;
-    component.formCategoryCode = mockFormCategoryCode;
-    component.formId = mockFormId;
-    component.formConfig = mockFormConfig;
-    component.applicationId = mockApplicationId;
+    component.formCategoryCode = categoryCode;
+    component.formId = formId;
+    component.formConfig = formConfig;
+    component.applicationId = applicationId;
     component.formData = of(formData);
     fixture.detectChanges();
   }));
@@ -108,12 +103,12 @@ describe('FormComponent', () => {
     component.submit(formData);
     expect(mockFormDataService.saveFormData).toHaveBeenCalledWith({
       formDefinition: {
-        formId: mockFormConfig.formId,
-        applicationId: mockApplicationId,
+        formId: formConfig.formId,
+        applicationId: applicationId,
       },
       content: formData.content,
       refId: formData.refId,
-      id: 'testId',
+      id: formId,
     });
   });
 
@@ -122,7 +117,7 @@ describe('FormComponent', () => {
       id: 'test-formData',
       type: 'DATA',
       formDefinition: {
-        formId: 'testId',
+        formId: formId,
       },
     };
     spyOn(mockFormDataService, 'saveFormData');
