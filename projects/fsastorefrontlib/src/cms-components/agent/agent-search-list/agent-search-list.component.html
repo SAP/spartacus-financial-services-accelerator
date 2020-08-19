@@ -1,13 +1,14 @@
 <ng-container *ngIf="searchResults$ | async as results">
   <div class="mt-5">
     <div class="row">
-      <ng-container *ngIf="results.pagination as pagination">
+      <ng-container *ngIf="results.pagination.totalCount > 0">
         <div class="col-lg-6 col-12 mb-5 text-center">
           <cx-pagination
             *ngIf="pagination"
             [pagination]="pagination"
             (viewPageEvent)="pageChange($event)"
-          ></cx-pagination>
+          >
+          </cx-pagination>
         </div>
         <div
           class="col-lg-6 col-12 mb-5 d-flex justify-content-center align-items-center semi-bold"
@@ -44,7 +45,8 @@
                   class="cx-product-image-container px-4"
                   [container]="agent.thumbnail"
                   format="thumbnail"
-                ></cx-media>
+                >
+                </cx-media>
               </div>
               <div class="col-12 col-sm-9">
                 <h5
