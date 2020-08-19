@@ -24,7 +24,7 @@ export const layoutConfig: LayoutConfig = {
     },
     navigation: {
       xs: {
-        slots: ['SiteLogin', 'NavigationBar', 'TopHeaderSlot'],
+        slots: ['SiteLogin', 'NavigationBar', 'SiteContext'],
       },
     },
     LandingPageTemplate: {

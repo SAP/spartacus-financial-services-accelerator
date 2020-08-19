@@ -3,6 +3,7 @@
     position: relative;
     width: 100%;
   }
+  /* needed as a fix for Enriched banner not displaying correctly SOMETIMES, when resizing window */
   cx-media img {
     width: 100%;
   }
