@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { ActiveCartService, RoutingService } from '@spartacus/core';
 import { combineLatest, Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import { FSCart } from './../../../occ/occ-models/occ.models';
 
 @Injectable({
@@ -19,7 +19,8 @@ export class PersonalDetailsSetGuard implements CanActivate {
       this.cartService.getActive(),
       this.cartService.isStable(),
     ]).pipe(
-      filter(([_, loaded]) => loaded),
+      filter(([cart, stable]) => stable),
+      take(1),
       map(([cart, _]) => {
         if (cart?.entries?.length > 0) {
           const personalDetailsForm = (<FSCart>cart).entries[0]?.formData;

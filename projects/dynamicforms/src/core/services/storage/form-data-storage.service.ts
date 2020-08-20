@@ -10,7 +10,7 @@ export class FormDataStorageService {
   );
 
   clearFormDataLocalStorage() {
-    localStorage.removeItem(DYNAMIC_FORMS_LOCAL_STORAGE_KEY);
+    this.formLocalStorageData = null;
   }
 
   clearFormDataIdFromLocalStorage(formDataId: string) {
@@ -21,6 +21,7 @@ export class FormDataStorageService {
       DYNAMIC_FORMS_LOCAL_STORAGE_KEY,
       JSON.stringify(formStorageData)
     );
+    this.formLocalStorageData = formStorageData;
   }
 
   setFormDataToLocalStorage(formData: YFormData) {

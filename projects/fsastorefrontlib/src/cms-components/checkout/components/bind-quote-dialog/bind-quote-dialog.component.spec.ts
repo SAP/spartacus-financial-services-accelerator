@@ -1,9 +1,12 @@
 import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { FormDataStorageService } from '@fsa/dynamicforms';
 import { I18nTestingModule } from '@spartacus/core';
 import { ModalService } from '@spartacus/storefront';
+import { of } from 'rxjs';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
+import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCart } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './bind-quote-dialog.component';
 import createSpy = jasmine.createSpy;
@@ -26,6 +29,19 @@ class MockModalService {
   dismissActiveModal(): void {}
 }
 
+class MockCartService {
+  getActive() {
+    return of(mockCart);
+  }
+  isStable() {
+    return of(true);
+  }
+}
+
+class MockFormDataStorageService {
+  clearFormDataIdFromLocalStorage() {}
+}
+
 describe('BindQuoteDialogComponent', () => {
   let component: BindQuoteDialogComponent;
   let fixture: ComponentFixture<BindQuoteDialogComponent>;
@@ -45,6 +61,14 @@ describe('BindQuoteDialogComponent', () => {
         {
           provide: QuoteService,
           useClass: MockQuoteService,
+        },
+        {
+          provide: FSCartService,
+          useClass: MockCartService,
+        },
+        {
+          provide: FormDataStorageService,
+          useClass: MockFormDataStorageService,
         },
       ],
     }).compileComponents();

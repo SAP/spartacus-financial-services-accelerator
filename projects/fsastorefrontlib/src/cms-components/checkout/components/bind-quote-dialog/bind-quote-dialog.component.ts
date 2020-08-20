@@ -3,7 +3,7 @@ import {
   ElementRef,
   EventEmitter,
   Output,
-  ViewChild
+  ViewChild,
 } from '@angular/core';
 import { FormDataStorageService } from '@fsa/dynamicforms';
 import { ModalService } from '@spartacus/storefront';
@@ -32,7 +32,7 @@ export class BindQuoteDialogComponent {
     protected quoteService: QuoteService,
     protected cartService: FSCartService,
     protected formDataStoragetService: FormDataStorageService
-  ) { }
+  ) {}
 
   dismissModal(reason?: any): void {
     this.modalService.dismissActiveModal(reason);
