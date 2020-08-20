@@ -5,8 +5,9 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { PaginationModel } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { InboxService } from '../../../../../core/my-account/facade/inbox.service';
 import {
   FSSearchConfig,
@@ -24,7 +25,7 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
   messagesObject$: Observable<any>;
   messageGroup: string;
-  pagination: any;
+  pagination: PaginationModel;
 
   searchConfig: FSSearchConfig = {
     currentPage: 0,
@@ -79,6 +80,16 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
       this.inboxService
         .getMessages(this.messageGroup, this.searchConfig)
         .pipe(
+          tap(response => {
+            if (response) {
+              this.pagination = {
+                currentPage: response.pagination.page,
+                pageSize: response.pagination.count,
+                totalPages: response.pagination.totalPages,
+                totalResults: response.pagination.totalCount,
+              };
+            }
+          }),
           map(response => {
             this.inboxService.messagesSource.next(response);
             if (response.sorts.length > 0 && response.pagination) {
@@ -87,8 +98,6 @@ export class InboxMessagesComponent implements OnInit, OnDestroy {
               this.searchConfig.sortOrder =
                 response.sorts[0].asc === true ? 'asc' : 'desc';
             }
-            this.pagination = response.pagination;
-            this.pagination.currentPage = response.pagination.page;
             response.messages.forEach(message => {
               newMessageList.push(this.buildDisplayMessage(message));
             });
