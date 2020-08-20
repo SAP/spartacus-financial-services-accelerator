@@ -3,25 +3,23 @@
     {{ 'changeRequest.confirmation.title' | cxTranslate }}
   </h2>
   <div class="box-shadow p-4">
-    <div class="content860 d-flex flex-row justify-content-center flex-wrap">
-      <div class="text-center w-100 my-5">
+    <div class="content860 d-flex flex-column align-content-center flex-wrap">
+      <div class="d-flex justify-content-center my-5">
         <div class="image-wrapper">
           <img class="image-item" [src]="getImagelink()" alt="" />
         </div>
       </div>
       <div class="flex-100 border border-color-6 mb-5"></div>
-      <div class="text-center">
-        <p>
-          {{ 'changeRequest.confirmation.message' | cxTranslate }}
+      <p class="text-center">
+        {{ 'changeRequest.confirmation.message' | cxTranslate }}
 
-          <a
-            class="overview-section-link"
-            routerLink="/my-account/inbox/"
-            routerLinkActive="active"
-            >{{ 'changeRequest.confirmation.inbox' | cxTranslate }}</a
-          >
-        </p>
-      </div>
+        <a
+          class="overview-section-link"
+          routerLink="/my-account/inbox/"
+          routerLinkActive="active"
+          >{{ 'changeRequest.confirmation.inbox' | cxTranslate }}</a
+        >
+      </p>
     </div>
   </div>
 </ng-container>
