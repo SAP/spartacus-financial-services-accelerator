@@ -142,6 +142,7 @@ header {
       }
       cx-icon {
         color: var(--cx-color-1);
+        margin-inline-end: 10px;
       }
     }
   }
@@ -174,7 +175,10 @@ header {
       }
       .cx-login-greet {
         color: var(--cx-color-primary);
-        padding: 10px 0 10px;
+        font-weight: var(--cx-font-weight-semi);
+        @include media-breakpoint-up(lg) {
+          padding: 0.5rem 0 0.5rem;
+        }
       }
     }
   }
