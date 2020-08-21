@@ -7,7 +7,7 @@ import {
   RoutingService,
 } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import { BindingStateType, FSCart } from './../../../occ/occ-models/occ.models';
 
 @Injectable({
@@ -23,6 +23,7 @@ export class BindQuoteGuard implements CanActivate {
   canActivate(): Observable<boolean> {
     return this.cartService.getActive().pipe(
       filter(cart => !!cart.code),
+      take(1),
       map(cart => {
         const bindingState = (<FSCart>cart).insuranceQuote?.state?.code;
         if (bindingState === BindingStateType.BIND) {
