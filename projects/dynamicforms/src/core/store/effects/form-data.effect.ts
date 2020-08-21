@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, Effect, ofType } from '@ngrx/effects';
+import { AuthActions } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { FormConnector } from '../../connectors/form-connector';
+import { FormDataStorageService } from '../../services/storage/form-data-storage.service';
 import * as fromActions from '../actions';
 
 @Injectable()
@@ -39,7 +41,16 @@ export class FormDataEffects {
     })
   );
 
+  @Effect({ dispatch: false })
+  clearFormData$ = this.actions$.pipe(
+    ofType(AuthActions.LOGOUT),
+    tap(_ => {
+      this.formDataStorageService.clearFormDataLocalStorage();
+    })
+  );
+
   constructor(
+    private formDataStorageService: FormDataStorageService,
     private actions$: Actions,
     private formConnector: FormConnector
   ) {}
