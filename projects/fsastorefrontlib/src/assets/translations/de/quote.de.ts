@@ -7,6 +7,7 @@ export const quote = {
     viewQuotes: 'Bisherige Anträge ansehen',
     getQuote: 'Angebot anfordern',
     moreInfo: 'Mehr Informationen',
+    notBoundQuoteDescription: '[DE] Your quote/application is not bound.',
     retrieveQuotes: 'Antrag fortsetzen',
     referredQuoteDescription:
       'Ihr Angebot wird weitergeleitet. Weitere Informationen erhalten Sie bei Ihrem Kundenbetreuer.',
