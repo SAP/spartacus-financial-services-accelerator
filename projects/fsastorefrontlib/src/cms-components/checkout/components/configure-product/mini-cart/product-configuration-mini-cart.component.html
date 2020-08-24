@@ -13,12 +13,16 @@
           "
           class="short-overview-item row"
         >
-          <div class="short-overview-title col-7">
-            {{ 'configureProduct.' + priceAttribute.key | cxTranslate }}:
-          </div>
-          <div class="short-overview-value col-5">
-            {{ priceAttribute.value }}
-          </div>
+          <ng-container
+            *ngIf="
+              getTranslation('configureProduct', priceAttribute.key) as label
+            "
+          >
+            <div class="short-overview-title col-7">{{ label }}:</div>
+            <div class="short-overview-value col-5">
+              {{ priceAttribute.value }}
+            </div>
+          </ng-container>
         </div>
         <div class="highlighted border-top border-color-3 row">
           <div class="short-overview-title col-6">
