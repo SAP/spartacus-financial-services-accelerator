@@ -20,34 +20,6 @@
             {{ priceAttribute.value }}
           </div>
         </div>
-        <div
-          *ngFor="let oneTimeChargeEntry of product.price?.oneTimeChargeEntries"
-          class="short-overview-item row"
-        >
-          <div class="short-overview-title col-7">
-            {{ oneTimeChargeEntry.name }}:
-          </div>
-          <ng-container *ngIf="oneTimeChargeEntry.chargeInformation">
-            <div class="short-overview-value col-5">
-              {{ oneTimeChargeEntry.chargeInformation }}
-            </div>
-          </ng-container>
-          <ng-container *ngIf="!oneTimeChargeEntry.chargeInformation">
-            <div class="short-overview-value col-5">
-              {{ oneTimeChargeEntry.price.formattedValue }}
-            </div>
-          </ng-container>
-        </div>
-        <div class="highlighted border-top border-color-3 row">
-          <div class="short-overview-title col-6">
-            {{ 'fscommon.totalPrice' | cxTranslate }}:
-          </div>
-          <div class="short-overview-value col-6">
-            {{
-              (product.price?.oneTimeChargeEntries)[0]?.price?.formattedValue
-            }}
-          </div>
-        </div>
       </ng-container>
     </div>
   </ng-container>
