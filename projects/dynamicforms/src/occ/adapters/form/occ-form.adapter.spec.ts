@@ -78,11 +78,12 @@ describe('OccFormAdapter', () => {
       httpMock.expectOne((req: HttpRequest<any>) => {
         return req.url === createFormDataEndpoint && req.method === 'POST';
       }, `POST method and url`);
-      expect(
-        occEndpointService.getUrl
-      ).toHaveBeenCalledWith(createFormDataEndpoint, {
-        userId: OCC_USER_ID_CURRENT,
-      });
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        createFormDataEndpoint,
+        {
+          userId: OCC_USER_ID_CURRENT,
+        }
+      );
     }));
   });
 
