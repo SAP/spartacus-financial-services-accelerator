@@ -45,9 +45,19 @@ export class BindQuoteDialogComponent {
         filter(([_, stable]) => stable),
         take(1),
         map(([cart, _]) => {
-          const formDataId = (<FSCart>cart)?.entries[0]?.formData[0]?.id;
+          const personalDetailsFormId = (<FSCart>cart)?.entries?.[0]
+            .formData?.[0]?.id;
           this.formDataStoragetService.clearFormDataIdFromLocalStorage(
-            formDataId
+            personalDetailsFormId
+          );
+
+          const chooseCoverFormId = (<any>(
+            (<FSCart>cart).insuranceQuote?.quoteDetails?.entry
+          ))
+            ?.filter(details => details.key === 'formId')
+            .map(mapEntry => mapEntry.value)[0];
+          this.formDataStoragetService.clearFormDataIdFromLocalStorage(
+            chooseCoverFormId
           );
         })
       )
