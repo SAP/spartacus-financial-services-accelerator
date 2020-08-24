@@ -20,6 +20,16 @@
             {{ priceAttribute.value }}
           </div>
         </div>
+        <div class="highlighted border-top border-color-3 row">
+          <div class="short-overview-title col-6">
+            {{ 'fscommon.totalPrice' | cxTranslate }}:
+          </div>
+          <div class="short-overview-value col-6">
+            {{
+              (product.price?.oneTimeChargeEntries)[0]?.price?.formattedValue
+            }}
+          </div>
+        </div>
       </ng-container>
     </div>
   </ng-container>
