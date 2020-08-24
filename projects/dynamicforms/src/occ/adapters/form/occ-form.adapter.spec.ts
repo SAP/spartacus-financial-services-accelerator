@@ -4,7 +4,7 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OccEndpointsService } from '@spartacus/core';
+import { OCC_USER_ID_CURRENT, OccEndpointsService } from '@spartacus/core';
 import { YFormData } from '../../../core/models/form-occ.models';
 import { OccFormAdapter } from './occ-form.adapter';
 
@@ -68,6 +68,7 @@ describe('OccFormAdapter', () => {
         return req.url === formDataEndpoint && req.method === 'PUT';
       }, `PUT method and url`);
       expect(occEndpointService.getUrl).toHaveBeenCalledWith(formDataEndpoint, {
+        userId: OCC_USER_ID_CURRENT,
         formDataId,
       });
     }));
@@ -77,9 +78,11 @@ describe('OccFormAdapter', () => {
       httpMock.expectOne((req: HttpRequest<any>) => {
         return req.url === createFormDataEndpoint && req.method === 'POST';
       }, `POST method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        createFormDataEndpoint
-      );
+      expect(
+        occEndpointService.getUrl
+      ).toHaveBeenCalledWith(createFormDataEndpoint, {
+        userId: OCC_USER_ID_CURRENT,
+      });
     }));
   });
 
@@ -90,6 +93,7 @@ describe('OccFormAdapter', () => {
         return req.url === formDataEndpoint && req.method === 'GET';
       }, `GET method and url`);
       expect(occEndpointService.getUrl).toHaveBeenCalledWith(formDataEndpoint, {
+        userId: OCC_USER_ID_CURRENT,
         formDataId,
       });
     }));
