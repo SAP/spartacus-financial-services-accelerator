@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Cart, I18nTestingModule } from '@spartacus/core';
+import { I18nTestingModule } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
-import { FSProduct } from './../../../../occ/occ-models/occ.models';
+import { FSProduct, FSCart } from './../../../../occ/occ-models/occ.models';
 import { MiniCartComponent } from './mini-cart.component';
 
 const mockProduct: FSProduct = {
@@ -15,7 +15,18 @@ const mockProduct: FSProduct = {
   },
 };
 
-const mockCart: Cart = {
+const mockSortedEntries = [
+  {
+    key: '1TestKey',
+    value: '1TestValue',
+  },
+  {
+    key: '2TestKey',
+    value: '2TestValue',
+  },
+];
+
+const mockCart: FSCart = {
   code: 'testCode',
   guid: 'testUid',
   deliveryOrderGroups: [
@@ -36,7 +47,7 @@ const mockCart: Cart = {
 };
 
 class MockCartService {
-  getActive(): Observable<Cart> {
+  getActive(): Observable<FSCart> {
     return of(mockCart);
   }
   isStable(): Observable<boolean> {
@@ -95,5 +106,34 @@ describe('MiniCartComponent', () => {
       'vehicleMake'
     );
     expect(translationValue).toEqual('test value');
+  });
+
+  it('should sort values in array', () => {
+    const unsortedEntries = [
+      {
+        key: '2TestKey',
+        value: '2TestValue',
+      },
+      {
+        key: '1TestKey',
+        value: '1TestValue',
+      },
+    ];
+    miniCartComponent.sortValues(unsortedEntries);
+    expect(unsortedEntries).toEqual(mockSortedEntries);
+  });
+  it('should not sort values in array', () => {
+    const alreadySortedEntries = [
+      {
+        key: '1TestKey',
+        value: '1TestValue',
+      },
+      {
+        key: '2TestKey',
+        value: '2TestValue',
+      },
+    ];
+    miniCartComponent.sortValues(alreadySortedEntries);
+    expect(alreadySortedEntries).toEqual(mockSortedEntries);
   });
 });
