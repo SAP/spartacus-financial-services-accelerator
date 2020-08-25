@@ -3,7 +3,16 @@ export const common = {
     insurances_travel: {
       tripEndDate: 'End Date',
       Travellers: 'Number of Travelers',
-      tripDetailsTravellerAges: 'Age of Travelers',
+      tripDetailsTravellerAges: '1st Traveler\'s Age', // prettier-ignore
+      tripDetailsTravellerAges2: '2nd Traveler\'s Age', // prettier-ignore
+      tripDetailsTravellerAges3: '3rd Traveler\'s Age', // prettier-ignore
+      tripDetailsTravellerAges4: '4th Traveler\'s Age', // prettier-ignore
+      tripDetailsTravellerAges5: '5th Traveler\'s Age', // prettier-ignore
+      tripDetailsTravellerAges6: '6th Traveler\'s Age', // prettier-ignore
+      tripDetailsTravellerAges7: '7th Traveler\'s Age', // prettier-ignore
+      tripDetailsTravellerAges8: '8th Traveler\'s Age', // prettier-ignore
+      tripDetailsTravellerAges9: '9th Traveler\'s Age', // prettier-ignore
+      tripDetailsTravellerAges10: '10th Traveler\'s Age' // prettier-ignore
     },
     insurances_savings: {
       annualContributionIncrease: 'Annual Contribution Increase',

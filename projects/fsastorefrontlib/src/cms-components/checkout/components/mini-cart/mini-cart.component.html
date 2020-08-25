@@ -86,7 +86,7 @@
   let-valueList="valueList"
   let-defaultCategory="defaultCategory"
 >
-  <ng-container *ngFor="let item of valueList">
+  <ng-container *ngFor="let item of sortValues(valueList)">
     <ng-container
       *ngIf="getTranslation(defaultCategory.code, item.key) as label"
     >
