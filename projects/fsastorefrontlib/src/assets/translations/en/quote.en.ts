@@ -8,6 +8,7 @@ export const quote = {
     getQuote: 'Get a Quote',
     moreInfo: 'More info',
     retrieveQuotes: 'Retrieve Quotes',
+    notBoundQuoteDescription: 'Your quote/application is not bound.',
     referredQuoteDescription:
       'Your quote is referred. For more information, please contact the agent.',
     boundQuoteDescription: 'Your quote is already bound.',
