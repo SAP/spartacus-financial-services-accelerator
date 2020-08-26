@@ -13,28 +13,14 @@
           "
           class="short-overview-item row"
         >
-          <div class="short-overview-title col-7">
-            {{ 'configureProduct.' + priceAttribute.key | cxTranslate }}:
-          </div>
-          <div class="short-overview-value col-5">
-            {{ priceAttribute.value }}
-          </div>
-        </div>
-        <div
-          *ngFor="let oneTimeChargeEntry of product.price?.oneTimeChargeEntries"
-          class="short-overview-item row"
-        >
-          <div class="short-overview-title col-7">
-            {{ oneTimeChargeEntry.name }}:
-          </div>
-          <ng-container *ngIf="oneTimeChargeEntry.chargeInformation">
+          <ng-container
+            *ngIf="
+              getTranslation('configureProduct', priceAttribute.key) as label
+            "
+          >
+            <div class="short-overview-title col-7">{{ label }}:</div>
             <div class="short-overview-value col-5">
-              {{ oneTimeChargeEntry.chargeInformation }}
-            </div>
-          </ng-container>
-          <ng-container *ngIf="!oneTimeChargeEntry.chargeInformation">
-            <div class="short-overview-value col-5">
-              {{ oneTimeChargeEntry.price.formattedValue }}
+              {{ priceAttribute.value }}
             </div>
           </ng-container>
         </div>
@@ -52,7 +38,6 @@
     </div>
   </ng-container>
 </div>
-
 <ng-template #emptyConfigurationMiniCart>
   <p>
     {{ 'configureProduct.emptyConfigurationDetails' | cxTranslate }}
