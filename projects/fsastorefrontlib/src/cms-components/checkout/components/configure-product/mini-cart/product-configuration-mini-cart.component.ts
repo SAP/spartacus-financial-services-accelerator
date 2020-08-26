@@ -16,6 +16,7 @@ import {
   PricingService,
 } from '../../../../../core/product-pricing/facade';
 import { FSProduct, PricingData } from '../../../../../occ/occ-models';
+import { FSTranslationService } from '../../../../../core/i18n/facade/translation.service';
 
 @Component({
   selector: 'cx-fs-product-configuration-mini-cart',
@@ -29,7 +30,8 @@ export class ProductConfigurationMiniCartComponent
     protected productService: FSProductService,
     protected currentProductService: CurrentProductService,
     protected formDataService: FormDataService,
-    protected changeDetectorRef: ChangeDetectorRef
+    protected changeDetectorRef: ChangeDetectorRef,
+    protected translationService: FSTranslationService
   ) {}
 
   subscription = new Subscription();
@@ -71,6 +73,13 @@ export class ProductConfigurationMiniCartComponent
           )
           .subscribe()
       );
+  }
+
+  getTranslation(translationGroup: string, translationKey: string): string {
+    return this.translationService.getTranslationValue(
+      [translationGroup],
+      translationKey
+    );
   }
 
   ngOnDestroy() {
