@@ -12,7 +12,6 @@ export const policy = {
     youHaveNoPolicies: 'You have no Policies!',
     policySummary: 'Policy Summary',
     thankYouForOrder: 'Thank you!',
-    yourPolicyHasBeenSubmited: 'Your request has already been submitted',
     finishQuoteToGetPolicy: 'You need to finish your quote to get a Policy',
     noValidPolicies: 'You have no valid policies!',
     documentName: 'Name',

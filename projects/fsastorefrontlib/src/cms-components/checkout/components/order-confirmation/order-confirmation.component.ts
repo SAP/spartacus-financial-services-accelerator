@@ -8,6 +8,7 @@ import { OccConfig, Order } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-fs-order-confirmation',
