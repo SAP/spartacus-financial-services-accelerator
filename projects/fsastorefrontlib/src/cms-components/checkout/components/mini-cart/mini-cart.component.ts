@@ -27,11 +27,4 @@ export class MiniCartComponent {
       translationKey
     );
   }
-
-  sortValues(valueList) {
-    return valueList.sort(
-      (value1, value2) =>
-        0 - (value1.key.toUpperCase() > value2.key.toUpperCase() ? -1 : 1)
-    );
-  }
 }

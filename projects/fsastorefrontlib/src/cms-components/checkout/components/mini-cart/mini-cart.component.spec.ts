@@ -15,17 +15,6 @@ const mockProduct: FSProduct = {
   },
 };
 
-const mockSortedEntries = [
-  {
-    key: '1TestKey',
-    value: '1TestValue',
-  },
-  {
-    key: '2TestKey',
-    value: '2TestValue',
-  },
-];
-
 const mockCart: FSCart = {
   code: 'testCode',
   guid: 'testUid',
@@ -106,34 +95,5 @@ describe('MiniCartComponent', () => {
       'vehicleMake'
     );
     expect(translationValue).toEqual('test value');
-  });
-
-  it('should sort values in array', () => {
-    const unsortedEntries = [
-      {
-        key: '2TestKey',
-        value: '2TestValue',
-      },
-      {
-        key: '1TestKey',
-        value: '1TestValue',
-      },
-    ];
-    miniCartComponent.sortValues(unsortedEntries);
-    expect(unsortedEntries).toEqual(mockSortedEntries);
-  });
-  it('should not sort values in array', () => {
-    const alreadySortedEntries = [
-      {
-        key: '1TestKey',
-        value: '1TestValue',
-      },
-      {
-        key: '2TestKey',
-        value: '2TestValue',
-      },
-    ];
-    miniCartComponent.sortValues(alreadySortedEntries);
-    expect(alreadySortedEntries).toEqual(mockSortedEntries);
   });
 });
