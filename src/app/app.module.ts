@@ -11,13 +11,6 @@ import { AppComponent } from './app.component';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    StoreModule.forRoot({}, {
-      // Disabled until compatibility issue with NgRx and Angular Version 9 is resolved
-      runtimeChecks: {
-        strictStateImmutability: false,
-        strictActionImmutability: false,
-      },
-    }),
     FSStorefrontModule.withConfig({
       backend: {
         occ: {

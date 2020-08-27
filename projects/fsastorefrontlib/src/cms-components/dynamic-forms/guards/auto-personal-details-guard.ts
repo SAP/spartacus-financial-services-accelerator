@@ -37,10 +37,9 @@ export class AutoPersonalDetailsGuard implements CanActivate {
       filter(([cart, user, loaded]) => this.isUserValid(user) && loaded),
       take(1),
       map(([cart, user]) => {
-        const fsCart: FSCart = FormsUtils.serializeCartEntries(cart);
         const policyHolderSameAsMainDriver = FormsUtils.getValueByPath(
           this.policyHolderSameAsMainDriverPath,
-          fsCart
+          cart
         );
         if (
           !!policyHolderSameAsMainDriver &&
@@ -48,7 +47,7 @@ export class AutoPersonalDetailsGuard implements CanActivate {
         ) {
           const mainDriverDob = FormsUtils.getValueByPath(
             this.mainDriverDobPath,
-            fsCart
+            cart
           );
           const userDob = (<FSUser>user).dateOfBirth;
           if (FormsUtils.convertIfDate(mainDriverDob) === userDob) {
