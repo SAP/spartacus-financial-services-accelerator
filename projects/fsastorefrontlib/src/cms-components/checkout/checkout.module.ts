@@ -62,6 +62,7 @@ import { ReferredQuoteDialogComponent } from './components/referred-quote/referr
 import { UserIdentificationModule } from './components/user-identification/user-identification.module';
 import { CategoryStepGuard } from './guards/category-step-guard';
 import { CheckoutStepGuard } from './guards/checkout-step-guard';
+import { OrderConfirmationGuard } from '../../core/checkout/guards/order-confirmation.guard';
 
 const routes: Routes = [
   {
@@ -218,9 +219,11 @@ const routes: Routes = [
         },
         OrderConfirmationFlex: {
           component: OrderConfirmationComponent,
+          guards: [OrderConfirmationGuard],
         },
         OrderConfirmationMessageFlex: {
           component: OrderConfirmationMessageComponent,
+          guards: [OrderConfirmationGuard],
         },
         DynamicProgressBarStepsComponent: {
           component: FSCheckoutProgressComponent,

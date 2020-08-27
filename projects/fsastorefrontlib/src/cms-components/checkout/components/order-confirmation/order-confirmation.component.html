@@ -1,4 +1,4 @@
-<ng-container *ngIf="orderPlaced; else orderCompleted">
+<ng-container *ngIf="orderPlaced">
   <ng-container *ngIf="order$ | async as order">
     <ng-container *ngIf="order.code; else loading">
       <ng-container
@@ -322,11 +322,6 @@
     </ng-container>
   </ng-container>
 </ng-container>
-<ng-template #orderCompleted>
-  <h1 class="mt-5 mb-3 text-center">
-    {{ 'policy.yourPolicyHasBeenSubmited' | cxTranslate }}
-  </h1>
-</ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
 </ng-template>
