@@ -15,6 +15,10 @@
     &-item {
       margin: 10px 0;
     }
+    &-title,
+    &-value {
+      overflow-wrap: break-word;
+    }
     &-value {
       text-align: right;
       align-self: flex-end;

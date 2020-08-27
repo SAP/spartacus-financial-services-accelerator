@@ -7,7 +7,7 @@ import {
 import { RoutingService } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
 import { Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import { FSCartService } from './../../../../../core/cart/facade/cart.service';
 import { PricingService } from './../../../../../core/product-pricing/facade/pricing.service';
 import { FSProduct } from './../../../../../occ/occ-models/occ.models';
@@ -57,21 +57,21 @@ export class ProductConfigurationNavigationComponent
       this.formDataService
         .getSubmittedForm()
         .pipe(
+          filter(formData => !!formData?.content),
+          take(1),
           map(formData => {
-            if (formData && formData.content) {
-              const pricingData = this.pricingService.buildPricingData(
-                JSON.parse(formData.content)
-              );
-              this.cartService.createCartForProduct(
-                this.productCode,
-                this.bundleCode,
-                1,
-                pricingData
-              );
-              this.routingService.go({
-                cxRoute: 'addOptions',
-              });
-            }
+            const pricingData = this.pricingService.buildPricingData(
+              JSON.parse(formData.content)
+            );
+            this.cartService.createCartForProduct(
+              this.productCode,
+              this.bundleCode,
+              1,
+              pricingData
+            );
+            this.routingService.go({
+              cxRoute: 'addOptions',
+            });
           })
         )
         .subscribe()

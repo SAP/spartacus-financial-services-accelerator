@@ -32,29 +32,29 @@
               (cart?.entries)[0]?.product?.defaultCategory as defaultCategory
             "
           >
-            <div class="short-overview-item row">
-              <ng-container *ngIf="cart?.insuranceQuote?.startDate">
+            <ng-container *ngIf="cart?.insuranceQuote?.startDate">
+              <div class="short-overview-item row">
                 <div class="short-overview-title col-7">
                   {{ 'fscommon.startDate' | cxTranslate }}:
                 </div>
                 <div class="short-overview-value col-5">
                   {{ cart?.insuranceQuote?.startDate | cxDate: 'dd MMM yyyy' }}
                 </div>
-              </ng-container>
-              <ng-container
-                *ngTemplateOutlet="
-                  cartDetails;
-                  context: {
-                    valueList: !(cart?.entries)[0]?.product?.configurable
-                      ? cart?.insuranceQuote?.quoteDetails?.entry
-                      : ((cart?.entries)[0]?.configurationInfos)[0]
-                          ?.configurationValues?.entry,
-                    defaultCategory: defaultCategory
-                  }
-                "
-              >
-              </ng-container>
-            </div>
+              </div>
+            </ng-container>
+            <ng-container
+              *ngTemplateOutlet="
+                cartDetails;
+                context: {
+                  valueList: !(cart?.entries)[0]?.product?.configurable
+                    ? cart?.insuranceQuote?.quoteDetails?.entry
+                    : ((cart?.entries)[0]?.configurationInfos)[0]
+                        ?.configurationValues?.entry,
+                  defaultCategory: defaultCategory
+                }
+              "
+            >
+            </ng-container>
           </ng-container>
           <ng-container
             *ngFor="let entry of cart.deliveryOrderGroups[0]?.entries"
@@ -90,9 +90,11 @@
     <ng-container
       *ngIf="getTranslation(defaultCategory.code, item.key) as label"
     >
-      <div class="short-overview-title col-7">{{ label }}:</div>
-      <div class="short-overview-value col-5">
-        {{ item.value }}
+      <div class="short-overview-item row">
+        <div class="short-overview-title col-7">{{ label }}:</div>
+        <div class="short-overview-value col-5">
+          {{ item.value }}
+        </div>
       </div>
     </ng-container>
   </ng-container>

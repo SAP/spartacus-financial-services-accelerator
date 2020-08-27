@@ -13,7 +13,7 @@ import { BindingStateType, FSCart } from './../../../occ/occ-models/occ.models';
 @Injectable({
   providedIn: 'root',
 })
-export class BindQuoteGuard implements CanActivate {
+export class QuoteNotBoundGuard implements CanActivate {
   constructor(
     protected routingService: RoutingService,
     protected cartService: ActiveCartService,
@@ -26,9 +26,9 @@ export class BindQuoteGuard implements CanActivate {
       take(1),
       map(cart => {
         const bindingState = (<FSCart>cart).insuranceQuote?.state?.code;
-        if (bindingState === BindingStateType.BIND) {
+        if (bindingState !== BindingStateType.BIND) {
           this.globalMessageService.add(
-            { key: 'quote.boundQuoteDescription' },
+            { key: 'quote.notBoundQuoteDescription' },
             GlobalMessageType.MSG_TYPE_INFO
           );
           this.routingService.go({ cxRoute: 'home' });

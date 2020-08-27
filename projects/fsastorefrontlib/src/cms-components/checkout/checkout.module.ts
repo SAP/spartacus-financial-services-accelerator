@@ -28,6 +28,8 @@ import {
 import { CartConnector } from '../../core/cart/connectors/cart.connector';
 import { FSCartService } from '../../core/cart/facade/cart.service';
 import { CheckoutConnector } from '../../core/checkout/connectors/checkout.connector';
+import { BindQuoteGuard } from '../../core/checkout/guards/bind-quote.guard';
+import { PersonalDetailsSetGuard } from '../../core/checkout/guards/personal-details-set.guard';
 import { ReferredQuoteGuard } from '../../core/checkout/guards/referred-quote.guard';
 import { CategoryService } from '../../core/checkout/services/category/category.service';
 import { CHECKOUT_FEATURE } from '../../core/checkout/store';
@@ -38,6 +40,8 @@ import {
 } from '../../core/checkout/store/reducers/index';
 import { QuoteConnector } from '../../core/my-account/connectors/quote.connector';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
+import { AutoPersonalDetailsGuard } from '../dynamic-forms/guards/auto-personal-details-guard';
+import { QuoteNotBoundGuard } from './../../core/checkout/guards/quote-not-bound.guard';
 import { FSTranslationService } from './../../core/i18n/facade/translation.service';
 import { AddOptionsComponent } from './components/add-options/add-options.component';
 import { AddOptionsModule } from './components/add-options/add-options.module';
@@ -58,8 +62,7 @@ import { ReferredQuoteDialogComponent } from './components/referred-quote/referr
 import { UserIdentificationModule } from './components/user-identification/user-identification.module';
 import { CategoryStepGuard } from './guards/category-step-guard';
 import { CheckoutStepGuard } from './guards/checkout-step-guard';
-import { AutoPersonalDetailsGuard } from '../dynamic-forms/guards/auto-personal-details-guard';
-import { BindQuoteGuard } from '../../core/checkout/guards/bind-quote.guard';
+import { OrderConfirmationGuard } from '../../core/checkout/guards/order-confirmation.guard';
 
 const routes: Routes = [
   {
@@ -97,7 +100,7 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard],
+    canActivate: [AuthGuard, CmsPageGuard, PersonalDetailsSetGuard],
     data: {
       cxRoute: 'quoteReview',
       pageLabel: 'quote-review',
@@ -110,6 +113,7 @@ const routes: Routes = [
       AuthGuard,
       CmsPageGuard,
       CheckoutStepGuard,
+      QuoteNotBoundGuard,
       ReferredQuoteGuard,
     ],
     data: {
@@ -144,7 +148,13 @@ const routes: Routes = [
   },
   {
     path: null,
-    canActivate: [AuthGuard, CmsPageGuard, CheckoutStepGuard],
+    canActivate: [
+      AuthGuard,
+      CmsPageGuard,
+      CheckoutStepGuard,
+      CartNotEmptyGuard,
+      QuoteNotBoundGuard,
+    ],
     data: {
       cxRoute: 'legalInformation',
       pageLabel: 'legalInformationPage',
@@ -158,6 +168,7 @@ const routes: Routes = [
       CmsPageGuard,
       CheckoutStepGuard,
       CartNotEmptyGuard,
+      QuoteNotBoundGuard,
     ],
     data: {
       cxRoute: 'userIdentification',
@@ -208,9 +219,11 @@ const routes: Routes = [
         },
         OrderConfirmationFlex: {
           component: OrderConfirmationComponent,
+          guards: [OrderConfirmationGuard],
         },
         OrderConfirmationMessageFlex: {
           component: OrderConfirmationMessageComponent,
+          guards: [OrderConfirmationGuard],
         },
         DynamicProgressBarStepsComponent: {
           component: FSCheckoutProgressComponent,

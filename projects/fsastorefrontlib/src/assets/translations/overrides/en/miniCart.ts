@@ -3,7 +3,6 @@ export const common = {
     insurances_travel: {
       tripEndDate: 'End Date',
       Travellers: 'Number of Travelers',
-      tripDetailsTravellerAges: 'Age of Travelers',
     },
     insurances_savings: {
       annualContributionIncrease: 'Annual Contribution Increase',
