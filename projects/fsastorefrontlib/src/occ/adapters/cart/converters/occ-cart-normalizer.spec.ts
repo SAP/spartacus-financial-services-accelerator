@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
-import { ConverterService, PRODUCT_NORMALIZER } from '@spartacus/core';
+import { ConverterService } from '@spartacus/core';
 import { FSOccCartNormalizer } from './occ-cart-normalizer';
-import { FSCart } from 'fsastorefrontlib/occ';
+
 class MockConverterService {
   convert() {}
 }
@@ -109,7 +109,7 @@ describe('FSOccCartNormalizer', () => {
         },
       ],
     };
-    const seriazliedMockCartNoInsuranceQuote = {
+    const serializedMockCartNoInsuranceQuote = {
       code: '1',
       entries: [
         {
@@ -125,7 +125,7 @@ describe('FSOccCartNormalizer', () => {
       ],
     };
     const result = occCartNormalizer.convert(mockCartNoInsuranceQuote);
-    expect(result).toEqual(seriazliedMockCartNoInsuranceQuote);
+    expect(result).toEqual(serializedMockCartNoInsuranceQuote);
   });
 
   it('should serialize Configuration Infos', () => {
