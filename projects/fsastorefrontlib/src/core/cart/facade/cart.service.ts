@@ -11,7 +11,7 @@ import {
   StateWithMultiCart,
 } from '@spartacus/core';
 import { combineLatest } from 'rxjs';
-import { filter, map, take } from 'rxjs/operators';
+import { filter, map, take, switchMap } from 'rxjs/operators';
 import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
 import * as fromAction from './../../checkout/store/actions/index';
 
@@ -34,9 +34,9 @@ export class FSCartService extends ActiveCartService {
     combineLatest([this.getActiveCartId(), this.authService.getOccUserId()])
       .pipe(
         take(1),
-        map(([activeCartId, userId]) => {
+        switchMap(([activeCartId, userId]) => {
           if (!activeCartId) {
-            this.multiCartService
+            return this.multiCartService
               .createCart({
                 userId: userId,
                 extraData: {
@@ -60,8 +60,7 @@ export class FSCartService extends ActiveCartService {
                     pricingData
                   );
                 })
-              )
-              .subscribe();
+              );
           } else {
             this.startBundleForCart(
               userId,

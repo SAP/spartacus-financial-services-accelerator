@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CartModification } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { PricingData } from '../../../occ/occ-models';
+import { PricingData, FSCart } from '../../../occ/occ-models';
 import { CartAdapter } from './cart.adapter';
 
 @Injectable({
@@ -9,6 +9,14 @@ import { CartAdapter } from './cart.adapter';
 })
 export class CartConnector {
   constructor(protected adapter: CartAdapter) {}
+
+  create(
+    userId: string,
+    oldCartId?: string,
+    toMergeCartGuid?: string
+  ): Observable<FSCart> {
+    return this.adapter.create(userId, oldCartId, toMergeCartGuid);
+  }
 
   addToCart(
     userId: string,
