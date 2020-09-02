@@ -8,8 +8,8 @@ export class FSOccCartNormalizer implements Converter<any, FSCart> {
     if (target === undefined) {
       target = { ...(source as any) };
     }
-    target = this.serializeQuoteDetails(target);
-    target = this.serializeConfigurationInfos(target);
+    this.serializeQuoteDetails(target);
+    this.serializeConfigurationInfos(target);
     return target;
   }
 
@@ -35,7 +35,6 @@ export class FSOccCartNormalizer implements Converter<any, FSCart> {
         cart.insuranceQuote.insuredObjectList.insuredObjects = serializedInusredObjects;
       }
     }
-    return cart;
   }
 
   private serializeConfigurationInfos(cart) {
@@ -51,7 +50,6 @@ export class FSOccCartNormalizer implements Converter<any, FSCart> {
       );
       cart.entries[0].configurationInfos[0].configurationValues = serilizedConfigurationValues;
     }
-    return cart;
   }
 
   private serializeInsuredObject(insuredObject) {
