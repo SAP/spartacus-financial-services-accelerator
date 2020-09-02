@@ -141,6 +141,6 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   }
 
   private checkInvalidControls(formData: YFormData): boolean {
-    return Boolean(formData && !this.valid);
+    return !!(formData && !this.valid);
   }
 }
