@@ -23,7 +23,7 @@ export class AutoPersonalDetailsPrefillResolver implements PrefillResolver {
       this.userService.get(),
     ]).pipe(
       map(([cart, user]) => {
-        const fsCart: FSCart = FormsUtils.serializeCartEntries(cart);
+        const fsCart: FSCart = cart;
         const policyHolderSameAsMainDriver =
           fsCart?.insuranceQuote?.quoteDetails?.customerId;
         if (

@@ -15,7 +15,6 @@ export class OccQuoteNormalizer
     if (target === undefined) {
       target = { ...(source as any) };
     }
-
     return target;
   }
 }
