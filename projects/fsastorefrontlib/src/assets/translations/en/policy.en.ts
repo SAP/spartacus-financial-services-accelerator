@@ -21,9 +21,9 @@ export const policy = {
       'Sorry, the requested change can\'t be executed online, please contact your agent', // prettier-ignore
     details: {
       trip: 'Travel Information',
+      event: 'Event Information',
       auto: 'Vehicle',
       property: 'Property Information',
-      person: 'Person Information',
       insurances_travel: {
         tripDestination: 'Destination',
         Travellers: 'Number of Travelers',

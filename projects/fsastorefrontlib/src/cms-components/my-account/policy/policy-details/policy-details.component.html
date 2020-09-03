@@ -101,13 +101,17 @@
             "
           >
             <ul class="accordion-list container-fluid">
-              <li class="accordion-list-item row sub-title">
+              <li
+                *ngIf="
+                  getTranslation(
+                    'details',
+                    insuredObject.insuredObjectType | lowercase
+                  ) as insuredObjectType
+                "
+                class="accordion-list-item row sub-title"
+              >
                 <div class="col-12">
-                  {{
-                    'policy.details.' + insuredObject.insuredObjectType
-                      | lowercase
-                      | cxTranslate
-                  }}
+                  {{ insuredObjectType }}
                 </div>
               </li>
               <ng-container
@@ -118,7 +122,7 @@
                 <li
                   *ngIf="
                     getTranslation(
-                      policy.categoryData?.code,
+                      'details.' + policy.categoryData?.code,
                       insuredObjectItem.label
                     ) as insuredObjectItemLabel
                   "
@@ -192,7 +196,7 @@
                           (childInsuredObjectItem.label !== 'customerId' ||
                             childInsuredObjectItem.value !== 'false') &&
                           getTranslation(
-                            policy.categoryData?.code,
+                            'details.' + policy.categoryData?.code,
                             childInsuredObjectItem.label
                           ) as childInsuredObjectItemLabel
                         "

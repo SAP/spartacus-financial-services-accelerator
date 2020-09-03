@@ -24,7 +24,6 @@ export const policy = {
       trip: 'Reiseinformation',
       auto: 'Fahrzeug',
       property: 'Immobilieninformationen',
-      person: '[DE] Person Information',
       insurances_travel: {
         tripDestination: 'Ziel',
         Travellers: 'Anzahl der Reisenden',
