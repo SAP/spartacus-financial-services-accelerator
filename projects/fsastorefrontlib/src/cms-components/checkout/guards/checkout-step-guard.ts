@@ -38,12 +38,7 @@ export class CheckoutStepGuard implements CanActivate {
       take(1),
       map(cart => {
         {
-          if (
-            cart.deliveryOrderGroups &&
-            cart.deliveryOrderGroups.length > 0 &&
-            cart.deliveryOrderGroups[0]?.entries &&
-            cart.deliveryOrderGroups[0]?.entries.length > 0
-          ) {
+          if (cart?.deliveryOrderGroups[0]?.entries?.length) {
             const fsProduct: FSProduct =
               cart.deliveryOrderGroups[0].entries[0].product;
             this.currentCategory = fsProduct.defaultCategory.code;
