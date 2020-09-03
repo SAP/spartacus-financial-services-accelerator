@@ -1,4 +1,12 @@
-import { Component, OnInit, Injector } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Injector,
+  AfterViewChecked,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
+
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { LanguageService } from '@spartacus/core';
@@ -9,7 +17,8 @@ import { ModalService } from '@spartacus/storefront';
   selector: 'cx-pop-up',
   templateUrl: './pop-up.component.html',
 })
-export class PopUpComponent extends AbstractFormComponent implements OnInit {
+export class PopUpComponent extends AbstractFormComponent
+  implements OnInit, AfterViewChecked {
   constructor(
     protected formConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
@@ -20,15 +29,16 @@ export class PopUpComponent extends AbstractFormComponent implements OnInit {
     super(formConfig, languageService, injector, formService);
   }
   modalInstance: any;
+  @ViewChild('content') modalContent: ElementRef;
 
-  openModal(content) {
-    this.modalService.open(content, {
+  ngOnInit() {
+    super.ngOnInit();
+  }
+
+  ngAfterViewChecked() {
+    this.modalService.open(this.modalContent, {
       centered: true,
       size: 'lg',
     });
-    // this.modalInstance.errorMsgObject = this.config.error;
-  }
-  ngOnInit() {
-    super.ngOnInit();
   }
 }

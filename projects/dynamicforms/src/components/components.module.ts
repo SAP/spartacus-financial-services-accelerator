@@ -17,6 +17,7 @@ import { SeparatorComponent } from './separator/separator.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { AbstractOptionsComponent } from './abstract-options/abstract-options.component';
 import { DynamicSelectComponent } from './dynamic-select/dynamic-select.component';
+import { PopUpComponent } from './pop-up/pop-up.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, I18nModule],
@@ -36,6 +37,7 @@ import { DynamicSelectComponent } from './dynamic-select/dynamic-select.componen
     SeparatorComponent,
     CheckboxComponent,
     DynamicSelectComponent,
+    PopUpComponent,
   ],
   entryComponents: [
     AbstractFormComponent,
@@ -68,6 +70,7 @@ import { DynamicSelectComponent } from './dynamic-select/dynamic-select.componen
     SeparatorComponent,
     CheckboxComponent,
     DynamicSelectComponent,
+    PopUpComponent,
   ],
 })
 export class ComponentsModule {}

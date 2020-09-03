@@ -1,4 +1,4 @@
-<ng-template #content let-c="close" let-d="dismiss">
+<ng-template #content let-c="close" let-d="dismiss" let-open="open">
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Hi there!</h4>
     <button
@@ -23,7 +23,3 @@
     </button>
   </div>
 </ng-template>
-
-<button class="btn btn-lg btn-outline-primary" (click)="openModal(content)">
-  Launch demo modal
-</button>
