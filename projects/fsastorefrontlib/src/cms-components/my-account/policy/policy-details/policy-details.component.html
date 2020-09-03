@@ -104,7 +104,7 @@
               <li
                 *ngIf="
                   getTranslation(
-                    'details',
+                    policy.categoryData?.code,
                     insuredObject.insuredObjectType | lowercase
                   ) as insuredObjectType
                 "
@@ -122,7 +122,7 @@
                 <li
                   *ngIf="
                     getTranslation(
-                      'details.' + policy.categoryData?.code,
+                      policy.categoryData?.code,
                       insuredObjectItem.label
                     ) as insuredObjectItemLabel
                   "
@@ -196,7 +196,7 @@
                           (childInsuredObjectItem.label !== 'customerId' ||
                             childInsuredObjectItem.value !== 'false') &&
                           getTranslation(
-                            'details.' + policy.categoryData?.code,
+                            policy.categoryData?.code,
                             childInsuredObjectItem.label
                           ) as childInsuredObjectItemLabel
                         "

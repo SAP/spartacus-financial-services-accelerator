@@ -20,11 +20,9 @@ export const policy = {
     changeError:
       'Sorry, the requested change can\'t be executed online, please contact your agent', // prettier-ignore
     details: {
-      trip: 'Travel Information',
-      event: 'Event Information',
-      auto: 'Vehicle',
       property: 'Property Information',
       insurances_travel: {
+        trip: 'Travel Information',
         tripDestination: 'Destination',
         Travellers: 'Number of Travelers',
         tripStartDate: 'Start Date',
@@ -41,6 +39,7 @@ export const policy = {
         name: 'Name',
       },
       insurances_event: {
+        event: 'Event Information',
         venue: 'Venue Name',
         address: 'Venue Address',
         city: 'Venue City',
@@ -56,6 +55,7 @@ export const policy = {
         name: 'Name',
       },
       insurances_auto: {
+        auto: 'Vehicle',
         vehicleMake: 'Vehicle Make',
         vehicleModel: 'Vehicle Model',
         vehicleType: 'Vehicle Type',
@@ -74,12 +74,14 @@ export const policy = {
         driverLicenceNumber: 'Driver License Number',
       },
       insurances_property_homeowners: {
+        property: 'Property Information',
         'property-address-line-1': 'Property Address',
         propertyDetailsCoverRequired: 'Cover Required',
         propertyType: 'Property Type',
         propertyValue: 'Property Value',
       },
       insurances_property_renters: {
+        property: 'Property Information',
         'property-address-line-1': 'Property Address',
         propertyDetailsCoverRequired: 'Cover Required',
         propertyType: 'Property Type',

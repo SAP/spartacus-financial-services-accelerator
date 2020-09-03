@@ -109,7 +109,7 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
 
   getTranslation(translationGroup: string, translationKey: string): string {
     return this.translationService.getTranslationValue(
-      ['policy', translationGroup],
+      ['policy.details', translationGroup],
       translationKey
     );
   }
