@@ -17,7 +17,6 @@ export class LegalInformationSetGuard implements CanActivate {
   canActivate(): Observable<boolean> {
     return this.checkoutService.getLegalInformation().pipe(
       map(legalInformaton => {
-        console.log(legalInformaton);
         if (!legalInformaton) {
           this.routingService.go({ cxRoute: 'legalInformation' });
           return false;
