@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
 import {
   AuthGuard,
   CmsConfig,
@@ -29,18 +28,17 @@ import { CartConnector } from '../../core/cart/connectors/cart.connector';
 import { FSCartService } from '../../core/cart/facade/cart.service';
 import { CheckoutConnector } from '../../core/checkout/connectors/checkout.connector';
 import { BindQuoteGuard } from '../../core/checkout/guards/bind-quote.guard';
+import { OrderConfirmationGuard } from '../../core/checkout/guards/order-confirmation.guard';
 import { PersonalDetailsSetGuard } from '../../core/checkout/guards/personal-details-set.guard';
 import { ReferredQuoteGuard } from '../../core/checkout/guards/referred-quote.guard';
 import { CategoryService } from '../../core/checkout/services/category/category.service';
-import { CHECKOUT_FEATURE } from '../../core/checkout/store';
+import { FSCheckoutStoreModule } from '../../core/checkout/store/checkout-store.module';
 import { effects } from '../../core/checkout/store/effects/index';
-import {
-  reducerProvider,
-  reducerToken,
-} from '../../core/checkout/store/reducers/index';
+import { reducerProvider } from '../../core/checkout/store/reducers/index';
 import { QuoteConnector } from '../../core/my-account/connectors/quote.connector';
 import { AccordionModule } from '../../shared/accordion/accordion.module';
 import { AutoPersonalDetailsGuard } from '../dynamic-forms/guards/auto-personal-details-guard';
+import { LegalInformationSetGuard } from './../../core/checkout/guards/legal-information-set.guard';
 import { QuoteNotBoundGuard } from './../../core/checkout/guards/quote-not-bound.guard';
 import { FSTranslationService } from './../../core/i18n/facade/translation.service';
 import { AddOptionsComponent } from './components/add-options/add-options.component';
@@ -62,7 +60,6 @@ import { ReferredQuoteDialogComponent } from './components/referred-quote/referr
 import { UserIdentificationModule } from './components/user-identification/user-identification.module';
 import { CategoryStepGuard } from './guards/category-step-guard';
 import { CheckoutStepGuard } from './guards/checkout-step-guard';
-import { OrderConfirmationGuard } from '../../core/checkout/guards/order-confirmation.guard';
 
 const routes: Routes = [
   {
@@ -169,6 +166,7 @@ const routes: Routes = [
       CheckoutStepGuard,
       CartNotEmptyGuard,
       QuoteNotBoundGuard,
+      LegalInformationSetGuard,
     ],
     data: {
       cxRoute: 'userIdentification',
@@ -196,8 +194,8 @@ const routes: Routes = [
     PaymentFormModule,
     CardModule,
     FSCheckoutProgressModule,
+    FSCheckoutStoreModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature(CHECKOUT_FEATURE, reducerToken),
     EffectsModule.forFeature(effects),
     ConfigModule.withConfig(<CmsConfig | RoutesConfig | RoutingConfig>{
       cmsComponents: {
