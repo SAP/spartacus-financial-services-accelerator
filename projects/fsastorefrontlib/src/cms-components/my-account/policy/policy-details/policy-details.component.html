@@ -101,6 +101,15 @@
             "
           >
             <ul class="accordion-list container-fluid">
+              <li class="accordion-list-item row sub-title">
+                <div class="col-12">
+                  {{
+                    'policy.details.' + insuredObject.insuredObjectType
+                      | lowercase
+                      | cxTranslate
+                  }}
+                </div>
+              </li>
               <ng-container
                 *ngFor="
                   let insuredObjectItem of insuredObject.insuredObjectItems
@@ -148,18 +157,25 @@
                   </ng-container>
                 </li>
               </ng-container>
+            </ul>
+            <ng-container
+              *ngIf="
+                insuredObject.childInsuredObjectList?.insuredObjects?.length > 0
+              "
+            >
               <ng-container
-                *ngIf="
-                  insuredObject.childInsuredObjectList?.insuredObjects?.length >
-                  0
+                *ngFor="
+                  let childInsuredObject of insuredObject.childInsuredObjectList
+                    .insuredObjects;
+                  let i = index
                 "
               >
-                <ng-container
-                  *ngFor="
-                    let childInsuredObject of insuredObject
-                      .childInsuredObjectList.insuredObjects
-                  "
-                >
+                <ul class="accordion-list container-fluid">
+                  <li class="accordion-list-item row sub-title">
+                    <div class="col-12">
+                      {{ childInsuredObject.insuredObjectType }} {{ i + 1 }}
+                    </div>
+                  </li>
                   <ng-container
                     *ngIf="
                       childInsuredObject.insuredObjectItems &&
@@ -207,9 +223,9 @@
                       </li>
                     </ng-container>
                   </ng-container>
-                </ng-container>
+                </ul>
               </ng-container>
-            </ul>
+            </ng-container>
           </ng-container>
         </ng-container>
       </cx-fs-accordion-item>

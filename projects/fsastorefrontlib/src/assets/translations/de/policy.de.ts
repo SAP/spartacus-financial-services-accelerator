@@ -21,6 +21,10 @@ export const policy = {
     changeError:
       '[DE] Sorry, the requested change can\'t be executed online, please contact your agent', // prettier-ignore
     details: {
+      trip: 'Reiseinformation',
+      auto: 'Fahrzeug',
+      property: 'Immobilieninformationen',
+      person: '[DE] Person Information',
       insurances_travel: {
         tripDestination: 'Ziel',
         Travellers: 'Anzahl der Reisenden',
