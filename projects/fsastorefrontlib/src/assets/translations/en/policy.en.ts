@@ -20,7 +20,6 @@ export const policy = {
     changeError:
       'Sorry, the requested change can\'t be executed online, please contact your agent', // prettier-ignore
     details: {
-      property: 'Property Information',
       insurances_travel: {
         trip: 'Travel Information',
         tripDestination: 'Destination',
