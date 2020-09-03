@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 
 @Component({
-  selector: 'cx-hidden',
+  selector: 'cx-data-holder',
   template: '',
 })
-export class HiddenComponent extends AbstractFormComponent {}
+export class DataHolderComponent extends AbstractFormComponent {}

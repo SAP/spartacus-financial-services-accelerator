@@ -12,7 +12,7 @@ import { SeparatorComponent } from '../../components/separator/separator.compone
 import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
 import { DynamicSelectComponent } from '../../components/dynamic-select/dynamic-select.component';
 import { UserPrefillResolver } from '../resolver/user-prefill-resolver';
-import { HiddenComponent } from '../../components/hidden/hidden.component';
+import { DataHolderComponent } from '../../components/data-holder/data-holder.component';
 
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
@@ -50,8 +50,8 @@ export const defaultFormConfig: DynamicFormsConfig = {
       separator: {
         component: SeparatorComponent,
       },
-      hidden: {
-        component: HiddenComponent,
+      dataHolder: {
+        component: DataHolderComponent,
       },
     },
     validators: {

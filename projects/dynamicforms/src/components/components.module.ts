@@ -17,7 +17,7 @@ import { SeparatorComponent } from './separator/separator.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { AbstractOptionsComponent } from './abstract-options/abstract-options.component';
 import { DynamicSelectComponent } from './dynamic-select/dynamic-select.component';
-import { HiddenComponent } from './hidden/hidden.component';
+import { DataHolderComponent } from './data-holder/data-holder.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, I18nModule],
@@ -28,7 +28,7 @@ import { HiddenComponent } from './hidden/hidden.component';
     ButtonComponent,
     DatePickerComponent,
     ErrorNoticeComponent,
-    HiddenComponent,
+    DataHolderComponent,
     InputComponent,
     RadioComponent,
     SelectComponent,
@@ -44,7 +44,7 @@ import { HiddenComponent } from './hidden/hidden.component';
     AbstractOptionsComponent,
     ButtonComponent,
     DatePickerComponent,
-    HiddenComponent,
+    DataHolderComponent,
     InputComponent,
     RadioComponent,
     SelectComponent,
@@ -62,7 +62,7 @@ import { HiddenComponent } from './hidden/hidden.component';
     ButtonComponent,
     DatePickerComponent,
     ErrorNoticeComponent,
-    HiddenComponent,
+    DataHolderComponent,
     InputComponent,
     RadioComponent,
     SelectComponent,

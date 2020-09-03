@@ -2,7 +2,7 @@ export * from './components.module';
 export * from './abstract-form/abstract-form.component';
 export * from './abstract-options/abstract-options.component';
 export * from './input/input.component';
-export * from './hidden/hidden.component';
+export * from './data-holder/data-holder.component';
 export * from './button/button.component';
 export * from './datepicker/datepicker.component';
 export * from './error-notice/error-notice.component';
