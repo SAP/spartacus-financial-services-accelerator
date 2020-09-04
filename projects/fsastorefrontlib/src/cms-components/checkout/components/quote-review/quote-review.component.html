@@ -49,7 +49,7 @@
                           context: {
                             valueList: !(cart?.entries)[0]?.product
                               ?.configurable
-                              ? cart?.insuranceQuote?.quoteDetails?.entry
+                              ? cart?.insuranceQuote?.quoteDetails
                               : ((cart?.entries)[0]?.configurationInfos)[0]
                                   ?.configurationValues.entry,
                             defaultCategory: defaultCategory
@@ -289,7 +289,7 @@
   let-valueList="valueList"
   let-defaultCategory="defaultCategory"
 >
-  <ng-container *ngFor="let item of valueList">
+  <ng-container *ngFor="let item of valueList | keyvalue">
     <ng-container
       *ngIf="getTranslation(defaultCategory.code, item.key) as label"
     >
