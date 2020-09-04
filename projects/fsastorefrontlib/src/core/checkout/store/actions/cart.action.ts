@@ -21,7 +21,7 @@ export class StartBundle extends StateUtils.EntityProcessesIncrementAction {
 export class StartBundleFail extends StateUtils.EntityProcessesDecrementAction {
   readonly type = START_BUNDLE_FAIL;
   constructor(public payload: any) {
-    super(MULTI_CART_DATA, payload.cartId);
+    super(MULTI_CART_DATA, payload);
   }
 }
 
