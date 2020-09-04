@@ -39,7 +39,7 @@ export const policy = {
         name: 'Vorname und Nachname',
       },
       insurances_event: {
-        event: '[DE] Event Information',
+        event: 'Ereignisinformationen',
         venue: 'Name der Veranstaltungsorts',
         address: 'Adresse des Veranstaltungsorts',
         city: 'Ort des Veranstaltungsorts',
