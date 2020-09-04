@@ -60,10 +60,7 @@
 }
 .documents {
   li:first-child {
-    border-bottom: none;
-    text-transform: uppercase;
-    background: var(--cx-color-4);
-    font-weight: var(--cx-font-weight-semi);
+    @extend .sub-title;
   }
   .document-link {
     color: var(--cx-color-primary);
@@ -73,6 +70,12 @@
     color: var(--cx-color-11);
     font-weight: var(--cx-font-weight-semi);
   }
+}
+.sub-title {
+  border-bottom: none;
+  text-transform: uppercase;
+  background: var(--cx-color-4);
+  font-weight: var(--cx-font-weight-semi);
 }
 .heading-headline {
   font-size: var(--cx-h2-font-size);

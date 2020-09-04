@@ -6,8 +6,8 @@ export const defaultOccFormConfig: FormOccConfig = {
       endpoints: {
         definition: 'forms/definitions/${formDefinitionId}',
         definitions: 'forms/definitions',
-        formData: 'forms/formData/${formDataId}',
-        createFormData: 'forms/formData',
+        formData: 'forms/users/${userId}/formData/${formDataId}',
+        createFormData: 'forms/users/${userId}/formData',
       },
     },
   },
