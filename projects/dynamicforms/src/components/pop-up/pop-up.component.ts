@@ -1,9 +1,4 @@
-import {
-  Component,
-  AfterViewChecked,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
+import { Component, AfterViewChecked, ViewChild } from '@angular/core';
 
 import { ModalService } from '@spartacus/storefront';
 import { FormComponentService } from '../form-component.service';
@@ -19,7 +14,7 @@ export class PopUpComponent implements AfterViewChecked {
   ) {}
 
   modalInstance: any;
-  @ViewChild('content') modalContent: ElementRef;
+  @ViewChild('content') modalContent;
 
   close() {
     this.modalService.closeActiveModal();
