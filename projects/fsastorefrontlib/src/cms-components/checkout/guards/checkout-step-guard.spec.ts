@@ -43,6 +43,7 @@ class MockCheckoutConfigService {
 }
 
 const mockedCart = {
+  code: 'testCartCode',
   deliveryOrderGroups: [
     {
       entries: [
@@ -130,38 +131,5 @@ describe('CheckoutStepGuard', () => {
       .subscribe(value => (result = value))
       .unsubscribe();
     expect(result).toEqual(true);
-  });
-
-  it('should return true in case there is not product in cart and unsubscribe', () => {
-    spyOn(routingConfigService, 'getRouteConfig').and.returnValues({
-      paths: ['testRoute'],
-    });
-    spyOn(checkoutConfigService, 'getCurrentStepIndex').and.returnValues(0);
-    const emptyCart = {
-      deliveryOrderGroups: [],
-    };
-    spyOn(cartService, 'getActive').and.returnValues(of(emptyCart));
-
-    let result;
-    const mockActivatedRoute = {
-      url: [
-        {
-          path: categoryCodeParam,
-        },
-      ],
-    };
-    guard
-      .canActivate(mockActivatedRoute as CmsActivatedRouteSnapshot)
-      .subscribe(value => (result = value))
-      .unsubscribe();
-
-    expect(result).toEqual(true);
-
-    const subscriptions = guard['subscription'];
-    spyOn(subscriptions, 'unsubscribe').and.callThrough();
-
-    guard.ngOnDestroy();
-
-    expect(subscriptions.unsubscribe).toHaveBeenCalled();
   });
 });

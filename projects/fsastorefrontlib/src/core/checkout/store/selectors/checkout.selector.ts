@@ -1,14 +1,17 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
+import { StateUtils } from '@spartacus/core';
 import {
   FSCheckoutState,
   FSCheckoutStepsState,
   FSStateWithCheckout,
 } from '../checkout-state';
 import { getCheckoutState } from './feature.selector';
-import { StateUtils } from '@spartacus/core';
 
 const getIdentificationTypeSelector = (state: FSCheckoutStepsState) =>
   state.identificationType;
+
+const getLegalInformationTypeSelector = (state: FSCheckoutStepsState) =>
+  state.legalInformation;
 
 export const getCheckoutStepsState: MemoizedSelector<
   FSStateWithCheckout,
@@ -29,3 +32,8 @@ export const getIdentificationType: MemoizedSelector<
   FSStateWithCheckout,
   boolean
 > = createSelector(getCheckoutSteps, getIdentificationTypeSelector);
+
+export const getLegalInformation: MemoizedSelector<
+  FSStateWithCheckout,
+  boolean
+> = createSelector(getCheckoutSteps, getLegalInformationTypeSelector);

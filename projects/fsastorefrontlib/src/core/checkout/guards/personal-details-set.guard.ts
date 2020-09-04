@@ -19,7 +19,7 @@ export class PersonalDetailsSetGuard implements CanActivate {
       this.cartService.getActive(),
       this.cartService.isStable(),
     ]).pipe(
-      filter(([cart, stable]) => stable),
+      filter(([_, stable]) => stable),
       take(1),
       map(([cart, _]) => {
         if (cart?.entries?.length > 0) {

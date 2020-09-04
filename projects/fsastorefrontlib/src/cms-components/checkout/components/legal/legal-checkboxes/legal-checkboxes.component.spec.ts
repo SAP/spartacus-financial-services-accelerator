@@ -3,9 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { of } from 'rxjs';
+import { FSSteps } from '../../../../../occ/occ-models';
+import { FSCheckoutService } from './../../../../../core/checkout/facade/checkout.service';
 import { FSCheckoutConfigService } from './../../../../../core/checkout/services/checkout-config.service';
 import { LegalCheckboxesComponent } from './legal-checkboxes.component';
-import { FSSteps } from '../../../../../occ/occ-models';
 
 class MockActivatedRoute {
   params = of();
@@ -13,6 +14,10 @@ class MockActivatedRoute {
 
 class MockRoutingService {
   go() {}
+}
+
+class MockCheckoutService {
+  setLegalInformation() {}
 }
 
 class FSCheckoutConfigServiceStub {
@@ -29,6 +34,7 @@ describe('LegalCheckboxesComponent', () => {
   let component: LegalCheckboxesComponent;
   let fixture: ComponentFixture<LegalCheckboxesComponent>;
   let routingService: RoutingService;
+  let checkoutService: FSCheckoutService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -47,6 +53,10 @@ describe('LegalCheckboxesComponent', () => {
           provide: FSCheckoutConfigService,
           useClass: FSCheckoutConfigServiceStub,
         },
+        {
+          provide: FSCheckoutService,
+          useClass: MockCheckoutService,
+        },
       ],
     }).compileComponents();
   }));
@@ -56,6 +66,7 @@ describe('LegalCheckboxesComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     routingService = TestBed.inject(RoutingService);
+    checkoutService = TestBed.inject(FSCheckoutService);
     spyOn(routingService, 'go').and.stub();
   });
 

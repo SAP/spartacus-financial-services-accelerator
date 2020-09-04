@@ -18,6 +18,7 @@ import { CheckboxComponent } from './checkbox/checkbox.component';
 import { AbstractOptionsComponent } from './abstract-options/abstract-options.component';
 import { DynamicSelectComponent } from './dynamic-select/dynamic-select.component';
 import { PopUpComponent } from './pop-up/pop-up.component';
+import { DataHolderComponent } from './data-holder/data-holder.component';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, I18nModule],
@@ -28,6 +29,7 @@ import { PopUpComponent } from './pop-up/pop-up.component';
     ButtonComponent,
     DatePickerComponent,
     ErrorNoticeComponent,
+    DataHolderComponent,
     InputComponent,
     RadioComponent,
     SelectComponent,
@@ -44,6 +46,7 @@ import { PopUpComponent } from './pop-up/pop-up.component';
     AbstractOptionsComponent,
     ButtonComponent,
     DatePickerComponent,
+    DataHolderComponent,
     InputComponent,
     RadioComponent,
     SelectComponent,
@@ -61,6 +64,7 @@ import { PopUpComponent } from './pop-up/pop-up.component';
     ButtonComponent,
     DatePickerComponent,
     ErrorNoticeComponent,
+    DataHolderComponent,
     InputComponent,
     RadioComponent,
     SelectComponent,
