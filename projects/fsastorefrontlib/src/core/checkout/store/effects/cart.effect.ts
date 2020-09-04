@@ -97,6 +97,8 @@ export class CartEffects {
                   cartId: cartCode,
                 })
               );
+            } else {
+              actions.push(new fromActions.StartBundleFail(payload.cartId));
             }
             return [
               new CartActions.LoadCart({
