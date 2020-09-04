@@ -6,7 +6,7 @@ import {
   CheckoutDeliveryService,
   CheckoutService,
 } from '@spartacus/core';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { CheckoutSelectors, FSStateWithCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
 
@@ -42,6 +42,18 @@ export class FSCheckoutService extends CheckoutService {
       })
       .unsubscribe();
     return this.fsStore.pipe(select(CheckoutSelectors.getIdentificationType));
+  }
+
+  setLegalInformation() {
+    this.fsStore.dispatch(
+      new fromFSAction.SetLegalInformationSuccess({
+        legalInformation: true,
+      })
+    );
+  }
+
+  getLegalInformation(): Observable<boolean> {
+    return this.fsStore.pipe(select(CheckoutSelectors.getLegalInformation));
   }
 
   mockDeliveryMode() {
