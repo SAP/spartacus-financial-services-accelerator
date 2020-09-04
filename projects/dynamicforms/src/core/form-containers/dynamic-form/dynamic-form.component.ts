@@ -17,6 +17,7 @@ import { FormDefinition } from '../../models/form-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 import { FormDataService } from '../../services/data/form-data.service';
 import { YFormData } from './../../models/form-occ.models';
+import { FormComponentService } from 'projects/dynamicforms/src/components/form-component.service';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -32,6 +33,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   @Output()
   submit: EventEmitter<any> = new EventEmitter<any>();
 
+  populatedInvalid$: Observable<boolean>;
   form: FormGroup;
   subscription = new Subscription();
 
@@ -49,10 +51,12 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     protected changeDetectorRef: ChangeDetectorRef,
     protected formService: FormBuilderService,
     protected formDataService: FormDataService,
+    protected formComponentService: FormComponentService,
     public formConfig: DynamicFormsConfig
   ) {}
 
   ngOnInit() {
+    this.populatedInvalid$ = this.formComponentService.populatedFormInvalid;
     if (this.config) {
       this.form = this.formService.createForm(this.config);
     }
@@ -135,6 +139,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         const control = <FormControl>formControl;
         if (!control.valid) {
           control.markAsTouched({ onlySelf: true });
+          this.formComponentService.populatedFormInvalidSource.next(true);
         }
       }
     }

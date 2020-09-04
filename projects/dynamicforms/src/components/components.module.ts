@@ -19,6 +19,7 @@ import { AbstractOptionsComponent } from './abstract-options/abstract-options.co
 import { DynamicSelectComponent } from './dynamic-select/dynamic-select.component';
 import { PopUpComponent } from './pop-up/pop-up.component';
 import { DataHolderComponent } from './data-holder/data-holder.component';
+import { FormComponentService } from './form-component.service';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, I18nModule],
@@ -76,5 +77,6 @@ import { DataHolderComponent } from './data-holder/data-holder.component';
     DynamicSelectComponent,
     PopUpComponent,
   ],
+  providers: [FormComponentService],
 })
 export class ComponentsModule {}
