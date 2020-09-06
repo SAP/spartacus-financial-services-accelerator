@@ -4,6 +4,8 @@ export const forms = {
     dateOfBirthMinimumAge: 'Mindestens 18 Jahre alt',
     lessThan200K: '[DE] Range must be between 0 -200,000',
     enterValidEmail: 'Bitte geben Sie eine gültige Email Adresse ein.',
+    validationErrors: '[DE] There are validation errors',
+    fillOutProperly: `[DE] Please retry once all of the fields have been properly filled-out.`,
     dateOfBirth: {
       label: 'Geburtsdatum',
     },
