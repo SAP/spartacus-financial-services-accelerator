@@ -60,66 +60,55 @@
         </div>
       </div>
     </div>
+
     <div class="box-shadow d-block d-md-none border-top-3 border-color-primary">
-      <ng-container
-        *ngFor="let changedPolicyObject of changedPolicyObjects; index as i"
-      >
-        <div class="container-fluid p-3 border-bottom border-color-4">
-          <div class="row p-1">
-            <div class="col-6 text-uppercase semi-bold">
+      <div class="container-fluid">
+        <ng-container
+          *ngFor="let changedPolicyObject of changedPolicyObjects; index as i"
+        >
+          <div class="row p-2 border-bottom border-color-4">
+            <div class="col-6 py-1 semi-bold">
               {{ 'fscommon.no' | cxTranslate }}.:
             </div>
-            <div class="col-6 text-right text-sm-left">{{ i + 1 }}.</div>
-          </div>
-          <div class="row p-1">
-            <div class="col-6 text-uppercase semi-bold">
+            <div class="col-6 py-1 text-right text-sm-left">{{ i + 1 }}.</div>
+            <div class="col-6 py-1 semi-bold">
               {{ 'changeRequest.description' | cxTranslate }}
             </div>
             <div class="col-6 text-right text-sm-left">
               {{ changedPolicyObject?.label }}
             </div>
-          </div>
-          <div class="row p-1">
-            <div class="col-6 text-uppercase semi-bold">
+            <div class="col-6 py-1 semi-bold">
               {{ 'changeRequest.currentSelection' | cxTranslate }}
             </div>
             <div class="col-6 text-right text-sm-left">
               {{ changedPolicyObject?.oldValue }}
             </div>
-          </div>
-          <div class="row p-1">
-            <div class="col-6 text-uppercase semi-bold">
+            <div class="col-6 py-1 semi-bold">
               {{ 'changeRequest.newSelection' | cxTranslate }}
             </div>
             <div class="col-6 text-right text-sm-left">
               {{ changedPolicyObject?.newValue }}
             </div>
           </div>
-        </div>
-      </ng-container>
-      <div class="container-fluid p-3 background-color-4">
-        <div class="row">
-          <div class="col-6 text-uppercase semi-bold">
+        </ng-container>
+        <div class="row p-2 background-color-4">
+          <div class="col-6 py-1 text-uppercase semi-bold">
             {{ 'forms.effectiveDate' | cxTranslate }}:
           </div>
-          <div class="col-6 text-right semi-bold text-sm-left">
+          <div class="col-6 py-1 text-right semi-bold text-sm-left">
             {{ currentDate | date: 'dd-MM-yyyy' }}
           </div>
-        </div>
-        <div class="row">
-          <div class="col-6 text-uppercase semi-bold">
+          <div class="col-6 py-1 text-uppercase semi-bold">
             {{ 'changeRequest.currentPremium' | cxTranslate }}
           </div>
-          <div class="col-6 text-right semi-bold text-sm-left">
+          <div class="col-6 py-1 text-right semi-bold text-sm-left">
             {{ changeRequest.insurancePolicy?.policyPremium?.formattedValue }} /
             {{ changeRequest.insurancePolicy?.paymentFrequency }}
           </div>
-        </div>
-        <div class="row">
-          <div class="col-6 text-uppercase semi-bold">
+          <div class="col-6 py-1 text-uppercase semi-bold">
             {{ 'changeRequest.newPremium' | cxTranslate }}:
           </div>
-          <div class="col-6 text-right semi-bold text-sm-left">
+          <div class="col-6 py-1 text-right semi-bold text-sm-left">
             {{ changeRequest.changedPolicy?.policyPremium?.formattedValue }} /
             {{ changeRequest.changedPolicy?.paymentFrequency }}
           </div>
@@ -128,7 +117,7 @@
     </div>
   </ng-container>
   <div class="row mt-5">
-    <div class="col-12 col-md-5 pb-2">
+    <div class="col-12 col-md-5 mb-3">
       <button
         class="action-button btn-block"
         (click)="cancelChangeRequest(changeRequest.requestId)"
@@ -136,7 +125,7 @@
         {{ 'common.cancel' | cxTranslate }}
       </button>
     </div>
-    <div class="col-12 col-md-5 offset-0 offset-md-2 pb-2">
+    <div class="col-12 col-md-5 ml-auto">
       <button
         class="primary-button btn-block"
         (click)="updateChangeRequest(changeRequest)"

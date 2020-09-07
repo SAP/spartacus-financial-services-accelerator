@@ -3,14 +3,15 @@ import { CanActivate } from '@angular/router';
 import {
   GlobalMessageService,
   GlobalMessageType,
+  OCC_USER_ID_ANONYMOUS,
   RoutingService,
   UserService,
 } from '@spartacus/core';
-import { filter, map } from 'rxjs/operators';
 import { combineLatest, Observable } from 'rxjs';
+import { filter, map, take } from 'rxjs/operators';
+import { FSCart, FSUser } from '../../../../src/occ/occ-models/occ.models';
 import { FSCartService } from '../../../core/cart/facade/cart.service';
 import { FormsUtils } from '../utils/forms-utils';
-import { FSCart, FSUser } from '../../../../src/occ/occ-models/occ.models';
 
 @Injectable({
   providedIn: 'root',
@@ -26,26 +27,27 @@ export class AutoPersonalDetailsGuard implements CanActivate {
     'insuranceQuote.quoteDetails.customerId';
   private readonly mainDriverDobPath =
     'insuranceQuote.insuredObjectList.insuredObjects[0].childInsuredObjectList.insuredObjects[0].dateOfBirth';
+
   canActivate(): Observable<boolean> {
     return combineLatest([
       this.cartService.getActive(),
       this.userService.get(),
       this.cartService.isStable(),
     ]).pipe(
-      filter(([cart, user, loaded]) => loaded),
+      filter(([_, user, loaded]) => this.isUserValid(user) && loaded),
+      take(1),
       map(([cart, user]) => {
-        const fsCart: FSCart = FormsUtils.serializeQuoteDetails(cart);
         const policyHolderSameAsMainDriver = FormsUtils.getValueByPath(
           this.policyHolderSameAsMainDriverPath,
-          fsCart
+          cart
         );
         if (
-          policyHolderSameAsMainDriver !== 'false' &&
-          policyHolderSameAsMainDriver !== undefined
+          !!policyHolderSameAsMainDriver &&
+          policyHolderSameAsMainDriver !== 'false'
         ) {
           const mainDriverDob = FormsUtils.getValueByPath(
             this.mainDriverDobPath,
-            fsCart
+            cart
           );
           const userDob = (<FSUser>user).dateOfBirth;
           if (FormsUtils.convertIfDate(mainDriverDob) === userDob) {
@@ -61,6 +63,12 @@ export class AutoPersonalDetailsGuard implements CanActivate {
         }
         return true;
       })
+    );
+  }
+
+  private isUserValid(user): boolean {
+    return (
+      user && Object.keys(user).length !== 0 && user !== OCC_USER_ID_ANONYMOUS
     );
   }
 }

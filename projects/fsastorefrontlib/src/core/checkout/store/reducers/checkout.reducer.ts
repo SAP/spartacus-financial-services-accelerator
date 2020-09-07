@@ -37,6 +37,13 @@ export function reducer(
         identificationType,
       };
     }
+    case fromAction.SET_LEGAL_INFORMATION_SUCCESS: {
+      const legalInformation = true;
+      return {
+        ...state,
+        legalInformation,
+      };
+    }
 
     case CheckoutActions.CREATE_PAYMENT_DETAILS_SUCCESS:
     case CheckoutActions.SET_PAYMENT_DETAILS_SUCCESS: {

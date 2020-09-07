@@ -102,55 +102,84 @@
           >
             <ul class="accordion-list container-fluid">
               <li
+                *ngIf="
+                  getTranslation(
+                    policy.categoryData?.code,
+                    insuredObject.insuredObjectType | lowercase
+                  ) as insuredObjectType
+                "
+                class="accordion-list-item row sub-title"
+              >
+                <div class="col-12">
+                  {{ insuredObjectType }}
+                </div>
+              </li>
+              <ng-container
                 *ngFor="
                   let insuredObjectItem of insuredObject.insuredObjectItems
                 "
-                class="accordion-list-item row"
               >
-                <div class="col-6 col-sm-5 item-label">
-                  {{ insuredObjectItem.label }}
-                </div>
-                <div class="col-6 col-sm-5 value notice">
-                  {{ insuredObjectItem.value }}
-                </div>
-                <ng-container
+                <li
                   *ngIf="
-                    insuredObjectItem.changeable &&
-                    isChangeAllowed(
-                      policy.categoryData?.allowedFSRequestTypes,
-                      'FSINSUREDOBJECT_CHANGE',
-                      policy.startDate
-                    )
+                    getTranslation(
+                      policy.categoryData?.code,
+                      insuredObjectItem.label
+                    ) as insuredObjectItemLabel
                   "
+                  class="accordion-list-item row"
                 >
-                  <div class="col-12 col-sm-2 value notice">
-                    <p
-                      (click)="
-                        changePolicyDetails(
-                          policy.policyNumber,
-                          policy.contractNumber,
-                          'FSINSUREDOBJECT_CHANGE'
-                        )
-                      "
-                      class="link mb-0"
-                    >
-                      {{ 'fscommon.edit' | cxTranslate }}
-                    </p>
+                  <div class="col-6 col-sm-5 item-label">
+                    {{ insuredObjectItemLabel }}
                   </div>
-                </ng-container>
-              </li>
+                  <div class="col-6 col-sm-5 value notice">
+                    {{ insuredObjectItem.value }}
+                  </div>
+                  <ng-container
+                    *ngIf="
+                      insuredObjectItem.changeable &&
+                      isChangeAllowed(
+                        policy.categoryData?.allowedFSRequestTypes,
+                        'FSINSUREDOBJECT_CHANGE',
+                        policy.startDate
+                      )
+                    "
+                  >
+                    <div class="col-12 col-sm-2 value notice">
+                      <p
+                        (click)="
+                          changePolicyDetails(
+                            policy.policyNumber,
+                            policy.contractNumber,
+                            'FSINSUREDOBJECT_CHANGE'
+                          )
+                        "
+                        class="link mb-0"
+                      >
+                        {{ 'fscommon.edit' | cxTranslate }}
+                      </p>
+                    </div>
+                  </ng-container>
+                </li>
+              </ng-container>
+            </ul>
+            <ng-container
+              *ngIf="
+                insuredObject.childInsuredObjectList?.insuredObjects?.length > 0
+              "
+            >
               <ng-container
-                *ngIf="
-                  insuredObject.childInsuredObjectList?.insuredObjects?.length >
-                  0
+                *ngFor="
+                  let childInsuredObject of insuredObject.childInsuredObjectList
+                    .insuredObjects;
+                  let i = index
                 "
               >
-                <ng-container
-                  *ngFor="
-                    let childInsuredObject of insuredObject
-                      .childInsuredObjectList.insuredObjects
-                  "
-                >
+                <ul class="accordion-list container-fluid">
+                  <li class="accordion-list-item row sub-title">
+                    <div class="col-12">
+                      {{ childInsuredObject.insuredObjectType }} {{ i + 1 }}
+                    </div>
+                  </li>
                   <ng-container
                     *ngIf="
                       childInsuredObject.insuredObjectItems &&
@@ -164,13 +193,17 @@
                     >
                       <li
                         *ngIf="
-                          childInsuredObjectItem.label !== 'customerId' ||
-                          childInsuredObjectItem.value !== 'false'
+                          (childInsuredObjectItem.label !== 'customerId' ||
+                            childInsuredObjectItem.value !== 'false') &&
+                          getTranslation(
+                            policy.categoryData?.code,
+                            childInsuredObjectItem.label
+                          ) as childInsuredObjectItemLabel
                         "
                         class="accordion-list-item row"
                       >
                         <div class="col-6 col-sm-5 item-label">
-                          {{ childInsuredObjectItem.label }}
+                          {{ childInsuredObjectItemLabel }}
                         </div>
                         <div class="col-6 col-sm-5 value notice">
                           {{ childInsuredObjectItem.value }}
@@ -194,9 +227,9 @@
                       </li>
                     </ng-container>
                   </ng-container>
-                </ng-container>
+                </ul>
               </ng-container>
-            </ul>
+            </ng-container>
           </ng-container>
         </ng-container>
       </cx-fs-accordion-item>

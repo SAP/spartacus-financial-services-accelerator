@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { OccEndpointsService } from '@spartacus/core';
+import { OccEndpointsService, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FormAdapter } from '../../../core/connectors/form.adapter';
@@ -20,7 +20,9 @@ export class OccFormAdapter implements FormAdapter {
   ) {}
 
   saveFormData(formData: YFormData): Observable<YFormData> {
-    const url = this.occEndpointService.getUrl('createFormData');
+    const url = this.occEndpointService.getUrl('createFormData', {
+      userId: OCC_USER_ID_CURRENT,
+    });
     let params: HttpParams = new HttpParams()
       .set('definitionId', formData.formDefinition.formId)
       .set('applicationId', formData.formDefinition.applicationId)
@@ -32,6 +34,7 @@ export class OccFormAdapter implements FormAdapter {
     if (formData.id) {
       const formDataId = formData.id;
       const updateUrl = this.occEndpointService.getUrl('formData', {
+        userId: OCC_USER_ID_CURRENT,
         formDataId,
       });
       return this.http
@@ -45,7 +48,10 @@ export class OccFormAdapter implements FormAdapter {
   }
 
   getFormData(formDataId: string): Observable<YFormData> {
-    const url = this.occEndpointService.getUrl('formData', { formDataId });
+    const url = this.occEndpointService.getUrl('formData', {
+      userId: OCC_USER_ID_CURRENT,
+      formDataId,
+    });
     return this.http
       .get<YFormData>(url)
       .pipe(catchError((error: any) => throwError(error.json())));

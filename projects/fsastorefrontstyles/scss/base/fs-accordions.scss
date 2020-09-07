@@ -42,6 +42,7 @@
   }
   .accordion-item-wrapper {
     display: flex;
+    flex-direction: column;
     transition: all 0.5s ease-in-out;
     max-height: 0;
     overflow: hidden;
@@ -63,11 +64,11 @@
     border-bottom: 1px solid var(--cx-color-3);
     padding: 14px 0;
     margin: 0;
-    &:last-child {
+    &:last-child,
+    &.sub-title {
       border-bottom: none;
     }
     .item-label {
-      padding-left: 0;
       font-weight: var(--cx-font-weight-semi);
       text-transform: capitalize;
     }

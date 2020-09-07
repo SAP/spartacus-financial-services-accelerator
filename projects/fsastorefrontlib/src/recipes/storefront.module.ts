@@ -73,6 +73,11 @@ import { layoutConfig } from './config/default-layout-config';
         },
       },
     }),
+    ConfigModule.withConfig({
+      date: {
+        format: 'yyyy-mm-dd',
+      },
+    }),
   ],
   exports: [B2cStorefrontModule, CmsLibModule],
   declarations: [],

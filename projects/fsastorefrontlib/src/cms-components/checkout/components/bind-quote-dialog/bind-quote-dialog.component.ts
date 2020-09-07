@@ -5,9 +5,13 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
+import { FormDataStorageService } from '@fsa/dynamicforms';
 import { ModalService } from '@spartacus/storefront';
-import { Subscription } from 'rxjs';
+import { combineLatest, Subscription } from 'rxjs';
+import { filter, map, take } from 'rxjs/operators';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
+import { FSCartService } from './../../../../core/cart/facade/cart.service';
+import { FSCart } from './../../../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-bind-quote-dialog',
@@ -25,7 +29,9 @@ export class BindQuoteDialogComponent {
 
   constructor(
     protected modalService: ModalService,
-    protected quoteService: QuoteService
+    protected quoteService: QuoteService,
+    protected cartService: FSCartService,
+    protected formDataStoragetService: FormDataStorageService
   ) {}
 
   dismissModal(reason?: any): void {
@@ -34,6 +40,28 @@ export class BindQuoteDialogComponent {
 
   bindQuote() {
     this.quoteService.bindQuote(this.cartCode);
+    combineLatest([this.cartService.getActive(), this.cartService.isStable()])
+      .pipe(
+        filter(([_, stable]) => stable),
+        take(1),
+        map(([cart, _]) => {
+          const personalDetailsFormId = (<FSCart>cart)?.entries?.[0]
+            .formData?.[0]?.id;
+          this.formDataStoragetService.clearFormDataIdFromLocalStorage(
+            personalDetailsFormId
+          );
+
+          const chooseCoverFormId = (<any>(
+            (<FSCart>cart).insuranceQuote?.quoteDetails?.entry
+          ))
+            ?.filter(details => details.key === 'formId')
+            .map(mapEntry => mapEntry.value)[0];
+          this.formDataStoragetService.clearFormDataIdFromLocalStorage(
+            chooseCoverFormId
+          );
+        })
+      )
+      .subscribe();
     this.quoteBinding$.emit(false);
   }
 }

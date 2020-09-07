@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import * as clone from 'clone';
 import { FSCart } from '../../../occ/occ-models/occ.models';
 
 @Injectable()
@@ -29,50 +30,5 @@ export class FormsUtils {
       return objectValue[attributeName][arrayPosition];
     }
     return objectValue[attribute];
-  }
-
-  static serializeQuoteDetails(cart): any {
-    const serializedFsCart: FSCart = cart;
-    if (cart && cart.insuranceQuote && cart.insuranceQuote) {
-      const insuranceQuote = cart.insuranceQuote;
-      if (insuranceQuote.quoteDetails && insuranceQuote.quoteDetails.entry) {
-        const serilizedQuoteDetails = {};
-        insuranceQuote.quoteDetails.entry.forEach(entry => {
-          serilizedQuoteDetails[entry.key] = entry.value;
-        });
-        serializedFsCart.insuranceQuote.quoteDetails = serilizedQuoteDetails;
-      }
-      if (
-        insuranceQuote.insuredObjectList &&
-        insuranceQuote.insuredObjectList.insuredObjects
-      ) {
-        const serializedInusredObjects = [];
-        insuranceQuote.insuredObjectList.insuredObjects.forEach(
-          insuredObject => {
-            serializedInusredObjects.push(
-              this.serializeInsuredObject(insuredObject)
-            );
-          }
-        );
-        serializedFsCart.insuranceQuote.insuredObjectList.insuredObjects = serializedInusredObjects;
-      }
-    }
-    return serializedFsCart;
-  }
-
-  private static serializeInsuredObject(insuredObject) {
-    if (insuredObject.insuredObjectItems) {
-      insuredObject.insuredObjectItems.forEach(item => {
-        insuredObject[item.label] = item.value;
-      });
-      if (insuredObject.childInsuredObjectList) {
-        insuredObject.childInsuredObjectList.insuredObjects.forEach(
-          childObject => {
-            this.serializeInsuredObject(childObject);
-          }
-        );
-      }
-    }
-    return insuredObject;
   }
 }

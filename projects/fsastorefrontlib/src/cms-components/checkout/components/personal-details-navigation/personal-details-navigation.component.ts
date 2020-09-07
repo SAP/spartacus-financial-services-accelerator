@@ -1,15 +1,14 @@
-import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Cart, RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
-import { map, take, switchMap } from 'rxjs/operators';
-import { FSSteps, FSOrderEntry } from '../../../../occ/occ-models/occ.models';
-
+import { map, switchMap, take } from 'rxjs/operators';
+import { FSOrderEntry, FSSteps } from '../../../../occ/occ-models/occ.models';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
 import { QuoteService } from './../../../../core/my-account/facade/quote.service';
+import { PricingService } from './../../../../core/product-pricing/facade/pricing.service';
 
 @Component({
   selector: 'cx-fs-personal-details-navigation',

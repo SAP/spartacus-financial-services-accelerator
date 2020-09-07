@@ -1,14 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
+  GlobalMessageService,
   RoutingService,
   UserService,
-  GlobalMessageService,
 } from '@spartacus/core';
-import { AutoPersonalDetailsGuard } from './auto-personal-details-guard';
-import { FSUser } from '../../../occ/occ-models/occ.models';
 import { of } from 'rxjs';
 import { FSCartService } from '../../../core/cart/facade/cart.service';
+import { FSUser } from '../../../occ/occ-models/occ.models';
+import { AutoPersonalDetailsGuard } from './auto-personal-details-guard';
 import createSpy = jasmine.createSpy;
 
 const mockUser: FSUser = {
@@ -62,6 +62,7 @@ describe('AutoPersonalDetailsGuard', () => {
 
   it('should redirect to homepage in case policyHolderSameAsMainDriver is set to true and DOBs are not the same', () => {
     const mockCart: any = {
+      entries: [],
       insuranceQuote: {
         quoteDetails: {
           customerId: 'true',
@@ -95,6 +96,7 @@ describe('AutoPersonalDetailsGuard', () => {
 
   it('should not redirect to homepage in case policyHolderSameAsMainDriver is set to false', () => {
     const mockCart: any = {
+      entries: [],
       insuranceQuote: {
         quoteDetails: {
           customerId: 'false',
@@ -128,6 +130,7 @@ describe('AutoPersonalDetailsGuard', () => {
 
   it('should not redirect to homepage in case policyHolderSameAsMainDriver is set to true and DOBs are same', () => {
     const mockCart: any = {
+      entries: [],
       insuranceQuote: {
         quoteDetails: {
           customerId: 'true',

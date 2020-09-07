@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { select, Store } from '@ngrx/store';
 import { AuthService, OrderEntry } from '@spartacus/core';
-import { map, take } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import {
   FSCart,
   FSOrderEntry,
@@ -52,13 +52,17 @@ export class QuoteService {
       .pipe(take(1))
       .subscribe(occUserId => {
         if (occUserId) {
-          this.cartService.loadCart(quote.cartCode);
+          this.cartService.loadCart(quote.cartCode, occUserId);
         }
       })
       .unsubscribe();
 
     this.cartService
       .getActive()
+      .pipe(
+        filter(cart => cart.code === quote.cartCode),
+        take(1)
+      )
       .subscribe((cart: FSCart) => {
         if (cart && cart.entries && cart.entries.length > 0) {
           const orderEntry: OrderEntry = cart.entries[0];

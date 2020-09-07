@@ -9,7 +9,6 @@ import {
   Output,
 } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { YFormData } from './../../models/form-occ.models';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../config/form-config';
@@ -17,6 +16,7 @@ import { GeneralHelpers } from '../../helpers/helpers';
 import { FormDefinition } from '../../models/form-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 import { FormDataService } from '../../services/data/form-data.service';
+import { YFormData } from './../../models/form-occ.models';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -104,7 +104,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         .getSubmittedForm()
         .pipe(
           map(form => {
-            if (form && !this.valid) {
+            if (this.checkInvalidControls(form)) {
               this.markInvalidControls(this.form);
               this.changeDetectorRef.detectChanges();
             } else if (
@@ -138,5 +138,9 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         }
       }
     }
+  }
+
+  private checkInvalidControls(formData: YFormData): boolean {
+    return !!(formData && !this.valid);
   }
 }
