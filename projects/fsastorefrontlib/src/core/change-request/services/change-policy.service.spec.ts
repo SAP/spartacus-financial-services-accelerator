@@ -1,13 +1,25 @@
 import { TestBed } from '@angular/core/testing';
 import { RequestType } from './../../../occ/occ-models/occ.models';
+import { FSTranslationService } from './../../i18n/facade/translation.service';
 import { ChangePolicyService } from './change-policy.service';
+
+class MockFSTranslationService {
+  getTranslationValue() {}
+}
 
 describe('ChangePolicyService', () => {
   let service: ChangePolicyService;
+  let translationService: FSTranslationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ChangePolicyService],
+      providers: [
+        ChangePolicyService,
+        {
+          provide: FSTranslationService,
+          useClass: MockFSTranslationService,
+        },
+      ],
     });
 
     service = TestBed.inject(ChangePolicyService);
