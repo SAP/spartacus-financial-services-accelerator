@@ -9,7 +9,6 @@ class MockFSTranslationService {
 
 describe('ChangePolicyService', () => {
   let service: ChangePolicyService;
-  let translationService: FSTranslationService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
