@@ -14,17 +14,18 @@ export class PopUpComponent implements AfterViewInit {
   ) {}
 
   modalInstance: any;
+
   @ViewChild('content') modalContent;
 
   open() {
-    this.modalService.open(this.modalContent, {
-      centered: true,
-      size: 'lg',
-    });
-  }
-  close() {
-    this.modalService.closeActiveModal();
-    this.formComponentService.populatedFormInvalidSource.next(false);
+    this.modalService
+      .open(this.modalContent, {
+        centered: true,
+        size: 'lg',
+      })
+      .result.catch(() => {
+        this.formComponentService.populatedFormInvalidSource.next(false);
+      });
   }
 
   ngAfterViewInit() {
