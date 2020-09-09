@@ -109,6 +109,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         .pipe(
           map(form => {
             if (this.checkInvalidControls(form)) {
+              this.formComponentService.populatedFormInvalidSource.next(true);
               this.markInvalidControls(this.form);
               this.changeDetectorRef.detectChanges();
             } else if (
@@ -139,7 +140,6 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         const control = <FormControl>formControl;
         if (!control.valid) {
           control.markAsTouched({ onlySelf: true });
-          this.formComponentService.populatedFormInvalidSource.next(true);
         }
       }
     }

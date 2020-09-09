@@ -1,4 +1,4 @@
-import { Component, AfterViewChecked, ViewChild } from '@angular/core';
+import { Component, ViewChild, AfterViewInit } from '@angular/core';
 
 import { ModalService } from '@spartacus/storefront';
 import { FormComponentService } from '../form-component.service';
@@ -7,7 +7,7 @@ import { FormComponentService } from '../form-component.service';
   selector: 'cx-pop-up',
   templateUrl: './pop-up.component.html',
 })
-export class PopUpComponent implements AfterViewChecked {
+export class PopUpComponent implements AfterViewInit {
   constructor(
     protected modalService: ModalService,
     protected formComponentService: FormComponentService
@@ -16,15 +16,18 @@ export class PopUpComponent implements AfterViewChecked {
   modalInstance: any;
   @ViewChild('content') modalContent;
 
+  open() {
+    this.modalService.open(this.modalContent, {
+      centered: true,
+      size: 'lg',
+    });
+  }
   close() {
     this.modalService.closeActiveModal();
     this.formComponentService.populatedFormInvalidSource.next(false);
   }
 
-  ngAfterViewChecked() {
-    this.modalService.open(this.modalContent, {
-      centered: true,
-      size: 'lg',
-    });
+  ngAfterViewInit() {
+    this.open();
   }
 }
