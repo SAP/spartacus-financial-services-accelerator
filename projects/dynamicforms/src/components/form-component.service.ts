@@ -5,6 +5,6 @@ import { BehaviorSubject } from 'rxjs';
 export class FormComponentService {
   constructor() {}
 
-  populatedFormInvalidSource = new BehaviorSubject<boolean>(null);
-  populatedFormInvalid = this.populatedFormInvalidSource.asObservable();
+  isPopulatedFormInvalidSource = new BehaviorSubject<boolean>(null);
+  isPopulatedFormInvalid = this.isPopulatedFormInvalidSource.asObservable();
 }

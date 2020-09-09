@@ -24,7 +24,7 @@ export class PopUpComponent implements AfterViewInit {
         size: 'lg',
       })
       .result.catch(() => {
-        this.formComponentService.populatedFormInvalidSource.next(false);
+        this.formComponentService.isPopulatedFormInvalidSource.next(false);
       });
   }
 

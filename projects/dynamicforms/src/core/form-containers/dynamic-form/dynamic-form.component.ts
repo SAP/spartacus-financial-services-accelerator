@@ -17,7 +17,7 @@ import { FormDefinition } from '../../models/form-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 import { FormDataService } from '../../services/data/form-data.service';
 import { YFormData } from './../../models/form-occ.models';
-import { FormComponentService } from 'projects/dynamicforms/src/components/form-component.service';
+import { FormComponentService } from '../../../components/form-component.service';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -56,7 +56,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.populatedInvalid$ = this.formComponentService.populatedFormInvalid;
+    this.populatedInvalid$ = this.formComponentService.isPopulatedFormInvalid;
     if (this.config) {
       this.form = this.formService.createForm(this.config);
     }
@@ -109,7 +109,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         .pipe(
           map(form => {
             if (this.checkInvalidControls(form)) {
-              this.formComponentService.populatedFormInvalidSource.next(true);
+              this.formComponentService.isPopulatedFormInvalidSource.next(true);
               this.markInvalidControls(this.form);
               this.changeDetectorRef.detectChanges();
             } else if (
