@@ -118,3 +118,21 @@ export function populatePersonalDetails() {
     .click();
   cy.get('[name="totalMonthlyExpenses"]').type('5050');
 }
+
+export function populatePersonalDetailsLoanAndCA() {
+  cy.get('[name="dateOfBirth"]').type('1987-01-01');
+  cy.get('[name="maritalStatus"]').select('married');
+  cy.get('[name="numberOfFinancialDependants"]').select('4');
+  cy.get('[name="isResidentOfBanksCountry"]')
+    .eq(0)
+    .click();
+  cy.get('[name="isUsCitizen"]')
+    .eq(1)
+    .click();
+  cy.get('[name="residentialStatus"]').select('living-with-parent-relative');
+  cy.get('[name="residentialAddress"]').type('Omladinskih Brigada');
+  cy.get('[name="movingInDateToResidentialAddress"]').type('2002-01-01');
+  cy.get('[name="isPostalSameAsResidential"]')
+    .eq(0)
+    .click();
+}
