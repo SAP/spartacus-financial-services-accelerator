@@ -23,48 +23,18 @@
         <ng-container
           *ngFor="let changedPolicyObject of changedPolicyObjects; index as i"
         >
-          <ng-container
-            *ngIf="
-              changeRequest.fsStepGroupDefinition.requestType.code ===
-              'FSINSUREDOBJECT_CHANGE'
-            "
-          >
-            <div class="row p-3 font-weight-bold">
-              <div class="col-1">{{ i + 1 }}.</div>
-              <div class="col-4">
-                {{ 'forms.auto.' + changedPolicyObject?.label | cxTranslate }}
-              </div>
-              <div class="col-4">
-                {{ changedPolicyObject?.oldValue }}
-              </div>
-              <div class="col-3 notice">
-                {{ changedPolicyObject?.newValue }}
-              </div>
+          <div class="row p-3 font-weight-bold">
+            <div class="col-1">{{ i + 1 }}.</div>
+            <div class="col-4">
+              {{ changedPolicyObject?.label }}
             </div>
-          </ng-container>
-          <ng-container
-            *ngIf="
-              changeRequest.fsStepGroupDefinition.requestType.code ===
-              'FSCOVERAGE_CHANGE'
-            "
-          >
-            <div class="row p-3 font-weight-bold border-bottom border-color-4">
-              <div class="col-1">{{ i + 1 }}.</div>
-              <div class="col-4">
-                {{ changedPolicyObject?.label }}
-              </div>
-              <div class="col-4">
-                {{
-                  'changeRequest.' + changedPolicyObject?.oldValue | cxTranslate
-                }}
-              </div>
-              <div class="col-3 notice">
-                {{
-                  'changeRequest.' + changedPolicyObject?.newValue | cxTranslate
-                }}
-              </div>
+            <div class="col-4">
+              {{ changedPolicyObject?.oldValue }}
             </div>
-          </ng-container>
+            <div class="col-3 notice">
+              {{ changedPolicyObject?.newValue }}
+            </div>
+          </div>
         </ng-container>
         <div class="row p-3 background-color-4">
           <div class="offset-1 col-4 pb-3 text-uppercase semi-bold">
@@ -104,69 +74,20 @@
             <div class="col-6 py-1 semi-bold">
               {{ 'changeRequest.description' | cxTranslate }}
             </div>
-            <div class="col-6 py-1 text-right text-sm-left">
-              <ng-container
-                *ngIf="
-                  changeRequest.fsStepGroupDefinition.requestType.code ===
-                  'FSINSUREDOBJECT_CHANGE'
-                "
-              >
-                {{ 'forms.auto.' + changedPolicyObject?.label | cxTranslate }}
-              </ng-container>
-              <ng-container
-                *ngIf="
-                  changeRequest.fsStepGroupDefinition.requestType.code ===
-                  'FSCOVERAGE_CHANGE'
-                "
-              >
-                {{ changedPolicyObject?.label }}
-              </ng-container>
+            <div class="col-6 text-right text-sm-left">
+              {{ changedPolicyObject?.label }}
             </div>
             <div class="col-6 py-1 semi-bold">
               {{ 'changeRequest.currentSelection' | cxTranslate }}
             </div>
-            <div class="col-6 py-1 text-right text-sm-left">
-              <ng-container
-                *ngIf="
-                  changeRequest.fsStepGroupDefinition.requestType.code ===
-                  'FSINSUREDOBJECT_CHANGE'
-                "
-              >
-                {{ changedPolicyObject?.oldValue }}
-              </ng-container>
-              <ng-container
-                *ngIf="
-                  changeRequest.fsStepGroupDefinition.requestType.code ===
-                  'FSCOVERAGE_CHANGE'
-                "
-              >
-                {{
-                  'changeRequest.' + changedPolicyObject?.oldValue | cxTranslate
-                }}
-              </ng-container>
+            <div class="col-6 text-right text-sm-left">
+              {{ changedPolicyObject?.oldValue }}
             </div>
             <div class="col-6 py-1 semi-bold">
               {{ 'changeRequest.newSelection' | cxTranslate }}
             </div>
-            <div class="col-6 py-1 text-right text-sm-left">
-              <ng-container
-                *ngIf="
-                  changeRequest.fsStepGroupDefinition.requestType.code ===
-                  'FSINSUREDOBJECT_CHANGE'
-                "
-              >
-                {{ changedPolicyObject?.newValue }}
-              </ng-container>
-              <ng-container
-                *ngIf="
-                  changeRequest.fsStepGroupDefinition.requestType.code ===
-                  'FSCOVERAGE_CHANGE'
-                "
-              >
-                {{
-                  'changeRequest.' + changedPolicyObject?.newValue | cxTranslate
-                }}
-              </ng-container>
+            <div class="col-6 text-right text-sm-left">
+              {{ changedPolicyObject?.newValue }}
             </div>
           </div>
         </ng-container>

@@ -2,13 +2,22 @@ import { PolicyModule } from './../../../cms-components/my-account/policy/policy
 import { ChangedPolicyData } from './../../../occ/occ-models/occ.models';
 import { RequestType } from './../../../occ/occ-models/occ.models';
 import { Injectable } from '@angular/core';
+import { FSTranslationService } from '../../../core/i18n/facade/translation.service';
 
 @Injectable({
   providedIn: PolicyModule,
 })
 export class ChangePolicyService {
+  constructor(protected translationService: FSTranslationService) {}
+
   changedPolicyObjects: ChangedPolicyData[] = [];
 
+  getTranslation(translationChunks: string[], translationKey: string): string {
+    return this.translationService.getTranslationValue(
+      translationChunks,
+      translationKey
+    );
+  }
   getChangedPolicyObjects(changeRequestData: any): ChangedPolicyData[] {
     this.changedPolicyObjects = [];
     if (
@@ -29,8 +38,12 @@ export class ChangePolicyService {
                 insuredObjectItem.label,
                 changeRequestData.changedPolicy
               );
+              const translatedLabel = this.getTranslation(
+                ['forms', 'auto'],
+                insuredObjectItem.label
+              );
               this.setChangedPolicyObject(
-                insuredObjectItem.label,
+                translatedLabel,
                 insuredObjectItem.value,
                 newVal
               );
@@ -47,10 +60,18 @@ export class ChangePolicyService {
                 optionalProduct.coverageProduct.cartDisplayName,
                 changeRequestData.changedPolicy
               );
+              const translatedOldValue = this.getTranslation(
+                ['changeRequest'],
+                optionalProduct.coverageIsIncluded
+              );
+              const translatedNewValue = this.getTranslation(
+                ['changeRequest'],
+                newVal
+              );
               this.setChangedPolicyObject(
                 optionalProduct.coverageProduct.cartDisplayName,
-                optionalProduct.coverageIsIncluded,
-                newVal
+                translatedOldValue,
+                translatedNewValue
               );
             });
           }
