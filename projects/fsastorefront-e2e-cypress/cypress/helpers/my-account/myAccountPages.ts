@@ -21,10 +21,11 @@ export function checkSavingsData() {
   cy.get('.premium-data-row').within(() => {
     cy.contains('Savings Insurance');
     cy.contains('Half-yearly');
-    cy.contains('€781.99');
+    cy.contains('€817.23');
   });
-  cy.get('.premium-data-row').click();
+  cy.get('.premium-data-row').click({ force: true });
   cy.get('.container-fluid').should('be.visible');
+  cy.get('.color-dot').contains('€817.23');
 }
 
 export function checkCloseAccountPage() {
@@ -52,4 +53,5 @@ export function closeAccount() {
       cy.get('.btn-secondary').contains('Cancel');
       cy.get('.btn-primary').contains('CLOSE MY ACCOUNT').click();
     });
+  cy.get('.alert-success').should('have.text', 'Account closed with success');
 }

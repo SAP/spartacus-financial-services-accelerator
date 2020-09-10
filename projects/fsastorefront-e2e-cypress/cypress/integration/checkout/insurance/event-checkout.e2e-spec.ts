@@ -23,7 +23,6 @@ context('Event Checkout', () => {
   });
 
   it('Should open event category page', () => {
-    checkout.waitForHomepage();
     checkout.startInsuranceCheckout('Event');
   });
 
@@ -92,5 +91,14 @@ context('Event Checkout', () => {
     cy.wait(500);
     myAccount.checkCloseAccountPage();
     myAccount.closeAccount();
+  });
+
+  it('Closed account user cannot login', () => {
+    cy.visit('/login');
+    register.login(registrationUser.email, registrationUser.password);
+    cy.get('.alert-danger').should(
+      'have.text',
+      'User is disabled. Please login again.'
+    );
   });
 });

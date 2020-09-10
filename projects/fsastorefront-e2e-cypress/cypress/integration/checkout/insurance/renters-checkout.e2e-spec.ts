@@ -24,7 +24,6 @@ context('Renters Checkout', () => {
   });
 
   it('Should open renters category page', () => {
-    checkout.waitForHomepage();
     checkout.startInsuranceCheckout('Renters');
   });
 

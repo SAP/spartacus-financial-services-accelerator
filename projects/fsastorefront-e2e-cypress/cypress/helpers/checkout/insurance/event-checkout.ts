@@ -81,7 +81,6 @@ export function populatePersonalDetails() {
 export function checkEventPolicy() {
   cy.get('.title').contains('Event Insurance');
   cy.get('.value').contains('Two Star Event Plan');
-
   cy.get('.label').contains('Premium');
   cy.get('.value').contains('€47.99');
 }

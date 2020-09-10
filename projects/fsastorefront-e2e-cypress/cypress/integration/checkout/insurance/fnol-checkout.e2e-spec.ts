@@ -31,7 +31,7 @@ context('FNOL for sample data user', () => {
     cy.get('.heading-headline').should('have.text', 'Login');
   });
 
-  it('Should check no policies page for new user', () => {
+  it('Should check on policies page for new user', () => {
     cy.visit('/login');
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
@@ -41,6 +41,8 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should complete first step auto checkout', () => {
+    cy.visit('/');
+    cy.wait(500);
     auto.openCategoryPage();
     auto.populateAutoInformation();
     auto.populateMainDriverInfo();
@@ -78,6 +80,7 @@ context('FNOL for sample data user', () => {
   });
 
   it('Select default payment details', () => {
+    checkout.clickContinueButton();
     selectPaymentMethod();
   });
 

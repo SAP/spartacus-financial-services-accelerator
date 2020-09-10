@@ -25,7 +25,6 @@ context('Savings Insurance Checkout', () => {
   });
 
   it('Should start Savings checkout', () => {
-    checkout.waitForHomepage();
     checkout.startInsuranceCheckout('Savings');
   });
 
@@ -71,6 +70,7 @@ context('Savings Insurance Checkout', () => {
     addPaymentMethod(registrationUserWithoutPhone.email, cartId);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
+    checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {

@@ -123,7 +123,7 @@ export function checkMyAccountEmptyPages(myAccountPage, emptyPageMessage) {
     menuOption: 'My Account',
     dropdownItem: myAccountPage,
   });
-  cy.wait(500);
+  cy.wait(1000);
   cy.get('h2').contains(myAccountPage);
   cy.get('h3').contains(emptyPageMessage);
 }
