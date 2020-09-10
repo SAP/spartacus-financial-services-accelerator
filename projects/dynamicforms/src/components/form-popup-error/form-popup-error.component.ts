@@ -1,13 +1,12 @@
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
-
 import { ModalService } from '@spartacus/storefront';
 import { FormComponentService } from '../form-component.service';
 
 @Component({
-  selector: 'cx-pop-up',
-  templateUrl: './pop-up.component.html',
+  selector: 'cx-form-popup-error',
+  templateUrl: './form-popup-error.component.html',
 })
-export class PopUpComponent implements AfterViewInit {
+export class FormPopupErrorComponent implements AfterViewInit {
   constructor(
     protected modalService: ModalService,
     protected formComponentService: FormComponentService

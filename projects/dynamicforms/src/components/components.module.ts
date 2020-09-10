@@ -17,7 +17,7 @@ import { SeparatorComponent } from './separator/separator.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { AbstractOptionsComponent } from './abstract-options/abstract-options.component';
 import { DynamicSelectComponent } from './dynamic-select/dynamic-select.component';
-import { PopUpComponent } from './pop-up/pop-up.component';
+import { FormPopupErrorComponent } from './form-popup-error/form-popup-error.component';
 import { DataHolderComponent } from './data-holder/data-holder.component';
 import { FormComponentService } from './form-component.service';
 
@@ -40,7 +40,7 @@ import { FormComponentService } from './form-component.service';
     SeparatorComponent,
     CheckboxComponent,
     DynamicSelectComponent,
-    PopUpComponent,
+    FormPopupErrorComponent,
   ],
   entryComponents: [
     AbstractFormComponent,
@@ -75,7 +75,7 @@ import { FormComponentService } from './form-component.service';
     SeparatorComponent,
     CheckboxComponent,
     DynamicSelectComponent,
-    PopUpComponent,
+    FormPopupErrorComponent,
   ],
   providers: [FormComponentService],
 })
