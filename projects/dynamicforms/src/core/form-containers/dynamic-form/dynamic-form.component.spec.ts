@@ -16,6 +16,7 @@ import {
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 import { FormDataService } from '../../services/data/form-data.service';
 import { DynamicFormComponent } from './dynamic-form.component';
+import { FormComponentService } from '../../../components/form-component.service';
 
 @Directive({
   // tslint:disable
@@ -72,15 +73,22 @@ export class MockFormDataService {
   }
 }
 
+export class MockFormComponentService {
+  isPopulatedFormInvalidSource = new BehaviorSubject<boolean>(true);
+  isPopulatedFormInvalid = of(false);
+}
+
 describe('DynamicFormComponent', () => {
   let component: DynamicFormComponent;
   let fixture: ComponentFixture<DynamicFormComponent>;
   let mockFormBuilderService: MockFormBuilderService;
   let mockFormDataService: MockFormDataService;
+  let mockFormComponentService: MockFormComponentService;
 
   beforeEach(async(() => {
     mockFormBuilderService = new MockFormBuilderService();
     mockFormDataService = new MockFormDataService();
+    mockFormComponentService = new MockFormComponentService();
     TestBed.configureTestingModule({
       imports: [ReactiveFormsModule],
       declarations: [DynamicFormComponent, MockDynamicFieldDirective],
@@ -92,6 +100,10 @@ describe('DynamicFormComponent', () => {
         {
           provide: FormDataService,
           useValue: mockFormDataService,
+        },
+        {
+          provide: FormComponentService,
+          useValue: mockFormComponentService,
         },
         {
           provide: DynamicFormsConfig,
