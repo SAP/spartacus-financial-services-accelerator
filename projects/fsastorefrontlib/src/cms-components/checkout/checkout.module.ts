@@ -10,6 +10,7 @@ import {
   I18nModule,
   RoutesConfig,
   RoutingConfig,
+  UrlModule,
 } from '@spartacus/core';
 import {
   CardModule,
@@ -193,6 +194,7 @@ const routes: Routes = [
     PaymentMethodModule,
     PaymentFormModule,
     CardModule,
+    UrlModule,
     FSCheckoutProgressModule,
     FSCheckoutStoreModule,
     RouterModule.forChild(routes),

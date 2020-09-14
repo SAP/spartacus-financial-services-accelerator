@@ -58,11 +58,23 @@
                       >
                       </ng-container>
                     </ul>
-                    <div class="col-12 col-md-6">
-                      <button class="action-button btn-block">
-                        {{ 'fscommon.edit' | cxTranslate }}
-                      </button>
-                    </div>
+                    <ng-container
+                      *ngIf="cart.insuranceQuote?.state?.code !== 'BIND'"
+                    >
+                      <div class="col-12 col-md-6">
+                        <button
+                          class="action-button btn-block"
+                          [routerLink]="
+                            {
+                              cxRoute: 'generalInformation',
+                              params: { code: activeCategory }
+                            } | cxUrl
+                          "
+                        >
+                          {{ 'fscommon.edit' | cxTranslate }}
+                        </button>
+                      </div>
+                    </ng-container>
                   </div>
                 </div>
               </cx-fs-accordion-item>
@@ -109,11 +121,25 @@
                     </ng-container>
                   </ng-container>
                 </ul>
-                <div class="col-12 col-md-6">
-                  <button class="action-button btn-block">
-                    {{ 'fscommon.edit' | cxTranslate }}
-                  </button>
-                </div>
+                <ng-container
+                  *ngIf="cart.insuranceQuote?.state?.code !== 'BIND'"
+                >
+                  <div class="col-12 col-md-6">
+                    <button
+                      class="action-button btn-block"
+                      [routerLink]="
+                        {
+                          cxRoute: 'category',
+                          params: {
+                            code: activeCategory
+                          }
+                        } | cxUrl
+                      "
+                    >
+                      {{ 'fscommon.edit' | cxTranslate }}
+                    </button>
+                  </div>
+                </ng-container>
               </div>
             </div>
           </cx-fs-accordion-item>
@@ -137,11 +163,22 @@
                       </li>
                     </ng-container>
                   </ul>
-                  <div class="col-12 col-md-6">
-                    <button class="action-button btn-block">
-                      {{ 'fscommon.edit' | cxTranslate }}
-                    </button>
-                  </div>
+                  <ng-container
+                    *ngIf="cart.insuranceQuote?.state?.code !== 'BIND'"
+                  >
+                    <div class="col-12 col-md-6">
+                      <button
+                        class="action-button btn-block"
+                        [routerLink]="
+                          {
+                            cxRoute: 'addOptions'
+                          } | cxUrl
+                        "
+                      >
+                        {{ 'fscommon.edit' | cxTranslate }}
+                      </button>
+                    </div>
+                  </ng-container>
                 </div>
               </div>
             </cx-fs-accordion-item>
@@ -192,11 +229,15 @@
                       </ng-container>
                     </ng-container>
                   </ul>
-                  <div class="col-12 col-md-6">
-                    <button class="action-button btn-block">
-                      {{ 'fscommon.edit' | cxTranslate }}
-                    </button>
-                  </div>
+                  <ng-container
+                    *ngIf="cart.insuranceQuote?.state?.code !== 'BIND'"
+                  >
+                    <div class="col-12 col-md-6">
+                      <button class="action-button btn-block">
+                        {{ 'fscommon.edit' | cxTranslate }}
+                      </button>
+                    </div>
+                  </ng-container>
                 </div>
               </div>
             </cx-fs-accordion-item>
@@ -233,11 +274,22 @@
                     </ng-container>
                   </ng-container>
                 </ul>
-                <div class="col-12 col-md-6">
-                  <button class="action-button btn-block">
-                    {{ 'fscommon.edit' | cxTranslate }}
-                  </button>
-                </div>
+                <ng-container
+                  *ngIf="cart.insuranceQuote?.state?.code !== 'BIND'"
+                >
+                  <div class="col-12 col-md-6">
+                    <button
+                      class="action-button btn-block"
+                      [routerLink]="
+                        {
+                          cxRoute: 'checkoutPersonalDetails'
+                        } | cxUrl
+                      "
+                    >
+                      {{ 'fscommon.edit' | cxTranslate }}
+                    </button>
+                  </div>
+                </ng-container>
               </div>
             </div>
           </cx-fs-accordion-item>
