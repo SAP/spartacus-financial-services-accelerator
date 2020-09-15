@@ -101,7 +101,7 @@ export class FSRegisterComponent extends RegisterComponent {
     return this.config.date.format || '';
   }
 
-  private isFSConsentRequired(): boolean {
+  protected isFSConsentRequired(): boolean {
     const {
       requiredConsents,
       registerConsent,
