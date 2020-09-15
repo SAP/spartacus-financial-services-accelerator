@@ -27,6 +27,7 @@ export interface FieldConfig {
   validations?: ValidatorFunction[];
   dependsOn?: DependsOn;
   prefillValue?: PrefillValue;
+  readonly?: boolean;
 }
 export interface DependsOn {
   hide?: boolean;
