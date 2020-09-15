@@ -17,7 +17,9 @@ import { SeparatorComponent } from './separator/separator.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { AbstractOptionsComponent } from './abstract-options/abstract-options.component';
 import { DynamicSelectComponent } from './dynamic-select/dynamic-select.component';
+import { FormPopupErrorComponent } from './form-popup-error/form-popup-error.component';
 import { DataHolderComponent } from './data-holder/data-holder.component';
+import { FormComponentService } from './form-component.service';
 
 @NgModule({
   imports: [CommonModule, ReactiveFormsModule, I18nModule],
@@ -38,6 +40,7 @@ import { DataHolderComponent } from './data-holder/data-holder.component';
     SeparatorComponent,
     CheckboxComponent,
     DynamicSelectComponent,
+    FormPopupErrorComponent,
   ],
   entryComponents: [
     AbstractFormComponent,
@@ -72,6 +75,8 @@ import { DataHolderComponent } from './data-holder/data-holder.component';
     SeparatorComponent,
     CheckboxComponent,
     DynamicSelectComponent,
+    FormPopupErrorComponent,
   ],
+  providers: [FormComponentService],
 })
 export class ComponentsModule {}

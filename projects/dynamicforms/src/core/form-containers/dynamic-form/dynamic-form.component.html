@@ -17,5 +17,8 @@
         </ng-container>
       </div>
     </ng-container>
+    <ng-container *ngIf="populatedInvalid$ | async">
+      <cx-form-popup-error></cx-form-popup-error>
+    </ng-container>
   </form>
 </ng-container>
