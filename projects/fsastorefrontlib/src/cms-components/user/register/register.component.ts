@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { DefaultFormValidators } from '@fsa/dynamicforms';
 import {
   AnonymousConsentsConfig,
@@ -35,8 +40,7 @@ export class FSRegisterComponent extends RegisterComponent {
       anonymousConsentsConfig
     );
   }
-
-  userRegistrationForm: FormGroup = this.fb.group(
+  registerForm: FormGroup = this.fb.group(
     {
       titleCode: ['', Validators.required],
       firstName: ['', Validators.required],
@@ -62,7 +66,10 @@ export class FSRegisterComponent extends RegisterComponent {
         ],
       ],
       passwordconf: ['', Validators.required],
-      newsletter: [false],
+      newsletter: new FormControl({
+        value: false,
+        disabled: this.isFSConsentRequired(),
+      }),
       termsandconditions: [false, Validators.requiredTrue],
     },
     { validator: DefaultFormValidators.matchFields('password', 'passwordconf') }
@@ -90,21 +97,20 @@ export class FSRegisterComponent extends RegisterComponent {
     };
   }
 
-  submitForm(): void {
-    if (this.userRegistrationForm.valid) {
-      this.registerUser();
-    } else {
-      this.userRegistrationForm.markAllAsTouched();
-    }
-  }
-
-  registerUser(): void {
-    this.userService.register(
-      this.collectDataFromRegisterForm(this.userRegistrationForm.value)
-    );
-  }
-
   getDateFormat() {
     return this.config.date.format || '';
+  }
+
+  private isFSConsentRequired(): boolean {
+    const {
+      requiredConsents,
+      registerConsent,
+    } = this.anonymousConsentsConfig?.anonymousConsents;
+
+    if (requiredConsents && registerConsent) {
+      return requiredConsents.includes(registerConsent);
+    }
+
+    return false;
   }
 }
