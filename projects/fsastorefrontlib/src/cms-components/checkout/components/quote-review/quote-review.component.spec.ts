@@ -262,4 +262,9 @@ describe('Quote Review Component', () => {
     );
     expect(translationValue).toEqual('test value');
   });
+
+  it('step should not be editable if quote status id BIND', () => {
+    const result = component.isEditable('BIND');
+    expect(result).toEqual(false);
+  });
 });

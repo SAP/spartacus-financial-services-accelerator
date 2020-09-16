@@ -32,7 +32,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   cartCode: string;
   previousCheckoutStep$: Observable<FSSteps>;
   nextCheckoutStep$: Observable<FSSteps>;
-  activeCategory: string;
+  activeCategory$: Observable<String>;
 
   constructor(
     protected cartService: FSCartService,
@@ -50,17 +50,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     this.isCartStable$ = this.cartService.isStable();
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
-
-    this.subscription.add(
-      this.categoryService
-        .getActiveCategory()
-        .pipe(
-          map(activeCategory => {
-            this.activeCategory = activeCategory;
-          })
-        )
-        .subscribe()
-    );
+    this.activeCategory$ = this.categoryService.getActiveCategory();
   }
 
   getBaseUrl() {
@@ -157,5 +147,9 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
       ['quoteReview', translationGroup],
       translationKey
     );
+  }
+
+  isEditable(code: string): boolean {
+    return code === BindingStateType.BIND ? false : true;
   }
 }
