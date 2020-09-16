@@ -15,7 +15,6 @@ export function checkAgentLocatorPage() {
       cy.get('.primary-button').contains('List View').and('not.be.disabled');
     });
   cy.get('.cx-store-map').should('be.visible');
-  cy.get('cx-pagination').should('be.visible');
   cy.get('.agent-list').should('be.visible');
   cy.get('cx-footer-navigation').should('be.visible');
 }
@@ -120,7 +119,7 @@ export function contactAgentByName(agentName) {
 export function locateSavingsAgent() {
   cy.get('.accordion-heading')
     .contains(' Savings ')
-    .click()
+    .click({ force: true })
     .parent()
     .within(() => {
       cy.get('.agent-container').should('have.length', 4);

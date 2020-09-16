@@ -1,9 +1,8 @@
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
-import * as productCategory from '../../../helpers/productCategoryPage';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import { checkPersonalDetailsPage } from '../../../helpers/checkout/checkoutSteps';
-import { checkInboxComponets } from '../../../helpers/my-account/inbox';
+import * as inbox from '../../../helpers/my-account/inbox';
 import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
 import * as creditCard from '../../../helpers/checkout/banking/creditCard';
 import * as userIdentification from '../../../helpers/checkout/banking/userIdentificationPage';
@@ -11,12 +10,12 @@ import * as userIdentification from '../../../helpers/checkout/banking/userIdent
 context('Credit Card Checkout', () => {
   before(() => {
     cy.visit('/');
+    register.registerUser(registrationUser);
+    register.login(registrationUser.email, registrationUser.password);
   });
 
   it('Should register a new user and start Credit Card checkout', () => {
-    register.registerUser(registrationUser);
-    register.login(registrationUser.email, registrationUser.password);
-    checkout.waitForHomepage();
+    cy.wait(500);
     banking.startBankingCheckout('Credit Card');
   });
 
@@ -49,16 +48,18 @@ context('Credit Card Checkout', () => {
     checkout.checkCheckoutStep('Your Credit Card Application', '7');
     checkPersonalDetailsPage();
     creditCard.populatePersonalDetails();
+    creditCard.populateAdditionalApplicant();
     checkout.clickContinueButton();
   });
 
   it('Should check Quote Review page', () => {
     banking.checkBankingProgressBar();
-    checkout.checkAccordions('generalQuoteAccordions');
+    checkout.checkAccordions('quoteReviewWithoutOptional');
   });
 
   it('Should bind Quote', () => {
     checkout.bindQuotePopup();
+    checkout.clickContinueButton();
   });
 
   it('Should check Legal Information page', () => {
@@ -85,7 +86,9 @@ context('Credit Card Checkout', () => {
       menuOption: 'My Account',
       dropdownItem: 'Inbox',
     });
-    checkInboxComponets();
+    inbox.checkInboxComponets();
+    inbox.checkGeneralTab();
+    cy.wait(500);
     cy.get('div.col-6').contains(' Order Pending ');
   });
 });

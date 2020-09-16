@@ -23,7 +23,7 @@ export function checkLegalInformationPage() {
   cy.get('cx-fs-legal-documents > .border-color-3')
     .should('be.visible')
     .within(() => {
-      cy.get('li.pb-1').should('have.length', 4);
+      cy.get('li.pb-3').should('have.length', 4);
     });
   cy.get('cx-fs-legal-checkboxes').within(() => {
     cy.get('input[type="checkbox"]').click({ multiple: true, force: true });
@@ -43,5 +43,5 @@ export function startBankingCheckout(mainProduct) {
   });
   cy.get('.enriched-banner-styled-text')
     .should('contain', ' Request a product')
-    .click();
+    .click({ multiple: true, force: true });
 }

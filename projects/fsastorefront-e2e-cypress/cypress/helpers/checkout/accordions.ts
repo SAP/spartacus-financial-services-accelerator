@@ -11,6 +11,12 @@ export const quoteReviewAccordionGroup2 = [
   'Personal Details',
 ];
 
+export const quoteReviewWithoutOptionalProducts = [
+  'General Details',
+  "What's Included",
+  'Personal Details',
+];
+
 export const finalReviewAccordionLife = [
   'Life Insurance Information',
   "What's Included",
@@ -34,13 +40,13 @@ export const policyDetailsAccordions = [
 ];
 
 export const agentListViewAccordions = [
-  ' Homeowners ',
-  ' Renters ',
-  ' Auto ',
-  ' Life ',
-  ' Travel ',
-  ' Event ',
-  ' Savings ',
+  ' Homeowners Insurance',
+  ' Renters Insurance',
+  ' Auto Insurance',
+  ' Life Insurance',
+  ' Travel Insurance',
+  ' Event Insurance',
+  ' Savings Insurance',
 ];
 
 export const finalReviewAccordionHomeowners = [
@@ -59,6 +65,12 @@ export const finalReviewAccordionRenters = [
 
 export const confirmationAccordionCreditCard = [
   'Credit Card Information',
+  "What's Included",
+  'Personal Details',
+];
+
+export const confirmationAccordionCurrentAccount = [
+  'Current Account Information',
   "What's Included",
   'Added by you',
   'Personal Details',
@@ -142,6 +154,14 @@ export const Accordions = {
     {
       category: 'savingsPolicyDetails',
       accordionItems: this.policyDetailsSavings,
+    },
+    {
+      category: 'quoteReviewWithoutOptional',
+      accordionItems: this.quoteReviewWithoutOptionalProducts,
+    },
+    {
+      category: 'confirmationCurrentAccount',
+      accordionItems: this.confirmationAccordionCurrentAccount,
     },
   ],
 };

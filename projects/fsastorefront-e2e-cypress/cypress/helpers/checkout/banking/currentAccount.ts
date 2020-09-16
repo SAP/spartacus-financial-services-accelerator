@@ -79,14 +79,16 @@ export function populatePersonalDetails() {
   cy.get('[name="residentialAddress"]').type('Omladinskih Brigada');
   cy.get('[name="movingInDateToResidentialAddress"]').type('2002-01-01');
   cy.get('[name="isPostalSameAsResidential"]').eq(0).click();
-  cy.get('[name="employmentStatus"]').select('2');
+  cy.get('[name="employmentStatus"]').select('part-time');
+  cy.get('[name="employersName"]').type('global digital');
+  cy.get('[name="jobTitle"]').type('Manager');
   cy.get('[name="employmentStartDate"]').type('2005-01-01');
   cy.get('[name="incomeFrequency"]').select('monthly');
   cy.get('[name="netIncomeAmount"]').type('7800');
 }
 
 export function populateConfigureStep() {
-  cy.get('[name=accountType]').select('2');
+  cy.get('[name=accountType]').select('1');
   cy.get('[name=apply-for-debit-card]').select('yes');
   cy.get('[name=debit-card-design]').select('black');
 }

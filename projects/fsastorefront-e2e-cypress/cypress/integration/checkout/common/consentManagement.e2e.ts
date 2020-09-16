@@ -14,6 +14,7 @@ context('Consent Management', () => {
   it('should check anonymous consent in registration form', () => {
     cy.get('cx-login a').click();
     cy.get('.register').findByText('Register').click({ force: true });
+    //TODO: Bug FSA-5303
     cy.get('input[type="checkbox"]').first().should('be.checked');
   });
 

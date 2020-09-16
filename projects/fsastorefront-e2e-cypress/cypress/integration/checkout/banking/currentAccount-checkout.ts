@@ -11,7 +11,6 @@ context('Current Account Checkout', () => {
   });
 
   it('Start checkout for Current Account ', () => {
-    checkout.waitForHomepage();
     banking.startBankingCheckout('Current Account');
   });
 
@@ -40,6 +39,7 @@ context('Current Account Checkout', () => {
   it('Should register user in checkout', () => {
     register.populateRegistrationForm(registrationUser);
     register.loginInUser(registrationUser.email, registrationUser.password);
+    cy.wait(500);
   });
 
   it('Should complete personal details step', () => {
@@ -47,20 +47,24 @@ context('Current Account Checkout', () => {
     checkout.checkPersonalDetailsPage();
     currentAccount.populatePersonalDetails();
     //currentAccount.checkMiniCartCurrentAccount();
+    //Waiting for registration process to be completed
+    cy.wait(5000);
     checkout.clickContinueButton();
   });
 
   it('Should check Quote Review page', () => {
     banking.checkBankingProgressBar();
-    checkout.checkAccordions('threeAccordions');
+    checkout.checkAccordions('generalQuoteAccordions');
   });
 
   it('Should bind Quote', () => {
     checkout.bindQuotePopup();
+    checkout.clickContinueButton();
   });
 
   it('Should check Legal Information page', () => {
-    banking.checkLegalInformationPage('Your Current Account Application');
+    checkout.checkCheckoutStep('Your Current Account Application', '7');
+    banking.checkLegalInformationPage();
     checkout.clickContinueButton();
   });
 
@@ -73,7 +77,7 @@ context('Current Account Checkout', () => {
 
   it('Should check order confirmation', () => {
     checkout.checkOrderConfirmationBanking();
-    checkout.checkAccordions('threeAccordions');
+    checkout.checkAccordions('confirmationCurrentAccount');
   });
 
   it('Should empty my account policies page', () => {

@@ -1,4 +1,5 @@
 const currentDate = Cypress.moment().format('DD-MM-YYYY');
+const todaysDate = Cypress.moment().format('DD MMM YYYY');
 
 export function startChangeMileage() {
   cy.get('.fs-icon')
@@ -51,7 +52,7 @@ export function startChangeCoverage() {
     .eq(1)
     .parentsUntil()
     .contains(' Optional Extras ')
-    .click();
+    .click({ force: true });
   cy.get('.link.position-absolute').contains('Edit').click();
 }
 
@@ -94,4 +95,22 @@ export function checkChangedPolicyNewPremium() {
   cy.get('.offset-1').contains(currentDate);
   cy.get('.col-4.semi-bold').eq(5).contains(' €100.00 / Monthly ');
   cy.get('.col-3.semi-bold').eq(2).contains(' €100.00 / Monthly ');
+}
+
+export function checkInboxMessages() {
+  cy.get('.fs-tab').should('be.visible').contains('Auto');
+  cy.get('.fs-tab')
+    .should('be.visible')
+    .contains('Policies')
+    .click({ force: true });
+  cy.wait(500);
+  cy.get('.message')
+    .click({ multiple: true })
+    .within(() => {
+      cy.contains('Policy ID');
+      cy.contains('Dear Ben Moore, The change request');
+      cy.contains(todaysDate);
+      cy.get('.box-shadow').should('be.visible');
+    });
+  cy.get('.message').should('have.class', 'read');
 }

@@ -10,6 +10,7 @@ import {
 import * as myPolicies from '../../../helpers/my-account/policies';
 import * as changeRequest from '../../../helpers/changeRequest';
 import { waitForCreateAsset } from '../../../helpers/generalHelpers';
+import * as inbox from '../../../helpers/my-account/inbox';
 
 context('Change Request for new user', () => {
   before(() => {
@@ -37,12 +38,10 @@ context('Change Request for new user', () => {
     cy.wait(`@${addToCart}`).then(result => {
       const body = <any>result.response.body;
       const cartId = body.code;
-      checkout.clickContinueButton();
       addPaymentMethod(registrationUser.email, cartId);
     });
     //auto.checkAutoSilverMiniCart();
     checkout.clickContinueButton();
-    checkout.waitForPersonalDetailsPage();
   });
 
   it('Should populate personal details page', () => {
@@ -57,9 +56,10 @@ context('Change Request for new user', () => {
   it('Should complete auto checkout', () => {
     fnol.waitForQuoteReviewPage();
     checkout.clickContinueButton();
-    //check accordions
     checkout.checkAccordions('generalQuoteAccordions');
+    checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
+    checkout.clickContinueButton();
     selectPaymentMethod();
     checkout.placeOrderOnFinalReview();
     checkout.checkOrderConfirmation();
@@ -69,7 +69,7 @@ context('Change Request for new user', () => {
     myPolicies.checkMyPoliciesPage();
     myPolicies.checkAutoPolicy();
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
-    checkout.checkAccordions('threeAccordions');
+    checkout.checkAccordions('policyDetails');
   });
 
   it('Should complete change mileage checkout', () => {
@@ -83,7 +83,7 @@ context('Change Request for new user', () => {
     changeRequest.checkChangedPolicyPremium();
     cy.get('.primary-button').should('contain', 'Submit').click();
     changeRequest.checkChangeRequestConfirmation();
-    cy.get('.SiteLogo').click();
+    cy.wait(4000);
   });
 
   it('Should complete change coverage checkout', () => {
@@ -102,7 +102,7 @@ context('Change Request for new user', () => {
     changeRequest.checkChangedPolicyPremium();
     cy.get('.primary-button').should('contain', 'Submit').click();
     changeRequest.checkChangeRequestConfirmation();
-    cy.get('.SiteLogo').click();
+    cy.wait(4000);
   });
 
   it('Should cancel change policy request', () => {
@@ -119,8 +119,17 @@ context('Change Request for new user', () => {
     cy.get('.action-button').should('contain', 'Cancel').click();
     //check user is redirected to policy details page
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
-    checkout.checkAccordions('threeAccordions');
+    checkout.checkAccordions('policyDetails');
   });
 
-  //TODO:Check inbox messages
+  it('Should check inbox messages for change request', () => {
+    cy.selectOptionFromDropdown({
+      menuOption: 'My Account',
+      dropdownItem: 'Inbox',
+    });
+    inbox.checkInboxComponets();
+    inbox.checkGeneralTab();
+    inbox.checkInboxHeader();
+    changeRequest.checkInboxMessages();
+  });
 });

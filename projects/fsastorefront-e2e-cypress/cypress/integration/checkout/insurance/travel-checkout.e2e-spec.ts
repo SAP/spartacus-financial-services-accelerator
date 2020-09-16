@@ -1,6 +1,9 @@
 import * as register from '../../../helpers/register';
 import * as travelCheckout from '../../../helpers/checkout/insurance/travel-checkout';
-import { registrationUser } from '../../../sample-data/users';
+import {
+  registrationUser,
+  registrationUserWithoutPhone,
+} from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import {
   addPaymentMethod,
@@ -8,7 +11,6 @@ import {
 } from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 import { clickContinueButton } from '../../../helpers/checkout/checkoutSteps';
-import * as fnol from '../../../helpers/fnolCheckout';
 import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
 let cartId;
@@ -43,19 +45,24 @@ context('Travel Insurance Checkout', () => {
       clickContinueButton();
     });
 
-    it('Populate personal details and add payment method', () => {
+    it('Populate personal details', () => {
       checkout.populatePersonalDetailsPage();
       clickContinueButton();
-      fnol.waitForQuoteReviewPage();
-      clickContinueButton();
-      addPaymentMethod(registrationUser.email, cartId);
-      checkout.ConfirmBindQuote();
-      checkout.clickContinueButton();
+      cy.wait(1000);
     });
 
-    it('Check mini cart on quote review page', () => {
+    it('Should check quote review page and add payment', () => {
+      checkout.checkCheckoutStep('Your Travel Insurance', '7');
+      checkout.checkProgressBarInsurance();
+      checkout.clickContinueButton();
+      //TODO: check mini cart
       checkout.checkAccordions('generalQuoteAccordions');
+      checkout.ConfirmBindQuote();
       //travelCheckout.checkTravelMiniCart();
+      addPaymentMethod(registrationUserWithoutPhone.email, cartId);
+      checkout.clickContinueButton();
+      checkout.ConfirmBindQuote();
+      checkout.clickContinueButton();
     });
 
     it('Select default payment details', () => {

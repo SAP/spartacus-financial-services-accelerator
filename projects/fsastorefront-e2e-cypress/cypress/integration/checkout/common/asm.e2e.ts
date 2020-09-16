@@ -31,5 +31,6 @@ context('ASM', () => {
 
   it('should end the session for user', () => {
     cy.get('.logout').should('be.visible').click();
+    asm.checkAsmHeader();
   });
 });
