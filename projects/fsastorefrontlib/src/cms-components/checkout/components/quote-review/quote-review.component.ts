@@ -150,6 +150,6 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   }
 
   isEditable(code: string): boolean {
-    return code === BindingStateType.BIND ? false : true;
+    return (code === BindingStateType.BIND);
   }
 }
