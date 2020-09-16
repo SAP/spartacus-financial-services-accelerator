@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import { ModalService, SpinnerModule } from '@spartacus/storefront';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { FSCart, FSSteps } from '../../../../occ/occ-models';
 import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
@@ -11,7 +11,7 @@ import { FSTranslationService } from './../../../../core/i18n/facade/translation
 import { AccordionModule } from './../../../../shared/accordion/accordion.module';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 import { QuoteReviewComponent } from './quote-review.component';
-
+import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 const formDataContent = '{"content":"formContent"}';
 
 class MockActivatedRoute {
@@ -32,6 +32,14 @@ const MockOccModuleConfig: OccConfig = {
     },
   },
 };
+
+class MockCategoryService {
+  setActiveCategory(category: string) {}
+
+  getActiveCategory(): Observable<string> {
+    return of('testCategory');
+  }
+}
 
 class FSCartServiceStub {
   getActive() {}
@@ -101,6 +109,10 @@ describe('Quote Review Component', () => {
         {
           provide: FSTranslationService,
           useClass: MockFSTranslationService,
+        },
+        {
+          provide: CategoryService,
+          useClass: MockCategoryService,
         },
       ],
     }).compileComponents();
@@ -249,5 +261,10 @@ describe('Quote Review Component', () => {
       'vehicleMake'
     );
     expect(translationValue).toEqual('test value');
+  });
+
+  it('step should not be editable if quote status id BIND', () => {
+    const result = component.isEditable('BIND');
+    expect(result).toEqual(false);
   });
 });

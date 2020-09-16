@@ -58,11 +58,16 @@
                       >
                       </ng-container>
                     </ul>
-                    <div class="col-12 col-md-6">
-                      <button class="action-button btn-block">
-                        {{ 'fscommon.edit' | cxTranslate }}
-                      </button>
-                    </div>
+                    <ng-container
+                      *ngTemplateOutlet="
+                        edit;
+                        context: {
+                          route: 'generalInformation',
+                          code: cart.insuranceQuote?.state?.code
+                        }
+                      "
+                    >
+                    </ng-container>
                   </div>
                 </div>
               </cx-fs-accordion-item>
@@ -109,11 +114,16 @@
                     </ng-container>
                   </ng-container>
                 </ul>
-                <div class="col-12 col-md-6">
-                  <button class="action-button btn-block">
-                    {{ 'fscommon.edit' | cxTranslate }}
-                  </button>
-                </div>
+                <ng-container
+                  *ngTemplateOutlet="
+                    edit;
+                    context: {
+                      route: 'category',
+                      code: cart.insuranceQuote?.state?.code
+                    }
+                  "
+                >
+                </ng-container>
               </div>
             </div>
           </cx-fs-accordion-item>
@@ -137,11 +147,16 @@
                       </li>
                     </ng-container>
                   </ul>
-                  <div class="col-12 col-md-6">
-                    <button class="action-button btn-block">
-                      {{ 'fscommon.edit' | cxTranslate }}
-                    </button>
-                  </div>
+                  <ng-container
+                    *ngTemplateOutlet="
+                      edit;
+                      context: {
+                        route: 'addOptions',
+                        code: cart.insuranceQuote?.state?.code
+                      }
+                    "
+                  >
+                  </ng-container>
                 </div>
               </div>
             </cx-fs-accordion-item>
@@ -192,11 +207,6 @@
                       </ng-container>
                     </ng-container>
                   </ul>
-                  <div class="col-12 col-md-6">
-                    <button class="action-button btn-block">
-                      {{ 'fscommon.edit' | cxTranslate }}
-                    </button>
-                  </div>
                 </div>
               </div>
             </cx-fs-accordion-item>
@@ -233,11 +243,16 @@
                     </ng-container>
                   </ng-container>
                 </ul>
-                <div class="col-12 col-md-6">
-                  <button class="action-button btn-block">
-                    {{ 'fscommon.edit' | cxTranslate }}
-                  </button>
-                </div>
+                <ng-container
+                  *ngTemplateOutlet="
+                    edit;
+                    context: {
+                      route: 'checkoutPersonalDetails',
+                      code: cart.insuranceQuote?.state?.code
+                    }
+                  "
+                >
+                </ng-container>
               </div>
             </div>
           </cx-fs-accordion-item>
@@ -300,5 +315,26 @@
         </div>
       </li>
     </ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #edit let-code="code" let-route="route">
+  <ng-container *ngIf="isEditable(code)">
+    <div class="col-12 col-md-6">
+      <button
+        class="action-button btn-block"
+        *ngIf="activeCategory$ | async as activeCategory"
+        [routerLink]="
+          {
+            cxRoute: route,
+            params: {
+              code: activeCategory
+            }
+          } | cxUrl
+        "
+      >
+        {{ 'fscommon.edit' | cxTranslate }}
+      </button>
+    </div>
   </ng-container>
 </ng-template>

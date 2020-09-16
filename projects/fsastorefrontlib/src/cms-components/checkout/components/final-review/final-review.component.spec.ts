@@ -83,8 +83,6 @@ describe('FinalReviewComponent', () => {
 
     routingService = TestBed.inject(RoutingService);
     spyOn(routingService, 'go').and.callThrough();
-
-    spyOn(component.goToQuoteReview, 'emit').and.stub();
   });
 
   it('should create component', () => {
@@ -94,11 +92,6 @@ describe('FinalReviewComponent', () => {
   it('should toggle', () => {
     component.toggleTAndC();
     expect(component.tAndCToggler).toEqual(true);
-  });
-
-  it('should call edit', () => {
-    component.edit();
-    expect(component.goToQuoteReview.emit).toHaveBeenCalled();
   });
 
   it('should place order', () => {

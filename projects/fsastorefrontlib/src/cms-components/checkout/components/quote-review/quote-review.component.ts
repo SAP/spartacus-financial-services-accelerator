@@ -4,7 +4,10 @@ import { Cart, OccConfig, RoutingService } from '@spartacus/core';
 import { ModalRef, ModalService } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FSCheckoutConfigService } from '../../../../core/checkout/services';
+import {
+  FSCheckoutConfigService,
+  CategoryService,
+} from '../../../../core/checkout/services';
 import { FSTranslationService } from '../../../../core/i18n/facade/translation.service';
 import { ReferredQuoteDialogComponent } from '../referred-quote/referred-quote-dialog.component';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
@@ -29,12 +32,14 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
   cartCode: string;
   previousCheckoutStep$: Observable<FSSteps>;
   nextCheckoutStep$: Observable<FSSteps>;
+  activeCategory$: Observable<String>;
 
   constructor(
     protected cartService: FSCartService,
     protected config: OccConfig,
     protected routingService: RoutingService,
     protected checkoutConfigService: FSCheckoutConfigService,
+    protected categoryService: CategoryService,
     protected activatedRoute: ActivatedRoute,
     protected modalService: ModalService,
     protected translationService: FSTranslationService
@@ -45,6 +50,7 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     this.isCartStable$ = this.cartService.isStable();
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
+    this.activeCategory$ = this.categoryService.getActiveCategory();
   }
 
   getBaseUrl() {
@@ -141,5 +147,9 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
       ['quoteReview', translationGroup],
       translationKey
     );
+  }
+
+  isEditable(code: string): boolean {
+    return code !== BindingStateType.BIND;
   }
 }
