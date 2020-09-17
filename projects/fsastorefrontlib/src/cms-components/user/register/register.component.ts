@@ -60,10 +60,8 @@ export class FSRegisterComponent extends RegisterComponent
     super.ngOnInit();
     this.sub.add(
       this.anonymousConsent$.subscribe(data => {
-        if (data?.consent?.consentState) {
-          this.consentGiven =
-            data.consent.consentState === ANONYMOUS_CONSENT_STATUS.GIVEN;
-        }
+        this.consentGiven =
+          data?.consent?.consentState === ANONYMOUS_CONSENT_STATUS.GIVEN;
       })
     );
     this.registerForm.get('newsletter').patchValue(this.consentGiven);
@@ -93,19 +91,6 @@ export class FSRegisterComponent extends RegisterComponent
 
   getDateFormat() {
     return this.config.date.format || '';
-  }
-
-  protected isFSConsentRequired(): boolean {
-    const {
-      requiredConsents,
-      registerConsent,
-    } = this.anonymousConsentsConfig?.anonymousConsents;
-
-    if (requiredConsents && registerConsent) {
-      return requiredConsents.includes(registerConsent);
-    }
-
-    return false;
   }
 
   ngOnDestroy() {
