@@ -9,6 +9,8 @@ import {
 } from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import * as changeRequest from '../../../helpers/changeRequest';
+import { waitForCreateAsset } from '../../../helpers/generalHelpers';
+import * as inbox from '../../../helpers/my-account/inbox';
 
 context('Change Request for new user', () => {
   before(() => {
@@ -29,15 +31,35 @@ context('Change Request for new user', () => {
     checkout.clickContinueButton();
   });
 
-  it('Should complete auto checkout', () => {
+  it('Should check comparison table and select main product', () => {
+    const addToCart = waitForCreateAsset('carts', 'addToCart');
     auto.checkAutoComparisonTable();
     auto.selectAutoSilver();
+    cy.wait(`@${addToCart}`).then(result => {
+      const body = <any>result.response.body;
+      const cartId = body.code;
+      addPaymentMethod(registrationUser.email, cartId);
+    });
+    //auto.checkAutoSilverMiniCart();
     checkout.clickContinueButton();
+  });
+
+  it('Should populate personal details page', () => {
+    checkout.checkPersonalDetailsPage();
+    auto.populatePersonalDetails();
+    auto.populateVehicleDetails();
+    auto.populateMainDriverData();
+    auto.populateAdditionalData();
+    checkout.clickContinueButton();
+  });
+
+  it('Should complete auto checkout', () => {
     fnol.waitForQuoteReviewPage();
-    addPaymentMethod(registrationUser.email);
-    auto.checkAutoSilverMiniCart();
+    checkout.clickContinueButton();
+    checkout.checkAccordions('generalQuoteAccordions');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
+    checkout.clickContinueButton();
     selectPaymentMethod();
     checkout.placeOrderOnFinalReview();
     checkout.checkOrderConfirmation();
@@ -59,10 +81,9 @@ context('Change Request for new user', () => {
     //check change preview - second step
     changeRequest.checkChangeMileageSteps();
     changeRequest.checkChangedPolicyPremium();
-    cy.get('.primary-button')
-      .should('contain', 'Submit')
-      .click();
+    cy.get('.primary-button').should('contain', 'Submit').click();
     changeRequest.checkChangeRequestConfirmation();
+    cy.wait(4000);
   });
 
   it('Should complete change coverage checkout', () => {
@@ -73,18 +94,15 @@ context('Change Request for new user', () => {
     changeRequest.checkChangeCoverageSteps();
     changeRequest.checkOptionalExtras();
     //check continue button is disabled if coverage is not added
-    cy.get('.primary-button')
-      .contains('Continue')
-      .should('be.disabled');
+    cy.get('.primary-button').contains('Continue').should('be.disabled');
     changeRequest.addRoadsideAssistance();
     checkout.clickContinueButton();
     //check change preview - second step
     changeRequest.checkChangeCoverageSteps();
     changeRequest.checkChangedPolicyPremium();
-    cy.get('.primary-button')
-      .should('contain', 'Submit')
-      .click();
+    cy.get('.primary-button').should('contain', 'Submit').click();
     changeRequest.checkChangeRequestConfirmation();
+    cy.wait(4000);
   });
 
   it('Should cancel change policy request', () => {
@@ -97,13 +115,21 @@ context('Change Request for new user', () => {
     checkout.clickContinueButton();
     //check change preview - second step
     changeRequest.checkChangeMileageSteps();
-    changeRequest.checkChangedPolicyPremium();
-    cy.get('.action-button')
-      .should('contain', 'Cancel')
-      .click();
+    changeRequest.checkChangedPolicyNewPremium();
+    cy.get('.action-button').should('contain', 'Cancel').click();
     //check user is redirected to policy details page
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
     checkout.checkAccordions('policyDetails');
   });
-  //TODO:Check inbox messages
+
+  it('Should check inbox messages for change request', () => {
+    cy.selectOptionFromDropdown({
+      menuOption: 'My Account',
+      dropdownItem: 'Inbox',
+    });
+    inbox.checkInboxComponets();
+    inbox.checkGeneralTab();
+    inbox.checkInboxHeader();
+    changeRequest.checkInboxMessages();
+  });
 });

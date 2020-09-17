@@ -26,7 +26,4 @@ export const getPremiumCalendarData: MemoizedSelector<
 export const getPremiumCalendarLoaded: MemoizedSelector<
   StateWithMyAccount,
   boolean
-> = createSelector(
-  getPremiumCalendarState,
-  fromPremiumCalendar.getLoaded
-);
+> = createSelector(getPremiumCalendarState, fromPremiumCalendar.getLoaded);

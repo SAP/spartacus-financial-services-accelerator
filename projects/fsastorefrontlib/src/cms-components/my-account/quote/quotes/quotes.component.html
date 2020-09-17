@@ -17,20 +17,20 @@
                   >:
                   <span class="value">{{ quote.quoteId }}</span>
                 </div>
-                <div class="info-card-data">
-                  <span class="label">{{
-                    'quote.quoteStatus.title' | cxTranslate
-                  }}</span
-                  >:
-                  <ng-container *ngIf="!quote.isExpired; else expired">
-                    <span *ngIf="quote.state.code === 'BIND'" class="value">
-                      {{ 'quote.quoteStatus.ready' | cxTranslate }}
+                <ng-container *ngIf="quote.quoteWorkflowStatus">
+                  <div class="info-card-data">
+                    <span class="label">{{
+                      'quote.quoteWorkflowStatus.title' | cxTranslate
+                    }}</span
+                    >:
+                    <span class="value">
+                      {{
+                        'quote.quoteWorkflowStatus.' +
+                          quote.quoteWorkflowStatus.code | cxTranslate
+                      }}
                     </span>
-                    <span *ngIf="quote.state.code === 'UNBIND'" class="value">
-                      {{ 'quote.quoteStatus.unfinished' | cxTranslate }}
-                    </span>
-                  </ng-container>
-                </div>
+                  </div>
+                </ng-container>
                 <div class="info-card-data">
                   <span class="label">{{
                     'fscommon.expiryDate' | cxTranslate
@@ -64,7 +64,12 @@
                 </span>
               </div>
             </div>
-            <ng-container *ngIf="!quote.isExpired">
+            <ng-container
+              *ngIf="
+                !quote.isExpired &&
+                quote.quoteWorkflowStatus.code !== 'REFERRED'
+              "
+            >
               <div class="info-card-links">
                 <a class="link" (click)="retrieveQuote(quote)">
                   {{ 'fscommon.retrieve' | cxTranslate }}
@@ -79,11 +84,6 @@
 </ng-container>
 <ng-template #noQuotes>
   <h3>{{ 'quote.youHaveNoQuotes' | cxTranslate }}!</h3>
-</ng-template>
-<ng-template #expired>
-  <span class="value">
-    {{ 'quote.quoteStatus.expired' | cxTranslate }}
-  </span>
 </ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>

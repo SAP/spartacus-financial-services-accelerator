@@ -7,18 +7,24 @@ export const quote = {
     viewQuotes: 'Bisherige Anträge ansehen',
     getQuote: 'Angebot anfordern',
     moreInfo: 'Mehr Informationen',
+    notBoundQuoteDescription: '[DE] Your quote/application is not bound.',
     retrieveQuotes: 'Antrag fortsetzen',
+    referredQuoteDescription:
+      'Ihr Angebot wird weitergeleitet. Weitere Informationen erhalten Sie bei Ihrem Kundenbetreuer.',
+    boundQuoteDescription: '[DE] Your quote is already bound.',
     viewYourQuotes: 'Angebote ansehen',
     youHaveNoQuotes: 'Sie haben zur Zeit keine Angebote',
     noActiveQuotes: 'Sie haben zur Zeit keine aktiven Angebote',
     getQuoteBySelecting:
       'Starten sie Ihr Angebot, indem Sie eine der obigen Versicherungsarten auswählen',
-    quoteStatus: {
+    quoteWorkflowStatus: {
       title: 'Antragsstatus',
-      ready: 'Bereit zum Abschließen',
-      unfinished: 'Unvollständig',
-      expired: 'Abgelaufen',
-      expires: 'Läuft ab',
+      REFERRED: 'Weitergeleitet',
+      APPROVED: 'Genehmigt',
+      REJECTED: 'Abgelehnt',
+      PENDING: 'Ausstehend',
+      ERROR: 'Fehler',
+      na: 'N/A',
     },
   },
 };

@@ -5,6 +5,7 @@ import {
   ProductSelectors,
   ProductService,
   StateWithProduct,
+  ProductLoadingService,
 } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -13,8 +14,11 @@ import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
 
 @Injectable()
 export class FSProductService extends ProductService {
-  constructor(protected store: Store<StateWithProduct>) {
-    super(store);
+  constructor(
+    protected store: Store<StateWithProduct>,
+    protected productLoading: ProductLoadingService
+  ) {
+    super(store, productLoading);
   }
 
   getCalculatedProductData(
@@ -30,7 +34,9 @@ export class FSProductService extends ProductService {
 
     return this.store.pipe(
       select(ProductSelectors.getSelectedProductStateFactory(productCode)),
-      map(productState => productState.value)
+      map(productState => {
+        return productState.value;
+      })
     );
   }
 }

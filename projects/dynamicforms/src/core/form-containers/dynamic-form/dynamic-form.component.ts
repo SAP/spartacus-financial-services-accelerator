@@ -1,15 +1,14 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
   OnDestroy,
   OnInit,
   Output,
-  ChangeDetectorRef,
 } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
-import { YFormData } from '@fsa/dynamicforms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../config/form-config';
@@ -17,6 +16,8 @@ import { GeneralHelpers } from '../../helpers/helpers';
 import { FormDefinition } from '../../models/form-config.interface';
 import { FormBuilderService } from '../../services/builder/form-builder.service';
 import { FormDataService } from '../../services/data/form-data.service';
+import { YFormData } from './../../models/form-occ.models';
+import { FormComponentService } from '../../../components/form-component.service';
 
 @Component({
   exportAs: 'cx-dynamicForm',
@@ -32,6 +33,7 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
   @Output()
   submit: EventEmitter<any> = new EventEmitter<any>();
 
+  populatedInvalid$: Observable<boolean>;
   form: FormGroup;
   subscription = new Subscription();
 
@@ -49,10 +51,12 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     protected changeDetectorRef: ChangeDetectorRef,
     protected formService: FormBuilderService,
     protected formDataService: FormDataService,
+    protected formComponentService: FormComponentService,
     public formConfig: DynamicFormsConfig
   ) {}
 
   ngOnInit() {
+    this.populatedInvalid$ = this.formComponentService.isPopulatedFormInvalid;
     if (this.config) {
       this.form = this.formService.createForm(this.config);
     }
@@ -80,7 +84,10 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
   mapDataToFormControls(formData) {
     for (const groupCode of Object.keys(formData)) {
-      if (GeneralHelpers.getObjectDepth(formData) === 1) {
+      if (
+        this.form.get(groupCode) &&
+        GeneralHelpers.getObjectDepth(formData) === 1
+      ) {
         this.form.get(groupCode).setValue(formData[groupCode]);
       } else {
         for (const controlName of Object.keys(formData[groupCode])) {
@@ -101,7 +108,8 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         .getSubmittedForm()
         .pipe(
           map(form => {
-            if (form && !this.valid) {
+            if (this.checkInvalidControls(form)) {
+              this.formComponentService.isPopulatedFormInvalidSource.next(true);
               this.markInvalidControls(this.form);
               this.changeDetectorRef.detectChanges();
             } else if (
@@ -135,5 +143,9 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
         }
       }
     }
+  }
+
+  private checkInvalidControls(formData: YFormData): boolean {
+    return !!(formData && !this.valid);
   }
 }

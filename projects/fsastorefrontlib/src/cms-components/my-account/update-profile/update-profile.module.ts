@@ -7,7 +7,7 @@ import {
   ConfigModule,
   I18nModule,
 } from '@spartacus/core';
-import { SpinnerModule } from '@spartacus/storefront';
+import { SpinnerModule, FormErrorsModule } from '@spartacus/storefront';
 import { FSUpdateProfileFormComponent } from './update-profile-form/update-profile-form.component';
 import { FSUpdateProfileComponent } from './update-profile.component';
 
@@ -26,6 +26,7 @@ import { FSUpdateProfileComponent } from './update-profile.component';
     ReactiveFormsModule,
     SpinnerModule,
     I18nModule,
+    FormErrorsModule,
   ],
   declarations: [FSUpdateProfileComponent, FSUpdateProfileFormComponent],
   exports: [FSUpdateProfileComponent],

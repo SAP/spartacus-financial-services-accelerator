@@ -12,6 +12,7 @@ import { SeparatorComponent } from '../../components/separator/separator.compone
 import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
 import { DynamicSelectComponent } from '../../components/dynamic-select/dynamic-select.component';
 import { UserPrefillResolver } from '../resolver/user-prefill-resolver';
+import { DataHolderComponent } from '../../components/data-holder/data-holder.component';
 
 export const defaultFormConfig: DynamicFormsConfig = {
   dynamicForms: {
@@ -49,6 +50,9 @@ export const defaultFormConfig: DynamicFormsConfig = {
       separator: {
         component: SeparatorComponent,
       },
+      dataHolder: {
+        component: DataHolderComponent,
+      },
     },
     validators: {
       compareToCurrentDate: {
@@ -57,8 +61,11 @@ export const defaultFormConfig: DynamicFormsConfig = {
       dateOfBirth: {
         validator: DefaultFormValidators.dateOfBirthValidator,
       },
-      youngerThan: {
-        validator: DefaultFormValidators.youngerThanValidator,
+      compareDOBtoAge: {
+        validator: DefaultFormValidators.compareDOBtoAge,
+      },
+      compareAgeToDOB: {
+        validator: DefaultFormValidators.compareAgeToDOB,
       },
       maxValue: {
         validator: DefaultFormValidators.max,
@@ -81,14 +88,17 @@ export const defaultFormConfig: DynamicFormsConfig = {
       checkValue: {
         validator: DefaultFormValidators.checkValue,
       },
+      containsValue: {
+        validator: DefaultFormValidators.shouldContainValue,
+      },
       compareNumbers: {
         validator: DefaultFormValidators.compareNumbers,
       },
       email: {
         validator: DefaultFormValidators.email,
       },
-      postalCode: {
-        validator: DefaultFormValidators.postalCode,
+      alphanumeric: {
+        validator: DefaultFormValidators.alphanumeric,
       },
     },
     prefill: {

@@ -1,5 +1,6 @@
-import { Type } from '@angular/core';
+import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -11,9 +12,8 @@ import {
 import { MediaModule, SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
-import { CategoryService } from './../../../../core/checkout/services/category/category.service';
 import { FSCheckoutConfigService } from './../../../../core/checkout/services/checkout-config.service';
-import { FSProduct } from './../../../../occ/occ-models/occ.models';
+import { FSSteps, FSProduct } from './../../../../occ/occ-models/occ.models';
 import { AddOptionsComponent } from './add-options.component';
 
 const product: FSProduct = {
@@ -23,22 +23,25 @@ const product: FSProduct = {
   configurable: false,
 };
 
-let mockEntries: OrderEntry[] = [
+const mockEntries: OrderEntry[] = [
   {
     product: product,
   },
 ];
 
+const mockCategoryAndStep: FSSteps = {
+  stepParameter: 'insurances_travel',
+  step: 'category',
+};
+
 class MockCartService {
-  getLoaded() {}
+  isStable() {
+    return of(true);
+  }
 
-  removeEntry(item: any) {}
+  removeEntry() {}
 
-  addOptionalProduct(
-    orderEntryCode: string,
-    qty: number,
-    entryNumber: string
-  ) {}
+  addOptionalProduct() {}
 
   getEntries(): Observable<OrderEntry[]> {
     return of(mockEntries);
@@ -61,19 +64,13 @@ class MockCheckoutConfigService {
   }
 }
 
-class MockCategoryService {
-  getActiveCategory(): Observable<string> {
-    return of('insurances_auto');
-  }
-}
-
 describe('AddOptionsComponent', () => {
   let component: AddOptionsComponent;
   let fixture: ComponentFixture<AddOptionsComponent>;
   let cartService: FSCartService;
   let routingService: RoutingService;
   let checkoutConfigService: FSCheckoutConfigService;
-  let categoryService: CategoryService;
+  let el: DebugElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -102,10 +99,6 @@ describe('AddOptionsComponent', () => {
           useClass: MockCheckoutConfigService,
         },
         {
-          provide: CategoryService,
-          useClass: MockCategoryService,
-        },
-        {
           provide: ActivatedRoute,
           useValue: {
             routeConfig: {
@@ -122,24 +115,21 @@ describe('AddOptionsComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
-    spyOn(cartService, 'getLoaded').and.callThrough();
+    cartService = TestBed.inject(FSCartService);
+    spyOn(cartService, 'isStable').and.callThrough();
+
     spyOn(cartService, 'removeEntry').and.callThrough();
     spyOn(cartService, 'addOptionalProduct').and.callThrough();
     spyOn(cartService, 'getEntries').and.callThrough();
 
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    routingService = TestBed.inject(RoutingService);
     spyOn(routingService, 'go').and.callThrough();
 
-    checkoutConfigService = TestBed.get(FSCheckoutConfigService as Type<
-      FSCheckoutConfigService
-    >);
+    checkoutConfigService = TestBed.inject(FSCheckoutConfigService);
     spyOn(checkoutConfigService, 'getNextCheckoutStepUrl').and.callThrough();
 
-    categoryService = TestBed.get(CategoryService as Type<CategoryService>);
-    spyOn(categoryService, 'getActiveCategory').and.callThrough();
-
     component.ngOnInit();
+    el = fixture.debugElement;
   });
 
   it('should create add options component', () => {
@@ -171,43 +161,26 @@ describe('AddOptionsComponent', () => {
   });
 
   it('should go back', () => {
-    mockEntries = [
-      {
-        product: product,
-      },
-    ];
     component.ngOnInit();
-    component.back();
+    component.navigateBack(mockCategoryAndStep);
     expect(routingService.go).toHaveBeenCalled();
   });
 
   it('should navigate next', () => {
-    mockEntries = [
-      {
-        product: product,
-      },
-    ];
     component.ngOnInit();
-    component.navigateNext();
+    component.navigateNext(mockCategoryAndStep);
     expect(routingService.go).toHaveBeenCalled();
   });
 
-  it('should not navigate next because product is empty', () => {
-    mockEntries = [{}];
+  it('should not render navigation buttons if next and previous steps are not defined', () => {
+    checkoutConfigService.nextStep = undefined;
+    checkoutConfigService.previousStep = undefined;
     component.ngOnInit();
-    component.navigateNext();
-    expect(routingService.go).not.toHaveBeenCalled();
-  });
 
-  it('should not navigate next because default category is empty', () => {
-    mockEntries = [
-      {
-        product: {},
-      },
-    ];
-    component.ngOnInit();
-    component.navigateNext();
-    expect(routingService.go).not.toHaveBeenCalled();
+    const previousButton = el.query(By.css('.action-button'));
+    const nextButton = el.query(By.css('.primary-button'));
+    expect(previousButton).not.toBeTruthy();
+    expect(nextButton).not.toBeTruthy();
   });
 
   it('should set currentCurrency variable to EUR', () => {

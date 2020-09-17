@@ -7,7 +7,9 @@ import {
   selectPaymentMethod,
 } from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
+import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
+let cartId;
 context('Homeowners Checkout', () => {
   before(() => {
     cy.visit('/login');
@@ -30,7 +32,8 @@ context('Homeowners Checkout', () => {
   });
 
   it('Should populate first page in checkout', () => {
-    checkout.checkProgressBarInsurance('Your Homeowners Insurance');
+    checkout.checkCheckoutStep('Your Homeowners Insurance', '7');
+    checkout.checkProgressBarInsurance();
     //check page content - first step
     checkout.checkFirstCheckoutStep('Homeowners');
     homeowners.populateHomeownersSpecific();
@@ -42,9 +45,14 @@ context('Homeowners Checkout', () => {
   });
 
   it('Should check comparison table', () => {
-    checkout.checkInsuranceComparisonPage('Your Homeowners Insurance', '2');
+    checkout.checkCheckoutStep('Your Homeowners Insurance', '7');
+    checkout.checkInsuranceComparisonPage('2');
     homeowners.checkHomeownersComparisonTable();
+    const addToCart = waitForCreateAsset('carts', 'addToCart');
     homeowners.selectHomeownersAnnually();
+    cy.wait(`@${addToCart}`).then(result => {
+      cartId = (<any>result.response.body).code;
+    });
   });
 
   it('Should check add options page', () => {
@@ -60,12 +68,14 @@ context('Homeowners Checkout', () => {
   });
 
   it('Should check quote review page', () => {
-    checkout.checkProgressBarInsurance('Homeowners');
+    checkout.checkCheckoutStep('Your Homeowners Insurance', '7');
+    checkout.checkProgressBarInsurance();
     //homeowners.checkMiniCartHomeowners();
-    checkout.checkAccordions('propertyQuoteReview');
-    addPaymentMethod(registrationUserWithoutPhone.email);
+    checkout.checkAccordions('generalQuoteAccordions');
+    addPaymentMethod(registrationUserWithoutPhone.email, cartId);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
+    checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {

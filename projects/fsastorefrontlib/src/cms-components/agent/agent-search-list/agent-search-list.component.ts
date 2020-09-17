@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { PaginationModel } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 
 @Component({
@@ -13,6 +15,7 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
   searchQuery: string;
   selectedAgent$: Observable<any>;
   selectedIndex = 0;
+  pagination: PaginationModel;
 
   constructor(
     protected agentSearchService: AgentSearchService,
@@ -24,7 +27,18 @@ export class AgentSearchListComponent implements OnInit, OnDestroy {
       this.route.queryParams.subscribe(params => this.initialize(params))
     );
 
-    this.searchResults$ = this.agentSearchService.getResults();
+    this.searchResults$ = this.agentSearchService.getResults().pipe(
+      tap(agents => {
+        if (agents) {
+          this.pagination = {
+            currentPage: agents.pagination.page,
+            pageSize: agents.pagination.count,
+            totalPages: agents.pagination.totalPages,
+            totalResults: agents.pagination.totalCount,
+          };
+        }
+      })
+    );
   }
 
   private initialize(queryParams: Params) {

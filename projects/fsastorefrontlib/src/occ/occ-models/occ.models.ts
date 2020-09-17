@@ -9,6 +9,7 @@ import {
   User,
   UserSignUp,
 } from '@spartacus/core';
+import { CheckoutStep } from '@spartacus/storefront';
 
 export interface ContactAgentData {
   email?: string;
@@ -30,6 +31,7 @@ export interface FSProduct extends Product {
   defaultCategory?: Category;
   bundleTemplates?: BundleTemplate[];
   configurable?: boolean;
+  dynamicAttributes?: Map<string, any>;
 }
 
 export interface YFormConfiguratorSettings {
@@ -53,12 +55,20 @@ export interface B2BAdministrator {
   orgUnit: OrgUnit;
 }
 
+export interface FSOrderEntry extends OrderEntry {
+  configurationInfos?: any[];
+}
 export interface FSCart extends Cart {
   insuranceQuote?: InsuranceQuote;
+  entries?: FSOrderEntry[];
 }
 
 export interface InsuranceQuoteList {
   insuranceQuotes: InsuranceQuote[];
+}
+
+export interface QuoteWorkflowStatus {
+  code?: string;
 }
 
 export interface InsuranceQuote {
@@ -68,8 +78,14 @@ export interface InsuranceQuote {
   quoteStatus?: QuoteStatus;
   quotePrice?: Occ.Price;
   paymentFrequency?: string;
+  quoteWorkflowStatus?: QuoteWorkflowStatus;
+  quoteDetails?: Record<string, string>;
+  insuredObjectList?: InsuredObjectList;
 }
 
+export interface InsuredObjectList {
+  insuredObjects?: any[];
+}
 export interface QuoteBindingState {
   code?: string;
 }
@@ -81,6 +97,12 @@ export interface QuoteStatus {
 export enum BindingStateType {
   BIND = 'BIND',
   UNBIND = 'UNBIND',
+}
+
+export enum QuoteWorkflowStatusType {
+  APPROVED = 'APPROVED',
+  REFERRED = 'REFERRED',
+  PENDING = 'PENDING',
 }
 
 export enum ConfiguratorType {
@@ -116,6 +138,7 @@ export enum StepStatus {
 export enum QuoteActionType {
   BIND = 'BIND',
   UNDERWRITING = 'UNDERWRITING',
+  UPDATE = 'UPDATE',
 }
 
 export interface FSOrderEntry extends OrderEntry {
@@ -211,4 +234,12 @@ export interface ChangedPolicyData {
   label?: string;
   oldValue?: string;
   newValue?: string;
+}
+
+export interface FSCheckoutStep extends CheckoutStep {
+  restrictedCategories?: string[];
+}
+export interface FSSteps {
+  stepParameter: string;
+  step: string;
 }

@@ -4,35 +4,18 @@ export function checkBankingComparisonPage() {
   cy.get('.primary-button')
     .should('contain', 'Select')
     .should('have.length', 3);
-  cy.get('a.link')
-    .should('contain', 'More Info')
-    .should('have.length', 3);
+  cy.get('a.link').should('contain', 'More Info').should('have.length', 3);
 }
 
 export function checkBankingProgressBar() {
   cy.get('.progress-inner-wrapper').should('have.length', 7);
-  cy.get('p.label')
-    .should('have.length', 7)
-    .eq(0)
-    .contains("What's Included");
-  cy.get('p.label')
-    .eq(1)
-    .contains('Configure a Product');
-  cy.get('p.label')
-    .eq(2)
-    .contains('Add Options');
-  cy.get('p.label')
-    .eq(3)
-    .contains('Personal Details');
-  cy.get('p.label')
-    .eq(4)
-    .contains('Quote Review');
-  cy.get('p.label')
-    .eq(5)
-    .contains('Legal Information');
-  cy.get('p.label')
-    .eq(6)
-    .contains('User Identification');
+  cy.get('p.label').should('have.length', 7).eq(0).contains("What's Included");
+  cy.get('p.label').eq(1).contains('Configure a Product');
+  cy.get('p.label').eq(2).contains('Add Options');
+  cy.get('p.label').eq(3).contains('Personal Details');
+  cy.get('p.label').eq(4).contains('Quote Review');
+  cy.get('p.label').eq(5).contains('Legal Information');
+  cy.get('p.label').eq(6).contains('User Identification');
 }
 
 export function checkLegalInformationPage() {
@@ -40,7 +23,7 @@ export function checkLegalInformationPage() {
   cy.get('cx-fs-legal-documents > .border-color-3')
     .should('be.visible')
     .within(() => {
-      cy.get('li.pb-1').should('have.length', 4);
+      cy.get('li.pb-3').should('have.length', 4);
     });
   cy.get('cx-fs-legal-checkboxes').within(() => {
     cy.get('input[type="checkbox"]').click({ multiple: true, force: true });
@@ -136,3 +119,13 @@ export function populatePersonalDetailsLoanAndCA() {
     .eq(0)
     .click();
 }
+
+  export function startBankingCheckout(mainProduct) {
+  cy.selectOptionFromDropdown({
+    menuOption: 'Banking',
+    dropdownItem: mainProduct,
+  });
+  cy.get('.enriched-banner-styled-text')
+    .should('contain', ' Request a product')
+    .click({ multiple: true, force: true });
+  }

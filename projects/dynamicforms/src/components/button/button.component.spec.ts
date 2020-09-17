@@ -1,13 +1,19 @@
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormGroup, FormControl, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormGroup,
+  FormControl,
+  ReactiveFormsModule,
+  AbstractControl,
+} from '@angular/forms';
+import { LanguageService } from '@spartacus/core';
+import { of } from 'rxjs';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { ButtonComponent } from './button.component';
-import { LanguageService } from '@spartacus/core';
-import { of } from 'rxjs';
+import { FormService } from './../../core/services/form/form.service';
 
 class MockOccValueListService {}
 
@@ -33,10 +39,19 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {},
 };
 
+const formControl = new FormControl('formValue');
+
+class MockFormService {
+  getFormControlForCode(): AbstractControl {
+    return formControl;
+  }
+}
+
 describe('ButtonComponent', () => {
   let component: ButtonComponent;
   let fixture: ComponentFixture<ButtonComponent>;
   let el: DebugElement;
+  let formService: FormService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -49,6 +64,7 @@ describe('ButtonComponent', () => {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
         },
+        { provide: FormService, useClass: MockFormService },
       ],
     }).compileComponents();
   }));
@@ -56,6 +72,7 @@ describe('ButtonComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(ButtonComponent);
     component = fixture.componentInstance;
+    formService = TestBed.inject(FormService);
     component.group = mockFormGroup;
     component.config = mockField;
     el = fixture.debugElement;

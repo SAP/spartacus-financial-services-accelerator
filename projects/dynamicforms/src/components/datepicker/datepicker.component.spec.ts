@@ -1,13 +1,20 @@
 import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
+import { of } from 'rxjs';
+import { FormDateConfig } from '../../core';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
+import { FormService } from './../../core/services/form/form.service';
 import { DatePickerComponent } from './datepicker.component';
-import { of } from 'rxjs';
 
 @Component({
   // tslint:disable
@@ -34,6 +41,14 @@ const mockField: FieldConfig = {
   },
 };
 
+const formControl = new FormControl('formValue');
+
+class MockFormService {
+  getFormControlForCode(): AbstractControl {
+    return formControl;
+  }
+}
+
 const mockFormGroup = new FormGroup({
   testDatePicker: new FormControl(),
 });
@@ -45,6 +60,7 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 describe('DatePickerComponent', () => {
   let component: DatePickerComponent;
   let fixture: ComponentFixture<DatePickerComponent>;
+  let formService: FormService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -58,12 +74,18 @@ describe('DatePickerComponent', () => {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
         },
+        { provide: FormService, useClass: MockFormService },
+        {
+          provide: FormDateConfig,
+          useValue: { date: { format: 'yyyy-mm-dd' } },
+        },
       ],
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DatePickerComponent);
+    formService = TestBed.inject(FormService);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
     component.config = mockField;

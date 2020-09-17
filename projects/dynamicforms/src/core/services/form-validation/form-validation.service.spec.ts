@@ -35,7 +35,7 @@ describe('FormValidationService', () => {
       ],
     });
 
-    service = TestBed.get(FormValidationService);
+    service = TestBed.inject(FormValidationService);
   });
 
   it('should be created', () => {

@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { select, Store, StoreModule } from '@ngrx/store';
 import * as fromActions from '../actions/form-data.action';
@@ -24,7 +23,7 @@ describe('Form Data Selectors', () => {
       ],
     });
 
-    store = TestBed.get(Store as Type<Store<StateWithForm>>);
+    store = TestBed.inject(Store);
     spyOn(store, 'dispatch').and.callThrough();
   });
 

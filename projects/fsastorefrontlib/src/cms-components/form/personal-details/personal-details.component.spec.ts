@@ -1,15 +1,19 @@
+import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Component, Input, Type } from '@angular/core';
-import { CmsComponentData, SpinnerModule } from '@spartacus/storefront';
+import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import {
   ActiveCartService,
+  Cart,
   CmsComponent,
   I18nTestingModule,
+  UserToken,
+  AuthService,
 } from '@spartacus/core';
-import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
-import { of } from 'rxjs';
-import { PersonalDetailsComponent } from './personal-details.component';
+import { CmsComponentData, SpinnerModule } from '@spartacus/storefront';
+import { of, Observable } from 'rxjs';
 import { FormDefinitionType } from '../../../occ/occ-models';
+import { FSProduct } from './../../../occ/occ-models/occ.models';
+import { PersonalDetailsComponent } from './personal-details.component';
 
 const formDefinition = {
   formId: 'formId',
@@ -25,6 +29,11 @@ class MockFormDataService {
   }
   loadFormDefinitions(category, type) {
     return of(formDefinition);
+  }
+}
+class MockAuthService {
+  getUserToken(): Observable<UserToken> {
+    return of({ access_token: 'test' } as UserToken);
   }
 }
 @Component({
@@ -44,13 +53,16 @@ class MockFormComponent {
   @Input()
   formData;
 }
-const mockCart = {
+
+const mockProduct: FSProduct = {
+  defaultCategory: { code: 'category' },
+};
+
+const mockCart: Cart = {
   code: 'cartCode',
   entries: [
     {
-      product: {
-        defaultCategory: { code: 'category' },
-      },
+      product: mockProduct,
     },
   ],
 };
@@ -82,8 +94,8 @@ class MockFormDataStorageService {
 describe('PersonalDetailsComponent', () => {
   let component: PersonalDetailsComponent;
   let fixture: ComponentFixture<PersonalDetailsComponent>;
-  let mockFormDataService: MockFormDataService;
-  let mockActiveCartService: MockActiveCartService;
+  let mockFormDataService: FormDataService;
+  let mockActiveCartService: ActiveCartService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -106,13 +118,16 @@ describe('PersonalDetailsComponent', () => {
           provide: FormDataStorageService,
           useClass: MockFormDataStorageService,
         },
+        {
+          provide: FormDataStorageService,
+          useClass: MockFormDataStorageService,
+        },
+        { provide: AuthService, useClass: MockAuthService },
       ],
     }).compileComponents();
 
-    mockFormDataService = TestBed.get(FormDataService as Type<FormDataService>);
-    mockActiveCartService = TestBed.get(ActiveCartService as Type<
-      ActiveCartService
-    >);
+    mockFormDataService = TestBed.inject(FormDataService);
+    mockActiveCartService = TestBed.inject(ActiveCartService);
   }));
 
   beforeEach(() => {

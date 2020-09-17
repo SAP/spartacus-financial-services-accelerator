@@ -60,10 +60,7 @@
 }
 .documents {
   li:first-child {
-    border-bottom: none;
-    text-transform: uppercase;
-    background: var(--cx-color-4);
-    font-weight: var(--cx-font-weight-semi);
+    @extend .sub-title;
   }
   .document-link {
     color: var(--cx-color-primary);
@@ -73,6 +70,12 @@
     color: var(--cx-color-11);
     font-weight: var(--cx-font-weight-semi);
   }
+}
+.sub-title {
+  border-bottom: none;
+  text-transform: uppercase;
+  background: var(--cx-color-4);
+  font-weight: var(--cx-font-weight-semi);
 }
 .heading-headline {
   font-size: var(--cx-h2-font-size);
@@ -106,9 +109,6 @@
 .image-wrapper {
   border-radius: 50%;
   background-color: var(--cx-color-1);
-  display: inline-block;
-  vertical-align: middle;
-  text-align: center;
   &.small {
     flex: 0 0 auto;
     width: 60px;
@@ -154,6 +154,7 @@
 }
 .styled-list {
   li {
+    display: flex;
     font-size: var(--cx-h5-font-size);
     a {
       font-size: var(--cx-text-font-size);

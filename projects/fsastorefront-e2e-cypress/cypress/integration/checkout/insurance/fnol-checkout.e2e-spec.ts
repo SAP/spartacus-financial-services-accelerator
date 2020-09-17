@@ -15,21 +15,23 @@ import {
   checkMyPoliciesPage,
   updatePolicyEffectiveAndStartDate,
 } from '../../../helpers/my-account/policies';
+import {
+  waitForPage,
+  waitForCreateAsset,
+} from '../../../helpers/generalHelpers';
 
+let cartId;
 context('FNOL for sample data user', () => {
   before(() => {
-    cy.visit('/login');
+    cy.visit('/');
   });
 
   it('Should check anonymous user cannot access claims', () => {
-    cy.visit('/');
-    cy.get('.Section4 cx-banner')
-      .eq(1)
-      .click();
+    cy.get('.Section4 cx-banner').eq(1).click();
     cy.get('.heading-headline').should('have.text', 'Login');
   });
 
-  it('Should check no policies page for new user', () => {
+  it('Should check on policies page for new user', () => {
     cy.visit('/login');
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
@@ -39,6 +41,8 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should complete first step auto checkout', () => {
+    cy.visit('/');
+    cy.wait(500);
     auto.openCategoryPage();
     auto.populateAutoInformation();
     auto.populateMainDriverInfo();
@@ -47,20 +51,36 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should continue in add options and quote review pages', () => {
+    const addToCart = waitForCreateAsset('carts', 'addToCart');
     auto.checkAutoComparisonTable();
     auto.selectAutoBronze();
+    cy.wait(`@${addToCart}`).then(result => {
+      cartId = (<any>result.response.body).code;
+    });
     //add options page
+    const personalDetails = waitForPage('personal-details', 'personalDetails');
     clickContinueButton();
+    cy.wait(`@${personalDetails}`).its('status').should('eq', 200);
+  });
+
+  it('Should populate personal details page', () => {
+    checkout.checkPersonalDetailsPage();
+    auto.populatePersonalDetails();
+    auto.populateVehicleDetails();
+    auto.populateMainDriverData();
+    const quoteReview = waitForPage('quote-review', 'quoteReview');
+    checkout.clickContinueButton();
+    cy.wait(`@${quoteReview}`).its('status').should('eq', 200);
   });
 
   it('Should add new payment and bind quote', () => {
-    fnol.waitForQuoteReviewPage();
-    addPaymentMethod(registrationUser.email);
+    addPaymentMethod(registrationUser.email, cartId);
     clickContinueButton();
     checkout.ConfirmBindQuote();
   });
 
   it('Select default payment details', () => {
+    checkout.clickContinueButton();
     selectPaymentMethod();
   });
 

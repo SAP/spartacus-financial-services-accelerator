@@ -25,7 +25,7 @@ describe('FSTranslationService', () => {
         FSTranslationService,
       ],
     });
-    service = TestBed.get(FSTranslationService);
+    service = TestBed.inject(FSTranslationService);
   });
 
   it('should get translation value', () => {

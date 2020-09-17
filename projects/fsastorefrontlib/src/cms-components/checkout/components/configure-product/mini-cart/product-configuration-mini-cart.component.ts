@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { FormDataService } from '@fsa/dynamicforms';
 import { Product } from '@spartacus/core';
 import { CurrentProductService } from '@spartacus/storefront';
@@ -10,10 +16,12 @@ import {
   PricingService,
 } from '../../../../../core/product-pricing/facade';
 import { FSProduct, PricingData } from '../../../../../occ/occ-models';
+import { FSTranslationService } from '../../../../../core/i18n/facade/translation.service';
 
 @Component({
   selector: 'cx-fs-product-configuration-mini-cart',
   templateUrl: './product-configuration-mini-cart.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductConfigurationMiniCartComponent
   implements OnInit, OnDestroy {
@@ -21,7 +29,9 @@ export class ProductConfigurationMiniCartComponent
     protected pricingService: PricingService,
     protected productService: FSProductService,
     protected currentProductService: CurrentProductService,
-    protected formDataService: FormDataService
+    protected formDataService: FormDataService,
+    protected changeDetectorRef: ChangeDetectorRef,
+    protected translationService: FSTranslationService
   ) {}
 
   subscription = new Subscription();
@@ -57,11 +67,19 @@ export class ProductConfigurationMiniCartComponent
                   this.productId,
                   this.pricingData
                 );
+                this.changeDetectorRef.detectChanges();
               }
             })
           )
           .subscribe()
       );
+  }
+
+  getTranslation(translationGroup: string, translationKey: string): string {
+    return this.translationService.getTranslationValue(
+      [translationGroup],
+      translationKey
+    );
   }
 
   ngOnDestroy() {

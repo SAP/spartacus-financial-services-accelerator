@@ -1,8 +1,23 @@
 {
-  "name": "dynamicforms",
+  "name": "@fsa/dynamicforms",
   "version": "0.0.1",
   "peerDependencies": {
-    "@angular/common": "^8.0.3",
-    "@angular/core": "^8.0.3"
+    "@angular/common": "^9.0.0",
+    "@angular/compiler": "^9.0.0",
+    "@angular/core": "^9.0.0",
+    "@angular/forms": "^9.0.0",
+    "@angular/localize": "^9.0.0",
+    "@angular/platform-browser": "^9.0.0",
+    "@angular/router": "^9.0.0",
+    "@angular/service-worker": "^9.0.0",
+    "@ng-bootstrap/ng-bootstrap": "^6.0.0",
+    "@ng-select/ng-select": "^4.0.0",
+    "@ngrx/effects": "^9.0.0",
+    "@ngrx/store": "^9.0.0",
+    "@spartacus/core": "2.0.0-rc.2",
+    "bootstrap": "^4.2.1",
+    "rxjs": "^6.5.4",
+    "zone.js": "^0.10.2",
+    "ngx-infinite-scroll": "^8.0.0"
   }
 }

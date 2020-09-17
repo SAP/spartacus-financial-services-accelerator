@@ -43,7 +43,4 @@ export const getPotentialProductAssignments: MemoizedSelector<
 export const getLoaded: MemoizedSelector<
   StateWithProductAssignment,
   any
-> = createSelector(
-  getProductAssignmentState,
-  fromProductAssignment.getLoaded
-);
+> = createSelector(getProductAssignmentState, fromProductAssignment.getLoaded);

@@ -10,8 +10,10 @@
       <input
         class="form-control"
         type="date"
+        placeholder="{{ getDateFormat() }}"
         [formControlName]="config.name"
         [attr.name]="config.name"
+        [attr.readonly]="config.readonly"
       />
     </div>
     <cx-error-notice

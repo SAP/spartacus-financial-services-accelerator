@@ -1,17 +1,16 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
+import { AuthActions } from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
 import { FormConnector } from '../../connectors/form-connector';
+import { FormDataStorageService } from '../../services/storage/form-data-storage.service';
 import * as fromActions from '../actions';
 import { YFormData } from './../../models/form-occ.models';
 import * as fromUserReducers from './../../store/reducers/index';
 import * as fromEffects from './form-data.effect';
-import { FormDataStorageService } from '../../services/storage/form-data-storage.service';
-import { AuthActions } from '@spartacus/core';
 
 const formData: YFormData = {
   id: 'test-formData',
@@ -61,9 +60,7 @@ describe('Form Data Effects', () => {
         provideMockActions(() => actions$),
       ],
     });
-    effects = TestBed.get(fromEffects.FormDataEffects as Type<
-      fromEffects.FormDataEffects
-    >);
+    effects = TestBed.inject(fromEffects.FormDataEffects);
   });
 
   describe('loadFormData$', () => {

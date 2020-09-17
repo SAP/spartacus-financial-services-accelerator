@@ -1,6 +1,7 @@
 import * as travelCheckout from '../../../helpers/checkout/insurance/travel-checkout';
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
+import * as checkout from '../../../helpers/checkout/checkoutSteps';
 
 context('Retrieve Quote', () => {
   before(() => {
@@ -36,13 +37,10 @@ context('Retrieve Quote', () => {
     });
 
     it('Should retrieve a quote and check if the user is on the correct page', () => {
-      cy.get('a.link')
-        .contains('Retrieve')
-        .click();
-      cy.url().should('include', 'add-options');
-      cy.get('.is-active').within(() => {
-        cy.get('p').contains('Add Options');
-      });
+      cy.get('.link').contains('Retrieve').click({ force: true });
+      cy.wait(1000);
+      checkout.checkCheckoutStep('Your Travel Insurance', '7');
+      cy.get('h2').contains('Add Options');
     });
   });
 });

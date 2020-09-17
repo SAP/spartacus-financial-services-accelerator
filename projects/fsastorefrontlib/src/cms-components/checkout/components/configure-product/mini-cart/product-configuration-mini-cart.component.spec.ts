@@ -1,4 +1,4 @@
-import { DebugElement, Type } from '@angular/core';
+import { DebugElement } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { I18nTestingModule, Product } from '@spartacus/core';
@@ -10,6 +10,7 @@ import { FSProductService } from './../../../../../core/product-pricing/facade/p
 import { PricingData } from './../../../../../occ/occ-models/form-pricing.interface';
 import { FSProduct } from './../../../../../occ/occ-models/occ.models';
 import { ProductConfigurationMiniCartComponent } from './product-configuration-mini-cart.component';
+import { FSTranslationService } from '../../../../../core/i18n/facade/translation.service';
 
 const formData: YFormData = {
   id: 'test-formData',
@@ -65,6 +66,11 @@ class MockPricingService {
     return pricingData;
   }
 }
+
+class MockFSTranslationService {
+  getTranslationValue() {}
+}
+
 describe('ProductConfigurationMiniCartComponent', () => {
   let component: ProductConfigurationMiniCartComponent;
   let fixture: ComponentFixture<ProductConfigurationMiniCartComponent>;
@@ -73,6 +79,7 @@ describe('ProductConfigurationMiniCartComponent', () => {
   let pricingService: PricingService;
   let formDataService: FormDataService;
   let fsProductService: FSProductService;
+  let translationService: FSTranslationService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -95,18 +102,21 @@ describe('ProductConfigurationMiniCartComponent', () => {
           provide: FSProductService,
           useClass: MockFSProductService,
         },
+        {
+          provide: FSTranslationService,
+          useClass: MockFSTranslationService,
+        },
       ],
     }).compileComponents();
-    currentProductService = TestBed.get(CurrentProductService as Type<
-      CurrentProductService
-    >);
-    formDataService = TestBed.get(FormDataService as Type<FormDataService>);
-    pricingService = TestBed.get(PricingService as Type<PricingService>);
-    fsProductService = TestBed.get(FSProductService as Type<FSProductService>);
+    currentProductService = TestBed.inject(CurrentProductService);
+    formDataService = TestBed.inject(FormDataService);
+    pricingService = TestBed.inject(PricingService);
+    fsProductService = TestBed.inject(FSProductService);
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductConfigurationMiniCartComponent);
+    translationService = TestBed.inject(FSTranslationService);
     component = fixture.componentInstance;
     el = fixture.debugElement;
     fixture.detectChanges();
@@ -148,5 +158,15 @@ describe('ProductConfigurationMiniCartComponent', () => {
     component.ngOnInit();
     component.ngOnDestroy();
     expect(subscriptions.unsubscribe).toHaveBeenCalled();
+  });
+  it('should find translation for key', () => {
+    spyOn(translationService, 'getTranslationValue').and.returnValue(
+      'test value'
+    );
+    const translationValue = component.getTranslation(
+      'insurances_auto',
+      'vehicleMake'
+    );
+    expect(translationValue).toEqual('test value');
   });
 });

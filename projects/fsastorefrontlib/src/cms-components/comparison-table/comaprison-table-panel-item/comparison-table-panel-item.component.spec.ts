@@ -1,4 +1,4 @@
-import { DebugElement, Pipe, PipeTransform, Type } from '@angular/core';
+import { DebugElement, Pipe, PipeTransform } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -120,6 +120,10 @@ class MockFSProductService {
   getCalculatedProductData(): Observable<Product> {
     return of();
   }
+
+  isLoading(): Observable<boolean> {
+    return of(true);
+  }
 }
 
 describe('ComparisonTablePanelItemComponent', () => {
@@ -168,14 +172,10 @@ describe('ComparisonTablePanelItemComponent', () => {
       ],
       declarations: [ComparisonTablePanelItemComponent, MockUrlPipe],
     }).compileComponents();
-    mockCartService = TestBed.get(FSCartService as Type<FSCartService>);
-    mockRoutingService = TestBed.get(RoutingService as Type<RoutingService>);
-    mockCheckoutConfigService = TestBed.get(FSCheckoutConfigService as Type<
-      FSCheckoutConfigService
-    >);
-    mockProductService = TestBed.get(FSProductService as Type<
-      FSProductService
-    >);
+    mockCartService = TestBed.inject(FSCartService);
+    mockRoutingService = TestBed.inject(RoutingService);
+    mockCheckoutConfigService = TestBed.inject(FSCheckoutConfigService);
+    mockProductService = TestBed.inject(FSProductService);
   }));
 
   beforeEach(() => {

@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { DefaultFormValidators } from '@fsa/dynamicforms';
 import { UpdateProfileFormComponent } from '@spartacus/storefront';
 import { FSUser } from '../../../../occ/occ-models';
+import { DateConfig } from './../../../../core/date-config/date-config';
 
 @Component({
   selector: 'cx-fs-update-profile-form',
@@ -26,7 +27,10 @@ export class FSUpdateProfileFormComponent extends UpdateProfileFormComponent
     }),
   });
 
-  constructor(protected formBuilder: FormBuilder) {
+  constructor(
+    protected formBuilder: FormBuilder,
+    protected config: DateConfig
+  ) {
     super(formBuilder);
   }
 
@@ -34,12 +38,27 @@ export class FSUpdateProfileFormComponent extends UpdateProfileFormComponent
   user: FSUser;
 
   @Output()
-  submited = new EventEmitter<{ userUpdates: FSUser }>();
+  submitted = new EventEmitter<{ userUpdates: FSUser }>();
 
   ngOnInit() {
     super.ngOnInit();
     if (this.user && this.user.contactInfos) {
+      this.form.patchValue(this.user);
       this.form.controls.contactInfos.setValue(this.user.contactInfos[0]);
     }
+  }
+
+  onSubmit(): void {
+    if (this.form.valid) {
+      this.submitted.emit({
+        userUpdates: { ...this.form.value },
+      });
+    } else {
+      this.form.markAllAsTouched();
+    }
+  }
+
+  getDateFormat() {
+    return this.config.date.format || '';
   }
 }

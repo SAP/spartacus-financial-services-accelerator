@@ -1,4 +1,3 @@
-import * as productCategory from '../../../helpers/productCategoryPage';
 import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as currentAccount from '../../../helpers/checkout/banking/currentAccount';
@@ -12,13 +11,7 @@ context('Current Account Checkout', () => {
   });
 
   it('Start checkout for Current Account ', () => {
-    cy.wait(500);
-    //checkout.waitForHomepage();
-    cy.selectOptionFromDropdown({
-      menuOption: 'Banking',
-      dropdownItem: 'Current Account',
-    });
-    productCategory.startCheckoutForBanking();
+    banking.startBankingCheckout('Current Account');
   });
 
   it('Should check comparison page', () => {
@@ -46,6 +39,7 @@ context('Current Account Checkout', () => {
   it('Should register user in checkout', () => {
     register.populateRegistrationForm(registrationUser);
     register.loginInUser(registrationUser.email, registrationUser.password);
+    cy.wait(500);
   });
 
   it('Should complete personal details step', () => {
@@ -54,20 +48,24 @@ context('Current Account Checkout', () => {
     banking.populatePersonalDetailsLoanAndCA();
     currentAccount.populatePersonalDetails();
     //currentAccount.checkMiniCartCurrentAccount();
+    //Waiting for registration process to be completed
+    cy.wait(5000);
     checkout.clickContinueButton();
   });
 
   it('Should check Quote Review page', () => {
     banking.checkBankingProgressBar();
-    checkout.checkAccordions('currentAccount');
+    checkout.checkAccordions('generalQuoteAccordions');
   });
 
   it('Should bind Quote', () => {
     checkout.bindQuotePopup();
+    checkout.clickContinueButton();
   });
 
   it('Should check Legal Information page', () => {
-    banking.checkLegalInformationPage('Your Current Account Application');
+    checkout.checkCheckoutStep('Your Current Account Application', '7');
+    banking.checkLegalInformationPage();
     checkout.clickContinueButton();
   });
 
@@ -79,8 +77,8 @@ context('Current Account Checkout', () => {
   });
 
   it('Should check order confirmation', () => {
-    checkout.checkOrderConfirmation();
-    checkout.checkAccordions('currentAccount');
+    checkout.checkOrderConfirmationBanking();
+    checkout.checkAccordions('confirmationCurrentAccount');
   });
 
   it('Should empty my account policies page', () => {

@@ -13,12 +13,9 @@ context('Consent Management', () => {
 
   it('should check anonymous consent in registration form', () => {
     cy.get('cx-login a').click();
-    cy.get('.register')
-      .findByText('Register')
-      .click({ force: true });
-    cy.get('input[type="checkbox"]')
-      .first()
-      .should('be.checked');
+    cy.get('.register').findByText('Register').click({ force: true });
+    //TODO: Bug FSA-5303
+    cy.get('input[type="checkbox"]').first().should('be.checked');
   });
 
   it('should register a new user', () => {
@@ -34,8 +31,6 @@ context('Consent Management', () => {
       menuOption: 'My Account',
       dropdownItem: 'Consent Management',
     });
-    cy.get('input[type="checkbox"]')
-      .first()
-      .should('be.checked');
+    cy.get('input[type="checkbox"]').first().should('be.checked');
   });
 });

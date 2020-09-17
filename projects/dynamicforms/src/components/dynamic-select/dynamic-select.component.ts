@@ -23,7 +23,7 @@ export class DynamicSelectComponent extends AbstractFormComponent
     protected formService: FormService,
     protected injector: Injector
   ) {
-    super(formConfig, languageService, injector);
+    super(formConfig, languageService, injector, formService);
   }
 
   ngOnInit() {

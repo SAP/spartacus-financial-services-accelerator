@@ -1,21 +1,23 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { Type } from '@angular/core';
-import { QuoteConnector } from './quote.connector';
-import { QuoteAdapter } from './quote.adapter';
-import createSpy = jasmine.createSpy;
 import { QuoteActionType } from './../../../occ/occ-models/occ.models';
+import { QuoteAdapter } from './quote.adapter';
+import { QuoteConnector } from './quote.connector';
+import createSpy = jasmine.createSpy;
 
 class MockQuoteAdapter implements QuoteAdapter {
   getQuotes = createSpy('QuoteAdapter.getQuotes').and.callFake(userId =>
     of('getQuotes' + userId)
   );
-  updateQuote = createSpy('QuoteAdapter.updateQuote').and.callFake(
-    (userId, cart, quote) => of('updateQuote' + userId + cart + quote)
+  updateQuote = createSpy(
+    'QuoteAdapter.updateQuote'
+  ).and.callFake((userId, cart, quote) =>
+    of('updateQuote' + userId + cart + quote)
   );
-  invokeQuoteAction = createSpy('QuoteAdapter.invokeQuoteAction').and.callFake(
-    (userId, policyId, contractId) =>
-      of('invokeQuoteAction' + userId + policyId + contractId)
+  invokeQuoteAction = createSpy(
+    'QuoteAdapter.invokeQuoteAction'
+  ).and.callFake((userId, policyId, contractId) =>
+    of('invokeQuoteAction' + userId + policyId + contractId)
   );
 }
 const user = 'user';
@@ -30,8 +32,8 @@ describe('QuoteConnector', () => {
       providers: [{ provide: QuoteAdapter, useClass: MockQuoteAdapter }],
     });
 
-    quoteConnector = TestBed.get(QuoteConnector as Type<QuoteConnector>);
-    quoteAdapter = TestBed.get(QuoteAdapter as Type<QuoteAdapter>);
+    quoteConnector = TestBed.inject(QuoteConnector);
+    quoteAdapter = TestBed.inject(QuoteAdapter);
   });
 
   it('should be created', () => {
@@ -46,11 +48,23 @@ describe('QuoteConnector', () => {
     expect(quoteAdapter.updateQuote).toHaveBeenCalledWith(user, cartId, {});
   });
   it('should call adapter for bindQuote', () => {
-    quoteConnector.invokeQuoteAction(user, cartId, QuoteActionType.BIND);
+    quoteConnector.invokeQuoteAction(user, cartId, QuoteActionType.BIND, null);
     expect(quoteAdapter.invokeQuoteAction).toHaveBeenCalledWith(
       user,
       cartId,
-      QuoteActionType.BIND
+      QuoteActionType.BIND,
+      null
+    );
+  });
+  it('should call adapter for update personal details', () => {
+    quoteConnector.invokeQuoteAction(user, cartId, QuoteActionType.UPDATE, {
+      attribute: '1',
+    });
+    expect(quoteAdapter.invokeQuoteAction).toHaveBeenCalledWith(
+      user,
+      cartId,
+      QuoteActionType.UPDATE,
+      { attribute: '1' }
     );
   });
 });

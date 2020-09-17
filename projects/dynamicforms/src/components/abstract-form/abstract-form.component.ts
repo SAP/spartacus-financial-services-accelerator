@@ -1,24 +1,26 @@
 import {
   Component,
   HostBinding,
-  OnInit,
-  OnDestroy,
   Injector,
+  OnDestroy,
+  OnInit,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { FieldConfig } from '../../core/models/form-config.interface';
-import { DynamicFormsConfig } from '../../core/config/form-config';
 import { LanguageService } from '@spartacus/core';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
+import { DynamicFormsConfig } from '../../core/config/form-config';
+import { FieldConfig } from '../../core/models/form-config.interface';
 import { PrefillResolver } from '../../core/resolver/prefill-resolver.interface';
+import { FormService } from '../../core/services/form/form.service';
 
 @Component({ template: '' })
 export class AbstractFormComponent implements OnInit, OnDestroy {
   constructor(
     protected appConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
-    protected injector: Injector
+    protected injector: Injector,
+    protected formService: FormService
   ) {}
 
   @HostBinding('class') hostComponentClass: string;
@@ -29,11 +31,21 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
   activeLang$ = this.languageService.getActive();
 
   ngOnInit() {
+    this.setHostComponentClass();
+    this.setActiveLanguageLabels();
+    this.controlPrefill();
+    this.interDependancyValueCheck();
+  }
+
+  protected setHostComponentClass() {
     this.hostComponentClass =
       this.config && this.config.gridClass ? this.config.gridClass : 'col-12';
     if (this.config && this.config.cssClass) {
       this.hostComponentClass = `${this.hostComponentClass} ${this.config.cssClass}`;
     }
+  }
+
+  protected setActiveLanguageLabels() {
     this.subscription.add(
       this.languageService
         .getActive()
@@ -48,6 +60,9 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+  }
+
+  protected controlPrefill() {
     if (this.config.prefillValue) {
       const targetObject = this.appConfig.dynamicForms.prefill[
         this.config.prefillValue.targetObject
@@ -56,17 +71,49 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
         const prefillResolver = this.injector.get<PrefillResolver>(
           targetObject.prefillResolver
         );
-        prefillResolver
-          .getFieldValue(this.config.prefillValue.targetValue)
-          .subscribe(value => {
-            if (value) {
-              this.group.get(this.config.name).setValue(value);
-            }
-          })
-          .unsubscribe();
+        this.subscription.add(
+          prefillResolver
+            .getPrefillValue(this.config.prefillValue.targetValue)
+            .subscribe(value => {
+              if (value) {
+                this.group.get(this.config.name).setValue(value);
+              }
+            })
+        );
       }
     }
   }
+
+  protected interDependancyValueCheck() {
+    const triggeredControl = this.formService.getFormControlForCode(
+      this.config.name,
+      this.group.root
+    );
+    if (triggeredControl) {
+      this.subscription.add(
+        triggeredControl.valueChanges
+          .pipe(
+            filter(_ => !!this.config.validations),
+            map(_ => {
+              this.config.validations.forEach(validation => {
+                if (validation.arguments && validation.arguments.length > 1) {
+                  const targetControl = this.formService.getFormControlForCode(
+                    validation.arguments[0].value,
+                    this.group.root
+                  );
+                  targetControl.updateValueAndValidity({
+                    onlySelf: true,
+                    emitEvent: false,
+                  });
+                }
+              });
+            })
+          )
+          .subscribe()
+      );
+    }
+  }
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();

@@ -1,4 +1,4 @@
-<ng-container *ngIf="orderPlaced; else orderCompleted">
+<ng-container *ngIf="orderPlaced">
   <ng-container *ngIf="order$ | async as order">
     <ng-container *ngIf="order.code; else loading">
       <ng-container
@@ -52,23 +52,20 @@
                     <div class="container">
                       <div class="row justify-content-center">
                         <ul class="col-12 accordion-list">
-                          <li class="accordion-list-item row">
-                            <ng-container
-                              *ngTemplateOutlet="
-                                orderDetails;
-                                context: {
-                                  valueList: !(order?.entries)[0]?.product
-                                    ?.configurable
-                                    ? order?.insuranceQuote?.quoteDetails?.entry
-                                    : ((order?.entries)[0]
-                                        ?.configurationInfos)[0]
-                                        ?.configurationValues.entry,
-                                  defaultCategory: defaultCategory
-                                }
-                              "
-                            >
-                            </ng-container>
-                          </li>
+                          <ng-container
+                            *ngTemplateOutlet="
+                              orderDetails;
+                              context: {
+                                valueList: !(order?.entries)[0]?.product
+                                  ?.configurable
+                                  ? order?.insuranceQuote?.quoteDetails?.entry
+                                  : ((order?.entries)[0]?.configurationInfos)[0]
+                                      ?.configurationValues.entry,
+                                defaultCategory: defaultCategory
+                              }
+                            "
+                          >
+                          </ng-container>
                         </ul>
                       </div>
                     </div>
@@ -119,28 +116,34 @@
                   </div>
                 </div>
               </cx-fs-accordion-item>
-              <cx-fs-accordion-item
-                [title]="'fscommon.addedByYou' | cxTranslate"
+              <ng-container
+                *ngIf="
+                  (order.deliveryOrderGroups[0]?.entries | slice: 1).length > 0
+                "
               >
-                <div class="container">
-                  <div class="row justify-content-center">
-                    <ul class="col-12 accordion-list">
-                      <ng-container
-                        *ngFor="
-                          let item of order.deliveryOrderGroups[0]?.entries
-                            | slice: 1
-                        "
-                      >
-                        <li class="accordion-list-item row">
-                          <div class="col-12 item-label">
-                            {{ item.product?.name }}
-                          </div>
-                        </li>
-                      </ng-container>
-                    </ul>
+                <cx-fs-accordion-item
+                  [title]="'fscommon.addedByYou' | cxTranslate"
+                >
+                  <div class="container">
+                    <div class="row justify-content-center">
+                      <ul class="col-12 accordion-list">
+                        <ng-container
+                          *ngFor="
+                            let item of order.deliveryOrderGroups[0]?.entries
+                              | slice: 1
+                          "
+                        >
+                          <li class="accordion-list-item row">
+                            <div class="col-12 item-label">
+                              {{ item.product?.name }}
+                            </div>
+                          </li>
+                        </ng-container>
+                      </ul>
+                    </div>
                   </div>
-                </div>
-              </cx-fs-accordion-item>
+                </cx-fs-accordion-item>
+              </ng-container>
               <ng-container
                 *ngIf="
                   order.deliveryOrderGroups[0]?.entries.length > 0 &&
@@ -257,44 +260,51 @@
                       :
                     </div>
                     <div class="short-overview-value col-5">
-                      {{ order.code }}
+                      <ng-container
+                        *ngIf="order.insuranceQuote?.policyId; else orderCode"
+                      >
+                        {{ order.insuranceQuote.policyId }}
+                      </ng-container>
+                      <ng-template #orderCode>
+                        {{ order.code }}
+                      </ng-template>
                     </div>
                   </div>
-                  <div
-                    *ngIf="order.insuranceQuote?.paymentFrequency"
-                    class="short-overview-item row"
+                  <ng-container *ngIf="order.insuranceQuote?.paymentFrequency">
+                    <div class="short-overview-item row">
+                      <div class="short-overview-title col-7">
+                        {{ 'fscommon.paymentFrequency' | cxTranslate }}:
+                      </div>
+                      <div class="short-overview-value col-5">
+                        {{ order.insuranceQuote?.paymentFrequency }}
+                      </div>
+                    </div></ng-container
                   >
-                    <div class="short-overview-title col-7">
-                      {{ 'fscommon.paymentFrequency' | cxTranslate }}:
-                    </div>
-                    <div class="short-overview-value col-5">
-                      {{ order.insuranceQuote?.paymentFrequency }}
-                    </div>
-                  </div>
-                  <div
-                    *ngIf="order.insuranceQuote?.startDate"
-                    class="short-overview-item row"
+                  <ng-container *ngIf="order.insuranceQuote?.startDate"
+                    ><div class="short-overview-item row">
+                      <div class="short-overview-title col-7">
+                        {{ 'fscommon.startDate' | cxTranslate }}:
+                      </div>
+                      <div class="short-overview-value col-5">
+                        {{
+                          order.insuranceQuote?.startDate
+                            | cxDate: 'dd MMM yyyy'
+                        }}
+                      </div>
+                    </div></ng-container
                   >
-                    <div class="short-overview-title col-7">
-                      {{ 'fscommon.startDate' | cxTranslate }}:
+                  <ng-container
+                    *ngFor="let entry of order.deliveryOrderGroups[0]?.entries"
+                  >
+                    <div class="short-overview-item row">
+                      <div class="short-overview-title col-7">
+                        {{ entry.product.name }}:
+                      </div>
+                      <div class="short-overview-value col-5">
+                        {{ entry.totalPrice.formattedValue }}
+                      </div>
                     </div>
-                    <div class="short-overview-value col-5">
-                      {{
-                        order.insuranceQuote?.startDate | cxDate: 'dd MMM yyyy'
-                      }}
-                    </div>
-                  </div>
-                  <div class="short-overview-item row">
-                    <div class="short-overview-title col-7">
-                      {{
-                        (order.deliveryOrderGroups[0]?.entries)[0]?.product
-                          ?.name
-                      }}
-                    </div>
-                    <div class="short-overview-value col-5">
-                      {{ order.totalPrice?.formattedValue }}
-                    </div>
-                  </div>
+                  </ng-container>
                   <div class="highlighted border-top border-color-3 row">
                     <div class="short-overview-title col-6">
                       {{ 'fscommon.orderTotal' | cxTranslate }}:
@@ -312,11 +322,6 @@
     </ng-container>
   </ng-container>
 </ng-container>
-<ng-template #orderCompleted>
-  <h1 class="mt-5 mb-3 text-center">
-    {{ 'policy.yourPolicyHasBeenSubmited' | cxTranslate }}
-  </h1>
-</ng-template>
 <ng-template #loading>
   <cx-spinner></cx-spinner>
 </ng-template>
@@ -329,10 +334,12 @@
     <ng-container
       *ngIf="getTranslation(defaultCategory.code, item.key) as label"
     >
-      <div class="col-6 item-label">{{ label }}:</div>
-      <div class="col-6 value notice">
-        {{ item.value }}
-      </div>
+      <li class="accordion-list-item row">
+        <div class="col-6 item-label">{{ label }}:</div>
+        <div class="col-6 value notice">
+          {{ item.value }}
+        </div>
+      </li>
     </ng-container>
   </ng-container>
 </ng-template>

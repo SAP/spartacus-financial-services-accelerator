@@ -13,10 +13,7 @@
     "typeRoots": [
       "node_modules/@types"
     ],
-    "lib": [
-      "es2017",
-      "dom"
-    ],
+    "lib": ["es2018", "dom"],
     "paths": {
       "@fsa/storefront": [
         "projects/fsastorefrontlib/src/public_api"

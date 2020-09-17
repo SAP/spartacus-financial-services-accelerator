@@ -1,4 +1,5 @@
 import { Action } from '@ngrx/store';
+import { StateUtils, MULTI_CART_DATA } from '@spartacus/core';
 
 export const LOAD_QUOTES = '[Quote] Load Quotes';
 export const LOAD_QUOTES_SUCCESS = '[Quote] Load Quotes Success';
@@ -40,9 +41,11 @@ export class UpdateQuoteFail implements Action {
   constructor(public payload: any) {}
 }
 
-export class QuoteProcessAction implements Action {
+export class QuoteProcessAction extends StateUtils.LoaderLoadAction {
   readonly type = QUOTE_PROCESS_ACTION;
-  constructor(public payload: any) {}
+  constructor(public payload: any) {
+    super(MULTI_CART_DATA);
+  }
 }
 
 export type QuoteAction =

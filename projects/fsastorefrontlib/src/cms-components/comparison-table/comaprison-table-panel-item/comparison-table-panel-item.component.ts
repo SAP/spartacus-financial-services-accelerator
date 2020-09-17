@@ -30,7 +30,6 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
   billingTimes: any;
   @Input()
   pricingData: PricingData;
-  checkoutStepUrlNext: string;
   productPrice: string;
 
   constructor(
@@ -43,14 +42,11 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
   ) {}
 
   product$: Observable<FSProduct>;
+  isLoading = true;
   panelItemEntries: OneTimeChargeEntry[] = [];
   private subscription = new Subscription();
 
   ngOnInit() {
-    this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-      this.activatedRoute
-    );
-
     this.getProductData();
   }
 
@@ -59,6 +55,18 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
       this.productCode,
       this.pricingData
     );
+
+    this.subscription.add(
+      this.productService
+        .isLoading(this.productCode)
+        .pipe(
+          map(isLoading => {
+            this.isLoading = isLoading;
+          })
+        )
+        .subscribe()
+    );
+
     this.subscription.add(
       this.product$
         .pipe(
@@ -75,14 +83,31 @@ export class ComparisonTablePanelItemComponent implements OnInit, OnDestroy {
                 product.price.oneTimeChargeEntries &&
                 product.price.oneTimeChargeEntries.length > 0
               ) {
-                product.price.oneTimeChargeEntries.forEach(
-                  oneTimeChargeEntry => {
-                    if (oneTimeChargeEntry.billingTime.code === 'paynow') {
-                      this.productPrice =
-                        oneTimeChargeEntry.price.formattedValue;
+                if (
+                  product.dynamicAttributes &&
+                  Object.keys(product.dynamicAttributes).length > 0
+                ) {
+                  const dynamicKeys = [];
+                  product.dynamicAttributes.forEach(dynamicAttribute => {
+                    if (dynamicAttribute.key === 'monthlyAnnuity') {
+                      this.productPrice = dynamicAttribute.value.formattedValue;
                     }
-                  }
-                );
+                    dynamicKeys.push(dynamicAttribute.key);
+                  });
+
+                  this.billingTimes = this.billingTimes.filter(
+                    billingTime => !dynamicKeys.includes(billingTime.code)
+                  );
+                } else {
+                  product.price.oneTimeChargeEntries.forEach(
+                    oneTimeChargeEntry => {
+                      if (oneTimeChargeEntry.billingTime.code === 'paynow') {
+                        this.productPrice =
+                          oneTimeChargeEntry.price.formattedValue;
+                      }
+                    }
+                  );
+                }
                 this.panelItemEntries = this.billingTimes.map(billingTime => {
                   return product.price.oneTimeChargeEntries.find(
                     entry => entry.billingTime.code === billingTime.code

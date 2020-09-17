@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FSStorefrontModule } from '@fsa/storefront';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { AppComponent } from './app.component';
@@ -10,6 +11,13 @@ import { AppComponent } from './app.component';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
+    StoreModule.forRoot({}, {
+      // Disabled until compatibility issue with NgRx and Angular Version 9 is resolved
+      runtimeChecks: {
+        strictStateImmutability: false,
+        strictActionImmutability: false,
+      },
+    }),
     FSStorefrontModule.withConfig({
       backend: {
         occ: {
@@ -30,8 +38,7 @@ import { AppComponent } from './app.component';
         client_secret: 'secret'
       },
       features: {
-        level: '1.3',
-        anonymousConsents: true,
+        consignmentTracking: true,
       }
     }),
     StoreDevtoolsModule.instrument({

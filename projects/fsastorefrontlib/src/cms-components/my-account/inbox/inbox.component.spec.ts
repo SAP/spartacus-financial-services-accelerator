@@ -1,6 +1,6 @@
 import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   AuthRedirectService,
   AuthService,
@@ -95,7 +95,7 @@ describe('InboxComponent', () => {
     mockInboxDataService = new MockInboxDataService();
 
     TestBed.configureTestingModule({
-      imports: [NgbTabsetModule, I18nTestingModule],
+      imports: [NgbNavModule, I18nTestingModule],
       declarations: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
       providers: [
         {

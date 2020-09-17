@@ -8,23 +8,14 @@ const formDefinitionLoaded = (state: FormDefinitionState) => state.loaded;
 export const getFormDefinitionState: MemoizedSelector<
   StateWithForm,
   FormDefinitionState
-> = createSelector(
-  getFormState,
-  (state: FormsState) => state.formDefinition
-);
+> = createSelector(getFormState, (state: FormsState) => state.formDefinition);
 
 export const getFormDefinition: MemoizedSelector<
   StateWithForm,
   any
-> = createSelector(
-  getFormDefinitionState,
-  formDefinitionContent
-);
+> = createSelector(getFormDefinitionState, formDefinitionContent);
 
 export const getFormDefinitionLoaded: MemoizedSelector<
   StateWithForm,
   any
-> = createSelector(
-  getFormDefinitionState,
-  formDefinitionLoaded
-);
+> = createSelector(getFormDefinitionState, formDefinitionLoaded);

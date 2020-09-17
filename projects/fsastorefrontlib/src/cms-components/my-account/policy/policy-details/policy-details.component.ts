@@ -5,11 +5,14 @@ import {
   OnInit,
 } from '@angular/core';
 import { OccConfig, RoutingService } from '@spartacus/core';
+import { saveAs } from 'file-saver';
 import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
+import { DocumentService } from './../../../../core/document/facade/document.service';
 import { AllowedFSRequestType } from './../../../../occ/occ-models';
+import { FSTranslationService } from '../../../../core/i18n/facade';
 
 @Component({
   selector: 'cx-fs-policy-details',
@@ -21,7 +24,9 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     protected routingService: RoutingService,
     protected policyService: PolicyService,
     protected config: OccConfig,
-    protected changeRequestService: ChangeRequestService
+    protected changeRequestService: ChangeRequestService,
+    protected documentService: DocumentService,
+    protected translationService: FSTranslationService
   ) {}
 
   policy$;
@@ -51,10 +56,12 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
 
   isChangeAllowed(
     allowedFSRequestTypes: AllowedFSRequestType[],
-    requestType: string
+    requestType: string,
+    startDate: string
   ): boolean {
-    if (allowedFSRequestTypes) {
+    if (startDate && allowedFSRequestTypes) {
       return (
+        new Date(startDate) <= new Date() &&
         allowedFSRequestTypes
           .filter(allowedRequestType => allowedRequestType.requestType)
           .map(allowedRequestType => allowedRequestType.requestType.code)
@@ -83,6 +90,27 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
           })
         )
         .subscribe()
+    );
+  }
+
+  getDocument(documentId, documentName, event) {
+    event.preventDefault();
+    this.subscription.add(
+      this.documentService
+        .getDocumentById(documentId)
+        .pipe(
+          map(document => {
+            saveAs(document, documentName + '.pdf');
+          })
+        )
+        .subscribe()
+    );
+  }
+
+  getTranslation(translationGroup: string, translationKey: string): string {
+    return this.translationService.getTranslationValue(
+      ['policy.details', translationGroup],
+      translationKey
     );
   }
 

@@ -1,11 +1,10 @@
-import { Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Cart, I18nTestingModule } from '@spartacus/core';
+import { I18nTestingModule } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
 import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
-import { FSProduct } from './../../../../occ/occ-models/occ.models';
+import { FSProduct, FSCart } from './../../../../occ/occ-models/occ.models';
 import { MiniCartComponent } from './mini-cart.component';
 
 const mockProduct: FSProduct = {
@@ -16,7 +15,7 @@ const mockProduct: FSProduct = {
   },
 };
 
-const mockCart: Cart = {
+const mockCart: FSCart = {
   code: 'testCode',
   guid: 'testUid',
   deliveryOrderGroups: [
@@ -37,8 +36,11 @@ const mockCart: Cart = {
 };
 
 class MockCartService {
-  getActive(): Observable<Cart> {
+  getActive(): Observable<FSCart> {
     return of(mockCart);
+  }
+  isStable(): Observable<boolean> {
+    return of(true);
   }
 }
 
@@ -67,10 +69,8 @@ describe('MiniCartComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MiniCartComponent);
-    translationService = TestBed.get(FSTranslationService as Type<
-      FSTranslationService
-    >);
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
+    translationService = TestBed.inject(FSTranslationService);
+    cartService = TestBed.inject(FSCartService);
     miniCartComponent = fixture.componentInstance;
   });
 

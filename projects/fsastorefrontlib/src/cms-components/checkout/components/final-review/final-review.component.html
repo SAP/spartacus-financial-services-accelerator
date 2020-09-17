@@ -34,7 +34,14 @@
         </ul>
       </div>
       <div class="col-12 col-md-3">
-        <button class="action-button btn-block" (click)="edit()">
+        <button
+          class="action-button btn-block"
+          [routerLink]="
+            {
+              cxRoute: 'checkoutPaymentDetails'
+            } | cxUrl
+          "
+        >
           {{ 'fscommon.edit' | cxTranslate }}
         </button>
       </div>

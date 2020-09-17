@@ -1,4 +1,4 @@
-import { Component, DebugElement, Input, Type } from '@angular/core';
+import { Component, DebugElement, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
@@ -75,8 +75,8 @@ describe('CMSFormSubmitComponent', () => {
   let formSubmitComponent: CMSFormSubmitComponent;
   let fixture: ComponentFixture<CMSFormSubmitComponent>;
   let el: DebugElement;
-  let mockCmsComponentConnector: MockCmsComponentConnector;
-  let mockFormDataService: MockFormDataService;
+  let mockCmsComponentConnector: CmsComponentConnector;
+  let mockFormDataService: FormDataService;
   let mockFormDataStorageService: FormDataStorageService;
 
   beforeEach(async(() => {
@@ -106,13 +106,9 @@ describe('CMSFormSubmitComponent', () => {
         },
       ],
     }).compileComponents();
-    mockCmsComponentConnector = TestBed.get(CmsComponentConnector as Type<
-      CmsComponentConnector
-    >);
-    mockFormDataService = TestBed.get(FormDataService as Type<FormDataService>);
-    mockFormDataStorageService = TestBed.get(FormDataStorageService as Type<
-      FormDataStorageService
-    >);
+    mockCmsComponentConnector = TestBed.inject(CmsComponentConnector);
+    mockFormDataService = TestBed.inject(FormDataService);
+    mockFormDataStorageService = TestBed.inject(FormDataStorageService);
   }));
 
   beforeEach(() => {

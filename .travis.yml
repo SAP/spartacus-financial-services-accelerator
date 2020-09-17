@@ -1,10 +1,8 @@
 language: node_js
-node_js: 
-  - '10.15.2'
-
+node_js:
+  - 12.13.1
 install:
   - yarn install
-
 script:
   - yarn ng build dynamicforms
   - yarn ng build fsastorefrontlib

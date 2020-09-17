@@ -1,6 +1,6 @@
 import { InjectionToken, Provider } from '@angular/core';
 import { ActionReducer, ActionReducerMap, MetaReducer } from '@ngrx/store';
-import { AuthActions, loaderReducer } from '@spartacus/core';
+import { AuthActions, StateUtils } from '@spartacus/core';
 import * as fromReducer from './change-request.reducer';
 
 import {
@@ -11,16 +11,16 @@ import {
 
 export function getReducers(): ActionReducerMap<ChangeRequestsState> {
   return {
-    changeRequest: loaderReducer<ChangeRequestState>(
+    changeRequest: StateUtils.loaderReducer<ChangeRequestState>(
       CHANGE_REQUEST_DATA,
       fromReducer.reducer
     ),
   };
 }
 
-export const reducerToken: InjectionToken<
-  ActionReducerMap<ChangeRequestsState>
-> = new InjectionToken<ActionReducerMap<ChangeRequestsState>>(
+export const reducerToken: InjectionToken<ActionReducerMap<
+  ChangeRequestsState
+>> = new InjectionToken<ActionReducerMap<ChangeRequestsState>>(
   'ChangeRequestReducers'
 );
 export const reducerProvider: Provider = {
@@ -30,7 +30,7 @@ export const reducerProvider: Provider = {
 export function clearChangeProcessState(
   reducer: ActionReducer<any>
 ): ActionReducer<any> {
-  return function(state, action) {
+  return function (state, action) {
     if (action.type === AuthActions.LOGOUT) {
       state = undefined;
     }

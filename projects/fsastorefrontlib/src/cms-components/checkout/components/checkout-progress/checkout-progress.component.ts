@@ -11,12 +11,17 @@ import {
   CheckoutProgressComponent,
   CurrentProductService,
 } from '@spartacus/storefront';
-import { Observable, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { Observable, of, Subscription } from 'rxjs';
+import { filter, map, tap } from 'rxjs/operators';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
+import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
-import { FSProduct } from './../../../../occ/occ-models/occ.models';
-import { FSCheckoutStep } from './checkout-step.component';
+import {
+  BindingStateType,
+  FSCart,
+  FSCheckoutStep,
+  FSProduct,
+} from './../../../../occ/occ-models/occ.models';
 
 @Component({
   selector: 'cx-fs-checkout-progress',
@@ -32,18 +37,31 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
     protected activatedRoute: ActivatedRoute,
     protected categoryService: CategoryService,
     protected cartService: FSCartService,
-    protected productService: CurrentProductService
+    protected productService: CurrentProductService,
+    public checkoutConfigService: FSCheckoutConfigService
   ) {
     super(config, routingService, routingConfigService);
   }
   private subscription = new Subscription();
   activeCategory$: Observable<string>;
-  activeCategorySteps = [];
+  activeProduct$: Observable<FSProduct>;
 
   ngOnInit() {
     super.ngOnInit();
     this.setActiveCategory();
     this.filterSteps();
+    this.subscription.add(
+      this.cartService
+        .getActive()
+        .pipe(
+          tap(() => {
+            this.checkoutConfigService.triggerPreviousNextStepSet(
+              this.activatedRoute
+            );
+          })
+        )
+        .subscribe()
+    );
   }
 
   setActiveCategory() {
@@ -69,6 +87,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
                       this.categoryService.setActiveCategory(
                         fsProduct.defaultCategory.code
                       );
+                      this.activeProduct$ = of(fsProduct);
                     })
                   )
                   .subscribe()
@@ -88,6 +107,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
                       this.categoryService.setActiveCategory(
                         fsProduct.defaultCategory.code
                       );
+                      this.activeProduct$ = of(fsProduct);
                     }
                   }
                 })
@@ -101,11 +121,10 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
   }
 
   setActiveStepIndex() {
-    this.activeStepUrl = this.activatedRoute.routeConfig.path;
-    this.activeCategorySteps.forEach((step, index) => {
-      const routeUrl = this.routingConfigService.getRouteConfig(step.routeName)
-        .paths[0];
-      if (routeUrl === this.activeStepUrl) {
+    const activeStepRoute = this.activatedRoute.snapshot.data.cxRoute;
+    this.checkoutConfigService.steps.forEach((step, index) => {
+      const stepRoute = step.routeName;
+      if (stepRoute === activeStepRoute) {
         this.activeStepIndex = index;
       }
     });
@@ -113,18 +132,37 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
 
   filterSteps() {
     this.subscription.add(
-      this.activeCategory$.subscribe(activeCategory => {
-        this.activeCategorySteps = this.steps.filter(step => {
-          return (
-            !(<FSCheckoutStep>step).restrictedCategories ||
-            (<FSCheckoutStep>step).restrictedCategories.indexOf(
-              activeCategory
-            ) === -1
-          );
-        });
-        this.setActiveStepIndex();
-      })
+      this.activeCategory$
+        .pipe(
+          filter(activeCategory => activeCategory !== ''),
+          map(activeCategory => {
+            this.checkoutConfigService.steps = this.steps.filter(step => {
+              return (
+                !(<FSCheckoutStep>step).restrictedCategories ||
+                (<FSCheckoutStep>step).restrictedCategories.indexOf(
+                  activeCategory
+                ) === -1
+              );
+            });
+            this.setActiveStepIndex();
+          })
+        )
+        .subscribe()
     );
+  }
+
+  isQuoteBound(): Observable<boolean> {
+    return this.cartService.getActive().pipe(
+      filter(cart => !!cart),
+      map(
+        cart =>
+          (<FSCart>cart).insuranceQuote?.state?.code === BindingStateType.BIND
+      )
+    );
+  }
+
+  isProductStep(step: FSCheckoutStep): boolean {
+    return this.checkoutConfigService.isProductStep(step.routeName);
   }
 
   ngOnDestroy(): void {

@@ -7,7 +7,9 @@ import {
   selectPaymentMethod,
 } from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
+import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
+let cartId;
 context('Renters Checkout', () => {
   before(() => {
     cy.visit('/');
@@ -26,7 +28,8 @@ context('Renters Checkout', () => {
   });
 
   it('Should populate first page in checkout', () => {
-    checkout.checkProgressBarInsurance('Your Renters Insurance');
+    checkout.checkCheckoutStep('Your Renters Insurance', '7');
+    checkout.checkProgressBarInsurance();
     checkout.checkFirstCheckoutStep('Renters');
     checkout.populatePropertyDetails();
     checkout.populateContentsCover();
@@ -35,9 +38,14 @@ context('Renters Checkout', () => {
   });
 
   it('Should check comparison table', () => {
-    checkout.checkInsuranceComparisonPage('Your Renters Insurance', '2');
+    checkout.checkCheckoutStep('Your Renters Insurance', '7');
+    checkout.checkInsuranceComparisonPage('2');
     renters.checkRentersComparisonTable();
+    const addToCart = waitForCreateAsset('carts', 'addToCart');
     renters.selectRentersMonthly();
+    cy.wait(`@${addToCart}`).then(result => {
+      cartId = (<any>result.response.body).code;
+    });
   });
 
   it('Should check add options page', () => {
@@ -54,13 +62,15 @@ context('Renters Checkout', () => {
   });
 
   it('Should check quote review page', () => {
-    checkout.checkProgressBarInsurance('Renters');
+    checkout.checkCheckoutStep('Your Renters Insurance', '7');
+    checkout.checkProgressBarInsurance();
     //renters.checkMiniCartRentersRemovedProduct();
     checkout.clickContinueButton();
-    checkout.checkAccordions('propertyQuoteReview');
-    addPaymentMethod(registrationUserWithoutPhone.email);
+    checkout.checkAccordions('generalQuoteAccordions');
+    addPaymentMethod(registrationUserWithoutPhone.email, cartId);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
+    checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {
@@ -81,12 +91,12 @@ context('Renters Checkout', () => {
     renters.checkRentersPolicy();
   });
 
-  it('Should validate phone number', () => {
+  it('Should validate phone number and check empty my account pages', () => {
     register.validatePhoneNumber('');
     checkout.checkMyAccountEmptyPages('Claims', 'You have no Claims!');
     checkout.checkMyAccountEmptyPages(
       'Quotes & Applications',
-      'You have no Quotes and Applications!'
+      'You have no Quotes or Applications!'
     );
   });
 });

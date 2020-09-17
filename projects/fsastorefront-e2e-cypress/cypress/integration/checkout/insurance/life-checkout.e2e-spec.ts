@@ -14,13 +14,12 @@ context('Life Insurance Checkout', () => {
   });
 
   it('Should check progress bar', () => {
-    checkout.checkProgressBarInsurance('Your Life Insurance');
+    checkout.checkCheckoutStep('Your Life Insurance', '7');
+    checkout.checkProgressBarInsurance();
   });
 
   it('Should complete life checkout', () => {
     //populate first step
-    cy.get('cx-form-component').should('be.visible');
-    cy.get('h3').contains('Coverage Information');
     life.populateFirstStep();
     checkout.clickContinueButton();
     //check comparison table
@@ -33,15 +32,11 @@ context('Life Insurance Checkout', () => {
     //register new user in checkout
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
-    cy.get('.SiteLogo')
-      .should('be.visible')
-      .click();
-    checkout.startInsuranceCheckout('Life');
-    cy.wait(500);
-    cy.get('[name=lifeWhoCovered]')
-      .eq(1)
-      .click();
+    life.addSecondPerson();
     life.populateSecondPerson();
+  });
+
+  it('Should continue in checkout', () => {
     checkout.clickContinueButton();
     //check comparison table when second person is added
     life.checkLifeComparisonTableSecondPerson();
@@ -49,7 +44,7 @@ context('Life Insurance Checkout', () => {
   });
 
   it('Should check optional products', () => {
-    life.checkOptionalProductsAddRenewalOption();
+    life.checkOptionalProductsSecond();
     //life.checkLifeBasicMiniCartSecondPerson();
     checkout.clickContinueButton();
   });
@@ -61,9 +56,10 @@ context('Life Insurance Checkout', () => {
   });
 
   it('Should check quote review step', () => {
-    checkout.checkProgressBarInsurance('Your Life Insurance');
+    checkout.checkCheckoutStep('Your Life Insurance', '7');
+    checkout.checkProgressBarInsurance();
     //life.checkLifeBasicMiniCartSecondPerson();
-    checkout.checkAccordions('lifeQuoteReview');
+    checkout.checkAccordions('quoteReviewWithoutOptional');
     cy.get('.primary-button').should('not.be.visible');
   });
 

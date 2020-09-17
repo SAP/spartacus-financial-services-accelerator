@@ -1,14 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { Type } from '@angular/core';
-import createSpy = jasmine.createSpy;
 import { UserRequestAdapter } from './user-request.adapter';
 import { UserRequestConnector } from './user-request.connector';
+import createSpy = jasmine.createSpy;
 
 class MockUserRequestAdapter implements UserRequestAdapter {
-  getUserRequest = createSpy('UserRequestAdapter.getUserRequest').and.callFake(
-    (userId, request) => of('getUserRequest' + userId + request)
-  );
+  getUserRequest = createSpy(
+    'UserRequestAdapter.getUserRequest'
+  ).and.callFake((userId, request) => of('getUserRequest' + userId + request));
   updateUserRequest = createSpy(
     'UserRequestAdapter.updateUserRequest'
   ).and.callFake((userId, request, stepData) =>
@@ -34,12 +33,8 @@ describe('UserRequestConnector', () => {
       ],
     });
 
-    userRequestConnector = TestBed.get(UserRequestConnector as Type<
-      UserRequestConnector
-    >);
-    userRequestAdapter = TestBed.get(UserRequestAdapter as Type<
-      UserRequestAdapter
-    >);
+    userRequestConnector = TestBed.inject(UserRequestConnector);
+    userRequestAdapter = TestBed.inject(UserRequestAdapter);
   });
 
   it('should be created', () => {

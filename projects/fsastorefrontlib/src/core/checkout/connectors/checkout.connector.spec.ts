@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { CheckoutAdapter } from './checkout.adapter';
@@ -25,10 +24,8 @@ describe('CheckoutConnector', () => {
       providers: [{ provide: CheckoutAdapter, useClass: MockCheckoutAdapter }],
     });
 
-    checkoutConnector = TestBed.get(CheckoutConnector as Type<
-      CheckoutConnector
-    >);
-    checkoutAdapter = TestBed.get(CheckoutAdapter as Type<CheckoutAdapter>);
+    checkoutConnector = TestBed.inject(CheckoutConnector);
+    checkoutAdapter = TestBed.inject(CheckoutAdapter);
   });
 
   it('should be created', () => {

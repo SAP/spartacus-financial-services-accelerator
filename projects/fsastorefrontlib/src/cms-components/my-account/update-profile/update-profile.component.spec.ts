@@ -22,9 +22,7 @@ import { FSUpdateProfileComponent } from './update-profile.component';
 
 @Component({
   selector: 'cx-fs-update-profile-form',
-  template: `
-    <div>update profile form</div>
-  `,
+  template: ` <div>update profile form</div> `,
 })
 class MockUpdateProfileFormComponent {
   @Input()
@@ -34,14 +32,12 @@ class MockUpdateProfileFormComponent {
   titles: Title[];
 
   @Output()
-  submited = new EventEmitter<{ uid: string; userUpdates: FSUser }>();
+  submitted = new EventEmitter<{ uid: string; userUpdates: FSUser }>();
 }
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'cx-spinner',
-  template: `
-    <div>spinner</div>
-  `,
+  template: ` <div>spinner</div> `,
 })
 class MockCxSpinnerComponent {}
 
@@ -118,9 +114,9 @@ describe('UpdateProfileComponent', () => {
     component = fixture.componentInstance;
     el = fixture.debugElement;
 
-    userService = TestBed.get(UserService);
-    routingService = TestBed.get(RoutingService);
-    globalMessageService = TestBed.get(GlobalMessageService);
+    userService = TestBed.inject(UserService);
+    routingService = TestBed.inject(RoutingService);
+    globalMessageService = TestBed.inject(GlobalMessageService);
 
     fixture.detectChanges();
   });

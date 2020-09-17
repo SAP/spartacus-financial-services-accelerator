@@ -1,7 +1,17 @@
-import { Component, DebugElement, Input, Type } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, DebugElement, Input } from '@angular/core';
+import {
+  async,
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { FormDataService, YFormData } from '@fsa/dynamicforms';
+import { ActivatedRoute } from '@angular/router';
+import {
+  FormDataService,
+  FormDataStorageService,
+  YFormData,
+} from '@fsa/dynamicforms';
 import { NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { CmsComponent } from '@spartacus/core';
 import { CmsComponentData, MediaModule } from '@spartacus/storefront';
@@ -12,6 +22,7 @@ import { PricingService } from './../../../core/product-pricing/facade/pricing.s
 import { ComparisonPanelCMSComponent } from './../../../occ/occ-models/cms-component.models';
 import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
 import { ComparisonTablePanelComponent } from './comparison-table-panel.component';
+import createSpy = jasmine.createSpy;
 
 @Component({
   // tslint:disable
@@ -59,23 +70,17 @@ const formData: YFormData = {
     '{"testContent":{"tripDestination":"Europe","tripStartDate":"2022-02-02"}}',
 };
 
-const pricingData: PricingData = {
-  priceAttributeGroups: [
-    {
-      name: 'test',
-      priceAttributes: [
-        {
-          key: 'tripDestination',
-          value: 'Europe',
-        },
-        {
-          key: 'tripStartDate',
-          value: '2022-02-02',
-        },
-      ],
-    },
-  ],
-};
+let pricingData: PricingData;
+
+class MockActivatedRoute {
+  params = of();
+}
+
+class MockFormDataStorageService {
+  getFormDataIdByCategory() {
+    return 'test-formData';
+  }
+}
 
 class MockBillingTimeConnector {
   getBillingTimes(): Observable<any> {
@@ -101,7 +106,7 @@ describe('ComparisonTablePanelComponent', () => {
   let mockBillingTimeConnector: BillingTimeConnector;
   let mockFormDataService: FormDataService;
   let mockPricingService: PricingService;
-
+  let mockFOrMDataStorageService: FormDataStorageService;
   let el: DebugElement;
 
   beforeEach(async(() => {
@@ -124,24 +129,51 @@ describe('ComparisonTablePanelComponent', () => {
           provide: PricingService,
           useClass: MockPricingService,
         },
+        {
+          provide: FormDataStorageService,
+          useClass: MockFormDataStorageService,
+        },
+        {
+          provide: ActivatedRoute,
+          useClass: MockActivatedRoute,
+        },
       ],
       declarations: [
         ComparisonTablePanelComponent,
         ComparisonTablePanelItemComponent,
       ],
     }).compileComponents();
-    mockBillingTimeConnector = TestBed.get(BillingTimeConnector as Type<
-      BillingTimeConnector
-    >);
-    mockFormDataService = TestBed.get(FormDataService as Type<FormDataService>);
-    mockPricingService = TestBed.get(PricingService as Type<PricingService>);
+    mockBillingTimeConnector = TestBed.inject(BillingTimeConnector);
+    mockFormDataService = TestBed.inject(FormDataService);
+    mockPricingService = TestBed.inject(PricingService);
+    mockFOrMDataStorageService = TestBed.inject(FormDataStorageService);
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ComparisonTablePanelComponent);
     comparisonTablePanelComponent = fixture.componentInstance;
 
+    pricingData = {
+      priceAttributeGroups: [
+        {
+          name: 'test',
+          priceAttributes: [
+            {
+              key: 'tripDestination',
+              value: 'Europe',
+            },
+            {
+              key: 'tripStartDate',
+              value: '2022-02-02',
+            },
+          ],
+        },
+      ],
+    };
+    comparisonTablePanelComponent.pricingData$ = of(pricingData);
+
     el = fixture.debugElement;
+    fixture.detectChanges();
   });
 
   it('should be created', () => {
@@ -149,11 +181,15 @@ describe('ComparisonTablePanelComponent', () => {
   });
 
   it('should create comparison panel with pricing data and billing times', () => {
-    spyOn(mockPricingService, 'buildPricingData').and.stub();
     spyOn(mockFormDataService, 'getFormData').and.returnValue(of(formData));
+    spyOn(mockPricingService, 'buildPricingData').and.returnValue(pricingData);
     comparisonTablePanelComponent.ngOnInit();
 
-    expect(mockPricingService.buildPricingData).toHaveBeenCalled();
+    let result;
+    comparisonTablePanelComponent.pricingData$.subscribe(
+      pricingData => (result = pricingData)
+    );
+    expect(result).toEqual(pricingData);
   });
 
   it('should not build pricing data', () => {
@@ -177,11 +213,10 @@ describe('ComparisonTablePanelComponent', () => {
     expect(billingTimeHelpContent).toBeTruthy();
   });
 
-  it('should render comparison table panel item', () => {
+  it('should not render comparison table panel item', () => {
     fixture.detectChanges();
-    const comparisonTablePanelItem = el.query(
-      By.css('cx-fs-comparison-table-panel-item')
-    ).nativeElement;
+    const comparisonTablePanelItem = el.query(By.css('cx-spinner'))
+      .nativeElement;
     expect(comparisonTablePanelItem).toBeTruthy();
   });
 });

@@ -1,11 +1,9 @@
-import { TestBed, inject } from '@angular/core/testing';
-import { Type } from '@angular/core';
+import { inject, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
+import { InboxConnector } from '../connectors/inbox.connector';
+import { InboxDataService, InboxTab } from '../services/inbox-data.service';
 import { reducerProvider } from '../store/reducers/index';
 import { InboxService } from './inbox.service';
-import { InboxDataService } from '../services/inbox-data.service';
-import { of } from 'rxjs';
-import { InboxTab } from '../services/inbox-data.service';
-import { InboxConnector } from '../connectors/inbox.connector';
 
 const userId = 'testUser';
 const messageGroup = 'testGroup';
@@ -51,8 +49,8 @@ describe('InboxServiceTest', () => {
       ],
     });
 
-    service = TestBed.get(InboxService as Type<InboxService>);
-    inboxData = TestBed.get(InboxDataService as Type<InboxDataService>);
+    service = TestBed.inject(InboxService);
+    inboxData = TestBed.inject(InboxDataService);
   });
 
   it('should InboxService is injected', inject(

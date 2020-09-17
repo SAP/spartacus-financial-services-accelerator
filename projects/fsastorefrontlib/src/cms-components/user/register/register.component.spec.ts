@@ -20,15 +20,40 @@ import {
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { FSRegisterComponent } from './register.component';
 import createSpy = jasmine.createSpy;
+import { DateConfig } from './../../../core/date-config/date-config';
 const isLevelBool: BehaviorSubject<boolean> = new BehaviorSubject(false);
 const registerUserIsSuccess: BehaviorSubject<boolean> = new BehaviorSubject(
   false
 );
+const registerUserIsLoading: BehaviorSubject<boolean> = new BehaviorSubject(
+  false
+);
+
+const MockDateConfig: DateConfig = {
+  date: {
+    format: 'yyyy-mm-dd',
+  },
+};
+const mockRegisterFormData: any = {
+  titleCode: 'Mr',
+  firstName: 'John',
+  lastName: 'Doe',
+  email: 'JohnDoe@thebest.john.intheworld.com',
+  dateOfBirth: '17/09/1990',
+  phoneNumber: '333333333',
+  email_lowercase: 'johndoe@thebest.john.intheworld.com',
+  termsandconditions: true,
+  password: 'strongPass$!123',
+};
 
 class MockUserService {
   loadTitles(): void {}
   getTitles(): Observable<Title[]> {
     return of([]);
+  }
+  resetRegisterUserProcessState(): void {}
+  getRegisterUserResultLoading(): Observable<boolean> {
+    return registerUserIsLoading.asObservable();
   }
   getRegisterUserResultSuccess(): Observable<boolean> {
     return registerUserIsSuccess.asObservable();
@@ -118,6 +143,10 @@ describe('FSRegisterComponent', () => {
           provide: AnonymousConsentsConfig,
           useValue: mockAnonymousConsentsConfig,
         },
+        {
+          provide: DateConfig,
+          useValue: MockDateConfig,
+        },
       ],
     }).compileComponents();
   }));
@@ -128,5 +157,20 @@ describe('FSRegisterComponent', () => {
   });
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+  describe('collectDataFromRegisterForm()', () => {
+    it('should return correct register data', () => {
+      const form = mockRegisterFormData;
+
+      expect(component.collectDataFromRegisterForm(form)).toEqual({
+        firstName: form.firstName,
+        lastName: form.lastName,
+        uid: form.email_lowercase,
+        password: form.password,
+        titleCode: form.titleCode,
+        dateOfBirth: form.dateOfBirth,
+        phoneNumber: form.phoneNumber,
+      });
+    });
   });
 });

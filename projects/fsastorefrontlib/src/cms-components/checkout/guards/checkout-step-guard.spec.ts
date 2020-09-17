@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
@@ -44,6 +43,7 @@ class MockCheckoutConfigService {
 }
 
 const mockedCart = {
+  code: 'testCartCode',
   deliveryOrderGroups: [
     {
       entries: [
@@ -68,9 +68,9 @@ class MockCartService {
 
 describe('CheckoutStepGuard', () => {
   let guard: CheckoutStepGuard;
-  let routingConfigService: MockRoutingConfigService;
-  let checkoutConfigService: MockCheckoutConfigService;
-  let cartService: MockCartService;
+  let routingConfigService: RoutingConfigService;
+  let checkoutConfigService: FSCheckoutConfigService;
+  let cartService: FSCartService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -88,14 +88,10 @@ describe('CheckoutStepGuard', () => {
       imports: [RouterTestingModule],
     }).compileComponents();
 
-    guard = TestBed.get(CheckoutStepGuard as Type<CheckoutStepGuard>);
-    routingConfigService = TestBed.get(RoutingConfigService as Type<
-      RoutingConfigService
-    >);
-    checkoutConfigService = TestBed.get(FSCheckoutConfigService as Type<
-      FSCheckoutConfigService
-    >);
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
+    guard = TestBed.inject(CheckoutStepGuard);
+    routingConfigService = TestBed.inject(RoutingConfigService);
+    checkoutConfigService = TestBed.inject(FSCheckoutConfigService);
+    cartService = TestBed.inject(FSCartService);
   });
 
   it('should not return true in case there is not category in route', () => {
@@ -135,38 +131,5 @@ describe('CheckoutStepGuard', () => {
       .subscribe(value => (result = value))
       .unsubscribe();
     expect(result).toEqual(true);
-  });
-
-  it('should return true in case there is not product in cart and unsubscribe', () => {
-    spyOn(routingConfigService, 'getRouteConfig').and.returnValues({
-      paths: ['testRoute'],
-    });
-    spyOn(checkoutConfigService, 'getCurrentStepIndex').and.returnValues(0);
-    const emptyCart = {
-      deliveryOrderGroups: [],
-    };
-    spyOn(cartService, 'getActive').and.returnValues(of(emptyCart));
-
-    let result;
-    const mockActivatedRoute = {
-      url: [
-        {
-          path: categoryCodeParam,
-        },
-      ],
-    };
-    guard
-      .canActivate(mockActivatedRoute as CmsActivatedRouteSnapshot)
-      .subscribe(value => (result = value))
-      .unsubscribe();
-
-    expect(result).toEqual(true);
-
-    const subscriptions = guard['subscription'];
-    spyOn(subscriptions, 'unsubscribe').and.callThrough();
-
-    guard.ngOnDestroy();
-
-    expect(subscriptions.unsubscribe).toHaveBeenCalled();
   });
 });

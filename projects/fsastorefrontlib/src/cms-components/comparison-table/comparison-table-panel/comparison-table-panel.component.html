@@ -1,5 +1,5 @@
-<ng-container *ngIf="comparisonPanel | async as panel">
-  <ng-container *ngIf="billingData | async as billingInfo">
+<ng-container *ngIf="comparisonPanel$ | async as panel">
+  <ng-container *ngIf="billingData$ | async as billingInfo">
     <div class="fixed-column">
       <div class="table-header"></div>
       <div class="table-cell-wrapper">
@@ -21,13 +21,14 @@
     </div>
     <div class="slide-column-wrapper">
       <div class="slide-column">
-        <ng-container *ngIf="comparisonPanel | async as panel">
-          <ng-container *ngFor="let productCode of getProductList()">
+        <ng-container *ngIf="comparisonPanel$ | async as panel">
+          <ng-container *ngFor="let productCode of panel.products.split(' ')">
             <ng-container *ngIf="productCode">
               <cx-fs-comparison-table-panel-item
+                *ngIf="pricingData$ | async as pricing; else loading"
                 [productCode]="productCode"
                 [billingTimes]="billingInfo.billingTimes"
-                [pricingData]="pricingData"
+                [pricingData]="pricing"
               ></cx-fs-comparison-table-panel-item>
             </ng-container>
           </ng-container>
@@ -36,3 +37,6 @@
     </div>
   </ng-container>
 </ng-container>
+<ng-template #loading>
+  <cx-spinner></cx-spinner>
+</ng-template>

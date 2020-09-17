@@ -1,10 +1,9 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { select, Store, StoreModule } from '@ngrx/store';
-import * as fromReducers from '../reducers/index';
-import * as fromSelectors from './change-request.selector';
-import * as fromActions from './../actions/change-request.action';
 import { StateWithChangeRequest } from '../change-request-state';
+import * as fromReducers from '../reducers/index';
+import * as fromActions from './../actions/change-request.action';
+import * as fromSelectors from './change-request.selector';
 
 describe('Change Request Selectors', () => {
   let store: Store<StateWithChangeRequest>;
@@ -17,7 +16,7 @@ describe('Change Request Selectors', () => {
       ],
     });
 
-    store = TestBed.get(Store as Type<Store<StateWithChangeRequest>>);
+    store = TestBed.inject(Store);
     spyOn(store, 'dispatch').and.callThrough();
   });
 

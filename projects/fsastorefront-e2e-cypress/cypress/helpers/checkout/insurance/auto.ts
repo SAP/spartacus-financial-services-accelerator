@@ -1,5 +1,7 @@
 import * as shared from '../shared-checkout';
 
+const todaysDate = Cypress.moment().format('YYYY-MM-DD');
+
 export function openCategoryPage() {
   cy.selectOptionFromDropdown({
     menuOption: 'Insurance',
@@ -20,7 +22,7 @@ export function openCategoryPage() {
 
 export function populateAutoInformation() {
   cy.get('cx-dynamic-form').within(() => {
-    cy.get('[name=coverageStartDate]').type('2021-01-01');
+    cy.get('[name=coverageStartDate]').type(todaysDate);
     //current date + one year
     cy.get('[name="paymentFrequency"]').select('MONTHLY');
     cy.get('[name="vehicleMake"]').select('Audi');
@@ -36,21 +38,12 @@ export function populateAutoInformation() {
 }
 
 export function populateMainDriverInfo() {
-  cy.get('[name=dateOfBirth]')
-    .eq('0')
-    .type('1982-01-01');
-  cy.get('[name="driverGender"]')
-    .eq('0')
-    .select('Female');
-  cy.get('[name="driverMaritalStatus"]')
-    .eq('0')
-    .select('Single');
-  cy.get('[name="driverCategory"]')
-    .eq('0')
-    .select('Main');
-  cy.get('[name="driverLicenceDate"]')
-    .eq('0')
-    .type('2018-01-01');
+  cy.get('#customerIdfalse').check();
+  cy.get('[name=dateOfBirth]').eq('0').type('1982-01-01');
+  cy.get('[name="driverGender"]').eq('0').select('Female');
+  cy.get('[name="driverMaritalStatus"]').eq('0').select('Single');
+  cy.get('[name="driverCategory"]').eq('0').select('Main');
+  cy.get('[name="driverLicenceDate"]').eq('0').type('2018-01-01');
 }
 
 export function checkAutoComparisonTable() {
@@ -111,19 +104,36 @@ export function checkAutoSilverMiniCart() {
 }
 
 export function populateAdditionalDriverInfo() {
-  cy.get('[name=dateOfBirth]')
-    .eq('1')
-    .type('1982-08-24');
-  cy.get('[name="driverGender"]')
-    .eq('1')
-    .select('Male');
-  cy.get('[name="driverMaritalStatus"]')
-    .eq('1')
-    .select('Widowed');
-  cy.get('[name="driverCategory"]')
-    .eq('1')
-    .select('Occasional');
-  cy.get('[name="driverLicenceDate"]')
-    .eq('1')
-    .type('2015-01-01');
+  cy.get('[name=dateOfBirth]').eq('1').type('1982-08-24');
+  cy.get('[name="driverGender"]').eq('1').select('Male');
+  cy.get('[name="driverMaritalStatus"]').eq('1').select('Widowed');
+  cy.get('[name="driverCategory"]').eq('1').select('Occasional');
+  cy.get('[name="driverLicenceDate"]').eq('1').type('2015-01-01');
+}
+
+export function populatePersonalDetails() {
+  cy.get('[name=phoneNumber]').type('94865978');
+  cy.get('[name=street]').type('Omladisnkih Brigada');
+  cy.get('[name=streetNumber]').type('125g');
+  cy.get('[name=city]').type('Belgrade');
+  cy.get('[name=postcode]').type('11090');
+  cy.get('[name=country]').select('RS');
+}
+
+export function populateVehicleDetails() {
+  cy.get('[name=licencePlate]').type('94865978');
+  cy.get('[name=vinNumber]').type('11111111111111111');
+}
+
+export function populateMainDriverData() {
+  cy.get('[name=mainDriverDateOfBirth]').type('1991-02-17');
+  cy.get('[name=mainDriverFirstName]').type('Johan');
+  cy.get('[name=mainDriverLastName]').type('Grozni');
+  cy.get('[name=mainDriverLicenceNumber]').type('BG-234-xx');
+}
+
+export function populateAdditionalData() {
+  cy.get('[name=additionalDriver1FirstName]').type('Phin');
+  cy.get('[name=additionalDriver1LastName]').type('Jones');
+  cy.get('[name=additionalDriver1LicenceNumber]').type('BG-234-yy');
 }

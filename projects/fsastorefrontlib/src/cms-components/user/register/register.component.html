@@ -1,6 +1,6 @@
 <section>
   <div class="cx-section">
-    <form [formGroup]="userRegistrationForm">
+    <form (ngSubmit)="submitForm()" [formGroup]="registerForm">
       <div class="form-group">
         <label>
           <span class="label-content">{{
@@ -57,18 +57,19 @@
           <input
             class="form-control"
             [class.is-invalid]="
-              userRegistrationForm.get('dateOfBirth').invalid &&
-              userRegistrationForm.get('dateOfBirth').dirty
+              registerForm.get('dateOfBirth').invalid &&
+              registerForm.get('dateOfBirth').dirty
             "
             type="date"
             name="dateOfBirth"
             formControlName="dateOfBirth"
+            placeholder="{{ getDateFormat() }}"
           />
           <div
             class="invalid-feedback"
             *ngIf="
-              userRegistrationForm.get('dateOfBirth').invalid &&
-              userRegistrationForm.get('dateOfBirth').dirty
+              registerForm.get('dateOfBirth').invalid &&
+              registerForm.get('dateOfBirth').dirty
             "
           >
             <span>{{ 'forms.dateOfBirthMinimumAge' | cxTranslate }}</span>
@@ -84,8 +85,8 @@
           <input
             class="form-control"
             [class.is-invalid]="
-              userRegistrationForm.get('phoneNumber').invalid &&
-              userRegistrationForm.get('phoneNumber').dirty
+              registerForm.get('phoneNumber').invalid &&
+              registerForm.get('phoneNumber').dirty
             "
             type="text"
             name="phoneNumber"
@@ -94,8 +95,8 @@
           <div
             class="invalid-feedback"
             *ngIf="
-              userRegistrationForm.get('phoneNumber').invalid &&
-              userRegistrationForm.get('phoneNumber').dirty
+              registerForm.get('phoneNumber').invalid &&
+              registerForm.get('phoneNumber').dirty
             "
           >
             <span>{{
@@ -113,8 +114,8 @@
           <input
             class="form-control"
             [class.is-invalid]="
-              userRegistrationForm.get('email').invalid &&
-              userRegistrationForm.get('email').dirty
+              registerForm.get('email').invalid &&
+              registerForm.get('email').dirty
             "
             type="email"
             name="email"
@@ -126,8 +127,8 @@
           <div
             class="invalid-feedback"
             *ngIf="
-              userRegistrationForm.get('email').invalid &&
-              userRegistrationForm.get('email').dirty
+              registerForm.get('email').invalid &&
+              registerForm.get('email').dirty
             "
           >
             <span>{{ 'forms.enterValidEmail' | cxTranslate }}</span>
@@ -143,8 +144,8 @@
           <input
             class="form-control"
             [class.is-invalid]="
-              userRegistrationForm.get('password').invalid &&
-              userRegistrationForm.get('password').dirty
+              registerForm.get('password').invalid &&
+              registerForm.get('password').dirty
             "
             type="password"
             name="password"
@@ -154,8 +155,8 @@
           <div
             class="invalid-feedback"
             *ngIf="
-              userRegistrationForm.get('password').invalid &&
-              userRegistrationForm.get('password').dirty
+              registerForm.get('password').invalid &&
+              registerForm.get('password').dirty
             "
           >
             <span>{{ 'register.passwordMinRequirements' | cxTranslate }}</span>
@@ -171,8 +172,8 @@
           <input
             class="form-control"
             [class.is-invalid]="
-              userRegistrationForm.get('password').value !==
-              userRegistrationForm.get('passwordconf').value
+              registerForm.get('password').value !==
+              registerForm.get('passwordconf').value
             "
             type="password"
             name="confirmpassword"
@@ -184,9 +185,9 @@
           <div
             class="invalid-feedback"
             *ngIf="
-              userRegistrationForm.get('password').value !==
-                userRegistrationForm.get('passwordconf').value &&
-              userRegistrationForm.get('passwordconf').value
+              registerForm.get('password').value !==
+                registerForm.get('passwordconf').value &&
+              registerForm.get('passwordconf').value
             "
           >
             <span>{{ 'register.bothPasswordMustMatch' | cxTranslate }}</span>
@@ -196,35 +197,18 @@
 
       <div class="form-group">
         <div class="form-check">
-          <ng-container
-            *ngIf="isAnonymousConsentEnabled; else hardcodedNewsletter"
-          >
-            <label *ngIf="anonymousConsent$ | async as anonymousConsent">
-              <input
-                type="checkbox"
-                name="newsletter"
-                class="form-check-input"
-                formControlName="newsletter"
-                [checked]="isConsentGiven(anonymousConsent.consent)"
-              />
-              <span class="form-check-label">
-                {{ anonymousConsent.template }}
-              </span>
-            </label>
-          </ng-container>
-          <ng-template #hardcodedNewsletter
-            ><label>
-              <input
-                type="checkbox"
-                name="newsletter"
-                class="form-check-input"
-                formControlName="newsletter"
-              />
-              <span class="form-check-label">
-                {{ 'register.emailMarketing' | cxTranslate }}
-              </span>
-            </label>
-          </ng-template>
+          <label *ngIf="anonymousConsent$ | async as anonymousConsent">
+            <input
+              type="checkbox"
+              name="newsletter"
+              class="form-check-input"
+              formControlName="newsletter"
+              [checked]="isConsentGiven(anonymousConsent.consent)"
+            />
+            <span class="form-check-label">
+              {{ anonymousConsent.template }}
+            </span>
+          </label>
         </div>
       </div>
 
@@ -251,8 +235,7 @@
       </div>
       <button
         type="submit"
-        (click)="submit()"
-        [disabled]="userRegistrationForm.invalid"
+        [disabled]="registerForm.invalid"
         class="btn btn-block btn-primary"
       >
         {{ 'register.register' | cxTranslate }}

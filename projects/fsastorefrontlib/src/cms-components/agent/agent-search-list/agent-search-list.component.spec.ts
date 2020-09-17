@@ -1,11 +1,11 @@
+import { Component, Input, Pipe, PipeTransform, Type } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { AgentSearchListComponent } from './agent-search-list.component';
-import { of } from 'rxjs';
-import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
 import { ActivatedRoute } from '@angular/router';
-import { Type, Component, Input, Pipe, PipeTransform } from '@angular/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { I18nTestingModule } from '@spartacus/core';
+import { of } from 'rxjs';
+import { AgentSearchService } from '../../../core/agent/facade/agent-search.service';
+import { AgentSearchListComponent } from './agent-search-list.component';
 
 const searchResults = {
   pagination: { page: 0 },
@@ -93,9 +93,9 @@ describe('AgentSearchListComponent', () => {
     fixture = TestBed.createComponent(AgentSearchListComponent);
     component = fixture.componentInstance;
     activatedRoute = TestBed.get(ActivatedRoute as Type<ActivatedRoute>);
-    mockSearchService = TestBed.get(AgentSearchService as Type<
-      AgentSearchService
-    >);
+    mockSearchService = TestBed.inject(
+      AgentSearchService as Type<AgentSearchService>
+    );
 
     fixture.detectChanges();
   });

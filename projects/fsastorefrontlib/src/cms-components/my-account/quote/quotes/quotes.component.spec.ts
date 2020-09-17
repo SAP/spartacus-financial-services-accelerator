@@ -1,11 +1,16 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
-import { SpinnerModule } from '@spartacus/storefront';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Type } from '@angular/core';
-import { QuotesComponent } from './quotes.component';
+import {
+  ActiveCartService,
+  Cart,
+  I18nTestingModule,
+  OccConfig,
+  RoutingService,
+} from '@spartacus/core';
+import { SpinnerModule } from '@spartacus/storefront';
 import { QuoteService } from '../../../../core/my-account/facade/quote.service';
-import { InsuranceQuote } from './../../../../occ/occ-models/occ.models';
+import { QuotesComponent } from './quotes.component';
+import { Observable, of } from 'rxjs';
 import createSpy = jasmine.createSpy;
 
 class MockRoutingService {
@@ -32,11 +37,18 @@ const MockOccConfig: OccConfig = {
   },
 };
 
+class MockActiveCartService {
+  getActive(): Observable<Cart> {
+    return of({ code: 'cartCode' });
+  }
+}
+
 describe('QuotesComponent', () => {
   let component: QuotesComponent;
   let fixture: ComponentFixture<QuotesComponent>;
-  let quoteService: MockQuoteService;
-  let routingService: MockRoutingService;
+  let quoteService: QuoteService;
+  let routingService: RoutingService;
+  let cartService: ActiveCartService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -55,16 +67,21 @@ describe('QuotesComponent', () => {
           provide: OccConfig,
           useValue: MockOccConfig,
         },
+        {
+          provide: ActiveCartService,
+          useClass: MockActiveCartService,
+        },
       ],
     }).compileComponents();
+    cartService = TestBed.inject(ActiveCartService);
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(QuotesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    quoteService = TestBed.get(QuoteService as Type<QuoteService>);
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    quoteService = TestBed.inject(QuoteService);
+    routingService = TestBed.inject(RoutingService);
   });
 
   it('should create', () => {
@@ -78,12 +95,12 @@ describe('QuotesComponent', () => {
     expect(routingService.go).not.toHaveBeenCalled();
   });
   it('should retrieve quote and route to the quote review', () => {
-    const quote: InsuranceQuote = { state: { code: 'BIND' } };
+    const quote = { state: { code: 'BIND' }, cartCode: 'cartCode' };
     component.retrieveQuote(quote);
     expect(routingService.go).toHaveBeenCalledWith({ cxRoute: 'quoteReview' });
   });
   it('should retrieve quote and route to add options', () => {
-    const quote: InsuranceQuote = { state: { code: 'OTHER' } };
+    const quote = { state: { code: 'OTHER' }, cartCode: 'cartCode' };
     component.retrieveQuote(quote);
     expect(routingService.go).toHaveBeenCalledWith({ cxRoute: 'addOptions' });
   });

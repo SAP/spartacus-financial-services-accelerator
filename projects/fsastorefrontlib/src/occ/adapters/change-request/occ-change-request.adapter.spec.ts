@@ -47,9 +47,9 @@ describe('OccChangeRequestAdapter', () => {
       ],
     });
 
-    adapter = TestBed.get(OccChangeRequestAdapter);
-    httpMock = TestBed.get(HttpTestingController);
-    occEndpointService = TestBed.get(OccEndpointsService);
+    adapter = TestBed.inject(OccChangeRequestAdapter);
+    httpMock = TestBed.inject(HttpTestingController);
+    occEndpointService = TestBed.inject(OccEndpointsService);
     spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 
@@ -76,10 +76,9 @@ describe('OccChangeRequestAdapter', () => {
           req.method === 'POST'
         );
       }, `POST method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        createChangeRequestEndpoint,
-        { userId }
-      );
+      expect(
+        occEndpointService.getUrl
+      ).toHaveBeenCalledWith(createChangeRequestEndpoint, { userId });
     }));
   });
 
@@ -127,9 +126,10 @@ describe('OccChangeRequestAdapter', () => {
       status: 400,
       statusText: 'Bad Request',
     });
-    adapter
-      .getChangeRequest(userId, requestId)
-      .subscribe(res => (response = res), err => (errResponse = err));
+    adapter.getChangeRequest(userId, requestId).subscribe(
+      res => (response = res),
+      err => (errResponse = err)
+    );
     httpMock
       .expectOne((req: HttpRequest<any>) => {
         return req.url === changeRequestEndpoint && req.method === 'GET';
@@ -174,9 +174,10 @@ describe('OccChangeRequestAdapter', () => {
       status: 400,
       statusText: 'Bad Request',
     });
-    adapter
-      .cancelChangeRequest(userId, requestId)
-      .subscribe(res => (response = res), err => (errResponse = err));
+    adapter.cancelChangeRequest(userId, requestId).subscribe(
+      res => (response = res),
+      err => (errResponse = err)
+    );
     httpMock
       .expectOne((req: HttpRequest<any>) => {
         return (

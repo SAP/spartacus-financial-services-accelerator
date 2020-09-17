@@ -1,29 +1,30 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { Type } from '@angular/core';
-import createSpy = jasmine.createSpy;
 import { ClaimAdapter } from './claim.adapter';
 import { ClaimConnector } from './claim.connector';
+import createSpy = jasmine.createSpy;
 
 class MockClaimAdapter extends ClaimAdapter {
   getClaims = createSpy('ClaimAdapter.getClaims').and.callFake(userId =>
     of('getClaims' + userId)
   );
 
-  getClaim = createSpy('ClaimAdapter.getClaim').and.callFake(
-    (userId, claimId) => of('getClaim' + userId + claimId)
-  );
-  deleteClaim = createSpy('ClaimAdapter.deleteClaim').and.callFake(
-    (userId, claimId) => of('deleteClaim' + userId + claimId)
-  );
-  createClaim = createSpy('ClaimAdapter.createClaim').and.callFake(
-    (userId, policyId, contractId) =>
-      of('createClaim' + userId + policyId + contractId)
+  getClaim = createSpy(
+    'ClaimAdapter.getClaim'
+  ).and.callFake((userId, claimId) => of('getClaim' + userId + claimId));
+  deleteClaim = createSpy(
+    'ClaimAdapter.deleteClaim'
+  ).and.callFake((userId, claimId) => of('deleteClaim' + userId + claimId));
+  createClaim = createSpy(
+    'ClaimAdapter.createClaim'
+  ).and.callFake((userId, policyId, contractId) =>
+    of('createClaim' + userId + policyId + contractId)
   );
 
-  updateClaim = createSpy('ClaimAdapter.updateClaim').and.callFake(
-    (userId, claimId, claimData) =>
-      of('updateClaim' + userId + claimId + claimData)
+  updateClaim = createSpy(
+    'ClaimAdapter.updateClaim'
+  ).and.callFake((userId, claimId, claimData) =>
+    of('updateClaim' + userId + claimId + claimData)
   );
 }
 const user = 'user';
@@ -40,8 +41,8 @@ describe('ClaimConnector', () => {
       providers: [{ provide: ClaimAdapter, useClass: MockClaimAdapter }],
     });
 
-    claimConnector = TestBed.get(ClaimConnector as Type<ClaimConnector>);
-    claimAdapter = TestBed.get(ClaimAdapter as Type<ClaimAdapter>);
+    claimConnector = TestBed.inject(ClaimConnector);
+    claimAdapter = TestBed.inject(ClaimAdapter);
   });
 
   it('should be created', () => {

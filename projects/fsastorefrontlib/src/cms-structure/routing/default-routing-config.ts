@@ -9,7 +9,9 @@ export const storefrontRoutesConfig: RoutesConfig = {
     paths: ['checkout/configureProduct/:productCode'],
     paramsMapping: { productCode: 'code' },
   },
-  category: { paths: ['checkout/c/:categoryCode'] },
+  category: {
+    paths: ['checkout/c/:categoryCode'],
+  },
   addOptions: { paths: ['checkout/add-options'] },
   checkoutPersonalDetails: {
     paths: ['checkout/personal-details'],
@@ -31,7 +33,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   claimsPage: { paths: ['claimsPage'] },
   contactAgent: { paths: ['contact-agent/:agent'] },
   productActivation: { paths: ['orgUnit/:orgUnitId/productActivation'] },
-  productAssignment: { paths: ['orgUnit/:orgUnitId/productAssignment'] },
+  productAssignment: { paths: ['orgUnit/:orgUnitId/productAssignments'] },
   unitDetails: { paths: ['orgUnit/:orgUnitId'] },
   inbox: { paths: ['my-account/inbox'] },
   policies: { paths: ['my-account/my-policies'] },
@@ -44,7 +46,7 @@ export const storefrontRoutesConfig: RoutesConfig = {
   fnolIncidentReportPage: { paths: ['fnolIncidentReportPage'] },
   fnolGeneralInfoPage: { paths: ['fnolGeneralInfoPage'] },
   fnolSummaryPage: { paths: ['fnolSummaryPage'] },
-  fnolConfirmation: { paths: ['fnolConfirmationPage'] },
+  fnolConfirmationPage: { paths: ['fnolConfirmationPage'] },
   changeCarDetailsPage: { paths: ['changeCarDetailsPage'] },
   changeCoveragePage: { paths: ['changeCoveragePage'] },
   changeSimulationPage: { paths: ['changeSimulationPage'] },

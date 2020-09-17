@@ -8,7 +8,6 @@ import { catchError, concatMap, map } from 'rxjs/operators';
 import { CartConnector } from '../../../cart/connectors/cart.connector';
 import * as fromQuoteActions from '../../../my-account/store/actions/quote.action';
 import * as fromActions from '../actions/cart.action';
-
 @Injectable()
 export class CartEffects {
   @Effect()
@@ -35,7 +34,6 @@ export class CartEffects {
           catchError(error =>
             from([
               new CartActions.CartAddEntryFail(error),
-              new CartActions.CartProcessesDecrement(payload.cartId),
               new CartActions.LoadCart({
                 cartId: payload.cartId,
                 userId: payload.userId,
@@ -64,13 +62,10 @@ export class CartEffects {
           concatMap((cart: any) => {
             const actions: Action[] = [];
             const cartCode =
-              payload.userId === 'anonymous' ? payload.cartId : cart.cartCode;
-
-            if (
-              cart.entry &&
-              cart.entry.product &&
-              cart.entry.product.defaultCategory
-            ) {
+              payload.userId === OCC_USER_ID_ANONYMOUS
+                ? cart.guid
+                : cart.cartCode;
+            if (cart?.entry?.product?.defaultCategory) {
               const formDataId = this.formDataStorageService.getFormDataIdByCategory(
                 cart.entry.product.defaultCategory.code
               );
@@ -94,14 +89,7 @@ export class CartEffects {
                 );
               }
             }
-            if (
-              cartCode !== payload.cartId &&
-              OCC_USER_ID_ANONYMOUS !== payload.userId
-            ) {
-              actions.push(
-                new CartActions.CartProcessesDecrement(payload.cartId)
-              );
-            } else {
+            if (cartCode === payload.cartId) {
               actions.push(
                 new CartActions.CartAddEntrySuccess({
                   ...cart.entry,
@@ -109,6 +97,8 @@ export class CartEffects {
                   cartId: cartCode,
                 })
               );
+            } else {
+              actions.push(new fromActions.StartBundleFail(payload.cartId));
             }
             return [
               new CartActions.LoadCart({
@@ -121,23 +111,9 @@ export class CartEffects {
               ...actions,
             ];
           }),
-          catchError(error =>
-            from([new CartActions.CartAddEntryFail(JSON.stringify(error))])
-          )
+          catchError(error => from([new CartActions.CartAddEntryFail(error)]))
         );
     })
-  );
-
-  @Effect()
-  processesIncrement$: Observable<
-    CartActions.CartProcessesIncrement
-  > = this.actions$.pipe(
-    ofType(fromActions.ADD_OPTIONAL_PRODUCT, fromActions.START_BUNDLE),
-    map(
-      (action: fromActions.AddOptionalProduct | fromActions.StartBundle) =>
-        action.payload
-    ),
-    map(payload => new CartActions.CartProcessesIncrement(payload.cartId))
   );
 
   constructor(

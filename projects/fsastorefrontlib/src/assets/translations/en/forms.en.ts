@@ -4,6 +4,8 @@ export const forms = {
     lessThan200K: 'Range must be between 0 -200,000',
     dateOfBirthMinimumAge: 'Must be over 18 years old',
     enterValidEmail: 'Please enter a valid email',
+    validationErrors: 'There are validation errors',
+    fillOutProperly: `Please retry once all of the fields have been properly filled-out.`,
     dateOfBirth: {
       label: 'Date of Birth',
     },
@@ -55,6 +57,11 @@ export const forms = {
       credit_card_details_form: 'Configure a Product',
       current_account_details_form: 'Configure a Product',
     },
+    auto: {
+      vehicleAnnualMileage: 'Vehicle Annual Mileage',
+    },
     definitionLoadError: 'Error occurred. Form could not be loaded.',
+    policyHolderNotSameAsMainDriver:
+      'Please return to the first step of checkout: “Choose a cover” and check your Date of birth. Policy holder and main driver should have the same Date of birth.',
   },
 };

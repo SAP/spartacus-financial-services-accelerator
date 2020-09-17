@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import {
   FormControl,
@@ -8,10 +7,7 @@ import {
 } from '@angular/forms';
 import { of } from 'rxjs';
 import { DynamicFormsConfig } from '../../config/form-config';
-import {
-  ControlDependency,
-  FieldConfig,
-} from '../../models/form-config.interface';
+import { FieldConfig } from '../../models/form-config.interface';
 import { FormService } from '../form/form.service';
 import { defaultFormConfig } from './../../config/default-form-config';
 import { FormValidationService } from './../form-validation/form-validation.service';
@@ -20,46 +16,50 @@ import { FieldDependencyResolverService } from './field-dependency-resolver.serv
 const fieldType = 'input';
 const minValue = 'minValue';
 
-const dependencyConditions: ControlDependency[] = [
-  {
-    controlName: 'testField2',
-    conditions: [
+const testField1: FieldConfig = {
+  name: 'testField1',
+  fieldType: fieldType,
+  dependsOn: {
+    hide: true,
+    controls: [
       {
-        name: minValue,
-        arguments: [
+        controlName: 'testField2',
+        conditions: [
           {
-            value: '5',
+            name: minValue,
+            arguments: [
+              {
+                value: '5',
+              },
+            ],
           },
         ],
       },
     ],
   },
-];
-
-const testField1: FieldConfig = {
-  name: 'testField1',
-  fieldType: fieldType,
-  dependsOn: dependencyConditions,
 };
 
 const testField2: FieldConfig = {
   name: 'testField2',
   fieldType: fieldType,
-  dependsOn: [
-    {
-      controlName: 'testField3',
-      conditions: [
-        {
-          name: minValue,
-          arguments: [
-            {
-              value: '7',
-            },
-          ],
-        },
-      ],
-    },
-  ],
+  dependsOn: {
+    hide: true,
+    controls: [
+      {
+        controlName: 'testField3',
+        conditions: [
+          {
+            name: minValue,
+            arguments: [
+              {
+                value: '7',
+              },
+            ],
+          },
+        ],
+      },
+    ],
+  },
 };
 
 const testField3: FieldConfig = {
@@ -106,11 +106,9 @@ describe('FieldDependencyResolverService', () => {
         },
       ],
     });
-    mockFormValidationService = TestBed.get(FormValidationService as Type<
-      FormValidationService
-    >);
-    mockFormService = TestBed.get(FormService as Type<FormService>);
-    service = TestBed.get(FieldDependencyResolverService);
+    mockFormValidationService = TestBed.inject(FormValidationService);
+    mockFormService = TestBed.inject(FormService);
+    service = TestBed.inject(FieldDependencyResolverService);
   });
 
   it('should be created', () => {

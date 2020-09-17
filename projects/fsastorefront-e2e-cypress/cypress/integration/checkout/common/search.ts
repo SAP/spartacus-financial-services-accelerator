@@ -6,6 +6,7 @@ context('Search', () => {
     cy.visit('/');
   });
 
+  //TODO: Bug FSA-5142
   it('Should search world that will lead to no results page', () => {
     search.searchNoResults();
   });

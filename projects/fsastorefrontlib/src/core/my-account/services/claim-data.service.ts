@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Claim } from '../../../occ/occ-models';
-import { AuthService } from '@spartacus/core';
-import { Store, select } from '@ngrx/store';
-import * as fromReducer from '../store/reducers';
-import * as fromClaimStore from '../store/selectors';
+import { select, Store } from '@ngrx/store';
+import { AuthService, OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
 import { filter } from 'rxjs/operators';
-import { OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
+import { Claim } from '../../../occ/occ-models';
 import { StateWithMyAccount } from '../store/my-account-state';
+import * as fromClaimStore from '../store/selectors';
 
 export interface SelectedPolicy {
   userId: string;

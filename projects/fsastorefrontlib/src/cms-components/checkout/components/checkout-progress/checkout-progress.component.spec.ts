@@ -15,7 +15,10 @@ import { storefrontRoutesConfig } from '../../../../cms-structure/routing/defaul
 import { FSCartService } from '../../../../core/cart/facade/cart.service';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { checkoutConfig } from '../../config/default-checkout-config';
-import { FSProduct } from './../../../../occ/occ-models/occ.models';
+import {
+  BindingStateType,
+  FSProduct,
+} from './../../../../occ/occ-models/occ.models';
 import { FSCheckoutProgressComponent } from './checkout-progress.component';
 
 const mockCheckoutConfig: CheckoutConfig = checkoutConfig;
@@ -25,6 +28,8 @@ const mockRoutesConfig: RoutesConfig = storefrontRoutesConfig;
 let mockParams = {};
 
 let mockCart = {
+  code: 'cart',
+  insuranceQuote: {},
   deliveryOrderGroups: [
     {
       entries: [
@@ -69,8 +74,10 @@ class MockRoutingService {
 }
 
 class MockActivatedRoute {
-  routeConfig = {
-    path: 'checkout/add-options',
+  snapshot = {
+    data: {
+      cxRoute: 'addOptions',
+    },
   };
   params = of(mockParams);
 }
@@ -161,15 +168,15 @@ describe('FSCheckoutProgressComponent', () => {
     spyOn(categoryService, 'setActiveCategory').and.callThrough();
     spyOn(categoryService, 'getActiveCategory').and.callThrough();
 
-    routingConfigService = TestBed.get(RoutingConfigService as Type<
-      RoutingConfigService
-    >);
+    routingConfigService = TestBed.get(
+      RoutingConfigService as Type<RoutingConfigService>
+    );
     spyOn(routingConfigService, 'getRouteConfig').and.callThrough();
 
     cartService = TestBed.get(FSCartService as Type<FSCartService>);
-    currentProductService = TestBed.get(CurrentProductService as Type<
-      CurrentProductService
-    >);
+    currentProductService = TestBed.get(
+      CurrentProductService as Type<CurrentProductService>
+    );
 
     spyOn(cartService, 'getActive').and.callThrough();
   });
@@ -195,6 +202,8 @@ describe('FSCheckoutProgressComponent', () => {
 
   it('should not set active category to default category code', () => {
     mockCart = {
+      code: 'cart',
+      insuranceQuote: {},
       deliveryOrderGroups: null,
     };
     component.ngOnInit();
@@ -202,6 +211,8 @@ describe('FSCheckoutProgressComponent', () => {
 
   it('should not set active category to default category code 1', () => {
     mockCart = {
+      code: 'cart',
+      insuranceQuote: {},
       deliveryOrderGroups: [],
     };
     component.ngOnInit();
@@ -209,6 +220,8 @@ describe('FSCheckoutProgressComponent', () => {
 
   it('should not set active category to default category code 2', () => {
     mockCart = {
+      code: 'cart',
+      insuranceQuote: {},
       deliveryOrderGroups: [
         {
           entries: null,
@@ -220,6 +233,8 @@ describe('FSCheckoutProgressComponent', () => {
 
   it('should not set active category to default category code 3', () => {
     mockCart = {
+      code: 'cart',
+      insuranceQuote: {},
       deliveryOrderGroups: [
         {
           entries: [],
@@ -231,6 +246,8 @@ describe('FSCheckoutProgressComponent', () => {
 
   it('should not set active category to default category code 4', () => {
     mockCart = {
+      code: 'cart',
+      insuranceQuote: {},
       deliveryOrderGroups: [
         {
           entries: [
@@ -244,8 +261,10 @@ describe('FSCheckoutProgressComponent', () => {
     component.ngOnInit();
   });
 
-  it('should not set active categorys to default category code 5', () => {
+  it('should not set active categories to default category code 5', () => {
     mockCart = {
+      code: 'cart',
+      insuranceQuote: {},
       deliveryOrderGroups: [
         {
           entries: [
@@ -271,5 +290,48 @@ describe('FSCheckoutProgressComponent', () => {
         expect(activeCategory).toBe(mockProduct.defaultCategory.code);
       })
       .unsubscribe();
+  });
+
+  it('should return true when quote is bound', () => {
+    mockCart = {
+      code: 'cartCode',
+      deliveryOrderGroups: [],
+      insuranceQuote: {
+        state: {
+          code: BindingStateType.BIND,
+        },
+      },
+    };
+    component.ngOnInit();
+    let bound;
+    component.isQuoteBound().subscribe(result => (bound = result));
+    expect(bound).toEqual(true);
+  });
+
+  it('should return false when quote is not bound', () => {
+    mockCart = {
+      code: 'cartCode',
+      deliveryOrderGroups: [],
+      insuranceQuote: {
+        state: {
+          code: BindingStateType.UNBIND,
+        },
+      },
+    };
+    component.ngOnInit();
+    let bound;
+    component.isQuoteBound().subscribe(result => (bound = result));
+    expect(bound).toEqual(false);
+  });
+  it('should return false when quote does not have state code', () => {
+    mockCart = {
+      code: 'cartCode',
+      deliveryOrderGroups: [],
+      insuranceQuote: {},
+    };
+    component.ngOnInit();
+    let bound;
+    component.isQuoteBound().subscribe(result => (bound = result));
+    expect(bound).toEqual(false);
   });
 });

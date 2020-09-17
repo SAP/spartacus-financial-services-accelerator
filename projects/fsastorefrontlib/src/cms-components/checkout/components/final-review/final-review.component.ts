@@ -16,8 +16,6 @@ import { FSCheckoutConfigService } from '../../../../core/checkout/services/chec
 export class FinalReviewComponent implements OnInit {
   @Input()
   paymentDetails$: Observable<PaymentDetails>;
-  @Output()
-  goToQuoteReview = new EventEmitter<any>();
   tAndCToggler = false;
   constructor(
     protected checkoutService: FSCheckoutService,
@@ -27,21 +25,13 @@ export class FinalReviewComponent implements OnInit {
     protected activatedRoute: ActivatedRoute
   ) {}
 
-  checkoutStepUrlNext: string;
-
   ngOnInit() {
     this.checkoutService.mockDeliveryMode();
-    this.checkoutStepUrlNext = this.checkoutConfigService.getNextCheckoutStepUrl(
-      this.activatedRoute
-    );
     this.paymentDetails$ = this.checkoutPaymentService.getPaymentDetails();
   }
 
   toggleTAndC(): void {
     this.tAndCToggler = !this.tAndCToggler;
-  }
-  edit() {
-    this.goToQuoteReview.emit();
   }
   placeOrder(): void {
     this.checkoutService.placeOrder();

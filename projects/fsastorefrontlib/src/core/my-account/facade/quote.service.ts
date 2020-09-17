@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { select, Store } from '@ngrx/store';
 import { AuthService, OrderEntry } from '@spartacus/core';
-import { map, take } from 'rxjs/operators';
+import { filter, map, take } from 'rxjs/operators';
 import {
   FSCart,
   FSOrderEntry,
@@ -52,29 +52,30 @@ export class QuoteService {
       .pipe(take(1))
       .subscribe(occUserId => {
         if (occUserId) {
-          this.cartService.loadCart(quote.cartCode);
+          this.cartService.loadCart(quote.cartCode, occUserId);
         }
       })
       .unsubscribe();
 
-    this.cartService.getActive().subscribe((cart: FSCart) => {
-      if (
-        cart &&
-        cart.deliveryOrderGroups &&
-        cart.deliveryOrderGroups.length > 0 &&
-        cart.deliveryOrderGroups[0].entries &&
-        cart.deliveryOrderGroups[0].entries.length > 0
-      ) {
-        const orderEntry: OrderEntry = cart.deliveryOrderGroups[0].entries[0];
-        const product: FSProduct = orderEntry.product;
+    this.cartService
+      .getActive()
+      .pipe(
+        filter(cart => cart.code === quote.cartCode),
+        take(1)
+      )
+      .subscribe((cart: FSCart) => {
+        if (cart && cart.entries && cart.entries.length > 0) {
+          const orderEntry: OrderEntry = cart.entries[0];
+          const product: FSProduct = orderEntry.product;
 
-        this.loadPersonalDetailsForm(cart.deliveryOrderGroups[0].entries[0]);
-        this.loadChooseCoverForm(
-          cart.insuranceQuote,
-          product.defaultCategory.code
-        );
-      }
-    });
+          this.loadPersonalDetailsForm(orderEntry);
+          this.loadChooseCoverForm(
+            cart.insuranceQuote,
+            product.defaultCategory.code
+          );
+        }
+      })
+      .unsubscribe();
   }
 
   protected loadPersonalDetailsForm(entry: FSOrderEntry) {
@@ -143,6 +144,23 @@ export class QuoteService {
             userId: occUserId,
             cartId: cartId,
             action: QuoteActionType.UNDERWRITING,
+          })
+        )
+      )
+      .unsubscribe();
+  }
+
+  updateQuote(cartId: string, priceAttributes: any) {
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId =>
+        this.store.dispatch(
+          new fromAction.QuoteProcessAction({
+            userId: occUserId,
+            cartId: cartId,
+            action: QuoteActionType.UPDATE,
+            body: priceAttributes,
           })
         )
       )
