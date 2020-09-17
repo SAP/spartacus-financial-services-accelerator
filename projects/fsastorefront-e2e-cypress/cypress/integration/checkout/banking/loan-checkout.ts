@@ -1,4 +1,3 @@
-import * as productCategory from "../../../helpers/productCategoryPage";
 import * as register from "../../../helpers/register";
 import {registrationUser} from "../../../sample-data/users";
 import * as checkout from "../../../helpers/checkout/checkoutSteps";
@@ -10,18 +9,14 @@ import * as userIdentification from "../../../helpers/checkout/banking/userIdent
 
 context('Loan Checkout', () => {
   before(() => {
-    cy.visit('/');
+    cy.visit('http://10.27.241.80/financial/en/EUR');
   });
 
   it('Should register a new user and start Loan checkout', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
     checkout.waitForHomepage();
-    cy.selectOptionFromDropdown({
-      menuOption: 'Banking',
-      dropdownItem: 'Loan',
-    });
-    productCategory.startCheckoutForBanking();
+    banking.startBankingCheckout('Loan');
   });
 
   it('Should configure a Loan product', () => {
@@ -29,9 +24,9 @@ context('Loan Checkout', () => {
     checkout.checkCheckoutStep('Your Loan Application', '6');
     banking.checkConfigureStep();
     loan.configureLoan();
-    cy.get('.btn-primary').contains('Calculate').click();
+    cy.get('.action-button').click();
     //mini cart
-    loan.checkMiniCart();
+    //loan.checkMiniCart();
     checkout.clickContinueButton();
     checkout.waitForAddOptions();
 
@@ -41,7 +36,7 @@ context('Loan Checkout', () => {
     checkout.checkCheckoutStep('Your Loan Application', '6');
     //TODO loan included product
     //loan.checkOptionalProducts();
-    loan.checkMiniCart();
+    //loan.checkMiniCart();
     checkout.clickContinueButton();
   });
 

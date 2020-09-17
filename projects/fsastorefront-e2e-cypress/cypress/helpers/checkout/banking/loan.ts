@@ -52,8 +52,30 @@ export function configureLoan() {
 }
 
 export function checkMiniCart() {
-  cy.get('.short-overview-content').should('be.visible')
-    .within( ()=> {
-      cy.get('.short-overview-value').contains(' €172.64 ');
-    });
+  const miniCartContent: addOptionsPage.MiniCart = {
+    price: ' €172.64 ',
+    products: [
+      {
+        title: ' Number of Applicants: ',
+        value: ' 2 ',
+      },
+      {
+        title: 'Loan Amount:',
+        value: ' 18001 ',
+      },
+      {
+        title: 'Loan Term:',
+        value: ' 6-year ',
+      },
+      {
+        title: ' Repayment Frequency:',
+        value: ' biweekly ',
+      },
+      {
+        title: ' Loan Purpose:',
+        value: ' purchasing-a-car ',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
 }

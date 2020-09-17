@@ -24,7 +24,7 @@ export function checkMiniCart() {
     price: ' €503,125.00 ',
     products: [
       {
-        title: 'Term Amount:',
+        title: ' Term Amount: ',
         value: ' 500000 ',
       },
       {

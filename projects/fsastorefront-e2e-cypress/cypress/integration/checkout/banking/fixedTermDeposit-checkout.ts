@@ -1,4 +1,3 @@
-import * as productCategory from "../../../helpers/productCategoryPage";
 import * as register from "../../../helpers/register";
 import {registrationUser} from "../../../sample-data/users";
 import * as checkout from "../../../helpers/checkout/checkoutSteps";
@@ -18,11 +17,7 @@ context('Fixed Term Deposit Checkout', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
     checkout.waitForHomepage();
-    cy.selectOptionFromDropdown({
-      menuOption: 'Banking',
-      dropdownItem: 'Fixed Term Deposit',
-    });
-    productCategory.startCheckoutForBanking();
+    banking.startBankingCheckout('Fixed Term Deposit');
   });
 
   it('Should configure a Loan product', () => {
