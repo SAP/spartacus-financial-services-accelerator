@@ -41,10 +41,11 @@ export class FSUpdateProfileFormComponent extends UpdateProfileFormComponent
   submitted = new EventEmitter<{ userUpdates: FSUser }>();
 
   ngOnInit() {
-    super.ngOnInit();
-    if (this.user && this.user.contactInfos) {
+    if (this.user) {
       this.form.patchValue(this.user);
-      this.form.controls.contactInfos.setValue(this.user.contactInfos[0]);
+      if (this.user.contactInfos) {
+        this.form.controls.contactInfos.setValue(this.user.contactInfos[0]);
+      }
     }
   }
 
