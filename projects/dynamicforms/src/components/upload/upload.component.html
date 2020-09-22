@@ -35,10 +35,8 @@
           > -->
         </div>
       </div>
-      <ng-container *ngIf="control$ | async">
-        <ng-container *ngFor="let file of fileList">
-          <p>{{ file?.name }}: {{ file.size }}</p>
-        </ng-container>
+      <ng-container *ngFor="let file of fileList">
+        <p>{{ file?.name }}: {{ file.size }}</p>
       </ng-container>
     </div>
     <cx-error-notice

@@ -5,9 +5,7 @@ import {
   Injector,
   OnInit,
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { LanguageService } from '@spartacus/core';
-import { Observable } from 'rxjs';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
@@ -19,7 +17,6 @@ import { FormService } from './../../core/services/form/form.service';
 })
 export class UploadComponent extends AbstractFormComponent implements OnInit {
   fileList: File[] = [];
-  control$: Observable<any>;
 
   @HostListener('change', ['$event.target.files', '$event.target.accept'])
   handleFiles(files: FileList, fileType: string) {
@@ -45,9 +42,5 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
 
   ngOnInit() {
     super.ngOnInit();
-    this.control$ = this.group.get(this.config.name).valueChanges;
-    this.control$.subscribe(data => {
-      this.fileList = [...data];
-    });
   }
 }
