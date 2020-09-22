@@ -14,7 +14,7 @@
             class="custom-file-input"
             [attr.aria-describedby]="config.name"
             [attr.name]="config.name"
-            [attr.multiple]="config.multiple"
+            [attr.multiple]="config.multiple ? config.multiple : null"
             [attr.accept]="config.accept"
           /> -->
           <input
@@ -22,7 +22,7 @@
             class="form-control-file"
             [attr.aria-describedby]="config.name"
             [attr.name]="config.name"
-            [attr.multiple]="config.multiple"
+            [attr.multiple]="config.multiple ? config.multiple : null"
             [attr.accept]="config.accept"
           />
           <input
@@ -35,8 +35,10 @@
           > -->
         </div>
       </div>
-      <ng-container *ngFor="let file of fileList">
-        <p>{{ file?.name }}: {{ file.size }}</p>
+      <ng-container *ngIf="fileList.length > 0">
+        <div *ngFor="let file of fileList">
+          {{ file?.name }}: {{ file?.size }}
+        </div>
       </ng-container>
     </div>
     <cx-error-notice

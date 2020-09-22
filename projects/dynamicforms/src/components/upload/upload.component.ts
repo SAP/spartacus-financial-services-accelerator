@@ -3,7 +3,6 @@ import {
   Component,
   HostListener,
   Injector,
-  OnInit,
 } from '@angular/core';
 import { LanguageService } from '@spartacus/core';
 import { DynamicFormsConfig } from '../../core/config/form-config';
@@ -15,15 +14,18 @@ import { FormService } from './../../core/services/form/form.service';
   selector: 'cx-upload',
   templateUrl: './upload.component.html',
 })
-export class UploadComponent extends AbstractFormComponent implements OnInit {
+export class UploadComponent extends AbstractFormComponent {
   fileList: File[] = [];
 
-  @HostListener('change', ['$event.target.files', '$event.target.accept'])
-  handleFiles(files: FileList, fileType: string) {
+  @HostListener('change', ['$event'])
+  handleFiles(event) {
     this.fileList = []; // reset when user is choosing files again
-    if (this.config.accept === fileType.toString()) {
-      this.fileList = Array.from(files);
-      this.group.get(this.config.name).setValue(files);
+    if (
+      this.config.accept === event.target.accept.toString() &&
+      this.config.multiple === event.target.multiple
+    ) {
+      this.fileList = Array.from(event.target.files);
+      this.group.get(this.config.name).setValue(this.fileList);
     } else {
       this.group.get(this.config.name).setValue(null); // triggering validation if nothing is selected
     }
@@ -38,9 +40,5 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     protected injector: Injector
   ) {
     super(formConfig, languageService, injector, formService);
-  }
-
-  ngOnInit() {
-    super.ngOnInit();
   }
 }
