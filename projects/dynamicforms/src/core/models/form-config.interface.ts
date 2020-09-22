@@ -28,6 +28,9 @@ export interface FieldConfig {
   dependsOn?: DependsOn;
   prefillValue?: PrefillValue;
   readonly?: boolean;
+  multiple?: boolean;
+  accept?: string;
+  maxFileSize?: number;
 }
 export interface DependsOn {
   hide?: boolean;

@@ -1,1 +1,45 @@
-<p>upload works!</p>
+<ng-container *ngIf="group">
+  <div class="dynamic-field" [formGroup]="group" [hidden]="config.hidden">
+    <div class="form-group">
+      <label class="col-form-label" [attr.for]="config.name">
+        {{ label }}
+        <ng-container *ngIf="!config.required">
+          {{ 'forms.optional' | cxTranslate }}
+        </ng-container>
+      </label>
+      <input
+        type="file"
+        class="form-control-file"
+        [attr.aria-describedby]="config.name"
+        [attr.name]="config.name"
+        [attr.multiple]="config.multiple"
+        [attr.accept]="config.accept"
+      />
+      <input
+        type="hidden"
+        [attr.name]="config.name + '_hidden'"
+        [formControlName]="config.name"
+      />
+      <h5>{{ fileList }} <br />{{ fileSize }}</h5>
+      <!-- <div class="input-group">
+        <div class="custom-file">
+          <input
+            [attr.id]="config.name"
+            multiple
+            type="file"
+            class="custom-file-input"
+            [attr.name]="config.name"
+            [formControlName]="config.name"
+          />
+          <label class="custom-file-label" [attr.for]="config.name"
+            >Choose file</label
+          >
+        </div>
+      </div> -->
+    </div>
+    <cx-error-notice
+      [warn]="group.controls[config.name]"
+      [parentConfig]="config"
+    ></cx-error-notice>
+  </div>
+</ng-container>
