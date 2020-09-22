@@ -7,37 +7,37 @@
           {{ 'forms.optional' | cxTranslate }}
         </ng-container>
       </label>
-      <input
-        type="file"
-        class="form-control-file"
-        [attr.aria-describedby]="config.name"
-        [attr.name]="config.name"
-        [attr.multiple]="config.multiple"
-        [attr.accept]="config.accept"
-      />
-      <input
-        type="hidden"
-        [attr.name]="config.name + '_hidden'"
-        [formControlName]="config.name"
-      />
-      <ng-container *ngIf="control$ | async">
-        <h5>{{ fileList }} <br />{{ fileSize }}</h5>
-      </ng-container>
-      <!-- <div class="input-group">
+      <div class="input-group">
         <div class="custom-file">
-          <input
-            [attr.id]="config.name"
-            multiple
+          <!-- <input
             type="file"
             class="custom-file-input"
+            [attr.aria-describedby]="config.name"
             [attr.name]="config.name"
+            [attr.multiple]="config.multiple"
+            [attr.accept]="config.accept"
+          /> -->
+          <input
+            type="file"
+            class="form-control-file"
+            [attr.aria-describedby]="config.name"
+            [attr.name]="config.name"
+            [attr.multiple]="config.multiple"
+            [attr.accept]="config.accept"
+          />
+          <input
+            type="hidden"
+            [attr.name]="config.name + '_hidden'"
             [formControlName]="config.name"
           />
-          <label class="custom-file-label" [attr.for]="config.name"
+          <!-- <label class="custom-file-label" [attr.for]="config.name"
             >Choose file</label
-          >
+          > -->
         </div>
-      </div> -->
+      </div>
+      <ng-container *ngIf="control$ | async">
+        <p>{{ fileList }} <br />{{ fileSize }}</p>
+      </ng-container>
     </div>
     <cx-error-notice
       [warn]="group.controls[config.name]"
