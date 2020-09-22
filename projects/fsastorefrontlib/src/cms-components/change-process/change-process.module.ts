@@ -57,8 +57,8 @@ const routes: Routes = [
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
-      cxRoute: 'changeDriverDetailsPage',
-      pageLabel: 'changeDriverDetailsPage',
+      cxRoute: 'changeAdditionalDriverPage',
+      pageLabel: 'changeAdditionalDriverPage',
     },
     component: PageLayoutComponent,
   },
