@@ -41,9 +41,9 @@ context('Event Checkout', () => {
   it('Should check add options page', () => {
     event.checkCheckoutPage();
     event.checkOptionalProducts();
-    //event.checkMiniCartEvent();
+    event.checkMiniCart();
     checkout.removeOptionalProduct('Excess Waiver');
-    //event.checkMiniCartEventRemovedProduct();
+    event.checkMiniCartRemovedProduct();
     checkout.clickContinueButton();
   });
 
@@ -56,7 +56,7 @@ context('Event Checkout', () => {
   it('Should check quote review page', () => {
     event.checkCheckoutPage();
     event.checkProgressBarEvent();
-    //renters.checkMiniCartRentersRemovedProduct();
+    event.checkMiniCartRemovedProduct();
     checkout.clickContinueButton();
     checkout.checkAccordions('threeAccordions');
     addPaymentMethod(registrationUser.email, cartId);

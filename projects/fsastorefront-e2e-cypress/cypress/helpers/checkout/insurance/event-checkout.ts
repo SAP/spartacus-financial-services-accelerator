@@ -1,4 +1,5 @@
 import * as shared from '../shared-checkout';
+import * as sharedCheckout from '../shared-checkout.interface';
 
 export function checkProgressBarEvent() {
   cy.get('p.label').should('have.length', 6).eq(0).contains("What's Included");
@@ -88,4 +89,42 @@ export function checkEventPolicy() {
 export function checkCheckoutPage() {
   cy.get('h2').contains('Your Event Insurance');
   cy.get('.progress-inner-wrapper').should('have.length', '6');
+}
+
+export function checkMiniCart() {
+  const miniCartContent: sharedCheckout.MiniCart = {
+    price: ' €57.99 ',
+    products: [
+      {
+        title: ' Two Star Event Plan: ',
+        value: ' €18.99 ',
+      },
+      {
+        title: ' Excess Waiver: ',
+        value: ' €10.00 ',
+      },
+      {
+        title: ' Venue Cover: ',
+        value: ' €29.00 ',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
+}
+
+export function checkMiniCartRemovedProduct() {
+  const miniCartContent: sharedCheckout.MiniCart = {
+    price: ' €47.99 ',
+    products: [
+      {
+        title: ' Two Star Event Plan: ',
+        value: ' €18.99 ',
+      },
+      {
+        title: ' Venue Cover: ',
+        value: ' €29.00 ',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
 }

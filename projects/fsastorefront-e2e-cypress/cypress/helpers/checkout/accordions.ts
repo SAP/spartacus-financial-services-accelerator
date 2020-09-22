@@ -107,6 +107,13 @@ export const policyDetailsSavings = [
   'What Does It Cost Me',
 ];
 
+export const confirmationAccordionFTD = [
+  'Fixed Term Deposit Information',
+  "What's Included",
+  'Added by you',
+  'Personal Details',
+];
+
 export const Accordions = {
   accordions: [
     {
@@ -152,6 +159,10 @@ export const Accordions = {
     {
       category: 'LoanConfirmation',
       accordionItems: this.confirmationAccordionLoan,
+    },
+    {
+      category: 'FTDConfirmation',
+      accordionItems: this.confirmationAccordionFTD,
     },
     {
       category: 'savingsQuoteReview',

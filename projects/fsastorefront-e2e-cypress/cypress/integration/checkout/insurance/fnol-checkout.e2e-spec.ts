@@ -4,10 +4,6 @@ import * as fnol from '../../../helpers/fnolCheckout';
 import * as auto from '../../../helpers/checkout/insurance/auto';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import {
-  checkBackAndContinueButtons,
-  clickContinueButton,
-} from '../../../helpers/checkout/checkoutSteps';
-import {
   addPaymentMethod,
   selectPaymentMethod,
 } from '../../../helpers/checkout/insurance/payment';
@@ -47,7 +43,7 @@ context('FNOL for sample data user', () => {
     auto.populateAutoInformation();
     auto.populateMainDriverInfo();
     cy.get('[name=noOfDrivers]').select('0');
-    clickContinueButton();
+    checkout.clickContinueButton();
   });
 
   it('Should continue in add options and quote review pages', () => {
@@ -59,7 +55,7 @@ context('FNOL for sample data user', () => {
     });
     //add options page
     const personalDetails = waitForPage('personal-details', 'personalDetails');
-    clickContinueButton();
+    checkout.clickContinueButton();
     cy.wait(`@${personalDetails}`).its('status').should('eq', 200);
   });
 
@@ -75,7 +71,7 @@ context('FNOL for sample data user', () => {
 
   it('Should add new payment and bind quote', () => {
     addPaymentMethod(registrationUser.email, cartId);
-    clickContinueButton();
+    checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
   });
 
@@ -101,7 +97,7 @@ context('FNOL for sample data user', () => {
     fnol.checkFNOLCheckoutPage();
     fnol.checkFNOLSteps();
     fnol.populateIncidentInformationStep();
-    clickContinueButton();
+    checkout.clickContinueButton();
     fnol.waitForIncidentReportStep();
   });
 
@@ -113,33 +109,33 @@ context('FNOL for sample data user', () => {
     fnol.checkFNOLCheckoutPage();
     fnol.checkFNOLSteps();
     fnol.populateIncidentInformationStep();
-    clickContinueButton();
+    checkout.clickContinueButton();
     fnol.checkFNOLCheckoutPage();
   });
 
   it('Should check and populate Incident Report page', () => {
     fnol.populateIncidentReportStep();
-    checkBackAndContinueButtons();
-    clickContinueButton();
+    checkout.checkBackAndContinueButtons();
+    checkout.clickContinueButton();
   });
 
   it('Should check and populate General Information page', () => {
     fnol.checkFNOLCheckoutPage();
     fnol.populateGeneralInformationStep();
-    clickContinueButton();
+    checkout.clickContinueButton();
   });
 
   it('Should check summary page', () => {
     fnol.checkFNOLCheckoutPage();
     fnol.checkSummaryPage();
-    checkBackAndContinueButtons();
+    checkout.checkBackAndContinueButtons();
   });
 
   it('Should check information in accordions on summary page', () => {
     fnol.checkIncidentInformationAccordion();
     fnol.checkIncidentReportAccordion();
     fnol.checkGeneralInformationAccordion();
-    clickContinueButton();
+    checkout.clickContinueButton();
   });
 
   it('Should check claim confirmation page', () => {

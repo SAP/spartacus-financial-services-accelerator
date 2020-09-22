@@ -1,6 +1,5 @@
 import { registrationUser } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
-import * as fnol from '../../../helpers/fnolCheckout';
 import * as auto from '../../../helpers/checkout/insurance/auto';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import {
@@ -54,7 +53,7 @@ context('Change Request for new user', () => {
   });
 
   it('Should complete auto checkout', () => {
-    fnol.waitForQuoteReviewPage();
+    checkout.waitForQuoteReviewPage();
     checkout.clickContinueButton();
     checkout.checkAccordions('generalQuoteAccordions');
     checkout.clickContinueButton();

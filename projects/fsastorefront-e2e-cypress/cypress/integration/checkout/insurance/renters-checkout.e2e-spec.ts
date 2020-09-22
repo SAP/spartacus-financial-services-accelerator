@@ -50,9 +50,9 @@ context('Renters Checkout', () => {
 
   it('Should check add options page', () => {
     renters.checkOptionalProducts();
-    //renters.checkMiniCartRenters();
+    renters.checkMiniCartRenters();
     checkout.removeOptionalProduct('Bicycles Cover');
-    //renters.checkMiniCartRentersRemovedProduct();
+    renters.checkMiniCartRentersRemovedProduct();
     checkout.clickContinueButton();
   });
 
@@ -64,7 +64,7 @@ context('Renters Checkout', () => {
   it('Should check quote review page', () => {
     checkout.checkCheckoutStep('Your Renters Insurance', '7');
     checkout.checkProgressBarInsurance();
-    //renters.checkMiniCartRentersRemovedProduct();
+    renters.checkMiniCartRentersRemovedProduct();
     checkout.clickContinueButton();
     checkout.checkAccordions('generalQuoteAccordions');
     addPaymentMethod(registrationUserWithoutPhone.email, cartId);

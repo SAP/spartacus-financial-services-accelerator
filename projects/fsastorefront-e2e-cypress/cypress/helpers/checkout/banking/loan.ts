@@ -1,4 +1,4 @@
-import * as shared from "../shared-checkout";
+import * as shared from '../shared-checkout';
 
 export function checkOptionalProducts() {
   const addOptionsContent: addOptionsPage.AddOptions = {
@@ -35,7 +35,10 @@ export function checkLegalInformationLoan() {
   cy.get('cx-fs-legal-documents > .border-color-3')
     .should('be.visible')
     .within(() => {
-      cy.get('li.pb-1').should('have.length', 5);
+      cy.get('li.pb-3')
+        .should('have.length', 5)
+        .last()
+        .contains('Personal Loan - Terms And Conditions');
     });
   cy.get('cx-fs-legal-checkboxes').within(() => {
     cy.get('input[type="checkbox"]').click({ multiple: true, force: true });
@@ -51,14 +54,43 @@ export function configureLoan() {
   cy.get('[name=loanPurpose]').select('purchasing-a-car');
 }
 
-export function checkMiniCart() {
+export function checkMiniCartFirstStep() {
   const miniCartContent: addOptionsPage.MiniCart = {
     price: ' €172.64 ',
     products: [
       {
-        title: ' Number of Applicants: ',
+        title: 'Number of Applicants:',
         value: ' 2 ',
       },
+      {
+        title: 'Loan Amount:',
+        value: ' 18001 ',
+      },
+      {
+        title: 'Loan Start Date:',
+        value: ' 2021-12-12 ',
+      },
+      {
+        title: 'Loan Term:',
+        value: ' 6-year ',
+      },
+      {
+        title: 'Repayment Frequency:',
+        value: ' biweekly ',
+      },
+      {
+        title: 'Loan Purpose:',
+        value: ' purchasing-a-car ',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
+}
+
+export function checkMiniCart() {
+  const miniCartContent: addOptionsPage.MiniCart = {
+    price: ' €172.64 ',
+    products: [
       {
         title: 'Loan Amount:',
         value: ' 18001 ',
@@ -68,14 +100,41 @@ export function checkMiniCart() {
         value: ' 6-year ',
       },
       {
-        title: ' Repayment Frequency:',
+        title: 'Loan Purpose:',
+        value: ' purchasing-a-car ',
+      },
+      {
+        title: 'Loan Start Date:',
+        value: ' 2021-12-12 ',
+      },
+      {
+        title: 'Number Of Applicants:',
+        value: ' 2 ',
+      },
+      {
+        title: 'Repayment Frequency:',
         value: ' biweekly ',
       },
       {
-        title: ' Loan Purpose:',
-        value: ' purchasing-a-car ',
+        title: ' Personal Loan: ',
+        value: ' €168.02 ',
+      },
+      {
+        title: ' Service Fee: ',
+        value: ' €4.62 ',
       },
     ],
   };
   shared.checkMiniCart(miniCartContent);
+}
+
+export function checkLoanApplication() {
+  cy.get('cx-fs-quotes').within(() => {
+    cy.get('.info-card').should('have.length', 1);
+    cy.get('h6').should('have.text', ' Loan ');
+    cy.get('.label').contains('Personal Loan');
+    cy.get('.label').contains('Quote status');
+    cy.get('.value').contains('Approved');
+    cy.get('.value').contains('€172.64');
+  });
 }

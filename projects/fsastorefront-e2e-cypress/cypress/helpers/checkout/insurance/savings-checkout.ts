@@ -93,3 +93,36 @@ export function checkInvestmentDetails() {
       cy.get('.col-12').contains('Single Capital Company: 50%');
     });
 }
+
+export function checkMiniCart() {
+  const miniCartContent: addOptionsPage.MiniCart = {
+    price: ' €817.23 ',
+    products: [
+      {
+        title: ' Start Date: ',
+        value: ' 12 Dec 2020 ',
+      },
+      {
+        title: 'Annual Contribution Increase:',
+        value: ' 1 ',
+      },
+      {
+        title: 'Retirement Age:',
+        value: ' 67 ',
+      },
+      {
+        title: ' Balanced Deal: ',
+        value: ' €779.00 ',
+      },
+      {
+        title: ' Survivor Pension: ',
+        value: ' €35.24 ',
+      },
+      {
+        title: ' Dependent Children Pension: ',
+        value: ' €2.99 ',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
+}

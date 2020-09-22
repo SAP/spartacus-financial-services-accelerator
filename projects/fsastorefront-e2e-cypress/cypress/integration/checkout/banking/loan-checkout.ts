@@ -1,15 +1,15 @@
-import * as register from "../../../helpers/register";
-import {registrationUser} from "../../../sample-data/users";
-import * as checkout from "../../../helpers/checkout/checkoutSteps";
-import * as banking from "../../../helpers/checkout/banking/checkoutBankingSteps";
-import {populatePersonalDetails} from "../../../helpers/checkout/banking/checkoutBankingSteps";
-import * as creditCard from "../../../helpers/checkout/banking/creditCard";
-import * as loan from "../../../helpers/checkout/banking/loan";
-import * as userIdentification from "../../../helpers/checkout/banking/userIdentificationPage";
+import * as register from '../../../helpers/register';
+import { registrationUser } from '../../../sample-data/users';
+import * as checkout from '../../../helpers/checkout/checkoutSteps';
+import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
+import * as loan from '../../../helpers/checkout/banking/loan';
+import * as userIdentification from '../../../helpers/checkout/banking/userIdentificationPage';
+import * as policies from '../../../helpers/my-account/policies';
+import * as ftd from '../../../helpers/checkout/banking/fixedTermDeposit';
 
 context('Loan Checkout', () => {
   before(() => {
-    cy.visit('http://10.27.241.80/financial/en/EUR');
+    cy.visit('/');
   });
 
   it('Should register a new user and start Loan checkout', () => {
@@ -23,36 +23,48 @@ context('Loan Checkout', () => {
     banking.checkProgressBarLoanAndFTD();
     checkout.checkCheckoutStep('Your Loan Application', '6');
     banking.checkConfigureStep();
+    banking.checkConfigurationMiniCart();
     loan.configureLoan();
     cy.get('.action-button').click();
-    //mini cart
-    //loan.checkMiniCart();
+    loan.checkMiniCartFirstStep();
     checkout.clickContinueButton();
     checkout.waitForAddOptions();
-
   });
 
   it('Should check optional products', () => {
     checkout.checkCheckoutStep('Your Loan Application', '6');
-    //TODO loan included product
+    //TODO: Ajvan how to check mandatory products
+    cy.wait(500);
     //loan.checkOptionalProducts();
-    //loan.checkMiniCart();
     checkout.clickContinueButton();
   });
 
   it('Should populate Personal Details page', () => {
     checkout.checkCheckoutStep('Your Loan Application', '6');
     checkout.checkPersonalDetailsPage();
-    loan.checkMiniCart();
-    populatePersonalDetails();
+    banking.populatePersonalDetailsCCandLoan();
+    banking.populateAdditionalApplicantCCandLoan();
     checkout.clickContinueButton();
   });
 
   it('Should check Quote Review page', () => {
     checkout.checkCheckoutStep('Your Loan Application', '6');
     banking.checkProgressBarLoanAndFTD();
-    checkout.checkAccordions('creditCard');
+    loan.checkMiniCart();
+    checkout.checkAccordions('generalQuoteAccordions');
     checkout.bindQuotePopup();
+    checkout.clickContinueButton();
+  });
+
+  it('Should retrieve bind quote', () => {
+    policies.checkMyQuotesPage();
+    loan.checkLoanApplication();
+    cy.get('.link').contains('Retrieve').click({ force: true });
+    checkout.waitForQuoteReviewPage();
+    checkout.checkCheckoutStep('Your Loan Application', '6');
+    cy.get('h2').contains('Loan Application');
+    checkout.checkAccordions('generalQuoteAccordions');
+    checkout.clickContinueButton();
   });
 
   it('Should check Legal Information page', () => {
@@ -72,8 +84,10 @@ context('Loan Checkout', () => {
 
   it('Should check order confirmation', () => {
     checkout.checkOrderConfirmation();
-    loan.checkMiniCart();
+    cy.get('.short-overview-title')
+      .contains('Order total')
+      .parent()
+      .contains('€172.64');
     checkout.checkAccordions('LoanConfirmation');
   });
-
 });

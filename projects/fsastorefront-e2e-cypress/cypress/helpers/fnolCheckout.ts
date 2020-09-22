@@ -207,8 +207,3 @@ export function waitForIncidentReportStep() {
   );
   cy.wait(`@${incidentForm}`).its('status').should('eq', 200);
 }
-
-export function waitForQuoteReviewPage() {
-  const quoteReview = waitForPage('quote-review', 'quoteReview');
-  cy.wait(`@${quoteReview}`).its('status').should('eq', 200);
-}

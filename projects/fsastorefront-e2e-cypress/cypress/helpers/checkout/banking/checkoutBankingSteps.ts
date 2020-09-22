@@ -41,64 +41,38 @@ export function checkProgressBarLoanAndFTD() {
     .should('have.length', 6)
     .eq(0)
     .contains('Configure a Product');
-  cy.get('p.label')
-    .eq(1)
-    .contains('Add Options');
-  cy.get('p.label')
-    .eq(2)
-    .contains('Personal Details');
-  cy.get('p.label')
-    .eq(3)
-    .contains('Quote Review');
-  cy.get('p.label')
-    .eq(4)
-    .contains('Legal Information');
-  cy.get('p.label')
-    .eq(5)
-    .contains('User Identification');
+  cy.get('p.label').eq(1).contains('Add Options');
+  cy.get('p.label').eq(2).contains('Personal Details');
+  cy.get('p.label').eq(3).contains('Quote Review');
+  cy.get('p.label').eq(4).contains('Legal Information');
+  cy.get('p.label').eq(5).contains('User Identification');
 }
 
 export function populatePersonalDetails() {
   cy.get('[name="dob"]').type('1987-01-01');
   cy.get('[name="maritalStatus"]').select('married');
   cy.get('[name="numberOfFinancialDependents"]').select('4');
-  cy.get('[name="permanentResident"]')
-    .eq(0)
-    .click();
-  cy.get('[name="usCitizen"]')
-    .eq(1)
-    .click();
+  cy.get('[name="permanentResident"]').eq(0).click();
+  cy.get('[name="usCitizen"]').eq(1).click();
   cy.get('[name="residentialStatus"]').select('4');
   cy.get('[name="residentialAddress"]').type('Omladinskih Brigada');
   cy.get('[name="movedToAddressDate"]').type('2002-01-01');
-  cy.get('[name="isPostalAddressSame"]')
-    .eq(0)
-    .click();
+  cy.get('[name="isPostalAddressSame"]').eq(0).click();
   cy.get('[name="employmentStatus"]').select('fullTime');
   cy.get('[name="employerName"]').type('Ben Moore DOO');
   cy.get('[name="jobTitle"]').type('CEO');
   cy.get('[name="employmentStartDate"]').type('2005-01-01');
   cy.get('[name="incomeFrequency"]').select('monthly');
   cy.get('[name="netIncomeAmount"]').type('7800');
-  cy.get('[name="anyOtherIncome"]')
-    .eq(0)
-    .click();
+  cy.get('[name="anyOtherIncome"]').eq(0).click();
   cy.get('[name="workingOvertime"]').click();
-  cy.get('[name="meetingFinancialCommitments"]')
-    .eq(0)
-    .click();
+  cy.get('[name="meetingFinancialCommitments"]').eq(0).click();
   cy.get('[name="meetingFinancialCommitmentsDescription"]').type(
     'Lorem Ipsum is simply dummy text of the printing and typesetting industry. '
   );
-  cy.get('[name="anyFinancialObstacles"]')
-    .eq(1)
-    .click();
-  cy.get('[name="anyPossessions"]')
-    .eq(1)
-    .click();
-  cy.get('[name="anyDebts"]')
-    .eq(1)
-    .click();
+  cy.get('[name="anyFinancialObstacles"]').eq(1).click();
+  cy.get('[name="anyPossessions"]').eq(1).click();
+  cy.get('[name="anyDebts"]').eq(1).click();
   cy.get('[name="totalMonthlyExpenses"]').type('5050');
 }
 
@@ -106,21 +80,15 @@ export function populatePersonalDetailsLoanAndCA() {
   cy.get('[name="dateOfBirth"]').type('1987-01-01');
   cy.get('[name="maritalStatus"]').select('married');
   cy.get('[name="numberOfFinancialDependants"]').select('4');
-  cy.get('[name="isResidentOfBanksCountry"]')
-    .eq(0)
-    .click();
-  cy.get('[name="isUsCitizen"]')
-    .eq(1)
-    .click();
+  cy.get('[name="isResidentOfBanksCountry"]').eq(0).click();
+  cy.get('[name="isUsCitizen"]').eq(1).click();
   cy.get('[name="residentialStatus"]').select('living-with-parent-relative');
   cy.get('[name="residentialAddress"]').type('Omladinskih Brigada');
   cy.get('[name="movingInDateToResidentialAddress"]').type('2002-01-01');
-  cy.get('[name="isPostalSameAsResidential"]')
-    .eq(0)
-    .click();
+  cy.get('[name="isPostalSameAsResidential"]').eq(0).click();
 }
 
-  export function startBankingCheckout(mainProduct) {
+export function startBankingCheckout(mainProduct) {
   cy.selectOptionFromDropdown({
     menuOption: 'Banking',
     dropdownItem: mainProduct,
@@ -128,4 +96,54 @@ export function populatePersonalDetailsLoanAndCA() {
   cy.get('.enriched-banner-styled-text')
     .should('contain', ' Request a product')
     .click({ multiple: true, force: true });
-  }
+}
+
+export function populatePersonalDetailsCCandLoan() {
+  cy.get('[name="dob"]').eq(0).type('1987-01-01');
+  cy.get('[name="maritalStatus"]').eq(0).select('married');
+  cy.get('[name="numberOfFinancialDependents"]').eq(0).select('4');
+  cy.get('[name="permanentResident"]').eq(0).click();
+  cy.get('[name="usCitizen"]').eq(1).click();
+  cy.get('[name="residentialStatus"]').eq(0).select('4');
+  cy.get('[name="residentialAddress"]').eq(0).type('Omladinskih Brigada');
+  cy.get('[name="movedToAddressDate"]').eq(0).type('2002-01-01');
+  cy.get('[name="isPostalAddressSame"]').eq(0).click();
+  cy.get('[name="employmentStatus"]').eq(0).select('fullTime');
+  cy.get('[name="employerName"]').eq(0).type('Ben Moore DOO');
+  cy.get('[name="jobTitle"]').eq(0).type('CEO');
+  cy.get('[name="employmentStartDate"]').eq(0).type('2005-01-01');
+  cy.get('[name="incomeFrequency"]').eq(0).select('monthly');
+  cy.get('[name="netIncomeAmount"]').eq(0).type('7800');
+  cy.get('[name="anyOtherIncome"]').eq(0).click();
+  cy.get('[name="workingOvertime"]').click();
+  cy.get('[name="meetingFinancialCommitments"]').eq(0).click();
+  cy.get('[name="meetingFinancialCommitmentsDescription"]').type(
+    'Lorem Ipsum is simply dummy text of the printing and typesetting industry. '
+  );
+  cy.get('[name="anyFinancialObstacles"]').eq(1).click();
+  cy.get('[name="anyPossessions"]').eq(1).click();
+  cy.get('[name="anyDebts"]').eq(1).click();
+  cy.get('[name="totalMonthlyExpenses"]').type('5050');
+}
+
+export function populateAdditionalApplicantCCandLoan() {
+  cy.get('[name="title"]').eq(1).select('dr');
+  cy.get('[name="firstName"]').eq(1).type('John');
+  cy.get('[name="lastName"]').eq(1).type('Moore');
+  cy.get('[name="dob"]').eq(1).type('1981-01-01');
+  cy.get('[name="maritalStatus"]').eq(1).select('divorced');
+  cy.get('[name="numberOfFinancialDependents"]').eq(1).select('1');
+  cy.get('[name="sameLocationAsMainApplicant"]').eq(0).click();
+  cy.get('[name="employmentStatus-additionalApplicant"]').select('retired');
+  cy.get('[name="employmentStartDate"]').eq(1).type('2000-01-01');
+  cy.get('[name="incomeFrequency"]').eq(1).select('annually');
+  cy.get('[name="netIncomeAmount"]').eq(1).type('7800');
+}
+
+export function checkConfigurationMiniCart() {
+  cy.get('cx-fs-product-configuration-mini-cart').within(() => {
+    cy.get('.short-overview-content').contains(
+      ' Interested in how great our offer is? '
+    );
+  });
+}

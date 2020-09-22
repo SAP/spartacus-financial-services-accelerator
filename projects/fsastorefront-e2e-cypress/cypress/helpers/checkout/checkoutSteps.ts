@@ -187,16 +187,12 @@ export function waitForHomepage() {
 
 export function waitForAddOptions() {
   const addOptions = waitForPage('add-options', 'addOptions');
-  cy.wait(`@${addOptions}`)
-    .its('status')
-    .should('eq', 200);
+  cy.wait(`@${addOptions}`).its('status').should('eq', 200);
 }
 
 export function waitForConfirmation() {
-  const confirmation = waitForPage( 'orderConfirmationPage', 'confirmation');
-  cy.wait(`@${confirmation}`)
-    .its('status')
-    .should('eq', 200);
+  const confirmation = waitForPage('orderConfirmationPage', 'confirmation');
+  cy.wait(`@${confirmation}`).its('status').should('eq', 200);
 }
 
 export function checkCheckoutStep(mainProduct, numberOfSteps) {
@@ -208,4 +204,9 @@ export function checkPersonalDetailsPage() {
   cy.get('cx-fs-personal-details').should('be.visible');
   cy.get('cx-fs-mini-cart').should('be.visible');
   cy.get('cx-footer-navigation').should('be.visible');
+}
+
+export function waitForQuoteReviewPage() {
+  const quoteReview = waitForPage('quote-review', 'quoteReview');
+  cy.wait(`@${quoteReview}`).its('status').should('eq', 200);
 }

@@ -1,4 +1,4 @@
-import * as shared from "../shared-checkout";
+import * as shared from '../shared-checkout';
 
 export function checkOptionalProducts() {
   const addOptionsContent: addOptionsPage.AddOptions = {
@@ -19,12 +19,12 @@ export function checkOptionalProducts() {
   shared.checkAddOptionsPageContent(addOptionsContent);
 }
 
-export function checkMiniCart() {
+export function checkMiniCartFirstStep() {
   const miniCartContent: addOptionsPage.MiniCart = {
     price: ' €503,125.00 ',
     products: [
       {
-        title: ' Term Amount: ',
+        title: 'Term Amount:',
         value: ' 500000 ',
       },
       {
@@ -38,9 +38,64 @@ export function checkMiniCart() {
       {
         title: 'Start Date:',
         value: ' 2021-12-12 ',
-
       },
     ],
   };
   shared.checkMiniCart(miniCartContent);
+}
+
+export function checkMiniCart() {
+  const miniCartContent: addOptionsPage.MiniCart = {
+    price: ' €503,125.00 ',
+    products: [
+      {
+        title: 'Deposit Term:',
+        value: ' 3 ',
+      },
+
+      {
+        title: 'Maturity Option:',
+        value: ' termination ',
+      },
+      {
+        title: 'Start Date:',
+        value: ' 2021-12-12 ',
+      },
+      {
+        title: 'Investment Amount:',
+        value: ' 500000 ',
+      },
+      {
+        title: ' Fixed Term Deposit: ',
+        value: ' €503,125.00 ',
+      },
+      {
+        title: ' Flexi Deposit: ',
+        value: ' €0.00 ',
+      },
+      {
+        title: ' Offset Account: ',
+        value: ' €0.00 ',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
+}
+
+export function configureAProduct() {
+  cy.get('[name=term-amount]').type('500000');
+  cy.get('[name=deposit-term]').select('3');
+  cy.get('[name=maturity-option]').select('termination');
+  cy.get('[name=startDate]').type('2021-12-12');
+}
+
+export function checkFtdApplication() {
+  cy.get('cx-fs-quotes').within(() => {
+    cy.get('.info-card').should('have.length', 1);
+    cy.get('h6').should('have.text', ' Fixed Term Deposit ');
+    cy.get('.label').contains('Fixed Term Deposit');
+    cy.get('.label').contains('Quote status');
+    cy.get('.value').contains('Pending');
+    cy.get('.value').contains('€503,125.00');
+  });
 }
