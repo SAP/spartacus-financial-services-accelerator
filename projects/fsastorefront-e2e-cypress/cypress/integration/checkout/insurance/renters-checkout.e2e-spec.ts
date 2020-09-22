@@ -21,6 +21,7 @@ context('Renters Checkout', () => {
       registrationUserWithoutPhone.email,
       registrationUserWithoutPhone.password
     );
+    checkout.waitForHomepage();
   });
 
   it('Should open renters category page', () => {

@@ -2,7 +2,6 @@ import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as event from '../../../helpers/checkout/insurance/event-checkout';
-import { clickContinueButton } from '../../../helpers/checkout/checkoutSteps';
 import {
   addPaymentMethod,
   selectPaymentMethod,
@@ -51,7 +50,7 @@ context('Event Checkout', () => {
     event.checkCheckoutPage();
     checkout.checkPersonalDetailsPage();
     event.populatePersonalDetails();
-    clickContinueButton();
+    checkout.clickContinueButton();
   });
   it('Should check quote review page', () => {
     event.checkCheckoutPage();
