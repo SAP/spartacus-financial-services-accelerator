@@ -18,21 +18,15 @@ import { FormService } from './../../core/services/form/form.service';
   templateUrl: './upload.component.html',
 })
 export class UploadComponent extends AbstractFormComponent implements OnInit {
-  fileList: string[] = [];
-  fileSize: number[] = [];
+  fileList: File[] = [];
   control$: Observable<any>;
 
   @HostListener('change', ['$event.target.files', '$event.target.accept'])
   handleFiles(files: FileList, fileType: string) {
     this.fileList = []; // reset when user is choosing files again
-    this.fileSize = []; // reset when user is choosing files again
-    const fileList = Array.from(files);
     if (this.config.accept === fileType.toString()) {
-      fileList.map(data => {
-        this.fileList = [...this.fileList, data.name];
-        this.fileSize = [...this.fileSize, data.size];
-      });
-      this.group.get(this.config.name).setValue(this.fileList);
+      this.fileList = Array.from(files);
+      this.group.get(this.config.name).setValue(files);
     } else {
       this.group.get(this.config.name).setValue(null); // triggering validation if nothing is selected
     }
