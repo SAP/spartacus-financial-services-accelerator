@@ -20,7 +20,9 @@
         [attr.name]="config.name + '_hidden'"
         [formControlName]="config.name"
       />
-      <h5>{{ fileList }} <br />{{ fileSize }}</h5>
+      <ng-container *ngIf="control$ | async">
+        <h5>{{ fileList }} <br />{{ fileSize }}</h5>
+      </ng-container>
       <!-- <div class="input-group">
         <div class="custom-file">
           <input

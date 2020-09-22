@@ -3,10 +3,11 @@ import {
   Component,
   HostListener,
   Injector,
-  OnDestroy,
   OnInit,
 } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { LanguageService } from '@spartacus/core';
+import { Observable } from 'rxjs';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
@@ -16,10 +17,10 @@ import { FormService } from './../../core/services/form/form.service';
   selector: 'cx-upload',
   templateUrl: './upload.component.html',
 })
-export class UploadComponent extends AbstractFormComponent
-  implements OnInit, OnDestroy {
+export class UploadComponent extends AbstractFormComponent implements OnInit {
   fileList: string[];
   fileSize: number[];
+  control$: Observable<any>;
 
   @HostListener('change', ['$event.target.files', '$event.target.accept'])
   handleFiles(files: FileList, fileType: string) {
@@ -50,8 +51,9 @@ export class UploadComponent extends AbstractFormComponent
 
   ngOnInit() {
     super.ngOnInit();
-    this.group.get(this.config.name).valueChanges.subscribe(data => {
-      this.fileList = [];
+    this.control$ = this.group.get(this.config.name).valueChanges;
+    this.fileList = [];
+    this.control$.subscribe(data => {
       this.fileList = [...data];
       console.log(this.fileList);
     });
