@@ -33,9 +33,7 @@ context('Loan Checkout', () => {
 
   it('Should check optional products', () => {
     checkout.checkCheckoutStep('Your Loan Application', '6');
-    //TODO: Ajvan how to check mandatory products
-    cy.wait(500);
-    //loan.checkOptionalProducts();
+    loan.checkOptionalProducts();
     checkout.clickContinueButton();
   });
 
@@ -87,7 +85,7 @@ context('Loan Checkout', () => {
     cy.get('.short-overview-title')
       .contains('Order total')
       .parent()
-      .contains('€172.64');
+      .contains('€187.76');
     checkout.checkAccordions('LoanConfirmation');
   });
 });

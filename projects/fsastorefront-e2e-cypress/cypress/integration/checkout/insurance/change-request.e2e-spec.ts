@@ -39,7 +39,8 @@ context('Change Request for new user', () => {
       const cartId = body.code;
       addPaymentMethod(registrationUser.email, cartId);
     });
-    //auto.checkAutoSilverMiniCart();
+    auto.checkAutoSilverMiniCart();
+    auto.checkOptionalProducts();
     checkout.clickContinueButton();
   });
 

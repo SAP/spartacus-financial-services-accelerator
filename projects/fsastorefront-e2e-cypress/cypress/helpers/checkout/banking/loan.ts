@@ -6,6 +6,7 @@ export function checkOptionalProducts() {
     items: [
       {
         name: 'Service Fee',
+        mandatory: true,
       },
       {
         name: 'Life Cover',
@@ -89,7 +90,7 @@ export function checkMiniCartFirstStep() {
 
 export function checkMiniCart() {
   const miniCartContent: addOptionsPage.MiniCart = {
-    price: ' €172.64 ',
+    price: ' €187.76 ',
     products: [
       {
         title: 'Loan Amount:',
@@ -123,6 +124,14 @@ export function checkMiniCart() {
         title: ' Service Fee: ',
         value: ' €4.62 ',
       },
+      {
+        title: ' Critical Illness Cover: ',
+        value: ' €11.76 ',
+      },
+      {
+        title: ' Job Loss Cover: ',
+        value: ' €3.36 ',
+      },
     ],
   };
   shared.checkMiniCart(miniCartContent);
@@ -135,6 +144,6 @@ export function checkLoanApplication() {
     cy.get('.label').contains('Personal Loan');
     cy.get('.label').contains('Quote status');
     cy.get('.value').contains('Approved');
-    cy.get('.value').contains('€172.64');
+    cy.get('.value').contains('€187.76');
   });
 }
