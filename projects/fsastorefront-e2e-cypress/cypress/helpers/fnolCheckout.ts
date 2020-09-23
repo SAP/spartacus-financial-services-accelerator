@@ -57,17 +57,17 @@ export function updateIncidentType() {
 }
 
 export function populateIncidentReportStep() {
-  cy.get('[name=howAccidentOccurred]')
-    .clear()
-    .type(
-      'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
-    );
+  cy.get('[name=howAccidentOccurred]').type(
+    'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
+  );
 }
 
 export function populateGeneralInformationStep() {
-  cy.get('[name=responsibleForAccident]').clear().type('me');
-  cy.get('[name=policeInformed]').eq(0).click();
-  cy.get('[name=witnesses]').eq(1).click();
+  cy.get('[name=phFault]').select('3rdParty');
+  cy.get('[name=reportedToPolice]').eq(0).click();
+  cy.get('[name=witnessExist]').eq(1).click();
+  cy.get('[name=vehicleParked]').eq(1).click();
+  cy.get('[name=otherVehicleInvolved]').eq(1).click();
 }
 
 export function checkSummaryPage() {
@@ -86,7 +86,7 @@ export function checkIncidentInformationAccordion() {
     .within(() => {
       cy.get('.accordion-list-item').should('have.length', '8');
     });
-  cy.get('.accordion-list-item').contains('AutoCollision');
+  cy.get('.accordion-list-item').contains('AutoGlassDamage');
 }
 
 export function checkIncidentReportAccordion() {
@@ -106,9 +106,9 @@ export function checkGeneralInformationAccordion() {
   cy.get('.accordion-item-wrapper')
     .eq(2)
     .within(() => {
-      cy.get('.accordion-list-item').should('have.length', '3');
+      cy.get('.accordion-list-item').should('have.length', '5');
     });
-  cy.get('.accordion-list-item').contains('me');
+  cy.get('.accordion-list-item').contains('3rdParty');
 }
 
 export function checkConfirmationPage() {
@@ -124,10 +124,12 @@ export function checkConfirmationPage() {
 }
 
 export function checkOpenClaimContent() {
-  cy.get('.title').contains('Auto Insurance');
-  cy.get('.title').contains('Date of Loss');
+  cy.get('h6').contains(' Auto Insurance Claim ');
+  cy.get('.label').contains('Incident Type');
+  cy.get('.value').contains('Collision');
+  cy.get('.label').contains('Date of Loss');
   cy.get('.value').contains('01 Jan 2018');
-  cy.get('.title').contains('Status');
+  cy.get('.label').contains('Status');
   cy.get('.value').contains('OPEN');
 }
 
@@ -163,9 +165,9 @@ export function checkAndResumeSpecificClaim() {
   });
   cy.wait(`@${claims}`).its('status').should('eq', 200);
   cy.get('.info-card').within(() => {
-    cy.get('h4.info-card-caption').contains(claimNumber);
+    cy.get('.info-card-content').contains(claimNumber);
     this.checkOpenClaimContent();
-    cy.get('.secondary-button').contains('Resume').click();
+    cy.get('.link').contains('Resume').click({ force: true });
   });
 }
 

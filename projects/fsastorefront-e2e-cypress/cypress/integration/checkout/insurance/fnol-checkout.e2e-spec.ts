@@ -108,7 +108,8 @@ context('FNOL for sample data user', () => {
   it('Should check user is navigated to first FNOL page', () => {
     fnol.checkFNOLCheckoutPage();
     fnol.checkFNOLSteps();
-    fnol.populateIncidentInformationStep();
+    fnol.updateIncidentType();
+    //fnol.populateIncidentInformationStep();
     checkout.clickContinueButton();
     fnol.checkFNOLCheckoutPage();
   });

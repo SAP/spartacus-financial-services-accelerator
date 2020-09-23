@@ -5,7 +5,6 @@ import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps
 import * as loan from '../../../helpers/checkout/banking/loan';
 import * as userIdentification from '../../../helpers/checkout/banking/userIdentificationPage';
 import * as policies from '../../../helpers/my-account/policies';
-import * as ftd from '../../../helpers/checkout/banking/fixedTermDeposit';
 
 context('Loan Checkout', () => {
   before(() => {
