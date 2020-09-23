@@ -7,6 +7,7 @@
           {{ 'forms.optional' | cxTranslate }}
         </ng-container>
       </label>
+      <p>{{ 'forms.maxFileSize' | cxTranslate }} {{ config.maxFileSize }}MB</p>
       <div class="input-group">
         <div class="custom-file">
           <!-- <input
@@ -38,11 +39,7 @@
       <ng-container *ngIf="fileList.length > 0">
         <div *ngFor="let file of fileList">
           {{ file?.name }}:
-          {{
-            file?.size / 1024 / 1024 > 1
-              ? (file?.size / 1024 / 1024).toFixed(2)
-              : (file?.size / 1024).toFixed(2)
-          }}{{ file?.size / 1024 / 1024 > 1 ? 'MB' : 'KB' }}
+          {{ bytesToSize(file.size) }}
         </div>
       </ng-container>
     </div>

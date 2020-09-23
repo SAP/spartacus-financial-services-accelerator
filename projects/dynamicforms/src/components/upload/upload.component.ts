@@ -26,6 +26,15 @@ export class UploadComponent extends AbstractFormComponent {
     }
   }
 
+  bytesToSize(bytes: number) {
+    const sizes = ['Bytes', 'KB', 'MB'];
+    const i = Number(Math.floor(Math.log(bytes) / Math.log(1024)));
+    if (i === 0) {
+      return `${bytes} ${sizes[i]})`;
+    }
+    return `${(bytes / 1024 ** i).toFixed(1)} ${sizes[i]}`;
+  }
+
   checkFileSize(event): Boolean {
     const files: File[] = Array.from(event.target.files);
     const maxExceeded = files.filter(

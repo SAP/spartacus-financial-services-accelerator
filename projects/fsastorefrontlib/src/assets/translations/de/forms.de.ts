@@ -6,6 +6,7 @@ export const forms = {
     enterValidEmail: 'Bitte geben Sie eine gültige Email Adresse ein.',
     validationErrors: '[DE] There are validation errors',
     fillOutProperly: `[DE] Please retry once all of the fields have been properly filled-out.`,
+    maxFileSize: '[DE] Maximum file size allowed',
     dateOfBirth: {
       label: 'Geburtsdatum',
     },
