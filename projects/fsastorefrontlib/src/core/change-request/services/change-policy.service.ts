@@ -52,8 +52,9 @@ export class ChangePolicyService {
           break;
         }
         case RequestType.COVERAGE_CHANGE: {
-          const optionalProducts =
-            changeRequestData.insurancePolicy.optionalProducts;
+          const optionalProducts = changeRequestData?.insurancePolicy?.optionalProducts?.filter(
+            optionalProduct => !optionalProduct.isMandatory
+          );
           if (optionalProducts) {
             optionalProducts.forEach(optionalProduct => {
               const newVal = this.getChangedCoverageValue(
