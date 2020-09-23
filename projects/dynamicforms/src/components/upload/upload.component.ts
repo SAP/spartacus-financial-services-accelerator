@@ -26,7 +26,7 @@ export class UploadComponent extends AbstractFormComponent {
     }
   }
 
-  bytesToSize(bytes: number) {
+  bytesConverter(bytes: number) {
     const sizes = ['Bytes', 'KB', 'MB'];
     const i = Number(Math.floor(Math.log(bytes) / Math.log(1024)));
     if (i === 0) {
