@@ -1,51 +1,26 @@
-<ng-container *ngIf="group">
-  <div class="dynamic-field" [formGroup]="group" [hidden]="config.hidden">
-    <div class="form-group">
-      <label class="col-form-label" [attr.for]="config.name">
-        {{ label }}
-        <ng-container *ngIf="!config.required">
-          {{ 'forms.optional' | cxTranslate }}
-        </ng-container>
-      </label>
-      <p>{{ 'forms.maxFileSize' | cxTranslate }} {{ config.maxFileSize }}MB</p>
-      <div class="input-group">
-        <div class="custom-file">
-          <!-- <input
-            type="file"
-            class="custom-file-input"
-            [attr.aria-describedby]="config.name"
-            [attr.name]="config.name"
-            [attr.multiple]="config.multiple ? config.multiple : null"
-            [attr.accept]="config.accept"
-          /> -->
-          <input
-            type="file"
-            class="form-control-file"
-            [attr.aria-describedby]="config.name"
-            [attr.name]="config.name"
-            [attr.multiple]="config.multiple ? config.multiple : null"
-            [attr.accept]="config.accept"
-          />
-          <input
-            type="hidden"
-            [attr.name]="config.name + '_hidden'"
-            [formControlName]="config.name"
-          />
-          <!-- <label class="custom-file-label" [attr.for]="config.name"
-            >Choose file</label
-          > -->
-        </div>
-      </div>
-      <ng-container *ngIf="fileList.length > 0">
-        <div *ngFor="let file of fileList">
-          {{ file?.name }}:
-          {{ bytesToSize(file.size) }}
-        </div>
-      </ng-container>
-    </div>
-    <cx-error-notice
-      [warn]="group.controls[config.name]"
-      [parentConfig]="config"
-    ></cx-error-notice>
-  </div>
-</ng-container>
+<div
+  class="drop-container"
+  ngFileDrop
+  [options]="options"
+  (uploadOutput)="onUploadOutput($event)"
+  [uploadInput]="uploadInput"
+  [ngClass]="{ 'is-drop-over': dragOver }"
+>
+  <h1>Drag &amp; Drop</h1>
+</div>
+
+<label class="upload-button">
+  <input
+    type="file"
+    ngFileSelect
+    [options]="options"
+    (uploadOutput)="onUploadOutput($event)"
+    [uploadInput]="uploadInput"
+    multiple
+  />
+  or choose file(s)
+</label>
+
+<button type="button" class="start-upload-btn" (click)="startUpload()">
+  Start Upload
+</button>
