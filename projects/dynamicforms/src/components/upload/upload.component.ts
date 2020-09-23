@@ -1,14 +1,5 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  HostListener,
-  Injector,
-} from '@angular/core';
-import { LanguageService } from '@spartacus/core';
-import { DynamicFormsConfig } from '../../core/config/form-config';
-import { OccValueListService } from '../../occ/services/occ-value-list.service';
+import { Component, HostListener } from '@angular/core';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
-import { FormService } from './../../core/services/form/form.service';
 
 @Component({
   selector: 'cx-upload',
@@ -20,25 +11,26 @@ export class UploadComponent extends AbstractFormComponent {
   @HostListener('change', ['$event'])
   handleFiles(event) {
     this.fileList = []; // reset when user is choosing files again
+    const uploadControl = this.group.get(this.config.name);
     if (
       this.config.accept === event.target.accept.toString() &&
-      this.config.multiple === event.target.multiple
+      this.config.multiple === event.target.multiple &&
+      this.checkFileSize(event)
     ) {
       this.fileList = Array.from(event.target.files);
-      this.group.get(this.config.name).setValue(this.fileList);
+      uploadControl.setValue(this.fileList);
     } else {
-      this.group.get(this.config.name).setValue(null); // triggering validation if nothing is selected
+      // triggering validation if nothing is selected
+      uploadControl.markAsTouched({ onlySelf: true });
+      uploadControl.setValue(null);
     }
   }
 
-  constructor(
-    protected occValueListService: OccValueListService,
-    protected formConfig: DynamicFormsConfig,
-    protected languageService: LanguageService,
-    protected changeDetectorRef: ChangeDetectorRef,
-    protected formService: FormService,
-    protected injector: Injector
-  ) {
-    super(formConfig, languageService, injector, formService);
+  checkFileSize(event): Boolean {
+    const files: File[] = Array.from(event.target.files);
+    const maxExceeded = files.filter(
+      file => file.size / 1024 / 1024 > this.config.maxFileSize
+    );
+    return !(maxExceeded.length > 0);
   }
 }
