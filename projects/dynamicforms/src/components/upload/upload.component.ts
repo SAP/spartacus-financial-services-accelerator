@@ -12,7 +12,6 @@ export class UploadComponent extends AbstractFormComponent {
 
   @HostListener('change', ['$event'])
   handleFiles(event) {
-    this.fileList = [];
     this.uploadControl = this.group.get(this.config.name);
     if (
       this.config.accept.toString() === event.target.accept &&
