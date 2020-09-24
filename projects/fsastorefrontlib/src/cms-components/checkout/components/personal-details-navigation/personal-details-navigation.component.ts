@@ -48,9 +48,8 @@ export class PersonalDetailsNavigationComponent implements OnInit, OnDestroy {
               const yFormData: YFormData = {
                 refId: cart.code + '_' + cart.entries[0].entryNumber,
               };
-              if (entry.formData && entry.formData.length > 0) {
-                yFormData.id = entry.formData[0].id;
-              }
+              yFormData.id =
+                entry?.formData?.length > 0 ? entry.formData[0].id : null;
               this.formService.submit(yFormData);
             }
             return this.formService.getSubmittedForm().pipe(
