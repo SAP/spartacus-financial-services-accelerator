@@ -31,7 +31,7 @@ const formId = 'testFormId';
 const applicationId = 'testApplicationId';
 
 const formData: YFormData = {
-  id: 'test-formData',
+  id: formId,
   type: 'DATA',
   content:
     '{"testContent":{"tripDestination":"Europe","tripStartDate":"2022-02-02"}}',
