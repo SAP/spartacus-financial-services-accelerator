@@ -41,4 +41,7 @@ export class UploadComponent extends AbstractFormComponent {
     );
     return !(maxExceeded.length > 0);
   }
+  removeFile(i) {
+    this.fileList.splice(i, 1);
+  }
 }

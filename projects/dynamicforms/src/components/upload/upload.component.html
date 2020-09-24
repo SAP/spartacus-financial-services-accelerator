@@ -37,10 +37,22 @@
         </div>
       </div>
       <ng-container *ngIf="fileList.length > 0">
-        <div *ngFor="let file of fileList">
-          {{ file?.name }}:
-          {{ convertFileSize(file.size) }}
-        </div>
+        <ul class="list-group">
+          <li
+            *ngFor="let file of fileList; let i = index"
+            class="list-group-item d-flex align-items-center"
+          >
+            {{ file?.name }}:
+            {{ convertFileSize(file.size) }}
+            <span
+              type="button"
+              class="close d-flex pl-3"
+              aria-label="Close"
+              (click)="removeFile(i)"
+              >&times;</span
+            >
+          </li>
+        </ul>
       </ng-container>
     </div>
     <cx-error-notice
