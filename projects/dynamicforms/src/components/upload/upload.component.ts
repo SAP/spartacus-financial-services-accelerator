@@ -10,7 +10,7 @@ export class UploadComponent extends AbstractFormComponent {
 
   @HostListener('change', ['$event'])
   handleFiles(event) {
-    this.fileList = []; // reset when user is choosing files again
+    this.fileList = [];
     const uploadControl = this.group.get(this.config.name);
     if (
       this.config.accept === event.target.accept.toString() &&
@@ -20,13 +20,12 @@ export class UploadComponent extends AbstractFormComponent {
       this.fileList = Array.from(event.target.files);
       uploadControl.setValue(this.fileList);
     } else {
-      // triggering validation if nothing is selected
       uploadControl.markAsTouched({ onlySelf: true });
       uploadControl.setValue(null);
     }
   }
 
-  bytesConverter(bytes: number) {
+  convertFileSize(bytes: number) {
     const sizes = ['Bytes', 'KB', 'MB'];
     const i = Number(Math.floor(Math.log(bytes) / Math.log(1024)));
     if (i === 0) {

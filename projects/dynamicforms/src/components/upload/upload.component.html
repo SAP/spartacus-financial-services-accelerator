@@ -39,7 +39,7 @@
       <ng-container *ngIf="fileList.length > 0">
         <div *ngFor="let file of fileList">
           {{ file?.name }}:
-          {{ bytesConverter(file.size) }}
+          {{ convertFileSize(file.size) }}
         </div>
       </ng-container>
     </div>
