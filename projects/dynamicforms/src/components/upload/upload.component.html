@@ -28,7 +28,7 @@
 <ul>
   <li *ngFor="let file of files">
     <span>{{ file.name }}</span
-    ><span class="pl-3">{{ file.size }}</span>
+    ><span class="pl-3">{{ file.type }}</span>
     <span class="pl-3 close" type="button" (click)="removeFile(file.id)"
       >&times;</span
     >
@@ -46,3 +46,7 @@
     </div>
   </li>
 </ul>
+<cx-error-notice
+  [warn]="group.controls[config.name]"
+  [parentConfig]="config"
+></cx-error-notice>

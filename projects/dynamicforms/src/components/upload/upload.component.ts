@@ -31,24 +31,20 @@ export class UploadComponent extends AbstractFormComponent {
   ) {
     super(appConfig, languageService, injector, formService);
 
-    this.options = { concurrency: 1, maxUploads: 2, maxFileSize: 100000000 };
+    this.options = {
+      concurrency: 1,
+      maxUploads: 2,
+      maxFileSize: 100000000,
+      allowedContentTypes: this.config?.accept,
+    };
     this.files = []; // local uploading files array
     this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
     this.humanizeBytes = humanizeBytes;
   }
 
   onUploadOutput(output: UploadOutput): void {
+    console.log(this.options);
     switch (output.type) {
-      case 'allAddedToQueue':
-        // uncomment this if you want to auto upload files when added
-        // const event: UploadInput = {
-        //   type: 'uploadAll',
-        //   url: '/upload',
-        //   method: 'POST',
-        //   data: { foo: 'bar' }
-        // };
-        // this.uploadInput.emit(event);
-        break;
       case 'addedToQueue':
         if (typeof output.file !== 'undefined') {
           this.files.push(output.file);
