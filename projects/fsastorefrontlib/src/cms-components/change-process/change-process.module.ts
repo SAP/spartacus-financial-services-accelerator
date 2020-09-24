@@ -53,6 +53,15 @@ const routes: Routes = [
     },
     component: PageLayoutComponent,
   },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'changeAdditionalDriverPage',
+      pageLabel: 'changeAdditionalDriverPage',
+    },
+    component: PageLayoutComponent,
+  },
 ];
 
 @NgModule({
