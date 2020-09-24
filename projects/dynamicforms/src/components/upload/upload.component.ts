@@ -15,7 +15,7 @@ export class UploadComponent extends AbstractFormComponent {
     this.fileList = [];
     this.uploadControl = this.group.get(this.config.name);
     if (
-      this.config.accept === event.target.accept.toString() &&
+      this.config.accept.toString() === event.target.accept &&
       this.config.multiple === event.target.multiple &&
       this.checkFileSize(event)
     ) {

@@ -29,7 +29,7 @@ export interface FieldConfig {
   prefillValue?: PrefillValue;
   readonly?: boolean;
   multiple?: boolean;
-  accept?: string;
+  accept?: string[];
   maxFileSize?: number;
 }
 export interface DependsOn {
