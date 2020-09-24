@@ -1,13 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
-import { I18nTestingModule, UserService } from '@spartacus/core';
+import { I18nTestingModule } from '@spartacus/core';
 import { CurrentDatePrefillResolver } from './current-date-prefill-resolver';
 import { DatePipe } from '@angular/common';
 
 describe('UserPrefilResolver', () => {
   const datePipe = new DatePipe('en');
   let currentDatePrefilResolver: CurrentDatePrefillResolver;
-  let userService: UserService;
   const currentDate = datePipe.transform(Date.now(), 'yyyy-MM-dd');
 
   beforeEach(() => {
@@ -17,7 +16,6 @@ describe('UserPrefilResolver', () => {
     });
 
     currentDatePrefilResolver = TestBed.inject(CurrentDatePrefillResolver);
-    userService = TestBed.inject(UserService);
   });
 
   it('should inject current date resolver', () => {
