@@ -29,7 +29,10 @@
   <li *ngFor="let file of files">
     <span>{{ file.name }}</span
     ><span class="pl-3">{{ file.size }}</span>
-    <span class="pl-3 close" type="button" (click)="removeFile(file.id)"></span>
+    <span class="pl-3 close" type="button" (click)="removeFile(file.id)"
+      >&times;</span
+    >
+
     <div class="progress">
       <div
         class="progress-bar w-{{ file.progress.data.percentage }}"
