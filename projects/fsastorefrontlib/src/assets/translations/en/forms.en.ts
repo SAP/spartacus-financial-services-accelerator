@@ -49,7 +49,7 @@ export const forms = {
       travel_personal_details: 'Personal Details',
       savings_personal_details: 'Personal Details',
       auto_personal_details: 'Personal Details',
-      auto_change_car_details_form: 'Auto Information',
+      auto_change_process_mileage: 'Auto Information',
       loan_creditCard_personalDetails: 'Personal Details',
       ftd_currentAcc_personal_details: 'Personal Details',
       fixed_term_deposit_details_form: 'Configure a Product',
