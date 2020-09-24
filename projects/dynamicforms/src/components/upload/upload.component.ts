@@ -31,7 +31,7 @@ export class UploadComponent extends AbstractFormComponent {
   ) {
     super(appConfig, languageService, injector, formService);
 
-    this.options = { concurrency: 1, maxUploads: 3, maxFileSize: 100 };
+    this.options = { concurrency: 1, maxUploads: 2, maxFileSize: 100000000 };
     this.files = []; // local uploading files array
     this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
     this.humanizeBytes = humanizeBytes;
