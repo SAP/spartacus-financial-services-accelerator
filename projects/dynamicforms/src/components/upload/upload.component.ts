@@ -1,4 +1,5 @@
 import { Component, HostListener } from '@angular/core';
+import { AbstractControl, FormControl } from '@angular/forms';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 
 @Component({
@@ -7,21 +8,22 @@ import { AbstractFormComponent } from '../abstract-form/abstract-form.component'
 })
 export class UploadComponent extends AbstractFormComponent {
   fileList: File[] = [];
+  uploadControl: AbstractControl;
 
   @HostListener('change', ['$event'])
   handleFiles(event) {
     this.fileList = [];
-    const uploadControl = this.group.get(this.config.name);
+    this.uploadControl = this.group.get(this.config.name);
     if (
       this.config.accept === event.target.accept.toString() &&
       this.config.multiple === event.target.multiple &&
       this.checkFileSize(event)
     ) {
       this.fileList = Array.from(event.target.files);
-      uploadControl.setValue(this.fileList);
+      this.uploadControl.setValue(this.fileList);
     } else {
-      uploadControl.markAsTouched({ onlySelf: true });
-      uploadControl.setValue(null);
+      this.uploadControl.markAsTouched({ onlySelf: true });
+      this.uploadControl.setValue(null);
     }
   }
 
@@ -41,7 +43,10 @@ export class UploadComponent extends AbstractFormComponent {
     );
     return !(maxExceeded.length > 0);
   }
+
   removeFile(i) {
     this.fileList.splice(i, 1);
+    this.uploadControl.setValue(this.fileList);
+    this.uploadControl.markAsTouched({ onlySelf: true });
   }
 }
