@@ -147,3 +147,10 @@ export function checkConfigurationMiniCart() {
     );
   });
 }
+
+export function checkOrderTotal(price) {
+  cy.get('.short-overview-title')
+    .contains('Order total')
+    .parent()
+    .contains(price);
+}

@@ -81,10 +81,7 @@ context('Loan Checkout', () => {
 
   it('Should check order confirmation', () => {
     checkout.checkOrderConfirmation();
-    cy.get('.short-overview-title')
-      .contains('Order total')
-      .parent()
-      .contains('€187.76');
+    banking.checkOrderTotal('€187.76');
     checkout.checkAccordions('LoanConfirmation');
   });
 });

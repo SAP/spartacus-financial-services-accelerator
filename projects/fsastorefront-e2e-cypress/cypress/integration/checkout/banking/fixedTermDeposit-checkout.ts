@@ -87,6 +87,7 @@ context('Fixed Term Deposit Checkout', () => {
 
   it('Should check order confirmation', () => {
     checkout.checkOrderConfirmation();
+    banking.checkOrderTotal('€503,125.00');
     cy.get('.short-overview-title')
       .contains('Order total')
       .parent()

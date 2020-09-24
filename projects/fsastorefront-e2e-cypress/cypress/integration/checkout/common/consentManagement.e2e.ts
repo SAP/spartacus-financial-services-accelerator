@@ -39,7 +39,6 @@ context('Consent Management', () => {
       menuOption: 'My Account',
       dropdownItem: 'Consent Management',
     });
-    cy.wait(500);
     cy.get('input[type="checkbox"]').first().should('be.checked');
   });
 });
