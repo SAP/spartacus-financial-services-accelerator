@@ -33,8 +33,8 @@ export class UploadComponent extends AbstractFormComponent {
 
     this.options = {
       concurrency: 1,
-      maxUploads: 2,
-      maxFileSize: 100000000,
+      maxUploads: this.config?.maxUploads,
+      maxFileSize: this.config?.maxFileSize,
       allowedContentTypes: this.config?.accept,
     };
     this.files = []; // local uploading files array
