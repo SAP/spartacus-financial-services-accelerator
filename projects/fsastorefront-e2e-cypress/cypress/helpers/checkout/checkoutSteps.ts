@@ -90,6 +90,8 @@ export function checkOrderConfirmation() {
   cy.get('cx-fs-order-confirmation-message').within(() => {
     cy.get('h5').eq(0).should('have.text', ' Thank you! ');
   });
+  cy.get('cx-fs-order-confirmation').should('be.visible');
+  cy.get('.short-overview').should('be.visible');
 }
 
 export function checkInsuranceComparisonPage(numberOfProducts) {
@@ -183,6 +185,16 @@ export function waitForHomepage() {
   cy.wait(`@${homepage}`).its('status').should('eq', 200);
 }
 
+export function waitForAddOptions() {
+  const addOptions = waitForPage('add-options', 'addOptions');
+  cy.wait(`@${addOptions}`).its('status').should('eq', 200);
+}
+
+export function waitForConfirmation() {
+  const confirmation = waitForPage('orderConfirmationPage', 'confirmation');
+  cy.wait(`@${confirmation}`).its('status').should('eq', 200);
+}
+
 export function checkCheckoutStep(mainProduct, numberOfSteps) {
   cy.get('h2').contains(mainProduct);
   cy.get('.progress-inner-wrapper').should('have.length', numberOfSteps);
@@ -192,4 +204,9 @@ export function checkPersonalDetailsPage() {
   cy.get('cx-fs-personal-details').should('be.visible');
   cy.get('cx-fs-mini-cart').should('be.visible');
   cy.get('cx-footer-navigation').should('be.visible');
+}
+
+export function waitForQuoteReviewPage() {
+  const quoteReview = waitForPage('quote-review', 'quoteReview');
+  cy.wait(`@${quoteReview}`).its('status').should('eq', 200);
 }

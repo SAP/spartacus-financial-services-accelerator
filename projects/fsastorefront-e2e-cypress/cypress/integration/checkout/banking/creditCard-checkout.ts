@@ -1,7 +1,6 @@
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import { checkPersonalDetailsPage } from '../../../helpers/checkout/checkoutSteps';
 import * as inbox from '../../../helpers/my-account/inbox';
 import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
 import * as creditCard from '../../../helpers/checkout/banking/creditCard';
@@ -46,9 +45,9 @@ context('Credit Card Checkout', () => {
 
   it('Should populate Personal Details page', () => {
     checkout.checkCheckoutStep('Your Credit Card Application', '7');
-    checkPersonalDetailsPage();
-    creditCard.populatePersonalDetails();
-    creditCard.populateAdditionalApplicant();
+    checkout.checkPersonalDetailsPage();
+    banking.populatePersonalDetailsCCandLoan();
+    banking.populateAdditionalApplicantCCandLoan();
     checkout.clickContinueButton();
   });
 
@@ -76,7 +75,7 @@ context('Credit Card Checkout', () => {
   });
 
   it('Should check order confirmation', () => {
-    checkout.checkOrderConfirmationBanking();
+    checkout.checkOrderConfirmation();
     checkout.checkAccordions('creditCardConfirmation');
   });
 

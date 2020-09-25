@@ -61,18 +61,17 @@ export function checkOptionalExtras() {
     .should('be.visible')
     .within(() => {
       cy.get('.section-header-heading').contains(' Optional Extras ');
-      cy.get('.row.mx-3').should('have.length', 4);
-      cy.get('h6').eq(0).contains('Collision Coverage');
-      cy.get('h6').eq(1).contains('Uninsured Coverage');
-      cy.get('h6').eq(2).contains('Roadside Assistance');
-      cy.get('h6').eq(3).contains('Trailer Liability');
+      cy.get('.row.mx-3').should('have.length', 3);
+      cy.get('h6').eq(0).contains('Uninsured Coverage');
+      cy.get('h6').eq(1).contains('Roadside Assistance');
+      cy.get('h6').eq(2).contains('Trailer Liability');
     });
 }
 
 export function addRoadsideAssistance() {
   cy.get('.secondary-button').should('have.length', 3).contains(' Add ');
   cy.get('.row.mx-3')
-    .eq(2)
+    .eq(1)
     .within(() => {
       cy.get('h6').contains('Roadside Assistance');
       cy.get('.secondary-button').click();

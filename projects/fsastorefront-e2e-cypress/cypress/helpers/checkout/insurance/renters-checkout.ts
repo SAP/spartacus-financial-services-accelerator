@@ -54,6 +54,18 @@ export function checkMiniCartRenters() {
     price: ' €66.62 ',
     products: [
       {
+        title: ' Start Date: ',
+        value: ' 12 Dec 2020 ',
+      },
+      {
+        title: 'Property Address:',
+        value: ' Omladinskin Brigada ',
+      },
+      {
+        title: 'Property Type:',
+        value: ' House ',
+      },
+      {
         title: ' Renters Monthly: ',
         value: ' €31.50 ',
       },
@@ -78,6 +90,18 @@ export function checkMiniCartRentersRemovedProduct() {
   const miniCartContent: addOptionsPage.MiniCart = {
     price: ' €54.60 ',
     products: [
+      {
+        title: ' Start Date: ',
+        value: ' 12 Dec 2020 ',
+      },
+      {
+        title: 'Property Address:',
+        value: ' Omladinskin Brigada ',
+      },
+      {
+        title: 'Property Type:',
+        value: ' House ',
+      },
       {
         title: ' Renters Monthly: ',
         value: ' €31.50 ',

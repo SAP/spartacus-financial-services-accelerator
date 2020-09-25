@@ -45,6 +45,7 @@ context('Current Account Checkout', () => {
   it('Should complete personal details step', () => {
     checkout.checkCheckoutStep(' Your Current Account Application ', '7');
     checkout.checkPersonalDetailsPage();
+    banking.populatePersonalDetailsLoanAndCA();
     currentAccount.populatePersonalDetails();
     //currentAccount.checkMiniCartCurrentAccount();
     //Waiting for registration process to be completed
