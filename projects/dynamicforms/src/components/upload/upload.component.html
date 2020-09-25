@@ -16,7 +16,7 @@
     [options]="options"
     (uploadOutput)="onUploadOutput($event)"
     [uploadInput]="uploadInput"
-    multiple
+    [attr.multiple]="config.multiple ? config.multiple : null"
   />
   or choose file(s)
 </label>

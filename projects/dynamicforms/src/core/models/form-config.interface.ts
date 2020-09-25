@@ -31,6 +31,7 @@ export interface FieldConfig {
   maxUploads?: number;
   accept?: string[];
   maxFileSize?: number;
+  multiple?: boolean;
 }
 export interface DependsOn {
   hide?: boolean;
