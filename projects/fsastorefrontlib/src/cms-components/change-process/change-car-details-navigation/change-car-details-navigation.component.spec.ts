@@ -20,9 +20,7 @@ const requestId = 'request1';
 const changeRequest = {
   requestId: requestId,
 };
-const mockSubmittedFormData = {
-  content: '{ "vehicleAnnualMileage":"2323"}',
-};
+let mockSubmittedFormData;
 
 class MockFormDataService {
   submit() {}
@@ -144,8 +142,11 @@ describe('ChangeCarDetailsNavigationComponent', () => {
   });
 
   it('should execute simulation request', () => {
-    component.ngOnInit();
+    mockSubmittedFormData = {
+      content: '{ "vehicleAnnualMileage":"2323"}',
+    };
 
+    component.ngOnInit();
     const changedRequestData = {
       requestId: requestId,
       insurancePolicy: {
@@ -166,5 +167,53 @@ describe('ChangeCarDetailsNavigationComponent', () => {
     };
     component.simulateChanges(changedRequestData);
     expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalled();
+  });
+
+  it('should not execute simulation request when insuredObjectItems length is 0', () => {
+    mockSubmittedFormData = {
+      content: '{ "vehicleAnnualMileage":"2323"}',
+    };
+    const changedRequestData = {
+      requestId: requestId,
+      insurancePolicy: {
+        insuredObjectList: {
+          insuredObjects: [],
+        },
+      },
+    };
+    component.ngOnInit();
+
+    component.simulateChanges(changedRequestData);
+    expect(
+      mockChangeRequestService.simulateChangeRequest
+    ).not.toHaveBeenCalled();
+  });
+
+  it('should not execute simulation request when submittedFormData.content is not defined', () => {
+    mockSubmittedFormData = {};
+    const changedRequestData = {
+      requestId: requestId,
+      insurancePolicy: {
+        insuredObjectList: {
+          insuredObjects: [
+            {
+              insuredObjectItems: [
+                {
+                  label: 'vehicleAnnualMileage',
+                  value: '3000',
+                  changeable: true,
+                },
+              ],
+            },
+          ],
+        },
+      },
+    };
+    component.ngOnInit();
+
+    component.simulateChanges(changedRequestData);
+    expect(
+      mockChangeRequestService.simulateChangeRequest
+    ).not.toHaveBeenCalled();
   });
 });

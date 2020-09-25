@@ -14,9 +14,7 @@ import { of } from 'rxjs';
   selector: 'cx-fs-change-car-details-navigation',
   templateUrl: './change-car-details-navigation.component.html',
 })
-export class ChangeCarDetailsNavigationComponent
-  extends AbstractChangeProcessStepComponent
-  implements OnInit, OnDestroy {
+export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessStepComponent {
   constructor(
     protected userRequestNavigationService: UserRequestNavigationService,
     protected changeRequestService: ChangeRequestService,
@@ -36,10 +34,6 @@ export class ChangeCarDetailsNavigationComponent
     );
   }
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
   simulateChanges(changeRequest) {
     if (
       changeRequest?.insurancePolicy?.insuredObjectList?.insuredObjects.length >
@@ -54,37 +48,32 @@ export class ChangeCarDetailsNavigationComponent
           filter(formData => formData.content !== undefined),
           take(1),
           map(submittedFormData => {
-            if (submittedFormData && submittedFormData.content) {
-              const changeCarDetailsForm = JSON.parse(
-                submittedFormData.content
-              );
-              changeRequest.insurancePolicy.insuredObjectList.insuredObjects.forEach(
-                insuredObject => {
-                  changedInsuredObject = {
-                    insuredObjectId: insuredObject.insuredObjectId,
-                    insuredObjectItems: [],
-                  };
-                  insuredObject.insuredObjectItems
-                    .filter(item => item.changeable)
-                    .forEach(item => {
-                      changedInsuredObject.insuredObjectItems.push({
-                        label: item.label,
-                        value: changeCarDetailsForm[item.label],
-                      });
+            const changeCarDetailsForm = JSON.parse(submittedFormData.content);
+            changeRequest.insurancePolicy.insuredObjectList.insuredObjects.forEach(
+              insuredObject => {
+                changedInsuredObject = {
+                  insuredObjectId: insuredObject.insuredObjectId,
+                  insuredObjectItems: [],
+                };
+                insuredObject.insuredObjectItems
+                  .filter(item => item.changeable)
+                  .forEach(item => {
+                    changedInsuredObject.insuredObjectItems.push({
+                      label: item.label,
+                      value: changeCarDetailsForm[item.label],
                     });
-                }
-              );
-              this.simulateChangeRequest({
-                requestId: changeRequest.requestId,
-                insurancePolicy: {
-                  insuredObjectList: {
-                    insuredObjects: [changedInsuredObject],
-                  },
+                  });
+              }
+            );
+            this.simulateChangeRequest({
+              requestId: changeRequest.requestId,
+              insurancePolicy: {
+                insuredObjectList: {
+                  insuredObjects: [changedInsuredObject],
                 },
-                configurationSteps: changeRequest.configurationSteps,
-              });
-            }
-            return of(null);
+              },
+              configurationSteps: changeRequest.configurationSteps,
+            });
           })
         )
         .subscribe();
