@@ -2,7 +2,6 @@ import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as event from '../../../helpers/checkout/insurance/event-checkout';
-import { clickContinueButton } from '../../../helpers/checkout/checkoutSteps';
 import {
   addPaymentMethod,
   selectPaymentMethod,
@@ -41,9 +40,9 @@ context('Event Checkout', () => {
   it('Should check add options page', () => {
     event.checkCheckoutPage();
     event.checkOptionalProducts();
-    //event.checkMiniCartEvent();
+    event.checkMiniCart();
     checkout.removeOptionalProduct('Excess Waiver');
-    //event.checkMiniCartEventRemovedProduct();
+    event.checkMiniCartRemovedProduct();
     checkout.clickContinueButton();
   });
 
@@ -51,12 +50,12 @@ context('Event Checkout', () => {
     event.checkCheckoutPage();
     checkout.checkPersonalDetailsPage();
     event.populatePersonalDetails();
-    clickContinueButton();
+    checkout.clickContinueButton();
   });
   it('Should check quote review page', () => {
     event.checkCheckoutPage();
     event.checkProgressBarEvent();
-    //renters.checkMiniCartRentersRemovedProduct();
+    event.checkMiniCartRemovedProduct();
     checkout.clickContinueButton();
     checkout.checkAccordions('threeAccordions');
     addPaymentMethod(registrationUser.email, cartId);
