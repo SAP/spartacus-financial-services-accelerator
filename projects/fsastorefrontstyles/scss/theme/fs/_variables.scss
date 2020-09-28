@@ -14,7 +14,9 @@ $color-link-hover: #3498db;
 $color-button-secondary-hover: #385980;
 $color-darkest-blue: #000066;
 
-$fs-colors: (
+$progress-bar-bg: $color-blue;
+
+$theme-colors: (
   'primary': $color-blue,
   'secondary': $color-dark-blue,
   'text': $color-dark-blue,

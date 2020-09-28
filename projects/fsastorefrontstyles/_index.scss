@@ -1,6 +1,5 @@
 //Spartacus styling
 @import '~@spartacus/styles/index';
-@import '~bootstrap/scss/progress';
 //FSA styling
 @import 'scss/root.scss';
 @import 'scss/fs-mixins';
@@ -12,3 +11,4 @@
 
 // components
 @import './scss/fs-theme';
+@import '~bootstrap/scss/progress';

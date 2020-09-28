@@ -7,6 +7,8 @@ export const forms = {
     validationErrors: '[DE] There are validation errors',
     fillOutProperly: `[DE] Please retry once all of the fields have been properly filled-out.`,
     maxFileSize: '[DE] Maximum file size allowed',
+    chooseFile: '[DE] Choose file(s)',
+    startUpload: '[DE] Start upload',
     dateOfBirth: {
       label: 'Geburtsdatum',
     },

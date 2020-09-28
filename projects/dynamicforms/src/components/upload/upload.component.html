@@ -24,24 +24,32 @@
       </div> -->
       <div class="input-group">
         <div class="custom-file">
-          <label class="upload-button">
-            <input
-              type="file"
-              class="form-control-file"
-              ngFileSelect
-              [options]="options"
-              (uploadOutput)="onUploadOutput($event)"
-              [uploadInput]="uploadInput"
-              [attr.multiple]="config.multiple ? config.multiple : null"
-            />
+          <input
+            type="file"
+            class="custom-file-input"
+            ngFileSelect
+            [options]="options"
+            (uploadOutput)="onUploadOutput($event)"
+            [uploadInput]="uploadInput"
+            [attr.multiple]="config.multiple ? config.multiple : null"
+          />
+          <!-- <label class="upload-button">
             or choose file(s)
-          </label>
+          </label> -->
+          <label class="custom-file-label" [attr.for]="config.name">{{
+            'forms.chooseFile' | cxTranslate
+          }}</label>
         </div>
       </div>
-
-      <button type="button" class="start-upload-btn" (click)="startUpload()">
-        Start Upload
-      </button>
+      <ng-container *ngIf="files.length > 0">
+        <button
+          type="button"
+          class="start-upload-btn my-3"
+          (click)="startUpload()"
+        >
+          {{ 'forms.startUpload' | cxTranslate }}
+        </button>
+      </ng-container>
 
       <ul>
         <li *ngFor="let file of files">

@@ -25,7 +25,7 @@ export class UploadComponent extends AbstractFormComponent {
   dragOver: boolean;
 
   // fileList: File[] = [];
-  // uploadControl: AbstractControl;
+  uploadControl: AbstractControl;
 
   constructor(
     protected appConfig: DynamicFormsConfig,
@@ -86,10 +86,12 @@ export class UploadComponent extends AbstractFormComponent {
   // }
 
   onUploadOutput(output: UploadOutput): void {
+    this.uploadControl = this.group.get(this.config.name);
     switch (output.type) {
       case 'addedToQueue':
         if (typeof output.file !== 'undefined') {
           this.files.push(output.file);
+          this.uploadControl.setValue(this.files);
         }
         break;
       case 'uploading':
@@ -107,6 +109,7 @@ export class UploadComponent extends AbstractFormComponent {
         this.files = this.files.filter(
           (file: UploadFile) => file !== output.file
         );
+        this.uploadControl.setValue(this.files);
         break;
       case 'dragOver':
         this.dragOver = true;

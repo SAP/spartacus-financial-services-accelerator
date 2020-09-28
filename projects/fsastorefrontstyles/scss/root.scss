@@ -1,7 +1,7 @@
 @import 'theme';
 
 :root {
-  @each $color, $value in $fs-colors {
+  @each $color, $value in $theme-colors {
     --cx-color-#{$color}: #{$value};
   }
 
