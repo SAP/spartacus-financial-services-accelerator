@@ -55,3 +55,10 @@ export function closeAccount() {
     });
   cy.get('.alert-success').should('have.text', 'Account closed with success');
 }
+
+export function checkPersonalDetails() {
+  cy.get('.heading-headline').should('have.text', 'Update Personal Details');
+  cy.get('[formcontrolname="firstName"]').should('have.value', 'Alex');
+  cy.get('[formcontrolname="lastName"]').should('have.value', 'Moore');
+  cy.get('[formcontrolname="dateOfBirth"]').should('have.value', '1990-12-12');
+}
