@@ -1,4 +1,5 @@
 import { Component, EventEmitter, HostListener, Injector } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 import { LanguageService } from '@spartacus/core';
 import {
   UploadOutput,
@@ -23,6 +24,9 @@ export class UploadComponent extends AbstractFormComponent {
   humanizeBytes: Function;
   dragOver: boolean;
 
+  fileList: File[] = [];
+  uploadControl: AbstractControl;
+
   constructor(
     protected appConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
@@ -41,6 +45,45 @@ export class UploadComponent extends AbstractFormComponent {
     this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
     this.humanizeBytes = humanizeBytes;
   }
+
+  // @HostListener('change', ['$event'])
+  // handleFiles(event) {
+  //   this.uploadControl = this.group.get(this.config.name);
+  //   if (
+  //     this.config.accept.toString() === event.target.accept &&
+  //     this.config.multiple === event.target.multiple &&
+  //     this.checkFileSize(event)
+  //   ) {
+  //     this.fileList = Array.from(event.target.files);
+  //     this.uploadControl.setValue(this.fileList);
+  //   } else {
+  //     this.uploadControl.markAsTouched({ onlySelf: true });
+  //     this.uploadControl.setValue(null);
+  //   }
+  // }
+
+  convertFileSize(bytes: number) {
+    const sizes = ['Bytes', 'KB', 'MB'];
+    const i = Number(Math.floor(Math.log(bytes) / Math.log(1024)));
+    if (i === 0) {
+      return `${bytes} ${sizes[i]}`;
+    }
+    return `${(bytes / 1024 ** i).toFixed(1)} ${sizes[i]}`;
+  }
+
+  checkFileSize(event): Boolean {
+    const files: File[] = Array.from(event.target.files);
+    const maxExceeded = files.filter(
+      file => file.size / 1024 / 1024 > this.config.maxFileSize
+    );
+    return !(maxExceeded.length > 0);
+  }
+
+  // removeFile(i) {
+  //   this.fileList.splice(i, 1);
+  //   this.uploadControl.setValue(this.fileList);
+  //   this.uploadControl.markAsTouched({ onlySelf: true });
+  // }
 
   onUploadOutput(output: UploadOutput): void {
     console.log(this.options);
