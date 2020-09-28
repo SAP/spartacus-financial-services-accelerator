@@ -21,9 +21,10 @@ import { FormPopupErrorComponent } from './form-popup-error/form-popup-error.com
 import { DataHolderComponent } from './data-holder/data-holder.component';
 import { FormComponentService } from './form-component.service';
 import { UploadComponent } from './upload/upload.component';
+import { NgxUploaderModule } from 'ngx-uploader';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, I18nModule],
+  imports: [CommonModule, ReactiveFormsModule, I18nModule, NgxUploaderModule],
   declarations: [
     FormComponentDirective,
     AbstractFormComponent,

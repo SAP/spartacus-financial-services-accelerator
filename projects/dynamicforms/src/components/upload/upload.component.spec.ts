@@ -6,7 +6,6 @@ import {
   ReactiveFormsModule,
   AbstractControl,
 } from '@angular/forms';
-import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { DynamicFormsConfig } from '../../core/config/form-config';

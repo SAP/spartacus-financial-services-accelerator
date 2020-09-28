@@ -38,7 +38,7 @@ context('Retrieve Quote', () => {
 
     it('Should retrieve a quote and check if the user is on the correct page', () => {
       cy.get('.link').contains('Retrieve').click({ force: true });
-      cy.wait(1000);
+      checkout.waitForAddOptions();
       checkout.checkCheckoutStep('Your Travel Insurance', '7');
       cy.get('h2').contains('Add Options');
     });

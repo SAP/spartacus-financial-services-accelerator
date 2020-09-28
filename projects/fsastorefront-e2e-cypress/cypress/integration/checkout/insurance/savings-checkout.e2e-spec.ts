@@ -50,13 +50,13 @@ context('Savings Insurance Checkout', () => {
   it('Should check add options page', () => {
     checkout.checkCheckoutStep('Your Savings Insurance', '7');
     savings.checkOptionalProducts();
-    //TODO: check mini cart
     checkout.clickContinueButton();
   });
 
   it('Should populate personal details page', () => {
     checkout.checkCheckoutStep('Your Savings Insurance', '7');
     checkout.checkPersonalDetailsPage();
+    savings.checkMiniCart();
     checkout.populatePersonalDetailsPage();
     savings.populateSavingsSpecific();
     checkout.clickContinueButton();
@@ -65,7 +65,7 @@ context('Savings Insurance Checkout', () => {
   it('Should check quote review page', () => {
     checkout.checkCheckoutStep('Your Savings Insurance', '7');
     checkout.checkProgressBarInsurance();
-    //TODO: check mini cart
+    savings.checkMiniCart();
     checkout.checkAccordions('savingsQuoteReview');
     addPaymentMethod(registrationUserWithoutPhone.email, cartId);
     checkout.clickContinueButton();

@@ -75,6 +75,12 @@ export const confirmationAccordionCurrentAccount = [
   'Added by you',
   'Personal Details',
 ];
+export const confirmationAccordionLoan = [
+  'Loan Information',
+  "What's Included",
+  'Added by you',
+  'Personal Details',
+];
 
 export const quoteReviewAccordionSavings = [
   'General Details',
@@ -99,6 +105,13 @@ export const policyDetailsSavings = [
   'Optional Extras',
   'Investment Details',
   'What Does It Cost Me',
+];
+
+export const confirmationAccordionFTD = [
+  'Fixed Term Deposit Information',
+  "What's Included",
+  'Added by you',
+  'Personal Details',
 ];
 
 export const Accordions = {
@@ -142,6 +155,14 @@ export const Accordions = {
     {
       category: 'rentersFinalReview',
       accordionItems: this.finalReviewAccordionRenters,
+    },
+    {
+      category: 'LoanConfirmation',
+      accordionItems: this.confirmationAccordionLoan,
+    },
+    {
+      category: 'FTDConfirmation',
+      accordionItems: this.confirmationAccordionFTD,
     },
     {
       category: 'savingsQuoteReview',

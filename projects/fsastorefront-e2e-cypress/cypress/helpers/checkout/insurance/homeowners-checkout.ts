@@ -56,6 +56,22 @@ export function checkMiniCartHomeowners() {
     price: ' €491.25 ',
     products: [
       {
+        title: ' Start Date: ',
+        value: ' 12 Dec 2020 ',
+      },
+      {
+        title: 'Property Address:',
+        value: ' Omladinskin Brigada ',
+      },
+      {
+        title: 'Property Type:',
+        value: ' House ',
+      },
+      {
+        title: 'Property Value:',
+        value: ' 200000 ',
+      },
+      {
         title: ' Homeowners Annually: ',
         value: ' €338.10 ',
       },

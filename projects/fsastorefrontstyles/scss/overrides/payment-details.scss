@@ -28,7 +28,7 @@ cx-payment-method {
   }
   cx-payment-form {
     & form > .row:not(.cx-checkout-btns) {
-      @include box-shadow(0px, 8px, 20px, 1px, $color-grey, 1);
+      @include fs-box-shadow(0px, 8px, 20px, 1px, $color-grey, 1);
       margin: 0;
       padding: 2rem;
       @include media-breakpoint-down(xs) {
