@@ -4,10 +4,11 @@ import { I18nTestingModule } from '@spartacus/core';
 import { CurrentDatePrefillResolver } from './current-date-prefill-resolver';
 import { DatePipe } from '@angular/common';
 
-describe('UserPrefilResolver', () => {
-  const datePipe = new DatePipe('en');
+const datePipe = new DatePipe('en');
+const currentDate = datePipe.transform(Date.now(), 'yyyy-MM-dd');
+
+describe('CurrentDatePrefillResolver', () => {
   let currentDatePrefilResolver: CurrentDatePrefillResolver;
-  const currentDate = datePipe.transform(Date.now(), 'yyyy-MM-dd');
 
   beforeEach(() => {
     TestBed.configureTestingModule({
