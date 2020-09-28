@@ -12,3 +12,10 @@
   font-weight: var(--cx-font-weight-semi);
   text-transform: uppercase;
 }
+
+.custom-file-input {
+  &:focus ~ .custom-file-label {
+    border-color: var(--cx-color-secondary);
+    box-shadow: none;
+  }
+}
