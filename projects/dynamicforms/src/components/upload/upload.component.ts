@@ -24,8 +24,8 @@ export class UploadComponent extends AbstractFormComponent {
   humanizeBytes: Function;
   dragOver: boolean;
 
-  fileList: File[] = [];
-  uploadControl: AbstractControl;
+  // fileList: File[] = [];
+  // uploadControl: AbstractControl;
 
   constructor(
     protected appConfig: DynamicFormsConfig,
@@ -86,7 +86,6 @@ export class UploadComponent extends AbstractFormComponent {
   // }
 
   onUploadOutput(output: UploadOutput): void {
-    console.log(this.options);
     switch (output.type) {
       case 'addedToQueue':
         if (typeof output.file !== 'undefined') {

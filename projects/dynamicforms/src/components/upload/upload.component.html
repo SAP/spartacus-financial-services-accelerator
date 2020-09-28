@@ -1,52 +1,127 @@
-<div
-  class="drop-container"
-  ngFileDrop
-  [options]="options"
-  (uploadOutput)="onUploadOutput($event)"
-  [uploadInput]="uploadInput"
-  [ngClass]="{ 'is-drop-over': dragOver }"
->
-  <h1>Drag &amp; Drop</h1>
-</div>
+<ng-container *ngIf="group">
+  <div class="dynamic-field" [formGroup]="group" [hidden]="config.hidden">
+    <div class="form-group">
+      <label class="col-form-label" [attr.for]="config.name">
+        {{ label }}
+        <ng-container *ngIf="!config.required">
+          {{ 'forms.optional' | cxTranslate }}
+        </ng-container>
+      </label>
+      <p>
+        {{ 'forms.maxFileSize' | cxTranslate }}:
+        {{ convertFileSize(config.maxFileSize) }}
+      </p>
 
-<label class="upload-button">
-  <input
-    type="file"
-    ngFileSelect
-    [options]="options"
-    (uploadOutput)="onUploadOutput($event)"
-    [uploadInput]="uploadInput"
-    [attr.multiple]="config.multiple ? config.multiple : null"
-  />
-  or choose file(s)
-</label>
-
-<button type="button" class="start-upload-btn" (click)="startUpload()">
-  Start Upload
-</button>
-
-<ul>
-  <li *ngFor="let file of files">
-    <span>{{ file.name }}</span
-    ><span class="pl-3">{{ file.type }}</span>
-    <span class="pl-3 close" type="button" (click)="removeFile(file.id)"
-      >&times;</span
-    >
-
-    <div class="progress">
-      <div
-        class="progress-bar w-{{ file.progress.data.percentage }}"
-        role="progressbar"
-        [attr.aria-valuenow]="file.progress.data.percentage"
-        aria-valuemin="0"
-        aria-valuemax="100"
+      <!-- <div
+        class="drop-container"
+        ngFileDrop
+        [options]="options"
+        (uploadOutput)="onUploadOutput($event)"
+        [uploadInput]="uploadInput"
+        [ngClass]="{ 'is-drop-over': dragOver }"
       >
-        {{ file.progress.data.percentage }}
+        <h1>Drag &amp; Drop</h1>
+      </div> -->
+      <div class="input-group">
+        <div class="custom-file">
+          <label class="upload-button">
+            <input
+              type="file"
+              class="form-control-file"
+              ngFileSelect
+              [options]="options"
+              (uploadOutput)="onUploadOutput($event)"
+              [uploadInput]="uploadInput"
+              [attr.multiple]="config.multiple ? config.multiple : null"
+            />
+            or choose file(s)
+          </label>
+        </div>
       </div>
+
+      <button type="button" class="start-upload-btn" (click)="startUpload()">
+        Start Upload
+      </button>
+
+      <ul>
+        <li *ngFor="let file of files">
+          <span>{{ file.name }}</span
+          ><span class="pl-3">{{ file.type }}</span>
+          <span class="pl-3 close" type="button" (click)="removeFile(file.id)"
+            >&times;</span
+          >
+
+          <div class="progress">
+            <div
+              class="progress-bar"
+              [style.width]="file.progress.data.percentage + '%'"
+              role="progressbar"
+              [attr.aria-valuenow]="file.progress.data.percentage"
+              aria-valuemin="0"
+              aria-valuemax="100"
+            >
+              {{ file.progress.data.percentage }}
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
-  </li>
-</ul>
-<cx-error-notice
-  [warn]="group.controls[config.name]"
-  [parentConfig]="config"
-></cx-error-notice>
+    <cx-error-notice
+      [warn]="group.controls[config.name]"
+      [parentConfig]="config"
+    ></cx-error-notice>
+  </div>
+</ng-container>
+
+<!-- <ng-container *ngIf="group">
+  <div class="dynamic-field" [formGroup]="group" [hidden]="config.hidden">
+    <div class="form-group">
+      <label class="col-form-label" [attr.for]="config.name">
+        {{ label }}
+        <ng-container *ngIf="!config.required">
+          {{ 'forms.optional' | cxTranslate }}
+        </ng-container>
+      </label>
+      <p>{{ 'forms.maxFileSize' | cxTranslate }}: {{ config.maxFileSize }}MB</p>
+      <div class="input-group">
+        <div class="custom-file">
+          <input
+            type="file"
+            class="form-control-file"
+            [attr.aria-describedby]="config.name"
+            [attr.name]="config.name"
+            [attr.multiple]="config.multiple ? config.multiple : null"
+            [attr.accept]="config.accept"
+          />
+          <input
+            type="hidden"
+            [attr.name]="config.name + '_hidden'"
+            [formControlName]="config.name"
+          />
+        </div>
+      </div>
+      <ng-container *ngIf="fileList.length > 0">
+        <ul class="list-group">
+          <li
+            *ngFor="let file of fileList; let i = index"
+            class="list-group-item d-flex align-items-center"
+          >
+            {{ file?.name }}:
+            {{ convertFileSize(file.size) }}
+            <span
+              type="button"
+              class="close d-flex pl-3"
+              aria-label="Close"
+              (click)="removeFile(i)"
+              >&times;</span
+            >
+          </li>
+        </ul>
+      </ng-container>
+    </div>
+    <cx-error-notice
+      [warn]="group.controls[config.name]"
+      [parentConfig]="config"
+    ></cx-error-notice>
+  </div>
+</ng-container> -->
