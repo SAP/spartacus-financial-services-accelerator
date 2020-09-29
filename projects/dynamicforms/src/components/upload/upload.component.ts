@@ -1,4 +1,10 @@
-import { Component, EventEmitter, HostListener, Injector } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  HostListener,
+  Injector,
+  OnInit,
+} from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { LanguageService } from '@spartacus/core';
 import {
@@ -16,7 +22,7 @@ import { AbstractFormComponent } from '../abstract-form/abstract-form.component'
   selector: 'cx-upload',
   templateUrl: './upload.component.html',
 })
-export class UploadComponent extends AbstractFormComponent {
+export class UploadComponent extends AbstractFormComponent implements OnInit {
   options: UploaderOptions;
   formData: FormData;
   files: UploadFile[];
@@ -34,16 +40,6 @@ export class UploadComponent extends AbstractFormComponent {
     protected formService: FormService
   ) {
     super(appConfig, languageService, injector, formService);
-
-    this.options = {
-      concurrency: 1,
-      maxUploads: this.config?.maxUploads,
-      maxFileSize: this.config?.maxFileSize,
-      allowedContentTypes: this.config?.accept,
-    };
-    this.files = []; // local uploading files array
-    this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
-    this.humanizeBytes = humanizeBytes;
   }
 
   // @HostListener('change', ['$event'])
@@ -61,6 +57,18 @@ export class UploadComponent extends AbstractFormComponent {
   //     this.uploadControl.setValue(null);
   //   }
   // }
+  ngOnInit() {
+    super.ngOnInit();
+    this.files = []; // local uploading files array
+    this.uploadInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
+    this.humanizeBytes = humanizeBytes;
+    this.options = {
+      concurrency: 1,
+      maxUploads: this.config?.maxUploads,
+      maxFileSize: this.config?.maxFileSize,
+      allowedContentTypes: this.config?.accept,
+    };
+  }
 
   convertFileSize(bytes: number) {
     const sizes = ['Bytes', 'KB', 'MB'];

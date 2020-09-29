@@ -32,6 +32,7 @@
             (uploadOutput)="onUploadOutput($event)"
             [uploadInput]="uploadInput"
             [attr.multiple]="config.multiple ? config.multiple : null"
+            [attr.accept]="config.accept"
           />
           <!-- <label class="upload-button">
             or choose file(s)
@@ -53,8 +54,8 @@
 
       <ul>
         <li *ngFor="let file of files">
-          <span>{{ file.name }}</span
-          ><span class="pl-3">{{ file.type }}</span>
+          <span>{{ file.name }}</span>
+          <span class="pl-3"> {{ convertFileSize(file.size) }}</span>
           <span class="pl-3 close" type="button" (click)="removeFile(file.id)"
             >&times;</span
           >
