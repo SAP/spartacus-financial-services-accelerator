@@ -114,7 +114,7 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
-  private isAddingOfInsuredObjectAllowed(
+  isAddingOfInsuredObjectAllowed(
     currentNumberOfInsuredObjects: number,
     maxNumberOfInsuredObjects: number
   ) {
