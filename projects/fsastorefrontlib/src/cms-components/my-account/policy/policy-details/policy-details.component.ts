@@ -7,7 +7,7 @@ import {
 import { OccConfig, RoutingService } from '@spartacus/core';
 import { saveAs } from 'file-saver';
 import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, max } from 'rxjs/operators';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
 import { DocumentService } from './../../../../core/document/facade/document.service';
@@ -112,6 +112,15 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
       ['policy.details', translationGroup],
       translationKey
     );
+  }
+
+  private isAddingOfInsuredObjectAllowed(
+    currentNumberOfInsuredObjects: number,
+    maxNumberOfInsuredObjects: number
+  ) {
+    return maxNumberOfInsuredObjects > currentNumberOfInsuredObjects
+      ? true
+      : false;
   }
 
   ngOnDestroy() {
