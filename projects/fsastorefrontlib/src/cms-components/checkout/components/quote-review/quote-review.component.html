@@ -62,8 +62,13 @@
                       *ngTemplateOutlet="
                         edit;
                         context: {
-                          route: 'generalInformation',
-                          code: cart.insuranceQuote?.state?.code
+                          route: cart.entries[0]?.product?.configurable
+                            ? 'configureProduct'
+                            : 'generalInformation',
+                          state: cart.insuranceQuote?.state?.code,
+                          param: cart.entries[0]?.product?.configurable
+                            ? cart.entries[0].product.code
+                            : ''
                         }
                       "
                     >
@@ -118,8 +123,13 @@
                   *ngTemplateOutlet="
                     edit;
                     context: {
-                      route: 'category',
-                      code: cart.insuranceQuote?.state?.code
+                      route: cart.entries[0]?.product?.configurable
+                        ? 'configureProduct'
+                        : 'category',
+                      state: cart.insuranceQuote?.state?.code,
+                      param: cart.entries[0]?.product?.configurable
+                        ? cart.entries[0].product.code
+                        : ''
                     }
                   "
                 >
@@ -152,7 +162,7 @@
                       edit;
                       context: {
                         route: 'addOptions',
-                        code: cart.insuranceQuote?.state?.code
+                        state: cart.insuranceQuote?.state?.code
                       }
                     "
                   >
@@ -248,7 +258,7 @@
                     edit;
                     context: {
                       route: 'checkoutPersonalDetails',
-                      code: cart.insuranceQuote?.state?.code
+                      state: cart.insuranceQuote?.state?.code
                     }
                   "
                 >
@@ -318,8 +328,8 @@
   </ng-container>
 </ng-template>
 
-<ng-template #edit let-code="code" let-route="route">
-  <ng-container *ngIf="isEditable(code)">
+<ng-template #edit let-state="state" let-route="route" let-param="param">
+  <ng-container *ngIf="isEditable(state)">
     <div class="col-12 col-md-6">
       <button
         class="action-button btn-block"
@@ -328,7 +338,7 @@
           {
             cxRoute: route,
             params: {
-              code: activeCategory
+              code: param ? param : activeCategory
             }
           } | cxUrl
         "
