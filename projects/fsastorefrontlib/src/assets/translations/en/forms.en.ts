@@ -56,6 +56,7 @@ export const forms = {
       loan_details_form: 'Configure a Product',
       credit_card_details_form: 'Configure a Product',
       current_account_details_form: 'Configure a Product',
+      auto_additional_driver_form: 'Auto information',
     },
     auto: {
       vehicleAnnualMileage: 'Vehicle Annual Mileage',

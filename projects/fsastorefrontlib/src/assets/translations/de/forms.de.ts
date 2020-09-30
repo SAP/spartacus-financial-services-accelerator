@@ -53,6 +53,7 @@ export const forms = {
       loan_details_form: 'Produkt konfigurieren',
       credit_card_details_form: 'Produkt konfigurieren',
       current_account_details_form: 'Produkt konfigurieren',
+      auto_additional_driver_form: 'Autoinformationen',
     },
     auto: {
       vehicleAnnualMileage: 'Jahreskilometerleistung des Fahrzeugs',

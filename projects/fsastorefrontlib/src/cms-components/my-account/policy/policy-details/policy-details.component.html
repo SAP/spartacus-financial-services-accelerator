@@ -227,6 +227,35 @@
                       </li>
                     </ng-container>
                   </ng-container>
+                  <ng-container
+                    *ngIf="
+                      isChangeAllowed(
+                        policy.categoryData?.allowedFSRequestTypes,
+                        'FSINSUREDOBJECT_ADD',
+                        policy.startDate
+                      ) &&
+                      isAddingOfInsuredObjectAllowed(
+                        insuredObject,
+                        childInsuredObject.maxNumberOfInsuredObjects
+                      ) &&
+                      insuredObject.childInsuredObjectList.insuredObjects
+                        .length ===
+                        i + 1
+                    "
+                  >
+                    <button
+                      class="action-button btn-block mt-4"
+                      (click)="
+                        changePolicyDetails(
+                          policy.policyNumber,
+                          policy.contractNumber,
+                          'FSINSUREDOBJECT_ADD'
+                        )
+                      "
+                    >
+                      {{ 'fscommon.add' | cxTranslate }}
+                    </button>
+                  </ng-container>
                 </ul>
               </ng-container>
             </ng-container>
