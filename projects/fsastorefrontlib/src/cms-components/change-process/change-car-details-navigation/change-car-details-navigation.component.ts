@@ -1,6 +1,6 @@
 import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
 import { UserRequestNavigationService } from '../../../core/user-request/facade/user-request-navigation.service';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { GlobalMessageService, RoutingService } from '@spartacus/core';
@@ -8,7 +8,6 @@ import { AbstractChangeProcessStepComponent } from '../abstract-change-process-s
 import { ChangePolicyService } from '../../../core/change-request/services/change-policy.service';
 import { YFormData, FormDataService } from '@fsa/dynamicforms';
 import { map, take, filter } from 'rxjs/operators';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'cx-fs-change-car-details-navigation',
