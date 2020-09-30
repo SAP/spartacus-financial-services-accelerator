@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  HostListener,
-  Injector,
-  OnInit,
-} from '@angular/core';
+import { Component, EventEmitter, Injector, OnInit } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 import { LanguageService } from '@spartacus/core';
 import {
@@ -30,8 +24,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   humanizeBytes: Function;
   dragOver: boolean;
 
-  // fileList: File[] = [];
   uploadControl: AbstractControl;
+  filteredFiles: boolean;
 
   constructor(
     protected appConfig: DynamicFormsConfig,
@@ -42,21 +36,6 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     super(appConfig, languageService, injector, formService);
   }
 
-  // @HostListener('change', ['$event'])
-  // handleFiles(event) {
-  //   this.uploadControl = this.group.get(this.config.name);
-  //   if (
-  //     this.config.accept.toString() === event.target.accept &&
-  //     this.config.multiple === event.target.multiple &&
-  //     this.checkFileSize(event)
-  //   ) {
-  //     this.fileList = Array.from(event.target.files);
-  //     this.uploadControl.setValue(this.fileList);
-  //   } else {
-  //     this.uploadControl.markAsTouched({ onlySelf: true });
-  //     this.uploadControl.setValue(null);
-  //   }
-  // }
   ngOnInit() {
     super.ngOnInit();
     this.files = []; // local uploading files array
@@ -68,6 +47,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
       maxFileSize: this.config?.maxFileSize,
       allowedContentTypes: this.config?.accept,
     };
+    this.uploadControl = this.group.get(this.config.name);
   }
 
   convertFileSize(bytes: number) {
@@ -87,14 +67,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     return !(maxExceeded.length > 0);
   }
 
-  // removeFile(i) {
-  //   this.fileList.splice(i, 1);
-  //   this.uploadControl.setValue(this.fileList);
-  //   this.uploadControl.markAsTouched({ onlySelf: true });
-  // }
-
   onUploadOutput(output: UploadOutput): void {
-    this.uploadControl = this.group.get(this.config.name);
     switch (output.type) {
       case 'addedToQueue':
         if (typeof output.file !== 'undefined') {
@@ -119,13 +92,13 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
         );
         this.uploadControl.setValue(this.files);
         break;
-      case 'dragOver':
-        this.dragOver = true;
-        break;
-      case 'dragOut':
-      case 'drop':
-        this.dragOver = false;
-        break;
+      // case 'dragOver':
+      //   this.dragOver = true;
+      //   break;
+      // case 'dragOut':
+      // case 'drop':
+      //   this.dragOver = false;
+      //   break;
       case 'done':
         // The file is downloaded
         break;
