@@ -328,7 +328,12 @@
   </ng-container>
 </ng-template>
 
-<ng-template #edit let-quoteStateCode="quoteStateCode" let-route="route" let-param="param">
+<ng-template
+  #edit
+  let-quoteStateCode="quoteStateCode"
+  let-route="route"
+  let-param="param"
+>
   <ng-container *ngIf="isEditable(quoteStateCode)">
     <div class="col-12 col-md-6">
       <button
