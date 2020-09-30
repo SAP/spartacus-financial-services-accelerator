@@ -8,15 +8,13 @@ import { AbstractChangeProcessStepComponent } from '../abstract-change-process-s
 import { ChangePolicyService } from '../../../core/change-request/services/change-policy.service';
 import { YFormData, FormDataService } from '@fsa/dynamicforms';
 import { map, take, filter } from 'rxjs/operators';
-import { of, Subscription } from 'rxjs';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'cx-fs-change-car-details-navigation',
   templateUrl: './change-car-details-navigation.component.html',
 })
-export class ChangeCarDetailsNavigationComponent
-  extends AbstractChangeProcessStepComponent
-  implements OnDestroy {
+export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessStepComponent {
   constructor(
     protected userRequestNavigationService: UserRequestNavigationService,
     protected changeRequestService: ChangeRequestService,
@@ -36,8 +34,6 @@ export class ChangeCarDetailsNavigationComponent
     );
   }
 
-  subscription = new Subscription();
-
   simulateChanges(changeRequest) {
     if (
       changeRequest?.insurancePolicy?.insuredObjectList?.insuredObjects.length >
@@ -46,49 +42,41 @@ export class ChangeCarDetailsNavigationComponent
       let changedInsuredObject;
       const yFormData: YFormData = {};
       this.formDataService.submit(yFormData);
-
-      this.subscription.add(
-        this.formDataService
-          .getSubmittedForm()
-          .pipe(
-            filter(formData => formData.content !== undefined),
-            take(1),
-            map(submittedFormData => {
-              const changeCarDetailsForm = JSON.parse(
-                submittedFormData.content
-              );
-              changeRequest.insurancePolicy.insuredObjectList.insuredObjects.forEach(
-                insuredObject => {
-                  changedInsuredObject = {
-                    insuredObjectId: insuredObject.insuredObjectId,
-                    insuredObjectItems: [],
-                  };
-                  insuredObject.insuredObjectItems
-                    .filter(item => item.changeable)
-                    .forEach(item => {
-                      changedInsuredObject.insuredObjectItems.push({
-                        label: item.label,
-                        value: changeCarDetailsForm[item.label],
-                      });
+      this.formDataService
+        .getSubmittedForm()
+        .pipe(
+          filter(formData => formData.content !== undefined),
+          take(1),
+          map(submittedFormData => {
+            const changeCarDetailsForm = JSON.parse(submittedFormData.content);
+            changeRequest.insurancePolicy.insuredObjectList.insuredObjects.forEach(
+              insuredObject => {
+                changedInsuredObject = {
+                  insuredObjectId: insuredObject.insuredObjectId,
+                  insuredObjectItems: [],
+                };
+                insuredObject.insuredObjectItems
+                  .filter(item => item.changeable)
+                  .forEach(item => {
+                    changedInsuredObject.insuredObjectItems.push({
+                      label: item.label,
+                      value: changeCarDetailsForm[item.label],
                     });
-                }
-              );
-              this.simulateChangeRequest({
-                requestId: changeRequest.requestId,
-                insurancePolicy: {
-                  insuredObjectList: {
-                    insuredObjects: [changedInsuredObject],
-                  },
+                  });
+              }
+            );
+            this.simulateChangeRequest({
+              requestId: changeRequest.requestId,
+              insurancePolicy: {
+                insuredObjectList: {
+                  insuredObjects: [changedInsuredObject],
                 },
-                configurationSteps: changeRequest.configurationSteps,
-              });
-            })
-          )
-          .subscribe()
-      );
+              },
+              configurationSteps: changeRequest.configurationSteps,
+            });
+          })
+        )
+        .subscribe();
     }
-  }
-  ngOnDestroy() {
-    super.ngOnDestroy();
   }
 }
