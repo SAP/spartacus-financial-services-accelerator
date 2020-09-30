@@ -23,11 +23,11 @@ export function checkChangeMileageSteps() {
 }
 
 export function enterNewMileage() {
-  cy.get('cx-fs-change-car-details-form')
+  cy.get('cx-fs-cms-form-submit')
     .should('be.visible')
     .within(() => {
       cy.get('h3').contains('Auto Information');
-      cy.get('.label-content').eq(1).contains('Change mileage');
+      cy.get('.col-form-label').eq(1).contains('Change mileage');
       cy.get('[name="vehicleAnnualMileage"]').type(50000);
     });
 }

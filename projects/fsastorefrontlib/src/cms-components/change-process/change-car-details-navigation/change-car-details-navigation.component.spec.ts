@@ -7,25 +7,27 @@ import {
   I18nTestingModule,
   RoutingService,
 } from '@spartacus/core';
-import { of } from 'rxjs';
+import { of, Observable } from 'rxjs';
 import { ChangeRequestService } from '../../../core/change-request/facade/change-request.service';
-import { ChangePolicyService } from './../../../core/change-request/services/change-policy.service';
-import { DateConfig } from './../../../core/date-config/date-config';
-import { UserRequestNavigationService } from './../../../core/user-request/facade';
-import { ChangeCarDetailsFormComponent } from './change-car-details-form.component';
+import { ChangePolicyService } from '../../../core/change-request/services/change-policy.service';
+import { UserRequestNavigationService } from '../../../core/user-request/facade';
+import { ChangeCarDetailsNavigationComponent } from './change-car-details-navigation.component';
 import createSpy = jasmine.createSpy;
+import { FormDataService, YFormData } from '@fsa/dynamicforms';
 
 const requestId = 'request1';
 
 const changeRequest = {
   requestId: requestId,
 };
+let mockSubmittedFormData;
 
-const MockDateConfig: DateConfig = {
-  date: {
-    format: 'yyyy-mm-dd',
-  },
-};
+class MockFormDataService {
+  submit() {}
+  getSubmittedForm(): Observable<YFormData> {
+    return of(mockSubmittedFormData);
+  }
+}
 
 class MockChangeRequestService {
   simulateChangeRequest = createSpy();
@@ -76,10 +78,9 @@ const mockChangeCarDetailsForm: any = {
   vehicleAnnualMileage: '10000',
 };
 
-describe('ChangeCarDetailsFormComponent', () => {
-  let controls;
-  let component: ChangeCarDetailsFormComponent;
-  let fixture: ComponentFixture<ChangeCarDetailsFormComponent>;
+describe('ChangeCarDetailsNavigationComponent', () => {
+  let component: ChangeCarDetailsNavigationComponent;
+  let fixture: ComponentFixture<ChangeCarDetailsNavigationComponent>;
   let mockChangeRequestService: ChangeRequestService;
   let mockUserRequestNavigationService: UserRequestNavigationService;
   let mockRoutingService: RoutingService;
@@ -107,6 +108,10 @@ describe('ChangeCarDetailsFormComponent', () => {
           useClass: MockChangePolicyService,
         },
         {
+          provide: FormDataService,
+          useClass: MockFormDataService,
+        },
+        {
           provide: ActivatedRoute,
           useValue: {
             routeConfig: {
@@ -114,12 +119,8 @@ describe('ChangeCarDetailsFormComponent', () => {
             },
           },
         },
-        {
-          provide: DateConfig,
-          useValue: MockDateConfig,
-        },
       ],
-      declarations: [ChangeCarDetailsFormComponent],
+      declarations: [ChangeCarDetailsNavigationComponent],
     }).compileComponents();
 
     mockRoutingService = TestBed.inject(RoutingService);
@@ -131,10 +132,9 @@ describe('ChangeCarDetailsFormComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ChangeCarDetailsFormComponent);
+    fixture = TestBed.createComponent(ChangeCarDetailsNavigationComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    controls = component.changeCarDetailsForm.controls;
   });
 
   it('should create', () => {
@@ -142,13 +142,11 @@ describe('ChangeCarDetailsFormComponent', () => {
   });
 
   it('should execute simulation request', () => {
-    controls['effectiveDate'].setValue(mockChangeCarDetailsForm.effectiveDate);
-    controls['vehicleAnnualMileage'].setValue(
-      mockChangeCarDetailsForm.vehicleAnnualMileage
-    );
+    mockSubmittedFormData = {
+      content: '{ "vehicleAnnualMileage":"2323"}',
+    };
 
     component.ngOnInit();
-
     const changedRequestData = {
       requestId: requestId,
       insurancePolicy: {
@@ -159,6 +157,7 @@ describe('ChangeCarDetailsFormComponent', () => {
                 {
                   label: 'vehicleAnnualMileage',
                   value: '3000',
+                  changeable: true,
                 },
               ],
             },
@@ -170,25 +169,51 @@ describe('ChangeCarDetailsFormComponent', () => {
     expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalled();
   });
 
-  it('should not execute simulation if form is not populated', () => {
-    component.ngOnInit();
-
+  it('should not execute simulation request when insuredObjectItems length is 0', () => {
+    mockSubmittedFormData = {
+      content: '{ "vehicleAnnualMileage":"2323"}',
+    };
     const changedRequestData = {
       requestId: requestId,
+      insurancePolicy: {
+        insuredObjectList: {
+          insuredObjects: [],
+        },
+      },
     };
+    component.ngOnInit();
+
     component.simulateChanges(changedRequestData);
     expect(
       mockChangeRequestService.simulateChangeRequest
     ).not.toHaveBeenCalled();
   });
 
-  it('form invalid when not all required fields filled', () => {
-    const form = mockChangeCarDetailsForm;
+  it('should not execute simulation request when submittedFormData.content is not defined', () => {
+    mockSubmittedFormData = {};
+    const changedRequestData = {
+      requestId: requestId,
+      insurancePolicy: {
+        insuredObjectList: {
+          insuredObjects: [
+            {
+              insuredObjectItems: [
+                {
+                  label: 'vehicleAnnualMileage',
+                  value: '3000',
+                  changeable: true,
+                },
+              ],
+            },
+          ],
+        },
+      },
+    };
     component.ngOnInit();
 
-    controls['effectiveDate'].setValue(form.effectiveDate);
-    controls['vehicleAnnualMileage'].setValue('');
-
-    expect(component.changeCarDetailsForm.valid).toBeFalsy();
+    component.simulateChanges(changedRequestData);
+    expect(
+      mockChangeRequestService.simulateChangeRequest
+    ).not.toHaveBeenCalled();
   });
 });
