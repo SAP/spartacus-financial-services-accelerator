@@ -120,10 +120,7 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
   ): boolean {
     const currentNumberOfInsuredObjects =
       insuredObject?.childInsuredObjectList?.insuredObjects?.length;
-    if (currentNumberOfInsuredObjects) {
-      return maxNumberOfInsuredObjects > currentNumberOfInsuredObjects;
-    }
-    return false;
+    return maxNumberOfInsuredObjects > currentNumberOfInsuredObjects;
   }
 
   ngOnDestroy() {
