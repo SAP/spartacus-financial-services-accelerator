@@ -65,7 +65,7 @@
                           route: cart.entries[0]?.product?.configurable
                             ? 'configureProduct'
                             : 'generalInformation',
-                          state: cart.insuranceQuote?.state?.code,
+                          quoteStateCode: cart.insuranceQuote?.state?.code,
                           param: cart.entries[0]?.product?.configurable
                             ? cart.entries[0].product.code
                             : ''
@@ -126,7 +126,7 @@
                       route: cart.entries[0]?.product?.configurable
                         ? 'configureProduct'
                         : 'category',
-                      state: cart.insuranceQuote?.state?.code,
+                      quoteStateCode: cart.insuranceQuote?.state?.code,
                       param: cart.entries[0]?.product?.configurable
                         ? cart.entries[0].product.code
                         : ''
@@ -162,7 +162,7 @@
                       edit;
                       context: {
                         route: 'addOptions',
-                        state: cart.insuranceQuote?.state?.code
+                        quoteStateCode: cart.insuranceQuote?.state?.code
                       }
                     "
                   >
@@ -258,7 +258,7 @@
                     edit;
                     context: {
                       route: 'checkoutPersonalDetails',
-                      state: cart.insuranceQuote?.state?.code
+                      quoteStateCode: cart.insuranceQuote?.state?.code
                     }
                   "
                 >
@@ -328,8 +328,8 @@
   </ng-container>
 </ng-template>
 
-<ng-template #edit let-state="state" let-route="route" let-param="param">
-  <ng-container *ngIf="isEditable(state)">
+<ng-template #edit let-quoteStateCode="quoteStateCode" let-route="route" let-param="param">
+  <ng-container *ngIf="isEditable(quoteStateCode)">
     <div class="col-12 col-md-6">
       <button
         class="action-button btn-block"
