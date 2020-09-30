@@ -190,6 +190,7 @@ export interface FSStepData {
   pageLabelOrId?: string;
   status?: string;
   yformConfigurator?: YFormData;
+  summaryStep?: boolean;
 }
 
 export interface FSUserRequest {
