@@ -20,6 +20,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
       this.checkFileSize(event)
     ) {
       this.fileList = Array.from(event.target.files);
+      this.fileList.splice(this.config.maxUploads);
       this.uploadControl.setValue(this.fileList);
     } else {
       // triggering reset and validation if something was manipulated through DOM inspector
