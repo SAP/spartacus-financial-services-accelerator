@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { Config, ConfigModule, I18nModule } from '@spartacus/core';
 import { ComponentsModule } from './components/components.module';
@@ -21,6 +21,6 @@ import { FormOccModule } from './occ/adapters/form/form-occ.module';
     ComponentsModule,
   ],
   exports: [FormContainerModule],
-  providers: [{ provide: DynamicFormsConfig, useExisting: Config }],
+  providers: [{ provide: DynamicFormsConfig, useExisting: Config }, DatePipe],
 })
 export class DynamicFormModule {}

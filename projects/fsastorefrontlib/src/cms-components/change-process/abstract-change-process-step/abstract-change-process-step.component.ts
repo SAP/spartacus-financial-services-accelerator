@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {
   GlobalMessageService,
@@ -25,7 +24,6 @@ export class AbstractChangeProcessStepComponent implements OnInit, OnDestroy {
     protected activatedRoute: ActivatedRoute,
     protected routingService: RoutingService,
     protected globalMessageService: GlobalMessageService,
-    protected fb: FormBuilder,
     protected changePolicyService: ChangePolicyService
   ) {}
 

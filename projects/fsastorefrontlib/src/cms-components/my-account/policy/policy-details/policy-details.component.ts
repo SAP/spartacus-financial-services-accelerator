@@ -114,6 +114,15 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
+  isAddingOfInsuredObjectAllowed(
+    insuredObject: any,
+    maxNumberOfInsuredObjects: number
+  ): boolean {
+    const currentNumberOfInsuredObjects =
+      insuredObject?.childInsuredObjectList?.insuredObjects?.length;
+    return maxNumberOfInsuredObjects > currentNumberOfInsuredObjects;
+  }
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();

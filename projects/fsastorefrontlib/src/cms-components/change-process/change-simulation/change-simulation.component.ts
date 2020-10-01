@@ -11,10 +11,6 @@ export class ChangeSimulationComponent
   implements OnInit {
   currentDate: Date = new Date();
 
-  ngOnInit() {
-    super.ngOnInit();
-  }
-
   getChangedPolicyObjects(changeRequestData: any): ChangedPolicyData[] {
     return this.changePolicyService.getChangedPolicyObjects(changeRequestData);
   }

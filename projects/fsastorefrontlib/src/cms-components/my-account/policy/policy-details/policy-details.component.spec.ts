@@ -215,4 +215,29 @@ describe('PolicyDetailsComponent', () => {
     component.getDocument(documentId, documentName, mockEvent);
     expect(documentService.getDocumentById).toHaveBeenCalledWith(documentId);
   });
+
+  it('should check if adding of new insured object is allowed', () => {
+    const insuredObject = {
+      childInsuredObjectList: {
+        insuredObjects: [
+          {
+            insuredObjectId: '001',
+            insuredObjectType: 'TEST_TYPE',
+          },
+          {
+            insuredObjectId: '002',
+            insuredObjectType: 'TEST_TYPE',
+          },
+        ],
+      },
+    };
+    const allowed = component.isAddingOfInsuredObjectAllowed(insuredObject, 3);
+    const notAllowed = component.isAddingOfInsuredObjectAllowed(
+      insuredObject,
+      2
+    );
+
+    expect(allowed).toBe(true);
+    expect(notAllowed).toBe(false);
+  });
 });

@@ -85,12 +85,14 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
         .subscribe()
     );
 
-    const formData: YFormData = {};
-    if (this.activeStepData.yformConfigurator) {
-      formData.id = this.activeStepData.yformConfigurator.id;
+    if (!this.configurationSteps[this.activeStepIndex].summaryStep) {
+      const formData: YFormData = {};
+      if (this.activeStepData.yformConfigurator) {
+        formData.id = this.activeStepData.yformConfigurator.id;
+      }
+      this.formDataService.submit(formData);
     }
 
-    this.formDataService.submit(formData);
     if (this.activeStepIndex + 1 === this.configurationSteps.length) {
       this.claimService.updateClaim(
         claimData,

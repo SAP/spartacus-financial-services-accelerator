@@ -50,11 +50,13 @@ export const forms = {
       savings_personal_details: 'Persönliche Angaben',
       loan_creditCard_personalDetails: 'Persönliche Angaben',
       auto_personal_details: 'Persönliche Angaben',
+      auto_change_process_mileage: 'Fahrzeuginformationen',
       ftd_currentAcc_personal_details: 'Persönliche Angaben',
       fixed_term_deposit_details_form: 'Produkt konfigurieren',
       loan_details_form: 'Produkt konfigurieren',
       credit_card_details_form: 'Produkt konfigurieren',
       current_account_details_form: 'Produkt konfigurieren',
+      auto_additional_driver_form: 'Autoinformationen',
     },
     auto: {
       vehicleAnnualMileage: 'Jahreskilometerleistung des Fahrzeugs',
