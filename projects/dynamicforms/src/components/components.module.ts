@@ -19,12 +19,11 @@ import { AbstractOptionsComponent } from './abstract-options/abstract-options.co
 import { DynamicSelectComponent } from './dynamic-select/dynamic-select.component';
 import { FormPopupErrorComponent } from './form-popup-error/form-popup-error.component';
 import { DataHolderComponent } from './data-holder/data-holder.component';
-import { FormComponentService } from './form-component.service';
 import { UploadComponent } from './upload/upload.component';
-import { NgxUploaderModule } from 'ngx-uploader';
+import { FormComponentService } from './form-component.service';
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, I18nModule, NgxUploaderModule],
+  imports: [CommonModule, ReactiveFormsModule, I18nModule],
   declarations: [
     FormComponentDirective,
     AbstractFormComponent,
