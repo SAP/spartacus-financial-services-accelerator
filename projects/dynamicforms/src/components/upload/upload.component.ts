@@ -51,13 +51,13 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     return !(maxExceeded.length > 0);
   }
 
-  removeFile(index, uploadFeature) {
+  removeFile(index, uploadField) {
     this.fileList.splice(index, 1);
     this.uploadControl.setValue(this.fileList);
     this.uploadControl.markAsTouched({ onlySelf: true });
     // reset DOM File element to sync it with reactive control
     if (this.fileList.length === 0) {
-      uploadFeature.value = null;
+      uploadField.value = null;
     }
   }
 }

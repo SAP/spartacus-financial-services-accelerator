@@ -14,7 +14,7 @@
       <div class="input-group">
         <div class="custom-file">
           <input
-            #uploadFeature
+            #uploadField
             type="file"
             class="custom-file-input"
             [attr.aria-describedby]="config.name"
@@ -49,7 +49,7 @@
             <span
               class="pl-3 close"
               type="button"
-              (click)="removeFile(i, uploadFeature)"
+              (click)="removeFile(i, uploadField)"
               >&times;</span
             >
 
