@@ -17,7 +17,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     if (
       this.config.accept.toString() === event.target.accept &&
       this.config.multiple === event.target.multiple &&
-      this.isFileSizeAllowed(event)
+      this.checkFileSize(event)
     ) {
       this.fileList = Array.from(event.target.files);
       this.fileList.splice(this.config.maxUploads);
@@ -48,7 +48,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     return `${(bytes / 1024 ** i).toFixed(1)} ${sizes[i]}`;
   }
 
-  isFileSizeAllowed(event): Boolean {
+  checkFileSize(event): Boolean {
     const files: File[] = Array.from(event.target.files);
     const maxExceeded = files.filter(
       file => file.size > this.config.maxFileSize
