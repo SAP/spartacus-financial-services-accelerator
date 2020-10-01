@@ -22,14 +22,6 @@
             [attr.multiple]="config.multiple ? config.multiple : null"
             [attr.accept]="config.accept"
           />
-          <!-- <input
-            type="file"
-            class="form-control-file"
-            [attr.aria-describedby]="config.name"
-            [attr.name]="config.name"
-            [attr.multiple]="config.multiple ? config.multiple : null"
-            [attr.accept]="config.accept"
-          /> -->
           <input
             type="hidden"
             [attr.name]="config.name + '_hidden'"
@@ -52,7 +44,6 @@
               (click)="removeFile(i, uploadField)"
               >&times;</span
             >
-
             <!-- <div class="progress">
               <div
                 class="progress-bar"
