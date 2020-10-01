@@ -59,6 +59,14 @@
           </li>
         </ul>
       </ng-container>
+      <button
+        *ngIf="fileList.length > 1"
+        type="button"
+        class="action-button"
+        (click)="removeAll(uploadField)"
+      >
+        {{ 'forms.removeAll' | cxTranslate }}
+      </button>
     </div>
     <cx-error-notice
       [warn]="group.controls[config.name]"

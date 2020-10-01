@@ -9,6 +9,7 @@ export const forms = {
     maxFileSize: 'Maximum file size allowed',
     chooseFile: 'Choose file(s)',
     startUpload: 'Start upload',
+    removeAll: 'Remove all',
     dateOfBirth: {
       label: 'Date of Birth',
     },

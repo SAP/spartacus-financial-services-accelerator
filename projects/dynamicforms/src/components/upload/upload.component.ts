@@ -25,14 +25,18 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     } else {
       // triggering reset and validation if something was manipulated through DOM inspector
       // or files are violating config rules
-      this.uploadControl.setValue(null);
-      this.uploadControl.markAsTouched({ onlySelf: true });
+      this.setValueAndValidate(null);
     }
   }
 
   ngOnInit() {
     super.ngOnInit();
     this.uploadControl = this.group.get(this.config.name);
+  }
+
+  setValueAndValidate(value) {
+    this.uploadControl.setValue(value);
+    this.uploadControl.markAsTouched({ onlySelf: true });
   }
 
   convertFileSize(bytes: number) {
@@ -54,11 +58,16 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
 
   removeFile(index, uploadField) {
     this.fileList.splice(index, 1);
-    this.uploadControl.setValue(this.fileList);
-    this.uploadControl.markAsTouched({ onlySelf: true });
+    this.setValueAndValidate(this.fileList);
     // reset DOM File element to sync it with reactive control
     if (this.fileList.length === 0) {
       uploadField.value = null;
     }
+  }
+
+  removeAll(uploadField) {
+    this.fileList = [];
+    uploadField.value = null;
+    this.setValueAndValidate(this.fileList);
   }
 }
