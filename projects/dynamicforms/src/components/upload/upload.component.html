@@ -7,73 +7,41 @@
           {{ 'forms.optional' | cxTranslate }}
         </ng-container>
       </label>
-      <p>
-        {{ 'forms.maxFileSize' | cxTranslate }}:
-        {{ convertFileSize(config.maxFileSize) }}
-      </p>
-
-      <!-- <div
-        class="drop-container"
-        ngFileDrop
-        [options]="options"
-        (uploadOutput)="onUploadOutput($event)"
-        [uploadInput]="uploadInput"
-        [ngClass]="{ 'is-drop-over': dragOver }"
-      >
-        <h1>Drag &amp; Drop</h1>
-      </div> -->
+      <p>{{ 'forms.maxFileSize' | cxTranslate }} {{ config.maxFileSize }}MB</p>
       <div class="input-group">
         <div class="custom-file">
-          <input
+          <!-- <input
             type="file"
             class="custom-file-input"
-            ngFileSelect
-            [options]="options"
-            (uploadOutput)="onUploadOutput($event)"
-            [uploadInput]="uploadInput"
+            [attr.aria-describedby]="config.name"
+            [attr.name]="config.name"
+            [attr.multiple]="config.multiple ? config.multiple : null"
+            [attr.accept]="config.accept"
+          /> -->
+          <input
+            type="file"
+            class="form-control-file"
+            [attr.aria-describedby]="config.name"
+            [attr.name]="config.name"
             [attr.multiple]="config.multiple ? config.multiple : null"
             [attr.accept]="config.accept"
           />
-          <!-- <label class="upload-button">
-            or choose file(s)
-          </label> -->
-          <label class="custom-file-label" [attr.for]="config.name">{{
-            'forms.chooseFile' | cxTranslate
-          }}</label>
+          <input
+            type="hidden"
+            [attr.name]="config.name + '_hidden'"
+            [formControlName]="config.name"
+          />
+          <!-- <label class="custom-file-label" [attr.for]="config.name"
+            >Choose file</label
+          > -->
         </div>
       </div>
-      <ng-container *ngIf="files.length > 0">
-        <button
-          type="button"
-          class="start-upload-btn my-3"
-          (click)="startUpload()"
-        >
-          {{ 'forms.startUpload' | cxTranslate }}
-        </button>
+      <ng-container *ngIf="fileList.length > 0">
+        <div *ngFor="let file of fileList">
+          {{ file?.name }}:
+          {{ bytesToSize(file.size) }}
+        </div>
       </ng-container>
-
-      <ul>
-        <li *ngFor="let file of files">
-          <span>{{ file.name }}</span>
-          <span class="pl-3"> {{ convertFileSize(file.size) }}</span>
-          <span class="pl-3 close" type="button" (click)="removeFile(file.id)"
-            >&times;</span
-          >
-
-          <div class="progress">
-            <div
-              class="progress-bar"
-              [style.width]="file.progress.data.percentage + '%'"
-              role="progressbar"
-              [attr.aria-valuenow]="file.progress.data.percentage"
-              aria-valuemin="0"
-              aria-valuemax="100"
-            >
-              {{ file.progress.data.percentage }}
-            </div>
-          </div>
-        </li>
-      </ul>
     </div>
     <cx-error-notice
       [warn]="group.controls[config.name]"
