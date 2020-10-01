@@ -1,32 +1,40 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { AbstractControl } from '@angular/forms';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 
 @Component({
   selector: 'cx-upload',
   templateUrl: './upload.component.html',
 })
-export class UploadComponent extends AbstractFormComponent {
+export class UploadComponent extends AbstractFormComponent implements OnInit {
   fileList: File[] = [];
+  uploadControl: AbstractControl;
 
   @HostListener('change', ['$event'])
   handleFiles(event) {
-    this.fileList = []; // reset when user is choosing files again
-    const uploadControl = this.group.get(this.config.name);
+    // Reset when user is choosing files again!
+    this.fileList = [];
     if (
-      this.config.accept === event.target.accept.toString() &&
+      this.config.accept.toString() === event.target.accept &&
       this.config.multiple === event.target.multiple &&
       this.checkFileSize(event)
     ) {
       this.fileList = Array.from(event.target.files);
-      uploadControl.setValue(this.fileList);
+      this.uploadControl.setValue(this.fileList);
     } else {
-      // triggering validation if nothing is selected
-      uploadControl.markAsTouched({ onlySelf: true });
-      uploadControl.setValue(null);
+      // triggering reset and validation if something was manipulated through DOM inspector
+      // or files are violating config rules
+      this.uploadControl.setValue(null);
+      this.uploadControl.markAsTouched({ onlySelf: true });
     }
   }
 
-  bytesToSize(bytes: number) {
+  ngOnInit() {
+    super.ngOnInit();
+    this.uploadControl = this.group.get(this.config.name);
+  }
+
+  convertFileSize(bytes: number) {
     const sizes = ['Bytes', 'KB', 'MB'];
     const i = Number(Math.floor(Math.log(bytes) / Math.log(1024)));
     if (i === 0) {
@@ -38,8 +46,18 @@ export class UploadComponent extends AbstractFormComponent {
   checkFileSize(event): Boolean {
     const files: File[] = Array.from(event.target.files);
     const maxExceeded = files.filter(
-      file => file.size / 1024 / 1024 > this.config.maxFileSize
+      file => file.size > this.config.maxFileSize
     );
     return !(maxExceeded.length > 0);
+  }
+
+  removeFile(index, uploadFeature) {
+    this.fileList.splice(index, 1);
+    this.uploadControl.setValue(this.fileList);
+    this.uploadControl.markAsTouched({ onlySelf: true });
+    // reset DOM File element to sync it with reactive control
+    if (this.fileList.length === 0) {
+      uploadFeature.value = null;
+    }
   }
 }

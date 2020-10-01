@@ -14,6 +14,7 @@
 }
 
 .custom-file-input {
+  cursor: pointer;
   &:focus ~ .custom-file-label {
     border-color: var(--cx-color-secondary);
     box-shadow: none;
