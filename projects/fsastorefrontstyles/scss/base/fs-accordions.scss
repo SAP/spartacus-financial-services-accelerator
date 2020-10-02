@@ -30,7 +30,7 @@
   .accordion-item {
     border: 1px solid var(--cx-color-3);
     margin-top: 20px;
-    @include box-shadow(0, 8px, 6px, -6px, $color-grey, 1);
+    @include fs-box-shadow(0, 8px, 6px, -6px, $color-grey, 1);
     position: relative;
     .fs-icon {
       @include vertical-center;

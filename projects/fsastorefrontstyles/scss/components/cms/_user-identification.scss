@@ -1,6 +1,6 @@
 %cx-fs-select-identification {
   .fs-icon:before {
-    @include transition;
+    @include fs-transition;
     font-size: 38px;
     border: 1px solid transparent;
     padding: 10px;

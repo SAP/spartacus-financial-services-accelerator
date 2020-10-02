@@ -76,12 +76,6 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
-
   mapDataToFormControls(formData) {
     for (const groupCode of Object.keys(formData)) {
       if (
@@ -147,5 +141,10 @@ export class DynamicFormComponent implements OnInit, OnDestroy {
 
   private checkInvalidControls(formData: YFormData): boolean {
     return !!(formData && !this.valid);
+  }
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }
