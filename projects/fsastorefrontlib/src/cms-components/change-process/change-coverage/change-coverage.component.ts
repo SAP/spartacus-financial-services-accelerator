@@ -68,6 +68,7 @@ export class ChangeCoverageComponent extends AbstractChangeProcessStepComponent
             coverageProduct: {
               code: coverage.coverageProduct.code,
             },
+            technicalId: coverage.technicalId,
           });
         }
       });
