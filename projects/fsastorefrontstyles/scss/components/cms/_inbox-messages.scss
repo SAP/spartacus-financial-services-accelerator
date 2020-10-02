@@ -22,9 +22,6 @@
       }
     }
     .box-shadow {
-      max-width: 1100px;
-      width: 100%;
-      margin: 0 auto;
       padding: 20px;
       color: var(--cx-color-11);
       @include box-shadow(0px, 3px, 10px, 1px, $color-dark-grey, 0.3);
