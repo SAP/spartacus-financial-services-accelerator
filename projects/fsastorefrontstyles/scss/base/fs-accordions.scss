@@ -8,6 +8,8 @@
     width: 32px;
     height: 32px;
     padding: 2px;
+    display: block;
+    margin: 0 auto;
     @include media-breakpoint-up(md) {
       @include absolute-center;
     }
