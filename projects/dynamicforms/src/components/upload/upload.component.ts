@@ -34,7 +34,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     this.uploadControl = this.group.get(this.config.name);
   }
 
-  setValueAndValidate(value: File[]) {
+  protected setValueAndValidate(value: File[]) {
     this.uploadControl.setValue(value);
     this.uploadControl.markAsTouched({ onlySelf: true });
   }
