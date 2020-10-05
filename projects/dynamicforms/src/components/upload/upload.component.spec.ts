@@ -56,7 +56,16 @@ class MockFormService {
 const mockFormGroup = new FormGroup({
   testUpload: new FormControl(),
 });
-const mockFile = new File([''], 'filename', { type: 'application/pdf' });
+
+const blob1 = new Blob([''], { type: 'application/pdf' });
+blob1['lastModifiedDate'] = '';
+blob1['name'] = 'testFile1';
+const mockFile = <File>blob1;
+
+const blob2 = new Blob([''], { type: 'image/jpeg' });
+blob2['lastModifiedDate'] = '';
+blob2['name'] = 'testFile2';
+const mockFile2 = <File>blob2;
 
 const mockManipulatedTarget = {
   target: {
@@ -66,7 +75,7 @@ const mockManipulatedTarget = {
 
 const mockEvent = {
   target: {
-    files: [mockFile],
+    files: [mockFile, mockFile2],
     multiple: true,
     accept: 'application/pdf,image/jpeg',
     value: 'test',
@@ -117,7 +126,7 @@ describe('UploadComponent', () => {
     component.ngOnInit();
     component.handleFiles(mockEvent);
     fixture.detectChanges();
-    expect(component.fileList.length).toEqual(1);
+    expect(component.fileList.length).toEqual(2);
   });
 
   it('should not select files when accept is manipulated', () => {
@@ -126,10 +135,9 @@ describe('UploadComponent', () => {
   });
 
   it('should remove a file', () => {
-    const mockIndex = 0;
     component.handleFiles(mockEvent);
-    component.removeFile(mockIndex, mockEvent.target);
-    expect(component.fileList.length).toEqual(0);
+    component.removeFile(0, mockEvent.target.files);
+    expect(component.fileList.length).toBe(1);
   });
 
   it('should remove all Files', () => {
