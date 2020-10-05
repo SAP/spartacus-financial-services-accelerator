@@ -13,13 +13,46 @@ import { ChangePolicyService } from '../../../core/change-request/services/chang
 import { UserRequestNavigationService } from '../../../core/user-request/facade';
 import { ChangeCarDetailsNavigationComponent } from './change-car-details-navigation.component';
 import createSpy = jasmine.createSpy;
-import { FormDataService, YFormData } from '@fsa/dynamicforms';
+import {
+  FormDataService,
+  YFormData,
+  FormDataStorageService,
+} from '@fsa/dynamicforms';
 
 const requestId = 'request1';
 
 const changeRequest = {
   requestId: requestId,
 };
+
+const mockChangeCarDetailsForm: any = {
+  effectiveDate: '10/10/2020',
+  vehicleAnnualMileage: '10000',
+};
+
+const addedInsuredObject: any = {
+  insuredObjectItems: [
+    {
+      label: 'firstName',
+      value: 'Mock name',
+    },
+    {
+      label: 'lastName',
+      value: 'Mock surname',
+    },
+  ],
+};
+
+const changedInsuredObject: any = {
+  insuredObjectItems: [
+    {
+      label: 'vehicleAnnualMileage',
+      value: '3000',
+      changeable: true,
+    },
+  ],
+};
+
 let mockSubmittedFormData;
 
 class MockFormDataService {
@@ -47,7 +80,14 @@ class MockChangeRequestService {
   }
 }
 
-class MockChangePolicyService {}
+class MockChangePolicyService {
+  createInsuredObject() {
+    return addedInsuredObject;
+  }
+  getChangedInsuredObject() {
+    return changedInsuredObject;
+  }
+}
 
 const configurationSteps = [
   {
@@ -69,14 +109,12 @@ class MockUserRequestNavigationService {
   getConfigurationSteps() {
     return configurationSteps;
   }
-
   getActiveStep() {}
 }
 
-const mockChangeCarDetailsForm: any = {
-  effectiveDate: '10/10/2020',
-  vehicleAnnualMileage: '10000',
-};
+class MockFormDataStorageService {
+  clearFormDataIdFromLocalStorage() {}
+}
 
 describe('ChangeCarDetailsNavigationComponent', () => {
   let component: ChangeCarDetailsNavigationComponent;
@@ -85,6 +123,7 @@ describe('ChangeCarDetailsNavigationComponent', () => {
   let mockUserRequestNavigationService: UserRequestNavigationService;
   let mockRoutingService: RoutingService;
   let globalMessageService: GlobalMessageService;
+  let mockFormDataStorageService: FormDataStorageService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -112,6 +151,10 @@ describe('ChangeCarDetailsNavigationComponent', () => {
           useClass: MockFormDataService,
         },
         {
+          provide: FormDataStorageService,
+          useClass: MockFormDataStorageService,
+        },
+        {
           provide: ActivatedRoute,
           useValue: {
             routeConfig: {
@@ -129,6 +172,7 @@ describe('ChangeCarDetailsNavigationComponent', () => {
     mockUserRequestNavigationService = TestBed.inject(
       UserRequestNavigationService
     );
+    mockFormDataStorageService = TestBed.inject(FormDataStorageService);
   }));
 
   beforeEach(() => {
@@ -141,27 +185,21 @@ describe('ChangeCarDetailsNavigationComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should execute simulation request', () => {
+  it('should execute simulation request for changing existing insured object', () => {
     mockSubmittedFormData = {
       content: '{ "vehicleAnnualMileage":"2323"}',
     };
-
     component.ngOnInit();
     const changedRequestData = {
       requestId: requestId,
+      fsStepGroupDefinition: {
+        requestType: {
+          code: 'FSINSUREDOBJECT_CHANGE',
+        },
+      },
       insurancePolicy: {
         insuredObjectList: {
-          insuredObjects: [
-            {
-              insuredObjectItems: [
-                {
-                  label: 'vehicleAnnualMileage',
-                  value: '3000',
-                  changeable: true,
-                },
-              ],
-            },
-          ],
+          insuredObjects: [changedInsuredObject],
         },
       },
     };
@@ -175,6 +213,11 @@ describe('ChangeCarDetailsNavigationComponent', () => {
     };
     const changedRequestData = {
       requestId: requestId,
+      fsStepGroupDefinition: {
+        requestType: {
+          code: 'FSINSUREDOBJECT_CHANGE',
+        },
+      },
       insurancePolicy: {
         insuredObjectList: {
           insuredObjects: [],
@@ -195,17 +238,7 @@ describe('ChangeCarDetailsNavigationComponent', () => {
       requestId: requestId,
       insurancePolicy: {
         insuredObjectList: {
-          insuredObjects: [
-            {
-              insuredObjectItems: [
-                {
-                  label: 'vehicleAnnualMileage',
-                  value: '3000',
-                  changeable: true,
-                },
-              ],
-            },
-          ],
+          insuredObjects: [changedInsuredObject],
         },
       },
     };
@@ -215,5 +248,27 @@ describe('ChangeCarDetailsNavigationComponent', () => {
     expect(
       mockChangeRequestService.simulateChangeRequest
     ).not.toHaveBeenCalled();
+  });
+
+  it('should execute simulation request for adding new insured object', () => {
+    mockSubmittedFormData = {
+      content: '{ "firstName":"Mock Name", "lastName":"Mock Surname"}',
+    };
+    component.ngOnInit();
+    const changedRequestData = {
+      requestId: requestId,
+      fsStepGroupDefinition: {
+        requestType: {
+          code: 'FSINSUREDOBJECT_ADD',
+        },
+      },
+      insurancePolicy: {
+        insuredObjectList: {
+          insuredObjects: [addedInsuredObject],
+        },
+      },
+    };
+    component.simulateChanges(changedRequestData);
+    expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalled();
   });
 });

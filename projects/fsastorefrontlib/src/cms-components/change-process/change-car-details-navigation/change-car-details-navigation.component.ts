@@ -51,10 +51,12 @@ export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessSt
           map(submittedFormData => {
             const changeProcessForm = JSON.parse(submittedFormData.content);
             if (
+              changeRequest?.insurancePolicy?.insuredObjectList?.insuredObjects
+                .length > 0 &&
               changeRequest.fsStepGroupDefinition?.requestType?.code ===
-              RequestType.INSURED_OBJECT_CHANGE
+                RequestType.INSURED_OBJECT_CHANGE
             ) {
-              const changedInsuredObject = this.getChangedInsuredObject(
+              const changedInsuredObject = this.changePolicyService.getChangedInsuredObject(
                 changeRequest,
                 changeProcessForm
               );
@@ -69,12 +71,15 @@ export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessSt
               });
             }
             if (
+              changeRequest?.insurancePolicy?.insuredObjectList &&
               changeRequest.fsStepGroupDefinition?.requestType?.code ===
-              RequestType.INSURED_OBJECT_ADD
+                RequestType.INSURED_OBJECT_ADD
             ) {
-              const addedInsuredObject = this.getAddedInsuredObject(
-                changeRequest,
+              const addedInsuredObject = this.changePolicyService.createInsuredObject(
                 changeProcessForm
+              );
+              addedInsuredObject.insuredObjectType = this.getTypeOfChidlInsuredObject(
+                changeRequest
               );
               this.simulateChangeRequest({
                 requestId: changeRequest.requestId,
@@ -82,7 +87,9 @@ export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessSt
                   insuredObjectList: {
                     insuredObjects: [
                       {
-                        insuredObjectId: this.getMainInsuredObjectId(changeRequest),
+                        insuredObjectId: this.getMainInsuredObjectId(
+                          changeRequest
+                        ),
                         childInsuredObjectList: {
                           insuredObjects: [addedInsuredObject],
                         },
@@ -102,53 +109,13 @@ export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessSt
     }
   }
 
-  // pomeriti u servis
-  protected getChangedInsuredObject(
-    changeRequest: any,
-    changeProcessForm: any
-  ) {
-    let changedInsuredObject;
-    changeRequest.insurancePolicy?.insuredObjectList?.insuredObjects?.forEach(
-      insuredObject => {
-        changedInsuredObject = {
-          insuredObjectId: insuredObject.insuredObjectId,
-          insuredObjectItems: [],
-        };
-        insuredObject.insuredObjectItems
-          .filter(item => item.changeable)
-          .forEach(item => {
-            changedInsuredObject.insuredObjectItems.push({
-              label: item.label,
-              value: changeProcessForm[item.label],
-            });
-          });
-      }
-    );
-    return changedInsuredObject;
-  }
-
-  // stay here
-  protected getAddedInsuredObject(changeRequest, changeProcessForm) {
-    const newInsuredObject = {
-      insuredObjectType: this.getTypeOfChidlInsuredObject(changeRequest),
-      insuredObjectItems: [],
-    };
-    Object.keys(changeProcessForm).forEach(key => {
-      newInsuredObject.insuredObjectItems.push({
-        key: key,
-        label: key,
-        value: changeProcessForm[key],
-      });
-    });
-    return newInsuredObject;
-  }
-
   private getMainInsuredObjectId(changeRequest) {
-    return changeRequest.insurancePolicy?.insuredObjectList?.insuredObjects[0]?.insuredObjectId;
+    return changeRequest.insurancePolicy?.insuredObjectList?.insuredObjects[0]
+      ?.insuredObjectId;
   }
 
   private getTypeOfChidlInsuredObject(changeRequest) {
-    return changeRequest.insurancePolicy?.insuredObjectList?.insuredObjects[0]?.childInsuredObjectList?.insuredObjects[0]?.insuredObjectType;
+    return changeRequest.insurancePolicy?.insuredObjectList?.insuredObjects[0]
+      ?.childInsuredObjectList?.insuredObjects[0]?.insuredObjectType;
   }
-
 }
