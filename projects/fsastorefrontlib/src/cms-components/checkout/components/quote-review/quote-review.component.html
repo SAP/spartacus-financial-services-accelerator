@@ -150,11 +150,13 @@
                           | slice: 1
                       "
                     >
-                      <li class="accordion-list-item row">
-                        <div class="col-12 item-label">
-                          {{ item.product?.name }}
-                        </div>
-                      </li>
+                      <ng-container *ngIf="item.removeable">
+                        <li class="accordion-list-item row">
+                          <div class="col-12 item-label">
+                            {{ item.product?.name }}
+                          </div>
+                        </li>
+                      </ng-container>
                     </ng-container>
                   </ul>
                   <ng-container
