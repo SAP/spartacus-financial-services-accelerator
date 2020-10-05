@@ -25,12 +25,12 @@ const changeRequest = {
   requestId: requestId,
 };
 
-const mockChangeCarDetailsForm: any = {
+const mockChangeCarDetailsForm = {
   effectiveDate: '10/10/2020',
   vehicleAnnualMileage: '10000',
 };
 
-const addedInsuredObject: any = {
+const addedInsuredObject = {
   insuredObjectItems: [
     {
       label: 'firstName',
@@ -43,7 +43,7 @@ const addedInsuredObject: any = {
   ],
 };
 
-const changedInsuredObject: any = {
+const changedInsuredObject = {
   insuredObjectItems: [
     {
       label: 'vehicleAnnualMileage',
