@@ -56,19 +56,9 @@ class MockFormService {
 const mockFormGroup = new FormGroup({
   testing: new FormControl(),
 });
+const mockFile = new File([''], 'filename', { type: 'application/pdf' });
 
-const blob = new Blob([''], { type: 'application/pdf' });
-blob['lastModifiedDate'] = '';
-blob['name'] = 'filename';
-const mockFile = <File>blob;
-const fileList = {
-  0: mockFile,
-  1: mockFile,
-  length: 2,
-  item: (index: number) => mockFile,
-};
-
-const mockEvt = {
+const mockEvent = {
   target: {
     files: [mockFile],
     multiple: true,
@@ -118,18 +108,18 @@ describe('UploadComponent', () => {
 
   it('should select files', () => {
     component.ngOnInit();
-    component.handleFiles(mockEvt);
+    component.handleFiles(mockEvent);
     fixture.detectChanges();
     expect(component.fileList.length).toEqual(1);
   });
 
   it('should not select files when accept is manipulated', () => {
-    const mockEvtAcceptManipulated = {
+    const mockEventAcceptManipulated = {
       target: {
         accept: '*',
       },
     };
-    component.handleFiles(mockEvtAcceptManipulated);
+    component.handleFiles(mockEventAcceptManipulated);
     expect(component.uploadControl.value).toBe(null);
   });
 
@@ -138,7 +128,7 @@ describe('UploadComponent', () => {
     const target = {
       value: 'test',
     };
-    component.handleFiles(mockEvt);
+    component.handleFiles(mockEvent);
     component.removeFile(mockIndex, target);
     expect(component.fileList.length).toEqual(0);
   });
@@ -147,14 +137,14 @@ describe('UploadComponent', () => {
     const target = {
       value: 'test',
     };
-    component.handleFiles(mockEvt);
+    component.handleFiles(mockEvent);
     component.removeAll(target);
     expect(component.fileList.length).toEqual(0);
   });
 
   it('should not select files when accept is not defined', () => {
     mockField.maxFileSize = 30;
-    component.handleFiles(mockEvt);
+    component.handleFiles(mockEvent);
     expect(component.convertFileSize(mockField.maxFileSize)).toBe('30 Bytes');
   });
 });
