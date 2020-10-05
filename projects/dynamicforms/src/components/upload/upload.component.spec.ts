@@ -142,7 +142,7 @@ describe('UploadComponent', () => {
     expect(component.fileList.length).toEqual(0);
   });
 
-  it('should not select files when accept is not defined', () => {
+  it('should display bytes when value is less than 1024', () => {
     mockField.maxFileSize = 30;
     component.handleFiles(mockEvent);
     expect(component.convertFileSize(mockField.maxFileSize)).toBe('30 Bytes');
