@@ -132,7 +132,7 @@ export class ChangePolicyService {
     return changedInsuredObject;
   }
 
-  /**å
+  /**
    * Method used to create new insured object instance based on provided form data during change process
    *
    * @param formData The form data
