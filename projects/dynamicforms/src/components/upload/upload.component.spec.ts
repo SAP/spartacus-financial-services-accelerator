@@ -58,11 +58,18 @@ const mockFormGroup = new FormGroup({
 });
 const mockFile = new File([''], 'filename', { type: 'application/pdf' });
 
+const mockManipulatedTarget = {
+  target: {
+    accept: '*',
+  },
+};
+
 const mockEvent = {
   target: {
     files: [mockFile],
     multiple: true,
     accept: 'application/pdf,image/jpeg',
+    value: 'test',
   },
 };
 
@@ -114,31 +121,20 @@ describe('UploadComponent', () => {
   });
 
   it('should not select files when accept is manipulated', () => {
-    const mockEventAcceptManipulated = {
-      target: {
-        accept: '*',
-      },
-    };
-    component.handleFiles(mockEventAcceptManipulated);
+    component.handleFiles(mockManipulatedTarget);
     expect(component.uploadControl.value).toBe(null);
   });
 
   it('should remove a file', () => {
     const mockIndex = 0;
-    const target = {
-      value: 'test',
-    };
     component.handleFiles(mockEvent);
-    component.removeFile(mockIndex, target);
+    component.removeFile(mockIndex, mockEvent.target);
     expect(component.fileList.length).toEqual(0);
   });
 
   it('should remove all Files', () => {
-    const target = {
-      value: 'test',
-    };
     component.handleFiles(mockEvent);
-    component.removeAll(target);
+    component.removeAll(mockEvent.target);
     expect(component.fileList.length).toEqual(0);
   });
 
