@@ -13,6 +13,7 @@ import { CheckboxComponent } from '../../components/checkbox/checkbox.component'
 import { DynamicSelectComponent } from '../../components/dynamic-select/dynamic-select.component';
 import { UserPrefillResolver } from '../resolvers/user-prefill-resolver';
 import { DataHolderComponent } from '../../components/data-holder/data-holder.component';
+import { UploadComponent } from '../../components/upload/upload.component';
 import { CurrentDatePrefillResolver } from '../resolvers/current-date-prefill-resolver';
 
 export const defaultFormConfig: DynamicFormsConfig = {
@@ -53,6 +54,9 @@ export const defaultFormConfig: DynamicFormsConfig = {
       },
       dataHolder: {
         component: DataHolderComponent,
+      },
+      upload: {
+        component: UploadComponent,
       },
     },
     validators: {

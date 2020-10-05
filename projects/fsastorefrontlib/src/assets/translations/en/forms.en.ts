@@ -6,6 +6,10 @@ export const forms = {
     enterValidEmail: 'Please enter a valid email',
     validationErrors: 'There are validation errors',
     fillOutProperly: `Please retry once all of the fields have been properly filled-out.`,
+    maxFileSize: 'Maximum file size allowed',
+    chooseFile: 'Choose file(s)',
+    startUpload: 'Start upload',
+    removeAll: 'Remove all',
     dateOfBirth: {
       label: 'Date of Birth',
     },
