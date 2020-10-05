@@ -33,10 +33,10 @@ class MockLanguageService {
 }
 const mockField: FieldConfig = {
   label: {
-    en: 'Testing',
-    de: 'Testing',
+    en: 'Test Upload',
+    de: 'Test Upload',
   },
-  name: 'testing',
+  name: 'testUpload',
   fieldType: 'upload',
   required: true,
   multiple: true,
@@ -54,7 +54,7 @@ class MockFormService {
 }
 
 const mockFormGroup = new FormGroup({
-  testing: new FormControl(),
+  testUpload: new FormControl(),
 });
 const mockFile = new File([''], 'filename', { type: 'application/pdf' });
 
