@@ -39,6 +39,8 @@ export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessSt
     );
   }
 
+  protected readonly excessiveProperties = ['effectiveDate'];
+
   simulateChanges(changeRequest) {
     if (changeRequest?.insurancePolicy) {
       const yFormData: YFormData = {};
@@ -75,11 +77,9 @@ export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessSt
               changeRequest.fsStepGroupDefinition?.requestType?.code ===
                 RequestType.INSURED_OBJECT_ADD
             ) {
-              const addedInsuredObject = this.changePolicyService.createInsuredObject(
+              const addedInsuredObject = this.prepareAddedInsuredObject(
+                changeRequest,
                 changeProcessForm
-              );
-              addedInsuredObject.insuredObjectType = this.getTypeOfChidlInsuredObject(
-                changeRequest
               );
               this.simulateChangeRequest({
                 requestId: changeRequest.requestId,
@@ -107,6 +107,19 @@ export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessSt
         )
         .subscribe();
     }
+  }
+
+  protected prepareAddedInsuredObject(changeRequest, changeProcessForm) {
+    const filteredChangeProcessForm = Object.keys(changeProcessForm).filter(
+      key => !this.excessiveProperties.includes(key)
+    );
+    const addedInsuredObject = this.changePolicyService.createInsuredObject(
+      filteredChangeProcessForm
+    );
+    addedInsuredObject.insuredObjectType = this.getTypeOfChidlInsuredObject(
+      changeRequest
+    );
+    return addedInsuredObject;
   }
 
   private getMainInsuredObjectId(changeRequest) {
