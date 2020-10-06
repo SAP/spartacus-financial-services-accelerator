@@ -53,8 +53,8 @@ export class OrderConfirmationComponent implements OnInit, OnDestroy {
     );
   }
 
-  checkIfRemoveableEntriesExists(cart: Order) {
-    const filteredEntries = this.checkoutService.filterRemoveableEntries(cart);
+  checkIfRemoveableEntriesExists(order: Order) {
+    const filteredEntries = this.checkoutService.filterRemoveableEntries(order);
     return filteredEntries.length > 0;
   }
 }
