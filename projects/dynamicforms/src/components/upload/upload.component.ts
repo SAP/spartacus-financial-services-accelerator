@@ -43,7 +43,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     const sizes = ['Bytes', 'KB', 'MB'];
     const i = Number(Math.floor(Math.log(bytes) / Math.log(1024)));
     if (i === 0) {
-      return `${bytes} ${sizes[i]})`;
+      return `${bytes} ${sizes[i]}`;
     }
     return `${(bytes / 1024 ** i).toFixed(1)} ${sizes[i]}`;
   }

@@ -32,11 +32,17 @@ class MockLanguageService {
   }
 }
 const mockField: FieldConfig = {
-  fieldType: 'input',
-  name: 'testInput',
   label: {
-    en: 'Test Input Label',
+    en: 'Test Upload',
+    de: 'Test Upload',
   },
+  name: 'testUpload',
+  fieldType: 'upload',
+  required: true,
+  multiple: true,
+  maxUploads: 4,
+  accept: ['application/pdf', 'image/jpeg'],
+  maxFileSize: 1048576,
 };
 
 const formControl = new FormControl('formValue');
@@ -48,8 +54,33 @@ class MockFormService {
 }
 
 const mockFormGroup = new FormGroup({
-  testInput: new FormControl(),
+  testUpload: new FormControl(),
 });
+
+const blob1 = new Blob([''], { type: 'application/pdf' });
+blob1['lastModifiedDate'] = '';
+blob1['name'] = 'testFile1';
+const mockFile = <File>blob1;
+
+const blob2 = new Blob([''], { type: 'image/jpeg' });
+blob2['lastModifiedDate'] = '';
+blob2['name'] = 'testFile2';
+const mockFile2 = <File>blob2;
+
+const mockManipulatedTarget = {
+  target: {
+    accept: '*',
+  },
+};
+
+const mockEvent = {
+  target: {
+    files: [mockFile, mockFile2],
+    multiple: true,
+    accept: 'application/pdf,image/jpeg',
+    value: 'test',
+  },
+};
 
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {},
@@ -89,5 +120,35 @@ describe('UploadComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should select files', () => {
+    component.ngOnInit();
+    component.handleFiles(mockEvent);
+    fixture.detectChanges();
+    expect(component.fileList.length).toEqual(2);
+  });
+
+  it('should not select files when accept is manipulated', () => {
+    component.handleFiles(mockManipulatedTarget);
+    expect(component.uploadControl.value).toBe(null);
+  });
+
+  it('should remove a file', () => {
+    component.handleFiles(mockEvent);
+    component.removeFile(0, mockEvent.target.files);
+    expect(component.fileList.length).toBe(1);
+  });
+
+  it('should remove all Files', () => {
+    component.handleFiles(mockEvent);
+    component.removeAll(mockEvent.target);
+    expect(component.fileList.length).toEqual(0);
+  });
+
+  it('should display bytes when value is less than 1024', () => {
+    mockField.maxFileSize = 30;
+    component.handleFiles(mockEvent);
+    expect(component.convertFileSize(mockField.maxFileSize)).toBe('30 Bytes');
   });
 });
