@@ -332,17 +332,13 @@
                 {{ optionalCoverage.coverageProduct.name }}
               </div>
               <div
-                *ngIf="optionalCoverage.coverageIsIncluded"
                 class="col-6 col-sm-5 value notice"
-              >
-                {{ 'fscommon.included' | cxTranslate }}
-              </div>
-              <div
-                *ngIf="!optionalCoverage.coverageIsIncluded"
-                class="col-6 col-sm-5 value notice"
-              >
-                {{ 'fscommon.notIncluded' | cxTranslate }}
-              </div>
+                [innerText]="
+                  optionalCoverage.coverageIsIncluded
+                    ? ('fscommon.included' | cxTranslate)
+                    : ('fscommon.notIncluded' | cxTranslate)
+                "
+              ></div>
             </li>
           </ng-container>
         </ng-container>
