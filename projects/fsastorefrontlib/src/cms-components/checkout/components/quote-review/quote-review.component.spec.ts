@@ -12,6 +12,7 @@ import { AccordionModule } from './../../../../shared/accordion/accordion.module
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 import { QuoteReviewComponent } from './quote-review.component';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
+import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 const formDataContent = '{"content":"formContent"}';
 
 class MockActivatedRoute {
@@ -32,7 +33,9 @@ const MockOccModuleConfig: OccConfig = {
     },
   },
 };
-
+class MockFSCheckoutService {
+  filterRemoveableEntries() {}
+}
 class MockCategoryService {
   setActiveCategory(category: string) {}
 
@@ -113,6 +116,10 @@ describe('Quote Review Component', () => {
         {
           provide: CategoryService,
           useClass: MockCategoryService,
+        },
+        {
+          provide: FSCheckoutService,
+          useClass: MockFSCheckoutService,
         },
       ],
     }).compileComponents();

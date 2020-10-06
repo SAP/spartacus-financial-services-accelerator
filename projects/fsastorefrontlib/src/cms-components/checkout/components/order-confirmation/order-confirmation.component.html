@@ -110,12 +110,6 @@
                                   "
                                 ></ng-container>
                               </ng-container>
-                              <ng-template #itemValue let-value="value">
-                                {{ value }}
-                              </ng-template>
-                              <ng-template #iconOk
-                                ><span class="fs-icon icon-ok"></span>
-                              </ng-template>
                             </div>
                           </li>
                         </ng-container>
@@ -124,11 +118,7 @@
                   </div>
                 </div>
               </cx-fs-accordion-item>
-              <ng-container
-                *ngIf="
-                  (order.deliveryOrderGroups[0]?.entries | slice: 1).length > 0
-                "
-              >
+              <ng-container *ngIf="checkIfRemoveableEntriesExists(order)">
                 <cx-fs-accordion-item
                   [title]="'fscommon.addedByYou' | cxTranslate"
                 >
@@ -353,3 +343,7 @@
     </ng-container>
   </ng-container>
 </ng-template>
+<ng-template #itemValue let-value="value">
+  {{ value }}
+</ng-template>
+<ng-template #iconOk><span class="fs-icon icon-ok"></span> </ng-template>

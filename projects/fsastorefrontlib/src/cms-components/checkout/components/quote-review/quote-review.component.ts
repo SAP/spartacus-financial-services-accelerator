@@ -18,6 +18,7 @@ import {
   QuoteWorkflowStatusType,
 } from './../../../../occ/occ-models/occ.models';
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
+import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 
 @Component({
   selector: 'cx-fs-quote-review',
@@ -42,7 +43,8 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
     protected categoryService: CategoryService,
     protected activatedRoute: ActivatedRoute,
     protected modalService: ModalService,
-    protected translationService: FSTranslationService
+    protected translationService: FSTranslationService,
+    protected checkoutService: FSCheckoutService
   ) {}
 
   ngOnInit() {
@@ -126,6 +128,11 @@ export class QuoteReviewComponent implements OnInit, OnDestroy {
         )
         .subscribe()
     );
+  }
+
+  checkIfRemoveableEntriesExists(cart: FSCart) {
+    const filteredEntries = this.checkoutService.filterRemoveableEntries(cart);
+    return filteredEntries.length > 0;
   }
 
   getFormContent(cart: any): any {

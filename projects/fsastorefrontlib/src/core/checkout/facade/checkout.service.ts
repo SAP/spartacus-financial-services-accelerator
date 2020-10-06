@@ -5,10 +5,15 @@ import {
   AuthService,
   CheckoutDeliveryService,
   CheckoutService,
+  Order,
 } from '@spartacus/core';
 import { combineLatest, Observable } from 'rxjs';
 import { CheckoutSelectors, FSStateWithCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
+import {
+  FSCart,
+  FSOrderEntry,
+} from 'projects/fsastorefrontlib/src/occ/occ-models/occ.models';
 
 @Injectable()
 export class FSCheckoutService extends CheckoutService {
@@ -58,5 +63,12 @@ export class FSCheckoutService extends CheckoutService {
 
   mockDeliveryMode() {
     this.checkoutDeliveryService.setDeliveryMode(this.mockedDeliveryMode);
+  }
+
+  filterRemoveableEntries(cart: FSCart | Order) {
+    const cartEntries: FSOrderEntry[] = cart?.deliveryOrderGroups[0]?.entries;
+    if (cartEntries?.length > 0) {
+      return cartEntries.filter(item => item.removeable);
+    }
   }
 }

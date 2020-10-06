@@ -137,9 +137,7 @@
               </div>
             </div>
           </cx-fs-accordion-item>
-          <ng-container
-            *ngIf="(cart.deliveryOrderGroups[0]?.entries | slice: 1).length > 0"
-          >
+          <ng-container *ngIf="checkIfRemoveableEntriesExists(cart)">
             <cx-fs-accordion-item [title]="'fscommon.addedByYou' | cxTranslate">
               <div class="container">
                 <div class="row justify-content-center">
