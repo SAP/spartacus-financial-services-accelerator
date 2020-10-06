@@ -93,20 +93,26 @@
                             <div class="col-6 value notice">
                               <ng-container
                                 *ngIf="
-                                  item.price.value > 0;
-                                  then formattedPrice;
-                                  else item.chargeInformation
-                                    ? chargeInfo
-                                    : iconOk
+                                  item.price?.value > 0 ||
+                                    item.chargeInformation;
+                                  else iconOk
                                 "
                               >
+                                <ng-container
+                                  *ngTemplateOutlet="
+                                    itemValue;
+                                    context: {
+                                      value:
+                                        item.price.value > 0
+                                          ? item.price.formattedValue
+                                          : item.chargeInformation
+                                    }
+                                  "
+                                ></ng-container>
                               </ng-container>
-                              <ng-template #formattedPrice
-                                >{{ item.price.formattedValue }}
+                              <ng-template #itemValue let-value="value">
+                                {{ value }}
                               </ng-template>
-                              <ng-template #chargeInfo>{{
-                                item.chargeInformation
-                              }}</ng-template>
                               <ng-template #iconOk
                                 ><span class="fs-icon icon-ok"></span>
                               </ng-template>
