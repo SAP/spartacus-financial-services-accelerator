@@ -175,7 +175,7 @@ describe('Cart Effects', () => {
         quoteContent: insuranceQuote,
       });
 
-      const qwe: any = {
+      const responsePayload: any = {
         product: {
           defaultCategory: {
             code: 'testCategory',
@@ -185,7 +185,7 @@ describe('Cart Effects', () => {
         userId: userId,
       };
       const addEntryCompletion = new CartActions.CartAddEntrySuccess({
-        ...qwe,
+        ...responsePayload,
       });
 
       actions$ = hot('-a', { a: action });
