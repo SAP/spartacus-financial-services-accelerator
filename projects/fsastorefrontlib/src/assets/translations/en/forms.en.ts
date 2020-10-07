@@ -10,6 +10,7 @@ export const forms = {
     chooseFile: 'Choose file(s)',
     startUpload: 'Start upload',
     removeAll: 'Remove all',
+    upload: 'Upload',
     dateOfBirth: {
       label: 'Date of Birth',
     },

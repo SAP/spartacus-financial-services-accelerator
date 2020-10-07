@@ -1,6 +1,12 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Injector, OnInit } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
+
+import { FileUploadService } from '../../core/services/file/file-upload.service';
+import { HttpEventType, HttpResponse } from '@angular/common/http';
+import { LanguageService } from '@spartacus/core';
+import { DynamicFormsConfig } from '../../core/config/form-config';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
+import { FormService } from './../../core/services/form/form.service';
 
 @Component({
   selector: 'cx-upload',
@@ -9,7 +15,17 @@ import { AbstractFormComponent } from '../abstract-form/abstract-form.component'
 export class UploadComponent extends AbstractFormComponent implements OnInit {
   fileList: File[] = [];
   uploadControl: AbstractControl;
+  progress = 0;
 
+  constructor(
+    protected appConfig: DynamicFormsConfig,
+    protected languageService: LanguageService,
+    protected injector: Injector,
+    protected formService: FormService,
+    protected fileUploadService: FileUploadService
+  ) {
+    super(appConfig, languageService, injector, formService);
+  }
   @HostListener('change', ['$event'])
   handleFiles(event) {
     // Reset when user is choosing files again!
@@ -46,6 +62,19 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
       return `${bytes} ${sizes[i]}`;
     }
     return `${(bytes / 1024 ** i).toFixed(1)} ${sizes[i]}`;
+  }
+
+  uploadFiles(files: File[], uploadField) {
+    files.forEach(file => {
+      this.fileUploadService.uploadFile(file).subscribe(event => {
+        if (event.type === HttpEventType.UploadProgress) {
+          this.progress = Math.round((100 * event.loaded) / event.total);
+        } else if (event instanceof HttpResponse) {
+          this.progress = 0;
+          this.removeAll(uploadField);
+        }
+      });
+    });
   }
 
   checkFileSize(event): Boolean {

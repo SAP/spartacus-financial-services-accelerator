@@ -14,6 +14,7 @@ import { FieldDependencyResolverService } from './../services/form-dependencies/
 import { FormDataStorageService } from './../services/storage/form-data-storage.service';
 import { DynamicFormComponent } from './dynamic-form/dynamic-form.component';
 import { FormComponent } from './form/form.component';
+import { FileUploadService } from '../services/file/file-upload.service';
 
 @NgModule({
   imports: [
@@ -35,6 +36,7 @@ import { FormComponent } from './form/form.component';
     OccValueListService,
     FormConnector,
     FormDataService,
+    FileUploadService,
   ],
 })
 export class FormContainerModule {}

@@ -34,6 +34,14 @@
       </div>
 
       <ng-container *ngIf="fileList.length > 0">
+        <div class="col-md-3 col-sm-3 col-xs-6">
+          <button
+            class="primary-button btn-block"
+            (click)="uploadFiles(fileList, uploadField)"
+          >
+            {{ 'forms.upload' | cxTranslate }}
+          </button>
+        </div>
         <ul>
           <li class="pt-3" *ngFor="let file of fileList; let i = index">
             <span>{{ file?.name }}:</span>
@@ -44,18 +52,18 @@
               (click)="removeFile(i, uploadField)"
               >&times;</span
             >
-            <!-- <div class="progress">
+            <!--    <div class="progress" *ngIf="progress > 0">
               <div
                 class="progress-bar"
-                [style.width]="'100%'"
+                [style.width]="progress"
                 role="progressbar"
-                [attr.aria-valuenow]="'100%'"
+                [attr.aria-valuenow]="progress"
                 aria-valuemin="0"
                 aria-valuemax="100"
               >
-                100%
+                {{progress}}
               </div>
-            </div> -->
+            </div>-->
           </li>
         </ul>
       </ng-container>
