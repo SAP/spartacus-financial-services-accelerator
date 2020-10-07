@@ -71,16 +71,16 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     return `${(bytes / 1024 ** i).toFixed(1)} ${sizes[i]}`;
   }
 
-  uploadFiles(files: File[], uploadField) {
+  uploadFiles(files: File[]) {
     files.forEach(file => {
       this.fileUploadService.uploadFile(file).subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round((100 * event.loaded) / event.total);
           this.cd.detectChanges();
         }
-        // can be used to reset upload control
-        // if (event instanceof HttpResponse) {
-        // }
+        if (event instanceof HttpResponse) {
+          this.progress = 0;
+        }
       });
     });
   }

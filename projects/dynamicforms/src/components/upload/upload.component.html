@@ -34,14 +34,6 @@
       </div>
 
       <ng-container *ngIf="fileList.length > 0">
-        <div class="col-md-3 col-sm-3 col-xs-6">
-          <button
-            class="primary-button btn-block"
-            (click)="uploadFiles(fileList, uploadField)"
-          >
-            {{ 'forms.upload' | cxTranslate }}
-          </button>
-        </div>
         <ul>
           <li class="pt-3" *ngFor="let file of fileList; let i = index">
             <span>{{ file?.name }}:</span>
@@ -66,15 +58,27 @@
             </div>
           </li>
         </ul>
+
+        <div class="row justify-content-between">
+          <div class="col-md-3 col-sm-3 col-xs-6">
+            <button
+              class="btn-primary btn-block"
+              (click)="uploadFiles(fileList)"
+            >
+              {{ 'forms.upload' | cxTranslate }}
+            </button>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-6">
+            <button
+              *ngIf="fileList.length > 1"
+              class="action-button btn-block"
+              (click)="removeAll(uploadField)"
+            >
+              {{ 'forms.removeAll' | cxTranslate }}
+            </button>
+          </div>
+        </div>
       </ng-container>
-      <button
-        *ngIf="fileList.length > 1"
-        type="button"
-        class="action-button"
-        (click)="removeAll(uploadField)"
-      >
-        {{ 'forms.removeAll' | cxTranslate }}
-      </button>
     </div>
     <cx-error-notice
       [warn]="group.controls[config.name]"
