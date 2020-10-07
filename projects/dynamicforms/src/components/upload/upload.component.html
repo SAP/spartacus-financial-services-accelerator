@@ -62,19 +62,19 @@
         <div class="row justify-content-between">
           <div class="col-md-3 col-sm-3 col-xs-6">
             <button
-              class="btn-primary btn-block"
-              (click)="uploadFiles(fileList)"
-            >
-              {{ 'forms.upload' | cxTranslate }}
-            </button>
-          </div>
-          <div class="col-md-3 col-sm-3 col-xs-6">
-            <button
               *ngIf="fileList.length > 1"
               class="action-button btn-block"
               (click)="removeAll(uploadField)"
             >
               {{ 'forms.removeAll' | cxTranslate }}
+            </button>
+          </div>
+          <div class="col-md-3 col-sm-3 col-xs-6">
+            <button
+              class="btn-primary btn-block"
+              (click)="uploadFiles(fileList)"
+            >
+              {{ 'forms.upload' | cxTranslate }}
             </button>
           </div>
         </div>
