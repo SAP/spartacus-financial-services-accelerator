@@ -10,10 +10,7 @@ import {
 import { combineLatest, Observable } from 'rxjs';
 import { CheckoutSelectors, FSStateWithCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
-import {
-  FSCart,
-  FSOrderEntry,
-} from 'projects/fsastorefrontlib/src/occ/occ-models/occ.models';
+import { FSCart, FSOrderEntry } from '../../../occ/occ-models/occ.models';
 
 @Injectable()
 export class FSCheckoutService extends CheckoutService {
