@@ -85,42 +85,40 @@
                             ?.product?.price?.oneTimeChargeEntries
                         "
                       >
-                        <li class="accordion-list-item row">
-                          <div class="col-6 item-label">
-                            {{ item.billingTime?.name }}
-                          </div>
-                          <div class="col-6 value notice">
-                            <ng-container
-                              *ngIf="
-                                item.price.value > 0;
-                                then formattedPrice;
-                                else item.chargeInformation
-                                  ? chargeInfo
-                                  : iconOk
-                              "
-                            >
-                            </ng-container>
-                            <ng-template #formattedPrice
-                              >{{ item.price.formattedValue }}
-                            </ng-template>
-                            <ng-template #chargeInfo>{{
-                              item.chargeInformation
-                            }}</ng-template>
-                            <ng-template #iconOk
-                              ><span class="fs-icon icon-ok"></span>
-                            </ng-template>
-                          </div>
-                        </li>
+                        <ng-container *ngIf="item.mandatory">
+                          <li class="accordion-list-item row">
+                            <div class="col-6 item-label">
+                              {{ item.billingTime?.name }}
+                            </div>
+                            <div class="col-6 value notice">
+                              <ng-container
+                                *ngIf="
+                                  item.price?.value > 0 ||
+                                    item.chargeInformation;
+                                  else iconOk
+                                "
+                              >
+                                <ng-container
+                                  *ngTemplateOutlet="
+                                    itemValue;
+                                    context: {
+                                      value:
+                                        item.price.value > 0
+                                          ? item.price.formattedValue
+                                          : item.chargeInformation
+                                    }
+                                  "
+                                ></ng-container>
+                              </ng-container>
+                            </div>
+                          </li>
+                        </ng-container>
                       </ng-container>
                     </ul>
                   </div>
                 </div>
               </cx-fs-accordion-item>
-              <ng-container
-                *ngIf="
-                  (order.deliveryOrderGroups[0]?.entries | slice: 1).length > 0
-                "
-              >
+              <ng-container *ngIf="checkIfRemoveableEntriesExists(order)">
                 <cx-fs-accordion-item
                   [title]="'fscommon.addedByYou' | cxTranslate"
                 >
@@ -133,11 +131,13 @@
                               | slice: 1
                           "
                         >
-                          <li class="accordion-list-item row">
-                            <div class="col-12 item-label">
-                              {{ item.product?.name }}
-                            </div>
-                          </li>
+                          <ng-container *ngIf="item.removeable">
+                            <li class="accordion-list-item row">
+                              <div class="col-12 item-label">
+                                {{ item.product?.name }}
+                              </div>
+                            </li>
+                          </ng-container>
                         </ng-container>
                       </ul>
                     </div>
@@ -343,3 +343,7 @@
     </ng-container>
   </ng-container>
 </ng-template>
+<ng-template #itemValue let-value="value">
+  {{ value }}
+</ng-template>
+<ng-template #iconOk><span class="fs-icon icon-ok"></span> </ng-template>

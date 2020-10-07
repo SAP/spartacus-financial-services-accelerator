@@ -14,10 +14,9 @@ import { FSStateWithCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
 import * as fromReducers from './../store/reducers/index';
 import { FSCheckoutService } from './checkout.service';
+import { FSCart } from '../../../occ/occ-models/occ.models';
 
 const identificationType = 'idType';
-const userId = 'userId';
-const cart: Cart = { code: 'cartId', guid: 'guid' };
 
 class CheckoutDeliveryServiceStub {
   setDeliveryMode() {}
@@ -89,5 +88,55 @@ describe('FSCheckoutServiceTest', () => {
     service.mockDeliveryMode();
 
     expect(checkoutDeliveryService.setDeliveryMode).toHaveBeenCalled();
+  });
+
+  it('should filter out entries with removeable poperty set to true', () => {
+    const mockCart: any = {
+      code: 'cartCode',
+      insuranceQuote: {
+        state: {
+          code: 'UNBIND',
+        },
+        quoteWorkflowStatus: {
+          code: 'APPROVED',
+        },
+      },
+      deliveryOrderGroups: [
+        {
+          entries: [
+            {},
+            {
+              removeable: false,
+            },
+            {
+              removeable: true,
+            },
+          ],
+        },
+      ],
+    };
+    const result = service.filterRemoveableEntries(mockCart);
+    expect(result.length).toEqual(1);
+  });
+
+  it(' filterRemoveableEntries should not return anything if etries are empty', () => {
+    const mockCart: any = {
+      code: 'cartCode',
+      insuranceQuote: {
+        state: {
+          code: 'UNBIND',
+        },
+        quoteWorkflowStatus: {
+          code: 'APPROVED',
+        },
+      },
+      deliveryOrderGroups: [
+        {
+          entries: [],
+        },
+      ],
+    };
+    const result = service.filterRemoveableEntries(mockCart);
+    expect(result).toEqual(undefined);
   });
 });

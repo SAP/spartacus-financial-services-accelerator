@@ -19,6 +19,7 @@ import { AbstractOptionsComponent } from './abstract-options/abstract-options.co
 import { DynamicSelectComponent } from './dynamic-select/dynamic-select.component';
 import { FormPopupErrorComponent } from './form-popup-error/form-popup-error.component';
 import { DataHolderComponent } from './data-holder/data-holder.component';
+import { UploadComponent } from './upload/upload.component';
 import { FormComponentService } from './form-component.service';
 
 @NgModule({
@@ -41,6 +42,7 @@ import { FormComponentService } from './form-component.service';
     CheckboxComponent,
     DynamicSelectComponent,
     FormPopupErrorComponent,
+    UploadComponent,
   ],
   entryComponents: [
     AbstractFormComponent,
@@ -57,6 +59,7 @@ import { FormComponentService } from './form-component.service';
     SeparatorComponent,
     CheckboxComponent,
     DynamicSelectComponent,
+    UploadComponent,
   ],
   exports: [
     FormComponentDirective,
@@ -76,6 +79,7 @@ import { FormComponentService } from './form-component.service';
     CheckboxComponent,
     DynamicSelectComponent,
     FormPopupErrorComponent,
+    UploadComponent,
   ],
   providers: [FormComponentService],
 })

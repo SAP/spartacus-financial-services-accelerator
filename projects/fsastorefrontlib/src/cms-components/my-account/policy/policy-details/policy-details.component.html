@@ -325,26 +325,23 @@
             {{ 'fscommon.edit' | cxTranslate }}
           </p>
         </ng-container>
-        <li
-          *ngFor="let optionalCoverage of policy.optionalProducts"
-          class="accordion-list-item row"
-        >
-          <div class="col-6 col-sm-5 item-label">
-            {{ optionalCoverage.coverageProduct.name }}
-          </div>
-          <div
-            *ngIf="optionalCoverage.coverageIsIncluded"
-            class="col-6 col-sm-5 value notice"
-          >
-            {{ 'fscommon.included' | cxTranslate }}
-          </div>
-          <div
-            *ngIf="!optionalCoverage.coverageIsIncluded"
-            class="col-6 col-sm-5 value notice"
-          >
-            {{ 'fscommon.notIncluded' | cxTranslate }}
-          </div>
-        </li>
+        <ng-container *ngFor="let optionalCoverage of policy.optionalProducts">
+          <ng-container *ngIf="!optionalCoverage.isMandatory">
+            <li class="accordion-list-item row">
+              <div class="col-6 col-sm-5 item-label">
+                {{ optionalCoverage.coverageProduct.name }}
+              </div>
+              <div
+                class="col-6 col-sm-5 value notice"
+                [innerText]="
+                  optionalCoverage.coverageIsIncluded
+                    ? ('fscommon.included' | cxTranslate)
+                    : ('fscommon.notIncluded' | cxTranslate)
+                "
+              ></div>
+            </li>
+          </ng-container>
+        </ng-container>
       </ul>
     </cx-fs-accordion-item>
     <cx-fs-accordion-item

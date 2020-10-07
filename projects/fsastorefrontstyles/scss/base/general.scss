@@ -50,7 +50,7 @@ p {
   font-size: var(--cx-text-font-size);
 }
 a {
-  @include transition();
+  @include fs-transition();
   &:hover {
     text-decoration: none;
   }

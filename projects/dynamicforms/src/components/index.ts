@@ -15,4 +15,5 @@ export * from './title/title.component';
 export * from './time/time.component';
 export * from './separator/separator.component';
 export * from './checkbox/checkbox.component';
+export * from './upload/upload.component';
 export * from './form-component.directive';
