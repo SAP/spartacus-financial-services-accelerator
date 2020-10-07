@@ -1,4 +1,10 @@
-import { Component, HostListener, Injector, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  HostListener,
+  Injector,
+  OnInit,
+} from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
 import { FileUploadService } from '../../core/services/file/file-upload.service';
@@ -15,14 +21,15 @@ import { FormService } from './../../core/services/form/form.service';
 export class UploadComponent extends AbstractFormComponent implements OnInit {
   fileList: File[] = [];
   uploadControl: AbstractControl;
-  progress = 0;
+  progress: number;
 
   constructor(
     protected appConfig: DynamicFormsConfig,
     protected languageService: LanguageService,
     protected injector: Injector,
     protected formService: FormService,
-    protected fileUploadService: FileUploadService
+    protected fileUploadService: FileUploadService,
+    protected cd: ChangeDetectorRef
   ) {
     super(appConfig, languageService, injector, formService);
   }
@@ -69,10 +76,11 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
       this.fileUploadService.uploadFile(file).subscribe(event => {
         if (event.type === HttpEventType.UploadProgress) {
           this.progress = Math.round((100 * event.loaded) / event.total);
-        } else if (event instanceof HttpResponse) {
-          this.progress = 0;
-          this.removeAll(uploadField);
+          this.cd.detectChanges();
         }
+        // can be used to reset upload control
+        // if (event instanceof HttpResponse) {
+        // }
       });
     });
   }

@@ -52,18 +52,18 @@
               (click)="removeFile(i, uploadField)"
               >&times;</span
             >
-            <!--    <div class="progress" *ngIf="progress > 0">
+            <div class="progress" *ngIf="progress">
               <div
                 class="progress-bar"
-                [style.width]="progress"
+                [style.width]="progress + '%'"
                 role="progressbar"
                 [attr.aria-valuenow]="progress"
                 aria-valuemin="0"
                 aria-valuemax="100"
               >
-                {{progress}}
+                {{ progress }}
               </div>
-            </div>-->
+            </div>
           </li>
         </ul>
       </ng-container>
