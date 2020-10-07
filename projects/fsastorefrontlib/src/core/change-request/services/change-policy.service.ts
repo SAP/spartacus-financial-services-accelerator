@@ -104,4 +104,50 @@ export class ChangePolicyService {
     );
     return changedCoverage.coverageIsIncluded;
   }
+
+  /**
+   * Method used to get insured object after applying changes provided within form data
+   *
+   * @param changeRequest The change request
+   * @param formData The form data
+   */
+  getChangedInsuredObject(changeRequest, formData) {
+    let changedInsuredObject;
+    changeRequest.insurancePolicy?.insuredObjectList?.insuredObjects?.forEach(
+      insuredObject => {
+        changedInsuredObject = {
+          insuredObjectId: insuredObject.insuredObjectId,
+          insuredObjectItems: [],
+        };
+        insuredObject.insuredObjectItems
+          .filter(item => item.changeable)
+          .forEach(item => {
+            changedInsuredObject.insuredObjectItems.push({
+              label: item.label,
+              value: formData[item.label],
+            });
+          });
+      }
+    );
+    return changedInsuredObject;
+  }
+
+  /**
+   * Method used to create new insured object instance based on provided form data during change process
+   *
+   * @param formData The form data
+   */
+  createInsuredObject(formData) {
+    const insuredObject: any = {
+      insuredObjectItems: [],
+    };
+    Object.keys(formData).forEach(key => {
+      insuredObject.insuredObjectItems.push({
+        key: key,
+        label: key,
+        value: formData[key],
+      });
+    });
+    return insuredObject;
+  }
 }

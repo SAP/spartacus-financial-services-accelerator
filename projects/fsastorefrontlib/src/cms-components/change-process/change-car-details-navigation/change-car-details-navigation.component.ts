@@ -6,8 +6,13 @@ import { ActivatedRoute } from '@angular/router';
 import { GlobalMessageService, RoutingService } from '@spartacus/core';
 import { AbstractChangeProcessStepComponent } from '../abstract-change-process-step/abstract-change-process-step.component';
 import { ChangePolicyService } from '../../../core/change-request/services/change-policy.service';
-import { YFormData, FormDataService } from '@fsa/dynamicforms';
+import {
+  YFormData,
+  FormDataService,
+  FormDataStorageService,
+} from '@fsa/dynamicforms';
 import { map, take, filter } from 'rxjs/operators';
+import { RequestType } from './../../../occ/occ-models';
 
 @Component({
   selector: 'cx-fs-change-car-details-navigation',
@@ -21,7 +26,8 @@ export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessSt
     protected routingService: RoutingService,
     protected globalMessageService: GlobalMessageService,
     protected changePolicyService: ChangePolicyService,
-    protected formDataService: FormDataService
+    protected formDataService: FormDataService,
+    protected formDataStoragetService: FormDataStorageService
   ) {
     super(
       userRequestNavigationService,
@@ -33,12 +39,10 @@ export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessSt
     );
   }
 
+  protected readonly extraProperties = ['effectiveDate'];
+
   simulateChanges(changeRequest) {
-    if (
-      changeRequest?.insurancePolicy?.insuredObjectList?.insuredObjects.length >
-      0
-    ) {
-      let changedInsuredObject;
+    if (changeRequest?.insurancePolicy) {
       const yFormData: YFormData = {};
       this.formDataService.submit(yFormData);
       this.formDataService
@@ -47,35 +51,91 @@ export class ChangeCarDetailsNavigationComponent extends AbstractChangeProcessSt
           filter(formData => formData.content !== undefined),
           take(1),
           map(submittedFormData => {
-            const changeCarDetailsForm = JSON.parse(submittedFormData.content);
-            changeRequest.insurancePolicy.insuredObjectList.insuredObjects.forEach(
-              insuredObject => {
-                changedInsuredObject = {
-                  insuredObjectId: insuredObject.insuredObjectId,
-                  insuredObjectItems: [],
-                };
-                insuredObject.insuredObjectItems
-                  .filter(item => item.changeable)
-                  .forEach(item => {
-                    changedInsuredObject.insuredObjectItems.push({
-                      label: item.label,
-                      value: changeCarDetailsForm[item.label],
-                    });
+            const changeProcessForm = JSON.parse(submittedFormData.content);
+            const requestType =
+              changeRequest.fsStepGroupDefinition?.requestType?.code;
+            if (
+              changeRequest?.insurancePolicy?.insuredObjectList?.insuredObjects
+                .length > 0
+            ) {
+              switch (requestType) {
+                case RequestType.INSURED_OBJECT_CHANGE: {
+                  const changedInsuredObject = this.changePolicyService.getChangedInsuredObject(
+                    changeRequest,
+                    changeProcessForm
+                  );
+                  this.simulateChangeRequest({
+                    requestId: changeRequest.requestId,
+                    insurancePolicy: {
+                      insuredObjectList: {
+                        insuredObjects: [changedInsuredObject],
+                      },
+                    },
+                    configurationSteps: changeRequest.configurationSteps,
                   });
+                  break;
+                }
+                case RequestType.INSURED_OBJECT_ADD: {
+                  const addedInsuredObject = this.prepareAddedInsuredObject(
+                    changeRequest,
+                    changeProcessForm
+                  );
+                  this.simulateChangeRequest({
+                    requestId: changeRequest.requestId,
+                    insurancePolicy: {
+                      insuredObjectList: {
+                        insuredObjects: [
+                          {
+                            insuredObjectId: this.getMainInsuredObjectId(
+                              changeRequest
+                            ),
+                            childInsuredObjectList: {
+                              insuredObjects: [addedInsuredObject],
+                            },
+                          },
+                        ],
+                      },
+                    },
+                    configurationSteps: changeRequest.configurationSteps,
+                  });
+                  break;
+                }
               }
-            );
-            this.simulateChangeRequest({
-              requestId: changeRequest.requestId,
-              insurancePolicy: {
-                insuredObjectList: {
-                  insuredObjects: [changedInsuredObject],
-                },
-              },
-              configurationSteps: changeRequest.configurationSteps,
-            });
+              this.formDataStoragetService.clearFormDataIdFromLocalStorage(
+                submittedFormData.id
+              );
+            }
           })
         )
         .subscribe();
     }
+  }
+
+  protected prepareAddedInsuredObject(changeRequest, changeProcessForm) {
+    const filteredForm = Object.keys(changeProcessForm)
+      .filter(key => !this.extraProperties.includes(key))
+      .reduce((obj, key) => {
+        return {
+          ...obj,
+          [key]: changeProcessForm[key],
+        };
+      }, {});
+    const addedInsuredObject = this.changePolicyService.createInsuredObject(
+      filteredForm
+    );
+    addedInsuredObject.insuredObjectType = this.getTypeOfChidlInsuredObject(
+      changeRequest
+    );
+    return addedInsuredObject;
+  }
+
+  private getMainInsuredObjectId(changeRequest) {
+    return changeRequest.insurancePolicy?.insuredObjectList?.insuredObjects[0]
+      ?.insuredObjectId;
+  }
+
+  private getTypeOfChidlInsuredObject(changeRequest) {
+    return changeRequest.insurancePolicy?.insuredObjectList?.insuredObjects[0]
+      ?.childInsuredObjectList?.insuredObjects[0]?.insuredObjectType;
   }
 }
