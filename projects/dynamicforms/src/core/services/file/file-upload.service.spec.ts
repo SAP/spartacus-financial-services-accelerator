@@ -2,7 +2,7 @@ import { inject, TestBed } from '@angular/core/testing';
 import { AuthService, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { FileUploadService } from './file-upload.service';
 import { Observable, of } from 'rxjs';
-import { UploadConnector } from '../../connectors/upload-connector';
+import { UploadConnector } from '../../connectors/upload.connector';
 
 class MockUploadConnector {
   uploadFile(userId, file) {

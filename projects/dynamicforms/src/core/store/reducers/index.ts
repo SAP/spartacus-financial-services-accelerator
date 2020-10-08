@@ -5,11 +5,13 @@ import { FormsState } from '../state';
 import { DYNAMIC_FORMS_LOCAL_STORAGE_KEY } from './../../services/storage/form-data-storage.service';
 import * as fromFormData from './form-data.reducer';
 import * as fromFormDefinition from './form-definition.reducer';
+import * as fromUploadFiles from './upload.reducer';
 
 export function getReducers(): ActionReducerMap<FormsState> {
   return {
     formDefinition: fromFormDefinition.reducer,
     formData: fromFormData.reducer,
+    uploadFiles: fromUploadFiles.reducer,
   };
 }
 
