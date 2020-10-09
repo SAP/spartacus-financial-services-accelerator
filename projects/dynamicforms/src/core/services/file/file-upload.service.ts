@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { switchMap, take } from 'rxjs/operators';
+import { switchMap, take, tap } from 'rxjs/operators';
 import { UploadConnector } from '../../connectors/upload.connector';
 import * as fromAction from '../../store/actions';
 import { StateWithForm } from '../../store/state';
@@ -18,15 +18,15 @@ export class FileUploadService {
   uploadFile(file: File): Observable<any> {
     return this.authService.getOccUserId().pipe(
       take(1),
-      switchMap(occUserId => {
+      tap(occUserId => {
         this.store.dispatch(
           new fromAction.UploadFile({
             userId: occUserId,
             file: file,
           })
         );
-        return this.uploadConnector.uploadFile(occUserId, file);
-      })
+      }),
+      switchMap(occUserId => this.uploadConnector.uploadFile(occUserId, file))
     );
   }
 }
