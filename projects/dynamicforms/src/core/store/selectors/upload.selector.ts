@@ -1,14 +1,14 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
-import { UploadFilesState, FormsState, StateWithForm } from '../state';
+import { FilesState, FormsState, StateWithForm } from '../state';
 import { getFormState } from './feature.selector';
 
-const uploadContent = (state: UploadFilesState) => state.content;
-const uploadLoaded = (state: UploadFilesState) => state.loaded;
+const uploadContent = (state: FilesState) => state.content;
+const uploadLoaded = (state: FilesState) => state.loaded;
 
 export const getUploadFilesState: MemoizedSelector<
   StateWithForm,
-  UploadFilesState
-> = createSelector(getFormState, (state: FormsState) => state.uploadFiles);
+  FilesState
+> = createSelector(getFormState, (state: FormsState) => state.uploadedFiles);
 
 export const getUploadFiles: MemoizedSelector<
   StateWithForm,

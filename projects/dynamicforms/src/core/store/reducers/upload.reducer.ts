@@ -1,25 +1,25 @@
 import * as fromAction from '../actions';
-import { UploadFilesState } from '../state';
+import { FilesState } from '../state';
 
-export const initialState: UploadFilesState = {
+export const initialState: FilesState = {
   loaded: false,
-  content: {},
+  content: {
+    files: [],
+  },
 };
 
 export function reducer(
   state = initialState,
-  action: fromAction.UploadFilesAction
-): UploadFilesState {
+  action: fromAction.UploadFileAction
+): FilesState {
   switch (action.type) {
-    case fromAction.UPLOAD_FILES: {
-      return {
-        ...state,
-        loaded: false,
-      };
-    }
-
-    case fromAction.UPLOAD_FILES_SUCCESS: {
-      const content = { ...action.payload };
+    case fromAction.UPLOAD_FILE_SUCCESS: {
+      let content = { ...action.payload };
+      const fileContent = state.content;
+      if (content?.body?.code) {
+        fileContent.files = [...fileContent.files, content.body];
+      }
+      content = fileContent;
       return {
         ...state,
         content,
@@ -29,5 +29,5 @@ export function reducer(
   }
   return state;
 }
-export const getUploadFiles = (state: UploadFilesState) => state.content;
-export const getLoaded = (state: UploadFilesState) => state.loaded;
+export const getUploadFiles = (state: FilesState) => state.content;
+export const getLoaded = (state: FilesState) => state.loaded;

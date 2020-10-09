@@ -18,8 +18,7 @@ export function uploadConfigFactory(): StateConfig {
     state: {
       storageSync: {
         keys: {
-          [`${FORM_FEATURE}.documentUpload.code`]: StorageSyncType.LOCAL_STORAGE,
-          [`${FORM_FEATURE}.documentUpload.downloadUrl`]: StorageSyncType.LOCAL_STORAGE,
+          [`${FORM_FEATURE}.uploadedFiles.content.files`]: StorageSyncType.LOCAL_STORAGE,
         },
       },
     },

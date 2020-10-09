@@ -9,19 +9,19 @@ import * as fromActions from '../actions';
 export class UploadFilesEffects {
   @Effect()
   uploadFiles$: Observable<any> = this.actions$.pipe(
-    ofType(fromActions.UPLOAD_FILES),
-    map((action: fromActions.UploadFiles) => action.payload),
+    ofType(fromActions.UPLOAD_FILE),
+    map((action: fromActions.UploadFile) => action.payload),
     mergeMap(payload => {
-      return this.uploadConnector
-        .uploadFile(payload.userId, payload.files)
-        .pipe(
-          map((fileData: any) => {
-            return new fromActions.LoadFormDataSuccess(fileData);
-          }),
-          catchError(error => {
-            return of(new fromActions.LoadFormDataFail(JSON.stringify(error)));
-          })
-        );
+      return this.uploadConnector.uploadFile(payload.userId, payload.file).pipe(
+        map((fileData: any) => {
+          if (fileData) {
+            return new fromActions.UploadFileSuccess(fileData);
+          }
+        }),
+        catchError(error => {
+          return of(new fromActions.UploadFileFail(JSON.stringify(error)));
+        })
+      );
     })
   );
 

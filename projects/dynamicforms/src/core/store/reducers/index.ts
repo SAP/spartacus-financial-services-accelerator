@@ -11,7 +11,7 @@ export function getReducers(): ActionReducerMap<FormsState> {
   return {
     formDefinition: fromFormDefinition.reducer,
     formData: fromFormData.reducer,
-    uploadFiles: fromUploadFiles.reducer,
+    uploadedFiles: fromUploadFiles.reducer,
   };
 }
 
