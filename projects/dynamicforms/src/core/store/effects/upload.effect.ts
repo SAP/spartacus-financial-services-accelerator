@@ -12,6 +12,7 @@ export class UploadFilesEffects {
     ofType(fromActions.UPLOAD_FILE),
     map((action: fromActions.UploadFile) => action.payload),
     mergeMap(payload => {
+      console.log(payload);
       return this.uploadConnector.uploadFile(payload.userId, payload.file).pipe(
         map((fileData: any) => {
           if (fileData) {
