@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AuthService, OCC_USER_ID_CURRENT } from '@spartacus/core';
+import { AuthService } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { map, switchMap, take, tap } from 'rxjs/operators';
+import { switchMap, take } from 'rxjs/operators';
 import { UploadConnector } from '../../connectors/upload.connector';
 import * as fromAction from '../../store/actions';
 import * as uploadSelector from '../../store/selectors/upload.selector';
