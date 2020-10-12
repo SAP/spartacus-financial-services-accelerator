@@ -16,14 +16,6 @@ export class FileUploadService {
     protected store: Store<StateWithForm>
   ) {}
 
-  getFileStatus(body: any) {
-    this.store.dispatch(
-      new fromAction.UploadFileSuccess({
-        body,
-      })
-    );
-  }
-
   uploadFile(file: File): Observable<any> {
     return this.authService.getOccUserId().pipe(
       take(1),
@@ -33,9 +25,13 @@ export class FileUploadService {
     );
   }
 
-  // uploadFile(file: File): Observable<any> {
-  //   return this.uploadConnector.uploadFile(OCC_USER_ID_CURRENT, file);
-  // }
+  getFileStatus(body: any) {
+    this.store.dispatch(
+      new fromAction.UploadFileSuccess({
+        body,
+      })
+    );
+  }
 
   getUploadedDocuments(): Observable<any> {
     return this.store.select(uploadSelector.getUploadFiles);
