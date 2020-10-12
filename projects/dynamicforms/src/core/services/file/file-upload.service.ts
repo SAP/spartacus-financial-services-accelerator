@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthService, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { map, switchMap, take, tap } from 'rxjs/operators';
 import { UploadConnector } from '../../connectors/upload.connector';
 import * as fromAction from '../../store/actions';
 import * as uploadSelector from '../../store/selectors/upload.selector';
@@ -16,23 +16,26 @@ export class FileUploadService {
     protected store: Store<StateWithForm>
   ) {}
 
-  uploadFile(file: File) {
-    this.authService.getOccUserId().pipe(
-      take(1),
-      map(occUserId => {
-        this.store.dispatch(
-          new fromAction.UploadFile({
-            userId: occUserId,
-            file: file,
-          })
-        );
+  getFileStatus(body: any) {
+    this.store.dispatch(
+      new fromAction.UploadFileSuccess({
+        body,
       })
     );
   }
 
-  getFileStatus(file: File): Observable<any> {
-    return this.uploadConnector.uploadFile(OCC_USER_ID_CURRENT, file);
+  uploadFile(file: File): Observable<any> {
+    return this.authService.getOccUserId().pipe(
+      take(1),
+      switchMap(occUserId => {
+        return this.uploadConnector.uploadFile(occUserId, file);
+      })
+    );
   }
+
+  // uploadFile(file: File): Observable<any> {
+  //   return this.uploadConnector.uploadFile(OCC_USER_ID_CURRENT, file);
+  // }
 
   getUploadedDocuments(): Observable<any> {
     return this.store.select(uploadSelector.getUploadFiles);

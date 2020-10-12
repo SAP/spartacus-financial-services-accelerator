@@ -73,14 +73,14 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
 
   uploadFiles(files: File[]) {
     files.forEach(file => {
-      this.fileUploadService.uploadFile(file);
       this.subscription.add(
-        this.fileUploadService.getFileStatus(file).subscribe(event => {
-          if (event.type === HttpEventType.UploadProgress) {
+        this.fileUploadService.uploadFile(file).subscribe(event => {
+          if (event?.type === HttpEventType.UploadProgress) {
             this.progress = Math.round((100 * event.loaded) / event.total);
             this.cd.detectChanges();
           }
           if (event instanceof HttpResponse) {
+            this.fileUploadService.getFileStatus(event.body);
             this.progress = 0;
           }
         })
