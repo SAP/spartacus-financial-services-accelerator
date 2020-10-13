@@ -15,7 +15,7 @@ export function reducer(
   switch (action.type) {
     case fromAction.UPLOAD_FILE_SUCCESS: {
       let content = { ...action.payload };
-      const fileContent = state.content;
+      const fileContent = { ...state.content };
       if (content?.body?.code) {
         fileContent.files = [...fileContent.files, content.body];
       }
