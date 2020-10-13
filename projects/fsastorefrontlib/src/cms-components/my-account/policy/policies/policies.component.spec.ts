@@ -1,11 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import {
-  Cart,
-  I18nTestingModule,
-  OccConfig,
-  RoutingService,
-} from '@spartacus/core';
+import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { PolicyService } from '../../../../core/my-account/facade';
@@ -42,9 +37,6 @@ class MockPolicyService {
   loadPolicies = createSpy();
   getPolicies = createSpy();
   getLoaded = createSpy();
-  getActive(): Observable<Cart> {
-    return of();
-  }
 }
 const MockOccConfig: OccConfig = {
   context: {

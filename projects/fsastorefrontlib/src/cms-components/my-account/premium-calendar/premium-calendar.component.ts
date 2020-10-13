@@ -15,7 +15,6 @@ export class PremiumCalendarComponent implements OnInit {
 
   policies$;
   policiesLoaded$;
-  opened = false;
 
   ngOnInit() {
     this.policyService.loadPremiumCalendar();
@@ -25,5 +24,13 @@ export class PremiumCalendarComponent implements OnInit {
 
   getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
+  }
+
+  getInsurancePolicies(insurancePolicies) {
+    return [...insurancePolicies];
+  }
+
+  openPolicy(policy) {
+    policy.opened = !policy.opened;
   }
 }
