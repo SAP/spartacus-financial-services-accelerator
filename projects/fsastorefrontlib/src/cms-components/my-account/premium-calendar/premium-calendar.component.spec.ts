@@ -5,19 +5,24 @@ import { SpinnerModule } from '@spartacus/storefront';
 import { PolicyService } from '../../../core/my-account/facade';
 import { PremiumCalendarComponent } from './premium-calendar.component';
 import createSpy = jasmine.createSpy;
-import { policy } from 'projects/fsastorefrontlib/src/assets/translations/en/policy.en';
+import { of } from 'rxjs';
 
 const policy1 = {
   policyId: 'policyId',
   opened: false,
 };
 
-const policies = [policy1];
+const policies = {
+    insurancePolicies: [policy1]
+}
 
 class MockPolicyService {
   loadPremiumCalendar = createSpy();
-  getPremiumCalendar = createSpy();
   getPremiumCalendarLoaded = createSpy();
+
+  getPremiumCalendar(){
+      return of(policies);
+  }
 }
 const MockOccConfig: OccConfig = {
   context: {
@@ -65,10 +70,6 @@ describe('PremiumCalendarComponent', () => {
 
   it('should get base url', () => {
     expect(component.getBaseUrl()).toEqual('');
-  });
-
-  it('should get insurance policies', () => {
-    expect(component.getInsurancePolicies(policies).length).toEqual(1);
   });
 
   it('should open or close policy', () => {
