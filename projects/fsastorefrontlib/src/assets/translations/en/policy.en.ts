@@ -25,7 +25,6 @@ export const policy = {
         tripDestination: 'Destination',
         Travellers: 'Number of Travelers',
         tripStartDate: 'Start Date',
-        tripDetailsTravellerAges: 'Age of Travelers',
         traveller: 'Traveler\'s Name', // prettier-ignore
         costOfTrip: 'Cost of Trip',
         NoOfDays: 'Number of Days',
