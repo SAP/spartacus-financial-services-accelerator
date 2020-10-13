@@ -2,7 +2,7 @@
   {{ 'premiumCalendar.premiumCalendar' | cxTranslate }}
 </h2>
 <ng-container *ngIf="policiesLoaded$ | async; else loading">
-  <ng-container *ngIf="policies?.length > 0; else noPolicies">
+  <ng-container *ngIf="displayPolicies?.length > 0; else noPolicies">
     <div class="container-fluid d-none d-lg-block">
       <!-- Desktop Layout-->
       <div class="section-header-heading row">
@@ -12,7 +12,7 @@
         <h5 class="col">{{ 'fscommon.premium' | cxTranslate }}</h5>
         <h5 class="col">{{ 'fscommon.paymentMethod' | cxTranslate }}</h5>
       </div>
-      <div *ngFor="let policy of policies">
+      <div *ngFor="let policy of displayPolicies">
         <div
           class="premium-data-row row border boder-color-3"
           (click)="openPolicy(policy)"
@@ -104,7 +104,7 @@
     <div class="container-fluid">
       <!-- Mobile layout-->
       <div class="row">
-        <ng-container *ngFor="let policy of policies">
+        <ng-container *ngFor="let policy of displayPolicies">
           <div class="col-12 col-sm-6 d-block d-lg-none">
             <div class="cards__wrapper">
               <div class="cards__title cards__title--gradient-background">

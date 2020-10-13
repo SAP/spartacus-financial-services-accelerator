@@ -21,7 +21,7 @@ export class PremiumCalendarComponent implements OnInit, OnDestroy {
   ) {}
 
   policiesLoaded$;
-  policies = [];
+  displayPolicies = [];
 
   private subscription = new Subscription();
 
@@ -40,7 +40,7 @@ export class PremiumCalendarComponent implements OnInit, OnDestroy {
             const policyList = <any>policies;
             if (policyList?.insurancePolicies) {
               policyList.insurancePolicies.map(policy => {
-                this.policies.push({ ...policy });
+                this.displayPolicies.push({ ...policy });
               });
             }
           })

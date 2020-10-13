@@ -13,15 +13,15 @@ const policy1 = {
 };
 
 const policies = {
-    insurancePolicies: [policy1]
-}
+  insurancePolicies: [policy1],
+};
 
 class MockPolicyService {
   loadPremiumCalendar = createSpy();
   getPremiumCalendarLoaded = createSpy();
 
-  getPremiumCalendar(){
-      return of(policies);
+  getPremiumCalendar() {
+    return of(policies);
   }
 }
 const MockOccConfig: OccConfig = {
