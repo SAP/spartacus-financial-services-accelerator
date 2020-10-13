@@ -28,12 +28,6 @@ const mockHttpResponse = {
     code: '00007012',
     downloadUrl: '/medias/testFile1.pdf',
   },
-  ok: true,
-  status: 201,
-  statusText: 'OK',
-  type: 4,
-  url:
-    'https://financialservices.local:9002/occ/v2/financial/users/current/documents?fields=FULL&lang=en&curr=EUR',
 };
 
 class MockAuthService {
