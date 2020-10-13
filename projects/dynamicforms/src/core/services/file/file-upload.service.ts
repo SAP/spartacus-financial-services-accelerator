@@ -36,8 +36,4 @@ export class FileUploadService {
   getUploadedDocuments(): Observable<any> {
     return this.store.select(uploadSelector.getUploadFiles);
   }
-
-  isFileLoaded(): Observable<boolean> {
-    return this.store.select(uploadSelector.getUploadFilesLoaded);
-  }
 }

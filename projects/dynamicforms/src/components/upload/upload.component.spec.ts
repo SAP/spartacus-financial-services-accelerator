@@ -14,6 +14,7 @@ import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { FormService } from './../../core/services/form/form.service';
 
 import { UploadComponent } from './upload.component';
+import { FileUploadService } from '../../core/services/file/file-upload.service';
 
 @Component({
   // tslint:disable
@@ -86,13 +87,28 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {},
 };
 
+export class MockFileUpladService {
+  uploadFile(file: File) {
+    return of();
+  }
+  getFileStatus(body: any) {}
+  getUploadedDocuments() {
+    return of();
+  }
+  isFileLoaded() {
+    return of();
+  }
+}
+
 describe('UploadComponent', () => {
   let formService: FormService;
   let el: DebugElement;
   let component: UploadComponent;
   let fixture: ComponentFixture<UploadComponent>;
+  let mockFileUpladService: MockFileUpladService;
 
   beforeEach(async(() => {
+    mockFileUpladService = new MockFileUpladService();
     TestBed.configureTestingModule({
       declarations: [UploadComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule, I18nTestingModule],
@@ -102,6 +118,10 @@ describe('UploadComponent', () => {
         {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
+        },
+        {
+          provide: FileUploadService,
+          useValue: MockFileUpladService,
         },
         { provide: FormService, useClass: MockFormService },
       ],
