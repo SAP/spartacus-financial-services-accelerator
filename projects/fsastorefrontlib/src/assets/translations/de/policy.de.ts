@@ -26,7 +26,6 @@ export const policy = {
         tripDestination: 'Ziel',
         Travellers: 'Anzahl der Reisenden',
         tripStartDate: 'Startdatum',
-        tripDetailsTravellerAges: 'Alter der Reisenden',
         traveller: 'Reisender',
         costOfTrip: 'Reisekosten',
         NoOfDays: 'Anzahl der Reisenden',
