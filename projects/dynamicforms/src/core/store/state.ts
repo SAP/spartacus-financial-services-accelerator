@@ -25,6 +25,6 @@ export interface FormDataState {
 export interface FilesState {
   loaded: boolean;
   content: {
-    files: any[];
+    files: File[];
   };
 }

@@ -95,9 +95,6 @@ export class MockFileUpladService {
   getUploadedDocuments() {
     return of();
   }
-  isFileLoaded() {
-    return of();
-  }
 }
 
 describe('UploadComponent', () => {
