@@ -49,7 +49,6 @@ export class FormBuilderService {
     const validations = this.formValidationService.getValidatorsForField(
       fieldConfig
     );
-    console.log(value);
     return this.fb.control({ disabled, value }, validations);
   }
 }
