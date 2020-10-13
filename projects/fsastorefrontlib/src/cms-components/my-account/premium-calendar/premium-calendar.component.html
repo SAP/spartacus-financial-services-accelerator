@@ -109,7 +109,9 @@
       <div class="container-fluid">
         <!-- Mobile layout-->
         <div class="row">
-          <ng-container *ngFor="let policy of policies.insurancePolicies">
+          <ng-container
+            *ngFor="let policy of policies.insurancePolicies; let i = index"
+          >
             <div class="col-12 col-sm-6 d-block d-lg-none">
               <div class="cards__wrapper">
                 <div class="cards__title cards__title--gradient-background">
@@ -143,10 +145,10 @@
                   </div>
                   <div
                     class="container cards__data border-bottom border-color-3"
-                    (click)="opened = !opened"
+                    (click)="toggleActiveAccordion(i)"
                     [ngClass]="{
                       clickable: policy.billingData.length > 1,
-                      active: opened
+                      active: selectedIndex.includes(i)
                     }"
                   >
                     <div class="row">
@@ -204,7 +206,7 @@
                   <ng-container *ngIf="policy.billingData.length > 1">
                     <div
                       class="accordion container"
-                      [ngClass]="opened ? 'opened' : ''"
+                      [ngClass]="selectedIndex.includes(i) ? 'opened' : ''"
                     >
                       <ul class="list-data">
                         <ng-container
