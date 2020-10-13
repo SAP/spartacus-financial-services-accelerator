@@ -20,41 +20,26 @@ export class PremiumCalendarComponent implements OnInit, OnDestroy {
     protected policyService: PolicyService
   ) {}
 
+  policies$;
   policiesLoaded$;
-  displayPolicies = [];
+  selectedIndex: number[] = [];
 
   private subscription = new Subscription();
 
   ngOnInit() {
     this.policyService.loadPremiumCalendar();
+    this.policies$ = this.policyService.getPremiumCalendar();
     this.policiesLoaded$ = this.policyService.getPremiumCalendarLoaded();
-    this.getInsurancePolicies();
-  }
-
-  getInsurancePolicies() {
-    this.subscription.add(
-      this.policyService
-        .getPremiumCalendar()
-        .pipe(
-          map(policies => {
-            const policyList = <any>policies;
-            if (policyList?.insurancePolicies) {
-              policyList.insurancePolicies.map(policy => {
-                this.displayPolicies.push({ ...policy });
-              });
-            }
-          })
-        )
-        .subscribe()
-    );
   }
 
   getBaseUrl() {
     return this.config.backend.occ.baseUrl || '';
   }
 
-  openPolicy(policy) {
-    policy.opened = !policy.opened;
+  toggleActiveAccordion(index: number) {
+    this.selectedIndex.includes(index)
+      ? this.selectedIndex.splice(this.selectedIndex.indexOf(index), 1)
+      : this.selectedIndex.push(index);
   }
 
   ngOnDestroy() {
