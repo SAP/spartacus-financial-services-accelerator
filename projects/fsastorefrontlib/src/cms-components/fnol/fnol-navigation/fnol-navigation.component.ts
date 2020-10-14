@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { RoutingService } from '@spartacus/core';
-import { Observable, of, Subscription } from 'rxjs';
+import { Observable, of, Subscription, combineLatest } from 'rxjs';
 import { filter, map, switchMap } from 'rxjs/operators';
 import { ClaimService } from '../../../core/my-account/facade/claim.service';
 import {
@@ -11,6 +11,7 @@ import {
 } from '../../../core/user-request/facade';
 import { Claim, FSStepData, StepStatus } from '../../../occ/occ-models';
 import { ClaimStatus } from '../../../occ/occ-models/occ.models';
+import { FileUploadService } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'cx-fs-fnol-navigation',
@@ -22,14 +23,14 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
   configurationSteps: FSStepData[];
   activeStepData: FSStepData;
   activeStepIndex: number;
-
   constructor(
     protected userRequestService: UserRequestService,
     protected activatedRoute: ActivatedRoute,
     protected userRequestNavigationService: UserRequestNavigationService,
     protected formDataService: FormDataService,
     protected router: RoutingService,
-    protected claimService: ClaimService
+    protected claimService: ClaimService,
+    protected fileService: FileUploadService
   ) {}
 
   ngOnInit() {
@@ -100,15 +101,21 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
         StepStatus.COMPLETED
       );
     }
+
     this.subscription.add(
-      this.formDataService
-        .getSubmittedForm()
+      combineLatest([
+        this.formDataService.getSubmittedForm(),
+        this.fileService.getUploadedDocuments(),
+      ])
         .pipe(
-          switchMap(submittedFormData => {
+          map(([submittedFormData, uploadedContent]) => {
             if (submittedFormData && submittedFormData.content) {
               claimData.configurationSteps[
                 this.activeStepIndex
               ].stepContent.contentData = submittedFormData;
+              if (uploadedContent) {
+                claimData.documents = uploadedContent.files;
+              }
               this.claimService.updateClaim(
                 claimData,
                 this.activeStepIndex,

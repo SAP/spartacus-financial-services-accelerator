@@ -33,6 +33,7 @@ import { FileUploadService } from '../services/file/file-upload.service';
     FormValidationService,
     FieldDependencyResolverService,
     FormDataStorageService,
+    FileUploadService,
     OccValueListService,
     FormConnector,
     FormDataService,
