@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
@@ -23,31 +23,33 @@ describe('ChooseCoverNavigationComponent', () => {
   let fixture: ComponentFixture<ChooseCoverNavigationComponent>;
   let mockFormDataStorageService: FormDataStorageService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule],
-      declarations: [ChooseCoverNavigationComponent],
-      providers: [
-        {
-          provide: FormDataService,
-          useValue: FormDataService,
-        },
-        {
-          provide: RoutingService,
-          useValue: MockRoutingService,
-        },
-        {
-          provide: ActivatedRoute,
-          useClass: MockActivatedRoute,
-        },
-        {
-          provide: FormDataStorageService,
-          useClass: MockFormDataStorageService,
-        },
-      ],
-    }).compileComponents();
-    mockFormDataStorageService = TestBed.inject(FormDataStorageService);
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule],
+        declarations: [ChooseCoverNavigationComponent],
+        providers: [
+          {
+            provide: FormDataService,
+            useValue: FormDataService,
+          },
+          {
+            provide: RoutingService,
+            useValue: MockRoutingService,
+          },
+          {
+            provide: ActivatedRoute,
+            useClass: MockActivatedRoute,
+          },
+          {
+            provide: FormDataStorageService,
+            useClass: MockFormDataStorageService,
+          },
+        ],
+      }).compileComponents();
+      mockFormDataStorageService = TestBed.inject(FormDataStorageService);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ChooseCoverNavigationComponent);

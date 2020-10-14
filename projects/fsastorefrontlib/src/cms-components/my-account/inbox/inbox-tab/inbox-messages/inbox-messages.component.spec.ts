@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule } from '@spartacus/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { InboxService } from '../../../../../core/my-account/facade/inbox.service';
@@ -73,36 +73,38 @@ describe('InboxMessagesComponent', () => {
   let mockInboxService: MockInboxService;
   let fixture: ComponentFixture<InboxMessagesComponent>;
 
-  beforeEach(async(() => {
-    mockInboxService = new MockInboxService();
-    loadedMessages = [
-      {
-        uid: 'firstMessage',
-        read: false,
-        checked: false,
-      },
-      {
-        uid: 'secondMessage',
-        read: false,
-        checked: true,
-      },
-    ];
-
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule],
-      declarations: [
-        InboxMessagesComponent,
-        InboxTabComponent,
-        MockPaginationComponent,
-      ],
-      providers: [
+  beforeEach(
+    waitForAsync(() => {
+      mockInboxService = new MockInboxService();
+      loadedMessages = [
         {
-          provide: InboxService,
-          useValue: mockInboxService,
+          uid: 'firstMessage',
+          read: false,
+          checked: false,
         },
-      ],
-    }).compileComponents();
-  }));
+        {
+          uid: 'secondMessage',
+          read: false,
+          checked: true,
+        },
+      ];
+
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule],
+        declarations: [
+          InboxMessagesComponent,
+          InboxTabComponent,
+          MockPaginationComponent,
+        ],
+        providers: [
+          {
+            provide: InboxService,
+            useValue: mockInboxService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(InboxMessagesComponent);

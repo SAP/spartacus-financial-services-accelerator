@@ -3,7 +3,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
 import { PricingData } from '../../occ-models';
 import { OccCartAdapter } from './occ-cart.adapter';
@@ -50,45 +50,51 @@ describe('OccCartAdapter', () => {
   });
 
   describe('addToCart', () => {
-    it('should add product to cart', async(() => {
-      adapter
-        .addToCart(userId, cartId, productCode, quantity, entryNumber)
-        .subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === addToCartEndpoint && req.method === 'POST';
-      }, `POST method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        addToCartEndpoint,
-        {
-          userId,
-          cartId,
-        }
-      );
-    }));
+    it(
+      'should add product to cart',
+      waitForAsync(() => {
+        adapter
+          .addToCart(userId, cartId, productCode, quantity, entryNumber)
+          .subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === addToCartEndpoint && req.method === 'POST';
+        }, `POST method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          addToCartEndpoint,
+          {
+            userId,
+            cartId,
+          }
+        );
+      })
+    );
   });
 
   describe('startBundle', () => {
-    it('start bundle', async(() => {
-      adapter
-        .startBundle(
-          userId,
-          cartId,
-          productCode,
-          bundleTemplateId,
-          quantity,
-          pricingData
-        )
-        .subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === startBundleEndpoint && req.method === 'POST';
-      }, `POST method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        startBundleEndpoint,
-        {
-          userId,
-          cartId,
-        }
-      );
-    }));
+    it(
+      'start bundle',
+      waitForAsync(() => {
+        adapter
+          .startBundle(
+            userId,
+            cartId,
+            productCode,
+            bundleTemplateId,
+            quantity,
+            pricingData
+          )
+          .subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === startBundleEndpoint && req.method === 'POST';
+        }, `POST method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          startBundleEndpoint,
+          {
+            userId,
+            cartId,
+          }
+        );
+      })
+    );
   });
 });

@@ -3,7 +3,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
 import { QuoteActionType } from '../../occ-models';
 import { OccQuoteAdapter } from './occ-quote.adapter';
@@ -49,48 +49,57 @@ describe('OccQuoteAdapter', () => {
   });
 
   describe('getQuotes', () => {
-    it('should fetch user Quotes', async(() => {
-      adapter.getQuotes(userId).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === quotesEndpoint && req.method === 'GET';
-      }, `GET method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(quotesEndpoint, {
-        userId,
-      });
-    }));
+    it(
+      'should fetch user Quotes',
+      waitForAsync(() => {
+        adapter.getQuotes(userId).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === quotesEndpoint && req.method === 'GET';
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(quotesEndpoint, {
+          userId,
+        });
+      })
+    );
   });
 
   describe('updateQuote', () => {
-    it('should update user Quote', async(() => {
-      adapter.updateQuote(userId, cartId, quoteContent).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === updateQuoteEndpoint && req.method === 'PATCH';
-      }, `PATCH method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        updateQuoteEndpoint,
-        {
-          userId,
-          cartId,
-        }
-      );
-    }));
+    it(
+      'should update user Quote',
+      waitForAsync(() => {
+        adapter.updateQuote(userId, cartId, quoteContent).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === updateQuoteEndpoint && req.method === 'PATCH';
+        }, `PATCH method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          updateQuoteEndpoint,
+          {
+            userId,
+            cartId,
+          }
+        );
+      })
+    );
   });
 
   describe('bind quote', () => {
-    it('should bind user Quote', async(() => {
-      adapter
-        .invokeQuoteAction(userId, cartId, QuoteActionType.BIND, null)
-        .subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === quoteActionEndpoint && req.method === 'POST';
-      }, `POST method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        quoteActionEndpoint,
-        {
-          userId,
-          cartId,
-        }
-      );
-    }));
+    it(
+      'should bind user Quote',
+      waitForAsync(() => {
+        adapter
+          .invokeQuoteAction(userId, cartId, QuoteActionType.BIND, null)
+          .subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === quoteActionEndpoint && req.method === 'POST';
+        }, `POST method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          quoteActionEndpoint,
+          {
+            userId,
+            cartId,
+          }
+        );
+      })
+    );
   });
 });

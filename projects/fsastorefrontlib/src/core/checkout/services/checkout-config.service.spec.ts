@@ -6,7 +6,11 @@ import {
   RoutesConfig,
   RoutingConfigService,
 } from '@spartacus/core';
-import { CheckoutConfig, CurrentProductService } from '@spartacus/storefront';
+import {
+  CheckoutConfig,
+  CheckoutStepService,
+  CurrentProductService,
+} from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
 import { checkoutConfig } from '../../../cms-components/checkout/config/default-checkout-config';
 import { storefrontRoutesConfig } from '../../../cms-structure/routing/default-routing-config';
@@ -53,6 +57,10 @@ class MockCartService {
   }
 }
 
+class MockCheckoutStepService {
+  getPreviousCheckoutStepUrl() {}
+}
+
 const mockRoutingConfig: RoutesConfig = storefrontRoutesConfig;
 
 class MockRoutingConfigService {
@@ -78,6 +86,7 @@ describe('FSCheckoutConfigService', () => {
   let service: FSCheckoutConfigService;
   let activatedRoute: ActivatedRoute;
   let routingConfigService: RoutingConfigService;
+  let checkoutStepService: CheckoutStepService;
   let cartService: FSCartService;
 
   beforeEach(() => {
@@ -98,6 +107,10 @@ describe('FSCheckoutConfigService', () => {
           useClass: MockCartService,
         },
         {
+          provide: CheckoutStepService,
+          useClass: MockCheckoutStepService,
+        },
+        {
           provide: CurrentProductService,
           useClass: MockCurrentProductService,
         },
@@ -106,14 +119,16 @@ describe('FSCheckoutConfigService', () => {
 
     activatedRoute = TestBed.inject(ActivatedRoute);
     routingConfigService = TestBed.inject(RoutingConfigService);
+    checkoutStepService = TestBed.inject(CheckoutStepService);
     cartService = TestBed.inject(FSCartService);
 
     service = new FSCheckoutConfigService(
       mockCheckoutConfig,
       routingConfigService,
+      checkoutStepService,
       cartService
     );
-    spyOn(service, 'getPreviousCheckoutStepUrl').and.returnValue(
+    spyOn(checkoutStepService, 'getPreviousCheckoutStepUrl').and.returnValue(
       'checkout/c/insurances_auto'
     );
   });
@@ -158,6 +173,7 @@ describe('FSCheckoutConfigService', () => {
     spyOn<any>(service, 'getUrlFromStepRoute').and.returnValue('/:productCode');
     expect(service.isProductStep('productPage')).toBe(true);
   });
+
   it('should return false for non product step', () => {
     spyOn<any>(service, 'getUrlFromStepRoute').and.returnValue('/route/:code');
     expect(service.isProductStep('nonProductPage')).toBe(false);

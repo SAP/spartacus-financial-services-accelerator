@@ -83,7 +83,9 @@ import { layoutConfig } from './config/default-layout-config';
   declarations: [],
 })
 export class FSStorefrontModule {
-  static withConfig(config?: StorefrontConfig): ModuleWithProviders {
+  static withConfig(
+    config?: StorefrontConfig
+  ): ModuleWithProviders<FSStorefrontModule> {
     return {
       ngModule: FSStorefrontModule,
       providers: [provideConfig(config)],

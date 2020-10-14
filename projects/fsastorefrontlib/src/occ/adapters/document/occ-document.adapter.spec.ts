@@ -3,7 +3,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
 import { OccDocumentAdapter } from './occ-document-adapter';
 
@@ -35,9 +35,9 @@ describe('OccDocumentAdapter', () => {
       ],
     });
 
-    adapter = TestBed.get(OccDocumentAdapter);
-    httpMock = TestBed.get(HttpTestingController);
-    occEndpointService = TestBed.get(OccEndpointsService);
+    adapter = TestBed.inject(OccDocumentAdapter);
+    httpMock = TestBed.inject(HttpTestingController);
+    occEndpointService = TestBed.inject(OccEndpointsService);
     spyOn(occEndpointService, 'getUrl').and.callThrough();
   });
 
@@ -46,23 +46,26 @@ describe('OccDocumentAdapter', () => {
   });
 
   describe('getDocument', () => {
-    it('should get document', async(() => {
-      adapter.getDocument(userId, documentId).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url === documentsEndpoint &&
-          req.params.append('userId', userId) &&
-          req.params.append('documentId', documentId) &&
-          req.method === 'GET'
+    it(
+      'should get document',
+      waitForAsync(() => {
+        adapter.getDocument(userId, documentId).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return (
+            req.url === documentsEndpoint &&
+            req.params.append('userId', userId) &&
+            req.params.append('documentId', documentId) &&
+            req.method === 'GET'
+          );
+        }, `POST method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          documentsEndpoint,
+          {
+            userId,
+            documentId,
+          }
         );
-      }, `POST method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        documentsEndpoint,
-        {
-          userId,
-          documentId,
-        }
-      );
-    }));
+      })
+    );
   });
 });

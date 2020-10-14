@@ -1,6 +1,6 @@
 import { Component, DebugElement, Input } from '@angular/core';
 import {
-  async,
+  waitForAsync,
   ComponentFixture,
   TestBed,
   fakeAsync,
@@ -109,45 +109,47 @@ describe('ComparisonTablePanelComponent', () => {
   let mockFOrMDataStorageService: FormDataStorageService;
   let el: DebugElement;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [NgbTabsetModule, NgbTooltipModule, MediaModule],
-      providers: [
-        {
-          provide: CmsComponentData,
-          useValue: mockCmsComponentData,
-        },
-        {
-          provide: BillingTimeConnector,
-          useClass: MockBillingTimeConnector,
-        },
-        {
-          provide: FormDataService,
-          useClass: MockFormDataService,
-        },
-        {
-          provide: PricingService,
-          useClass: MockPricingService,
-        },
-        {
-          provide: FormDataStorageService,
-          useClass: MockFormDataStorageService,
-        },
-        {
-          provide: ActivatedRoute,
-          useClass: MockActivatedRoute,
-        },
-      ],
-      declarations: [
-        ComparisonTablePanelComponent,
-        ComparisonTablePanelItemComponent,
-      ],
-    }).compileComponents();
-    mockBillingTimeConnector = TestBed.inject(BillingTimeConnector);
-    mockFormDataService = TestBed.inject(FormDataService);
-    mockPricingService = TestBed.inject(PricingService);
-    mockFOrMDataStorageService = TestBed.inject(FormDataStorageService);
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [NgbTabsetModule, NgbTooltipModule, MediaModule],
+        providers: [
+          {
+            provide: CmsComponentData,
+            useValue: mockCmsComponentData,
+          },
+          {
+            provide: BillingTimeConnector,
+            useClass: MockBillingTimeConnector,
+          },
+          {
+            provide: FormDataService,
+            useClass: MockFormDataService,
+          },
+          {
+            provide: PricingService,
+            useClass: MockPricingService,
+          },
+          {
+            provide: FormDataStorageService,
+            useClass: MockFormDataStorageService,
+          },
+          {
+            provide: ActivatedRoute,
+            useClass: MockActivatedRoute,
+          },
+        ],
+        declarations: [
+          ComparisonTablePanelComponent,
+          ComparisonTablePanelItemComponent,
+        ],
+      }).compileComponents();
+      mockBillingTimeConnector = TestBed.inject(BillingTimeConnector);
+      mockFormDataService = TestBed.inject(FormDataService);
+      mockPricingService = TestBed.inject(PricingService);
+      mockFOrMDataStorageService = TestBed.inject(FormDataStorageService);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ComparisonTablePanelComponent);

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
   ActiveCartService,
@@ -50,31 +50,33 @@ describe('QuotesComponent', () => {
   let routingService: RoutingService;
   let cartService: ActiveCartService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule, RouterTestingModule, SpinnerModule],
-      declarations: [QuotesComponent],
-      providers: [
-        {
-          provide: QuoteService,
-          useClass: MockQuoteService,
-        },
-        {
-          provide: RoutingService,
-          useClass: MockRoutingService,
-        },
-        {
-          provide: OccConfig,
-          useValue: MockOccConfig,
-        },
-        {
-          provide: ActiveCartService,
-          useClass: MockActiveCartService,
-        },
-      ],
-    }).compileComponents();
-    cartService = TestBed.inject(ActiveCartService);
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule, RouterTestingModule, SpinnerModule],
+        declarations: [QuotesComponent],
+        providers: [
+          {
+            provide: QuoteService,
+            useClass: MockQuoteService,
+          },
+          {
+            provide: RoutingService,
+            useClass: MockRoutingService,
+          },
+          {
+            provide: OccConfig,
+            useValue: MockOccConfig,
+          },
+          {
+            provide: ActiveCartService,
+            useClass: MockActiveCartService,
+          },
+        ],
+      }).compileComponents();
+      cartService = TestBed.inject(ActiveCartService);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(QuotesComponent);

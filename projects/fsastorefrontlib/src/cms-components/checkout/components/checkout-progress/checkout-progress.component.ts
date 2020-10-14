@@ -5,10 +5,10 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { RoutingConfigService, RoutingService } from '@spartacus/core';
 import {
   CheckoutConfig,
   CheckoutProgressComponent,
+  CheckoutStepService,
   CurrentProductService,
 } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
@@ -32,22 +32,20 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
   implements OnInit, OnDestroy {
   constructor(
     protected config: CheckoutConfig,
-    protected routingService: RoutingService,
-    protected routingConfigService: RoutingConfigService,
     protected activatedRoute: ActivatedRoute,
     protected categoryService: CategoryService,
     protected cartService: FSCartService,
     protected productService: CurrentProductService,
+    protected checkoutStepService: CheckoutStepService,
     public checkoutConfigService: FSCheckoutConfigService
   ) {
-    super(config, routingService, routingConfigService);
+    super(checkoutStepService);
   }
   private subscription = new Subscription();
   activeCategory$: Observable<string>;
   activeProduct$: Observable<FSProduct>;
 
   ngOnInit() {
-    super.ngOnInit();
     this.setActiveCategory();
     this.filterSteps();
     this.subscription.add(
@@ -136,14 +134,20 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
         .pipe(
           filter(activeCategory => activeCategory !== ''),
           map(activeCategory => {
-            this.checkoutConfigService.steps = this.steps.filter(step => {
-              return (
-                !(<FSCheckoutStep>step).restrictedCategories ||
-                (<FSCheckoutStep>step).restrictedCategories.indexOf(
-                  activeCategory
-                ) === -1
-              );
-            });
+            this.steps$
+              .pipe(
+                map((steps: FSCheckoutStep[]) => {
+                  this.checkoutConfigService.steps = steps.filter(step => {
+                    return (
+                      !(<FSCheckoutStep>step).restrictedCategories ||
+                      (<FSCheckoutStep>step).restrictedCategories.indexOf(
+                        activeCategory
+                      ) === -1
+                    );
+                  });
+                })
+              )
+              .subscribe();
             this.setActiveStepIndex();
           })
         )

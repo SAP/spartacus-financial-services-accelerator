@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
@@ -117,46 +117,48 @@ describe('ChangeCoverageComponent', () => {
   let mockRoutingService: RoutingService;
   let globalMessageService: GlobalMessageService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [NgbTooltipModule, I18nTestingModule, ReactiveFormsModule],
-      providers: [
-        { provide: ChangeRequestService, useClass: MockChangeRequestService },
-        {
-          provide: UserRequestNavigationService,
-          useClass: MockUserRequestNavigationService,
-        },
-        {
-          provide: RoutingService,
-          useClass: MockRoutingService,
-        },
-        {
-          provide: GlobalMessageService,
-          useClass: GlobalMessageServiceMock,
-        },
-        {
-          provide: ChangePolicyService,
-          useClass: MockChangePolicyService,
-        },
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            routeConfig: {
-              path: 'testPath',
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [NgbTooltipModule, I18nTestingModule, ReactiveFormsModule],
+        providers: [
+          { provide: ChangeRequestService, useClass: MockChangeRequestService },
+          {
+            provide: UserRequestNavigationService,
+            useClass: MockUserRequestNavigationService,
+          },
+          {
+            provide: RoutingService,
+            useClass: MockRoutingService,
+          },
+          {
+            provide: GlobalMessageService,
+            useClass: GlobalMessageServiceMock,
+          },
+          {
+            provide: ChangePolicyService,
+            useClass: MockChangePolicyService,
+          },
+          {
+            provide: ActivatedRoute,
+            useValue: {
+              routeConfig: {
+                path: 'testPath',
+              },
             },
           },
-        },
-      ],
-      declarations: [ChangeCoverageComponent, MockMediaComponent],
-    }).compileComponents();
+        ],
+        declarations: [ChangeCoverageComponent, MockMediaComponent],
+      }).compileComponents();
 
-    mockUserRequestNavigationService = TestBed.inject(
-      UserRequestNavigationService
-    );
-    mockRoutingService = TestBed.inject(RoutingService);
-    globalMessageService = TestBed.inject(GlobalMessageService);
-    mockChangeRequestService = TestBed.inject(ChangeRequestService);
-  }));
+      mockUserRequestNavigationService = TestBed.inject(
+        UserRequestNavigationService
+      );
+      mockRoutingService = TestBed.inject(RoutingService);
+      globalMessageService = TestBed.inject(GlobalMessageService);
+      mockChangeRequestService = TestBed.inject(ChangeRequestService);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ChangeCoverageComponent);

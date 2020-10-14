@@ -1,5 +1,5 @@
 import { Component, DebugElement, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import { CmsComponent, CmsComponentConnector } from '@spartacus/core';
@@ -79,37 +79,39 @@ describe('CMSFormSubmitComponent', () => {
   let mockFormDataService: FormDataService;
   let mockFormDataStorageService: FormDataStorageService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [
-        CMSFormSubmitComponent,
-        MockFormComponent,
-        MockSpinnerComponent,
-      ],
-      providers: [
-        {
-          provide: CmsComponentData,
-          useValue: MockCmsComponentData,
-        },
-        {
-          provide: CmsComponentConnector,
-          useClass: MockCmsComponentConnector,
-        },
-        {
-          provide: FormDataService,
-          useClass: MockFormDataService,
-        },
-        {
-          provide: FormDataStorageService,
-          useClass: MockFormDataStorageService,
-        },
-      ],
-    }).compileComponents();
-    mockCmsComponentConnector = TestBed.inject(CmsComponentConnector);
-    mockFormDataService = TestBed.inject(FormDataService);
-    mockFormDataStorageService = TestBed.inject(FormDataStorageService);
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [RouterTestingModule],
+        declarations: [
+          CMSFormSubmitComponent,
+          MockFormComponent,
+          MockSpinnerComponent,
+        ],
+        providers: [
+          {
+            provide: CmsComponentData,
+            useValue: MockCmsComponentData,
+          },
+          {
+            provide: CmsComponentConnector,
+            useClass: MockCmsComponentConnector,
+          },
+          {
+            provide: FormDataService,
+            useClass: MockFormDataService,
+          },
+          {
+            provide: FormDataStorageService,
+            useClass: MockFormDataStorageService,
+          },
+        ],
+      }).compileComponents();
+      mockCmsComponentConnector = TestBed.inject(CmsComponentConnector);
+      mockFormDataService = TestBed.inject(FormDataService);
+      mockFormDataStorageService = TestBed.inject(FormDataStorageService);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CMSFormSubmitComponent);

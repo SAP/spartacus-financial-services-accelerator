@@ -26,7 +26,7 @@ class MockDocumentConnector {
 describe('DocumentServiceTest', () => {
   let service: DocumentService;
   let authService: MockAuthService;
-  let documentConnector: MockDocumentConnector;
+  let documentConnector: DocumentConnector;
 
   beforeEach(() => {
     authService = new MockAuthService();
@@ -39,10 +39,8 @@ describe('DocumentServiceTest', () => {
         { provide: DocumentConnector, useClass: MockDocumentConnector },
       ],
     });
-    service = TestBed.get(DocumentService as Type<DocumentService>);
-    documentConnector = TestBed.get(
-      DocumentConnector as Type<DocumentConnector>
-    );
+    service = TestBed.inject(DocumentService);
+    documentConnector = TestBed.inject(DocumentConnector);
   });
 
   it('should check if DocumentService is injected', inject(

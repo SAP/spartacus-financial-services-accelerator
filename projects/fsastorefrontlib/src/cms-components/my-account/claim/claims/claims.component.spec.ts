@@ -1,5 +1,5 @@
 import { Component, DebugElement, Pipe, PipeTransform } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { StoreModule } from '@ngrx/store';
@@ -110,30 +110,32 @@ describe('ClaimsComponent', () => {
   let routingService: RoutingService;
   let el: DebugElement;
 
-  beforeEach(async(() => {
-    mockUserRequestService = new MockUserRequestService();
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule, FormsModule, StoreModule.forRoot({})],
-      providers: [
-        { provide: ClaimService, useClass: MockClaimService },
-        { provide: OccConfig, useValue: mockOccModuleConfig },
-        { provide: UserRequestService, useValue: mockUserRequestService },
-        { provide: RoutingService, useClass: MockRoutingService },
-        {
-          provide: ModalService,
-          useValue: modalService,
-        },
-      ],
-      declarations: [
-        ClaimsComponent,
-        MockCxSpinnerComponent,
-        MockParseDatePipe,
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      mockUserRequestService = new MockUserRequestService();
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule, FormsModule, StoreModule.forRoot({})],
+        providers: [
+          { provide: ClaimService, useClass: MockClaimService },
+          { provide: OccConfig, useValue: mockOccModuleConfig },
+          { provide: UserRequestService, useValue: mockUserRequestService },
+          { provide: RoutingService, useClass: MockRoutingService },
+          {
+            provide: ModalService,
+            useValue: modalService,
+          },
+        ],
+        declarations: [
+          ClaimsComponent,
+          MockCxSpinnerComponent,
+          MockParseDatePipe,
+        ],
+      }).compileComponents();
 
-    routingService = TestBed.inject(RoutingService);
-    claimService = TestBed.inject(ClaimService);
-  }));
+      routingService = TestBed.inject(RoutingService);
+      claimService = TestBed.inject(ClaimService);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ClaimsComponent);

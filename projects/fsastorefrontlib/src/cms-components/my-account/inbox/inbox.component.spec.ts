@@ -1,5 +1,5 @@
 import { Component, DebugElement, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import {
   AuthRedirectService,
@@ -89,39 +89,45 @@ describe('InboxComponent', () => {
     uid: 'test',
   };
 
-  beforeEach(async(() => {
-    mockInboxService = new MockInboxService();
-    mockCmsService = new MockCmsService();
-    mockInboxDataService = new MockInboxDataService();
+  beforeEach(
+    waitForAsync(() => {
+      mockInboxService = new MockInboxService();
+      mockCmsService = new MockCmsService();
+      mockInboxDataService = new MockInboxDataService();
 
-    TestBed.configureTestingModule({
-      imports: [NgbNavModule, I18nTestingModule],
-      declarations: [InboxComponent, InboxTabComponent, InboxMessagesComponent],
-      providers: [
-        {
-          provide: CmsComponentData,
-          useValue: MockCmsComponentData,
-        },
-        {
-          provide: InboxService,
-          useValue: mockInboxService,
-        },
-        {
-          provide: InboxDataService,
-          useValue: mockInboxDataService,
-        },
-        {
-          provide: CmsService,
-          useValue: mockCmsService,
-        },
-        { provide: AuthService, useClass: MockAuthService },
-        {
-          provide: AuthRedirectService,
-          useClass: MockRedirectAfterAuthService,
-        },
-      ],
-    }).compileComponents();
-  }));
+      TestBed.configureTestingModule({
+        imports: [NgbNavModule, I18nTestingModule],
+        declarations: [
+          InboxComponent,
+          InboxTabComponent,
+          InboxMessagesComponent,
+        ],
+        providers: [
+          {
+            provide: CmsComponentData,
+            useValue: MockCmsComponentData,
+          },
+          {
+            provide: InboxService,
+            useValue: mockInboxService,
+          },
+          {
+            provide: InboxDataService,
+            useValue: mockInboxDataService,
+          },
+          {
+            provide: CmsService,
+            useValue: mockCmsService,
+          },
+          { provide: AuthService, useClass: MockAuthService },
+          {
+            provide: AuthRedirectService,
+            useClass: MockRedirectAfterAuthService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(InboxComponent);

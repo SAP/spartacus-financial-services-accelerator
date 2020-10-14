@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule, OccConfig } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
 import { FSCheckoutService } from './../../../../core/checkout/facade/checkout.service';
@@ -32,26 +32,28 @@ describe('OrderConfirmationComponent', () => {
   let checkoutService: FSCheckoutService;
   let translationService: FSTranslationService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [SpinnerModule, AccordionModule, I18nTestingModule],
-      declarations: [OrderConfirmationComponent],
-      providers: [
-        {
-          provide: FSCheckoutService,
-          useClass: FSCheckoutServiceStub,
-        },
-        {
-          provide: OccConfig,
-          useValue: MockOccModuleConfig,
-        },
-        {
-          provide: FSTranslationService,
-          useClass: MockFSTranslationService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [SpinnerModule, AccordionModule, I18nTestingModule],
+        declarations: [OrderConfirmationComponent],
+        providers: [
+          {
+            provide: FSCheckoutService,
+            useClass: FSCheckoutServiceStub,
+          },
+          {
+            provide: OccConfig,
+            useValue: MockOccModuleConfig,
+          },
+          {
+            provide: FSTranslationService,
+            useClass: MockFSTranslationService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(OrderConfirmationComponent);

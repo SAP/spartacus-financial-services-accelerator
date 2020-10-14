@@ -1,5 +1,5 @@
 import { Component, Input, Pipe, PipeTransform } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { I18nTestingModule } from '@spartacus/core';
 import { of } from 'rxjs';
@@ -53,28 +53,30 @@ describe('FNOLProgressBarComponent', () => {
   let mockUserRequestService: MockUserRequestService;
   let mockClaimService: MockClaimService;
 
-  beforeEach(async(() => {
-    mockUserRequestService = new MockUserRequestService();
-    mockClaimService = new MockClaimService();
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule, RouterTestingModule],
-      declarations: [
-        FNOLProgressBarComponent,
-        MockUrlPipe,
-        MockProgressBarComponent,
-      ],
-      providers: [
-        {
-          provide: UserRequestService,
-          useValue: mockUserRequestService,
-        },
-        {
-          provide: ClaimService,
-          useValue: mockClaimService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      mockUserRequestService = new MockUserRequestService();
+      mockClaimService = new MockClaimService();
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule, RouterTestingModule],
+        declarations: [
+          FNOLProgressBarComponent,
+          MockUrlPipe,
+          MockProgressBarComponent,
+        ],
+        providers: [
+          {
+            provide: UserRequestService,
+            useValue: mockUserRequestService,
+          },
+          {
+            provide: ClaimService,
+            useValue: mockClaimService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FNOLProgressBarComponent);

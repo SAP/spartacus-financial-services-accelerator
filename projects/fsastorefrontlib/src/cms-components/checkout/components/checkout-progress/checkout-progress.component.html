@@ -4,47 +4,44 @@
       <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
         {{ 'fscommon.checkout.' + activeCategory | cxTranslate }}
       </h2>
-
-      <section *ngIf="routerState$ | async as routerState">
-        <div class="progress-wrapper mt-4">
-          <div class="d-flex flex-wrap">
+      <div class="progress-wrapper mt-4">
+        <div class="d-flex flex-wrap">
+          <div
+            class="progress-inner-wrapper flex-grow-1 flex-shrink-1 text-center"
+            *ngFor="let step of checkoutConfigService.steps; let i = index"
+          >
             <div
-              class="progress-inner-wrapper flex-grow-1 flex-shrink-1 text-center"
-              *ngFor="let step of checkoutConfigService.steps; let i = index"
+              class="d-flex progress-node"
+              [ngClass]="{
+                ' is-active': i === activeStepIndex,
+                ' is-disabled':
+                  i > activeStepIndex ||
+                  (i < activeStepIndex && (isQuoteBound() | async) == true)
+              }"
+              [routerLink]="
+                {
+                  cxRoute: step.routeName,
+                  params:
+                    isProductStep(step) && (activeProduct$ | async)?.code
+                      ? { code: (activeProduct$ | async)?.code }
+                      : { code: activeCategory }
+                } | cxUrl
+              "
             >
               <div
-                class="d-flex progress-node"
-                [ngClass]="{
-                  ' is-active': i === activeStepIndex,
-                  ' is-disabled':
-                    i > activeStepIndex ||
-                    (i < activeStepIndex && (isQuoteBound() | async) == true)
-                }"
-                [routerLink]="
-                  {
-                    cxRoute: step.routeName,
-                    params:
-                      isProductStep(step) && (activeProduct$ | async)?.code
-                        ? { code: (activeProduct$ | async)?.code }
-                        : { code: activeCategory }
-                  } | cxUrl
-                "
-              >
-                <div
-                  class="step"
-                  [ngClass]="[
-                    activeStepIndex > i ? 'fs-icon visited' : 'step-number'
-                  ]"
-                  [attr.data-step]="i + 1"
-                ></div>
-                <p class="label position-relative mb-2">
-                  {{ step.name | cxTranslate }}
-                </p>
-              </div>
+                class="step"
+                [ngClass]="[
+                  activeStepIndex > i ? 'fs-icon visited' : 'step-number'
+                ]"
+                [attr.data-step]="i + 1"
+              ></div>
+              <p class="label position-relative mb-2">
+                {{ step.name | cxTranslate }}
+              </p>
             </div>
           </div>
         </div>
-      </section>
+      </div>
     </div>
   </div>
 </div>

@@ -7,7 +7,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { OccEndpointsService, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { OccCsTicketAdapter } from './occ-cs-ticket.adapter';
 
@@ -49,27 +49,33 @@ describe('OccCsTicketAdapter', () => {
   });
 
   describe('createCsTicketForAgent', () => {
-    it('create customer support ticket', async(() => {
-      adapter
-        .createCsTicketForAgent(undefined, OCC_USER_ID_CURRENT, ticketData)
-        .subscribe();
-      const mockReq = httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === csTicketEndpoint && req.method === 'POST';
-      }, `POST method and url`);
-      expect(mockReq.cancelled).toBeFalsy();
-      expect(mockReq.request.responseType).toEqual('json');
-    }));
+    it(
+      'create customer support ticket',
+      waitForAsync(() => {
+        adapter
+          .createCsTicketForAgent(undefined, OCC_USER_ID_CURRENT, ticketData)
+          .subscribe();
+        const mockReq = httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === csTicketEndpoint && req.method === 'POST';
+        }, `POST method and url`);
+        expect(mockReq.cancelled).toBeFalsy();
+        expect(mockReq.request.responseType).toEqual('json');
+      })
+    );
 
-    it('create customer support ticket for specific agent', async(() => {
-      adapter
-        .createCsTicketForAgent(agentId, OCC_USER_ID_CURRENT, ticketData)
-        .subscribe();
-      const mockReq = httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === csTicketEndpoint && req.method === 'POST';
-      }, `POST method and url`);
-      expect(mockReq.cancelled).toBeFalsy();
-      expect(mockReq.request.responseType).toEqual('json');
-    }));
+    it(
+      'create customer support ticket for specific agent',
+      waitForAsync(() => {
+        adapter
+          .createCsTicketForAgent(agentId, OCC_USER_ID_CURRENT, ticketData)
+          .subscribe();
+        const mockReq = httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === csTicketEndpoint && req.method === 'POST';
+        }, `POST method and url`);
+        expect(mockReq.cancelled).toBeFalsy();
+        expect(mockReq.request.responseType).toEqual('json');
+      })
+    );
 
     it('should throw an error', () => {
       let response: any;

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -79,38 +79,40 @@ describe('ContactAgentFormComponent', () => {
   let globalMessageService: GlobalMessageService;
   let mockRoutingService: RoutingService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ContactAgentFormComponent, MockUrlPipe],
-      imports: [I18nTestingModule, RouterTestingModule, ReactiveFormsModule],
-      providers: [
-        {
-          provide: UserService,
-          useClass: MockedUserService,
-        },
-        {
-          provide: AgentSearchService,
-          useValue: mockAgentSearchService,
-        },
-        {
-          provide: ActivatedRoute,
-          useClass: ActivatedRouteMock,
-        },
-        {
-          provide: GlobalMessageService,
-          useClass: MockGlobalMessageService,
-        },
-        {
-          provide: RoutingService,
-          useClass: MockRoutingService,
-        },
-        {
-          provide: CsTicketService,
-          useClass: MockCsTicketService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ContactAgentFormComponent, MockUrlPipe],
+        imports: [I18nTestingModule, RouterTestingModule, ReactiveFormsModule],
+        providers: [
+          {
+            provide: UserService,
+            useClass: MockedUserService,
+          },
+          {
+            provide: AgentSearchService,
+            useValue: mockAgentSearchService,
+          },
+          {
+            provide: ActivatedRoute,
+            useClass: ActivatedRouteMock,
+          },
+          {
+            provide: GlobalMessageService,
+            useClass: MockGlobalMessageService,
+          },
+          {
+            provide: RoutingService,
+            useClass: MockRoutingService,
+          },
+          {
+            provide: CsTicketService,
+            useClass: MockCsTicketService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ContactAgentFormComponent);
