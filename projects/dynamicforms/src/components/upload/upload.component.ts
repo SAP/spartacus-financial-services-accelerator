@@ -22,6 +22,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   fileList: File[] = [];
   uploadControl: AbstractControl;
   progress: number;
+  files = {};
 
   constructor(
     protected appConfig: DynamicFormsConfig,
@@ -35,8 +36,11 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   }
   @HostListener('change', ['$event'])
   handleFiles(event) {
-    // Reset when user is choosing files again!
+    // Reset when user is choosing files again
     this.fileList = [];
+    this.files = {
+      [this.config.name]: [],
+    };
     if (
       this.config.accept.toString() === event.target.accept &&
       this.config.multiple === event.target.multiple &&
@@ -80,8 +84,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
             this.cd.detectChanges();
           }
           if (event instanceof HttpResponse) {
-            this.fileUploadService.getFileStatus(event.body);
             this.progress = 0;
+            this.handleFileResponse(event);
           }
         })
       );
@@ -109,5 +113,12 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     this.fileList = [];
     uploadField.value = null;
     this.setValueAndValidate(this.fileList);
+  }
+
+  protected handleFileResponse(event) {
+    this.fileUploadService.setFileInStore(event.body);
+    const fileCode = event.body.code;
+    this.files[this.config.name].push(fileCode);
+    this.uploadControl.setValue(this.files);
   }
 }

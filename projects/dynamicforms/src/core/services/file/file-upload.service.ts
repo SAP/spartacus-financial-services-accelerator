@@ -25,7 +25,7 @@ export class FileUploadService {
     );
   }
 
-  getFileStatus(body: any) {
+  setFileInStore(body: any) {
     this.store.dispatch(
       new fromAction.UploadFileSuccess({
         body,
