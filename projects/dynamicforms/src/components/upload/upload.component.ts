@@ -58,11 +58,6 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     this.uploadControl = this.group.get(this.config.name);
   }
 
-  protected setValueAndValidate(value: File[]) {
-    this.uploadControl.setValue(value);
-    this.uploadControl.markAsTouched({ onlySelf: true });
-  }
-
   convertFileSize(bytes: number) {
     const sizes = ['Bytes', 'KB', 'MB'];
     const i = Number(Math.floor(Math.log(bytes) / Math.log(1024)));
@@ -112,17 +107,22 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     this.setValueAndValidate(this.fileList);
   }
 
+  protected setValueAndValidate(value: File[]) {
+    this.uploadControl.setValue(value);
+    this.uploadControl.markAsTouched({ onlySelf: true });
+  }
+
   protected handleFileResponse(event) {
     this.fileUploadService.setFileInStore(event.body);
     const fileCode = event.body.code;
-    this.files[this.config.name].push(fileCode);
+    this.files[this.config.fieldType].push(fileCode);
     this.uploadControl.setValue(this.files);
   }
 
   protected resetFileList() {
     this.fileList = [];
     this.files = {
-      [this.config.name]: [],
+      [this.config.fieldType]: [],
     };
     this.fileUploadService.resetFiles();
   }

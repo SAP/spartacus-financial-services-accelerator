@@ -87,7 +87,7 @@ describe('FileUploadService', () => {
   });
 
   it('should get status of file being uploaded', () => {
-    service.getFileStatus(mockBody);
+    service.setFileInStore(mockBody);
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.UploadFileSuccess({
         body: mockBody,

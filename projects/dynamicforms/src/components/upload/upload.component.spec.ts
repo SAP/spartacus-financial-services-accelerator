@@ -15,6 +15,7 @@ import { FormService } from './../../core/services/form/form.service';
 
 import { UploadComponent } from './upload.component';
 import { FileUploadService } from '../../core/services/file/file-upload.service';
+import { HttpResponse } from '@angular/common/http';
 
 @Component({
   // tslint:disable
@@ -83,18 +84,37 @@ const mockEvent = {
   },
 };
 
+const mockHttpResponse = {
+  body: {
+    code: '00007012',
+    downloadUrl: '/medias/testFile1.pdf',
+  },
+  type: 4,
+};
+
+const mockInProgressHttpResponse = {
+  body: {
+    code: '00007012',
+    downloadUrl: '/medias/testFile1.pdf',
+  },
+  loaded: 100,
+  total: 200,
+  type: 1,
+};
+
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {},
 };
 
 export class MockFileUpladService {
   uploadFile(file: File) {
-    return of();
+    return of(mockInProgressHttpResponse);
   }
-  getFileStatus(body: any) {}
+  setFileInStore(body: any) {}
   getUploadedDocuments() {
     return of();
   }
+  resetFiles() {}
 }
 
 describe('UploadComponent', () => {
@@ -102,10 +122,9 @@ describe('UploadComponent', () => {
   let el: DebugElement;
   let component: UploadComponent;
   let fixture: ComponentFixture<UploadComponent>;
-  let mockFileUpladService: MockFileUpladService;
+  let fileUpladService: FileUploadService;
 
   beforeEach(async(() => {
-    mockFileUpladService = new MockFileUpladService();
     TestBed.configureTestingModule({
       declarations: [UploadComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule, I18nTestingModule],
@@ -118,7 +137,7 @@ describe('UploadComponent', () => {
         },
         {
           provide: FileUploadService,
-          useValue: MockFileUpladService,
+          useClass: MockFileUpladService,
         },
         { provide: FormService, useClass: MockFormService },
       ],
@@ -128,6 +147,7 @@ describe('UploadComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(UploadComponent);
     formService = TestBed.inject(FormService);
+    fileUpladService = TestBed.inject(FileUploadService);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
     component.config = mockField;
@@ -161,6 +181,15 @@ describe('UploadComponent', () => {
     component.handleFiles(mockEvent);
     component.removeAll(mockEvent.target);
     expect(component.fileList.length).toEqual(0);
+  });
+
+  it('should start upload files', () => {
+    component.ngOnInit();
+    component.handleFiles(mockEvent);
+    component.uploadFiles(mockEvent.target.files);
+    spyOn(fileUpladService, 'uploadFile').and.callThrough();
+    fixture.detectChanges();
+    expect(component.progress).toEqual(50);
   });
 
   it('should display bytes when value is less than 1024', () => {

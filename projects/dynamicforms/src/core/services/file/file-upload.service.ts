@@ -25,7 +25,7 @@ export class FileUploadService {
     );
   }
 
-  resetFiles() {
+  resetFiles(): void {
     this.store.dispatch(new fromAction.ResetFileSuccess({}));
   }
 
