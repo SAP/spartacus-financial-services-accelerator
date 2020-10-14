@@ -25,6 +25,10 @@ export class FileUploadService {
     );
   }
 
+  resetFiles() {
+    this.store.dispatch(new fromAction.ResetFileSuccess({}));
+  }
+
   setFileInStore(body: any) {
     this.store.dispatch(
       new fromAction.UploadFileSuccess({

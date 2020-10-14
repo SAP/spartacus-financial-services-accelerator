@@ -26,6 +26,9 @@ export function reducer(
         loaded: true,
       };
     }
+    case fromAction.RESET_FILE_SUCCESS: {
+      state = initialState;
+    }
   }
   return state;
 }

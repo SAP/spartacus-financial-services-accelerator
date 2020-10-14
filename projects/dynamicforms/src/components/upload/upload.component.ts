@@ -37,10 +37,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   @HostListener('change', ['$event'])
   handleFiles(event) {
     // Reset when user is choosing files again
-    this.fileList = [];
-    this.files = {
-      [this.config.name]: [],
-    };
+    this.resetFileList();
     if (
       this.config.accept.toString() === event.target.accept &&
       this.config.multiple === event.target.multiple &&
@@ -120,5 +117,13 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     const fileCode = event.body.code;
     this.files[this.config.name].push(fileCode);
     this.uploadControl.setValue(this.files);
+  }
+
+  protected resetFileList() {
+    this.fileList = [];
+    this.files = {
+      [this.config.name]: [],
+    };
+    this.fileUploadService.resetFiles();
   }
 }

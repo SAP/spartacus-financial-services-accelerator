@@ -149,7 +149,6 @@ export class ClaimService {
     const stepData = Object.assign({}, claim.configurationSteps[stepIndex], {
       status: stepStatus,
     });
-
     this.authService
       .getOccUserId()
       .pipe(take(1))

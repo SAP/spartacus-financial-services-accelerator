@@ -103,7 +103,11 @@ export class ClaimEffects {
         payload.stepData.stepContent.contentData
       ) {
         updateClaimData = payload.stepData.stepContent.contentData;
-
+        if (payload.claimData?.documents) {
+          Object.assign(updateClaimData, {
+            documents: payload.claimData.documents,
+          });
+        }
         if (this.claimServiceData.claimData.locationOfLoss !== undefined) {
           claimDataWithLocation = Object.assign(updateClaimData, {
             locationOfLoss: this.claimServiceData.claimData.locationOfLoss.code,
