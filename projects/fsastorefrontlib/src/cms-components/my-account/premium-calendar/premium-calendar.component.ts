@@ -21,7 +21,7 @@ export class PremiumCalendarComponent implements OnInit, OnDestroy {
 
   policies$;
   policiesLoaded$;
-  selectedIndex: number[] = [];
+  selectedIndexes: number[] = [];
 
   private subscription = new Subscription();
 
@@ -36,9 +36,9 @@ export class PremiumCalendarComponent implements OnInit, OnDestroy {
   }
 
   toggleActiveAccordion(index: number) {
-    this.selectedIndex.includes(index)
-      ? this.selectedIndex.splice(this.selectedIndex.indexOf(index), 1)
-      : this.selectedIndex.push(index);
+    this.selectedIndexes.includes(index)
+      ? this.selectedIndexes.splice(this.selectedIndexes.indexOf(index), 1)
+      : this.selectedIndexes.push(index);
   }
 
   ngOnDestroy() {

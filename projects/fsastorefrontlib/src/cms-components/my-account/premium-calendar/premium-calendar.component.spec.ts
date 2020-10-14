@@ -74,8 +74,8 @@ describe('PremiumCalendarComponent', () => {
 
   it('should open and close policy accordion', () => {
     component.toggleActiveAccordion(3);
-    expect(component.selectedIndex.length).toEqual(1);
+    expect(component.selectedIndexes.length).toEqual(1);
     component.toggleActiveAccordion(3);
-    expect(component.selectedIndex.length).toEqual(0);
+    expect(component.selectedIndexes.length).toEqual(0);
   });
 });

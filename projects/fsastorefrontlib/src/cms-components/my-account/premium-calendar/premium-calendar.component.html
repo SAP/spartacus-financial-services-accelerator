@@ -21,7 +21,7 @@
             (click)="toggleActiveAccordion(i)"
             [ngClass]="{
               clickable: policy.billingData?.length > 1,
-              active: selectedIndex.includes(i)
+              active: selectedIndexes.includes(i)
             }"
           >
             <div class="col">
@@ -83,7 +83,7 @@
           <div
             class="accordion row"
             *ngIf="policy.billingData?.length > 1"
-            [ngClass]="selectedIndex.includes(i) ? 'opened' : ''"
+            [ngClass]="selectedIndexes.includes(i) ? 'opened' : ''"
           >
             <div class="container-fluid">
               <ng-container
@@ -148,7 +148,7 @@
                     (click)="toggleActiveAccordion(i)"
                     [ngClass]="{
                       clickable: policy.billingData.length > 1,
-                      active: selectedIndex.includes(i)
+                      active: selectedIndexes.includes(i)
                     }"
                   >
                     <div class="row">
@@ -206,7 +206,7 @@
                   <ng-container *ngIf="policy.billingData.length > 1">
                     <div
                       class="accordion container"
-                      [ngClass]="selectedIndex.includes(i) ? 'opened' : ''"
+                      [ngClass]="selectedIndexes.includes(i) ? 'opened' : ''"
                     >
                       <ul class="list-data">
                         <ng-container
