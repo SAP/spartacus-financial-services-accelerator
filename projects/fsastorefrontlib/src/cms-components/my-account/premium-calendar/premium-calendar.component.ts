@@ -6,7 +6,6 @@ import {
 } from '@angular/core';
 import { OccConfig } from '@spartacus/core';
 import { PolicyService } from '../../../core/my-account/facade';
-import { map } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 @Component({
