@@ -43,14 +43,12 @@ export const common = {
     banking_loans: {
       loanPurpose: 'Darlehensgrund',
       'loan-amount': 'Darlehensbetrag',
-      loanStartDate: 'Start des Darlehens',
       'loan-term': 'Laufzeit',
       numberOfApplicants: 'Anzahl der Bewerber',
       'repayment-frequency': 'Rückzahlungsvariante',
     },
     banking_fixed_term_deposit: {
       'maturity-option': 'Laufzeitverlängerung',
-      startDate: 'Startdatum',
       'term-amount': 'Investment Betrag',
       'deposit-term': 'Einzahlungsdauer',
     },
