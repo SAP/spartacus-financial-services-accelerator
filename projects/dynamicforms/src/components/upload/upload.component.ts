@@ -115,14 +115,14 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   protected handleFileResponse(event) {
     this.fileUploadService.setFileInStore(event.body);
     const fileCode = event.body.code;
-    this.files[this.config.fieldType].push(fileCode);
+    this.files[this.config.name].push(fileCode);
     this.uploadControl.setValue(this.files);
   }
 
   protected resetFileList() {
     this.fileList = [];
     this.files = {
-      [this.config.fieldType]: [],
+      [this.config.name]: [],
     };
     this.fileUploadService.resetFiles();
   }
