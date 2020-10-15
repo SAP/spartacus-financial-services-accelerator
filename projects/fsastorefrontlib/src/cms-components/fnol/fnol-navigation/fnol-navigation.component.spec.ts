@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FormDataService } from '@fsa/dynamicforms';
+import { FormDataService, FileUploadService } from '@fsa/dynamicforms';
 import {
   GlobalMessageService,
   I18nTestingModule,
@@ -54,17 +54,22 @@ export class MockUserRequestNavigationService {
   }
 }
 
+export class MockFileUploadService {
+  getUploadedDocuments() {}
+}
+
 describe('FNOLNavigationComponent', () => {
   let component: FNOLNavigationComponent;
   let fixture: ComponentFixture<FNOLNavigationComponent>;
   let mockUserRequestService: MockUserRequestService;
   let mockClaimService: MockClaimService;
   let mockUserRequestNavigationService: MockUserRequestNavigationService;
-
+  let mockFileUploadService: MockFileUploadService;
   beforeEach(async(() => {
     mockUserRequestService = new MockUserRequestService();
     mockClaimService = new MockClaimService();
     mockUserRequestNavigationService = new MockUserRequestNavigationService();
+    mockFileUploadService = new MockFileUploadService();
     TestBed.configureTestingModule({
       imports: [I18nTestingModule, RouterTestingModule],
       declarations: [FNOLNavigationComponent],
@@ -92,6 +97,10 @@ describe('FNOLNavigationComponent', () => {
         {
           provide: GlobalMessageService,
           useValue: GlobalMessageService,
+        },
+        {
+          provide: FileUploadService,
+          useValue: mockFileUploadService,
         },
         {
           provide: RoutingService,

@@ -26,6 +26,21 @@ export function reducer(
         loaded: true,
       };
     }
+    case fromAction.REMOVE_FILE_SUCCESS: {
+      const fileContent = { ...state.content };
+      const removedFileCode = action.payload;
+      fileContent.files.forEach((file, index) => {
+        if ((<any>file).code === removedFileCode) {
+          fileContent.files.splice(index, 1);
+        }
+      });
+      const content = fileContent;
+      return {
+        ...state,
+        content,
+        loaded: true,
+      };
+    }
     case fromAction.RESET_FILE_SUCCESS: {
       state = initialState;
     }
