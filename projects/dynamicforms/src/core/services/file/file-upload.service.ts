@@ -40,4 +40,22 @@ export class FileUploadService {
   getUploadedDocuments(): Observable<any> {
     return this.store.select(uploadSelector.getUploadFiles);
   }
+
+  removeFileForCode(userId: string, fileCode: string) {
+    this.store.dispatch(
+      new fromAction.RemoveFile({
+        user: userId,
+        fileCode: fileCode,
+      })
+    );
+  }
+
+  removeAllFiles(userId, fileList) {
+    if (fileList?.length > 0) {
+      fileList.forEach(file => {
+        const fileCode = file?.code;
+        this.removeFileForCode(userId, fileCode);
+      });
+    }
+  }
 }

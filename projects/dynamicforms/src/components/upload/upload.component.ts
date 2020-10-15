@@ -122,6 +122,17 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   }
 
   removeAll(uploadField) {
+    this.subscription.add(
+      this.authService
+        .getOccUserId()
+        .pipe(
+          take(1),
+          map(occUserId => {
+            this.fileUploadService.removeAllFiles(occUserId, this.fileList);
+          })
+        )
+        .subscribe()
+    );
     this.fileList = [];
     uploadField.value = null;
     this.setValueAndValidate(this.fileList);
