@@ -3,7 +3,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
 import { OccPolicyAdapter } from './occ-policy.adapter';
 
@@ -49,43 +49,55 @@ describe('OccPolicyAdapter', () => {
   });
 
   describe('getPolicies', () => {
-    it('should fetch user Policies', async(() => {
-      adapter.getPolicies(userId).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === policiesEndpoint && req.method === 'GET';
-      }, `GET method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(policiesEndpoint, {
-        userId,
-      });
-    }));
+    it(
+      'should fetch user Policies',
+      waitForAsync(() => {
+        adapter.getPolicies(userId).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === policiesEndpoint && req.method === 'GET';
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          policiesEndpoint,
+          {
+            userId,
+          }
+        );
+      })
+    );
   });
 
   describe('getPolicy', () => {
-    it('should fetch a single policy', async(() => {
-      adapter.getPolicy(userId, policyId, contractId).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === policyEndpoint && req.method === 'GET';
-      }, `GET a single policy`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(policyEndpoint, {
-        userId,
-        policyId,
-        contractId,
-      });
-    }));
+    it(
+      'should fetch a single policy',
+      waitForAsync(() => {
+        adapter.getPolicy(userId, policyId, contractId).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === policyEndpoint && req.method === 'GET';
+        }, `GET a single policy`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(policyEndpoint, {
+          userId,
+          policyId,
+          contractId,
+        });
+      })
+    );
   });
 
   describe('getPremiumCalendar', () => {
-    it('should fetch user premium calendar', async(() => {
-      adapter.getPremiumCalendar(userId).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === premiumCalendarEndpoint && req.method === 'GET';
-      }, `GET method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        premiumCalendarEndpoint,
-        {
-          userId,
-        }
-      );
-    }));
+    it(
+      'should fetch user premium calendar',
+      waitForAsync(() => {
+        adapter.getPremiumCalendar(userId).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === premiumCalendarEndpoint && req.method === 'GET';
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          premiumCalendarEndpoint,
+          {
+            userId,
+          }
+        );
+      })
+    );
   });
 });

@@ -3,7 +3,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
 import { FSStepData } from '../../occ-models/occ.models';
 import { OccUserRequestAdapter } from './occ-user-request.adapter';
@@ -54,11 +54,35 @@ describe('OccUserRequestAdapter', () => {
   });
 
   describe('getUserRequest', () => {
-    it('should fetch user request', async(() => {
-      adapter.getUserRequest(userId, requestId).subscribe();
+    it(
+      'should fetch user request',
+      waitForAsync(() => {
+        adapter.getUserRequest(userId, requestId).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === userRequestEndpoint && req.method === 'GET';
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          userRequestEndpoint,
+          {
+            userId,
+            requestId,
+          }
+        );
+      })
+    );
+  });
+
+  it(
+    'update user request',
+    waitForAsync(() => {
+      adapter.updateUserRequest(userId, requestId, stepData).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === userRequestEndpoint && req.method === 'GET';
-      }, `GET method and url`);
+        return (
+          req.url === userRequestEndpoint &&
+          req.body === stepData &&
+          req.method === 'PATCH'
+        );
+      }, `PATCH method and url`);
       expect(occEndpointService.getUrl).toHaveBeenCalledWith(
         userRequestEndpoint,
         {
@@ -66,40 +90,25 @@ describe('OccUserRequestAdapter', () => {
           requestId,
         }
       );
-    }));
-  });
-
-  it('update user request', async(() => {
-    adapter.updateUserRequest(userId, requestId, stepData).subscribe();
-    httpMock.expectOne((req: HttpRequest<any>) => {
-      return (
-        req.url === userRequestEndpoint &&
-        req.body === stepData &&
-        req.method === 'PATCH'
-      );
-    }, `PATCH method and url`);
-    expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-      userRequestEndpoint,
-      {
-        userId,
-        requestId,
-      }
-    );
-  }));
+    })
+  );
 
   describe('submit user request', () => {
-    it('should submit user request', async(() => {
-      adapter.submitUserRequest(userId, requestId).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === submitUserRequestEndpoint && req.method === 'POST';
-      }, `POST method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        submitUserRequestEndpoint,
-        {
-          userId,
-          requestId,
-        }
-      );
-    }));
+    it(
+      'should submit user request',
+      waitForAsync(() => {
+        adapter.submitUserRequest(userId, requestId).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === submitUserRequestEndpoint && req.method === 'POST';
+        }, `POST method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          submitUserRequestEndpoint,
+          {
+            userId,
+            requestId,
+          }
+        );
+      })
+    );
   });
 });

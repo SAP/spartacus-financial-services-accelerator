@@ -1,4 +1,4 @@
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { of } from 'rxjs';
 import { CsTicketConnector } from './../connectors/cs-ticket.connector';
@@ -27,18 +27,20 @@ class MockOccTicketConnector {
 describe('CsTicketService', () => {
   let mockOccTicketConnector: MockOccTicketConnector;
   let service: CsTicketService;
-  beforeEach(async(() => {
-    mockOccTicketConnector = new MockOccTicketConnector();
-    TestBed.configureTestingModule({
-      providers: [
-        {
-          provide: CsTicketConnector,
-          useValue: mockOccTicketConnector,
-        },
-      ],
-    });
-    service = TestBed.inject(CsTicketService);
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      mockOccTicketConnector = new MockOccTicketConnector();
+      TestBed.configureTestingModule({
+        providers: [
+          {
+            provide: CsTicketConnector,
+            useValue: mockOccTicketConnector,
+          },
+        ],
+      });
+      service = TestBed.inject(CsTicketService);
+    })
+  );
 
   it('should be created', () => {
     expect(service).toBeTruthy();

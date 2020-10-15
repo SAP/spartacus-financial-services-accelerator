@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
@@ -57,30 +57,32 @@ describe('PoliciesComponent', () => {
   let claimService: ClaimService;
   let routingService: RoutingService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule, RouterTestingModule, SpinnerModule],
-      declarations: [PoliciesComponent],
-      providers: [
-        {
-          provide: PolicyService,
-          useClass: MockPolicyService,
-        },
-        {
-          provide: RoutingService,
-          useClass: MockRoutingService,
-        },
-        {
-          provide: OccConfig,
-          useValue: MockOccConfig,
-        },
-        {
-          provide: ClaimService,
-          useClass: MockClaimService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule, RouterTestingModule, SpinnerModule],
+        declarations: [PoliciesComponent],
+        providers: [
+          {
+            provide: PolicyService,
+            useClass: MockPolicyService,
+          },
+          {
+            provide: RoutingService,
+            useClass: MockRoutingService,
+          },
+          {
+            provide: OccConfig,
+            useValue: MockOccConfig,
+          },
+          {
+            provide: ClaimService,
+            useClass: MockClaimService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PoliciesComponent);

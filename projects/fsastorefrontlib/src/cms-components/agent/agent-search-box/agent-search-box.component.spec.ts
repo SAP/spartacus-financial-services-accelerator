@@ -1,5 +1,5 @@
 import { Component, Input, Type } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { AgentSearchBoxComponent } from './agent-search-box.component';
@@ -25,18 +25,20 @@ describe('AgentSearchBoxComponent', () => {
   let fixture: ComponentFixture<AgentSearchBoxComponent>;
   let routingService: RoutingService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule, ReactiveFormsModule],
-      providers: [
-        {
-          provide: RoutingService,
-          useValue: { go: jasmine.createSpy() },
-        },
-      ],
-      declarations: [AgentSearchBoxComponent, MockIconComponent],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule, ReactiveFormsModule],
+        providers: [
+          {
+            provide: RoutingService,
+            useValue: { go: jasmine.createSpy() },
+          },
+        ],
+        declarations: [AgentSearchBoxComponent, MockIconComponent],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AgentSearchBoxComponent);

@@ -3,7 +3,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
 import {
   PriceAttributeGroup,
@@ -64,14 +64,20 @@ describe('OccProductPricingAdapter', () => {
   });
 
   describe('getCalculatedProductData', () => {
-    it('should return product data with price included in response', async(() => {
-      adapter.getCalculatedProductData(productCode, pricingData).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === pricingEndpoint && req.method === 'POST';
-      }, `POST method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(pricingEndpoint, {
-        productCode,
-      });
-    }));
+    it(
+      'should return product data with price included in response',
+      waitForAsync(() => {
+        adapter.getCalculatedProductData(productCode, pricingData).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === pricingEndpoint && req.method === 'POST';
+        }, `POST method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          pricingEndpoint,
+          {
+            productCode,
+          }
+        );
+      })
+    );
   });
 });

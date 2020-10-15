@@ -1,5 +1,5 @@
 import { DebugElement, PipeTransform, Pipe } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule, CmsComponent } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
 import { of, Observable, BehaviorSubject } from 'rxjs';
@@ -64,23 +64,25 @@ describe('AgentRootComponent', () => {
     uid: 'testComponent',
   };
 
-  beforeEach(async(() => {
-    mockOccAgentAConnector = new MockOccAgentConnector();
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule, AccordionModule, RouterTestingModule],
-      declarations: [AgentRootComponent, MockUrlPipe, MockMediaComponent],
-      providers: [
-        {
-          provide: CmsComponentData,
-          useValue: MockCmsComponentData,
-        },
-        {
-          provide: AgentConnector,
-          useValue: mockOccAgentAConnector,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      mockOccAgentAConnector = new MockOccAgentConnector();
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule, AccordionModule, RouterTestingModule],
+        declarations: [AgentRootComponent, MockUrlPipe, MockMediaComponent],
+        providers: [
+          {
+            provide: CmsComponentData,
+            useValue: MockCmsComponentData,
+          },
+          {
+            provide: AgentConnector,
+            useValue: mockOccAgentAConnector,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AgentRootComponent);

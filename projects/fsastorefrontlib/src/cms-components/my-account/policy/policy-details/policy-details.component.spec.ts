@@ -1,6 +1,10 @@
-import { Type } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+  I18nTestingModule,
+  OccConfig,
+  RouterState,
+  RoutingService,
+} from '@spartacus/core';
 import * as FileSaver from 'file-saver';
 import { Observable, of } from 'rxjs';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
@@ -103,31 +107,31 @@ describe('PolicyDetailsComponent', () => {
   let component: PolicyDetailsComponent;
   let fixture: ComponentFixture<PolicyDetailsComponent>;
   let changeRequestService: MockChangeRequestService;
-  let routingService: MockRoutingService;
+  let routingService: RoutingService;
   let policyService: PolicyService;
   let documentService: MockDocumentService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [AccordionModule, I18nTestingModule],
-      providers: [
-        { provide: RoutingService, useClass: MockRoutingService },
-        { provide: PolicyService, useClass: MockPolicyService },
-        { provide: OccConfig, useValue: mockOccModuleConfig },
-        { provide: ChangeRequestService, useClass: MockChangeRequestService },
-        { provide: DocumentService, useClass: MockDocumentService },
-        { provide: FSTranslationService, useClass: MockFSTranslationService },
-      ],
-      declarations: [PolicyDetailsComponent],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [AccordionModule, I18nTestingModule],
+        providers: [
+          { provide: RoutingService, useClass: MockRoutingService },
+          { provide: PolicyService, useClass: MockPolicyService },
+          { provide: OccConfig, useValue: mockOccModuleConfig },
+          { provide: ChangeRequestService, useClass: MockChangeRequestService },
+          { provide: DocumentService, useClass: MockDocumentService },
+          { provide: FSTranslationService, useClass: MockFSTranslationService },
+        ],
+        declarations: [PolicyDetailsComponent],
+      }).compileComponents();
 
-    changeRequestService = TestBed.get(
-      ChangeRequestService as Type<ChangeRequestService>
-    );
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
-    policyService = TestBed.get(PolicyService as Type<PolicyService>);
-    documentService = TestBed.get(DocumentService as Type<DocumentService>);
-  }));
+      changeRequestService = TestBed.inject(ChangeRequestService);
+      routingService = TestBed.inject(RoutingService);
+      policyService = TestBed.inject(PolicyService);
+      documentService = TestBed.inject(DocumentService);
+    })
+  );
 
   beforeEach(() => {
     spyOn(FileSaver, 'saveAs').and.stub();
@@ -148,7 +152,7 @@ describe('PolicyDetailsComponent', () => {
         state: {
           params: {},
         },
-      })
+      } as RouterState)
     );
     component.ngOnInit();
     expect(policyService.loadPolicyDetails).not.toHaveBeenCalled();
@@ -181,7 +185,7 @@ describe('PolicyDetailsComponent', () => {
       contractId,
       RequestType.INSURED_OBJECT_CHANGE
     );
-    expect(routingService.go).not.toHaveBeenCalledWith();
+    expect(routingService.go).not.toHaveBeenCalled();
   });
 
   it('should check if request type is allowed', () => {

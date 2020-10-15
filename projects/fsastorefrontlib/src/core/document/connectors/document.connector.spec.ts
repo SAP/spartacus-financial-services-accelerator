@@ -1,4 +1,3 @@
-import { Type } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { of } from 'rxjs';
@@ -26,10 +25,8 @@ describe('DocumentConnector', () => {
       providers: [{ provide: DocumentAdapter, useClass: MockDocumentAdapter }],
     });
 
-    documentConnector = TestBed.get(
-      DocumentConnector as Type<DocumentConnector>
-    );
-    documentAdapter = TestBed.get(DocumentAdapter as Type<DocumentAdapter>);
+    documentConnector = TestBed.inject(DocumentConnector);
+    documentAdapter = TestBed.inject(DocumentAdapter);
   });
 
   it('should be created', () => {

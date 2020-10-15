@@ -1,5 +1,5 @@
 import { DebugElement, Input, Directive } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   CmsComponentConnector,
   ContentSlotComponentData,
@@ -53,30 +53,32 @@ describe('CmsCustomContainerComponent', () => {
     }),
   };
 
-  beforeEach(async(() => {
-    mockCmsComponentConnector = new MockCmsComponentConnector();
-    TestBed.configureTestingModule({
-      imports: [SpinnerModule, I18nTestingModule],
-      declarations: [
-        CmsCustomContainerComponent,
-        MockComponentWrapperDirective,
-      ],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useClass: MockActivatedRoute,
-        },
-        {
-          provide: CmsComponentData,
-          useValue: MockCmsComponentData,
-        },
-        {
-          provide: CmsComponentConnector,
-          useClass: MockCmsComponentConnector,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      mockCmsComponentConnector = new MockCmsComponentConnector();
+      TestBed.configureTestingModule({
+        imports: [SpinnerModule, I18nTestingModule],
+        declarations: [
+          CmsCustomContainerComponent,
+          MockComponentWrapperDirective,
+        ],
+        providers: [
+          {
+            provide: ActivatedRoute,
+            useClass: MockActivatedRoute,
+          },
+          {
+            provide: CmsComponentData,
+            useValue: MockCmsComponentData,
+          },
+          {
+            provide: CmsComponentConnector,
+            useClass: MockCmsComponentConnector,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CmsCustomContainerComponent);

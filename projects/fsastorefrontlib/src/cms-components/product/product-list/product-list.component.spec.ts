@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { FSProductListComponent } from './product-list.component';
 import { Component, Input, PipeTransform, Pipe, Type } from '@angular/core';
@@ -60,26 +60,28 @@ describe('ProductListComponent', () => {
   let component: FSProductListComponent;
   let fixture: ComponentFixture<FSProductListComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule, I18nTestingModule, ListNavigationModule],
-      declarations: [FSProductListComponent, MockMediaComponent, MockUrlPipe],
-      providers: [
-        {
-          provide: PageLayoutService,
-          useClass: MockPageLayoutService,
-        },
-        {
-          provide: ProductListComponentService,
-          useClass: MockProductListComponentService,
-        },
-        {
-          provide: ViewConfig,
-          useClass: MockViewConfig,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [RouterTestingModule, I18nTestingModule, ListNavigationModule],
+        declarations: [FSProductListComponent, MockMediaComponent, MockUrlPipe],
+        providers: [
+          {
+            provide: PageLayoutService,
+            useClass: MockPageLayoutService,
+          },
+          {
+            provide: ProductListComponentService,
+            useClass: MockProductListComponentService,
+          },
+          {
+            provide: ViewConfig,
+            useClass: MockViewConfig,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FSProductListComponent);

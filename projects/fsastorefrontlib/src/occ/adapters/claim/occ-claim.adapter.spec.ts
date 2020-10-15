@@ -3,7 +3,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
 import { OccClaimAdapter } from './occ-claim.adapter';
 
@@ -51,55 +51,67 @@ describe('OccClaimAdapter', () => {
   });
 
   describe('getClaims', () => {
-    it('should fetch user Claims', async(() => {
-      adapter.getClaims(userId).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === claimsEndpoint && req.method === 'GET';
-      }, `GET method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(claimsEndpoint, {
-        userId,
-      });
-    }));
+    it(
+      'should fetch user Claims',
+      waitForAsync(() => {
+        adapter.getClaims(userId).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === claimsEndpoint && req.method === 'GET';
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(claimsEndpoint, {
+          userId,
+        });
+      })
+    );
   });
 
   describe('getClaim', () => {
-    it('get specified claim by id', async(() => {
-      adapter.getClaim(userId, claimId).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === claimEndpoint && req.method === 'GET';
-      }, `GET method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(claimEndpoint, {
-        userId,
-        claimId,
-      });
-    }));
+    it(
+      'get specified claim by id',
+      waitForAsync(() => {
+        adapter.getClaim(userId, claimId).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === claimEndpoint && req.method === 'GET';
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(claimEndpoint, {
+          userId,
+          claimId,
+        });
+      })
+    );
   });
 
   describe('deleteClaim', () => {
-    it('delete specified claim by id', async(() => {
-      adapter.deleteClaim(userId, claimId).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === claimEndpoint && req.method === 'DELETE';
-      }, `DELETE method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(claimEndpoint, {
-        userId,
-        claimId,
-      });
-    }));
+    it(
+      'delete specified claim by id',
+      waitForAsync(() => {
+        adapter.deleteClaim(userId, claimId).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === claimEndpoint && req.method === 'DELETE';
+        }, `DELETE method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(claimEndpoint, {
+          userId,
+          claimId,
+        });
+      })
+    );
   });
 
   describe('createClaim', () => {
-    it('create claim for specified policyId and contractId', async(() => {
-      adapter.createClaim(userId, policyNumber, contractNumber).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === createClaimEndpoint && req.method === 'POST';
-      }, `POST method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        createClaimEndpoint,
-        {
-          userId,
-        }
-      );
-    }));
+    it(
+      'create claim for specified policyId and contractId',
+      waitForAsync(() => {
+        adapter.createClaim(userId, policyNumber, contractNumber).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === createClaimEndpoint && req.method === 'POST';
+        }, `POST method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          createClaimEndpoint,
+          {
+            userId,
+          }
+        );
+      })
+    );
   });
 });

@@ -1,4 +1,4 @@
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { GeoPoint, WindowRef } from '@spartacus/core';
 import { BehaviorSubject, of } from 'rxjs';
 import { AgentConnector } from '../connectors/agent.connector';
@@ -72,24 +72,26 @@ describe('AgentSearchService', () => {
       },
     },
   };
-  beforeEach(async(() => {
-    mockOccAgentConnector = new MockOccAgentConnector();
-    TestBed.configureTestingModule({
-      providers: [
-        {
-          provide: AgentConnector,
-          useValue: mockOccAgentConnector,
-        },
-        {
-          provide: WindowRef,
-          useValue: MockWindowRef,
-        },
-      ],
-    });
-    service = TestBed.inject(AgentSearchService);
-    winRef = TestBed.inject(WindowRef);
-    service.agents = mockAgentsBS;
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      mockOccAgentConnector = new MockOccAgentConnector();
+      TestBed.configureTestingModule({
+        providers: [
+          {
+            provide: AgentConnector,
+            useValue: mockOccAgentConnector,
+          },
+          {
+            provide: WindowRef,
+            useValue: MockWindowRef,
+          },
+        ],
+      });
+      service = TestBed.inject(AgentSearchService);
+      winRef = TestBed.inject(WindowRef);
+      service.agents = mockAgentsBS;
+    })
+  );
 
   it('should be created', () => {
     expect(service).toBeTruthy();

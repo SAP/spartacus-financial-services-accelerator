@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import {
@@ -31,27 +31,29 @@ describe('DeleteClaimDialogComponent', () => {
   let claimService: ClaimService;
   let authService: AuthService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, I18nTestingModule],
-      declarations: [DeleteClaimDialogComponent],
-      providers: [
-        {
-          provide: ModalService,
-          useClass: MockModalService,
-        },
-        {
-          provide: ClaimService,
-          useClass: MockClaimService,
-        },
-        {
-          provide: AuthService,
-          useClass: MockAuthService,
-        },
-        { provide: NgbActiveModal, useValue: { open: () => {} } },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [ReactiveFormsModule, I18nTestingModule],
+        declarations: [DeleteClaimDialogComponent],
+        providers: [
+          {
+            provide: ModalService,
+            useClass: MockModalService,
+          },
+          {
+            provide: ClaimService,
+            useClass: MockClaimService,
+          },
+          {
+            provide: AuthService,
+            useClass: MockAuthService,
+          },
+          { provide: NgbActiveModal, useValue: { open: () => {} } },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DeleteClaimDialogComponent);

@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { FormDataStorageService } from '@fsa/dynamicforms';
 import { I18nTestingModule } from '@spartacus/core';
@@ -79,30 +79,32 @@ describe('BindQuoteDialogComponent', () => {
   let cartService: MockCartService;
   let formDataStorageService: MockFormDataStorageService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule],
-      declarations: [BindQuoteDialogComponent],
-      providers: [
-        {
-          provide: ModalService,
-          useClass: MockModalService,
-        },
-        {
-          provide: QuoteService,
-          useClass: MockQuoteService,
-        },
-        {
-          provide: FSCartService,
-          useClass: MockCartService,
-        },
-        {
-          provide: FormDataStorageService,
-          useClass: MockFormDataStorageService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule],
+        declarations: [BindQuoteDialogComponent],
+        providers: [
+          {
+            provide: ModalService,
+            useClass: MockModalService,
+          },
+          {
+            provide: QuoteService,
+            useClass: MockQuoteService,
+          },
+          {
+            provide: FSCartService,
+            useClass: MockCartService,
+          },
+          {
+            provide: FormDataStorageService,
+            useClass: MockFormDataStorageService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(BindQuoteDialogComponent);

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ProgressBarComponent } from './progress-bar.component';
 import { UserRequestNavigationService } from '../../core/user-request/facade/user-request-navigation.service';
@@ -31,24 +31,26 @@ describe('ProgressBarComponent', () => {
 
   let mockUserRequestNavigationService: MockUserRequestNavigationService;
   let mockActivatedRoute: MockActivatedRoute;
-  beforeEach(async(() => {
-    mockActivatedRoute = new MockActivatedRoute();
-    mockUserRequestNavigationService = new MockUserRequestNavigationService();
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      providers: [
-        {
-          provide: UserRequestNavigationService,
-          useValue: mockUserRequestNavigationService,
-        },
-        {
-          provide: ActivatedRoute,
-          useValue: mockActivatedRoute,
-        },
-      ],
-      declarations: [ProgressBarComponent, MockUrlPipe],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      mockActivatedRoute = new MockActivatedRoute();
+      mockUserRequestNavigationService = new MockUserRequestNavigationService();
+      TestBed.configureTestingModule({
+        imports: [RouterTestingModule],
+        providers: [
+          {
+            provide: UserRequestNavigationService,
+            useValue: mockUserRequestNavigationService,
+          },
+          {
+            provide: ActivatedRoute,
+            useValue: mockActivatedRoute,
+          },
+        ],
+        declarations: [ProgressBarComponent, MockUrlPipe],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProgressBarComponent);
