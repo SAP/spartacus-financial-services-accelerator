@@ -23,6 +23,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   uploadControl: AbstractControl;
   progress: number;
   files = {};
+  uploadDisable = false;
 
   constructor(
     protected appConfig: DynamicFormsConfig,
@@ -45,7 +46,6 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     ) {
       this.fileList = Array.from(event.target.files);
       this.fileList.splice(this.config.maxUploads);
-      this.uploadControl.setValue(this.fileList);
     } else {
       // triggering reset and validation if something was manipulated through DOM inspector
       // or files are violating config rules
@@ -68,6 +68,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   }
 
   uploadFiles(files: File[]) {
+    this.uploadDisable = true;
+    this.setValueAndValidate(this.fileList);
     files.forEach(file => {
       this.subscription.add(
         this.fileUploadService.uploadFile(file).subscribe(event => {
@@ -78,6 +80,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
           if (event instanceof HttpResponse) {
             this.progress = 0;
             this.handleFileResponse(event);
+            this.uploadDisable = false;
           }
         })
       );
