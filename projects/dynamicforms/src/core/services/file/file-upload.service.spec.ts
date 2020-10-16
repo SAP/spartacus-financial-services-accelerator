@@ -94,4 +94,20 @@ describe('FileUploadService', () => {
       })
     );
   });
+
+  it('should remove file by code', () => {
+    service.removeFileForCode(OCC_USER_ID_CURRENT, mockBody.code);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.RemoveFile({
+        user: OCC_USER_ID_CURRENT,
+        fileCode: mockBody.code,
+      })
+    );
+  });
+
+  it('should remove all files', () => {
+    const fileList = [{ code: 'fileCode1' }, { code: 'fileCode2' }];
+    service.removeAllFiles(OCC_USER_ID_CURRENT, fileList);
+    expect(store.dispatch).toHaveBeenCalledTimes(2);
+  });
 });

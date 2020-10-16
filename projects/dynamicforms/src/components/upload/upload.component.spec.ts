@@ -6,8 +6,13 @@ import {
   ReactiveFormsModule,
   AbstractControl,
 } from '@angular/forms';
-import { of } from 'rxjs';
-import { I18nTestingModule, LanguageService } from '@spartacus/core';
+import { of, Observable } from 'rxjs';
+import {
+  I18nTestingModule,
+  LanguageService,
+  OCC_USER_ID_CURRENT,
+  AuthService,
+} from '@spartacus/core';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
@@ -84,6 +89,12 @@ class MockFormService {
   }
 }
 
+class MockAuthService {
+  getOccUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
+  }
+}
+
 const mockFormGroup = new FormGroup({
   testUpload: new FormControl(),
 });
@@ -122,6 +133,7 @@ describe('UploadComponent', () => {
   let component: UploadComponent;
   let fixture: ComponentFixture<UploadComponent>;
   let mockfileUpladService: FileUploadService;
+  let mockAuthService: AuthService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -139,11 +151,13 @@ describe('UploadComponent', () => {
           useClass: MockFileUpladService,
         },
         { provide: FormService, useClass: MockFormService },
+        { provide: AuthService, useClass: MockAuthService },
       ],
     }).compileComponents();
     fixture = TestBed.createComponent(UploadComponent);
     formService = TestBed.inject(FormService);
     mockfileUpladService = TestBed.inject(FileUploadService);
+    mockAuthService = TestBed.inject(AuthService);
   }));
 
   beforeEach(() => {
