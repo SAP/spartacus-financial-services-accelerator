@@ -47,7 +47,7 @@
             ></span>
             <div class="row">
               <div class="col-10 col-sm-11">
-                <div class="progress h-100" *ngIf="progress">
+                <div class="progress" *ngIf="progress">
                   <div
                     class="progress-bar"
                     [style.width]="progress + '%'"
@@ -78,7 +78,6 @@
             </div>
             <div class="col-md-3 col-sm-3 col-12">
               <button
-                [disabled]="uploadDisable"
                 class="btn-primary btn-block"
                 (click)="uploadFiles(fileList)"
               >
