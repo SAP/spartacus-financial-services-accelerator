@@ -67,7 +67,7 @@
           </li>
         </ul>
         <div class="row justify-content-between">
-          <div class="col-md-3 col-sm-3 col-xs-6">
+          <div class="col-md-3 col-sm-3 col-12 mb-3 mb-sm-0">
             <button
               *ngIf="fileList.length > 1 && progress === 0"
               class="action-button btn-block"
@@ -76,7 +76,7 @@
               {{ 'forms.removeAll' | cxTranslate }}
             </button>
           </div>
-          <div class="col-md-3 col-sm-3 col-xs-6">
+          <div class="col-md-3 col-sm-3 col-12">
             <button
               *ngIf="progress === 0"
               class="btn-primary btn-block"
