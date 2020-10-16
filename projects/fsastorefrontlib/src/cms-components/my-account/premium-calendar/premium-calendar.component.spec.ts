@@ -72,8 +72,10 @@ describe('PremiumCalendarComponent', () => {
     expect(component.getBaseUrl()).toEqual('');
   });
 
-  it('should open or close policy', () => {
-    component.openPolicy(policy1);
-    expect(policy1.opened).toEqual(true);
+  it('should open and close policy accordion', () => {
+    component.toggleActiveAccordion(3);
+    expect(component.selectedIndexes.length).toEqual(1);
+    component.toggleActiveAccordion(3);
+    expect(component.selectedIndexes.length).toEqual(0);
   });
 });
