@@ -34,8 +34,8 @@
       </div>
 
       <ng-container *ngIf="fileList.length > 0">
-        <ul>
-          <li class="pt-3" *ngFor="let file of fileList; let i = index">
+        <ul class="mb-4">
+          <li class="pt-4" *ngFor="let file of fileList; let i = index">
             <span>{{ file?.name }}:</span>
             <span class="pl-3"> {{ convertFileSize(file.size) }}</span>
             <span
@@ -66,26 +66,27 @@
             </div>
           </li>
         </ul>
-        <div class="row justify-content-between">
-          <div class="col-md-3 col-sm-3 col-12 mb-3 mb-sm-0">
-            <button
-              *ngIf="fileList.length > 1 && progress === 0"
-              class="action-button btn-block"
-              (click)="removeAll(uploadField)"
-            >
-              {{ 'forms.removeAll' | cxTranslate }}
-            </button>
+        <ng-container *ngIf="fileList.length > 1 && progress === 0">
+          <div class="row justify-content-between">
+            <div class="col-md-3 col-sm-3 col-12 mb-3 mb-sm-0">
+              <button
+                class="action-button btn-block"
+                (click)="removeAll(uploadField)"
+              >
+                {{ 'forms.removeAll' | cxTranslate }}
+              </button>
+            </div>
+            <div class="col-md-3 col-sm-3 col-12">
+              <button
+                [disabled]="uploadDisable"
+                class="btn-primary btn-block"
+                (click)="uploadFiles(fileList)"
+              >
+                {{ 'forms.upload' | cxTranslate }}
+              </button>
+            </div>
           </div>
-          <div class="col-md-3 col-sm-3 col-12">
-            <button
-              *ngIf="progress === 0"
-              class="btn-primary btn-block"
-              (click)="uploadFiles(fileList)"
-            >
-              {{ 'forms.upload' | cxTranslate }}
-            </button>
-          </div>
-        </div>
+        </ng-container>
       </ng-container>
     </div>
     <cx-error-notice

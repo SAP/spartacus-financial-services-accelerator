@@ -23,7 +23,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   uploadControl: AbstractControl;
   progress = 0;
   files = {};
-  uploadDisable = false;
+  uploadDisable: boolean;
 
   constructor(
     protected appConfig: DynamicFormsConfig,
