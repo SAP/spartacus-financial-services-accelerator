@@ -70,6 +70,7 @@
           <div class="row justify-content-between">
             <div class="col-md-3 col-sm-3 col-12 mb-3 mb-sm-0">
               <button
+                [disabled]="uploadDisable"
                 class="action-button btn-block"
                 (click)="removeAll(uploadField)"
               >
@@ -78,6 +79,7 @@
             </div>
             <div class="col-md-3 col-sm-3 col-12">
               <button
+                [disabled]="uploadDisable"
                 class="btn-primary btn-block"
                 (click)="uploadFiles(fileList)"
               >
