@@ -36,23 +36,6 @@ const mockInProgressHttpResponse = {
   type: 1,
 };
 
-class MockFileUpladService {
-  uploadFile(_file: File) {
-    return of(mockInProgressHttpResponse);
-  }
-  setFileInStore(_body: any) {}
-  getUploadedDocuments() {
-    return of();
-  }
-  resetFiles() {}
-}
-
-class MockOccValueListService {}
-class MockLanguageService {
-  getActive() {
-    return of('en');
-  }
-}
 const mockField: FieldConfig = {
   label: {
     en: 'Test Upload',
@@ -68,12 +51,6 @@ const mockField: FieldConfig = {
 };
 
 const formControl = new FormControl('formValue');
-
-class MockFormService {
-  getFormControlForCode(): AbstractControl {
-    return formControl;
-  }
-}
 
 const mockFormGroup = new FormGroup({
   testUpload: new FormControl(),
@@ -107,6 +84,30 @@ const mockEvent = {
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {},
 };
+
+class MockFileUpladService {
+  uploadFile(_file: File) {
+    return of(mockInProgressHttpResponse);
+  }
+  setFileInStore(_body: any) {}
+  getUploadedDocuments() {
+    return of();
+  }
+  resetFiles() {}
+}
+
+class MockOccValueListService {}
+class MockLanguageService {
+  getActive() {
+    return of('en');
+  }
+}
+
+class MockFormService {
+  getFormControlForCode(): AbstractControl {
+    return formControl;
+  }
+}
 
 describe('UploadComponent', () => {
   let formService: FormService;

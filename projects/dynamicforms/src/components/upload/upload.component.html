@@ -42,8 +42,8 @@
               class="pl-3 close"
               type="button"
               (click)="removeFile(i, uploadField)"
-              >&times;</span
-            >
+              ><i class="fas fa-trash"></i
+            ></span>
             <div class="progress" *ngIf="progress">
               <div
                 class="progress-bar"
@@ -58,7 +58,6 @@
             </div>
           </li>
         </ul>
-
         <div class="row justify-content-between">
           <div class="col-md-3 col-sm-3 col-xs-6">
             <button
