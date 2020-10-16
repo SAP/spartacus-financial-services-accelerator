@@ -39,23 +39,30 @@
             <span>{{ file?.name }}:</span>
             <span class="pl-3"> {{ convertFileSize(file.size) }}</span>
             <span
-              *ngIf="!progress; else completed"
-              class="pl-3 close"
-              type="button"
+              *ngIf="!progress"
+              class="close"
+              role="button"
               (click)="removeFile(i, uploadField)"
               ><i class="fas fa-trash"></i
             ></span>
-            <div class="progress" *ngIf="progress">
-              <div
-                class="progress-bar"
-                [style.width]="progress + '%'"
-                role="progressbar"
-                [attr.aria-valuenow]="progress"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                {{ progress }}
+            <div class="row">
+              <div class="col-10 col-sm-11">
+                <div class="progress h-100" *ngIf="progress">
+                  <div
+                    class="progress-bar"
+                    [style.width]="progress + '%'"
+                    role="progressbar"
+                    [attr.aria-valuenow]="progress"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >
+                    {{ progress }}
+                  </div>
+                </div>
               </div>
+              <span class="col-2 col-sm-1 text-right" *ngIf="progress === 100"
+                ><i class="fas fa-check"></i
+              ></span>
             </div>
           </li>
         </ul>
@@ -87,6 +94,3 @@
     ></cx-error-notice>
   </div>
 </ng-container>
-<ng-template #completed>
-  <span *ngIf="progress === 100"><i class="fas fa-check"></i></span>
-</ng-template>
