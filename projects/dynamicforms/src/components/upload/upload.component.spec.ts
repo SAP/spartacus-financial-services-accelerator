@@ -31,15 +31,6 @@ class MockErrorNoticeComponent {
   @Input() parentConfig;
 }
 
-const mockCompletedHttpResponse = {
-  body: {
-    code: '00007012',
-    downloadUrl: '/medias/testFile1.pdf',
-  },
-  ok: true,
-  type: 4,
-};
-
 const mockInProgressHttpResponse = {
   body: {
     code: '00007012',
@@ -50,23 +41,6 @@ const mockInProgressHttpResponse = {
   type: 1,
 };
 
-class MockFileUpladService {
-  uploadFile(_file: File) {
-    return of(mockInProgressHttpResponse);
-  }
-  setFileInStore(_body: any) {}
-  getUploadedDocuments() {
-    return of();
-  }
-  resetFiles() {}
-}
-
-class MockOccValueListService {}
-class MockLanguageService {
-  getActive() {
-    return of('en');
-  }
-}
 const mockField: FieldConfig = {
   label: {
     en: 'Test Upload',
@@ -82,18 +56,6 @@ const mockField: FieldConfig = {
 };
 
 const formControl = new FormControl('formValue');
-
-class MockFormService {
-  getFormControlForCode(): AbstractControl {
-    return formControl;
-  }
-}
-
-class MockAuthService {
-  getOccUserId(): Observable<string> {
-    return of(OCC_USER_ID_CURRENT);
-  }
-}
 
 const mockFormGroup = new FormGroup({
   testUpload: new FormControl(),
@@ -127,6 +89,36 @@ const mockEvent = {
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {},
 };
+
+class MockFileUpladService {
+  uploadFile(_file: File) {
+    return of(mockInProgressHttpResponse);
+  }
+  setFileInStore(_body: any) {}
+  getUploadedDocuments() {
+    return of();
+  }
+  resetFiles() {}
+}
+
+class MockOccValueListService {}
+class MockLanguageService {
+  getActive() {
+    return of('en');
+  }
+}
+
+class MockFormService {
+  getFormControlForCode(): AbstractControl {
+    return formControl;
+  }
+}
+
+class MockAuthService {
+  getOccUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
+  }
+}
 
 describe('UploadComponent', () => {
   let formService: FormService;

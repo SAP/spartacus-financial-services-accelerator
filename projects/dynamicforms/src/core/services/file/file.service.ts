@@ -12,7 +12,7 @@ import { StateWithForm } from '../../store/state';
 export class FileService {
   constructor(
     protected authService: AuthService,
-    protected uploadConnector: FileConnector,
+    protected fileConnector: FileConnector,
     protected store: Store<StateWithForm>
   ) {}
 
@@ -20,7 +20,7 @@ export class FileService {
     return this.authService.getOccUserId().pipe(
       take(1),
       switchMap(occUserId => {
-        return this.uploadConnector.uploadFile(occUserId, file);
+        return this.fileConnector.uploadFile(occUserId, file);
       })
     );
   }

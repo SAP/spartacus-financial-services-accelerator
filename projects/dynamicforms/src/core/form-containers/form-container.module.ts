@@ -33,7 +33,6 @@ import { FileService } from '../services/file/file.service';
     FormValidationService,
     FieldDependencyResolverService,
     FormDataStorageService,
-    FileService,
     OccValueListService,
     FormConnector,
     FormDataService,

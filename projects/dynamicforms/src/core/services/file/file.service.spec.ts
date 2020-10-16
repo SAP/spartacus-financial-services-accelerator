@@ -8,12 +8,6 @@ import { Store, StoreModule } from '@ngrx/store';
 import { reducerProvider, reducerToken } from '../../store/reducers';
 import * as fromAction from '../../store/actions';
 
-class MockFileConnector {
-  uploadFile(userId, file) {
-    return of();
-  }
-}
-
 const blob1 = new Blob([''], { type: 'application/pdf' });
 blob1['lastModifiedDate'] = '';
 blob1['name'] = 'testFile1';
@@ -29,6 +23,12 @@ const mockHttpResponse = {
     downloadUrl: '/medias/testFile1.pdf',
   },
 };
+
+class MockFileConnector {
+  uploadFile(userId, file) {
+    return of();
+  }
+}
 
 class MockAuthService {
   getOccUserId(): Observable<string> {
@@ -86,7 +86,7 @@ describe('FileService', () => {
       .unsubscribe();
   });
 
-  it('should get status of file being uploaded', () => {
+  it('should set file in store', () => {
     service.setFileInStore(mockBody);
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.UploadFileSuccess({
