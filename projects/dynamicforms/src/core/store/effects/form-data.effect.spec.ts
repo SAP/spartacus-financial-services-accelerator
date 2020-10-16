@@ -5,7 +5,7 @@ import { StoreModule } from '@ngrx/store';
 import { AuthActions } from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
-import { FormConnector } from '../../connectors/form-connector';
+import { FormConnector } from '../../connectors/form.connector';
 import { FormDataStorageService } from '../../services/storage/form-data-storage.service';
 import * as fromActions from '../actions';
 import { YFormData } from './../../models/form-occ.models';

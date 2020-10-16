@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
-export const UPLOAD_FILE_SUCCESS = '[Upload File] Upload file Success';
-export const RESET_FILE_SUCCESS = '[Upload File] Reset file Success';
+export const UPLOAD_FILE_SUCCESS = '[File] Upload file Success';
+export const RESET_FILE_SUCCESS = '[File] Reset file Success';
 export const REMOVE_FILE = '[File] Remove File';
 export const REMOVE_FILE_SUCCESS = '[File] Remove File Success';
 export const REMOVE_FILE_FAIL = '[File] Remove File Fail';
@@ -31,7 +31,7 @@ export class RemoveFileFail implements Action {
   constructor(public payload: any) {}
 }
 
-export type UploadFileAction =
+export type FileAction =
   | UploadFileSuccess
   | ResetFileSuccess
   | RemoveFile

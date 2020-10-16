@@ -1,14 +1,14 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { AuthService, OCC_USER_ID_CURRENT } from '@spartacus/core';
-import { FileUploadService } from './file-upload.service';
+import { FileService } from './file.service';
 import { Observable, of } from 'rxjs';
-import { UploadConnector } from '../../connectors/upload.connector';
-import { StateWithForm } from './../../store/state';
+import { FileConnector } from '../../connectors/file.connector';
+import { StateWithForm } from '../../store/state';
 import { Store, StoreModule } from '@ngrx/store';
 import { reducerProvider, reducerToken } from '../../store/reducers';
 import * as fromAction from '../../store/actions';
 
-class MockUploadConnector {
+class MockFileConnector {
   uploadFile(userId, file) {
     return of();
   }
@@ -36,24 +36,24 @@ class MockAuthService {
   }
 }
 
-describe('FileUploadService', () => {
-  let service: FileUploadService;
-  let mockOccFileUploadConnector: MockUploadConnector;
+describe('FileService', () => {
+  let service: FileService;
+  let mockOccFileFileConnector: MockFileConnector;
   let store: Store<StateWithForm>;
 
   beforeEach(() => {
-    mockOccFileUploadConnector = new MockUploadConnector();
+    mockOccFileFileConnector = new MockFileConnector();
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
         StoreModule.forFeature('form', reducerToken),
       ],
       providers: [
-        FileUploadService,
+        FileService,
         reducerProvider,
         {
-          provide: UploadConnector,
-          useValue: mockOccFileUploadConnector,
+          provide: FileConnector,
+          useValue: mockOccFileFileConnector,
         },
         {
           provide: AuthService,
@@ -61,14 +61,14 @@ describe('FileUploadService', () => {
         },
       ],
     });
-    service = TestBed.inject(FileUploadService);
+    service = TestBed.inject(FileService);
     store = TestBed.inject(Store);
     spyOn(store, 'dispatch').and.callThrough();
   });
 
-  it('should check if FileUploadService is injected', inject(
-    [FileUploadService],
-    (fileUploadService: FileUploadService) => {
+  it('should check if FileService is injected', inject(
+    [FileService],
+    (fileUploadService: FileService) => {
       expect(fileUploadService).toBeTruthy();
     }
   ));

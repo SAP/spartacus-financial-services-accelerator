@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { select, Store, StoreModule } from '@ngrx/store';
-import * as fromActions from '../actions/upload.action';
+import * as fromActions from '../actions/file.action';
 import * as fromReducers from '../reducers/index';
 import { StateWithForm } from '../state';
 import * as fromSelectors from './upload.selector';

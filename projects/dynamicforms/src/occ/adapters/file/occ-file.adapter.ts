@@ -3,18 +3,18 @@ import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { UploadAdapter } from '../../../core/connectors/upload.adapter';
+import { FileAdapter } from '../../../core/connectors/file.adapter';
 
 const FULL_PARAMS = 'FULL';
 
 @Injectable()
-export class OccUploadAdapter implements UploadAdapter {
+export class OccFileAdapter implements FileAdapter {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService
   ) {}
 
-  uploadFiles(userId, file: File): Observable<any> {
+  uploadFile(userId, file: File): Observable<any> {
     const url = this.occEndpointService.getUrl('uploadFile', {
       userId: userId,
     });

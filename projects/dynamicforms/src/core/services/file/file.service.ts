@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AuthService } from '@spartacus/core';
 import { Observable } from 'rxjs';
+import { switchMap, take } from 'rxjs/operators';
+import { FileConnector } from '../../connectors/file.connector';
 import { switchMap, take, map } from 'rxjs/operators';
 import { UploadConnector } from '../../connectors/upload.connector';
 import * as fromAction from '../../store/actions';
@@ -9,10 +11,10 @@ import * as uploadSelector from '../../store/selectors/upload.selector';
 import { StateWithForm } from '../../store/state';
 
 @Injectable()
-export class FileUploadService {
+export class FileService {
   constructor(
     protected authService: AuthService,
-    protected uploadConnector: UploadConnector,
+    protected uploadConnector: FileConnector,
     protected store: Store<StateWithForm>
   ) {}
 

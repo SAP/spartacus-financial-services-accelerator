@@ -3,7 +3,7 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { AuthActions } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
-import { FormConnector } from '../../connectors/form-connector';
+import { FormConnector } from '../../connectors/form.connector';
 import { FormDataStorageService } from '../../services/storage/form-data-storage.service';
 import * as fromActions from '../actions';
 

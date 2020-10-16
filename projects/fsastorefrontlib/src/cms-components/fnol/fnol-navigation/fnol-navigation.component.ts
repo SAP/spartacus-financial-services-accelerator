@@ -11,7 +11,7 @@ import {
 } from '../../../core/user-request/facade';
 import { Claim, FSStepData, StepStatus } from '../../../occ/occ-models';
 import { ClaimStatus } from '../../../occ/occ-models/occ.models';
-import { FileUploadService } from '@fsa/dynamicforms';
+import { FileService } from '@fsa/dynamicforms';
 
 @Component({
   selector: 'cx-fs-fnol-navigation',
@@ -30,7 +30,7 @@ export class FNOLNavigationComponent implements OnInit, OnDestroy {
     protected formDataService: FormDataService,
     protected router: RoutingService,
     protected claimService: ClaimService,
-    protected fileService: FileUploadService
+    protected fileService: FileService
   ) {}
 
   ngOnInit() {

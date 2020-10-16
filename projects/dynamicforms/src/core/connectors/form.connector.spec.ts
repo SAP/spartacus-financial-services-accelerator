@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
 import { YFormData } from './../models/form-occ.models';
-import { FormConnector } from './form-connector';
+import { FormConnector } from './form.connector';
 import { FormAdapter } from './form.adapter';
 import createSpy = jasmine.createSpy;
 
