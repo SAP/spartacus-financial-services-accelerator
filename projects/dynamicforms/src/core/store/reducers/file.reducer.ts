@@ -10,7 +10,7 @@ export const initialState: FilesState = {
 
 export function reducer(
   state = initialState,
-  action: fromAction.UploadFileAction
+  action: fromAction.FileAction
 ): FilesState {
   switch (action.type) {
     case fromAction.UPLOAD_FILE_SUCCESS: {
@@ -33,4 +33,3 @@ export function reducer(
   return state;
 }
 export const getUploadFiles = (state: FilesState) => state.content;
-export const getLoaded = (state: FilesState) => state.loaded;

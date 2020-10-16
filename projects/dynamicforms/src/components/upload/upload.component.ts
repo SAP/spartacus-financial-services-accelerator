@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
 
-import { FileUploadService } from '../../core/services/file/file-upload.service';
+import { FileService } from '../../core/services/file/file.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { LanguageService } from '@spartacus/core';
 import { DynamicFormsConfig } from '../../core/config/form-config';
@@ -30,7 +30,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     protected languageService: LanguageService,
     protected injector: Injector,
     protected formService: FormService,
-    protected fileUploadService: FileUploadService,
+    protected fileUploadService: FileService,
     protected cd: ChangeDetectorRef
   ) {
     super(appConfig, languageService, injector, formService);

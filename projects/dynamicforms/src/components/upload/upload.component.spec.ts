@@ -12,7 +12,7 @@ import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { FormService } from './../../core/services/form/form.service';
-import { FileUploadService } from '../../core/services/file/file-upload.service';
+import { FileService } from '../../core/services/file/file.service';
 
 import { UploadComponent } from './upload.component';
 
@@ -121,7 +121,7 @@ describe('UploadComponent', () => {
   let formService: FormService;
   let component: UploadComponent;
   let fixture: ComponentFixture<UploadComponent>;
-  let mockfileUpladService: FileUploadService;
+  let mockfileUpladService: FileService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -135,7 +135,7 @@ describe('UploadComponent', () => {
           useValue: mockDynamicFormsConfig,
         },
         {
-          provide: FileUploadService,
+          provide: FileService,
           useClass: MockFileUpladService,
         },
         { provide: FormService, useClass: MockFormService },
@@ -143,7 +143,7 @@ describe('UploadComponent', () => {
     }).compileComponents();
     fixture = TestBed.createComponent(UploadComponent);
     formService = TestBed.inject(FormService);
-    mockfileUpladService = TestBed.inject(FileUploadService);
+    mockfileUpladService = TestBed.inject(FileService);
   }));
 
   beforeEach(() => {

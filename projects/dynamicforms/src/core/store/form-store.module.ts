@@ -13,7 +13,7 @@ import { effects } from './effects/index';
 import { metaReducers, reducerProvider, reducerToken } from './reducers/index';
 import { FORM_FEATURE } from './state';
 
-export function uploadConfigFactory(): StateConfig {
+export function fileConfigFactory(): StateConfig {
   const config: StateConfig = {
     state: {
       storageSync: {
@@ -35,7 +35,7 @@ export function uploadConfigFactory(): StateConfig {
       metaReducers,
     }),
     EffectsModule.forFeature(effects),
-    ConfigModule.withConfigFactory(uploadConfigFactory),
+    ConfigModule.withConfigFactory(fileConfigFactory),
   ],
   providers: [reducerProvider],
 })

@@ -1,7 +1,7 @@
 import { Action } from '@ngrx/store';
 
-export const UPLOAD_FILE_SUCCESS = '[Upload File] Upload file Success';
-export const RESET_FILE_SUCCESS = '[Upload File] Reset file Success';
+export const UPLOAD_FILE_SUCCESS = '[File] Upload file Success';
+export const RESET_FILE_SUCCESS = '[File] Reset file Success';
 
 export class UploadFileSuccess implements Action {
   readonly type = UPLOAD_FILE_SUCCESS;
@@ -13,4 +13,4 @@ export class ResetFileSuccess implements Action {
   constructor(public payload: any) {}
 }
 
-export type UploadFileAction = UploadFileSuccess | ResetFileSuccess;
+export type FileAction = UploadFileSuccess | ResetFileSuccess;

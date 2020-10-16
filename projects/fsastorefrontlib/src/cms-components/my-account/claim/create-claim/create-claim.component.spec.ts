@@ -7,7 +7,7 @@ import { StoreModule } from '@ngrx/store';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { SelectedPolicy } from '../../../../core/my-account/services';
 import createSpy = jasmine.createSpy;
-import { FileUploadService } from '@fsa/dynamicforms';
+import { FileService } from '@fsa/dynamicforms';
 
 class MockRoutingService {
   go = createSpy();
@@ -25,7 +25,7 @@ class MockClaimService {
   }
 }
 
-class MockFileUploadService {
+class MockFileService {
   uploadFile(file: File): Observable<any> {
     return of();
   }
@@ -47,7 +47,7 @@ describe('CreateClaimComponent', () => {
   let fixture: ComponentFixture<CreateClaimComponent>;
   let mockClaimService: MockClaimService;
   let mockRoutingService: MockRoutingService;
-  let mockFileUploadService: FileUploadService;
+  let mockFileService: FileService;
 
   beforeEach(async(() => {
     mockClaimService = new MockClaimService();
@@ -56,7 +56,7 @@ describe('CreateClaimComponent', () => {
       imports: [I18nTestingModule, FormsModule, StoreModule.forRoot({})],
       providers: [
         { provide: ClaimService, useValue: mockClaimService },
-        { provide: FileUploadService, useClass: MockFileUploadService },
+        { provide: FileService, useClass: MockFileService },
 
         { provide: RoutingService, useValue: mockRoutingService },
       ],
@@ -65,7 +65,7 @@ describe('CreateClaimComponent', () => {
   }));
 
   beforeEach(() => {
-    mockFileUploadService = TestBed.inject(FileUploadService);
+    mockFileService = TestBed.inject(FileService);
     fixture = TestBed.createComponent(CreateClaimComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

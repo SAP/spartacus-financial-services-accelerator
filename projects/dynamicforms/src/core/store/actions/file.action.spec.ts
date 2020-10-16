@@ -1,10 +1,8 @@
-import * as fromUpload from './upload.action';
+import * as fromUpload from './file.action';
 
 describe('upload and reset files', () => {
   it('should return an upload action', () => {
-    expect(fromUpload.UPLOAD_FILE_SUCCESS).toBe(
-      '[Upload File] Upload file Success'
-    );
+    expect(fromUpload.UPLOAD_FILE_SUCCESS).toBe('[File] Upload file Success');
   });
 });
 describe('upload and reset files', () => {

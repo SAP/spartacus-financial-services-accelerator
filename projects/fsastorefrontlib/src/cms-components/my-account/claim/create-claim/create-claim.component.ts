@@ -4,7 +4,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { FileUploadService } from '@fsa/dynamicforms';
+import { FileService } from '@fsa/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -20,7 +20,7 @@ export class CreateClaimComponent implements OnInit, OnDestroy {
   constructor(
     protected claimService: ClaimService,
     protected routingService: RoutingService,
-    protected fileUploadService: FileUploadService
+    protected fileUploadService: FileService
   ) {}
 
   subscription = new Subscription();

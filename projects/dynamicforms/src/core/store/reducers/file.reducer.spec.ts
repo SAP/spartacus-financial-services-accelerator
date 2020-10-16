@@ -1,5 +1,5 @@
 import * as fromAction from '../actions';
-import * as fromReducer from './upload.reducer';
+import * as fromReducer from './file.reducer';
 
 const mockFile = {
   code: '00007011',
