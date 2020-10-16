@@ -31,7 +31,7 @@ export class OccFileAdapter implements FileAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  removeFile(userId: string, fileCode: string): Observable<any> {
+  removeFileForUserAndCode(userId: string, fileCode: string): Observable<any> {
     const url = this.occEndpointService.getUrl('removeFile', {
       userId,
       fileCode,

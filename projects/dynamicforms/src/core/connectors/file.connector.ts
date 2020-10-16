@@ -13,6 +13,6 @@ export class FileConnector {
   }
 
   removeFile(userId: string, fileCode: string): Observable<any> {
-    return this.uploadAdapter.removeFile(userId, fileCode);
+    return this.uploadAdapter.removeFileForUserAndCode(userId, fileCode);
   }
 }

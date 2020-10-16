@@ -99,6 +99,8 @@ class MockFileUpladService {
     return of();
   }
   resetFiles() {}
+  removeFileForCode() {}
+  removeAllFiles() {}
 }
 
 class MockOccValueListService {}
@@ -175,20 +177,6 @@ describe('UploadComponent', () => {
     expect(component.uploadControl.value).toBe(null);
   });
 
-  it('should remove individual files', () => {
-    component.handleFiles(mockEvent);
-    component.removeFile(0, mockEvent.target.files);
-    expect(component.fileList.length).toBe(1);
-    component.removeFile(0, mockEvent.target.files);
-    expect(component.fileList.length).toBe(0);
-  });
-
-  it('should remove all Files', () => {
-    component.handleFiles(mockEvent);
-    component.removeAll(mockEvent.target);
-    expect(component.fileList.length).toEqual(0);
-  });
-
   it('should start upload files', () => {
     component.uploadFiles(mockEvent.target.files);
     spyOn(mockfileUpladService, 'uploadFile').and.callThrough();
@@ -199,5 +187,17 @@ describe('UploadComponent', () => {
     mockField.maxFileSize = 30;
     component.handleFiles(mockEvent);
     expect(component.convertFileSize(mockField.maxFileSize)).toBe('30 Bytes');
+  });
+
+  it('should remove single file', () => {
+    component.handleFiles(mockEvent);
+    component.removeFile(0, mockField);
+    expect(component.fileList.length).toEqual(1);
+  });
+
+  it('should remove all files', () => {
+    component.handleFiles(mockEvent);
+    component.removeAll(mockField);
+    expect(component.fileList.length).toEqual(0);
   });
 });

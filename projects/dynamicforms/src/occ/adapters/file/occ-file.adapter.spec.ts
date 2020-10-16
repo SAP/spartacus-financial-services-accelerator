@@ -67,9 +67,9 @@ describe('OccFileAdapter', () => {
     mockReq.flush('');
   });
 
-  it('should remove file', () => {
+  it('should be able to remove file', () => {
     occFileAdapter
-      .removeFile(OCC_USER_ID_CURRENT, mockFileCode)
+      .removeFileForUserAndCode(OCC_USER_ID_CURRENT, mockFileCode)
       .subscribe(result => expect(result).toEqual(''));
     const mockReq = httpMock.expectOne(req => {
       return req.method === 'DELETE';

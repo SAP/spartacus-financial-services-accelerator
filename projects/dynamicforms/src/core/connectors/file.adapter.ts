@@ -15,5 +15,8 @@ export abstract class FileAdapter {
    * @param userId The user id
    * @param fileCode The file code
    */
-  abstract removeFile(userId: string, fileCode: string): Observable<any>;
+  abstract removeFileForUserAndCode(
+    userId: string,
+    fileCode: string
+  ): Observable<any>;
 }
