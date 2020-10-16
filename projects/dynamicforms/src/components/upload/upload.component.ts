@@ -21,7 +21,7 @@ import { FormService } from './../../core/services/form/form.service';
 export class UploadComponent extends AbstractFormComponent implements OnInit {
   fileList: File[] = [];
   uploadControl: AbstractControl;
-  progress: number;
+  progress = 0;
   files = {};
   uploadDisable = false;
 
