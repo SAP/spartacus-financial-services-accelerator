@@ -11,4 +11,8 @@ export class FileConnector {
   uploadFile(userId: string, file: File): Observable<any> {
     return this.uploadAdapter.uploadFile(userId, file);
   }
+
+  removeFile(userId: string, fileCode: string): Observable<any> {
+    return this.uploadAdapter.removeFile(userId, fileCode);
+  }
 }

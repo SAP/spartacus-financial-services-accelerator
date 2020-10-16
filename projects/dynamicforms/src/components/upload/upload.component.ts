@@ -32,7 +32,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     protected injector: Injector,
     protected formService: FormService,
     protected fileUploadService: FileService,
-    protected cd: ChangeDetectorRef
+    protected cd: ChangeDetectorRef,
+    protected authService: AuthService
   ) {
     super(appConfig, languageService, injector, formService);
   }

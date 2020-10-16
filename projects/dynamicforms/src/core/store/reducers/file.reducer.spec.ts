@@ -28,4 +28,14 @@ describe('File Upload Reducer', () => {
       expect(finalState).toEqual(initialState);
     });
   });
+  describe('REMOVE_FILE_SUCCESS', () => {
+    it('should remove file from current state', () => {
+      const createSuccess = new fromAction.UploadFileSuccess(mockContent);
+      const createState = fromReducer.reducer(initialState, createSuccess);
+
+      const removeSuccess = new fromAction.RemoveFileSuccess(mockFile.code);
+      const removeState = fromReducer.reducer(createState, removeSuccess);
+      expect(removeState.content.files.length).toEqual(0);
+    });
+  });
 });

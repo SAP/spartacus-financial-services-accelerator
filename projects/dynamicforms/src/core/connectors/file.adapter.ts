@@ -8,7 +8,6 @@ export abstract class FileAdapter {
    * @param files The file object
    */
   abstract uploadFile(userId: string, file: File): Observable<any>;
-  abstract uploadFiles(userId: string, files: File): Observable<any>;
 
   /**
    * Abstract method used to remove file by code

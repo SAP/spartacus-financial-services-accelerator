@@ -4,8 +4,6 @@ import { AuthService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { FileConnector } from '../../connectors/file.connector';
-import { switchMap, take, map } from 'rxjs/operators';
-import { UploadConnector } from '../../connectors/upload.connector';
 import * as fromAction from '../../store/actions';
 import * as uploadSelector from '../../store/selectors/upload.selector';
 import { StateWithForm } from '../../store/state';

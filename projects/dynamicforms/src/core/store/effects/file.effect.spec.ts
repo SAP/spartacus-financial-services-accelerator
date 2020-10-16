@@ -7,8 +7,8 @@ import { Observable, of, throwError } from 'rxjs';
 import * as fromActions from '../actions';
 import * as fromUserReducers from './../../store/reducers/index';
 import * as fromEffects from './file.effect';
-import { UploadConnector } from '../../connectors/upload.connector';
 import { OCC_USER_ID_CURRENT } from '@spartacus/core';
+import { FileConnector } from '../../connectors/file.connector';
 
 const mockFileCode = 'testFileCode';
 const mockDownloadUrl = 'mockDownloadUrl';
@@ -21,13 +21,15 @@ class MockFileConnector {
   uploadFile() {
     return of(mockFile);
   }
-  removeFile() {}
+  removeFile() {
+    return of(mockFile.code);
+  }
 }
 
 describe('File Effects', () => {
-  let actions$: Observable<fromActions.UploadFileAction>;
+  let actions$: Observable<fromActions.FileAction>;
   let effects: fromEffects.FilesEffect;
-  let mockFileConnector: UploadConnector;
+  let mockFileConnector: FileConnector;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -38,7 +40,7 @@ describe('File Effects', () => {
       ],
       providers: [
         {
-          provide: UploadConnector,
+          provide: FileConnector,
           useClass: MockFileConnector,
         },
 
@@ -47,7 +49,7 @@ describe('File Effects', () => {
       ],
     });
     effects = TestBed.inject(fromEffects.FilesEffect);
-    mockFileConnector = TestBed.inject(UploadConnector);
+    mockFileConnector = TestBed.inject(FileConnector);
   });
 
   describe('removeFile$', () => {

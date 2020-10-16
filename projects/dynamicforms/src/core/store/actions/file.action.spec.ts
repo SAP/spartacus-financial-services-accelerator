@@ -1,4 +1,5 @@
 import * as fromUpload from './file.action';
+import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 
 describe('upload and reset files', () => {
   it('should return an upload action', () => {
