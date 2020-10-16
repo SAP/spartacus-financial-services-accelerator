@@ -4,6 +4,7 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
+import { FileUploadService } from '@fsa/dynamicforms';
 import { RoutingService } from '@spartacus/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -18,7 +19,8 @@ import { SelectedPolicy } from '../../../../core/my-account/services/claim-data.
 export class CreateClaimComponent implements OnInit, OnDestroy {
   constructor(
     protected claimService: ClaimService,
-    protected routingService: RoutingService
+    protected routingService: RoutingService,
+    protected fileUploadService: FileUploadService
   ) {}
 
   subscription = new Subscription();
@@ -37,6 +39,7 @@ export class CreateClaimComponent implements OnInit, OnDestroy {
           map(policy => {
             if (policy && policy.userId) {
               this.claimService.createClaim(policy.policyId, policy.contractId);
+              this.fileUploadService.resetFiles();
               this.routingService.go({
                 cxRoute: 'fnolIncidentPage',
               });

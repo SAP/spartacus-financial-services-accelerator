@@ -1,4 +1,4 @@
-import { Component, DebugElement, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   FormControl,
@@ -12,10 +12,9 @@ import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { FormService } from './../../core/services/form/form.service';
+import { FileUploadService } from '../../core/services/file/file-upload.service';
 
 import { UploadComponent } from './upload.component';
-import { FileUploadService } from '../../core/services/file/file-upload.service';
-import { HttpResponse } from '@angular/common/http';
 
 @Component({
   // tslint:disable
@@ -25,6 +24,36 @@ import { HttpResponse } from '@angular/common/http';
 class MockErrorNoticeComponent {
   @Input() warn;
   @Input() parentConfig;
+}
+
+const mockCompletedHttpResponse = {
+  body: {
+    code: '00007012',
+    downloadUrl: '/medias/testFile1.pdf',
+  },
+  ok: true,
+  type: 4,
+};
+
+const mockInProgressHttpResponse = {
+  body: {
+    code: '00007012',
+    downloadUrl: '/medias/testFile1.pdf',
+  },
+  loaded: 100,
+  total: 200,
+  type: 1,
+};
+
+class MockFileUpladService {
+  uploadFile(_file: File) {
+    return of(mockInProgressHttpResponse);
+  }
+  setFileInStore(_body: any) {}
+  getUploadedDocuments() {
+    return of();
+  }
+  resetFiles() {}
 }
 
 class MockOccValueListService {}
@@ -84,45 +113,15 @@ const mockEvent = {
   },
 };
 
-const mockHttpResponse = {
-  body: {
-    code: '00007012',
-    downloadUrl: '/medias/testFile1.pdf',
-  },
-  type: 4,
-};
-
-const mockInProgressHttpResponse = {
-  body: {
-    code: '00007012',
-    downloadUrl: '/medias/testFile1.pdf',
-  },
-  loaded: 100,
-  total: 200,
-  type: 1,
-};
-
 const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {},
 };
 
-export class MockFileUpladService {
-  uploadFile(file: File) {
-    return of(mockInProgressHttpResponse);
-  }
-  setFileInStore(body: any) {}
-  getUploadedDocuments() {
-    return of();
-  }
-  resetFiles() {}
-}
-
 describe('UploadComponent', () => {
   let formService: FormService;
-  let el: DebugElement;
   let component: UploadComponent;
   let fixture: ComponentFixture<UploadComponent>;
-  let fileUpladService: FileUploadService;
+  let mockfileUpladService: FileUploadService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -142,16 +141,15 @@ describe('UploadComponent', () => {
         { provide: FormService, useClass: MockFormService },
       ],
     }).compileComponents();
+    fixture = TestBed.createComponent(UploadComponent);
+    formService = TestBed.inject(FormService);
+    mockfileUpladService = TestBed.inject(FileUploadService);
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UploadComponent);
-    formService = TestBed.inject(FormService);
-    fileUpladService = TestBed.inject(FileUploadService);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
     component.config = mockField;
-    el = fixture.debugElement;
     fixture.detectChanges();
   });
 
@@ -171,10 +169,12 @@ describe('UploadComponent', () => {
     expect(component.uploadControl.value).toBe(null);
   });
 
-  it('should remove a file', () => {
+  it('should remove individual files', () => {
     component.handleFiles(mockEvent);
     component.removeFile(0, mockEvent.target.files);
     expect(component.fileList.length).toBe(1);
+    component.removeFile(0, mockEvent.target.files);
+    expect(component.fileList.length).toBe(0);
   });
 
   it('should remove all Files', () => {
@@ -184,11 +184,8 @@ describe('UploadComponent', () => {
   });
 
   it('should start upload files', () => {
-    component.ngOnInit();
-    component.handleFiles(mockEvent);
     component.uploadFiles(mockEvent.target.files);
-    spyOn(fileUpladService, 'uploadFile').and.callThrough();
-    fixture.detectChanges();
+    spyOn(mockfileUpladService, 'uploadFile').and.callThrough();
     expect(component.progress).toEqual(50);
   });
 

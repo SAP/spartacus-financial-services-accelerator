@@ -71,6 +71,8 @@
           </div>
           <div class="col-md-3 col-sm-3 col-xs-6">
             <button
+              *ngIf="progress !== 100"
+              [disabled]="uploadDisable"
               class="btn-primary btn-block"
               (click)="uploadFiles(fileList)"
             >
