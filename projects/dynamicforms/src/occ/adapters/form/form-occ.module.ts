@@ -6,7 +6,7 @@ import { defaultOccFormConfig } from './default-occ-form-config';
 import { OccFormAdapter } from './occ-form.adapter';
 import { FormAdapter } from '../../../../src/core/connectors';
 import { UploadAdapter } from '../../../core/connectors/upload.adapter';
-import { OccUploadAdapter } from '../upload/occ-upload.adapter';
+import { OccUploadAdapter } from '../upload/file.adapter';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
