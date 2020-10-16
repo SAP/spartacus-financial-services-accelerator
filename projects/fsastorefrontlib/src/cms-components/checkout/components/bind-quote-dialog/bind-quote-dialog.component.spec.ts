@@ -39,12 +39,7 @@ const cartWithForms = {
   insuranceQuote: {
     quoteId: 'testQuote001',
     quoteDetails: {
-      entry: [
-        {
-          key: 'formId',
-          value: personalDetailsFormId,
-        },
-      ],
+      formId: personalDetailsFormId,
     },
   },
 };
