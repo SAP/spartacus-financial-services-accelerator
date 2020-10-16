@@ -26,15 +26,6 @@ class MockErrorNoticeComponent {
   @Input() parentConfig;
 }
 
-const mockCompletedHttpResponse = {
-  body: {
-    code: '00007012',
-    downloadUrl: '/medias/testFile1.pdf',
-  },
-  ok: true,
-  type: 4,
-};
-
 const mockInProgressHttpResponse = {
   body: {
     code: '00007012',
