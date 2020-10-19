@@ -51,11 +51,9 @@ export class BindQuoteDialogComponent {
             personalDetailsFormId
           );
 
-          const chooseCoverFormId = (<any>(
-            (<FSCart>cart).insuranceQuote?.quoteDetails?.entry
-          ))
-            ?.filter(details => details.key === 'formId')
-            .map(mapEntry => mapEntry.value)[0];
+          const chooseCoverFormId = <any>(
+            (<FSCart>cart).insuranceQuote?.quoteDetails?.formId
+          );
           this.formDataStoragetService.clearFormDataIdFromLocalStorage(
             chooseCoverFormId
           );
