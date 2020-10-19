@@ -1,0 +1,98 @@
+<ng-container *ngIf="group">
+  <div class="dynamic-field" [formGroup]="group" [hidden]="config.hidden">
+    <div class="form-group">
+      <label class="col-form-label">
+        {{ label }}
+        <ng-container *ngIf="!config.required">
+          {{ 'dynamicforms.optional' | cxTranslate }}
+        </ng-container>
+      </label>
+      <p>
+        {{ 'dynamicforms.maxFileSize' | cxTranslate }}
+        {{ convertFileSize(config.maxFileSize) }}
+      </p>
+      <div class="input-group">
+        <div class="custom-file">
+          <input
+            #uploadField
+            type="file"
+            class="custom-file-input"
+            [attr.aria-describedby]="config.name"
+            [attr.name]="config.name"
+            [attr.multiple]="config.multiple ? config.multiple : null"
+            [attr.accept]="config.accept"
+          />
+          <input
+            type="hidden"
+            [attr.name]="config.name + '_hidden'"
+            [formControlName]="config.name"
+          />
+          <label class="custom-file-label" [attr.for]="config.name">{{
+            'dynamicforms.chooseFile' | cxTranslate
+          }}</label>
+        </div>
+      </div>
+
+      <ng-container *ngIf="fileList.length > 0">
+        <ul class="mb-4">
+          <li class="pt-4" *ngFor="let file of fileList; let i = index">
+            <span>{{ file?.name }}:</span>
+            <span class="pl-3"> {{ convertFileSize(file.size) }}</span>
+            <span
+              *ngIf="!progress"
+              class="close"
+              role="button"
+              (click)="removeFile(i, uploadField)"
+              ><i class="fas fa-trash"></i
+            ></span>
+            <div class="row">
+              <div class="col-10 col-sm-11">
+                <div class="progress" *ngIf="progress">
+                  <div
+                    class="progress-bar"
+                    [style.width]="progress + '%'"
+                    role="progressbar"
+                    [attr.aria-valuenow]="progress"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >
+                    {{ progress }}
+                  </div>
+                </div>
+              </div>
+              <span class="col-2 col-sm-1 text-right" *ngIf="progress === 100"
+                ><i class="fas fa-check"></i
+              ></span>
+            </div>
+          </li>
+        </ul>
+        <ng-container *ngIf="fileList.length > 1 && progress === 0">
+          <div class="row justify-content-between">
+            <div class="col-md-3 col-sm-3 col-12 mb-3 mb-sm-0">
+              <button
+                [disabled]="uploadDisable"
+                class="action-button btn-block"
+                (click)="removeAll(uploadField)"
+              >
+                {{ 'dynamicforms.removeAll' | cxTranslate }}
+              </button>
+            </div>
+            <div class="col-md-3 col-sm-3 col-12">
+              <button
+                [disabled]="uploadDisable"
+                class="btn-primary btn-block"
+                (click)="uploadFiles(fileList)"
+              >
+                {{ 'dynamicforms.upload' | cxTranslate }}
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+    <cx-error-notice
+      [warn]="group.controls[config.name]"
+      [parentConfig]="config"
+    ></cx-error-notice>
+  </div>
+</ng-container>
