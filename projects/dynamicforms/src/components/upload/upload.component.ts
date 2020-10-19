@@ -22,9 +22,9 @@ import { take, map } from 'rxjs/operators';
 export class UploadComponent extends AbstractFormComponent implements OnInit {
   fileList: File[] = [];
   uploadControl: AbstractControl;
-  progress: number;
+  progress = 0;
   files = {};
-  uploadDisable = false;
+  uploadDisable: boolean;
 
   constructor(
     protected appConfig: DynamicFormsConfig,
@@ -82,8 +82,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
           if (event instanceof HttpResponse) {
             this.setFileCode(file, event);
             this.progress = 0;
-            this.handleFileResponse(event);
             this.uploadDisable = false;
+            this.handleFileResponse(event);
           }
         })
       );
