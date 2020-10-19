@@ -99,8 +99,8 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
       this.fileService
         .getFile(document.code, document.mime)
         .pipe(
-          map(document => {
-            saveAs(document, document.altText);
+          map(downloadedFile => {
+            saveAs(downloadedFile, document.altText);
           })
         )
         .subscribe()
