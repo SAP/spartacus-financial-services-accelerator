@@ -4,7 +4,7 @@
       <label class="col-form-label">
         {{ label }}
         <ng-container *ngIf="!config.required">
-          {{ 'forms.optional' | cxTranslate }}
+          {{ 'dynamicforms.optional' | cxTranslate }}
         </ng-container>
       </label>
       <select
@@ -13,7 +13,7 @@
         [formControlName]="config.name"
       >
         <option [selected]="true" disabled value="null">{{
-          'fscommon.pleaseSelect' | cxTranslate
+          'dynamicforms.pleaseSelect' | cxTranslate
         }}</option>
         <option
           *ngFor="let option of options$ | async as options"
