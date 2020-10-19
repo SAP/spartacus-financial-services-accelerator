@@ -6,7 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { GlobalMessage, GlobalMessageService } from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
-import { FormConnector } from '../../connectors/form-connector';
+import { FormConnector } from '../../connectors/form.connector';
 import * as fromActions from '../actions';
 import * as fromUserReducers from './../../store/reducers/index';
 import * as fromEffects from './form-definition.effect';

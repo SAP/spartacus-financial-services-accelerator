@@ -34,39 +34,61 @@
       </div>
 
       <ng-container *ngIf="fileList.length > 0">
-        <ul>
-          <li class="pt-3" *ngFor="let file of fileList; let i = index">
+        <ul class="mb-4">
+          <li class="pt-4" *ngFor="let file of fileList; let i = index">
             <span>{{ file?.name }}:</span>
             <span class="pl-3"> {{ convertFileSize(file.size) }}</span>
             <span
-              class="pl-3 close"
-              type="button"
+              *ngIf="!progress"
+              class="close"
+              role="button"
               (click)="removeFile(i, uploadField)"
-              >&times;</span
-            >
-            <!-- <div class="progress">
-              <div
-                class="progress-bar"
-                [style.width]="'100%'"
-                role="progressbar"
-                [attr.aria-valuenow]="'100%'"
-                aria-valuemin="0"
-                aria-valuemax="100"
-              >
-                100%
+              ><i class="fas fa-trash"></i
+            ></span>
+            <div class="row">
+              <div class="col-10 col-sm-11">
+                <div class="progress" *ngIf="progress">
+                  <div
+                    class="progress-bar"
+                    [style.width]="progress + '%'"
+                    role="progressbar"
+                    [attr.aria-valuenow]="progress"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >
+                    {{ progress }}
+                  </div>
+                </div>
               </div>
-            </div> -->
+              <span class="col-2 col-sm-1 text-right" *ngIf="progress === 100"
+                ><i class="fas fa-check"></i
+              ></span>
+            </div>
           </li>
         </ul>
+        <ng-container *ngIf="fileList.length > 1 && progress === 0">
+          <div class="row justify-content-between">
+            <div class="col-md-3 col-sm-3 col-12 mb-3 mb-sm-0">
+              <button
+                [disabled]="uploadDisable"
+                class="action-button btn-block"
+                (click)="removeAll(uploadField)"
+              >
+                {{ 'forms.removeAll' | cxTranslate }}
+              </button>
+            </div>
+            <div class="col-md-3 col-sm-3 col-12">
+              <button
+                [disabled]="uploadDisable"
+                class="btn-primary btn-block"
+                (click)="uploadFiles(fileList)"
+              >
+                {{ 'forms.upload' | cxTranslate }}
+              </button>
+            </div>
+          </div>
+        </ng-container>
       </ng-container>
-      <button
-        *ngIf="fileList.length > 1"
-        type="button"
-        class="action-button"
-        (click)="removeAll(uploadField)"
-      >
-        {{ 'forms.removeAll' | cxTranslate }}
-      </button>
     </div>
     <cx-error-notice
       [warn]="group.controls[config.name]"

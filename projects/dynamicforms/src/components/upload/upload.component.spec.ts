@@ -1,4 +1,4 @@
-import { Component, DebugElement, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   FormControl,
@@ -12,6 +12,7 @@ import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { FormService } from './../../core/services/form/form.service';
+import { FileService } from '../../core/services/file/file.service';
 
 import { UploadComponent } from './upload.component';
 
@@ -25,12 +26,16 @@ class MockErrorNoticeComponent {
   @Input() parentConfig;
 }
 
-class MockOccValueListService {}
-class MockLanguageService {
-  getActive() {
-    return of('en');
-  }
-}
+const mockInProgressHttpResponse = {
+  body: {
+    code: '00007012',
+    downloadUrl: '/medias/testFile1.pdf',
+  },
+  loaded: 100,
+  total: 200,
+  type: 1,
+};
+
 const mockField: FieldConfig = {
   label: {
     en: 'Test Upload',
@@ -46,12 +51,6 @@ const mockField: FieldConfig = {
 };
 
 const formControl = new FormControl('formValue');
-
-class MockFormService {
-  getFormControlForCode(): AbstractControl {
-    return formControl;
-  }
-}
 
 const mockFormGroup = new FormGroup({
   testUpload: new FormControl(),
@@ -86,11 +85,35 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {},
 };
 
+class MockFileUpladService {
+  uploadFile(_file: File) {
+    return of(mockInProgressHttpResponse);
+  }
+  setFileInStore(_body: any) {}
+  getUploadedDocuments() {
+    return of();
+  }
+  resetFiles() {}
+}
+
+class MockOccValueListService {}
+class MockLanguageService {
+  getActive() {
+    return of('en');
+  }
+}
+
+class MockFormService {
+  getFormControlForCode(): AbstractControl {
+    return formControl;
+  }
+}
+
 describe('UploadComponent', () => {
   let formService: FormService;
-  let el: DebugElement;
   let component: UploadComponent;
   let fixture: ComponentFixture<UploadComponent>;
+  let mockfileUpladService: FileService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -103,18 +126,22 @@ describe('UploadComponent', () => {
           provide: DynamicFormsConfig,
           useValue: mockDynamicFormsConfig,
         },
+        {
+          provide: FileService,
+          useClass: MockFileUpladService,
+        },
         { provide: FormService, useClass: MockFormService },
       ],
     }).compileComponents();
+    fixture = TestBed.createComponent(UploadComponent);
+    formService = TestBed.inject(FormService);
+    mockfileUpladService = TestBed.inject(FileService);
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UploadComponent);
-    formService = TestBed.inject(FormService);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
     component.config = mockField;
-    el = fixture.debugElement;
     fixture.detectChanges();
   });
 
@@ -134,16 +161,24 @@ describe('UploadComponent', () => {
     expect(component.uploadControl.value).toBe(null);
   });
 
-  it('should remove a file', () => {
+  it('should remove individual files', () => {
     component.handleFiles(mockEvent);
     component.removeFile(0, mockEvent.target.files);
     expect(component.fileList.length).toBe(1);
+    component.removeFile(0, mockEvent.target.files);
+    expect(component.fileList.length).toBe(0);
   });
 
   it('should remove all Files', () => {
     component.handleFiles(mockEvent);
     component.removeAll(mockEvent.target);
     expect(component.fileList.length).toEqual(0);
+  });
+
+  it('should start upload files', () => {
+    component.uploadFiles(mockEvent.target.files);
+    spyOn(mockfileUpladService, 'uploadFile').and.callThrough();
+    expect(component.progress).toEqual(50);
   });
 
   it('should display bytes when value is less than 1024', () => {

@@ -9,6 +9,7 @@ export interface StateWithForm {
 export interface FormsState {
   formDefinition: FormDefinitionState;
   formData: FormDataState;
+  uploadedFiles: FilesState;
 }
 
 export interface FormDefinitionState {
@@ -19,4 +20,11 @@ export interface FormDefinitionState {
 export interface FormDataState {
   loaded: boolean;
   content: {};
+}
+
+export interface FilesState {
+  loaded: boolean;
+  content: {
+    files: File[];
+  };
 }
