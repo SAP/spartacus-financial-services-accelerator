@@ -142,8 +142,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     this.setValueAndValidate(this.fileList);
   }
 
-  downloadFile(file, event) {
-    event.preventDefault();
+  downloadFile(file) {
     this.subscription.add(
       this.fileUploadService
         .getFile(file.code, file.type)
