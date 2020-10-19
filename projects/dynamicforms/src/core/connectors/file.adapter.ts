@@ -2,6 +2,18 @@ import { Observable } from 'rxjs';
 
 export abstract class FileAdapter {
   /**
+   * Abstract method used to fetch file by code for specified user
+   *
+   * @param userId The user id
+   * @param fileCode The file code
+   * @param fileCode The file type
+   */
+  abstract getFileForCodeAndType(
+    userId: string,
+    fileCode: string,
+    fileType: string
+  ): Observable<any>;
+  /**
    * Abstract method used to upload file
    *
    * @param userId The user id

@@ -21,7 +21,6 @@ import { PolicyDetailsComponent } from './policy-details/policy-details.componen
 import { AccordionModule } from '../../../shared/accordion/accordion.module';
 import { ChangeRequestService } from './../../../core/change-request/facade/change-request.service';
 import { ChangeRequestStoreModule } from './../../../core/change-request/store/change-request-store.module';
-import { DocumentService } from './../../../core/document/facade/document.service';
 
 const routes: Routes = [
   {
@@ -68,7 +67,7 @@ const routes: Routes = [
   ],
   declarations: [PoliciesComponent, PolicyDetailsComponent],
   exports: [PoliciesComponent, PolicyDetailsComponent],
-  providers: [PolicyService, ChangeRequestService, DocumentService],
+  providers: [PolicyService, ChangeRequestService],
   entryComponents: [PoliciesComponent, PolicyDetailsComponent],
 })
 export class PolicyModule {}

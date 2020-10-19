@@ -2,8 +2,9 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { FileAdapter } from '../../../core/connectors/file.adapter';
+import { base64StringToBlob } from 'blob-util';
 
 const FULL_PARAMS = 'FULL';
 
@@ -42,5 +43,16 @@ export class OccFileAdapter implements FileAdapter {
     return this.http
       .delete(url, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  getFileForCodeAndType(userId: string, fileCode: string, fileType: string) {
+    const url = this.occEndpointService.getUrl('getFile', {
+      userId,
+      fileCode,
+    });
+    return this.http.get<string>(url).pipe(
+      map(document => base64StringToBlob(document, fileType)),
+      catchError((error: any) => throwError(error.json()))
+    );
   }
 }

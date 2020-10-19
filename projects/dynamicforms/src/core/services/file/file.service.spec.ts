@@ -16,6 +16,7 @@ const mockFile = <File>blob1;
 const mockBody = {
   code: '00007011',
   downloadUrl: '/medias/testFile1.pdf',
+  mime: 'mockType',
 };
 const mockHttpResponse = {
   body: {
@@ -25,8 +26,11 @@ const mockHttpResponse = {
 };
 
 class MockFileConnector {
-  uploadFile(userId, file) {
+  uploadFile() {
     return of();
+  }
+  getFile() {
+    return of(mockBody);
   }
 }
 
@@ -109,5 +113,16 @@ describe('FileService', () => {
     const fileList = [{ code: 'fileCode1' }, { code: 'fileCode2' }];
     service.removeAllFiles(OCC_USER_ID_CURRENT, fileList);
     expect(store.dispatch).toHaveBeenCalledTimes(2);
+  });
+
+  it('should be able to fetch file', () => {
+    let result;
+    service
+      .getFile(mockBody.code, mockBody.mime)
+      .subscribe(file => {
+        result = file;
+      })
+      .unsubscribe();
+    expect(result).toEqual(mockBody);
   });
 });

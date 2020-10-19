@@ -16,6 +16,15 @@ export class FileService {
     protected store: Store<StateWithForm>
   ) {}
 
+  getFile(fileCode: string, fileType: string): Observable<any> {
+    return this.authService.getOccUserId().pipe(
+      take(1),
+      switchMap(occUserId => {
+        return this.fileConnector.getFile(occUserId, fileCode, fileType);
+      })
+    );
+  }
+
   uploadFile(file: File): Observable<any> {
     return this.authService.getOccUserId().pipe(
       take(1),
