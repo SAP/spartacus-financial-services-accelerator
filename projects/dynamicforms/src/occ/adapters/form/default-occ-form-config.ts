@@ -9,6 +9,7 @@ export const defaultOccFormConfig: FormOccConfig = {
         formData: 'forms/users/${userId}/formData/${formDataId}',
         createFormData: 'forms/users/${userId}/formData',
         uploadFile: 'users/${userId}/documents',
+        removeFile: 'users/${userId}/documents/${fileCode}',
       },
     },
   },

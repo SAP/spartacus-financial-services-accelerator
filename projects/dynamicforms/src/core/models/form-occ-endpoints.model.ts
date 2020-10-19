@@ -26,4 +26,9 @@ export interface FormOccEndpoints extends OccEndpoints {
    *
    */
   uploadFile?: string;
+  /**
+   * Remove file
+   *
+   */
+  removeFile?: string;
 }

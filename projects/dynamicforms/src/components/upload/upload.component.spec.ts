@@ -6,8 +6,13 @@ import {
   ReactiveFormsModule,
   AbstractControl,
 } from '@angular/forms';
-import { of } from 'rxjs';
-import { I18nTestingModule, LanguageService } from '@spartacus/core';
+import { of, Observable } from 'rxjs';
+import {
+  I18nTestingModule,
+  LanguageService,
+  OCC_USER_ID_CURRENT,
+  AuthService,
+} from '@spartacus/core';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
@@ -94,6 +99,8 @@ class MockFileUpladService {
     return of();
   }
   resetFiles() {}
+  removeFileForCode() {}
+  removeAllFiles() {}
 }
 
 class MockOccValueListService {}
@@ -109,11 +116,18 @@ class MockFormService {
   }
 }
 
+class MockAuthService {
+  getOccUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
+  }
+}
+
 describe('UploadComponent', () => {
   let formService: FormService;
   let component: UploadComponent;
   let fixture: ComponentFixture<UploadComponent>;
   let mockfileUpladService: FileService;
+  let mockAuthService: AuthService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -131,11 +145,13 @@ describe('UploadComponent', () => {
           useClass: MockFileUpladService,
         },
         { provide: FormService, useClass: MockFormService },
+        { provide: AuthService, useClass: MockAuthService },
       ],
     }).compileComponents();
     fixture = TestBed.createComponent(UploadComponent);
     formService = TestBed.inject(FormService);
     mockfileUpladService = TestBed.inject(FileService);
+    mockAuthService = TestBed.inject(AuthService);
   }));
 
   beforeEach(() => {
@@ -161,20 +177,6 @@ describe('UploadComponent', () => {
     expect(component.uploadControl.value).toBe(null);
   });
 
-  it('should remove individual files', () => {
-    component.handleFiles(mockEvent);
-    component.removeFile(0, mockEvent.target.files);
-    expect(component.fileList.length).toBe(1);
-    component.removeFile(0, mockEvent.target.files);
-    expect(component.fileList.length).toBe(0);
-  });
-
-  it('should remove all Files', () => {
-    component.handleFiles(mockEvent);
-    component.removeAll(mockEvent.target);
-    expect(component.fileList.length).toEqual(0);
-  });
-
   it('should start upload files', () => {
     component.uploadFiles(mockEvent.target.files);
     spyOn(mockfileUpladService, 'uploadFile').and.callThrough();
@@ -185,5 +187,17 @@ describe('UploadComponent', () => {
     mockField.maxFileSize = 30;
     component.handleFiles(mockEvent);
     expect(component.convertFileSize(mockField.maxFileSize)).toBe('30 Bytes');
+  });
+
+  it('should remove single file', () => {
+    component.handleFiles(mockEvent);
+    component.removeFile(0, mockField);
+    expect(component.fileList.length).toEqual(1);
+  });
+
+  it('should remove all files', () => {
+    component.handleFiles(mockEvent);
+    component.removeAll(mockField);
+    expect(component.fileList.length).toEqual(0);
   });
 });

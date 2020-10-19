@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OccEndpointsService } from '@spartacus/core';
 import { Observable, throwError } from 'rxjs';
@@ -28,6 +28,19 @@ export class OccFileAdapter implements FileAdapter {
         observe: 'events',
         params: params,
       })
+      .pipe(catchError((error: any) => throwError(error.json())));
+  }
+
+  removeFileForUserAndCode(userId: string, fileCode: string): Observable<any> {
+    const url = this.occEndpointService.getUrl('removeFile', {
+      userId,
+      fileCode,
+    });
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+    return this.http
+      .delete(url, { headers })
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 }

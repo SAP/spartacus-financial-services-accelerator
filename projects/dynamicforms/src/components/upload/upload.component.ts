@@ -9,10 +9,11 @@ import { AbstractControl } from '@angular/forms';
 
 import { FileService } from '../../core/services/file/file.service';
 import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { LanguageService } from '@spartacus/core';
+import { LanguageService, AuthService } from '@spartacus/core';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 import { FormService } from './../../core/services/form/form.service';
+import { take, map } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-upload',
@@ -31,7 +32,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     protected injector: Injector,
     protected formService: FormService,
     protected fileUploadService: FileService,
-    protected cd: ChangeDetectorRef
+    protected cd: ChangeDetectorRef,
+    protected authService: AuthService
   ) {
     super(appConfig, languageService, injector, formService);
   }
@@ -78,6 +80,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
             this.cd.detectChanges();
           }
           if (event instanceof HttpResponse) {
+            this.setFileCode(file, event);
             this.progress = 0;
             this.uploadDisable = false;
             this.handleFileResponse(event);
@@ -96,8 +99,25 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   }
 
   removeFile(index, uploadField) {
+    // Execute Http.Delete request to backend
+    this.subscription.add(
+      this.authService
+        .getOccUserId()
+        .pipe(
+          take(1),
+          map(occUserId => {
+            const fileCode = (<any>this.fileList[index])?.code;
+            if (fileCode) {
+              this.fileUploadService.removeFileForCode(occUserId, fileCode);
+            }
+          })
+        )
+        .subscribe()
+    );
     this.fileList.splice(index, 1);
     this.setValueAndValidate(this.fileList);
+    this.uploadControl.setValue(this.files);
+
     // reset DOM File element to sync it with reactive control
     if (this.fileList.length === 0) {
       uploadField.value = null;
@@ -105,6 +125,17 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   }
 
   removeAll(uploadField) {
+    this.subscription.add(
+      this.authService
+        .getOccUserId()
+        .pipe(
+          take(1),
+          map(occUserId => {
+            this.fileUploadService.removeAllFiles(occUserId, this.fileList);
+          })
+        )
+        .subscribe()
+    );
     this.fileList = [];
     uploadField.value = null;
     this.setValueAndValidate(this.fileList);
@@ -128,5 +159,12 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
       [this.config.name]: [],
     };
     this.fileUploadService.resetFiles();
+  }
+
+  protected setFileCode(file, event) {
+    if (event.body?.code) {
+      file.code = event.body?.code;
+    }
+    this.cd.detectChanges();
   }
 }
