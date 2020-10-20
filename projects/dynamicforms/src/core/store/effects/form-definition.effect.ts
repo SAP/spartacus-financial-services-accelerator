@@ -21,7 +21,7 @@ export class FormDefinitionEffects {
               return new fromActions.LoadFormDefinitionSuccess(formDefinition);
             }),
             catchError(error => {
-              this.showGlobalMessage('forms.definitionLoadError');
+              this.showGlobalMessage('dynamicforms.definitionLoadError');
               return of(
                 new fromActions.LoadFormDefinitionFail(JSON.stringify(error))
               );
@@ -37,7 +37,7 @@ export class FormDefinitionEffects {
             );
           }),
           catchError(error => {
-            this.showGlobalMessage('forms.definitionLoadError');
+            this.showGlobalMessage('dynamicforms.definitionLoadError');
             return of(
               new fromActions.LoadFormDefinitionFail(JSON.stringify(error))
             );

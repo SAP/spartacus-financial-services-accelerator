@@ -2,6 +2,7 @@ export const dynamicforms = {
   dynamicforms: {
     titles: {
       homeowners_details_form: 'Immobilieninformationen',
+      renters_details_form: 'Mieterinformationen',
       trip_details_form: 'Reiseinformation',
       auto_details_form: 'Fahrzeuginformationen',
       life_details_form: 'Informationen zur Abdeckung',
