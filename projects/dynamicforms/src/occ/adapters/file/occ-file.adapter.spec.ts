@@ -12,6 +12,7 @@ import { OccFileAdapter } from '../form';
 
 const blob1 = new Blob([''], { type: 'application/pdf' });
 const mockFileCode = 'mockCode';
+const mockFileType = 'mockType';
 blob1['lastModifiedDate'] = '';
 blob1['name'] = 'testFile1';
 const mockFile = <File>blob1;
@@ -75,6 +76,21 @@ describe('OccFileAdapter', () => {
       return req.method === 'DELETE';
     });
     expect(occEnpointsService.getUrl).toHaveBeenCalledWith('removeFile', {
+      userId: OCC_USER_ID_CURRENT,
+      fileCode: mockFileCode,
+    });
+    expect(mockReq.cancelled).toBeFalsy();
+    mockReq.flush('');
+  });
+
+  it('should be able to get file', () => {
+    occFileAdapter
+      .getFileForCodeAndType(OCC_USER_ID_CURRENT, mockFileCode, mockFileType)
+      .subscribe();
+    const mockReq = httpMock.expectOne(req => {
+      return req.method === 'GET';
+    });
+    expect(occEnpointsService.getUrl).toHaveBeenCalledWith('getFile', {
       userId: OCC_USER_ID_CURRENT,
       fileCode: mockFileCode,
     });

@@ -39,7 +39,14 @@
             <span>{{ file?.name }}:</span>
             <span class="pl-3"> {{ convertFileSize(file.size) }}</span>
             <span
-              *ngIf="!progress"
+              *ngIf="file?.code"
+              class="close"
+              type="button"
+              (click)="downloadFile(file)"
+              ><i class="fas fa-download"></i
+            ></span>
+            <span
+              *ngIf="file?.code || progress === 0"
               class="close"
               role="button"
               (click)="removeFile(i, uploadField)"
@@ -60,7 +67,7 @@
                   </div>
                 </div>
               </div>
-              <span class="col-2 col-sm-1 text-right" *ngIf="progress === 100"
+              <span class="col-2 col-sm-1 text-right" *ngIf="file.code"
                 ><i class="fas fa-check"></i
               ></span>
             </div>

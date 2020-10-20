@@ -14,6 +14,7 @@ import { DynamicFormsConfig } from '../../core/config/form-config';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 import { FormService } from './../../core/services/form/form.service';
 import { take, map } from 'rxjs/operators';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'cx-upload',
@@ -139,6 +140,19 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     this.fileList = [];
     uploadField.value = null;
     this.setValueAndValidate(this.fileList);
+  }
+
+  downloadFile(file) {
+    this.subscription.add(
+      this.fileUploadService
+        .getFile(file.code, file.type)
+        .pipe(
+          map(downloadedFile => {
+            saveAs(downloadedFile, file.name);
+          })
+        )
+        .subscribe()
+    );
   }
 
   protected setValueAndValidate(value: File[]) {

@@ -31,4 +31,9 @@ export interface FormOccEndpoints extends OccEndpoints {
    *
    */
   removeFile?: string;
+  /**
+   * Get file
+   *
+   */
+  getFile?: string;
 }
