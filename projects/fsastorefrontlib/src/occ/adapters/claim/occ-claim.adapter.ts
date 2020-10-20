@@ -14,7 +14,7 @@ export class OccClaimAdapter implements ClaimAdapter {
   constructor(
     protected http: HttpClient,
     protected occEndpointService: OccEndpointsService
-  ) { }
+  ) {}
 
   protected getClaimsEndpoint(userId: string) {
     const claimsEndpoint = '/users/' + userId + '/claims';
@@ -107,8 +107,7 @@ export class OccClaimAdapter implements ClaimAdapter {
         claimNumber: claimId,
         requestId: claim.requestId,
         documents: documents,
-        properties:
-        {
+        properties: {
           entry: [
             {
               key: 'phFault',
@@ -130,7 +129,7 @@ export class OccClaimAdapter implements ClaimAdapter {
               key: 'numberOfVehicleInvolved',
               value: claim.numberOfVehicleInvolved,
             },
-          ]
+          ],
         },
       };
     }
