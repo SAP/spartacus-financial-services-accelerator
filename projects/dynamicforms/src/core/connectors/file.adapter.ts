@@ -6,7 +6,7 @@ export abstract class FileAdapter {
    *
    * @param userId The user id
    * @param fileCode The file code
-   * @param fileCode The file type
+   * @param fileType The file type
    */
   abstract getFileForCodeAndType(
     userId: string,
