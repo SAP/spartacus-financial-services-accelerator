@@ -35,18 +35,18 @@ export class ChangePolicyService {
             changeRequestData.changedPolicy.insuredObjectList.insuredObjects[0];
 
           changedInsuredObject.childInsuredObjectList.insuredObjects.forEach(
-            insuredObjectItem => {
+            childInsuredObjectItem => {
               let description = '';
               let currentValue = '';
               let newValue = '';
-              insuredObjectItem.insuredObjectItems.forEach(item => {
-                if (item.label === 'firstName' || item.label === 'lastName') {
-                  description += ' ' + item.value;
-                }
-              });
-
+              childInsuredObjectItem.insuredObjectItems
+                .filter(
+                  item =>
+                    item.label === 'firstName' || item.label === 'lastName'
+                )
+                .forEach(foundItem => (description += ' ' + foundItem.value));
               if (
-                this.childInsuredObjectExist(insuredObject, insuredObjectItem)
+                this.childInsuredObjectExist(insuredObject, childInsuredObjectItem)
               ) {
                 currentValue = this.getTranslation(
                   ['changeRequest'],
