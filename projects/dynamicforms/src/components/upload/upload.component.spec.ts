@@ -145,6 +145,7 @@ describe('UploadComponent', () => {
             useClass: MockFileUpladService,
           },
           { provide: FormService, useClass: MockFormService },
+          { provide: AuthService, useClass: MockAuthService },
         ],
       }).compileComponents();
       fixture = TestBed.createComponent(UploadComponent);
