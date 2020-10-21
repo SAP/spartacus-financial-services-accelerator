@@ -56,7 +56,11 @@
           />
           <span class="form-check-label">
             {{ 'fscommon.confirmAndAgree' | cxTranslate }}
-            <a href="#" class="link text-capitalize">
+            <a
+              [routerLink]="{ cxRoute: 'termsAndConditions' } | cxUrl"
+              target="_blank"
+              class="link text-capitalize"
+            >
               {{ 'fscommon.termsConditions' | cxTranslate }}
             </a>
           </span>
