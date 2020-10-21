@@ -21,6 +21,10 @@ import { OccModule } from '../occ/occ.module';
 import { occProductConfig } from '../occ/services/default-occ-product-config';
 import { occUserConfig } from '../occ/services/default-occ-user-config';
 import { layoutConfig } from './config/default-layout-config';
+import {
+  dynamicformsTranslations,
+  dynamicformsTranslationsDe,
+} from '@fsa/dynamicforms';
 
 @NgModule({
   imports: [
@@ -52,6 +56,15 @@ import { layoutConfig } from './config/default-layout-config';
         resources: {
           en: fstranslations,
           de: fstranslationsDe,
+        },
+        fallbackLang: 'en',
+      },
+    }),
+    ConfigModule.withConfig({
+      i18n: {
+        resources: {
+          en: dynamicformsTranslations,
+          de: dynamicformsTranslationsDe,
         },
         fallbackLang: 'en',
       },
