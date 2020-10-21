@@ -1,18 +1,23 @@
-import { Component, DebugElement, Input } from '@angular/core';
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, Input } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  AbstractControl,
 } from '@angular/forms';
-import { of } from 'rxjs';
-import { I18nTestingModule, LanguageService } from '@spartacus/core';
+import {
+  AuthService,
+  I18nTestingModule,
+  LanguageService,
+  OCC_USER_ID_CURRENT,
+} from '@spartacus/core';
+import { Observable, of } from 'rxjs';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
+import { FileService } from '../../core/services/file/file.service';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { FormService } from './../../core/services/form/form.service';
-
 import { UploadComponent } from './upload.component';
 
 @Component({
@@ -25,12 +30,16 @@ class MockErrorNoticeComponent {
   @Input() parentConfig;
 }
 
-class MockOccValueListService {}
-class MockLanguageService {
-  getActive() {
-    return of('en');
-  }
-}
+const mockInProgressHttpResponse = {
+  body: {
+    code: '00007012',
+    downloadUrl: '/medias/testFile1.pdf',
+  },
+  loaded: 100,
+  total: 200,
+  type: 1,
+};
+
 const mockField: FieldConfig = {
   label: {
     en: 'Test Upload',
@@ -46,12 +55,6 @@ const mockField: FieldConfig = {
 };
 
 const formControl = new FormControl('formValue');
-
-class MockFormService {
-  getFormControlForCode(): AbstractControl {
-    return formControl;
-  }
-}
 
 const mockFormGroup = new FormGroup({
   testUpload: new FormControl(),
@@ -86,11 +89,44 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
   dynamicForms: {},
 };
 
+class MockFileUpladService {
+  uploadFile(_file: File) {
+    return of(mockInProgressHttpResponse);
+  }
+  setFileInStore(_body: any) {}
+  getUploadedDocuments() {
+    return of();
+  }
+  resetFiles() {}
+  removeFileForCode() {}
+  removeAllFiles() {}
+}
+
+class MockOccValueListService {}
+class MockLanguageService {
+  getActive() {
+    return of('en');
+  }
+}
+
+class MockFormService {
+  getFormControlForCode(): AbstractControl {
+    return formControl;
+  }
+}
+
+class MockAuthService {
+  getOccUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
+  }
+}
+
 describe('UploadComponent', () => {
   let formService: FormService;
-  let el: DebugElement;
   let component: UploadComponent;
   let fixture: ComponentFixture<UploadComponent>;
+  let mockfileUpladService: FileService;
+  let mockAuthService: AuthService;
 
   beforeEach(
     waitForAsync(() => {
@@ -104,19 +140,24 @@ describe('UploadComponent', () => {
             provide: DynamicFormsConfig,
             useValue: mockDynamicFormsConfig,
           },
+          {
+            provide: FileService,
+            useClass: MockFileUpladService,
+          },
           { provide: FormService, useClass: MockFormService },
         ],
       }).compileComponents();
+      fixture = TestBed.createComponent(UploadComponent);
+      formService = TestBed.inject(FormService);
+      mockfileUpladService = TestBed.inject(FileService);
+      mockAuthService = TestBed.inject(AuthService);
     })
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(UploadComponent);
-    formService = TestBed.inject(FormService);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
     component.config = mockField;
-    el = fixture.debugElement;
     fixture.detectChanges();
   });
 
@@ -136,21 +177,27 @@ describe('UploadComponent', () => {
     expect(component.uploadControl.value).toBe(null);
   });
 
-  it('should remove a file', () => {
-    component.handleFiles(mockEvent);
-    component.removeFile(0, mockEvent.target.files);
-    expect(component.fileList.length).toBe(1);
-  });
-
-  it('should remove all Files', () => {
-    component.handleFiles(mockEvent);
-    component.removeAll(mockEvent.target);
-    expect(component.fileList.length).toEqual(0);
+  it('should start upload files', () => {
+    component.uploadFiles(mockEvent.target.files);
+    spyOn(mockfileUpladService, 'uploadFile').and.callThrough();
+    expect(component.progress).toEqual(50);
   });
 
   it('should display bytes when value is less than 1024', () => {
     mockField.maxFileSize = 30;
     component.handleFiles(mockEvent);
     expect(component.convertFileSize(mockField.maxFileSize)).toBe('30 Bytes');
+  });
+
+  it('should remove single file', () => {
+    component.handleFiles(mockEvent);
+    component.removeFile(0, mockField);
+    expect(component.fileList.length).toEqual(1);
+  });
+
+  it('should remove all files', () => {
+    component.handleFiles(mockEvent);
+    component.removeAll(mockField);
+    expect(component.fileList.length).toEqual(0);
   });
 });

@@ -5,6 +5,8 @@ import { provideConfig } from '@spartacus/core';
 import { defaultOccFormConfig } from './default-occ-form-config';
 import { OccFormAdapter } from './occ-form.adapter';
 import { FormAdapter } from '../../../../src/core/connectors';
+import { FileAdapter } from '../../../core/connectors/file.adapter';
+import { OccFileAdapter } from '../file/occ-file.adapter';
 
 @NgModule({
   imports: [CommonModule, HttpClientModule],
@@ -12,6 +14,10 @@ import { FormAdapter } from '../../../../src/core/connectors';
     {
       provide: FormAdapter,
       useClass: OccFormAdapter,
+    },
+    {
+      provide: FileAdapter,
+      useClass: OccFileAdapter,
     },
     provideConfig(defaultOccFormConfig),
   ],

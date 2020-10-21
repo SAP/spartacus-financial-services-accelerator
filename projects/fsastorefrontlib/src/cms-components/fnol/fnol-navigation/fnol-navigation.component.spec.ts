@@ -1,7 +1,7 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { FormDataService } from '@fsa/dynamicforms';
+import { FileService, FormDataService } from '@fsa/dynamicforms';
 import {
   GlobalMessageService,
   I18nTestingModule,
@@ -54,18 +54,24 @@ export class MockUserRequestNavigationService {
   }
 }
 
+export class MockFileService {
+  getUploadedDocuments() {}
+}
+
 describe('FNOLNavigationComponent', () => {
   let component: FNOLNavigationComponent;
   let fixture: ComponentFixture<FNOLNavigationComponent>;
   let mockUserRequestService: MockUserRequestService;
   let mockClaimService: MockClaimService;
   let mockUserRequestNavigationService: MockUserRequestNavigationService;
+  let mockFileService: MockFileService;
 
   beforeEach(
     waitForAsync(() => {
       mockUserRequestService = new MockUserRequestService();
       mockClaimService = new MockClaimService();
       mockUserRequestNavigationService = new MockUserRequestNavigationService();
+      mockFileService = new MockFileService();
       TestBed.configureTestingModule({
         imports: [I18nTestingModule, RouterTestingModule],
         declarations: [FNOLNavigationComponent],
@@ -89,6 +95,10 @@ describe('FNOLNavigationComponent', () => {
           {
             provide: FormDataService,
             useValue: FormDataService,
+          },
+          {
+            provide: FileService,
+            useValue: mockFileService,
           },
           {
             provide: GlobalMessageService,

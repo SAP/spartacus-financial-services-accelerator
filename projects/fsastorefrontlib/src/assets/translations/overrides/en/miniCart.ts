@@ -43,14 +43,12 @@ export const common = {
     banking_loans: {
       loanPurpose: 'Loan Purpose',
       'loan-amount': 'Loan Amount',
-      loanStartDate: 'Loan Start Date',
       'loan-term': 'Loan Term',
       numberOfApplicants: 'Number Of Applicants',
       'repayment-frequency': 'Repayment Frequency',
     },
     banking_fixed_term_deposit: {
       'maturity-option': 'Maturity Option',
-      startDate: 'Start Date',
       'term-amount': 'Investment Amount',
       'deposit-term': 'Deposit Term',
     },

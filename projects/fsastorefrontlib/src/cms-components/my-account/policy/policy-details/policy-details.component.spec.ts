@@ -1,4 +1,5 @@
-import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FileService } from '@fsa/dynamicforms';
 import {
   I18nTestingModule,
   OccConfig,
@@ -10,13 +11,12 @@ import { Observable, of } from 'rxjs';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { AccordionModule } from '../../../../shared/accordion/accordion.module';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
-import { DocumentService } from './../../../../core/document/facade/document.service';
+import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
 import {
   AllowedFSRequestType,
   RequestType,
 } from './../../../../occ/occ-models';
 import { PolicyDetailsComponent } from './policy-details.component';
-import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
 
 class MockPolicyService {
   loadPolicyDetails() {}
@@ -87,14 +87,15 @@ const policyId = 'policyId';
 const contractId = 'contractId';
 const startDate = '2020-07-30T06:00:04+0000';
 const documentId = 'documentId';
-const documentName = 'document';
+const documentMime = 'mockMimeType';
 
 const document = {
-  id: documentId,
+  code: documentId,
+  mime: documentMime,
 };
 
-class MockDocumentService {
-  getDocumentById(id) {
+class MockFileService {
+  getFile(code, mime) {
     return of(document);
   }
 }
@@ -109,7 +110,7 @@ describe('PolicyDetailsComponent', () => {
   let changeRequestService: MockChangeRequestService;
   let routingService: RoutingService;
   let policyService: PolicyService;
-  let documentService: MockDocumentService;
+  let fileService: MockFileService;
 
   beforeEach(
     waitForAsync(() => {
@@ -120,7 +121,7 @@ describe('PolicyDetailsComponent', () => {
           { provide: PolicyService, useClass: MockPolicyService },
           { provide: OccConfig, useValue: mockOccModuleConfig },
           { provide: ChangeRequestService, useClass: MockChangeRequestService },
-          { provide: DocumentService, useClass: MockDocumentService },
+          { provide: FileService, useClass: MockFileService },
           { provide: FSTranslationService, useClass: MockFSTranslationService },
         ],
         declarations: [PolicyDetailsComponent],
@@ -129,7 +130,7 @@ describe('PolicyDetailsComponent', () => {
       changeRequestService = TestBed.inject(ChangeRequestService);
       routingService = TestBed.inject(RoutingService);
       policyService = TestBed.inject(PolicyService);
-      documentService = TestBed.inject(DocumentService);
+      fileService = TestBed.inject(FileService);
     })
   );
 
@@ -215,9 +216,9 @@ describe('PolicyDetailsComponent', () => {
   });
 
   it('should test get document', () => {
-    spyOn(documentService, 'getDocumentById').and.callThrough();
-    component.getDocument(documentId, documentName, mockEvent);
-    expect(documentService.getDocumentById).toHaveBeenCalledWith(documentId);
+    spyOn(fileService, 'getFile').and.callThrough();
+    component.getDocument(document, mockEvent);
+    expect(fileService.getFile).toHaveBeenCalledWith(documentId, documentMime);
   });
 
   it('should check if adding of new insured object is allowed', () => {

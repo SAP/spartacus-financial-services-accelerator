@@ -219,6 +219,8 @@ export interface Claim extends FSUserRequest {
   dateOfLoss?: string;
   timeOfLoss?: string;
   claimStatus?: ClaimStatus;
+  documents?: any;
+  properties?: any;
 }
 
 export interface AllowedFSRequestType {
