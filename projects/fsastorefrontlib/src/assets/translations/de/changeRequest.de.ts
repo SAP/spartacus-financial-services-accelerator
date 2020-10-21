@@ -2,6 +2,9 @@ export const changeRequest = {
   changeRequest: {
     false: '[DE] Not Included',
     true: '[DE] Included',
+    added: '[DE] Added',
+    notAdded: '[DE] Not Added',
+    existing: '[DE] Existing',
     description: '[DE] Description',
     currentSelection: '[DE] Current Selection',
     newSelection: '[DE] New Selection',

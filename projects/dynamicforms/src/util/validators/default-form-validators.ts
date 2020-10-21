@@ -9,7 +9,6 @@ import {
 export class DefaultFormValidators extends Validators {
   static passwordRegex = /^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^*()_\-+{};:.,]).{6,}$/;
   static phoneNumberRegex = /^(?:\d{6,20})?$/;
-  static postalCodeRegex = /^(?=.*[0-9])[A-Za-z0-9\s]+$/;
 
   static valueComparison(
     baseValue: number | Date,

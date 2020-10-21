@@ -1,6 +1,8 @@
 import { PolicyModule } from './../../../cms-components/my-account/policy/policy.module';
-import { ChangedPolicyData } from './../../../occ/occ-models/occ.models';
-import { RequestType } from './../../../occ/occ-models/occ.models';
+import {
+  ChangedPolicyData,
+  RequestType,
+} from './../../../occ/occ-models/occ.models';
 import { Injectable } from '@angular/core';
 import { FSTranslationService } from '../../../core/i18n/facade/translation.service';
 
@@ -25,6 +27,44 @@ export class ChangePolicyService {
       changeRequestData.insurancePolicy
     ) {
       switch (changeRequestData.fsStepGroupDefinition.requestType.code) {
+        case RequestType.INSURED_OBJECT_ADD: {
+          const insuredObject =
+            changeRequestData.insurancePolicy.insuredObjectList
+              .insuredObjects[0];
+          const changedInsuredObject =
+            changeRequestData.changedPolicy.insuredObjectList.insuredObjects[0];
+
+          changedInsuredObject.childInsuredObjectList.insuredObjects.forEach(
+            insuredObjectItem => {
+              let description = '';
+              let currentValue = '';
+              let newValue = '';
+              insuredObjectItem.insuredObjectItems.forEach(item => {
+                if (item.label === 'firstName' || item.label === 'lastName') {
+                  description += ' ' + item.value;
+                }
+              });
+
+              if (
+                this.childInsuredObjectExist(insuredObject, insuredObjectItem)
+              ) {
+                currentValue = this.getTranslation(
+                  ['changeRequest'],
+                  'existing'
+                );
+                newValue = currentValue;
+              } else {
+                currentValue = this.getTranslation(
+                  ['changeRequest'],
+                  'notAdded'
+                );
+                newValue = this.getTranslation(['changeRequest'], 'added');
+              }
+              this.setChangedPolicyObject(description, currentValue, newValue);
+            }
+          );
+          break;
+        }
         case RequestType.INSURED_OBJECT_CHANGE: {
           const insuredObject =
             changeRequestData.insurancePolicy.insuredObjectList
@@ -81,6 +121,15 @@ export class ChangePolicyService {
       }
       return this.changedPolicyObjects;
     }
+  }
+
+  childInsuredObjectExist(insuredObject, insuredObjectItem) {
+    return (
+      insuredObject.childInsuredObjectList.insuredObjects.filter(
+        childObject =>
+          insuredObjectItem.insuredObjectId === childObject.insuredObjectId
+      ).length > 0
+    );
   }
 
   setChangedPolicyObject(label: string, value: string, newValue: string) {
