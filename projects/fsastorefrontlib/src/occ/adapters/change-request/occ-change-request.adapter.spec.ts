@@ -7,7 +7,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
 import { OccChangeRequestAdapter } from './occ-change-request.adapter';
 
@@ -58,65 +58,74 @@ describe('OccChangeRequestAdapter', () => {
   });
 
   describe('createChangeRequest', () => {
-    it('should create change request', async(() => {
-      adapter
-        .createChangeRequestForPolicy(
-          policyId,
-          contractId,
-          changeRequestType,
-          userId
-        )
-        .subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url === createChangeRequestEndpoint &&
-          req.params.append('policyId', policyId) &&
-          req.params.append('contractId', contractId) &&
-          req.params.append('requestType', changeRequestType) &&
-          req.method === 'POST'
-        );
-      }, `POST method and url`);
-      expect(
-        occEndpointService.getUrl
-      ).toHaveBeenCalledWith(createChangeRequestEndpoint, { userId });
-    }));
+    it(
+      'should create change request',
+      waitForAsync(() => {
+        adapter
+          .createChangeRequestForPolicy(
+            policyId,
+            contractId,
+            changeRequestType,
+            userId
+          )
+          .subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return (
+            req.url === createChangeRequestEndpoint &&
+            req.params.append('policyId', policyId) &&
+            req.params.append('contractId', contractId) &&
+            req.params.append('requestType', changeRequestType) &&
+            req.method === 'POST'
+          );
+        }, `POST method and url`);
+        expect(
+          occEndpointService.getUrl
+        ).toHaveBeenCalledWith(createChangeRequestEndpoint, { userId });
+      })
+    );
   });
 
   describe('simulateChangeRequest', () => {
-    it('should simulate change request', async(() => {
-      adapter
-        .simulateChangeRequest(userId, requestId, changeRequestData)
-        .subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return (
-          req.url === simulateChangeRequestsEndpoint && req.method === 'POST'
+    it(
+      'should simulate change request',
+      waitForAsync(() => {
+        adapter
+          .simulateChangeRequest(userId, requestId, changeRequestData)
+          .subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return (
+            req.url === simulateChangeRequestsEndpoint && req.method === 'POST'
+          );
+        }, `POST method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          simulateChangeRequestsEndpoint,
+          {
+            userId,
+            requestId,
+          }
         );
-      }, `POST method and url`);
+      })
+    );
+  });
+
+  it(
+    'load change request',
+    waitForAsync(() => {
+      adapter.getChangeRequest(userId, requestId).subscribe();
+      const mockReq = httpMock.expectOne((req: HttpRequest<any>) => {
+        return req.url === changeRequestEndpoint && req.method === 'GET';
+      });
+      expect(mockReq.cancelled).toBeFalsy();
+      expect(mockReq.request.responseType).toEqual('json');
       expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        simulateChangeRequestsEndpoint,
+        changeRequestEndpoint,
         {
           userId,
           requestId,
         }
       );
-    }));
-  });
-
-  it('load change request', async(() => {
-    adapter.getChangeRequest(userId, requestId).subscribe();
-    const mockReq = httpMock.expectOne((req: HttpRequest<any>) => {
-      return req.url === changeRequestEndpoint && req.method === 'GET';
-    });
-    expect(mockReq.cancelled).toBeFalsy();
-    expect(mockReq.request.responseType).toEqual('json');
-    expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-      changeRequestEndpoint,
-      {
-        userId,
-        requestId,
-      }
-    );
-  }));
+    })
+  );
 
   it('should throw an error when loading change request', () => {
     let response: any;
@@ -146,25 +155,30 @@ describe('OccChangeRequestAdapter', () => {
     );
   });
 
-  it('cancel change request', async(() => {
-    const cancelChangeRequestBody = {
-      actionName: 'CANCEL',
-    };
-    adapter.cancelChangeRequest(userId, requestId).subscribe();
-    const mockReq = httpMock.expectOne((req: HttpRequest<any>) => {
-      return req.url === cancelChangeRequestsEndpoint && req.method === 'POST';
-    });
-    expect(mockReq.request.body).toEqual(cancelChangeRequestBody);
-    expect(mockReq.cancelled).toBeFalsy();
-    expect(mockReq.request.responseType).toEqual('json');
-    expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-      cancelChangeRequestsEndpoint,
-      {
-        userId,
-        requestId,
-      }
-    );
-  }));
+  it(
+    'cancel change request',
+    waitForAsync(() => {
+      const cancelChangeRequestBody = {
+        actionName: 'CANCEL',
+      };
+      adapter.cancelChangeRequest(userId, requestId).subscribe();
+      const mockReq = httpMock.expectOne((req: HttpRequest<any>) => {
+        return (
+          req.url === cancelChangeRequestsEndpoint && req.method === 'POST'
+        );
+      });
+      expect(mockReq.request.body).toEqual(cancelChangeRequestBody);
+      expect(mockReq.cancelled).toBeFalsy();
+      expect(mockReq.request.responseType).toEqual('json');
+      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+        cancelChangeRequestsEndpoint,
+        {
+          userId,
+          requestId,
+        }
+      );
+    })
+  );
 
   it('should throw an error when canceling change request', () => {
     let response: any;

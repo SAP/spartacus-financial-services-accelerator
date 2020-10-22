@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ChangeProcessConfirmationComponent } from './change-process-confirmation.component';
 import { I18nTestingModule } from '@spartacus/core';
 import { of } from 'rxjs';
@@ -31,22 +31,24 @@ describe('ChangeProcessConfirmationComponent', () => {
   let component: ChangeProcessConfirmationComponent;
   let fixture: ComponentFixture<ChangeProcessConfirmationComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ChangeProcessConfirmationComponent],
-      imports: [I18nTestingModule],
-      providers: [
-        {
-          provide: ChangeRequestService,
-          useClass: MockChangeRequestService,
-        },
-        {
-          provide: DomSanitizer,
-          useClass: MockDomSanitizer,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ChangeProcessConfirmationComponent],
+        imports: [I18nTestingModule],
+        providers: [
+          {
+            provide: ChangeRequestService,
+            useClass: MockChangeRequestService,
+          },
+          {
+            provide: DomSanitizer,
+            useClass: MockDomSanitizer,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ChangeProcessConfirmationComponent);

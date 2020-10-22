@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -78,48 +78,50 @@ describe('ChangeSimulationComponent', () => {
   let globalMessageService: GlobalMessageService;
   let changePolicyService: ChangePolicyService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule, ReactiveFormsModule],
-      providers: [
-        { provide: ChangeRequestService, useClass: MockChangeRequestService },
-        {
-          provide: UserRequestNavigationService,
-          useClass: MockUserRequestNavigationService,
-        },
-        {
-          provide: RoutingService,
-          useClass: MockRoutingService,
-        },
-        {
-          provide: GlobalMessageService,
-          useClass: GlobalMessageServiceMock,
-        },
-        {
-          provide: ChangePolicyService,
-          useClass: MockChangePolicyService,
-        },
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            routeConfig: {
-              path: 'testPath',
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule, ReactiveFormsModule],
+        providers: [
+          { provide: ChangeRequestService, useClass: MockChangeRequestService },
+          {
+            provide: UserRequestNavigationService,
+            useClass: MockUserRequestNavigationService,
+          },
+          {
+            provide: RoutingService,
+            useClass: MockRoutingService,
+          },
+          {
+            provide: GlobalMessageService,
+            useClass: GlobalMessageServiceMock,
+          },
+          {
+            provide: ChangePolicyService,
+            useClass: MockChangePolicyService,
+          },
+          {
+            provide: ActivatedRoute,
+            useValue: {
+              routeConfig: {
+                path: 'testPath',
+              },
             },
           },
-        },
-      ],
-      declarations: [ChangeSimulationComponent],
-    }).compileComponents();
-    mockUserRequestNavigationService = TestBed.inject(
-      UserRequestNavigationService
-    );
-    mockRoutingService = TestBed.inject(RoutingService);
-    globalMessageService = TestBed.inject(GlobalMessageService);
-    mockChangeRequestService = TestBed.inject(ChangeRequestService);
+        ],
+        declarations: [ChangeSimulationComponent],
+      }).compileComponents();
+      mockUserRequestNavigationService = TestBed.inject(
+        UserRequestNavigationService
+      );
+      mockRoutingService = TestBed.inject(RoutingService);
+      globalMessageService = TestBed.inject(GlobalMessageService);
+      mockChangeRequestService = TestBed.inject(ChangeRequestService);
 
-    changePolicyService = TestBed.inject(ChangePolicyService);
-    spyOn(changePolicyService, 'getChangedPolicyObjects').and.callThrough();
-  }));
+      changePolicyService = TestBed.inject(ChangePolicyService);
+      spyOn(changePolicyService, 'getChangedPolicyObjects').and.callThrough();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ChangeSimulationComponent);

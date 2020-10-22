@@ -1,5 +1,5 @@
 import { Component, DebugElement, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   AbstractControl,
   FormControl,
@@ -78,21 +78,23 @@ describe('DynamicSelectComponent', () => {
   let formService: FormService;
   let el: DebugElement;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [DynamicSelectComponent, MockErrorNoticeComponent],
-      imports: [ReactiveFormsModule, I18nTestingModule],
-      providers: [
-        { provide: OccValueListService, useClass: MockOccValueListService },
-        { provide: LanguageService, useClass: MockLanguageService },
-        {
-          provide: DynamicFormsConfig,
-          useValue: mockDynamicFormsConfig,
-        },
-        { provide: FormService, useClass: MockFormService },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [DynamicSelectComponent, MockErrorNoticeComponent],
+        imports: [ReactiveFormsModule, I18nTestingModule],
+        providers: [
+          { provide: OccValueListService, useClass: MockOccValueListService },
+          { provide: LanguageService, useClass: MockLanguageService },
+          {
+            provide: DynamicFormsConfig,
+            useValue: mockDynamicFormsConfig,
+          },
+          { provide: FormService, useClass: MockFormService },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(DynamicSelectComponent);

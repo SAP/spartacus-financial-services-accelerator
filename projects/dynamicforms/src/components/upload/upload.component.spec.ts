@@ -1,24 +1,23 @@
 import { Component, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  AbstractControl,
 } from '@angular/forms';
-import { of, Observable } from 'rxjs';
 import {
+  AuthService,
   I18nTestingModule,
   LanguageService,
   OCC_USER_ID_CURRENT,
-  AuthService,
 } from '@spartacus/core';
+import { Observable, of } from 'rxjs';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
+import { FileService } from '../../core/services/file/file.service';
 import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { FormService } from './../../core/services/form/form.service';
-import { FileService } from '../../core/services/file/file.service';
-
 import { UploadComponent } from './upload.component';
 
 @Component({
@@ -129,30 +128,32 @@ describe('UploadComponent', () => {
   let mockfileUpladService: FileService;
   let mockAuthService: AuthService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [UploadComponent, MockErrorNoticeComponent],
-      imports: [ReactiveFormsModule, I18nTestingModule],
-      providers: [
-        { provide: OccValueListService, useClass: MockOccValueListService },
-        { provide: LanguageService, useClass: MockLanguageService },
-        {
-          provide: DynamicFormsConfig,
-          useValue: mockDynamicFormsConfig,
-        },
-        {
-          provide: FileService,
-          useClass: MockFileUpladService,
-        },
-        { provide: FormService, useClass: MockFormService },
-        { provide: AuthService, useClass: MockAuthService },
-      ],
-    }).compileComponents();
-    fixture = TestBed.createComponent(UploadComponent);
-    formService = TestBed.inject(FormService);
-    mockfileUpladService = TestBed.inject(FileService);
-    mockAuthService = TestBed.inject(AuthService);
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [UploadComponent, MockErrorNoticeComponent],
+        imports: [ReactiveFormsModule, I18nTestingModule],
+        providers: [
+          { provide: OccValueListService, useClass: MockOccValueListService },
+          { provide: LanguageService, useClass: MockLanguageService },
+          {
+            provide: DynamicFormsConfig,
+            useValue: mockDynamicFormsConfig,
+          },
+          {
+            provide: FileService,
+            useClass: MockFileUpladService,
+          },
+          { provide: FormService, useClass: MockFormService },
+          { provide: AuthService, useClass: MockAuthService },
+        ],
+      }).compileComponents();
+      fixture = TestBed.createComponent(UploadComponent);
+      formService = TestBed.inject(FormService);
+      mockfileUpladService = TestBed.inject(FileService);
+      mockAuthService = TestBed.inject(AuthService);
+    })
+  );
 
   beforeEach(() => {
     component = fixture.componentInstance;

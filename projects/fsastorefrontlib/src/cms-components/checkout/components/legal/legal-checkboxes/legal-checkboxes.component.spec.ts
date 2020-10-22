@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule, RoutingService } from '@spartacus/core';
@@ -36,30 +36,32 @@ describe('LegalCheckboxesComponent', () => {
   let routingService: RoutingService;
   let checkoutService: FSCheckoutService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule, FormsModule],
-      declarations: [LegalCheckboxesComponent],
-      providers: [
-        {
-          provide: RoutingService,
-          useClass: MockRoutingService,
-        },
-        {
-          provide: ActivatedRoute,
-          useValue: MockActivatedRoute,
-        },
-        {
-          provide: FSCheckoutConfigService,
-          useClass: FSCheckoutConfigServiceStub,
-        },
-        {
-          provide: FSCheckoutService,
-          useClass: MockCheckoutService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule, FormsModule],
+        declarations: [LegalCheckboxesComponent],
+        providers: [
+          {
+            provide: RoutingService,
+            useClass: MockRoutingService,
+          },
+          {
+            provide: ActivatedRoute,
+            useValue: MockActivatedRoute,
+          },
+          {
+            provide: FSCheckoutConfigService,
+            useClass: FSCheckoutConfigServiceStub,
+          },
+          {
+            provide: FSCheckoutService,
+            useClass: MockCheckoutService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LegalCheckboxesComponent);

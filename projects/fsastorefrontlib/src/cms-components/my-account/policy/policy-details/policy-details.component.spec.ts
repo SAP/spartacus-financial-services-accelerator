@@ -1,18 +1,22 @@
-import { Type } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FileService } from '@fsa/dynamicforms';
+import {
+  I18nTestingModule,
+  OccConfig,
+  RouterState,
+  RoutingService,
+} from '@spartacus/core';
 import * as FileSaver from 'file-saver';
 import { Observable, of } from 'rxjs';
 import { PolicyService } from '../../../../core/my-account/facade/policy.service';
 import { AccordionModule } from '../../../../shared/accordion/accordion.module';
 import { ChangeRequestService } from './../../../../core/change-request/facade/change-request.service';
+import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
 import {
   AllowedFSRequestType,
   RequestType,
 } from './../../../../occ/occ-models';
 import { PolicyDetailsComponent } from './policy-details.component';
-import { FSTranslationService } from './../../../../core/i18n/facade/translation.service';
-import { FileService } from '@fsa/dynamicforms';
 
 class MockPolicyService {
   loadPolicyDetails() {}
@@ -104,31 +108,31 @@ describe('PolicyDetailsComponent', () => {
   let component: PolicyDetailsComponent;
   let fixture: ComponentFixture<PolicyDetailsComponent>;
   let changeRequestService: MockChangeRequestService;
-  let routingService: MockRoutingService;
+  let routingService: RoutingService;
   let policyService: PolicyService;
   let fileService: MockFileService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [AccordionModule, I18nTestingModule],
-      providers: [
-        { provide: RoutingService, useClass: MockRoutingService },
-        { provide: PolicyService, useClass: MockPolicyService },
-        { provide: OccConfig, useValue: mockOccModuleConfig },
-        { provide: ChangeRequestService, useClass: MockChangeRequestService },
-        { provide: FileService, useClass: MockFileService },
-        { provide: FSTranslationService, useClass: MockFSTranslationService },
-      ],
-      declarations: [PolicyDetailsComponent],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [AccordionModule, I18nTestingModule],
+        providers: [
+          { provide: RoutingService, useClass: MockRoutingService },
+          { provide: PolicyService, useClass: MockPolicyService },
+          { provide: OccConfig, useValue: mockOccModuleConfig },
+          { provide: ChangeRequestService, useClass: MockChangeRequestService },
+          { provide: FileService, useClass: MockFileService },
+          { provide: FSTranslationService, useClass: MockFSTranslationService },
+        ],
+        declarations: [PolicyDetailsComponent],
+      }).compileComponents();
 
-    changeRequestService = TestBed.get(
-      ChangeRequestService as Type<ChangeRequestService>
-    );
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
-    policyService = TestBed.get(PolicyService as Type<PolicyService>);
-    fileService = TestBed.get(FileService as Type<FileService>);
-  }));
+      changeRequestService = TestBed.inject(ChangeRequestService);
+      routingService = TestBed.inject(RoutingService);
+      policyService = TestBed.inject(PolicyService);
+      fileService = TestBed.inject(FileService);
+    })
+  );
 
   beforeEach(() => {
     spyOn(FileSaver, 'saveAs').and.stub();
@@ -149,7 +153,7 @@ describe('PolicyDetailsComponent', () => {
         state: {
           params: {},
         },
-      })
+      } as RouterState)
     );
     component.ngOnInit();
     expect(policyService.loadPolicyDetails).not.toHaveBeenCalled();
@@ -182,7 +186,7 @@ describe('PolicyDetailsComponent', () => {
       contractId,
       RequestType.INSURED_OBJECT_CHANGE
     );
-    expect(routingService.go).not.toHaveBeenCalledWith();
+    expect(routingService.go).not.toHaveBeenCalled();
   });
 
   it('should check if request type is allowed', () => {

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { FormDataService, YFormData } from '@fsa/dynamicforms';
 import { Cart, I18nTestingModule, RoutingService } from '@spartacus/core';
@@ -82,44 +82,46 @@ describe('PersonalDetailsNavigationComponent', () => {
   let routingService: RoutingService;
   let quoteService: QuoteService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule],
-      declarations: [PersonalDetailsNavigationComponent],
-      providers: [
-        {
-          provide: FSCartService,
-          useClass: MockCartService,
-        },
-        {
-          provide: FormDataService,
-          useClass: MockFormService,
-        },
-        {
-          provide: RoutingService,
-          useClass: MockRoutingService,
-        },
-        {
-          provide: FSCheckoutConfigService,
-          useClass: MockCheckoutConfigService,
-        },
-        {
-          provide: ActivatedRoute,
-          useClass: MockActivatedRoute,
-        },
-        {
-          provide: QuoteService,
-          useClass: MockQuoteService,
-        },
-        {
-          provide: PricingService,
-          useClass: MockPricingService,
-        },
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule],
+        declarations: [PersonalDetailsNavigationComponent],
+        providers: [
+          {
+            provide: FSCartService,
+            useClass: MockCartService,
+          },
+          {
+            provide: FormDataService,
+            useClass: MockFormService,
+          },
+          {
+            provide: RoutingService,
+            useClass: MockRoutingService,
+          },
+          {
+            provide: FSCheckoutConfigService,
+            useClass: MockCheckoutConfigService,
+          },
+          {
+            provide: ActivatedRoute,
+            useClass: MockActivatedRoute,
+          },
+          {
+            provide: QuoteService,
+            useClass: MockQuoteService,
+          },
+          {
+            provide: PricingService,
+            useClass: MockPricingService,
+          },
+        ],
+      }).compileComponents();
 
-    quoteService = TestBed.inject(QuoteService);
-  }));
+      quoteService = TestBed.inject(QuoteService);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PersonalDetailsNavigationComponent);

@@ -1,5 +1,5 @@
 import { Component, DebugElement, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   FormControl,
   FormGroup,
@@ -62,21 +62,23 @@ describe('TimeComponent', () => {
   let formService: FormService;
   let el: DebugElement;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [TimeComponent, MockErrorNoticeComponent],
-      imports: [ReactiveFormsModule, I18nTestingModule],
-      providers: [
-        { provide: OccValueListService, useClass: MockOccValueListService },
-        { provide: LanguageService, useClass: MockLanguageService },
-        {
-          provide: DynamicFormsConfig,
-          useValue: mockDynamicFormsConfig,
-        },
-        { provide: FormService, useClass: MockFormService },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TimeComponent, MockErrorNoticeComponent],
+        imports: [ReactiveFormsModule, I18nTestingModule],
+        providers: [
+          { provide: OccValueListService, useClass: MockOccValueListService },
+          { provide: LanguageService, useClass: MockLanguageService },
+          {
+            provide: DynamicFormsConfig,
+            useValue: mockDynamicFormsConfig,
+          },
+          { provide: FormService, useClass: MockFormService },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(TimeComponent);

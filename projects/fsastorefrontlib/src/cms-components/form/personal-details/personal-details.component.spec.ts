@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormDataService, FormDataStorageService } from '@fsa/dynamicforms';
 import {
   ActiveCartService,
@@ -97,38 +97,40 @@ describe('PersonalDetailsComponent', () => {
   let mockFormDataService: FormDataService;
   let mockActiveCartService: ActiveCartService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [SpinnerModule, I18nTestingModule],
-      declarations: [MockFormComponent, PersonalDetailsComponent],
-      providers: [
-        {
-          provide: FormDataService,
-          useClass: MockFormDataService,
-        },
-        {
-          provide: ActiveCartService,
-          useClass: MockActiveCartService,
-        },
-        {
-          provide: CmsComponentData,
-          useValue: MockCmsComponentData,
-        },
-        {
-          provide: FormDataStorageService,
-          useClass: MockFormDataStorageService,
-        },
-        {
-          provide: FormDataStorageService,
-          useClass: MockFormDataStorageService,
-        },
-        { provide: AuthService, useClass: MockAuthService },
-      ],
-    }).compileComponents();
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [SpinnerModule, I18nTestingModule],
+        declarations: [MockFormComponent, PersonalDetailsComponent],
+        providers: [
+          {
+            provide: FormDataService,
+            useClass: MockFormDataService,
+          },
+          {
+            provide: ActiveCartService,
+            useClass: MockActiveCartService,
+          },
+          {
+            provide: CmsComponentData,
+            useValue: MockCmsComponentData,
+          },
+          {
+            provide: FormDataStorageService,
+            useClass: MockFormDataStorageService,
+          },
+          {
+            provide: FormDataStorageService,
+            useClass: MockFormDataStorageService,
+          },
+          { provide: AuthService, useClass: MockAuthService },
+        ],
+      }).compileComponents();
 
-    mockFormDataService = TestBed.inject(FormDataService);
-    mockActiveCartService = TestBed.inject(ActiveCartService);
-  }));
+      mockFormDataService = TestBed.inject(FormDataService);
+      mockActiveCartService = TestBed.inject(ActiveCartService);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PersonalDetailsComponent);

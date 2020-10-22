@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { of, BehaviorSubject } from 'rxjs';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
@@ -30,31 +30,33 @@ describe('FormPopupErrorComponent', () => {
   const mockModalRef: MockNgbModalRef = new MockNgbModalRef();
   let modalInstance: any;
 
-  beforeEach(async(() => {
-    mockLanguageService = new MockLanguageService();
-    mockFormComponentService = new MockFormComponentService();
+  beforeEach(
+    waitForAsync(() => {
+      mockLanguageService = new MockLanguageService();
+      mockFormComponentService = new MockFormComponentService();
 
-    TestBed.configureTestingModule({
-      declarations: [FormPopupErrorComponent],
-      imports: [ReactiveFormsModule, I18nTestingModule],
-      providers: [
-        {
-          provide: LanguageService,
-          useValue: mockLanguageService,
-        },
-        {
-          provide: FormComponentService,
-          useValue: mockFormComponentService,
-        },
-        {
-          provide: NgbActiveModal,
-          useValue: {
-            open: () => {},
+      TestBed.configureTestingModule({
+        declarations: [FormPopupErrorComponent],
+        imports: [ReactiveFormsModule, I18nTestingModule],
+        providers: [
+          {
+            provide: LanguageService,
+            useValue: mockLanguageService,
           },
-        },
-      ],
-    }).compileComponents();
-  }));
+          {
+            provide: FormComponentService,
+            useValue: mockFormComponentService,
+          },
+          {
+            provide: NgbActiveModal,
+            useValue: {
+              open: () => {},
+            },
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FormPopupErrorComponent);

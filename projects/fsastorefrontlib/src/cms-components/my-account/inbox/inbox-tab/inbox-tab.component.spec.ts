@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CmsService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
@@ -27,24 +27,26 @@ describe('InboxTabComponent', () => {
   let fixture: ComponentFixture<InboxTabComponent>;
   let el: DebugElement;
 
-  beforeEach(async(() => {
-    mockInboxService = new MockInboxService();
-    mockCmsService = new MockCmsService();
+  beforeEach(
+    waitForAsync(() => {
+      mockInboxService = new MockInboxService();
+      mockCmsService = new MockCmsService();
 
-    TestBed.configureTestingModule({
-      declarations: [InboxTabComponent],
-      providers: [
-        {
-          provide: InboxService,
-          useValue: mockInboxService,
-        },
-        {
-          provide: CmsService,
-          useValue: mockCmsService,
-        },
-      ],
-    }).compileComponents();
-  }));
+      TestBed.configureTestingModule({
+        declarations: [InboxTabComponent],
+        providers: [
+          {
+            provide: InboxService,
+            useValue: mockInboxService,
+          },
+          {
+            provide: CmsService,
+            useValue: mockCmsService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(InboxTabComponent);

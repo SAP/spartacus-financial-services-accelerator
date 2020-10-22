@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   FormControl,
   FormGroup,
@@ -75,19 +75,21 @@ describe('AbstractFormComponent', () => {
   let mockLanguageService: LanguageService;
   let formService: FormService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [AbstractFormComponent],
-      imports: [ReactiveFormsModule],
-      providers: [
-        { provide: LanguageService, useClass: MockLanguageService },
-        { provide: DynamicFormsConfig, useValue: mockDynamicFormsConfig },
-        { provide: UserPrefillResolver, useClass: MockUserPrefillResolver },
-        { provide: FormService, useClass: MockFormService },
-      ],
-    }).compileComponents();
-    mockLanguageService = TestBed.inject(LanguageService);
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [AbstractFormComponent],
+        imports: [ReactiveFormsModule],
+        providers: [
+          { provide: LanguageService, useClass: MockLanguageService },
+          { provide: DynamicFormsConfig, useValue: mockDynamicFormsConfig },
+          { provide: UserPrefillResolver, useClass: MockUserPrefillResolver },
+          { provide: FormService, useClass: MockFormService },
+        ],
+      }).compileComponents();
+      mockLanguageService = TestBed.inject(LanguageService);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AbstractFormComponent);

@@ -1,13 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { I18nTestingModule, RoutingService } from '@spartacus/core';
-import { CreateClaimComponent } from './create-claim.component';
-import { ClaimService } from '../../../../core/my-account/facade/claim.service';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { StoreModule } from '@ngrx/store';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { SelectedPolicy } from '../../../../core/my-account/services';
-import createSpy = jasmine.createSpy;
 import { FileService } from '@fsa/dynamicforms';
+import { StoreModule } from '@ngrx/store';
+import { I18nTestingModule, RoutingService } from '@spartacus/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { ClaimService } from '../../../../core/my-account/facade/claim.service';
+import { SelectedPolicy } from '../../../../core/my-account/services';
+import { CreateClaimComponent } from './create-claim.component';
+import createSpy = jasmine.createSpy;
 
 class MockRoutingService {
   go = createSpy();
@@ -49,20 +49,21 @@ describe('CreateClaimComponent', () => {
   let mockRoutingService: MockRoutingService;
   let mockFileService: FileService;
 
-  beforeEach(async(() => {
-    mockClaimService = new MockClaimService();
-    mockRoutingService = new MockRoutingService();
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule, FormsModule, StoreModule.forRoot({})],
-      providers: [
-        { provide: ClaimService, useValue: mockClaimService },
-        { provide: FileService, useClass: MockFileService },
-
-        { provide: RoutingService, useValue: mockRoutingService },
-      ],
-      declarations: [CreateClaimComponent],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      mockClaimService = new MockClaimService();
+      mockRoutingService = new MockRoutingService();
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule, FormsModule, StoreModule.forRoot({})],
+        providers: [
+          { provide: ClaimService, useValue: mockClaimService },
+          { provide: FileService, useClass: MockFileService },
+          { provide: RoutingService, useValue: mockRoutingService },
+        ],
+        declarations: [CreateClaimComponent],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     mockFileService = TestBed.inject(FileService);

@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   CheckoutPaymentService,
   PaymentDetails,
@@ -7,7 +6,6 @@ import {
 } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
-import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
 
 @Component({
   selector: 'cx-fs-final-review',
@@ -20,9 +18,7 @@ export class FinalReviewComponent implements OnInit {
   constructor(
     protected checkoutService: FSCheckoutService,
     protected checkoutPaymentService: CheckoutPaymentService,
-    protected routingService: RoutingService,
-    protected checkoutConfigService: FSCheckoutConfigService,
-    protected activatedRoute: ActivatedRoute
+    protected routingService: RoutingService
   ) {}
 
   ngOnInit() {
@@ -33,8 +29,9 @@ export class FinalReviewComponent implements OnInit {
   toggleTAndC(): void {
     this.tAndCToggler = !this.tAndCToggler;
   }
+
   placeOrder(): void {
-    this.checkoutService.placeOrder();
+    this.checkoutService.placeOrder(this.tAndCToggler);
     this.checkoutService.orderPlaced = true;
     this.routingService.go({ cxRoute: 'orderConfirmation' });
   }

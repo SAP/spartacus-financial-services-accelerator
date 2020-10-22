@@ -13,6 +13,7 @@ export const initialState: FSCheckoutStepsState = {
   },
   paymentDetails: {},
   orderDetails: {},
+  poNumber: { po: undefined, costCenter: undefined },
 };
 
 export function reducer(

@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { CmsComponent, Product } from '@spartacus/core';
 import { CmsComponentData } from '@spartacus/storefront';
@@ -37,23 +37,25 @@ describe('ProductFeatureComponent', () => {
     uid: 'test',
   };
 
-  beforeEach(async(() => {
-    mockProductService = new MockProductService();
-    TestBed.configureTestingModule({
-      imports: [],
-      declarations: [ProductFeatureComponent],
-      providers: [
-        {
-          provide: CmsComponentData,
-          useValue: MockCmsComponentData,
-        },
-        {
-          provide: FSProductService,
-          useValue: mockProductService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      mockProductService = new MockProductService();
+      TestBed.configureTestingModule({
+        imports: [],
+        declarations: [ProductFeatureComponent],
+        providers: [
+          {
+            provide: CmsComponentData,
+            useValue: MockCmsComponentData,
+          },
+          {
+            provide: FSProductService,
+            useValue: mockProductService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductFeatureComponent);

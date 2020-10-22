@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
@@ -58,11 +58,7 @@ class MockRoutingService {
   go() {}
 }
 
-class MockCheckoutConfigService {
-  getNextCheckoutStepUrl(activeRoute: any) {
-    return '/';
-  }
-}
+class MockCheckoutConfigService {}
 
 describe('AddOptionsComponent', () => {
   let component: AddOptionsComponent;
@@ -72,43 +68,45 @@ describe('AddOptionsComponent', () => {
   let checkoutConfigService: FSCheckoutConfigService;
   let el: DebugElement;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        I18nTestingModule,
-        SpinnerModule,
-        MediaModule,
-        NgbTooltipModule,
-      ],
-      declarations: [AddOptionsComponent],
-      providers: [
-        {
-          provide: FSCartService,
-          useClass: MockCartService,
-        },
-        {
-          provide: CurrencyService,
-          useClass: MockCurrencyService,
-        },
-        {
-          provide: RoutingService,
-          useClass: MockRoutingService,
-        },
-        {
-          provide: FSCheckoutConfigService,
-          useClass: MockCheckoutConfigService,
-        },
-        {
-          provide: ActivatedRoute,
-          useValue: {
-            routeConfig: {
-              path: 'checkout/add-options',
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [
+          I18nTestingModule,
+          SpinnerModule,
+          MediaModule,
+          NgbTooltipModule,
+        ],
+        declarations: [AddOptionsComponent],
+        providers: [
+          {
+            provide: FSCartService,
+            useClass: MockCartService,
+          },
+          {
+            provide: CurrencyService,
+            useClass: MockCurrencyService,
+          },
+          {
+            provide: RoutingService,
+            useClass: MockRoutingService,
+          },
+          {
+            provide: FSCheckoutConfigService,
+            useClass: MockCheckoutConfigService,
+          },
+          {
+            provide: ActivatedRoute,
+            useValue: {
+              routeConfig: {
+                path: 'checkout/add-options',
+              },
             },
           },
-        },
-      ],
-    }).compileComponents();
-  }));
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AddOptionsComponent);
@@ -126,7 +124,6 @@ describe('AddOptionsComponent', () => {
     spyOn(routingService, 'go').and.callThrough();
 
     checkoutConfigService = TestBed.inject(FSCheckoutConfigService);
-    spyOn(checkoutConfigService, 'getNextCheckoutStepUrl').and.callThrough();
 
     component.ngOnInit();
     el = fixture.debugElement;

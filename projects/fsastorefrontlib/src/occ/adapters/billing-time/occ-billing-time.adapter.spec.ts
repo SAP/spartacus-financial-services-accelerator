@@ -3,7 +3,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
 import { OccBillingTimeAdapter } from './occ-billing-time.adapter';
 
@@ -43,14 +43,17 @@ describe('OccBillingTimeAdapter', () => {
   });
 
   describe('getBillingTimes', () => {
-    it('get billing times', async(() => {
-      adapter.getBillingTimes(productCodes).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === billingtimeEndpoint && req.method === 'GET';
-      }, `GET method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(
-        billingtimeEndpoint
-      );
-    }));
+    it(
+      'get billing times',
+      waitForAsync(() => {
+        adapter.getBillingTimes(productCodes).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === billingtimeEndpoint && req.method === 'GET';
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(
+          billingtimeEndpoint
+        );
+      })
+    );
   });
 });
