@@ -1,8 +1,5 @@
 import { PolicyModule } from './../../../cms-components/my-account/policy/policy.module';
-import {
-  ChangedPolicyData,
-  RequestType,
-} from './../../../occ/occ-models/occ.models';
+import { ChangedPolicyData, RequestType } from './../../../occ/occ-models/occ.models';
 import { Injectable } from '@angular/core';
 import { FSTranslationService } from '../../../core/i18n/facade/translation.service';
 
@@ -13,6 +10,7 @@ export class ChangePolicyService {
   constructor(protected translationService: FSTranslationService) {}
 
   changedPolicyObjects: ChangedPolicyData[] = [];
+  descriptionKeys = ['firstName', 'lastName'];
 
   getTranslation(translationChunks: string[], translationKey: string): string {
     return this.translationService.getTranslationValue(
@@ -40,13 +38,13 @@ export class ChangePolicyService {
               let currentValue = '';
               let newValue = '';
               childInsuredObjectItem.insuredObjectItems
-                .filter(
-                  item =>
-                    item.label === 'firstName' || item.label === 'lastName'
-                )
+                .filter(item => this.descriptionKeys.some(key => key === item.label))
                 .forEach(foundItem => (description += ' ' + foundItem.value));
               if (
-                this.childInsuredObjectExist(insuredObject, childInsuredObjectItem)
+                this.childInsuredObjectExist(
+                  insuredObject,
+                  childInsuredObjectItem
+                )
               ) {
                 currentValue = this.getTranslation(
                   ['changeRequest'],
@@ -124,11 +122,9 @@ export class ChangePolicyService {
   }
 
   childInsuredObjectExist(insuredObject, insuredObjectItem) {
-    return (
-      insuredObject.childInsuredObjectList.insuredObjects.filter(
-        childObject =>
-          insuredObjectItem.insuredObjectId === childObject.insuredObjectId
-      ).length > 0
+    return insuredObject.childInsuredObjectList.insuredObjects.some(
+      childObject =>
+        insuredObjectItem.insuredObjectId === childObject.insuredObjectId
     );
   }
 
