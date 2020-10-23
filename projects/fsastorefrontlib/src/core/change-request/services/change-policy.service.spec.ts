@@ -10,6 +10,25 @@ const mockChangeProcessForm = {
   driverGender: 'Female',
 };
 
+const mockInsuredObject = {
+  insuredObjectId: 'testInsuredObject',
+  insuredObjectItems: [],
+  childInsuredObjectList: {
+    insuredObjects: [
+      {
+        insuredObjectId: 'testChildInsuredObject',
+        insuredObjectItems: [
+          {
+            label: 'lastName',
+            value: 'Initial lastName',
+            changeable: true,
+          },
+        ],
+      },
+    ],
+  },
+};
+
 class MockFSTranslationService {
   getTranslationValue() {}
 }
@@ -144,6 +163,85 @@ describe('ChangePolicyService', () => {
     };
     service.getChangedPolicyObjects(changeRequestData);
   });
+  it('should get changed policy objects for type add insured object', () => {
+    const changeRequestData = {
+      fsStepGroupDefinition: {
+        requestType: {
+          code: RequestType.INSURED_OBJECT_ADD,
+        },
+      },
+      changedPolicy: {
+        insuredObjectList: {
+          insuredObjects: [
+            {
+              insuredObjectItems: [
+                {
+                  label: 'testLabel',
+                  value: '123',
+                },
+              ],
+              childInsuredObjectList: {
+                insuredObjects: [
+                  {
+                    insuredObjectId: 'testChildInsuredObject',
+                    insuredObjectItems: [
+                      {
+                        label: 'lastName',
+                        value: 'Initial lastName',
+                      },
+                    ],
+                  },
+                  {
+                    insuredObjectId: 'testChildInsuredObject2',
+                    insuredObjectItems: [
+                      {
+                        label: 'lastName',
+                        value: 'Initial lastName',
+                      },
+                    ],
+                  },
+                  {
+                    insuredObjectId: 'testChildInsuredObject3',
+                    insuredObjectItems: [
+                      {
+                        label: 'lastName',
+                        value: 'Initial lastName',
+                      },
+                    ],
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+      insurancePolicy: {
+        insuredObjectList: {
+          insuredObjects: [
+            {
+              insuredObjectItems: [{}],
+              childInsuredObjectList: {
+                insuredObjects: [
+                  {
+                    insuredObjectId: 'testChildInsuredObject3',
+                    insuredObjectItems: [
+                      {
+                        label: 'lastName',
+                        value: 'Initial lastName',
+                      },
+                    ],
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    };
+    expect(service.getChangedPolicyObjects(changeRequestData).length).toEqual(
+      3
+    );
+  });
 
   it('should create new insured object based on provided form data', () => {
     const newInsuredObject = service.createInsuredObject(mockChangeProcessForm);
@@ -188,5 +286,30 @@ describe('ChangePolicyService', () => {
     expect(changedInsuredObject.insuredObjectItems[0].value).toEqual(
       'Changed lastName'
     );
+  });
+
+  it('should find child insured object based on provided insured object', () => {
+    const childInsuredObject = {
+      insuredObjectId: 'testChildInsuredObject',
+      insuredObjectItems: [],
+    };
+
+    const result = service.childInsuredObjectExist(
+      mockInsuredObject,
+      childInsuredObject
+    );
+    expect(result).toEqual(true);
+  });
+  it('should not find child insured object based on provided insured object', () => {
+    const childInsuredObject = {
+      insuredObjectId: 'testInsuredObjectNonExisting',
+      insuredObjectItems: [],
+    };
+
+    const result = service.childInsuredObjectExist(
+      mockInsuredObject,
+      childInsuredObject
+    );
+    expect(result).toEqual(false);
   });
 });
