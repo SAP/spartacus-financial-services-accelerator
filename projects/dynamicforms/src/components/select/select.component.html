@@ -12,10 +12,10 @@
         [attr.name]="config.name"
         formControlName="{{ config.name }}"
       >
-        <option [selected]="true" disabled value="null">{{
+        <option disabled [value]="undefined">{{
           'dynamicforms.pleaseSelect' | cxTranslate
         }}</option>
-        <option *ngFor="let option of config.options" value="{{ option.name }}">
+        <option *ngFor="let option of config.options" [value]="option.name">
           <ng-container *ngIf="activeLang$ | async as activeLang">
             {{ getLocalizedOption(option.label, activeLang) }}
           </ng-container>
