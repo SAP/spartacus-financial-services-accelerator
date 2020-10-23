@@ -1,5 +1,8 @@
 import { PolicyModule } from './../../../cms-components/my-account/policy/policy.module';
-import { ChangedPolicyData, RequestType } from './../../../occ/occ-models/occ.models';
+import {
+  ChangedPolicyData,
+  RequestType,
+} from './../../../occ/occ-models/occ.models';
 import { Injectable } from '@angular/core';
 import { FSTranslationService } from '../../../core/i18n/facade/translation.service';
 
@@ -38,8 +41,13 @@ export class ChangePolicyService {
               let currentValue = '';
               let newValue = '';
               childInsuredObjectItem.insuredObjectItems
-                .filter(item => this.descriptionKeys.some(key => key === item.label))
-                .forEach(foundItem => (description += ' ' + foundItem.value));
+                .filter(item =>
+                  this.descriptionKeys.some(key => key === item.label)
+                )
+                .forEach(
+                  foundItem =>
+                    (description = `${description} ${foundItem.value}`)
+                );
               if (
                 this.childInsuredObjectExist(
                   insuredObject,
