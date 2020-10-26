@@ -8,6 +8,7 @@ export const userRequest = {
     whenHappened: 'Wann ist es passiert',
     whatTime: 'Uhrzeit',
     howAccidentOccurred: 'Wie ist der Schaden entstanden',
+    relevantFiles: '[DE] Relevant files',
     reportedToPolice: 'Wurde die Polizei informiert',
     phFault: 'Wer ist Unfallverantwortlich',
     witnessExist:
