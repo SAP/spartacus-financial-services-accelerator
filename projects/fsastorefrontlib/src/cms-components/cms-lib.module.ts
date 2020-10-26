@@ -19,6 +19,7 @@ import { NotFoundModule } from './not-found/not-found.module';
 import { CmsFormSubmitModule } from './form/cms-form-submit/cms-form-submit.module';
 import { PersonalDetailsModule } from './form/personal-details/personal-details.module';
 import { GeneralInformationModule } from './form/general-information/general-information.module';
+import { FSLoginFormModule } from './user/login-form/login-form.module';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import { GeneralInformationModule } from './form/general-information/general-inf
     CustomContainerModule,
     MyAccountModule,
     FSRegisterModule,
+    FSLoginFormModule,
     FnolModule,
     ChangeProcessModule,
     EffectsModule.forFeature(effects),
@@ -49,6 +51,7 @@ import { GeneralInformationModule } from './form/general-information/general-inf
     CustomContainerModule,
     MyAccountModule,
     FSRegisterModule,
+    FSLoginFormModule,
     FnolModule,
     ChangeProcessModule,
     CategoryFeatureModule,
