@@ -1,5 +1,6 @@
 import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { FileService } from '@fsa/dynamicforms';
 import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import { SpinnerModule } from '@spartacus/storefront';
 import { Observable, of } from 'rxjs';
@@ -49,6 +50,18 @@ const MockOccConfig: OccConfig = {
     },
   },
 };
+
+class MockFileService {
+  uploadFile(file: File): Observable<any> {
+    return of();
+  }
+  resetFiles(): void {}
+  setFileInStore(body: any) {}
+  getUploadedDocuments(): Observable<any> {
+    return of();
+  }
+}
+
 const contractNumber = '01';
 describe('PoliciesComponent', () => {
   let component: PoliciesComponent;
@@ -56,6 +69,7 @@ describe('PoliciesComponent', () => {
   let policyService: PolicyService;
   let claimService: ClaimService;
   let routingService: RoutingService;
+  let mockFileService: FileService;
 
   beforeEach(
     waitForAsync(() => {
@@ -79,6 +93,7 @@ describe('PoliciesComponent', () => {
             provide: ClaimService,
             useClass: MockClaimService,
           },
+          { provide: FileService, useClass: MockFileService },
         ],
       }).compileComponents();
     })
@@ -90,6 +105,7 @@ describe('PoliciesComponent', () => {
     fixture.detectChanges();
     policyService = TestBed.inject(PolicyService);
     claimService = TestBed.inject(ClaimService);
+    mockFileService = TestBed.inject(FileService);
     routingService = TestBed.inject(RoutingService);
   });
   it('should create', () => {
