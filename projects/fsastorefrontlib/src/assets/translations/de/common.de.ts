@@ -30,6 +30,7 @@ export const fscommon = {
     retrieve: 'Abrufen',
     notAvailable: 'N/V',
     contractId: 'VertragId',
+    expiredPolicyId: '[DE] Expired Policy Id',
     orderTotal: 'Gesamtbetrag',
     orderConfirmation: 'Bestellbestätigung',
     startDate: 'Startdatum',
