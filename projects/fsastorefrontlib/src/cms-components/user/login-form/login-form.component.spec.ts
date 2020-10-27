@@ -24,6 +24,7 @@ class MockUrlPipe implements PipeTransform {
 }
 
 @Component({
+  // tslint:disable
   selector: 'cx-login-register',
   template: '',
 })
