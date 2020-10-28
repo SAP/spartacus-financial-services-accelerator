@@ -13,7 +13,8 @@ export const userRequest = {
     witnessExist: 'Are there any witnesses we can contact',
     description: 'Description',
     vehicleParked: 'Is your vehicle parked',
-    otherVehicleInvolved: 'Were there any other vehicle involved?',
+    otherVehicleInvolved: 'Were there any other vehicle involved',
     numberOfVehicleInvolved: 'How many vehicles are involved',
+    entitledToDriveVehicle: 'Driver entitled to drive vehicle',
   },
 };
