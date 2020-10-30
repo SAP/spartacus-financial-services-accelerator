@@ -36,7 +36,7 @@ export class BindQuoteGuard implements CanActivate {
     const sourceStep = <FSCheckoutStep>(
       this.fsCheckoutConfigService.steps[currentStepIndex - 1]
     );
-    if (sourceStep.id !== this.COMPARISON_CHECKOUT_STEP) {
+    if (sourceStep && sourceStep.id !== this.COMPARISON_CHECKOUT_STEP) {
       return this.cartService.getActive().pipe(
         filter(cart => !!cart.code),
         take(1),
