@@ -1,0 +1,10 @@
+@import '../../fs-mixins';
+@import '../../theme';
+
+%cx-fs-payment-method {
+  h4 {
+    font-size: var(--cx-h6-font-size);
+    color: var(--cx-color-primary);
+    font-weight: var(--cx-font-weight-semi);
+  }
+}

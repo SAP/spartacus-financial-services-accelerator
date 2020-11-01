@@ -91,6 +91,8 @@ export const fscommon = {
     'property-address-line-1': 'Property address',
     lifeMainDob: 'Date of Birth',
     contribution: 'Contribution',
+    creditCard: 'Credit Card',
+    invoice: 'Invoice',
     application: {
       title: 'Application',
       applicationRequestSubmitted:
