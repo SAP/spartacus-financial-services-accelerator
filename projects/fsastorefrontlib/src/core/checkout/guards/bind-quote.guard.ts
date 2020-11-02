@@ -27,7 +27,10 @@ export class BindQuoteGuard implements CanActivate {
     protected fsCheckoutConfigService: FSCheckoutConfigService
   ) {}
 
-  protected readonly COMPARISON_CHECKOUT_STEP = 'comparisonCheckoutStep';
+  protected readonly CART_CREATION_CHECKOUT_STEPS = [
+    'comparisonCheckoutStep',
+    'configureProductStep',
+  ];
 
   canActivate(route: CmsActivatedRouteSnapshot): Observable<boolean | UrlTree> {
     const currentStepIndex = this.fsCheckoutConfigService.getCurrentStepIndex(
@@ -36,7 +39,10 @@ export class BindQuoteGuard implements CanActivate {
     const sourceStep = <FSCheckoutStep>(
       this.fsCheckoutConfigService.steps[currentStepIndex - 1]
     );
-    if (sourceStep && sourceStep.id !== this.COMPARISON_CHECKOUT_STEP) {
+    if (
+      sourceStep &&
+      !this.CART_CREATION_CHECKOUT_STEPS.includes(sourceStep.id)
+    ) {
       return this.cartService.getActive().pipe(
         filter(cart => !!cart.code),
         take(1),
