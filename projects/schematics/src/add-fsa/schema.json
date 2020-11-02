@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "SpartacusSchematics",
+  "title": "Spartacus Schematics",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "baseUrl": {
+      "type": "string",
+      "description": "The url of the OCC backend",
+      "default": "https://financialservices.local:9002"
+    },
+    "occPrefix": {
+      "type": "string",
+      "description": "The OCC API prefix. E.g.: /occ/v2/",
+      "default": "/rest/v2/"
+    },
+    "baseSite": {
+      "type": "string",
+      "description": "A comma-separated list of base site(s) to use with Spartacus"
+    },
+    "currency": {
+      "type": "string",
+      "description": "A comma-separated list of currencies to use in Spartacus",
+      "default": "USD"
+    },
+    "language": {
+      "type": "string",
+      "description": "A comma-separated list of languages to use in Spartacus",
+      "default": "en"
+    }
+  },
+  "required": []
+}
