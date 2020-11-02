@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FSPaymentMethodComponent } from './payment-method.component';
 import {
   UserPaymentService,
@@ -33,14 +32,17 @@ const mockPaymentDetails: PaymentDetails = {
 class MockCxIconComponent {
   @Input() type: ICON_TYPE;
 }
+
 class MockCheckoutDeliveryService {
   getDeliveryAddress(): Observable<PaymentDetails> {
     return of(null);
   }
 }
+
 class MockGlobalMessageService {
   add = createSpy();
 }
+
 class MockCheckoutPaymentService {
   setPaymentDetails = createSpy();
   createPaymentDetails = createSpy();
@@ -48,6 +50,7 @@ class MockCheckoutPaymentService {
     return of(mockPaymentDetails);
   }
 }
+
 class MockUserPaymentService {
   loadPaymentMethods(): void {}
   getPaymentMethods(): Observable<PaymentDetails[]> {
@@ -67,6 +70,7 @@ class MockActiveCartService {
     return false;
   }
 }
+
 class MockCheckoutStepService {
   next = createSpy();
   back = createSpy();
@@ -74,19 +78,20 @@ class MockCheckoutStepService {
     return 'common.back';
   }
 }
+
 class MockFSTranslationService {
   getTranslationValue() {}
   translate() {
     return of('test translation');
   }
 }
+
 const mockActivatedRoute = {
   snapshot: {
     url: ['checkout', 'payment-method'],
   },
 };
 
-class MockSpinnerComponent {}
 describe('FSPaymentMethodComponent', () => {
   let component: FSPaymentMethodComponent;
   let fixture: ComponentFixture<FSPaymentMethodComponent>;

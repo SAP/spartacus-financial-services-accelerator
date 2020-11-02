@@ -10,28 +10,3 @@
   margin: 1rem auto 3rem;
   text-align: center;
 }
-cx-fs-payment-method {
-  .cx-checkout-btns {
-    justify-content: flex-start;
-  }
-  cx-payment-form {
-    & form > .row:not(.cx-checkout-btns) {
-      @include media-breakpoint-down(xs) {
-        padding: 2rem 0;
-      }
-    }
-    .cx-payment-form-billing-address {
-      color: var(--cx-color-primary);
-    }
-    .col-md-12.col-xl-10 {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-    @include media-breakpoint-down(md) {
-      background-color: var(--cx-color-1);
-    }
-  }
-  @include media-breakpoint-down(md) {
-    background-color: var(--cx-color-1);
-  }
-}
