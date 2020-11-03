@@ -90,6 +90,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
             this.setFileCode(file, event);
             this.handleFileResponse(event);
           }
+          // when all files are finished uploading show the remove all button
           this.removeAllDisable = !!this.overallProgressFinished(
             this.individualProgress
           );
