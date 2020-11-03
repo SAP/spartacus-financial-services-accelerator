@@ -46,7 +46,7 @@
               ><i class="fas fa-download"></i
             ></span>
             <span
-              *ngIf="file?.code || progress === 0"
+              *ngIf="file?.code"
               class="close"
               role="button"
               (click)="removeFile(i, uploadField)"
@@ -54,16 +54,16 @@
             ></span>
             <div class="row">
               <div class="col-10 col-sm-11">
-                <div class="progress" *ngIf="progress">
+                <div class="progress" *ngIf="progress[i] > 0">
                   <div
                     class="progress-bar"
-                    [style.width]="progress + '%'"
+                    [style.width]="progress[i] + '%'"
                     role="progressbar"
-                    [attr.aria-valuenow]="progress"
+                    [attr.aria-valuenow]="progress[i]"
                     aria-valuemin="0"
                     aria-valuemax="100"
                   >
-                    {{ progress }}
+                    {{ progress[i] }}
                   </div>
                 </div>
               </div>
@@ -73,11 +73,10 @@
             </div>
           </li>
         </ul>
-        <ng-container *ngIf="fileList.length > 0 && progress === 0">
+        <ng-container *ngIf="fileList.length > 0 && !uploadDisable">
           <div class="row justify-content-between">
             <div class="col-md-3 col-sm-3 col-12 mb-3 mb-sm-0">
               <button
-                [disabled]="uploadDisable"
                 class="action-button btn-block"
                 (click)="removeAll(uploadField)"
               >
@@ -86,7 +85,6 @@
             </div>
             <div class="col-md-3 col-sm-3 col-12">
               <button
-                [disabled]="uploadDisable"
                 class="btn-primary btn-block"
                 (click)="uploadFiles(fileList)"
               >

@@ -23,7 +23,7 @@ import { saveAs } from 'file-saver';
 export class UploadComponent extends AbstractFormComponent implements OnInit {
   fileList: File[] = [];
   uploadControl: AbstractControl;
-  progress = 0;
+  progress: {};
   files = {};
   uploadDisable: boolean;
 
@@ -42,6 +42,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   handleFiles(event) {
     // Reset when user is choosing files again
     this.resetFileList();
+    this.uploadDisable = false;
+    this.progress = {};
     if (
       this.config.accept.toString() === event.target.accept &&
       this.config.multiple === event.target.multiple &&
@@ -73,17 +75,17 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   uploadFiles(files: File[]) {
     this.uploadDisable = true;
     this.setValueAndValidate(this.fileList);
-    files.forEach(file => {
+    files.forEach((file, index) => {
       this.subscription.add(
         this.fileUploadService.uploadFile(file).subscribe(event => {
           if (event?.type === HttpEventType.UploadProgress) {
-            this.progress = Math.round((100 * event.loaded) / event.total);
+            this.progress[index] = Math.round(
+              (100 * event.loaded) / event.total
+            );
             this.cd.detectChanges();
           }
           if (event instanceof HttpResponse) {
             this.setFileCode(file, event);
-            this.progress = 0;
-            this.uploadDisable = false;
             this.handleFileResponse(event);
           }
         })
