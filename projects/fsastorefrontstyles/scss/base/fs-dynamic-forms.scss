@@ -16,8 +16,7 @@
       padding: 2rem 0;
     }
     label {
-      font-weight: var(--cx-font-weight-semi);
-      text-transform: uppercase;
+      @extend .label;
     }
     cx-title {
       margin-bottom: 1rem;

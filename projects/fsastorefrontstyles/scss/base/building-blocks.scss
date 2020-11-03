@@ -72,10 +72,9 @@
   }
 }
 .sub-title {
+  @extend .label;
   border-bottom: none;
-  text-transform: uppercase;
   background: var(--cx-color-4);
-  font-weight: var(--cx-font-weight-semi);
 }
 .heading-headline {
   font-size: var(--cx-h2-font-size);

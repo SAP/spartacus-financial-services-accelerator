@@ -10,8 +10,7 @@
       }
     }
     .title {
-      font-weight: var(--cx-font-weight-semi);
-      text-transform: uppercase;
+      @extend .label;
     }
   }
 }
