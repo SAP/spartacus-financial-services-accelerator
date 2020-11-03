@@ -23,9 +23,10 @@ import { saveAs } from 'file-saver';
 export class UploadComponent extends AbstractFormComponent implements OnInit {
   fileList: File[] = [];
   uploadControl: AbstractControl;
-  progress: {};
+  individualProgress = {};
   files = {};
-  uploadDisable: boolean;
+  uploadDisable = false;
+  removeAllDisable = false;
 
   constructor(
     protected appConfig: DynamicFormsConfig,
@@ -42,8 +43,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   handleFiles(event) {
     // Reset when user is choosing files again
     this.resetFileList();
+    this.individualProgress = {};
     this.uploadDisable = false;
-    this.progress = {};
     if (
       this.config.accept.toString() === event.target.accept &&
       this.config.multiple === event.target.multiple &&
@@ -74,12 +75,13 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
 
   uploadFiles(files: File[]) {
     this.uploadDisable = true;
+    this.removeAllDisable = true;
     this.setValueAndValidate(this.fileList);
     files.forEach((file, index) => {
       this.subscription.add(
         this.fileUploadService.uploadFile(file).subscribe(event => {
           if (event?.type === HttpEventType.UploadProgress) {
-            this.progress[index] = Math.round(
+            this.individualProgress[index] = Math.round(
               (100 * event.loaded) / event.total
             );
             this.cd.detectChanges();
@@ -88,9 +90,18 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
             this.setFileCode(file, event);
             this.handleFileResponse(event);
           }
+          this.removeAllDisable = !!this.overallProgressFinished(
+            this.individualProgress
+          );
         })
       );
     });
+  }
+
+  overallProgressFinished(progress) {
+    return (
+      Object.keys(progress).filter((_k, i) => progress[i] !== 100).length !== 0
+    );
   }
 
   checkFileSize(event): Boolean {
@@ -119,7 +130,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     );
     this.fileList.splice(index, 1);
     this.setValueAndValidate(this.fileList);
-    this.uploadControl.setValue(this.files);
+    // this.uploadControl.setValue(this.files);
 
     // reset DOM File element to sync it with reactive control
     if (this.fileList.length === 0) {
