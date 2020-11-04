@@ -68,9 +68,8 @@ button:focus {
 }
 .link {
   cursor: pointer;
-  font-weight: var(--cx-font-weight-semi);
+  @extend .label;
   text-decoration: underline;
-  text-transform: uppercase;
   color: var(--cx-color-primary);
   &:hover {
     text-decoration: underline;

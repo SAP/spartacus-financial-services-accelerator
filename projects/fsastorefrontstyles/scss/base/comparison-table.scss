@@ -100,12 +100,11 @@ cx-fs-comparison-table-container {
       background-color: var(--cx-color-5);
     }
     &-title {
+      @extend .label;
       display: inline-block;
       line-height: 1.2;
       max-width: calc(100% - 4vw);
       vertical-align: middle;
-      text-transform: uppercase;
-      font-weight: var(--cx-font-weight-semi);
     }
     &-value {
       @include media-breakpoint-down(sm) {
