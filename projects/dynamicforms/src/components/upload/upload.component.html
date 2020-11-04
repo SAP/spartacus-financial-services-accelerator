@@ -36,24 +36,43 @@
       <ng-container *ngIf="fileList.length > 0">
         <ul class="mb-4">
           <li class="pt-4" *ngFor="let file of fileList; let i = index">
-            <span>{{ file?.name }}:</span>
-            <span class="pl-3"> {{ convertFileSize(file.size) }}</span>
-            <span
-              *ngIf="file?.code"
-              class="close"
-              type="button"
-              (click)="downloadFile(file)"
-              ><i class="fas fa-download"></i
-            ></span>
-            <span
-              class="close"
-              role="button"
-              (click)="removeFile(i, uploadField)"
-              ><i class="fas fa-trash"></i
-            ></span>
-            <div class="row">
-              <div class="col-10 col-sm-11">
-                <div class="progress" *ngIf="individualProgress[i] > 0">
+            <div class="row no-gutters">
+              <div class="col-10">
+                <div class="row no-gutters">
+                  <span class="col-1" *ngIf="file?.code"
+                    ><i class="fas fa-check"></i
+                  ></span>
+                  <span class="col-8 text-break">{{ file?.name }}</span>
+                  <span class="col-3"> {{ convertFileSize(file.size) }}</span>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="row no-gutters">
+                  <span
+                    class="col-6 text-right"
+                    *ngIf="file?.code"
+                    role="button"
+                    (click)="downloadFile(file)"
+                    ><i class="fas fa-download"></i
+                  ></span>
+                  <span
+                    *ngIf="!removeAllDisable"
+                    class="col-6 text-right ml-md-auto"
+                    role="button"
+                    (click)="removeFile(i, uploadField)"
+                    ><i class="fas fa-trash"></i
+                  ></span>
+                </div>
+              </div>
+            </div>
+            <div class="row no-gutters">
+              <div class="col-12">
+                <div
+                  class="progress"
+                  *ngIf="
+                    individualProgress[i] > 0 && individualProgress[i] !== 100
+                  "
+                >
                   <div
                     class="progress-bar"
                     [style.width]="individualProgress[i] + '%'"
@@ -66,9 +85,6 @@
                   </div>
                 </div>
               </div>
-              <span class="col-2 col-sm-1 text-right" *ngIf="file?.code"
-                ><i class="fas fa-check"></i
-              ></span>
             </div>
           </li>
         </ul>
