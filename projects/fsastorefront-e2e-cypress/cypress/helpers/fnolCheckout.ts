@@ -66,6 +66,7 @@ export function populateGeneralInformationStep() {
   cy.get('[name=phFault]').select('3rdParty');
   cy.get('[name=reportedToPolice]').eq(0).click();
   cy.get('[name=witnessExist]').eq(1).click();
+  cy.get('[name=entitledToDriveVehicle]').eq(1).click();
   cy.get('[name=vehicleParked]').eq(1).click();
   cy.get('[name=otherVehicleInvolved]').eq(1).click();
 }
@@ -208,4 +209,10 @@ export function waitForIncidentReportStep() {
     'incidentForm'
   );
   cy.wait(`@${incidentForm}`).its('status').should('eq', 200);
+}
+
+export function waitForfnolGeneralInformationStep() {
+  const generalInfoPage = waitForPage('fnolGeneralInfoPage', 'generalInfoPage');
+  cy.get('.Section4 cx-banner').eq(1).click();
+  cy.wait(`@${generalInfoPage}`).its('status').should('eq', 200);
 }

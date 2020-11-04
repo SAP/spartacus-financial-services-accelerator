@@ -196,7 +196,7 @@ export function waitForConfirmation() {
 }
 
 export function checkCheckoutStep(mainProduct, numberOfSteps) {
-  cy.get('h2').contains(mainProduct);
+  cy.get('h2').should('be.visible').contains(mainProduct);
   cy.get('.progress-inner-wrapper').should('have.length', numberOfSteps);
 }
 
