@@ -4,6 +4,7 @@ import { YFormData } from './../models/form-occ.models';
 import { FormConnector } from './form-connector';
 import { FormAdapter } from './form.adapter';
 import createSpy = jasmine.createSpy;
+import { OCC_USER_ID_CURRENT } from '@spartacus/core';
 
 class MockFormAdapter implements FormAdapter {
   getFormDefinitions = createSpy(
@@ -16,12 +17,14 @@ class MockFormAdapter implements FormAdapter {
   ).and.callFake((applicationID, formDataID) =>
     of('getFormDefinition' + applicationID + formDataID)
   );
-  getFormData = createSpy('FormAdapter.getFormData').and.callFake(formDataID =>
-    of('getFormData' + formDataID)
+  getFormData = createSpy(
+    'FormAdapter.getFormData'
+  ).and.callFake((formDataID, userId) =>
+    of('getFormData' + formDataID + userId)
   );
-  saveFormData = createSpy('FormAdapter.saveFormData').and.callFake(formData =>
-    of('saveFormData' + formData)
-  );
+  saveFormData = createSpy(
+    'FormAdapter.saveFormData'
+  ).and.callFake((formData, userId) => of('saveFormData' + formData + userId));
 }
 const formDefinitionId = 'formDef';
 const formDataId = 'formData';
@@ -67,12 +70,18 @@ describe('FormConnector', () => {
   });
 
   it('should call adapter for get form data', () => {
-    formConnector.getFormData(formDataId);
-    expect(formAdapter.getFormData).toHaveBeenCalledWith(formDataId);
+    formConnector.getFormData(formDataId, OCC_USER_ID_CURRENT);
+    expect(formAdapter.getFormData).toHaveBeenCalledWith(
+      formDataId,
+      OCC_USER_ID_CURRENT
+    );
   });
 
   it('should call adapter for save form data', () => {
-    formConnector.saveFormData(mockFormData);
-    expect(formAdapter.saveFormData).toHaveBeenCalledWith(mockFormData);
+    formConnector.saveFormData(mockFormData, OCC_USER_ID_CURRENT);
+    expect(formAdapter.saveFormData).toHaveBeenCalledWith(
+      mockFormData,
+      OCC_USER_ID_CURRENT
+    );
   });
 });

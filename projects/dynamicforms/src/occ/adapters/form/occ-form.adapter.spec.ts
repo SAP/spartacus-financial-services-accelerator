@@ -4,7 +4,11 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 import { async, TestBed } from '@angular/core/testing';
-import { OCC_USER_ID_CURRENT, OccEndpointsService } from '@spartacus/core';
+import {
+  OCC_USER_ID_CURRENT,
+  OccEndpointsService,
+  OCC_USER_ID_ANONYMOUS,
+} from '@spartacus/core';
 import { YFormData } from '../../../core/models/form-occ.models';
 import { OccFormAdapter } from './occ-form.adapter';
 
@@ -35,8 +39,8 @@ class MockOccEndpointsService {
   }
 }
 
-const formDefinitionEndpoint = 'definition';
-const formDefinitionsEndpoint = 'definitions';
+const formDefinitionEndpoint = 'formDefinition';
+const formDefinitionsEndpoint = 'formDefinitions';
 const formDataEndpoint = 'formData';
 const createFormDataEndpoint = 'createFormData';
 describe('OccFormAdapter', () => {
@@ -63,7 +67,7 @@ describe('OccFormAdapter', () => {
 
   describe('persistFormData', () => {
     it('should update existing form data', async(() => {
-      occFormAdapter.saveFormData(formData).subscribe();
+      occFormAdapter.saveFormData(formData, OCC_USER_ID_CURRENT).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return req.url === formDataEndpoint && req.method === 'PUT';
       }, `PUT method and url`);
@@ -73,15 +77,17 @@ describe('OccFormAdapter', () => {
       });
     }));
 
-    it('should create new form data', async(() => {
-      occFormAdapter.saveFormData(formDataNew).subscribe();
+    it('should create new form data for anonymous user', async(() => {
+      occFormAdapter
+        .saveFormData(formDataNew, OCC_USER_ID_ANONYMOUS)
+        .subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return req.url === createFormDataEndpoint && req.method === 'POST';
       }, `POST method and url`);
       expect(occEndpointService.getUrl).toHaveBeenCalledWith(
         createFormDataEndpoint,
         {
-          userId: OCC_USER_ID_CURRENT,
+          userId: OCC_USER_ID_ANONYMOUS,
         }
       );
     }));
@@ -89,7 +95,7 @@ describe('OccFormAdapter', () => {
 
   describe('loadFormData', () => {
     it('loadFormData', async(() => {
-      occFormAdapter.getFormData(formData.id).subscribe();
+      occFormAdapter.getFormData(formData.id, OCC_USER_ID_CURRENT).subscribe();
       httpMock.expectOne((req: HttpRequest<any>) => {
         return req.url === formDataEndpoint && req.method === 'GET';
       }, `GET method and url`);

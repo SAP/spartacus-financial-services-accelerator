@@ -24,11 +24,11 @@ export class FormConnector {
       formDefinitionType
     );
   }
-  getFormData(formDataId: string): Observable<YFormData> {
-    return this.formAdapter.getFormData(formDataId);
+  getFormData(formDataId: string, userId: string): Observable<YFormData> {
+    return this.formAdapter.getFormData(formDataId, userId);
   }
 
-  saveFormData(formData: YFormData): Observable<YFormData> {
-    return this.formAdapter.saveFormData(formData);
+  saveFormData(formData: YFormData, userId: string): Observable<YFormData> {
+    return this.formAdapter.saveFormData(formData, userId);
   }
 }
