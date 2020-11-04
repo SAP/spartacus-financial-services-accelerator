@@ -6,7 +6,7 @@ import {
   Injector,
   OnInit,
 } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import { AuthService, LanguageService } from '@spartacus/core';
 import { saveAs } from 'file-saver';
 import { map, take } from 'rxjs/operators';
@@ -22,9 +22,10 @@ import { FormService } from './../../core/services/form/form.service';
 export class UploadComponent extends AbstractFormComponent implements OnInit {
   fileList: File[] = [];
   uploadControl: AbstractControl;
-  progress = 0;
+  individualProgress = {};
   files = [];
-  uploadDisable: boolean;
+  uploadDisable = false;
+  removeAllDisable = false;
 
   constructor(
     protected appConfig: DynamicFormsConfig,
@@ -41,6 +42,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   handleFiles(event) {
     // Reset when user is choosing files again
     this.resetFileList();
+    this.individualProgress = {};
+    this.uploadDisable = false;
     if (
       this.config.accept.toString() === event.target.accept &&
       this.config.multiple === event.target.multiple &&
@@ -48,6 +51,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     ) {
       this.fileList = Array.from(event.target.files);
       this.fileList.splice(this.config.maxUploads);
+      this.setValueAndValidate(this.fileList);
     } else {
       // triggering reset and validation if something was manipulated through DOM inspector
       // or files are violating config rules
@@ -71,31 +75,28 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
 
   uploadFiles(files: File[]) {
     this.uploadDisable = true;
+    this.removeAllDisable = true;
     this.setValueAndValidate(this.fileList);
-    files.forEach(file => {
+    files.forEach((file, index) => {
       this.subscription.add(
         this.fileUploadService.uploadFile(file).subscribe(event => {
           if (event?.type === HttpEventType.UploadProgress) {
-            this.progress = Math.round((100 * event.loaded) / event.total);
+            this.individualProgress[index] = Math.round(
+              (100 * event.loaded) / event.total
+            );
             this.cd.detectChanges();
           }
           if (event instanceof HttpResponse) {
             this.setFileCode(file, event);
-            this.progress = 0;
-            this.uploadDisable = false;
             this.handleFileResponse(event);
           }
+          // when all files are finished uploading show the remove all button
+          this.removeAllDisable = !!this.overallProgressFinished(
+            this.individualProgress
+          );
         })
       );
     });
-  }
-
-  checkFileSize(event): Boolean {
-    const files: File[] = Array.from(event.target.files);
-    const maxExceeded = files.filter(
-      file => file.size > this.config.maxFileSize
-    );
-    return !(maxExceeded.length > 0);
   }
 
   removeFile(index, uploadField) {
@@ -116,7 +117,6 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     );
     this.fileList.splice(index, 1);
     this.setValueAndValidate(this.fileList);
-    this.uploadControl.setValue(this.files);
 
     // reset DOM File element to sync it with reactive control
     if (this.fileList.length === 0) {
@@ -152,6 +152,20 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
         )
         .subscribe()
     );
+  }
+
+  protected overallProgressFinished(progress) {
+    return (
+      Object.keys(progress).filter((_k, i) => progress[i] !== 100).length !== 0
+    );
+  }
+
+  protected checkFileSize(event): Boolean {
+    const files: File[] = Array.from(event.target.files);
+    const maxExceeded = files.filter(
+      file => file.size > this.config.maxFileSize
+    );
+    return !(maxExceeded.length > 0);
   }
 
   protected setValueAndValidate(value: File[]) {
