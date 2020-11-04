@@ -19,9 +19,9 @@ export class OccFormAdapter implements FormAdapter {
     protected occEndpointService: OccEndpointsService
   ) {}
 
-  saveFormData(formData: YFormData): Observable<YFormData> {
+  saveFormData(formData: YFormData, userId: string): Observable<YFormData> {
     const url = this.occEndpointService.getUrl('createFormData', {
-      userId: OCC_USER_ID_CURRENT,
+      userId: userId,
     });
     let params: HttpParams = new HttpParams()
       .set('definitionId', formData.formDefinition.formId)
@@ -47,9 +47,9 @@ export class OccFormAdapter implements FormAdapter {
       .pipe(catchError((error: any) => throwError(error.json())));
   }
 
-  getFormData(formDataId: string): Observable<YFormData> {
+  getFormData(formDataId: string, userId: string): Observable<YFormData> {
     const url = this.occEndpointService.getUrl('formData', {
-      userId: OCC_USER_ID_CURRENT,
+      userId: userId,
       formDataId,
     });
     return this.http
@@ -61,7 +61,7 @@ export class OccFormAdapter implements FormAdapter {
     categoryCode: string,
     formDefinitionType: string
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('definitions');
+    const url = this.occEndpointService.getUrl('formDefinitions');
     const params: HttpParams = new HttpParams()
       .set('categoryCode', categoryCode)
       .set('yFormDefinitionType', formDefinitionType)
@@ -75,7 +75,7 @@ export class OccFormAdapter implements FormAdapter {
     applicationId: string,
     formDefinitionId: string
   ): Observable<any> {
-    const url = this.occEndpointService.getUrl('definition', {
+    const url = this.occEndpointService.getUrl('formDefinition', {
       formDefinitionId,
     });
     const params: HttpParams = new HttpParams()
