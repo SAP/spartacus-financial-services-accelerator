@@ -100,12 +100,6 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     });
   }
 
-  private overallProgressFinished(progress) {
-    return (
-      Object.keys(progress).filter((_k, i) => progress[i] !== 100).length !== 0
-    );
-  }
-
   checkFileSize(event): Boolean {
     const files: File[] = Array.from(event.target.files);
     const maxExceeded = files.filter(
@@ -166,6 +160,12 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
           })
         )
         .subscribe()
+    );
+  }
+
+  protected overallProgressFinished(progress) {
+    return (
+      Object.keys(progress).filter((_k, i) => progress[i] !== 100).length !== 0
     );
   }
 
