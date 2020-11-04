@@ -1,3 +1,4 @@
+import { HttpEventType, HttpResponse } from '@angular/common/http';
 import {
   ChangeDetectorRef,
   Component,
@@ -5,16 +6,14 @@ import {
   Injector,
   OnInit,
 } from '@angular/core';
-import { AbstractControl } from '@angular/forms';
-
-import { FileService } from '../../core/services/file/file.service';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
-import { LanguageService, AuthService } from '@spartacus/core';
+import { AbstractControl, FormGroup } from '@angular/forms';
+import { AuthService, LanguageService } from '@spartacus/core';
+import { saveAs } from 'file-saver';
+import { map, take } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../core/config/form-config';
+import { FileService } from '../../core/services/file/file.service';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 import { FormService } from './../../core/services/form/form.service';
-import { take, map } from 'rxjs/operators';
-import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'cx-upload',
@@ -24,7 +23,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   fileList: File[] = [];
   uploadControl: AbstractControl;
   individualProgress = {};
-  files = {};
+  files = [];
   uploadDisable = false;
   removeAllDisable = false;
 
@@ -177,15 +176,13 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   protected handleFileResponse(event) {
     this.fileUploadService.setFileInStore(event.body);
     const fileCode = event.body.code;
-    this.files[this.config.name].push(fileCode);
+    this.files.push(fileCode);
     this.uploadControl.setValue(this.files);
   }
 
   protected resetFileList() {
     this.fileList = [];
-    this.files = {
-      [this.config.name]: [],
-    };
+    this.files = [];
     this.fileUploadService.resetFiles();
   }
 
