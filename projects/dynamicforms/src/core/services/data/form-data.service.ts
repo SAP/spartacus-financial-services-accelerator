@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { AuthService } from '@spartacus/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, switchMap, take } from 'rxjs/operators';
 import { YFormData, YFormDefinition } from '../../models';
@@ -11,7 +12,10 @@ import { StateWithForm } from '../../store/state';
 export class FormDataService {
   submittedForm = new BehaviorSubject<YFormData>(null);
 
-  constructor(protected store: Store<StateWithForm>) {}
+  constructor(
+    protected store: Store<StateWithForm>,
+    protected authService: AuthService
+  ) {}
 
   submit(form: YFormData) {
     this.submittedForm.next(form);
@@ -26,11 +30,18 @@ export class FormDataService {
   }
 
   saveFormData(formData: YFormData) {
-    this.store.dispatch(
-      new fromAction.SaveFormData({
-        formData: formData,
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.store.dispatch(
+          new fromAction.SaveFormData({
+            formData: formData,
+            userId: occUserId,
+          })
+        );
       })
-    );
+      .unsubscribe();
   }
 
   loadFormDefinition(applicationId: string, formDefinitionId: string) {
@@ -52,11 +63,18 @@ export class FormDataService {
   }
 
   loadFormData(formDataId: string) {
-    this.store.dispatch(
-      new fromAction.LoadFormData({
-        formDataId: formDataId,
+    this.authService
+      .getOccUserId()
+      .pipe(take(1))
+      .subscribe(occUserId => {
+        this.store.dispatch(
+          new fromAction.LoadFormData({
+            formDataId: formDataId,
+            userId: occUserId,
+          })
+        );
       })
-    );
+      .unsubscribe();
   }
 
   getFormData(): Observable<YFormData> {

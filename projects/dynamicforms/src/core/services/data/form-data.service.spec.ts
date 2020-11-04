@@ -1,7 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 import { FormDefinitionType } from '@fsa/storefront';
 import { Store, StoreModule } from '@ngrx/store';
-import { I18nTestingModule } from '@spartacus/core';
+import {
+  AuthService,
+  I18nTestingModule,
+  OCC_USER_ID_ANONYMOUS,
+  OCC_USER_ID_CURRENT,
+} from '@spartacus/core';
+import { Observable, of } from 'rxjs';
 import * as fromAction from '../../store/actions';
 import { reducerProvider, reducerToken } from '../../store/reducers';
 import { YFormData, YFormDefinition } from './../../models/form-occ.models';
@@ -27,9 +33,16 @@ const mockFormData: YFormData = {
   },
 };
 
+class MockAuthService {
+  getOccUserId(): Observable<string> {
+    return of(OCC_USER_ID_CURRENT);
+  }
+}
+
 describe('FormDataService', () => {
   let service: FormDataService;
   let store: Store<StateWithForm>;
+  let mockAuthService: AuthService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -38,12 +51,17 @@ describe('FormDataService', () => {
         StoreModule.forRoot({}),
         StoreModule.forFeature('form', reducerToken),
       ],
-      providers: [FormDataService, reducerProvider],
+      providers: [
+        FormDataService,
+        reducerProvider,
+        { provide: AuthService, useClass: MockAuthService },
+      ],
     });
 
     service = TestBed.inject(FormDataService);
     store = TestBed.inject(Store);
     spyOn(store, 'dispatch').and.callThrough();
+    mockAuthService = TestBed.inject(AuthService);
   });
 
   it('should be created', () => {
@@ -100,6 +118,7 @@ describe('FormDataService', () => {
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.LoadFormData({
         formDataId: mockFormData.id,
+        userId: OCC_USER_ID_CURRENT,
       })
     );
   });
@@ -110,6 +129,21 @@ describe('FormDataService', () => {
     expect(store.dispatch).toHaveBeenCalledWith(
       new fromAction.SaveFormData({
         formData: mockFormData,
+        userId: OCC_USER_ID_CURRENT,
+      })
+    );
+  });
+
+  it('should save form data when user is anonymous', () => {
+    spyOn(mockAuthService, 'getOccUserId').and.returnValue(
+      of(OCC_USER_ID_ANONYMOUS)
+    );
+    service.saveFormData(mockFormData);
+
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromAction.SaveFormData({
+        formData: mockFormData,
+        userId: OCC_USER_ID_ANONYMOUS,
       })
     );
   });

@@ -66,6 +66,7 @@
   .label {
     font-size: var(--cx-title-font-size);
     padding: 0 2px;
+    text-transform: none;
   }
   .is-disabled {
     color: var(--cx-color-6);
