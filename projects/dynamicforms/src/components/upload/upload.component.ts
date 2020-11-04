@@ -6,7 +6,7 @@ import {
   Injector,
   OnInit,
 } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 import { AuthService, LanguageService } from '@spartacus/core';
 import { saveAs } from 'file-saver';
 import { map, take } from 'rxjs/operators';
