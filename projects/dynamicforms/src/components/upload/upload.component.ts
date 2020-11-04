@@ -100,14 +100,6 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     });
   }
 
-  checkFileSize(event): Boolean {
-    const files: File[] = Array.from(event.target.files);
-    const maxExceeded = files.filter(
-      file => file.size > this.config.maxFileSize
-    );
-    return !(maxExceeded.length > 0);
-  }
-
   removeFile(index, uploadField) {
     // Execute Http.Delete request to backend
     this.subscription.add(
@@ -167,6 +159,14 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     return (
       Object.keys(progress).filter((_k, i) => progress[i] !== 100).length !== 0
     );
+  }
+
+  protected checkFileSize(event): Boolean {
+    const files: File[] = Array.from(event.target.files);
+    const maxExceeded = files.filter(
+      file => file.size > this.config.maxFileSize
+    );
+    return !(maxExceeded.length > 0);
   }
 
   protected setValueAndValidate(value: File[]) {
