@@ -99,7 +99,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     });
   }
 
-  overallProgressFinished(progress) {
+  private overallProgressFinished(progress) {
     return (
       Object.keys(progress).filter((_k, i) => progress[i] !== 100).length !== 0
     );
