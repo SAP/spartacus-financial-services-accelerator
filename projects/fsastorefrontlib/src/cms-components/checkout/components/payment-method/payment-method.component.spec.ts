@@ -8,7 +8,8 @@ import {
   CheckoutPaymentService,
   GlobalMessageService,
   PaymentDetails,
-  TranslationService, RoutingService,
+  TranslationService,
+  RoutingService,
 } from '@spartacus/core';
 import { CheckoutStepService, ICON_TYPE } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';

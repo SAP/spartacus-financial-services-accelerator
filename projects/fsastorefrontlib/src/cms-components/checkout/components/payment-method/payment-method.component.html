@@ -35,7 +35,7 @@
             </label>
           </div>
         </form>
-        <ng-container *ngIf="selectedPaymentMethod == 'creditCard'">
+        <ng-container *ngIf="selectedPaymentMethod === 'creditCard'">
           <div class="my-4">
             <hr />
           </div>
@@ -82,9 +82,11 @@
         *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
         ><button
           class="action-button btn-block"
-          (click)="navigateBack(previousCheckoutStep)">
+          (click)="navigateBack(previousCheckoutStep)"
+        >
           {{ 'common.back' | cxTranslate }}
-        </button></ng-container>
+        </button></ng-container
+      >
     </div>
     <div class="col-md-12 col-lg-6">
       <ng-container *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
