@@ -61,7 +61,6 @@ import { UserIdentificationModule } from './components/user-identification/user-
 import { CategoryStepGuard } from './guards/category-step-guard';
 import { CheckoutStepGuard } from './guards/checkout-step-guard';
 import { FSPaymentMethodComponent } from './components/payment-method/payment-method.component';
-import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
   {
@@ -196,7 +195,6 @@ const routes: Routes = [
     PaymentFormModule,
     CardModule,
     UrlModule,
-    FormsModule,
     FSCheckoutProgressModule,
     FSCheckoutStoreModule,
     RouterModule.forChild(routes),

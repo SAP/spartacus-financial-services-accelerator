@@ -4,11 +4,12 @@
     height: 100%;
   }
   .card-header {
-    @extend .label;
     color: var(--cx-color-1);
     font-size: var(--cx-h6-font-size);
     background: var(--cx-color-primary);
     padding: 0.5rem 1rem;
+    font-weight: var(--cx-font-weight-semi);
+    text-transform: uppercase;
   }
   .cx-card-title {
     color: var(--cx-color-primary);

@@ -50,7 +50,7 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
       checkoutStepService
     );
   }
-  selectedPaymentMethod: String;
+  selectedPaymentMethod: string;
   previousCheckoutStep$: Observable<FSSteps>;
   nextCheckoutStep$: Observable<FSSteps>;
   subscription = new Subscription();
@@ -59,6 +59,10 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
     super.ngOnInit();
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
+  }
+
+  setSelectedPaymentMethod(selectedMethod: string) {
+    this.selectedPaymentMethod = selectedMethod;
   }
 
   navigateBack(previousStep: FSSteps) {
@@ -75,7 +79,7 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
         .pipe(
           filter(payment => !!payment),
           take(1),
-          tap(payment => {
+          tap(() => {
             this.routingService.go({
               cxRoute: nextStep.step,
             });
@@ -86,6 +90,7 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
   }
 
   ngOnDestroy() {
+    super.ngOnDestroy();
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
