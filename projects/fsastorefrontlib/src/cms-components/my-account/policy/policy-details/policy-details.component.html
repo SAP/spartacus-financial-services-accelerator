@@ -57,7 +57,7 @@
             {{ policy.mainProduct?.coverageProduct?.name }}
           </div>
         </li>
-        <li class="accordion-list-item row">
+        <li *ngIf="policy.paymentFrequency" class="accordion-list-item row">
           <div class="col-6 col-sm-5 item-label">
             {{ 'fscommon.paymentFrequency' | cxTranslate }}
           </div>
