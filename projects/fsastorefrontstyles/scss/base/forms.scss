@@ -9,8 +9,7 @@
   color: var(--cx-color-danger);
 }
 .label-content {
-  font-weight: var(--cx-font-weight-semi);
-  text-transform: uppercase;
+  @extend .label;
 }
 
 .custom-file-input {
@@ -19,4 +18,7 @@
     border-color: var(--cx-color-secondary);
     box-shadow: none;
   }
+}
+*[role='button'] {
+  @include color-flip(--cx-color-1, --cx-color-primary, --cx-color-text);
 }

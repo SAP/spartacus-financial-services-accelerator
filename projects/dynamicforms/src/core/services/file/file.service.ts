@@ -63,7 +63,9 @@ export class FileService {
     if (fileList?.length > 0) {
       fileList.forEach(file => {
         const fileCode = file?.code;
-        this.removeFileForCode(userId, fileCode);
+        if (fileCode) {
+          this.removeFileForCode(userId, fileCode);
+        }
       });
     }
   }
