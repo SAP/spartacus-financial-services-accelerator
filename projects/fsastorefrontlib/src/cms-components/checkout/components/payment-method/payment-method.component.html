@@ -27,6 +27,7 @@
               id="invoice"
               value="invoice"
               name="paymentMethod"
+              (click)="selectPaymentMethod({ id: 'invoice' })"
               [(ngModel)]="selectedPaymentMethod"
             />
             <label class="pl-3 pt-1" for="invoice">
@@ -77,18 +78,25 @@
   </div>
   <div *ngIf="!newPaymentFormManuallyOpened" class="row">
     <div class="col-md-12 col-lg-6">
-      <button class="btn btn-block btn-action" (click)="back()">
-        {{ backBtnText | cxTranslate }}
-      </button>
+      <ng-container
+        *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
+        ><button
+          class="action-button btn-block"
+          (click)="navigateBack(previousCheckoutStep)">
+          {{ 'common.back' | cxTranslate }}
+        </button></ng-container>
     </div>
     <div class="col-md-12 col-lg-6">
-      <button
-        class="btn btn-block btn-primary"
-        [disabled]="!(selectedMethod$ | async)?.id"
-        (click)="next()"
+      <ng-container *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
+        ><button
+          class="primary-button btn-block"
+          type="button"
+          data-checkout-url=""
+          (click)="navigateNext(nextCheckoutStep)"
+        >
+          {{ 'common.continue' | cxTranslate }}
+        </button></ng-container
       >
-        {{ 'common.continue' | cxTranslate }}
-      </button>
     </div>
   </div>
   <ng-template #newPaymentForm>

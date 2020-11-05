@@ -6,14 +6,24 @@ import {
 } from '@spartacus/core';
 import { FSCheckoutService } from './../../../../core/checkout/facade/checkout.service';
 import { FinalReviewComponent } from './final-review.component';
+import { of } from 'rxjs';
 
+import { Pipe, PipeTransform } from '@angular/core';
+@Pipe({
+  name: 'cxUrl',
+})
+class MockUrlPipe implements PipeTransform {
+  transform() {}
+}
 class MockCheckoutService {
   mockDeliveryMode() {}
   placeOrder() {}
 }
 
 class MockCheckoutPaymentService {
-  getPaymentDetails() {}
+  getPaymentDetails() {
+    return of({});
+  }
 }
 
 class MockRoutingService {
@@ -32,7 +42,7 @@ describe('FinalReviewComponent', () => {
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [I18nTestingModule],
-        declarations: [FinalReviewComponent],
+        declarations: [FinalReviewComponent, MockUrlPipe],
         providers: [
           {
             provide: FSCheckoutService,

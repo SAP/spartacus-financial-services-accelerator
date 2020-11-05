@@ -12,15 +12,18 @@
           <li>{{ paymentDetails.accountHolderName }}</li>
           <li>{{ paymentDetails.cardNumber }}</li>
           <li>{{ paymentDetails.cardType?.name }}</li>
-          <li>
+          <li *ngIf="paymentDetails.expiryMonth; else invoice">
             {{ 'fscommon.expires' | cxTranslate }}:
             {{ paymentDetails.expiryMonth }} / {{ paymentDetails.expiryYear }}
           </li>
+          <ng-template #invoice>
+            {{ 'fscommon.invoice' | cxTranslate }}</ng-template
+          >
         </ul>
       </div>
       <div class="col-6 col-md-5">
         <ul class="list-unstyled">
-          <li class="mb-2">
+          <li class="mb-2" *ngIf="paymentDetails.billingAddress">
             <strong>{{ 'fscommon.billingAddress' | cxTranslate }}</strong>
           </li>
           <li>

@@ -8,13 +8,14 @@ import {
   CheckoutPaymentService,
   GlobalMessageService,
   PaymentDetails,
-  TranslationService,
+  TranslationService, RoutingService,
 } from '@spartacus/core';
 import { CheckoutStepService, ICON_TYPE } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
 import { Input } from '@angular/core';
 import createSpy = jasmine.createSpy;
 import { Observable, of } from 'rxjs';
+import { FSCheckoutConfigService, FSSteps } from '@fsa/storefront';
 
 const mockPaymentDetails: PaymentDetails = {
   id: 'mock payment id',
@@ -27,6 +28,11 @@ const mockPaymentDetails: PaymentDetails = {
   expiryMonth: '01',
   expiryYear: '2022',
   cvn: '123',
+};
+
+const mockCategoryAndStep: FSSteps = {
+  stepParameter: 'insurances_auto',
+  step: 'category',
 };
 
 class MockCxIconComponent {
@@ -86,15 +92,26 @@ class MockFSTranslationService {
   }
 }
 
+class MockRoutingService {
+  go = createSpy();
+}
+
 const mockActivatedRoute = {
   snapshot: {
     url: ['checkout', 'payment-method'],
   },
 };
 
+class MockCheckoutConfigService {
+  getNextCheckoutStepUrl(): string {
+    return '';
+  }
+}
+
 describe('FSPaymentMethodComponent', () => {
   let component: FSPaymentMethodComponent;
   let fixture: ComponentFixture<FSPaymentMethodComponent>;
+  let routingService: RoutingService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -105,6 +122,14 @@ describe('FSPaymentMethodComponent', () => {
         {
           provide: CheckoutDeliveryService,
           useClass: MockCheckoutDeliveryService,
+        },
+        {
+          provide: RoutingService,
+          useClass: MockRoutingService,
+        },
+        {
+          provide: FSCheckoutConfigService,
+          useClass: MockCheckoutConfigService,
         },
         {
           provide: ActiveCartService,
@@ -123,6 +148,7 @@ describe('FSPaymentMethodComponent', () => {
         },
       ],
     }).compileComponents();
+    routingService = TestBed.inject(RoutingService);
   });
 
   beforeEach(() => {
@@ -133,5 +159,15 @@ describe('FSPaymentMethodComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should go back to previous step', () => {
+    component.navigateBack(mockCategoryAndStep);
+    expect(routingService.go).toHaveBeenCalled();
+  });
+
+  it('should navigate next', () => {
+    component.navigateNext(mockCategoryAndStep);
+    expect(routingService.go).toHaveBeenCalled();
   });
 });
