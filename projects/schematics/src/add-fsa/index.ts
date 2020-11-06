@@ -18,7 +18,6 @@ import {
   addImport,
   addToModuleImportsAndCommitChanges,
 } from '../shared/utils/module-file-utils';
-import { getSpartacusCurrentFeatureLevel } from '../shared/utils/package-utils';
 import { parseCSV } from '../shared/utils/transform-utils';
 import { getProjectFromWorkspace } from '../shared/utils/workspace-utils';
 import { Schema as FsOptions } from './schema';
@@ -37,7 +36,8 @@ function prepareSiteContextConfig(options: FsOptions): string {
   let context = `
       context: {
         currency: [${currency}],
-        language: [${language}],`;
+        language: [${language}],
+        urlParameters: ['baseSite', 'language', 'currency'],`;
 
   if (options.baseSite) {
     const baseSites = parseCSV(options.baseSite);
@@ -60,17 +60,12 @@ function getStorefrontConfig(options: FsOptions): string {
           prefix: '${options.occPrefix}'
         }
       },${context}
-      i18n: {
-        resources: translations,
-        chunks: translationChunksConfig,
-        fallbackLang: 'en'
-      },
       authentication: {
         client_id: '${options.clientId}',
         client_secret: '${options.clientSecret}'
       },
       features: {
-        consignmentTracking: '${options.consignmentTracking}',
+        consignmentTracking: ${options.consignmentTracking},
       }
     }`;
 }
@@ -147,9 +142,7 @@ function installStyles(project: experimental.workspace.WorkspaceProject): Rule {
     }
 
     const htmlContent = buffer.toString();
-    const insertion =
-      '\n' +
-      `$styleVersion: ${getSpartacusCurrentFeatureLevel()};\n@import '~@fsa/fsastorefrontstyles/index';\n`;
+    const insertion = `\n@import '~@fsa/fsastorefrontstyles/index';\n`;
 
     if (htmlContent.includes(insertion)) {
       return;

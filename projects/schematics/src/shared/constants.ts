@@ -52,7 +52,7 @@ export const COMPONENT_FACTORY_RESOLVER = 'ComponentFactoryResolver';
 
 export const HTTP_CLIENT = 'HttpClient';
 
-export const FS_STOREFRONT_MODULE = 'B2cStorefrontModule';
+export const FS_STOREFRONT_MODULE = 'FSStorefrontModule';
 export const CMS_COMPONENT_DATA_CLASS = 'CmsComponentData';
 export const CONFIG_MODULE_CLASS = 'ConfigModule';
 export const CMS_CONFIG = 'CmsConfig';

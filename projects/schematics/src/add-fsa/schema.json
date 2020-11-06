@@ -34,6 +34,20 @@
       "type": "string",
       "description": "A comma-separated list of languages to use in FSA",
       "default": "en"
+    },
+    "clientId": {
+      "type": "string",
+      "description": "A comma-separated list of base site(s) to use with FSA"
+    },
+    "clientSecret": {
+      "type": "string",
+      "description": "A comma-separated list of currencies to use in FSA",
+      "default": "USD"
+    },
+    "consignmentTracking": {
+      "type": "boolean",
+      "description": "A comma-separated list of languages to use in FSA",
+      "default": "en"
     }
   },
   "required": []
