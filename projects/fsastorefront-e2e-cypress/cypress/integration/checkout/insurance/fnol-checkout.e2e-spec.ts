@@ -38,7 +38,6 @@ context('FNOL for sample data user', () => {
 
   it('Should complete first step auto checkout', () => {
     checkout.startInsuranceCheckout('Auto');
-    //auto.openCategoryPage();
     auto.populateAutoInformation();
     auto.populateMainDriverInfo();
     cy.get('[name=noOfDrivers]').select('0');

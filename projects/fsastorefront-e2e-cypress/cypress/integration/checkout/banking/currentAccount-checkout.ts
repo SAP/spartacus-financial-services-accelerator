@@ -38,7 +38,6 @@ context('Current Account Checkout', () => {
   it('Should register user in checkout', () => {
     register.populateRegistrationForm(registrationUser);
     register.loginInUser(registrationUser.email, registrationUser.password);
-    cy.wait(1000);
   });
 
   it('Should complete personal details step', () => {

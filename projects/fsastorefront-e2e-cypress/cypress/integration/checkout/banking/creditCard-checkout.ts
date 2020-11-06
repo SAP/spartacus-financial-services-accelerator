@@ -14,7 +14,7 @@ context('Credit Card Checkout', () => {
   });
 
   it('Should register a new user and start Credit Card checkout', () => {
-    cy.wait(500);
+    checkout.waitForHomepage();
     banking.startBankingCheckout('Credit Card');
   });
 
