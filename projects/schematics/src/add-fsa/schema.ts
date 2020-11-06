@@ -5,6 +5,9 @@ export interface Schema {
   baseSite?: string;
   currency?: string;
   language?: string;
+  clientId?: string;
+  clientSecret?: string;
+  consignmentTracking?: boolean;
 }
 
 /**
@@ -78,6 +81,18 @@ export interface AngularComponentSchema {
    * The view encapsulation strategy to use in the new component.
    */
   viewEncapsulation?: ViewEncapsulation;
+  /**
+   * Sets client id.
+   */
+  clientId?: string;
+  /**
+   * Sets client secret.
+   */
+  clientSecret?: string;
+  /**
+   * Sets consignment tracking on/off.
+   */
+  consignmentTracking?: boolean;
 }
 /**
  * The change detection strategy to use in the new component.

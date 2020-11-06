@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "id": "SpartacusSchematics",
-  "title": "Spartacus Schematics",
+  "id": "FSASchematics",
+  "title": "FSA Schematics",
   "type": "object",
   "properties": {
     "project": {
@@ -18,21 +18,21 @@
     },
     "occPrefix": {
       "type": "string",
-      "description": "The OCC API prefix. E.g.: /occ/v2/",
-      "default": "/rest/v2/"
+      "description": "The OCC API prefix. E.g.: /rest/v2/",
+      "default": "/occ/v2/"
     },
     "baseSite": {
       "type": "string",
-      "description": "A comma-separated list of base site(s) to use with Spartacus"
+      "description": "A comma-separated list of base site(s) to use with FSA"
     },
     "currency": {
       "type": "string",
-      "description": "A comma-separated list of currencies to use in Spartacus",
+      "description": "A comma-separated list of currencies to use in FSA",
       "default": "USD"
     },
     "language": {
       "type": "string",
-      "description": "A comma-separated list of languages to use in Spartacus",
+      "description": "A comma-separated list of languages to use in FSA",
       "default": "en"
     }
   },

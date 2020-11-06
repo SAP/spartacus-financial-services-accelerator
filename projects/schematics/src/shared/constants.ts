@@ -22,7 +22,7 @@ export const ANGULAR_COMMON = '@angular/common';
 export const ANGULAR_PLATFORM_BROWSER = '@angular/platform-browser';
 
 export const SPARTACUS_CORE = '@spartacus/core';
-export const SPARTACUS_STOREFRONTLIB = '@spartacus/storefront';
+export const FSA_STOREFRONTLIB = '@fsa/storefront';
 export const SPARTACUS_CDS = '@spartacus/cds';
 export const SPARTACUS_ASSETS = '@spartacus/assets';
 export const SPARTACUS_STYLES = '@spartacus/styles';
@@ -52,7 +52,7 @@ export const COMPONENT_FACTORY_RESOLVER = 'ComponentFactoryResolver';
 
 export const HTTP_CLIENT = 'HttpClient';
 
-export const B2C_STOREFRONT_MODULE = 'B2cStorefrontModule';
+export const FS_STOREFRONT_MODULE = 'B2cStorefrontModule';
 export const CMS_COMPONENT_DATA_CLASS = 'CmsComponentData';
 export const CONFIG_MODULE_CLASS = 'ConfigModule';
 export const CMS_CONFIG = 'CmsConfig';
