@@ -162,7 +162,7 @@ function installStyles(project: experimental.workspace.WorkspaceProject): Rule {
   };
 }
 
-export function addSpartacus(options: FsOptions): Rule {
+export function addFsa(options: FsOptions): Rule {
   return (tree: Tree, context: SchematicContext) => {
     const project = getProjectFromWorkspace(tree, options);
 
