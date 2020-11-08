@@ -28,7 +28,7 @@
     "currency": {
       "type": "string",
       "description": "A comma-separated list of currencies to use in FSA",
-      "default": "USD"
+      "default": "EUR"
     },
     "language": {
       "type": "string",
@@ -37,17 +37,18 @@
     },
     "clientId": {
       "type": "string",
-      "description": "A comma-separated list of base site(s) to use with FSA"
+      "description": "Client ID",
+      "default": "financial_customer"
     },
     "clientSecret": {
       "type": "string",
-      "description": "A comma-separated list of currencies to use in FSA",
-      "default": "USD"
+      "description": "Client secret",
+      "default": "secret"
     },
     "consignmentTracking": {
       "type": "boolean",
-      "description": "A comma-separated list of languages to use in FSA",
-      "default": "en"
+      "description": "Consignmet tracking on or off",
+      "default": true
     }
   },
   "required": []
