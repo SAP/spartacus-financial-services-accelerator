@@ -7,28 +7,21 @@ import {
   SchematicsException,
   Tree,
 } from '@angular-devkit/schematics';
-import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
 import { getProjectStyleFile } from '@angular/cdk/schematics';
 import { isImported } from '@schematics/angular/utility/ast-utils';
 import { getAppModulePath } from '@schematics/angular/utility/ng-ast-utils';
-import { getProjectTargets } from '../shared/utils/workspace-utils';
-import { FS_STOREFRONT_MODULE, FSA_STOREFRONTLIB } from '../shared/constants';
-import { getTsSourceFile } from '../shared/utils/file-utils';
+
 import {
   addImport,
+  getTsSourceFile,
+  getProjectTargets,
   addToModuleImportsAndCommitChanges,
-} from '../shared/utils/module-file-utils';
+} from '@spartacus/schematics';
+
+import { FS_STOREFRONT_MODULE, FSA_STOREFRONTLIB } from '../shared/constants';
 import { parseCSV } from '../shared/utils/transform-utils';
 import { getProjectFromWorkspace } from '../shared/utils/workspace-utils';
 import { Schema as FsOptions } from './schema';
-
-function installPackageJsonDependencies(): Rule {
-  return (tree: Tree, context: SchematicContext) => {
-    context.addTask(new NodePackageInstallTask());
-    context.logger.log('info', `🔍 Installing packages...`);
-    return tree;
-  };
-}
 
 function prepareSiteContextConfig(options: FsOptions): string {
   const currency = parseCSV(options.currency, ['USD']).toUpperCase();
@@ -159,10 +152,9 @@ export function addFsa(options: FsOptions): Rule {
   return (tree: Tree, context: SchematicContext) => {
     const project = getProjectFromWorkspace(tree, options);
 
-    return chain([
-      updateAppModule(options),
-      installStyles(project),
-      installPackageJsonDependencies(),
-    ])(tree, context);
+    return chain([updateAppModule(options), installStyles(project)])(
+      tree,
+      context
+    );
   };
 }

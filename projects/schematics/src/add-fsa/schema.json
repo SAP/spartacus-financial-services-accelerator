@@ -33,7 +33,7 @@
     "language": {
       "type": "string",
       "description": "A comma-separated list of languages to use in FSA",
-      "default": "en"
+      "default": "en,de"
     },
     "clientId": {
       "type": "string",

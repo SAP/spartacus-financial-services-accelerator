@@ -6,7 +6,7 @@ import {
   SchematicContext,
   Tree,
 } from '@angular-devkit/schematics';
-import { ANGULAR_LOCALIZE } from '../shared/constants';
+import { ANGULAR_LOCALIZE } from '@spartacus/schematics';
 
 export default function (options: any): Rule {
   return (host: Tree, context: SchematicContext) => {
