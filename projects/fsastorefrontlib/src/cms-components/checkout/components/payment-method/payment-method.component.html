@@ -16,7 +16,8 @@
               id="creditCard"
               value="creditCard"
               name="paymentMethod"
-              (click)="setSelectedPaymentMethod('creditCard')"
+              (click)="setSelectedPaymentMethod($event);
+              "
             />
             <label class="pl-3 pt-1" for="creditCard">
               {{ 'fscommon.creditCard' | cxTranslate }}
@@ -29,7 +30,7 @@
               name="paymentMethod"
               (click)="
                 selectPaymentMethod({ id: 'invoice' });
-                setSelectedPaymentMethod('invoice')
+                setSelectedPaymentMethod($event)
               "
             />
             <label class="pl-3 pt-1" for="invoice">
@@ -57,7 +58,7 @@
                 </button>
               </div>
             </div>
-
+            
             <div class="row">
               <div
                 class="cx-payment-card col-md-12 col-lg-6"
@@ -78,7 +79,8 @@
       </div>
     </ng-container>
   </div>
-  <div *ngIf="!newPaymentFormManuallyOpened" class="row">
+  {{newPaymentFormManuallyOpened}}
+  <div *ngIf="!newPaymentFormManuallyOpened && !cards.length" class="row">
     <div class="col-md-12 col-lg-6 mb-3 mb-lg-0">
       <ng-container
         *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
@@ -97,6 +99,7 @@
           type="button"
           data-checkout-url=""
           (click)="navigateNext(nextCheckoutStep)"
+          [disabled]="!(selectedMethod$ | async)?.id"
         >
           {{ 'common.continue' | cxTranslate }}
         </button></ng-container
@@ -104,13 +107,16 @@
     </div>
   </div>
   <ng-template #newPaymentForm>
-    <cx-payment-form
-      (setPaymentDetails)="setPaymentDetails($event)"
-      (closeForm)="hideNewPaymentForm()"
-      (goBack)="back()"
-      [paymentMethodsCount]="cards?.length || 0"
-      [setAsDefaultField]="!isGuestCheckout"
-    ></cx-payment-form>
+    <ng-container *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
+        >
+      <cx-payment-form
+        (setPaymentDetails)="setPaymentDetails($event)"
+        (closeForm)="hideNewPaymentForm()"
+        (goBack)="navigateBack(previousCheckoutStep)"
+        [paymentMethodsCount]="cards?.length || 0"
+        [setAsDefaultField]="!isGuestCheckout"
+      ></cx-payment-form>
+    </ng-container>
   </ng-template>
 </ng-container>
 

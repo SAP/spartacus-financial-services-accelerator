@@ -61,8 +61,8 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
   }
 
-  setSelectedPaymentMethod(selectedMethod: string) {
-    this.selectedPaymentMethod = selectedMethod;
+  setSelectedPaymentMethod(selectedMethod: Event) {
+    this.selectedPaymentMethod = (<HTMLInputElement>selectedMethod.target).value;
   }
 
   navigateBack(previousStep: FSSteps) {
@@ -71,7 +71,7 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
       params: { code: previousStep.stepParameter },
     });
   }
-
+  
   navigateNext(nextStep: FSSteps) {
     this.subscription.add(
       this.checkoutPaymentService
