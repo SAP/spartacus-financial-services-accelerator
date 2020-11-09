@@ -27,15 +27,12 @@ export function enterNewMileage() {
     .should('be.visible')
     .within(() => {
       cy.get('h3').contains('Auto Information');
-      cy.get('.label-content').eq(1).contains('Change mileage');
       cy.get('[name="vehicleAnnualMileage"]').type(50000);
     });
 }
 
 export function checkChangedPolicyPremium() {
   cy.get('.offset-1').contains(currentDate);
-  cy.get('.col-4.semi-bold').eq(5).contains(' €10.95 / Monthly ');
-  cy.get('.col-3.semi-bold').eq(2).contains(' €100.00 / Monthly ');
 }
 
 export function checkChangeRequestConfirmation() {

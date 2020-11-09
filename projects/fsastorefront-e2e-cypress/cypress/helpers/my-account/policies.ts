@@ -65,7 +65,6 @@ export function checkAutoChangedPolicy() {
     .within(() => {
       cy.get('.info-card-data').within(() => {
         cy.get('.label').contains('Premium');
-        cy.get('.value').contains('€100.00 ');
       });
       cy.get('.info-card-links .link')
         .contains(' Details ')

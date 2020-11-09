@@ -9,6 +9,10 @@ export function checkGeneralTab() {
   cy.get('.fs-tab').should('be.visible').contains('General');
 }
 
+export function checkBankingTabs() {
+  cy.get('.fs-tab').should('be.visible').contains('General');
+}
+
 export function checkInboxHeader() {
   cy.get('.m-4').should('be.visible');
   cy.get('.section-header-heading ').within(() => {

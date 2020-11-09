@@ -1,7 +1,6 @@
 import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import { checkPersonalDetailsPage } from '../../../helpers/checkout/checkoutSteps';
 import * as inbox from '../../../helpers/my-account/inbox';
 import * as banking from '../../../helpers/checkout/banking/checkoutBankingSteps';
 import * as creditCard from '../../../helpers/checkout/banking/creditCard';
@@ -12,6 +11,7 @@ context('Credit Card Checkout', () => {
     cy.visit('/');
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
+    checkout.waitForHomepage();
   });
 
   it('Should register a new user and start Credit Card checkout', () => {
@@ -40,15 +40,14 @@ context('Credit Card Checkout', () => {
   it('Should check optional products for Credit Card', () => {
     checkout.checkCheckoutStep('Your Credit Card Application', '7');
     creditCard.checkOptionalProducts();
-    //creditCard.checkMiniCartCreditCard();
     checkout.clickContinueButton();
   });
 
   it('Should populate Personal Details page', () => {
     checkout.checkCheckoutStep('Your Credit Card Application', '7');
-    checkPersonalDetailsPage();
-    creditCard.populatePersonalDetails();
-    creditCard.populateAdditionalApplicant();
+    checkout.checkPersonalDetailsPage();
+    banking.populatePersonalDetailsCCandLoan();
+    banking.populateAdditionalApplicantCCandLoan();
     checkout.clickContinueButton();
   });
 
@@ -76,7 +75,7 @@ context('Credit Card Checkout', () => {
   });
 
   it('Should check order confirmation', () => {
-    checkout.checkOrderConfirmationBanking();
+    checkout.checkOrderConfirmation();
     checkout.checkAccordions('creditCardConfirmation');
   });
 
@@ -87,8 +86,7 @@ context('Credit Card Checkout', () => {
       dropdownItem: 'Inbox',
     });
     inbox.checkInboxComponets();
-    inbox.checkGeneralTab();
-    cy.wait(500);
-    cy.get('div.col-6').contains(' Order Pending ');
+    inbox.checkBankingTabs();
+    cy.get('div.col-6').should('contain.text', ' Order Pending ');
   });
 });

@@ -1,6 +1,8 @@
 import * as shared from '../shared-checkout';
+import * as sharedCheckout from '../shared-checkout.interface';
 
 const todaysDate = Cypress.moment().format('YYYY-MM-DD');
+const currentDate = Cypress.moment().format(' DD MMM YYYY ');
 
 export function openCategoryPage() {
   cy.selectOptionFromDropdown({
@@ -91,6 +93,30 @@ export function checkAutoSilverMiniCart() {
     price: ' €10.95 ',
     products: [
       {
+        title: ' Start Date: ',
+        value: currentDate,
+      },
+      {
+        title: 'Vehicle Make:',
+        value: ' Audi ',
+      },
+      {
+        title: 'Vehicle Model:',
+        value: ' A5 ',
+      },
+      {
+        title: 'Vehicle Type:',
+        value: ' A5 Quattro ',
+      },
+      {
+        title: 'Vehicle Value:',
+        value: ' 12000 ',
+      },
+      {
+        title: 'Vehicle Year:',
+        value: ' 2017 ',
+      },
+      {
         title: ' Third Party Liability: ',
         value: ' €9.95 ',
       },
@@ -126,7 +152,6 @@ export function populateVehicleDetails() {
 }
 
 export function populateMainDriverData() {
-  cy.get('[name=mainDriverDateOfBirth]').type('1991-02-17');
   cy.get('[name=mainDriverFirstName]').type('Johan');
   cy.get('[name=mainDriverLastName]').type('Grozni');
   cy.get('[name=mainDriverLicenceNumber]').type('BG-234-xx');
@@ -136,4 +161,32 @@ export function populateAdditionalData() {
   cy.get('[name=additionalDriver1FirstName]').type('Phin');
   cy.get('[name=additionalDriver1LastName]').type('Jones');
   cy.get('[name=additionalDriver1LicenceNumber]').type('BG-234-yy');
+}
+
+export function checkOptionalProducts() {
+  const addOptionsContent: addOptionsPage.AddOptions = {
+    title: 'Your Auto Insurance',
+    items: [
+      {
+        name: 'Collision Coverage',
+        mandatory: true,
+      },
+      {
+        name: 'Uninsured Coverage',
+        available: true,
+      },
+      {
+        name: 'Roadside Assistance',
+        available: true,
+      },
+      {
+        name: 'Trailer Liability',
+        available: true,
+      },
+      {
+        name: ' Covered with Third Party Liability ',
+      },
+    ],
+  };
+  shared.checkAddOptionsPageContent(addOptionsContent);
 }
