@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { StoreModule } from '@ngrx/store';
-import { AuthActions } from '@spartacus/core';
+import { AuthActions, OCC_USER_ID_CURRENT } from '@spartacus/core';
 import { cold, hot } from 'jasmine-marbles';
 import { Observable, of, throwError } from 'rxjs';
 import { FormConnector } from '../../connectors/form-connector';
@@ -67,6 +67,7 @@ describe('Form Data Effects', () => {
     it('should load form data', () => {
       const action = new fromActions.LoadFormData({
         formDataId: formData.id,
+        userId: OCC_USER_ID_CURRENT,
       });
       const completion = new fromActions.LoadFormDataSuccess(formData);
       actions$ = hot('-a', { a: action });
@@ -94,6 +95,7 @@ describe('Form Data Effects', () => {
     it('should save form data', () => {
       const action = new fromActions.SaveFormData({
         formData: formData,
+        userId: OCC_USER_ID_CURRENT,
       });
       const completion = new fromActions.SaveFormDataSuccess(formData);
       actions$ = hot('-a', { a: action });
@@ -107,6 +109,7 @@ describe('Form Data Effects', () => {
       );
       const action = new fromActions.SaveFormData({
         formData: formData,
+        userId: OCC_USER_ID_CURRENT,
       });
       const completion = new fromActions.SaveFormDataFail(
         JSON.stringify('Error')

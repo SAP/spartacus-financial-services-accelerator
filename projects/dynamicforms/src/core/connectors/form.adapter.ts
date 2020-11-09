@@ -28,13 +28,21 @@ export abstract class FormAdapter {
    * Abstract method used to save (create new or update) form data
    *
    * @param formData The form data object
+   * @param userId The user id
    */
-  abstract saveFormData(formData: YFormData): Observable<YFormData>;
+  abstract saveFormData(
+    formData: YFormData,
+    userId: string
+  ): Observable<YFormData>;
 
   /**
    * Abstract method used to get form data
    *
    * @param formDataId The identifier of form data object
+   * @param userId The user id
    */
-  abstract getFormData(formDataId: string): Observable<YFormData>;
+  abstract getFormData(
+    formDataId: string,
+    userId: string
+  ): Observable<YFormData>;
 }

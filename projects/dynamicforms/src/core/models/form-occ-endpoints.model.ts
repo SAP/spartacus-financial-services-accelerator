@@ -5,12 +5,12 @@ export interface FormOccEndpoints extends OccEndpoints {
    * Get form definition by id
    *
    */
-  definition?: string;
+  formDefinition?: string;
   /**
    * Get form definitions
    *
    */
-  definitions?: string;
+  formDefinitions?: string;
   /**
    * Get form data
    *
