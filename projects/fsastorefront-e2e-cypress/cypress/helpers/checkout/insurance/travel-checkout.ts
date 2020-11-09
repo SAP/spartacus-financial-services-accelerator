@@ -1,22 +1,7 @@
 import * as shared from '../shared-checkout';
+import * as sharedCheckout from '../shared-checkout.interface';
 
-export function openCategoryPage() {
-  cy.selectOptionFromDropdown({
-    menuOption: 'Insurance',
-    dropdownItem: 'Travel',
-  });
-  cy.get('.enriched-banner-styled-text')
-    .invoke('text')
-    .then(text => {
-      if (text !== ' Get a Quote') {
-        openCategoryPage();
-      }
-    });
-
-  cy.get('.enriched-banner-styled-text')
-    .should('be.visible')
-    .click({ force: true });
-}
+const currentDate = Cypress.moment().format(' DD MMM YYYY ');
 
 export function populateInsuranceInfoForm() {
   cy.get('cx-dynamic-form').within(() => {
@@ -101,6 +86,14 @@ export function checkTravelMiniCart() {
   const miniCartContent: addOptionsPage.MiniCart = {
     price: ' €99.00 ',
     products: [
+      {
+        title: ' Start Date: ',
+        value: ' 01 Jan 2021 ',
+      },
+      {
+        title: 'Number of Travelers:',
+        value: ' 1 ',
+      },
       {
         title: ' Single - Budget Plan: ',
         value: ' €90.00 ',

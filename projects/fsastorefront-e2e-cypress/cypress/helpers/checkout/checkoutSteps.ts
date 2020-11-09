@@ -1,5 +1,5 @@
 import { Accordions } from './accordions';
-import { waitForPage } from '../generalHelpers';
+import { waitForPage, waitForFormDefinition } from '../generalHelpers';
 
 export function checkProgressBarInsurance() {
   cy.get('p.label').should('have.length', 7).eq(0).contains('Choose a Cover');
@@ -23,12 +23,12 @@ export function populatePersonalDetailsPage() {
 
 export function ConfirmBindQuote() {
   cy.get('cx-fs-bind-quote-dialog').within(() => {
-    cy.get('.primary-button').click();
+    cy.get('.primary-button').click({ force: true });
   });
 }
 
 export function bindQuotePopup() {
-  cy.get('.primary-button').should('contain', 'Continue').click();
+  cy.get('.primary-button').should('contain.text', 'Continue').click();
   cy.wait(500);
   cy.get('cx-fs-bind-quote-dialog').within(() => {
     cy.get('.primary-button').click();
@@ -37,16 +37,18 @@ export function bindQuotePopup() {
 }
 
 export function clickContinueButton() {
-  cy.get('.primary-button').should('contain', 'Continue').click();
+  cy.get('.primary-button')
+    .should('contain.text', 'Continue')
+    .click({ force: true });
 }
 
 export function checkBackAndContinueButtons() {
-  cy.get('.action-button').should('contain', 'Back');
-  cy.get('.primary-button').should('contain', 'Continue');
+  cy.get('.action-button').should('contain.text', 'Back');
+  cy.get('.primary-button').should('contain.text', 'Continue');
 }
 
 export function clickResumeButton() {
-  cy.get('.secondary-button').contains('Resume').click();
+  cy.get('.secondary-button').should('contain.text', 'Resume').click();
   cy.wait(1000);
 }
 
@@ -90,6 +92,8 @@ export function checkOrderConfirmation() {
   cy.get('cx-fs-order-confirmation-message').within(() => {
     cy.get('h5').eq(0).should('have.text', ' Thank you! ');
   });
+  cy.get('cx-fs-order-confirmation').should('be.visible');
+  cy.get('.short-overview').should('be.visible');
 }
 
 export function checkInsuranceComparisonPage(numberOfProducts) {
@@ -183,8 +187,18 @@ export function waitForHomepage() {
   cy.wait(`@${homepage}`).its('status').should('eq', 200);
 }
 
+export function waitForAddOptions() {
+  const addOptions = waitForPage('add-options', 'addOptions');
+  cy.wait(`@${addOptions}`).its('status').should('eq', 200);
+}
+
+export function waitForConfirmation() {
+  const confirmation = waitForPage('orderConfirmationPage', 'confirmation');
+  cy.wait(`@${confirmation}`).its('status').should('eq', 200);
+}
+
 export function checkCheckoutStep(mainProduct, numberOfSteps) {
-  cy.get('h2').contains(mainProduct);
+  cy.get('h2').should('be.visible').contains(mainProduct);
   cy.get('.progress-inner-wrapper').should('have.length', numberOfSteps);
 }
 
@@ -192,4 +206,17 @@ export function checkPersonalDetailsPage() {
   cy.get('cx-fs-personal-details').should('be.visible');
   cy.get('cx-fs-mini-cart').should('be.visible');
   cy.get('cx-footer-navigation').should('be.visible');
+}
+
+export function waitForQuoteReviewPage() {
+  const quoteReview = waitForPage('quote-review', 'quoteReview');
+  cy.wait(`@${quoteReview}`).its('status').should('eq', 200);
+}
+
+export function waitForPersonalDetailsForm() {
+  const formDefinition = waitForFormDefinition(
+    'banking_current_account',
+    'formDefinition'
+  );
+  cy.wait(`@${formDefinition}`).its('status').should('eq', 200);
 }

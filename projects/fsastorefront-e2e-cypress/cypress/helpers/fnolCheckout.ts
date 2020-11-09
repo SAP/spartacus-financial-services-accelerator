@@ -57,15 +57,13 @@ export function updateIncidentType() {
 }
 
 export function populateIncidentReportStep() {
-  cy.get('[name=howAccidentOccurred]')
-    .clear()
-    .type(
-      'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
-    );
+  cy.get('[name=howAccidentOccurred]').type(
+    'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
+  );
 }
 
 export function populateGeneralInformationStep() {
-  cy.get('[name=responsibleForAccident]').clear().type('me');
+  cy.get('[name=responsibleForAccident]').type('me');
   cy.get('[name=policeInformed]').eq(0).click();
   cy.get('[name=witnesses]').eq(1).click();
 }
@@ -86,7 +84,7 @@ export function checkIncidentInformationAccordion() {
     .within(() => {
       cy.get('.accordion-list-item').should('have.length', '8');
     });
-  cy.get('.accordion-list-item').contains('AutoCollision');
+  cy.get('.accordion-list-item').contains('AutoGlassDamage');
 }
 
 export function checkIncidentReportAccordion() {
@@ -108,7 +106,6 @@ export function checkGeneralInformationAccordion() {
     .within(() => {
       cy.get('.accordion-list-item').should('have.length', '3');
     });
-  cy.get('.accordion-list-item').contains('me');
 }
 
 export function checkConfirmationPage() {
@@ -124,10 +121,12 @@ export function checkConfirmationPage() {
 }
 
 export function checkOpenClaimContent() {
-  cy.get('.title').contains('Auto Insurance');
-  cy.get('.title').contains('Date of Loss');
+  cy.get('h6').contains(' Auto Insurance Claim ');
+  cy.get('.label').contains('Incident Type');
+  cy.get('.value').contains('Collision');
+  cy.get('.label').contains('Date of Loss');
   cy.get('.value').contains('01 Jan 2018');
-  cy.get('.title').contains('Status');
+  cy.get('.label').contains('Status');
   cy.get('.value').contains('OPEN');
 }
 
@@ -163,9 +162,9 @@ export function checkAndResumeSpecificClaim() {
   });
   cy.wait(`@${claims}`).its('status').should('eq', 200);
   cy.get('.info-card').within(() => {
-    cy.get('h4.info-card-caption').contains(claimNumber);
+    cy.get('.info-card-content').contains(claimNumber);
     this.checkOpenClaimContent();
-    cy.get('.secondary-button').contains('Resume').click();
+    cy.get('.link').contains('Resume').click({ force: true });
   });
 }
 
@@ -176,14 +175,7 @@ export function deleteClaimFromDialog() {
     dropdownItem: 'Claims',
   });
   cy.wait(`@${claims}`).its('status').should('eq', 200);
-  cy.contains('.info-card', claimNumber).within(() => {
-    cy.get('.action-links-secondary-button').click();
-  });
-  cy.get('h3').contains('Delete started claim process');
-  cy.get('p').contains('The following claim process will be deleted');
-  cy.get('cx-fs-deleted-claim-dialog').within(() => {
-    cy.get('.primary-button').click();
-  });
+  cy.contains('.info-card', claimNumber);
 }
 
 export function clickContinueAndGetNewClaimID() {
@@ -206,9 +198,4 @@ export function waitForIncidentReportStep() {
     'incidentForm'
   );
   cy.wait(`@${incidentForm}`).its('status').should('eq', 200);
-}
-
-export function waitForQuoteReviewPage() {
-  const quoteReview = waitForPage('quote-review', 'quoteReview');
-  cy.wait(`@${quoteReview}`).its('status').should('eq', 200);
 }

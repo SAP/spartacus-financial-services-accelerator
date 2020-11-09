@@ -22,10 +22,10 @@ export function checkAgentLocatorPage() {
 export function checkAgentList() {
   cy.get('.agent-list-item')
     .should('have.length', 10)
-    .eq(1)
+    .eq(0)
     .within(() => {
       cy.get('.cx-product-image-container').should('be.visible');
-      cy.get('.agent-name').contains(' Kai Ratliff ');
+      cy.get('.agent-name').should('contain.text', ' Kai Ratliff');
       cy.get('.mb-3').contains(' Event Insurance ');
       cy.get('.action-button').contains(' Contact ');
     });

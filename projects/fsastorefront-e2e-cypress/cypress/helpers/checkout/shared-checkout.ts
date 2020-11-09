@@ -11,11 +11,14 @@ export function checkAddOptionsPageContent(addOptions: AddOptions) {
           .eq(index)
           .within(() => {
             cy.get('h6').should('have.text', item.name);
-            if (!item.available) {
+            if (item.available === false) {
               cy.get('.col-md-3').should('contain', ' Not available ');
             }
             if (item.shouldAdd) {
               cy.get('.secondary-button').click();
+            }
+            if (item.mandatory) {
+              cy.get('.col-md-3').should('contain', ' Included ');
             }
           });
       });
