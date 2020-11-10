@@ -1,14 +1,11 @@
 export const forms = {
   forms: {
-    enterValidValue: 'Bitte geben Sie einen gültigen Wert ein',
     dateOfBirthMinimumAge: 'Mindestens 18 Jahre alt',
-    lessThan200K: '[DE] Range must be between 0 -200,000',
     enterValidEmail: 'Bitte geben Sie eine gültige Email Adresse ein.',
-    validationErrors: '[DE] There are validation errors',
-    fillOutProperly: `[DE] Please retry once all of the fields have been properly filled-out.`,
     dateOfBirth: {
       label: 'Geburtsdatum',
     },
+    effectiveDate: '[DE] Effective date',
     phoneNumber: {
       label: 'Telefonnummer',
       lengthValidation:
@@ -30,32 +27,7 @@ export const forms = {
       call: '[DE]Call',
     },
     subject: '[DE] Subject',
-    optional: '(Optional)',
     send: '[DE] Send',
-    titles: {
-      homeowners_details_form: 'Immobilieninformationen',
-      trip_details_form: 'Reiseinformation',
-      auto_details_form: 'Fahrzeuginformationen',
-      life_details_form: 'Informationen zur Abdeckung',
-      savings_details_form: '[DE] Choose Cover',
-      auto_claim_incident_info_form: 'Informationen zum Vorfall',
-      auto_claim_incident_report_form: 'Vorfallsbericht',
-      auto_claim_general_form: 'Allgemeine Informationen',
-      insurance_personal_details: 'Persönliche Angaben',
-      event_personal_details: 'Persönliche Angaben',
-      travel_personal_details: 'Persönliche Angaben',
-      savings_personal_details: 'Persönliche Angaben',
-      loan_creditCard_personalDetails: 'Persönliche Angaben',
-      auto_personal_details: 'Persönliche Angaben',
-      ftd_currentAcc_personal_details: 'Persönliche Angaben',
-      fixed_term_deposit_details_form: 'Produkt konfigurieren',
-      loan_details_form: 'Produkt konfigurieren',
-      credit_card_details_form: 'Produkt konfigurieren',
-      current_account_details_form: 'Produkt konfigurieren',
-    },
-    auto: {
-      vehicleAnnualMileage: 'Jahreskilometerleistung des Fahrzeugs',
-    },
     policyHolderNotSameAsMainDriver:
       '[DE] Please return to the first step of checkout: “Choose a cover” and check your Date of birth. Policy holder and main driver should have the same Date of birth.',
   },
