@@ -19,6 +19,7 @@ context('Event Checkout', () => {
   it('Should register a new user', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
+    checkout.waitForHomepage();
   });
 
   it('Should open event category page', () => {
@@ -50,13 +51,14 @@ context('Event Checkout', () => {
     event.checkCheckoutPage();
     checkout.checkPersonalDetailsPage();
     event.populatePersonalDetails();
+    //registration process to be completed
+    cy.wait(500);
     checkout.clickContinueButton();
   });
   it('Should check quote review page', () => {
     event.checkCheckoutPage();
     event.checkProgressBarEvent();
     event.checkMiniCartRemovedProduct();
-    checkout.clickContinueButton();
     checkout.checkAccordions('threeAccordions');
     addPaymentMethod(registrationUser.email, cartId);
     checkout.clickContinueButton();

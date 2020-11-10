@@ -32,22 +32,19 @@ context('Current Account Checkout', () => {
   it('Should check optional products for Current Account', () => {
     checkout.checkCheckoutStep(' Your Current Account Application ', '7');
     currentAccount.checkOptionalProductsAddTransactionChest();
-    //creditCard.checkMiniCartCreditCard();
-    checkout.clickContinueButton();
   });
 
   it('Should register user in checkout', () => {
     register.populateRegistrationForm(registrationUser);
     register.loginInUser(registrationUser.email, registrationUser.password);
-    cy.wait(500);
   });
 
   it('Should complete personal details step', () => {
+    checkout.waitForPersonalDetailsForm();
     checkout.checkCheckoutStep(' Your Current Account Application ', '7');
     checkout.checkPersonalDetailsPage();
     banking.populatePersonalDetailsLoanAndCA();
     currentAccount.populatePersonalDetails();
-    //currentAccount.checkMiniCartCurrentAccount();
     //Waiting for registration process to be completed
     cy.wait(5000);
     checkout.clickContinueButton();

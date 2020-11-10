@@ -11,6 +11,7 @@ context('Credit Card Checkout', () => {
     cy.visit('/');
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
+    checkout.waitForHomepage();
   });
 
   it('Should register a new user and start Credit Card checkout', () => {
@@ -39,7 +40,6 @@ context('Credit Card Checkout', () => {
   it('Should check optional products for Credit Card', () => {
     checkout.checkCheckoutStep('Your Credit Card Application', '7');
     creditCard.checkOptionalProducts();
-    //creditCard.checkMiniCartCreditCard();
     checkout.clickContinueButton();
   });
 
@@ -86,8 +86,7 @@ context('Credit Card Checkout', () => {
       dropdownItem: 'Inbox',
     });
     inbox.checkInboxComponets();
-    inbox.checkGeneralTab();
-    cy.wait(500);
-    cy.get('div.col-6').contains(' Order Pending ');
+    inbox.checkBankingTabs();
+    cy.get('div.col-6').should('contain.text', ' Order Pending ');
   });
 });

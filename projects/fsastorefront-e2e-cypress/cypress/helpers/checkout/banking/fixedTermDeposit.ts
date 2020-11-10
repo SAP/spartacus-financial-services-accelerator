@@ -52,7 +52,6 @@ export function checkMiniCart() {
         title: 'Deposit Term:',
         value: ' 3 ',
       },
-
       {
         title: 'Maturity Option:',
         value: ' termination ',

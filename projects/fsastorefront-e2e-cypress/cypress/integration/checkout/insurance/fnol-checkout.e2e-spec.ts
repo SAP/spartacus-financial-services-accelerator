@@ -37,8 +37,6 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should complete first step auto checkout', () => {
-    cy.visit('/');
-    cy.wait(500);
     auto.openCategoryPage();
     auto.populateAutoInformation();
     auto.populateMainDriverInfo();
@@ -109,7 +107,6 @@ context('FNOL for sample data user', () => {
     fnol.checkFNOLCheckoutPage();
     fnol.checkFNOLSteps();
     fnol.updateIncidentType();
-    //fnol.populateIncidentInformationStep();
     checkout.clickContinueButton();
     fnol.checkFNOLCheckoutPage();
   });

@@ -1,4 +1,6 @@
 import * as shared from '../shared-checkout';
+import * as sharedCheckout from '../shared-checkout.interface';
+
 const todaysDate = Cypress.moment().format('YYYY-MM-DD');
 const currentDate = Cypress.moment().format(' DD MMM YYYY ');
 
@@ -150,7 +152,6 @@ export function populateVehicleDetails() {
 }
 
 export function populateMainDriverData() {
-  cy.get('[name=mainDriverDateOfBirth]').type('1991-02-17');
   cy.get('[name=mainDriverFirstName]').type('Johan');
   cy.get('[name=mainDriverLastName]').type('Grozni');
   cy.get('[name=mainDriverLicenceNumber]').type('BG-234-xx');

@@ -23,7 +23,7 @@
         sentDate: defaultSortOrder
       } as sorts"
     >
-      <div class="col-3 label">
+      <div class="col-3 text-uppercase">
         {{ 'fscommon.subject' | cxTranslate }}
         <span
           class="filter position-absolute fs-icon icon-triangle-bottom"
@@ -35,7 +35,7 @@
         >
         </span>
       </div>
-      <div class="col-6 label">
+      <div class="col-6 text-uppercase">
         {{ 'fscommon.preview' | cxTranslate }}
         <span
           class="filter position-absolute fs-icon icon-triangle-bottom"
@@ -46,7 +46,7 @@
           [ngClass]="sorts.content === 'asc' ? 'rotate' : ''"
         ></span>
       </div>
-      <div class="col-2 label">
+      <div class="col-2 text-uppercase">
         {{ 'fscommon.date' | cxTranslate }}
         <span
           class="filter position-absolute fs-icon icon-triangle-bottom"
