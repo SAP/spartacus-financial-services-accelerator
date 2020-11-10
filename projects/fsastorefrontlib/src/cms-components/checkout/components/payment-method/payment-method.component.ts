@@ -54,14 +54,17 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
   previousCheckoutStep$: Observable<FSSteps>;
   nextCheckoutStep$: Observable<FSSteps>;
   subscription = new Subscription();
+  paymentDetails$;
 
   ngOnInit(): void {
     super.ngOnInit();
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
+    this.paymentDetails$ = this.checkoutPaymentService.getPaymentDetails();
   }
 
   setSelectedPaymentMethod(selectedMethod: Event) {
+    this.checkoutPaymentService.resetSetPaymentDetailsProcess();
     this.selectedPaymentMethod = (<HTMLInputElement>selectedMethod.target).value;
   }
 
@@ -71,7 +74,7 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
       params: { code: previousStep.stepParameter },
     });
   }
-  
+
   navigateNext(nextStep: FSSteps) {
     this.subscription.add(
       this.checkoutPaymentService

@@ -58,7 +58,7 @@
                 </button>
               </div>
             </div>
-            
+
             <div class="row">
               <div
                 class="cx-payment-card col-md-12 col-lg-6"
@@ -79,8 +79,7 @@
       </div>
     </ng-container>
   </div>
-  {{newPaymentFormManuallyOpened}}
-  <div *ngIf="!newPaymentFormManuallyOpened && !cards.length" class="row">
+  <div *ngIf="!newPaymentFormManuallyOpened && (paymentDetails$ | async)?.id" class="row">
     <div class="col-md-12 col-lg-6 mb-3 mb-lg-0">
       <ng-container
         *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
