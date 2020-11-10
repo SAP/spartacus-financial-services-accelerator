@@ -80,10 +80,11 @@
   </div>
   <div
     *ngIf="
+      cards?.length > 0 ||
       ((!newPaymentFormManuallyOpened || (paymentDetails$ | async)?.id) &&
         selectedPaymentMethod !== 'creditCard') ||
       (!newPaymentFormManuallyOpened &&
-        selectedPaymentMethod == 'creditCard' &&
+        selectedPaymentMethod === 'creditCard' &&
         (paymentDetails$ | async)?.cardNumber)
     "
     class="row"
@@ -106,7 +107,11 @@
           type="button"
           data-checkout-url=""
           (click)="navigateNext(nextCheckoutStep)"
-          [disabled]="!(selectedMethod$ | async)?.id"
+          [disabled]="
+            !(paymentDetails$ | async)?.id ||
+            (selectedPaymentMethod == 'creditCard' &&
+              !(paymentDetails$ | async)?.cardNumber)
+          "
         >
           {{ 'common.continue' | cxTranslate }}
         </button></ng-container
