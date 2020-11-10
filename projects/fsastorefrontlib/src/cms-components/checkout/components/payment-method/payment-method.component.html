@@ -80,7 +80,7 @@
   </div>
   <div
     *ngIf="
-      cards?.length > 0 ||
+      (cards?.length > 0 && !newPaymentFormManuallyOpened) ||
       ((!newPaymentFormManuallyOpened || (paymentDetails$ | async)?.id) &&
         selectedPaymentMethod !== 'creditCard') ||
       (!newPaymentFormManuallyOpened &&
