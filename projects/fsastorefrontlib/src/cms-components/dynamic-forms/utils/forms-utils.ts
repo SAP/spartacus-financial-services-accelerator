@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as clone from 'clone';
-import { FSCart } from '../../../occ/occ-models/occ.models';
 
 @Injectable()
 export class FormsUtils {
