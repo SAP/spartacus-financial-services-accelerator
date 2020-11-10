@@ -3,10 +3,12 @@ import { RouterTestingModule } from '@angular/router/testing';
 import {
   ActiveCartService,
   Cart,
+  CmsActivatedRouteSnapshot,
   GlobalMessageService,
   RoutingService,
 } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
+import { FSCheckoutConfigService } from '../services';
 import { BindingStateType } from './../../../occ/occ-models/occ.models';
 import { BindQuoteGuard } from './bind-quote.guard';
 
@@ -18,7 +20,13 @@ const mockCart = {
     },
   },
 };
-
+const mockActivatedRoute = {
+  url: [
+    {
+      path: 'testPath',
+    },
+  ],
+};
 class MockRoutingService {
   go() {}
 }
@@ -33,10 +41,31 @@ class MockGlobalMessageService {
   add() {}
 }
 
+class MockCheckoutConfigService {
+  steps = [
+    {
+      id: 'generalInformationStep',
+      routeName: 'generalInformation',
+    },
+    {
+      id: 'comparisonCheckoutStep',
+      routeName: 'category',
+    },
+    {
+      id: 'addOptionsStep',
+      routeName: 'addOptions',
+    },
+  ];
+  getCurrentStepIndex() {
+    return 1;
+  }
+}
+
 describe(`BindQuoteGuard`, () => {
   let guard: BindQuoteGuard;
   let cartService: ActiveCartService;
   let routing: RoutingService;
+  let checkoutConfigService: FSCheckoutConfigService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -53,6 +82,10 @@ describe(`BindQuoteGuard`, () => {
           provide: GlobalMessageService,
           useClass: MockGlobalMessageService,
         },
+        {
+          provide: FSCheckoutConfigService,
+          useClass: MockCheckoutConfigService,
+        },
       ],
       imports: [RouterTestingModule],
     });
@@ -60,6 +93,7 @@ describe(`BindQuoteGuard`, () => {
     guard = TestBed.inject(BindQuoteGuard);
     cartService = TestBed.inject(ActiveCartService);
     routing = TestBed.inject(RoutingService);
+    checkoutConfigService = TestBed.inject(FSCheckoutConfigService);
 
     spyOn(routing, 'go').and.stub();
   });
@@ -68,7 +102,7 @@ describe(`BindQuoteGuard`, () => {
     mockCart.insuranceQuote.state.code = BindingStateType.BIND;
     spyOn(cartService, 'getActive').and.returnValue(of(mockCart));
     guard
-      .canActivate()
+      .canActivate(mockActivatedRoute as CmsActivatedRouteSnapshot)
       .subscribe(isActive => expect(isActive).toBe(false))
       .unsubscribe();
     expect(routing.go).toHaveBeenCalled();
@@ -78,7 +112,16 @@ describe(`BindQuoteGuard`, () => {
     mockCart.insuranceQuote.state.code = BindingStateType.UNBIND;
     spyOn(cartService, 'getActive').and.returnValue(of(mockCart));
     guard
-      .canActivate()
+      .canActivate(mockActivatedRoute as CmsActivatedRouteSnapshot)
+      .subscribe(isActive => expect(isActive).toBe(true))
+      .unsubscribe();
+    expect(routing.go).not.toHaveBeenCalled();
+  });
+
+  it(`should not redirect to the homepage when source step is comparisonCheckoutStep`, () => {
+    spyOn(checkoutConfigService, 'getCurrentStepIndex').and.returnValue(2);
+    guard
+      .canActivate(mockActivatedRoute as CmsActivatedRouteSnapshot)
       .subscribe(isActive => expect(isActive).toBe(true))
       .unsubscribe();
     expect(routing.go).not.toHaveBeenCalled();
