@@ -47,7 +47,7 @@
     },
     "consignmentTracking": {
       "type": "boolean",
-      "description": "Consignmet tracking on or off",
+      "description": "Consignment tracking on or off",
       "default": true
     }
   },
