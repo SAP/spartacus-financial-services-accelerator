@@ -121,18 +121,6 @@ describe('OccFormAdapter', () => {
         );
       })
     );
-
-  describe('loadFormData', () => {
-    it('loadFormData', async(() => {
-      occFormAdapter.getFormData(formData.id, OCC_USER_ID_CURRENT).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === formDataEndpoint && req.method === 'GET';
-      }, `GET method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(formDataEndpoint, {
-        userId: OCC_USER_ID_CURRENT,
-        formDataId,
-      });
-    }));
   });
 
   describe('loadFormDefinitionById', () => {
