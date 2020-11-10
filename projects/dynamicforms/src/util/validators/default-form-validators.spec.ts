@@ -1,11 +1,11 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import { DefaultFormValidators } from './default-form-validators';
 
-const field1 = 'field1'
-const field2 = 'field2'
+const field1 = 'field1';
+const field2 = 'field2';
 const date1 = 'date1';
-const date2 = 'date2'
-const dateOfBirth = 'dateOfBirth'
+const date2 = 'date2';
+const dateOfBirth = 'dateOfBirth';
 
 describe('FormValidationService', () => {
   let form: FormGroup;
@@ -23,17 +23,17 @@ describe('FormValidationService', () => {
   it('should not return error, when fields match', () => {
     form.get(field1).setValue('fieldValue');
     form.get(field2).setValue('fieldValue');
-    expect(
-      DefaultFormValidators.matchFields(field1, field2)(form)
-    ).toEqual(undefined);
+    expect(DefaultFormValidators.matchFields(field1, field2)(form)).toEqual(
+      undefined
+    );
   });
 
   it("should return error, when emails don't match", () => {
     form.get(field1).setValue('fieldValue');
     form.get(field2).setValue('otherValue');
-    expect(
-      DefaultFormValidators.matchFields(field1, field2)(form)
-    ).toEqual({ NotEqual: true });
+    expect(DefaultFormValidators.matchFields(field1, field2)(form)).toEqual({
+      NotEqual: true,
+    });
   });
 
   it('should return error, when person is younger then minimun age', () => {
@@ -82,9 +82,7 @@ describe('FormValidationService', () => {
 
   it('should not return error, when field contains at least one letter and number', () => {
     form.get(field1).setValue('testValue1');
-    expect(DefaultFormValidators.alphanumeric(form.get(field1))).toEqual(
-      null
-    );
+    expect(DefaultFormValidators.alphanumeric(form.get(field1))).toEqual(null);
   });
 
   it('should check field value against regex', () => {
@@ -92,16 +90,12 @@ describe('FormValidationService', () => {
 
     form.get(field1).setValue('testValue1');
     expect(
-      DefaultFormValidators.regexValidator(numberLetterRegex)(
-        form.get(field1)
-      )
+      DefaultFormValidators.regexValidator(numberLetterRegex)(form.get(field1))
     ).toEqual(null);
 
     form.get(field1).setValue('testValue');
     expect(
-      DefaultFormValidators.regexValidator(numberLetterRegex)(
-        form.get(field1)
-      )
+      DefaultFormValidators.regexValidator(numberLetterRegex)(form.get(field1))
     ).toEqual({ InvalidFormat: true });
   });
 
@@ -223,10 +217,7 @@ describe('FormValidationService', () => {
     form.get(date2).setValue('10-10-2016');
 
     expect(
-      DefaultFormValidators.compareDates(
-        date2,
-        'shouldBeLess'
-      )(form.get(date1))
+      DefaultFormValidators.compareDates(date2, 'shouldBeLess')(form.get(date1))
     ).toEqual({ valueConflict: true });
 
     expect(
