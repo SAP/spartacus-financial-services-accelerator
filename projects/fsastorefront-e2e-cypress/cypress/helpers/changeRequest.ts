@@ -33,6 +33,7 @@ export function enterNewMileage() {
 
 export function checkChangedPolicyPremium() {
   cy.get('.offset-1').contains(currentDate);
+  cy.get('.col-3.semi-bold').eq(2).contains(' €100.00 / Monthly ');
 }
 
 export function checkChangeRequestConfirmation() {
@@ -58,15 +59,16 @@ export function checkOptionalExtras() {
     .should('be.visible')
     .within(() => {
       cy.get('.section-header-heading').contains(' Optional Extras ');
-      cy.get('.row.mx-3').should('have.length', 3);
+      cy.get('.row.mx-3').should('have.length', 4);
       cy.get('h6').eq(0).contains('Uninsured Coverage');
       cy.get('h6').eq(1).contains('Roadside Assistance');
       cy.get('h6').eq(2).contains('Trailer Liability');
+      cy.get('h6').eq(3).contains('Winter Tires');
     });
 }
 
 export function addRoadsideAssistance() {
-  cy.get('.secondary-button').should('have.length', 3).contains(' Add ');
+  cy.get('.secondary-button').should('have.length', 4).contains(' Add ');
   cy.get('.row.mx-3')
     .eq(1)
     .within(() => {

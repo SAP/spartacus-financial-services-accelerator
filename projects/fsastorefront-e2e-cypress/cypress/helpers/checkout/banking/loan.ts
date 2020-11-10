@@ -60,6 +60,10 @@ export function checkMiniCart() {
     price: ' €187.76 ',
     products: [
       {
+        title: ' Start Date: ',
+        value: ' 12 Dec 2021 ',
+      },
+      {
         title: 'Loan Amount:',
         value: ' 18001 ',
       },
@@ -70,10 +74,6 @@ export function checkMiniCart() {
       {
         title: 'Loan Purpose:',
         value: ' purchasing-a-car ',
-      },
-      {
-        title: 'Loan Start Date:',
-        value: ' 2021-12-12 ',
       },
       {
         title: 'Number Of Applicants:',

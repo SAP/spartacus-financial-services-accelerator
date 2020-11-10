@@ -29,7 +29,6 @@ export function ConfirmBindQuote() {
 
 export function bindQuotePopup() {
   cy.get('.primary-button').should('contain.text', 'Continue').click();
-  cy.wait(500);
   cy.get('cx-fs-bind-quote-dialog').within(() => {
     cy.get('.primary-button').click();
   });
@@ -37,9 +36,7 @@ export function bindQuotePopup() {
 }
 
 export function clickContinueButton() {
-  cy.get('.primary-button')
-    .should('contain.text', 'Continue')
-    .click({ force: true });
+  cy.get('.primary-button').should('contain.text', 'Continue').click();
 }
 
 export function checkBackAndContinueButtons() {
@@ -198,7 +195,7 @@ export function waitForConfirmation() {
 }
 
 export function checkCheckoutStep(mainProduct, numberOfSteps) {
-  cy.get('h2').should('be.visible').contains(mainProduct);
+  cy.get('h2').should('be.visible').should('contain.text', mainProduct);
   cy.get('.progress-inner-wrapper').should('have.length', numberOfSteps);
 }
 

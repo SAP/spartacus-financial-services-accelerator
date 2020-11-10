@@ -55,6 +55,7 @@ context('Event Checkout', () => {
     cy.wait(500);
     checkout.clickContinueButton();
   });
+
   it('Should check quote review page', () => {
     event.checkCheckoutPage();
     event.checkProgressBarEvent();
