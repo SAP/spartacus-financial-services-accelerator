@@ -80,8 +80,11 @@
   </div>
   <div
     *ngIf="
-      (!newPaymentFormManuallyOpened && (paymentDetails$ | async)?.id) ||
-      selectedPaymentMethod !== 'creditCard'
+      ((!newPaymentFormManuallyOpened || (paymentDetails$ | async)?.id) &&
+        selectedPaymentMethod !== 'creditCard') ||
+      (!newPaymentFormManuallyOpened &&
+        selectedPaymentMethod == 'creditCard' &&
+        (paymentDetails$ | async)?.cardNumber)
     "
     class="row"
   >
