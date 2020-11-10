@@ -65,7 +65,9 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
 
   setSelectedPaymentMethod(selectedMethod: Event) {
     this.checkoutPaymentService.resetSetPaymentDetailsProcess();
-    this.selectedPaymentMethod = (<HTMLInputElement>selectedMethod.target).value;
+    this.selectedPaymentMethod = (<HTMLInputElement>(
+      selectedMethod.target
+    )).value;
   }
 
   navigateBack(previousStep: FSSteps) {

@@ -16,8 +16,7 @@
               id="creditCard"
               value="creditCard"
               name="paymentMethod"
-              (click)="setSelectedPaymentMethod($event);
-              "
+              (click)="setSelectedPaymentMethod($event)"
             />
             <label class="pl-3 pt-1" for="creditCard">
               {{ 'fscommon.creditCard' | cxTranslate }}
@@ -79,7 +78,13 @@
       </div>
     </ng-container>
   </div>
-  <div *ngIf="!newPaymentFormManuallyOpened && (paymentDetails$ | async)?.id" class="row">
+  <div
+    *ngIf="
+      (!newPaymentFormManuallyOpened && (paymentDetails$ | async)?.id) ||
+      selectedPaymentMethod !== 'creditCard'
+    "
+    class="row"
+  >
     <div class="col-md-12 col-lg-6 mb-3 mb-lg-0">
       <ng-container
         *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
@@ -106,8 +111,7 @@
     </div>
   </div>
   <ng-template #newPaymentForm>
-    <ng-container *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
-        >
+    <ng-container *ngIf="previousCheckoutStep$ | async as previousCheckoutStep">
       <cx-payment-form
         (setPaymentDetails)="setPaymentDetails($event)"
         (closeForm)="hideNewPaymentForm()"
