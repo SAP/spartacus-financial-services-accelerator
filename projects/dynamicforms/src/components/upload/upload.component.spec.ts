@@ -181,7 +181,7 @@ describe('UploadComponent', () => {
   it('should start upload files', () => {
     component.uploadFiles(mockEvent.target.files);
     spyOn(mockfileUpladService, 'uploadFile').and.callThrough();
-    expect(component.progress).toEqual(50);
+    expect(component.individualProgress[0]).toEqual(50);
   });
 
   it('should display bytes when value is less than 1024', () => {

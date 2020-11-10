@@ -19,3 +19,6 @@
     box-shadow: none;
   }
 }
+*[role='button'] {
+  @include color-flip(--cx-color-1, --cx-color-primary, --cx-color-text);
+}

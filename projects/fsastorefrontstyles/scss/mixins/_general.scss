@@ -30,38 +30,21 @@
   -moz-box-shadow: $x $y $a $b rgba($color, $opacity);
   -webkit-box-shadow: $x $y $a $b rgba($color, $opacity);
 }
-@mixin primary-btn-color {
-  background-color: var(--cx-color-primary) !important;
-  border-color: var(--cx-color-primary) !important;
-  color: var(--cx-color-1) !important;
-  &:hover,
-  &:active,
-  &:focus {
-    background-color: var(--cx-color-7) !important;
-    border-color: var(--cx-color-7) !important;
-    color: var(--cx-color-1) !important;
-  }
-}
-@mixin secondary-btn-color {
-  background-color: var(--cx-color-secondary) !important;
-  border-color: var(--cx-color-secondary) !important;
-  color: var(--cx-color-1) !important;
-  &:hover,
-  &:active,
-  &:focus {
-    background-color: var(--cx-color-8) !important;
-    border-color: var(--cx-color-8) !important;
-    color: var(--cx-color-1) !important;
-  }
-}
-@mixin secondary-btn-color-inverted {
-  background-color: var(--cx-color-1) !important;
-  border-color: var(--cx-color-1) !important;
-  color: var(--cx-color-secondary) !important;
-  &:hover,
-  &:active,
-  &:focus {
-    opacity: 0.9;
+@mixin color-flip($color-1, $color-2, $color-3) {
+  background-color: var($color-1);
+  color: var($color-2);
+  @if $color-3 {
+    &:hover,
+    &:active,
+    &:focus {
+      color: var($color-3);
+    }
+  } @else {
+    &:hover,
+    &:active,
+    &:focus {
+      opacity: 0.9;
+    }
   }
 }
 @mixin fs-transition {

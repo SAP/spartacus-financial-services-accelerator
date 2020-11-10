@@ -119,21 +119,9 @@ context('Change Request for new user', () => {
     checkout.clickContinueButton();
     //check change preview - second step
     changeRequest.checkChangeMileageSteps();
-    //changeRequest.checkChangedPolicyNewPremium();
     cy.get('.action-button').should('contain', 'Cancel').click();
     //check user is redirected to policy details page
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
     checkout.checkAccordions('policyDetails');
-  });
-
-  it('Should check inbox messages for change request', () => {
-    cy.selectOptionFromDropdown({
-      menuOption: 'My Account',
-      dropdownItem: 'Inbox',
-    });
-    inbox.checkInboxComponets();
-    inbox.checkGeneralTab();
-    inbox.checkInboxHeader();
-    changeRequest.checkInboxMessages();
   });
 });

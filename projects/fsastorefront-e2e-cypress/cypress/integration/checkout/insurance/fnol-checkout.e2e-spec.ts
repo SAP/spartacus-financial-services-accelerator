@@ -107,7 +107,6 @@ context('FNOL for sample data user', () => {
     fnol.checkFNOLCheckoutPage();
     fnol.checkFNOLSteps();
     fnol.updateIncidentType();
-    //fnol.populateIncidentInformationStep();
     checkout.clickContinueButton();
     fnol.checkFNOLCheckoutPage();
   });

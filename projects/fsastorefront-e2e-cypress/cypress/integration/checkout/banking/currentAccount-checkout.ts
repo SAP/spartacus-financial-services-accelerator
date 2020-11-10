@@ -41,6 +41,7 @@ context('Current Account Checkout', () => {
   });
 
   it('Should complete personal details step', () => {
+    checkout.waitForPersonalDetailsForm();
     checkout.checkCheckoutStep(' Your Current Account Application ', '7');
     checkout.checkPersonalDetailsPage();
     banking.populatePersonalDetailsLoanAndCA();

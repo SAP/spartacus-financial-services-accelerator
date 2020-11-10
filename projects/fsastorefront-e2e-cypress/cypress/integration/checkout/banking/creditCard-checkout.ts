@@ -11,6 +11,7 @@ context('Credit Card Checkout', () => {
     cy.visit('/');
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
+    checkout.waitForHomepage();
   });
 
   it('Should register a new user and start Credit Card checkout', () => {

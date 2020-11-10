@@ -63,7 +63,7 @@ export function populatePersonalDetails() {
   cy.get('[name="jobTitle"]').type('CEO');
   cy.get('[name="employmentStartDate"]').type('2005-01-01');
   cy.get('[name="incomeFrequency"]').select('monthly');
-  cy.get('[name="netIncomeAmount"]').type('7800');
+  cy.get('[name="net-income-amount"]').type('7800');
   cy.get('[name="anyOtherIncome"]').eq(0).click();
   cy.get('[name="workingOvertime"]').click();
   cy.get('[name="meetingFinancialCommitments"]').eq(0).click();
@@ -73,7 +73,7 @@ export function populatePersonalDetails() {
   cy.get('[name="anyFinancialObstacles"]').eq(1).click();
   cy.get('[name="anyPossessions"]').eq(1).click();
   cy.get('[name="anyDebts"]').eq(1).click();
-  cy.get('[name="totalMonthlyExpenses"]').type('5050');
+  cy.get('[name="total-other-monthly-expenses"]').type('5050');
 }
 
 export function populatePersonalDetailsLoanAndCA() {
