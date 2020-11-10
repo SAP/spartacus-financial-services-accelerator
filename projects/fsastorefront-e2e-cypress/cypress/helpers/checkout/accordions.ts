@@ -114,13 +114,6 @@ export const confirmationAccordionFTD = [
   'Personal Details',
 ];
 
-export const confirmationAccordionLoan = [
-  'Loan Information',
-  "What's Included",
-  'Added by you',
-  'Personal Details',
-];
-
 export const Accordions = {
   accordions: [
     {
@@ -190,14 +183,6 @@ export const Accordions = {
     {
       category: 'confirmationCurrentAccount',
       accordionItems: this.confirmationAccordionCurrentAccount,
-    },
-    {
-      category: 'FTDConfirmation',
-      accordionItems: this.confirmationAccordionFTD,
-    },
-    {
-      category: 'LoanConfirmation',
-      accordionItems: this.confirmationAccordionLoan,
     },
   ],
 };

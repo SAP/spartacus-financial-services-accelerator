@@ -124,4 +124,15 @@ context('Change Request for new user', () => {
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
     checkout.checkAccordions('policyDetails');
   });
+
+  it('Should check inbox messages for change request', () => {
+    cy.selectOptionFromDropdown({
+      menuOption: 'My Account',
+      dropdownItem: 'Inbox',
+    });
+    inbox.checkInboxComponets();
+    inbox.checkGeneralTab();
+    inbox.checkInboxHeader();
+    changeRequest.checkInboxMessages();
+  });
 });

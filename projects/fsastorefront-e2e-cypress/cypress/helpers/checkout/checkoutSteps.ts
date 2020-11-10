@@ -23,7 +23,7 @@ export function populatePersonalDetailsPage() {
 
 export function ConfirmBindQuote() {
   cy.get('cx-fs-bind-quote-dialog').within(() => {
-    cy.get('.primary-button').click({ force: true });
+    cy.get('.primary-button').click();
   });
 }
 

@@ -1,5 +1,4 @@
 import * as shared from '../shared-checkout';
-import * as sharedCheckout from '../shared-checkout.interface';
 
 const todaysDate = Cypress.moment().format('YYYY-MM-DD');
 const currentDate = Cypress.moment().format(' DD MMM YYYY ');
