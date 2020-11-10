@@ -49,17 +49,16 @@ export function checkMiniCart() {
     price: ' €503,125.00 ',
     products: [
       {
+        title: ' Start Date: ',
+        value: ' 12 Dec 2021 ',
+      },
+      {
         title: 'Deposit Term:',
         value: ' 3 ',
       },
-
       {
         title: 'Maturity Option:',
         value: ' termination ',
-      },
-      {
-        title: 'Start Date:',
-        value: ' 2021-12-12 ',
       },
       {
         title: 'Investment Amount:',
