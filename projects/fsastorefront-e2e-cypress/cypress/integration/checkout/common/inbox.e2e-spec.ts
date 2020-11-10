@@ -26,7 +26,7 @@ context('Inbox Correspondence for sample data user', () => {
       dropdownItem: 'Inbox',
     });
     inbox.checkInboxComponets();
-    inbox.checkGeneralTab();
+    inbox.checkBankingTabs();
     inbox.checkInboxHeader();
     // checks 5 messages on first page
     inbox.readMessagesAndCheckAttachment(1, 5);

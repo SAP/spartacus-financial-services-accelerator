@@ -4,3 +4,4 @@
 import '@testing-library/cypress/add-commands';
 import './select-user-menu-option.commands';
 import './ng-select.commands';
+import 'cypress-file-upload';

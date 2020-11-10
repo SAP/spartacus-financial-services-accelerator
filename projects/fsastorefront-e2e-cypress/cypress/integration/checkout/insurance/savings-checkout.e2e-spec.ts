@@ -22,6 +22,7 @@ context('Savings Insurance Checkout', () => {
       registrationUserWithoutPhone.email,
       registrationUserWithoutPhone.password
     );
+    checkout.waitForHomepage();
   });
 
   it('Should start Savings checkout', () => {

@@ -184,6 +184,10 @@ export function checkOptionalProducts() {
         available: true,
       },
       {
+        name: 'Winter Tires',
+        available: true,
+      },
+      {
         name: ' Covered with Third Party Liability ',
       },
     ],

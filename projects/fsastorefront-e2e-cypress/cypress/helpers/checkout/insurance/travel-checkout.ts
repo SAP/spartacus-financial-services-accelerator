@@ -1,8 +1,6 @@
 import * as shared from '../shared-checkout';
 import * as sharedCheckout from '../shared-checkout.interface';
 
-const currentDate = Cypress.moment().format(' DD MMM YYYY ');
-
 export function populateInsuranceInfoForm() {
   cy.get('cx-dynamic-form').within(() => {
     cy.get('[name=tripDestination]').select('Europe');

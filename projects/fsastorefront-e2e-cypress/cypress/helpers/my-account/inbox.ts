@@ -11,6 +11,7 @@ export function checkGeneralTab() {
 
 export function checkBankingTabs() {
   cy.get('.fs-tab').should('be.visible').contains('General');
+  cy.get('.fs-tab').should('be.visible').contains('Applications');
 }
 
 export function checkInboxHeader() {

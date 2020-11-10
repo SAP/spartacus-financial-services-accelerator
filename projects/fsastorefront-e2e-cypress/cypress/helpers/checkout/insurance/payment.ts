@@ -1,5 +1,5 @@
 export function selectPaymentMethod() {
-  cy.get('.cx-card-title').should('contain', 'Default Payment Method');
+  cy.get('.cx-card-title').should('contain', 'DEFAULT');
   cy.get('.card-header').should('contain', 'Selected');
   cy.get('cx-payment-method').within(() => {
     cy.get('.btn-primary').click();

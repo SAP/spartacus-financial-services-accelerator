@@ -14,8 +14,14 @@ context('ProductCategoryPage', () => {
     productCategory.checkComponents();
     productCategory.checkQuoteButtons();
     cy.get('.product-feature-wrapper').should('have.length', 2);
-    cy.get('.section-header-heading').should('contain', 'Homeowners Monthly');
-    cy.get('.section-header-heading').should('contain', 'Homeowners Annually');
+    cy.get('.section-header-heading').should(
+      'contain.text',
+      'Homeowners Monthly'
+    );
+    cy.get('.section-header-heading').should(
+      'contain.text',
+      'Homeowners Annually'
+    );
     cy.get('.item-details').should('have.length', 2);
   });
 
@@ -27,8 +33,11 @@ context('ProductCategoryPage', () => {
     productCategory.checkComponents();
     productCategory.checkQuoteButtons();
     cy.get('.product-feature-wrapper').should('have.length', 2);
-    cy.get('.section-header-heading').should('contain', 'Renters Monthly');
-    cy.get('.section-header-heading').should('contain', 'Renters Annually');
+    cy.get('.section-header-heading').should('contain.text', 'Renters Monthly');
+    cy.get('.section-header-heading').should(
+      'contain.text',
+      'Renters Annually'
+    );
     cy.get('.item-details').should('have.length', 2);
   });
 
@@ -40,9 +49,9 @@ context('ProductCategoryPage', () => {
     productCategory.checkComponents();
     productCategory.checkQuoteButtons();
     cy.get('.product-feature-wrapper').should('have.length', 3);
-    cy.get('.section-header-heading').should('contain', 'Auto Bronze');
-    cy.get('.section-header-heading').should('contain', 'Auto Silver');
-    cy.get('.section-header-heading').should('contain', 'Auto Gold');
+    cy.get('.section-header-heading').should('contain.text', 'Auto Bronze');
+    cy.get('.section-header-heading').should('contain.text', 'Auto Silver');
+    cy.get('.section-header-heading').should('contain.text', 'Auto Gold');
     cy.get('.item-details').should('have.length', 3);
   });
 
@@ -54,8 +63,8 @@ context('ProductCategoryPage', () => {
     productCategory.checkComponents();
     productCategory.checkQuoteButtons();
     cy.get('.product-feature-wrapper').should('have.length', 2);
-    cy.get('.section-header-heading').should('contain', 'Life Basic');
-    cy.get('.section-header-heading').should('contain', 'Life Premium');
+    cy.get('.section-header-heading').should('contain.text', 'Life Basic');
+    cy.get('.section-header-heading').should('contain.text', 'Life Premium');
     cy.get('.item-details').should('have.length', 2);
   });
 
@@ -67,9 +76,9 @@ context('ProductCategoryPage', () => {
     productCategory.checkComponents();
     productCategory.checkQuoteButtons();
     cy.get('.product-feature-wrapper').should('have.length', 3);
-    cy.get('.section-header-heading').should('contain', 'Single Budget');
-    cy.get('.section-header-heading').should('contain', 'Single Silver');
-    cy.get('.section-header-heading').should('contain', 'Single Gold');
+    cy.get('.section-header-heading').should('contain.text', 'Single Budget');
+    cy.get('.section-header-heading').should('contain.text', 'Single Silver');
+    cy.get('.section-header-heading').should('contain.text', 'Single Gold');
     cy.get('.item-details').should('have.length', 3);
   });
 
@@ -81,9 +90,15 @@ context('ProductCategoryPage', () => {
     productCategory.checkComponents();
     productCategory.checkQuoteButtons();
     cy.get('.product-feature-wrapper').should('have.length', 3);
-    cy.get('.section-header-heading').should('contain', 'Event Two Stars');
-    cy.get('.section-header-heading').should('contain', 'Event Three Stars');
-    cy.get('.section-header-heading').should('contain', 'Event Four Stars');
+    cy.get('.section-header-heading').should('contain.text', 'Event Two Stars');
+    cy.get('.section-header-heading').should(
+      'contain.text',
+      'Event Three Stars'
+    );
+    cy.get('.section-header-heading').should(
+      'contain.text',
+      'Event Four Stars'
+    );
     cy.get('.item-details').should('have.length', 3);
   });
 
@@ -105,9 +120,9 @@ context('ProductCategoryPage', () => {
     productCategory.checkComponents();
     productCategory.checkApplicationButtons();
     cy.get('.product-feature-wrapper').should('have.length', 3);
-    cy.get('.section-header-heading').should('contain', 'Basic Account');
-    cy.get('.section-header-heading').should('contain', 'Family Account');
-    cy.get('.section-header-heading').should('contain', 'Premium Account');
+    cy.get('.section-header-heading').should('contain.text', 'Basic Account');
+    cy.get('.section-header-heading').should('contain.text', 'Family Account');
+    cy.get('.section-header-heading').should('contain.text', 'Premium Account');
     cy.get('.item-details').should('have.length', 3);
   });
 
@@ -119,9 +134,9 @@ context('ProductCategoryPage', () => {
     productCategory.checkComponents();
     productCategory.checkApplicationButtons();
     cy.get('.product-feature-wrapper').should('have.length', 3);
-    cy.get('.section-header-heading').should('contain', 'Basic Card');
-    cy.get('.section-header-heading').should('contain', 'Premium Card');
-    cy.get('.section-header-heading').should('contain', 'Exclusive Card');
+    cy.get('.section-header-heading').should('contain.text', 'Basic Card');
+    cy.get('.section-header-heading').should('contain.text', 'Premium Card');
+    cy.get('.section-header-heading').should('contain.text', 'Exclusive Card');
     cy.get('.item-details').should('have.length', 3);
   });
 
@@ -133,7 +148,7 @@ context('ProductCategoryPage', () => {
     productCategory.checkComponents();
     productCategory.checkApplicationButtons();
     cy.get('.product-feature-wrapper').should('have.length', 1);
-    cy.get('.section-header-heading').should('contain', 'Personal Loan');
+    cy.get('.section-header-heading').should('contain.text', 'Personal Loan');
     cy.get('.item-details').should('have.length', 1);
   });
 
@@ -145,7 +160,10 @@ context('ProductCategoryPage', () => {
     productCategory.checkComponents();
     productCategory.checkApplicationButtons();
     cy.get('.product-feature-wrapper').should('have.length', 1);
-    cy.get('.section-header-heading').should('contain', 'Fixed Term Deposit');
+    cy.get('.section-header-heading').should(
+      'contain.text',
+      'Fixed Term Deposit'
+    );
     cy.get('.item-details').should('have.length', 1);
   });
 });
