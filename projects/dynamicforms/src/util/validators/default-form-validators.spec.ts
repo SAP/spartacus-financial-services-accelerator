@@ -14,136 +14,132 @@ describe('FormValidationService', () => {
     });
   });
 
-  describe('Fields must match validator', () => {
-    it('should not return error, when fields match', () => {
-      form.get('fieldOne').setValue('fieldValue');
-      form.get('fieldTwo').setValue('fieldValue');
-      expect(
-        DefaultFormValidators.matchFields('fieldOne', 'fieldTwo')(form)
-      ).toEqual(undefined);
-    });
+  it('should not return error, when fields match', () => {
+    form.get('fieldOne').setValue('fieldValue');
+    form.get('fieldTwo').setValue('fieldValue');
+    expect(
+      DefaultFormValidators.matchFields('fieldOne', 'fieldTwo')(form)
+    ).toEqual(undefined);
+  });
 
-    it("should return error, when emails don't match", () => {
-      form.get('fieldOne').setValue('fieldValue');
-      form.get('fieldTwo').setValue('otherValue');
-      expect(
-        DefaultFormValidators.matchFields('fieldOne', 'fieldTwo')(form)
-      ).toEqual({ NotEqual: true });
-    });
+  it("should return error, when emails don't match", () => {
+    form.get('fieldOne').setValue('fieldValue');
+    form.get('fieldTwo').setValue('otherValue');
+    expect(
+      DefaultFormValidators.matchFields('fieldOne', 'fieldTwo')(form)
+    ).toEqual({ NotEqual: true });
+  });
 
-    it('should return error, when person is younger then minimun age', () => {
-      form.get('dateOfBirth').setValue('10-10-2015');
-      expect(
-        DefaultFormValidators.dateOfBirthValidator(18)(form.get('dateOfBirth'))
-      ).toEqual({ InvalidDate: true });
-    });
+  it('should return error, when person is younger then minimun age', () => {
+    form.get('dateOfBirth').setValue('10-10-2015');
+    expect(
+      DefaultFormValidators.dateOfBirthValidator(18)(form.get('dateOfBirth'))
+    ).toEqual({ InvalidDate: true });
+  });
 
-    it('should not return error, when person is older then minimun age', () => {
-      form.get('dateOfBirth').setValue('10-10-2000');
-      expect(
-        DefaultFormValidators.dateOfBirthValidator(18)(form.get('dateOfBirth'))
-      ).toEqual(null);
-    });
+  it('should not return error, when person is older then minimun age', () => {
+    form.get('dateOfBirth').setValue('10-10-2000');
+    expect(
+      DefaultFormValidators.dateOfBirthValidator(18)(form.get('dateOfBirth'))
+    ).toEqual(null);
+  });
 
-    it('should return error, when field does not contain given value', () => {
-      form.get('fieldOne').setValue('testValue');
-      expect(
-        DefaultFormValidators.shouldContainValue('notExist')(
-          form.get('fieldOne')
-        )
-      ).toEqual({ valueConflict: true });
-    });
+  it('should return error, when field does not contain given value', () => {
+    form.get('fieldOne').setValue('testValue');
+    expect(
+      DefaultFormValidators.shouldContainValue('notExist')(form.get('fieldOne'))
+    ).toEqual({ valueConflict: true });
+  });
 
-    it('should not return error, when field contains given value', () => {
-      form.get('fieldOne').setValue('testValue');
-      expect(
-        DefaultFormValidators.shouldContainValue('test')(form.get('fieldOne'))
-      ).toEqual(null);
-    });
+  it('should not return error, when field contains given value', () => {
+    form.get('fieldOne').setValue('testValue');
+    expect(
+      DefaultFormValidators.shouldContainValue('test')(form.get('fieldOne'))
+    ).toEqual(null);
+  });
 
-    it('should return error, when field does not match to one of given values', () => {
-      form.get('fieldOne').setValue('testValue');
-      const allowedValues = ['testValue1', 'testValue2'];
-      expect(
-        DefaultFormValidators.checkValue(allowedValues)(form.get('fieldOne'))
-      ).toEqual({ valueConflict: true });
-    });
+  it('should return error, when field does not match to one of given values', () => {
+    form.get('fieldOne').setValue('testValue');
+    const allowedValues = ['testValue1', 'testValue2'];
+    expect(
+      DefaultFormValidators.checkValue(allowedValues)(form.get('fieldOne'))
+    ).toEqual({ valueConflict: true });
+  });
 
-    it('should not return error, when field matches one of given values', () => {
-      form.get('fieldOne').setValue('testValue1');
-      const allowedValues = ['testValue1', 'testValue2'];
-      expect(
-        DefaultFormValidators.checkValue(allowedValues)(form.get('fieldOne'))
-      ).toEqual(null);
-    });
+  it('should not return error, when field matches one of given values', () => {
+    form.get('fieldOne').setValue('testValue1');
+    const allowedValues = ['testValue1', 'testValue2'];
+    expect(
+      DefaultFormValidators.checkValue(allowedValues)(form.get('fieldOne'))
+    ).toEqual(null);
+  });
 
-    it('should not return error, when field contains at least one letter and number', () => {
-      form.get('fieldOne').setValue('testValue1');
-      expect(DefaultFormValidators.alphanumeric(form.get('fieldOne'))).toEqual(
-        null
-      );
-    });
+  it('should not return error, when field contains at least one letter and number', () => {
+    form.get('fieldOne').setValue('testValue1');
+    expect(DefaultFormValidators.alphanumeric(form.get('fieldOne'))).toEqual(
+      null
+    );
+  });
 
-    it('should check field value against regex', () => {
-      const numberLetterRegex = /^(?=.*[0-9])[A-Za-z0-9\s]+$/;
+  it('should check field value against regex', () => {
+    const numberLetterRegex = /^(?=.*[0-9])[A-Za-z0-9\s]+$/;
 
-      form.get('fieldOne').setValue('testValue1');
-      expect(
-        DefaultFormValidators.regexValidator(numberLetterRegex)(
-          form.get('fieldOne')
-        )
-      ).toEqual(null);
+    form.get('fieldOne').setValue('testValue1');
+    expect(
+      DefaultFormValidators.regexValidator(numberLetterRegex)(
+        form.get('fieldOne')
+      )
+    ).toEqual(null);
 
-      form.get('fieldOne').setValue('testValue');
-      expect(
-        DefaultFormValidators.regexValidator(numberLetterRegex)(
-          form.get('fieldOne')
-        )
-      ).toEqual({ InvalidFormat: true });
-    });
+    form.get('fieldOne').setValue('testValue');
+    expect(
+      DefaultFormValidators.regexValidator(numberLetterRegex)(
+        form.get('fieldOne')
+      )
+    ).toEqual({ InvalidFormat: true });
+  });
 
-    it('should not return error, when field contains numbers only', () => {
-      form.get('fieldOne').setValue('12345');
-      expect(DefaultFormValidators.number(form.get('fieldOne'))).toEqual(null);
-    });
+  it('should not return error, when field contains numbers only', () => {
+    form.get('fieldOne').setValue('12345');
+    expect(DefaultFormValidators.number(form.get('fieldOne'))).toEqual(null);
+  });
 
-    it('should check if date comparison condition is satisfied', () => {
-      const dateToCompare = new Date('10-10-2020');
-      const dateToCompare2 = new Date('03-03-2020');
-      const baseDate = new Date('05-05-2020');
+  it('should check if date comparison condition is satisfied', () => {
+    const dateToCompare = new Date('10-10-2020');
+    const dateToCompare2 = new Date('03-03-2020');
+    const baseDate = new Date('05-05-2020');
 
-      expect(
-        DefaultFormValidators.valueComparison(
-          baseDate,
-          dateToCompare,
-          'shouldBeLess'
-        )
-      ).toEqual(null);
+    expect(
+      DefaultFormValidators.valueComparison(
+        baseDate,
+        dateToCompare,
+        'shouldBeLess'
+      )
+    ).toEqual(null);
 
-      expect(
-        DefaultFormValidators.valueComparison(
-          baseDate,
-          dateToCompare,
-          'shouldBeGreater'
-        )
-      ).toEqual({ valueConflict: true });
+    expect(
+      DefaultFormValidators.valueComparison(
+        baseDate,
+        dateToCompare,
+        'shouldBeGreater'
+      )
+    ).toEqual({ valueConflict: true });
 
-      expect(
-        DefaultFormValidators.valueComparison(
-          baseDate,
-          dateToCompare2,
-          'shouldBeLess'
-        )
-      ).toEqual({ valueConflict: true });
+    expect(
+      DefaultFormValidators.valueComparison(
+        baseDate,
+        dateToCompare2,
+        'shouldBeLess'
+      )
+    ).toEqual({ valueConflict: true });
 
-      expect(
-        DefaultFormValidators.valueComparison(
-          baseDate,
-          dateToCompare2,
-          'shouldBeGreater'
-        )
-      ).toEqual(null);
-    });
+    expect(
+      DefaultFormValidators.valueComparison(
+        baseDate,
+        dateToCompare2,
+        'shouldBeGreater'
+      )
+    ).toEqual(null);
   });
 
   it('should compare date in past with current date', () => {
