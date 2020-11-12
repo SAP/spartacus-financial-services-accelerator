@@ -14,7 +14,7 @@
     "baseUrl": {
       "type": "string",
       "description": "The url of the OCC backend",
-      "default": "https://financialservices.local:9002"
+      "x-prompt": "Please enter your server base url"
     },
     "occPrefix": {
       "type": "string",
@@ -23,7 +23,8 @@
     },
     "baseSite": {
       "type": "string",
-      "description": "A comma-separated list of base site(s) to use with FSA"
+      "description": "A comma-separated list of base site(s) to use with FSA",
+      "default": "financial"
     },
     "currency": {
       "type": "string",
