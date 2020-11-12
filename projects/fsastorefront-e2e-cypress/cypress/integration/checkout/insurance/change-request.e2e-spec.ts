@@ -119,7 +119,6 @@ context('Change Request for new user', () => {
     checkout.clickContinueButton();
     //check change preview - second step
     changeRequest.checkChangeMileageSteps();
-    //changeRequest.checkChangedPolicyNewPremium();
     cy.get('.action-button').should('contain', 'Cancel').click();
     //check user is redirected to policy details page
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
