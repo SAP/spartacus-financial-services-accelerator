@@ -1,4 +1,25 @@
 {
   "name": "@fsa/fsastorefrontstyles",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "author": "FSA",
+  "description": "Style library containing global styles",
+  "homepage": "https://github.com/SAP/spartacus",
+  "keywords": [
+    "spartacus",
+    "fsa",
+    "styles"
+  ],
+  "license": "Apache-2.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "sass": "^1.25.0"
+  },
+  "peerDependencies": {
+    "bootstrap": "^4.0"
+  },
+  "dependencies": {
+    "hamburgers": "^1.1.3"
+  }
 }

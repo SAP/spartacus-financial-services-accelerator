@@ -60,7 +60,6 @@
     "@spartacus/styles": "2.0.0-rc.3"
   },
   "devDependencies": {
-    "@spartacus/schematics": "2.0.0-rc.3",
     "@angular-devkit/build-angular": "~0.901.0",
     "@angular-devkit/build-ng-packagr": "~0.901.0",
     "@angular/cli": "~9.1.0",
