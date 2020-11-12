@@ -18,7 +18,7 @@ class MockFormComponent {
   @Input()
   formId;
   @Input()
-  formTitle;
+  formSubject;
   @Input()
   formConfig;
   @Input()
