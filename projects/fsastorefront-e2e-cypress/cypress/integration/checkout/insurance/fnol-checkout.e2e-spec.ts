@@ -37,9 +37,7 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should complete first step auto checkout', () => {
-    cy.visit('/');
-    cy.wait(500);
-    auto.openCategoryPage();
+    checkout.startInsuranceCheckout('Auto');
     auto.populateAutoInformation();
     auto.populateMainDriverInfo();
     cy.get('[name=noOfDrivers]').select('0');
@@ -115,12 +113,24 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should check and populate Incident Report page', () => {
-    fnol.populateIncidentReportStep();
+    const filePath = 'fsaImageTest.png';
+    //cy.get('.custom-file-input').attachFile(filePath);
+    cy.get('[name=howAccidentOccurred]').type(
+      'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
+    );
+    cy.get('.custom-file-input').attachFile(filePath);
+
+    cy.get('.btn-primary').click();
+    cy.wait(2000);
+    //fnol.populateIncidentReportStep();
     checkout.checkBackAndContinueButtons();
+    cy.get('.primary-button').should('be.visible').click();
+    cy.wait(500);
     checkout.clickContinueButton();
   });
 
   it('Should check and populate General Information page', () => {
+    //fnol.waitForfnolGeneralInformationStep();
     fnol.checkFNOLCheckoutPage();
     fnol.populateGeneralInformationStep();
     checkout.clickContinueButton();

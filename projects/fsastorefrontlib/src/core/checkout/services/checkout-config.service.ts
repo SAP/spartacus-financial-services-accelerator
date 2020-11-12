@@ -60,9 +60,8 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
 
   triggerPreviousNextStepSet(activatedRoute: ActivatedRoute) {
     let activeParamType: string;
-    const previousUrl = this.checkoutStepService.getPreviousCheckoutStepUrl(
-      activatedRoute
-    );
+    const previousUrl = this.getPreviousCheckoutStepUrl(activatedRoute);
+
     if (previousUrl) {
       const paramType = previousUrl.substring(previousUrl.lastIndexOf(':') + 1);
       this.cartService
@@ -105,6 +104,14 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
     if (this.steps[nextStepNumber]) {
       this.setNextStep(activeParamType, this.steps[nextStepNumber].routeName);
     }
+  }
+
+  getPreviousCheckoutStepUrl(activatedRoute: ActivatedRoute): string {
+    const stepIndex = this.getCurrentStepIndex(activatedRoute);
+
+    return stepIndex >= 0 && this.steps[stepIndex - 1]
+      ? this.getUrlFromStepRoute(this.steps[stepIndex - 1].routeName)
+      : null;
   }
 
   // Class is implemented in order to fix this behavior from spartacus. Once real fix is implemented class can be removed.

@@ -1,4 +1,5 @@
 import * as shared from '../shared-checkout';
+import * as sharedCheckout from '../shared-checkout.interface';
 
 export function checkOptionalProducts() {
   const addOptionsContent: addOptionsPage.AddOptions = {
@@ -25,6 +26,14 @@ export function checkMiniCartCreditCard() {
   const miniCartContent: addOptionsPage.MiniCart = {
     price: ' €89.00 ',
     products: [
+      {
+        title: 'Debit Card Design:',
+        value: ' black ',
+      },
+      {
+        title: 'Minimum Card Limit:',
+        value: ' no ',
+      },
       {
         title: ' Premium Card: ',
         value: ' €89.00 ',
