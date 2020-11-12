@@ -33,7 +33,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.setHostComponentClass();
-    this.setActiveLanguageLabels();
+    this.setLocalizedProperties();
     this.controlPrefill();
     this.interDependancyValueCheck();
   }
@@ -46,7 +46,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  protected setActiveLanguageLabels() {
+  protected setLocalizedProperties() {
     this.subscription.add(
       this.languageService
         .getActive()
@@ -58,7 +58,9 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
                 : this.config.label.default;
             }
             if (this.config?.placeholder) {
-              this.placeHolder = this.config.placeholder[lang] ? this.config.placeholder[lang] : this.config.placeholder.default;
+              this.placeHolder = this.config.placeholder[lang]
+                ? this.config.placeholder[lang]
+                : this.config.placeholder.default;
             }
           })
         )
