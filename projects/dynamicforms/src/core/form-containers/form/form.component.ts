@@ -32,6 +32,8 @@ export class FormComponent implements OnDestroy {
   @Input()
   formId: string;
   @Input()
+  formTitle: string;
+  @Input()
   formConfig: FormDefinition;
   @Input()
   applicationId: string;

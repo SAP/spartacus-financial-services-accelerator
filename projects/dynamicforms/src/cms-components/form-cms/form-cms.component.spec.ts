@@ -18,6 +18,8 @@ class MockFormComponent {
   @Input()
   formId;
   @Input()
+  formTitle;
+  @Input()
   formConfig;
   @Input()
   applicationId;

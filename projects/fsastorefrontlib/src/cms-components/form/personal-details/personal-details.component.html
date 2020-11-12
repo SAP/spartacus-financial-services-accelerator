@@ -2,6 +2,7 @@
   <cx-form-component
     *ngIf="formConfig"
     [formId]="formDefinition.formId"
+    [formTitle]="formDefinition.name"
     [formConfig]="formConfig"
     [applicationId]="formDefinition.applicationId"
     [formData]="formData$"
