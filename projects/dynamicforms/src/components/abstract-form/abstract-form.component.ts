@@ -25,6 +25,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
 
   @HostBinding('class') hostComponentClass: string;
   label: string;
+  placeHolder: string;
   config: FieldConfig;
   group: FormGroup;
   subscription = new Subscription();
@@ -51,10 +52,13 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
         .getActive()
         .pipe(
           map(lang => {
-            if (this.config && this.config.label) {
+            if (this.config?.label) {
               this.label = this.config.label[lang]
                 ? this.config.label[lang]
                 : this.config.label.default;
+            }
+            if (this.config?.placeholder) {
+              this.placeHolder = this.config.placeholder[lang] ? this.config.placeholder[lang] : this.config.placeholder.default;
             }
           })
         )
