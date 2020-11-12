@@ -1,6 +1,7 @@
 {
   "name": "@fsa/dynamicforms",
   "version": "0.0.1",
+  "author": "FSA",
   "peerDependencies": {
     "@angular/common": "^9.0.0",
     "@angular/compiler": "^9.0.0",

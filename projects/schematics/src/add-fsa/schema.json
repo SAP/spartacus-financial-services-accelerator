@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "FSASchematics",
+  "title": "FSA Schematics",
+  "type": "object",
+  "properties": {
+    "project": {
+      "type": "string",
+      "description": "The name of the project.",
+      "$default": {
+        "$source": "projectName"
+      }
+    },
+    "baseUrl": {
+      "type": "string",
+      "description": "The url of the OCC backend",
+      "x-prompt": "Please enter your server base url"
+    },
+    "occPrefix": {
+      "type": "string",
+      "description": "The OCC API prefix. E.g.: /rest/v2/",
+      "default": "/occ/v2/"
+    },
+    "baseSite": {
+      "type": "string",
+      "description": "A comma-separated list of base site(s) to use with FSA",
+      "default": "financial"
+    },
+    "currency": {
+      "type": "string",
+      "description": "A comma-separated list of currencies to use in FSA",
+      "default": "EUR"
+    },
+    "language": {
+      "type": "string",
+      "description": "A comma-separated list of languages to use in FSA",
+      "default": "en,de"
+    },
+    "clientId": {
+      "type": "string",
+      "description": "Client ID",
+      "default": "financial_customer"
+    },
+    "clientSecret": {
+      "type": "string",
+      "description": "Client secret",
+      "default": "secret"
+    },
+    "consignmentTracking": {
+      "type": "boolean",
+      "description": "Consignment tracking on or off",
+      "default": true
+    }
+  },
+  "required": []
+}
