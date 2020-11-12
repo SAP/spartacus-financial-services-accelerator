@@ -1,0 +1,43 @@
+{
+  "name": "@fsa/schematics",
+  "version": "0.0.1",
+  "description": "FSA schematics",
+  "keywords": [
+    "spartacus",
+    "fsa",
+    "schematics"
+  ],
+  "scripts": {
+    "clean": "rimraf \"src/**/*.js\" \"src/**/*.js.map\" \"src/**/*.d.ts\"",
+    "build": "yarn clean && tsc -p tsconfig.json",
+    "test": "yarn build && jasmine \"src/**/*_spec.js\""
+  },
+  "author": "FSA",
+  "license": "Apache",
+  "schematics": "./src/collection.json",
+  "dependencies": {
+    "@angular-devkit/core": "^10.1.0",
+    "@angular-devkit/schematics": "^10.1.0",
+    "@angular/cdk": "^10.2.0",
+    "@angular/localize": "^10.1.0",
+    "@angular/pwa": "^0.1001.0",
+    "@nguniversal/express-engine": "^10.1.0",
+    "@schematics/angular": "^10.1.0",
+    "@schematics/update": "^0.1001.0",
+    "@spartacus/schematics": "3.0.0-next.3"
+  },
+  "devDependencies": {
+    "@spartacus/schematics": "3.0.0-next.3",
+    "@types/jasmine": "^3.5.0",
+    "@types/node": "^12.11.1",
+    "@types/shelljs": "^0.8.7",
+    "jasmine": "^3.5.0",
+    "rimraf": "^3.0.2",
+    "shelljs": "^0.8.3",
+    "typescript": "~4.0.2"
+  },
+  "ng-add": {
+    "save": "devDependencies"
+  },
+  "main": "src/public_api.js"
+}
