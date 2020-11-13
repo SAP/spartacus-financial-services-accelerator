@@ -93,6 +93,10 @@ export const fscommon = {
     contribution: 'Contribution',
     creditCard: 'Credit Card',
     invoice: 'Invoice',
+    payment: {
+      CARD: 'Credit Card',
+      INVOICE: 'Invoice',
+    },
     application: {
       title: 'Application',
       applicationRequestSubmitted:

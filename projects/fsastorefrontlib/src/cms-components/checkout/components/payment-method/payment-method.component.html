@@ -9,35 +9,24 @@
           {{ 'fscommon.paymentMethod' | cxTranslate }}
         </h4>
         <form>
-          <div class="form-check">
+          <div class="form-check" *ngFor="let type of paymentTypes$ | async">
             <input
+              id="paymentType-{{ type.code }}"
               class="form-check-input"
               type="radio"
-              id="creditCard"
-              value="creditCard"
               name="paymentMethod"
-              (click)="setSelectedPaymentMethod($event)"
+              aria-checked="true"
+              (click)="changeType(type.code)"
+              [value]="type.code"
+              [checked]="type.code === (paymentType$ | async)"
+              formControlName="paymentType"
             />
-            <label class="pl-3 pt-1" for="creditCard">
-              {{ 'fscommon.creditCard' | cxTranslate }}
-            </label>
-            <input
-              class="form-check-input"
-              type="radio"
-              id="invoice"
-              value="invoice"
-              name="paymentMethod"
-              (click)="
-                selectPaymentMethod({ id: 'invoice' });
-                setSelectedPaymentMethod($event)
-              "
-            />
-            <label class="pl-3 pt-1" for="invoice">
-              {{ 'fscommon.invoice' | cxTranslate }}
+            <label class="pl-3 pt-1">
+              {{ 'fscommon.payment.' + type.code | cxTranslate }}
             </label>
           </div>
         </form>
-        <ng-container *ngIf="selectedPaymentMethod === 'creditCard'">
+        <ng-container *ngIf="(paymentType$ | async) === creditCard">
           <div class="my-4">
             <hr />
           </div>
@@ -78,46 +67,46 @@
       </div>
     </ng-container>
   </div>
-  <div
-    *ngIf="
-      (cards?.length > 0 && !newPaymentFormManuallyOpened) ||
-      ((!newPaymentFormManuallyOpened || (paymentDetails$ | async)?.id) &&
-        selectedPaymentMethod !== 'creditCard') ||
-      (!newPaymentFormManuallyOpened &&
-        selectedPaymentMethod === 'creditCard' &&
-        (paymentDetails$ | async)?.cardNumber)
-    "
-    class="row"
+  <ng-container
+    *ngIf="{
+      paymentDetails: paymentDetails$ | async,
+      paymentType: paymentType$ | async
+    } as payment"
   >
-    <div class="col-md-12 col-lg-6 mb-3 mb-lg-0">
-      <ng-container
-        *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
-        ><button
-          class="action-button btn-block"
-          (click)="navigateBack(previousCheckoutStep)"
+    <div
+      *ngIf="showNavigation(cards, newPaymentFormManuallyOpened, payment)"
+      class="row"
+    >
+      <div class="col-md-12 col-lg-6 mb-3 mb-lg-0">
+        <ng-container
+          *ngIf="previousCheckoutStep$ | async as previousCheckoutStep"
+          ><button
+            class="action-button btn-block"
+            (click)="navigateBack(previousCheckoutStep)"
+          >
+            {{ 'common.back' | cxTranslate }}
+          </button></ng-container
         >
-          {{ 'common.back' | cxTranslate }}
-        </button></ng-container
-      >
-    </div>
-    <div class="col-md-12 col-lg-6">
-      <ng-container *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
-        ><button
-          class="primary-button btn-block"
-          type="button"
-          data-checkout-url=""
-          (click)="navigateNext(nextCheckoutStep)"
-          [disabled]="
-            !(paymentDetails$ | async)?.id ||
-            (selectedPaymentMethod == 'creditCard' &&
-              !(paymentDetails$ | async)?.cardNumber)
-          "
+      </div>
+      <div class="col-md-12 col-lg-6">
+        <ng-container *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
+          ><button
+            class="primary-button btn-block"
+            type="button"
+            data-checkout-url=""
+            (click)="navigateNext(nextCheckoutStep)"
+            [disabled]="
+              !(paymentDetails$ | async)?.id ||
+              ((paymentType$ | async) == creditCard &&
+                !(paymentDetails$ | async)?.cardNumber)
+            "
+          >
+            {{ 'common.continue' | cxTranslate }}
+          </button></ng-container
         >
-          {{ 'common.continue' | cxTranslate }}
-        </button></ng-container
-      >
+      </div>
     </div>
-  </div>
+  </ng-container>
   <ng-template #newPaymentForm>
     <ng-container *ngIf="previousCheckoutStep$ | async as previousCheckoutStep">
       <cx-payment-form

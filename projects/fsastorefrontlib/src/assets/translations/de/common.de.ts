@@ -91,6 +91,10 @@ export const fscommon = {
     contribution: 'Jährliche Beitragserhöhung',
     creditCard: 'Kreditkarte',
     invoice: '[DE] Invoice',
+    payment: {
+      CARD: 'Kreditkarte',
+      INVOICE: '[DE] Invoice',
+    },
     application: {
       title: 'Antrag',
       applicationRequestSubmitted:

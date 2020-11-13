@@ -7,17 +7,20 @@ import {
   ActiveCartService,
   CheckoutDeliveryService,
   CheckoutPaymentService,
-  CheckoutService,
   GlobalMessageService,
+  PaymentDetails,
+  PaymentType,
+  PaymentTypeService,
   RoutingService,
   TranslationService,
   UserPaymentService,
 } from '@spartacus/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
-import { FSSteps } from '../../../../occ/occ-models';
+import { FSPaymentTypeEnum, FSSteps } from '../../../../occ/occ-models';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services';
-import { filter, take, tap } from 'rxjs/operators';
+import { filter, map, take, tap } from 'rxjs/operators';
+import { FSCheckoutService } from '../../../../core/checkout/facade';
 
 @Component({
   selector: 'cx-fs-payment-method',
@@ -27,7 +30,7 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
   implements OnInit, OnDestroy {
   constructor(
     protected userPaymentService: UserPaymentService,
-    protected checkoutService: CheckoutService,
+    protected checkoutService: FSCheckoutService,
     protected checkoutDeliveryService: CheckoutDeliveryService,
     protected checkoutPaymentService: CheckoutPaymentService,
     protected globalMessageService: GlobalMessageService,
@@ -36,6 +39,7 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
     protected activeCartService: ActiveCartService,
     protected checkoutStepService: CheckoutStepService,
     protected checkoutConfigService: FSCheckoutConfigService,
+    protected paymentTypeService: PaymentTypeService,
     protected routingService: RoutingService
   ) {
     super(
@@ -50,24 +54,35 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
       checkoutStepService
     );
   }
-  selectedPaymentMethod: string;
+  NOT_ALLOWED_PAYMENTS = ['ACCOUNT'];
+  paymentTypes$: Observable<PaymentType[]>;
+  paymentType$: Observable<string>;
   previousCheckoutStep$: Observable<FSSteps>;
   nextCheckoutStep$: Observable<FSSteps>;
   subscription = new Subscription();
-  paymentDetails$;
+  paymentDetails$: Observable<PaymentDetails>;
+  creditCard = FSPaymentTypeEnum.CARD;
 
   ngOnInit(): void {
     super.ngOnInit();
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
-    this.paymentDetails$ = this.checkoutPaymentService.getPaymentDetails();
-  }
+    this.paymentDetails$ = this.checkoutPaymentService
+      .getPaymentDetails()
+      .pipe(filter(payment => !!payment));
 
-  setSelectedPaymentMethod(selectedMethod: Event) {
-    this.checkoutPaymentService.resetSetPaymentDetailsProcess();
-    this.selectedPaymentMethod = (<HTMLInputElement>(
-      selectedMethod.target
-    )).value;
+    this.paymentTypes$ = this.paymentTypeService.getPaymentTypes().pipe(
+      filter(paymentTypes => paymentTypes.length > 0),
+      take(1),
+      map(paymentTypes => {
+        const filteredPayments = paymentTypes.filter(
+          item => !this.NOT_ALLOWED_PAYMENTS.some(key => key === item.code)
+        );
+        return filteredPayments;
+      })
+    );
+    this.paymentType$ = this.checkoutService.getPaymentType();
+    this.paymentType$.subscribe(pay => console.log(pay));
   }
 
   navigateBack(previousStep: FSSteps) {
@@ -83,8 +98,7 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
         .getPaymentDetails()
         .pipe(
           filter(payment => !!payment),
-          take(1),
-          tap(() => {
+          tap(_ => {
             this.routingService.go({
               cxRoute: nextStep.step,
             });
@@ -94,10 +108,32 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
     );
   }
 
+  changeType(code: string) {
+    this.checkoutService.setPaymentType(code);
+    if (code === FSPaymentTypeEnum.INVOICE) {
+      this.selectPaymentMethod({ id: code });
+    }
+  }
+
   ngOnDestroy() {
     super.ngOnDestroy();
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  showNavigation(
+    cards: any,
+    newPaymentFormManuallyOpened: boolean,
+    payment: any
+  ) {
+    return (
+      (cards?.length > 0 && !newPaymentFormManuallyOpened) ||
+      ((!newPaymentFormManuallyOpened || payment.paymentDetails.id) &&
+        payment.paymentType !== this.creditCard) ||
+      (!newPaymentFormManuallyOpened &&
+        payment.paymentType === this.creditCard &&
+        payment.paymentDetails?.cardNumber)
+    );
   }
 }

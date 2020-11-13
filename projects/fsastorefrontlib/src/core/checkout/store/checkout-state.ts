@@ -9,6 +9,7 @@ export interface FSStateWithCheckout {
 export interface FSCheckoutStepsState extends CheckoutStepsState {
   legalInformation: boolean;
   identificationType: boolean;
+  paymentType: string;
 }
 
 export interface FSCheckoutState extends CheckoutState {

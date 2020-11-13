@@ -53,9 +53,19 @@ export class FSCheckoutService extends CheckoutService {
       })
     );
   }
-
+  setPaymentType(code: string) {
+    this.fsStore.dispatch(
+      new fromFSAction.SetPaymentTypeSuccess({
+        code,
+      })
+    );
+  }
   getLegalInformation(): Observable<boolean> {
     return this.fsStore.pipe(select(CheckoutSelectors.getLegalInformation));
+  }
+
+  getPaymentType(): Observable<string> {
+    return this.fsStore.pipe(select(CheckoutSelectors.getPaymentType));
   }
 
   mockDeliveryMode() {
