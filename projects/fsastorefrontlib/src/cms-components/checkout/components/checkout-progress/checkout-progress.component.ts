@@ -12,7 +12,7 @@ import {
   CurrentProductService,
 } from '@spartacus/storefront';
 import { Observable, of, Subscription } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map, take, tap } from 'rxjs/operators';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
 import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
 import { FSCartService } from './../../../../core/cart/facade/cart.service';
@@ -37,20 +37,20 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
     protected cartService: FSCartService,
     protected productService: CurrentProductService,
     protected checkoutStepService: CheckoutStepService,
-    public checkoutConfigService: FSCheckoutConfigService
+    protected checkoutConfigService: FSCheckoutConfigService
   ) {
     super(checkoutStepService);
   }
   private subscription = new Subscription();
   activeCategory$: Observable<string>;
   activeProduct$: Observable<FSProduct>;
+  isCartStable$: Observable<boolean> = this.cartService.isStable();
 
   ngOnInit() {
     this.setActiveCategory();
     this.filterSteps();
     this.subscription.add(
-      this.cartService
-        .getActive()
+      this.isCartStable$
         .pipe(
           tap(() => {
             this.checkoutConfigService.triggerPreviousNextStepSet(
@@ -92,23 +92,28 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
               );
             } else {
               this.subscription.add(
-                this.cartService.getActive().subscribe(cart => {
-                  if (
-                    cart.deliveryOrderGroups &&
-                    cart.deliveryOrderGroups.length > 0 &&
-                    cart.deliveryOrderGroups[0].entries &&
-                    cart.deliveryOrderGroups[0].entries.length > 0
-                  ) {
-                    const fsProduct: FSProduct =
-                      cart.deliveryOrderGroups[0].entries[0].product;
-                    if (fsProduct && fsProduct.defaultCategory) {
-                      this.categoryService.setActiveCategory(
-                        fsProduct.defaultCategory.code
-                      );
-                      this.activeProduct$ = of(fsProduct);
-                    }
-                  }
-                })
+                this.cartService
+                  .getActive()
+                  .pipe(
+                    map(cart => {
+                      if (
+                        cart.deliveryOrderGroups &&
+                        cart.deliveryOrderGroups.length > 0 &&
+                        cart.deliveryOrderGroups[0].entries &&
+                        cart.deliveryOrderGroups[0].entries.length > 0
+                      ) {
+                        const fsProduct: FSProduct =
+                          cart.deliveryOrderGroups[0].entries[0].product;
+                        if (fsProduct && fsProduct.defaultCategory) {
+                          this.categoryService.setActiveCategory(
+                            fsProduct.defaultCategory.code
+                          );
+                          this.activeProduct$ = of(fsProduct);
+                        }
+                      }
+                    })
+                  )
+                  .subscribe()
               );
             }
             this.activeCategory$ = this.categoryService.getActiveCategory();

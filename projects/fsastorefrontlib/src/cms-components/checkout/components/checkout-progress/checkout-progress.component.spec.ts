@@ -100,6 +100,9 @@ class MockCartService {
   getActive() {
     return of(mockCart);
   }
+  isStable(): Observable<boolean> {
+    return of(true);
+  }
 }
 
 class MockCurrentProductService {

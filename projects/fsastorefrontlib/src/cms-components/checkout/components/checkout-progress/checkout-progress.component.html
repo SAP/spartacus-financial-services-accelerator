@@ -1,47 +1,50 @@
 <div class="cx-multi-step-checkout">
   <div class="row">
-    <div *ngIf="activeCategory$ | async as activeCategory" class="col-12">
-      <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
-        {{ 'fscommon.checkout.' + activeCategory | cxTranslate }}
-      </h2>
-      <div class="progress-wrapper mt-4">
-        <div class="d-flex flex-wrap">
-          <div
-            class="progress-inner-wrapper flex-grow-1 flex-shrink-1 text-center"
-            *ngFor="let step of checkoutConfigService.steps; let i = index"
-          >
+    <ng-container *ngIf="isCartStable$ | async as isCartStable">
+      <div *ngIf="activeCategory$ | async as activeCategory" class="col-12">
+        <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
+          {{ 'fscommon.checkout.' + activeCategory | cxTranslate }}
+          {{ isCartStable }}
+        </h2>
+        <div class="progress-wrapper mt-4">
+          <div class="d-flex flex-wrap">
             <div
-              class="d-flex progress-node"
-              [ngClass]="{
-                ' is-active': i === activeStepIndex,
-                ' is-disabled':
-                  i > activeStepIndex ||
-                  (i < activeStepIndex && (isQuoteBound() | async) == true)
-              }"
-              [routerLink]="
-                {
-                  cxRoute: step.routeName,
-                  params:
-                    isProductStep(step) && (activeProduct$ | async)?.code
-                      ? { code: (activeProduct$ | async)?.code }
-                      : { code: activeCategory }
-                } | cxUrl
-              "
+              class="progress-inner-wrapper flex-grow-1 flex-shrink-1 text-center"
+              *ngFor="let step of checkoutConfigService.steps; let i = index"
             >
               <div
-                class="step"
-                [ngClass]="[
-                  activeStepIndex > i ? 'fs-icon visited' : 'step-number'
-                ]"
-                [attr.data-step]="i + 1"
-              ></div>
-              <p class="label position-relative mb-2">
-                {{ step.name | cxTranslate }}
-              </p>
+                class="d-flex progress-node"
+                [ngClass]="{
+                  ' is-active': i === activeStepIndex,
+                  ' is-disabled':
+                    i > activeStepIndex ||
+                    (i < activeStepIndex && (isQuoteBound() | async) == true)
+                }"
+                [routerLink]="
+                  {
+                    cxRoute: step.routeName,
+                    params:
+                      isProductStep(step) && (activeProduct$ | async)?.code
+                        ? { code: (activeProduct$ | async)?.code }
+                        : { code: activeCategory }
+                  } | cxUrl
+                "
+              >
+                <div
+                  class="step"
+                  [ngClass]="[
+                    activeStepIndex > i ? 'fs-icon visited' : 'step-number'
+                  ]"
+                  [attr.data-step]="i + 1"
+                ></div>
+                <p class="label position-relative mb-2">
+                  {{ step.name | cxTranslate }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </ng-container>
   </div>
 </div>
