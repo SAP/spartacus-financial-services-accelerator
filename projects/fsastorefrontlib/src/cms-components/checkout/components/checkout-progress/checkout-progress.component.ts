@@ -96,12 +96,7 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
                   .getActive()
                   .pipe(
                     map(cart => {
-                      if (
-                        cart.deliveryOrderGroups &&
-                        cart.deliveryOrderGroups.length > 0 &&
-                        cart.deliveryOrderGroups[0].entries &&
-                        cart.deliveryOrderGroups[0].entries.length > 0
-                      ) {
+                      if (cart?.deliveryOrderGroups[0]?.entries?.length > 0) {
                         const fsProduct: FSProduct =
                           cart.deliveryOrderGroups[0].entries[0].product;
                         if (fsProduct && fsProduct.defaultCategory) {
