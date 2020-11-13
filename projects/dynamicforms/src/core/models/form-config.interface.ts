@@ -19,7 +19,7 @@ export interface FieldConfig {
   cssClass?: string;
   gridClass?: string;
   apiValue?: ApiConfig;
-  placeholder?: string;
+  placeholder?: LocalizedString;
   fieldType: string;
   value?: any;
   hidden?: boolean;
