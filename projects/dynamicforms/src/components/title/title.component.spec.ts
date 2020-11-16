@@ -55,7 +55,6 @@ describe('TitleComponent', () => {
       declarations: [TitleComponent],
       imports: [ReactiveFormsModule],
       providers: [
-        { provide: OccValueListService, useClass: MockOccValueListService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,
