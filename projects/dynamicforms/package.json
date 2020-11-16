@@ -19,6 +19,7 @@
     "bootstrap": "^4.2.1",
     "rxjs": "^6.5.4",
     "zone.js": "^0.10.2",
-    "ngx-infinite-scroll": "^8.0.0"
+    "file-saver": "^2.0.2",
+    "blob-util": "^2.0.2"
   }
 }
