@@ -4,7 +4,6 @@
       <div *ngIf="activeCategory$ | async as activeCategory" class="col-12">
         <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
           {{ 'fscommon.checkout.' + activeCategory | cxTranslate }}
-          {{ isCartStable }}
         </h2>
         <div class="progress-wrapper mt-4">
           <div class="d-flex flex-wrap">
