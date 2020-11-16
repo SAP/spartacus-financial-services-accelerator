@@ -114,8 +114,16 @@ export class OccClaimAdapter implements ClaimAdapter {
               value: claim.phFault,
             },
             {
+              key: 'reportedToPolice',
+              value: claim.reportedToPolice,
+            },
+            {
               key: 'witnessExist',
               value: claim.witnessExist,
+            },
+            {
+              key: 'entitledToDriveVehicle',
+              value: claim.entitledToDriveVehicle,
             },
             {
               key: 'vehicleParked',
