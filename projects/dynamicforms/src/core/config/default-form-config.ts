@@ -10,7 +10,6 @@ import { DefaultFormValidators } from './../../util/validators/default-form-vali
 import { DynamicFormsConfig } from './form-config';
 import { SeparatorComponent } from '../../components/separator/separator.component';
 import { CheckboxComponent } from '../../components/checkbox/checkbox.component';
-import { DynamicSelectComponent } from '../../components/dynamic-select/dynamic-select.component';
 import { UserPrefillResolver } from '../resolvers/user-prefill-resolver';
 import { DataHolderComponent } from '../../components/data-holder/data-holder.component';
 import { UploadComponent } from '../../components/upload/upload.component';
@@ -27,9 +26,6 @@ export const defaultFormConfig: DynamicFormsConfig = {
       },
       select: {
         component: SelectComponent,
-      },
-      dynamicSelect: {
-        component: DynamicSelectComponent,
       },
       title: {
         component: TitleComponent,
