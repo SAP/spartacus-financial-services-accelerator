@@ -13,7 +13,6 @@ import { quoteReview } from './en/quoteReview.en';
 import { userRequest } from './en/userRequest.en';
 import { common } from './overrides/en/miniCart';
 import { payment } from './overrides/en/payment';
-import { dynamicforms } from './overrides/en/dynamicforms';
 
 export const fstranslations: TranslationResources = {
   b2b,
@@ -33,5 +32,4 @@ export const fstranslations: TranslationResources = {
 export const fsOverrides: TranslationResources = {
   payment,
   common,
-  dynamicforms,
 };
