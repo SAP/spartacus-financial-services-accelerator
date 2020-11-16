@@ -15,7 +15,6 @@ import { quote } from './de/quote.de';
 import { quoteReview } from './de/quoteReview.de';
 import { userRequest } from './de/userRequest.de';
 import { user } from './de/user.de';
-import { dynamicforms } from './overrides/de/dynamicforms';
 
 export const fstranslationsDe: TranslationResources = {
   b2b,
@@ -37,5 +36,4 @@ export const fsOverridesDe: TranslationResources = {
   payment,
   common,
   myAccount,
-  dynamicforms,
 };
