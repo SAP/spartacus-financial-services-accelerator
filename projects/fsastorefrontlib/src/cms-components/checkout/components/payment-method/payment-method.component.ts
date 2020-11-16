@@ -82,7 +82,6 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
       })
     );
     this.paymentType$ = this.checkoutService.getPaymentType();
-    this.paymentType$.subscribe(pay => console.log(pay));
   }
 
   navigateBack(previousStep: FSSteps) {
