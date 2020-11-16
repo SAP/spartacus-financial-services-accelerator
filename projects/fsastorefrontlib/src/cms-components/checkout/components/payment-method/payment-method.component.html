@@ -15,6 +15,7 @@
               class="form-check-input"
               type="radio"
               name="paymentMethod"
+              [attr.aria-checked]="type.code === (paymentType$ | async)"
               (click)="changeType(type.code)"
               [value]="type.code"
               [checked]="type.code === (paymentType$ | async)"

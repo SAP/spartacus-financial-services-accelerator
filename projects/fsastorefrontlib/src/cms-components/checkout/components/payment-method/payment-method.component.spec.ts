@@ -74,12 +74,10 @@ class MockUserPaymentService {
 
 class MockCheckoutService {
   clearCheckoutStep = createSpy();
-
+  setPaymentType = createSpy();
   getPaymentType(): Observable<string> {
     return of('invoice');
   }
-
-  setPaymentType = createSpy();
 }
 
 class MockActiveCartService {
