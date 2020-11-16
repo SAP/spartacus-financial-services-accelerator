@@ -13,7 +13,7 @@ export const initialState: FSCheckoutStepsState = {
   },
   paymentDetails: {},
   orderDetails: {},
-  paymentType: 'invoice',
+  paymentType: '',
   poNumber: { po: undefined, costCenter: undefined },
 };
 

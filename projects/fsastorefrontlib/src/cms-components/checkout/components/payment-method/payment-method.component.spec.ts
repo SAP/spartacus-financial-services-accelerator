@@ -120,6 +120,7 @@ class MockCheckoutConfigService {
 }
 
 class MockPaymentTypeService {
+  loadPaymentTypes = createSpy();
   getSelectedPaymentType() {
     return of({});
   }

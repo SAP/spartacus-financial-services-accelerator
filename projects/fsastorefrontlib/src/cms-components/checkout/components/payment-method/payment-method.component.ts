@@ -65,6 +65,7 @@ export class FSPaymentMethodComponent extends PaymentMethodComponent
 
   ngOnInit(): void {
     super.ngOnInit();
+    this.paymentTypeService.loadPaymentTypes();
     this.previousCheckoutStep$ = this.checkoutConfigService.previousStep;
     this.nextCheckoutStep$ = this.checkoutConfigService.nextStep;
     this.paymentDetails$ = this.checkoutPaymentService
