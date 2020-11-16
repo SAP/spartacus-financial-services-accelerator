@@ -6,6 +6,7 @@ import {
 } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
+import { filter, take } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-fs-final-review',
@@ -23,7 +24,10 @@ export class FinalReviewComponent implements OnInit {
 
   ngOnInit() {
     this.checkoutService.mockDeliveryMode();
-    this.paymentDetails$ = this.checkoutPaymentService.getPaymentDetails();
+    this.paymentDetails$ = this.checkoutPaymentService.getPaymentDetails().pipe(
+      filter(payment => !!payment),
+      take(1)
+    );
   }
 
   toggleTAndC(): void {

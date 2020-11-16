@@ -89,6 +89,12 @@ export const fscommon = {
     'property-address-line-1': 'Objektadresse',
     lifeMainDob: '[DE] Date of Birth',
     contribution: 'Jährliche Beitragserhöhung',
+    creditCard: 'Kreditkarte',
+    invoice: '[DE] Invoice',
+    payment: {
+      CARD: 'Kreditkarte',
+      INVOICE: '[DE] Invoice',
+    },
     application: {
       title: 'Antrag',
       applicationRequestSubmitted:

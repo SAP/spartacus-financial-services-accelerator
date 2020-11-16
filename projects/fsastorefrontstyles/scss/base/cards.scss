@@ -39,6 +39,7 @@
   }
   .label {
     text-transform: capitalize;
+    font-weight: var(--cx-font-weight-semi);
   }
   .value {
     color: var(--cx-color-primary);

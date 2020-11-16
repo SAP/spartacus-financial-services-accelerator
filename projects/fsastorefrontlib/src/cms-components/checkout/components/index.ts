@@ -17,3 +17,4 @@ export * from './quote-review/quote-review.component';
 export * from './referred-quote/referred-quote-dialog.component';
 export * from './user-identification/select-identification/select-identification.component';
 export * from './user-identification/user-identification.module';
+export * from './payment-method/payment-method.component';

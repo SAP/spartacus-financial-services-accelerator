@@ -9,7 +9,8 @@
   color: var(--cx-color-danger);
 }
 .label-content {
-  @extend .label;
+  font-weight: var(--cx-font-weight-semi);
+  text-transform: uppercase;
 }
 
 .custom-file-input {

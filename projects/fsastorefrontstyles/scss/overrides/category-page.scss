@@ -63,7 +63,8 @@
         font-size: var(--cx-h4-font-size);
       }
       cx-link a {
-        @extend .label;
+        font-weight: var(--cx-font-weight-semi);
+        text-transform: uppercase;
         color: var(--cx-color-primary);
         font-size: var(--cx-title-font-size);
         &:hover {

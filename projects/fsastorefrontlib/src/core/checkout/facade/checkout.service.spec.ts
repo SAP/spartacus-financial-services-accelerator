@@ -3,7 +3,6 @@ import { Store, StoreModule } from '@ngrx/store';
 import {
   ActiveCartService,
   AuthService,
-  Cart,
   CheckoutDeliveryService,
   CHECKOUT_FEATURE,
   OCC_USER_ID_CURRENT,
@@ -14,9 +13,9 @@ import { FSStateWithCheckout } from '../store';
 import * as fromFSAction from '../store/actions/index';
 import * as fromReducers from './../store/reducers/index';
 import { FSCheckoutService } from './checkout.service';
-import { FSCart } from '../../../occ/occ-models/occ.models';
 
 const identificationType = 'idType';
+const paymentType = 'paymentCode';
 
 class CheckoutDeliveryServiceStub {
   setDeliveryMode() {}
@@ -84,9 +83,29 @@ describe('FSCheckoutServiceTest', () => {
     );
   });
 
+  it('should set payment type', () => {
+    service.setPaymentType(paymentType);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromFSAction.SetPaymentTypeSuccess({
+        code: paymentType,
+      })
+    );
+  });
+
+  it('should get payment type', () => {
+    service.setPaymentType(paymentType);
+    let response;
+    service
+      .getPaymentType()
+      .subscribe(payment => {
+        response = payment;
+      })
+      .unsubscribe();
+    expect(response).toEqual(paymentType);
+  });
+
   it('should mock delivery mode', () => {
     service.mockDeliveryMode();
-
     expect(checkoutDeliveryService.setDeliveryMode).toHaveBeenCalled();
   });
 

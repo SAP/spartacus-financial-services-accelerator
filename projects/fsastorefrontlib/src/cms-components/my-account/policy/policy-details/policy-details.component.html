@@ -57,7 +57,7 @@
             {{ policy.mainProduct?.coverageProduct?.name }}
           </div>
         </li>
-        <li class="accordion-list-item row">
+        <li *ngIf="policy.paymentFrequency" class="accordion-list-item row">
           <div class="col-6 col-sm-5 item-label">
             {{ 'fscommon.paymentFrequency' | cxTranslate }}
           </div>
@@ -70,7 +70,9 @@
             {{ 'fscommon.paymentMethod' | cxTranslate }}
           </div>
           <div class="col-6 col-sm-5 value notice">
-            <ng-container *ngIf="policy.paymentMethod?.paymentOption; else na">
+            <ng-container
+              *ngIf="policy.paymentMethod?.paymentOption; else defaultPayment"
+            >
               {{ policy.paymentMethod?.paymentOption }}
             </ng-container>
           </div>
@@ -403,7 +405,9 @@
             {{ 'fscommon.paymentMethod' | cxTranslate }}
           </div>
           <div class="col-6 col-sm-5 value notice">
-            <ng-container *ngIf="policy.paymentMethod?.paymentOption; else na">
+            <ng-container
+              *ngIf="policy.paymentMethod?.paymentOption; else defaultPayment"
+            >
               {{ policy.paymentMethod?.paymentOption }}
             </ng-container>
           </div>
@@ -460,6 +464,6 @@
     </cx-fs-accordion-item>
   </div>
 </ng-container>
-<ng-template #na>
-  {{ 'fscommon.notAvailable' | cxTranslate }}
+<ng-template #defaultPayment>
+  {{ 'fscommon.invoice' | cxTranslate }}
 </ng-template>

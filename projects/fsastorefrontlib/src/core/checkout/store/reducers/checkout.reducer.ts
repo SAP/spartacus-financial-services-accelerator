@@ -13,6 +13,7 @@ export const initialState: FSCheckoutStepsState = {
   },
   paymentDetails: {},
   orderDetails: {},
+  paymentType: '',
   poNumber: { po: undefined, costCenter: undefined },
 };
 
@@ -45,7 +46,12 @@ export function reducer(
         legalInformation,
       };
     }
-
+    case fromAction.SET_PAYMENT_TYPE_SUCCESS: {
+      return {
+        ...state,
+        paymentType: action.payload.code,
+      };
+    }
     case CheckoutActions.CREATE_PAYMENT_DETAILS_SUCCESS:
     case CheckoutActions.SET_PAYMENT_DETAILS_SUCCESS: {
       return {
