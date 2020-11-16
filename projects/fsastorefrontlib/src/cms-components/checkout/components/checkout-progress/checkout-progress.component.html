@@ -1,6 +1,6 @@
 <div class="cx-multi-step-checkout">
   <div class="row">
-    <ng-container *ngIf="isCartStable$ | async as isCartStable">
+    <ng-container *ngIf="isCartStable$ | async">
       <div *ngIf="activeCategory$ | async as activeCategory" class="col-12">
         <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
           {{ 'fscommon.checkout.' + activeCategory | cxTranslate }}
