@@ -61,9 +61,9 @@ export class PolicyDetailsComponent implements OnInit, OnDestroy {
   ): boolean {
     if (startDate && allowedFSRequestTypes) {
       const formatedStartDate = new Date(startDate).toISOString().substr(0, 10);
-      const formatedActualDate = new Date().toISOString().substr(0, 10);
+      const formattedCurrentDate = new Date().toISOString().substr(0, 10);
       return (
-        formatedStartDate <= formatedActualDate &&
+        formatedStartDate <= formattedCurrentDate &&
         allowedFSRequestTypes
           .filter(allowedRequestType => allowedRequestType.requestType)
           .map(allowedRequestType => allowedRequestType.requestType.code)
