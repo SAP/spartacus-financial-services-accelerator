@@ -27,6 +27,8 @@ class MockFormComponent {
   @Input()
   formId;
   @Input()
+  formSubject;
+  @Input()
   formConfig;
   @Input()
   applicationId;
@@ -51,6 +53,7 @@ const formData: YFormData = {
 const formDefinition = {
   formId: 'formDefinition1',
   content: '{ "formGroup": "testGroup" }',
+  subject: 'Test subject',
 };
 
 const configurationCategory: FSCategory = {
