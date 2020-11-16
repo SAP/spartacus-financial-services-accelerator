@@ -7,12 +7,14 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { By } from '@angular/platform-browser';
+import {
+  DynamicFormsConfig,
+  FieldConfig,
+  FormService,
+} from '@fsa/dynamicforms';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
+import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
 import { of } from 'rxjs';
-import { DynamicFormsConfig } from '../../core';
-import { FieldConfig } from '../../core/models/form-config.interface';
-import { OccValueListService } from '../../occ/services/occ-value-list.service';
-import { FormService } from './../../core/services/form/form.service';
 import { DynamicSelectComponent } from './dynamic-select.component';
 
 @Component({

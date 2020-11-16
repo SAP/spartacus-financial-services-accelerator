@@ -11,7 +11,6 @@ import { of } from 'rxjs';
 import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
-import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { InputComponent } from './input.component';
 import { FormService } from './../../core/services/form/form.service';
 
@@ -25,7 +24,6 @@ class MockErrorNoticeComponent {
   @Input() parentConfig;
 }
 
-class MockOccValueListService {}
 class MockLanguageService {
   getActive() {
     return of('en');
@@ -66,7 +64,6 @@ describe('InputComponent', () => {
       declarations: [InputComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
-        { provide: OccValueListService, useClass: MockOccValueListService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,

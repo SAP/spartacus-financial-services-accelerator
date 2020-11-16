@@ -4,7 +4,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { I18nModule } from '@spartacus/core';
 import { ComponentsModule } from '../../components/components.module';
-import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { FormConnector } from '../connectors/form-connector';
 import { FormBuilderService } from '../services/builder/form-builder.service';
 import { FormDataService } from '../services/data/form-data.service';
@@ -32,7 +31,6 @@ import { FormComponent } from './form/form.component';
     FormValidationService,
     FieldDependencyResolverService,
     FormDataStorageService,
-    OccValueListService,
     FormConnector,
     FormDataService,
   ],
