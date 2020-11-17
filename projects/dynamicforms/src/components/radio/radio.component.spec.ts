@@ -11,7 +11,6 @@ import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { of } from 'rxjs';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
-import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { RadioComponent } from './radio.component';
 import { FormService } from './../../core/services/form/form.service';
 
@@ -30,8 +29,6 @@ class MockLanguageService {
     return of('en');
   }
 }
-
-class MockOccValueListService {}
 
 const mockField: FieldConfig = {
   fieldType: 'radio',
@@ -77,7 +74,6 @@ describe('RadioComponent', () => {
         declarations: [RadioComponent, MockErrorNoticeComponent],
         imports: [ReactiveFormsModule, I18nTestingModule],
         providers: [
-          { provide: OccValueListService, useClass: MockOccValueListService },
           { provide: LanguageService, useClass: MockLanguageService },
           {
             provide: DynamicFormsConfig,

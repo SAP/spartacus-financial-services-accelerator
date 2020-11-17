@@ -16,7 +16,6 @@ import { TitleComponent } from './title/title.component';
 import { SeparatorComponent } from './separator/separator.component';
 import { CheckboxComponent } from './checkbox/checkbox.component';
 import { AbstractOptionsComponent } from './abstract-options/abstract-options.component';
-import { DynamicSelectComponent } from './dynamic-select/dynamic-select.component';
 import { FormPopupErrorComponent } from './form-popup-error/form-popup-error.component';
 import { DataHolderComponent } from './data-holder/data-holder.component';
 import { UploadComponent } from './upload/upload.component';
@@ -40,7 +39,6 @@ import { FormComponentService } from './form-component.service';
     TitleComponent,
     SeparatorComponent,
     CheckboxComponent,
-    DynamicSelectComponent,
     FormPopupErrorComponent,
     UploadComponent,
   ],
@@ -58,7 +56,6 @@ import { FormComponentService } from './form-component.service';
     TitleComponent,
     SeparatorComponent,
     CheckboxComponent,
-    DynamicSelectComponent,
     UploadComponent,
   ],
   exports: [
@@ -77,7 +74,6 @@ import { FormComponentService } from './form-component.service';
     TitleComponent,
     SeparatorComponent,
     CheckboxComponent,
-    DynamicSelectComponent,
     FormPopupErrorComponent,
     UploadComponent,
   ],

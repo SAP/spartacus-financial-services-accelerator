@@ -11,10 +11,8 @@ import { LanguageService } from '@spartacus/core';
 import { DynamicFormsConfig } from '../../core';
 import { of } from 'rxjs';
 import { FieldConfig } from './../../core/models/form-config.interface';
-import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { FormService } from './../../core/services/form/form.service';
 
-class MockOccValueListService {}
 class MockLanguageService {
   getActive() {
     return of('en');
@@ -76,7 +74,6 @@ describe('AbstractOptionsComponent', () => {
         declarations: [AbstractOptionsComponent],
         imports: [ReactiveFormsModule],
         providers: [
-          { provide: OccValueListService, useClass: MockOccValueListService },
           { provide: LanguageService, useClass: MockLanguageService },
           {
             provide: DynamicFormsConfig,

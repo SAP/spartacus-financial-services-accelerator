@@ -11,7 +11,6 @@ import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { of } from 'rxjs';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
-import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { SelectComponent } from './select.component';
 import { FormService } from './../../core/services/form/form.service';
 
@@ -47,8 +46,6 @@ class MockFormService {
   }
 }
 
-class MockOccValueListService {}
-
 const mockFormGroup = new FormGroup({
   dependentTestField: new FormControl(),
   testSelect: new FormControl(),
@@ -62,7 +59,6 @@ describe('SelectComponent', () => {
   let component: SelectComponent;
   let fixture: ComponentFixture<SelectComponent>;
   let formService: FormService;
-  let occValueListService: OccValueListService;
   let el: DebugElement;
 
   beforeEach(
@@ -71,7 +67,6 @@ describe('SelectComponent', () => {
         declarations: [SelectComponent, MockErrorNoticeComponent],
         imports: [ReactiveFormsModule, I18nTestingModule],
         providers: [
-          { provide: OccValueListService, useClass: MockOccValueListService },
           { provide: LanguageService, useClass: MockLanguageService },
           {
             provide: DynamicFormsConfig,
@@ -85,7 +80,6 @@ describe('SelectComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(SelectComponent);
-    occValueListService = TestBed.inject(OccValueListService);
     formService = TestBed.inject(FormService);
     component = fixture.componentInstance;
     component.group = mockFormGroup;
