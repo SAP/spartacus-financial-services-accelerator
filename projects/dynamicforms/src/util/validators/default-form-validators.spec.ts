@@ -28,7 +28,7 @@ describe('FormValidationService', () => {
     );
   });
 
-  it("should return error, when emails don't match", () => {
+  it('should return error, when emails do not match', () => {
     form.get(field1).setValue('fieldValue');
     form.get(field2).setValue('otherValue');
     expect(DefaultFormValidators.matchFields(field1, field2)(form)).toEqual({

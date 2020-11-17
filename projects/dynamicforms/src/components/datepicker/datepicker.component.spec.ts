@@ -12,7 +12,6 @@ import { of } from 'rxjs';
 import { FormDateConfig } from '../../core';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
-import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { FormService } from './../../core/services/form/form.service';
 import { DatePickerComponent } from './datepicker.component';
 
@@ -31,7 +30,6 @@ class MockLanguageService {
     return of('en');
   }
 }
-class MockOccValueListService {}
 
 const mockField: FieldConfig = {
   fieldType: 'datepicker',
@@ -68,7 +66,6 @@ describe('DatePickerComponent', () => {
       declarations: [DatePickerComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
-        { provide: OccValueListService, useClass: MockOccValueListService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,

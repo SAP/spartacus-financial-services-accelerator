@@ -7,6 +7,7 @@ import { CalculationButtonComponent } from './form-components/calculation-button
 import { CartPrefillResolver } from './resolver/cart-prefill-resolver';
 import { AutoPersonalDetailsPrefillResolver } from './resolver/auto-personal-details-prefill-resolver';
 import { CartEntriesPrefillResolver } from './resolver/cart-entries-prefill-resolver';
+import { DynamicSelectComponent } from './form-components/dynamic-select/dynamic-select.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,9 @@ import { CartEntriesPrefillResolver } from './resolver/cart-entries-prefill-reso
         components: {
           calculateButton: {
             component: CalculationButtonComponent,
+          },
+          dynamicSelect: {
+            component: DynamicSelectComponent,
           },
         },
         prefill: {
@@ -35,8 +39,8 @@ import { CartEntriesPrefillResolver } from './resolver/cart-entries-prefill-reso
       },
     }),
   ],
-  declarations: [CalculationButtonComponent],
-  entryComponents: [CalculationButtonComponent],
-  exports: [CalculationButtonComponent],
+  declarations: [CalculationButtonComponent, DynamicSelectComponent],
+  entryComponents: [CalculationButtonComponent, DynamicSelectComponent],
+  exports: [CalculationButtonComponent, DynamicSelectComponent],
 })
 export class FSDynamicformsModule {}

@@ -12,7 +12,6 @@ import { I18nTestingModule, LanguageService } from '@spartacus/core';
 import { CheckboxComponent } from './checkbox.component';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { DynamicFormsConfig } from '../../core';
-import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { FormService } from './../../core/services/form/form.service';
 
 @Component({
@@ -30,8 +29,6 @@ class MockLanguageService {
     return of('en');
   }
 }
-
-class MockOccValueListService {}
 
 const mockField: FieldConfig = {
   fieldType: 'checkbox',
@@ -76,7 +73,6 @@ describe('CheckboxComponent', () => {
       declarations: [CheckboxComponent, MockErrorNoticeComponent],
       imports: [ReactiveFormsModule, I18nTestingModule],
       providers: [
-        { provide: OccValueListService, useClass: MockOccValueListService },
         { provide: LanguageService, useClass: MockLanguageService },
         {
           provide: DynamicFormsConfig,
