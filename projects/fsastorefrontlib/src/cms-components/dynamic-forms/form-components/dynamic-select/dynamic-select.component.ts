@@ -1,14 +1,16 @@
 import { ChangeDetectorRef, Component, Injector, OnInit } from '@angular/core';
+import {
+  AbstractFormComponent,
+  DynamicFormsConfig,
+  FormService,
+} from '@fsa/dynamicforms';
 import { LanguageService } from '@spartacus/core';
+import { OccValueListService } from '../../../../occ/services/value-list/occ-value-list.service';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { DynamicFormsConfig } from '../../core/config/form-config';
-import { OccValueListService } from '../../occ/services/occ-value-list.service';
-import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
-import { FormService } from './../../core/services/form/form.service';
 
 @Component({
-  selector: 'cx-dynamic-select',
+  selector: 'cx-fs-dynamic-select',
   templateUrl: './dynamic-select.component.html',
 })
 export class DynamicSelectComponent extends AbstractFormComponent
