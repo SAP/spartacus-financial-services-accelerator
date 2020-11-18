@@ -115,12 +115,6 @@
     height: 60px;
   }
 }
-.info-icon {
-  &:before {
-    content: 'i';
-    font-family: 'monospace';
-  }
-}
 .notice-text {
   background-color: var(--cx-color-4);
 }
@@ -232,6 +226,8 @@
 }
 .info-icon {
   &:before {
+    content: 'i';
+    font-family: 'monospace';
     background-color: var(--cx-color-text);
     border-radius: 50%;
     font-size: 35px;
