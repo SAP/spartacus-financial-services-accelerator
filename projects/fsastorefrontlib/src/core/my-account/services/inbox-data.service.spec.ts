@@ -1,19 +1,14 @@
 import { TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-import {
-  OCC_USER_ID_ANONYMOUS,
-  OCC_USER_ID_CURRENT,
-  UserIdService,
-} from '@spartacus/core';
+import { OCC_USER_ID_ANONYMOUS, OCC_USER_ID_CURRENT, UserIdService } from '@spartacus/core';
 import { StateWithMyAccount } from '../store/my-account-state';
 import * as fromReducers from '../store/reducers';
 import { InboxDataService } from './inbox-data.service';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-const userId: Observable<string> = new BehaviorSubject<string>(
-  OCC_USER_ID_CURRENT
+let userId: Observable<string> = new BehaviorSubject<string>(
+  OCC_USER_ID_ANONYMOUS
 );
-const user = 'userId';
 class MockUserIdService {
   getUserId(): Observable<string> {
     return userId;
@@ -24,7 +19,6 @@ describe('InboxDataService', () => {
   let store: Store<StateWithMyAccount>;
   let userIdService: MockUserIdService;
   beforeEach(() => {
-    userIdService = new MockUserIdService();
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
@@ -34,7 +28,7 @@ describe('InboxDataService', () => {
         InboxDataService,
         {
           provide: UserIdService,
-          useClass: UserIdService,
+          useClass: MockUserIdService,
         },
       ],
     });
