@@ -26,7 +26,7 @@ export function waitForCMSComponent(component: string, alias: string): string {
 
 export function waitForFormDefinition(form: string, alias: string): string {
   cy.server();
-  cy.route('GET', `occ/v2/financial/formDefinitions?categoryCode=${form}*`).as(
+  cy.route('GET', `/occ/v2/financial/formDefinitions?categoryCode=${form}*`).as(
     alias
   );
   return alias;

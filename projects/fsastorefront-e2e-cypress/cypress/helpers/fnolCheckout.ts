@@ -50,6 +50,7 @@ export function populateIncidentInformationStep() {
       .type('my tesla S was stolen while I was in the shopping center');
   });
 }
+
 export function updateIncidentType() {
   cy.get('cx-dynamic-form').within(() => {
     cy.get('[name=whatHappened]').select('Glass Damage');
@@ -95,7 +96,7 @@ export function checkIncidentReportAccordion() {
   cy.get('.accordion-item-wrapper')
     .eq(1)
     .within(() => {
-      cy.get('.accordion-list-item').should('have.length', '1');
+      cy.get('.accordion-list-item').should('have.length', '2');
     });
   cy.get('.accordion-list-item').contains('while buying tesla coils');
 }
@@ -107,7 +108,7 @@ export function checkGeneralInformationAccordion() {
   cy.get('.accordion-item-wrapper')
     .eq(2)
     .within(() => {
-      cy.get('.accordion-list-item').should('have.length', '5');
+      cy.get('.accordion-list-item').should('have.length', '6');
     });
   cy.get('.accordion-list-item').contains('3rdParty');
 }
@@ -142,20 +143,19 @@ export function startClaimFromHomepage() {
 
 export function checkFnolEntryPage() {
   cy.get('.heading-headline').contains('Make a Claim Online');
-  cy.get('h3.section-header-heading').contains('Which car has been damaged?');
+  cy.get('h3').contains('Which car has been damaged?');
   cy.get('cx-fs-cms-custom-container').within(() => {
     cy.get('.cx-payment-card-inner').should('be.visible');
   });
 }
 
 export function selectPolicyOnEntryPage() {
-  cy.get('.form-check-input').click();
   cy.get('.cx-payment-card')
     .eq(0)
     .within(() => {
-      cy.get('.cx-card-link');
-    })
-    .click();
+      cy.get('.cx-card-link').click();
+    });
+  cy.get('.form-check-input').click();
 }
 
 export function checkAndResumeSpecificClaim() {
@@ -180,9 +180,9 @@ export function deleteClaimFromDialog() {
   });
   cy.wait(`@${claims}`).its('status').should('eq', 200);
   cy.contains('.info-card', claimNumber).within(() => {
-    cy.get('.action-links-secondary-button').click();
+    cy.get('a.fs-icon').should('be.visible').click({ force: true });
   });
-  cy.get('h3').contains('Delete started claim process');
+  cy.get('h3').should('contain.text', 'Delete started claim process');
   cy.get('p').contains('The following claim process will be deleted');
   cy.get('cx-fs-deleted-claim-dialog').within(() => {
     cy.get('.primary-button').click();
@@ -194,13 +194,27 @@ export function clickContinueAndGetNewClaimID() {
     'AutoClaimIncidentFormComponent',
     'incidentInfoForm'
   );
-  cy.get('.primary-button').should('contain', 'Continue').click();
+  cy.get('h3').contains('Which car has been damaged?');
+  cy.get('.primary-button').should('be.visible').click();
   cy.wait(`@${incidentInfoForm}`)
     .its('status')
     .should('eq', 200)
     .then(() => {
       claimNumber = this.getClaimIdFromLocalStorage();
     });
+}
+
+export function populateIncidentInformationSecondClaim() {
+  cy.get('[name=whatHappened]').select('AutoTheft');
+  cy.get('[name=whenHappened]').clear().type('2019-01-01');
+  cy.get('[name=whatTime]').clear().type('12:12:12');
+  cy.get('[name=country]').select('Serbia');
+  cy.get('[name=city]').clear().type('Belgräde');
+  cy.get('[name=postcode]').clear().type('11040');
+  cy.get('[name=address]').clear().type('Omladinskih Brigada 90g');
+  cy.get('[name=description]')
+    .clear()
+    .type('my tesla S was stolen while I was in the shopping center');
 }
 
 export function waitForIncidentReportStep() {

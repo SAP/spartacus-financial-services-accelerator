@@ -2,10 +2,7 @@ import * as register from '../../../helpers/register';
 import { registrationUser } from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as event from '../../../helpers/checkout/insurance/event-checkout';
-import {
-  addPaymentMethod,
-  selectPaymentMethod,
-} from '../../../helpers/checkout/insurance/payment';
+import * as payment from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 import * as myAccount from '../../../helpers/my-account/myAccountPages';
 import { waitForCreateAsset } from '../../../helpers/generalHelpers';
@@ -61,14 +58,15 @@ context('Event Checkout', () => {
     event.checkProgressBarEvent();
     event.checkMiniCartRemovedProduct();
     checkout.checkAccordions('threeAccordions');
-    addPaymentMethod(registrationUser.email, cartId);
+    payment.addPaymentMethod(registrationUser.email, cartId);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
     checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {
-    selectPaymentMethod();
+    payment.selectPaymentMethodCard();
+    checkout.clickContinueButton();
   });
 
   it('Place order on final review page', () => {

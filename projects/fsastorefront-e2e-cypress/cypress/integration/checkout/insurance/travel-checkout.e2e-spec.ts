@@ -1,14 +1,8 @@
 import * as register from '../../../helpers/register';
 import * as travelCheckout from '../../../helpers/checkout/insurance/travel-checkout';
-import {
-  registrationUser,
-  registrationUserWithoutPhone,
-} from '../../../sample-data/users';
+import { registrationUser } from '../../../sample-data/users';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import {
-  addPaymentMethod,
-  selectPaymentMethod,
-} from '../../../helpers/checkout/insurance/payment';
+import * as payment from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
@@ -37,7 +31,6 @@ context('Travel Insurance Checkout', () => {
     travelCheckout.selectSingleBudgetPlan();
     cy.wait(`@${addToCart}`).then(result => {
       cartId = (<any>result.response.body).code;
-      addPaymentMethod(registrationUser.email, cartId);
     });
   });
 
@@ -63,7 +56,8 @@ context('Travel Insurance Checkout', () => {
   });
 
   it('Select default payment details', () => {
-    selectPaymentMethod();
+    payment.selectPaymentMethodInvoice();
+    checkout.clickContinueButton();
   });
 
   it('Place order on final review pages', () => {

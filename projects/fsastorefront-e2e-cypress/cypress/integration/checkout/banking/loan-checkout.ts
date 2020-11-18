@@ -72,7 +72,6 @@ context('Loan Checkout', () => {
 
   it('Should complete User Identification page', () => {
     checkout.checkCheckoutStep('Your Loan Application', '6');
-    banking.checkProgressBarLoanAndFTD();
     userIdentification.checkUserIdentificationPage();
     userIdentification.selectUserIdentification('Legal Identification');
     checkout.clickContinueButton();

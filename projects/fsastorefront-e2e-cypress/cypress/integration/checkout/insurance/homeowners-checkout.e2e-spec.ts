@@ -2,10 +2,7 @@ import { registrationUserWithoutPhone } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
 import * as homeowners from '../../../helpers/checkout/insurance/homeowners-checkout';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import {
-  addPaymentMethod,
-  selectPaymentMethod,
-} from '../../../helpers/checkout/insurance/payment';
+import * as payment from '../../../helpers/checkout/insurance/payment';
 import { checkMyPoliciesPage } from '../../../helpers/my-account/policies';
 import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 
@@ -72,14 +69,14 @@ context('Homeowners Checkout', () => {
     checkout.checkProgressBarInsurance();
     homeowners.checkMiniCartHomeowners();
     checkout.checkAccordions('generalQuoteAccordions');
-    addPaymentMethod(registrationUserWithoutPhone.email, cartId);
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
     checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {
-    selectPaymentMethod();
+    payment.selectPaymentMethodInvoice();
+    checkout.clickContinueButton();
   });
 
   it('Place order on final review page', () => {

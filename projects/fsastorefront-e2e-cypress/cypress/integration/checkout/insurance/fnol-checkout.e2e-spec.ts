@@ -3,10 +3,7 @@ import * as register from '../../../helpers/register';
 import * as fnol from '../../../helpers/fnolCheckout';
 import * as auto from '../../../helpers/checkout/insurance/auto';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import {
-  addPaymentMethod,
-  selectPaymentMethod,
-} from '../../../helpers/checkout/insurance/payment';
+import * as payment from '../../../helpers/checkout/insurance/payment';
 import {
   checkMyPoliciesPage,
   updatePolicyEffectiveAndStartDate,
@@ -16,7 +13,6 @@ import {
   waitForCreateAsset,
 } from '../../../helpers/generalHelpers';
 
-let cartId;
 context('FNOL for sample data user', () => {
   before(() => {
     cy.visit('/');
@@ -48,10 +44,6 @@ context('FNOL for sample data user', () => {
     const addToCart = waitForCreateAsset('carts', 'addToCart');
     auto.checkAutoComparisonTable();
     auto.selectAutoBronze();
-    cy.wait(`@${addToCart}`).then(result => {
-      cartId = (<any>result.response.body).code;
-    });
-    //add options page
     const personalDetails = waitForPage('personal-details', 'personalDetails');
     checkout.clickContinueButton();
     cy.wait(`@${personalDetails}`).its('status').should('eq', 200);
@@ -67,15 +59,18 @@ context('FNOL for sample data user', () => {
     cy.wait(`@${quoteReview}`).its('status').should('eq', 200);
   });
 
-  it('Should add new payment and bind quote', () => {
-    addPaymentMethod(registrationUser.email, cartId);
+  it('Should bind quote', () => {
+    checkout.checkCheckoutStep('Your Auto Insurance', '7');
+    checkout.checkProgressBarInsurance();
+    checkout.checkAccordions('quoteReviewWithoutOptional');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
+    checkout.clickContinueButton();
   });
 
   it('Select default payment details', () => {
+    payment.selectPaymentMethodInvoice();
     checkout.clickContinueButton();
-    selectPaymentMethod();
   });
 
   it('Place order on final review page', () => {
@@ -113,15 +108,12 @@ context('FNOL for sample data user', () => {
 
   it('Should check and populate Incident Report page', () => {
     const filePath = 'fsaImageTest.png';
-    //cy.get('.custom-file-input').attachFile(filePath);
     cy.get('[name=howAccidentOccurred]').type(
       'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
     );
     cy.get('.custom-file-input').attachFile(filePath);
-
     cy.get('.btn-primary').click();
     cy.wait(2000);
-    //fnol.populateIncidentReportStep();
     checkout.checkBackAndContinueButtons();
     cy.get('.primary-button').should('be.visible').click();
     cy.wait(500);
@@ -129,7 +121,6 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should check and populate General Information page', () => {
-    //fnol.waitForfnolGeneralInformationStep();
     fnol.checkFNOLCheckoutPage();
     fnol.populateGeneralInformationStep();
     checkout.clickContinueButton();
@@ -158,6 +149,10 @@ context('FNOL for sample data user', () => {
     fnol.checkFnolEntryPage();
     fnol.selectPolicyOnEntryPage();
     fnol.clickContinueAndGetNewClaimID();
+    fnol.checkFNOLSteps();
+    fnol.populateIncidentInformationSecondClaim();
+    checkout.clickContinueButton();
+    fnol.checkFNOLCheckoutPage();
     fnol.checkFNOLSteps();
   });
 
