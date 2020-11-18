@@ -101,6 +101,11 @@
   text-align: center;
   position: relative;
 }
+.image-item {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 .image-wrapper {
   border-radius: 50%;
   background-color: var(--cx-color-1);
@@ -109,11 +114,6 @@
     width: 60px;
     height: 60px;
   }
-}
-.image-item {
-  display: block;
-  width: 100%;
-  height: 100%;
 }
 .notice-text {
   background-color: var(--cx-color-4);
