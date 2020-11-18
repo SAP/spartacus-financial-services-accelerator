@@ -7,7 +7,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { AuthService, LanguageService } from '@spartacus/core';
+import { AuthService, LanguageService, UserIdService } from '@spartacus/core';
 import { saveAs } from 'file-saver';
 import { map, take } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../core/config/form-config';
@@ -34,7 +34,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     protected formService: FormService,
     protected fileUploadService: FileService,
     protected cd: ChangeDetectorRef,
-    protected authService: AuthService
+    protected userIdService: UserIdService
   ) {
     super(appConfig, languageService, injector, formService);
   }
@@ -102,8 +102,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   removeFile(index, uploadField) {
     // Execute Http.Delete request to backend
     this.subscription.add(
-      this.authService
-        .getOccUserId()
+      this.userIdService
+        .getUserId()
         .pipe(
           take(1),
           map(occUserId => {
@@ -126,8 +126,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
 
   removeAll(uploadField) {
     this.subscription.add(
-      this.authService
-        .getOccUserId()
+      this.userIdService
+        .getUserId()
         .pipe(
           take(1),
           map(occUserId => {

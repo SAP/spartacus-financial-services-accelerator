@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AuthService } from '@spartacus/core';
+import { UserIdService } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 import { FileConnector } from '../../connectors/file.connector';
@@ -11,13 +11,13 @@ import { StateWithForm } from '../../store/state';
 @Injectable()
 export class FileService {
   constructor(
-    protected authService: AuthService,
+    protected userIdService: UserIdService,
     protected fileConnector: FileConnector,
     protected store: Store<StateWithForm>
   ) {}
 
   getFile(fileCode: string, fileType: string): Observable<any> {
-    return this.authService.getOccUserId().pipe(
+    return this.userIdService.getUserId().pipe(
       take(1),
       switchMap(occUserId => {
         return this.fileConnector.getFile(occUserId, fileCode, fileType);
@@ -26,7 +26,7 @@ export class FileService {
   }
 
   uploadFile(file: File): Observable<any> {
-    return this.authService.getOccUserId().pipe(
+    return this.userIdService.getUserId().pipe(
       take(1),
       switchMap(occUserId => {
         return this.fileConnector.uploadFile(occUserId, file);

@@ -1,5 +1,8 @@
 import { inject, TestBed } from '@angular/core/testing';
-import { AuthService, OCC_USER_ID_CURRENT } from '@spartacus/core';
+import {
+  OCC_USER_ID_CURRENT,
+  UserIdService,
+} from '@spartacus/core';
 import { FileService } from './file.service';
 import { Observable, of } from 'rxjs';
 import { FileConnector } from '../../connectors/file.connector';
@@ -34,8 +37,8 @@ class MockFileConnector {
   }
 }
 
-class MockAuthService {
-  getOccUserId(): Observable<string> {
+class MockUserIdService {
+  getUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
   }
 }
@@ -60,8 +63,8 @@ describe('FileService', () => {
           useValue: mockOccFileFileConnector,
         },
         {
-          provide: AuthService,
-          useClass: MockAuthService,
+          provide: UserIdService,
+          useClass: MockUserIdService,
         },
       ],
     });

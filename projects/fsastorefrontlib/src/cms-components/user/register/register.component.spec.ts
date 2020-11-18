@@ -15,7 +15,6 @@ import {
   RoutingService,
   Title,
   UserService,
-  UserToken,
 } from '@spartacus/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { FSRegisterComponent } from './register.component';
@@ -66,8 +65,8 @@ class MockGlobalMessageService {
   }
 }
 class MockAuthService {
-  getUserToken(): Observable<UserToken> {
-    return of({ access_token: 'test' } as UserToken);
+  isUserLoggedIn(): Observable<boolean> {
+    return of(true);
   }
 }
 class MockAuthRedirectService {

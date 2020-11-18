@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import {
   ActiveCartService,
-  AuthService,
   CheckoutDeliveryService,
   CheckoutService,
   Order,
+  UserIdService,
 } from '@spartacus/core';
 import { combineLatest, Observable } from 'rxjs';
 import { CheckoutSelectors, FSStateWithCheckout } from '../store';
@@ -17,10 +17,10 @@ export class FSCheckoutService extends CheckoutService {
   constructor(
     protected fsStore: Store<FSStateWithCheckout>,
     protected activeCartService: ActiveCartService,
-    protected authService: AuthService,
+    protected userIdService: UserIdService,
     protected checkoutDeliveryService: CheckoutDeliveryService
   ) {
-    super(fsStore, authService, activeCartService);
+    super(fsStore, userIdService, activeCartService);
   }
 
   orderPlaced: boolean;
@@ -29,7 +29,7 @@ export class FSCheckoutService extends CheckoutService {
   setIdentificationType(identificationType: string) {
     combineLatest([
       this.activeCartService.getActiveCartId(),
-      this.authService.getOccUserId(),
+      this.userIdService.getUserId(),
     ])
       .subscribe(([activeCartCode, occUserId]) => {
         if (activeCartCode && occUserId) {

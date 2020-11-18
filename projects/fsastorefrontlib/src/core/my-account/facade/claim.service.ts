@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
 import * as fromAction from '../store/actions';
 import * as fromClaimStore from '../store';
 import { SelectedPolicy } from '../services/claim-data.service';
-import { AuthService } from '@spartacus/core';
+import { AuthService, UserIdService } from '@spartacus/core';
 import { take, filter, switchMap } from 'rxjs/operators';
 import * as fromSelector from '../store/selectors';
 import { StateWithMyAccount } from '../store/my-account-state';
@@ -18,15 +18,16 @@ export class ClaimService {
 
   constructor(
     protected store: Store<StateWithMyAccount>,
-    protected authService: AuthService
+    protected authService: AuthService,
+    protected userIdService: UserIdService
   ) {
     combineLatest([
       this.store.select(fromSelector.getClaimContent),
-      this.authService.getUserToken(),
+      this.authService.isUserLoggedIn(),
     ])
-      .subscribe(([claim, userToken]) => {
+      .subscribe(([claim, userLoggedIn]) => {
         this.currentClaimId = claim.claimNumber;
-        if (this.isCreated(claim) && this.isLoggedIn(userToken.userId)) {
+        if (this.isCreated(claim) && userLoggedIn) {
           this.loadCurrentClaim();
         }
       })
@@ -34,8 +35,8 @@ export class ClaimService {
   }
 
   loadCurrentClaim() {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         this.store.dispatch(
@@ -75,8 +76,8 @@ export class ClaimService {
   }
 
   loadClaims() {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         this.store.dispatch(
@@ -114,8 +115,8 @@ export class ClaimService {
   }
 
   createClaim(policyId: string, contractId: string) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId =>
         this.store.dispatch(
@@ -130,8 +131,8 @@ export class ClaimService {
   }
 
   resumeClaim(claimNumber: string) {
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         this.currentClaimId = claimNumber;
@@ -149,8 +150,8 @@ export class ClaimService {
     const stepData = Object.assign({}, claim.configurationSteps[stepIndex], {
       status: stepStatus,
     });
-    this.authService
-      .getOccUserId()
+    this.userIdService
+      .getUserId()
       .pipe(take(1))
       .subscribe(occUserId => {
         this.store.dispatch(

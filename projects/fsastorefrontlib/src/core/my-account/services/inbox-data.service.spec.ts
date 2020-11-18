@@ -1,33 +1,30 @@
 import { TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-import { AuthService, OCC_USER_ID_ANONYMOUS, UserToken } from '@spartacus/core';
-import { Observable, ReplaySubject } from 'rxjs';
+import {
+  OCC_USER_ID_ANONYMOUS,
+  OCC_USER_ID_CURRENT,
+  UserIdService,
+} from '@spartacus/core';
 import { StateWithMyAccount } from '../store/my-account-state';
 import * as fromReducers from '../store/reducers';
 import { InboxDataService } from './inbox-data.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
-const userToken$ = new ReplaySubject<UserToken | any>();
-
-class AuthServiceStub {
-  getUserToken(): Observable<UserToken> {
-    return userToken$.asObservable();
+const userId: Observable<string> = new BehaviorSubject<string>(
+  OCC_USER_ID_CURRENT
+);
+const user = 'userId';
+class MockUserIdService {
+  getUserId(): Observable<string> {
+    return userId;
   }
 }
-
-const testUserToken: UserToken = {
-  access_token: 'access_token',
-  userId: 'userId',
-  refresh_token: 'refresh_token',
-  token_type: 'token_type',
-  expires_in: 1,
-  scope: ['scope'],
-};
-
 describe('InboxDataService', () => {
   let service: InboxDataService;
   let store: Store<StateWithMyAccount>;
-
+  let userIdService: MockUserIdService;
   beforeEach(() => {
+    userIdService = new MockUserIdService();
     TestBed.configureTestingModule({
       imports: [
         StoreModule.forRoot({}),
@@ -36,23 +33,23 @@ describe('InboxDataService', () => {
       providers: [
         InboxDataService,
         {
-          provide: AuthService,
-          useClass: AuthServiceStub,
+          provide: UserIdService,
+          useClass: UserIdService,
         },
       ],
     });
     service = TestBed.inject(InboxDataService);
     store = TestBed.inject(Store);
+    userIdService = TestBed.inject(UserIdService);
   });
 
   describe('userId', () => {
     it('should return userId when user logged in', () => {
-      userToken$.next(testUserToken);
-      expect(service.userId).toEqual(testUserToken.userId);
+      (userId as BehaviorSubject<string>).next(OCC_USER_ID_CURRENT);
+      expect(service.userId).toEqual(OCC_USER_ID_CURRENT);
     });
-
     it('should not return userId when customer is not logged in', () => {
-      userToken$.next({});
+      (userId as BehaviorSubject<string>).next(OCC_USER_ID_ANONYMOUS);
       expect(service.userId).toEqual(OCC_USER_ID_ANONYMOUS);
     });
   });

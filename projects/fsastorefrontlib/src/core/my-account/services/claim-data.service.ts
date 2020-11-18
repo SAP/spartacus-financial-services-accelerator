@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { AuthService, OCC_USER_ID_ANONYMOUS } from '@spartacus/core';
+import {
+  AuthService,
+  OCC_USER_ID_ANONYMOUS,
+  UserIdService,
+} from '@spartacus/core';
 import { filter } from 'rxjs/operators';
 import { Claim } from '../../../occ/occ-models';
 import { StateWithMyAccount } from '../store/my-account-state';
@@ -20,14 +24,14 @@ export class ClaimDataService {
 
   constructor(
     protected store: Store<StateWithMyAccount>,
-    protected auth: AuthService
+    protected userIdService: UserIdService
   ) {
-    this.auth
-      .getUserToken()
-      .pipe(filter(userToken => this.userId !== userToken.userId))
+    this.userIdService
+      .getUserId()
+      .pipe(filter(userToken => this.userId !== userToken))
       .subscribe(userToken => {
         if (Object.keys(userToken).length !== 0) {
-          this.userId = userToken.userId;
+          this.userId = userToken;
         } else {
           this.userId = OCC_USER_ID_ANONYMOUS;
         }
