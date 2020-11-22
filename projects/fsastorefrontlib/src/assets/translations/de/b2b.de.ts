@@ -1,7 +1,7 @@
 export const b2b = {
   b2b: {
-    selectProducts: '[DE] Select Products',
-    activeProducts: '[DE] Active Products',
-    notAssigned: '[DE] Not Assigned',
+    selectProducts: 'Produkte auswählen',
+    activeProducts: 'Aktive Produkte',
+    notAssigned: 'Nicht zugeordnet',
   },
 };

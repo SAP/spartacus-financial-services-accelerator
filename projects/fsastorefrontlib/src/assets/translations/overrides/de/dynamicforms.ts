@@ -6,7 +6,7 @@ export const dynamicforms = {
       trip_details_form: 'Reiseinformation',
       auto_details_form: 'Fahrzeuginformationen',
       life_details_form: 'Informationen zur Abdeckung',
-      savings_details_form: '[DE] Choose Cover',
+      savings_details_form: 'Wählen Sie Ihren Schutz',
       auto_claim_incident_info_form: 'Informationen zum Vorfall',
       auto_claim_incident_report_form: 'Vorfallsbericht',
       auto_claim_general_form: 'Allgemeine Informationen',

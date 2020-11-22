@@ -7,11 +7,11 @@ export const quote = {
     viewQuotes: 'Bisherige Anträge ansehen',
     getQuote: 'Angebot anfordern',
     moreInfo: 'Mehr Informationen',
-    notBoundQuoteDescription: '[DE] Your quote/application is not bound.',
+    notBoundQuoteDescription: 'Ihr Angebot / Antrag ist nicht bindend.',
     retrieveQuotes: 'Antrag fortsetzen',
     referredQuoteDescription:
       'Ihr Angebot wird weitergeleitet. Weitere Informationen erhalten Sie bei Ihrem Kundenbetreuer.',
-    boundQuoteDescription: '[DE] Your quote is already bound.',
+    boundQuoteDescription: 'Ihr Angebot ist bindend.',
     viewYourQuotes: 'Angebote ansehen',
     youHaveNoQuotes: 'Sie haben zur Zeit keine Angebote',
     noActiveQuotes: 'Sie haben zur Zeit keine aktiven Angebote',

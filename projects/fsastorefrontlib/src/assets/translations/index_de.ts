@@ -6,7 +6,7 @@ import { fscommon } from './de/common.de';
 import { configureProduct } from './de/configureProduct.de';
 import { forms } from './de/forms.de';
 import { orderConfirmation } from './de/orderConfirmation.de';
-import { common } from './overrides/de/miniCart';
+import { miniCart } from './overrides/de/miniCart';
 import { payment } from './overrides/de/payment';
 import { myAccount } from './overrides/de/myAccount';
 import { policy } from './de/policy.de';
@@ -14,8 +14,9 @@ import { premiumCalendar } from './de/premiumCalendar.de';
 import { quote } from './de/quote.de';
 import { quoteReview } from './de/quoteReview.de';
 import { userRequest } from './de/userRequest.de';
-import { user } from './de/user.de';
 import { dynamicforms } from './overrides/de/dynamicforms';
+import { common } from './overrides/de/common';
+import { user } from './overrides/de/user';
 
 export const fstranslationsDe: TranslationResources = {
   b2b,
@@ -25,7 +26,6 @@ export const fstranslationsDe: TranslationResources = {
   quote,
   policy,
   premiumCalendar,
-  user,
   userRequest,
   changeRequest,
   configureProduct,
@@ -34,7 +34,9 @@ export const fstranslationsDe: TranslationResources = {
 };
 
 export const fsOverridesDe: TranslationResources = {
+  user,
   payment,
+  miniCart,
   common,
   myAccount,
   dynamicforms,
