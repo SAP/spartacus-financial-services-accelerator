@@ -31,15 +31,6 @@ const routes: Routes = [
     path: null,
     canActivate: [AuthGuard, CmsPageGuard],
     data: {
-      cxRoute: 'orderHistory',
-      pageLabel: 'orders',
-    },
-    component: PageLayoutComponent,
-  },
-  {
-    path: null,
-    canActivate: [AuthGuard, CmsPageGuard],
-    data: {
       cxRoute: 'accountOverview',
       pageLabel: 'account-overview',
     },
@@ -104,6 +95,8 @@ const routes: Routes = [
     ClaimModule,
     PremiumCalendarModule,
     UserRequestStoreModule,
+    RouterModule,
+    RouterModule.forChild(routes),
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         UpdateProfileComponent: {
@@ -111,8 +104,6 @@ const routes: Routes = [
         },
       },
     }),
-    RouterModule,
-    RouterModule.forChild(routes),
   ],
 })
 export class MyAccountModule {}
