@@ -1,5 +1,4 @@
-import { Type } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule, UserService } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
@@ -65,49 +64,42 @@ describe('PotentialProductAssignmentsComponent', () => {
   let mockedProductAssignmentService: MockedProductAssignmentService;
   let mockedUserService: MockedUserService;
 
-  beforeEach(async(() => {
-    mockedProductAssignmentService = new MockedProductAssignmentService();
-    mockedUserService = new MockedUserService();
-    TestBed.configureTestingModule({
-      declarations: [PotentialProductAssignmentsComponent],
-      imports: [I18nTestingModule],
-      providers: [
-        {
-          provide: ActivatedRoute,
-          useClass: ActivatedRouteMock,
-        },
-        {
-          provide: ProductAssignmentService,
-          useValue: mockedProductAssignmentService,
-        },
-        {
-          provide: UserService,
-          useValue: mockedUserService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      mockedProductAssignmentService = new MockedProductAssignmentService();
+      mockedUserService = new MockedUserService();
+      TestBed.configureTestingModule({
+        declarations: [PotentialProductAssignmentsComponent],
+        imports: [I18nTestingModule],
+        providers: [
+          {
+            provide: ActivatedRoute,
+            useClass: ActivatedRouteMock,
+          },
+          {
+            provide: ProductAssignmentService,
+            useValue: mockedProductAssignmentService,
+          },
+          {
+            provide: UserService,
+            useValue: mockedUserService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PotentialProductAssignmentsComponent);
     component = fixture.componentInstance;
-    mockedProductAssignmentService = TestBed.get(
-      ProductAssignmentService as Type<ProductAssignmentService>
-    );
     spyOn(
       mockedProductAssignmentService,
       'createProductAssignment'
     ).and.callThrough();
-    mockedProductAssignmentService = TestBed.get(
-      ProductAssignmentService as Type<ProductAssignmentService>
-    );
     spyOn(
       mockedProductAssignmentService,
       'removeProductAssignment'
     ).and.callThrough();
-    mockedProductAssignmentService = TestBed.get(
-      ProductAssignmentService as Type<ProductAssignmentService>
-    );
     fixture.detectChanges();
   });
 

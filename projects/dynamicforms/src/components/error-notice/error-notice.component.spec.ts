@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -37,20 +37,22 @@ describe('ErrorNoticeComponent', () => {
   let el: DebugElement;
   let mockLanguageService: MockLanguageService;
 
-  beforeEach(async(() => {
-    mockLanguageService = new MockLanguageService();
+  beforeEach(
+    waitForAsync(() => {
+      mockLanguageService = new MockLanguageService();
 
-    TestBed.configureTestingModule({
-      declarations: [ErrorNoticeComponent],
-      imports: [ReactiveFormsModule, I18nTestingModule],
-      providers: [
-        {
-          provide: LanguageService,
-          useValue: mockLanguageService,
-        },
-      ],
-    }).compileComponents();
-  }));
+      TestBed.configureTestingModule({
+        declarations: [ErrorNoticeComponent],
+        imports: [ReactiveFormsModule, I18nTestingModule],
+        providers: [
+          {
+            provide: LanguageService,
+            useValue: mockLanguageService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ErrorNoticeComponent);

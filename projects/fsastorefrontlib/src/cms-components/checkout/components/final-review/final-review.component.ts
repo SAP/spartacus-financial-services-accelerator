@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   CheckoutPaymentService,
   PaymentDetails,
@@ -7,7 +6,7 @@ import {
 } from '@spartacus/core';
 import { Observable } from 'rxjs';
 import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
-import { FSCheckoutConfigService } from '../../../../core/checkout/services/checkout-config.service';
+import { filter, take } from 'rxjs/operators';
 
 @Component({
   selector: 'cx-fs-final-review',
@@ -20,21 +19,23 @@ export class FinalReviewComponent implements OnInit {
   constructor(
     protected checkoutService: FSCheckoutService,
     protected checkoutPaymentService: CheckoutPaymentService,
-    protected routingService: RoutingService,
-    protected checkoutConfigService: FSCheckoutConfigService,
-    protected activatedRoute: ActivatedRoute
+    protected routingService: RoutingService
   ) {}
 
   ngOnInit() {
     this.checkoutService.mockDeliveryMode();
-    this.paymentDetails$ = this.checkoutPaymentService.getPaymentDetails();
+    this.paymentDetails$ = this.checkoutPaymentService.getPaymentDetails().pipe(
+      filter(payment => !!payment),
+      take(1)
+    );
   }
 
   toggleTAndC(): void {
     this.tAndCToggler = !this.tAndCToggler;
   }
+
   placeOrder(): void {
-    this.checkoutService.placeOrder();
+    this.checkoutService.placeOrder(this.tAndCToggler);
     this.checkoutService.orderPlaced = true;
     this.routingService.go({ cxRoute: 'orderConfirmation' });
   }

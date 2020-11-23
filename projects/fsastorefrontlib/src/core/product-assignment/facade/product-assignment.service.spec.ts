@@ -1,9 +1,9 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import {
-  AuthService,
   OCC_CART_ID_CURRENT,
   OCC_USER_ID_CURRENT,
+  UserIdService,
 } from '@spartacus/core';
 import { of } from 'rxjs';
 import { Observable } from 'rxjs/internal/Observable';
@@ -54,15 +54,15 @@ const sortCode = 'name';
 const productAssignmentCode = 'testOne';
 const parentOrgUnit = 'TestParentOrg';
 
-class MockAuthService {
-  getOccUserId(): Observable<string> {
+class MockUserIdService {
+  getUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
   }
 }
 describe('ProductAssignmentServiceTest', () => {
   let service: ProductAssignmentService;
   let store: Store<StateWithProductAssignment>;
-  let mockAuthService: AuthService;
+  let userIdService: UserIdService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -83,15 +83,15 @@ describe('ProductAssignmentServiceTest', () => {
       ],
       providers: [
         {
-          provide: AuthService,
-          useClass: MockAuthService,
+          provide: UserIdService,
+          useClass: MockUserIdService,
         },
       ],
     });
 
     service = TestBed.inject(ProductAssignmentService);
     store = TestBed.inject(Store);
-    mockAuthService = TestBed.inject(AuthService);
+    userIdService = TestBed.inject(UserIdService);
     service.user = OCC_CART_ID_CURRENT;
     spyOn(store, 'dispatch').and.callThrough();
   });

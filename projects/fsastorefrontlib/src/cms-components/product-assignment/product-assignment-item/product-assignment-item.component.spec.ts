@@ -1,5 +1,5 @@
-import { Pipe, PipeTransform, Type } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Pipe, PipeTransform } from '@angular/core';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { I18nTestingModule } from '@spartacus/core';
 import { ProductAssignmentService } from './../../../core/product-assignment/facade/product-assignment.service';
 import { ProductAssignmentItemComponent } from './product-assignment-item.component';
@@ -31,19 +31,21 @@ describe('ProductAssignmentItemComponent', () => {
   let fixture: ComponentFixture<ProductAssignmentItemComponent>;
   let mockedProductAssignmentService: MockedProductAssignmentService;
 
-  beforeEach(async(() => {
-    mockedProductAssignmentService = new MockedProductAssignmentService();
-    TestBed.configureTestingModule({
-      declarations: [ProductAssignmentItemComponent, MockTranslatePipe],
-      imports: [I18nTestingModule],
-      providers: [
-        {
-          provide: ProductAssignmentService,
-          useValue: mockedProductAssignmentService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      mockedProductAssignmentService = new MockedProductAssignmentService();
+      TestBed.configureTestingModule({
+        declarations: [ProductAssignmentItemComponent, MockTranslatePipe],
+        imports: [I18nTestingModule],
+        providers: [
+          {
+            provide: ProductAssignmentService,
+            useValue: mockedProductAssignmentService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductAssignmentItemComponent);
@@ -54,9 +56,6 @@ describe('ProductAssignmentItemComponent', () => {
       mockedProductAssignmentService,
       'changeActiveStatus'
     ).and.callThrough();
-    mockedProductAssignmentService = TestBed.get(
-      ProductAssignmentService as Type<ProductAssignmentService>
-    );
     fixture.detectChanges();
   });
 

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { I18nTestingModule } from '@spartacus/core';
 import { Observable, of } from 'rxjs';
@@ -53,19 +53,21 @@ describe('MiniCartComponent', () => {
   let translationService: FSTranslationService;
   let cartService: FSCartService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [RouterTestingModule, I18nTestingModule],
-      declarations: [MiniCartComponent],
-      providers: [
-        { provide: FSCartService, useClass: MockCartService },
-        {
-          provide: FSTranslationService,
-          useClass: MockFSTranslationService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [RouterTestingModule, I18nTestingModule],
+        declarations: [MiniCartComponent],
+        providers: [
+          { provide: FSCartService, useClass: MockCartService },
+          {
+            provide: FSTranslationService,
+            useClass: MockFSTranslationService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(MiniCartComponent);

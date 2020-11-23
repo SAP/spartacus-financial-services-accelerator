@@ -3,7 +3,7 @@ import {
   HttpClientTestingModule,
   HttpTestingController,
 } from '@angular/common/http/testing';
-import { async, TestBed } from '@angular/core/testing';
+import { waitForAsync, TestBed } from '@angular/core/testing';
 import { OccEndpointsService } from '@spartacus/core';
 import { OccAgentAdapter } from './occ-agent.adapter';
 
@@ -46,34 +46,43 @@ describe('OccAgentAdapter', () => {
   });
 
   describe('getAgentsByCategory', () => {
-    it('get Agents By Category', async(() => {
-      adapter.getAgentsByCategory(category).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === agentsEndpoint && req.method === 'GET';
-      }, `GET method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(agentsEndpoint);
-    }));
+    it(
+      'get Agents By Category',
+      waitForAsync(() => {
+        adapter.getAgentsByCategory(category).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === agentsEndpoint && req.method === 'GET';
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(agentsEndpoint);
+      })
+    );
   });
 
   describe('getAgentByID', () => {
-    it('gets Agent By ID', async(() => {
-      adapter.getAgentByID(id).subscribe();
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === agentEndpoint && req.method === 'GET';
-      }, `GET url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(agentEndpoint, {
-        id,
-      });
-    }));
+    it(
+      'gets Agent By ID',
+      waitForAsync(() => {
+        adapter.getAgentByID(id).subscribe();
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === agentEndpoint && req.method === 'GET';
+        }, `GET url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(agentEndpoint, {
+          id,
+        });
+      })
+    );
   });
 
   describe('searchAgents', () => {
-    it('search Agents By Query String', async(() => {
-      adapter.getAgentsByQuery(searchQuery, pageNumber).subscribe(res => {});
-      httpMock.expectOne((req: HttpRequest<any>) => {
-        return req.url === agentsEndpoint && req.method === 'GET';
-      }, `GET method and url`);
-      expect(occEndpointService.getUrl).toHaveBeenCalledWith(agentsEndpoint);
-    }));
+    it(
+      'search Agents By Query String',
+      waitForAsync(() => {
+        adapter.getAgentsByQuery(searchQuery, pageNumber).subscribe(res => {});
+        httpMock.expectOne((req: HttpRequest<any>) => {
+          return req.url === agentsEndpoint && req.method === 'GET';
+        }, `GET method and url`);
+        expect(occEndpointService.getUrl).toHaveBeenCalledWith(agentsEndpoint);
+      })
+    );
   });
 });

@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform, Type } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
@@ -118,63 +118,65 @@ describe('FSCheckoutProgressComponent', () => {
   let cartService: FSCartService;
   let currentProductService: CurrentProductService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule, RouterTestingModule],
-      declarations: [FSCheckoutProgressComponent, MockUrlPipe],
-      providers: [
-        {
-          provide: CheckoutConfig,
-          useValue: mockCheckoutConfig,
-        },
-        {
-          provide: RoutingService,
-          useClass: MockRoutingService,
-        },
-        {
-          provide: RoutingConfigService,
-          useClass: MockRoutingConfigService,
-        },
-        {
-          provide: ActivatedRoute,
-          useClass: MockActivatedRoute,
-        },
-        {
-          provide: CategoryService,
-          useClass: MockCategoryService,
-        },
-        {
-          provide: FSCartService,
-          useClass: MockCartService,
-        },
-        {
-          provide: CurrentProductService,
-          useClass: MockCurrentProductService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule, RouterTestingModule],
+        declarations: [FSCheckoutProgressComponent, MockUrlPipe],
+        providers: [
+          {
+            provide: CheckoutConfig,
+            useValue: mockCheckoutConfig,
+          },
+          {
+            provide: RoutingService,
+            useClass: MockRoutingService,
+          },
+          {
+            provide: RoutingConfigService,
+            useClass: MockRoutingConfigService,
+          },
+          {
+            provide: ActivatedRoute,
+            useClass: MockActivatedRoute,
+          },
+          {
+            provide: CategoryService,
+            useClass: MockCategoryService,
+          },
+          {
+            provide: FSCartService,
+            useClass: MockCartService,
+          },
+          {
+            provide: CurrentProductService,
+            useClass: MockCurrentProductService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FSCheckoutProgressComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
 
-    routingService = TestBed.get(RoutingService as Type<RoutingService>);
+    routingService = TestBed.inject(RoutingService as Type<RoutingService>);
     spyOn(routingService, 'go').and.callThrough();
     spyOn(routingService, 'getRouterState').and.callThrough();
 
-    categoryService = TestBed.get(CategoryService as Type<CategoryService>);
+    categoryService = TestBed.inject(CategoryService as Type<CategoryService>);
     spyOn(categoryService, 'setActiveCategory').and.callThrough();
     spyOn(categoryService, 'getActiveCategory').and.callThrough();
 
-    routingConfigService = TestBed.get(
+    routingConfigService = TestBed.inject(
       RoutingConfigService as Type<RoutingConfigService>
     );
     spyOn(routingConfigService, 'getRouteConfig').and.callThrough();
 
-    cartService = TestBed.get(FSCartService as Type<FSCartService>);
-    currentProductService = TestBed.get(
+    cartService = TestBed.inject(FSCartService as Type<FSCartService>);
+    currentProductService = TestBed.inject(
       CurrentProductService as Type<CurrentProductService>
     );
 

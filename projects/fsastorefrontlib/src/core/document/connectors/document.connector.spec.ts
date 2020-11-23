@@ -26,10 +26,10 @@ describe('DocumentConnector', () => {
       providers: [{ provide: DocumentAdapter, useClass: MockDocumentAdapter }],
     });
 
-    documentConnector = TestBed.get(
+    documentConnector = TestBed.inject(
       DocumentConnector as Type<DocumentConnector>
     );
-    documentAdapter = TestBed.get(DocumentAdapter as Type<DocumentAdapter>);
+    documentAdapter = TestBed.inject(DocumentAdapter as Type<DocumentAdapter>);
   });
 
   it('should be created', () => {

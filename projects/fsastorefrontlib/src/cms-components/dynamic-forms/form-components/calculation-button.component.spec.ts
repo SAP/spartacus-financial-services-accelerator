@@ -1,5 +1,5 @@
 import { DebugElement } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import {
   FormControl,
   FormGroup,
@@ -83,35 +83,37 @@ describe('CalculationButtonComponent', () => {
   let formDataService: FormDataService;
   let formService: FormService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [CalculationButtonComponent],
-      imports: [ReactiveFormsModule],
-      providers: [
-        { provide: LanguageService, useClass: MockLanguageService },
-        {
-          provide: DynamicFormsConfig,
-          useValue: mockDynamicFormsConfig,
-        },
-        {
-          provide: CurrentProductService,
-          useClass: MockCurrentProductService,
-        },
-        {
-          provide: FormDataStorageService,
-          useClass: MockFormDataStorageService,
-        },
-        {
-          provide: FormDataService,
-          useClass: MockFormDataService,
-        },
-        { provide: FormService, useClass: MockFormService },
-      ],
-    }).compileComponents();
-    currentProductService = TestBed.inject(CurrentProductService);
-    formDataStorageService = TestBed.inject(FormDataStorageService);
-    formDataService = TestBed.inject(FormDataService);
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [CalculationButtonComponent],
+        imports: [ReactiveFormsModule],
+        providers: [
+          { provide: LanguageService, useClass: MockLanguageService },
+          {
+            provide: DynamicFormsConfig,
+            useValue: mockDynamicFormsConfig,
+          },
+          {
+            provide: CurrentProductService,
+            useClass: MockCurrentProductService,
+          },
+          {
+            provide: FormDataStorageService,
+            useClass: MockFormDataStorageService,
+          },
+          {
+            provide: FormDataService,
+            useClass: MockFormDataService,
+          },
+          { provide: FormService, useClass: MockFormService },
+        ],
+      }).compileComponents();
+      currentProductService = TestBed.inject(CurrentProductService);
+      formDataStorageService = TestBed.inject(FormDataStorageService);
+      formDataService = TestBed.inject(FormDataService);
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CalculationButtonComponent);

@@ -1,5 +1,5 @@
 import { Component, Input, Pipe, PipeTransform, Type } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { I18nTestingModule } from '@spartacus/core';
@@ -72,22 +72,24 @@ describe('AgentSearchListComponent', () => {
   let mockSearchService: AgentSearchService;
   let activatedRoute: ActivatedRouteMock;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule, RouterTestingModule],
-      providers: [
-        { provide: ActivatedRoute, useClass: ActivatedRouteMock },
-        { provide: AgentSearchService, useValue: mockAgentSearchService },
-      ],
-      declarations: [
-        AgentSearchListComponent,
-        MockPagintionComponent,
-        MockMediaComponent,
-        MockUrlPipe,
-        MockMapComponent,
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule, RouterTestingModule],
+        providers: [
+          { provide: ActivatedRoute, useClass: ActivatedRouteMock },
+          { provide: AgentSearchService, useValue: mockAgentSearchService },
+        ],
+        declarations: [
+          AgentSearchListComponent,
+          MockPagintionComponent,
+          MockMediaComponent,
+          MockUrlPipe,
+          MockMapComponent,
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AgentSearchListComponent);

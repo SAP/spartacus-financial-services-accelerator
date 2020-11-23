@@ -65,7 +65,7 @@ export class SelectIdentificationTypeComponent implements OnInit, OnDestroy {
           filter(identificationType => identificationType),
           take(1),
           tap(() => {
-            this.checkoutService.placeOrder();
+            this.checkoutService.placeOrder(true);
             this.checkoutService.orderPlaced = true;
             this.routingService.go({ cxRoute: 'orderConfirmation' });
           })

@@ -1,5 +1,5 @@
 import { DebugElement, Directive, Input } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 import { CmsComponent, ContentSlotComponentData } from '@spartacus/core';
@@ -35,21 +35,23 @@ describe('ComparisonTableTabComponent', () => {
   let fixture: ComponentFixture<ComparisonTableTabComponent>;
   let el: DebugElement;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [NgbTabsetModule],
-      declarations: [
-        ComparisonTableTabComponent,
-        MockComponentWrapperDirective,
-      ],
-      providers: [
-        {
-          provide: CmsComponentData,
-          useValue: mockCmsComponentData,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [NgbTabsetModule],
+        declarations: [
+          ComparisonTableTabComponent,
+          MockComponentWrapperDirective,
+        ],
+        providers: [
+          {
+            provide: CmsComponentData,
+            useValue: mockCmsComponentData,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ComparisonTableTabComponent);

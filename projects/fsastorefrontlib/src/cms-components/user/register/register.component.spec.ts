@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import {
@@ -15,7 +15,6 @@ import {
   RoutingService,
   Title,
   UserService,
-  UserToken,
 } from '@spartacus/core';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { FSRegisterComponent } from './register.component';
@@ -66,8 +65,8 @@ class MockGlobalMessageService {
   }
 }
 class MockAuthService {
-  getUserToken(): Observable<UserToken> {
-    return of({ access_token: 'test' } as UserToken);
+  isUserLoggedIn(): Observable<boolean> {
+    return of(true);
   }
 }
 class MockAuthRedirectService {
@@ -112,44 +111,46 @@ const mockAnonymousConsentsConfig: AnonymousConsentsConfig = {
 describe('FSRegisterComponent', () => {
   let component: FSRegisterComponent;
   let fixture: ComponentFixture<FSRegisterComponent>;
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, RouterTestingModule, I18nTestingModule],
-      declarations: [FSRegisterComponent, MockUrlPipe],
-      providers: [
-        {
-          provide: AuthRedirectService,
-          useClass: MockAuthRedirectService,
-        },
-        { provide: UserService, useClass: MockUserService },
-        { provide: AuthService, useClass: MockAuthService },
-        {
-          provide: GlobalMessageService,
-          useClass: MockGlobalMessageService,
-        },
-        {
-          provide: RoutingService,
-          useClass: MockRoutingService,
-        },
-        {
-          provide: FeatureConfigService,
-          useClass: MockFeatureConfigService,
-        },
-        {
-          provide: AnonymousConsentsService,
-          useClass: MockAnonymousConsentsService,
-        },
-        {
-          provide: AnonymousConsentsConfig,
-          useValue: mockAnonymousConsentsConfig,
-        },
-        {
-          provide: DateConfig,
-          useValue: MockDateConfig,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [ReactiveFormsModule, RouterTestingModule, I18nTestingModule],
+        declarations: [FSRegisterComponent, MockUrlPipe],
+        providers: [
+          {
+            provide: AuthRedirectService,
+            useClass: MockAuthRedirectService,
+          },
+          { provide: UserService, useClass: MockUserService },
+          { provide: AuthService, useClass: MockAuthService },
+          {
+            provide: GlobalMessageService,
+            useClass: MockGlobalMessageService,
+          },
+          {
+            provide: RoutingService,
+            useClass: MockRoutingService,
+          },
+          {
+            provide: FeatureConfigService,
+            useClass: MockFeatureConfigService,
+          },
+          {
+            provide: AnonymousConsentsService,
+            useClass: MockAnonymousConsentsService,
+          },
+          {
+            provide: AnonymousConsentsConfig,
+            useValue: mockAnonymousConsentsConfig,
+          },
+          {
+            provide: DateConfig,
+            useValue: MockDateConfig,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
   beforeEach(() => {
     fixture = TestBed.createComponent(FSRegisterComponent);
     component = fixture.componentInstance;

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { I18nTestingModule } from '@spartacus/core';
 import { of } from 'rxjs';
@@ -65,34 +65,38 @@ describe('FormComponent', () => {
   let fixture: ComponentFixture<FormComponent>;
   let mockFormDataService: MockFormDataService;
 
-  beforeEach(async(() => {
-    mockFormDataService = new MockFormDataService();
-    TestBed.configureTestingModule({
-      imports: [ReactiveFormsModule, I18nTestingModule],
-      declarations: [FormComponent, MockDynamicFormComponent],
-      providers: [
-        {
-          provide: FormDataService,
-          useValue: mockFormDataService,
-        },
-        {
-          provide: FormDataStorageService,
-          useClass: MockFormDataStorageService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      mockFormDataService = new MockFormDataService();
+      TestBed.configureTestingModule({
+        imports: [ReactiveFormsModule, I18nTestingModule],
+        declarations: [FormComponent, MockDynamicFormComponent],
+        providers: [
+          {
+            provide: FormDataService,
+            useValue: mockFormDataService,
+          },
+          {
+            provide: FormDataStorageService,
+            useClass: MockFormDataStorageService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
-  beforeEach(async(() => {
-    fixture = TestBed.createComponent(FormComponent);
-    component = fixture.componentInstance;
-    component.formCategoryCode = categoryCode;
-    component.formId = formId;
-    component.formConfig = formConfig;
-    component.applicationId = applicationId;
-    component.formData = of(formData);
-    fixture.detectChanges();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      fixture = TestBed.createComponent(FormComponent);
+      component = fixture.componentInstance;
+      component.formCategoryCode = categoryCode;
+      component.formId = formId;
+      component.formConfig = formConfig;
+      component.applicationId = applicationId;
+      component.formData = of(formData);
+      fixture.detectChanges();
+    })
+  );
 
   it('should create', () => {
     expect(component).toBeTruthy();

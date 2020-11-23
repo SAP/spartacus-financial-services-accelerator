@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { I18nTestingModule, OccConfig, RoutingService } from '@spartacus/core';
 import { ModalService, SpinnerModule } from '@spartacus/storefront';
@@ -12,6 +12,7 @@ import { AccordionModule } from './../../../../shared/accordion/accordion.module
 import { BindQuoteDialogComponent } from './../bind-quote-dialog/bind-quote-dialog.component';
 import { QuoteReviewComponent } from './quote-review.component';
 import { CategoryService } from '../../../../core/checkout/services/category/category.service';
+import { FSCheckoutService } from '../../../../core/checkout/facade/checkout.service';
 const formDataContent = '{"content":"formContent"}';
 
 class MockActivatedRoute {
@@ -32,7 +33,9 @@ const MockOccModuleConfig: OccConfig = {
     },
   },
 };
-
+class MockFSCheckoutService {
+  filterRemoveableEntries() {}
+}
 class MockCategoryService {
   setActiveCategory(category: string) {}
 
@@ -77,46 +80,52 @@ describe('Quote Review Component', () => {
   let routingService: RoutingService;
   let translationService: FSTranslationService;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [SpinnerModule, AccordionModule, I18nTestingModule],
-      declarations: [QuoteReviewComponent],
-      providers: [
-        {
-          provide: RoutingService,
-          useClass: MockRoutingService,
-        },
-        {
-          provide: ActivatedRoute,
-          useValue: MockActivatedRoute,
-        },
-        {
-          provide: FSCheckoutConfigService,
-          useClass: FSCheckoutConfigServiceStub,
-        },
-        {
-          provide: OccConfig,
-          useValue: MockOccModuleConfig,
-        },
-        {
-          provide: FSCartService,
-          useClass: FSCartServiceStub,
-        },
-        {
-          provide: ModalService,
-          useValue: modalService,
-        },
-        {
-          provide: FSTranslationService,
-          useClass: MockFSTranslationService,
-        },
-        {
-          provide: CategoryService,
-          useClass: MockCategoryService,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [SpinnerModule, AccordionModule, I18nTestingModule],
+        declarations: [QuoteReviewComponent],
+        providers: [
+          {
+            provide: RoutingService,
+            useClass: MockRoutingService,
+          },
+          {
+            provide: ActivatedRoute,
+            useValue: MockActivatedRoute,
+          },
+          {
+            provide: FSCheckoutConfigService,
+            useClass: FSCheckoutConfigServiceStub,
+          },
+          {
+            provide: OccConfig,
+            useValue: MockOccModuleConfig,
+          },
+          {
+            provide: FSCartService,
+            useClass: FSCartServiceStub,
+          },
+          {
+            provide: ModalService,
+            useValue: modalService,
+          },
+          {
+            provide: FSTranslationService,
+            useClass: MockFSTranslationService,
+          },
+          {
+            provide: CategoryService,
+            useClass: MockCategoryService,
+          },
+          {
+            provide: FSCheckoutService,
+            useClass: MockFSCheckoutService,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(QuoteReviewComponent);

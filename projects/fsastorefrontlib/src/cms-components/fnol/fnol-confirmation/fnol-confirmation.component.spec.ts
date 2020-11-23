@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { DomSanitizer } from '@angular/platform-browser';
 import { I18nTestingModule } from '@spartacus/core';
 import { ClaimStatus } from '../../../occ/occ-models/occ.models';
@@ -32,23 +32,25 @@ describe('FNOLConfirmationComponent', () => {
   let fixture: ComponentFixture<FNOLConfirmationComponent>;
   let mockSanitizer: MockDomSanitizer;
 
-  beforeEach(async(() => {
-    mockSanitizer = new MockDomSanitizer();
-    TestBed.configureTestingModule({
-      imports: [I18nTestingModule],
-      declarations: [FNOLConfirmationComponent],
-      providers: [
-        {
-          provide: ClaimService,
-          useClass: MockClaimService,
-        },
-        {
-          provide: DomSanitizer,
-          useValue: mockSanitizer,
-        },
-      ],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      mockSanitizer = new MockDomSanitizer();
+      TestBed.configureTestingModule({
+        imports: [I18nTestingModule],
+        declarations: [FNOLConfirmationComponent],
+        providers: [
+          {
+            provide: ClaimService,
+            useClass: MockClaimService,
+          },
+          {
+            provide: DomSanitizer,
+            useValue: mockSanitizer,
+          },
+        ],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(FNOLConfirmationComponent);

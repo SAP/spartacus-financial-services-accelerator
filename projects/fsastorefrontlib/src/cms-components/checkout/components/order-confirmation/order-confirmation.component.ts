@@ -52,4 +52,9 @@ export class OrderConfirmationComponent implements OnInit, OnDestroy {
       translationKey
     );
   }
+
+  checkIfRemoveableEntriesExists(order: Order) {
+    const filteredEntries = this.checkoutService.filterRemoveableEntries(order);
+    return filteredEntries.length > 0;
+  }
 }

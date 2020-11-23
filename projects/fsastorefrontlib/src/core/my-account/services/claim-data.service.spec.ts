@@ -1,29 +1,26 @@
 import { TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
-import { AuthService, OCC_USER_ID_ANONYMOUS, UserToken } from '@spartacus/core';
-import { Observable, ReplaySubject } from 'rxjs';
+import {
+  OCC_USER_ID_ANONYMOUS,
+  OCC_USER_ID_CURRENT,
+  UserIdService,
+} from '@spartacus/core';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Claim } from '../../../occ/occ-models';
 import * as fromAction from '../store/actions';
 import { StateWithMyAccount } from '../store/my-account-state';
 import * as fromReducers from '../store/reducers';
 import { ClaimDataService } from './claim-data.service';
 
-const userToken$ = new ReplaySubject<UserToken | any>();
-
-class AuthServiceStub {
-  getUserToken(): Observable<UserToken> {
-    return userToken$.asObservable();
+const userId: Observable<string> = new BehaviorSubject<string>(
+  OCC_USER_ID_ANONYMOUS
+);
+class MockUserIdService {
+  getUserId(): Observable<string> {
+    return userId;
   }
 }
 
-const testUserToken: UserToken = {
-  access_token: 'access_token',
-  userId: 'userId',
-  refresh_token: 'refresh_token',
-  token_type: 'token_type',
-  expires_in: 1,
-  scope: ['scope'],
-};
 const testClaim: Claim = {
   claimNumber: 'CL00001',
 };
@@ -41,8 +38,8 @@ describe('ClaimDataService', () => {
       providers: [
         ClaimDataService,
         {
-          provide: AuthService,
-          useClass: AuthServiceStub,
+          provide: UserIdService,
+          useClass: MockUserIdService,
         },
       ],
     });
@@ -52,12 +49,11 @@ describe('ClaimDataService', () => {
 
   describe('userId', () => {
     it('should return userId when user logged in', () => {
-      userToken$.next(testUserToken);
-      expect(service.userId).toEqual(testUserToken.userId);
+      (userId as BehaviorSubject<string>).next(OCC_USER_ID_CURRENT);
+      expect(service.userId).toEqual(OCC_USER_ID_CURRENT);
     });
-
-    it('should return anonymous if user is not logged in', () => {
-      userToken$.next({});
+    it('should return userId when user not logged in', () => {
+      (userId as BehaviorSubject<string>).next(OCC_USER_ID_ANONYMOUS);
       expect(service.userId).toEqual(OCC_USER_ID_ANONYMOUS);
     });
   });

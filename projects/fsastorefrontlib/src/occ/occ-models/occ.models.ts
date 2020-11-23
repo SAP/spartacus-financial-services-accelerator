@@ -57,6 +57,7 @@ export interface B2BAdministrator {
 
 export interface FSOrderEntry extends OrderEntry {
   configurationInfos?: any[];
+  removeable?: boolean;
 }
 export interface FSCart extends Cart {
   insuranceQuote?: InsuranceQuote;
