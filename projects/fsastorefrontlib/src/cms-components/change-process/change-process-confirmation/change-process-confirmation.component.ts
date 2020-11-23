@@ -20,8 +20,6 @@ export class ChangeProcessConfirmationComponent implements OnInit {
   }
 
   getImagelink() {
-    return this.domSanitizer.bypassSecurityTrustUrl(
-      genericIcons.documentNotice
-    );
+    return this.domSanitizer.bypassSecurityTrustUrl(genericIcons.document);
   }
 }

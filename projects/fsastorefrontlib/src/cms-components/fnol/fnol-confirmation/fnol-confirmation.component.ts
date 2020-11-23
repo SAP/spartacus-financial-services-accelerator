@@ -19,8 +19,6 @@ export class FNOLConfirmationComponent implements OnInit {
     this.claim$ = this.claimService.getCurrentClaim();
   }
   getImagelink() {
-    return this.domSanitizer.bypassSecurityTrustUrl(
-      genericIcons.documentNotice
-    );
+    return this.domSanitizer.bypassSecurityTrustUrl(genericIcons.document);
   }
 }
