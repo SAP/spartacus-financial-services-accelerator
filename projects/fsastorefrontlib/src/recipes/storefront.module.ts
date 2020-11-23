@@ -4,7 +4,6 @@ import { translationChunksConfig, translations } from '@spartacus/assets';
 import { ConfigModule, provideConfig } from '@spartacus/core';
 import {
   B2cStorefrontModule,
-  defaultCmsContentProviders,
   PageComponentModule,
   StorefrontConfig,
 } from '@spartacus/storefront';
@@ -91,7 +90,6 @@ import {
       },
     }),
   ],
-  providers: [...defaultCmsContentProviders],
   exports: [B2cStorefrontModule, CmsLibModule],
   declarations: [],
 })
