@@ -1,5 +1,9 @@
 import { Accordions } from './accordions';
-import { waitForPage, waitForFormDefinition } from '../generalHelpers';
+import {
+  waitForPage,
+  waitForFormDefinition,
+  waitForCMSComponent,
+} from '../generalHelpers';
 
 export function checkProgressBarInsurance() {
   cy.get('p.label').should('have.length', 7).eq(0).contains('Choose a Cover');
@@ -37,6 +41,10 @@ export function bindQuotePopup() {
 
 export function clickContinueButton() {
   cy.get('.primary-button').should('contain.text', 'Continue').click();
+}
+
+export function clickBackButton() {
+  cy.get('.action-button').should('contain.text', 'Back').click();
 }
 
 export function checkBackAndContinueButtons() {
@@ -218,4 +226,33 @@ export function waitForPersonalDetailsForm() {
     'formDefinition'
   );
   cy.wait(`@${formDefinition}`).its('status').should('eq', 200);
+}
+
+export function waitForChangeMileage() {
+  const changeCarDetails = waitForCMSComponent(
+    'ChangeCarDetailsFormComponent',
+    'changeCarDetails'
+  );
+  cy.wait(`@${changeCarDetails}`).its('status').should('eq', 200);
+}
+
+export function waitForSimulation() {
+  const changeSimulation = waitForPage(
+    'changeSimulationPage',
+    'changeSimulation'
+  );
+  cy.wait(`@${changeSimulation}`).its('status').should('eq', 200);
+}
+
+export function waitForChangeConfirmation() {
+  const changeConfirmation = waitForPage(
+    '%2FchangeRequestConfirmationPage',
+    'changeConfirmation'
+  );
+  cy.wait(`@${changeConfirmation}`).its('status').should('eq', 200);
+}
+
+export function waitForPolicyDetails() {
+  const policyDetails = waitForPage('policy-details', 'policyDetails');
+  cy.wait(`@${policyDetails}`).its('status').should('eq', 200);
 }

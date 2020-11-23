@@ -6,9 +6,8 @@ import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import { selectPaymentMethodInvoice } from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import * as changeRequest from '../../../helpers/changeRequest';
-import * as inbox from '../../../helpers/my-account/inbox';
 
-context('Auto Checkout', () => {
+context('Auto Silver Checkout', () => {
   before(() => {
     cy.visit('http://10.27.241.80/financial/en/EUR/');
   });
@@ -21,7 +20,7 @@ context('Auto Checkout', () => {
 
   it('Should complete first auto step with additional driver', () => {
     checkout.startInsuranceCheckout('Auto');
-    auto.populateAutoInformation();
+    auto.populateAutoMonthlyAudi();
     auto.populateMainDriverInfo();
     cy.get('[name=noOfDrivers]').select('1');
     auto.populateAdditionalDriverInfo();
@@ -29,10 +28,10 @@ context('Auto Checkout', () => {
   });
 
   it('Should check comparison table and select main product', () => {
-    autoIntegration.checkAutoComparisonTable();
+    autoIntegration.checkAutoComparisonTableAudi();
     autoIntegration.selectAutoSilver();
     autoIntegration.checkAutoSilverMiniCart();
-    auto.checkOptionalProducts();
+    auto.checkOptionalProductsSilver();
     checkout.clickContinueButton();
   });
 
@@ -61,20 +60,21 @@ context('Auto Checkout', () => {
     selectPaymentMethodInvoice();
     checkout.clickContinueButton();
     checkout.placeOrderOnFinalReview();
-    cy.wait(18000);
+    cy.wait(20000);
     checkout.checkOrderConfirmation();
   });
 
   it('Should check my policies and policy details page', () => {
-    cy.wait(25000);
+    cy.wait(30000);
     myPolicies.checkMyPoliciesPage();
-    myPolicies.checkAutoPolicy();
+    autoIntegration.checkReplicatedSilverPolicy();
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
     checkout.checkAccordions('policyDetails');
   });
 
   it('Should complete change mileage checkout', () => {
     changeRequest.startChangeMileage();
+    checkout.waitForChangeMileage();
     //check change car details - first step
     changeRequest.checkChangeMileageSteps();
     changeRequest.enterNewMileage();
@@ -84,50 +84,5 @@ context('Auto Checkout', () => {
     changeRequest.checkChangedPolicyPremium();
     cy.get('.primary-button').should('contain', 'Submit').click();
     changeRequest.checkChangeRequestConfirmation();
-  });
-
-  it('Should complete change coverage checkout', () => {
-    myPolicies.checkMyPoliciesPage();
-    myPolicies.checkAutoPolicy();
-    changeRequest.startChangeCoverage();
-    //check change coverage - first step
-    changeRequest.checkChangeCoverageSteps();
-    changeRequest.checkOptionalExtras();
-    //check continue button is disabled if coverage is not added
-    cy.get('.primary-button').contains('Continue').should('be.disabled');
-    changeRequest.addRoadsideAssistance();
-    checkout.clickContinueButton();
-    //check change preview - second step
-    changeRequest.checkChangeCoverageSteps();
-    changeRequest.checkChangedPolicyPremium();
-    cy.get('.primary-button').should('contain', 'Submit').click();
-    changeRequest.checkChangeRequestConfirmation();
-  });
-
-  it('Should cancel change policy request', () => {
-    myPolicies.checkMyPoliciesPage();
-    myPolicies.checkAutoChangedPolicy();
-    changeRequest.startChangeMileage();
-    //check change car details - first step
-    changeRequest.checkChangeMileageSteps();
-    cy.get('[name="vehicleAnnualMileage"]').type(80000);
-    checkout.clickContinueButton();
-    //check change preview - second step
-    changeRequest.checkChangeMileageSteps();
-    cy.get('.action-button').should('contain', 'Cancel').click();
-    //check user is redirected to policy details page
-    cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
-    checkout.checkAccordions('policyDetails');
-  });
-
-  it('Should check inbox messages for change request', () => {
-    cy.selectOptionFromDropdown({
-      menuOption: 'My Account',
-      dropdownItem: 'Inbox',
-    });
-    inbox.checkInboxComponets();
-    inbox.checkGeneralTab();
-    inbox.checkInboxHeader();
-    changeRequest.checkInboxMessages();
   });
 });

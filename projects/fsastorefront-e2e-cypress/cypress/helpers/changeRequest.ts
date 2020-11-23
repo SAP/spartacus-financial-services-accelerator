@@ -26,6 +26,7 @@ export function enterNewMileage() {
   cy.get('cx-fs-cms-form-submit')
     .should('be.visible')
     .within(() => {
+      //Bug FSA-5471
       cy.get('h3').contains('Auto Information');
       cy.get('[name="vehicleAnnualMileage"]').type(50000);
     });

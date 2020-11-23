@@ -1,52 +1,41 @@
 import { registrationUser } from '../../../sample-data/users';
 import * as register from '../../../helpers/register';
-import * as fnol from '../../../helpers/fnolCheckout';
 import * as auto from '../../../helpers/checkout/insurance/auto';
+import * as autoIntegration from '../../../helpers/checkout/insurance/autoIntegration';
 import * as checkout from '../../../helpers/checkout/checkoutSteps';
-import * as payment from '../../../helpers/checkout/insurance/payment';
+import { selectPaymentMethodInvoice } from '../../../helpers/checkout/insurance/payment';
+import * as myPolicies from '../../../helpers/my-account/policies';
+import * as fnol from '../../../helpers/fnolCheckout';
 import {
   checkMyPoliciesPage,
   updatePolicyEffectiveAndStartDate,
 } from '../../../helpers/my-account/policies';
-import {
-  waitForPage,
-  waitForCreateAsset,
-} from '../../../helpers/generalHelpers';
 
-context('FNOL for sample data user', () => {
+context('Auto Silver Checkout', () => {
   before(() => {
-    cy.visit('/');
+    cy.visit('http://10.27.241.80/financial/en/EUR/');
   });
 
-  it('Should check anonymous user cannot access claims', () => {
-    cy.get('.Section4 cx-banner').eq(1).click();
-    cy.get('.heading-headline').should('have.text', 'Login');
-  });
-
-  it('Should check on policies page for new user', () => {
-    cy.visit('/login');
+  it('Should register a new user', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
-    fnol.startClaimFromHomepage();
-    cy.get('.heading-headline').should('have.text', 'Make a Claim Online');
-    cy.get('.notice.py-4').contains('You have no valid policies!');
+    checkout.waitForHomepage();
   });
 
-  it('Should complete first step auto checkout', () => {
+  it('Should complete first auto step without additional drivers', () => {
     checkout.startInsuranceCheckout('Auto');
-    auto.populateAutoMonthlyAudi();
+    auto.populateAutoAnnuallyBMW();
     auto.populateMainDriverInfo();
     cy.get('[name=noOfDrivers]').select('0');
     checkout.clickContinueButton();
   });
 
-  it('Should continue in add options and quote review pages', () => {
-    const addToCart = waitForCreateAsset('carts', 'addToCart');
-    auto.checkAutoComparisonTable();
-    auto.selectAutoBronze();
-    const personalDetails = waitForPage('personal-details', 'personalDetails');
+  it('Should check comparison table and select Gold Product', () => {
+    autoIntegration.checkAutoComparisonTableGolf();
+    autoIntegration.selectAutoGold();
+    autoIntegration.checkAutoGoldMiniCart();
+    auto.checkOptionalProductsGold();
     checkout.clickContinueButton();
-    cy.wait(`@${personalDetails}`).its('status').should('eq', 200);
   });
 
   it('Should populate personal details page', () => {
@@ -54,56 +43,42 @@ context('FNOL for sample data user', () => {
     auto.populatePersonalDetails();
     auto.populateVehicleDetails();
     auto.populateMainDriverData();
-    const quoteReview = waitForPage('quote-review', 'quoteReview');
+    autoIntegration.checkAutoGoldMiniCart();
     checkout.clickContinueButton();
-    cy.wait(`@${quoteReview}`).its('status').should('eq', 200);
   });
 
-  it('Should bind quote', () => {
+  it('Should bound a quote', () => {
     checkout.checkCheckoutStep('Your Auto Insurance', '7');
     checkout.checkProgressBarInsurance();
+    autoIntegration.checkAutoGoldMiniCart();
     checkout.checkAccordions('quoteReviewWithoutOptional');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
+    cy.wait(20000);
     checkout.clickContinueButton();
   });
 
-  it('Select default payment details', () => {
-    payment.selectPaymentMethodInvoice();
+  it('Select default payment details and place an order', () => {
+    selectPaymentMethodInvoice();
     checkout.clickContinueButton();
-  });
-
-  it('Place order on final review page', () => {
     checkout.placeOrderOnFinalReview();
-  });
-
-  it('Check order confirmation', () => {
+    cy.wait(20000);
     checkout.checkOrderConfirmation();
   });
 
-  it('Should update policy details', () => {
-    checkMyPoliciesPage();
-    updatePolicyEffectiveAndStartDate();
+  it('Should check my policies and policy details page', () => {
+    cy.wait(30000);
+    myPolicies.checkMyPoliciesPage();
+    autoIntegration.checkReplicatedGoldPolicyAndStartFnol();
   });
 
   it('Should check and populate Incident Information page', () => {
+    autoIntegration.waitForIncidentInfoForm();
     fnol.checkFNOLCheckoutPage();
     fnol.checkFNOLSteps();
     fnol.populateIncidentInformationStep();
     checkout.clickContinueButton();
-    fnol.waitForIncidentReportStep();
-  });
-
-  it('Should check claim is created', () => {
-    fnol.checkAndResumeSpecificClaim();
-  });
-
-  it('Should check user is navigated to first FNOL page', () => {
-    fnol.checkFNOLCheckoutPage();
-    fnol.checkFNOLSteps();
-    fnol.updateIncidentType();
-    checkout.clickContinueButton();
-    fnol.checkFNOLCheckoutPage();
+    autoIntegration.waitForIncidentReportForm();
   });
 
   it('Should check and populate Incident Report page', () => {
@@ -112,12 +87,16 @@ context('FNOL for sample data user', () => {
       'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
     );
     cy.get('.custom-file-input').attachFile(filePath);
-    cy.get('.btn-primary').click();
+    cy.get('.btn-primary')
+      .should('contain.text', 'Upload')
+      .eq(0)
+      .click({ force: true });
     cy.wait(2000);
     checkout.checkBackAndContinueButtons();
-    cy.get('.primary-button').should('be.visible').click();
+    cy.get('.primary-button').should('contain.text', 'Continue').click();
     cy.wait(500);
     checkout.clickContinueButton();
+    autoIntegration.waitForGeneralInfoForm();
   });
 
   it('Should check and populate General Information page', () => {
@@ -133,7 +112,7 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should check information in accordions on summary page', () => {
-    fnol.checkIncidentInformationAccordion();
+    autoIntegration.checkIncidentInformationAccordion();
     fnol.checkIncidentReportAccordion();
     fnol.checkGeneralInformationAccordion();
     checkout.clickContinueButton();
@@ -141,22 +120,5 @@ context('FNOL for sample data user', () => {
 
   it('Should check claim confirmation page', () => {
     fnol.checkConfirmationPage();
-  });
-
-  it('Should start a claim checkout from homepage', () => {
-    cy.get('.SiteLogo').click();
-    fnol.startClaimFromHomepage();
-    fnol.checkFnolEntryPage();
-    fnol.selectPolicyOnEntryPage();
-    fnol.clickContinueAndGetNewClaimID();
-    fnol.checkFNOLSteps();
-    fnol.populateIncidentInformationSecondClaim();
-    checkout.clickContinueButton();
-    fnol.checkFNOLCheckoutPage();
-    fnol.checkFNOLSteps();
-  });
-
-  it('Should delete started claim', () => {
-    fnol.deleteClaimFromDialog();
   });
 });
