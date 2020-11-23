@@ -10,12 +10,12 @@ import {
 } from '@spartacus/core';
 import {
   MediaModule,
-  StoreFinderModule,
   ListNavigationModule,
   IconModule,
   PageLayoutComponent,
   CmsPageGuard,
 } from '@spartacus/storefront';
+import { StoreFinderModule } from '@spartacus/misc/storefinder/';
 import { AgentRootComponent } from './agent-root/agent-root.component';
 import { FindAgentNavigationComponent } from './find-agent-navigation/find-agent-navigation.component';
 import { AccordionModule } from '../../shared/accordion/accordion.module';

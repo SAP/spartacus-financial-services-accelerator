@@ -22,7 +22,7 @@ export class FSCartService extends ActiveCartService {
     protected userIdService: UserIdService,
     protected multiCartService: MultiCartService
   ) {
-    super(store, userIdService, multiCartService);
+    super(store, multiCartService, userIdService);
   }
 
   createCartForProduct(

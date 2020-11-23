@@ -20,7 +20,7 @@ export class FSCheckoutService extends CheckoutService {
     protected userIdService: UserIdService,
     protected checkoutDeliveryService: CheckoutDeliveryService
   ) {
-    super(fsStore, userIdService, activeCartService);
+    super(fsStore, activeCartService, userIdService);
   }
 
   orderPlaced: boolean;

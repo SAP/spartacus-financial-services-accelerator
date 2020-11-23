@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RoutingService } from '@spartacus/core';
-import { StoreFinderSearchComponent } from '@spartacus/storefront';
+import { StoreFinderSearchComponent } from '@spartacus/misc/storefinder/components';
 
 @Component({
   selector: 'cx-fs-agent-search-box',
