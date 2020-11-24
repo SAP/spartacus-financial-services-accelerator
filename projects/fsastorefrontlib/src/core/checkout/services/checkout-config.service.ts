@@ -60,9 +60,8 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
 
   triggerPreviousNextStepSet(activatedRoute: ActivatedRoute) {
     let activeParamType: string;
-    const previousUrl = this.checkoutStepService.getPreviousCheckoutStepUrl(
-      activatedRoute
-    );
+    const previousUrl = this.getPreviousCheckoutStepUrl(activatedRoute);
+
     if (previousUrl) {
       const paramType = previousUrl.substring(previousUrl.lastIndexOf(':') + 1);
       this.cartService
@@ -120,8 +119,8 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
     activatedRoute: ActivatedRoute | CmsActivatedRouteSnapshot
   ) {
     return activatedRoute &&
-      activatedRoute.routeConfig &&
-      activatedRoute.routeConfig.path
+    activatedRoute.routeConfig &&
+    activatedRoute.routeConfig.path
       ? `/${activatedRoute.routeConfig.path}`
       : null;
   }

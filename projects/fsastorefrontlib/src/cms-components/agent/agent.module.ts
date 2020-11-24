@@ -24,6 +24,7 @@ import { ContactAgentFormComponent } from './contact-agent-form/contact-agent-fo
 
 import { AgentConnector } from '../../core/agent/connectors/agent.connector';
 import { StoreFinderComponentsModule } from '@spartacus/misc/storefinder/components';
+import { StoreFinderModule } from '@spartacus/misc';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { StoreFinderComponentsModule } from '@spartacus/misc/storefinder/compone
     I18nModule,
     UrlModule,
     IconModule,
+    StoreFinderModule,
     StoreFinderComponentsModule,
     ReactiveFormsModule,
     ListNavigationModule,
