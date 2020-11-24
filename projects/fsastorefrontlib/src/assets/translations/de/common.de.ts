@@ -3,7 +3,7 @@ export const fscommon = {
     no: 'Nr',
     mr: 'Herr.',
     mrs: 'Frau',
-    add: 'Add',
+    add: 'Hinzufügen',
     apply: 'Abschließen',
     next: 'Weiter',
     edit: 'Editieren',
@@ -56,6 +56,7 @@ export const fscommon = {
     confirmAndAgree:
       'Hiermit bestätige ich, dass ich die Datenschutzbestimmungen gelesen habe und damit einverstanden bin.',
     termsConditions: 'Allgemeine Geschäftsbedingungen',
+    noMessages: 'Du hast keine Nachrichten!',
     noMessagesForGroup:
       'Sie haben zur Zeit keine Nachrichten für die ausgewählte Gruppe',
     modifyPlan: 'Plan ändern',

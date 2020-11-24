@@ -17,6 +17,7 @@ import { userRequest } from './de/userRequest.de';
 import { dynamicforms } from './overrides/de/dynamicforms';
 import { common } from './overrides/de/common';
 import { user } from './overrides/de/user';
+import { address } from './overrides/de/address';
 
 export const fstranslationsDe: TranslationResources = {
   b2b,
@@ -40,4 +41,5 @@ export const fsOverridesDe: TranslationResources = {
   common,
   myAccount,
   dynamicforms,
+  address,
 };
