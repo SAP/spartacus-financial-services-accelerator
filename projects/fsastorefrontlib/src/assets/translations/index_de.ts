@@ -16,6 +16,7 @@ import { quoteReview } from './de/quoteReview.de';
 import { userRequest } from './de/userRequest.de';
 import { common } from './overrides/de/common';
 import { user } from './overrides/de/user';
+import { address } from './overrides/de/address';
 
 export const fstranslationsDe: TranslationResources = {
   b2b,
@@ -38,4 +39,5 @@ export const fsOverridesDe: TranslationResources = {
   miniCart,
   common,
   myAccount,
+  address,
 };
