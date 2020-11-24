@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
-import { PrefillResolver } from '../../core/resolvers/prefill-resolver.interface';
+import { PrefillResolver } from '../../core/resolver/prefill-resolver.interface';
 import { FormService } from '../../core/services/form/form.service';
 
 @Component({ template: '' })
@@ -72,7 +72,7 @@ export class AbstractFormComponent implements OnInit, OnDestroy {
     if (this.config.prefillValue) {
       const targetObject = this.appConfig.dynamicForms.prefill[
         this.config.prefillValue.targetObject
-        ];
+      ];
       if (targetObject && targetObject.prefillResolver) {
         const prefillResolver = this.injector.get<PrefillResolver>(
           targetObject.prefillResolver

@@ -14,7 +14,7 @@
       >
         <option disabled [value]="undefined">{{
           'dynamicforms.pleaseSelect' | cxTranslate
-          }}</option>
+        }}</option>
         <option *ngFor="let option of config.options" [value]="option.name">
           <ng-container *ngIf="activeLang$ | async as activeLang">
             {{ getLocalizedOption(option.label, activeLang) }}

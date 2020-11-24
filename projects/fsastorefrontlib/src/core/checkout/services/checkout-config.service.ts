@@ -119,8 +119,8 @@ export class FSCheckoutConfigService extends CheckoutConfigService {
     activatedRoute: ActivatedRoute | CmsActivatedRouteSnapshot
   ) {
     return activatedRoute &&
-    activatedRoute.routeConfig &&
-    activatedRoute.routeConfig.path
+      activatedRoute.routeConfig &&
+      activatedRoute.routeConfig.path
       ? `/${activatedRoute.routeConfig.path}`
       : null;
   }
