@@ -5,20 +5,19 @@ cx-page-layout {
   & > cx-page-slot:not(.has-components) {
     display: none;
   }
-}
-
-.FSRequestPageTemplate,
-.MultiTabsCategoryPageTemplate,
-.MultiStepCheckoutSummaryPageTemplate,
-.FSCategoryPageTemplate,
-.CheckoutPageTemplate,
-.GeneralPageTemplate,
-.SearchResultsListPageTemplate {
-  padding: 0;
-  & > cx-page-slot {
-    max-width: 1140px;
-    margin: 0 auto;
-    padding: 3rem 1.5rem 0 1.5rem;
+  &.FSRequestPageTemplate,
+  &.MultiTabsCategoryPageTemplate,
+  &.MultiStepCheckoutSummaryPageTemplate,
+  &.FSCategoryPageTemplate,
+  &.CheckoutPageTemplate,
+  &.GeneralPageTemplate,
+  &.SearchResultsListPageTemplate {
+    padding: 0;
+    & > cx-page-slot {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 0 1.5rem;
+    }
   }
 }
 
