@@ -19,6 +19,7 @@ context('Change Request for new user', () => {
   it('Should register a new user', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
+    checkout.waitForHomepage();
   });
 
   it('Should complete first auto step with additional driver', () => {
@@ -50,16 +51,21 @@ context('Change Request for new user', () => {
     auto.populateVehicleDetails();
     auto.populateMainDriverData();
     auto.populateAdditionalData();
+    auto.checkAutoSilverMiniCart();
     checkout.clickContinueButton();
   });
 
-  it('Should complete auto checkout', () => {
-    checkout.waitForQuoteReviewPage();
-    checkout.clickContinueButton();
-    checkout.checkAccordions('generalQuoteAccordions');
+  it('Should bound a quote', () => {
+    checkout.checkCheckoutStep('Your Auto Insurance', '7');
+    checkout.checkProgressBarInsurance();
+    auto.checkAutoSilverMiniCart();
+    checkout.checkAccordions('quoteReviewWithoutOptional');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
     checkout.clickContinueButton();
+  });
+
+  it('Select default payment details and place an order', () => {
     selectPaymentMethod();
     checkout.placeOrderOnFinalReview();
     checkout.checkOrderConfirmation();
@@ -83,7 +89,6 @@ context('Change Request for new user', () => {
     changeRequest.checkChangedPolicyPremium();
     cy.get('.primary-button').should('contain', 'Submit').click();
     changeRequest.checkChangeRequestConfirmation();
-    cy.wait(4000);
   });
 
   it('Should complete change coverage checkout', () => {
@@ -102,12 +107,11 @@ context('Change Request for new user', () => {
     changeRequest.checkChangedPolicyPremium();
     cy.get('.primary-button').should('contain', 'Submit').click();
     changeRequest.checkChangeRequestConfirmation();
-    cy.wait(4000);
   });
 
   it('Should cancel change policy request', () => {
     myPolicies.checkMyPoliciesPage();
-    myPolicies.checkAutoPolicy();
+    myPolicies.checkAutoChangedPolicy();
     changeRequest.startChangeMileage();
     //check change car details - first step
     changeRequest.checkChangeMileageSteps();
@@ -115,7 +119,6 @@ context('Change Request for new user', () => {
     checkout.clickContinueButton();
     //check change preview - second step
     changeRequest.checkChangeMileageSteps();
-    changeRequest.checkChangedPolicyNewPremium();
     cy.get('.action-button').should('contain', 'Cancel').click();
     //check user is redirected to policy details page
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');

@@ -16,6 +16,7 @@ import { ProductAssignmentOccModule } from './adapters/product-assignment/produc
 import { QuoteOccModule } from './adapters/quote/quote-occ.module';
 import { UserRequestOccModule } from './adapters/user-request/user-request-occ.module';
 import { FSUserOccModule } from './adapters/user/user-occ.module';
+import { OccValueListService } from './services/value-list/occ-value-list.service';
 
 @NgModule({
   imports: [
@@ -36,6 +37,6 @@ import { FSUserOccModule } from './adapters/user/user-occ.module';
     CsTicketOccModule,
     FSUserOccModule,
   ],
-  providers: [{ provide: OccConfig, useExisting: Config }],
+  providers: [OccValueListService, { provide: OccConfig, useExisting: Config }],
 })
 export class OccModule {}

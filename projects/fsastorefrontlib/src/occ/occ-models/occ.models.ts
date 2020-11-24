@@ -96,6 +96,11 @@ export interface QuoteStatus {
   code?: string;
 }
 
+export enum FSPaymentTypeEnum {
+  INVOICE = 'INVOICE',
+  CARD = 'CARD',
+}
+
 export enum BindingStateType {
   BIND = 'BIND',
   UNBIND = 'UNBIND',

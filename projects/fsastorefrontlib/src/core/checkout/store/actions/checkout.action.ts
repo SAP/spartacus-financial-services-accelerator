@@ -7,6 +7,7 @@ export const SET_IDENTIFICATION_TYPE_FAIL =
   '[Cart] Set Identification Type Fail';
 export const SET_LEGAL_INFORMATION_SUCCESS =
   '[Cart] Set Legal Information Success';
+export const SET_PAYMENT_TYPE_SUCCESS = '[Cart] Set Payment Type Success';
 
 export class SetIdentificationType implements Action {
   readonly type = SET_IDENTIFICATION_TYPE;
@@ -28,8 +29,13 @@ export class SetLegalInformationSuccess implements Action {
   constructor(public payload: any) {}
 }
 
+export class SetPaymentTypeSuccess implements Action {
+  readonly type = SET_PAYMENT_TYPE_SUCCESS;
+  constructor(public payload: any) {}
+}
 export type CheckoutAction =
   | SetIdentificationType
   | SetIdentificationTypeSuccess
   | SetIdentificationTypeFail
-  | SetLegalInformationSuccess;
+  | SetLegalInformationSuccess
+  | SetPaymentTypeSuccess;

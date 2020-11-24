@@ -14,7 +14,6 @@ import { premiumCalendar } from './de/premiumCalendar.de';
 import { quote } from './de/quote.de';
 import { quoteReview } from './de/quoteReview.de';
 import { userRequest } from './de/userRequest.de';
-import { dynamicforms } from './overrides/de/dynamicforms';
 import { common } from './overrides/de/common';
 import { user } from './overrides/de/user';
 import { address } from './overrides/de/address';
@@ -40,6 +39,5 @@ export const fsOverridesDe: TranslationResources = {
   miniCart,
   common,
   myAccount,
-  dynamicforms,
   address,
 };

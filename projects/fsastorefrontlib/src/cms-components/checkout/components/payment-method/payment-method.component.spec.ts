@@ -1,22 +1,26 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FSPaymentMethodComponent } from './payment-method.component';
 import {
-  UserPaymentService,
-  CheckoutService,
-  CheckoutDeliveryService,
   ActiveCartService,
+  CheckoutDeliveryService,
   CheckoutPaymentService,
   GlobalMessageService,
   PaymentDetails,
-  TranslationService,
+  PaymentTypeService,
   RoutingService,
+  TranslationService,
+  UserPaymentService,
 } from '@spartacus/core';
 import { CheckoutStepService, ICON_TYPE } from '@spartacus/storefront';
 import { ActivatedRoute } from '@angular/router';
 import { Input } from '@angular/core';
-import createSpy = jasmine.createSpy;
 import { Observable, of } from 'rxjs';
-import { FSCheckoutConfigService, FSSteps } from '@fsa/storefront';
+import {
+  FSCheckoutConfigService,
+  FSCheckoutService,
+  FSSteps,
+} from '@fsa/storefront';
+import createSpy = jasmine.createSpy;
 
 const mockPaymentDetails: PaymentDetails = {
   id: 'mock payment id',
@@ -70,6 +74,10 @@ class MockUserPaymentService {
 
 class MockCheckoutService {
   clearCheckoutStep = createSpy();
+  setPaymentType = createSpy();
+  getPaymentType(): Observable<string> {
+    return of('invoice');
+  }
 }
 
 class MockActiveCartService {
@@ -109,17 +117,29 @@ class MockCheckoutConfigService {
   }
 }
 
+class MockPaymentTypeService {
+  loadPaymentTypes = createSpy();
+  getSelectedPaymentType() {
+    return of({});
+  }
+
+  getPaymentTypes() {
+    return of([{}]);
+  }
+}
+
 describe('FSPaymentMethodComponent', () => {
   let component: FSPaymentMethodComponent;
   let fixture: ComponentFixture<FSPaymentMethodComponent>;
   let routingService: RoutingService;
+  let checkoutService: FSCheckoutService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [FSPaymentMethodComponent],
       providers: [
         { provide: UserPaymentService, useClass: MockUserPaymentService },
-        { provide: CheckoutService, useClass: MockCheckoutService },
+        { provide: FSCheckoutService, useClass: MockCheckoutService },
         {
           provide: CheckoutDeliveryService,
           useClass: MockCheckoutDeliveryService,
@@ -140,6 +160,10 @@ describe('FSPaymentMethodComponent', () => {
           provide: CheckoutPaymentService,
           useClass: MockCheckoutPaymentService,
         },
+        {
+          provide: PaymentTypeService,
+          useClass: MockPaymentTypeService,
+        },
         { provide: GlobalMessageService, useClass: MockGlobalMessageService },
         { provide: CheckoutStepService, useClass: MockCheckoutStepService },
         { provide: ActivatedRoute, useValue: mockActivatedRoute },
@@ -150,6 +174,7 @@ describe('FSPaymentMethodComponent', () => {
       ],
     }).compileComponents();
     routingService = TestBed.inject(RoutingService);
+    checkoutService = TestBed.inject(FSCheckoutService);
   });
 
   beforeEach(() => {
@@ -170,5 +195,10 @@ describe('FSPaymentMethodComponent', () => {
   it('should navigate next', () => {
     component.navigateNext(mockCategoryAndStep);
     expect(routingService.go).toHaveBeenCalled();
+  });
+
+  it('should changeType', () => {
+    component.changeType('invoice');
+    expect(checkoutService.setPaymentType).toHaveBeenCalled();
   });
 });
