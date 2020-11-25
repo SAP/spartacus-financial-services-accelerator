@@ -63,6 +63,7 @@
     @extend .sub-title;
   }
   .document-link {
+    @include ellipsis;
     color: var(--cx-color-primary);
     font-weight: var(--cx-font-weight-normal);
   }

@@ -1,6 +1,7 @@
 @import '../../theme/fs/variables';
 
 %cx-fs-policy-details {
+  width: 100%;
   .overview-section {
     color: var(--cx-color-secondary);
     font-size: $h4-font-size;
@@ -62,6 +63,18 @@
       margin: 20px 0 10px;
       font-weight: var(--cx-font-weight-semi);
       font-size: var(--cx-h6-font-size);
+    }
+  }
+  .documents {
+    .value {
+      @include media-breakpoint-down(xs) {
+        padding: 0 15px;
+      }
+    }
+    .document-title {
+      @include media-breakpoint-down(xs) {
+        text-align: right;
+      }
     }
   }
 }
