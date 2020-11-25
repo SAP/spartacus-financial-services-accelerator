@@ -9,7 +9,7 @@ export const user = {
       clearAll: 'Alles löschen',
     },
     banner: {
-      title: 'This website uses cookies',
+      title: '[DE] This website uses cookies',
       description:
         'Wir verwenden Cookies zur personalisierung und optimierung der Benutzererfahrung. Des Weiteren können Ihre Daten über Ihr Nutzerverhalten zur Marketingzwecken genutzt werden. Weitere Informationen finden Sie in unseren Datenschutzbestimmungen.',
       allowAll: 'Alles erlauben',

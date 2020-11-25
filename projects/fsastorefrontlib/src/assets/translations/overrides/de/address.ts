@@ -18,8 +18,8 @@ export const address = {
     },
     state: 'Zustand',
     zipCode: {
-      label: '[DE] Zip code',
-      placeholder: '[DE] Postal Code/Zip',
+      label: 'Postleitzahl',
+      placeholder: 'Postleitzahl',
     },
     phoneNumber: {
       label: 'Telefonnummer (optional)',

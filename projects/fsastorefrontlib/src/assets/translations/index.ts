@@ -31,5 +31,5 @@ export const fstranslations: TranslationResources = {
 
 export const fsOverrides: TranslationResources = {
   payment,
-  miniCart
+  miniCart,
 };
