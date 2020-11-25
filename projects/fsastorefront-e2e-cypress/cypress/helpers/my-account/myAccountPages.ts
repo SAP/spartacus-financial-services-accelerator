@@ -29,7 +29,7 @@ export function checkSavingsData() {
 }
 
 export function checkCloseAccountPage() {
-  cy.get('.heading-headline').contains('Close Account');
+  cy.get('.heading-headline').should('contain.text', 'Close Account');
   cy.get('cx-paragraph').contains('When you close your account, your');
   cy.get('.item-details')
     .should('be.visible')

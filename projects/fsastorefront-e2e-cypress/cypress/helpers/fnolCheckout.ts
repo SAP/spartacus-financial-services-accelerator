@@ -230,3 +230,12 @@ export function waitForfnolGeneralInformationStep() {
   cy.get('.Section4 cx-banner').eq(1).click();
   cy.wait(`@${generalInfoPage}`).its('status').should('eq', 200);
 }
+
+export function populateIncidentRpeportStep() {
+  const filePath = 'fsaImageTest.png';
+  cy.get('[name=howAccidentOccurred]').type(
+    'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
+  );
+  cy.get('.custom-file-input').attachFile(filePath);
+  cy.get('.btn-primary').click();
+}

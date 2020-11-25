@@ -36,7 +36,6 @@ export function bindQuotePopup() {
   cy.get('cx-fs-bind-quote-dialog').within(() => {
     cy.get('.primary-button').click();
   });
-  cy.wait(1000);
 }
 
 export function clickContinueButton() {
@@ -50,11 +49,6 @@ export function clickBackButton() {
 export function checkBackAndContinueButtons() {
   cy.get('.action-button').should('contain.text', 'Back');
   cy.get('.primary-button').should('contain.text', 'Continue');
-}
-
-export function clickResumeButton() {
-  cy.get('.secondary-button').should('contain.text', 'Resume').click();
-  cy.wait(1000);
 }
 
 export function checkOrderConfirmationBanking() {
@@ -134,9 +128,8 @@ export function checkMyAccountEmptyPages(myAccountPage, emptyPageMessage) {
     menuOption: 'My Account',
     dropdownItem: myAccountPage,
   });
-  cy.wait(1000);
-  cy.get('h2').contains(myAccountPage);
-  cy.get('h3').contains(emptyPageMessage);
+  cy.get('h2').should('contain.text', myAccountPage);
+  cy.get('h3').should('contain.text', emptyPageMessage);
 }
 
 export function checkFirstCheckoutStep(mainProduct) {
@@ -234,22 +227,6 @@ export function waitForChangeMileage() {
     'changeCarDetails'
   );
   cy.wait(`@${changeCarDetails}`).its('status').should('eq', 200);
-}
-
-export function waitForSimulation() {
-  const changeSimulation = waitForPage(
-    'changeSimulationPage',
-    'changeSimulation'
-  );
-  cy.wait(`@${changeSimulation}`).its('status').should('eq', 200);
-}
-
-export function waitForChangeConfirmation() {
-  const changeConfirmation = waitForPage(
-    '%2FchangeRequestConfirmationPage',
-    'changeConfirmation'
-  );
-  cy.wait(`@${changeConfirmation}`).its('status').should('eq', 200);
 }
 
 export function waitForPolicyDetails() {

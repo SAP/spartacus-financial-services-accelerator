@@ -1,5 +1,5 @@
 {
-  "defaultCommandTimeout": 10000,
+  "defaultCommandTimeout": 20000,
   "baseUrl": "http://10.27.246.242",
   "requestTimeout": 10000,
   "modifyObstructiveCode": false,

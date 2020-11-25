@@ -102,8 +102,8 @@ export function checkInboxMessages() {
     .should('be.visible')
     .contains('Policies')
     .click({ force: true });
-  cy.wait(500);
   cy.get('.message')
+    .should('be.visible')
     .click({ multiple: true })
     .within(() => {
       cy.contains('Policy ID');

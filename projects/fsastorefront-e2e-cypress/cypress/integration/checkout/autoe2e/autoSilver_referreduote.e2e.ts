@@ -8,6 +8,8 @@ import {
   checkMyQuotesPage,
 } from '../../../helpers/my-account/policies';
 
+Cypress.config('defaultCommandTimeout', 500000);
+
 context('Auto Silver - Referred Quote', () => {
   before(() => {
     cy.visit('http://10.27.241.80/financial/en/EUR/');
@@ -51,7 +53,6 @@ context('Auto Silver - Referred Quote', () => {
     checkout.checkAccordions('quoteReviewWithoutOptional');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
-    cy.wait(20000);
     checkout.clickContinueButton();
   });
 

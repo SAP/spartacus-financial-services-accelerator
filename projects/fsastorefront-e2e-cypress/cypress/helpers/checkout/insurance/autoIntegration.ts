@@ -1,9 +1,5 @@
 import * as shared from '../shared-checkout';
-import {
-  waitForUserAssets,
-  waitForFormDefinition,
-  waitForPage,
-} from '../../generalHelpers';
+import { waitForUserAssets, waitForFormDefinition } from '../../generalHelpers';
 Cypress.config('requestTimeout', 500000);
 
 const currentDate = Cypress.moment().format(' DD MMM YYYY ');
@@ -482,4 +478,59 @@ export function checkReferredQuotePopup() {
       cy.get('.action-button').should('contain.text', 'Cancel');
       cy.get('.primary-button').should('contain.text', 'Contact Agent').click();
     });
+}
+
+export function selectAutoBronzeAudi() {
+  cy.get('cx-fs-comparison-table-panel-item')
+    .eq(0)
+    .within(() => {
+      cy.get('.table-header-title').should('have.text', 'Auto Bronze');
+      cy.get('.table-header-value').should('have.text', '€213.06');
+      cy.get('.primary-button').click();
+    });
+}
+
+export function checkAutoBrozneAudiMiniCart() {
+  const miniCartContent: addOptionsPage.MiniCart = {
+    price: ' €120.58 ',
+    products: [
+      {
+        title: ' Start Date: ',
+        value: currentDate,
+      },
+      {
+        title: 'Vehicle Make:',
+        value: ' Audi ',
+      },
+      {
+        title: 'Vehicle Model:',
+        value: ' A5 ',
+      },
+      {
+        title: 'Vehicle Type:',
+        value: ' A5 Quattro ',
+      },
+      {
+        title: 'Vehicle Value:',
+        value: ' 12000 ',
+      },
+      {
+        title: 'Vehicle Year:',
+        value: ' 2017 ',
+      },
+      {
+        title: ' Third Party Liability: ',
+        value: ' €112.48 ',
+      },
+      {
+        title: ' Collision Coverage: ',
+        value: ' €3.10 ',
+      },
+      {
+        title: ' Uninsured Coverage: ',
+        value: ' €5.00 ',
+      },
+    ],
+  };
+  shared.checkMiniCart(miniCartContent);
 }

@@ -107,16 +107,12 @@ context('FNOL for sample data user', () => {
   });
 
   it('Should check and populate Incident Report page', () => {
-    const filePath = 'fsaImageTest.png';
-    cy.get('[name=howAccidentOccurred]').type(
-      'while buying tesla coils, my tesla model s was stolen while buying tesla coils, my tesla model s was stolen'
-    );
-    cy.get('.custom-file-input').attachFile(filePath);
-    cy.get('.btn-primary').click();
-    cy.wait(2000);
+    fnol.checkFNOLSteps();
+    cy.get('.Footer').should('be.visible');
+    fnol.populateIncidentRpeportStep();
     checkout.checkBackAndContinueButtons();
     cy.get('.primary-button').should('be.visible').click();
-    cy.wait(500);
+    fnol.checkFNOLSteps();
     checkout.clickContinueButton();
   });
 

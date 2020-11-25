@@ -9,7 +9,7 @@ import * as changeRequest from '../../../helpers/changeRequest';
 
 Cypress.config('defaultCommandTimeout', 500000);
 
-context('Auto Silver Checkout with change mileage', () => {
+context('Auto Bronze Checkout with change coverage', () => {
   before(() => {
     cy.visit('http://10.27.241.80/financial/en/EUR/');
   });
@@ -29,11 +29,10 @@ context('Auto Silver Checkout with change mileage', () => {
     checkout.clickContinueButton();
   });
 
-  it('Should check comparison table and select main product', () => {
+  it('Should check comparison table and select main and optional products', () => {
     autoIntegration.checkAutoComparisonTableAudi();
-    autoIntegration.selectAutoSilver();
-    autoIntegration.checkAutoSilverMiniCart();
-    auto.checkOptionalProductsSilver();
+    autoIntegration.selectAutoBronzeAudi();
+    auto.checkOptionalProductsBronze();
     checkout.clickContinueButton();
   });
 
@@ -43,15 +42,15 @@ context('Auto Silver Checkout with change mileage', () => {
     auto.populateVehicleDetails();
     auto.populateMainDriverData();
     auto.populateAdditionalData();
-    autoIntegration.checkAutoSilverMiniCart();
+    autoIntegration.checkAutoBrozneAudiMiniCart();
     checkout.clickContinueButton();
   });
 
   it('Should bound a quote', () => {
     checkout.checkCheckoutStep('Your Auto Insurance', '7');
     checkout.checkProgressBarInsurance();
-    autoIntegration.checkAutoSilverMiniCart();
-    checkout.checkAccordions('quoteReviewWithoutOptional');
+    autoIntegration.checkAutoBrozneAudiMiniCart();
+    checkout.checkAccordions('generalQuoteAccordions');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
     checkout.clickContinueButton();
@@ -72,15 +71,17 @@ context('Auto Silver Checkout with change mileage', () => {
     checkout.checkAccordions('policyDetails');
   });
 
-  it('Should complete change mileage checkout', () => {
-    changeRequest.startChangeMileage();
-    checkout.waitForChangeMileage();
-    //check change car details - first step
-    changeRequest.checkChangeMileageSteps();
-    changeRequest.enterNewMileage();
+  it('Should complete change coverage checkout', () => {
+    changeRequest.startChangeCoverage();
+    //check change coverage - first step
+    changeRequest.checkChangeCoverageSteps();
+    changeRequest.checkOptionalExtras();
+    //check continue button is disabled if coverage is not added
+    cy.get('.primary-button').contains('Continue').should('be.disabled');
+    changeRequest.addRoadsideAssistance();
     checkout.clickContinueButton();
     //check change preview - second step
-    changeRequest.checkChangeMileageSteps();
+    changeRequest.checkChangeCoverageSteps();
     changeRequest.checkChangedPolicyPremium();
     cy.get('.primary-button').should('contain', 'Submit').click();
     changeRequest.checkChangeRequestConfirmation();

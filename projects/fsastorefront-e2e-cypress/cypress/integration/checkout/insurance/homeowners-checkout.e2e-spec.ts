@@ -95,5 +95,9 @@ context('Homeowners Checkout', () => {
 
   it('Should validate phone number', () => {
     register.validatePhoneNumber('');
+    checkout.checkMyAccountEmptyPages(
+      'Quotes & Applications',
+      'You have no Quotes or Applications!'
+    );
   });
 });

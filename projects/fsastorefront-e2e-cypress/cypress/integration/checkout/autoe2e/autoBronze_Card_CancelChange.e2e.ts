@@ -8,9 +8,9 @@ import * as myPolicies from '../../../helpers/my-account/policies';
 import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 import * as changeRequest from '../../../helpers/changeRequest';
 
-Cypress.config('requestTimeout', 500000);
+Cypress.config('defaultCommandTimeout', 500000);
 
-context('Auto Bronze Checkout', () => {
+context('Auto Bronze Checkout with cancel change', () => {
   before(() => {
     cy.visit('http://10.27.241.80/financial/en/EUR/');
   });
@@ -64,7 +64,7 @@ context('Auto Bronze Checkout', () => {
     checkout.checkAccordions('generalQuoteAccordions');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
-    cy.wait(20000);
+    cy.get('.section-header-heading').should('be.visible');
     checkout.clickContinueButton();
   });
 
@@ -72,7 +72,6 @@ context('Auto Bronze Checkout', () => {
     payment.selectPaymentMethodCard();
     checkout.clickContinueButton();
     checkout.placeOrderOnFinalReview();
-    cy.wait(20000);
     checkout.checkOrderConfirmation();
   });
 

@@ -93,9 +93,5 @@ context('Renters Checkout', () => {
   it('Should validate phone number and check empty my account pages', () => {
     register.validatePhoneNumber('');
     checkout.checkMyAccountEmptyPages('Claims', 'You have no Claims!');
-    checkout.checkMyAccountEmptyPages(
-      'Quotes & Applications',
-      'You have no Quotes or Applications!'
-    );
   });
 });

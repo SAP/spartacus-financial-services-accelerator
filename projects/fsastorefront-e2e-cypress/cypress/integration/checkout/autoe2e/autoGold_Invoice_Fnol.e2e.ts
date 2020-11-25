@@ -6,12 +6,10 @@ import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import { selectPaymentMethodInvoice } from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import * as fnol from '../../../helpers/fnolCheckout';
-import {
-  checkMyPoliciesPage,
-  updatePolicyEffectiveAndStartDate,
-} from '../../../helpers/my-account/policies';
 
-context('Auto Silver Checkout', () => {
+Cypress.config('defaultCommandTimeout', 500000);
+
+context('Auto Gold Checkout with FNOL', () => {
   before(() => {
     cy.visit('http://10.27.241.80/financial/en/EUR/');
   });
@@ -54,7 +52,6 @@ context('Auto Silver Checkout', () => {
     checkout.checkAccordions('quoteReviewWithoutOptional');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
-    cy.wait(20000);
     checkout.clickContinueButton();
   });
 
@@ -62,7 +59,6 @@ context('Auto Silver Checkout', () => {
     selectPaymentMethodInvoice();
     checkout.clickContinueButton();
     checkout.placeOrderOnFinalReview();
-    cy.wait(20000);
     checkout.checkOrderConfirmation();
   });
 

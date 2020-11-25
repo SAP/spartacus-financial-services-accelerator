@@ -86,11 +86,6 @@ export function checkEventPolicy() {
   cy.get('.value').contains('€47.99');
 }
 
-export function checkCheckoutPage() {
-  cy.get('h2').contains('Your Event Insurance');
-  cy.get('.progress-inner-wrapper').should('have.length', '6');
-}
-
 export function checkMiniCart() {
   const miniCartContent: sharedCheckout.MiniCart = {
     price: ' €57.99 ',

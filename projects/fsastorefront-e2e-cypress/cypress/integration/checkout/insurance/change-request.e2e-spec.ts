@@ -84,11 +84,9 @@ context('Change Request for new user', () => {
     changeRequest.enterNewMileage();
     checkout.clickContinueButton();
     //check change preview - second step
-    checkout.waitForSimulation();
     changeRequest.checkChangeMileageSteps();
     changeRequest.checkChangedPolicyPremium();
     cy.get('.primary-button').should('contain', 'Submit').click();
-    checkout.waitForChangeConfirmation();
     changeRequest.checkChangeRequestConfirmation();
   });
 
@@ -122,7 +120,10 @@ context('Change Request for new user', () => {
     changeRequest.checkChangeMileageSteps();
     cy.get('.action-button').should('contain', 'Cancel').click();
     //check user is redirected to policy details page
-    cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
+    cy.get('.overview-section-title').should(
+      'contain.text',
+      'Auto Insurance Policy'
+    );
     checkout.checkAccordions('policyDetails');
   });
 });
