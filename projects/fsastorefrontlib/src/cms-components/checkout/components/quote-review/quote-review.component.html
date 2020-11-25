@@ -151,7 +151,7 @@
                       <ng-container *ngIf="item.removeable">
                         <li class="accordion-list-item row">
                           <div class="col-12 item-label">
-                            {{ item.product?.name }}
+                            {{ item.product?.cartDisplayName }}
                           </div>
                         </li>
                       </ng-container>
@@ -278,13 +278,7 @@
                 </button></ng-container
               >
             </div>
-            <div
-              *ngIf="
-                cart.insuranceQuote?.quoteWorkflowStatus?.code === 'APPROVED' ||
-                cart.insuranceQuote?.quoteWorkflowStatus?.code === 'REFERRED'
-              "
-              class="col-md-6 col-sm-6 col-xs-12"
-            >
+            <div class="col-md-6 col-sm-6 col-xs-12">
               <ng-container
                 *ngIf="nextCheckoutStep$ | async as nextCheckoutStep"
                 ><button
