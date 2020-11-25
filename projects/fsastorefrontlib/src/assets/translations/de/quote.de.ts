@@ -17,7 +17,7 @@ export const quote = {
     noActiveQuotes: 'Sie haben zur Zeit keine aktiven Angebote',
     getQuoteBySelecting:
       'Starten sie Ihr Angebot, indem Sie eine der obigen Versicherungsarten auswählen',
-    confirmInformation: '[DE] Confirm Information',
+    confirmInformation: 'Informationen bestätigen',
     bindingConfirmation:
       '[DE] By clicking Continue I certify the information in this application is true and correct.',
     quoteWorkflowStatus: {
