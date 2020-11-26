@@ -26,7 +26,7 @@ export const forms = {
       call: 'Call',
     },
     auto: {
-      vehicleAnnualMileage: 'Vehicle Annual Mileage'
+      vehicleAnnualMileage: 'Vehicle Annual Mileage',
     },
     subject: 'Subject',
     enterMessage: 'Your message',
