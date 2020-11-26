@@ -71,10 +71,5 @@
         padding: 0 15px;
       }
     }
-    .document-title {
-      @include media-breakpoint-down(xs) {
-        text-align: right;
-      }
-    }
   }
 }
