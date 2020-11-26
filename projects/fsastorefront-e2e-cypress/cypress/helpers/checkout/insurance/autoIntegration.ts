@@ -128,9 +128,9 @@ export function checkReplicatedSilverPolicy() {
     .should('have.length', 1)
     .within(() => {
       cy.get('.info-card-data').within(() => {
-        cy.get('.value').contains('Auto Silver ');
-        cy.get('.label').contains('Premium');
-        cy.get('.value').contains('€329.64 ');
+        cy.get('.value').should('contain.text', 'Auto Silver');
+        cy.get('.label').should('contain.text', 'Premium');
+        cy.get('.value').should('contain.text', '€329.64 ');
       });
       cy.get('.info-card-links .link')
         .contains(' Details ')
@@ -147,6 +147,22 @@ export function checkReplicatedBronzePolicy() {
         cy.get('.value').contains('Auto Bronze');
         cy.get('.label').contains('Premium');
         cy.get('.value').contains('€2,024.41 ');
+      });
+      cy.get('.info-card-links .link')
+        .contains(' Details ')
+        //TODO: When cypress fix issue detached from the DOM remove force true
+        .click({ force: true });
+    });
+}
+
+export function checkReplicatedBronzeA5Policy() {
+  cy.get('.info-card')
+    .should('have.length', 1)
+    .within(() => {
+      cy.get('.info-card-data').within(() => {
+        cy.get('.value').should('contain.text', 'Auto Bronze');
+        cy.get('.label').should('contain.text', 'Premium');
+        cy.get('.value').should('contain.text', '€221.16 ');
       });
       cy.get('.info-card-links .link')
         .contains(' Details ')

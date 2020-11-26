@@ -39,6 +39,15 @@ export const policyDetailsAccordions = [
   ' What Does It Cost Me? ',
 ];
 
+export const policyDetailsIntegration = [
+  ' Policy Summary ',
+  ' Who or What Is Insured ',
+  " What's Included ",
+  ' Optional Extras ',
+  ' What Does It Cost Me? ',
+  ' Documents',
+];
+
 export const agentListViewAccordions = [
   ' Homeowners Insurance',
   ' Renters Insurance',
@@ -175,6 +184,10 @@ export const Accordions = {
     {
       category: 'savingsPolicyDetails',
       accordionItems: this.policyDetailsSavings,
+    },
+    {
+      category: 'integrationPolicyDetails',
+      accordionItems: this.policyDetailsIntegration,
     },
     {
       category: 'quoteReviewWithoutOptional',

@@ -6,6 +6,11 @@ import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import { selectPaymentMethodInvoice } from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import * as changeRequest from '../../../helpers/changeRequest';
+import {
+  addTrailerLiability,
+  checkChangedCoveragePremium,
+  checkOptionalExtrasBronze,
+} from '../../../helpers/checkout/insurance/policyChange_integration';
 
 Cypress.config('defaultCommandTimeout', 500000);
 
@@ -64,25 +69,26 @@ context('Auto Bronze Checkout with change coverage', () => {
   });
 
   it('Should check my policies and policy details page', () => {
-    cy.wait(30000);
+    //waiting for replication process to be completed
+    cy.wait(35000);
     myPolicies.checkMyPoliciesPage();
-    autoIntegration.checkReplicatedSilverPolicy();
+    autoIntegration.checkReplicatedBronzeA5Policy();
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
-    checkout.checkAccordions('policyDetails');
+    checkout.checkAccordions('integrationPolicyDetails');
   });
 
   it('Should complete change coverage checkout', () => {
     changeRequest.startChangeCoverage();
     //check change coverage - first step
     changeRequest.checkChangeCoverageSteps();
-    changeRequest.checkOptionalExtras();
+    checkOptionalExtrasBronze();
     //check continue button is disabled if coverage is not added
     cy.get('.primary-button').contains('Continue').should('be.disabled');
-    changeRequest.addRoadsideAssistance();
+    addTrailerLiability();
     checkout.clickContinueButton();
     //check change preview - second step
     changeRequest.checkChangeCoverageSteps();
-    changeRequest.checkChangedPolicyPremium();
+    checkChangedCoveragePremium();
     cy.get('.primary-button').should('contain', 'Submit').click();
     changeRequest.checkChangeRequestConfirmation();
   });

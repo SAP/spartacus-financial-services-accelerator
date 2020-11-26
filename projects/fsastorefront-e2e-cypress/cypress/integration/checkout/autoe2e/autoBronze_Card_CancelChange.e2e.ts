@@ -7,6 +7,10 @@ import * as payment from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import { waitForCreateAsset } from '../../../helpers/generalHelpers';
 import * as changeRequest from '../../../helpers/changeRequest';
+import {
+  checkChangedMileagePremium,
+  checkChangedMileagePremiumCancelled,
+} from '../../../helpers/checkout/insurance/policyChange_integration';
 
 Cypress.config('defaultCommandTimeout', 500000);
 
@@ -76,11 +80,12 @@ context('Auto Bronze Checkout with cancel change', () => {
   });
 
   it('Should check my policies and policy details page', () => {
-    cy.wait(30000);
+    //waiting for replication process to be completed
+    cy.wait(35000);
     myPolicies.checkMyPoliciesPage();
     autoIntegration.checkReplicatedBronzePolicy();
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
-    checkout.checkAccordions('policyDetails');
+    checkout.checkAccordions('integrationPolicyDetails');
   });
 
   it('Should cancel change policy request', () => {
@@ -90,17 +95,14 @@ context('Auto Bronze Checkout with cancel change', () => {
     checkout.waitForChangeMileage();
     //check change car details - first step
     changeRequest.checkChangeMileageSteps();
-    cy.get('[name="vehicleAnnualMileage"]').type(80000);
+    cy.get('[name="vehicleAnnualMileage"]').type('80000');
     checkout.clickContinueButton();
     //check change preview - cancel
+    changeRequest.checkChangeMileageSteps();
+    checkChangedMileagePremiumCancelled();
     cy.get('.action-button').should('contain', 'Cancel').click();
     //check user is redirected to policy details page
-    checkout.waitForPolicyDetails();
-    cy.get('.alert-icon').should(
-      'contain.text',
-      'Your policy change request has been canceled'
-    );
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
-    checkout.checkAccordions('policyDetails');
+    checkout.checkAccordions('integrationPolicyDetails');
   });
 });

@@ -63,7 +63,8 @@ context('Auto Gold Checkout with FNOL', () => {
   });
 
   it('Should check my policies and policy details page', () => {
-    cy.wait(30000);
+    //waiting for replication process to be completed
+    cy.wait(35000);
     myPolicies.checkMyPoliciesPage();
     autoIntegration.checkReplicatedGoldPolicyAndStartFnol();
   });
@@ -87,7 +88,6 @@ context('Auto Gold Checkout with FNOL', () => {
       .should('contain.text', 'Upload')
       .eq(0)
       .click({ force: true });
-    cy.wait(2000);
     checkout.checkBackAndContinueButtons();
     cy.get('.primary-button').should('contain.text', 'Continue').click();
     cy.wait(500);
@@ -116,5 +116,15 @@ context('Auto Gold Checkout with FNOL', () => {
 
   it('Should check claim confirmation page', () => {
     fnol.checkConfirmationPage();
+    //replication proces to be completed
+    cy.wait(2000);
+  });
+
+  it('Should check claim replication', () => {
+    cy.selectOptionFromDropdown({
+      menuOption: 'My Account',
+      dropdownItem: 'Claims',
+    });
+    fnol.checkClaimReplication();
   });
 });

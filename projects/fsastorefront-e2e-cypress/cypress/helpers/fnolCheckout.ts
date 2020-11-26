@@ -239,3 +239,15 @@ export function populateIncidentRpeportStep() {
   cy.get('.custom-file-input').attachFile(filePath);
   cy.get('.btn-primary').click();
 }
+
+export function checkClaimReplication() {
+  cy.get('.info-card')
+    .should('have.length', 1)
+    .within(() => {
+      cy.get('.info-card-data').within(() => {
+        cy.get('.value').should('contain.text', 'Collision');
+        cy.get('.label').should('contain.text', 'Status');
+        cy.get('.value').should('contain.text', 'PROCESSING');
+      });
+    });
+}

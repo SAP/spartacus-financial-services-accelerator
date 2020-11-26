@@ -12,7 +12,7 @@ export function startChangeMileage() {
 }
 
 export function checkChangeMileageSteps() {
-  cy.get('h2').contains(' Change Auto Insurance Policy ');
+  cy.get('h2').should('contain.text', ' Change Auto Insurance Policy ');
   cy.get('.action-button').should('contain', 'Cancel');
   cy.get('.progress-inner-wrapper')
     .should('have.length', 2)
@@ -26,7 +26,6 @@ export function enterNewMileage() {
   cy.get('cx-fs-cms-form-submit')
     .should('be.visible')
     .within(() => {
-      //Bug FSA-5471
       cy.get('h3').contains('Auto Information');
       cy.get('[name="vehicleAnnualMileage"]').type(50000);
     });

@@ -114,7 +114,7 @@ context('Change Request for new user', () => {
     changeRequest.startChangeMileage();
     //check change car details - first step
     changeRequest.checkChangeMileageSteps();
-    cy.get('[name="vehicleAnnualMileage"]').type(80000);
+    cy.get('[name="vehicleAnnualMileage"]').type('80000');
     checkout.clickContinueButton();
     //check change preview - second step
     changeRequest.checkChangeMileageSteps();

@@ -6,6 +6,10 @@ import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import { selectPaymentMethodInvoice } from '../../../helpers/checkout/insurance/payment';
 import * as myPolicies from '../../../helpers/my-account/policies';
 import * as changeRequest from '../../../helpers/changeRequest';
+import {
+  checkChangedMileagePremium,
+  enterNewMileage,
+} from '../../../helpers/checkout/insurance/policyChange_integration';
 
 Cypress.config('defaultCommandTimeout', 500000);
 
@@ -65,11 +69,12 @@ context('Auto Silver Checkout with change mileage', () => {
   });
 
   it('Should check my policies and policy details page', () => {
-    cy.wait(30000);
+    //waiting for replication process to be completed
+    cy.wait(35000);
     myPolicies.checkMyPoliciesPage();
     autoIntegration.checkReplicatedSilverPolicy();
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
-    checkout.checkAccordions('policyDetails');
+    checkout.checkAccordions('integrationPolicyDetails');
   });
 
   it('Should complete change mileage checkout', () => {
@@ -77,11 +82,11 @@ context('Auto Silver Checkout with change mileage', () => {
     checkout.waitForChangeMileage();
     //check change car details - first step
     changeRequest.checkChangeMileageSteps();
-    changeRequest.enterNewMileage();
+    enterNewMileage();
     checkout.clickContinueButton();
     //check change preview - second step
     changeRequest.checkChangeMileageSteps();
-    changeRequest.checkChangedPolicyPremium();
+    checkChangedMileagePremium();
     cy.get('.primary-button').should('contain', 'Submit').click();
     changeRequest.checkChangeRequestConfirmation();
   });
