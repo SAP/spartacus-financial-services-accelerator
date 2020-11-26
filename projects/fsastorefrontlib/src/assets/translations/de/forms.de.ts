@@ -29,6 +29,7 @@ export const forms = {
     auto: {
       vehicleAnnualMileage: 'Jahreskilometerleistung des Fahrzeugs',
     },
+    changeMileage: 'Kilometerstand ändern',
     subject: '[DE] Subject',
     send: '[DE] Send',
     policyHolderNotSameAsMainDriver:
