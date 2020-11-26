@@ -1,5 +1,4 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { StoreModule } from '@ngrx/store';
 import { translationChunksConfig, translations } from '@spartacus/assets';
 import { ConfigModule, provideConfig } from '@spartacus/core';
 import {
@@ -31,9 +30,7 @@ import {
     B2cStorefrontModule,
     CmsLibModule,
     CheckoutModule,
-    ConfigModule.forRoot(),
     OccModule,
-    StoreModule.forRoot({}),
     ConfigModule.withConfig({
       i18n: {
         resources: {
