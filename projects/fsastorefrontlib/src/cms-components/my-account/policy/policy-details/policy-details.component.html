@@ -432,12 +432,12 @@
             <div class="col-6">
               <a
                 href="#"
-                class="document-link d-block"
+                class="document-link d-block text-truncate"
                 (click)="getDocument(document, $event)"
                 >{{ document.altText }}</a
               >
             </div>
-            <div class="col-6 document-title">
+            <div class="col-6 document-title text-right text-sm-left">
               {{ document.itemTimestamp | cxDate: 'dd MMM yyyy' }}
             </div>
           </li>
