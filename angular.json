@@ -23,9 +23,7 @@
               "src/assets",
               "src/webApplicationInjector.js"
             ],
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "./projects/fsastorefrontstyles/scss",
@@ -124,13 +122,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["src/tsconfig.app.json", "src/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -154,20 +147,14 @@
             "main": "projects/fsastorefrontlib/src/test.ts",
             "tsConfig": "projects/fsastorefrontlib/tsconfig.spec.json",
             "karmaConfig": "projects/fsastorefrontlib/karma.conf.js",
-            "styles": [
-              "src/styles.scss"
-            ],
+            "styles": ["src/styles.scss"],
             "stylePreprocessorOptions": {
               "includePaths": [
                 "./projects/fsastorefrontstyles/scss",
                 "node_modules/@spartacus/styles/scss"
               ]
             },
-            "codeCoverageExclude": [
-              "**/index.ts",
-              "**/*.de.ts",
-              "**/*.en.ts"
-            ]
+            "codeCoverageExclude": ["**/index.ts", "**/*.de.ts", "**/*.en.ts"]
           }
         },
         "lint": {
@@ -177,9 +164,7 @@
               "projects/fsastorefrontlib/tsconfig.lib.json",
               "projects/fsastorefrontlib/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -195,6 +180,11 @@
           "options": {
             "tsConfig": "projects/dynamicforms/tsconfig.lib.json",
             "project": "projects/dynamicforms/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/dynamicforms/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -212,9 +202,7 @@
               "projects/dynamicforms/tsconfig.lib.json",
               "projects/dynamicforms/tsconfig.spec.json"
             ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
