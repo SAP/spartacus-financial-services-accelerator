@@ -26,6 +26,9 @@ export const forms = {
       email: '[DE]Email',
       call: '[DE]Call',
     },
+    auto: {
+      vehicleAnnualMileage: 'Jahreskilometerleistung des Fahrzeugs',
+    },
     subject: '[DE] Subject',
     send: '[DE] Send',
     policyHolderNotSameAsMainDriver:
