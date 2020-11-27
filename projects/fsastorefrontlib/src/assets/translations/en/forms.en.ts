@@ -25,6 +25,10 @@ export const forms = {
       email: 'Email',
       call: 'Call',
     },
+    auto: {
+      vehicleAnnualMileage: 'Vehicle Annual Mileage',
+    },
+    changeMileage: 'Change Mileage',
     subject: 'Subject',
     enterMessage: 'Your message',
     send: 'Send',
