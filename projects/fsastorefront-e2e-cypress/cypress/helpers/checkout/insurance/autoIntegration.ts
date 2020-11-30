@@ -1,6 +1,5 @@
 import * as shared from '../shared-checkout';
 import { waitForUserAssets, waitForFormDefinition } from '../../generalHelpers';
-Cypress.config('requestTimeout', 500000);
 
 const currentDate = Cypress.moment().format(' DD MMM YYYY ');
 
