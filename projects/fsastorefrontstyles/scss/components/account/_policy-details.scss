@@ -39,7 +39,7 @@
       background: transparent;
       color: var(--cx-color-secondary);
       &:before {
-        @include fs-transition;
+        @include transition;
         float: right;
         font-size: 20px;
       }
@@ -55,7 +55,7 @@
     border-radius: 5px;
     padding: 20px 0;
     margin: 0 4% 70px;
-    @include fs-box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 0.3);
+    @include box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 0.3);
     @include media-breakpoint-down(sm) {
       padding: 25px 0 20px;
     }
