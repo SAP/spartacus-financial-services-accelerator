@@ -180,6 +180,11 @@
           "options": {
             "tsConfig": "projects/dynamicforms/tsconfig.lib.json",
             "project": "projects/dynamicforms/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/dynamicforms/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
