@@ -7,16 +7,19 @@ export const quote = {
     viewQuotes: 'Bisherige Anträge ansehen',
     getQuote: 'Angebot anfordern',
     moreInfo: 'Mehr Informationen',
-    notBoundQuoteDescription: '[DE] Your quote/application is not bound.',
+    notBoundQuoteDescription: 'Ihr Angebot / Antrag ist nicht bindend.',
     retrieveQuotes: 'Antrag fortsetzen',
     referredQuoteDescription:
       'Ihr Angebot wird weitergeleitet. Weitere Informationen erhalten Sie bei Ihrem Kundenbetreuer.',
-    boundQuoteDescription: '[DE] Your quote is already bound.',
+    boundQuoteDescription: 'Ihr Angebot ist bindend.',
     viewYourQuotes: 'Angebote ansehen',
     youHaveNoQuotes: 'Sie haben zur Zeit keine Angebote',
     noActiveQuotes: 'Sie haben zur Zeit keine aktiven Angebote',
     getQuoteBySelecting:
       'Starten sie Ihr Angebot, indem Sie eine der obigen Versicherungsarten auswählen',
+    confirmInformation: 'Informationen bestätigen',
+    bindingConfirmation:
+      '[DE] By clicking Continue I certify the information in this application is true and correct.',
     quoteWorkflowStatus: {
       title: 'Antragsstatus',
       REFERRED: 'Weitergeleitet',

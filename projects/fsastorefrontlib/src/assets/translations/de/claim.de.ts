@@ -1,10 +1,10 @@
 export const claim = {
   claim: {
-    claim: '[DE] Claim',
+    claim: 'Schaden',
     claims: 'Schadensfälle',
-    claimNo: '[DE] Claim No',
+    claimNo: 'Schadennr.',
     makeClaim: 'Melden Sie einen Schaden',
-    incidentType: '[DE] Incident Type',
+    incidentType: 'Art des Schadens',
     truthConfirmation:
       'Hiermit bestätige ich, dass ich alle Angaben wahrheitsgemäß ausfülle.',
     dateOfLoss: 'Datum des Schadens',
@@ -13,6 +13,14 @@ export const claim = {
     deleteStartedClaimProcess: 'Gestarteten Schadensfall löschen',
     followingClaimProcessWillBeDeleted:
       'Der folgende Schadensfall wird gelöscht.',
-    alreadySubmitted: '[DE] Your Claim is already submitted.',
+    alreadySubmitted: 'Ihr Schaden wurde bereits eingereicht.',
+    confirmation: {
+      processingNumber: 'Ihre Bearbeitungsnummer lautet',
+      submissionNotice:
+        'Ihr Schadensfall wurde erfolgreich in unserem System gespeichert. Sie finden die Bestätigungs-E-Mail im Posteingang Ihres Self-Service-Portals und in Ihrem Postfach.',
+      submissionStatus: 'To check your status online, visit Claims section.',
+      questionsOrConcerns:
+        'Wenn Sie weitere Fragen haben, wenden Sie sich bitte an Ihren Sachbearbeiter. Um Ihren Status online zu überprüfen, besuchen Sie den Bereich Schadensfälle.',
+    },
   },
 };

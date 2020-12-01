@@ -5,30 +5,33 @@ export const forms = {
     dateOfBirth: {
       label: 'Geburtsdatum',
     },
-    effectiveDate: '[DE] Effective date',
+    effectiveDate: 'Datum des Inkrafttretens',
     phoneNumber: {
       label: 'Telefonnummer',
       lengthValidation:
         'Die Telefonnummer sollte aus mindestens 6 und höchstens 20 Zeichen bestehen.',
     },
-    enterMessage: '[DE] Your message',
+    enterMessage: 'Ihre Nachricht',
     interest: {
-      title: '[DE] Interest',
-      complaint: '[DE] Complaint',
-      note: '[DE] Note',
-      financialAdvisory: '[DE] Financial Advisory',
-      productInfo: '[DE] Product Information',
-      quotePolicy: '[DE] Quote & Policy',
-      claimInfo: '[DE] Claim Information',
+      title: 'Interessen',
+      complaint: 'Beschwerde',
+      note: 'Hinweis',
+      financialAdvisory: 'Finanzberatung',
+      productInfo: 'Produktinformation',
+      quotePolicy: 'Angebot & Police',
+      claimInfo: 'Anspruchsinformationen',
     },
     contactType: {
-      title: '[DE]Contact type',
-      email: '[DE]Email',
-      call: '[DE]Call',
+      title: 'Kontaktvariante',
+      email: 'E-Mail',
+      call: 'Anruf',
     },
-    subject: '[DE] Subject',
-    send: '[DE] Send',
+    subject: 'Betreff',
+    send: 'Abschicken',
+    auto: {
+      vehicleAnnualMileage: 'Jahreskilometerleistung des Fahrzeugs',
+    },
     policyHolderNotSameAsMainDriver:
-      '[DE] Please return to the first step of checkout: “Choose a cover” and check your Date of birth. Policy holder and main driver should have the same Date of birth.',
+      'Bitte kehren Sie zum ersten Schritt der Kaufabwicklung zurück: "Wählen Sie Ihren Schutz" und überprüfen Sie Ihr Geburtsdatum. Das Geburtsdatum des Versicherungsnehmer und Fahrzugführer müssen übereinstimmen.',
   },
 };
