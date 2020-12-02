@@ -16,6 +16,7 @@ import { Observable, of } from 'rxjs';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { FileService } from '../../core/services/file/file.service';
+import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { FormService } from './../../core/services/form/form.service';
 import { UploadComponent } from './upload.component';
 
@@ -133,6 +134,7 @@ describe('UploadComponent', () => {
         declarations: [UploadComponent, MockErrorNoticeComponent],
         imports: [ReactiveFormsModule, I18nTestingModule],
         providers: [
+          { provide: OccValueListService, useClass: MockOccValueListService },
           { provide: LanguageService, useClass: MockLanguageService },
           {
             provide: DynamicFormsConfig,
