@@ -36,7 +36,7 @@ import { FSOrderHistoryComponent } from './order-history.component';
   providers: [
     provideDefaultConfig(<CmsConfig>{
       cmsComponents: {
-        AccountFSOrderHistoryComponent: {
+        AccountOrderHistoryComponent: {
           component: FSOrderHistoryComponent,
           guards: [AuthGuard],
         },
@@ -45,4 +45,4 @@ import { FSOrderHistoryComponent } from './order-history.component';
   ],
   entryComponents: [FSOrderHistoryComponent],
 })
-export class OrderHistoryModule {}
+export class FSOrderHistoryModule {}

@@ -10,12 +10,12 @@ import {
   UrlModule,
 } from '@spartacus/core';
 import {
-  ConsignmentTrackingComponent,
   CartSharedModule,
   SpinnerModule,
   OrderOverviewModule,
+  OrderDetailsModule,
 } from '@spartacus/storefront';
-
+import { FSConsignmentTrackingComponent } from './order-detail-items';
 import { FSTrackingEventsComponent } from './order-detail-items/consignment-tracking/tracking-events/tracking-events.component';
 import { FSOrderConsignedEntriesComponent } from './order-detail-items/order-consigned-entries/order-consigned-entries.component';
 import { FSOrderDetailItemsComponent } from './order-detail-items/order-detail-items.component';
@@ -27,7 +27,7 @@ const moduleComponents = [
   FSOrderDetailItemsComponent,
   FSOrderDetailTotalsComponent,
   FSTrackingEventsComponent,
-  ConsignmentTrackingComponent,
+  FSConsignmentTrackingComponent,
   FSOrderConsignedEntriesComponent,
 ];
 
@@ -41,6 +41,7 @@ const moduleComponents = [
     UrlModule,
     SpinnerModule,
     OrderOverviewModule,
+    OrderDetailsModule,
   ],
   providers: [
     provideDefaultConfig(<CmsConfig | FeaturesConfig>{
@@ -64,4 +65,4 @@ const moduleComponents = [
   exports: [...moduleComponents],
   entryComponents: [...moduleComponents],
 })
-export class OrderDetailsModule {}
+export class FSOrderDetailsModule {}

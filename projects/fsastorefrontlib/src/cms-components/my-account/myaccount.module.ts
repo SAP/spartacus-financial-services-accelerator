@@ -12,6 +12,7 @@ import { CmsPageGuard, PageLayoutComponent } from '@spartacus/storefront';
 import { UserRequestStoreModule } from '../../core/user-request/store/user-request-store.module';
 import { ClaimModule } from './claim/claim.module';
 import { InboxModule } from './inbox/inbox.module';
+import { FSOrderModule } from './order';
 import { PolicyModule } from './policy/policy.module';
 import { PremiumCalendarModule } from './premium-calendar/premium-calendar.module';
 import { QuoteModule } from './quote/quote.module';
@@ -97,6 +98,7 @@ const routes: Routes = [
     UserRequestStoreModule,
     RouterModule,
     RouterModule.forChild(routes),
+    FSOrderModule,
     ConfigModule.withConfig(<CmsConfig>{
       cmsComponents: {
         UpdateProfileComponent: {

@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
-import { OrderDetailsModule } from './order-details/order-details.module';
-import { OrderHistoryModule } from './order-history/order-history.module';
+import { FSOrderDetailsModule } from './order-details/order-details.module';
+import { FSOrderHistoryModule } from './order-history/order-history.module';
 
 @NgModule({
-  imports: [OrderHistoryModule, OrderDetailsModule],
+  imports: [FSOrderHistoryModule, FSOrderDetailsModule],
 })
-export class OrderModule {}
+export class FSOrderModule {}
