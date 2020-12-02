@@ -38,7 +38,7 @@ export class PremiumCalendarComponent implements OnInit, OnDestroy {
       ? this.selectedIndexes.splice(this.selectedIndexes.indexOf(index), 1)
       : this.selectedIndexes.push(index);
   }
-  
+
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
