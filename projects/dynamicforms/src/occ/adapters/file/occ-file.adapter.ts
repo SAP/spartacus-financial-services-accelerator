@@ -62,7 +62,7 @@ export class OccFileAdapter implements FileAdapter {
     });
     const params: HttpParams = new HttpParams()
       .set('documentCodes', fileCodes.toString())
-      .set('fields', 'FULL');
+      .set('fields', FULL_PARAMS);
     return this.http
       .get<any>(url, { params })
       .pipe(catchError((error: any) => throwError(error.json())));
