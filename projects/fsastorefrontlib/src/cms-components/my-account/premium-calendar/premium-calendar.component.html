@@ -1,13 +1,12 @@
 <h2 class="heading-headline py-3 mt-3 mb-5 text-center">
   {{ 'premiumCalendar.premiumCalendar' | cxTranslate }}
 </h2>
-<ng-container *ngIf="policies$ | async as policies; else noPolicies">
-  <ng-container *ngIf="policiesLoaded$ | async; else loading">
+<ng-container *ngIf="policiesLoaded$ | async; else loading">
+  <ng-container *ngIf="policies$ | async as policies">
     <ng-container
       *ngIf="policies?.insurancePolicies?.length > 0; else noPolicies"
     >
       <div class="container-fluid">
-        <!-- Desktop Layout-->
         <div class="section-header-heading row d-none d-lg-flex text-left">
           <h5 class="col text-center">{{ 'policy.policy' | cxTranslate }}</h5>
           <h5 class="col">{{ 'fscommon.paymentFrequency' | cxTranslate }}</h5>
@@ -127,7 +126,6 @@
           </div>
         </div>
       </div>
-      <!-- End of Desktop Layout-->
     </ng-container>
   </ng-container>
 </ng-container>
