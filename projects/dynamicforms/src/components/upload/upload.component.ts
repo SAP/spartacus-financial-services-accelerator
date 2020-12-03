@@ -94,9 +94,6 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   }
 
   convertFileSize(bytes: number) {
-    if (!bytes) {
-      return '';
-    }
     const sizes = ['Bytes', 'KB', 'MB'];
     const i = Number(Math.floor(Math.log(bytes) / Math.log(1024)));
     if (i === 0) {
