@@ -17,8 +17,9 @@ export const claim = {
     confirmation: {
       processingNumber: 'Ihre Bearbeitungsnummer lautet',
       submissionNotice:
-        'Ihr Schadensfall wurde erfolgreich in unserem System gespeichert. Sie finden die Bestätigungs-E-Mail im Posteingang Ihres Self-Service-Portals und in Ihrem Postfach.',
-      submissionStatus: 'To check your status online, visit Claims section.',
+        'Ihr Schadensfall wurde erfolgreich in unserem System gespeichert.',
+      submissionStatus:
+        'Sie finden die Bestätigungs-E-Mail im Posteingang Ihres Self-Service-Portals und in Ihrem Postfach.',
       questionsOrConcerns:
         'Wenn Sie weitere Fragen haben, wenden Sie sich bitte an Ihren Sachbearbeiter. Um Ihren Status online zu überprüfen, besuchen Sie den Bereich Schadensfälle.',
     },
