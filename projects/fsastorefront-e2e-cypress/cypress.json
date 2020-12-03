@@ -1,12 +1,13 @@
 {
   "defaultCommandTimeout": 10000,
-  "baseUrl": "https://fsastorefrontapp.c73z0k1qfh-financial1-s6-public.model-t.cc.commerce.ondemand.com",
+  "baseUrl": "https://fsastorefrontapp.c73z0k1qfh-financial1-s5-public.model-t.cc.commerce.ondemand.com",
   "requestTimeout": 10000,
   "modifyObstructiveCode": false,
   "env": {
     "CLIENT_ID": "financial_trusted",
     "CLIENT_SECRET": "secret",
-    "API_URL": "https://api.c73z0k1qfh-financial1-s6-public.model-t.cc.commerce.ondemand.com"
+    "API_URL": "https://api.c73z0k1qfh-financial1-s6-public.model-t.cc.commerce.ondemand.com",
+    "API_URL_INT": "https://api.c73z0k1qfh-financial1-s5-public.model-t.cc.commerce.ondemand.com"
   },
   "video": false,
   "reporter": "mochawesome",

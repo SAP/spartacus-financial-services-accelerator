@@ -39,6 +39,15 @@ export const policyDetailsAccordions = [
   ' What Does It Cost Me? ',
 ];
 
+export const policyDetailsIntegration = [
+  ' Policy Summary ',
+  ' Who or What Is Insured ',
+  " What's Included ",
+  ' Optional Extras ',
+  ' What Does It Cost Me? ',
+  ' Documents',
+];
+
 export const agentListViewAccordions = [
   ' Homeowners Insurance',
   ' Renters Insurance',
@@ -176,6 +185,10 @@ export const Accordions = {
     {
       category: 'confirmationCurrentAccount',
       accordionItems: this.confirmationAccordionCurrentAccount,
+    },
+    {
+      category: 'integrationPolicyDetails',
+      accordionItems: this.policyDetailsIntegration,
     },
     {
       category: 'FTDConfirmation',
