@@ -25,6 +25,15 @@ export class FileService {
     );
   }
 
+  getFiles(fileCodes: Array<string>): Observable<any> {
+    return this.authService.getOccUserId().pipe(
+      take(1),
+      switchMap(occUserId => {
+        return this.fileConnector.getFiles(occUserId, fileCodes);
+      })
+    );
+  }
+
   uploadFile(file: File): Observable<any> {
     return this.authService.getOccUserId().pipe(
       take(1),

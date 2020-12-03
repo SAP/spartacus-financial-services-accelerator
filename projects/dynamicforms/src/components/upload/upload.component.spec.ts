@@ -16,9 +16,9 @@ import { Observable, of } from 'rxjs';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FieldConfig } from '../../core/models/form-config.interface';
 import { FileService } from '../../core/services/file/file.service';
-import { OccValueListService } from '../../occ/services/occ-value-list.service';
 import { FormService } from './../../core/services/form/form.service';
 import { UploadComponent } from './upload.component';
+import { FormDataService, YFormData } from '../../core';
 
 @Component({
   // tslint:disable
@@ -75,7 +75,10 @@ const mockManipulatedTarget = {
     accept: '*',
   },
 };
-
+const formData = {
+  formDataId: 'id',
+  content: '{"relevantFiles":["DOC00002012","DOC00002011"]}',
+};
 const mockEvent = {
   target: {
     files: [mockFile, mockFile2],
@@ -92,6 +95,9 @@ const mockDynamicFormsConfig: DynamicFormsConfig = {
 class MockFileUpladService {
   uploadFile(_file: File) {
     return of(mockInProgressHttpResponse);
+  }
+  getFiles(codes) {
+    return of();
   }
   setFileInStore(_body: any) {}
   getUploadedDocuments() {
@@ -114,7 +120,11 @@ class MockFormService {
     return formControl;
   }
 }
-
+class MockFormDataService {
+  getFormData(): Observable<any> {
+    return of(formData);
+  }
+}
 class MockAuthService {
   getOccUserId(): Observable<string> {
     return of(OCC_USER_ID_CURRENT);
@@ -134,7 +144,6 @@ describe('UploadComponent', () => {
         declarations: [UploadComponent, MockErrorNoticeComponent],
         imports: [ReactiveFormsModule, I18nTestingModule],
         providers: [
-          { provide: OccValueListService, useClass: MockOccValueListService },
           { provide: LanguageService, useClass: MockLanguageService },
           {
             provide: DynamicFormsConfig,
@@ -145,6 +154,7 @@ describe('UploadComponent', () => {
             useClass: MockFileUpladService,
           },
           { provide: FormService, useClass: MockFormService },
+          { provide: FormDataService, useClass: MockFormDataService },
           { provide: AuthService, useClass: MockAuthService },
         ],
       }).compileComponents();

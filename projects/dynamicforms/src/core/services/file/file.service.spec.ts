@@ -32,6 +32,9 @@ class MockFileConnector {
   getFile() {
     return of(mockBody);
   }
+  getFiles() {
+    return of(mockBody);
+  }
 }
 
 class MockAuthService {
@@ -115,6 +118,16 @@ describe('FileService', () => {
     expect(store.dispatch).toHaveBeenCalledTimes(2);
   });
 
+  it('should be able to get files', () => {
+    let result;
+    service
+      .getFiles(Array.from(mockBody.code))
+      .subscribe(file => {
+        result = file;
+      })
+      .unsubscribe();
+    expect(result).toEqual(mockBody);
+  });
   it('should be able to fetch file', () => {
     let result;
     service
