@@ -9,7 +9,7 @@ import {
 import { AbstractControl } from '@angular/forms';
 import { AuthService, LanguageService } from '@spartacus/core';
 import { saveAs } from 'file-saver';
-import { filter, map, take } from 'rxjs/operators';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FileService } from '../../core/services/file/file.service';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
@@ -40,6 +40,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   ) {
     super(appConfig, languageService, injector, formService);
   }
+
   @HostListener('change', ['$event'])
   handleFiles(event) {
     // Reset when user is choosing files again
@@ -70,12 +71,9 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
         .pipe(
           filter(formData => !!formData.content),
           take(1),
-          map(formData => JSON.parse(formData.content).relevantFiles)
-        )
-        .subscribe(codes =>
-          this.fileUploadService
-            .getFiles(codes)
-            .pipe(
+          map(formData => JSON.parse(formData.content).relevantFiles),
+          switchMap(codes => {
+            return this.fileUploadService.getFiles(codes).pipe(
               filter(files => !!files.documents),
               map(files => {
                 this.fileList = files.documents;
@@ -88,13 +86,17 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
                 this.uploadDisable = true;
                 this.cd.detectChanges();
               })
-            )
-            .subscribe()
+            );
+          })
         )
+        .subscribe()
     );
   }
 
   convertFileSize(bytes: number) {
+    if (!bytes) {
+      return '';
+    }
     const sizes = ['Bytes', 'KB', 'MB'];
     const i = Number(Math.floor(Math.log(bytes) / Math.log(1024)));
     if (i === 0) {
