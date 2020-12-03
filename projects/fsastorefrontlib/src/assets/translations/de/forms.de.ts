@@ -26,14 +26,12 @@ export const forms = {
       email: 'E-Mail',
       call: 'Anruf',
     },
-    subject: 'Betreff',
-    send: 'Abschicken',
     auto: {
       vehicleAnnualMileage: 'Jahreskilometerleistung des Fahrzeugs',
     },
     changeMileage: 'Kilometerstand ändern',
-    subject: '[DE] Subject',
-    send: '[DE] Send',
+    subject: 'Betreff',
+    send: 'Abschicken',
     policyHolderNotSameAsMainDriver:
       'Bitte kehren Sie zum ersten Schritt der Kaufabwicklung zurück: "Wählen Sie Ihren Schutz" und überprüfen Sie Ihr Geburtsdatum. Das Geburtsdatum des Versicherungsnehmer und Fahrzugführer müssen übereinstimmen.',
   },
