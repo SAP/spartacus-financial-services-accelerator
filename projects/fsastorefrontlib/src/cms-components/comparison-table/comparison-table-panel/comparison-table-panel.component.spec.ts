@@ -17,7 +17,6 @@ import { PricingService } from './../../../core/product-pricing/facade/pricing.s
 import { ComparisonPanelCMSComponent } from './../../../occ/occ-models/cms-component.models';
 import { PricingData } from './../../../occ/occ-models/form-pricing.interface';
 import { ComparisonTablePanelComponent } from './comparison-table-panel.component';
-import createSpy = jasmine.createSpy;
 
 @Component({
   // tslint:disable

@@ -1,11 +1,17 @@
 export const dynamicforms = {
   dynamicforms: {
     optional: '(Optional)',
+    maxFileSize: 'Maximal zulässige Dateigröße',
+    chooseFile: 'Datei(en) auswählen',
+    startUpload: 'Upload starten',
+    removeAll: 'Alles entfernen',
+    upload: 'Hochladen',
     pleaseSelect: 'Wählen Sie:',
     enterValidValue: 'Bitte geben Sie einen gültigen Wert ein',
-    validationErrors: '[DE] There are validation errors',
-    definitionLoadError: '[DE] Error occurred. Form could not be loaded.',
+    validationErrors: 'Es liegen Validierungsfehler vor',
+    definitionLoadError:
+      'Ein Fehler ist aufgetreten. Das Formular konnte nicht geladen werden.',
     fillOutProperly:
-      '[DE] Please retry once all of the fields have been properly filled-out.',
+      'Bitte Versuchen Sie es erneut, sobald alle Felder ordnugsgemäß',
   },
 };

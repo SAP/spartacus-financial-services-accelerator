@@ -13,6 +13,9 @@ const getIdentificationTypeSelector = (state: FSCheckoutStepsState) =>
 const getLegalInformationTypeSelector = (state: FSCheckoutStepsState) =>
   state.legalInformation;
 
+const getPaymentTypeSelector = (state: FSCheckoutStepsState) =>
+  state.paymentType;
+
 export const getCheckoutStepsState: MemoizedSelector<
   FSStateWithCheckout,
   StateUtils.LoaderState<FSCheckoutStepsState>
@@ -37,3 +40,8 @@ export const getLegalInformation: MemoizedSelector<
   FSStateWithCheckout,
   boolean
 > = createSelector(getCheckoutSteps, getLegalInformationTypeSelector);
+
+export const getPaymentType: MemoizedSelector<
+  FSStateWithCheckout,
+  string
+> = createSelector(getCheckoutSteps, getPaymentTypeSelector);

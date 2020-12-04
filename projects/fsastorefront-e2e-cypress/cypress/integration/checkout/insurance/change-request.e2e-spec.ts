@@ -19,6 +19,7 @@ context('Change Request for new user', () => {
   it('Should register a new user', () => {
     register.registerUser(registrationUser);
     register.login(registrationUser.email, registrationUser.password);
+    checkout.waitForHomepage();
   });
 
   it('Should complete first auto step with additional driver', () => {
@@ -58,7 +59,7 @@ context('Change Request for new user', () => {
     checkout.checkCheckoutStep('Your Auto Insurance', '7');
     checkout.checkProgressBarInsurance();
     auto.checkAutoSilverMiniCart();
-    checkout.checkAccordions('generalQuoteAccordions');
+    checkout.checkAccordions('quoteReviewWithoutOptional');
     checkout.clickContinueButton();
     checkout.ConfirmBindQuote();
     checkout.clickContinueButton();
@@ -118,12 +119,20 @@ context('Change Request for new user', () => {
     checkout.clickContinueButton();
     //check change preview - second step
     changeRequest.checkChangeMileageSteps();
-    cy.get('.action-button')
-      .should('contain', 'Cancel')
-      .click({ force: true })
-      .wait(500);
+    cy.get('.action-button').should('contain', 'Cancel').click();
     //check user is redirected to policy details page
     cy.get('.overview-section-title').contains(' Auto Insurance Policy ');
     checkout.checkAccordions('policyDetails');
+  });
+
+  it('Should check inbox messages for change request', () => {
+    cy.selectOptionFromDropdown({
+      menuOption: 'My Account',
+      dropdownItem: 'Inbox',
+    });
+    inbox.checkInboxComponets();
+    inbox.checkGeneralTab();
+    inbox.checkInboxHeader();
+    changeRequest.checkInboxMessages();
   });
 });

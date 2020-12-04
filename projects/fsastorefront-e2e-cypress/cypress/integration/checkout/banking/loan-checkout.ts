@@ -25,7 +25,9 @@ context('Loan Checkout', () => {
     banking.checkConfigurationMiniCart();
     loan.configureLoan();
     cy.get('.action-button').click();
+    loan.checkMiniCartFirstStep();
     checkout.clickContinueButton();
+    checkout.waitForAddOptions();
   });
 
   it('Should check optional products', () => {

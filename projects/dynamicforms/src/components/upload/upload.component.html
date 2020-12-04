@@ -1,0 +1,120 @@
+<ng-container *ngIf="group">
+  <div class="dynamic-field" [formGroup]="group" [hidden]="config.hidden">
+    <div class="form-group">
+      <label class="col-form-label">
+        {{ label }}
+        <ng-container *ngIf="!config.required">
+          {{ 'dynamicforms.optional' | cxTranslate }}
+        </ng-container>
+      </label>
+      <p>
+        {{ 'dynamicforms.maxFileSize' | cxTranslate }}
+        {{ convertFileSize(config.maxFileSize) }}
+      </p>
+      <div class="input-group">
+        <div class="custom-file">
+          <input
+            #uploadField
+            type="file"
+            class="custom-file-input"
+            [attr.aria-describedby]="config.name"
+            [attr.name]="config.name"
+            [attr.multiple]="config.multiple ? config.multiple : null"
+            [attr.accept]="config.accept"
+          />
+          <input
+            type="hidden"
+            [attr.name]="config.name + '_hidden'"
+            [formControlName]="config.name"
+          />
+          <label class="custom-file-label" [attr.for]="config.name">{{
+            'dynamicforms.chooseFile' | cxTranslate
+          }}</label>
+        </div>
+      </div>
+
+      <ng-container *ngIf="fileList.length > 0">
+        <ul class="mb-4">
+          <li class="pt-4" *ngFor="let file of fileList; let i = index">
+            <div class="row no-gutters">
+              <div class="col-10">
+                <div class="row no-gutters">
+                  <span class="col-1" *ngIf="file?.code"
+                    ><i class="fas fa-check"></i
+                  ></span>
+                  <span class="col-8 text-break">{{ file?.name }}</span>
+                  <span class="col-3"> {{ convertFileSize(file.size) }}</span>
+                </div>
+              </div>
+              <div class="col-2">
+                <div class="row no-gutters">
+                  <span
+                    class="col-6 text-right"
+                    *ngIf="file?.code"
+                    role="button"
+                    (click)="downloadFile(file)"
+                    ><i class="fas fa-download"></i
+                  ></span>
+                  <span
+                    *ngIf="!removeAllDisable"
+                    class="col-6 text-right ml-auto"
+                    role="button"
+                    (click)="removeFile(i, uploadField)"
+                    ><i class="fas fa-trash"></i
+                  ></span>
+                </div>
+              </div>
+            </div>
+            <div class="row no-gutters">
+              <div class="col-12">
+                <div
+                  class="progress"
+                  *ngIf="
+                    individualProgress[i] > 0 && individualProgress[i] !== 100
+                  "
+                >
+                  <div
+                    class="progress-bar"
+                    [style.width]="individualProgress[i] + '%'"
+                    role="progressbar"
+                    [attr.aria-valuenow]="individualProgress[i]"
+                    aria-valuemin="0"
+                    aria-valuemax="100"
+                  >
+                    {{ individualProgress[i] }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <ng-container *ngIf="fileList?.length > 0">
+          <div class="row justify-content-between">
+            <div class="col-md-3 col-sm-3 col-12 mb-3 mb-sm-0">
+              <button
+                *ngIf="fileList.length > 1 && !removeAllDisable"
+                class="action-button btn-block"
+                (click)="removeAll(uploadField)"
+              >
+                {{ 'dynamicforms.removeAll' | cxTranslate }}
+              </button>
+            </div>
+            <div class="col-md-3 col-sm-3 col-12">
+              <button
+                *ngIf="!uploadDisable"
+                class="btn-primary btn-block"
+                (click)="uploadFiles(fileList)"
+              >
+                {{ 'dynamicforms.upload' | cxTranslate }}
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+    <cx-error-notice
+      [warn]="group.controls[config.name]"
+      [parentConfig]="config"
+    ></cx-error-notice>
+  </div>
+</ng-container>

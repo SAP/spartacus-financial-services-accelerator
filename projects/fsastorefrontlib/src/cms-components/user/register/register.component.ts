@@ -1,20 +1,17 @@
-import { Component } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { DefaultFormValidators } from '@fsa/dynamicforms';
 import {
   AnonymousConsentsConfig,
   AnonymousConsentsService,
+  ANONYMOUS_CONSENT_STATUS,
   GlobalMessageService,
   RoutingService,
   UserService,
   AuthConfigService,
 } from '@spartacus/core';
 import { RegisterComponent } from '@spartacus/storefront';
+import { Subscription } from 'rxjs';
 import { FSUserSignUp } from '../../../occ/occ-models';
 import { DateConfig } from './../../../core/date-config/date-config';
 
@@ -22,7 +19,8 @@ import { DateConfig } from './../../../core/date-config/date-config';
   selector: 'cx-fs-register',
   templateUrl: './register.component.html',
 })
-export class FSRegisterComponent extends RegisterComponent {
+export class FSRegisterComponent extends RegisterComponent
+  implements OnInit, OnDestroy {
   constructor(
     protected userService: UserService,
     protected globalMessageService: GlobalMessageService,
@@ -43,40 +41,34 @@ export class FSRegisterComponent extends RegisterComponent {
       authConfigService
     );
   }
-  registerForm: FormGroup = this.fb.group(
-    {
-      titleCode: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      phoneNumber: [
-        '',
-        DefaultFormValidators.regexValidator(
-          DefaultFormValidators.phoneNumberRegex
-        ),
-      ],
-      dateOfBirth: [
-        '',
-        [Validators.required, DefaultFormValidators.dateOfBirthValidator(18)],
-      ],
-      email: ['', [Validators.required, DefaultFormValidators.email]],
-      password: [
-        '',
-        [
-          Validators.required,
-          DefaultFormValidators.regexValidator(
-            DefaultFormValidators.passwordRegex
-          ),
-        ],
-      ],
-      passwordconf: ['', Validators.required],
-      newsletter: new FormControl({
-        value: false,
-        disabled: this.isFSConsentRequired(),
-      }),
-      termsandconditions: [false, Validators.requiredTrue],
-    },
-    { validator: DefaultFormValidators.matchFields('password', 'passwordconf') }
-  );
+
+  sub = new Subscription();
+  consentGiven: boolean;
+
+  registerForm = this.fb.group({
+    ...this.registerForm.controls,
+    phoneNumber: [
+      '',
+      DefaultFormValidators.regexValidator(
+        DefaultFormValidators.phoneNumberRegex
+      ),
+    ],
+    dateOfBirth: [
+      '',
+      [Validators.required, DefaultFormValidators.dateOfBirthValidator(18)],
+    ],
+  });
+
+  ngOnInit() {
+    super.ngOnInit();
+    this.sub.add(
+      this.anonymousConsent$.subscribe(data => {
+        this.consentGiven =
+          data?.consent?.consentState === ANONYMOUS_CONSENT_STATUS.GIVEN;
+      })
+    );
+    this.registerForm.get('newsletter').patchValue(this.consentGiven);
+  }
 
   collectDataFromRegisterForm(formData: any): FSUserSignUp {
     const {
@@ -104,16 +96,9 @@ export class FSRegisterComponent extends RegisterComponent {
     return this.config.date.format || '';
   }
 
-  protected isFSConsentRequired(): boolean {
-    const {
-      requiredConsents,
-      registerConsent,
-    } = this.anonymousConsentsConfig?.anonymousConsents;
-
-    if (requiredConsents && registerConsent) {
-      return requiredConsents.includes(registerConsent);
+  ngOnDestroy() {
+    if (this.sub) {
+      this.sub.unsubscribe();
     }
-
-    return false;
   }
 }

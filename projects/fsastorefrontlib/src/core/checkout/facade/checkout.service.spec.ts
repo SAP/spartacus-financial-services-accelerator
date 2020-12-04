@@ -2,7 +2,6 @@ import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import {
   ActiveCartService,
-  Cart,
   CheckoutDeliveryService,
   CHECKOUT_FEATURE,
   OCC_USER_ID_CURRENT,
@@ -16,7 +15,9 @@ import * as fromReducers from './../store/reducers/index';
 import { FSCheckoutService } from './checkout.service';
 
 const identificationType = 'idType';
+
 const userId = 'userId';
+const paymentType = 'paymentCode';
 
 class CheckoutDeliveryServiceStub {
   setDeliveryMode() {}
@@ -83,11 +84,32 @@ describe('FSCheckoutServiceTest', () => {
     );
   });
 
+  it('should set payment type', () => {
+    service.setPaymentType(paymentType);
+    expect(store.dispatch).toHaveBeenCalledWith(
+      new fromFSAction.SetPaymentTypeSuccess({
+        code: paymentType,
+      })
+    );
+  });
+
+  it('should get payment type', () => {
+    service.setPaymentType(paymentType);
+    let response;
+    service
+      .getPaymentType()
+      .subscribe(payment => {
+        response = payment;
+      })
+      .unsubscribe();
+    expect(response).toEqual(paymentType);
+  });
+
   it('should mock delivery mode', () => {
     service.mockDeliveryMode();
-
     expect(checkoutDeliveryService.setDeliveryMode).toHaveBeenCalled();
   });
+
   it('should filter out entries with removeable poperty set to true', () => {
     const mockCart: any = {
       code: 'cartCode',

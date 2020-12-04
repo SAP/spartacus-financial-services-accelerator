@@ -70,6 +70,22 @@ export function checkLifeBasicMiniCart() {
     price: ' €9.75 ',
     products: [
       {
+        title: ' Start Date: ',
+        value: ' 25 Sep 2022 ',
+      },
+      {
+        title: 'Coverage Period:',
+        value: ' 24 ',
+      },
+      {
+        title: 'Coverage Amount:',
+        value: ' 30000 ',
+      },
+      {
+        title: 'Insured:',
+        value: ' yourself ',
+      },
+      {
         title: ' Basic Life Insurance: ',
         value: ' €7.69 ',
       },
@@ -124,6 +140,22 @@ export function checkLifeBasicMiniCartSecondPerson() {
   const miniCartContent: sharedCheckout.MiniCart = {
     price: ' €22.15 ',
     products: [
+      {
+        title: ' Start Date: ',
+        value: ' 25 Sep 2022 ',
+      },
+      {
+        title: 'Coverage Period:',
+        value: ' 24 ',
+      },
+      {
+        title: 'Coverage Amount:',
+        value: ' 30000 ',
+      },
+      {
+        title: 'Insured:',
+        value: ' yourself and second person ',
+      },
       {
         title: ' Basic Life Insurance: ',
         value: ' €22.15 ',

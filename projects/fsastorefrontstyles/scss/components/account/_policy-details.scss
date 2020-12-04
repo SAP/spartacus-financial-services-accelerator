@@ -1,6 +1,7 @@
 @import '../../theme/fs/variables';
 
 %cx-fs-policy-details {
+  width: 100%;
   .overview-section {
     color: var(--cx-color-secondary);
     font-size: $h4-font-size;
@@ -38,7 +39,7 @@
       background: transparent;
       color: var(--cx-color-secondary);
       &:before {
-        @include transition;
+        @include fs-transition;
         float: right;
         font-size: 20px;
       }
@@ -54,7 +55,7 @@
     border-radius: 5px;
     padding: 20px 0;
     margin: 0 4% 70px;
-    @include box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 0.3);
+    @include fs-box-shadow(0px, 0px, 9px, 1px, $color-dark-grey, 0.3);
     @include media-breakpoint-down(sm) {
       padding: 25px 0 20px;
     }
@@ -62,6 +63,13 @@
       margin: 20px 0 10px;
       font-weight: var(--cx-font-weight-semi);
       font-size: var(--cx-h6-font-size);
+    }
+  }
+  .documents {
+    .value {
+      @include media-breakpoint-down(xs) {
+        padding: 0 15px;
+      }
     }
   }
 }

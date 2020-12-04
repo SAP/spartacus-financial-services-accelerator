@@ -63,9 +63,12 @@ export function populateIncidentReportStep() {
 }
 
 export function populateGeneralInformationStep() {
-  cy.get('[name=responsibleForAccident]').type('me');
-  cy.get('[name=policeInformed]').eq(0).click();
-  cy.get('[name=witnesses]').eq(1).click();
+  cy.get('[name=phFault]').select('3rdParty');
+  cy.get('[name=reportedToPolice]').eq(0).click();
+  cy.get('[name=witnessExist]').eq(1).click();
+  cy.get('[name=entitledToDriveVehicle]').eq(1).click();
+  cy.get('[name=vehicleParked]').eq(1).click();
+  cy.get('[name=otherVehicleInvolved]').eq(1).click();
 }
 
 export function checkSummaryPage() {
@@ -104,8 +107,9 @@ export function checkGeneralInformationAccordion() {
   cy.get('.accordion-item-wrapper')
     .eq(2)
     .within(() => {
-      cy.get('.accordion-list-item').should('have.length', '3');
+      cy.get('.accordion-list-item').should('have.length', '5');
     });
+  cy.get('.accordion-list-item').contains('3rdParty');
 }
 
 export function checkConfirmationPage() {
@@ -175,7 +179,14 @@ export function deleteClaimFromDialog() {
     dropdownItem: 'Claims',
   });
   cy.wait(`@${claims}`).its('status').should('eq', 200);
-  cy.contains('.info-card', claimNumber);
+  cy.contains('.info-card', claimNumber).within(() => {
+    cy.get('.action-links-secondary-button').click();
+  });
+  cy.get('h3').contains('Delete started claim process');
+  cy.get('p').contains('The following claim process will be deleted');
+  cy.get('cx-fs-deleted-claim-dialog').within(() => {
+    cy.get('.primary-button').click();
+  });
 }
 
 export function clickContinueAndGetNewClaimID() {
@@ -198,4 +209,10 @@ export function waitForIncidentReportStep() {
     'incidentForm'
   );
   cy.wait(`@${incidentForm}`).its('status').should('eq', 200);
+}
+
+export function waitForfnolGeneralInformationStep() {
+  const generalInfoPage = waitForPage('fnolGeneralInfoPage', 'generalInfoPage');
+  cy.get('.Section4 cx-banner').eq(1).click();
+  cy.wait(`@${generalInfoPage}`).its('status').should('eq', 200);
 }

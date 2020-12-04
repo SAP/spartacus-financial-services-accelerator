@@ -21,7 +21,6 @@ import {
   PageLayoutComponent,
   PaymentDetailsSetGuard,
   PaymentFormModule,
-  PaymentMethodComponent,
   PaymentMethodModule,
   SpinnerModule,
 } from '@spartacus/storefront';
@@ -61,6 +60,7 @@ import { ReferredQuoteDialogComponent } from './components/referred-quote/referr
 import { UserIdentificationModule } from './components/user-identification/user-identification.module';
 import { CategoryStepGuard } from './guards/category-step-guard';
 import { CheckoutStepGuard } from './guards/checkout-step-guard';
+import { FSPaymentMethodComponent } from './components/payment-method/payment-method.component';
 
 const routes: Routes = [
   {
@@ -212,7 +212,7 @@ const routes: Routes = [
           component: QuoteReviewComponent,
         },
         PaymentDetailsFlex: {
-          component: PaymentMethodComponent,
+          component: FSPaymentMethodComponent,
         },
         FinalReviewFlex: {
           component: FinalReviewComponent,
@@ -246,6 +246,7 @@ const routes: Routes = [
     PersonalDetailsNavigationComponent,
     OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
+    FSPaymentMethodComponent,
   ],
   exports: [
     I18nModule,
@@ -258,6 +259,7 @@ const routes: Routes = [
     ReferredQuoteDialogComponent,
     FinalReviewComponent,
     OrderConfirmationComponent,
+    FSPaymentMethodComponent,
   ],
   entryComponents: [
     AddOptionsComponent,
@@ -270,6 +272,7 @@ const routes: Routes = [
     OrderConfirmationComponent,
     OrderConfirmationMessageComponent,
     MiniCartComponent,
+    FSPaymentMethodComponent,
   ],
   providers: [
     FSCartService,

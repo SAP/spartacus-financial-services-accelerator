@@ -3,6 +3,32 @@ import { RequestType } from './../../../occ/occ-models/occ.models';
 import { FSTranslationService } from './../../i18n/facade/translation.service';
 import { ChangePolicyService } from './change-policy.service';
 
+const mockChangeProcessForm = {
+  dateOfBirth: '1990-05-05',
+  lastName: 'Changed lastName',
+  driverCategory: 'Occasional',
+  driverGender: 'Female',
+};
+
+const mockInsuredObject = {
+  insuredObjectId: 'testInsuredObject',
+  insuredObjectItems: [],
+  childInsuredObjectList: {
+    insuredObjects: [
+      {
+        insuredObjectId: 'testChildInsuredObject',
+        insuredObjectItems: [
+          {
+            label: 'lastName',
+            value: 'Initial lastName',
+            changeable: true,
+          },
+        ],
+      },
+    ],
+  },
+};
+
 class MockFSTranslationService {
   getTranslationValue() {}
 }
@@ -136,5 +162,154 @@ describe('ChangePolicyService', () => {
       insurancePolicy: {},
     };
     service.getChangedPolicyObjects(changeRequestData);
+  });
+  it('should get changed policy objects for type add insured object', () => {
+    const changeRequestData = {
+      fsStepGroupDefinition: {
+        requestType: {
+          code: RequestType.INSURED_OBJECT_ADD,
+        },
+      },
+      changedPolicy: {
+        insuredObjectList: {
+          insuredObjects: [
+            {
+              insuredObjectItems: [
+                {
+                  label: 'testLabel',
+                  value: '123',
+                },
+              ],
+              childInsuredObjectList: {
+                insuredObjects: [
+                  {
+                    insuredObjectId: 'testChildInsuredObject',
+                    insuredObjectItems: [
+                      {
+                        label: 'lastName',
+                        value: 'Initial lastName',
+                      },
+                    ],
+                  },
+                  {
+                    insuredObjectId: 'testChildInsuredObject2',
+                    insuredObjectItems: [
+                      {
+                        label: 'lastName',
+                        value: 'Initial lastName',
+                      },
+                    ],
+                  },
+                  {
+                    insuredObjectId: 'testChildInsuredObject3',
+                    insuredObjectItems: [
+                      {
+                        label: 'lastName',
+                        value: 'Initial lastName',
+                      },
+                    ],
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+      insurancePolicy: {
+        insuredObjectList: {
+          insuredObjects: [
+            {
+              insuredObjectItems: [{}],
+              childInsuredObjectList: {
+                insuredObjects: [
+                  {
+                    insuredObjectId: 'testChildInsuredObject3',
+                    insuredObjectItems: [
+                      {
+                        label: 'lastName',
+                        value: 'Initial lastName',
+                      },
+                    ],
+                  },
+                ],
+              },
+            },
+          ],
+        },
+      },
+    };
+    expect(service.getChangedPolicyObjects(changeRequestData).length).toEqual(
+      3
+    );
+  });
+
+  it('should create new insured object based on provided form data', () => {
+    const newInsuredObject = service.createInsuredObject(mockChangeProcessForm);
+
+    expect(newInsuredObject.insuredObjectItems.length).toEqual(4);
+    expect(newInsuredObject.insuredObjectItems[0].label).toEqual('dateOfBirth');
+  });
+
+  it('should get changed insured object based on provided form data', () => {
+    const mockChangeRequest = {
+      insurancePolicy: {
+        insuredObjectList: {
+          insuredObjects: [
+            {
+              insuredObjectId: 'testInsuredObject',
+              insuredObjectItems: [
+                {
+                  label: 'lastName',
+                  value: 'Initial lastName',
+                  changeable: true,
+                },
+                {
+                  label: 'firstName',
+                  value: 'Initial firstName',
+                  changeable: false,
+                },
+              ],
+            },
+          ],
+        },
+      },
+    };
+    const changedInsuredObject = service.getChangedInsuredObject(
+      mockChangeRequest,
+      mockChangeProcessForm
+    );
+
+    expect(changedInsuredObject.insuredObjectId).toEqual('testInsuredObject');
+    expect(changedInsuredObject.insuredObjectItems[0].label).toEqual(
+      'lastName'
+    );
+    expect(changedInsuredObject.insuredObjectItems[0].value).toEqual(
+      'Changed lastName'
+    );
+  });
+
+  it('should find child insured object based on provided insured object', () => {
+    const childInsuredObject = {
+      insuredObjectId: 'testChildInsuredObject',
+      insuredObjectItems: [],
+    };
+
+    const result = service.childInsuredObjectExist(
+      mockInsuredObject,
+      childInsuredObject
+    );
+    expect(result).toEqual(true);
+  });
+  it('should not find child insured object based on provided insured object', () => {
+    const childInsuredObject = {
+      insuredObjectId: 'testInsuredObjectNonExisting',
+      insuredObjectItems: [],
+    };
+
+    const result = service.childInsuredObjectExist(
+      mockInsuredObject,
+      childInsuredObject
+    );
+    expect(result).toEqual(false);
   });
 });

@@ -150,7 +150,6 @@ export class ClaimService {
     const stepData = Object.assign({}, claim.configurationSteps[stepIndex], {
       status: stepStatus,
     });
-
     this.userIdService
       .getUserId()
       .pipe(take(1))

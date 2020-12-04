@@ -1,0 +1,33 @@
+@import '../../fs-mixins';
+@import '../../theme';
+
+%cx-fs-payment-method {
+  h4 {
+    font-size: var(--cx-h6-font-size);
+    color: var(--cx-color-primary);
+    font-weight: var(--cx-font-weight-semi);
+  }
+  .cx-checkout-btns {
+    justify-content: flex-start;
+  }
+  @include media-breakpoint-down(md) {
+    background-color: var(--cx-color-1);
+  }
+  cx-payment-form {
+    & form > .row:not(.cx-checkout-btns) {
+      @include media-breakpoint-down(xs) {
+        padding: 2rem 0;
+      }
+    }
+    .cx-payment-form-billing-address {
+      color: var(--cx-color-primary);
+    }
+    .col-md-12.col-xl-10 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+    @include media-breakpoint-down(md) {
+      background-color: var(--cx-color-1);
+    }
+  }
+}

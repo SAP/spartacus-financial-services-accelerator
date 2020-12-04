@@ -1,4 +1,5 @@
 import * as asm from '../../../helpers/asm';
+import * as checkout from '../../../helpers/checkout/checkoutSteps';
 import * as register from '../../../helpers/register';
 import {
   amosAgent,
@@ -16,12 +17,11 @@ context('ASM', () => {
 
   it('should register a new user', () => {
     register.registerUser(registrationUserWithoutPhone);
-    cy.wait(1500);
     register.login(
       registrationUserWithoutPhone.email,
       registrationUserWithoutPhone.password
     );
-    cy.wait(1500);
+    checkout.waitForHomepage();
   });
 
   it('should login as agent', () => {

@@ -5,6 +5,7 @@ import {
   OnDestroy,
 } from '@angular/core';
 import { OccConfig, RoutingService } from '@spartacus/core';
+import { FileService } from '@fsa/dynamicforms';
 import {
   ClaimService,
   PolicyService,
@@ -26,7 +27,8 @@ export class PoliciesComponent implements OnInit, OnDestroy {
     protected config: OccConfig,
     protected policyService: PolicyService,
     protected routingService: RoutingService,
-    protected claimService: ClaimService
+    protected claimService: ClaimService,
+    protected fileUploadService: FileService
   ) {}
 
   policies$;
@@ -46,6 +48,7 @@ export class PoliciesComponent implements OnInit, OnDestroy {
 
   startClaim(policyId: string, contractNumber: string) {
     if (policyId && contractNumber) {
+      this.fileUploadService.resetFiles();
       this.claimService.createClaim(policyId, contractNumber);
       this.subscription.add(
         this.claimService

@@ -3,8 +3,9 @@ import { I18nTestingModule, RoutingService } from '@spartacus/core';
 import { CreateClaimComponent } from './create-claim.component';
 import { ClaimService } from '../../../../core/my-account/facade/claim.service';
 import { FormsModule } from '@angular/forms';
+import { FileService } from '@fsa/dynamicforms';
 import { StoreModule } from '@ngrx/store';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { SelectedPolicy } from '../../../../core/my-account/services';
 import createSpy = jasmine.createSpy;
 
@@ -24,6 +25,17 @@ class MockClaimService {
   }
 }
 
+class MockFileService {
+  uploadFile(file: File): Observable<any> {
+    return of();
+  }
+  resetFiles(): void {}
+  setFileInStore(body: any) {}
+  getUploadedDocuments(): Observable<any> {
+    return of();
+  }
+}
+
 const mockSelectedPolicy: SelectedPolicy = {
   userId: 'testUser',
   policyId: 'testPolicy',
@@ -35,6 +47,7 @@ describe('CreateClaimComponent', () => {
   let fixture: ComponentFixture<CreateClaimComponent>;
   let mockClaimService: MockClaimService;
   let mockRoutingService: MockRoutingService;
+  let mockFileService: FileService;
 
   beforeEach(
     waitForAsync(() => {
@@ -44,6 +57,7 @@ describe('CreateClaimComponent', () => {
         imports: [I18nTestingModule, FormsModule, StoreModule.forRoot({})],
         providers: [
           { provide: ClaimService, useValue: mockClaimService },
+          { provide: FileService, useClass: MockFileService },
           { provide: RoutingService, useValue: mockRoutingService },
         ],
         declarations: [CreateClaimComponent],
@@ -52,6 +66,7 @@ describe('CreateClaimComponent', () => {
   );
 
   beforeEach(() => {
+    mockFileService = TestBed.inject(FileService);
     fixture = TestBed.createComponent(CreateClaimComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

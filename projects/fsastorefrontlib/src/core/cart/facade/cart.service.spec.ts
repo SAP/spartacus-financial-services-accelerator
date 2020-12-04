@@ -1,7 +1,6 @@
 import { inject, TestBed } from '@angular/core/testing';
 import { Store, StoreModule } from '@ngrx/store';
 import {
-  AuthService,
   OCC_USER_ID_CURRENT,
   MultiCartService,
   StateWithMultiCart,

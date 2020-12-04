@@ -19,7 +19,7 @@ import {
 import { ProgressBarModule } from '../progress-bar/progress-bar.module';
 import { ChangeRequestSubmissionGuard } from './../../core/change-request/guards/change-request-submission.guard';
 import { AbstractChangeProcessStepComponent } from './abstract-change-process-step/abstract-change-process-step.component';
-import { ChangeCarDetailsFormComponent } from './change-car-details-form/change-car-details-form.component';
+import { ChangeCarDetailsNavigationComponent } from './change-car-details-navigation/change-car-details-navigation.component';
 import { ChangeCoverageComponent } from './change-coverage/change-coverage.component';
 import { ChangeProcessConfirmationComponent } from './change-process-confirmation/change-process-confirmation.component';
 import { ChangeProcessProgressBarComponent } from './change-process-progress-bar/change-process-progress-bar.component';
@@ -53,6 +53,15 @@ const routes: Routes = [
     },
     component: PageLayoutComponent,
   },
+  {
+    path: null,
+    canActivate: [AuthGuard, CmsPageGuard],
+    data: {
+      cxRoute: 'changeAdditionalDriverPage',
+      pageLabel: 'changeAdditionalDriverPage',
+    },
+    component: PageLayoutComponent,
+  },
 ];
 
 @NgModule({
@@ -74,8 +83,8 @@ const routes: Routes = [
         ChangeCoverageFlex: {
           component: ChangeCoverageComponent,
         },
-        ChangeCarDetailsFlex: {
-          component: ChangeCarDetailsFormComponent,
+        ChangeCarDetailsNavigationFlex: {
+          component: ChangeCarDetailsNavigationComponent,
         },
         ChangeSimulationFlex: {
           component: ChangeSimulationComponent,
@@ -90,7 +99,7 @@ const routes: Routes = [
     ChangeCoverageComponent,
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
-    ChangeCarDetailsFormComponent,
+    ChangeCarDetailsNavigationComponent,
     AbstractChangeProcessStepComponent,
     ChangeProcessConfirmationComponent,
   ],
@@ -98,7 +107,7 @@ const routes: Routes = [
     ChangeCoverageComponent,
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
-    ChangeCarDetailsFormComponent,
+    ChangeCarDetailsNavigationComponent,
     AbstractChangeProcessStepComponent,
     ChangeProcessConfirmationComponent,
   ],
@@ -106,7 +115,7 @@ const routes: Routes = [
     ChangeCoverageComponent,
     ChangeSimulationComponent,
     ChangeProcessProgressBarComponent,
-    ChangeCarDetailsFormComponent,
+    ChangeCarDetailsNavigationComponent,
     AbstractChangeProcessStepComponent,
     ChangeProcessConfirmationComponent,
   ],

@@ -5,7 +5,6 @@ export * from './change-request/index';
 export * from './checkout/index';
 export * from './claim/index';
 export * from './cs-ticket/index';
-export * from './document/index';
 export * from './inbox/index';
 export * from './policy/index';
 export * from './pricing/index';

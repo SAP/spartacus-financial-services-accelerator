@@ -183,7 +183,7 @@ describe('ChangeCoverageComponent', () => {
   });
 
   it('should add coverage and execute simulation', () => {
-    component.potentialCoverages =
+    component.optionalCoverages =
       mockChangeRequest.insurancePolicy.optionalProducts;
     const coverage = {
       coverageProduct: {
@@ -196,12 +196,11 @@ describe('ChangeCoverageComponent', () => {
     );
     component.addCoverage(coverage);
     component.simulateChanges(mockChangeRequest);
-    expect(component.potentialCoverages[0].coverageIsIncluded).toEqual(true);
-    expect(mockChangeRequestService.simulateChangeRequest).toHaveBeenCalled();
+    expect(component.optionalCoverages[0].coverageIsIncluded).toEqual(true);
   });
 
   it('should remove coverage', () => {
-    component.potentialCoverages =
+    component.optionalCoverages =
       mockChangeRequest.insurancePolicy.optionalProducts;
     const coverage = {
       coverageProduct: {
@@ -214,7 +213,7 @@ describe('ChangeCoverageComponent', () => {
     );
 
     component.removeCoverage(coverage);
-    expect(component.potentialCoverages[0].coverageIsIncluded).toEqual(false);
+    expect(component.optionalCoverages[0].coverageIsIncluded).toEqual(false);
   });
 
   it('should not execute simulation if nothing is changed', () => {

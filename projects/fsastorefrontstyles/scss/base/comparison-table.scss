@@ -21,7 +21,7 @@ cx-fs-comparison-table-container {
     }
   }
   .tab-pane {
-    @include box-shadow(0px, 2px, 20px, 1px, $color-grey, 1);
+    @include fs-box-shadow(0px, 2px, 20px, 1px, $color-grey, 1);
   }
   cx-fs-comparison-table-panel {
     display: block;

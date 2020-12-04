@@ -23,7 +23,7 @@ export function checkChangeMileageSteps() {
 }
 
 export function enterNewMileage() {
-  cy.get('cx-fs-change-car-details-form')
+  cy.get('cx-fs-cms-form-submit')
     .should('be.visible')
     .within(() => {
       cy.get('h3').contains('Auto Information');
@@ -33,6 +33,7 @@ export function enterNewMileage() {
 
 export function checkChangedPolicyPremium() {
   cy.get('.offset-1').contains(currentDate);
+  cy.get('.col-3.semi-bold').eq(2).contains(' €100.00 / Monthly ');
 }
 
 export function checkChangeRequestConfirmation() {
@@ -59,17 +60,17 @@ export function checkOptionalExtras() {
     .within(() => {
       cy.get('.section-header-heading').contains(' Optional Extras ');
       cy.get('.row.mx-3').should('have.length', 4);
-      cy.get('h6').eq(0).contains('Collision Coverage');
-      cy.get('h6').eq(1).contains('Uninsured Coverage');
-      cy.get('h6').eq(2).contains('Roadside Assistance');
-      cy.get('h6').eq(3).contains('Trailer Liability');
+      cy.get('h6').eq(0).contains('Uninsured Coverage');
+      cy.get('h6').eq(1).contains('Roadside Assistance');
+      cy.get('h6').eq(2).contains('Trailer Liability');
+      cy.get('h6').eq(3).contains('Winter Tires');
     });
 }
 
 export function addRoadsideAssistance() {
-  cy.get('.secondary-button').should('have.length', 3).contains(' Add ');
+  cy.get('.secondary-button').should('have.length', 4).contains(' Add ');
   cy.get('.row.mx-3')
-    .eq(2)
+    .eq(1)
     .within(() => {
       cy.get('h6').contains('Roadside Assistance');
       cy.get('.secondary-button').click();

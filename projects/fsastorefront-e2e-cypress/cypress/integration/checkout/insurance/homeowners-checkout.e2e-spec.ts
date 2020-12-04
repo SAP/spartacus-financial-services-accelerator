@@ -57,7 +57,7 @@ context('Homeowners Checkout', () => {
 
   it('Should check add options page', () => {
     homeowners.checkOptionalProducts();
-    //homeowners.checkMiniCartHomeowners();
+    homeowners.checkMiniCartHomeowners();
     checkout.clickContinueButton();
   });
 
@@ -70,7 +70,7 @@ context('Homeowners Checkout', () => {
   it('Should check quote review page', () => {
     checkout.checkCheckoutStep('Your Homeowners Insurance', '7');
     checkout.checkProgressBarInsurance();
-    //homeowners.checkMiniCartHomeowners();
+    homeowners.checkMiniCartHomeowners();
     checkout.checkAccordions('generalQuoteAccordions');
     addPaymentMethod(registrationUserWithoutPhone.email, cartId);
     checkout.clickContinueButton();

@@ -35,7 +35,7 @@
         &:before {
           color: var(--cx-color-1);
           background-color: var(--cx-color-primary);
-          @include transition();
+          @include fs-transition();
         }
       }
       &:before {

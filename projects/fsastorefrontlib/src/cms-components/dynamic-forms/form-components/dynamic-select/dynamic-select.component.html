@@ -10,7 +10,7 @@
       <select
         class="form-control"
         [attr.name]="config.name"
-        formControlName="{{ config.name }}"
+        [formControlName]="config.name"
       >
         <option [selected]="true" disabled value="null">{{
           'dynamicforms.pleaseSelect' | cxTranslate
