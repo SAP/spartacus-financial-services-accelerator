@@ -9,11 +9,12 @@ import {
 import { AbstractControl } from '@angular/forms';
 import { AuthService, LanguageService } from '@spartacus/core';
 import { saveAs } from 'file-saver';
-import { map, take } from 'rxjs/operators';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../core/config/form-config';
 import { FileService } from '../../core/services/file/file.service';
 import { AbstractFormComponent } from '../abstract-form/abstract-form.component';
 import { FormService } from './../../core/services/form/form.service';
+import { FormDataService } from '../../core/services';
 
 @Component({
   selector: 'cx-upload',
@@ -32,12 +33,14 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     protected languageService: LanguageService,
     protected injector: Injector,
     protected formService: FormService,
+    protected formDataService: FormDataService,
     protected fileUploadService: FileService,
     protected cd: ChangeDetectorRef,
     protected authService: AuthService
   ) {
     super(appConfig, languageService, injector, formService);
   }
+
   @HostListener('change', ['$event'])
   handleFiles(event) {
     // Reset when user is choosing files again
@@ -62,6 +65,36 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   ngOnInit() {
     super.ngOnInit();
     this.uploadControl = this.group.get(this.config.name);
+    this.populateUploadedFiles();
+  }
+
+  protected populateUploadedFiles() {
+    this.subscription.add(
+      this.formDataService
+        .getFormData()
+        .pipe(
+          filter(formData => !!formData.content),
+          take(1),
+          map(formData => JSON.parse(formData.content).relevantFiles),
+          switchMap(codes => {
+            return this.fileUploadService.getFiles(codes).pipe(
+              filter(files => !!files.documents),
+              map(files => {
+                this.fileList = files.documents;
+                if (this.files.length === 0) {
+                  files.documents.forEach(file => {
+                    this.files.push(file.code);
+                  });
+                  this.uploadControl?.setValue(this.files);
+                }
+                this.uploadDisable = true;
+                this.cd.detectChanges();
+              })
+            );
+          })
+        )
+        .subscribe()
+    );
   }
 
   convertFileSize(bytes: number) {
@@ -116,8 +149,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
         .subscribe()
     );
     this.fileList.splice(index, 1);
-    this.setValueAndValidate(this.fileList);
-
+    this.files.splice(index, 1);
+    this.setValueAndValidate(this.files);
     // reset DOM File element to sync it with reactive control
     if (this.fileList.length === 0) {
       uploadField.value = null;
@@ -144,7 +177,7 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   downloadFile(file) {
     this.subscription.add(
       this.fileUploadService
-        .getFile(file.code, file.type)
+        .getFile(file.code, file.type ? file.type : file.mime)
         .pipe(
           map(downloadedFile => {
             saveAs(downloadedFile, file.name);
