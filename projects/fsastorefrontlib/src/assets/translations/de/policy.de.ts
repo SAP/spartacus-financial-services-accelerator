@@ -3,7 +3,7 @@ export const policy = {
     policies: 'Policen',
     policy: 'Police',
     policyId: 'Policen ID',
-    policyNo: '[DE] Policy No',
+    policyNo: 'Policennr.',
     myPolicy: 'Meine Policen',
     policyNumberIs: 'Versicherungsnummer',
     policyHolder: 'Versicherungshalter',
@@ -11,15 +11,16 @@ export const policy = {
     viewYourPolicies: 'Ihre aktuellen Policen ansehen',
     youHaveNoPolicies: 'Sie haben zur Zeit keine Versicherung bei uns!',
     policySummary: 'Policenübersicht',
-    thankYouForOrder: '[DE] Thank you!',
+    thankYouForOrder: 'Vielen Dank!',
     finishQuoteToGetPolicy:
       'Sie müssen Ihren Antrag abschließen, um eine Police zu erhalten.',
     noValidPolicies: 'Sie haben keine gültigen Policen!',
     documentName: 'Name',
     documentIssueDate: 'Erstelldatum',
-    policyCanceled: '[DE] Your policy change request has been canceled',
+    policyCanceled:
+      'Ihr Antrag zur Änderung der Police wurde erfolgreich storniert.',
     changeError:
-      '[DE] Sorry, the requested change can\'t be executed online, please contact your agent', // prettier-ignore
+      'Die angeforderte Änderung kann nicht online ausgeführt werden. Bitte wenen Sie sich an Ihren Sachbearbeiter.',
     details: {
       insurances_travel: {
         trip: 'Reiseinformation',

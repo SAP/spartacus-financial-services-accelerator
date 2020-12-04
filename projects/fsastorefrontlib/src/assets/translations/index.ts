@@ -11,7 +11,7 @@ import { premiumCalendar } from './en/premiumCalendar.en';
 import { quote } from './en/quote.en';
 import { quoteReview } from './en/quoteReview.en';
 import { userRequest } from './en/userRequest.en';
-import { common } from './overrides/en/miniCart';
+import { miniCart } from './overrides/en/miniCart';
 import { payment } from './overrides/en/payment';
 
 export const fstranslations: TranslationResources = {
@@ -31,5 +31,5 @@ export const fstranslations: TranslationResources = {
 
 export const fsOverrides: TranslationResources = {
   payment,
-  common,
+  miniCart,
 };
