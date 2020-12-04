@@ -65,6 +65,10 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   ngOnInit() {
     super.ngOnInit();
     this.uploadControl = this.group.get(this.config.name);
+    this.populateUploadedFiles();
+  }
+
+  protected populateUploadedFiles() {
     this.subscription.add(
       this.formDataService
         .getFormData()
