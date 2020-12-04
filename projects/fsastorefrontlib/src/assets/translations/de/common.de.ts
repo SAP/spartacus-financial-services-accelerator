@@ -92,7 +92,7 @@ export const fscommon = {
     lifeMainDob: 'Geburtsdatum',
     contribution: 'Jährliche Beitragserhöhung',
     creditCard: 'Kreditkarte',
-    invoice: '[Rechnung',
+    invoice: 'Rechnung',
     payment: {
       CARD: 'Kreditkarte',
       INVOICE: 'Rechnung',
