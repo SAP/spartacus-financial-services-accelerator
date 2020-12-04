@@ -11,19 +11,9 @@ const policy1 = {
   policyId: 'policyId',
   opened: false,
 };
-
 const policies = {
   insurancePolicies: [policy1],
 };
-
-class MockPolicyService {
-  loadPremiumCalendar = createSpy();
-  getPremiumCalendarLoaded = createSpy();
-
-  getPremiumCalendar() {
-    return of(policies);
-  }
-}
 const MockOccConfig: OccConfig = {
   context: {
     baseSite: [''],
@@ -35,6 +25,15 @@ const MockOccConfig: OccConfig = {
     },
   },
 };
+
+class MockPolicyService {
+  loadPremiumCalendar = createSpy();
+  getPremiumCalendarLoaded = createSpy();
+  getPremiumCalendar() {
+    return of(policies);
+  }
+}
+
 describe('PremiumCalendarComponent', () => {
   let component: PremiumCalendarComponent;
   let fixture: ComponentFixture<PremiumCalendarComponent>;
@@ -72,8 +71,10 @@ describe('PremiumCalendarComponent', () => {
     expect(component.getBaseUrl()).toEqual('');
   });
 
-  it('should open or close policy', () => {
-    component.openPolicy(policy1);
-    expect(policy1.opened).toEqual(true);
+  it('should open and close policy accordion', () => {
+    component.toggleActiveAccordion(3);
+    expect(component.selectedIndexes.length).toEqual(1);
+    component.toggleActiveAccordion(3);
+    expect(component.selectedIndexes.length).toEqual(0);
   });
 });
