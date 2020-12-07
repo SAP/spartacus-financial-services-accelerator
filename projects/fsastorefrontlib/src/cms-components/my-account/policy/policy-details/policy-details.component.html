@@ -454,6 +454,7 @@
             <img
               class="circle-image"
               [src]="getBaseUrl() + policy.responsibleAgent?.thumbnail?.url"
+              [alt]="policy.responsibleAgent?.displayName"
             />
             <p class="content-box-info">
               {{ policy.responsibleAgent?.displayName }}

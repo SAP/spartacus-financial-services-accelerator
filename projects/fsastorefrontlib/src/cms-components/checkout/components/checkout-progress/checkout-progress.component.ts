@@ -139,10 +139,8 @@ export class FSCheckoutProgressComponent extends CheckoutProgressComponent
                 map((steps: FSCheckoutStep[]) => {
                   this.checkoutConfigService.steps = steps.filter(step => {
                     return (
-                      !(<FSCheckoutStep>step).restrictedCategories ||
-                      (<FSCheckoutStep>step).restrictedCategories.indexOf(
-                        activeCategory
-                      ) === -1
+                      !step.restrictedCategories ||
+                      step.restrictedCategories.indexOf(activeCategory) === -1
                     );
                   });
                 })
