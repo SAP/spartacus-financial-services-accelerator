@@ -87,3 +87,19 @@ export function clickOnPolicyDetails() {
       .click({ force: true });
   });
 }
+
+export function checkAutoReferredQuote() {
+  cy.get('.info-card')
+    .should('have.length', 1)
+    .within(() => {
+      cy.get('.info-card-data').within(() => {
+        cy.get('.label').contains('Auto Silver');
+        cy.get('.label').contains('Quote status');
+        cy.get('.value').contains('Referred');
+        cy.get('.label').contains('Expiry Date');
+        cy.get('.label').contains('Price');
+        cy.get('.value').contains('€174.03');
+        cy.get('.value').contains('Monthly');
+      });
+    });
+}
