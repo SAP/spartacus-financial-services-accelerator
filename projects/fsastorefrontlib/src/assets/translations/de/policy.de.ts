@@ -21,7 +21,7 @@ export const policy = {
     policyCanceled:
       'Ihr Antrag zur Änderung der Police wurde erfolgreich storniert.',
     changeError:
-      'Die angeforderte Änderung kann nicht online ausgeführt werden. Bitte wenen Sie sich an Ihren Sachbearbeiter.', // prettier-ignore
+      'Die angeforderte Änderung kann nicht online ausgeführt werden. Bitte wenen Sie sich an Ihren Sachbearbeiter.',
     details: {
       insurances_travel: {
         trip: 'Reiseinformation',

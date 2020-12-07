@@ -31,6 +31,7 @@ export const forms = {
     auto: {
       vehicleAnnualMileage: 'Jahreskilometerleistung des Fahrzeugs',
     },
+    changeMileage: 'Kilometerstand ändern',
     policyHolderNotSameAsMainDriver:
       'Bitte kehren Sie zum ersten Schritt der Kaufabwicklung zurück: "Wählen Sie Ihren Schutz" und überprüfen Sie Ihr Geburtsdatum. Das Geburtsdatum des Versicherungsnehmer und Fahrzugführer müssen übereinstimmen.',
   },
