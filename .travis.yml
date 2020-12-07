@@ -13,3 +13,10 @@ script:
   - yarn run ng lint
   - yarn prettier
   - yarn run test --watch=false
+  - sonar-scanner
+addons:
+  sonarcloud:
+    organization: "financial-services-accelerator"
+    token:
+      secure: "Xej1sIQLBNupbltkZM66iRLOnk6JrlZZZkjx/naS94UnUqHLjM1r9Uv6vri+Tn/l0srUOl0ePleoN7RmQVr6EplmUHq84ky2rwAGhiTI0hkZIld8HekTEwsVj9EJlKkrHJG9/HS6H4nbvpBoy6DPPuk/xwFaHLNaCyE6ayb0bwgZCtuzAUUbCQEhwUDlcEyEXkxGT6qIVqM0VZeWvZCEZ7RhjiZhTiU3qEIn6fNh9gi06rXTGwCrvTpdGDzw/yhQseTPZVf3BuoYDIxXm/XeA9xLUdPu4vzjP18esEjvc1mgh+nfZCEw341PPsersKetCv/uHJHxuLP6wc6wh6opVO8D6tGmqtRhpcYDb9QzZUdQanmgmvqgmx2yNVVVsx7FVwfHj4e8h5y+9gQ9KwD/zsCdr+QZmV8TCkyVs6FnuOU3t0iqfzyRopxYXEGXLOtwnXVB7gocsA2SH7niFoe0dVs0PcCn0acLaBuGbMB1DbUKglv10xi+KlIWIGc/fDEOGG5j79aO6JuyVL26PwhwWD6TbXjP75VLXmbLvx+P3TcvO3o/pdEaDHFKPCIBlnNFkV4UeCiqcDNTFvN4M2mDl3Kdo9Eyk0L2qlmAfMArkFp4C/lJZ1lyhuEHR0bWII1mTyEmLo7ptKcvAMGUU2tVk2YaAOudyigxMhVjaVnESpY="
+
