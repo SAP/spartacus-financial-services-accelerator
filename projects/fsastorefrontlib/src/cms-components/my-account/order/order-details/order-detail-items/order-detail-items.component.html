@@ -1,28 +1,27 @@
 <ng-container *ngIf="order$ | async as order">
   <ng-container *ngIf="order?.entries?.length > 0">
     <ng-container *ngIf="order?.entries as entries">
-      <div class="row d-none d-md-flex d-lg-flex d-xl-flex">
-        <div class="col-7 text-center">
+      <div class="row d-none d-md-flex d-lg-flex d-xl-flex text-uppercase">
+        <h6 class="col-7">
           {{ 'cartItems.description' | cxTranslate }}
-        </div>
-        <div class="col-3">{{ 'fscommon.paymentFrequency' | cxTranslate }}</div>
-        <div class="col-2">{{ 'cartItems.itemPrice' | cxTranslate }}</div>
+        </h6>
+        <h6 class="col-3">{{ 'fscommon.paymentFrequency' | cxTranslate }}</h6>
+        <h6 class="col-2">{{ 'cartItems.itemPrice' | cxTranslate }}</h6>
       </div>
       <ng-container *ngFor="let entry of entries">
-        <div class="row">
-          <ng-container
+        <div class="row border-bottom py-3">
+          <div
             *ngIf="
               entry.product?.fulfilmentType?.code === 'FINANCIAL_3RD_PARTY'
             "
+            class="col-12 pb-3"
           >
-            <div class="col d-flex justify-content-end">
-              <button class="btn btn-action ml-auto" type="button">
+            <div class="text-right">
+              <button class="btn btn-action" type="button">
                 {{ 'orderDetails.consignmentTracking.action' | cxTranslate }}
               </button>
             </div>
-          </ng-container>
-        </div>
-        <div class="row">
+          </div>
           <div class="col-2">
             <cx-media [container]="entry.product?.images?.PRIMARY"></cx-media>
           </div>
@@ -45,12 +44,5 @@
     <ng-template #na>
       {{ 'fscommon.notAvailable' | cxTranslate }}
     </ng-template>
-
-    <hr />
-    <br />
-    <cx-order-consigned-entries
-      [order]="order.consignments[0]?.entries"
-      [consignments]="order.consignments"
-    ></cx-order-consigned-entries>
   </ng-container>
 </ng-container>
