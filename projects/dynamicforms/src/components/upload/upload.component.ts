@@ -118,31 +118,33 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     this.removeAllDisable = true;
     this.setValueAndValidate(this.fileList);
     files.forEach((file, index) => {
-      this.fileUploadService.uploadFile(file).subscribe(
-        event => {
-          if (event?.type === HttpEventType.UploadProgress) {
-            this.individualProgress[index] = Math.round(
-              (100 * event.loaded) / event.total
+      this.subscription.add(
+        this.fileUploadService.uploadFile(file).subscribe(
+          event => {
+            if (event?.type === HttpEventType.UploadProgress) {
+              this.individualProgress[index] = Math.round(
+                (100 * event.loaded) / event.total
+              );
+              this.cd.detectChanges();
+            }
+            if (event instanceof HttpResponse) {
+              this.setFileCode(file, event);
+              this.handleFileResponse(event);
+            }
+            // when all files are finished uploading show the remove all button
+            this.removeAllDisable = !!this.overallProgressFinished(
+              this.individualProgress
             );
-            this.cd.detectChanges();
+          },
+          error => {
+            this.globalMessageService.add(
+              {
+                key: 'dynamicforms.documentUploadError',
+              },
+              GlobalMessageType.MSG_TYPE_ERROR
+            );
           }
-          if (event instanceof HttpResponse) {
-            this.setFileCode(file, event);
-            this.handleFileResponse(event);
-          }
-          // when all files are finished uploading show the remove all button
-          this.removeAllDisable = !!this.overallProgressFinished(
-            this.individualProgress
-          );
-        },
-        error => {
-          this.globalMessageService.add(
-            {
-              key: 'dynamicforms.documentUploadError',
-            },
-            GlobalMessageType.MSG_TYPE_ERROR
-          );
-        }
+        )
       );
     });
   }
