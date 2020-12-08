@@ -8,9 +8,7 @@ import {
   checkMyPoliciesPage,
   updatePolicyEffectiveAndStartDate,
 } from '../../../helpers/my-account/policies';
-import {
-  waitForPage,
-} from '../../../helpers/generalHelpers';
+import { waitForPage } from '../../../helpers/generalHelpers';
 
 context('FNOL for sample data user', () => {
   before(() => {
