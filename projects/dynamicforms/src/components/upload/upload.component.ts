@@ -7,7 +7,12 @@ import {
   OnInit,
 } from '@angular/core';
 import { AbstractControl } from '@angular/forms';
-import { AuthService, LanguageService } from '@spartacus/core';
+import {
+  AuthService,
+  GlobalMessageService,
+  GlobalMessageType,
+  LanguageService,
+} from '@spartacus/core';
 import { saveAs } from 'file-saver';
 import { filter, map, switchMap, take } from 'rxjs/operators';
 import { DynamicFormsConfig } from '../../core/config/form-config';
@@ -21,6 +26,8 @@ import { FormDataService } from '../../core/services';
   templateUrl: './upload.component.html',
 })
 export class UploadComponent extends AbstractFormComponent implements OnInit {
+  protected readonly fileSizeSymbols = ['Bytes', 'KB', 'MB'];
+
   fileList: File[] = [];
   uploadControl: AbstractControl;
   individualProgress = {};
@@ -36,7 +43,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     protected formDataService: FormDataService,
     protected fileUploadService: FileService,
     protected cd: ChangeDetectorRef,
-    protected authService: AuthService
+    protected authService: AuthService,
+    protected globalMessageService: GlobalMessageService
   ) {
     super(appConfig, languageService, injector, formService);
   }
@@ -98,12 +106,11 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
   }
 
   convertFileSize(bytes: number) {
-    const sizes = ['Bytes', 'KB', 'MB'];
     const i = Number(Math.floor(Math.log(bytes) / Math.log(1024)));
     if (i === 0) {
-      return `${bytes} ${sizes[i]}`;
+      return `${bytes} ${this.fileSizeSymbols[i]}`;
     }
-    return `${(bytes / 1024 ** i).toFixed(1)} ${sizes[i]}`;
+    return `${(bytes / 1024 ** i).toFixed(1)} ${this.fileSizeSymbols[i]}`;
   }
 
   uploadFiles(files: File[]) {
@@ -111,8 +118,8 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
     this.removeAllDisable = true;
     this.setValueAndValidate(this.fileList);
     files.forEach((file, index) => {
-      this.subscription.add(
-        this.fileUploadService.uploadFile(file).subscribe(event => {
+      this.fileUploadService.uploadFile(file).subscribe(
+        event => {
           if (event?.type === HttpEventType.UploadProgress) {
             this.individualProgress[index] = Math.round(
               (100 * event.loaded) / event.total
@@ -127,7 +134,15 @@ export class UploadComponent extends AbstractFormComponent implements OnInit {
           this.removeAllDisable = !!this.overallProgressFinished(
             this.individualProgress
           );
-        })
+        },
+        error => {
+          this.globalMessageService.add(
+            {
+              key: 'dynamicforms.documentUploadError',
+            },
+            GlobalMessageType.MSG_TYPE_ERROR
+          );
+        }
       );
     });
   }
